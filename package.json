@@ -1,7 +1,7 @@
 {
-  "name": "loveit-src",
+  "name": "fixit-src",
   "version": "0.2.0",
-  "description": "LoveIt theme source file",
+  "description": "FixIt theme source file",
   "private": true,
   "dependencies": {},
   "devDependencies": {
@@ -36,16 +36,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dillonzq/LoveIt.git"
+    "url": "git+https://github.com/Lruihao/FixIt.git"
   },
   "keywords": [
     "hugo",
     "theme"
   ],
-  "author": "Dillon",
+  "author": "Lruihao",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dillonzq/LoveIt/issues"
+    "url": "https://github.com/Lruihao/FixIt/issues"
   },
-  "homepage": "https://github.com/dillonzq/LoveIt#readme"
+  "homepage": "https://github.com/Lruihao/FixIt#readme"
 }
