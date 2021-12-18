@@ -8,10 +8,9 @@
 
 It is based on the original [LoveIt Theme](https://github.com/dillonzq/LoveIt), [LeaveIt Theme](https://github.com/liuzc/LeaveIt) and [KeepIt Theme](https://github.com/Fastbyte01/KeepIt).
 
-Since the three themes have a similar look, if you have questions about their differences,
-read [Why choose LoveIt](#why-choose-loveit) so that you can choose the one that works best for you.
+It is mainly based on [LoveIt Theme](https://github.com/dillonzq/LoveIt) that's repository has stopped maintenance, so i just wanna fix it.
 
-![Hugo Theme LoveIt](https://github.com/Lruihao/FixIt/raw/master/images/Apple-Devices-Preview.png)
+![Hugo Theme FixIt](https://github.com/Lruihao/FixIt/raw/master/images/Apple-Devices-Preview.png)
 
 [Read more](https://github.com/dillonzq/LoveIt)
 ## [Demo Site](https://lruihao.cn)
