@@ -52,7 +52,7 @@
   }
 
   .content {
-    > h2 {
+    > h1, > h2 {
       font-size: 1.5rem;
 
       & code {
@@ -273,6 +273,7 @@
     @import "../_partial/_single/mapbox";
     @import "../_partial/_single/music";
     @import "../_partial/_single/bilibili";
+    @import "../_partial/_single/cardlink";
 
     hr {
       margin: 1rem 0;

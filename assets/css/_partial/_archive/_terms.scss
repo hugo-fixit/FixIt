@@ -71,6 +71,7 @@
   width: 4em;
   text-align: right;
   color: $global-font-secondary-color;
+  white-space: nowrap;
 
   [theme=dark] & {
     color: $global-font-secondary-color-dark;

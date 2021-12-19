@@ -1,0 +1,97 @@
+//卡片式链接样式 cardlink
+
+.card-link,.card-link:hover {
+  text-decoration: none;
+  border: none!important;
+  color: inherit!important
+}
+
+.card-link {
+  position: relative;
+  display: block;
+  margin: 1em auto;
+  width: 390px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  max-width: 100%;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none
+}
+
+.ztext {
+  word-break: break-word;
+  line-height: 1.6
+}
+
+.card-link-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(/lib/img/card-link-bg.jpg);
+  background-repeat: no-repeat;
+  -webkit-filter: blur(20px);
+  filter: blur(20px);
+  background-size: cover;
+  background-position: center
+}
+
+.card-link,.card-link:hover {
+  text-decoration: none;
+  border: none!important;
+  color: inherit!important
+}
+
+.card-link-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-radius: inherit;
+  background-color: rgba(246,246,246,0.88)
+}
+
+.card-link-text {
+  overflow: hidden
+}
+
+.card-link-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: calc(16px * 1.25 * 2);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: #1a1a1a
+}
+
+.card-link-meta {
+  display: flex;
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #999;
+  white-space: nowrap
+}
+
+.card-link-url {
+  display: inline-flex;
+  align-items: center;
+}
+
+.card-link-imageCell {
+  margin-left: 8px;
+  border-radius: 6px
+}
+
+.card-link-image {
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: inherit
+}

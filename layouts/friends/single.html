@@ -1,0 +1,42 @@
+{{- define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end -}}
+
+{{- define "content" -}}
+{{- $params := .Scratch.Get "params" -}}
+  <div class="page single special friends">
+    {{- /* Title */ -}}
+    <h1 class="single-title animated pulse faster">
+      {{- .Title -}}
+    </h1>
+
+    {{- /* Subtitle */ -}}
+    {{- with $params.subtitle -}}
+      <h2 class="single-subtitle">{{ . }}</h2>
+    {{- end -}}
+
+    {{- /* Friend links */ -}}
+    {{- $loading := resources.Get "svg/loading.svg" | minify -}}
+    <script src="//at.alicdn.com/t/font_578712_g26jo2kbzd5qm2t9.js"></script>
+    <div class="friend-links">
+      {{ range $index, $friend := .Site.Data.friends }}
+        <a class="friend-link" title="{{ $friend.discription }}" href="{{ $friend.url | safeURL }}" rel="external nofollow noopener noreferrer" target="_blank">
+          {{ if $friend.avatar }}
+            <img class="friend-avatar lazyload" src="{{ $loading.RelPermalink }}" data-src="{{ $friend.avatar }}" alt="{{ $friend.nickname }}" />
+          {{ else }}
+            <svg class="friend-avatar" aria-hidden="true">
+              <use xlink:href="#icon-{{ add 1 $index }}"></use>
+            </svg>
+          {{ end }}
+          <span class="friend-nickname" title="{{ $friend.nickname }}">@{{ $friend.nickname }}</span>
+        </a>
+      {{ end }}
+    </div>
+
+    {{- /* Content */ -}}
+    <div class="content" id="content">
+      {{- dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+    </div>
+
+    {{- /* Comment */ -}}
+    {{- partial "comment.html" . -}}
+  </div>
+{{- end -}}
