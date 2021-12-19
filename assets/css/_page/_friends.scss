@@ -1,0 +1,63 @@
+/**
+ * @Description: Style of layout named 'Friend links'.
+ * @Author: lruihao.cn
+ * @Updated:  2021/9/20 19:26
+ */
+ 
+.friend-links {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+@media (max-width: 576px) {
+  .friend-links {
+    justify-content: space-around;
+  }
+}
+.friend-link {
+  width: 150px;
+  height: 200px;
+  font-size: 1rem;
+  text-align: center;
+  background: rgba(255,255,255,0.3);
+  box-sizing: border-box; 
+  box-shadow: 3px 3px 5px #aaa;
+  border-radius: 5px;
+  border:none;
+  transition-duration: 0.3s;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.friend-link:hover {
+  background: #fff;
+  transform: scale(1.03);
+  box-shadow: 0 0 3px #aaa;
+}
+.friend-avatar {
+  object-fit: cover;
+  object-position: center;
+  width: 100%!important;
+  height: 150px!important;
+  border-radius: 5px;
+  margin: 0;
+  padding: 0;
+}
+.friend-nickname{
+  display: block;
+  position: relative;
+  color: #2bbc8a;
+  font-weight: bold;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 18px;
+  margin-bottom: 1rem;
+}
+.friend-nickname:hover {
+  color: #d480aa;
+}
