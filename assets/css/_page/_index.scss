@@ -15,6 +15,10 @@
   @include blur;
 }
 
+.headerLink {
+  scroll-margin-top: 3.5rem;
+}
+
 @import "_single";
 @import "_special";
 @import "_archive";
