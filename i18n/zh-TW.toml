@@ -50,7 +50,7 @@ other = "切換主題"
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "由 {{ .Hugo }} 強力驅動 | 主題 - {{ .Theme }}"
+other = "Powered by {{ .Hugo }} | Theme - {{ .Theme }}"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
@@ -155,49 +155,49 @@ other = "抱歉，您要查找的頁面不存在。"
 
 # === shortcodes/admonition.html ===
 [note]
-other = "注意"
+other = "Note"
 
 [abstract]
-other = "摘要"
+other = "Abstract"
 
 [info]
-other = "信息"
+other = "Info"
 
 [tip]
-other = "技巧"
+other = "Tip"
 
 [success]
-other = "成功"
+other = "Success"
 
 [question]
-other = "問題"
+other = "Question"
 
 [warning]
-other = "警告"
+other = "Warning"
 
 [failure]
-other = "失敗"
+other = "Failure"
 
 [danger]
-other = "危險"
+other = "Danger"
 
 [bug]
 other = "Bug"
 
 [example]
-other = "示例"
+other = "Example"
 
 [quote]
-other = "引用"
+other = "Quote"
 # === shortcodes/admonition.html ===
 
 # === shortcodes/version.html ===
 [new]
-other = "新增"
+other = "NEW"
 
 [changed]
-other = "更改"
+other = "CHANGED"
 
 [deleted]
-other = "刪除"
+other = "DELETED"
 # === shortcodes/version.html ===
