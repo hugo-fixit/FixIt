@@ -29,6 +29,12 @@ other = "Category"
 
 [categories]
 other = "Categories"
+
+[projects]
+other = "Projects"
+
+[years]
+other = "Years"
 # === Taxonomy ===
 
 # === Pagination ===
