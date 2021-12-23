@@ -11,17 +11,17 @@
   [header-desktop=normal] & {
     padding-top: 0;
   }
+  
+  .headerLink {
+    [header-desktop] & {
+      scroll-margin-top: $header-height;
+    }
+    [header-desktop=normal] & {
+      scroll-margin-top: 0;
+    }
+  }
 
   @include blur;
-}
-
-.headerLink {
-  scroll-margin-top: 0;
-
-  [header-desktop=fixed] &,
-  [header-mobile=fixed] & {
-    scroll-margin-top: $header-height;
-  }
 }
 
 @import "_single";
