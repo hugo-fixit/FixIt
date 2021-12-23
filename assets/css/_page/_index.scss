@@ -16,7 +16,12 @@
 }
 
 .headerLink {
-  scroll-margin-top: 3.5rem;
+  scroll-margin-top: 0;
+
+  [header-desktop=fixed] &,
+  [header-mobile=fixed] & {
+    scroll-margin-top: $header-height;
+  }
 }
 
 @import "_single";
