@@ -5,6 +5,7 @@
 - :bug: Fix: add scroll-margin to headerlink
 - :arrow_up: Chore: update all third-party libraries
 - :wrench: Chore(i18n): change some translations
+- :fire: Feat: remove lib smooth-scroll (#1)
 
 ## v0.2.11
 

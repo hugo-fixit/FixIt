@@ -56,8 +56,6 @@ libFiles:
   objectFitImagesJS: object-fit-images@3.2.4/dist/ofi.min.js
   # sharer.js@0.4.2 https://github.com/ellisonleao/sharer.js
   sharerJS: sharer.js@0.4.2/sharer.min.js
-  # smooth-scroll@16.1.3 https://github.com/cferdinandi/smooth-scroll
-  smoothScrollJS: smooth-scroll@16.1.3/dist/smooth-scroll.min.js
   # twemoji@13.1.0 https://github.com/twitter/twemoji
   twemojiJS: twemoji@13.0.0/dist/twemoji.min.js
   # typeit@7.0.4 https://github.com/alexmacarthur/typeit

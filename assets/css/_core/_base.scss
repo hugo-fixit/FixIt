@@ -5,6 +5,13 @@ html {
   font-size: $global-font-size;
   line-height: $global-line-height;
   width:100%;
+  scroll-behavior: auto;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  html {
+      scroll-behavior: auto;
+  }
 }
 
 /* scrollbar, only support webkit */
