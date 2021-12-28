@@ -2,11 +2,13 @@
 
 ## v0.2.12
 
-- :arrow_up: Chore: update all third-party libraries
-- :wrench: Chore(i18n): change some translations
 - :bug: Fix: add scroll-margin to headerlink
 - :fire: Feat: remove lib smooth-scroll ([#1](https://github.com/Lruihao/FixIt/issues/1))
 - :lipstick: Style: change scroll-behavior to smooth
+- :lipstick: Style: page image margin
+- :arrow_up: Chore: update all third-party libraries
+- :wrench: Chore: minify card-link background image
+- :wrench: Chore(i18n): change some translations
 
 ## v0.2.11
 
