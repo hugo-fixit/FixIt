@@ -24,7 +24,9 @@
     "start": "npm run babel && hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender",
     "start-production": "npm run babel && hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender -e production",
     "check": "htmlproofer exampleSite/public --check-html --allow-hash-href --empty-alt-ignore --disable-external",
-    "copy": "rm -rf resources && cp -rf exampleSite/resources resources"
+    "copy": "rm -rf resources && cp -rf exampleSite/resources resources",
+    "server": "hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender",
+    "server:production": "hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender -e production"
   },
   "resolutions": {
     "minimist": "^1.2.5"
