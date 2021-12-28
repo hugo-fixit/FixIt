@@ -9,6 +9,7 @@
 - :arrow_up: Chore: update all third-party libraries
 - :wrench: Chore: minify card-link background image
 - :wrench: Chore(i18n): change some translations
+- :bug: Fix: Check if content is empty beforing passing
 
 ## v0.2.11
 
