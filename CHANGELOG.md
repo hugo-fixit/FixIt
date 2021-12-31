@@ -18,7 +18,7 @@
 
 - :sparkles: Feat: add cardlink shoretcode ([Lruihao/hugo-blog@`df9eca2`](https://github.com/Lruihao/hugo-blog/commit/df9eca26af43287748fd8d4654014357a8269b0b)) 
 - :tada: Feat: add friends layout template
-- :wrench: Chore(i18n): add translations for Traditional Chinese ([Lruihao/hugo-blog@`df9eca2`](https://github.com/Lruihao/hugo-blog/commit/df9eca26af43287748fd8d4654014357a8269b0b))
+- :wrench: Chore(i18n): add translations for Traditional Chinese ([Lruihao/hugo-blog@`df9eca2`](https://github.com/Lruihao/hugo-blog/commit/b86157d8b84830bda415ab2488580afd843acac2))
 - :bug: Fix: mobile style ([Lruihao/hugo-blog#19](https://github.com/Lruihao/hugo-blog/issues/19))
 - :bug: Style: fix content h1 style ([Lruihao/hugo-blog#8](https://github.com/Lruihao/hugo-blog/issues/8))
 - :bug: Fix: `.params.author` should be `$params.author`  ([Lruihao/hugo-blog#1](https://github.com/Lruihao/hugo-blog/issues/1))
