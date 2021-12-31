@@ -622,10 +622,6 @@ class Theme {
         }
     }
 
-    initSmoothScroll() {
-        if (SmoothScroll) new SmoothScroll('[href^="#"]', { speed: 300, speedAsDuration: true, header: '#header-desktop' });
-    }
-
     initCookieconsent() {
         if (this.config.cookieconsent) cookieconsent.initialise(this.config.cookieconsent);
     }
@@ -708,7 +704,6 @@ class Theme {
             this.initHighlight();
             this.initTable();
             this.initHeaderLink();
-            this.initSmoothScroll();
             this.initMath();
             this.initMermaid();
             this.initEcharts();

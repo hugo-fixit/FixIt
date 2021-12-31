@@ -8,10 +8,14 @@
 <meta name="application-name" content="{{ .Site.Params.app.title | default .Site.Title }}">
 <meta name="apple-mobile-web-app-title" content="{{ .Site.Params.app.title | default .Site.Title }}">
 
-{{- with .Site.Params.app.themeColor -}}
-    <meta name="theme-color" content="{{ . }}">
+{{- with .Site.Params.app.themeColor.light -}}
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="{{ . }}">
+{{- end -}}
+
+{{- with .Site.Params.app.themeColor.dark -}}
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="{{ . }}">
 {{- end -}}
 
 {{- with .Site.Params.app.tileColor -}}
-    <meta name="msapplication-TileColor" content="{{ . }}">
+  <meta name="msapplication-TileColor" content="{{ . }}">
 {{- end -}}

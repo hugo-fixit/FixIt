@@ -11,6 +11,15 @@
   [header-desktop=normal] & {
     padding-top: 0;
   }
+  
+  .headerLink {
+    [header-desktop] & {
+      scroll-margin-top: $header-height;
+    }
+    [header-desktop=normal] & {
+      scroll-margin-top: 0;
+    }
+  }
 
   @include blur;
 }

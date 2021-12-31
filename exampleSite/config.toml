@@ -104,12 +104,14 @@ enableEmoji = true
         noFavicon = false
         # modern SVG favicon to use in place of older style .png and .ico files
         svgFavicon = ""
-        # Android browser theme color
-        themeColor = "#ffffff"
         # Safari mask icon color
         iconColor = "#5bbad5"
         # Windows v8-10 tile color
         tileColor = "#da532c"
+        # Android browser theme color
+        [languages.en.params.app.themeColor]
+          light = "#ffffff"
+          dark = "#252627"
       # Search config
       [languages.en.params.search]
         enable = true
@@ -304,12 +306,14 @@ enableEmoji = true
         noFavicon = false
         # 更现代的 SVG 网站图标, 可替代旧的 .png 和 .ico 文件
         svgFavicon = ""
-        # Android 浏览器主题色
-        themeColor = "#ffffff"
         # Safari 图标颜色
         iconColor = "#5bbad5"
         # Windows v8-10 磁贴颜色
         tileColor = "#da532c"
+        # Android 浏览器主题色
+        [languages.zh-cn.params.app.themeColor]
+          light = "#ffffff"
+          dark = "#252627"
       # 搜索配置
       [languages.zh-cn.params.search]
         enable = true
@@ -500,12 +504,14 @@ enableEmoji = true
         noFavicon = false
         # modern SVG favicon to use in place of older style .png and .ico files
         svgFavicon = ""
-        # Android browser theme color
-        themeColor = "#ffffff"
         # Safari mask icon color
         iconColor = "#5bbad5"
         # Windows v8-10 tile color
         tileColor = "#da532c"
+        # Android browser theme color
+        [languages.fr.params.app.themeColor]
+          light = "#ffffff"
+          dark = "#252627"
       # Search config
       [languages.fr.params.search]
         enable = true
@@ -639,6 +645,9 @@ enableEmoji = true
   # website images for Open Graph and Twitter Cards
   # 网站图片, 用于 Open Graph 和 Twitter Cards
   images = ["/logo.png"]
+  # enable PWA
+  # 开启 PWA 支持
+  enablePWA = true
 
   # Header config
   # 页面头部导航栏配置

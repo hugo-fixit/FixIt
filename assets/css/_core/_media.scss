@@ -60,6 +60,15 @@
       padding-top: 0;
     }
 
+    .headerLink {
+      [header-mobile] & {
+        scroll-margin-top: 0;
+      }
+      [header-mobile=fixed] & {
+        scroll-margin-top: $header-height;
+      }
+    }
+
     .categories-card {
       .card-item {
         width: 100%;
