@@ -112,7 +112,7 @@ The rendered output looks like this:
 </section>
 {{< /highlight >}}
 
-## 4 instagram
+## 4 instagram [Deprecated]
 
 [Documentation of `instagram`](https://gohugo.io/content-management/shortcodes#instagram)
 
@@ -123,8 +123,6 @@ Example `instagram` input:
 ```
 
 The rendered output looks like this:
-
-{{< instagram BWNjjyYFxVx hidecaption >}}
 
 ## 5 param
 
