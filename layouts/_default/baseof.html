@@ -45,27 +45,6 @@
       </a>
     </div>
 
-    {{- /* PWA */ -}}
-    {{- if eq .Site.Params.enablePWA true -}}
-      {{- if eq hugo.Environment "production" -}}
-        <script type="text/javascript">
-          if ('serviceWorker' in navigator) {
-            navigator.serviceWorker
-              .register('/service-worker.min.js', { scope: '/' })
-              .then(function (registration) {
-                // console.log('Service Worker Registered');
-              })
-              .catch(function (error) {
-                console.error('error: ', error);
-              });
-            navigator.serviceWorker.ready.then(function (registration) {
-              // console.log('Service Worker Ready');
-            });
-          }
-        </script>
-      {{- end -}}
-    {{- end -}}
-
     {{- /* Load JavaScript scripts and CSS */ -}}
     {{- partial "assets.html" . -}}
   </body>

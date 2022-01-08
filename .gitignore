@@ -14,6 +14,7 @@ $RECYCLE.BIN/
 
 # OSX
 .DS_Store
+.hugo_build.lock
 
 # Linux
 .directory

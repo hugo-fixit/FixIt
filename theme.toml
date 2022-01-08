@@ -20,9 +20,11 @@ features = [
   "pagination",
   "social-menu",
   "syntax-highlighting",
-  "SEO Optimized"
+  "SEO Optimized",
+  "friends link template",
+  "PWA support",
+  "watermark support"
 ]
-min_version = "0.62.0"
 
 [author]
   name = "Lruihao"
@@ -31,3 +33,9 @@ min_version = "0.62.0"
 [original]
   name = "Dillon"
   homepage = "https://dillonzq.com"
+  repo = "https://github.com/dillonzq/LoveIt"
+
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.62.0"

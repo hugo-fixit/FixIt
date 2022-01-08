@@ -1,10 +1,12 @@
 <!-- See https://github.com/Lruihao/FixIt/releases -->
 
-## v0.2.12
+## v0.2.12 [2022-1-8]
 
 - :tada: Feat: add PWA support
+- :tada: Feat: add Watermark support ([#16](https://github.com/Lruihao/FixIt/issues/16))
 - :bug: Fix: add scroll-margin to headerlink
 - :bug: Fix: Check if content is empty beforing passing
+- :bug: Fix: toc-auto display error ([#21](https://github.com/Lruihao/FixIt/issues/21))
 - :fire: Feat: remove lib smooth-scroll ([#1](https://github.com/Lruihao/FixIt/issues/1))
 - :lipstick: Style: change scroll-behavior to smooth
 - :lipstick: Style: page image margin
@@ -12,7 +14,8 @@
 - :wrench: Chore: minify card-link background image
 - :wrench: Chore(i18n): change some translations
 
-## v0.2.11
+[`v0.2.11...v0.2.12`](https://github.com/Lruihao/FixIt/compare/v0.2.11...v0.2.12)
+## v0.2.11 [2021-12-19]
 
 > :tada: The beginning of FixIt to fix the theme LoveIt.
 
