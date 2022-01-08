@@ -167,8 +167,8 @@
 {{- end -}}
 
 {{- /* Watermark */ -}}
-{{- if $params.watermark.enable -}}
-  {{- $source :=  default "lib/watermark/watermark.min.js" -}}
+{{- if eq .Site.Params.enablePWA true -}}
+  {{- $source := "lib/watermark/watermark.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 {{- end -}}
 
