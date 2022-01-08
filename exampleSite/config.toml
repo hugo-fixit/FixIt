@@ -646,7 +646,7 @@ enableEmoji = true
   # 网站图片, 用于 Open Graph 和 Twitter Cards
   images = ["/logo.png"]
   # enable PWA since v0.2.12
-  # 开启 PWA 支持（>v0.2.12 版本）
+  # 开启 PWA 支持 since v0.2.12
   enablePWA = true
 
   # Header config
@@ -696,6 +696,9 @@ enableEmoji = true
     # site creation time
     # 网站创立年份
     since = 2019
+    # Public network security only in China (HTML format is supported) since v0.2.12
+    # 公网安备信息，仅在中国使用 (支持 HTML 格式) since v0.2.12
+    gov = ""
     # ICP info only in China (HTML format is supported)
     # ICP 备案信息，仅在中国使用 (支持 HTML 格式)
     icp = ""
@@ -975,7 +978,7 @@ enableEmoji = true
 
   # Watermark config since v0.2.12
   # Detail config see https://github.com/Lruihao/watermark#readme
-  # 水印配置
+  # 水印配置 since v0.2.12
   # 详细参数见 https://github.com/Lruihao/watermark#readme
   [params.watermark]
     enable = true

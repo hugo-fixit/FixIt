@@ -1,5 +1,5 @@
 footer {
-  height: 2rem;
+  height: auto;
   width: 100%;
   text-align: center;
   line-height: 1.25rem;
@@ -11,13 +11,12 @@ footer {
     .footer-line {
       width: 100%;
 
-      .icp-br {
-        display: none;
+      .footer-divider::before {
+        content: '|';
+        margin-left: .25rem;
+        margin-right: .25rem;
       }
 
-      .fa-ban {
-        color: Tomato;
-      }
     }
   }
 

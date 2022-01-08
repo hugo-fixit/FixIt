@@ -10,13 +10,10 @@
       {{- /* Hugo and FixIt */ -}}
       {{- if ne .Site.Params.footer.hugo false -}}
         <div class="footer-line">
-          {{- $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo %v">Hugo</a>` hugo.Version -}}
+          {{- $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer" title="Hugo %v">Hugo</a>` hugo.Version -}}
           {{- $theme := .Scratch.Get "version" | printf 
-            `<a href="https://github.com/Lruihao/FixIt" target="_blank" rel="noopener noreffer" title="FixIt %v">
-            <i class="fa-stack fa-xs">
-              <i class="fas fa-bug fa-stack-1x"></i>
-              <i class="fas fa-ban fa-stack-2x"></i>
-            </i>
+            `<a href="https://github.com/Lruihao/FixIt" target="_blank" rel="external nofollow noopener noreffer" title="FixIt %v">
+            <i class="fa-stack fa-xs logo"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i>
             FixIt
             </a>` -}}
           {{- dict "Hugo" $hugo "Theme" $theme | T "poweredBySome" | safeHTML }}
@@ -43,13 +40,19 @@
 
         {{- /* License */ -}}
         {{- with .Site.Params.footer.license -}}
-          &nbsp;|&nbsp;<span class="license">{{ . | safeHTML }}</span>
+          <span class="license footer-divider">{{ . | safeHTML }}</span>
         {{- end -}}
-
+      </div>
+      
+      <div class="footer-line">
+        {{- /* GOV */ -}}
+        {{- with .Site.Params.footer.gov -}}
+          <span class="gov">{{ . | safeHTML }}</span>
+        {{- end -}}
+    
         {{- /* ICP */ -}}
         {{- with .Site.Params.footer.icp -}}
-          <span class="icp-splitter">&nbsp;|&nbsp;</span><br class="icp-br"/>
-          <span class="icp">{{ . | safeHTML }}</span>
+          <span class="icp footer-divider">{{ . | safeHTML }}</span>
         {{- end -}}
       </div>
     </div>

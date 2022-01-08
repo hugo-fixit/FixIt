@@ -75,15 +75,10 @@
       }
     }
   }
-
-  .copyright {
-    .copyright-line {
-      .icp-splitter {
-        display: none;
-      }
-      .icp-br {
-        display: block;
-      }
+  
+  footer{
+    .footer-container {
+      font-size: .618rem;
     }
   }
 }
