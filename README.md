@@ -48,6 +48,7 @@ Thanks to the authors of following resources included in the theme:
 * [Gitalk](https://github.com/gitalk/gitalk)
 * [Valine](https://valine.js.org/)
 * [cookieconsent](https://github.com/osano/cookieconsent)
+* [Watermark](https://github.com/Lruihao/watermark)
 
 ## Author
 

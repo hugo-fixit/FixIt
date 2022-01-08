@@ -645,8 +645,8 @@ enableEmoji = true
   # website images for Open Graph and Twitter Cards
   # 网站图片, 用于 Open Graph 和 Twitter Cards
   images = ["/logo.png"]
-  # enable PWA
-  # 开启 PWA 支持
+  # enable PWA since v0.2.12
+  # 开启 PWA 支持（>v0.2.12 版本）
   enablePWA = true
 
   # Header config
@@ -972,6 +972,40 @@ enableEmoji = true
     # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
     # 打字结束之后光标的持续时间 (单位是毫秒, "-1" 代表无限大)
     duration = -1
+
+  # Watermark config since v0.2.12
+  # Detail config see https://github.com/Lruihao/watermark#readme
+  # 水印配置
+  # 详细参数见 https://github.com/Lruihao/watermark#readme
+  [params.watermark]
+    enable = true
+    # watermark's text
+    # 水印内容
+    content = 'Theme FixIt'
+    # watermark's transparency
+    # 水印透明度
+    opacity = 0.02
+    # parent of watermark's container
+    # 水印父节点
+    appendTo = '.wrapper>.main'
+    # watermark's width. unit: px
+    # 单水印宽度 单位：px
+    width = 150
+    # watermark's height. unit: px
+    # 单水印高度 单位：px
+    height = 20
+    # row spacing of watermarks. unit: px
+    # 水印行间距 单位：px
+    rowSpacing = 60
+    # col spacing of watermarks. unit: px
+    # 水印列间距 单位：px
+    colSpacing = 30
+    # watermark's tangent angle. unit: deg
+    # 水印旋转角度 单位：deg
+    rotate = 15
+    # watermark's fontSize. unit: rem
+    # 水印字体大小，单位：rem
+    fontSize = 0.85
 
   # Site verification code for Google/Bing/Yandex/Pinterest/Baidu
   # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
