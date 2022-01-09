@@ -7,6 +7,7 @@
           {{- safeHTML . -}}
         </div>
       {{- end -}}
+
       {{- /* Hugo and FixIt */ -}}
       {{- if ne .Site.Params.footer.hugo false -}}
         <div class="footer-line">
@@ -40,6 +41,30 @@
         {{- /* License */ -}}
         {{- with .Site.Params.footer.license -}}
           <span class="license footer-divider">{{ . | safeHTML }}</span>
+        {{- end -}}
+      </div>
+
+      <div class="footer-line">
+        {{- /* 不蒜子 */ -}}
+        {{- if eq .Site.Params.ibruce.enable true -}}
+          <span id="busuanzi_container_site_uv" title={{ T "siteUV" }}>
+            <i class="fas fa-user color-dark-gray"></i>
+            <span id="busuanzi_value_site_uv">
+              <i class="fa fa-spinner fa-spin"></i>
+            </span>
+          </span>
+          {{- if .Site.Params.ibruce.siteTime -}}
+            <span class="site-time footer-divider" title={{ T "siteRuning" }}>
+              <i class="fas fa-heartbeat animate-icon"></i>
+              <span class="run-times">Loading...</span>
+            </span>
+          {{- end -}}
+          <span id="busuanzi_container_site_pv" class="footer-divider" title={{ T "siteUV" }}>
+            <i class="fas fa-eye color-dark-gray"></i>
+            <span id="busuanzi_value_site_pv">
+              <i class="fa fa-spinner fa-spin"></i>
+            </span>
+          </span>
         {{- end -}}
       </div>
       

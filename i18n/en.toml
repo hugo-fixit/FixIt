@@ -53,6 +53,15 @@ other = "Switch Theme"
 # === partials/footer.html ===
 [poweredBySome]
 other = "Powered by {{ .Hugo }} | Theme - {{ .Theme }}"
+
+[siteUV]
+other = "Total visitors"
+
+[sitePV]
+other = "Total visits"
+
+[siteRuning]
+other = "Site running ..."
 # === partials/footer.html ===
 
 # === partials/comment.html ===
@@ -71,7 +80,7 @@ other = "en_US"
 other = "Search"
 
 [searchPlaceholder]
-other = "Search titles or contents..."
+other = "Search titles or contents ..."
 
 [clear]
 other = "Clear"

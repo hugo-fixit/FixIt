@@ -172,6 +172,12 @@
   {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 {{- end -}}
 
+{{- /* 不蒜子 */ -}}
+{{- if eq .Site.Params.ibruce.enable true -}}
+  {{- $source := "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" -}}
+  {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+{{- end -}}
+
 {{- range $params.library.css -}}
   {{- dict "Source" . "Fingerprint" $fingerprint | dict "Scratch" $.Scratch "Data" | partial "scratch/style.html" -}}
 {{- end -}}
@@ -211,22 +217,20 @@
 {{- /* Inline scripts */ -}}
 <script type="text/javascript">
 {{- /* PWA */ -}}
-{{- if eq .Site.Params.enablePWA true -}}
-  {{- if eq hugo.Environment "production" -}}
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker
-        .register('/service-worker.min.js', { scope: '/' })
-        .then(function (registration) {
-          // console.log('Service Worker Registered');
-        })
-        .catch(function (error) {
-          console.error('error: ', error);
-        });
-      navigator.serviceWorker.ready.then(function (registration) {
-        // console.log('Service Worker Ready');
+{{- if eq hugo.Environment "production" | and .Site.Params.enablePWA -}}
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+      .register('/service-worker.min.js', { scope: '/' })
+      .then(function (registration) {
+        // console.log('Service Worker Registered');
+      })
+      .catch(function (error) {
+        console.error('error: ', error);
       });
-    }
-  {{- end -}}
+    navigator.serviceWorker.ready.then(function (registration) {
+      // console.log('Service Worker Ready');
+    });
+  }
 {{- end -}}
 
 {{- /* Watermark */ -}}
@@ -242,5 +246,26 @@
     rotate: {{ $.Site.Params.watermark.rotate }},
     fontSize: {{ $.Site.Params.watermark.fontSize }}
   });
+{{- end -}}
+
+{{- /* Site time */ -}}
+{{- if eq .Site.Params.ibruce.enable true | and .Site.Params.ibruce.siteTime -}}
+  function createTime() {
+    let now = new Date();
+    let run = new Date({{ $.Site.Params.ibruce.siteTime }});
+    //總的秒數
+    let runTime = (now - run) / 1000,
+      days = Math.floor(runTime / 60 / 60 / 24),
+      hours = Math.floor(runTime / 60 / 60 - (24 * days)),
+      minutes = Math.floor(runTime / 60 - (24 * 60 * days) - (60 * hours)),
+      seconds = Math.floor((now - run) / 1000 - (24 * 60 * 60 * days) - (60 * 60 * hours) - (60 * minutes));
+    document.querySelector(".run-times").innerHTML = `${days}d ${String(hours).padStart(2,0)}h ${String(minutes).padStart(2,0)}m ${String(seconds).padStart(2,0)}s`;
+  }
+  
+  if (!document.hidden) {
+    var siteTime = setInterval("createTime()", 500);
+  } else {
+    clearInterval(siteTime);
+  }
 {{- end -}}
 </script>

@@ -54,6 +54,15 @@ other = "切換主題"
 # === partials/footer.html ===
 [poweredBySome]
 other = "Powered by {{ .Hugo }} | Theme - {{ .Theme }}"
+
+[siteUV]
+other = "總訪客數"
+
+[sitePV]
+other = "總訪問量"
+
+[siteRuning]
+other = "網站運行中 ..."
 # === partials/footer.html ===
 
 # === partials/comment.html ===

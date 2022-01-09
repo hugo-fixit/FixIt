@@ -54,6 +54,15 @@ other = "切换主题"
 # === partials/footer.html ===
 [poweredBySome]
 other = "由 {{ .Hugo }} 强力驱动 | 主题 - {{ .Theme }}"
+
+[siteUV]
+other = "总访客数"
+
+[sitePV]
+other = "总访问量"
+
+[siteRuning]
+other = "网站运行中 ..."
 # === partials/footer.html ===
 
 # === partials/comment.html ===
@@ -72,7 +81,7 @@ other = "zh_CN"
 other = "搜索"
 
 [searchPlaceholder]
-other = "搜索文章标题或内容..."
+other = "搜索文章标题或内容 ..."
 
 [clear]
 other = "清空"

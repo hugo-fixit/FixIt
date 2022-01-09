@@ -17,8 +17,35 @@ footer {
         margin-right: .25rem;
       }
 
+      .animate-icon {
+        color: #dc143c;
+        animation: icon-animate 1.33s ease-in-out infinite;
+      }
+
+      .color-dark-gray{
+        color: DarkSlateGray;
+      }
+
     }
   }
 
   @include blur;
+}
+
+@keyframes icon-animate {
+  0%,100% {
+    transform: scale(1)
+  }
+
+  10%,30% {
+    transform: scale(.9)
+  }
+
+  20%,40%,60%,80% {
+    transform: scale(1.1)
+  }
+
+  50%,70% {
+    transform: scale(1.1)
+  }
 }

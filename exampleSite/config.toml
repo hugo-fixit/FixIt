@@ -1010,6 +1010,17 @@ enableEmoji = true
     # 水印字体大小，单位：rem
     fontSize = 0.85
 
+  # Busuanzi count since v0.2.12
+  # 不蒜子统计
+  [params.ibruce]
+    enable = true
+    # Enable in post meta
+    # 在文章中开启
+    enablePost = false
+    # Site creation time
+    # 网站创立时间
+    siteTime = '2018-05-28T20:01:01+08:00'
+  
   # Site verification code for Google/Bing/Yandex/Pinterest/Baidu
   # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
   [params.verification]
