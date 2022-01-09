@@ -183,7 +183,7 @@
 {{- end -}}
 
 {{- range $params.library.js -}}
-  {{- dict "Source" . "Fingerprint" $fingerprint "Async" true "Defer" true | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
+  {{- dict "Source" . "Fingerprint" $fingerprint "Defer" true | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
 {{- end -}}
 
 {{- with (.Scratch.Get "this").styleArr -}}
@@ -199,6 +199,15 @@
 {{- /* Theme script */ -}}
 {{- dict "Source" "js/theme.min.js" "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 {{- $_ := (resources.Get "js/theme.min.js.map").RelPermalink -}}
+
+{{- /* Custom script */ -}}
+{{- if eq .Site.Params.customJS.enable true -}}
+  {{- $source = "js/_custom.js" -}}
+  {{- if eq .Site.Params.customJS.minify true -}}
+    {{- $source = "js/_custom.min.js" -}}
+  {{- end -}}
+  {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+{{- end -}}
 
 {{- with (.Scratch.Get "this").scriptArr -}}
   {{- delimit . "\n" | dict "Content" | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
