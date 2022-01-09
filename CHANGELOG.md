@@ -1,6 +1,6 @@
 <!-- See https://github.com/Lruihao/FixIt/releases -->
 
-## v0.2.12 [2022-1-8]
+## v0.2.12 [2022-1-10]
 
 - :tada: Feat: add PWA support
 - :tada: Feat: add Watermark support ([#16](https://github.com/Lruihao/FixIt/issues/16))
@@ -9,11 +9,9 @@
 - :sparkles: Feat: add CustomJS option ([#24](https://github.com/Lruihao/FixIt/issues/24))
 - :zap: Perf: optimize JS loading ([#25](https://github.com/Lruihao/FixIt/issues/25))
 - :bug: Fix: add scroll-margin to headerlink
-- :bug: Fix: Check if content is empty beforing passing
 - :bug: Fix: toc-auto display error ([#21](https://github.com/Lruihao/FixIt/issues/21))
 - :fire: Feat: remove lib smooth-scroll ([#1](https://github.com/Lruihao/FixIt/issues/1))
-- :lipstick: Style: change scroll-behavior to smooth
-- :lipstick: Style: page image margin
+- :lipstick: Style: change scroll-behavior to smooth, page image margin, header style, footer style etc.
 - :arrow_up: Chore: update all third-party libraries
 - :wrench: Chore: minify card-link background image
 - :wrench: Chore(i18n): change some translations
