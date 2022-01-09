@@ -6,6 +6,7 @@
 - :tada: Feat: add Watermark support ([#16](https://github.com/Lruihao/FixIt/issues/16))
 - :tada: Feat: add "不蒜子" count and site run time ([#18](https://github.com/Lruihao/FixIt/issues/18))
 - :sparkles: Feat: add public network security config (only in China) ([#15](https://github.com/Lruihao/FixIt/issues/15))
+- :zap: Perf: optimize JS loading ([#25](https://github.com/Lruihao/FixIt/issues/25))
 - :bug: Fix: add scroll-margin to headerlink
 - :bug: Fix: Check if content is empty beforing passing
 - :bug: Fix: toc-auto display error ([#21](https://github.com/Lruihao/FixIt/issues/21))
