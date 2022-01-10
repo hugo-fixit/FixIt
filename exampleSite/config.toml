@@ -682,8 +682,8 @@ enableEmoji = true
       # subtitle name
       # 副标题名称
       name = ""
-      # whether to use typeit animation for title name
-      # 是否为标题显示打字机动画
+      # whether to use typeit animation for subtitle name
+      # 是否为副标题显示打字机动画
       typeit = false
 
   # Footer config
