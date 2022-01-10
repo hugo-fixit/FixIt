@@ -12,10 +12,7 @@
       {{- if ne .Site.Params.footer.hugo false -}}
         <div class="footer-line">
           {{- $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer" title="Hugo %v">Hugo</a>` hugo.Version -}}
-          {{- $theme := .Scratch.Get "version" | printf 
-            `<a href="https://github.com/Lruihao/FixIt" target="_blank" rel="external nofollow noopener noreffer" title="FixIt %v">
-            <i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i>&nbsp;FixIt
-            </a>` -}}
+          {{- $theme := .Scratch.Get "version" | printf `<a href="https://github.com/Lruihao/FixIt" target="_blank" rel="external nofollow noopener noreffer" title="FixIt %v"><i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> FixIt</a>` -}}
           {{- dict "Hugo" $hugo "Theme" $theme | T "poweredBySome" | safeHTML }}
         </div>
       {{- end -}}
@@ -51,20 +48,20 @@
             <i class="fas fa-user color-dark-gray"></i>
             <span id="busuanzi_value_site_uv">
               <i class="fa fa-spinner fa-spin"></i>
-            </span>
-          </span>
+            </span
+          ></span>
           {{- if .Site.Params.ibruce.siteTime -}}
             <span class="site-time footer-divider" title={{ T "siteRuning" }}>
               <i class="fas fa-heartbeat animate-icon"></i>
-              <span class="run-times">Loading...</span>
-            </span>
+              <span class="run-times">Loading...</span
+            ></span>
           {{- end -}}
           <span id="busuanzi_container_site_pv" class="footer-divider" title={{ T "sitePV" }}>
             <i class="fas fa-eye color-dark-gray"></i>
             <span id="busuanzi_value_site_pv">
               <i class="fa fa-spinner fa-spin"></i>
-            </span>
-          </span>
+            </span
+          ></span>
         {{- end -}}
       </div>
       
