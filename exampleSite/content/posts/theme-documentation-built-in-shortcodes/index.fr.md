@@ -142,7 +142,7 @@ The rendered output looks like this:
 
 [Documentation of `ref` and `relref`](https://gohugo.io/content-management/shortcodes#ref-and-relref)
 
-## 7 tweet
+## 7 tweet [Deprecated]
 
 [Documentation of `tweet`](https://gohugo.io/content-management/shortcodes#tweet)
 
@@ -153,8 +153,6 @@ Example `tweet` input:
 ```
 
 The rendered output looks like this:
-
-{{< tweet 877500564405444608 >}}
 
 ## 8 vimeo
 
