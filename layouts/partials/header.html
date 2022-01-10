@@ -15,24 +15,24 @@
             <span id="{{ $id }}" class="typeit"></span>
             {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
           {{- else -}}
-            <span class="header-title">{{- .name -}}</span>
+            <span class="header-title-text">{{- .name -}}</span>
           {{- end -}}
           {{- with .post -}}
             <span class="header-title-post">{{ . | safeHTML }}</span>
           {{- end -}}
         {{- else -}}
-          <span class="header-title">{{- .Site.Title -}}</span>
-        {{- end -}}
-        {{- with .Site.Params.header.subtitle -}}
-          {{- if .typeit -}}
-            {{- $id := dict "Content" .name "Scratch" $.Scratch | partial "function/id.html" -}}
-            &nbsp;<span id="{{ $id }}" class="typeit "></span>
-            {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
-          {{- else -}}
-            &nbsp;<span class="header-subtitle">{{- .name -}}</span>
-          {{- end -}}
+          <span class="header-title-text">{{- .Site.Title -}}</span>
         {{- end -}}
       </a>
+      {{- with .Site.Params.header.subtitle -}}
+        {{- if .typeit -}}
+          {{- $id := dict "Content" .name "Scratch" $.Scratch | partial "function/id.html" -}}
+          <span id="{{ $id }}" class="typeit header-subtitle"></span>
+          {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
+        {{- else -}}
+          <span class="header-subtitle">{{- .name -}}</span>
+        {{- end -}}
+      {{- end -}}
     </div>
     <div class="menu">
       <div class="menu-inner">
@@ -111,15 +111,24 @@
               <span id="{{ $id }}" class="typeit"></span>
               {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
             {{- else -}}
-              {{- .name -}}
+              <span class="header-title-text">{{- .name -}}</span>
             {{- end -}}
             {{- with .post -}}
               <span class="header-title-post">{{ . | safeHTML }}</span>
             {{- end -}}
           {{- else -}}
-            {{- .Site.Title -}}
+            <span class="header-title-text">{{- .Site.Title -}}</span>
           {{- end -}}
         </a>
+        {{- with .Site.Params.header.subtitle -}}
+          {{- if .typeit -}}
+            {{- $id := dict "Content" .name "Scratch" $.Scratch | partial "function/id.html" -}}
+            <span id="{{ $id }}" class="typeit header-subtitle"></span>
+            {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
+          {{- else -}}
+            <span class="header-subtitle">{{- .name -}}</span>
+          {{- end -}}
+        {{- end -}}
       </div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>

@@ -676,9 +676,15 @@ enableEmoji = true
       # whether to use typeit animation for title name
       # 是否为标题显示打字机动画
       typeit = false
+    # Header subtitle config since v0.2.12
+    # 页面头部导航栏副标题配置 since v0.2.12
     [params.header.subtitle]
-      name = "李瑞豪的博客"
-      typeit = true
+      # subtitle name
+      # 副标题名称
+      name = ""
+      # whether to use typeit animation for title name
+      # 是否为标题显示打字机动画
+      typeit = false
 
   # Footer config
   # 页面底部信息配置
@@ -1014,7 +1020,7 @@ enableEmoji = true
     fontSize = 0.85
 
   # Busuanzi count since v0.2.12
-  # 不蒜子统计
+  # 不蒜子统计 since v0.2.12
   [params.ibruce]
     enable = true
     # Enable in post meta
@@ -1100,7 +1106,7 @@ enableEmoji = true
   # "_custom.js" located in "themes/FixIt/assets/js/"
   # you can store your custom JS file in the same path under your project:
   # "assets/js/_custom.js"
-  # 页面最后添加自定义 JS
+  # 页面最后添加自定义 JS since v0.2.12
   # "_custom.js" 位于 "themes/FixIt/assets/js" 目录
   # 可以在你的项目下相同路径存放你自己的自定义 JS 文件:
   # "assets/js/_custom.js"

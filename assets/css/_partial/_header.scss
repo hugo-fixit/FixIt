@@ -8,20 +8,6 @@ header {
     background-color: $header-background-color-dark;
   }
 
-  .logo {
-    min-height: 1.5em;
-    height: 1.5em;
-    vertical-align: text-bottom;
-  }
-
-  .logo, .header-title-pre {
-    padding-right: .25rem;
-  }
-
-  .header-title-post {
-    padding-left: .25rem;
-  }
-
   &:hover {
     @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, .1));
   }
@@ -44,6 +30,22 @@ header {
   white-space: nowrap;
   text-overflow: ellipsis;
   @include flex(10);
+
+  .logo {
+    min-height: 1.5em;
+    height: 1.5em;
+    vertical-align: text-bottom;
+  }
+  
+  .header-title-text {
+    margin-left: .25rem;
+    margin-right: .25rem;
+  }
+
+  .header-subtitle {
+    margin-left: .25rem;
+    font-size: .6em;
+  }
 }
 
 .menu .menu-item {

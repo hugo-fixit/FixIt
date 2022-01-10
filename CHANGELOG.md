@@ -1,6 +1,6 @@
 <!-- See https://github.com/Lruihao/FixIt/releases -->
 
-## v0.2.12 [2022-1-10]
+## v0.2.12 [2022-1-11]
 
 - :tada: Feat: add PWA support
 - :tada: Feat: add Watermark support ([#16](https://github.com/Lruihao/FixIt/issues/16))
@@ -8,6 +8,7 @@
 - :sparkles: Feat: add public network security config (only in China) ([#15](https://github.com/Lruihao/FixIt/issues/15))
 - :sparkles: Feat: add CustomJS option ([#24](https://github.com/Lruihao/FixIt/issues/24))
 - :zap: Perf: optimize JS loading ([#25](https://github.com/Lruihao/FixIt/issues/25))
+- :recycle: Refactor: header title DOM and add subtitle option ([#26](https://github.com/Lruihao/FixIt/issues/26))
 - :bug: Fix: add scroll-margin to headerlink
 - :bug: Fix: toc-auto display error ([#21](https://github.com/Lruihao/FixIt/issues/21))
 - :fire: Feat: remove lib smooth-scroll ([#1](https://github.com/Lruihao/FixIt/issues/1))
