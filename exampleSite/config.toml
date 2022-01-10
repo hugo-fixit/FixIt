@@ -676,6 +676,9 @@ enableEmoji = true
       # whether to use typeit animation for title name
       # 是否为标题显示打字机动画
       typeit = false
+    [params.header.subtitle]
+      name = "李瑞豪的博客"
+      typeit = true
 
   # Footer config
   # 页面底部信息配置
