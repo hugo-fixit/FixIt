@@ -14,17 +14,17 @@
 {{- $height := "20rem" -}}
 
 {{- if .IsNamedParams -}}
-    {{- $lightStyle = .Get "light-style" | default $lightStyle -}}
-    {{- $darkStyle = .Get "dark-style" | default $darkStyle -}}
-    {{- $navigation = .Get "navigation" | ne false | and $navigation -}}
-    {{- $geolocate = .Get "geolocate" | ne false | and $geolocate -}}
-    {{- $scale = .Get "scale" | ne false | and $scale -}}
-    {{- $fullscreen = .Get "fullscreen" | ne false | and $fullscreen -}}
-    {{- $width = .Get "width" | default $width -}}
-    {{- $height = .Get "height" | default $height -}}
+  {{- $lightStyle = .Get "light-style" | default $lightStyle -}}
+  {{- $darkStyle = .Get "dark-style" | default $darkStyle -}}
+  {{- $navigation = .Get "navigation" | ne false | and $navigation -}}
+  {{- $geolocate = .Get "geolocate" | ne false | and $geolocate -}}
+  {{- $scale = .Get "scale" | ne false | and $scale -}}
+  {{- $fullscreen = .Get "fullscreen" | ne false | and $fullscreen -}}
+  {{- $width = .Get "width" | default $width -}}
+  {{- $height = .Get "height" | default $height -}}
 {{- else -}}
-    {{- $lightStyle = .Get 4 | default $lightStyle -}}
-    {{- $darkStyle = .Get 5 | default $darkStyle -}}
+  {{- $lightStyle = .Get 4 | default $lightStyle -}}
+  {{- $darkStyle = .Get 5 | default $darkStyle -}}
 {{- end -}}
 {{- $darkStyle = $darkStyle | default $lightStyle -}}
 {{- $options := dict "lng" $lng "lat" $lat "zoom" $zoom "marked" $marked "lightStyle" $lightStyle "darkStyle" $darkStyle "geolocate" $geolocate "navigation" $navigation "scale" $scale "fullscreen" $fullscreen -}}

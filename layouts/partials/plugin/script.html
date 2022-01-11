@@ -1,25 +1,25 @@
 {{- if .Content -}}
-    <script type="text/javascript">
-        {{- .Content | safeJS -}}
-    </script>
+  <script type="text/javascript">
+    {{- .Content | safeJS -}}
+  </script>
 {{- else if strings.HasPrefix .Source "<script" -}}
-    {{- safeHTML .Source -}}
+  {{- safeHTML .Source -}}
 {{- else -}}
-    {{- $src := .Source -}}
-    {{- $integrity := .Integrity -}}
-    {{- if (urls.Parse $src).Host | not -}}
-        {{- $resource := resources.Get $src -}}
-        {{- with .Template -}}
-            {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
-        {{- end -}}
-        {{- if .Minify -}}
-            {{- $resource = $resource | minify -}}
-        {{- end -}}
-        {{- with .Fingerprint -}}
-            {{- $resource = $resource | fingerprint . -}}
-            {{- $integrity = $resource.Data.Integrity -}}
-        {{- end -}}
-        {{- $src = $resource.RelPermalink -}}
+  {{- $src := .Source -}}
+  {{- $integrity := .Integrity -}}
+  {{- if (urls.Parse $src).Host | not -}}
+    {{- $resource := resources.Get $src -}}
+    {{- with .Template -}}
+      {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
     {{- end -}}
-    <script type="text/javascript" src="{{ $src }}"{{ if .Crossorigin }} crossorigin="anonymous"{{ end }}{{ with $integrity }} integrity="{{ . }}"{{ end }}{{ if .Async }} async{{ end }}{{ if .Defer }} defer{{ end }}{{ with .Attr }} {{ . | safeHTMLAttr }}{{ end }}></script>
+    {{- if .Minify -}}
+      {{- $resource = $resource | minify -}}
+    {{- end -}}
+    {{- with .Fingerprint -}}
+      {{- $resource = $resource | fingerprint . -}}
+      {{- $integrity = $resource.Data.Integrity -}}
+    {{- end -}}
+    {{- $src = $resource.RelPermalink -}}
+  {{- end -}}
+  <script type="text/javascript" src="{{ $src }}"{{ if .Crossorigin }} crossorigin="anonymous"{{ end }}{{ with $integrity }} integrity="{{ . }}"{{ end }}{{ if .Async }} async{{ end }}{{ if .Defer }} defer{{ end }}{{ with .Attr }} {{ . | safeHTMLAttr }}{{ end }}></script>
 {{- end -}}
