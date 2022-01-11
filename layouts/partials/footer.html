@@ -17,65 +17,75 @@
         </div>
       {{- end -}}
 
-      <div class="footer-line">
-        {{- /* Copyright year */ -}}
-        {{- if ne .Site.Params.footer.copyright false -}}
-          <i class="far fa-copyright fa-fw"></i>
-          {{- with .Site.Params.footer.since -}}
-            <span itemprop="copyrightYear">
-              {{- if lt . now.Year }}{{ . }} - {{ end }}{{ now.Year -}}
-            </span>
-          {{- else -}}
-            <span itemprop="copyrightYear">{{ now.Year }}</span>
+      {{- if .Site.Params.footer.copyright | or .Site.Params.footer.author | or .Site.Params.footer.license -}}
+        <div class="footer-line">
+          {{- /* Copyright year */ -}}
+          {{- if ne .Site.Params.footer.copyright false -}}
+            <i class="far fa-copyright fa-fw"></i>
+            {{- with .Site.Params.footer.since -}}
+              <span itemprop="copyrightYear">
+                {{- if lt . now.Year }}{{ . }} - {{ end }}{{ now.Year -}}
+              </span>
+            {{- else -}}
+              <span itemprop="copyrightYear">{{ now.Year }}</span>
+            {{- end -}}
           {{- end -}}
-        {{- end -}}
 
-        {{- /* Author */ -}}
-        {{- if ne .Site.Params.footer.author false -}}
-          <span class="author" itemprop="copyrightHolder">&nbsp;<a href="{{ $.Site.Author.link | default .Site.Home.RelPermalink }}" target="_blank">{{ .Site.Author.name }}</a></span>
-        {{- end -}}
+          {{- /* Author */ -}}
+          {{- if ne .Site.Params.footer.author false -}}
+            <span class="author" itemprop="copyrightHolder">&nbsp;<a href="{{ $.Site.Author.link | default .Site.Home.RelPermalink }}" target="_blank">{{ .Site.Author.name }}</a></span>
+          {{- end -}}
 
-        {{- /* License */ -}}
-        {{- with .Site.Params.footer.license -}}
-          <span class="license footer-divider">{{ . | safeHTML }}</span>
-        {{- end -}}
-      </div>
+          {{- /* License */ -}}
+          {{- with .Site.Params.footer.license -}}
+            {{- if $.Site.Params.footer.copyright | or $.Site.Params.footer.author -}}
+              <span class="footer-divider"></span>
+            {{- end -}}
+            <span class="license">{{ . | safeHTML }}</span>
+          {{- end -}}
+        </div>
+      {{- end -}}
 
-      <div class="footer-line">
-        {{- /* 不蒜子 */ -}}
-        {{- if eq .Site.Params.ibruce.enable true -}}
-          <span id="busuanzi_container_site_uv" title={{ T "siteUV" }}>
-            <i class="fas fa-user color-dark-gray"></i>
-            <span id="busuanzi_value_site_uv">
-              <i class="fa fa-spinner fa-spin"></i>
-            </span
+      {{- /* 不蒜子 */ -}}
+      {{- if eq .Site.Params.ibruce.enable true -}}
+        <div class="footer-line">
+          <span id="busuanzi_container_site_uv" title={{ T "siteUV" }}
+            ><i class="fas fa-user color-dark-gray"></i>
+            <span id="busuanzi_value_site_uv"
+              ><i class="fa fa-spinner fa-spin"></i
+            ></span
           ></span>
           {{- if .Site.Params.ibruce.siteTime -}}
-            <span class="site-time footer-divider" title={{ T "siteRuning" }}>
-              <i class="fas fa-heartbeat animate-icon"></i>
+            <span class="site-time footer-divider" title={{ T "siteRuning" }}
+              ></span><i class="fas fa-heartbeat animate-icon"></i>
               <span class="run-times">Loading...</span
             ></span>
           {{- end -}}
-          <span id="busuanzi_container_site_pv" class="footer-divider" title={{ T "sitePV" }}>
-            <i class="fas fa-eye color-dark-gray"></i>
-            <span id="busuanzi_value_site_pv">
-              <i class="fa fa-spinner fa-spin"></i>
-            </span
+          <span id="busuanzi_container_site_pv" class="footer-divider" title={{ T "sitePV" }}
+            ><i class="fas fa-eye color-dark-gray"></i>
+            <span id="busuanzi_value_site_pv"
+              ><i class="fa fa-spinner fa-spin"></i
+            ></span
           ></span>
-        {{- end -}}
-      </div>
+        </div>
+      {{- end -}}
       
-      <div class="footer-line">
-        {{- /* GOV */ -}}
-        {{- with .Site.Params.footer.gov -}}
-          <span class="gov">{{ . | safeHTML }}</span>
-        {{- end -}}
-    
-        {{- /* ICP */ -}}
-        {{- with .Site.Params.footer.icp -}}
-          <span class="icp footer-divider">{{ . | safeHTML }}</span>
-        {{- end -}}
-      </div>
+      {{- if .Site.Params.footer.gov | or .Site.Params.footer.icp -}}
+        <div class="footer-line">
+          {{- /* GOV */ -}}
+          {{- with .Site.Params.footer.gov -}}
+            <span class="gov">{{ . | safeHTML }}</span>
+          {{- end -}}
+      
+          {{- /* ICP */ -}}
+          {{- with .Site.Params.footer.icp -}}
+            {{- if $.Site.Params.footer.gov -}}
+              <span class="footer-divider"></span>
+            {{- end -}}
+            <span class="icp">{{ . | safeHTML }}</span>
+          {{- end -}}
+        </div>
+      {{- end -}}
     </div>
   </footer>
 {{- end -}}

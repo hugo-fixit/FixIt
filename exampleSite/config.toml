@@ -1028,7 +1028,7 @@ enableEmoji = true
     enablePost = false
     # Site creation time
     # 网站创立时间
-    siteTime = '2018-05-28T20:01:01+08:00'
+    siteTime = '2019-02-03T19:30:34+08:00'
   
   # Site verification code for Google/Bing/Yandex/Pinterest/Baidu
   # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
@@ -1153,9 +1153,9 @@ enableEmoji = true
 # Author config
 # 作者配置
 [author]
-  name = "xxxx"
-  email = ""
-  link = ""
+  name = "Lruihao"
+  email = "1024@lruihao.cn"
+  link = "https://lruihao.cn"
 
 # Sitemap config
 # 网站地图配置
