@@ -991,9 +991,9 @@ enableEmoji = true
   # 详细参数见 https://github.com/Lruihao/watermark#readme
   [params.watermark]
     enable = true
-    # watermark's text
-    # 水印内容
-    content = 'Theme FixIt'
+    # watermark's text (HTML format is supported)
+    # 水印内容 (允许 HTML 格式)
+    content = '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> Theme FixIt'
     # watermark's transparency
     # 水印透明度
     opacity = 0.02
@@ -1005,7 +1005,7 @@ enableEmoji = true
     width = 150
     # watermark's height. unit: px
     # 单水印高度 单位：px
-    height = 20
+    height = 23
     # row spacing of watermarks. unit: px
     # 水印行间距 单位：px
     rowSpacing = 60
