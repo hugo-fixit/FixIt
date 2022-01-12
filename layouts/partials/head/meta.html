@@ -1,7 +1,10 @@
 {{- $params := .Scratch.Get "params" -}}
 
-<meta name="Description" content="{{ $params.description | default .Site.Params.description }}">
+<meta name="author" content="{{ .Site.Author.name }}: {{ .Site.Author.link }}">
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+<meta name="keywords" content="{{ range $index, $keyword := .Site.Params.keywords }}{{ if ne $index 0 }},{{ end }}{{ $keyword }}{{ end }}" />
 
+{{- template "_internal/schema.html" . -}}
 {{- template "_internal/opengraph.html" . -}}
 {{- template "_internal/twitter_cards.html" . -}}
 

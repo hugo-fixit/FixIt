@@ -13,6 +13,7 @@
 - :bug: Fix: add scroll-margin to headerlink
 - :bug: Fix: toc-auto display error ([#21](https://github.com/Lruihao/FixIt/issues/21))
 - :fire: Feat: remove lib smooth-scroll ([#1](https://github.com/Lruihao/FixIt/issues/1))
+- :robot: Feat(SEO): optimize SEO meta ([#30](https://github.com/Lruihao/FixIt/issues/30))
 - :lipstick: Style: change scroll-behavior to smooth, page image margin, header style, footer style etc.
 - :arrow_up: Chore: update all third-party libraries
 - :wrench: Chore: minify card-link background image
