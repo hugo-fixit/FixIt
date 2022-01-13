@@ -16,6 +16,7 @@ code {
 pre {
   margin: 0;
   padding: .25rem 0 .25rem .5rem;
+  overflow: auto;
   @include tab-size(4);
 
   code {

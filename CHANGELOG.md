@@ -1,6 +1,6 @@
 <!-- See https://github.com/Lruihao/FixIt/releases -->
 
-## v0.2.12 [2022-1-11]
+## v0.2.12 [2022-1-13]
 
 - :tada: Feat: add PWA support
 - :tada: Feat: add Watermark support ([#16](https://github.com/Lruihao/FixIt/issues/16))
@@ -11,6 +11,7 @@
 - :art: Perf: optimize footer code
 - :recycle: Refactor: header title DOM and add subtitle option ([#26](https://github.com/Lruihao/FixIt/issues/26))
 - :bug: Fix: add scroll-margin to headerlink
+- :bug: Fix: pre element overflow error ([#29](https://github.com/Lruihao/FixIt/issues/29))
 - :bug: Fix: toc-auto display error ([#21](https://github.com/Lruihao/FixIt/issues/21))
 - :fire: Feat: remove lib smooth-scroll ([#1](https://github.com/Lruihao/FixIt/issues/1))
 - :robot: Feat(SEO): optimize SEO meta ([#30](https://github.com/Lruihao/FixIt/issues/30))
