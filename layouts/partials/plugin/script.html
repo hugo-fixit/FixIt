@@ -7,19 +7,21 @@
 {{- else -}}
   {{- $src := .Source -}}
   {{- $integrity := .Integrity -}}
-  {{- if (urls.Parse $src).Host | not -}}
-    {{- $resource := resources.Get $src -}}
-    {{- with .Template -}}
-      {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
+  {{- if $src -}}
+    {{- if (urls.Parse $src).Host | not -}}
+      {{- $resource := resources.Get $src -}}
+      {{- with .Template -}}
+        {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
+      {{- end -}}
+      {{- if .Minify -}}
+        {{- $resource = $resource | minify -}}
+      {{- end -}}
+      {{- with .Fingerprint -}}
+        {{- $resource = $resource | fingerprint . -}}
+        {{- $integrity = $resource.Data.Integrity -}}
+      {{- end -}}
+      {{- $src = $resource.RelPermalink -}}
     {{- end -}}
-    {{- if .Minify -}}
-      {{- $resource = $resource | minify -}}
-    {{- end -}}
-    {{- with .Fingerprint -}}
-      {{- $resource = $resource | fingerprint . -}}
-      {{- $integrity = $resource.Data.Integrity -}}
-    {{- end -}}
-    {{- $src = $resource.RelPermalink -}}
+    <script type="text/javascript" src="{{ $src }}"{{ if .Crossorigin }} crossorigin="anonymous"{{ end }}{{ with $integrity }} integrity="{{ . }}"{{ end }}{{ if .Async }} async{{ end }}{{ if .Defer }} defer{{ end }}{{ with .Attr }} {{ . | safeHTMLAttr }}{{ end }}></script>
   {{- end -}}
-  <script type="text/javascript" src="{{ $src }}"{{ if .Crossorigin }} crossorigin="anonymous"{{ end }}{{ with $integrity }} integrity="{{ . }}"{{ end }}{{ if .Async }} async{{ end }}{{ if .Defer }} defer{{ end }}{{ with .Attr }} {{ . | safeHTMLAttr }}{{ end }}></script>
 {{- end -}}
