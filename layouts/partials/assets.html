@@ -223,9 +223,9 @@
 
 {{- partial "plugin/analytics.html" . -}}
 
-{{- /* Inline scripts */ -}}
+{{- /* Initialize libraries scripts */ -}}
 <script type="text/javascript">
-{{- /* PWA */ -}}
+{{- /* PWA Initialization */ -}}
 {{- if eq hugo.Environment "production" | and .Site.Params.enablePWA -}}
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
@@ -242,22 +242,24 @@
   }
 {{- end -}}
 
-{{- /* Watermark */ -}}
+{{- /* Watermark Initialization */ -}}
 {{- if eq .Site.Params.watermark.enable true -}}
-  new Watermark({
-    content: {{ $.Site.Params.watermark.content }} || ' Theme FixIt',
-    appendTo: {{ $.Site.Params.watermark.appendTo }} || '.wrapper>.main',
-    opacity: {{ $.Site.Params.watermark.opacity }},
-    width: {{ $.Site.Params.watermark.width }},
-    height: {{ $.Site.Params.watermark.height }},
-    rowSpacing: {{ $.Site.Params.watermark.rowSpacing }},
-    colSpacing: {{ $.Site.Params.watermark.colSpacing }},
-    rotate: {{ $.Site.Params.watermark.rotate }},
-    fontSize: {{ $.Site.Params.watermark.fontSize }}
-  });
+  {{- with .Site.Params.watermark -}}
+    new Watermark({
+      content: {{ .Content }} || '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> Theme FixIt',
+      appendTo: {{ .AppendTo }} || '.wrapper>.main',
+      opacity: {{ .Opacity }},
+      width: {{ .Width }},
+      height: {{ .Height }},
+      rowSpacing: {{ .RowSpacing }},
+      colSpacing: {{ .ColSpacing }},
+      rotate: {{ .Rotate }},
+      fontSize: {{ .FontSize }}
+    });
+  {{- end -}}
 {{- end -}}
 
-{{- /* Site time */ -}}
+{{- /* Site time Initialization */ -}}
 {{- if eq .Site.Params.ibruce.enable true | and .Site.Params.ibruce.siteTime -}}
   function createTime() {
     let now = new Date();
