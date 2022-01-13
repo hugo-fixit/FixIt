@@ -11,7 +11,7 @@
             <span class="header-title-pre">{{ . | safeHTML }}</span>
           {{- end -}}
           {{- if .typeit -}}
-            {{- $id := dict "Content" .name "Scratch" $.Scratch | partial "function/id.html" -}}
+            {{- $id := dict "Content" .name "Scratch" $.Scratch "Id" "typeit-header-desktop" | partial "function/id.html" -}}
             <span id="{{ $id }}" class="typeit"></span>
             {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
           {{- else -}}
@@ -26,7 +26,7 @@
       </a>
       {{- with .Site.Params.header.subtitle -}}
         {{- if .typeit -}}
-          {{- $id := dict "Content" .name "Scratch" $.Scratch | partial "function/id.html" -}}
+          {{- $id := dict "Content" .name "Scratch" $.Scratch "Id" "typeit-header-subtitle-desktop" | partial "function/id.html" -}}
           <span id="{{ $id }}" class="typeit header-subtitle"></span>
           {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
         {{- else -}}
@@ -107,7 +107,7 @@
               <span class="header-title-pre">{{ . | safeHTML }}</span>
             {{- end -}}
             {{- if .typeit -}}
-              {{- $id := dict "Content" .name "Scratch" $.Scratch | partial "function/id.html" -}}
+              {{- $id := dict "Content" .name "Scratch" $.Scratch "Id" "typeit-header-title-mobile" | partial "function/id.html" -}}
               <span id="{{ $id }}" class="typeit"></span>
               {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
             {{- else -}}
@@ -122,7 +122,7 @@
         </a>
         {{- with .Site.Params.header.subtitle -}}
           {{- if .typeit -}}
-            {{- $id := dict "Content" .name "Scratch" $.Scratch | partial "function/id.html" -}}
+            {{- $id := dict "Content" .name "Scratch" $.Scratch "Id" "typeit-header-subtitle-mobile" | partial "function/id.html" -}}
             <span id="{{ $id }}" class="typeit header-subtitle"></span>
             {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
           {{- else -}}

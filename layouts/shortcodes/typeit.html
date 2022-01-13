@@ -6,7 +6,7 @@
   {{- /* highlight code content without line number */ -}}
   {{- $content = highlight $content . "linenos=false" -}}
   {{- /* delete outer label */ -}}
-  {{- $content = replaceRE `<div class="highlight"><pre class="chroma"><code[^<>]*>(?s)(.*)</code></pre></div>` "$1" $content -}}
+  {{- $content = replaceRE `<div class="highlight"><pre tabindex="0" class="chroma"><code[^<>]*>(?s)(.*)</code></pre></div>` "$1" $content -}}
   {{- /* parsing markdown links */ -}}
   {{- $content = replaceRE `(<span[^<>]*>)([^<>]*)\[([^<>]+)\]\(([^<>]+)\)([^<>]*)(</span>)` "$1$2$6<a href=$4>$3</a>$1$5$6" $content -}}
   {{- /* replace " " to "&nbsp;" and replace "\n" to "<br />" */ -}}

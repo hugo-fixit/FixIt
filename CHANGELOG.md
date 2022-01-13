@@ -11,6 +11,7 @@
 - :zap: Perf: optimize JS loading ([#25](https://github.com/Lruihao/FixIt/issues/25))
 - :art: Perf: optimize footer code
 - :recycle: Refactor: header title DOM and add subtitle option ([#26](https://github.com/Lruihao/FixIt/issues/26))
+- :bug: Fix: typeit print code error ([#19](https://github.com/Lruihao/FixIt/issues/19))
 - :bug: Fix: add scroll-margin to headerlink
 - :bug: Fix: pre element overflow error ([#29](https://github.com/Lruihao/FixIt/issues/29))
 - :bug: Fix: toc-auto display error ([#21](https://github.com/Lruihao/FixIt/issues/21))
