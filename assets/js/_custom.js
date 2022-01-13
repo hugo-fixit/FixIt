@@ -9,7 +9,7 @@ const CustomJS = new (function () {
    * @returns {CustomJS}
    */
   this.hello = () => {
-    console.log('hello CustomJS!');
+    console.log('Hello CustomJS!');
     return this;
   }
   /**
@@ -30,6 +30,6 @@ const CustomJS = new (function () {
   CustomJS.init();
   // It will be executed when the DOM tree is built.
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOMContentLoaded!')
+    console.log('DOM content loaded!')
   });
 })();
