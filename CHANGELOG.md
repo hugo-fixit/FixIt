@@ -15,7 +15,7 @@
 - :bug: Fix: pre element overflow error ([#29](https://github.com/Lruihao/FixIt/issues/29))
 - :bug: Fix: toc-auto display error ([#21](https://github.com/Lruihao/FixIt/issues/21))
 - :fire: Feat: remove lib smooth-scroll ([#1](https://github.com/Lruihao/FixIt/issues/1))
-- :robot: Feat(SEO): optimize SEO meta ([#30](https://github.com/Lruihao/FixIt/issues/30))
+- :mag: Feat(SEO): optimize SEO meta ([#30](https://github.com/Lruihao/FixIt/issues/30))
 - :lipstick: Style: change scroll-behavior to smooth, page image margin, header style, footer style etc.
 - :wrench: Chore: minify static images
 - :wrench: Chore(i18n): change some translations
