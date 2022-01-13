@@ -985,6 +985,13 @@ enableEmoji = true
     # 打字结束之后光标的持续时间 (单位是毫秒, "-1" 代表无限大)
     duration = -1
 
+  # PanguJS config since v0.2.12
+  # 盘古之白配置 since v0.2.12
+  [params.pangu]
+    # For Chinese writing
+    # 适用于中文写作用户
+    enable = true
+
   # Watermark config since v0.2.12
   # Detail config see https://github.com/Lruihao/watermark#readme
   # 水印配置 since v0.2.12

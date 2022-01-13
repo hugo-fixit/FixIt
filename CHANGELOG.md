@@ -5,6 +5,7 @@
 - :tada: Feat: add PWA support
 - :tada: Feat: add Watermark support ([#16](https://github.com/Lruihao/FixIt/issues/16))
 - :tada: Feat: add "不蒜子" count and site run time ([#18](https://github.com/Lruihao/FixIt/issues/18))
+- :sparkles: Feat: add pangu.js support ([#20](https://github.com/Lruihao/FixIt/issues/20))
 - :sparkles: Feat: add public network security config (only in China) ([#15](https://github.com/Lruihao/FixIt/issues/15))
 - :sparkles: Feat: add CustomJS option ([#24](https://github.com/Lruihao/FixIt/issues/24))
 - :zap: Perf: optimize JS loading ([#25](https://github.com/Lruihao/FixIt/issues/25))
@@ -16,9 +17,9 @@
 - :fire: Feat: remove lib smooth-scroll ([#1](https://github.com/Lruihao/FixIt/issues/1))
 - :robot: Feat(SEO): optimize SEO meta ([#30](https://github.com/Lruihao/FixIt/issues/30))
 - :lipstick: Style: change scroll-behavior to smooth, page image margin, header style, footer style etc.
-- :arrow_up: Chore: update all third-party libraries
-- :wrench: Chore: minify card-link background image
+- :wrench: Chore: minify static images
 - :wrench: Chore(i18n): change some translations
+- :arrow_up: Chore: update all third-party libraries
 
 [`v0.2.11...v0.2.12`](https://github.com/Lruihao/FixIt/compare/v0.2.11...v0.2.12)
 ## v0.2.11 [2021-12-19]

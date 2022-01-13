@@ -54,6 +54,8 @@ libFiles:
   normalizeCSS: normalize.css@8.0.1/normalize.min.css
   # object-fit-images@3.2.4 https://github.com/fregante/object-fit-images
   objectFitImagesJS: object-fit-images@3.2.4/dist/ofi.min.js
+  # pangu.js@4.0.7 https://github.com/vinta/pangu.js
+  panguJS: pangu@4.0.7/dist/browser/pangu.min.js
   # sharer.js@0.4.2 https://github.com/ellisonleao/sharer.js
   sharerJS: sharer.js@0.4.2/sharer.min.js
   # twemoji@13.1.0 https://github.com/twitter/twemoji

@@ -166,6 +166,12 @@
   {{- $config = $cookieconsentConfig | dict "cookieconsent" | merge $config -}}
 {{- end -}}
 
+{{- /* PanguJS */ -}}
+{{- if eq .Site.Params.pangu.enable true -}}
+  {{- $source := $cdn.metingJS | default "lib/pangu/pangu.min.js" -}}
+  {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+{{- end -}}
+
 {{- /* Watermark */ -}}
 {{- if eq .Site.Params.watermark.enable true -}}
   {{- $source := "lib/watermark/watermark.min.js" -}}
@@ -225,41 +231,7 @@
 
 {{- /* Initialize libraries scripts */ -}}
 <script type="text/javascript">
-{{- /* PWA Initialization */ -}}
-{{- if eq hugo.Environment "production" | and .Site.Params.enablePWA -}}
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker
-      .register('/service-worker.min.js', { scope: '/' })
-      .then(function (registration) {
-        // console.log('Service Worker Registered');
-      })
-      .catch(function (error) {
-        console.error('error: ', error);
-      });
-    navigator.serviceWorker.ready.then(function (registration) {
-      // console.log('Service Worker Ready');
-    });
-  }
-{{- end -}}
-
-{{- /* Watermark Initialization */ -}}
-{{- if eq .Site.Params.watermark.enable true -}}
-  {{- with .Site.Params.watermark -}}
-    new Watermark({
-      content: {{ .Content }} || '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> Theme FixIt',
-      appendTo: {{ .AppendTo }} || '.wrapper>.main',
-      opacity: {{ .Opacity }},
-      width: {{ .Width }},
-      height: {{ .Height }},
-      rowSpacing: {{ .RowSpacing }},
-      colSpacing: {{ .ColSpacing }},
-      rotate: {{ .Rotate }},
-      fontSize: {{ .FontSize }}
-    });
-  {{- end -}}
-{{- end -}}
-
-{{- /* Site time Initialization */ -}}
+{{- /* Calculate run time */ -}}
 {{- if eq .Site.Params.ibruce.enable true | and .Site.Params.ibruce.siteTime -}}
   function createTime() {
     let now = new Date();
@@ -272,11 +244,59 @@
       seconds = Math.floor((now - run) / 1000 - (24 * 60 * 60 * days) - (60 * 60 * hours) - (60 * minutes));
     document.querySelector(".run-times").innerHTML = `${days}d ${String(hours).padStart(2,0)}h ${String(minutes).padStart(2,0)}m ${String(seconds).padStart(2,0)}s`;
   }
-  
-  if (!document.hidden) {
-    var siteTime = setInterval("createTime()", 500);
-  } else {
-    clearInterval(siteTime);
-  }
 {{- end -}}
+
+/**
+ * Immediate.
+ */
+(() => {
+  {{- /* PWA Initialization */ -}}
+  {{- if eq hugo.Environment "production" | and .Site.Params.enablePWA -}}
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/service-worker.min.js', { scope: '/' })
+        .then(function (registration) {
+          // console.log('Service Worker Registered');
+        })
+        .catch(function (error) {
+          console.error('error: ', error);
+        });
+      navigator.serviceWorker.ready.then(function (registration) {
+        // console.log('Service Worker Ready');
+      });
+    }
+  {{- end -}}
+
+  {{- /* Watermark Initialization */ -}}
+  {{- if eq .Site.Params.watermark.enable true -}}
+    {{- with .Site.Params.watermark -}}
+      new Watermark({
+        content: {{ .Content }} || '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> Theme FixIt',
+        appendTo: {{ .AppendTo }} || '.wrapper>.main',
+        opacity: {{ .Opacity }},
+        width: {{ .Width }},
+        height: {{ .Height }},
+        rowSpacing: {{ .RowSpacing }},
+        colSpacing: {{ .ColSpacing }},
+        rotate: {{ .Rotate }},
+        fontSize: {{ .FontSize }}
+      });
+    {{- end -}}
+  {{- end -}}
+
+  {{- /* Site time Initialization */ -}}
+  {{- if eq .Site.Params.ibruce.enable true | and .Site.Params.ibruce.siteTime -}}
+    if (!document.hidden) {
+      var siteTime = setInterval("createTime()", 500);
+    } else {
+      clearInterval(siteTime);
+    }
+  {{- end -}}
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Listen to any DOM change and automatically perform spacing via MutationObserver()
+    {{ if eq .Site.Params.pangu.enable true }}pangu.autoSpacingPage();{{ end }}
+  });
+
+})();
 </script>
