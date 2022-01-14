@@ -1,6 +1,6 @@
 <!-- See https://github.com/Lruihao/FixIt/releases -->
 
-## v0.2.12 [2022-1-13]
+## v0.2.12 [2022-1-14]
 
 - :tada: Feat: add PWA support
 - :tada: Feat: add Watermark support ([#16](https://github.com/Lruihao/FixIt/issues/16))
@@ -8,6 +8,7 @@
 - :sparkles: Feat: add pangu.js support ([#20](https://github.com/Lruihao/FixIt/issues/20))
 - :sparkles: Feat: add public network security config (only in China) ([#15](https://github.com/Lruihao/FixIt/issues/15))
 - :sparkles: Feat: add CustomJS option ([#24](https://github.com/Lruihao/FixIt/issues/24))
+- :zap: Perf: merge cardlink shortcode (deprecated v0.2.13) into link shortcode and add 'download' param ([#42](https://github.com/Lruihao/FixIt/issues/42))
 - :zap: Perf: optimize JS loading ([#25](https://github.com/Lruihao/FixIt/issues/25))
 - :art: Perf: optimize footer code
 - :recycle: Refactor: header title DOM and add subtitle option ([#26](https://github.com/Lruihao/FixIt/issues/26))
@@ -27,7 +28,7 @@
 
 > :tada: The beginning of FixIt to fix the theme LoveIt.
 
-- :sparkles: Feat: add cardlink shoretcode ([Lruihao/hugo-blog@`df9eca2`](https://github.com/Lruihao/hugo-blog/commit/df9eca26af43287748fd8d4654014357a8269b0b)) 
+- :sparkles: Feat: add cardlink shortcode ([Lruihao/hugo-blog@`df9eca2`](https://github.com/Lruihao/hugo-blog/commit/df9eca26af43287748fd8d4654014357a8269b0b)) 
 - :tada: Feat: add friends layout template
 - :wrench: Chore(i18n): add translations for Traditional Chinese ([Lruihao/hugo-blog@`df9eca2`](https://github.com/Lruihao/hugo-blog/commit/b86157d8b84830bda415ab2488580afd843acac2))
 - :bug: Fix: mobile style ([Lruihao/hugo-blog#19](https://github.com/Lruihao/hugo-blog/issues/19))

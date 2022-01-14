@@ -8,6 +8,8 @@
   {{- $options = dict "Title" (.Get "title") | merge $options -}}
   {{- $options = dict "Class" (.Get "class") | merge $options -}}
   {{- $options = dict "Rel" (.Get "rel") | merge $options -}}
+  {{- $options = dict "Download" (.Get "download") | merge $options -}}
+  {{- $options = dict "Card" (.Get "card") | merge $options -}}
 {{- else -}}
   {{- $options = dict "Content" (.Get 1 | default (.Get 0)) | merge $options -}}
   {{- $options = dict "Title" (.Get 2) | merge $options -}}
