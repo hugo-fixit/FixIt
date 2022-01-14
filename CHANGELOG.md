@@ -10,7 +10,6 @@
 - :sparkles: Feat: add CustomJS option ([#24](https://github.com/Lruihao/FixIt/issues/24))
 - :zap: Perf: merge cardlink shortcode (deprecated v0.2.13) into link shortcode and add 'download' param ([#42](https://github.com/Lruihao/FixIt/issues/42))
 - :zap: Perf: optimize JS loading ([#25](https://github.com/Lruihao/FixIt/issues/25))
-- :art: Perf: optimize footer code
 - :recycle: Refactor: header title DOM and add subtitle option ([#26](https://github.com/Lruihao/FixIt/issues/26))
 - :bug: Fix: typeit print code error ([#19](https://github.com/Lruihao/FixIt/issues/19))
 - :bug: Fix: add scroll-margin to headerlink
@@ -18,7 +17,7 @@
 - :bug: Fix: toc-auto display error ([#21](https://github.com/Lruihao/FixIt/issues/21))
 - :fire: Feat: remove lib smooth-scroll ([#1](https://github.com/Lruihao/FixIt/issues/1))
 - :mag: Feat(SEO): optimize SEO meta ([#30](https://github.com/Lruihao/FixIt/issues/30))
-- :lipstick: Style: change scroll-behavior to smooth, page image margin, header style, footer style etc.
+- :lipstick: Style: change scroll-behavior to smooth, header style, footer style etc.
 - :wrench: Chore: minify static images
 - :wrench: Chore(i18n): change some translations
 - :arrow_up: Chore: update all third-party libraries
