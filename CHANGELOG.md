@@ -8,11 +8,11 @@
 - :sparkles: Feat: add pangu.js support ([#20](https://github.com/Lruihao/FixIt/issues/20))
 - :sparkles: Feat: add public network security config (only in China) ([#15](https://github.com/Lruihao/FixIt/issues/15))
 - :sparkles: Feat: add CustomJS option ([#24](https://github.com/Lruihao/FixIt/issues/24))
-- :zap: Perf: merge cardlink shortcode (deprecated v0.2.13) into link shortcode and add 'download' param ([#42](https://github.com/Lruihao/FixIt/issues/42))
+- :zap: Perf: merge shortcode cardlink (deprecated v0.2.13) into shortcode link and add 'download' param ([#42](https://github.com/Lruihao/FixIt/issues/42))
 - :zap: Perf: optimize JS loading ([#25](https://github.com/Lruihao/FixIt/issues/25))
 - :recycle: Refactor: header title DOM and add subtitle option ([#26](https://github.com/Lruihao/FixIt/issues/26))
 - :bug: Fix: typeit print code error ([#19](https://github.com/Lruihao/FixIt/issues/19))
-- :bug: Fix: add scroll-margin to headerlink
+- :bug: Fix: add scroll-margin to all anchors of page content ([#39](https://github.com/Lruihao/FixIt/issues/39))
 - :bug: Fix: pre element overflow error ([#29](https://github.com/Lruihao/FixIt/issues/29))
 - :bug: Fix: toc-auto display error ([#21](https://github.com/Lruihao/FixIt/issues/21))
 - :fire: Feat: remove lib smooth-scroll ([#1](https://github.com/Lruihao/FixIt/issues/1))

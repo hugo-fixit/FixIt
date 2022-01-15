@@ -388,7 +388,7 @@ class Theme {
   initHeaderLink() {
     for (let num = 1; num <= 6; num++) {
       this.util.forEach(document.querySelectorAll('.single .content > h' + num), $header => {
-        $header.classList.add('headerLink');
+        $header.classList.add('header-link');
         $header.insertAdjacentHTML('afterbegin', `<a href="#${$header.id}" class="header-mark"></a>`);
       });
     }
@@ -424,7 +424,7 @@ class Theme {
       $toc.style.visibility = 'visible';
       const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
       const $tocLiElements = $tocCore.getElementsByTagName('li');
-      const $headerLinkElements = document.getElementsByClassName('headerLink');
+      const $headerLinkElements = document.getElementsByClassName('header-link');
       const headerIsFixed = document.body.getAttribute('header-desktop') !== 'normal';
       const headerHeight = document.getElementById('header-desktop').offsetHeight;
       const TOP_SPACING = 20 + (headerIsFixed ? headerHeight : 0);

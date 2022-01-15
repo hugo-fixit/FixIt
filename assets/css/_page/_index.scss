@@ -12,12 +12,13 @@
     padding-top: 0;
   }
   
-  .headerLink {
-    [header-desktop] & {
+  .content {
+    [id] {
       scroll-margin-top: $header-height;
-    }
-    [header-desktop=normal] & {
-      scroll-margin-top: 0;
+      
+      [header-desktop=normal] & {
+        scroll-margin-top: 0;
+      }
     }
   }
 
