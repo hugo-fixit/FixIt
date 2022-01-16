@@ -11,7 +11,8 @@
   {{- end -}}
 
   {{- /* Auto TOC */ -}}
-  {{- if ne $toc.enable false -}}
+  {{- $tocEmpty := eq .TableOfContents `<nav id="TableOfContents"></nav>` -}}
+  {{- if (ne $toc.enable false) | and (ne $tocEmpty true) -}}
     <div class="toc" id="toc-auto">
       <h2 class="toc-title">{{ T "contents" }}</h2>
       <div class="toc-content{{ if eq $toc.auto false }} always-active{{ end }}" id="toc-content-auto"></div>
@@ -80,8 +81,8 @@
     {{- end -}}
 
     {{- /* Static TOC */ -}}
-    {{- if ne $toc.enable false -}}
-      <div class="details toc" id="toc-static"  kept="{{ if $toc.keepStatic }}true{{ end }}">
+    {{- if (ne $toc.enable false) | and (ne $tocEmpty true) -}}
+      <div class="details toc" id="toc-static" kept="{{ if $toc.keepStatic }}true{{ else }}false{{ end }}">
         <div class="details-summary toc-title">
           <span>{{ T "contents" }}</span>
           <span><i class="details-icon fas fa-angle-right"></i></span>

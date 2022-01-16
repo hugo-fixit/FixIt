@@ -14,7 +14,7 @@
 - :bug: Fix: typeit print code error ([#19](https://github.com/Lruihao/FixIt/issues/19))
 - :bug: Fix: add scroll-margin to all anchors of page content ([#39](https://github.com/Lruihao/FixIt/issues/39))
 - :bug: Fix: pre element overflow error ([#29](https://github.com/Lruihao/FixIt/issues/29))
-- :bug: Fix: toc-auto display error ([#21](https://github.com/Lruihao/FixIt/issues/21))
+- :bug: Fix: toc display error without content header ([#21](https://github.com/Lruihao/FixIt/issues/21))
 - :fire: Feat: remove lib smooth-scroll ([#1](https://github.com/Lruihao/FixIt/issues/1))
 - :mag: Feat(SEO): optimize SEO meta ([#30](https://github.com/Lruihao/FixIt/issues/30))
 - :lipstick: Style: change scroll-behavior to smooth, header style, footer style etc.

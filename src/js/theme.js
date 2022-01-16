@@ -399,12 +399,7 @@ class Theme {
     if ($tocCore === null){
       return;
     }
-    const $toc = document.getElementById('toc-auto');
-    if ($tocCore.innerText === ''){
-      $toc.style.display = 'none';
-      return;
-    }
-    if (document.getElementById('toc-static').getAttribute('kept') || this.util.isTocStatic()) {
+    if (document.getElementById('toc-static').getAttribute('kept') === 'true' || this.util.isTocStatic()) {
       const $tocContentStatic = document.getElementById('toc-content-static');
       if ($tocCore.parentElement !== $tocContentStatic) {
         $tocCore.parentElement.removeChild($tocCore);
@@ -417,6 +412,7 @@ class Theme {
         $tocCore.parentElement.removeChild($tocCore);
         $tocContentAuto.appendChild($tocCore);
       }
+      const $toc = document.getElementById('toc-auto');
       const $page = document.getElementsByClassName('page')[0];
       const rect = $page.getBoundingClientRect();
       $toc.style.left = `${rect.left + rect.width + 20}px`;
