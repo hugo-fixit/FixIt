@@ -18,6 +18,7 @@
 - :fire: Feat: remove lib smooth-scroll ([#1](https://github.com/Lruihao/FixIt/issues/1))
 - :mag: Feat(SEO): optimize SEO meta ([#30](https://github.com/Lruihao/FixIt/issues/30))
 - :lipstick: Style: change scroll-behavior to smooth, header style, footer style etc.
+- :pencil: Docs: improve demo site documentation ([#37](https://github.com/Lruihao/FixIt/issues/37))
 - :wrench: Chore: minify static images
 - :wrench: Chore(i18n): change some translations
 - :arrow_up: Chore: update all third-party libraries
