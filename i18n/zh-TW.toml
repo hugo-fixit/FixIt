@@ -31,11 +31,6 @@ other = "分類"
 [categories]
 other = "分類"
 
-[projects]
-other = "項目"
-
-[years]
-other = "年度總結"
 # === Taxonomy ===
 
 # === Pagination ===
