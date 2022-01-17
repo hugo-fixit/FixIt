@@ -155,6 +155,14 @@ other = "Page not found"
 other = "The page you're looking for doesn't exist. Sorry."
 # === 404.html ===
 
+# === offline ===
+[offlineTitle]
+other = "Offline"
+
+[offlineText]
+other = "You are not connected to the Internet, only cached pages will be available."
+# === offline ===
+
 # === shortcodes/admonition.html ===
 [note]
 other = "Note"

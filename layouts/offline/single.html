@@ -1,0 +1,17 @@
+{{- define "title" }}
+  {{- T "offlineTitle" }} - {{ .Site.Title -}}
+{{- end -}}
+
+{{- define "content" -}}
+  <div class="page" id="content-offline">
+    <h1 class="offline-title animated pulse faster">{{- T "offlineTitle" -}}</h1>
+    <h2 class="offline-subtitle">
+      <i class="fa-stack fa-xs">
+        <i class="fas fa-wifi fa-stack-1x"></i>
+        <i class="fas fa-ban fa-stack-2x"></i>
+      </i>
+      <span>ERROR_INTERNET_DISCONNECTED</span>
+    </h2>
+    <p class="error-text">{{- T "offlineText" -}}</p>
+  </div>
+{{- end -}}

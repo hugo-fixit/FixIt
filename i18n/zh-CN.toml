@@ -160,6 +160,14 @@ other = "页面没找到"
 other = "抱歉，您要查找的页面不存在。"
 # === 404.html ===
 
+# === offline ===
+[offlineTitle]
+other = "离线"
+
+[offlineText]
+other = "您没有连接到 Internet，只有缓存的页面可用。"
+# === offline ===
+
 # === shortcodes/admonition.html ===
 [note]
 other = "注意"
