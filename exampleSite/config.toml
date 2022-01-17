@@ -427,6 +427,10 @@ enableEmoji = true
         Bilibili = "xxxx"
         Email = "xxxx@xxxx.com"
         RSS = true
+      # 盘古之白配置 since v0.2.12
+      [languages.zh-cn.params.pangu]
+        # 适用于中文写作用户
+        enable = true
 
 [params]
   # FixIt theme version
@@ -792,7 +796,7 @@ enableEmoji = true
   [params.pangu]
     # For Chinese writing
     # 适用于中文写作用户
-    enable = true
+    enable = false
 
   # Watermark config since v0.2.12
   # Detail config see https://github.com/Lruihao/watermark#readme
