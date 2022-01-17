@@ -76,13 +76,21 @@ enableEmoji = true
         title = ""
         weight = 4
       [[languages.en.menu.main]]
+        identifier = "friends"
+        pre = ""
+        post = ""
+        name = "Friends"
+        url = "/friends/"
+        title = ""
+        weight = 5
+      [[languages.en.menu.main]]
         identifier = "about"
         pre = ""
         post = ""
         name = "About"
         url = "/about/"
         title = ""
-        weight = 5
+        weight = 6
       [[languages.en.menu.main]]
         identifier = "github"
         pre = "<i class='fab fa-github fa-fw'></i>"
@@ -90,7 +98,7 @@ enableEmoji = true
         name = ""
         url = "https://github.com/Lruihao/FixIt"
         title = "GitHub"
-        weight = 6
+        weight = 7
     [languages.en.params]
       # site description
       description = "About FixIt Theme"
@@ -278,13 +286,21 @@ enableEmoji = true
         title = ""
         weight = 4
       [[languages.zh-cn.menu.main]]
+        identifier = "friends"
+        pre = ""
+        post = ""
+        name = "友链"
+        url = "/friends/"
+        title = "友情链接"
+        weight = 5
+      [[languages.zh-cn.menu.main]]
         identifier = "about"
         pre = ""
         post = ""
         name = "关于"
         url = "/about/"
         title = ""
-        weight = 5
+        weight = 6
       [[languages.zh-cn.menu.main]]
         identifier = "github"
         pre = "<i class='fab fa-github fa-fw'></i>"
@@ -292,7 +308,7 @@ enableEmoji = true
         name = ""
         url = "https://github.com/Lruihao/FixIt"
         title = "GitHub"
-        weight = 6
+        weight = 7
     [languages.zh-cn.params]
       # 网站描述
       description = "关于 FixIt 主题"
