@@ -5,12 +5,13 @@ type: "friends"
 comment: false
 ---
 
+---
 ## Base info
 ```yaml
-- nickname: Lruihao's Note
+- nickname: Lruihao
   avatar: https://lruihao.cn/images/avatar.jpg
   url: https://lruihao.cn
-  discription: 不怕萬人阻擋，只怕自己投降
+  discription: Lruihao's Note
 ```
 
 ## Friendly Reminder

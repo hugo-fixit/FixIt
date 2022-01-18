@@ -10,7 +10,7 @@ comment: false
 - nickname: 菠菜眾長
   avatar: https://lruihao.cn/images/avatar.jpg
   url: https://lruihao.cn
-  discription: 不怕萬人阻擋，只怕自己投降
+  discription: 李瑞豪的博客
 ```
 
 ## 友情提醒
