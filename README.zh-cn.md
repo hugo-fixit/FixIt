@@ -34,7 +34,7 @@ git submodule add https://github.com/Lruihao/FixIt.git themes/FixIt
 之后，你可以在站点目录通过这条命令来将主题更新至最新版本：
 
 ```bash
-git submodule update --remote
+git submodule update --remote --merge
 ```
 
 或者在主题目录中使用 shell 命令 `fixit_checker.sh` 将主题更新至最新版本：

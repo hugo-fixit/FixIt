@@ -34,7 +34,7 @@ git submodule add https://github.com/Lruihao/FixIt.git themes/FixIt
 And later you can update the submodule in your site directory to the latest commit using this command:
 
 ```bash
-git submodule update --remote
+git submodule update --remote --merge
 ```
 
 Or use shell command `fixit_checker.sh` to update and commit in the theme directory.
