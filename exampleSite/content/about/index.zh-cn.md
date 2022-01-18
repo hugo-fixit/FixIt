@@ -81,6 +81,7 @@ math:
 * :(fab fa-js-square fa-fw): 支持**自定义脚本**的 shortcode
 * :(fas fa-i-cursor fa-fw): 支持基于 [TypeIt](https://typeitjs.com/) 的**打字动画** shortcode
 * :(fas fa-cookie-bite fa-fw): 支持基于 [cookieconsent](https://github.com/osano/cookieconsent) 的 **Cookie 许可横幅**
+* :(fas fa-desktop fa-fw): 支持**渐进式网页应用**
 * :(fas fa-signature fa-fw): 支持基于 [Watermark](https://github.com/Lruihao/watermark) 的**网页水印**
 * :(fas fa-language fa-fw): 支持基于 [pangu.js](https://github.com/vinta/pangu.js) 的**中文排版**
 * :(fas fa-link fa-fw): 支持**卡片式链接**的 shortcode
