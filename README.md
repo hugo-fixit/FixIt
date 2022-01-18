@@ -9,14 +9,27 @@
 
 It is based on the original [LoveIt Theme](https://github.com/dillonzq/LoveIt), [LeaveIt Theme](https://github.com/liuzc/LeaveIt) and [KeepIt Theme](https://github.com/Fastbyte01/KeepIt).
 
-**It is mainly based on [LoveIt Theme](https://github.com/dillonzq/LoveIt) that's repository has stopped maintenance, so i just wanna fix it.**
+[LoveIt Theme](https://github.com/dillonzq/LoveIt) is a awesome hugo theme for us, I'm sorry that it's repository has been out of maintenance for a long time, so I rebuilt a new fork named FixIt so that I can better Fix it and make it more user-friendly.
+
+The FixIt theme inherits the excellent functions of these themes, and adds new functions and optimizations on this basis. Please read [Why Choose FixIt](#why-choose-fixit) to learn more.
 
 ![Hugo Theme FixIt](https://github.com/Lruihao/FixIt/raw/master/images/Apple-Devices-Preview.png)
 
-[Read more](https://github.com/dillonzq/LoveIt)
+## Getting started
+
+Head to this [documentation page](https://hugofixit.pages.dev/theme-documentation-basics/) for a complete guidence to get started with the FixIt theme.
+
 ## [Demo Site](https://lruihao.cn)
 
 To see this theme in action, here is a live [demo site](https://lruihao.cn) which is rendered with **FixIt** theme.
+
+## [Roadmap](https://github.com/Lruihao/FixIt/projects/1)
+
+## [Changelog](https://github.com/Lruihao/FixIt/blob/main/CHANGELOG.md)
+
+## Questions, ideas, bugs, pull requests
+
+All feedback is welcome! Head over to the [issue tracker](https://github.com/Lruihao/FixIt/issues).
 
 ## License
 
