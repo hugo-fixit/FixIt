@@ -4,6 +4,7 @@ public/
 
 node_modules/
 build/
+resources/
 
 ## OS Files
 # Windows
@@ -14,7 +15,10 @@ $RECYCLE.BIN/
 
 # OSX
 .DS_Store
-.hugo_build.lock
 
 # Linux
 .directory
+
+# Hugo
+.hugo_build.lock
+jsconfig.json
