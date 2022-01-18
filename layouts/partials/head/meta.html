@@ -1,8 +1,8 @@
 {{- $params := .Scratch.Get "params" -}}
 
 <meta name="author" content="{{ .Site.Author.name }}: {{ .Site.Author.link }}">
-<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
-<meta name="keywords" content="{{ if .IsPage}}{{ range $index, $tag := .Params.tags }}{{ if ne $index 0 }},{{ end }}{{ $tag }}{{ end }}{{ else }}{{ range $index, $keyword := .Site.Params.keywords }}{{ if ne $index 0 }},{{ end }}{{ $keyword }}{{ end }}{{ end }}" />
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage | and .Summary }}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+<meta name="keywords" content="{{ $keywords := .Keywords }}{{ if not $keywords }}{{ if .IsPage | and .Params.tags }}{{ $keywords = .Params.tags }}{{ else }}{{ $keywords = .Site.Params.keywords }}{{ end }}{{ end }}{{ range $index, $keyword := $keywords }}{{ if ne $index 0 }},{{ end }}{{ $keyword }}{{ end }}" />
 
 {{- template "_internal/schema.html" . -}}
 {{- template "_internal/opengraph.html" . -}}
