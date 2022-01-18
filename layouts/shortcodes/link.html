@@ -13,5 +13,6 @@
 {{- else -}}
   {{- $options = dict "Content" (.Get 1 | default (.Get 0)) | merge $options -}}
   {{- $options = dict "Title" (.Get 2) | merge $options -}}
+  {{- $options = dict "Card" (.Get 3) | merge $options -}}
 {{- end -}}
 {{- partial "plugin/link.html" $options -}}
