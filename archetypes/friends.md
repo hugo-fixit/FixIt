@@ -1,14 +1,18 @@
 ---
-title: "Friends"
-subtitle: This is just a demo website, no links exchange ~
+title: "{{ replace .TranslationBaseName "-" " " | title }}"
+subtitle: ""
 type: "friends"
+date: {{ .Date }}
+description: "Friends of {{ .Site.Author.name }}"
 keywords: 
   - Hugo
   - friends tempalate
 comment: false
 ---
 
+<!-- When you set data `friends.yml` in `yourProject/data/` directory, it will be automatically loaded here. -->
 ---
+<!-- You can define additional content below for this page. -->
 ## Base info
 ```yaml
 - nickname: Lruihao

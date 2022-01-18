@@ -2,6 +2,9 @@
 title: "友情链接"
 subtitle: 这只是一个演示网站，不进行友链交换哦 ~
 type: "friends"
+keywords: 
+  - Hugo
+  - friends tempalate
 comment: false
 ---
 

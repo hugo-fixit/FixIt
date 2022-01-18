@@ -1,6 +1,6 @@
 <!-- See https://github.com/Lruihao/FixIt/releases -->
 
-## v0.2.12 [2022-1-14]
+## v0.2.12 [2022-1-18]
 
 - :tada: Feat: add PWA support
 - :tada: Feat: add Watermark support ([#16](https://github.com/Lruihao/FixIt/issues/16))
@@ -8,6 +8,9 @@
 - :sparkles: Feat: add pangu.js support ([#20](https://github.com/Lruihao/FixIt/issues/20))
 - :sparkles: Feat: add public network security config (only in China) ([#15](https://github.com/Lruihao/FixIt/issues/15))
 - :sparkles: Feat: add CustomJS option ([#24](https://github.com/Lruihao/FixIt/issues/24))
+- :sparkles: Feat: add theme embedded archeTypes
+- :mag: Feat(SEO): optimize SEO meta ([#30](https://github.com/Lruihao/FixIt/issues/30))
+- :fire: Feat: remove lib smooth-scroll ([#1](https://github.com/Lruihao/FixIt/issues/1))
 - :zap: Perf: merge shortcode cardlink (deprecated v0.2.13) into shortcode link and add 'download' param ([#42](https://github.com/Lruihao/FixIt/issues/42))
 - :zap: Perf: optimize JS loading ([#25](https://github.com/Lruihao/FixIt/issues/25))
 - :recycle: Refactor: header title DOM and add subtitle option ([#26](https://github.com/Lruihao/FixIt/issues/26))
@@ -15,8 +18,6 @@
 - :bug: Fix: add scroll-margin to all anchors of page content ([#39](https://github.com/Lruihao/FixIt/issues/39))
 - :bug: Fix: pre element overflow error ([#29](https://github.com/Lruihao/FixIt/issues/29))
 - :bug: Fix: toc display error without content header ([#21](https://github.com/Lruihao/FixIt/issues/21))
-- :fire: Feat: remove lib smooth-scroll ([#1](https://github.com/Lruihao/FixIt/issues/1))
-- :mag: Feat(SEO): optimize SEO meta ([#30](https://github.com/Lruihao/FixIt/issues/30))
 - :lipstick: Style: change scroll-behavior to smooth, header style, footer style etc.
 - :pencil: Docs: improve demo site documentation ([#37](https://github.com/Lruihao/FixIt/issues/37))
 - :wrench: Chore: minify static images
@@ -37,6 +38,6 @@
 
 [`v0.2.10...v0.2.11`](https://github.com/Lruihao/FixIt/compare/v0.2.10...v0.2.11)
 
-## v0.2.10 :arrow_down: 
+## v0.2.10 :arrow_down: [2020-5-29 before]
 
 Thanks [dillonzq/LoveIt](https://github.com/dillonzq/LoveIt/releases)
