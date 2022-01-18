@@ -822,7 +822,7 @@ enableEmoji = true
     enable = true
     # watermark's text (HTML format is supported)
     # 水印内容 (允许 HTML 格式)
-    content = '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> Theme FixIt'
+    content = '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> FixIt Theme'
     # watermark's transparency
     # 水印透明度
     opacity = 0.02

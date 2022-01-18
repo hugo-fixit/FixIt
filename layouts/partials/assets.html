@@ -271,7 +271,7 @@
   {{- if eq .Site.Params.watermark.enable true -}}
     {{- with .Site.Params.watermark -}}
       new Watermark({
-        content: {{ .Content }} || '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> Theme FixIt',
+        content: {{ .Content }} || '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> FixIt Theme',
         appendTo: {{ .AppendTo }} || '.wrapper>.main',
         opacity: {{ .Opacity }},
         width: {{ .Width }},
