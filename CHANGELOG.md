@@ -20,6 +20,7 @@
 - :bug: Fix: toc display error without content header ([#21](https://github.com/Lruihao/FixIt/issues/21))
 - :lipstick: Style: change scroll-behavior to smooth, header style, footer style etc.
 - :pencil: Docs: improve demo site documentation ([#37](https://github.com/Lruihao/FixIt/issues/37))
+- :wrench: Chore: add commands fixit_checker.sh
 - :wrench: Chore: minify static images
 - :wrench: Chore(i18n): change some translations
 - :arrow_up: Chore: update all third-party libraries
