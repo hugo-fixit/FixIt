@@ -149,7 +149,6 @@ sh fixit_checker.sh
 * 支持**自定义样式**的 shortcode
 * 支持**自定义脚本**的 shortcode
 * 支持基于 [TypeIt](https://typeitjs.com/) 的**打字动画** shortcode
-* 支持基于 [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll) 的**滚动动画**
 * 支持基于 [cookieconsent](https://github.com/osano/cookieconsent) 的 **Cookie 许可横幅**
 * 支持**渐进式网页应用**
 * 支持基于 [Watermark](https://github.com/Lruihao/watermark) 的**网页水印**

@@ -149,7 +149,6 @@ the FixIt theme may be more suitable for you.
 * **Custom style** shortcode
 * **Custom script** shortcode
 * **Animated typing** supported by [TypeIt](https://typeitjs.com/)
-* **Dynamic scroll** supported by [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * **Cookie consent banner** supported by [cookieconsent](https://github.com/osano/cookieconsent)
 * **PWA (Progressive Web App)** supported
 * **Web Watermark** supported by [Watermark](https://github.com/Lruihao/watermark)
