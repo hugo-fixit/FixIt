@@ -2,11 +2,11 @@
 weight: 5
 title: "Emoji 支持"
 date: 2019-10-01T17:55:28+08:00
-lastmod: 2019-10-01T17:55:28+08:00
+lastmod: 2022-01-19T19:48:28+08:00
 draft: false
 author: "Dillon"
 authorLink: "https://dillonzq.com"
-description: "Hugo 和 LoveIt 中的 Emoji 的用法指南."
+description: "Hugo 和 LoveIt 中的 Emoji 的用法指南。"
 resources:
 - name: "featured-image"
   src: "featured-image.jpg"
@@ -17,30 +17,29 @@ categories: ["Markdown"]
 lightgallery: true
 ---
 
-Emoji 可以通过多种方式在 Hugo 项目中启用.
+Emoji 可以通过多种方式在 Hugo 项目中启用。
 
 <!--more-->
 
-[`emojify`](https://gohugo.io/functions/emojify/) 方法可以直接在模板中调用, 或者使用[行内 Shortcodes](https://gohugo.io/templates/shortcode-templates#inline-shortcodes).
+[`emojify`](https://gohugo.io/functions/emojify/) 方法可以直接在模板中调用，或者使用 [行内 Shortcodes](https://gohugo.io/templates/shortcode-templates#inline-shortcodes)。
 
-要全局使用 emoji, 需要在你的[网站配置](https://gohugo.io/getting-started/configuration/)中设置 `enableEmoji` 为 `true`,
-然后你就可以直接在文章中输入 emoji 的代码.
-
+要全局使用 emoji, 需要在你的 [网站配置](https://gohugo.io/getting-started/configuration/) 中设置 `enableEmoji` 为 `true`,
+然后你就可以直接在文章中输入 emoji 的代码。
 它们以**冒号**开头和结尾，并且包含 emoji 的 **代码**:
 
 ```markdown
-去露营啦! {?:}tent: 很快就回来.
+去露营啦！{?:}tent: 很快就回来。
 
-真开心! {?:}joy:
+真开心！{?:}joy:
 ```
 
-呈现的输出效果如下:
+呈现的输出效果如下：
 
-去露营啦! :tent: 很快就回来.
+去露营啦！:tent: 很快就回来。
 
-真开心! :joy:
+真开心！:joy:
 
-以下**符号清单**是 emoji 代码的非常有用的参考.
+以下**符号清单**是 emoji 代码的非常有用的参考。
 
 ## 表情与情感
 
