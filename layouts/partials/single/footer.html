@@ -4,7 +4,7 @@
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span>
+        <span title={{ "2006-01-02 15:04:05" | .Lastmod.Format }}>
           {{- with .Site.Params.dateformat | default "2006-01-02" | .Lastmod.Format -}}
             {{- dict "Date" . | T "updatedOnDate" -}}
             {{- if $.Site.Params.gitRepo -}}
