@@ -286,11 +286,13 @@
 
   {{- /* Site time Initialization */ -}}
   {{- if eq .Site.Params.ibruce.enable true | and .Site.Params.ibruce.siteTime -}}
-    if (!document.hidden) {
+    var siteTime = setInterval("createTime()", 500);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        return clearInterval(siteTime);
+      }
       var siteTime = setInterval("createTime()", 500);
-    } else {
-      clearInterval(siteTime);
-    }
+    });
   {{- end -}}
 
   document.addEventListener('DOMContentLoaded', () => {
