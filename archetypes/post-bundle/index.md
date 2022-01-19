@@ -12,9 +12,9 @@ license: ""
 comment: false
 
 tags:
-  - draft
+- draft
 categories:
-  - draft
+- draft
 
 hiddenFromHomePage: false
 hiddenFromSearch: false
@@ -24,6 +24,12 @@ summary: ""
 # Full link or relative root link of image
 featuredImage: ""
 featuredImagePreview: ""
+# Or contain featuredImage and featuredImagePreview into resources
+resources:
+- name: "featured-image"
+  src: ""
+- name: "featured-image-preview"
+  src: ""
 
 toc:
   enable: true
