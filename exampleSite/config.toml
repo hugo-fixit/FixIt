@@ -447,6 +447,16 @@ enableEmoji = true
       [languages.zh-cn.params.pangu]
         # 适用于中文写作用户
         enable = true
+      # 水印配置 since v0.2.12
+      # 详细参数见 https://github.com/Lruihao/watermark#readme
+      [languages.zh-cn.params.watermark]
+        enable = true
+        # 水印内容 (允许 HTML 格式)
+        content = '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> FixIt 主题'
+        # 水印透明度
+        opacity = 0.02
+        # 单水印高度 单位：px
+        height = 23
 
 [params]
   # FixIt theme version
