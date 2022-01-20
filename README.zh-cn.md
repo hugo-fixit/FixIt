@@ -32,7 +32,7 @@ FixIt 主题继承了这些主题的优秀功能，并在此基础上添加了�
 hugo server --source=exampleSite
 ```
 
-当然，你也可以直接看 [FixIt 主题维基](https://github.com/Lruihao/FixIt/wiki)
+当然，你也可以直接阅读 [FixIt 主题维基](https://github.com/Lruihao/FixIt/wiki)
 
 ## 从 LoveIt 迁移
 

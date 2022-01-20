@@ -33,7 +33,7 @@ Build Documentation Locally:
 hugo server --source=exampleSite
 ```
 
-Of course, you can also watch the [FixIt wiki](https://github.com/Lruihao/FixIt/wiki) directly.
+Of course, you can also read the [FixIt wiki](https://github.com/Lruihao/FixIt/wiki) directly.
 
 ## Migrate from LoveIt
 
