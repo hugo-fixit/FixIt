@@ -21,6 +21,20 @@ The FixIt theme inherits the excellent functions of these themes, and adds new f
 <!-- TODO update url -->
 Head to this [documentation page](https://hugofixit.pages.dev/theme-documentation-basics/) for a complete guidence to get started with the FixIt theme.
 
+### [Demo Site](https://lruihao.cn)
+<!-- TODO update url -->
+To see this theme in action, here is a live [demo site](https://lruihao.cn) which is rendered with **FixIt** theme.
+
+### [Documentation](https://hugofixit.pages.dev/categories/documentation/)
+<!-- TODO update url -->
+Build Documentation Locally:
+
+```bash
+hugo server --source=exampleSite
+```
+
+Of course, you can also watch the [FixIt wiki](https://github.com/Lruihao/FixIt/wiki) directly.
+
 ## Migrate from LoveIt
 
 If you are currently using the LoveIt theme (or some other themes), it is very easy to migrate to FixIt.
@@ -51,10 +65,6 @@ Next, go to the `config.toml` and change the default theme to `FixIt`.
 ```
 
 Now the migration is finished and everything is ready 🎉
-
-## [Demo Site](https://lruihao.cn)
-<!-- TODO update url -->
-To see this theme in action, here is a live [demo site](https://lruihao.cn) which is rendered with **FixIt** theme.
 
 ## Why choose FixIt
 
@@ -156,14 +166,6 @@ the FixIt theme may be more suitable for you.
 * **Card type** link shortcode
 * **Friends** page embedded template
 * ...
-
-## [Documentation](https://hugofixit.pages.dev/categories/documentation/)
-<!-- TODO update url -->
-Build Documentation Locally:
-
-```bash
-hugo server --source=exampleSite
-```
 
 ## Multilingual and i18n
 

@@ -21,6 +21,19 @@ FixIt 主题继承了这些主题的优秀功能，并在此基础上添加了�
 <!-- TODO update url -->
 前往这篇 [文档](https://hugofixit.pages.dev/zh-cn/theme-documentation-basics/)，阅读关于安装与使用的详细指南。
 
+### 主题 [预览](https://hugofixit.pages.dev/zh-cn/)
+<!-- TODO update url -->
+为了直观地浏览主题特性，这里有一个基于 **FixIt** 主题渲染的 [预览网站](https://hugofixit.pages.dev/zh-cn/)。
+
+### [文档](https://hugofixit.pages.dev/zh-cn/categories/documentation/)
+<!-- TODO update url -->
+在本地构建文档：
+```bash
+hugo server --source=exampleSite
+```
+
+当然，你也可以直接看 [FixIt 主题维基](https://github.com/Lruihao/FixIt/wiki)
+
 ## 从 LoveIt 迁移
 
 如果你现在正在使用 LoveIt 主题（或者一些其他的主题），你可以很容易地迁移至 FixIt。
@@ -51,10 +64,6 @@ sh fixit_checker.sh
 ```
 
 这样就完成了迁移工作，现在一切准备就绪 🎉
-
-## 主题 [预览](https://hugofixit.pages.dev/zh-cn/)
-<!-- TODO update url -->
-为了直观地浏览主题特性，这里有一个基于 **FixIt** 主题渲染的 [预览网站](https://hugofixit.pages.dev/zh-cn/)。
 
 ## 为什么选择 FixIt
 
@@ -156,13 +165,6 @@ sh fixit_checker.sh
 * 支持**卡片式链接**的 shortcode
 * 支持**友情链接**的页面模板
 * ...
-
-## [文档](https://hugofixit.pages.dev/zh-cn/categories/documentation/)
-<!-- TODO update url -->
-在本地构建文档：
-```bash
-hugo server --source=exampleSite
-```
 
 ## 多语言和国际化
 
