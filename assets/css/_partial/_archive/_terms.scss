@@ -72,6 +72,7 @@
   text-align: right;
   color: $global-font-secondary-color;
   white-space: nowrap;
+  font-variant-numeric: tabular-nums lining-nums;
 
   [theme=dark] & {
     color: $global-font-secondary-color-dark;

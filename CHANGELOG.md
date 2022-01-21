@@ -19,7 +19,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: typeit print code error ([#19](https://github.com/Lruihao/FixIt/issues/19))
 - :bug: Fix: pre element overflow error ([#29](https://github.com/Lruihao/FixIt/issues/29))
 - :bug: Fix: toc display error without content header ([#21](https://github.com/Lruihao/FixIt/issues/21))
-- :lipstick: Style: style detail adjustments, change scroll-behavior to smooth, header, footer, shortcode style etc.
+- :lipstick: Style: style detail adjustments, change scroll-behavior to smooth, taxonomy, header, footer, shortcode style etc.
 - :pencil: Docs: improve demo site documentation ([#37](https://github.com/Lruihao/FixIt/issues/37))
 - :wrench: Chore: add commands `fixit_checker.sh`
 - :wrench: Chore(i18n): change some translations
