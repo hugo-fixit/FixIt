@@ -1016,10 +1016,6 @@ enableEmoji = true
 # Privacy config (https://gohugo.io/about/hugo-and-gdpr/)
 # 隐私信息配置 (https://gohugo.io/about/hugo-and-gdpr/)
 [privacy]
-  # privacy of the Google Analytics (replaced by params.analytics.google)
-  # Google Analytics 相关隐私 (被 params.analytics.google 替代)
-  [privacy.googleAnalytics]
-    # ...
   [privacy.twitter]
     enableDNT = true
   [privacy.youtube]

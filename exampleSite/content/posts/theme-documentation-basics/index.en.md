@@ -2,11 +2,11 @@
 weight: 1
 title: "Theme Documentation - Basics"
 date: 2020-03-06T21:29:01+08:00
-lastmod: 2020-03-06T21:29:01+08:00
+lastmod: 2022-01-12T17:09:01+08:00
 draft: false
-author: "Dillon"
-authorLink: "https://dillonzq.com"
-description: "Discover what the Hugo - LoveIt theme is all about and the core-concepts behind it."
+author: "Lruihao"
+authorLink: "https://lruihao.cn"
+description: "Discover what the Hugo - FixIt theme is all about and the core-concepts behind it."
 resources:
 - name: "featured-image"
   src: "featured-image.jpg"
@@ -20,7 +20,7 @@ toc:
   auto: false
 ---
 
-Discover what the Hugo - **LoveIt** theme is all about and the core-concepts behind it.
+Discover what the Hugo - **FixIt** theme is all about and the core-concepts behind it.
 
 <!--more-->
 
@@ -53,26 +53,26 @@ cd my_website
 
 ### 2.2 Install the Theme
 
-The **LoveIt** theme’s repository is: [https://github.com/dillonzq/LoveIt](https://github.com/dillonzq/LoveIt).
+The **FixIt** theme’s repository is: <https://github.com/Lruihao/FixIt>.
 
-You can download the [latest release :(far fa-file-archive fa-fw): .zip file](https://github.com/dillonzq/LoveIt/releases) of the theme and extract it in the `themes` directory.
+You can download the [latest release :(far fa-file-archive fa-fw): .zip file](https://github.com/Lruihao/FixIt/releases) of the theme and extract it in the `themes` directory.
 
 Alternatively, clone this repository to the `themes` directory:
 
 ```bash
-git clone https://github.com/dillonzq/LoveIt.git themes/LoveIt
+git clone https://github.com/Lruihao/FixIt.git themes/FixIt
 ```
 
 Or, create an empty git repository and make this repository a submodule of your site directory:
 
 ```bash
 git init
-git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
+git submodule add https://github.com/Lruihao/FixIt.git themes/FixIt
 ```
 
 ### 2.3 Basic Configuration {#basic-configuration}
 
-The following is a basic configuration for the LoveIt theme:
+The following is a basic configuration for the FixIt theme:
 
 ```toml
 baseURL = "http://example.org/"
@@ -83,10 +83,10 @@ languageCode = "en"
 title = "My New Hugo Site"
 
 # Change the default theme to be use when building the site with Hugo
-theme = "LoveIt"
+theme = "FixIt"
 
 [params]
-  # LoveIt theme version
+  # FixIt theme version
   version = "0.2.X"
 
 [menu]
@@ -188,13 +188,13 @@ Alternatively, you can use [AWS Amplify](https://gohugo.io/hosting-and-deploymen
 
 ### 3.1 Site Configuration {#site-configuration}
 
-In addition to [Hugo global configuration](https://gohugo.io/overview/configuration/) and [menu configuration](#basic-configuration), **LoveIt** lets you define the following parameters in your site configuration (here is a `config.toml`, whose values are default).
+In addition to [Hugo global configuration](https://gohugo.io/overview/configuration/) and [menu configuration](#basic-configuration), **FixIt** lets you define the following parameters in your site configuration (here is a `config.toml`, whose values are default).
 
 Please open the code block below to view the complete sample configuration :(far fa-hand-point-down fa-fw)::
 
 ```toml
 [params]
-  # {{< version 0.2.0 changed >}} LoveIt theme version
+  # {{< version 0.2.0 changed >}} FixIt theme version
   version = "0.2.X"
   # site description
   description = "This is My New Hugo Site"
@@ -211,21 +211,25 @@ Please open the code block below to view the complete sample configuration :(far
   dateFormat = "2006-01-02"
   # website images for Open Graph and Twitter Cards
   images = ["/logo.png"]
+  # {{< version 0.2.12 >}} enable PWA
+  enablePWA = true
 
   # {{< version 0.2.0 >}} App icon config
   [params.app]
     # optional site title override for the app when added to an iOS home screen or Android launcher
-    title = "LoveIt"
+    title = "FixIt"
     # whether to omit favicon resource links
     noFavicon = false
     # modern SVG favicon to use in place of older style .png and .ico files
     svgFavicon = ""
-    # Android browser theme color
-    themeColor = "#ffffff"
     # Safari mask icon color
     iconColor = "#5bbad5"
     # Windows v8-10 tile color
     tileColor = "#da532c"
+    # {{< version 0.2.12 changed >}} Android browser theme color
+    [params.app.themeColor]
+      light = "#ffffff"
+      dark = "#252627"
 
   # {{< version 0.2.0 >}} Search config
   [params.search]
@@ -330,9 +334,6 @@ Please open the code block below to view the complete sample configuration :(far
       enable = true
       # special amount of posts in each home posts page
       paginate = 6
-      # {{< version 0.2.0 deleted >}} replaced with hiddenFromHomePage in params.page
-      # default behavior when you don't set "hiddenFromHomePage" in front matter
-      defaultHiddenFromHomePage = false
 
   # Social config about the author
   [params.social]
@@ -417,6 +418,8 @@ Please open the code block below to view the complete sample configuration :(far
     fraction = true
     # {{< version 0.2.0 >}} whether to enable the fontawesome extended syntax
     fontawesome = true
+    # license info (HTML format is supported)
+    license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
     # whether to show link to Raw Markdown content of the content
     linkToMarkdown = true
     # {{< version 0.2.4 >}} whether to show the full text content in RSS
@@ -429,7 +432,7 @@ Please open the code block below to view the complete sample configuration :(far
       keepStatic = true
       # whether to make the table of the contents in the sidebar automatically collapsed
       auto = true
-    # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} mathematical formulas
+    # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} mathematical formulas (https://katex.org)
     [params.page.math]
       enable = true
       # default block delimiter is $$ ... $$ and \\[ ... \\]
@@ -448,7 +451,7 @@ Please open the code block below to view the complete sample configuration :(far
       copy = true
       # the maximum number of lines of displayed code by default
       maxShownLines = 10
-    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} config
+    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} config (https://docs.mapbox.com/mapbox-gl-js)
     [params.page.mapbox]
       # access token of Mapbox GL JS
       accessToken = ""
@@ -497,13 +500,13 @@ Please open the code block below to view the complete sample configuration :(far
     # {{< version 0.2.0 changed >}} Comment config
     [params.page.comment]
       enable = true
-      # {{< link "https://disqus.com/" Disqus >}} comment config
+      # {{< link "https://disqus.com/" Disqus >}} comment config (https://disqus.com)
       [params.page.comment.disqus]
         # {{< version 0.1.1 >}}
         enable = false
         # Disqus shortname to use Disqus in posts
         shortname = ""
-      # {{< link "https://github.com/gitalk/gitalk" Gitalk >}} comment config
+      # {{< link "https://github.com/gitalk/gitalk" Gitalk >}} comment config (https://github.com/gitalk/gitalk)
       [params.page.comment.gitalk]
         # {{< version 0.1.1 >}}
         enable = false
@@ -511,7 +514,7 @@ Please open the code block below to view the complete sample configuration :(far
         repo = ""
         clientId = ""
         clientSecret = ""
-      # {{< link "https://github.com/xCss/Valine" Valine >}} comment config
+      # {{< link "https://github.com/xCss/Valine" Valine >}} comment config (https://github.com/xCss/Valine)
       [params.page.comment.valine]
         enable = false
         appId = ""
@@ -528,18 +531,18 @@ Please open the code block below to view the complete sample configuration :(far
         serverURLs = ""
         # {{< version 0.2.6 >}} emoji data file name, default is "google.yml"
         # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
-        # located in "themes/LoveIt/assets/data/emoji/" directory
+        # located in "themes/FixIt/assets/data/emoji/" directory
         # you can store your own data files in the same path under your project:
         # "assets/data/emoji/"
         emoji = ""
-      # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook comment" >}} config
+      # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook comment" >}} config (https://developers.facebook.com/docs/plugins/comments)
       [params.page.comment.facebook]
         enable = false
         width = "100%"
         numPosts = 10
         appId = ""
         languageCode = ""
-      # {{< version 0.2.0 >}} {{< link "https://comments.app/" "Telegram comments" >}} config
+      # {{< version 0.2.0 >}} {{< link "https://comments.app/" "Telegram comments" >}} config (https://comments.app)
       [params.page.comment.telegram]
         enable = false
         siteID = ""
@@ -549,10 +552,10 @@ Please open the code block below to view the complete sample configuration :(far
         colorful = true
         dislikes = false
         outlined = false
-      # {{< version 0.2.0 >}} {{< link "https://commento.io/" "Commento" >}} comment config
+      # {{< version 0.2.0 >}} {{< link "https://commento.io/" "Commento" >}} comment config (https://commento.io)
       [params.page.comment.commento]
         enable = false
-      # {{< version 0.2.5 >}} {{< link "https://utteranc.es/" "Utterances" >}} comment config
+      # {{< version 0.2.5 >}} {{< link "https://utteranc.es/" "Utterances" >}} comment config (https://utteranc.es)
       [params.page.comment.utterances]
         enable = false
         # owner/repo
@@ -592,6 +595,37 @@ Please open the code block below to view the complete sample configuration :(far
     cursorChar = "|"
     # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
     duration = -1
+
+  # {{< version 0.2.12 >}} Watermark config
+  # Detail config see https://github.com/Lruihao/watermark#readme
+  [params.watermark]
+    enable = false
+    # watermark's text (HTML format is supported)
+    content = ''
+    # watermark's transparency
+    opacity = 0.1
+    # parent of watermark's container
+    appendTo = '.wrapper>.main'
+    # watermark's width. unit: px
+    width = 150
+    # watermark's height. unit: px
+    height = 20
+    # row spacing of watermarks. unit: px
+    rowSpacing = 60
+    # col spacing of watermarks. unit: px
+    colSpacing = 30
+    # watermark's tangent angle. unit: deg
+    rotate = 15
+    # watermark's fontSize. unit: rem
+    fontSize = 0.85
+
+  # {{< version 0.2.12 >}} Busuanzi count
+  [params.ibruce]
+    enable = true
+    # Enable in post meta
+    enablePost = false
+    # Site creation time e.g. '2019-02-03T19:30:34+08:00'
+    siteTime = ''
 
   # Site verification code config for Google/Bing/Yandex/Pinterest/Baidu
   [params.verification]
@@ -635,7 +669,7 @@ Please open the code block below to view the complete sample configuration :(far
   [params.cdn]
     # CDN data file name, disabled by default
     # ("jsdelivr.yml")
-    # located in "themes/LoveIt/assets/data/cdn/" directory
+    # located in "themes/FixIt/assets/data/cdn/" directory
     # you can store your own data files in the same path under your project:
     # "assets/data/cdn/"
     data = ""
@@ -649,7 +683,7 @@ Please open the code block below to view the complete sample configuration :(far
 
 # Markup related config in Hugo
 [markup]
-  # {{< link "https://gohugo.io/content-management/syntax-highlighting" "Syntax Highlighting" >}}
+  # {{< link "https://gohugo.io/content-management/syntax-highlighting" "Syntax Highlighting" >}} (https://gohugo.io/content-management/syntax-highlighting)
   [markup.highlight]
     codeFences = true
     guessSyntax = true
@@ -688,16 +722,13 @@ Please open the code block below to view the complete sample configuration :(far
   filename = "sitemap.xml"
   priority = 0.5
 
-# {{< link "https://gohugo.io/content-management/urls#permalinks" "Permalinks config" >}}
+# {{< link "https://gohugo.io/content-management/urls#permalinks" "Permalinks config" >}} (https://gohugo.io/content-management/urls#permalinks)
 [Permalinks]
   # posts = ":year/:month/:filename"
   posts = ":filename"
 
-# {{< link "https://gohugo.io/about/hugo-and-gdpr/" "Privacy config" >}}
+# {{< link "https://gohugo.io/about/hugo-and-gdpr/" "Privacy config" >}} (https://gohugo.io/about/hugo-and-gdpr/)
 [privacy]
-  # {{< version 0.2.0 deleted >}} privacy of the Google Analytics (replaced by params.analytics.google)
-  [privacy.googleAnalytics]
-    # ...
   [privacy.twitter]
     enableDNT = true
   [privacy.youtube]
@@ -747,7 +778,7 @@ You could enable these features with `hugo serve -e production`.
   data = ""
 ````
 
-The default CDN data file is located in `themes/LoveIt/assets/data/cdn/` directory.
+The default CDN data file is located in `themes/FixIt/assets/data/cdn/` directory.
 You can store your own data file in the same path under your project: `assets/data/cdn/`.
 {{< /admonition >}}
 
@@ -778,7 +809,7 @@ Or You can set more options through a dict:
     title = "Mastodon"
 ```
 
-The default data of all supported social links is located in `themes/LoveIt/assets/data/social.yaml`,
+The default data of all supported social links is located in `themes/FixIt/assets/data/social.yaml`,
 which is you can refer to.
 {{< /admonition >}}
 
@@ -807,11 +838,11 @@ Customize `browserconfig.xml` and `site.webmanifest` to set theme-color and back
 Hugo **extended** version is necessary for the style customization.
 {{< /admonition >}}
 
-**LoveIt** theme has been built to be as configurable as possible by defining custom `.scss` style files.
+**FixIt** theme has been built to be as configurable as possible by defining custom `.scss` style files.
 
 The directory including the custom `.scss` style files is `assets/css` relative to **your project root directory**.
 
-In `assets/css/_override.scss`, you can override the variables in `themes/LoveIt/assets/css/_variables.scss` to customize the style.
+In `assets/css/_override.scss`, you can override the variables in `themes/FixIt/assets/css/_variables.scss` to customize the style.
 
 Here is a example:
 
@@ -824,7 +855,7 @@ In `assets/css/_custom.scss`, you can add some css style code to customize the s
 
 ## 4 Multilingual and i18n
 
-**LoveIt** theme is fully compatible with Hugo multilingual mode, which provides in-browser language switching.
+**FixIt** theme is fully compatible with Hugo multilingual mode, which provides in-browser language switching.
 
 ![Language Switch](language-switch.gif "Language Switch")
 
@@ -842,11 +873,11 @@ In `assets/css/_custom.scss`, you can add some css style code to customize the s
 | Italian              | `it`      | `it`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | Spanish              | `es`      | `es`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | German               | `de`      | `de`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-| German               | `de`      | `de`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | Serbian              | `sr`      | `sr`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
 | Russian              | `ru`      | `ru`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | Romanian             | `ro`      | `ro`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | Vietnamese           | `vi`      | `vi`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
+| Traditional Chinese  | `zh-tw`   | `zh-TW`               | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 
 ### 4.2 Basic Configuration
 
@@ -973,15 +1004,15 @@ Use [Front Matter parameter](https://gohugo.io/content-management/multilingual#t
 
 Translations strings are used for common default values used in the theme. Translations are available in [some languages](#language-compatibility), but you may use another language or want to override default values.
 
-To override these values, create a new file in your local i18n folder `i18n/<languageCode>.toml` and inspire yourself from `themes/LoveIt/i18n/en.toml`.
+To override these values, create a new file in your local i18n folder `i18n/<languageCode>.toml` and inspire yourself from `themes/FixIt/i18n/en.toml`.
 
-By the way, as these translations could be used by other people, please take the time to propose a translation by [:(fas fa-code-branch fa-fw): making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
+By the way, as these translations could be used by other people, please take the time to propose a translation by [:(fas fa-code-branch fa-fw): making a PR](https://github.com/Lruihao/FixIt/pulls) to the theme!
 
 ## 5 Search
 
 {{< version 0.2.0 >}}
 
-Based on [Lunr.js](https://lunrjs.com/) or [algolia](https://www.algolia.com/), searching is supported in **LoveIt** theme.
+Based on [Lunr.js](https://lunrjs.com/) or [algolia](https://www.algolia.com/), searching is supported in **FixIt** theme.
 
 ### 5.1 Output Configuration
 
@@ -1038,4 +1069,10 @@ You could upload the `index.json` files by browsers but a CLI tool may be better
 [Algolia Atomic](https://github.com/chrisdmacrae/atomic-algolia) is a good choice.
 To be compatible with Hugo multilingual mode,
 you need to upload different `index.json` for each language to the different index of algolia, such as `zh-cn/index.json` or `fr/index.json`...
+{{< /admonition >}}
+
+---
+
+{{< admonition quote "Thanks" >}}
+_Thanks to the original author [Dillon](https://dillonzq.com) for preparing and revising the content before version `v0.2.10` in this documentation._
 {{< /admonition >}}
