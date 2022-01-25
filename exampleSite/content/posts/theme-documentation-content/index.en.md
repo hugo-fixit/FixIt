@@ -2,11 +2,11 @@
 weight: 2
 title: "Theme Documentation - Content"
 date: 2020-03-05T15:58:26+08:00
-lastmod: 2020-03-05T15:58:26+08:00
+lastmod: 2022-01-25T11:02:26+08:00
 draft: false
-author: "Dillon"
-authorLink: "https://dillonzq.com"
-description: "Find out how to create and organize your content quickly and intuitively in LoveIt theme."
+author: "Lruihao"
+authorLink: "https://lruihao.cn"
+description: "Find out how to create and organize your content quickly and intuitively in FixIt theme."
 resources:
 - name: "featured-image"
   src: "featured-image.jpg"
@@ -22,7 +22,7 @@ math:
   enable: true
 ---
 
-Find out how to create and organize your content quickly and intuitively in **LoveIt** theme.
+Find out how to create and organize your content quickly and intuitively in **FixIt** theme.
 
 <!--more-->
 
@@ -77,6 +77,7 @@ draft: true
 author: ""
 authorLink: ""
 description: ""
+keywords: ""
 license: ""
 images: []
 
@@ -138,6 +139,7 @@ seo:
 * **author**: the author for the content.
 * **authorLink**: the link of the author.
 * **description**: the description for the content.
+* **keywords**: the keywords for the content.
 * **license**: the special lisence for this content.
 * **images**: page images for Open Graph and Twitter Cards.
 
@@ -164,6 +166,7 @@ seo:
 * **comment**: {{< version 0.2.0 changed >}} the same as the `params.page.comment` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **library**: {{< version 0.2.7 >}} the same as the `params.page.library` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **seo**: {{< version 0.2.10 >}} the same as the `params.page.seo` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **type**: the rendering template of page, see [templates](#tamplates) for details.
 
 {{< admonition tip >}}
 {{< version 0.2.10 >}}
@@ -180,11 +183,68 @@ resources:
 - name: featured-image-preview
   src: featured-image-preview.jpg
 ```
+
+{{< version 0.2.12 >}} 
+
+Some [archetypes](https://gohugo.io/content-management/archetypes/) are embedded in the **FixIt** theme, which will take effect when creating new content with the following commands, and the front matter will be automatically brought in.
+
+```bash
+hugo new posts/foo.md
+hugo new --kind post-bundle posts/bar.md
+```
+{{< /admonition >}}
+
+## 3 Tamplates {#tamplates}
+
+Generally, you don't need to set the **type** parameter, because Hugo and fixit will help you choose. However, the **FixIt** theme provides some special templates for users to use.
+
+### Friends
+
+{{< version 0.2.12 >}} 
+
+Set `type: "friends"` in the front matter and create data file named `friends.yml` in the `yourSite/data/` directory, whose content format is as follows:
+
+```yml
+# Friend/Site info of one
+- nickname: friend's name
+  avatar: friend's avatar
+  url: site link
+  discription: discription of friend/site
+```
+
+{{< admonition tip >}}
+
+You can use the following command to quickly create a friends page:
+
+```bash
+hugo new friends/index.md
+```
+
+{{< /admonition >}}
+
+### Offline
+
+{{< version 0.2.12 >}}
+
+Set `type: "offline"` in the front matter and set `enablePWA` in `config.toml`:
+```toml
+[params]
+  # enable PWA
+  enablePWA = true
+```
+{{< admonition tip >}}
+
+You can use the following command to quickly create a offline page:
+
+```bash
+hugo new offline/index.md
+```
+
 {{< /admonition >}}
 
 ## 3 Content Summaries
 
-**LoveIt** theme uses the summary of the content to display abstract information in the home page. Hugo can generate summaries of your content.
+**FixIt** theme uses the summary of the content to display abstract information in the home page. Hugo can generate summaries of your content.
 
 ![Summary Preview](summary.png "Summary Preview")
 
@@ -214,7 +274,7 @@ You might want your summary to be something other than the text that starts the 
 
 You might want your description in the `description` variable of the article front matter as the summary.
 
-You may add the `<!--more-->` summary divider at the start of the article. Keep content that comes before the summary divider empty. Then **LoveIt** theme will use your description as the summary.
+You may add the `<!--more-->` summary divider at the start of the article. Keep content that comes before the summary divider empty. Then **FixIt** theme will use your description as the summary.
 
 ### Priority Order of Summary Selection
 
@@ -235,7 +295,7 @@ This part is shown in the [basic markdown syntax page](../basic-markdown-syntax/
 
 ## 5 Extended Markdown Syntax {#extended-markdown-syntax}
 
-**LoveIt** theme has some extended syntax elements for you to write articles.
+**FixIt** theme has some extended syntax elements for you to write articles.
 
 ### Emoji Support
 
@@ -243,7 +303,7 @@ This part is shown in the [emoji support page](../emoji-support/).
 
 ### Mathematical Formula
 
-**LoveIt** theme supports mathematical formulas based on [$ \KaTeX $](https://katex.org/).
+**FixIt** theme supports mathematical formulas based on [$ \KaTeX $](https://katex.org/).
 
 Set the property `enable = true` under `[params.math]` in your [site configuration](../theme-documentation-basics#site-configuration)
 and the property `math: true` of the article front matter to enable the automatic rendering of mathematical formulas.
@@ -316,7 +376,7 @@ $$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$
 
 ### Ruby Annotation {#ruby}
 
-An extended Markdown syntax for **ruby annotation** is supported in **LoveIt** theme:
+An extended Markdown syntax for **ruby annotation** is supported in **FixIt** theme:
 
 ```markdown
 [Hugo]{?^}(An open-source static site generator)
@@ -330,7 +390,7 @@ The rendered output looks like this:
 
 {{< version 0.2.0 >}}
 
-An extended Markdown syntax for **fraction** is supported in **LoveIt** theme:
+An extended Markdown syntax for **fraction** is supported in **FixIt** theme:
 
 ```markdown
 [Light]{?/}[Dark]
@@ -346,7 +406,7 @@ The rendered output looks like this:
 
 ### Font Awesome {#fontawesome}
 
-**LoveIt** theme uses [Font Awesome](https://fontawesome.com/) as the icon library.
+**FixIt** theme uses [Font Awesome](https://fontawesome.com/) as the icon library.
 You can easily use these icons in your articles.
 
 Get the `class` of icons you wanted from the [Font Awesome website](https://fontawesome.com/icons?d=gallery).
@@ -397,3 +457,9 @@ Another example is:
 The rendered output looks like this:
 
 **[link{?]}(#escape-character)** instead of **[link](#escape-character)**.
+
+---
+
+{{< admonition quote "Thanks" >}}
+_Thanks to the original author [Dillon](https://dillonzq.com) for preparing and revising the content before version `v0.2.10` in this documentation._
+{{< /admonition >}}
