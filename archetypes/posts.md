@@ -18,12 +18,7 @@ categories:
 hiddenFromHomePage: false
 hiddenFromSearch: false
 
-# custom summary instead of <!--more-->
 summary: ""
-# Full link or relative root link of image
-featuredImage: ""
-featuredImagePreview: ""
-# Or contain featuredImage and featuredImagePreview into resources
 resources:
 - name: "featured-image"
   src: ""
@@ -35,6 +30,10 @@ toc:
 math:
   enable: false
 lightgallery: false
+seo:
+  images: []
+
+# See details front matter: /theme-documentation-content/#front-matter
 ---
 
 <!--more-->
