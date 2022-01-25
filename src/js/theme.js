@@ -475,7 +475,7 @@ class Theme {
   initMermaid() {
     const $mermaidElements = document.getElementsByClassName('mermaid');
     if ($mermaidElements.length) {
-      mermaid.initialize({startOnLoad: false, theme: 'null'});
+      mermaid.initialize({startOnLoad: false, theme: 'default'});
       this.util.forEach($mermaidElements, $mermaid => {
         mermaid.mermaidAPI.render('svg-' + $mermaid.id, this.data[$mermaid.id], svgCode => {
           $mermaid.insertAdjacentHTML('afterbegin', svgCode);

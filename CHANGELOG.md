@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - :zap: Perf: merge shortcode cardlink (deprecated v0.2.13) into shortcode link and add 'download' param ([#42](https://github.com/Lruihao/FixIt/issues/42))
 - :zap: Perf: optimize JS loading ([#25](https://github.com/Lruihao/FixIt/issues/25))
 - :recycle: Refactor: header title DOM and add subtitle option ([#26](https://github.com/Lruihao/FixIt/issues/26))
+- :bug: Fix: set mermaid theme as 'default' when initialization ([#38](https://github.com/Lruihao/FixIt/issues/38))
 - :bug: Fix: typeit print code error ([#19](https://github.com/Lruihao/FixIt/issues/19))
 - :bug: Fix: pre element overflow error ([#29](https://github.com/Lruihao/FixIt/issues/29))
 - :bug: Fix: toc display error without content header ([#21](https://github.com/Lruihao/FixIt/issues/21))

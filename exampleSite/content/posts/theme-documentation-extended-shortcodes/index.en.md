@@ -2,11 +2,11 @@
 weight: 4
 title: "Theme Documentation - Extended Shortcodes"
 date: 2020-03-03T16:29:41+08:00
-lastmod: 2020-03-03T16:29:41+08:00
+lastmod: 2022-01-25T15:48:59+08:00
 draft: false
-author: "Dillon"
-authorLink: "https://dillonzq.com"
-description: "LoveIt theme provides multiple shortcodes on top of built-in ones in Hugo."
+author: "Lruihao"
+authorLink: "https://lruihao.cn"
+description: "FixIt theme provides multiple shortcodes on top of built-in ones in Hugo."
 resources:
 - name: "featured-image"
   src: "featured-image.jpg"
@@ -19,7 +19,7 @@ categories: ["documentation"]
 lightgallery: true
 ---
 
-**LoveIt** theme provides multiple shortcodes on top of built-in ones in Hugo.
+**FixIt** theme provides multiple shortcodes on top of built-in ones in Hugo.
 
 <!--more-->
 
@@ -472,9 +472,7 @@ end
     branch newbranch
     checkout newbranch
     commit
-    commit
     checkout master
-    commit
     commit
     merge newbranch
 {{</* /mermaid */>}}
@@ -494,9 +492,7 @@ end
     branch newbranch
     checkout newbranch
     commit
-    commit
     checkout master
-    commit
     commit
     merge newbranch
 {{< /mermaid >}}
@@ -1284,12 +1280,18 @@ Example `script` input:
 
 ```markdown
 {{</* script */>}}
-console.log('Hello LoveIt!');
+console.log('Hello FixIt!');
 {{</* /script */>}}
 ```
 
 You can see the output in the console of the developer tool.
 
 {{< script >}}
-console.log('Hello LoveIt!');
+console.log('Hello FixIt!');
 {{< /script >}}
+
+---
+
+{{< admonition quote "Thanks" >}}
+_Thanks to the original author [Dillon](https://dillonzq.com) for preparing and revising the content before version `v0.2.10` in this documentation._
+{{< /admonition >}}
