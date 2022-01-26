@@ -18,7 +18,7 @@ math:
 [![GitHub forks](https://img.shields.io/github/forks/Lruihao/FixIt?style=social)](https://github.com/Lruihao/FixIt/fork)
 {{< /style >}}
 
-> [<i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> FixIt](https://github.com/Lruihao/FixIt) 是一个由 [Lruihao](https://lruihao.cn) 开发的**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。
+> [<i class="fa-stack fa-xs logo-icon"><i class="fas fa-ban fa-stack-2x"></i><i class="fas fa-bug fa-stack-1x"></i></i> FixIt](https://github.com/Lruihao/FixIt) 是一个由 [Lruihao](https://lruihao.cn) 开发的**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。
 >
 > 它的原型基于 [LoveIt 主题](https://github.com/dillonzq/LoveIt)，[LeaveIt 主题](https://github.com/liuzc/LeaveIt) 和 [KeepIt 主题](https://github.com/Fastbyte01/KeepIt)。
 

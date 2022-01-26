@@ -456,7 +456,7 @@ enableEmoji = true
       [languages.zh-cn.params.watermark]
         enable = true
         # 水印内容 (允许 HTML 格式)
-        content = '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> FixIt 主题'
+        content = '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-ban fa-stack-2x"></i><i class="fas fa-bug fa-stack-1x"></i></i> FixIt 主题'
         # 水印透明度
         opacity = 0.02
         # 单水印高度 单位：px
@@ -505,7 +505,7 @@ enableEmoji = true
       name = "FixIt"
       # you can add extra information before the name (HTML format is supported), such as icons
       # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
-      pre = '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i>'
+      pre = '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-ban fa-stack-2x"></i><i class="fas fa-bug fa-stack-1x"></i></i>'
       # you can add extra information after the name (HTML format is supported), such as icons
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
       post = ""
@@ -839,7 +839,7 @@ enableEmoji = true
     enable = true
     # watermark's text (HTML format is supported)
     # 水印内容 (允许 HTML 格式)
-    content = '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> FixIt Theme'
+    content = '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-ban fa-stack-2x"></i><i class="fas fa-bug fa-stack-1x"></i></i> FixIt Theme'
     # watermark's transparency
     # 水印透明度
     opacity = 0.02

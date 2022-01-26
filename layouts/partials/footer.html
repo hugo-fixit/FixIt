@@ -12,7 +12,7 @@
       {{- if ne .Site.Params.footer.hugo false -}}
         <div class="footer-line">
           {{- $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer" title="Hugo %v">Hugo</a>` hugo.Version -}}
-          {{- $theme := .Scratch.Get "version" | printf `<a href="https://github.com/Lruihao/FixIt" target="_blank" rel="external nofollow noopener noreffer" title="FixIt %v"><i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> FixIt</a>` -}}
+          {{- $theme := .Scratch.Get "version" | printf `<a href="https://github.com/Lruihao/FixIt" target="_blank" rel="external nofollow noopener noreffer" title="FixIt %v"><i class="fa-stack fa-xs logo-icon"><i class="fas fa-ban fa-stack-2x"></i><i class="fas fa-bug fa-stack-1x"></i></i> FixIt</a>` -}}
           {{- dict "Hugo" $hugo "Theme" $theme | T "poweredBySome" | safeHTML }}
         </div>
       {{- end -}}
