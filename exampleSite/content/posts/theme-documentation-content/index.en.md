@@ -224,7 +224,7 @@ hugo new friends/index.md
 
 ### Offline
 
-{{< version 0.2.12 >}}
+{{< version 0.2.12 >}} See [PWA Support]({{< relref "pwa-support" >}}) for details.
 
 Set `type: "offline"` in the front matter and set `enablePWA` in `config.toml`:
 ```toml
