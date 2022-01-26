@@ -1,7 +1,11 @@
 {
-  "name": "FixIt",
-  "short_name": "FixIt",
+  "name": "FixIt Theme Documentation",
+  "short_name": "FixIt Docs",
+  "start_url": "/",
   "description": "A Clean, Elegant but Advanced Hugo Theme",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone",
   "icons": [
     {
       "src": "/apple-touch-icon.png",
@@ -19,9 +23,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone",
-  "start_url": "/"
+  ]
 }
