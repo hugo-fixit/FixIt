@@ -223,7 +223,7 @@ hugo new friends/index.md
 
 ### 离线页面
 
-{{< version 0.2.12 >}} 详见 [PWA 支持]({{< relref "pwa-support" >}})
+{{< version 0.2.12 >}} 详见 [PWA 支持](/zh-cn/pwa-support/)
 
 在前置参数中设置 `type: "offline"`，并在 `config.toml` 中开启 `enablePWA`：
 ```toml

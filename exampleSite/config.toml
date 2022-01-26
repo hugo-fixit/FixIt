@@ -143,8 +143,8 @@ enableEmoji = true
         absoluteURL = false
         [languages.en.params.search.algolia]
           index = "index.en"
-          appID = "PASDMWALPK"
-          searchKey = "b42948e51daaa93df92381c8e2ac0f93"
+          appID = "YKOM6PKLUY"
+          searchKey = "a44c110d3ac360be2c69cd79d34b77a8"
       # Home page config
       [languages.en.params.home]
         # amount of RSS pages
@@ -353,8 +353,8 @@ enableEmoji = true
         absoluteURL = false
         [languages.zh-cn.params.search.algolia]
           index = "index.zh-cn"
-          appID = "PASDMWALPK"
-          searchKey = "b42948e51daaa93df92381c8e2ac0f93"
+          appID = "YKOM6PKLUY"
+          searchKey = "a44c110d3ac360be2c69cd79d34b77a8"
       # 主页信息设置
       [languages.zh-cn.params.home]
         # RSS 文章数目
