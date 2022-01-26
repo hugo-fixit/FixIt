@@ -190,7 +190,7 @@ Some [archetypes](https://gohugo.io/content-management/archetypes/) are embedded
 
 ```bash
 hugo new posts/foo.md
-hugo new --kind post-bundle posts/bar.md
+hugo new --kind post-bundle posts/bar/
 ```
 {{< /admonition >}}
 

@@ -189,7 +189,7 @@ resources:
 
 ```bash
 hugo new posts/foo.md
-hugo new --kind post-bundle posts/bar.md
+hugo new --kind post-bundle posts/bar/
 ```
 {{< /admonition >}}
 
@@ -254,7 +254,7 @@ hugo new offline/index.md
 
 你可以通过在 [网站配置](../theme-documentation-basics#site-configuration) 中设置 `summaryLength` 来自定义摘要长度。
 
-如果您要使用 [CJK]^(中文/日语/韩语) 语言创建内容，并且想使用 Hugo 的自动摘要拆分功能，请在 [网站配置](../theme-documentation-basics#site-configuration) 中将 `hasCJKLanguage` 设置为 `true`.
+如果您要使用 [CJK]^（中文/日语/韩语） 语言创建内容，并且想使用 Hugo 的自动摘要拆分功能，请在 [网站配置](../theme-documentation-basics#site-configuration) 中将 `hasCJKLanguage` 设置为 `true`.
 
 ### 手动摘要拆分
 
@@ -379,12 +379,12 @@ $$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$
 **FixIt** 主题支持一种 **字符注音或者注释** Markdown 扩展语法：
 
 ```markdown
-[Hugo]{?^}(一个开源的静态网站生成工具)
+[Hugo]{?^}（一个开源的静态网站生成工具）
 ```
 
 呈现的输出效果如下：
 
-[Hugo]^(一个开源的静态网站生成工具)
+[Hugo]^（一个开源的静态网站生成工具）
 
 ### 分数 {#fraction}
 
