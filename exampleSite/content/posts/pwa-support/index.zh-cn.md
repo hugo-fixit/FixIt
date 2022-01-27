@@ -2,7 +2,7 @@
 weight: 7
 title: "PWA 支持"
 date: 2022-01-26T11:10:56+08:00
-draft: true
+draft: false
 author: "Lruihao"
 authorLink: "https://lruihao.cn"
 description: "在 FixIt 中设置 PWA 的指南。"
