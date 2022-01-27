@@ -18,15 +18,12 @@ The FixIt theme inherits the excellent functions of these themes, and adds new f
 ![Hugo Theme FixIt](https://github.com/Lruihao/FixIt/raw/master/images/Apple-Devices-Preview.png)
 
 ## Getting started
-<!-- TODO update url -->
-Head to this [documentation page](https://hugofixit.pages.dev/theme-documentation-basics/) for a complete guidence to get started with the FixIt theme.
+Head to this [documentation page](https://fixit.lruihao.cn/theme-documentation-basics/) for a complete guidence to get started with the FixIt theme.
 
-### [Demo Site](https://lruihao.cn)
-<!-- TODO update url -->
-To see this theme in action, here is a live [demo site](https://lruihao.cn) which is rendered with **FixIt** theme.
+### [Demo Site](https://fixit.lruihao.cn)
+To see this theme in action, here is a live [demo site](https://fixit.lruihao.cn) which is rendered with **FixIt** theme.
 
-### [Documentation](https://hugofixit.pages.dev/categories/documentation/)
-<!-- TODO update url -->
+### [Documentation](https://fixit.lruihao.cn/categories/documentation/)
 Build Documentation Locally:
 
 ```bash
@@ -185,8 +182,7 @@ FixIt supports the following languages:
 * Vietnamese
 * Traditional Chinese
 * [Contribute with a new language](https://github.com/Lruihao/FixIt/pulls)
-<!-- TODO update url -->
-[Languages Compatibility](https://hugofixit.com/theme-documentation-basics/#language-compatibility)
+[Languages Compatibility](https://fixit.lruihao.cn/theme-documentation-basics/#language-compatibility)
 
 ## [Roadmap](https://github.com/Lruihao/FixIt/projects/1)
 
