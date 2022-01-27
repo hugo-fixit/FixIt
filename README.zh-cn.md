@@ -18,15 +18,12 @@ FixIt 主题继承了这些主题的优秀功能，并在此基础上添加了�
 ![Hugo Theme FixIt](https://github.com/Lruihao/FixIt/raw/master/images/Apple-Devices-Preview.png)
 
 ## 立即开始
-<!-- TODO update url -->
-前往这篇 [文档](https://hugofixit.pages.dev/zh-cn/theme-documentation-basics/)，阅读关于安装与使用的详细指南。
+前往这篇 [文档](https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/)，阅读关于安装与使用的详细指南。
 
-### 主题 [预览](https://hugofixit.pages.dev/zh-cn/)
-<!-- TODO update url -->
-为了直观地浏览主题特性，这里有一个基于 **FixIt** 主题渲染的 [预览网站](https://hugofixit.pages.dev/zh-cn/)。
+### 主题 [预览](https://fixit.lruihao.cn/zh-cn/)
+为了直观地浏览主题特性，这里有一个基于 **FixIt** 主题渲染的 [预览网站](https://fixit.lruihao.cn/zh-cn/)。
 
-### [文档](https://hugofixit.pages.dev/zh-cn/categories/documentation/)
-<!-- TODO update url -->
+### [文档](https://fixit.lruihao.cn/zh-cn/categories/documentation/)
 在本地构建文档：
 ```bash
 hugo server --source=exampleSite
@@ -184,8 +181,7 @@ FixIt 支持下列语言：
 * 越南语
 * 繁体中文
 * [贡献一种新的语言](https://github.com/Lruihao/FixIt/pulls)
-<!-- TODO update url -->
-[语言兼容性](https://hugofixit.com/zh-cn/theme-documentation-basics/#language-compatibility)
+[语言兼容性](https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/#language-compatibility)
 
 ## [路线图](https://github.com/Lruihao/FixIt/projects/1)
 

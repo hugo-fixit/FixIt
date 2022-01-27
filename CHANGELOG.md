@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/Lruihao/FixIt/releases -->
 
-## v0.2.12 [2022-1-26]
+## v0.2.12 [2022-1-27]
 
 - :tada: Feat: add PWA support
 - :tada: Feat: add Watermark support ([#16](https://github.com/Lruihao/FixIt/issues/16))
