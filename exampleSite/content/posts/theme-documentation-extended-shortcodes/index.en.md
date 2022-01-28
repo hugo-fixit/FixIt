@@ -79,6 +79,14 @@ The `link` shortcode has the following named parameters:
 
     `title` attribute of the HTML `a` tag, which will be shown when hovering on the link.
 
+* **card** *[optional]* (**fourth** positional parameter) {{< version 0.2.12 >}}
+
+    是否显示为卡片式链接，默认值 `false`。
+
+* **download** *[optional]* {{< version 0.2.12 >}}
+
+    `optional` attribute of the HTML `a` tag.
+
 * **class** *[optional]*
 
     `class` attribute of the HTML `a` tag.
@@ -120,6 +128,28 @@ Or
 The rendered output looks like this (hover over the link, there should be a tooltip):
 
 {{< link "https://github.com/upstage/" Upstage "Visit Upstage!" >}}
+
+Example `link` input for card type:
+
+```markdown
+{{</* link "https://github.com/Lruihao/FixIt" "FixIt Theme" "source of FixIt Theme" true */>}}
+Or
+{{</* link href="https://github.com/Lruihao/FixIt" content="FixIt Theme" title="source of FixIt Theme" card=true */>}}
+```
+
+The rendered output looks like this:
+
+{{< link "https://github.com/Lruihao/FixIt" "FixIt Theme" "source of FixIt Theme" true >}}
+
+Example `link` input with download attribute:
+
+```markdown
+{{</* link href="/music/Wavelength.mp3" content="Wavelength" title="Download Wavelength.mp3" download="Wavelength.mp3" */>}}
+```
+
+The rendered output looks like this:
+
+{{< link href="/music/Wavelength.mp3" content="Wavelength" title="Download Wavelength.mp3" download="Wavelength.mp3" >}}
 
 ## 3 image {#image}
 

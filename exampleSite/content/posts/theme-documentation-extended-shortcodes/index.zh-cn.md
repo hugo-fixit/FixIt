@@ -68,27 +68,35 @@ This is a **right-aligned** paragraph.
 
 `link` shortcode 有以下命名参数：
 
-* **href** *[必需]* (**第一个**位置参数）
+* **href** *[必需]*（**第一个**位置参数）
 
     链接的目标。
 
-* **content** *[可选]* (**第二个**位置参数）
+* **content** *[可选]*（**第二个**位置参数）
 
     链接的内容，默认值是 **href** 参数的值。
 
     *支持 Markdown 或者 HTML 格式。*
 
-* **title** *[可选]* (**第三个**位置参数）
+* **title** *[可选]*（**第三个**位置参数）
 
     HTML `a` 标签 的 `title` 属性，当悬停在链接上会显示的提示。
 
-* **rel** *[可选]*
+* **card** *[可选]*（**第四个**位置参数）{{< version 0.2.12 >}}
 
-    HTML `a` 标签 的 `rel` 补充属性。
+    是否显示为卡片式链接，默认值 `false`。
+
+* **download** *[可选]* {{< version 0.2.12 >}}
+
+    HTML `a` 标签 的 `download` 属性。
 
 * **class** *[可选]*
 
     HTML `a` 标签 的 `class` 属性。
+
+* **rel** *[可选]*
+
+    HTML `a` 标签 的 `rel` 补充属性。
 
 一个 `link` 示例：
 
@@ -124,6 +132,28 @@ This is a **right-aligned** paragraph.
 
 {{< link "https://github.com/upstage/" Upstage "Visit Upstage!" >}}
 
+一个卡片式 `link` 示例：
+
+```markdown
+{{</* link "https://github.com/Lruihao/FixIt" "FixIt Theme" "source of FixIt Theme" true */>}}
+或者
+{{</* link href="https://github.com/Lruihao/FixIt" content="FixIt Theme" title="source of FixIt Theme" card=true */>}}
+```
+
+呈现的输出效果如下：
+
+{{< link "https://github.com/Lruihao/FixIt" "FixIt Theme" "source of FixIt Theme" true >}}
+
+一个可下载的 `link` 示例：
+
+```markdown
+{{</* link href="/music/Wavelength.mp3" content="Wavelength" title="Download Wavelength.mp3" download="Wavelength.mp3" */>}}
+```
+
+呈现的输出效果如下：
+
+{{< link href="/music/Wavelength.mp3" content="Wavelength" title="Download Wavelength.mp3" download="Wavelength.mp3" >}}
+
 ## 3 image {#image}
 
 {{< version 0.2.0 changed >}}
@@ -134,17 +164,17 @@ This is a **right-aligned** paragraph.
 
 `image` shortcode 有以下命名参数：
 
-* **src** *[必需]* (**第一个**位置参数）
+* **src** *[必需]*（**第一个**位置参数）
 
     图片的 URL.
 
-* **alt** *[可选]* (**第二个**位置参数）
+* **alt** *[可选]*（**第二个**位置参数）
 
     图片无法显示时的替代文本，默认值是 **src** 参数的值。
 
     *支持 Markdown 或者 HTML 格式。*
 
-* **caption** *[可选]* (**第三个**位置参数）
+* **caption** *[可选]*（**第三个**位置参数）
 
     图片标题。
 
@@ -248,15 +278,15 @@ This is a **right-aligned** paragraph.
 
 `admonition` shortcode 有以下命名参数：
 
-* **type** *[必需]* (**第一个**位置参数）
+* **type** *[必需]*（**第一个**位置参数）
 
     `admonition` 横幅的类型，默认值是 `note`。
 
-* **title** *[可选]* (**第二个**位置参数）
+* **title** *[可选]*（**第二个**位置参数）
 
     `admonition` 横幅的标题，默认值是 **type** 参数的值。
 
-* **open** *[可选]* (**第三个**位置参数） {{< version 0.2.0 changed >}}
+* **open** *[可选]*（**第三个**位置参数） {{< version 0.2.0 changed >}}
 
     横幅内容是否默认展开，默认值是 `true`。
 
@@ -902,11 +932,11 @@ data = [
 
 `echarts` shortcode 还有以下命名参数：
 
-* **width** *[可选]* (**第一个**位置参数）
+* **width** *[可选]*（**第一个**位置参数）
 
     {{< version 0.2.0 >}} 数据可视化的宽度，默认值是 `100%`。
 
-* **height** *[可选]* (**第二个**位置参数）
+* **height** *[可选]*（**第二个**位置参数）
 
     {{< version 0.2.0 >}} 数据可视化的高度，默认值是 `30rem`。
 
@@ -918,27 +948,27 @@ data = [
 
 `mapbox` shortcode 有以下命名参数来使用 Mapbox GL JS:
 
-* **lng** *[必需]* (**第一个**位置参数）
+* **lng** *[必需]*（**第一个**位置参数）
 
     地图初始中心点的经度，以度为单位。
 
-* **lat** *[必需]* (**第二个**位置参数）
+* **lat** *[必需]*（**第二个**位置参数）
 
     地图初始中心点的纬度，以度为单位。
 
-* **zoom** *[可选]* (**第三个**位置参数）
+* **zoom** *[可选]*（**第三个**位置参数）
 
     地图的初始缩放级别，默认值是 `10`。
 
-* **marked** *[可选]* (**第四个**位置参数）
+* **marked** *[可选]*（**第四个**位置参数）
 
     是否在地图的初始中心点添加图钉，默认值是 `true`。
 
-* **light-style** *[可选]* (**第五个**位置参数）
+* **light-style** *[可选]*（**第五个**位置参数）
 
     浅色主题的地图样式，默认值是 [前置参数](../theme-documentation-content#front-matter) 或者 [网站配置](../theme-documentation-basics#site-configuration) 中设置的值。
 
-* **dark-style** *[可选]* (**第六个**位置参数）
+* **dark-style** *[可选]*（**第六个**位置参数）
 
     深色主题的地图样式，默认值是 [前置参数](../theme-documentation-content#front-matter) 或者 [网站配置](../theme-documentation-basics#site-configuration) 中设置的值。
 
@@ -1032,7 +1062,7 @@ data = [
 
 `music` shortcode 有一个命名参数来使用音乐平台 URL 的自动识别：
 
-* **auto** *[必需]]* (**第一个**位置参数）
+* **auto** *[必需]]*（**第一个**位置参数）
 
     用来自动识别的音乐平台 URL, 支持 `netease`, `tencent` 和 `xiami` 平台。
 
@@ -1052,19 +1082,19 @@ data = [
 
 `music` shortcode 有以下命名参数来使用自定义音乐平台：
 
-* **server** *[必需]* (**第一个**位置参数）
+* **server** *[必需]*（**第一个**位置参数）
 
     [`netease`, `tencent`, `kugou`, `xiami`, `baidu`]
 
     音乐平台。
 
-* **type** *[必需]* (**第二个**位置参数）
+* **type** *[必需]*（**第二个**位置参数）
 
     [`song`, `playlist`, `album`, `search`, `artist`]
 
     音乐类型。
 
-* **id** *[必需]* (**第三个**位置参数）
+* **id** *[必需]*（**第三个**位置参数）
 
     歌曲 ID, 或者播放列表 ID, 或者专辑 ID, 或者搜索关键词，或者创作者 ID.
 
