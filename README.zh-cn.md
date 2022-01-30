@@ -134,6 +134,7 @@ sh fixit_checker.sh
 * 支持 **[Telegram comments](https://comments.app/) 评论**系统
 * 支持 **[Commento](https://commento.io/)** 评论系统
 * 支持 **[Utterances](https://utteranc.es/)** 评论系统
+* 支持 **[Artalk](https://artalk.js.org/)** 评论系统
 
 ### 扩展功能
 
@@ -220,6 +221,7 @@ FixIt 主题中用到了以下项目，感谢它们的作者：
 * [cookieconsent](https://github.com/osano/cookieconsent)
 * [Watermark](https://github.com/Lruihao/watermark)
 * [pangu.js](https://github.com/vinta/pangu.js)
+* [Artalk](https://artalk.js.org/)
 
 ## 作者
 

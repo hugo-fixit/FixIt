@@ -508,9 +508,23 @@ hugo
       Skype = false
       Trello = false
       Mix = false
-    # {{< version 0.2.0 changed >}} 评论系统设置
+    # {{< version 0.2.13 changed >}} 评论系统设置
     [params.page.comment]
-      enable = true
+      enable = false
+      # {{< version 0.2.13 >}}
+      # {{< link "https://artalk.js.org/" Artalk >}} 评论系统设置 (https://artalk.js.org/)
+      [params.page.comment.artalk]
+        enable = false
+        pageKey = ""
+        pageTitle = ""
+        server = "https://yourdomain/api/"
+        site = "默认站点"
+        placeholder = ""
+        noComment = ""
+        sendBtn = ""
+        editorTravel = true
+        flatMode = 'auto'
+        maxNesting = 3
       # {{< link "https://disqus.com/" Disqus >}} 评论系统设置 (https://disqus.com)
       [params.page.comment.disqus]
         # {{< version 0.1.1 >}}

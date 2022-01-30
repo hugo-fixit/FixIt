@@ -135,6 +135,7 @@ the FixIt theme may be more suitable for you.
 * **Telegram comments** system supported by [Telegram Comments](https://comments.app/)
 * **Commento** comment system supported by [Commento](https://commento.io/)
 * **Utterances** comment system supported by [Utterances](https://utteranc.es/)
+* **Artalk** comment system supported by [Artalk](https://artalk.js.org/)
 
 ### Extended Features
 
@@ -223,6 +224,7 @@ Thanks to the authors of following resources included in the theme:
 * [cookieconsent](https://github.com/osano/cookieconsent)
 * [Watermark](https://github.com/Lruihao/watermark)
 * [pangu.js](https://github.com/vinta/pangu.js)
+* [Artalk](https://artalk.js.org/)
 
 ## Author
 

@@ -708,6 +708,20 @@ enableEmoji = true
     # 评论系统设置
     [params.page.comment]
       enable = false
+      # Artalk comment config (https://artalk.js.org/) since v0.2.12
+      # Artalk 评论系统设置 (https://artalk.js.org/) since v0.2.12
+      [params.page.comment.artalk]
+        enable = false
+        pageKey = ""
+        pageTitle = ""
+        server = "https://yourdomain/api/"
+        site = "默认站点"
+        placeholder = ""
+        noComment = ""
+        sendBtn = ""
+        editorTravel = true
+        flatMode = 'auto'
+        maxNesting = 3
       # Disqus comment config (https://disqus.com/)
       # Disqus 评论系统设置 (https://disqus.com/)
       [params.page.comment.disqus]

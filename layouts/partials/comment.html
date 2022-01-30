@@ -5,6 +5,20 @@
 
 {{- if $comment.enable -}}
   <div id="comments">
+    {{- /* Artalk Comment System */ -}}
+    {{- $artalk := $comment.artalk | default dict -}}
+    {{- if $artalk.enable -}}
+      <div id="artalk" class="comment"></div>
+      {{- $source := $cdn.artalkCSS | default "lib/artalk/Artalk.min.css" -}}
+      {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+      {{- $source := $cdn.artalkJS | default "lib/artalk/Artalk.min.js" -}}
+      {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+      {{- $commentConfig = dict "el" "#artalk" "pageKey" $artalk.pageKey "pageTitle" $artalk.pageTitle "server" $artalk.server "site" $artalk.site "placeholder" $artalk.placeholder "noComment" $artalk.noComment "sendBtn" $artalk.sendBtn "editorTravel" $artalk.editorTravel "flatMode" $artalk.flatMode "maxNesting" $artalk.maxNesting | dict "artalk" | merge $commentConfig -}}
+      <noscript>
+        Please enable JavaScript to view the comments powered by <a href="https://github.com/ArtalkJS/Artalk" rel="license external nofollow noopener noreffer">Artalk</a>.
+      </noscript>
+    {{- end -}}
+
     {{- /* Disqus Comment System */ -}}
     {{- $disqus := $comment.disqus | default dict -}}
     {{- if $disqus.enable -}}
@@ -12,7 +26,7 @@
       {{- $source := printf "https://%v.disqus.com/embed.js" $disqus.shortname -}}
       {{- dict "Source" $source "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript" rel="license external nofollow noopener noreffer">Disqus</a>.
       </noscript>
     {{- end -}}
 
@@ -26,7 +40,7 @@
       {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
       {{- $commentConfig = dict "id" .Date "title" .Title "clientID" $gitalk.clientId "clientSecret" $gitalk.clientSecret "repo" $gitalk.repo "owner" $gitalk.owner "admin" (slice $gitalk.owner) | dict "gitalk" | merge $commentConfig -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk" rel="license external nofollow noopener noreffer">Gitalk</a>.
       </noscript>
     {{- end -}}
 
@@ -53,7 +67,7 @@
       {{- end -}}
       {{- $commentConfig = $valine.emoji | default "google.yml" | printf "data/emoji/%v" | resources.Get | transform.Unmarshal | dict "valine" | merge $commentConfig -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/" rel="license external nofollow noopener noreffer">Valine</a>.
       </noscript>
     {{- end -}}
 
@@ -70,7 +84,7 @@
       {{- $source := printf "https://connect.facebook.net/%v/sdk.js#xfbml=1&version=v5.0&appId=%v&autoLogAppEvents=1" ($facebook.languageCode | default (T "facebookLanguageCode")) $facebook.appId -}}
       {{- dict "Source" $source "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://developers.facebook.com/docs/plugins/comments/"></a>Facebook</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://developers.facebook.com/docs/plugins/comments/" rel="license external nofollow noopener noreffer">Facebook</a>.
       </noscript>
     {{- end -}}
 
@@ -97,7 +111,7 @@
       {{- end -}}
       {{- dict "Source" "https://comments.app/js/widget.js?2" "Defer" true "Attr" $attr | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://comments.app/">Telegram Comments</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://comments.app/" rel="license external nofollow noopener noreffer">Telegram Comments</a>.
       </noscript>
     {{- end -}}
 
@@ -107,7 +121,7 @@
       <div id="commento"></div>
       {{- dict "Source" "https://cdn.commento.io/js/commento.js" "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://commento.io/">Commento</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://commento.io/" rel="license external nofollow noopener noreffer">Commento</a>.
       </noscript>
     {{- end -}}
 
@@ -121,7 +135,7 @@
       {{- $commentConfig = $utterances.lightTheme | default "github-light" | dict "lightTheme" | dict "utterances" | merge $commentConfig -}}
       {{- $commentConfig = $utterances.darkTheme | default "github-dark" | dict "darkTheme" | dict "utterances" | merge $commentConfig -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/" rel="license external nofollow noopener noreffer">Utterances</a>.
       </noscript>
     {{- end -}}
   </div>
