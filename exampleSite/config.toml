@@ -707,7 +707,13 @@ enableEmoji = true
     # Comment config
     # 评论系统设置
     [params.page.comment]
-      enable = false
+      enable = true
+      # Artalk comment system config
+      # Artalk 评论系统设置
+      [params.page.comment.artalk]
+        enable = true
+        server = "https://yourdomain/api/"
+        sitename = "默认站点"
       # Disqus comment config (https://disqus.com/)
       # Disqus 评论系统设置 (https://disqus.com/)
       [params.page.comment.disqus]
