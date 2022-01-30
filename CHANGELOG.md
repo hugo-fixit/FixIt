@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/Lruihao/FixIt/releases -->
 
+# v0.2.13
+
+- :tada: Feat: add Artalk comment support ([#54](https://github.com/Lruihao/FixIt/issues/54))
+
 ## v0.2.12 [2022-1-27]
 
 - :tada: Feat: add PWA support

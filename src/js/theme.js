@@ -593,12 +593,17 @@ class Theme {
 
   initComment() {
     if (this.config.comment) {
+      if (this.config.comment.artalk){
+        new Artalk(this.config.comment.artalk)
+      }
       if (this.config.comment.gitalk) {
         this.config.comment.gitalk.body = decodeURI(window.location.href);
         const gitalk = new Gitalk(this.config.comment.gitalk);
         gitalk.render('gitalk');
       }
-      if (this.config.comment.valine) new Valine(this.config.comment.valine);
+      if (this.config.comment.valine) {
+        new Valine(this.config.comment.valine);
+      }
       if (this.config.comment.utterances) {
         const utterancesConfig = this.config.comment.utterances;
         const script = document.createElement('script');

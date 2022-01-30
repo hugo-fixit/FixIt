@@ -497,9 +497,21 @@ Please open the code block below to view the complete sample configuration :(far
       Skype = false
       Trello = false
       Mix = false
-    # {{< version 0.2.0 changed >}} Comment config
+    # {{< version 0.2.13 changed >}} Comment config
     [params.page.comment]
-      enable = true
+      enable = false
+      # {{< version 0.2.13 >}}
+      # {{< link "https://artalk.js.org/" Artalk >}} comment config (https://artalk.js.org/)
+      [params.page.comment.artalk]
+        enable = false
+        server = "https://yourdomain/api/"
+        site = "your site name"
+        placeholder = ""
+        noComment = ""
+        sendBtn = ""
+        editorTravel = true
+        flatMode = 'auto'
+        maxNesting = 3
       # {{< link "https://disqus.com/" Disqus >}} comment config (https://disqus.com)
       [params.page.comment.disqus]
         # {{< version 0.1.1 >}}

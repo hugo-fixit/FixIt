@@ -58,7 +58,8 @@ math:
 * :(far fa-comments fa-fw): **Facebook comments** system supported by [Facebook](https://developers.facebook.com/docs/plugins/comments/)
 * :(fas fa-comment fa-fw): **Telegram comments** system supported by [Comments](https://comments.app/)
 * :(fas fa-comment-dots fa-fw): **Commento** comment system supported by [Commento](https://commento.io/)
-* :(fas fa-comment-alt fa-fw): **Utterances** comment system supported by [Utterances](https://utteranc.es/)
+* :(far fa-comment-alt fa-fw): **Utterances** comment system supported by [Utterances](https://utteranc.es/)
+* :(far fa-comment-alt fa-fw): **Artalk** comment system supported by [Artalk](https://artalk.js.org/)
 
 #### Extended Features
 
@@ -121,3 +122,4 @@ Thanks to the authors of following resources included in the theme:
 * [cookieconsent](https://github.com/osano/cookieconsent)
 * [Watermark](https://github.com/Lruihao/watermark)
 * [pangu.js](https://github.com/vinta/pangu.js)
+* [Artalk](https://artalk.js.org/)
