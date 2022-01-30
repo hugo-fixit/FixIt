@@ -864,6 +864,9 @@ enableEmoji = true
     # watermark's fontSize. unit: rem
     # 水印字体大小，单位：rem
     fontSize = 0.85
+    # watermark's fontFamily
+    # 水印字体
+    fontFamily = 'inherit'
 
   # Busuanzi count since v0.2.12
   # 不蒜子统计 since v0.2.12

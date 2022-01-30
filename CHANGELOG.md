@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/Lruihao/FixIt/releases -->
 
+## v0.2.13
+- :sparkles: Feat: update watermark 1.0.3-RC (fontFamily support)
+- **Full Changelog:** [`v0.2.12...v0.2.13`](https://github.com/Lruihao/FixIt/compare/v0.2.12...v0.2.13)
+
 ## v0.2.12 [2022-1-27]
 
 - :tada: Feat: add PWA support

@@ -618,6 +618,8 @@ Please open the code block below to view the complete sample configuration :(far
     rotate = 15
     # watermark's fontSize. unit: rem
     fontSize = 0.85
+    # watermark's fontFamily
+    fontFamily = 'inherit'
 
   # {{< version 0.2.12 >}} Busuanzi count
   [params.ibruce]

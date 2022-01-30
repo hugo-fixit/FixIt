@@ -629,6 +629,8 @@ hugo
     rotate = 15
     # 水印字体大小，单位：rem
     fontSize = 0.85
+    # 水印字体
+    fontFamily = 'inherit'
 
   # {{< version 0.2.12 >}} 不蒜子统计
   [params.ibruce]
