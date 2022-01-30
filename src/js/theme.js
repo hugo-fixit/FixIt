@@ -594,7 +594,11 @@ class Theme {
   initComment() {
     if (this.config.comment) {
       if (this.config.comment.artalk){
-        new Artalk(this.config.comment.artalk)
+        const artalk = new Artalk(this.config.comment.artalk);
+        artalk.setDarkMode(this.isDark);
+        this.switchThemeEventSet.add(() => {
+          artalk.setDarkMode(this.isDark);
+        })
       }
       if (this.config.comment.gitalk) {
         this.config.comment.gitalk.body = decodeURI(window.location.href);

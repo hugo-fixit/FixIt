@@ -13,7 +13,7 @@
       {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
       {{- $source := $cdn.artalkJS | default "lib/artalk/Artalk.min.js" -}}
       {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-      {{- $commentConfig = dict "el" "#artalk" "server" $artalk.server "site" $artalk.site "placeholder" $artalk.placeholder "noComment" $artalk.noComment "sendBtn" $artalk.sendBtn "editorTravel" $artalk.editorTravel "flatMode" $artalk.flatMode "maxNesting" $artalk.maxNesting | dict "artalk" | merge $commentConfig -}}
+      {{- $commentConfig = dict "el" "#artalk" "pageKey" $artalk.pageKey "pageTitle" $artalk.pageTitle "server" $artalk.server "site" $artalk.site "placeholder" $artalk.placeholder "noComment" $artalk.noComment "sendBtn" $artalk.sendBtn "editorTravel" $artalk.editorTravel "flatMode" $artalk.flatMode "maxNesting" $artalk.maxNesting | dict "artalk" | merge $commentConfig -}}
       <noscript>
         Please enable JavaScript to view the comments powered by <a href="https://github.com/ArtalkJS/Artalk" rel="license external nofollow noopener noreffer">Artalk</a>.
       </noscript>

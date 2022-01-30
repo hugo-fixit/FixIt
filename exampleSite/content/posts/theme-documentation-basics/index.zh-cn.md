@@ -515,8 +515,10 @@ hugo
       # {{< link "https://artalk.js.org/" Artalk >}} 评论系统设置 (https://artalk.js.org/)
       [params.page.comment.artalk]
         enable = false
+        pageKey = ""
+        pageTitle = ""
         server = "https://yourdomain/api/"
-        site = "你的网站名称"
+        site = "默认站点"
         placeholder = ""
         noComment = ""
         sendBtn = ""

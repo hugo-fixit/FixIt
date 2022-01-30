@@ -504,8 +504,10 @@ Please open the code block below to view the complete sample configuration :(far
       # {{< link "https://artalk.js.org/" Artalk >}} comment config (https://artalk.js.org/)
       [params.page.comment.artalk]
         enable = false
+        pageKey = ""
+        pageTitle = ""
         server = "https://yourdomain/api/"
-        site = "your site name"
+        site = "默认站点"
         placeholder = ""
         noComment = ""
         sendBtn = ""
