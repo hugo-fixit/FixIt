@@ -44,7 +44,7 @@ Finally, create a new pull request at https://github.com/Lruihao/FixIt/pulls to 
 
 | event | merge |
 | :-- | :-- |
-| release | **master => RC branch:** `--rebase` |
+| release | **RC branch => master:** `--rebase` |
 | PR | **others:master => master:** `--rebase` |
 | single feature| **feature branch => RC branch:** `--merge` |
 
