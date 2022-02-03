@@ -2,21 +2,21 @@
 # - nickname: friend's name 朋友名字
 #   avatar: friend's avatar 朋友头像
 #   url: site link 站点链接
-#   discription: discription of friend/site 对朋友或其站点的说明
+#   description: description of friend/site 对朋友或其站点的说明
 
 - nickname: FixIt Source
   avatar: /images/Apple-Devices-Preview.png
   url: https://github.com/Lruihao/FixIt
-  discription: A clean, elegant but advanced blog theme for Hugo
+  description: A clean, elegant but advanced blog theme for Hugo
 - nickname: FixIt Demo
   avatar:
   url: /
-  discription: 一个简洁、优雅且高效的 Hugo 主题
+  description: 一个简洁、优雅且高效的 Hugo 主题
 - nickname: Lruihao
   avatar: https://lruihao.cn/images/avatar.jpg
   url: https://lruihao.cn
-  discription: Lruihao's Note
+  description: Lruihao's Note
 - nickname: Cell
   avatar: https://avatars.githubusercontent.com/u/33419593?v=4
   url: https://github.com/Lruihao
-  discription:  Lruihao's GitHub
+  description:  Lruihao's GitHub

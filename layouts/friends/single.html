@@ -18,7 +18,7 @@
     <script src="//at.alicdn.com/t/font_578712_g26jo2kbzd5qm2t9.js" async defer></script>
     <div class="friend-links">
       {{ range $index, $friend := .Site.Data.friends }}
-        <a class="friend-link" title="{{ $friend.discription }}" href="{{ $friend.url | safeURL }}" rel="external nofollow noopener noreferrer" target="_blank">
+        <a class="friend-link" title="{{ $friend.description }}" href="{{ $friend.url | safeURL }}" rel="external nofollow noopener noreferrer" target="_blank">
           {{ if $friend.avatar }}
             <img class="friend-avatar lazyload" src="{{ $loading.RelPermalink }}" data-src="{{ $friend.avatar }}" alt="{{ $friend.nickname }}" />
           {{ else }}

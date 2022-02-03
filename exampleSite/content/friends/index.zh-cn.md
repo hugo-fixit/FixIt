@@ -13,7 +13,7 @@ comment: false
 - nickname: 菠菜眾長
   avatar: https://lruihao.cn/images/avatar.jpg
   url: https://lruihao.cn
-  discription: 李瑞豪的博客
+  description: 李瑞豪的博客
 ```
 
 ## 友情提醒

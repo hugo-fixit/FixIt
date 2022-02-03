@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 - :tada: Feat: add Artalk comment support ([#54](https://github.com/Lruihao/FixIt/issues/54))
 - :sparkles: Feat: update watermark 1.0.3-RC (fontFamily support)
+- :pencil2: Style: fix typo discription should be: description ([#60](https://github.com/Lruihao/FixIt/issues/60))
 - **Full Changelog:** [`v0.2.12...v0.2.13`](https://github.com/Lruihao/FixIt/compare/v0.2.12...v0.2.13)
 
 ## v0.2.12 [2022-1-27]

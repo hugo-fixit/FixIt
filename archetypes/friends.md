@@ -18,7 +18,7 @@ comment: false
 - nickname: Lruihao
   avatar: https://lruihao.cn/images/avatar.jpg
   url: https://lruihao.cn
-  discription: Lruihao's Note
+  description: Lruihao's Note
 ```
 
 ## Friendly Reminder

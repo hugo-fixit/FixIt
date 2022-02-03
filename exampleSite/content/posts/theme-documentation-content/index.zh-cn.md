@@ -208,7 +208,7 @@ hugo new --kind post-bundle posts/bar/
 - nickname: 朋友名字
   avatar: 朋友头像
   url: 站点链接
-  discription: 对朋友或其站点的说明
+  description: 对朋友或其站点的说明
 ```
 
 {{< admonition tip >}}

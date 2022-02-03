@@ -34,7 +34,7 @@ Finally, create a new pull request at https://github.com/Lruihao/FixIt/pulls to 
 
 ### Branches
 
-| Branch | Discription |
+| Branch | Description |
 | :-- | :-- |
 | master | _The branch open to the public and release versions_ |
 | RC branch | _The development branch of the next version, e.g. v0.2.12-RC_ |
@@ -60,7 +60,7 @@ Finally, create a new pull request at https://github.com/Lruihao/FixIt/pulls to 
 
 #### Message
 
-| Emoji                                         | Type     | Example                                                      | Discription (No Ambiguous)                                   |
+| Emoji                                         | Type     | Example                                                      | Description (No Ambiguous)                                   |
 | :-------------------------------------------- | :------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
 | :tada:  <br>:sparkles:                        | Feat     | Feat: add {feature}                                          | new feature                                                  |
 | :truck:                                       |          | Feat: adjust/migrate {feature name}，{change details}        | For the adjustment feature, it is necessary to describe the current situation (before) and after adjustment (after) |

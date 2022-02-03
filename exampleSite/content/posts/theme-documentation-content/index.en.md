@@ -209,7 +209,7 @@ Set `type: "friends"` in the front matter and create data file named `friends.ym
 - nickname: friend's name
   avatar: friend's avatar
   url: site link
-  discription: discription of friend/site
+  description: description of friend/site
 ```
 
 {{< admonition tip >}}
