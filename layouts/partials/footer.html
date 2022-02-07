@@ -33,7 +33,9 @@
 
           {{- /* Author */ -}}
           {{- if ne .Site.Params.footer.author false -}}
-            <span class="author" itemprop="copyrightHolder">&nbsp;<a href="{{ $.Site.Author.link | default .Site.Home.RelPermalink }}" target="_blank">{{ .Site.Author.name }}</a></span>
+            <span class="author" itemprop="copyrightHolder">
+              {{ partial "plugin/link.html" (dict "Destination" ($.Site.Author.link | default .Site.Home.RelPermalink) "Content" .Site.Author.name) -}}
+            </span>
           {{- end -}}
 
           {{- /* License */ -}}

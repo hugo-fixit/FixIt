@@ -6,7 +6,7 @@
     title="{{ . }}"
   {{ end }}
   {{ if (urls.Parse .Destination).Host | or .Newtab }}
-    {{ $rel = "noopener noreffer" }}
+    {{ $rel = "external nofollow noopener noreffer" }}
     target="_blank"
   {{ end }}
   {{ if $rel | or .Rel }}
