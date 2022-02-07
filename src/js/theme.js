@@ -593,11 +593,26 @@ class Theme {
 
   initComment() {
     if (this.config.comment) {
-      if (this.config.comment.artalk){
+      if (this.config.comment.artalk) {
         const artalk = new Artalk(this.config.comment.artalk);
         artalk.setDarkMode(this.isDark);
         this.switchThemeEventSet.add(() => {
           artalk.setDarkMode(this.isDark);
+        })
+        this.config.comment.artalk.lightgallery && artalk.on('comments-loaded', () => {
+          document.querySelectorAll('.atk-comment .atk-content').forEach(($content) => {
+            const $imgs = $content.querySelectorAll('img:not([atk-emoticon]):not([atk-lightbox-loaded])');
+            $imgs.forEach(($img) => {
+              $img.setAttribute('atk-lightbox-loaded', '');
+              const $link = document.createElement('a');
+              $link.setAttribute('class', 'atk-img-link');
+              $link.setAttribute('href', $img.src);
+              $link.setAttribute('data-src', $img.src);
+              $link.append($img.cloneNode());
+              $img.replaceWith($link);
+            })
+            if ($imgs.length) lightGallery($content, { selector: '.atk-img-link' });
+          })
         })
       }
       if (this.config.comment.gitalk) {

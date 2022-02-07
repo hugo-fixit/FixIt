@@ -720,6 +720,7 @@ enableEmoji = true
         editorTravel = true
         flatMode = 'auto'
         maxNesting = 3
+        lightgallery = false
       # Disqus comment config (https://disqus.com/)
       # Disqus 评论系统设置 (https://disqus.com/)
       [params.page.comment.disqus]
