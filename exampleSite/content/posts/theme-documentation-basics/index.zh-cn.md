@@ -523,6 +523,7 @@ hugo
         editorTravel = true
         flatMode = 'auto'
         maxNesting = 3
+        lightgallery = false
       # {{< link "https://disqus.com/" Disqus >}} 评论系统设置 (https://disqus.com)
       [params.page.comment.disqus]
         # {{< version 0.1.1 >}}
