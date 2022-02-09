@@ -5,7 +5,7 @@
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.62.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/Lruihao/FixIt?style=flat-square)](https://github.com/Lruihao/FixIt/blob/master/LICENSE)
 
-[English README](https://github.com/HEIGE-PCloud/DoIt/blob/main/README.md) | 简体中文说明
+[English README](https://github.com/Lruihao/FixIt/blob/master/README.md) | 简体中文说明
 
 > [FixIt](https://github.com/Lruihao/FixIt) 是一个**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。
 

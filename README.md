@@ -5,7 +5,7 @@
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.62.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/Lruihao/FixIt?style=flat-square)](https://github.com/Lruihao/FixIt/blob/master/LICENSE)
 
-English README | [简体中文说明](https://github.com/Lruihao/FixIt/blob/main/README.zh-cn.md)
+English README | [简体中文说明](https://github.com/Lruihao/FixIt/blob/master/README.zh-cn.md)
 
 > **FixIt** is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/).
 
