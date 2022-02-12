@@ -599,7 +599,7 @@ class Theme {
         this.switchThemeEventSet.add(() => {
           artalk.setDarkMode(this.isDark);
         })
-        this.config.comment.artalk.lightgallery && artalk.on('comments-loaded', () => {
+        this.config.lightGallery && this.config.comment.artalk.lightgallery && artalk.on('comments-loaded', () => {
           document.querySelectorAll('.atk-comment .atk-content').forEach(($content) => {
             const $imgs = $content.querySelectorAll('img:not([atk-emoticon]):not([atk-lightbox-loaded])');
             $imgs.forEach(($img) => {

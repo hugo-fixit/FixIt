@@ -720,6 +720,8 @@ enableEmoji = true
         editorTravel = true
         flatMode = 'auto'
         maxNesting = 3
+        # Tip: It take effect when params.page.lightgallery is enabled.
+        # 提示: 当 params.page.lightgallery 启用时生效
         lightgallery = false
       # Disqus comment config (https://disqus.com/)
       # Disqus 评论系统设置 (https://disqus.com/)

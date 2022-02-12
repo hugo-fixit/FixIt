@@ -512,6 +512,7 @@ Please open the code block below to view the complete sample configuration :(far
         editorTravel = true
         flatMode = 'auto'
         maxNesting = 3
+        # Tip: It take effect when params.page.lightgallery is enabled.
         lightgallery = false
       # {{< link "https://disqus.com/" Disqus >}} comment config (https://disqus.com)
       [params.page.comment.disqus]
