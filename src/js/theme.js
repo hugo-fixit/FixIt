@@ -652,6 +652,64 @@ class Theme {
     if (this.config.cookieconsent) cookieconsent.initialise(this.config.cookieconsent);
   }
 
+  getSiteTime() {
+    let now = new Date();
+    let run = new Date(this.config.ibruce.siteTime);
+    let runTime = (now - run) / 1000,
+      days = Math.floor(runTime / 60 / 60 / 24),
+      hours = Math.floor(runTime / 60 / 60 - (24 * days)),
+      minutes = Math.floor(runTime / 60 - (24 * 60 * days) - (60 * hours)),
+      seconds = Math.floor((now - run) / 1000 - (24 * 60 * 60 * days) - (60 * 60 * hours) - (60 * minutes));
+    document.querySelector(".run-times").innerHTML = `${days},${String(hours).padStart(2,0)}:${String(minutes).padStart(2,0)}:${String(seconds).padStart(2,0)}`;
+  }
+
+  initSiteTime() {
+    if(this.config.ibruce.enable && this.config.ibruce.siteTime){
+      this.siteTime = setInterval(this.getSiteTime, 500);
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          return clearInterval(this.siteTime);
+        }
+        this.siteTime = setInterval(this.getSiteTime, 500);
+      });
+    }
+  }
+
+  initServiceWorker() {
+    if (this.config.enablePWA && 'serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/service-worker.min.js', { scope: '/' })
+        .then(function (registration) {
+          // console.log('Service Worker Registered');
+        })
+        .catch(function (error) {
+          console.error('error: ', error);
+        });
+      navigator.serviceWorker.ready.then(function (registration) {
+        // console.log('Service Worker Ready');
+      });
+    }
+  }
+
+  initWatermark() {
+    this.config.watermark.enable && new Watermark({
+      content: this.config.watermark.content || '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> FixIt Theme',
+      appendTo:this.config.watermark.appendTo || '.wrapper>.main',
+      opacity: this.config.watermark.opacity,
+      width: this.config.watermark.width,
+      height: this.config.watermark.height,
+      rowSpacing: this.config.watermark.rowSpacing,
+      colSpacing: this.config.watermark.colSpacing,
+      rotate: this.config.watermark.rotate,
+      fontSize: this.config.watermark.fontSize,
+      fontFamily: this.config.watermark.fontFamily
+    });
+  }
+
+  initPangu() {
+    this.config.enablePangu && pangu.autoSpacingPage();
+  }
+
   onScroll() {
     const $headers = [];
     if (document.body.getAttribute('header-desktop') === 'auto') $headers.push(document.getElementById('header-desktop'));
@@ -736,6 +794,10 @@ class Theme {
       this.initTypeit();
       this.initMapbox();
       this.initCookieconsent();
+      this.initSiteTime();
+      this.initServiceWorker();
+      this.initWatermark();
+      this.initPangu();
     } catch (err) {
       console.error(err);
     }
