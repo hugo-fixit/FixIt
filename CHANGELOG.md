@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## v0.2.13
 
 - :tada: Feat: add Artalk comment support ([#54](https://github.com/Lruihao/FixIt/issues/54))
+- :sparkles: Style: add media style for print view ([#61](https://github.com/Lruihao/FixIt/issues/61))
 - :sparkles: Feat: update watermark 1.0.3-RC (fontFamily support)
 - :pencil2: Style: fix typo discription should be: description ([#60](https://github.com/Lruihao/FixIt/issues/60))
 - :fire: Feat: remove shortcode cardlink

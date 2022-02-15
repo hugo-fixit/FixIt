@@ -81,3 +81,43 @@
     }
   }
 }
+
+@media only print {
+  @page {
+    size: A4 portrait;
+    margin: 1.27cm;
+    page-break-after: auto;
+  }
+
+  .page {
+    width: 100%;
+    padding-top: 0!important;
+
+    .single-title,
+    .single-subtitle,
+    .post-meta {
+      text-align: center;
+    }
+
+    h1:not(.single-title),
+    .page-break-before {
+      page-break-before: always;
+    }
+  
+    .page-break-after {
+      page-break-after: always;
+    }
+  }
+
+  header,
+  footer .footer-line:not(.powered):not(.copyright),
+  #toc-auto,
+  .post-info-share,
+  .post-info-more section:last-child,
+  .post-nav,
+  #fixed-buttons,
+  #comments {
+    display: none!important;
+  }
+}
+

@@ -3,14 +3,14 @@
     <div class="footer-container">
       {{- /* Custom Content */ -}}
       {{- with .Site.Params.footer.custom -}}
-        <div class="footer-line">
+        <div class="footer-line custom">
           {{- safeHTML . -}}
         </div>
       {{- end -}}
 
       {{- /* Hugo and FixIt */ -}}
       {{- if ne .Site.Params.footer.hugo false -}}
-        <div class="footer-line">
+        <div class="footer-line powered">
           {{- $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer" title="Hugo %v">Hugo</a>` hugo.Version -}}
           {{- $theme := .Scratch.Get "version" | printf `<a href="https://github.com/Lruihao/FixIt" target="_blank" rel="external nofollow noopener noreffer" title="FixIt %v"><i class="fa-stack fa-xs logo-icon"><i class="fas fa-ban fa-stack-2x"></i><i class="fas fa-bug fa-stack-1x"></i></i> FixIt</a>` -}}
           {{- dict "Hugo" $hugo "Theme" $theme | T "poweredBySome" | safeHTML }}
@@ -18,7 +18,7 @@
       {{- end -}}
 
       {{- if .Site.Params.footer.copyright | or .Site.Params.footer.author | or .Site.Params.footer.license -}}
-        <div class="footer-line">
+        <div class="footer-line copyright">
           {{- /* Copyright year */ -}}
           {{- if ne .Site.Params.footer.copyright false -}}
             <i class="far fa-copyright fa-fw"></i>
@@ -50,7 +50,7 @@
 
       {{- /* 不蒜子 */ -}}
       {{- if eq .Site.Params.ibruce.enable true -}}
-        <div class="footer-line">
+        <div class="footer-line ibruce">
           <span id="busuanzi_container_site_uv" title={{ T "siteUV" }}
             ><i class="far fa-user"></i>
             <span id="busuanzi_value_site_uv"
