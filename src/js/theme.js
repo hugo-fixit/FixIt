@@ -693,7 +693,7 @@ class Theme {
 
   initWatermark() {
     this.config.watermark.enable && new Watermark({
-      content: this.config.watermark.content || '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-bug fa-stack-1x"></i><i class="fas fa-ban fa-stack-2x"></i></i> FixIt Theme',
+      content: this.config.watermark.content || '<img class="fixit-icon" src="/svg/fixit.svg" alt="FixIt logo" /> FixIt Theme',
       appendTo:this.config.watermark.appendTo || '.wrapper>.main',
       opacity: this.config.watermark.opacity,
       width: this.config.watermark.width,

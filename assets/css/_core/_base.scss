@@ -60,11 +60,3 @@ body {
 img {
   @include object-fit(contain);
 }
-
-i.logo-icon{
-  width: 2em;
-  
-  .fa-ban {
-    color: $global-logo-icon-color;
-  }
-}

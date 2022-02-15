@@ -18,7 +18,7 @@ math:
 [![GitHub forks](https://img.shields.io/github/forks/Lruihao/FixIt?style=social)](https://github.com/Lruihao/FixIt/fork)
 {{< /style >}}
 
-> [<i class="fa-stack fa-xs logo-icon"><i class="fas fa-ban fa-stack-2x"></i><i class="fas fa-bug fa-stack-1x"></i></i> FixIt](https://github.com/Lruihao/FixIt) is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/) developed by [Lruihao](https://lruihao.cn).
+> [<img class="fixit-icon" src="/svg/fixit.svg" alt="FixIt logo" /> FixIt](https://github.com/Lruihao/FixIt) is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/) developed by [Lruihao](https://lruihao.cn).
 >
 > It is based on the original [LoveIt Theme](https://github.com/dillonzq/LoveIt), [LeaveIt Theme](https://github.com/liuzc/LeaveIt) and [KeepIt Theme](https://github.com/Fastbyte01/KeepIt).
 

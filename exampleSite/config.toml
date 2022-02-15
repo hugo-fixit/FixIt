@@ -456,11 +456,11 @@ enableEmoji = true
       [languages.zh-cn.params.watermark]
         enable = true
         # 水印内容 (允许 HTML 格式)
-        content = '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-ban fa-stack-2x"></i><i class="fas fa-bug fa-stack-1x"></i></i> FixIt 主题'
+        content = '<img class="fixit-icon" src="/svg/fixit.svg" alt="FixIt logo" /> FixIt 主题'
         # 水印透明度
         opacity = 0.02
         # 单水印高度 单位：px
-        height = 23
+        height = 21
 
 [params]
   # FixIt theme version
@@ -499,13 +499,13 @@ enableEmoji = true
     [params.header.title]
       # URL of the LOGO
       # LOGO 的 URL
-      logo = ""
+      logo = "/svg/fixit.svg"
       # title name
       # 标题名称
       name = "FixIt"
       # you can add extra information before the name (HTML format is supported), such as icons
       # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
-      pre = '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-ban fa-stack-2x"></i><i class="fas fa-bug fa-stack-1x"></i></i>'
+      pre = ""
       # you can add extra information after the name (HTML format is supported), such as icons
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
       post = ""
@@ -854,7 +854,7 @@ enableEmoji = true
     enable = true
     # watermark's text (HTML format is supported)
     # 水印内容 (允许 HTML 格式)
-    content = '<i class="fa-stack fa-xs logo-icon"><i class="fas fa-ban fa-stack-2x"></i><i class="fas fa-bug fa-stack-1x"></i></i> FixIt Theme'
+    content = '<img class="fixit-icon" src="/svg/fixit.svg" alt="FixIt logo" /> FixIt Theme'
     # watermark's transparency
     # 水印透明度
     opacity = 0.02
@@ -866,7 +866,7 @@ enableEmoji = true
     width = 150
     # watermark's height. unit: px
     # 单水印高度 单位：px
-    height = 23
+    height = 21
     # row spacing of watermarks. unit: px
     # 水印行间距 单位：px
     rowSpacing = 60
