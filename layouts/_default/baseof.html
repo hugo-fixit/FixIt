@@ -26,7 +26,8 @@
     <div class="wrapper">
       {{- partial "header.html" . -}}
       <main class="main">
-        <div class="container">
+        {{- $pageStyle := (.Scratch.Get "params").pageStyle | default "normal" -}}
+        <div class="container" page-style="{{ $pageStyle }}">
           {{- block "content" . }}{{ end -}}
         </div>
       </main>

@@ -9,6 +9,9 @@
     flex: 1 0 auto;
 
     .container {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: center; 
       padding: 0 1rem;
     }
   }

@@ -13,6 +13,10 @@ themesDir = "../.."
 # 网站标题
 title = "FixIt"
 
+# Ignore errors
+# 忽略错误
+ignoreErrors = ["error-remote-getjson"]
+
 # whether to use robots.txt
 # 是否使用 robots.txt
 enableRobotsTXT = true
@@ -610,6 +614,9 @@ enableEmoji = true
     # whether to show the full text content in RSS
     # 是否在 RSS 中显示全文内容
     rssFullText = false
+    # Page style ("normal", "wide")
+    # 页面样式 ("normal", "wide")
+    pageStyle = "wide"
     # Table of the contents config
     # 目录配置
     [params.page.toc]
