@@ -51,24 +51,27 @@
   display: block;
   position: sticky;
   top: $header-height + 1rem;
-  height: 100%;
-  padding-left: .8rem;
-  padding-right: .8rem;
-  margin: 1rem;
-  border-left: 4px solid $global-border-color;
+  padding-left: 1rem;
+  padding-right: 1rem;
   @include overflow-wrap(break-word);
   box-sizing: border-box;
-  left: 0;
   visibility: hidden;
 
   @include blur;
 
-  [theme=dark] & {
-    border-left-color: $global-border-color-dark;
-  }
-
   .toc-title {
     margin: .8rem 0;
+
+    &::before {
+      content: "|";
+      font-weight: bolder;
+      margin-right: 0.5rem;
+      color: $global-border-color;
+
+      [theme=dark] & {
+        color: $global-border-color-dark;
+      }
+    }
   }
 
   .toc-content {

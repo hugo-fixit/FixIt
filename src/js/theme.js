@@ -395,10 +395,12 @@ class Theme {
   }
 
   initToc() {
-    const $tocCore = document.getElementById('TableOfContents');
-    if ($tocCore === null){
+    const $toc = document.getElementById('toc-auto');
+    if ($toc === null){
       return;
     }
+    document.querySelector('.container').className = 'container-reverse';
+    const $tocCore = document.getElementById('TableOfContents');
     if (document.getElementById('toc-static').getAttribute('kept') === 'true' || this.util.isTocStatic()) {
       const $tocContentStatic = document.getElementById('toc-content-static');
       if ($tocCore.parentElement !== $tocContentStatic) {
@@ -412,7 +414,6 @@ class Theme {
         $tocCore.parentElement.removeChild($tocCore);
         $tocContentAuto.appendChild($tocCore);
       }
-      const $toc = document.getElementById('toc-auto');
       const $page = document.getElementsByClassName('page')[0];
       const rect = $page.getBoundingClientRect();
       // $toc.style.left = `${rect.left + rect.width + 20}px`;
@@ -761,7 +762,7 @@ class Theme {
         this._resizeTimeout = window.setTimeout(() => {
           this._resizeTimeout = null;
           for (let event of this.resizeEventSet) event();
-          this.initToc();
+          // this.initToc(); // TODO delete
           this.initMermaid();
           this.initSearch();
         }, 100);

@@ -3,12 +3,16 @@
     width: 60%;
 
     [page-style=wide] & {
-      width: 70%;
+      width: 64%;
     }
   }
   
   #toc-auto {
-    width: 20%!important;
+    width: 20%;
+
+    [page-style=wide] & {
+      width: 18%;
+    }
   }
 }
 
@@ -22,17 +26,29 @@
   }
 
   #toc-auto {
-    width: 20%!important;
+    width: 22%;
+
+    [page-style=wide] & {
+      width: 20%;
+    }
   }
 }
 
 @media only screen and (max-width: 1200px) {
   .page {
-    width: 52%!important;
+    width: 52%;
+
+    [page-style=wide] & {
+      width: 56%;
+    }
   }
 
   #toc-auto {
-    width: 20%!important;
+    width: 24%;
+
+    [page-style=wide] & {
+      width: 22%;
+    }
   }
 
   #header-desktop .header-wrapper {
