@@ -696,8 +696,15 @@ Please open the code block below to view the complete sample configuration :(far
     polyfill = false
     # whether to use object-fit-images to be compatible with older browsers
     objectFit = false
+  
+  # {{< version 0.2.12 >}} Custom JS at last
+  # "_custom.js" located in "themes/FixIt/assets/js/"
+  # you can store your custom JS file in the same path under your project:
+  # "assets/js/_custom.js"
+  [params.customJS]
+    enable = true
 
-# Markup related config in Hugo
+# Markup related configuration in Hugo
 [markup]
   # {{< link "https://gohugo.io/content-management/syntax-highlighting" "Syntax Highlighting" >}} (https://gohugo.io/content-management/syntax-highlighting)
   [markup.highlight]

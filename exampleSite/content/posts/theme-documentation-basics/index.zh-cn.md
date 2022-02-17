@@ -707,6 +707,13 @@ hugo
     polyfill = false
     # 是否使用 object-fit-images 来兼容旧式浏览器
     objectFit = false
+  
+  # {{< version 0.2.12 >}} 页面最后添加自定义 JS
+  # "_custom.js" 位于 "themes/FixIt/assets/js" 目录
+  # 可以在你的项目下相同路径存放你自己的自定义 JS 文件：
+  # "assets/js/_custom.js"
+  [params.customJS]
+    enable = true
 
 # Hugo 解析文档的配置
 [markup]

@@ -1,1 +1,0 @@
-const CustomJS=new function(){this.hello=(()=>(console.log("Hello CustomJS!"),this)),this.init=(()=>(this.hello(),this))};CustomJS.init(),document.addEventListener("DOMContentLoaded",()=>{console.log("DOM content loaded!")});
