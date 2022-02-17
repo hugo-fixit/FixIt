@@ -1,26 +1,38 @@
 @media only screen and (min-width: 1441px) {
   .page {
-    width: 66%;
+    width: 60%;
 
     [page-style=wide] & {
       width: 70%;
     }
   }
+  
+  #toc-auto {
+    width: 20%!important;
+  }
 }
 
 @media only screen and (max-width: 1440px) {
   .page {
-    width: 60%;
+    width: 56%;
 
     [page-style=wide] & {
-      width: 66%;
+      width: 60%;
     }
+  }
+
+  #toc-auto {
+    width: 20%!important;
   }
 }
 
 @media only screen and (max-width: 1200px) {
   .page {
-    width: 56%!important;
+    width: 52%!important;
+  }
+
+  #toc-auto {
+    width: 20%!important;
   }
 
   #header-desktop .header-wrapper {
