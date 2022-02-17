@@ -255,9 +255,9 @@ Please open the code block below to view the complete sample configuration :(far
 
   # Header config
   [params.header]
-    # desktop header mode ("fixed", "normal", "auto")
-    desktopMode = "fixed"
-    # mobile header mode ("fixed", "normal", "auto")
+    # desktop header mode ("sticky", "normal", "auto")
+    desktopMode = "sticky"
+    # mobile header mode ("sticky", "normal", "auto")
     mobileMode = "auto"
     # {{< version 0.2.0 >}} Header title config
     [params.header.title]

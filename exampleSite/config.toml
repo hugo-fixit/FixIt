@@ -492,11 +492,11 @@ enableEmoji = true
   # Header config
   # 页面头部导航栏配置
   [params.header]
-    # desktop header mode ("fixed", "normal", "auto")
-    # 桌面端导航栏模式 ("fixed", "normal", "auto")
-    desktopMode = "fixed"
-    # mobile header mode ("fixed", "normal", "auto")
-    # 移动端导航栏模式 ("fixed", "normal", "auto")
+    # desktop header mode ("sticky", "normal", "auto")
+    # 桌面端导航栏模式 ("sticky", "normal", "auto")
+    desktopMode = "sticky"
+    # mobile header mode ("sticky", "normal", "auto")
+    # 移动端导航栏模式 ("sticky", "normal", "auto")
     mobileMode = "auto"
     # Header title config
     # 页面头部导航栏标题配置

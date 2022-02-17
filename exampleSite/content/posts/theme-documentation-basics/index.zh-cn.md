@@ -258,9 +258,9 @@ hugo
 
   # 页面头部导航栏配置
   [params.header]
-    # 桌面端导航栏模式 ("fixed", "normal", "auto")
-    desktopMode = "fixed"
-    # 移动端导航栏模式 ("fixed", "normal", "auto")
+    # 桌面端导航栏模式 ("sticky", "normal", "auto")
+    desktopMode = "sticky"
+    # 移动端导航栏模式 ("sticky", "normal", "auto")
     mobileMode = "auto"
     # {{< version 0.2.0 >}} 页面头部导航栏标题配置
     [params.header.title]

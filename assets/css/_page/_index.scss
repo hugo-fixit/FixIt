@@ -1,13 +1,5 @@
 .page {
   position: relative;
-
-  [header-desktop] & {
-    padding-top: $header-height;
-  }
-
-  [header-desktop=normal] & {
-    padding-top: 0;
-  }
   
   .content {
     [id] {

@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## v0.2.13
 
+- :tada: Refactor: page layout ([#65](https://github.com/Lruihao/FixIt/issues/65))
 - :tada: Feat: add Artalk comment support ([#54](https://github.com/Lruihao/FixIt/issues/54))
 - :sparkles: Style: add media style for print view ([#61](https://github.com/Lruihao/FixIt/issues/61))
 - :sparkles: Feat: add pageStyle option ([#62](https://github.com/Lruihao/FixIt/issues/62))
