@@ -694,15 +694,15 @@ class Theme {
   initWatermark() {
     this.config.watermark.enable && new Watermark({
       content: this.config.watermark.content || '<img class="fixit-icon" src="/svg/fixit.svg" alt="FixIt logo" /> FixIt Theme',
-      appendTo:this.config.watermark.appendTo || '.wrapper>.main',
+      appendTo:this.config.watermark.appendto || '.wrapper>.main',
       opacity: this.config.watermark.opacity,
       width: this.config.watermark.width,
       height: this.config.watermark.height,
-      rowSpacing: this.config.watermark.rowSpacing,
-      colSpacing: this.config.watermark.colSpacing,
+      rowSpacing: this.config.watermark.rowspacing,
+      colSpacing: this.config.watermark.colspacing,
       rotate: this.config.watermark.rotate,
-      fontSize: this.config.watermark.fontSize,
-      fontFamily: this.config.watermark.fontFamily
+      fontSize: this.config.watermark.fontsize,
+      fontFamily: this.config.watermark.fontfamily
     });
   }
 

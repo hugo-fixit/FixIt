@@ -177,6 +177,7 @@
 {{- if eq .Site.Params.watermark.enable true -}}
   {{- $source := "lib/watermark/watermark.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+  {{- /* Hugo bug: case insensitive for `.Site.Params` */ -}}
   {{- $config = dict "watermark" .Site.Params.watermark | merge $config -}}
 {{- end -}}
 
