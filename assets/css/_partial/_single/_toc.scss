@@ -50,7 +50,7 @@
 #toc-auto {
   display: block;
   position: sticky;
-  top: $header-height + 1rem;
+  top: $header-height + 1rem; // TODO calculate top
   padding-left: 1rem;
   padding-right: 1rem;
   @include overflow-wrap(break-word);

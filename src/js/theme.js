@@ -394,12 +394,12 @@ class Theme {
     }
   }
 
+  // TODO review
   initToc() {
     const $toc = document.getElementById('toc-auto');
     if ($toc === null){
       return;
     }
-    document.querySelector('.container').className = 'container-reverse';
     const $tocCore = document.getElementById('TableOfContents');
     if (document.getElementById('toc-static').getAttribute('kept') === 'true' || this.util.isTocStatic()) {
       const $tocContentStatic = document.getElementById('toc-content-static');
@@ -414,8 +414,8 @@ class Theme {
         $tocCore.parentElement.removeChild($tocCore);
         $tocContentAuto.appendChild($tocCore);
       }
-      const $page = document.getElementsByClassName('page')[0];
-      const rect = $page.getBoundingClientRect();
+      // const $page = document.getElementsByClassName('page')[0];
+      // const rect = $page.getBoundingClientRect();
       // $toc.style.left = `${rect.left + rect.width + 20}px`;
       // $toc.style.maxWidth = `${$page.getBoundingClientRect().left - 20}px`;
       $toc.style.visibility = 'visible';
@@ -428,9 +428,9 @@ class Theme {
       const minTocTop = $toc.offsetTop;
       const minScrollTop = minTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
       this._tocOnScroll = this._tocOnScroll || (() => {
-        const footerTop = document.getElementById('post-footer').offsetTop;
-        const maxTocTop = footerTop - $toc.getBoundingClientRect().height;
-        const maxScrollTop = maxTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
+        // const footerTop = document.getElementById('post-footer').offsetTop;
+        // const maxTocTop = footerTop - $toc.getBoundingClientRect().height;
+        // const maxScrollTop = maxTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
         // if (this.newScrollTop < minScrollTop) {
         //   $toc.style.position = 'absolute';
         //   $toc.style.top = `${minTocTop}px`;
@@ -695,7 +695,7 @@ class Theme {
   initWatermark() {
     this.config.watermark.enable && new Watermark({
       content: this.config.watermark.content || '<img class="fixit-icon" src="/svg/fixit.svg" alt="FixIt logo" /> FixIt Theme',
-      appendTo:this.config.watermark.appendTo || '.wrapper>.main',
+      appendTo: this.config.watermark.appendTo || '.wrapper>main',
       opacity: this.config.watermark.opacity,
       width: this.config.watermark.width,
       height: this.config.watermark.height,
@@ -762,7 +762,6 @@ class Theme {
         this._resizeTimeout = window.setTimeout(() => {
           this._resizeTimeout = null;
           for (let event of this.resizeEventSet) event();
-          // this.initToc(); // TODO delete
           this.initMermaid();
           this.initSearch();
         }, 100);

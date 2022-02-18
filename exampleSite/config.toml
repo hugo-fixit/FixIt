@@ -614,8 +614,8 @@ enableEmoji = true
     # whether to show the full text content in RSS
     # 是否在 RSS 中显示全文内容
     rssFullText = false
-    # Page style ("normal", "wide")
-    # 页面样式 ("normal", "wide")
+    # Page style ("normal", "wide", ...) since v0.2.13
+    # 页面样式 ("normal", "wide", ...) since v0.2.13
     pageStyle = "wide"
     # Table of the contents config
     # 目录配置
@@ -628,7 +628,10 @@ enableEmoji = true
       keepStatic = false
       # whether to make the table of the contents in the sidebar automatically collapsed
       # 是否使侧边目录自动折叠展开
-      auto = false
+      auto = true
+      # position of TOC ("left", "right") since v0.2.13
+      # 目录位置 ("left", "right") since v0.2.13
+      position = "right"
     # Code config
     # 代码配置
     [params.page.code]
@@ -867,7 +870,7 @@ enableEmoji = true
     opacity = 0.02
     # parent of watermark's container
     # 水印父节点
-    appendTo = '.wrapper>.main'
+    appendTo = '.wrapper>main'
     # watermark's width. unit: px
     # 单水印宽度 单位：px
     width = 150

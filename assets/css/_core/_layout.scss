@@ -8,20 +8,20 @@
   main {
     flex: 1 0 auto;
 
-    .container,
-    .container-reverse {
+    aside:first-child {
+      order: 2;
+    }
+
+    &.container {
       display: flex;
       align-items: flex-start;
+      justify-content: center;
       padding: 0 1rem;
     }
 
-    .container {
-      justify-content: center;
-    }
-
-    .container-reverse {
+    &.container-reverse {
+      @extend .container;
       flex-direction: row-reverse;
-      justify-content: flex-start;
     }
   }
 }

@@ -7,7 +7,7 @@
     }
   }
   
-  #toc-auto {
+  aside {
     width: 20%;
 
     [page-style=wide] & {
@@ -25,7 +25,7 @@
     }
   }
 
-  #toc-auto {
+  aside {
     width: 22%;
 
     [page-style=wide] & {
@@ -43,7 +43,7 @@
     }
   }
 
-  #toc-auto {
+  aside {
     width: 24%;
 
     [page-style=wide] & {
@@ -61,8 +61,8 @@
 }
 
 @media only screen and (max-width: 960px) {
-  #toc-auto {
-    display: none;
+  aside {
+    display: none!important;
   }
 
   #toc-static {
@@ -93,14 +93,6 @@
 
   .page {
     width: 100%!important;
-
-    [header-mobile] & {
-      padding-top: $header-height;
-    }
-
-    [header-mobile=normal] & {
-      padding-top: 0;
-    }
 
     .content {
       [id] {
@@ -150,6 +142,7 @@
     }
   }
 
+  // TODO add common class for all elements
   header,
   footer .footer-line:not(.powered):not(.copyright),
   #toc-auto,

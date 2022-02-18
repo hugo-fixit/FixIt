@@ -25,11 +25,9 @@
     {{- /* Body wrapper */ -}}
     <div class="wrapper">
       {{- partial "header.html" . -}}
-      <main class="main">
-        {{- $pageStyle := (.Scratch.Get "params").pageStyle | default "normal" -}}
-        <div class="container" page-style="{{ $pageStyle }}">
-          {{- block "content" . }}{{ end -}}
-        </div>
+      {{- $toc := .Scratch.Get "toc" -}}
+      <main class="container{{ if (eq $toc.enable true) | and (eq $toc.position `left`) }}-reverse{{ end }}" page-style="{{ (.Scratch.Get `params`).pageStyle | default `normal` }}">
+        {{- block "content" . }}{{ end -}}
       </main>
       {{- partial "footer.html" . -}}
     </div>

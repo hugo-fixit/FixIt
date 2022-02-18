@@ -2,22 +2,20 @@
 
 {{- define "content" -}}
   {{- $params := .Scratch.Get "params" -}}
+  {{- $toc := .Scratch.Get "toc" -}}
 
-  {{- $toc := $params.toc -}}
-  {{- if eq $toc true -}}
-    {{- $toc = .Site.Params.page.toc | default dict -}}
-  {{- else if eq $toc false -}}
-    {{- $toc = dict "enable" false -}}
-  {{- end -}}
-
-  {{- /* Auto TOC */ -}}
-  {{- $tocEmpty := eq .TableOfContents `<nav id="TableOfContents"></nav>` -}}
-  {{- if (ne $toc.enable false) | and (ne $tocEmpty true) -}}
-    <div class="toc" id="toc-auto">
+  <aside class="toc" id="toc-auto">
+    {{- /* Auto TOC */ -}}
+    {{- $tocEmpty := eq .TableOfContents `<nav id="TableOfContents"></nav>` -}}
+    {{- if (ne $toc.enable false) | and (ne $tocEmpty true) -}}
       <h2 class="toc-title">{{ T "contents" }}</h2>
       <div class="toc-content{{ if eq $toc.auto false }} always-active{{ end }}" id="toc-content-auto"></div>
-    </div>
-  {{- end -}}
+    {{- end -}}
+  </aside>
+
+  <aside class="aside-custom">
+    <!-- put aside for later use -->
+  </aside>
 
   <article class="page single">
     {{- /* Title */ -}}

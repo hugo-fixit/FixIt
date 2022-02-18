@@ -11,6 +11,12 @@
 {{- end -}}
 
 {{- $params := .Params | merge .Site.Params.page -}}
+{{- $toc := $params.toc -}}
+{{- if eq $toc true -}}
+  {{- $toc = .Site.Params.page.toc | default dict -}}
+{{- else if eq $toc false -}}
+  {{- $toc = dict "enable" false -}}
+{{- end -}}
 
 {{- if eq hugo.Environment "production" -}}
   {{- $cdn := .Site.Params.cdn -}}
@@ -36,6 +42,7 @@
 {{- end -}}
 
 {{- .Scratch.Set "params" $params -}}
+{{- .Scratch.Set "toc" $toc -}}
 {{- .Scratch.Set "this" dict -}}
 
 {{- partial "plugin/compatibility.html" . -}}
