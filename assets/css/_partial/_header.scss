@@ -149,7 +149,8 @@ header {
 
 #header-desktop {
   display: block;
-  position: fixed;
+  position: sticky;
+  top: 0;
   height: $header-height;
   line-height: $header-height;
 
@@ -214,7 +215,8 @@ header {
 
 #header-mobile {
   display: none;
-  position: fixed;
+  position: sticky;
+  top: 0;
   height: $header-height;
   line-height: $header-height;
 

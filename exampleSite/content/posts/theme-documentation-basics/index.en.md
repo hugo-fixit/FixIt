@@ -255,9 +255,9 @@ Please open the code block below to view the complete sample configuration :(far
 
   # Header config
   [params.header]
-    # desktop header mode ("fixed", "normal", "auto")
-    desktopMode = "fixed"
-    # mobile header mode ("fixed", "normal", "auto")
+    # desktop header mode ("sticky", "normal", "auto")
+    desktopMode = "sticky"
+    # mobile header mode ("sticky", "normal", "auto")
     mobileMode = "auto"
     # {{< version 0.2.0 >}} Header title config
     [params.header.title]
@@ -424,6 +424,8 @@ Please open the code block below to view the complete sample configuration :(far
     linkToMarkdown = true
     # {{< version 0.2.4 >}} whether to show the full text content in RSS
     rssFullText = false
+    # {{< version 0.2.13 >}} Page style ("normal", "wide", ...)
+    pageStyle = "normal"
     # {{< version 0.2.0 >}} Table of the contents config
     [params.page.toc]
       # whether to enable the table of the contents
@@ -432,6 +434,8 @@ Please open the code block below to view the complete sample configuration :(far
       keepStatic = true
       # whether to make the table of the contents in the sidebar automatically collapsed
       auto = true
+      # {{< version 0.2.13 >}} position of TOC ("left", "right")
+      position = "right"
     # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} mathematical formulas (https://katex.org)
     [params.page.math]
       enable = true
@@ -619,7 +623,7 @@ Please open the code block below to view the complete sample configuration :(far
     # watermark's transparency
     opacity = 0.1
     # parent of watermark's container
-    appendTo = '.wrapper>.main'
+    appendTo = '.wrapper>main'
     # watermark's width. unit: px
     width = 150
     # watermark's height. unit: px

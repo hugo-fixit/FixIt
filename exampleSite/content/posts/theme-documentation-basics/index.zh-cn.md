@@ -258,9 +258,9 @@ hugo
 
   # 页面头部导航栏配置
   [params.header]
-    # 桌面端导航栏模式 ("fixed", "normal", "auto")
-    desktopMode = "fixed"
-    # 移动端导航栏模式 ("fixed", "normal", "auto")
+    # 桌面端导航栏模式 ("sticky", "normal", "auto")
+    desktopMode = "sticky"
+    # 移动端导航栏模式 ("sticky", "normal", "auto")
     mobileMode = "auto"
     # {{< version 0.2.0 >}} 页面头部导航栏标题配置
     [params.header.title]
@@ -435,6 +435,8 @@ hugo
     linkToMarkdown = true
     # {{< version 0.2.4 >}} 是否在 RSS 中显示全文内容
     rssFullText = false
+    # {{< version 0.2.13 >}} 页面样式 ("normal", "wide", ...)
+    pageStyle = "normal"
     # {{< version 0.2.0 >}} 目录配置
     [params.page.toc]
       # 是否使用目录
@@ -443,6 +445,8 @@ hugo
       keepStatic = true
       # 是否使侧边目录自动折叠展开
       auto = true
+      # {{< version 0.2.13 >}} 目录位置 ("left", "right")
+      position = "right"
     # {{< version 0.2.0 >}} 代码配置
     [params.page.code]
       # 是否显示代码块的复制按钮
@@ -630,7 +634,7 @@ hugo
     # 水印透明度
     opacity = 0.1
     # 水印父节点
-    appendTo = '.wrapper>.main'
+    appendTo = '.wrapper>main'
     # 单水印宽度 单位：px
     width = 150
     # 单水印高度 单位：px
