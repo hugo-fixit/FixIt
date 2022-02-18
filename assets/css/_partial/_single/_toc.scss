@@ -50,7 +50,7 @@
 #toc-auto {
   display: block;
   position: sticky;
-  top: $header-height + 1rem; // TODO calculate top
+  top: $header-height + .5rem;
   padding-left: 1rem;
   padding-right: 1rem;
   @include overflow-wrap(break-word);
@@ -60,7 +60,7 @@
   @include blur;
 
   .toc-title {
-    margin: .8rem 0;
+    margin: .5rem 0;
 
     &::before {
       content: "|";

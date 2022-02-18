@@ -394,7 +394,6 @@ class Theme {
     }
   }
 
-  // TODO review
   initToc() {
     const $toc = document.getElementById('toc-auto');
     if ($toc === null){
@@ -414,34 +413,15 @@ class Theme {
         $tocCore.parentElement.removeChild($tocCore);
         $tocContentAuto.appendChild($tocCore);
       }
-      // const $page = document.getElementsByClassName('page')[0];
-      // const rect = $page.getBoundingClientRect();
-      // $toc.style.left = `${rect.left + rect.width + 20}px`;
-      // $toc.style.maxWidth = `${$page.getBoundingClientRect().left - 20}px`;
       $toc.style.visibility = 'visible';
+      $toc.style.marginTop = document.querySelector('.single-title').clientHeight + document.querySelector('.post-meta').clientHeight + 'px';
+      $toc.style.marginBottom = document.getElementById('post-footer').clientHeight + 'px';
       const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
       const $tocLiElements = $tocCore.getElementsByTagName('li');
       const $headerLinkElements = document.getElementsByClassName('header-link');
       const headerIsFixed = document.body.getAttribute('header-desktop') !== 'normal';
       const headerHeight = document.getElementById('header-desktop').offsetHeight;
-      const TOP_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
-      const minTocTop = $toc.offsetTop;
-      const minScrollTop = minTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
       this._tocOnScroll = this._tocOnScroll || (() => {
-        // const footerTop = document.getElementById('post-footer').offsetTop;
-        // const maxTocTop = footerTop - $toc.getBoundingClientRect().height;
-        // const maxScrollTop = maxTocTop - TOP_SPACING + (headerIsFixed ? 0 : headerHeight);
-        // if (this.newScrollTop < minScrollTop) {
-        //   $toc.style.position = 'absolute';
-        //   $toc.style.top = `${minTocTop}px`;
-        // } else if (this.newScrollTop > maxScrollTop) {
-        //   $toc.style.position = 'absolute';
-        //   $toc.style.top = `${maxTocTop}px`;
-        // } else {
-        //   $toc.style.position = 'fixed';
-        //   $toc.style.top = `${TOP_SPACING}px`;
-        // }
-
         this.util.forEach($tocLinkElements, $tocLink => { $tocLink.classList.remove('active'); });
         this.util.forEach($tocLiElements, $tocLi => { $tocLi.classList.remove('has-active'); });
         const INDEX_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
