@@ -493,17 +493,88 @@ bilibili:
   Icon:
     Src: svg/icons/bilibili.svg
 
-# 063: Email
-email:
+# 063: ORCID
+orcid:
   Weight: 63
+  Prefix: https://orcid.org/
+  Title: ORCID
+  Icon:
+    Class: fab fa-orcid fa-fw
+
+# 064 Liberapay
+liberapay:
+  Weight: 64
+  Prefix: https://liberapay.com/
+  Title: Liberapay
+  Icon:
+    Simpleicons: liberapay
+
+# 065 Ko-Fi
+ko-fi:
+  Weight: 65
+  Prefix: https://ko-fi.com/
+  Title: Ko-Fi
+  Icon:
+    Simpleicons: kofi
+
+# 066: BuyMeaCoffee
+buymeacoffee:
+  Weight: 66
+  Prefix: https://www.buymeacoffee.com/
+  Title: BuyMeaCoffee
+  Icon:
+    Simpleicons: buymeacoffee
+
+# 067: Linktree
+linktree:
+  Weight: 67
+  Prefix: https://linktr.ee/
+  Title: Linktree
+  Icon:
+    Simpleicons: linktree
+
+# 068: QQ
+qq:
+  Weight: 68
+  Template: https://wpa.qq.com/msgrd?v=3&uin=%v&site=qq&menu=yes
+  Title: QQ
+  Icon:
+    Simpleicons: tencentqq
+
+# 069: QQGroup
+qqgroup:
+  Weight: 69
+  Template: https://qm.qq.com/cgi-bin/qm/qr?k=%v&jump_from=webapi
+  Title: QQGroup
+  Icon:
+    Class: fas fa-users
+
+# 070: Diaspora
+diaspora:
+  Weight: 70
+  Title: diaspora*
+  Icon:
+    Simpleicons: diaspora
+
+# 071: CSDN
+csdn:
+  Weight: 71
+  Prefix: https://blog.csdn.net/
+  Title: CSDN
+  Icon:
+    Src: svg/icons/csdn.svg
+
+# 072: Email
+email:
+  Weight: 72
   Template: mailto:%v
   Title: Email
   Icon:
     Class: far fa-envelope fa-fw
 
-# 064: RSS
+# 073: RSS
 rss:
-  Weight: 64
+  Weight: 73
   Url: /index.xml
   Title: RSS
   Newtab: true

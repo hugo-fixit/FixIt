@@ -238,6 +238,15 @@ enableEmoji = true
         XMPP = ""
         Matrix = ""
         Bilibili = ""
+        ORCID = ""
+        Liberapay = ""
+        Ko-Fi = ""
+        BuyMeaCoffee = ""
+        Linktree = ""
+        QQ = ""
+        QQGroup = ""
+        Diaspora = ""
+        CSDN = ""
         Email = "xxxx@xxxx.com"
         RSS = true
         [languages.en.params.social.Mastodon]

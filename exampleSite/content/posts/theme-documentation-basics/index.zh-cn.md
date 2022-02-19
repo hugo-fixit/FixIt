@@ -410,6 +410,15 @@ hugo
     XMPP = ""
     Matrix = ""
     Bilibili = ""
+    ORCID = ""
+    Liberapay = ""
+    Ko-Fi = ""
+    BuyMeaCoffee = ""
+    Linktree = ""
+    QQ = ""
+    QQGroup = ""
+    Diaspora = ""
+    CSDN = ""
     Email = "xxxx@xxxx.com"
     RSS = true # {{< version 0.2.0 >}}
 
