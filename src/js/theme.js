@@ -825,7 +825,7 @@ class Theme {
       new Watermark({
         content:
           this.config.watermark.content ||
-          '<img class="fixit-icon" src="/svg/fixit.svg" alt="FixIt logo" /> FixIt Theme',
+          '<img class="fixit-icon" src="/images/fixit.svg" alt="FixIt logo" /> FixIt Theme',
         appendTo: this.config.watermark.appendto || '.wrapper>main',
         opacity: this.config.watermark.opacity,
         width: this.config.watermark.width,
