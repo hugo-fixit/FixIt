@@ -8,7 +8,9 @@ All notable changes to this project will be documented in this file.
 - :tada: Feat: add Artalk comment support ([#54](https://github.com/Lruihao/FixIt/issues/54))
 - :sparkles: Style: add media style for print view ([#61](https://github.com/Lruihao/FixIt/issues/61))
 - :sparkles: Feat: add pageStyle option ([#62](https://github.com/Lruihao/FixIt/issues/62))
+- :sparkles: Feat: add 9 newly supported social links ([#17](https://github.com/Lruihao/FixIt/issues/17))
 - :sparkles: Feat: update watermark 1.0.3-RC (fontFamily support)
+- :lipstick: Style: add radius of the scrollbar
 - :pencil2: Style: fix typo discription should be: description ([#60](https://github.com/Lruihao/FixIt/issues/60))
 - :fire: Feat: remove shortcode cardlink
 - **Full Changelog:** [`v0.2.12...v0.2.13`](https://github.com/Lruihao/FixIt/compare/v0.2.12...v0.2.13)

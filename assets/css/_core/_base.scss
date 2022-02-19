@@ -6,6 +6,7 @@ html {
   line-height: $global-line-height;
   width: 100%;
   scroll-behavior: smooth;
+  overflow: overlay;
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
@@ -15,7 +16,6 @@ html {
 }
 
 /* scrollbar, only support webkit */
-// TODO
 ::-webkit-scrollbar {
   width: .5rem;
   height: .5rem;
@@ -23,6 +23,7 @@ html {
 
 ::-webkit-scrollbar-thumb {
   background-color: $scrollbar-color;
+  border-radius: $scrollbar-radius;
 
   &:hover {
     background-color: $scrollbar-hover-color;
