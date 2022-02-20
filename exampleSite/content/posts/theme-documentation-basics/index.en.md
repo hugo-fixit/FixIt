@@ -562,6 +562,21 @@ Please open the code block below to view the complete sample configuration :(far
         # you can store your own data files in the same path under your project:
         # "assets/data/emoji/"
         emoji = ""
+      # {{< version 0.2.13 >}} {{< link "https://waline.js.org" Waline >}} comment config (https://waline.js.org)
+      [params.page.comment.waline]
+        enable = false
+        serverURL = ""
+        visitor = false
+        emoji = ['https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo']
+        meta = ['nick', 'mail', 'link']
+        requiredMeta = []
+        login = 'enable'
+        wordLimit = 0
+        pageSize = 10
+        uploadImage = false
+        highlight = true
+        mathTagSupport = false
+        commentCount = false
       # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook comment" >}} config (https://developers.facebook.com/docs/plugins/comments)
       [params.page.comment.facebook]
         enable = false
@@ -591,6 +606,14 @@ Please open the code block below to view the complete sample configuration :(far
         label = ""
         lightTheme = "github-light"
         darkTheme = "github-dark"
+      # {{< version 0.2.13 >}} {{< link "https://twikoo.js.org/" "Twikoo" >}} comment config (https://twikoo.js.org/)
+      [params.page.comment.twikoo]
+        enable = false
+        envId = ""
+        region = ""
+        path = ""
+        visitor = true
+        commentCount = true
     # {{< version 0.2.7 >}} Third-party library config
     [params.page.library]
       [params.page.library.css]

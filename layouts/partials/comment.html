@@ -13,9 +13,36 @@
       {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
       {{- $source := $cdn.artalkJS | default "lib/artalk/Artalk.min.js" -}}
       {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-      {{- $commentConfig = dict "el" "#artalk" "pageKey" .Permalink "pageTitle" .Title "server" $artalk.server "site" $artalk.site "placeholder" $artalk.placeholder "noComment" $artalk.noComment "sendBtn" $artalk.sendBtn "editorTravel" $artalk.editorTravel "flatMode" $artalk.flatMode "maxNesting" $artalk.maxNesting "lightgallery" $artalk.lightgallery | dict "artalk" | merge $commentConfig -}}
+      {{- $commentConfig = dict "el" "#artalk" "pageKey" .Permalink "pageTitle" .Title | dict "artalk" | merge $commentConfig -}}
+      {{- with $artalk.server -}}
+        {{- $commentConfig = dict "server" . | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $artalk.site -}}
+        {{- $commentConfig = dict "site" . | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $artalk.placeholder -}}
+        {{- $commentConfig = dict "placeholder" . | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $artalk.noComment -}}
+        {{- $commentConfig = dict "noComment" . | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $artalk.sendBtn -}}
+        {{- $commentConfig = dict "sendBtn" . | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $artalk.editorTravel -}}
+        {{- $commentConfig = dict "editorTravel" . | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $artalk.flatMode -}}
+        {{- $commentConfig = dict "flatMode" . | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $artalk.maxNesting -}}
+        {{- $commentConfig = dict "maxNesting" . | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $artalk.lightgallery -}}
+        {{- $commentConfig = dict "lightgallery" . | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://github.com/ArtalkJS/Artalk" rel="license external nofollow noopener noreffer">Artalk</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://github.com/ArtalkJS/Artalk" rel="external nofollow noopener noreffer">Artalk</a>.
       </noscript>
     {{- end -}}
 
@@ -26,7 +53,7 @@
       {{- $source := printf "https://%v.disqus.com/embed.js" $disqus.shortname -}}
       {{- dict "Source" $source "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript" rel="license external nofollow noopener noreffer">Disqus</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript" rel="external nofollow noopener noreffer">Disqus</a>.
       </noscript>
     {{- end -}}
 
@@ -40,7 +67,7 @@
       {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
       {{- $commentConfig = dict "id" .Date "title" .Title "clientID" $gitalk.clientId "clientSecret" $gitalk.clientSecret "repo" $gitalk.repo "owner" $gitalk.owner "admin" (slice $gitalk.owner) | dict "gitalk" | merge $commentConfig -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk" rel="license external nofollow noopener noreffer">Gitalk</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk" rel="external nofollow noopener noreffer">Gitalk</a>.
       </noscript>
     {{- end -}}
 
@@ -67,7 +94,49 @@
       {{- end -}}
       {{- $commentConfig = $valine.emoji | default "google.yml" | printf "data/emoji/%v" | resources.Get | transform.Unmarshal | dict "valine" | merge $commentConfig -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/" rel="license external nofollow noopener noreffer">Valine</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/" rel="external nofollow noopener noreffer">Valine</a>.
+      </noscript>
+    {{- end -}}
+
+    {{- /* Waline Comment System */ -}}
+    {{- $waline := $comment.waline | default dict -}}
+    {{- if $waline.enable -}}
+      <div id="waline" class="comment"></div>
+      {{- $source := $cdn.walineJS | default "lib/waline/Waline.min.js" -}}
+      {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+      {{- $commentConfig = dict "el" "#waline" "serverURL" $waline.serverURL "lang" .Lang "dark" "body[theme='dark']" "copyright" true | dict "waline" | merge $commentConfig -}}
+      {{- with $waline.visitor -}}
+        {{- $commentConfig = dict "visitor" . | dict "waline" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $waline.emoji -}}
+        {{- $commentConfig = dict "emoji" . | dict "waline" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $waline.meta -}}
+        {{- $commentConfig = dict "meta" . | dict "waline" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $waline.requiredMeta -}}
+        {{- $commentConfig = dict "requiredMeta" . | dict "waline" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $waline.login -}}
+        {{- $commentConfig = dict "login" . | dict "waline" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $waline.wordLimit -}}
+        {{- $commentConfig = dict "wordLimit" . | dict "waline" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $waline.pageSize -}}
+        {{- $commentConfig = dict "pageSize" . | dict "waline" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $waline.uploadImage -}}
+        {{- $commentConfig = dict "uploadImage" . | dict "waline" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $waline.highlight -}}
+        {{- $commentConfig = dict "highlight" . | dict "waline" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $waline.mathTagSupport -}}
+        {{- $commentConfig = dict "mathTagSupport" . | dict "waline" | merge $commentConfig -}}
+      {{- end -}}
+      <noscript>
+        Please enable JavaScript to view the comments powered by <a href="https://waline.js.org/" rel="external nofollow noopener noreffer">Waline</a>.
       </noscript>
     {{- end -}}
 
@@ -84,7 +153,7 @@
       {{- $source := printf "https://connect.facebook.net/%v/sdk.js#xfbml=1&version=v5.0&appId=%v&autoLogAppEvents=1" ($facebook.languageCode | default (T "facebookLanguageCode")) $facebook.appId -}}
       {{- dict "Source" $source "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://developers.facebook.com/docs/plugins/comments/" rel="license external nofollow noopener noreffer">Facebook</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://developers.facebook.com/docs/plugins/comments/" rel="external nofollow noopener noreffer">Facebook</a>.
       </noscript>
     {{- end -}}
 
@@ -111,7 +180,7 @@
       {{- end -}}
       {{- dict "Source" "https://comments.app/js/widget.js?2" "Defer" true "Attr" $attr | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://comments.app/" rel="license external nofollow noopener noreffer">Telegram Comments</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://comments.app/" rel="external nofollow noopener noreffer">Telegram Comments</a>.
       </noscript>
     {{- end -}}
 
@@ -121,7 +190,7 @@
       <div id="commento"></div>
       {{- dict "Source" "https://cdn.commento.io/js/commento.js" "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://commento.io/" rel="license external nofollow noopener noreffer">Commento</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://commento.io/" rel="external nofollow noopener noreffer">Commento</a>.
       </noscript>
     {{- end -}}
 
@@ -135,7 +204,29 @@
       {{- $commentConfig = $utterances.lightTheme | default "github-light" | dict "lightTheme" | dict "utterances" | merge $commentConfig -}}
       {{- $commentConfig = $utterances.darkTheme | default "github-dark" | dict "darkTheme" | dict "utterances" | merge $commentConfig -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/" rel="license external nofollow noopener noreffer">Utterances</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/" rel="external nofollow noopener noreffer">Utterances</a>.
+      </noscript>
+    {{- end -}}
+
+    {{- /* Twikoo Comment System */ -}}
+    {{- /* Twikoo Comment System */ -}}
+    {{- $twikoo := $comment.twikoo | default dict -}}
+    {{- if $twikoo.enable -}}
+      <div id="twikoo"></div>
+      {{- $source := $cdn.twikooJS | default "lib/twikoo/twikoo.all.min.js" -}}
+      {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+      {{- $commentConfig = dict "el" "#twikoo" "envId" $twikoo.envId "lang" .Lang | dict "twikoo" | merge $commentConfig -}}
+      {{- with $twikoo.region -}}
+        {{- $commentConfig = dict "region" . | dict "twikoo" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $twikoo.path -}}
+        {{- $commentConfig = dict "path" . | dict "twikoo" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $twikoo.commentCount -}}
+        {{- $commentConfig = dict "commentCount" . | dict "twikoo" | merge $commentConfig -}}
+      {{- end -}}
+      <noscript>
+        Please enable JavaScript to view the comments powered by <a href="https://twikoo.js.org/" rel="external nofollow noopener noreffer">Twikoo</a>.
       </noscript>
     {{- end -}}
   </div>

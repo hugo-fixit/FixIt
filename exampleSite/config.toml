@@ -496,7 +496,7 @@ enableEmoji = true
   images = ["/logo.png"]
   # enable PWA since v0.2.12
   # 开启 PWA 支持 since v0.2.12
-  enablePWA = true
+  enablePWA = false
 
   # Header config
   # 页面头部导航栏配置
@@ -784,6 +784,22 @@ enableEmoji = true
         # 可以在你的项目下相同路径存放你自己的数据文件:
         # "assets/data/emoji/"
         emoji = ""
+      # Waline comment config (https://waline.js.org) since v0.2.13
+      # Waline 评论系统设置 (https://waline.js.org) since v0.2.13
+      [params.page.comment.waline]
+        enable = false
+        serverURL = ""
+        visitor = false
+        emoji = ['https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo']
+        meta = ['nick', 'mail', 'link']
+        requiredMeta = []
+        login = 'enable'
+        wordLimit = 0
+        pageSize = 10
+        uploadImage = false
+        highlight = true
+        mathTagSupport = false
+        commentCount = false
       # Facebook comment config (https://developers.facebook.com/docs/plugins/comments)
       # Facebook 评论系统设置 (https://developers.facebook.com/docs/plugins/comments)
       [params.page.comment.facebook]
@@ -793,7 +809,7 @@ enableEmoji = true
         appId = ""
         languageCode = ""
       # Telegram comments config (https://comments.app/)
-      # Telegram comments 评论系统设置 (https://comments.app/)
+      # Telegram 评论系统设置 (https://comments.app/)
       [params.page.comment.telegram]
         enable = false
         siteID = ""
@@ -804,11 +820,11 @@ enableEmoji = true
         dislikes = false
         outlined = false
       # Commento comment config (https://commento.io/)
-      # Commento comment 评论系统设置 (https://commento.io/)
+      # Commento 评论系统设置 (https://commento.io/)
       [params.page.comment.commento]
         enable = false
       # Utterances comment config (https://utteranc.es/)
-      # Utterances comment 评论系统设置 (https://utteranc.es/)
+      # Utterances 评论系统设置 (https://utteranc.es/)
       [params.page.comment.utterances]
         enable = false
         # owner/repo
@@ -817,6 +833,15 @@ enableEmoji = true
         label = ""
         lightTheme = "github-light"
         darkTheme = "github-dark"
+      # Twikoo comment config (https://twikoo.js.org/) since v0.2.13
+      # Twikoo 评论系统设置 (https://twikoo.js.org/) since v0.2.13
+      [params.page.comment.twikoo]
+        enable = false
+        envId = ""
+        region = ""
+        path = ""
+        visitor = true
+        commentCount = true
     # Third-party library config
     # 第三方库配置
     [params.page.library]

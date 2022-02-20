@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 - :tada: Refactor: page layout ([#65](https://github.com/Lruihao/FixIt/issues/65))
 - :tada: Feat: add Artalk comment support ([#54](https://github.com/Lruihao/FixIt/issues/54))
+- :tada: Feat: add Waline comment support ([#36](https://github.com/Lruihao/FixIt/issues/36))
+- :tada: Feat: add Twikoo comment support ([#64](https://github.com/Lruihao/FixIt/issues/64))
 - :sparkles: Style: add media style for print view ([#61](https://github.com/Lruihao/FixIt/issues/61))
 - :sparkles: Feat: add pageStyle option ([#62](https://github.com/Lruihao/FixIt/issues/62))
 - :sparkles: Feat: add 9 newly supported social links ([#17](https://github.com/Lruihao/FixIt/issues/17))

@@ -55,11 +55,13 @@ math:
 * :(far fa-comment fa-fw): **Disqus** comment system supported by [Disqus](https://disqus.com)
 * :(far fa-comment-dots fa-fw): **Gitalk** comment system supported by [Gitalk](https://github.com/gitalk/gitalk)
 * :(far fa-comment-alt fa-fw): **Valine** comment system supported by [Valine](https://valine.js.org/)
+* :(far fa-comment-alt fa-fw): **Waline** comment system supported by [Waline](https://waline.js.org/)
 * :(far fa-comments fa-fw): **Facebook comments** system supported by [Facebook](https://developers.facebook.com/docs/plugins/comments/)
 * :(fas fa-comment fa-fw): **Telegram comments** system supported by [Comments](https://comments.app/)
 * :(fas fa-comment-dots fa-fw): **Commento** comment system supported by [Commento](https://commento.io/)
 * :(far fa-comment-alt fa-fw): **Utterances** comment system supported by [Utterances](https://utteranc.es/)
 * :(far fa-comment-alt fa-fw): **Artalk** comment system supported by [Artalk](https://artalk.js.org/)
+* :(fas fa-comment-alt fa-fw): **Twikoo** comment system supported by [Twikoo](https://twikoo.js.org/)
 
 #### Extended Features
 
@@ -123,3 +125,5 @@ Thanks to the authors of following resources included in the theme:
 * [cell-watermark](https://github.com/Lruihao/watermark)
 * [pangu.js](https://github.com/vinta/pangu.js)
 * [Artalk](https://artalk.js.org/)
+* [Waline](https://waline.js.org/)
+* [Twikoo](https://twikoo.js.org/)

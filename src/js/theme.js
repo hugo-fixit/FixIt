@@ -513,7 +513,10 @@ class Theme {
         document.querySelector('.single-title').clientHeight +
         document.querySelector('.post-meta').clientHeight +
         'px';
-      $toc.style.marginBottom = document.getElementById('post-footer').clientHeight + 'px';
+      $toc.style.marginBottom =
+        document.getElementById('post-footer').clientHeight +
+        document.getElementById('comments').clientHeight +
+        'px';
       const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
       const $tocLiElements = $tocCore.getElementsByTagName('li');
       const $headerLinkElements = document.getElementsByClassName('header-link');
@@ -733,14 +736,19 @@ class Theme {
               if ($imgs.length) lightGallery($content, { selector: '.atk-img-link' });
             });
           });
+        return artalk;
       }
       if (this.config.comment.gitalk) {
         this.config.comment.gitalk.body = decodeURI(window.location.href);
         const gitalk = new Gitalk(this.config.comment.gitalk);
         gitalk.render('gitalk');
+        return gitalk;
       }
       if (this.config.comment.valine) {
-        new Valine(this.config.comment.valine);
+        return new Valine(this.config.comment.valine);
+      }
+      if (this.config.comment.waline) {
+        return new Waline(this.config.comment.waline);
       }
       if (this.config.comment.utterances) {
         const utterancesConfig = this.config.comment.utterances;
@@ -768,6 +776,32 @@ class Theme {
             iframe.contentWindow.postMessage(message, 'https://utteranc.es');
           });
         this.switchThemeEventSet.add(this._utterancesOnSwitchTheme);
+        return;
+      }
+      if (this.config.comment.twikoo) {
+        const twikooConfig = this.config.comment.twikoo;
+        twikoo.init(twikooConfig);
+        if (twikooConfig.commentCount) {
+          // https://twikoo.js.org/api.html#get-comments-count
+          twikoo
+            .getCommentsCount({
+              envId: twikooConfig.envId,
+              region: twikooConfig.region,
+              urls: [window.location.pathname],
+              includeReply: false
+            })
+            .then(function (response) {
+              // example: [
+              //   { url: '/2020/10/post-1.html', count: 10 },
+              //   { url: '/2020/11/post-2.html', count: 0 },
+              //   { url: '/2020/12/post-3.html', count: 20 }
+              // ]
+              // If there is an element with id="twikoo-comment-count", set its innerHTML to the count of comments
+              const twikooCommentCount = document.getElementById('twikoo-comment-count');
+              if (twikooCommentCount) twikooCommentCount.innerHTML = response[0].count;
+            });
+        }
+        return;
       }
     }
   }
@@ -949,8 +983,8 @@ class Theme {
     }
 
     window.setTimeout(() => {
-      this.initToc();
       this.initComment();
+      this.initToc();
 
       this.onScroll();
       this.onResize();
