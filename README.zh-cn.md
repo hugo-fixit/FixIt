@@ -125,7 +125,7 @@ sh fixit_checker.sh
 
 * 支持 **[Gravatar](https://gravatar.com)** 头像
 * 支持本地**头像**
-* 支持多达 **64** 种社交链接
+* 支持多达 **73** 种社交链接
 * 支持多达 **28** 种网站分享
 * 支持 **[Disqus](https://disqus.com)** 评论系统
 * 支持 **[Gitalk](https://github.com/gitalk/gitalk)** 评论系统
@@ -187,6 +187,8 @@ FixIt 支持下列语言：
 [语言兼容性](https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/#language-compatibility)
 
 ## [路线图](https://github.com/Lruihao/FixIt/projects/1)
+
+## [更新日志](https://github.com/Lruihao/FixIt/blob/master/CHANGELOG.md)
 
 ## 问题、想法、 bugs 和 PRs
 

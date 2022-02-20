@@ -126,7 +126,7 @@ the FixIt theme may be more suitable for you.
 
 * **Gravatar** supported by [Gravatar](https://gravatar.com)
 * Local **Avatar** supported
-* Up to **64** social links supported
+* Up to **73** social links supported
 * Up to **28** share sites supported
 * **Disqus** comment system supported by [Disqus](https://disqus.com)
 * **Gitalk** comment system supported by [Gitalk](https://github.com/gitalk/gitalk)
@@ -189,7 +189,7 @@ FixIt supports the following languages:
 
 ## [Roadmap](https://github.com/Lruihao/FixIt/projects/1)
 
-## [Changelog](https://github.com/Lruihao/FixIt/blob/main/CHANGELOG.md)
+## [Changelog](https://github.com/Lruihao/FixIt/blob/master/CHANGELOG.md)
 
 ## Questions, ideas, bugs, pull requests
 
