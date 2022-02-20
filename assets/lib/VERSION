@@ -3,6 +3,7 @@ animate.css@4.1.1 https://github.com/daneden/animate.css
 aplayer@1.10.1 https://github.com/MoePlayer/APlayer
 artalk@2.1.4 https://github.com/ArtalkJS/Artalk
 autocomplete.js@0.38.1 https://github.com/algolia/autocomplete.js
+cell-watermark@1.0.3 https://github.com/Lruihao/watermark
 clipboard.js@2.0.8 https://github.com/zenorocha/clipboard.js
 cookieconsent@3.1.1 https://github.com/osano/cookieconsent
 echarts@5.2.2 https://github.com/apache/echarts
@@ -25,4 +26,3 @@ simple-icons@5.21.1 https://github.com/simple-icons/simple-icons
 twemoji@13.1.0 https://github.com/twitter/twemoji
 typeit@7.0.4 https://github.com/alexmacarthur/typeit
 valine@1.4.16 https://github.com/xCss/Valine
-watermark@1.0.3 https://github.com/Lruihao/watermark

@@ -88,7 +88,7 @@ Now the migration is finished and everything is ready 🎉
 * Custom style shortcodes supported
 * **CDN** for all third-party libraries supported
 * **PWA (Progressive Web App)** supported
-* **Web Watermark** supported by [Watermark](https://github.com/Lruihao/watermark)
+* **Web Watermark** supported by [cell-watermark](https://github.com/Lruihao/watermark)
 * **Chinese typesetting** supported by [pangu.js](https://github.com/vinta/pangu.js)
 * **Card type** link shortcode
 * **Friends** page embedded template
@@ -159,7 +159,7 @@ the FixIt theme may be more suitable for you.
 * **Animated typing** supported by [TypeIt](https://typeitjs.com/)
 * **Cookie consent banner** supported by [cookieconsent](https://github.com/osano/cookieconsent)
 * **PWA (Progressive Web App)** supported
-* **Web Watermark** supported by [Watermark](https://github.com/Lruihao/watermark)
+* **Web Watermark** supported by [cell-watermark](https://github.com/Lruihao/watermark)
 * **Chinese typesetting** supported by [pangu.js](https://github.com/vinta/pangu.js)
 * **Card type** link shortcode
 * **Friends** page embedded template
@@ -222,7 +222,7 @@ Thanks to the authors of following resources included in the theme:
 * [Gitalk](https://github.com/gitalk/gitalk)
 * [Valine](https://valine.js.org/)
 * [cookieconsent](https://github.com/osano/cookieconsent)
-* [Watermark](https://github.com/Lruihao/watermark)
+* [cell-watermark](https://github.com/Lruihao/watermark)
 * [pangu.js](https://github.com/vinta/pangu.js)
 * [Artalk](https://artalk.js.org/)
 

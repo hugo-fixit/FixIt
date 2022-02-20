@@ -87,7 +87,7 @@ sh fixit_checker.sh
 * 支持自定义样式的 shortcode
 * 支持所有第三方库的 **CDN**
 * 支持**渐进式网页应用**
-* 支持基于 [Watermark](https://github.com/Lruihao/watermark) 的**网页水印**
+* 支持基于 [cell-watermark](https://github.com/Lruihao/watermark) 的**网页水印**
 * 支持基于 [pangu.js](https://github.com/vinta/pangu.js) 的**中文排版**
 * 支持**卡片式链接**的 shortcode
 * 支持**友情链接**的页面模板
@@ -158,7 +158,7 @@ sh fixit_checker.sh
 * 支持基于 [TypeIt](https://typeitjs.com/) 的**打字动画** shortcode
 * 支持基于 [cookieconsent](https://github.com/osano/cookieconsent) 的 **Cookie 许可横幅**
 * 支持**渐进式网页应用**
-* 支持基于 [Watermark](https://github.com/Lruihao/watermark) 的**网页水印**
+* 支持基于 [cell-watermark](https://github.com/Lruihao/watermark) 的**网页水印**
 * 支持基于 [pangu.js](https://github.com/vinta/pangu.js) 的**中文排版**
 * 支持**卡片式链接**的 shortcode
 * 支持**友情链接**的页面模板
@@ -219,7 +219,7 @@ FixIt 主题中用到了以下项目，感谢它们的作者：
 * [Gitalk](https://github.com/gitalk/gitalk)
 * [Valine](https://valine.js.org/)
 * [cookieconsent](https://github.com/osano/cookieconsent)
-* [Watermark](https://github.com/Lruihao/watermark)
+* [cell-watermark](https://github.com/Lruihao/watermark)
 * [pangu.js](https://github.com/vinta/pangu.js)
 * [Artalk](https://artalk.js.org/)
 

@@ -83,7 +83,7 @@ math:
 * :(fas fa-i-cursor fa-fw): **Animated typing** supported by [TypeIt](https://typeitjs.com/)
 * :(fas fa-cookie-bite fa-fw): **Cookie consent banner** supported by [cookieconsent](https://github.com/osano/cookieconsent)
 * :(fas fa-desktop fa-fw): **PWA (Progressive Web App)** supported
-* :(fas fa-signature fa-fw): **Web Watermark** supported by [Watermark](https://github.com/Lruihao/watermark)
+* :(fas fa-signature fa-fw): **Web Watermark** supported by [cell-watermark](https://github.com/Lruihao/watermark)
 * :(fas fa-language fa-fw): **Chinese typesetting** supported by [pangu.js](https://github.com/vinta/pangu.js)
 * :(fas fa-link fa-fw): **Card type** link shortcode
 * :(fas fa-users fa-fw): **Friends** page embedded template
@@ -120,6 +120,6 @@ Thanks to the authors of following resources included in the theme:
 * [Gitalk](https://github.com/gitalk/gitalk)
 * [Valine](https://valine.js.org/)
 * [cookieconsent](https://github.com/osano/cookieconsent)
-* [Watermark](https://github.com/Lruihao/watermark)
+* [cell-watermark](https://github.com/Lruihao/watermark)
 * [pangu.js](https://github.com/vinta/pangu.js)
 * [Artalk](https://artalk.js.org/)
