@@ -326,6 +326,8 @@ hugo
     # 主页个人信息
     [params.home.profile]
       enable = true
+      # {{< version 0.2.13 >}} 选择使用 Gravatar 源站或其他镜像站，若留空则为默认的 "www.gravatar.com"
+      gravatarSite = ""
       # Gravatar 邮箱，用于优先在主页显示的头像
       gravatarEmail = ""
       # 主页显示头像的 URL

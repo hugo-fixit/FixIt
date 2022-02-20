@@ -315,6 +315,8 @@ Please open the code block below to view the complete sample configuration :(far
     # Home page profile
     [params.home.profile]
       enable = true
+      # {{< version 0.2.13 >}} Gravatar mirror site domain, default: "www.gravatar.com"
+      gravatarSite = ""
       # Gravatar Email for preferred avatar in home page
       gravatarEmail = ""
       # URL of avatar shown in home page
