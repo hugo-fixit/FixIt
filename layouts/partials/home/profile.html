@@ -1,8 +1,11 @@
 {{- $profile := .Site.Params.home.profile -}}
 <div class="home-profile">
   {{- $avatar := $profile.avatarURL -}}
-  {{- with $profile.gravatarEmail -}}
-    {{- $avatar = md5 . | printf "https://www.gravatar.com/avatar/%v?s=240&d=mp" -}}
+  {{- if $profile.gravatarEmail -}}
+    {{- with $profile -}}
+      {{- $site := .gravatarSite | default "www.gravatar.com" -}}
+      {{- $avatar = md5 .gravatarEmail | printf "https://%v/avatar/%v?s=240&d=mp" $site -}}
+    {{- end -}}
   {{- end -}}
   {{- if $avatar -}}
     <div class="home-avatar">
