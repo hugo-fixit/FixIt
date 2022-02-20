@@ -513,10 +513,7 @@ class Theme {
         document.querySelector('.single-title').clientHeight +
         document.querySelector('.post-meta').clientHeight +
         'px';
-      $toc.style.marginBottom =
-        document.getElementById('post-footer').clientHeight +
-        document.getElementById('comments').clientHeight +
-        'px';
+      $toc.style.marginBottom = document.getElementById('post-footer').clientHeight + 'px';
       const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
       const $tocLiElements = $tocCore.getElementsByTagName('li');
       const $headerLinkElements = document.getElementsByClassName('header-link');
@@ -525,6 +522,11 @@ class Theme {
       this._tocOnScroll =
         this._tocOnScroll ||
         (() => {
+          const $comments = document.getElementById('comments');
+          if ($comments) {
+            $toc.style.marginBottom =
+              document.getElementById('post-footer').clientHeight + $comments.clientHeight + 'px';
+          }
           this.util.forEach($tocLinkElements, ($tocLink) => {
             $tocLink.classList.remove('active');
           });
