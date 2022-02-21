@@ -5,13 +5,14 @@ All notable changes to this project will be documented in this file.
 ## v0.2.13
 
 - :recycle: Refactor: page layout ([#65](https://github.com/Lruihao/FixIt/issues/65))
-- :tada: Feat: add Artalk comment support ([#54](https://github.com/Lruihao/FixIt/issues/54))
+- :tada: Feat: add Artalk comment support ([#54](https://github.com/Lruihao/FixIt/issues/54), [#57](https://github.com/Lruihao/FixIt/pull/57)@hiifong)
 - :tada: Feat: add Waline comment support ([#36](https://github.com/Lruihao/FixIt/issues/36))
 - :tada: Feat: add Twikoo comment support ([#64](https://github.com/Lruihao/FixIt/issues/64))
 - :sparkles: Style: add media style for print view ([#61](https://github.com/Lruihao/FixIt/issues/61))
 - :sparkles: Feat: add pageStyle option ([#62](https://github.com/Lruihao/FixIt/issues/62))
 - :sparkles: Feat: add 9 newly supported social links ([#17](https://github.com/Lruihao/FixIt/issues/17))
 - :sparkles: Feat: update cell-watermark 1.0.3 and support CDN (fontFamily supported)
+- :sparkles: Feat: add Gravatar mirror site support ([#66](https://github.com/Lruihao/FixIt/pull/66)@ctj12461)
 - :lipstick: Style: add radius of the scrollbar
 - :pencil2: Style: fix typo discription should be: description ([#60](https://github.com/Lruihao/FixIt/issues/60))
 - :fire: Feat: remove shortcode cardlink ([#42](https://github.com/Lruihao/FixIt/issues/42))
