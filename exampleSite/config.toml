@@ -240,6 +240,7 @@ enableEmoji = true
         XMPP = ""
         Matrix = ""
         Bilibili = ""
+        # ORCID, ... , CSDN since v0.2.13
         ORCID = ""
         Liberapay = ""
         Ko-Fi = ""
@@ -250,7 +251,7 @@ enableEmoji = true
         Diaspora = ""
         CSDN = ""
         Email = "xxxx@xxxx.com"
-        RSS = true
+        RSS = true # since v0.2.0
         [languages.en.params.social.Mastodon]
           id = "@xxxx"
           prefix = "https://mastodon.technology/"
@@ -462,8 +463,18 @@ enableEmoji = true
         XMPP = ""
         Matrix = ""
         Bilibili = "xxxx"
+        # ORCID, ... , CSDN since v0.2.13
+        ORCID = ""
+        Liberapay = ""
+        Ko-Fi = ""
+        BuyMeaCoffee = ""
+        Linktree = ""
+        QQ = ""
+        QQGroup = ""
+        Diaspora = ""
+        CSDN = ""
         Email = "xxxx@xxxx.com"
-        RSS = true
+        RSS = true # since v0.2.0
       # 盘古之白配置 since v0.2.12
       [languages.zh-cn.params.pangu]
         # 适用于中文写作用户

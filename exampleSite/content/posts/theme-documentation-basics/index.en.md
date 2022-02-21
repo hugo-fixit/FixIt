@@ -401,6 +401,7 @@ Please open the code block below to view the complete sample configuration :(far
     XMPP = ""
     Matrix = ""
     Bilibili = ""
+    # ORCID, ... , CSDN {{< version 0.2.13 >}}
     ORCID = ""
     Liberapay = ""
     Ko-Fi = ""
