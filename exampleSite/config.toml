@@ -656,6 +656,19 @@ enableEmoji = true
       # position of TOC ("left", "right") since v0.2.13
       # 目录位置 ("left", "right") since v0.2.13
       position = "right"
+    # Display a message at the beginning of an article to warn the reader that its content might be expired. since v0.2.13
+    # 在文章开头显示提示信息，提醒读者文章内容可能过时。 since v0.2.13
+    [params.page.expirationReminder]
+      enable = true
+      # Display the reminder if the last modified time is more than 90 days ago
+      # 如果文章最后更新于这天数之前，显示提醒
+      reminder = 90
+      # Display warning if the last modified time is more than 180 days ago
+      # 如果文章最后更新于这天数之前，显示警告
+      warning = 180
+      # If the article expires, close the comment or not
+      # 如果文章到期是否关闭评论
+      closeComment = false
     # Code config
     # 代码配置
     [params.page.code]

@@ -150,6 +150,9 @@ other = "主頁"
 
 [readMore]
 other = "閱讀全文"
+
+[expirationReminder]
+other = "本文最後更新於 {{ .Date }}，文中內容可能已過時。"
 # === posts/single.html ===
 
 # === 404.html ===

@@ -459,6 +459,15 @@ hugo
       auto = true
       # {{< version 0.2.13 >}} 目录位置 ("left", "right")
       position = "right"
+    # {{< version 0.2.13 >}} 在文章开头显示提示信息，提醒读者文章内容可能过时
+    [params.page.expirationReminder]
+      enable = false
+      # 如果文章最后更新于这天数之前，显示提醒
+      reminder = 90
+      # 如果文章最后更新于这天数之前，显示警告
+      warning = 180
+      # 如果文章到期是否关闭评论
+      closeComment = false
     # {{< version 0.2.0 >}} 代码配置
     [params.page.code]
       # 是否显示代码块的复制按钮

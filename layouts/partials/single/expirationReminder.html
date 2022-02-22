@@ -1,0 +1,34 @@
+{{- $params := .Scratch.Get "params" -}}
+{{- $expirationReminder := $params.expirationReminder | default dict -}}
+
+{{- if $expirationReminder.enable -}}
+  {{- $daysAgo := div (sub now.Unix .Lastmod.Unix) 86400 }}
+  {{- $reminderThreshold := $expirationReminder.reminder | default 90 }}
+  {{- $warningThreshold := $expirationReminder.warning | default 180 }}
+  {{- $updateTime := .Lastmod }}
+
+  {{- if gt $daysAgo $reminderThreshold -}}
+    {{- $type := "note" -}}
+    {{- $icon := "fa-pencil-alt" -}}
+    {{- if gt $daysAgo $warningThreshold -}}
+      {{- $type = "warning" -}}
+      {{- $icon = "fa-exclamation-triangle" -}}
+      {{- /* If the article expires, close the comment or not */ -}}
+      {{- if $expirationReminder.closeComment -}}
+        {{- .Scratch.Set "comment" dict -}}
+      {{- end -}}
+    {{- end -}}
+    <div class="details admonition {{ $type }} open">
+      <div class="details-summary admonition-title">
+        <i class="icon fas {{ $icon }} fa-fw"></i>{{ T $type }}<i class="details-icon fas fa-angle-right fa-fw"></i>
+      </div>
+      <div class="details-content">
+        <div class="admonition-content">
+          {{- with .Site.Params.dateformat | default "2006-01-02" | $updateTime.Format -}}
+            {{- dict "Date" . | T "expirationReminder" -}}
+          {{- end -}}
+        </div>
+      </div>
+    </div>
+  {{- end -}}
+{{- end -}}

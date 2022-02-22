@@ -145,6 +145,9 @@ other = "Home"
 
 [readMore]
 other = "Read More"
+
+[expirationReminder]
+other = "This article was last updated on {{ .Date }}, the content may be out of date."
 # === posts/single.html ===
 
 # === 404.html ===

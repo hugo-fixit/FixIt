@@ -448,6 +448,15 @@ Please open the code block below to view the complete sample configuration :(far
       auto = true
       # {{< version 0.2.13 >}} position of TOC ("left", "right")
       position = "right"
+    # {{< version 0.2.13 >}} Display a message at the beginning of an article to warn the reader that its content might be expired
+    [params.page.expirationReminder]
+      enable = false
+      # Display the reminder if the last modified time is more than 90 days ago
+      reminder = 90
+      # Display warning if the last modified time is more than 180 days ago
+      warning = 180
+      # If the article expires, close the comment or not
+      closeComment = false
     # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} mathematical formulas (https://katex.org)
     [params.page.math]
       enable = true
