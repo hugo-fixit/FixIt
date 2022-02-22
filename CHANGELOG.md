@@ -12,10 +12,11 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: add pageStyle option ([#62](https://github.com/Lruihao/FixIt/issues/62))
 - :sparkles: Feat: add article expiration reminder support ([#51](https://github.com/Lruihao/FixIt/issues/51))
 - :sparkles: Feat: add 9 newly supported social links ([#17](https://github.com/Lruihao/FixIt/issues/17))
-- :sparkles: Feat: update cell-watermark 1.0.3 and support CDN (fontFamily supported)
 - :sparkles: Feat: add Gravatar mirror site support ([#66](https://github.com/Lruihao/FixIt/pull/66)@ctj12461)
+- :sparkles: Feat: update cell-watermark 1.0.3 and CDN support (fontFamily supported)
+- :mag: Feat: add 360 and sougou seo support
 - :lipstick: Style: add radius of the scrollbar
-- :pencil2: Style: fix typo discription should be: description ([#60](https://github.com/Lruihao/FixIt/issues/60))
+- :pencil2: Style: fix typo "discription" should be "description" ([#60](https://github.com/Lruihao/FixIt/issues/60))
 - :fire: Feat: remove shortcode cardlink ([#42](https://github.com/Lruihao/FixIt/issues/42))
 - **Full Changelog:** [`v0.2.12...v0.2.13`](https://github.com/Lruihao/FixIt/compare/v0.2.12...v0.2.13)
 

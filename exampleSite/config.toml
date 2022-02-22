@@ -966,14 +966,16 @@ enableEmoji = true
     # 网站创立时间
     siteTime = '2019-02-03T19:30:34+08:00'
   
-  # Site verification code for Google/Bing/Yandex/Pinterest/Baidu
-  # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
+  # Site verification code for Google/Bing/Yandex/Pinterest/Baidu/360/Sogou
+  # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu/360/Sogou
   [params.verification]
     google = ""
     bing = ""
     yandex = ""
     pinterest = ""
     baidu = ""
+    so = ""
+    sogou = ""
 
   # Site SEO config
   # 网站 SEO 配置

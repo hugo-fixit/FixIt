@@ -15,6 +15,12 @@
 {{- with .Site.Params.verification.baidu -}}
   <meta name="baidu-site-verification" content="{{ . }}" />
 {{- end -}}
+{{- with .Site.Params.verification.so -}}
+  <meta name="360-site-verification" content="{{ . }}" />
+{{- end -}}
+{{- with .Site.Params.verification.sogou -}}
+  <meta name="sogou_site_verification" content="{{ . }}" />
+{{- end -}}
 
 {{- /* Home SEO */ -}}
 {{- if .IsHome -}}

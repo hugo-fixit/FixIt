@@ -691,13 +691,15 @@ Please open the code block below to view the complete sample configuration :(far
     # Site creation time e.g. '2019-02-03T19:30:34+08:00'
     siteTime = ''
 
-  # Site verification code config for Google/Bing/Yandex/Pinterest/Baidu
+  # Site verification code config for Google/Bing/Yandex/Pinterest/Baidu/360/Sogou
   [params.verification]
     google = ""
     bing = ""
     yandex = ""
     pinterest = ""
     baidu = ""
+    so = ""
+    sogou = ""
 
   # {{< version 0.2.10 >}} Site SEO config
   [params.seo]

@@ -702,13 +702,15 @@ hugo
     # 网站创立时间 例：'2019-02-03T19:30:34+08:00'
     siteTime = ''
 
-  # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu
+  # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu/360/Sogou
   [params.verification]
     google = ""
     bing = ""
     yandex = ""
     pinterest = ""
     baidu = ""
+    so = ""
+    sogou = ""
 
   # {{< version 0.2.10 >}} 网站 SEO 配置
   [params.seo]
