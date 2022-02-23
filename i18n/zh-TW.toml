@@ -133,6 +133,9 @@ other = "預計閱讀 {{ .Count }} 分鐘"
 [views]
 other = "次閱讀"
 
+[comments]
+other = "條評論"
+
 [author]
 other = "作者"
 

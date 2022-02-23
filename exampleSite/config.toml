@@ -812,6 +812,7 @@ enableEmoji = true
         # 可以在你的项目下相同路径存放你自己的数据文件:
         # "assets/data/emoji/"
         emoji = ""
+        commentCount = true # since v0.2.13
       # Waline comment config (https://waline.js.org) since v0.2.13
       # Waline 评论系统设置 (https://waline.js.org) since v0.2.13
       [params.page.comment.waline]

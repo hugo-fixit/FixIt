@@ -56,15 +56,42 @@
         <i class="fas fa-pencil-alt fa-fw"></i>&nbsp;{{ T "wordCount" .WordCount }}&nbsp;
         <i class="far fa-clock fa-fw"></i>&nbsp;{{ T "readingTime" .ReadingTime }}&nbsp;
         {{- $comment := .Scratch.Get "comment" | default dict -}}
-        {{- if $comment.enable | and $comment.valine.enable | and $comment.valine.visitor -}}
-          <span id="{{ .RelPermalink }}" class="leancloud_visitors" data-flag-title="{{ .Title }}">
-            <i class="far fa-eye fa-fw"></i>&nbsp;<span class="leancloud-visitors-count"></span>&nbsp;{{ T "views" }}
-          </span>&nbsp;
-        {{- end -}}
-        {{- if .Site.Params.ibruce.enable | and .Site.Params.ibruce.enablePost -}}
+        {{- /* Visitor Count */ -}}
+        {{- if $comment.enable -}}
+          {{- if ($comment.valine.enable | and $comment.valine.visitor) | or ($comment.waline.enable | and $comment.waline.visitor) -}}
+            {{- /* Warning: waline v2 will not be compatible with valine */ -}}  
+            <span id="{{ .RelPermalink }}" class="leancloud_visitors" data-flag-title="{{ .Title }}">
+              <i class="far fa-eye fa-fw"></i>&nbsp;<span class="leancloud-visitors-count"></span>&nbsp;{{ T "views" }}
+            </span>&nbsp;
+          {{- else if $comment.waline.enable | and $comment.waline.visitor -}}
+            <span class="comment-visitors" data-flag-title="{{ .Title }}">
+              <i class="far fa-eye fa-fw"></i>&nbsp;<span id="{{ .RelPermalink }}" class="waline-visitor-count"></span>&nbsp;{{ T "views" }}
+            </span>&nbsp;
+          {{- else if $comment.twikoo.enable | and $comment.twikoo.visitor -}}
+            <span id="{{ .RelPermalink }}" class="comment-visitors" data-flag-title="{{ .Title }}">
+              <i class="far fa-eye fa-fw"></i>&nbsp;<span id="twikoo_visitors"></span>&nbsp;{{ T "views" }}
+            </span>&nbsp;
+          {{- end -}}
+        {{- else if .Site.Params.ibruce.enable | and .Site.Params.ibruce.enablePost -}}
           <span id="busuanzi_container_page_pv" class="busuanzi_visitors" data-flag-title="{{ .Title }}">
             <i class="far fa-eye fa-fw"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;{{ T "views" }}
           </span>&nbsp;
+        {{- end -}}
+        {{- /* Comment Count */ -}}
+        {{- if $comment.enable -}}
+          {{- if $comment.valine.enable | and $comment.valine.commentCount -}}
+            <span class="comment-count" data-flag-title="{{ .Title }}">
+              <i class="far fa-comments fa-fw"></i>&nbsp;<span data-xid="{{ .RelPermalink }}" class="valine-comment-count"></span>&nbsp;{{ T "comments" }}
+            </span>&nbsp;
+          {{- else if $comment.waline.enable | and $comment.waline.commentCount -}}
+            <span class="comment-count" data-flag-title="{{ .Title }}">
+              <i class="far fa-comments fa-fw"></i>&nbsp;<span id="{{ .RelPermalink }}" class="waline-comment-count"></span>&nbsp;{{ T "comments" }}
+            </span>&nbsp;
+          {{- else if $comment.twikoo.enable | and $comment.twikoo.commentCount -}}
+            <span id="{{ .RelPermalink }}" class="comment-count" data-flag-title="{{ .Title }}">
+              <i class="far fa-comments fa-fw"></i>&nbsp;<span id="twikoo-comment-count"></span>&nbsp;{{ T "comments" }}
+            </span>&nbsp;
+          {{- end -}}
         {{- end -}}
       </div>
     </div>

@@ -128,6 +128,9 @@ other = "{{ .Count }} minutes"
 [views]
 other = "views"
 
+[comments]
+other = "comments"
+
 [author]
 other = "Author"
 
