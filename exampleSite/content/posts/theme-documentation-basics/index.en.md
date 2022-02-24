@@ -525,8 +525,7 @@ Please open the code block below to view the complete sample configuration :(far
     # {{< version 0.2.13 changed >}} Comment config
     [params.page.comment]
       enable = false
-      # {{< version 0.2.13 >}}
-      # {{< link "https://artalk.js.org/" Artalk >}} comment config (https://artalk.js.org/)
+      # {{< version 0.2.13 >}} {{< link "https://artalk.js.org/" Artalk >}} comment config (https://artalk.js.org/)
       [params.page.comment.artalk]
         enable = false
         server = "https://yourdomain/api/"
@@ -537,7 +536,7 @@ Please open the code block below to view the complete sample configuration :(far
         editorTravel = true
         flatMode = 'auto'
         maxNesting = 3
-        # Tip: It take effect when params.page.lightgallery is enabled.
+        # It take effect when `params.page.lightgallery` is enabled
         lightgallery = false
       # {{< link "https://disqus.com/" Disqus >}} comment config (https://disqus.com)
       [params.page.comment.disqus]
@@ -627,6 +626,8 @@ Please open the code block below to view the complete sample configuration :(far
         path = ""
         visitor = true
         commentCount = true
+        # It take effect when `params.page.lightgallery` is enabled
+        lightgallery = false
     # {{< version 0.2.7 >}} Third-party library config
     [params.page.library]
       [params.page.library.css]

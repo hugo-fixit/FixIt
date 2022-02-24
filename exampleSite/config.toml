@@ -755,8 +755,8 @@ enableEmoji = true
     # 评论系统设置
     [params.page.comment]
       enable = false
-      # Artalk comment config (https://artalk.js.org/) since v0.2.12
-      # Artalk 评论系统设置 (https://artalk.js.org/) since v0.2.12
+      # Artalk comment config (https://artalk.js.org/) since v0.2.13
+      # Artalk 评论系统设置 (https://artalk.js.org/) since v0.2.13
       [params.page.comment.artalk]
         enable = false
         server = "https://yourdomain/api/"
@@ -767,8 +767,8 @@ enableEmoji = true
         editorTravel = true
         flatMode = 'auto'
         maxNesting = 3
-        # Tip: It take effect when params.page.lightgallery is enabled.
-        # 提示: 当 params.page.lightgallery 启用时生效
+        # It take effect when `params.page.lightgallery` is enabled
+        # 当 `params.page.lightgallery` 启用时生效
         lightgallery = false
       # Disqus comment config (https://disqus.com/)
       # Disqus 评论系统设置 (https://disqus.com/)
@@ -871,6 +871,9 @@ enableEmoji = true
         path = ""
         visitor = true
         commentCount = true
+        # It take effect when `params.page.lightgallery` is enabled
+        # 当 `params.page.lightgallery` 启用时生效
+        lightgallery = false
     # Third-party library config
     # 第三方库配置
     [params.page.library]

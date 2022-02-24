@@ -225,6 +225,9 @@
       {{- with $twikoo.commentCount -}}
         {{- $commentConfig = dict "commentCount" . | dict "twikoo" | merge $commentConfig -}}
       {{- end -}}
+      {{- with $twikoo.lightgallery -}}
+        {{- $commentConfig = dict "lightgallery" . | dict "twikoo" | merge $commentConfig -}}
+      {{- end -}}
       <noscript>
         Please enable JavaScript to view the comments powered by <a href="https://twikoo.js.org/" rel="external nofollow noopener noreffer">Twikoo</a>.
       </noscript>

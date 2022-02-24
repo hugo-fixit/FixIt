@@ -711,100 +711,109 @@ class Theme {
     }
   }
 
-  initComment() {
-    if (this.config.comment) {
-      if (this.config.comment.artalk) {
-        const artalk = new Artalk(this.config.comment.artalk);
-        artalk.setDarkMode(this.isDark);
-        this.switchThemeEventSet.add(() => {
-          artalk.setDarkMode(this.isDark);
+  initCommentLightGallery(comments, images) {
+    if (!this.config.lightGallery) {
+      return;
+    }
+    document.querySelectorAll(comments).forEach(($content) => {
+      const $imgs = $content.querySelectorAll(images + ':not([lightgallery-loaded])');
+      $imgs.forEach(($img) => {
+        $img.setAttribute('lightgallery-loaded', '');
+        const $link = document.createElement('a');
+        $link.setAttribute('class', 'comment-lightgallery');
+        $link.setAttribute('href', $img.src);
+        $link.append($img.cloneNode());
+        $img.replaceWith($link);
+      });
+      if ($imgs.length)
+        lightGallery($content, {
+          selector: '.comment-lightgallery',
+          actualSize: false,
+          hideBarsDelay: 2000,
+          speed: 400
         });
-        this.config.lightGallery &&
-          this.config.comment.artalk.lightgallery &&
-          artalk.on('comments-loaded', () => {
-            document.querySelectorAll('.atk-comment .atk-content').forEach(($content) => {
-              const $imgs = $content.querySelectorAll(
-                'img:not([atk-emoticon]):not([atk-lightbox-loaded])'
-              );
-              $imgs.forEach(($img) => {
-                $img.setAttribute('atk-lightbox-loaded', '');
-                const $link = document.createElement('a');
-                $link.setAttribute('class', 'atk-img-link');
-                $link.setAttribute('href', $img.src);
-                $link.setAttribute('data-src', $img.src);
-                $link.append($img.cloneNode());
-                $img.replaceWith($link);
-              });
-              if ($imgs.length) lightGallery($content, { selector: '.atk-img-link' });
-            });
+    });
+  }
+
+  initComment() {
+    if (!this.config.comment) {
+      return;
+    }
+    if (this.config.comment.artalk) {
+      const artalk = new Artalk(this.config.comment.artalk);
+      artalk.setDarkMode(this.isDark);
+      this.switchThemeEventSet.add(() => {
+        artalk.setDarkMode(this.isDark);
+      });
+      artalk.on('comments-loaded', () => {
+        this.config.comment.artalk.lightgallery &&
+          this.initCommentLightGallery('.atk-comment .atk-content', 'img:not([atk-emoticon])');
+      });
+      return artalk;
+    }
+    if (this.config.comment.gitalk) {
+      this.config.comment.gitalk.body = decodeURI(window.location.href);
+      const gitalk = new Gitalk(this.config.comment.gitalk);
+      gitalk.render('gitalk');
+      return gitalk;
+    }
+    if (this.config.comment.valine) {
+      return new Valine(this.config.comment.valine);
+    }
+    if (this.config.comment.waline) {
+      return new Waline(this.config.comment.waline);
+    }
+    if (this.config.comment.utterances) {
+      const utterancesConfig = this.config.comment.utterances;
+      const script = document.createElement('script');
+      script.src = 'https://utteranc.es/client.js';
+      script.type = 'text/javascript';
+      script.setAttribute('repo', utterancesConfig.repo);
+      script.setAttribute('issue-term', utterancesConfig.issueTerm);
+      if (utterancesConfig.label) script.setAttribute('label', utterancesConfig.label);
+      script.setAttribute(
+        'theme',
+        this.isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme
+      );
+      script.crossOrigin = 'anonymous';
+      script.async = true;
+      document.getElementById('utterances').appendChild(script);
+      this._utterancesOnSwitchTheme =
+        this._utterancesOnSwitchTheme ||
+        (() => {
+          const message = {
+            type: 'set-theme',
+            theme: this.isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme
+          };
+          const iframe = document.querySelector('.utterances-frame');
+          iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+        });
+      this.switchThemeEventSet.add(this._utterancesOnSwitchTheme);
+      return;
+    }
+    if (this.config.comment.twikoo) {
+      const twikooConfig = this.config.comment.twikoo;
+      if (twikooConfig.lightgallery) {
+        twikooConfig.onCommentLoaded = () => {
+          this.initCommentLightGallery('.tk-comments .tk-content', 'img:not(.tk-owo-emotion)');
+        };
+      }
+      twikoo.init(twikooConfig);
+      if (twikooConfig.commentCount) {
+        // https://twikoo.js.org/api.html#get-comments-count
+        twikoo
+          .getCommentsCount({
+            envId: twikooConfig.envId,
+            region: twikooConfig.region,
+            urls: [window.location.pathname],
+            includeReply: false
+          })
+          .then(function (response) {
+            const twikooCommentCount = document.getElementById('twikoo-comment-count');
+            if (twikooCommentCount) twikooCommentCount.innerHTML = response[0].count;
           });
-        return artalk;
       }
-      if (this.config.comment.gitalk) {
-        this.config.comment.gitalk.body = decodeURI(window.location.href);
-        const gitalk = new Gitalk(this.config.comment.gitalk);
-        gitalk.render('gitalk');
-        return gitalk;
-      }
-      if (this.config.comment.valine) {
-        return new Valine(this.config.comment.valine);
-      }
-      if (this.config.comment.waline) {
-        return new Waline(this.config.comment.waline);
-      }
-      if (this.config.comment.utterances) {
-        const utterancesConfig = this.config.comment.utterances;
-        const script = document.createElement('script');
-        script.src = 'https://utteranc.es/client.js';
-        script.type = 'text/javascript';
-        script.setAttribute('repo', utterancesConfig.repo);
-        script.setAttribute('issue-term', utterancesConfig.issueTerm);
-        if (utterancesConfig.label) script.setAttribute('label', utterancesConfig.label);
-        script.setAttribute(
-          'theme',
-          this.isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme
-        );
-        script.crossOrigin = 'anonymous';
-        script.async = true;
-        document.getElementById('utterances').appendChild(script);
-        this._utterancesOnSwitchTheme =
-          this._utterancesOnSwitchTheme ||
-          (() => {
-            const message = {
-              type: 'set-theme',
-              theme: this.isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme
-            };
-            const iframe = document.querySelector('.utterances-frame');
-            iframe.contentWindow.postMessage(message, 'https://utteranc.es');
-          });
-        this.switchThemeEventSet.add(this._utterancesOnSwitchTheme);
-        return;
-      }
-      if (this.config.comment.twikoo) {
-        const twikooConfig = this.config.comment.twikoo;
-        twikoo.init(twikooConfig);
-        if (twikooConfig.commentCount) {
-          // https://twikoo.js.org/api.html#get-comments-count
-          twikoo
-            .getCommentsCount({
-              envId: twikooConfig.envId,
-              region: twikooConfig.region,
-              urls: [window.location.pathname],
-              includeReply: false
-            })
-            .then(function (response) {
-              // example: [
-              //   { url: '/2020/10/post-1.html', count: 10 },
-              //   { url: '/2020/11/post-2.html', count: 0 },
-              //   { url: '/2020/12/post-3.html', count: 20 }
-              // ]
-              // If there is an element with id="twikoo-comment-count", set its innerHTML to the count of comments
-              const twikooCommentCount = document.getElementById('twikoo-comment-count');
-              if (twikooCommentCount) twikooCommentCount.innerHTML = response[0].count;
-            });
-        }
-        return;
-      }
+      return;
     }
   }
 

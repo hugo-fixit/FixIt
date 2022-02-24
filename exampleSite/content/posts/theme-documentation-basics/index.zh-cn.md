@@ -536,8 +536,7 @@ hugo
     # {{< version 0.2.13 changed >}} 评论系统设置
     [params.page.comment]
       enable = false
-      # {{< version 0.2.13 >}}
-      # {{< link "https://artalk.js.org/" Artalk >}} 评论系统设置 (https://artalk.js.org/)
+      # {{< version 0.2.13 >}} {{< link "https://artalk.js.org/" Artalk >}} 评论系统设置 (https://artalk.js.org/)
       [params.page.comment.artalk]
         enable = false
         server = "https://yourdomain/api/"
@@ -548,7 +547,7 @@ hugo
         editorTravel = true
         flatMode = 'auto'
         maxNesting = 3
-        # 提示：当 params.page.lightgallery 启用时生效
+        # 当 `params.page.lightgallery` 启用时生效
         lightgallery = false
       # {{< link "https://disqus.com/" Disqus >}} 评论系统设置 (https://disqus.com)
       [params.page.comment.disqus]
@@ -638,6 +637,8 @@ hugo
         path = ""
         visitor = true
         commentCount = true
+        # 当 `params.page.lightgallery` 启用时生效
+        lightgallery = false
     # {{< version 0.2.7 >}} 第三方库配置
     [params.page.library]
       [params.page.library.css]
