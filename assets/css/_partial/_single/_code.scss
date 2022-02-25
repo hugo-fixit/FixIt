@@ -1,5 +1,5 @@
 code {
-  display:inline-block;
+  display: inline-block;
   max-width: 100%;
   padding: 0 .4rem;
   @include overflow-wrap(break-word);
@@ -172,7 +172,7 @@ code, pre, .highlight table, .highlight tr, .highlight td {
       }
 
       .table-wrapper {
-        max-height: $MAX_LENGTH;
+        max-height: 100%;
         @include details-transition-close;
       }
 

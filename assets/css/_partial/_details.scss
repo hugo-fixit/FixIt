@@ -26,7 +26,7 @@
     }
 
     .details-content {
-      max-height: $MAX_LENGTH;
+      max-height: 100%;
       @include details-transition-close;
     }
   }
