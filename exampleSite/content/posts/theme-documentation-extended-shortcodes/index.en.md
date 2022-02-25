@@ -2,7 +2,6 @@
 weight: 4
 title: "Theme Documentation - Extended Shortcodes"
 date: 2020-03-03T16:29:41+08:00
-lastmod: 2022-01-25T15:48:59+08:00
 draft: false
 author: "Lruihao"
 authorLink: "https://lruihao.cn"
@@ -1319,6 +1318,35 @@ You can see the output in the console of the developer tool.
 {{< script >}}
 console.log('Hello FixIt!');
 {{< /script >}}
+
+## 12 details
+{{< version 0.2.13 >}}
+
+`details` is a shortcode to insert **:(fab fa-html5 fa-fw): HTML5 tag** details and summary in your post.
+
+The `details` shortcode has only one parameter:
+
+- **summary** *[optional]* (**first** positional parameter)
+
+  summary of details. (markdown support)
+
+Example `details` input:
+
+```markdown
+{{</* details "**Copyright** 2022." */>}}
+*All pages and graphics on this web site are the property of FixIt.*
+{{</* /details */>}}
+Or
+{{</* details summary="**Copyright** 2022." */>}}
+*All pages and graphics on this web site are the property of FixIt.*
+{{</* /details */>}}
+```
+
+The rendered output looks like this:
+
+{{< details "**Copyright** 2022." >}}
+*All pages and graphics on this web site are the property of FixIt.*
+{{< /details >}}
 
 ---
 

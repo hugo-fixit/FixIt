@@ -2,7 +2,6 @@
 weight: 4
 title: "主题文档 - 扩展 Shortcodes"
 date: 2020-03-03T16:29:59+08:00
-lastmod: 2022-01-25T15:48:59+08:00
 draft: false
 author: "Lruihao"
 authorLink: "https://lruihao.cn"
@@ -1321,6 +1320,34 @@ console.log('Hello FixIt!');
 {{< script >}}
 console.log('Hello FixIt!');
 {{< /script >}}
+
+## 12 details
+{{< version 0.2.13 >}}
+
+`details` shortcode 用来在你的文章中插入 **:(fab fa-html5 fa-fw): HTML5 标签** details 和 summary。
+
+`details` shortcode 只有一个参数：
+- **summary** *[可选]* (**第一个**位置参数）
+
+  summary 标签的内容（支持 markdown）
+
+一个 `details` 示例：
+
+```markdown
+{{</* details "**Copyright** 2022." */>}}
+*All pages and graphics on this web site are the property of FixIt.*
+{{</* /details */>}}
+Or
+{{</* details summary="**Copyright** 2022." */>}}
+*All pages and graphics on this web site are the property of FixIt.*
+{{</* /details */>}}
+```
+
+呈现的输出效果如下：
+
+{{< details "**Copyright** 2022." >}}
+*All pages and graphics on this web site are the property of FixIt.*
+{{< /details >}}
 
 ---
 
