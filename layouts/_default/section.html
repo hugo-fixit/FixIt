@@ -17,6 +17,7 @@
       {{- else -}}
         {{- $pages = .Paginate $pages -}}
       {{- end -}}
+      {{- partial "recently-updated.html" . -}}
       {{- range $pages.PageGroups -}}
         <h3 class="group-title">{{ .Key }}</h3>
         {{- range .Pages -}}
@@ -24,7 +25,7 @@
             <a href="{{ .RelPermalink }}" class="archive-item-link">
               {{- .Title -}}
             </a>
-            <span class="archive-item-date" title={{ "2006-01-02 15:04:05" | .Date.Format }}>
+            <span class="archive-item-date" title='{{ "2006-01-02 15:04:05" | .Date.Format }}'>
               {{- $.Site.Params.section.dateFormat | default "01-02" | .Date.Format -}}
             </span>
           </article>

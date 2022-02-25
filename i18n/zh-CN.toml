@@ -30,8 +30,12 @@ other = "分类"
 
 [categories]
 other = "分类"
-
 # === Taxonomy ===
+
+# === Section ===
+[recentlyUpdated]
+other = "最近更新"
+# === Section ===
 
 # === Pagination ===
 [more]

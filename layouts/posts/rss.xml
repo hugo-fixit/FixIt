@@ -34,6 +34,20 @@
       </lastBuildDate>
     {{- end -}}
     <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml" />
+    {{- if .Site.Params.section.recentlyUpdated.rss -}}
+      {{- $postCount := 0 -}}
+      {{- $maxPostCount := .Site.Params.section.recentlyUpdated.maxCount | default 10 -}}
+      {{- $days := .Site.Params.section.recentlyUpdated.days | default 30 -}}
+      {{- range (where .Data.Pages.ByLastmod.Reverse "Section" "!=" "") -}}
+        {{- if gt (add .Lastmod.Unix (mul 86900 $days)) now.Unix -}}
+          {{- if lt $postCount $maxPostCount -}}
+            {{- if ne .Lastmod.Unix .Date.Unix }}
+              {{- dict "Page" . "Site" .Site | partial "rss/item.html" -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
     {{- range .Pages | first (.Site.Params.section.rss | default 10) -}}
       {{- dict "Page" . "Site" .Site | partial "rss/item.html" -}}
     {{- end -}}

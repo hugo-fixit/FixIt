@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 - :tada: Feat: add Artalk comment support ([#54](https://github.com/Lruihao/FixIt/issues/54), [#57](https://github.com/Lruihao/FixIt/pull/57)@hiifong)
 - :tada: Feat: add Waline comment support ([#36](https://github.com/Lruihao/FixIt/issues/36))
 - :tada: Feat: add Twikoo comment support ([#64](https://github.com/Lruihao/FixIt/issues/64))
+- :sparkles: Feat: add recently updated section ([#50](https://github.com/Lruihao/FixIt/issues/50))
 - :sparkles: Style: add media style for print view ([#61](https://github.com/Lruihao/FixIt/issues/61))
 - :sparkles: Feat: add pageStyle option ([#62](https://github.com/Lruihao/FixIt/issues/62))
 - :sparkles: Feat: add article expiration reminder support ([#51](https://github.com/Lruihao/FixIt/issues/51))

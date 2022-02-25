@@ -1,0 +1,27 @@
+{{- if and .Site.Params.section.recentlyUpdated.enable (eq $.Paginator.PageNumber 1) -}}
+  {{- $hasTitle := false }}
+  {{- $postCount := 0 -}}
+  {{- $maxPostCount := .Site.Params.section.recentlyUpdated.maxCount | default 10 -}}
+  {{- $days := .Site.Params.section.recentlyUpdated.days | default 30 -}}
+  {{- range (where .Data.Pages.ByLastmod.Reverse "Section" "!=" "") -}}
+    {{- if gt (add .Lastmod.Unix (mul 86900 $days)) now.Unix -}}
+      {{- if lt $postCount $maxPostCount -}}
+        {{- if ne .Lastmod.Unix .Date.Unix }}
+          {{- $postCount = add $postCount 1 -}}
+          {{- if eq $hasTitle false -}}
+            <h3 class="group-title">{{- T "recentlyUpdated" -}}</h3>
+            {{- $hasTitle = true -}}
+          {{- end -}}
+          <article class="archive-item">
+            <a href="{{ .RelPermalink }}" class="archive-item-link">
+              {{- .Title -}}
+            </a>
+            <span class="archive-item-date" title='{{ "2006-01-02 15:04:05" | .Lastmod.Format }}'>
+              {{- default $.Site.Params.section.dateFormat | default "01-02" | .Lastmod.Format -}}
+            </span>
+          </article>
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

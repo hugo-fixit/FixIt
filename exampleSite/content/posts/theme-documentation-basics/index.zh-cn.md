@@ -309,6 +309,12 @@ hugo
     dateFormat = "01-02"
     # RSS 文章数目
     rss = 10
+    # {{< version 0.2.13 >}} 最近更新文章设置
+    [params.section.recentlyUpdated]
+      enable = false
+      rss = false
+      days = 30
+      maxCount = 10
 
   # {{< version 0.2.0 >}} List（目录或标签）页面配置
   [params.list]

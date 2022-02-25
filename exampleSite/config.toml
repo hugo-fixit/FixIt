@@ -591,6 +591,13 @@ enableEmoji = true
     # amount of RSS pages
     # RSS 文章数目
     rss = 10
+    # recently updated posts settings since v0.2.13
+    # 最近更新文章设置 since v0.2.13
+    [params.section.recentlyUpdated]
+      enable = true
+      rss = true
+      days = 30
+      maxCount = 10
 
   # List (category or tag) page config
   # List (目录或标签) 页面配置
