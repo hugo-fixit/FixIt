@@ -1337,7 +1337,7 @@ console.log('Hello FixIt!');
 {{</* details "**Copyright** 2022." */>}}
 *All pages and graphics on this web site are the property of FixIt.*
 {{</* /details */>}}
-Or
+或者
 {{</* details summary="**Copyright** 2022." */>}}
 *All pages and graphics on this web site are the property of FixIt.*
 {{</* /details */>}}
