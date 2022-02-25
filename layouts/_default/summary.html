@@ -11,7 +11,7 @@
   {{- end -}}
   {{- with $image -}}
     <div class="featured-image-preview">
-      <a href="{{ $.RelPermalink }}">
+      <a href="{{ $.RelPermalink }}" aria-label="{{ $.Title }}">
         {{- dict "Src" . "Title" $.Description "Resources" $.Resources | partial "plugin/image.html" -}}
       </a>
     </div>
@@ -32,7 +32,7 @@
     </span>
 
     {{- with .Site.Params.dateFormat | default "2006-01-02" | .PublishDate.Format -}}
-      &nbsp;<span class="post-publish" title={{ "2006-01-02 15:04:05" | $.PublishDate.Format }}>
+      &nbsp;<span class="post-publish" title='{{ "2006-01-02 15:04:05" | $.PublishDate.Format }}'>
         {{- printf `<time datetime="%v">%v</time>` . . | dict "Date" | T "publishedOnDate" | safeHTML -}}
       </span>
     {{- end -}}
