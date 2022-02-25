@@ -1,6 +1,14 @@
 .archive {
   .single-title {
     text-align: right;
+    
+    sup {
+      color: $global-font-secondary-color;
+
+      [theme=dark] & {
+        color: $global-font-secondary-color-dark;
+      }
+    }
   }
 
   .group-title {

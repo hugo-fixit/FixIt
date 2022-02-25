@@ -9,11 +9,12 @@ All notable changes to this project will be documented in this file.
 - :tada: Feat: add Waline comment support ([#36](https://github.com/Lruihao/FixIt/issues/36))
 - :tada: Feat: add Twikoo comment support ([#64](https://github.com/Lruihao/FixIt/issues/64))
 - :sparkles: Feat: add recently updated section ([#50](https://github.com/Lruihao/FixIt/issues/50))
-- :sparkles: Style: add media style for print view ([#61](https://github.com/Lruihao/FixIt/issues/61))
-- :sparkles: Feat: add pageStyle option ([#62](https://github.com/Lruihao/FixIt/issues/62))
 - :sparkles: Feat: add article expiration reminder support ([#51](https://github.com/Lruihao/FixIt/issues/51))
-- :sparkles: Feat: add 9 newly supported social links ([#17](https://github.com/Lruihao/FixIt/issues/17))
+- :sparkles: Feat: add pageStyle option ([#62](https://github.com/Lruihao/FixIt/issues/62))
+- :sparkles: Style: add media style for print view ([#61](https://github.com/Lruihao/FixIt/issues/61))
 - :sparkles: Feat: add Gravatar mirror site support ([#66](https://github.com/Lruihao/FixIt/pull/66)@ctj12461)
+- :sparkles: Feat: add archive count display ([#33](https://github.com/Lruihao/FixIt/issues/33))
+- :sparkles: Feat: add 9 newly supported social links ([#17](https://github.com/Lruihao/FixIt/issues/17))
 - :sparkles: Feat: update cell-watermark 1.0.3 and CDN support (fontFamily supported)
 - :mag: Feat: add 360 and sougou seo support
 - :lipstick: Style: add radius of the scrollbar
