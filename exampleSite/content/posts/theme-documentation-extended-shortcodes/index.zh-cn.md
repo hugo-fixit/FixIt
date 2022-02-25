@@ -283,7 +283,7 @@ This is a **right-aligned** paragraph.
 
 * **title** *[可选]*（**第二个**位置参数）
 
-    `admonition` 横幅的标题，默认值是 **type** 参数的值。
+    `admonition` 横幅的标题，默认值是 **type** 参数的值。（支持 markdown）{{< version 0.2.13 changed >}}
 
 * **open** *[可选]*（**第三个**位置参数） {{< version 0.2.0 changed >}}
 
@@ -1329,7 +1329,7 @@ console.log('Hello FixIt!');
 `details` shortcode 只有一个参数：
 - **summary** *[可选]* (**第一个**位置参数）
 
-  summary 标签的内容（支持 markdown）
+    summary 标签的内容（支持 markdown）
 
 一个 `details` 示例：
 

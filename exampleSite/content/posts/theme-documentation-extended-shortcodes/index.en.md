@@ -280,7 +280,7 @@ The `admonition` shortcode has the following named parameters:
 
 * **title** *[optional]* (**second** positional parameter)
 
-    Title of the `admonition` banner, default value is the value of **type** parameter.
+    Title of the `admonition` banner, default value is the value of **type** parameter. (markdown support) {{< version 0.2.13 changed >}}
 
 * **open** *[optional]* (**third** positional parameter) {{< version 0.2.0 changed >}}
 
@@ -1328,7 +1328,7 @@ The `details` shortcode has only one parameter:
 
 - **summary** *[optional]* (**first** positional parameter)
 
-  summary of details. (markdown support)
+    summary of details. (markdown support)
 
 Example `details` input:
 
