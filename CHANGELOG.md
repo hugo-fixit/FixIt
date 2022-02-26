@@ -23,6 +23,7 @@ All notable changes to this project will be documented in this file.
 - :lipstick: Style: add radius of the scrollbar
 - :pencil2: Style: fix typo *discription* should be **description** ([#60](https://github.com/Lruihao/FixIt/issues/60))
 - :fire: Feat: remove shortcode cardlink ([#42](https://github.com/Lruihao/FixIt/issues/42))
+- :wrench: Chore: add atomic-algolia for exampleSite ([#70](https://github.com/Lruihao/FixIt/issues/70))
 - **Full Changelog:** [`v0.2.12...v0.2.13`](https://github.com/Lruihao/FixIt/compare/v0.2.12...v0.2.13)
 
 ## v0.2.12 [2022-1-27]

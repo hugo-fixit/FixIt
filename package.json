@@ -3,7 +3,9 @@
   "version": "0.2.0",
   "description": "FixIt theme source file",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "atomic-algolia": "^0.3.19"
+  },
   "devDependencies": {
     "@babel/cli": "^7.16.8",
     "@babel/core": "^7.16.12",
@@ -26,7 +28,8 @@
     "check": "htmlproofer exampleSite/public --check-html --allow-hash-href --empty-alt-ignore --disable-external",
     "copy": "rm -rf resources && cp -rf exampleSite/resources resources",
     "server": "hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender",
-    "server:production": "hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender -e production"
+    "server:production": "hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender -e production",
+    "algolia": "atomic-algolia"
   },
   "resolutions": {
     "minimist": "^1.2.5"
