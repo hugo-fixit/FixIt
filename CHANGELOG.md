@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: add markdown support for **title** parameter of the admonition shortcode
 - :sparkles: Feat: add 9 newly supported social links ([#17](https://github.com/Lruihao/FixIt/issues/17))
 - :sparkles: Feat: update cell-watermark 1.0.3 and CDN support (fontFamily supported)
+- :bug: Fix: remove source map of local libraries to avoid 404 error ([#67](https://github.com/Lruihao/FixIt/issues/67))
 - :mag: Feat: add 360 and sougou seo support
 - :lipstick: Style: add radius of the scrollbar
 - :pencil2: Style: fix typo *discription* should be **description** ([#60](https://github.com/Lruihao/FixIt/issues/60))
