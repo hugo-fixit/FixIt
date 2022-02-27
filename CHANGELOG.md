@@ -17,12 +17,13 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: add details shortcode ([#68](https://github.com/Lruihao/FixIt/issues/68))
 - :sparkles: Feat: add markdown support for **title** parameter of the admonition shortcode
 - :sparkles: Feat: add 9 newly supported social links ([#17](https://github.com/Lruihao/FixIt/issues/17))
-- :sparkles: Feat: update cell-watermark 1.0.3 and CDN support (fontFamily supported)
-- :bug: Fix: remove source map of local libraries to avoid 404 error ([#67](https://github.com/Lruihao/FixIt/issues/67))
+- :zap: Perf: enhance highlight feature and fix some css bugs ([#43](https://github.com/Lruihao/FixIt/issues/43))
 - :mag: Feat: add 360 and sougou seo support
+- :bug: Fix: remove source map of local libraries to avoid 404 error ([#67](https://github.com/Lruihao/FixIt/issues/67))
+- :fire: Feat: remove shortcode cardlink ([#42](https://github.com/Lruihao/FixIt/issues/42))
 - :lipstick: Style: add radius of the scrollbar
 - :pencil2: Style: fix typo *discription* should be **description** ([#60](https://github.com/Lruihao/FixIt/issues/60))
-- :fire: Feat: remove shortcode cardlink ([#42](https://github.com/Lruihao/FixIt/issues/42))
+- :wrench: Chore: update cell-watermark 1.0.3 and CDN support (fontFamily supported)
 - :wrench: Chore: add atomic-algolia for exampleSite ([#70](https://github.com/Lruihao/FixIt/issues/70))
 - **Full Changelog:** [`v0.2.12...v0.2.13`](https://github.com/Lruihao/FixIt/compare/v0.2.12...v0.2.13)
 
