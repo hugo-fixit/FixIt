@@ -1,14 +1,15 @@
 // inline code
-// TODO
 code {
   display: inline-block;
   max-width: 100%;
   padding: 0 .4rem;
-  @include overflow-wrap(break-word);
-  @include line-break(anywhere);
   font-size: $code-font-size;
   font-family: $code-font-family;
   color: $code-color;
+  background-color: #afb8c133;
+  border-radius: $global-border-radius;;
+  @include overflow-wrap(break-word);
+  @include line-break(anywhere);
 
   [theme=dark] & {
     color: $code-color-dark;
@@ -18,8 +19,12 @@ code {
 // indented code
 pre {
   margin: 0;
-  padding: .25rem 0 .25rem .5rem;
+  line-height: 1.45;
+  padding: .5rem;
   overflow: auto;
+  font-size: $code-font-size;
+  font-family: $code-font-family;
+  border-radius: $global-border-radius;
   @include tab-size(4);
 
   background: $code-background-color;
@@ -30,6 +35,9 @@ pre {
 
   code {
     padding: 0;
+    border-radius: 0;
+    background-color: transparent;
+    @include max-content(min-width);
   }
 
   img {
@@ -40,8 +48,8 @@ pre {
 }
 
 .highlight, .gist {
-  font-family: $code-font-family;
   font-size: $code-font-size;
+  font-family: $code-font-family;
 
   .table-wrapper {
     > table,
@@ -58,7 +66,6 @@ pre {
 
 // block fenced code
 .highlight {
-  line-height: 1.4em;
   margin: .5rem 0;
 
   > .chroma {
@@ -72,8 +79,10 @@ pre {
       width: 100%;
       font-family: $global-font-family;
       font-weight: bold;
+      border-radius: $global-border-radius;
       color: $code-info-color;
       background: darken($code-background-color, 8%);
+      @include transition(all 0.2s ease);
 
       [theme=dark] & {
         color: $code-info-color-dark;
@@ -124,23 +133,6 @@ pre {
       }
     }
 
-    /* LineTableTD */
-    .lntd {
-      vertical-align: top;
-      padding: 0;
-
-      // line numbers
-      &:first-child {
-        min-width: 1.6rem;
-        text-align: right;
-      }
-
-      // code content
-      &:last-child {
-        width: 100%;
-      }
-    }
-
     /* LineTable */
     .lntable {
       border-spacing: 0;
@@ -148,44 +140,96 @@ pre {
       overflow: auto;
       display: block;
 
+      background: $code-background-color;
+
+      [theme=dark] & {
+        background: $code-background-color-dark;
+      }
+
+      /* LineTableTD */
+      .lntd {
+        vertical-align: top;
+        padding: 0;
+
+        // line numbers
+        &:first-child {
+          min-width: 1.6rem;
+          text-align: right;
+
+          pre {
+            padding: .25rem;
+          }
+
+          /* LineNumbers */
+          .ln {
+            padding-right: .75rem;
+          }
+
+          /* LineNumbersTable */
+          .lnt, .ln {
+            color: $global-font-secondary-color;
+
+            [theme=dark] & {
+              color: $global-font-secondary-color-dark;
+            }
+          }
+        }
+
+        // code content
+        &:last-child {
+          width: 100%;
+
+          pre {
+            padding: .25rem .5rem .25rem .25rem;
+
+            code {
+              width: 100%;
+            }
+          }
+
+          /* LineHighlight */
+          .hl {
+            display: block;
+            background-color: #fff8c5;
+            box-shadow: -2px 0 0 #edd88b;
+
+            [theme=dark] & {
+              background-color: darken($code-background-color-dark, 5%);
+            }
+          }
+
+          /* GenericUnderline */
+          .gl {
+            text-decoration: underline;
+          }
+          /* GenericStrong */
+          .gs {
+            font-weight: bold;
+          }
+          /* GenericEmph */
+          .ge {
+            font-style: italic;
+          }
+        }
+      }
+
       pre {
-        @include max-content(min-width);
+        border-radius: 0;
       }
-    }
 
-    /* LineNumbers */
-    .ln {
-      padding-right: .75rem;
-    }
-
-    /* LineHighlight */
-    .hl {
-      display: block;
-      background-color: darken($code-background-color, 10%);
-
-      [theme=dark] & {
-        background-color: darken($code-background-color-dark, 5%);
-      }
-    }
-
-    /* LineNumbersTable */
-    .ln, .lnt {
-      color: $global-font-secondary-color;
-
-      [theme=dark] & {
-        color: $global-font-secondary-color-dark;
-      }
     }
 
     .table-wrapper {
       max-height: 0;
-      overflow-y: hidden;
+      overflow: hidden;
+      border-radius: 0 0 $global-border-radius $global-border-radius;
       @include details-transition-open;
     }
 
     &.open {
       .code-header {
         background: darken($code-background-color, 3%);
+        border-radius: $global-border-radius $global-border-radius 0 0;
 
         [theme=dark] & {
           background: darken($code-background-color-dark, 3%);
@@ -211,14 +255,21 @@ pre {
     }
   }
 
+  // ========== Higtlight Color ========== //
+
   /* Error */
   .err { 
-    color: $code-error-color; 
-    background-color: $code-error-background-color;
+    font-style: italic;
+    border-bottom: 1px dotted $code-error-color;
   }
-
-  /* GenericEmph */ .ge { font-style: italic }
-  /* GenericStrong */ .gs { font-weight: bold }
+  /* GenericDeleted */
+  .gd {
+    background-color: #ffebe9;
+  }
+  /* GenericInserted */
+  .gi {
+    background-color: #dafbe1;
+  }
 
   @each $class, $color in $code-highlight-color-map {
     .#{$class} { color: $color; }
@@ -229,6 +280,7 @@ pre {
       .#{$class} { color: $color; }
     }
   }
+  // ========== Higtlight Color ========== //
 }
 
 // gist shortcode
