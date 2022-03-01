@@ -17,7 +17,11 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: add details shortcode ([#68](https://github.com/Lruihao/FixIt/issues/68))
 - :sparkles: Feat: add markdown support for **title** parameter of the admonition shortcode
 - :sparkles: Feat: add 9 newly supported social links ([#17](https://github.com/Lruihao/FixIt/issues/17))
-- :zap: Perf: enhance highlight feature and fix some css bugs ([#43](https://github.com/Lruihao/FixIt/issues/43))
+- :zap: Perf: enhance highlight feature (GitHub syntax supported) and fix some css bugs ([#43](https://github.com/Lruihao/FixIt/issues/43))
+  - Inline Code
+  - Indented Code
+  - Block Fenced Code
+  - gist shortcode
 - :mag: Feat: add 360 and sougou seo support
 - :bug: Fix: remove source map of local libraries to avoid 404 error ([#67](https://github.com/Lruihao/FixIt/issues/67))
 - :fire: Feat: remove shortcode cardlink ([#42](https://github.com/Lruihao/FixIt/issues/42))
