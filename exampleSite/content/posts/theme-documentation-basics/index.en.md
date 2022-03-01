@@ -122,7 +122,7 @@ theme = "FixIt"
 [markup]
   # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
   [markup.highlight]
-    # false is a necessary configuration (https://github.com/dillonzq/LoveIt/issues/158)
+    # false is a necessary configuration (https://github.com/Lruihao/FixIt/issues/43)
     noClasses = false
 ```
 
@@ -766,13 +766,14 @@ Please open the code block below to view the complete sample configuration :(far
 [markup]
   # {{< link "https://gohugo.io/content-management/syntax-highlighting" "Syntax Highlighting" >}} (https://gohugo.io/content-management/syntax-highlighting)
   [markup.highlight]
+    ########## necessary configurations ##########
+    # {{< link "https://github.com/Lruihao/FixIt/issues/43" >}}
     codeFences = true
-    guessSyntax = true
     lineNos = true
     lineNumbersInTable = true
-    # false is a necessary configuration
-    # ({{< link "https://github.com/dillonzq/LoveIt/issues/158" >}})
-    noClasses = false
+    noClasses = false 
+    ########## necessary configurations ##########
+    guessSyntax = true
   # Goldmark is from Hugo 0.60 the default library used for Markdown
   [markup.goldmark]
     [markup.goldmark.extensions]

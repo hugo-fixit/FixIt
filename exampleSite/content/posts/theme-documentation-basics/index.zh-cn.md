@@ -125,7 +125,7 @@ theme = "FixIt"
 [markup]
   # 语法高亮设置 (https://gohugo.io/content-management/syntax-highlighting)
   [markup.highlight]
-    # false 是必要的设置 (https://github.com/dillonzq/LoveIt/issues/158)
+    # false 是必要的设置 (https://github.com/Lruihao/FixIt/issues/43)
     noClasses = false
 ```
 
@@ -777,12 +777,14 @@ hugo
 [markup]
   # {{< link "https://gohugo.io/content-management/syntax-highlighting" "语法高亮设置" >}} (https://gohugo.io/content-management/syntax-highlighting)
   [markup.highlight]
+    ################## 必要的配置 ##################
+    # {{< link "https://github.com/Lruihao/FixIt/issues/43" >}}
     codeFences = true
-    guessSyntax = true
     lineNos = true
     lineNumbersInTable = true
-    # false 是必要的设置 (https://github.com/dillonzq/LoveIt/issues/158)
-    noClasses = false
+    noClasses = false 
+    ################## 必要的配置 ##################
+    guessSyntax = true
   # Goldmark 是 Hugo 0.60 以来的默认 Markdown 解析库
   [markup.goldmark]
     [markup.goldmark.extensions]
