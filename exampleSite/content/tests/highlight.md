@@ -22,7 +22,7 @@ draft: true
 ```java
 /**
  * @author John Smith <john.smith@example.com>
-*/
+ */
 package l2f.gameserver.model;
 
 public abstract strictfp class L2Char extends L2Object {
