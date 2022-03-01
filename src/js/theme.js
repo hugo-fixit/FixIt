@@ -487,11 +487,10 @@ class Theme {
   }
 
   initToc() {
-    const $toc = document.getElementById('toc-auto');
-    if ($toc === null) {
+    const $tocCore = document.getElementById('TableOfContents');
+    if ($tocCore === null) {
       return;
     }
-    const $tocCore = document.getElementById('TableOfContents');
     if (
       document.getElementById('toc-static').getAttribute('kept') === 'true' ||
       this.util.isTocStatic()
@@ -508,7 +507,8 @@ class Theme {
         $tocCore.parentElement.removeChild($tocCore);
         $tocContentAuto.appendChild($tocCore);
       }
-      $toc.style.visibility = 'visible';
+      const $toc = document.getElementById('toc-auto');
+      $toc.style.visibility = 'visible'; // TODO use animateCSS instead
       $toc.style.marginTop =
         document.querySelector('.single-title').clientHeight +
         document.querySelector('.post-meta').clientHeight +
@@ -947,6 +947,7 @@ class Theme {
           this._resizeTimeout = window.setTimeout(() => {
             this._resizeTimeout = null;
             for (let event of this.resizeEventSet) event();
+            this.initToc();
             this.initMermaid();
             this.initSearch();
           }, 100);
