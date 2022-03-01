@@ -1,26 +1,48 @@
+// inline code
 code {
   display: inline-block;
   max-width: 100%;
-  padding: 0 .4rem;
-  @include overflow-wrap(break-word);
-  @include line-break(anywhere);
+  padding: 0 0.4rem;
   font-size: $code-font-size;
   font-family: $code-font-family;
   color: $code-color;
+  background-color: rgba(175, 184, 193, 0.2);
+  border-radius: $global-border-radius;
+  @include overflow-wrap(break-word);
+  @include line-break(anywhere);
 
-  [theme=dark] & {
+  [theme='dark'] & {
     color: $code-color-dark;
+    background-color: rgba(99, 110, 123, 0.4);
   }
 }
 
+// indented code
 pre {
   margin: 0;
-  padding: .25rem 0 .25rem .5rem;
+  line-height: 1.45em;
+  padding: 0.5rem;
   overflow: auto;
+  font-size: $code-font-size;
+  font-family: $code-font-family;
+  border-radius: $global-border-radius;
   @include tab-size(4);
+
+  background-color: $code-background-color;
+
+  [theme='dark'] & {
+    background-color: $code-background-color-dark;
+  }
 
   code {
     padding: 0;
+    border-radius: 0;
+    background-color: transparent;
+    @include max-content(min-width);
+
+    [theme='dark'] & {
+      background-color: transparent;
+    }
   }
 
   img {
@@ -30,17 +52,10 @@ pre {
   }
 }
 
-code, pre, .highlight table, .highlight tr, .highlight td {
-  background: $code-background-color;
-
-  [theme=dark] & {
-    background: $code-background-color-dark;
-  }
-}
-
-.highlight, .gist {
-  font-family: $code-font-family;
+.highlight,
+.gist {
   font-size: $code-font-size;
+  font-family: $code-font-family;
 
   .table-wrapper {
     > table,
@@ -55,9 +70,9 @@ code, pre, .highlight table, .highlight tr, .highlight td {
   }
 }
 
+// block fenced code
 .highlight {
-  line-height: 1.4em;
-  margin: .5rem 0;
+  margin: 0.5rem 0;
 
   > .chroma {
     position: relative;
@@ -70,12 +85,15 @@ code, pre, .highlight table, .highlight tr, .highlight td {
       width: 100%;
       font-family: $global-font-family;
       font-weight: bold;
+      line-height: 1.4em;
+      border-radius: $global-border-radius;
       color: $code-info-color;
-      background: darken($code-background-color, 8%);
+      background-color: darken($code-background-color, 3%);
+      @include transition(border-radius 0.2s ease);
 
-      [theme=dark] & {
+      [theme='dark'] & {
         color: $code-info-color-dark;
-        background: darken($code-background-color-dark, 6%);
+        background-color: darken($code-background-color-dark, 6%);
       }
 
       &:hover {
@@ -84,12 +102,35 @@ code, pre, .highlight table, .highlight tr, .highlight td {
 
       .code-title {
         width: 100%;
-        padding: .4rem;
+        padding: 0.4rem;
+
+        .arrow {
+          padding: 0 0.2rem;
+          @include transition(transform 0.2s ease);
+        }
       }
 
       .code-title::after {
-        padding-left: .2rem;
+        padding-left: 0.2rem;
         content: 'Code';
+      }
+
+      .ellipses {
+        padding: 0.4rem;
+      }
+
+      .copy {
+        display: none;
+        padding: 0.4rem;
+
+        &:hover {
+          cursor: pointer;
+          color: $global-link-hover-color;
+
+          [theme='dark'] & {
+            color: $global-link-hover-color-dark;
+          }
+        }
       }
 
       @each $type, $text in $code-type-map {
@@ -99,75 +140,72 @@ code, pre, .highlight table, .highlight tr, .highlight td {
       }
     }
 
-    .lntd:first-child {
-      min-width: 1.6rem;
-      text-align: right;
-    }
-
-    .lntd:last-child {
-      width: 100%;
-
-      pre {
-        @include max-content(min-width);
-      }
-    }
-
-    .ln {
-      padding-right: .75rem;
-    }
-
-    .hl {
-      display: block;
-      background-color: darken($code-background-color, 10%);
-
-      [theme=dark] & {
-        background-color: darken($code-background-color-dark, 5%);
-      }
-    }
-
-    .ln, .lnt {
-      color: $global-font-secondary-color;
-
-      [theme=dark] & {
-        color: $global-font-secondary-color-dark;
-      }
-    }
-
-    .arrow {
-      padding: 0 .2rem;
-      @include transition(transform 0.2s ease);
-    }
-
-    .ellipses {
-      padding: .4rem;
-    }
-
-    .copy {
-      display: none;
-      padding: .4rem;
-
-      &:hover {
-        cursor: pointer;
-        color: $global-link-hover-color;
-
-        [theme=dark] & {
-          color: $global-link-hover-color-dark;
-        }
-      }
-    }
-
+    // delayed loading table-wrapper
     .table-wrapper {
       max-height: 0;
-      overflow-y: hidden;
+      overflow: hidden;
+      border-radius: 0 0 $global-border-radius $global-border-radius;
       @include details-transition-open;
+    }
+
+    table {
+      border-spacing: 0;
+      width: auto;
+      overflow: auto;
+      display: block;
+      background-color: $code-background-color;
+
+      [theme='dark'] & {
+        background-color: $code-background-color-dark;
+      }
+
+      td {
+        vertical-align: top;
+        padding: 0;
+      }
+
+      pre {
+        padding: 0.25rem;
+        border-radius: 0;
+      }
+
+      /* lineNumbersInTable=false */
+      .ln {
+        min-width: 1.35rem;
+      }
+
+      // ========== lineNumbersInTable ========== //
+      // line numbers
+      .lntd:first-child {
+        min-width: 1.6rem;
+        text-align: right;
+
+        pre {
+          padding-right: 0;
+        }
+      }
+      // code content
+      .lntd:last-child {
+        width: 100%;
+
+        pre {
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
+        }
+        code {
+          width: 100%;
+        }
+      }
+      // ========== lineNumbersInTable ========== //
     }
 
     &.open {
       .code-header {
-        background: darken($code-background-color, 3%);
+        background-color: darken($code-background-color, 6%);
+        border-radius: $global-border-radius $global-border-radius 0 0;
 
-        [theme=dark] & {
-          background: darken($code-background-color-dark, 3%);
+        [theme='dark'] & {
+          background-color: darken($code-background-color-dark, 3%);
         }
       }
 
@@ -190,197 +228,121 @@ code, pre, .highlight table, .highlight tr, .highlight td {
     }
   }
 
-  /* Comment */  .c,
-  /* CommentHashbang */  .ch,
-  /* CommentMultiline */  .cm,
-  /* CommentSingle */  .c1,
-  /* CommentSpecial */  .cs,
-  /* CommentPreproc */  .cp,
-  /* CommentPreprocFile */  .cpf { font-style: italic }
-  /* GenericUnderline */  .gl { text-decoration: underline }
+  /* LineHighlight */
+  .hl {
+    display: block;
+    background-color: $code-hightlight-color;
+    box-shadow: -0.5rem 0 0 $code-hightlight-color, 0.5rem 0 0 $code-hightlight-color;
 
-  @each $class, $color in $code-highlight-color-map {
-    .#{$class} { color: $color; }
-  }
-
-  [theme=dark] & {
-    @each $class, $color in $code-highlight-color-map-dark {
-      .#{$class} { color: $color; }
+    [theme='dark'] & {
+      background-color: $code-hightlight-color-dark;
+      box-shadow: -0.5rem 0 0 $code-hightlight-color-dark, 0.5rem 0 0 $code-hightlight-color-dark;
     }
   }
+  /* GenericUnderline */
+  .gl {
+    text-decoration: underline;
+  }
+  /* GenericStrong */
+  .gs {
+    font-weight: bold;
+  }
+  /* GenericEmph */
+  .ge {
+    font-style: italic;
+  }
+  /* lineNumbersInTable=false */
+  .ln {
+    padding-right: 0.5rem;
+    display: inline-block;
+    min-width: 1.1rem;
+    text-align: right;
+  }
+  /* LineNumbers */
+  .lnt,
+  .ln {
+    color: $global-font-secondary-color;
+
+    [theme='dark'] & {
+      color: $global-font-secondary-color-dark;
+    }
+  }
+
+  // ========== Higtlight Color ========== //
+
+  /* Error */
+  .err {
+    font-style: italic;
+    border-bottom: 1px dotted $code-error-color;
+  }
+  /* GenericDeleted */
+  .gd {
+    background-color: #ffebe9;
+
+    [theme='dark'] & {
+      background-color: #78191b;
+    }
+  }
+  /* GenericInserted */
+  .gi {
+    background-color: #dafbe1;
+
+    [theme='dark'] & {
+      background-color: #1b4721;
+    }
+  }
+
+  @each $class, $color in $code-highlight-color-map {
+    .#{$class} {
+      color: $color;
+    }
+  }
+
+  [theme='dark'] & {
+    @each $class, $color in $code-highlight-color-map-dark {
+      .#{$class} {
+        color: $color;
+      }
+    }
+  }
+  // ========== Higtlight Color ========== //
 }
 
+// gist shortcode
 .gist {
-  .gist-file, .gist-data, .gist-meta {
+  .gist-file,
+  .gist-data,
+  .gist-meta {
     border: none;
   }
 
+  .gist-data {
+    background-color: transparent;
+  }
+
   .gist-meta {
-    padding: .4rem .8rem;
+    padding: 0.4rem 0.8rem;
+    @include link(false, false);
     background-color: darken($code-background-color, 5%);
 
-    @include link(false, false);
-
-    [theme=dark] & {
+    [theme='dark'] & {
       background-color: darken($code-background-color-dark, 5%);
     }
   }
 
-  [theme=dark] & {
-    // imported from https://github.com/lonekorean/gist-syntax-themes/blob/master/stylesheets/one-dark.css
-    .highlight {
-      background: #141414;
-    }
-    .blob-num,
-    .blob-code-inner,
+  .table-wrapper {
     .highlight,
-    .pl-enm,
-    .pl-ko,
-    .pl-mo,
-    .pl-mp1 .pl-sf,
-    .pl-ms,
-    .pl-pdc1,
-    .pl-scp,
-    .pl-smc,
-    .pl-som,
-    .pl-va,
-    .pl-vpf,
-    .pl-vpu,
-    .pl-mdr {
-        color: #aab1bf;
-    }
-    .pl-mb,
-    .pl-pdb {
-        font-weight: 700;
-    }
-    .pl-c,
-    .pl-c span,
-    .pl-pdc {
-        color: #5b6270;
-        font-style: italic;
-    }
-    .pl-sr .pl-cce {
-        color: #56b5c2;
-        font-weight: 400;
-    }
-    .pl-ef,
-    .pl-en,
-    .pl-enf,
-    .pl-eoai,
-    .pl-kos,
-    .pl-mh .pl-pdh,
-    .pl-mr {
-        color: #61afef;
-    }
-    .pl-ens,
-    .pl-vi {
-        color: #be5046;
-    }
-    .pl-enti,
-    .pl-mai .pl-sf,
-    .pl-ml,
-    .pl-sf,
-    .pl-sr,
-    .pl-sr .pl-sra,
-    .pl-src,
-    .pl-st,
-    .pl-vo {
-        color: #56b5c2;
-    }
-    .pl-eoi,
-    .pl-mri,
-    .pl-pds,
-    .pl-pse .pl-s1,
-    .pl-s,
-    .pl-s1 {
-        color: #97c279;
-    }
-    .pl-k,
-    .pl-kolp,
-    .pl-mc,
-    .pl-pde {
-        color: #c578dd;
-    }
-    .pl-mi,
-    .pl-pdi {
-        color: #c578dd;
-        font-style: italic;
-    }
-    .pl-mp,
-    .pl-stp {
-        color: #818896;
-    }
-    .pl-mdh,
-    .pl-mdi,
-    .pl-mdr {
-        font-weight: 400;
-    }
-    .pl-mdht,
-    .pl-mi1 {
-        color: #97c279;
-        background: #020;
-    }
-    .pl-md,
-    .pl-mdhf {
-        color: #df6b75;
-        background: #200;
-    }
-    .pl-corl {
-        color: #df6b75;
-        text-decoration: underline;
-    }
-    .pl-ib {
-        background: #df6b75;
-    }
-    .pl-ii {
-        background: #e0c184;
-        color: #fff;
-    }
-    .pl-iu {
-        background: #e05151;
-    }
-    .pl-ms1 {
-        color: #aab1bf;
-        background: #373b41;
-    }
-    .pl-c1,
-    .pl-cn,
-    .pl-e,
-    .pl-eoa,
-    .pl-eoac,
-    .pl-eoac .pl-pde,
-    .pl-kou,
-    .pl-mm,
-    .pl-mp .pl-s3,
-    .pl-mq,
-    .pl-s3,
-    .pl-sok,
-    .pl-sv,
-    .pl-mb {
-        color: #d19965;
-    }
-    .pl-enc,
-    .pl-entc,
-    .pl-pse .pl-s2,
-    .pl-s2,
-    .pl-sc,
-    .pl-smp,
-    .pl-sr .pl-sre,
-    .pl-stj,
-    .pl-v,
-    .pl-pdb {
-        color: #e4bf7a;
-    }
-    .pl-ent,
-    .pl-entl,
-    .pl-entm,
-    .pl-mh,
-    .pl-pdv,
-    .pl-smi,
-    .pl-sol,
-    .pl-mdh,
-    .pl-mdi {
-        color: #df6b75;
+    &::-webkit-scrollbar {
+      background-color: #f6f8fa;
+
+      [theme='dark'] & {
+        background-color: #2d333b;
+      }
     }
   }
+
+  [theme='dark'] & {
+    @import './github-dark-dimmed';
+  }
+
 }

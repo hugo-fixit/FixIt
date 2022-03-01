@@ -1,0 +1,169 @@
+/**
+ * Theme: GitHub Dark Dimmed
+ * Description: Dark Dimmed theme as seen on github.com
+ * Author: github.com
+ * Maintainer: https://github.com/Lruihao/FixIt
+ * Updated: 2022-03-01
+ */
+ & {
+  --color-fg-default: #adbac7;
+  --color-prettylights-syntax-comment: #768390;
+  --color-prettylights-syntax-constant: #6cb6ff;
+  --color-prettylights-syntax-entity: #dcbdfb;
+  --color-prettylights-syntax-storage-modifier-import: #adbac7;
+  --color-prettylights-syntax-entity-tag: #8ddb8c;
+  --color-prettylights-syntax-keyword: #f47067;
+  --color-prettylights-syntax-string: #96d0ff;
+  --color-prettylights-syntax-variable: #f69d50;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #e5534b;
+  --color-prettylights-syntax-invalid-illegal-text: #cdd9e5;
+  --color-prettylights-syntax-invalid-illegal-bg: #922323;
+  --color-prettylights-syntax-carriage-return-text: #cdd9e5;
+  --color-prettylights-syntax-carriage-return-bg: #ad2e2c;
+  --color-prettylights-syntax-string-regexp: #8ddb8c;
+  --color-prettylights-syntax-markup-list: #eac55f;
+  --color-prettylights-syntax-markup-heading: #316dca;
+  --color-prettylights-syntax-markup-italic: #adbac7;
+  --color-prettylights-syntax-markup-bold: #adbac7;
+  --color-prettylights-syntax-markup-deleted-text: #ffd8d3;
+  --color-prettylights-syntax-markup-deleted-bg: #78191b;
+  --color-prettylights-syntax-markup-inserted-text: #b4f1b4;
+  --color-prettylights-syntax-markup-inserted-bg: #1b4721;
+  --color-prettylights-syntax-markup-changed-text: #ffddb0;
+  --color-prettylights-syntax-markup-changed-bg: #682d0f;
+  --color-prettylights-syntax-markup-ignored-text: #adbac7;
+  --color-prettylights-syntax-markup-ignored-bg: #255ab2;
+  --color-prettylights-syntax-meta-diff-range: #dcbdfb;
+  --color-prettylights-syntax-brackethighlighter-angle: #768390;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #545d68;
+  --color-prettylights-syntax-constant-other-reference-link: #96d0ff;
+
+  .blob-num,
+  .blob-code-inner {
+    color: val(--color-fg-default);
+  }
+
+  .pl-c /* comment, punctuation.definition.comment, string.comment */ {
+    color: var(--color-prettylights-syntax-comment);
+  }
+
+  .pl-c1 /* constant, entity.name.constant, variable.other.constant, variable.language, support, meta.property-name, support.constant, support.variable, meta.module-reference, markup.raw, meta.diff.header, meta.output */,
+  .pl-s .pl-v /* string variable */ {
+    color: var(--color-prettylights-syntax-constant);
+  }
+
+  .pl-e /* entity */,
+  .pl-en /* entity.name */ {
+    color: var(--color-prettylights-syntax-entity);
+  }
+
+  .pl-smi /* variable.parameter.function, storage.modifier.package, storage.modifier.import, storage.type.java, variable.other */,
+  .pl-s .pl-s1 /* string source */ {
+    color: var(--color-prettylights-syntax-storage-modifier-import);
+  }
+
+  .pl-ent /* entity.name.tag, markup.quote */ {
+    color: var(--color-prettylights-syntax-entity-tag);
+  }
+
+  .pl-k /* keyword, storage, storage.type */ {
+    color: var(--color-prettylights-syntax-keyword);
+  }
+
+  .pl-s /* string */,
+  .pl-pds /* punctuation.definition.string, source.regexp, string.regexp.character-class */,
+  .pl-s .pl-pse .pl-s1 /* string punctuation.section.embedded source */,
+  .pl-sr /* string.regexp */,
+  .pl-sr .pl-cce /* string.regexp constant.character.escape */,
+  .pl-sr .pl-sre /* string.regexp source.ruby.embedded */,
+  .pl-sr .pl-sra /* string.regexp string.regexp.arbitrary-repitition */ {
+    color: var(--color-prettylights-syntax-string);
+  }
+
+  .pl-v /* variable */,
+  .pl-smw /* sublimelinter.mark.warning */ {
+    color: var(--color-prettylights-syntax-variable);
+  }
+
+  .pl-bu /* invalid.broken, invalid.deprecated, invalid.unimplemented, message.error, brackethighlighter.unmatched, sublimelinter.mark.error */ {
+    color: var(--color-prettylights-syntax-brackethighlighter-unmatched);
+  }
+
+  .pl-ii /* invalid.illegal */ {
+    color: var(--color-prettylights-syntax-invalid-illegal-text);
+    background-color: var(--color-prettylights-syntax-invalid-illegal-bg);
+  }
+
+  .pl-c2 /* carriage-return */ {
+    color: var(--color-prettylights-syntax-carriage-return-text);
+    background-color: var(--color-prettylights-syntax-carriage-return-bg);
+  }
+
+  .pl-c2::before /* carriage-return */ {
+    content: '^M';
+  }
+
+  .pl-sr .pl-cce /* string.regexp constant.character.escape */ {
+    font-weight: bold;
+    color: var(--color-prettylights-syntax-string-regexp);
+  }
+
+  .pl-ml /* markup.list */ {
+    color: var(--color-prettylights-syntax-markup-list);
+  }
+
+  .pl-mh /* markup.heading */,
+  .pl-mh .pl-en /* markup.heading entity.name */,
+  .pl-ms /* meta.separator */ {
+    font-weight: bold;
+    color: var(--color-prettylights-syntax-markup-heading);
+  }
+
+  .pl-mi /* markup.italic */ {
+    font-style: italic;
+    color: var(--color-prettylights-syntax-markup-italic);
+  }
+
+  .pl-mb /* markup.bold */ {
+    font-weight: bold;
+    color: var(--color-prettylights-syntax-markup-bold);
+  }
+
+  .pl-md /* markup.deleted, meta.diff.header.from-file, punctuation.definition.deleted */ {
+    color: var(--color-prettylights-syntax-markup-deleted-text);
+    background-color: var(--color-prettylights-syntax-markup-deleted-bg);
+  }
+
+  .pl-mi1 /* markup.inserted, meta.diff.header.to-file, punctuation.definition.inserted */ {
+    color: var(--color-prettylights-syntax-markup-inserted-text);
+    background-color: var(--color-prettylights-syntax-markup-inserted-bg);
+  }
+
+  .pl-mc /* markup.changed, punctuation.definition.changed */ {
+    color: var(--color-prettylights-syntax-markup-changed-text);
+    background-color: var(--color-prettylights-syntax-markup-changed-bg);
+  }
+
+  .pl-mi2 /* markup.ignored, markup.untracked */ {
+    color: var(--color-prettylights-syntax-markup-ignored-text);
+    background-color: var(--color-prettylights-syntax-markup-ignored-bg);
+  }
+
+  .pl-mdr /* meta.diff.range */ {
+    font-weight: bold;
+    color: var(--color-prettylights-syntax-meta-diff-range);
+  }
+
+  .pl-ba /* brackethighlighter.tag, brackethighlighter.curly, brackethighlighter.round, brackethighlighter.square, brackethighlighter.angle, brackethighlighter.quote */ {
+    color: var(--color-prettylights-syntax-brackethighlighter-angle);
+  }
+
+  .pl-sg /* sublimelinter.gutter-mark */ {
+    color: var(--color-prettylights-syntax-sublimelinter-gutter-mark);
+  }
+
+  .pl-corl /* constant.other.reference.link, string.other.link */ {
+    text-decoration: underline;
+    color: var(--color-prettylights-syntax-constant-other-reference-link);
+  }
+}
