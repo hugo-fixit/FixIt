@@ -3,13 +3,15 @@ const CACHE_VERSION = 1;
 const BASE_CACHE_FILES = [
   '/css/style.min.css',
   '/js/theme.min.js',
-  '/site.webmanifest'
+  '/site.webmanifest',
+  '/images/fixit.svg'
 ];
 
 const OFFLINE_CACHE_FILES = [
   '/css/style.min.css',
   '/js/theme.min.js',
   '/site.webmanifest',
+  '/images/fixit.svg',
   '/offline/'
 ];
 
@@ -17,6 +19,7 @@ const NOT_FOUND_CACHE_FILES = [
   '/css/style.min.css',
   '/js/theme.min.js',
   '/site.webmanifest',
+  '/images/fixit.svg',
   '/404.html'
 ];
 
