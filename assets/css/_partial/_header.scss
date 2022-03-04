@@ -217,7 +217,7 @@ header {
   display: none;
   position: sticky;
   top: 0;
-  height: $header-height;
+  min-height: $header-height;
   line-height: $header-height;
 
   [header-mobile=normal] & {

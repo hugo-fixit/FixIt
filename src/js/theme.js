@@ -42,6 +42,7 @@ class Theme {
     this.resizeEventSet = new Set();
     this.switchThemeEventSet = new Set();
     this.clickMaskEventSet = new Set();
+    this.disableScrollEvent = false;
     if (window.objectFitImages) objectFitImages();
   }
 
@@ -74,7 +75,8 @@ class Theme {
     const $menuMobile = document.getElementById('menu-mobile');
     $menuToggleMobile.addEventListener(
       'click',
-      () => {
+      (event) => {
+        this.disableScrollEvent = true;
         document.body.classList.toggle('blur');
         $menuToggleMobile.classList.toggle('active');
         $menuMobile.classList.toggle('active');
@@ -903,7 +905,12 @@ class Theme {
       MINIMUM = 100;
     window.addEventListener(
       'scroll',
-      () => {
+      (event) => {
+        if(this.disableScrollEvent) {
+          event.preventDefault();
+          this.disableScrollEvent = false;
+          return;
+        }
         this.newScrollTop = this.util.getScrollTop();
         const scroll = this.newScrollTop - this.oldScrollTop;
         const isMobile = this.util.isMobile();
@@ -916,6 +923,7 @@ class Theme {
             this.util.animateCSS($header, ['fadeInDown', 'faster'], true);
           }
         });
+        // whether to show b2t button
         if (this.newScrollTop > MINIMUM) {
           if (isMobile && scroll > ACCURACY) {
             $fixedButtons.classList.remove('fadeIn');
