@@ -911,6 +911,7 @@ class Theme {
           this.disableScrollEvent = false;
           return;
         }
+        document.getElementById('mask').click();
         this.newScrollTop = this.util.getScrollTop();
         const scroll = this.newScrollTop - this.oldScrollTop;
         const isMobile = this.util.isMobile();
@@ -958,6 +959,7 @@ class Theme {
             this.initToc();
             this.initMermaid();
             this.initSearch();
+            document.getElementById('mask').click();
           }, 100);
         }
       },
