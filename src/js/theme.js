@@ -402,6 +402,11 @@ class Theme {
   }
 
   initHighlight() {
+    if (this.config.code.editableCode){
+      this.util.forEach(document.querySelectorAll('.highlight pre.chroma'), ($preChroma) => {
+        $preChroma.setAttribute('contenteditable', true);
+      });
+    }
     this.util.forEach(document.querySelectorAll('.highlight > pre.chroma'), ($preChroma) => {
       const $chroma = document.createElement('div');
       $chroma.className = $preChroma.className;

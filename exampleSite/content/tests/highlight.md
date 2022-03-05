@@ -156,7 +156,7 @@ var _str2Array = (str) => {
     return str.split(',');
   }
 };
-{{< / highlight >}}
+{{< /highlight >}}
 
 ---
 

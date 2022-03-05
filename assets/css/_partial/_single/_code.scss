@@ -167,11 +167,12 @@ pre {
       pre {
         padding: 0.25rem;
         border-radius: 0;
+        outline-offset: -1px;
       }
 
       /* lineNumbersInTable=false */
       .ln {
-        min-width: 1.35rem;
+        min-width: 1.25rem;
       }
 
       // ========== lineNumbersInTable ========== //

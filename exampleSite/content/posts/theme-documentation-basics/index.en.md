@@ -482,6 +482,8 @@ Please open the code block below to view the complete sample configuration :(far
       copy = true
       # the maximum number of lines of displayed code by default
       maxShownLines = 10
+      # {{< version 0.2.13 >}} whether code blocks can be edited
+      editableCode = false
     # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} config (https://docs.mapbox.com/mapbox-gl-js)
     [params.page.mapbox]
       # access token of Mapbox GL JS
