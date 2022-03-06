@@ -18,9 +18,9 @@ class Util {
 
   animateCSS(element, animation, reserved, callback) {
     if (!Array.isArray(animation)) animation = [animation];
-    element.classList.add('animated', ...animation);
+    element.classList.add('animate__animated', ...animation);
     const handler = () => {
-      element.classList.remove('animated', ...animation);
+      element.classList.remove('animate__animated', ...animation);
       element.removeEventListener('animationend', handler);
       if (typeof callback === 'function') callback();
     };
@@ -457,7 +457,7 @@ class Theme {
           $copy.title = this.config.code.copyTitle;
           const clipboard = new ClipboardJS($copy);
           clipboard.on('success', (_e) => {
-            this.util.animateCSS($code, 'flash');
+            this.util.animateCSS($code, 'animate__flash');
           });
           $header.appendChild($copy);
         }
@@ -503,7 +503,8 @@ class Theme {
         $tocContentAuto.appendChild($tocCore);
       }
       const $toc = document.getElementById('toc-auto');
-      $toc.style.visibility = 'visible'; // TODO use animateCSS instead
+      $toc.style.visibility = 'visible';
+      this.util.animateCSS($toc, ['animate__fadeIn', 'animate__faster'], true);
       $toc.style.marginTop = document.querySelector('.single-title').clientHeight + document.querySelector('.post-meta').clientHeight + 'px';
       $toc.style.marginBottom = document.getElementById('post-footer').clientHeight + 'px';
       const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
@@ -881,27 +882,27 @@ class Theme {
         const isMobile = this.util.isMobile();
         this.util.forEach($headers, ($header) => {
           if (scroll > ACCURACY) {
-            $header.classList.remove('fadeInDown');
-            this.util.animateCSS($header, ['fadeOutUp', 'faster'], true);
+            $header.classList.remove('animate__fadeInDown');
+            this.util.animateCSS($header, ['animate__fadeOutUp', 'animate__faster'], true);
           } else if (scroll < -ACCURACY) {
-            $header.classList.remove('fadeOutUp');
-            this.util.animateCSS($header, ['fadeInDown', 'faster'], true);
+            $header.classList.remove('animate__fadeOutUp');
+            this.util.animateCSS($header, ['animate__fadeInDown', 'animate__faster'], true);
           }
         });
         // whether to show b2t button
         if (this.newScrollTop > MINIMUM) {
           if (isMobile && scroll > ACCURACY) {
-            $fixedButtons.classList.remove('fadeIn');
-            this.util.animateCSS($fixedButtons, ['fadeOut', 'faster'], true);
+            $fixedButtons.classList.remove('animate__fadeIn');
+            this.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
           } else if (!isMobile || scroll < -ACCURACY) {
             $fixedButtons.style.display = 'block';
-            $fixedButtons.classList.remove('fadeOut');
-            this.util.animateCSS($fixedButtons, ['fadeIn', 'faster'], true);
+            $fixedButtons.classList.remove('animate__fadeOut');
+            this.util.animateCSS($fixedButtons, ['animate__fadeIn', 'animate__faster'], true);
           }
         } else {
           if (!isMobile) {
-            $fixedButtons.classList.remove('fadeIn');
-            this.util.animateCSS($fixedButtons, ['fadeOut', 'faster'], true);
+            $fixedButtons.classList.remove('animate__fadeIn');
+            this.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
           }
           $fixedButtons.style.display = 'none';
         }

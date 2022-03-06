@@ -55,7 +55,7 @@
   padding-right: 1rem;
   @include overflow-wrap(break-word);
   box-sizing: border-box;
-  visibility: hidden; // TODO use animateCSS instead
+  visibility: hidden;
 
   @include blur;
 
