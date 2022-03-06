@@ -97,10 +97,10 @@ other = "en"
 other = "Copy to clipboard"
 
 [editLockTitle]
-other = "Unlock editable code block"
+other = "Lock editable code block"
 
 [editUnLockTitle]
-other = "Lock editable code block"
+other = "Unlock editable code block"
 
 [cookieconsentMessage]
 other = "This website uses Cookies to improve your experience."

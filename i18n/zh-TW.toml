@@ -104,10 +104,10 @@ other = "lib/lunr/lunr.segmentit.js"
 other = "複製到剪貼板"
 
 [editLockTitle]
-other = "解鎖可編輯代碼塊"
+other = "鎖定可編輯代碼塊"
 
 [editUnLockTitle]
-other = "鎖定可編輯代碼塊"
+other = "解鎖可編輯代碼塊"
 
 [cookieconsentMessage]
 other = "本網站使用 Cookies 來改善您的流覽體驗."

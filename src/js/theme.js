@@ -424,22 +424,21 @@ class Theme {
         if (this.config.code.editable) {
           const $edit = document.createElement('span');
           $edit.classList.add('edit');
-          // this.config.code.editUnLockTitle
-          $edit.insertAdjacentHTML('afterbegin', `<i class="fas fa-lock fa-fw" title="${this.config.code.editLockTitle}"></i>`);
+          $edit.insertAdjacentHTML('afterbegin', `<i class="fas fa-key fa-fw" title="${this.config.code.editUnLockTitle}"></i>`);
           $edit.addEventListener('click', () => {
+            const $iconKey = $edit.querySelector('.fa-key');
             const $iconLock = $edit.querySelector('.fa-lock');
-            const $iconUnLock = $edit.querySelector('.fa-lock-open');
             const $preChromas = $edit.parentElement.parentElement.querySelectorAll('pre.chroma');
             const $preChroma = $preChromas.length === 2 ? $preChromas[1] : $preChromas[0];
-            if ($iconLock) {
-              $iconLock.classList.add('fa-lock-open');
-              $iconLock.classList.remove('fa-lock');
-              $iconLock.title = this.config.code.editUnLockTitle;
+            if ($iconKey) {
+              $iconKey.classList.add('fa-lock');
+              $iconKey.classList.remove('fa-key');
+              $iconKey.title = this.config.code.editLockTitle;
               $preChroma.setAttribute('contenteditable', true);
             } else {
-              $iconUnLock.classList.add('fa-lock');
-              $iconUnLock.classList.remove('fa-lock-open');
-              $iconUnLock.title = this.config.code.editLockTitle;
+              $iconLock.classList.add('fa-key');
+              $iconLock.classList.remove('fa-lock');
+              $iconLock.title = this.config.code.editUnLockTitle;
               $preChroma.setAttribute('contenteditable', false);
             }
           }, false);
