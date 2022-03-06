@@ -160,4 +160,4 @@ var _str2Array = (str) => {
 
 ---
 
-{{< gist spf13 7896402 >}}
+{{</* gist spf13 7896402 */>}}

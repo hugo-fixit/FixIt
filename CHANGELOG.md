@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file.
   - Indented Code
   - Block Fenced Code
   - gist shortcode
-- :sparkles: Feat: add `params.page.code.editableCode` option support ([#76](https://github.com/Lruihao/FixIt/issues/76))
+- :sparkles: Feat: add `params.page.code.edit` option support ([#76](https://github.com/Lruihao/FixIt/issues/76))
 - :mag: Feat: add 360 and sougou seo support
 - :bug: Fix: remove source map of local libraries to avoid 404 error ([#67](https://github.com/Lruihao/FixIt/issues/67))
 - :fire: Feat: remove shortcode cardlink ([#42](https://github.com/Lruihao/FixIt/issues/42))

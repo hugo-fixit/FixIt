@@ -56,7 +56,11 @@
 
 {{- $code := $params.code | default dict -}}
 {{- $config = cond (ne $code.maxShownLines nil) $code.maxShownLines 10 | dict "maxShownLines" | dict "code" | merge $config -}}
-{{- $config = cond (ne $code.editableCode nil) $code.editableCode false | dict "editableCode" | dict "code" | merge $config -}}
+
+{{- /* edit code */ -}}
+{{- if ne $code.edit false -}}
+  {{- $config = dict "editable" true "editLockTitle" (T "editLockTitle") "editUnLockTitle" (T "editUnLockTitle") | dict "code" | merge $config -}}
+{{- end -}}
 
 {{- /* clipboard.js */ -}}
 {{- if ne $code.copy false -}}

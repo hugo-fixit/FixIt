@@ -5,9 +5,7 @@ class Util {
   }
 
   getScrollTop() {
-    return (
-      (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop
-    );
+    return (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
   }
 
   isMobile() {
@@ -97,8 +95,7 @@ class Theme {
       $themeSwitch.addEventListener(
         'click',
         () => {
-          if (document.body.getAttribute('theme') === 'dark')
-            document.body.setAttribute('theme', 'light');
+          if (document.body.getAttribute('theme') === 'dark') document.body.setAttribute('theme', 'light');
           else document.body.setAttribute('theme', 'dark');
           this.isDark = !this.isDark;
           window.localStorage && localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
@@ -112,12 +109,7 @@ class Theme {
   initSearch() {
     const searchConfig = this.config.search;
     const isMobile = this.util.isMobile();
-    if (
-      !searchConfig ||
-      (isMobile && this._searchMobileOnce) ||
-      (!isMobile && this._searchDesktopOnce)
-    )
-      return;
+    if (!searchConfig || (isMobile && this._searchMobileOnce) || (!isMobile && this._searchDesktopOnce)) return;
 
     const maxResultLength = searchConfig.maxResultLength ? searchConfig.maxResultLength : 10;
     const snippetLength = searchConfig.snippetLength ? searchConfig.snippetLength : 50;
@@ -251,14 +243,8 @@ class Theme {
                     context = context.substr(0, snippetLength);
                   }
                   Object.keys(metadata).forEach((key) => {
-                    title = title.replace(
-                      new RegExp(`(${key})`, 'gi'),
-                      `<${highlightTag}>$1</${highlightTag}>`
-                    );
-                    context = context.replace(
-                      new RegExp(`(${key})`, 'gi'),
-                      `<${highlightTag}>$1</${highlightTag}>`
-                    );
+                    title = title.replace(new RegExp(`(${key})`, 'gi'), `<${highlightTag}>$1</${highlightTag}>`);
+                    context = context.replace(new RegExp(`(${key})`, 'gi'), `<${highlightTag}>$1</${highlightTag}>`);
                   });
                   results[uri] = {
                     uri: uri,
@@ -275,8 +261,7 @@ class Theme {
                   .then((data) => {
                     const indexData = {};
                     this._index = lunr(function () {
-                      if (searchConfig.lunrLanguageCode)
-                        this.use(lunr[searchConfig.lunrLanguageCode]);
+                      if (searchConfig.lunrLanguageCode) this.use(lunr[searchConfig.lunrLanguageCode]);
                       this.ref('objectID');
                       this.field('title', { boost: 50 });
                       this.field('tags', { boost: 20 });
@@ -298,10 +283,7 @@ class Theme {
               } else finish(search());
             } else if (searchConfig.type === 'algolia') {
               this._algoliaIndex =
-                this._algoliaIndex ||
-                algoliasearch(searchConfig.algoliaAppID, searchConfig.algoliaSearchKey).initIndex(
-                  searchConfig.algoliaIndex
-                );
+                this._algoliaIndex || algoliasearch(searchConfig.algoliaAppID, searchConfig.algoliaSearchKey).initIndex(searchConfig.algoliaIndex);
               this._algoliaIndex
                 .search(query, {
                   offset: 0,
@@ -313,17 +295,15 @@ class Theme {
                 })
                 .then(({ hits }) => {
                   const results = {};
-                  hits.forEach(
-                    ({ uri, date, _highlightResult: { title }, _snippetResult: { content } }) => {
-                      if (results[uri] && results[uri].context.length > content.value) return;
-                      results[uri] = {
-                        uri: uri,
-                        title: title.value,
-                        date: date,
-                        context: content.value
-                      };
-                    }
-                  );
+                  hits.forEach(({ uri, date, _highlightResult: { title }, _snippetResult: { content } }) => {
+                    if (results[uri] && results[uri].context.length > content.value) return;
+                    results[uri] = {
+                      uri: uri,
+                      title: title.value,
+                      date: date,
+                      context: content.value
+                    };
+                  });
                   finish(Object.values(results).slice(0, maxResultLength));
                 })
                 .catch((err) => {
@@ -335,8 +315,7 @@ class Theme {
           templates: {
             suggestion: ({ title, date, context }) =>
               `<div><span class="suggestion-title">${title}</span><span class="suggestion-date">${date}</span></div><div class="suggestion-context">${context}</div>`,
-            empty: ({ query }) =>
-              `<div class="search-empty">${searchConfig.noResultsFound}: <span class="search-query">"${query}"</span></div>`,
+            empty: ({ query }) => `<div class="search-empty">${searchConfig.noResultsFound}: <span class="search-query">"${query}"</span></div>`,
             footer: ({}) => {
               const { searchType, icon, href } =
                 searchConfig.type === 'algolia'
@@ -397,16 +376,10 @@ class Theme {
   }
 
   initLightGallery() {
-    if (this.config.lightGallery)
-      lightGallery(document.getElementById('content'), this.config.lightGallery);
+    if (this.config.lightGallery) lightGallery(document.getElementById('content'), this.config.lightGallery);
   }
 
   initHighlight() {
-    if (this.config.code.editableCode){
-      this.util.forEach(document.querySelectorAll('.highlight pre.chroma'), ($preChroma) => {
-        $preChroma.setAttribute('contenteditable', true);
-      });
-    }
     this.util.forEach(document.querySelectorAll('.highlight > pre.chroma'), ($preChroma) => {
       const $chroma = document.createElement('div');
       $chroma.className = $preChroma.className;
@@ -427,6 +400,7 @@ class Theme {
         const $code = $codeElements[$codeElements.length - 1];
         const $header = document.createElement('div');
         $header.className = 'code-header ' + $code.className.toLowerCase();
+        // code title
         const $title = document.createElement('span');
         $title.classList.add('code-title');
         $title.insertAdjacentHTML('afterbegin', '<i class="arrow fas fa-chevron-right fa-fw"></i>');
@@ -438,27 +412,48 @@ class Theme {
           false
         );
         $header.appendChild($title);
+        // ellipses icon
         const $ellipses = document.createElement('span');
         $ellipses.insertAdjacentHTML('afterbegin', '<i class="fas fa-ellipsis-h fa-fw"></i>');
         $ellipses.classList.add('ellipses');
-        $ellipses.addEventListener(
-          'click',
-          () => {
-            $chroma.classList.add('open');
-          },
-          false
-        );
-        $header.appendChild($ellipses);
-        const $copy = document.createElement('span');
-        $copy.insertAdjacentHTML('afterbegin', '<i class="far fa-copy fa-fw"></i>');
-        $copy.classList.add('copy');
-        const code = $code.innerText;
-        if (
-          this.config.code.maxShownLines < 0 ||
-          code.split('\n').length < this.config.code.maxShownLines + 2
-        )
+        $ellipses.addEventListener('click', () => {
           $chroma.classList.add('open');
+        }, false);
+        $header.appendChild($ellipses);
+        // edit button
+        if (this.config.code.editable) {
+          const $edit = document.createElement('span');
+          $edit.classList.add('edit');
+          // this.config.code.editUnLockTitle
+          $edit.insertAdjacentHTML('afterbegin', `<i class="fas fa-lock fa-fw" title="${this.config.code.editLockTitle}"></i>`);
+          $edit.addEventListener('click', () => {
+            const $iconLock = $edit.querySelector('.fa-lock');
+            const $iconUnLock = $edit.querySelector('.fa-lock-open');
+            const $preChromas = $edit.parentElement.parentElement.querySelectorAll('pre.chroma');
+            const $preChroma = $preChromas.length === 2 ? $preChromas[1] : $preChromas[0];
+            if ($iconLock) {
+              $iconLock.classList.add('fa-lock-open');
+              $iconLock.classList.remove('fa-lock');
+              $iconLock.title = this.config.code.editUnLockTitle;
+              $preChroma.setAttribute('contenteditable', true);
+            } else {
+              $iconUnLock.classList.add('fa-lock');
+              $iconUnLock.classList.remove('fa-lock-open');
+              $iconUnLock.title = this.config.code.editLockTitle;
+              $preChroma.setAttribute('contenteditable', false);
+            }
+          }, false);
+          $header.appendChild($edit);
+        }
+        // copy button
         if (this.config.code.copyTitle) {
+          const $copy = document.createElement('span');
+          $copy.insertAdjacentHTML('afterbegin', '<i class="far fa-copy fa-fw"></i>');
+          $copy.classList.add('copy');
+          const code = $code.innerText;
+          if (this.config.code.maxShownLines < 0 || code.split('\n').length < this.config.code.maxShownLines + 2) {
+            $chroma.classList.add('open');
+          }
           $copy.setAttribute('data-clipboard-text', code);
           $copy.title = this.config.code.copyTitle;
           const clipboard = new ClipboardJS($copy);
@@ -485,10 +480,7 @@ class Theme {
     for (let num = 1; num <= 6; num++) {
       this.util.forEach(document.querySelectorAll('.single .content > h' + num), ($header) => {
         $header.classList.add('header-link');
-        $header.insertAdjacentHTML(
-          'afterbegin',
-          `<a href="#${$header.id}" class="header-mark"></a>`
-        );
+        $header.insertAdjacentHTML('afterbegin', `<a href="#${$header.id}" class="header-mark"></a>`);
       });
     }
   }
@@ -498,10 +490,7 @@ class Theme {
     if ($tocCore === null) {
       return;
     }
-    if (
-      document.getElementById('toc-static').getAttribute('kept') === 'true' ||
-      this.util.isTocStatic()
-    ) {
+    if (document.getElementById('toc-static').getAttribute('kept') === 'true' || this.util.isTocStatic()) {
       const $tocContentStatic = document.getElementById('toc-content-static');
       if ($tocCore.parentElement !== $tocContentStatic) {
         $tocCore.parentElement.removeChild($tocCore);
@@ -516,10 +505,7 @@ class Theme {
       }
       const $toc = document.getElementById('toc-auto');
       $toc.style.visibility = 'visible'; // TODO use animateCSS instead
-      $toc.style.marginTop =
-        document.querySelector('.single-title').clientHeight +
-        document.querySelector('.post-meta').clientHeight +
-        'px';
+      $toc.style.marginTop = document.querySelector('.single-title').clientHeight + document.querySelector('.post-meta').clientHeight + 'px';
       $toc.style.marginBottom = document.getElementById('post-footer').clientHeight + 'px';
       const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
       const $tocLiElements = $tocCore.getElementsByTagName('li');
@@ -531,8 +517,7 @@ class Theme {
         (() => {
           const $comments = document.getElementById('comments');
           if ($comments) {
-            $toc.style.marginBottom =
-              document.getElementById('post-footer').clientHeight + $comments.clientHeight + 'px';
+            $toc.style.marginBottom = document.getElementById('post-footer').clientHeight + $comments.clientHeight + 'px';
           }
           this.util.forEach($tocLinkElements, ($tocLink) => {
             $tocLink.classList.remove('active');
@@ -545,10 +530,7 @@ class Theme {
           for (let i = 0; i < $headerLinkElements.length - 1; i++) {
             const thisTop = $headerLinkElements[i].getBoundingClientRect().top;
             const nextTop = $headerLinkElements[i + 1].getBoundingClientRect().top;
-            if (
-              (i == 0 && thisTop > INDEX_SPACING) ||
-              (thisTop <= INDEX_SPACING && nextTop > INDEX_SPACING)
-            ) {
+            if ((i == 0 && thisTop > INDEX_SPACING) || (thisTop <= INDEX_SPACING && nextTop > INDEX_SPACING)) {
               activeTocIndex = i;
               break;
             }
@@ -623,18 +605,7 @@ class Theme {
       mapboxgl.setRTLTextPlugin(this.config.mapbox.RTLTextPlugin);
       this._mapboxArr = this._mapboxArr || [];
       this.util.forEach(document.getElementsByClassName('mapbox'), ($mapbox) => {
-        const {
-          lng,
-          lat,
-          zoom,
-          lightStyle,
-          darkStyle,
-          marked,
-          navigation,
-          geolocate,
-          scale,
-          fullscreen
-        } = this.data[$mapbox.id];
+        const { lng, lat, zoom, lightStyle, darkStyle, marked, navigation, geolocate, scale, fullscreen } = this.data[$mapbox.id];
         const mapbox = new mapboxgl.Map({
           container: $mapbox,
           center: [lng, lat],
@@ -753,8 +724,7 @@ class Theme {
         artalk.setDarkMode(this.isDark);
       });
       artalk.on('comments-loaded', () => {
-        this.config.comment.artalk.lightgallery &&
-          this.initCommentLightGallery('.atk-comment .atk-content', 'img:not([atk-emoticon])');
+        this.config.comment.artalk.lightgallery && this.initCommentLightGallery('.atk-comment .atk-content', 'img:not([atk-emoticon])');
       });
       return artalk;
     }
@@ -778,10 +748,7 @@ class Theme {
       script.setAttribute('repo', utterancesConfig.repo);
       script.setAttribute('issue-term', utterancesConfig.issueTerm);
       if (utterancesConfig.label) script.setAttribute('label', utterancesConfig.label);
-      script.setAttribute(
-        'theme',
-        this.isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme
-      );
+      script.setAttribute('theme', this.isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme);
       script.crossOrigin = 'anonymous';
       script.async = true;
       document.getElementById('utterances').appendChild(script);
@@ -835,13 +802,10 @@ class Theme {
       days = Math.floor(runTime / 60 / 60 / 24),
       hours = Math.floor(runTime / 60 / 60 - 24 * days),
       minutes = Math.floor(runTime / 60 - 24 * 60 * days - 60 * hours),
-      seconds = Math.floor(
-        (now - run) / 1000 - 24 * 60 * 60 * days - 60 * 60 * hours - 60 * minutes
-      );
-    document.querySelector('.run-times').innerHTML = `${days},${String(hours).padStart(
-      2,
-      0
-    )}:${String(minutes).padStart(2, 0)}:${String(seconds).padStart(2, 0)}`;
+      seconds = Math.floor((now - run) / 1000 - 24 * 60 * 60 * days - 60 * 60 * hours - 60 * minutes);
+    document.querySelector('.run-times').innerHTML = `${days},${String(hours).padStart(2, 0)}:${String(minutes).padStart(2, 0)}:${String(
+      seconds
+    ).padStart(2, 0)}`;
   }
 
   initSiteTime() {
@@ -875,9 +839,7 @@ class Theme {
   initWatermark() {
     this.config.watermark.enable &&
       new Watermark({
-        content:
-          this.config.watermark.content ||
-          '<img class="fixit-icon" src="/images/fixit.svg" alt="FixIt logo" /> FixIt Theme',
+        content: this.config.watermark.content || '<img class="fixit-icon" src="/images/fixit.svg" alt="FixIt logo" /> FixIt Theme',
         appendTo: this.config.watermark.appendto || '.wrapper>main',
         opacity: this.config.watermark.opacity,
         width: this.config.watermark.width,
@@ -896,10 +858,8 @@ class Theme {
 
   onScroll() {
     const $headers = [];
-    if (document.body.getAttribute('header-desktop') === 'auto')
-      $headers.push(document.getElementById('header-desktop'));
-    if (document.body.getAttribute('header-mobile') === 'auto')
-      $headers.push(document.getElementById('header-mobile'));
+    if (document.body.getAttribute('header-desktop') === 'auto') $headers.push(document.getElementById('header-desktop'));
+    if (document.body.getAttribute('header-mobile') === 'auto') $headers.push(document.getElementById('header-mobile'));
     if (document.getElementById('comments')) {
       const $viewComments = document.getElementById('view-comments');
       $viewComments.href = `#comments`;
@@ -911,7 +871,7 @@ class Theme {
     window.addEventListener(
       'scroll',
       (event) => {
-        if(this.disableScrollEvent) {
+        if (this.disableScrollEvent) {
           event.preventDefault();
           this.disableScrollEvent = false;
           return;
