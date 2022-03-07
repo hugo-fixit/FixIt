@@ -26,7 +26,7 @@ All notable changes to this project will be documented in this file.
 - :mag: Feat: add 360 and sougou seo support
 - :bug: Fix: remove source map of local libraries to avoid 404 error ([#67](https://github.com/Lruihao/FixIt/issues/67))
 - :fire: Feat: remove shortcode cardlink ([#42](https://github.com/Lruihao/FixIt/issues/42))
-- :lipstick: Style: add radius of the scrollbar
+- :lipstick: Style: more refined theme style ([#40](https://github.com/Lruihao/FixIt/issues/40))
 - :pencil2: Style: fix typo *discription* should be **description** ([#60](https://github.com/Lruihao/FixIt/issues/60))
 - :wrench: Chore(update-libs):
   - Update cell-watermark 1.0.3 and CDN support (fontFamily supported)
