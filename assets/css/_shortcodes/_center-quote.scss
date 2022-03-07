@@ -1,0 +1,41 @@
+.blockquote-center {
+  border-left: none;
+  margin: 40px 0;
+  padding: 0;
+  position: relative;
+  text-align: center;
+
+  &::after, &::before {
+    left: 0;
+    line-height: 1;
+    opacity: .6;
+    position: absolute;
+    width: 100%;
+  }
+
+  &::before {
+    border-top: 1px solid $global-border-color;
+    text-align: left;
+    top: -20px;
+    content: '\f10d';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+
+    [theme=dark] & {
+      border-top-color: $global-border-color-dark;
+    }
+  }
+  
+  &::after {
+    border-bottom: 1px solid $global-border-color;
+    bottom: -20px;
+    text-align: right;
+    content: '\f10e';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+
+    [theme=dark] & {
+      border-bottom-color: $global-border-color-dark;
+    }
+  }
+}

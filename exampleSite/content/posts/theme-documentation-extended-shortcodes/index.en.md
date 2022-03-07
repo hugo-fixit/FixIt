@@ -42,7 +42,7 @@ And the **second** one is the tag name of the HTML element wrapping the content 
 
 Example `style` input:
 
-```markdown
+```
 {{</* style "text-align:right; strong{color:#00b1ff;}" */>}}
 This is a **right-aligned** paragraph.
 {{</* /style */>}}
@@ -96,7 +96,7 @@ The `link` shortcode has the following named parameters:
 
 Example `link` input:
 
-```markdown
+```
 {{</* link "https://assemble.io" */>}}
 Or
 {{</* link href="https://assemble.io" */>}}
@@ -118,7 +118,7 @@ The rendered output looks like this:
 
 Example `link` input with a title:
 
-```markdown
+```
 {{</* link "https://github.com/upstage/" Upstage "Visit Upstage!" */>}}
 Or
 {{</* link href="https://github.com/upstage/" content=Upstage title="Visit Upstage!" */>}}
@@ -130,7 +130,7 @@ The rendered output looks like this (hover over the link, there should be a tool
 
 Example `link` input for card type:
 
-```markdown
+```
 {{</* link "https://github.com/Lruihao/FixIt" "FixIt Theme" "source of FixIt Theme" true */>}}
 Or
 {{</* link href="https://github.com/Lruihao/FixIt" content="FixIt Theme" title="source of FixIt Theme" card=true */>}}
@@ -142,7 +142,7 @@ The rendered output looks like this:
 
 Example `link` input with download attribute:
 
-```markdown
+```
 {{</* link href="/music/Wavelength.mp3" content="Wavelength" title="Download Wavelength.mp3" download="Wavelength.mp3" */>}}
 ```
 
@@ -210,7 +210,7 @@ The `image` shortcode has the following named parameters:
 
 Example `image` input:
 
-```markdown
+```
 {{</* image src="/images/lighthouse.jpg" caption="Lighthouse (`image`)" src_s="/images/lighthouse-small.jpg" src_l="/images/lighthouse-large.jpg" */>}}
 ```
 
@@ -288,7 +288,7 @@ The `admonition` shortcode has the following named parameters:
 
 Example `admonition` input:
 
-```markdown
+```
 {{</* admonition type=tip title="This is a tip" open=false */>}}
 A **tip** banner
 {{</* /admonition */>}}
@@ -314,7 +314,7 @@ Just insert your mermaid code in the `mermaid` shortcode and that’s it.
 
 Example **flowchart** `mermaid` input:
 
-```markdown
+```
 {{</* mermaid */>}}
 graph LR;
     A[Hard edge] -->|Link text| B(Round edge)
@@ -338,7 +338,7 @@ graph LR;
 
 Example **sequence diagram** `mermaid` input:
 
-```markdown
+```
 {{</* mermaid */>}}
 sequenceDiagram
     participant Alice
@@ -374,7 +374,7 @@ sequenceDiagram
 
 Example **GANTT** `mermaid` input:
 
-```markdown
+```
 {{</* mermaid */>}}
 gantt
     dateFormat  YYYY-MM-DD
@@ -418,7 +418,7 @@ gantt
 
 Example **class diagram** `mermaid` input:
 
-```markdown
+```
 {{</* mermaid */>}}
 classDiagram
     Class01 <|-- AveryLongClass : Cool
@@ -460,7 +460,7 @@ classDiagram
 
 Example **state diagram** `mermaid` input:
 
-```markdown
+```
 {{</* mermaid */>}}
 stateDiagram
     [*] --> Still
@@ -488,7 +488,7 @@ stateDiagram
 
 Example **git graph** `mermaid` input:
 
-```markdown
+```
 {{</* mermaid */>}}
 gitGraph:
 options
@@ -530,7 +530,7 @@ end
 
 Example **pie** `mermaid` input:
 
-```markdown
+```
 {{</* mermaid */>}}
 pie
     "Dogs" : 386
@@ -994,7 +994,7 @@ The `mapbox` shortcode has the following named parameters to use Mapbox GL JS:
 
 Example simple `mapbox` input:
 
-```markdown
+```
 {{</* mapbox 121.485 31.233 12 */>}}
 Or
 {{</* mapbox lng=121.485 lat=31.233 zoom=12 */>}}
@@ -1006,7 +1006,7 @@ The rendered output looks like this:
 
 Example `mapbox` input with the custom style:
 
-```markdown
+```
 {{</* mapbox -122.252 37.453 10 false "mapbox://styles/mapbox/navigation-preview-day-v4" "mapbox://styles/mapbox/navigation-preview-night-v4" */>}}
 Or
 {{</* mapbox lng=-122.252 lat=37.453 zoom=10 marked=false light-style="mapbox://styles/mapbox/navigation-preview-day-v4" dark-style="mapbox://styles/mapbox/navigation-preview-night-v4" */>}}
@@ -1046,7 +1046,7 @@ The `music` shortcode has the following named parameters by custom music URL:
 
 Example `music` input by custom music URL:
 
-```markdown
+```
 {{</* music url="/music/Wavelength.mp3" name=Wavelength artist=oldmanyoung cover="/images/Wavelength.jpg" */>}}
 ```
 
@@ -1065,7 +1065,7 @@ The `music` shortcode has one named parameter by music platform URL automatic id
 
 Example `music` input by music platform URL automatic identification:
 
-```markdown
+```
 {{</* music auto="https://music.163.com/#/playlist?id=60198" */>}}
 Or
 {{</* music "https://music.163.com/#/playlist?id=60198" */>}}
@@ -1097,7 +1097,7 @@ The `music` shortcode has the following named parameters by custom music platfor
 
 Example `music` input by custom music platform:
 
-```markdown
+```
 {{</* music server="netease" type="song" id="1868553" */>}}
 Or
 {{</* music netease song 1868553 */>}}
@@ -1171,7 +1171,7 @@ https://www.bilibili.com/video/BV1Sx411T7QQ
 
 Example `bilibili` input:
 
-```markdown
+```
 {{</* bilibili BV1Sx411T7QQ */>}}
 Or
 {{</* bilibili id=BV1Sx411T7QQ */>}}
@@ -1190,7 +1190,7 @@ https://www.bilibili.com/video/BV1TJ411C7An?p=3
 
 Example `bilibili` input with `p`:
 
-```markdown
+```
 {{</* bilibili BV1TJ411C7An 3 */>}}
 Or
 {{</* bilibili id=BV1TJ411C7An p=3 */>}}
@@ -1212,7 +1212,7 @@ Simple content is allowed in `Markdown` format and **without** rich block conten
 
 Example `typeit` input:
 
-```markdown
+```
 {{</* typeit */>}}
 This is a *paragraph* with **typing animation** based on [TypeIt](https://typeitjs.com/)...
 {{</* /typeit */>}}
@@ -1228,7 +1228,7 @@ Alternatively, you can use custom **HTML tags**.
 
 Example `typeit` input with `h4` tag:
 
-```markdown
+```
 {{</* typeit tag=h4 */>}}
 This is a *paragraph* with **typing animation** based on [TypeIt](https://typeitjs.com/)...
 {{</* /typeit */>}}
@@ -1246,7 +1246,7 @@ Code content is allowed and will be highlighted by named parameter `code` for th
 
 Example `typeit` input with `code`:
 
-```markdown
+```
 {{</* typeit code=java */>}}
 public class HelloWorld {
     public static void main(String []args) {
@@ -1275,7 +1275,7 @@ A set of `typeit` contents with the same value of named parameter `group` will s
 
 Example `typeit` input with `group`:
 
-```markdown
+```
 {{</* typeit group=paragraph */>}}
 **First** this paragraph begins
 {{</* /typeit */>}}
@@ -1307,7 +1307,7 @@ The script content can be guaranteed to be executed in order after all third-par
 
 Example `script` input:
 
-```markdown
+```
 {{</* script */>}}
 console.log('Hello FixIt!');
 {{</* /script */>}}
@@ -1320,6 +1320,7 @@ console.log('Hello FixIt!');
 {{< /script >}}
 
 ## 12 details
+
 {{< version 0.2.13 >}}
 
 `details` is a shortcode to insert **:(fab fa-html5 fa-fw): HTML5 tag** details and summary in your post.
@@ -1332,7 +1333,7 @@ The `details` shortcode has only one parameter:
 
 Example `details` input:
 
-```markdown
+```
 {{</* details "**Copyright** 2022." */>}}
 *All pages and graphics on this web site are the property of FixIt.*
 {{</* /details */>}}
@@ -1347,6 +1348,28 @@ The rendered output looks like this:
 {{< details "**Copyright** 2022." >}}
 *All pages and graphics on this web site are the property of FixIt.*
 {{< /details >}}
+
+## 13 center-quote
+
+{{< version 0.2.13 >}}
+
+`center-quote` is a shortcode to insert centered text blockquote tag in your post.
+
+Example `center-quote` input:
+
+```
+{{</* center-quote */>}}
+**hello** *world*  
+this is a center-quote shortcode example.
+{{</* /center-quote */>}}
+```
+
+The rendered output looks like this:
+
+{{< center-quote >}}
+**hello** *world*  
+this is a center-quote shortcode example.
+{{< /center-quote >}}
 
 ---
 

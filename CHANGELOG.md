@@ -14,7 +14,8 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Style: add media style for print view ([#61](https://github.com/Lruihao/FixIt/issues/61))
 - :sparkles: Feat: add Gravatar mirror site support ([#66](https://github.com/Lruihao/FixIt/pull/66)@ctj12461)
 - :sparkles: Feat: add archive count display ([#33](https://github.com/Lruihao/FixIt/issues/33))
-- :sparkles: Feat: add details shortcode ([#68](https://github.com/Lruihao/FixIt/issues/68))
+- :sparkles: Feat: add `details` shortcode ([#68](https://github.com/Lruihao/FixIt/issues/68))
+- :sparkles: Feat: add `center-quote` shortcode ([#69](https://github.com/Lruihao/FixIt/issues/69))
 - :sparkles: Feat: add markdown support for **title** parameter of the admonition shortcode
 - :sparkles: Feat: add 9 newly supported social links ([#17](https://github.com/Lruihao/FixIt/issues/17))
 - :zap: Perf: enhance highlight feature (GitHub syntax supported) and fix some css bugs ([#43](https://github.com/Lruihao/FixIt/issues/43))
