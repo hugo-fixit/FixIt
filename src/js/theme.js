@@ -1,7 +1,9 @@
 class Util {
   forEach(elements, handler) {
     elements = elements || [];
-    for (let i = 0; i < elements.length; i++) handler(elements[i]);
+    for(let i = 0; i < elements.length; i++){
+      handler(elements[i]);
+    }
   }
 
   getScrollTop() {
@@ -41,7 +43,7 @@ class Theme {
     this.switchThemeEventSet = new Set();
     this.clickMaskEventSet = new Set();
     this.disableScrollEvent = false;
-    if (window.objectFitImages) objectFitImages();
+    window.objectFitImages && objectFitImages();
   }
 
   initSVGIcon() {
@@ -55,7 +57,7 @@ class Theme {
           $svg.setAttribute('data-svg-src', $icon.getAttribute('data-svg-src'));
           $svg.classList.add('icon');
           const $titleElements = $svg.getElementsByTagName('title');
-          if ($titleElements.length) $svg.removeChild($titleElements[0]);
+          $titleElements.length && $svg.removeChild($titleElements[0])
           $icon.parentElement.replaceChild($svg, $icon);
         })
         .catch((err) => {
@@ -65,124 +67,92 @@ class Theme {
   }
 
   initTwemoji() {
-    if (this.config.twemoji) twemoji.parse(document.body);
+    this.config.twemoji && twemoji.parse(document.body);
   }
 
   initMenuMobile() {
     const $menuToggleMobile = document.getElementById('menu-toggle-mobile');
     const $menuMobile = document.getElementById('menu-mobile');
-    $menuToggleMobile.addEventListener(
-      'click',
-      (event) => {
-        this.disableScrollEvent = true;
-        document.body.classList.toggle('blur');
-        $menuToggleMobile.classList.toggle('active');
-        $menuMobile.classList.toggle('active');
-      },
-      false
-    );
-    this._menuMobileOnClickMask =
-      this._menuMobileOnClickMask ||
-      (() => {
-        $menuToggleMobile.classList.remove('active');
-        $menuMobile.classList.remove('active');
-      });
+    $menuToggleMobile.addEventListener('click', (event) => {
+      this.disableScrollEvent = true;
+      document.body.classList.toggle('blur');
+      $menuToggleMobile.classList.toggle('active');
+      $menuMobile.classList.toggle('active');
+    }, false);
+    this._menuMobileOnClickMask = this._menuMobileOnClickMask || (() => {
+      $menuToggleMobile.classList.remove('active');
+      $menuMobile.classList.remove('active');
+    });
     this.clickMaskEventSet.add(this._menuMobileOnClickMask);
   }
 
   initSwitchTheme() {
     this.util.forEach(document.getElementsByClassName('theme-switch'), ($themeSwitch) => {
-      $themeSwitch.addEventListener(
-        'click',
-        () => {
-          if (document.body.getAttribute('theme') === 'dark') document.body.setAttribute('theme', 'light');
-          else document.body.setAttribute('theme', 'dark');
-          this.isDark = !this.isDark;
-          window.localStorage && localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
-          for (let event of this.switchThemeEventSet) event();
-        },
-        false
-      );
+      $themeSwitch.addEventListener('click', () => {
+        document.body.setAttribute('theme', document.body.getAttribute('theme') === 'dark' ? 'light' : 'dark');
+        this.isDark = !this.isDark;
+        window.localStorage && localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
+        for (let event of this.switchThemeEventSet) {
+          event();
+        }
+      }, false);
     });
   }
 
   initSearch() {
     const searchConfig = this.config.search;
     const isMobile = this.util.isMobile();
-    if (!searchConfig || (isMobile && this._searchMobileOnce) || (!isMobile && this._searchDesktopOnce)) return;
-
-    const maxResultLength = searchConfig.maxResultLength ? searchConfig.maxResultLength : 10;
-    const snippetLength = searchConfig.snippetLength ? searchConfig.snippetLength : 50;
-    const highlightTag = searchConfig.highlightTag ? searchConfig.highlightTag : 'em';
-
+    if (!searchConfig || (isMobile && this._searchMobileOnce) || (!isMobile && this._searchDesktopOnce)) {
+      return;
+    }
+    const maxResultLength = searchConfig.maxResultLength || 10;
+    const snippetLength = searchConfig.snippetLength || 50;
+    const highlightTag = searchConfig.highlightTag || 'em';
     const suffix = isMobile ? 'mobile' : 'desktop';
     const $header = document.getElementById(`header-${suffix}`);
     const $searchInput = document.getElementById(`search-input-${suffix}`);
     const $searchToggle = document.getElementById(`search-toggle-${suffix}`);
     const $searchLoading = document.getElementById(`search-loading-${suffix}`);
     const $searchClear = document.getElementById(`search-clear-${suffix}`);
+
     if (isMobile) {
       this._searchMobileOnce = true;
-      $searchInput.addEventListener(
-        'focus',
-        () => {
-          document.body.classList.add('blur');
-          $header.classList.add('open');
-        },
-        false
-      );
-      document.getElementById('search-cancel-mobile').addEventListener(
-        'click',
-        () => {
-          $header.classList.remove('open');
-          document.body.classList.remove('blur');
-          document.getElementById('menu-toggle-mobile').classList.remove('active');
-          document.getElementById('menu-mobile').classList.remove('active');
-          $searchLoading.style.display = 'none';
-          $searchClear.style.display = 'none';
-          this._searchMobile && this._searchMobile.autocomplete.setVal('');
-        },
-        false
-      );
-      $searchClear.addEventListener(
-        'click',
-        () => {
-          $searchClear.style.display = 'none';
-          this._searchMobile && this._searchMobile.autocomplete.setVal('');
-        },
-        false
-      );
-      this._searchMobileOnClickMask =
-        this._searchMobileOnClickMask ||
-        (() => {
-          $header.classList.remove('open');
-          $searchLoading.style.display = 'none';
-          $searchClear.style.display = 'none';
-          this._searchMobile && this._searchMobile.autocomplete.setVal('');
-        });
+      $searchInput.addEventListener('focus', () => {
+        document.body.classList.add('blur');
+        $header.classList.add('open');
+      }, false);
+      document.getElementById('search-cancel-mobile').addEventListener('click', () => {
+        $header.classList.remove('open');
+        document.body.classList.remove('blur');
+        document.getElementById('menu-toggle-mobile').classList.remove('active');
+        document.getElementById('menu-mobile').classList.remove('active');
+        $searchLoading.style.display = 'none';
+        $searchClear.style.display = 'none';
+        this._searchMobile && this._searchMobile.autocomplete.setVal('');
+      }, false);
+      $searchClear.addEventListener('click', () => {
+        $searchClear.style.display = 'none';
+        this._searchMobile && this._searchMobile.autocomplete.setVal('');
+      }, false);
+      this._searchMobileOnClickMask = this._searchMobileOnClickMask || (() => {
+        $header.classList.remove('open');
+        $searchLoading.style.display = 'none';
+        $searchClear.style.display = 'none';
+        this._searchMobile && this._searchMobile.autocomplete.setVal('');
+      });
       this.clickMaskEventSet.add(this._searchMobileOnClickMask);
     } else {
       this._searchDesktopOnce = true;
-      $searchToggle.addEventListener(
-        'click',
-        () => {
-          document.body.classList.add('blur');
-          $header.classList.add('open');
-          $searchInput.focus();
-        },
-        false
-      );
-      $searchClear.addEventListener(
-        'click',
-        () => {
-          $searchClear.style.display = 'none';
-          this._searchDesktop && this._searchDesktop.autocomplete.setVal('');
-        },
-        false
-      );
-      this._searchDesktopOnClickMask =
-        this._searchDesktopOnClickMask ||
-        (() => {
+      $searchToggle.addEventListener('click', () => {
+        document.body.classList.add('blur');
+        $header.classList.add('open');
+        $searchInput.focus();
+      }, false);
+      $searchClear.addEventListener('click', () => {
+        $searchClear.style.display = 'none';
+        this._searchDesktop && this._searchDesktop.autocomplete.setVal('');
+      }, false);
+      this._searchDesktopOnClickMask = this._searchDesktopOnClickMask ||(() => {
           $header.classList.remove('open');
           $searchLoading.style.display = 'none';
           $searchClear.style.display = 'none';
@@ -190,18 +160,13 @@ class Theme {
         });
       this.clickMaskEventSet.add(this._searchDesktopOnClickMask);
     }
-    $searchInput.addEventListener(
-      'input',
-      () => {
-        if ($searchInput.value === '') $searchClear.style.display = 'none';
-        else $searchClear.style.display = 'inline';
-      },
-      false
-    );
+    $searchInput.addEventListener('input', () => {
+      if ($searchInput.value === '') $searchClear.style.display = 'none';
+      else $searchClear.style.display = 'inline';
+    }, false);
 
     const initAutosearch = () => {
-      const autosearch = autocomplete(
-        `#search-input-${suffix}`,
+      const autosearch = autocomplete(`#search-input-${suffix}`,
         {
           hint: false,
           autoselect: true,
@@ -222,17 +187,23 @@ class Theme {
             };
             if (searchConfig.type === 'lunr') {
               const search = () => {
-                if (lunr.queryHandler) query = lunr.queryHandler(query);
+                if (lunr.queryHandler) {
+                  query = lunr.queryHandler(query);
+                }
                 const results = {};
                 this._index.search(query).forEach(({ ref, matchData: { metadata } }) => {
                   const matchData = this._indexData[ref];
                   let { uri, title, content: context } = matchData;
-                  if (results[uri]) return;
+                  if (results[uri]) {
+                    return;
+                  }
                   let position = 0;
                   Object.values(metadata).forEach(({ content }) => {
                     if (content) {
                       const matchPosition = content.position[0][0];
-                      if (matchPosition < position || position === 0) position = matchPosition;
+                      if (matchPosition < position || position === 0) {
+                        position = matchPosition;
+                      }
                     }
                   });
                   position -= snippetLength / 5;
@@ -296,7 +267,9 @@ class Theme {
                 .then(({ hits }) => {
                   const results = {};
                   hits.forEach(({ uri, date, _highlightResult: { title }, _snippetResult: { content } }) => {
-                    if (results[uri] && results[uri].context.length > content.value) return;
+                    if (results[uri] && results[uri].context.length > content.value) {
+                      return;
+                    }
                     results[uri] = {
                       uri: uri,
                       title: title.value,
@@ -337,8 +310,11 @@ class Theme {
       autosearch.on('autocomplete:selected', (_event, suggestion, _dataset, _context) => {
         window.location.assign(suggestion.uri);
       });
-      if (isMobile) this._searchMobile = autosearch;
-      else this._searchDesktop = autosearch;
+      if (isMobile) {
+        this._searchMobile = autosearch;
+      } else {
+        this._searchDesktop = autosearch;
+      }
     };
     if (searchConfig.lunrSegmentitURL && !document.getElementById('lunr-segmentit')) {
       const script = document.createElement('script');
@@ -359,24 +335,22 @@ class Theme {
         };
       }
       document.body.appendChild(script);
-    } else initAutosearch();
+    } else {
+      initAutosearch();
+    }
   }
 
   initDetails() {
     this.util.forEach(document.getElementsByClassName('details'), ($details) => {
-      const $summary = $details.getElementsByClassName('details-summary')[0];
-      $summary.addEventListener(
-        'click',
-        () => {
-          $details.classList.toggle('open');
-        },
-        false
-      );
+      const $summary = $details.querySelector('.details-summary');
+      $summary.addEventListener('click', () => {
+        $details.classList.toggle('open');
+      }, false);
     });
   }
 
   initLightGallery() {
-    if (this.config.lightGallery) lightGallery(document.getElementById('content'), this.config.lightGallery);
+    this.config.lightGallery && lightGallery(document.getElementById('content'), this.config.lightGallery);
   }
 
   initHighlight() {
@@ -404,13 +378,9 @@ class Theme {
         const $title = document.createElement('span');
         $title.classList.add('code-title');
         $title.insertAdjacentHTML('afterbegin', '<i class="arrow fas fa-chevron-right fa-fw"></i>');
-        $title.addEventListener(
-          'click',
-          () => {
-            $chroma.classList.toggle('open');
-          },
-          false
-        );
+        $title.addEventListener('click', () => {
+          $chroma.classList.toggle('open');
+        }, false);
         $header.appendChild($title);
         // ellipses icon
         const $ellipses = document.createElement('span');
@@ -512,45 +482,45 @@ class Theme {
       const $headerLinkElements = document.getElementsByClassName('header-link');
       const headerIsFixed = document.body.getAttribute('header-desktop') !== 'normal';
       const headerHeight = document.getElementById('header-desktop').offsetHeight;
-      this._tocOnScroll =
-        this._tocOnScroll ||
-        (() => {
-          const $comments = document.getElementById('comments');
-          if ($comments) {
-            $toc.style.marginBottom = document.getElementById('post-footer').clientHeight + $comments.clientHeight + 'px';
-          }
-          this.util.forEach($tocLinkElements, ($tocLink) => {
-            $tocLink.classList.remove('active');
-          });
-          this.util.forEach($tocLiElements, ($tocLi) => {
-            $tocLi.classList.remove('has-active');
-          });
-          const INDEX_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
-          let activeTocIndex = $headerLinkElements.length - 1;
-          for (let i = 0; i < $headerLinkElements.length - 1; i++) {
-            const thisTop = $headerLinkElements[i].getBoundingClientRect().top;
-            const nextTop = $headerLinkElements[i + 1].getBoundingClientRect().top;
-            if ((i == 0 && thisTop > INDEX_SPACING) || (thisTop <= INDEX_SPACING && nextTop > INDEX_SPACING)) {
-              activeTocIndex = i;
-              break;
-            }
-          }
-          if (activeTocIndex !== -1) {
-            $tocLinkElements[activeTocIndex].classList.add('active');
-            let $parent = $tocLinkElements[activeTocIndex].parentElement;
-            while ($parent !== $tocCore) {
-              $parent.classList.add('has-active');
-              $parent = $parent.parentElement.parentElement;
-            }
-          }
+      this._tocOnScroll = this._tocOnScroll || (() => {
+        const $comments = document.getElementById('comments');
+        if ($comments) {
+          $toc.style.marginBottom = document.getElementById('post-footer').clientHeight + $comments.clientHeight + 'px';
+        }
+        this.util.forEach($tocLinkElements, ($tocLink) => {
+          $tocLink.classList.remove('active');
         });
+        this.util.forEach($tocLiElements, ($tocLi) => {
+          $tocLi.classList.remove('has-active');
+        });
+        const INDEX_SPACING = 20 + (headerIsFixed ? headerHeight : 0);
+        let activeTocIndex = $headerLinkElements.length - 1;
+        for (let i = 0; i < $headerLinkElements.length - 1; i++) {
+          const thisTop = $headerLinkElements[i].getBoundingClientRect().top;
+          const nextTop = $headerLinkElements[i + 1].getBoundingClientRect().top;
+          if ((i == 0 && thisTop > INDEX_SPACING) || (thisTop <= INDEX_SPACING && nextTop > INDEX_SPACING)) {
+            activeTocIndex = i;
+            break;
+          }
+        }
+        if (activeTocIndex !== -1) {
+          $tocLinkElements[activeTocIndex].classList.add('active');
+          let $parent = $tocLinkElements[activeTocIndex].parentElement;
+          while ($parent !== $tocCore) {
+            $parent.classList.add('has-active');
+            $parent = $parent.parentElement.parentElement;
+          }
+        }
+      });
       this._tocOnScroll();
       this.scrollEventSet.add(this._tocOnScroll);
     }
   }
 
   initMath() {
-    if (this.config.math) renderMathInElement(document.body, this.config.math);
+    if (this.config.math) {
+      renderMathInElement(document.body, this.config.math);
+    }
   }
 
   initMermaid() {
@@ -571,31 +541,27 @@ class Theme {
   }
 
   initEcharts() {
-    this._echartsOnSwitchTheme =
-      this._echartsOnSwitchTheme ||
-      (() => {
-        this._echartsArr = this._echartsArr || [];
-        for (let i = 0; i < this._echartsArr.length; i++) {
-          this._echartsArr[i].dispose();
-        }
-        this._echartsArr = [];
-        this.util.forEach(document.getElementsByClassName('echarts'), ($echarts) => {
-          const chart = echarts.init($echarts, this.isDark ? 'dark' : 'macarons', {
-            renderer: 'svg'
-          });
-          chart.setOption(JSON.parse(this.data[$echarts.id]));
-          this._echartsArr.push(chart);
+    this._echartsOnSwitchTheme = this._echartsOnSwitchTheme || (() => {
+      this._echartsArr = this._echartsArr || [];
+      for (let i = 0; i < this._echartsArr.length; i++) {
+        this._echartsArr[i].dispose();
+      }
+      this._echartsArr = [];
+      this.util.forEach(document.getElementsByClassName('echarts'), ($echarts) => {
+        const chart = echarts.init($echarts, this.isDark ? 'dark' : 'macarons', {
+          renderer: 'svg'
         });
+        chart.setOption(JSON.parse(this.data[$echarts.id]));
+        this._echartsArr.push(chart);
       });
+    });
     this.switchThemeEventSet.add(this._echartsOnSwitchTheme);
     this._echartsOnSwitchTheme();
-    this._echartsOnResize =
-      this._echartsOnResize ||
-      (() => {
-        for (let i = 0; i < this._echartsArr.length; i++) {
-          this._echartsArr[i].resize();
-        }
-      });
+    this._echartsOnResize = this._echartsOnResize || (() => {
+      for (let i = 0; i < this._echartsArr.length; i++) {
+        this._echartsArr[i].resize();
+      }
+    });
     this.resizeEventSet.add(this._echartsOnResize);
   }
 
@@ -641,16 +607,14 @@ class Theme {
         mapbox.addControl(new MapboxLanguage());
         this._mapboxArr.push(mapbox);
       });
-      this._mapboxOnSwitchTheme =
-        this._mapboxOnSwitchTheme ||
-        (() => {
-          this.util.forEach(this._mapboxArr, (mapbox) => {
-            const $mapbox = mapbox.getContainer();
-            const { lightStyle, darkStyle } = this.data[$mapbox.id];
-            mapbox.setStyle(this.isDark ? darkStyle : lightStyle);
-            mapbox.addControl(new MapboxLanguage());
-          });
+      this._mapboxOnSwitchTheme = this._mapboxOnSwitchTheme || (() => {
+        this.util.forEach(this._mapboxArr, (mapbox) => {
+          const $mapbox = mapbox.getContainer();
+          const { lightStyle, darkStyle } = this.data[$mapbox.id];
+          mapbox.setStyle(this.isDark ? darkStyle : lightStyle);
+          mapbox.addControl(new MapboxLanguage());
         });
+      });
       this.switchThemeEventSet.add(this._mapboxOnSwitchTheme);
     }
   }
@@ -658,9 +622,9 @@ class Theme {
   initTypeit() {
     if (this.config.typeit) {
       const typeitConfig = this.config.typeit;
-      const speed = typeitConfig.speed ? typeitConfig.speed : 100;
-      const cursorSpeed = typeitConfig.cursorSpeed ? typeitConfig.cursorSpeed : 1000;
-      const cursorChar = typeitConfig.cursorChar ? typeitConfig.cursorChar : '|';
+      const speed = typeitConfig.speed || 100;
+      const cursorSpeed = typeitConfig.cursorSpeed || 1000;
+      const cursorChar = typeitConfig.cursorChar || '|';
       Object.values(typeitConfig.data).forEach((group) => {
         const typeone = (i) => {
           const id = group[i];
@@ -672,11 +636,10 @@ class Theme {
             cursorChar: cursorChar,
             waitUntilVisible: true,
             afterComplete: () => {
-              if (i === group.length - 1) {
-                if (typeitConfig.duration >= 0)
-                  window.setTimeout(() => {
-                    instance.destroy();
-                  }, typeitConfig.duration);
+              if (i === group.length - 1 && typeitConfig.duration >= 0) {
+                window.setTimeout(() => {
+                  instance.destroy();
+                }, typeitConfig.duration);
                 return;
               }
               instance.destroy();
@@ -703,13 +666,14 @@ class Theme {
         $link.append($img.cloneNode());
         $img.replaceWith($link);
       });
-      if ($imgs.length)
+      if ($imgs.length) {
         lightGallery($content, {
           selector: '.comment-lightgallery',
           actualSize: false,
           hideBarsDelay: 2000,
           speed: 400
         });
+      }
     });
   }
 
@@ -752,16 +716,14 @@ class Theme {
       script.crossOrigin = 'anonymous';
       script.async = true;
       document.getElementById('utterances').appendChild(script);
-      this._utterancesOnSwitchTheme =
-        this._utterancesOnSwitchTheme ||
-        (() => {
-          const message = {
-            type: 'set-theme',
-            theme: this.isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme
-          };
-          const iframe = document.querySelector('.utterances-frame');
-          iframe.contentWindow.postMessage(message, 'https://utteranc.es');
-        });
+      this._utterancesOnSwitchTheme = this._utterancesOnSwitchTheme || (() => {
+        const message = {
+          type: 'set-theme',
+          theme: this.isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme
+        };
+        const iframe = document.querySelector('.utterances-frame');
+        iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+      });
       this.switchThemeEventSet.add(this._utterancesOnSwitchTheme);
       return;
     }
@@ -792,7 +754,7 @@ class Theme {
   }
 
   initCookieconsent() {
-    if (this.config.cookieconsent) cookieconsent.initialise(this.config.cookieconsent);
+    this.config.cookieconsent && cookieconsent.initialise(this.config.cookieconsent);
   }
 
   getSiteTime() {
@@ -816,7 +778,7 @@ class Theme {
           return clearInterval(this.siteTime);
         }
         this.siteTime = setInterval(this.getSiteTime, 500);
-      });
+      }, false);
     }
   }
 
@@ -868,79 +830,67 @@ class Theme {
     const $fixedButtons = document.getElementById('fixed-buttons');
     const ACCURACY = 20,
       MINIMUM = 100;
-    window.addEventListener(
-      'scroll',
-      (event) => {
-        if (this.disableScrollEvent) {
-          event.preventDefault();
-          this.disableScrollEvent = false;
-          return;
+    window.addEventListener('scroll', (event) => {
+      if (this.disableScrollEvent) {
+        event.preventDefault();
+        this.disableScrollEvent = false;
+        return;
+      }
+      document.getElementById('mask').click();
+      this.newScrollTop = this.util.getScrollTop();
+      const scroll = this.newScrollTop - this.oldScrollTop;
+      const isMobile = this.util.isMobile();
+      this.util.forEach($headers, ($header) => {
+        if (scroll > ACCURACY) {
+          $header.classList.remove('animate__fadeInDown');
+          this.util.animateCSS($header, ['animate__fadeOutUp', 'animate__faster'], true);
+        } else if (scroll < -ACCURACY) {
+          $header.classList.remove('animate__fadeOutUp');
+          this.util.animateCSS($header, ['animate__fadeInDown', 'animate__faster'], true);
         }
-        document.getElementById('mask').click();
-        this.newScrollTop = this.util.getScrollTop();
-        const scroll = this.newScrollTop - this.oldScrollTop;
-        const isMobile = this.util.isMobile();
-        this.util.forEach($headers, ($header) => {
-          if (scroll > ACCURACY) {
-            $header.classList.remove('animate__fadeInDown');
-            this.util.animateCSS($header, ['animate__fadeOutUp', 'animate__faster'], true);
-          } else if (scroll < -ACCURACY) {
-            $header.classList.remove('animate__fadeOutUp');
-            this.util.animateCSS($header, ['animate__fadeInDown', 'animate__faster'], true);
-          }
-        });
-        // whether to show b2t button
-        if (this.newScrollTop > MINIMUM) {
-          if (isMobile && scroll > ACCURACY) {
-            $fixedButtons.classList.remove('animate__fadeIn');
-            this.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
-          } else if (!isMobile || scroll < -ACCURACY) {
-            $fixedButtons.style.display = 'block';
-            $fixedButtons.classList.remove('animate__fadeOut');
-            this.util.animateCSS($fixedButtons, ['animate__fadeIn', 'animate__faster'], true);
-          }
-        } else {
-          if (!isMobile) {
-            $fixedButtons.classList.remove('animate__fadeIn');
-            this.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
-          }
-          $fixedButtons.style.display = 'none';
+      });
+      // whether to show b2t button
+      if (this.newScrollTop > MINIMUM) {
+        if (isMobile && scroll > ACCURACY) {
+          $fixedButtons.classList.remove('animate__fadeIn');
+          this.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
+        } else if (!isMobile || scroll < -ACCURACY) {
+          $fixedButtons.style.display = 'block';
+          $fixedButtons.classList.remove('animate__fadeOut');
+          this.util.animateCSS($fixedButtons, ['animate__fadeIn', 'animate__faster'], true);
         }
-        for (let event of this.scrollEventSet) event();
-        this.oldScrollTop = this.newScrollTop;
-      },
-      false
-    );
+      } else {
+        if (!isMobile) {
+          $fixedButtons.classList.remove('animate__fadeIn');
+          this.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
+        }
+        $fixedButtons.style.display = 'none';
+      }
+      for (let event of this.scrollEventSet) event();
+      this.oldScrollTop = this.newScrollTop;
+    }, false);
   }
 
   onResize() {
-    window.addEventListener(
-      'resize',
-      () => {
-        if (!this._resizeTimeout) {
-          this._resizeTimeout = window.setTimeout(() => {
-            this._resizeTimeout = null;
-            for (let event of this.resizeEventSet) event();
-            this.initToc();
-            this.initMermaid();
-            this.initSearch();
-            document.getElementById('mask').click();
-          }, 100);
-        }
-      },
-      false
-    );
+    window.addEventListener('resize', () => {
+      if (!this._resizeTimeout) {
+        this._resizeTimeout = window.setTimeout(() => {
+          this._resizeTimeout = null;
+          for (let event of this.resizeEventSet) event();
+          this.initToc();
+          this.initMermaid();
+          this.initSearch();
+          document.getElementById('mask').click();
+        }, 100);
+      }
+    }, false);
   }
 
   onClickMask() {
-    document.getElementById('mask').addEventListener(
-      'click',
-      () => {
-        for (let event of this.clickMaskEventSet) event();
-        document.body.classList.remove('blur');
-      },
-      false
-    );
+    document.getElementById('mask').addEventListener('click', () => {
+      for (let event of this.clickMaskEventSet) event();
+      document.body.classList.remove('blur');
+    }, false);
   }
 
   init() {
