@@ -44,7 +44,7 @@ Hugo **extended** 版本对于 `style` shortcode 是必需的。
 
 一个 `style` 示例：
 
-```
+```go-html-template
 {{</* style "text-align:right; strong{color:#00b1ff;}" */>}}
 This is a **right-aligned** paragraph.
 {{</* /style */>}}
@@ -99,7 +99,7 @@ This is a **right-aligned** paragraph.
 
 一个 `link` 示例：
 
-```
+```go-html-template
 {{</* link "https://assemble.io" */>}}
 或者
 {{</* link href="https://assemble.io" */>}}
@@ -121,7 +121,7 @@ This is a **right-aligned** paragraph.
 
 一个带有标题的 `link` 示例：
 
-```
+```go-html-template
 {{</* link "https://github.com/upstage/" Upstage "Visit Upstage!" */>}}
 或者
 {{</* link href="https://github.com/upstage/" content=Upstage title="Visit Upstage!" */>}}
@@ -133,7 +133,7 @@ This is a **right-aligned** paragraph.
 
 一个卡片式 `link` 示例：
 
-```
+```go-html-template
 {{</* link "https://github.com/Lruihao/FixIt" "FixIt Theme" "source of FixIt Theme" true */>}}
 或者
 {{</* link href="https://github.com/Lruihao/FixIt" content="FixIt Theme" title="source of FixIt Theme" card=true */>}}
@@ -145,7 +145,7 @@ This is a **right-aligned** paragraph.
 
 一个可下载的 `link` 示例：
 
-```
+```go-html-template
 {{</* link href="/music/Wavelength.mp3" content="Wavelength" title="Download Wavelength.mp3" download="Wavelength.mp3" */>}}
 ```
 
@@ -213,7 +213,7 @@ This is a **right-aligned** paragraph.
 
 一个 `image` 示例：
 
-```
+```go-html-template
 {{</* image src="/images/lighthouse.jpg" caption="Lighthouse (`image`)" src_s="/images/lighthouse-small.jpg" src_l="/images/lighthouse-large.jpg" */>}}
 ```
 
@@ -291,7 +291,7 @@ This is a **right-aligned** paragraph.
 
 一个 `admonition` 示例：
 
-```
+```go-html-template
 {{</* admonition type=tip title="This is a tip" open=false */>}}
 一个 **技巧** 横幅
 {{</* /admonition */>}}
@@ -317,7 +317,7 @@ This is a **right-aligned** paragraph.
 
 一个 **流程图** `mermaid` 示例：
 
-```
+```go-html-template
 {{</* mermaid */>}}
 graph LR;
     A[Hard edge] -->|Link text| B(Round edge)
@@ -341,7 +341,7 @@ graph LR;
 
 一个 **时序图** `mermaid` 示例：
 
-```
+```go-html-template
 {{</* mermaid */>}}
 sequenceDiagram
     participant Alice
@@ -377,7 +377,7 @@ sequenceDiagram
 
 一个 **甘特图** `mermaid` 示例：
 
-```
+```go-html-template
 {{</* mermaid */>}}
 gantt
     dateFormat  YYYY-MM-DD
@@ -421,7 +421,7 @@ gantt
 
 一个 **类图** `mermaid` 示例：
 
-```
+```go-html-template
 {{</* mermaid */>}}
 classDiagram
     Class01 <|-- AveryLongClass : Cool
@@ -463,7 +463,7 @@ classDiagram
 
 一个 **状态图** `mermaid` 示例：
 
-```
+```go-html-template
 {{</* mermaid */>}}
 stateDiagram
     [*] --> Still
@@ -491,7 +491,7 @@ stateDiagram
 
 一个 **Git 图** `mermaid` 示例：
 
-```
+```go-html-template
 {{</* mermaid */>}}
 gitGraph:
 options
@@ -533,7 +533,7 @@ end
 
 一个 **饼图** `mermaid` 示例：
 
-```
+```go-html-template
 {{</* mermaid */>}}
 pie
     "Dogs" : 386
@@ -997,7 +997,7 @@ data = [
 
 一个简单的 `mapbox` 示例：
 
-```
+```go-html-template
 {{</* mapbox 121.485 31.233 12 */>}}
 或者
 {{</* mapbox lng=121.485 lat=31.233 zoom=12 */>}}
@@ -1009,7 +1009,7 @@ data = [
 
 一个带有自定义样式的 `mapbox` 示例：
 
-```
+```go-html-template
 {{</* mapbox -122.252 37.453 10 false "mapbox://styles/mapbox/streets-zh-v1" */>}}
 或者
 {{</* mapbox lng=-122.252 lat=37.453 zoom=10 marked=false light-style="mapbox://styles/mapbox/streets-zh-v1" */>}}
@@ -1049,7 +1049,7 @@ data = [
 
 一个使用自定义音乐 URL 的 `music` 示例：
 
-```
+```go-html-template
 {{</* music url="/music/Wavelength.mp3" name=Wavelength artist=oldmanyoung cover="/images/Wavelength.jpg" */>}}
 ```
 
@@ -1067,7 +1067,7 @@ data = [
 
 一个使用音乐平台 URL 的自动识别的 `music` 示例：
 
-```
+```go-html-template
 {{</* music auto="https://music.163.com/#/playlist?id=60198" */>}}
 或者
 {{</* music "https://music.163.com/#/playlist?id=60198" */>}}
@@ -1099,7 +1099,7 @@ data = [
 
 一个使用自定义音乐平台的 `music` 示例：
 
-```
+```go-html-template
 {{</* music server="netease" type="song" id="1868553" */>}}
 或者
 {{</* music netease song 1868553 */>}}
@@ -1173,7 +1173,7 @@ https://www.bilibili.com/video/BV1Sx411T7QQ
 
 一个 `bilibili` 示例：
 
-```
+```go-html-template
 {{</* bilibili BV1Sx411T7QQ */>}}
 或者
 {{</* bilibili id=BV1Sx411T7QQ */>}}
@@ -1191,7 +1191,7 @@ https://www.bilibili.com/video/BV1TJ411C7An?p=3
 
 一个带有 `p` 参数的 `bilibili` 示例：
 
-```
+```go-html-template
 {{</* bilibili BV1TJ411C7An 3 */>}}
 或者
 {{</* bilibili id=BV1TJ411C7An p=3 */>}}
@@ -1213,7 +1213,7 @@ https://www.bilibili.com/video/BV1TJ411C7An?p=3
 
 一个 `typeit` 示例：
 
-```
+```go-html-template
 {{</* typeit */>}}
 这一个带有基于 [TypeIt](https://typeitjs.com/) 的 **打字动画** 的 *段落* ...
 {{</* /typeit */>}}
@@ -1229,7 +1229,7 @@ https://www.bilibili.com/video/BV1TJ411C7An?p=3
 
 一个带有 `h4` 标签的 `typeit` 示例：
 
-```
+```go-html-template
 {{</* typeit tag=h4 */>}}
 这一个带有基于 [TypeIt](https://typeitjs.com/) 的 **打字动画** 的 *段落* ...
 {{</* /typeit */>}}
@@ -1247,7 +1247,7 @@ https://www.bilibili.com/video/BV1TJ411C7An?p=3
 
 一个带有 `code` 参数的 `typeit` 示例：
 
-```
+```go-html-template
 {{</* typeit code=java */>}}
 public class HelloWorld {
     public static void main(String []args) {
@@ -1276,7 +1276,7 @@ public class HelloWorld {
 
 一个带有 `group` 参数的 `typeit` 示例：
 
-```
+```go-html-template
 {{</* typeit group=paragraph */>}}
 **首先**, 这个段落开始
 {{</* /typeit */>}}
@@ -1309,7 +1309,7 @@ public class HelloWorld {
 
 一个 `script` 示例：
 
-```
+```go-html-template
 {{</* script */>}}
 console.log('Hello FixIt!');
 {{</* /script */>}}
@@ -1334,7 +1334,7 @@ console.log('Hello FixIt!');
 
 一个 `details` 示例：
 
-```
+```go-html-template
 {{</* details "**Copyright** 2022." */>}}
 *All pages and graphics on this web site are the property of FixIt.*
 {{</* /details */>}}
@@ -1358,7 +1358,7 @@ console.log('Hello FixIt!');
 
 一个 `center-quote` 示例：
 
-```
+```go-html-template
 {{</* center-quote */>}}
 **hello** *world*  
 this is a center-quote shortcode example.
