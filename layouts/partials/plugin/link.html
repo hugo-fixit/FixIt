@@ -16,7 +16,7 @@
     {{ $class = "card-link" }}
   {{ end }}
   {{ if $class | or .Class }}
-    class="{{ $class }}{{ with .Class }} {{ . }}{{ end }}"
+    class="{{ with $class }}{{ . }} {{ end }}{{ with .Class }}{{ . }}{{ end }}"
   {{ end }}
   {{ with .Download }}
     download="{{ . }}"
