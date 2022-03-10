@@ -2,6 +2,11 @@
 // Override Variables
 // 覆盖变量
 // ==============================
-$global-font-size: 16.5px;
-$global-font-weight: 350;
-$global-line-height: 1.8rem;
+$global-font-family: Noto Sans SC, system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+$global-font-size: 16px;
+$global-font-weight: normal;
+$global-line-height: 1.6rem;
+
+$global-font-color: #212121;
+
+$header-title-font-family: Noto Serif SC, system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
