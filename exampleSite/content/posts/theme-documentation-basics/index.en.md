@@ -937,6 +937,58 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 
 In `assets/css/_custom.scss`, you can add some css style code to customize the style.
 
+#### 3.3.1 Page Style Customization {#page-style}
+
+{{< version 0.2.13 >}}
+
+The FixIt theme provides a page width configuration option `pageStyle` and three values.
+
+* **narrow** Keep `<v0.2.12` page/toc width ratio
+* **normal** New default page/toc width ratio
+* **wide** Larger page/toc width ratio
+
+In addition, you can also customize the `pageStyle` value in `assets/css/_custom.scss`
+
+For example: `pageStyle="custom"`
+
+```scss
+@media only screen and (min-width: 1441px) {
+  [page-style='custom'] {
+    .page {
+      width: 70%;
+    }
+
+    aside {
+      width: 15%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  [page-style='custom'] {
+    .page {
+      width: 60%;
+    }
+
+    aside {
+      width: 20%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  [page-style='custom'] {
+    .page {
+      width: 56%;
+    }
+
+    aside {
+      width: 22%;
+    }
+  }
+}
+```
+
 ## 4 Multilingual and i18n
 
 **FixIt** theme is fully compatible with Hugo multilingual mode, which provides in-browser language switching.

@@ -949,6 +949,58 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 
 在 `assets/css/_custom.scss` 中，你可以添加一些 CSS 样式代码以自定义样式。
 
+#### 3.3.1 自定义页面宽度 {#page-style}
+
+{{< version 0.2.13 >}}
+
+FixIt 主题提供了页面宽度配置选项 `pageStyle` 并提供三种选项。
+
+* **narrow** 保留 `<v0.2.12` 页面目录宽度比
+* **normal** 新的默认页面目录宽度比
+* **wide** 较大的页面目录宽度比
+
+另外，你还可以在 `assets/css/_custom.scss` 中，自定义 `pageStyle` 值
+
+例如： `pageStyle="custom"` 
+
+```scss
+@media only screen and (min-width: 1441px) {
+  [page-style='custom'] {
+    .page {
+      width: 70%;
+    }
+
+    aside {
+      width: 15%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  [page-style='custom'] {
+    .page {
+      width: 60%;
+    }
+
+    aside {
+      width: 20%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  [page-style='custom'] {
+    .page {
+      width: 56%;
+    }
+
+    aside {
+      width: 22%;
+    }
+  }
+}
+```
+
 ## 4 多语言和 i18n
 
 **FixIt** 主题完全兼容 Hugo 的多语言模式，并且支持在网页上切换语言。
