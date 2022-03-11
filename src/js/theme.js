@@ -405,11 +405,13 @@ class Theme {
               $iconKey.classList.remove('fa-key');
               $iconKey.title = this.config.code.editLockTitle;
               $preChroma.setAttribute('contenteditable', true);
+              $preChroma.focus();
             } else {
               $iconLock.classList.add('fa-key');
               $iconLock.classList.remove('fa-lock');
               $iconLock.title = this.config.code.editUnLockTitle;
               $preChroma.setAttribute('contenteditable', false);
+              $preChroma.blur();
             }
           }, false);
           $header.appendChild($edit);
