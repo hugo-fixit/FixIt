@@ -453,7 +453,7 @@ hugo
     linkToMarkdown = true
     # {{< version 0.2.4 >}} 是否在 RSS 中显示全文内容
     rssFullText = false
-    # {{< version 0.2.13 >}} 页面样式 ("normal", "wide", ...)
+    # {{< version 0.2.13 >}} 页面样式 ("narrow", "normal", "wide", ...)
     pageStyle = "normal"
     # {{< version 0.2.0 >}} 目录配置
     [params.page.toc]

@@ -645,8 +645,8 @@ enableEmoji = true
     # whether to show the full text content in RSS
     # 是否在 RSS 中显示全文内容
     rssFullText = false
-    # Page style ("normal", "wide", ...) since v0.2.13
-    # 页面样式 ("normal", "wide", ...) since v0.2.13
+    # Page style ("narrow", "normal", "wide", ...) since v0.2.13
+    # 页面样式 ("narrow", "normal", "wide", ...) since v0.2.13
     pageStyle = "normal"
     # Table of the contents config
     # 目录配置
