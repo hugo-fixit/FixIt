@@ -22,7 +22,7 @@
   font-family: $header-title-font-family;
 }
 
-.single-title{
+.single-title {
   font-family: $header-title-font-family;
   font-weight: bold;
 }
@@ -48,8 +48,18 @@
 
 .single {
   .content {
-    >h1, >h2, >h3 {
+    > h1,
+    > h2,
+    > h3 {
       color: #212121;
+    }
+  }
+}
+.post-meta {
+  font-family: $header-title-font-family;
+  .post-author {
+    .author {
+      font-size: 16px;
     }
   }
 }
