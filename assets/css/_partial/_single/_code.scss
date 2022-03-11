@@ -7,7 +7,7 @@ code {
   font-family: $code-font-family;
   color: $code-color;
   background-color: rgba(175, 184, 193, 0.2);
-  border-radius: $global-border-radius;
+  @include border-radius($global-border-radius);
   @include overflow-wrap(break-word);
   @include line-break(anywhere);
 
@@ -25,7 +25,7 @@ pre {
   overflow: auto;
   font-size: $code-font-size;
   font-family: $code-font-family;
-  border-radius: $global-border-radius;
+  @include border-radius($global-border-radius);
   @include tab-size(4);
 
   background-color: $code-background-color;
@@ -36,8 +36,8 @@ pre {
 
   code {
     padding: 0;
-    border-radius: 0;
     background-color: transparent;
+    @include border-radius(0);
     @include max-content(min-width);
 
     [theme='dark'] & {
@@ -86,9 +86,9 @@ pre {
       font-family: $global-font-family;
       font-weight: bold;
       line-height: 1.4em;
-      border-radius: $global-border-radius;
       color: $code-info-color;
       background-color: darken($code-background-color, 3%);
+      @include border-radius($global-border-radius);
       @include transition(border-radius 0.2s ease);
 
       [theme='dark'] & {
@@ -145,7 +145,7 @@ pre {
     .table-wrapper {
       max-height: 0;
       overflow: hidden;
-      border-radius: 0 0 $global-border-radius $global-border-radius;
+      @include border-radius(0 0 $global-border-radius $global-border-radius);
       @include details-transition-open;
     }
 
@@ -167,8 +167,8 @@ pre {
 
       pre {
         padding: 0.25rem;
-        border-radius: 0;
         outline-offset: -1px;
+        @include border-radius(0);
       }
 
       /* lineNumbersInTable=false */
@@ -204,7 +204,7 @@ pre {
     &.open {
       .code-header {
         background-color: darken($code-background-color, 6%);
-        border-radius: $global-border-radius $global-border-radius 0 0;
+        @include border-radius($global-border-radius $global-border-radius 0 0);
 
         [theme='dark'] & {
           background-color: darken($code-background-color-dark, 3%);

@@ -23,7 +23,7 @@ html {
 
 ::-webkit-scrollbar-thumb {
   background-color: $scrollbar-color;
-  border-radius: $global-border-radius;
+  @include border-radius($global-border-radius);
 
   &:hover {
     background-color: $scrollbar-hover-color;
@@ -50,6 +50,15 @@ body {
   }
 }
 
+img {
+  @include object-fit(contain);
+  @include border-radius($global-border-radius/2);
+}
+
+iframe {
+  @include border-radius($global-border-radius);
+}
+
 @include ms;
 @include link(true, true);
 
@@ -58,7 +67,3 @@ body {
 @import '../_partial/details';
 @import '../_partial/fixed-button';
 @import '../_partial/cookieconsent';
-
-img {
-  @include object-fit(contain);
-}

@@ -24,7 +24,7 @@
   background: rgba(255, 255, 255, 0.3);
   box-sizing: border-box;
   box-shadow: 3px 3px 5px #aaa;
-  border-radius: $global-border-radius;
+  @include border-radius($global-border-radius);
   border: none;
   transition-duration: 0.3s;
   margin-bottom: 1rem;
@@ -42,7 +42,7 @@
   object-position: center;
   width: 100% !important;
   height: 150px !important;
-  border-radius: $global-border-radius;
+  @include border-radius($global-border-radius);
   margin: 0;
   padding: 0;
 }

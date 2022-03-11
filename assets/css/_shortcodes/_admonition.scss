@@ -5,6 +5,7 @@
   background-color: map-get($admonition-background-color-map, 'note');
   border-left: 0.25rem solid map-get($admonition-color-map, 'note');
   overflow: auto;
+  @include border-radius($global-border-radius);
 
   .admonition-title {
     font-weight: bold;

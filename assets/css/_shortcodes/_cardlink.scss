@@ -8,12 +8,12 @@
   display: block;
   margin: 0.5rem auto;
   box-sizing: border-box;
-  border-radius: 0.75rem;
   width: 400px;
   max-width: 100%;
   overflow: hidden;
   text-decoration: none;
   border: none;
+  @include border-radius(0.75rem);
 }
 
 .cl- {
