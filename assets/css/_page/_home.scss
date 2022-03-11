@@ -1,11 +1,11 @@
 .home {
   .home-profile {
-    @include transform(translateY( 16vh));
-    padding: 0 0 .5rem;
+    @include transform(translateY(16vh));
+    padding: 0 0 0.5rem;
     text-align: center;
 
     .home-avatar {
-      padding: .5rem;
+      padding: 0.5rem;
 
       img {
         display: inline-block;
@@ -13,12 +13,12 @@
         height: auto;
         margin: 0 auto;
         @include border-radius(100%);
-        @include box-shadow(0 0 0 .3618em rgba(0, 0, 0, .05));
+        @include box-shadow(0 0 0 0.3618em rgba(0, 0, 0, 0.05));
         @include transition(all 0.4s ease);
 
         &:hover {
           position: relative;
-          @include transform(translateY(-.75rem));
+          @include transform(translateY(-0.75rem));
         }
       }
     }
@@ -27,18 +27,18 @@
       font-size: 1.25rem;
       font-weight: bold;
       margin: 0;
-      padding: .5rem;
+      padding: 0.5rem;
     }
 
     .home-subtitle {
       font-size: 1rem;
       font-weight: normal;
       margin: 0;
-      padding: .5rem;
+      padding: 0.5rem;
     }
 
     .links {
-      padding: .5rem;
+      padding: 0.5rem;
       font-size: 1.5rem;
 
       a * {
@@ -47,7 +47,7 @@
 
       img {
         height: 1.5rem;
-        padding: 0 .25rem;
+        padding: 0 0.25rem;
       }
     }
 
@@ -56,10 +56,10 @@
       line-height: 1.5rem;
       font-weight: normal;
       margin: 0;
-      padding: .5rem;
+      padding: 0.5rem;
       color: $global-font-secondary-color;
 
-      [theme=dark] & {
+      [theme='dark'] & {
         color: $global-font-secondary-color-dark;
       }
     }
@@ -78,11 +78,11 @@
 
   .summary {
     padding-top: 1rem;
-    padding-bottom: .8rem;
+    padding-bottom: 0.8rem;
     color: $global-font-color;
     border-bottom: 1px dashed $global-border-color;
 
-    [theme=dark] & {
+    [theme='dark'] & {
       color: $global-font-color-dark;
       border-bottom: 1px dashed $global-border-color-dark;
     }
@@ -121,14 +121,14 @@
     .content {
       @include box(vertical);
       -webkit-line-clamp: 3;
-      margin-top: .3rem;
+      margin-top: 0.3rem;
       width: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
       @include overflow-wrap(break-word);
       color: $global-font-secondary-color;
 
-      [theme=dark] & {
+      [theme='dark'] & {
         color: $global-font-secondary-color-dark;
       }
 
@@ -143,7 +143,7 @@
         display: inline;
 
         &::after {
-          content: "\A";
+          content: '\A';
           white-space: pre;
         }
       }
@@ -154,21 +154,22 @@
 
       @include link(false, true);
 
-      b, strong {
+      b,
+      strong {
         color: $global-font-secondary-color;
 
-        [theme=dark] & {
+        [theme='dark'] & {
           color: $global-font-secondary-color-dark;
         }
       }
     }
 
     .post-footer {
-      margin-top: .4rem;
+      margin-top: 0.4rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: .875rem;
+      font-size: 0.875rem;
 
       @include link(false, false);
 

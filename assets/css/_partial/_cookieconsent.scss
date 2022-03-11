@@ -2,14 +2,16 @@
   .cc-btn {
     color: $global-font-color;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       background-color: #ccc;
     }
 
-    [theme=dark] & {
+    [theme='dark'] & {
       color: $global-font-color;
 
-      &:hover, &:focus {
+      &:hover,
+      &:focus {
         background-color: #fff;
       }
     }

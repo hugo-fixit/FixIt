@@ -10,16 +10,16 @@
 
     ul {
       text-indent: -0.85rem;
-      padding-left: .8rem;
+      padding-left: 0.8rem;
       list-style: none;
 
       a:first-child::before {
-        content: "|";
+        content: '|';
         font-weight: bolder;
-        margin-right: .5rem;
+        margin-right: 0.5rem;
         color: $single-link-color;
 
-        [theme=dark] & {
+        [theme='dark'] & {
           color: $single-link-color-dark;
         }
       }
@@ -37,7 +37,7 @@
       color: $global-font-secondary-color;
     }
 
-    [theme=dark] & {
+    [theme='dark'] & {
       background: $code-background-color-dark;
 
       rt {
@@ -50,7 +50,7 @@
 #toc-auto {
   display: block;
   position: sticky;
-  top: $header-height + .5rem;
+  top: $header-height + 0.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
   @include overflow-wrap(break-word);
@@ -60,15 +60,15 @@
   @include blur;
 
   .toc-title {
-    margin: .5rem 0;
+    margin: 0.5rem 0;
 
     &::before {
-      content: "|";
+      content: '|';
       font-weight: bolder;
       margin-right: 0.5rem;
       color: $global-border-color;
 
-      [theme=dark] & {
+      [theme='dark'] & {
         color: $global-border-color-dark;
       }
     }
@@ -80,7 +80,7 @@
     }
 
     > nav > ul {
-      margin: .625rem 0;
+      margin: 0.625rem 0;
     }
 
     ul {
@@ -97,14 +97,14 @@
       font-weight: bold;
       color: $single-link-color;
 
-      [theme=dark] & {
+      [theme='dark'] & {
         color: $single-link-color-dark;
       }
 
       &::before {
         color: $single-link-hover-color;
 
-        [theme=dark] & {
+        [theme='dark'] & {
           color: $single-link-hover-color-dark;
         }
       }
@@ -114,9 +114,9 @@
 
 #toc-static {
   display: none;
-  margin: .8rem 0;
+  margin: 0.8rem 0;
 
-  &[kept=true] {
+  &[kept='true'] {
     display: block;
   }
 
@@ -124,10 +124,10 @@
     display: flex;
     justify-content: space-between;
     line-height: 2em;
-    padding: 0 .75rem;
+    padding: 0 0.75rem;
     background: darken($code-background-color, 6%);
 
-    [theme=dark] & {
+    [theme='dark'] & {
       background: darken($code-background-color-dark, 6%);
     }
   }
@@ -137,10 +137,10 @@
 
     > nav > ul {
       margin: 0;
-      padding: .4rem 1rem .4rem 1.8rem;
+      padding: 0.4rem 1rem 0.4rem 1.8rem;
     }
 
-    [theme=dark] & {
+    [theme='dark'] & {
       background-color: $code-background-color-dark;
     }
   }
@@ -149,7 +149,7 @@
     .toc-title {
       background: darken($code-background-color, 3%);
 
-      [theme=dark] & {
+      [theme='dark'] & {
         background: darken($code-background-color-dark, 3%);
       }
     }

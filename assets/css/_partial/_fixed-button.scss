@@ -9,7 +9,7 @@
   right: 1.5rem;
   font-size: 1rem;
   line-height: 1.3rem;
-  padding: .6rem .6rem;
+  padding: 0.6rem 0.6rem;
   color: $global-font-secondary-color;
   background: $header-background-color;
   @include border-radius(2rem);
@@ -17,20 +17,24 @@
 
   @include blur;
 
-  &:hover, &:active {
+  &:hover,
+  &:active {
     color: $global-font-color;
     cursor: pointer;
   }
 
-  &:active, &:focus, &:hover {
+  &:active,
+  &:focus,
+  &:hover {
     outline: none;
   }
 
-  [theme=dark] & {
+  [theme='dark'] & {
     color: $global-font-secondary-color-dark;
     background: $header-background-color-dark;
 
-    &:hover, &:active {
+    &:hover,
+    &:active {
       color: $global-font-color-dark;
     }
   }

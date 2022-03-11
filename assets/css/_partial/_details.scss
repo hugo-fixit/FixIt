@@ -9,7 +9,7 @@
     color: $global-font-secondary-color;
     @include transition(transform 0.2s ease);
 
-    [theme=dark] & {
+    [theme='dark'] & {
       color: $global-font-secondary-color-dark;
     }
   }

@@ -1,9 +1,9 @@
 /**
- * @Description: Style of layout named 'Friend links'.
- * @Author: lruihao.cn
- * @Updated:  2021/9/20 19:26
+ * @Description: Style of layout named 'friends'.
+ * @Author: Lruihao <https://lruihao.cn>
+ * @Updated:  2022/3/11 21:36
  */
- 
+
 .friend-links {
   margin-top: 1rem;
   display: flex;
@@ -21,11 +21,11 @@
   height: 200px;
   font-size: 1rem;
   text-align: center;
-  background: rgba(255,255,255,0.3);
-  box-sizing: border-box; 
+  background: rgba(255, 255, 255, 0.3);
+  box-sizing: border-box;
   box-shadow: 3px 3px 5px #aaa;
-  border-radius: 5px;
-  border:none;
+  border-radius: $global-border-radius;
+  border: none;
   transition-duration: 0.3s;
   margin-bottom: 1rem;
   display: flex;
@@ -40,13 +40,13 @@
 .friend-avatar {
   object-fit: cover;
   object-position: center;
-  width: 100%!important;
-  height: 150px!important;
-  border-radius: 5px;
+  width: 100% !important;
+  height: 150px !important;
+  border-radius: $global-border-radius;
   margin: 0;
   padding: 0;
 }
-.friend-nickname{
+.friend-nickname {
   display: block;
   position: relative;
   color: #2bbc8a;

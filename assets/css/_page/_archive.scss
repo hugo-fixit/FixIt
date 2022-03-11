@@ -1,11 +1,11 @@
 .archive {
   .single-title {
     text-align: right;
-    
+
     sup {
       color: $global-font-secondary-color;
 
-      [theme=dark] & {
+      [theme='dark'] & {
         color: $global-font-secondary-color-dark;
       }
     }
@@ -16,6 +16,6 @@
     margin-bottom: 1rem;
   }
 
-  @import "../_partial/_archive/terms";
-  @import "../_partial/_archive/tags";
+  @import '../_partial/_archive/terms';
+  @import '../_partial/_archive/tags';
 }

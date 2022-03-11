@@ -9,7 +9,7 @@
   line-height: 1.6rem;
 
   .card-item {
-    font-size: .875rem;
+    font-size: 0.875rem;
     text-align: left;
     width: 45%;
     display: flex;
@@ -28,7 +28,7 @@
         font-weight: bold;
         display: inline-block;
         margin-top: 1rem;
-        margin-bottom: .75rem;
+        margin-bottom: 0.75rem;
       }
 
       span {
@@ -44,7 +44,7 @@
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  margin: .25rem 0 .25rem 1.5rem;
+  margin: 0.25rem 0 0.25rem 1.5rem;
 }
 
 .archive-item-link {
@@ -58,7 +58,7 @@
     background-color: transparent;
   }
 
-  [theme=dark] & {
+  [theme='dark'] & {
     color: $global-link-color-dark;
 
     &:hover {
@@ -73,7 +73,7 @@
   white-space: nowrap;
   font-variant-numeric: tabular-nums lining-nums;
 
-  [theme=dark] & {
+  [theme='dark'] & {
     color: $global-font-secondary-color-dark;
   }
 }

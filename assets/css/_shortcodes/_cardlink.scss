@@ -6,9 +6,9 @@
 .card-link {
   position: relative;
   display: block;
-  margin: .5rem auto;
+  margin: 0.5rem auto;
   box-sizing: border-box;
-  border-radius: .75rem;
+  border-radius: 0.75rem;
   width: 400px;
   max-width: 100%;
   overflow: hidden;
@@ -19,13 +19,13 @@
 .cl- {
   &backdrop {
     position: absolute;
-    top: .75rem;
-    bottom: .75rem;
+    top: 0.75rem;
+    bottom: 0.75rem;
     left: 0;
     right: 0;
-    background-image: url("/images/fixit.svg");
+    background-image: url('/images/fixit.svg');
     background-repeat: no-repeat;
-    filter: blur(.15rem);
+    filter: blur(0.15rem);
     opacity: 0.5;
     background-size: contain;
     background-position: center;
@@ -36,7 +36,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: .75rem;
+    padding: 0.75rem;
     background-color: rgba(245, 245, 245, 0.88);
   }
 
@@ -58,8 +58,8 @@
   &meta {
     display: flex;
     align-items: center;
-    margin-top: .25rem;
-    font-size: .825rem;
+    margin-top: 0.25rem;
+    font-size: 0.825rem;
     color: $global-font-secondary-color;
   }
 
@@ -67,7 +67,7 @@
     width: 1rem;
     height: 1rem;
     flex-shrink: 0;
-    margin-right: .25rem;
+    margin-right: 0.25rem;
   }
 
   &url {
@@ -80,10 +80,10 @@
     width: 4rem;
     height: 4rem;
     flex-shrink: 0;
-    margin-left: .25rem;
+    margin-left: 0.25rem;
   }
 
-  [theme=dark] & {
+  [theme='dark'] & {
     &content {
       background-color: rgba(61, 62, 65, 0.88);
     }
@@ -96,5 +96,4 @@
       color: $global-font-secondary-color-dark;
     }
   }
-
 }

@@ -5,10 +5,11 @@
   position: relative;
   text-align: center;
 
-  &::after, &::before {
+  &::after,
+  &::before {
     left: 0;
     line-height: 1;
-    opacity: .6;
+    opacity: 0.6;
     position: absolute;
     width: 100%;
   }
@@ -21,11 +22,11 @@
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
 
-    [theme=dark] & {
+    [theme='dark'] & {
       border-top-color: $global-border-color-dark;
     }
   }
-  
+
   &::after {
     border-bottom: 1px solid $global-border-color;
     bottom: -20px;
@@ -34,7 +35,7 @@
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
 
-    [theme=dark] & {
+    [theme='dark'] & {
       border-bottom-color: $global-border-color-dark;
     }
   }
