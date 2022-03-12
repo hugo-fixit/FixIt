@@ -13,6 +13,7 @@
     padding: 0.25rem 1.8rem;
     border-bottom: 1px solid map-get($admonition-background-color-map, 'note');
     background-color: opacify(map-get($admonition-background-color-map, 'note'), 0.15);
+    @include border-radius(0);
   }
 
   &.open .admonition-title {
