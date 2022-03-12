@@ -949,7 +949,7 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 
 在 `assets/css/_custom.scss` 中，你可以添加一些 CSS 样式代码以自定义样式。
 
-#### 3.3.1 自定义页面宽度 {#page-style}
+#### 3.3.1 页面宽度 {#page-style}
 
 {{< version 0.2.13 >}}
 
@@ -999,6 +999,26 @@ FixIt 主题提供了页面宽度配置选项 `pageStyle` 并提供三种选项�
     }
   }
 }
+```
+
+#### 3.3.2 打印样式 {#print-style}
+
+{{< version 0.2.13 >}}
+
+在 FixIt 主题中，提供有三个打印视图相关的 css class
+
+* `page-break-before` 在元素之前插入分页符
+* `page-break-after` 在元素之后插入分页符
+* `print-d-none` 在打印视图中隐藏元素
+
+下面是一个简单的例子：
+
+```html
+<div class="page-break-before"></div>
+<div class="page-break-after"></div>
+<div class="print-d-none">
+  您希望在打印视图中隐藏的某些内容写在此处。
+</div>
 ```
 
 ## 4 多语言和 i18n

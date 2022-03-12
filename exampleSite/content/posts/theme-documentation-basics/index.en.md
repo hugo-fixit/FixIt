@@ -937,7 +937,7 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 
 In `assets/css/_custom.scss`, you can add some css style code to customize the style.
 
-#### 3.3.1 Page Style Customization {#page-style}
+#### 3.3.1 Page Style {#page-style}
 
 {{< version 0.2.13 >}}
 
@@ -987,6 +987,26 @@ For example: `pageStyle="custom"`
     }
   }
 }
+```
+
+#### 3.3.2 Print Style {#print-style}
+
+{{< version 0.2.13 >}}
+
+There are three css common class for print view in FixIt Theme.
+
+* `page-break-before` Insert page break before element
+* `page-break-after` Insert page break after element
+* `print-d-none` Hide elements in print view
+
+Here is a simple exmple:
+
+```html
+<div class="page-break-before"></div>
+<div class="page-break-after"></div>
+<div class="print-d-none">
+  Something you want to hide in the print view is written here.
+</div>
 ```
 
 ## 4 Multilingual and i18n
