@@ -14,7 +14,7 @@ $global-border-radius: 5px !default;
 
 // Color of the background
 $global-background-color: #ffffff !default;
-$global-background-color-dark: #292a2d !default;
+$global-background-color-dark: #292a2e !default;
 
 // Color of the text
 $global-font-color: #161209 !default;
@@ -29,7 +29,7 @@ $global-link-color: #161209 !default;
 $global-link-color-dark: #a9a9b3 !default;
 
 // Color of the hover link
-$global-link-hover-color: #2d96bd !default;
+$global-link-hover-color: #2983bb !default; // 潮蓝
 $global-link-hover-color-dark: #fff !default;
 
 // Color of the border
@@ -78,12 +78,12 @@ $toc-title-font-size: 1.2rem !default;
 $toc-content-font-size: 1rem !default;
 
 // Color of the single link
-$single-link-color: #2d96bd !default;
-$single-link-color-dark: #55bde2 !default;
+$single-link-color: #2376b7 !default; // 花青
+$single-link-color-dark: #1781b5 !default; // 釉蓝
 
 // Color of the hover single link
-$single-link-hover-color: #ef3982 !default;
-$single-link-hover-color-dark: #bdebfc !default;
+$single-link-hover-color: #ea517f !default; // 莲瓣红
+$single-link-hover-color-dark: #619ac3 !default; // 羽扇豆蓝
 
 // Color of the table background
 $table-background-color: #fff !default;
@@ -100,7 +100,7 @@ $blockquote-color-dark: #6c757d !default;
 
 // ========== Pagination ========== //
 // Color of the link in pagination
-$pagination-link-color: #2d96bd !default;
+$pagination-link-color: #bfbfbf !default;
 $pagination-link-color-dark: #a9a9b3 !default;
 
 // Color of the hover link in pagination
