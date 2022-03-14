@@ -205,6 +205,24 @@
           }
         }
 
+        &:not([class]) tbody {
+          & tr:nth-child(odd) {
+            background: darken($table-background-color, 2.25%);
+
+            [theme='dark'] & {
+              background-color: lighten($table-background-color-dark, 2.75%);
+            }
+          }
+          
+          & tr:hover {
+            background: darken($table-background-color, 4.5%);
+
+            [theme='dark'] & {
+              background-color: lighten($table-background-color-dark, 5.5%);
+            }
+          }
+        }
+
         th,
         td {
           padding: 0.3rem 1rem;
