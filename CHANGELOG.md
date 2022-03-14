@@ -2,17 +2,17 @@
 All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/Lruihao/FixIt/releases -->
 
-## v0.2.13
+## v0.2.13 [2022.3.14]
 
 - :recycle: Refactor: page layout ([#65](https://github.com/Lruihao/FixIt/issues/65))
-- :tada: Feat: add Artalk comment support ([#54](https://github.com/Lruihao/FixIt/issues/54), [#57](https://github.com/Lruihao/FixIt/pull/57)@hiifong)
+- :tada: Feat: add Artalk comment support ([#54](https://github.com/Lruihao/FixIt/issues/54), @hiifong[#57](https://github.com/Lruihao/FixIt/pull/57))
 - :tada: Feat: add Waline comment support ([#36](https://github.com/Lruihao/FixIt/issues/36))
 - :tada: Feat: add Twikoo comment support ([#64](https://github.com/Lruihao/FixIt/issues/64))
 - :sparkles: Feat: add recently updated section ([#50](https://github.com/Lruihao/FixIt/issues/50))
 - :sparkles: Feat: add article expiration reminder support ([#51](https://github.com/Lruihao/FixIt/issues/51))
 - :sparkles: Feat: add pageStyle option ([#62](https://github.com/Lruihao/FixIt/issues/62))
 - :sparkles: Style: add media style for print view ([#61](https://github.com/Lruihao/FixIt/issues/61))
-- :sparkles: Feat: add Gravatar mirror site support ([#66](https://github.com/Lruihao/FixIt/pull/66)@ctj12461)
+- :sparkles: Feat: add Gravatar mirror site support (@ctj12461[#66](https://github.com/Lruihao/FixIt/pull/66))
 - :sparkles: Feat: add archive count display ([#33](https://github.com/Lruihao/FixIt/issues/33))
 - :sparkles: Feat: add `details` shortcode ([#68](https://github.com/Lruihao/FixIt/issues/68))
 - :sparkles: Feat: add `center-quote` shortcode ([#69](https://github.com/Lruihao/FixIt/issues/69))

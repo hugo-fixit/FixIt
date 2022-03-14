@@ -282,6 +282,8 @@
         color: $blockquote-color-dark;
         border-left-color: $global-border-color-dark;
       }
+
+      @include link(false, true);
     }
 
     .footnotes {

@@ -18,15 +18,15 @@ $global-background-color-dark: #292a2e !default;
 
 // Color of the text
 $global-font-color: #161209 !default;
-$global-font-color-dark: #a9a9b3 !default;
+$global-font-color-dark: #b1b1ba !default;
 
 // Color of the secondary text
-$global-font-secondary-color: #a9a9b3 !default;
-$global-font-secondary-color-dark: #5d5d5f !default;
+$global-font-secondary-color: #b1b1ba !default;
+$global-font-secondary-color-dark: #909092 !default;
 
 // Color of the link
 $global-link-color: #161209 !default;
-$global-link-color-dark: #a9a9b3 !default;
+$global-link-color-dark: #b1b1ba !default;
 
 // Color of the hover link
 $global-link-hover-color: #2983bb !default; // 潮蓝
@@ -42,7 +42,7 @@ $global-border-color-dark: #363636 !default;
 $scrollbar-color: #87878d !default;
 
 // Color of the hover scrollbar
-$scrollbar-hover-color: #a9a9b3 !default;
+$scrollbar-hover-color: #b1b1ba !default;
 // ========== Scrollbar ========== //
 
 // ========== Selection ========== //
@@ -94,14 +94,14 @@ $table-thead-color: #ededed !default;
 $table-thead-color-dark: #20252b !default;
 
 // Color of the blockquote
-$blockquote-color: #adb5bd !default;
-$blockquote-color-dark: #6c757d !default;
+$blockquote-color: #bbc2c8 !default; 
+$blockquote-color-dark: #808992 !default;
 // ========== Single Content ========== //
 
 // ========== Pagination ========== //
 // Color of the link in pagination
 $pagination-link-color: #bfbfbf !default;
-$pagination-link-color-dark: #a9a9b3 !default;
+$pagination-link-color-dark: #b1b1ba !default;
 
 // Color of the hover link in pagination
 $pagination-link-hover-color: #000 !default;
