@@ -943,7 +943,7 @@ In `assets/css/_custom.scss`, you can add some css style code to customize the s
 
 The FixIt theme provides a page width configuration option `pageStyle` and three values.
 
-* **narrow** Keep `<v0.2.12` page/toc width ratio
+* **narrow** Keep `<v0.2.13` page/toc width ratio
 * **normal** New default page/toc width ratio
 * **wide** Larger page/toc width ratio
 

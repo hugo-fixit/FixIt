@@ -955,7 +955,7 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 
 FixIt 主题提供了页面宽度配置选项 `pageStyle` 并提供三种选项。
 
-* **narrow** 保留 `<v0.2.12` 页面目录宽度比
+* **narrow** 保留 `<v0.2.13` 页面目录宽度比
 * **normal** 新的默认页面目录宽度比
 * **wide** 较大的页面目录宽度比
 

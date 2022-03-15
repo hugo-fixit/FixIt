@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/Lruihao/FixIt/releases -->
 
+## v0.2.14
+
+- **Full Changelog:** @Lruihao [`v0.2.13...v0.2.14`](https://github.com/Lruihao/FixIt/compare/v0.2.11...v0.2.12-beta)
+
 ## v0.2.13 [2022.3.14]
 
 - :recycle: Refactor: page layout ([#65](https://github.com/Lruihao/FixIt/issues/65))
@@ -33,7 +37,7 @@ All notable changes to this project will be documented in this file.
   - Update cell-watermark 1.0.3 and CDN support (fontFamily supported)
   - Update animate.css 3.7.2 -> 4.1.1 ([#74](https://github.com/Lruihao/FixIt/issues/74))
 - :wrench: Chore: add atomic-algolia for exampleSite ([#70](https://github.com/Lruihao/FixIt/issues/70))
-- **Full Changelog:** [`v0.2.12...v0.2.13`](https://github.com/Lruihao/FixIt/compare/v0.2.12...v0.2.13)
+- **Full Changelog:** @Lruihao [`v0.2.12...v0.2.13`](https://github.com/Lruihao/FixIt/compare/v0.2.12...v0.2.13)
 
 ## v0.2.12 [2022-1-27]
 
@@ -58,7 +62,7 @@ All notable changes to this project will be documented in this file.
 - :wrench: Chore: add commands `fixit_checker.sh`
 - :wrench: Chore(i18n): change some translations
 - :arrow_up: Chore: update all third-party libraries
-- **Full Changelog:** [`v0.2.11...v0.2.12`](https://github.com/Lruihao/FixIt/compare/v0.2.11...v0.2.12)
+- **Full Changelog:** @Lruihao [`v0.2.11...v0.2.12`](https://github.com/Lruihao/FixIt/compare/v0.2.11...v0.2.12)
 ## v0.2.11 [2021-12-19]
 
 > :tada: The beginning of FixIt to fix the theme LoveIt.
@@ -69,7 +73,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: mobile style ([Lruihao/hugo-blog#19](https://github.com/Lruihao/hugo-blog/issues/19))
 - :bug: Style: fix content h1 style ([Lruihao/hugo-blog#8](https://github.com/Lruihao/hugo-blog/issues/8))
 - :bug: Fix: `.params.author` should be `$params.author`  ([Lruihao/hugo-blog#1](https://github.com/Lruihao/hugo-blog/issues/1))
-- **Full Changelog:** [`v0.2.10...v0.2.11`](https://github.com/Lruihao/FixIt/compare/v0.2.10...v0.2.11)
+- **Full Changelog:** @Lruihao [`v0.2.10...v0.2.11`](https://github.com/Lruihao/FixIt/compare/v0.2.10...v0.2.11)
 
 ## v0.2.10 :arrow_down: [2020-5-29 before]
 
