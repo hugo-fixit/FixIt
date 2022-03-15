@@ -4,7 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## v0.2.14
 
-- **Full Changelog:** @Lruihao [`v0.2.13...v0.2.14`](https://github.com/Lruihao/FixIt/compare/v0.2.11...v0.2.12-beta)
+- :zap: Perf: remove third-party library clipboard.js ([#84](https://github.com/Lruihao/FixIt/issues/84))
+- **Full Changelog:** @Lruihao [`v0.2.13...v0.2.14`](https://github.com/Lruihao/FixIt/compare/v0.2.13...v0.2.14)
 
 ## v0.2.13 [2022.3.14]
 
@@ -63,6 +64,7 @@ All notable changes to this project will be documented in this file.
 - :wrench: Chore(i18n): change some translations
 - :arrow_up: Chore: update all third-party libraries
 - **Full Changelog:** @Lruihao [`v0.2.11...v0.2.12`](https://github.com/Lruihao/FixIt/compare/v0.2.11...v0.2.12)
+
 ## v0.2.11 [2021-12-19]
 
 > :tada: The beginning of FixIt to fix the theme LoveIt.
