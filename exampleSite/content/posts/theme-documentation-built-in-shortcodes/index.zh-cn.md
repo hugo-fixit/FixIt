@@ -78,7 +78,7 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 
 ## 3 highlight
 
-[`highlight` 的文档](https://gohugo.io/content-management/shortcodes#instagram)
+[`highlight` 的文档](https://gohugo.io/content-management/shortcodes#highlight)
 
 一个 `highlight` 示例：
 
