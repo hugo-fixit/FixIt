@@ -8,13 +8,17 @@
   padding: 1rem 0 0;
 
   a {
-    font-size: .8rem;
-    color: #bfbfbf;
-    letter-spacing: .1rem;
+    font-size: 0.8rem;
+    color: $pagination-link-color;
+    letter-spacing: 0.1rem;
     font-weight: 700;
     padding: 5px 5px;
     text-decoration: none;
     @include transition(0.3s);
+
+    [theme='dark'] & {
+      color: $pagination-link-color-dark;
+    }
   }
 
   li {
@@ -32,14 +36,14 @@
       color: $pagination-link-hover-color;
     }
 
-    [theme=dark] &:hover a {
+    [theme='dark'] &:hover a {
       color: $pagination-link-hover-color-dark;
     }
 
     &:before,
     &:after {
       position: absolute;
-      content: "";
+      content: '';
       width: 0;
       height: 3px;
       background: $pagination-link-hover-color;
@@ -47,8 +51,8 @@
       bottom: 0px;
     }
 
-    [theme=dark] &:before,
-    [theme=dark] &:after {
+    [theme='dark'] &:before,
+    [theme='dark'] &:after {
       background: $pagination-link-hover-color-dark;
     }
 
@@ -66,7 +70,6 @@
     }
 
     &:hover {
-
       &:before,
       &:after {
         width: 50%;
@@ -78,7 +81,7 @@
         color: $pagination-link-hover-color;
       }
 
-      [theme=dark] & a {
+      [theme='dark'] & a {
         color: $pagination-link-hover-color-dark;
       }
 

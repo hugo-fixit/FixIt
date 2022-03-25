@@ -11,19 +11,19 @@ html {
 
 @media screen and (prefers-reduced-motion: reduce) {
   html {
-      scroll-behavior: auto;
+    scroll-behavior: auto;
   }
 }
 
 /* scrollbar, only support webkit */
 ::-webkit-scrollbar {
-  width: .5rem;
-  height: .5rem;
+  width: 0.5rem;
+  height: 0.5rem;
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: $scrollbar-color;
-  border-radius: $global-border-radius;
+  @include border-radius($global-border-radius);
 
   &:hover {
     background-color: $scrollbar-hover-color;
@@ -33,7 +33,7 @@ html {
 ::selection {
   background-color: $selection-color;
 
-  [theme=dark] & {
+  [theme='dark'] & {
     background-color: $selection-color-dark;
   }
 }
@@ -44,21 +44,26 @@ body {
   @include overflow-wrap(break-word);
   scrollbar-color: auto;
 
-  &[theme=dark] {
+  &[theme='dark'] {
     color: $global-font-color-dark;
     background-color: $global-background-color-dark;
   }
 }
 
+img {
+  @include object-fit(contain);
+  @include border-radius($global-border-radius/2);
+}
+
+iframe {
+  @include border-radius($global-border-radius);
+}
+
 @include ms;
 @include link(true, true);
 
-@import "../_partial/mask";
-@import "../_partial/icon";
-@import "../_partial/details";
-@import "../_partial/fixed-button";
-@import "../_partial/cookieconsent";
-
-img {
-  @include object-fit(contain);
-}
+@import '../_partial/mask';
+@import '../_partial/icon';
+@import '../_partial/details';
+@import '../_partial/fixed-button';
+@import '../_partial/cookieconsent';

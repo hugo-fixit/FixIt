@@ -17,7 +17,9 @@
               {{- .Title -}}
             </a>
             <span class="archive-item-date" title='{{ "2006-01-02 15:04:05" | .Lastmod.Format }}'>
-              {{- default $.Site.Params.section.dateFormat | default "01-02" | .Lastmod.Format -}}
+              {{- with .Site.Params.section.dateformat | default "01-02" | .Lastmod.Format -}}
+                {{- dict "Date" . | T "updatedOnDate" -}}
+              {{- end -}}
             </span>
           </article>
         {{- end -}}

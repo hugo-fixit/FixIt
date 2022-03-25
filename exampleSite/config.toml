@@ -486,7 +486,7 @@ enableEmoji = true
         # 水印内容 (允许 HTML 格式)
         content = '<img class="fixit-icon" src="/images/fixit.svg" alt="FixIt logo" /> FixIt 主题'
         # 水印透明度
-        opacity = 0.02
+        opacity = 0.0125
         # 单水印高度 单位：px
         height = 21
 
@@ -943,7 +943,7 @@ enableEmoji = true
     content = '<img class="fixit-icon" src="/images/fixit.svg" alt="FixIt logo" /> FixIt Theme'
     # watermark's transparency
     # 水印透明度
-    opacity = 0.02
+    opacity = 0.0125
     # parent of watermark's container
     # 水印父节点
     appendTo = '.wrapper>main'

@@ -62,10 +62,8 @@
   {{- $config = dict "editable" true "editLockTitle" (T "editLockTitle") "editUnLockTitle" (T "editUnLockTitle") | dict "code" | merge $config -}}
 {{- end -}}
 
-{{- /* clipboard.js */ -}}
+{{- /* copy code */ -}}
 {{- if ne $code.copy false -}}
-  {{- $source := $cdn.clipboardJS | default "lib/clipboard/clipboard.min.js" -}}
-  {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- $config = T "copyToClipboard" | dict "copyTitle" | dict "code" | merge $config -}}
 {{- end -}}
 

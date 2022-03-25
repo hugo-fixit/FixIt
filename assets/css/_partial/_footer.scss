@@ -6,19 +6,19 @@ footer {
   padding: 1rem 0;
 
   .footer-container {
-    font-size: .875rem;
+    font-size: 0.875rem;
 
     .footer-line {
       width: 100%;
 
       .footer-divider::before {
         content: '|';
-        margin-left: .25rem;
-        margin-right: .25rem;
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
       }
 
       .fixit-icon {
-        top: .25em;
+        top: 0.25em;
       }
 
       .animate-icon {
@@ -29,7 +29,6 @@ footer {
       .run-times {
         font-variant-numeric: tabular-nums lining-nums;
       }
-
     }
   }
 
@@ -37,19 +36,25 @@ footer {
 }
 
 @keyframes icon-animate {
-  0%,100% {
-    transform: scale(1)
+  0%,
+  100% {
+    transform: scale(1);
   }
 
-  10%,30% {
-    transform: scale(.9)
+  10%,
+  30% {
+    transform: scale(0.9);
   }
 
-  20%,40%,60%,80% {
-    transform: scale(1.1)
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: scale(1.1);
   }
 
-  50%,70% {
-    transform: scale(1.1)
+  50%,
+  70% {
+    transform: scale(1.1);
   }
 }

@@ -1,8 +1,8 @@
-@import "../_partial/_single/toc";
+@import '../_partial/_single/toc';
 
 .single {
   .single-title {
-    padding: 1rem 0 .5rem;
+    padding: 1rem 0 0.5rem;
     margin: 0;
     font-size: 1.7rem;
     font-weight: bold;
@@ -10,7 +10,7 @@
   }
 
   .single-subtitle {
-    margin: .4rem 0;
+    margin: 0.4rem 0;
     font-size: 1.2rem;
     font-weight: normal;
     font-style: italic;
@@ -18,14 +18,14 @@
   }
 
   .post-meta {
-    font-size: .875rem;
+    font-size: 0.875rem;
     color: $global-font-secondary-color;
 
     span {
       display: inline-block;
     }
 
-    [theme=dark] & {
+    [theme='dark'] & {
       color: $global-font-secondary-color-dark;
     }
 
@@ -37,7 +37,7 @@
   }
 
   .featured-image {
-    margin: .5rem 0 1rem 0;
+    margin: 0.5rem 0 1rem 0;
 
     img {
       display: block;
@@ -53,7 +53,8 @@
   }
 
   .content {
-    > h1, > h2 {
+    > h1,
+    > h2 {
       font-size: 1.5rem;
 
       & code {
@@ -93,7 +94,7 @@
       font-weight: bold;
       margin: 1.7rem 0;
 
-      [theme=dark] & {
+      [theme='dark'] & {
         font-weight: bolder;
       }
     }
@@ -104,28 +105,29 @@
     > h5,
     > h6 {
       > .header-mark::before {
-        content: "|";
-        margin-right: .3125rem;
+        content: '|';
+        margin-right: 0.3125rem;
         color: $single-link-color;
 
-        [theme=dark] & {
+        [theme='dark'] & {
           color: $single-link-color-dark;
         }
       }
     }
 
     > h2 > .header-mark::before {
-      content: "#";
+      content: '#';
     }
 
     p {
-      margin: 1rem 0;
+      margin: 0.5rem 0;
     }
 
-    b, strong {
+    b,
+    strong {
       font-weight: bold;
 
-      [theme=dark] & {
+      [theme='dark'] & {
         color: #ddd;
       }
     }
@@ -135,17 +137,20 @@
     a {
       @include overflow-wrap(break-word);
 
-      [theme=dark] & b, [theme=dark] & strong {
+      [theme='dark'] & b,
+      [theme='dark'] & strong {
         color: $single-link-color-dark;
       }
     }
 
-    [theme=dark] a:hover b, [theme=dark] a:hover strong {
+    [theme='dark'] a:hover b,
+    [theme='dark'] a:hover strong {
       color: $single-link-hover-color-dark;
     }
 
-    ul, ol {
-      margin: .5rem 0;
+    ul,
+    ol {
+      margin: 0.5rem 0;
       padding-left: 2.5rem;
     }
 
@@ -160,7 +165,7 @@
         color: $global-font-secondary-color;
       }
 
-      [theme=dark] & {
+      [theme='dark'] & {
         background: $code-background-color-dark;
 
         rt {
@@ -175,7 +180,7 @@
       &::-webkit-scrollbar {
         background-color: $table-background-color;
 
-        [theme=dark] & {
+        [theme='dark'] & {
           background-color: $table-background-color-dark;
         }
       }
@@ -183,28 +188,47 @@
       > table {
         width: 100%;
         max-width: 100%;
-        margin: .625rem 0;
+        margin: 0.625rem 0;
         border-spacing: 0;
         background: $table-background-color;
         border-collapse: collapse;
 
-        [theme=dark] & {
+        [theme='dark'] & {
           background: $table-background-color-dark;
         }
 
         thead {
           background: $table-thead-color;
 
-          [theme=dark] & {
+          [theme='dark'] & {
             background-color: $table-thead-color-dark;
           }
         }
 
-        th, td {
-          padding: .3rem 1rem;
+        &:not([class]) tbody {
+          & tr:nth-child(odd) {
+            background: darken($table-background-color, 2.25%);
+
+            [theme='dark'] & {
+              background-color: lighten($table-background-color-dark, 2.75%);
+            }
+          }
+          
+          & tr:hover {
+            background: darken($table-background-color, 4.5%);
+
+            [theme='dark'] & {
+              background-color: lighten($table-background-color-dark, 5.5%);
+            }
+          }
+        }
+
+        th,
+        td {
+          padding: 0.3rem 1rem;
           border: 1px solid darken($table-thead-color, 2%);
 
-          [theme=dark] & {
+          [theme='dark'] & {
             border-color: darken($table-thead-color-dark, 2%);
           }
         }
@@ -217,16 +241,16 @@
     }
 
     figure {
-      margin: .5rem;
+      margin: 0.5rem;
       text-align: center;
 
       .image-caption:not(:empty) {
         min-width: 20%;
         max-width: 80%;
         display: inline-block;
-        padding: .5rem;
+        padding: 0.5rem;
         margin: 0 auto;
-        font-size: .875rem;
+        font-size: 0.875rem;
         color: #969696;
       }
 
@@ -249,26 +273,33 @@
       padding: 0 1em;
       margin: 1rem 0;
 
-      [theme=dark] & {
+      ul,
+      ol {
+        padding-left: 1.5em;
+      }
+
+      [theme='dark'] & {
         color: $blockquote-color-dark;
         border-left-color: $global-border-color-dark;
       }
+
+      @include link(false, true);
     }
 
     .footnotes {
       color: $global-font-secondary-color;
 
-      [theme=dark] & {
+      [theme='dark'] & {
         color: $global-font-secondary-color-dark;
       }
 
       p {
-        margin: .25rem 0;
+        margin: 0.25rem 0;
       }
     }
 
-    @import "../_partial/_single/code";
-    @import "../_shortcodes/index";
+    @import '../_partial/_single/code';
+    @import '../_shortcodes/index';
 
     hr {
       margin: 1rem 0;
@@ -276,24 +307,24 @@
       border-top: 1px dashed $global-border-color;
       border-bottom: none;
 
-      [theme=dark] & {
+      [theme='dark'] & {
         border-top: 1px dashed $global-border-color-dark;
       }
     }
 
     kbd {
       display: inline-block;
-      padding: .25rem;
+      padding: 0.25rem;
       background-color: $global-background-color;
       border: 1px solid $global-border-color;
       border-bottom-color: $global-border-color;
       @include border-radius(3px);
       @include box-shadow(inset 0 -1px 0 $global-border-color);
-      font-size: .8rem;
+      font-size: 0.8rem;
       font-family: $code-font-family;
       color: $code-color;
 
-      [theme=dark] & {
+      [theme='dark'] & {
         background-color: $global-background-color-dark;
         border: 1px solid $global-border-color-dark;
         border-bottom-color: $global-border-color-dark;
@@ -304,8 +335,8 @@
 
     .typeit {
       .code {
-        padding: .375rem;
-        font-size: .875rem;
+        padding: 0.375rem;
+        font-size: 0.875rem;
         font-family: $code-font-family;
         font-weight: bold;
         word-break: break-all;
@@ -318,8 +349,8 @@
     }
   }
 
-  @import "../_partial/_single/footer";
-  @import "../_partial/_single/comment";
+  @import '../_partial/_single/footer';
+  @import '../_partial/_single/comment';
 }
 
 .lg-toolbar .lg-icon::after {

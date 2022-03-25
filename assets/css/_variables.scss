@@ -14,22 +14,22 @@ $global-border-radius: 5px !default;
 
 // Color of the background
 $global-background-color: #ffffff !default;
-$global-background-color-dark: #292a2d !default;
+$global-background-color-dark: #292a2e !default;
 
 // Color of the text
 $global-font-color: #161209 !default;
-$global-font-color-dark: #a9a9b3 !default;
+$global-font-color-dark: #b1b1ba !default;
 
 // Color of the secondary text
-$global-font-secondary-color: #a9a9b3 !default;
-$global-font-secondary-color-dark: #5d5d5f !default;
+$global-font-secondary-color: #b1b1ba !default;
+$global-font-secondary-color-dark: #909092 !default;
 
 // Color of the link
 $global-link-color: #161209 !default;
-$global-link-color-dark: #a9a9b3 !default;
+$global-link-color-dark: #b1b1ba !default;
 
 // Color of the hover link
-$global-link-hover-color: #2d96bd !default;
+$global-link-hover-color: #2983bb !default; // 潮蓝
 $global-link-hover-color-dark: #fff !default;
 
 // Color of the border
@@ -42,7 +42,7 @@ $global-border-color-dark: #363636 !default;
 $scrollbar-color: #87878d !default;
 
 // Color of the hover scrollbar
-$scrollbar-hover-color: #a9a9b3 !default;
+$scrollbar-hover-color: #b1b1ba !default;
 // ========== Scrollbar ========== //
 
 // ========== Selection ========== //
@@ -78,12 +78,12 @@ $toc-title-font-size: 1.2rem !default;
 $toc-content-font-size: 1rem !default;
 
 // Color of the single link
-$single-link-color: #2d96bd !default;
-$single-link-color-dark: #55bde2 !default;
+$single-link-color: #2376b7 !default; // 花青
+$single-link-color-dark: #1781b5 !default; // 釉蓝
 
 // Color of the hover single link
-$single-link-hover-color: #ef3982 !default;
-$single-link-hover-color-dark: #bdebfc !default;
+$single-link-hover-color: #ea517f !default; // 莲瓣红
+$single-link-hover-color-dark: #619ac3 !default; // 羽扇豆蓝
 
 // Color of the table background
 $table-background-color: #fff !default;
@@ -94,14 +94,14 @@ $table-thead-color: #ededed !default;
 $table-thead-color-dark: #20252b !default;
 
 // Color of the blockquote
-$blockquote-color: #9e9e9e !default;
-$blockquote-color-dark: #8c8c8c !default;
+$blockquote-color: #bbc2c8 !default; 
+$blockquote-color-dark: #808992 !default;
 // ========== Single Content ========== //
 
 // ========== Pagination ========== //
 // Color of the link in pagination
-$pagination-link-color: #2d96bd !default;
-$pagination-link-color-dark: #a9a9b3 !default;
+$pagination-link-color: #bfbfbf !default;
+$pagination-link-color-dark: #b1b1ba !default;
 
 // Color of the hover link in pagination
 $pagination-link-hover-color: #000 !default;
@@ -127,7 +127,7 @@ $code-info-color: #9c9c9c !default;
 $code-info-color-dark: #b1b0b0 !default;
 
 // Font size of the code
-$code-font-size: .875rem !default;
+$code-font-size: 0.875rem !default;
 
 // Font family of the code
 $code-font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace, $global-font-family !default;
@@ -182,7 +182,7 @@ $code-type-map: (
   language-typescript: 'TypeScript',
   language-vue: 'Vue',
   language-yml: 'YAML',
-  language-yaml: 'YAML',
+  language-yaml: 'YAML'
 ) !default;
 
 // Color map of the code highlight
@@ -340,7 +340,7 @@ $code-highlight-color-map-dark: (
   /* GenericTraceback */ 'gt': $code-error-color,
   /* GenericUnderline */ 'gl': $code-color-dark,
   /* TextWhitespace */ 'w': $code-color-dark,
-  /* Other */ 'x': $code-color-dark,
+  /* Other */ 'x': $code-color-dark
 ) !default;
 // ========== Code ========== //
 
@@ -358,7 +358,7 @@ $admonition-color-map: (
   'danger': #ff1744,
   'bug': #f50057,
   'example': #651fff,
-  'quote': #9e9e9e,
+  'quote': #9e9e9e
 ) !default;
 
 // Color map of the admonition background
@@ -374,6 +374,6 @@ $admonition-background-color-map: (
   'danger': rgba(255, 23, 68, 0.1),
   'bug': rgba(245, 0, 87, 0.1),
   'example': rgba(101, 31, 255, 0.1),
-  'quote': rgba(159, 159, 159, 0.1),
+  'quote': rgba(159, 159, 159, 0.1)
 ) !default;
 // ========== Admonition ========== //

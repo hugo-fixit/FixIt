@@ -405,11 +405,13 @@ class Theme {
               $iconKey.classList.remove('fa-key');
               $iconKey.title = this.config.code.editLockTitle;
               $preChroma.setAttribute('contenteditable', true);
+              $preChroma.focus();
             } else {
               $iconLock.classList.add('fa-key');
               $iconLock.classList.remove('fa-lock');
               $iconLock.title = this.config.code.editUnLockTitle;
               $preChroma.setAttribute('contenteditable', false);
+              $preChroma.blur();
             }
           }, false);
           $header.appendChild($edit);
@@ -423,12 +425,14 @@ class Theme {
           if (this.config.code.maxShownLines < 0 || code.split('\n').length < this.config.code.maxShownLines + 2) {
             $chroma.classList.add('open');
           }
-          $copy.setAttribute('data-clipboard-text', code);
           $copy.title = this.config.code.copyTitle;
-          const clipboard = new ClipboardJS($copy);
-          clipboard.on('success', (_e) => {
-            this.util.animateCSS($code, 'animate__flash');
-          });
+          $copy.addEventListener('click', () => {
+            navigator.clipboard.writeText(code).then(() => {
+              this.util.animateCSS($code, 'animate__flash');
+            }, () => {
+              console.error('Clipboard write failed!', 'Your browser does not support clipboard API!');
+            });
+          }, false);
           $header.appendChild($copy);
         }
         $chroma.insertBefore($header, $chroma.firstChild);

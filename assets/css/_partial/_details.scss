@@ -1,5 +1,7 @@
 .details {
   .details-summary {
+    @include border-radius($global-border-radius);
+
     &:hover {
       cursor: pointer;
     }
@@ -9,7 +11,7 @@
     color: $global-font-secondary-color;
     @include transition(transform 0.2s ease);
 
-    [theme=dark] & {
+    [theme='dark'] & {
       color: $global-font-secondary-color-dark;
     }
   }
@@ -21,12 +23,17 @@
   }
 
   &.open {
+    .details-summary {
+      @include border-radius($global-border-radius $global-border-radius 0 0);
+    }
+
     i.details-icon {
       @include transform(rotate(90deg));
     }
 
     .details-content {
       max-height: 100%;
+      @include border-radius(0 0 $global-border-radius $global-border-radius);
       @include details-transition-close;
     }
   }

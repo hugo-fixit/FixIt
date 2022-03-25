@@ -937,6 +937,78 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 
 In `assets/css/_custom.scss`, you can add some css style code to customize the style.
 
+#### 3.3.1 Page Style {#page-style}
+
+{{< version 0.2.13 >}}
+
+The FixIt theme provides a page width configuration option `pageStyle` and three values.
+
+* **narrow** Keep `<v0.2.13` page/toc width ratio
+* **normal** New default page/toc width ratio
+* **wide** Larger page/toc width ratio
+
+In addition, you can also customize the `pageStyle` value in `assets/css/_custom.scss`
+
+For example: `pageStyle="custom"`
+
+```scss
+@media only screen and (min-width: 1441px) {
+  [page-style='custom'] {
+    .page {
+      width: 70%;
+    }
+
+    aside {
+      width: 15%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  [page-style='custom'] {
+    .page {
+      width: 60%;
+    }
+
+    aside {
+      width: 20%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  [page-style='custom'] {
+    .page {
+      width: 56%;
+    }
+
+    aside {
+      width: 22%;
+    }
+  }
+}
+```
+
+#### 3.3.2 Print Style {#print-style}
+
+{{< version 0.2.13 >}}
+
+There are three css common class for print view in FixIt Theme.
+
+* `page-break-before` Insert page break before element
+* `page-break-after` Insert page break after element
+* `print-d-none` Hide elements in print view
+
+Here is a simple exmple:
+
+```html
+<div class="page-break-before"></div>
+<div class="page-break-after"></div>
+<div class="print-d-none">
+  Something you want to hide in the print view is written here.
+</div>
+```
+
 ## 4 Multilingual and i18n
 
 **FixIt** theme is fully compatible with Hugo multilingual mode, which provides in-browser language switching.

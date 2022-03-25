@@ -949,6 +949,78 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 
 在 `assets/css/_custom.scss` 中，你可以添加一些 CSS 样式代码以自定义样式。
 
+#### 3.3.1 页面宽度 {#page-style}
+
+{{< version 0.2.13 >}}
+
+FixIt 主题提供了页面宽度配置选项 `pageStyle` 并提供三种选项。
+
+* **narrow** 保留 `<v0.2.13` 页面目录宽度比
+* **normal** 新的默认页面目录宽度比
+* **wide** 较大的页面目录宽度比
+
+另外，你还可以在 `assets/css/_custom.scss` 中，自定义 `pageStyle` 值
+
+例如： `pageStyle="custom"` 
+
+```scss
+@media only screen and (min-width: 1441px) {
+  [page-style='custom'] {
+    .page {
+      width: 70%;
+    }
+
+    aside {
+      width: 15%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  [page-style='custom'] {
+    .page {
+      width: 60%;
+    }
+
+    aside {
+      width: 20%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  [page-style='custom'] {
+    .page {
+      width: 56%;
+    }
+
+    aside {
+      width: 22%;
+    }
+  }
+}
+```
+
+#### 3.3.2 打印样式 {#print-style}
+
+{{< version 0.2.13 >}}
+
+在 FixIt 主题中，提供有三个打印视图相关的 css class
+
+* `page-break-before` 在元素之前插入分页符
+* `page-break-after` 在元素之后插入分页符
+* `print-d-none` 在打印视图中隐藏元素
+
+下面是一个简单的例子：
+
+```html
+<div class="page-break-before"></div>
+<div class="page-break-after"></div>
+<div class="print-d-none">
+  您希望在打印视图中隐藏的某些内容写在此处。
+</div>
+```
+
 ## 4 多语言和 i18n
 
 **FixIt** 主题完全兼容 Hugo 的多语言模式，并且支持在网页上切换语言。

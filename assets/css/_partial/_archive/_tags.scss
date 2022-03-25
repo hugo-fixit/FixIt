@@ -19,7 +19,7 @@
     sup {
       color: $global-font-secondary-color;
 
-      [theme=dark] & {
+      [theme='dark'] & {
         color: $global-font-secondary-color-dark;
       }
     }

@@ -1,11 +1,11 @@
 .page {
   position: relative;
-  
+
   .content {
     [id] {
       scroll-margin-top: $header-height;
-      
-      [header-desktop=normal] & {
+
+      [header-desktop='normal'] & {
         scroll-margin-top: 0;
       }
     }
@@ -14,10 +14,10 @@
   @include blur;
 }
 
-@import "_single";
-@import "_special";
-@import "_archive";
-@import "_home";
-@import "_404";
-@import "_offline";
-@import "_friends";
+@import '_single';
+@import '_special';
+@import '_archive';
+@import '_home';
+@import '_404';
+@import '_offline';
+@import '_friends';
