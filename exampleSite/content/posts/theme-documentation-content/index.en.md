@@ -242,7 +242,7 @@ hugo new offline/index.md
 
 {{< /admonition >}}
 
-## 3 Content Summaries
+## 4 Content Summaries
 
 **FixIt** theme uses the summary of the content to display abstract information in the home page. Hugo can generate summaries of your content.
 
@@ -289,11 +289,11 @@ Because there are multiple ways in which a summary can be specified it is useful
 It is not recommended to include rich text block elements in the summary, which will cause typographic errors. Such as code blocks, pictures, tables, etc.
 {{< /admonition >}}
 
-## 4 Basic Markdown Syntax
+## 5 Basic Markdown Syntax
 
 This part is shown in the [basic markdown syntax page](../basic-markdown-syntax/).
 
-## 5 Extended Markdown Syntax {#extended-markdown-syntax}
+## 6 Extended Markdown Syntax {#extended-markdown-syntax}
 
 **FixIt** theme has some extended syntax elements for you to write articles.
 
