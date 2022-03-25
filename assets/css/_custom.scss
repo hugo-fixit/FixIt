@@ -63,3 +63,27 @@
     }
   }
 }
+
+.summary {
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+}
+
+.single {
+  .single-title {
+    font-size: 1.7rem;
+  }
+  .content {
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: bold;
+      margin: 1.7rem 0;
+    }
+    p {
+      margin: 1rem 0;
+    }
+  }
+}
