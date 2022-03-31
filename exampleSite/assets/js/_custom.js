@@ -28,7 +28,7 @@ const CustomJS = new (function () {
  * Immediate.
  */
 (() => {
-  CustomJS.init();
+  // CustomJS.init();
   // It will be executed when the DOM tree is built.
   document.addEventListener('DOMContentLoaded', () => {
     // console.log('DOM content loaded!')

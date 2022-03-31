@@ -18,15 +18,22 @@ class Util {
     return window.matchMedia('only screen and (max-width: 960px)').matches;
   }
 
+  /**
+   * add animate to element
+   * @param {Element} element animate element
+   * @param {String|Array<String>} animation animation name
+   * @param {Boolean} reserved reserved animation
+   * @param {Function} callback remove callback
+   */
   animateCSS(element, animation, reserved, callback) {
-    if (!Array.isArray(animation)) animation = [animation];
+    !Array.isArray(animation) && (animation = [animation]);
     element.classList.add('animate__animated', ...animation);
     const handler = () => {
       element.classList.remove('animate__animated', ...animation);
       element.removeEventListener('animationend', handler);
-      if (typeof callback === 'function') callback();
+      typeof callback === 'function' && callback();
     };
-    if (!reserved) element.addEventListener('animationend', handler, false);
+    !reserved && element.addEventListener('animationend', handler, false);
   }
 }
 
