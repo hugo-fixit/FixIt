@@ -449,7 +449,7 @@ Please open the code block below to view the complete sample configuration :(far
       # whether to enable the table of the contents
       enable = true
       # {{< version 0.2.9 >}} whether to keep the static table of the contents in front of the post
-      keepStatic = true
+      keepStatic = false
       # whether to make the table of the contents in the sidebar automatically collapsed
       auto = true
       # {{< version 0.2.13 >}} position of TOC ("left", "right")

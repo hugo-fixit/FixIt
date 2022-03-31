@@ -460,7 +460,7 @@ hugo
       # 是否使用目录
       enable = true
       # {{< version 0.2.9 >}} 是否保持使用文章前面的静态目录
-      keepStatic = true
+      keepStatic = false
       # 是否使侧边目录自动折叠展开
       auto = true
       # {{< version 0.2.13 >}} 目录位置 ("left", "right")
