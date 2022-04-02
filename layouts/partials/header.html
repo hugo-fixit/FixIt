@@ -34,17 +34,32 @@
         {{- end -}}
       {{- end -}}
     </div>
-    <div class="menu">
-      <div class="menu-inner">
+    <nav class="header-nav">
+      <ul class="menu">
         {{- range .Site.Menus.main -}}
           {{- $url := .URL | relLangURL -}}
           {{- with .Page -}}
             {{- $url = .RelPermalink -}}
           {{- end -}}
-          <a class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}" href="{{ $url }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
-            {{- .Pre | safeHTML }} {{ .Name }} {{ .Post | safeHTML -}}
-          </a>
+          <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}">
+            <a href="{{ $url }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
+              {{- .Pre | safeHTML }} {{ .Name }} {{ .Post | safeHTML -}}
+            </a>
+            {{- if .HasChildren -}}
+              <ul class="sub-menu">
+                {{ range .Children }}
+                  <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}">
+                    <a href="{{ $url }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
+                      {{- .Pre | safeHTML }} {{ .Name }} {{ .Post | safeHTML -}}
+                    </a>
+                  </li>
+                {{- end -}}
+              </ul>
+            {{- end -}}
+          </li>
         {{- end -}}
+        
+        <!-- TODO -->
         {{- if .Site.Menus.main -}}
           <span class="menu-item delimiter"></span>
         {{- end -}}
@@ -88,8 +103,8 @@
         <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
           <i class="fas fa-adjust fa-fw"></i>
         </a>
-      </div>
-    </div>
+      </ul>
+   </nav>
   </div>
 </header>
 

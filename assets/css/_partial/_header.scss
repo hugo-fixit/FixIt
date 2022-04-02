@@ -169,9 +169,25 @@ header {
     .menu {
       overflow: hidden;
       white-space: nowrap;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      margin: 0;
+      padding: 0;
 
-      .menu-inner {
-        float: right;
+      li {
+        list-style: none;
+      }
+
+      .sub-menu {
+        position: relative;
+        display: none;
+      }
+
+      >.menu-item:hover {
+        & .sub-menu {
+          display: block;
+        }
       }
 
       .menu-item {
