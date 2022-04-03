@@ -34,7 +34,7 @@
         {{- end -}}
       {{- end -}}
     </div>
-    <nav class="header-nav">
+    <nav>
       <ul class="menu">
         {{- range .Site.Menus.main -}}
           {{- $url := .URL | relLangURL -}}
@@ -59,12 +59,11 @@
           </li>
         {{- end -}}
         
-        <!-- TODO -->
         {{- if .Site.Menus.main -}}
-          <span class="menu-item delimiter"></span>
+          <!-- TODO -->
         {{- end -}}
         {{- if .Site.IsMultiLingual -}}
-          <a href="javascript:void(0);" class="menu-item language" title="{{ T "selectLanguage" }}">
+          <li class="menu-item language" title="{{ T "selectLanguage" }}">
             {{- .Language.LanguageName -}}
             <i class="fas fa-chevron-right fa-fw"></i>
             <select class="language-select" id="language-select-desktop" onchange="location = this.value;">
@@ -84,10 +83,10 @@
                 {{- end -}}
               {{- end -}}
             </select>
-          </a>
+          </li>
         {{- end -}}
         {{- if .Site.Params.search.enable -}}
-          <span class="menu-item search" id="search-desktop">
+          <li class="menu-item search" id="search-desktop">
             <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-desktop">
             <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="{{ T `search` }}">
               <i class="fas fa-search fa-fw"></i>
@@ -98,11 +97,11 @@
             <span class="search-button search-loading" id="search-loading-desktop">
               <i class="fas fa-spinner fa-fw fa-spin"></i>
             </span>
-          </span>
+          </li>
         {{- end -}}
-        <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
+        <li class="menu-item theme-switch" title="{{ T "switchTheme" }}">
           <i class="fas fa-adjust fa-fw"></i>
-        </a>
+        </li>
       </ul>
    </nav>
   </div>
