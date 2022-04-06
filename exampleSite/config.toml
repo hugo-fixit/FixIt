@@ -93,7 +93,6 @@ enableEmoji = true
         weight = 5
       [[languages.en.menu.main]]
         identifier = "about"
-        pre = ""
         post = ""
         name = "About"
         url = "/about/"
@@ -101,20 +100,20 @@ enableEmoji = true
         weight = 6
       [[languages.en.menu.main]]
         identifier = "about2"
-        pre = ""
-        post = ""
+        pre = "Pre"
+        post = "Post"
         name = "About2"
         parent = 'about'
-        url = "/about/2"
+        url = "/about/"
         title = ""
         weight = 2
       [[languages.en.menu.main]]
-        identifier = "about1"
+        identifier = "friends1"
         pre = ""
         post = ""
-        name = "About1"
+        name = "friends1"
         parent = 'about'
-        url = "/about/1"
+        url = "/friends/"
         title = ""
         weight = 1
       [[languages.en.menu.main]]
