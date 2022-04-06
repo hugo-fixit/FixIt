@@ -207,6 +207,7 @@ header {
         padding: 0;
         display: none;
         left: 0;
+        padding: 0 1rem;
         // max-width: 5rem;
 
         background-color: $header-background-color;
@@ -221,6 +222,18 @@ header {
         .menu-item {
           height: $header-height*0.8;
           line-height: $header-height*0.8;
+
+          &:hover {
+            color: $global-link-hover-color;
+            cursor: pointer;
+          }
+
+          &[selected] {
+            color: $global-link-hover-color;
+            &::marker {
+              content: '>';
+            }
+          }
         }
       }
 

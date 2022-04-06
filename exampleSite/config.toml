@@ -100,6 +100,24 @@ enableEmoji = true
         title = ""
         weight = 6
       [[languages.en.menu.main]]
+        identifier = "about2"
+        pre = ""
+        post = ""
+        name = "About2"
+        parent = 'about'
+        url = "/about/2"
+        title = ""
+        weight = 2
+      [[languages.en.menu.main]]
+        identifier = "about1"
+        pre = ""
+        post = ""
+        name = "About1"
+        parent = 'about'
+        url = "/about/1"
+        title = ""
+        weight = 1
+      [[languages.en.menu.main]]
         identifier = "github"
         pre = "<i class='fab fa-github fa-fw'></i>"
         post = ""
