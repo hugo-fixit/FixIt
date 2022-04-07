@@ -41,9 +41,9 @@
           {{- with .Page -}}
             {{- $url = .RelPermalink -}}
           {{- end -}}
-          <li class="menu-item">
-            <a 
-              class="{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }}active{{ end }}"
+          <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}">
+            <a
+              class="menu-link"
               href="{{ $url }}"
               {{ with .Title }}title="{{ . }}"{{ end }}
               {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
@@ -51,16 +51,19 @@
               {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
             </a>
             {{- if .HasChildren -}}
-              <i class="dropdown-icon fas fa-caret-down fa-fw"></i>
+              <i class="dropdown-icon fas fa-caret-down"></i>
               <ul class="sub-menu">
                 {{ range .Children }}
                   {{- $url := .URL | relLangURL -}}
                   {{- with .Page -}}
                     {{- $url = .RelPermalink -}}
                   {{- end -}}
-                  <li class="menu-item">
-                    <a 
-                      class="{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }}active{{ end }}"
+                  <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}">
+                    <!-- {{- if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) -}}
+                      <i class="fas fa-caret-right"></i>
+                    {{- end -}} -->
+                    <a
+                      class="menu-link"
                       href="{{ $url }}"
                       {{ with .Title }}title="{{ . }}"{{ end }}
                       {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
@@ -73,15 +76,14 @@
             {{- end -}}
           </li>
         {{- end -}}
-        
         {{- if .Site.Menus.main -}}
-          <!-- TODO -->
+          <li class="menu-item delimiter"></li>
         {{- end -}}
         {{- if .Site.IsMultiLingual -}}
           <li class="menu-item language">
             <span title="{{ T "selectLanguage" }}">
               {{- .Language.LanguageName -}}
-              <i class="dropdown-icon fas fa-caret-down fa-fw"></i>
+              <i class="dropdown-icon fas fa-caret-down"></i>
             </span>
             <ul class="sub-menu" id="language-select-desktop">
               {{- if eq .Kind "404" -}}

@@ -59,17 +59,13 @@ header {
     color: transparent;
     box-sizing: border-box;
     height: 2.5rem;
-    width: 2.5rem;
+    width: 1.25rem;
     @include border-radius(0.5rem);
     border: none;
     outline: none;
-    background-color: $header-background-color;
+    background-color: transparent;
     vertical-align: baseline !important;
     @include transition(width 0.3s ease);
-
-    [theme='dark'] & {
-      background-color: $header-background-color-dark;
-    }
   }
 
   @include placeholder(transparent);
@@ -84,6 +80,10 @@ header {
   .search-toggle {
     left: 0.5rem;
     right: auto;
+
+    .open & {
+      left: 1rem;
+    }
   }
 
   .search-loading {
@@ -141,6 +141,7 @@ header {
   top: 0;
   height: $header-height;
   line-height: $header-height;
+  box-sizing: border-box;
 
   [header-desktop='normal'] & {
     position: static;
@@ -148,9 +149,11 @@ header {
 
   .header-wrapper {
     padding: 0 2rem 0 10vh;
+    height: 100%;
 
     .header-title {
       font-size: $header-title-font-size;
+      height: 100%;
     }
 
     .menu {
@@ -168,19 +171,22 @@ header {
       }
 
       .menu-item {
-        margin: 0 0.5rem;
+        padding: 0 0.5rem;
         list-style: none;
 
         &.delimiter {
-          border-left: 1.5px solid $global-font-color;
+          width: 0;
+          margin: 0;
+          padding: 0;
+          border-left: 1px dashed lighten($global-font-secondary-color, 20%);
 
           [theme='dark'] & {
-            border-left-color: $global-border-color-dark;
+            border-left-color: darken($global-font-secondary-color-dark, 20%);
           }
         }
 
         & .dropdown-icon {
-          text-align: right;
+          margin-left: 0.25rem;
           color: $global-font-secondary-color;
 
           [theme='dark'] & {
@@ -192,25 +198,34 @@ header {
           margin-right: 0;
         }
 
-        &.search {
-          margin: 0 -0.5rem 0 0;
+        &.active {
+          >.menu-link {
+            font-weight: bold;
+            color: $menu-active-color;
+  
+            [theme='dark'] & {
+              color: $menu-active-color-dark;
+            }
+          }
         }
       }
 
       .sub-menu {
+        z-index: 160;
         position: absolute;
         margin: 0;
-        padding: 0.5rem;
+        padding: 0.25rem 0;
         display: none;
-        top: calc(#{$header-height} - 0.5rem);
-        right: 0;
-        // max-width: 5rem;
-
+        top: calc(#{$header-height} - 0.75rem);
+        left: 0;
+        border-radius: $global-border-radius;
+        border: 1px solid $global-border-color;
         background-color: $header-background-color;
         @include transition(box-shadow 0.3s ease);
 
         [theme='dark'] & {
           background-color: $header-background-color-dark;
+          border-color: $global-border-color-dark;
         }
 
         @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, 0.1));
@@ -218,24 +233,16 @@ header {
         .menu-item {
           height: $header-height*0.5;
           line-height: $header-height*0.5;
-        }
-      }
-
-      a.active {
-        font-weight: 900;
-        // TODO 命名不规范
-        color: $header-hover-color;
-
-        [theme='dark'] & {
-          color: $header-hover-color-dark;
+          max-width: 15rem;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow-x: hidden;
         }
       }
     }
   }
 
   &.open .header-wrapper .menu .menu-item.search {
-    margin: 0 0.25rem 0 0.5rem;
-
     input {
       width: 24rem;
     }
