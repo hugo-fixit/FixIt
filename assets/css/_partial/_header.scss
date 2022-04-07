@@ -48,8 +48,14 @@ header {
   }
 }
 
-.menu .menu-item {
-  position: relative;
+.menu {
+  margin: 0;
+  padding: 0;
+
+  .menu-item {
+    position: relative;
+    list-style: none;
+  }
 }
 
 .search {
@@ -81,7 +87,7 @@ header {
     left: 0.5rem;
     right: auto;
 
-    .open & {
+    #header-desktop.open & {
       left: 1rem;
     }
   }
@@ -161,8 +167,6 @@ header {
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
-      margin: 0;
-      padding: 0;
 
       >.menu-item:hover {
         & .sub-menu {
@@ -172,7 +176,6 @@ header {
 
       .menu-item {
         padding: 0 0.5rem;
-        list-style: none;
 
         &.delimiter {
           width: 0;
@@ -317,7 +320,7 @@ header {
     }
 
     .menu {
-      text-align: center;
+      // text-align: center;
       background: $header-background-color;
       border-top: 2px solid $global-border-color;
       display: none;
