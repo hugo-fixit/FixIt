@@ -55,6 +55,31 @@ header {
   .menu-item {
     position: relative;
     list-style: none;
+
+    & .dropdown-icon {
+      margin-left: 0.25rem;
+      color: $global-font-secondary-color;
+
+      [theme='dark'] & {
+        color: $global-font-secondary-color-dark;
+      }
+
+      &.open::before {
+        content: "\f0d7";
+      }
+    }
+
+    &.active {
+      >.menu-link,
+      >.nested-item>.menu-link {
+        font-weight: bold;
+        color: $menu-active-color;
+
+        [theme='dark'] & {
+          color: $menu-active-color-dark;
+        }
+      }
+    }
   }
 }
 
@@ -188,28 +213,8 @@ header {
           }
         }
 
-        & .dropdown-icon {
-          margin-left: 0.25rem;
-          color: $global-font-secondary-color;
-
-          [theme='dark'] & {
-            color: $global-font-secondary-color-dark;
-          }
-        }
-
         &.language {
           margin-right: 0;
-        }
-
-        &.active {
-          >.menu-link {
-            font-weight: bold;
-            color: $menu-active-color;
-  
-            [theme='dark'] & {
-              color: $menu-active-color-dark;
-            }
-          }
         }
       }
 
@@ -320,11 +325,10 @@ header {
     }
 
     .menu {
-      // text-align: center;
       background: $header-background-color;
       border-top: 2px solid $global-border-color;
       display: none;
-      padding-top: 0.5rem;
+      padding: 0.5rem 1rem 0;
       @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
 
       .search-wrapper {
@@ -332,7 +336,7 @@ header {
         justify-content: space-between;
         align-items: center;
         box-sizing: border-box;
-        padding: ($header-height - 2.5rem) / 2 1rem;
+        padding: ($header-height - 2.5rem) / 2 0;
         line-height: 2.5rem;
       }
 
@@ -357,6 +361,21 @@ header {
       .menu-item {
         display: block;
         line-height: 2.5rem;
+
+        & .nested-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
+
+      .sub-menu {
+        padding-left: 1rem;
+        display: none;
+
+        &.open {
+          display: block;
+        }
       }
 
       &.active {

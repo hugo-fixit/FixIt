@@ -91,6 +91,13 @@ class Theme {
       $menuMobile.classList.remove('active');
     });
     this.clickMaskEventSet.add(this._menuMobileOnClickMask);
+    // add nested menu toggler
+    this.util.forEach(document.querySelectorAll('.menu-item>.nested-item'), ($nestedItem) => {
+      $nestedItem.addEventListener('click', function () {
+        this.parentNode.querySelector('.sub-menu').classList.toggle('open');
+        this.querySelector('.dropdown-icon').classList.toggle('open');
+      })
+    });
   }
 
   initSwitchTheme() {

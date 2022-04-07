@@ -196,16 +196,18 @@
             {{- $url = .RelPermalink -}}
           {{- end -}}
           <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}">
-            <a
-              class="menu-link"
-              href="{{ $url }}"
-              {{ with .Title }}title="{{ . }}"{{ end }}
-              {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
-            >
-              {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
-            </a>
             {{- if .HasChildren -}}
-              <i class="dropdown-icon fas fa-caret-down"></i>
+              <span class="nested-item">
+                <a
+                  class="menu-link"
+                  href="{{ $url }}"
+                  {{ with .Title }}title="{{ . }}"{{ end }}
+                  {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+                >
+                  {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
+                </a>
+                <i class="dropdown-icon fas fa-caret-right"></i>
+              </span>
               <ul class="sub-menu">
                 {{ range .Children }}
                   {{- $url := .URL | relLangURL -}}
@@ -224,14 +226,20 @@
                   </li>
                 {{- end -}}
               </ul>
+            {{- else -}}
+            <a
+              class="menu-link"
+              href="{{ $url }}"
+              {{ with .Title }}title="{{ . }}"{{ end }}
+              {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+            >
+              {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
+            </a>
             {{- end -}}
           </li>
-          <!-- <a class="menu-item" href="{{ $url }}" title="{{ .Title }}"{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
-            {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
-          </a> -->
         {{- end -}}
 
-
+        <!-- TODO -->
         <li class="menu-item theme-switch" title="{{ T "switchTheme" }}">
           <i class="fas fa-adjust fa-fw"></i>
         </li>
