@@ -82,7 +82,7 @@
               {{- .Language.LanguageName -}}
               <i class="dropdown-icon fas fa-caret-down"></i>
             </span>
-            <ul class="sub-menu" id="language-select-desktop">
+            <ul class="sub-menu">
               {{- if eq .Kind "404" -}}
               <!-- TODO offline i18n -->
                 {{- range .Sites -}}
@@ -244,9 +244,11 @@
           <i class="fas fa-adjust fa-fw"></i>
         </li>
         {{- if .Site.IsMultiLingual -}}
-          <li class="menu-item" title="{{ T "selectLanguage" }}">
-            {{- .Language.LanguageName -}}
-            <i class="dropdown-icon fas fa-caret-down"></i>
+          <li class="menu-item language">
+            <span title="{{ T "selectLanguage" }}">
+              {{- .Language.LanguageName -}}
+              <i class="dropdown-icon fas fa-caret-down"></i>
+            </span>
             <select class="language-select" onchange="location = this.value;">
               {{- if eq .Kind "404" -}}
                 <!-- TODO offline i18n -->
@@ -258,7 +260,7 @@
                 {{- end -}}
               {{- else -}}
                 {{- range .AllTranslations -}}
-                  <option value="{{ .RelPermalink }}"{{ if eq .Lang $.Lang }} selected{{ end }}>
+                  <option value="{{ .RelPermalink }}"{{ if eq .Lang $.Lang }} selected disabled{{ end }}>
                     {{- .Language.LanguageName -}}
                   </option>
                 {{- end -}}

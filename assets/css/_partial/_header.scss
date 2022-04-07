@@ -34,7 +34,8 @@ header {
   .logo {
     min-height: 1.5em;
     height: 1.5em;
-    vertical-align: text-bottom;
+    top: 10px;
+    position: relative;
   }
 
   .header-title-text {
@@ -178,6 +179,10 @@ header {
     position: static;
   }
 
+  nav {
+    overflow: hidden;
+  }
+
   .header-wrapper {
     padding: 0 2rem 0 10vh;
     height: 100%;
@@ -192,6 +197,7 @@ header {
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
+      float: right;
 
       >.menu-item:hover {
         & .sub-menu {
@@ -328,7 +334,7 @@ header {
       background: $header-background-color;
       border-top: 2px solid $global-border-color;
       display: none;
-      padding: 0.5rem 1rem 0;
+      padding: 0.5rem 0 0;
       @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
 
       .search-wrapper {
@@ -336,7 +342,7 @@ header {
         justify-content: space-between;
         align-items: center;
         box-sizing: border-box;
-        padding: ($header-height - 2.5rem) / 2 0;
+        padding: ($header-height - 2.5rem) / 2 1rem;
         line-height: 2.5rem;
       }
 
@@ -347,6 +353,11 @@ header {
         input {
           width: 100%;
         }
+      }
+
+      .search-loading,
+      .search-clear {
+        right:  0.5rem;
       }
 
       .search-button {
@@ -361,20 +372,63 @@ header {
       .menu-item {
         display: block;
         line-height: 2.5rem;
+        padding: 0 1rem;
+
+        &:hover {
+          background-color: lighten($global-font-secondary-color, 24%);
+
+          [theme='dark'] & {
+            background-color: darken($global-font-secondary-color-dark, 24%);
+          }
+        }
+
+        .menu-link {
+          display: block;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow-x: hidden;
+          @include flex(4);
+        }
 
         & .nested-item {
           display: flex;
           justify-content: space-between;
           align-items: center;
+
+          .menu-link {
+            max-width: 80%;
+          }
+        }
+        
+        &.theme-switch,
+        &.language {
+          text-align: center;
+        }
+
+        .language-select {
+          position: absolute;
+          opacity: 0;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
         }
       }
 
       .sub-menu {
-        padding-left: 1rem;
+        padding-left: 0;
         display: none;
 
         &.open {
           display: block;
+        }
+
+        .menu-item:hover {
+          background-color: lighten($global-font-secondary-color, 20%);
+
+          [theme='dark'] & {
+            background-color: darken($global-font-secondary-color-dark, 20%);
+          }
         }
       }
 
