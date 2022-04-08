@@ -54,7 +54,6 @@ header {
   padding: 0;
 
   .menu-item {
-    position: relative;
     list-style: none;
 
     & .dropdown-icon {
@@ -181,6 +180,7 @@ header {
 
   nav {
     overflow: hidden;
+    white-space: nowrap;
   }
 
   .header-wrapper {
@@ -193,7 +193,6 @@ header {
     }
 
     .menu {
-      white-space: nowrap;
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
@@ -231,7 +230,6 @@ header {
         padding: 0.25rem 0;
         display: none;
         top: calc(#{$header-height} - 0.75rem);
-        left: 0;
         border-radius: $global-border-radius;
         border: 1px solid $global-border-color;
         background-color: $header-background-color;
@@ -371,6 +369,7 @@ header {
 
       .menu-item {
         display: block;
+        position: relative;
         line-height: 2.5rem;
         padding: 0 1rem;
 

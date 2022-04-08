@@ -76,6 +76,16 @@ class Theme {
   initTwemoji() {
     this.config.twemoji && twemoji.parse(document.body);
   }
+  /**
+   * This is a dirty hack for fixing sub menu position error in desktop header
+   */
+  initSubMenuDesktop() {
+    this.util.forEach(document.querySelectorAll('[has-children],.language'), ($item) => {
+      $item.addEventListener('mouseover', function(){
+        this.querySelector('.sub-menu').style.left= `${this.getBoundingClientRect().left}px`;
+      })
+    });
+  }
 
   initMenuMobile() {
     const $menuToggleMobile = document.getElementById('menu-toggle-mobile');
@@ -915,6 +925,7 @@ class Theme {
     try {
       this.initSVGIcon();
       this.initTwemoji();
+      this.initSubMenuDesktop();
       this.initMenuMobile();
       this.initSwitchTheme();
       this.initSearch();
