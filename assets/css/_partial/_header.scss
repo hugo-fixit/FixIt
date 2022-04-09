@@ -34,7 +34,7 @@ header {
   .logo {
     min-height: 1.5em;
     height: 1.5em;
-    vertical-align: text-bottom;
+    vertical-align: middle;
   }
 
   .header-title-text {
@@ -48,20 +48,37 @@ header {
   }
 }
 
-.menu .menu-item {
-  position: relative;
-}
+.menu {
+  margin: 0;
+  padding: 0;
 
-.language-select {
-  position: absolute;
-  opacity: 0;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  .menu-item {
+    list-style: none;
 
-  &:hover {
-    cursor: pointer;
+    & .dropdown-icon {
+      margin-left: 0.25rem;
+      color: $global-font-secondary-color;
+
+      [theme='dark'] & {
+        color: $global-font-secondary-color-dark;
+      }
+
+      &.open::before {
+        content: "\f0d7";
+      }
+    }
+
+    &.active {
+      >.menu-link,
+      >.nested-item>.menu-link {
+        font-weight: bold;
+        color: $menu-active-color;
+
+        [theme='dark'] & {
+          color: $menu-active-color-dark;
+        }
+      }
+    }
   }
 }
 
@@ -72,17 +89,13 @@ header {
     color: transparent;
     box-sizing: border-box;
     height: 2.5rem;
-    width: 2.5rem;
+    width: 1.25rem;
     @include border-radius(0.5rem);
     border: none;
     outline: none;
-    background-color: $header-background-color;
+    background-color: transparent;
     vertical-align: baseline !important;
     @include transition(width 0.3s ease);
-
-    [theme='dark'] & {
-      background-color: $header-background-color-dark;
-    }
   }
 
   @include placeholder(transparent);
@@ -97,6 +110,10 @@ header {
   .search-toggle {
     left: 0.5rem;
     right: auto;
+
+    #header-desktop.open & {
+      left: 1rem;
+    }
   }
 
   .search-loading {
@@ -154,60 +171,89 @@ header {
   top: 0;
   height: $header-height;
   line-height: $header-height;
+  box-sizing: border-box;
 
   [header-desktop='normal'] & {
     position: static;
   }
 
+  nav {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
   .header-wrapper {
     padding: 0 2rem 0 10vh;
+    height: 100%;
 
     .header-title {
       font-size: $header-title-font-size;
+      height: 100%;
     }
 
     .menu {
-      overflow: hidden;
-      white-space: nowrap;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      float: right;
 
-      .menu-inner {
-        float: right;
+      >.menu-item:hover {
+        & .sub-menu {
+          display: block;
+        }
       }
 
       .menu-item {
-        margin: 0 0.5rem;
+        padding: 0 0.5rem;
 
         &.delimiter {
-          border-left: 1.5px solid $global-font-color;
+          width: 0;
+          margin: 0;
+          padding: 0;
+          border-left: 1px dashed lighten($global-font-secondary-color, 20%);
 
           [theme='dark'] & {
-            border-left-color: $global-border-color-dark;
+            border-left-color: darken($global-font-secondary-color-dark, 20%);
           }
         }
 
         &.language {
           margin-right: 0;
         }
-
-        &.search {
-          margin: 0 -0.5rem 0 0;
-        }
       }
 
-      a.active {
-        font-weight: 900;
-        color: $header-hover-color;
+      .sub-menu {
+        z-index: 160;
+        position: absolute;
+        margin: 0;
+        padding: 0.25rem 0;
+        display: none;
+        top: calc(#{$header-height} - 0.75rem);
+        border-radius: $global-border-radius;
+        border: 1px solid $global-border-color;
+        background-color: $header-background-color;
+        @include transition(box-shadow 0.3s ease);
 
         [theme='dark'] & {
-          color: $header-hover-color-dark;
+          background-color: $header-background-color-dark;
+          border-color: $global-border-color-dark;
+        }
+
+        @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, 0.1));
+
+        .menu-item {
+          height: $header-height*0.5;
+          line-height: $header-height*0.5;
+          max-width: 15rem;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow-x: hidden;
         }
       }
     }
   }
 
   &.open .header-wrapper .menu .menu-item.search {
-    margin: 0 0.25rem 0 0.5rem;
-
     input {
       width: 24rem;
     }
@@ -282,11 +328,10 @@ header {
     }
 
     .menu {
-      text-align: center;
       background: $header-background-color;
       border-top: 2px solid $global-border-color;
       display: none;
-      padding-top: 0.5rem;
+      padding: 0.5rem 0 0;
       @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
 
       .search-wrapper {
@@ -307,6 +352,11 @@ header {
         }
       }
 
+      .search-loading,
+      .search-clear {
+        right:  0.5rem;
+      }
+
       .search-button {
         top: 0;
       }
@@ -318,7 +368,66 @@ header {
 
       .menu-item {
         display: block;
+        position: relative;
         line-height: 2.5rem;
+        padding: 0 1rem;
+
+        &:hover {
+          background-color: lighten($global-font-secondary-color, 24%);
+
+          [theme='dark'] & {
+            background-color: darken($global-font-secondary-color-dark, 24%);
+          }
+        }
+
+        .menu-link {
+          display: block;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow-x: hidden;
+          @include flex(4);
+        }
+
+        & .nested-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .menu-link {
+            max-width: 80%;
+          }
+        }
+        
+        &.theme-switch,
+        &.language {
+          text-align: center;
+        }
+
+        .language-select {
+          position: absolute;
+          opacity: 0;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .sub-menu {
+        padding-left: 0;
+        display: none;
+
+        &.open {
+          display: block;
+        }
+
+        .menu-item:hover {
+          background-color: lighten($global-font-secondary-color, 20%);
+
+          [theme='dark'] & {
+            background-color: darken($global-font-secondary-color-dark, 20%);
+          }
+        }
       }
 
       &.active {

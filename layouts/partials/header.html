@@ -34,45 +34,79 @@
         {{- end -}}
       {{- end -}}
     </div>
-    <div class="menu">
-      <div class="menu-inner">
+    <nav>
+      <ul class="menu">
         {{- range .Site.Menus.main -}}
           {{- $url := .URL | relLangURL -}}
           {{- with .Page -}}
             {{- $url = .RelPermalink -}}
           {{- end -}}
-          <a class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}" href="{{ $url }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
-            {{- .Pre | safeHTML }} {{ .Name }} {{ .Post | safeHTML -}}
-          </a>
+          <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}"{{ if .HasChildren }} has-children{{ end }}>
+            <a
+              class="menu-link"
+              href="{{ $url }}"
+              {{ with .Title }}title="{{ . }}"{{ end }}
+              {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+            >
+              {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
+            </a>
+            {{- if .HasChildren -}}
+              <i class="dropdown-icon fas fa-caret-down"></i>
+              <ul class="sub-menu">
+                {{ range .Children }}
+                  {{- $url := .URL | relLangURL -}}
+                  {{- with .Page -}}
+                    {{- $url = .RelPermalink -}}
+                  {{- end -}}
+                  <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}">
+                    <a
+                      class="menu-link"
+                      href="{{ $url }}"
+                      {{ with .Title }}title="{{ . }}"{{ end }}
+                      {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+                    >
+                      {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
+                    </a>
+                  </li>
+                {{- end -}}
+              </ul>
+            {{- end -}}
+          </li>
         {{- end -}}
         {{- if .Site.Menus.main -}}
-          <span class="menu-item delimiter"></span>
+          <li class="menu-item delimiter"></li>
         {{- end -}}
         {{- if .Site.IsMultiLingual -}}
-          <a href="javascript:void(0);" class="menu-item language" title="{{ T "selectLanguage" }}">
-            {{- .Language.LanguageName -}}
-            <i class="fas fa-chevron-right fa-fw"></i>
-            <select class="language-select" id="language-select-desktop" onchange="location = this.value;">
+          <li class="menu-item language">
+            <span title="{{ T "selectLanguage" }}">
+              {{- .Language.LanguageName -}}
+              <i class="dropdown-icon fas fa-caret-down"></i>
+            </span>
+            <ul class="sub-menu">
               {{- if eq .Kind "404" -}}
-                {{- /* https://github.com/dillonzq/LoveIt/issues/378 */ -}}
+              <!-- TODO offline i18n -->
                 {{- range .Sites -}}
                   {{- $link := printf "%v/404.html" .LanguagePrefix -}}
-                  <option value="{{ $link }}"{{ if eq . $.Site }} selected{{ end }}>
+                  <li class="menu-item" {{ if eq . $.Site }}selected{{ end }} title="{{- .Language.LanguageName -}}" lang="{{ $link }}" onclick="location = this.getAttribute('lang')">
                     {{- .Language.LanguageName -}}
-                  </option>
+                  </li>
                 {{- end -}}
               {{- else -}}
                 {{- range .AllTranslations -}}
-                  <option value="{{ .RelPermalink }}"{{ if eq .Lang $.Lang }} selected{{ end }}>
-                    {{- .Language.LanguageName -}}
-                  </option>
+                  {{- if ne .Lang $.Lang -}}
+                    <li class="menu-item">
+                      <a href="{{ .RelPermalink }}" title="{{- .Language.LanguageName -}}">
+                        {{- .Language.LanguageName -}}
+                      </a>
+                    </li>
+                  {{- end -}}
                 {{- end -}}
               {{- end -}}
-            </select>
-          </a>
+            </ul>
+          </li>
         {{- end -}}
         {{- if .Site.Params.search.enable -}}
-          <span class="menu-item search" id="search-desktop">
+          <li class="menu-item search" id="search-desktop">
             <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-desktop">
             <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="{{ T `search` }}">
               <i class="fas fa-search fa-fw"></i>
@@ -83,13 +117,13 @@
             <span class="search-button search-loading" id="search-loading-desktop">
               <i class="fas fa-spinner fa-fw fa-spin"></i>
             </span>
-          </span>
+          </li>
         {{- end -}}
-        <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
+        <li class="menu-item theme-switch" title="{{ T "switchTheme" }}">
           <i class="fas fa-adjust fa-fw"></i>
-        </a>
-      </div>
-    </div>
+        </li>
+      </ul>
+   </nav>
   </div>
 </header>
 
@@ -134,63 +168,108 @@
         <span></span><span></span><span></span>
       </div>
     </div>
-    <div class="menu" id="menu-mobile">
-      {{- if .Site.Params.search.enable -}}
-        <div class="search-wrapper">
-          <div class="search mobile" id="search-mobile">
-            <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-mobile">
-            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="{{ T `search` }}">
-              <i class="fas fa-search fa-fw"></i>
+    <nav>
+      <ul class="menu" id="menu-mobile">
+        {{- if .Site.Params.search.enable -}}
+          <li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="{{ T `search` }}">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="{{ T `clear` }}">
+                <i class="fas fa-times-circle fa-fw"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fas fa-spinner fa-fw fa-spin"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              {{ T `cancel` }}
             </a>
-            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="{{ T `clear` }}">
-              <i class="fas fa-times-circle fa-fw"></i>
-            </a>
-            <span class="search-button search-loading" id="search-loading-mobile">
-              <i class="fas fa-spinner fa-fw fa-spin"></i>
-            </span>
-          </div>
-          <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
-            {{ T `cancel` }}
-          </a>
-        </div>
-      {{- end -}}
-      {{- $currentPage := . -}}
-      {{- range .Site.Menus.main -}}
-        {{- $url := .URL | relLangURL -}}
-        {{- with .Page -}}
-          {{- $url = .RelPermalink -}}
+          </li>
         {{- end -}}
-        <a class="menu-item" href="{{ $url }}" title="{{ .Title }}"{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
-          {{- .Pre | safeHTML }}{{ .Name }}{{ .Post | safeHTML -}}
-        </a>
-      {{- end -}}
-      <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
-        <i class="fas fa-adjust fa-fw"></i>
-      </a>
-      {{- if .Site.IsMultiLingual -}}
-        <a href="javascript:void(0);" class="menu-item" title="{{ T "selectLanguage" }}">
-          {{- .Language.LanguageName -}}
-          <i class="fas fa-chevron-right fa-fw"></i>
-          <select class="language-select" onchange="location = this.value;">
-            {{- if eq .Kind "404" -}}
-              {{- /* https://github.com/dillonzq/LoveIt/issues/378 */ -}}
-              {{- range .Sites -}}
-                {{- $link := printf "%v/404.html" .LanguagePrefix -}}
-                <option value="{{ $link }}"{{ if eq . $.Site }} selected{{ end }}>
-                  {{- .Language.LanguageName -}}
-                </option>
-              {{- end -}}
+        {{- $currentPage := . -}}
+        {{- range .Site.Menus.main -}}
+          {{- $url := .URL | relLangURL -}}
+          {{- with .Page -}}
+            {{- $url = .RelPermalink -}}
+          {{- end -}}
+          <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}">
+            {{- if .HasChildren -}}
+              <span class="nested-item">
+                <a
+                  class="menu-link"
+                  href="{{ $url }}"
+                  {{ with .Title }}title="{{ . }}"{{ end }}
+                  {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+                >
+                  {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
+                </a>
+                <i class="dropdown-icon fas fa-caret-right"></i>
+              </span>
+              <ul class="sub-menu">
+                {{ range .Children }}
+                  {{- $url := .URL | relLangURL -}}
+                  {{- with .Page -}}
+                    {{- $url = .RelPermalink -}}
+                  {{- end -}}
+                  <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}">
+                    <a
+                      class="menu-link"
+                      href="{{ $url }}"
+                      {{ with .Title }}title="{{ . }}"{{ end }}
+                      {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+                    >
+                      {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
+                    </a>
+                  </li>
+                {{- end -}}
+              </ul>
             {{- else -}}
-              {{- range .AllTranslations -}}
-                <option value="{{ .RelPermalink }}"{{ if eq .Lang $.Lang }} selected{{ end }}>
-                  {{- .Language.LanguageName -}}
-                </option>
-              {{- end -}}
+            <a
+              class="menu-link"
+              href="{{ $url }}"
+              {{ with .Title }}title="{{ . }}"{{ end }}
+              {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+            >
+              {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
+            </a>
             {{- end -}}
-          </select>
-        </a>
-      {{- end -}}
-    </div>
+          </li>
+        {{- end -}}
+
+        <!-- TODO -->
+        <li class="menu-item theme-switch" title="{{ T "switchTheme" }}">
+          <i class="fas fa-adjust fa-fw"></i>
+        </li>
+        {{- if .Site.IsMultiLingual -}}
+          <li class="menu-item language">
+            <span title="{{ T "selectLanguage" }}">
+              {{- .Language.LanguageName -}}
+              <i class="dropdown-icon fas fa-caret-down"></i>
+            </span>
+            <select class="language-select" onchange="location = this.value;">
+              {{- if eq .Kind "404" -}}
+                <!-- TODO offline i18n -->
+                {{- range .Sites -}}
+                  {{- $link := printf "%v/404.html" .LanguagePrefix -}}
+                  <option value="{{ $link }}"{{ if eq . $.Site }} selected{{ end }}>
+                    {{- .Language.LanguageName -}}
+                  </option>
+                {{- end -}}
+              {{- else -}}
+                {{- range .AllTranslations -}}
+                  <option value="{{ .RelPermalink }}"{{ if eq .Lang $.Lang }} selected disabled{{ end }}>
+                    {{- .Language.LanguageName -}}
+                  </option>
+                {{- end -}}
+              {{- end -}}
+            </select>
+          </li>
+        {{- end -}}
+      </ul>
+    </nav>
   </div>
 </header>
 <div class="search-dropdown desktop">

@@ -93,12 +93,29 @@ enableEmoji = true
         weight = 5
       [[languages.en.menu.main]]
         identifier = "about"
-        pre = ""
         post = ""
         name = "About"
         url = "/about/"
         title = ""
         weight = 6
+      [[languages.en.menu.main]]
+        identifier = "about2"
+        pre = "Pre"
+        post = "Post"
+        name = "About2"
+        parent = 'about'
+        url = "/about/"
+        title = ""
+        weight = 2
+      [[languages.en.menu.main]]
+        identifier = "friends1"
+        pre = ""
+        post = ""
+        name = "friends1"
+        parent = 'about'
+        url = "/friends/"
+        title = ""
+        weight = 1
       [[languages.en.menu.main]]
         identifier = "github"
         pre = "<i class='fab fa-github fa-fw'></i>"

@@ -77,6 +77,21 @@ class Theme {
     this.config.twemoji && twemoji.parse(document.body);
   }
 
+  initMenu() {
+    this.initMenuDesktop();
+    this.initMenuMobile();
+  }
+
+  initMenuDesktop() {
+    // This is a dirty hack for fixing sub menu position error in desktop header
+    this.util.forEach(document.querySelectorAll('[has-children], #header-desktop .language'), ($item) => {
+      $item.addEventListener('mouseover', function(){
+        this.querySelector('.sub-menu').style.left= `${this.getBoundingClientRect().left}px`;
+      })
+      $item.querySelector('.sub-menu').style.minWidth= `${$item.offsetWidth - 8}px`;
+    });
+  }
+
   initMenuMobile() {
     const $menuToggleMobile = document.getElementById('menu-toggle-mobile');
     const $menuMobile = document.getElementById('menu-mobile');
@@ -91,6 +106,13 @@ class Theme {
       $menuMobile.classList.remove('active');
     });
     this.clickMaskEventSet.add(this._menuMobileOnClickMask);
+    // add nested menu toggler
+    this.util.forEach(document.querySelectorAll('.menu-item>.nested-item'), ($nestedItem) => {
+      $nestedItem.addEventListener('click', function () {
+        this.parentNode.querySelector('.sub-menu').classList.toggle('open');
+        this.querySelector('.dropdown-icon').classList.toggle('open');
+      })
+    });
   }
 
   initSwitchTheme() {
@@ -908,7 +930,7 @@ class Theme {
     try {
       this.initSVGIcon();
       this.initTwemoji();
-      this.initMenuMobile();
+      this.initMenu();
       this.initSwitchTheme();
       this.initSearch();
       this.initDetails();
