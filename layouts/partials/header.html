@@ -41,37 +41,44 @@
           {{- with .Page -}}
             {{- $url = .RelPermalink -}}
           {{- end -}}
-          <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}"{{ if .HasChildren }} has-children{{ end }}>
-            <a
-              class="menu-link"
-              href="{{ $url }}"
-              {{ with .Title }}title="{{ . }}"{{ end }}
-              {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+          {{- if (ne hugo.Environment "production") | or (ne .Params.Draft true) -}}
+            <li
+              class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}"
+              {{ if .HasChildren }}has-children{{ end }}
             >
-              {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
-            </a>
-            {{- if .HasChildren -}}
-              <i class="dropdown-icon fas fa-chevron-down"></i>
-              <ul class="sub-menu">
-                {{ range .Children }}
-                  {{- $url := .URL | relLangURL -}}
-                  {{- with .Page -}}
-                    {{- $url = .RelPermalink -}}
-                  {{- end -}}
-                  <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}">
-                    <a
-                      class="menu-link"
-                      href="{{ $url }}"
-                      {{ with .Title }}title="{{ . }}"{{ end }}
-                      {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+              <a
+                class="menu-link"
+                href="{{ $url }}"
+                {{ with .Title }}title="{{ . }}"{{ end }}
+                {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+              >
+                {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
+              </a>
+              {{- if .HasChildren -}}
+                <i class="dropdown-icon fas fa-chevron-down"></i>
+                <ul class="sub-menu">
+                  {{ range .Children }}
+                    {{- $url := .URL | relLangURL -}}
+                    {{- with .Page -}}
+                      {{- $url = .RelPermalink -}}
+                    {{- end -}}
+                    <li
+                      class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}"
                     >
-                      {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
-                    </a>
-                  </li>
-                {{- end -}}
-              </ul>
-            {{- end -}}
-          </li>
+                      <a
+                        class="menu-link"
+                        href="{{ $url }}"
+                        {{ with .Title }}title="{{ . }}"{{ end }}
+                        {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+                      >
+                        {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
+                      </a>
+                    </li>
+                  {{- end -}}
+                </ul>
+              {{- end -}}
+            </li>
+          {{- end -}}
         {{- end -}}
         {{- if .Site.Menus.main -}}
           <li class="menu-item delimiter"></li>
@@ -198,48 +205,54 @@
           {{- with .Page -}}
             {{- $url = .RelPermalink -}}
           {{- end -}}
-          <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}">
-            {{- if .HasChildren -}}
-              <span class="nested-item">
-                <a
-                  class="menu-link"
-                  href="{{ $url }}"
-                  {{ with .Title }}title="{{ . }}"{{ end }}
-                  {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
-                >
-                  {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
-                </a>
-                <i class="dropdown-icon fas fa-chevron-right"></i>
-              </span>
-              <ul class="sub-menu">
-                {{ range .Children }}
-                  {{- $url := .URL | relLangURL -}}
-                  {{- with .Page -}}
-                    {{- $url = .RelPermalink -}}
-                  {{- end -}}
-                  <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}">
-                    <a
-                      class="menu-link"
-                      href="{{ $url }}"
-                      {{ with .Title }}title="{{ . }}"{{ end }}
-                      {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
-                    >
-                      {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
-                    </a>
-                  </li>
-                {{- end -}}
-              </ul>
-            {{- else -}}
-            <a
-              class="menu-link"
-              href="{{ $url }}"
-              {{ with .Title }}title="{{ . }}"{{ end }}
-              {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+          {{- if (ne hugo.Environment "production") | or (ne .Params.Draft true) -}}
+            <li
+              class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}"
             >
-              {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
-            </a>
-            {{- end -}}
-          </li>
+              {{- if .HasChildren -}}
+                <span class="nested-item">
+                  <a
+                    class="menu-link"
+                    href="{{ $url }}"
+                    {{ with .Title }}title="{{ . }}"{{ end }}
+                    {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+                  >
+                    {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
+                  </a>
+                  <i class="dropdown-icon fas fa-chevron-right"></i>
+                </span>
+                <ul class="sub-menu">
+                  {{ range .Children }}
+                    {{- $url := .URL | relLangURL -}}
+                    {{- with .Page -}}
+                      {{- $url = .RelPermalink -}}
+                    {{- end -}}
+                    <li
+                      class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}"
+                    >
+                      <a
+                        class="menu-link"
+                        href="{{ $url }}"
+                        {{ with .Title }}title="{{ . }}"{{ end }}
+                        {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+                      >
+                        {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
+                      </a>
+                    </li>
+                  {{- end -}}
+                </ul>
+              {{- else -}}
+              <a
+                class="menu-link"
+                href="{{ $url }}"
+                {{ with .Title }}title="{{ . }}"{{ end }}
+                {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+              >
+                {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
+              </a>
+              {{- end -}}
+            </li>
+          {{- end -}}
         {{- end -}}
         <li class="menu-item theme-switch" title="{{ T "switchTheme" }}">
           <i class="fas fa-adjust fa-fw"></i>

@@ -5,9 +5,10 @@ All notable changes to this project will be documented in this file.
 ## v0.2.14
 
 - :recycle: Refactor: header layout
-  - Add sub menu (nested menu) support ([#31](https://github.com/Lruihao/FixIt/issues/31))
-  - Modified language selector to submenu (@pandaoh[`eced169`](https://github.com/Lruihao/FixIt/commit/eced169713ce4a0208ce70ab556824e47eb671d5), @Lruihao[#31](https://github.com/Lruihao/FixIt/issues/31))
-  - Fix some header css bug ([#31](https://github.com/Lruihao/FixIt/issues/31))
+  - :tada: Add sub menu (nested menu) support ([#31](https://github.com/Lruihao/FixIt/issues/31))
+  - :sparkles: Feat: add user-defined content to menu items via the params field ([#99](https://github.com/Lruihao/FixIt/issues/99))
+  - :sparkles: Modified language selector to submenu (@pandaoh[`eced169`](https://github.com/Lruihao/FixIt/commit/eced169713ce4a0208ce70ab556824e47eb671d5), @Lruihao[#31](https://github.com/Lruihao/FixIt/issues/31))
+  - :bug: Fix some header css bug ([#31](https://github.com/Lruihao/FixIt/issues/31))
 - :zap: Perf: remove third-party library clipboard.js ([#84](https://github.com/Lruihao/FixIt/issues/84))
 - :pencil2: Docs: fix highlight url typo in `theme-documentation-built-in-shortcodes` (@d-baer[#85](https://github.com/Lruihao/FixIt/pull/85))
 - **Full Changelog:** @Lruihao [`v0.2.13...v0.2.14`](https://github.com/Lruihao/FixIt/compare/v0.2.13...v0.2.14)

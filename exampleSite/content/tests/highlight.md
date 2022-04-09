@@ -1,8 +1,22 @@
 ---
-title: "Highlight Code"
+title: "Highlight Test"
 date: 2022-02-27T18:45:22+08:00
+discription: "Test for code highlight feature"
 type: 'posts'
 draft: true
+
+tags:
+- Test
+- content
+- highlight
+categories:
+- Test
+
+menu:
+  main:
+    title: "Test for code highlight feature"
+    parent: "tests"
+    pre: "<i class='fas fa-vial fa-fw fa-sm'></i>"
 ---
 
 `inline code`
