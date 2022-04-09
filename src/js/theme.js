@@ -76,14 +76,19 @@ class Theme {
   initTwemoji() {
     this.config.twemoji && twemoji.parse(document.body);
   }
-  /**
-   * This is a dirty hack for fixing sub menu position error in desktop header
-   */
-  initSubMenuDesktop() {
-    this.util.forEach(document.querySelectorAll('[has-children],.language'), ($item) => {
+
+  initMenu() {
+    this.initMenuDesktop();
+    this.initMenuMobile();
+  }
+
+  initMenuDesktop() {
+    // This is a dirty hack for fixing sub menu position error in desktop header
+    this.util.forEach(document.querySelectorAll('[has-children], #header-desktop .language'), ($item) => {
       $item.addEventListener('mouseover', function(){
         this.querySelector('.sub-menu').style.left= `${this.getBoundingClientRect().left}px`;
       })
+      $item.querySelector('.sub-menu').style.minWidth= `${$item.offsetWidth - 8}px`;
     });
   }
 
@@ -925,8 +930,7 @@ class Theme {
     try {
       this.initSVGIcon();
       this.initTwemoji();
-      this.initSubMenuDesktop();
-      this.initMenuMobile();
+      this.initMenu();
       this.initSwitchTheme();
       this.initSearch();
       this.initDetails();
