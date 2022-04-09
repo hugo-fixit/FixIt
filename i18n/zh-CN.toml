@@ -46,6 +46,9 @@ other = "更多"
 [selectLanguage]
 other = "选择语言"
 
+[noMoretTranslations]
+other = "没有更多翻译"
+
 [switchTheme]
 other = "切换主题"
 # === partials/header.html ===

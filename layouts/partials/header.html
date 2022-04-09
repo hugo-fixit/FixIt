@@ -101,7 +101,7 @@
                     </li>
                   {{- end -}}
                 {{- end -}}
-              {{- else -}}
+              {{- else if gt (len .AllTranslations) 1 -}}
                 {{- range .AllTranslations -}}
                   {{- if ne .Lang $.Lang -}}
                     <li class="menu-item">
@@ -111,6 +111,8 @@
                     </li>
                   {{- end -}}
                 {{- end -}}
+              {{- else -}}
+                <li class="menu-item">{{- T "noMoretTranslations" -}}</li>
               {{- end -}}
             </ul>
           </li>
@@ -271,12 +273,14 @@
                     {{- .Language.LanguageName -}}
                   </option>
                 {{- end -}}
-              {{- else -}}
+              {{- else if gt (len .AllTranslations) 1 -}}
                 {{- range .AllTranslations -}}
                   <option value="{{ .RelPermalink }}"{{ if eq .Lang $.Lang }} selected disabled{{ end }}>
                     {{- .Language.LanguageName -}}
                   </option>
                 {{- end -}}
+              {{- else -}}
+                <option disabled>{{- T "noMoretTranslations" -}}</option>
               {{- end -}}
             </select>
           </li>

@@ -45,6 +45,9 @@ other = "More"
 [selectLanguage]
 other = "Select Language"
 
+[noMoretTranslations]
+other = "No more translations"
+
 [switchTheme]
 other = "Switch Theme"
 # === partials/header.html ===
