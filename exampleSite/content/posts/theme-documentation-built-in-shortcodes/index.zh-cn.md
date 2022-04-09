@@ -15,6 +15,12 @@ tags: ["shortcodes"]
 categories: ["documentation"]
 
 lightgallery: true
+
+menu:
+  main:
+    title: "Hugo 提供了多个内置的 Shortcodes, 以方便作者保持 Markdown 内容的整洁。"
+    parent: "documentation"
+    pre: "<i class='fab fa-readme fa-fw fa-sm'></i>"
 ---
 
 **Hugo** 提供了多个内置的 Shortcodes, 以方便作者保持 Markdown 内容的整洁。

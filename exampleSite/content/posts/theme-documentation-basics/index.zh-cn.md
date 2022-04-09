@@ -18,6 +18,12 @@ lightgallery: true
 
 toc:
   auto: false
+
+menu:
+  main:
+    title: "探索 Hugo - FixIt 主题的全部内容和背后的核心概念。"
+    parent: "documentation"
+    pre: "<i class='fab fa-readme fa-fw fa-sm'></i>"
 ---
 
 探索 Hugo - **FixIt** 主题的全部内容和背后的核心概念。

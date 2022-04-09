@@ -18,6 +18,13 @@ lightgallery: true
 
 toc:
   auto: false
+
+menu:
+  main:
+    name: "Basics"
+    title: "Discover what the Hugo - FixIt theme is all about and the core-concepts behind it."
+    parent: "documentation"
+    pre: "<i class='fab fa-readme fa-fw fa-sm'></i>"
 ---
 
 Discover what the Hugo - **FixIt** theme is all about and the core-concepts behind it.

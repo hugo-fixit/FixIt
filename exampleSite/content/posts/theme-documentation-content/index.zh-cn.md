@@ -20,6 +20,12 @@ toc:
   auto: false
 math:
   enable: true
+
+menu:
+  main:
+    title: "了解如何在 FixIt 主题中快速，直观地创建和组织内容。"
+    parent: "documentation"
+    pre: "<i class='fab fa-readme fa-fw fa-sm'></i>"
 ---
 
 了解如何在 **FixIt** 主题中快速，直观地创建和组织内容。

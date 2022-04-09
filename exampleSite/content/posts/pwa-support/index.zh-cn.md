@@ -1,6 +1,6 @@
 ---
 weight: 7
-title: "PWA 支持"
+title: "主题文档 - PWA 支持"
 date: 2022-01-26T11:10:56+08:00
 draft: false
 author: "Lruihao"
@@ -13,6 +13,12 @@ categories: ["Documentation"]
 resources:
 - name: featured-image
   src: featured-image.png
+
+menu:
+  main:
+    title: "在 FixIt 中设置 PWA 的指南。"
+    parent: "documentation"
+    pre: "<i class='fab fa-readme fa-fw fa-sm'></i>"
 ---
 
 了解如何在 FixIt 主题中配置渐进式网络应用程序 (PWA)。

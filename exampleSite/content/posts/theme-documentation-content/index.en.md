@@ -20,6 +20,13 @@ toc:
   auto: false
 math:
   enable: true
+
+menu:
+  main:
+    name: "Content"
+    title: "Find out how to create and organize your content quickly and intuitively in FixIt theme."
+    parent: "documentation"
+    pre: "<i class='fab fa-readme fa-fw fa-sm'></i>"
 ---
 
 Find out how to create and organize your content quickly and intuitively in **FixIt** theme.

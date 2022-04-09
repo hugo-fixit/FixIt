@@ -16,6 +16,13 @@ tags: ["shortcodes"]
 categories: ["documentation"]
 
 lightgallery: true
+
+menu:
+  main:
+    name: "Extended Shortcodes"
+    title: "FixIt theme provides multiple shortcodes on top of built-in ones in Hugo."
+    parent: "documentation"
+    pre: "<i class='fab fa-readme fa-fw fa-sm'></i>"
 ---
 
 **FixIt** theme provides multiple shortcodes on top of built-in ones in Hugo.

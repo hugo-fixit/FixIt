@@ -5,7 +5,7 @@ date: 2020-03-03T16:29:59+08:00
 draft: false
 author: "Lruihao"
 authorLink: "https://lruihao.cn"
-description: "FixIt 主题在 Hugo 内置的 shortcode 的基础上提供多个扩展的 shortcode."
+description: "FixIt 主题在 Hugo 内置的 shortcode 的基础上提供多个扩展的 shortcode"
 resources:
 - name: "featured-image"
   src: "featured-image.jpg"
@@ -19,6 +19,12 @@ lightgallery: true
 mapbox:
   lightStyle: mapbox://styles/mapbox/light-zh-v1?optimize=true
   darkStyle: mapbox://styles/mapbox/dark-zh-v1?optimize=true
+
+menu:
+  main:
+    title: "FixIt 主题在 Hugo 内置的 shortcode 的基础上提供多个扩展的 shortcode"
+    parent: "documentation"
+    pre: "<i class='fab fa-readme fa-fw fa-sm'></i>"
 ---
 
 **FixIt** 主题在 Hugo 内置的 shortcode 的基础上提供多个扩展的 shortcode.
