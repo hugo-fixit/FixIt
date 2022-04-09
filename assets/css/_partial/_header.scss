@@ -57,14 +57,15 @@ header {
 
     & .dropdown-icon {
       margin-left: 0.25rem;
-      color: $global-font-secondary-color;
+      font-size: .875em;
+      color: $global-font-color;
 
       [theme='dark'] & {
-        color: $global-font-secondary-color-dark;
+        color: $global-font-color-dark;
       }
 
       &.open::before {
-        content: "\f0d7";
+        content: "\f078";
       }
     }
 

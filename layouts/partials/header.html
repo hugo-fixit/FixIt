@@ -51,7 +51,7 @@
               {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
             </a>
             {{- if .HasChildren -}}
-              <i class="dropdown-icon fas fa-caret-down"></i>
+              <i class="dropdown-icon fas fa-chevron-down"></i>
               <ul class="sub-menu">
                 {{ range .Children }}
                   {{- $url := .URL | relLangURL -}}
@@ -80,16 +80,19 @@
           <li class="menu-item language">
             <span title="{{ T "selectLanguage" }}">
               {{- .Language.LanguageName -}}
-              <i class="dropdown-icon fas fa-caret-down"></i>
+              <i class="dropdown-icon fas fa-chevron-down"></i>
             </span>
             <ul class="sub-menu">
-              {{- if eq .Kind "404" -}}
-              <!-- TODO offline i18n -->
+              {{- if (eq .Kind "404") -}}
                 {{- range .Sites -}}
-                  {{- $link := printf "%v/404.html" .LanguagePrefix -}}
-                  <li class="menu-item" {{ if eq . $.Site }}selected{{ end }} title="{{- .Language.LanguageName -}}" lang="{{ $link }}" onclick="location = this.getAttribute('lang')">
-                    {{- .Language.LanguageName -}}
-                  </li>
+                  {{- if ne . $.Site -}}
+                    {{- $link := printf "%v/404.html" .LanguagePrefix -}}
+                    <li class="menu-item">
+                      <a href="{{ $link }}" title="{{- .Language.LanguageName -}}">
+                        {{- .Language.LanguageName -}}
+                      </a>
+                    </li>
+                  {{- end -}}
                 {{- end -}}
               {{- else -}}
                 {{- range .AllTranslations -}}
@@ -206,7 +209,7 @@
                 >
                   {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
                 </a>
-                <i class="dropdown-icon fas fa-caret-right"></i>
+                <i class="dropdown-icon fas fa-chevron-right"></i>
               </span>
               <ul class="sub-menu">
                 {{ range .Children }}
@@ -238,8 +241,6 @@
             {{- end -}}
           </li>
         {{- end -}}
-
-        <!-- TODO -->
         <li class="menu-item theme-switch" title="{{ T "switchTheme" }}">
           <i class="fas fa-adjust fa-fw"></i>
         </li>
@@ -247,14 +248,13 @@
           <li class="menu-item language">
             <span title="{{ T "selectLanguage" }}">
               {{- .Language.LanguageName -}}
-              <i class="dropdown-icon fas fa-caret-down"></i>
+              <i class="dropdown-icon fas fa-chevron-down"></i>
             </span>
             <select class="language-select" onchange="location = this.value;">
               {{- if eq .Kind "404" -}}
-                <!-- TODO offline i18n -->
                 {{- range .Sites -}}
                   {{- $link := printf "%v/404.html" .LanguagePrefix -}}
-                  <option value="{{ $link }}"{{ if eq . $.Site }} selected{{ end }}>
+                  <option value="{{ $link }}"{{ if eq . $.Site }} selected disabled{{ end }}>
                     {{- .Language.LanguageName -}}
                   </option>
                 {{- end -}}
