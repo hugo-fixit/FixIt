@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
   - :sparkles: Feat: modified language selector to submenu (@pandaoh[`eced169`](https://github.com/Lruihao/FixIt/commit/eced169713ce4a0208ce70ab556824e47eb671d5), @Lruihao[#31](https://github.com/Lruihao/FixIt/issues/31))
   - :bug: Fix: add "no more translations" judgment logic ([#100](https://github.com/Lruihao/FixIt/issues/100))
   - :bug: Fix: fix some header css bug ([#31](https://github.com/Lruihao/FixIt/issues/31))
+- :sparkles: Style: add some common CSS styles Class ([#101](https://github.com/Lruihao/FixIt/issues/101))
 - :memo: Docs: revised theme documentation
 - :zap: Perf: remove third-party library clipboard.js ([#84](https://github.com/Lruihao/FixIt/issues/84))
 - :pencil2: Docs: fix highlight url typo in `theme-documentation-built-in-shortcodes` (@d-baer[#85](https://github.com/Lruihao/FixIt/pull/85))
