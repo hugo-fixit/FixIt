@@ -111,19 +111,19 @@ theme = "FixIt"
     title = ""
     weight = 1
   [[menu.main]]
-    identifier = "tags"
-    pre = ""
-    post = ""
-    name = "标签"
-    url = "/tags/"
-    title = ""
-    weight = 2
-  [[menu.main]]
     identifier = "categories"
     pre = ""
     post = ""
     name = "分类"
     url = "/categories/"
+    title = ""
+    weight = 2
+  [[menu.main]]
+    identifier = "tags"
+    pre = ""
+    post = ""
+    name = "标签"
+    url = "/tags/"
     title = ""
     weight = 3
 
@@ -136,7 +136,8 @@ theme = "FixIt"
 ```
 
 {{< admonition >}}
-在构建网站时，你可以使用 `--theme` 选项设置主题。但是，我建议你修改配置文件 (**config.toml**) 将本主题设置为默认主题。
+- 在构建网站时，你可以使用 `--theme` 选项设置主题。但是，我建议你修改配置文件 (**config.toml**) 将本主题设置为默认主题。
+- {{< version 0.2.14 >}} FixIt 主题提供了子菜单的支持，请详见 [菜单进阶配置](#menu-advanced-configuration)
 {{< /admonition >}}
 
 ### 2.4 创建你的第一篇文章
@@ -1011,7 +1012,7 @@ FixIt 主题提供了页面宽度配置选项 `pageStyle` 并提供三种选项�
 
 {{< version 0.2.13 >}}
 
-在 FixIt 主题中，提供有三个打印视图相关的 css class
+在 FixIt 主题中，提供有三个打印视图相关的 CSS 类
 
 * `page-break-before` 在元素之前插入分页符
 * `page-break-after` 在元素之后插入分页符
@@ -1025,6 +1026,73 @@ FixIt 主题提供了页面宽度配置选项 `pageStyle` 并提供三种选项�
 <div class="print-d-none">
   您希望在打印视图中隐藏的某些内容写在此处。
 </div>
+```
+
+### 3.4 菜单进阶配置 {#menu-advanced-configuration}
+
+Hugo 有一个简单而强大的 [菜单系统](https://gohugo.io/content-management/menus/)。
+
+根据 Hugo 提供的接口，FixIt 主题只实现了部分功能，但我想这足以满足大多数人的需求，也让用户在使用上更加简单。
+
+下面是一个完整的菜单项配置：
+
+```toml
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    # {{< version 0.2.14 >}} 父级菜单项的标识符 (identifier)
+    parent = ""
+    # 你可以在名称（允许 HTML 格式）之前添加其他信息，例如图标
+    pre = ""
+    # 你可以在名称（允许 HTML 格式）之后添加其他信息，例如图标
+    post = ""
+    name = "文章"
+    url = "/posts/"
+    # 当你将鼠标悬停在此菜单链接上时，将显示的标题
+    title = ""
+    weight = 1
+    # {{< version 0.2.14 >}} 向菜单项添加用户定义的内容
+    [menu.main.params]
+      # 添加 CSS 类到特定的菜单项
+      class = 'text-center'
+      # 是否为草稿菜单，草稿菜单不会在生产环境渲染
+      draft = false
+```
+
+#### 3.4.1 子菜单
+
+{{< version 0.2.14 >}}
+
+考虑到实用性和排版问题，FixIt 主题只支持两层嵌套的菜单，通过在菜单配置中的 `parent` 字段即可。
+
+一个菜单项的父项应该是另一个菜单项的标识符 (`identifier`)，在菜单中标识符应该是唯一的。
+
+#### 3.4.2 菜单参数
+
+{{< version 0.2.14 >}}
+
+您还可以通过 `params` 字段将自定义的内容添加到菜单项。 FixIt 主题目前提供了两个参数的配置：
+
+* **class** *{String}* 添加 CSS 类到特定的菜单项
+* **draft** *{Boolean}* 是否为草稿菜单，草稿菜单不会在生产环境渲染
+
+#### 3.4.3 添加内容到菜单 {#content-to-menu}
+
+也可以通过配置 `front matter` 从页面创建菜单项（即 `.md` 文件）。 
+
+这是一个 `yaml` 示例：
+
+```yaml
+---
+title: "主题文档 - 基本概念"
+author: "Lruihao"
+menu:
+  main:
+    title: "探索 Hugo - FixIt 主题的全部内容和背后的核心概念。"
+    parent: "documentation"
+    pre: "<i class='fab fa-readme fa-fw fa-sm'></i>"
+---
+...
 ```
 
 ## 4 多语言和 i18n

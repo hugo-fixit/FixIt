@@ -50,13 +50,15 @@ enableEmoji = true
     [languages.en.menu]
       [[languages.en.menu.main]]
         identifier = "posts"
+        # Identifier of the parent menu item since v0.2.14
+        parent = ""
         # you can add extra information before the name (HTML format is supported), such as icons
         pre = "<i class='fas fa-archive fa-fw fa-sm'></i>"
         # you can add extra information after the name (HTML format is supported), such as icons
         post = ""
         name = "Posts"
         url = "/posts/"
-        # title will be shown when you hover on this menu link.
+        # title will be shown when you hover on this menu link
         title = ""
         weight = 1
       [[languages.en.menu.main]]
@@ -85,7 +87,7 @@ enableEmoji = true
         weight = 4
       [[languages.en.menu.main]]
         identifier = "tests"
-        pre = "<i class='fas fa-vials fa-fw fa-sm'></i>"
+        pre = "<i class='fas fa-flask fa-fw fa-sm'></i>"
         post = ""
         name = "Tests"
         url = "/tests/"
@@ -286,6 +288,8 @@ enableEmoji = true
     [languages.zh-cn.menu]
       [[languages.zh-cn.menu.main]]
         identifier = "posts"
+        # 父级菜单项的标识符 (identifier) since v0.2.14
+        parent = ""
         # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
         pre = "<i class='fas fa-archive fa-fw fa-sm'></i>"
         # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标

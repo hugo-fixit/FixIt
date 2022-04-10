@@ -172,6 +172,7 @@ seo:
 * **library**: {{< version 0.2.7 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.library` 部分相同
 * **seo**: {{< version 0.2.10 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.seo` 部分相同
 * **type**: 页面渲染模板，详见 [页面模板](#tamplates)
+* **menu**: 详见 [添加内容到菜单](../theme-documentation-basics#content-to-menu)
 
 {{< admonition tip >}}
 {{< version 0.2.10 >}}

@@ -134,7 +134,8 @@ theme = "FixIt"
 ```
 
 {{< admonition >}}
-When building the website, you can set a theme by using `--theme` option. However, we suggest you modify the configuration file (**config.toml**) and set the theme as the default.
+- When building the website, you can set a theme by using `--theme` option. However, we suggest you modify the configuration file (**config.toml**) and set the theme as the default.
+- {{< version 0.2.14 >}} The FixIt theme provides sub menu support. Please refer to [Menu Advanced Configuration](#menu-advanced-configuration) for details.
 {{< /admonition >}}
 
 ### 2.4 Create Your First Post
@@ -1014,6 +1015,74 @@ Here is a simple exmple:
 <div class="print-d-none">
   Something you want to hide in the print view is written here.
 </div>
+```
+
+### 3.4 Menu Advanced Configuration {#menu-advanced-configuration}
+
+Hugo has a simple yet powerful [menu system](https://gohugo.io/content-management/menus/).
+
+According to the interface provided by Hugo, FixIt theme only realizes some functions, but I think it is enough to meet the needs of most people and make users easier to use.
+
+The following is a complete menu item configuration:
+
+```toml
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    # {{< version 0.2.14 >}} Identifier of the parent menu item
+    parent = ""
+    # you can add extra information before the name (HTML format is supported), such as icons
+    pre = ""
+    # you can add extra information after the name (HTML format is supported), such as icons
+    post = ""
+    name = "Posts"
+    url = "/posts/"
+    # title will be shown when you hover on this menu link
+    title = ""
+    weight = 1
+    # {{< version 0.2.14 >}} add user-defined content to menu items
+    [menu.main.params]
+      # add css class to a specific menu item
+      class = 'text-center'
+      # whether set as a draft menu item that will not be rendered in the production environment
+      draft = false
+```
+
+#### 3.4.1 Sub Menu
+
+{{< version 0.2.14 >}}
+
+In consideration of practicability and typesetting, the FixIt theme only supports two-tier nested menus, which can be configured through the `parent` field in the menu configuration.
+
+The parent item of a menu item should be the `identifier` of another menu item, and the identifier should be unique in the menu.
+
+#### 3.4.2 Menu Params
+
+{{< version 0.2.14 >}}
+
+You can also add user-defined content to menu items via the `params` field. The FixIt theme currently provides two parameters:
+
+* **class** *{String}* add css class to a specific menu item
+* **draft** *{Boolean}* whether set as a draft menu item that will not be rendered in the production environment
+
+#### 3.4.3 Add content to Menu {#content-to-menu}
+
+It’s also possible to create menu entries from the page by configuring `front matter` (i.e. the `.md`-file).
+
+Here is a `yaml` example:
+
+```yaml
+---
+title: "Theme Documentation - Basics"
+author: "Lruihao"
+menu:
+  main:
+    name: "Basics"
+    title: "Discover what the Hugo - FixIt theme is all about and the core-concepts behind it."
+    parent: "documentation"
+    pre: "<i class='fab fa-readme fa-fw fa-sm'></i>"
+---
+...
 ```
 
 ## 4 Multilingual and i18n

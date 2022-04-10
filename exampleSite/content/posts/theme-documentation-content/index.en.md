@@ -174,6 +174,7 @@ seo:
 * **library**: {{< version 0.2.7 >}} the same as the `params.page.library` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **seo**: {{< version 0.2.10 >}} the same as the `params.page.seo` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **type**: the rendering template of page, see [templates](#tamplates) for details.
+* **menu**: see [Add content to Menu](../theme-documentation-basics#content-to-menu)
 
 {{< admonition tip >}}
 {{< version 0.2.10 >}}

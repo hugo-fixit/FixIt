@@ -1,7 +1,7 @@
 ---
 title: "Shortcodes Test"
 date: 2022-03-07T22:31:22+08:00
-discription: "Test for shortcodes usages"
+description: "Test for shortcodes usages"
 type: 'posts'
 draft: true
 
