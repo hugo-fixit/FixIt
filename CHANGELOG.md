@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file.
   - :bug: Fix: fix some header css bug ([#31](https://github.com/Lruihao/FixIt/issues/31))
 - :sparkles: Feat: enhance link render ([#96](https://github.com/Lruihao/FixIt/issues/96))
   - Add external icon for external links automatically
-  - Add download icon for card links
+  - Add download icon for downloadable links
 - :sparkles: Style: add some common CSS styles Class ([#101](https://github.com/Lruihao/FixIt/issues/101))
 - :memo: Docs: revised theme documentation
 - :zap: Perf: remove third-party library clipboard.js ([#84](https://github.com/Lruihao/FixIt/issues/84))
