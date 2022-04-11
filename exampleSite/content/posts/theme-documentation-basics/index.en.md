@@ -221,6 +221,8 @@ Please open the code block below to view the complete sample configuration :(far
   images = ["/logo.png"]
   # {{< version 0.2.12 >}} enable PWA
   enablePWA = true
+  # {{< version 0.2.14 >}} whether to add external Icon for external links automatically
+  externalIcon = false
 
   # {{< version 0.2.0 >}} App icon config
   [params.app]

@@ -223,6 +223,8 @@ hugo
   images = ["/logo.png"]
   # {{< version 0.2.12 >}} 开启 PWA 支持
   enablePWA = true
+  # {{< version 0.2.14 >}} 是否自动显示外链图标
+  externalIcon = false
 
   # {{< version 0.2.0 >}} 应用图标配置
   [params.app]

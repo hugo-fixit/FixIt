@@ -530,6 +530,9 @@ enableEmoji = true
   # enable PWA since v0.2.12
   # 开启 PWA 支持 since v0.2.12
   enablePWA = true
+  # whether to add external Icon for external links automatically since v0.2.14
+  # 是否自动显示外链图标 since v0.2.14
+  externalIcon = true
 
   # Header config
   # 页面头部导航栏配置

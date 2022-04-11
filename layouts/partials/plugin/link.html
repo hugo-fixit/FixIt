@@ -1,4 +1,5 @@
 {{- $rel := "" -}}
+{{- $external := false -}}
 {{- $class := "" -}}
 <a
   href="{{ .Destination | safeURL }}"
@@ -7,6 +8,7 @@
   {{ end }}
   {{ if (urls.Parse .Destination).Host | or .Newtab }}
     {{ $rel = "external nofollow noopener noreffer" }}
+    {{ $external = true }}
     target="_blank"
   {{ end }}
   {{ if $rel | or .Rel }}
@@ -28,6 +30,9 @@
     {{- end -}}
     {{- with .Content -}}
       {{- . | safeHTML -}}
+    {{- end -}}
+    {{ if (.ExternalIcon | default false) | and $external }}
+      {{ dict "Class" "fas fa-external-link-alt fa-fw fa-xs" | partial "plugin/icon.html" }}
     {{- end -}}
   {{- else -}}
     <span class="cl-backdrop"></span>
