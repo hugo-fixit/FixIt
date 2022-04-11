@@ -157,7 +157,8 @@ By default all posts and pages are created as a draft. If you want to render the
 Launch by using the following command:
 
 ```bash
-hugo serve
+# `hugo serve` is an alias of `hugo server`, which is not a misspelling ~
+hugo server
 ```
 
 Go to `http://localhost:1313`.
@@ -165,7 +166,7 @@ Go to `http://localhost:1313`.
 ![Basic configuration preview](basic-configuration-preview.png "Basic configuration preview")
 
 {{< admonition tip >}}
-When you run `hugo serve`, when the contents of the files change, the page automatically refreshes with the changes.
+When you run `hugo server`, when the contents of the files change, the page automatically refreshes with the changes.
 {{< /admonition >}}
 
 {{< admonition >}}
@@ -173,7 +174,7 @@ Since the theme use `.Scratch` in Hugo to implement some features,
 it is highly recommended that you add `--disableFastRender` parameter to `hugo server` command for the live preview of the page you are editing.
 
 ```bash
-hugo serve --disableFastRender
+hugo server --disableFastRender
 ```
 {{< /admonition >}}
 
@@ -854,12 +855,12 @@ Note that some of these parameters are explained in details in other sections of
 {{< /admonition >}}
 
 {{< admonition note "Hugo environments" >}}
-Default environments are `development` with `hugo serve` and `production` with `hugo`.
+Default environments are `development` with `hugo server` and `production` with `hugo`.
 
 Due to limitations in the local `development` environment,
 the **comment system**, **CDN** and **fingerprint** will not be enabled in the `development` environment.
 
-You could enable these features with `hugo serve -e production`.
+You could enable these features with `hugo server -e production`.
 {{< /admonition >}}
 
 {{< admonition tip "Tips about CDN Configuration" >}}

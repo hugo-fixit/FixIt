@@ -159,7 +159,8 @@ hugo new posts/first_post.md
 使用以下命令启动网站：
 
 ```bash
-hugo serve
+# `hugo serve` 是 `hugo server` 的一个别名，并不是文档拼写错误哦 ~
+hugo server
 ```
 
 去查看 `http://localhost:1313`.
@@ -167,7 +168,7 @@ hugo serve
 ![基本配置下的预览](basic-configuration-preview.zh-cn.png "基本配置下的预览")
 
 {{< admonition tip >}}
-当你运行 `hugo serve` 时，当文件内容更改时，页面会随着更改自动刷新。
+当你运行 `hugo server` 时，当文件内容更改时，页面会随着更改自动刷新。
 {{< /admonition >}}
 
 {{< admonition >}}
@@ -175,7 +176,7 @@ hugo serve
 非常建议你为 `hugo server` 命令添加 `--disableFastRender` 参数来实时预览你正在编辑的文章页面。
 
 ```bash
-hugo serve --disableFastRender
+hugo server --disableFastRender
 ```
 {{< /admonition >}}
 
@@ -864,13 +865,13 @@ hugo
 {{< /admonition >}}
 
 {{< admonition note "Hugo 的运行环境" >}}
-`hugo serve` 的默认运行环境是 `development`,
+`hugo server` 的默认运行环境是 `development`,
 而 `hugo` 的默认运行环境是 `production`.
 
 由于本地 `development` 环境的限制，
 **评论系统**, **CDN** 和 **fingerprint** 不会在 `development` 环境下启用。
 
-你可以使用 `hugo serve -e production` 命令来开启这些特性。
+你可以使用 `hugo server -e production` 命令来开启这些特性。
 {{< /admonition >}}
 
 {{< admonition tip "关于 CDN 配置的技巧" >}}
