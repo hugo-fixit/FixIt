@@ -31,7 +31,11 @@
     {{- with .Content -}}
       {{- . | safeHTML -}}
     {{- end -}}
-    {{- if (.ExternalIcon | default false) | and $external | and (eq (hasPrefix .Content `<img` ) false) }}
+    {{- if 
+      (.ExternalIcon | default false) 
+      | and $external | and (eq (hasPrefix .Content `<img` ) false)
+      | and (eq ((strings.HasSuffix .Content `</i>`) | or (strings.HasSuffix .Content `):`)) false)
+    }}
       {{ if .Download }}
         {{ dict "Class" "fas fa-cloud-download-alt fa-fw fa-xs" | partial "plugin/icon.html" }}
       {{- else -}}
