@@ -996,7 +996,7 @@ enableEmoji = true
     enable = true
     # Enable in post meta
     # 在文章中开启
-    enablePost = false
+    enablePost = true
     # Site creation time
     # 网站创立时间
     siteTime = '2021-12-18T16:15:22+08:00'
