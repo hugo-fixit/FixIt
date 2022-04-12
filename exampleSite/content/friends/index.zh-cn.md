@@ -12,7 +12,7 @@ comment: false
 ---
 
 {{< admonition tip "添加您的 FixIt 网站" >}}
-您可以通过 [创建 PR :(fas fa-code-branch fa-fw):](https://github.com/Lruihao/FixIt/pulls) 将您的 FixIt 网站添加到此页面。
+您可以通过 [创建 PR :(fas fa-code-branch fa-fw):](https://github.com/Lruihao/FixIt/pulls) 将您的 FixIt 网站添加到此页面。（例如：[#111](https://github.com/Lruihao/FixIt/pull/111)）
 
 请确保已添加的网站一直处在运行状态，否则将取消链接。
 {{< /admonition >}}
