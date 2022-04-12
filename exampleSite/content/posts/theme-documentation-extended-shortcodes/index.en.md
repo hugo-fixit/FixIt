@@ -101,6 +101,10 @@ The `link` shortcode has the following named parameters:
 
     Additional `rel` attributes of the HTML `a` tag.
 
+* **external-icon** *[optional]* {{< version 0.2.14 >}}
+
+    whether to add external Icon for external links automatically
+
 Example `link` input:
 
 ```go-html-template

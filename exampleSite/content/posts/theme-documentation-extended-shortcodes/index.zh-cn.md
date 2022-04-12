@@ -103,6 +103,10 @@ This is a **right-aligned** paragraph.
 
     HTML `a` 标签 的 `rel` 补充属性。
 
+* **external-icon** *[可选]* {{< version 0.2.14 >}}
+
+    是否自动显示外链图标
+
 一个 `link` 示例：
 
 ```go-html-template

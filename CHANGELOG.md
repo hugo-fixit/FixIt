@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: enhance link render ([#96](https://github.com/Lruihao/FixIt/issues/96))
   - Add external icon for external links automatically
   - Add download icon for downloadable links
+- :sparkles: Feat: link shortcode add `external-icon` option ([#96](https://github.com/Lruihao/FixIt/issues/96))
 - :bug: Fix: invalid front matter `comment: true` ([#108](https://github.com/Lruihao/FixIt/issues/108))
 - :sparkles: Style: add some common CSS styles Class ([#101](https://github.com/Lruihao/FixIt/issues/101))
 - :memo: Docs: revised theme documentation
