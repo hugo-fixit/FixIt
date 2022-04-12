@@ -4,6 +4,11 @@
 #   url: site link 站点链接
 #   description: description of friend/site 对朋友或其站点的说明
 
+- nickname: Lruihao
+  avatar: https://lruihao.cn/images/avatar.jpg
+  url: https://lruihao.cn
+  description: Share programming experience and learning experience.
+
 - nickname: new site
   avatar:
   url: https://github.com/Lruihao/FixIt/pulls

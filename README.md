@@ -101,6 +101,7 @@ the FixIt theme may be more suitable for you.
 
 To see this theme in action, here are some live demo sites which are rendered with **FixIt** theme.
 
+* [Lruihao's note](https://lruihao.cn)
 * Add a your site by [making a PR](https://github.com/Lruihao/FixIt/pulls)
 
 ## Features
