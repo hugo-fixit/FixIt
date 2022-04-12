@@ -100,6 +100,7 @@ sh fixit_checker.sh
 ## 谁在用 FixIt
 为了直观地浏览主题特性，这里有一些基于 **FixIt** 主题渲染的预览网站。
 
+* [李瑞豪的博客](https://lruihao.cn)
 * 你可以通过 [提交 PR](https://github.com/Lruihao/FixIt/pulls) 添加你的网站
 
 ## 特性
