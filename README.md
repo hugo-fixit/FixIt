@@ -17,14 +17,11 @@ The FixIt theme inherits the excellent functions of these themes, and adds new f
 
 ![Hugo Theme FixIt](https://github.com/Lruihao/FixIt/raw/master/images/Apple-Devices-Preview.png)
 
-## Getting started
+## [Getting started](https://fixit.lruihao.cn/categories/documentation/)
+
 Head to this [documentation page](https://fixit.lruihao.cn/theme-documentation-basics/) for a complete guidence to get started with the FixIt theme.
 
-### [Demo Site](https://fixit.lruihao.cn)
-To see this theme in action, here is a live [demo site](https://fixit.lruihao.cn) which is rendered with **FixIt** theme.
-
-### [Documentation](https://fixit.lruihao.cn/categories/documentation/)
-Build Documentation Locally:
+Or run [Documentation Site](https://fixit.lruihao.cn) locally:
 
 ```bash
 hugo server --source=exampleSite
@@ -32,7 +29,7 @@ hugo server --source=exampleSite
 
 Of course, you can also read the [FixIt wiki](https://github.com/Lruihao/FixIt/wiki) directly.
 
-## Migrate from LoveIt
+## Migrate and Update
 
 If you are currently using the LoveIt theme (or some other themes), it is very easy to migrate to FixIt.
 
@@ -99,6 +96,12 @@ if you prefer the design language and freedom of the FixIt theme,
 if you want to use the extended Font Awesome icons conveniently,  
 if you want to embed mathematical formulas, flowcharts, music or Bilibili videos in your posts,  
 the FixIt theme may be more suitable for you.  
+
+## Who used FixIt
+
+To see this theme in action, here are some live demo sites which are rendered with **FixIt** theme.
+
+* Add a your site by [making a PR](https://github.com/Lruihao/FixIt/pulls)
 
 ## Features
 
@@ -193,7 +196,7 @@ FixIt supports the following languages:
 
 ## Questions, ideas, bugs, pull requests
 
-All feedback is welcome! Head over to the [issue tracker](https://github.com/Lruihao/FixIt/issues).
+All feedback is welcome! Head over to the [issues](https://github.com/Lruihao/FixIt/issues) or [discussions](https://github.com/Lruihao/FixIt/discussions) tracker.
 
 ## License
 

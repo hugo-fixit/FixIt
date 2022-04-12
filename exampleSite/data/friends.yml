@@ -4,19 +4,7 @@
 #   url: site link 站点链接
 #   description: description of friend/site 对朋友或其站点的说明
 
-- nickname: FixIt Source
-  avatar: /images/Apple-Devices-Preview.png
-  url: https://github.com/Lruihao/FixIt
-  description: A clean, elegant but advanced blog theme for Hugo
-- nickname: FixIt Demo
+- nickname: new site
   avatar:
-  url: /
-  description: 一个简洁、优雅且高效的 Hugo 主题
-- nickname: Lruihao
-  avatar: https://lruihao.cn/images/avatar.jpg
-  url: https://lruihao.cn
-  description: Lruihao's Note
-- nickname: Cell
-  avatar: https://avatars.githubusercontent.com/u/33419593?v=4
-  url: https://github.com/Lruihao
-  description:  Lruihao's GitHub
+  url: https://github.com/Lruihao/FixIt/pulls
+  description: Create a pull request to add a new site.

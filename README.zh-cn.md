@@ -17,21 +17,19 @@ FixIt 主题继承了这些主题的优秀功能，并在此基础上添加了�
 
 ![Hugo Theme FixIt](https://github.com/Lruihao/FixIt/raw/master/images/Apple-Devices-Preview.png)
 
-## 立即开始
+## [立即开始](https://fixit.lruihao.cn/zh-cn/categories/documentation/)
+
 前往这篇 [文档](https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/)，阅读关于安装与使用的详细指南。
 
-### 主题 [预览](https://fixit.lruihao.cn/zh-cn/)
-为了直观地浏览主题特性，这里有一个基于 **FixIt** 主题渲染的 [预览网站](https://fixit.lruihao.cn/zh-cn/)。
+或者，在本地构建 [文档](https://fixit.lruihao.cn/zh-cn/)：
 
-### [文档](https://fixit.lruihao.cn/zh-cn/categories/documentation/)
-在本地构建文档：
 ```bash
 hugo server --source=exampleSite
 ```
 
 当然，你也可以直接阅读 [FixIt 主题维基](https://github.com/Lruihao/FixIt/wiki)
 
-## 从 LoveIt 迁移
+## 迁移和升级
 
 如果你现在正在使用 LoveIt 主题（或者一些其他的主题），你可以很容易地迁移至 FixIt。
 
@@ -98,6 +96,11 @@ sh fixit_checker.sh
 如果你想便捷地使用扩展的 Font Awesome 图标，  
 如果你想在文章内嵌数学公式、流程图、音乐或是 Bilibili 视频，  
 那么，FixIt 主题可能是更适合你。  
+
+## 谁在用 FixIt
+为了直观地浏览主题特性，这里有一些基于 **FixIt** 主题渲染的预览网站。
+
+* 你可以通过 [提交 PR](https://github.com/Lruihao/FixIt/pulls) 添加你的网站
 
 ## 特性
 
@@ -190,9 +193,9 @@ FixIt 支持下列语言：
 
 ## [更新日志](https://github.com/Lruihao/FixIt/blob/master/CHANGELOG.md)
 
-## 问题、想法、 bugs 和 PRs
+## 问题、想法、bugs 和 PRs
 
-所有的反馈都是欢迎的！详见 [issue tracker](https://github.com/Lruihao/FixIt/issues)。
+所有的反馈都是欢迎的！详见 [议题](https://github.com/Lruihao/FixIt/issues) 或者 [讨论](https://github.com/Lruihao/FixIt/discussions)。
 
 ## 许可协议
 

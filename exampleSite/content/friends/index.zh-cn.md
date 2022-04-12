@@ -1,27 +1,18 @@
 ---
 title: "友情链接"
-subtitle: 这只是一个演示网站，不进行友链交换哦 ~
+subtitle: 记录一些使用 FixIt 主题的朋友们
 type: "friends"
-description: "Hugo FixIt 主题的友链模板 Demo"
+description: "FixIt 主题的友链模板 Demo"
 keywords: 
   - Hugo
-  - friends tempalate
+  - 友情链接
 comment: false
 ---
 
-## 基本信息
+---
 
-```yaml
-- nickname: 菠菜眾長
-  avatar: https://lruihao.cn/images/avatar.jpg
-  url: https://lruihao.cn
-  description: 李瑞豪的博客
-```
+{{< admonition tip "添加您的 FixIt 网站" >}}
+您可以通过 [创建 PR :(fas fa-code-branch fa-fw):](https://github.com/Lruihao/FixIt/pulls) 将您的 FixIt 网站添加到此页面。
 
-## 友情提醒
-
-{{< admonition info "Notice" true >}}
-1. 互换友链请按以上格式在评论留言。（仅限个人非商业博客/网站）
-2. 提醒：网站失效、停止维护、内容不当都可能被取消连接！
-3. 那些不尊重他人劳动成果，转载不加出处的，或恶意行为的网站，还请您不要来进行交换了。
+请确保已添加的网站一直处在运行状态，否则将取消链接。
 {{< /admonition >}}

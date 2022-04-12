@@ -1252,7 +1252,7 @@ defaultContentLanguage = "zh-cn"
 
 要覆盖默认值，请在你项目的 i18n 目录 `i18n/<languageCode>.toml` 中创建一个新文件，并从 `themes/FixIt/i18n/en.toml` 中获得提示。
 
-另外，由于你的翻译可能会帮助到其他人，请花点时间通过 [:(fas fa-code-branch fa-fw): 创建一个 PR](https://github.com/Lruihao/FixIt/pulls) 来贡献主题翻译，谢谢！
+另外，由于你的翻译可能会帮助到其他人，请花点时间通过 [创建一个 PR :(fas fa-code-branch fa-fw):](https://github.com/Lruihao/FixIt/pulls) 来贡献主题翻译，谢谢！
 
 ## 5 搜索
 

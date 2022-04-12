@@ -1241,7 +1241,7 @@ Translations strings are used for common default values used in the theme. Trans
 
 To override these values, create a new file in your local i18n folder `i18n/<languageCode>.toml` and inspire yourself from `themes/FixIt/i18n/en.toml`.
 
-By the way, as these translations could be used by other people, please take the time to propose a translation by [:(fas fa-code-branch fa-fw): making a PR](https://github.com/Lruihao/FixIt/pulls) to the theme!
+By the way, as these translations could be used by other people, please take the time to propose a translation by [ making a PR :(fas fa-code-branch fa-fw):](https://github.com/Lruihao/FixIt/pulls) to the theme!
 
 ## 5 Search
 

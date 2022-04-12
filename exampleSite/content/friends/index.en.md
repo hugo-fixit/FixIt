@@ -1,8 +1,8 @@
 ---
 title: "Friends"
-subtitle: This is just a demo website, no links exchange ~
+subtitle: Recording some friends who use FixIt theme
 type: "friends"
-description: "Friends tempalate demo of Hugo theme FixIt"
+description: "Friends tempalate demo of FixIt theme"
 keywords: 
   - Hugo
   - friends tempalate
@@ -10,19 +10,9 @@ comment: false
 ---
 
 ---
-## Base info
 
-```yaml
-- nickname: Lruihao
-  avatar: https://lruihao.cn/images/avatar.jpg
-  url: https://lruihao.cn
-  description: Lruihao's Note
-```
+{{< admonition tip "Add your FixIt site" >}}
+You could add your FixIt site to this page via [making a PR :(fas fa-code-branch fa-fw):](https://github.com/Lruihao/FixIt/pulls).
 
-## Friendly Reminder
-
-{{< admonition info "Notice" true >}}
-1. If you want to exchange link, please leave a comment in the above format. (personal non-commercial blogs / websites only)
-2. Warn: Website failure, stop maintenance and improper content may be cancelled!
-3. Those websites that do not respect other people's labor achievements, reprint without source, or malicious acts, please do not come to exchange.
+Please ensure that the added website is always running, otherwise it will be unlinked.
 {{< /admonition >}}
