@@ -1010,14 +1010,14 @@ The `mapbox` shortcode has the following named parameters to use Mapbox GL JS:
 Example simple `mapbox` input:
 
 ```go-html-template
-{{</* mapbox 121.485 31.233 12 */>}}
+{{</* mapbox 113.953277 22.559102 11 */>}}
 Or
-{{</* mapbox lng=121.485 lat=31.233 zoom=12 */>}}
+{{</* mapbox lng=113.953277 lat=22.559102 zoom=11 */>}}
 ```
 
 The rendered output looks like this:
 
-{{< mapbox 121.485 31.233 12 >}}
+{{< mapbox 113.953277 22.559102 11 >}}
 
 Example `mapbox` input with the custom style:
 
