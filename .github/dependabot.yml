@@ -10,3 +10,7 @@ updates:
     schedule:
       interval: "monthly"
     open-pull-requests-limit: 1000
+    assignees:
+      - "Lruihao"
+    labels:
+      - "dependencies"

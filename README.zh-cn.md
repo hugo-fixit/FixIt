@@ -188,7 +188,7 @@ FixIt 支持下列语言：
 * 越南语
 * 繁体中文
 * [贡献一种新的语言](https://github.com/Lruihao/FixIt/pulls)
-[语言兼容性](https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/#language-compatibility)
+* [语言兼容性](https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/#language-compatibility)
 
 ## [路线图](https://github.com/Lruihao/FixIt/projects/1)
 
@@ -197,6 +197,16 @@ FixIt 支持下列语言：
 ## 问题、想法、bugs 和 PRs
 
 所有的反馈都是欢迎的！详见 [议题](https://github.com/Lruihao/FixIt/issues) 或者 [讨论](https://github.com/Lruihao/FixIt/discussions)。
+
+## 参与贡献
+
+请参阅 [CONTRIBUTING.md](/CONTRIBUTING.md) 以了解贡献该项目的基本信息。
+
+确保在贡献和参与讨论时遵守 [CODE_OF_CONDUCT.md](/CODE_OF_CONDUCT.md)。
+
+**贡献时，请先通过此存储库上的问题讨论您希望进行的更改，然后再进行实际更改**。
+
+## [所有贡献者](/contributors.md)
 
 ## 许可协议
 

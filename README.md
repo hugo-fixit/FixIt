@@ -189,7 +189,7 @@ FixIt supports the following languages:
 * Vietnamese
 * Traditional Chinese
 * [Contribute with a new language](https://github.com/Lruihao/FixIt/pulls)
-[Languages Compatibility](https://fixit.lruihao.cn/theme-documentation-basics/#language-compatibility)
+* [Languages Compatibility](https://fixit.lruihao.cn/theme-documentation-basics/#language-compatibility)
 
 ## [Roadmap](https://github.com/Lruihao/FixIt/projects/1)
 
@@ -198,6 +198,16 @@ FixIt supports the following languages:
 ## Questions, ideas, bugs, pull requests
 
 All feedback is welcome! Head over to the [issues](https://github.com/Lruihao/FixIt/issues) or [discussions](https://github.com/Lruihao/FixIt/discussions) tracker.
+
+## Contributing
+
+Please see [CONTRIBUTING.md](/CONTRIBUTING.md) for getting started with the contribution.
+
+Make sure that you follow [CODE_OF_CONDUCT.md](/CODE_OF_CONDUCT.md) while contributing and engaging in the discussions.
+
+**When contributing, please first discuss the change you wish to make via an issue on this repository before making the actual change**.
+
+## [Contributors](/contributors.md)
 
 ## License
 
