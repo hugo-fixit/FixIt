@@ -804,7 +804,7 @@ class Theme {
   }
 
   initSiteTime() {
-    if (this.config.ibruce.enable && this.config.ibruce.siteTime) {
+    if (this.config?.ibruce?.enable && this.config?.ibruce?.siteTime) {
       this.siteTime = setInterval(this.getSiteTime, 500);
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
@@ -832,7 +832,7 @@ class Theme {
   }
 
   initWatermark() {
-    this.config.watermark.enable &&
+    this.config?.watermark?.enable &&
       new Watermark({
         content: this.config.watermark.content || '<img class="fixit-icon" src="/images/fixit.svg" alt="FixIt logo" /> FixIt Theme',
         appendTo: this.config.watermark.appendto || '.wrapper>main',
