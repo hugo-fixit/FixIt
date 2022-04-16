@@ -135,6 +135,7 @@
     @include link(false, false);
 
     a {
+      white-space: normal;
       @include overflow-wrap(break-word);
 
       [theme='dark'] & b,

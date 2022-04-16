@@ -26,3 +26,9 @@ normal content
 **hello** *world*  
 this is a center-quote shortcode example.
 {{< /center-quote >}}
+
+{{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} mathematical formulas (https://katex.org)
+
+```
+{{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} mathematical formulas (https://katex.org)
+```
