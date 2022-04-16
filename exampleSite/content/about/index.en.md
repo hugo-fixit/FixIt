@@ -126,3 +126,4 @@ Thanks to the authors of following resources included in the theme:
 * [Artalk](https://artalk.js.org/)
 * [Waline](https://waline.js.org/)
 * [Twikoo](https://twikoo.js.org/)
+* [github-corners](https://github.com/tholman/github-corners)

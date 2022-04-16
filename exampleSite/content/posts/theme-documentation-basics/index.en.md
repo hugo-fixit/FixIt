@@ -774,6 +774,11 @@ Please open the code block below to view the complete sample configuration :(far
   # "assets/js/_custom.js"
   [params.customJS]
     enable = true
+  # {{< version 0.2.14 >}} GitHub banner in the top-right corner
+  [params.githubCorner]
+    enable = false
+    permalink = "https://github.com/Lruihao/FixIt"
+    title = "View source on GitHub"
 
 # Markup related configuration in Hugo
 [markup]

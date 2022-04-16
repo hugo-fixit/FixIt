@@ -241,6 +241,7 @@ FixIt 主题中用到了以下项目，感谢它们的作者：
 * [Artalk](https://artalk.js.org/)
 * [Waline](https://waline.js.org/)
 * [Twikoo](https://twikoo.js.org/)
+* [github-corners](https://github.com/tholman/github-corners)
 
 ## 作者
 

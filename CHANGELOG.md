@@ -14,12 +14,17 @@ All notable changes to this project will be documented in this file.
   - Add external icon for external links automatically
   - Add download icon for downloadable links
 - :sparkles: Feat: link shortcode add `external-icon` option ([#96](https://github.com/Lruihao/FixIt/issues/96))
+- :sparkles: Feat: add GitHub Corners support ([#106](https://github.com/Lruihao/FixIt/issues/106))
 - :bug: Fix: invalid front matter `comment: true` ([#108](https://github.com/Lruihao/FixIt/issues/108))
 - :bug: Fix: ibruce and watermark option negative value error ([#114](https://github.com/Lruihao/FixIt/issues/114))
 - :sparkles: Style: add some common CSS styles Class ([#101](https://github.com/Lruihao/FixIt/issues/101))
 - :memo: Docs: revised theme documentations
 - :zap: Perf: remove third-party library clipboard.js ([#84](https://github.com/Lruihao/FixIt/issues/84))
 - :pencil2: Docs: fix highlight url typo in `theme-documentation-built-in-shortcodes` (@d-baer[#85](https://github.com/Lruihao/FixIt/pull/85))
+- :wrench: Chore(deps-dev):
+  - Bump minimist from 1.2.5 to 1.2.6 ([#92](https://github.com/Lruihao/FixIt/pull/92))
+  - Bump @babel/core from 7.17.5 to 7.17.9 ([#98](https://github.com/Lruihao/FixIt/pull/98))
+  - Bump core-js from 3.21.1 to 3.22.0 ([#117](https://github.com/Lruihao/FixIt/pull/117))
 - **Full Changelog:** @Lruihao [`v0.2.13...v0.2.14`](https://github.com/Lruihao/FixIt/compare/v0.2.13...v0.2.14)
 
 ## v0.2.13 [2022.3.14]

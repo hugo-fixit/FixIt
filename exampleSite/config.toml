@@ -120,7 +120,7 @@ enableEmoji = true
         title = "GitHub"
         weight = 8
         [languages.en.menu.main.params]
-          class = "text-center"
+          class = "d-none-desktop text-center"
     [languages.en.params]
       # site description
       description = "About FixIt Theme"
@@ -346,7 +346,7 @@ enableEmoji = true
         title = "GitHub"
         weight = 7
         [languages.zh-cn.menu.main.params]
-          class = "text-center"
+          class = "d-none-desktop text-center"
     [languages.zh-cn.params]
       # 网站描述
       description = "关于 FixIt 主题"
@@ -507,6 +507,11 @@ enableEmoji = true
         opacity = 0.0125
         # 单水印高度 单位：px
         height = 21
+      # 在顶部右侧显示 GitHub 开源链接 since v0.2.14
+      [languages.zh-cn.params.githubCorner]
+        enable = true
+        permalink = "https://github.com/Lruihao/FixIt"
+        title = "在 GitHub 上查看源代码"
 
 [params]
   # FixIt theme version
@@ -1085,6 +1090,12 @@ enableEmoji = true
   # "assets/js/_custom.js"
   [params.customJS]
     enable = true
+  # GitHub banner in the top-right corner since v0.2.14
+  # 在顶部右侧显示 GitHub 开源链接 since v0.2.14
+  [params.githubCorner]
+    enable = true
+    permalink = "https://github.com/Lruihao/FixIt"
+    title = "View source on GitHub"
 
 # Markup related configuration in Hugo
 # Hugo 解析文档的配置

@@ -1,0 +1,36 @@
+@keyframes octocat-wave {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20%,
+  60% {
+    transform: rotate(-25deg);
+  }
+  40%,
+  80% {
+    transform: rotate(10deg);
+  }
+}
+
+.github-corner {
+  display: block;
+  width: 1.5rem;
+
+  :hover .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
+  svg {
+    border: 0;
+    color: white;
+    fill: $header-background-color-dark;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    [theme='dark'] & {
+      color: black;
+      fill: $header-background-color;
+    }
+  }
+}

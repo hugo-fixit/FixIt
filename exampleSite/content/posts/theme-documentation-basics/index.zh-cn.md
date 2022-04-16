@@ -784,6 +784,11 @@ hugo
   # "assets/js/_custom.js"
   [params.customJS]
     enable = true
+  # {{< version 0.2.14 >}} 在顶部右侧显示 GitHub 开源链接
+  [params.githubCorner]
+    enable = false
+    permalink = "https://github.com/Lruihao/FixIt"
+    title = "在 GitHub 上查看源代码"
 
 # Hugo 解析文档的配置
 [markup]
