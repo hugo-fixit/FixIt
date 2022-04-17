@@ -35,14 +35,14 @@
       (.ExternalIcon | default false) 
       | and $external | and (eq (hasPrefix .Content `<img` ) false)
       | and (eq ((strings.HasSuffix .Content `</i>`) | or (strings.HasSuffix .Content `):`)) false)
-    }}
-      {{ if .Download }}
-        {{ dict "Class" "fas fa-cloud-download-alt fa-fw fa-xs" | partial "plugin/icon.html" }}
+    -}}
+      {{- if .Download -}}
+        {{- dict "Class" "fas fa-cloud-download-alt fa-fw fa-xs ms-1" | partial "plugin/icon.html" -}}
       {{- else -}}
-        {{ dict "Class" "fas fa-external-link-alt fa-fw fa-xs" | partial "plugin/icon.html" }}
+        {{- dict "Class" "fas fa-external-link-alt fa-fw fa-xs ms-1" | partial "plugin/icon.html" -}}
       {{- end -}}
     {{- else if .Download }}
-      {{ dict "Class" "fas fa-download fa-fw fa-xs" | partial "plugin/icon.html" }}
+      {{- dict "Class" "fas fa-download fa-fw fa-xs ms-1" | partial "plugin/icon.html" -}}
     {{- end -}}
   {{- else -}}
     <span class="cl-backdrop"></span>
