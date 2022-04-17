@@ -13,10 +13,13 @@
     width: 45%;
     display: flex;
     align-items: flex-start;
-    margin-top: 2rem;
     min-height: 10rem;
     padding: 0 2%;
     position: relative;
+
+    &:nth-child(n+3){
+      margin-top: 2rem;
+    }
 
     .card-item-wrapper {
       width: 100%;
