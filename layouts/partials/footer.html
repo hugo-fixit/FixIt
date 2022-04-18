@@ -21,7 +21,7 @@
         <div class="footer-line copyright">
           {{- /* Copyright year */ -}}
           {{- if ne .Site.Params.footer.copyright false -}}
-            <i class="far fa-copyright fa-fw"></i>
+            <i class="far fa-copyright fa-fw"></i>&nbsp;
             {{- with .Site.Params.footer.since -}}
               <span itemprop="copyrightYear">
                 {{- if lt . now.Year }}{{ . }} - {{ end }}{{ now.Year -}}
