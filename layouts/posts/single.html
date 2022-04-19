@@ -41,8 +41,8 @@
           {{- $category := partialCached "function/path.html" . . | printf "/categories/%v" | $.Site.GetPage -}}
           {{- $categories = $categories | append (printf `<a href="%v"><i class="far fa-folder fa-fw"></i>&nbsp;%v</a>` $category.RelPermalink $category.Title) -}}
         {{- end -}}
-        {{- with delimit $categories "&nbsp;" -}}
-          &nbsp;<span class="post-category">
+        {{- with delimit $categories "&ensp;" }}
+          <span class="post-category">
             {{- dict "Categories" . | T "includedInCategories" | safeHTML -}}
           </span>
         {{- end -}}

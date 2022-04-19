@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: invalid front matter `comment: true` ([#108](https://github.com/Lruihao/FixIt/issues/108))
 - :bug: Fix: ibruce and watermark option negative value error ([#114](https://github.com/Lruihao/FixIt/issues/114))
 - :sparkles: Style: add some common CSS styles Class ([#101](https://github.com/Lruihao/FixIt/issues/101))
+- :lipstick: Style: add the gap between and icon and text at blending typesetting (@ctj12461, @Lruihao[#118](https://github.com/Lruihao/FixIt/pull/118))
 - :memo: Docs: revised theme documentations
 - :zap: Perf: remove third-party library clipboard.js ([#84](https://github.com/Lruihao/FixIt/issues/84))
 - :pencil2: Docs: fix highlight url typo in `theme-documentation-built-in-shortcodes` (@d-baer[#85](https://github.com/Lruihao/FixIt/pull/85))
