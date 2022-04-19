@@ -22,7 +22,7 @@
 </table>
 <!-- readme: collaborators -end -->
 
-## Contributors
+## [Contributors](https://github.com/Lruihao/FixIt/graphs/contributors)
 
 <!-- readme: contributors,d-baer -start -->
 <table>

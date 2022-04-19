@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+    workflow_dispatch:
 jobs:
   contrib-readme-job:
     runs-on: ubuntu-latest
