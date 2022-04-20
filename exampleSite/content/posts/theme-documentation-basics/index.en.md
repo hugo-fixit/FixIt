@@ -1075,8 +1075,15 @@ You can also add user-defined content to menu items via the `params` field. The 
 
 {{< admonition >}}
 The draft menu items and posts/pages can be rendered by starting the `Hugo server` command or adding the `-D`/`--buildDrafts` parameter to `hugo` command.
+{{< /admonition >}}
 
+{{< admonition tip >}}
 This helps to distinguish the different contents of preview environment and production environment during deployment.
+
+For example:
+
+-  [preview environment with draft menu items](https://fixit-1uivrlhmq-lruihao.vercel.app)
+-  [production environment without draft menu items](https://fixit.lruihao.cn)
 {{< /admonition >}}
 
 #### 3.4.3 Add content to Menu {#content-to-menu}

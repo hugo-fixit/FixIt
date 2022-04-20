@@ -1086,8 +1086,15 @@ Hugo 有一个简单而强大的 [菜单系统](https://gohugo.io/content-manage
 
 {{< admonition >}}
 `hugo server` 命令启动或者为 `hugo` 添加 `-D`/`--buildDrafts` 参数，都能渲染草稿菜单和页面。
+{{< /admonition >}}
 
+{{< admonition tip >}}
 这样做有利于在部署时很好地区分**预览环境**和**生产环境**不同的内容。
+
+例如：
+
+-  [有草稿菜单的预览环境](https://fixit-1uivrlhmq-lruihao.vercel.app)
+-  [没有草稿菜单的生产环境](https://fixit.lruihao.cn)
 {{< /admonition >}}
 
 #### 3.4.3 添加内容到菜单 {#content-to-menu}
