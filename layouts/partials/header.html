@@ -1,3 +1,5 @@
+{{ $BuildDrafts :=.Site.BuildDrafts }}
+
 {{- /* Desktop header */ -}}
 <header class="desktop" id="header-desktop">
   <div class="header-wrapper">
@@ -41,7 +43,7 @@
           {{- with .Page -}}
             {{- $url = .RelPermalink -}}
           {{- end -}}
-          {{- if (ne hugo.Environment "production") | or (ne .Params.Draft true) -}}
+          {{- if (ne .Params.Draft true) | or $BuildDrafts -}}
             <li
               class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}"
               {{ if .HasChildren }}has-children{{ end }}

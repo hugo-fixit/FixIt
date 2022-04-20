@@ -1052,7 +1052,7 @@ The following is a complete menu item configuration:
     [menu.main.params]
       # add css class to a specific menu item
       class = 'text-center'
-      # whether set as a draft menu item that will not be rendered in the production environment
+      # whether set as a draft menu item whose function is similar to a draft post/page
       draft = false
 ```
 
@@ -1071,7 +1071,13 @@ The parent item of a menu item should be the `identifier` of another menu item, 
 You can also add user-defined content to menu items via the `params` field. The FixIt theme currently provides two parameters:
 
 * **class** *{String}* add css class to a specific menu item
-* **draft** *{Boolean}* whether set as a draft menu item that will not be rendered in the production environment
+* **draft** *{Boolean}* whether set as a draft menu item whose function is similar to a draft post/page
+
+{{< admonition >}}
+The draft menu items and posts/pages can be rendered by starting the `Hugo server` command or adding the `-D`/`--buildDrafts` parameter to `hugo` command.
+
+This helps to distinguish the different contents of preview environment and production environment during deployment.
+{{< /admonition >}}
 
 #### 3.4.3 Add content to Menu {#content-to-menu}
 

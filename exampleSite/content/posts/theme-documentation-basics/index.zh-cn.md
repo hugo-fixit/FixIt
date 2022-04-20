@@ -1063,7 +1063,7 @@ Hugo 有一个简单而强大的 [菜单系统](https://gohugo.io/content-manage
     [menu.main.params]
       # 添加 CSS 类到特定的菜单项
       class = 'text-center'
-      # 是否为草稿菜单，草稿菜单不会在生产环境渲染
+      # 是否为草稿菜单，类似草稿页面
       draft = false
 ```
 
@@ -1082,7 +1082,13 @@ Hugo 有一个简单而强大的 [菜单系统](https://gohugo.io/content-manage
 您还可以通过 `params` 字段将自定义的内容添加到菜单项。 FixIt 主题目前提供了两个参数的配置：
 
 * **class** *{String}* 添加 CSS 类到特定的菜单项
-* **draft** *{Boolean}* 是否为草稿菜单，草稿菜单不会在生产环境渲染
+* **draft** *{Boolean}* 是否为草稿菜单，类似草稿页面
+
+{{< admonition >}}
+`hugo server` 命令启动或者为 `hugo` 添加 `-D`/`--buildDrafts` 参数，都能渲染草稿菜单和页面。
+
+这样做有利于在部署时很好地区分**预览环境**和**生产环境**不同的内容。
+{{< /admonition >}}
 
 #### 3.4.3 添加内容到菜单 {#content-to-menu}
 
