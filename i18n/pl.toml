@@ -32,6 +32,11 @@ other = "Kategoria"
 other = "Kategorie"
 # === Taxonomy ===
 
+# === Section ===
+[recentlyUpdated]
+other = "Ostatnio zaktualizowane"
+# === Section ===
+
 # === Pagination ===
 [more]
 other = "Więcej"
@@ -41,6 +46,9 @@ other = "Więcej"
 [selectLanguage]
 other = "Wybierz język"
 
+[noMoretTranslations]
+other = "Brak dalszych tłumaczeń"
+
 [switchTheme]
 other = "Przełącz schemat"
 # === partials/header.html ===
@@ -48,11 +56,20 @@ other = "Przełącz schemat"
 # === partials/footer.html ===
 [poweredBySome]
 other = "Napędzany przez {{ .Hugo }} | Szablon - {{ .Theme }}"
+
+[siteUV]
+other = "Całkowita odwiedzających"
+
+[sitePV]
+other = "Łączna wizyt"
+
+[siteRunning]
+other = "Website running ..."
 # === partials/footer.html ===
 
 # === partials/comment.html ===
 [valineLang]
-other = "en"
+other = "en" # Valine nie obsługuje języka polskiego
 
 [valinePlaceholder]
 other = "Twój komentarz ..."
@@ -82,6 +99,21 @@ other = "pl"
 
 [copyToClipboard]
 other = "Skopiuj do schowka"
+
+[editLockTitle]
+other = "Zablokuj edytowalny blok kodu"
+
+[editUnLockTitle]
+other = "Odblokuj edytowalny blok kodu"
+
+[cookieconsentMessage]
+other = "Ta strona korzysta z plików Cookies, aby poprawić komfort użytkowania."
+
+[cookieconsentDismiss]
+other = "Zgodzić się"
+
+[cookieconsentLink]
+other = "Ucz się więcej"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===
@@ -110,6 +142,9 @@ other = "{{ .Count }} minuty"
 [views]
 other = "wyświetleń"
 
+[comments]
+other = "komentarzy"
+
 [author]
 other = "Autor"
 
@@ -118,6 +153,9 @@ other = "Zaktualizowano {{ .Date }}"
 
 [readMarkdown]
 other = "Zobacz Markdown"
+
+[editThisPage]
+other = "Edytuj tą stronę"
 
 [back]
 other = "Wstecz"
@@ -128,14 +166,8 @@ other = "Strona główna"
 [readMore]
 other = "Czytaj więcej"
 
-[cookieconsentMessage]
-other = "Ta strona korzysta z plików Cookies, aby poprawić komfort użytkowania."
-
-[cookieconsentDismiss]
-other = "Zgodzić się"
-
-[cookieconsentLink]
-other = "Ucz się więcej"
+[expirationReminder]
+other = "Ten artykuł był ostatnio aktualizowany {{ .Date }}, jego treść może być nieaktualna."
 # === posts/single.html ===
 
 # === 404.html ===
@@ -145,6 +177,14 @@ other = "Nie znaleziono strony"
 [pageNotFoundText]
 other = "Wybacz, chyba coś namieszaliśmy."
 # === 404.html ===
+
+# === offline ===
+[offlineTitle]
+other = "Offline"
+
+[offlineText]
+other = "Nie masz połączenia z Internetem, dostępne będą tylko strony z pamięci podręcznej."
+# === offline ===
 
 # === shortcodes/admonition.html ===
 [note]

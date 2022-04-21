@@ -32,6 +32,11 @@ other = "Kategorie"
 other = "Kategorien"
 # === Taxonomy ===
 
+# === Section ===
+[recentlyUpdated]
+other = "Zuletzt aktualisiert"
+# === Section ===
+
 # === Pagination ===
 [more]
 other = "Mehr"
@@ -41,6 +46,9 @@ other = "Mehr"
 [selectLanguage]
 other = "Sprache wählen"
 
+[noMoretTranslations]
+other = "Keine weiteren Übersetzungen"
+
 [switchTheme]
 other = "Thema wechseln"
 # === partials/header.html ===
@@ -48,11 +56,20 @@ other = "Thema wechseln"
 # === partials/footer.html ===
 [poweredBySome]
 other = "Ermöglicht durch {{ .Hugo }} | Thema - {{ .Theme }}"
+
+[siteUV]
+other = "Besucher insgesamt"
+
+[sitePV]
+other = "Besuche insgesamt"
+
+[siteRunning]
+other = "Website läuft ..."
 # === partials/footer.html ===
 
 # === partials/comment.html ===
 [valineLang]
-other = "en"
+other = "en" # Deutsch unterstützt Valine nicht
 
 [valinePlaceholder]
 other = "Ihr Kommentar ..."
@@ -85,6 +102,12 @@ other = "lib/lunr/lunr.de.js"
 
 [copyToClipboard]
 other = "In Zwischenablage kopieren"
+
+[editLockTitle]
+other = "Bearbeitbaren Codeblock sperren"
+
+[editUnLockTitle]
+other = "Bearbeiten des Codeblocks entsperren"
 
 [cookieconsentMessage]
 other = "Diese Website verwendet Cookies, um Ihre Erfahrung zu verbessern."
@@ -122,6 +145,9 @@ other = "{{ .Count }} minuten"
 [views]
 other = "aufrufe"
 
+[comments]
+other = "Kommentare"
+
 [author]
 other = "Autor"
 
@@ -131,6 +157,9 @@ other = "Aktualisiert am {{ .Date }}"
 [readMarkdown]
 other = "Markdown anzeigen"
 
+[editThisPage]
+other = "Diese Seite bearbeiten"
+
 [back]
 other = "Zurück"
 
@@ -139,6 +168,9 @@ other = "Startseite"
 
 [readMore]
 other = "Mehr lesen"
+
+[expirationReminder]
+other = "Dieser Artikel wurde zuletzt auf {{ .Date }} aktualisiert, der Inhalt kann veraltet sein."
 # === posts/single.html ===
 
 # === 404.html ===
@@ -148,6 +180,14 @@ other = "Seite nicht gefunden"
 [pageNotFoundText]
 other = "Leider konnte die von Ihnen angeforderte Seite nicht aufgerufen werden."
 # === 404.html ===
+
+# === offline ===
+[offlineTitle]
+other = "Offline"
+
+[offlineText]
+other = "Sie sind nicht mit dem Internet verbunden, es stehen nur zwischengespeicherte Seiten zur Verfügung."
+# === offline ===
 
 # === shortcodes/admonition.html ===
 [note]

@@ -32,6 +32,11 @@ other = "Категория"
 other = "Категории"
 # === Taxonomy ===
 
+# === Section ===
+[recentlyUpdated]
+other = "Недавно обновленные"
+# === Section ===
+
 # === Pagination ===
 [more]
 other = "Больше"
@@ -41,6 +46,9 @@ other = "Больше"
 [selectLanguage]
 other = "Выбор Языка"
 
+[noMoretTranslations]
+other = "Нет больше переводов"
+
 [switchTheme]
 other = "Сменить Тему"
 # === partials/header.html ===
@@ -48,11 +56,20 @@ other = "Сменить Тему"
 # === partials/footer.html ===
 [poweredBySome]
 other = "Сделано {{ .Hugo }} | Тема - {{ .Theme }}"
+
+[siteUV]
+other = "Всего посетителей"
+
+[sitePV]
+other = "Всего посещений"
+
+[siteRunning]
+other = "Website running ..."
 # === partials/footer.html ===
 
 # === partials/comment.html ===
 [valineLang]
-other = "en"
+other = "en" # Valine не поддерживает русский
 
 [valinePlaceholder]
 other = "Ваш комментарий ..."
@@ -85,6 +102,12 @@ other = "lib/lunr/lunr.ru.js"
 
 [copyToClipboard]
 other = "Копировать в буфер обмена"
+
+[editLockTitle]
+other = "Заблокировать редактируемый кодовый блок"
+
+[editUnLockTitle]
+other = "Разблокировать редактируемый блок кода"
 
 [cookieconsentMessage]
 other = "Этот сайт использует Cookies для улучшения вашего опыта."
@@ -122,6 +145,9 @@ other = "{{ .Count }} минут"
 [views]
 other = "просмотров"
 
+[comments]
+other = "комментариев"
+
 [author]
 other = "Автор"
 
@@ -131,6 +157,9 @@ other = "Oбновлена {{ .Date }}"
 [readMarkdown]
 other = "Читать Markdown"
 
+[editThisPage]
+other = "Редактировать эту страницу"
+
 [back]
 other = "Назад"
 
@@ -139,6 +168,9 @@ other = "Домой"
 
 [readMore]
 other = "Читать больше"
+
+[expirationReminder]
+other = "Эта статья последний раз обновлялась {{ .Date }}, содержание может быть устаревшим."
 # === posts/single.html ===
 
 # === 404.html ===
@@ -148,6 +180,14 @@ other = "Страница не найдена"
 [pageNotFoundText]
 other = "Страница, которую вы ищете, не существует. Приносим извинения."
 # === 404.html ===
+
+# === offline ===
+[offlineTitle]
+other = "Не в сети"
+
+[offlineText]
+other = "Вы не подключены к интернету, будут доступны только кешированные страницы."
+# === offline ===
 
 # === shortcodes/admonition.html ===
 [note]

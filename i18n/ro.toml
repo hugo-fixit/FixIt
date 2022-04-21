@@ -32,6 +32,11 @@ other = "Categorie"
 other = "Categorii"
 # === Taxonomy ===
 
+# === Section ===
+[recentlyUpdated]
+other = "Actualizat recent"
+# === Section ===
+
 # === Pagination ===
 [more]
 other = "Mai mult"
@@ -41,6 +46,9 @@ other = "Mai mult"
 [selectLanguage]
 other = "Selectare Limbă"
 
+[noMoretTranslations]
+other = "Nu mai sunt traduceri disponibile"
+
 [switchTheme]
 other = "Schimbare Temă"
 # === partials/header.html ===
@@ -48,11 +56,20 @@ other = "Schimbare Temă"
 # === partials/footer.html ===
 [poweredBySome]
 other = "Realizat de către {{ .Hugo }} | Temă - {{ .Theme }}"
+
+[siteUV]
+other = "Total vizitatori"
+
+[sitePV]
+other = "Total vizite"
+
+[siteRunning]
+other = "Site-ul rulează ..."
 # === partials/footer.html ===
 
 # === partials/comment.html ===
 [valineLang]
-other = "en"
+other = "en" # Valine nu suporta romana
 
 [valinePlaceholder]
 other = "Comentariul dvs ..."
@@ -85,6 +102,12 @@ other = "lib/lunr/lunr.ro.js"
 
 [copyToClipboard]
 other = "Copiați în clipboard"
+
+[editLockTitle]
+other = "Blocați blocul de cod editabil"
+
+[editUnLockTitle]
+other = "Deblocați blocul de cod editabil"
 
 [cookieconsentMessage]
 other = "Acest site web utilizează Cookies pentru a vă îmbunătăți experiența."
@@ -122,6 +145,9 @@ other = "{{ .Count }} minute"
 [views]
 other = "vizualizări"
 
+[comments]
+other = "comentarii"
+
 [author]
 other = "Autor"
 
@@ -131,6 +157,9 @@ other = "Actualizat la {{ .Date }}"
 [readMarkdown]
 other = "Citire Markdown"
 
+[editThisPage]
+other = "Editați această pagină"
+
 [back]
 other = "Înapoi"
 
@@ -139,6 +168,9 @@ other = "Acasă"
 
 [readMore]
 other = "Citește mai mult"
+
+[expirationReminder]
+other = "Acest articol a fost actualizat ultima dată pe {{ .Date }}, conținutul poate fi depășit."
 # === posts/single.html ===
 
 # === 404.html ===
@@ -148,6 +180,14 @@ other = "Pagina nu a fost găsită"
 [pageNotFoundText]
 other = "Pagina pe care o căutați nu există. Ne cerem scuze."
 # === 404.html ===
+
+# === offline ===
+[offlineTitle]
+other = "Deconectat"
+
+[offlineText]
+other = "Nu sunteți conectat la Internet, vor fi disponibile doar paginile stocate în cache."
+# === offline ===
 
 # === shortcodes/admonition.html ===
 [note]

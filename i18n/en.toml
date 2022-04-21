@@ -62,8 +62,8 @@ other = "Total visitors"
 [sitePV]
 other = "Total visits"
 
-[siteRuning]
-other = "Site running ..."
+[siteRunning]
+other = "Website running ..."
 # === partials/footer.html ===
 
 # === partials/comment.html ===

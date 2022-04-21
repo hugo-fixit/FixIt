@@ -63,7 +63,7 @@ other = "总访客数"
 [sitePV]
 other = "总访问量"
 
-[siteRuning]
+[siteRunning]
 other = "网站运行中 ..."
 # === partials/footer.html ===
 
@@ -113,7 +113,7 @@ other = "锁定可编辑代码块"
 other = "解锁可编辑代码块"
 
 [cookieconsentMessage]
-other = "本网站使用 Cookies 来改善您的浏览体验."
+other = "本网站使用 Cookies 来改善您的浏览体验。"
 
 [cookieconsentDismiss]
 other = "同意"

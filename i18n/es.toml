@@ -32,6 +32,11 @@ other = "Categoría"
 other = "Categorías"
 # === Taxonomy ===
 
+# === Section ===
+[recentlyUpdated]
+other = "Actualizado recientemente"
+# === Section ===
+
 # === Pagination ===
 [more]
 other = "Más"
@@ -41,6 +46,9 @@ other = "Más"
 [selectLanguage]
 other = "Selecciona el lenguage"
 
+[noMoretTranslations]
+other = "No hay más traducciones"
+
 [switchTheme]
 other = "Cambia el tema"
 # === partials/header.html ===
@@ -48,11 +56,20 @@ other = "Cambia el tema"
 # === partials/footer.html ===
 [poweredBySome]
 other = "Provisto por {{ .Hugo }} | Tema - {{ .Theme }}"
+
+[siteUV]
+other = "Total de visitantes"
+
+[sitePV]
+other = "Total de visitas"
+
+[siteRunning]
+other = "El sitio se está ejecutando ..."
 # === partials/footer.html ===
 
 # === partials/comment.html ===
 [valineLang]
-other = "en"
+other = "en" # Español no soportado por Valine
 
 [valinePlaceholder]
 other = "Tu comentario ..."
@@ -85,6 +102,12 @@ other = "lib/lunr/lunr.es.js"
 
 [copyToClipboard]
 other = "Copiar al portapapeles"
+
+[editLockTitle]
+other = "Bloquear bloque de código editable"
+
+[editUnLockTitle]
+other = "Desbloquear bloque de código editable"
 
 [cookieconsentMessage]
 other = "Este sitio web utiliza Cookies para mejorar su experiencia."
@@ -122,6 +145,9 @@ other = "{{ .Count }} minutos"
 [views]
 other = "vistas"
 
+[comments]
+other = "Comentarios"
+
 [author]
 other = "Autor"
 
@@ -131,6 +157,9 @@ other = "Actualizado el {{ .Date }}"
 [readMarkdown]
 other = "Leer Markdown"
 
+[editThisPage]
+other = "Editar esta página"
+
 [back]
 other = "Regresar"
 
@@ -139,6 +168,9 @@ other = "Inicio"
 
 [readMore]
 other = "Leer más"
+
+[expirationReminder]
+other = "Este artículo se actualizó por última vez el {{ .Date }}, es posible que el contenido no esté actualizado."
 # === posts/single.html ===
 
 # === 404.html ===
@@ -148,6 +180,14 @@ other = "Página no encontrada"
 [pageNotFoundText]
 other = "La página que estás buscando no existe. Lo siento."
 # === 404.html ===
+
+# === offline ===
+[offlineTitle]
+other = "desconectado"
+
+[offlineText]
+other = "No está conectado a Internet, solo estarán disponibles las páginas almacenadas en caché."
+# === offline ===
 
 # === shortcodes/admonition.html ===
 [note]

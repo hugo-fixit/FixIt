@@ -31,6 +31,11 @@ other = "Danh mục"
 other = "Danh mục"
 # === Taxonomy ===
 
+# === Section ===
+[recentlyUpdated]
+other = "Mới nhất"
+# === Section ===
+
 # === Pagination ===
 [more]
 other = "Thêm"
@@ -40,6 +45,9 @@ other = "Thêm"
 [selectLanguage]
 other = "Chọn Ngôn ngữ"
 
+[noMoretTranslations]
+other = "Không có nữa"
+
 [switchTheme]
 other = "Đổi chủ đề"
 # === partials/header.html ===
@@ -47,11 +55,20 @@ other = "Đổi chủ đề"
 # === partials/footer.html ===
 [poweredBySome]
 other = "Cung cấp bởi {{ .Hugo }} | Chủ đề - {{ .Theme }}"
+
+[siteUV]
+other = "Tổng khách truy cập"
+
+[sitePV]
+other = "Tổng lượt truy cập"
+
+[siteRunning]
+other = "Trang web đang chạy ..."
 # === partials/footer.html ===
 
 # === partials/comment.html ===
 [valineLang]
-other = "en"
+other = "en" # Valine không hỗ trợ tiếng Việt
 
 [valinePlaceholder]
 other = "Bình luận của bạn ..."
@@ -84,6 +101,12 @@ other = "lib/lunr/lunr.vi.js"
 
 [copyToClipboard]
 other = "Sao chép vào bộ nhớ tạm"
+
+[editLockTitle]
+other = "Khóa khối mã có thể chỉnh sửa"
+
+[editUnLockTitle]
+other = "Mở khóa khối mã có thể chỉnh sửa"
 
 [cookieconsentMessage]
 other = "Trang web này sử dụng Cookies để cải thiện trải nghiệm của bạn."
@@ -121,6 +144,9 @@ other = "{{ .Count }} phút"
 [views]
 other = "lượt xem"
 
+[comments]
+other = "bình luận"
+
 [author]
 other = "Tác giả"
 
@@ -130,6 +156,9 @@ other = "Cập nhật ngày {{ .Date }}"
 [readMarkdown]
 other = "Đọc với định dạng Markdown"
 
+[editThisPage]
+other = "Chỉnh sửa trang này"
+
 [back]
 other = "Quay lại"
 
@@ -138,6 +167,9 @@ other = "Trang chủ"
 
 [readMore]
 other = "Đọc thêm"
+
+[expirationReminder]
+other = "Bài viết này được cập nhật lần cuối vào {{ .Date }}, nội dung có thể đã lỗi thời."
 # === posts/single.html ===
 
 # === 404.html ===
@@ -147,6 +179,14 @@ other = "Không tìm thấy trang"
 [pageNotFoundText]
 other = "Trang bạn đang tìm kiếm không tồn tại. Xin lỗi."
 # === 404.html ===
+
+# === offline ===
+[offlineTitle]
+other = "ngoại tuyến"
+
+[offlineText]
+other = "Bạn chưa kết nối với Internet, chỉ các trang được lưu trong bộ nhớ cache sẽ khả dụng."
+# === offline ===
 
 # === shortcodes/admonition.html ===
 [note]

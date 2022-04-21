@@ -1141,7 +1141,7 @@ menu:
 | 意大利语 | `it` | `it` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 | 西班牙语 | `es` | `es` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 | 德语 | `de` | `de` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
-| 塞尔维亚语 | `pl` | `pl` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
+| 塞尔维亚语 | `sr` | `sr` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
 | 俄语 | `ru` | `ru` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 | 罗马尼亚语 | `ro` | `ro` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 | 越南语 | `vi` | `vi` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |

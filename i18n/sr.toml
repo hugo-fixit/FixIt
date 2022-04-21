@@ -32,6 +32,11 @@ other = "Категорија"
 other = "Категорије"
 # === Taxonomy ===
 
+# === Section ===
+[recentlyUpdated]
+other = "Недавно Ажурирано"
+# === Section ===
+
 # === Pagination ===
 [more]
 other = "Више"
@@ -41,6 +46,9 @@ other = "Више"
 [selectLanguage]
 other = "Изабери Језик"
 
+[noMoretTranslations]
+other = "Нема више превода"
+
 [switchTheme]
 other = "Промени Тему"
 # === partials/header.html ===
@@ -48,11 +56,20 @@ other = "Промени Тему"
 # === partials/footer.html ===
 [poweredBySome]
 other = "Покреће {{ .Hugo }} | Тема - {{ .Theme }}"
+
+[siteUV]
+other = "Укупно посетилаца"
+
+[sitePV]
+other = "Укупно посета"
+
+[siteRunning]
+other = "Website running ..."
 # === partials/footer.html ===
 
 # === partials/comment.html ===
 [valineLang]
-other = "sr"
+other = "sr" # Valine не подржава српски
 
 [valinePlaceholder]
 other = "Ваш коментар ..."
@@ -82,6 +99,12 @@ other = "sr"
 
 [copyToClipboard]
 other = "Копирај на радну таблу"
+
+[editLockTitle]
+other = "Закључај блок кода који се може уређивати"
+
+[editUnLockTitle]
+other = "Откључајте блок кода који се може уређивати"
 
 [cookieconsentMessage]
 other = "Ова веб локација користи Cookies да би побољшала ваше искуство."
@@ -119,6 +142,9 @@ other = "{{ .Count }} минута"
 [views]
 other = "прегледа"
 
+[comments]
+other = "коментари"
+
 [author]
 other = "Аутор"
 
@@ -128,6 +154,9 @@ other = "Ажурирано {{ .Date }}"
 [readMarkdown]
 other = "Читај Markdown"
 
+[editThisPage]
+other = "Уреди ову страницу"
+
 [back]
 other = "Назад"
 
@@ -136,6 +165,9 @@ other = "Почетна"
 
 [readMore]
 other = "Прочитај више"
+
+[expirationReminder]
+other = "Овај чланак је последњи пут ажуриран {{ .Date }}, садржај је можда застарео."
 # === posts/single.html ===
 
 # === 404.html ===
@@ -145,6 +177,14 @@ other = "Страница није пронађена"
 [pageNotFoundText]
 other = "Страница коју тражите не постоји. Жао нам је."
 # === 404.html ===
+
+# === offline ===
+[offlineTitle]
+other = "Оффлине"
+
+[offlineText]
+other = "Нисте повезани на Интернет, биће доступне само кеширане странице."
+# === offline ===
 
 # === shortcodes/admonition.html ===
 [note]
