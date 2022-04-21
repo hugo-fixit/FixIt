@@ -37,9 +37,15 @@
 
       .post-info-md {
         font-size: 0.8rem;
-        width: 8rem;
+        width: fit-content;
 
         @include link(false, false);
+
+        >span:not(:first-child)::before {
+          content: '|';
+          margin-left: 0.25rem;
+          margin-right: 0.25rem;
+        }
       }
 
       .post-info-share {

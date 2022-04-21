@@ -495,6 +495,11 @@ Please open the code block below to view the complete sample configuration :(far
       edit = true
       # the maximum number of lines of displayed code by default
       maxShownLines = 10
+    # {{< version 0.2.14 >}} Post edit
+    [params.page.edit]
+      enable = false
+      # url = "https://github.com/user-name/repo-name/edit/branch-name/subdirectory-name" # Link for fork & edit
+      url = "https://github.com/Lruihao/FixIt/edit/master/exampleSite/content" # Link for fork & edit
     # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} config (https://docs.mapbox.com/mapbox-gl-js)
     [params.page.mapbox]
       # access token of Mapbox GL JS

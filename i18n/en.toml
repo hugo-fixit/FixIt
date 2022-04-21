@@ -153,6 +153,9 @@ other = "Updated on {{ .Date }}"
 [readMarkdown]
 other = "Read Markdown"
 
+[editThisPage]
+other = "Edit this page"
+
 [back]
 other = "Back"
 

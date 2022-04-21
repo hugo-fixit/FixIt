@@ -30,9 +30,16 @@
         {{- if $params.linktomarkdown -}}
           {{- with .OutputFormats.Get "markdown" -}}
             <span>
-              <a class="link-to-markdown" href="{{ .RelPermalink }}" target="_blank">
-                {{- T "readMarkdown" -}}
-              </a>
+              {{- $options := dict "Class" "link-to-markdown" "Destination" .RelPermalink "Title" (T "readMarkdown") "Content" (T "readMarkdown") "externalIcon" false -}}
+              {{- partial "plugin/link.html" $options -}}
+            </span>
+          {{- end -}}
+        {{- end -}}
+        {{- with $params.edit -}}
+          {{- if .Enable -}}
+            <span>
+              {{- $options := dict "Class" "link-to-edit" "Destination" (printf "%v/%v" .Url $.File.Path) "Title" (T "editThisPage") "Content" (T "editThisPage") "externalIcon" false -}}
+              {{- partial "plugin/link.html" $options -}}
             </span>
           {{- end -}}
         {{- end -}}

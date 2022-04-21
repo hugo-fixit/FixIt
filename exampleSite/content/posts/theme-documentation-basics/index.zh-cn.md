@@ -492,6 +492,11 @@ hugo
       edit = true
       # 默认展开显示的代码行数
       maxShownLines = 10
+    # {{< version 0.2.14 >}} 文章编辑
+    [params.page.edit]
+      enable = false
+      # url = "https://github.com/user-name/repo-name/edit/branch-name/subdirectory-name" # Link for fork & edit
+      url = "https://github.com/Lruihao/FixIt/edit/master/exampleSite/content" # Link for fork & edit
     # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} 数学公式 (https://katex.org)
     [params.page.math]
       enable = true

@@ -15,9 +15,10 @@ All notable changes to this project will be documented in this file.
   - Add download icon for downloadable links
 - :sparkles: Feat: link shortcode add `external-icon` option ([#96](https://github.com/Lruihao/FixIt/issues/96))
 - :sparkles: Feat: add GitHub Corners support ([#106](https://github.com/Lruihao/FixIt/issues/106))
+- :sparkles: Feat: add "Edit this page" button support ([#103](https://github.com/Lruihao/FixIt/issues/103))
 - :bug: Fix: invalid front matter `comment: true` ([#108](https://github.com/Lruihao/FixIt/issues/108))
 - :bug: Fix: ibruce and watermark option negative value error ([#114](https://github.com/Lruihao/FixIt/issues/114))
-- :sparkles: Style: add some common CSS styles Class ([#101](https://github.com/Lruihao/FixIt/issues/101))
+- :lipstick: Style: add some common CSS styles Class ([#101](https://github.com/Lruihao/FixIt/issues/101))
 - :lipstick: Style: add the gap between and icon and text at blending typesetting (@ctj12461, @Lruihao[#118](https://github.com/Lruihao/FixIt/pull/118))
 - :lipstick: Style: modify blockquote CSS
 - :memo: Docs: revised theme documentations
