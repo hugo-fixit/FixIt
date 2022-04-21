@@ -1093,7 +1093,7 @@ Hugo 有一个简单而强大的 [菜单系统](https://gohugo.io/content-manage
 
 例如：
 
--  [有草稿菜单的预览环境](https://fixit-1uivrlhmq-lruihao.vercel.app)
+-  [有草稿菜单的预览环境](https://fixit-obuxwqlr6-lruihao.vercel.app)
 -  [没有草稿菜单的生产环境](https://fixit.lruihao.cn)
 {{< /admonition >}}
 

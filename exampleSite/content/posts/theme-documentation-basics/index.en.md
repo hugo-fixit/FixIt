@@ -1082,7 +1082,7 @@ This helps to distinguish the different contents of preview environment and prod
 
 For example:
 
--  [preview environment with draft menu items](https://fixit-1uivrlhmq-lruihao.vercel.app)
+-  [preview environment with draft menu items](https://fixit-obuxwqlr6-lruihao.vercel.app)
 -  [production environment without draft menu items](https://fixit.lruihao.cn)
 {{< /admonition >}}
 
