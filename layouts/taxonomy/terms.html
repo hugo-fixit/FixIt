@@ -10,7 +10,8 @@
   <div class="page archive">
     {{- /* Title */ -}}
     <h2 class="single-title animate__animated animate__pulse animate__faster">
-      {{- .Params.Title | default (T $taxonomies) | default $taxonomies | dict "Some" | T "allSome" -}}
+      {{- .Params.Title | default (T $taxonomies) | default $taxonomies | dict "Some" | T "allSome" }}
+      <sup>{{- len $terms -}}</sup>
     </h2>
 
     {{- /* Categories Page */ -}}
@@ -24,7 +25,8 @@
             <div class="card-item-wrapper">
               <h3 class="card-item-title">
                 <a href="{{ .RelPermalink }}">
-                  <i class="far fa-folder fa-fw"></i>&nbsp;{{ .Page.Title }}
+                  <i class="far fa-folder fa-fw"></i>
+                  {{ .Page.Title }}&nbsp;<sup>{{- len $pages -}}</sup>
                 </a>
               </h3>
               {{- range first 5 $pages -}}

@@ -6,8 +6,8 @@
   <div class="page archive">
     {{- /* Title */ -}}
     <h2 class="single-title animate__animated animate__pulse animate__faster">
-      {{- .Params.Title | default (T .Section) | default .Section | dict "Some" | T "allSome" -}}
-      &nbsp;<sup>{{- len .Pages -}}</sup>
+      {{- .Params.Title | default (T .Section) | default .Section | dict "Some" | T "allSome" }}
+      <sup>{{- len .Pages -}}</sup>
     </h2>
 
     {{- /* Paginate */ -}}

@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## v0.2.14
 
+> Add hugo new features support.
+
 - :recycle: Refactor: header layout
   - :tada: Feat: add sub menu (nested menu) support ([#31](https://github.com/Lruihao/FixIt/issues/31))
   - :sparkles: Feat: add user-defined content to menu items via the `params` field ([#99](https://github.com/Lruihao/FixIt/issues/99))
@@ -16,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: link shortcode add `external-icon` option ([#96](https://github.com/Lruihao/FixIt/issues/96))
 - :sparkles: Feat: add GitHub Corners support ([#106](https://github.com/Lruihao/FixIt/issues/106))
 - :sparkles: Feat: add "Edit this page" button support ([#103](https://github.com/Lruihao/FixIt/issues/103))
+- :sparkles: Feat: add count badge for taxonomy ([#122](https://github.com/Lruihao/FixIt/issues/122))
 - :bug: Fix: invalid front matter `comment: true` ([#108](https://github.com/Lruihao/FixIt/issues/108))
 - :bug: Fix: ibruce and watermark option negative value error ([#114](https://github.com/Lruihao/FixIt/issues/114))
 - :lipstick: Style: add some common CSS styles Class ([#101](https://github.com/Lruihao/FixIt/issues/101))
@@ -32,6 +35,8 @@ All notable changes to this project will be documented in this file.
 - **Full Changelog:** @Lruihao [`v0.2.13...v0.2.14`](https://github.com/Lruihao/FixIt/compare/v0.2.13...v0.2.14)
 
 ## v0.2.13 [2022.3.14]
+
+> Improve and add some new features.
 
 - :recycle: Refactor: page layout ([#65](https://github.com/Lruihao/FixIt/issues/65))
 - :tada: Feat: add Artalk comment support ([#54](https://github.com/Lruihao/FixIt/issues/54), @hiifong[#57](https://github.com/Lruihao/FixIt/pull/57))
@@ -65,6 +70,8 @@ All notable changes to this project will be documented in this file.
 - **Full Changelog:** @Lruihao [`v0.2.12...v0.2.13`](https://github.com/Lruihao/FixIt/compare/v0.2.12...v0.2.13)
 
 ## v0.2.12 [2022-1-27]
+
+> Fix most known bugs and add some new features.
 
 - :tada: Feat: add PWA support
 - :tada: Feat: add Watermark support ([#16](https://github.com/Lruihao/FixIt/issues/16))
