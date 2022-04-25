@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file.
 - :zap: Perf: remove third-party library clipboard.js ([#84](https://github.com/Lruihao/FixIt/issues/84))
 - :pencil2: Docs: fix highlight url typo in `theme-documentation-built-in-shortcodes` (@d-baer[#85](https://github.com/Lruihao/FixIt/pull/85))
 - :wrench: Chore(i18n): improve translations for supported languages ([#119](https://github.com/Lruihao/FixIt/issues/119))
+- :wrench: Chore(i18n): add i18n support for console messages
 - :wrench: Chore(deps-dev):
   - Bump minimist from 1.2.5 to 1.2.6 ([#92](https://github.com/Lruihao/FixIt/pull/92))
   - Bump @babel/core from 7.17.5 to 7.17.9 ([#98](https://github.com/Lruihao/FixIt/pull/98))

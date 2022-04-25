@@ -2,13 +2,27 @@
 # Traducciones para español
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
-# === baseof ==
+# === init ===
+[configurationError]
+other = "" # waitting for translation
+
+[compatibilityError]
+other = "" # waitting for translation
+
+[RCVersionWarn]
+other = "" # waitting for translation
+
+[devEnvWarn]
+other = "" # waitting for translation
+# === init ===
+
+# === baseof ===
 [backToTop]
 other = "Volver arriba"
 
 [viewComments]
 other = "Ver comentarios"
-# === baseof ==
+# === baseof ===
 
 # === Post ===
 [posts]

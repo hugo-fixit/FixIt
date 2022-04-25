@@ -2,13 +2,27 @@
 # Traduceri pentru limba română
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
-# === baseof ==
+# === init ===
+[configurationError]
+other = "" # waitting for translation
+
+[compatibilityError]
+other = "" # waitting for translation
+
+[RCVersionWarn]
+other = "" # waitting for translation
+
+[devEnvWarn]
+other = "" # waitting for translation
+# === init ===
+
+# === baseof ===
 [backToTop]
 other = "Înapoi Sus"
 
 [viewComments]
 other = "Vizualizare Comentarii"
-# === baseof ==
+# === baseof ===
 
 # === Post ===
 [posts]

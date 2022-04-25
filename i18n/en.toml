@@ -1,13 +1,27 @@
 # Translations for English
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
-# === baseof ==
+# === init ===
+[configurationError]
+other = "Configuration Error\nYou haven't configured the FixIt version param correctly yet. See https://fixit.lruihao.cn/theme-documentation-basics/#basic-configuration"
+
+[compatibilityError]
+other = "Compatibility Error ({{ .From }} -> {{ .To }}):\nYou have an incompatible update. See https://github.com/Lruihao/FixIt/releases"
+
+[RCVersionWarn]
+other = "You are using a development version of FixIt. Please consider using a stable version.\nSee https://github.com/Lruihao/FixIt/releases"
+
+[devEnvWarn]
+other = "Current environment is \"development\". The \"comment system\", \"CDN\" and \"fingerprint\" will be disabled."
+# === init ===
+
+# === baseof ===
 [backToTop]
 other = "Back to Top"
 
 [viewComments]
 other = "View Comments"
-# === baseof ==
+# === baseof ===
 
 # === Post ===
 [posts]

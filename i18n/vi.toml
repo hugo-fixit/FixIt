@@ -1,13 +1,27 @@
 # Translations for Vietnamese
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
-# === baseof ==
+# === init ===
+[configurationError]
+other = "" # waitting for translation
+
+[compatibilityError]
+other = "" # waitting for translation
+
+[RCVersionWarn]
+other = "" # waitting for translation
+
+[devEnvWarn]
+other = "" # waitting for translation
+# === init ===
+
+# === baseof ===
 [backToTop]
 other = "Lên trên"
 
 [viewComments]
 other = "Xem bình luận"
-# === baseof ==
+# === baseof ===
 
 # === Post ===
 [posts]

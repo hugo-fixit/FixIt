@@ -1,12 +1,15 @@
-{{- .Scratch.Set "version" "0.2.14" -}}
+{{- $version := "v0.2.14-RC" -}}
+{{- $VERSION := "0.2.X" -}}
 
 {{- /* FixIt theme version detection */ -}}
-{{- $VERSION := "0.2.X" -}}
 {{- if eq .Site .Sites.First -}}
+  {{- if (strings.HasSuffix $version "RC") -}}
+    {{- warnf "FixIt %v\n%v" $version (T "RCVersionWarn") -}}
+  {{- end -}}
   {{- if not .Site.Params.version -}}
-    {{- errorf "Configuration Error 配置文件错误\n\nYou haven't configured the FixIt version param correctly yet. See https://hugoloveit.com/theme-documentation-basics/#basic-configuration\n你还没有正确配置 FixIt 的版本参数. 参考 https://hugoloveit.com/zh-cn/theme-documentation-basics/#basic-configuration\n" -}}
+    {{- errorf "FixIt %v\n%v" $version (T "configurationError") -}}
   {{- else if ne .Site.Params.version $VERSION -}}
-    {{- errorf (printf "Compatibility Error 兼容性错误\n\n%v -> %v:\nYou have an incompatible update. See https://github.com/Lruihao/FixIt/releases\n你进行了一次不兼容的更新. 参考 https://github.com/Lruihao/FixIt/releases\n" .Site.Params.version $VERSION) -}}
+    {{- errorf "FixIt %v\n%v" $version (dict "From" .Site.Params.version "To" $VERSION | T "compatibilityError")  -}}
   {{- end -}}
 {{- end -}}
 
@@ -38,9 +41,10 @@
     {{- .Scratch.Set "comment" dict -}}
   {{- end -}}
 {{- else if eq .Site .Sites.First -}}
-  {{- warnf "\n\nCurrent environment is \"development\". The \"comment system\", \"CDN\" and \"fingerprint\" will be disabled.\n当前运行环境是 \"development\". \"评论系统\", \"CDN\" 和 \"fingerprint\" 不会启用.\n" -}}
+  {{- warnf "FixIt %v\n%v" $version (T "devEnvWarn") -}}
 {{- end -}}
 
+{{- .Scratch.Set "version" $version -}}
 {{- .Scratch.Set "params" $params -}}
 {{- .Scratch.Set "toc" $toc -}}
 {{- .Scratch.Set "this" dict -}}

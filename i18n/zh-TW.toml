@@ -2,13 +2,27 @@
 # 簡體中文的翻譯
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
-# === baseof ==
+# === init ===
+[configurationError]
+other = "配置文件錯誤\n您還沒有正確配置 FixIt 的版本參數。參考 https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/#basic-configuration"
+
+[compatibilityError]
+other = "兼容性錯誤 ({{ .From }} -> {{ .To }}):\n您進行了一次不兼容的更新。参考 https://github.com/Lruihao/FixIt/releases"
+
+[RCVersionWarn]
+other = "您正在使用開發版的 FixIt，請考慮使用穩定版。\n見 https://github.com/Lruihao/FixIt/releases"
+
+[devEnvWarn]
+other = "當前運行環境是“development”。“評論系統”，“CDN”和“fingerprint”不會啟用。"
+# === init ===
+
+# === baseof ===
 [backToTop]
 other = "回到頂部"
 
 [viewComments]
 other = "查看評論"
-# === baseof ==
+# === baseof ===
 
 # === Post ===
 [posts]
