@@ -44,6 +44,11 @@
   {{- warnf "FixIt %v\n%v" $version (T "devEnvWarn") -}}
 {{- end -}}
 
+{{- /* Deprecated parameter detection */ -}}
+{{- with .Site.Params.home.profile.gravatarSite -}}
+  {{- warnf "%v" "The parameter `home.profile.gravatarSite` is deprecated since v0.2.14, use `params.gravatar.host` instead." -}}
+{{- end -}}
+
 {{- .Scratch.Set "version" $version -}}
 {{- .Scratch.Set "params" $params -}}
 {{- .Scratch.Set "toc" $toc -}}
