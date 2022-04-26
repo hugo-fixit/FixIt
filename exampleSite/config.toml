@@ -170,8 +170,6 @@ enableEmoji = true
         # Home page profile
         [languages.en.params.home.profile]
           enable = true
-          # Gravatar mirror site domain, default: "www.gravatar.com" since v0.2.13
-          gravatarSite = ""
           # Gravatar Email for preferred avatar in home page
           gravatarEmail = ""
           # URL of avatar shown in home page
@@ -396,8 +394,6 @@ enableEmoji = true
         # 主页个人信息
         [languages.zh-cn.params.home.profile]
           enable = true
-          # 选择使用 Gravatar 源站或其他镜像站，若留空则为默认的 "www.gravatar.com" since v0.2.13
-          gravatarSite = ""
           # Gravatar 邮箱，用于优先在主页显示的头像
           gravatarEmail = ""
           # 主页显示头像的 URL
@@ -1102,6 +1098,13 @@ enableEmoji = true
     enable = true
     permalink = "https://github.com/Lruihao/FixIt"
     title = "View source on GitHub"
+  # Gravatar config since v0.2.14
+  # Gravatar 设置 since v0.2.14
+  [params.gravatar]
+    # Gravatar host, default: "www.gravatar.com"
+    # Gravatar 主机，默认：“www.gravatar.com”
+    host = "www.gravatar.com" # "cn.gravatar.com", "gravatar.loli.net"
+    # style = "mp" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
 
 # Markup related configuration in Hugo
 # Hugo 解析文档的配置

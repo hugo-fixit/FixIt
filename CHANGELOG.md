@@ -19,6 +19,8 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: add GitHub Corners support ([#106](https://github.com/Lruihao/FixIt/issues/106))
 - :sparkles: Feat: add "Edit this page" button support ([#103](https://github.com/Lruihao/FixIt/issues/103))
 - :sparkles: Feat: add count badge for taxonomy ([#122](https://github.com/Lruihao/FixIt/issues/122))
+- :zap: Perf: add Gravatar config support
+     > :warning: *The parameter `home.profile.gravatarSite` is deprecated since v0.2.14, use `params.gravatar.host` instead.*
 - :bug: Fix: invalid front matter `comment: true` ([#108](https://github.com/Lruihao/FixIt/issues/108))
 - :bug: Fix: ibruce and watermark option negative value error ([#114](https://github.com/Lruihao/FixIt/issues/114))
 - :lipstick: Style: add some common CSS styles Class ([#101](https://github.com/Lruihao/FixIt/issues/101))

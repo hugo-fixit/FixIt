@@ -343,7 +343,8 @@ hugo
     [params.home.profile]
       enable = true
       # {{< version 0.2.13 >}} 选择使用 Gravatar 源站或其他镜像站，若留空则为默认的 "www.gravatar.com"
-      gravatarSite = ""
+      # {{< version 0.2.14 changed >}} {{< version 0.2.15 deleted >}} 参数 `home.profile.gravatarSite` 自 v0.2.14 起已弃用，请改用 `gravatar.host`
+      # gravatarSite = ""
       # Gravatar 邮箱，用于优先在主页显示的头像
       gravatarEmail = ""
       # 主页显示头像的 URL
@@ -794,6 +795,11 @@ hugo
     enable = false
     permalink = "https://github.com/Lruihao/FixIt"
     title = "在 GitHub 上查看源代码"
+  # {{< version 0.2.14 >}} Gravatar 设置
+  [params.gravatar]
+    # Gravatar 主机，默认：“www.gravatar.com”
+    host = "www.gravatar.com" # "cn.gravatar.com", "gravatar.loli.net"
+    style = "mp" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
 
 # Hugo 解析文档的配置
 [markup]

@@ -333,7 +333,8 @@ Please open the code block below to view the complete sample configuration :(far
     [params.home.profile]
       enable = true
       # {{< version 0.2.13 >}} Gravatar mirror site domain, default: "www.gravatar.com"
-      gravatarSite = ""
+      # {{< version 0.2.14 changed >}} {{< version 0.2.15 deleted >}} The parameter `home.profile.gravatarSite` is deprecated since v0.2.14, use `gravatar.host` instead
+      # gravatarSite = ""
       # Gravatar Email for preferred avatar in home page
       gravatarEmail = ""
       # URL of avatar shown in home page
@@ -784,6 +785,11 @@ Please open the code block below to view the complete sample configuration :(far
     enable = false
     permalink = "https://github.com/Lruihao/FixIt"
     title = "View source on GitHub"
+  # {{< version 0.2.14 >}} Gravatar config
+  [params.gravatar]
+    # Gravatar host, default: "www.gravatar.com"
+    host = "www.gravatar.com" # "cn.gravatar.com", "gravatar.loli.net"
+    style = "mp" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
 
 # Markup related configuration in Hugo
 [markup]

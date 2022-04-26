@@ -2,9 +2,14 @@
 <div class="home-profile">
   {{- $avatar := $profile.avatarURL -}}
   {{- if $profile.gravatarEmail -}}
-    {{- with $profile -}}
-      {{- $site := .gravatarSite | default "www.gravatar.com" -}}
-      {{- $avatar = md5 .gravatarEmail | printf "https://%v/avatar/%v?s=240&d=mp" $site -}}
+    {{- $gravatar := .Site.Params.gravatar -}}
+    {{- /* TODO: The parameter `home.profile.gravatarSite` will be deleted in v0.2.15 */ -}}
+    {{- with $gravatar -}}
+      {{- $avatar = printf "https://%v/avatar/%v?s=240&d=%v"
+        ($profile.gravatarSite | default .Host | default "www.gravatar.com")
+        (md5 $profile.gravatarEmail)
+        (.Style | default "mp")
+      -}}
     {{- end -}}
   {{- end -}}
   {{- if $avatar -}}
