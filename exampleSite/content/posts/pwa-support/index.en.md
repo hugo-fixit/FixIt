@@ -14,6 +14,9 @@ resources:
 - name: featured-image
   src: featured-image.png
 
+toc:
+  auto: false
+
 menu:
   main:
     name: "PWA Support"

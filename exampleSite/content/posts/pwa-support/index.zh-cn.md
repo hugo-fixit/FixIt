@@ -14,6 +14,9 @@ resources:
 - name: featured-image
   src: featured-image.png
 
+toc:
+  auto: false
+
 menu:
   main:
     title: "在 FixIt 中设置 PWA 的指南。"
