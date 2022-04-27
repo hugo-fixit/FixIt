@@ -508,6 +508,11 @@ enableEmoji = true
         enable = true
         permalink = "https://github.com/Lruihao/FixIt"
         title = "在 GitHub 上查看源代码"
+      # Gravatar 设置 since v0.2.14
+      [languages.zh-cn.params.gravatar]
+        # Gravatar 主机，默认：“www.gravatar.com”
+        host = "gravatar.loli.net"
+        style = "mp" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
 
 [params]
   # FixIt theme version
@@ -670,6 +675,9 @@ enableEmoji = true
     # Page style ("narrow", "normal", "wide", ...) since v0.2.13
     # 页面样式 ("narrow", "normal", "wide", ...) since v0.2.13
     pageStyle = "normal"
+    # Gravatar is force-used as the author's avatar since v0.2.14
+    # 强制使用 Gravatar 作为作者头像 since v0.2.14
+    gravatarForce = true
     # Table of the contents config
     # 目录配置
     [params.page.toc]
@@ -1104,7 +1112,7 @@ enableEmoji = true
     # Gravatar host, default: "www.gravatar.com"
     # Gravatar 主机，默认：“www.gravatar.com”
     host = "www.gravatar.com" # "cn.gravatar.com", "gravatar.loli.net"
-    # style = "mp" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
+    style = "mp" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
 
 # Markup related configuration in Hugo
 # Hugo 解析文档的配置

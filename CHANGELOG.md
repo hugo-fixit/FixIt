@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
   - Add download icon for downloadable links
 - :sparkles: Feat: link shortcode add `external-icon` option ([#96](https://github.com/Lruihao/FixIt/issues/96))
 - :sparkles: Feat: add GitHub Corners support ([#106](https://github.com/Lruihao/FixIt/issues/106))
+- :sparkles: Feat: add local avatar and gravatar support for post author ([#125](https://github.com/Lruihao/FixIt/issues/125))
 - :sparkles: Feat: add "Edit this page" button support ([#103](https://github.com/Lruihao/FixIt/issues/103))
 - :sparkles: Feat: add count badge for taxonomy ([#122](https://github.com/Lruihao/FixIt/issues/122))
 - :zap: Perf: add Gravatar config support

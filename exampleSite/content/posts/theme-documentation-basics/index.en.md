@@ -453,6 +453,8 @@ Please open the code block below to view the complete sample configuration :(far
     rssFullText = false
     # {{< version 0.2.13 >}} Page style ("narrow", "normal", "wide", ...)
     pageStyle = "normal"
+    # {{< version 0.2.14 >}} Gravatar is force-used as the author's avatar
+    gravatarForce = false
     # {{< version 0.2.0 >}} Table of the contents config
     [params.page.toc]
       # whether to enable the table of the contents
@@ -786,7 +788,7 @@ Please open the code block below to view the complete sample configuration :(far
   [params.gravatar]
     # Gravatar host, default: "www.gravatar.com"
     host = "www.gravatar.com" # "cn.gravatar.com", "gravatar.loli.net"
-    style = "mp" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
+    style = "" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
 
 # Markup related configuration in Hugo
 [markup]

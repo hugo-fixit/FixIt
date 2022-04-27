@@ -463,6 +463,8 @@ hugo
     rssFullText = false
     # {{< version 0.2.13 >}} 页面样式 ("narrow", "normal", "wide", ...)
     pageStyle = "normal"
+    # {{< version 0.2.14 >}} 强制使用 Gravatar 作为作者头像
+    gravatarForce = true
     # {{< version 0.2.0 >}} 目录配置
     [params.page.toc]
       # 是否使用目录
@@ -796,7 +798,7 @@ hugo
   [params.gravatar]
     # Gravatar 主机，默认：“www.gravatar.com”
     host = "www.gravatar.com" # "cn.gravatar.com", "gravatar.loli.net"
-    style = "mp" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
+    style = "" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
 
 # Hugo 解析文档的配置
 [markup]

@@ -33,6 +33,21 @@
 
     .author {
       font-size: 1.05rem;
+      
+      img.avatar {
+        width: 1.3rem;
+        height: 1.3rem;
+        border-radius: 50%;
+        vertical-align: text-bottom;
+        border: 0.25px solid $global-border-color;
+        box-sizing: border-box;
+        object-position: center;
+        @include object-fit(cover);
+
+        [theme='dark'] & {
+          border-color: $global-border-color-dark;
+        }
+      }
     }
   }
 

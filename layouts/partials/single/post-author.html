@@ -1,0 +1,35 @@
+{{- $params := .Scratch.Get "params" -}}
+
+{{- $author := .Site.Author | merge (dict "name" "" "link" (echoParam $params "authorlink") "email" (echoParam $params "authoremail")) -}}
+{{- $avatar := .Site.Params.home.profile.avatarURL -}}
+{{- if isset $params "author" | and (ne $params.author .Site.Author.name) -}}
+  {{- $author = dict "name" $params.author | merge $author -}}
+  {{- $author = dict "link" (echoParam $params "authorlink") | merge $author -}}
+  {{- $author = dict "email" (echoParam $params "authoremail") | merge $author -}}
+  {{- $avatar = "" -}}
+{{- end -}}
+{{- if (not $avatar | or $params.gravatarForce) | and $author.email -}}
+  {{- $gravatar := .Site.Params.gravatar -}}
+  {{- with $gravatar -}}
+    {{- $avatar = printf "https://%v/avatar/%v?s=32&d=%v" (.Host | default "www.gravatar.com") (md5 $author.email) (.Style | default "") -}}
+  {{- end -}}
+{{- end -}}
+<span class="post-author">
+  {{- $content := $author.name -}}
+  {{- $icon := dict "Class" "fas fa-user-circle" -}}
+  {{- if $avatar -}}
+    {{- $content = printf "%v&nbsp;%v" (dict "Src" $avatar "Class" "avatar" | partial "plugin/image.html") $author.name -}}
+    {{- $icon = "" -}}
+  {{- end -}}
+  {{- if $author.link -}}
+    {{- $options := dict "Class" "author" "Destination" $author.link "Title" (T "author") "Rel" "author" "Icon" $icon "Content" $content -}}
+    {{- partial "plugin/link.html" $options -}}
+  {{- else -}}
+    <span class="author">
+      {{- with $icon -}}
+        <i class="{{ .Class }}"></i>
+      {{ end -}}
+      {{- $content | safeHTML -}}
+    </span>
+  {{- end -}}
+</span>
