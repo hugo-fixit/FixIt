@@ -5,6 +5,7 @@ date: {{ .Date }}
 draft: true
 author: ""
 authorLink: ""
+authorEmail: ""
 description: ""
 keywords: ""
 license: ""

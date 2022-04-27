@@ -81,6 +81,7 @@ lastmod: 2020-03-04T15:58:26+08:00
 draft: true
 author: ""
 authorLink: ""
+authorEmail: ""
 description: ""
 keywords: ""
 license: ""
@@ -143,6 +144,7 @@ seo:
 * **draft**: 如果设为 `true`, 除非 `hugo` 命令使用了 `--buildDrafts`/`-D` 参数，这篇文章不会被渲染
 * **author**: 文章作者
 * **authorLink**: 文章作者的链接
+* **authorEmail**: {{< version 0.2.14 >}} 文章作者的邮箱
 * **description**: 文章内容的描述
 * **keywords**: 文章内容的关键词
 * **license**: 这篇文章特殊的许可
