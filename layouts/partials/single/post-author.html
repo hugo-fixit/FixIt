@@ -18,7 +18,7 @@
   {{- $content := $author.name -}}
   {{- $icon := dict "Class" "fas fa-user-circle" -}}
   {{- if $avatar -}}
-    {{- $content = printf "%v&nbsp;%v" (dict "Src" $avatar "Class" "avatar" | partial "plugin/image.html") $author.name -}}
+    {{- $content = printf "%v&nbsp;%v" (dict "Src" $avatar "Class" "avatar" "Alt" $author.name | partial "plugin/image.html") $author.name -}}
     {{- $icon = "" -}}
   {{- end -}}
   {{- if $author.link -}}
