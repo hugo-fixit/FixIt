@@ -103,12 +103,20 @@ fraction: true
 fontawesome: true
 linkToMarkdown: true
 rssFullText: false
+pageStyle: "normal"
+gravatarForce: false
 
 toc:
   enable: true
   auto: true
+expirationReminder:
+  enable: false
+  # ...
 code:
   copy: true
+  # ...
+edit:
+  enable: false
   # ...
 math:
   enable: true
@@ -166,9 +174,13 @@ seo:
 * **fontawesome**: {{< version 0.2.0 >}} if `true`, the content will enable the [Font Awesome extended syntax](#fontawesome).
 * **linkToMarkdown**: if `true`, the footer of the content will be shown the link to the orignal Markdown file.
 * **rssFullText**: {{< version 0.2.4 >}} if `true`, the full text content will be shown in RSS.
+* **pageStyle**: {{< version 0.2.13 >}} Detail see [Page Style](../theme-documentation-basics#page-style)
+* **gravatarForce**: {{< version 0.2.14 >}} Gravatar is force-used as the author's avatar.
 
 * **toc**: {{< version 0.2.9 changed >}} the same as the `params.page.toc` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **expirationReminder**: {{< version 0.2.13 >}} the same as the `params.page.expirationReminder` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **code**: {{< version 0.2.0 >}} the same as the `params.page.code` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **edit**: {{< version 0.2.14 >}} the same as the `params.page.edit` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **math**: {{< version 0.2.0 changed >}} the same as the `params.page.math` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **mapbox**: {{< version 0.2.0 >}} the same as the `params.page.mapbox` part in the [site configuration](../theme-documentation-basics#site-configuration).
 * **share**: the same as the `params.page.share` part in the [site configuration](../theme-documentation-basics#site-configuration).

@@ -101,12 +101,20 @@ fraction: true
 fontawesome: true
 linkToMarkdown: true
 rssFullText: false
+pageStyle: "normal"
+gravatarForce: false
 
 toc:
   enable: true
   auto: true
+expirationReminder:
+  enable: false
+  # ...
 code:
   copy: true
+  # ...
+edit:
+  enable: false
   # ...
 math:
   enable: true
@@ -164,9 +172,13 @@ seo:
 * **fontawesome**: {{< version 0.2.0 >}} 如果设为 `true`, 这篇文章会使用 [Font Awesome 扩展语法](#fontawesome)
 * **linkToMarkdown**: 如果设为 `true`, 内容的页脚将显示指向原始 Markdown 文件的链接
 * **rssFullText**: {{< version 0.2.4 >}} 如果设为 `true`, 在 RSS 中将会显示全文内容
+* **pageStyle**: {{< version 0.2.13 >}} 页面样式，详见 [页面宽度](../theme-documentation-basics#page-style)
+* **gravatarForce**: {{< version 0.2.14 >}} 强制使用 Gravatar 作为作者头像
 
 * **toc**: {{< version 0.2.9 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.toc` 部分相同
+* **expirationReminder**: {{< version 0.2.13 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.expirationReminder` 部分相同
 * **code**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.code` 部分相同
+* **edit**: {{< version 0.2.14 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.edit` 部分相同
 * **math**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.math` 部分相同
 * **mapbox**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.mapbox` 部分相同
 * **share**: 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.share` 部分相同
