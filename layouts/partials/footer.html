@@ -63,7 +63,7 @@
               {{- if ge $humanizedNum 1000 -}}
                 {{- $humanizedNum = printf "%.2fK" (div $humanizedNum 1000.0) -}}
               {{- end -}}
-              <span class="total-word-count footer-divider"><i class="far fa-keyboard fa-fw"></i>&nbsp;{{- T "totalwordCount" (dict "Count" $humanizedNum) -}}</span>
+              <span class="total-word-count footer-divider" title='{{- T "totalwordCount" . }}'><i class="far fa-keyboard fa-fw"></i>&nbsp;{{- T "totalwordCount" (dict "Count" $humanizedNum) -}}</span>
             {{- end -}}
           {{- end -}}
         </div>
