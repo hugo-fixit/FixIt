@@ -101,6 +101,7 @@ sh fixit_checker.sh
 为了直观地浏览主题特性，这里有一些基于 **FixIt** 主题渲染的预览网站。
 
 * [FixIt 主题官网](https://fixit.lruihao.cn/zh-cn/)
+* [FixIt 主题官网 - 预览](https://pre.fixit.lruihao.cn/zh-cn/)
 * [李瑞豪的博客](https://lruihao.cn)
 * 你可以通过 [提交 PR](https://github.com/Lruihao/FixIt/pulls) 添加你的网站（例如：[#111](https://github.com/Lruihao/FixIt/pull/111)）
 
