@@ -59,7 +59,11 @@
               {{- $localData.Add "totalWordCount" .WordCount -}}
             {{- end -}}
             {{- with ($localData.Get "totalWordCount") -}}
-              <span class="total-word-count footer-divider"><i class="far fa-keyboard fa-fw"></i>&nbsp;{{- T "totalwordCount" . -}}</span>
+              {{- $humanizedNum := . -}}
+              {{- if ge $humanizedNum 1000 -}}
+                {{- $humanizedNum = printf "%.2fK" (div $humanizedNum 1000.0) -}}
+              {{- end -}}
+              <span class="total-word-count footer-divider"><i class="far fa-keyboard fa-fw"></i>&nbsp;{{- T "totalwordCount" (dict "Count" $humanizedNum) -}}</span>
             {{- end -}}
           {{- end -}}
         </div>
