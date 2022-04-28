@@ -21,9 +21,10 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: add "Edit this page" button support ([#103](https://github.com/Lruihao/FixIt/issues/103))
 - :sparkles: Feat: add count badge for taxonomy ([#122](https://github.com/Lruihao/FixIt/issues/122))
 - :zap: Perf: add Gravatar config support
-     > :warning: *The parameter `home.profile.gravatarSite` is deprecated since v0.2.14, use `params.gravatar.host` instead.*
 - :bug: Fix: invalid front matter `comment: true` ([#108](https://github.com/Lruihao/FixIt/issues/108))
 - :bug: Fix: ibruce and watermark option negative value error ([#114](https://github.com/Lruihao/FixIt/issues/114))
+- :truck: Feat: *migrate ~~`home.profile.gravatarSite`~~ to `gravatar.host`*
+- :truck: Feat: *migrate ~~`ibruce.siteTime`~~ to `footer.siteTime`*
 - :lipstick: Style: add some common CSS styles Class ([#101](https://github.com/Lruihao/FixIt/issues/101))
 - :lipstick: Style: add the gap between and icon and text at blending typesetting (@ctj12461, @Lruihao[#118](https://github.com/Lruihao/FixIt/pull/118))
 - :lipstick: Style: modify blockquote CSS

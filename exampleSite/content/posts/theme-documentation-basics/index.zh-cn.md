@@ -301,6 +301,8 @@ hugo
     author = true
     # 网站创立年份
     since = 2019
+    # {{< version 0.2.14 >}} 网站创立时间
+    siteTime = '' # 例：'2019-02-03T19:30:34+08:00'
     # {{< version 0.2.12 >}} 公网安备信息，仅在中国使用（支持 HTML 格式）
     gov = ""
     # {{< version 0.2.12 changed >}} ICP 备案信息，仅在中国使用（支持 HTML 格式）
@@ -724,9 +726,9 @@ hugo
     enable = true
     # 在文章中开启
     enablePost = false
-    # 网站创立时间 例：'2019-02-03T19:30:34+08:00'
-    siteTime = ''
-
+    # {{< version 0.2.14 changed >}} {{< version 0.2.15 deleted >}} 网站创立时间
+    # 参数 `ibruce.siteTime` 自 v0.2.14 起已弃用，请改用 `footer.siteTime`
+    # siteTime = '' # 例：'2019-02-03T19:30:34+08:00'
   # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu/360/Sogou
   [params.verification]
     google = ""
@@ -1103,8 +1105,8 @@ Hugo 有一个简单而强大的 [菜单系统](https://gohugo.io/content-manage
 
 例如：
 
--  [有草稿菜单的预览环境](https://pre.fixit.lruihao.cn)
--  [没有草稿菜单的生产环境](https://fixit.lruihao.cn)
+-  [有草稿菜单的预览环境](https://pre.fixit.lruihao.cn/zh-cn/)
+-  [没有草稿菜单的生产环境](https://fixit.lruihao.cn/zh-cn/)
 {{< /admonition >}}
 
 #### 3.4.3 添加内容到菜单 {#content-to-menu}

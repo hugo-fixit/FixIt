@@ -188,8 +188,12 @@
 {{- if eq .Site.Params.ibruce.enable true -}}
   {{- $source := "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Async" true "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-  {{- $ibruceConfig := dict "enable" true "siteTime" .Site.Params.ibruce.siteTime -}}
-  {{- $config = dict "ibruce" $ibruceConfig | merge $config -}}
+{{- end -}}
+
+{{- /* Site creation time */ -}}
+{{- /* TODO: The parameter `ibruce.siteTime` will be deleted in v0.2.15 */ -}}
+{{- if .Site.Params.ibruce.siteTime | or .Site.Params.footer.siteTime -}}
+  {{- $config = dict "siteTime" (.Site.Params.ibruce.siteTime | default .Site.Params.footer.siteTime) | merge $config -}}
 {{- end -}}
 
 {{- /* PWA */ -}}

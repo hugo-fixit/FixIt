@@ -596,6 +596,9 @@ enableEmoji = true
     # site creation time
     # 网站创立年份
     since = 2021
+    # Site creation time since v0.2.14
+    # 网站创立时间 since v0.2.14
+    siteTime = '2021-12-18T16:15:22+08:00'
     # Public network security only in China (HTML format is supported) since v0.2.12
     # 公网安备信息，仅在中国使用 (支持 HTML 格式) since v0.2.12
     gov = ""
@@ -1012,9 +1015,6 @@ enableEmoji = true
     # Enable in post meta
     # 在文章中开启
     enablePost = true
-    # Site creation time
-    # 网站创立时间
-    siteTime = '2021-12-18T16:15:22+08:00'
   
   # Site verification code for Google/Bing/Yandex/Pinterest/Baidu/360/Sogou
   # 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu/360/Sogou

@@ -11,7 +11,7 @@ footer {
     .footer-line {
       width: 100%;
 
-      .footer-divider::before {
+      .footer-divider:not(:first-child)::before {
         content: '|';
         margin-left: 0.25rem;
         margin-right: 0.25rem;

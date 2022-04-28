@@ -35,6 +35,15 @@ class Util {
     };
     !reserved && element.addEventListener('animationend', handler, false);
   }
+  
+  /**
+   * date validator
+   * @param {*} date may be date or not
+   * @returns {Boolean}
+   */
+  isValidDate(date) {
+    return date instanceof Date && !isNaN(date.getTime());
+  }
 }
 
 class Theme {
@@ -790,21 +799,25 @@ class Theme {
     this.config.cookieconsent && cookieconsent.initialise(this.config.cookieconsent);
   }
 
-  getSiteTime() {
+  getSiteTime = () => {
     let now = new Date();
-    let run = new Date(this.config.ibruce.siteTime);
+    let run = new Date(this.config.siteTime);
+    let $siteTime = document.querySelector('.site-time');
+    if (!this.util.isValidDate(run) || !$siteTime) {
+      clearInterval(this.siteTime);
+      $siteTime && $siteTime.remove();
+      return;
+    }
     let runTime = (now - run) / 1000,
       days = Math.floor(runTime / 60 / 60 / 24),
       hours = Math.floor(runTime / 60 / 60 - 24 * days),
       minutes = Math.floor(runTime / 60 - 24 * 60 * days - 60 * hours),
       seconds = Math.floor((now - run) / 1000 - 24 * 60 * 60 * days - 60 * 60 * hours - 60 * minutes);
-    document.querySelector('.run-times').innerHTML = `${days},${String(hours).padStart(2, 0)}:${String(minutes).padStart(2, 0)}:${String(
-      seconds
-    ).padStart(2, 0)}`;
+    $siteTime.querySelector('.run-times').innerHTML = `${days}, ${String(hours).padStart(2, 0)}:${String(minutes).padStart(2, 0)}:${String(seconds).padStart(2, 0)}`;
   }
 
   initSiteTime() {
-    if (this.config?.ibruce?.enable && this.config?.ibruce?.siteTime) {
+    if (this.config.siteTime) {
       this.siteTime = setInterval(this.getSiteTime, 500);
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) {

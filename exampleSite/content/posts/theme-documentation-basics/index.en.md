@@ -293,6 +293,8 @@ Please open the code block below to view the complete sample configuration :(far
     author = true
     # Site creation time
     since = 2019
+    # {{< version 0.2.14 >}} Site creation time
+    siteTime = '' # e.g. '2019-02-03T19:30:34+08:00'
     # ICP info only in China (HTML format is supported)
     icp = ""
     # license info (HTML format is supported)
@@ -714,8 +716,9 @@ Please open the code block below to view the complete sample configuration :(far
     enable = true
     # Enable in post meta
     enablePost = false
-    # Site creation time e.g. '2019-02-03T19:30:34+08:00'
-    siteTime = ''
+    # {{< version 0.2.14 changed >}} {{< version 0.2.15 deleted >}} Site creation time
+    # The parameter `ibruce.siteTime` is deprecated since v0.2.14, use `footer.siteTime` instead
+    siteTime = '' # e.g. '2019-02-03T19:30:34+08:00'
 
   # Site verification code config for Google/Bing/Yandex/Pinterest/Baidu/360/Sogou
   [params.verification]
