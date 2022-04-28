@@ -149,6 +149,10 @@ other = "укључено {{ .Categories }}"
 one = "Једна реч"
 other = "{{ .Count }} речи"
 
+[totalwordCount]
+one = "" # waitting for translation
+other = "" # waitting for translation
+
 [readingTime]
 one = "Један минут"
 other = "{{ .Count }} минута"

@@ -802,10 +802,10 @@ class Theme {
   getSiteTime = () => {
     let now = new Date();
     let run = new Date(this.config.siteTime);
-    let $siteTime = document.querySelector('.site-time');
-    if (!this.util.isValidDate(run) || !$siteTime) {
+    let $runTimes = document.querySelector('.run-times');
+    if (!this.util.isValidDate(run) || !$runTimes) {
       clearInterval(this.siteTime);
-      $siteTime && $siteTime.remove();
+      $runTimes && $runTimes.parentNode.remove();
       return;
     }
     let runTime = (now - run) / 1000,
@@ -813,7 +813,7 @@ class Theme {
       hours = Math.floor(runTime / 60 / 60 - 24 * days),
       minutes = Math.floor(runTime / 60 - 24 * 60 * days - 60 * hours),
       seconds = Math.floor((now - run) / 1000 - 24 * 60 * 60 * days - 60 * 60 * hours - 60 * minutes);
-    $siteTime.querySelector('.run-times').innerHTML = `${days}, ${String(hours).padStart(2, 0)}:${String(minutes).padStart(2, 0)}:${String(seconds).padStart(2, 0)}`;
+    $runTimes.innerHTML = `${days}, ${String(hours).padStart(2, 0)}:${String(minutes).padStart(2, 0)}:${String(seconds).padStart(2, 0)}`;
   }
 
   initSiteTime() {

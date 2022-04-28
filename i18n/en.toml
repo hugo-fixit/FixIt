@@ -148,6 +148,10 @@ other = "included in {{ .Categories }}"
 one = "One word"
 other = "{{ .Count }} words"
 
+[totalwordCount]
+one = "Total one word"
+other = "Total {{ .Count }} words"
+
 [readingTime]
 one = "One minute"
 other = "{{ .Count }} minutes"

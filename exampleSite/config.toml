@@ -593,12 +593,15 @@ enableEmoji = true
     # whether to show the author
     # 是否显示作者
     author = true
-    # site creation time
+    # site creation year
     # 网站创立年份
     since = 2021
     # Site creation time since v0.2.14
     # 网站创立时间 since v0.2.14
     siteTime = '2021-12-18T16:15:22+08:00'
+    # whether to show total word count of site content since v0.2.14
+    # 是否显示网站内容总字数 since v0.2.14
+    wordCount = true
     # Public network security only in China (HTML format is supported) since v0.2.12
     # 公网安备信息，仅在中国使用 (支持 HTML 格式) since v0.2.12
     gov = ""

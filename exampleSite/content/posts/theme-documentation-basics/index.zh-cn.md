@@ -303,6 +303,8 @@ hugo
     since = 2019
     # {{< version 0.2.14 >}} 网站创立时间
     siteTime = '' # 例：'2019-02-03T19:30:34+08:00'
+    # {{< version 0.2.14 >}} 是否显示网站内容总字数
+    wordCount = true
     # {{< version 0.2.12 >}} 公网安备信息，仅在中国使用（支持 HTML 格式）
     gov = ""
     # {{< version 0.2.12 changed >}} ICP 备案信息，仅在中国使用（支持 HTML 格式）

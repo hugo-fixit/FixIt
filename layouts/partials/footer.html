@@ -40,26 +40,37 @@
 
           {{- /* License */ -}}
           {{- with .Site.Params.footer.license -}}
-            {{- if $.Site.Params.footer.copyright | or $.Site.Params.footer.author -}}
-              <span class="footer-divider"></span>
-            {{- end -}}
-            <span class="license">{{ . | safeHTML }}</span>
+            <span class="license footer-divider">{{ . | safeHTML }}</span>
           {{- end -}}
         </div>
       {{- end -}}
 
-      <div class="footer-line statistics">
-        {{- /* TODO: The parameter `ibruce.siteTime` will be deleted in v0.2.15 */ -}}
-        {{- if .Site.Params.ibruce.siteTime | or .Site.Params.footer.siteTime -}}
-          <span class="site-time" title={{ T "siteRunning" }}><i class="fas fa-heartbeat fa-fw animate-icon"></i>&nbsp;<span class="run-times">Loading ...</span></span>
-        {{- end -}}
-      </div>
+      {{- /* TODO: The parameter `ibruce.siteTime` will be deleted in v0.2.15 */ -}}
+      {{- if .Site.Params.ibruce.siteTime | or .Site.Params.footer.siteTime | or .Site.Params.footer.wordCount -}}
+        <div class="footer-line statistics">
+          {{- if .Site.Params.ibruce.siteTime | or .Site.Params.footer.siteTime -}}
+            <span class="site-time" title='{{ T "siteRunning" }}'><i class="fas fa-heartbeat fa-fw animate-icon"></i>&nbsp;<span class="run-times">{{- T "siteRunning" -}}</span></span>
+          {{- end -}}
+
+          {{- /* Total word count */ -}}
+          {{- if ne .Site.Params.footer.wordCount false -}}
+            {{- $localData := newScratch -}}
+            {{- range (where .Site.Pages "Kind" "page") -}}
+              {{- $localData.Add "totalWordCount" .WordCount -}}
+            {{- end -}}
+            {{- with ($localData.Get "totalWordCount") -}}
+              <span class="total-word-count footer-divider"><i class="far fa-keyboard fa-fw"></i>&nbsp;{{- T "totalwordCount" . -}}</span>
+            {{- end -}}
+          {{- end -}}
+        </div>
+      {{- end -}}
 
       {{- /* 不蒜子 */ -}}
       {{- if eq .Site.Params.ibruce.enable true -}}
         <div class="footer-line ibruce">
-          <span id="busuanzi_container_site_uv" title={{ T "siteUV" }}><i class="far fa-user fa-fw"></i><span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin fa-fw"></i></span></span>
-          <span id="busuanzi_container_site_pv" class="footer-divider" title={{ T "sitePV" }}><i class="far fa-eye fa-fw"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin fa-fw"></i></span></span>
+          <span id="busuanzi_container_site_uv" title='{{ T "siteUV" }}'><i class="far fa-user fa-fw"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin fa-fw"></i></span></span>
+          {{- /* remove spaces */ -}}
+          <span id="busuanzi_container_site_pv" class="footer-divider" title='{{ T "sitePV" }}'><i class="far fa-eye fa-fw"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin fa-fw"></i></span></span>
         </div>
       {{- end -}}
       
@@ -69,13 +80,10 @@
           {{- with .Site.Params.footer.gov -}}
             <span class="gov">{{ . | safeHTML }}</span>
           {{- end -}}
-      
+
           {{- /* ICP */ -}}
           {{- with .Site.Params.footer.icp -}}
-            {{- if $.Site.Params.footer.gov -}}
-              <span class="footer-divider"></span>
-            {{- end -}}
-            <span class="icp">{{ . | safeHTML }}</span>
+            <span class="icp footer-divider">{{ . | safeHTML }}</span>
           {{- end -}}
         </div>
       {{- end -}}

@@ -149,6 +149,10 @@ other = "zawarty w {{ .Categories }}"
 one = "Jedno słowo"
 other = "{{ .Count }} słów"
 
+[totalwordCount]
+one = "" # waitting for translation
+other = "" # waitting for translation
+
 [readingTime]
 one = "Jedna minuta"
 other = "{{ .Count }} minuty"

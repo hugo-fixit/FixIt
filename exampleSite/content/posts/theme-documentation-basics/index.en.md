@@ -291,10 +291,12 @@ Please open the code block below to view the complete sample configuration :(far
     copyright = true
     # {{< version 0.2.0 >}} whether to show the author
     author = true
-    # Site creation time
+    # Site creation year
     since = 2019
     # {{< version 0.2.14 >}} Site creation time
     siteTime = '' # e.g. '2019-02-03T19:30:34+08:00'
+    # {{< version 0.2.14 >}} whether to show total word count of site content
+    wordCount = true
     # ICP info only in China (HTML format is supported)
     icp = ""
     # license info (HTML format is supported)
