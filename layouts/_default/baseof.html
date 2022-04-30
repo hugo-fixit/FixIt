@@ -20,8 +20,6 @@
     {{- $theme := .Site.Params.defaulttheme -}}
     <script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('{{ $theme }}' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '{{ $theme }}' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
-    <div id="mask"></div>
-
     {{- /* Body wrapper */ -}}
     <div class="wrapper">
       {{- partial "header.html" . -}}
@@ -32,17 +30,8 @@
       {{- partial "footer.html" . -}}
     </div>
 
-    <div id="fixed-buttons">
-      {{- /* top button */ -}}
-      <a href="#" id="back-to-top" class="fixed-button" title="{{ T `backToTop` }}">
-        <i class="fas fa-arrow-up fa-fw"></i>
-      </a>
-
-      {{- /* comment button */ -}}
-      <a href="#" id="view-comments" class="fixed-button" title="{{ T `viewComments` }}">
-        <i class="fas fa-comment fa-fw"></i>
-      </a>
-    </div>
+    {{- /* Theme widgets */ -}}
+    {{- partial "widgets.html" . -}}
 
     {{- /* Load JavaScript scripts and CSS */ -}}
     {{- partial "assets.html" . -}}

@@ -789,6 +789,7 @@ Please open the code block below to view the complete sample configuration :(far
     enable = false
     permalink = "https://github.com/Lruihao/FixIt"
     title = "View source on GitHub"
+    position = "right" # left, right
   # {{< version 0.2.14 >}} Gravatar config
   [params.gravatar]
     # Gravatar host, default: "www.gravatar.com"

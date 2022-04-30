@@ -184,8 +184,13 @@ header {
   }
 
   .header-wrapper {
-    padding: 0 2rem 0 10vh;
+    // use css native function to calculate max value
+    padding: 0 2rem 0 MAX(10vh, $header-height);
     height: 100%;
+
+    &[github-corner='right'] {
+      padding-right: $header-height;
+    }
 
     .header-title {
       font-size: $header-title-font-size;

@@ -798,6 +798,7 @@ hugo
     enable = false
     permalink = "https://github.com/Lruihao/FixIt"
     title = "在 GitHub 上查看源代码"
+    position = "right" # left, right
   # {{< version 0.2.14 >}} Gravatar 设置
   [params.gravatar]
     # Gravatar 主机，默认：“www.gravatar.com”

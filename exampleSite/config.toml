@@ -508,6 +508,7 @@ enableEmoji = true
         enable = true
         permalink = "https://github.com/Lruihao/FixIt"
         title = "在 GitHub 上查看源代码"
+        position = "right" # left, right
       # Gravatar 设置 since v0.2.14
       [languages.zh-cn.params.gravatar]
         # Gravatar 主机，默认：“www.gravatar.com”
@@ -1109,6 +1110,7 @@ enableEmoji = true
     enable = true
     permalink = "https://github.com/Lruihao/FixIt"
     title = "View source on GitHub"
+    position = "right" # left, right
   # Gravatar config since v0.2.14
   # Gravatar 设置 since v0.2.14
   [params.gravatar]

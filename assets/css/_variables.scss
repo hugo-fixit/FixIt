@@ -377,3 +377,13 @@ $admonition-background-color-map: (
   'quote': rgba(159, 159, 159, 0.1)
 ) !default;
 // ========== Admonition ========== //
+
+// ========== GitHub Corners ========== //
+// Color of the GitHub Corners
+$github-corner-color: white !default;
+$github-corner-color-dark: black !default;
+
+// Color of the GitHub Corners background
+$github-corner-fill: $header-background-color-dark !default;
+$github-corner-fill-dark: $header-background-color !default;
+// ========== GitHub Corners ========== //
