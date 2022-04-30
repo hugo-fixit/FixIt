@@ -79,7 +79,7 @@
       {{- end -}}
       
       {{- if .Site.Params.footer.gov | or .Site.Params.footer.icp -}}
-        <div class="footer-line">
+        <div class="footer-line beian">
           {{- /* GOV */ -}}
           {{- with .Site.Params.footer.gov -}}
             <span class="gov">{{ . | safeHTML }}</span>

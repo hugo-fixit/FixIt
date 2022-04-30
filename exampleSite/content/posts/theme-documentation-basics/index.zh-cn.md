@@ -500,7 +500,7 @@ hugo
     [params.page.edit]
       enable = false
       # url = "https://github.com/user-name/repo-name/edit/branch-name/subdirectory-name" # Link for fork & edit
-      url = "https://github.com/Lruihao/FixIt/edit/master/exampleSite/content" # Link for fork & edit
+      url = "" # Link for fork & edit
     # {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} 数学公式 (https://katex.org)
     [params.page.math]
       enable = true
@@ -793,7 +793,7 @@ hugo
   # "assets/js/_custom.js"
   [params.customJS]
     enable = true
-  # {{< version 0.2.14 >}} 在顶部右侧显示 GitHub 开源链接
+  # {{< version 0.2.14 >}} 在左上角或者右上角显示 GitHub 开源链接
   [params.githubCorner]
     enable = false
     permalink = "https://github.com/Lruihao/FixIt"

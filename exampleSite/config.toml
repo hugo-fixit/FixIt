@@ -1104,8 +1104,8 @@ enableEmoji = true
   # "assets/js/_custom.js"
   [params.customJS]
     enable = true
-  # GitHub banner in the top-right corner since v0.2.14
-  # 在顶部右侧显示 GitHub 开源链接 since v0.2.14
+  # GitHub banner in the top-right or top-left corner since v0.2.14
+  # 在左上角或者右上角显示 GitHub 开源链接 since v0.2.14
   [params.githubCorner]
     enable = true
     permalink = "https://github.com/Lruihao/FixIt"

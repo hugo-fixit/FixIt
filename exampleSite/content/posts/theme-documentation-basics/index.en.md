@@ -503,7 +503,7 @@ Please open the code block below to view the complete sample configuration :(far
     [params.page.edit]
       enable = false
       # url = "https://github.com/user-name/repo-name/edit/branch-name/subdirectory-name" # Link for fork & edit
-      url = "https://github.com/Lruihao/FixIt/edit/master/exampleSite/content" # Link for fork & edit
+      url = "" # Link for fork & edit
     # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" "Mapbox GL JS" >}} config (https://docs.mapbox.com/mapbox-gl-js)
     [params.page.mapbox]
       # access token of Mapbox GL JS
@@ -720,7 +720,7 @@ Please open the code block below to view the complete sample configuration :(far
     enablePost = false
     # {{< version 0.2.14 changed >}} {{< version 0.2.15 deleted >}} Site creation time
     # The parameter `ibruce.siteTime` is deprecated since v0.2.14, use `footer.siteTime` instead
-    siteTime = '' # e.g. '2019-02-03T19:30:34+08:00'
+    # siteTime = '' # e.g. '2019-02-03T19:30:34+08:00'
 
   # Site verification code config for Google/Bing/Yandex/Pinterest/Baidu/360/Sogou
   [params.verification]
@@ -784,7 +784,7 @@ Please open the code block below to view the complete sample configuration :(far
   # "assets/js/_custom.js"
   [params.customJS]
     enable = true
-  # {{< version 0.2.14 >}} GitHub banner in the top-right corner
+  # {{< version 0.2.14 >}} GitHub banner in the top-right or top-left corner
   [params.githubCorner]
     enable = false
     permalink = "https://github.com/Lruihao/FixIt"
