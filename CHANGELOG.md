@@ -44,6 +44,7 @@ All notable changes to this project will be documented in this file.
 ## v0.2.13 [2022.3.14]
 
 > Improve and add some new features.
+> Snapshot: <https://fixit-bbh5g5x90-lruihao.vercel.app>
 
 - :recycle: Refactor: page layout ([#65](https://github.com/Lruihao/FixIt/issues/65))
 - :tada: Feat: add Artalk comment support ([#54](https://github.com/Lruihao/FixIt/issues/54), @hiifong[#57](https://github.com/Lruihao/FixIt/pull/57))
@@ -79,6 +80,7 @@ All notable changes to this project will be documented in this file.
 ## v0.2.12 [2022-1-27]
 
 > Fix most known bugs and add some new features.
+> Snapshot: <https://fixit-e9lpwfkbp-lruihao.vercel.app>
 
 - :tada: Feat: add PWA support
 - :tada: Feat: add Watermark support ([#16](https://github.com/Lruihao/FixIt/issues/16))
