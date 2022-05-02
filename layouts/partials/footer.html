@@ -53,7 +53,9 @@
           {{- end -}}
 
           {{- /* Total word count */ -}}
-          {{- if ne .Site.Params.footer.wordCount false -}}
+          {{- /* There is a fatal bug. See https://github.com/Lruihao/FixIt/issues/124 */ -}}
+          {{- /* if ne .Site.Params.footer.wordCount false */ -}}
+          {{- if false -}}
             {{- $localData := newScratch -}}
             {{- range (where .Site.Pages "Kind" "page") -}}
               {{- $localData.Add "totalWordCount" .WordCount -}}

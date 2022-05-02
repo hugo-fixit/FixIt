@@ -20,7 +20,7 @@
       {{- end -}}
       {{- partial "recently-updated.html" . -}}
       {{- range $pages.PageGroups -}}
-      <h3 class="group-title">{{ .Key }}</h3>
+        <h3 class="group-title">{{ .Key }}</h3>
         {{- range .Pages -}}
           <article class="archive-item">
             <a href="{{ .RelPermalink }}" class="archive-item-link">

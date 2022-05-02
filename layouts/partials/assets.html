@@ -221,6 +221,7 @@
 
 {{- /* Theme script */ -}}
 {{- dict "Source" "js/theme.min.js" "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+{{- $_ := (resources.Get "js/theme.min.js.map").RelPermalink -}}
 
 {{- /* Custom script */ -}}
 {{- if eq .Site.Params.customJS.enable true -}}
