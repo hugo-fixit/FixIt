@@ -18,6 +18,13 @@
             <br />
             <sub><b>DoubleAm</b></sub>
         </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/hiifong">
+            <img src="https://avatars.githubusercontent.com/u/89133723?v=4" width="100;" alt="hiifong"/>
+            <br />
+            <sub><b>Hiifong</b></sub>
+        </a>
     </td></tr>
 </table>
 <!-- readme: collaborators -end -->
@@ -92,6 +99,13 @@
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/ctj12461">
+            <img src="https://avatars.githubusercontent.com/u/42143810?v=4" width="100;" alt="ctj12461"/>
+            <br />
+            <sub><b>Justin Chen</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/edte">
             <img src="https://avatars.githubusercontent.com/u/50194671?v=4" width="100;" alt="edte"/>
             <br />
@@ -104,15 +118,15 @@
             <br />
             <sub><b>Solarpowerinncr</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/youngxhui">
             <img src="https://avatars.githubusercontent.com/u/16971804?v=4" width="100;" alt="youngxhui"/>
             <br />
             <sub><b>Youngxhui</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/dogukanerel">
             <img src="https://avatars.githubusercontent.com/u/19349444?v=4" width="100;" alt="dogukanerel"/>
@@ -147,15 +161,15 @@
             <br />
             <sub><b>Jake Hayes</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/markdluethje">
             <img src="https://avatars.githubusercontent.com/u/31922494?v=4" width="100;" alt="markdluethje"/>
             <br />
             <sub><b>Mark-Daniel Lüthje</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/nirgn975">
             <img src="https://avatars.githubusercontent.com/u/3472902?v=4" width="100;" alt="nirgn975"/>
@@ -190,15 +204,15 @@
             <br />
             <sub><b>Vanildo Souto Mangueira</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/victor-pogor">
             <img src="https://avatars.githubusercontent.com/u/24962085?v=4" width="100;" alt="victor-pogor"/>
             <br />
             <sub><b>Victor Pogor</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/wtchangdm">
             <img src="https://avatars.githubusercontent.com/u/1546333?v=4" width="100;" alt="wtchangdm"/>
@@ -218,13 +232,6 @@
             <img src="https://avatars.githubusercontent.com/u/4409904?v=4" width="100;" alt="codedge"/>
             <br />
             <sub><b>Holger Lösken</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/ctj12461">
-            <img src="https://avatars.githubusercontent.com/u/42143810?v=4" width="100;" alt="ctj12461"/>
-            <br />
-            <sub><b>Justin Chen</b></sub>
         </a>
     </td>
     <td align="center">
