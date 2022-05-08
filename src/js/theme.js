@@ -763,8 +763,7 @@ class Theme {
           type: 'set-theme',
           theme: this.isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme
         };
-        const iframe = document.querySelector('.utterances-frame');
-        iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+        document.querySelector('.utterances-frame')?.contentWindow.postMessage(message, 'https://utteranc.es');
       });
       this.switchThemeEventSet.add(this._utterancesOnSwitchTheme);
       return;
@@ -791,6 +790,24 @@ class Theme {
             if (twikooCommentCount) twikooCommentCount.innerHTML = response[0].count;
           });
       }
+      return;
+    }
+    if (this.config.comment.giscus) {
+      const giscusConfig = this.config.comment.giscus;
+      this._giscusOnSwitchTheme = this._giscusOnSwitchTheme || (() => {
+        const message = { setConfig: { theme: this.isDark ? giscusConfig.darkTheme : giscusConfig.lightTheme }};
+        document.querySelector('.giscus-frame')?.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      });
+      this.switchThemeEventSet.add(this._giscusOnSwitchTheme);
+      const _this = this;
+      _this.giscus2parentMsg = window.addEventListener('message', (event) => {
+        const $script = document.querySelector('#giscus>script');
+        if ($script){
+          _this._giscusOnSwitchTheme();
+          $script.parentElement.removeChild($script);
+        }
+        window.removeEventListener('message', _this.giscus2parentMsg);
+      });
       return;
     }
   }

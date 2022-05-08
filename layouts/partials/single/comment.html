@@ -236,7 +236,30 @@
     {{- $giscus := $comment.giscus | default dict -}}
     {{- if $giscus.enable -}}
       {{- with $giscus -}}
-        <script src="https://giscus.app/client.js" data-repo="{{ .Repo }}" data-repo-id="{{ .RepoId }}" data-category="{{ .Category }}" data-category-id="{{ .CategoryId }}" data-mapping="{{ .Mapping }}" data-term="{{ .Term }}" data-theme="{{ .Theme }}" data-reactions-enabled="{{ .ReactionsEnabled }}" data-emit-metadata="{{ .emitMetadata }}" data-input-position="{{ .inputPosition }}" data-lang="{{ .Lang }}" data-nscript="{{ .Nscript }}"></script>
+        {{- $commentConfig = .lightTheme | default "light" | dict "lightTheme" | dict "giscus" | merge $commentConfig -}}
+        {{- $commentConfig = .darkTheme | default "dark" | dict "darkTheme" | dict "giscus" | merge $commentConfig -}}
+        <div id="giscus">
+          <script
+            src="https://giscus.app/client.js"
+            data-repo="{{ .Repo }}"
+            data-repo-id="{{ .RepoId }}"
+            data-category="{{ .Category }}"
+            data-category-id="{{ .CategoryId }}"
+            data-mapping="{{ .Mapping }}"
+            data-theme="preferred_color_scheme"
+            data-reactions-enabled="{{ .ReactionsEnabled }}"
+            data-emit-metadata="{{ .emitMetadata }}"
+            data-input-position="{{ .inputPosition }}"
+            data-lang="{{ $.Site.LanguageCode }}"
+            {{ if ne .LazyLoad false }}data-loading="lazy"{{ end }}
+            crossorigin="anonymous"
+            async
+            defer
+          ></script>
+          <noscript>
+            Please enable JavaScript to view the comments powered by <a href="https://giscus.app/" rel="external nofollow noopener noreffer">giscus</a>.
+          </noscript>
+        </div>
       {{- end -}}
     {{- end -}}
   </div>

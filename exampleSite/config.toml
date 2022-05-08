@@ -929,20 +929,17 @@ enableEmoji = true
         lightgallery = false
       [params.page.comment.giscus]
         enable = true
-        repo = "giscus/giscus"
-        repoId = "MDEwOlJlcG9zaXRvcnkzNTE5NTgwNTM="
-        category = ""
-        categoryId = "MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyNzk2NTc1"
-        mapping = "specific"
-        term = "Welcome to giscus!"
+        repo = "Lruihao/FixIt"
+        repoId = "R_kgDOGihPtQ"
+        category = "General"
+        categoryId = "DIC_kwDOGihPtc4CApHX"
+        mapping = "title"
         reactionsEnabled = "1"
-        emitMetadata = "1"
-        inputPosition = "top" # top, bottom
-        theme = "light"
-        lang = "en"
-        loading = "lazy"
-        nscript = "afterInteractive"
-        crossorigin = "anonymous"
+        emitMetadata = "0"
+        inputPosition = "bottom" # top, bottom
+        lightTheme = "light"
+        darkTheme = "dark"
+        lazyLoad = true
     # Third-party library config
     # 第三方库配置
     [params.page.library]
