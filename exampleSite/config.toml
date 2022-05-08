@@ -807,7 +807,7 @@ enableEmoji = true
     # Comment config
     # 评论系统设置
     [params.page.comment]
-      enable = false
+      enable = true
       # Artalk comment config (https://artalk.js.org/) since v0.2.13
       # Artalk 评论系统设置 (https://artalk.js.org/) since v0.2.13
       [params.page.comment.artalk]
@@ -927,6 +927,22 @@ enableEmoji = true
         # It take effect when `params.page.lightgallery` is enabled
         # 当 `params.page.lightgallery` 启用时生效
         lightgallery = false
+      [params.page.comment.giscus]
+        enable = true
+        repo = "giscus/giscus"
+        repoId = "MDEwOlJlcG9zaXRvcnkzNTE5NTgwNTM="
+        category = ""
+        categoryId = "MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyNzk2NTc1"
+        mapping = "specific"
+        term = "Welcome to giscus!"
+        reactionsEnabled = "1"
+        emitMetadata = "1"
+        inputPosition = "top" # top, bottom
+        theme = "light"
+        lang = "en"
+        loading = "lazy"
+        nscript = "afterInteractive"
+        crossorigin = "anonymous"
     # Third-party library config
     # 第三方库配置
     [params.page.library]

@@ -209,7 +209,6 @@
     {{- end -}}
 
     {{- /* Twikoo Comment System */ -}}
-    {{- /* Twikoo Comment System */ -}}
     {{- $twikoo := $comment.twikoo | default dict -}}
     {{- if $twikoo.enable -}}
       <div id="twikoo"></div>
@@ -231,6 +230,14 @@
       <noscript>
         Please enable JavaScript to view the comments powered by <a href="https://twikoo.js.org/" rel="external nofollow noopener noreffer">Twikoo</a>.
       </noscript>
+    {{- end -}}
+
+    {{- /* Giscus Comment System */ -}}
+    {{- $giscus := $comment.giscus | default dict -}}
+    {{- if $giscus.enable -}}
+      {{- with $giscus -}}
+        <script src="https://giscus.app/client.js" data-repo="{{ .Repo }}" data-repo-id="{{ .RepoId }}" data-category="{{ .Category }}" data-category-id="{{ .CategoryId }}" data-mapping="{{ .Mapping }}" data-term="{{ .Term }}" data-theme="{{ .Theme }}" data-reactions-enabled="{{ .ReactionsEnabled }}" data-emit-metadata="{{ .emitMetadata }}" data-input-position="{{ .inputPosition }}" data-lang="{{ .Lang }}" data-nscript="{{ .Nscript }}"></script>
+      {{- end -}}
     {{- end -}}
   </div>
 {{- end -}}
