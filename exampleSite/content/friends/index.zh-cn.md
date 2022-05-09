@@ -6,7 +6,7 @@ description: "FixIt 主题的友链模板 Demo"
 keywords: 
   - Hugo
   - 友情链接
-comment: false
+comment: true
 ---
 
 ---

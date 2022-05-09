@@ -2,6 +2,7 @@
 title: "关于 FixIt"
 date: 2019-08-02T11:04:49+08:00
 draft: false
+comment: false
 
 lightgallery: true
 
@@ -127,3 +128,4 @@ FixIt 主题中用到了以下项目，感谢它们的作者：
 * [Waline](https://waline.js.org/)
 * [Twikoo](https://twikoo.js.org/)
 * [github-corners](https://github.com/tholman/github-corners)
+* [giscus](https://giscus.app/zh-CN)

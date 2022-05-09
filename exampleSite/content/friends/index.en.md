@@ -6,7 +6,7 @@ description: "Friends tempalate demo of FixIt theme"
 keywords: 
   - Hugo
   - friends tempalate
-comment: false
+comment: true
 ---
 
 ---

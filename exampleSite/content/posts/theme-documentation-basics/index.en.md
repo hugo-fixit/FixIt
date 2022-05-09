@@ -656,6 +656,20 @@ Please open the code block below to view the complete sample configuration :(far
         commentCount = true
         # It take effect when `params.page.lightgallery` is enabled
         lightgallery = false
+      # {{< version 0.2.14 >}} {{< link "https://giscus.app/" "Giscus" >}} comments config
+      [params.page.comment.giscus]
+        enable = false
+        repo = ""
+        repoId = ""
+        category = ""
+        categoryId = ""
+        mapping = ""
+        reactionsEnabled = "1"
+        emitMetadata = "0"
+        inputPosition = "bottom" # top, bottom
+        lightTheme = "light"
+        darkTheme = "dark"
+        lazyLoad = true
     # {{< version 0.2.7 >}} Third-party library config
     [params.page.library]
       [params.page.library.css]

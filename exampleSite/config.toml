@@ -536,7 +536,7 @@ enableEmoji = true
   images = ["/logo.png"]
   # enable PWA since v0.2.12
   # 开启 PWA 支持 since v0.2.12
-  enablePWA = true
+  enablePWA = false
   # whether to add external Icon for external links automatically since v0.2.14
   # 是否自动显示外链图标 since v0.2.14
   externalIcon = true
@@ -927,6 +927,8 @@ enableEmoji = true
         # It take effect when `params.page.lightgallery` is enabled
         # 当 `params.page.lightgallery` 启用时生效
         lightgallery = false
+      # Giscus comments config (https://giscus.app/) since v0.2.14
+      # Giscus 评论系统设置 (https://giscus.app/) since v0.2.14
       [params.page.comment.giscus]
         enable = true
         repo = "Lruihao/FixIt"
@@ -934,6 +936,7 @@ enableEmoji = true
         category = "General"
         categoryId = "DIC_kwDOGihPtc4CApHX"
         mapping = "title"
+        term = ""
         reactionsEnabled = "1"
         emitMetadata = "0"
         inputPosition = "bottom" # top, bottom

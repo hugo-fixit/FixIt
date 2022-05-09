@@ -2,6 +2,7 @@
 title: "About FixIt"
 date: 2019-08-02T11:04:49+08:00
 draft: false
+comment: false
 
 lightgallery: true
 
@@ -127,3 +128,4 @@ Thanks to the authors of following resources included in the theme:
 * [Waline](https://waline.js.org/)
 * [Twikoo](https://twikoo.js.org/)
 * [github-corners](https://github.com/tholman/github-corners)
+* [giscus](https://giscus.app/)

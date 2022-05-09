@@ -666,6 +666,20 @@ hugo
         commentCount = true
         # 当 `params.page.lightgallery` 启用时生效
         lightgallery = false
+      # {{< version 0.2.14 >}} {{< link "https://giscus.app/" "Giscus" >}} 评论系统设置
+      [params.page.comment.giscus]
+        enable = false
+        repo = ""
+        repoId = ""
+        category = ""
+        categoryId = ""
+        mapping = ""
+        reactionsEnabled = "1"
+        emitMetadata = "0"
+        inputPosition = "bottom" # top, bottom
+        lightTheme = "light"
+        darkTheme = "dark"
+        lazyLoad = true
     # {{< version 0.2.7 >}} 第三方库配置
     [params.page.library]
       [params.page.library.css]

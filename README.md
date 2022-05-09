@@ -180,6 +180,7 @@ FixIt supports the following languages:
 
 * English
 * Simplified Chinese
+* Traditional Chinese
 * French
 * Polish
 * Brazilian Portuguese
@@ -190,9 +191,9 @@ FixIt supports the following languages:
 * Russian
 * Romanian
 * Vietnamese
-* Traditional Chinese
 * [Contribute with a new language](https://github.com/Lruihao/FixIt/pulls)
-* [Languages Compatibility](https://fixit.lruihao.cn/theme-documentation-basics/#language-compatibility)
+
+[Languages Compatibility](https://fixit.lruihao.cn/theme-documentation-basics/#language-compatibility)
 
 ## [Roadmap](https://github.com/Lruihao/FixIt/projects/1)
 
@@ -246,6 +247,7 @@ Thanks to the authors of following resources included in the theme:
 * [Waline](https://waline.js.org/)
 * [Twikoo](https://twikoo.js.org/)
 * [github-corners](https://github.com/tholman/github-corners)
+* [giscus](https://giscus.app/)
 
 ## Author
 

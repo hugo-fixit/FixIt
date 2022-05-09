@@ -179,6 +179,7 @@ FixIt 支持下列语言：
 
 * 英语
 * 简体中文
+* 繁体中文
 * 法语
 * 波兰语
 * 巴西葡萄牙语
@@ -189,9 +190,9 @@ FixIt 支持下列语言：
 * 俄语
 * 罗马尼亚语
 * 越南语
-* 繁体中文
 * [贡献一种新的语言](https://github.com/Lruihao/FixIt/pulls)
-* [语言兼容性](https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/#language-compatibility)
+
+[语言兼容性](https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/#language-compatibility)
 
 ## [路线图](https://github.com/Lruihao/FixIt/projects/1)
 
@@ -245,6 +246,7 @@ FixIt 主题中用到了以下项目，感谢它们的作者：
 * [Waline](https://waline.js.org/)
 * [Twikoo](https://twikoo.js.org/)
 * [github-corners](https://github.com/tholman/github-corners)
+* [giscus](https://giscus.app/zh-CN)
 
 ## 作者
 

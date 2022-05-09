@@ -246,10 +246,11 @@
             data-category="{{ .Category }}"
             data-category-id="{{ .CategoryId }}"
             data-mapping="{{ .Mapping }}"
+            {{ if .Term }}data-term="{{ .Term }}"{{ end }}
             data-theme="preferred_color_scheme"
             data-reactions-enabled="{{ .ReactionsEnabled }}"
-            data-emit-metadata="{{ .emitMetadata }}"
-            data-input-position="{{ .inputPosition }}"
+            data-emit-metadata="{{ .EmitMetadata }}"
+            data-input-position="{{ .EnputPosition }}"
             data-lang="{{ $.Site.LanguageCode }}"
             {{ if ne .LazyLoad false }}data-loading="lazy"{{ end }}
             crossorigin="anonymous"
