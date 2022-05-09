@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: enhance link render ([#96](https://github.com/Lruihao/FixIt/issues/96))
   - Add external icon for external links automatically
   - Add download icon for downloadable links
+- :sparkles: Feat: add giscus comment system ([#130](https://github.com/Lruihao/FixIt/issues/130))
 - :sparkles: Feat: link shortcode add `external-icon` option ([#96](https://github.com/Lruihao/FixIt/issues/96))
 - :sparkles: Feat: add GitHub Corners support ([#106](https://github.com/Lruihao/FixIt/issues/106))
 - :sparkles: Feat: add local avatar and gravatar support for post author ([#125](https://github.com/Lruihao/FixIt/issues/125))
