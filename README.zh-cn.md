@@ -103,7 +103,7 @@ sh fixit_checker.sh
 * [FixIt 主题官网](https://fixit.lruihao.cn/zh-cn/)
 * [FixIt 主题官网 - 预览](https://pre.fixit.lruihao.cn/zh-cn/)
 * [李瑞豪的博客](https://lruihao.cn)
-* [hiifong的博客](https://52at.ml)
+* [hiifong 的博客](https://52at.ml)
 * 你可以通过 [提交 PR](https://github.com/Lruihao/FixIt/pulls) 添加你的网站（例如：[#111](https://github.com/Lruihao/FixIt/pull/111)）
 
 ## 特性

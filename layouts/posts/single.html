@@ -55,7 +55,7 @@
         {{- if $comment.enable -}}
           {{- if ($comment.valine.enable | and $comment.valine.visitor) | or ($comment.waline.enable | and $comment.waline.visitor) -}}
             {{- /* Warning: waline v2 will not be compatible with valine */ -}}  
-            <span id="{{ .RelPermalink }}" class="leancloud_visitors" data-flag-title="{{ .Title }}">
+            <span id="{{ .RelPermalink }}" class="leancloud_visitors comment-visitors" data-flag-title="{{ .Title }}">
               <i class="far fa-eye fa-fw"></i>&nbsp;<span class="leancloud-visitors-count">-</span>&nbsp;{{ T "views" }}
             </span>&nbsp;
           {{- else if $comment.waline.enable | and $comment.waline.visitor -}}
@@ -68,7 +68,7 @@
             </span>&nbsp;
           {{- end -}}
         {{- else if .Site.Params.ibruce.enable | and .Site.Params.ibruce.enablePost -}}
-          <span id="busuanzi_container_page_pv" class="busuanzi_visitors" data-flag-title="{{ .Title }}">
+          <span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="{{ .Title }}">
             <i class="far fa-eye fa-fw"></i>&nbsp;<span id="busuanzi_value_page_pv">-</span>&nbsp;{{ T "views" }}
           </span>&nbsp;
         {{- end -}}

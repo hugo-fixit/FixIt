@@ -1,4 +1,3 @@
-
 ---
 title: "Markdown Test"
 date: 2022-04-20T17:50:22+08:00
@@ -15,6 +14,7 @@ categories:
 
 menu:
   main:
+    name: "Markdown 测试"
     title: "Test for Markdown rendering"
     parent: "tests"
     pre: "<i class='fas fa-vial fa-fw fa-sm'></i>"
