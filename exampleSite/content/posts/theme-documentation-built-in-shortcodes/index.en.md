@@ -37,6 +37,18 @@ A shortcode is a simple snippet that can generate reasonable HTML code and confo
 
 Hugo ships with a set of predefined shortcodes that represent very common usage. These shortcodes are provided for author convenience and to keep your markdown content clean.
 
+
+{{< admonition tip "Use Shortcodes" >}}
+
+1. Shortcodes with raw string parameters \` \`
+2. Shortcodes with Markdown `< >`
+3. Shortcodes without Markdown `% %`
+
+See detail [shortcodes/#use-shortcodes](https://gohugo.io/content-management/shortcodes/#use-shortcodes)
+
+{{< /admonition >}}
+
+
 ## 1 figure {#figure}
 
 [Documentation of `figure`](https://gohugo.io/content-management/shortcodes#figure)

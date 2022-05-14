@@ -295,7 +295,7 @@ The `admonition` shortcode has the following named parameters:
 
 * **title** *[optional]* (**second** positional parameter)
 
-    Title of the `admonition` banner, default value is the value of **type** parameter. (markdown support) {{< version 0.2.13 changed >}}
+    Title of the `admonition` banner, default value is the value of **type** parameter. (markdown support) {{< version 0.2.14 changed >}}
 
 * **open** *[optional]* (**third** positional parameter) {{< version 0.2.0 changed >}}
 
@@ -1336,7 +1336,7 @@ console.log('Hello FixIt!');
 
 ## 12 details
 
-{{< version 0.2.13 >}}
+{{< version 0.2.13 >}} {{< version 0.2.14 changed >}}
 
 `details` is a shortcode to insert **:(fab fa-html5 fa-fw): HTML5 tag** details and summary in your post.
 
@@ -1366,25 +1366,25 @@ The rendered output looks like this:
 
 ## 13 center-quote
 
-{{< version 0.2.13 >}}
+{{< version 0.2.13 >}} {{< version 0.2.14 changed >}}
 
 `center-quote` is a shortcode to insert centered text blockquote tag in your post.
 
 Example `center-quote` input:
 
 ```go-html-template
-{{</* center-quote */>}}
+{{%/* center-quote */%}}
 **hello** *world*  
 this is a center-quote shortcode example.
-{{</* /center-quote */>}}
+{{%/* /center-quote */%}}
 ```
 
 The rendered output looks like this:
 
-{{< center-quote >}}
+{{% center-quote %}}
 **hello** *world*  
 this is a center-quote shortcode example.
-{{< /center-quote >}}
+{{% /center-quote %}}
 
 ---
 

@@ -297,7 +297,7 @@ This is a **right-aligned** paragraph.
 
 * **title** *[可选]*（**第二个**位置参数）
 
-    `admonition` 横幅的标题，默认值是 **type** 参数的值。（支持 markdown）{{< version 0.2.13 changed >}}
+    `admonition` 横幅的标题，默认值是 **type** 参数的值。（支持 markdown）{{< version 0.2.14 changed >}}
 
 * **open** *[可选]*（**第三个**位置参数） {{< version 0.2.0 changed >}}
 
@@ -1337,7 +1337,7 @@ console.log('Hello FixIt!');
 
 ## 12 details
 
-{{< version 0.2.13 >}}
+{{< version 0.2.13 >}} {{< version 0.2.14 changed >}}
 
 `details` shortcode 用来在你的文章中插入 **:(fab fa-html5 fa-fw): HTML5 标签** details 和 summary。
 
@@ -1366,25 +1366,25 @@ console.log('Hello FixIt!');
 
 ## 13 center-quote
 
-{{< version 0.2.13 >}}
+{{< version 0.2.13 >}} {{< version 0.2.14 changed >}}
 
 `center-quote` shortcode 用来在你的文章中插入文本居中的 blockquote 标签。
 
 一个 `center-quote` 示例：
 
 ```go-html-template
-{{</* center-quote */>}}
+{{%/* center-quote */%}}
 **hello** *world*  
 this is a center-quote shortcode example.
-{{</* /center-quote */>}}
+{{%/* /center-quote */%}}
 ```
 
 呈现的输出效果如下：
 
-{{< center-quote >}}
+{{% center-quote %}}
 **hello** *world*  
 this is a center-quote shortcode example.
-{{< /center-quote >}}
+{{% /center-quote %}}
 
 ---
 
