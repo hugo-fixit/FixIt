@@ -1,4 +1,4 @@
 <details>
-  <summary>{{ .Get "summary" | default (.Get 0) | markdownify }}</summary>
-  {{ .Inner | markdownify }}
+  <summary>{{ .Get "summary" | default (.Get 0) | .Page.RenderString }}</summary>
+  {{ .Inner | .Page.RenderString }}
 </details>
