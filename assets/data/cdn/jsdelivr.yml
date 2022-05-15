@@ -3,16 +3,16 @@ prefix:
   # simple-icons@6.3.0 https://github.com/simple-icons/simple-icons
   simpleIcons: https://cdn.jsdelivr.net/npm/simple-icons@6.3.0/icons/
 libFiles:
-  # algoliasearch@4.11.0 https://github.com/algolia/algoliasearch-client-javascript
-  algoliasearchJS: algoliasearch@4.11.0/dist/algoliasearch-lite.umd.min.js
+  # algoliasearch@4.13.0 https://github.com/algolia/algoliasearch-client-javascript
+  algoliasearchJS: algoliasearch@4.13.0/dist/algoliasearch-lite.umd.min.js
   # animate.css@4.1.1 https://github.com/daneden/animate.css
   animateCSS: animate.css@4.1.1/animate.min.css
   # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
   aplayerCSS: aplayer@1.10.1/dist/APlayer.min.css
   aplayerJS: aplayer@1.10.1/dist/APlayer.min.js
   # artalk@2.1.4 https://github.com/ArtalkJS/Artalk
-  artalkCSS: artalk@2.1.4/dist/Artalk.min.css
-  artalkJS: artalk@2.1.4/dist/Artalk.min.js
+  artalkCSS: artalk@2.2.12/dist/Artalk.min.css
+  artalkJS: artalk@2.2.12/dist/Artalk.min.js
   # autocomplete.js@0.38.1 https://github.com/algolia/autocomplete.js
   autocompleteJS: autocomplete.js@0.38.1/dist/autocomplete.min.js
   # cell-watermark@1.0.3 https://github.com/Lruihao/watermark
@@ -21,23 +21,24 @@ libFiles:
   cookieconsentCSS: cookieconsent@3.1.1/build/cookieconsent.min.css
   cookieconsentJS: cookieconsent@3.1.1/build/cookieconsent.min.js
   # echarts@5.2.2 https://github.com/apache/echarts
-  echartsJS: echarts@5.2.2/dist/echarts.min.js
-  echartsMacaronsJS: echarts@5.2.2/theme/macarons.min.js
+  echartsJS: echarts@5.3.2/dist/echarts.min.js
+  echartsMacaronsJS: echarts@5.3.2/theme/macarons.min.js
+  # TODO update
   # fontawesome-free@5.14.0 https://github.com/FortAwesome/Font-Awesome
   fontawesomeFreeCSS: '@fortawesome/fontawesome-free@5.14.0/css/all.min.css'
   # gitalk@1.7.2 https://github.com/gitalk/gitalk
   gitalkCSS: gitalk@1.7.2/dist/gitalk.min.css
   gitalkJS: gitalk@1.7.2/dist/gitalk.min.js
   # katex@0.15.1 https://github.com/KaTeX/KaTeX
-  katexAutoRenderJS: katex@0.15.1/dist/contrib/auto-render.min.js
-  katexCopyTexCSS: katex@0.15.1/dist/contrib/copy-tex.min.css
-  katexCopyTexJS: katex@0.15.1/dist/contrib/copy-tex.min.js
-  katexCSS: katex@0.15.1/dist/katex.min.css
-  katexJS: katex@0.15.1/dist/katex.min.js
-  katexMhchemJS: katex@0.15.1/dist/contrib/mhchem.min.js
+  katexAutoRenderJS: katex@0.15.3/dist/contrib/auto-render.min.js
+  katexCopyTexCSS: katex@0.15.3/dist/contrib/copy-tex.min.css
+  katexCopyTexJS: katex@0.15.3/dist/contrib/copy-tex.min.js
+  katexCSS: katex@0.15.3/dist/katex.min.css
+  katexJS: katex@0.15.3/dist/katex.min.js
+  katexMhchemJS: katex@0.15.3/dist/contrib/mhchem.min.js
   # lazysizes@5.3.2 https://github.com/aFarkas/lazysizes
   lazysizesJS: lazysizes@5.3.2/lazysizes.min.js
-   # lightgallery.js@1.4.0 https://github.com/sachinchoolur/lightgallery.js
+  # lightgallery.js@1.4.0 https://github.com/sachinchoolur/lightgallery.js
   # lg-thumbnail.js@1.4.0 https://github.com/sachinchoolur/lg-thumbnail.js
   # lg-zoom.js@1.3.0 https://github.com/sachinchoolur/lg-zoom.js
   lightgalleryCSS: lightgallery.js@1.4.0/dist/css/lightgallery.min.css
@@ -46,11 +47,12 @@ libFiles:
   lightgalleryZoomJS: lg-zoom.js@1.3.0/dist/lg-zoom.min.js
   # lunr.js@2.3.9 https://github.com/olivernn/lunr.js
   lunrJS: lunr@2.3.9/lunr.min.js
-  # mapbox-gl@1.10.1 https://docs.mapbox.com/mapbox-gl-js
-  mapboxGLCSS: mapbox-gl@1.10.1/dist/mapbox-gl.min.css
-  mapboxGLJS: mapbox-gl@1.10.1/dist/mapbox-gl.min.js
-  # mermaid@8.5.1 https://github.com/knsv/mermaid
-  mermaidJS: mermaid@8.5.1/dist/mermaid.min.js
+  # mapbox-gl@2.8.2 https://docs.mapbox.com/mapbox-gl-js
+  mapboxGLCSS: mapbox-gl@2.8.2/dist/mapbox-gl.min.css
+  mapboxGLJS: mapbox-gl@2.8.2/dist/mapbox-gl.min.js
+  # TODO update
+  # mermaid@8.13.3 https://github.com/knsv/mermaid
+  mermaidJS: mermaid@8.13.3/dist/mermaid.min.js
   # meting@2.0.1 https://github.com/metowolf/MetingJS
   metingJS: meting@2.0.1/dist/Meting.min.js
   # normalize.css@8.0.1 https://github.com/necolas/normalize.css
@@ -60,12 +62,13 @@ libFiles:
   # pangu.js@4.0.7 https://github.com/vinta/pangu.js
   panguJS: pangu@4.0.7/dist/browser/pangu.min.js
   # sharer.js@0.4.2 https://github.com/ellisonleao/sharer.js
-  sharerJS: sharer.js@0.4.2/sharer.min.js
+  sharerJS: sharer.js@0.5.1/sharer.min.js
   # twemoji@13.1.0 https://github.com/twitter/twemoji
-  twemojiJS: twemoji@13.0.0/dist/twemoji.min.js
+  twemojiJS: twemoji@14.0.2/dist/twemoji.min.js
   # typeit@7.0.4 https://github.com/alexmacarthur/typeit
   typeitJS: typeit@7.0.4/dist/typeit.min.js
   # valine@1.4.16 https://github.com/xCss/Valine
-  valineJS: valine@1.4.16/dist/Valine.min.js
+  valineJS: valine@1.4.18/dist/Valine.min.js
   # waline@1.5.2 https://github.com/walinejs/waline
+  # TODO update
   walineJS: "@waline/client@1.5.2/dist/Waline.min.js"
