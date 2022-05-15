@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/Lruihao/FixIt/releases -->
 
-## v0.2.14
+## v0.2.14 [2022.5.15]
 
 > Add hugo new features support.
 
@@ -36,10 +36,13 @@ All notable changes to this project will be documented in this file.
 - :wrench: Chore(i18n): improve translations for supported languages ([#119](https://github.com/Lruihao/FixIt/issues/119))
 - :wrench: Chore(i18n): add i18n support for console messages
 - :wrench: Chore: add deprecated parameter detection in cli
+- :arrow_up: Chore: update some third-party libraries
 - :wrench: Chore(deps-dev):
   - Bump minimist from 1.2.5 to 1.2.6 ([#92](https://github.com/Lruihao/FixIt/pull/92))
-  - Bump @babel/core from 7.17.5 to 7.17.9 ([#98](https://github.com/Lruihao/FixIt/pull/98))
-  - Bump core-js from 3.21.1 to 3.22.0 ([#117](https://github.com/Lruihao/FixIt/pull/117))
+  - Bump @babel/core from 7.17.5 to 7.17.10 ([#126](https://github.com/Lruihao/FixIt/pull/126))
+  - Bump core-js from 3.21.1 to 3.22.5 ([#129](https://github.com/Lruihao/FixIt/pull/129))
+  - Bump @babel/cli from 7.17.6 to 7.17.10 ([#127](https://github.com/Lruihao/FixIt/pull/127))
+  - Bump @babel/preset-env from 7.16.11 to 7.17.10 ([`bc74d14`](https://github.com/Lruihao/FixIt/commit/bc74d149c16b36644fecdd5bef325bf8087f8593))
 - **Full Changelog:** @Lruihao [`v0.2.13...v0.2.14`](https://github.com/Lruihao/FixIt/compare/v0.2.13...v0.2.14)
 
 ## v0.2.13 [2022.3.14]
