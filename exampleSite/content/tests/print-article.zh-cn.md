@@ -29,7 +29,7 @@ menu:
 
 > **这是一篇测试 FixIt 主题在打印视图表现的测试文章。所有居中的说明文字将不会出现在打印视图。**
 > 
-> 按 `ctrl + P` 或者 `⌘ + P` 可以打印此页面。
+> 按 <kbd>ctrl</kbd> + <kbd>P</kbd> 或者 <kbd>⌘</kbd> + <kbd>P</kbd> 可以打印此页面。
 >
 > FR: <https://lruihao.cn/posts/js-rediscover/>
 
