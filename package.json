@@ -12,7 +12,7 @@
     "babel-preset-minify": "^0.5.1",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
-    "core-js": "^3.22.5",
+    "core-js": "^3.22.0",
     "minimist": "^1.2.6",
     "segmentit": "^2.0.3"
   },
