@@ -17,7 +17,7 @@ menu:
     name: "Markdown 测试"
     title: "Test for Markdown rendering"
     parent: "tests"
-    pre: "<i class='fas fa-vial fa-fw fa-sm'></i>"
+    pre: "<i class='fa-solid fa-vial fa-fw fa-sm'></i>"
 ---
 
 ## line break

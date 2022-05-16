@@ -16,7 +16,7 @@
 {{- end -}}
 <span class="post-author">
   {{- $content := $author.name -}}
-  {{- $icon := dict "Class" "fas fa-user-circle" -}}
+  {{- $icon := dict "Class" "fa-solid fa-user-circle" -}}
   {{- if $avatar -}}
     {{- $content = printf "%v&nbsp;%v" (dict "Src" $avatar "Class" "avatar" "Alt" $author.name | partial "plugin/image.html") $author.name -}}
     {{- $icon = "" -}}

@@ -22,7 +22,7 @@ menu:
     name: "PWA Support"
     title: "Guide to setup PWA in FixIt."
     parent: "documentation"
-    pre: "<i class='fab fa-readme fa-fw fa-sm'></i>"
+    pre: "<i class='fa-brands fa-readme fa-fw fa-sm'></i>"
 ---
 
 Find out how to turn your FixIt site into a Progressive Web App.

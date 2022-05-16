@@ -21,7 +21,7 @@ menu:
     name: "Basics"
     title: "Discover what the Hugo - FixIt theme is all about and the core-concepts behind it."
     parent: "documentation"
-    pre: "<i class='fab fa-readme fa-fw fa-sm'></i>"
+    pre: "<i class='fa-brands fa-readme fa-fw fa-sm'></i>"
 ---
 
 Discover what the Hugo - **FixIt** theme is all about and the core-concepts behind it.
@@ -32,14 +32,14 @@ Discover what the Hugo - **FixIt** theme is all about and the core-concepts behi
 
 Thanks to the simplicity of Hugo, [Hugo](https://gohugo.io/) is the only dependency of this theme.
 
-Just install latest version of [:(far fa-file-archive fa-fw): Hugo (> 0.62.0)](https://gohugo.io/getting-started/installing/) for your OS (**Windows**, **Linux**, **macOS**).
+Just install latest version of [:(fa-regular fa-file-archive fa-fw): Hugo (> 0.62.0)](https://gohugo.io/getting-started/installing/) for your OS (**Windows**, **Linux**, **macOS**).
 
 {{< admonition note "Why not support earlier versions of Hugo?" >}}
 Since [Markdown Render Hooks](https://gohugo.io/getting-started/configuration-markup#markdown-render-hooks) was introduced in the [Hugo Christmas Edition](https://gohugo.io/news/0.62.0-relnotes/), this theme only supports Hugo versions above **0.62.0**.
 {{< /admonition >}}
 
 {{< admonition tip "Hugo extended version is recommended" >}}
-Since some features of this theme need to processes :(fab fa-sass fa-fw): SCSS to :(fab fa-css3 fa-fw): CSS, it is recommended to use Hugo **extended** version for better experience.
+Since some features of this theme need to processes :(fa-brands fa-sass fa-fw): SCSS to :(fa-brands fa-css3 fa-fw): CSS, it is recommended to use Hugo **extended** version for better experience.
 {{< /admonition >}}
 
 ## 2 Installation
@@ -59,7 +59,7 @@ cd my_website
 
 The **FixIt** theme’s repository is: <https://github.com/Lruihao/FixIt>.
 
-You can download the [latest release :(far fa-file-archive fa-fw): .zip file](https://github.com/Lruihao/FixIt/releases) of the theme and extract it in the `themes` directory.
+You can download the [latest release :(fa-regular fa-file-archive fa-fw): .zip file](https://github.com/Lruihao/FixIt/releases) of the theme and extract it in the `themes` directory.
 
 Alternatively, clone this repository to the `themes` directory:
 
@@ -196,7 +196,7 @@ Alternatively, you can use [AWS Amplify](https://gohugo.io/hosting-and-deploymen
 
 In addition to [Hugo global configuration](https://gohugo.io/overview/configuration/) and [menu configuration](#basic-configuration), **FixIt** lets you define the following parameters in your site configuration (here is a `config.toml`, whose values are default).
 
-Please open the code block below to view the complete sample configuration :(far fa-hand-point-down fa-fw)::
+Please open the code block below to view the complete sample configuration :(fa-regular fa-hand-point-down fa-fw)::
 
 ```toml
 [params]
@@ -1134,7 +1134,7 @@ menu:
     name: "Basics"
     title: "Discover what the Hugo - FixIt theme is all about and the core-concepts behind it."
     parent: "documentation"
-    pre: "<i class='fab fa-readme fa-fw fa-sm'></i>"
+    pre: "<i class='fa-brands fa-readme fa-fw fa-sm'></i>"
 ---
 ...
 ```
@@ -1151,19 +1151,19 @@ menu:
 
 | Language             | Hugo Code | HTML `lang` Attribute | Theme Docs                    | Lunr.js Support               |
 |:-------------------- |:---------:|:---------------------:|:-----------------------------:|:-----------------------------:|
-| English              | `en`      | `en`                  | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
-| Simplified Chinese   | `zh-cn`   | `zh-CN`               | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
-| French               | `fr`      | `fr`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-| Polish               | `pl`      | `pl`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
-| Brazilian Portuguese | `pt-br`   | `pt-BR`               | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-| Italian              | `it`      | `it`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-| Spanish              | `es`      | `es`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-| German               | `de`      | `de`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-| Serbian              | `sr`      | `sr`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
-| Russian              | `ru`      | `ru`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-| Romanian             | `ro`      | `ro`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-| Vietnamese           | `vi`      | `vi`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-| Traditional Chinese  | `zh-tw`   | `zh-TW`               | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
+| English              | `en`      | `en`                  | :(fa-regular fa-check-square fa-fw): | :(fa-regular fa-check-square fa-fw): |
+| Simplified Chinese   | `zh-cn`   | `zh-CN`               | :(fa-regular fa-check-square fa-fw): | :(fa-regular fa-check-square fa-fw): |
+| French               | `fr`      | `fr`                  | :(fa-regular fa-square fa-fw):       | :(fa-regular fa-check-square fa-fw): |
+| Polish               | `pl`      | `pl`                  | :(fa-regular fa-square fa-fw):       | :(fa-regular fa-square fa-fw):       |
+| Brazilian Portuguese | `pt-br`   | `pt-BR`               | :(fa-regular fa-square fa-fw):       | :(fa-regular fa-check-square fa-fw): |
+| Italian              | `it`      | `it`                  | :(fa-regular fa-square fa-fw):       | :(fa-regular fa-check-square fa-fw): |
+| Spanish              | `es`      | `es`                  | :(fa-regular fa-square fa-fw):       | :(fa-regular fa-check-square fa-fw): |
+| German               | `de`      | `de`                  | :(fa-regular fa-square fa-fw):       | :(fa-regular fa-check-square fa-fw): |
+| Serbian              | `sr`      | `sr`                  | :(fa-regular fa-square fa-fw):       | :(fa-regular fa-square fa-fw):       |
+| Russian              | `ru`      | `ru`                  | :(fa-regular fa-square fa-fw):       | :(fa-regular fa-check-square fa-fw): |
+| Romanian             | `ro`      | `ro`                  | :(fa-regular fa-square fa-fw):       | :(fa-regular fa-check-square fa-fw): |
+| Vietnamese           | `vi`      | `vi`                  | :(fa-regular fa-square fa-fw):       | :(fa-regular fa-check-square fa-fw): |
+| Traditional Chinese  | `zh-tw`   | `zh-TW`               | :(fa-regular fa-square fa-fw):       | :(fa-regular fa-check-square fa-fw): |
 
 ### 4.2 Basic Configuration
 
@@ -1292,7 +1292,7 @@ Translations strings are used for common default values used in the theme. Trans
 
 To override these values, create a new file in your local i18n folder `i18n/<languageCode>.toml` and inspire yourself from `themes/FixIt/i18n/en.toml`.
 
-By the way, as these translations could be used by other people, please take the time to propose a translation by [ making a PR :(fas fa-code-branch fa-fw):](https://github.com/Lruihao/FixIt/pulls) to the theme!
+By the way, as these translations could be used by other people, please take the time to propose a translation by [making a PR :(fa-solid fa-code-branch fa-fw):](https://github.com/Lruihao/FixIt/pulls) to the theme!
 
 ## 5 Search
 

@@ -9,10 +9,10 @@
       {{- $taxonomy := .Data.Singular -}}
       {{- $pageCount := len .Pages -}}
       {{- if eq $taxonomy "category" -}}
-        <i class="far fa-folder-open fa-fw"></i>
+        <i class="fa-regular fa-folder-open fa-fw"></i>
         {{ .Title }}&nbsp;<sup>{{- $pageCount -}}</sup>
       {{- else if eq $taxonomy "tag" -}}
-        <i class="fas fa-tag fa-fw"></i>
+        <i class="fa-solid fa-tag fa-fw"></i>
         {{ .Title }}&nbsp;<sup>{{- $pageCount -}}</sup>
       {{- else -}}
         {{- printf "%v - %v" (T $taxonomy | default $taxonomy) .Title -}}

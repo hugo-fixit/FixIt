@@ -21,7 +21,7 @@ menu:
     name: "Built-in Shortcodes"
     title: "Hugo provides multiple built-in shortcodes for author convenience and to keep your markdown content clean."
     parent: "documentation"
-    pre: "<i class='fab fa-readme fa-fw fa-sm'></i>"
+    pre: "<i class='fa-brands fa-readme fa-fw fa-sm'></i>"
 ---
 
 **Hugo** provides multiple built-in shortcodes for author convenience and to keep your markdown content clean.

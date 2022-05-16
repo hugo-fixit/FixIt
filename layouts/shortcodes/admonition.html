@@ -1,18 +1,18 @@
 {{- $inner := .Inner | .Page.RenderString -}}
 
-{{- $iconMap := dict "note" "fas fa-pencil-alt fa-fw" -}}
-{{- $iconMap  = dict "abstract" "fas fa-list-ul fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "info" "fas fa-info-circle fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "tip" "fas fa-lightbulb fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "success" "fas fa-check-circle fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "question" "fas fa-question-circle fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "warning" "fas fa-exclamation-triangle fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "failure" "fas fa-times-circle fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "danger" "fas fa-skull-crossbones fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "bug" "fas fa-bug fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "example" "fas fa-list-ol fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "quote" "fas fa-quote-right fa-fw" | merge $iconMap -}}
-{{- $iconDetails := "fas fa-angle-right fa-fw" -}}
+{{- $iconMap := dict "note" "fa-solid fa-pencil-alt fa-fw" -}}
+{{- $iconMap  = dict "abstract" "fa-solid fa-list-ul fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "info" "fa-solid fa-info-circle fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "tip" "fa-solid fa-lightbulb fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "success" "fa-solid fa-check-circle fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "question" "fa-solid fa-question-circle fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "warning" "fa-solid fa-exclamation-triangle fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "failure" "fa-solid fa-times-circle fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "danger" "fa-solid fa-skull-crossbones fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "bug" "fa-solid fa-bug fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "example" "fa-solid fa-list-ol fa-fw" | merge $iconMap -}}
+{{- $iconMap  = dict "quote" "fa-solid fa-quote-right fa-fw" | merge $iconMap -}}
+{{- $iconDetails := "fa-solid fa-angle-right fa-fw" -}}
 
 {{- if .IsNamedParams -}}
   {{- $type := .Get "type" | default "note" -}}

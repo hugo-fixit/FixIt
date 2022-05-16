@@ -37,12 +37,12 @@
       | and (eq ((strings.HasSuffix .Content `</i>`) | or (strings.HasSuffix .Content `):`)) false)
     -}}
       {{- if .Download -}}
-        {{- dict "Class" "fas fa-cloud-download-alt fa-fw ms-1" | partial "plugin/icon.html" -}}
+        {{- dict "Class" "fa-solid fa-cloud-download-alt fa-fw ms-1" | partial "plugin/icon.html" -}}
       {{- else -}}
-        {{- dict "Class" "fas fa-external-link-alt fa-fw fa-xs ms-1" | partial "plugin/icon.html" -}}
+        {{- dict "Class" "fa-solid fa-external-link-alt fa-fw fa-xs ms-1" | partial "plugin/icon.html" -}}
       {{- end -}}
     {{- else if .Download }}
-      {{- dict "Class" "fas fa-download fa-fw ms-1" | partial "plugin/icon.html" -}}
+      {{- dict "Class" "fa-solid fa-download fa-fw ms-1" | partial "plugin/icon.html" -}}
     {{- end -}}
   {{- else -}}
     <span class="cl-backdrop"></span>

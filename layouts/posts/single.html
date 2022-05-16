@@ -34,7 +34,7 @@
         {{- $categories := slice -}}
         {{- range .Params.categories -}}
           {{- $category := partialCached "function/path.html" . . | printf "/categories/%v" | $.Site.GetPage -}}
-          {{- $categories = $categories | append (printf `<a href="%v"><i class="far fa-folder fa-fw"></i>&nbsp;%v</a>` $category.RelPermalink $category.Title) -}}
+          {{- $categories = $categories | append (printf `<a href="%v"><i class="fa-regular fa-folder fa-fw"></i>&nbsp;%v</a>` $category.RelPermalink $category.Title) -}}
         {{- end -}}
         {{- with delimit $categories "&ensp;" }}
           <span class="post-category">
@@ -45,46 +45,46 @@
       <div class="post-meta-line">
         {{- with .Site.Params.dateformat | default "2006-01-02" | .PublishDate.Format -}}
           <span title={{ "2006-01-02 15:04:05" | $.PublishDate.Format }}>
-            <i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="{{ . }}" >{{ . }}</time>
+            <i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="{{ . }}" >{{ . }}</time>
           </span>&nbsp;
         {{- end -}}
-        <i class="fas fa-pencil-alt fa-fw"></i>&nbsp;{{ T "wordCount" .WordCount }}&nbsp;
-        <i class="far fa-clock fa-fw"></i>&nbsp;{{ T "readingTime" .ReadingTime }}&nbsp;
+        <i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;{{ T "wordCount" .WordCount }}&nbsp;
+        <i class="fa-regular fa-clock fa-fw"></i>&nbsp;{{ T "readingTime" .ReadingTime }}&nbsp;
         {{- $comment := .Scratch.Get "comment" | default dict -}}
         {{- /* Visitor Count */ -}}
         {{- if $comment.enable -}}
           {{- if ($comment.valine.enable | and $comment.valine.visitor) | or ($comment.waline.enable | and $comment.waline.visitor) -}}
             {{- /* Warning: waline v2 will not be compatible with valine */ -}}  
             <span id="{{ .RelPermalink }}" class="leancloud_visitors comment-visitors" data-flag-title="{{ .Title }}">
-              <i class="far fa-eye fa-fw"></i>&nbsp;<span class="leancloud-visitors-count">-</span>&nbsp;{{ T "views" }}
+              <i class="fa-regular fa-eye fa-fw"></i>&nbsp;<span class="leancloud-visitors-count">-</span>&nbsp;{{ T "views" }}
             </span>&nbsp;
           {{- else if $comment.waline.enable | and $comment.waline.visitor -}}
             <span class="comment-visitors" data-flag-title="{{ .Title }}">
-              <i class="far fa-eye fa-fw"></i>&nbsp;<span id="{{ .RelPermalink }}" class="waline-visitor-count">-</span>&nbsp;{{ T "views" }}
+              <i class="fa-regular fa-eye fa-fw"></i>&nbsp;<span id="{{ .RelPermalink }}" class="waline-visitor-count">-</span>&nbsp;{{ T "views" }}
             </span>&nbsp;
           {{- else if $comment.twikoo.enable | and $comment.twikoo.visitor -}}
             <span id="{{ .RelPermalink }}" class="comment-visitors" data-flag-title="{{ .Title }}">
-              <i class="far fa-eye fa-fw"></i>&nbsp;<span id="twikoo_visitors">-</span>&nbsp;{{ T "views" }}
+              <i class="fa-regular fa-eye fa-fw"></i>&nbsp;<span id="twikoo_visitors">-</span>&nbsp;{{ T "views" }}
             </span>&nbsp;
           {{- end -}}
         {{- else if .Site.Params.ibruce.enable | and .Site.Params.ibruce.enablePost -}}
           <span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="{{ .Title }}">
-            <i class="far fa-eye fa-fw"></i>&nbsp;<span id="busuanzi_value_page_pv">-</span>&nbsp;{{ T "views" }}
+            <i class="fa-regular fa-eye fa-fw"></i>&nbsp;<span id="busuanzi_value_page_pv">-</span>&nbsp;{{ T "views" }}
           </span>&nbsp;
         {{- end -}}
         {{- /* Comment Count */ -}}
         {{- if $comment.enable -}}
           {{- if $comment.valine.enable | and $comment.valine.commentCount -}}
             <span class="comment-count" data-flag-title="{{ .Title }}">
-              <i class="far fa-comments fa-fw"></i>&nbsp;<span data-xid="{{ .RelPermalink }}" class="valine-comment-count">-</span>&nbsp;{{ T "comments" }}
+              <i class="fa-regular fa-comments fa-fw"></i>&nbsp;<span data-xid="{{ .RelPermalink }}" class="valine-comment-count">-</span>&nbsp;{{ T "comments" }}
             </span>&nbsp;
           {{- else if $comment.waline.enable | and $comment.waline.commentCount -}}
             <span class="comment-count" data-flag-title="{{ .Title }}">
-              <i class="far fa-comments fa-fw"></i>&nbsp;<span id="{{ .RelPermalink }}" class="waline-comment-count">-</span>&nbsp;{{ T "comments" }}
+              <i class="fa-regular fa-comments fa-fw"></i>&nbsp;<span id="{{ .RelPermalink }}" class="waline-comment-count">-</span>&nbsp;{{ T "comments" }}
             </span>&nbsp;
           {{- else if $comment.twikoo.enable | and $comment.twikoo.commentCount -}}
             <span id="{{ .RelPermalink }}" class="comment-count" data-flag-title="{{ .Title }}">
-              <i class="far fa-comments fa-fw"></i>&nbsp;<span id="twikoo-comment-count">-</span>&nbsp;{{ T "comments" }}
+              <i class="fa-regular fa-comments fa-fw"></i>&nbsp;<span id="twikoo-comment-count">-</span>&nbsp;{{ T "comments" }}
             </span>&nbsp;
           {{- end -}}
         {{- end -}}
@@ -107,7 +107,7 @@
       <div class="details toc" id="toc-static" kept="{{ if $toc.keepStatic }}true{{ else }}false{{ end }}">
         <div class="details-summary toc-title">
           <span>{{ T "contents" }}</span>
-          <span><i class="details-icon fas fa-angle-right"></i></span>
+          <span><i class="details-icon fa-solid fa-angle-right"></i></span>
         </div>
         <div class="details-content toc-content" id="toc-content-static">
           {{- dict "Content" .TableOfContents "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}

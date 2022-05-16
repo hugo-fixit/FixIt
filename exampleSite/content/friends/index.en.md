@@ -12,7 +12,7 @@ comment: true
 ---
 
 {{< admonition tip "Add your FixIt site" >}}
-You could add your FixIt site to this page via [making a PR :(fas fa-code-branch fa-fw):](https://github.com/Lruihao/FixIt/pulls). (e.g. [#111](https://github.com/Lruihao/FixIt/pull/111))
+You could add your FixIt site to this page via [making a PR :(fa-solid fa-code-branch fa-fw):](https://github.com/Lruihao/FixIt/pulls). (e.g. [#111](https://github.com/Lruihao/FixIt/pull/111))
 
-> :(fas fa-exclamation-triangle): *Website failure, stop maintenance and improper content may be unlinked!*
+> :(fa-solid fa-exclamation-triangle): *Website failure, stop maintenance and improper content may be unlinked!*
 {{< /admonition >}}

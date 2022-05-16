@@ -24,7 +24,7 @@ menu:
   main:
     title: "FixIt 主题在 Hugo 内置的 shortcode 的基础上提供多个扩展的 shortcode"
     parent: "documentation"
-    pre: "<i class='fab fa-readme fa-fw fa-sm'></i>"
+    pre: "<i class='fa-brands fa-readme fa-fw fa-sm'></i>"
 ---
 
 **FixIt** 主题在 Hugo 内置的 shortcode 的基础上提供多个扩展的 shortcode.
@@ -43,7 +43,7 @@ Hugo **extended** 版本对于 `style` shortcode 是必需的。
 
 `style` shortcode 有两个位置参数。
 
-第一个参数是自定义样式的内容。它支持 [:(fab fa-sass fa-fw): SASS](https://sass-lang.com/documentation/style-rules/declarations#nesting) 中的嵌套语法，
+第一个参数是自定义样式的内容。它支持 [:(fa-brands fa-sass fa-fw): SASS](https://sass-lang.com/documentation/style-rules/declarations#nesting) 中的嵌套语法，
 并且 `&` 指代这个父元素。
 
 第二个参数是包裹你要更改样式的内容的 HTML 标签，默认值是 `div`。
@@ -1314,7 +1314,7 @@ public class HelloWorld {
 
 {{< version 0.2.8 >}}
 
-`script` shortcode 用来在你的文章中插入 **:(fab fa-js fa-fw): Javascript** 脚本。
+`script` shortcode 用来在你的文章中插入 **:(fa-brands fa-js fa-fw): Javascript** 脚本。
 
 {{< admonition >}}
 脚本内容可以保证在所有的第三方库加载之后按顺序执行。
@@ -1339,7 +1339,7 @@ console.log('Hello FixIt!');
 
 {{< version 0.2.13 >}} {{< version 0.2.14 changed >}}
 
-`details` shortcode 用来在你的文章中插入 **:(fab fa-html5 fa-fw): HTML5 标签** details 和 summary。
+`details` shortcode 用来在你的文章中插入 **:(fa-brands fa-html5 fa-fw): HTML5 标签** details 和 summary。
 
 `details` shortcode 只有一个参数：
 - **summary** *[可选]* (**第一个**位置参数）

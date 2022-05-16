@@ -15,7 +15,7 @@ menu:
   main:
     title: "Test for shortcodes usages"
     parent: "tests"
-    pre: "<i class='fas fa-vial fa-fw fa-sm'></i>"
+    pre: "<i class='fa-solid fa-vial fa-fw fa-sm'></i>"
 ---
 
 normal content

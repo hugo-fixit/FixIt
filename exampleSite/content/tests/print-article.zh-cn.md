@@ -22,7 +22,7 @@ menu:
     name: "打印测试"
     title: "这是一篇测试 FixIt 主题在打印视图表现的测试文章"
     parent: "tests"
-    pre: "<i class='fas fa-vial fa-fw fa-sm'></i>"
+    pre: "<i class='fa-solid fa-vial fa-fw fa-sm'></i>"
 ---
 
 <div class="print-d-none">

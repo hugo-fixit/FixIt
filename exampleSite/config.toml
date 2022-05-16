@@ -53,7 +53,7 @@ enableEmoji = true
         # Identifier of the parent menu item since v0.2.14
         parent = ""
         # you can add extra information before the name (HTML format is supported), such as icons
-        pre = "<i class='fas fa-archive fa-fw fa-sm'></i>"
+        pre = "<i class='fa-solid fa-archive fa-fw fa-sm'></i>"
         # you can add extra information after the name (HTML format is supported), such as icons
         post = ""
         name = "Posts"
@@ -63,7 +63,7 @@ enableEmoji = true
         weight = 1
       [[languages.en.menu.main]]
         identifier = "categories"
-        pre = "<i class='fas fa-th fa-fw fa-sm'></i>"
+        pre = "<i class='fa-solid fa-th fa-fw fa-sm'></i>"
         post = ""
         name = "Categories"
         url = "/categories/"
@@ -71,7 +71,7 @@ enableEmoji = true
         weight = 2
       [[languages.en.menu.main]]
         identifier = "tags"
-        pre = "<i class='fas fa-tags fa-fw fa-sm'></i>"
+        pre = "<i class='fa-solid fa-tags fa-fw fa-sm'></i>"
         post = ""
         name = "Tags"
         url = "/tags/"
@@ -79,7 +79,7 @@ enableEmoji = true
         weight = 3
       [[languages.en.menu.main]]
         identifier = "documentation"
-        pre = "<i class='fas fa-book fa-fw fa-sm'></i>"
+        pre = "<i class='fa-solid fa-book fa-fw fa-sm'></i>"
         post = ""
         name = "Docs"
         url = "/categories/documentation/"
@@ -87,7 +87,7 @@ enableEmoji = true
         weight = 4
       [[languages.en.menu.main]]
         identifier = "tests"
-        pre = "<i class='fas fa-flask fa-fw fa-sm'></i>"
+        pre = "<i class='fa-solid fa-flask fa-fw fa-sm'></i>"
         post = ""
         name = "Tests"
         url = "/tests/"
@@ -97,7 +97,7 @@ enableEmoji = true
           draft = true
       [[languages.en.menu.main]]
         identifier = "friends"
-        pre = "<i class='fas fa-users fa-fw fa-sm'></i>"
+        pre = "<i class='fa-solid fa-users fa-fw fa-sm'></i>"
         post = ""
         name = "Friends"
         url = "/friends/"
@@ -105,7 +105,7 @@ enableEmoji = true
         weight = 6
       [[languages.en.menu.main]]
         identifier = "about"
-        pre = "<i class='fas fa-info-circle fa-fw fa-sm'></i>"
+        pre = "<i class='fa-solid fa-info-circle fa-fw fa-sm'></i>"
         post = ""
         name = "About"
         url = "/about/"
@@ -113,7 +113,7 @@ enableEmoji = true
         weight = 7
       [[languages.en.menu.main]]
         identifier = "github"
-        pre = "<i class='fab fa-github fa-fw'></i>"
+        pre = "<i class='fa-brands fa-github fa-fw'></i>"
         post = ""
         name = ""
         url = "https://github.com/Lruihao/FixIt"
@@ -289,7 +289,7 @@ enableEmoji = true
         # 父级菜单项的标识符 (identifier) since v0.2.14
         parent = ""
         # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
-        pre = "<i class='fas fa-archive fa-fw fa-sm'></i>"
+        pre = "<i class='fa-solid fa-archive fa-fw fa-sm'></i>"
         # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
         post = ""
         name = "所有文章"
@@ -298,7 +298,7 @@ enableEmoji = true
         weight = 1
       [[languages.zh-cn.menu.main]]
         identifier = "categories"
-        pre = "<i class='fas fa-th fa-fw fa-sm'></i>"
+        pre = "<i class='fa-solid fa-th fa-fw fa-sm'></i>"
         post = ""
         name = "分类"
         url = "/categories/"
@@ -306,7 +306,7 @@ enableEmoji = true
         weight = 2
       [[languages.zh-cn.menu.main]]
         identifier = "tags"
-        pre = "<i class='fas fa-tags fa-fw fa-sm'></i>"
+        pre = "<i class='fa-solid fa-tags fa-fw fa-sm'></i>"
         post = ""
         name = "标签"
         url = "/tags/"
@@ -314,14 +314,14 @@ enableEmoji = true
         weight = 3
       [[languages.zh-cn.menu.main]]
         identifier = "documentation"
-        pre = "<i class='fas fa-book fa-fw fa-sm'></i>"
+        pre = "<i class='fa-solid fa-book fa-fw fa-sm'></i>"
         name = "文档"
         url = "/categories/documentation/"
         title = "主题文档"
         weight = 4
       [[languages.zh-cn.menu.main]]
         identifier = "tests"
-        pre = "<i class='fas fa-flask fa-fw fa-sm'></i>"
+        pre = "<i class='fa-solid fa-flask fa-fw fa-sm'></i>"
         post = ""
         name = "测试"
         url = "/tests/"
@@ -331,7 +331,7 @@ enableEmoji = true
           draft = true
       [[languages.zh-cn.menu.main]]
         identifier = "friends"
-        pre = "<i class='fas fa-users fa-fw fa-sm'></i>"
+        pre = "<i class='fa-solid fa-users fa-fw fa-sm'></i>"
         post = ""
         name = "友链"
         url = "/friends/"
@@ -339,7 +339,7 @@ enableEmoji = true
         weight = 6
       [[languages.zh-cn.menu.main]]
         identifier = "about"
-        pre = "<i class='fas fa-info-circle fa-fw fa-sm'></i>"
+        pre = "<i class='fa-solid fa-info-circle fa-fw fa-sm'></i>"
         post = ""
         name = "关于"
         url = "/about/"
@@ -347,7 +347,7 @@ enableEmoji = true
         weight = 7
       [[languages.zh-cn.menu.main]]
         identifier = "github"
-        pre = "<i class='fab fa-github fa-fw'></i>"
+        pre = "<i class='fa-brands fa-github fa-fw'></i>"
         post = ""
         name = ""
         url = "https://github.com/Lruihao/FixIt"
