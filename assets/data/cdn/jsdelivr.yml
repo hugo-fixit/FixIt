@@ -23,9 +23,8 @@ libFiles:
   # echarts@5.2.2 https://github.com/apache/echarts
   echartsJS: echarts@5.3.2/dist/echarts.min.js
   echartsMacaronsJS: echarts@5.3.2/theme/macarons.min.js
-  # TODO update
-  # fontawesome-free@5.14.0 https://github.com/FortAwesome/Font-Awesome
-  fontawesomeFreeCSS: '@fortawesome/fontawesome-free@5.14.0/css/all.min.css'
+  # fontawesome-free@6.1.1 https://github.com/FortAwesome/Font-Awesome
+  fontawesomeFreeCSS: '@fortawesome/fontawesome-free@6.1.1/css/all.min.css'
   # gitalk@1.7.2 https://github.com/gitalk/gitalk
   gitalkCSS: gitalk@1.7.2/dist/gitalk.min.css
   gitalkJS: gitalk@1.7.2/dist/gitalk.min.js
@@ -71,4 +70,4 @@ libFiles:
   valineJS: valine@1.4.18/dist/Valine.min.js
   # waline@1.5.2 https://github.com/walinejs/waline
   # TODO update
-  walineJS: "@waline/client@1.5.2/dist/Waline.min.js"
+  walineJS: '@waline/client@1.5.2/dist/Waline.min.js'

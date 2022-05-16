@@ -2,9 +2,19 @@
 All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/Lruihao/FixIt/releases -->
 
+
+## v0.2.15
+
+> Add hugo new features support.
+> Snapshot: 
+
+- :arrow_up: Chore: update some third-party libraries
+- **Full Changelog:** @Lruihao [`v0.2.14...v0.2.15`](https://github.com/Lruihao/FixIt/compare/v0.2.14...v0.2.15)
+
 ## v0.2.14 [2022.5.15]
 
 > Add hugo new features support.
+> Snapshot: <https://fixit-p1tg6tsml-lruihao.vercel.app>
 
 - :recycle: Refactor: header layout
   - :tada: Feat: add sub menu (nested menu) support ([#31](https://github.com/Lruihao/FixIt/issues/31))
