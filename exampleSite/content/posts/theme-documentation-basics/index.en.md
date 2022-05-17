@@ -16,6 +16,9 @@ categories: ["documentation"]
 
 lightgallery: true
 
+toc:
+  auto: false
+
 menu:
   main:
     name: "Basics"
