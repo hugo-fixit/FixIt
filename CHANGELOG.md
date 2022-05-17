@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 > Add hugo new features support.
 > Snapshot: 
 
+- :bug: Fix: Giscus comments invalid config `inputPosition`
 - :art: Style: add scroll bar for auto toc ([#136](https://github.com/Lruihao/FixIt/issues/136))
 - :arrow_up: Chore: update some third-party libraries
 - **Full Changelog:** @Lruihao [`v0.2.14...v0.2.15`](https://github.com/Lruihao/FixIt/compare/v0.2.14...v0.2.15)
