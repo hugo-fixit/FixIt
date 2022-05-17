@@ -495,8 +495,12 @@ class Theme {
       });
     }
   }
-
-  initToc() {
+  /**
+   * init table of contents
+   * @param {Boolean} [onInit=false]
+   * @returns 
+   */
+  initToc(onInit = false) {
     const $tocCore = document.getElementById('TableOfContents');
     if ($tocCore === null) {
       return;
@@ -507,7 +511,7 @@ class Theme {
         $tocCore.parentElement.removeChild($tocCore);
         $tocContentStatic.appendChild($tocCore);
       }
-      if (this._tocOnScroll) this.scrollEventSet.delete(this._tocOnScroll);
+      this._tocOnScroll && this.scrollEventSet.delete(this._tocOnScroll);
     } else {
       const $tocContentAuto = document.getElementById('toc-content-auto');
       if ($tocCore.parentElement !== $tocContentAuto) {
@@ -556,6 +560,15 @@ class Theme {
       });
       this._tocOnScroll();
       this.scrollEventSet.add(this._tocOnScroll);
+      // only addEventListener once
+      onInit && document.querySelector('#toc-auto>.toc-title').addEventListener('click', () => {
+        const animation = ['animate__faster']
+        const tocHidden = $toc.classList.contains('toc-hidden');
+        animation.push(tocHidden ? 'animate__fadeIn' : 'animate__fadeOut');
+        $tocContentAuto.classList.remove(tocHidden ? 'animate__fadeOut' : 'animate__fadeIn');
+        this.util.animateCSS($tocContentAuto, animation, true);
+        $toc.classList.toggle('toc-hidden');
+      }, false)
     }
   }
 
@@ -984,7 +997,7 @@ class Theme {
 
     window.setTimeout(() => {
       this.initComment();
-      this.initToc();
+      this.initToc(true);
 
       this.onScroll();
       this.onResize();

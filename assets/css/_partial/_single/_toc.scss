@@ -61,6 +61,7 @@
 
   .toc-title {
     margin: 0.5rem 0;
+    cursor: pointer;
 
     &::before {
       content: '|';
@@ -72,6 +73,15 @@
         color: $global-border-color-dark;
       }
     }
+
+    i.toc-icon {
+      @include transition(transform 0.2s ease);
+    }
+  }
+
+  &.toc-hidden i.toc-icon {
+    @include transform(rotate(-90deg));
+    @include transition(transform 0.2s ease);
   }
 
   .toc-content {

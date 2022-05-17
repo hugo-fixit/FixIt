@@ -8,7 +8,7 @@
     {{- /* Auto TOC */ -}}
     {{- $tocEmpty := eq .TableOfContents `<nav id="TableOfContents"></nav>` -}}
     {{- if (ne $toc.enable false) | and (ne $tocEmpty true) -}}
-      <h2 class="toc-title">{{ T "contents" }}</h2>
+      <h2 class="toc-title">{{ T "contents" }} <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2>
       <div class="toc-content{{ if eq $toc.auto false }} always-active{{ end }}" id="toc-content-auto"></div>
     {{- end -}}
   </aside>

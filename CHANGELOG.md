@@ -2,12 +2,12 @@
 All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/Lruihao/FixIt/releases -->
 
-
 ## v0.2.15
 
 > Add hugo new features support.
 > Snapshot: 
 
+- :sparkles: Feat: enhance auto toc feature ([#104](https://github.com/Lruihao/FixIt/issues/104) [#136](https://github.com/Lruihao/FixIt/issues/136))
 - :bug: Fix: Giscus comments invalid config `inputPosition`
 - :art: Style: add scroll bar for auto toc ([#136](https://github.com/Lruihao/FixIt/issues/136))
 - :arrow_up: Chore: update some third-party libraries
