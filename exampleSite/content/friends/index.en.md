@@ -6,7 +6,10 @@ description: "Friends tempalate demo of FixIt theme"
 keywords: 
   - Hugo
   - friends tempalate
-comment: true
+comment:
+  giscus:
+    mapping: "number"
+    term: "120"
 ---
 
 ---
