@@ -895,7 +895,7 @@ hugo
 [outputFormats]
   # 用于输出 Markdown 格式文档的设置
   [outputFormats.MarkDown]
-    mediaType = "text/plain"
+    mediaType = "text/markdown"
     isPlainText = true
     isHTML = false
   # {{< version 0.2.15 >}} 用于输出 baidu_urls.txt 文件的设置
