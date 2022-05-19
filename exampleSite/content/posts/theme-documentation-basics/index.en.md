@@ -269,9 +269,9 @@ Please open the code block below to view the complete sample configuration :(fa-
 
   # Header config
   [params.header]
-    # desktop header mode ("sticky", "normal", "auto")
+    # {{< version 0.2.13 changed >}} desktop header mode ("sticky", "normal", "auto")
     desktopMode = "sticky"
-    # mobile header mode ("sticky", "normal", "auto")
+    # {{< version 0.2.13 changed >}} mobile header mode ("sticky", "normal", "auto")
     mobileMode = "auto"
     # {{< version 0.2.0 >}} Header title config
     [params.header.title]
@@ -284,6 +284,12 @@ Please open the code block below to view the complete sample configuration :(fa-
       # you can add extra information after the name (HTML format is supported), such as icons
       post = ""
       # {{< version 0.2.5 >}} whether to use typeit animation for title name
+      typeit = false
+    # {{< version 0.2.12 >}} Header subtitle config
+    [params.header.subtitle]
+      # subtitle name
+      name = ""
+      # whether to use typeit animation for subtitle name
       typeit = false
 
   # Footer config
@@ -303,6 +309,8 @@ Please open the code block below to view the complete sample configuration :(fa-
     siteTime = '' # e.g. '2019-02-03T19:30:34+08:00'
     # {{< version 0.2.14 >}} whether to show total word count of site content
     wordCount = true
+    # {{< version 0.2.12 >}} Public network security only in China (HTML format is supported)
+    gov = ""
     # ICP info only in China (HTML format is supported)
     icp = ""
     # license info (HTML format is supported)
@@ -556,7 +564,7 @@ Please open the code block below to view the complete sample configuration :(fa-
       Skype = false
       Trello = false
       Mix = false
-    # {{< version 0.2.13 changed >}} Comment config
+    # {{< version 0.2.14 changed >}} Comment config
     [params.page.comment]
       enable = false
       # {{< version 0.2.13 >}} {{< link "https://artalk.js.org/" Artalk >}} comment config (https://artalk.js.org/)
@@ -572,15 +580,13 @@ Please open the code block below to view the complete sample configuration :(fa-
         maxNesting = 3
         # It take effect when `params.page.lightgallery` is enabled
         lightgallery = false
-      # {{< link "https://disqus.com/" Disqus >}} comment config (https://disqus.com)
+      # {{< version 0.1.1 >}} {{< link "https://disqus.com/" Disqus >}} comment config (https://disqus.com)
       [params.page.comment.disqus]
-        # {{< version 0.1.1 >}}
         enable = false
         # Disqus shortname to use Disqus in posts
         shortname = ""
-      # {{< link "https://github.com/gitalk/gitalk" Gitalk >}} comment config (https://github.com/gitalk/gitalk)
+      # {{< version 0.1.1 >}} {{< link "https://github.com/gitalk/gitalk" Gitalk >}} comment config (https://github.com/gitalk/gitalk)
       [params.page.comment.gitalk]
-        # {{< version 0.1.1 >}}
         enable = false
         owner = ""
         repo = ""
@@ -708,6 +714,11 @@ Please open the code block below to view the complete sample configuration :(fa-
     # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
     duration = -1
 
+  # {{< version 0.2.12 >}} PanguJS config
+  [params.pangu]
+    # For Chinese writing
+    enable = false
+
   # {{< version 0.2.12 >}} Watermark config
   # Detail config see https://github.com/Lruihao/watermark#readme
   [params.watermark]
@@ -730,7 +741,7 @@ Please open the code block below to view the complete sample configuration :(fa-
     rotate = 15
     # watermark's fontSize. unit: rem
     fontSize = 0.85
-    # watermark's fontFamily
+    # {{< version 0.2.13 >}} watermark's fontFamily
     fontFamily = 'inherit'
 
   # {{< version 0.2.12 >}} Busuanzi count

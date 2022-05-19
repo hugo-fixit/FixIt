@@ -271,9 +271,9 @@ hugo
 
   # 页面头部导航栏配置
   [params.header]
-    # 桌面端导航栏模式 ("sticky", "normal", "auto")
+    # {{< version 0.2.13 changed >}} 桌面端导航栏模式 ("sticky", "normal", "auto")
     desktopMode = "sticky"
-    # 移动端导航栏模式 ("sticky", "normal", "auto")
+    # {{< version 0.2.13 changed >}} 移动端导航栏模式 ("sticky", "normal", "auto")
     mobileMode = "auto"
     # {{< version 0.2.0 >}} 页面头部导航栏标题配置
     [params.header.title]
@@ -566,7 +566,7 @@ hugo
       Skype = false
       Trello = false
       Mix = false
-    # {{< version 0.2.13 changed >}} 评论系统设置
+    # {{< version 0.2.14 changed >}} 评论系统设置
     [params.page.comment]
       enable = false
       # {{< version 0.2.13 >}} {{< link "https://artalk.js.org/" Artalk >}} 评论系统设置 (https://artalk.js.org/)
@@ -582,15 +582,13 @@ hugo
         maxNesting = 3
         # 当 `params.page.lightgallery` 启用时生效
         lightgallery = false
-      # {{< link "https://disqus.com/" Disqus >}} 评论系统设置 (https://disqus.com)
+      # {{< version 0.1.1 >}} {{< link "https://disqus.com/" Disqus >}} 评论系统设置 (https://disqus.com)
       [params.page.comment.disqus]
-        # {{< version 0.1.1 >}}
         enable = false
         # Disqus 的 shortname，用来在文章中启用 Disqus 评论系统
         shortname = ""
-      # {{< link "https://github.com/gitalk/gitalk" Gitalk >}} 评论系统设置 (https://github.com/gitalk/gitalk)
+      # {{< version 0.1.1 >}} {{< link "https://github.com/gitalk/gitalk" Gitalk >}} 评论系统设置 (https://github.com/gitalk/gitalk)
       [params.page.comment.gitalk]
-        # {{< version 0.1.1 >}}
         enable = false
         owner = ""
         repo = ""
@@ -718,6 +716,11 @@ hugo
     # 打字结束之后光标的持续时间（单位是毫秒，"-1" 代表无限大）
     duration = -1
   
+  # {{< version 0.2.12 >}} 盘古之白配置
+  [params.pangu]
+    # 适用于中文写作用户
+    enable = false
+  
   # {{< version 0.2.12 >}} 水印配置
   # 详细参数见 https://github.com/Lruihao/watermark#readme
   [params.watermark]
@@ -740,7 +743,7 @@ hugo
     rotate = 15
     # 水印字体大小，单位：rem
     fontSize = 0.85
-    # 水印字体
+    # {{< version 0.2.13 >}} 水印字体
     fontFamily = 'inherit'
 
   # {{< version 0.2.12 >}} 不蒜子统计
