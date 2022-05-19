@@ -11,7 +11,7 @@
 
 它的原型基于 [LoveIt 主题](https://github.com/dillonzq/LoveIt), [LeaveIt 主题](https://github.com/liuzc/LeaveIt) 和 [KeepIt 主题](https://github.com/Fastbyte01/KeepIt)。
 
-[LoveIt 主题](https://github.com/dillonzq/LoveIt) 对我们来说是一个很棒的 Hugo 主题，很抱歉的是它的存储库已经停止维护很长一段时间了，所以我重建了一个名为 FixIt 的新主题，这样我可以更好地 **Fix It** 并使它用户体验更好。
+<!-- [LoveIt 主题](https://github.com/dillonzq/LoveIt) 对我们来说是一个很棒的 Hugo 主题，很抱歉的是它的存储库已经停止维护很长一段时间了，所以我重建了一个名为 FixIt 的新主题，这样我可以更好地 **Fix It** 并使它用户体验更好。 -->
 
 FixIt 主题继承了这些主题的优秀功能，并在此基础上添加了新的功能与优化，请阅读 [为什么选择 FixIt](#为什么选择-FixIt) 来了解更多。
 

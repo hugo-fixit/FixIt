@@ -11,7 +11,7 @@ English README | [简体中文说明](https://github.com/Lruihao/FixIt/blob/mast
 
 It is based on the original [LoveIt Theme](https://github.com/dillonzq/LoveIt), [LeaveIt Theme](https://github.com/liuzc/LeaveIt) and [KeepIt Theme](https://github.com/Fastbyte01/KeepIt).
 
-[LoveIt Theme](https://github.com/dillonzq/LoveIt) is a awesome hugo theme for us, I'm sorry that it's repository has been out of maintenance for a long time, so I rebuilt a new fork named FixIt so that I can better **Fix It** and make it more user-friendly.
+<!-- [LoveIt Theme](https://github.com/dillonzq/LoveIt) is a awesome hugo theme for us, I'm sorry that it's repository has been out of maintenance for a long time, so I rebuilt a new fork named FixIt so that I can better **Fix It** and make it more user-friendly. -->
 
 The FixIt theme inherits the excellent functions of these themes, and adds new functions and optimizations on this basis. Please read [Why Choose FixIt](#why-choose-fixit) to learn more.
 
