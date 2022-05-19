@@ -3,10 +3,9 @@
   {{- $avatar := $profile.avatarURL -}}
   {{- if $profile.gravatarEmail -}}
     {{- $gravatar := .Site.Params.gravatar -}}
-    {{- /* TODO: The parameter `home.profile.gravatarSite` will be deleted in v0.2.15 */ -}}
     {{- with $gravatar -}}
       {{- $avatar = printf "https://%v/avatar/%v?s=240&d=%v"
-        ($profile.gravatarSite | default .Host | default "www.gravatar.com")
+        (.Host | default "www.gravatar.com")
         (md5 $profile.gravatarEmail)
         (.Style | default "mp")
       -}}

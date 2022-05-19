@@ -191,9 +191,8 @@
 {{- end -}}
 
 {{- /* Site creation time */ -}}
-{{- /* TODO: The parameter `ibruce.siteTime` will be deleted in v0.2.15 */ -}}
-{{- if .Site.Params.ibruce.siteTime | or .Site.Params.footer.siteTime -}}
-  {{- $config = dict "siteTime" (.Site.Params.ibruce.siteTime | default .Site.Params.footer.siteTime) | merge $config -}}
+{{- if .Site.Params.footer.siteTime -}}
+  {{- $config = dict "siteTime" .Site.Params.footer.siteTime | merge $config -}}
 {{- end -}}
 
 {{- /* PWA */ -}}

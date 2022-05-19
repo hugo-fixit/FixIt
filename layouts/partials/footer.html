@@ -45,10 +45,9 @@
         </div>
       {{- end -}}
 
-      {{- /* TODO: The parameter `ibruce.siteTime` will be deleted in v0.2.15 */ -}}
-      {{- if .Site.Params.ibruce.siteTime | or .Site.Params.footer.siteTime | or .Site.Params.footer.wordCount -}}
+      {{- if .Site.Params.footer.siteTime | or .Site.Params.footer.wordCount -}}
         <div class="footer-line statistics">
-          {{- if .Site.Params.ibruce.siteTime | or .Site.Params.footer.siteTime -}}
+          {{- if .Site.Params.footer.siteTime -}}
             <span class="site-time" title='{{ T "siteRunning" }}'><i class="fa-solid fa-heartbeat fa-fw animate-icon"></i>&nbsp;<span class="run-times">{{- T "siteRunning" -}}</span></span>
           {{- end -}}
 
