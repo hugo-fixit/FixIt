@@ -66,6 +66,10 @@
             <span id="{{ .RelPermalink }}" class="comment-visitors" data-flag-title="{{ .Title }}">
               <i class="fa-regular fa-eye fa-fw"></i>&nbsp;<span id="twikoo_visitors">-</span>&nbsp;{{ T "views" }}
             </span>&nbsp;
+          {{- else if .Site.Params.ibruce.enable | and .Site.Params.ibruce.enablePost -}}
+            <span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="{{ .Title }}">
+              <i class="fa-regular fa-eye fa-fw"></i>&nbsp;<span id="busuanzi_value_page_pv">-</span>&nbsp;{{ T "views" }}
+            </span>&nbsp;
           {{- end -}}
         {{- else if .Site.Params.ibruce.enable | and .Site.Params.ibruce.enablePost -}}
           <span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="{{ .Title }}">

@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: enhance auto toc feature ([#104](https://github.com/Lruihao/FixIt/issues/104) [#136](https://github.com/Lruihao/FixIt/issues/136))
 - :sparkles: Feat(SEO): add options to make output baidu_urls.txt file ([#138](https://github.com/Lruihao/FixIt/issues/138))
 - :bug: Fix: Giscus comments invalid config `inputPosition`
+- :bug: Fix: busuanzi logic error
 - :art: Style: add scroll bar for auto toc ([#136](https://github.com/Lruihao/FixIt/issues/136))
 - :arrow_up: Chore: update some third-party libraries
 - **Full Changelog:** @Lruihao [`v0.2.14...v0.2.15`](https://github.com/Lruihao/FixIt/compare/v0.2.14...v0.2.15)
