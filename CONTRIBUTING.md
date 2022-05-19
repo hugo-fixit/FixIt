@@ -20,17 +20,17 @@ And now you are ready to go!
 Here are some useful commands.
 
 ```bash
-#build theme.js with babel
+# build theme.js with babel
 npm run babel
-#build theme.js and then build the static site
+# build theme.js and then build the static site
 npm run build
-#run a local debugging server
+# run a local debugging server with watch
 npm run server
-#run a local debugging server in production environment
+# run a local debugging server with watch in production environment
 npm run server:production
-#build theme.js and then run a local debugging server
+# build theme.js and then run a local debugging server
 npm run start
-#build theme.js and then run a local debugging server in production environment
+# build theme.js and then run a local debugging server in production environment
 npm run start:production
 
 ```
