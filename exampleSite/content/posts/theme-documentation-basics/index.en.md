@@ -881,21 +881,32 @@ Please open the code block below to view the complete sample configuration :(fa-
   [privacy.youtube]
     privacyEnhanced = true
 
-# Options to make output .md files
+# {{< version 0.2.15 changed >}}
 [mediaTypes]
-  [mediaTypes."text/plain"]
+  # Options to make output .md files
+  [mediaTypes."text/markdown"]
     suffixes = ["md"]
+  # Options to make output .txt files
+  [mediaTypes."text/plain"]
+    suffixes = ["txt"]
 
-# Options to make output .md files
-[outputFormats.MarkDown]
-  mediaType = "text/plain"
-  isPlainText = true
-  isHTML = false
+# {{< version 0.2.15 changed >}}
+[outputFormats]
+  # Options to make output .md files
+  [outputFormats.MarkDown]
+    mediaType = "text/markdown"
+    isPlainText = true
+    isHTML = false
+  # {{< version 0.2.15 >}} Options to make output baidu_urls.txt file
+  [outputFormats.BaiduUrls]
+    baseName = "baidu_urls"
+    mediaType = "text/plain"
+    isPlainText = true
+    isHTML = false
 
-# Options to make hugo output files
+# {{< version 0.2.15 changed >}} Options to make hugo output files
 [outputs]
-  # {{< version 0.2.0 changed >}}
-  home = ["HTML", "RSS", "JSON"]
+  home = ["HTML", "RSS", "JSON", "BaiduUrls"]
   page = ["HTML", "MarkDown"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]

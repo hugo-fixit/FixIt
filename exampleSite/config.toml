@@ -1213,23 +1213,35 @@ enableEmoji = true
   [privacy.youtube]
     privacyEnhanced = true
 
-# Options to make output .md files
-# 用于输出 Markdown 格式文档的设置
 [mediaTypes]
-  [mediaTypes."text/plain"]
+  # Options to make output .md files
+  # 用于输出 Markdown 格式文档的设置
+  [mediaTypes."text/markdown"]
     suffixes = ["md"]
+  # Options to make output .txt files
+  # 用于输出 txt 文件的设置
+  [mediaTypes."text/plain"]
+    suffixes = ["txt"]
 
-# Options to make output .md files
-# 用于输出 Markdown 格式文档的设置
-[outputFormats.MarkDown]
-  mediaType = "text/plain"
-  isPlainText = true
-  isHTML = false
+[outputFormats]
+  # Options to make output .md files
+  # 用于输出 Markdown 格式文档的设置
+  [outputFormats.MarkDown]
+    mediaType = "text/plain"
+    isPlainText = true
+    isHTML = false
+  # Options to make output baidu_urls.txt file
+  # 用于输出 baidu_urls.txt 文件的设置
+  [outputFormats.BaiduUrls]
+    baseName = "baidu_urls"
+    mediaType = "text/plain"
+    isPlainText = true
+    isHTML = false
 
 # Options to make hugo output files
 # 用于 Hugo 输出文档的设置
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+  home = ["HTML", "RSS", "JSON", "BaiduUrls"]
   page = ["HTML", "MarkDown"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]

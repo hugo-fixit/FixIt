@@ -882,21 +882,32 @@ hugo
   [privacy.youtube]
     privacyEnhanced = true
 
-# 用于输出 Markdown 格式文档的设置
+# {{< version 0.2.15 changed >}}
 [mediaTypes]
-  [mediaTypes."text/plain"]
+  # 用于输出 Markdown 格式文档的设置
+  [mediaTypes."text/markdown"]
     suffixes = ["md"]
+  # 用于输出 txt 格式文档的设置
+  [mediaTypes."text/plain"]
+    suffixes = ["txt"]
 
-# 用于输出 Markdown 格式文档的设置
-[outputFormats.MarkDown]
-  mediaType = "text/plain"
-  isPlainText = true
-  isHTML = false
+# {{< version 0.2.15 changed >}}
+[outputFormats]
+  # 用于输出 Markdown 格式文档的设置
+  [outputFormats.MarkDown]
+    mediaType = "text/plain"
+    isPlainText = true
+    isHTML = false
+  # {{< version 0.2.15 >}} 用于输出 baidu_urls.txt 文件的设置
+  [outputFormats.BaiduUrls]
+    baseName = "baidu_urls"
+    mediaType = "text/plain"
+    isPlainText = true
+    isHTML = false
 
-# 用于 Hugo 输出文档的设置
+# {{< version 0.2.15 changed >}} 用于 Hugo 输出文档的设置
 [outputs]
-  # {{< version 0.2.0 changed >}}
-  home = ["HTML", "RSS", "JSON"]
+  home = ["HTML", "RSS", "JSON", "BaiduUrls"]
   page = ["HTML", "MarkDown"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
