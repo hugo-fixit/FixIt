@@ -8,7 +8,7 @@
       {{- if ne .Lastmod.Unix .Date.Unix }}
         {{- $postCount = add $postCount 1 -}}
         {{- if eq $hasTitle false -}}
-          <h3 class="group-title">{{- T "recentlyUpdated" -}}</h3>
+          <h2 class="group-title">{{- T "recentlyUpdated" -}}</h2>
           {{- $hasTitle = true -}}
         {{- end -}}
         <article class="archive-item">

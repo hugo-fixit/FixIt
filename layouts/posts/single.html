@@ -18,13 +18,13 @@
   </aside>
 
   <article class="page single">
-    {{- /* Title */ -}}
-    <h1 class="single-title animate__animated animate__flipInX">{{ .Title }}</h1>
+    <div class="header">
+      {{- /* Title */ -}}
+      <h1 class="single-title animate__animated animate__flipInX">{{ .Title }}</h1>
 
-    {{- /* Subtitle */ -}}
-    {{- with $params.subtitle -}}
-      <h2 class="single-subtitle">{{ . }}</h2>
-    {{- end -}}
+      {{- /* Subtitle */ -}}
+      {{- with $params.subtitle -}}<p class="single-subtitle animate__animated animate__fadeIn">{{ . }}</p>{{- end -}}
+    </div>
 
     {{- /* Meta */ -}}
     <div class="post-meta">
