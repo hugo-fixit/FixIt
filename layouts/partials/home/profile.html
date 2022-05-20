@@ -5,7 +5,7 @@
     {{- $gravatar := .Site.Params.gravatar -}}
     {{- with $gravatar -}}
       {{- $avatar = printf "https://%v/avatar/%v?s=240&d=%v"
-        (.Host | default "www.gravatar.com")
+        (path.Clean .Host | default "www.gravatar.com")
         (md5 $profile.gravatarEmail)
         (.Style | default "mp")
       -}}
