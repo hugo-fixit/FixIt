@@ -50,6 +50,15 @@
         {{- end -}}
         <i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;{{ T "wordCount" .WordCount }}&nbsp;
         <i class="fa-regular fa-clock fa-fw"></i>&nbsp;{{ T "readingTime" .ReadingTime }}&nbsp;
+
+        {{- /* If the article expires, close the comment or not */ -}}
+        {{- $expirationReminder := $params.expirationReminder | default dict -}}
+        {{- if
+          $expirationReminder.enable
+          | and (gt (div (sub now.Unix .Lastmod.Unix) 86400) ($expirationReminder.warning | default 180))
+          | and $expirationReminder.closeComment -}}
+          {{- .Scratch.Set "comment" (dict "enable" false) -}}
+        {{- end -}}
         {{- $comment := .Scratch.Get "comment" | default dict -}}
         {{- /* Visitor Count */ -}}
         {{- if $comment.enable -}}
