@@ -33,6 +33,10 @@ other = "Posts"
 [allSome]
 other = "Todos {{ .Some }}"
 
+[totalwordCount]
+one = "" # waitting for translation
+other = "" # waitting for translation
+
 [tag]
 other = "Tag"
 
@@ -151,10 +155,6 @@ other = "incluido em {{ .Categories }}"
 [wordCount]
 one = "Uma palavra"
 other = "{{ .Count }} palavras"
-
-[totalwordCount]
-one = "" # waitting for translation
-other = "" # waitting for translation
 
 [readingTime]
 one = "Um minuto"

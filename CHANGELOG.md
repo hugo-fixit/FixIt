@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 > Add hugo new features support.
 > Snapshot: 
 
+- :sparkles: Feat: add total word count feature in section and remove from footer ([#124](https://github.com/Lruihao/FixIt/issues/124))
 - :sparkles: Feat: enhance auto toc feature ([#104](https://github.com/Lruihao/FixIt/issues/104) [#136](https://github.com/Lruihao/FixIt/issues/136))
 - :sparkles: Feat(SEO): add options to make output baidu_urls.txt file ([#138](https://github.com/Lruihao/FixIt/issues/138))
 - :bug: Fix: Giscus comments invalid config `inputPosition`

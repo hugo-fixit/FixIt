@@ -50,23 +50,6 @@
           {{- if .Site.Params.footer.siteTime -}}
             <span class="site-time" title='{{ T "siteRunning" }}'><i class="fa-solid fa-heartbeat fa-fw animate-icon"></i>&nbsp;<span class="run-times">{{- T "siteRunning" -}}</span></span>
           {{- end -}}
-
-          {{- /* Total word count */ -}}
-          {{- /* There is a fatal bug. See https://github.com/Lruihao/FixIt/issues/124 */ -}}
-          {{- /* if ne .Site.Params.footer.wordCount false */ -}}
-          {{- if false -}}
-            {{- $localData := newScratch -}}
-            {{- range (where .Site.Pages "Kind" "page") -}}
-              {{- $localData.Add "totalWordCount" .WordCount -}}
-            {{- end -}}
-            {{- with ($localData.Get "totalWordCount") -}}
-              {{- $humanizedNum := . -}}
-              {{- if ge $humanizedNum 1000 -}}
-                {{- $humanizedNum = printf "%.2fK" (div $humanizedNum 1000.0) -}}
-              {{- end -}}
-              <span class="total-word-count footer-divider" title='{{- T "totalwordCount" . }}'><i class="fa-regular fa-keyboard fa-fw"></i>&nbsp;{{- T "totalwordCount" (dict "Count" $humanizedNum) -}}</span>
-            {{- end -}}
-          {{- end -}}
         </div>
       {{- end -}}
 

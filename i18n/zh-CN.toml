@@ -33,6 +33,9 @@ other = "文章"
 [allSome]
 other = "所有{{ .Some }}"
 
+[totalwordCount]
+other = "总计约 {{ .Count }} 字"
+
 [tag]
 other = "标签"
 
@@ -153,9 +156,6 @@ other = "收录于 {{ .Categories }}"
 
 [wordCount]
 other = "约 {{ .Count }} 字"
-
-[totalwordCount]
-other = "总计约 {{ .Count }} 字"
 
 [readingTime]
 other = "预计阅读 {{ .Count }} 分钟"

@@ -4,11 +4,29 @@
 
 {{- define "content" -}}
   <div class="page archive">
-    {{- /* Title */ -}}
-    <h2 class="single-title animate__animated animate__pulse animate__faster">
-      {{- .Params.Title | default (T .Section) | default .Section | dict "Some" | T "allSome" }}
-      <sup>{{- len .Pages -}}</sup>
-    </h2>
+    <div class="header">
+      {{- /* Title */ -}}
+      <h1 class="single-title animate__animated animate__pulse animate__faster">
+        {{- .Params.Title | default (T .Section) | default .Section | dict "Some" | T "allSome" }}
+        <sup>{{- len .Pages -}}</sup>
+      </h1>
+      {{- /* Total word count */ -}}
+      {{- /* See https://github.com/Lruihao/FixIt/issues/124 */ -}}
+      {{- $localData := newScratch -}}
+      {{- range .Pages -}}
+        {{- $localData.Add "totalWordCount" .WordCount -}}
+      {{- end -}}
+      {{- with ($localData.Get "totalWordCount") -}}
+        {{- $humanizedNum := . -}}
+        {{- if ge $humanizedNum 1000 -}}
+          {{- $humanizedNum = printf "%.2fK" (div $humanizedNum 1000.0) -}}
+        {{- end -}}
+        <p class="single-subtitle total-word-count" title='{{- T "totalwordCount" . }}'>
+          <i class="fa-regular fa-keyboard fa-fw"></i>
+          {{ T "totalwordCount" (dict "Count" $humanizedNum) -}}
+        </p>
+      {{- end -}}
+    </div>
 
     {{- /* Paginate */ -}}
     {{- if .Pages -}}
@@ -20,7 +38,7 @@
       {{- end -}}
       {{- partial "recently-updated.html" . -}}
       {{- range $pages.PageGroups -}}
-        <h3 class="group-title">{{ .Key }}</h3>
+        <h2 class="group-title">{{ .Key }}</h2>
         {{- range .Pages -}}
           <article class="archive-item">
             <a href="{{ .RelPermalink }}" class="archive-item-link">

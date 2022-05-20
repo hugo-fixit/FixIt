@@ -1,9 +1,24 @@
 .archive {
   .single-title {
+    padding: 1rem 0 0.5rem;
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: bold;
+    line-height: 140%;
+    text-align: right;
+  }
+
+  .single-subtitle {
+    margin: 0.4rem 0;
+    font-size: 1.2rem;
+    font-weight: normal;
+    font-style: italic;
+    line-height: 100%;
     text-align: right;
   }
 
   .group-title {
+    font-size: 1.2rem;
     margin-top: 1.5rem;
     margin-bottom: 1rem;
   }

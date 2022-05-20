@@ -32,6 +32,10 @@ other = "Bài viết"
 [allSome]
 other = "Tất cả {{ .Some }}"
 
+[totalwordCount]
+one = "" # waitting for translation
+other = "" # waitting for translation
+
 [tag]
 other = "Nhãn"
 
@@ -150,10 +154,6 @@ other = "trong {{ .Categories }}"
 [wordCount]
 one = "One word"
 other = "{{ .Count }} từ"
-
-[totalwordCount]
-one = "" # waitting for translation
-other = "" # waitting for translation
 
 [readingTime]
 one = "One minute"

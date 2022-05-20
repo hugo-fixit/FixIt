@@ -32,6 +32,10 @@ other = "Posts"
 [allSome]
 other = "All {{ .Some }}"
 
+[totalwordCount]
+one = "Total one word"
+other = "Total {{ .Count }} words"
+
 [tag]
 other = "Tag"
 
@@ -147,10 +151,6 @@ other = "included in {{ .Categories }}"
 [wordCount]
 one = "One word"
 other = "{{ .Count }} words"
-
-[totalwordCount]
-one = "Total one word"
-other = "Total {{ .Count }} words"
 
 [readingTime]
 one = "One minute"

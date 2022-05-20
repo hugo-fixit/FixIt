@@ -33,6 +33,10 @@ other = "Статьи"
 [allSome]
 other = "Все {{ .Some }}"
 
+[totalwordCount]
+one = "" # waitting for translation
+other = "" # waitting for translation
+
 [tag]
 other = "Тэг"
 
@@ -151,10 +155,6 @@ other = "включен в {{ .Categories }}"
 [wordCount]
 one = "Одно слово"
 other = "{{ .Count }} слов"
-
-[totalwordCount]
-one = "" # waitting for translation
-other = "" # waitting for translation
 
 [readingTime]
 one = "Одна минута"
