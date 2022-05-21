@@ -196,7 +196,7 @@
 {{- end -}}
 
 {{- /* PWA */ -}}
-{{- if eq hugo.Environment "production" -}}
+{{- if hugo.IsProduction -}}
   {{- $config = dict "enablePWA" .Site.Params.enablePWA | merge $config -}}
 {{- end -}}
 

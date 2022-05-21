@@ -21,7 +21,7 @@
   {{- $toc = dict "enable" false -}}
 {{- end -}}
 
-{{- if eq hugo.Environment "production" -}}
+{{- if hugo.IsProduction -}}
   {{- $cdn := .Site.Params.cdn -}}
   {{- with $cdn.data -}}
     {{- $cdnData := printf "data/cdn/%v" . | resources.Get | transform.Unmarshal -}}
