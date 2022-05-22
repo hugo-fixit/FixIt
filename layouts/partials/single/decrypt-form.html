@@ -1,0 +1,32 @@
+<div class="text-center" style="margin-top: 1rem;">
+  <input type="password" id="fixit-encrypt-gate" placeholder="{{ .Message }}">
+</div>
+
+<!-- Temporary attempt -->
+<script type="text/javascript">
+  document.querySelector('#fixit-encrypt-gate')?.addEventListener('keydown', function(e) {
+    if (e.code === 'Enter') {
+      e.preventDefault();
+      const $content = document.querySelector('#content');
+      const password = $content.getAttribute('data-password');
+      const base64EncodeContent = $content.getAttribute('data-content');
+      // TODO 密码正则验证，只允许数字和字母 (maybe)
+      const input = this.value.trim()
+      const saltLen = input.length % 2 ? input.length : input.length + 1;
+      // TODO 仅测试解密流程，md5 和 sha256 实现后，此处移除 明文密码
+      const inputMd5 = input === '1212' ? 'a01610228fe998f515a72dd730294d87' : 'md5_feature_todo';
+      const inputSha256 = 'cbfad02f9ed2a8d1e08d8f74f5303e9eb93637d47f82ab6f1c15871cf8dd0481';
+      if (inputMd5 !== password) {
+        return console.log('password error')
+      }
+      console.log('password passed')
+      const base64DecodeContent = atob(base64EncodeContent.replace(inputSha256.slice(saltLen), ''));
+      // TODO 记住解密状态
+      this.classList.add('d-none')
+      const $decryptedContent = document.createElement('div');
+      $decryptedContent.innerHTML = base64DecodeContent;
+      $decryptedContent.className = 'decrypted-ontent';
+      $content.insertAdjacentElement('afterbegin', $decryptedContent);
+    }
+  })
+</script>
