@@ -247,6 +247,7 @@ FixIt 主题中用到了以下项目，感谢它们的作者：
 * [Twikoo](https://twikoo.js.org/)
 * [github-corners](https://github.com/tholman/github-corners)
 * [giscus](https://giscus.app/zh-CN)
+* [crypto-js](https://github.com/brix/crypto-js)
 
 ## 作者
 

@@ -184,6 +184,17 @@
   {{- $config = dict "watermark" .Site.Params.watermark | merge $config -}}
 {{- end -}}
 
+{{- /* Content Decryption */ -}}
+{{- if $params.password -}}
+  {{- $cryptoCoreJS := $cdn.cryptoCoreJS | default "lib/crypto-js/core.js" -}}
+  {{- $cryptoMd5JS := $cdn.cryptoCoreJS | default "lib/crypto-js/md5.js" -}}
+  {{- $cryptoSha256JS := $cdn.cryptoCoreJS | default "lib/crypto-js/sha256.js" -}}
+  {{- dict "Source" $cryptoCoreJS "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+  {{- dict "Source" $cryptoMd5JS "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+  {{- dict "Source" $cryptoSha256JS "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+  {{- dict "Source" "js/decryption.js" "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+{{- end -}}
+
 {{- /* 不蒜子 */ -}}
 {{- if eq .Site.Params.ibruce.enable true -}}
   {{- $source := "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" -}}
@@ -224,7 +235,7 @@
 
 {{- /* Custom script */ -}}
 {{- if eq .Site.Params.customJS.enable true -}}
-  {{- $source = "js/_custom.js" -}}
+  {{- $source := "js/_custom.js" -}}
   {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 {{- end -}}
 

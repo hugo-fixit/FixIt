@@ -9,7 +9,7 @@ message: password is 1212
 
 tags:
 - Test
-- Encrypt
+- Encryption
 categories:
 - Test
 

@@ -248,6 +248,7 @@ Thanks to the authors of following resources included in the theme:
 * [Twikoo](https://twikoo.js.org/)
 * [github-corners](https://github.com/tholman/github-corners)
 * [giscus](https://giscus.app/)
+* [crypto-js](https://github.com/brix/crypto-js)
 
 ## Author
 
