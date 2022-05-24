@@ -387,8 +387,12 @@ class Theme {
     });
   }
 
-  initLightGallery() {
-    this.config.lightGallery && lightGallery(document.getElementById('content'), this.config.lightGallery);
+  /**
+   * init images gallery supported by lightgallery.js
+   * @param {String} [parentSelector='#content']
+   */
+  initLightGallery(parentSelector = '#content') {
+    this.config.lightGallery && lightGallery(document.querySelector(parentSelector), this.config.lightGallery);
   }
 
   initHighlight() {
@@ -891,7 +895,29 @@ class Theme {
   }
 
   initPangu() {
+     // TODO 待优化
     this.config.enablePangu && pangu.autoSpacingPage();
+  }
+
+  initFixItDecryptor() {
+    if (typeof FixItDecryptor !== 'undefined') {
+      this.decryptor = new FixItDecryptor({
+        ondecrypted: () => {
+          this.initDetails();
+          this.initLightGallery('.decrypted-content');
+          this.initHighlight();
+          this.initTable();
+          // this.initHeaderLink(); // TODO
+          // this.initMath(); // TODO
+          this.initMermaid();
+          this.initEcharts();
+          // this.initTypeit(); // TODO
+          // this.initMapbox(); // TODO 
+          // this.initPangu(); // TODO 中文转码有 BUG
+        }
+      });
+      this.decryptor.init();
+    }
   }
 
   onScroll() {
@@ -991,6 +1017,7 @@ class Theme {
       this.initServiceWorker();
       this.initWatermark();
       this.initPangu();
+      this.initFixItDecryptor();
     } catch (err) {
       console.error(err);
     }
@@ -1007,8 +1034,8 @@ class Theme {
 }
 
 const themeInit = () => {
-  const theme = new Theme();
-  theme.init();
+  window.theme = new Theme();
+  window.theme.init();
 };
 
 if (document.readyState !== 'loading') {
