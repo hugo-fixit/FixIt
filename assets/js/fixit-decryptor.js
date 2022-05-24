@@ -35,11 +35,7 @@ FixItDecryptor = function (option = {}) {
         const base64DecodeContent = atob(base64EncodeContent.replace(inputSha256.slice(saltLen), ''));
         // TODO 记住解密状态
         this.parentNode.classList.add('d-none');
-        const $decryptedContent = document.createElement('div');
-        $decryptedContent.innerHTML = base64DecodeContent;
-        $decryptedContent.className = 'decrypted-content';
-        $content.insertAdjacentElement('afterbegin', $decryptedContent);
-        // $content.insertAdjacentHTML('afterbegin', base64DecodeContent);
+        $content.insertAdjacentHTML('afterbegin', base64DecodeContent);
         // content decrypted events
         for (let event of _decryptor.decryptedEventSet) {
           event();

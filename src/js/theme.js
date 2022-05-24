@@ -46,7 +46,9 @@ class Util {
   }
 }
 
-class Theme {
+class FixIt {
+  #encrypted = typeof FixItDecryptor !== 'undefined';
+
   constructor() {
     this.config = window.config;
     this.data = this.config.data;
@@ -387,12 +389,8 @@ class Theme {
     });
   }
 
-  /**
-   * init images gallery supported by lightgallery.js
-   * @param {String} [parentSelector='#content']
-   */
-  initLightGallery(parentSelector = '#content') {
-    this.config.lightGallery && lightGallery(document.querySelector(parentSelector), this.config.lightGallery);
+  initLightGallery() {
+    this.config.lightGallery && lightGallery(document.getElementById('content'), this.config.lightGallery);
   }
 
   initHighlight() {
@@ -900,24 +898,23 @@ class Theme {
   }
 
   initFixItDecryptor() {
-    if (typeof FixItDecryptor !== 'undefined') {
-      this.decryptor = new FixItDecryptor({
-        ondecrypted: () => {
-          this.initDetails();
-          this.initLightGallery('.decrypted-content');
-          this.initHighlight();
-          this.initTable();
-          // this.initHeaderLink(); // TODO
-          // this.initMath(); // TODO
-          this.initMermaid();
-          this.initEcharts();
-          // this.initTypeit(); // TODO
-          // this.initMapbox(); // TODO 
-          // this.initPangu(); // TODO 中文转码有 BUG
-        }
-      });
-      this.decryptor.init();
-    }
+    this.decryptor = new FixItDecryptor({
+      ondecrypted: () => {
+        this.initDetails();
+        this.initLightGallery();
+        // this.initLightGallery('.decrypted-content');
+        this.initHighlight();
+        this.initTable();
+        this.initHeaderLink(); // TODO
+        // this.initMath(); // TODO
+        this.initMermaid();
+        this.initEcharts();
+        // this.initTypeit(); // TODO
+        // this.initMapbox(); // TODO 
+        // this.initPangu(); // TODO 中文转码有 BUG
+      }
+    });
+    this.decryptor.init();
   }
 
   onScroll() {
@@ -1002,22 +999,25 @@ class Theme {
       this.initMenu();
       this.initSwitchTheme();
       this.initSearch();
-      this.initDetails();
-      this.initLightGallery();
-      this.initHighlight();
-      this.initTable();
-      this.initHeaderLink();
-      this.initMath();
-      this.initMermaid();
-      this.initEcharts();
-      this.initTypeit();
-      this.initMapbox();
       this.initCookieconsent();
       this.initSiteTime();
       this.initServiceWorker();
       this.initWatermark();
-      this.initPangu();
-      this.initFixItDecryptor();
+      if (this.#encrypted) {
+        this.initFixItDecryptor();
+      } else {
+        this.initDetails();
+        this.initLightGallery();
+        this.initHighlight();
+        this.initTable();
+        this.initHeaderLink();
+        this.initMath();
+        this.initMermaid();
+        this.initEcharts();
+        this.initTypeit();
+        this.initMapbox();
+        this.initPangu();
+      }
     } catch (err) {
       console.error(err);
     }
@@ -1034,8 +1034,8 @@ class Theme {
 }
 
 const themeInit = () => {
-  window.theme = new Theme();
-  window.theme.init();
+  window.fixit = new FixIt();
+  window.fixit.init();
 };
 
 if (document.readyState !== 'loading') {

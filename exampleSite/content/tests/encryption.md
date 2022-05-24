@@ -203,8 +203,7 @@ series:
 console.log('before decrypting!');
 
 document.addEventListener('DOMContentLoaded', () => {
-  // console.log('DOM content loaded!')
-  window.theme.decryptor.addEventListener('decrypted', function() {
+  fixit.theme.decryptor.addEventListener('decrypted', function() {
     console.log('after decrypting')
   })
 });
@@ -217,8 +216,7 @@ You can see the output in the console of the developer tool.
 console.log('before decrypting!');
 
 document.addEventListener('DOMContentLoaded', () => {
-  // console.log('DOM content loaded!')
-  window.theme.decryptor.addEventListener('decrypted', function() {
+  fixit.decryptor.addEventListener('decrypted', function() {
     console.log('after decrypting')
   })
 });
