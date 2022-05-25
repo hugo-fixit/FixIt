@@ -132,6 +132,9 @@
   &[kept='true'] {
     display: block;
   }
+  &.d-none {
+    display: none;
+  }
 
   .toc-title {
     display: flex;

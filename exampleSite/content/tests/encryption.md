@@ -9,8 +9,8 @@ message: password is 1212
 
 lightgallery: true
 
-toc:
-  auto: false
+math:
+  enable: true
 
 tags:
 - Test
@@ -39,11 +39,9 @@ I was shy, so I hid.
 
 [Hugo]^(An open-source static site generator)
 
-<!-- TODO -->
+$$ \ce{CO2 + C -> 2 CO} $$
 
-<!-- $$ \ce{CO2 + C -> 2 CO} $$
-
-$$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$ -->
+$$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$
 
 ## Shortcodes in Encrypted Content
 
@@ -181,9 +179,9 @@ series:
           - 1320
 {{< /echarts >}}
 
-### 7 mapbox TODO
+### 7 mapbox
 
-<!-- TODO {{< mapbox 113.953277 22.559102 11 >}} -->
+{{< mapbox 113.953277 22.559102 11 >}}
 
 ### 8 music
 
@@ -193,14 +191,23 @@ series:
 
 {{< bilibili BV1Sx411T7QQ >}}
 
-### 10 typeit TODO
-<!-- TODO -->
+### 10 typeit
+
+{{< typeit code=javascript >}}
+console.log('before decrypting');
+
+document.addEventListener('DOMContentLoaded', () => {
+  fixit.decryptor.addEventListener('decrypted', function() {
+    console.log('after decrypting')
+  })
+});
+{{< /typeit >}}
 
 ### 11 script
 
 ```go-html-template
 {{</* script */>}}
-console.log('before decrypting!');
+console.log('before decrypting');
 
 document.addEventListener('DOMContentLoaded', () => {
   fixit.theme.decryptor.addEventListener('decrypted', function() {
@@ -213,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
 You can see the output in the console of the developer tool.
 
 {{< script >}}
-console.log('before decrypting!');
+console.log('before decrypting');
 
 document.addEventListener('DOMContentLoaded', () => {
   fixit.decryptor.addEventListener('decrypted', function() {

@@ -499,10 +499,8 @@ class FixIt {
   }
   /**
    * init table of contents
-   * @param {Boolean} [onInit=false]
-   * @returns 
    */
-  initToc(onInit = false) {
+  initToc() {
     const $tocCore = document.getElementById('TableOfContents');
     if ($tocCore === null) {
       return;
@@ -562,16 +560,20 @@ class FixIt {
       });
       this._tocOnScroll();
       this.scrollEventSet.add(this._tocOnScroll);
-      // only addEventListener once
-      onInit && document.querySelector('#toc-auto>.toc-title').addEventListener('click', () => {
-        const animation = ['animate__faster']
-        const tocHidden = $toc.classList.contains('toc-hidden');
-        animation.push(tocHidden ? 'animate__fadeIn' : 'animate__fadeOut');
-        $tocContentAuto.classList.remove(tocHidden ? 'animate__fadeOut' : 'animate__fadeIn');
-        this.util.animateCSS($tocContentAuto, animation, true);
-        $toc.classList.toggle('toc-hidden');
-      }, false)
     }
+  }
+
+  initTocListener() {
+    const $toc = document.getElementById('toc-auto');
+    const $tocContentAuto = document.getElementById('toc-content-auto');
+    document.querySelector('#toc-auto>.toc-title')?.addEventListener('click', () => {
+      const animation = ['animate__faster']
+      const tocHidden = $toc.classList.contains('toc-hidden');
+      animation.push(tocHidden ? 'animate__fadeIn' : 'animate__fadeOut');
+      $tocContentAuto.classList.remove(tocHidden ? 'animate__fadeOut' : 'animate__fadeIn');
+      this.util.animateCSS($tocContentAuto, animation, true);
+      $toc.classList.toggle('toc-hidden');
+    }, false)
   }
 
   initMath() {
@@ -902,15 +904,19 @@ class FixIt {
       ondecrypted: () => {
         this.initDetails();
         this.initLightGallery();
-        // this.initLightGallery('.decrypted-content');
         this.initHighlight();
         this.initTable();
-        this.initHeaderLink(); // TODO
-        // this.initMath(); // TODO
+        this.initHeaderLink();
+        this.initMath();
         this.initMermaid();
         this.initEcharts();
-        // this.initTypeit(); // TODO
-        // this.initMapbox(); // TODO 
+        this.initTypeit();
+        this.initMapbox();
+        this.util.forEach(document.querySelectorAll('#toc-auto>.d-none, #toc-static.d-none'), ($element) => {
+          $element.classList.remove('d-none');
+        });
+        this.initToc();
+        this.initTocListener();
         // this.initPangu(); // TODO 中文转码有 BUG
       }
     });
@@ -975,7 +981,9 @@ class FixIt {
       if (!this._resizeTimeout) {
         this._resizeTimeout = window.setTimeout(() => {
           this._resizeTimeout = null;
-          for (let event of this.resizeEventSet) event();
+          for (let event of this.resizeEventSet) {
+            event();
+          }
           this.initToc();
           this.initMermaid();
           this.initSearch();
@@ -1018,18 +1026,20 @@ class FixIt {
         this.initMapbox();
         this.initPangu();
       }
+      window.setTimeout(() => {
+        this.initComment();
+        if (!this.#encrypted) {
+          this.initToc();
+          this.initTocListener();
+        }
+
+        this.onScroll();
+        this.onResize();
+        this.onClickMask();
+      }, 100);
     } catch (err) {
       console.error(err);
     }
-
-    window.setTimeout(() => {
-      this.initComment();
-      this.initToc(true);
-
-      this.onScroll();
-      this.onResize();
-      this.onClickMask();
-    }, 100);
   }
 }
 
