@@ -29,7 +29,7 @@ menu:
 
 I was shy, so I hid.
 
-<!-- more -->
+<!--more-->
 
 ![Hugo Theme FixIt](/images/Apple-Devices-Preview.png "Hugo Theme FixIt")
 
@@ -56,7 +56,6 @@ That is so funny! :joy:
 
 ### ruby
 [Hugo]^(An open-source static site generator)
-
 
 ### math
 $$ \ce{CO2 + C -> 2 CO} $$

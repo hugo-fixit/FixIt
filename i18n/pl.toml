@@ -186,6 +186,9 @@ other = "Czytaj więcej"
 
 [expirationReminder]
 other = "Ten artykuł był ostatnio aktualizowany {{ .Date }}, jego treść może być nieaktualna."
+
+[encryptedMessage]
+other = "" # waitting for translation
 # === posts/single.html ===
 
 # === 404.html ===

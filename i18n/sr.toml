@@ -186,6 +186,9 @@ other = "Прочитај више"
 
 [expirationReminder]
 other = "Овај чланак је последњи пут ажуриран {{ .Date }}, садржај је можда застарео."
+
+[encryptedMessage]
+other = "" # waitting for translation
 # === posts/single.html ===
 
 # === 404.html ===

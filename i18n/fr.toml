@@ -186,6 +186,9 @@ other = "Accueil"
 
 [readMore]
 other = "En savoir plus"
+
+[encryptedMessage]
+other = "" # waitting for translation
 # === posts/single.html ===
 
 # === 404.html ===

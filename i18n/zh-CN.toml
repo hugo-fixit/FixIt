@@ -189,6 +189,9 @@ other = "阅读全文"
 
 [expirationReminder]
 other = "本文最后更新于 {{ .Date }}，文中内容可能已过时。"
+
+[encryptedMessage]
+other = "本文已加密，请输入正确密码后查看！"
 # === posts/single.html ===
 
 # === 404.html ===

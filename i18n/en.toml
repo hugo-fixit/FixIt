@@ -185,6 +185,9 @@ other = "Read More"
 
 [expirationReminder]
 other = "This article was last updated on {{ .Date }}, the content may be out of date."
+
+[encryptedMessage]
+other = "This article was encrypted, please enter the correct password to view!"
 # === posts/single.html ===
 
 # === 404.html ===

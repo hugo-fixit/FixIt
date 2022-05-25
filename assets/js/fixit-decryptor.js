@@ -30,7 +30,8 @@ FixItDecryptor = function (option = {}) {
         const inputMd5 = CryptoJS.MD5(input).toString();
         const inputSha256 = CryptoJS.SHA256(input).toString();
         if (inputMd5 !== password) {
-          return console.log('password error: ', input, inputMd5);
+          // TODO show message
+          return console.warn('Password error:', input, 'not the correct password!');
         }
         const base64DecodeContent = CryptoJS.enc.Base64.parse(base64EncodeContent.replace(inputSha256.slice(saltLen), '')).toString(CryptoJS.enc.Utf8);
         // TODO 记住解密状态
