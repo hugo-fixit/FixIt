@@ -895,13 +895,14 @@ class FixIt {
   }
 
   initPangu() {
-     // TODO 待优化
+     // TODO 待优化：只渲染
     this.config.enablePangu && pangu.autoSpacingPage();
   }
 
   initFixItDecryptor() {
     this.decryptor = new FixItDecryptor({
       ondecrypted: () => {
+        this.initTwemoji();
         this.initDetails();
         this.initLightGallery();
         this.initHighlight();
@@ -917,7 +918,7 @@ class FixIt {
         });
         this.initToc();
         this.initTocListener();
-        // this.initPangu(); // TODO 中文转码有 BUG
+        this.initPangu();
       }
     });
     this.decryptor.init();
@@ -1003,7 +1004,6 @@ class FixIt {
   init() {
     try {
       this.initSVGIcon();
-      this.initTwemoji();
       this.initMenu();
       this.initSwitchTheme();
       this.initSearch();
@@ -1014,6 +1014,7 @@ class FixIt {
       if (this.#encrypted) {
         this.initFixItDecryptor();
       } else {
+        this.initTwemoji();
         this.initDetails();
         this.initLightGallery();
         this.initHighlight();

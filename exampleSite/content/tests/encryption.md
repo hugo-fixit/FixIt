@@ -12,6 +12,8 @@ lightgallery: true
 math:
   enable: true
 
+twemoji: true
+
 tags:
 - Test
 - Encryption
@@ -27,18 +29,36 @@ menu:
 
 I was shy, so I hid.
 
-<!-- ## pangu test
-
-與PM戰鬥的人，應當小心自己不要成為PM -->
-
-<!-- emoji render error -->
+<!-- more -->
 
 ![Hugo Theme FixIt](/images/Apple-Devices-Preview.png "Hugo Theme FixIt")
 
+<!-- emoji render error -->
+
 ## Encrypted Content
 
+### twemoji
+<!-- ### emoji -->
+
+coffee ☕
+
+Gone camping! :tent: Be back soon.
+
+That is so funny! :joy:
+
+### pangu
+
+```
+與PM戰鬥的人，應當小心自己不要成為PM
+```
+
+與PM戰鬥的人，應當小心自己不要成為PM
+
+### ruby
 [Hugo]^(An open-source static site generator)
 
+
+### math
 $$ \ce{CO2 + C -> 2 CO} $$
 
 $$ \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} $$

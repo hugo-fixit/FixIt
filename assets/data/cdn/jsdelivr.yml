@@ -26,6 +26,7 @@ libFiles:
   cookieconsentJS: cookieconsent@3.1.1/build/cookieconsent.min.js
   # crypto-js@4.1.1 https://github.com/brix/crypto-js
   cryptoCoreJS: crypto-js@4.1.1/core.js
+  cryptoEncBase64JS: crypto-js@4.1.1/enc-base64.js
   cryptoMd5JS: crypto-js@4.1.1/md5.js
   cryptoSha256JS: crypto-js@4.1.1/sha256.js
   # echarts@5.2.2 https://github.com/apache/echarts

@@ -32,7 +32,7 @@ FixItDecryptor = function (option = {}) {
         if (inputMd5 !== password) {
           return console.log('password error: ', input, inputMd5);
         }
-        const base64DecodeContent = atob(base64EncodeContent.replace(inputSha256.slice(saltLen), ''));
+        const base64DecodeContent = CryptoJS.enc.Base64.parse(base64EncodeContent.replace(inputSha256.slice(saltLen), '')).toString(CryptoJS.enc.Utf8);
         // TODO 记住解密状态
         this.parentNode.classList.add('d-none');
         $content.insertAdjacentHTML('afterbegin', base64DecodeContent);
