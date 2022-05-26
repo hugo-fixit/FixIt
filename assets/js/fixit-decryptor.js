@@ -14,35 +14,80 @@ FixItDecryptor = function (option = {}) {
    * initialize FixIt decryptor
    */
   _proto.init = () => {
-    let _decryptor = this;
-    if (_decryptor.option.ondecrypted) {
-      _decryptor.addEventListener('decrypted', _decryptor.option.ondecrypted);
-    }
+    const _decryptor = this;
+    this.option.ondecrypted && this.addEventListener('decrypted', this.option.ondecrypted);
+
+    this.validateLocalStorage();
+
     document.querySelector('#fixit-decryptor')?.addEventListener('keydown', function (e) {
       if (e.key === 'Enter') {
         e.preventDefault();
         const $content = document.querySelector('#content');
         const password = $content.getAttribute('data-password');
-        const base64EncodeContent = $content.getAttribute('data-content');
-        // TODO 密码正则验证，只允许数字和字母 (maybe)
         const input = this.value.trim();
         const saltLen = input.length % 2 ? input.length : input.length + 1;
         const inputMd5 = CryptoJS.MD5(input).toString();
         const inputSha256 = CryptoJS.SHA256(input).toString();
+        const base64EncodeContent = $content.getAttribute('data-content').replace(inputSha256.slice(saltLen), '');
+
         if (inputMd5 !== password) {
-          // TODO show message
-          return console.warn('Password error:', input, 'not the correct password!');
+          alert(`Password error: ${input} not the correct password!`);
+          this.value = '';
+          return console.warn(`Password error: ${input} not the correct password!`);
         }
-        const base64DecodeContent = CryptoJS.enc.Base64.parse(base64EncodeContent.replace(inputSha256.slice(saltLen), '')).toString(CryptoJS.enc.Utf8);
-        // TODO 记住解密状态
-        this.parentNode.classList.add('d-none');
-        $content.insertAdjacentHTML('afterbegin', base64DecodeContent);
-        // content decrypted events
-        for (let event of _decryptor.decryptedEventSet) {
-          event();
+
+        try {
+          document.querySelector('.fixit-decryptor-container').classList.add('d-none');
+          $content.insertAdjacentHTML('afterbegin', CryptoJS.enc.Base64.parse(base64EncodeContent).toString(CryptoJS.enc.Utf8));
+          // remember stat
+          window.localStorage.setItem(
+            `fixit-decryptor/#${location.pathname}`,
+            JSON.stringify({
+              md5: inputMd5,
+              sha256: inputSha256.slice(saltLen)
+            })
+          );
+          // decrypted hook
+          for (let event of _decryptor.decryptedEventSet) {
+            event();
+          }
+        } catch (err) {
+          alert(err);
+          return console.error(err);
         }
       }
     });
+  };
+
+  /**
+   * validate remembered stat in localStorage
+   * // TODO 简化代码
+   */
+  _proto.validateLocalStorage = () => {
+    const $content = document.querySelector('#content');
+    const password = $content.getAttribute('data-password');
+    const rememberStat = JSON.parse(window.localStorage.getItem(`fixit-decryptor/#${location.pathname}`));
+
+    if (rememberStat?.md5 && rememberStat?.sha256) {
+      const base64EncodeContent = $content.getAttribute('data-content').replace(rememberStat.sha256, '');
+      if (rememberStat.md5 !== password) {
+        window.localStorage.removeItem(`fixit-decryptor/#${location.pathname}`);
+        return console.warn('The password has expired, please re-enter!');
+      }
+      try {
+        document.querySelector('.fixit-decryptor-container').classList.add('d-none');
+        $content.insertAdjacentHTML('afterbegin', CryptoJS.enc.Base64.parse(base64EncodeContent).toString(CryptoJS.enc.Utf8));
+        // decrypted hook
+        for (let event of this.decryptedEventSet) {
+          event();
+        }
+      } catch (err) {
+        alert(err);
+        return console.error(err);
+      }
+    } else {
+      document.querySelector('.fixit-decryptor-container').classList.remove('d-none');
+    }
   };
 
   /**

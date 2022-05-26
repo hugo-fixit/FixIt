@@ -1,7 +1,7 @@
 {{- $params := .Scratch.Get "params" -}}
 
 <!-- TODO UI style -->
-<div class="fixit-decryptor-container text-center" style="margin-top: 1rem">
+<div class="fixit-decryptor-container text-center d-none" style="margin-top: 1rem">
   <label for="fixit-decryptor">
     <input type="password" id="fixit-decryptor" placeholder="{{ $params.message }}" />
   </label>
