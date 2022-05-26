@@ -901,7 +901,7 @@ class FixIt {
 
   initFixItDecryptor() {
     this.decryptor = new FixItDecryptor({
-      ondecrypted: () => {
+      decrypted: () => {
         this.initTwemoji();
         this.initDetails();
         this.initLightGallery();

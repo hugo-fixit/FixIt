@@ -1,13 +1,13 @@
 /**
  * FixIt decryptor for encrypted pages
- * @param {Object} option
- * @param {Function} option.ondecrypted handler after decrypting
+ * @param {Object} options
+ * @param {Function} options.decrypted handler after decrypting
  * @author @Lruihao https://lruihao.cn
  * @since v0.2.15
  */
-FixItDecryptor = function (option = {}) {
+FixItDecryptor = function (options = {}) {
   var _proto = FixItDecryptor.prototype;
-  this.option = option || {};
+  this.options = options || {};
   this.decryptedEventSet = new Set();
 
   /**
@@ -15,7 +15,7 @@ FixItDecryptor = function (option = {}) {
    */
   _proto.init = () => {
     const _decryptor = this;
-    this.option.ondecrypted && this.addEventListener('decrypted', this.option.ondecrypted);
+    this.options.decrypted && this.addEventListener('decrypted', this.options.decrypted);
 
     this.validateLocalStorage();
 
