@@ -1003,14 +1003,6 @@ class FixIt {
 
   init() {
     try {
-      this.initSVGIcon();
-      this.initMenu();
-      this.initSwitchTheme();
-      this.initSearch();
-      this.initCookieconsent();
-      this.initSiteTime();
-      this.initServiceWorker();
-      this.initWatermark();
       if (this.#encrypted) {
         this.initFixItDecryptor();
       } else {
@@ -1027,13 +1019,21 @@ class FixIt {
         this.initMapbox();
         this.initPangu();
       }
+      this.initSVGIcon();
+      this.initMenu();
+      this.initSwitchTheme();
+      this.initSearch();
+      this.initCookieconsent();
+      this.initSiteTime();
+      this.initServiceWorker();
+      this.initWatermark();
+
       window.setTimeout(() => {
         this.initComment();
         if (!this.#encrypted) {
           this.initToc();
           this.initTocListener();
         }
-
         this.onScroll();
         this.onResize();
         this.onClickMask();

@@ -33,8 +33,6 @@ I was shy, so I hid.
 
 ![Hugo Theme FixIt](/images/Apple-Devices-Preview.png "Hugo Theme FixIt")
 
-<!-- emoji render error -->
-
 ## Encrypted Content
 
 ### twemoji
