@@ -10,25 +10,30 @@
     outline: none;
     color: $global-font-color;
     background-color: $global-background-color;
-    border: 1px solid $global-border-color;
+    border: 1px solid darken($global-border-color, 15%);
     border-radius: $global-border-radius;
     transition: 0.1s;
+    box-shadow: 0px 0px 5px 0px darken($global-border-color, 15%);
 
     &:active,
+    &:focus,
     &:hover {
-      color: $global-link-hover-color;
+      color: darken($global-link-hover-color, 6%);
       border-color: $global-link-hover-color;
+      box-shadow: 0px 0px 5px 0px lighten($global-link-hover-color, 20%);
 
       [theme='dark'] & {
-        color: $global-link-hover-color-dark;
+        color: lighten($global-link-hover-color-dark, 6%);
         border-color: $global-link-hover-color-dark;
+        box-shadow: 0px 0px 5px 0px darken($global-link-hover-color-dark, 20%);
       }
     }
 
     [theme='dark'] & {
       color: $global-font-color-dark;
-      border-color: $global-border-color-dark;
+      border-color: lighten($global-border-color-dark, 15%);
       background-color: $global-background-color-dark;
+      box-shadow: 0px 0px 5px 0px lighten($global-border-color-dark, 15%);
     }
   }
 

@@ -913,7 +913,7 @@ class FixIt {
         this.initMermaid();
         this.initEcharts();
         this.initTypeit();
-        // this.initMapbox();
+        this.initMapbox();
         this.util.forEach($tocNodes, ($element) => {
           $element.classList.remove('d-none');
         });

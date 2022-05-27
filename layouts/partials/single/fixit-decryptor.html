@@ -1,10 +1,9 @@
 {{- $params := .Scratch.Get "params" -}}
 
-<!-- TODO UI style -->
 <div class="fixit-decryptor-container">
   {{- $msg := $params.message | default (T "encryptedMessage") -}}
-  <label for="fixit-decryptor-input" title="{{ $msg }}">
-    <input type="password" id="fixit-decryptor-input" class="d-none" placeholder="{{ $msg }}" />
+  <label for="fixit-decryptor-input" title='{{ T "password" }}'>
+    <input type="password" id="fixit-decryptor-input" class="d-none" placeholder="🔑 {{ $msg }}" />
   </label>
   <button class="fixit-encryptor-btn d-none">{{ T "encryptyAgain" }}</button>
 </div>
