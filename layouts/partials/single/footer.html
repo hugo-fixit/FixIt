@@ -17,7 +17,7 @@
           {{- end -}}
         </span>
       </div>
-      <div class="post-info-license">
+      <div class="post-info-license {{ with $params.password }} d-none{{ end }}">
         {{- with $params.license | string -}}
           <span>
             {{- . | safeHTML -}}
@@ -25,7 +25,7 @@
         {{- end -}}
       </div>
     </div>
-    <div class="post-info-line">
+    <div class="post-info-line{{ with $params.password }} d-none{{ end }}">
       <div class="post-info-md">
         {{- if $params.linktomarkdown -}}
           {{- with .OutputFormats.Get "markdown" -}}

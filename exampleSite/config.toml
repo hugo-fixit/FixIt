@@ -1004,7 +1004,9 @@ enableEmoji = true
   [params.pangu]
     # For Chinese writing
     # 适用于中文写作用户
-    enable = false
+    enable = true
+    # TODO 为空则全局生效
+    selector = ''
 
   # Watermark config since v0.2.12
   # Detail config see https://github.com/Lruihao/watermark#readme

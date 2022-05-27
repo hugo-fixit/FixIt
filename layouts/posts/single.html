@@ -8,8 +8,8 @@
     {{- /* Auto TOC */ -}}
     {{- $tocEmpty := eq .TableOfContents `<nav id="TableOfContents"></nav>` -}}
     {{- if (ne $toc.enable false) | and (ne $tocEmpty true) -}}
-      <h2 class="toc-title">{{ T "contents" }} <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2>
-      <div class="toc-content{{ if eq $toc.auto false }} always-active{{ end }}" id="toc-content-auto"></div>
+      <h2 class="toc-title{{ with $params.password }} d-none{{ end }}">{{ T "contents" }} <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2>
+      <div class="toc-content{{ if eq $toc.auto false }} always-active{{ end }}{{ with $params.password }} d-none{{ end }}" id="toc-content-auto"></div>
     {{- end -}}
   </aside>
 
@@ -117,7 +117,7 @@
 
     {{- /* Static TOC */ -}}
     {{- if (ne $toc.enable false) | and (ne $tocEmpty true) -}}
-      <div class="details toc" id="toc-static" kept="{{ if $toc.keepStatic }}true{{ else }}false{{ end }}">
+      <div class="details toc{{ with $params.password }} d-none{{ end }}" id="toc-static" kept="{{ if $toc.keepStatic }}true{{ else }}false{{ end }}">
         <div class="details-summary toc-title">
           <span>{{ T "contents" }}</span>
           <span><i class="details-icon fa-solid fa-angle-right"></i></span>
@@ -129,10 +129,30 @@
     {{- end -}}
 
     {{- /* Content */ -}}
-    <div class="content" id="content">
-      {{- /* Expiration Reminder */ -}}
-      {{- partial "single/expiration-reminder.html" . -}}
-      {{- dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+    {{- $content := dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+    {{- if $params.password -}}
+      {{- $saltLen := strings.RuneCount (trim $params.password "") -}}
+      {{- $saltLen = cond (eq (mod $saltLen 2) 0) (add $saltLen 1) $saltLen -}}
+      {{- $base64EncodeContent := $content | base64Encode -}}
+      {{- $content = printf "%v%v%v"
+        (substr $base64EncodeContent 0 $saltLen)
+        (substr (sha256 $params.password) $saltLen)
+        (substr $base64EncodeContent $saltLen)
+      -}}
+    {{- end -}}
+    <div
+      class="content"
+      id="content"
+      {{ with $params.password }}data-password="{{ md5 $params.password }}"{{ end }}
+      {{ with $params.password }}data-content="{{ $content }}"{{ end }}
+    >
+      {{- if not $params.password -}}
+        {{- /* Expiration Reminder */ -}}
+        {{- partial "single/expiration-reminder.html" . -}}
+        {{- $content -}}
+      {{- else -}}
+        {{- partial "single/fixit-decryptor.html" . -}}
+      {{- end -}}
     </div>
 
     {{- /* Footer */ -}}

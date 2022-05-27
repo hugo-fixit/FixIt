@@ -46,7 +46,9 @@ class Util {
   }
 }
 
-class Theme {
+class FixIt {
+  #encrypted = typeof FixItDecryptor !== 'undefined';
+
   constructor() {
     this.config = window.config;
     this.data = this.config.data;
@@ -497,10 +499,8 @@ class Theme {
   }
   /**
    * init table of contents
-   * @param {Boolean} [onInit=false]
-   * @returns 
    */
-  initToc(onInit = false) {
+  initToc() {
     const $tocCore = document.getElementById('TableOfContents');
     if ($tocCore === null) {
       return;
@@ -560,16 +560,20 @@ class Theme {
       });
       this._tocOnScroll();
       this.scrollEventSet.add(this._tocOnScroll);
-      // only addEventListener once
-      onInit && document.querySelector('#toc-auto>.toc-title').addEventListener('click', () => {
-        const animation = ['animate__faster']
-        const tocHidden = $toc.classList.contains('toc-hidden');
-        animation.push(tocHidden ? 'animate__fadeIn' : 'animate__fadeOut');
-        $tocContentAuto.classList.remove(tocHidden ? 'animate__fadeOut' : 'animate__fadeIn');
-        this.util.animateCSS($tocContentAuto, animation, true);
-        $toc.classList.toggle('toc-hidden');
-      }, false)
     }
+  }
+
+  initTocListener() {
+    const $toc = document.getElementById('toc-auto');
+    const $tocContentAuto = document.getElementById('toc-content-auto');
+    document.querySelector('#toc-auto>.toc-title')?.addEventListener('click', () => {
+      const animation = ['animate__faster']
+      const tocHidden = $toc.classList.contains('toc-hidden');
+      animation.push(tocHidden ? 'animate__fadeIn' : 'animate__fadeOut');
+      $tocContentAuto.classList.remove(tocHidden ? 'animate__fadeOut' : 'animate__fadeIn');
+      this.util.animateCSS($tocContentAuto, animation, true);
+      $toc.classList.toggle('toc-hidden');
+    }, false)
   }
 
   initMath() {
@@ -891,7 +895,39 @@ class Theme {
   }
 
   initPangu() {
+     // TODO 待优化：只渲染
     this.config.enablePangu && pangu.autoSpacingPage();
+  }
+
+  initFixItDecryptor() {
+    const $tocNodes = document.querySelectorAll('#toc-auto>.d-none, #toc-static.d-none');
+    this.decryptor = new FixItDecryptor({
+      decrypted: () => {
+        this.initTwemoji();
+        this.initDetails();
+        this.initLightGallery();
+        this.initHighlight();
+        this.initTable();
+        this.initHeaderLink();
+        this.initMath();
+        this.initMermaid();
+        this.initEcharts();
+        this.initTypeit();
+        this.initMapbox();
+        this.util.forEach($tocNodes, ($element) => {
+          $element.classList.remove('d-none');
+        });
+        this.initToc();
+        this.initTocListener();
+        this.initPangu();
+      },
+      reset: () => {
+        this.util.forEach($tocNodes, ($element) => {
+          $element.classList.add('d-none');
+        });
+      }
+    });
+    this.decryptor.init();
   }
 
   onScroll() {
@@ -952,7 +988,9 @@ class Theme {
       if (!this._resizeTimeout) {
         this._resizeTimeout = window.setTimeout(() => {
           this._resizeTimeout = null;
-          for (let event of this.resizeEventSet) event();
+          for (let event of this.resizeEventSet) {
+            event();
+          }
           this.initToc();
           this.initMermaid();
           this.initSearch();
@@ -971,44 +1009,50 @@ class Theme {
 
   init() {
     try {
+      if (this.#encrypted) {
+        this.initFixItDecryptor();
+      } else {
+        this.initTwemoji();
+        this.initDetails();
+        this.initLightGallery();
+        this.initHighlight();
+        this.initTable();
+        this.initHeaderLink();
+        this.initMath();
+        this.initMermaid();
+        this.initEcharts();
+        this.initTypeit();
+        this.initMapbox();
+        this.initPangu();
+      }
       this.initSVGIcon();
-      this.initTwemoji();
       this.initMenu();
       this.initSwitchTheme();
       this.initSearch();
-      this.initDetails();
-      this.initLightGallery();
-      this.initHighlight();
-      this.initTable();
-      this.initHeaderLink();
-      this.initMath();
-      this.initMermaid();
-      this.initEcharts();
-      this.initTypeit();
-      this.initMapbox();
       this.initCookieconsent();
       this.initSiteTime();
       this.initServiceWorker();
       this.initWatermark();
-      this.initPangu();
+
+      window.setTimeout(() => {
+        this.initComment();
+        if (!this.#encrypted) {
+          this.initToc();
+          this.initTocListener();
+        }
+        this.onScroll();
+        this.onResize();
+        this.onClickMask();
+      }, 100);
     } catch (err) {
       console.error(err);
     }
-
-    window.setTimeout(() => {
-      this.initComment();
-      this.initToc(true);
-
-      this.onScroll();
-      this.onResize();
-      this.onClickMask();
-    }, 100);
   }
 }
 
 const themeInit = () => {
-  const theme = new Theme();
-  theme.init();
+  window.fixit = new FixIt();
+  window.fixit.init();
 };
 
 if (document.readyState !== 'loading') {

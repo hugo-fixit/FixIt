@@ -1,3 +1,7 @@
+# Tip: remove sourceMappingURL of local libraries to avoid source map 404 error.
+# See https://github.com/Lruihao/FixIt/issues/67
+# TODO https://unpkg.com/ cdn support
+
 prefix:
   libFiles: https://cdn.jsdelivr.net/npm/
   # simple-icons@6.3.0 https://github.com/simple-icons/simple-icons
@@ -20,6 +24,11 @@ libFiles:
   # cookieconsent@3.1.1 https://github.com/osano/cookieconsent
   cookieconsentCSS: cookieconsent@3.1.1/build/cookieconsent.min.css
   cookieconsentJS: cookieconsent@3.1.1/build/cookieconsent.min.js
+  # crypto-js@4.1.1 https://github.com/brix/crypto-js
+  cryptoCoreJS: crypto-js@4.1.1/core.js
+  cryptoEncBase64JS: crypto-js@4.1.1/enc-base64.js
+  cryptoMd5JS: crypto-js@4.1.1/md5.js
+  cryptoSha256JS: crypto-js@4.1.1/sha256.js
   # echarts@5.2.2 https://github.com/apache/echarts
   echartsJS: echarts@5.3.2/dist/echarts.min.js
   echartsMacaronsJS: echarts@5.3.2/theme/macarons.min.js

@@ -5,6 +5,7 @@ artalk@2.2.12 https://github.com/ArtalkJS/Artalk
 autocomplete.js@0.38.1 https://github.com/algolia/autocomplete.js
 cell-watermark@1.0.3 https://github.com/Lruihao/watermark
 cookieconsent@3.1.1 https://github.com/osano/cookieconsent
+crypto-js@4.1.1 https://github.com/brix/crypto-js
 echarts@5.3.2 https://github.com/apache/echarts
 fontawesome-free@6.1.1 https://github.com/FortAwesome/Font-Awesome
 gitalk@1.7.2 https://github.com/gitalk/gitalk

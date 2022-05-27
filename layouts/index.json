@@ -1,6 +1,6 @@
 {{- if .Site.Params.search -}}
     {{- $index := slice -}}
-    {{- $pages := .Site.RegularPages -}}
+    {{- $pages := where .Site.RegularPages "Params.password" "eq" nil -}}
     {{- if .Site.Params.page.hiddenFromSearch -}}
         {{- $pages = where $pages "Params.hiddenfromsearch" false -}}
     {{- else -}}

@@ -188,6 +188,18 @@ other = "Đọc thêm"
 
 [expirationReminder]
 other = "Bài viết này được cập nhật lần cuối vào {{ .Date }}, nội dung có thể đã lỗi thời."
+
+[encryptedAbstract]
+other = "" # waitting for translation
+
+[encryptedMessage]
+other = "" # waitting for translation
+
+[password]
+other = "Mật khẩu"
+
+[encryptyAgain]
+other = "" # waitting for translation
 # === posts/single.html ===
 
 # === 404.html ===

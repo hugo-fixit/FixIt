@@ -18,7 +18,9 @@
   text-align: center !important;
 }
 
-.d-none,
+.d-none {
+  display: none !important;
+}
 .d-none-desktop {
   display: none;
 }
