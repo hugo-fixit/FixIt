@@ -36,21 +36,12 @@ I was shy, so I hid.
 ## Encrypted Content
 
 ### twemoji
-<!-- ### emoji -->
 
-coffee ☕
+Coffee ☕
 
 Gone camping! :tent: Be back soon.
 
 That is so funny! :joy:
-
-### pangu
-
-```
-與PM戰鬥的人，應當小心自己不要成為PM
-```
-
-與PM戰鬥的人，應當小心自己不要成為PM
 
 ### ruby
 [Hugo]^(An open-source static site generator)

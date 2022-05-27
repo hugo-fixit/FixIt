@@ -1,5 +1,5 @@
 ---
-title: "Markdown Test"
+title: "Markdown 测试"
 date: 2022-04-20T17:50:22+08:00
 description: "Test for Markdown rendering"
 type: 'posts'
@@ -14,14 +14,13 @@ categories:
 
 menu:
   main:
-    name: "Markdown 测试"
     title: "Test for Markdown rendering"
     parent: "tests"
     pre: "<i class='fa-solid fa-vial fa-fw fa-sm'></i>"
 ---
 
 ## line break
-`FixIt is a clean, elegant but advanced blog theme for Hugo developed by Lruihao.It is based on the original LoveIt Theme, LeaveIt Theme and KeepIt Theme.`
+`FixIt is a clean, elegant but advanced blog theme for Hugo developed by Lruihao. It is based on the original LoveIt Theme, LeaveIt Theme and KeepIt Theme.`
 
 `FixIt 是一个由 Lruihao 开发的简洁、优雅且高效的 Hugo 博客主题。它的原型基于 LoveIt 主题，LeaveIt 主题 和 KeepIt 主题。`
 

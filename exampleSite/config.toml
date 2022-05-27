@@ -1004,7 +1004,7 @@ enableEmoji = true
   [params.pangu]
     # For Chinese writing
     # 适用于中文写作用户
-    enable = true
+    enable = false
     # TODO 为空则全局生效
     selector = ''
 
