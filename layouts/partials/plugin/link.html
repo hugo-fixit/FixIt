@@ -1,6 +1,9 @@
 {{- $rel := "" -}}
 {{- $external := false -}}
-{{- $class := "" -}}
+{{- $class := .Class | default "" -}}
+{{- if eq .Card true -}}
+  {{- $class = trim (printf "%v %v" "card-link" $class) " " -}}
+{{- end -}}
 <a
   href="{{ .Destination | safeURL }}"
   {{ with .Title }}
@@ -14,11 +17,8 @@
   {{ if $rel | or .Rel }}
     rel="{{ $rel }}{{ with .Rel }} {{ . }}{{ end }}"
   {{ end }}
-  {{ if eq .Card true }}
-    {{ $class = "card-link" }}
-  {{ end }}
-  {{ if $class | or .Class }}
-    class="{{ with $class }}{{ . }} {{ end }}{{ with .Class }}{{ . }}{{ end }}"
+  {{ with $class }}
+    class="{{ with $class }}{{ . }}{{ end }}"
   {{ end }}
   {{ with .Download }}
     download="{{ . }}"

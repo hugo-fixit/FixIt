@@ -8,7 +8,7 @@
   display: block;
   margin: 0.5rem auto;
   box-sizing: border-box;
-  width: 400px;
+  width: clamp(50%, 400px, 100%);
   max-width: 100%;
   overflow: hidden;
   text-decoration: none;
