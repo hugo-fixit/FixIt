@@ -2,7 +2,7 @@
 # {{ .Title }}
 
 {{ if $params.password -}}
-  ***{{ T "encryptedMessage" }}***
+  ***{{ T "encryptedAbstract" }}***
 {{- else -}}
   {{ .RawContent }}
 {{- end }}

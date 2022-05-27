@@ -190,8 +190,17 @@ other = "阅读全文"
 [expirationReminder]
 other = "本文最后更新于 {{ .Date }}，文中内容可能已过时。"
 
+[encryptedAbstract]
+other = "本文已加密，因此其原始内容不可见！"
+
 [encryptedMessage]
-other = "本文已加密，请输入正确密码后查看！"
+other = "请输入密码"
+
+[password]
+other = "密码"
+
+[encryptyAgain]
+other = "重新加密"
 # === posts/single.html ===
 
 # === 404.html ===

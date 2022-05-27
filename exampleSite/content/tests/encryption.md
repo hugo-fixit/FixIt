@@ -5,7 +5,7 @@ description: "Test for encrypting content"
 type: 'posts'
 draft: true
 password: 1212
-message: password is 1212
+message: Password is 1212
 
 lightgallery: true
 

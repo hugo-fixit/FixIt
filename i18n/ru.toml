@@ -190,7 +190,16 @@ other = "Читать больше"
 [expirationReminder]
 other = "Эта статья последний раз обновлялась {{ .Date }}, содержание может быть устаревшим."
 
+[encryptedAbstract]
+other = "" # waitting for translation
+
 [encryptedMessage]
+other = "" # waitting for translation
+
+[password]
+other = "арготизм"
+
+[encryptyAgain]
 other = "" # waitting for translation
 # === posts/single.html ===
 

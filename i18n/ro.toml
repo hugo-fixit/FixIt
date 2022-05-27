@@ -190,7 +190,16 @@ other = "Citește mai mult"
 [expirationReminder]
 other = "Acest articol a fost actualizat ultima dată pe {{ .Date }}, conținutul poate fi depășit."
 
+[encryptedAbstract]
+other = "" # waitting for translation
+
 [encryptedMessage]
+other = "" # waitting for translation
+
+[password]
+other = "Parolă"
+
+[encryptyAgain]
 other = "" # waitting for translation
 # === posts/single.html ===
 

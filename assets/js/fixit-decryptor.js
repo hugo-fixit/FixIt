@@ -19,7 +19,8 @@ FixItDecryptor = function (options = {}) {
    */
   var _decryptContent = (base64EncodeContent) => {
     try {
-      this.$el.classList.add('d-none');
+      this.$el.querySelector('#fixit-decryptor-input').classList.add('d-none');
+      this.$el.querySelector('.fixit-encryptor-btn').classList.remove('d-none');
       document.querySelector('#content').insertAdjacentHTML(
         'afterbegin',
         CryptoJS.enc.Base64.parse(base64EncodeContent).toString(CryptoJS.enc.Utf8)
@@ -43,7 +44,7 @@ FixItDecryptor = function (options = {}) {
 
     this.validateCache();
 
-    document.querySelector('#fixit-decryptor')?.addEventListener('keydown', function (e) {
+    this.$el.querySelector('#fixit-decryptor-input')?.addEventListener('keydown', function (e) {
       if (e.key === 'Enter') {
         e.preventDefault();
         const $content = document.querySelector('#content');
@@ -53,13 +54,13 @@ FixItDecryptor = function (options = {}) {
         const inputMd5 = CryptoJS.MD5(input).toString();
         const inputSha256 = CryptoJS.SHA256(input).toString();
 
+        this.value = '';
         if (!input) {
-          alert('Please input the correct password!');
-          return console.warn('Please input the correct password!');
+          alert('Please enter the correct password!');
+          return console.warn('Please enter the correct password!');
         }
         if (inputMd5 !== password) {
           alert(`Password error: ${input} not the correct password!`);
-          this.value = '';
           return console.warn(`Password error: ${input} not the correct password!`);
         }
         // cache decryption statistics
@@ -74,6 +75,18 @@ FixItDecryptor = function (options = {}) {
         _decryptContent($content.getAttribute('data-content').replace(inputSha256.slice(saltLen), ''));
       }
     });
+
+    this.$el.querySelector('.fixit-encryptor-btn')?.addEventListener('click', function (e) {
+      e.preventDefault();
+      this.classList.add('d-none')
+      _decryptor.$el.querySelector('#fixit-decryptor-input').classList.remove('d-none');
+      document.querySelector('#content').innerHTML = '';
+      document.querySelector('#content').insertAdjacentElement(
+        'afterbegin',
+        _decryptor.$el
+      );
+      window.localStorage.removeItem(`fixit-decryptor/#${location.pathname}`);
+    });
   };
 
   /**
@@ -85,10 +98,10 @@ FixItDecryptor = function (options = {}) {
     const cachedStat = JSON.parse(window.localStorage.getItem(`fixit-decryptor/#${location.pathname}`));
 
     if (!cachedStat) {
-      return this.$el.classList.remove('d-none');
+      return this.$el.querySelector('#fixit-decryptor-input').classList.remove('d-none');
     }
     if (cachedStat?.md5 !== password || Number(cachedStat?.expiration) < Math.ceil(Date.now() / 1000)) {
-      this.$el.classList.remove('d-none');
+      this.$el.querySelector('#fixit-decryptor-input').classList.remove('d-none');
       window.localStorage.removeItem(`fixit-decryptor/#${location.pathname}`);
       return console.warn('The password has expired, please re-enter!');
     }
