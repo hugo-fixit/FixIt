@@ -2,6 +2,7 @@
  * FixIt decryptor for encrypted pages
  * @param {Object} options
  * @param {Function} [options.decrypted] handler after decrypting
+ * @param {Function} [options.reset] handler after encrypting again
  * @param {Number} [options.duration=86400] number of seconds to cache decryption statistics. unit: s
  * @author @Lruihao https://lruihao.cn
  * @since v0.2.15
@@ -11,6 +12,7 @@ FixItDecryptor = function (options = {}) {
   this.options = options || {};
   this.options.duration = this.options.duration || 24 * 60 * 60; // default cache one day
   this.decryptedEventSet = new Set();
+  this.resetEventSet = new Set();
   this.$el = document.querySelector('.fixit-decryptor-container');
 
   /**
@@ -25,13 +27,12 @@ FixItDecryptor = function (options = {}) {
         'afterbegin',
         CryptoJS.enc.Base64.parse(base64EncodeContent).toString(CryptoJS.enc.Utf8)
       );
-      // decrypted hook
-      for (const event of this.decryptedEventSet) {
-        event();
-      }
     } catch (err) {
-      alert(err);
       return console.error(err);
+    }
+    // decrypted hook
+    for (const event of this.decryptedEventSet) {
+      event();
     }
   };
 
@@ -39,11 +40,11 @@ FixItDecryptor = function (options = {}) {
    * initialize FixIt decryptor
    */
   _proto.init = () => {
-    const _decryptor = this;
-    this.options.decrypted && this.addEventListener('decrypted', this.options.decrypted);
-
+    this.addEventListener('decrypted', this.options?.decrypted);
+    this.addEventListener('reset', this.options?.reset);
     this.validateCache();
-
+    
+    const _decryptor = this;
     this.$el.querySelector('#fixit-decryptor-input')?.addEventListener('keydown', function (e) {
       if (e.key === 'Enter') {
         e.preventDefault();
@@ -86,6 +87,10 @@ FixItDecryptor = function (options = {}) {
         _decryptor.$el
       );
       window.localStorage.removeItem(`fixit-decryptor/#${location.pathname}`);
+      // reset hook
+      for (const event of _decryptor.resetEventSet) {
+        event();
+      }
     });
   };
 
@@ -112,31 +117,47 @@ FixItDecryptor = function (options = {}) {
    * add event listener for FixIt Decryptor
    * @param {String} event
    * @param {Function} listener event handler
+   * @returns {FixItDecryptor}
    */
   _proto.addEventListener = (event, listener) => {
+    if (typeof listener !== 'function') {
+      return this;
+    }
     switch (event) {
       case 'decrypted':
         this.decryptedEventSet.add(listener);
+        break;
+      case 'reset':
+        this.resetEventSet.add(listener);
         break;
       default:
         console.warn(`Event ${event} not found in FixIt Decryptor!`);
         break;
     }
+    return this;
   };
 
   /**
    * remove event listener for FixIt Decryptor
    * @param {String} event
    * @param {Function} listener event handler
+   * @returns {FixItDecryptor}
    */
   _proto.removeEventListener = (event, listener) => {
+    if (typeof listener !== 'function') {
+      return this;
+    }
     switch (event) {
       case 'decrypted':
         this.decryptedEventSet.delete(listener);
+        break;
+      case 'reset':
+        this.resetEventSet.delete(listener);
         break;
       default:
         console.warn(`Event ${event} not found in FixIt Decryptor!`);
         break;
     }
+    return this;
   };
 };
