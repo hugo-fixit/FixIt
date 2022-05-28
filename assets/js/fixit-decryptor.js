@@ -1,9 +1,9 @@
 /**
  * FixIt decryptor for encrypted pages
  * @param {Object} options
- * @param {Function} [options.decrypted] handler after decrypting
- * @param {Function} [options.reset] handler after encrypting again
- * @param {Number} [options.duration=86400] number of seconds to cache decryption statistics, unit: s
+ * @param {Function} [options.decrypted] [Lifecycle Hooks] handler after decrypting
+ * @param {Function} [options.reset] [Lifecycle Hooks] handler after encrypting again
+ * @param {Number} [options.duration=86400] number of seconds to cache decryption statistics. unit: s
  * @author @Lruihao https://lruihao.cn
  * @since v0.2.15
  */
@@ -123,7 +123,7 @@ FixItDecryptor = function (options = {}) {
 
   /**
    * add event listener for FixIt Decryptor
-   * @param {String} event
+   * @param {String} event event name
    * @param {Function} listener event handler
    * @returns {FixItDecryptor}
    */
@@ -147,7 +147,7 @@ FixItDecryptor = function (options = {}) {
 
   /**
    * remove event listener for FixIt Decryptor
-   * @param {String} event
+   * @param {String} event event name
    * @param {Function} listener event handler
    * @returns {FixItDecryptor}
    */

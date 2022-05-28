@@ -72,6 +72,78 @@ It's really cool! :(fa-regular fa-grin-squint fa-fw):
 It is necessary only if the front matters and the `page` part in your [site configuration](../theme-documentation-basics#site-configuration) are inconsistent.
 {{< /admonition >}}
 
+* **title**: the title for the content.
+* **subtitle**: {{< version 0.2.0 >}} the subtitle for the content.
+* **date**: the datetime assigned to this page, which is usually fetched from the `date` field in front matter, but this behaviour is configurabl in the [site configuration](../theme-documentation-basics#site-configuration).
+* **lastmod**: the datetime at which the content was last modified.
+* **draft**: if `true`, the content will not be rendered unless the `--buildDrafts`/`-D` flag is passed to the `hugo` command.
+* **author**: the author for the content.
+* **authorLink**: the link of the author.
+* **authorEmail**: {{< version 0.2.14 >}} the  of the author.
+* **description**: the description for the content.
+* **keywords**: the keywords for the content.
+* **license**: the special lisence for this content.
+* **images**: page images for Open Graph and Twitter Cards.
+
+* **tags**: the tags for the content.
+* **categories**: the categories for the content.
+* **featuredImage**: the featured image for the content.
+* **featuredImagePreview**: the featured image for the content preview in the home page.
+
+* **hiddenFromHomePage**: if `true`, the content will not be shown in the home page.
+* **hiddenFromSearch**: {{< version 0.2.0 >}} if `true`, the content will not be shown in the search results.
+* **twemoji**: {{< version 0.2.0 >}} if `true`, the content will enable the twemoji.
+* **lightgallery**: if `true`, images in the content will be shown as the gallery.
+* **ruby**: {{< version 0.2.0 >}} if `true`, the content will enable the [ruby extended syntax](#ruby).
+* **fraction**: {{< version 0.2.0 >}} if `true`, the content will enable the [fraction extended syntax](#fraction).
+* **fontawesome**: {{< version 0.2.0 >}} if `true`, the content will enable the [Font Awesome extended syntax](#fontawesome).
+* **linkToMarkdown**: if `true`, the footer of the content will be shown the link to the orignal Markdown file.
+* **rssFullText**: {{< version 0.2.4 >}} if `true`, the full text content will be shown in RSS.
+* **pageStyle**: {{< version 0.2.13 >}} Detail see [Page Style](../theme-documentation-basics#page-style)
+* **gravatarForce**: {{< version 0.2.14 >}} Gravatar is force-used as the author's avatar.
+
+* **toc**: {{< version 0.2.9 changed >}} the same as the `params.page.toc` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **expirationReminder**: {{< version 0.2.13 >}} the same as the `params.page.expirationReminder` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **code**: {{< version 0.2.0 >}} the same as the `params.page.code` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **edit**: {{< version 0.2.14 >}} the same as the `params.page.edit` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **math**: {{< version 0.2.0 changed >}} the same as the `params.page.math` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **mapbox**: {{< version 0.2.0 >}} the same as the `params.page.mapbox` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **share**: the same as the `params.page.share` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **comment**: {{< version 0.2.0 changed >}} the same as the `params.page.comment` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **library**: {{< version 0.2.7 >}} the same as the `params.page.library` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **seo**: {{< version 0.2.10 >}} the same as the `params.page.seo` part in the [site configuration](../theme-documentation-basics#site-configuration).
+* **type**: the rendering template of page, see [templates](#tamplates) for details.
+* **menu**: see [Add content to Menu](../theme-documentation-basics#content-to-menu)
+
+* **password**: {{< version 0.2.15 >}} password of encrypted page content, see [Content Encryption](../theme-documentation-content-encryption/)
+* **message**: {{< version 0.2.15 >}} encryption prompt, see [Content Encryption](../theme-documentation-content-encryption/)
+
+{{< admonition tip >}}
+{{< version 0.2.10 >}}
+
+**featuredImage** and **featuredImagePreview** support the complete usage of [local resource references](#contents-organization).
+
+If the page resource with `name: featured-image` or `name: featured-image-preview` is set in the front matter,
+it is not necessary to set the parameter `featuredImage` or `featuredImagePreview`:
+
+```yaml
+resources:
+- name: featured-image
+  src: featured-image.jpg
+- name: featured-image-preview
+  src: featured-image-preview.jpg
+```
+
+{{< version 0.2.12 >}} 
+
+Some [archetypes](https://gohugo.io/content-management/archetypes/) are embedded in the **FixIt** theme, which will take effect when creating new content with the following commands, and the front matter will be automatically brought in.
+
+```bash
+hugo new posts/foo.md
+hugo new --kind post-bundle posts/bar/
+```
+{{< /admonition >}}
+
 Here is a front matter example:
 
 ```yaml
@@ -146,75 +218,6 @@ seo:
   # ...
 ---
 ```
-
-* **title**: the title for the content.
-* **subtitle**: {{< version 0.2.0 >}} the subtitle for the content.
-* **date**: the datetime assigned to this page, which is usually fetched from the `date` field in front matter, but this behaviour is configurabl in the [site configuration](../theme-documentation-basics#site-configuration).
-* **lastmod**: the datetime at which the content was last modified.
-* **draft**: if `true`, the content will not be rendered unless the `--buildDrafts`/`-D` flag is passed to the `hugo` command.
-* **author**: the author for the content.
-* **authorLink**: the link of the author.
-* **authorEmail**: {{< version 0.2.14 >}} the  of the author.
-* **description**: the description for the content.
-* **keywords**: the keywords for the content.
-* **license**: the special lisence for this content.
-* **images**: page images for Open Graph and Twitter Cards.
-
-* **tags**: the tags for the content.
-* **categories**: the categories for the content.
-* **featuredImage**: the featured image for the content.
-* **featuredImagePreview**: the featured image for the content preview in the home page.
-
-* **hiddenFromHomePage**: if `true`, the content will not be shown in the home page.
-* **hiddenFromSearch**: {{< version 0.2.0 >}} if `true`, the content will not be shown in the search results.
-* **twemoji**: {{< version 0.2.0 >}} if `true`, the content will enable the twemoji.
-* **lightgallery**: if `true`, images in the content will be shown as the gallery.
-* **ruby**: {{< version 0.2.0 >}} if `true`, the content will enable the [ruby extended syntax](#ruby).
-* **fraction**: {{< version 0.2.0 >}} if `true`, the content will enable the [fraction extended syntax](#fraction).
-* **fontawesome**: {{< version 0.2.0 >}} if `true`, the content will enable the [Font Awesome extended syntax](#fontawesome).
-* **linkToMarkdown**: if `true`, the footer of the content will be shown the link to the orignal Markdown file.
-* **rssFullText**: {{< version 0.2.4 >}} if `true`, the full text content will be shown in RSS.
-* **pageStyle**: {{< version 0.2.13 >}} Detail see [Page Style](../theme-documentation-basics#page-style)
-* **gravatarForce**: {{< version 0.2.14 >}} Gravatar is force-used as the author's avatar.
-
-* **toc**: {{< version 0.2.9 changed >}} the same as the `params.page.toc` part in the [site configuration](../theme-documentation-basics#site-configuration).
-* **expirationReminder**: {{< version 0.2.13 >}} the same as the `params.page.expirationReminder` part in the [site configuration](../theme-documentation-basics#site-configuration).
-* **code**: {{< version 0.2.0 >}} the same as the `params.page.code` part in the [site configuration](../theme-documentation-basics#site-configuration).
-* **edit**: {{< version 0.2.14 >}} the same as the `params.page.edit` part in the [site configuration](../theme-documentation-basics#site-configuration).
-* **math**: {{< version 0.2.0 changed >}} the same as the `params.page.math` part in the [site configuration](../theme-documentation-basics#site-configuration).
-* **mapbox**: {{< version 0.2.0 >}} the same as the `params.page.mapbox` part in the [site configuration](../theme-documentation-basics#site-configuration).
-* **share**: the same as the `params.page.share` part in the [site configuration](../theme-documentation-basics#site-configuration).
-* **comment**: {{< version 0.2.0 changed >}} the same as the `params.page.comment` part in the [site configuration](../theme-documentation-basics#site-configuration).
-* **library**: {{< version 0.2.7 >}} the same as the `params.page.library` part in the [site configuration](../theme-documentation-basics#site-configuration).
-* **seo**: {{< version 0.2.10 >}} the same as the `params.page.seo` part in the [site configuration](../theme-documentation-basics#site-configuration).
-* **type**: the rendering template of page, see [templates](#tamplates) for details.
-* **menu**: see [Add content to Menu](../theme-documentation-basics#content-to-menu)
-
-{{< admonition tip >}}
-{{< version 0.2.10 >}}
-
-**featuredImage** and **featuredImagePreview** support the complete usage of [local resource references](#contents-organization).
-
-If the page resource with `name: featured-image` or `name: featured-image-preview` is set in the front matter,
-it is not necessary to set the parameter `featuredImage` or `featuredImagePreview`:
-
-```yaml
-resources:
-- name: featured-image
-  src: featured-image.jpg
-- name: featured-image-preview
-  src: featured-image-preview.jpg
-```
-
-{{< version 0.2.12 >}} 
-
-Some [archetypes](https://gohugo.io/content-management/archetypes/) are embedded in the **FixIt** theme, which will take effect when creating new content with the following commands, and the front matter will be automatically brought in.
-
-```bash
-hugo new posts/foo.md
-hugo new --kind post-bundle posts/bar/
-```
-{{< /admonition >}}
 
 ## 3 Tamplates {#tamplates}
 
