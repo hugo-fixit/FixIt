@@ -3,7 +3,7 @@
  * @param {Object} options
  * @param {Function} [options.decrypted] handler after decrypting
  * @param {Function} [options.reset] handler after encrypting again
- * @param {Number} [options.duration=86400] number of seconds to cache decryption statistics. unit: s
+ * @param {Number} [options.duration=86400] number of seconds to cache decryption statistics, unit: s
  * @author @Lruihao https://lruihao.cn
  * @since v0.2.15
  */
@@ -21,6 +21,7 @@ FixItDecryptor = function (options = {}) {
    */
   var _decryptContent = (base64EncodeContent) => {
     try {
+      this.$el.querySelector('.fixit-decryptor-loading').classList.add('d-none');
       this.$el.querySelector('#fixit-decryptor-input').classList.add('d-none');
       this.$el.querySelector('.fixit-encryptor-btn').classList.remove('d-none');
       document.querySelector('#content').insertAdjacentHTML(
@@ -56,6 +57,7 @@ FixItDecryptor = function (options = {}) {
         const inputSha256 = CryptoJS.SHA256(input).toString();
 
         this.value = '';
+        this.blur();
         if (!input) {
           alert('Please enter the correct password!');
           return console.warn('Please enter the correct password!');
@@ -96,6 +98,7 @@ FixItDecryptor = function (options = {}) {
 
   /**
    * validate the cached decryption statistics in localStorage
+   * @returns {FixItDecryptor}
    */
   _proto.validateCache = () => {
     const $content = document.querySelector('#content');
@@ -103,14 +106,19 @@ FixItDecryptor = function (options = {}) {
     const cachedStat = JSON.parse(window.localStorage.getItem(`fixit-decryptor/#${location.pathname}`));
 
     if (!cachedStat) {
-      return this.$el.querySelector('#fixit-decryptor-input').classList.remove('d-none');
+      this.$el.querySelector('.fixit-decryptor-loading').classList.add('d-none');
+      this.$el.querySelector('#fixit-decryptor-input').classList.remove('d-none');
+      return this;
     }
     if (cachedStat?.md5 !== password || Number(cachedStat?.expiration) < Math.ceil(Date.now() / 1000)) {
+      this.$el.querySelector('.fixit-decryptor-loading').classList.add('d-none');
       this.$el.querySelector('#fixit-decryptor-input').classList.remove('d-none');
       window.localStorage.removeItem(`fixit-decryptor/#${location.pathname}`);
-      return console.warn('The password has expired, please re-enter!');
+      console.warn('The password has expired, please re-enter!');
+      return this;
     }
     _decryptContent($content.getAttribute('data-content').replace(cachedStat.sha256, ''));
+    return this;
   };
 
   /**
