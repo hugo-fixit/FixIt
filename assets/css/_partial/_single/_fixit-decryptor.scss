@@ -9,7 +9,6 @@
     box-sizing: border-box;
     outline: none;
     color: $global-font-color;
-    background-color: $global-background-color;
     border: 1px solid darken($global-border-color, 15%);
     border-radius: $global-border-radius;
     transition: 0.1s;
@@ -32,7 +31,6 @@
     [theme='dark'] & {
       color: $global-font-color-dark;
       border-color: lighten($global-border-color-dark, 15%);
-      background-color: $global-background-color-dark;
       box-shadow: 0px 0px 5px 0px lighten($global-border-color-dark, 15%);
     }
   }
@@ -42,11 +40,22 @@
     height: 3rem;
     padding-left: 1rem;
     padding-right: 1rem;
+    background-color: $global-background-color;
+
+    [theme='dark'] & {
+      background-color: $global-background-color-dark;
+    }
   }
 
   .fixit-encryptor-btn {
     cursor: pointer;
     transition: 0.1s;
     padding: 0.6rem 1rem;
+
+    background-color: $header-background-color;
+
+    [theme='dark'] & {
+      background-color: $header-background-color-dark;
+    }
   }
 }

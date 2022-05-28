@@ -1,9 +1,13 @@
-{{- $params := .Scratch.Get "params" -}}
+{{- $msg := (.Scratch.Get "params").message | default (T "encryptedMessage") -}}
+{{- $loading := resources.Get "svg/loading.svg" | minify -}}
 
 <div class="fixit-decryptor-container">
-  {{- $msg := $params.message | default (T "encryptedMessage") -}}
+  <img class="fixit-decryptor-loading" src="{{ $loading.RelPermalink }}" alt="decryptor loading" />
   <label for="fixit-decryptor-input" title='{{ T "password" }}'>
     <input type="password" id="fixit-decryptor-input" class="d-none" placeholder="🔑 {{ $msg }}" />
   </label>
-  <button class="fixit-encryptor-btn d-none">{{ T "encryptyAgain" }}</button>
+  <button class="fixit-encryptor-btn d-none">
+    <i class="fa-solid fa-lock"></i>
+    {{ T "encryptyAgain" }}
+  </button>
 </div>

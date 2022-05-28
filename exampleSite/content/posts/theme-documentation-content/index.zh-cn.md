@@ -70,6 +70,78 @@ menu:
 只有在文章的参数和你的 [网站设置](../theme-documentation-basics#site-configuration) 中的 `page` 部分不一致时才有必要这么做。
 {{< /admonition >}}
 
+* **title**: 文章标题
+* **subtitle**: {{< version 0.2.0 >}} 文章副标题
+* **date**: 这篇文章创建的日期时间它通常是从文章的前置参数中的 `date` 字段获取的，但是也可以在 [网站配置](../theme-documentation-basics#site-configuration) 中设置
+* **lastmod**: 上次修改内容的日期时间
+* **draft**: 如果设为 `true`, 除非 `hugo` 命令使用了 `--buildDrafts`/`-D` 参数，这篇文章不会被渲染
+* **author**: 文章作者
+* **authorLink**: 文章作者的链接
+* **authorEmail**: {{< version 0.2.14 >}} 文章作者的邮箱
+* **description**: 文章内容的描述
+* **keywords**: 文章内容的关键词
+* **license**: 这篇文章特殊的许可
+* **images**: 页面图片，用于 Open Graph 和 Twitter Cards.
+
+* **tags**: 文章的标签
+* **categories**: 文章所属的类别
+* **featuredImage**: 文章的特色图片
+* **featuredImagePreview**: 用在主页预览的文章特色图片
+
+* **hiddenFromHomePage**: 如果设为 `true`, 这篇文章将不会显示在主页上
+* **hiddenFromSearch**: {{< version 0.2.0 >}} 如果设为 `true`, 这篇文章将不会显示在搜索结果中
+* **twemoji**: {{< version 0.2.0 >}} 如果设为 `true`, 这篇文章会使用 twemoji
+* **lightgallery**: 如果设为 `true`, 文章中的图片将可以按照画廊形式呈现
+* **ruby**: {{< version 0.2.0 >}} 如果设为 `true`, 这篇文章会使用 [上标注释扩展语法](#ruby)
+* **fraction**: {{< version 0.2.0 >}} 如果设为 `true`, 这篇文章会使用 [分数扩展语法](#fraction)
+* **fontawesome**: {{< version 0.2.0 >}} 如果设为 `true`, 这篇文章会使用 [Font Awesome 扩展语法](#fontawesome)
+* **linkToMarkdown**: 如果设为 `true`, 内容的页脚将显示指向原始 Markdown 文件的链接
+* **rssFullText**: {{< version 0.2.4 >}} 如果设为 `true`, 在 RSS 中将会显示全文内容
+* **pageStyle**: {{< version 0.2.13 >}} 页面样式，详见 [页面宽度](../theme-documentation-basics#page-style)
+* **gravatarForce**: {{< version 0.2.14 >}} 强制使用 Gravatar 作为作者头像
+
+* **toc**: {{< version 0.2.9 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.toc` 部分相同
+* **expirationReminder**: {{< version 0.2.13 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.expirationReminder` 部分相同
+* **code**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.code` 部分相同
+* **edit**: {{< version 0.2.14 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.edit` 部分相同
+* **math**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.math` 部分相同
+* **mapbox**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.mapbox` 部分相同
+* **share**: 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.share` 部分相同
+* **comment**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.comment` 部分相同
+* **library**: {{< version 0.2.7 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.library` 部分相同
+* **seo**: {{< version 0.2.10 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.seo` 部分相同
+* **type**: 页面渲染模板，详见 [页面模板](#tamplates)
+* **menu**: 详见 [添加内容到菜单](../theme-documentation-basics#content-to-menu)
+
+* **password**: {{< version 0.2.15 >}} 加密页面内容的密码，详见 [内容加密](../theme-documentation-content-encryption/)
+* **message**: {{< version 0.2.15 >}} 加密提示信息，详见 [内容加密](../theme-documentation-content-encryption/)
+
+{{< admonition tip >}}
+{{< version 0.2.10 >}}
+
+**featuredImage** 和 **featuredImagePreview** 支持 [本地资源引用](#contents-organization) 的完整用法。
+
+如果带有在前置参数中设置了 `name: featured-image` 或 `name: featured-image-preview` 属性的页面资源，
+没有必要在设置 `featuredImage` 或 `featuredImagePreview`:
+
+```yaml
+resources:
+- name: featured-image
+  src: featured-image.jpg
+- name: featured-image-preview
+  src: featured-image-preview.jpg
+```
+
+{{< version 0.2.12 >}} 
+
+**FixIt** 主题内嵌了一些 [原型](https://gohugo.io/content-management/archetypes/)，在使用以下命令创建新内容时生效，会自动带入常用的前置参数：
+
+```bash
+hugo new posts/foo.md
+hugo new --kind post-bundle posts/bar/
+```
+{{< /admonition >}}
+
 这是一个前置参数例子：
 
 ```yaml
@@ -144,75 +216,6 @@ seo:
   # ...
 ---
 ```
-
-* **title**: 文章标题
-* **subtitle**: {{< version 0.2.0 >}} 文章副标题
-* **date**: 这篇文章创建的日期时间它通常是从文章的前置参数中的 `date` 字段获取的，但是也可以在 [网站配置](../theme-documentation-basics#site-configuration) 中设置
-* **lastmod**: 上次修改内容的日期时间
-* **draft**: 如果设为 `true`, 除非 `hugo` 命令使用了 `--buildDrafts`/`-D` 参数，这篇文章不会被渲染
-* **author**: 文章作者
-* **authorLink**: 文章作者的链接
-* **authorEmail**: {{< version 0.2.14 >}} 文章作者的邮箱
-* **description**: 文章内容的描述
-* **keywords**: 文章内容的关键词
-* **license**: 这篇文章特殊的许可
-* **images**: 页面图片，用于 Open Graph 和 Twitter Cards.
-
-* **tags**: 文章的标签
-* **categories**: 文章所属的类别
-* **featuredImage**: 文章的特色图片
-* **featuredImagePreview**: 用在主页预览的文章特色图片
-
-* **hiddenFromHomePage**: 如果设为 `true`, 这篇文章将不会显示在主页上
-* **hiddenFromSearch**: {{< version 0.2.0 >}} 如果设为 `true`, 这篇文章将不会显示在搜索结果中
-* **twemoji**: {{< version 0.2.0 >}} 如果设为 `true`, 这篇文章会使用 twemoji
-* **lightgallery**: 如果设为 `true`, 文章中的图片将可以按照画廊形式呈现
-* **ruby**: {{< version 0.2.0 >}} 如果设为 `true`, 这篇文章会使用 [上标注释扩展语法](#ruby)
-* **fraction**: {{< version 0.2.0 >}} 如果设为 `true`, 这篇文章会使用 [分数扩展语法](#fraction)
-* **fontawesome**: {{< version 0.2.0 >}} 如果设为 `true`, 这篇文章会使用 [Font Awesome 扩展语法](#fontawesome)
-* **linkToMarkdown**: 如果设为 `true`, 内容的页脚将显示指向原始 Markdown 文件的链接
-* **rssFullText**: {{< version 0.2.4 >}} 如果设为 `true`, 在 RSS 中将会显示全文内容
-* **pageStyle**: {{< version 0.2.13 >}} 页面样式，详见 [页面宽度](../theme-documentation-basics#page-style)
-* **gravatarForce**: {{< version 0.2.14 >}} 强制使用 Gravatar 作为作者头像
-
-* **toc**: {{< version 0.2.9 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.toc` 部分相同
-* **expirationReminder**: {{< version 0.2.13 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.expirationReminder` 部分相同
-* **code**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.code` 部分相同
-* **edit**: {{< version 0.2.14 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.edit` 部分相同
-* **math**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.math` 部分相同
-* **mapbox**: {{< version 0.2.0 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.mapbox` 部分相同
-* **share**: 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.share` 部分相同
-* **comment**: {{< version 0.2.0 changed >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.comment` 部分相同
-* **library**: {{< version 0.2.7 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.library` 部分相同
-* **seo**: {{< version 0.2.10 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.seo` 部分相同
-* **type**: 页面渲染模板，详见 [页面模板](#tamplates)
-* **menu**: 详见 [添加内容到菜单](../theme-documentation-basics#content-to-menu)
-
-{{< admonition tip >}}
-{{< version 0.2.10 >}}
-
-**featuredImage** 和 **featuredImagePreview** 支持 [本地资源引用](#contents-organization) 的完整用法。
-
-如果带有在前置参数中设置了 `name: featured-image` 或 `name: featured-image-preview` 属性的页面资源，
-没有必要在设置 `featuredImage` 或 `featuredImagePreview`:
-
-```yaml
-resources:
-- name: featured-image
-  src: featured-image.jpg
-- name: featured-image-preview
-  src: featured-image-preview.jpg
-```
-
-{{< version 0.2.12 >}} 
-
-**FixIt** 主题内嵌了一些 [原型](https://gohugo.io/content-management/archetypes/)，在使用以下命令创建新内容时生效，会自动带入常用的前置参数：
-
-```bash
-hugo new posts/foo.md
-hugo new --kind post-bundle posts/bar/
-```
-{{< /admonition >}}
 
 ## 3 页面模板 {#tamplates}
 
