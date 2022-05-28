@@ -1,5 +1,5 @@
 ---
-weight: 7
+weight: 5
 title: "Theme Documentation - PWA Support"
 date: 2022-01-26T09:32:56+08:00
 draft: false

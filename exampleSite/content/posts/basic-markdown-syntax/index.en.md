@@ -1,5 +1,4 @@
 ---
-weight: 4
 title: "Basic Markdown Syntax"
 date: 2019-12-01T21:57:40+08:00
 lastmod: 2022-03-01T22:30:40+08:00

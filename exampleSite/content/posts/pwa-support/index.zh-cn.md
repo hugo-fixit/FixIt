@@ -1,5 +1,5 @@
 ---
-weight: 7
+weight: 5
 title: "主题文档 - PWA 支持"
 date: 2022-01-26T11:10:56+08:00
 draft: false
