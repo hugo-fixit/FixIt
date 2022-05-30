@@ -107,6 +107,10 @@ To see this theme in action, here are some live demo sites which are rendered wi
 * [hiifong's blog](https://52at.ml)
 * Add a your site by [making a PR](https://github.com/Lruihao/FixIt/pulls) (e.g. [#111](https://github.com/Lruihao/FixIt/pull/111))
 
+## [hugo contact form](https://fabform.io/a/hugo-contact-form)
+
+
+
 ## Features
 
 ### Performance and SEO
