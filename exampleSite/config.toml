@@ -1106,12 +1106,12 @@ enableEmoji = true
   # 第三方库文件的 CDN 设置
   [params.cdn]
     # CDN data file name, disabled by default
-    # ("jsdelivr.yml")
+    # ("jsdelivr.yml", "unpkg.yml")
     # located in "themes/FixIt/assets/data/cdn/" directory
     # you can store your own data files in the same path under your project:
     # "assets/data/cdn/"
     # CDN 数据文件名称, 默认不启用
-    # ("jsdelivr.yml")
+    # ("jsdelivr.yml", "unpkg.yml")
     # 位于 "themes/FixIt/assets/data/cdn/" 目录
     # 可以在你的项目下相同路径存放你自己的数据文件:
     # "assets/data/cdn/"

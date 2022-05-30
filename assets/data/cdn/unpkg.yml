@@ -2,9 +2,9 @@
 # See https://github.com/Lruihao/FixIt/issues/67
 
 prefix:
-  libFiles: https://cdn.jsdelivr.net/npm/
+  libFiles: https://unpkg.com/
   # simple-icons@6.3.0 https://github.com/simple-icons/simple-icons
-  simpleIcons: https://cdn.jsdelivr.net/npm/simple-icons@6.3.0/icons/
+  simpleIcons: https://unpkg.com/simple-icons@6.3.0/icons/
 libFiles:
   # algoliasearch@4.13.0 https://github.com/algolia/algoliasearch-client-javascript
   algoliasearchJS: algoliasearch@4.13.0/dist/algoliasearch-lite.umd.min.js

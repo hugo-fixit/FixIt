@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: busuanzi logic error
 - :bug: Fix: close comment system logic error when the article was expired
 - :art: Style: add scroll bar for auto toc ([#136](https://github.com/Lruihao/FixIt/issues/136))
+- :wrench: Feat(cdn): add unpkg cdn support
 - :arrow_up: Chore: update some third-party libraries
 - **Full Changelog:** @Lruihao [`v0.2.14...v0.2.15`](https://github.com/Lruihao/FixIt/compare/v0.2.14...v0.2.15)
 
