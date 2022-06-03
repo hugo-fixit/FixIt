@@ -107,10 +107,10 @@ class FixIt {
     const $menuToggleMobile = document.getElementById('menu-toggle-mobile');
     const $menuMobile = document.getElementById('menu-mobile');
     $menuToggleMobile.addEventListener('click', (event) => {
-      this.disableScrollEvent = true;
       document.body.classList.toggle('blur');
       $menuToggleMobile.classList.toggle('active');
       $menuMobile.classList.toggle('active');
+      this.disableScrollEvent = document.body.classList.contains('blur')
     }, false);
     this._menuMobileOnClickMask = this._menuMobileOnClickMask || (() => {
       $menuToggleMobile.classList.remove('active');
@@ -158,10 +158,12 @@ class FixIt {
     if (isMobile) {
       this._searchMobileOnce = true;
       $searchInput.addEventListener('focus', () => {
+        this.disableScrollEvent = true;
         document.body.classList.add('blur');
         $header.classList.add('open');
       }, false);
       document.getElementById('search-cancel-mobile').addEventListener('click', () => {
+        this.disableScrollEvent = false;
         $header.classList.remove('open');
         document.body.classList.remove('blur');
         document.getElementById('menu-toggle-mobile').classList.remove('active');
@@ -932,23 +934,25 @@ class FixIt {
 
   onScroll() {
     const $headers = [];
-    if (document.body.getAttribute('header-desktop') === 'auto') $headers.push(document.getElementById('header-desktop'));
-    if (document.body.getAttribute('header-mobile') === 'auto') $headers.push(document.getElementById('header-mobile'));
+    if (document.body.getAttribute('header-desktop') === 'auto') {
+      $headers.push(document.getElementById('header-desktop'));
+    }
+    if (document.body.getAttribute('header-mobile') === 'auto') {
+      $headers.push(document.getElementById('header-mobile'));
+    }
     if (document.getElementById('comments')) {
       const $viewComments = document.getElementById('view-comments');
       $viewComments.href = `#comments`;
       $viewComments.style.display = 'block';
     }
     const $fixedButtons = document.getElementById('fixed-buttons');
-    const ACCURACY = 20,
-      MINIMUM = 100;
+    const ACCURACY = 20, MINIMUM = 100;
     window.addEventListener('scroll', (event) => {
       if (this.disableScrollEvent) {
         event.preventDefault();
-        this.disableScrollEvent = false;
         return;
       }
-      document.getElementById('mask').click();
+      const $mask = document.getElementById('mask');
       this.newScrollTop = this.util.getScrollTop();
       const scroll = this.newScrollTop - this.oldScrollTop;
       const isMobile = this.util.isMobile();
@@ -956,9 +960,11 @@ class FixIt {
         if (scroll > ACCURACY) {
           $header.classList.remove('animate__fadeInDown');
           this.util.animateCSS($header, ['animate__fadeOutUp', 'animate__faster'], true);
+          $mask.click();
         } else if (scroll < -ACCURACY) {
           $header.classList.remove('animate__fadeOutUp');
           this.util.animateCSS($header, ['animate__fadeInDown', 'animate__faster'], true);
+          $mask.click();
         }
       });
       // whether to show b2t button
@@ -978,12 +984,15 @@ class FixIt {
         }
         $fixedButtons.style.display = 'none';
       }
-      for (let event of this.scrollEventSet) event();
+      for (let event of this.scrollEventSet) {
+        event();
+      }
       this.oldScrollTop = this.newScrollTop;
     }, false);
   }
 
   onResize() {
+    const resizeBefore = this.util.isMobile();
     window.addEventListener('resize', () => {
       if (!this._resizeTimeout) {
         this._resizeTimeout = window.setTimeout(() => {
@@ -994,7 +1003,12 @@ class FixIt {
           this.initToc();
           this.initMermaid();
           this.initSearch();
-          document.getElementById('mask').click();
+
+          isMobile = this.util.isMobile()
+          if (isMobile !== resizeBefore) {
+            document.getElementById('mask').click();
+            resizeBefore = isMobile;
+          }
         }, 100);
       }
     }, false);
@@ -1002,7 +1016,13 @@ class FixIt {
 
   onClickMask() {
     document.getElementById('mask').addEventListener('click', () => {
-      for (let event of this.clickMaskEventSet) event();
+      if (!document.body.classList.contains('blur')) {
+        return;
+      }
+      for (let event of this.clickMaskEventSet) {
+        event();
+      }
+      this.disableScrollEvent = false;
       document.body.classList.remove('blur');
     }, false);
   }
