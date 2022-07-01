@@ -1,4 +1,6 @@
 {{- $password := .Get 0 | default "" -}}
+<!-- TODO get msg from shortcode param -->
+{{- $msg := (.Scratch.Get "params").message | default (T "encryptedMessage") -}}
 
 {{- if $password -}}
   {{- $content := .Inner | .Page.RenderString -}}
@@ -10,8 +12,16 @@
     (substr (sha256 $password) $saltLen)
     (substr $base64EncodeContent $saltLen)
   -}}
-  <fixit-encryptor data-password="{{ $password }}" data-content="{{ $content }}"></fixit-encryptor>
-  {{- partial "single/fixit-decryptor.html" . -}}
+
+  <fixit-encryptor class="fixit-encryptor-shortcode">
+    <div class="fixit-decryptor-container">
+      <label title='{{ T "password" }}'>
+        <input type="password" class="fixit-decryptor-input" placeholder="🔑 {{ $msg }}" />
+      </label>
+    </div>
+    <div data-password="{{ md5 $password }}" data-content="{{ $content }}"></div>
+  </fixit-encryptor>
+  {{- .Page.Scratch.SetInMap "this" "encryptPartial" true -}}
 {{- else -}}
   {{- .Inner -}}
 {{- end -}}

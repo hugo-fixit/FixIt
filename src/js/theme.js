@@ -47,8 +47,6 @@ class Util {
 }
 
 class FixIt {
-  #encrypted = typeof FixItDecryptor !== 'undefined';
-
   constructor() {
     this.config = window.config;
     this.data = this.config.data;
@@ -879,7 +877,7 @@ class FixIt {
   }
 
   initWatermark() {
-    this.config?.watermark?.enable &&
+    this.config.watermark?.enable &&
       new Watermark({
         content: this.config.watermark.content || '<img class="fixit-icon" src="/images/fixit.svg" alt="FixIt logo" /> FixIt Theme',
         appendTo: this.config.watermark.appendto || '.wrapper>main',
@@ -927,7 +925,8 @@ class FixIt {
         });
       }
     });
-    this.decryptor.init();
+    this.config.encryption?.all && this.decryptor.init();
+    this.config.encryption?.shortcode && this.decryptor.initShortcodes();
   }
 
   onScroll() {
@@ -1009,9 +1008,9 @@ class FixIt {
 
   init() {
     try {
-      if (this.#encrypted) {
+      if (this.config.encryption) {
         this.initFixItDecryptor();
-      } else {
+      } else if(!this.config.encryption?.all) {
         this.initTwemoji();
         this.initDetails();
         this.initLightGallery();
@@ -1036,7 +1035,7 @@ class FixIt {
 
       window.setTimeout(() => {
         this.initComment();
-        if (!this.#encrypted) {
+        if (!this.config.encryption?.all) {
           this.initToc();
           this.initTocListener();
         }
