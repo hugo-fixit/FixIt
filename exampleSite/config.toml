@@ -838,6 +838,7 @@ enableEmoji = true
         # It take effect when `params.page.lightgallery` is enabled
         # 当 `params.page.lightgallery` 启用时生效
         lightgallery = false
+        locale = "" # since v0.2.15
       # Disqus comment config (https://disqus.com/)
       # Disqus 评论系统设置 (https://disqus.com/)
       [params.page.comment.disqus]

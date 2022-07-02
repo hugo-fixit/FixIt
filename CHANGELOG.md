@@ -18,7 +18,8 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: close comment system logic error when the article was expired
 - :art: Style: add scroll bar for auto toc ([#136](https://github.com/Lruihao/FixIt/issues/136))
 - :wrench: Feat(cdn): add unpkg cdn support
-- :arrow_up: Chore: update some third-party libraries
+- :arrow_up: Chore(libs): update some third-party libraries
+  - Update Artalk from 2.2.12 to 2.3.4 ([#150](https://github.com/Lruihao/FixIt/issues/150))
 - **Full Changelog:** @Lruihao [`v0.2.14...v0.2.15`](https://github.com/Lruihao/FixIt/compare/v0.2.14...v0.2.15)
 
 ## v0.2.14 [2022.5.15]

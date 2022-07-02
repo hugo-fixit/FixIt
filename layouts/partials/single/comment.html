@@ -13,7 +13,14 @@
       {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
       {{- $source := $cdn.artalkJS | default "lib/artalk/Artalk.min.js" -}}
       {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-      {{- $commentConfig = dict "el" "#artalk" "pageKey" .Permalink "pageTitle" .Title | dict "artalk" | merge $commentConfig -}}
+      {{- $commentConfig = dict "el" "#artalk" "pageKey" .Permalink "pageTitle" .Title "pvEl" "artalk-visitor-count" "countEl" "artalk-comment-count" | dict "artalk" | merge $commentConfig -}}
+      {{- if (eq $artalk.locale "") | and (eq $.Site.LanguageCode "en") -}}
+        {{- $artalk = dict "locale" "en-US" | merge $artalk -}}
+      {{- end -}}
+      {{- $commentConfig = dict "locale" ($artalk.locale | default $.Site.LanguageCode | default "auto") | dict "artalk" | merge $commentConfig -}}
+      {{- with .Site.Params.gravatar -}}
+        {{- $commentConfig = dict "mirror" .Host "default" .Style | dict "gravatar" | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
       {{- with $artalk.server -}}
         {{- $commentConfig = dict "server" . | dict "artalk" | merge $commentConfig -}}
       {{- end -}}

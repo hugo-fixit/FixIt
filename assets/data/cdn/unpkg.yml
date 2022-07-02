@@ -13,9 +13,9 @@ libFiles:
   # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
   aplayerCSS: aplayer@1.10.1/dist/APlayer.min.css
   aplayerJS: aplayer@1.10.1/dist/APlayer.min.js
-  # artalk@2.1.4 https://github.com/ArtalkJS/Artalk
-  artalkCSS: artalk@2.2.12/dist/Artalk.min.css
-  artalkJS: artalk@2.2.12/dist/Artalk.min.js
+  # artalk@2.3.4 https://github.com/ArtalkJS/Artalk
+  artalkCSS: artalk@2.3.4/dist/Artalk.css
+  artalkJS: artalk@2.3.4/dist/Artalk.js
   # autocomplete.js@0.38.1 https://github.com/algolia/autocomplete.js
   autocompleteJS: autocomplete.js@0.38.1/dist/autocomplete.min.js
   # cell-watermark@1.0.3 https://github.com/Lruihao/watermark
