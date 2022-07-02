@@ -63,6 +63,7 @@ Now the migration is finished and everything is ready 🎉
 ## Why choose FixIt
 
 * Custom **Header (sub-menu supported)**
+* **Content Encryption** supported (Pages, Partial)
 * Custom **CSS Style**
 * A new **home page**, compatible with the latest version of Hugo
 * A lot of **style detail adjustments,** including color, font size, margins, code preview style
