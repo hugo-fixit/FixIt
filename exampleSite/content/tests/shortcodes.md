@@ -57,16 +57,3 @@ A **tip** banner
 ```
 {{< version 0.2.0 changed >}} {{< link "https://katex.org/" KaTeX >}} mathematical formulas (https://katex.org)
 ```
-
-Nested **fixit-encryptor** shortcode
-
-{{% fixit-encryptor "1212" %}}
-  **hello**
-{{% /fixit-encryptor %}}
-
-{{% fixit-encryptor "1212" %}}
-  *world*
-  {{< admonition >}}
-    fixit-encryptor shortcode was supported in {{< version 0.2.15 >}}
-  {{< /admonition >}}
-{{% /fixit-encryptor %}}

@@ -1386,6 +1386,15 @@ The rendered output looks like this:
 this is a center-quote shortcode example.
 {{% /center-quote %}}
 
+
+## fixit-encryptor
+
+{{< version 0.2.15 >}}
+
+You can use `fixit-encryptor` shortcode to encrypt partial content.
+
+The full documentation is provided in [Theme Documentation - Content Encryption](../theme-documentation-content-encryption/#partial-encryption).
+
 ---
 
 {{< admonition quote "Thanks" >}}

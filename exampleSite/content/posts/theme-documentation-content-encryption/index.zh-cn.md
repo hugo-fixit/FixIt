@@ -94,7 +94,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ## 部分加密
 
-- [ ] fixit-encryptor shortcode
+{{< version 0.2.15 >}}
+
+您可以使用 `fixit-encryptor` shortcode 来加密部分内容。
+
+`fixit-encryptor` shortcode 具有以下命名参数：
+
+* **password** *[必选]*（**第一个**位置参数）
+
+    部分加密内容的密码。
+
+* **message** *[可选]*（**第二个**位置参数）
+
+    解密输入框的提示信息。
+
+一个 `fixit-encryptor` 示例：
+
+```go-html-template
+{{%/* fixit-encryptor "1212" "密码是 1212" */%}}
+`fixit-encryptor` shortcode 在版本 {{</* version 0.2.15 */>}} 得到支持。
+{{%/* /fixit-encryptor */%}}
+Or
+{{%/* fixit-encryptor password="1212" message="密码是 1212" */%}}
+`fixit-encryptor` shortcode 在版本 {{</* version 0.2.15 */>}} 得到支持。
+{{%/* /fixit-encryptor */%}}
+```
+
+呈现的输出效果如下：
+
+{{% fixit-encryptor "1212" "密码是 1212" %}}
+`fixit-encryptor` shortcode 在版本 {{< version 0.2.15 >}} 得到支持。
+{{% /fixit-encryptor %}}
 
 ## 结语
 

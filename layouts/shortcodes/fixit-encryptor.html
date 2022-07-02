@@ -1,6 +1,13 @@
-{{- $password := .Get 0 | default "" -}}
-<!-- TODO get msg from shortcode param -->
-{{- $msg := (.Scratch.Get "params").message | default (T "encryptedMessage") -}}
+{{- $password := "" -}}
+{{- $message := "" -}}
+
+{{- if .IsNamedParams -}}
+  {{- $password = .Get "password" | default "" -}}
+  {{- $message = .Get "message" | default (T "encryptedMessage") -}}
+{{- else -}}
+  {{- $password = .Get 0 | default "" -}}
+  {{- $message = .Get 1 | default (T "encryptedMessage") -}}
+{{- end -}}
 
 {{- if $password -}}
   {{- $content := .Inner | .Page.RenderString -}}
@@ -16,7 +23,7 @@
   <fixit-encryptor class="fixit-encryptor-shortcode">
     <div class="fixit-decryptor-container">
       <label title='{{ T "password" }}'>
-        <input type="password" class="fixit-decryptor-input" placeholder="🔑 {{ $msg }}" />
+        <input type="password" class="fixit-decryptor-input" placeholder="🔑 {{ $message }}" />
       </label>
     </div>
     <div data-password="{{ md5 $password }}" data-content="{{ $content }}"></div>

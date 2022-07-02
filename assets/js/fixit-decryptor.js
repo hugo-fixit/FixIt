@@ -14,7 +14,6 @@ FixItDecryptor = function (options = {}) {
   this.decryptedEventSet = new Set();
   this.resetEventSet = new Set();
   this.$el = document.querySelector('.fixit-decryptor-container');
-  this.$shortcodes = document.querySelectorAll('fixit-encryptor');
 
   /**
    * decrypt content
@@ -32,6 +31,11 @@ FixItDecryptor = function (options = {}) {
     } catch (err) {
       return console.error(err);
     }
+    // decrypted hook
+    console.log(this.decryptedEventSet)
+    for (const event of this.decryptedEventSet) {
+      event();
+    }    
   };
 
   /**
@@ -97,8 +101,12 @@ FixItDecryptor = function (options = {}) {
    * initialize fixit-encryptor shortcodes
    */
   _proto.initShortcodes = () => {
+    // TODO TODO shortcode decrypted event
+    // this.addEventListener('decrypted', this.options?.decrypted);
     const _decryptor = this;
-    this.$shortcodes.forEach($shortcode => {
+    const $shortcodes = document.querySelectorAll('fixit-encryptor:not(.decrypted)');
+
+    $shortcodes.forEach($shortcode => {
       $shortcode.querySelector('.fixit-decryptor-input')?.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
           e.preventDefault();
@@ -131,10 +139,10 @@ FixItDecryptor = function (options = {}) {
           } catch (err) {
             return console.error(err);
           }
-          // decrypted hook
-          for (const event of _decryptor.decryptedEventSet) {
-            event();
-          }
+          // TODO shortcode decrypted hook
+          // for (const event of _decryptor.decryptedEventSet) {
+          //   event();
+          // }
         }
       });
     });

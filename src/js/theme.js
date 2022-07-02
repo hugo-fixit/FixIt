@@ -925,8 +925,13 @@ class FixIt {
         });
       }
     });
+    if (this.config.encryption?.shortcode) {
+      this.decryptor.addEventListener('decrypted', () => {
+        this.decryptor.initShortcodes();
+      })
+      this.decryptor.initShortcodes();
+    }
     this.config.encryption?.all && this.decryptor.init();
-    this.config.encryption?.shortcode && this.decryptor.initShortcodes();
   }
 
   onScroll() {

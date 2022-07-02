@@ -1386,6 +1386,14 @@ this is a center-quote shortcode example.
 this is a center-quote shortcode example.
 {{% /center-quote %}}
 
+## fixit-encryptor
+
+{{< version 0.2.15 >}}
+
+您可以使用 `fixit-encryptor` shortcode 来加密部分内容。
+
+完整文档请查看页面 [主题文档 - 内容加密](../theme-documentation-content-encryption/#partial-encryption).
+
 ---
 
 {{< admonition quote "感谢" >}}
