@@ -95,9 +95,39 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 {{< /script >}}
 
-## Partial encryption
+## Partial Encryption
 
-- [ ] fixit-encryptor shortcode
+{{< version 0.2.15 >}}
+
+You can use `fixit-encryptor` shortcode to encrypt partial content.
+
+The `fixit-encryptor` shortcode has the following named parameters:
+
+* **password** *[required]* (**first** positional parameter)
+
+    Password of the partial encrypted content.
+
+* **message** *[optional]* (**second** positional parameter)
+
+    Placeholder of the decryptor input.
+
+Example `fixit-encryptor` input:
+
+```go-html-template
+{{%/* fixit-encryptor "1212" "Password is 1212" */%}}
+The `fixit-encryptor` shortcode was supported in version {{</* version 0.2.15 */>}}.
+{{%/* /fixit-encryptor */%}}
+Or
+{{%/* fixit-encryptor password="1212" message="Password is 1212" */%}}
+The `fixit-encryptor` shortcode was supported in version {{</* version 0.2.15 */>}}.
+{{%/* /fixit-encryptor */%}}
+```
+
+The rendered output looks like this:
+
+{{% fixit-encryptor "1212" "Password is 1212" %}}
+The `fixit-encryptor` shortcode was supported in version {{< version 0.2.15 >}}.
+{{% /fixit-encryptor %}}
 
 ## Summary
 
@@ -105,6 +135,10 @@ Compared with encrypting content through script batch processing such as golang/
 
 * **Advantages**: High usability, out of the box, without further batch processing
 * **Disadvantages**: Low security, the encryption algorithm is limited by the `go-html-template` syntax
+
+> "The simplest password is enough to prevent 90% of people!"
+>
+> There is no trivial matter about privacy. Please do not upload important and private contents, and keep them properly!
 
 ## Class FixItDecryptor API {#fixit-decryptor-api}
 
@@ -131,6 +165,10 @@ FixIt decryptor for encrypted pages
 #### init()
 
 initialize FixIt decryptor
+
+#### initShortcodes()
+
+initialize fixit-encryptor shortcodes
 
 #### validateCache()
 

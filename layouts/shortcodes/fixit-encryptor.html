@@ -1,0 +1,34 @@
+{{- $password := "" -}}
+{{- $message := "" -}}
+
+{{- if .IsNamedParams -}}
+  {{- $password = .Get "password" | default "" -}}
+  {{- $message = .Get "message" | default (T "encryptedMessage") -}}
+{{- else -}}
+  {{- $password = .Get 0 | default "" -}}
+  {{- $message = .Get 1 | default (T "encryptedMessage") -}}
+{{- end -}}
+
+{{- if $password -}}
+  {{- $content := .Inner | .Page.RenderString -}}
+  {{- $saltLen := strings.RuneCount (trim $password "") -}}
+  {{- $saltLen = cond (eq (mod $saltLen 2) 0) (add $saltLen 1) $saltLen -}}
+  {{- $base64EncodeContent := $content | base64Encode -}}
+  {{- $content = printf "%v%v%v"
+    (substr $base64EncodeContent 0 $saltLen)
+    (substr (sha256 $password) $saltLen)
+    (substr $base64EncodeContent $saltLen)
+  -}}
+
+  <fixit-encryptor class="fixit-encryptor-shortcode">
+    <div class="fixit-decryptor-container">
+      <label title='{{ T "password" }}'>
+        <input type="password" class="fixit-decryptor-input" placeholder="🔑 {{ $message }}" />
+      </label>
+    </div>
+    <div data-password="{{ md5 $password }}" data-content="{{ $content }}"></div>
+  </fixit-encryptor>
+  {{- .Page.Scratch.SetInMap "this" "encryptPartial" true -}}
+{{- else -}}
+  {{- .Inner -}}
+{{- end -}}

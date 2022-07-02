@@ -249,3 +249,25 @@ document.addEventListener('DOMContentLoaded', () => {
 **hello** *world*  
 this is a center-quote shortcode example.
 {{% /center-quote %}}
+
+
+### fixit-encryptor
+
+All the following shortcodes passwords are `1212`.
+
+{{% fixit-encryptor "1212" %}}
+This is a `fixit-encryptor` shortcode example.
+{{% /fixit-encryptor %}}
+
+{{% fixit-encryptor "1212" %}}
+
+**hello**
+{{% fixit-encryptor "1212" %}}
+*world*
+
+{{< admonition >}}
+The `fixit-encryptor` shortcode was supported in version {{</* version 0.2.15 */>}}.
+{{< /admonition >}}
+{{% /fixit-encryptor %}}
+
+{{% /fixit-encryptor %}}

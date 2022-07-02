@@ -32,9 +32,10 @@ FixItDecryptor = function (options = {}) {
       return console.error(err);
     }
     // decrypted hook
+    console.log(this.decryptedEventSet)
     for (const event of this.decryptedEventSet) {
       event();
-    }
+    }    
   };
 
   /**
@@ -93,6 +94,57 @@ FixItDecryptor = function (options = {}) {
       for (const event of _decryptor.resetEventSet) {
         event();
       }
+    });
+  };
+
+  /**
+   * initialize fixit-encryptor shortcodes
+   */
+  _proto.initShortcodes = () => {
+    // TODO TODO shortcode decrypted event
+    // this.addEventListener('decrypted', this.options?.decrypted);
+    const _decryptor = this;
+    const $shortcodes = document.querySelectorAll('fixit-encryptor:not(.decrypted)');
+
+    $shortcodes.forEach($shortcode => {
+      $shortcode.querySelector('.fixit-decryptor-input')?.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const $decryptor = this.parentElement.parentElement;
+          const $content = $decryptor.nextElementSibling;
+          const password = $content.getAttribute('data-password');
+          const input = this.value.trim();
+          const saltLen = input.length % 2 ? input.length : input.length + 1;
+          const inputMd5 = CryptoJS.MD5(input).toString();
+          const inputSha256 = CryptoJS.SHA256(input).toString();
+  
+          this.value = '';
+          this.blur();
+          if (!input) {
+            alert('Please enter the correct password!');
+            return console.warn('Please enter the correct password!');
+          }
+          if (inputMd5 !== password) {
+            alert(`Password error: ${input} not the correct password!`);
+            return console.warn(`Password error: ${input} not the correct password!`);
+          }
+          try {
+            const base64EncodeContent = $content.getAttribute('data-content').replace(inputSha256.slice(saltLen), '');
+            $decryptor.querySelector('.fixit-decryptor-input').classList.add('d-none');
+            $content.insertAdjacentHTML(
+              'afterbegin',
+              CryptoJS.enc.Base64.parse(base64EncodeContent).toString(CryptoJS.enc.Utf8)
+            );
+            $decryptor.parentElement.classList.add('decrypted')
+          } catch (err) {
+            return console.error(err);
+          }
+          // TODO shortcode decrypted hook
+          // for (const event of _decryptor.decryptedEventSet) {
+          //   event();
+          // }
+        }
+      });
     });
   };
 
