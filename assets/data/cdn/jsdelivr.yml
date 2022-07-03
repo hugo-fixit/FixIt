@@ -74,8 +74,8 @@ libFiles:
   twemojiJS: twemoji@14.0.2/dist/twemoji.min.js
   # typeit@7.0.4 https://github.com/alexmacarthur/typeit
   typeitJS: typeit@7.0.4/dist/typeit.min.js
-  # valine@1.4.16 https://github.com/xCss/Valine
-  valineJS: valine@1.4.18/dist/Valine.min.js
+  # valine@1.5.0 https://github.com/xCss/Valine
+  valineJS: valine@1.5.0/dist/Valine.min.js
   # waline@2.6.1 https://github.com/walinejs/waline
   walineCSS: '@waline/client@2.6.1/dist/waline.css'
   walineJS: '@waline/client@2.6.1/dist/waline.js'
