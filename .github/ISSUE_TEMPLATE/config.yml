@@ -1,5 +1,13 @@
 blank_issues_enabled: false
 contact_links:
+  - name: Questions about FixIt 关于 FixIt 的问题
+    url: https://github.com/Lruihao/FixIt/discussions/new
+    about: Please ask questions in Discussion. 请在讨论中提问。
+
+  - name: 官方 QQ 群
+    url: https://qm.qq.com/cgi-bin/qm/qr?k=awbwdTtSQ_-H5QGzeJxdWgv6JMbNehNM&jump_from=webapi
+    about: '加入 FixIt 主题交流群: 814031017'
+
   - name: Theme Documentation 主题文档
     url: https://fixit.lruihao.cn/categories/documentation/
-    about: Please read the documentation carefully. 请先仔细阅读主题文档.
+    about: Please read the documentation carefully. 请先仔细阅读主题文档。

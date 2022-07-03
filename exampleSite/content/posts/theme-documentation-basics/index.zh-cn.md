@@ -443,7 +443,7 @@ hugo
     BuyMeaCoffee = ""
     Linktree = ""
     QQ = ""
-    QQGroup = ""
+    QQGroup = "" # https://qun.qq.com/join.html
     Diaspora = ""
     CSDN = ""
     Email = "xxxx@xxxx.com"

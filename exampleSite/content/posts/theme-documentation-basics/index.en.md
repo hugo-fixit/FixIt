@@ -441,7 +441,7 @@ Please open the code block below to view the complete sample configuration :(fa-
     BuyMeaCoffee = ""
     Linktree = ""
     QQ = ""
-    QQGroup = ""
+    QQGroup = "" # https://qun.qq.com/join.html
     Diaspora = ""
     CSDN = ""
     Email = "xxxx@xxxx.com"
