@@ -761,7 +761,7 @@ class FixIt {
       return new Valine(this.config.comment.valine);
     }
     if (this.config.comment.waline) {
-      return new Waline(this.config.comment.waline);
+      return Waline.init(this.config.comment.waline);
     }
     if (this.config.comment.utterances) {
       const utterancesConfig = this.config.comment.utterances;
@@ -1008,7 +1008,7 @@ class FixIt {
           this.initMermaid();
           this.initSearch();
 
-          isMobile = this.util.isMobile()
+          const isMobile = this.util.isMobile()
           if (isMobile !== resizeBefore) {
             document.getElementById('mask').click();
             resizeBefore = isMobile;

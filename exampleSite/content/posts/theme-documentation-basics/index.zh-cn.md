@@ -566,7 +566,7 @@ hugo
       Skype = false
       Trello = false
       Mix = false
-    # {{< version 0.2.14 changed >}} 评论系统设置
+    # {{< version 0.2.15 changed >}} 评论系统设置
     [params.page.comment]
       enable = false
       # {{< version 0.2.13 >}} {{< link "https://artalk.js.org/" Artalk >}} 评论系统设置 (https://artalk.js.org/)
@@ -582,6 +582,7 @@ hugo
         maxNesting = 3
         # 当 `params.page.lightgallery` 启用时生效
         lightgallery = false
+        locale = "" # {{< version 0.2.15 >}}
       # {{< version 0.1.1 >}} {{< link "https://disqus.com/" Disqus >}} 评论系统设置 (https://disqus.com)
       [params.page.comment.disqus]
         enable = false
@@ -620,17 +621,21 @@ hugo
       [params.page.comment.waline]
         enable = false
         serverURL = ""
-        visitor = false
-        emoji = ['https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo']
+        pageview = false # {{< version 0.2.15 >}}
+        emoji = ['//unpkg.com/@waline/emojis@1.0.1/weibo']
         meta = ['nick', 'mail', 'link']
         requiredMeta = []
         login = 'enable'
         wordLimit = 0
         pageSize = 10
-        uploadImage = false
-        highlight = true
-        mathTagSupport = false
-        commentCount = false
+        imageUploader = false # {{< version 0.2.15 >}}
+        highlighter = true # {{< version 0.2.15 >}}
+        comment = false # {{< version 0.2.15 >}}
+        # visitor = false # {{< version 0.2.15 deleted >}} 更名为 pageview
+        # uploadImage = false # {{< version 0.2.15 deleted >}} 更名为 imageUploader
+        # highlight = true # {{< version 0.2.15 deleted >}} 更名为 highlighter
+        # mathTagSupport = false {{< version 0.2.15 deleted >}}
+        # commentCount = false {{< version 0.2.15 deleted >}} 更名为 comment
       # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook 评论系统" >}}设置 (https://developers.facebook.com/docs/plugins/comments)
       [params.page.comment.facebook]
         enable = false
@@ -797,11 +802,11 @@ hugo
   # {{< version 0.2.7 changed >}} 第三方库文件的 CDN 设置
   [params.cdn]
     # CDN 数据文件名称，默认不启用
-    # ("jsdelivr.yml")
+    # ("jsdelivr.yml", "unpkg.yml")
     # 位于 "themes/FixIt/assets/data/cdn/" 目录
     # 可以在你的项目下相同路径存放你自己的数据文件：
     # "assets/data/cdn/"
-    # data = "jsdelivr.yml"
+    # data = "unpkg.yml"
 
   # {{< version 0.2.8 >}} 兼容性设置
   [params.compatibility]

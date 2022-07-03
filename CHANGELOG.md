@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
 - :wrench: Feat(cdn): add unpkg cdn support
 - :arrow_up: Chore(libs): update some third-party libraries
   - Update Artalk from 2.2.12 to 2.3.4 ([#150](https://github.com/Lruihao/FixIt/issues/150))
+  - Update Waline from 1.5.2 to 2.6.1
 - **Full Changelog:** @Lruihao [`v0.2.14...v0.2.15`](https://github.com/Lruihao/FixIt/compare/v0.2.14...v0.2.15)
 
 ## v0.2.14 [2022.5.15]

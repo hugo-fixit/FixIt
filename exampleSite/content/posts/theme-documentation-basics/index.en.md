@@ -564,7 +564,7 @@ Please open the code block below to view the complete sample configuration :(fa-
       Skype = false
       Trello = false
       Mix = false
-    # {{< version 0.2.14 changed >}} Comment config
+    # {{< version 0.2.15 changed >}} Comment config
     [params.page.comment]
       enable = false
       # {{< version 0.2.13 >}} {{< link "https://artalk.js.org/" Artalk >}} comment config (https://artalk.js.org/)
@@ -580,6 +580,7 @@ Please open the code block below to view the complete sample configuration :(fa-
         maxNesting = 3
         # It take effect when `params.page.lightgallery` is enabled
         lightgallery = false
+        locale = "" # {{< version 0.2.15 >}}
       # {{< version 0.1.1 >}} {{< link "https://disqus.com/" Disqus >}} comment config (https://disqus.com)
       [params.page.comment.disqus]
         enable = false
@@ -618,17 +619,21 @@ Please open the code block below to view the complete sample configuration :(fa-
       [params.page.comment.waline]
         enable = false
         serverURL = ""
-        visitor = false
-        emoji = ['https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo']
+        pageview = false # {{< version 0.2.15 >}}
+        emoji = ['//unpkg.com/@waline/emojis@1.0.1/weibo']
         meta = ['nick', 'mail', 'link']
         requiredMeta = []
         login = 'enable'
         wordLimit = 0
         pageSize = 10
-        uploadImage = false
-        highlight = true
-        mathTagSupport = false
-        commentCount = false
+        imageUploader = false # {{< version 0.2.15 >}}
+        highlighter = true # {{< version 0.2.15 >}}
+        comment = false # {{< version 0.2.15 >}}
+        # visitor = false # {{< version 0.2.15 deleted >}} renamed to pageview
+        # uploadImage = false # {{< version 0.2.15 deleted >}} renamed to imageUploader
+        # highlight = true # {{< version 0.2.15 deleted >}} renamed to highlighter
+        # mathTagSupport = false {{< version 0.2.15 deleted >}}
+        # commentCount = false {{< version 0.2.15 deleted >}} renamed to comment
       # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook comment" >}} config (https://developers.facebook.com/docs/plugins/comments)
       [params.page.comment.facebook]
         enable = false
@@ -796,11 +801,11 @@ Please open the code block below to view the complete sample configuration :(fa-
   # {{< version 0.2.7 changed >}} CDN config for third-party library files
   [params.cdn]
     # CDN data file name, disabled by default
-    # ("jsdelivr.yml")
+    # ("jsdelivr.yml", "unpkg.yml")
     # located in "themes/FixIt/assets/data/cdn/" directory
     # you can store your own data files in the same path under your project:
     # "assets/data/cdn/"
-    data = ""
+    # data = "unpkg"
 
   # {{< version 0.2.8 >}} Compatibility config
   [params.compatibility]

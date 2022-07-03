@@ -887,17 +887,16 @@ enableEmoji = true
       [params.page.comment.waline]
         enable = false
         serverURL = ""
-        visitor = false
-        emoji = ['https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo']
+        pageview = false
+        emoji = ['//unpkg.com/@waline/emojis@1.0.1/weibo']
         meta = ['nick', 'mail', 'link']
         requiredMeta = []
         login = 'enable'
         wordLimit = 0
         pageSize = 10
-        uploadImage = false
-        highlight = true
-        mathTagSupport = false
-        commentCount = false
+        imageUploader = false
+        highlighter = true
+        comment = false
       # Facebook comment config (https://developers.facebook.com/docs/plugins/comments)
       # Facebook 评论系统设置 (https://developers.facebook.com/docs/plugins/comments)
       [params.page.comment.facebook]
@@ -1116,7 +1115,7 @@ enableEmoji = true
     # 位于 "themes/FixIt/assets/data/cdn/" 目录
     # 可以在你的项目下相同路径存放你自己的数据文件:
     # "assets/data/cdn/"
-    # data = "jsdelivr.yml"
+    # data = "unpkg.yml"
 
   # Compatibility config
   # 兼容性设置
