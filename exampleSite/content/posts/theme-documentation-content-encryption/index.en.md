@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 {{< /script >}}
 
-## Partial Encryption
+## Partial Encryption {#partial-encryption}
 
 {{< version 0.2.15 >}}
 

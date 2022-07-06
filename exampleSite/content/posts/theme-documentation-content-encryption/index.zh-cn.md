@@ -5,7 +5,7 @@ author: "Lruihao"
 authorLink: "https://lruihao.cn"
 description: "了解如何在 FixIt 主题中加密内容。"
 password: 1212
-message: "Password is 1212"
+message: "密码是 1212"
 
 resources:
 - name: "featured-image"
@@ -56,7 +56,7 @@ categories:
 1. 每次输入正确密码后，会在用户本地缓存密码 hash 值，一天之内再次访问时，将自动解锁文章
 2. 文章最后提供有一个 “重新加密” 的按钮，点击即可立即忘记密码，并重新加密内容
 3. 加密文章已从搜索中隐藏
-4. 加密文章的 Markdown 输出已禁用，为了防止密码泄漏，**请勿将加密文章已任何形式公开**
+4. 加密文章的 Markdown 输出已禁用，为了防止密码泄漏，**请勿将加密文章以任何形式公开**
 
 {{< /admonition >}}
 
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 {{< /script >}}
 
-## 部分加密
+## 部分加密 {#partial-encryption}
 
 {{< version 0.2.15 >}}
 
