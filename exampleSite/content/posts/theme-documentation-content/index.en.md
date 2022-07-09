@@ -115,8 +115,8 @@ It is necessary only if the front matters and the `page` part in your [site conf
 * **type**: the rendering template of page, see [templates](#tamplates) for details.
 * **menu**: see [Add content to Menu](../theme-documentation-basics#content-to-menu)
 
-* **password**: {{< version 0.2.15 >}} password of encrypted page content, see [Content Encryption](../theme-documentation-content-encryption/)
-* **message**: {{< version 0.2.15 >}} encryption prompt, see [Content Encryption](../theme-documentation-content-encryption/)
+* **password**: {{< version 0.2.15 >}} password of encrypted page content, see [Theme Documentation - Content Encryption](../theme-documentation-content-encryption/)
+* **message**: {{< version 0.2.15 >}} encryption prompt, see [Theme Documentation - Content Encryption](../theme-documentation-content-encryption/)
 
 {{< admonition tip >}}
 {{< version 0.2.10 >}}

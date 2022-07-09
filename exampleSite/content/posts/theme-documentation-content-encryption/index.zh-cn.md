@@ -15,6 +15,13 @@ tags:
 - Encryption
 categories:
 - documentation
+
+menu:
+  main:
+    name: "主题文档 - 内容加密"
+    title: "了解如何在 FixIt 主题中加密内容。"
+    parent: "documentation"
+    pre: "<i class='fa-solid fa-lock fa-fw fa-sm'></i>"
 ---
 
 了解如何在 FixIt 主题中加密内容。

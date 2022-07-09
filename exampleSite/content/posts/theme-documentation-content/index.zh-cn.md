@@ -113,8 +113,8 @@ menu:
 * **type**: 页面渲染模板，详见 [页面模板](#tamplates)
 * **menu**: 详见 [添加内容到菜单](../theme-documentation-basics#content-to-menu)
 
-* **password**: {{< version 0.2.15 >}} 加密页面内容的密码，详见 [内容加密](../theme-documentation-content-encryption/)
-* **message**: {{< version 0.2.15 >}} 加密提示信息，详见 [内容加密](../theme-documentation-content-encryption/)
+* **password**: {{< version 0.2.15 >}} 加密页面内容的密码，详见 [主题文档 - 内容加密](../theme-documentation-content-encryption/)
+* **message**: {{< version 0.2.15 >}} 加密提示信息，详见 [主题文档 - 内容加密](../theme-documentation-content-encryption/)
 
 {{< admonition tip >}}
 {{< version 0.2.10 >}}

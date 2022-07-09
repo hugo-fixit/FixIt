@@ -15,6 +15,13 @@ tags:
 - Encryption
 categories:
 - documentation
+
+menu:
+  main:
+    name: "Content Encryption"
+    title: "Find out how to encrypt content in FixIt theme."
+    parent: "documentation"
+    pre: "<i class='fa-solid fa-lock fa-fw fa-sm'></i>"
 ---
 
 Find out how to encrypt content in FixIt theme.
