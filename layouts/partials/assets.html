@@ -120,8 +120,6 @@
 {{- if (.Scratch.Get "this").mermaid -}}
   {{- $source := $cdn.mermaidJS | default "lib/mermaid/mermaid.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-  {{- $options := dict "targetPath" "lib/mermaid/mermaid.min.css" "enableSourceMap" true -}}
-  {{- dict "Source" "lib/mermaid/mermaid.scss" "ToCSS" $options "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
 {{- end -}}
 
 {{- /* ECharts */ -}}

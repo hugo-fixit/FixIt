@@ -583,20 +583,19 @@ class FixIt {
   }
 
   initMermaid() {
-    const $mermaidElements = document.getElementsByClassName('mermaid');
-    if ($mermaidElements.length) {
-      mermaid.initialize({ startOnLoad: false, theme: 'default' });
-      this.util.forEach($mermaidElements, ($mermaid) => {
-        mermaid.mermaidAPI.render(
-          'svg-' + $mermaid.id,
-          this.data[$mermaid.id],
-          (svgCode) => {
-            $mermaid.insertAdjacentHTML('afterbegin', svgCode);
-          },
-          $mermaid
-        );
-      });
-    }
+    this._mermaidOnSwitchTheme = this._mermaidOnSwitchTheme || (() => {
+      const $mermaidElements = document.getElementsByClassName('mermaid');
+      if ($mermaidElements.length) {
+        mermaid.initialize({startOnLoad: false, theme: this.isDark ? 'dark' : 'neutral', securityLevel: 'loose'});
+        this.util.forEach($mermaidElements, $mermaid => {
+          mermaid.render('svg-' + $mermaid.id, this.data[$mermaid.id], svgCode => {
+            $mermaid.innerHTML = svgCode;
+          }, $mermaid);
+        });
+      }
+    });
+    this.switchThemeEventSet.add(this._mermaidOnSwitchTheme);
+    this._mermaidOnSwitchTheme();
   }
 
   initEcharts() {

@@ -22,6 +22,7 @@ All notable changes to this project will be documented in this file.
   - Update Artalk from 2.2.12 to 2.3.4 ([#150](https://github.com/Lruihao/FixIt/issues/150))
   - Update Waline from 1.5.2 to 2.6.1
   - Update Valine from 1.4.18 to 1.5.0
+  - Update mermaid from 8.13.3 to 9.1.3
 - **Full Changelog:** @Lruihao [`v0.2.14...v0.2.15`](https://github.com/Lruihao/FixIt/compare/v0.2.14...v0.2.15)
 
 ## v0.2.14 [2022.5.15]
