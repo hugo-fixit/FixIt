@@ -995,7 +995,7 @@ class FixIt {
   }
 
   onResize() {
-    const resizeBefore = this.util.isMobile();
+    let resizeBefore = this.util.isMobile();
     window.addEventListener('resize', () => {
       if (!this._resizeTimeout) {
         this._resizeTimeout = window.setTimeout(() => {
