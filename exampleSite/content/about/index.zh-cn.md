@@ -3,6 +3,7 @@ title: "关于 FixIt"
 date: 2019-08-02T11:04:49+08:00
 draft: false
 comment: false
+comment: false
 pageStyle: "wide"
 
 lightgallery: true
@@ -64,9 +65,14 @@ math:
 * :(fa-regular fa-comment-alt fa-fw): 支持 **[Utterances](https://utteranc.es/)** 评论系统
 * :(fa-regular fa-comment-alt fa-fw): 支持 **[Artalk](https://artalk.js.org/)** 评论系统
 * :(fa-regular fa-comment-alt fa-fw): 支持 **[Twikoo](https://twikoo.js.org/)** 评论系统
+* :(fa-regular fa-comment-alt fa-fw): 支持 **[giscus](https://giscus.app/zh-CN/)** 评论系统
 
 #### 扩展功能
 
+* :(fa-solid fa-desktop fa-fw): 支持**渐进式网页应用**
+* :(fa-solid fa-bars fa-fw): 支持**二级菜单**
+* :(fa-solid fa-lock fa-fw): 支持**内容加密**（页面、局部）
+* :(fa-solid fa-users fa-fw): 支持**友情链接**的页面模板
 * :(fa-solid fa-search fa-fw): 支持基于 [Lunr.js](https://lunrjs.com/) 或 [algolia](https://www.algolia.com/) 的**搜索**
 * :(fa-regular fa-grin-tongue-wink fa-fw): 支持 **Twemoji**
 * :(fa-solid fa-code fa-fw): 支持**代码高亮**
@@ -86,20 +92,14 @@ math:
 * :(fa-brands fa-js-square fa-fw): 支持**自定义脚本**的 shortcode
 * :(fa-solid fa-i-cursor fa-fw): 支持基于 [TypeIt](https://typeitjs.com/) 的**打字动画** shortcode
 * :(fa-solid fa-cookie-bite fa-fw): 支持基于 [cookieconsent](https://github.com/osano/cookieconsent) 的 **Cookie 许可横幅**
-* :(fa-solid fa-desktop fa-fw): 支持**渐进式网页应用**
 * :(fa-solid fa-signature fa-fw): 支持基于 [cell-watermark](https://github.com/Lruihao/watermark) 的**网页水印**
 * :(fa-solid fa-language fa-fw): 支持基于 [pangu.js](https://github.com/vinta/pangu.js) 的**中文排版**
-* :(fa-solid fa-link fa-fw): 支持**卡片式链接**的 shortcode
-* :(fa-solid fa-users fa-fw): 支持**友情链接**的页面模板
 * ...
 
-### 许可协议
+### 致谢
 
-FixIt 根据 **MIT** 许可协议授权。
-
-更多信息请查看 [LICENSE 文件](https://github.com/Lruihao/FixIt/blob/master/LICENSE)。
-
-FixIt 主题中用到了以下项目，感谢它们的作者：
+<details>
+<summary>FixIt 主题中用到了以下项目，感谢它们的作者：</summary>
 
 * [normalize.css](https://github.com/necolas/normalize.css)
 * [Font Awesome](https://fontawesome.com/)
@@ -131,3 +131,8 @@ FixIt 主题中用到了以下项目，感谢它们的作者：
 * [github-corners](https://github.com/tholman/github-corners)
 * [giscus](https://giscus.app/zh-CN)
 * [crypto-js](https://github.com/brix/crypto-js)
+</details>
+
+### 许可协议
+
+FixIt 根据 **MIT** 许可协议授权。 更多信息请查看 [LICENSE 文件](https://github.com/Lruihao/FixIt/blob/master/LICENSE)。

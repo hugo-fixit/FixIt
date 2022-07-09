@@ -64,9 +64,14 @@ math:
 * :(fa-regular fa-comment-alt fa-fw): **Utterances** comment system supported by [Utterances](https://utteranc.es/)
 * :(fa-regular fa-comment-alt fa-fw): **Artalk** comment system supported by [Artalk](https://artalk.js.org/)
 * :(fa-solid fa-comment-alt fa-fw): **Twikoo** comment system supported by [Twikoo](https://twikoo.js.org/)
+* :(fa-solid fa-comment-alt fa-fw): **giscus** comment system supported by [giscus](https://giscus.app/)
 
 #### Extended Features
 
+* :(fa-solid fa-desktop fa-fw): **PWA (Progressive Web App)** supported
+* :(fa-solid fa-bars fa-fw): **Sub Menu** supported
+* :(fa-solid fa-lock fa-fw): **Content Encryption** supported (Pages, Partial)
+* :(fa-solid fa-users fa-fw): **Friends** page embedded template
 * :(fa-solid fa-search fa-fw): **Search** supported by [Lunr.js](https://lunrjs.com/) or [algolia](https://www.algolia.com/)
 * :(fa-regular fa-grin-tongue-wink fa-fw): **Twemoji** supported
 * :(fa-solid fa-code fa-fw): Automatically **highlighting** code
@@ -86,20 +91,14 @@ math:
 * :(fa-brands fa-js-square fa-fw): **Custom script** shortcode
 * :(fa-solid fa-i-cursor fa-fw): **Animated typing** supported by [TypeIt](https://typeitjs.com/)
 * :(fa-solid fa-cookie-bite fa-fw): **Cookie consent banner** supported by [cookieconsent](https://github.com/osano/cookieconsent)
-* :(fa-solid fa-desktop fa-fw): **PWA (Progressive Web App)** supported
 * :(fa-solid fa-signature fa-fw): **Web Watermark** supported by [cell-watermark](https://github.com/Lruihao/watermark)
 * :(fa-solid fa-language fa-fw): **Chinese typesetting** supported by [pangu.js](https://github.com/vinta/pangu.js)
-* :(fa-solid fa-link fa-fw): **Card type** link shortcode
-* :(fa-solid fa-users fa-fw): **Friends** page embedded template
 * ...
 
-### License
+### Acknowledgements
 
-FixIt is licensed under the **MIT** license.
-
-Check the [LICENSE file](https://github.com/Lruihao/FixIt/blob/master/LICENSE) for details.
-
-Thanks to the authors of following resources included in the theme:
+<details>
+<summary>Thanks to the authors of following resources included in the theme:</summary>
 
 * [normalize.css](https://github.com/necolas/normalize.css)
 * [Font Awesome](https://fontawesome.com/)
@@ -131,3 +130,8 @@ Thanks to the authors of following resources included in the theme:
 * [github-corners](https://github.com/tholman/github-corners)
 * [giscus](https://giscus.app/)
 * [crypto-js](https://github.com/brix/crypto-js)
+</details>
+
+### License
+
+FixIt is licensed under the **MIT** license. Check the [LICENSE file](https://github.com/Lruihao/FixIt/blob/master/LICENSE) for details.

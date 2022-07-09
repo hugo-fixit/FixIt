@@ -11,9 +11,7 @@ English README | [简体中文说明](https://github.com/Lruihao/FixIt/blob/mast
 
 It is based on the original [LoveIt Theme](https://github.com/dillonzq/LoveIt), [LeaveIt Theme](https://github.com/liuzc/LeaveIt) and [KeepIt Theme](https://github.com/Fastbyte01/KeepIt).
 
-<!-- [LoveIt Theme](https://github.com/dillonzq/LoveIt) is a awesome hugo theme for us, I'm sorry that it's repository has been out of maintenance for a long time, so I rebuilt a new fork named FixIt so that I can better **Fix It** and make it more user-friendly. -->
-
-The FixIt theme inherits the excellent functions of these themes, and adds new functions and optimizations on this basis. Please read [Why Choose FixIt](#why-choose-fixit) to learn more.
+The FixIt theme inherits the excellent features of these themes, and adds new features and optimizations on those basis. Please read [Why Choose FixIt](#why-choose-fixit) to learn more.
 
 ![Hugo Theme FixIt](https://github.com/Lruihao/FixIt/raw/master/images/Apple-Devices-Preview.png)
 
@@ -62,41 +60,15 @@ Now the migration is finished and everything is ready 🎉
 
 ## Why choose FixIt
 
-* Custom **Header (sub-menu supported)**
-* **Content Encryption** supported (Pages, Partial)
-* Custom **CSS Style**
-* A new **home page**, compatible with the latest version of Hugo
-* A lot of **style detail adjustments,** including color, font size, margins, code preview style
-* More readable **dark mode**
-* Some beautiful **CSS animations**
-* Easy-to-use and self-expanding **table of contents**
-* More **social links**, **share sites** and **comment system**
-* **Search** supported by [Lunr.js](https://lunrjs.com/) or [algolia](https://www.algolia.com/)
-* **Copy code** to clipboard with one click
-* Extended Markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
-* Extended Markdown syntax for **ruby annotation**
-* Extended Markdown syntax for **fraction**
-* **Mathematical formula** supported by [KaTeX](https://katex.org/)
-* **Diagram syntax** shortcode supported by [mermaid](https://github.com/knsv/mermaid)
-* **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
-* **Mapbox** shortcode supported by [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
-* Embedded **music player** supported by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
-* **Bilibili** player supported
-* Kinds of **admonitions** shortcode supported
-* Custom style shortcodes supported
-* **CDN** for all third-party libraries supported
-* **PWA (Progressive Web App)** supported
-* **Web Watermark** supported by [cell-watermark](https://github.com/Lruihao/watermark)
-* **Chinese typesetting** supported by [pangu.js](https://github.com/vinta/pangu.js)
-* **Card type** link shortcode
-* **Friends** page embedded template
-* ...
+The FixIt theme inherits the excellent features of themes such as LoveIt, and adds new features and optimizations on those basis, as detailed in [Features](#features). In addition, the FixIt theme has the following advantages:
 
-In short,  
-if you prefer the design language and freedom of the FixIt theme,  
-if you want to use the extended Font Awesome icons conveniently,  
-if you want to embed mathematical formulas, flowcharts, music or Bilibili videos in your posts,  
-the FixIt theme may be more suitable for you.  
+* Complete Chinese and English official documentations
+* Community support: Theme official website, Discussions and official QQ group
+* Continuously and actively update
+* Constantly incorporate suggestions and ideas from all sides
+* Highly open theme customizable section
+
+In short, if you prefer the design language and freedom of the FixIt theme, and if you like to personalize your own themes as I do, the FixIt theme may be more suitable for you.
 
 ## Who used FixIt
 
@@ -146,9 +118,14 @@ To see this theme in action, here are some live demo sites which are rendered wi
 * **Utterances** comment system supported by [Utterances](https://utteranc.es/)
 * **Artalk** comment system supported by [Artalk](https://artalk.js.org/)
 * **Twikoo** comment system supported by [Twikoo](https://twikoo.js.org/)
+* **giscus** comment system supported by [giscus](https://giscus.app/)
 
 ### Extended Features
 
+* **PWA (Progressive Web App)** supported
+* **Sub Menu** supported
+* **Content Encryption** supported (Pages, Partial)
+* **Friends** page embedded template
 * **Search** supported by [Lunr.js](https://lunrjs.com/) or [algolia](https://www.algolia.com/)
 * **Twemoji** supported
 * Automatically **highlighting** code
@@ -168,11 +145,8 @@ To see this theme in action, here are some live demo sites which are rendered wi
 * **Custom script** shortcode
 * **Animated typing** supported by [TypeIt](https://typeitjs.com/)
 * **Cookie consent banner** supported by [cookieconsent](https://github.com/osano/cookieconsent)
-* **PWA (Progressive Web App)** supported
 * **Web Watermark** supported by [cell-watermark](https://github.com/Lruihao/watermark)
 * **Chinese typesetting** supported by [pangu.js](https://github.com/vinta/pangu.js)
-* **Card type** link shortcode
-* **Friends** page embedded template
 * ...
 
 ## Multilingual and i18n
@@ -214,11 +188,10 @@ Make sure that you follow [CODE_OF_CONDUCT.md](/CODE_OF_CONDUCT.md) while contri
 
 ## [Contributors](/contributors.md)
 
-## License
+## Acknowledgements
 
-FixIt is licensed under the **MIT** license. Check the [LICENSE file](https://github.com/Lruihao/FixIt/blob/master/LICENSE) for details.
-
-Thanks to the authors of following resources included in the theme:
+<details>
+<summary>Thanks to the authors of following resources included in the theme:</summary>
 
 * [normalize.css](https://github.com/necolas/normalize.css)
 * [Font Awesome](https://fontawesome.com/)
@@ -250,6 +223,11 @@ Thanks to the authors of following resources included in the theme:
 * [github-corners](https://github.com/tholman/github-corners)
 * [giscus](https://giscus.app/)
 * [crypto-js](https://github.com/brix/crypto-js)
+</details>
+
+## License
+
+FixIt is licensed under the **MIT** license. Check the [LICENSE file](https://github.com/Lruihao/FixIt/blob/master/LICENSE) for details.
 
 ## Author
 

@@ -11,8 +11,6 @@
 
 它的原型基于 [LoveIt 主题](https://github.com/dillonzq/LoveIt), [LeaveIt 主题](https://github.com/liuzc/LeaveIt) 和 [KeepIt 主题](https://github.com/Fastbyte01/KeepIt)。
 
-<!-- [LoveIt 主题](https://github.com/dillonzq/LoveIt) 对我们来说是一个很棒的 Hugo 主题，很抱歉的是它的存储库已经停止维护很长一段时间了，所以我重建了一个名为 FixIt 的新主题，这样我可以更好地 **Fix It** 并使它用户体验更好。 -->
-
 FixIt 主题继承了这些主题的优秀功能，并在此基础上添加了新的功能与优化，请阅读 [为什么选择 FixIt](#为什么选择-FixIt) 来了解更多。
 
 ![Hugo Theme FixIt](https://github.com/Lruihao/FixIt/raw/master/images/Apple-Devices-Preview.png)
@@ -62,41 +60,15 @@ sh fixit_checker.sh
 
 ## 为什么选择 FixIt
 
-* 自定义**标题栏（支持子菜单）**
-* 支持**内容加密**（页面、局部）
-* 自定义 **CSS 样式**
-* 焕然一新的**主页**，已经兼容最新版 Hugo
-* 大量的**样式细节调整**，包括颜色、字体大小、边距、代码预览样式
-* 可读性更强的**深色模式**
-* 一些美观的 **CSS 动画**
-* 易用和自动展开的**文章目录**
-* 支持更多的**社交链接**、**网站分享**和**评论系统**
-* 支持基于 [Lunr.js](https://lunrjs.com/) 或 [algolia](https://www.algolia.com/) 的**搜索**
-* 一键**复制代码**到剪贴板
-* 支持基于 **[Font Awesome](https://fontawesome.com/) 图标**的扩展 Markdown 语法
-* 支持**上标注释**的扩展 Markdown 语法
-* 支持**分数**的扩展 Markdown 语法
-* 支持基于 [KaTeX](https://katex.org/) 的**数学公式**
-* 支持基于 [mermaid](https://github.com/knsv/mermaid) 的**图表**生成功能
-* 支持基于 [ECharts](https://echarts.apache.org/) 的**交互式数据可视化**生成功能
-* 支持基于 [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js) 的 **Mapbox** 地图显示功能
-* 支持基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 的内嵌**音乐播放器**
-* 支持内嵌 **Bilibili** 视频
-* 支持多种**注释**的 shortcode
-* 支持自定义样式的 shortcode
-* 支持所有第三方库的 **CDN**
-* 支持**渐进式网页应用**
-* 支持基于 [cell-watermark](https://github.com/Lruihao/watermark) 的**网页水印**
-* 支持基于 [pangu.js](https://github.com/vinta/pangu.js) 的**中文排版**
-* 支持**卡片式链接**的 shortcode
-* 支持**友情链接**的页面模板
-* ...
+FixIt 主题继承了 LoveIt 等主题的优秀功能，并在它们的基础上添加了新的功能与优化，详见 [特性](#特性)。除此之外，FixIt 主题还有以下优点：
 
-所以，  
-如果你更偏好 FixIt 主题的设计语言和自由度，  
-如果你想便捷地使用扩展的 Font Awesome 图标，  
-如果你想在文章内嵌数学公式、流程图、音乐或是 Bilibili 视频，  
-那么，FixIt 主题可能是更适合你。  
+* 完善的中英文官方文档
+* 社区支持：主题官网、Discussions 和官方 QQ 群
+* 持续积极地更新
+* 不断收纳各方的建议和想法
+* 高度开放主题可自定义部分
+
+总之，如果你更偏好 FixIt 主题的设计语言和自由度，如果你和我一样喜欢个性化自定义主题，那么，FixIt 主题可能是更适合你。  
 
 ## 谁在用 FixIt
 为了直观地浏览主题特性，这里有一些基于 **FixIt** 主题渲染的预览网站。
@@ -145,9 +117,14 @@ sh fixit_checker.sh
 * 支持 **[Utterances](https://utteranc.es/)** 评论系统
 * 支持 **[Artalk](https://artalk.js.org/)** 评论系统
 * 支持 **[Twikoo](https://twikoo.js.org/)** 评论系统
+* 支持 **[giscus](https://giscus.app/zh-CN/)** 评论系统
 
 ### 扩展功能
 
+* 支持**渐进式网页应用**
+* 支持**二级菜单**
+* 支持**内容加密**（页面、局部）
+* 支持**友情链接**的页面模板
 * 支持基于 [Lunr.js](https://lunrjs.com/) 或 [algolia](https://www.algolia.com/) 的**搜索**
 * 支持 **Twemoji**
 * 支持**代码高亮**
@@ -167,11 +144,8 @@ sh fixit_checker.sh
 * 支持**自定义脚本**的 shortcode
 * 支持基于 [TypeIt](https://typeitjs.com/) 的**打字动画** shortcode
 * 支持基于 [cookieconsent](https://github.com/osano/cookieconsent) 的 **Cookie 许可横幅**
-* 支持**渐进式网页应用**
 * 支持基于 [cell-watermark](https://github.com/Lruihao/watermark) 的**网页水印**
 * 支持基于 [pangu.js](https://github.com/vinta/pangu.js) 的**中文排版**
-* 支持**卡片式链接**的 shortcode
-* 支持**友情链接**的页面模板
 * ...
 
 ## 多语言和国际化
@@ -213,11 +187,10 @@ FixIt 支持下列语言：
 
 ## [所有贡献者](/contributors.md)
 
-## 许可协议
+## 致谢
 
-FixIt 根据 **MIT** 许可协议授权。 更多信息请查看 [LICENSE 文件](https://github.com/Lruihao/FixIt/blob/master/LICENSE)。
-
-FixIt 主题中用到了以下项目，感谢它们的作者：
+<details>
+<summary>FixIt 主题中用到了以下项目，感谢它们的作者：</summary>
 
 * [normalize.css](https://github.com/necolas/normalize.css)
 * [Font Awesome](https://fontawesome.com/)
@@ -249,6 +222,11 @@ FixIt 主题中用到了以下项目，感谢它们的作者：
 * [github-corners](https://github.com/tholman/github-corners)
 * [giscus](https://giscus.app/zh-CN)
 * [crypto-js](https://github.com/brix/crypto-js)
+</details>
+
+## 许可协议
+
+FixIt 根据 **MIT** 许可协议授权。 更多信息请查看 [LICENSE 文件](https://github.com/Lruihao/FixIt/blob/master/LICENSE)。
 
 ## 作者
 
