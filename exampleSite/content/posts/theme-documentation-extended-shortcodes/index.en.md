@@ -323,7 +323,7 @@ A **tip** banner
 
 The `mermaid` shortcode supports diagrams in Hugo with [Mermaid](https://mermaidjs.github.io/) library.
 
-The full documentation is provided in [Theme Documentation - mermaid Shortcode](../theme-documentation-mermaid-shortcode).
+The full documentation is provided in [Extended Shortcode - mermaid](../extended-shortcode-mermaid/).
 
 ## 6 echarts
 

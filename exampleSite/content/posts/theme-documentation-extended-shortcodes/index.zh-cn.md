@@ -325,7 +325,7 @@ This is a **right-aligned** paragraph.
 
 `mermaid` shortcode 使用 [Mermaid](https://mermaidjs.github.io/) 库提供绘制图表和流程图的功能.
 
-完整文档请查看页面 [主题文档 - mermaid Shortcode](../theme-documentation-mermaid-shortcode).
+完整文档请查看页面 [扩展 Shortcode - mermaid](../extended-shortcode-mermaid/).
 
 ## 6 echarts
 

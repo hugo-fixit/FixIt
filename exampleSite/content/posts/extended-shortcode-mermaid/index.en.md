@@ -1,5 +1,5 @@
 ---
-title: "Theme Documentation - mermaid Shortcode"
+title: "Extended Shortcode - mermaid"
 date: 2022-07-09T17:20:15+08:00
 draft: false
 author: "Lruihao"

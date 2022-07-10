@@ -1,5 +1,5 @@
 ---
-title: "主题文档 - mermaid Shortcode"
+title: "扩展 Shortcode - mermaid"
 date: 2022-07-09T17:20:15+08:00
 draft: false
 author: "Lruihao"
