@@ -718,6 +718,11 @@ Please open the code block below to view the complete sample configuration :(fa-
     cursorChar = "|"
     # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
     duration = -1
+  
+  # {{< version 0.2.15 >}} Mermaid config
+  [params.mermaid]
+    # For values, see https://mermaid-js.github.io/mermaid/#/Setup?id=theme
+    themes = ['neutral', 'dark']
 
   # {{< version 0.2.12 >}} PanguJS config
   [params.pangu]

@@ -586,7 +586,8 @@ class FixIt {
     this._mermaidOnSwitchTheme = this._mermaidOnSwitchTheme || (() => {
       const $mermaidElements = document.getElementsByClassName('mermaid');
       if ($mermaidElements.length) {
-        mermaid.initialize({startOnLoad: false, theme: this.isDark ? 'dark' : 'neutral', securityLevel: 'loose'});
+        const themes = this.config.mermaid.themes ?? ['neutral', 'dark'];
+        mermaid.initialize({startOnLoad: false, theme: this.isDark ? themes[1] : themes[0], securityLevel: 'loose'});
         this.util.forEach($mermaidElements, $mermaid => {
           mermaid.render('svg-' + $mermaid.id, this.data[$mermaid.id], svgCode => {
             $mermaid.innerHTML = svgCode;

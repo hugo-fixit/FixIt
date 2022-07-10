@@ -13,7 +13,6 @@ tags: ["shortcodes"]
 categories: ["documentation"]
 
 hiddenFromHomePage: true
-repost: https://hugoloveit.com/theme-documentation-mermaid-shortcode/
 ---
 
 {{< version 0.2.15 changed >}}
@@ -25,6 +24,10 @@ The `mermaid` shortcode supports diagrams in Hugo with [Mermaid](https://mermaid
 **Mermaid** is a library helping you to generate diagram and flowcharts from text, in a similar manner as Markdown.
 
 Just insert your mermaid code in the `mermaid` shortcode and that’s it.
+
+{{< admonition tip >}}
+You can configure mermaid themes globally in `config.toml` via the `params.mermaid` parameter
+{{< /admonition >}}
 
 ## Flowchart {#flowchart}
 

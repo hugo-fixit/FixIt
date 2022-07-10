@@ -720,6 +720,11 @@ hugo
     cursorChar = "|"
     # 打字结束之后光标的持续时间（单位是毫秒，"-1" 代表无限大）
     duration = -1
+
+  # {{< version 0.2.15 >}} Mermaid 配置
+  [params.mermaid]
+    # 取值详见 https://mermaid-js.github.io/mermaid/#/Setup?id=theme
+    themes = ['neutral', 'dark']
   
   # {{< version 0.2.12 >}} 盘古之白配置
   [params.pangu]

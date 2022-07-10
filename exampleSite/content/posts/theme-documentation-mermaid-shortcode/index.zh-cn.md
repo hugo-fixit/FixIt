@@ -13,7 +13,6 @@ tags: ["shortcodes"]
 categories: ["documentation"]
 
 hiddenFromHomePage: true
-repost: https://hugoloveit.com/zh-cn/theme-documentation-mermaid-shortcode/
 ---
 
 {{< version 0.2.15 changed >}}
@@ -25,6 +24,10 @@ repost: https://hugoloveit.com/zh-cn/theme-documentation-mermaid-shortcode/
 [mermaid](https://mermaidjs.github.io/) 是一个可以帮助你在文章中绘制图表和流程图的库, 类似 Markdown 的语法.
 
 只需将你的 mermaid 代码插入 `mermaid` shortcode 中即可.
+
+{{< admonition tip >}}
+你可以在 `config.toml` 中通过 `params.mermaid` 参数全局配置 mermaid 的主题
+{{< /admonition >}}
 
 ## 流程图 {#flowchart}
 

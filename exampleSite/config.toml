@@ -998,6 +998,13 @@ enableEmoji = true
     # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
     # 打字结束之后光标的持续时间 (单位是毫秒, "-1" 代表无限大)
     duration = -1
+  
+  # Mermaid config since v0.2.15
+  # Mermaid 配置 since v0.2.15
+  [params.mermaid]
+    # For values, see https://mermaid-js.github.io/mermaid/#/Setup?id=theme
+    # 取值详见 https://mermaid-js.github.io/mermaid/#/Setup?id=theme
+    themes = ['neutral', 'dark']
 
   # PanguJS config since v0.2.12
   # 盘古之白配置 since v0.2.12

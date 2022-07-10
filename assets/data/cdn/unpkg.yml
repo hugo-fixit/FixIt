@@ -1,4 +1,4 @@
-# TODO Tip: remove sourceMappingURL of local libraries to avoid source map 404 error.
+# Tips: remove sourceMappingURL of local libraries to avoid source map 404 error.
 # See https://github.com/Lruihao/FixIt/issues/67
 
 prefix:
