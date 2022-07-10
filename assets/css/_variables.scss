@@ -3,6 +3,9 @@
 // ==============================
 
 // ========== Global ========== //
+// Prefix for :root CSS variables.
+$prefix: fi- !default;
+
 // Font and Line Height
 $global-font-family: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif !default;
 $global-font-size: 16px;
@@ -35,6 +38,24 @@ $global-link-hover-color-dark: #fff !default;
 // Color of the border
 $global-border-color: #f0f0f0 !default;
 $global-border-color-dark: #363636 !default;
+
+// Theme colors
+$primary: #1772ee !default;
+$secondary: #919191 !default;
+$success: #13ce66 !default;
+$info: #0dcaf0 !default;
+$warning: #ffba00 !default;
+$danger: #ff4949 !default;
+
+// Theme colors map
+$theme-colors: (
+  'primary': $primary,
+  'secondary': $secondary,
+  'success': $success,
+  'info': $info,
+  'warning': $warning,
+  'danger': $danger
+) !default;
 // ========== Global ========== //
 
 // ========== Scrollbar ========== //
@@ -94,7 +115,7 @@ $table-thead-color: #ededed !default;
 $table-thead-color-dark: #20252b !default;
 
 // Color of the blockquote
-$blockquote-color: #697681 !default; 
+$blockquote-color: #697681 !default;
 $blockquote-color-dark: #9ba3aa !default;
 // ========== Single Content ========== //
 

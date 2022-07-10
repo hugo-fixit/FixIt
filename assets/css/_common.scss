@@ -40,3 +40,9 @@
 .pe-1 {
   padding-right: 0.25rem !important;
 }
+
+@each $color, $value in $theme-colors {
+  .text-#{$color} {
+    color: #{$value} !important;
+  }
+}
