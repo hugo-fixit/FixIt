@@ -1,8 +1,7 @@
 ---
 weight: 2
 title: "Theme Documentation - Content"
-date: 2020-03-05T15:58:26+08:00
-lastmod: 2022-01-25T11:02:26+08:00
+date: 2021-12-19T16:15:22+08:00
 draft: false
 author: "Lruihao"
 authorLink: "https://lruihao.cn"

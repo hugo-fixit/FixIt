@@ -1,8 +1,7 @@
 ---
 weight: 1
 title: "Theme Documentation - Basics"
-date: 2020-03-06T21:29:01+08:00
-lastmod: 2022-01-12T17:09:01+08:00
+date: 2021-12-19T16:15:22+08:00
 draft: false
 author: "Lruihao"
 authorLink: "https://lruihao.cn"

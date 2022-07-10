@@ -1,7 +1,6 @@
 ---
 title: "Markdown 基本语法"
-date: 2019-12-01T21:57:40+08:00
-lastmod: 2022-01-20T17:44:40+08:00
+date: 2021-12-18T16:15:22+08:00
 draft: false
 description: "这篇文章展示了基本的 Markdown 语法和格式。"
 resources:

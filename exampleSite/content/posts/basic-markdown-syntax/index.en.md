@@ -1,7 +1,6 @@
 ---
 title: "Basic Markdown Syntax"
-date: 2019-12-01T21:57:40+08:00
-lastmod: 2022-03-01T22:30:40+08:00
+date: 2021-12-18T16:15:22+08:00
 draft: false
 description: "This article shows the basic Markdown syntax and format."
 resources:
