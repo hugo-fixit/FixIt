@@ -20,7 +20,21 @@
   <article class="page single">
     <div class="header">
       {{- /* Title */ -}}
-      <h1 class="single-title animate__animated animate__flipInX">{{ .Title }}</h1>
+      <h1 class="single-title animate__animated animate__flipInX">
+        {{ $repost := $params.repost | default dict }}
+        {{- with $repost -}}
+          {{- if eq .Enable true -}}
+            {{- $icon := dict "Class" "fa-solid fa-share fa-fw" -}}
+            {{- $title := cond (hasPrefix .Url "http") (printf "%v -> %v" (T "repost") .Url ) (T "repost") -}}
+            {{- if hasPrefix .Url "http" -}}
+              {{ dict "Destination" .Url "Icon" $icon "Class" "icon-repost" "Title" $title | partial "plugin/link.html" -}}
+            {{- else -}}
+              <span title="{{ $title }}" class="icon-repost">{{- $icon | partial "plugin/icon.html" -}}</span>
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+        <span>{{- .Title -}}</span>
+      </h1>
 
       {{- /* Subtitle */ -}}
       {{- with $params.subtitle -}}<p class="single-subtitle animate__animated animate__fadeIn">{{ . }}</p>{{- end -}}

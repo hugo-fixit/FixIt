@@ -473,6 +473,10 @@ Please open the code block below to view the complete sample configuration :(fa-
     pageStyle = "normal"
     # {{< version 0.2.14 >}} Gravatar is force-used as the author's avatar
     gravatarForce = false
+    # {{< version 0.2.15 >}} Repost config
+    [params.page.repost]
+      enable = false
+      url = ""
     # {{< version 0.2.0 >}} Table of the contents config
     [params.page.toc]
       # whether to enable the table of the contents

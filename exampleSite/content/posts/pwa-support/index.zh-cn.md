@@ -3,8 +3,6 @@ weight: 5
 title: "主题文档 - PWA 支持"
 date: 2022-01-26T11:10:56+08:00
 draft: false
-author: "Lruihao"
-authorLink: "https://lruihao.cn"
 description: "在 FixIt 中设置 PWA 的指南。"
 
 tags: ["PWA"]
@@ -22,6 +20,10 @@ menu:
     title: "在 FixIt 中设置 PWA 的指南。"
     parent: "documentation"
     pre: "<i class='fa-brands fa-readme fa-fw fa-sm'></i>"
+
+repost:
+  enable: true
+  url: "https://hugodoit.com/zh-cn/pwa-support/"
 ---
 
 了解如何在 FixIt 主题中配置渐进式网络应用程序 (PWA)。

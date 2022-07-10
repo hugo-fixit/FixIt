@@ -145,6 +145,8 @@ other = "Поделиться в"
 # === posts/single.html ===
 [contents]
 other = "Содержание"
+[repost]
+other = "" # waitting for translation
 
 [publishedOnDate]
 other = "Опубликовано {{ .Date }}"

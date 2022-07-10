@@ -142,6 +142,8 @@ other = "Подели на"
 # === posts/single.html ===
 [contents]
 other = "Садржаји"
+[repost]
+other = "" # waitting for translation
 
 [publishedOnDate]
 other = "објављено {{ .Date }}"

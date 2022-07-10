@@ -142,6 +142,9 @@ other = "Share on"
 [contents]
 other = "Contents"
 
+[repost]
+other = "Repost"
+
 [publishedOnDate]
 other = "published on {{ .Date }}"
 

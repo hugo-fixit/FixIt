@@ -145,6 +145,8 @@ other = "Partager sur"
 # === posts/single.html ===
 [contents]
 other = "Contenu"
+[repost]
+other = "" # waitting for translation
 
 [publishedOnDate]
 other = "publié le {{ .Date }}"

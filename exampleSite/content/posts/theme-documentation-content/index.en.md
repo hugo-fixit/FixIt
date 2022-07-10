@@ -118,6 +118,8 @@ It is necessary only if the front matters and the `page` part in your [site conf
 * **password**: {{< version 0.2.15 >}} password of encrypted page content, see [Theme Documentation - Content Encryption](../theme-documentation-content-encryption/)
 * **message**: {{< version 0.2.15 >}} encryption prompt, see [Theme Documentation - Content Encryption](../theme-documentation-content-encryption/)
 
+* **repost**: {{< version 0.2.15 >}} the same as the `params.page.repost` part in the [site configuration](../theme-documentation-basics#site-configuration).
+
 {{< admonition tip >}}
 {{< version 0.2.10 >}}
 

@@ -148,6 +148,9 @@ other = "分享到"
 [contents]
 other = "目錄"
 
+[repost]
+other = "轉貼"
+
 [publishedOnDate]
 other = "發佈於 {{ .Date }}"
 

@@ -35,6 +35,10 @@ lightgallery: false
 seo:
   images: []
 
+repost:
+  enable: true
+  url: ""
+
 # See details front matter: /theme-documentation-content/#front-matter
 ---
 

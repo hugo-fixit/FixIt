@@ -8,6 +8,13 @@
     font-size: 1.6rem;
     font-weight: bold;
     line-height: 140%;
+  
+    .icon-repost {
+      color: var(--#{$prefix}success);
+      display: inline-block;
+      width: max-content;
+      margin-right: 0.25rem;
+    }
   }
 
   .single-subtitle {

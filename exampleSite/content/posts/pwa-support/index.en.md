@@ -3,8 +3,6 @@ weight: 5
 title: "Theme Documentation - PWA Support"
 date: 2022-01-26T09:32:56+08:00
 draft: false
-author: "Lruihao"
-authorLink: "https://lruihao.cn"
 description: "Guide to setup PWA in FixIt."
 
 tags: ["PWA"]
@@ -23,6 +21,10 @@ menu:
     title: "Guide to setup PWA in FixIt."
     parent: "documentation"
     pre: "<i class='fa-brands fa-readme fa-fw fa-sm'></i>"
+
+repost:
+  enable: true
+  url: "https://hugodoit.com/pwa-support/"
 ---
 
 Find out how to turn your FixIt site into a Progressive Web App.

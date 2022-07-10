@@ -142,6 +142,8 @@ other = "Udostępnij na"
 # === posts/single.html ===
 [contents]
 other = "Spis treści"
+[repost]
+other = "" # waitting for translation
 
 [publishedOnDate]
 other = "opublikowano {{ .Date }}"

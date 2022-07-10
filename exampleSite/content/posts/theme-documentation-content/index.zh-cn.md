@@ -116,6 +116,8 @@ menu:
 * **password**: {{< version 0.2.15 >}} 加密页面内容的密码，详见 [主题文档 - 内容加密](../theme-documentation-content-encryption/)
 * **message**: {{< version 0.2.15 >}} 加密提示信息，详见 [主题文档 - 内容加密](../theme-documentation-content-encryption/)
 
+* **repost**: {{< version 0.2.15 >}} 和 [网站配置](../theme-documentation-basics#site-configuration) 中的 `params.page.repost` 部分相同
+
 {{< admonition tip >}}
 {{< version 0.2.10 >}}
 

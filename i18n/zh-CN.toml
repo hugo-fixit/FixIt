@@ -148,6 +148,9 @@ other = "分享到"
 [contents]
 other = "目录"
 
+[repost]
+other = "转载"
+
 [publishedOnDate]
 other = "发布于 {{ .Date }}"
 

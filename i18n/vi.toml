@@ -144,6 +144,8 @@ other = "Chia sẻ trên"
 # === posts/single.html ===
 [contents]
 other = "Nội dung"
+[repost]
+other = "" # waitting for translation
 
 [publishedOnDate]
 other = "đăng ngày {{ .Date }}"

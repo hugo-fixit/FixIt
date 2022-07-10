@@ -475,6 +475,10 @@ hugo
     pageStyle = "normal"
     # {{< version 0.2.14 >}} 强制使用 Gravatar 作为作者头像
     gravatarForce = true
+    # {{< version 0.2.15 >}} 转载配置
+    [params.page.repost]
+      enable = false
+      url = ""
     # {{< version 0.2.0 >}} 目录配置
     [params.page.toc]
       # 是否使用目录

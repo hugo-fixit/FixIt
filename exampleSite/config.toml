@@ -700,6 +700,11 @@ enableEmoji = true
     # Gravatar is force-used as the author's avatar since v0.2.14
     # 强制使用 Gravatar 作为作者头像 since v0.2.14
     gravatarForce = true
+    # Repost config since v0.2.15
+    # 转载配置 since v0.2.15
+    [params.page.repost]
+      enable = false
+      url = ""
     # Table of the contents config
     # 目录配置
     [params.page.toc]
