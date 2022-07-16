@@ -4,7 +4,7 @@
 {{ if $params.password -}}
   ***{{ T "encryptedAbstract" }}***
 {{- else -}}
-  {{ .RawContent }}
+  {{ .RawContent | replaceRE "\n?{{% fixit-encryptor .+ %}}((\n|.)*){{% /fixit-encryptor %}}\n?" "" }}
 {{- end }}
 
 ---

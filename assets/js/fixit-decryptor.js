@@ -1,5 +1,5 @@
 /**
- * FixIt decryptor for encrypted pages
+ * FixIt decryptor for encrypted pages and fixit-encryptor shortcode
  * @param {Object} options
  * @param {Function} [options.decrypted] [Lifecycle Hooks] handler after decrypting
  * @param {Function} [options.reset] [Lifecycle Hooks] handler after encrypting again
@@ -45,7 +45,7 @@ FixItDecryptor = function (options = {}) {
     this.addEventListener('decrypted', this.options?.decrypted);
     this.addEventListener('reset', this.options?.reset);
     this.validateCache();
-    
+
     const _decryptor = this;
     this.$el.querySelector('#fixit-decryptor-input')?.addEventListener('keydown', function (e) {
       if (e.key === 'Enter') {
@@ -135,7 +135,7 @@ FixItDecryptor = function (options = {}) {
               'afterbegin',
               CryptoJS.enc.Base64.parse(base64EncodeContent).toString(CryptoJS.enc.Utf8)
             );
-            $decryptor.parentElement.classList.add('decrypted')
+            $decryptor.parentElement.classList.add('decrypted');
           } catch (err) {
             return console.error(err);
           }
