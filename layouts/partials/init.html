@@ -1,4 +1,5 @@
 {{- $version := "v0.2.15-RC" -}}
+{{ $latest := (getJSON "https://api.github.com/repos/Lruihao/FixIt/releases/latest").tag_name | default $version }}
 {{- $VERSION := "0.2.X" -}}
 
 {{- /* FixIt theme version detection */ -}}
@@ -57,6 +58,7 @@
 {{- end -}}
 
 {{- .Scratch.Set "version" $version -}}
+{{- .Scratch.Set "latest" $latest -}}
 {{- .Scratch.Set "params" $params -}}
 {{- .Scratch.Set "toc" $toc -}}
 {{- .Scratch.Set "this" dict -}}
