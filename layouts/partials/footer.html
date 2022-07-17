@@ -11,8 +11,8 @@
       {{- /* Hugo and FixIt */ -}}
       {{- if ne .Site.Params.footer.hugo false -}}
         <div class="footer-line powered">
-          {{- $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer" title="Hugo %v">Hugo</a>` hugo.Version -}}
-          {{- $theme := .Scratch.Get "version" | printf `<a href="https://github.com/Lruihao/FixIt" target="_blank" rel="external nofollow noopener noreffer" title="FixIt %v"><img class="fixit-icon" src="/images/fixit.svg" alt="FixIt logo" />&nbsp;FixIt</a>` -}}
+          {{- $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo %v">Hugo</a>` hugo.Version -}}
+          {{- $theme := .Scratch.Get "version" | printf `<a href="https://github.com/Lruihao/FixIt" target="_blank" rel="external nofollow noopener noreferrer" title="FixIt %v"><img class="fixit-icon" src="/images/fixit.svg" alt="FixIt logo" />&nbsp;FixIt</a>` -}}
           {{- dict "Hugo" $hugo "Theme" $theme | T "poweredBySome" | safeHTML }}
         </div>
       {{- end -}}

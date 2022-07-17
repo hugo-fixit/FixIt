@@ -52,7 +52,7 @@
                 class="menu-link"
                 href="{{ $url }}"
                 {{ with .Title }}title="{{ . }}"{{ end }}
-                {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+                {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
               >
                 {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
               </a>
@@ -71,7 +71,7 @@
                         class="menu-link"
                         href="{{ $url }}"
                         {{ with .Title }}title="{{ . }}"{{ end }}
-                        {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+                        {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
                       >
                         {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
                       </a>
@@ -219,7 +219,7 @@
                     class="menu-link"
                     href="{{ $url }}"
                     {{ with .Title }}title="{{ . }}"{{ end }}
-                    {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+                    {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
                   >
                     {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
                   </a>
@@ -238,7 +238,7 @@
                         class="menu-link"
                         href="{{ $url }}"
                         {{ with .Title }}title="{{ . }}"{{ end }}
-                        {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+                        {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
                       >
                         {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
                       </a>
@@ -250,7 +250,7 @@
                 class="menu-link"
                 href="{{ $url }}"
                 {{ with .Title }}title="{{ . }}"{{ end }}
-                {{ if (urls.Parse $url).Host }}rel="noopener noreffer" target="_blank"{{ end }}
+                {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
               >
                 {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
               </a>

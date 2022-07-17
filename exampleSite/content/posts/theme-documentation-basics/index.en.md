@@ -313,7 +313,7 @@ Please open the code block below to view the complete sample configuration :(fa-
     # ICP info only in China (HTML format is supported)
     icp = ""
     # license info (HTML format is supported)
-    license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+    license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
 
   # {{< version 0.2.0 >}} Section (all posts) page config
   [params.section]
@@ -463,7 +463,7 @@ Please open the code block below to view the complete sample configuration :(fa-
     # {{< version 0.2.0 >}} whether to enable the fontawesome extended syntax
     fontawesome = true
     # license info (HTML format is supported)
-    license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+    license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
     # whether to show link to Raw Markdown content of the content
     linkToMarkdown = true
     # {{< version 0.2.4 >}} whether to show the full text content in RSS

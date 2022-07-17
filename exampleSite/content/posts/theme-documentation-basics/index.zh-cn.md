@@ -315,7 +315,7 @@ hugo
     # {{< version 0.2.12 changed >}} ICP 备案信息，仅在中国使用（支持 HTML 格式）
     icp = ""
     # 许可协议信息（支持 HTML 格式）
-    license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+    license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
 
   # {{< version 0.2.0 >}} Section（所有文章）页面配置
   [params.section]
@@ -465,7 +465,7 @@ hugo
     # {{< version 0.2.0 >}} 是否使用 fontawesome 扩展语法
     fontawesome = true
     # 许可协议信息（支持 HTML 格式）
-    license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+    license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
     # 是否在文章页面显示原始 Markdown 文档链接
     linkToMarkdown = true
     # {{< version 0.2.4 >}} 是否在 RSS 中显示全文内容

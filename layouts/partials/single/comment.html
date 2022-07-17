@@ -49,7 +49,7 @@
         {{- $commentConfig = dict "lightgallery" . | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://github.com/ArtalkJS/Artalk" rel="external nofollow noopener noreffer">Artalk</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://github.com/ArtalkJS/Artalk" rel="external nofollow noopener noreferrer">Artalk</a>.
       </noscript>
     {{- end -}}
 
@@ -60,7 +60,7 @@
       {{- $source := printf "https://%v.disqus.com/embed.js" $disqus.shortname -}}
       {{- dict "Source" $source "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript" rel="external nofollow noopener noreffer">Disqus</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript" rel="external nofollow noopener noreferrer">Disqus</a>.
       </noscript>
     {{- end -}}
 
@@ -74,7 +74,7 @@
       {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
       {{- $commentConfig = dict "id" .Date "title" .Title "clientID" $gitalk.clientId "clientSecret" $gitalk.clientSecret "repo" $gitalk.repo "owner" $gitalk.owner "admin" (slice $gitalk.owner) | dict "gitalk" | merge $commentConfig -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk" rel="external nofollow noopener noreffer">Gitalk</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk" rel="external nofollow noopener noreferrer">Gitalk</a>.
       </noscript>
     {{- end -}}
 
@@ -101,7 +101,7 @@
       {{- end -}}
       {{- $commentConfig = $valine.emoji | default "google.yml" | printf "data/emoji/%v" | resources.Get | transform.Unmarshal | dict "valine" | merge $commentConfig -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/" rel="external nofollow noopener noreffer">Valine</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/" rel="external nofollow noopener noreferrer">Valine</a>.
       </noscript>
     {{- end -}}
 
@@ -145,7 +145,7 @@
         {{- $commentConfig = dict "comment" . | dict "waline" | merge $commentConfig -}}
       {{- end -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://waline.js.org/" rel="external nofollow noopener noreffer">Waline</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://waline.js.org/" rel="external nofollow noopener noreferrer">Waline</a>.
       </noscript>
     {{- end -}}
 
@@ -162,7 +162,7 @@
       {{- $source := printf "https://connect.facebook.net/%v/sdk.js#xfbml=1&version=v5.0&appId=%v&autoLogAppEvents=1" ($facebook.languageCode | default (T "facebookLanguageCode")) $facebook.appId -}}
       {{- dict "Source" $source "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://developers.facebook.com/docs/plugins/comments/" rel="external nofollow noopener noreffer">Facebook</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://developers.facebook.com/docs/plugins/comments/" rel="external nofollow noopener noreferrer">Facebook</a>.
       </noscript>
     {{- end -}}
 
@@ -189,7 +189,7 @@
       {{- end -}}
       {{- dict "Source" "https://comments.app/js/widget.js?2" "Defer" true "Attr" $attr | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://comments.app/" rel="external nofollow noopener noreffer">Telegram Comments</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://comments.app/" rel="external nofollow noopener noreferrer">Telegram Comments</a>.
       </noscript>
     {{- end -}}
 
@@ -199,7 +199,7 @@
       <div id="commento"></div>
       {{- dict "Source" "https://cdn.commento.io/js/commento.js" "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://commento.io/" rel="external nofollow noopener noreffer">Commento</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://commento.io/" rel="external nofollow noopener noreferrer">Commento</a>.
       </noscript>
     {{- end -}}
 
@@ -213,7 +213,7 @@
       {{- $commentConfig = $utterances.lightTheme | default "github-light" | dict "lightTheme" | dict "utterances" | merge $commentConfig -}}
       {{- $commentConfig = $utterances.darkTheme | default "github-dark" | dict "darkTheme" | dict "utterances" | merge $commentConfig -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/" rel="external nofollow noopener noreffer">Utterances</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/" rel="external nofollow noopener noreferrer">Utterances</a>.
       </noscript>
     {{- end -}}
 
@@ -237,7 +237,7 @@
         {{- $commentConfig = dict "lightgallery" . | dict "twikoo" | merge $commentConfig -}}
       {{- end -}}
       <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://twikoo.js.org/" rel="external nofollow noopener noreffer">Twikoo</a>.
+        Please enable JavaScript to view the comments powered by <a href="https://twikoo.js.org/" rel="external nofollow noopener noreferrer">Twikoo</a>.
       </noscript>
     {{- end -}}
 
@@ -267,7 +267,7 @@
             defer
           ></script>
           <noscript>
-            Please enable JavaScript to view the comments powered by <a href="https://giscus.app/" rel="external nofollow noopener noreffer">giscus</a>.
+            Please enable JavaScript to view the comments powered by <a href="https://giscus.app/" rel="external nofollow noopener noreferrer">giscus</a>.
           </noscript>
         </div>
       {{- end -}}
