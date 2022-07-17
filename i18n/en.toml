@@ -13,6 +13,9 @@ other = "You are using a development version of FixIt. Please consider using a s
 
 [devEnvWarn]
 other = "Current environment is \"development\". The \"comment system\", \"CDN\" and \"fingerprint\" will be disabled."
+
+[quicklyUpgrade]
+other = "Quickly upgrade use bash: cd themes/FixIt && sh fixit_checker.sh"
 # === init ===
 
 # === baseof ===

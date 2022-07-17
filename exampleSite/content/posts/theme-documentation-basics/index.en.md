@@ -202,8 +202,8 @@ Please open the code block below to view the complete sample configuration :(fa-
 
 ```toml
 [params]
-  # {{< version 0.2.0 changed >}} FixIt theme version
-  version = "0.2.X"
+  # {{< version 0.2.15 changed >}} FixIt theme version
+  version = "0.2.X" # e.g. "0.2.X", "0.2.15", "v0.2.15"
   # site description
   description = "This is My New Hugo Site"
   # site keywords
@@ -839,6 +839,13 @@ Please open the code block below to view the complete sample configuration :(fa-
     # Gravatar host, default: "www.gravatar.com"
     host = "www.gravatar.com" # "cn.gravatar.com", "gravatar.loli.net"
     style = "" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
+  # {{< version 0.2.15 >}} Developer options
+  [params.developerOptions]
+    enable = false
+    # Check for updates
+    c4u = false
+    # Please do not expose to public!
+    githubToken = ""
 
 # Markup related configuration in Hugo
 [markup]

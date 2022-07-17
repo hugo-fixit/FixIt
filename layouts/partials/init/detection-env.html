@@ -22,5 +22,5 @@
     {{- .Scratch.Set "comment" dict -}}
   {{- end -}}
 {{- else if eq .Site .Sites.First -}}
-  {{- warnf "FixIt %v\n%v" (.Scratch.Get "version") (T "devEnvWarn") -}}
+  {{- warnf "FixIt %v\n%v\n\n" (.Scratch.Get "version") (T "devEnvWarn") -}}
 {{- end -}}

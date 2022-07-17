@@ -204,8 +204,8 @@ hugo
 
 ```toml
 [params]
-  # {{< version 0.2.0 changed >}} FixIt 主题版本
-  version = "0.2.X"
+  # {{< version 0.2.15 changed >}} FixIt 主题版本
+  version = "0.2.X" # e.g. "0.2.X", "0.2.15", "v0.2.15"
   # 网站描述
   description = "这是我的全新 Hugo 网站"
   # 网站关键词
@@ -840,6 +840,13 @@ hugo
     # Gravatar 主机，默认：“www.gravatar.com”
     host = "www.gravatar.com" # "cn.gravatar.com", "gravatar.loli.net"
     style = "" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
+  # {{< version 0.2.15 >}} 开发者选项
+  [params.developerOptions]
+    enable = false
+    # 检查更新
+    c4u = false
+    # 请勿公开展示！
+    githubToken = ""
 
 # Hugo 解析文档的配置
 [markup]

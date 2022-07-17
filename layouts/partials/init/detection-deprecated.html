@@ -8,5 +8,5 @@
   {{- $warnErrors = $warnErrors | append "The parameter `ibruce.siteTime` is deprecated since v0.2.14, use `footer.siteTime` instead." -}}
 {{- end -}}
 {{- if len $warnErrors -}}
-  {{- warnf "Deprecated parameter detection until %v\n  - %v" (.Scratch.Get "version") (delimit $warnErrors "\n  - ") -}}
+  {{- warnf "Deprecated parameter detection until %v\n  - %v\n\n" (.Scratch.Get "version") (delimit $warnErrors "\n  - ") -}}
 {{- end -}}

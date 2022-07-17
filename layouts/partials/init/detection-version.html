@@ -1,17 +1,29 @@
-{{- /* FixIt theme version detection */ -}}
-
 {{- $version := "v0.2.15-RC" -}}
-{{ $header := dict "Authorization" "token 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" }}
-{{ $latest := (getJSON "https://api.github.com/repos/Lruihao/FixIt/releases/latest" $header).tag_name }}
+{{- $latest := $version -}}
+{{- $developerOptions := .Scratch.Get "developerOptions" -}}
 
-{{- if eq .Site .Sites.First -}}
-  {{- if (strings.HasSuffix $version "RC") -}}
-    {{- warnf "FixIt %v\n%v" $version (T "RCVersionWarn") -}}
+{{- /* Check for updates */ -}}
+{{- if $developerOptions.enable | and $developerOptions.c4u -}}
+  {{- /* Select the scope named "public_repo" to generate personal access token */ -}}
+  {{- $header := dict "Authorization" "" -}}
+  {{- with $developerOptions.githubtoken -}}
+    {{- $header = dict "Authorization" (printf "token %v" .)  -}}
   {{- end -}}
+  {{- $latest = (getJSON "https://api.github.com/repos/Lruihao/FixIt/releases/latest" $header).tag_name -}}
+{{- end -}}
+
+{{- /* FixIt theme version detection */ -}}
+{{- if eq .Site .Sites.First -}}
   {{- if not .Site.Params.version -}}
-    {{- errorf "FixIt %v\n%v" $version (T "configurationError") -}}
+    {{- errorf "FixIt %v\n%v\n\n" $version (T "configurationError") -}}
   {{- else if gt "0.2.0" (strings.TrimPrefix "v" .Site.Params.version) -}}
-    {{- errorf "FixIt %v\n%v" $version (dict "From" .Site.Params.version "To" $version | T "compatibilityError")  -}}
+    {{- errorf "FixIt %v\n%v\n\n" $version (dict "From" .Site.Params.version "To" $version | T "compatibilityError")  -}}
+  {{- end -}}
+  {{- if (strings.HasSuffix $version "RC") -}}
+    {{- warnf "FixIt %v\n%v\n\n" $version (T "RCVersionWarn") -}}
+  {{- end -}}
+  {{- if (gt $latest $version) -}}
+    {{- warnf "FixIt %v (⬆️ %v)\n%v\n\n" $version $latest (T "quicklyUpgrade") -}}
   {{- end -}}
 {{- end -}}
 

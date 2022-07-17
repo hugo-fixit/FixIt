@@ -1163,6 +1163,16 @@ enableEmoji = true
     # Gravatar 主机，默认：“www.gravatar.com”
     host = "www.gravatar.com" # "cn.gravatar.com", "gravatar.loli.net"
     style = "mp" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
+  # Developer options since v0.2.15
+  # 开发者选项 since v0.2.15
+  [params.developerOptions]
+    enable = false
+    # Check for updates
+    # 检查更新
+    c4u = false
+    # Please do not expose to public!
+    # 请勿公开展示！
+    githubToken = ""
 
 # Markup related configuration in Hugo
 # Hugo 解析文档的配置
