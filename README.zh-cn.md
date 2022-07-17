@@ -37,18 +37,6 @@ hugo server --source=exampleSite
 git submodule add https://github.com/Lruihao/FixIt.git themes/FixIt
 ```
 
-之后，你可以在站点目录通过这条命令来将主题更新至最新版本：
-
-```bash
-git submodule update --remote --merge
-```
-
-或者在主题目录中使用 shell 命令 `fixit_checker.sh` 将主题更新至最新版本：
-
-```bash
-sh fixit_checker.sh
-```
-
 接着，前往 `config.toml` 并将默认主题更改为 `FixIt`。
 
 ```diff
@@ -57,6 +45,20 @@ sh fixit_checker.sh
 ```
 
 这样就完成了迁移工作，现在一切准备就绪 🎉
+
+---
+
+之后，你可以在站点目录通过这条命令来将主题更新至最新版本：
+
+```bash
+git submodule update --remote --merge
+```
+
+或者这条 shell 命令：
+
+```bash
+cd themes/FixIt && sh fixit_checker.sh
+```
 
 ## 为什么选择 FixIt
 
