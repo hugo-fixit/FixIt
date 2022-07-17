@@ -1,0 +1,9 @@
+{{- .Scratch.Set "params" (.Params | merge .Site.Params.page) -}}
+{{- .Scratch.Set "this" dict -}}
+
+{{- partial "init/detection-version.html" . -}}
+{{- partial "init/detection-env.html" . -}}
+{{- partial "init/detection-deprecated.html" . -}}
+{{- partial "init/patch.html" . -}}
+
+{{- partial "plugin/compatibility.html" . -}}

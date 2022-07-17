@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: Giscus comments invalid config `inputPosition`
 - :bug: Fix: busuanzi logic error
 - :bug: Fix: close comment system logic error when the article was expired
+- :truck: Perf: subdivide FixIt initialization
 - :art: Style: add theme colors variables and add common color styles
 - :art: Style: add scroll bar for auto toc ([#136](https://github.com/Lruihao/FixIt/issues/136))
 - :wrench: Feat(cdn): add unpkg cdn support

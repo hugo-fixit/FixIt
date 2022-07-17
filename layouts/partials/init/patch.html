@@ -1,0 +1,10 @@
+{{- $params := .Scratch.Get "params" -}}
+
+{{- /* FixIt theme toc patch */ -}}
+{{- $toc := $params.toc -}}
+{{- if eq $toc true -}}
+  {{- $toc = .Site.Params.page.toc | default dict -}}
+{{- else if eq $toc false -}}
+  {{- $toc = dict "enable" false -}}
+{{- end -}}
+{{- .Scratch.Set "toc" $toc -}}

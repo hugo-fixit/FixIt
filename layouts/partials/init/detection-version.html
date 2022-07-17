@@ -1,0 +1,19 @@
+{{- /* FixIt theme version detection */ -}}
+
+{{- $version := "v0.2.15-RC" -}}
+{{ $header := dict "Authorization" "token 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" }}
+{{ $latest := (getJSON "https://api.github.com/repos/Lruihao/FixIt/releases/latest" $header).tag_name }}
+
+{{- if eq .Site .Sites.First -}}
+  {{- if (strings.HasSuffix $version "RC") -}}
+    {{- warnf "FixIt %v\n%v" $version (T "RCVersionWarn") -}}
+  {{- end -}}
+  {{- if not .Site.Params.version -}}
+    {{- errorf "FixIt %v\n%v" $version (T "configurationError") -}}
+  {{- else if gt "0.2.0" (strings.TrimPrefix "v" .Site.Params.version) -}}
+    {{- errorf "FixIt %v\n%v" $version (dict "From" .Site.Params.version "To" $version | T "compatibilityError")  -}}
+  {{- end -}}
+{{- end -}}
+
+{{- .Scratch.Set "version" $version -}}
+{{- .Scratch.Set "latest" $latest -}}

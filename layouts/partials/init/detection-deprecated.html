@@ -1,0 +1,12 @@
+{{- /* Deprecated parameter detection */ -}}
+
+{{- $warnErrors := slice -}}
+{{- with .Site.Params.home.profile.gravatarSite -}}
+  {{- $warnErrors = $warnErrors | append "The parameter `home.profile.gravatarSite` is deprecated since v0.2.14, use `gravatar.host` instead." -}}
+{{- end -}}
+{{- with .Site.Params.ibruce.siteTime -}}
+  {{- $warnErrors = $warnErrors | append "The parameter `ibruce.siteTime` is deprecated since v0.2.14, use `footer.siteTime` instead." -}}
+{{- end -}}
+{{- if len $warnErrors -}}
+  {{- warnf "Deprecated parameter detection until %v\n  - %v" (.Scratch.Get "version") (delimit $warnErrors "\n  - ") -}}
+{{- end -}}
