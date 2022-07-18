@@ -135,6 +135,13 @@
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/yureiita">
+            <img src="https://avatars.githubusercontent.com/u/26035759?v=4" width="100;" alt="yureiita"/>
+            <br />
+            <sub><b>Abdul Halim Daud</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/devandreacarratta">
             <img src="https://avatars.githubusercontent.com/u/46504271?v=4" width="100;" alt="devandreacarratta"/>
             <br />
@@ -154,15 +161,15 @@
             <br />
             <sub><b>Dmitry Kireev</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/thejayhaykid">
             <img src="https://avatars.githubusercontent.com/u/9452325?v=4" width="100;" alt="thejayhaykid"/>
             <br />
             <sub><b>Jake Hayes</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/markdluethje">
             <img src="https://avatars.githubusercontent.com/u/31922494?v=4" width="100;" alt="markdluethje"/>
@@ -197,15 +204,15 @@
             <br />
             <sub><b>Thibault Le Reste</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/vanildosouto">
             <img src="https://avatars.githubusercontent.com/u/1603028?v=4" width="100;" alt="vanildosouto"/>
             <br />
             <sub><b>Vanildo Souto Mangueira</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/victor-pogor">
             <img src="https://avatars.githubusercontent.com/u/24962085?v=4" width="100;" alt="victor-pogor"/>
@@ -240,15 +247,15 @@
             <br />
             <sub><b>Hiifong</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/onisuly">
             <img src="https://avatars.githubusercontent.com/u/8399827?v=4" width="100;" alt="onisuly"/>
             <br />
             <sub><b>Onisuly</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/quyleanh">
             <img src="https://avatars.githubusercontent.com/u/9365035?v=4" width="100;" alt="quyleanh"/>
