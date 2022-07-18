@@ -38,4 +38,4 @@ features = [
 [module]
   [module.hugoVersion]
     extended = true
-    min = "0.62.0"
+    min = "0.84.0"
