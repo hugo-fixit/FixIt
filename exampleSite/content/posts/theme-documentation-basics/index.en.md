@@ -840,7 +840,7 @@ Please open the code block below to view the complete sample configuration :(fa-
     host = "www.gravatar.com" # "cn.gravatar.com", "gravatar.loli.net"
     style = "" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
   # {{< version 0.2.15 >}} Developer options
-  [params.developerOptions]
+  [params.dev]
     enable = false
     # Check for updates
     c4u = false

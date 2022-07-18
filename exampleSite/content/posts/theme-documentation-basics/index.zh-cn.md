@@ -841,7 +841,7 @@ hugo
     host = "www.gravatar.com" # "cn.gravatar.com", "gravatar.loli.net"
     style = "" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
   # {{< version 0.2.15 >}} 开发者选项
-  [params.developerOptions]
+  [params.dev]
     enable = false
     # 检查更新
     c4u = false

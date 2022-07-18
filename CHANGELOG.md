@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## v0.2.15
 
-> Add hugo new features support.
+> Add content encryption feature(pages, partial), total word count, enhance auto toc, developer options and more.  
 > Snapshot: 
 
 - :tada: Feat: add content encryption of pages ([#123](https://github.com/Lruihao/FixIt/issues/123))
@@ -33,7 +33,7 @@ All notable changes to this project will be documented in this file.
 
 ## v0.2.14 [2022.5.15]
 
-> Add hugo new features support.
+> Add hugo new features support.  
 > Snapshot: <https://fixit-p1tg6tsml-lruihao.vercel.app>
 
 - :recycle: Refactor: header layout
@@ -77,7 +77,7 @@ All notable changes to this project will be documented in this file.
 
 ## v0.2.13 [2022.3.14]
 
-> Improve and add some new features.
+> Improve and add some new features.  
 > Snapshot: <https://fixit-bbh5g5x90-lruihao.vercel.app>
 
 - :recycle: Refactor: page layout ([#65](https://github.com/Lruihao/FixIt/issues/65))
@@ -113,7 +113,7 @@ All notable changes to this project will be documented in this file.
 
 ## v0.2.12 [2022-1-27]
 
-> Fix most known bugs and add some new features.
+> Fix most known bugs and add some new features.  
 > Snapshot: <https://fixit-e9lpwfkbp-lruihao.vercel.app>
 
 - :tada: Feat: add PWA support
