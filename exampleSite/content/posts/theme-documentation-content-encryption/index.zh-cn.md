@@ -46,7 +46,7 @@ author: "Lruihao"
 authorLink: "https://lruihao.cn"
 description: "了解如何在 FixIt 主题中加密内容。"
 password: 1212
-message: "Password is 1212"
+message: "密码是 1212"
 
 resources:
 - name: "featured-image"
