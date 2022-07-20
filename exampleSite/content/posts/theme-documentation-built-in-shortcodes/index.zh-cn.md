@@ -39,8 +39,8 @@ Hugo 附带了一组预定义的 shortcodes, 它们实现了一些非常常见�
 {{< admonition tip "使用 Shortcodes" >}}
 
 1. 带有原始字体串格式的 Shortcodes \` \`
-2. 带有 Markdown 的 Shortcodes `< >`
-3. 不带有 Markdown 的 Shortcodes `% %`
+2. 带有 Markdown 的 Shortcodes `% %`
+3. 不带有 Markdown 的 Shortcodes `< >`
 
 详见 [shortcodes/#use-shortcodes](https://gohugo.io/content-management/shortcodes/#use-shortcodes)
 

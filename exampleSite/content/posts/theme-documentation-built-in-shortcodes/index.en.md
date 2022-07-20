@@ -40,8 +40,8 @@ Hugo ships with a set of predefined shortcodes that represent very common usage.
 {{< admonition tip "Use Shortcodes" >}}
 
 1. Shortcodes with raw string parameters \` \`
-2. Shortcodes with Markdown `< >`
-3. Shortcodes without Markdown `% %`
+2. Shortcodes with Markdown `% %`
+3. Shortcodes without Markdown `< >`
 
 See detail [shortcodes/#use-shortcodes](https://gohugo.io/content-management/shortcodes/#use-shortcodes)
 
