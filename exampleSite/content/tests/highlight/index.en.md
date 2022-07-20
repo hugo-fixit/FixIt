@@ -12,6 +12,8 @@ tags:
 categories:
 - Test
 
+hiddenFromHomePage: true
+
 menu:
   main:
     title: "Test for code highlight feature"

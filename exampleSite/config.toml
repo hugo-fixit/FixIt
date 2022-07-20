@@ -188,7 +188,7 @@ enableEmoji = true
         [languages.en.params.home.posts]
           enable = true
           # special amount of posts in each home posts page
-          paginate = 5
+          paginate = 6
       # Social config in home page
       [languages.en.params.social]
         GitHub = "xxxx"
@@ -422,7 +422,7 @@ enableEmoji = true
         [languages.zh-cn.params.home.posts]
           enable = true
           # 主页每页显示文章数量
-          paginate = 5
+          paginate = 6
       # 主页的社交信息设置
       [languages.zh-cn.params.social]
         GitHub = "xxxx"
