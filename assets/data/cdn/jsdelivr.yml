@@ -31,6 +31,8 @@ libFiles:
   # echarts@5.2.2 https://github.com/apache/echarts
   echartsJS: echarts@5.3.2/dist/echarts.min.js
   echartsMacaronsJS: echarts@5.3.2/theme/macarons.min.js
+  # eruda@2.5.0 https://github.com/liriliri/eruda
+  erudaJS: eruda@2.5.0/eruda.js
   # fontawesome-free@6.1.1 https://github.com/FortAwesome/Font-Awesome
   fontawesomeFreeCSS: '@fortawesome/fontawesome-free@6.1.1/css/all.min.css'
   # gitalk@1.7.2 https://github.com/gitalk/gitalk
@@ -75,6 +77,8 @@ libFiles:
   typeitJS: typeit@7.0.4/dist/typeit.min.js
   # valine@1.5.0 https://github.com/xCss/Valine
   valineJS: valine@1.5.0/dist/Valine.min.js
+  # vconsole@3.14.6 https://github.com/Tencent/vConsole
+  vconsoleJS: vconsole@3.14.6/dist/vconsole.min.js
   # waline@2.6.1 https://github.com/walinejs/waline
   walineCSS: '@waline/client@2.6.1/dist/waline.css'
   walineJS: '@waline/client@2.6.1/dist/waline.js'
