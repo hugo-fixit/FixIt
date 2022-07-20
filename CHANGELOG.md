@@ -15,7 +15,8 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: add repost feature ([#156](https://github.com/Lruihao/FixIt/issues/156))
 - :sparkles: Feat: add developer options
 - :bug: Fix: unable to show search bar of header at mobile mode ([#143](https://github.com/Lruihao/FixIt/issues/143))
-- :bug: Fix: Giscus comments invalid config `inputPosition`
+- :bug: Fix: Giscus comment invalid config `inputPosition`
+- :bug: Fix: Waline comment invalid config `imageUploader = false` & `highlighter = false` (@yureiita[#161](https://github.com/Lruihao/FixIt/pull/161))
 - :bug: Fix: busuanzi logic error
 - :bug: Fix: close comment system logic error when the article was expired
 - :bug: Style: fix typos for rel attribute value noreferrer (@yureiita[#157](https://github.com/Lruihao/FixIt/pull/157))

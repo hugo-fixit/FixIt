@@ -632,7 +632,7 @@ hugo
         wordLimit = 0
         pageSize = 10
         imageUploader = false # {{< version 0.2.15 >}}
-        highlighter = true # {{< version 0.2.15 >}}
+        highlighter = false # {{< version 0.2.15 >}}
         comment = false # {{< version 0.2.15 >}}
         # visitor = false # {{< version 0.2.15 deleted >}} 更名为 pageview
         # uploadImage = false # {{< version 0.2.15 deleted >}} 更名为 imageUploader

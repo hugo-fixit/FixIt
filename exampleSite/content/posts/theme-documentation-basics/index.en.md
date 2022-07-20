@@ -630,7 +630,7 @@ Please open the code block below to view the complete sample configuration :(fa-
         wordLimit = 0
         pageSize = 10
         imageUploader = false # {{< version 0.2.15 >}}
-        highlighter = true # {{< version 0.2.15 >}}
+        highlighter = false # {{< version 0.2.15 >}}
         comment = false # {{< version 0.2.15 >}}
         # visitor = false # {{< version 0.2.15 deleted >}} renamed to pageview
         # uploadImage = false # {{< version 0.2.15 deleted >}} renamed to imageUploader

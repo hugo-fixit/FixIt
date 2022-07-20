@@ -900,7 +900,7 @@ enableEmoji = true
         wordLimit = 0
         pageSize = 10
         imageUploader = false
-        highlighter = true
+        highlighter = false
         comment = false
       # Facebook comment config (https://developers.facebook.com/docs/plugins/comments)
       # Facebook 评论系统设置 (https://developers.facebook.com/docs/plugins/comments)
