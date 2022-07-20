@@ -188,7 +188,7 @@ enableEmoji = true
         [languages.en.params.home.posts]
           enable = true
           # special amount of posts in each home posts page
-          paginate = 5
+          paginate = 6
       # Social config in home page
       [languages.en.params.social]
         GitHub = "xxxx"
@@ -422,7 +422,7 @@ enableEmoji = true
         [languages.zh-cn.params.home.posts]
           enable = true
           # 主页每页显示文章数量
-          paginate = 5
+          paginate = 6
       # 主页的社交信息设置
       [languages.zh-cn.params.social]
         GitHub = "xxxx"
@@ -1165,14 +1165,21 @@ enableEmoji = true
     style = "mp" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
   # Developer options since v0.2.15
   # 开发者选项 since v0.2.15
-  [params.developerOptions]
+  [params.dev]
+    # TODO 提前处理 如果 dev.enable = false 那其他值全部清空，避免后续使用时判断条件过多
     enable = false
     # Check for updates
     # 检查更新
     c4u = false
-    # Please do not expose to public!
-    # 请勿公开展示！
+    # For using the GitHub API, please do not expose to public!
+    # 用于使用 GitHub API，请勿公开展示！
     githubToken = ""
+    [params.dev.mDevtools]
+      enable = false
+      # "vConsole", "eruda" supported
+      # 支持 "vConsole", "eruda"
+      type = "vConsole"
+
 
 # Markup related configuration in Hugo
 # Hugo 解析文档的配置

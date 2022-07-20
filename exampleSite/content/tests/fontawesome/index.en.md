@@ -12,6 +12,8 @@ tags:
 categories:
 - Test
 
+hiddenFromHomePage: true
+
 menu:
   main:
     title: "Test for rendering Font Awesome icons"

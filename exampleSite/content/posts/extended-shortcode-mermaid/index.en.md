@@ -1,7 +1,6 @@
 ---
 title: "Extended Shortcode - mermaid"
 date: 2022-07-09T17:20:15+08:00
-draft: false
 author: "Lruihao"
 authorLink: "https://lruihao.cn"
 description: "The mermaid shortcode supports diagrams in Hugo with Mermaid library."

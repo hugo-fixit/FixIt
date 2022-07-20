@@ -841,7 +841,7 @@ hugo
     host = "www.gravatar.com" # "cn.gravatar.com", "gravatar.loli.net"
     style = "" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
   # {{< version 0.2.15 >}} 开发者选项
-  [params.developerOptions]
+  [params.dev]
     enable = false
     # 检查更新
     c4u = false
@@ -1199,6 +1199,7 @@ menu:
 |:----|:----:|:----:|:----:|:----:|
 | 英语 | `en` | `en` | :(fa-regular fa-check-square fa-fw): | :(fa-regular fa-check-square fa-fw): |
 | 简体中文 | `zh-cn` | `zh-CN` | :(fa-regular fa-check-square fa-fw): | :(fa-regular fa-check-square fa-fw): |
+| 繁体中文 | `zh-tw` | `zh-TW` | :(fa-regular fa-square fa-fw): | :(fa-regular fa-check-square fa-fw): |
 | 法语 | `fr` | `fr` | :(fa-regular fa-square fa-fw): | :(fa-regular fa-check-square fa-fw): |
 | 波兰语 | `pl` | `pl` | :(fa-regular fa-square fa-fw): | :(fa-regular fa-square fa-fw): |
 | 巴西葡萄牙语 | `pt-br` | `pt-BR` | :(fa-regular fa-square fa-fw): | :(fa-regular fa-check-square fa-fw): |
@@ -1209,7 +1210,6 @@ menu:
 | 俄语 | `ru` | `ru` | :(fa-regular fa-square fa-fw): | :(fa-regular fa-check-square fa-fw): |
 | 罗马尼亚语 | `ro` | `ro` | :(fa-regular fa-square fa-fw): | :(fa-regular fa-check-square fa-fw): |
 | 越南语 | `vi` | `vi` | :(fa-regular fa-square fa-fw): | :(fa-regular fa-check-square fa-fw): |
-| 繁体中文 | `zh-tw` | `zh-TW` | :(fa-regular fa-square fa-fw): | :(fa-regular fa-check-square fa-fw): |
 
 ### 4.2 基本配置
 

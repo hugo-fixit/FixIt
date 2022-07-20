@@ -1,12 +1,12 @@
 {{- $version := "v0.2.15-RC" -}}
 {{- $latest := $version -}}
-{{- $developerOptions := .Scratch.Get "developerOptions" -}}
+{{- $devOpts := .Scratch.Get "devOpts" -}}
 
 {{- /* Check for updates */ -}}
-{{- if $developerOptions.enable | and $developerOptions.c4u -}}
+{{- if $devOpts.enable | and $devOpts.c4u -}}
   {{- /* Select the scope named "public_repo" to generate personal access token */ -}}
   {{- $header := dict "Authorization" "" -}}
-  {{- with $developerOptions.githubtoken -}}
+  {{- with $devOpts.githubtoken -}}
     {{- $header = dict "Authorization" (printf "token %v" .)  -}}
   {{- end -}}
   {{- $latest = (getJSON "https://api.github.com/repos/Lruihao/FixIt/releases/latest" $header).tag_name -}}

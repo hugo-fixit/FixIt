@@ -18,6 +18,8 @@ tags:
 categories:
 - Test
 
+hiddenFromHomePage: true
+
 menu:
   main:
     title: "文章加密测试"

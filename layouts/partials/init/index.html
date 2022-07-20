@@ -1,5 +1,5 @@
 {{- .Scratch.Set "params" (.Params | merge .Site.Params.page) -}}
-{{- .Scratch.Set "developerOptions" (.Site.Params.developerOptions | default dict) -}}
+{{- .Scratch.Set "devOpts" (.Site.Params.dev | default dict) -}}
 {{- .Scratch.Set "this" dict -}}
 
 {{- partial "init/detection-version.html" . -}}

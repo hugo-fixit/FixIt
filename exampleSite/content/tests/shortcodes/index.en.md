@@ -11,6 +11,8 @@ tags:
 categories:
 - Test
 
+hiddenFromHomePage: true
+
 menu:
   main:
     title: "Test for shortcodes usages"

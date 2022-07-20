@@ -14,6 +14,8 @@ tags:
 categories:
 - Test
 
+hiddenFromHomePage: true
+
 code:
   maxShownLines: 30
 
