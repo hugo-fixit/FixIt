@@ -1166,7 +1166,6 @@ enableEmoji = true
   # Developer options since v0.2.15
   # 开发者选项 since v0.2.15
   [params.dev]
-    # TODO 提前处理 如果 dev.enable = false 那其他值全部清空，避免后续使用时判断条件过多
     enable = false
     # Check for updates
     # 检查更新

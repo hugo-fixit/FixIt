@@ -1,9 +1,9 @@
-{{- $version := "v0.2.15-RC" -}}
+{{- $version := .Scratch.Get "version" -}}
 {{- $latest := $version -}}
 {{- $devOpts := .Scratch.Get "devOpts" -}}
 
 {{- /* Check for updates */ -}}
-{{- if $devOpts.enable | and $devOpts.c4u -}}
+{{- if $devOpts.c4u -}}
   {{- /* Select the scope named "public_repo" to generate personal access token */ -}}
   {{- $header := dict "Authorization" "" -}}
   {{- with $devOpts.githubtoken -}}
@@ -27,5 +27,4 @@
   {{- end -}}
 {{- end -}}
 
-{{- .Scratch.Set "version" $version -}}
 {{- .Scratch.Set "latest" $latest -}}

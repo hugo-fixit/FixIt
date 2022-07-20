@@ -21,6 +21,12 @@
   {{- else if eq .Params.comment false -}}
     {{- .Scratch.Set "comment" dict -}}
   {{- end -}}
-{{- else if eq .Site .Sites.First -}}
-  {{- warnf "FixIt %v\n%v\n\n" (.Scratch.Get "version") (T "devEnvWarn") -}}
+{{- else -}}
+  {{- .Scratch.Set "devOpts" .Site.Params.dev -}}
+  {{- if ne .Site.Params.dev.enable true -}}
+    {{- .Scratch.Set "devOpts" dict -}}
+  {{- end -}}
+  {{- if eq .Site .Sites.First -}}
+    {{- warnf "FixIt %v\n%v\n\n" (.Scratch.Get "version") (T "devEnvWarn") -}}
+  {{- end -}}
 {{- end -}}
