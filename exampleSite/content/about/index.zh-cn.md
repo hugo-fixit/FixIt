@@ -131,6 +131,8 @@ math:
 * [github-corners](https://github.com/tholman/github-corners)
 * [giscus](https://giscus.app/zh-CN)
 * [crypto-js](https://github.com/brix/crypto-js)
+* [vConsole](https://github.com/Tencent/vConsole)
+* [eruda](https://github.com/liriliri/eruda)
 </details>
 
 ### 许可协议

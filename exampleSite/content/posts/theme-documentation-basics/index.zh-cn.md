@@ -847,6 +847,11 @@ hugo
     c4u = false
     # 请勿公开展示！
     githubToken = ""
+    # 移动端开发者工具配置
+    [params.dev.mDevtools]
+      enable = false
+      # 支持 "vConsole", "eruda"
+      type = "vConsole"
 
 # Hugo 解析文档的配置
 [markup]

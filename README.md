@@ -225,6 +225,8 @@ Make sure that you follow [CODE_OF_CONDUCT.md](/CODE_OF_CONDUCT.md) while contri
 * [github-corners](https://github.com/tholman/github-corners)
 * [giscus](https://giscus.app/)
 * [crypto-js](https://github.com/brix/crypto-js)
+* [vConsole](https://github.com/Tencent/vConsole)
+* [eruda](https://github.com/liriliri/eruda)
 </details>
 
 ## License

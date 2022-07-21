@@ -846,6 +846,11 @@ Please open the code block below to view the complete sample configuration :(fa-
     c4u = false
     # Please do not expose to public!
     githubToken = ""
+    # Mobile Devtools confi
+    [params.dev.mDevtools]
+      enable = false
+      # "vConsole", "eruda" supported
+      type = "vConsole"
 
 # Markup related configuration in Hugo
 [markup]

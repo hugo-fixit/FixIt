@@ -936,6 +936,32 @@ class FixIt {
     this.config.encryption?.all && this.decryptor.init();
   }
 
+  initMDevtools() {
+    const type = this.config?.mDevtools
+    if (typeof window.orientation === 'undefined') {
+      return;
+    }
+    if(type === 'vConsole') {
+      const vConsole = new VConsole({
+        target: '.widgets',
+        theme: this.isDark ? 'dark' : 'light'
+      });
+      this._vConsoleOnSwitchTheme = this._vConsoleOnSwitchTheme || (() => {
+        vConsole.setOption('theme', this.isDark ? 'dark' : 'light');
+      });
+      this.switchThemeEventSet.add(this._vConsoleOnSwitchTheme);
+    }
+    if(type === 'eruda') {
+      eruda.init({
+        defaults: { theme: this.isDark ? 'Dark' : 'Light' }
+      });
+      this._erudaOnSwitchTheme = this._erudaOnSwitchTheme || (() => {
+        eruda.util.evalCss.setTheme(this.isDark ? 'Dark' : 'Light');
+      });
+      this.switchThemeEventSet.add(this._erudaOnSwitchTheme);
+    }
+  }
+
   onScroll() {
     const $headers = [];
     if (document.body.getAttribute('header-desktop') === 'auto') {
@@ -1057,6 +1083,7 @@ class FixIt {
       this.initSiteTime();
       this.initServiceWorker();
       this.initWatermark();
+      this.initMDevtools();
 
       window.setTimeout(() => {
         this.initComment();

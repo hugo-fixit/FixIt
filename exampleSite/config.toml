@@ -1173,6 +1173,8 @@ enableEmoji = true
     # For using the GitHub API, please do not expose to public!
     # 用于使用 GitHub API，请勿公开展示！
     githubToken = ""
+    # Mobile Devtools config
+    # 移动端开发者工具配置
     [params.dev.mDevtools]
       enable = false
       # "vConsole", "eruda" supported

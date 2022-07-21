@@ -11,18 +11,21 @@ All notable changes to this project will be documented in this file.
 - :tada: Feat: add `fixit-encryptor` shortcode ([#123](https://github.com/Lruihao/FixIt/issues/123))
 - :sparkles: Feat: add total word count feature in section and remove from footer ([#124](https://github.com/Lruihao/FixIt/issues/124))
 - :sparkles: Feat: enhance auto toc feature ([#104](https://github.com/Lruihao/FixIt/issues/104) [#136](https://github.com/Lruihao/FixIt/issues/136))
-- :sparkles: Feat(SEO): add options to make output baidu_urls.txt file ([#138](https://github.com/Lruihao/FixIt/issues/138))
 - :sparkles: Feat: add repost feature ([#156](https://github.com/Lruihao/FixIt/issues/156))
 - :sparkles: Feat: add developer options
+  - Check for updates option
+  - Mobile Devtools config ([#163](https://github.com/Lruihao/FixIt/pull/163))
 - :bug: Fix: unable to show search bar of header at mobile mode ([#143](https://github.com/Lruihao/FixIt/issues/143))
 - :bug: Fix: Giscus comment invalid config `inputPosition`
 - :bug: Fix: Waline comment invalid config `imageUploader = false` & `highlighter = false` (@yureiita[#161](https://github.com/Lruihao/FixIt/pull/161))
 - :bug: Fix: busuanzi logic error
 - :bug: Fix: close comment system logic error when the article was expired
 - :bug: Style: fix typos for rel attribute value noreferrer (@yureiita[#157](https://github.com/Lruihao/FixIt/pull/157))
+- :mag: Feat(SEO): add options to make output `baidu_urls.txt` file ([#138](https://github.com/Lruihao/FixIt/issues/138))
 - :truck: Perf: subdivide FixIt initialization
 - :art: Style: add theme colors variables and add common color styles
 - :art: Style: add scroll bar for auto toc ([#136](https://github.com/Lruihao/FixIt/issues/136))
+- :memo: Docs: revise theme documentations
 - :wrench: Feat(cdn): add unpkg cdn support
 - :wrench: Chore: change the theme minimum supported Hugo versions above **0.84.0**
 - :arrow_up: Chore(libs): update some third-party libraries
@@ -61,7 +64,7 @@ All notable changes to this project will be documented in this file.
 - :lipstick: Style: add some common CSS styles Class ([#101](https://github.com/Lruihao/FixIt/issues/101))
 - :lipstick: Style: add the gap between and icon and text at blending typesetting (@ctj12461, @Lruihao[#118](https://github.com/Lruihao/FixIt/pull/118))
 - :lipstick: Style: modify blockquote CSS
-- :memo: Docs: revised theme documentations
+- :memo: Docs: revise theme documentations
 - :zap: Perf: remove third-party library clipboard.js ([#84](https://github.com/Lruihao/FixIt/issues/84))
 - :pencil2: Docs: fix highlight url typo in `theme-documentation-built-in-shortcodes` (@d-baer[#85](https://github.com/Lruihao/FixIt/pull/85))
 - :wrench: Chore(i18n): improve translations for supported languages ([#119](https://github.com/Lruihao/FixIt/issues/119))
