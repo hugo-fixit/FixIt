@@ -22,10 +22,12 @@ FixIt 主题继承了这些主题的优秀功能，并在此基础上添加了�
 或者，在本地构建 [文档](https://fixit.lruihao.cn/zh-cn/)：
 
 ```bash
-hugo server --source=exampleSite
+git clone --recursive https://github.com/Lruihao/FixIt.git FixIt
+cd FixIt
+hugo server --source=docs
 ```
 
-当然，你也可以直接阅读 [FixIt 主题维基](https://github.com/Lruihao/FixIt/wiki)
+除此之外，还有[FixIt 主题维基](https://github.com/Lruihao/FixIt/wiki)。
 
 ## 迁移和升级
 

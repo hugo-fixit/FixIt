@@ -22,10 +22,12 @@ Head to this [documentation page](https://fixit.lruihao.cn/theme-documentation-b
 Or run [Documentation Site](https://fixit.lruihao.cn) locally:
 
 ```bash
-hugo server --source=exampleSite
+git clone --recursive https://github.com/Lruihao/FixIt.git FixIt
+cd FixIt
+hugo server --source=docs
 ```
 
-Of course, you can also read the [FixIt wiki](https://github.com/Lruihao/FixIt/wiki) directly.
+In addition, there is the [FixIt wiki](https://github.com/Lruihao/FixIt/wiki).
 
 ## Migrate and Update
 

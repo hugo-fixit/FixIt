@@ -19,10 +19,10 @@
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
     "babel": "npx babel src/js/theme.js --out-file assets/js/theme.min.js --source-maps --no-comments && npx babel src/js/service-worker.js --out-file static/service-worker.min.js --source-maps --no-comments",
-    "build": "npm run babel && hugo -v --source=exampleSite --themesDir ../.. --gc --minify",
+    "build": "npm run babel && hugo -v --source=docs --gc --minify",
     "build-lunr-segmentit": "browserify src/lib/lunr.segmentit.js -o assets/lib/lunr/lunr.segmentit.js -t babelify --presets @babel/preset-env --presets minify",
-    "server": "hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender --navigateToChanged --ignoreCache",
-    "server:production": "hugo server --source=exampleSite --themesDir ../.. -D --disableFastRender --navigateToChanged --ignoreCache -e production",
+    "server": "hugo server --source=docs -D --disableFastRender --navigateToChanged --ignoreCache",
+    "server:production": "hugo server --source=docs -D --disableFastRender --navigateToChanged --ignoreCache -e production",
     "start": "npm run babel && npm run server",
     "start:production": "npm run babel && npm run server:production",
     "algolia": "atomic-algolia"
