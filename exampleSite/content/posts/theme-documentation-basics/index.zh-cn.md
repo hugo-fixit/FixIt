@@ -198,14 +198,14 @@ hugo
 
 ### 3.1 网站配置 {#site-configuration}
 
-除了 [Hugo 全局配置](https://gohugo.io/overview/configuration/) 和 [菜单配置](#basic-configuration) 之外，**FixIt** 主题还允许您在网站配置中定义以下参数（这是一个示例 `config.toml`, 其内容为默认值）.
+除了 [Hugo 全局配置](https://gohugo.io/overview/configuration/) 和 [菜单配置](#basic-configuration) 之外，**FixIt** 主题还允许您在网站配置中定义以下参数（这是一个示例 `config.toml`, 其内容为默认值）。
 
 请打开下面的代码块查看完整的示例配置 :(fa-regular fa-hand-point-down fa-fw)::
 
 ```toml
 [params]
   # {{< version 0.2.15 changed >}} FixIt 主题版本
-  version = "0.2.X" # e.g. "0.2.X", "0.2.15", "v0.2.15"
+  version = "0.2.X" # 例如："0.2.X", "0.2.15", "v0.2.15" 等
   # 网站描述
   description = "这是我的全新 Hugo 网站"
   # 网站关键词
@@ -277,7 +277,7 @@ hugo
     # {{< version 0.2.0 >}} 页面头部导航栏标题配置
     [params.header.title]
       # LOGO 的 URL
-      logo = ""
+      logo = "/images/fixit.svg"
       # 标题名称
       name = ""
       # 你可以在名称（允许 HTML 格式）之前添加其他信息，例如图标
@@ -373,12 +373,12 @@ hugo
 
   # 作者的社交信息设置
   [params.social]
-    GitHub = "xxxx"
+    GitHub = "Lruihao"
     Linkedin = ""
-    Twitter = "xxxx"
-    Instagram = "xxxx"
-    Facebook = "xxxx"
-    Telegram = "xxxx"
+    Twitter = ""
+    Instagram = ""
+    Facebook = ""
+    Telegram = ""
     Medium = ""
     Gitlab = ""
     Youtubelegacy = ""
@@ -442,10 +442,10 @@ hugo
     BuyMeaCoffee = ""
     Linktree = ""
     QQ = ""
-    QQGroup = "" # https://qun.qq.com/join.html
+    QQGroup = "awbwdTtSQ_-H5QGzeJxdWgv6JMbNehNM" # https://qun.qq.com/join.html
     Diaspora = ""
     CSDN = ""
-    Email = "xxxx@xxxx.com"
+    Email = ""
     RSS = true # {{< version 0.2.0 >}}
 
   # {{< version 0.2.0 changed >}} 文章页面配置

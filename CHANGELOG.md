@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file.
 - :art: Style: add theme colors variables and add common color styles
 - :art: Style: add scroll bar for auto toc ([#136](https://github.com/Lruihao/FixIt/issues/136))
 - :memo: Docs: revise theme documentations
+- :heavy_plus_sign: Feat: add theme core configuration settings file
 - :wrench: Feat(cdn): add unpkg cdn support
 - :wrench: Chore: change the theme minimum supported Hugo versions above **0.84.0**
 - :arrow_up: Chore(libs): update some third-party libraries

@@ -108,19 +108,19 @@ theme = "FixIt"
     title = ""
     weight = 1
   [[menu.main]]
-    identifier = "tags"
-    pre = ""
-    post = ""
-    name = "Tags"
-    url = "/tags/"
-    title = ""
-    weight = 2
-  [[menu.main]]
     identifier = "categories"
     pre = ""
     post = ""
     name = "Categories"
     url = "/categories/"
+    title = ""
+    weight = 2
+  [[menu.main]]
+    identifier = "tags"
+    pre = ""
+    post = ""
+    name = "Tags"
+    url = "/tags/"
     title = ""
     weight = 3
 
@@ -203,7 +203,7 @@ Please open the code block below to view the complete sample configuration :(fa-
 ```toml
 [params]
   # {{< version 0.2.15 changed >}} FixIt theme version
-  version = "0.2.X" # e.g. "0.2.X", "0.2.15", "v0.2.15"
+  version = "0.2.X" # e.g. "0.2.X", "0.2.15", "v0.2.15" etc.
   # site description
   description = "This is My New Hugo Site"
   # site keywords
@@ -275,7 +275,7 @@ Please open the code block below to view the complete sample configuration :(fa-
     # {{< version 0.2.0 >}} Header title config
     [params.header.title]
       # URL of the LOGO
-      logo = ""
+      logo = "/images/fixit.svg"
       # title name
       name = ""
       # you can add extra information before the name (HTML format is supported), such as icons
@@ -371,12 +371,12 @@ Please open the code block below to view the complete sample configuration :(fa-
 
   # Social config about the author
   [params.social]
-    GitHub = "xxxx"
+    GitHub = "Lruihao"
     Linkedin = ""
-    Twitter = "xxxx"
-    Instagram = "xxxx"
-    Facebook = "xxxx"
-    Telegram = "xxxx"
+    Twitter = ""
+    Instagram = ""
+    Facebook = ""
+    Telegram = ""
     Medium = ""
     Gitlab = ""
     Youtubelegacy = ""
@@ -443,7 +443,7 @@ Please open the code block below to view the complete sample configuration :(fa-
     QQGroup = "" # https://qun.qq.com/join.html
     Diaspora = ""
     CSDN = ""
-    Email = "xxxx@xxxx.com"
+    Email = ""
     RSS = true # {{< version 0.2.0 >}}
 
   # {{< version 0.2.0 changed >}} Page config
