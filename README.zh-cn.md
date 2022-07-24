@@ -1,9 +1,8 @@
 # FixIt 主题 | Hugo
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Lruihao/FixIt?style=flat-square)](https://github.com/Lruihao/FixIt/releases)
-[![GitHub commits since tagged version](https://img.shields.io/github/commits-since/Lruihao/FixIt/v0.2.10?style=flat-square)](https://github.com/Lruihao/FixIt/compare/v0.2.10...master)
-[![Hugo](https://img.shields.io/badge/Hugo-%5E0.84.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
-[![License](https://img.shields.io/github/license/Lruihao/FixIt?style=flat-square)](https://github.com/Lruihao/FixIt/blob/master/LICENSE)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Lruihao/FixIt?style=flat)](https://github.com/Lruihao/FixIt/releases)
+[![Hugo](https://img.shields.io/badge/Hugo-%5E0.84.0-ff4088?style=flat&logo=hugo)](https://gohugo.io/)
+[![License](https://img.shields.io/github/license/Lruihao/FixIt?style=flat)](https://github.com/Lruihao/FixIt/blob/master/LICENSE)
 
 [English README](https://github.com/Lruihao/FixIt/blob/master/README.md) | 简体中文说明
 

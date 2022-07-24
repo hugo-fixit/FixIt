@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 - :truck: Perf: subdivide FixIt initialization
 - :art: Style: add theme colors variables and add common color styles
 - :art: Style: add scroll bar for auto toc ([#136](https://github.com/Lruihao/FixIt/issues/136))
+- :art: Style: change the version badge style form flat-square to flat
 - :memo: Docs: revise theme documentations
 - :heavy_plus_sign: Feat: add theme core configuration settings file
 - :wrench: Feat(cdn): add unpkg cdn support
