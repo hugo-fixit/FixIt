@@ -38,7 +38,7 @@
         {{- with $params.edit -}}
           {{- if .Enable -}}
             <span>
-              {{- $options := dict "Class" "link-to-edit" "Destination" (path.Join .Url $.File.Path) "Title" (T "editThisPage") "Content" (T "editThisPage") "externalIcon" false -}}
+              {{- $options := dict "Class" "link-to-edit" "Destination" (printf "%v/%v" (strings.TrimSuffix "/" .Url) $.File.Path) "Title" (T "editThisPage") "Content" (T "editThisPage") "externalIcon" false -}}
               {{- partial "plugin/link.html" $options -}}
             </span>
           {{- end -}}
