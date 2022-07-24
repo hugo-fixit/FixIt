@@ -872,7 +872,9 @@ class FixIt {
         .catch(function (error) {
           console.error('error: ', error);
         });
-      navigator.serviceWorker.ready.then(function (registration) {
+      navigator.serviceWorker
+        .ready
+        .then(function (registration) {
         // console.log('Service Worker Ready');
       });
     }
