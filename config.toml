@@ -360,8 +360,10 @@
     # FixIt 0.2.14 | NEW Post edit
     [params.page.edit]
       enable = false
-      # url = "https://github.com/user-name/repo-name/edit/branch-name/subdirectory-name" # Link for fork & edit
-      url = "" # Link for fork & edit
+      # FixIt 0.2.15 | CHANGED Link for fork & edit
+      # url = "/edit/branch-name/subdirectory-name" # base on `params.gitRepo`
+      # url = "https://github.com/user-name/repo-name/edit/branch-name/subdirectory-name" # full url
+      url = ""
     # FixIt 0.2.0 | NEW Mapbox GL JS config (https://docs.mapbox.com/mapbox-gl-js)
     [params.page.mapbox]
       # access token of Mapbox GL JS

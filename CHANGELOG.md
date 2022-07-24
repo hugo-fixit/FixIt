@@ -22,6 +22,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: close comment system logic error when the article was expired
 - :bug: Style: fix typos for rel attribute value noreferrer (@yureiita[#157](https://github.com/Lruihao/FixIt/pull/157))
 - :recycle: Refactor: migrate service-worker.js to js.build
+- :recycle: Refactor: change the post edit url splicing rules
 - :mag: Feat(SEO): add options to make output `baidu_urls.txt` file ([#138](https://github.com/Lruihao/FixIt/issues/138))
 - :truck: Perf: subdivide FixIt initialization
 - :art: Style: add theme colors variables and add common color styles

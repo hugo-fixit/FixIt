@@ -1,4 +1,5 @@
 {{- $params := .Scratch.Get "params" -}}
+{{- $gitRepo := (strings.TrimSuffix "/" .Site.Params.gitRepo) -}}
 
 <div class="post-footer" id="post-footer">
   <div class="post-info">
@@ -7,9 +8,9 @@
         <span title={{ "2006-01-02 15:04:05" | .Lastmod.Format }}>
           {{- with .Site.Params.dateformat | default "2006-01-02" | .Lastmod.Format -}}
             {{- dict "Date" . | T "updatedOnDate" -}}
-            {{- if $.Site.Params.gitRepo -}}
+            {{- if $gitRepo -}}
               {{- with $.GitInfo -}}
-                &nbsp;<a class="git-hash" href="{{ printf `%v/commit/%v` $.Site.Params.gitRepo .Hash }}" rel="external nofollow noopener noreferrer" target="_blank" title="commit by {{ .AuthorName }}({{ .AuthorEmail }}) {{ .Hash }}: {{ .Subject }}">
+                &nbsp;<a class="git-hash" href="{{ printf `%v/commit/%v` $gitRepo .Hash }}" rel="external nofollow noopener noreferrer" target="_blank" title="commit by {{ .AuthorName }}({{ .AuthorEmail }}) {{ .Hash }}: {{ .Subject }}">
                   <i class="fa-solid fa-hashtag fa-fw"></i>{{- .AbbreviatedHash -}}
                 </a>
               {{- end -}}
@@ -38,7 +39,11 @@
         {{- with $params.edit -}}
           {{- if .Enable -}}
             <span>
-              {{- $options := dict "Class" "link-to-edit" "Destination" (printf "%v/%v" (strings.TrimSuffix "/" .Url) $.File.Path) "Title" (T "editThisPage") "Content" (T "editThisPage") "externalIcon" false -}}
+              {{- $editUrl := printf "%v/%v" (strings.TrimSuffix "/" .Url) $.File.Path -}}
+              {{- if not (hasPrefix $editUrl "http") -}}
+                {{- $editUrl = printf "%v/%v" $gitRepo (strings.TrimPrefix "/" $editUrl) -}}
+              {{- end -}}
+              {{- $options := dict "Class" "link-to-edit" "Destination" $editUrl "Title" (T "editThisPage") "Content" (T "editThisPage") "externalIcon" false -}}
               {{- partial "plugin/link.html" $options -}}
             </span>
           {{- end -}}
