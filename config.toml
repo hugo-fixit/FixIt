@@ -386,7 +386,7 @@
       Twitter = true
       Facebook = true
       Linkedin = false
-      Whatsapp = true
+      Whatsapp = false
       Pinterest = false
       Tumblr = false
       HackerNews = false
@@ -394,7 +394,7 @@
       VK = false
       Buffer = false
       Xing = false
-      Line = true
+      Line = false
       Instapaper = false
       Pocket = false
       Digg = false
@@ -402,11 +402,11 @@
       Flipboard = false
       Weibo = true
       Renren = false
-      Myspace = true
-      Blogger = true
+      Myspace = false
+      Blogger = false
       Baidu = false
       Odnoklassniki = false
-      Evernote = true
+      Evernote = false
       Skype = false
       Trello = false
       Mix = false
