@@ -58,7 +58,7 @@ git submodule update --remote --merge
 Or this shell command:
 
 ```bash
-cd themes/FixIt && sh fixit_checker.sh
+sh themes/FixIt/fixit_checker.sh
 ```
 
 ## Why choose FixIt
