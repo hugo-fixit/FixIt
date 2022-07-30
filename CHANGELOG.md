@@ -24,7 +24,7 @@ All notable changes to this project will be documented in this file.
 - :recycle: Refactor: migrate service-worker.js to js.build
 - :recycle: Refactor: change the post edit url splicing rules
 - :mag: Feat(SEO): add options to make output `baidu_urls.txt` file ([#138](https://github.com/Lruihao/FixIt/issues/138))
-- :truck: Perf: subdivide FixIt initialization
+- :truck: Feat: migrate exampleSite to docs submodule
 - :art: Style: add theme colors variables and add common color styles
 - :art: Style: add scroll bar for auto toc ([#136](https://github.com/Lruihao/FixIt/issues/136))
 - :art: Style: change the version badge style form flat-square to flat
