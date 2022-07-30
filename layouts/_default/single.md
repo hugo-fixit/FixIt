@@ -10,4 +10,5 @@
 ---
 
 > {{ T "author"}}: {{ .Site.Author.name }}  
-> {{ .Permalink }}
+> URL: {{ .Permalink }}  
+{{ if $params.repost.enable | and (hasPrefix $params.repost.url "http") }}> {{ T "repost" }} URL: {{ $params.repost.url }}{{ end }}
