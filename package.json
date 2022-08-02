@@ -9,7 +9,7 @@
     "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.11",
     "atomic-algolia": "^0.3.19",
-    "babel-preset-minify": "^0.5.1",
+    "babel-preset-minify": "^0.5.2",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
     "core-js": "^3.22.0",
