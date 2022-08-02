@@ -1,10 +1,10 @@
 # FixIt Theme | Hugo
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Lruihao/FixIt?style=flat)](https://github.com/Lruihao/FixIt/releases)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/hugo-fixit/FixIt?style=flat)](https://github.com/hugo-fixit/FixIt/releases)
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.84.0-ff4088?style=flat&logo=hugo)](https://gohugo.io/)
-[![License](https://img.shields.io/github/license/Lruihao/FixIt?style=flat)](https://github.com/Lruihao/FixIt/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/hugo-fixit/FixIt?style=flat)](https://github.com/hugo-fixit/FixIt/blob/master/LICENSE)
 
-English README | [简体中文说明](https://github.com/Lruihao/FixIt/blob/master/README.zh-cn.md)
+English README | [简体中文说明](https://github.com/hugo-fixit/FixIt/blob/master/README.zh-cn.md)
 
 > **FixIt** is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/).
 
@@ -12,7 +12,7 @@ It is based on the original [LoveIt Theme](https://github.com/dillonzq/LoveIt), 
 
 The FixIt theme inherits the excellent features of these themes, and adds new features and optimizations on those basis. Please read [Why Choose FixIt](#why-choose-fixit) to learn more.
 
-![Hugo Theme FixIt](https://github.com/Lruihao/FixIt/raw/master/images/Apple-Devices-Preview.png)
+![Hugo Theme FixIt](https://github.com/hugo-fixit/FixIt/raw/master/images/Apple-Devices-Preview.png)
 
 ## [Getting started](https://fixit.lruihao.cn/categories/documentation/)
 
@@ -21,12 +21,12 @@ Head to this [documentation page](https://fixit.lruihao.cn/theme-documentation-b
 Or run [Documentation Site](https://fixit.lruihao.cn) locally:
 
 ```bash
-git clone --recursive https://github.com/Lruihao/FixIt.git FixIt
+git clone --recursive https://github.com/hugo-fixit/FixIt.git FixIt
 cd FixIt
 hugo server --source=docs
 ```
 
-In addition, there is the [FixIt wiki](https://github.com/Lruihao/FixIt/wiki).
+In addition, there is the [FixIt wiki](https://github.com/hugo-fixit/FixIt/wiki).
 
 ## Migrate and Update
 
@@ -35,7 +35,7 @@ If you are currently using the LoveIt theme (or some other themes), it is very e
 You can add this repo as a submodule of your site directory.
 
 ```bash
-git submodule add https://github.com/Lruihao/FixIt.git themes/FixIt
+git submodule add https://github.com/hugo-fixit/FixIt.git themes/FixIt
 ```
 
 Next, go to the `config.toml` and change the default theme to `FixIt`.
@@ -81,7 +81,7 @@ To see this theme in action, here are some live demo sites which are rendered wi
 * [FixIt Theme Official Website - Preview](https://pre.fixit.lruihao.cn)
 * [Lruihao's note](https://lruihao.cn)
 * [hiifong's blog](https://52at.ml)
-* Add a your site by [making a PR](https://github.com/Lruihao/FixIt/pulls) (e.g. [#111](https://github.com/Lruihao/FixIt/pull/111))
+* Add a your site by [making a PR](https://github.com/hugo-fixit/FixIt/pulls) (e.g. [#111](https://github.com/hugo-fixit/FixIt/pull/111))
 
 ## Features
 
@@ -169,17 +169,17 @@ FixIt supports the following languages:
 * Russian
 * Romanian
 * Vietnamese
-* [Contribute with a new language](https://github.com/Lruihao/FixIt/pulls)
+* [Contribute with a new language](https://github.com/hugo-fixit/FixIt/pulls)
 
 [Languages Compatibility](https://fixit.lruihao.cn/theme-documentation-basics/#language-compatibility)
 
-## [Roadmap](https://github.com/Lruihao/FixIt/projects/1)
+## [Roadmap](https://github.com/hugo-fixit/FixIt/projects/1)
 
-## [Changelog](https://github.com/Lruihao/FixIt/blob/master/CHANGELOG.md)
+## [Changelog](https://github.com/hugo-fixit/FixIt/blob/master/CHANGELOG.md)
 
 ## Questions, ideas, bugs, pull requests
 
-All feedback is welcome! Head over to the [issues](https://github.com/Lruihao/FixIt/issues) or [discussions](https://github.com/Lruihao/FixIt/discussions) tracker.
+All feedback is welcome! Head over to the [issues](https://github.com/hugo-fixit/FixIt/issues) or [discussions](https://github.com/hugo-fixit/FixIt/discussions) tracker.
 
 ## Contributing
 
@@ -232,7 +232,7 @@ Make sure that you follow [CODE_OF_CONDUCT.md](/CODE_OF_CONDUCT.md) while contri
 
 ## License
 
-FixIt is licensed under the **MIT** license. Check the [LICENSE file](https://github.com/Lruihao/FixIt/blob/master/LICENSE) for details.
+FixIt is licensed under the **MIT** license. Check the [LICENSE file](https://github.com/hugo-fixit/FixIt/blob/master/LICENSE) for details.
 
 ## Author
 

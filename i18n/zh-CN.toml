@@ -7,10 +7,10 @@
 other = "配置文件错误\n您还没有正确配置 FixIt 的版本参数。参考 https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/#basic-configuration"
 
 [compatibilityError]
-other = "兼容性错误 ({{ .From }} -> {{ .To }}):\n您进行了一次不兼容的更新。参考 https://github.com/Lruihao/FixIt/releases"
+other = "兼容性错误 ({{ .From }} -> {{ .To }}):\n您进行了一次不兼容的更新。参考 https://github.com/hugo-fixit/FixIt/releases"
 
 [RCVersionWarn]
-other = "您正在使用开发版的 FixIt，请考虑使用稳定版。\n见 https://github.com/Lruihao/FixIt/releases"
+other = "您正在使用开发版的 FixIt，请考虑使用稳定版。\n见 https://github.com/hugo-fixit/FixIt/releases"
 
 [devEnvWarn]
 other = "当前运行环境是“development”。“评论系统”，“CDN”和“fingerprint”不会启用。"

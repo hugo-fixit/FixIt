@@ -1,35 +1,5 @@
 # Contributors-Readme
-
-## Collaborators
-
-<!-- readme: collaborators -start -->
-<table>
-<tr>
-    <td align="center">
-        <a href="https://github.com/Lruihao">
-            <img src="https://avatars.githubusercontent.com/u/33419593?v=4" width="100;" alt="Lruihao"/>
-            <br />
-            <sub><b>Cell</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/pandaoh">
-            <img src="https://avatars.githubusercontent.com/u/38677740?v=4" width="100;" alt="pandaoh"/>
-            <br />
-            <sub><b>DoubleAm</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/hiifong">
-            <img src="https://avatars.githubusercontent.com/u/89133723?v=4" width="100;" alt="hiifong"/>
-            <br />
-            <sub><b>Hiifong</b></sub>
-        </a>
-    </td></tr>
-</table>
-<!-- readme: collaborators -end -->
-
-## [Contributors](https://github.com/Lruihao/FixIt/graphs/contributors)
+## [Contributors](https://github.com/hugo-fixit/FixIt/graphs/contributors)
 
 <!-- readme: contributors,d-baer -start -->
 <table>

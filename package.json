@@ -33,7 +33,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lruihao/FixIt.git"
+    "url": "git+https://github.com/hugo-fixit/FixIt.git"
   },
   "keywords": [
     "hugo",
@@ -42,7 +42,7 @@
   "author": "Lruihao",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Lruihao/FixIt/issues"
+    "url": "https://github.com/hugo-fixit/FixIt/issues"
   },
-  "homepage": "https://github.com/Lruihao/FixIt#readme"
+  "homepage": "https://github.com/hugo-fixit/FixIt#readme"
 }

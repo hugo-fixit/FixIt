@@ -1,5 +1,5 @@
 {{- $version := .Get 0 -}}
-{{- $url := printf "https://github.com/Lruihao/FixIt/releases/tag/v%v" $version -}}
+{{- $url := printf "https://github.com/hugo-fixit/FixIt/releases/tag/v%v" $version -}}
 {{- $type := .Get 1 | default "new" | lower -}}
 {{- $label := T $type -}}
 {{- $color := cond (eq $type "changed") "ff9101" "00b1ff" | cond (eq $type "deleted") "ff5252" -}}

@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: Questions 问题讨论
-    url: https://github.com/Lruihao/FixIt/discussions/new
+    url: https://github.com/hugo-fixit/FixIt/discussions/new
     about: Please ask questions in Discussion. 请在讨论中提问。
 
   - name: 官方 QQ 群

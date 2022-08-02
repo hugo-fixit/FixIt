@@ -674,7 +674,7 @@
   # FixIt 0.2.14 | NEW GitHub banner in the top-right or top-left corner
   [params.githubCorner]
     enable = false
-    permalink = "https://github.com/Lruihao/FixIt"
+    permalink = "https://github.com/hugo-fixit/FixIt"
     title = "View source on GitHub"
     position = "right" # left, right
   # FixIt 0.2.14 | NEW Gravatar config

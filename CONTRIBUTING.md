@@ -35,7 +35,7 @@ npm run start:production
 
 ```
 
-Finally, create a new pull request at https://github.com/Lruihao/FixIt/pulls to submit your contribution 🎉
+Finally, create a new pull request at https://github.com/hugo-fixit/FixIt/pulls to submit your contribution 🎉
 
 ## Git standard for developers
 

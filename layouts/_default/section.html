@@ -11,7 +11,7 @@
         <sup>{{- len .Pages -}}</sup>
       </h1>
       {{- /* Total word count */ -}}
-      {{- /* See https://github.com/Lruihao/FixIt/issues/124 */ -}}
+      {{- /* See https://github.com/hugo-fixit/FixIt/issues/124 */ -}}
       {{- $localData := newScratch -}}
       {{- range .Pages -}}
         {{- $localData.Add "totalWordCount" .WordCount -}}

@@ -1,18 +1,18 @@
 # FixIt 主题 | Hugo
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Lruihao/FixIt?style=flat)](https://github.com/Lruihao/FixIt/releases)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/hugo-fixit/FixIt?style=flat)](https://github.com/hugo-fixit/FixIt/releases)
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.84.0-ff4088?style=flat&logo=hugo)](https://gohugo.io/)
-[![License](https://img.shields.io/github/license/Lruihao/FixIt?style=flat)](https://github.com/Lruihao/FixIt/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/hugo-fixit/FixIt?style=flat)](https://github.com/hugo-fixit/FixIt/blob/master/LICENSE)
 
-[English README](https://github.com/Lruihao/FixIt/blob/master/README.md) | 简体中文说明
+[English README](https://github.com/hugo-fixit/FixIt/blob/master/README.md) | 简体中文说明
 
-> [FixIt](https://github.com/Lruihao/FixIt) 是一个**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。
+> [FixIt](https://github.com/hugo-fixit/FixIt) 是一个**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。
 
 它的原型基于 [LoveIt 主题](https://github.com/dillonzq/LoveIt), [LeaveIt 主题](https://github.com/liuzc/LeaveIt) 和 [KeepIt 主题](https://github.com/Fastbyte01/KeepIt)。
 
 FixIt 主题继承了这些主题的优秀功能，并在此基础上添加了新的功能与优化，请阅读 [为什么选择 FixIt](#为什么选择-FixIt) 来了解更多。
 
-![Hugo Theme FixIt](https://github.com/Lruihao/FixIt/raw/master/images/Apple-Devices-Preview.png)
+![Hugo Theme FixIt](https://github.com/hugo-fixit/FixIt/raw/master/images/Apple-Devices-Preview.png)
 
 ## [立即开始](https://fixit.lruihao.cn/zh-cn/categories/documentation/)
 
@@ -21,12 +21,12 @@ FixIt 主题继承了这些主题的优秀功能，并在此基础上添加了�
 或者，在本地构建 [文档](https://fixit.lruihao.cn/zh-cn/)：
 
 ```bash
-git clone --recursive https://github.com/Lruihao/FixIt.git FixIt
+git clone --recursive https://github.com/hugo-fixit/FixIt.git FixIt
 cd FixIt
 hugo server --source=docs
 ```
 
-除此之外，还有[FixIt 主题维基](https://github.com/Lruihao/FixIt/wiki)。
+除此之外，还有[FixIt 主题维基](https://github.com/hugo-fixit/FixIt/wiki)。
 
 ## 迁移和升级
 
@@ -35,7 +35,7 @@ hugo server --source=docs
 你可以将这个主题仓库添加为你的网站目录的子模块。
 
 ```bash
-git submodule add https://github.com/Lruihao/FixIt.git themes/FixIt
+git submodule add https://github.com/hugo-fixit/FixIt.git themes/FixIt
 ```
 
 接着，前往 `config.toml` 并将默认主题更改为 `FixIt`。
@@ -80,7 +80,7 @@ FixIt 主题继承了 LoveIt 等主题的优秀功能，并在它们的基础上
 * [FixIt 主题官网 - 预览](https://pre.fixit.lruihao.cn/zh-cn/)
 * [李瑞豪的博客](https://lruihao.cn)
 * [hiifong 的博客](https://52at.ml)
-* 你可以通过 [提交 PR](https://github.com/Lruihao/FixIt/pulls) 添加你的网站（例如：[#111](https://github.com/Lruihao/FixIt/pull/111)）
+* 你可以通过 [提交 PR](https://github.com/hugo-fixit/FixIt/pulls) 添加你的网站（例如：[#111](https://github.com/hugo-fixit/FixIt/pull/111)）
 
 ## 特性
 
@@ -168,17 +168,17 @@ FixIt 支持下列语言：
 * 俄语
 * 罗马尼亚语
 * 越南语
-* [贡献一种新的语言](https://github.com/Lruihao/FixIt/pulls)
+* [贡献一种新的语言](https://github.com/hugo-fixit/FixIt/pulls)
 
 [语言兼容性](https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/#language-compatibility)
 
-## [路线图](https://github.com/Lruihao/FixIt/projects/1)
+## [路线图](https://github.com/hugo-fixit/FixIt/projects/1)
 
-## [更新日志](https://github.com/Lruihao/FixIt/blob/master/CHANGELOG.md)
+## [更新日志](https://github.com/hugo-fixit/FixIt/blob/master/CHANGELOG.md)
 
 ## 问题、想法、bugs 和 PRs
 
-所有的反馈都是欢迎的！详见 [议题](https://github.com/Lruihao/FixIt/issues) 或者 [讨论](https://github.com/Lruihao/FixIt/discussions)。
+所有的反馈都是欢迎的！详见 [议题](https://github.com/hugo-fixit/FixIt/issues) 或者 [讨论](https://github.com/hugo-fixit/FixIt/discussions)。
 
 ## 参与贡献
 
@@ -231,7 +231,7 @@ FixIt 支持下列语言：
 
 ## 许可协议
 
-FixIt 根据 **MIT** 许可协议授权。 更多信息请查看 [LICENSE 文件](https://github.com/Lruihao/FixIt/blob/master/LICENSE)。
+FixIt 根据 **MIT** 许可协议授权。 更多信息请查看 [LICENSE 文件](https://github.com/hugo-fixit/FixIt/blob/master/LICENSE)。
 
 ## 作者
 

@@ -9,7 +9,7 @@
   {{- with $devOpts.githubtoken -}}
     {{- $header = dict "Authorization" (printf "token %v" .)  -}}
   {{- end -}}
-  {{- $latest = (getJSON "https://api.github.com/repos/Lruihao/FixIt/releases/latest" $header).tag_name -}}
+  {{- $latest = (getJSON "https://api.github.com/repos/hugo-fixit/FixIt/releases/latest" $header).tag_name -}}
 {{- end -}}
 
 {{- /* FixIt theme version detection */ -}}
