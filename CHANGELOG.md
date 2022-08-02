@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: busuanzi logic error
 - :bug: Fix: close comment system logic error when the article was expired
 - :bug: Style: fix typos for rel attribute value noreferrer (@yureiita[#157](https://github.com/hugo-fixit/FixIt/pull/157))
-- :recycle: Refactor: migrate service-worker.js to js.build
+- :recycle: Refactor: migrate theme js from src to assets by js.build
 - :recycle: Refactor: change the post edit url splicing rules
 - :mag: Feat(SEO): add options to make output `baidu_urls.txt` file ([#138](https://github.com/hugo-fixit/FixIt/issues/138))
 - :truck: Feat: migrate exampleSite to docs submodule
@@ -38,6 +38,12 @@ All notable changes to this project will be documented in this file.
   - Update Waline from 1.5.2 to 2.6.1
   - Update Valine from 1.4.18 to 1.5.0
   - Update mermaid from 8.13.3 to 9.1.3
+- :arrow_up: Chore(deps-dev):
+  - Bump babel-preset-minify from 0.5.1 to 0.5.2 ([#145](https://github.com/hugo-fixit/FixIt/pull/145))
+  - Bump core-js from 3.22.0 to 3.24.1 ([#168](https://github.com/hugo-fixit/FixIt/pull/168))
+  - Bump @babel/preset-env from 7.16.11 to 7.18.10 ([#169](https://github.com/hugo-fixit/FixIt/pull/169))
+  - Bump @babel/cli from 7.17.6 to 7.18.10 ([#170](https://github.com/hugo-fixit/FixIt/pull/170))
+  - Bump @babel/core from 7.17.9 to 7.18.10 ([#171](https://github.com/hugo-fixit/FixIt/pull/171))
 - **Full Changelog:** @Lruihao [`v0.2.14...v0.2.15`](https://github.com/hugo-fixit/FixIt/compare/v0.2.14...v0.2.15)
 
 ## v0.2.14 [2022.5.15]
