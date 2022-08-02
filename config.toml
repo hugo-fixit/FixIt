@@ -212,7 +212,7 @@
 
   # Social config about the author
   [params.social]
-    GitHub = "Lruihao"
+    GitHub = ""
     Linkedin = ""
     Twitter = ""
     Instagram = ""
