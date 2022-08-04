@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/hugo-fixit/FixIt/releases -->
 
 ## v0.2.15
+## v0.2.15 [2022.8.4]
 
 > Add content encryption feature(pages, partial), total word count, enhance auto toc, developer options and more.  
 > Snapshot: 
