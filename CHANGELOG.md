@@ -2,11 +2,14 @@
 All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/hugo-fixit/FixIt/releases -->
 
-## v0.2.15
+## v0.2.16
+
+- **Full Changelog:** @Lruihao [`v0.2.15...v0.2.16`](https://github.com/hugo-fixit/FixIt/compare/v0.2.15...v0.2.16)
+
 ## v0.2.15 [2022.8.4]
 
 > Add content encryption feature(pages, partial), total word count, enhance auto toc, developer options and more.  
-> Snapshot: 
+> Snapshot: <https://fixit-hvd1rg4ba-x-cell.vercel.app>
 
 - :truck: Feat: ransfer repository from Lruihao to hugo-fixit
 - :tada: Feat: add content encryption of pages ([#123](https://github.com/hugo-fixit/FixIt/issues/123))
