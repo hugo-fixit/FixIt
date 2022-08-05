@@ -1,4 +1,4 @@
-{{- $content := trim .Inner "\n" -}}
+{{- $content := trim (partial "function/dos2unix.html" .Inner) "\n" -}}
 {{- $classList := .Get "class" | slice -}}
 {{- $tag := .Get "tag" | default "div" -}}
 
