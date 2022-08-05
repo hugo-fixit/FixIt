@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## v0.2.16
 
+- :wrench: Chore: modify babel config and optimize theme.js compilation and loading
 - **Full Changelog:** @Lruihao [`v0.2.15...v0.2.16`](https://github.com/hugo-fixit/FixIt/compare/v0.2.15...v0.2.16)
 
 ## v0.2.15 [2022.8.4]
