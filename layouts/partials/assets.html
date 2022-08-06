@@ -223,11 +223,11 @@
 
 {{- /* PWA */ -}}
 {{- if .Site.Params.enablePWA | and hugo.IsProduction -}}
-  {{ $options := dict }}
-  {{ $options = dict "targetPath" "service-worker.min.js" | merge $options }}
-  {{ $options = dict "minify" true | merge $options }}
-  {{ $js := resources.Get "js/service-worker.js" | js.Build $options }}
-  {{ $_ := $js.RelPermalink }}
+  {{- $options := dict -}}
+  {{- $options = dict "targetPath" "service-worker.min.js" | merge $options -}}
+  {{- $options = dict "minify" true | merge $options -}}
+  {{- $js := resources.Get "js/service-worker.js" | js.Build $options -}}
+  {{- $_ := $js.RelPermalink -}}
   {{- $config = dict "enablePWA" .Site.Params.enablePWA | merge $config -}}
 {{- end -}}
 
