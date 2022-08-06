@@ -13,11 +13,9 @@
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
     "core-js": "^3.24.1",
-    "minimist": "^1.2.6",
     "segmentit": "^2.0.3"
   },
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "babel": "npx babel src/js/theme.js -o assets/js/theme.min.js -s",
     "build": "npm run babel && hugo -v --source=docs --gc --minify",
     "build:vercel": "npm run babel && hugo -v --source=docs --theme $PWD $BUILD_DRAFTS --gc --minify",
@@ -35,7 +33,8 @@
   },
   "keywords": [
     "hugo",
-    "theme"
+    "theme",
+    "fixit"
   ],
   "author": "Lruihao",
   "license": "MIT",

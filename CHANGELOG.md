@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 - :bug: Fix: add function doc2unix to unify new lines symbol between Windows and Unix/Mac OS
 - :wrench: Chore: modify babel config and optimize theme.js compilation and loading
+- :wrench: Chore(deps-dev):
+  - Remove minimist
 - **Full Changelog:** @Lruihao [`v0.2.15...v0.2.16`](https://github.com/hugo-fixit/FixIt/compare/v0.2.15...v0.2.16)
 
 ## v0.2.15 [2022.8.4]
