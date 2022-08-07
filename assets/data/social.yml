@@ -348,7 +348,7 @@ zhihu:
   Prefix: https://www.zhihu.com/people/
   Title: 知乎
   Icon:
-    Simpleicons: zhihu
+    Class: fab fa-zhihu fa-fw
 
 # 045: 豆瓣
 douban:
