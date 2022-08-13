@@ -4,6 +4,10 @@ Disallow: /images/
 Disallow: /js/
 Disallow: /css/
 
+Disallow: /*offline/
+Disallow: /*404.html$
+Disallow: /*.md$
+
 User-agent: MJ12bot
 Disallow: /
 
