@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: add custom aside template in post page ([#172](https://github.com/hugo-fixit/FixIt/issues/172))
 - :bug: Fix: add function doc2unix to unify new lines symbol between Windows and Unix/Mac OS
 - :bug: Fix: author display error in post and markdown file
-- :globe_with_meridians: Docs(i18n): update pt-br in i18n
+- :globe_with_meridians: Docs(i18n): update pt-br, de in i18n
 - :wrench: Chore: modify babel config and optimize theme.js compilation and loading
 - :wrench: Chore(deps-dev):
   - Remove minimist

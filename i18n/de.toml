@@ -21,7 +21,7 @@ other = "" # waitting for translation
 
 # === baseof ===
 [backToTop]
-other = "nach oben"
+other = "Nach oben"
 
 [viewComments]
 other = "Kommentare anzeigen"
@@ -71,12 +71,12 @@ other = "Sprache wählen"
 other = "Keine weiteren Übersetzungen"
 
 [switchTheme]
-other = "Thema wechseln"
+other = "Darstellung ändern"
 # === partials/header.html ===
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Ermöglicht durch {{ .Hugo }} | Thema - {{ .Theme }}"
+other = "Realisiert durch {{ .Hugo }} | Thema - {{ .Theme }}"
 
 [siteUV]
 other = "Besucher insgesamt"
@@ -152,21 +152,21 @@ other = "Inhalt"
 other = "" # waitting for translation
 
 [publishedOnDate]
-other = "veröffentlicht auf {{ .Date }}"
+other = "veröffentlicht an {{ .Date }}"
 
 [includedInCategories]
 other = "enthalten in {{ .Categories }}"
 
 [wordCount]
-one = "Ein wort"
-other = "{{ .Count }} wörter"
+one = "Ein Wort"
+other = "{{ .Count }} Wörter"
 
 [readingTime]
-one = "Eine minute"
-other = "{{ .Count }} minuten"
+one = "Eine Minute"
+other = "{{ .Count }} Minuten"
 
 [views]
-other = "aufrufe"
+other = "Aufrufe"
 
 [comments]
 other = "Kommentare"
@@ -229,13 +229,13 @@ other = "Sie sind nicht mit dem Internet verbunden, es stehen nur zwischengespei
 other = "Notiz"
 
 [abstract]
-other = "Ausblick"
+other = "Kurzfassung"
 
 [info]
 other = "Info"
 
 [tip]
-other = "Tip"
+other = "Tipp"
 
 [success]
 other = "Erfolg"
@@ -250,7 +250,7 @@ other = "Warnung"
 other = "Fehler"
 
 [danger]
-other = "Gefahr"
+other = "Vorsicht"
 
 [bug]
 other = "Bug"
