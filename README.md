@@ -81,6 +81,7 @@ To see this theme in action, here are some live demo sites which are rendered wi
 * [FixIt Theme Official Website - Preview](https://pre.fixit.lruihao.cn)
 * [Lruihao's note](https://lruihao.cn)
 * [hiifong's blog](https://52at.ml)
+* [wlanxww's blog](https://wlanxww.com)
 * Add a your site by [making a PR](https://github.com/hugo-fixit/FixIt/pulls) (e.g. [#111](https://github.com/hugo-fixit/FixIt/pull/111))
 
 ## Features
