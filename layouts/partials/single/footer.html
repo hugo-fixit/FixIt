@@ -18,13 +18,11 @@
           {{- end -}}
         </span>
       </div>
-      <div class="post-info-license {{ with $params.password }} d-none{{ end }}">
-        {{- with $params.license | string -}}
-          <span>
-            {{- . | safeHTML -}}
-          </span>
-        {{- end -}}
-      </div>
+      {{- with $params.license | string -}}
+        <div class="post-info-license{{ with $params.password }} d-none{{ end }}">
+          <span>{{- . | safeHTML -}} </span>
+        </div>
+      {{- end -}}
     </div>
     <div class="post-info-line{{ with $params.password }} d-none{{ end }}">
       <div class="post-info-md">
