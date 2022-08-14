@@ -34,7 +34,7 @@ other = "Posts"
 
 # === Taxonomy ===
 [allSome]
-other = "Todos {{ .Some }}"
+other = "{{ .Some }}"
 
 [totalwordCount]
 one = "" # waitting for translation
@@ -76,7 +76,7 @@ other = "Trocar tema"
 
 # === partials/footer.html ===
 [poweredBySome]
-other = "Movido a {{ .Hugo }} | Tema - {{ .Theme }}"
+other = "Possibilitado por {{ .Hugo }} | Tema - {{ .Theme }}"
 
 [siteUV]
 other = "Total de visitantes"
