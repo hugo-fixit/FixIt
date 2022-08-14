@@ -80,6 +80,7 @@ FixIt 主题继承了 LoveIt 等主题的优秀功能，并在它们的基础上
 * [FixIt 主题官网 - 预览](https://pre.fixit.lruihao.cn/zh-cn/)
 * [李瑞豪的博客](https://lruihao.cn)
 * [hiifong 的博客](https://52at.ml)
+* [wlanxww 的博客](https://wlanxww.com)
 * 你可以通过 [提交 PR](https://github.com/hugo-fixit/FixIt/pulls) 添加你的网站（例如：[#111](https://github.com/hugo-fixit/FixIt/pull/111)）
 
 ## 特性
