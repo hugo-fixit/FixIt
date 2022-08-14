@@ -5,17 +5,17 @@
 <table>
 <tr>
     <td align="center">
-        <a href="https://github.com/dillonzq">
-            <img src="https://avatars.githubusercontent.com/u/30786232?v=4" width="100;" alt="dillonzq"/>
-            <br />
-            <sub><b>Dillon</b></sub>
-        </a>
-    </td>
-    <td align="center">
         <a href="https://github.com/Lruihao">
             <img src="https://avatars.githubusercontent.com/u/33419593?v=4" width="100;" alt="Lruihao"/>
             <br />
             <sub><b>Cell</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/dillonzq">
+            <img src="https://avatars.githubusercontent.com/u/30786232?v=4" width="100;" alt="dillonzq"/>
+            <br />
+            <sub><b>Dillon</b></sub>
         </a>
     </td>
     <td align="center">
@@ -62,6 +62,13 @@
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/yureiita">
+            <img src="https://avatars.githubusercontent.com/u/26035759?v=4" width="100;" alt="yureiita"/>
+            <br />
+            <sub><b>Abdul Halim Daud</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/Fedomn">
             <img src="https://avatars.githubusercontent.com/u/6177727?v=4" width="100;" alt="Fedomn"/>
             <br />
@@ -81,15 +88,15 @@
             <br />
             <sub><b>Edte</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/solarpowerinncr">
             <img src="https://avatars.githubusercontent.com/u/37186560?v=4" width="100;" alt="solarpowerinncr"/>
             <br />
             <sub><b>Solarpowerinncr</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/youngxhui">
             <img src="https://avatars.githubusercontent.com/u/16971804?v=4" width="100;" alt="youngxhui"/>
@@ -102,13 +109,6 @@
             <img src="https://avatars.githubusercontent.com/u/19349444?v=4" width="100;" alt="dogukanerel"/>
             <br />
             <sub><b>Doğukan Erel</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/yureiita">
-            <img src="https://avatars.githubusercontent.com/u/26035759?v=4" width="100;" alt="yureiita"/>
-            <br />
-            <sub><b>Abdul Halim Daud</b></sub>
         </a>
     </td>
     <td align="center">
@@ -248,12 +248,20 @@
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/xueweiwujxw">
+            <img src="https://avatars.githubusercontent.com/u/45992640?v=4" width="100;" alt="xueweiwujxw"/>
+            <br />
+            <sub><b>Xuewei Wu</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/ziobron">
             <img src="https://avatars.githubusercontent.com/u/4595135?v=4" width="100;" alt="ziobron"/>
             <br />
             <sub><b>Łukasz Ziobroń</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/d-baer">
             <img src="https://avatars.githubusercontent.com/u/22482986?v=4" width="100;" alt="d-baer"/>
