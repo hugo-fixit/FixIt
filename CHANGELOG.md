@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 - :sparkles: Feat: add custom aside template in post page ([#172](https://github.com/hugo-fixit/FixIt/issues/172))
 - :bug: Fix: add function doc2unix to unify new lines symbol between Windows and Unix/Mac OS
+- :bug: Fix: author display error in post and markdown file
 - :wrench: Chore: modify babel config and optimize theme.js compilation and loading
 - :wrench: Chore(deps-dev):
   - Remove minimist

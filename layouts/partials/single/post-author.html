@@ -1,6 +1,6 @@
 {{- $params := .Scratch.Get "params" -}}
 
-{{- $author := .Site.Author | merge (dict "name" "" "link" (echoParam $params "authorlink") "email" (echoParam $params "authoremail")) -}}
+{{- $author := .Site.Author | merge (dict "name" "Anonymous" "link" (echoParam $params "authorlink") "email" (echoParam $params "authoremail")) -}}
 {{- $avatar := .Site.Params.home.profile.avatarURL -}}
 {{- if isset $params "author" | and (ne $params.author .Site.Author.name) -}}
   {{- $author = dict "name" $params.author | merge $author -}}
