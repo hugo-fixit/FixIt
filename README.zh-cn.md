@@ -74,6 +74,7 @@ FixIt 主题继承了 LoveIt 等主题的优秀功能，并在它们的基础上
 总之，如果你更偏好 FixIt 主题的设计语言和自由度，如果你和我一样喜欢个性化自定义主题，那么，FixIt 主题可能是更适合你。  
 
 ## 谁在用 FixIt
+
 为了直观地浏览主题特性，这里有一些基于 **FixIt** 主题渲染的预览网站。
 
 * [FixIt 主题官网](https://fixit.lruihao.cn/zh-cn/)
@@ -219,6 +220,7 @@ FixIt 支持下列语言：
 * [Valine](https://valine.js.org/)
 * [cookieconsent](https://github.com/osano/cookieconsent)
 * [cell-watermark](https://github.com/Lruihao/watermark)
+* [不蒜子](http://busuanzi.ibruce.info/)
 * [pangu.js](https://github.com/vinta/pangu.js)
 * [Artalk](https://artalk.js.org/)
 * [Waline](https://waline.js.org/)
@@ -228,6 +230,14 @@ FixIt 支持下列语言：
 * [crypto-js](https://github.com/brix/crypto-js)
 * [vConsole](https://github.com/Tencent/vConsole)
 * [eruda](https://github.com/liriliri/eruda)
+
+</details>
+
+<details>
+<summary>FixIt 主题还借鉴了以下项目的部分功能，同样感谢它们的作者：</summary>
+
+* [DoIt](https://github.com/HEIGE-PCloud/DoIt)
+
 </details>
 
 ## 许可协议
