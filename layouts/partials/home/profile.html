@@ -38,7 +38,8 @@
     <h2 class="home-subtitle">
       {{- if $profile.typeit -}}
         {{- $id := dict "Content" . "Scratch" $.Scratch "Id" "typeit-profile-subtitle" | partial "function/id.html" -}}
-        <div id="{{ $id }}" class="typeit"></div>
+        <span class="d-none">{{ . }}</span>
+        <span id="{{ $id }}" class="typeit"></span>
         {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
       {{- else -}}
         {{- . -}}
