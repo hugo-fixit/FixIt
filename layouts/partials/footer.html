@@ -18,7 +18,7 @@
       {{- end -}}
 
       {{- if .Site.Params.footer.copyright | or .Site.Params.footer.author | or .Site.Params.footer.license -}}
-        <div class="footer-line copyright">
+        <div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork">
           {{- /* Copyright year */ -}}
           {{- if ne .Site.Params.footer.copyright false -}}
             <i class="fa-regular fa-copyright fa-fw"></i>
