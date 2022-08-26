@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: use data attributes or class replace for custom attributes
 - :art: Style: change the default icons of some social links
 - :globe_with_meridians: Docs(i18n): update pt-br, de in i18n
+- :mag: Perf(SEO): enhance SEO performance
 - :wrench: Chore: modify babel config and optimize theme.js compilation and loading
 - :wrench: Chore(deps-dev):
   - Remove minimist
