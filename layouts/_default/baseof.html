@@ -1,7 +1,7 @@
 {{- partial "init/index.html" . -}}
 
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}">
+<html itemscope itemtype="http://schema.org/WebPage" lang="{{ .Site.LanguageCode }}">
   <head>
     {{ if (eq .Kind "home") | and (ne .Site.Params.disableThemeInject true) }}
       <meta name="theme" content='FixIt {{ .Scratch.Get "version" }}'>
@@ -9,9 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>
-      {{- block "title" . }}{{ .Site.Title }}{{ end -}}
-    </title>
+    <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
 
     {{- partial "head/meta.html" . -}}
     {{- partial "head/link.html" . -}}
