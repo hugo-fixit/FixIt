@@ -1,7 +1,5 @@
 {{- if .Content -}}
-  <script type="text/javascript">
-    {{- .Content | safeJS -}}
-  </script>
+  <script>{{- .Content | safeJS -}}</script>
 {{- else if strings.HasPrefix .Source "<script" -}}
   {{- safeHTML .Source -}}
 {{- else -}}
@@ -22,6 +20,6 @@
       {{- end -}}
       {{- $src = $resource.RelPermalink -}}
     {{- end -}}
-    <script type="text/javascript" src="{{ $src }}"{{ if .Crossorigin }} crossorigin="anonymous"{{ end }}{{ with $integrity }} integrity="{{ . }}"{{ end }}{{ if .Async }} async{{ end }}{{ if .Defer }} defer{{ end }}{{ with .Attr }} {{ . | safeHTMLAttr }}{{ end }}></script>
+    <script src="{{ $src }}"{{ if .Crossorigin }} crossorigin="anonymous"{{ end }}{{ with $integrity }} integrity="{{ . }}"{{ end }}{{ if .Async }} async{{ end }}{{ if .Defer }} defer{{ end }}{{ with .Attr }} {{ . | safeHTMLAttr }}{{ end }}></script>
   {{- end -}}
 {{- end -}}

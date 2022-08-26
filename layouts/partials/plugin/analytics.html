@@ -3,7 +3,7 @@
 {{- if $analytics.enable -}}
   {{- /* Google Analytics */ -}}
   {{- with $analytics.google.id -}}
-    <script type="text/javascript">
+    <script>
       window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
       gtag('config', '{{ . }}'{{ if $analytics.google.anonymizeIP }}, { 'anonymize_ip': true }{{ end }});
     </script>
@@ -12,7 +12,7 @@
 
   {{- /* Fathom Analytics */ -}}
   {{- with $analytics.fathom.id -}}
-    <script type="text/javascript">
+    <script>
       window.fathom=window.fathom||function(){(fathom.q=fathom.q||[]).push(arguments);};
       fathom('set', 'siteId', '{{ . }}');
       fathom('trackPageview');
