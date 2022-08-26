@@ -140,7 +140,7 @@
 
     {{- /* Static TOC */ -}}
     {{- if (ne $toc.enable false) | and (ne $tocEmpty true) -}}
-      <div class="details toc{{ with $params.password }} d-none{{ end }}" id="toc-static" kept="{{ if $toc.keepStatic }}true{{ else }}false{{ end }}">
+      <div class="details toc{{ with $params.password }} d-none{{ end }}" id="toc-static" data-kept="{{ if $toc.keepStatic }}true{{ else }}false{{ end }}">
         <div class="details-summary toc-title">
           <span>{{ T "contents" }}</span>
           <span><i class="details-icon fa-solid fa-angle-right"></i></span>

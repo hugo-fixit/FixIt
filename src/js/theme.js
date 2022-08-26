@@ -50,7 +50,7 @@ class FixIt {
   constructor() {
     this.config = window.config;
     this.data = this.config.data;
-    this.isDark = document.body.getAttribute('theme') === 'dark';
+    this.isDark = document.body.getAttribute('data-theme') === 'dark';
     this.util = new Util();
     this.newScrollTop = this.util.getScrollTop();
     this.oldScrollTop = this.newScrollTop;
@@ -93,7 +93,7 @@ class FixIt {
 
   initMenuDesktop() {
     // This is a dirty hack for fixing sub menu position error in desktop header
-    this.util.forEach(document.querySelectorAll('[has-children], #header-desktop .language'), ($item) => {
+    this.util.forEach(document.querySelectorAll('.has-children, #header-desktop .language'), ($item) => {
       $item.addEventListener('mouseover', function(){
         this.querySelector('.sub-menu').style.left= `${this.getBoundingClientRect().left}px`;
       })
@@ -127,7 +127,7 @@ class FixIt {
   initSwitchTheme() {
     this.util.forEach(document.getElementsByClassName('theme-switch'), ($themeSwitch) => {
       $themeSwitch.addEventListener('click', () => {
-        document.body.setAttribute('theme', document.body.getAttribute('theme') === 'dark' ? 'light' : 'dark');
+        document.body.setAttribute('data-theme', document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
         this.isDark = !this.isDark;
         window.localStorage && localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
         for (let event of this.switchThemeEventSet) {
@@ -505,7 +505,7 @@ class FixIt {
     if ($tocCore === null) {
       return;
     }
-    if (document.getElementById('toc-static').getAttribute('kept') === 'true' || this.util.isTocStatic()) {
+    if (document.getElementById('toc-static').getAttribute('date-kept') === 'true' || this.util.isTocStatic()) {
       const $tocContentStatic = document.getElementById('toc-content-static');
       if ($tocCore.parentElement !== $tocContentStatic) {
         $tocCore.parentElement.removeChild($tocCore);
@@ -526,7 +526,7 @@ class FixIt {
       const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
       const $tocLiElements = $tocCore.getElementsByTagName('li');
       const $headerLinkElements = document.getElementsByClassName('header-link');
-      const headerIsFixed = document.body.getAttribute('header-desktop') !== 'normal';
+      const headerIsFixed = document.body.getAttribute('data-header-desktop') !== 'normal';
       const headerHeight = document.getElementById('header-desktop').offsetHeight;
       this._tocOnScroll = this._tocOnScroll || (() => {
         const $comments = document.getElementById('comments');
@@ -966,10 +966,10 @@ class FixIt {
 
   onScroll() {
     const $headers = [];
-    if (document.body.getAttribute('header-desktop') === 'auto') {
+    if (document.body.getAttribute('data-header-desktop') === 'auto') {
       $headers.push(document.getElementById('header-desktop'));
     }
-    if (document.body.getAttribute('header-mobile') === 'auto') {
+    if (document.body.getAttribute('data-header-mobile') === 'auto') {
       $headers.push(document.getElementById('header-mobile'));
     }
     if (document.getElementById('comments')) {

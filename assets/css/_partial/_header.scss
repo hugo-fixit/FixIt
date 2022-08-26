@@ -4,7 +4,7 @@ header {
   background-color: $header-background-color;
   @include transition(box-shadow 0.3s ease);
 
-  [theme='dark'] & {
+  [data-theme='dark'] & {
     background-color: $header-background-color-dark;
   }
 
@@ -60,7 +60,7 @@ header {
       font-size: .875em;
       color: $global-font-color;
 
-      [theme='dark'] & {
+      [data-theme='dark'] & {
         color: $global-font-color-dark;
       }
 
@@ -75,7 +75,7 @@ header {
         font-weight: bold;
         color: $menu-active-color;
 
-        [theme='dark'] & {
+        [data-theme='dark'] & {
           color: $menu-active-color-dark;
         }
       }
@@ -133,7 +133,7 @@ header {
       padding: 0 2rem 0 2rem;
     }
 
-    [theme='dark'] & {
+    [data-theme='dark'] & {
       input {
         color: $global-font-color-dark;
         background-color: $search-background-color-dark;
@@ -147,7 +147,7 @@ header {
     .search-button {
       color: $global-font-secondary-color;
 
-      [theme='dark'] & {
+      [data-theme='dark'] & {
         color: $global-font-secondary-color-dark;
       }
     }
@@ -174,7 +174,7 @@ header {
   line-height: $header-height;
   box-sizing: border-box;
 
-  [header-desktop='normal'] & {
+  [data-header-desktop='normal'] & {
     position: static;
   }
 
@@ -188,7 +188,7 @@ header {
     padding: 0 2rem 0 MAX(10vh, $header-height);
     height: 100%;
 
-    &[github-corner='right'] {
+    &[data-github-corner='right'] {
       padding-right: $header-height;
     }
 
@@ -218,7 +218,7 @@ header {
           padding: 0;
           border-left: 1px dashed lighten($global-font-secondary-color, 20%);
 
-          [theme='dark'] & {
+          [data-theme='dark'] & {
             border-left-color: darken($global-font-secondary-color-dark, 20%);
           }
         }
@@ -240,7 +240,7 @@ header {
         background-color: $header-background-color;
         @include transition(box-shadow 0.3s ease);
 
-        [theme='dark'] & {
+        [data-theme='dark'] & {
           background-color: $header-background-color-dark;
           border-color: $global-border-color-dark;
         }
@@ -273,7 +273,7 @@ header {
   min-height: $header-height;
   line-height: $header-height;
 
-  [header-mobile='normal'] & {
+  [data-header-mobile='normal'] & {
     position: static;
   }
 
@@ -304,7 +304,7 @@ header {
           @include border-radius(3px);
           @include transition(all 0.3s ease-in-out);
 
-          [theme='dark'] & {
+          [data-theme='dark'] & {
             background: $global-font-color-dark;
           }
         }
@@ -381,7 +381,7 @@ header {
         &:hover {
           background-color: lighten($global-font-secondary-color, 24%);
 
-          [theme='dark'] & {
+          [data-theme='dark'] & {
             background-color: darken($global-font-secondary-color-dark, 24%);
           }
         }
@@ -430,7 +430,7 @@ header {
         .menu-item:hover {
           background-color: lighten($global-font-secondary-color, 20%);
 
-          [theme='dark'] & {
+          [data-theme='dark'] & {
             background-color: darken($global-font-secondary-color-dark, 20%);
           }
         }
@@ -440,7 +440,7 @@ header {
         display: block;
       }
 
-      [theme='dark'] & {
+      [data-theme='dark'] & {
         background: $header-background-color-dark;
         border-top-color: $global-border-color-dark;
       }
@@ -487,7 +487,7 @@ header {
     right: 0 !important;
     background-color: $global-background-color;
 
-    [theme='dark'] & {
+    [data-theme='dark'] & {
       background-color: $global-background-color-dark;
     }
 
@@ -514,7 +514,7 @@ header {
           text-align: right;
           color: $global-font-secondary-color;
 
-          [theme='dark'] & {
+          [data-theme='dark'] & {
             color: $global-font-secondary-color-dark;
           }
         }
@@ -528,7 +528,7 @@ header {
           @include overflow-wrap(break-word);
           color: $global-font-secondary-color;
 
-          [theme='dark'] & {
+          [data-theme='dark'] & {
             color: $global-font-secondary-color-dark;
           }
         }
@@ -537,7 +537,7 @@ header {
           font-style: normal;
           background-color: $selection-color;
 
-          [theme='dark'] & {
+          [data-theme='dark'] & {
             background-color: $selection-color-dark;
           }
         }
@@ -545,7 +545,7 @@ header {
         &.cursor {
           background: darken($code-background-color, 5%);
 
-          [theme='dark'] & {
+          [data-theme='dark'] & {
             background: lighten($code-background-color-dark, 5%);
           }
         }
@@ -563,7 +563,7 @@ header {
       .search-query {
         font-weight: bold;
 
-        [theme='dark'] & {
+        [data-theme='dark'] & {
           color: #ddd;
         }
       }
@@ -575,7 +575,7 @@ header {
       font-size: 0.8rem;
       color: $global-font-secondary-color;
 
-      [theme='dark'] {
+      [data-theme='dark'] {
         color: $global-font-secondary-color-dark;
       }
 

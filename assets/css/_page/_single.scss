@@ -33,7 +33,7 @@
       display: inline-block;
     }
 
-    [theme='dark'] & {
+    [data-theme='dark'] & {
       color: $global-font-secondary-color-dark;
     }
 
@@ -52,7 +52,7 @@
         object-position: center;
         @include object-fit(cover);
 
-        [theme='dark'] & {
+        [data-theme='dark'] & {
           border-color: $global-border-color-dark;
         }
       }
@@ -117,7 +117,7 @@
       font-weight: bold;
       margin: 1.2rem 0;
 
-      [theme='dark'] & {
+      [data-theme='dark'] & {
         font-weight: bolder;
       }
     }
@@ -132,7 +132,7 @@
         margin-right: 0.3125rem;
         color: $single-link-color;
 
-        [theme='dark'] & {
+        [data-theme='dark'] & {
           color: $single-link-color-dark;
         }
       }
@@ -150,7 +150,7 @@
     strong {
       font-weight: bold;
 
-      [theme='dark'] & {
+      [data-theme='dark'] & {
         color: #ddd;
       }
     }
@@ -161,14 +161,14 @@
       white-space: normal;
       @include overflow-wrap(break-word);
 
-      [theme='dark'] & b,
-      [theme='dark'] & strong {
+      [data-theme='dark'] & b,
+      [data-theme='dark'] & strong {
         color: $single-link-color-dark;
       }
     }
 
-    [theme='dark'] a:hover b,
-    [theme='dark'] a:hover strong {
+    [data-theme='dark'] a:hover b,
+    [data-theme='dark'] a:hover strong {
       color: $single-link-hover-color-dark;
     }
 
@@ -189,7 +189,7 @@
         color: $global-font-secondary-color;
       }
 
-      [theme='dark'] & {
+      [data-theme='dark'] & {
         background: $code-background-color-dark;
 
         rt {
@@ -204,7 +204,7 @@
       &::-webkit-scrollbar {
         background-color: $table-background-color;
 
-        [theme='dark'] & {
+        [data-theme='dark'] & {
           background-color: $table-background-color-dark;
         }
       }
@@ -217,14 +217,14 @@
         background: $table-background-color;
         border-collapse: collapse;
 
-        [theme='dark'] & {
+        [data-theme='dark'] & {
           background: $table-background-color-dark;
         }
 
         thead {
           background: $table-thead-color;
 
-          [theme='dark'] & {
+          [data-theme='dark'] & {
             background-color: $table-thead-color-dark;
           }
         }
@@ -233,7 +233,7 @@
           & tr:nth-child(odd) {
             background: darken($table-background-color, 2.25%);
 
-            [theme='dark'] & {
+            [data-theme='dark'] & {
               background-color: lighten($table-background-color-dark, 2.75%);
             }
           }
@@ -241,7 +241,7 @@
           & tr:hover {
             background: darken($table-background-color, 4.5%);
 
-            [theme='dark'] & {
+            [data-theme='dark'] & {
               background-color: lighten($table-background-color-dark, 5.5%);
             }
           }
@@ -252,7 +252,7 @@
           padding: 0.3rem 1rem;
           border: 1px solid darken($table-thead-color, 2%);
 
-          [theme='dark'] & {
+          [data-theme='dark'] & {
             border-color: darken($table-thead-color-dark, 2%);
           }
         }
@@ -305,7 +305,7 @@
         padding-left: 1.5em;
       }
 
-      [theme='dark'] & {
+      [data-theme='dark'] & {
         color: $blockquote-color-dark;
         border-left-color: $global-border-color-dark;
       }
@@ -316,7 +316,7 @@
     .footnotes {
       color: $global-font-secondary-color;
 
-      [theme='dark'] & {
+      [data-theme='dark'] & {
         color: $global-font-secondary-color-dark;
       }
 
@@ -334,7 +334,7 @@
       border-top: 1px dashed $global-border-color;
       border-bottom: none;
 
-      [theme='dark'] & {
+      [data-theme='dark'] & {
         border-top: 1px dashed $global-border-color-dark;
       }
     }
@@ -351,7 +351,7 @@
       font-family: $code-font-family;
       color: $code-color;
 
-      [theme='dark'] & {
+      [data-theme='dark'] & {
         background-color: $global-background-color-dark;
         border: 1px solid $global-border-color-dark;
         border-bottom-color: $global-border-color-dark;

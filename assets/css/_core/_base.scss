@@ -33,7 +33,7 @@ html {
 ::selection {
   background-color: $selection-color;
 
-  [theme='dark'] & {
+  [data-theme='dark'] & {
     background-color: $selection-color-dark;
   }
 }
@@ -44,7 +44,7 @@ body {
   @include overflow-wrap(break-word);
   scrollbar-color: auto;
 
-  &[theme='dark'] {
+  &[data-theme='dark'] {
     color: $global-font-color-dark;
     background-color: $global-background-color-dark;
   }

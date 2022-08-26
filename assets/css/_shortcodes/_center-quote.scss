@@ -23,7 +23,7 @@
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
 
-    [theme='dark'] & {
+    [data-theme='dark'] & {
       border-top-color: $global-border-color-dark;
     }
   }
@@ -36,7 +36,7 @@
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
 
-    [theme='dark'] & {
+    [data-theme='dark'] & {
       border-bottom-color: $global-border-color-dark;
     }
   }

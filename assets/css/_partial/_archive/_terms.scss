@@ -60,7 +60,7 @@
     background-color: transparent;
   }
 
-  [theme='dark'] & {
+  [data-theme='dark'] & {
     color: $global-link-color-dark;
 
     &:hover {
@@ -75,7 +75,7 @@
   white-space: nowrap;
   font-variant-numeric: tabular-nums lining-nums;
 
-  [theme='dark'] & {
+  [data-theme='dark'] & {
     color: $global-font-secondary-color-dark;
   }
 }

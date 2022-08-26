@@ -29,7 +29,7 @@
     outline: none;
   }
 
-  [theme='dark'] & {
+  [data-theme='dark'] & {
     color: $global-font-secondary-color-dark;
     background: $header-background-color-dark;
 

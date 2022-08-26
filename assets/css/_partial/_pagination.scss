@@ -16,7 +16,7 @@
     text-decoration: none;
     @include transition(0.3s);
 
-    [theme='dark'] & {
+    [data-theme='dark'] & {
       color: $pagination-link-color-dark;
     }
   }
@@ -36,7 +36,7 @@
       color: $pagination-link-hover-color;
     }
 
-    [theme='dark'] &:hover a {
+    [data-theme='dark'] &:hover a {
       color: $pagination-link-hover-color-dark;
     }
 
@@ -51,8 +51,8 @@
       bottom: 0px;
     }
 
-    [theme='dark'] &:before,
-    [theme='dark'] &:after {
+    [data-theme='dark'] &:before,
+    [data-theme='dark'] &:after {
       background: $pagination-link-hover-color-dark;
     }
 
@@ -81,7 +81,7 @@
         color: $pagination-link-hover-color;
       }
 
-      [theme='dark'] & a {
+      [data-theme='dark'] & a {
         color: $pagination-link-hover-color-dark;
       }
 

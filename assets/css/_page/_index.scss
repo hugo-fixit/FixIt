@@ -5,7 +5,7 @@
     [id] {
       scroll-margin-top: $header-height;
 
-      [header-desktop='normal'] & {
+      [data-header-desktop='normal'] & {
         scroll-margin-top: 0;
       }
     }

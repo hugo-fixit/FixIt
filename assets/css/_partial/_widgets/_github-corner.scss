@@ -28,7 +28,7 @@
     color: $github-corner-color;
     fill: $github-corner-fill;
 
-    [theme='dark'] & {
+    [data-theme='dark'] & {
       color: $github-corner-color-dark;
       fill: $github-corner-fill-dark;
     }

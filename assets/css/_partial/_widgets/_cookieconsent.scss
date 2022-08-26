@@ -7,7 +7,7 @@
       background-color: #ccc;
     }
 
-    [theme='dark'] & {
+    [data-theme='dark'] & {
       color: $global-font-color;
 
       &:hover,

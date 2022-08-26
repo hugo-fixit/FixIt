@@ -19,7 +19,7 @@
         margin-right: 0.5rem;
         color: $single-link-color;
 
-        [theme='dark'] & {
+        [data-theme='dark'] & {
           color: $single-link-color-dark;
         }
       }
@@ -37,7 +37,7 @@
       color: $global-font-secondary-color;
     }
 
-    [theme='dark'] & {
+    [data-theme='dark'] & {
       background: $code-background-color-dark;
 
       rt {
@@ -69,7 +69,7 @@
       margin-right: 0.5rem;
       color: $global-border-color;
 
-      [theme='dark'] & {
+      [data-theme='dark'] & {
         color: $global-border-color-dark;
       }
     }
@@ -110,14 +110,14 @@
       font-weight: bold;
       color: $single-link-color;
 
-      [theme='dark'] & {
+      [data-theme='dark'] & {
         color: $single-link-color-dark;
       }
 
       &::before {
         color: $single-link-hover-color;
 
-        [theme='dark'] & {
+        [data-theme='dark'] & {
           color: $single-link-hover-color-dark;
         }
       }
@@ -129,7 +129,7 @@
   display: none;
   margin: 0.8rem 0;
 
-  &[kept='true'] {
+  &[data-kept='true'] {
     display: block;
   }
 
@@ -140,7 +140,7 @@
     padding: 0 0.75rem;
     background: darken($code-background-color, 3%);
 
-    [theme='dark'] & {
+    [data-theme='dark'] & {
       background: darken($code-background-color-dark, 6%);
     }
   }
@@ -153,7 +153,7 @@
       padding: 0.4rem 1rem 0.4rem 1.8rem;
     }
 
-    [theme='dark'] & {
+    [data-theme='dark'] & {
       background-color: $code-background-color-dark;
     }
   }
@@ -162,7 +162,7 @@
     .toc-title {
       background: darken($code-background-color, 6%);
 
-      [theme='dark'] & {
+      [data-theme='dark'] & {
         background: darken($code-background-color-dark, 3%);
       }
     }

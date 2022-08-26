@@ -2,11 +2,11 @@
   .page {
     width: 60%;
 
-    [page-style='wide'] & {
+    [data-page-style='wide'] & {
       width: 64%;
     }
 
-    [page-style='narrow'] & {
+    [data-page-style='narrow'] & {
       max-width: 800px;
     }
   }
@@ -14,11 +14,11 @@
   aside {
     width: 20%;
 
-    [page-style='wide'] & {
+    [data-page-style='wide'] & {
       width: 18%;
     }
 
-    [page-style='narrow'] & {
+    [data-page-style='narrow'] & {
       width: calc(50% - 400px);
     }
   }
@@ -28,7 +28,7 @@
   .page {
     width: 56%;
 
-    [page-style='wide'] & {
+    [data-page-style='wide'] & {
       width: 60%;
     }
   }
@@ -36,7 +36,7 @@
   aside {
     width: 22%;
 
-    [page-style='wide'] & {
+    [data-page-style='wide'] & {
       width: 20%;
     }
   }
@@ -46,7 +46,7 @@
   .page {
     width: 52%;
 
-    [page-style='wide'] & {
+    [data-page-style='wide'] & {
       width: 56%;
     }
   }
@@ -54,7 +54,7 @@
   aside {
     width: 24%;
 
-    [page-style='wide'] & {
+    [data-page-style='wide'] & {
       width: 22%;
     }
   }
@@ -105,7 +105,7 @@
 
     .content {
       [id] {
-        [header-mobile='normal'] & {
+        [data-header-mobile='normal'] & {
           scroll-margin-top: 0;
         }
       }

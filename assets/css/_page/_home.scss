@@ -59,14 +59,14 @@
       padding: 0.5rem;
       color: $global-font-secondary-color;
 
-      [theme='dark'] & {
+      [data-theme='dark'] & {
         color: $global-font-secondary-color-dark;
       }
     }
   }
 }
 
-.home[posts] {
+.home.posts {
   .home-profile {
     @include transform(translateY(0));
     padding-top: 2rem;
@@ -82,7 +82,7 @@
     color: $global-font-color;
     border-bottom: 1px dashed $global-border-color;
 
-    [theme='dark'] & {
+    [data-theme='dark'] & {
       color: $global-font-color-dark;
       border-bottom: 1px dashed $global-border-color-dark;
     }
@@ -128,7 +128,7 @@
       @include overflow-wrap(break-word);
       color: $global-font-secondary-color;
 
-      [theme='dark'] & {
+      [data-theme='dark'] & {
         color: $global-font-secondary-color-dark;
       }
 
@@ -158,7 +158,7 @@
       strong {
         color: $global-font-secondary-color;
 
-        [theme='dark'] & {
+        [data-theme='dark'] & {
           color: $global-font-secondary-color-dark;
         }
       }

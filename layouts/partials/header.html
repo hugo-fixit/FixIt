@@ -2,7 +2,7 @@
 
 {{- /* Desktop header */ -}}
 <header class="desktop" id="header-desktop">
-  <div class="header-wrapper"{{ if .Site.Params.githubCorner.enable }} github-corner="{{ .Site.Params.githubCorner.position }}"{{ end }}>
+  <div class="header-wrapper"{{ if .Site.Params.githubCorner.enable }} data-github-corner="{{ .Site.Params.githubCorner.position }}"{{ end }}>
     <div class="header-title">
       <a href="{{ .Site.Home.RelPermalink }}" title="{{ .Site.Title }}">
         {{- with .Site.Params.header.title -}}
@@ -44,10 +44,7 @@
             {{- $url = .RelPermalink -}}
           {{- end -}}
           {{- if (ne .Params.Draft true) | or $buildDrafts -}}
-            <li
-              class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}"
-              {{ if .HasChildren }}has-children{{ end }}
-            >
+            <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }} {{ if .HasChildren }}has-children{{ end }}">
               <a
                 class="menu-link"
                 href="{{ $url }}"

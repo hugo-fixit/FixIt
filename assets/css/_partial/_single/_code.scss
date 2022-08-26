@@ -11,7 +11,7 @@ code {
   @include overflow-wrap(break-word);
   @include line-break(anywhere);
 
-  [theme='dark'] & {
+  [data-theme='dark'] & {
     color: $code-color-dark;
     background-color: rgba(99, 110, 123, 0.4);
   }
@@ -30,7 +30,7 @@ pre {
 
   background-color: $code-background-color;
 
-  [theme='dark'] & {
+  [data-theme='dark'] & {
     background-color: $code-background-color-dark;
   }
 
@@ -40,7 +40,7 @@ pre {
     @include border-radius(0);
     @include max-content(min-width);
 
-    [theme='dark'] & {
+    [data-theme='dark'] & {
       background-color: transparent;
     }
   }
@@ -91,7 +91,7 @@ pre {
       @include border-radius($global-border-radius);
       @include transition(border-radius 0.2s ease);
 
-      [theme='dark'] & {
+      [data-theme='dark'] & {
         color: $code-info-color-dark;
         background-color: darken($code-background-color-dark, 6%);
       }
@@ -128,7 +128,7 @@ pre {
           cursor: pointer;
           color: $global-link-hover-color;
 
-          [theme='dark'] & {
+          [data-theme='dark'] & {
             color: $global-link-hover-color-dark;
           }
         }
@@ -156,7 +156,7 @@ pre {
       display: block;
       background-color: $code-background-color;
 
-      [theme='dark'] & {
+      [data-theme='dark'] & {
         background-color: $code-background-color-dark;
       }
 
@@ -206,7 +206,7 @@ pre {
         background-color: darken($code-background-color, 6%);
         @include border-radius($global-border-radius $global-border-radius 0 0);
 
-        [theme='dark'] & {
+        [data-theme='dark'] & {
           background-color: darken($code-background-color-dark, 3%);
         }
       }
@@ -237,7 +237,7 @@ pre {
     background-color: $code-hightlight-color;
     box-shadow: -0.5rem 0 0 $code-hightlight-color, 0.5rem 0 0 $code-hightlight-color;
 
-    [theme='dark'] & {
+    [data-theme='dark'] & {
       background-color: $code-hightlight-color-dark;
       box-shadow: -0.5rem 0 0 $code-hightlight-color-dark, 0.5rem 0 0 $code-hightlight-color-dark;
     }
@@ -266,7 +266,7 @@ pre {
   .ln {
     color: $global-font-secondary-color;
 
-    [theme='dark'] & {
+    [data-theme='dark'] & {
       color: $global-font-secondary-color-dark;
     }
   }
@@ -282,7 +282,7 @@ pre {
   .gd {
     background-color: #ffebe9;
 
-    [theme='dark'] & {
+    [data-theme='dark'] & {
       background-color: #78191b;
     }
   }
@@ -290,7 +290,7 @@ pre {
   .gi {
     background-color: #dafbe1;
 
-    [theme='dark'] & {
+    [data-theme='dark'] & {
       background-color: #1b4721;
     }
   }
@@ -301,7 +301,7 @@ pre {
     }
   }
 
-  [theme='dark'] & {
+  [data-theme='dark'] & {
     @each $class, $color in $code-highlight-color-map-dark {
       .#{$class} {
         color: $color;
@@ -328,7 +328,7 @@ pre {
     @include link(false, false);
     background-color: darken($code-background-color, 5%);
 
-    [theme='dark'] & {
+    [data-theme='dark'] & {
       background-color: darken($code-background-color-dark, 5%);
     }
   }
@@ -338,13 +338,13 @@ pre {
     &::-webkit-scrollbar {
       background-color: #f6f8fa;
 
-      [theme='dark'] & {
+      [data-theme='dark'] & {
         background-color: #2d333b;
       }
     }
   }
 
-  [theme='dark'] & {
+  [data-theme='dark'] & {
     @import './github-dark-dimmed';
   }
 }

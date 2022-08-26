@@ -83,7 +83,7 @@
     margin-left: 0.25rem;
   }
 
-  [theme='dark'] & {
+  [data-theme='dark'] & {
     &content {
       background-color: rgba(61, 62, 65, 0.88);
     }

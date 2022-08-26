@@ -113,7 +113,7 @@
       {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
       {{- $source := $cdn.walineJS | default "lib/waline/waline.js" -}}
       {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-      {{- $commentConfig = dict "el" "#waline" "serverURL" $waline.serverURL "lang" .Lang "dark" "body[theme='dark']" "copyright" true "imageUploader" false "highlighter" false | dict "waline" | merge $commentConfig -}}
+      {{- $commentConfig = dict "el" "#waline" "serverURL" $waline.serverURL "lang" .Lang "dark" "body[data-theme='dark']" "copyright" true "imageUploader" false "highlighter" false | dict "waline" | merge $commentConfig -}}
       {{- with $waline.pageview -}}
         {{- $commentConfig = dict "pageview" . | dict "waline" | merge $commentConfig -}}
       {{- end -}}
