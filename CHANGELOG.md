@@ -9,6 +9,8 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: add function doc2unix to unify new lines symbol between Windows and Unix/Mac OS
 - :bug: Fix: author display error in post and markdown file
 - :bug: Fix: use data attributes or class replace for custom attributes
+- :bug: Fix: attribute `media` not allowed on element meta in `[name=theme-color]`
+- :bug: Fix: support smooth migration from LoveIt to FixIt ([#174](https://github.com/hugo-fixit/FixIt/discussions/174) [#182](https://github.com/hugo-fixit/FixIt/issues/182))
 - :art: Style: change the default icons of some social links
 - :globe_with_meridians: Docs(i18n): update pt-br, de in i18n
 - :mag: Perf(SEO): enhance SEO performance

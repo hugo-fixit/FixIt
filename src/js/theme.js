@@ -62,6 +62,18 @@ class FixIt {
     window.objectFitImages && objectFitImages();
   }
 
+  initThemeColor() {
+    const $meta = document.querySelector('[name="theme-color"]');
+    if (!$meta) {
+      return;
+    }
+    this._themeColorOnSwitchTheme = this._themeColorOnSwitchTheme || (() => {
+      $meta.content = this.isDark ? $meta.dataset.dark : $meta.dataset.light;
+    });
+    this.switchThemeEventSet.add(this._themeColorOnSwitchTheme);
+    this._themeColorOnSwitchTheme();
+  }
+
   initSVGIcon() {
     this.util.forEach(document.querySelectorAll('[data-svg-src]'), ($icon) => {
       fetch($icon.getAttribute('data-svg-src'))
@@ -1075,6 +1087,7 @@ class FixIt {
         this.initMapbox();
         this.initPangu();
       }
+      this.initThemeColor();
       this.initSVGIcon();
       this.initMenu();
       this.initSwitchTheme();

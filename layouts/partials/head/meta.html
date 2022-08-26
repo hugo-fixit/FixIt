@@ -23,12 +23,12 @@
 <meta name="application-name" content="{{ .Site.Params.app.title | default .Site.Title }}">
 <meta name="apple-mobile-web-app-title" content="{{ .Site.Params.app.title | default .Site.Title }}">
 
-{{- with .Site.Params.app.themeColor.light -}}
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="{{ . }}">
-{{- end -}}
-
-{{- with .Site.Params.app.themeColor.dark -}}
-  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="{{ . }}">
+{{- with .Site.Params.app.themeColor -}}
+  {{- $color := . -}}
+  {{- if ne (len $color) 2 -}}
+    {{- $color = dict "light" . "dark" . -}}
+  {{- end -}}
+  <meta name="theme-color" data-light="{{ $color.light }}" data-dark="{{ $color.dark }}" content="{{ $color.light }}">
 {{- end -}}
 
 {{- with .Site.Params.app.tileColor -}}
