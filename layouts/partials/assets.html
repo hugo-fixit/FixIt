@@ -106,6 +106,14 @@
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- end -}}
   {{- $delimiters := slice (dict "left" "$$" "right" "$$" "display" true) (dict "left" "\\[" "right" "\\]" "display" true) -}}
+  {{- $delimiters = $delimiters | append (dict "left" "\\begin{equation}" "right" "\\end{equation}" "display" true) -}}
+  {{- $delimiters = $delimiters | append (dict "left" "\\begin{equation*}" "right" "\\end{equation*}" "display" true) -}}
+  {{- $delimiters = $delimiters | append (dict "left" "\\begin{align}" "right" "\\end{align}" "display" true) -}}
+  {{- $delimiters = $delimiters | append (dict "left" "\\begin{align*}" "right" "\\end{align*}" "display" true) -}}
+  {{- $delimiters = $delimiters | append (dict "left" "\\begin{alignat}" "right" "\\end{alignat}" "display" true) -}}
+  {{- $delimiters = $delimiters | append (dict "left" "\\begin{alignat*}" "right" "\\end{alignat*}" "display" true) -}}
+  {{- $delimiters = $delimiters | append (dict "left" "\\begin{gather}" "right" "\\end{gather}" "display" true) -}}
+  {{- $delimiters = $delimiters | append (dict "left" "\\begin{CD}" "right" "\\end{CD}" "display" true) -}}
   {{- if and $math.blockLeftDelimiter $math.blockRightDelimiter -}}
     {{- $delimiters = $delimiters | append (dict "left" $math.blockLeftDelimiter "right" $math.blockRightDelimiter "display" true) -}}
   {{- end -}}
