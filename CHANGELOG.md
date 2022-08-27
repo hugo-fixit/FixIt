@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ## v0.2.16
 
+- :sparkles: Feat: add `raw` shortcode
 - :sparkles: Feat: add custom aside template in post page ([#172](https://github.com/hugo-fixit/FixIt/issues/172))
 - :sparkles: Feat(math): add more block delimiter support for math
 - :wheelchair: Feat(accessibility): using `aria-hidden=true` on an icon font that AT should ignore
