@@ -15,6 +15,8 @@ All notable changes to this project will be documented in this file.
 - :globe_with_meridians: Docs(i18n): update pt-br, de in i18n
 - :mag: Perf(SEO): enhance SEO performance
 - :wrench: Chore: modify babel config and optimize theme.js compilation and loading
+- :arrow_up: Chore(libs):
+  - Update simple-icons from 6.3.0 to 7.8.0
 - :wrench: Chore(deps-dev):
   - Remove dependencies: minimist, babel-preset-minify
 - **Full Changelog:** @Lruihao [`v0.2.15...v0.2.16`](https://github.com/hugo-fixit/FixIt/compare/v0.2.15...v0.2.16)
