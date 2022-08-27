@@ -38,7 +38,7 @@ libFiles:
   # gitalk@1.7.2 https://github.com/gitalk/gitalk
   gitalkCSS: gitalk@1.7.2/dist/gitalk.min.css
   gitalkJS: gitalk@1.7.2/dist/gitalk.min.js
-  # katex@0.15.1 https://github.com/KaTeX/KaTeX
+  # katex@0.15.3 https://github.com/KaTeX/KaTeX
   katexAutoRenderJS: katex@0.15.3/dist/contrib/auto-render.min.js
   katexCopyTexCSS: katex@0.15.3/dist/contrib/copy-tex.min.css
   katexCopyTexJS: katex@0.15.3/dist/contrib/copy-tex.min.js
