@@ -16,7 +16,7 @@ All notable changes to this project will be documented in this file.
 - :mag: Perf(SEO): enhance SEO performance
 - :wrench: Chore: modify babel config and optimize theme.js compilation and loading
 - :wrench: Chore(deps-dev):
-  - Remove minimist
+  - Remove dependencies: minimist, babel-preset-minify
 - **Full Changelog:** @Lruihao [`v0.2.15...v0.2.16`](https://github.com/hugo-fixit/FixIt/compare/v0.2.15...v0.2.16)
 
 ## v0.2.15 [2022.8.4]
