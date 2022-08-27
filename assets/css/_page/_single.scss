@@ -10,7 +10,7 @@
     line-height: 140%;
   
     .icon-repost {
-      color: var(--#{$prefix}success);
+      color: $success;
       display: inline-block;
       width: max-content;
       margin-right: 0.25rem;
@@ -18,10 +18,9 @@
   }
 
   .single-subtitle {
-    margin: 0.4rem 0;
+    margin: 0.5rem 0;
     font-size: 1.2rem;
     font-weight: normal;
-    font-style: italic;
     line-height: 100%;
   }
 
