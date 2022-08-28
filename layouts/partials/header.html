@@ -43,7 +43,7 @@
           {{- with .Page -}}
             {{- $url = .RelPermalink -}}
           {{- end -}}
-          {{- if (ne .Params.Draft true) | or $buildDrafts -}}
+          {{- if (ne .Params.Draft true) | or $buildDrafts | and (ne .Params.Type "mobile")  -}}
             <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}{{ if .HasChildren }} has-children{{ end }}">
               <a
                 class="menu-link"
@@ -212,7 +212,7 @@
           {{- with .Page -}}
             {{- $url = .RelPermalink -}}
           {{- end -}}
-          {{- if (ne .Params.Draft true) | or $buildDrafts -}}
+          {{- if (ne .Params.Draft true) | or $buildDrafts | and (ne .Params.Type "desktop") -}}
             <li
               class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}"
             >

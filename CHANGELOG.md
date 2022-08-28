@@ -6,16 +6,16 @@ All notable changes to this project will be documented in this file.
 ## v0.2.16
 
 - :sparkles: Feat: add `raw` shortcode
+- :sparkles: Feat(menu): add params: `icon`, `type` for menu items
 - :sparkles: Feat: add custom aside template in post page ([#172](https://github.com/hugo-fixit/FixIt/issues/172))
 - :sparkles: Feat(math): add more block delimiter support for math
-- :sparkles: Feat(menu): add `params.icon` support for menu items
 - :wheelchair: Feat(accessibility): use `aria-hidden=true` on icons that AT should ignore
 - :bug: Fix: add function doc2unix to unify new lines symbol between Windows and Unix/Mac OS
 - :bug: Fix: author display error in post and markdown file
 - :bug: Fix: use data attributes or class replace for custom attributes
 - :bug: Fix: attribute `media` not allowed on element meta in `[name=theme-color]`
 - :bug: Fix: support smooth migration from LoveIt to FixIt ([#174](https://github.com/hugo-fixit/FixIt/discussions/174) [#182](https://github.com/hugo-fixit/FixIt/issues/182))
-- :bug: Fix: `center-quote` shortcode when config unsafe = false (@yureiita[#160](https://github.com/hugo-fixit/FixIt/pull/160))
+- :bug: Fix: `center-quote` shortcode rendering error when config `unsafe = false` (@yureiita[#160](https://github.com/hugo-fixit/FixIt/pull/160))
 - :art: Style: change the default icons of some social links
 - :globe_with_meridians: Docs(i18n): update pt-br, de in i18n
 - :mag: Perf(SEO): enhance SEO performance
