@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: attribute `media` not allowed on element meta in `[name=theme-color]`
 - :bug: Fix: support smooth migration from LoveIt to FixIt ([#174](https://github.com/hugo-fixit/FixIt/discussions/174) [#182](https://github.com/hugo-fixit/FixIt/issues/182))
 - :bug: Fix: `center-quote` shortcode rendering error when config `unsafe = false` (@yureiita[#160](https://github.com/hugo-fixit/FixIt/pull/160))
+- :bug: Fix: menu item invalid params `draft` in submenu
 - :art: Style: change the default icons of some social links
 - :globe_with_meridians: Docs(i18n): update pt-br, de in i18n
 - :mag: Perf(SEO): enhance SEO performance

@@ -43,7 +43,7 @@
           {{- with .Page -}}
             {{- $url = .RelPermalink -}}
           {{- end -}}
-          {{- if (ne .Params.Draft true) | or $buildDrafts | and (ne .Params.Type "mobile")  -}}
+          {{- if (ne .Params.Draft true) | or $buildDrafts | and (ne .Params.Type "mobile") -}}
             <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}{{ if .HasChildren }} has-children{{ end }}">
               <a
                 class="menu-link"
@@ -64,21 +64,23 @@
                     {{- with .Page -}}
                       {{- $url = .RelPermalink -}}
                     {{- end -}}
-                    <li
-                      class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}"
-                    >
-                      <a
-                        class="menu-link"
-                        href="{{ $url }}"
-                        {{ with .Title }}title="{{ . }}"{{ end }}
-                        {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
+                    {{- if (ne .Params.Draft true) | or $buildDrafts | and (ne .Params.Type "mobile") -}}
+                      <li
+                        class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}"
                       >
-                        {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
-                        {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
-                        {{- .Name }}
-                        {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
-                      </a>
-                    </li>
+                        <a
+                          class="menu-link"
+                          href="{{ $url }}"
+                          {{ with .Title }}title="{{ . }}"{{ end }}
+                          {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
+                        >
+                          {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
+                          {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
+                          {{- .Name }}
+                          {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
+                        </a>
+                      </li>
+                    {{- end -}}
                   {{- end -}}
                 </ul>
               {{- end -}}
@@ -237,35 +239,37 @@
                     {{- with .Page -}}
                       {{- $url = .RelPermalink -}}
                     {{- end -}}
-                    <li
-                      class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}"
-                    >
-                      <a
-                        class="menu-link"
-                        href="{{ $url }}"
-                        {{ with .Title }}title="{{ . }}"{{ end }}
-                        {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
+                    {{- if (ne .Params.Draft true) | or $buildDrafts | and (ne .Params.Type "desktop") -}}
+                      <li
+                        class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}"
                       >
-                        {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
-                        {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
-                        {{- .Name }}
-                        {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
-                      </a>
-                    </li>
+                        <a
+                          class="menu-link"
+                          href="{{ $url }}"
+                          {{ with .Title }}title="{{ . }}"{{ end }}
+                          {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
+                        >
+                          {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
+                          {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
+                          {{- .Name }}
+                          {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
+                        </a>
+                      </li>
+                    {{- end -}}
                   {{- end -}}
                 </ul>
               {{- else -}}
-              <a
-                class="menu-link"
-                href="{{ $url }}"
-                {{ with .Title }}title="{{ . }}"{{ end }}
-                {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
-              >
-                {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
-                {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
-                {{- .Name }}
-                {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
-              </a>
+                <a
+                  class="menu-link"
+                  href="{{ $url }}"
+                  {{ with .Title }}title="{{ . }}"{{ end }}
+                  {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
+                >
+                  {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
+                  {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
+                  {{- .Name }}
+                  {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
+                </a>
               {{- end -}}
             </li>
           {{- end -}}
