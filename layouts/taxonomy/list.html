@@ -9,10 +9,10 @@
       {{- $taxonomy := .Data.Singular -}}
       {{- $pageCount := len .Pages -}}
       {{- if eq $taxonomy "category" -}}
-        <i class="fa-regular fa-folder-open fa-fw"></i>
+        {{ dict "Class" "fa-regular fa-folder-open fa-fw" | partial "plugin/icon.html" }}
         {{ .Title }}&nbsp;<sup>{{- $pageCount -}}</sup>
       {{- else if eq $taxonomy "tag" -}}
-        <i class="fa-solid fa-tag fa-fw"></i>
+        {{ dict "Class" "fa-solid fa-tag fa-fw" | partial "plugin/icon.html" }}
         {{ .Title }}&nbsp;<sup>{{- $pageCount -}}</sup>
       {{- else -}}
         {{- printf "%v - %v" (T $taxonomy | default $taxonomy) .Title -}}

@@ -7,11 +7,12 @@
       <div class="post-info-mod">
         <span title={{ "2006-01-02 15:04:05" | .Lastmod.Format }}>
           {{- with .Site.Params.dateformat | default "2006-01-02" | .Lastmod.Format -}}
-            {{- dict "Date" . | T "updatedOnDate" -}}
+            {{- dict "Date" . | T "updatedOnDate" -}}&nbsp;
             {{- if $gitRepo -}}
               {{- with $.GitInfo -}}
-                &nbsp;<a class="git-hash" href="{{ printf `%v/commit/%v` $gitRepo .Hash }}" rel="external nofollow noopener noreferrer" target="_blank" title="commit by {{ .AuthorName }}({{ .AuthorEmail }}) {{ .Hash }}: {{ .Subject }}">
-                  <i class="fa-solid fa-hashtag fa-fw"></i>{{- .AbbreviatedHash -}}
+                <a class="git-hash" href="{{ printf `%v/commit/%v` $gitRepo .Hash }}" rel="external nofollow noopener noreferrer" target="_blank" title="commit by {{ .AuthorName }}({{ .AuthorEmail }}) {{ .Hash }}: {{ .Subject }}">
+                  {{- dict "Class" "fa-solid fa-hashtag fa-fw" | partial "plugin/icon.html" -}}
+                  {{- .AbbreviatedHash -}}
                 </a>
               {{- end -}}
             {{- end -}}
@@ -58,7 +59,7 @@
   <div class="post-info-more">
     <section class="post-tags">
       {{- with .Params.tags -}}
-        <i class="fa-solid fa-tags fa-fw"></i>&nbsp;
+        {{- dict "Class" "fa-solid fa-tags fa-fw" | partial "plugin/icon.html" -}}&nbsp;
         {{- range $index, $value := . -}}
           {{- if gt $index 0 }},&nbsp;{{ end -}}
           {{- $tag := partialCached "function/path.html" $value $value | printf "/tags/%v" | $.Site.GetPage -}}
@@ -73,10 +74,16 @@
 
   <div class="post-nav">
     {{- if .PrevInSection -}}
-      <a href="{{ .PrevInSection.RelPermalink }}" class="prev" rel="prev" title="{{ .PrevInSection.Title }}"><i class="fa-solid fa-angle-left fa-fw"></i>{{ .PrevInSection.Title }}</a>
+      <a href="{{ .PrevInSection.RelPermalink }}" class="prev" rel="prev" title="{{ .PrevInSection.Title }}">
+        {{- dict "Class" "fa-solid fa-angle-left fa-fw" | partial "plugin/icon.html" -}}
+        {{- .PrevInSection.Title -}}
+      </a>
     {{- end -}}
     {{ if .NextInSection }}
-      <a href="{{ .NextInSection.RelPermalink }}" class="next" rel="next" title="{{ .NextInSection.Title }}">{{ .NextInSection.Title }}<i class="fa-solid fa-angle-right fa-fw"></i></a>
+      <a href="{{ .NextInSection.RelPermalink }}" class="next" rel="next" title="{{ .NextInSection.Title }}">
+        {{- .NextInSection.Title -}}
+        {{- dict "Class" "fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
+      </a>
     {{- end -}}
   </div>
 </div>

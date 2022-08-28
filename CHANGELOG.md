@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: add custom aside template in post page ([#172](https://github.com/hugo-fixit/FixIt/issues/172))
 - :sparkles: Feat(math): add more block delimiter support for math
 - :sparkles: Feat(menu): add `params.icon` support for menu items
-- :wheelchair: Feat(accessibility): using `aria-hidden=true` on an icon font that AT should ignore
+- :wheelchair: Feat(accessibility): use `aria-hidden=true` on icons that AT should ignore
 - :bug: Fix: add function doc2unix to unify new lines symbol between Windows and Unix/Mac OS
 - :bug: Fix: author display error in post and markdown file
 - :bug: Fix: use data attributes or class replace for custom attributes

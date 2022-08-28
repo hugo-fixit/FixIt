@@ -22,8 +22,7 @@
           {{- $humanizedNum = printf "%.2fK" (div $humanizedNum 1000.0) -}}
         {{- end -}}
         <p class="single-subtitle total-word-count" title='{{- T "totalwordCount" . }}'>
-          <i class="fa-regular fa-keyboard fa-fw"></i>
-          {{ T "totalwordCount" (dict "Count" $humanizedNum) -}}
+          {{- dict "Class" "fa-regular fa-keyboard fa-fw" | partial "plugin/icon.html" }} {{ T "totalwordCount" (dict "Count" $humanizedNum) -}}
         </p>
       {{- end -}}
     </div>

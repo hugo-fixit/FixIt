@@ -2,12 +2,12 @@
   <div id="fixed-buttons">
     {{- /* top button */ -}}
     <a href="#" id="back-to-top" class="fixed-button" title="{{ T `backToTop` }}">
-      <i class="fa-solid fa-arrow-up fa-fw"></i>
+      {{- dict "Class" "fa-solid fa-arrow-up fa-fw" | partial "plugin/icon.html" -}}
     </a>
 
     {{- /* comment button */ -}}
     <a href="#" id="view-comments" class="fixed-button" title="{{ T `viewComments` }}">
-      <i class="fa-solid fa-comment fa-fw"></i>
+      {{- dict "Class" "fa-solid fa-comment fa-fw" | partial "plugin/icon.html" -}}
     </a>
   </div>
 

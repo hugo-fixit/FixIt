@@ -21,7 +21,7 @@
         <div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork">
           {{- /* Copyright year */ -}}
           {{- if ne .Site.Params.footer.copyright false -}}
-            <i class="fa-regular fa-copyright fa-fw"></i>
+            {{ dict "Class" "fa-regular fa-copyright fa-fw" | partial "plugin/icon.html" }}
             {{ with .Site.Params.footer.since -}}
               <span itemprop="copyrightYear">
                 {{- if lt . now.Year }}{{ . }} - {{ end }}{{ now.Year -}}
@@ -48,17 +48,25 @@
       {{- if .Site.Params.footer.siteTime | or .Site.Params.footer.wordCount -}}
         <div class="footer-line statistics">
           {{- if .Site.Params.footer.siteTime -}}
-            <span class="site-time" title='{{ T "siteRunning" }}'><i class="fa-solid fa-heartbeat fa-fw animate-icon"></i>&nbsp;<span class="run-times">{{- T "siteRunning" -}}</span></span>
+            <span class="site-time" title='{{ T "siteRunning" }}'>
+              {{- dict "Class" "fa-solid fa-heartbeat fa-fw animate-icon" | partial "plugin/icon.html" -}}&nbsp;
+              {{- printf `<span class="run-times">%v</span>` (T "siteRunning") | safeHTML -}}
+            </span>
           {{- end -}}
         </div>
       {{- end -}}
 
       {{- /* 不蒜子 */ -}}
       {{- if eq .Site.Params.ibruce.enable true -}}
+        {{- $loading := dict "Class" "fa-solid fa-spinner fa-spin fa-fw" | partial "plugin/icon.html" -}}
         <div class="footer-line ibruce">
-          <span id="busuanzi_container_site_uv" title='{{ T "siteUV" }}'><i class="fa-regular fa-user fa-fw"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin fa-fw"></i></span></span>
-          {{- /* remove spaces */ -}}
-          <span id="busuanzi_container_site_pv" class="footer-divider" title='{{ T "sitePV" }}'><i class="fa-regular fa-eye fa-fw"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin fa-fw"></i></span></span>
+          <span id="busuanzi_container_site_uv" title='{{ T "siteUV" }}'>
+            {{- dict "Class" "fa-regular fa-user fa-fw" | partial "plugin/icon.html" -}}&nbsp;<span id="busuanzi_value_site_uv">{{ $loading }}</span>
+          </span>
+          {{- /* NO_SPACING */ -}}
+          <span id="busuanzi_container_site_pv" class="footer-divider" title='{{ T "sitePV" }}'>
+            {{- dict "Class" "fa-regular fa-eye fa-fw" | partial "plugin/icon.html" -}}&nbsp;<span id="busuanzi_value_site_pv">{{ $loading }}</span>
+          </span>
         </div>
       {{- end -}}
       

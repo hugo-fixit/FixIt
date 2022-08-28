@@ -31,9 +31,10 @@
   {{- else -}}
     <span class="author">
       {{- with $icon -}}
-        <i class="{{ .Class }}"></i>
+        {{ . | partial "plugin/icon.html" }}
       {{ end -}}
       {{- $content | safeHTML -}}
     </span>
   {{- end -}}
 </span>
+{{- /* EOF */ -}}
