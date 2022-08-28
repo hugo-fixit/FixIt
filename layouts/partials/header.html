@@ -44,17 +44,20 @@
             {{- $url = .RelPermalink -}}
           {{- end -}}
           {{- if (ne .Params.Draft true) | or $buildDrafts -}}
-            <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }} {{ if .HasChildren }}has-children{{ end }}">
+            <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}{{ if .HasChildren }} has-children{{ end }}">
               <a
                 class="menu-link"
                 href="{{ $url }}"
                 {{ with .Title }}title="{{ . }}"{{ end }}
                 {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
               >
-                {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
+                {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
+                {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
+                {{- .Name }}
+                {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
               </a>
               {{- if .HasChildren -}}
-                <i class="dropdown-icon fa-solid fa-chevron-down"></i>
+                {{ dict "Class" "dropdown-icon fa-solid fa-chevron-down" | partial "plugin/icon.html" }}
                 <ul class="sub-menu">
                   {{ range .Children }}
                     {{- $url := .URL | relLangURL -}}
@@ -70,7 +73,10 @@
                         {{ with .Title }}title="{{ . }}"{{ end }}
                         {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
                       >
-                        {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
+                        {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
+                        {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
+                        {{- .Name }}
+                        {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
                       </a>
                     </li>
                   {{- end -}}
@@ -86,7 +92,7 @@
           <li class="menu-item language">
             <span title="{{ T "selectLanguage" }}">
               {{- .Language.LanguageName -}}
-              <i class="dropdown-icon fa-solid fa-chevron-down"></i>
+              {{ dict "Class" "dropdown-icon fa-solid fa-chevron-down" | partial "plugin/icon.html" }}
             </span>
             <ul class="sub-menu">
               {{- if (eq .Kind "404") -}}
@@ -120,18 +126,18 @@
           <li class="menu-item search" id="search-desktop">
             <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-desktop">
             <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="{{ T `search` }}">
-              <i class="fa-solid fa-search fa-fw"></i>
+              {{ dict "Class" "fa-solid fa-search fa-fw" | partial "plugin/icon.html" }}
             </a>
             <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="{{ T `clear` }}">
-              <i class="fa-solid fa-times-circle fa-fw"></i>
+              {{ dict "Class" "fa-solid fa-times-circle fa-fw" | partial "plugin/icon.html" }}
             </a>
             <span class="search-button search-loading" id="search-loading-desktop">
-              <i class="fa-solid fa-spinner fa-fw fa-spin"></i>
+              {{ dict "Class" "fa-solid fa-spinner fa-fw fa-spin" | partial "plugin/icon.html" }}
             </span>
           </li>
         {{- end -}}
         <li class="menu-item theme-switch" title="{{ T "switchTheme" }}">
-          <i class="fa-solid fa-adjust fa-fw"></i>
+          {{ dict "Class" "fa-solid fa-adjust fa-fw" | partial "plugin/icon.html" }}
         </li>
       </ul>
     </nav>
@@ -186,13 +192,13 @@
             <div class="search mobile" id="search-mobile">
               <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-mobile">
               <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="{{ T `search` }}">
-                <i class="fa-solid fa-search fa-fw"></i>
+                {{ dict "Class" "fa-solid fa-search fa-fw" | partial "plugin/icon.html" }}
               </a>
               <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="{{ T `clear` }}">
-                <i class="fa-solid fa-times-circle fa-fw"></i>
+                {{ dict "Class" "fa-solid fa-times-circle fa-fw" | partial "plugin/icon.html" }}
               </a>
               <span class="search-button search-loading" id="search-loading-mobile">
-                <i class="fa-solid fa-spinner fa-fw fa-spin"></i>
+                {{ dict "Class" "fa-solid fa-spinner fa-fw fa-spin" | partial "plugin/icon.html" }}
               </span>
             </div>
             <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
@@ -218,9 +224,12 @@
                     {{ with .Title }}title="{{ . }}"{{ end }}
                     {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
                   >
-                    {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
+                    {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
+                    {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
+                    {{- .Name }}
+                    {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
                   </a>
-                  <i class="dropdown-icon fa-solid fa-chevron-right"></i>
+                  {{ dict "Class" "dropdown-icon fa-solid fa-chevron-right" | partial "plugin/icon.html" }}
                 </span>
                 <ul class="sub-menu">
                   {{ range .Children }}
@@ -237,7 +246,10 @@
                         {{ with .Title }}title="{{ . }}"{{ end }}
                         {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
                       >
-                        {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
+                        {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
+                        {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
+                        {{- .Name }}
+                        {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
                       </a>
                     </li>
                   {{- end -}}
@@ -249,20 +261,23 @@
                 {{ with .Title }}title="{{ . }}"{{ end }}
                 {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
               >
-                {{- with .Pre -}}{{- . | safeHTML }} {{ end }}{{ .Name }}{{ with .Post }} {{ . | safeHTML -}}{{- end -}}
+                {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
+                {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
+                {{- .Name }}
+                {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
               </a>
               {{- end -}}
             </li>
           {{- end -}}
         {{- end -}}
         <li class="menu-item theme-switch" title="{{ T "switchTheme" }}">
-          <i class="fa-solid fa-adjust fa-fw"></i>
+          {{ dict "Class" "fa-solid fa-adjust fa-fw" | partial "plugin/icon.html" }}
         </li>
         {{- if .Site.IsMultiLingual -}}
           <li class="menu-item language">
             <span title="{{ T "selectLanguage" }}">
               {{- .Language.LanguageName -}}
-              <i class="dropdown-icon fa-solid fa-chevron-down"></i>
+              {{ dict "Class" "dropdown-icon fa-solid fa-chevron-down" | partial "plugin/icon.html" }}
             </span>
             <select class="language-select" onchange="location = this.value;">
               {{- if eq .Kind "404" -}}
