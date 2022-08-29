@@ -1,8 +1,7 @@
-/**
- * Code type map
- * @generator https://github.com/hugo-fixit/.tools/blob/main/tampermonkey/code-type-map-fetcher.user.js
- */
+// Code type map
 $code-type-map: (
+  // Chroma supported languages
+  // @generator https://github.com/hugo-fixit/.tools/blob/main/tampermonkey/code-type-map-fetcher.user.js
   "abap": "ABAP",
   "abnf": "ABNF",
   "as": "ActionScript",
@@ -367,5 +366,7 @@ $code-type-map: (
   "yaml": "YAML",
   "yang": "YANG",
   "zed": "Zed",
-  "zig": "Zig"
+  "zig": "Zig",
+  // Custom code type
+  "markdown": "markdown"
 ) !default;
