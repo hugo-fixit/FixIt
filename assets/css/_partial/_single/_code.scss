@@ -135,7 +135,7 @@ pre {
       }
 
       @each $type, $text in $code-type-map {
-        &.#{$type} .code-title::after {
+        &.language-#{$type} .code-title::after {
           content: $text;
         }
       }
