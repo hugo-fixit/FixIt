@@ -154,58 +154,7 @@ $code-font-size: 0.875rem !default;
 // Font family of the code
 $code-font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace, $global-font-family !default;
 
-// Code type map
-$code-type-map: (
-  // Custom code type
-  language-bash: 'Bash',
-  language-c: 'C',
-  language-cs: 'C#',
-  language-cpp: 'C++',
-  language-clojure: 'Clojure',
-  language-coffeescript: 'CoffeeScript',
-  language-css: 'CSS',
-  language-dart: 'Dart',
-  language-diff: 'Diff',
-  language-erlang: 'Erlang',
-  language-go: 'Go',
-  language-go-html-template: 'Go HTML Template',
-  language-groovy: 'Groovy',
-  language-haskell: 'Haskell',
-  language-html: 'HTML',
-  language-http: 'HTTP',
-  language-xml: 'XML',
-  language-java: 'Java',
-  language-js: 'JavaScript',
-  language-javascript: 'JavaScript',
-  language-json: 'JSON',
-  language-kotlin: 'Kotlin',
-  language-latex: 'LaTeX',
-  language-less: 'Less',
-  language-lisp: 'Lisp',
-  language-lua: 'Lua',
-  language-makefile: 'Makefile',
-  language-markdown: 'Markdown',
-  language-matlab: 'Matlab',
-  language-objectivec: 'Objective-C',
-  language-php: 'PHP',
-  language-perl: 'Perl',
-  language-python: 'Python',
-  language-r: 'R',
-  language-ruby: 'Ruby',
-  language-rust: 'Rust',
-  language-scala: 'Scala',
-  language-scss: 'Scss',
-  language-shell: 'Shell',
-  language-sql: 'SQL',
-  language-swift: 'Swift',
-  language-tex: 'TeX',
-  language-toml: 'TOML',
-  language-ts: 'TypeScript',
-  language-typescript: 'TypeScript',
-  language-vue: 'Vue',
-  language-yml: 'YAML',
-  language-yaml: 'YAML'
-) !default;
+@import "_maps/index";
 
 // Color map of the code highlight
 $code-highlight-color-map: (

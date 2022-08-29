@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat(menu): add params: `icon`, `type` for menu items
 - :sparkles: Feat: add custom aside template in post page ([#172](https://github.com/hugo-fixit/FixIt/issues/172))
 - :sparkles: Feat(math): add more block delimiter support for math
+- :sparkles: Feat(highlight): add full support for Chroma highlighting languages in the [list](https://gohugo.io/content-management/syntax-highlighting/#list-of-chroma-highlighting-languages)
 - :wheelchair: Feat(accessibility): use `aria-hidden=true` on icons that AT should ignore
 - :bug: Fix: add function doc2unix to unify new lines symbol between Windows and Unix/Mac OS
 - :bug: Fix: author display error in post and markdown file
@@ -105,7 +106,7 @@ All notable changes to this project will be documented in this file.
 - :memo: Docs: revise theme documentations
 - :zap: Perf: remove third-party library clipboard.js ([#84](https://github.com/hugo-fixit/FixIt/issues/84))
 - :pencil2: Docs: fix highlight url typo in `theme-documentation-built-in-shortcodes` (@d-baer[#85](https://github.com/hugo-fixit/FixIt/pull/85))
-- :wrench: Chore(i18n): improve translations for supported languages ([#119](https://github.com/hugo-fixit/FixIt/issues/119))
+- :wrench: Chore(i18n): improve translations for the supported languages ([#119](https://github.com/hugo-fixit/FixIt/issues/119))
 - :wrench: Chore(i18n): add i18n support for console messages
 - :wrench: Chore: add deprecated parameter detection in cli
 - :arrow_up: Chore: update some third-party libraries
