@@ -10,6 +10,7 @@
   {{- $options = dict "Rel" (.Get "rel") | merge $options -}}
   {{- $options = dict "Download" (.Get "download") | merge $options -}}
   {{- $options = dict "Card" (.Get "card") | merge $options -}}
+  {{- $options = dict "Noreferrer" (.Get "noreferrer") | merge $options -}}
 {{- else -}}
   {{- $options = dict "Content" (.Get 1 | default (.Get 0)) | merge $options -}}
   {{- $options = dict "Title" (.Get 2) | merge $options -}}

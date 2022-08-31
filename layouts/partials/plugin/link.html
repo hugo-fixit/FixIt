@@ -1,5 +1,9 @@
 {{- $rel := "" -}}
 {{- $external := false -}}
+{{- $noreferrer := true -}}
+{{- if eq .Noreferrer false -}}
+  {{- $noreferrer = false -}}
+{{- end -}}
 {{- $class := .Class | default "" -}}
 {{- if eq .Card true -}}
   {{- $class = trim (printf "%v %v" "card-link" $class) " " -}}
@@ -10,7 +14,7 @@
     title="{{ . }}"
   {{ end }}
   {{ if (urls.Parse .Destination).Host | or .Newtab }}
-    {{ $rel = "external nofollow noopener noreferrer" }}
+    {{ $rel = cond $noreferrer "external nofollow noopener noreferrer" "external nofollow" }}
     {{ $external = true }}
     target="_blank"
   {{ end }}
