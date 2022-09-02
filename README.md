@@ -212,7 +212,7 @@ Make sure that you follow [CODE_OF_CONDUCT.md](/CODE_OF_CONDUCT.md) while contri
 * [Sharer.js](https://github.com/ellisonleao/sharer.js)
 * [TypeIt](https://typeitjs.com/)
 * [KaTeX](https://katex.org/)
-* [mermaid](https://github.com/knsv/mermaid)
+* [mermaid](https://github.com/mermaid-js/mermaid)
 * [ECharts](https://echarts.apache.org/)
 * [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
 * [APlayer](https://github.com/MoePlayer/APlayer)
