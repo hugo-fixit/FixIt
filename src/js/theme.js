@@ -611,6 +611,11 @@ class FixIt {
   }
 
   initEcharts() {
+    if (!this.config.echarts) {
+      return;
+    }
+    echarts.registerTheme('light', this.config.echarts.lightTheme);
+    echarts.registerTheme('dark', this.config.echarts.darkTheme);
     this._echartsOnSwitchTheme = this._echartsOnSwitchTheme || (() => {
       this._echartsArr = this._echartsArr || [];
       for (let i = 0; i < this._echartsArr.length; i++) {
@@ -618,9 +623,7 @@ class FixIt {
       }
       this._echartsArr = [];
       this.util.forEach(document.getElementsByClassName('echarts'), ($echarts) => {
-        const chart = echarts.init($echarts, this.isDark ? 'dark' : 'macarons', {
-          renderer: 'svg'
-        });
+        const chart = echarts.init($echarts, this.isDark ? 'dark' : 'light', { renderer: 'svg' });
         chart.setOption(JSON.parse(this.data[$echarts.id]));
         this._echartsArr.push(chart);
       });
