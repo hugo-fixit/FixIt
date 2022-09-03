@@ -47,7 +47,7 @@ libFiles:
   katexMhchemJS: katex@0.15.3/dist/contrib/mhchem.min.js
   # lazysizes@5.3.2 https://github.com/aFarkas/lazysizes
   lazysizesJS: lazysizes@5.3.2/lazysizes.min.js
- # lightgallery@2.6.0 https://github.com/sachinchoolur/lightgallery
+  # lightgallery@2.6.0 https://github.com/sachinchoolur/lightgallery
   lightgalleryCSS: lightgallery@2.6.0/css/lightgallery-bundle.min.css
   lightgalleryJS: lightgallery@2.6.0/lightgallery.min.js
   lightgalleryThumbnailJS: lightgallery@2.6.0/plugins/thumbnail/lg-thumbnail.min.js
