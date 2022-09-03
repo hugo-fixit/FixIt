@@ -4,29 +4,20 @@
 {{- if eq .Noreferrer false -}}
   {{- $noreferrer = false -}}
 {{- end -}}
+{{- if (urls.Parse .Destination).Host | or .Newtab -}}
+  {{- $rel = cond $noreferrer "external nofollow noopener noreferrer" "external nofollow" -}}
+  {{- $external = true -}}
+{{- end -}}
 {{- $class := .Class | default "" -}}
 {{- if eq .Card true -}}
   {{- $class = trim (printf "%v %v" "card-link" $class) " " -}}
 {{- end -}}
-<a
-  href="{{ .Destination | safeURL }}"
-  {{ with .Title }}
-    title="{{ . }}"
-  {{ end }}
-  {{ if (urls.Parse .Destination).Host | or .Newtab }}
-    {{ $rel = cond $noreferrer "external nofollow noopener noreferrer" "external nofollow" }}
-    {{ $external = true }}
-    target="_blank"
-  {{ end }}
-  {{ if $rel | or .Rel }}
-    rel="{{ $rel }}{{ with .Rel }} {{ . }}{{ end }}"
-  {{ end }}
-  {{ with $class }}
-    class="{{ with $class }}{{ . }}{{ end }}"
-  {{ end }}
-  {{ with .Download }}
-    download="{{ . }}"
-  {{ end }}
+<a href="{{ .Destination | safeURL }}"
+  {{- with .Title }} title="{{ . }}"{{- end -}}
+  {{- if $external -}} target="_blank"{{- end -}}
+  {{- if $rel | or .Rel }} rel="{{ $rel }}{{ with .Rel }} {{ . }}{{ end }}"{{- end -}}
+  {{- with $class }} class="{{ with $class }}{{ . }}{{ end }}"{{- end -}}
+  {{- with .Download }} download="{{ . }}"{{- end -}}
 >
   {{- if ne .Card true -}}
     {{- with .Icon -}}
