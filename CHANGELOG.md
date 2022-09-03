@@ -29,6 +29,7 @@ All notable changes to this project will be documented in this file.
   - Update emoji-data from 5.0.1 to 14.0.0
   - Update mermaid from 9.1.3 to 9.1.6
   - Update typeit from 7.0.4 to 8.7.0
+  - Update lightgallery from 1.4.0 to 2.6.0
 - :wrench: Chore(deps-dev):
   - Remove dependencies: minimist, babel-preset-minify
 - **Full Changelog:** @Lruihao [`v0.2.15...v0.2.16`](https://github.com/hugo-fixit/FixIt/compare/v0.2.15...v0.2.16)

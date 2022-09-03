@@ -401,7 +401,21 @@ class FixIt {
   }
 
   initLightGallery() {
-    this.config.lightGallery && lightGallery(document.getElementById('content'), this.config.lightGallery);
+    if (this.config.lightgallery) {
+      lightGallery(document.getElementById('content'), {
+        plugins: [lgThumbnail, lgZoom],
+        selector: '.lightgallery',
+        speed: 400,
+        hideBarsDelay: 2000,
+        allowMediaOverlap: true,
+        exThumbImage: 'data-thumbnail',
+        toggleThumb: true,
+        thumbWidth: 80,
+        thumbHeight: '60px',
+        actualSize: false,
+        showZoomInOutIcons: true,
+      });
+    }
   }
 
   initHighlight() {

@@ -134,7 +134,7 @@ To see this theme in action, here are some live demo sites which are rendered wi
 * **Twemoji** supported
 * Automatically **highlighting** code
 * **Copy code** to clipboard with one click
-* **Images gallery** supported by [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
+* **Images gallery** supported by [lightgallery](https://github.com/sachinchoolur/lightgallery)
 * Extended Markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
 * Extended Markdown syntax for **ruby annotation**
 * Extended Markdown syntax for **fraction**
@@ -208,7 +208,7 @@ Make sure that you follow [CODE_OF_CONDUCT.md](/CODE_OF_CONDUCT.md) while contri
 * [object-fit-images](https://github.com/fregante/object-fit-images)
 * [Twemoji](https://github.com/twitter/twemoji)
 * [emoji-data](https://github.com/iamcal/emoji-data)
-* [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
+* [lightgallery](https://github.com/sachinchoolur/lightgallery)
 * [Sharer.js](https://github.com/ellisonleao/sharer.js)
 * [TypeIt](https://typeitjs.com/)
 * [KaTeX](https://katex.org/)

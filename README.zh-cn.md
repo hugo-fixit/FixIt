@@ -134,7 +134,7 @@ FixIt 主题继承了 LoveIt 等主题的优秀功能，并在它们的基础上
 * 支持 **Twemoji**
 * 支持**代码高亮**
 * 一键**复制代码**到剪贴板
-* 支持基于 [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js) 的**图片画廊**
+* 支持基于 [lightgallery](https://github.com/sachinchoolur/lightgallery) 的**图片画廊**
 * 支持 **[Font Awesome](https://fontawesome.com/) 图标**的扩展 Markdown 语法
 * 支持**上标注释**的扩展 Markdown 语法
 * 支持**分数**的扩展 Markdown 语法
@@ -208,7 +208,7 @@ FixIt 支持下列语言：
 * [object-fit-images](https://github.com/fregante/object-fit-images)
 * [Twemoji](https://github.com/twitter/twemoji)
 * [emoji-data](https://github.com/iamcal/emoji-data)
-* [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
+* [lightgallery](https://github.com/sachinchoolur/lightgallery)
 * [Sharer.js](https://github.com/ellisonleao/sharer.js)
 * [TypeIt](https://typeitjs.com/)
 * [KaTeX](https://katex.org/)
