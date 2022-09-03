@@ -61,8 +61,6 @@ libFiles:
   mermaidJS: mermaid@9.1.6/dist/mermaid.min.js
   # meting@2.0.1 https://github.com/metowolf/MetingJS
   metingJS: meting@2.0.1/dist/Meting.min.js
-  # normalize.css@8.0.1 https://github.com/necolas/normalize.css
-  normalizeCSS: normalize.css@8.0.1/normalize.min.css
   # object-fit-images@3.2.4 https://github.com/fregante/object-fit-images
   objectFitImagesJS: object-fit-images@3.2.4/dist/ofi.min.js
   # pangu.js@4.0.7 https://github.com/vinta/pangu.js
