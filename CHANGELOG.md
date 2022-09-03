@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: menu item invalid params `draft` in submenu
 - :bug: Fix: missing height and weight of img element and lazyload object-fit style
 - :bug: Fix: typeit shortcode invalid config `duration = -1` and fix style
+- :bug: Fix: typeit shortcode prints consecutive spaces and newline errors
 - :art: Style: change the default icons of some social links
 - :globe_with_meridians: Docs(i18n): update pt-br, de in i18n
 - :mag: Perf(SEO): enhance SEO performance

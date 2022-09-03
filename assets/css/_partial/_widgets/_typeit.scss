@@ -1,0 +1,22 @@
+.typeit {
+  .highlight {
+    padding: 0.375rem;
+    font-size: 0.875rem;
+    font-family: $code-font-family;
+    font-weight: bold;
+    word-break: break-all;
+    white-space: pre-wrap;
+  }
+
+  --ti-cursor-font-family: #{$global-font-family};
+  --ti-cursor-font-size: #{$global-font-size};
+  --ti-cursor-font-style: normal;
+  --ti-cursor-font-weight: #{$global-font-weight};
+  --ti-cursor-line-height: #{$global-line-height};
+  --ti-cursor-color: #{$global-font-color};
+  --ti-cursor-transform: translateX(0);
+
+  [data-theme='dark'] & {
+    --ti-cursor-color: #{$global-font-color-dark};
+  }
+}
