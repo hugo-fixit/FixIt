@@ -1,12 +1,12 @@
 // inline code
 code {
-  display: inline-block;
-  max-width: 100%;
-  padding: 0 0.25rem;
+  padding: 0.2em 0.4em;
+  margin: 0;
   font-size: $code-font-size;
   font-family: $code-font-family;
   color: $code-color;
   background-color: rgba(175, 184, 193, 0.2);
+  text-decoration: inherit;
   @include border-radius($global-border-radius);
   @include overflow-wrap(break-word);
   @include line-break(anywhere);
