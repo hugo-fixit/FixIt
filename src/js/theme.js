@@ -723,10 +723,12 @@ class FixIt {
             cursorChar: cursorChar,
             waitUntilVisible: true,
             afterComplete: () => {
-              if (i === group.length - 1 && typeitConfig.duration >= 0) {
-                window.setTimeout(() => {
-                  instance.destroy();
-                }, typeitConfig.duration);
+              if (i === group.length - 1) {
+                if (typeitConfig.duration >= 0) {
+                  window.setTimeout(() => {
+                    instance.destroy();
+                  }, typeitConfig.duration);
+                }
                 return;
               }
               instance.destroy();

@@ -366,17 +366,6 @@
       }
     }
 
-    .typeit {
-      // TODO refactor
-      .code {
-        padding: 0.375rem;
-        font-size: 0.875rem;
-        font-family: $code-font-family;
-        font-weight: bold;
-        word-break: break-all;
-      }
-    }
-
     .version {
       height: 1.25em;
       vertical-align: text-bottom;
@@ -385,6 +374,27 @@
 
   @import '../_partial/_single/footer';
   @import '../_partial/_single/comment';
+}
+
+.typeit {
+  .highlight {
+    padding: 0.375rem;
+    font-size: 0.875rem;
+    font-family: $code-font-family;
+    font-weight: bold;
+    word-break: break-all;
+  }
+
+  --ti-cursor-font-family: $global-font-family;
+  --ti-cursor-font-size: $global-font-size;
+  --ti-cursor-font-weight: $global-font-weight;
+  --ti-cursor-line-height: $global-line-height;
+  --ti-cursor-color: $global-font-secondary-color;
+  --ti-cursor-margin-left: 0;
+
+  [theme=dark] & {
+    --ti-cursor-color: $global-font-secondary-color-dark;
+  }
 }
 
 .lg-toolbar .lg-icon::after {
