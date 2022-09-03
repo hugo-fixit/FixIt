@@ -282,14 +282,20 @@
 
       img {
         display: block;
+        width: 100%;
         height: auto;
         margin: 0 auto;
         overflow: hidden;
       }
     }
 
+    .lazyload,
     .lazyloading {
-      @include object-fit(none);
+      @include object-fit(scale-down);
+    }
+
+    .lazyloaded {
+      @include object-fit(fill);
     }
 
     blockquote {
@@ -360,6 +366,7 @@
     }
 
     .typeit {
+      // TODO refactor
       .code {
         padding: 0.375rem;
         font-size: 0.875rem;
