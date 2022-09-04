@@ -17,7 +17,8 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: update echarts theme config
 - :zap: Perf: remove extra spaces in plugin link
 - :wheelchair: Feat(accessibility): use `aria-hidden=true` on icons that AT should ignore
-- :bug: Fix: add function doc2unix to unify new lines symbol between Windows and Unix/Mac OS
+- :recycle: Refactor: image rendering
+- :bug: Fix: add function `dos2unix` to unify new lines symbol between Windows and Unix/Mac OS
 - :bug: Fix: author display error in post and markdown file
 - :bug: Fix: use data attributes or class replace for custom attributes
 - :bug: Fix: attribute `media` not allowed on element meta in `[name=theme-color]`

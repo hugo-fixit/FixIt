@@ -19,16 +19,21 @@
 {{- end -}}
 
 {{- $alt := .Alt | default $src -}}
+{{- $caption := .Caption | default $alt -}}
 {{- $loading := resources.Get "svg/loading.svg" | minify -}}
 {{- if .Linked -}}
-  <a class="lightgallery" href="{{ $large | safeURL }}" title="{{ .Title | default $alt }}" data-thumbnail="{{ $small | safeURL }}"{{ with .Caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
+  <a class="lightgallery" href="{{ $large | safeURL }}" data-thumbnail="{{ $small | safeURL }}"{{ with $caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
     <img
       class="lazyload{{ with .Class }} {{ . }}{{ end }}"
       src="{{ $loading.RelPermalink }}"
       data-src="{{ $src | safeURL }}"
       data-srcset="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
       data-sizes="auto"
-      alt="{{ $alt }}"{{ with .Height }} height="{{ . }}"{{ end }}{{ with .Width }} width="{{ . }}"{{ end }} />
+      alt="{{ $alt }}"
+      title="{{ .Title | default $alt }}"
+      {{- with .Height }} height="{{ . }}"{{- end -}}
+      {{- with .Width }} width="{{ . }}"{{- end -}}
+    />
   </a>
 {{- else -}}
   <img
@@ -39,6 +44,7 @@
     data-sizes="auto"
     alt="{{ $alt }}"
     title="{{ .Title | default $alt }}"
-    {{- with $width }} width="{{ . }}"{{ end }}
-    {{- with $height }} height="{{ . }}"{{ end }} />
+    {{- with $width }} width="{{ . }}"{{- end -}}
+    {{- with $height }} height="{{ . }}"{{- end -}}
+  />
 {{- end -}}
