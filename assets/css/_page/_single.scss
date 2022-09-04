@@ -283,16 +283,18 @@
 
       img {
         display: block;
-        width: 100%;
-        height: auto;
         margin: 0 auto;
         overflow: hidden;
+
+        &.lazyloaded {
+          width: 100%;
+        }
       }
     }
 
     .lazyload,
     .lazyloading {
-      @include object-fit(scale-down);
+      @include object-fit(none);
     }
 
     .lazyloaded {
