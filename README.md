@@ -92,7 +92,7 @@ To see this theme in action, here are some live demo sites which are rendered wi
 * Optimized SEO performance with a correct **SEO SCHEMA** based on JSON-LD
 * **[Google Analytics](https://analytics.google.com/analytics)** supported
 * **[Fathom Analytics](https://usefathom.com/)** supported
-* Search engine **verification** supported (Google, Bind, Yandex and Baidu)
+* Search engine **verification** supported (Google, Bing, Yandex, Pinterest, Baidu, 360 and Sogou)
 * **CDN** for third-party libraries supported
 * Automatically converted images with **Lazy Load** by [lazysizes](https://github.com/aFarkas/lazysizes)
 
