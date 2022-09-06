@@ -6,24 +6,30 @@ license = "MIT"
 licenselink = "https://github.com/hugo-fixit/FixIt/blob/master/LICENSE"
 description = "A Clean, Elegant but Advanced Hugo Theme for Hugo."
 homepage = "https://github.com/hugo-fixit/FixIt"
+demosite = "https://fixit.lruihao.cn"
+min_version = "0.84.0"
+
 tags = [
   "blog",
   "clean",
   "responsive",
+  "light",
   "dark",
   "theme"
 ]
 features = [
-  "cover-image",
-  "favicon",
-  "multilingual",
-  "pagination",
-  "social-menu",
-  "syntax-highlighting",
+  "i18n",
+  "PWA",
+  "Sub menu",
+  "Content Encryption",
+  "watermark",
   "SEO Optimized",
   "friends link template",
-  "PWA support",
-  "watermark support"
+  "pagination",
+  "syntax-highlighting",
+  "cover-image",
+  "favicon",
+  "social links"
 ]
 
 [author]
@@ -34,8 +40,3 @@ features = [
   name = "Dillon"
   homepage = "https://dillonzq.com"
   repo = "https://github.com/dillonzq/LoveIt"
-
-[module]
-  [module.hugoVersion]
-    extended = true
-    min = "0.84.0"

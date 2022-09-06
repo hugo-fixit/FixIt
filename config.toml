@@ -694,3 +694,11 @@
       enable = false
       # "vConsole", "eruda" supported
       type = "vConsole"
+
+# -------------------------------------------------------------------------------------
+# Hugo version required
+# -------------------------------------------------------------------------------------
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.84.0"
