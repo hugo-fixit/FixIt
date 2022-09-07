@@ -29,11 +29,11 @@ class Util {
     !Array.isArray(animation) && (animation = [animation]);
     element.classList.add('animate__animated', ...animation);
     const handler = () => {
-      element.classList.remove('animate__animated', ...animation);
+      !reserved && element.classList.remove('animate__animated', ...animation);
       element.removeEventListener('animationend', handler);
       typeof callback === 'function' && callback();
     };
-    !reserved && element.addEventListener('animationend', handler, false);
+    element.addEventListener('animationend', handler, false);
   }
   
   /**
@@ -43,6 +43,16 @@ class Util {
    */
   isValidDate(date) {
     return date instanceof Date && !isNaN(date.getTime());
+  }
+  
+  /**
+   * scroll some element into view
+   * @param {String} element element to scroll
+   */
+  scrollIntoView(selector) {
+    document.querySelector(selector).scrollIntoView({
+      behavior: 'smooth'
+    });
   }
 }
 
@@ -1001,12 +1011,17 @@ class FixIt {
     if (document.body.getAttribute('data-header-mobile') === 'auto') {
       $headers.push(document.getElementById('header-mobile'));
     }
-    if (document.getElementById('comments')) {
-      const $viewComments = document.getElementById('view-comments');
-      $viewComments.href = `#comments`;
-      $viewComments.style.display = 'block';
+    if (document.querySelector('#comments')) {
+      const $viewCommentsBtn = document.querySelector('.view-comments');
+      $viewCommentsBtn.classList.remove('d-none');
+      $viewCommentsBtn.addEventListener('click', () => {
+        this.util.scrollIntoView('#comments');
+      });
     }
-    const $fixedButtons = document.getElementById('fixed-buttons');
+    document.querySelector('.back-to-top').addEventListener('click', () => {
+      this.util.scrollIntoView('body');
+    });
+    const $fixedButtons = document.querySelector('.fixed-buttons');
     const ACCURACY = 20, MINIMUM = 100;
     window.addEventListener('scroll', (event) => {
       if (this.disableScrollEvent) {
@@ -1032,18 +1047,21 @@ class FixIt {
       if (this.newScrollTop > MINIMUM) {
         if (isMobile && scroll > ACCURACY) {
           $fixedButtons.classList.remove('animate__fadeIn');
-          this.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
+          this.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true, () => {
+            $fixedButtons.classList.contains('animate__fadeOut') && $fixedButtons.classList.add('d-none');
+          });
         } else if (!isMobile || scroll < -ACCURACY) {
-          $fixedButtons.style.display = 'block';
+          $fixedButtons.classList.remove('d-none');
           $fixedButtons.classList.remove('animate__fadeOut');
           this.util.animateCSS($fixedButtons, ['animate__fadeIn', 'animate__faster'], true);
         }
       } else {
         if (!isMobile) {
           $fixedButtons.classList.remove('animate__fadeIn');
-          this.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true);
+          this.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true, () => {
+            $fixedButtons.classList.contains('animate__fadeOut') && $fixedButtons.classList.add('d-none');
+          });
         }
-        $fixedButtons.style.display = 'none';
       }
       for (let event of this.scrollEventSet) {
         event();

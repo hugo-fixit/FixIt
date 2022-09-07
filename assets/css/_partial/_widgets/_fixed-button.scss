@@ -1,9 +1,4 @@
-#fixed-buttons {
-  display: none;
-}
-
 .fixed-button {
-  display: none;
   z-index: 100;
   position: fixed;
   right: 1.5rem;
@@ -40,11 +35,10 @@
   }
 }
 
-#back-to-top {
-  display: block;
+.back-to-top {
   bottom: 1.5rem;
 }
 
-#view-comments {
+.view-comments {
   bottom: 4.5rem;
 }

@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - :zap: Perf: remove extra spaces in plugin link
 - :wheelchair: Feat(accessibility): use `aria-hidden=true` on icons that AT should ignore
 - :recycle: Refactor: image rendering
+- :recycle: Refactor: back to top and scroll to comments
 - :bug: Fix: add function `dos2unix` to unify new lines symbol between Windows and Unix/Mac OS
 - :bug: Fix: author display error in post and markdown file
 - :bug: Fix: use data attributes or class replace for custom attributes

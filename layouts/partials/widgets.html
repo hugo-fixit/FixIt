@@ -1,14 +1,13 @@
 <div class="widgets">
-  <div id="fixed-buttons">
+  <div class="fixed-buttons d-none">
     {{- /* top button */ -}}
-    <a href="#" id="back-to-top" class="fixed-button" title="{{ T `backToTop` }}">
+    <div class="fixed-button back-to-top" title="{{ T `backToTop` }}">
       {{- dict "Class" "fa-solid fa-arrow-up fa-fw" | partial "plugin/icon.html" -}}
-    </a>
-
+    </div>
     {{- /* comment button */ -}}
-    <a href="#" id="view-comments" class="fixed-button" title="{{ T `viewComments` }}">
+    <div class="fixed-button view-comments d-none" title="{{ T `viewComments` }}">
       {{- dict "Class" "fa-solid fa-comment fa-fw" | partial "plugin/icon.html" -}}
-    </a>
+    </div>
   </div>
 
   {{- /* GitHub Corners */ -}}
