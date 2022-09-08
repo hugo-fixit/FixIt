@@ -664,13 +664,7 @@
     polyfill = false
     # whether to use object-fit-images to be compatible with older browsers
     objectFit = false
-  
-  # FixIt 0.2.12 | NEW Custom JS at last
-  # "_custom.js" located in "themes/FixIt/assets/js/"
-  # you can store your custom JS file in the same path under your project:
-  # "assets/js/_custom.js"
-  [params.customJS]
-    enable = true
+
   # FixIt 0.2.14 | NEW GitHub banner in the top-right or top-left corner
   [params.githubCorner]
     enable = false

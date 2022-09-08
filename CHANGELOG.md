@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 - :wheelchair: Feat(accessibility): use `aria-hidden=true` on icons that AT should ignore
 - :recycle: Refactor: image rendering
 - :recycle: Refactor: back to top and scroll to comments
+- :recycle: Refactor: custom.js rendering and remove `params.customJS` ([#189](https://github.com/hugo-fixit/FixIt/pull/189))
 - :bug: Fix: add function `dos2unix` to unify new lines symbol between Windows and Unix/Mac OS
 - :bug: Fix: author display error in post and markdown file
 - :bug: Fix: use data attributes or class replace for custom attributes

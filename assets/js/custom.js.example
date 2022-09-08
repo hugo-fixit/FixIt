@@ -1,20 +1,20 @@
 /**
+ * Custom javascript for FixIt site.
  * @author @Lruihao https://lruihao.cn
- * @description Custom javascript for the hugo theme FixIt.
  */
-const CustomJS = new (function () {
+const FixItCustom = new (function () {
   /**
    * Hello World
    * You can define your own functions below.
-   * @returns {CustomJS}
+   * @returns {FixItCustom}
    */
   this.hello = () => {
-    // console.log('Hello CustomJS!');
+    console.log('FixItCustom echo: Hello FixIt!');
     return this;
-  }
+  };
   /**
    * Initialize.
-   * @returns {CustomJS}
+   * @returns {FixItCustom}
    */
   this.init = () => {
     // Custom infos.
@@ -27,9 +27,9 @@ const CustomJS = new (function () {
  * Immediate.
  */
 (() => {
-  CustomJS.init();
+  FixItCustom.init();
   // It will be executed when the DOM tree is built.
   document.addEventListener('DOMContentLoaded', () => {
-    // console.log('DOM content loaded!')
+    // FixItCustom.init();
   });
 })();
