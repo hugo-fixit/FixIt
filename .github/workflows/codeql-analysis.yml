@@ -15,14 +15,17 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - assets/lib/**
+      - docs/**
   pull_request:
     branches:
       - master
+    paths-ignore:
+      - assets/lib/**
+      - docs/**
   schedule:
     - cron: '30 18 * * 5'
-  paths-ignore:
-    - assets/lib/**
-    - docs/**
 
 jobs:
   analyze:
