@@ -1,5 +1,5 @@
-@import '../_partial/_single/toc';
-@import '../_partial/_single/fixit-decryptor';
+@import '../_partials/_single/toc';
+@import '../_partials/_single/fixit-decryptor';
 
 .single {
   .single-title {
@@ -333,7 +333,7 @@
       }
     }
 
-    @import '../_partial/_single/code';
+    @import '../_partials/_single/code';
     @import '../_shortcodes/index';
 
     hr {
@@ -374,8 +374,8 @@
     }
   }
 
-  @import '../_partial/_single/footer';
-  @import '../_partial/_single/comment';
+  @import '../_partials/_single/footer';
+  @import '../_partials/_single/comment';
 }
 
 .lg-toolbar .lg-icon::after {

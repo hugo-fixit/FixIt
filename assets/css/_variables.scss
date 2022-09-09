@@ -146,4 +146,7 @@ $github-corner-fill: $header-background-color-dark !default;
 $github-corner-fill-dark: $header-background-color !default;
 // ========== GitHub Corners ========== //
 
-@import '_maps/index';
+@import '_partials/_maps/admonition';
+@import '_partials/_maps/code-highlight';
+@import '_partials/_maps/code-type';
+@import '_partials/_maps/colors';

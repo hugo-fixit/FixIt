@@ -62,7 +62,7 @@ iframe {
 @include ms;
 @include link(true, true);
 
-@import '../_partial/mask';
-@import '../_partial/icon';
-@import '../_partial/details';
-@import '../_partial/_widgets';
+@import '../_partials/mask';
+@import '../_partials/icon';
+@import '../_partials/details';
+@import '../_partials/widgets';

@@ -2,22 +2,15 @@
 
 @import "_variables";
 @import "_override";
-
 @import "_mixin/index";
-
 @import "../lib/normalize/normalize";
-
-@import "_root";
+@import "_core/root";
+@import "_core/common";
 @import "_core/base";
 @import "_core/layout";
-
-@import "_page/index";
-
-@import "_partial/header";
-@import "_partial/footer";
-@import "_partial/pagination";
-
+@import "_page";
+@import "_partials/header";
+@import "_partials/footer";
+@import "_partials/pagination";
 @import "_core/media";
-
-@import "_common";
 @import "_custom";
