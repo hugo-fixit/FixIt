@@ -1,7 +1,11 @@
 :root {
   // Note: Custom variable values only support SassScript inside `#{}`.
 
+  // Theme colors varibles
   @each $color, $value in $theme-colors {
-    --#{$prefix}#{$color}: #{$value};
+    --#{$prefix}-#{$color}: #{$value};
+  }
+  @each $color, $value in $theme-colors {
+    --#{$prefix}-#{$color}-dark: #{darken($value, 5%)};
   }
 }

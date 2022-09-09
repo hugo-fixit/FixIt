@@ -10,10 +10,14 @@
     line-height: 140%;
   
     .icon-repost {
-      color: $success;
+      color: var(--fi-success);
       display: inline-block;
       width: max-content;
       margin-right: 0.25rem;
+
+      [data-theme='dark'] & {
+        color: var(--fi-success-dark);
+      }
     }
   }
 
