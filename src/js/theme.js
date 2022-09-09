@@ -1031,7 +1031,6 @@ class FixIt {
       const $mask = document.getElementById('mask');
       this.newScrollTop = this.util.getScrollTop();
       const scroll = this.newScrollTop - this.oldScrollTop;
-      const isMobile = this.util.isMobile();
       this.util.forEach($headers, ($header) => {
         if (scroll > ACCURACY) {
           $header.classList.remove('animate__fadeInDown');
@@ -1045,23 +1044,14 @@ class FixIt {
       });
       // whether to show b2t button
       if (this.newScrollTop > MINIMUM) {
-        if (isMobile && scroll > ACCURACY) {
-          $fixedButtons.classList.remove('animate__fadeIn');
-          this.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true, () => {
-            $fixedButtons.classList.contains('animate__fadeOut') && $fixedButtons.classList.add('d-none');
-          });
-        } else if (!isMobile || scroll < -ACCURACY) {
-          $fixedButtons.classList.remove('d-none');
-          $fixedButtons.classList.remove('animate__fadeOut');
-          this.util.animateCSS($fixedButtons, ['animate__fadeIn', 'animate__faster'], true);
-        }
+        $fixedButtons.classList.remove('d-none');
+        $fixedButtons.classList.remove('animate__fadeOut');
+        this.util.animateCSS($fixedButtons, ['animate__fadeIn', 'animate__faster'], true);
       } else {
-        if (!isMobile) {
-          $fixedButtons.classList.remove('animate__fadeIn');
-          this.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true, () => {
-            $fixedButtons.classList.contains('animate__fadeOut') && $fixedButtons.classList.add('d-none');
-          });
-        }
+        $fixedButtons.classList.remove('animate__fadeIn');
+        this.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true, () => {
+          $fixedButtons.classList.contains('animate__fadeOut') && $fixedButtons.classList.add('d-none');
+        });
       }
       for (let event of this.scrollEventSet) {
         event();
