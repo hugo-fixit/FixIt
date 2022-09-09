@@ -1022,6 +1022,7 @@ class FixIt {
       this.util.scrollIntoView('body');
     });
     const $fixedButtons = document.querySelector('.fixed-buttons');
+    const $readingProgressBar = document.querySelector('.reading-progress-bar');
     const ACCURACY = 20, MINIMUM = 100;
     window.addEventListener('scroll', (event) => {
       if (this.disableScrollEvent) {
@@ -1052,6 +1053,11 @@ class FixIt {
         this.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true, () => {
           $fixedButtons.classList.contains('animate__fadeOut') && $fixedButtons.classList.add('d-none');
         });
+      }
+      if ($readingProgressBar) {
+        const contentHeight = document.body.scrollHeight - window.innerHeight;
+        const scrollPercent = contentHeight > 0 ? Math.min(100 * window.scrollY / contentHeight, 100) : 0;
+        $readingProgressBar.style.setProperty('--progress', `${scrollPercent.toFixed(2)}%`);
       }
       for (let event of this.scrollEventSet) {
         event();

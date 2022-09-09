@@ -1,0 +1,11 @@
+.reading-progress-bar {
+  --progress: 0;
+  width: var(--progress);
+  background-color: var(--bg-progress, $info);
+  z-index: 150;
+  position: fixed;
+  
+  [data-theme="dark"] & {
+    background-color: var(--bg-progress-dark, darken($info, 5%));
+  }
+}

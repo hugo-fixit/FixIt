@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 > This version fixes several bugs, adds a few new features and SEO optimizations, and refactors part of the project structure and code.  
 > Snapshot: <>
 
+- :tada: Feat: add reading progress bar support ([#191](https://github.com/hugo-fixit/FixIt/issues/191))
 - :sparkles: Feat: add `raw` shortcode
 - :sparkles: Feat(menu): add params: `icon`, `type` for menu items
 - :sparkles: Feat: add custom aside template in post page ([#172](https://github.com/hugo-fixit/FixIt/issues/172))

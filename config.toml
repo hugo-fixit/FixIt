@@ -676,6 +676,17 @@
     # Gravatar host, default: "www.gravatar.com"
     host = "www.gravatar.com" # "cn.gravatar.com", "gravatar.loli.net"
     style = "" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
+  # FixIt 0.2.16 | NEW Reading progress bar
+  [params.readingProgress]
+    enable = false
+    # Available values: ["left", "right"]
+    start = "left"
+    # Available values: ["top", "bottom"]
+    position = "top"
+    reversed = false
+    light = ""
+    dark = ""
+    height = "2px"
   # FixIt 0.2.15 | NEW Developer options
   [params.dev]
     enable = false

@@ -22,4 +22,17 @@
 
   {{- /* Search mask */ -}}
   <div id="mask"></div>
+
+  {{- /* Reading progress bar */ -}}
+  {{- $readingProgress := .Site.Params.readingProgress -}}
+  {{- if $readingProgress.enable -}}
+    {{- with $readingProgress -}}
+      <div class="reading-progress-bar" style="
+        {{- if .Reversed -}}width: calc(100% - var(--progress));{{- end -}}
+        {{- if .Light -}}--bg-progress: {{ .Light }};{{- end -}}
+        {{- if .Dark -}}--bg-progress-dark: {{ .Dark }};{{- end -}}
+        {{- .Start | default "left" -}}: 0;
+        {{- .Position | default "top" -}}: 0;height: {{ .Height | default "2px" }};"></div>
+    {{- end -}}
+  {{- end -}}
 </div>
