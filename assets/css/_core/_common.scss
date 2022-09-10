@@ -46,3 +46,7 @@
     color: #{$value} !important;
   }
 }
+
+.variant-numeric {
+  font-variant-numeric: tabular-nums lining-nums;
+}

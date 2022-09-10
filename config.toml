@@ -676,6 +676,11 @@
     # Gravatar host, default: "www.gravatar.com"
     host = "www.gravatar.com" # "cn.gravatar.com", "gravatar.loli.net"
     style = "" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
+  # FixIt 0.2.16 | NEW Back to top
+  [params.backToTop]
+    enable = true
+    # Scroll percent label in b2t button
+    scrollpercent = false
   # FixIt 0.2.16 | NEW Reading progress bar
   [params.readingProgress]
     enable = false

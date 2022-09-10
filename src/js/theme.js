@@ -775,8 +775,17 @@ class FixIt {
   }
 
   initComment() {
-    if (!this.config.comment) {
+    if (!this.config.comment?.enable) {
       return;
+    }
+    // whether to show the view comments button
+    if (document.querySelector('#comments')) {
+      const $viewCommentsBtn = document.querySelector('.view-comments');
+      $viewCommentsBtn.classList.remove('d-none');
+      // view comments button click event
+      $viewCommentsBtn.addEventListener('click', () => {
+        this.util.scrollIntoView('#comments');
+      }, false);
     }
     if (this.config.comment.artalk) {
       const artalk = new Artalk(this.config.comment.artalk);
@@ -1003,25 +1012,20 @@ class FixIt {
 
   onScroll() {
     const $headers = [];
-    if (document.body.getAttribute('data-header-desktop') === 'auto') {
+    const ACCURACY = 20, MINIMUM = 100;
+    const $fixedButtons = document.querySelector('.fixed-buttons');
+    const $backToTop = document.querySelector('.back-to-top');
+    const $readingProgressBar = document.querySelector('.reading-progress-bar');
+    if (document.body.dataset.headerDesktop === 'auto') {
       $headers.push(document.getElementById('header-desktop'));
     }
-    if (document.body.getAttribute('data-header-mobile') === 'auto') {
+    if (document.body.dataset.headerMobile === 'auto') {
       $headers.push(document.getElementById('header-mobile'));
     }
-    if (document.querySelector('#comments')) {
-      const $viewCommentsBtn = document.querySelector('.view-comments');
-      $viewCommentsBtn.classList.remove('d-none');
-      $viewCommentsBtn.addEventListener('click', () => {
-        this.util.scrollIntoView('#comments');
-      });
-    }
-    document.querySelector('.back-to-top').addEventListener('click', () => {
+    // b2t button click event
+    $backToTop?.addEventListener('click', () => {
       this.util.scrollIntoView('body');
     });
-    const $fixedButtons = document.querySelector('.fixed-buttons');
-    const $readingProgressBar = document.querySelector('.reading-progress-bar');
-    const ACCURACY = 20, MINIMUM = 100;
     window.addEventListener('scroll', (event) => {
       if (this.disableScrollEvent) {
         event.preventDefault();
@@ -1030,32 +1034,37 @@ class FixIt {
       const $mask = document.getElementById('mask');
       this.newScrollTop = this.util.getScrollTop();
       const scroll = this.newScrollTop - this.oldScrollTop;
+      // header animation
       this.util.forEach($headers, ($header) => {
         if (scroll > ACCURACY) {
           $header.classList.remove('animate__fadeInDown');
-          this.util.animateCSS($header, ['animate__fadeOutUp', 'animate__faster'], true);
+          this.util.animateCSS($header, ['animate__fadeOutUp'], true);
           $mask.click();
         } else if (scroll < -ACCURACY) {
           $header.classList.remove('animate__fadeOutUp');
-          this.util.animateCSS($header, ['animate__fadeInDown', 'animate__faster'], true);
+          this.util.animateCSS($header, ['animate__fadeInDown'], true);
           $mask.click();
         }
       });
-      // whether to show b2t button
-      if (this.newScrollTop > MINIMUM) {
-        $fixedButtons.classList.remove('d-none');
-        $fixedButtons.classList.remove('animate__fadeOut');
-        this.util.animateCSS($fixedButtons, ['animate__fadeIn', 'animate__faster'], true);
-      } else {
-        $fixedButtons.classList.remove('animate__fadeIn');
-        this.util.animateCSS($fixedButtons, ['animate__fadeOut', 'animate__faster'], true, () => {
-          $fixedButtons.classList.contains('animate__fadeOut') && $fixedButtons.classList.add('d-none');
-        });
-      }
+      const contentHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercent = contentHeight > 0 ? Math.min(100 * window.scrollY / contentHeight, 100) : 0;
       if ($readingProgressBar) {
-        const contentHeight = document.body.scrollHeight - window.innerHeight;
-        const scrollPercent = contentHeight > 0 ? Math.min(100 * window.scrollY / contentHeight, 100) : 0;
         $readingProgressBar.style.setProperty('--progress', `${scrollPercent.toFixed(2)}%`);
+      }
+      // whether to show fixed buttons
+      if ($fixedButtons) {
+        if (this.newScrollTop > MINIMUM) {
+          $fixedButtons.classList.remove('d-none', 'animate__fadeOut');
+          this.util.animateCSS($fixedButtons, ['animate__fadeIn'], true);
+        } else {
+          $fixedButtons.classList.remove('animate__fadeIn');
+          this.util.animateCSS($fixedButtons, ['animate__fadeOut'], true, () => {
+            $fixedButtons.classList.contains('animate__fadeOut') && $fixedButtons.classList.add('d-none');
+          });
+        }
+        if ($backToTop) {
+          $backToTop.querySelector('span').innerText = `${Math.round(scrollPercent)}%`;
+        }
       }
       for (let event of this.scrollEventSet) {
         event();

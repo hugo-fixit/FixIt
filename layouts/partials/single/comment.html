@@ -1,9 +1,10 @@
 {{- $cdn := .Scratch.Get "cdn" | default dict -}}
 {{- $fingerprint := .Scratch.Get "fingerprint" -}}
 {{- $comment := .Scratch.Get "comment" | default dict -}}
-{{- $commentConfig := dict -}}
+{{- $commentConfig := dict "enable" false -}}
 
 {{- if $comment.enable -}}
+  {{- $commentConfig = dict "enable" true -}}
   <div id="comments">
     {{- /* Artalk Comment System */ -}}
     {{- $artalk := $comment.artalk | default dict -}}

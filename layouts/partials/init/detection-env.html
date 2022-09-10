@@ -19,7 +19,7 @@
   {{- if eq .Params.comment true -}}
     {{- .Scratch.Set "comment" .Site.Params.page.comment -}}
   {{- else if eq .Params.comment false -}}
-    {{- .Scratch.Set "comment" dict -}}
+    {{- .Scratch.Set "comment" (dict "enable" false) -}}
   {{- end -}}
 {{- else -}}
   {{- .Scratch.Set "devOpts" .Site.Params.dev -}}

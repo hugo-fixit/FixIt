@@ -3,11 +3,11 @@
   position: fixed;
   right: 1.5rem;
   font-size: 1rem;
-  line-height: 1.3rem;
-  padding: 0.6rem 0.6rem;
+  line-height: 1.5rem;
+  padding: 0.5rem 0.625rem;
   color: $global-font-secondary-color;
-  background: $header-background-color;
-  @include border-radius(2rem);
+  background-color: $header-background-color;
+  @include border-radius(1.25rem);
   @include transition(color 0.4s ease);
 
   @include blur;
@@ -26,7 +26,7 @@
 
   [data-theme='dark'] & {
     color: $global-font-secondary-color-dark;
-    background: $header-background-color-dark;
+    background-color: $header-background-color-dark;
 
     &:hover,
     &:active {
