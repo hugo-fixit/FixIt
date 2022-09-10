@@ -28,12 +28,10 @@ class Util {
   animateCSS(element, animation, reserved, callback) {
     !Array.isArray(animation) && (animation = [animation]);
     element.classList.add('animate__animated', ...animation);
-    const handler = () => {
+    element.addEventListener('animationend', () => {
       !reserved && element.classList.remove('animate__animated', ...animation);
-      element.removeEventListener('animationend', handler);
       typeof callback === 'function' && callback();
-    };
-    element.addEventListener('animationend', handler, false);
+    }, { once: true });
   }
   
   /**
