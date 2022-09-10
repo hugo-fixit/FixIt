@@ -24,6 +24,9 @@ other = "Back to Top"
 
 [viewComments]
 other = "View Comments"
+
+[noscript]
+other = "Theme FixIt works best with JavaScript enabled."
 # === baseof ===
 
 # === Post ===

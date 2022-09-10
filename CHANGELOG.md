@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat(highlight): add full support for Chroma highlighting languages in the [list](https://gohugo.io/content-management/syntax-highlighting/#list-of-chroma-highlighting-languages)
 - :sparkles: Feat: add optional parameter `noreferrer` for the shortcode `link`
 - :sparkles: Feat: update echarts theme config
+- :sparkles: Feat: add noscript warning banner ([#194](https://github.com/hugo-fixit/FixIt/issues/194))
 - :zap: Perf: remove extra spaces in plugin link
 - :wheelchair: Feat(accessibility): use `aria-hidden=true` on icons that AT should ignore
 - :recycle: Refactor: image rendering

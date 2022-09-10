@@ -25,6 +25,9 @@ other = "回到顶部"
 
 [viewComments]
 other = "查看评论"
+
+[noscript]
+other = "FixIt 主题在启用 JavaScript 的情况下效果最佳。"
 # === baseof ===
 
 # === Post ===

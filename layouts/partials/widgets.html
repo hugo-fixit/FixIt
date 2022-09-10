@@ -44,4 +44,8 @@
         {{- .Position | default "top" -}}: 0;height: {{ .Height | default "2px" }};"></div>
     {{- end -}}
   {{- end -}}
+
+  <noscript>
+    <div class="noscript-warning">{{ T `noscript` }}</div>
+  </noscript>
 </div>

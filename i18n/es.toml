@@ -25,6 +25,9 @@ other = "Volver arriba"
 
 [viewComments]
 other = "Ver comentarios"
+
+[noscript]
+other = "" # waitting for translation
 # === baseof ===
 
 # === Post ===

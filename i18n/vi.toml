@@ -24,6 +24,9 @@ other = "Lên trên"
 
 [viewComments]
 other = "Xem bình luận"
+
+[noscript]
+other = "" # waitting for translation
 # === baseof ===
 
 # === Post ===

@@ -1,0 +1,16 @@
+.noscript-warning {
+  background-color: var(--fi-danger);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  position: fixed;
+  text-align: center;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 150;
+
+  [data-theme='dark'] & {
+    background-color: var(--fi-danger-dark);
+  }
+}
