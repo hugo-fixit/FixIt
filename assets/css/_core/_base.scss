@@ -59,6 +59,10 @@ iframe {
   @include border-radius($global-border-radius);
 }
 
+[role=button] {
+  cursor: pointer;
+}
+
 @include ms;
 @include link(true, true);
 

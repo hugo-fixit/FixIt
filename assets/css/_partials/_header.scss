@@ -163,7 +163,13 @@ header {
 }
 
 .theme-switch i {
+  cursor: pointer;
   @include transform(rotate(225deg));
+  @include transition(transform 0.4s ease);
+
+  &:hover {
+    @include transform(rotate(45deg));
+  }
 }
 
 #header-desktop {
