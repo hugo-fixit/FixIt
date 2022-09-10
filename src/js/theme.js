@@ -7,7 +7,7 @@ class Util {
   }
 
   getScrollTop() {
-    return (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
+    return (document.documentElement ?? document.body).scrollTop;
   }
 
   isMobile() {
@@ -1012,7 +1012,7 @@ class FixIt {
 
   onScroll() {
     const $headers = [];
-    const ACCURACY = 20, MINIMUM = 100;
+    const ACCURACY = 20;
     const $fixedButtons = document.querySelector('.fixed-buttons');
     const $backToTop = document.querySelector('.back-to-top');
     const $readingProgressBar = document.querySelector('.reading-progress-bar');
@@ -1047,13 +1047,13 @@ class FixIt {
         }
       });
       const contentHeight = document.body.scrollHeight - window.innerHeight;
-      const scrollPercent = contentHeight > 0 ? Math.min(100 * window.scrollY / contentHeight, 100) : 0;
+      const scrollPercent = contentHeight > 0 ? Math.min(100 * (window.scrollY < 0 ? 0 : window.scrollY) / contentHeight, 100) : 0;
       if ($readingProgressBar) {
         $readingProgressBar.style.setProperty('--progress', `${scrollPercent.toFixed(2)}%`);
       }
       // whether to show fixed buttons
       if ($fixedButtons) {
-        if (this.newScrollTop > MINIMUM) {
+        if (scrollPercent > 1) {
           $fixedButtons.classList.remove('d-none', 'animate__fadeOut');
           this.util.animateCSS($fixedButtons, ['animate__fadeIn'], true);
         } else {
