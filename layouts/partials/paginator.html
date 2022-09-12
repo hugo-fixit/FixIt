@@ -13,15 +13,13 @@
         {{- $.Scratch.Set "paginator.ellipsed" true -}}
       {{- end -}}
       {{- if $showNumber -}}
-        <li class="page-item {{ if eq . $.Paginator }}active{{ end }}">
+        <li class="page-item{{ if eq . $.Paginator }} active{{ end }}">
           <span class="page-link">
-            <a href="{{ .URL }}">
-              {{- .PageNumber -}}
-            </a>
+            <a href="{{ .URL }}">{{ .PageNumber }}</a>
           </span>
         </li>
       {{- else if ($.Scratch.Get "paginator.shouldEllipse") -}}
-        <li class="page-item ">
+        <li class="page-item">
           <span class="page-link" aria-hidden="true">&hellip;</span>
         </li>
       {{- end -}}

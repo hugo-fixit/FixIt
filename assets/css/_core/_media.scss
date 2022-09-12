@@ -123,6 +123,10 @@
       font-size: 0.618rem;
     }
   }
+  
+  .pagination .page-item {
+    margin: 0 5px;
+  }
 }
 
 @media only print {

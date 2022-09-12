@@ -2,10 +2,11 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  flex-wrap: wrap;
   list-style: none;
   white-space: nowrap;
   width: 100%;
-  padding: 1rem 0 0;
+  padding: 1rem 0;
 
   a {
     font-size: 0.8rem;
@@ -22,8 +23,8 @@
   }
 
   li {
-    padding-bottom: 3px;
-    margin: 0 20px;
+    padding: 5px;
+    margin: 0 10px;
     box-sizing: border-box;
     position: relative;
     display: inline;
@@ -40,8 +41,8 @@
       color: $pagination-link-hover-color-dark;
     }
 
-    &:before,
-    &:after {
+    &::before,
+    &::after {
       position: absolute;
       content: '';
       width: 0;
@@ -51,27 +52,22 @@
       bottom: 0px;
     }
 
-    [data-theme='dark'] &:before,
-    [data-theme='dark'] &:after {
+    [data-theme='dark'] &::before,
+    [data-theme='dark'] &::after {
       background: $pagination-link-hover-color-dark;
     }
 
-    &:before .active,
-    &:after .active {
-      width: 100%;
-    }
-
-    &:before {
+    &::before {
       left: 50%;
     }
 
-    &:after {
+    &::after {
       right: 50%;
     }
 
     &:hover {
-      &:before,
-      &:after {
+      &::before,
+      &::after {
         width: 50%;
       }
     }
@@ -85,9 +81,9 @@
         color: $pagination-link-hover-color-dark;
       }
 
-      &:before,
-      &:after {
-        width: 60%;
+      &::before,
+      &::after {
+        width: 50%;
       }
     }
   }
