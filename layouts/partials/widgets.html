@@ -36,12 +36,20 @@
   {{- $readingProgress := .Site.Params.readingProgress -}}
   {{- if $readingProgress.enable -}}
     {{- with $readingProgress -}}
-      <div class="reading-progress-bar" style="
-        {{- if .Reversed -}}width: calc(100% - var(--progress));{{- end -}}
-        {{- if .Light -}}--bg-progress: {{ .Light }};{{- end -}}
-        {{- if .Dark -}}--bg-progress-dark: {{ .Dark }};{{- end -}}
-        {{- .Start | default "left" -}}: 0;
-        {{- .Position | default "top" -}}: 0;height: {{ .Height | default "2px" }};"></div>
+      {{- $style := printf "%v: 0;%v: 0;" (.Start | default "left") (.Position | default "top") -}}
+      {{- if .Height | and (ne .Height "2px")   -}}
+        {{- $style = printf "%v--progress-h: %v;" $style .Height -}}
+      {{- end -}}
+      {{- if .Reversed -}}
+        {{- $style = printf "%v%v" $style "width: calc(100% - var(--progress));" -}}
+      {{- end -}}
+      {{- if .Light -}}
+        {{- $style = printf "%v--bg-progress: %v;" $style .Light -}}
+      {{- end -}}
+      {{- if .Dark -}}
+        {{- $style = printf "%v--bg-progress-dark: %v;" $style .Dark -}}
+      {{- end -}}
+      <div class="reading-progress-bar" {{ printf "style=\"%v\"" $style | safeHTMLAttr }}></div>
     {{- end -}}
   {{- end -}}
 
