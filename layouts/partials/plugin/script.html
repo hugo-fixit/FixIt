@@ -1,11 +1,11 @@
-{{- if .Content -}}
-  <script>{{- .Content | safeJS -}}</script>
-{{- else if strings.HasPrefix .Source "<script" -}}
-  {{- safeHTML .Source -}}
+{{- with .Content -}}
+  <script>{{ . | safeJS }}</script>
 {{- else -}}
-  {{- $src := .Source -}}
-  {{- $integrity := .Integrity -}}
-  {{- if $src -}}
+  {{- if strings.HasPrefix .Source "<script" -}}
+    {{- safeHTML .Source -}}
+  {{- else -}}
+    {{- $src := .Source -}}
+    {{- $integrity := .Integrity -}}
     {{- if (urls.Parse $src).Host | not -}}
       {{- $resource := resources.Get $src -}}
       {{- with .Template -}}
@@ -20,6 +20,22 @@
       {{- end -}}
       {{- $src = $resource.RelPermalink -}}
     {{- end -}}
-    <script src="{{ $src }}"{{ if .Crossorigin }} crossorigin="anonymous"{{ end }}{{ with $integrity }} integrity="{{ . }}"{{ end }}{{ if .Async }} async{{ end }}{{ if .Defer }} defer{{ end }}{{ with .Attr }} {{ . | safeHTMLAttr }}{{ end }}></script>
+    {{- $attrs := printf `src="%v"` $src -}}
+    {{- if .Crossorigin -}}
+      {{- $attrs = ` crossorigin="anonymous"` | add $attrs -}}
+    {{- end -}}
+    {{- with $integrity -}}
+      {{- $attrs = printf ` integrity="%v"` . | add $attrs -}}
+    {{- end -}}
+    {{- if .Async -}}
+      {{- $attrs = " async" | add $attrs -}}
+    {{- end -}}
+    {{- if .Defer -}}
+      {{- $attrs = " defer" | add $attrs -}}
+    {{- end -}}
+    {{- with .Attr -}}
+      {{- $attrs = add " " . | add $attrs -}}
+    {{- end -}}
+    <script {{ $attrs | safeHTMLAttr }}></script>
   {{- end -}}
 {{- end -}}
