@@ -3,9 +3,9 @@
 
   // Theme colors varibles
   @each $color, $value in $theme-colors {
-    --#{$prefix}-#{$color}: #{$value};
+    --#{$prefix}#{$color}: #{$value};
   }
   @each $color, $value in $theme-colors {
-    --#{$prefix}-#{$color}-dark: #{darken($value, 5%)};
+    --#{$prefix}#{$color}-dark: #{darken($value, 5%)};
   }
 }
