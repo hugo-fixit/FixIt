@@ -210,7 +210,7 @@
       # special amount of posts in each home posts page
       paginate = 6
 
-  # Social config about the author
+  # FixIt 0.2.16 | CHANGED Social config about the author
   [params.social]
     GitHub = ""
     Linkedin = ""
@@ -274,7 +274,6 @@
     XMPP = ""
     Matrix = ""
     Bilibili = ""
-    # ORCID, ... , CSDN FixIt 0.2.13 | NEW
     ORCID = ""
     Liberapay = ""
     Ko-Fi = ""
@@ -284,8 +283,19 @@
     QQGroup = "" # https://qun.qq.com/join.html
     Diaspora = ""
     CSDN = ""
+    Discord = ""
+    DiscordInvite = ""
+    Lichess = ""
+    Pleroma = ""
+    Kaggle = ""
+    MediaWiki= ""
+    Plume = ""
+    HackTheBox = ""
+    RootMe= ""
+    Feishu = ""
+    Phone = ""
     Email = ""
-    RSS = true # FixIt 0.2.0 | NEW
+    RSS = true
 
   # FixIt 0.2.0 | CHANGED Page config
   [params.page]

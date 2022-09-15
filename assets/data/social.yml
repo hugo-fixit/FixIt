@@ -452,7 +452,7 @@ thingiverse:
   Prefix: https://www.thingiverse.com/
   Title: Thingiverse
   Icon:
-    Src: svg/icons/thingiverse.svg
+    Simpleicons: thingiverse
 
 # 058: Dev.To
 devto:
@@ -564,17 +564,102 @@ csdn:
   Icon:
     Src: svg/icons/csdn.svg
 
-# 072: Email
-email:
+# 072: Discord User Profile
+discord:
   Weight: 72
+  Prefix: https://discordapp.com/users/
+  Title: Discord
+  Icon:
+    Class: fa-brands fa-discord fa-fw
+
+# 073: Discord Server Invite Link
+discordInvite:
+  Weight: 73
+  Prefix: https://discord.gg/
+  Title: Discord
+  Icon:
+    Class: fa-brands fa-discord fa-fw
+
+# 074: Lichess user profile
+lichess:
+  Weight: 74
+  Prefix: https://lichess.org/@/
+  Title: Lichess
+  Icon:
+    Simpleicons: lichess
+
+# 075: Pleroma
+pleroma:
+  Weight: 75
+  Title: Pleroma
+  Icon:
+    Simpleicons: pleroma
+
+# 076: Kaggle
+kaggle:
+  Weight: 76
+  Prefix: https://kaggle.com/
+  Title: Kaggle
+  Icon:
+    Class: fa-brands fa-kaggle fa-fw
+
+# 077: MediaWiki
+mediawiki:
+  Weight: 77
+  Title: MediaWiki
+  Icon:
+    Class: fa-brands fa-wikipedia-w fa-fw
+
+# 078: Plume
+plume:
+  Weight: 78
+  Title: Plume
+  Icon:
+    Src: svg/icons/plume.svg
+
+# 079: Hack The Box
+hackthebox:
+  Weight: 79
+  Title: Hack The Box
+  Prefix: https://app.hackthebox.com/profile/
+  Icon:
+    Simpleicons: hackthebox
+
+# 080: Root-Me
+rootme:
+  Weight: 80
+  Title: Root-Me
+  Prefix: https://www.root-me.org/
+  Icon:
+    Src: svg/icons/rootme.svg
+
+# 081: Feishu
+feishu:
+  Weight: 81
+  Title: Feishu
+  Template: https://www.feishu.cn/invitation/page/add_contact/?token=%v
+  Icon:
+    Class: fa-solid fa-dove
+
+# Phone
+phone:
+  Weight: 98
+  Template: tel:%v
+  Title: Phone
+  Icon:
+    Class: fa-solid fa-phone fa-fw
+
+# Email
+email:
+  Weight: 99
   Template: mailto:%v
   Title: Email
   Icon:
     Class: fa-regular fa-envelope fa-fw
 
-# 073: RSS
+# RSS
 rss:
-  Weight: 73
+  Weight: 100
   Url: /index.xml
   Title: RSS
   Newtab: true
