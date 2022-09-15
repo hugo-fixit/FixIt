@@ -2,9 +2,9 @@
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hugo-fixit/FixIt?style=flat)](https://github.com/hugo-fixit/FixIt/releases)
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.84.0-ff4088?style=flat&logo=hugo)](https://gohugo.io/)
-[![License](https://img.shields.io/github/license/hugo-fixit/FixIt?style=flat)](https://github.com/hugo-fixit/FixIt/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/hugo-fixit/FixIt?style=flat)](/LICENSE)
 
-[English README](https://github.com/hugo-fixit/FixIt/blob/master/README.md) | 简体中文说明
+👉 [English README](/README.md) | 简体中文说明
 
 > [FixIt](https://github.com/hugo-fixit/FixIt) 是一个**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。
 
@@ -12,7 +12,7 @@
 
 FixIt 主题继承了这些主题的优秀功能，并在此基础上添加了新的功能与优化，请阅读 [为什么选择 FixIt](#为什么选择-FixIt) 来了解更多。
 
-![Hugo Theme FixIt](https://github.com/hugo-fixit/FixIt/raw/master/images/Apple-Devices-Preview.png)
+![Hugo Theme FixIt](/images/Apple-Devices-Preview.png)
 
 ## [立即开始](https://fixit.lruihao.cn/zh-cn/categories/documentation/)
 
@@ -176,7 +176,7 @@ FixIt 支持下列语言：
 
 ## [路线图](https://github.com/hugo-fixit/FixIt/projects/1)
 
-## [更新日志](https://github.com/hugo-fixit/FixIt/blob/master/CHANGELOG.md)
+## [更新日志](/CHANGELOG.md)
 
 ## 问题、想法、bugs 和 PRs
 
@@ -243,8 +243,18 @@ FixIt 支持下列语言：
 
 ## 许可协议
 
-FixIt 根据 **MIT** 许可协议授权。 更多信息请查看 [LICENSE 文件](https://github.com/hugo-fixit/FixIt/blob/master/LICENSE)。
+FixIt 根据 **MIT** 许可协议授权。 更多信息请查看 [LICENSE 文件](/LICENSE)。
 
 ## 作者
 
 [Lruihao](https://lruihao.cn)
+
+## 赞助支持
+
+如果你喜爱这个主题，请考虑给我买杯咖啡 ☕️.
+
+* [PayPal](https://paypal.me/Lruihao)
+* [支付宝](/images/alipay.gif)
+* [微信支付](/images/wechat.gif)
+
+谢谢！❤️

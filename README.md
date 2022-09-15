@@ -2,9 +2,9 @@
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hugo-fixit/FixIt?style=flat)](https://github.com/hugo-fixit/FixIt/releases)
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.84.0-ff4088?style=flat&logo=hugo)](https://gohugo.io/)
-[![License](https://img.shields.io/github/license/hugo-fixit/FixIt?style=flat)](https://github.com/hugo-fixit/FixIt/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/hugo-fixit/FixIt?style=flat)](/LICENSE)
 
-English README | [简体中文说明](https://github.com/hugo-fixit/FixIt/blob/master/README.zh-cn.md)
+👉 English README | [简体中文说明](/README.zh-cn.md)
 
 > **FixIt** is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/).
 
@@ -12,7 +12,7 @@ It is based on the original [LoveIt Theme](https://github.com/dillonzq/LoveIt), 
 
 The FixIt theme inherits the excellent features of these themes, and adds new features and optimizations on those basis. Please read [Why Choose FixIt](#why-choose-fixit) to learn more.
 
-![Hugo Theme FixIt](https://github.com/hugo-fixit/FixIt/raw/master/images/Apple-Devices-Preview.png)
+![Hugo Theme FixIt](/images/Apple-Devices-Preview.png)
 
 ## [Getting started](https://fixit.lruihao.cn/categories/documentation/)
 
@@ -176,7 +176,7 @@ FixIt supports the following languages:
 
 ## [Roadmap](https://github.com/hugo-fixit/FixIt/projects/1)
 
-## [Changelog](https://github.com/hugo-fixit/FixIt/blob/master/CHANGELOG.md)
+## [Changelog](/CHANGELOG.md)
 
 ## Questions, ideas, bugs, pull requests
 
@@ -243,8 +243,18 @@ Make sure that you follow [CODE_OF_CONDUCT.md](/CODE_OF_CONDUCT.md) while contri
 
 ## License
 
-FixIt is licensed under the **MIT** license. Check the [LICENSE file](https://github.com/hugo-fixit/FixIt/blob/master/LICENSE) for details.
+FixIt is licensed under the **MIT** license. Check the [LICENSE file](/LICENSE) for details.
 
 ## Author
 
 [Lruihao](https://lruihao.cn)
+
+## Sponsor
+
+If you enjoy the theme, please consider buying me a coffee ☕️.
+
+* [PayPal](https://paypal.me/Lruihao)
+* [Alipay](/images/alipay.gif)
+* [Wechat](/images/wechat.gif)
+
+Thanks! ❤️
