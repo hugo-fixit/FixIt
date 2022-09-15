@@ -114,7 +114,7 @@ class FixIt {
   initMenuDesktop() {
     // This is a dirty hack for fixing sub menu position error in desktop header
     this.util.forEach(document.querySelectorAll('.has-children, #header-desktop .language'), ($item) => {
-      $item.addEventListener('mouseover', function(){
+      $item.addEventListener('mouseover', function () {
         this.querySelector('.sub-menu').style.left= `${this.getBoundingClientRect().left}px`;
       })
       $item.querySelector('.sub-menu').style.minWidth= `${$item.offsetWidth - 8}px`;
@@ -929,7 +929,7 @@ class FixIt {
   initWatermark() {
     this.config.watermark?.enable &&
       new Watermark({
-        content: this.config.watermark.content || '<img class="fixit-icon" src="/images/fixit.svg" alt="FixIt logo" /> FixIt Theme',
+        content: this.config.watermark.content || `${document.querySelector('footer .fixit-icon')?.outerHTML ?? ''} FixIt Theme`,
         appendTo: this.config.watermark.appendto || '.wrapper>main',
         opacity: this.config.watermark.opacity,
         width: this.config.watermark.width,

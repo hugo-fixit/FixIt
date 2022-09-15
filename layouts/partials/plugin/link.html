@@ -40,7 +40,7 @@
       {{- dict "Class" "fa-solid fa-download fa-fw ms-1 text-secondary" | partial "plugin/icon.html" -}}
     {{- end -}}
   {{- else -}}
-    <span class="cl-backdrop"></span>
+    <span class="cl-backdrop" {{ printf "style=\"--cl-bg-url: url(%v);\"" (resources.Get "fixit.svg" | minify).RelPermalink | safeHTMLAttr }}></span>
     <span class="cl-content">
       <span class="cl-text">
         <span class="cl-title">

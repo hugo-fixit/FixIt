@@ -116,7 +116,7 @@
     # FixIt 0.2.0 | NEW Header title config
     [params.header.title]
       # URL of the LOGO
-      logo = "/images/fixit.svg"
+      logo = "/fixit.min.svg"
       # title name
       name = "My New Hugo Site"
       # you can add extra information before the name (HTML format is supported), such as icons
