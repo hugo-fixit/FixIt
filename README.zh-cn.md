@@ -254,7 +254,7 @@ FixIt 根据 **MIT** 许可协议授权。 更多信息请查看 [LICENSE 文件
 如果你喜爱这个主题，请考虑给我买杯咖啡 ☕️.
 
 * [PayPal](https://paypal.me/Lruihao)
-* [支付宝](/images/alipay.gif)
-* [微信支付](/images/wechat.gif)
+* [支付宝](https://gitee.com/lruihao/FixIt/raw/master/images/alipay.gif)
+* [微信支付](https://gitee.com/lruihao/FixIt/raw/master/images/wechatpay.gif)
 
 谢谢！❤️

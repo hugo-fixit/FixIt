@@ -254,7 +254,7 @@ FixIt is licensed under the **MIT** license. Check the [LICENSE file](/LICENSE) 
 If you enjoy the theme, please consider buying me a coffee ☕️.
 
 * [PayPal](https://paypal.me/Lruihao)
-* [Alipay](/images/alipay.gif)
-* [Wechat](/images/wechat.gif)
+* [Alipay](https://gitee.com/lruihao/FixIt/raw/master/images/alipay.gif)
+* [Wechat](https://gitee.com/lruihao/FixIt/raw/master/images/wechatpay.gif)
 
 Thanks! ❤️
