@@ -1,20 +1,27 @@
 {{- /* https://img.shields.io/badge/$label-$version-$color?style=flat&labelColor=403c3d */ -}}
-{{- $labelLength := strings.RuneCount .label | mul 64 | add 100 -}}
-{{- $versionLength := strings.RuneCount .version | mul 60 -}}
-{{- $width := add $labelLength $versionLength | add 200 -}}
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {{ $width }} 200">
-    <g shape-rendering="crispEdges">
-        {{- $x1 := add $labelLength 100 -}}
-        {{- $x2 := add $versionLength 100 -}}
-        <path fill="#403c3d" d="M0 0h{{ $x1 }}v200H0z"/>
-        <path fill="#{{ .color }}" d="M{{ $x1 }} 0h{{ $x2 }}v200H{{ $x1 }}z"/>
-    </g>
-    <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="110">
-        <text x="{{ div $labelLength 2 | add 60 }}" y="140" textLength="{{ $labelLength }}">
-            {{- .label -}}
-        </text>
-        <text x="{{ div $versionLength 2 | add $labelLength | add 140 }}" y="140" textLength="{{ $versionLength }}">
-            {{- .version -}}
-        </text>
-    </g>
+{{- $labelWidth := strings.RuneCount .label | mul (cond .isCJK 11.5 8.5) | add 10 -}}
+{{- $versionWidth := strings.RuneCount .version | mul 6 | add 10 -}}
+{{- $width := add $labelWidth $versionWidth -}}
+{{- $labelLength := sub $labelWidth 10 | mul 10 -}}
+{{- $versionLength := sub $versionWidth 10 | mul 10 -}}
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{{ $width }}" height="20" role="img" aria-label="{{ .label }}: {{ .version }}">
+  <title>{{ .label }}: {{ .version }}</title>
+  <linearGradient id="s" x2="0" y2="100%">
+    <stop offset="0" stop-color="#bbb" stop-opacity=".1" />
+    <stop offset="1" stop-opacity=".1" />
+  </linearGradient>
+  <clipPath id="r">
+    <rect width="{{ $width }}" height="20" rx="3" fill="#fff" />
+  </clipPath>
+  <g clip-path="url(#r)">
+    <rect width="{{ $labelWidth }}" height="20" fill="#403c3d" />
+    <rect x="{{ $labelWidth }}" width="{{ $versionWidth }}" height="20" fill="#{{ .color }}" />
+    <rect width="{{ $width }}" height="20" fill="url(#s)" />
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110">
+    <text aria-hidden="true" x="{{ div $labelLength 2 | add 60 }}" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="{{ $labelLength }}">{{ .label }}</text>
+    <text x="{{ div $labelLength 2 | add 60 }}" y="140" transform="scale(.1)" fill="#fff" textLength="{{ $labelLength }}">{{ .label }}</text>
+    <text aria-hidden="true" x="{{ div $versionLength 2 | add $labelLength | add 140 }}" y="150" fill="#010101" fill-opacity=".3" transform="scale(.1)" textLength="{{ $versionLength }}">{{ .version }}</text>
+    <text x="{{ div $versionLength 2 | add $labelLength | add 140 }}" y="140" transform="scale(.1)" fill="#fff" textLength="{{ $versionLength }}">{{ .version }}</text>
+  </g>
 </svg>
