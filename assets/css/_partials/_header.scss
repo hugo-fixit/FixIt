@@ -80,6 +80,11 @@ header {
         }
       }
     }
+
+    &.language,
+    &.theme-switch {
+      cursor: pointer;
+    }
   }
 }
 
@@ -162,12 +167,13 @@ header {
   }
 }
 
-.theme-switch i {
-  cursor: pointer;
-  @include transform(rotate(225deg));
-  @include transition(transform 0.4s ease);
+.theme-switch {
+  i {
+    @include transform(rotate(225deg));
+    @include transition(transform 0.4s ease);
+  }
 
-  &:hover {
+  &:hover i {
     @include transform(rotate(45deg));
   }
 }
