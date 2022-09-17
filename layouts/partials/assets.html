@@ -240,6 +240,11 @@
   {{- $config = dict "enablePWA" .Site.Params.enablePWA | merge $config -}}
 {{- end -}}
 
+{{- /* Auto Bookmark */ -}}
+{{- with .Site.Params.autoBookmark -}}
+  {{- $config = dict "autoBookmark" . | merge $config -}}
+{{- end -}}
+
 {{- range $params.library.css -}}
   {{- dict "Source" . "Fingerprint" $fingerprint | dict "Scratch" $.Scratch "Data" | partial "scratch/style.html" -}}
 {{- end -}}

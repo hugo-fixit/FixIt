@@ -943,7 +943,7 @@ class FixIt {
   }
 
   initPangu() {
-     // TODO 待优化：只渲染
+    // TODO 待优化：只渲染
     this.config.enablePangu && pangu.autoSpacingPage();
   }
 
@@ -985,11 +985,11 @@ class FixIt {
   }
 
   initMDevtools() {
-    const type = this.config?.mDevtools
+    const type = this.config?.mDevtools;
     if (typeof window.orientation === 'undefined') {
       return;
     }
-    if(type === 'vConsole') {
+    if (type === 'vConsole') {
       const vConsole = new VConsole({
         target: '.widgets',
         theme: this.isDark ? 'dark' : 'light'
@@ -1007,6 +1007,24 @@ class FixIt {
         eruda.util.evalCss.setTheme(this.isDark ? 'Dark' : 'Light');
       });
       this.switchThemeEventSet.add(this._erudaOnSwitchTheme);
+    }
+  }
+
+  initAutoMark() {
+    if (!this.config.autoBookmark) {
+      return;
+    }
+    window.addEventListener('beforeunload', () => {
+      const scrollTop = this.util.getScrollTop();
+      scrollTop && localStorage.setItem(`fixit-bookmark/#${location.pathname}`, scrollTop);
+    });
+    const scrollTop = Number(localStorage.getItem(`fixit-bookmark/#${location.pathname}`));
+    // If the page opens with a specific hash, just jump out
+    if (scrollTop && location.hash === '') {
+      window.scrollTo({ 
+        top: scrollTop, 
+        behavior: "smooth" 
+      });
     }
   }
 
@@ -1137,6 +1155,7 @@ class FixIt {
       this.initServiceWorker();
       this.initWatermark();
       this.initMDevtools();
+      this.initAutoMark();
 
       window.setTimeout(() => {
         this.initComment();
