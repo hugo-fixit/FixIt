@@ -23,8 +23,9 @@
     {{- warnf "FixIt %v\n%v\n\n" $version (T "RCVersionWarn") -}}
   {{- end -}}
   {{- if (gt $latest $version) -}}
-    {{- warnf "FixIt %v (⬆️ %v)\n%v\n\n" $version $latest (T "quicklyUpgrade") -}}
+    {{- warnf "FixIt %v (⬆️ %v)\n%v`git submodule update --remote --merge`\n\n" $version $latest (T "quicklyUpgrade") -}}
   {{- end -}}
 {{- end -}}
+{{- warnf "FixIt %v (⬆️ %v)\n%v`git submodule update --remote --merge`\n\n" $version $latest (T "quicklyUpgrade") -}}
 
 {{- .Scratch.Set "latest" $latest -}}

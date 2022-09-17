@@ -55,12 +55,6 @@ And later you can update the submodule in your site directory to the latest comm
 git submodule update --remote --merge
 ```
 
-Or this shell command:
-
-```bash
-sh themes/FixIt/fixit_checker.sh
-```
-
 ## Why choose FixIt
 
 The FixIt theme inherits the excellent features of themes such as LoveIt, and adds new features and optimizations on those basis, as detailed in [Features](#features). In addition, the FixIt theme has the following advantages:

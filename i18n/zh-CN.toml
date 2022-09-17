@@ -16,7 +16,7 @@ other = "您正在使用开发版的 FixIt，请考虑使用稳定版。\n见 ht
 other = "当前运行环境是“development”。“评论系统”，“CDN”和“fingerprint”不会启用。"
 
 [quicklyUpgrade]
-other = "使用命令快速升级：cd themes/FixIt && sh fixit_checker.sh"
+other = "使用命令快速升级："
 # === init ===
 
 # === baseof ===

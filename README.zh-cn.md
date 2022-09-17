@@ -57,12 +57,6 @@ git submodule add https://github.com/hugo-fixit/FixIt.git themes/FixIt
 git submodule update --remote --merge
 ```
 
-或者这条 shell 命令：
-
-```bash
-sh themes/FixIt/fixit_checker.sh
-```
-
 ## 为什么选择 FixIt
 
 FixIt 主题继承了 LoveIt 等主题的优秀功能，并在它们的基础上添加了新的功能与优化，详见 [特性](#特性)。除此之外，FixIt 主题还有以下优点：
