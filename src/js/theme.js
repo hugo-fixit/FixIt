@@ -1018,8 +1018,7 @@ class FixIt {
       return;
     }
     window.addEventListener('beforeunload', () => {
-      const scrollTop = this.util.getScrollTop();
-      scrollTop && window.localStorage?.setItem(`fixit-bookmark/#${location.pathname}`, scrollTop);
+      window.localStorage?.setItem(`fixit-bookmark/#${location.pathname}`, this.util.getScrollTop());
     });
     const scrollTop = Number(window.localStorage?.getItem(`fixit-bookmark/#${location.pathname}`));
     // If the page opens with a specific hash, just jump out
