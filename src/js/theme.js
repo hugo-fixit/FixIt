@@ -1,7 +1,7 @@
 class Util {
   forEach(elements, handler) {
     elements = elements || [];
-    for(let i = 0; i < elements.length; i++){
+    for (let i = 0; i < elements.length; i++) {
       handler(elements[i]);
     }
   }
@@ -33,7 +33,7 @@ class Util {
       typeof callback === 'function' && callback();
     }, { once: true });
   }
-  
+
   /**
    * date validator
    * @param {*} date may be date or not
@@ -93,7 +93,7 @@ class FixIt {
           $svg.setAttribute('data-svg-src', $icon.getAttribute('data-svg-src'));
           $svg.classList.add('icon');
           const $titleElements = $svg.getElementsByTagName('title');
-          $titleElements.length && $svg.removeChild($titleElements[0])
+          $titleElements.length && $svg.removeChild($titleElements[0]);
           $icon.parentElement.replaceChild($svg, $icon);
         })
         .catch((err) => {
@@ -115,9 +115,9 @@ class FixIt {
     // This is a dirty hack for fixing sub menu position error in desktop header
     this.util.forEach(document.querySelectorAll('.has-children, #header-desktop .language'), ($item) => {
       $item.addEventListener('mouseover', function () {
-        this.querySelector('.sub-menu').style.left= `${this.getBoundingClientRect().left}px`;
-      })
-      $item.querySelector('.sub-menu').style.minWidth= `${$item.offsetWidth - 8}px`;
+        this.querySelector('.sub-menu').style.left = `${this.getBoundingClientRect().left}px`;
+      });
+      $item.querySelector('.sub-menu').style.minWidth = `${$item.offsetWidth - 8}px`;
     });
   }
 
@@ -128,7 +128,7 @@ class FixIt {
       document.body.classList.toggle('blur');
       $menuToggleMobile.classList.toggle('active');
       $menuMobile.classList.toggle('active');
-      this.disableScrollEvent = document.body.classList.contains('blur')
+      this.disableScrollEvent = document.body.classList.contains('blur');
     }, false);
     this._menuMobileOnClickMask = this._menuMobileOnClickMask || (() => {
       $menuToggleMobile.classList.remove('active');
@@ -140,7 +140,7 @@ class FixIt {
       $nestedItem.addEventListener('click', function () {
         this.parentNode.querySelector('.sub-menu').classList.toggle('open');
         this.querySelector('.dropdown-icon').classList.toggle('open');
-      })
+      });
     });
   }
 
@@ -600,13 +600,13 @@ class FixIt {
     const $toc = document.getElementById('toc-auto');
     const $tocContentAuto = document.getElementById('toc-content-auto');
     document.querySelector('#toc-auto>.toc-title')?.addEventListener('click', () => {
-      const animation = ['animate__faster']
+      const animation = ['animate__faster'];
       const tocHidden = $toc.classList.contains('toc-hidden');
       animation.push(tocHidden ? 'animate__fadeIn' : 'animate__fadeOut');
       $tocContentAuto.classList.remove(tocHidden ? 'animate__fadeOut' : 'animate__fadeIn');
       this.util.animateCSS($tocContentAuto, animation, true);
       $toc.classList.toggle('toc-hidden');
-    }, false)
+    }, false);
   }
 
   initMath() {
@@ -1131,7 +1131,7 @@ class FixIt {
     try {
       if (this.config.encryption) {
         this.initFixItDecryptor();
-      } else if(!this.config.encryption?.all) {
+      } else if (!this.config.encryption?.all) {
         this.initTwemoji();
         this.initDetails();
         this.initLightGallery();
