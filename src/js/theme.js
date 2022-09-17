@@ -45,10 +45,13 @@ class Util {
   
   /**
    * scroll some element into view
-   * @param {String} element element to scroll
+   * @param {String} selector element to scroll
    */
   scrollIntoView(selector) {
-    document.querySelector(selector).scrollIntoView({
+    const element = selector.startsWith('#')
+      ? document.getElementById(selector.slice(1))
+      : document.querySelector(selector);
+    element?.scrollIntoView({
       behavior: 'smooth'
     });
   }
@@ -149,7 +152,7 @@ class FixIt {
       $themeSwitch.addEventListener('click', () => {
         document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
         this.isDark = !this.isDark;
-        window.localStorage && localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
+        window.localStorage?.setItem('theme', this.isDark ? 'dark' : 'light');
         for (let event of this.switchThemeEventSet) {
           event();
         }
@@ -1016,14 +1019,14 @@ class FixIt {
     }
     window.addEventListener('beforeunload', () => {
       const scrollTop = this.util.getScrollTop();
-      scrollTop && localStorage.setItem(`fixit-bookmark/#${location.pathname}`, scrollTop);
+      scrollTop && window.localStorage?.setItem(`fixit-bookmark/#${location.pathname}`, scrollTop);
     });
-    const scrollTop = Number(localStorage.getItem(`fixit-bookmark/#${location.pathname}`));
+    const scrollTop = Number(window.localStorage?.getItem(`fixit-bookmark/#${location.pathname}`));
     // If the page opens with a specific hash, just jump out
     if (scrollTop && location.hash === '') {
       window.scrollTo({ 
-        top: scrollTop, 
-        behavior: "smooth" 
+        top: scrollTop,
+        behavior: 'smooth'
       });
     }
   }
