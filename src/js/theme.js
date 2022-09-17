@@ -1047,7 +1047,7 @@ class FixIt {
         }
       });
       const contentHeight = document.body.scrollHeight - window.innerHeight;
-      const scrollPercent = contentHeight > 0 ? Math.min(100 * (window.scrollY < 0 ? 0 : window.scrollY) / contentHeight, 100) : 0;
+      const scrollPercent = Math.max(Math.min(100 * Math.max(this.newScrollTop, 0) / contentHeight, 100), 0);
       if ($readingProgressBar) {
         $readingProgressBar.style.setProperty('--progress', `${scrollPercent.toFixed(2)}%`);
       }
