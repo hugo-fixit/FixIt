@@ -3,11 +3,10 @@
 @import "_variables";
 @import "_override";
 @import "_mixin/index";
-@import "../lib/normalize/normalize";
 @import "_core/root";
-@import "_core/common";
 @import "_core/base";
 @import "_core/layout";
+@import "_core/common";
 @import "_page";
 @import "_partials/header";
 @import "_partials/footer";

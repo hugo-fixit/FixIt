@@ -1,3 +1,5 @@
+@import "../../lib/normalize/normalize";
+
 html {
   font-family: $global-font-family;
   font-weight: $global-font-weight;
@@ -56,11 +58,21 @@ img {
 }
 
 iframe {
+  border: 0;
   @include border-radius($global-border-radius);
 }
 
-[role=button] {
+[role='button'] {
   cursor: pointer;
+}
+
+summary {
+  cursor: pointer;
+}
+
+abbr[title] {
+  cursor: help;
+  text-decoration-skip-ink: none;
 }
 
 @include ms;
