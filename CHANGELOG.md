@@ -44,6 +44,7 @@ All notable changes to this project will be documented in this file.
 - :globe_with_meridians: Docs(i18n): update pt-br, de in i18n
 - :mag: Perf(SEO): enhance SEO performance
 - :wrench: Chore: modify babel config and optimize theme.js compilation and loading
+- :wrench: Chore: creating new go.mod: module github.com/hugo-fixit/FixIt
 - :arrow_up: Chore(libs):
   - Update simple-icons from 6.3.0 to 7.8.0
   - Update emoji-data from 5.0.1 to 14.0.0
