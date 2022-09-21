@@ -425,6 +425,7 @@ class FixIt {
         thumbHeight: '60px',
         actualSize: false,
         showZoomInOutIcons: true,
+        licenseKey: 'none'
       });
     }
   }
