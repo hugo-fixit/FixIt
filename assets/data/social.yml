@@ -641,9 +641,17 @@ feishu:
   Icon:
     Class: fa-solid fa-dove
 
+# 082: TryHackMe
+tryhackme:
+  Weight: 82
+  Title: TryHackMe
+  Prefix: https://tryhackme.com/p/
+  Icon:
+    Simpleicons: tryhackme
+
 # Phone
 phone:
-  Weight: 98
+  Weight: 997
   Template: tel:%v
   Title: Phone
   Icon:
@@ -651,7 +659,7 @@ phone:
 
 # Email
 email:
-  Weight: 99
+  Weight: 998
   Template: mailto:%v
   Title: Email
   Icon:
@@ -659,7 +667,7 @@ email:
 
 # RSS
 rss:
-  Weight: 100
+  Weight: 999
   Url: /index.xml
   Title: RSS
   Newtab: true
