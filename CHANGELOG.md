@@ -19,7 +19,7 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: add optional parameter `noreferrer` for the shortcode `link`
 - :sparkles: Feat: update echarts theme config
 - :sparkles: Feat: add noscript warning banner ([#194](https://github.com/hugo-fixit/FixIt/issues/194))
-- :sparkles: Feat: add 11 newly supported social links ([#175](https://github.com/hugo-fixit/FixIt/issues/175) [#197](https://github.com/hugo-fixit/FixIt/issues/197))
+- :sparkles: Feat: add 12 newly supported social links ([#175](https://github.com/hugo-fixit/FixIt/issues/175) [#197](https://github.com/hugo-fixit/FixIt/issues/197))
 - :zap: Perf: remove extra spaces in plugin link
 - :wheelchair: Feat(accessibility): use `aria-hidden=true` on icons that AT should ignore
 - :recycle: Refactor: image rendering
@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file.
 - :recycle: Refactor: scss directory ([#185](https://github.com/hugo-fixit/FixIt/issues/185))
 - :recycle: Refactor: plugin script
 - :recycle: Refactor: version.template.svg
+- :recycle: Refactor: config ([#187](https://github.com/hugo-fixit/FixIt/issues/187))
 - :bug: Fix: add function `dos2unix` to unify new lines symbol between Windows and Unix/Mac OS
 - :bug: Fix: author display error in post and markdown file
 - :bug: Fix: use data attributes or class replace for custom attributes

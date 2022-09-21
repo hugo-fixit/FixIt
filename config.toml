@@ -46,22 +46,22 @@
   # FixIt 0.2.15 | CHANGED FixIt theme version
   version = "0.2.X" # e.g. "0.2.X", "0.2.15", "v0.2.15" etc.
   # site description
-  description = "This is My New Hugo Site"
+  description = "This is my new Hugo FixIt site"
   # site keywords
-  keywords = ["Theme", "Hugo"]
-  # site default theme ("light", "dark", "auto")
+  keywords = ["Hugo", "FixIt"]
+  # site default theme ["light", "dark", "auto"]
   defaultTheme = "auto"
   # public git repo url only then enableGitInfo is true
   gitRepo = ""
   # FixIt 0.1.1 | NEW which hash function used for SRI, when empty, no SRI is used
-  # ("sha256", "sha384", "sha512", "md5")
+  # ["sha256", "sha384", "sha512", "md5"]
   fingerprint = ""
   # FixIt 0.2.0 | NEW date format
   dateFormat = "2006-01-02"
   # website images for Open Graph and Twitter Cards
-  images = ["/logo.png"]
+  images = []
   # FixIt 0.2.12 | NEW enable PWA
-  enablePWA = true
+  enablePWA = false
   # FixIt 0.2.14 | NEW whether to add external Icon for external links automatically
   externalIcon = false
   # FixIt 0.2.14 | NEW FixIt will, by default, inject a theme meta tag in the HTML head on the home page only.
@@ -85,13 +85,13 @@
     tileColor = "#da532c"
     # FixIt 0.2.12 | CHANGED Android browser theme color
     [params.app.themeColor]
-      light = "#ffffff"
+      light = "#f8f8f8"
       dark = "#252627"
 
   # FixIt 0.2.0 | NEW Search config
   [params.search]
     enable = true
-    # type of search engine ("lunr", "algolia")
+    # type of search engine ["lunr", "algolia"]
     type = "lunr"
     # max index length of the chunked content
     contentLength = 4000
@@ -112,16 +112,16 @@
 
   # Header config
   [params.header]
-    # FixIt 0.2.13 | CHANGED desktop header mode ("sticky", "normal", "auto")
+    # FixIt 0.2.13 | CHANGED desktop header mode ["sticky", "normal", "auto"]
     desktopMode = "sticky"
-    # FixIt 0.2.13 | CHANGED mobile header mode ("sticky", "normal", "auto")
+    # FixIt 0.2.13 | CHANGED mobile header mode ["sticky", "normal", "auto"]
     mobileMode = "auto"
     # FixIt 0.2.0 | NEW Header title config
     [params.header.title]
       # URL of the LOGO
       logo = "/fixit.min.svg"
       # title name
-      name = "My New Hugo Site"
+      name = "My New Hugo FixIt Site"
       # you can add extra information before the name (HTML format is supported), such as icons
       pre = ""
       # you can add extra information after the name (HTML format is supported), such as icons
@@ -139,7 +139,7 @@
   [params.footer]
     enable = true
     # FixIt 0.2.0 | NEW Custom content (HTML format is supported)
-    custom = ''
+    custom = ""
     # FixIt 0.2.0 | NEW whether to show Hugo and theme info
     hugo = true
     # FixIt 0.2.0 | NEW whether to show copyright info
@@ -147,9 +147,9 @@
     # FixIt 0.2.0 | NEW whether to show the author
     author = true
     # Site creation year
-    since = 2019
+    since = 2021
     # FixIt 0.2.14 | NEW Site creation time
-    siteTime = '' # e.g. '2019-02-03T19:30:34+08:00'
+    siteTime = "" # e.g. "2021-12-18T16:15:22+08:00"
     # FixIt 0.2.14 | NEW whether to show total word count of site content
     wordCount = true
     # FixIt 0.2.12 | NEW Public network security only in China (HTML format is supported)
@@ -190,17 +190,14 @@
     # Home page profile
     [params.home.profile]
       enable = true
-      # FixIt 0.2.13 | NEW Gravatar mirror site domain, default: "www.gravatar.com"
-      # FixIt 0.2.14 | CHANGED FixIt 0.2.15 | DELETED The parameter `home.profile.gravatarSite` is deprecated since v0.2.14, use `gravatar.host` instead
-      # gravatarSite = ""
       # Gravatar Email for preferred avatar in home page
       gravatarEmail = ""
       # URL of avatar shown in home page
-      avatarURL = ""
+      avatarURL = "/fixit.min.svg"
       # FixIt 0.2.7 | CHANGED title shown in home page (HTML format is supported)
       title = ""
       # subtitle shown in home page
-      subtitle = "This is My New Hugo Site"
+      subtitle = "This is my new Hugo FixIt site"
       # whether to use typeit animation for subtitle
       typeit = true
       # whether to show social links
@@ -323,7 +320,7 @@
     linkToMarkdown = true
     # FixIt 0.2.4 | NEW whether to show the full text content in RSS
     rssFullText = false
-    # FixIt 0.2.13 | NEW Page style ("narrow", "normal", "wide", ...)
+    # FixIt 0.2.13 | NEW Page style ["narrow", "normal", "wide", ...]
     pageStyle = "normal"
     # FixIt 0.2.14 | NEW Gravatar is force-used as the author's avatar
     gravatarForce = false
@@ -339,7 +336,7 @@
       keepStatic = false
       # whether to make the table of the contents in the sidebar automatically collapsed
       auto = true
-      # FixIt 0.2.13 | NEW position of TOC ("left", "right")
+      # FixIt 0.2.13 | NEW position of TOC ["left", "right"]
       position = "right"
     # FixIt 0.2.13 | NEW Display a message at the beginning of an article to warn the reader that its content might be expired
     [params.page.expirationReminder]
@@ -436,7 +433,7 @@
         noComment = ""
         sendBtn = ""
         editorTravel = true
-        flatMode = 'auto'
+        flatMode = "auto"
         maxNesting = 3
         # It take effect when `params.page.lightgallery` is enabled
         lightgallery = false
@@ -469,7 +466,7 @@
         enableQQ = false
         serverURLs = ""
         # FixIt 0.2.6 | NEW emoji data file name, default is "google.yml"
-        # ("apple.yml", "google.yml", "facebook.yml", "twitter.yml")
+        # ["apple.yml", "google.yml", "facebook.yml", "twitter.yml"]
         # located in "themes/FixIt/assets/data/emoji/" directory
         # you can store your own data files in the same path under your project:
         # "assets/data/emoji/"
@@ -480,20 +477,15 @@
         enable = false
         serverURL = ""
         pageview = false # FixIt 0.2.15 | NEW
-        emoji = ['//unpkg.com/@waline/emojis@1.0.1/weibo']
-        meta = ['nick', 'mail', 'link']
+        emoji = ["//unpkg.com/@waline/emojis@1.0.1/weibo"]
+        meta = ["nick", "mail", "link"]
         requiredMeta = []
-        login = 'enable'
+        login = "enable"
         wordLimit = 0
         pageSize = 10
         imageUploader = false # FixIt 0.2.15 | NEW
         highlighter = false # FixIt 0.2.15 | NEW
         comment = false # FixIt 0.2.15 | NEW
-        # visitor = false # FixIt 0.2.15 | DELETED renamed to pageview
-        # uploadImage = false # FixIt 0.2.15 | DELETED renamed to imageUploader
-        # highlight = true # FixIt 0.2.15 | DELETED renamed to highlighter
-        # mathTagSupport = false FixIt 0.2.15 | DELETED
-        # commentCount = false FixIt 0.2.15 | DELETED renamed to comment
       # Facebook comment config (https://developers.facebook.com/docs/plugins/comments)
       [params.page.comment.facebook]
         enable = false
@@ -578,11 +570,11 @@
     cursorChar = "|"
     # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
     duration = -1
-  
+
   # FixIt 0.2.15 | NEW Mermaid config
   [params.mermaid]
     # For values, see https://mermaid-js.github.io/mermaid/#/Setup?id=theme
-    themes = ['neutral', 'dark']
+    themes = ["neutral", "dark"]
 
   # FixIt 0.2.12 | NEW PanguJS config
   [params.pangu]
@@ -594,11 +586,11 @@
   [params.watermark]
     enable = false
     # watermark's text (HTML format is supported)
-    content = ''
+    content = ""
     # watermark's transparency
     opacity = 0.1
     # parent of watermark's container
-    appendTo = '.wrapper>main'
+    appendTo = ".wrapper>main"
     # watermark's width. unit: px
     width = 150
     # watermark's height. unit: px
@@ -612,16 +604,13 @@
     # watermark's fontSize. unit: rem
     fontSize = 0.85
     # FixIt 0.2.13 | NEW watermark's fontFamily
-    fontFamily = 'inherit'
+    fontFamily = "inherit"
 
   # FixIt 0.2.12 | NEW Busuanzi count
   [params.ibruce]
     enable = false
     # Enable in post meta
     enablePost = false
-    # FixIt 0.2.14 | CHANGED FixIt 0.2.15 | DELETED Site creation time
-    # The parameter `ibruce.siteTime` is deprecated since v0.2.14, use `footer.siteTime` instead
-    # siteTime = '' # e.g. '2019-02-03T19:30:34+08:00'
 
   # Site verification code config for Google/Bing/Yandex/Pinterest/Baidu/360/Sogou
   [params.verification]
@@ -665,12 +654,10 @@
 
   # FixIt 0.2.7 | CHANGED CDN config for third-party library files
   [params.cdn]
-    # CDN data file name, disabled by default
-    # ("jsdelivr.yml", "unpkg.yml")
+    # CDN data file name, disabled by default ["jsdelivr.yml", "unpkg.yml", ...]
     # located in "themes/FixIt/assets/data/cdn/" directory
-    # you can store your own data files in the same path under your project:
-    # "assets/data/cdn/"
-    # data = "unpkg"
+    # you can store your own data files in the same path under your project: "assets/data/cdn/"
+    data = ""
 
   # FixIt 0.2.8 | NEW Compatibility config
   [params.compatibility]
@@ -684,17 +671,20 @@
     enable = false
     permalink = "https://github.com/hugo-fixit/FixIt"
     title = "View source on GitHub"
-    position = "right" # left, right
+    position = "right" # ["left", "right"]
+
   # FixIt 0.2.14 | NEW Gravatar config
   [params.gravatar]
     # Gravatar host, default: "www.gravatar.com"
-    host = "www.gravatar.com" # "cn.gravatar.com", "gravatar.loli.net"
-    style = "" # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
+    host = "www.gravatar.com" # ["cn.gravatar.com", "gravatar.loli.net", ...]
+    style = "" # ["", "mp", "identicon", "monsterid", "wavatar", "retro", "blank", "robohash"]
+
   # FixIt 0.2.16 | NEW Back to top
   [params.backToTop]
     enable = true
     # Scroll percent label in b2t button
     scrollpercent = false
+
   # FixIt 0.2.16 | NEW Reading progress bar
   [params.readingProgress]
     enable = false
@@ -706,6 +696,7 @@
     light = ""
     dark = ""
     height = "2px"
+
   # FixIt 0.2.15 | NEW Developer options
   [params.dev]
     enable = false
