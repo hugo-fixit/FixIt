@@ -22,7 +22,7 @@
     "start": "npm run babel && npm run server",
     "start:production": "npm run babel && npm run server:production",
     "algolia": "atomic-algolia",
-    "update:docs": "git submodule update --remote --merge && git add docs && git commit -m ':memo: Docs: update FixIt theme Docs'"
+    "update:docs": "git submodule update --remote --merge && git add docs && git commit -m ':memo: Docs: update theme docs'"
   },
   "repository": {
     "type": "git",
