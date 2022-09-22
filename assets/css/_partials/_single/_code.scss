@@ -9,7 +9,7 @@ code {
   text-decoration: inherit;
   @include border-radius($global-border-radius);
   @include overflow-wrap(break-word);
-  @include line-break(anywhere);
+  @include line-break(auto);
 
   [data-theme='dark'] & {
     color: $code-color-dark;

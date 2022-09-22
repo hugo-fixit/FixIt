@@ -51,7 +51,7 @@ $code-background-color-dark: #272C34 !default;
   code, pre, pre code {
     font-size: 90%;
     @include overflow-wrap(break-word);
-    @include line-break(anywhere);
+    @include line-break(auto);
     @include tab-size(4);
     color: $code-color;
     background: $code-background-color;
