@@ -16,7 +16,7 @@
     pre = ""
     # you can add extra information after the name (HTML format is supported), such as icons
     post = ""
-    name = "Posts"
+    name = "Solutions"
     url = "/posts/"
     # title will be shown when you hover on this menu link
     title = ""
@@ -48,9 +48,9 @@
   # site description
   description = "This is My New Hugo Site"
   # site keywords
-  keywords = ["Theme", "Hugo"]
+  keywords = ["Solution Manual", "Understanding Analysis"]
   # site default theme ("light", "dark", "auto")
-  defaultTheme = "auto"
+  defaultTheme = "light"
   # public git repo url only then enableGitInfo is true
   gitRepo = ""
   # FixIt 0.1.1 | NEW which hash function used for SRI, when empty, no SRI is used
@@ -119,9 +119,9 @@
     # FixIt 0.2.0 | NEW Header title config
     [params.header.title]
       # URL of the LOGO
-      logo = "/fixit.min.svg"
+      logo = ""
       # title name
-      name = "My New Hugo Site"
+      name = "Fight with Math"
       # you can add extra information before the name (HTML format is supported), such as icons
       pre = ""
       # you can add extra information after the name (HTML format is supported), such as icons
@@ -141,15 +141,15 @@
     # FixIt 0.2.0 | NEW Custom content (HTML format is supported)
     custom = ''
     # FixIt 0.2.0 | NEW whether to show Hugo and theme info
-    hugo = true
+    hugo = false
     # FixIt 0.2.0 | NEW whether to show copyright info
     copyright = true
     # FixIt 0.2.0 | NEW whether to show the author
-    author = true
+    author = false
     # Site creation year
-    since = 2019
+    since = 2022
     # FixIt 0.2.14 | NEW Site creation time
-    siteTime = '' # e.g. '2019-02-03T19:30:34+08:00'
+    siteTime = '2022-01-01T00:00:00+00:00' # e.g. '2019-02-03T19:30:34+08:00'
     # FixIt 0.2.14 | NEW whether to show total word count of site content
     wordCount = true
     # FixIt 0.2.12 | NEW Public network security only in China (HTML format is supported)
@@ -157,7 +157,7 @@
     # ICP info only in China (HTML format is supported)
     icp = ""
     # license info (HTML format is supported)
-    license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+    license = ''
 
   # FixIt 0.2.0 | NEW Section (all posts) page config
   [params.section]
@@ -189,7 +189,7 @@
     rss = 10
     # Home page profile
     [params.home.profile]
-      enable = true
+      enable = false
       # FixIt 0.2.13 | NEW Gravatar mirror site domain, default: "www.gravatar.com"
       # FixIt 0.2.14 | CHANGED FixIt 0.2.15 | DELETED The parameter `home.profile.gravatarSite` is deprecated since v0.2.14, use `gravatar.host` instead
       # gravatarSite = ""
@@ -200,7 +200,7 @@
       # FixIt 0.2.7 | CHANGED title shown in home page (HTML format is supported)
       title = ""
       # subtitle shown in home page
-      subtitle = "This is My New Hugo Site"
+      subtitle = ""
       # whether to use typeit animation for subtitle
       typeit = true
       # whether to show social links
@@ -318,13 +318,13 @@
     # FixIt 0.2.0 | NEW whether to enable the fontawesome extended syntax
     fontawesome = true
     # license info (HTML format is supported)
-    license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+    license = ''
     # whether to show link to Raw Markdown content of the content
     linkToMarkdown = true
     # FixIt 0.2.4 | NEW whether to show the full text content in RSS
     rssFullText = false
     # FixIt 0.2.13 | NEW Page style ("narrow", "normal", "wide", ...)
-    pageStyle = "normal"
+    pageStyle = "narrow"
     # FixIt 0.2.14 | NEW Gravatar is force-used as the author's avatar
     gravatarForce = false
     # FixIt 0.2.15 | NEW Repost config
@@ -336,7 +336,7 @@
       # whether to enable the table of the contents
       enable = true
       # FixIt 0.2.9 | NEW whether to keep the static table of the contents in front of the post
-      keepStatic = false
+      keepStatic = true
       # whether to make the table of the contents in the sidebar automatically collapsed
       auto = true
       # FixIt 0.2.13 | NEW position of TOC ("left", "right")
@@ -360,9 +360,9 @@
       blockLeftDelimiter = ""
       blockRightDelimiter = ""
       # KaTeX extension copy_tex
-      copyTex = true
+      copyTex = false
       # KaTeX extension mhchem
-      mhchem = true
+      mhchem = false
     # FixIt 0.2.0 | NEW Code config
     [params.page.code]
       # whether to show the copy button of the code block
@@ -400,11 +400,11 @@
       Twitter = true
       Facebook = true
       Linkedin = false
-      Whatsapp = false
+      Whatsapp = true
       Pinterest = false
       Tumblr = false
       HackerNews = false
-      Reddit = false
+      Reddit = true
       VK = false
       Buffer = false
       Xing = false
@@ -414,7 +414,7 @@
       Digg = false
       Stumbleupon = false
       Flipboard = false
-      Weibo = true
+      Weibo = false
       Renren = false
       Myspace = false
       Blogger = false
@@ -618,7 +618,7 @@
   [params.ibruce]
     enable = false
     # Enable in post meta
-    enablePost = false
+    enablePost = true
     # FixIt 0.2.14 | CHANGED FixIt 0.2.15 | DELETED Site creation time
     # The parameter `ibruce.siteTime` is deprecated since v0.2.14, use `footer.siteTime` instead
     # siteTime = '' # e.g. '2019-02-03T19:30:34+08:00'
@@ -670,7 +670,7 @@
     # located in "themes/FixIt/assets/data/cdn/" directory
     # you can store your own data files in the same path under your project:
     # "assets/data/cdn/"
-    # data = "unpkg"
+    # data = "jsdelivr"
 
   # FixIt 0.2.8 | NEW Compatibility config
   [params.compatibility]
@@ -694,10 +694,10 @@
   [params.backToTop]
     enable = true
     # Scroll percent label in b2t button
-    scrollpercent = false
+    scrollpercent = true
   # FixIt 0.2.16 | NEW Reading progress bar
   [params.readingProgress]
-    enable = false
+    enable = true
     # Available values: ["left", "right"]
     start = "left"
     # Available values: ["top", "bottom"]
