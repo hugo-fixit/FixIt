@@ -12,7 +12,7 @@
 
 FixIt 主题继承了这些主题的优秀功能，并在此基础上添加了新的功能与优化，请阅读 [为什么选择 FixIt](#为什么选择-FixIt) 来了解更多。
 
-![Hugo Theme FixIt](/images/Apple-Devices-Preview.png)
+![Hugo Theme FixIt](https://pre.fixit.lruihao.cn/images/Apple-Devices-Preview.png)
 
 ## [立即开始](https://fixit.lruihao.cn/zh-cn/categories/documentation/)
 
@@ -190,7 +190,7 @@ FixIt 支持下列语言：
 
 ## 致谢
 
-<details>
+<details open>
 <summary>FixIt 主题中用到了以下项目，感谢它们的作者：</summary>
 
 * [normalize.css](https://github.com/necolas/normalize.css)
@@ -230,7 +230,7 @@ FixIt 支持下列语言：
 
 </details>
 
-<details>
+<details open>
 <summary>FixIt 主题还借鉴了以下项目的部分功能，同样感谢它们的作者：</summary>
 
 * [DoIt](https://github.com/HEIGE-PCloud/DoIt)

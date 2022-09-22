@@ -12,7 +12,7 @@ It is based on the original [LoveIt Theme](https://github.com/dillonzq/LoveIt), 
 
 The FixIt theme inherits the excellent features of these themes, and adds new features and optimizations on those basis. Please read [Why Choose FixIt](#why-choose-fixit) to learn more.
 
-![Hugo Theme FixIt](/images/Apple-Devices-Preview.png)
+![Hugo Theme FixIt](https://pre.fixit.lruihao.cn/images/Apple-Devices-Preview.png)
 
 ## [Getting started](https://fixit.lruihao.cn/categories/documentation/)
 
@@ -188,7 +188,7 @@ Make sure that you follow [CODE_OF_CONDUCT.md](/CODE_OF_CONDUCT.md) while contri
 
 ## Acknowledgements
 
-<details>
+<details open>
 <summary>Thanks to the authors of following resources included in the theme:</summary>
 
 * [normalize.css](https://github.com/necolas/normalize.css)
@@ -228,7 +228,7 @@ Make sure that you follow [CODE_OF_CONDUCT.md](/CODE_OF_CONDUCT.md) while contri
 
 </details>
 
-<details>
+<details open>
 <summary>The FixIt also draws on some features of the following projects, and thanks to their authors as well:</summary>
 
 * [DoIt](https://github.com/HEIGE-PCloud/DoIt)
