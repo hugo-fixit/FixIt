@@ -48,7 +48,7 @@ All notable changes to this project will be documented in this file.
 - :wrench: Chore: modify babel config and optimize theme.js compilation and loading
 - :wrench: Chore: creating new go.mod: module github.com/hugo-fixit/FixIt
 - :arrow_up: Chore(libs):
-  - Update simple-icons from 6.3.0 to 7.8.0
+  - Update simple-icons from 6.3.0 to 7.12.0
   - Update emoji-data from 5.0.1 to 14.0.0
   - Update mermaid from 9.1.3 to 9.1.6
   - Update typeit from 7.0.4 to 8.7.0
