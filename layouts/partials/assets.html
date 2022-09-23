@@ -232,9 +232,7 @@
 
 {{- /* PWA */ -}}
 {{- if .Site.Params.enablePWA | and hugo.IsProduction -}}
-  {{- $options := dict -}}
-  {{- $options = dict "targetPath" "service-worker.min.js" | merge $options -}}
-  {{- $options = dict "minify" true | merge $options -}}
+  {{- $options := dict "targetPath" "service-worker.min.js" "minify" true -}}
   {{- $source := resources.Get "js/service-worker.js" | js.Build $options -}}
   {{- $_ := $source.RelPermalink -}}
   {{- $config = dict "enablePWA" .Site.Params.enablePWA | merge $config -}}
@@ -264,12 +262,14 @@
 {{- $config | jsonify | printf "window.config=%s;" | dict "Content" | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 
 {{- /* Theme script */ -}}
+{{- /* TODO migrate to js.build in hugo future version */ -}}
 {{- dict "Source" "js/theme.min.js" "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 {{- $_ := (resources.Get "js/theme.min.js.map").RelPermalink -}}
 
 {{- /* Custom script */ -}}
 {{- with ((resources.Get "js/custom.js") | default (resources.Get "js/_custom.js")) -}}
-  {{- dict "Source" . "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
+  {{- $options := dict "targetPath" "js/custom.min.js" "minify" true "sourceMap" "inline" -}}
+  {{- dict "Source" . "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
 {{- end -}}
 
 {{- with (.Scratch.Get "this").scriptArr -}}

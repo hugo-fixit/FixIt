@@ -18,6 +18,9 @@
         {{- $resource = $resource | fingerprint . -}}
         {{- $integrity = $resource.Data.Integrity -}}
       {{- end -}}
+      {{- with .Build -}}
+        {{- $resource = $resource | js.Build . -}}
+      {{- end -}}
       {{- $src = $resource.RelPermalink -}}
     {{- end -}}
     {{- $attrs := printf `src="%v"` $src -}}

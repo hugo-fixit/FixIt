@@ -45,7 +45,7 @@ All notable changes to this project will be documented in this file.
 - :lipstick: Style: change line-break style of code element from `anywhere` to `auto`
 - :globe_with_meridians: Docs(i18n): update pt-br, de in i18n
 - :mag: Perf(SEO): enhance SEO performance
-- :wrench: Chore: modify babel config and optimize theme.js compilation and loading
+- :wrench: Chore: modify babel config and optimize theme.js compilation and loading (revert [`65371a1`](https://github.com/hugo-fixit/FixIt/commit/65371a19a40591c3f403f7fde2b7001c3390354d))
 - :wrench: Chore: creating new go.mod: module github.com/hugo-fixit/FixIt
 - :arrow_up: Chore(libs):
   - Update simple-icons from 6.3.0 to 7.12.0
