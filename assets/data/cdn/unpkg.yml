@@ -57,8 +57,8 @@ libFiles:
   # mapbox-gl@2.8.2 https://docs.mapbox.com/mapbox-gl-js
   mapboxGLCSS: mapbox-gl@2.8.2/dist/mapbox-gl.min.css
   mapboxGLJS: mapbox-gl@2.8.2/dist/mapbox-gl.min.js
-  # mermaid@9.1.6 https://github.com/mermaid-js/mermaid
-  mermaidJS: mermaid@9.1.6/dist/mermaid.min.js
+  # mermaid@9.1.7 https://github.com/mermaid-js/mermaid
+  mermaidJS: mermaid@9.1.7/dist/mermaid.min.js
   # meting@2.0.1 https://github.com/metowolf/MetingJS
   metingJS: meting@2.0.1/dist/Meting.min.js
   # object-fit-images@3.2.4 https://github.com/fregante/object-fit-images

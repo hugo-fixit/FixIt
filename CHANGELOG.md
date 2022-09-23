@@ -50,7 +50,7 @@ All notable changes to this project will be documented in this file.
 - :arrow_up: Chore(libs):
   - Update simple-icons from 6.3.0 to 7.12.0
   - Update emoji-data from 5.0.1 to 14.0.0
-  - Update mermaid from 9.1.3 to 9.1.6
+  - Update mermaid from 9.1.3 to 9.1.7
   - Update typeit from 7.0.4 to 8.7.0
   - Update lightgallery from 1.4.0 to 2.6.0
   - Update Valine from 1.5.0 to 1.5.1
