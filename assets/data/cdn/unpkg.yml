@@ -75,7 +75,7 @@ libFiles:
   valineJS: valine@1.5.1/dist/Valine.min.js
   # vconsole@3.14.6 https://github.com/Tencent/vConsole
   vconsoleJS: vconsole@3.14.6/dist/vconsole.min.js
-  # waline@2.6.1 https://github.com/walinejs/waline
-  walineCSS: '@waline/client@2.6.1/dist/waline.css'
-  walineJS: '@waline/client@2.6.1/dist/waline.js'
+  # waline@2.10.0 https://github.com/walinejs/waline
+  walineCSS: '@waline/client@2.10.0/dist/waline.css'
+  walineJS: '@waline/client@2.10.0/dist/waline.js'
   

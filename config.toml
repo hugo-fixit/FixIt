@@ -472,12 +472,12 @@
         # "assets/data/emoji/"
         emoji = ""
         commentCount = true # FixIt 0.2.13 | NEW
-      # FixIt 0.2.13 | NEW Waline comment config (https://waline.js.org)
+      # FixIt 0.2.16 | CHANGED Waline comment config (https://waline.js.org)
       [params.page.comment.waline]
         enable = false
         serverURL = ""
         pageview = false # FixIt 0.2.15 | NEW
-        emoji = ["//unpkg.com/@waline/emojis@1.0.1/weibo"]
+        emoji = ["//unpkg.com/@waline/emojis@1.1.0/weibo"]
         meta = ["nick", "mail", "link"]
         requiredMeta = []
         login = "enable"
@@ -486,6 +486,9 @@
         imageUploader = false # FixIt 0.2.15 | NEW
         highlighter = false # FixIt 0.2.15 | NEW
         comment = false # FixIt 0.2.15 | NEW
+        texRenderer = false # FixIt 0.2.16 | NEW
+        search = false # FixIt 0.2.16 | NEW
+        recaptchaV3Key = "" # FixIt 0.2.16 | NEW
       # Facebook comment config (https://developers.facebook.com/docs/plugins/comments)
       [params.page.comment.facebook]
         enable = false

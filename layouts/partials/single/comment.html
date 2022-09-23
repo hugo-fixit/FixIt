@@ -107,6 +107,7 @@
     {{- end -}}
 
     {{- /* Waline Comment System */ -}}
+    {{- /* see https://waline.js.org/reference/component.html */ -}}
     {{- $waline := $comment.waline | default dict -}}
     {{- if $waline.enable -}}
       <div id="waline" class="comment"></div>
@@ -114,7 +115,8 @@
       {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
       {{- $source := $cdn.walineJS | default "lib/waline/waline.js" -}}
       {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-      {{- $commentConfig = dict "el" "#waline" "serverURL" $waline.serverURL "lang" .Lang "dark" "body[data-theme='dark']" "copyright" true "imageUploader" false "highlighter" false | dict "waline" | merge $commentConfig -}}
+      {{- $commentConfig = dict "el" "#waline" "serverURL" $waline.serverURL "lang" .Lang "dark" "body[data-theme='dark']" | dict "waline" | merge $commentConfig -}}
+      {{- $commentConfig = dict "copyright" true "imageUploader" false "highlighter" false "texRenderer" false "search" false | dict "waline" | merge $commentConfig -}}
       {{- with $waline.pageview -}}
         {{- $commentConfig = dict "pageview" . | dict "waline" | merge $commentConfig -}}
       {{- end -}}
@@ -144,6 +146,15 @@
       {{- end -}}
       {{- with $waline.comment -}}
         {{- $commentConfig = dict "comment" . | dict "waline" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $waline.texRenderer -}}
+        {{- $commentConfig = dict "texRenderer" . | dict "waline" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $waline.search -}}
+        {{- $commentConfig = dict "search" . | dict "waline" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $waline.recaptchaV3Key -}}
+        {{- $commentConfig = dict "recaptchaV3Key" . | dict "waline" | merge $commentConfig -}}
       {{- end -}}
       <noscript>
         Please enable JavaScript to view the comments powered by <a href="https://waline.js.org/" rel="external nofollow noopener noreferrer">Waline</a>.

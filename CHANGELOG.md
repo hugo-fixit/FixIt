@@ -54,6 +54,7 @@ All notable changes to this project will be documented in this file.
   - Update typeit from 7.0.4 to 8.7.0
   - Update lightgallery from 1.4.0 to 2.6.0
   - Update Valine from 1.5.0 to 1.5.1
+  - Update @waline/client from 2.6.1 to 2.10.0
 - :wrench: Chore(deps-dev):
   - Remove dependencies: minimist, babel-preset-minify
 - **Full Changelog:** @Lruihao [`v0.2.15...v0.2.16`](https://github.com/hugo-fixit/FixIt/compare/v0.2.15...v0.2.16)
