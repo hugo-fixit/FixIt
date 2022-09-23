@@ -6,8 +6,8 @@ prefix:
   # simple-icons@7.12.0 https://github.com/simple-icons/simple-icons
   simpleIcons: https://cdn.jsdelivr.net/npm/simple-icons@7.12.0/icons/
 libFiles:
-  # algoliasearch@4.13.0 https://github.com/algolia/algoliasearch-client-javascript
-  algoliasearchJS: algoliasearch@4.13.0/dist/algoliasearch-lite.umd.min.js
+  # algoliasearch@4.14.2 https://github.com/algolia/algoliasearch-client-javascript
+  algoliasearchJS: algoliasearch@4.14.2/dist/algoliasearch-lite.umd.min.js
   # animate.css@4.1.1 https://github.com/daneden/animate.css
   animateCSS: animate.css@4.1.1/animate.min.css
   # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
@@ -16,7 +16,8 @@ libFiles:
   # artalk@2.3.4 https://github.com/ArtalkJS/Artalk
   artalkCSS: artalk@2.3.4/dist/Artalk.min.css
   artalkJS: artalk@2.3.4/dist/Artalk.min.js
-  # autocomplete.js@0.38.1 https://github.com/algolia/autocomplete.js
+  # autocomplete-js@0.38.1 https://github.com/algolia/autocomplete
+  # TODO update autocompleteJS: '@algolia/autocomplete-js@1.7.1/dist/umd/index.production.js'
   autocompleteJS: autocomplete.js@0.38.1/dist/autocomplete.min.js
   # cell-watermark@1.0.3 https://github.com/Lruihao/watermark
   cellWatermarkJS: cell-watermark@1.0.3/src/watermark.min.js
@@ -28,23 +29,21 @@ libFiles:
   cryptoEncBase64JS: crypto-js@4.1.1/enc-base64.js
   cryptoMd5JS: crypto-js@4.1.1/md5.js
   cryptoSha256JS: crypto-js@4.1.1/sha256.js
-  # echarts@5.2.2 https://github.com/apache/echarts
-  echartsJS: echarts@5.3.2/dist/echarts.min.js
-  echartsMacaronsJS: echarts@5.3.2/theme/macarons.min.js
+  # echarts@5.3.3 https://github.com/apache/echarts
+  echartsJS: echarts@5.3.3/dist/echarts.min.js
   # eruda@2.5.0 https://github.com/liriliri/eruda
   erudaJS: eruda@2.5.0/eruda.js
-  # fontawesome-free@6.1.1 https://github.com/FortAwesome/Font-Awesome
-  fontawesomeFreeCSS: '@fortawesome/fontawesome-free@6.1.1/css/all.min.css'
+  # fontawesome-free@6.2.0 https://github.com/FortAwesome/Font-Awesome
+  fontawesomeFreeCSS: '@fortawesome/fontawesome-free@6.2.0/css/all.min.css'
   # gitalk@1.7.2 https://github.com/gitalk/gitalk
   gitalkCSS: gitalk@1.7.2/dist/gitalk.min.css
   gitalkJS: gitalk@1.7.2/dist/gitalk.min.js
-  # katex@0.15.3 https://github.com/KaTeX/KaTeX
-  katexAutoRenderJS: katex@0.15.3/dist/contrib/auto-render.min.js
-  katexCopyTexCSS: katex@0.15.3/dist/contrib/copy-tex.min.css
-  katexCopyTexJS: katex@0.15.3/dist/contrib/copy-tex.min.js
-  katexCSS: katex@0.15.3/dist/katex.min.css
-  katexJS: katex@0.15.3/dist/katex.min.js
-  katexMhchemJS: katex@0.15.3/dist/contrib/mhchem.min.js
+  # katex@0.16.2 https://github.com/KaTeX/KaTeX
+  katexAutoRenderJS: katex@0.16.2/dist/contrib/auto-render.min.js
+  katexCopyTexJS: katex@0.16.2/dist/contrib/copy-tex.min.js
+  katexCSS: katex@0.16.2/dist/katex.min.css
+  katexJS: katex@0.16.2/dist/katex.min.js
+  katexMhchemJS: katex@0.16.2/dist/contrib/mhchem.min.js
   # lazysizes@5.3.2 https://github.com/aFarkas/lazysizes
   lazysizesJS: lazysizes@5.3.2/lazysizes.min.js
   # lightgallery@2.6.1 https://github.com/sachinchoolur/lightgallery

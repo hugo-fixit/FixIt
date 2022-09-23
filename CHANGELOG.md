@@ -56,6 +56,10 @@ All notable changes to this project will be documented in this file.
   - Update Valine from 1.5.0 to 1.5.1
   - Update @waline/client from 2.6.1 to 2.10.0
   - Update mapbox-gl from 2.8.2 to 2.10.0
+  - Update fontawesome-free from 6.1.1 to 6.2.0
+  - Update katex from 0.15.3 to 0.16.2
+  - Update echarts from 5.2.2 to 5.3.3
+  - Update algoliasearch from 4.13.0 to 4.14.2
 - :wrench: Chore(deps-dev):
   - Remove dependencies: minimist, babel-preset-minify
 - **Full Changelog:** @Lruihao [`v0.2.15...v0.2.16`](https://github.com/hugo-fixit/FixIt/compare/v0.2.15...v0.2.16)
