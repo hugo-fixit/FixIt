@@ -3,10 +3,16 @@
 All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/hugo-fixit/FixIt/releases -->
 
+## v0.2.17
+
+> Snapshot: <>
+
+- **Full Changelog:** @Lruihao [`v0.2.16...v0.2.17`](https://github.com/hugo-fixit/FixIt/compare/v0.2.16...v0.2.17)
+
 ## v0.2.16 [2022.9.24]
 
 > This version fixes several bugs, adds a few new features and SEO optimizations, and refactors part of the project structure and code.  
-> Snapshot: <>
+> Snapshot: <https://fixit-jir7e7kzt-x-cell.vercel.app>
 
 - :tada: Feat: add reading progress bar support ([#191](https://github.com/hugo-fixit/FixIt/issues/191))
 - :tada: Feat: add b2t scroll percent support ([#192](https://github.com/hugo-fixit/FixIt/issues/192))
