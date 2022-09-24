@@ -8,6 +8,15 @@
   {{- $height = $height | default .Height -}}
 {{- end -}}
 
+{{- $style := "" -}}
+{{- with $width -}}
+  {{- $style = printf "width: %v;" . -}}
+{{- end -}}
+{{- with $height -}}
+  {{- $style = printf "%vheight: %v;" $style . -}}
+{{- end -}}
+{{- /* with $style }} {{ printf "style=\"%v\"" $style | safeHTMLAttr -}}{{- end */ -}}
+
 {{- $small := .SrcSmall | default $src -}}
 {{- with dict "Path" .SrcSmall "Resources" .Resources | partial "function/resource.html" -}}
   {{- $small = .RelPermalink -}}
@@ -31,8 +40,10 @@
       data-sizes="auto"
       alt="{{ $alt }}"
       title="{{ .Title | default $alt }}"
-      {{- with .Height }} height="{{ . }}"{{- end -}}
-      {{- with .Width }} width="{{ . }}"{{- end -}}
+      {{- with $width }} width="{{ . }}"{{- end -}}
+      {{- with $height }} height="{{ . }}"{{- end -}}
+      {{- with .Width }} data-w{{- end -}}
+      {{- with .Height }} data-h{{- end -}}
     />
   </a>
 {{- else -}}
@@ -46,5 +57,7 @@
     title="{{ .Title | default $alt }}"
     {{- with $width }} width="{{ . }}"{{- end -}}
     {{- with $height }} height="{{ . }}"{{- end -}}
+    {{- with .Width }} data-w{{- end -}}
+    {{- with .Height }} data-h{{- end -}}
   />
 {{- end -}}

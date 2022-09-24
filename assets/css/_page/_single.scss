@@ -71,10 +71,10 @@
       height: auto;
       margin: 0 auto;
       overflow: hidden;
-    }
 
-    img.lazyloaded {
-      width: 100%;
+      &.lazyloaded {
+        width: 100%;
+      }
     }
   }
 
@@ -290,7 +290,7 @@
         margin: 0 auto;
         overflow: hidden;
 
-        &.lazyloaded {
+        &.lazyloaded:not([data-w]) {
           width: 100%;
         }
       }
@@ -301,7 +301,7 @@
       @include object-fit(none);
     }
 
-    .lazyloaded {
+    .lazyloaded:not([data-h]) {
       @include object-fit(fill);
     }
 

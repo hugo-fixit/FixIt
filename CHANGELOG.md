@@ -37,6 +37,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: `center-quote` shortcode rendering error when config `unsafe = false` (@yureiita[#160](https://github.com/hugo-fixit/FixIt/pull/160))
 - :bug: Fix: menu item invalid params `draft` in submenu
 - :bug: Fix: missing height and weight of img element and lazyload object-fit style
+- :bug: Fix: image shortcode invalid params `height` and `weight` ([#200](https://github.com/hugo-fixit/FixIt/issues/200))
 - :bug: Fix: typeit shortcode invalid config `duration = -1` and fix style
 - :bug: Fix: typeit shortcode prints consecutive spaces and newline errors
 - :art: Style: change the default icons of some social links
