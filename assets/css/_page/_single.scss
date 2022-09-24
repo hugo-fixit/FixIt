@@ -264,8 +264,11 @@
 
     img {
       max-width: 100%;
-      height: auto;
       min-height: 1em;
+
+      &:not([data-h]) {
+        height: auto;
+      }
     }
     svg {
       max-width: 100%;
@@ -301,7 +304,7 @@
       @include object-fit(none);
     }
 
-    .lazyloaded:not([data-h]) {
+    .lazyloaded {
       @include object-fit(fill);
     }
 
