@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/hugo-fixit/FixIt/releases -->
 
-## v0.2.16
+## v0.2.16 [2022.9.24]
 
 > This version fixes several bugs, adds a few new features and SEO optimizations, and refactors part of the project structure and code.  
 > Snapshot: <>
@@ -63,6 +63,8 @@ All notable changes to this project will be documented in this file.
   - Update algoliasearch from 4.13.0 to 4.14.2
 - :wrench: Chore(deps-dev):
   - Remove dependencies: minimist, babel-preset-minify
+  - Bump core-js from 3.24.1 to 3.25.2 (@dependabot[#201](https://github.com/hugo-fixit/FixIt/pull/201))
+  - Bump @babel/core from 7.18.10 to 7.19.1 (@dependabot[#202](https://github.com/hugo-fixit/FixIt/pull/202))
 - **Full Changelog:** @Lruihao [`v0.2.15...v0.2.16`](https://github.com/hugo-fixit/FixIt/compare/v0.2.15...v0.2.16)
 
 ## v0.2.15 [2022.8.4]
