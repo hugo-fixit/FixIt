@@ -69,16 +69,16 @@ FixIt 主题继承了 LoveIt 等主题的优秀功能，并在它们的基础上
 
 总之，如果你更偏好 FixIt 主题的设计语言和自由度，如果你和我一样喜欢个性化自定义主题，那么，FixIt 主题可能是更适合你。  
 
-## 谁在用 FixIt
+## [谁在用 FixIt](https://fixit.lruihao.cn/zh-cn/friends/)
 
 为了直观地浏览主题特性，这里有一些基于 **FixIt** 主题渲染的预览网站。
 
-* [FixIt 主题官网](https://fixit.lruihao.cn/zh-cn/)
-* [FixIt 主题官网 - 预览](https://pre.fixit.lruihao.cn/zh-cn/)
-* [李瑞豪的博客](https://lruihao.cn)
+* 📌 [FixIt 主题官网](https://fixit.lruihao.cn/zh-cn/)，[FixIt 预览版](https://pre.fixit.lruihao.cn/zh-cn/)｜[仓库](https://github.com/hugo-fixit/docs)
+* 📌 [李瑞豪的博客](https://lruihao.cn)｜[仓库](https://github.com/Lruihao/hugo-blog)
 * [hiifong 的博客](https://52at.ml)
 * [wlanxww 的博客](https://wlanxww.com)
-* 你可以通过 [提交 PR](https://github.com/hugo-fixit/FixIt/pulls) 添加你的网站（例如：[#111](https://github.com/hugo-fixit/FixIt/pull/111)）
+
+你可以 [提交 PR](https://github.com/hugo-fixit/FixIt/pulls) 以字典顺序将您的 FixIt 网站添加到列表中。（例如：[#111](https://github.com/hugo-fixit/FixIt/pull/111)）
 
 ## 特性
 

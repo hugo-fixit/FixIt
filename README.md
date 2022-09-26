@@ -67,16 +67,16 @@ The FixIt theme inherits the excellent features of themes such as LoveIt, and ad
 
 In short, if you prefer the design language and freedom of the FixIt theme, and if you like to personalize your own themes as I do, the FixIt theme may be more suitable for you.
 
-## Who used FixIt
+## [Who used FixIt](https://fixit.lruihao.cn/friends/)
 
 To see this theme in action, here are some live demo sites which are rendered with **FixIt** theme.
 
-* [FixIt Theme Official Website](https://fixit.lruihao.cn)
-* [FixIt Theme Official Website - Preview](https://pre.fixit.lruihao.cn)
-* [Lruihao's note](https://lruihao.cn)
+* 📌 [FixIt Theme Official Website](https://fixit.lruihao.cn), [PreFixIt](https://pre.fixit.lruihao.cn) | [repo](https://github.com/hugo-fixit/docs)
+* 📌 [Lruihao's note](https://lruihao.cn) | [repo](https://github.com/Lruihao/hugo-blog)
 * [hiifong's blog](https://52at.ml)
 * [wlanxww's blog](https://wlanxww.com)
-* Add a your site by [making a PR](https://github.com/hugo-fixit/FixIt/pulls) (e.g. [#111](https://github.com/hugo-fixit/FixIt/pull/111))
+
+You could add your FixIt site to the list in lexicographical order via [making a PR](https://github.com/hugo-fixit/FixIt/pulls). (e.g. [#111](https://github.com/hugo-fixit/FixIt/pull/111))
 
 ## Features
 
