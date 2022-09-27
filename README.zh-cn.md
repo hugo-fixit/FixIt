@@ -12,7 +12,7 @@
 
 FixIt 主题继承了这些主题的优秀功能，并在此基础上添加了新的功能与优化，请阅读 [为什么选择 FixIt](#为什么选择-FixIt) 来了解更多。
 
-![Hugo Theme FixIt](https://pre.fixit.lruihao.cn/images/Apple-Devices-Preview.png)
+![Hugo Theme FixIt](https://fixit.lruihao.cn/images/Apple-Devices-Preview.jpg)
 
 ## [立即开始](https://fixit.lruihao.cn/zh-cn/categories/documentation/)
 

@@ -12,7 +12,7 @@ It is based on the original [LoveIt Theme](https://github.com/dillonzq/LoveIt), 
 
 The FixIt theme inherits the excellent features of these themes, and adds new features and optimizations on those basis. Please read [Why Choose FixIt](#why-choose-fixit) to learn more.
 
-![Hugo Theme FixIt](https://pre.fixit.lruihao.cn/images/Apple-Devices-Preview.png)
+![Hugo Theme FixIt](https://fixit.lruihao.cn/images/Apple-Devices-Preview.jpg)
 
 ## [Getting started](https://fixit.lruihao.cn/categories/documentation/)
 
