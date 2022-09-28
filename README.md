@@ -4,7 +4,7 @@
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.84.0-ff4088?style=flat&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/hugo-fixit/FixIt?style=flat)](/LICENSE)
 
-👉 English README | [简体中文说明](/README.zh-cn.md)
+👉 English README | [简体中文说明](README.zh-cn.md)
 
 > [FixIt](https://github.com/hugo-fixit/FixIt) is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/).
 
@@ -178,13 +178,13 @@ All feedback is welcome! Head over to the [issues](https://github.com/hugo-fixit
 
 ## Contributing
 
-Please see [CONTRIBUTING.md](/CONTRIBUTING.md) for getting started with the contribution.
+Please see [CONTRIBUTING.md](CONTRIBUTING.md) for getting started with the contribution.
 
-Make sure that you follow [CODE_OF_CONDUCT.md](/CODE_OF_CONDUCT.md) while contributing and engaging in the discussions.
+Make sure that you follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) while contributing and engaging in the discussions.
 
 **When contributing, please first discuss the change you wish to make via an issue on this repository before making the actual change**.
 
-## [Contributors](/contributors.md)
+## [Contributors](contributors.md)
 
 ## Acknowledgements
 
@@ -237,7 +237,7 @@ Make sure that you follow [CODE_OF_CONDUCT.md](/CODE_OF_CONDUCT.md) while contri
 
 ## License
 
-FixIt is licensed under the **MIT** license. Check the [LICENSE file](/LICENSE) for details.
+FixIt is licensed under the **MIT** license. Check the [LICENSE file](LICENSE) for details.
 
 ## Author
 
@@ -248,7 +248,7 @@ FixIt is licensed under the **MIT** license. Check the [LICENSE file](/LICENSE) 
 If you enjoy the theme, please consider buying me a coffee ☕️.
 
 * [PayPal](https://paypal.me/Lruihao)
-* [Alipay](/images/alipay.gif)
-* [Wechat](/images/wechatpay.gif)
+* [Alipay](images/alipay.gif)
+* [Wechat](images/wechatpay.gif)
 
 Thanks! ❤️

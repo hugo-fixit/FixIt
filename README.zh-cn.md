@@ -4,7 +4,7 @@
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.84.0-ff4088?style=flat&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/hugo-fixit/FixIt?style=flat)](/LICENSE)
 
-👉 [English README](/README.md) | 简体中文说明
+👉 [English README](README.md) | 简体中文说明
 
 > [FixIt](https://github.com/hugo-fixit/FixIt) 是一个**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。
 
@@ -180,13 +180,13 @@ FixIt 支持下列语言：
 
 ## 参与贡献
 
-请参阅 [CONTRIBUTING.md](/CONTRIBUTING.md) 以了解贡献该项目的基本信息。
+请参阅 [CONTRIBUTING.md](CONTRIBUTING.md) 以了解贡献该项目的基本信息。
 
-确保在贡献和参与讨论时遵守 [CODE_OF_CONDUCT.md](/CODE_OF_CONDUCT.md)。
+确保在贡献和参与讨论时遵守 [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)。
 
 **贡献时，请先通过此存储库上的问题讨论您希望进行的更改，然后再进行实际更改**。
 
-## [所有贡献者](/contributors.md)
+## [所有贡献者](contributors.md)
 
 ## 致谢
 
@@ -239,7 +239,7 @@ FixIt 支持下列语言：
 
 ## 许可协议
 
-FixIt 根据 **MIT** 许可协议授权。 更多信息请查看 [LICENSE 文件](/LICENSE)。
+FixIt 根据 **MIT** 许可协议授权。 更多信息请查看 [LICENSE 文件](LICENSE)。
 
 ## 作者
 
@@ -250,7 +250,7 @@ FixIt 根据 **MIT** 许可协议授权。 更多信息请查看 [LICENSE 文件
 如果你喜爱这个主题，请考虑给我买杯咖啡 ☕️.
 
 * [PayPal](https://paypal.me/Lruihao)
-* [支付宝](/images/alipay.gif)
-* [微信支付](/images/wechatpay.gif)
+* [支付宝](images/alipay.gif)
+* [微信支付](images/wechatpay.gif)
 
 谢谢！❤️
