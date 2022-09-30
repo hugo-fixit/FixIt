@@ -23,8 +23,8 @@ FixIt 主题继承了这些主题的优秀功能，并在此基础上添加了�
 > Gitee 镜像仓库：<https://gitee.com/lruihao/FixIt>
 
 ```bash
-git clone --recursive https://github.com/hugo-fixit/FixIt.git FixIt
-cd FixIt
+git clone --recursive https://github.com/hugo-fixit/FixIt.git && cd FixIt
+
 hugo server --source=docs
 ```
 

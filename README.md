@@ -21,8 +21,8 @@ Head to this [documentation page](https://fixit.lruihao.cn/theme-documentation-b
 Or run [Documentation Site](https://fixit.lruihao.cn) locally:
 
 ```bash
-git clone --recursive https://github.com/hugo-fixit/FixIt.git FixIt
-cd FixIt
+git clone --recursive https://github.com/hugo-fixit/FixIt.git && cd FixIt
+
 hugo server --source=docs
 ```
 

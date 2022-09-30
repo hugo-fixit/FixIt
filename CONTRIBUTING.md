@@ -5,8 +5,7 @@ First, fork this repository by clicking the fork button.
 Next, clone your forked repo.
 
 ```
-git clone https://github.com/example/FixIt.git
-cd FixIt
+git clone --recursive https://github.com/hugo-fixit/FixIt.git && cd FixIt
 ```
 
 Then, install the dev dependencies.
