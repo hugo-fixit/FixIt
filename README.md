@@ -71,7 +71,9 @@ In short, if you prefer the design language and freedom of the FixIt theme, and 
 
 To see this theme in action, here are some live demo sites which are rendered with **FixIt** theme.
 
-* 📌 [FixIt Theme Official Website](https://fixit.lruihao.cn), [PreFixIt](https://pre.fixit.lruihao.cn) | [repo](https://github.com/hugo-fixit/docs)
+* 📌 [FixIt Theme Official Website](https://fixit.lruihao.cn), [FixIt Preview](https://pre.fixit.lruihao.cn) | [repo](https://github.com/hugo-fixit/docs)
+* 📌 [FixIt Blog Template - Git](https://demo.fixit.lruihao.cn) | [repo](https://github.com/hugo-fixit/hugo-fixit-blog-git)
+* 📌 [FixIt Blog Template - Go](https://demo1.fixit.lruihao.cn) | [repo](https://github.com/hugo-fixit/hugo-fixit-blog-go)
 * 📌 [Lruihao's note](https://lruihao.cn) | [repo](https://github.com/Lruihao/hugo-blog)
 * [hiifong's blog](https://52at.ml)
 * [wlanxww's blog](https://wlanxww.com)

@@ -74,6 +74,8 @@ FixIt 主题继承了 LoveIt 等主题的优秀功能，并在它们的基础上
 为了直观地浏览主题特性，这里有一些基于 **FixIt** 主题渲染的预览网站。
 
 * 📌 [FixIt 主题官网](https://fixit.lruihao.cn/zh-cn/)，[FixIt 预览版](https://pre.fixit.lruihao.cn/zh-cn/)｜[仓库](https://github.com/hugo-fixit/docs)
+* 📌 [FixIt 博客模板 - Git](https://demo.fixit.lruihao.cn)｜[仓库](https://github.com/hugo-fixit/hugo-fixit-blog-git)
+* 📌 [FixIt 博客模板 - Go](https://demo1.fixit.lruihao.cn)｜[仓库](https://github.com/hugo-fixit/hugo-fixit-blog-go)
 * 📌 [李瑞豪的博客](https://lruihao.cn)｜[仓库](https://github.com/Lruihao/hugo-blog)
 * [hiifong 的博客](https://52at.ml)
 * [wlanxww 的博客](https://wlanxww.com)
