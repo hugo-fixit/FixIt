@@ -21,6 +21,16 @@
     # title will be shown when you hover on this menu link
     title = ""
     weight = 1
+    # FixIt 0.2.14 | NEW add user-defined content to menu items
+    [menu.main.params]
+      # add css class to a specific menu item
+      class = ""
+      # whether set as a draft menu item whose function is similar to a draft post/page
+      draft = false
+      # FixIt 0.2.16 | NEW add fontawesome icon to a specific menu item
+      icon = "fa-solid fa-archive"
+      # FixIt 0.2.16 | NEW set menu item type, optional value: ["mobile", "desktop"]
+      type = ""
   [[menu.main]]
     identifier = "categories"
     pre = ""
@@ -29,6 +39,8 @@
     url = "/categories/"
     title = ""
     weight = 2
+    [menu.main.params]
+      icon = "fa-solid fa-th"
   [[menu.main]]
     identifier = "tags"
     pre = ""
@@ -37,6 +49,8 @@
     url = "/tags/"
     title = ""
     weight = 3
+    [menu.main.params]
+      icon = "fa-solid fa-tags"
 
 # -------------------------------------------------------------------------------------
 # Theme Core Configuration Settings
