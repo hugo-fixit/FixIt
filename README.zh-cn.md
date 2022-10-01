@@ -37,7 +37,11 @@ hugo server --source=docs
 你可以将这个主题仓库添加为你的网站目录的子模块。
 
 ```bash
+# 稳定版
 git submodule add https://github.com/hugo-fixit/FixIt.git themes/FixIt
+
+# ⚠️ 开发版
+git submodule add -b dev https://github.com/hugo-fixit/FixIt.git themes/FixIt
 ```
 
 接着，前往 `config.toml` 并将默认主题更改为 `FixIt`。

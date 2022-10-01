@@ -35,7 +35,11 @@ If you are currently using the LoveIt theme (or some other themes), it is very e
 You can add this repo as a submodule of your site directory.
 
 ```bash
+# Stable version
 git submodule add https://github.com/hugo-fixit/FixIt.git themes/FixIt
+
+# ⚠️ Dev version
+git submodule add -b dev https://github.com/hugo-fixit/FixIt.git themes/FixIt
 ```
 
 Next, go to the `config.toml` and change the default theme to `FixIt`.
