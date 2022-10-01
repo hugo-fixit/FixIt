@@ -6,7 +6,7 @@
   "devDependencies": {
     "@babel/cli": "^7.18.10",
     "@babel/core": "^7.19.1",
-    "@babel/preset-env": "^7.18.10",
+    "@babel/preset-env": "^7.19.3",
     "atomic-algolia": "^0.3.19",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
