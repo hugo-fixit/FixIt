@@ -4,7 +4,7 @@
   "description": "FixIt theme source files",
   "private": true,
   "devDependencies": {
-    "@babel/cli": "^7.18.10",
+    "@babel/cli": "^7.19.3",
     "@babel/core": "^7.19.1",
     "@babel/preset-env": "^7.18.10",
     "atomic-algolia": "^0.3.19",
