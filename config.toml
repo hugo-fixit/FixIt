@@ -81,9 +81,6 @@
   # FixIt 0.2.14 | NEW FixIt will, by default, inject a theme meta tag in the HTML head on the home page only.
   # You can turn it off, but we would really appreciate if you don’t, as this is a good way to watch FixIt's popularity on the rise.
   disableThemeInject = false
-  # FixIt 0.2.16 | NEW Auto Bookmark Support
-  # If true, save the reading progress when closing the page.
-  autoBookmark = false
 
   # FixIt 0.2.0 | NEW App icon config
   [params.app]
@@ -338,6 +335,9 @@
     pageStyle = "normal"
     # FixIt 0.2.14 | NEW Gravatar is force-used as the author's avatar
     gravatarForce = false
+    # FixIt 0.2.17 | CHANGED Auto Bookmark Support
+    # If true, save the reading progress when closing the page.
+    autoBookmark = false
     # FixIt 0.2.15 | NEW Repost config
     [params.page.repost]
       enable = false

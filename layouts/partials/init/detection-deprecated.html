@@ -7,6 +7,10 @@
 {{- with .Site.Params.ibruce.siteTime -}}
   {{- $warnErrors = $warnErrors | append "The parameter `ibruce.siteTime` is deprecated since v0.2.14, use `footer.siteTime` instead." -}}
 {{- end -}}
+{{- with .Site.Params.autoBookmark -}}
+  {{- $warnErrors = $warnErrors | append "The parameter `autoBookmark` is deprecated since v0.2.17, use `page.autoBookmark` instead." -}}
+{{- end -}}
+
 {{- if len $warnErrors -}}
   {{- warnf "Deprecated parameter detection until %v\n  - %v\n\n" (.Scratch.Get "version") (delimit $warnErrors "\n  - ") -}}
 {{- end -}}
