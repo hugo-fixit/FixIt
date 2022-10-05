@@ -498,7 +498,8 @@ class FixIt {
           const $copy = document.createElement('span');
           $copy.insertAdjacentHTML('afterbegin', '<i class="fa-regular fa-copy fa-fw" aria-hidden="true"></i>');
           $copy.classList.add('copy');
-          const code = $code.innerText;
+          // remove the leading and trailing whitespace of the code string
+          const code = $code.innerText.trim();
           if (this.config.code.maxShownLines < 0 || code.split('\n').length < this.config.code.maxShownLines + 2) {
             $chroma.classList.add('open');
           }
