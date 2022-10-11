@@ -67,13 +67,16 @@
             {{- printf `<time datetime="%v">%v</time>` . . | safeHTML -}}
           </span>&nbsp;
         {{- end -}}
-        <span>
-          {{- dict "Class" "fa-solid fa-pencil-alt fa-fw" | partial "plugin/icon.html" }} {{ T "wordCount" .WordCount -}}
-        </span>&nbsp;
-        {{- /* NO_SPACING */ -}}
-        <span>
-          {{- dict "Class" "fa-regular fa-clock fa-fw" | partial "plugin/icon.html" }} {{ T "readingTime" .ReadingTime -}}
-        </span>&nbsp;
+        {{- if $params.wordCount -}}
+          <span>
+            {{- dict "Class" "fa-solid fa-pencil-alt fa-fw" | partial "plugin/icon.html" }} {{ T "wordCount" .WordCount -}}
+          </span>&nbsp;
+        {{- end -}}
+        {{- if $params.readingTime -}}
+          <span>
+            {{- dict "Class" "fa-regular fa-clock fa-fw" | partial "plugin/icon.html" }} {{ T "readingTime" .ReadingTime -}}
+          </span>&nbsp;
+        {{- end -}}
 
         {{- /* If the article expires, close the comment or not */ -}}
         {{- $expirationReminder := $params.expirationReminder | default dict -}}

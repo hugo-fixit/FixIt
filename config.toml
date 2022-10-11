@@ -338,6 +338,11 @@
     # FixIt 0.2.17 | CHANGED Auto Bookmark Support
     # If true, save the reading progress when closing the page.
     autoBookmark = false
+    # FixIt 0.2.17 | NEW whether to enable wordCount
+    wordCount = true
+    # FixIt 0.2.17 | NEW whether to enable readingTime
+    readingTime = true
+
     # FixIt 0.2.15 | NEW Repost config
     [params.page.repost]
       enable = false
