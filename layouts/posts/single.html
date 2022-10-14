@@ -84,7 +84,7 @@
           $expirationReminder.enable
           | and (gt (div (sub now.Unix .Lastmod.Unix) 86400) ($expirationReminder.warning | default 180))
           | and $expirationReminder.closeComment -}}
-          {{- .Scratch.Set "comment" (dict "enable" false) -}}
+          {{- .Scratch.Set "commentExpired" true -}}
         {{- end -}}
         {{- $comment := .Scratch.Get "comment" | default dict -}}
         {{- $visitorIcon := dict "Class" "fa-regular fa-eye fa-fw" | partial "plugin/icon.html" -}}
@@ -96,7 +96,6 @@
               {{ $visitorIcon }}&nbsp;<span id="{{ .RelPermalink }}" class="artalk-visitor-count">-</span>&nbsp;{{ T "views" }}
             </span>&nbsp;
           {{- else if ($comment.valine.enable | and $comment.valine.visitor) -}}
-            {{- /* Warning: waline v2 will not be compatible with valine */ -}}  
             <span id="{{ .RelPermalink }}" class="leancloud_visitors comment-visitors" data-flag-title="{{ .Title }}">
               {{ $visitorIcon }}&nbsp;<span class="leancloud-visitors-count">-</span>&nbsp;{{ T "views" }}
             </span>&nbsp;

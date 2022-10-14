@@ -4,7 +4,7 @@
 {{- $commentConfig := dict "enable" false -}}
 
 {{- if $comment.enable -}}
-  {{- $commentConfig = dict "enable" true -}}
+  {{- $commentConfig = dict "enable" true "expired" (.Scratch.Get "commentExpired" | default false) -}}
   <div id="comments">
     {{- /* Artalk Comment System */ -}}
     {{- $artalk := $comment.artalk | default dict -}}

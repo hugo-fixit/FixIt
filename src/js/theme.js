@@ -792,7 +792,16 @@ class FixIt {
         this.util.scrollIntoView('#comments');
       }, false);
     }
+    this.config.comment.expired && document.querySelector('#comments').remove();
     if (this.config.comment.artalk) {
+      if (this.config.comment.expired) {
+        return Artalk.LoadCountWidget({
+          server: this.config.comment.artalk.server,
+          site: this.config.comment.artalk.site,
+          pvEl: this.config.comment.artalk.pvEl,
+          countEl: this.config.comment.artalk.countEl
+        })
+      }
       const artalk = new Artalk(this.config.comment.artalk);
       artalk.setDarkMode(this.isDark);
       this.switchThemeEventSet.add(() => {
@@ -813,6 +822,13 @@ class FixIt {
       return new Valine(this.config.comment.valine);
     }
     if (this.config.comment.waline) {
+      if (this.config.comment.expired) {
+        this.config.comment.waline.pageview && Waline.pageviewCount({
+          serverURL: this.config.comment.waline.serverURL,
+          path: window.location.pathname
+        });
+        return;
+      }
       return Waline.init(this.config.comment.waline);
     }
     if (this.config.comment.utterances) {
