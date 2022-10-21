@@ -55,17 +55,17 @@
         </a>
     </td>
     <td align="center">
-        <a href="https://github.com/realsangil">
-            <img src="https://avatars.githubusercontent.com/u/15508203?v=4" width="100;" alt="realsangil"/>
-            <br />
-            <sub><b>Sangil Park</b></sub>
-        </a>
-    </td>
-    <td align="center">
         <a href="https://github.com/yureiita">
             <img src="https://avatars.githubusercontent.com/u/26035759?v=4" width="100;" alt="yureiita"/>
             <br />
             <sub><b>Abdul Halim Daud</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/realsangil">
+            <img src="https://avatars.githubusercontent.com/u/15508203?v=4" width="100;" alt="realsangil"/>
+            <br />
+            <sub><b>Sangil Park</b></sub>
         </a>
     </td>
     <td align="center">
@@ -98,6 +98,13 @@
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/xueweiwujxw">
+            <img src="https://avatars.githubusercontent.com/u/45992640?v=4" width="100;" alt="xueweiwujxw"/>
+            <br />
+            <sub><b>Xuewei Wu</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/youngxhui">
             <img src="https://avatars.githubusercontent.com/u/16971804?v=4" width="100;" alt="youngxhui"/>
             <br />
@@ -124,15 +131,15 @@
             <br />
             <sub><b>Carlos Manuel Soares</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/AutomationD">
             <img src="https://avatars.githubusercontent.com/u/1790594?v=4" width="100;" alt="AutomationD"/>
             <br />
             <sub><b>Dmitry Kireev</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/thejayhaykid">
             <img src="https://avatars.githubusercontent.com/u/9452325?v=4" width="100;" alt="thejayhaykid"/>
@@ -148,10 +155,10 @@
         </a>
     </td>
     <td align="center">
-        <a href="https://github.com/nirgn975">
-            <img src="https://avatars.githubusercontent.com/u/3472902?v=4" width="100;" alt="nirgn975"/>
+        <a href="https://github.com/NicoDreamzZ">
+            <img src="https://avatars.githubusercontent.com/u/12086166?v=4" width="100;" alt="NicoDreamzZ"/>
             <br />
-            <sub><b>Nir Galon</b></sub>
+            <sub><b>Nico Rügheimer</b></sub>
         </a>
     </td>
     <td align="center">
@@ -167,15 +174,15 @@
             <br />
             <sub><b>Silke Henderickx</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/tlereste">
             <img src="https://avatars.githubusercontent.com/u/12964583?v=4" width="100;" alt="tlereste"/>
             <br />
             <sub><b>Thibault Le Reste</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/vanildosouto">
             <img src="https://avatars.githubusercontent.com/u/1603028?v=4" width="100;" alt="vanildosouto"/>
@@ -210,15 +217,15 @@
             <br />
             <sub><b>Holger Lösken</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/hiifong">
             <img src="https://avatars.githubusercontent.com/u/89133723?v=4" width="100;" alt="hiifong"/>
             <br />
             <sub><b>Hiifong</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/onisuly">
             <img src="https://avatars.githubusercontent.com/u/8399827?v=4" width="100;" alt="onisuly"/>
@@ -245,13 +252,6 @@
             <img src="https://avatars.githubusercontent.com/u/37209662?v=4" width="100;" alt="tomaja-linuxo"/>
             <br />
             <sub><b>Tomaja</b></sub>
-        </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/xueweiwujxw">
-            <img src="https://avatars.githubusercontent.com/u/45992640?v=4" width="100;" alt="xueweiwujxw"/>
-            <br />
-            <sub><b>Xuewei Wu</b></sub>
         </a>
     </td>
     <td align="center">
