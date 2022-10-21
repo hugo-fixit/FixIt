@@ -20,5 +20,8 @@ jobs:
         with:
           readme_path: "contributors.md"
           image_size: 100
+          commit_message: ":busts_in_silhouette: Chore(contributor): contrib-readme-action has updated contributors.md"
+          committer_username: "github-actions[bot]"
+          committer_email: "github-actions[bot]@users.noreply.github.com"
         env:
           GITHUB_TOKEN: ${{ secrets.CONTRIBUTORS_TOKEN }}
