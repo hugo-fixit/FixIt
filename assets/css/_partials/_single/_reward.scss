@@ -1,4 +1,4 @@
-.reward-container {
+.post-reward {
   margin: 1rem;
   padding: 1em 0;
   text-align: center;
@@ -7,7 +7,11 @@
     margin: 0.5rem 0;
   }
 
-  button {
+  #reward:checked~.reward-imgs {
+    display: block;
+  }
+
+  .reward-button {
     display: inline-block;
     box-sizing: border-box;
     cursor: pointer;
@@ -19,12 +23,8 @@
     padding: 0.6rem 1rem;
     background-color: $global-background-color;
     vertical-align: text-top;
+    line-height: 1rem;
 
-    &:focus~.post-reward {
-      display: block;
-    }
-
-    &:focus,
     &:active,
     &:hover {
       color: #ffffff;
@@ -46,7 +46,7 @@
   }
 }
 
-.post-reward {
+.reward-imgs {
   display: none;
   padding-top: 20px;
 

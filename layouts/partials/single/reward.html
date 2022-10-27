@@ -8,10 +8,11 @@
 {{- end -}}
 
 {{- if $reward.enable -}}
-  <div class="reward-container">
+  <div class="post-reward">
     <div class="comment">{{- $reward.comment -}}</div>
-    <button>{{- T "reward.donate" -}}</button>
-    <div class="post-reward">
+    <input type="checkbox" name="reward" id="reward" hidden />
+    <label class="reward-button" for="reward">{{- T "reward.donate" -}}</label>
+    <div class="reward-imgs">
       {{- range $way, $image := $reward.way -}}
         {{- with T (printf "reward.%v" $way) -}}
           {{- $way = . -}}
