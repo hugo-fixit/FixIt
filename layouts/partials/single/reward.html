@@ -1,0 +1,26 @@
+{{- $params := .Scratch.Get "params" -}}
+{{- $author := $params.author | default .Site.Author.name -}}
+{{- $reward := $params.reward -}}
+{{- if eq $reward true -}}
+  {{- $reward = dict "enable" true | merge .Site.Params.page.reward -}}
+{{- else if eq $reward false -}}
+  {{- $reward = dict "enable" false -}}
+{{- end -}}
+
+{{- if $reward.enable -}}
+  <div class="reward-container">
+    <div class="comment">{{- $reward.comment -}}</div>
+    <button>{{- T "reward.donate" -}}</button>
+    <div class="post-reward">
+      {{- range $way, $image := $reward.way -}}
+        {{- with T (printf "reward.%v" $way) -}}
+          {{- $way = . -}}
+        {{- end -}}
+        <div>
+          <img src="{{ $image }}" alt="{{ $author }} {{ $way }}">
+          <span{{- if $reward.animation }} data-animation{{- end -}}>{{- $way -}}</span>
+        </div>
+      {{- end -}}
+    </div>
+  </div>
+{{- end -}}

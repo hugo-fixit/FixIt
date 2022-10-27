@@ -209,6 +209,13 @@ other = "арготизм"
 
 [encryptyAgain]
 other = "" # waitting for translation
+
+[reward]
+  donate = ""
+  wechatpay = ""
+  alipay = ""
+  paypal = ""
+  bitcoin = ""
 # === posts/single.html ===
 
 # === 404.html ===

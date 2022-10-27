@@ -1,0 +1,73 @@
+.reward-container {
+  margin: 1rem;
+  padding: 1em 0;
+  text-align: center;
+  
+  .comment {
+    margin: 0.5rem 0;
+  }
+
+  button {
+    display: inline-block;
+    box-sizing: border-box;
+    cursor: pointer;
+    outline: none;
+    color: lighten($reward-color, 5%);
+    border: 2px solid lighten($reward-color, 10%);
+    border-radius: $global-border-radius;
+    transition: 0.3s;
+    padding: 0.6rem 1rem;
+    background-color: $global-background-color;
+    vertical-align: text-top;
+
+    &:focus~.post-reward {
+      display: block;
+    }
+
+    &:focus,
+    &:active,
+    &:hover {
+      color: #ffffff;
+      border-color: $reward-color;
+      background-color: $reward-color;
+
+      [data-theme='dark'] & {
+        color: #ffffff;
+        border-color: $reward-color-dark;
+        background-color: $reward-color-dark;
+      }
+    }
+
+    [data-theme='dark'] & {
+      color: $reward-color;
+      border-color: lighten($reward-color, 5%);
+      background-color: $global-background-color-dark;
+    }
+  }
+}
+
+.post-reward {
+  display: none;
+  padding-top: 20px;
+
+  div {
+    display: inline-block;
+
+    span {
+      display: block;
+    }
+
+    &:hover span[data-animation] {
+      animation: jackInTheBox 0.8s infinite linear;
+      // The animation may affect :hover of img in dark mode
+      pointer-events: none;
+    }
+  }
+
+  img {
+    display: inline-block;
+    margin: .8em 2em 0;
+    max-width: 100%;
+    width: $reward-img-width;
+  }
+}

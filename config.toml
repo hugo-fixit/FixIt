@@ -410,6 +410,16 @@
       scale = true
       # whether to add FullscreenControl
       fullscreen = true
+    # FixIt 0.2.17 | NEW Donate (Sponsor) settings
+    [params.page.reward]
+      enable = false
+      animation = false
+      # comment = "Buy me a coffee"
+      [params.page.reward.way]
+        # wechatpay = "/images/wechatpay.png"
+        # alipay = "/images/alipay.png"
+        # paypal = "/images/paypal.png"
+        # bitcoin = "/images/bitcoin.png"
     # FixIt 0.2.0 | CHANGED social share links in post page
     [params.page.share]
       enable = true

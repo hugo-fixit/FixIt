@@ -99,6 +99,13 @@ $table-thead-color-dark: #20252b !default;
 // Color of the blockquote
 $blockquote-color: #697681 !default;
 $blockquote-color-dark: #9ba3aa !default;
+
+// Color of reward
+$reward-color: tomato !default;
+$reward-color-dark: darken($reward-color, 5%) !default;
+
+// Width of reward image
+$reward-img-width: 180px !default;
 // ========== Single Content ========== //
 
 // ========== Pagination ========== //
