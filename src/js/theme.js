@@ -559,18 +559,18 @@ class FixIt {
       const $toc = document.getElementById('toc-auto');
       $toc.style.visibility = 'visible';
       this.util.animateCSS($toc, ['animate__fadeIn', 'animate__faster'], true);
-      $toc.style.marginTop = document.querySelector('.single-title').clientHeight + document.querySelector('.post-meta').clientHeight + 'px';
-      $toc.style.marginBottom = document.getElementById('post-footer').clientHeight + 'px';
+      const $postMeta = document.querySelector('.post-meta');
+      $toc.style.marginTop = `${$postMeta.offsetTop + $postMeta.clientHeight}px`;
       const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
       const $tocLiElements = $tocCore.getElementsByTagName('li');
       const $headerLinkElements = document.getElementsByClassName('header-link');
       const headerIsFixed = document.body.getAttribute('data-header-desktop') !== 'normal';
       const headerHeight = document.getElementById('header-desktop').offsetHeight;
+      document.querySelector('.container').addEventListener('resize', () => {
+        $toc.style.marginBottom = `${document.querySelector('.container').clientHeight - document.querySelector('.post-footer').offsetTop}px`;
+      });
       this._tocOnScroll = this._tocOnScroll || (() => {
-        const $comments = document.getElementById('comments');
-        if ($comments) {
-          $toc.style.marginBottom = document.getElementById('post-footer').clientHeight + $comments.clientHeight + 'px';
-        }
+        $toc.style.marginBottom = `${document.querySelector('.container').clientHeight - document.querySelector('.post-footer').offsetTop}px`;
         this.util.forEach($tocLinkElements, ($tocLink) => {
           $tocLink.classList.remove('active');
         });
