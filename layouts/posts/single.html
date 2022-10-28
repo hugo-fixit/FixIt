@@ -176,11 +176,10 @@
         (substr $base64EncodeContent $saltLen)
       -}}
     {{- end -}}
-    <div
-      class="content"
-      id="content"
-      {{ with $params.password }}data-password="{{ md5 $params.password }}"{{ end }}
-      {{ with $params.password }}data-content="{{ $content }}"{{ end }}
+    <div class="content" id="content"
+      {{- with $params.endFlag }} data-end-flag="{{ . }}"{{- end -}}
+      {{- with $params.password }} data-password="{{ md5 . }}"{{- end -}}
+      {{- with $params.password }} data-content="{{ $content }}"{{- end -}}
     >
       {{- if not $params.password -}}
         {{- /* Expiration Reminder */ -}}

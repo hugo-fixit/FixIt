@@ -342,6 +342,8 @@
     wordCount = true
     # FixIt 0.2.17 | NEW whether to enable readingTime
     readingTime = true
+    # FixIt 0.2.17 | NEW end of post flag
+    endFlag = ""
 
     # FixIt 0.2.15 | NEW Repost config
     [params.page.repost]

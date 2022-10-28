@@ -78,6 +78,15 @@
     }
   }
 
+  #content[data-end-flag]:not([data-password])::after {
+    content: attr(data-end-flag);
+    display: block;
+    text-align: center;
+    color: $global-font-secondary-color;
+    font-size: 15px;
+    padding: 5px;
+  }
+
   .content {
     > h1,
     > h2 {

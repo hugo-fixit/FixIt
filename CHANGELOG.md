@@ -7,7 +7,8 @@ All notable changes to this project will be documented in this file.
 
 > Snapshot: <>
 
-- :sparkles: Feat: add feature post reward support ([#216](https://github.com/hugo-fixit/FixIt/issues/216))
+- :sparkles: Feat: add feature post reward support ([#216](https://github.com/hugo-fixit/FixIt/issues/216), @Lruihao[#234](https://github.com/hugo-fixit/FixIt/pull/234))
+- :sparkles: Feat: add feature end of post flag support ([#236](https://github.com/hugo-fixit/FixIt/issues/236))
 - :sparkles: Feat: add params to close wordcount and readingTime in post ([#209](https://github.com/hugo-fixit/FixIt/issues/209))
 - :truck: Feat: migrate parameter `params.autoBookmark` to `params.page.autoBookmark` ([#55](https://github.com/hugo-fixit/FixIt/issues/55))
 - :zap: Perf: optimize close comment feature when the post has expired ([#204](https://github.com/hugo-fixit/FixIt/issues/204))
