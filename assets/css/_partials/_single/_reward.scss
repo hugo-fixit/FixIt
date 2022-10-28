@@ -58,7 +58,7 @@
     }
 
     &:hover span[data-animation] {
-      animation: jackInTheBox 0.8s infinite linear;
+      animation: var(--animation-reward, jackInTheBox) 0.8s infinite linear;
       // The animation may affect :hover of img in dark mode
       pointer-events: none;
     }
