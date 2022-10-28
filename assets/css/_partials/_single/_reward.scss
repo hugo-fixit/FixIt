@@ -6,12 +6,16 @@
     margin-top: 0;
   }
 
+  &:has(.reward-ways:empty) {
+    display: none;
+  }
+
   .comment {
     margin: 0.5rem 0;
     font-weight: 500;
   }
 
-  #reward:checked~.reward-imgs {
+  .reward-input:checked~.reward-ways {
     display: block;
   }
 
@@ -50,7 +54,7 @@
   }
 }
 
-.reward-imgs {
+.reward-ways {
   display: none;
   padding-top: 20px;
 

@@ -1,0 +1,28 @@
+{{- $params := .Page.Scratch.Get "params" -}}
+{{- $reward := dict "enable" true | merge (.Page.Scratch.Get "reward") -}}
+{{- $id := dict "Scratch" .Page.Scratch | partial "function/id.html" -}}
+{{- $author := (.Get "author") | default (.Get 4) | default $params.author | default .Page.Site.Author.name -}}
+{{- $ways := dict "wechatpay" "" "alipay" "" "paypal" "" "bitcoin" "" -}}
+
+{{- if .IsNamedParams -}}
+  {{- $ways = .Get "wechatpay" | dict "wechatpay" | merge $ways -}}
+  {{- $ways = .Get "alipay" | dict "alipay" | merge $ways -}}
+  {{- $ways = .Get "paypal" | dict "paypal" | merge $ways -}}
+  {{- $ways = .Get "bitcoin" | dict "bitcoin" | merge $ways -}}
+  {{- $reward = dict "ways" $ways | merge $reward -}}
+{{- else -}}
+  {{- $ways = .Get 0 | dict "wechatpay" | merge $ways -}}
+  {{- $ways = .Get 1 | dict "alipay" | merge $ways -}}
+  {{- $ways = .Get 2 | dict "paypal" | merge $ways -}}
+  {{- $ways = .Get 3 | dict "bitcoin" | merge $ways -}}
+  {{- if $ways.wechatpay -}}
+    {{- $reward = dict "ways" $ways | merge $reward -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with ((.Get "comment") | default (.Get 5)) -}}
+  {{- $reward = dict "comment" . | merge $reward -}}
+{{- end -}}
+
+{{- $options := dict "Reward" $reward "Id" $id "Author" $author -}}
+{{- partial "plugin/reward.html" $options -}}

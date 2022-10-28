@@ -1,0 +1,24 @@
+{{- $reward := .Reward -}}
+{{- $id := .Id -}}
+{{- $author := .Author -}}
+
+{{- if $reward.enable -}}
+  <div class="post-reward">
+    <div class="comment">{{- $reward.comment -}}</div>
+    <input type="checkbox" class="reward-input" name="reward" id="{{ $id }}" hidden />
+    <label class="reward-button" for="{{ $id }}">{{- T "reward.donate" -}}</label>
+    <div class="reward-ways">
+      {{- range $way, $image := $reward.ways -}}
+        {{- with T (printf "reward.%v" $way) -}}
+          {{- $way = . -}}
+        {{- end -}}
+        {{- if $image -}}
+          <div>
+            <img src="{{ $image }}" alt="{{ $author }} {{ $way }}">
+            <span{{- if $reward.animation }} data-animation{{- end -}}>{{- $way -}}</span>
+          </div>
+        {{- end -}}
+      {{- end -}}
+    </div>
+  </div>
+{{- end -}}
