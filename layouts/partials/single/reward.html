@@ -1,15 +1,10 @@
 {{- $params := .Scratch.Get "params" -}}
+{{- $reward := .Scratch.Get "reward" -}}
 {{- $author := $params.author | default .Site.Author.name -}}
-{{- $reward := $params.reward -}}
-{{- if eq $reward true -}}
-  {{- $reward = dict "enable" true | merge .Site.Params.page.reward -}}
-{{- else if eq $reward false -}}
-  {{- $reward = dict "enable" false -}}
-{{- end -}}
 
 {{- if $reward.enable -}}
   <div class="post-reward">
-    <div class="comment">{{- $reward.comment -}}</div>
+    <div class="comment">{{- $reward.comment -}} {{- $reward.position -}}</div>
     <input type="checkbox" name="reward" id="reward" hidden />
     <label class="reward-button" for="reward">{{- T "reward.donate" -}}</label>
     <div class="reward-imgs">

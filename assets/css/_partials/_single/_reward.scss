@@ -1,10 +1,14 @@
 .post-reward {
-  margin: 1rem;
-  padding: 1em 0;
+  padding: 1rem;
   text-align: center;
-  
+
+  &~.post-footer {
+    margin-top: 0;
+  }
+
   .comment {
     margin: 0.5rem 0;
+    font-weight: 500;
   }
 
   #reward:checked~.reward-imgs {
@@ -19,7 +23,7 @@
     color: lighten($reward-color, 5%);
     border: 2px solid lighten($reward-color, 10%);
     border-radius: $global-border-radius;
-    transition: 0.3s;
+    @include transition(all 0.3s ease-out);
     padding: 0.6rem 1rem;
     background-color: $global-background-color;
     vertical-align: text-top;

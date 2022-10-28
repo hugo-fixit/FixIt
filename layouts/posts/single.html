@@ -191,11 +191,15 @@
       {{- end -}}
     </div>
 
-    {{- /* Donate (Sponsor) */ -}}
-    {{- partial "single/reward.html" . -}}
-
-    {{- /* Footer */ -}}
-    {{- partial "single/footer.html" . -}}
+    {{- /* Footer and Reward */ -}}
+    {{- $reward := .Scratch.Get "reward" -}}
+    {{- if eq $reward.position "before" -}}
+      {{- partial "single/reward.html" . -}}
+      {{- partial "single/footer.html" . -}}
+    {{- else -}}
+      {{- partial "single/footer.html" . -}}
+      {{- partial "single/reward.html" . -}}
+    {{- end -}}
 
     {{- /* Comment */ -}}
     {{- partial "single/comment.html" . -}}

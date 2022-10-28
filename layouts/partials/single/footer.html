@@ -74,13 +74,13 @@
 
   <div class="post-nav">
     {{- if .PrevInSection -}}
-      <a href="{{ .PrevInSection.RelPermalink }}" class="prev" rel="prev" title="{{ .PrevInSection.Title }}">
+      <a href="{{ .PrevInSection.RelPermalink }}" class="post-nav-item" rel="prev" title="{{ .PrevInSection.Title }}">
         {{- dict "Class" "fa-solid fa-angle-left fa-fw" | partial "plugin/icon.html" -}}
         {{- .PrevInSection.Title -}}
       </a>
     {{- end -}}
     {{ if .NextInSection }}
-      <a href="{{ .NextInSection.RelPermalink }}" class="next" rel="next" title="{{ .NextInSection.Title }}">
+      <a href="{{ .NextInSection.RelPermalink }}" class="post-nav-item" rel="next" title="{{ .NextInSection.Title }}">
         {{- .NextInSection.Title -}}
         {{- dict "Class" "fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
       </a>

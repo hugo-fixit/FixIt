@@ -1,10 +1,20 @@
+{{- /* FixIt theme patches */ -}}
 {{- $params := .Scratch.Get "params" -}}
 
-{{- /* FixIt theme toc patch */ -}}
+{{- /* Toc data patch */ -}}
 {{- $toc := $params.toc -}}
 {{- if eq $toc true -}}
-  {{- $toc = .Site.Params.page.toc | default dict -}}
+  {{- $toc = dict "enable" true | merge .Site.Params.page.toc -}}
 {{- else if eq $toc false -}}
   {{- $toc = dict "enable" false -}}
 {{- end -}}
 {{- .Scratch.Set "toc" $toc -}}
+
+{{- /* Reward data patch */ -}}
+{{- $reward := $params.reward -}}
+{{- if eq $reward true -}}
+  {{- $reward = dict "enable" true | merge .Site.Params.page.reward -}}
+{{- else if eq $reward false -}}
+  {{- $reward = dict "enable" false -}}
+{{- end -}}
+{{- .Scratch.Set "reward" $reward -}}

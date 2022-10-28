@@ -1,5 +1,9 @@
 .post-footer {
-  margin-top: 3rem;
+  margin: 2rem 0;
+
+  &:has(~.post-reward) {
+    margin-bottom: 0;
+  }
 
   .post-info {
     border-bottom: 1px solid $global-border-color;
@@ -72,33 +76,27 @@
   }
 
   .post-nav {
-    &::before,
-    &::after {
-      content: ' ';
-      display: table;
-    }
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
 
-    & a.prev,
-    & a.next {
+    .post-nav-item {
+      flex: 1;
       font-size: 1rem;
       font-weight: 600;
       @include transition(all 0.3s ease-out);
-    }
 
-    & a.prev {
-      float: left;
-    }
+      &[rel='next'] {
+        text-align: right;
+      }
 
-    & a.prev:hover {
-      @include transform(translateX(-4px));
-    }
+      &[rel='prev']:hover {
+        @include transform(translateX(-4px));
+      }
 
-    & a.next {
-      float: right;
-    }
-
-    & a.next:hover {
-      @include transform(translateX(4px));
+      &[rel='next']:hover {
+        @include transform(translateX(4px));
+      }
     }
   }
 }
