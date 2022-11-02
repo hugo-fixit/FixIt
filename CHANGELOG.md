@@ -16,6 +16,12 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: remove the leading and trailing whitespace of the code string ([#205](https://github.com/hugo-fixit/FixIt/issues/205))
 - :bento: Fix: update webfonts for fontawesome 6.2.0 (@NicoDreamzZ[#228](https://github.com/hugo-fixit/FixIt/pull/228))
 - :bug: Fix: image shortcode/plugin lose the support for svg type files ([#210](https://github.com/hugo-fixit/FixIt/issues/210))
+- :wrench: Chore(deps-dev):
+  - Bump @babel/cli from 7.18.10 to 7.19.3
+  - Bump @babel/core from 7.19.1 to 7.19.6
+  - Bump @babel/preset-env from 7.18.10 to 7.19.4
+  - Bump core-js from 3.25.2 to 3.26.0
+
 - **Full Changelog:** @Lruihao [`v0.2.16...v0.2.17`](https://github.com/hugo-fixit/FixIt/compare/v0.2.16...v0.2.17)
 
 ## v0.2.16 [2022.9.24]
