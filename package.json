@@ -4,13 +4,13 @@
   "description": "FixIt theme source files",
   "private": true,
   "devDependencies": {
-    "@babel/cli": "^7.18.10",
-    "@babel/core": "^7.19.1",
-    "@babel/preset-env": "^7.18.10",
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.19.6",
+    "@babel/preset-env": "^7.19.4",
     "atomic-algolia": "^0.3.19",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
-    "core-js": "^3.25.2",
+    "core-js": "^3.26.0",
     "segmentit": "^2.0.3"
   },
   "scripts": {
