@@ -1,7 +1,5 @@
 .home {
   .home-profile {
-    @include transform(translateY(16vh));
-    padding: 0 0 0.5rem;
     text-align: center;
 
     .home-avatar {
@@ -68,8 +66,7 @@
 
 .home.posts {
   .home-profile {
-    @include transform(translateY(0));
-    padding-top: 2rem;
+    padding: 2rem 0;
   }
 
   .home-avatar img {
@@ -81,6 +78,10 @@
     padding-bottom: 0.8rem;
     color: $global-font-color;
     border-bottom: 1px dashed $global-border-color;
+
+    &:first-of-type {
+      padding-top: 0;
+    }
 
     [data-theme='dark'] & {
       color: $global-font-color-dark;

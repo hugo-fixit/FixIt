@@ -17,6 +17,10 @@
       align-items: flex-start;
       justify-content: center;
       padding: 0 1rem;
+
+      &:has(.home:not(.posts)) {
+        align-items: center;
+      }
     }
 
     &.container-reverse {

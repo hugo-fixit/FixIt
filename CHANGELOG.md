@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: remove the leading and trailing whitespace of the code string ([#205](https://github.com/hugo-fixit/FixIt/issues/205))
 - :bento: Fix: update webfonts for fontawesome 6.2.0 (@NicoDreamzZ[#228](https://github.com/hugo-fixit/FixIt/pull/228))
 - :bug: Fix: image shortcode/plugin lose the support for svg type files ([#210](https://github.com/hugo-fixit/FixIt/issues/210))
+- :lipstick: Style: update home page stylesheet
 - :wrench: Chore(deps-dev):
   - Bump @babel/cli from 7.18.10 to 7.19.3
   - Bump @babel/core from 7.19.1 to 7.19.6
