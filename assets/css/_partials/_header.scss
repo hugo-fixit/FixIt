@@ -219,6 +219,7 @@ header {
       >.menu-item:hover {
         & .sub-menu {
           display: block;
+          transform: translateX(-0.5rem);
         }
       }
 

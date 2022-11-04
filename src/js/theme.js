@@ -115,11 +115,7 @@ class FixIt {
   }
 
   initMenuDesktop() {
-    // This is a dirty hack for fixing sub menu position error in desktop header
     this.util.forEach(document.querySelectorAll('.has-children, #header-desktop .language'), ($item) => {
-      $item.addEventListener('mouseover', function () {
-        this.querySelector('.sub-menu').style.left = `${this.getBoundingClientRect().left}px`;
-      });
       $item.querySelector('.sub-menu').style.minWidth = `${$item.offsetWidth - 8}px`;
     });
   }
