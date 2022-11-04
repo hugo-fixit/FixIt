@@ -48,7 +48,7 @@
     {{- /* Tag Cloud Page */ -}}
     {{- else if eq $taxonomies "tags" -}}
       {{- $tagCloud := .Site.Params.tagcloud -}}
-      <div class="tag-cloud-tags">
+      <div class="tag-cloud-tags{{ with $tagCloud.enable }} text-center{{ end }}">
         {{- if $tagCloud.enable -}}
           {{- $tags := cond (eq $tagCloud.orderby "name") $.Site.Taxonomies.tags.Alphabetical $.Site.Taxonomies.tags.ByCount -}}
           {{- $baseGrade := div ($tagCloud.peekCount | default 10) 10.0 -}}

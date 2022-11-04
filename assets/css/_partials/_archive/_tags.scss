@@ -42,6 +42,7 @@
   .tag-cloud-#{$grade} {
     color: $tag-cloud-color!important;
     font-size: var(--tag-font);
+    margin: 10px!important;
 
     &:active,
     &:hover {
