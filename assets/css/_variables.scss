@@ -75,6 +75,14 @@ $search-background-color: #e9e9e9 !default;
 $search-background-color-dark: #363636 !default;
 // ========== Header ========== //
 
+// ========== Tag Cloud ========== //
+// Color range of tag cloud
+$tag-cloud-start: $global-font-secondary-color!default;
+$tag-cloud-end: $global-font-color!default;
+$tag-cloud-start-dark: $global-font-secondary-color-dark!default;
+$tag-cloud-end-dark: $global-font-color-dark!default;
+// ========== Tag Cloud ========== //
+
 // ========== Single Content ========== //
 // Font size of the TOC
 $toc-title-font-size: 1.2rem !default;
