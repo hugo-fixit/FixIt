@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: add custom templates and parameter `params.customFilePath` support
 - :sparkles: Feat: add feature end of post flag support ([#236](https://github.com/hugo-fixit/FixIt/issues/236))
 - :sparkles: Feat: add params to close wordcount and readingTime in post ([#209](https://github.com/hugo-fixit/FixIt/issues/209))
+- :sparkles: Feat: add parameter `params.home.profile.avatarMenu`
 - :truck: Feat: migrate parameter `params.autoBookmark` to `params.page.autoBookmark` ([#55](https://github.com/hugo-fixit/FixIt/issues/55))
 - :zap: Perf: optimize close comment feature when the post has expired ([#204](https://github.com/hugo-fixit/FixIt/issues/204))
 - :zap: Perf: optimize sub menu position calculation in desktop header with css replace of javascript

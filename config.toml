@@ -203,6 +203,8 @@
       gravatarEmail = "xx@xx.com"
       # URL of avatar shown in home page
       avatarURL = ""
+      # FixIt 0.2.17 | NEW identifier of avatar menu link
+      avatarMenu = ""
       # FixIt 0.2.7 | CHANGED title shown in home page (HTML format is supported)
       title = ""
       # subtitle shown in home page

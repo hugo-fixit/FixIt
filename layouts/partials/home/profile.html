@@ -14,7 +14,15 @@
   {{- if $avatar -}}
     <div class="home-avatar">
       {{- $menus := $.Site.Menus.main | default slice -}}
-      {{- with index $menus 0 -}}
+      {{- $avatarMenuIndex := 0 -}}
+      {{- if $profile.avatarMenu -}}
+        {{- range $index, $menu := $menus -}}
+          {{- if eq $menu.Identifier $profile.avatarMenu -}}
+            {{- $avatarMenuIndex = $index -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+      {{- with index $menus $avatarMenuIndex -}}
         {{- $url := .URL | relLangURL -}}
         {{- with .Page -}}
           {{- $url = .RelPermalink -}}
