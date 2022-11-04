@@ -100,4 +100,7 @@
       {{- . | safeHTML -}}
     </h3>
   {{- end -}}
+
+  {{- /* Custom Content */ -}}
+  {{- partial (.Scratch.Get "customFilePath").profile . -}}
 </div>

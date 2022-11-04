@@ -149,8 +149,6 @@
   # Footer config
   [params.footer]
     enable = true
-    # FixIt 0.2.0 | NEW Custom content (HTML format is supported)
-    custom = ""
     # FixIt 0.2.0 | NEW whether to show Hugo and theme info
     hugo = true
     # FixIt 0.2.0 | NEW whether to show copyright info
@@ -732,6 +730,13 @@
     light = ""
     dark = ""
     height = "2px"
+  
+  # FixIt 0.2.17 | NEW Define custom file paths
+  # Create your custom files in site directory `layouts/partials/custom` and uncomment needed files below
+  [params.customFilePath]
+    # aside = "custom/aside.html"
+    # profile = "custom/profile.html"
+    # footer = "custom/footer.html"
 
   # FixIt 0.2.15 | NEW Developer options
   [params.dev]

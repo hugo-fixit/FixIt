@@ -10,6 +10,9 @@
 {{- with .Site.Params.autoBookmark -}}
   {{- $warnErrors = $warnErrors | append "The parameter `autoBookmark` is deprecated since v0.2.17, use `page.autoBookmark` instead." -}}
 {{- end -}}
+{{- with .Site.Params.footer.custom -}}
+  {{- $warnErrors = $warnErrors | append "The parameter `footer.custom` is deprecated since v0.2.17, use parameter `params.customFilePath.footer` instead." -}}
+{{- end -}}
 
 {{- if len $warnErrors -}}
   {{- warnf "Deprecated parameter detection until %v\n  - %v\n\n" (.Scratch.Get "version") (delimit $warnErrors "\n  - ") -}}

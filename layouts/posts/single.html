@@ -18,7 +18,7 @@
 
   <aside class="aside-custom">
     <!-- put aside for later use -->
-    {{- partial "custom/aside.html" . -}}
+    {{- partial (.Scratch.Get "customFilePath").aside . -}}
   </aside>
 
   <article class="page single">

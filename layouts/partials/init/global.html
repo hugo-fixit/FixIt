@@ -1,0 +1,6 @@
+{{- /* Set customFilePath default value */ -}}
+{{- $customFilePath := .Site.Params.customFilePath -}}
+{{- $customFilePath = dict "aside" ($customFilePath.aside | default "custom/aside.html") | merge $customFilePath -}}
+{{- $customFilePath = dict "profile" ($customFilePath.profile | default "custom/profile.html") | merge $customFilePath -}}
+{{- $customFilePath = dict "footer" ($customFilePath.footer | default "custom/footer.html") | merge $customFilePath -}}
+{{- .Scratch.Set "customFilePath" $customFilePath -}}
