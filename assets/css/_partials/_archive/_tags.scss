@@ -45,16 +45,25 @@
     margin: 10px!important;
 
     &:active,
+    &:focus,
     &:hover {
       color: $global-link-hover-color!important;
 
       [data-theme='dark'] & {
         color: $global-link-hover-color-dark;
       }
+
+      sup {
+        opacity: 1;
+      }
     }
 
     [data-theme='dark'] & {
       color: $tag-cloud-color-dark!important;
+    }
+
+    sup {
+      opacity: 0;
     }
   }
 }
