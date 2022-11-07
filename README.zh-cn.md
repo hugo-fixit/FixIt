@@ -75,17 +75,20 @@ FixIt 主题继承了 LoveIt 等主题的优秀功能，并在它们的基础上
 
 ## [谁在用 FixIt](https://fixit.lruihao.cn/zh-cn/friends/)
 
+| 📌 站点                                                       | 仓库                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [FixIt 主题官网](https://fixit.lruihao.cn), [FixIt 预览版](https://pre.fixit.lruihao.cn) | [hugo-fixit/docs](https://github.com/hugo-fixit/docs)        |
+| [FixIt 博客模板 - Git](https://demo.fixit.lruihao.cn)   | [hugo-fixit/hugo-fixit-blog-git](https://github.com/hugo-fixit/hugo-fixit-blog-git) |
+| [FixIt 博客模板 - Go](https://demo.fixit.lruihao.cn)    | [hugo-fixit/hugo-fixit-blog-go](https://github.com/hugo-fixit/hugo-fixit-blog-go) |
+| [李瑞豪的博客](https://lruihao.cn)                         | [Lruihao/hugo-blog](https://github.com/Lruihao/hugo-blog)    |
+
 为了直观地浏览主题特性，这里有一些基于 **FixIt** 主题渲染的预览网站。
 
-* 📌 [FixIt 主题官网](https://fixit.lruihao.cn/zh-cn/)，[FixIt 预览版](https://pre.fixit.lruihao.cn/zh-cn/)｜[仓库](https://github.com/hugo-fixit/docs)
-* 📌 [FixIt 博客模板 - Git](https://demo.fixit.lruihao.cn)｜[仓库](https://github.com/hugo-fixit/hugo-fixit-blog-git)
-* 📌 [FixIt 博客模板 - Go](https://demo1.fixit.lruihao.cn)｜[仓库](https://github.com/hugo-fixit/hugo-fixit-blog-go)
-* 📌 [李瑞豪的博客](https://lruihao.cn)｜[仓库](https://github.com/Lruihao/hugo-blog)
-* [hiifong 的博客](https://52at.ml)
+* [hiifong 的博客](https://i.hiifong.cc)
+* [Niku 的博客](https://www.nikunokoya.com)
 * [wlanxww 的博客](https://wlanxww.com)
-* [Niku 的博客](https://www.nikunokoya.com/)
 
-你可以 [提交 PR](https://github.com/hugo-fixit/FixIt/pulls) 以字典顺序将您的 FixIt 网站添加到列表中。（例如：[#111](https://github.com/hugo-fixit/FixIt/pull/111)）
+你可以 [提交 PR](https://github.com/hugo-fixit/FixIt/pulls) 按 `nickname` 以字典顺序将您的 FixIt 网站添加到列表中。（例如：[#111](https://github.com/hugo-fixit/FixIt/pull/111)）
 
 ## 特性
 

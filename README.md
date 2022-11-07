@@ -73,17 +73,20 @@ In short, if you prefer the design language and freedom of the FixIt theme, and 
 
 ## [Who used FixIt](https://fixit.lruihao.cn/friends/)
 
+| 📌 Site                                                       | Repo                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [FixIt Theme Official Website](https://fixit.lruihao.cn), [FixIt Preview](https://pre.fixit.lruihao.cn) | [hugo-fixit/docs](https://github.com/hugo-fixit/docs)        |
+| [FixIt Blog Template - Git](https://demo.fixit.lruihao.cn)   | [hugo-fixit/hugo-fixit-blog-git](https://github.com/hugo-fixit/hugo-fixit-blog-git) |
+| [FixIt Blog Template - Go](https://demo.fixit.lruihao.cn)    | [hugo-fixit/hugo-fixit-blog-go](https://github.com/hugo-fixit/hugo-fixit-blog-go) |
+| [Lruihao's note](https://lruihao.cn)                         | [Lruihao/hugo-blog](https://github.com/Lruihao/hugo-blog)    |
+
 To see this theme in action, here are some live demo sites which are rendered with **FixIt** theme.
 
-* 📌 [FixIt Theme Official Website](https://fixit.lruihao.cn), [FixIt Preview](https://pre.fixit.lruihao.cn) | [repo](https://github.com/hugo-fixit/docs)
-* 📌 [FixIt Blog Template - Git](https://demo.fixit.lruihao.cn) | [repo](https://github.com/hugo-fixit/hugo-fixit-blog-git)
-* 📌 [FixIt Blog Template - Go](https://demo1.fixit.lruihao.cn) | [repo](https://github.com/hugo-fixit/hugo-fixit-blog-go)
-* 📌 [Lruihao's note](https://lruihao.cn) | [repo](https://github.com/Lruihao/hugo-blog)
-* [hiifong's blog](https://52at.ml)
+* [hiifong's blog](https://i.hiifong.cc)
+* [Niku's blog](https://www.nikunokoya.com)
 * [wlanxww's blog](https://wlanxww.com)
-* [Niku's blog](https://www.nikunokoya.com/)
 
-You could add your FixIt site to the list in lexicographical order via [making a PR](https://github.com/hugo-fixit/FixIt/pulls). (e.g. [#111](https://github.com/hugo-fixit/FixIt/pull/111))
+You could add your FixIt site to the list by `nickname` in lexicographical order via [making a PR](https://github.com/hugo-fixit/FixIt/pulls). (e.g. [#111](https://github.com/hugo-fixit/FixIt/pull/111))
 
 ## Features
 
