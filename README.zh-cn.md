@@ -83,6 +83,7 @@ FixIt 主题继承了 LoveIt 等主题的优秀功能，并在它们的基础上
 * 📌 [李瑞豪的博客](https://lruihao.cn)｜[仓库](https://github.com/Lruihao/hugo-blog)
 * [hiifong 的博客](https://52at.ml)
 * [wlanxww 的博客](https://wlanxww.com)
+* [Niku 的博客](https://www.nikunokoya.com/)
 
 你可以 [提交 PR](https://github.com/hugo-fixit/FixIt/pulls) 以字典顺序将您的 FixIt 网站添加到列表中。（例如：[#111](https://github.com/hugo-fixit/FixIt/pull/111)）
 
