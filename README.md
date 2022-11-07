@@ -81,6 +81,7 @@ To see this theme in action, here are some live demo sites which are rendered wi
 * 📌 [Lruihao's note](https://lruihao.cn) | [repo](https://github.com/Lruihao/hugo-blog)
 * [hiifong's blog](https://52at.ml)
 * [wlanxww's blog](https://wlanxww.com)
+* [Niku's blog](https://www.nikunokoya.com/)
 
 You could add your FixIt site to the list in lexicographical order via [making a PR](https://github.com/hugo-fixit/FixIt/pulls). (e.g. [#111](https://github.com/hugo-fixit/FixIt/pull/111))
 
