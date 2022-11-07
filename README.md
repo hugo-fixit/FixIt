@@ -84,6 +84,7 @@ To see this theme in action, here are some live demo sites which are rendered wi
 
 * [hiifong's blog](https://i.hiifong.cc)
 * [Niku's blog](https://www.nikunokoya.com)
+* [Wake Huang's blog](https://www.wakehuang.com)
 * [wlanxww's blog](https://wlanxww.com)
 
 You could add your FixIt site to the list by `nickname` in lexicographical order via [making a PR](https://github.com/hugo-fixit/FixIt/pulls). (e.g. [#111](https://github.com/hugo-fixit/FixIt/pull/111))
