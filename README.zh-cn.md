@@ -76,7 +76,7 @@ FixIt 主题继承了 LoveIt 等主题的优秀功能，并在它们的基础上
 ## [谁在用 FixIt](https://fixit.lruihao.cn/zh-cn/friends/)
 
 | 📌 站点                                                       | 仓库                                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| :----------------------------------------------------------- | :---------------------------------------------------------- |
 | [FixIt 主题官网](https://fixit.lruihao.cn), [FixIt 预览版](https://pre.fixit.lruihao.cn) | [hugo-fixit/docs](https://github.com/hugo-fixit/docs)        |
 | [FixIt 博客模板 - Git](https://demo.fixit.lruihao.cn)   | [hugo-fixit/hugo-fixit-blog-git](https://github.com/hugo-fixit/hugo-fixit-blog-git) |
 | [FixIt 博客模板 - Go](https://demo.fixit.lruihao.cn)    | [hugo-fixit/hugo-fixit-blog-go](https://github.com/hugo-fixit/hugo-fixit-blog-go) |

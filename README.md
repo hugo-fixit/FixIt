@@ -74,7 +74,7 @@ In short, if you prefer the design language and freedom of the FixIt theme, and 
 ## [Who used FixIt](https://fixit.lruihao.cn/friends/)
 
 | 📌 Site                                                       | Repo                                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| :----------------------------------------------------------- | :----------------------------------------------------------- |
 | [FixIt Theme Official Website](https://fixit.lruihao.cn), [FixIt Preview](https://pre.fixit.lruihao.cn) | [hugo-fixit/docs](https://github.com/hugo-fixit/docs)        |
 | [FixIt Blog Template - Git](https://demo.fixit.lruihao.cn)   | [hugo-fixit/hugo-fixit-blog-git](https://github.com/hugo-fixit/hugo-fixit-blog-git) |
 | [FixIt Blog Template - Go](https://demo.fixit.lruihao.cn)    | [hugo-fixit/hugo-fixit-blog-go](https://github.com/hugo-fixit/hugo-fixit-blog-go) |
