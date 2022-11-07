@@ -227,6 +227,13 @@
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/nikusaikou">
+            <img src="https://avatars.githubusercontent.com/u/32993922?v=4" width="100;" alt="nikusaikou"/>
+            <br />
+            <sub><b>Niku</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/onisuly">
             <img src="https://avatars.githubusercontent.com/u/8399827?v=4" width="100;" alt="onisuly"/>
             <br />
@@ -253,15 +260,15 @@
             <br />
             <sub><b>Tomaja</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/ziobron">
             <img src="https://avatars.githubusercontent.com/u/4595135?v=4" width="100;" alt="ziobron"/>
             <br />
             <sub><b>Łukasz Ziobroń</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/d-baer">
             <img src="https://avatars.githubusercontent.com/u/22482986?v=4" width="100;" alt="d-baer"/>
