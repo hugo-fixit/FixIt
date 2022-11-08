@@ -205,20 +205,27 @@
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/wakehuang">
+            <img src="https://avatars.githubusercontent.com/u/14356434?v=4" width="100;" alt="wakehuang"/>
+            <br />
+            <sub><b>WakeHuang</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/anup92k">
             <img src="https://avatars.githubusercontent.com/u/51033013?v=4" width="100;" alt="anup92k"/>
             <br />
             <sub><b>Anup</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/codedge">
             <img src="https://avatars.githubusercontent.com/u/4409904?v=4" width="100;" alt="codedge"/>
             <br />
             <sub><b>Holger Lösken</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/hiifong">
             <img src="https://avatars.githubusercontent.com/u/89133723?v=4" width="100;" alt="hiifong"/>
@@ -253,15 +260,15 @@
             <br />
             <sub><b>Sarath Sadasivan Pillai</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/tomaja-linuxo">
             <img src="https://avatars.githubusercontent.com/u/37209662?v=4" width="100;" alt="tomaja-linuxo"/>
             <br />
             <sub><b>Tomaja</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/ziobron">
             <img src="https://avatars.githubusercontent.com/u/4595135?v=4" width="100;" alt="ziobron"/>
@@ -289,6 +296,13 @@
             <img src="https://avatars.githubusercontent.com/in/29110?v=4" width="100;" alt="dependabot[bot]"/>
             <br />
             <sub><b>dependabot[bot]</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/github-actions[bot]">
+            <img src="https://avatars.githubusercontent.com/in/15368?v=4" width="100;" alt="github-actions[bot]"/>
+            <br />
+            <sub><b>github-actions[bot]</b></sub>
         </a>
     </td></tr>
 </table>
