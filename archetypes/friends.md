@@ -6,7 +6,7 @@ date: {{ .Date }}
 description: "{{ .Site.Author.name }}'s friends"
 keywords: 
   - Hugo
-  - friends tempalate
+  - friends template
 comment: false
 ---
 
