@@ -308,15 +308,6 @@
       }
     }
 
-    .lazyload,
-    .lazyloading {
-      @include object-fit(none);
-    }
-
-    .lazyloaded {
-      @include object-fit(fill);
-    }
-
     blockquote {
       display: block;
       border-left: 0.25em solid $global-border-color;

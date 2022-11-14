@@ -2,8 +2,7 @@
   position: relative;
   margin: 1rem 0;
   padding: 0 0.75rem;
-  background-color: map-get($admonition-background-color-map, 'note');
-  border-left: 0.25rem solid map-get($admonition-color-map, 'note');
+  border-left: .25rem solid;
   overflow: auto;
   @include border-radius($global-border-radius);
 
@@ -11,13 +10,8 @@
     font-weight: bold;
     margin: 0 -0.75rem;
     padding: 0.25rem 1.8rem;
-    border-bottom: 1px solid map-get($admonition-background-color-map, 'note');
-    background-color: opacify(map-get($admonition-background-color-map, 'note'), 0.15);
+    border-bottom: 1px solid;
     @include border-radius(0);
-  }
-
-  &.open .admonition-title {
-    background-color: map-get($admonition-background-color-map, 'note');
   }
 
   .admonition-content {
@@ -26,7 +20,6 @@
 
   i.icon {
     font-size: 0.85rem;
-    color: map-get($admonition-color-map, 'note');
     position: absolute;
     top: 0.6rem;
     left: 0.4rem;
@@ -38,27 +31,42 @@
     right: 0.3rem;
   }
 
-  @each $type, $color in $admonition-color-map {
-    &.#{$type} {
+  @each $type, $color, $background-color in $admonition-color-map {
+    @if $type == 'note' {
+      background-color: $background-color;
       border-left-color: $color;
+
+      .admonition-title {
+        border-bottom-color: $background-color;
+        background-color: opacify($background-color, 0.15);
+      }
+
+      &.open .admonition-title {
+        background-color: $background-color;
+      }
 
       i.icon {
         color: $color;
       }
     }
-  }
+    
+    @else {
+      &.#{$type} {
+        background-color: $background-color;
+        border-left-color: $color;
 
-  @each $type, $color in $admonition-background-color-map {
-    &.#{$type} {
-      background-color: $color;
+        .admonition-title {
+          border-bottom-color: $background-color;
+          background-color: opacify($background-color, 0.15);
+        }
 
-      .admonition-title {
-        border-bottom-color: $color;
-        background-color: opacify($color, 0.15);
-      }
+        &.open .admonition-title {
+          background-color: $background-color;
+        }
 
-      &.open .admonition-title {
-        background-color: $color;
+        i.icon {
+          color: $color;
+        }
       }
     }
   }

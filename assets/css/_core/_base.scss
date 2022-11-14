@@ -52,11 +52,6 @@ body {
   }
 }
 
-img {
-  @include object-fit(contain);
-  @include border-radius($global-border-radius/2);
-}
-
 iframe {
   border: 0;
   @include border-radius($global-border-radius);
@@ -75,10 +70,10 @@ abbr[title] {
   text-decoration-skip-ink: none;
 }
 
-@include ms;
 @include link(true, true);
 
 @import '../_partials/mask';
+@import '../_partials/img';
 @import '../_partials/icon';
 @import '../_partials/details';
 @import '../_partials/widgets';
