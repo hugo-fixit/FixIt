@@ -508,9 +508,9 @@
         serverURLs = ""
         # FixIt 0.2.6 | NEW emoji data file name, default is "google.yml"
         # ["apple.yml", "google.yml", "facebook.yml", "twitter.yml"]
-        # located in "themes/FixIt/assets/data/emoji/" directory
+        # located in "themes/FixIt/assets/lib/valine/emoji/" directory
         # you can store your own data files in the same path under your project:
-        # "assets/data/emoji/"
+        # "assets/lib/valine/emoji/"
         emoji = ""
         commentCount = true # FixIt 0.2.13 | NEW
       # FixIt 0.2.16 | CHANGED Waline comment config (https://waline.js.org)
