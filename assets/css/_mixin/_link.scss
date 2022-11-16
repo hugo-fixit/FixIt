@@ -12,7 +12,7 @@
       color: $single-link-color;
     }
 
-    [theme=dark] & {
+    [data-theme='dark'] & {
       @if $dark {
         color: $global-link-color-dark;
       }
@@ -33,7 +33,7 @@
       color: $single-link-hover-color;
     }
 
-    [theme=dark] & {
+    [data-theme='dark'] & {
       @if $dark {
         color: $global-link-hover-color-dark;
       }
