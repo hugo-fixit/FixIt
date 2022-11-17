@@ -539,7 +539,7 @@ class FixIt {
     if ($tocCore === null) {
       return;
     }
-    if (document.getElementById('toc-static').getAttribute('date-kept') === 'true' || this.util.isTocStatic()) {
+    if (document.getElementById('toc-static').getAttribute('data-kept') === 'true' || this.util.isTocStatic()) {
       const $tocContentStatic = document.getElementById('toc-content-static');
       if ($tocCore.parentElement !== $tocContentStatic) {
         $tocCore.parentElement.removeChild($tocCore);

@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: remove the leading and trailing whitespace of the code string ([#205](https://github.com/hugo-fixit/FixIt/issues/205))
 - :bento: Fix: update webfonts for fontawesome 6.2.0 (@NicoDreamzZ[#228](https://github.com/hugo-fixit/FixIt/pull/228))
 - :bug: Fix: image shortcode/plugin lose the support for svg type files ([#210](https://github.com/hugo-fixit/FixIt/issues/210))
+- :bug: Fix: can't keep the static table of the contents in front of the post
 - :lipstick: Style: refactor css style
 - :lipstick: Style: update home page stylesheet
 - :wrench: Chore(deps-dev):
