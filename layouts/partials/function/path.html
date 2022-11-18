@@ -1,3 +1,4 @@
 {{- /* https://discourse.gohugo.io/t/how-decode-urls-in-hugo/7549/4 */ -}}
-{{- $URL := . | urlize | urls.Parse -}}
+{{- /* https://github.com/hugo-fixit/FixIt/issues/245 */ -}}
+{{- $URL := . | urlize | urlquery | urls.Parse -}}
 {{- return $URL.Path -}}

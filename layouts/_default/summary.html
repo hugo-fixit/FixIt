@@ -43,7 +43,7 @@
     {{- $categories := slice -}}
     {{- range .Params.categories -}}
       {{- $category := partialCached "function/path.html" . . | printf "/categories/%v" | $.Site.GetPage -}}
-      {{- $categories = $categories | append (printf `<a href="%v">%v %v</a>` $category.RelPermalink (dict "Class" "fa-regular fa-folder fa-fw" | partial "plugin/icon.html") $category.Title) -}}
+      {{- $categories = $categories | append (printf `<a href="%v">%v %v</a>` (replace $category.RelPermalink "#" "%23") (dict "Class" "fa-regular fa-folder fa-fw" | partial "plugin/icon.html") $category.Title) -}}
     {{- end -}}
     {{- with delimit $categories "&ensp;" -}}
       &nbsp;<span class="post-category">
@@ -66,11 +66,12 @@
     <a href="{{ .RelPermalink }}">{{ T "readMore" }}</a>
     {{- with .Params.tags -}}
       <div class="post-tags">
-        {{- dict "Class" "fa-solid fa-tags fa-fw" | partial "plugin/icon.html" -}}&nbsp;
-        {{- range $index, $value := . -}}
-          {{- if gt $index 0 }},&nbsp;{{ end -}}
+        {{- dict "Class" "fa-solid fa-tags fa-fw me-1" | partial "plugin/icon.html" -}}
+        {{- range $value := . -}}
           {{- $tag := partialCached "function/path.html" $value $value | printf "/tags/%v" | $.Site.GetPage -}}
-          <a href="{{ $tag.RelPermalink }}">{{ $tag.Title }}</a>
+          {{- with $tag -}}
+            <a href='{{ replace .RelPermalink "#" "%23" }}' class="post-tag">{{ .Title }}</a>
+          {{- end -}}
         {{- end -}}
       </div>
     {{- end -}}

@@ -73,6 +73,13 @@
     * {
       display: inline;
     }
+
+    @include link(true, true);
+
+    .post-tag:not(:last-child)::after {
+      content: ',';
+      margin-right: 0.25rem;
+    }
   }
 
   .post-nav {

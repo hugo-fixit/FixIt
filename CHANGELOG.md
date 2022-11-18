@@ -22,6 +22,7 @@ All notable changes to this project will be documented in this file.
 - :bento: Fix: update webfonts for fontawesome 6.2.0 (@NicoDreamzZ[#228](https://github.com/hugo-fixit/FixIt/pull/228))
 - :bug: Fix: image shortcode/plugin lose the support for svg type files ([#210](https://github.com/hugo-fixit/FixIt/issues/210))
 - :bug: Fix: can't keep the static table of the contents in front of the post
+- :bug: Fix: escape hashtag character `#` in tag and category ([#245](https://github.com/hugo-fixit/FixIt/issues/245))
 - :lipstick: Style: refactor css style
 - :lipstick: Style: update home page stylesheet
 - :wrench: Chore(deps-dev):

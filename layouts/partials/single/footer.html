@@ -59,11 +59,12 @@
   <div class="post-info-more">
     <section class="post-tags">
       {{- with .Params.tags -}}
-        {{- dict "Class" "fa-solid fa-tags fa-fw" | partial "plugin/icon.html" -}}&nbsp;
-        {{- range $index, $value := . -}}
-          {{- if gt $index 0 }},&nbsp;{{ end -}}
+        {{- dict "Class" "fa-solid fa-tags fa-fw me-1" | partial "plugin/icon.html" -}}
+        {{- range $value := . -}}
           {{- $tag := partialCached "function/path.html" $value $value | printf "/tags/%v" | $.Site.GetPage -}}
-          <a href="{{ $tag.RelPermalink }}">{{ $tag.Title }}</a>
+          {{- with $tag -}}
+            <a href='{{ replace .RelPermalink "#" "%23" }}' class="post-tag">{{ .Title }}</a>
+          {{- end -}}
         {{- end -}}
       {{- end -}}
     </section>
