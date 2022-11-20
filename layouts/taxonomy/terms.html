@@ -24,7 +24,7 @@
           <div class="card-item">
             <div class="card-item-wrapper">
               <h3 class="card-item-title">
-                <a href='{{ replace .RelPermalink "#" "%23" }}'>
+                <a href='{{ partial "function/escapeurl.html" .RelPermalink }}'>
                   {{ dict "Class" "fa-regular fa-folder fa-fw" | partial "plugin/icon.html" }}
                   {{ .Page.Title }}&nbsp;<sup>{{- len $pages -}}</sup>
                 </a>
@@ -36,7 +36,7 @@
               {{- end -}}
               {{- if gt (len $pages) 5 -}}
                 <span class="more-post">
-                  <a href='{{ replace .RelPermalink "#" "%23" }}' class="more-single-link">{{ T "more" }} >></a>
+                  <a href='{{ partial "function/escapeurl.html" .RelPermalink }}' class="more-single-link">{{ T "more" }} >></a>
                 </span>
               {{- end -}}
             </div>
@@ -57,11 +57,11 @@
           {{- range $tags -}}
             {{- $grade := math.Min (math.Floor (div (sub .Count 1) $baseGrade)) 10 -}}
             {{- $fontSize := add $minFont (mul $grade $baseFont) -}}
-            <a href='{{ replace .Page.RelPermalink "#" "%23" }}' class="tag-cloud-{{ $grade }}" style="--tag-font: {{ $fontSize }}px">{{ .Page.Title }} <sup>{{ .Count }}</sup></a>
+            <a href='{{ partial "function/escapeurl.html" .Page.RelPermalink }}' class="tag-cloud-{{ $grade }}" style="--tag-font: {{ $fontSize }}px">{{ .Page.Title }} <sup>{{ .Count }}</sup></a>
           {{- end -}}
         {{- else -}}
           {{- range $.Site.Taxonomies.tags.ByCount -}}
-            <a href='{{ replace .Page.RelPermalink "#" "%23" }}'>{{ .Page.Title }} <sup>{{ .Count }}</sup></a>
+            <a href='{{ partial "function/escapeurl.html" .Page.RelPermalink }}'>{{ .Page.Title }} <sup>{{ .Count }}</sup></a>
           {{- end -}}
         {{- end -}}
       </div>

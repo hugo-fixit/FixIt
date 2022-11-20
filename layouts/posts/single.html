@@ -52,7 +52,7 @@
         {{- $categories := slice -}}
         {{- range .Params.categories -}}
           {{- $category := partialCached "function/path.html" . . | printf "/categories/%v" | $.Site.GetPage -}}
-          {{- $categories = $categories | append (printf `<a href="%v">%v %v</a>` (replace $category.RelPermalink "#" "%23") (dict "Class" "fa-regular fa-folder fa-fw" | partial "plugin/icon.html") $category.Title) -}}
+          {{- $categories = $categories | append (printf `<a href="%v">%v %v</a>` (partial "function/escapeurl.html" $category.RelPermalink) (dict "Class" "fa-regular fa-folder fa-fw" | partial "plugin/icon.html") $category.Title) -}}
         {{- end -}}
         {{- with delimit $categories "&ensp;" }}
           <span class="post-category">

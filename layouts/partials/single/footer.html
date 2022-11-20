@@ -63,7 +63,7 @@
         {{- range $value := . -}}
           {{- $tag := partialCached "function/path.html" $value $value | printf "/tags/%v" | $.Site.GetPage -}}
           {{- with $tag -}}
-            <a href='{{ replace .RelPermalink "#" "%23" }}' class="post-tag">{{ .Title }}</a>
+            <a href='{{ partial "function/escapeurl.html" .RelPermalink }}' class="post-tag">{{ .Title }}</a>
           {{- end -}}
         {{- end -}}
       {{- end -}}
