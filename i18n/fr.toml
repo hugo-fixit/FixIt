@@ -4,19 +4,19 @@
 
 # === init ===
 [configurationError]
-other = "" # waitting for translation
+other = "Erreur de configuration\nVous n'avez pas configuré la version de FixIt correctement. Voir https://fixit.lruihao.cn/theme-documentation-basics/#basic-configuration"
 
 [compatibilityError]
-other = "" # waitting for translation
+other = "Erreur de compatibilité ({{ .From }} -> {{ .To }}):\Vous avez une mise à jour incompatible. Voir https://github.com/hugo-fixit/FixIt/releases"
 
 [RCVersionWarn]
-other = "" # waitting for translation
+other = "Vous utilisez une version de développement de FixIt. Veuillez considérer l'utilisation d'une version stable.\nVoir https://github.com/hugo-fixit/FixIt/releases"
 
 [devEnvWarn]
-other = "" # waitting for translation
+other = "L'environnement actuel est \"développement\". Le \"système de commentaires\", le \"CDN\" et la \"prise d'empreinte\" seront désactivés."
 
 [quicklyUpgrade]
-other = "" # waitting for translation
+other = "La mise à jour rapide utilise la commande: "
 # === init ===
 
 # === baseof ===
@@ -27,7 +27,7 @@ other = "Retour en Haut"
 other = "Afficher les Commentaires"
 
 [noscript]
-other = "" # waitting for translation
+other = "Le thème FixIt fonctionne mieux quand JavaScript est activé."
 # === baseof ===
 
 # === Post ===
@@ -37,17 +37,17 @@ other = "Posts"
 
 # === Taxonomy ===
 [allSome]
-other = "Tous {{ .Some }}"
+other = "Tous les {{ .Some }}"
 
 [totalwordCount]
-one = "" # waitting for translation
-other = "" # waitting for translation
+one = "Nombre de mots: 1"
+other = "Nombre de mots: {{ .Count }}"
 
 [tag]
-other = "Balise"
+other = "Tag"
 
 [tags]
-other = "Balises"
+other = "Tags"
 
 [category]
 other = "Catégorie"
@@ -93,7 +93,7 @@ other = "Site en cours d'exécution ..."
 
 # === partials/comment.html ===
 [valineLang]
-other = "en" # Français non pris en charge par Valine
+other = "en" # French not supported by Valine
 
 [valinePlaceholder]
 other = "Votre commentaire ..."
@@ -110,7 +110,7 @@ other = "Chercher"
 other = "Rechercher des titres, des contenus..."
 
 [clear]
-other = "Clair"
+other = "Effacer"
 
 [cancel]
 other = "Annuler"
@@ -137,22 +137,23 @@ other = "Déverrouiller le bloc de code modifiable"
 other = "Ce site Web utilise des Cookies pour améliorer votre expérience."
 
 [cookieconsentDismiss]
-other = "Se mettre d'accord"
+other = "J'ai compris !"
 
 [cookieconsentLink]
-other = "Apprendre encore plus"
+other = "En apprendre plus"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===
 [shareOn]
-other = "Partager sur"
+other = "Partager via"
 # === partials/plugin/share.html ===
 
 # === posts/single.html ===
 [contents]
-other = "Contenu"
+other = "Contenus"
+
 [repost]
-other = "" # waitting for translation
+other = "Reposter"
 
 [publishedOnDate]
 other = "publié le {{ .Date }}"
@@ -161,11 +162,11 @@ other = "publié le {{ .Date }}"
 other = "inclus dans {{ .Categories }}"
 
 [wordCount]
-one = "Un mot"
+one = "1 mot"
 other = "{{ .Count }} mots"
 
 [readingTime]
-one = "Une minute"
+one = "1 minute"
 other = "{{ .Count }} minutes"
 
 [views]
@@ -181,7 +182,7 @@ other = "Auteur"
 other = "Mis à jour le {{ .Date }}"
 
 [readMarkdown]
-other = "Lire Markdown"
+other = "Ouvrir le Markdown"
 
 [editThisPage]
 other = "Modifier cette page"
@@ -195,29 +196,32 @@ other = "Accueil"
 [readMore]
 other = "En savoir plus"
 
+[expirationReminder]
+other = "Cet article a été mis à jour pour la dernière fois le {{ .Date }}, son contenu est peut-être obsolète."
+
 [encryptedAbstract]
-other = "" # waitting for translation
+other = "Cet article a été chiffré, son contenu n'est donc pas lisible!"
 
 [encryptedMessage]
-other = "" # waitting for translation
+other = "Entrer le mot de passe"
 
 [password]
 other = "Mot de passe"
 
 [encryptyAgain]
-other = "" # waitting for translation
+other = "Chiffrer à nouveau"
 
 [reward]
-  donate = ""
-  wechatpay = ""
-  alipay = ""
-  paypal = ""
-  bitcoin = ""
+  donate = "Faire un don"
+  wechatpay = "WeChat Pay"
+  alipay = "Alipay"
+  paypal = "PayPal"
+  bitcoin = "Bitcoin"
 # === posts/single.html ===
 
 # === 404.html ===
 [pageNotFound]
-other = "Page non trouvée"
+other = "Page introuvable"
 
 [pageNotFoundText]
 other = "Désolé, la page recherchée n'existe pas."
@@ -236,13 +240,13 @@ other = "Vous n'êtes pas connecté à Internet, seules les pages mises en cache
 other = "Remarque"
 
 [abstract]
-other = "Abstrait"
+other = "Résumé"
 
 [info]
 other = "Info"
 
 [tip]
-other = "Astuces"
+other = "Astuce"
 
 [success]
 other = "Succès"
@@ -274,8 +278,8 @@ other = "Citation"
 other = "NOUVEAU"
 
 [changed]
-other = "CHANGE"
+other = "MODIFIÉ"
 
 [deleted]
-other = "EFFACE"
+other = "SUPPRIMÉ"
 # === shortcodes/version.html ===
