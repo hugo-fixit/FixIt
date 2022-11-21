@@ -7,7 +7,7 @@
 other = "Erreur de configuration\nVous n'avez pas configuré la version de FixIt correctement. Voir https://fixit.lruihao.cn/theme-documentation-basics/#basic-configuration"
 
 [compatibilityError]
-other = "Erreur de compatibilité ({{ .From }} -> {{ .To }}):\Vous avez une mise à jour incompatible. Voir https://github.com/hugo-fixit/FixIt/releases"
+other = "Erreur de compatibilité ({{ .From }} -> {{ .To }}):\nVous avez une mise à jour incompatible. Voir https://github.com/hugo-fixit/FixIt/releases"
 
 [RCVersionWarn]
 other = "Vous utilisez une version de développement de FixIt. Veuillez considérer l'utilisation d'une version stable.\nVoir https://github.com/hugo-fixit/FixIt/releases"
