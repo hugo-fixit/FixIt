@@ -19,10 +19,10 @@
   {{- else if gt "0.2.0" (strings.TrimPrefix "v" .Site.Params.version) -}}
     {{- errorf "FixIt %v\n%v\n\n" $version (dict "From" .Site.Params.version "To" $version | T "compatibilityError")  -}}
   {{- end -}}
-  {{- if (strings.HasSuffix $version "RC") -}}
+  {{- if (strings.HasSuffix $version "RC") | and $devOpts.c4u -}}
     {{- warnf "FixIt %v\n%v\n\n" $version (T "RCVersionWarn") -}}
   {{- end -}}
-  {{- if (gt $latest $version) -}}
+  {{- if (gt $latest $version) | and $devOpts.c4u -}}
     {{- warnf "FixIt %v (⬆️ %v)\n%v`git submodule update --remote --merge`\n\n" $version $latest (T "quicklyUpgrade") -}}
   {{- end -}}
 {{- end -}}
