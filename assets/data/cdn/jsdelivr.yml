@@ -35,6 +35,8 @@ libFiles:
   erudaJS: eruda@2.5.0/eruda.js
   # fontawesome-free@6.2.0 https://github.com/FortAwesome/Font-Awesome
   fontawesomeFreeCSS: '@fortawesome/fontawesome-free@6.2.0/css/all.min.css'
+  # fusejs@6.6.2 https://github.com/krisk/fuse
+  fuseJS: fuse.js@6.6.2/dist/fuse.min.js
   # gitalk@1.7.2 https://github.com/gitalk/gitalk
   gitalkCSS: gitalk@1.7.2/dist/gitalk.min.css
   gitalkJS: gitalk@1.7.2/dist/gitalk.min.js

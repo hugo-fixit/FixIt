@@ -162,9 +162,19 @@ class FixIt {
     if (!searchConfig || (isMobile && this._searchMobileOnce) || (!isMobile && this._searchDesktopOnce)) {
       return;
     }
-    const maxResultLength = searchConfig.maxResultLength || 10;
-    const snippetLength = searchConfig.snippetLength || 50;
-    const highlightTag = searchConfig.highlightTag || 'em';
+    // Initialize default search config
+    const maxResultLength = searchConfig.maxResultLength ?? 10;
+    const snippetLength = searchConfig.snippetLength ?? 50;
+    const highlightTag = searchConfig.highlightTag ?? 'em';
+    const isCaseSensitive = searchConfig.isCaseSensitive ?? false;
+    const minMatchCharLength = searchConfig.minMatchCharLength ?? 1;
+    const findAllMatches = searchConfig.findAllMatches ?? false;
+    const location = searchConfig.location ?? 0;
+    const threshold = searchConfig.threshold ?? 0.3;
+    const distance = searchConfig.distance ?? 100;
+    const ignoreLocation = searchConfig.ignoreLocation ?? false;
+    const useExtendedSearch = searchConfig.useExtendedSearch ?? false;
+    const ignoreFieldNorm = searchConfig.ignoreFieldNorm ?? false;
     const suffix = isMobile ? 'mobile' : 'desktop';
     const $header = document.getElementById(`header-${suffix}`);
     const $searchInput = document.getElementById(`search-input-${suffix}`);
@@ -342,7 +352,68 @@ class FixIt {
                   console.error(err);
                   finish([]);
                 });
-            }
+            } else if (searchConfig.type === 'fuse') {
+              const search = () => {
+                const results = {};
+                window._index.search(query).forEach(({ item, refIndex, matches }) => {
+                  let title = item.title;
+                  let content = item.content;
+                  matches.forEach(({ indices, value, key }) => {
+                    if (key === 'content') {
+                      let offset = 0;
+                      for (let i = 0; i < indices.length; i++) {
+                        const substr = content.substring(indices[i][0] + offset, indices[i][1] + 1 + offset);
+                        const tag = `<${highlightTag}>` + substr + `</${highlightTag}>`;
+                        content = content.substring(0, indices[i][0] + offset) + tag + content.substring(indices[i][1] + 1 + offset, content.length);
+                        offset += highlightTag.length * 2 + 5;
+                      }
+                    } else if (key === 'title') {
+                      let offset = 0;
+                      for (let i = 0; i < indices.length; i++) {
+                        const substr = title.substring(indices[i][0] + offset, indices[i][1] + 1 + offset);
+                        const tag = `<${highlightTag}>` + substr + `</${highlightTag}>`;
+                        title = title.substring(0, indices[i][0] + offset) + tag + title.substring(indices[i][1] + 1 + offset, content.length);
+                        offset += highlightTag.length * 2 + 5;
+                      }
+                    }
+                  });
+                  results[item.uri] = {
+                    uri: item.uri,
+                    title: title,
+                    date: item.date,
+                    context: content
+                  };
+                });
+                return Object.values(results).slice(0, maxResultLength);
+              };
+              if (!window._index) {
+                fetch(searchConfig.fuseIndexURL)
+                  .then((response) => response.json())
+                  .then((data) => {
+                    const options = {
+                      isCaseSensitive: isCaseSensitive,
+                      findAllMatches: findAllMatches,
+                      minMatchCharLength: minMatchCharLength,
+                      location: location,
+                      threshold: threshold,
+                      distance: distance,
+                      ignoreLocation: ignoreLocation,
+                      useExtendedSearch: useExtendedSearch,
+                      ignoreFieldNorm: ignoreFieldNorm,
+                      includeScore: false,
+                      shouldSort: true,
+                      includeMatches: true,
+                      keys: ['content', 'title']
+                    };
+                    window._index = new Fuse(data, options);
+                    finish(search());
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                    finish([]);
+                  });
+              } else finish(search());
+            }            
           },
           templates: {
             suggestion: ({ title, date, context }) =>
@@ -356,11 +427,17 @@ class FixIt {
                       icon: '<i class="fa-brands fa-algolia fa-fw" aria-hidden="true"></i>',
                       href: 'https://www.algolia.com/'
                     }
-                  : {
-                      searchType: 'Lunr.js',
-                      icon: '',
-                      href: 'https://lunrjs.com/'
-                    };
+                  : (searchConfig.type === 'lunr'
+                      ? {
+                          searchType: 'Lunr.js',
+                          icon: '',
+                          href: 'https://lunrjs.com/'
+                        }
+                      : {
+                          searchType: 'Fuse.js',
+                          icon: '',
+                          href: 'https://fusejs.io/'
+                        })
               return `<div class="search-footer">Search by <a href="${href}" rel="noopener noreferrer" target="_blank">${icon} ${searchType}</a></div>`;
             }
           }

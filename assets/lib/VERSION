@@ -10,6 +10,7 @@ echarts@5.3.3 https://github.com/apache/echarts
 emoji-data@14.0.0 https://github.com/iamcal/emoji-data
 eruda@2.5.0 https://github.com/liriliri/eruda
 fontawesome-free@6.2.0 https://github.com/FortAwesome/Font-Awesome
+fusejs@6.6.2 https://github.com/krisk/fuse
 gitalk@1.7.2 https://github.com/gitalk/gitalk
 katex@0.16.2 https://github.com/KaTeX/KaTeX
 lazysizes@5.3.2 https://github.com/aFarkas/lazysizes

@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 
 > Snapshot: <>
 
+- :tada: Feat: add support for [Fusejs search](https://fusejs.io/) ([#203](https://github.com/hugo-fixit/FixIt/issues/203))
 - :sparkles: Feat: add feature post reward support ([#216](https://github.com/hugo-fixit/FixIt/issues/216), @Lruihao[#234](https://github.com/hugo-fixit/FixIt/pull/234))
 - :sparkles: Feat: add reward shortcode support ([#216](https://github.com/hugo-fixit/FixIt/issues/216))
 - :sparkles: Feat: add TagCloud config support for tags page, see parameter `params.tagcloud` ([#235](https://github.com/hugo-fixit/FixIt/issues/235))

@@ -28,6 +28,13 @@
     {{- $source := $cdn.algoliasearchJS | default "lib/algoliasearch/algoliasearch-lite.umd.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
     {{- $config = dict "type" "algolia" "algoliaIndex" $search.algolia.index "algoliaAppID" $search.algolia.appID "algoliaSearchKey" $search.algolia.searchKey | dict "search" | merge $config -}}
+  {{- else if eq $search.type "fuse" -}}
+    {{- with .Site.Home.OutputFormats.Get "json" -}}
+      {{- $config = dict "type" "fuse" "fuseIndexURL" .RelPermalink | dict "search" | merge $config -}}
+    {{- end -}}
+    {{- $source := $cdn.fuseJS | default "lib/fuse/fuse.min.js" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+    {{- $config = dict "isCaseSensitive" $search.fuse.isCaseSensitive "minMatchCharLength" $search.fuse.minMatchCharLength "findAllMatches" $search.fuse.findAllMatches "location" $search.fuse.location "threshold" $search.fuse.threshold "distance" $search.fuse.distance "ignoreLocation" $search.fuse.ignoreLocation "useExtendedSearch" $search.fuse.useExtendedSearch "ignoreFieldNorm" $search.fuse.ignoreFieldNorm | dict "search" | merge $config -}}
   {{- end -}}
 {{- end -}}
 
