@@ -2,22 +2,27 @@
 public/
 resources/
 
+# Hugo
+.hugo_build.lock
+jsconfig.json
+
 # NPM
 node_modules/
 
-## OS Files
-# Windows
+# VSCode
+.vscode
+
+# OS Files
+## Windows
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
-# OSX
+## OSX
 .DS_Store
 
-# Linux
+## Linux
 .directory
 
-# Hugo
-.hugo_build.lock
-jsconfig.json
+

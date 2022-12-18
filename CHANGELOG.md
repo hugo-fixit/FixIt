@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 - :truck: Feat: move `assets/data/emoji` to `assets/lib/valine/emoji/`
 - :zap: Perf: optimize close comment feature when the post has expired ([#204](https://github.com/hugo-fixit/FixIt/issues/204))
 - :zap: Perf: optimize sub menu position calculation in desktop header with css replace of javascript
+- :zap: Perf: enhance pangu spelling correction
 - :bug: Fix: remove the leading and trailing whitespace of the code string ([#205](https://github.com/hugo-fixit/FixIt/issues/205))
 - :bento: Fix: update webfonts for fontawesome 6.2.0 (@NicoDreamzZ[#228](https://github.com/hugo-fixit/FixIt/pull/228))
 - :bug: Fix: image shortcode/plugin lose the support for svg type files ([#210](https://github.com/hugo-fixit/FixIt/issues/210))

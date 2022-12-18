@@ -1037,8 +1037,21 @@ class FixIt {
   }
 
   initPangu() {
-    // TODO 待优化：只渲染
-    this.config.enablePangu && pangu.autoSpacingPage();
+    if (!this.config.pangu?.enable) {
+      return;
+    }
+    const selector = this.config.pangu.selector;
+    if (selector) {
+      if (selector.startsWith('#')) {
+        pangu.spacingElementById(selector.slice(1));
+      } else if (selector.startsWith('.')) {
+        pangu.spacingElementByClassName(selector.slice(1));
+      } else {
+        pangu.spacingElementByTagName(selector)
+      }
+      return;
+    }
+    pangu.autoSpacingPage();
   }
 
   initFixItDecryptor() {
