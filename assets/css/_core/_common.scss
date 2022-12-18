@@ -28,16 +28,20 @@
   display: block;
 }
 
-.ms-1 {
+.ms-1,
+.mx-1 {
   margin-left: 0.25rem !important;
 }
-.me-1 {
+.me-1,
+.mx-1 {
   margin-right: 0.25rem !important;
 }
-.ps-1 {
+.ps-1,
+.px-1 {
   padding-left: 0.25rem !important;
 }
-.pe-1 {
+.pe-1,
+.px-1 {
   padding-right: 0.25rem !important;
 }
 

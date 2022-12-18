@@ -168,8 +168,6 @@
     author = true
     # Site creation year
     since = 2021
-    # FixIt 0.2.14 | NEW Site creation time
-    siteTime = "" # e.g. "2021-12-18T16:15:22+08:00"
     # FixIt 0.2.14 | NEW whether to show total word count of site content
     wordCount = true
     # FixIt 0.2.12 | NEW Public network security only in China (HTML format is supported)
@@ -178,6 +176,12 @@
     icp = ""
     # license info (HTML format is supported)
     license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+    # FixIt 0.2.17 | CHANGED Site creation time
+    [params.footer.siteTime]
+      animate = true
+      icon = "fa-solid fa-heartbeat"
+      pre = ""
+      value = "" # e.g. "2021-12-18T16:15:22+08:00"
 
   # FixIt 0.2.0 | NEW Section (all posts) page config
   [params.section]

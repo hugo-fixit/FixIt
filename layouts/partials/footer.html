@@ -50,12 +50,14 @@
         </div>
       {{- end -}}
 
-      {{- if .Site.Params.footer.siteTime | or .Site.Params.footer.wordCount -}}
+      {{- if .Site.Params.footer.siteTime.value | or .Site.Params.footer.wordCount -}}
         <div class="footer-line statistics">
-          {{- if .Site.Params.footer.siteTime -}}
+          {{- with .Site.Params.footer.siteTime -}}
             <span class="site-time" title='{{ T "siteRunning" }}'>
-              {{- dict "Class" "fa-solid fa-heartbeat fa-fw animate-icon" | partial "plugin/icon.html" -}}&nbsp;
-              {{- printf `<span class="run-times">%v</span>` (T "siteRunning") | safeHTML -}}
+              {{- $siteTimeIcon := printf (cond .Animate "%v fa-fw animate-icon" "%v fa-fw") .Icon -}}
+              {{- dict "Class" $siteTimeIcon | partial "plugin/icon.html" -}}
+              {{- with .Pre -}}<span class="ms-1 d-none">{{ . }}</span>{{- end -}}
+              {{- printf `<span class="run-times ms-1">%v</span>` (T "siteRunning") | safeHTML -}}
             </span>
           {{- end -}}
         </div>

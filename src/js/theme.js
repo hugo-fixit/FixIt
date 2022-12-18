@@ -988,7 +988,8 @@ class FixIt {
       minutes = Math.floor(runTime / 60 - 24 * 60 * days - 60 * hours),
       seconds = Math.floor((now - run) / 1000 - 24 * 60 * 60 * days - 60 * 60 * hours - 60 * minutes);
     $runTimes.innerHTML = `${days}, ${String(hours).padStart(2, 0)}:${String(minutes).padStart(2, 0)}:${String(seconds).padStart(2, 0)}`;
-  }
+    document.querySelector('.site-time .d-none')?.classList.remove('d-none');
+  };
 
   initSiteTime() {
     if (this.config.siteTime) {

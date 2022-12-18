@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: add TagCloud config support for tags page, see parameter `params.tagcloud` ([#235](https://github.com/hugo-fixit/FixIt/issues/235))
 - :sparkles: Feat: add custom templates and parameter `params.customFilePath` support
 - :sparkles: Feat: add feature end of post flag support ([#236](https://github.com/hugo-fixit/FixIt/issues/236))
+- :sparkles: Feat: refactor parameter `params.footer.siteTime`
 - :sparkles: Feat: add params to close wordcount and readingTime in post ([#209](https://github.com/hugo-fixit/FixIt/issues/209))
 - :sparkles: Feat: add parameter `params.home.profile.avatarMenu`
 - :truck: Feat: migrate parameter `params.autoBookmark` to `params.page.autoBookmark` ([#55](https://github.com/hugo-fixit/FixIt/issues/55))
