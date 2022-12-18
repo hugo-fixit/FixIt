@@ -55,6 +55,12 @@
   }
 }
 
+@each $key, $value in $orders {
+  .order-#{$key} {
+    order: #{$value} !important;
+  }
+}
+
 .variant-numeric {
   font-variant-numeric: tabular-nums lining-nums;
 }

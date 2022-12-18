@@ -12,7 +12,7 @@
 
       {{- /* Hugo and FixIt */ -}}
       {{- if ne .Site.Params.footer.hugo false -}}
-        <div class="footer-line powered">
+        <div class="footer-line powered{{ with .Site.Params.footer.order.powered }} order-{{ . }}{{ end }}">
           {{- $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo %v">Hugo</a>` hugo.Version -}}
           {{- $theme := printf `<a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt %v"><img class="fixit-icon" src="%v" alt="FixIt logo" />&nbsp;FixIt</a>`
             (.Scratch.Get "version")
@@ -23,7 +23,7 @@
       {{- end -}}
 
       {{- if .Site.Params.footer.copyright | or .Site.Params.footer.author | or .Site.Params.footer.license -}}
-        <div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork">
+        <div class="footer-line copyright{{ with .Site.Params.footer.order.copyright }} order-{{ . }}{{ end }}" itemscope itemtype="http://schema.org/CreativeWork">
           {{- /* Copyright year */ -}}
           {{- if ne .Site.Params.footer.copyright false -}}
             {{ dict "Class" "fa-regular fa-copyright fa-fw" | partial "plugin/icon.html" }}
@@ -51,7 +51,7 @@
       {{- end -}}
 
       {{- if .Site.Params.footer.siteTime.value | or .Site.Params.footer.wordCount -}}
-        <div class="footer-line statistics">
+        <div class="footer-line statistics{{ with .Site.Params.footer.order.statistics }} order-{{ . }}{{ end }}">
           {{- with .Site.Params.footer.siteTime -}}
             <span class="site-time" title='{{ T "siteRunning" }}'>
               {{- $siteTimeIcon := printf (cond .Animate "%v fa-fw animate-icon" "%v fa-fw") .Icon -}}
@@ -66,7 +66,7 @@
       {{- /* 不蒜子 */ -}}
       {{- if eq .Site.Params.ibruce.enable true -}}
         {{- $loading := dict "Class" "fa-solid fa-spinner fa-spin fa-fw" | partial "plugin/icon.html" -}}
-        <div class="footer-line ibruce">
+        <div class="footer-line visitor{{ with .Site.Params.footer.order.visitor }} order-{{ . }}{{ end }}">
           <span id="busuanzi_container_site_uv" title='{{ T "siteUV" }}'>
             {{- dict "Class" "fa-regular fa-user fa-fw" | partial "plugin/icon.html" -}}&nbsp;<span id="busuanzi_value_site_uv">{{ $loading }}</span>{{- /* NO_SPACING */ -}}
           </span>
@@ -78,7 +78,7 @@
       {{- end -}}
       
       {{- if .Site.Params.footer.gov | or .Site.Params.footer.icp -}}
-        <div class="footer-line beian">
+        <div class="footer-line beian{{ with .Site.Params.footer.order.beian }} order-{{ . }}{{ end }}">
           {{- /* GOV */ -}}
           {{- with .Site.Params.footer.gov -}}
             <span class="gov">{{ . | safeHTML }}</span>

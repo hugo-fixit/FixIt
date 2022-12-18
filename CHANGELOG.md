@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: add feature end of post flag support ([#236](https://github.com/hugo-fixit/FixIt/issues/236))
 - :sparkles: Feat: refactor parameter `params.footer.siteTime`
 - :sparkles: Feat: add params to close wordcount and readingTime in post ([#209](https://github.com/hugo-fixit/FixIt/issues/209))
+- :sparkles: Feat: add parameter `params.footer.order` to order footer lines
 - :sparkles: Feat: add parameter `params.home.profile.avatarMenu`
 - :truck: Feat: migrate parameter `params.autoBookmark` to `params.page.autoBookmark` ([#55](https://github.com/hugo-fixit/FixIt/issues/55))
 - :truck: Feat: move `assets/data/emoji` to `assets/lib/valine/emoji/`

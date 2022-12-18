@@ -6,6 +6,8 @@ footer {
   padding: 1rem 0;
 
   .footer-container {
+    display: flex;
+    flex-direction: column;
     font-size: 0.875rem;
 
     .footer-line {
