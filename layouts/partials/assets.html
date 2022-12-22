@@ -251,6 +251,22 @@
   {{- end -}}
 {{- end -}}
 
+{{- /* PACE */ -}}
+{{- if eq .Site.Params.pace.enable true -}}
+  {{- $paceJS := "" -}}
+  {{- $paceCSS := "" -}}
+  {{- with ($cdn.paceJS | default "lib/pace") -}}
+    {{- $paceJS = printf "%v/pace.min.js" . -}}
+    {{- if $.Site.Params.pace.color | and $.Site.Params.pace.theme -}}
+      {{- $paceCSS = printf "%v/themes/%v/pace-theme-%v.css" .  $.Site.Params.pace.color $.Site.Params.pace.theme  -}}
+    {{- else -}}
+      {{- $paceCSS = printf "%v/pace-theme-default.min.css" . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- dict "Source" $paceJS "Fingerprint" $fingerprint "Async" true "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+  {{- dict "Source" $paceCSS "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+{{- end -}}
+
 {{- range $params.library.css -}}
   {{- dict "Source" . "Fingerprint" $fingerprint | dict "Scratch" $.Scratch "Data" | partial "scratch/style.html" -}}
 {{- end -}}

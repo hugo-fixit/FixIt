@@ -66,6 +66,8 @@ libFiles:
   objectFitImagesJS: object-fit-images@3.2.4/dist/ofi.min.js
   # pangu.js@4.0.7 https://github.com/vinta/pangu.js
   panguJS: pangu@4.0.7/dist/browser/pangu.min.js
+  # pace-js@1.2.4 https://github.com/CodeByZach/pace
+  paceJS: pace-js@1.2.4
   # sharer.js@0.4.2 https://github.com/ellisonleao/sharer.js
   sharerJS: sharer.js@0.5.1/sharer.min.js
   # twemoji@13.1.0 https://github.com/twitter/twemoji

@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: add feature post reward support ([#216](https://github.com/hugo-fixit/FixIt/issues/216), @Lruihao[#234](https://github.com/hugo-fixit/FixIt/pull/234))
 - :sparkles: Feat: add reward shortcode support ([#216](https://github.com/hugo-fixit/FixIt/issues/216))
 - :sparkles: Feat: add TagCloud config support for tags page, see parameter `params.tagcloud` ([#235](https://github.com/hugo-fixit/FixIt/issues/235))
+- :sparkles: Feat: add [pace](https://github.com/CodeByZach/pace) support ([#190](https://github.com/hugo-fixit/FixIt/issues/190))
 - :sparkles: Feat: add custom templates and parameter `params.customFilePath` support
 - :sparkles: Feat: add feature end of post flag support ([#236](https://github.com/hugo-fixit/FixIt/issues/236))
 - :sparkles: Feat: refactor parameter `params.footer.siteTime`
