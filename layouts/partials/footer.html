@@ -1,12 +1,6 @@
 {{- if ne .Site.Params.footer.enable false -}}
   <footer class="footer">
     <div class="footer-container">
-      {{- /* TODO Custom Content deprecated */ -}}
-      {{- with .Site.Params.footer.custom -}}
-        <div class="footer-line custom">
-          {{- safeHTML . -}}
-        </div>
-      {{- end -}}
       {{- /* Custom Content */ -}}
       {{- partial (.Scratch.Get "customFilePath").footer . -}}
 
