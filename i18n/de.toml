@@ -1,22 +1,23 @@
 # Translations for German
 # Übersetzung auf Deutsch
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
+# TODO Some fields are waiting for your translation
 
 # === init ===
 [configurationError]
-other = "" # waitting for translation
+other = ""
 
 [compatibilityError]
-other = "" # waitting for translation
+other = ""
 
 [RCVersionWarn]
-other = "" # waitting for translation
+other = ""
 
 [devEnvWarn]
-other = "" # waitting for translation
+other = ""
 
 [quicklyUpgrade]
-other = "" # waitting for translation
+other = ""
 # === init ===
 
 # === baseof ===
@@ -27,7 +28,7 @@ other = "Nach oben"
 other = "Kommentare anzeigen"
 
 [noscript]
-other = "" # waitting for translation
+other = ""
 # === baseof ===
 
 # === Post ===
@@ -40,8 +41,8 @@ other = "Artikel"
 other = "Alle {{ .Some }}"
 
 [totalwordCount]
-one = "" # waitting for translation
-other = "" # waitting for translation
+one = ""
+other = ""
 
 [tag]
 other = "Tag"
@@ -151,8 +152,9 @@ other = "Teilen auf"
 # === posts/single.html ===
 [contents]
 other = "Inhalt"
+
 [repost]
-other = "" # waitting for translation
+other = ""
 
 [publishedOnDate]
 other = "veröffentlicht an {{ .Date }}"
@@ -199,23 +201,23 @@ other = "Mehr lesen"
 other = "Dieser Artikel wurde zuletzt auf {{ .Date }} aktualisiert, der Inhalt kann veraltet sein."
 
 [encryptedAbstract]
-other = "" # waitting for translation
+other = ""
 
 [encryptedMessage]
-other = "" # waitting for translation
+other = ""
 
 [password]
 other = "Passwort"
 
 [encryptyAgain]
-other = "" # waitting for translation
+other = ""
 
 [reward]
-  donate = ""
-  wechatpay = ""
-  alipay = ""
-  paypal = ""
-  bitcoin = ""
+donate = ""
+wechatpay = ""
+alipay = ""
+paypal = ""
+bitcoin = ""
 # === posts/single.html ===
 
 # === 404.html ===

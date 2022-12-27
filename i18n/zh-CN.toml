@@ -212,11 +212,11 @@ other = "密码"
 other = "重新加密"
 
 [reward]
-  donate = "赞赏"
-  wechatpay = "微信"
-  alipay = "支付宝"
-  paypal = "贝宝"
-  bitcoin = "比特币"
+donate = "赞赏"
+wechatpay = "微信"
+alipay = "支付宝"
+paypal = "贝宝"
+bitcoin = "比特币"
 # === posts/single.html ===
 
 # === 404.html ===

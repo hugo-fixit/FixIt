@@ -212,11 +212,11 @@ other = "Mot de passe"
 other = "Chiffrer à nouveau"
 
 [reward]
-  donate = "Faire un don"
-  wechatpay = "WeChat Pay"
-  alipay = "Alipay"
-  paypal = "PayPal"
-  bitcoin = "Bitcoin"
+donate = "Faire un don"
+wechatpay = "WeChat Pay"
+alipay = "Alipay"
+paypal = "PayPal"
+bitcoin = "Bitcoin"
 # === posts/single.html ===
 
 # === 404.html ===

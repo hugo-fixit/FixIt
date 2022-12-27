@@ -1,22 +1,23 @@
 # Translations for Romanian
 # Traduceri pentru limba română
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
+# TODO Some fields are waiting for your translation
 
 # === init ===
 [configurationError]
-other = "" # waitting for translation
+other = ""
 
 [compatibilityError]
-other = "" # waitting for translation
+other = ""
 
 [RCVersionWarn]
-other = "" # waitting for translation
+other = ""
 
 [devEnvWarn]
-other = "" # waitting for translation
+other = ""
 
 [quicklyUpgrade]
-other = "" # waitting for translation
+other = ""
 # === init ===
 
 # === baseof ===
@@ -27,7 +28,7 @@ other = "Înapoi Sus"
 other = "Vizualizare Comentarii"
 
 [noscript]
-other = "" # waitting for translation
+other = ""
 # === baseof ===
 
 # === Post ===
@@ -40,8 +41,8 @@ other = "Articole"
 other = "Toate {{ .Some }}"
 
 [totalwordCount]
-one = "" # waitting for translation
-other = "" # waitting for translation
+one = ""
+other = ""
 
 [tag]
 other = "Etichetă"
@@ -151,8 +152,9 @@ other = "Distribuie pe"
 # === posts/single.html ===
 [contents]
 other = "Cuprins"
+
 [repost]
-other = "" # waitting for translation
+other = ""
 
 [publishedOnDate]
 other = "publicat la {{ .Date }}"
@@ -199,23 +201,23 @@ other = "Citește mai mult"
 other = "Acest articol a fost actualizat ultima dată pe {{ .Date }}, conținutul poate fi depășit."
 
 [encryptedAbstract]
-other = "" # waitting for translation
+other = ""
 
 [encryptedMessage]
-other = "" # waitting for translation
+other = ""
 
 [password]
 other = "Parolă"
 
 [encryptyAgain]
-other = "" # waitting for translation
+other = ""
 
 [reward]
-  donate = ""
-  wechatpay = ""
-  alipay = ""
-  paypal = ""
-  bitcoin = ""
+donate = ""
+wechatpay = ""
+alipay = ""
+paypal = ""
+bitcoin = ""
 # === posts/single.html ===
 
 # === 404.html ===

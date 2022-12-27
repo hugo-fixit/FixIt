@@ -208,11 +208,11 @@ other = "Password"
 other = "Encrypt again"
 
 [reward]
-  donate = "Donate"
-  wechatpay = "WeChat Pay"
-  alipay = "Alipay"
-  paypal = "PayPal"
-  bitcoin = "Bitcoin"
+donate = "Donate"
+wechatpay = "WeChat Pay"
+alipay = "Alipay"
+paypal = "PayPal"
+bitcoin = "Bitcoin"
 # === posts/single.html ===
 
 # === 404.html ===

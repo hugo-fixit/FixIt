@@ -1,21 +1,22 @@
 # Translations for Vietnamese
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
+# TODO Some fields are waiting for your translation
 
 # === init ===
 [configurationError]
-other = "" # waitting for translation
+other = ""
 
 [compatibilityError]
-other = "" # waitting for translation
+other = ""
 
 [RCVersionWarn]
-other = "" # waitting for translation
+other = ""
 
 [devEnvWarn]
-other = "" # waitting for translation
+other = ""
 
 [quicklyUpgrade]
-other = "" # waitting for translation
+other = ""
 # === init ===
 
 # === baseof ===
@@ -26,7 +27,7 @@ other = "Lên trên"
 other = "Xem bình luận"
 
 [noscript]
-other = "" # waitting for translation
+other = ""
 # === baseof ===
 
 # === Post ===
@@ -39,8 +40,8 @@ other = "Bài viết"
 other = "Tất cả {{ .Some }}"
 
 [totalwordCount]
-one = "" # waitting for translation
-other = "" # waitting for translation
+one = ""
+other = ""
 
 [tag]
 other = "Nhãn"
@@ -150,8 +151,9 @@ other = "Chia sẻ trên"
 # === posts/single.html ===
 [contents]
 other = "Nội dung"
+
 [repost]
-other = "" # waitting for translation
+other = ""
 
 [publishedOnDate]
 other = "đăng ngày {{ .Date }}"
@@ -198,23 +200,23 @@ other = "Đọc thêm"
 other = "Bài viết này được cập nhật lần cuối vào {{ .Date }}, nội dung có thể đã lỗi thời."
 
 [encryptedAbstract]
-other = "" # waitting for translation
+other = ""
 
 [encryptedMessage]
-other = "" # waitting for translation
+other = ""
 
 [password]
 other = "Mật khẩu"
 
 [encryptyAgain]
-other = "" # waitting for translation
+other = ""
 
 [reward]
-  donate = ""
-  wechatpay = ""
-  alipay = ""
-  paypal = ""
-  bitcoin = ""
+donate = ""
+wechatpay = ""
+alipay = ""
+paypal = ""
+bitcoin = ""
 # === posts/single.html ===
 
 # === 404.html ===
