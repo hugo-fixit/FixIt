@@ -1,7 +1,7 @@
 {{- $version := .Get 0 -}}
 {{- $url := printf "https://github.com/hugo-fixit/FixIt/releases/tag/v%v" $version -}}
 {{- $type := .Get 1 | default "new" | lower -}}
-{{- $label := T $type -}}
+{{- $label := T (printf "version.%v" $type) -}}
 {{- $color := cond (eq $type "changed") "ff9101" "00b1ff" | cond (eq $type "deleted") "ff5252" -}}
 {{- $pathTemplate := cond .Site.IsMultiLingual (printf "svg/version/%%v-%%v.%v.svg" .Page.Language.Lang) "svg/version/%v-%v.svg" -}}
 {{- $path := printf $pathTemplate $version $type -}}

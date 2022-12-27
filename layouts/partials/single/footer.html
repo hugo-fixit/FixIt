@@ -7,7 +7,7 @@
       <div class="post-info-mod">
         <span title={{ "2006-01-02 15:04:05" | .Lastmod.Format }}>
           {{- with .Site.Params.dateformat | default "2006-01-02" | .Lastmod.Format -}}
-            {{- dict "Date" . | T "updatedOnDate" -}}&nbsp;
+            {{- dict "Date" . | T "single.updatedOnDate" -}}&nbsp;
             {{- if $gitRepo -}}
               {{- with $.GitInfo -}}
                 <a class="git-hash" href="{{ printf `%v/commit/%v` $gitRepo .Hash }}" rel="external nofollow noopener noreferrer" target="_blank" title="commit by {{ .AuthorName }}({{ .AuthorEmail }}) {{ .Hash }}: {{ .Subject }}">
@@ -30,7 +30,7 @@
         {{- if $params.linktomarkdown -}}
           {{- with .OutputFormats.Get "markdown" -}}
             <span>
-              {{- $options := dict "Class" "link-to-markdown" "Destination" .RelPermalink "Title" (T "readMarkdown") "Content" (T "readMarkdown") "externalIcon" false -}}
+              {{- $options := dict "Class" "link-to-markdown" "Destination" .RelPermalink "Title" (T "single.readMarkdown") "Content" (T "single.readMarkdown") "externalIcon" false -}}
               {{- partial "plugin/link.html" $options -}}
             </span>
           {{- end -}}
@@ -42,7 +42,7 @@
               {{- if not (hasPrefix $editUrl "http") -}}
                 {{- $editUrl = printf "%v/%v" $gitRepo (strings.TrimPrefix "/" $editUrl) -}}
               {{- end -}}
-              {{- $options := dict "Class" "link-to-edit" "Destination" $editUrl "Title" (T "editThisPage") "Content" (T "editThisPage") "externalIcon" false -}}
+              {{- $options := dict "Class" "link-to-edit" "Destination" $editUrl "Title" (T "single.editThisPage") "Content" (T "single.editThisPage") "externalIcon" false -}}
               {{- partial "plugin/link.html" $options -}}
             </span>
           {{- end -}}
@@ -69,7 +69,7 @@
       {{- end -}}
     </section>
     <section>
-      <span><a href="javascript:void(0);" onclick="window.history.back();">{{ T "back" }}</a></span>&nbsp;|&nbsp;<span><a href="{{ .Site.Home.RelPermalink }}">{{ T "home" }}</a></span>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">{{ T "single.back" }}</a></span>&nbsp;|&nbsp;<span><a href="{{ .Site.Home.RelPermalink }}">{{ T "single.home" }}</a></span>
     </section>
   </div>
 

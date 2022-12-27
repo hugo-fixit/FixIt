@@ -4,45 +4,30 @@
 # TODO Some fields are waiting for your translation
 
 # === init ===
-[configurationError]
-other = ""
-
-[compatibilityError]
-other = ""
-
-[RCVersionWarn]
-other = ""
-
-[devEnvWarn]
-other = ""
-
-[quicklyUpgrade]
-other = ""
+[init]
+configurationError = ""
+compatibilityError = ""
+RCVersionWarn = ""
+devEnvWarn = ""
+quicklyUpgrade = ""
 # === init ===
 
 # === baseof ===
-[backToTop]
-other = "Наверх"
-
-[viewComments]
-other = "Посмотреть комментарии"
-
-[noscript]
-other = ""
+[baseof]
+backToTop = "Наверх"
+viewComments = "Посмотреть комментарии"
+noscript = ""
 # === baseof ===
-
-# === Post ===
-[posts]
-other = "Статьи"
-# === Post ===
 
 # === Taxonomy ===
 [allSome]
 other = "Все {{ .Some }}"
 
-[totalwordCount]
-one = ""
-other = ""
+[category]
+other = "Категория"
+
+[categories]
+other = "Категории"
 
 [tag]
 other = "Тэг"
@@ -50,98 +35,61 @@ other = "Тэг"
 [tags]
 other = "Тэги"
 
-[category]
-other = "Категория"
+[posts]
+other = "Статьи"
 
-[categories]
-other = "Категории"
+[taxonomy.totalwordCount]
+one = ""
+other = ""
 # === Taxonomy ===
 
 # === Section ===
-[recentlyUpdated]
-other = "Недавно обновленные"
+[section]
+recentlyUpdated = "Недавно обновленные"
 # === Section ===
 
 # === Pagination ===
-[more]
-other = "Больше"
+[pagination]
+more = "Больше"
 # === Pagination ===
 
 # === partials/header.html ===
-[selectLanguage]
-other = "Выбор Языка"
-
-[noMoretTranslations]
-other = "Нет больше переводов"
-
-[switchTheme]
-other = "Сменить Тему"
+[header]
+selectLanguage = "Выбор Языка"
+noMoretTranslations = "Нет больше переводов"
+switchTheme = "Сменить Тему"
 # === partials/header.html ===
 
 # === partials/footer.html ===
-[poweredBySome]
-other = "Сделано {{ .Hugo }} | Тема - {{ .Theme }}"
-
-[siteUV]
-other = "Всего посетителей"
-
-[sitePV]
-other = "Всего посещений"
-
-[siteRunning]
-other = "Website running ..."
+[footer]
+poweredBySome = "Сделано {{ .Hugo }} | Тема - {{ .Theme }}"
+siteUV = "Всего посетителей"
+sitePV = "Всего посещений"
+siteRunning = "Website running ..."
 # === partials/footer.html ===
 
 # === partials/comment.html ===
-[valineLang]
-other = "en" # Valine не поддерживает русский
-
-[valinePlaceholder]
-other = "Ваш комментарий ..."
-
-[facebookLanguageCode]
-other = "ru_RU"
+[comment]
+valineLang = "en" # Valine не поддерживает русский
+valinePlaceholder = "Ваш комментарий ..."
+facebookLanguageCode = "ru_RU"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
-[search]
-other = "Поиск"
-
-[searchPlaceholder]
-other = "Поиск заголовков или содержимого ..."
-
-[clear]
-other = "Очистить"
-
-[cancel]
-other = "Отменить"
-
-[noResultsFound]
-other = "Результатов не найдено"
-
-[lunrLanguageCode]
-other = "ru"
-
-[lunrLanguageLib]
-other = "lib/lunr/lunr.ru.js"
-
-[copyToClipboard]
-other = "Копировать в буфер обмена"
-
-[editLockTitle]
-other = "Заблокировать редактируемый кодовый блок"
-
-[editUnLockTitle]
-other = "Разблокировать редактируемый блок кода"
-
-[cookieconsentMessage]
-other = "Этот сайт использует Cookies для улучшения вашего опыта."
-
-[cookieconsentDismiss]
-other = "Согласен"
-
-[cookieconsentLink]
-other = "Учить больше"
+[assets]
+search = "Поиск"
+searchPlaceholder = "Поиск заголовков или содержимого ..."
+clear = "Очистить"
+cancel = "Отменить"
+noResultsFound = "Результатов не найдено"
+lunrLanguageCode = "ru"
+lunrLanguageLib = "lib/lunr/lunr.ru.js"
+copyToClipboard = "Копировать в буфер обмена"
+editLockTitle = "Заблокировать редактируемый кодовый блок"
+editUnLockTitle = "Разблокировать редактируемый блок кода"
+cookieconsentMessage = "Этот сайт использует Cookies для улучшения вашего опыта."
+cookieconsentDismiss = "Согласен"
+cookieconsentLink = "Учить больше"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===
@@ -150,69 +98,35 @@ other = "Поделиться в"
 # === partials/plugin/share.html ===
 
 # === posts/single.html ===
-[contents]
-other = "Содержание"
+[single]
+contents= "Содержание"
+repost= ""
+publishedOnDate= "Опубликовано {{ .Date }}"
+includedInCategories= "включен в {{ .Categories }}"
+views = "просмотров"
+comments = "комментариев"
+author = "Автор"
+updatedOnDate = "Oбновлена {{ .Date }}"
+readMarkdown = "Читать Markdown"
+editThisPage = "Редактировать эту страницу"
+back = "Назад"
+home = "Домой"
+readMore = "Читать больше"
+expirationReminder = "Эта статья последний раз обновлялась {{ .Date }}, содержание может быть устаревшим."
+encryptedAbstract = ""
+encryptedMessage = ""
+password = "арготизм"
+encryptyAgain = ""
 
-[repost]
-other = ""
-
-[publishedOnDate]
-other = "Опубликовано {{ .Date }}"
-
-[includedInCategories]
-other = "включен в {{ .Categories }}"
-
-[wordCount]
+[single.wordCount]
 one = "Одно слово"
 other = "{{ .Count }} слов"
 
-[readingTime]
+[single.readingTime]
 one = "Одна минута"
 other = "{{ .Count }} минут"
 
-[views]
-other = "просмотров"
-
-[comments]
-other = "комментариев"
-
-[author]
-other = "Автор"
-
-[updatedOnDate]
-other = "Oбновлена {{ .Date }}"
-
-[readMarkdown]
-other = "Читать Markdown"
-
-[editThisPage]
-other = "Редактировать эту страницу"
-
-[back]
-other = "Назад"
-
-[home]
-other = "Домой"
-
-[readMore]
-other = "Читать больше"
-
-[expirationReminder]
-other = "Эта статья последний раз обновлялась {{ .Date }}, содержание может быть устаревшим."
-
-[encryptedAbstract]
-other = ""
-
-[encryptedMessage]
-other = ""
-
-[password]
-other = "арготизм"
-
-[encryptyAgain]
-other = ""
-
-[reward]
+[single.reward]
 donate = ""
 wechatpay = ""
 alipay = ""
@@ -237,50 +151,24 @@ other = "Вы не подключены к интернету, будут дос
 # === offline ===
 
 # === shortcodes/admonition.html ===
-[note]
-other = "Замечание"
-
-[abstract]
-other = "Краткое описание"
-
-[info]
-other = "Инфо"
-
-[tip]
-other = "Совет"
-
-[success]
-other = "Удачто"
-
-[question]
-other = "Вопрос"
-
-[warning]
-other = "Предупреждение"
-
-[failure]
-other = "Отказ"
-
-[danger]
-other = "Опасность"
-
-[bug]
-other = "Ошибка"
-
-[example]
-other = "Пример"
-
-[quote]
-other = "Цитата"
+[admonition]
+note = "Замечание"
+abstract = "Краткое описание"
+info = "Инфо"
+tip = "Совет"
+success = "Удачто"
+question = "Вопрос"
+warning = "Предупреждение"
+failure = "Отказ"
+danger = "Опасность"
+bug = "Ошибка"
+example = "Пример"
+quote = "Цитата"
 # === shortcodes/admonition.html ===
 
 # === shortcodes/version.html ===
-[new]
-other = "НОВЫЙ"
-
-[changed]
-other = "ИЗМЕНЕН"
-
-[deleted]
-other = "УДАЛЕН"
+[version]
+new = "НОВЫЙ"
+changed = "ИЗМЕНЕН"
+deleted = "УДАЛЕН"
 # === shortcodes/version.html ===

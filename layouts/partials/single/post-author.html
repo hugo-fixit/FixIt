@@ -26,7 +26,7 @@
     {{- $icon = "" -}}
   {{- end -}}
   {{- if $author.link -}}
-    {{- $options := dict "Class" "author" "Destination" $author.link "Title" (T "author") "Rel" "author" "Icon" $icon "Content" $content -}}
+    {{- $options := dict "Class" "author" "Destination" $author.link "Title" (T "single.author") "Rel" "author" "Icon" $icon "Content" $content -}}
     {{- partial "plugin/link.html" $options -}}
   {{- else -}}
     <span class="author">

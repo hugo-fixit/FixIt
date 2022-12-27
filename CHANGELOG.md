@@ -29,6 +29,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: can't keep the static table of the contents in front of the post
 - :bug: Fix: escape hashtag character `#` in tag and category ([#245](https://github.com/hugo-fixit/FixIt/issues/245))
 - :bug: Fix: pangu.js cdn error
+- :recycle: Refactor(i18n): hierarchize translation fields for supported languages
 - :globe_with_meridians: Docs(i18n): add missing translations for French + enhancements (@Kapusch[#247](https://github.com/hugo-fixit/FixIt/pull/247))
 - :lipstick: Style: refactor css style
 - :lipstick: Style: update home page stylesheet

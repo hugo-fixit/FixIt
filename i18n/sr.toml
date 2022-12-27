@@ -4,45 +4,30 @@
 # TODO Some fields are waiting for your translation
 
 # === init ===
-[configurationError]
-other = "" 
-
-[compatibilityError]
-other = "" 
-
-[RCVersionWarn]
-other = "" 
-
-[devEnvWarn]
-other = "" 
-
-[quicklyUpgrade]
-other = "" 
+[init]
+configurationError = ""
+compatibilityError = ""
+RCVersionWarn = ""
+devEnvWarn = ""
+quicklyUpgrade = ""
 # === init ===
 
 # === baseof ===
-[backToTop]
-other = "Назад на Врх"
-
-[viewComments]
-other = "Погледај Коментаре"
-
-[noscript]
-other = "" 
+[baseof]
+backToTop = "Назад на Врх"
+viewComments = "Погледај Коментаре"
+noscript = ""
 # === baseof ===
-
-# === Post ===
-[posts]
-other = "Постови"
-# === Post ===
 
 # === Taxonomy ===
 [allSome]
 other = "Све {{ .Some }}"
 
-[totalwordCount]
-one = ""   
-other = "" 
+[category]
+other = "Категорија"
+
+[categories]
+other = "Категорије"
 
 [tag]
 other = "Таг"
@@ -50,95 +35,60 @@ other = "Таг"
 [tags]
 other = "Тагови"
 
-[category]
-other = "Категорија"
+[posts]
+other = "Постови"
 
-[categories]
-other = "Категорије"
+[taxonomy.totalwordCount]
+one = ""
+other = ""
 # === Taxonomy ===
 
 # === Section ===
-[recentlyUpdated]
-other = "Недавно Ажурирано"
+[section]
+recentlyUpdated = "Недавно Ажурирано"
 # === Section ===
 
 # === Pagination ===
-[more]
-other = "Више"
+[pagination]
+more = "Више"
 # === Pagination ===
 
 # === partials/header.html ===
-[selectLanguage]
-other = "Изабери Језик"
-
-[noMoretTranslations]
-other = "Нема више превода"
-
-[switchTheme]
-other = "Промени Тему"
+[header]
+selectLanguage = "Изабери Језик"
+noMoretTranslations = "Нема више превода"
+switchTheme = "Промени Тему"
 # === partials/header.html ===
 
 # === partials/footer.html ===
-[poweredBySome]
-other = "Покреће {{ .Hugo }} | Тема - {{ .Theme }}"
-
-[siteUV]
-other = "Укупно посетилаца"
-
-[sitePV]
-other = "Укупно посета"
-
-[siteRunning]
-other = "Website running ..."
+[footer]
+poweredBySome = "Покреће {{ .Hugo }} | Тема - {{ .Theme }}"
+siteUV = "Укупно посетилаца"
+sitePV = "Укупно посета"
+siteRunning = "Website running ..."
 # === partials/footer.html ===
 
 # === partials/comment.html ===
-[valineLang]
-other = "sr" # Valine не подржава српски
-
-[valinePlaceholder]
-other = "Ваш коментар ..."
-
-[facebookLanguageCode]
-other = "sr_RS"
+[comment]
+valineLang = "sr" # Valine не подржава српски
+valinePlaceholder = "Ваш коментар ..."
+facebookLanguageCode = "sr_RS"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
-[search]
-other = "Претрага"
-
-[searchPlaceholder]
-other = "Претражи наслове или садржај..."
-
-[clear]
-other = "Очисти"
-
-[cancel]
-other = "Поништи"
-
-[noResultsFound]
-other = "Без резултата"
-
-[lunrLanguageCode]
-other = "sr"
-
-[copyToClipboard]
-other = "Копирај на радну таблу"
-
-[editLockTitle]
-other = "Закључај блок кода који се може уређивати"
-
-[editUnLockTitle]
-other = "Откључајте блок кода који се може уређивати"
-
-[cookieconsentMessage]
-other = "Ова веб локација користи Cookies да би побољшала ваше искуство."
-
-[cookieconsentDismiss]
-other = "Договорити се"
-
-[cookieconsentLink]
-other = "Сазнајте више"
+[assets]
+search = "Претрага"
+searchPlaceholder = "Претражи наслове или садржај..."
+clear = "Очисти"
+cancel = "Поништи"
+noResultsFound = "Без резултата"
+lunrLanguageCode = "sr"
+copyToClipboard = "Копирај на радну таблу"
+editLockTitle = "Закључај блок кода који се може уређивати"
+editUnLockTitle = "Откључајте блок кода који се може уређивати"
+cookieconsentMessage = "Ова веб локација користи Cookies да би побољшала ваше искуство."
+cookieconsentDismiss = "Договорити се"
+cookieconsentLink = "Сазнајте више"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===
@@ -147,69 +97,35 @@ other = "Подели на"
 # === partials/plugin/share.html ===
 
 # === posts/single.html ===
-[contents]
-other = "Садржаји"
+[single]
+contents= "Садржаји"
+repost= ""
+publishedOnDate= "објављено {{ .Date }}"
+includedInCategories= "укључено {{ .Categories }}"
+views = "прегледа"
+comments = "коментари"
+author = "Аутор"
+updatedOnDate = "Ажурирано {{ .Date }}"
+readMarkdown = "Читај Markdown"
+editThisPage = "Уреди ову страницу"
+back = "Назад"
+home = "Почетна"
+readMore = "Прочитај више"
+expirationReminder = "Овај чланак је последњи пут ажуриран {{ .Date }}, садржај је можда застарео."
+encryptedAbstract = ""
+encryptedMessage = ""
+password = "Паролица"
+encryptyAgain = ""
 
-[repost]
-other = "" 
-
-[publishedOnDate]
-other = "објављено {{ .Date }}"
-
-[includedInCategories]
-other = "укључено {{ .Categories }}"
-
-[wordCount]
+[single.wordCount]
 one = "Једна реч"
 other = "{{ .Count }} речи"
 
-[readingTime]
+[single.readingTime]
 one = "Један минут"
 other = "{{ .Count }} минута"
 
-[views]
-other = "прегледа"
-
-[comments]
-other = "коментари"
-
-[author]
-other = "Аутор"
-
-[updatedOnDate]
-other = "Ажурирано {{ .Date }}"
-
-[readMarkdown]
-other = "Читај Markdown"
-
-[editThisPage]
-other = "Уреди ову страницу"
-
-[back]
-other = "Назад"
-
-[home]
-other = "Почетна"
-
-[readMore]
-other = "Прочитај више"
-
-[expirationReminder]
-other = "Овај чланак је последњи пут ажуриран {{ .Date }}, садржај је можда застарео."
-
-[encryptedAbstract]
-other = "" 
-
-[encryptedMessage]
-other = "" 
-
-[password]
-other = "Паролица"
-
-[encryptyAgain]
-other = "" 
-
-[reward]
+[single.reward]
 donate = ""
 wechatpay = ""
 alipay = ""
@@ -234,50 +150,24 @@ other = "Нисте повезани на Интернет, биће досту�
 # === offline ===
 
 # === shortcodes/admonition.html ===
-[note]
-other = "Напомена"
-
-[abstract]
-other = "Сажетак"
-
-[info]
-other = "Инфо"
-
-[tip]
-other = "Савет"
-
-[success]
-other = "Успех"
-
-[question]
-other = "Питање"
-
-[warning]
-other = "Упозорење"
-
-[failure]
-other = "Неуспех"
-
-[danger]
-other = "Опасност"
-
-[bug]
-other = "Грешка"
-
-[example]
-other = "Пример"
-
-[quote]
-other = "Цитат"
+[admonition]
+note = "Напомена"
+abstract = "Сажетак"
+info = "Инфо"
+tip = "Савет"
+success = "Успех"
+question = "Питање"
+warning = "Упозорење"
+failure = "Неуспех"
+danger = "Опасност"
+bug = "Грешка"
+example = "Пример"
+quote = "Цитат"
 # === shortcodes/admonition.html ===
 
 # === shortcodes/version.html ===
-[new]
-other = "НОВО"
-
-[changed]
-other = "ПРОМЕЊЕНО"
-
-[deleted]
-other = "ОБРИСАНО"
+[version]
+new = "НОВО"
+changed = "ПРОМЕЊЕНО"
+deleted = "ОБРИСАНО"
 # === shortcodes/version.html ===

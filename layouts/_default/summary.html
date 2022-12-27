@@ -23,7 +23,7 @@
     {{- with $repost -}}
       {{- if eq .Enable true -}}
         {{- $icon := dict "Class" "fa-solid fa-share fa-fw" -}}
-        {{- $title := cond (hasPrefix .Url "http") (printf "%v -> %v" (T "repost") .Url ) (T "repost") -}}
+        {{- $title := cond (hasPrefix .Url "http") (printf "%v -> %v" (T "single.repost") .Url ) (T "single.repost") -}}
         <span title="{{ $title }}" class="icon-repost">{{- $icon | partial "plugin/icon.html" -}}</span>
       {{- end -}}
     {{- end -}}
@@ -36,7 +36,7 @@
 
     {{- with .Site.Params.dateFormat | default "2006-01-02" | .PublishDate.Format -}}
       &nbsp;<span class="post-publish" title='{{ "2006-01-02 15:04:05" | $.PublishDate.Format }}'>
-        {{- printf `<time datetime="%v">%v</time>` . . | dict "Date" | T "publishedOnDate" | safeHTML -}}
+        {{- printf `<time datetime="%v">%v</time>` . . | dict "Date" | T "single.publishedOnDate" | safeHTML -}}
       </span>
     {{- end -}}
 
@@ -47,7 +47,7 @@
     {{- end -}}
     {{- with delimit $categories "&ensp;" -}}
       &nbsp;<span class="post-category">
-        {{- dict "Categories" . | T "includedInCategories" | safeHTML -}}
+        {{- dict "Categories" . | T "single.includedInCategories" | safeHTML -}}
       </span>
     {{- end -}}
   </div>
@@ -63,7 +63,7 @@
 
   {{- /* Footer */ -}}
   <div class="post-footer">
-    <a href="{{ .RelPermalink }}">{{ T "readMore" }}</a>
+    <a href="{{ .RelPermalink }}">{{ T "single.readMore" }}</a>
     {{- with .Params.tags -}}
       <div class="post-tags">
         {{- dict "Class" "fa-solid fa-tags fa-fw me-1" | partial "plugin/icon.html" -}}

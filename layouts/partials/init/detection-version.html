@@ -15,15 +15,15 @@
 {{- /* FixIt theme version detection */ -}}
 {{- if eq .Site .Sites.First -}}
   {{- if not .Site.Params.version -}}
-    {{- errorf "FixIt %v\n%v\n\n" $version (T "configurationError") -}}
+    {{- errorf "FixIt %v\n%v\n\n" $version (T "init.configurationError") -}}
   {{- else if gt "0.2.0" (strings.TrimPrefix "v" .Site.Params.version) -}}
-    {{- errorf "FixIt %v\n%v\n\n" $version (dict "From" .Site.Params.version "To" $version | T "compatibilityError")  -}}
+    {{- errorf "FixIt %v\n%v\n\n" $version (dict "From" .Site.Params.version "To" $version | T "init.compatibilityError")  -}}
   {{- end -}}
   {{- if (strings.HasSuffix $version "RC") | and $devOpts.c4u -}}
-    {{- warnf "FixIt %v\n%v\n\n" $version (T "RCVersionWarn") -}}
+    {{- warnf "FixIt %v\n%v\n\n" $version (T "init.RCVersionWarn") -}}
   {{- end -}}
   {{- if (gt $latest $version) | and $devOpts.c4u -}}
-    {{- warnf "FixIt %v (⬆️ %v)\n%v`git submodule update --remote --merge`\n\n" $version $latest (T "quicklyUpgrade") -}}
+    {{- warnf "FixIt %v (⬆️ %v)\n%v`git submodule update --remote --merge`\n\n" $version $latest (T "init.quicklyUpgrade") -}}
   {{- end -}}
 {{- end -}}
 

@@ -9,20 +9,20 @@
   {{- /* TODO update "lib/autocomplete-js/umd/index.production.js" */ -}}
   {{- $source := $cdn.autocompleteJS | default "lib/autocomplete/autocomplete.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-  {{- $config = dict "maxResultLength" $search.maxResultLength "snippetLength" $search.snippetLength "highlightTag" $search.highlightTag "noResultsFound" (T "noResultsFound") | dict "search" | merge $config -}}
+  {{- $config = dict "maxResultLength" $search.maxResultLength "snippetLength" $search.snippetLength "highlightTag" $search.highlightTag "noResultsFound" (T "assets.noResultsFound") | dict "search" | merge $config -}}
   {{- if eq $search.type "lunr" -}}
     {{- with .Site.Home.OutputFormats.Get "json" -}}
       {{- $config = dict "type" "lunr" "lunrIndexURL" .RelPermalink | dict "search" | merge $config -}}
     {{- end -}}
     {{- $source := $cdn.lunrJS | default "lib/lunr/lunr.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-    {{- if T "lunrLanguageLib" -}}
-      {{- $config = T "lunrLanguageCode" | dict "lunrLanguageCode" | dict "search" | merge $config -}}
-      {{- with T "lunrSegmentitLib" -}}
+    {{- if T "assets.lunrLanguageLib" -}}
+      {{- $config = T "assets.lunrLanguageCode" | dict "lunrLanguageCode" | dict "search" | merge $config -}}
+      {{- with T "assets.lunrSegmentitLib" -}}
         {{- $config = dict "lunrSegmentitURL" (resources.Get .).RelPermalink | dict "search" | merge $config -}}
       {{- end -}}
       {{- dict "Source" "lib/lunr/lunr.stemmer.support.js" "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-      {{- dict "Source" (T "lunrLanguageLib") "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+      {{- dict "Source" (T "assets.lunrLanguageLib") "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
     {{- end -}}
   {{- else if eq $search.type "algolia" -}}
     {{- $source := $cdn.algoliasearchJS | default "lib/algoliasearch/algoliasearch-lite.umd.min.js" -}}
@@ -67,12 +67,12 @@
 
 {{- /* edit code */ -}}
 {{- if ne $code.edit false -}}
-  {{- $config = dict "editable" true "editLockTitle" (T "editLockTitle") "editUnLockTitle" (T "editUnLockTitle") | dict "code" | merge $config -}}
+  {{- $config = dict "editable" true "editLockTitle" (T "assets.editLockTitle") "editUnLockTitle" (T "assets.editUnLockTitle") | dict "code" | merge $config -}}
 {{- end -}}
 
 {{- /* copy code */ -}}
 {{- if ne $code.copy false -}}
-  {{- $config = T "copyToClipboard" | dict "copyTitle" | dict "code" | merge $config -}}
+  {{- $config = T "assets.copyToClipboard" | dict "copyTitle" | dict "code" | merge $config -}}
 {{- end -}}
 
 {{- /* Sharer.js */ -}}
@@ -180,7 +180,7 @@
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- $cookieconsentConfig := dict "popup" (dict "background" "#1aa3ff") "button" (dict "background" "#f0f0f0") | dict "theme" "edgeless" "palette" -}}
   {{- $cookieconsentConfig = .Site.Params.cookieconsent | merge $cookieconsentConfig -}}
-  {{- $cookieconsentConfig = dict "message" ($cookieconsentConfig.content.message | default (T "cookieconsentMessage")) "dismiss" ($cookieconsentConfig.content.dismiss | default (T "cookieconsentDismiss")) "link" ($cookieconsentConfig.content.link | default (T "cookieconsentLink")) | dict "content" | merge $cookieconsentConfig -}}
+  {{- $cookieconsentConfig = dict "message" ($cookieconsentConfig.content.message | default (T "assets.cookieconsentMessage")) "dismiss" ($cookieconsentConfig.content.dismiss | default (T "assets.cookieconsentDismiss")) "link" ($cookieconsentConfig.content.link | default (T "assets.cookieconsentLink")) | dict "content" | merge $cookieconsentConfig -}}
   {{- $config = $cookieconsentConfig | dict "cookieconsent" | merge $config -}}
 {{- end -}}
 

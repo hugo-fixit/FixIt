@@ -3,10 +3,10 @@
 
 {{- if .IsNamedParams -}}
   {{- $password = .Get "password" | default "" -}}
-  {{- $message = .Get "message" | default (T "encryptedMessage") -}}
+  {{- $message = .Get "message" | default (T "single.encryptedMessage") -}}
 {{- else -}}
   {{- $password = .Get 0 | default "" -}}
-  {{- $message = .Get 1 | default (T "encryptedMessage") -}}
+  {{- $message = .Get 1 | default (T "single.encryptedMessage") -}}
 {{- end -}}
 
 {{- if $password -}}
@@ -22,7 +22,7 @@
 
   <fixit-encryptor class="fixit-encryptor-shortcode">
     <div class="fixit-decryptor-container">
-      <label title='{{ T "password" }}'>
+      <label title='{{ T "single.password" }}'>
         <input type="password" class="fixit-decryptor-input" placeholder="🔑 {{ $message }}" />
       </label>
     </div>

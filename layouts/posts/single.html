@@ -9,7 +9,7 @@
     {{- $tocEmpty := eq .TableOfContents `<nav id="TableOfContents"></nav>` -}}
     {{- if (ne $toc.enable false) | and (ne $tocEmpty true) -}}
       <h2 class="toc-title{{ with $params.password }} d-none{{ end }}">
-        {{- T "contents" -}}&nbsp;
+        {{- T "single.contents" -}}&nbsp;
         {{- dict "Class" "toc-icon fa-solid fa-angle-down fa-fw" | partial "plugin/icon.html" -}}
       </h2>
       <div class="toc-content{{ if eq $toc.auto false }} always-active{{ end }}{{ with $params.password }} d-none{{ end }}" id="toc-content-auto"></div>
@@ -29,7 +29,7 @@
         {{- with $repost -}}
           {{- if eq .Enable true -}}
             {{- $icon := dict "Class" "fa-solid fa-share fa-fw" -}}
-            {{- $title := cond (hasPrefix .Url "http") (printf "%v -> %v" (T "repost") .Url ) (T "repost") -}}
+            {{- $title := cond (hasPrefix .Url "http") (printf "%v -> %v" (T "single.repost") .Url ) (T "single.repost") -}}
             {{- if hasPrefix .Url "http" -}}
               {{ dict "Destination" .Url "Icon" $icon "Class" "icon-repost" "Title" $title | partial "plugin/link.html" -}}
             {{- else -}}
@@ -56,7 +56,7 @@
         {{- end -}}
         {{- with delimit $categories "&ensp;" }}
           <span class="post-category">
-            {{- dict "Categories" . | T "includedInCategories" | safeHTML -}}
+            {{- dict "Categories" . | T "single.includedInCategories" | safeHTML -}}
           </span>
         {{- end -}}
       </div>
@@ -69,12 +69,12 @@
         {{- end -}}
         {{- if $params.wordCount -}}
           <span>
-            {{- dict "Class" "fa-solid fa-pencil-alt fa-fw" | partial "plugin/icon.html" }} {{ T "wordCount" .WordCount -}}
+            {{- dict "Class" "fa-solid fa-pencil-alt fa-fw" | partial "plugin/icon.html" }} {{ T "single.wordCount" .WordCount -}}
           </span>&nbsp;
         {{- end -}}
         {{- if $params.readingTime -}}
           <span>
-            {{- dict "Class" "fa-regular fa-clock fa-fw" | partial "plugin/icon.html" }} {{ T "readingTime" .ReadingTime -}}
+            {{- dict "Class" "fa-regular fa-clock fa-fw" | partial "plugin/icon.html" }} {{ T "single.readingTime" .ReadingTime -}}
           </span>&nbsp;
         {{- end -}}
 
@@ -93,47 +93,47 @@
         {{- if $comment.enable -}}
           {{- if $comment.artalk.enable -}}
             <span class="comment-visitors" data-flag-title="{{ .Title }}">
-              {{ $visitorIcon }}&nbsp;<span id="{{ .RelPermalink }}" class="artalk-visitor-count">-</span>&nbsp;{{ T "views" }}
+              {{ $visitorIcon }}&nbsp;<span id="{{ .RelPermalink }}" class="artalk-visitor-count">-</span>&nbsp;{{ T "single.views" }}
             </span>&nbsp;
           {{- else if ($comment.valine.enable | and $comment.valine.visitor) -}}
             <span id="{{ .RelPermalink }}" class="leancloud_visitors comment-visitors" data-flag-title="{{ .Title }}">
-              {{ $visitorIcon }}&nbsp;<span class="leancloud-visitors-count">-</span>&nbsp;{{ T "views" }}
+              {{ $visitorIcon }}&nbsp;<span class="leancloud-visitors-count">-</span>&nbsp;{{ T "single.views" }}
             </span>&nbsp;
           {{- else if $comment.waline.enable | and $comment.waline.pageview -}}
             <span class="comment-visitors" data-flag-title="{{ .Title }}">
-              {{ $visitorIcon }}&nbsp;<span data-path="{{ .RelPermalink }}" class="waline-pageview-count">-</span>&nbsp;{{ T "views" }}
+              {{ $visitorIcon }}&nbsp;<span data-path="{{ .RelPermalink }}" class="waline-pageview-count">-</span>&nbsp;{{ T "single.views" }}
             </span>&nbsp;
           {{- else if $comment.twikoo.enable | and $comment.twikoo.visitor -}}
             <span id="{{ .RelPermalink }}" class="comment-visitors" data-flag-title="{{ .Title }}">
-              {{ $visitorIcon }}&nbsp;<span id="twikoo_visitors">-</span>&nbsp;{{ T "views" }}
+              {{ $visitorIcon }}&nbsp;<span id="twikoo_visitors">-</span>&nbsp;{{ T "single.views" }}
             </span>&nbsp;
           {{- else if .Site.Params.ibruce.enable | and .Site.Params.ibruce.enablePost -}}
             <span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="{{ .Title }}">
-              {{ $visitorIcon }}&nbsp;<span id="busuanzi_value_page_pv">-</span>&nbsp;{{ T "views" }}
+              {{ $visitorIcon }}&nbsp;<span id="busuanzi_value_page_pv">-</span>&nbsp;{{ T "single.views" }}
             </span>&nbsp;
           {{- end -}}
         {{- else if .Site.Params.ibruce.enable | and .Site.Params.ibruce.enablePost -}}
           <span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="{{ .Title }}">
-            {{ $visitorIcon }}&nbsp;<span id="busuanzi_value_page_pv">-</span>&nbsp;{{ T "views" }}
+            {{ $visitorIcon }}&nbsp;<span id="busuanzi_value_page_pv">-</span>&nbsp;{{ T "single.views" }}
           </span>&nbsp;
         {{- end -}}
         {{- /* Comment Count */ -}}
         {{- if $comment.enable -}}
           {{- if $comment.artalk.enable -}}
             <span class="comment-count" data-flag-title="{{ .Title }}">
-              {{ $commentIcon }}&nbsp;<span data-xid="{{ .RelPermalink }}" class="artalk-comment-count">-</span>&nbsp;{{ T "comments" }}
+              {{ $commentIcon }}&nbsp;<span data-xid="{{ .RelPermalink }}" class="artalk-comment-count">-</span>&nbsp;{{ T "single.comments" }}
             </span>&nbsp;
           {{- else if $comment.valine.enable | and $comment.valine.commentCount -}}
             <span class="comment-count" data-flag-title="{{ .Title }}">
-              {{ $commentIcon }}&nbsp;<span data-xid="{{ .RelPermalink }}" class="valine-comment-count">-</span>&nbsp;{{ T "comments" }}
+              {{ $commentIcon }}&nbsp;<span data-xid="{{ .RelPermalink }}" class="valine-comment-count">-</span>&nbsp;{{ T "single.comments" }}
             </span>&nbsp;
           {{- else if $comment.waline.enable | and $comment.waline.comment -}}
             <span class="comment-count" data-flag-title="{{ .Title }}">
-              {{ $commentIcon }}&nbsp;<span data-path="{{ .RelPermalink }}" class="waline-comment-count">-</span>&nbsp;{{ T "comments" }}
+              {{ $commentIcon }}&nbsp;<span data-path="{{ .RelPermalink }}" class="waline-comment-count">-</span>&nbsp;{{ T "single.comments" }}
             </span>&nbsp;
           {{- else if $comment.twikoo.enable | and $comment.twikoo.commentCount -}}
             <span id="{{ .RelPermalink }}" class="comment-count" data-flag-title="{{ .Title }}">
-              {{ $commentIcon }}&nbsp;<span id="twikoo-comment-count">-</span>&nbsp;{{ T "comments" }}
+              {{ $commentIcon }}&nbsp;<span id="twikoo-comment-count">-</span>&nbsp;{{ T "single.comments" }}
             </span>&nbsp;
           {{- end -}}
         {{- end -}}
@@ -155,7 +155,7 @@
     {{- if (ne $toc.enable false) | and (ne $tocEmpty true) -}}
       <div class="details toc{{ with $params.password }} d-none{{ end }}" id="toc-static" data-kept="{{ if $toc.keepStatic }}true{{ else }}false{{ end }}">
         <div class="details-summary toc-title">
-          <span>{{ T "contents" }}</span>
+          <span>{{ T "single.contents" }}</span>
           <span>{{ dict "Class" "details-icon fa-solid fa-angle-right" | partial "plugin/icon.html" }}</span>
         </div>
         <div class="details-content toc-content" id="toc-content-static">

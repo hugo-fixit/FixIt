@@ -27,6 +27,6 @@
     {{- .Scratch.Set "devOpts" dict -}}
   {{- end -}}
   {{- if eq .Site .Sites.First -}}
-    {{- warnf "FixIt %v\n%v\n\n" (.Scratch.Get "version") (T "devEnvWarn") -}}
+    {{- warnf "FixIt %v\n%v\n\n" (.Scratch.Get "version") (T "init.devEnvWarn") -}}
   {{- end -}}
 {{- end -}}

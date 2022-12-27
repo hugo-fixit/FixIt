@@ -3,44 +3,30 @@
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
 # === init ===
-[configurationError]
-other = "配置文件錯誤\n您還沒有正確配置 FixIt 的版本參數。參考 https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/#basic-configuration"
-
-[compatibilityError]
-other = "兼容性錯誤 ({{ .From }} -> {{ .To }}):\n您進行了一次不兼容的更新。参考 https://github.com/hugo-fixit/FixIt/releases"
-
-[RCVersionWarn]
-other = "您正在使用開發版的 FixIt，請考慮使用穩定版。\n見 https://github.com/hugo-fixit/FixIt/releases"
-
-[devEnvWarn]
-other = "當前運行環境是“development”。“評論系統”，“CDN”和“fingerprint”不會啟用。"
-
-[quicklyUpgrade]
-other = "使用命令快速升級："
+[init]
+configurationError = "配置文件錯誤\n您還沒有正確配置 FixIt 的版本參數。參考 https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/#basic-configuration"
+compatibilityError = "兼容性錯誤 ({{ .From }} -> {{ .To }}):\n您進行了一次不兼容的更新。参考 https://github.com/hugo-fixit/FixIt/releases"
+RCVersionWarn = "您正在使用開發版的 FixIt，請考慮使用穩定版。\n見 https://github.com/hugo-fixit/FixIt/releases"
+devEnvWarn = "當前運行環境是“development”。“評論系統”，“CDN”和“fingerprint”不會啟用。"
+quicklyUpgrade = "使用命令快速升級："
 # === init ===
 
 # === baseof ===
-[backToTop]
-other = "回到頂部"
-
-[viewComments]
-other = "查看評論"
-
-[noscript]
-other = "FixIt 主題在啟用 JavaScript 的情況下效果最佳。"
+[baseof]
+backToTop = "回到頂部"
+viewComments = "查看評論"
+noscript = "FixIt 主題在啟用 JavaScript 的情況下效果最佳。"
 # === baseof ===
-
-# === Post ===
-[posts]
-other = "文章"
-# === Post ===
 
 # === Taxonomy ===
 [allSome]
 other = "所有{{ .Some }}"
 
-[totalwordCount]
-other = "總計約 {{ .Count }} 字"
+[category]
+other = "分類"
+
+[categories]
+other = "分類"
 
 [tag]
 other = "標籤"
@@ -48,101 +34,61 @@ other = "標籤"
 [tags]
 other = "標籤"
 
-[category]
-other = "分類"
+[posts]
+other = "文章"
 
-[categories]
-other = "分類"
+[taxonomy.totalwordCount]
+other = "總計約 {{ .Count }} 字"
 # === Taxonomy ===
 
 # === Section ===
-[recentlyUpdated]
-other = "最近更新"
+[section]
+recentlyUpdated = "最近更新"
 # === Section ===
 
 # === Pagination ===
-[more]
-other = "更多"
+[pagination]
+more = "更多"
 # === Pagination ===
 
 # === partials/header.html ===
-[selectLanguage]
-other = "選擇語言"
-
-[noMoretTranslations]
-other = "沒有更多翻譯"
-
-[switchTheme]
-other = "切換主題"
+[header]
+selectLanguage = "選擇語言"
+noMoretTranslations = "沒有更多翻譯"
+switchTheme = "切換主題"
 # === partials/header.html ===
 
 # === partials/footer.html ===
-[poweredBySome]
-other = "由 {{ .Hugo }} 強力驅動 | 主題 - {{ .Theme }}"
-
-[siteUV]
-other = "總訪客數"
-
-[sitePV]
-other = "總訪問量"
-
-[siteRunning]
-other = "網站運行中 ..."
+[footer]
+poweredBySome = "由 {{ .Hugo }} 強力驅動 | 主題 - {{ .Theme }}"
+siteUV = "總訪客數"
+sitePV = "總訪問量"
+siteRunning = "網站運行中 ..."
 # === partials/footer.html ===
 
 # === partials/comment.html ===
-[valineLang]
-other = "zh-TW"
-
-[valinePlaceholder]
-other = "你的評論 ..."
-
-[facebookLanguageCode]
-other = "zh-TW"
+[comment]
+valineLang = "zh-TW"
+valinePlaceholder = "你的評論 ..."
+facebookLanguageCode = "zh-TW"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
-[search]
-other = "搜尋"
-
-[searchPlaceholder]
-other = "搜尋文章標題或內容 ..."
-
-[clear]
-other = "清除"
-
-[cancel]
-other = "取消"
-
-[noResultsFound]
-other = "沒有找到結果"
-
-[lunrLanguageCode]
-other = "zh" # 不支持繁體中文
-
-[lunrLanguageLib]
-other = "lib/lunr/lunr.zh.js"
-
-[lunrSegmentitLib]
-other = "lib/lunr/lunr.segmentit.js"
-
-[copyToClipboard]
-other = "複製到剪貼板"
-
-[editLockTitle]
-other = "鎖定可編輯代碼塊"
-
-[editUnLockTitle]
-other = "解鎖可編輯代碼塊"
-
-[cookieconsentMessage]
-other = "本網站使用 Cookies 來改善您的流覽體驗。"
-
-[cookieconsentDismiss]
-other = "同意"
-
-[cookieconsentLink]
-other = "瞭解更多"
+[assets]
+search = "搜尋"
+searchPlaceholder = "搜尋文章標題或內容 ..."
+clear = "清除"
+cancel = "取消"
+noResultsFound = "沒有找到結果"
+lunrLanguageCode = "zh" # 不支持繁體中文
+lunrLanguageLib = "lib/lunr/lunr.zh.js"
+lunrSegmentitLib = "lib/lunr/lunr.segmentit.js"
+copyToClipboard = "複製到剪貼板"
+editLockTitle = "鎖定可編輯代碼塊"
+editUnLockTitle = "解鎖可編輯代碼塊"
+cookieconsentMessage = "本網站使用 Cookies 來改善您的流覽體驗。"
+cookieconsentDismiss = "同意"
+cookieconsentLink = "瞭解更多"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===
@@ -151,67 +97,33 @@ other = "分享到"
 # === partials/plugin/share.html ===
 
 # === posts/single.html ===
-[contents]
-other = "目錄"
+[single]
+contents= "目錄"
+repost= "轉貼"
+publishedOnDate= "發佈於 {{ .Date }}"
+includedInCategories= "收錄於 {{ .Categories }}"
+views = "次閱讀"
+comments = "條評論"
+author = "作者"
+updatedOnDate = "更新於 {{ .Date }}"
+readMarkdown = "閱讀原始文檔"
+editThisPage = "編輯此頁"
+back = "返回"
+home = "主頁"
+readMore = "閱讀全文"
+expirationReminder = "本文最後更新於 {{ .Date }}，文中內容可能已過時。"
+encryptedAbstract = "本文已加密，囙此其原始內容不可見！"
+encryptedMessage = "請輸入密碼"
+password = "密碼"
+encryptyAgain = "重新加密"
 
-[repost]
-other = "轉貼"
-
-[publishedOnDate]
-other = "發佈於 {{ .Date }}"
-
-[includedInCategories]
-other = "收錄於 {{ .Categories }}"
-
-[wordCount]
+[single.wordCount]
 other = "約 {{ .Count }} 字"
 
-[readingTime]
+[single.readingTime]
 other = "預計閱讀 {{ .Count }} 分鐘"
 
-[views]
-other = "次閱讀"
-
-[comments]
-other = "條評論"
-
-[author]
-other = "作者"
-
-[updatedOnDate]
-other = "更新於 {{ .Date }}"
-
-[readMarkdown]
-other = "閱讀原始文檔"
-
-[editThisPage]
-other = "編輯此頁"
-
-[back]
-other = "返回"
-
-[home]
-other = "主頁"
-
-[readMore]
-other = "閱讀全文"
-
-[expirationReminder]
-other = "本文最後更新於 {{ .Date }}，文中內容可能已過時。"
-
-[encryptedAbstract]
-other = "本文已加密，囙此其原始內容不可見！"
-
-[encryptedMessage]
-other = "請輸入密碼"
-
-[password]
-other = "密碼"
-
-[encryptyAgain]
-other = "重新加密"
-
-[reward]
+[single.reward]
 donate = "讚賞"
 wechatpay = "微信"
 alipay = "支付寶"
@@ -236,50 +148,24 @@ other = "您沒有連接到 Internet，只有緩存的頁面可用。"
 # === offline ===
 
 # === shortcodes/admonition.html ===
-[note]
-other = "注意"
-
-[abstract]
-other = "摘要"
-
-[info]
-other = "資訊"
-
-[tip]
-other = "提示"
-
-[success]
-other = "成功"
-
-[question]
-other = "問題"
-
-[warning]
-other = "警告"
-
-[failure]
-other = "失敗"
-
-[danger]
-other = "危險"
-
-[bug]
-other = "Bug"
-
-[example]
-other = "範例"
-
-[quote]
-other = "引用"
+[admonition]
+note = "注意"
+abstract = "摘要"
+info = "資訊"
+tip = "提示"
+success = "成功"
+question = "問題"
+warning = "警告"
+failure = "失敗"
+danger = "危險"
+bug = "Bug"
+example = "範例"
+quote = "引用"
 # === shortcodes/admonition.html ===
 
 # === shortcodes/version.html ===
-[new]
-other = "新增"
-
-[changed]
-other = "更改"
-
-[deleted]
-other = "刪除"
+[version]
+new = "新增"
+changed = "更改"
+deleted = "刪除"
 # === shortcodes/version.html ===

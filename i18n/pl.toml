@@ -4,45 +4,30 @@
 # TODO Some fields are waiting for your translation
 
 # === init ===
-[configurationError]
-other = ""
-
-[compatibilityError]
-other = ""
-
-[RCVersionWarn]
-other = ""
-
-[devEnvWarn]
-other = ""
-
-[quicklyUpgrade]
-other = ""
+[init]
+configurationError = ""
+compatibilityError = ""
+RCVersionWarn = ""
+devEnvWarn = ""
+quicklyUpgrade = ""
 # === init ===
 
 # === baseof ===
-[backToTop]
-other = "Powrót do góry"
-
-[viewComments]
-other = "Zobacz komentarze"
-
-[noscript]
-other = ""
+[baseof]
+backToTop = "Powrót do góry"
+viewComments = "Zobacz komentarze"
+noscript = ""
 # === baseof ===
-
-# === Post ===
-[posts]
-other = "Posty"
-# === Post ===
 
 # === Taxonomy ===
 [allSome]
 other = "Wszystkie {{ .Some }}"
 
-[totalwordCount]
-one = ""
-other = ""
+[category]
+other = "Kategoria"
+
+[categories]
+other = "Kategorie"
 
 [tag]
 other = "Tag"
@@ -50,95 +35,60 @@ other = "Tag"
 [tags]
 other = "Tagi"
 
-[category]
-other = "Kategoria"
+[posts]
+other = "Posty"
 
-[categories]
-other = "Kategorie"
+[taxonomy.totalwordCount]
+one = ""
+other = ""
 # === Taxonomy ===
 
 # === Section ===
-[recentlyUpdated]
-other = "Ostatnio zaktualizowane"
+[section]
+recentlyUpdated = "Ostatnio zaktualizowane"
 # === Section ===
 
 # === Pagination ===
-[more]
-other = "Więcej"
+[pagination]
+more = "Więcej"
 # === Pagination ===
 
 # === partials/header.html ===
-[selectLanguage]
-other = "Wybierz język"
-
-[noMoretTranslations]
-other = "Brak dalszych tłumaczeń"
-
-[switchTheme]
-other = "Przełącz schemat"
+[header]
+selectLanguage = "Wybierz język"
+noMoretTranslations = "Brak dalszych tłumaczeń"
+switchTheme = "Przełącz schemat"
 # === partials/header.html ===
 
 # === partials/footer.html ===
-[poweredBySome]
-other = "Napędzany przez {{ .Hugo }} | Szablon - {{ .Theme }}"
-
-[siteUV]
-other = "Całkowita odwiedzających"
-
-[sitePV]
-other = "Łączna wizyt"
-
-[siteRunning]
-other = "Website running ..."
+[footer]
+poweredBySome = "Napędzany przez {{ .Hugo }} | Szablon - {{ .Theme }}"
+siteUV = "Całkowita odwiedzających"
+sitePV = "Łączna wizyt"
+siteRunning = "Website running ..."
 # === partials/footer.html ===
 
 # === partials/comment.html ===
-[valineLang]
-other = "en" # Valine nie obsługuje języka polskiego
-
-[valinePlaceholder]
-other = "Twój komentarz ..."
-
-[facebookLanguageCode]
-other = "pl"
+[comment]
+valineLang = "en" # Valine nie obsługuje języka polskiego
+valinePlaceholder = "Twój komentarz ..."
+facebookLanguageCode = "pl"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
-[search]
-other = "Szukaj"
-
-[searchPlaceholder]
-other = "Wyszukaj tytuł lub treść artykułu ..."
-
-[clear]
-other = "Pusty"
-
-[cancel]
-other = "Anuluj"
-
-[noResultsFound]
-other = "Nie znaleziono wyników"
-
-[lunrLanguageCode]
-other = "pl"
-
-[copyToClipboard]
-other = "Skopiuj do schowka"
-
-[editLockTitle]
-other = "Zablokuj edytowalny blok kodu"
-
-[editUnLockTitle]
-other = "Odblokuj edytowalny blok kodu"
-
-[cookieconsentMessage]
-other = "Ta strona korzysta z plików Cookies, aby poprawić komfort użytkowania."
-
-[cookieconsentDismiss]
-other = "Zgodzić się"
-
-[cookieconsentLink]
-other = "Ucz się więcej"
+[assets]
+search = "Szukaj"
+searchPlaceholder = "Wyszukaj tytuł lub treść artykułu ..."
+clear = "Pusty"
+cancel = "Anuluj"
+noResultsFound = "Nie znaleziono wyników"
+lunrLanguageCode = "pl"
+copyToClipboard = "Skopiuj do schowka"
+editLockTitle = "Zablokuj edytowalny blok kodu"
+editUnLockTitle = "Odblokuj edytowalny blok kodu"
+cookieconsentMessage = "Ta strona korzysta z plików Cookies, aby poprawić komfort użytkowania."
+cookieconsentDismiss = "Zgodzić się"
+cookieconsentLink = "Ucz się więcej"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===
@@ -147,69 +97,35 @@ other = "Udostępnij na"
 # === partials/plugin/share.html ===
 
 # === posts/single.html ===
-[contents]
-other = "Spis treści"
+[single]
+contents= "Spis treści"
+repost= ""
+publishedOnDate= "opublikowano {{ .Date }}"
+includedInCategories= "zawarty w {{ .Categories }}"
+views = "wyświetleń"
+comments = "komentarzy"
+author = "Autor"
+updatedOnDate = "Zaktualizowano {{ .Date }}"
+readMarkdown = "Zobacz Markdown"
+editThisPage = "Edytuj tą stronę"
+back = "Wstecz"
+home = "Strona główna"
+readMore = "Czytaj więcej"
+expirationReminder = "Ten artykuł był ostatnio aktualizowany {{ .Date }}, jego treść może być nieaktualna."
+encryptedAbstract = ""
+encryptedMessage = ""
+password = "Hasło"
+encryptyAgain = ""
 
-[repost]
-other = ""
-
-[publishedOnDate]
-other = "opublikowano {{ .Date }}"
-
-[includedInCategories]
-other = "zawarty w {{ .Categories }}"
-
-[wordCount]
+[single.wordCount]
 one = "Jedno słowo"
 other = "{{ .Count }} słów"
 
-[readingTime]
+[single.readingTime]
 one = "Jedna minuta"
 other = "{{ .Count }} minuty"
 
-[views]
-other = "wyświetleń"
-
-[comments]
-other = "komentarzy"
-
-[author]
-other = "Autor"
-
-[updatedOnDate]
-other = "Zaktualizowano {{ .Date }}"
-
-[readMarkdown]
-other = "Zobacz Markdown"
-
-[editThisPage]
-other = "Edytuj tą stronę"
-
-[back]
-other = "Wstecz"
-
-[home]
-other = "Strona główna"
-
-[readMore]
-other = "Czytaj więcej"
-
-[expirationReminder]
-other = "Ten artykuł był ostatnio aktualizowany {{ .Date }}, jego treść może być nieaktualna."
-
-[encryptedAbstract]
-other = ""
-
-[encryptedMessage]
-other = ""
-
-[password]
-other = "Hasło"
-
-[encryptyAgain]
-other = ""
-
-[reward]
+[single.reward]
 donate = ""
 wechatpay = ""
 alipay = ""
@@ -234,50 +150,24 @@ other = "Nie masz połączenia z Internetem, dostępne będą tylko strony z pam
 # === offline ===
 
 # === shortcodes/admonition.html ===
-[note]
-other = "Notka"
-
-[abstract]
-other = "Streszczenie"
-
-[info]
-other = "Info"
-
-[tip]
-other = "Wskazówka"
-
-[success]
-other = "Sukces"
-
-[question]
-other = "Pytanie"
-
-[warning]
-other = "Ostrzeżenie"
-
-[failure]
-other = "Błąd"
-
-[danger]
-other = "Niebezpieczeństwo"
-
-[bug]
-other = "Problem"
-
-[example]
-other = "Przykład"
-
-[quote]
-other = "Cytat"
+[admonition]
+note = "Notka"
+abstract = "Streszczenie"
+info = "Info"
+tip = "Wskazówka"
+success = "Sukces"
+question = "Pytanie"
+warning = "Ostrzeżenie"
+failure = "Błąd"
+danger = "Niebezpieczeństwo"
+bug = "Problem"
+example = "Przykład"
+quote = "Cytat"
 # === shortcodes/admonition.html ===
 
 # === shortcodes/version.html ===
-[new]
-other = "Dodano"
-
-[changed]
-other = "Zmieniono"
-
-[deleted]
-other = "Usunięte"
+[version]
+new = "Dodano"
+changed = "Zmieniono"
+deleted = "Usunięte"
 # === shortcodes/version.html ===

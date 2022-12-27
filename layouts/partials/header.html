@@ -92,7 +92,7 @@
         {{- end -}}
         {{- if .Site.IsMultiLingual -}}
           <li class="menu-item language">
-            <span role="button" aria-label="{{ T "selectLanguage" }}" title="{{ T "selectLanguage" }}">
+            <span role="button" aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}">
               {{- .Language.LanguageName -}}
               {{ dict "Class" "dropdown-icon fa-solid fa-chevron-down" | partial "plugin/icon.html" }}
             </span>
@@ -119,18 +119,18 @@
                   {{- end -}}
                 {{- end -}}
               {{- else -}}
-                <li class="menu-item">{{- T "noMoretTranslations" -}}</li>
+                <li class="menu-item">{{- T "header.noMoretTranslations" -}}</li>
               {{- end -}}
             </ul>
           </li>
         {{- end -}}
         {{- if .Site.Params.search.enable -}}
           <li class="menu-item search" id="search-desktop">
-            <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-desktop">
-            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="{{ T `search` }}">
+            <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `assets.searchPlaceholder`) }}" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="{{ T `assets.search` }}">
               {{ dict "Class" "fa-solid fa-search fa-fw" | partial "plugin/icon.html" }}
             </a>
-            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="{{ T `clear` }}">
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="{{ T `assets.clear` }}">
               {{ dict "Class" "fa-solid fa-times-circle fa-fw" | partial "plugin/icon.html" }}
             </a>
             <span class="search-button search-loading" id="search-loading-desktop">
@@ -138,7 +138,7 @@
             </span>
           </li>
         {{- end -}}
-        <li class="menu-item theme-switch" title="{{ T "switchTheme" }}">
+        <li class="menu-item theme-switch" title="{{ T "header.switchTheme" }}">
           {{ dict "Class" "fa-solid fa-adjust fa-fw" | partial "plugin/icon.html" }}
         </li>
       </ul>
@@ -192,11 +192,11 @@
         {{- if .Site.Params.search.enable -}}
           <li class="search-wrapper">
             <div class="search mobile" id="search-mobile">
-              <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `searchPlaceholder`) }}" id="search-input-mobile">
-              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="{{ T `search` }}">
+              <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `assets.searchPlaceholder`) }}" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="{{ T `assets.search` }}">
                 {{ dict "Class" "fa-solid fa-search fa-fw" | partial "plugin/icon.html" }}
               </a>
-              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="{{ T `clear` }}">
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="{{ T `assets.clear` }}">
                 {{ dict "Class" "fa-solid fa-times-circle fa-fw" | partial "plugin/icon.html" }}
               </a>
               <span class="search-button search-loading" id="search-loading-mobile">
@@ -204,7 +204,7 @@
               </span>
             </div>
             <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
-              {{ T `cancel` }}
+              {{ T `assets.cancel` }}
             </a>
           </li>
         {{- end -}}
@@ -274,12 +274,12 @@
             </li>
           {{- end -}}
         {{- end -}}
-        <li class="menu-item theme-switch" title="{{ T "switchTheme" }}">
+        <li class="menu-item theme-switch" title="{{ T "header.switchTheme" }}">
           {{ dict "Class" "fa-solid fa-adjust fa-fw" | partial "plugin/icon.html" }}
         </li>
         {{- if .Site.IsMultiLingual -}}
           <li class="menu-item language">
-            <span role="button" aria-label="{{ T "selectLanguage" }}" title="{{ T "selectLanguage" }}">
+            <span role="button" aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}">
               {{- .Language.LanguageName -}}
               {{ dict "Class" "dropdown-icon fa-solid fa-chevron-down" | partial "plugin/icon.html" }}
             </span>
@@ -298,7 +298,7 @@
                   </option>
                 {{- end -}}
               {{- else -}}
-                <option disabled>{{- T "noMoretTranslations" -}}</option>
+                <option disabled>{{- T "header.noMoretTranslations" -}}</option>
               {{- end -}}
             </select>
           </li>

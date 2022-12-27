@@ -8,14 +8,14 @@
       {{- if ne .Lastmod.Unix .Date.Unix }}
         {{- $postCount = add $postCount 1 -}}
         {{- if eq $hasTitle false -}}
-          <h2 class="group-title">{{- T "recentlyUpdated" -}}</h2>
+          <h2 class="group-title">{{- T "section.recentlyUpdated" -}}</h2>
           {{- $hasTitle = true -}}
         {{- end -}}
         <article class="archive-item">
           <a href="{{ .RelPermalink }}" class="archive-item-link">{{- .Title -}}</a>
           <span class="archive-item-date" title='{{ "2006-01-02 15:04:05" | .Lastmod.Format }}'>
             {{- with .Site.Params.section.dateformat | default "01-02" | .Lastmod.Format -}}
-              {{- dict "Date" . | T "updatedOnDate" -}}
+              {{- dict "Date" . | T "single.updatedOnDate" -}}
             {{- end -}}
           </span>
         </article>
