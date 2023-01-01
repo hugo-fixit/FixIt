@@ -10,7 +10,7 @@
     "atomic-algolia": "^0.3.19",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
-    "core-js": "^3.26.0",
+    "core-js": "^3.27.1",
     "segmentit": "^2.0.3"
   },
   "scripts": {
