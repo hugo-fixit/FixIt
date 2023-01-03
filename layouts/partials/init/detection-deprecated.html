@@ -12,7 +12,7 @@
   {{- $warns = $warns | append "The parameter `autoBookmark` is deprecated since v0.2.17, use `page.autoBookmark` instead." -}}
 {{- end -}}
 {{- with .Site.Params.footer.siteTime -}}
-  {{- if gt (len .) 4 -}}
+  {{- if gt (len .) 5 -}}
     {{- $errors = $errors | append "The parameter `footer.siteTime` has changed to an array since v0.2.17. Please correct the format!" -}}
   {{- end -}}
 {{- end -}}

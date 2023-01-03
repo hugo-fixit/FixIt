@@ -44,15 +44,17 @@
         </div>
       {{- end -}}
 
-      {{- if .Site.Params.footer.siteTime.value | or .Site.Params.footer.wordCount -}}
+      {{- if .Site.Params.footer.siteTime.enable | or .Site.Params.footer.wordCount -}}
         <div class="footer-line statistics{{ with .Site.Params.footer.order.statistics }} order-{{ . }}{{ end }}">
-          {{- with .Site.Params.footer.siteTime -}}
-            <span class="site-time" title='{{ T "footer.siteRunning" }}'>
-              {{- $siteTimeIcon := printf (cond .Animate "%v fa-fw animate-icon" "%v fa-fw") .Icon -}}
-              {{- dict "Class" $siteTimeIcon | partial "plugin/icon.html" -}}
-              {{- with .Pre -}}<span class="ms-1 d-none">{{ . }}</span>{{- end -}}
-              {{- printf `<span class="run-times ms-1">%v</span>` (T "footer.siteRunning") | safeHTML -}}
-            </span>
+          {{- if .Site.Params.footer.siteTime.enable | and .Site.Params.footer.siteTime.value -}}
+            {{- with .Site.Params.footer.siteTime -}}
+              <span class="site-time" title='{{ T "footer.siteRunning" }}'>
+                {{- $siteTimeIcon := printf (cond .Animate "%v fa-fw animate-icon" "%v fa-fw") .Icon -}}
+                {{- dict "Class" $siteTimeIcon | partial "plugin/icon.html" -}}
+                {{- with .Pre -}}<span class="ms-1 d-none">{{ . }}</span>{{- end -}}
+                {{- printf `<span class="run-times ms-1">%v</span>` (T "footer.siteRunning") | safeHTML -}}
+              </span>
+            {{- end -}}
           {{- end -}}
         </div>
       {{- end -}}

@@ -232,8 +232,10 @@
 {{- end -}}
 
 {{- /* Site creation time */ -}}
-{{- with .Site.Params.footer.siteTime.value -}}
-  {{- $config = dict "siteTime" . | merge $config -}}
+{{- if .Site.Params.footer.siteTime.enable -}}
+  {{- with .Site.Params.footer.siteTime.value -}}
+    {{- $config = dict "siteTime" . | merge $config -}}
+  {{- end -}}
 {{- end -}}
 
 {{- /* PWA */ -}}
