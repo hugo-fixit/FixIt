@@ -267,6 +267,10 @@
   {{- end -}}
   {{- dict "Source" $paceJS "Fingerprint" $fingerprint "Async" true "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- dict "Source" $paceCSS "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+  {{- /* To patch pace theme flat-top z-index error */ -}}
+  {{- if eq $.Site.Params.pace.theme "flat-top" -}}
+    {{- dict "Source" "lib/pace/pace-patch-flat-top.css" "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+  {{- end -}}
 {{- end -}}
 
 {{- range $params.library.css -}}
