@@ -33,6 +33,8 @@ All notable changes to this project will be documented in this file.
 - :globe_with_meridians: Docs(i18n): add missing translations for French + enhancements (@Kapusch[#247](https://github.com/hugo-fixit/FixIt/pull/247))
 - :lipstick: Style: refactor css style
 - :lipstick: Style: update home page stylesheet
+- :arrow_up: Chore(libs):
+  - Update Twikoo from 1.4.10 to 1.6.8 and add Katex support for it ([#215](https://github.com/hugo-fixit/FixIt/issues/215) [#243](https://github.com/hugo-fixit/FixIt/issues/243))
 - :wrench: Chore(deps-dev):
   - Bump @babel/cli from 7.18.10 to 7.19.3
   - Bump @babel/core from 7.19.1 to 7.19.6

@@ -18,3 +18,12 @@
   {{- $reward = dict "enable" false -}}
 {{- end -}}
 {{- .Scratch.Set "reward" $reward -}}
+
+{{- /* KaTeX data patch */ -}}
+{{- $math := $params.math -}}
+{{- if eq $math true -}}
+  {{- $math = .Site.Params.page.math | default dict -}}
+{{- else if eq $math false -}}
+  {{- $math = dict "enable" false -}}
+{{- end -}}
+{{- .Scratch.Set "math" $math -}}

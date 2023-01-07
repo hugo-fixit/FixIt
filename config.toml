@@ -502,7 +502,7 @@
         editorTravel = true
         flatMode = "auto"
         maxNesting = 3
-        # It take effect when `params.page.lightgallery` is enabled
+        # FixIt 0.2.17 | CHANGED enable lightgallery support
         lightgallery = false
         locale = "" # FixIt 0.2.15 | NEW
       # FixIt 0.1.1 | NEW Disqus comment config (https://disqus.com)
@@ -593,8 +593,10 @@
         path = ""
         visitor = true
         commentCount = true
-        # It take effect when `params.page.lightgallery` is enabled
+        # FixIt 0.2.17 | CHANGED enable lightgallery support
         lightgallery = false
+        # FixIt 0.2.17 | NEW enable Katex support
+        katex = false
       # FixIt 0.2.14 | NEW Giscus comments config
       [params.page.comment.giscus]
         enable = false

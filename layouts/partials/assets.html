@@ -90,12 +90,7 @@
 {{- end -}}
 
 {{- /* KaTeX */ -}}
-{{- $math := $params.math -}}
-{{- if eq $math true -}}
-  {{- $math = .Site.Params.page.math | default dict -}}
-{{- else if eq $math false -}}
-  {{- $math = dict "enable" false -}}
-{{- end -}}
+{{- $math := .Scratch.Get "math" -}}
 {{- if $math.enable -}}
   {{- $source := $cdn.katexCSS | default "lib/katex/katex.min.css" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
