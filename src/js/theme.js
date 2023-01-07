@@ -828,9 +828,6 @@ class FixIt {
   }
 
   initCommentLightGallery(comments, images) {
-    if (!this.config.lightGallery) {
-      return;
-    }
     document.querySelectorAll(comments).forEach(($content) => {
       const $imgs = $content.querySelectorAll(images + ':not([lightgallery-loaded])');
       $imgs.forEach(($img) => {
