@@ -1,11 +1,10 @@
 # =====================================================================================
 # It's recommended to use Alternate Theme Config to configure FixIt
 # Modifying this file may result in merge conflict
-# See: https://fixit.lruihao.cn/theme-documentation-basics/#site-configuration
 # =====================================================================================
 
 # -------------------------------------------------------------------------------------
-# Menu Settings
+# Menu Configuration
 # See: https://fixit.lruihao.cn/theme-documentation-basics/#menu-advanced-configuration
 # -------------------------------------------------------------------------------------
 
@@ -53,7 +52,8 @@
       icon = "fa-solid fa-tags"
 
 # -------------------------------------------------------------------------------------
-# Theme Core Configuration Settings
+# Theme Core Configuration
+# See: https://fixit.lruihao.cn/theme-documentation-basics/#site-configuration
 # -------------------------------------------------------------------------------------
 
 [params]
@@ -607,7 +607,7 @@
         mapping = ""
         reactionsEnabled = "1"
         emitMetadata = "0"
-        inputPosition = "bottom" # top, bottom
+        inputPosition = "bottom" # ["top", "bottom"]
         lightTheme = "light"
         darkTheme = "dark"
         lazyLoad = true
