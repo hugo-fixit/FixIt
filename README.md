@@ -115,7 +115,7 @@ You could add your FixIt site to the list in **nickname** lexicographical order 
 
 * **Gravatar** supported by [Gravatar](https://gravatar.com)
 * Local **Avatar** supported
-* Up to **85** social links supported
+* Up to **86** social links supported
 * Up to **28** share sites supported
 * **Disqus** comment system supported by [Disqus](https://disqus.com)
 * **Gitalk** comment system supported by [Gitalk](https://github.com/gitalk/gitalk)

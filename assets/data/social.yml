@@ -649,6 +649,14 @@ tryhackme:
   Icon:
     Simpleicons: tryhackme
 
+# 083 douyin
+douyin:
+  Weight: 83
+  Title: 抖音
+  Prefix: https://www.douyin.com/user/
+  Icon:
+    Class: fa-brands fa-tiktok
+
 # Phone
 phone:
   Weight: 997
