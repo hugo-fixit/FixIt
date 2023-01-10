@@ -657,7 +657,7 @@ douyin:
   Icon:
     Class: fa-brands fa-tiktok
 
-# 084 douyin
+# 084 TikTok
 tiktok:
   Weight: 84
   Title: TikTok
