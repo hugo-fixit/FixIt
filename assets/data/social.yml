@@ -657,6 +657,14 @@ douyin:
   Icon:
     Class: fa-brands fa-tiktok
 
+# 084 douyin
+tiktok:
+  Weight: 84
+  Title: TikTok
+  Prefix: https://www.tiktok.com/
+  Icon:
+    Class: fa-brands fa-tiktok
+
 # Phone
 phone:
   Weight: 997

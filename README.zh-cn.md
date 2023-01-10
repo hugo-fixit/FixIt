@@ -117,7 +117,7 @@ FixIt 主题继承了 LoveIt 等主题的优秀功能，并在它们的基础上
 
 * 支持 **[Gravatar](https://gravatar.com)** 头像
 * 支持本地**头像**
-* 支持多达 **86** 种社交链接
+* 支持多达 **87** 种社交链接
 * 支持多达 **28** 种网站分享
 * 支持 **[Disqus](https://disqus.com)** 评论系统
 * 支持 **[Gitalk](https://github.com/gitalk/gitalk)** 评论系统
