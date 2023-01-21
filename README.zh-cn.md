@@ -28,20 +28,22 @@ git clone --recursive https://github.com/hugo-fixit/FixIt.git && cd FixIt
 hugo server --source=docs
 ```
 
-除此之外，还有[FixIt 主题维基](https://github.com/hugo-fixit/FixIt/wiki)。
+除此之外，还有 [FixIt 主题维基](https://github.com/hugo-fixit/FixIt/wiki)。
 
-## 迁移和升级
+## 安装或迁移
 
 如果你现在正在使用 LoveIt 主题（或者一些其他的主题），你可以很容易地迁移至 FixIt。
 
-你可以将这个主题仓库添加为你的网站目录的子模块。
+你可以将这个主题仓库添加为你的网站目录的子模块。或者，您可以通过其他方式 [安装主题](https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/#install-theme)。
 
 ```bash
-# 稳定版
 git submodule add https://github.com/hugo-fixit/FixIt.git themes/FixIt
+```
 
-# ⚠️ 开发版
-git submodule add -b dev https://github.com/hugo-fixit/FixIt.git themes/FixIt
+之后，你可以在站点目录通过这条命令来将主题更新至最新版本：
+
+```bash
+git submodule update --remote --merge
 ```
 
 接着，前往 `config.toml` 并将默认主题更改为 `FixIt`。
@@ -52,14 +54,6 @@ git submodule add -b dev https://github.com/hugo-fixit/FixIt.git themes/FixIt
 ```
 
 这样就完成了迁移工作，现在一切准备就绪 🎉
-
----
-
-之后，你可以在站点目录通过这条命令来将主题更新至最新版本：
-
-```bash
-git submodule update --remote --merge
-```
 
 ## 为什么选择 FixIt
 
@@ -73,23 +67,16 @@ FixIt 主题继承了 LoveIt 等主题的优秀功能，并在它们的基础上
 
 总之，如果你更偏好 FixIt 主题的设计语言和自由度，如果你和我一样喜欢个性化自定义主题，那么，FixIt 主题可能是更适合你。  
 
-## [谁在用 FixIt](https://fixit.lruihao.cn/zh-cn/friends/)
+## 谁在用 FixIt
 
-| 📌 站点                                                       | 仓库                                                         |
+为了直观地浏览主题特性，这里有一些基于 **FixIt** 主题渲染的 [预览网站](https://fixit.lruihao.cn/zh-cn/friends/)。
+
+| 站点                                                          | 仓库                                                         |
 | :----------------------------------------------------------- | :---------------------------------------------------------- |
 | [FixIt 主题官网](https://fixit.lruihao.cn), [FixIt 预览版](https://pre.fixit.lruihao.cn) | [hugo-fixit/docs](https://github.com/hugo-fixit/docs)        |
 | [FixIt 博客模板 - Git](https://demo.fixit.lruihao.cn)   | [hugo-fixit/hugo-fixit-blog-git](https://github.com/hugo-fixit/hugo-fixit-blog-git) |
 | [FixIt 博客模板 - Go](https://demo.fixit.lruihao.cn)    | [hugo-fixit/hugo-fixit-blog-go](https://github.com/hugo-fixit/hugo-fixit-blog-go) |
-| [李瑞豪的博客](https://lruihao.cn)                         | [Lruihao/hugo-blog](https://github.com/Lruihao/hugo-blog)    |
-
-为了直观地浏览主题特性，这里有一些基于 **FixIt** 主题渲染的预览网站。
-
-* [Ayang 的博客](https://ayang.ink)
-* [hiifong 的博客](https://i.hiifong.cc)
-* [Niku 的博客](https://www.nikunokoya.com)
-* [wlanxww 的博客](https://wlanxww.com)
-
-你可以 [提交 PR](https://github.com/hugo-fixit/FixIt/pulls) 按 **nickname** 以字典顺序将您的 FixIt 网站添加到列表中。（例如：[#111](https://github.com/hugo-fixit/FixIt/pull/111)）
+| [李瑞豪的博客](https://lruihao.cn)                       | [Lruihao/hugo-blog](https://github.com/Lruihao/hugo-blog)    |
 
 ## 特性
 

@@ -28,18 +28,20 @@ hugo server --source=docs
 
 In addition, there is the [FixIt wiki](https://github.com/hugo-fixit/FixIt/wiki).
 
-## Migrate and Update
+## Install or Migrate
 
 If you are currently using the LoveIt theme (or some other themes), it is very easy to migrate to FixIt.
 
-You can add this repo as a submodule of your site directory.
+You can add this repo as a submodule of your site directory. Alternatively, you can [install the theme](https://fixit.lruihao.cn/theme-documentation-basics/#install-theme) in other ways.
 
 ```bash
-# Stable version
 git submodule add https://github.com/hugo-fixit/FixIt.git themes/FixIt
+```
 
-# ⚠️ Dev version
-git submodule add -b dev https://github.com/hugo-fixit/FixIt.git themes/FixIt
+And later you can update the submodule in your site directory to the latest commit using this command:
+
+```bash
+git submodule update --remote --merge
 ```
 
 Next, go to the `config.toml` and change the default theme to `FixIt`.
@@ -50,14 +52,6 @@ Next, go to the `config.toml` and change the default theme to `FixIt`.
 ```
 
 Now the migration is finished and everything is ready 🎉
-
----
-
-And later you can update the submodule in your site directory to the latest commit using this command:
-
-```bash
-git submodule update --remote --merge
-```
 
 ## Why choose FixIt
 
@@ -71,23 +65,16 @@ The FixIt theme inherits the excellent features of themes such as LoveIt, and ad
 
 In short, if you prefer the design language and freedom of the FixIt theme, and if you like to personalize your own themes as I do, the FixIt theme may be more suitable for you.
 
-## [Who used FixIt](https://fixit.lruihao.cn/friends/)
+## Who used FixIt
 
-| 📌 Site                                                       | Repo                                                         |
+To see this theme in action, here are some [live demo sites](https://fixit.lruihao.cn/friends/) which are rendered with **FixIt** theme.
+
+| Site                                                         | Repo                                                         |
 | :----------------------------------------------------------- | :----------------------------------------------------------- |
 | [FixIt Theme Official Website](https://fixit.lruihao.cn), [FixIt Preview](https://pre.fixit.lruihao.cn) | [hugo-fixit/docs](https://github.com/hugo-fixit/docs)        |
 | [FixIt Blog Template - Git](https://demo.fixit.lruihao.cn)   | [hugo-fixit/hugo-fixit-blog-git](https://github.com/hugo-fixit/hugo-fixit-blog-git) |
 | [FixIt Blog Template - Go](https://demo.fixit.lruihao.cn)    | [hugo-fixit/hugo-fixit-blog-go](https://github.com/hugo-fixit/hugo-fixit-blog-go) |
 | [Lruihao's note](https://lruihao.cn)                         | [Lruihao/hugo-blog](https://github.com/Lruihao/hugo-blog)    |
-
-To see this theme in action, here are some live demo sites which are rendered with **FixIt** theme.
-
-* [Ayang's blog](https://ayang.ink)
-* [hiifong's blog](https://i.hiifong.cc)
-* [Niku's blog](https://www.nikunokoya.com)
-* [wlanxww's blog](https://wlanxww.com)
-
-You could add your FixIt site to the list in **nickname** lexicographical order via [making a PR](https://github.com/hugo-fixit/FixIt/pulls). (e.g. [#111](https://github.com/hugo-fixit/FixIt/pull/111))
 
 ## Features
 
