@@ -5,7 +5,7 @@
   "private": true,
   "devDependencies": {
     "@babel/cli": "^7.20.7",
-    "@babel/core": "^7.19.6",
+    "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
     "atomic-algolia": "^0.3.19",
     "babelify": "^10.0.0",
