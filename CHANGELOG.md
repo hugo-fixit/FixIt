@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/hugo-fixit/FixIt/releases -->
 
-## v0.2.17
+## v0.2.17 [2023.1.29]
 
 > Snapshot: <>
 
@@ -29,6 +29,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: can't keep the static table of the contents in front of the post
 - :bug: Fix: escape hashtag character `#` in tag and category ([#245](https://github.com/hugo-fixit/FixIt/issues/245))
 - :bug: Fix: pangu.js cdn error
+- :bug: Fix: sitemap.xml link in robots.txt doesn't point to main sitemap (@Mejituu[#276](https://github.com/hugo-fixit/FixIt/pull/276))
 - :recycle: Refactor(i18n): hierarchize translation fields for supported languages
 - :globe_with_meridians: Docs(i18n): add missing translations for French + enhancements (@Kapusch[#247](https://github.com/hugo-fixit/FixIt/pull/247))
 - :lipstick: Style: refactor css style
@@ -36,10 +37,10 @@ All notable changes to this project will be documented in this file.
 - :arrow_up: Chore(libs):
   - Update Twikoo from 1.4.10 to 1.6.8 and add Katex support for it ([#215](https://github.com/hugo-fixit/FixIt/issues/215) [#243](https://github.com/hugo-fixit/FixIt/issues/243))
 - :wrench: Chore(deps-dev):
-  - Bump @babel/cli from 7.18.10 to 7.19.3
-  - Bump @babel/core from 7.19.1 to 7.19.6
-  - Bump @babel/preset-env from 7.18.10 to 7.19.4
-  - Bump core-js from 3.25.2 to 3.26.0
+  - Bump @babel/cli from 7.18.10 to 7.20.7
+  - Bump @babel/core from 7.19.1 to 7.20.12
+  - Bump @babel/preset-env from 7.18.10 to 7.20.2
+  - Bump core-js from 3.25.2 to 3.27.2
 
 - **Full Changelog:** @Lruihao [`v0.2.16...v0.2.17`](https://github.com/hugo-fixit/FixIt/compare/v0.2.16...v0.2.17)
 
