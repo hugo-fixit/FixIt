@@ -62,8 +62,8 @@
         </a>
     </td>
     <td align="center">
-        <a href="https://github.com/realsangil">
-            <img src="https://avatars.githubusercontent.com/u/15508203?v=4" width="100;" alt="realsangil"/>
+        <a href="https://github.com/psi59">
+            <img src="https://avatars.githubusercontent.com/u/15508203?v=4" width="100;" alt="psi59"/>
             <br />
             <sub><b>Sangil Park</b></sub>
         </a>
@@ -112,12 +112,27 @@
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/Kapusch">
+            <img src="https://avatars.githubusercontent.com/u/9576733?v=4" width="100;" alt="Kapusch"/>
+            <br />
+            <sub><b>Jean-Emmanuel BAILLAT</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/n0tr00teuorg">
+            <img src="https://avatars.githubusercontent.com/u/106423923?v=4" width="100;" alt="n0tr00teuorg"/>
+            <br />
+            <sub><b>N0tr00t</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/dogukanerel">
             <img src="https://avatars.githubusercontent.com/u/19349444?v=4" width="100;" alt="dogukanerel"/>
             <br />
             <sub><b>Doğukan Erel</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/devandreacarratta">
             <img src="https://avatars.githubusercontent.com/u/46504271?v=4" width="100;" alt="devandreacarratta"/>
@@ -131,8 +146,7 @@
             <br />
             <sub><b>Carlos Manuel Soares</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/AutomationD">
             <img src="https://avatars.githubusercontent.com/u/1790594?v=4" width="100;" alt="AutomationD"/>
@@ -155,6 +169,14 @@
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/Mejituu">
+            <img src="https://avatars.githubusercontent.com/u/36153418?v=4" width="100;" alt="Mejituu"/>
+            <br />
+            <sub><b>Mejituu</b></sub>
+        </a>
+    </td></tr>
+<tr>
+    <td align="center">
         <a href="https://github.com/NicoDreamzZ">
             <img src="https://avatars.githubusercontent.com/u/12086166?v=4" width="100;" alt="NicoDreamzZ"/>
             <br />
@@ -174,8 +196,7 @@
             <br />
             <sub><b>Silke Henderickx</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/tlereste">
             <img src="https://avatars.githubusercontent.com/u/12964583?v=4" width="100;" alt="tlereste"/>
@@ -196,7 +217,8 @@
             <br />
             <sub><b>Victor Pogor</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/wtchangdm">
             <img src="https://avatars.githubusercontent.com/u/1546333?v=4" width="100;" alt="wtchangdm"/>
@@ -205,20 +227,12 @@
         </a>
     </td>
     <td align="center">
-        <a href="https://github.com/wakehuang">
-            <img src="https://avatars.githubusercontent.com/u/14356434?v=4" width="100;" alt="wakehuang"/>
-            <br />
-            <sub><b>WakeHuang</b></sub>
-        </a>
-    </td>
-    <td align="center">
         <a href="https://github.com/anup92k">
             <img src="https://avatars.githubusercontent.com/u/51033013?v=4" width="100;" alt="anup92k"/>
             <br />
             <sub><b>Anup</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/codedge">
             <img src="https://avatars.githubusercontent.com/u/4409904?v=4" width="100;" alt="codedge"/>
@@ -246,7 +260,8 @@
             <br />
             <sub><b>Onisuly</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/quyleanh">
             <img src="https://avatars.githubusercontent.com/u/9365035?v=4" width="100;" alt="quyleanh"/>
@@ -260,8 +275,7 @@
             <br />
             <sub><b>Sarath Sadasivan Pillai</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/tomaja-linuxo">
             <img src="https://avatars.githubusercontent.com/u/37209662?v=4" width="100;" alt="tomaja-linuxo"/>
