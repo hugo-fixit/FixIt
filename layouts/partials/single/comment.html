@@ -156,6 +156,9 @@
       {{- with $waline.recaptchaV3Key -}}
         {{- $commentConfig = dict "recaptchaV3Key" . | dict "waline" | merge $commentConfig -}}
       {{- end -}}
+      {{- with $waline.reaction -}}
+        {{- $commentConfig = dict "reaction" . | dict "waline" | merge $commentConfig -}}
+      {{- end -}}
       <noscript>
         Please enable JavaScript to view the comments powered by <a href="https://waline.js.org/" rel="external nofollow noopener noreferrer">Waline</a>.
       </noscript>
