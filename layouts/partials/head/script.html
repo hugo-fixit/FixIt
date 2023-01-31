@@ -1,8 +1,0 @@
-{{- $fingerprint := .Scratch.Get "fingerprint" -}}
-
-{{- /* instant.page */ -}}
-{{- if .Site.Params.enableInstantPage -}}
-  {{- $options := dict "targetPath" "lib/instant-page/instantpage-5.1.1.min.js" "minify" true -}}
-  {{- $source := resources.Get "lib/instant-page/instantpage-5.1.1.js" -}}
-  {{- dict "Source" $source "Build" $options "Fingerprint" $fingerprint "Attr" "type=\"module\"" "Defer" true | partial "plugin/script.html" -}}
-{{- end -}}

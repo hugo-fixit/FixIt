@@ -1,7 +1,6 @@
 {{- $reward := .Reward -}}
 {{- $id := .Id -}}
 {{- $author := .Author -}}
-{{- $loading := resources.Get "svg/loading.svg" | minify -}}
 
 {{- if $reward.enable -}}
   <div class="post-reward">
@@ -15,7 +14,7 @@
         {{- end -}}
         {{- if $image -}}
           <div>
-            <img class="lazyautosizes lazyload" src="{{ $loading.RelPermalink }}" data-src="{{ $image }}" data-sizes="auto" alt="{{ $author }} {{ $way }}">
+            {{- dict "Src" $image "Alt" (printf "%v %v" $author $way) "Resources" $.Resources | partial "plugin/image.html" -}}
             <span{{- if $reward.animation }} data-animation{{- end -}}>{{- $way -}}</span>
           </div>
         {{- end -}}
