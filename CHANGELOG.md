@@ -3,9 +3,19 @@
 All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/hugo-fixit/FixIt/releases -->
 
-## v0.2.17 [2023.1.29]
+## v0.2.18
 
 > Snapshot: <>
+
+- :sparkles: Feat: add instant page (@Mejituu[#279](https://github.com/hugo-fixit/FixIt/pull/279))
+- :bug: Fix: donate images without lazy loading (@Mejituu[#279](https://github.com/hugo-fixit/FixIt/pull/279))
+- :arrow_up: Chore(libs):
+  - Update Update @waline/client from 2.10.0 to 2.14.7 (@Mejituu[#279](https://github.com/hugo-fixit/FixIt/pull/279))
+- **Full Changelog:** @Lruihao [`v0.2.16...v0.2.17`](https://github.com/hugo-fixit/FixIt/compare/v0.2.16...v0.2.17)
+
+## v0.2.17 [2023.1.29]
+
+> Snapshot: <https://fixit-pcwilecsu-x-cell.vercel.app>
 
 - :tada: Feat: add support for [Fusejs search](https://fusejs.io/) ([#203](https://github.com/hugo-fixit/FixIt/issues/203))
 - :sparkles: Feat: add feature post reward support ([#216](https://github.com/hugo-fixit/FixIt/issues/216), @Lruihao[#234](https://github.com/hugo-fixit/FixIt/pull/234))
@@ -41,7 +51,6 @@ All notable changes to this project will be documented in this file.
   - Bump @babel/core from 7.19.1 to 7.20.12
   - Bump @babel/preset-env from 7.18.10 to 7.20.2
   - Bump core-js from 3.25.2 to 3.27.2
-
 - **Full Changelog:** @Lruihao [`v0.2.16...v0.2.17`](https://github.com/hugo-fixit/FixIt/compare/v0.2.16...v0.2.17)
 
 ## v0.2.16 [2022.9.24]
