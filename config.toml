@@ -380,6 +380,8 @@
     readingTime = true
     # FixIt 0.2.17 | NEW end of post flag
     endFlag = ""
+    # FixIt 0.2.18 | NEW whether to enable instant.page
+    instantPage = false
 
     # FixIt 0.2.15 | NEW Repost config
     [params.page.repost]
@@ -558,6 +560,7 @@
         texRenderer = false # FixIt 0.2.16 | NEW
         search = false # FixIt 0.2.16 | NEW
         recaptchaV3Key = "" # FixIt 0.2.16 | NEW
+        reaction = false # FixIt 0.2.18 | NEW
       # Facebook comment config (https://developers.facebook.com/docs/plugins/comments)
       [params.page.comment.facebook]
         enable = false
@@ -607,6 +610,7 @@
         category = ""
         categoryId = ""
         mapping = ""
+        term = ""
         reactionsEnabled = "1"
         emitMetadata = "0"
         inputPosition = "bottom" # ["top", "bottom"]

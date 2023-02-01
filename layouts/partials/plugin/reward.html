@@ -14,7 +14,7 @@
         {{- end -}}
         {{- if $image -}}
           <div>
-            <img src="{{ $image }}" alt="{{ $author }} {{ $way }}">
+            {{- dict "Src" $image "Alt" (printf "%v %v" $author $way) "Resources" $.Resources | partial "plugin/image.html" -}}
             <span{{- if $reward.animation }} data-animation{{- end -}}>{{- $way -}}</span>
           </div>
         {{- end -}}
