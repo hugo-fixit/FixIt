@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 
 - :sparkles: Feat: add instant page (@Mejituu[#279](https://github.com/hugo-fixit/FixIt/pull/279))
 - :bug: Fix: donate images without lazy loading (@Mejituu[#279](https://github.com/hugo-fixit/FixIt/pull/279))
+- :wrench: Chore: change the theme minimum supported Hugo versions above **0.89.0**
 - :arrow_up: Chore(libs):
   - Update Update @waline/client from 2.10.0 to 2.14.7 (@Mejituu[#279](https://github.com/hugo-fixit/FixIt/pull/279))
 - **Full Changelog:** @Lruihao [`v0.2.16...v0.2.17`](https://github.com/hugo-fixit/FixIt/compare/v0.2.16...v0.2.17)
