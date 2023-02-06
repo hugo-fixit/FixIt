@@ -102,7 +102,7 @@
   # FixIt 0.2.0 | NEW Search config
   [params.search]
     enable = true
-    # type of search engine ["lunr", "algolia", "fuse]
+    # type of search engine ["lunr", "algolia", "fuse"]
     type = "lunr"
     # max index length of the chunked content
     contentLength = 4000
@@ -354,6 +354,7 @@
     # FixIt 0.2.0 | NEW whether to enable twemoji
     twemoji = false
     # whether to enable lightgallery
+    # FixIt 0.2.18 | CHANGED if set to "force", images in the content will be forced to shown as the gallery.
     lightgallery = false
     # FixIt 0.2.0 | NEW whether to enable the ruby extended syntax
     ruby = true

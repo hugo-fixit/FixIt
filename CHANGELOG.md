@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 > Snapshot: <>
 
 - :sparkles: Feat: add instant page (@Mejituu[#279](https://github.com/hugo-fixit/FixIt/pull/279))
+- :sparkles: Feat: add `force` option value to `params.page.lightgallery`
 - :bug: Fix: donate images without lazy loading (@Mejituu[#279](https://github.com/hugo-fixit/FixIt/pull/279))
 - :wrench: Chore: change the theme minimum supported Hugo versions above **0.89.0**
 - :arrow_up: Chore(libs):

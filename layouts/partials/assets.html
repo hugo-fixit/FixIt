@@ -56,7 +56,7 @@
 {{- end -}}
 
 {{- /* lightgallery */ -}}
-{{- if $params.lightgallery -}}
+{{- if $params.lightgallery | or (eq $params.lightgallery "force") -}}
   {{- $source := $cdn.lightgalleryCSS | default "lib/lightgallery/css/lightgallery-bundle.min.css" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
   {{- $source := $cdn.lightgalleryJS | default "lib/lightgallery/lightgallery.min.js" -}}
