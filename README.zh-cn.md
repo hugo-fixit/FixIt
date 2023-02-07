@@ -145,7 +145,7 @@ FixIt 主题继承了 LoveIt 等主题的优秀功能，并在它们的基础上
 * 支持基于 [cookieconsent](https://github.com/osano/cookieconsent) 的 **Cookie 许可横幅**
 * 支持基于 [cell-watermark](https://github.com/Lruihao/watermark) 的**网页水印**
 * 支持基于 [pangu.js](https://github.com/vinta/pangu.js) 的**中文排版**
-* ...
+* ……
 
 ## 多语言和国际化
 
@@ -248,7 +248,7 @@ FixIt 根据 **MIT** 许可协议授权。 更多信息请查看 [LICENSE 文件
 
 ## 赞助支持
 
-如果你喜爱这个主题，请考虑给我买杯咖啡 ☕️.
+如果你喜爱这个主题，请考虑给我买杯咖啡 ☕️。
 
 * [PayPal](https://paypal.me/Lruihao)
 * [支付宝](images/alipay.gif)

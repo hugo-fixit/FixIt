@@ -63,20 +63,20 @@ switchTheme = "切換主題"
 poweredBySome = "由 {{ .Hugo }} 強力驅動 | 主題 - {{ .Theme }}"
 siteUV = "總訪客數"
 sitePV = "總訪問量"
-siteRunning = "網站運行中 ..."
+siteRunning = "網站運行中……"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
 [comment]
 valineLang = "zh-TW"
-valinePlaceholder = "你的評論 ..."
+valinePlaceholder = "你的評論……"
 facebookLanguageCode = "zh-TW"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
 [assets]
 search = "搜尋"
-searchPlaceholder = "搜尋文章標題或內容 ..."
+searchPlaceholder = "搜尋文章標題或內容……"
 clear = "清除"
 cancel = "取消"
 noResultsFound = "沒有找到結果"

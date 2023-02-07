@@ -63,20 +63,20 @@ switchTheme = "切换主题"
 poweredBySome = "由 {{ .Hugo }} 强力驱动 | 主题 - {{ .Theme }}"
 siteUV = "总访客数"
 sitePV = "总访问量"
-siteRunning = "网站运行中 ..."
+siteRunning = "网站运行中……"
 # === partials/footer.html ===
 
 # === partials/comment.html ===
 [comment]
 valineLang = "zh-cn"
-valinePlaceholder = "你的评论 ..."
+valinePlaceholder = "你的评论……"
 facebookLanguageCode = "zh_CN"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
 [assets]
 search = "搜索"
-searchPlaceholder = "搜索文章标题或内容 ..."
+searchPlaceholder = "搜索文章标题或内容……"
 clear = "清空"
 cancel = "取消"
 noResultsFound = "没有找到结果"
