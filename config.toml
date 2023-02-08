@@ -810,7 +810,8 @@
       type = "vConsole"
 
 # -------------------------------------------------------------------------------------
-# Hugo version required
+# Modules Configure
+# See: https://gohugo.io/hugo-modules/configuration/#module-config-imports
 # -------------------------------------------------------------------------------------
 [module]
   [module.hugoVersion]
