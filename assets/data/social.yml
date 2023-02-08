@@ -573,7 +573,7 @@ discord:
     Class: fa-brands fa-discord fa-fw
 
 # 073: Discord Server Invite Link
-discordInvite:
+discordinvite:
   Weight: 73
   Prefix: https://discord.gg/
   Title: Discord
