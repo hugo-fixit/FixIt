@@ -14,23 +14,24 @@ FixIt 主题继承了这些主题的优秀功能，并在此基础上添加了�
 
 ![Hugo Theme FixIt](https://fixit.lruihao.cn/images/Apple-Devices-Preview.jpg)
 
-## [立即开始](https://fixit.lruihao.cn/zh-cn/categories/documentation/)
+## 快速上手
+
+使用以下模板之一：
+
+* [hugo-fixit/hugo-fixit-blog-git](https://github.com/hugo-fixit/hugo-fixit-blog-git)
+* [hugo-fixit/hugo-fixit-blog-go](https://github.com/hugo-fixit/hugo-fixit-blog-go)
+* [hugo-fixit/docs](https://github.com/hugo-fixit/docs "FixIt 主题官网")
+* [Lruihao/hugo-blog](https://github.com/Lruihao/hugo-blog "FixIt 主题作者的博客")
+
+## [完整文档](https://fixit.lruihao.cn/zh-cn/categories/documentation/)
 
 前往这篇 [文档](https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/)，阅读关于安装与使用的详细指南。
 
-或者，在本地构建 [文档](https://fixit.lruihao.cn/zh-cn/)：
-
-> Gitee 镜像仓库：<https://gitee.com/lruihao/FixIt>
-
-```bash
-git clone --recursive https://github.com/hugo-fixit/FixIt.git && cd FixIt
-
-hugo server --source=docs
-```
+或者在本地运行 [文档站点](https://fixit.lruihao.cn/zh-cn/)，更多细节详见 [参与贡献](#参与贡献)。
 
 除此之外，还有 [FixIt 主题维基](https://github.com/hugo-fixit/FixIt/wiki)。
 
-## 安装或迁移
+## 从 LoveIt 迁移
 
 如果你现在正在使用 LoveIt 主题（或者一些其他的主题），你可以很容易地迁移至 FixIt。
 
@@ -70,13 +71,6 @@ FixIt 主题继承了 LoveIt 等主题的优秀功能，并在它们的基础上
 ## 谁在用 FixIt
 
 为了直观地浏览主题特性，这里有一些基于 **FixIt** 主题渲染的 [预览网站](https://fixit.lruihao.cn/zh-cn/friends/)。
-
-| 站点                                                          | 仓库                                                         |
-| :----------------------------------------------------------- | :---------------------------------------------------------- |
-| [FixIt 主题官网](https://fixit.lruihao.cn), [FixIt 预览版](https://pre.fixit.lruihao.cn) | [hugo-fixit/docs](https://github.com/hugo-fixit/docs)        |
-| [FixIt 博客模板 - Git](https://demo.fixit.lruihao.cn)   | [hugo-fixit/hugo-fixit-blog-git](https://github.com/hugo-fixit/hugo-fixit-blog-git) |
-| [FixIt 博客模板 - Go](https://demo.fixit.lruihao.cn)    | [hugo-fixit/hugo-fixit-blog-go](https://github.com/hugo-fixit/hugo-fixit-blog-go) |
-| [李瑞豪的博客](https://lruihao.cn)                       | [Lruihao/hugo-blog](https://github.com/Lruihao/hugo-blog)    |
 
 ## 特性
 
@@ -185,6 +179,10 @@ FixIt 支持下列语言：
 **贡献时，请先通过此存储库上的问题讨论您希望进行的更改，然后再进行实际更改**。
 
 ## [所有贡献者](contributors.md)
+
+## 镜像
+
+* Gitee 镜像仓库：<https://gitee.com/lruihao/FixIt>
 
 ## 致谢
 

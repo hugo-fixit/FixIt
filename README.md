@@ -14,21 +14,24 @@ The FixIt theme inherits the excellent features of these themes, and adds new fe
 
 ![Hugo Theme FixIt](https://fixit.lruihao.cn/images/Apple-Devices-Preview.jpg)
 
-## [Getting started](https://fixit.lruihao.cn/categories/documentation/)
+## Getting started
+
+Use one of these templates:
+
+* [hugo-fixit/hugo-fixit-blog-git](https://github.com/hugo-fixit/hugo-fixit-blog-git)
+* [hugo-fixit/hugo-fixit-blog-go](https://github.com/hugo-fixit/hugo-fixit-blog-go)
+* [hugo-fixit/docs](https://github.com/hugo-fixit/docs "FixIt Theme Official Website")
+* [Lruihao/hugo-blog](https://github.com/Lruihao/hugo-blog "Blog of the author of the FixIt theme")
+
+## [Documentation](https://fixit.lruihao.cn/categories/documentation/)
 
 Head to this [documentation page](https://fixit.lruihao.cn/theme-documentation-basics/) for a complete guidence to get started with the FixIt theme.
 
-Or run [Documentation Site](https://fixit.lruihao.cn) locally:
-
-```bash
-git clone --recursive https://github.com/hugo-fixit/FixIt.git && cd FixIt
-
-hugo server --source=docs
-```
+Or run [Documentation Site](https://fixit.lruihao.cn) locally, see more details from [Contributing](#contributing).
 
 In addition, there is the [FixIt wiki](https://github.com/hugo-fixit/FixIt/wiki).
 
-## Install or Migrate
+## Migrate from LoveIt
 
 If you are currently using the LoveIt theme (or some other themes), it is very easy to migrate to FixIt.
 
@@ -68,13 +71,6 @@ In short, if you prefer the design language and freedom of the FixIt theme, and 
 ## Who used FixIt
 
 To see this theme in action, here are some [live demo sites](https://fixit.lruihao.cn/friends/) which are rendered with **FixIt** theme.
-
-| Site                                                         | Repo                                                         |
-| :----------------------------------------------------------- | :----------------------------------------------------------- |
-| [FixIt Theme Official Website](https://fixit.lruihao.cn), [FixIt Preview](https://pre.fixit.lruihao.cn) | [hugo-fixit/docs](https://github.com/hugo-fixit/docs)        |
-| [FixIt Blog Template - Git](https://demo.fixit.lruihao.cn)   | [hugo-fixit/hugo-fixit-blog-git](https://github.com/hugo-fixit/hugo-fixit-blog-git) |
-| [FixIt Blog Template - Go](https://demo.fixit.lruihao.cn)    | [hugo-fixit/hugo-fixit-blog-go](https://github.com/hugo-fixit/hugo-fixit-blog-go) |
-| [Lruihao's note](https://lruihao.cn)                         | [Lruihao/hugo-blog](https://github.com/Lruihao/hugo-blog)    |
 
 ## Features
 
