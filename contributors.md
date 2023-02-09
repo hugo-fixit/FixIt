@@ -76,20 +76,27 @@
         </a>
     </td>
     <td align="center">
+        <a href="https://github.com/Mejituu">
+            <img src="https://avatars.githubusercontent.com/u/36153418?v=4" width="100;" alt="Mejituu"/>
+            <br />
+            <sub><b>Mejituu</b></sub>
+        </a>
+    </td>
+    <td align="center">
         <a href="https://github.com/ctj12461">
             <img src="https://avatars.githubusercontent.com/u/42143810?v=4" width="100;" alt="ctj12461"/>
             <br />
             <sub><b>Justin Chen</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/edte">
             <img src="https://avatars.githubusercontent.com/u/50194671?v=4" width="100;" alt="edte"/>
             <br />
             <sub><b>Edte</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/solarpowerinncr">
             <img src="https://avatars.githubusercontent.com/u/37186560?v=4" width="100;" alt="solarpowerinncr"/>
@@ -124,15 +131,15 @@
             <br />
             <sub><b>N0tr00t</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/dogukanerel">
             <img src="https://avatars.githubusercontent.com/u/19349444?v=4" width="100;" alt="dogukanerel"/>
             <br />
             <sub><b>Doğukan Erel</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/devandreacarratta">
             <img src="https://avatars.githubusercontent.com/u/46504271?v=4" width="100;" alt="devandreacarratta"/>
@@ -167,15 +174,15 @@
             <br />
             <sub><b>Mark-Daniel Lüthje</b></sub>
         </a>
-    </td>
-    <td align="center">
-        <a href="https://github.com/Mejituu">
-            <img src="https://avatars.githubusercontent.com/u/36153418?v=4" width="100;" alt="Mejituu"/>
-            <br />
-            <sub><b>Mejituu</b></sub>
-        </a>
     </td></tr>
 <tr>
+    <td align="center">
+        <a href="https://github.com/mathieu-gilloots">
+            <img src="https://avatars.githubusercontent.com/u/1282351?v=4" width="100;" alt="mathieu-gilloots"/>
+            <br />
+            <sub><b>Mathieu GILLOOTS</b></sub>
+        </a>
+    </td>
     <td align="center">
         <a href="https://github.com/NicoDreamzZ">
             <img src="https://avatars.githubusercontent.com/u/12086166?v=4" width="100;" alt="NicoDreamzZ"/>
@@ -210,15 +217,15 @@
             <br />
             <sub><b>Vanildo Souto Mangueira</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/victor-pogor">
             <img src="https://avatars.githubusercontent.com/u/24962085?v=4" width="100;" alt="victor-pogor"/>
             <br />
             <sub><b>Victor Pogor</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/wtchangdm">
             <img src="https://avatars.githubusercontent.com/u/1546333?v=4" width="100;" alt="wtchangdm"/>
@@ -253,15 +260,15 @@
             <br />
             <sub><b>Niku</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/onisuly">
             <img src="https://avatars.githubusercontent.com/u/8399827?v=4" width="100;" alt="onisuly"/>
             <br />
             <sub><b>Onisuly</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/quyleanh">
             <img src="https://avatars.githubusercontent.com/u/9365035?v=4" width="100;" alt="quyleanh"/>
