@@ -123,7 +123,7 @@
       font-size: 0.618rem;
     }
   }
-  
+
   .pagination .page-item {
     margin: 0 5px;
   }
@@ -168,7 +168,7 @@
   .post-info-more section:last-child,
   .post-nav,
   .fixed-buttons,
-  #comments,
+  .single>#comments,
   .github-corner {
     display: none !important;
   }

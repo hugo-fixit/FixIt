@@ -7,12 +7,14 @@ All notable changes to this project will be documented in this file.
 
 > Snapshot: <>
 
-- :sparkles: Feat: add instant page (@Mejituu[#279](https://github.com/hugo-fixit/FixIt/pull/279))
+- :sparkles: Feat: add instant page (@Mejituu [#279](https://github.com/hugo-fixit/FixIt/pull/279))
 - :sparkles: Feat: add `force` option value to `params.page.lightgallery`
-- :bug: Fix: donate images without lazy loading (@Mejituu[#279](https://github.com/hugo-fixit/FixIt/pull/279))
+- :bug: Fix: donate images without lazy loading (@Mejituu [#279](https://github.com/hugo-fixit/FixIt/pull/279))
+- :bug: Fix: discordinvite typo (@mathieu-gilloots [#282](https://github.com/hugo-fixit/FixIt/pull/282))
+- :art: Style: fix `#comments` css style conflict ([#269](https://github.com/hugo-fixit/FixIt/issues/269))
 - :wrench: Chore: change the theme minimum supported Hugo versions above **0.89.0**
 - :arrow_up: Chore(libs):
-  - Update Update @waline/client from 2.10.0 to 2.14.7 (@Mejituu[#279](https://github.com/hugo-fixit/FixIt/pull/279))
+  - Update Update @waline/client from 2.10.0 to 2.14.7 (@Mejituu [#279](https://github.com/hugo-fixit/FixIt/pull/279))
 - **Full Changelog:** @Lruihao [`v0.2.16...v0.2.17`](https://github.com/hugo-fixit/FixIt/compare/v0.2.16...v0.2.17)
 
 ## v0.2.17 [2023.1.29]
@@ -36,14 +38,14 @@ All notable changes to this project will be documented in this file.
 - :zap: Perf: optimize sub menu position calculation in desktop header with css replace of javascript
 - :zap: Perf: enhance pangu spelling correction
 - :bug: Fix: remove the leading and trailing whitespace of the code string ([#205](https://github.com/hugo-fixit/FixIt/issues/205))
-- :bento: Fix: update webfonts for fontawesome 6.2.0 (@NicoDreamzZ[#228](https://github.com/hugo-fixit/FixIt/pull/228))
+- :bento: Fix: update webfonts for fontawesome 6.2.0 (@NicoDreamzZ [#228](https://github.com/hugo-fixit/FixIt/pull/228))
 - :bug: Fix: image shortcode/plugin lose the support for svg type files ([#210](https://github.com/hugo-fixit/FixIt/issues/210))
 - :bug: Fix: can't keep the static table of the contents in front of the post
 - :bug: Fix: escape hashtag character `#` in tag and category ([#245](https://github.com/hugo-fixit/FixIt/issues/245))
 - :bug: Fix: pangu.js cdn error
-- :bug: Fix: sitemap.xml link in robots.txt doesn't point to main sitemap (@Mejituu[#276](https://github.com/hugo-fixit/FixIt/pull/276))
+- :bug: Fix: sitemap.xml link in robots.txt doesn't point to main sitemap (@Mejituu [#276](https://github.com/hugo-fixit/FixIt/pull/276))
 - :recycle: Refactor(i18n): hierarchize translation fields for supported languages
-- :globe_with_meridians: Docs(i18n): add missing translations for French + enhancements (@Kapusch[#247](https://github.com/hugo-fixit/FixIt/pull/247))
+- :globe_with_meridians: Docs(i18n): add missing translations for French + enhancements (@Kapusch [#247](https://github.com/hugo-fixit/FixIt/pull/247))
 - :lipstick: Style: refactor css style
 - :lipstick: Style: update home page stylesheet
 - :arrow_up: Chore(libs):
@@ -86,7 +88,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: use data attributes or class replace for custom attributes
 - :bug: Fix: attribute `media` not allowed on element meta in `[name=theme-color]`
 - :bug: Fix: support smooth migration from LoveIt to FixIt ([#174](https://github.com/hugo-fixit/FixIt/discussions/174) [#182](https://github.com/hugo-fixit/FixIt/issues/182))
-- :bug: Fix: `center-quote` shortcode rendering error when config `unsafe = false` (@yureiita[#160](https://github.com/hugo-fixit/FixIt/pull/160))
+- :bug: Fix: `center-quote` shortcode rendering error when config `unsafe = false` (@yureiita [#160](https://github.com/hugo-fixit/FixIt/pull/160))
 - :bug: Fix: menu item invalid params `draft` in submenu
 - :bug: Fix: missing height and weight of img element and lazyload object-fit style
 - :bug: Fix: image shortcode invalid params `height` and `weight` ([#200](https://github.com/hugo-fixit/FixIt/issues/200))
@@ -115,8 +117,8 @@ All notable changes to this project will be documented in this file.
   - Update algoliasearch from 4.13.0 to 4.14.2
 - :wrench: Chore(deps-dev):
   - Remove dependencies: minimist, babel-preset-minify
-  - Bump core-js from 3.24.1 to 3.25.2 (@dependabot[#201](https://github.com/hugo-fixit/FixIt/pull/201))
-  - Bump @babel/core from 7.18.10 to 7.19.1 (@dependabot[#202](https://github.com/hugo-fixit/FixIt/pull/202))
+  - Bump core-js from 3.24.1 to 3.25.2 (@dependabot [#201](https://github.com/hugo-fixit/FixIt/pull/201))
+  - Bump @babel/core from 7.18.10 to 7.19.1 (@dependabot [#202](https://github.com/hugo-fixit/FixIt/pull/202))
 - **Full Changelog:** @Lruihao [`v0.2.15...v0.2.16`](https://github.com/hugo-fixit/FixIt/compare/v0.2.15...v0.2.16)
 
 ## v0.2.15 [2022.8.4]
@@ -135,10 +137,10 @@ All notable changes to this project will be documented in this file.
   - Mobile Devtools config ([#163](https://github.com/hugo-fixit/FixIt/pull/163))
 - :bug: Fix: unable to show search bar of header at mobile mode ([#143](https://github.com/hugo-fixit/FixIt/issues/143))
 - :bug: Fix: Giscus comment invalid config `inputPosition`
-- :bug: Fix: Waline comment invalid config `imageUploader = false` & `highlighter = false` (@yureiita[#161](https://github.com/hugo-fixit/FixIt/pull/161))
+- :bug: Fix: Waline comment invalid config `imageUploader = false` & `highlighter = false` (@yureiita [#161](https://github.com/hugo-fixit/FixIt/pull/161))
 - :bug: Fix: busuanzi logic error
 - :bug: Fix: close comment system logic error when the article was expired
-- :bug: Style: fix typos for rel attribute value noreferrer (@yureiita[#157](https://github.com/hugo-fixit/FixIt/pull/157))
+- :bug: Style: fix typos for rel attribute value noreferrer (@yureiita [#157](https://github.com/hugo-fixit/FixIt/pull/157))
 - :recycle: Refactor: migrate theme js from src to assets by js.build
 - :recycle: Refactor: change the post edit url splicing rules
 - :mag: Feat(SEO): add options to make output `baidu_urls.txt` file ([#138](https://github.com/hugo-fixit/FixIt/issues/138))
@@ -171,7 +173,7 @@ All notable changes to this project will be documented in this file.
 - :recycle: Refactor: header layout
   - :tada: Feat: add sub menu (nested menu) support ([#31](https://github.com/hugo-fixit/FixIt/issues/31))
   - :sparkles: Feat: add user-defined content to menu items via the `params` field ([#99](https://github.com/hugo-fixit/FixIt/issues/99))
-  - :sparkles: Feat: modified language selector to submenu (@pandaoh[`eced169`](https://github.com/hugo-fixit/FixIt/commit/eced169713ce4a0208ce70ab556824e47eb671d5), @Lruihao[#31](https://github.com/hugo-fixit/FixIt/issues/31))
+  - :sparkles: Feat: modified language selector to submenu (@pandaoh [`eced169`](https://github.com/hugo-fixit/FixIt/commit/eced169713ce4a0208ce70ab556824e47eb671d5), @Lruihao [#31](https://github.com/hugo-fixit/FixIt/issues/31))
   - :bug: Fix: add "no more translations" judgment logic ([#100](https://github.com/hugo-fixit/FixIt/issues/100))
   - :bug: Fix: fix some header css bug ([#31](https://github.com/hugo-fixit/FixIt/issues/31))
 - :sparkles: Feat: enhance link render ([#96](https://github.com/hugo-fixit/FixIt/issues/96))
@@ -190,11 +192,11 @@ All notable changes to this project will be documented in this file.
 - :truck: Feat: *migrate ~~`home.profile.gravatarSite`~~ to `gravatar.host`*
 - :truck: Feat: *migrate ~~`ibruce.siteTime`~~ to `footer.siteTime`*
 - :lipstick: Style: add some common CSS styles Class ([#101](https://github.com/hugo-fixit/FixIt/issues/101))
-- :lipstick: Style: add the gap between and icon and text at blending typesetting (@ctj12461, @Lruihao[#118](https://github.com/hugo-fixit/FixIt/pull/118))
+- :lipstick: Style: add the gap between and icon and text at blending typesetting (@ctj12461 @Lruihao [#118](https://github.com/hugo-fixit/FixIt/pull/118))
 - :lipstick: Style: modify blockquote CSS
 - :memo: Docs: revise theme documentations
 - :zap: Perf: remove third-party library clipboard.js ([#84](https://github.com/hugo-fixit/FixIt/issues/84))
-- :pencil2: Docs: fix highlight url typo in `theme-documentation-built-in-shortcodes` (@d-baer[#85](https://github.com/hugo-fixit/FixIt/pull/85))
+- :pencil2: Docs: fix highlight url typo in `theme-documentation-built-in-shortcodes` (@d-baer [#85](https://github.com/hugo-fixit/FixIt/pull/85))
 - :wrench: Chore(i18n): improve translations for the supported languages ([#119](https://github.com/hugo-fixit/FixIt/issues/119))
 - :wrench: Chore(i18n): add i18n support for console messages
 - :wrench: Chore: add deprecated parameter detection in cli
@@ -213,14 +215,14 @@ All notable changes to this project will be documented in this file.
 > Snapshot: <https://fixit-bbh5g5x90-lruihao.vercel.app>
 
 - :recycle: Refactor: page layout ([#65](https://github.com/hugo-fixit/FixIt/issues/65))
-- :tada: Feat: add Artalk comment support ([#54](https://github.com/hugo-fixit/FixIt/issues/54), @hiifong[#57](https://github.com/hugo-fixit/FixIt/pull/57))
+- :tada: Feat: add Artalk comment support ([#54](https://github.com/hugo-fixit/FixIt/issues/54), @hiifong [#57](https://github.com/hugo-fixit/FixIt/pull/57))
 - :tada: Feat: add Waline comment support ([#36](https://github.com/hugo-fixit/FixIt/issues/36))
 - :tada: Feat: add Twikoo comment support ([#64](https://github.com/hugo-fixit/FixIt/issues/64))
 - :sparkles: Feat: add recently updated section ([#50](https://github.com/hugo-fixit/FixIt/issues/50))
 - :sparkles: Feat: add article expiration reminder support ([#51](https://github.com/hugo-fixit/FixIt/issues/51))
 - :sparkles: Feat: add pageStyle option ([#62](https://github.com/hugo-fixit/FixIt/issues/62))
 - :sparkles: Style: add media style for print view ([#61](https://github.com/hugo-fixit/FixIt/issues/61))
-- :sparkles: Feat: add Gravatar mirror site support (@ctj12461[#66](https://github.com/hugo-fixit/FixIt/pull/66))
+- :sparkles: Feat: add Gravatar mirror site support (@ctj12461 [#66](https://github.com/hugo-fixit/FixIt/pull/66))
 - :sparkles: Feat: add archive count display ([#33](https://github.com/hugo-fixit/FixIt/issues/33))
 - :sparkles: Feat: add `details` shortcode ([#68](https://github.com/hugo-fixit/FixIt/issues/68))
 - :sparkles: Feat: add `center-quote` shortcode ([#69](https://github.com/hugo-fixit/FixIt/issues/69))
