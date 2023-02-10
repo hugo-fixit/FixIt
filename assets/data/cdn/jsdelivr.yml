@@ -48,8 +48,6 @@ libFiles:
   katexCSS: katex@0.16.2/dist/katex.min.css
   katexJS: katex@0.16.2/dist/katex.min.js
   katexMhchemJS: katex@0.16.2/dist/contrib/mhchem.min.js
-  # lazysizes@5.3.2 https://github.com/aFarkas/lazysizes
-  lazysizesJS: lazysizes@5.3.2/lazysizes.min.js
   # lightgallery@2.6.1 https://github.com/sachinchoolur/lightgallery
   lightgalleryCSS: lightgallery@2.6.1/css/lightgallery-bundle.min.css
   lightgalleryJS: lightgallery@2.6.1/lightgallery.min.js

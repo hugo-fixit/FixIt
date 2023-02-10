@@ -38,10 +38,6 @@
   {{- end -}}
 {{- end -}}
 
-{{- /* lazysizes */ -}}
-{{- $source := $cdn.lazysizesJS | default "lib/lazysizes/lazysizes.min.js" -}}
-{{- dict "Source" $source "Fingerprint" $fingerprint "Async" true "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-
 {{- /* instant.page */ -}}
 {{- if $params.instantPage -}}
   {{- $source := $cdn.instantPage | default "lib/instant-page/instantpage.min.js" -}}

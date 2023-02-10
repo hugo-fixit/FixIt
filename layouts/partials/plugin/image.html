@@ -1,24 +1,15 @@
-{{- /* lazysizes and lightgallery */ -}}
+{{- /* lightgallery */ -}}
 {{- $src := .Src -}}
 {{- $width := .Width -}}
 {{- $height := .Height -}}
 {{- with dict "Path" $src "Resources" .Resources | partial "function/resource.html" -}}
   {{- $src = .RelPermalink -}}
   {{- /* Resources can not get width and height of image for svg type */ -}}
-  {{- if ne .MediaType.SubType "svg" -}}
-    {{- $width = $width | default .Width -}}
-    {{- $height = $height | default .Height -}}
+  {{- if (not $width) | and (not $height) | and (ne .MediaType.SubType "svg") -}}
+    {{- $width = .Width -}}
+    {{- $height = .Height -}}
   {{- end -}}
 {{- end -}}
-
-{{- $style := "" -}}
-{{- with $width -}}
-  {{- $style = printf "width: %v;" . -}}
-{{- end -}}
-{{- with $height -}}
-  {{- $style = printf "%vheight: %v;" $style . -}}
-{{- end -}}
-{{- /* with $style }} {{ printf "style=\"%v\"" $style | safeHTMLAttr -}}{{- end */ -}}
 
 {{- $small := .SrcSmall | default $src -}}
 {{- with dict "Path" .SrcSmall "Resources" .Resources | partial "function/resource.html" -}}
@@ -32,35 +23,17 @@
 
 {{- $alt := .Alt | default $src -}}
 {{- $caption := .Caption | default $alt -}}
-{{- $loading := resources.Get "svg/loading.svg" | minify -}}
+{{- $loading := .Loading | default "lazy" -}}
+
 {{- if .Linked -}}
   <a class="lightgallery" href="{{ $large | safeURL }}" data-thumbnail="{{ $small | safeURL }}"{{ with $caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
-    <img
-      class="lazyload{{ with .Class }} {{ . }}{{ end }}"
-      src="{{ $loading.RelPermalink }}"
-      data-src="{{ $src | safeURL }}"
-      data-srcset="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
-      data-sizes="auto"
-      alt="{{ $alt }}"
-      title="{{ .Title | default $alt }}"
-      {{- with $width }} width="{{ . }}"{{- end -}}
-      {{- with $height }} height="{{ . }}"{{- end -}}
-      {{- with .Width }} data-w{{- end -}}
-      {{- with .Height }} data-h{{- end -}}
-    />
+{{- end -}}
+<img loading="{{ $loading }}" src="{{ .Src | safeURL }}" srcset="{{ $small | safeURL }}, {{ .Src | safeURL }} 1.5x, {{ $large | safeURL }} 2x" sizes="auto" alt="{{ $alt }}" title="{{ .Title | default $alt }}"
+  {{- with $width }} width="{{ . }}"{{- end -}}
+  {{- with $height }} height="{{ . }}"{{- end -}}
+  {{- with .Class -}}class="{{ . }}"{{- end -}}
+  {{- if eq $loading "lazy" -}} onload="this.classList.add('lazyloaded')"{{- end -}}
+/>
+{{- if .Linked -}}
   </a>
-{{- else -}}
-  <img
-    class="lazyload{{ with .Class }} {{ . }}{{ end }}"
-    src="{{ $loading.RelPermalink }}"
-    data-src="{{ $src | safeURL }}"
-    data-srcset="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
-    data-sizes="auto"
-    alt="{{ $alt }}"
-    title="{{ .Title | default $alt }}"
-    {{- with $width }} width="{{ . }}"{{- end -}}
-    {{- with $height }} height="{{ . }}"{{- end -}}
-    {{- with .Width }} data-w{{- end -}}
-    {{- with .Height }} data-h{{- end -}}
-  />
 {{- end -}}

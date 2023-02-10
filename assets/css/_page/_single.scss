@@ -67,14 +67,11 @@
 
     img {
       display: block;
+      width: 100%;
       max-width: 100%;
       height: auto;
       margin: 0 auto;
       overflow: hidden;
-
-      &.lazyloaded {
-        width: 100%;
-      }
     }
   }
 
@@ -274,10 +271,6 @@
     img {
       max-width: 100%;
       min-height: 1em;
-
-      &:not([data-h]) {
-        height: auto;
-      }
     }
     svg {
       max-width: 100%;
@@ -299,10 +292,11 @@
 
       img {
         display: block;
+        height: auto;
         margin: 0 auto;
         overflow: hidden;
 
-        &.lazyloaded:not([data-w]) {
+        &:not([width]) {
           width: 100%;
         }
       }

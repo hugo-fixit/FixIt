@@ -1,12 +1,7 @@
 img {
   @include border-radius($global-border-radius/2);
 
-  &.lazyload,
-  &.lazyloading {
-    @include object-fit(scale-down);
-  }
-
-  &.lazyloaded {
-    @include object-fit(contain);
+  &[loading='lazy']:not(.lazyloaded) {
+    background: url(/svg/loading.min.svg) no-repeat center;
   }
 }

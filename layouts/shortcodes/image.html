@@ -11,6 +11,7 @@
   {{- $options = dict "Width" (.Get "width") | merge $options -}}
   {{- $options = .Get "linked" | ne false | dict "Linked" | merge $options -}}
   {{- $options = dict "Rel" (.Get "rel") | merge $options -}}
+  {{- $options = dict "Loading" (.Get "loading") | merge $options -}}
 {{- else -}}
   {{- $options = cond $caption true false | dict "Linked" | merge $options -}}
 {{- end -}}
