@@ -5,7 +5,7 @@
 {{- with dict "Path" $src "Resources" .Resources | partial "function/resource.html" -}}
   {{- $src = .RelPermalink -}}
   {{- /* Resources can not get width and height of image for svg type */ -}}
-  {{- if (not $width) | and (not $height) | and (ne .MediaType.SubType "svg") -}}
+  {{- if (not $.Width) | and (not $.Height) | and (ne .MediaType.SubType "svg") -}}
     {{- $width = .Width -}}
     {{- $height = .Height -}}
   {{- end -}}
@@ -24,8 +24,8 @@
 {{- $alt := .Alt | default $src -}}
 {{- $caption := .Caption | default $alt -}}
 {{- $loading := .Loading | default "lazy" -}}
-{{- $commonScript := "this.removeAttribute('style');this.removeAttribute('onerror');this.removeAttribute('onload');" -}}
-{{- $onload := printf " onload=\"this.dataset.lazyloaded='';%v\"" $commonScript | safeHTMLAttr -}}
+{{- $commonScript := "this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}" -}}
+{{- $onload := printf " onload=\"%vthis.dataset.lazyloaded='';\"" $commonScript | safeHTMLAttr -}}
 {{- $onerror := printf " onerror=\"%v\"" $commonScript | safeHTMLAttr -}}
 {{- $style := printf " style=\"background: url(%v) no-repeat center;\"" (resources.Get "svg/loading.svg" | minify).RelPermalink | safeHTMLAttr -}}
 {{- if eq $loading "eager" -}}
@@ -37,13 +37,16 @@
 {{- if .Linked -}}
   <a class="lightgallery" href="{{ $large | safeURL }}" data-thumbnail="{{ $small | safeURL }}"{{ with $caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
 {{- end -}}
-<img loading="{{ $loading }}" src="{{ .Src | safeURL }}" srcset="{{ $small | safeURL }}, {{ .Src | safeURL }} 1.5x, {{ $large | safeURL }} 2x" sizes="auto" alt="{{ $alt }}" title="{{ .Title | default $alt }}"
+<img loading="{{ $loading }}" src="{{ .Src | safeURL }}" srcset="{{ $small | safeURL }}, {{ .Src | safeURL }} 1.5x, {{ $large | safeURL }} 2x" sizes="auto"
+  {{- if eq $loading "eager" }} title="{{ .Title | default $alt }}" alt="{{ $alt }}"
+  {{- else }} data-title="{{ .Title | default $alt }}" data-alt="{{ $alt }}"{{- end -}}
   {{- with $width }} width="{{ . }}"{{- end -}}
   {{- with $height }} height="{{ . }}"{{- end -}}
   {{- with .Class }} class="{{ . }}"{{- end -}}
   {{- with $style -}}{{ . }}{{- end -}}
   {{- with $onload -}}{{ . }}{{- end -}}
   {{- with $onerror -}}{{ . }}{{- end -}}
+  {{- with .Height }} data-h{{- end -}}
 />
 {{- if .Linked -}}
   </a>
