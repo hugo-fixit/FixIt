@@ -24,6 +24,15 @@
 {{- $alt := .Alt | default $src -}}
 {{- $caption := .Caption | default $alt -}}
 {{- $loading := .Loading | default "lazy" -}}
+{{- $commonScript := "this.removeAttribute('style');this.removeAttribute('onerror');this.removeAttribute('onload');" -}}
+{{- $onload := printf " onload=\"this.dataset.lazyloaded='';%v\"" $commonScript | safeHTMLAttr -}}
+{{- $onerror := printf " onerror=\"%v\"" $commonScript | safeHTMLAttr -}}
+{{- $style := printf " style=\"background: url(%v) no-repeat center;\"" (resources.Get "svg/loading.svg" | minify).RelPermalink | safeHTMLAttr -}}
+{{- if eq $loading "eager" -}}
+  {{- $onload = "" -}}
+  {{- $onerror = "" -}}
+  {{- $style = "" -}}
+{{- end -}}
 
 {{- if .Linked -}}
   <a class="lightgallery" href="{{ $large | safeURL }}" data-thumbnail="{{ $small | safeURL }}"{{ with $caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
@@ -32,7 +41,9 @@
   {{- with $width }} width="{{ . }}"{{- end -}}
   {{- with $height }} height="{{ . }}"{{- end -}}
   {{- with .Class }} class="{{ . }}"{{- end -}}
-  {{- if eq $loading "lazy" }} onload="this.classList.add('lazyloaded')"{{- end -}}
+  {{- with $style -}}{{ . }}{{- end -}}
+  {{- with $onload -}}{{ . }}{{- end -}}
+  {{- with $onerror -}}{{ . }}{{- end -}}
 />
 {{- if .Linked -}}
   </a>
