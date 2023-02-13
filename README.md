@@ -236,7 +236,7 @@ FixIt is licensed under the **MIT** license. Check the [LICENSE file](LICENSE) f
 
 ## Author
 
-[Lruihao](https://lruihao.cn)
+[Lruihao](https://github.com/Lruihao "Follow me on GitHub")
 
 ## Sponsor
 

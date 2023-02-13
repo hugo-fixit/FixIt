@@ -240,7 +240,7 @@ FixIt 根据 **MIT** 许可协议授权。 更多信息请查看 [LICENSE 文件
 
 ## 作者
 
-[Lruihao](https://lruihao.cn)
+[Lruihao](https://github.com/Lruihao "在 GitHub 上关注我")
 
 ## 赞助支持
 
