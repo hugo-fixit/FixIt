@@ -128,7 +128,8 @@
     {{- with .Site.Copyright -}}
       "license": {{ . | safeHTML }},
     {{- end -}}
-    {{- $publisher := .Params.author | default .Site.Author.name | default (T "single.author") | dict "name" -}}
+    {{- $postAuthor := cond (reflect.IsMap .Params.author) .Params.author.name .Params.author -}}
+    {{- $publisher := $postAuthor | default .Site.Author.name | default (T "single.author") | dict "name" -}}
     {{- $publisher = $params.seo.publisher | default dict | merge $publisher -}}
     "publisher": {
       "@type": "Organization",
@@ -147,7 +148,7 @@
         {{- end -}}
       {{- end -}}
     },
-    {{- with .Params.author | default .Site.Author.name | default (T "single.author") -}}
+    {{- with $postAuthor | default .Site.Author.name | default (T "single.author") -}}
       "author": {
         "@type": "Person",
         "name": {{ . | safeHTML }}

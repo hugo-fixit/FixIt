@@ -3,9 +3,11 @@ title: "{{ replace .TranslationBaseName "-" " " | title }}"
 subtitle: ""
 date: {{ .Date }}
 draft: true
-author: ""
-authorLink: ""
-authorEmail: ""
+author:
+  name: ""
+  link: ""
+  email: ""
+  avatar: ""
 description: ""
 keywords: ""
 license: ""

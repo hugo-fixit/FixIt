@@ -1,19 +1,24 @@
 {{- $params := .Scratch.Get "params" -}}
-{{- $author := .Site.Author | merge (dict "name" "Anonymous" "link" "" "email" "" "avatar" "") -}}
+{{- $authorDefault := dict "name" "Anonymous" "link" "" "email" "" "avatar" "" -}}
+{{- $author := .Site.Author | merge $authorDefault -}}
+{{- $authorPost := dict -}}
 {{- $gravatar := .Site.Params.gravatar -}}
 
-{{- if $gravatar.enable -}}
-  {{- if isset $params "author" | and (ne $params.author .Site.Author.name) -}}
-    {{- $author = dict "name" $params.author | merge $author -}}
-    {{- $author = dict "link" (echoParam $params "authorlink") | merge $author -}}
-    {{- $author = dict "email" (echoParam $params "authoremail") | merge $author -}}
-    {{- $author = dict "avatar" (echoParam $params "authoravatar") | merge $author -}}
-  {{- else -}}
-    {{- with $params.authorlink -}}{{- $author = dict "link" . | merge $author -}}{{- end -}}
-    {{- with $params.authoremail -}}{{- $author = dict "email" . | merge $author -}}{{- end -}}
-    {{- with $params.authoravatar -}}{{- $author = dict "avatar" . | merge $author -}}{{- end -}}
+{{- if $params.authorAvatar -}}
+  {{- if reflect.IsMap $params.author -}}
+    {{- $authorPost = $params.author -}}
+  {{- else if isset $params "author" -}}
+    {{- $authorPost = dict "name" $params.author -}}
   {{- end -}}
-  {{- if $author.email -}}
+  {{- if isset $authorPost "name" | and (ne $authorPost.name .Site.Author.name) -}}
+    {{- $author = $authorPost | merge $authorDefault | merge $author -}}
+  {{- else -}}
+    {{- with $authorPost.link -}}{{- $author = dict "link" . | merge $author -}}{{- end -}}
+    {{- with $authorPost.email -}}{{- $author = dict "email" . | merge $author -}}{{- end -}}
+    {{- with $authorPost.avatar -}}{{- $author = dict "avatar" . | merge $author -}}{{- end -}}
+  {{- end -}}
+
+  {{- if $gravatar.enable | and $author.email -}}
     {{- with $gravatar -}}
       {{- $author = dict "avatar" (printf "https://%v/avatar/%v?s=32&d=%v"
         (path.Clean .Host | default "www.gravatar.com")
@@ -28,7 +33,7 @@
 <span class="post-author">
   {{- $content := $author.name -}}
   {{- $icon := dict "Class" "fa-solid fa-user-circle" -}}
-  {{- if $author.avatar -}}
+  {{- if $author.avatar | and $params.authorAvatar -}}
     {{- $content = printf "%v&nbsp;%v" (dict "Src" $author.avatar "Class" "avatar" "Alt" $author.name | partial "plugin/image.html") $author.name -}}
     {{- $icon = "" -}}
   {{- end -}}
