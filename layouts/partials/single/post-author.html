@@ -1,28 +1,35 @@
 {{- $params := .Scratch.Get "params" -}}
+{{- $author := .Site.Author | merge (dict "name" "Anonymous" "link" "" "email" "" "avatar" "") -}}
+{{- $gravatar := .Site.Params.gravatar -}}
 
-{{- $author := .Site.Author | merge (dict "name" "Anonymous" "link" (echoParam $params "authorlink") "email" (echoParam $params "authoremail")) -}}
-{{- $avatar := .Site.Params.home.profile.avatarURL -}}
-{{- if isset $params "author" | and (ne $params.author .Site.Author.name) -}}
-  {{- $author = dict "name" $params.author | merge $author -}}
-  {{- $author = dict "link" (echoParam $params "authorlink") | merge $author -}}
-  {{- $author = dict "email" (echoParam $params "authoremail") | merge $author -}}
-  {{- $avatar = "" -}}
-{{- end -}}
-{{- if (not $avatar | or $params.gravatarForce) | and $author.email -}}
-  {{- $gravatar := .Site.Params.gravatar -}}
-  {{- with $gravatar -}}
-    {{- $avatar = printf "https://%v/avatar/%v?s=32&d=%v"
-      (path.Clean .Host | default "www.gravatar.com")
-      (md5 $author.email)
-      (.Style | default "")
-    -}}
+{{- if $gravatar.enable -}}
+  {{- if isset $params "author" | and (ne $params.author .Site.Author.name) -}}
+    {{- $author = dict "name" $params.author | merge $author -}}
+    {{- $author = dict "link" (echoParam $params "authorlink") | merge $author -}}
+    {{- $author = dict "email" (echoParam $params "authoremail") | merge $author -}}
+    {{- $author = dict "avatar" (echoParam $params "authoravatar") | merge $author -}}
+  {{- else -}}
+    {{- with $params.authorlink -}}{{- $author = dict "link" . | merge $author -}}{{- end -}}
+    {{- with $params.authoremail -}}{{- $author = dict "email" . | merge $author -}}{{- end -}}
+    {{- with $params.authoravatar -}}{{- $author = dict "avatar" . | merge $author -}}{{- end -}}
+  {{- end -}}
+  {{- if $author.email -}}
+    {{- with $gravatar -}}
+      {{- $author = dict "avatar" (printf "https://%v/avatar/%v?s=32&d=%v"
+        (path.Clean .Host | default "www.gravatar.com")
+        (md5 $author.email)
+        (.Style | default ""))
+        | merge $author 
+      -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
+
 <span class="post-author">
   {{- $content := $author.name -}}
   {{- $icon := dict "Class" "fa-solid fa-user-circle" -}}
-  {{- if $avatar -}}
-    {{- $content = printf "%v&nbsp;%v" (dict "Src" $avatar "Class" "avatar" "Alt" $author.name | partial "plugin/image.html") $author.name -}}
+  {{- if $author.avatar -}}
+    {{- $content = printf "%v&nbsp;%v" (dict "Src" $author.avatar "Class" "avatar" "Alt" $author.name | partial "plugin/image.html") $author.name -}}
     {{- $icon = "" -}}
   {{- end -}}
   {{- if $author.link -}}
@@ -31,7 +38,7 @@
   {{- else -}}
     <span class="author">
       {{- with $icon -}}
-        {{ . | partial "plugin/icon.html" }}
+        {{- . | partial "plugin/icon.html" }}
       {{ end -}}
       {{- $content | safeHTML -}}
     </span>
