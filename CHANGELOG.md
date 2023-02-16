@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: donate images without lazy loading (@Mejituu [#279](https://github.com/hugo-fixit/FixIt/pull/279))
 - :bug: Fix: discordinvite typo (@mathieu-gilloots [#282](https://github.com/hugo-fixit/FixIt/pull/282))
 - :recycle: Refactor: image lazy loading ([#283](https://github.com/hugo-fixit/FixIt/pull/283))
+- :recycle: Refactor: author's avatar of post or profile ([#261](https://github.com/hugo-fixit/FixIt/discussions/261))
 - :art: Style: fix `#comments` css style conflict ([#269](https://github.com/hugo-fixit/FixIt/issues/269))
 - :wrench: Chore: change the theme minimum supported Hugo versions above **0.89.0**
 - :arrow_up: Chore(libs):

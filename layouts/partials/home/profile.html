@@ -1,8 +1,8 @@
 {{- $profile := .Site.Params.home.profile -}}
 <div class="home-profile">
   {{- $avatar := $profile.avatarURL -}}
-  {{- if $profile.gravatarEmail -}}
-    {{- $gravatar := .Site.Params.gravatar -}}
+  {{- $gravatar := .Site.Params.gravatar -}}
+  {{- if $gravatar.enable | and $profile.gravatarEmail -}}
     {{- with $gravatar -}}
       {{- $avatar = printf "https://%v/avatar/%v?s=240&d=%v"
         (path.Clean .Host | default "www.gravatar.com")

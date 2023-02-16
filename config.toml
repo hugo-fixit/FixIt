@@ -347,6 +347,8 @@
 
   # FixIt 0.2.0 | CHANGED Page config
   [params.page]
+    # FixIt 0.2.18 | NEW whether to enable the author's avatar of the post
+    authorAvatar = true
     # FixIt 0.2.0 | NEW whether to hide a page from home page
     hiddenFromHomePage = false
     # FixIt 0.2.0 | NEW whether to hide a page from search results
@@ -370,8 +372,6 @@
     rssFullText = false
     # FixIt 0.2.13 | NEW Page style ["narrow", "normal", "wide", ...]
     pageStyle = "normal"
-    # FixIt 0.2.14 | NEW Gravatar is force-used as the author's avatar
-    gravatarForce = false
     # FixIt 0.2.17 | CHANGED Auto Bookmark Support
     # If true, save the reading progress when closing the page.
     autoBookmark = false
@@ -755,6 +755,8 @@
 
   # FixIt 0.2.14 | NEW Gravatar config
   [params.gravatar]
+    # FixIt 0.2.18 | NEW Depends on the author's email, if the author's email is not set, the local avatar will be used
+    enable = false
     # Gravatar host, default: "www.gravatar.com"
     host = "www.gravatar.com" # ["cn.gravatar.com", "gravatar.loli.net", ...]
     style = "" # ["", "mp", "identicon", "monsterid", "wavatar", "retro", "blank", "robohash"]
