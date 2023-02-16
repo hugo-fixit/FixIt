@@ -94,6 +94,9 @@
       {{- with $valine.meta -}}
         {{- $commentConfig = dict "meta" . | dict "valine" | merge $commentConfig -}}
       {{- end -}}
+      {{- with $valine.requiredFields -}}
+        {{- $commentConfig = dict "requiredFields" . | dict "valine" | merge $commentConfig -}}
+      {{- end -}}
       {{- with $valine.pageSize -}}
         {{- $commentConfig = dict "pageSize" . | dict "valine" | merge $commentConfig -}}
       {{- end -}}

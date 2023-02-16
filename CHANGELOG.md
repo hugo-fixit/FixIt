@@ -5,14 +5,21 @@ All notable changes to this project will be documented in this file.
 
 ## v0.2.18
 
+## Breaking Updates
+
+- [#288](https://github.com/hugo-fixit/FixIt/pull/288)
+
+## What's New
+
 > Snapshot: <>
 
 - :sparkles: Feat: add instant page (@Mejituu [#279](https://github.com/hugo-fixit/FixIt/pull/279))
 - :sparkles: Feat: add `force` option value to `params.page.lightgallery`
 - :bug: Fix: donate images without lazy loading (@Mejituu [#279](https://github.com/hugo-fixit/FixIt/pull/279))
 - :bug: Fix: discordinvite typo (@mathieu-gilloots [#282](https://github.com/hugo-fixit/FixIt/pull/282))
+- :bug: Fix: missing parameter `requiredFields` for Valine
 - :recycle: Refactor: image lazy loading ([#283](https://github.com/hugo-fixit/FixIt/pull/283))
-- :recycle: Refactor: author's avatar of post or profile ([#261](https://github.com/hugo-fixit/FixIt/discussions/261))
+- :recycle: Refactor: author's avatar of post or profile ([#288](https://github.com/hugo-fixit/FixIt/pull/288))
 - :art: Style: fix `#comments` css style conflict ([#269](https://github.com/hugo-fixit/FixIt/issues/269))
 - :wrench: Chore: change the theme minimum supported Hugo versions above **0.89.0**
 - :arrow_up: Chore(libs):
