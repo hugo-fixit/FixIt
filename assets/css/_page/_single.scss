@@ -275,6 +275,11 @@
       &:not([data-h]) {
         height: auto;
       }
+
+      &.version {
+        height: 1.25em;
+        vertical-align: text-bottom;
+      }
     }
     svg {
       max-width: 100%;
@@ -370,11 +375,6 @@
         @include box-shadow(inset 0 -1px 0 $global-border-color-dark);
         color: $code-color-dark;
       }
-    }
-
-    .version {
-      height: 1.25em;
-      vertical-align: text-bottom;
     }
   }
 
