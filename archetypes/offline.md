@@ -1,10 +1,9 @@
 ---
-type: "offline"
-description: "{{ T "offlineTitle" }} - {{ .Site.Title }}"
+type: offline
+description: '{{ T "offlineTitle" }} - {{ .Site.Title }}'
 keywords: 
   - PWA
-  - offline
-  - 离线
+  - {{ T "offlineTitle" }}
 ---
 
 <!-- You need do nothing for this page. -->
