@@ -25,7 +25,7 @@ Use one of these templates:
 
 ## [Documentation](https://fixit.lruihao.cn/categories/documentation/)
 
-Head to this [documentation page](https://fixit.lruihao.cn/theme-documentation-basics/) for a complete guidence to get started with the FixIt theme.
+Head to this [documentation page](https://fixit.lruihao.cn/documentation/basics/) for a complete guidence to get started with the FixIt theme.
 
 Or run [Documentation Site](https://fixit.lruihao.cn) locally, see more details from [Contributing](#contributing).
 
@@ -35,7 +35,7 @@ In addition, there is the [FixIt wiki](https://github.com/hugo-fixit/FixIt/wiki)
 
 If you are currently using the LoveIt theme (or some other themes), it is very easy to migrate to FixIt.
 
-You can add this repo as a submodule of your site directory. Alternatively, you can [install the theme](https://fixit.lruihao.cn/theme-documentation-basics/#install-theme) in other ways.
+You can add this repo as a submodule of your site directory. Alternatively, you can [install the theme](https://fixit.lruihao.cn/documentation/basics/#install-theme) in other ways.
 
 ```bash
 git submodule add https://github.com/hugo-fixit/FixIt.git themes/FixIt
@@ -159,7 +159,7 @@ FixIt supports the following languages:
 * Vietnamese
 * [Contribute with a new language](https://github.com/hugo-fixit/FixIt/pulls)
 
-[Languages Compatibility](https://fixit.lruihao.cn/theme-documentation-basics/#language-compatibility)
+[Languages Compatibility](https://fixit.lruihao.cn/documentation/basics/#language-compatibility)
 
 ## [Roadmap](https://github.com/hugo-fixit/FixIt/projects/1)
 

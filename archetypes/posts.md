@@ -34,7 +34,7 @@ repost:
   enable: true
   url:
 
-# See details front matter: https://fixit.lruihao.cn/theme-documentation-content/#front-matter
+# See details front matter: https://fixit.lruihao.cn/documentation/content/#front-matter
 ---
 
 <!--more-->

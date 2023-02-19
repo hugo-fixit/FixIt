@@ -5,7 +5,7 @@
 
 # -------------------------------------------------------------------------------------
 # Menu Configuration
-# See: https://fixit.lruihao.cn/theme-documentation-basics/#menu-advanced-configuration
+# See: https://fixit.lruihao.cn/documentation/basics/#menu-advanced-configuration
 # -------------------------------------------------------------------------------------
 
 [menu]
@@ -53,7 +53,7 @@
 
 # -------------------------------------------------------------------------------------
 # Theme Core Configuration
-# See: https://fixit.lruihao.cn/theme-documentation-basics/#site-configuration
+# See: https://fixit.lruihao.cn/documentation/basics/#site-configuration
 # -------------------------------------------------------------------------------------
 
 [params]
