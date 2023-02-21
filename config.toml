@@ -60,7 +60,7 @@
   # FixIt 0.2.15 | CHANGED FixIt theme version
   version = "0.2.X" # e.g. "0.2.X", "0.2.15", "v0.2.15" etc.
   # site description
-  description = "This is my new Hugo FixIt site"
+  description = ""
   # site keywords
   keywords = ["Hugo", "FixIt"]
   # site default theme ["light", "dark", "auto"]
@@ -101,7 +101,7 @@
 
   # FixIt 0.2.0 | NEW Search config
   [params.search]
-    enable = true
+    enable = false
     # type of search engine ["lunr", "algolia", "fuse"]
     type = "lunr"
     # max index length of the chunked content
@@ -143,7 +143,7 @@
       # URL of the LOGO
       logo = "/fixit.min.svg"
       # title name
-      name = "My New Hugo FixIt Site"
+      name = "My Hugo FixIt Site"
       # you can add extra information before the name (HTML format is supported), such as icons
       pre = ""
       # you can add extra information after the name (HTML format is supported), such as icons
@@ -170,7 +170,7 @@
     # FixIt 0.2.0 | NEW whether to show the author
     author = true
     # Site creation year
-    since = 2021
+    since = ""
     # FixIt 0.2.14 | NEW whether to show total word count of site content
     wordCount = true
     # FixIt 0.2.12 | NEW Public network security only in China (HTML format is supported)
@@ -178,7 +178,7 @@
     # ICP info only in China (HTML format is supported)
     icp = ""
     # license info (HTML format is supported)
-    license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+    license = ""
     # FixIt 0.2.17 | CHANGED Site creation time
     [params.footer.siteTime]
       enable = false
@@ -232,9 +232,9 @@
     rss = 10
     # Home page profile
     [params.home.profile]
-      enable = true
+      enable = false
       # Gravatar Email for preferred avatar in home page
-      gravatarEmail = "xx@xx.com"
+      gravatarEmail = ""
       # URL of avatar shown in home page
       avatarURL = ""
       # FixIt 0.2.17 | NEW identifier of avatar menu link
@@ -242,7 +242,7 @@
       # FixIt 0.2.7 | CHANGED title shown in home page (HTML format is supported)
       title = ""
       # subtitle shown in home page
-      subtitle = "This is my new Hugo FixIt site"
+      subtitle = ""
       # whether to use typeit animation for subtitle
       typeit = true
       # whether to show social links
