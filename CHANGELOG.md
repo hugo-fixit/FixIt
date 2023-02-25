@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 - :recycle: Refactor: image lazy loading ([#283](https://github.com/hugo-fixit/FixIt/pull/283))
 - :recycle: Refactor: author's avatar of post or profile ([#288](https://github.com/hugo-fixit/FixIt/pull/288))
 - :art: Style: fix `#comments` css style conflict ([#269](https://github.com/hugo-fixit/FixIt/issues/269))
+- :recycle: Refactor: theme documentation
 - :wrench: Chore: change the theme minimum supported Hugo versions above **0.89.0**
 - :arrow_up: Chore(libs):
   - Update Update @waline/client from 2.10.0 to 2.14.7 (@Mejituu [#279](https://github.com/hugo-fixit/FixIt/pull/279))
