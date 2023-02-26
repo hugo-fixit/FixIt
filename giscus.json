@@ -2,7 +2,8 @@
   "origins": [
     "https://fixit.lruihao.cn",
     "https://pre.fixit.lruihao.cn",
-    "https://hugofixit.vercel.app"
+    "https://hugofixit.vercel.app",
+    "https://fixit-x-cell.vercel.app"
   ],
   "originsRegex": [
     "https://fixit-git-([A-z0-9]|-)*x-cell\\.vercel\\.app",
