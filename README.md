@@ -16,12 +16,10 @@ The FixIt theme inherits the excellent features of these themes, and adds new fe
 
 ## Getting started
 
-Use one of these templates:
+Head to the [getting started page](http://fixit.lruihao.cn/documentation/getting-started/) or start with a template:
 
 * [hugo-fixit/hugo-fixit-blog-git](https://github.com/hugo-fixit/hugo-fixit-blog-git)
 * [hugo-fixit/hugo-fixit-blog-go](https://github.com/hugo-fixit/hugo-fixit-blog-go)
-* [hugo-fixit/docs](https://github.com/hugo-fixit/docs "FixIt Theme Official Website")
-* [Lruihao/hugo-blog](https://github.com/Lruihao/hugo-blog "Blog of the author of the FixIt theme")
 
 ## [Documentation](https://fixit.lruihao.cn/categories/documentation/)
 
@@ -35,7 +33,7 @@ In addition, there is the [FixIt wiki](https://github.com/hugo-fixit/FixIt/wiki)
 
 If you are currently using the LoveIt theme (or some other themes), it is very easy to migrate to FixIt.
 
-You can add this repo as a submodule of your site directory. Alternatively, you can [install the theme](https://fixit.lruihao.cn/documentation/basics/#install-theme) in other ways.
+You can add this repo as a submodule of your site directory. Alternatively, you can install the theme in [other ways](https://fixit.lruihao.cn/documentation/basics/#install-theme).
 
 ```bash
 git submodule add https://github.com/hugo-fixit/FixIt.git themes/FixIt

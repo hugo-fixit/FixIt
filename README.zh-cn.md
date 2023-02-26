@@ -16,16 +16,14 @@ FixIt 主题继承了这些主题的优秀功能，并在此基础上添加了�
 
 ## 快速上手
 
-使用以下模板之一：
+前往 [快速上手页面](https://fixit.lruihao.cn/zh-cn/documentation/getting-started/) 或从一个模板直接开始：
 
 * [hugo-fixit/hugo-fixit-blog-git](https://github.com/hugo-fixit/hugo-fixit-blog-git)
 * [hugo-fixit/hugo-fixit-blog-go](https://github.com/hugo-fixit/hugo-fixit-blog-go)
-* [hugo-fixit/docs](https://github.com/hugo-fixit/docs "FixIt 主题官网")
-* [Lruihao/hugo-blog](https://github.com/Lruihao/hugo-blog "FixIt 主题作者的博客")
 
 ## [完整文档](https://fixit.lruihao.cn/zh-cn/categories/documentation/)
 
-前往这篇 [文档](https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/)，阅读关于安装与使用的详细指南。
+前往这篇 [文档](https://fixit.lruihao.cn/zh-cn/documentation/basics/)，阅读关于安装与使用的详细指南。
 
 或者在本地运行 [文档站点](https://fixit.lruihao.cn/zh-cn/)，更多细节详见 [参与贡献](#参与贡献)。
 
@@ -35,7 +33,7 @@ FixIt 主题继承了这些主题的优秀功能，并在此基础上添加了�
 
 如果你现在正在使用 LoveIt 主题（或者一些其他的主题），你可以很容易地迁移至 FixIt。
 
-你可以将这个主题仓库添加为你的网站目录的子模块。或者，您可以通过其他方式 [安装主题](https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/#install-theme)。
+你可以将这个主题仓库添加为你的网站目录的子模块。或者，您可以通过 [其他方式](https://fixit.lruihao.cn/zh-cn/documentation/basics/#install-theme) 安装主题。
 
 ```bash
 git submodule add https://github.com/hugo-fixit/FixIt.git themes/FixIt
