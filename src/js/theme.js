@@ -87,13 +87,13 @@ class FixIt {
 
   initSVGIcon() {
     this.util.forEach(document.querySelectorAll('[data-svg-src]'), ($icon) => {
-      fetch($icon.getAttribute('data-svg-src'))
+      fetch($icon.dataset.svgSrc)
         .then((response) => response.text())
         .then((svg) => {
           const $temp = document.createElement('div');
           $temp.insertAdjacentHTML('afterbegin', svg);
           const $svg = $temp.firstChild;
-          $svg.setAttribute('data-svg-src', $icon.getAttribute('data-svg-src'));
+          $svg.dataset.svgSrc = $icon.dataset.svgSrc
           $svg.classList.add('icon');
           const $titleElements = $svg.getElementsByTagName('title');
           $titleElements.length && $svg.removeChild($titleElements[0]);
@@ -616,7 +616,7 @@ class FixIt {
     if ($tocCore === null) {
       return;
     }
-    if (document.getElementById('toc-static').getAttribute('data-kept') === 'true' || this.util.isTocStatic()) {
+    if (document.getElementById('toc-static').dataset.kept === true || this.util.isTocStatic()) {
       const $tocContentStatic = document.getElementById('toc-content-static');
       if ($tocCore.parentElement !== $tocContentStatic) {
         $tocCore.parentElement.removeChild($tocCore);
@@ -637,7 +637,7 @@ class FixIt {
       const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
       const $tocLiElements = $tocCore.getElementsByTagName('li');
       const $headerLinkElements = document.getElementsByClassName('header-link');
-      const headerIsFixed = document.body.getAttribute('data-header-desktop') !== 'normal';
+      const headerIsFixed = document.body.dataset.headerDesktop !== 'normal';
       const headerHeight = document.getElementById('header-desktop').offsetHeight;
       document.querySelector('.container').addEventListener('resize', () => {
         $toc.style.marginBottom = `${document.querySelector('.container').clientHeight - document.querySelector('.post-footer').offsetTop}px`;
