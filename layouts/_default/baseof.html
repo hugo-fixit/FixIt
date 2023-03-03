@@ -23,7 +23,7 @@
     <div class="wrapper">
       {{- partial "header.html" . -}}
       {{- $toc := .Scratch.Get "toc" -}}
-      <main class="container{{ if (eq $toc.enable true) | and (eq $toc.position `left`) }}-reverse{{ end }}" data-page-style="{{ (.Scratch.Get `params`).pageStyle | default `normal` }}">
+      <main class="container{{ if (eq $toc.enable true) | and (eq $toc.position `left`) }} container-reverse{{ end }}" data-page-style="{{ (.Scratch.Get `params`).pageStyle | default `normal` }}">
         {{- block "content" . }}{{ end -}}
       </main>
       {{- partial "footer.html" . -}}
