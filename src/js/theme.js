@@ -612,9 +612,15 @@ class FixIt {
    * init table of contents
    */
   initToc() {
-    const $tocCore = document.getElementById('TableOfContents');
+    let $tocCore = document.getElementById('TableOfContents');
     if ($tocCore === null) {
       return;
+    }
+    // It's a dirty hack to fix the bug of APlayer, see https://github.com/hugo-fixit/FixIt/issues/292
+    if (typeof APlayer === 'function') {
+      const $newTocCore = $tocCore.cloneNode(true);
+      $tocCore.parentElement.replaceChild($newTocCore, $tocCore);
+      $tocCore = $newTocCore;
     }
     if (document.getElementById('toc-static').dataset.kept === true || this.util.isTocStatic()) {
       const $tocContentStatic = document.getElementById('toc-content-static');
