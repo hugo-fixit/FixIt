@@ -70,6 +70,14 @@
 
 {{- /* Page SEO */ -}}
 {{- else if .IsPage -}}
+  {{- $authorName := .Site.Author.name | default (T "single.author") -}}
+  {{- with .Params.author -}}
+    {{- if reflect.IsMap . -}}
+      {{- $authorName = cond (isset . "name") .name $authorName -}}
+    {{- else -}}
+      {{- $authorName = . -}}
+    {{- end -}}
+  {{- end -}}
   <script type="application/ld+json">
   {
     "@context": "http://schema.org",
@@ -128,8 +136,7 @@
     {{- with .Site.Copyright -}}
       "license": {{ . | safeHTML }},
     {{- end -}}
-    {{- $postAuthor := cond (reflect.IsMap .Params.author) .Params.author.name .Params.author -}}
-    {{- $publisher := $postAuthor | default .Site.Author.name | default (T "single.author") | dict "name" -}}
+    {{- $publisher := $authorName | dict "name" -}}
     {{- $publisher = $params.seo.publisher | default dict | merge $publisher -}}
     "publisher": {
       "@type": "Organization",
@@ -148,7 +155,7 @@
         {{- end -}}
       {{- end -}}
     },
-    {{- with $postAuthor | default .Site.Author.name | default (T "single.author") -}}
+    {{- with $authorName -}}
       "author": {
         "@type": "Person",
         "name": {{ . | safeHTML }}
