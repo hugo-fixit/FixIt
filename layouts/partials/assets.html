@@ -88,7 +88,7 @@
   {{- $typeit := $.Site.Params.typeit -}}
   {{- $source := $cdn.typeitJS | default "lib/typeit/index.umd.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
-  {{- $config = dict "speed" $typeit.speed "cursorSpeed" $typeit.cursorSpeed "cursorChar" $typeit.cursorChar "duration" $typeit.duration "data" . | dict "typeit" | merge $config -}}
+  {{- $config = dict "speed" $typeit.speed "cursorSpeed" $typeit.cursorSpeed "cursorChar" $typeit.cursorChar "loop" $typeit.loop "loopDelay" $typeit.loopDelay "duration" $typeit.duration "data" . | dict "typeit" | merge $config -}}
 {{- end -}}
 
 {{- /* KaTeX */ -}}

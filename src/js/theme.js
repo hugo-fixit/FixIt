@@ -804,7 +804,8 @@ class FixIt {
       const speed = typeitConfig.speed || 100;
       const cursorSpeed = typeitConfig.cursorSpeed || 1000;
       const cursorChar = typeitConfig.cursorChar || '|';
-      const loop = typeitConfig.loop || false;
+      console.info('initTypeit == > loop =>'+typeitConfig.loop);
+      const loop = typeitConfig.loop ? true : false;
       const loopDelay = typeitConfig.loopDelay || null;
       Object.values(typeitConfig.data).forEach((group) => {
         const typeone = (i) => {
@@ -815,7 +816,7 @@ class FixIt {
             lifeLike: true,
             cursorSpeed: cursorSpeed,
             cursorChar: cursorChar,
-            loop: true,
+            loop: loop,
             loopDelay: loopDelay,
             waitUntilVisible: true,
             afterComplete: () => {
