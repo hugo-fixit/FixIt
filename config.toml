@@ -650,6 +650,11 @@
     cursorChar = "|"
     # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
     duration = -1
+    
+    loop = false
+
+    loopDelay = 0
+
 
   # FixIt 0.2.15 | NEW Mermaid config
   [params.mermaid]
