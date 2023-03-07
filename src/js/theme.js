@@ -815,7 +815,7 @@ class FixIt {
             lifeLike: true,
             cursorSpeed: cursorSpeed,
             cursorChar: cursorChar,
-            loop: true,
+            loop: loop,
             loopDelay: loopDelay,
             waitUntilVisible: true,
             afterComplete: () => {
