@@ -4,6 +4,7 @@
   {{- $classList = $classList | append . -}}
 {{- end -}}
 {{- $tag := .Get "tag" | default "div" -}}
+{{- $loop := cond (ne (.Get "group") "") false (.Get "loop") -}}
 
 {{- if .Get "code" -}}
   {{- /* highlight code content without line number */ -}}
@@ -34,5 +35,5 @@
   {{- $attrs = delimit $classList " " | printf `%v class="%v"` $attrs -}}
 {{- end -}}
 
-<div class="typeit">{{ printf `<%v %v></%v>` $tag $attrs $tag | safeHTML }}</div>
+<div class="typeit"{{ if ne $loop "" }} data-loop="{{ $loop }}"{{ end }}>{{ printf `<%v %v></%v>` $tag $attrs $tag | safeHTML }}</div>
 {{- /* EOF */ -}}

@@ -804,9 +804,11 @@ class FixIt {
       const speed = typeitConfig.speed || 100;
       const cursorSpeed = typeitConfig.cursorSpeed || 1000;
       const cursorChar = typeitConfig.cursorChar || '|';
+      const loop = typeitConfig.loop ?? false;
       Object.values(typeitConfig.data).forEach((group) => {
         const typeone = (i) => {
           const id = group[i];
+          const shortcodeLoop = document.querySelector(`#${id}`).parentElement.dataset.loop;
           const instance = new TypeIt(`#${id}`, {
             strings: this.data[id],
             speed: speed,
@@ -814,6 +816,7 @@ class FixIt {
             cursorSpeed: cursorSpeed,
             cursorChar: cursorChar,
             waitUntilVisible: true,
+            loop: shortcodeLoop ? JSON.parse(shortcodeLoop) : loop,
             afterComplete: () => {
               if (i === group.length - 1) {
                 if (typeitConfig.duration >= 0) {

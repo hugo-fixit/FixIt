@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 
 - :sparkles: Feat: add instant page (@Mejituu [#279](https://github.com/hugo-fixit/FixIt/pull/279))
 - :sparkles: Feat: add `force` option value to `params.page.lightgallery`
+- :sparkles: Feat: add loop paramter for typeit ([#303](https://github.com/hugo-fixit/FixIt/pull/303))
 - :bug: Fix: donate images without lazy loading (@Mejituu [#279](https://github.com/hugo-fixit/FixIt/pull/279))
 - :bug: Fix: discordinvite typo (@mathieu-gilloots [#282](https://github.com/hugo-fixit/FixIt/pull/282))
 - :bug: Fix: missing parameter `requiredFields` for Valine
@@ -28,6 +29,7 @@ All notable changes to this project will be documented in this file.
 - :wrench: Chore: change the theme minimum supported Hugo versions above **0.89.0**
 - :arrow_up: Chore(libs):
   - Update Update @waline/client from 2.10.0 to 2.14.7 (@Mejituu [#279](https://github.com/hugo-fixit/FixIt/pull/279))
+  - Update typeit from 8.7.0 to 8.7.1
 - **Full Changelog:** @Lruihao [`v0.2.16...v0.2.17`](https://github.com/hugo-fixit/FixIt/compare/v0.2.16...v0.2.17)
 
 ## v0.2.17 [2023.1.29]
