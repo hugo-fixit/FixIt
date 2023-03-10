@@ -40,23 +40,23 @@ footer {
 @keyframes icon-animate {
   0%,
   100% {
-    transform: scale(1);
+    @include transform(scale(1));
   }
 
   10%,
   30% {
-    transform: scale(0.9);
+    @include transform(scale(0.9));
   }
 
   20%,
   40%,
   60%,
   80% {
-    transform: scale(1.1);
+    @include transform(scale(1.1));
   }
 
   50%,
   70% {
-    transform: scale(1.1);
+    @include transform(scale(1.1));
   }
 }

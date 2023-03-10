@@ -34,7 +34,7 @@
 }
 .friend-link:hover {
   background: #fff;
-  transform: scale(1.03);
+  @include transform(scale(1.03));
   box-shadow: 0 0 3px #aaa;
 }
 .friend-avatar {

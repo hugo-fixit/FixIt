@@ -1,15 +1,15 @@
 @keyframes octocat-wave {
   0%,
   100% {
-    transform: rotate(0);
+    @include transform(rotate(0));
   }
   20%,
   60% {
-    transform: rotate(-25deg);
+    @include transform(rotate(-25deg));
   }
   40%,
   80% {
-    transform: rotate(10deg);
+    @include transform(rotate(10deg));
   }
 }
 
@@ -37,7 +37,7 @@
     left: 0;
 
     svg {
-      transform: scale(-1, 1);
+      @include transform(scale(-1, 1));
     }
   }
   &.right {
