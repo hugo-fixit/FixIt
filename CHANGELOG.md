@@ -22,6 +22,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: js.build is executed after fingerprint, resulting in the destruction of js integrity
 - :bug: Fix: toc fails when the toc aside is on the left
 - :bug: Fix: APlayer invades the click event of the anchor links, resulting in invalid Chinese anchor links scrolling ([#292](https://github.com/hugo-fixit/FixIt/issues/292))
+- :bug: Fix: resolve style conflicts between valine and animate.css ([#304](https://github.com/hugo-fixit/FixIt/issues/304))
 - :recycle: Refactor: image lazy loading ([#283](https://github.com/hugo-fixit/FixIt/pull/283))
 - :recycle: Refactor: author's avatar of post or profile ([#288](https://github.com/hugo-fixit/FixIt/pull/288))
 - :art: Style: fix `#comments` css style conflict ([#269](https://github.com/hugo-fixit/FixIt/issues/269))

@@ -1,0 +1,20 @@
+/* Resolve style conflicts between third-party plugins */
+
+@keyframes #{$prefix}pulse {
+  from {
+    @include transform(scale3d(1, 1, 1));
+  }
+
+  50% {
+    @include transform(scale3d(1.05, 1.05, 1.05));
+  }
+
+  to {
+    @include transform(scale3d(1, 1, 1));
+  }
+}
+
+.animate__pulse {
+  -webkit-animation-name: #{$prefix}pulse !important;
+  animation-name: #{$prefix}pulse !important;
+}
