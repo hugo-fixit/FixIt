@@ -351,8 +351,13 @@ header {
       background: $header-background-color;
       border-top: 2px solid $global-border-color;
       display: none;
-      padding: 0.5rem 0 0;
+      overflow-y: overlay;
+      max-height: 70vh;
       @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
+      
+      &::-webkit-scrollbar {
+        width: 0;
+      }
 
       .search-wrapper {
         display: flex;
@@ -421,6 +426,16 @@ header {
         &.theme-switch,
         &.language {
           text-align: center;
+          position: sticky;
+          background-color: $header-background-color;
+
+          [data-theme='dark'] & {
+            background-color: $header-background-color-dark;
+          }
+          bottom: 0;
+        }
+        &.theme-switch:has(+ .language) {
+          bottom: 2.5rem;
         }
 
         .language-select {
