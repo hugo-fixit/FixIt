@@ -87,6 +87,10 @@
   .toc-content {
     overflow-y: scroll;
     max-height: calc(100vh - #{2*$header-height});
+    
+    &::-webkit-scrollbar {
+      width: 0;
+    }
 
     &.always-active ul {
       display: block;

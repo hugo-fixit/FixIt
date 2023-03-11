@@ -43,8 +43,25 @@ html {
 body {
   background-color: $global-background-color;
   color: $global-font-color;
-  @include overflow-wrap(break-word);
   scrollbar-color: auto;
+  @include overflow-wrap(break-word);
+
+  &::-webkit-scrollbar {
+    width: 0.75rem;
+    height: 0.75rem;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    background-clip: content-box;
+    border: 2px solid transparent;
+    @include border-radius(0.5rem);
+  }
+
+  &[data-scroll]::-webkit-scrollbar-thumb {
+    background-color: $scrollbar-color;
+  }
 
   &[data-theme='dark'] {
     color: $global-font-color-dark;

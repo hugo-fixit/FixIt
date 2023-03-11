@@ -5,11 +5,11 @@ All notable changes to this project will be documented in this file.
 
 ## v0.2.18
 
-## Breaking Updates
+## :boom: Breaking Updates
 
 - [#288](https://github.com/hugo-fixit/FixIt/pull/288)
 
-## What's New
+## :new: What's New
 
 > Snapshot: <>
 
@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file.
 - :wheelchair: Feat: add post update date to post meta ([#285](https://github.com/hugo-fixit/FixIt/issues/285)])
 - :art: Style: fix `#comments` css style conflict ([#269](https://github.com/hugo-fixit/FixIt/issues/269))
 - :art: Style: adjust the mobile header style and fix the bug that scrolling is invalid when there are too many menus on mobile ([#289](https://github.com/hugo-fixit/FixIt/issues/289))
+- :art: Perf: optimize the scroll bar style of body and toc-auto elements
 - :memo: Docs: refactor the theme documentation
 - :wrench: Chore: change the theme minimum supported Hugo versions above **0.89.0**
 - :arrow_up: Chore(libs):
