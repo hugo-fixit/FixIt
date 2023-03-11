@@ -62,19 +62,27 @@
       </div>
       <div class="post-meta-line">
         {{- with .Site.Params.dateformat | default "2006-01-02" | .PublishDate.Format -}}
-          <span title={{ "2006-01-02 15:04:05" | $.PublishDate.Format }}>
-            {{- dict "Class" "fa-regular fa-calendar-alt fa-fw" | partial "plugin/icon.html" -}}&nbsp;
+          <span title="{{ dict "Date" ("2006-01-02 15:04:05" | $.PublishDate.Format) | T "single.publishedOnDate" }}">
+            {{- dict "Class" "fa-regular fa-calendar-alt fa-fw me-1" | partial "plugin/icon.html" -}}
+            {{- printf `<time datetime="%v">%v</time>` . . | safeHTML -}}
+          </span>&nbsp;
+        {{- end -}}
+        {{- with .Site.Params.dateformat | default "2006-01-02" | .Lastmod.Format -}}
+          <span title="{{ dict "Date" ("2006-01-02 15:04:05" | $.Lastmod.Format) | T "single.updatedOnDate" }}">
+            {{- dict "Class" "fa-regular fa-edit fa-fw me-1" | partial "plugin/icon.html" -}}
             {{- printf `<time datetime="%v">%v</time>` . . | safeHTML -}}
           </span>&nbsp;
         {{- end -}}
         {{- if $params.wordCount -}}
           <span>
-            {{- dict "Class" "fa-solid fa-pencil-alt fa-fw" | partial "plugin/icon.html" }} {{ T "single.wordCount" .WordCount -}}
+            {{- dict "Class" "fa-solid fa-pencil-alt fa-fw me-1" | partial "plugin/icon.html" -}}
+            {{- T "single.wordCount" .WordCount -}}
           </span>&nbsp;
         {{- end -}}
         {{- if $params.readingTime -}}
           <span>
-            {{- dict "Class" "fa-regular fa-clock fa-fw" | partial "plugin/icon.html" }} {{ T "single.readingTime" .ReadingTime -}}
+            {{- dict "Class" "fa-regular fa-clock fa-fw me-1" | partial "plugin/icon.html" -}}
+            {{- T "single.readingTime" .ReadingTime -}}
           </span>&nbsp;
         {{- end -}}
 
@@ -87,53 +95,53 @@
           {{- .Scratch.Set "commentExpired" true -}}
         {{- end -}}
         {{- $comment := .Scratch.Get "comment" | default dict -}}
-        {{- $visitorIcon := dict "Class" "fa-regular fa-eye fa-fw" | partial "plugin/icon.html" -}}
-        {{- $commentIcon := dict "Class" "fa-regular fa-comments fa-fw" | partial "plugin/icon.html" -}}
+        {{- $visitorIcon := dict "Class" "fa-regular fa-eye fa-fw me-1" | partial "plugin/icon.html" -}}
+        {{- $commentIcon := dict "Class" "fa-regular fa-comments fa-fw me-1" | partial "plugin/icon.html" -}}
         {{- /* Visitor Count */ -}}
         {{- if $comment.enable -}}
           {{- if $comment.artalk.enable -}}
             <span class="comment-visitors" data-flag-title="{{ .Title }}">
-              {{ $visitorIcon }}&nbsp;<span id="{{ .RelPermalink }}" class="artalk-visitor-count">-</span>&nbsp;{{ T "single.views" }}
+              {{ $visitorIcon }}<span id="{{ .RelPermalink }}" class="artalk-visitor-count">-</span>&nbsp;{{ T "single.views" }}
             </span>&nbsp;
           {{- else if ($comment.valine.enable | and $comment.valine.visitor) -}}
             <span id="{{ .RelPermalink }}" class="leancloud_visitors comment-visitors" data-flag-title="{{ .Title }}">
-              {{ $visitorIcon }}&nbsp;<span class="leancloud-visitors-count">-</span>&nbsp;{{ T "single.views" }}
+              {{ $visitorIcon }}<span class="leancloud-visitors-count">-</span>&nbsp;{{ T "single.views" }}
             </span>&nbsp;
           {{- else if $comment.waline.enable | and $comment.waline.pageview -}}
             <span class="comment-visitors" data-flag-title="{{ .Title }}">
-              {{ $visitorIcon }}&nbsp;<span data-path="{{ .RelPermalink }}" class="waline-pageview-count">-</span>&nbsp;{{ T "single.views" }}
+              {{ $visitorIcon }}<span data-path="{{ .RelPermalink }}" class="waline-pageview-count">-</span>&nbsp;{{ T "single.views" }}
             </span>&nbsp;
           {{- else if $comment.twikoo.enable | and $comment.twikoo.visitor -}}
             <span id="{{ .RelPermalink }}" class="comment-visitors" data-flag-title="{{ .Title }}">
-              {{ $visitorIcon }}&nbsp;<span id="twikoo_visitors">-</span>&nbsp;{{ T "single.views" }}
+              {{ $visitorIcon }}<span id="twikoo_visitors">-</span>&nbsp;{{ T "single.views" }}
             </span>&nbsp;
           {{- else if .Site.Params.ibruce.enable | and .Site.Params.ibruce.enablePost -}}
             <span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="{{ .Title }}">
-              {{ $visitorIcon }}&nbsp;<span id="busuanzi_value_page_pv">-</span>&nbsp;{{ T "single.views" }}
+              {{ $visitorIcon }}<span id="busuanzi_value_page_pv">-</span>&nbsp;{{ T "single.views" }}
             </span>&nbsp;
           {{- end -}}
         {{- else if .Site.Params.ibruce.enable | and .Site.Params.ibruce.enablePost -}}
           <span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="{{ .Title }}">
-            {{ $visitorIcon }}&nbsp;<span id="busuanzi_value_page_pv">-</span>&nbsp;{{ T "single.views" }}
+            {{ $visitorIcon }}<span id="busuanzi_value_page_pv">-</span>&nbsp;{{ T "single.views" }}
           </span>&nbsp;
         {{- end -}}
         {{- /* Comment Count */ -}}
         {{- if $comment.enable -}}
           {{- if $comment.artalk.enable -}}
             <span class="comment-count" data-flag-title="{{ .Title }}">
-              {{ $commentIcon }}&nbsp;<span data-xid="{{ .RelPermalink }}" class="artalk-comment-count">-</span>&nbsp;{{ T "single.comments" }}
+              {{ $commentIcon }}<span data-xid="{{ .RelPermalink }}" class="artalk-comment-count">-</span>&nbsp;{{ T "single.comments" }}
             </span>&nbsp;
           {{- else if $comment.valine.enable | and $comment.valine.commentCount -}}
             <span class="comment-count" data-flag-title="{{ .Title }}">
-              {{ $commentIcon }}&nbsp;<span data-xid="{{ .RelPermalink }}" class="valine-comment-count">-</span>&nbsp;{{ T "single.comments" }}
+              {{ $commentIcon }}<span data-xid="{{ .RelPermalink }}" class="valine-comment-count">-</span>&nbsp;{{ T "single.comments" }}
             </span>&nbsp;
           {{- else if $comment.waline.enable | and $comment.waline.comment -}}
             <span class="comment-count" data-flag-title="{{ .Title }}">
-              {{ $commentIcon }}&nbsp;<span data-path="{{ .RelPermalink }}" class="waline-comment-count">-</span>&nbsp;{{ T "single.comments" }}
+              {{ $commentIcon }}<span data-path="{{ .RelPermalink }}" class="waline-comment-count">-</span>&nbsp;{{ T "single.comments" }}
             </span>&nbsp;
           {{- else if $comment.twikoo.enable | and $comment.twikoo.commentCount -}}
             <span id="{{ .RelPermalink }}" class="comment-count" data-flag-title="{{ .Title }}">
-              {{ $commentIcon }}&nbsp;<span id="twikoo-comment-count">-</span>&nbsp;{{ T "single.comments" }}
+              {{ $commentIcon }}<span id="twikoo-comment-count">-</span>&nbsp;{{ T "single.comments" }}
             </span>&nbsp;
           {{- end -}}
         {{- end -}}
