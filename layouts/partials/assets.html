@@ -229,8 +229,9 @@
 {{- end -}}
 
 {{- /* Site creation time */ -}}
-{{- if .Site.Params.footer.siteTime.enable -}}
-  {{- with .Site.Params.footer.siteTime.value -}}
+{{- $siteTime := .Scratch.Get "siteTime" -}}
+{{- if $siteTime.enable -}}
+  {{- with $siteTime.value -}}
     {{- $config = dict "siteTime" . | merge $config -}}
   {{- end -}}
 {{- end -}}

@@ -27,3 +27,14 @@
   {{- $math = dict "enable" false -}}
 {{- end -}}
 {{- .Scratch.Set "math" $math -}}
+
+{{- /*  SiteTime config patch  */ -}}
+{{- $siteTime := dict "Animate" true "Icon" "fa-solid fa-heartbeat" -}}
+{{- with .Site.Params.footer.siteTime -}}
+  {{- if reflect.IsMap . -}}
+    {{- $siteTime = . -}}
+  {{- else -}}
+    {{- $siteTime = dict "enable" true "value" . | merge $siteTime -}}
+  {{- end -}}
+{{- end -}}
+{{- .Scratch.Set "siteTime" $siteTime -}}

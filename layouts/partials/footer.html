@@ -44,10 +44,11 @@
         </div>
       {{- end -}}
 
-      {{- if .Site.Params.footer.siteTime.enable | or .Site.Params.footer.wordCount -}}
+      {{- $siteTime := .Scratch.Get "siteTime" -}}
+      {{- if $siteTime.enable | or .Site.Params.footer.wordCount -}}
         <div class="footer-line statistics{{ with .Site.Params.footer.order.statistics }} order-{{ . }}{{ end }}">
-          {{- if .Site.Params.footer.siteTime.enable | and .Site.Params.footer.siteTime.value -}}
-            {{- with .Site.Params.footer.siteTime -}}
+          {{- if $siteTime.enable | and $siteTime.value -}}
+            {{- with $siteTime -}}
               <span class="site-time" title='{{ T "footer.siteRunning" }}'>
                 {{- $siteTimeIcon := printf (cond .Animate "%v fa-fw animate-icon" "%v fa-fw") .Icon -}}
                 {{- dict "Class" $siteTimeIcon | partial "plugin/icon.html" -}}

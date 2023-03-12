@@ -23,6 +23,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: toc fails when the toc aside is on the left
 - :bug: Fix: APlayer invades the click event of the anchor links, resulting in invalid Chinese anchor links scrolling ([#292](https://github.com/hugo-fixit/FixIt/issues/292))
 - :bug: Fix: resolve style conflicts between valine and animate.css ([#304](https://github.com/hugo-fixit/FixIt/issues/304))
+- :bug: Fix: version `v0.2.17` is not compatible with previous versions
 - :recycle: Refactor: image lazy loading ([#283](https://github.com/hugo-fixit/FixIt/pull/283))
 - :recycle: Refactor: author's avatar of post or profile ([#288](https://github.com/hugo-fixit/FixIt/pull/288))
 - :wheelchair: Feat: add post update date to post meta ([#285](https://github.com/hugo-fixit/FixIt/issues/285)])
