@@ -202,7 +202,7 @@
   {{- $cryptoCoreJS := $cdn.cryptoCoreJS | default "lib/crypto-js/core.js" -}}
   {{- $cryptoEncBase64JS := $cdn.cryptoEncBase64JS | default "lib/crypto-js/enc-base64.js" -}}
   {{- $cryptoMd5JS := $cdn.cryptoMd5JS | default "lib/crypto-js/md5.js" -}}
-  {{- $cryptoSha256JS := $cdn.cryptoCoreJS | default "lib/crypto-js/sha256.js" -}}
+  {{- $cryptoSha256JS := $cdn.cryptoSha256JS | default "lib/crypto-js/sha256.js" -}}
   {{- dict "Source" $cryptoCoreJS "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- dict "Source" $cryptoEncBase64JS "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- dict "Source" $cryptoMd5JS "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
