@@ -115,7 +115,7 @@ class FixIt {
   }
 
   initMenuDesktop() {
-    this.util.forEach(document.querySelectorAll('.has-children, #header-desktop .language'), ($item) => {
+    this.util.forEach(document.querySelectorAll('.has-children'), ($item) => {
       $item.querySelector('.sub-menu').style.minWidth = `${$item.offsetWidth - 8}px`;
     });
   }

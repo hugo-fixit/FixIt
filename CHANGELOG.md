@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: `crypto-js/md5.js` and `crypto-js/sha256.js` cdn path error
 - :recycle: Refactor: image lazy loading ([#283](https://github.com/hugo-fixit/FixIt/pull/283))
 - :recycle: Refactor: author's avatar of post or profile ([#288](https://github.com/hugo-fixit/FixIt/pull/288))
+- :recycle: Refactor: language switch in desktop header ([#306](https://github.com/hugo-fixit/FixIt/pull/306))
 - :wheelchair: Feat: add post update date to post meta ([#285](https://github.com/hugo-fixit/FixIt/issues/285)])
 - :art: Style: fix `#comments` css style conflict ([#269](https://github.com/hugo-fixit/FixIt/issues/269))
 - :art: Style: adjust the mobile header style and fix the bug that scrolling is invalid when there are too many menus on mobile ([#289](https://github.com/hugo-fixit/FixIt/issues/289))

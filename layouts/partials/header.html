@@ -90,40 +90,6 @@
         {{- if .Site.Menus.main -}}
           <li class="menu-item delimiter"></li>
         {{- end -}}
-        {{- if .Site.IsMultiLingual -}}
-          <li class="menu-item language">
-            <span role="button" aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}">
-              {{- .Language.LanguageName -}}
-              {{ dict "Class" "dropdown-icon fa-solid fa-chevron-down" | partial "plugin/icon.html" }}
-            </span>
-            <ul class="sub-menu">
-              {{- if (eq .Kind "404") -}}
-                {{- range .Sites -}}
-                  {{- if ne . $.Site -}}
-                    {{- $link := printf "%v/404.html" .LanguagePrefix -}}
-                    <li class="menu-item">
-                      <a href="{{ $link }}" class="menu-link" title="{{- .Language.LanguageName -}}">
-                        {{- .Language.LanguageName -}}
-                      </a>
-                    </li>
-                  {{- end -}}
-                {{- end -}}
-              {{- else if gt (len .AllTranslations) 1 -}}
-                {{- range .AllTranslations -}}
-                  {{- if ne .Lang $.Lang -}}
-                    <li class="menu-item">
-                      <a href="{{ .RelPermalink }}" class="menu-link" title="{{- .Language.LanguageName -}}">
-                        {{- .Language.LanguageName -}}
-                      </a>
-                    </li>
-                  {{- end -}}
-                {{- end -}}
-              {{- else -}}
-                <li class="menu-item">{{- T "header.noMoretTranslations" -}}</li>
-              {{- end -}}
-            </ul>
-          </li>
-        {{- end -}}
         {{- if .Site.Params.search.enable -}}
           <li class="menu-item search" id="search-desktop">
             <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `assets.searchPlaceholder`) }}" id="search-input-desktop">
@@ -141,6 +107,43 @@
         <li class="menu-item theme-switch" title="{{ T "header.switchTheme" }}">
           {{ dict "Class" "fa-solid fa-adjust fa-fw" | partial "plugin/icon.html" }}
         </li>
+        {{- if .Site.IsMultiLingual -}}
+          <li class="menu-item language">
+            <span role="button" aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}">
+              {{- dict "Class" "fa-solid fa-language fa-fw" | partial "plugin/icon.html" -}}
+            </span>
+            <ul class="sub-menu">
+              {{- if (eq .Kind "404") -}}
+                {{- range .Sites -}}
+                  {{- if ne . $.Site -}}
+                    {{- $link := printf "%v/404.html" .LanguagePrefix -}}
+                    <li class="menu-item">
+                      <a href="{{ $link }}" class="menu-link" title="{{- .Language.LanguageName -}}">
+                        {{- .Language.LanguageName -}}
+                      </a>
+                    </li>
+                  {{- end -}}
+                {{- end -}}
+              {{- else if gt (len .AllTranslations) 1 -}}
+                {{- range .AllTranslations -}}
+                  {{- if ne .Lang $.Lang -}}
+                    <li class="menu-item">
+                      <a href="{{ .RelPermalink }}" class="menu-link" title="{{ .Language.LanguageName }}">
+                        {{- .Language.LanguageName -}}
+                      </a>
+                    </li>
+                  {{- else -}}
+                    <li class="menu-item">
+                      <span class="menu-link text-secondary" title="{{ .Language.LanguageName }}">{{ .Language.LanguageName }}</span>
+                    </li>
+                  {{- end -}}
+                {{- end -}}
+              {{- else -}}
+                <li class="menu-item">{{- T "header.noMoretTranslations" -}}</li>
+              {{- end -}}
+            </ul>
+          </li>
+        {{- end -}}
       </ul>
     </nav>
   </div>
