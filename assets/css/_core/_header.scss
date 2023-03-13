@@ -216,10 +216,13 @@ header {
       flex-wrap: nowrap;
       float: right;
 
-      >.menu-item:hover {
-        & .sub-menu {
+      >.menu-item {
+        &:hover .sub-menu {
           display: block;
           @include transform(translateX(-0.5rem));
+        }
+        &.language:hover .sub-menu {
+          @include transform(translateX(calc(1.75rem - 100%)));
         }
       }
 
