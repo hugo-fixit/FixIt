@@ -238,10 +238,11 @@ FixIt is licensed under the **MIT** license. Check the [LICENSE file](LICENSE) f
 
 ## Sponsor
 
+Giving me a Star 🌟 is already the greatest encouragement and support for me.\
 If you enjoy the theme, please consider buying me a coffee ☕️.
 
 * [PayPal](https://paypal.me/Lruihao)
-* [Alipay](images/alipay.gif)
-* [Wechat](images/wechatpay.gif)
+* [Alipay](images/alipay.jpg)
+* [Wechat](images/wechatpay.jpg)
 
 Thanks! ❤️

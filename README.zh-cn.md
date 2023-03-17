@@ -242,10 +242,11 @@ FixIt 根据 **MIT** 许可协议授权。 更多信息请查看 [LICENSE 文件
 
 ## 赞助支持
 
+给我一个 Star 🌟 已经是对我最大的鼓励和支持了。\
 如果你喜爱这个主题，请考虑给我买杯咖啡 ☕️。
 
 * [PayPal](https://paypal.me/Lruihao)
-* [支付宝](images/alipay.gif)
-* [微信支付](images/wechatpay.gif)
+* [支付宝](images/alipay.jpg)
+* [微信支付](images/wechatpay.jpg)
 
 谢谢！❤️
