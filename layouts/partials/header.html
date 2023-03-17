@@ -108,7 +108,7 @@
           {{ dict "Class" "fa-solid fa-adjust fa-fw" | partial "plugin/icon.html" }}
         </li>
         {{- if .Site.IsMultiLingual -}}
-          <li class="menu-item language">
+          <li class="menu-item language-switch">
             <span role="button" aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}">
               {{- dict "Class" "fa-solid fa-language fa-fw" | partial "plugin/icon.html" -}}
             </span>
@@ -277,35 +277,35 @@
             </li>
           {{- end -}}
         {{- end -}}
-        <li class="menu-item theme-switch" title="{{ T "header.switchTheme" }}">
-          {{ dict "Class" "fa-solid fa-adjust fa-fw" | partial "plugin/icon.html" }}
-        </li>
-        {{- if .Site.IsMultiLingual -}}
-          <li class="menu-item language">
-            <span role="button" aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}">
-              {{- .Language.LanguageName -}}
-              {{ dict "Class" "dropdown-icon fa-solid fa-chevron-down" | partial "plugin/icon.html" }}
+        <li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="{{ T "header.switchTheme" }}">{{ dict "Class" "fa-solid fa-adjust fa-fw" | partial "plugin/icon.html" }}</span>
+          {{- if .Site.IsMultiLingual -}}
+            <span class="menu-system-item language-switch">
+              <span role="button" aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}">
+                {{- .Language.LanguageName -}}
+                {{- dict "Class" "dropdown-icon fa-solid fa-chevron-down" | partial "plugin/icon.html" -}}
+              </span>
+              <select class="language-select" onchange="location = this.value;">
+                {{- if eq .Kind "404" -}}
+                  {{- range .Sites -}}
+                    {{- $link := printf "%v/404.html" .LanguagePrefix -}}
+                    <option value="{{ $link }}"{{ if eq . $.Site }} selected disabled{{ end }}>
+                      {{- .Language.LanguageName -}}
+                    </option>
+                  {{- end -}}
+                {{- else if gt (len .AllTranslations) 1 -}}
+                  {{- range .AllTranslations -}}
+                    <option value="{{ .RelPermalink }}"{{ if eq .Lang $.Lang }} selected disabled{{ end }}>
+                      {{- .Language.LanguageName -}}
+                    </option>
+                  {{- end -}}
+                {{- else -}}
+                  <option disabled>{{- T "header.noMoretTranslations" -}}</option>
+                {{- end -}}
+              </select>
             </span>
-            <select class="language-select" onchange="location = this.value;">
-              {{- if eq .Kind "404" -}}
-                {{- range .Sites -}}
-                  {{- $link := printf "%v/404.html" .LanguagePrefix -}}
-                  <option value="{{ $link }}"{{ if eq . $.Site }} selected disabled{{ end }}>
-                    {{- .Language.LanguageName -}}
-                  </option>
-                {{- end -}}
-              {{- else if gt (len .AllTranslations) 1 -}}
-                {{- range .AllTranslations -}}
-                  <option value="{{ .RelPermalink }}"{{ if eq .Lang $.Lang }} selected disabled{{ end }}>
-                    {{- .Language.LanguageName -}}
-                  </option>
-                {{- end -}}
-              {{- else -}}
-                <option disabled>{{- T "header.noMoretTranslations" -}}</option>
-              {{- end -}}
-            </select>
-          </li>
-        {{- end -}}
+          {{- end -}}
+        </li>
       </ul>
     </nav>
   </div>
