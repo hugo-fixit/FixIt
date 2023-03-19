@@ -181,9 +181,11 @@ pre {
       .lntd:first-child {
         min-width: 1.6rem;
         text-align: right;
+        position: sticky;
+        left: 0;
 
         pre {
-          padding-right: 0;
+          // padding-right: 0;
         }
       }
       // code content

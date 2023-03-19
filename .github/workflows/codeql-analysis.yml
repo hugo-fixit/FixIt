@@ -19,7 +19,7 @@ on:
     branches:
       - master
   schedule:
-    - cron: '30 18 * * 5'
+    - cron: "30 18 * * 5"
 
 jobs:
   analyze:
@@ -29,14 +29,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'javascript' ]
-        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python' ]
+        language: [ "javascript" ]
+        # CodeQL supports [ "cpp", "csharp", "go", "java", "javascript", "python" ]
         # Learn more:
         # https://docs.github.com/en/free-pro-team@latest/github/finding-security-vulnerabilities-and-errors-in-your-code/configuring-code-scanning#changing-the-languages-that-are-analyzed
 
     steps:
-    - name: Checkout repository
+    - name: Check out repository code
       uses: actions/checkout@v3
+      with:
+        submodules: true  # Fetch Hugo themes (true OR recursive)
+        fetch-depth: 0         # Fetch all history for .GitInfo and .Lastmod
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL

@@ -5,35 +5,36 @@ on:
     branches:
       - master
     paths:
-      - 'docs'
+      - "docs"
   workflow_dispatch:
 
 jobs:
   algolia-atomic:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out repository code
+        uses: actions/checkout@v3
         with:
-          submodules: true  # Fetch Hugo themes (true OR recursive)
+          submodules: recursive  # Fetch Hugo themes (true OR recursive)
           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: 'latest'
+          hugo-version: "latest"
           extended: true
 
       - name: Build
         run: |
-            npm install
-            npm run build
+          npm install
+          npm run build
 
       - name: Update Algolia Index (en)
         env:
           ALGOLIA_APP_ID: YKOM6PKLUY
           ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
-          ALGOLIA_INDEX_NAME: 'index.en'
-          ALGOLIA_INDEX_FILE: './docs/public/index.json'
+          ALGOLIA_INDEX_NAME: "index.en"
+          ALGOLIA_INDEX_FILE: "./docs/public/index.json"
         run: |
           npm run algolia
 
@@ -41,7 +42,7 @@ jobs:
         env:
           ALGOLIA_APP_ID: YKOM6PKLUY
           ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
-          ALGOLIA_INDEX_NAME: 'index.zh-cn'
-          ALGOLIA_INDEX_FILE: './docs/public/zh-cn/index.json'
+          ALGOLIA_INDEX_NAME: "index.zh-cn"
+          ALGOLIA_INDEX_FILE: "./docs/public/zh-cn/index.json"
         run: |
           npm run algolia
