@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - :sparkles: Feat: add instant page (@Mejituu [#279](https://github.com/hugo-fixit/FixIt/pull/279))
 - :sparkles: Feat: add `force` option value to `params.page.lightgallery`
 - :sparkles: Feat: add loop paramter for typeit ([#303](https://github.com/hugo-fixit/FixIt/pull/303))
+- :sparkles: Feat: add paramater strict for giscus comment
 - :bug: Fix: donate images without lazy loading (@Mejituu [#279](https://github.com/hugo-fixit/FixIt/pull/279))
 - :bug: Fix: discordinvite typo (@mathieu-gilloots [#282](https://github.com/hugo-fixit/FixIt/pull/282))
 - :bug: Fix: missing parameter `requiredFields` for Valine

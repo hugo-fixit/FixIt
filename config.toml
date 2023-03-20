@@ -612,6 +612,7 @@
         category = ""
         categoryId = ""
         mapping = ""
+        strict = "0" # FixIt NEW | 0.2.18
         term = ""
         reactionsEnabled = "1"
         emitMetadata = "0"
