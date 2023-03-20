@@ -962,15 +962,13 @@ class FixIt {
         document.querySelector('.giscus-frame')?.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
       });
       this.switchThemeEventSet.add(this._giscusOnSwitchTheme);
-      const _this = this;
-      _this.giscus2parentMsg = window.addEventListener('message', (event) => {
+      this.giscus2parentMsg = window.addEventListener('message', (event) => {
         const $script = document.querySelector('#giscus>script');
         if ($script){
-          _this._giscusOnSwitchTheme();
+          this._giscusOnSwitchTheme();
           $script.parentElement.removeChild($script);
         }
-        window.removeEventListener('message', _this.giscus2parentMsg);
-      });
+      }, { once: true });
       return;
     }
   }
