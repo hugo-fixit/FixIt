@@ -656,8 +656,8 @@
 
   # FixIt 0.2.15 | NEW Mermaid config
   [params.mermaid]
-    # For values, see https://mermaid-js.github.io/mermaid/#/Setup?id=theme
-    themes = ["neutral", "dark"]
+    # For values, see https://mermaid.js.org/config/theming.html#available-themes
+    themes = ["default", "dark"]
 
   # FixIt 0.2.12 | NEW PanguJS config
   [params.pangu]
@@ -822,4 +822,4 @@
 [module]
   [module.hugoVersion]
     extended = true
-    min = "0.89.0"
+    min = "0.93.0"
