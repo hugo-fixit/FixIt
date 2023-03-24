@@ -37,7 +37,7 @@ All notable changes to this project will be documented in this file.
 - :art: Style: adjust the mobile header style and fix the bug that scrolling is invalid when there are too many menus on mobile ([#289](https://github.com/hugo-fixit/FixIt/issues/289))
 - :art: Perf: optimize the scroll bar style of body and toc-auto elements
 - :memo: Docs: refactor the theme documentation
-- :wrench: Chore: change the theme minimum supported Hugo versions above **0.93.0**
+- :wrench: Chore: change the theme minimum supported Hugo versions above **0.109.0**
 - :arrow_up: Chore(libs):
   - Update Update @waline/client from 2.10.0 to 2.14.7 (@Mejituu [#279](https://github.com/hugo-fixit/FixIt/pull/279))
   - Update typeit from 8.7.0 to 8.7.1
