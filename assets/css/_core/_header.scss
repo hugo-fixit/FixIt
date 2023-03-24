@@ -3,6 +3,7 @@ header {
   z-index: 150;
   background-color: $header-background-color;
   @include transition(box-shadow 0.3s ease);
+  @extend .print-d-none;
 
   [data-theme='dark'] & {
     background-color: $header-background-color-dark;

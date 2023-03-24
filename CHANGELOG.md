@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 > Snapshot: <>
 
 - :tada: Feat: add natively support mermaid with code fences ([#230](https://github.com/hugo-fixit/FixIt/issues/230))
+- :tada: Feat: add breadcrumb navigation ([#309](https://github.com/hugo-fixit/FixIt/pull/309))
 - :sparkles: Feat: add instant page (@Mejituu [#279](https://github.com/hugo-fixit/FixIt/pull/279))
 - :sparkles: Feat: add `force` option value to `params.page.lightgallery`
 - :sparkles: Feat: add loop paramter for typeit ([#303](https://github.com/hugo-fixit/FixIt/pull/303))
@@ -36,7 +37,7 @@ All notable changes to this project will be documented in this file.
 - :art: Style: adjust the mobile header style and fix the bug that scrolling is invalid when there are too many menus on mobile ([#289](https://github.com/hugo-fixit/FixIt/issues/289))
 - :art: Perf: optimize the scroll bar style of body and toc-auto elements
 - :memo: Docs: refactor the theme documentation
-- :wrench: Chore: change the theme minimum supported Hugo versions above **0.93.0**
+- :wrench: Chore: change the theme minimum supported Hugo versions above **0.109.0**
 - :arrow_up: Chore(libs):
   - Update Update @waline/client from 2.10.0 to 2.14.7 (@Mejituu [#279](https://github.com/hugo-fixit/FixIt/pull/279))
   - Update typeit from 8.7.0 to 8.7.1

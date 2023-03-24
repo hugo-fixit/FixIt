@@ -1,13 +1,10 @@
 .page {
   position: relative;
+  @extend %page-style;
 
   .content {
     [id] {
-      scroll-margin-top: $header-height;
-
-      [data-header-desktop='normal'] & {
-        scroll-margin-top: 0;
-      }
+      scroll-margin-top: var(--#{$prefix}scroll-mt);
     }
   }
 

@@ -157,6 +157,12 @@
       # whether to use typeit animation for subtitle name
       typeit = false
 
+  # FixIt 0.2.18 | NEW Breadcrumb config
+  [params.breadcrumb]
+    enable = false
+    sticky = false
+    showHome = false
+
   # Footer config
   [params.footer]
     enable = true
@@ -822,4 +828,4 @@
 [module]
   [module.hugoVersion]
     extended = true
-    min = "0.93.0"
+    min = "0.109.0"

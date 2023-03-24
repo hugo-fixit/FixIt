@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="{{ .Site.LanguageCode }}">
   <head>
-    {{ if (eq .Kind "home") | and (ne .Site.Params.disableThemeInject true) }}
+    {{ if .IsHome | and (ne .Site.Params.disableThemeInject true) }}
       <meta name="theme" content='FixIt {{ .Scratch.Get "version" }}'>
     {{ end }}
     <meta charset="utf-8">
@@ -19,11 +19,13 @@
     {{- /* Check theme isDark before body rendering */ -}}
     {{- $theme := .Site.Params.defaulttheme -}}
     <script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('{{ $theme }}' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '{{ $theme }}' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script>
+
     {{- /* Body wrapper */ -}}
-    <div class="wrapper">
+    <div class="wrapper" data-page-style="{{ (.Scratch.Get `params`).pageStyle | default `normal` }}">
       {{- partial "header.html" . -}}
+      {{- partial "breadcrumb.html" . -}}
       {{- $toc := .Scratch.Get "toc" -}}
-      <main class="container{{ if (eq $toc.enable true) | and (eq $toc.position `left`) }} container-reverse{{ end }}" data-page-style="{{ (.Scratch.Get `params`).pageStyle | default `normal` }}">
+      <main class="container{{ if (eq $toc.enable true) | and (eq $toc.position `left`) }} container-reverse{{ end }}">
         {{- block "content" . }}{{ end -}}
       </main>
       {{- partial "footer.html" . -}}

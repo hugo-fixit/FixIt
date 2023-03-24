@@ -9,8 +9,8 @@
   background-color: $header-background-color;
   @include border-radius(1.25rem);
   @include transition(color 0.4s ease);
-
   @include blur;
+  @extend .print-d-none;
 
   &:hover,
   &:active {
