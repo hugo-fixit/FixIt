@@ -8,4 +8,8 @@
   @each $color, $value in $theme-colors {
     --#{$prefix}#{$color}-dark: #{darken($value, 5%)};
   }
+
+  // Scroll margin top and Stack sticky top related
+  --#{$prefix}scroll-mt: calc(#{$header-height} + #{$global-scroll-margin-top});
+  --#{$prefix}breadcrumb-offset: 2.5rem;
 }

@@ -25,7 +25,7 @@
     <div class="header">
       {{- /* Title */ -}}
       <h1 class="single-title animate__animated animate__flipInX">
-        {{ $repost := $params.repost | default dict }}
+        {{- $repost := $params.repost | default dict -}}
         {{- with $repost -}}
           {{- if eq .Enable true -}}
             {{- $icon := dict "Class" "fa-solid fa-share fa-fw" -}}

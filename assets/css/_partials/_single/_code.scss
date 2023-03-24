@@ -100,6 +100,12 @@ pre {
         cursor: pointer;
       }
 
+      .ellipses,
+      .edit,
+      .copy {
+        @extend .print-d-none;
+      }
+
       .code-title {
         width: 100%;
         padding: 0.4rem;

@@ -50,14 +50,16 @@
 #toc-auto {
   display: block;
   position: sticky;
-  top: $header-height + 0.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  @include overflow-wrap(break-word);
+  top: var(--#{$prefix}scroll-mt);
   box-sizing: border-box;
   visibility: hidden;
-
+  @include overflow-wrap(break-word);
   @include blur;
+  @extend .print-d-none;
+
+  [data-header-desktop='normal'] & {
+    --#{$prefix}scroll-mt: #{$global-scroll-margin-top};
+  }
 
   .toc-title {
     margin: 0.5rem 0;

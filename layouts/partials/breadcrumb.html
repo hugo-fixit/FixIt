@@ -1,0 +1,12 @@
+{{- if (gt (len .Ancestors.Reverse) 1) | and (eq .Site.Params.breadcrumb.enable true) -}}
+  <nav aria-label="breadcrumb" class="breadcrumb-container{{ if .Site.Params.breadcrumb.sticky }} sticky{{ end }}">
+    <ol class="breadcrumb">
+      {{- range .Ancestors.Reverse -}}
+        {{- if or .Site.Params.breadcrumb.showHome (not .IsHome) -}}
+          <li class="breadcrumb-item"><a href="{{ .RelPermalink }}" title="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage | and .Summary }}{{ .Summary }}{{ else }}{{ .Title }}{{ end }}{{ end }}">{{ cond (and .Site.Params.breadcrumb.showHome .IsHome) (T "single.home") .Title }}</a></li>
+        {{- end -}}
+      {{- end -}}
+      <li class="breadcrumb-item active" aria-current="page">{{ .Title }}</li>
+    </ol>
+  </nav>
+{{- end -}}

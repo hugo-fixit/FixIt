@@ -32,6 +32,11 @@
     font-size: 0.875rem;
     color: $global-font-secondary-color;
 
+    .comment-visitors,
+    .comment-count {
+      @extend .print-d-none;
+    }
+
     span {
       display: inline-block;
     }

@@ -13,6 +13,10 @@ footer {
     .footer-line {
       width: 100%;
 
+      &:not(.powered):not(.copyright) {
+        @extend .print-d-none;
+      }
+
       .footer-divider:not(:first-child)::before {
         content: '|';
         margin-left: 0.25rem;

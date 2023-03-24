@@ -1,6 +1,7 @@
 .post-reward {
   padding: 1rem;
   text-align: center;
+  @extend .print-d-none;
 
   &~.post-footer {
     margin-top: 0;

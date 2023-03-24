@@ -53,6 +53,7 @@
       }
 
       .post-info-share {
+        @extend .print-d-none;
         a * {
           vertical-align: text-bottom;
         }
@@ -65,6 +66,10 @@
     display: flex;
     justify-content: space-between;
     font-size: 0.9rem;
+
+    section:last-child {
+      @extend .print-d-none;
+    }
   }
 
   .post-tags {
@@ -86,6 +91,7 @@
     display: flex;
     justify-content: space-between;
     gap: 1.5rem;
+    @extend .print-d-none;
 
     .post-nav-item {
       flex: 1;

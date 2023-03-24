@@ -17,6 +17,7 @@
   position: fixed;
   top: 0;
   z-index: 150;
+  @extend .print-d-none;
 
   :hover .octo-arm {
     animation: octocat-wave 560ms ease-in-out;

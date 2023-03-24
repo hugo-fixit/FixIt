@@ -8,9 +8,15 @@
   main {
     flex: 1 0 auto;
 
-    aside:first-child {
-      order: 2;
+    aside {
+      flex: 1;
+      padding-inline: 0.5rem;
+
+      &:first-child {
+        order: 2;
+      }
     }
+    
 
     &.container {
       display: flex;
@@ -30,5 +36,6 @@
 }
 
 @import "_core/header";
+@import "_core/breadcrumb";
 @import "_core/footer";
 @import "_core/pagination";

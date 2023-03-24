@@ -1,0 +1,46 @@
+.breadcrumb-container {
+  padding-inline: 1rem;
+  font-size: 0.75rem;
+  z-index: 100;
+  @extend .print-d-none;
+
+  &.sticky {
+    position: sticky;
+    top: $header-height;
+  }
+
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.5rem 0;
+    margin: 0 auto;
+    list-style: none;
+    border-bottom: 1px inset $global-border-color;
+    background-color: $global-background-color;
+    @extend %page-style;
+
+    [data-theme='dark'] & {
+      border-bottom-color: $global-border-color-dark;
+      background-color: $global-background-color-dark;
+    }
+
+    .breadcrumb-item {
+      display: flex;
+
+      +.breadcrumb-item::before {
+        content: "/";
+        display: inline-block;
+        padding-inline: 0.5rem;
+        color: $global-font-secondary-color;
+
+        [data-theme='dark'] & {
+          color: $global-font-secondary-color-dark;
+        }
+      }
+
+      &.active {
+        @extend .text-secondary;
+      }
+    }
+  }
+}

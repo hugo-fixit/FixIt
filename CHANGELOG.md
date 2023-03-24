@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 > Snapshot: <>
 
 - :tada: Feat: add natively support mermaid with code fences ([#230](https://github.com/hugo-fixit/FixIt/issues/230))
+- :tada: Feat: add breadcrumb navigation ([#309](https://github.com/hugo-fixit/FixIt/pull/309))
 - :sparkles: Feat: add instant page (@Mejituu [#279](https://github.com/hugo-fixit/FixIt/pull/279))
 - :sparkles: Feat: add `force` option value to `params.page.lightgallery`
 - :sparkles: Feat: add loop paramter for typeit ([#303](https://github.com/hugo-fixit/FixIt/pull/303))
