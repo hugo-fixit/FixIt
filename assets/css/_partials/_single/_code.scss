@@ -191,7 +191,7 @@ pre {
         left: 0;
 
         pre {
-          // padding-right: 0;
+          @include user-select(none);
         }
       }
       // code content

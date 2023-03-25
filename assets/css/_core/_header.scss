@@ -1,7 +1,7 @@
 header {
   width: 100%;
-  z-index: 150;
   background-color: $header-background-color;
+  @include z-index(2);
   @include transition(box-shadow 0.3s ease);
   @extend .print-d-none;
 
@@ -243,7 +243,6 @@ header {
       }
 
       .sub-menu {
-        z-index: 160;
         position: absolute;
         margin: 0;
         padding: 0.25rem 0;
@@ -252,6 +251,7 @@ header {
         border-radius: $global-border-radius;
         border: 1px solid $global-border-color;
         background-color: $header-background-color;
+        @include z-index(2, 50);
         @include transition(box-shadow 0.3s ease);
 
         [data-theme='dark'] & {
@@ -368,8 +368,8 @@ header {
         line-height: 2.5rem;
         position: sticky;
         top: 0;
-        z-index: 1;
         background-color: $header-background-color;
+        @include z-index(0, 50);
  
         [data-theme='dark'] & {
           background-color: $header-background-color-dark;
@@ -514,8 +514,8 @@ header {
 
 .search-dropdown {
   position: fixed;
-  z-index: 200;
   top: $header-height;
+  @include z-index(2);
   @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
 
   &.desktop {

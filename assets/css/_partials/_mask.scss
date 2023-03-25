@@ -6,11 +6,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
   background-color: rgba(0, 0, 0, 0);
+  @include z-index(0, -1);
 
   .blur & {
-    z-index: 100;
+    @include z-index(1);
     background-color: rgba(0, 0, 0, 0.25);
   }
 }

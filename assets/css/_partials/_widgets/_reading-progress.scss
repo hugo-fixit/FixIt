@@ -3,7 +3,7 @@
   height: var(--progress-h, 2px);
   width: var(--progress);
   background-color: var(--bg-progress, var(--#{$prefix}info));
-  z-index: 150;
+  @include z-index(2);
   position: fixed;
   
   [data-theme="dark"] & {

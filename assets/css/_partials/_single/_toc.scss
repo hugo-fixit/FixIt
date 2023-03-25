@@ -64,6 +64,7 @@
   .toc-title {
     margin: 0.5rem 0;
     cursor: pointer;
+    @include user-select(none);
 
     &::before {
       content: '|';

@@ -1,7 +1,7 @@
 .breadcrumb-container {
   padding-inline: 1rem;
   font-size: 0.75rem;
-  z-index: 100;
+  @include z-index(1);
   @extend .print-d-none;
 
   &.sticky {

@@ -99,3 +99,9 @@
   object-fit: $value;
   font-family: 'object-fit: #{$value};';
 }
+
+@mixin user-select($value) {
+  -webkit-user-select: $value !important;
+  -moz-user-select: $value !important;
+  user-select: $value !important;
+}

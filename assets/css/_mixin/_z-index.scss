@@ -1,0 +1,3 @@
+@mixin z-index($level, $diff: 0) {
+  z-index: ($level * 100) + $diff;
+}
