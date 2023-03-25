@@ -1,6 +1,36 @@
 {{- /* FixIt theme patches */ -}}
 {{- $params := .Scratch.Get "params" -}}
 
+{{- /* Author data patch */ -}}
+{{- $authorDefault := dict "name" "Anonymous" "link" "" "email" "" "avatar" "" -}}
+{{- $author := .Site.Author | merge $authorDefault -}}
+{{- $authorPost := dict -}}
+{{- $gravatar := .Site.Params.gravatar -}}
+{{- if reflect.IsMap $params.author -}}
+  {{- $authorPost = $params.author -}}
+{{- else if isset $params "author" -}}
+  {{- $authorPost = dict "name" $params.author -}}
+{{- end -}}
+{{- if isset $authorPost "name" | and (ne $authorPost.name .Site.Author.name) -}}
+  {{- $author = $authorPost | merge $authorDefault | merge $author -}}
+{{- else -}}
+  {{- with $authorPost.link -}}{{ $author = dict "link" . | merge $author }}{{- end -}}
+  {{- with $authorPost.email -}}{{ $author = dict "email" . | merge $author }}{{- end -}}
+  {{- with $authorPost.avatar -}}{{ $author = dict "avatar" . | merge $author }}{{- end -}}
+{{- end -}}
+
+{{- if $gravatar.enable | and $author.email -}}
+  {{- with $gravatar -}}
+    {{- $author = dict "avatar" (printf "https://%v/avatar/%v?s=32&d=%v"
+      (path.Clean .Host | default "www.gravatar.com")
+      (md5 $author.email)
+      (.Style | default ""))
+      | merge $author 
+    -}}
+  {{- end -}}
+{{- end -}}
+{{- .Scratch.Set "author" $author -}}
+
 {{- /* Toc data patch */ -}}
 {{- $toc := $params.toc -}}
 {{- if eq $toc true -}}

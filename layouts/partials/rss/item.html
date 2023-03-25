@@ -1,4 +1,13 @@
-{{- $params := .Page.Params | merge .Site.Params.Page | merge (dict "author" .Site.Author.name) -}}
+{{- $params := .Page.Params | merge .Site.Params.Page -}}
+{{- $authorName := .Site.Author.name | default (T "single.author") -}}
+{{- with .Params.author -}}
+  {{- if reflect.IsMap . -}}
+    {{- $authorName = cond (isset . "name") .name $authorName -}}
+  {{- else -}}
+    {{- $authorName = . -}}
+  {{- end -}}
+{{- end -}}
+
 <item>
   <title>
     {{- .Page.Title -}}
@@ -7,11 +16,9 @@
     {{- .Page.Permalink -}}
   </link>
   <pubDate>
-    {{- .Page.Date.Format "Mon, 02 Jan 2006 15:04:05 -0700"  -}}
+    {{- .Page.Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" -}}
   </pubDate>
-  <author>
-    {{- $params.author | default (T "single.author") -}}
-  </author>
+  <author>{{ $authorName }}</author>
   <guid>
     {{- .Page.Permalink -}}
   </guid>

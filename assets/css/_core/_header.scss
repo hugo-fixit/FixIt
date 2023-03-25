@@ -251,7 +251,6 @@ header {
         border-radius: $global-border-radius;
         border: 1px solid $global-border-color;
         background-color: $header-background-color;
-        @include z-index(2, 50);
         @include transition(box-shadow 0.3s ease);
 
         [data-theme='dark'] & {

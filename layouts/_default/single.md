@@ -1,9 +1,5 @@
 {{- $params := .Scratch.Get "params" -}}
-{{- $author := .Site.Author | merge (dict "name" "Anonymous" "link" (echoParam $params "authorlink")) -}}
-{{- if isset $params "author" | and (ne $params.author .Site.Author.name) -}}
-  {{- $author = dict "name" $params.author | merge $author -}}
-  {{- $author = dict "link" (echoParam $params "authorlink") | merge $author -}}
-{{- end -}}
+{{- $author := .Scratch.Get "author" -}}
 # {{ .Title }}
 
 {{ if $params.password -}}
