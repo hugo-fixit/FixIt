@@ -1139,6 +1139,36 @@ class FixIt {
     }
   }
 
+  initReward() {
+    const $rewards = document.querySelectorAll('.post-reward [data-mode="fixed"]');
+    if (!$rewards.length) {
+      return;
+    }
+    // `fixed` mode only supports desktop
+    if (this.util.isMobile()) {
+      this.util.forEach($rewards, ($reward) => {
+        $reward.removeAttribute('data-mode');
+      });
+      return;
+    }
+    // Close post reward images exclude special id
+    const _closeRewardExclude = (id) => {
+      this.util.forEach($rewards, ($reward) => {
+        const $rewardInput = $reward.parentElement.querySelector('.reward-input');
+        if ($rewardInput.id !== id) {
+          $rewardInput.checked = false;
+        }
+      });
+    };
+    // Add additional click event to reward buttons
+    this.util.forEach($rewards, ($reward) => {
+      $reward.previousElementSibling.addEventListener('click', function () {
+        _closeRewardExclude(this.getAttribute('for'));
+      }, false)
+    });
+    this.scrollEventSet.add(_closeRewardExclude);
+  }
+
   onScroll() {
     const $headers = [];
     const ACCURACY = 20;
@@ -1274,6 +1304,7 @@ class FixIt {
       this.initWatermark();
       this.initMDevtools();
       this.initAutoMark();
+      this.initReward();
 
       window.setTimeout(() => {
         this.initComment();

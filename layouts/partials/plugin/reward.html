@@ -4,18 +4,16 @@
 
 {{- if $reward.enable -}}
   <div class="post-reward">
-    <div class="comment">{{- $reward.comment -}}</div>
+    <div class="comment">{{ $reward.comment }}</div>
     <input type="checkbox" class="reward-input" name="reward" id="{{ $id }}" hidden />
-    <label class="reward-button" for="{{ $id }}">{{- T "single.reward.donate" -}}</label>
-    <div class="reward-ways">
+    <label class="reward-button" for="{{ $id }}">{{ T "single.reward.donate" }}</label>
+    <div class="reward-ways"{{ with $reward.mode }} data-mode="{{ . }}"{{ end }}>
       {{- range $way, $image := $reward.ways -}}
-        {{- with T (printf "single.reward.%v" $way) -}}
-          {{- $way = . -}}
-        {{- end -}}
+        {{- with T (printf "single.reward.%v" $way) -}}{{ $way = . }}{{- end -}}
         {{- if $image -}}
           <div>
             {{- dict "Src" $image "Alt" (printf "%v %v" $author $way) "Resources" $.Resources | partial "plugin/image.html" -}}
-            <span{{- if $reward.animation }} data-animation{{- end -}}>{{- $way -}}</span>
+            <span{{ if $reward.animation }} data-animation{{ end }}>{{ $way }}</span>
           </div>
         {{- end -}}
       {{- end -}}

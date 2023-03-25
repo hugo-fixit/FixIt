@@ -53,6 +53,7 @@
   top: var(--#{$prefix}scroll-mt);
   box-sizing: border-box;
   visibility: hidden;
+  @include z-index(1);
   @include overflow-wrap(break-word);
   @include blur;
   @extend .print-d-none;

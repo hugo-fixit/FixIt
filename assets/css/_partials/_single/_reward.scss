@@ -16,8 +16,53 @@
     font-weight: 500;
   }
 
+  .reward-ways {
+    display: none;
+  }
+
   .reward-input:checked~.reward-ways {
     display: block;
+    padding-top: 20px;
+
+    div {
+      display: inline-block;
+      @include user-select(none);
+  
+      span {
+        display: block;
+      }
+  
+      &:hover span[data-animation] {
+        animation: var(--animation-reward, jackInTheBox) 0.8s infinite linear;
+        // The animation may affect :hover of img in dark mode
+        pointer-events: none;
+      }
+  
+      img {
+        display: inline-block;
+        margin: 0.8em 2em 0;
+        max-width: 100%;
+        width: $reward-img-width;
+      }
+    }
+
+    // `fixed` mode only supports desktop
+    &[data-mode='fixed'] {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 1rem;
+      background-color: $global-background-color;
+      @include z-index(2);
+      @include border-radius($global-border-radius);
+      @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, 0.2));
+
+      [data-theme='dark'] & {
+        background-color: $global-background-color-dark;
+        @include box-shadow(0 0 1.5rem 0 rgba(255, 255, 255, 0.2));
+      }
+    }
   }
 
   .reward-button {
@@ -28,11 +73,11 @@
     color: lighten($reward-color, 5%);
     border: 2px solid lighten($reward-color, 10%);
     border-radius: $global-border-radius;
-    @include transition(all 0.3s ease-out);
     padding: 0.6rem 1rem;
     background-color: $global-background-color;
     vertical-align: text-top;
     line-height: 1rem;
+    @include transition(all 0.3s ease-out);
 
     &:active,
     &:hover {
@@ -52,31 +97,5 @@
       border-color: lighten($reward-color, 5%);
       background-color: $global-background-color-dark;
     }
-  }
-}
-
-.reward-ways {
-  display: none;
-  padding-top: 20px;
-
-  div {
-    display: inline-block;
-
-    span {
-      display: block;
-    }
-
-    &:hover span[data-animation] {
-      animation: var(--animation-reward, jackInTheBox) 0.8s infinite linear;
-      // The animation may affect :hover of img in dark mode
-      pointer-events: none;
-    }
-  }
-
-  img {
-    display: inline-block;
-    margin: .8em 2em 0;
-    max-width: 100%;
-    width: $reward-img-width;
   }
 }

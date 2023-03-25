@@ -1,5 +1,4 @@
-{{- $params := .Scratch.Get "params" -}}
 {{- $reward := .Scratch.Get "reward" -}}
-{{- $author := $params.author | default .Site.Author.name -}}
-{{- $options := dict "Scratch" .Scratch "Reward" $reward "Id" "fi-reward" "Author" $author -}}
+{{- $author := .Scratch.Get "author" -}}
+{{- $options := dict "Reward" $reward "Id" "fi-reward" "Author" $author.name -}}
 {{- partial "plugin/reward.html" $options -}}

@@ -17,7 +17,7 @@ All notable changes to this project will be documented in this file.
 - :tada: Feat: add breadcrumb navigation ([#309](https://github.com/hugo-fixit/FixIt/pull/309))
 - :sparkles: Feat: add instant page (@Mejituu [#279](https://github.com/hugo-fixit/FixIt/pull/279))
 - :sparkles: Feat: add `force` option value to `params.page.lightgallery`
-- :sparkles: Feat: add loop paramter for typeit ([#303](https://github.com/hugo-fixit/FixIt/pull/303))
+- :sparkles: Feat: add loop parameter for typeit ([#303](https://github.com/hugo-fixit/FixIt/pull/303))
 - :sparkles: Feat: add paramater strict for giscus comment
 - :bug: Fix: donate images without lazy loading (@Mejituu [#279](https://github.com/hugo-fixit/FixIt/pull/279))
 - :bug: Fix: discordinvite typo (@mathieu-gilloots [#282](https://github.com/hugo-fixit/FixIt/pull/282))
@@ -32,6 +32,7 @@ All notable changes to this project will be documented in this file.
 - :recycle: Refactor: image lazy loading ([#283](https://github.com/hugo-fixit/FixIt/pull/283))
 - :recycle: Refactor: author's avatar of post or profile ([#288](https://github.com/hugo-fixit/FixIt/pull/288))
 - :recycle: Refactor: language switch in desktop header ([#306](https://github.com/hugo-fixit/FixIt/pull/306))
+- :recycle: Refactor(reward): add parameter `mode` for post reward and refactor shortcode `reward`
 - :wheelchair: Feat: add post update date to post meta ([#285](https://github.com/hugo-fixit/FixIt/issues/285))
 - :art: Style: fix `#comments` css style conflict ([#269](https://github.com/hugo-fixit/FixIt/issues/269))
 - :art: Style: adjust the mobile header style and fix the bug that scrolling is invalid when there are too many menus on mobile ([#289](https://github.com/hugo-fixit/FixIt/issues/289))
