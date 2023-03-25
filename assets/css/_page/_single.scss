@@ -367,18 +367,18 @@
       background-color: $global-background-color;
       border: 1px solid $global-border-color;
       border-bottom-color: $global-border-color;
-      @include border-radius($global-border-radius);
-      @include box-shadow(inset 0 -1px 0 $global-border-color);
       font-size: 0.8rem;
       font-family: $code-font-family;
       color: $code-color;
+      @include border-radius($global-border-radius);
+      @include box-shadow(inset 0 -1px 0 $global-border-color);
 
       [data-theme='dark'] & {
         background-color: $global-background-color-dark;
         border: 1px solid $global-border-color-dark;
         border-bottom-color: $global-border-color-dark;
-        @include box-shadow(inset 0 -1px 0 $global-border-color-dark);
         color: $code-color-dark;
+        @include box-shadow(inset 0 -1px 0 $global-border-color-dark);
       }
     }
   }
