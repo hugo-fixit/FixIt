@@ -4,7 +4,7 @@
 
 # === init ===
 [init]
-configurationError = "配置文件錯誤\n您還沒有正確配置 FixIt 的版本參數。參考 https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/#basic-configuration"
+configurationError = "配置文件錯誤\n您還沒有正確配置 FixIt 的版本參數。參考 https://fixit.lruihao.cn/zh-cn/documentation/basics/#theme-configuration"
 compatibilityError = "兼容性錯誤 ({{ .From }} -> {{ .To }}):\n您進行了一次不兼容的更新。参考 https://github.com/hugo-fixit/FixIt/releases"
 RCVersionWarn = "您正在使用開發版的 FixIt，請考慮使用穩定版。\n見 https://github.com/hugo-fixit/FixIt/releases"
 devEnvWarn = "當前運行環境是“development”。“評論系統”，“CDN”和“fingerprint”不會啟用。"
