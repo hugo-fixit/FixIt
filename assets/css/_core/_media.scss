@@ -136,10 +136,12 @@
     width: 100% !important;
     padding-top: 0 !important;
 
-    .single-title,
-    .single-subtitle,
-    .post-meta {
-      text-align: center;
+    &.single {
+      .single-title,
+      .single-subtitle,
+      .post-meta {
+        text-align: center;
+      }
     }
 
     h1:not(.single-title),

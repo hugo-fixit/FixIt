@@ -69,6 +69,7 @@ class FixIt {
     this.resizeEventSet = new Set();
     this.switchThemeEventSet = new Set();
     this.clickMaskEventSet = new Set();
+    this.beforeprintEventSet = new Set();
     this.disableScrollEvent = false;
     window.objectFitImages && objectFitImages();
   }
@@ -699,21 +700,24 @@ class FixIt {
     }
   }
 
+  switchMermaidTheme(theme) {
+    const $mermaidElements = document.getElementsByClassName('mermaid');
+    if ($mermaidElements.length) {
+      // TODO perf
+      const themes = this.config.mermaid.themes ?? ['default', 'dark', 'neutral'];
+      mermaid.initialize({ startOnLoad: false, theme: theme ?? (this.isDark ? themes[1] : themes[0]), securityLevel: 'loose' });
+      this.util.forEach($mermaidElements, $mermaid => {
+        mermaid.render('svg-' + $mermaid.id, this.data[$mermaid.id], svgCode => {
+          $mermaid.innerHTML = svgCode;
+        }, $mermaid);
+      });
+    }
+  };
+
   initMermaid() {
-    this._mermaidOnSwitchTheme = this._mermaidOnSwitchTheme || (() => {
-      const $mermaidElements = document.getElementsByClassName('mermaid');
-      if ($mermaidElements.length) {
-        const themes = this.config.mermaid.themes ?? ['default', 'dark'];
-        mermaid.initialize({startOnLoad: false, theme: this.isDark ? themes[1] : themes[0], securityLevel: 'loose'});
-        this.util.forEach($mermaidElements, $mermaid => {
-          mermaid.render('svg-' + $mermaid.id, this.data[$mermaid.id], svgCode => {
-            $mermaid.innerHTML = svgCode;
-          }, $mermaid);
-        });
-      }
-    });
-    this.switchThemeEventSet.add(this._mermaidOnSwitchTheme);
-    this._mermaidOnSwitchTheme();
+    this.switchMermaidTheme();
+    this.switchThemeEventSet.add(() => { this.switchMermaidTheme(); });
+    this.beforeprintEventSet.add(() => { this.switchMermaidTheme('neutral'); });
   }
 
   initEcharts() {
@@ -1249,7 +1253,7 @@ class FixIt {
             event();
           }
           this.initToc();
-          this.initMermaid();
+          this.switchMermaidTheme();
           this.initSearch();
 
           const isMobile = this.util.isMobile()
@@ -1272,6 +1276,17 @@ class FixIt {
       }
       this.disableScrollEvent = false;
       document.body.classList.remove('blur');
+    }, false);
+  }
+
+  beforeprint() {
+    window.addEventListener('beforeprint', () => {
+      this.util.forEach(document.querySelectorAll('.chroma'), ($el) => {
+        $el.classList.toggle('open', true)
+      });
+      for (let event of this.beforeprintEventSet) {
+        event();
+      }
     }, false);
   }
 
@@ -1315,6 +1330,7 @@ class FixIt {
         this.onScroll();
         this.onResize();
         this.onClickMask();
+        this.beforeprint();
       }, 100);
     } catch (err) {
       console.error(err);
