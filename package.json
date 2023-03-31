@@ -22,7 +22,9 @@
     "start": "npm run babel && npm run server",
     "start:production": "npm run babel && npm run server:production",
     "algolia": "atomic-algolia",
-    "update:docs": "git submodule update --remote --merge && git add docs && git commit -m ':memo: Docs: update theme docs'"
+    "update:docs": "git submodule update --remote --merge && git add docs && git commit -m ':memo: Docs: update theme docs'",
+    "version": "sed -i '' \"s/v$npm_package_version-RC/v$npm_package_version/g\" layouts/partials/init/index.html && git add .",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",

@@ -46,7 +46,7 @@ All notable changes to this project will be documented in this file.
   - Update typeit from 8.7.0 to 8.7.1
   - Update mermaid from 9.1.7 to 9.4.3
   - Update Artalk from 2.3.4 to 2.5.2
-- **Full Changelog:** @Lruihao [`v0.2.16...v0.2.17`](https://github.com/hugo-fixit/FixIt/compare/v0.2.16...v0.2.17)
+- **Full Changelog:** @Lruihao [`v0.2.17...v0.2.18`](https://github.com/hugo-fixit/FixIt/compare/v0.2.17...v0.2.18)
 
 ## v0.2.17 [2023.1.29]
 
@@ -91,7 +91,7 @@ All notable changes to this project will be documented in this file.
   - Bump @babel/core from 7.20.12 to 7.21.4
   - Bump @babel/preset-env from 7.20.2 to 7.21.4
   - Bump core-js from 3.27.2 to 3.29.1
-- **Full Changelog:** @Lruihao [`v0.2.17...v0.2.18`](https://github.com/hugo-fixit/FixIt/compare/v0.2.17...v0.2.18)
+- **Full Changelog:** @Lruihao [`v0.2.16...v0.2.17`](https://github.com/hugo-fixit/FixIt/compare/v0.2.16...v0.2.17)
 
 ## v0.2.16 [2022.9.24]
 
