@@ -6,7 +6,8 @@
   {{- else -}}
     {{- $src := .Source -}}
     {{- $integrity := .Integrity -}}
-    {{- if (urls.Parse $src).Host | not -}}
+    {{- $attrs := "" -}}
+    {{- if $src | and (not (urls.Parse $src).Host) -}}
       {{- $resource := resources.Get $src -}}
       {{- with .Template -}}
         {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
@@ -21,9 +22,10 @@
         {{- $resource = $resource | fingerprint . -}}
         {{- $integrity = $resource.Data.Integrity -}}
       {{- end -}}
-      {{- $src = $resource.RelPermalink -}}
+      {{- with $resource.RelPermalink -}}
+        {{- $attrs = printf `src="%v"` . | add $attrs -}}
+      {{- end -}}
     {{- end -}}
-    {{- $attrs := printf `src="%v"` $src -}}
     {{- if .Crossorigin -}}
       {{- $attrs = ` crossorigin="anonymous"` | add $attrs -}}
     {{- end -}}
