@@ -101,7 +101,7 @@
         {{- if $comment.enable -}}
           {{- if $comment.artalk.enable -}}
             <span class="comment-visitors" data-flag-title="{{ .Title }}">
-              {{ $visitorIcon }}<span id="{{ .RelPermalink }}" class="artalk-visitor-count">-</span>&nbsp;{{ T "single.views" }}
+              {{ $visitorIcon }}<span class="artalk-visitor-count" data-page-key="{{ .RelPermalink }}">-</span>&nbsp;{{ T "single.views" }}
             </span>&nbsp;
           {{- else if ($comment.valine.enable | and $comment.valine.visitor) -}}
             <span id="{{ .RelPermalink }}" class="leancloud_visitors comment-visitors" data-flag-title="{{ .Title }}">
@@ -129,7 +129,7 @@
         {{- if $comment.enable -}}
           {{- if $comment.artalk.enable -}}
             <span class="comment-count" data-flag-title="{{ .Title }}">
-              {{ $commentIcon }}<span data-xid="{{ .RelPermalink }}" class="artalk-comment-count">-</span>&nbsp;{{ T "single.comments" }}
+              {{ $commentIcon }}<span class="artalk-comment-count" data-page-key="{{ .RelPermalink }}">-</span>&nbsp;{{ T "single.comments" }}
             </span>&nbsp;
           {{- else if $comment.valine.enable | and $comment.valine.commentCount -}}
             <span class="comment-count" data-flag-title="{{ .Title }}">

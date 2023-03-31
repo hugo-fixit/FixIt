@@ -885,7 +885,7 @@ class FixIt {
           countEl: this.config.comment.artalk.countEl
         })
       }
-      const artalk = new Artalk(this.config.comment.artalk);
+      const artalk = Artalk.init(this.config.comment.artalk);
       artalk.setDarkMode(this.isDark);
       this.switchThemeEventSet.add(() => {
         artalk.setDarkMode(this.isDark);

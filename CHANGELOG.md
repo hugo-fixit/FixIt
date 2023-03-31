@@ -3,15 +3,17 @@
 All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/hugo-fixit/FixIt/releases -->
 
-## v0.2.18
+## v0.2.18 [2023.3.31]
+
+> **Note**
+> This will be the last relatively stable 0.x release, after which the first major release will be incompatible with all previous 0.x releases
+> Snapshot: <>
 
 ## :boom: Breaking Updates
 
-- [#288](https://github.com/hugo-fixit/FixIt/pull/288)
+- Refactor author data config [#288](https://github.com/hugo-fixit/FixIt/pull/288)
 
 ## :new: What's New
-
-> Snapshot: <>
 
 - :tada: Feat: add natively support mermaid with code fences ([#230](https://github.com/hugo-fixit/FixIt/issues/230))
 - :tada: Feat: add breadcrumb navigation ([#309](https://github.com/hugo-fixit/FixIt/pull/309))
@@ -43,6 +45,7 @@ All notable changes to this project will be documented in this file.
   - Update Update @waline/client from 2.10.0 to 2.14.7 (@Mejituu [#279](https://github.com/hugo-fixit/FixIt/pull/279))
   - Update typeit from 8.7.0 to 8.7.1
   - Update mermaid from 9.1.7 to 9.4.3
+  - Update Artalk from 2.3.4 to 2.5.2
 - **Full Changelog:** @Lruihao [`v0.2.16...v0.2.17`](https://github.com/hugo-fixit/FixIt/compare/v0.2.16...v0.2.17)
 
 ## v0.2.17 [2023.1.29]

@@ -10,9 +10,9 @@
     {{- $artalk := $comment.artalk | default dict -}}
     {{- if $artalk.enable -}}
       <div id="artalk" class="comment"></div>
-      {{- $source := $cdn.artalkCSS | default "lib/artalk/Artalk.min.css" -}}
+      {{- $source := $cdn.artalkCSS | default "lib/artalk/Artalk.css" -}}
       {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
-      {{- $source := $cdn.artalkJS | default "lib/artalk/Artalk.min.js" -}}
+      {{- $source := $cdn.artalkJS | default "lib/artalk/Artalk.js" -}}
       {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
       {{- $commentConfig = dict "el" "#artalk" "pageKey" .Permalink "pageTitle" .Title "pvEl" "artalk-visitor-count" "countEl" "artalk-comment-count" | dict "artalk" | merge $commentConfig -}}
       {{- if (eq $artalk.locale "") | and (eq $.Site.LanguageCode "en") -}}
@@ -31,23 +31,47 @@
       {{- with $artalk.placeholder -}}
         {{- $commentConfig = dict "placeholder" . | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- with $artalk.noComment -}}
+      {{- with $artalk.nocomment -}}
         {{- $commentConfig = dict "noComment" . | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- with $artalk.sendBtn -}}
+      {{- with $artalk.sendbtn -}}
         {{- $commentConfig = dict "sendBtn" . | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- with $artalk.editorTravel -}}
+      {{- with $artalk.editortravel -}}
         {{- $commentConfig = dict "editorTravel" . | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- with $artalk.flatMode -}}
-        {{- $commentConfig = dict "flatMode" . | dict "artalk" | merge $commentConfig -}}
+      {{- if ne $artalk.flatmode nil -}}
+        {{- $commentConfig = dict "flatMode" $artalk.flatmode | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- with $artalk.maxNesting -}}
-        {{- $commentConfig = dict "maxNesting" . | dict "artalk" | merge $commentConfig -}}
+      {{- with $artalk.nestmax -}}
+        {{- $commentConfig = dict "nestMax" . | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $artalk.nestsort -}}
+        {{- $commentConfig = dict "nestSort" . | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
       {{- with $artalk.lightgallery -}}
         {{- $commentConfig = dict "lightgallery" . | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- if eq $artalk.vote false -}}
+        {{- $commentConfig = dict "vote" false | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $artalk.votedown -}}
+        {{- $commentConfig = dict "voteDown" . | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- if eq $artalk.uabadge false -}}
+        {{- $commentConfig = dict "uaBadge" false | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- if eq $artalk.listsort false -}}
+        {{- $commentConfig = dict "listSort" false | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- if eq $artalk.imgupload false -}}
+        {{- $commentConfig = dict "imgUpload" false | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- if eq $artalk.preview false -}}
+        {{- $commentConfig = dict "preview" false | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- if eq $artalk.versioncheck false -}}
+        {{- $commentConfig = dict "versionCheck" false | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
       <noscript>
         Please enable JavaScript to view the comments powered by <a href="https://github.com/ArtalkJS/Artalk" rel="external nofollow noopener noreferrer">Artalk</a>.
