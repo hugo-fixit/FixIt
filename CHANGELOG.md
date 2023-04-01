@@ -3,11 +3,16 @@
 All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/hugo-fixit/FixIt/releases -->
 
+<!-- remove 0.x releases and only keep ^1.0.0 releases -->
+
+<details>
+  <summary>0.x version</summary>
+
 ## v0.2.18 [2023.3.31]
 
 > **Note**
 > This will be the last relatively stable 0.x release, after which the first major release will be incompatible with all previous 0.x releases
-> Snapshot: <>
+> Snapshot: <https://fixit-bpkhreqhl-x-cell.vercel.app>
 
 ## :boom: Breaking Updates
 
@@ -324,3 +329,5 @@ All notable changes to this project will be documented in this file.
 ## v0.2.10 :arrow_down: [2020-5-29 before]
 
 Thanks [dillonzq/LoveIt](https://github.com/dillonzq/LoveIt/releases)
+
+</details>
