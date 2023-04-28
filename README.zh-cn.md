@@ -115,7 +115,7 @@ FixIt 主题继承了 LoveIt 等主题的优秀功能，并在它们的基础上
 * 支持**二级菜单**
 * 支持**内容加密**（页面、局部）
 * 支持**友情链接**的页面模板
-* 支持基于 [Lunr.js](https://lunrjs.com/) 或 [algolia](https://www.algolia.com/) 或 [Fuse.js](https://fusejs.io/) 的**搜索**
+* 支持基于 [algolia](https://www.algolia.com/) 或 [Fuse.js](https://fusejs.io/) 的**搜索**
 * 支持 **Twemoji**
 * 支持**代码高亮**
 * 一键**复制代码**到剪贴板
@@ -191,7 +191,6 @@ FixIt 支持下列语言：
 * [Simple Icons](https://github.com/simple-icons/simple-icons)
 * [Animate.css](https://daneden.github.io/animate.css/)
 * [autocomplete-js](https://github.com/algolia/autocomplete)
-* [Lunr.js](https://lunrjs.com/)
 * [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
 * [Fuse.js](https://fusejs.io/)
 * [object-fit-images](https://github.com/fregante/object-fit-images)

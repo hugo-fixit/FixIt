@@ -115,7 +115,7 @@ To see this theme in action, here are some [live demo sites](https://fixit.lruih
 * **Sub Menu** supported
 * **Content Encryption** supported (Pages, Partial)
 * **Friends** page embedded template
-* **Search** supported by [Lunr.js](https://lunrjs.com/) or [algolia](https://www.algolia.com/) or [Fuse.js](https://fusejs.io/)
+* **Search** supported by [algolia](https://www.algolia.com/) or [Fuse.js](https://fusejs.io/)
 * **Twemoji** supported
 * Automatically **highlighting** code
 * **Copy code** to clipboard with one click
@@ -187,7 +187,6 @@ Make sure that you follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) while contrib
 * [Simple Icons](https://github.com/simple-icons/simple-icons)
 * [Animate.css](https://daneden.github.io/animate.css/)
 * [autocomplete-js](https://github.com/algolia/autocomplete)
-* [Lunr.js](https://lunrjs.com/)
 * [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
 * [Fuse.js](https://fusejs.io/)
 * [object-fit-images](https://github.com/fregante/object-fit-images)

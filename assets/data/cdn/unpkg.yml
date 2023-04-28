@@ -53,8 +53,6 @@ libFiles:
   lightgalleryJS: lightgallery@2.6.1/lightgallery.min.js
   lightgalleryThumbnailJS: lightgallery@2.6.1/plugins/thumbnail/lg-thumbnail.min.js
   lightgalleryZoomJS: lightgallery@2.6.1/plugins/zoom/lg-zoom.min.js
-  # lunr.js@2.3.9 https://github.com/olivernn/lunr.js
-  lunrJS: lunr@2.3.9/lunr.min.js
   # mapbox-gl@2.10.0 https://docs.mapbox.com/mapbox-gl-js
   mapboxGLCSS: mapbox-gl@2.10.0/dist/mapbox-gl.css
   mapboxGLJS: mapbox-gl@2.10.0/dist/mapbox-gl.js

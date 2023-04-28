@@ -10,21 +10,7 @@
   {{- $source := $cdn.autocompleteJS | default "lib/autocomplete/autocomplete.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- $config = dict "maxResultLength" $search.maxResultLength "snippetLength" $search.snippetLength "highlightTag" $search.highlightTag "noResultsFound" (T "assets.noResultsFound") | dict "search" | merge $config -}}
-  {{- if eq $search.type "lunr" -}}
-    {{- with .Site.Home.OutputFormats.Get "json" -}}
-      {{- $config = dict "type" "lunr" "lunrIndexURL" .RelPermalink | dict "search" | merge $config -}}
-    {{- end -}}
-    {{- $source := $cdn.lunrJS | default "lib/lunr/lunr.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-    {{- if T "assets.lunrLanguageLib" -}}
-      {{- $config = T "assets.lunrLanguageCode" | dict "lunrLanguageCode" | dict "search" | merge $config -}}
-      {{- with T "assets.lunrSegmentitLib" -}}
-        {{- $config = dict "lunrSegmentitURL" (resources.Get .).RelPermalink | dict "search" | merge $config -}}
-      {{- end -}}
-      {{- dict "Source" "lib/lunr/lunr.stemmer.support.js" "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-      {{- dict "Source" (T "assets.lunrLanguageLib") "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-    {{- end -}}
-  {{- else if eq $search.type "algolia" -}}
+  {{- if eq $search.type "algolia" -}}
     {{- $source := $cdn.algoliasearchJS | default "lib/algoliasearch/algoliasearch-lite.umd.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
     {{- $config = dict "type" "algolia" "algoliaIndex" $search.algolia.index "algoliaAppID" $search.algolia.appID "algoliaSearchKey" $search.algolia.searchKey | dict "search" | merge $config -}}

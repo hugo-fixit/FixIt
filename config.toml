@@ -102,8 +102,8 @@
   # FixIt 0.2.0 | NEW Search config
   [params.search]
     enable = false
-    # type of search engine ["lunr", "algolia", "fuse"]
-    type = "lunr"
+    # type of search engine ["algolia", "fuse"]
+    type = "fuse"
     # max index length of the chunked content
     contentLength = 4000
     # placeholder of the search bar

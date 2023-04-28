@@ -4,14 +4,10 @@
   "description": "FixIt theme source files",
   "private": true,
   "devDependencies": {
-    "atomic-algolia": "^0.3.19",
-    "babelify": "^10.0.0",
-    "browserify": "^17.0.0",
-    "segmentit": "^2.0.3"
+    "atomic-algolia": "^0.3.19"
   },
   "scripts": {
     "build": "hugo -v --source=docs --gc --minify",
-    "build:lunr.segmentit": "browserify src/lib/lunr.segmentit.js -o assets/lib/lunr/lunr.segmentit.js -t babelify --presets @babel/preset-env --presets minify",
     "server": "hugo server --source=docs -D --disableFastRender --navigateToChanged --ignoreCache --bind 0.0.0.0",
     "server:production": "npm run server -- -e production",
     "algolia": "atomic-algolia",
