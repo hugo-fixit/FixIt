@@ -60,7 +60,7 @@ class Util {
 class FixIt {
   constructor() {
     this.config = window.config;
-    this.data = this.config.data;
+    this.data = this.config.data || [];
     this.isDark = document.body.dataset.theme === 'dark';
     this.util = new Util();
     this.newScrollTop = this.util.getScrollTop();
@@ -528,7 +528,8 @@ class FixIt {
         // code title
         const $title = document.createElement('span');
         $title.classList.add('code-title');
-        $title.insertAdjacentHTML('afterbegin', '<i class="arrow fa-solid fa-chevron-right fa-fw" aria-hidden="true"></i>');
+        const hlAttrs = this.data[$chroma.parentNode.id];
+        $title.insertAdjacentHTML('afterbegin', `<i class="arrow fa-solid fa-chevron-right fa-fw" aria-hidden="true"></i><span class="title-inner">${hlAttrs?.title ?? ''}</span>`);
         $title.addEventListener('click', () => {
           $chroma.classList.toggle('open');
         }, false);

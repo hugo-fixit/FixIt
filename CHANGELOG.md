@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/hugo-fixit/FixIt/releases -->
 
+## v0.2.18-lts
+
+- :sparkles: Feat: add code block attributes support ([#330](https://github.com/hugo-fixit/FixIt/issues/330))
+
 ## v0.2.18 [2023.3.31]
 
 > **Note**
