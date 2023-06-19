@@ -114,6 +114,12 @@ pre {
           padding: 0 0.2rem;
           @include transition(transform 0.2s ease);
         }
+
+        .title-inner {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+        }
       }
 
       .code-title::after {
