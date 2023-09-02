@@ -61,13 +61,13 @@
         {{- end -}}
       </div>
       <div class="post-meta-line">
-        {{- with .Site.Params.dateformat | default "2006-01-02" | .PublishDate.Format -}}
+        {{- with .PublishDate | dateFormat (.Site.Params.dateformat | default "2006-01-02") -}}
           <span title="{{ dict "Date" ("2006-01-02 15:04:05" | $.PublishDate.Format) | T "single.publishedOnDate" }}">
             {{- dict "Class" "fa-regular fa-calendar-alt fa-fw me-1" | partial "plugin/icon.html" -}}
             {{- printf `<time datetime="%v">%v</time>` . . | safeHTML -}}
           </span>&nbsp;
         {{- end -}}
-        {{- with .Site.Params.dateformat | default "2006-01-02" | .Lastmod.Format -}}
+        {{- with .Lastmod | dateFormat (.Site.Params.dateformat | default "2006-01-02") -}}
           <span title="{{ dict "Date" ("2006-01-02 15:04:05" | $.Lastmod.Format) | T "single.updatedOnDate" }}">
             {{- dict "Class" "fa-regular fa-edit fa-fw me-1" | partial "plugin/icon.html" -}}
             {{- printf `<time datetime="%v">%v</time>` . . | safeHTML -}}
