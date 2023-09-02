@@ -20,7 +20,7 @@
       </div>
       <div class="details-content">
         <div class="admonition-content">
-          {{- with .Site.Params.dateformat | default "2006-01-02" | $updateTime.Format -}}
+          {{- with $updateTime | dateFormat (.Site.Params.dateformat | default "2006-01-02") -}}
             {{- dict "Date" . | T "single.expirationReminder" -}}
           {{- end -}}
         </div>

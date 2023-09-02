@@ -34,7 +34,7 @@
   <div class="post-meta">
     {{- partial "single/post-author.html" . -}}
 
-    {{- with .Site.Params.dateFormat | default "2006-01-02" | .PublishDate.Format -}}
+    {{- with .PublishDate | dateFormat (.Site.Params.dateFormat | default "2006-01-02") -}}
       &nbsp;<span class="post-publish" title='{{ "2006-01-02 15:04:05" | $.PublishDate.Format }}'>
         {{- printf `<time datetime="%v">%v</time>` . . | dict "Date" | T "single.publishedOnDate" | safeHTML -}}
       </span>
