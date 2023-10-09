@@ -1,8 +1,14 @@
-@mixin link($light, $dark) {
+/**
+ * Link mixin
+ * @param {Boolean} $light use global link color
+ * @param {Boolean} $dark use global link color dark
+ * @param {String} $decoration text-decoration, default none
+ */
+@mixin link($light, $dark, $decoration: none) {
   a,
   a::before,
   a::after {
-    text-decoration: none;
+    text-decoration: $decoration;
 
     @if $light {
       color: $global-link-color;
