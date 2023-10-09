@@ -6,12 +6,14 @@ All notable changes to this project will be documented in this file.
 ## v0.2.18-lts
 
 - :sparkles: Feat: add code block attributes support ([#330](https://github.com/hugo-fixit/FixIt/issues/330))
+- :bug: Fix: use dateFormat function to render localized dates (@stefanoginobili [#355](https://github.com/hugo-fixit/FixIt/pull/355))
+- :lipstick: Style: update define list style
 
 ## v0.2.18 [2023.3.31]
 
 > **Note**
 > This will be the last relatively stable 0.x release, after which the first major release will be incompatible with all previous 0.x releases
-> Snapshot: <>
+> Snapshot: <https://fixit-bpkhreqhl-x-cell.vercel.app>
 
 ## :boom: Breaking Updates
 
