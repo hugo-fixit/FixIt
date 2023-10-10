@@ -37,15 +37,15 @@ other = "Etichette"
 
 [posts]
 other = "Articoli"
-
-[taxonomy.totalwordCount]
-one = ""
-other = ""
 # === Taxonomy ===
 
 # === Section ===
 [section]
 recentlyUpdated = "Aggiornati di recente"
+
+[section.totalWordCount]
+one = ""
+other = ""
 # === Section ===
 
 # === Pagination ===
@@ -119,6 +119,9 @@ encryptyAgain = ""
 [single.wordCount]
 one = "Una parola"
 other = "{{ .Count }} parole"
+
+[single.fuzzyWordCount]
+other = "circa {{ .Count }} parole"
 
 [single.readingTime]
 one = "Un minuto"

@@ -37,15 +37,15 @@ other = "Tags"
 
 [posts]
 other = "Posts"
-
-[taxonomy.totalwordCount]
-one = ""
-other = ""
 # === Taxonomy ===
 
 # === Section ===
 [section]
 recentlyUpdated = "Recentemente atualizado"
+
+[section.totalWordCount]
+one = ""
+other = ""
 # === Section ===
 
 # === Pagination ===
@@ -119,6 +119,9 @@ encryptyAgain = ""
 [single.wordCount]
 one = "Uma palavra"
 other = "{{ .Count }} palavras"
+
+[single.fuzzyWordCount]
+other = ""
 
 [single.readingTime]
 one = "Um minuto"

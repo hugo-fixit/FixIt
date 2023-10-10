@@ -36,15 +36,15 @@ other = "Nhãn"
 
 [posts]
 other = "Bài viết"
-
-[taxonomy.totalwordCount]
-one = ""
-other = ""
 # === Taxonomy ===
 
 # === Section ===
 [section]
 recentlyUpdated = "Mới nhất"
+
+[section.totalWordCount]
+one = ""
+other = ""
 # === Section ===
 
 # === Pagination ===
@@ -118,6 +118,9 @@ encryptyAgain = ""
 [single.wordCount]
 one = "One word"
 other = "{{ .Count }} từ"
+
+[single.fuzzyWordCount]
+other = "Khoảng {{ .Count }} từ"
 
 [single.readingTime]
 one = "One minute"

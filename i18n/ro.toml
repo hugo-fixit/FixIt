@@ -37,15 +37,15 @@ other = "Etichete"
 
 [posts]
 other = "Articole"
-
-[taxonomy.totalwordCount]
-one = ""
-other = ""
 # === Taxonomy ===
 
 # === Section ===
 [section]
 recentlyUpdated = "Actualizat recent"
+
+[section.totalWordCount]
+one = ""
+other = ""
 # === Section ===
 
 # === Pagination ===
@@ -119,6 +119,9 @@ encryptyAgain = ""
 [single.wordCount]
 one = "Un cuvânt"
 other = "{{ .Count }} cuvinte"
+
+[single.fuzzyWordCount]
+other = "Aproximativ {{ .Count }} cuvinte"
 
 [single.readingTime]
 one = "Un minut"
