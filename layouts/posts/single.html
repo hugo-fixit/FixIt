@@ -74,9 +74,9 @@
           </span>&nbsp;
         {{- end -}}
         {{- if $params.wordCount -}}
-          <span>
+          <span title="{{ T "single.wordCount" .WordCount }}">
             {{- dict "Class" "fa-solid fa-pencil-alt fa-fw me-1" | partial "plugin/icon.html" -}}
-            {{- T "single.wordCount" .WordCount -}}
+            {{- T "single.fuzzyWordCount" .FuzzyWordCount -}}
           </span>&nbsp;
         {{- end -}}
         {{- if $params.readingTime -}}

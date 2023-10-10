@@ -36,14 +36,14 @@ other = "标签"
 
 [posts]
 other = "文章"
-
-[taxonomy.totalwordCount]
-other = "总计约 {{ .Count }} 字"
 # === Taxonomy ===
 
 # === Section ===
 [section]
 recentlyUpdated = "最近更新"
+
+[section.totalWordCount]
+other = "总计约 {{ .Count }} 字"
 # === Section ===
 
 # === Pagination ===
@@ -118,6 +118,9 @@ password = "密码"
 encryptyAgain = "重新加密"
 
 [single.wordCount]
+other = "{{ .Count }} 字"
+
+[single.fuzzyWordCount]
 other = "约 {{ .Count }} 字"
 
 [single.readingTime]

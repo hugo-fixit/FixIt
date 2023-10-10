@@ -37,15 +37,15 @@ other = "Тэги"
 
 [posts]
 other = "Статьи"
-
-[taxonomy.totalwordCount]
-one = ""
-other = ""
 # === Taxonomy ===
 
 # === Section ===
 [section]
 recentlyUpdated = "Недавно обновленные"
+
+[section.totalWordCount]
+one = ""
+other = ""
 # === Section ===
 
 # === Pagination ===
@@ -121,6 +121,9 @@ encryptyAgain = ""
 [single.wordCount]
 one = "Одно слово"
 other = "{{ .Count }} слов"
+
+[single.fuzzyWordCount]
+other = "Около {{ .Count }} слов"
 
 [single.readingTime]
 one = "Одна минута"
