@@ -19,11 +19,11 @@
 {{- end -}}
 
 <link rel="canonical" href="{{ .Permalink }}" />
-{{- if .PrevInSection -}}
-  <link rel="prev" href="{{ .PrevInSection.Permalink }}" />
+{{- if .Prev -}}
+  <link rel="prev" href="{{ .Prev.Permalink }}" />
 {{- end -}}
-{{- if .NextInSection -}}
-  <link rel="next" href="{{ .NextInSection.Permalink }}" />
+{{- if .Next -}}
+  <link rel="next" href="{{ .Next.Permalink }}" />
 {{- end -}}
 
 {{- with .OutputFormats.Get "RSS" -}}
