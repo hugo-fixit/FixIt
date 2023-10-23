@@ -48,11 +48,11 @@ libFiles:
   katexCSS: katex@0.16.9/dist/katex.min.css
   katexJS: katex@0.16.9/dist/katex.min.js
   katexMhchemJS: katex@0.16.9/dist/contrib/mhchem.min.js
-  # lightgallery@2.6.1 https://github.com/sachinchoolur/lightgallery
-  lightgalleryCSS: lightgallery@2.6.1/css/lightgallery-bundle.min.css
-  lightgalleryJS: lightgallery@2.6.1/lightgallery.min.js
-  lightgalleryThumbnailJS: lightgallery@2.6.1/plugins/thumbnail/lg-thumbnail.min.js
-  lightgalleryZoomJS: lightgallery@2.6.1/plugins/zoom/lg-zoom.min.js
+  # lightgallery@2.7.2 https://github.com/sachinchoolur/lightgallery
+  lightgalleryCSS: lightgallery@2.7.2/css/lightgallery-bundle.min.css
+  lightgalleryJS: lightgallery@2.7.2/lightgallery.min.js
+  lightgalleryThumbnailJS: lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js
+  lightgalleryZoomJS: lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js
   # lunr.js@2.3.9 https://github.com/olivernn/lunr.js
   lunrJS: lunr@2.3.9/lunr.min.js
   # mapbox-gl@2.10.0 https://docs.mapbox.com/mapbox-gl-js
