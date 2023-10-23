@@ -13,9 +13,9 @@ libFiles:
   # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
   aplayerCSS: aplayer@1.10.1/dist/APlayer.min.css
   aplayerJS: aplayer@1.10.1/dist/APlayer.min.js
-  # artalk@2.5.2 https://github.com/ArtalkJS/Artalk
-  artalkCSS: artalk@2.5.2/dist/Artalk.css
-  artalkJS: artalk@2.5.2/dist/Artalk.js
+  # artalk@2.6.4 https://github.com/ArtalkJS/Artalk
+  artalkCSS: artalk@2.6.4/dist/Artalk.css
+  artalkJS: artalk@2.6.4/dist/Artalk.js
   # autocomplete-js@0.38.1 https://github.com/algolia/autocomplete
   # TODO update autocompleteJS: '@algolia/autocomplete-js@1.7.1/dist/umd/index.production.js'
   autocompleteJS: autocomplete.js@0.38.1/dist/autocomplete.min.js
