@@ -7,6 +7,11 @@
   {{- $commentConfig = dict "enable" true "expired" (.Scratch.Get "commentExpired" | default false) -}}
   <div id="comments">
     {{- /* Artalk Comment System */ -}}
+    {{/*
+      TODO next version to support new config for Artalk
+      https://artalk.js.org/guide/frontend/config.html#评论分页
+      https://artalk.js.org/guide/frontend/config.html#内容限高
+    */}}
     {{- $artalk := $comment.artalk | default dict -}}
     {{- if $artalk.enable -}}
       <div id="artalk" class="comment"></div>
@@ -20,7 +25,8 @@
       {{- end -}}
       {{- $commentConfig = dict "locale" ($artalk.locale | default $.Site.LanguageCode | default "auto") | dict "artalk" | merge $commentConfig -}}
       {{- with .Site.Params.gravatar -}}
-        {{- $commentConfig = dict "mirror" .Host "default" .Style | dict "gravatar" | dict "artalk" | merge $commentConfig -}}
+        {{/* See https://artalk.js.org/guide/frontend/config.html#gravatar-params */}}
+        {{- $commentConfig = dict "mirror" .Host "params" (printf "d=%v&s=240" .Style) | dict "gravatar" | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
       {{- with $artalk.server -}}
         {{- $commentConfig = dict "server" . | dict "artalk" | merge $commentConfig -}}

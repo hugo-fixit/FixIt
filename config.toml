@@ -507,7 +507,7 @@
       # FixIt 0.2.13 | NEW Artalk comment config (https://artalk.js.org/)
       [params.page.comment.artalk]
         enable = false
-        server = "https://yourdomain/api/"
+        server = "https://yourdomain"
         site = "默认站点"
         placeholder = ""
         noComment = ""
