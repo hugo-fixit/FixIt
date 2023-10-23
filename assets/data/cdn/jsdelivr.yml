@@ -42,12 +42,12 @@ libFiles:
   gitalkJS: gitalk@1.7.2/dist/gitalk.min.js
   # instant.page@5.2.0 https://github.com/instantpage/instant.page
   instantPage: instant.page@5.2.0/instantpage.min.js
-  # katex@0.16.2 https://github.com/KaTeX/KaTeX
-  katexAutoRenderJS: katex@0.16.2/dist/contrib/auto-render.min.js
-  katexCopyTexJS: katex@0.16.2/dist/contrib/copy-tex.min.js
-  katexCSS: katex@0.16.2/dist/katex.min.css
-  katexJS: katex@0.16.2/dist/katex.min.js
-  katexMhchemJS: katex@0.16.2/dist/contrib/mhchem.min.js
+  # katex@0.16.9 https://github.com/KaTeX/KaTeX
+  katexAutoRenderJS: katex@0.16.9/dist/contrib/auto-render.min.js
+  katexCopyTexJS: katex@0.16.9/dist/contrib/copy-tex.min.js
+  katexCSS: katex@0.16.9/dist/katex.min.css
+  katexJS: katex@0.16.9/dist/katex.min.js
+  katexMhchemJS: katex@0.16.9/dist/contrib/mhchem.min.js
   # lightgallery@2.6.1 https://github.com/sachinchoolur/lightgallery
   lightgalleryCSS: lightgallery@2.6.1/css/lightgallery-bundle.min.css
   lightgalleryJS: lightgallery@2.6.1/lightgallery.min.js
