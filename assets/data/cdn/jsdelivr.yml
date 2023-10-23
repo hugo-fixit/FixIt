@@ -6,8 +6,8 @@ prefix:
   # simple-icons@7.12.0 https://github.com/simple-icons/simple-icons
   simpleIcons: https://cdn.jsdelivr.net/npm/simple-icons@7.12.0/icons/
 libFiles:
-  # algoliasearch@4.14.2 https://github.com/algolia/algoliasearch-client-javascript
-  algoliasearchJS: algoliasearch@4.14.2/dist/algoliasearch-lite.umd.min.js
+  # algoliasearch@4.20.0 https://github.com/algolia/algoliasearch-client-javascript
+  algoliasearchJS: algoliasearch@4.20.0/dist/algoliasearch-lite.umd.min.js
   # animate.css@4.1.1 https://github.com/daneden/animate.css
   animateCSS: animate.css@4.1.1/animate.min.css
   # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
