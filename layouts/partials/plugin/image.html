@@ -37,7 +37,7 @@
 {{- if .Linked -}}
   <a class="lightgallery" href="{{ $large | safeURL }}" data-thumbnail="{{ $small | safeURL }}"{{ with $caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
 {{- end -}}
-<img loading="{{ $loading }}" src="{{ .Src | safeURL }}" srcset="{{ $small | safeURL }}, {{ .Src | safeURL }} 1.5x, {{ $large | safeURL }} 2x" sizes="auto"
+<img loading="{{ $loading }}" src="{{ $src | safeURL }}" srcset="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x" sizes="auto"
   {{- if eq $loading "eager" }} title="{{ .Title | default $alt }}" alt="{{ $alt }}"
   {{- else }} data-title="{{ .Title | default $alt }}" data-alt="{{ $alt }}"{{- end -}}
   {{- with $width }} width="{{ . }}"{{- end -}}
