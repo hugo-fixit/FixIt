@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 
 ## v0.2.18-lts
 
+> **Note**
+> FixIt 0.2.18 will reach End of Life (EOL) on December 31st, 2024. After that date, FixIt 0.2.18 will no longer receive updates, including security and browser compatibility fixes.
+> Please stay tuned for the next version of FixIt under development!
+
 - :sparkles: Feat: add code block attributes support ([#330](https://github.com/hugo-fixit/FixIt/issues/330))
 - :bug: Fix: use dateFormat function to render localized dates (@stefanoginobili [#355](https://github.com/hugo-fixit/FixIt/pull/355))
 - :lipstick: Style: update define list style
@@ -24,6 +28,7 @@ All notable changes to this project will be documented in this file.
   - Update Waline from 2.14.7 to 2.15.8
   - Update simple-icons from 7.12.0 to 9.19.0
 - :arrow_up: Chore(deps-dev): update and pin all development dependency versions
+- **Full Changelog:** @Lruihao [`v0.2.18...v0.2.18-lts.2`](https://github.com/hugo-fixit/FixIt/compare/v0.2.18...v0.2.18-lts.2)
 
 ## v0.2.18 [2023.3.31]
 
