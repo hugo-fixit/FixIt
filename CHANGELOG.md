@@ -9,6 +9,21 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: use dateFormat function to render localized dates (@stefanoginobili [#355](https://github.com/hugo-fixit/FixIt/pull/355))
 - :lipstick: Style: update define list style
 - :lipstick: Style: update footnote and footnote-ref style
+- :bug: Fix: total word count error in section
+- :arrow_up: Chore(libs):
+  - Update algoliasearch from 4.14.2 to 4.20.0
+  - Update Artalk from 2.5.2 to 2.6.4
+  - Update fontawesome-free from 6.2.0 to 6.4.2
+  - Update instant.page from 5.1.1 to 5.2.0
+  - Update katex from 0.16.2 to 0.16.9
+  - Update lightgallery from 2.6.1 to 2.7.2
+  - Removed Renren, Digg and StumbleUpon in sharer.js 0.5.0
+  - Update Twikoo from 1.6.8 to 1.6.22
+  - Update vConsole from 3.14.6 to 3.15.1
+  - Update eruda from 2.5.0 to 3.0.1
+  - Update Waline from 2.14.7 to 2.15.8
+  - Update simple-icons from 7.12.0 to 9.19.0
+- :arrow_up: Chore(deps-dev): update and pin all development dependency versions
 
 ## v0.2.18 [2023.3.31]
 
