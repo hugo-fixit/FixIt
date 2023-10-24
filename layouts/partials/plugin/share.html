@@ -107,18 +107,10 @@
   {{ end -}}
 
   {{- /* 016: Digg */ -}}
-  {{- if $share.Digg -}}
-    <a href="javascript:void(0);" title="{{ T `shareOn` }} Digg" data-sharer="digg" data-url="{{ .Permalink }}">
-      {{- dict "Class" "fa-brands fa-digg fa-fw" | partial "plugin/icon.html" -}}
-    </a>
-  {{ end -}}
+  {{- /* Removed in sharer.js 0.5.0 */ -}}
 
   {{- /* 017: StumbleUpon */ -}}
-  {{- if $share.Stumbleupon -}}
-    <a href="javascript:void(0);" title="{{ T `shareOn` }} StumbleUpon" data-sharer="stumbleupon" data-url="{{ .Permalink }}" data-title="{{ .Title }}">
-      {{- dict "Class" "fa-brands fa-stumbleupon fa-fw" | partial "plugin/icon.html" -}}
-    </a>
-  {{ end -}}
+  {{- /* Removed in sharer.js 0.5.0 */ -}}
 
   {{- /* 018: Flipboard */ -}}
   {{- if $share.Flipboard -}}
@@ -135,11 +127,7 @@
   {{ end -}}
 
   {{- /* 020: 人人 */ -}}
-  {{- if $share.Renren -}}
-    <a href="javascript:void(0);" title="{{ T `shareOn` }} 人人" data-sharer="renren" data-url="{{ .Permalink }}">
-      {{- dict "Class" "fa-brands fa-renren fa-fw" | partial "plugin/icon.html" -}}
-    </a>
-  {{ end -}}
+  {{- /* Removed in sharer.js 0.5.0 */ -}}
 
   {{- /* 021: Myspace */ -}}
   {{- if $share.Myspace -}}
