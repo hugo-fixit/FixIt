@@ -79,8 +79,8 @@ libFiles:
   typeitJS: typeit@8.7.1/dist/index.umd.js
   # valine@1.5.1 https://github.com/xCss/Valine
   valineJS: valine@1.5.1/dist/Valine.min.js
-  # vconsole@3.14.6 https://github.com/Tencent/vConsole
-  vconsoleJS: vconsole@3.14.6/dist/vconsole.min.js
+  # vconsole@3.15.1 https://github.com/Tencent/vConsole
+  vconsoleJS: vconsole@3.15.1/dist/vconsole.min.js
   # waline@2.14.7 https://github.com/walinejs/waline
   walineCSS: '@waline/client@2.14.7/dist/waline.css'
   walineJS: '@waline/client@2.14.7/dist/waline.js'
