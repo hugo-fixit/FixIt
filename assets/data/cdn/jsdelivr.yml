@@ -3,8 +3,8 @@
 
 prefix:
   libFiles: https://cdn.jsdelivr.net/npm/
-  # simple-icons@7.12.0 https://github.com/simple-icons/simple-icons
-  simpleIcons: https://cdn.jsdelivr.net/npm/simple-icons@7.12.0/icons/
+  # simple-icons@9.19.0 https://github.com/simple-icons/simple-icons
+  simpleIcons: https://cdn.jsdelivr.net/npm/simple-icons@9.19.0/icons/
 libFiles:
   # algoliasearch@4.20.0 https://github.com/algolia/algoliasearch-client-javascript
   algoliasearchJS: algoliasearch@4.20.0/dist/algoliasearch-lite.umd.min.js
@@ -56,6 +56,7 @@ libFiles:
   # lunr.js@2.3.9 https://github.com/olivernn/lunr.js
   lunrJS: lunr@2.3.9/lunr.min.js
   # mapbox-gl@2.10.0 https://docs.mapbox.com/mapbox-gl-js
+  # TODO update to 3.x
   mapboxGLCSS: mapbox-gl@2.10.0/dist/mapbox-gl.css
   mapboxGLJS: mapbox-gl@2.10.0/dist/mapbox-gl.js
   # mermaid@9.4.3 https://github.com/mermaid-js/mermaid
