@@ -141,6 +141,7 @@
 
     {{- /* Waline Comment System */ -}}
     {{- /* see https://waline.js.org/reference/component.html */ -}}
+    {{- /* TODO adapted to Waline 2.15.8 */ -}}
     {{- $waline := $comment.waline | default dict -}}
     {{- if $waline.enable -}}
       <div id="waline" class="comment"></div>
