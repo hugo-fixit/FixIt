@@ -266,6 +266,7 @@
     {{- end -}}
 
     {{- /* Twikoo Comment System */ -}}
+    {{- /* TODO review lang config https://github.com/twikoojs/twikoo/blob/main/src/client/utils/i18n/index.js */ -}}
     {{- $twikoo := $comment.twikoo | default dict -}}
     {{- if $twikoo.enable -}}
       <div id="twikoo"></div>
