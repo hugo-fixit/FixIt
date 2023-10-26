@@ -1,0 +1,6 @@
+{{- $filteredPath := strings.TrimSuffix "/" (.Path | lower) -}}
+{{- $suffixValid := false -}}
+{{- range .Suffixes -}}
+  {{- $suffixValid = or (eq (path.Ext $filteredPath) .) $suffixValid -}}
+{{- end -}}
+{{- return $suffixValid -}}

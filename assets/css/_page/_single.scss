@@ -8,7 +8,7 @@
     font-size: 1.6rem;
     font-weight: bold;
     line-height: 140%;
-  
+
     .icon-repost {
       color: var(--#{$prefix}success);
       display: inline-block;
@@ -49,7 +49,7 @@
 
     .author {
       font-size: 1.05rem;
-      
+
       img.avatar {
         width: 1.3rem;
         height: 1.3rem;
@@ -260,7 +260,7 @@
               background-color: lighten($table-background-color-dark, 2.75%);
             }
           }
-          
+
           & tr:hover {
             background: darken($table-background-color, 4.5%);
 
@@ -286,8 +286,23 @@
       max-width: 100%;
       min-height: 1em;
 
-      &:not([data-h]) {
+      &:not([height]) {
         height: auto;
+      }
+
+      &:is([loading='lazy']):not(.suffix-invalid):not([data-lazyloaded]) {
+        @media (min-resolution: 1dppx) {
+          width: var(--img-w);
+          height: var(--img-h);
+        }
+        @media (min-resolution: 1.5dppx) {
+          width: calc(var(--img-w) / 1.5);
+          height: calc(var(--img-h) / 1.5);
+        }
+        @media (min-resolution: 2dppx) {
+          width: calc(var(--img-w) / 2);
+          height: calc(var(--img-h) / 2);
+        }
       }
 
       &.version {
