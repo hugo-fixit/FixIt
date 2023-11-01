@@ -1,48 +1,64 @@
-{{- /* lightgallery */ -}}
+{{- /* this method is only available for image resources that are raster images */ -}}
 {{- $src := .Src -}}
-{{- $width := .Width -}}
-{{- $height := .Height -}}
 {{- $class := .Class | default "" -}}
 {{- $style := "" -}}
-{{- $cacheRemoteImages := (.Params.cacheRemoteImages | default dict) | merge site.Params.cacheRemoteImages -}}
-{{- $suffixList := slice ".jpeg" ".jpg" ".png" ".gif" ".bmp" ".tif" ".tiff" ".webp" -}}
-{{- $suffixValid := dict "Path" $src "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
-
-{{- if not $suffixValid -}}
-  {{- $class = printf "%v suffix-invalid" $class -}}
-{{- end -}}
-
-{{- with dict "Path" .Src "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
-  {{- $url := urls.Parse $.Src -}}
-  {{- if not $url.Host | or $cacheRemoteImages.replace -}}
-    {{- $src = .RelPermalink -}}
-  {{- end -}}
-  {{- /* this method is only available for image resources that are raster images */ -}}
-  {{- if (not $.Width) | and (not $.Height) | and (eq .ResourceType "image") | and $suffixValid -}}
-    {{- $width = .Width -}}
-    {{- $height = .Height -}}
-    {{- $style = printf "--img-w: %vpx;--img-h: %vpx;" .Width .Height | safeHTMLAttr -}}
-  {{- end -}}
-{{- end -}}
-
-{{- $small := .SrcSmall | default $src -}}
-{{- with dict "Path" .SrcSmall "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
-  {{- $small = .RelPermalink -}}
-{{- end -}}
-
-{{- $large := .SrcLarge | default $src -}}
-{{- with dict "Path" .SrcLarge "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
-  {{- $large = .RelPermalink -}}
-{{- end -}}
-
-{{- $alt := .Alt | default $src -}}
-{{- $caption := .Caption | default $alt -}}
 {{- $loading := .Loading | default "lazy" -}}
 {{- $onload := "" -}}
 {{- $onerror := "" -}}
+{{- $cacheRemoteImages := (.Params.cacheRemoteImages | default dict) | merge site.Params.cacheRemoteImages -}}
+{{- $suffixList := slice ".jpeg" ".jpg" ".png" ".gif" ".bmp" ".tif" ".tiff" ".webp" -}}
 
+{{- /* handle for default size image */ -}}
+{{- with dict "Path" $src "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
+  {{- $url := urls.Parse $src -}}
+  {{- $suffixValid := dict "Path" $src "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
+  {{- if not $url.Host | or $cacheRemoteImages.replace -}}
+    {{- $src = .RelPermalink -}}
+  {{- end -}}
+  {{- if not $suffixValid -}}
+    {{- $class = printf "%v suffix-invalid" $class -}}
+  {{- else if eq .ResourceType "image" -}}
+    {{- $style = printf "--width: %vpx;--aspect-ratio: %v / %v;" .Width .Width .Height | safeHTMLAttr -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* handle for small size image */ -}}
+{{- $small := .SrcSmall | default $src -}}
+{{- with dict "Path" .SrcSmall "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
+  {{- $url := urls.Parse $.SrcSmall -}}
+  {{- $suffixValid := dict "Path" $.SrcSmall "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
+  {{- if not $url.Host | or $cacheRemoteImages.replace -}}
+    {{- $small = .RelPermalink -}}
+  {{- end -}}
+  {{- if not $suffixValid -}}
+    {{- $class = printf "%v suffix-invalid__small" $class -}}
+  {{- else if eq .ResourceType "image" -}}
+    {{- $style = printf "%v--width-small: %vpx;--aspect-ratio-small: %v / %v;" $style .Width .Width .Height | safeHTMLAttr -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* handle for large size image */ -}}
+{{- $large := .SrcLarge | default $src -}}
+{{- with dict "Path" .SrcLarge "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
+  {{- $url := urls.Parse $.SrcLarge -}}
+  {{- $suffixValid := dict "Path" $.SrcLarge "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
+  {{- if not $url.Host | or $cacheRemoteImages.replace -}}
+    {{- $large = .RelPermalink -}}
+  {{- end -}}
+  {{- if not $suffixValid -}}
+    {{- $class = printf "%v suffix-invalid__large" $class -}}
+  {{- else if eq .ResourceType "image" -}}
+    {{- $style = printf "%v--width-large: %vpx;--aspect-ratio-large: %v / %v;" $style .Width .Width .Height | safeHTMLAttr -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* set image alt and caption */ -}}
+{{- $alt := .Alt | default $src -}}
+{{- $caption := .Caption | default $alt -}}
+
+{{- /* set image lazy loading */ -}}
+{{- /* for details, see https://lruihao.cn/posts/native-img-loading-lazy/ */ -}}
 {{- if eq $loading "lazy" -}}
-  {{- /* for details, see https://lruihao.cn/posts/native-img-loading-lazy/ */ -}}
   {{- /* TODO move to theme.js */ -}}
   {{- $commonScript := "this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}" -}}
   {{- $onload = printf " onload=\"%vthis.dataset.lazyloaded='';\"" $commonScript | safeHTMLAttr -}}
@@ -50,10 +66,11 @@
   {{- $style = printf " style=\"%vbackground: url(%v) no-repeat center;\"" $style (resources.Get "svg/loading.svg" | minify).RelPermalink | safeHTMLAttr -}}
 {{- end -}}
 
+{{- /* structure of lightgallery or img */ -}}
 {{- if .Linked -}}
   <a class="lightgallery" href="{{ $large | safeURL }}" data-thumbnail="{{ $small | safeURL }}"{{ with $caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
 {{- end -}}
-<img loading="{{ $loading }}" src="{{ $src | safeURL }}" srcset="{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x" sizes="auto"
+<img loading="{{ $loading }}" src="{{ $src | safeURL }}" srcset="{{ $small | safeURL }}?size=small, {{ $src | safeURL }}?size=medium 1.5x, {{ $large | safeURL }}?size=large 2x" sizes="auto"
   {{- if eq $loading "lazy" }} data-title="{{ .Title | default $alt }}" data-alt="{{ $alt }}"
   {{- else }} title="{{ .Title | default $alt }}" alt="{{ $alt }}"{{- end -}}
   {{- with .Width }} width="{{ . }}"{{- end -}}
