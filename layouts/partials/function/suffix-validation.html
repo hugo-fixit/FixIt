@@ -1,6 +1,9 @@
-{{- $filteredPath := strings.TrimSuffix "/" (.Path | lower) -}}
-{{- $suffixValid := false -}}
-{{- range .Suffixes -}}
-  {{- $suffixValid = or (eq (path.Ext $filteredPath) .) $suffixValid -}}
+{{- $url := urls.Parse .Path -}}
+{{- $path := strings.TrimSuffix "/" ((printf "%v%v" $url.Host $url.Path) | lower) -}}
+{{- with $url.Scheme -}}
+  {{- $path = printf "%v://%v" . $path -}}
 {{- end -}}
+{{- $suffix := path.Ext $path -}}
+{{- $suffixes := .Suffixes | default slice -}}
+{{- $suffixValid := in $suffixes $suffix -}}
 {{- return $suffixValid -}}
