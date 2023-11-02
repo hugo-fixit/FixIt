@@ -1,5 +1,7 @@
 {{- /* this method is only available for image resources that are raster images */ -}}
 {{- $src := .Src -}}
+{{- $srcSmall := .SrcSmall | default $src -}}
+{{- $srcLarge := .SrcLarge | default $src -}}
 {{- $class := .Class | default "" -}}
 {{- $style := "" -}}
 {{- $loading := .Loading | default "lazy" -}}
@@ -7,47 +9,50 @@
 {{- $onerror := "" -}}
 {{- $cacheRemoteImages := (.Params.cacheRemoteImages | default dict) | merge site.Params.cacheRemoteImages -}}
 {{- $suffixList := slice ".jpeg" ".jpg" ".png" ".gif" ".bmp" ".tif" ".tiff" ".webp" -}}
+{{- $suffixValid := dict "Path" $src "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
+{{- $suffixValidSmall := dict "Path" $srcSmall "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
+{{- $suffixValidLarge := dict "Path" $srcLarge "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
+
+{{- /* handle for invalid suffix */ -}}
+{{- if not $suffixValid | and $src -}}
+  {{- $class = printf "%v suffix-invalid" $class -}}
+{{- end -}}
+{{- if not $suffixValidSmall | and $srcSmall -}}
+  {{- $class = printf "%v suffix-invalid__small" $class -}}
+{{- end -}}
+{{- if not $suffixValidLarge | and $srcLarge -}}
+  {{- $class = printf "%v suffix-invalid__large" $class -}}
+{{- end -}}
 
 {{- /* handle for default size image */ -}}
 {{- with dict "Path" $src "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
   {{- $url := urls.Parse $src -}}
-  {{- $suffixValid := dict "Path" $src "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
   {{- if not $url.Host | or $cacheRemoteImages.replace -}}
     {{- $src = .RelPermalink -}}
   {{- end -}}
-  {{- if not $suffixValid -}}
-    {{- $class = printf "%v suffix-invalid" $class -}}
-  {{- else if eq .ResourceType "image" -}}
+  {{- if (eq .ResourceType "image") | and $suffixValid -}}
     {{- $style = printf "--width: %vpx;--aspect-ratio: %v / %v;" .Width .Width .Height | safeHTMLAttr -}}
   {{- end -}}
 {{- end -}}
 
 {{- /* handle for small size image */ -}}
-{{- $small := .SrcSmall | default $src -}}
 {{- with dict "Path" .SrcSmall "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
   {{- $url := urls.Parse $.SrcSmall -}}
-  {{- $suffixValid := dict "Path" $.SrcSmall "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
   {{- if not $url.Host | or $cacheRemoteImages.replace -}}
-    {{- $small = .RelPermalink -}}
+    {{- $srcSmall = .RelPermalink -}}
   {{- end -}}
-  {{- if not $suffixValid -}}
-    {{- $class = printf "%v suffix-invalid__small" $class -}}
-  {{- else if eq .ResourceType "image" -}}
+  {{- if (eq .ResourceType "image") | and $suffixValidSmall -}}
     {{- $style = printf "%v--width-small: %vpx;--aspect-ratio-small: %v / %v;" $style .Width .Width .Height | safeHTMLAttr -}}
   {{- end -}}
 {{- end -}}
 
 {{- /* handle for large size image */ -}}
-{{- $large := .SrcLarge | default $src -}}
 {{- with dict "Path" .SrcLarge "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
   {{- $url := urls.Parse $.SrcLarge -}}
-  {{- $suffixValid := dict "Path" $.SrcLarge "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
   {{- if not $url.Host | or $cacheRemoteImages.replace -}}
-    {{- $large = .RelPermalink -}}
+    {{- $srcLarge = .RelPermalink -}}
   {{- end -}}
-  {{- if not $suffixValid -}}
-    {{- $class = printf "%v suffix-invalid__large" $class -}}
-  {{- else if eq .ResourceType "image" -}}
+  {{- if (eq .ResourceType "image") | and $suffixValidLarge -}}
     {{- $style = printf "%v--width-large: %vpx;--aspect-ratio-large: %v / %v;" $style .Width .Width .Height | safeHTMLAttr -}}
   {{- end -}}
 {{- end -}}
@@ -66,11 +71,16 @@
   {{- $style = printf " style=\"%vbackground: url(%v) no-repeat center;\"" $style (resources.Get "svg/loading.svg" | minify).RelPermalink | safeHTMLAttr -}}
 {{- end -}}
 
+{{- /* set image srcset */ -}}
+{{- $srcSmall = printf (cond (strings.Contains $srcSmall "?") "%v&size=small" "%v?size=small") $srcSmall -}}
+{{- $srcMedium := printf (cond (strings.Contains $src "?") "%v&size=medium" "%v?size=medium") $src -}}
+{{- $srcLarge = printf (cond (strings.Contains $srcLarge "?") "%v&size=large" "%v?size=large") $srcLarge -}}
+
 {{- /* structure of lightgallery or img */ -}}
 {{- if .Linked -}}
-  <a class="lightgallery" href="{{ $large | safeURL }}" data-thumbnail="{{ $small | safeURL }}"{{ with $caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
+  <a class="lightgallery" href="{{ $srcLarge | safeURL }}" data-thumbnail="{{ $srcSmall | safeURL }}"{{ with $caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
 {{- end -}}
-<img loading="{{ $loading }}" src="{{ $src | safeURL }}" srcset="{{ $small | safeURL }}?size=small, {{ $src | safeURL }}?size=medium 1.5x, {{ $large | safeURL }}?size=large 2x" sizes="auto"
+<img loading="{{ $loading }}" src="{{ $src | safeURL }}" srcset="{{ $srcSmall | safeURL }}, {{ $srcMedium | safeURL }} 1.5x, {{ $srcLarge | safeURL }} 2x" sizes="auto"
   {{- if eq $loading "lazy" }} data-title="{{ .Title | default $alt }}" data-alt="{{ $alt }}"
   {{- else }} title="{{ .Title | default $alt }}" alt="{{ $alt }}"{{- end -}}
   {{- with .Width }} width="{{ . }}"{{- end -}}
