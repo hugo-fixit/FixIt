@@ -3,10 +3,25 @@
 All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/hugo-fixit/FixIt/releases -->
 
-## v0.2.18-lts
+## v0.2.18-lts.3 [2023.10.3]
+
+> Snapshot: <https://fixit-git-v0218-lts-cell-x.vercel.app>
+
+- :bug: Fix: fix path errors in image src and 1.5x srcset ([#346](https://github.com/hugo-fixit/FixIt/issues/346))
+- :sparkles: Feat: add options to cache remote image locally ([#362](https://github.com/hugo-fixit/FixIt/pull/362) Fixes [#348](https://github.com/hugo-fixit/FixIt/issues/348))
+- :bug: Fix: fix toc active error when breadcrumb is enabled and set `sticky` to `true` ([#368](https://github.com/hugo-fixit/FixIt/issues/368))
+- :arrow_up: Chore(deps-dev):
+  - Bump core-js from 3.33.1 to 3.33.2
+  - Bump browserify-sign from 4.2.1 to 4.2.2
+- **Full Changelog:** @Lruihao [`v0.2.18-lts.2...v0.2.18-lts.3`](https://github.com/hugo-fixit/FixIt/compare/v0.2.18.lts.2...v0.2.18-lts.3)
+
+## v0.2.18-lts.2 [2023.10.24]
+
+This release is mainly for upgrading third-party libraries and development dependencies.  
+Snapshot: <https://fixit-iyi1zrhg9-cell-x.vercel.app/>
 
 > **Note**
-> FixIt 0.2.18 will reach End of Life (EOL) on December 31st, 2024. After that date, FixIt 0.2.18 will no longer receive updates, including security and browser compatibility fixes.
+> **FixIt 0.2.18 will reach End of Life (EOL) on December 31st, 2024.** After that date, FixIt 0.2.18 will no longer receive updates, including security and browser compatibility fixes.
 > Please stay tuned for the next version of FixIt under development!
 
 - :sparkles: Feat: add code block attributes support ([#330](https://github.com/hugo-fixit/FixIt/issues/330))
@@ -29,6 +44,8 @@ All notable changes to this project will be documented in this file.
   - Update simple-icons from 7.12.0 to 9.19.0
 - :arrow_up: Chore(deps-dev): update and pin all development dependency versions
 - **Full Changelog:** @Lruihao [`v0.2.18...v0.2.18-lts.2`](https://github.com/hugo-fixit/FixIt/compare/v0.2.18...v0.2.18-lts.2)
+
+_BTW, Happy Programmer's Day (1024)! :)_
 
 ## v0.2.18 [2023.3.31]
 
@@ -57,7 +74,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: resolve style conflicts between valine and animate.css ([#304](https://github.com/hugo-fixit/FixIt/issues/304))
 - :bug: Fix: version `v0.2.17` is not compatible with previous versions
 - :bug: Fix: `crypto-js/md5.js` and `crypto-js/sha256.js` cdn path error
-- :bug: Fix:  HackTheBox social link not in the right format ([#308](https://github.com/hugo-fixit/FixIt/issues/308))
+- :bug: Fix: HackTheBox social link not in the right format ([#308](https://github.com/hugo-fixit/FixIt/issues/308))
 - :recycle: Refactor: image lazy loading ([#283](https://github.com/hugo-fixit/FixIt/pull/283))
 - :recycle: Refactor: author's avatar of post or profile ([#288](https://github.com/hugo-fixit/FixIt/pull/288))
 - :recycle: Refactor: language switch in desktop header ([#306](https://github.com/hugo-fixit/FixIt/pull/306))
@@ -301,7 +318,7 @@ All notable changes to this project will be documented in this file.
 - :bug: Fix: remove source map of local libraries to avoid 404 error ([#67](https://github.com/hugo-fixit/FixIt/issues/67))
 - :fire: Feat: remove shortcode cardlink ([#42](https://github.com/hugo-fixit/FixIt/issues/42))
 - :lipstick: Style: more refined theme style ([#40](https://github.com/hugo-fixit/FixIt/issues/40))
-- :pencil2: Style: fix typo *discription* should be **description** ([#60](https://github.com/hugo-fixit/FixIt/issues/60))
+- :pencil2: Style: fix typo _discription_ should be **description** ([#60](https://github.com/hugo-fixit/FixIt/issues/60))
 - :wrench: Chore(update-libs):
   - Update cell-watermark 1.0.3 and CDN support (fontFamily supported)
   - Update animate.css 3.7.2 -> 4.1.1 ([#74](https://github.com/hugo-fixit/FixIt/issues/74))
