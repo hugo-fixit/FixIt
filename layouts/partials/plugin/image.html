@@ -1,5 +1,3 @@
-{{- /* this method is only available for image resources that are raster images */ -}}
-{{- $src := .Src -}}
 {{- $class := .Class | default "" -}}
 {{- $style := "" -}}
 {{- $loading := .Loading | default "lazy" -}}
@@ -7,27 +5,16 @@
 {{- $onerror := "" -}}
 {{- $cacheRemoteImages := (.Params.cacheRemoteImages | default dict) | merge site.Params.cacheRemoteImages -}}
 {{- $suffixList := slice ".jpeg" ".jpg" ".png" ".gif" ".bmp" ".tif" ".tiff" ".webp" -}}
-{{- $suffixValid := dict "Path" .Src "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
-{{- $suffixValidSmall := dict "Path" .SrcSmall "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
-{{- $suffixValidLarge := dict "Path" .SrcLarge "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
-
-{{- /* handle for invalid suffix */ -}}
-{{- if not $suffixValid | and .Src -}}
-  {{- $class = printf "%v suffix-invalid" $class -}}
-{{- end -}}
-{{- if not $suffixValidSmall | and .SrcSmall -}}
-  {{- $class = printf "%v suffix-invalid__small" $class -}}
-{{- end -}}
-{{- if not $suffixValidLarge | and .SrcLarge -}}
-  {{- $class = printf "%v suffix-invalid__large" $class -}}
-{{- end -}}
 
 {{- /* handle for default size image */ -}}
+{{- $src := .Src -}}
+{{- $suffixValid := dict "Path" $src "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
 {{- with dict "Path" $src "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
   {{- $url := urls.Parse $src -}}
   {{- if not $url.Host | or $cacheRemoteImages.replace -}}
     {{- $src = .RelPermalink -}}
   {{- end -}}
+  {{- /* only available for image resources that are raster images */ -}}
   {{- if (eq .ResourceType "image") | and $suffixValid -}}
     {{- $style = printf "--width: %vpx;--aspect-ratio: %v / %v;" .Width .Width .Height | safeHTMLAttr -}}
   {{- end -}}
@@ -35,6 +22,7 @@
 
 {{- /* handle for small size image */ -}}
 {{- $srcSmall := .SrcSmall | default $src -}}
+{{- $suffixValidSmall := dict "Path" $srcSmall "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
 {{- with dict "Path" .SrcSmall "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
   {{- $url := urls.Parse $.SrcSmall -}}
   {{- if not $url.Host | or $cacheRemoteImages.replace -}}
@@ -47,6 +35,7 @@
 
 {{- /* handle for large size image */ -}}
 {{- $srcLarge := .SrcLarge | default $src -}}
+{{- $suffixValidLarge := dict "Path" $srcLarge "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
 {{- with dict "Path" .SrcLarge "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
   {{- $url := urls.Parse $.SrcLarge -}}
   {{- if not $url.Host | or $cacheRemoteImages.replace -}}
@@ -55,6 +44,17 @@
   {{- if (eq .ResourceType "image") | and $suffixValidLarge -}}
     {{- $style = printf "%v--width-large: %vpx;--aspect-ratio-large: %v / %v;" $style .Width .Width .Height | safeHTMLAttr -}}
   {{- end -}}
+{{- end -}}
+
+{{- /* handle for invalid suffix */ -}}
+{{- if not $suffixValid | and $src -}}
+  {{- $class = printf "%v suffix-invalid" $class -}}
+{{- end -}}
+{{- if not $suffixValidSmall | and $srcSmall -}}
+  {{- $class = printf "%v suffix-invalid__small" $class -}}
+{{- end -}}
+{{- if not $suffixValidLarge | and $srcLarge -}}
+  {{- $class = printf "%v suffix-invalid__large" $class -}}
 {{- end -}}
 
 {{- /* set image alt and caption */ -}}
