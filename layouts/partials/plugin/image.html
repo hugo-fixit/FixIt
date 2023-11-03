@@ -1,52 +1,94 @@
-{{- /* lightgallery */ -}}
+{{- /* this method is only available for image resources that are raster images */ -}}
 {{- $src := .Src -}}
-{{- $width := .Width -}}
-{{- $height := .Height -}}
-{{- with dict "Path" $src "Resources" .Resources | partial "function/resource.html" -}}
-  {{- $src = .RelPermalink -}}
-  {{- /* Resources can not get width and height of image for svg type */ -}}
-  {{- if (not $.Width) | and (not $.Height) | and (ne .MediaType.SubType "svg") -}}
-    {{- $width = .Width -}}
-    {{- $height = .Height -}}
+{{- $class := .Class | default "" -}}
+{{- $style := "" -}}
+{{- $loading := .Loading | default "lazy" -}}
+{{- $onload := "" -}}
+{{- $onerror := "" -}}
+{{- $cacheRemoteImages := (.Params.cacheRemoteImages | default dict) | merge site.Params.cacheRemoteImages -}}
+{{- $suffixList := slice ".jpeg" ".jpg" ".png" ".gif" ".bmp" ".tif" ".tiff" ".webp" -}}
+{{- $suffixValid := dict "Path" .Src "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
+{{- $suffixValidSmall := dict "Path" .SrcSmall "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
+{{- $suffixValidLarge := dict "Path" .SrcLarge "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
+
+{{- /* handle for invalid suffix */ -}}
+{{- if not $suffixValid | and .Src -}}
+  {{- $class = printf "%v suffix-invalid" $class -}}
+{{- end -}}
+{{- if not $suffixValidSmall | and .SrcSmall -}}
+  {{- $class = printf "%v suffix-invalid__small" $class -}}
+{{- end -}}
+{{- if not $suffixValidLarge | and .SrcLarge -}}
+  {{- $class = printf "%v suffix-invalid__large" $class -}}
+{{- end -}}
+
+{{- /* handle for default size image */ -}}
+{{- with dict "Path" $src "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
+  {{- $url := urls.Parse $src -}}
+  {{- if not $url.Host | or $cacheRemoteImages.replace -}}
+    {{- $src = .RelPermalink -}}
+  {{- end -}}
+  {{- if (eq .ResourceType "image") | and $suffixValid -}}
+    {{- $style = printf "--width: %vpx;--aspect-ratio: %v / %v;" .Width .Width .Height | safeHTMLAttr -}}
   {{- end -}}
 {{- end -}}
 
-{{- $small := .SrcSmall | default $src -}}
-{{- with dict "Path" .SrcSmall "Resources" .Resources | partial "function/resource.html" -}}
-  {{- $small = .RelPermalink -}}
+{{- /* handle for small size image */ -}}
+{{- $srcSmall := .SrcSmall | default $src -}}
+{{- with dict "Path" .SrcSmall "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
+  {{- $url := urls.Parse $.SrcSmall -}}
+  {{- if not $url.Host | or $cacheRemoteImages.replace -}}
+    {{- $srcSmall = .RelPermalink -}}
+  {{- end -}}
+  {{- if (eq .ResourceType "image") | and $suffixValidSmall -}}
+    {{- $style = printf "%v--width-small: %vpx;--aspect-ratio-small: %v / %v;" $style .Width .Width .Height | safeHTMLAttr -}}
+  {{- end -}}
 {{- end -}}
 
-{{- $large := .SrcLarge | default $src -}}
-{{- with dict "Path" .SrcLarge "Resources" .Resources | partial "function/resource.html" -}}
-  {{- $large = .RelPermalink -}}
+{{- /* handle for large size image */ -}}
+{{- $srcLarge := .SrcLarge | default $src -}}
+{{- with dict "Path" .SrcLarge "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
+  {{- $url := urls.Parse $.SrcLarge -}}
+  {{- if not $url.Host | or $cacheRemoteImages.replace -}}
+    {{- $srcLarge = .RelPermalink -}}
+  {{- end -}}
+  {{- if (eq .ResourceType "image") | and $suffixValidLarge -}}
+    {{- $style = printf "%v--width-large: %vpx;--aspect-ratio-large: %v / %v;" $style .Width .Width .Height | safeHTMLAttr -}}
+  {{- end -}}
 {{- end -}}
 
+{{- /* set image alt and caption */ -}}
 {{- $alt := .Alt | default $src -}}
 {{- $caption := .Caption | default $alt -}}
-{{- $loading := .Loading | default "lazy" -}}
-{{- $commonScript := "this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}" -}}
-{{- $onload := printf " onload=\"%vthis.dataset.lazyloaded='';\"" $commonScript | safeHTMLAttr -}}
-{{- $onerror := printf " onerror=\"%v\"" $commonScript | safeHTMLAttr -}}
-{{- $style := printf " style=\"background: url(%v) no-repeat center;\"" (resources.Get "svg/loading.svg" | minify).RelPermalink | safeHTMLAttr -}}
-{{- if eq $loading "eager" -}}
-  {{- $onload = "" -}}
-  {{- $onerror = "" -}}
-  {{- $style = "" -}}
+
+{{- /* set image lazy loading */ -}}
+{{- /* for details, see https://lruihao.cn/posts/native-img-loading-lazy/ */ -}}
+{{- if eq $loading "lazy" -}}
+  {{- /* TODO move to theme.js */ -}}
+  {{- $commonScript := "this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}" -}}
+  {{- $onload = printf " onload=\"%vthis.dataset.lazyloaded='';\"" $commonScript | safeHTMLAttr -}}
+  {{- $onerror = printf " onerror=\"%v\"" $commonScript | safeHTMLAttr -}}
+  {{- $style = printf " style=\"%vbackground: url(%v) no-repeat center;\"" $style (resources.Get "svg/loading.svg" | minify).RelPermalink | safeHTMLAttr -}}
 {{- end -}}
 
+{{- /* set image srcset */ -}}
+{{- $srcSmall = printf (cond (strings.Contains $srcSmall "?") "%v&size=small" "%v?size=small") $srcSmall -}}
+{{- $srcMedium := printf (cond (strings.Contains $src "?") "%v&size=medium" "%v?size=medium") $src -}}
+{{- $srcLarge = printf (cond (strings.Contains $srcLarge "?") "%v&size=large" "%v?size=large") $srcLarge -}}
+
+{{- /* structure of lightgallery or img */ -}}
 {{- if .Linked -}}
-  <a class="lightgallery" href="{{ $large | safeURL }}" data-thumbnail="{{ $small | safeURL }}"{{ with $caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
+  <a class="lightgallery" href="{{ $srcLarge | safeURL }}" data-thumbnail="{{ $srcSmall | safeURL }}"{{ with $caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
 {{- end -}}
-<img loading="{{ $loading }}" src="{{ .Src | safeURL }}" srcset="{{ $small | safeURL }}, {{ .Src | safeURL }} 1.5x, {{ $large | safeURL }} 2x" sizes="auto"
-  {{- if eq $loading "eager" }} title="{{ .Title | default $alt }}" alt="{{ $alt }}"
-  {{- else }} data-title="{{ .Title | default $alt }}" data-alt="{{ $alt }}"{{- end -}}
-  {{- with $width }} width="{{ . }}"{{- end -}}
-  {{- with $height }} height="{{ . }}"{{- end -}}
-  {{- with .Class }} class="{{ . }}"{{- end -}}
+<img loading="{{ $loading }}" src="{{ $src | safeURL }}" srcset="{{ $srcSmall | safeURL }}, {{ $srcMedium | safeURL }} 1.5x, {{ $srcLarge | safeURL }} 2x" sizes="auto"
+  {{- if eq $loading "lazy" }} data-title="{{ .Title | default $alt }}" data-alt="{{ $alt }}"
+  {{- else }} title="{{ .Title | default $alt }}" alt="{{ $alt }}"{{- end -}}
+  {{- with .Width }} width="{{ . }}"{{- end -}}
+  {{- with .Height }} height="{{ . }}"{{- end -}}
+  {{- with $class }} class="{{ trim . " " }}"{{- end -}}
   {{- with $style -}}{{ . }}{{- end -}}
   {{- with $onload -}}{{ . }}{{- end -}}
   {{- with $onerror -}}{{ . }}{{- end -}}
-  {{- with .Height }} data-h{{- end -}}
 />
 {{- if .Linked -}}
   </a>

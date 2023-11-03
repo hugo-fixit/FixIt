@@ -488,11 +488,8 @@
       Line = false
       Instapaper = false
       Pocket = false
-      Digg = false
-      Stumbleupon = false
       Flipboard = false
       Weibo = true
-      Renren = false
       Myspace = false
       Blogger = false
       Baidu = false
@@ -507,7 +504,7 @@
       # FixIt 0.2.13 | NEW Artalk comment config (https://artalk.js.org/)
       [params.page.comment.artalk]
         enable = false
-        server = "https://yourdomain/api/"
+        server = "https://yourdomain"
         site = "默认站点"
         placeholder = ""
         noComment = ""
@@ -812,6 +809,12 @@
     # ["barber-shop", "big-counter", "bounce", "center-atom", "center-circle", "center-radar", "center-simple",
     # "corner-indicator", "fill-left", "flash", "flat-top", "loading-bar", "mac-osx", "material", "minimal"]
     theme = "minimal"
+  
+  # FixIt 0.2.18-lts.3 | NEW [Experimental] cache remote images locally, see: https://github.com/hugo-fixit/FixIt/pull/362
+  [params.cacheRemoteImages]
+    enable = false
+    # replace remote image url with local image url
+    replace = false
   
   # FixIt 0.2.17 | NEW Define custom file paths
   # Create your custom files in site directory `layouts/partials/custom` and uncomment needed files below

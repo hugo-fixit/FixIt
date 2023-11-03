@@ -1,20 +1,21 @@
-algoliasearch@4.14.2 https://github.com/algolia/algoliasearch-client-javascript
+algoliasearch@4.20.0 https://github.com/algolia/algoliasearch-client-javascript
 animate.css@4.1.1 https://github.com/daneden/animate.css
 aplayer@1.10.1 https://github.com/MoePlayer/APlayer
-artalk@2.5.2 https://github.com/ArtalkJS/Artalk
+artalk@2.6.4 https://github.com/ArtalkJS/Artalk
 autocomplete-js@0.38.1 https://github.com/algolia/autocomplete
 cell-watermark@1.0.3 https://github.com/Lruihao/watermark
 cookieconsent@3.1.1 https://github.com/osano/cookieconsent
 crypto-js@4.1.1 https://github.com/brix/crypto-js
 echarts@5.3.3 https://github.com/apache/echarts
+TODO update emoji-data to 15.x
 emoji-data@14.0.0 https://github.com/iamcal/emoji-data
-eruda@2.5.0 https://github.com/liriliri/eruda
-fontawesome-free@6.2.0 https://github.com/FortAwesome/Font-Awesome
+eruda@3.0.1 https://github.com/liriliri/eruda
+fontawesome-free@6.4.2 https://github.com/FortAwesome/Font-Awesome
 fusejs@6.6.2 https://github.com/krisk/fuse
 gitalk@1.7.2 https://github.com/gitalk/gitalk
-instant.page@5.1.1 https://github.com/instantpage/instant.page
-katex@0.16.2 https://github.com/KaTeX/KaTeX
-lightgallery@2.6.1 https://github.com/sachinchoolur/lightgallery
+instant.page@5.2.0 https://github.com/instantpage/instant.page
+katex@0.16.9 https://github.com/KaTeX/KaTeX
+lightgallery@2.7.2 https://github.com/sachinchoolur/lightgallery
 mapbox-gl@2.10.0 https://github.com/mapbox/mapbox-gl-js
 mermaid@9.4.3 https://github.com/mermaid-js/mermaid
 meting@2.0.1 https://github.com/metowolf/MetingJS
@@ -22,10 +23,10 @@ normalize.css@8.0.1 https://github.com/necolas/normalize.css
 object-fit-images@3.2.4 https://github.com/fregante/object-fit-images [archived]
 pangu.js@4.0.7 https://github.com/vinta/pangu.js
 sharer.js@0.5.1 https://github.com/ellisonleao/sharer.js
-simple-icons@7.12.0 https://github.com/simple-icons/simple-icons
+simple-icons@9.19.0 https://github.com/simple-icons/simple-icons
 twemoji@14.0.2 https://github.com/twitter/twemoji
-twikoo@1.6.8 https://github.com/imaegoo/twikoo
+twikoo@1.6.22 https://github.com/imaegoo/twikoo
 typeit@8.7.1 https://github.com/alexmacarthur/typeit
 valine@1.5.1 https://github.com/xCss/Valine
-vconsole@3.14.6 https://github.com/Tencent/vConsole
-waline@2.14.7 https://github.com/walinejs/waline
+vconsole@3.15.1 https://github.com/Tencent/vConsole
+waline@2.15.8 https://github.com/walinejs/waline

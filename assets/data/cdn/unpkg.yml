@@ -3,19 +3,19 @@
 
 prefix:
   libFiles: https://unpkg.com/
-  # simple-icons@7.12.0 https://github.com/simple-icons/simple-icons
-  simpleIcons: https://unpkg.com/simple-icons@7.12.0/icons/
+  # simple-icons@9.19.0 https://github.com/simple-icons/simple-icons
+  simpleIcons: https://unpkg.com/simple-icons@9.19.0/icons/
 libFiles:
-  # algoliasearch@4.14.2 https://github.com/algolia/algoliasearch-client-javascript
-  algoliasearchJS: algoliasearch@4.14.2/dist/algoliasearch-lite.umd.js
+  # algoliasearch@4.20.0 https://github.com/algolia/algoliasearch-client-javascript
+  algoliasearchJS: algoliasearch@4.20.0/dist/algoliasearch-lite.umd.js
   # animate.css@4.1.1 https://github.com/daneden/animate.css
   animateCSS: animate.css@4.1.1/animate.min.css
   # aplayer@1.10.1 https://github.com/MoePlayer/APlayer
   aplayerCSS: aplayer@1.10.1/dist/APlayer.min.css
   aplayerJS: aplayer@1.10.1/dist/APlayer.min.js
-  # artalk@2.5.2 https://github.com/ArtalkJS/Artalk
-  artalkCSS: artalk@2.5.2/dist/Artalk.css
-  artalkJS: artalk@2.5.2/dist/Artalk.js
+  # artalk@2.6.4 https://github.com/ArtalkJS/Artalk
+  artalkCSS: artalk@2.6.4/dist/Artalk.css
+  artalkJS: artalk@2.6.4/dist/Artalk.js
   # autocomplete-js@0.38.1 https://github.com/algolia/autocomplete
   # TODO update autocompleteJS: '@algolia/autocomplete-js@1.7.1/dist/umd/index.production.js'
   autocompleteJS: autocomplete.js@0.38.1/dist/autocomplete.min.js
@@ -31,29 +31,30 @@ libFiles:
   cryptoSha256JS: crypto-js@4.1.1/sha256.js
   # echarts@5.3.3 https://github.com/apache/echarts
   echartsJS: echarts@5.3.3/dist/echarts.min.js
-  # eruda@2.5.0 https://github.com/liriliri/eruda
-  erudaJS: eruda@2.5.0/eruda.js
-  # fontawesome-free@6.2.0 https://github.com/FortAwesome/Font-Awesome
-  fontawesomeFreeCSS: '@fortawesome/fontawesome-free@6.2.0/css/all.min.css'
+  # eruda@3.0.1 https://github.com/liriliri/eruda
+  erudaJS: eruda@3.0.1/eruda.js
+  # fontawesome-free@6.4.2 https://github.com/FortAwesome/Font-Awesome
+  fontawesomeFreeCSS: '@fortawesome/fontawesome-free@6.4.2/css/all.min.css'
   # fusejs@6.6.2 https://github.com/krisk/fuse
   fuseJS: fuse.js@6.6.2/dist/fuse.min.js
   # gitalk@1.7.2 https://github.com/gitalk/gitalk
   gitalkCSS: gitalk@1.7.2/dist/gitalk.min.css
   gitalkJS: gitalk@1.7.2/dist/gitalk.min.js
-  # instant.page@5.1.1 https://github.com/instantpage/instant.page
-  instantPage: instant.page@5.1.1/instantpage.js
-  # katex@0.16.2 https://github.com/KaTeX/KaTeX
-  katexAutoRenderJS: katex@0.16.2/dist/contrib/auto-render.min.js
-  katexCopyTexJS: katex@0.16.2/dist/contrib/copy-tex.min.js
-  katexCSS: katex@0.16.2/dist/katex.min.css
-  katexJS: katex@0.16.2/dist/katex.min.js
-  katexMhchemJS: katex@0.16.2/dist/contrib/mhchem.min.js
-  # lightgallery@2.6.1 https://github.com/sachinchoolur/lightgallery
-  lightgalleryCSS: lightgallery@2.6.1/css/lightgallery-bundle.min.css
-  lightgalleryJS: lightgallery@2.6.1/lightgallery.min.js
-  lightgalleryThumbnailJS: lightgallery@2.6.1/plugins/thumbnail/lg-thumbnail.min.js
-  lightgalleryZoomJS: lightgallery@2.6.1/plugins/zoom/lg-zoom.min.js
+  # instant.page@5.2.0 https://github.com/instantpage/instant.page
+  instantPage: instant.page@5.2.0/instantpage.js
+  # katex@0.16.9 https://github.com/KaTeX/KaTeX
+  katexAutoRenderJS: katex@0.16.9/dist/contrib/auto-render.min.js
+  katexCopyTexJS: katex@0.16.9/dist/contrib/copy-tex.min.js
+  katexCSS: katex@0.16.9/dist/katex.min.css
+  katexJS: katex@0.16.9/dist/katex.min.js
+  katexMhchemJS: katex@0.16.9/dist/contrib/mhchem.min.js
+  # lightgallery@2.7.2 https://github.com/sachinchoolur/lightgallery
+  lightgalleryCSS: lightgallery@2.7.2/css/lightgallery-bundle.min.css
+  lightgalleryJS: lightgallery@2.7.2/lightgallery.min.js
+  lightgalleryThumbnailJS: lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js
+  lightgalleryZoomJS: lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js
   # mapbox-gl@2.10.0 https://docs.mapbox.com/mapbox-gl-js
+  # TODO update to 3.x
   mapboxGLCSS: mapbox-gl@2.10.0/dist/mapbox-gl.css
   mapboxGLJS: mapbox-gl@2.10.0/dist/mapbox-gl.js
   # mermaid@9.4.3 https://github.com/mermaid-js/mermaid
@@ -67,19 +68,19 @@ libFiles:
   panguJS: pangu@4.0.7/dist/browser/pangu.min.js
   # pace-js@1.2.4 https://github.com/CodeByZach/pace
   paceJS: pace-js@1.2.4
-  # sharer.js@0.4.2 https://github.com/ellisonleao/sharer.js
+  # sharer.js@0.5.1 https://github.com/ellisonleao/sharer.js
   sharerJS: sharer.js@0.5.1/sharer.min.js
-  # twemoji@13.1.0 https://github.com/twitter/twemoji
+  # twemoji@14.0.2 https://github.com/twitter/twemoji
   twemojiJS: twemoji@14.0.2/dist/twemoji.min.js
-  # twikoo@1.6.8 https://github.com/imaegoo/twikoo
-  twikooJS: twikoo@1.6.8/dist/twikoo.all.min.js
+  # twikoo@1.6.22 https://github.com/imaegoo/twikoo
+  twikooJS: twikoo@1.6.22/dist/twikoo.all.min.js
   # typeit@8.7.1 https://github.com/alexmacarthur/typeit
   typeitJS: typeit@8.7.1/dist/index.umd.js
   # valine@1.5.1 https://github.com/xCss/Valine
   valineJS: valine@1.5.1/dist/Valine.min.js
-  # vconsole@3.14.6 https://github.com/Tencent/vConsole
-  vconsoleJS: vconsole@3.14.6/dist/vconsole.min.js
-  # waline@2.14.7 https://github.com/walinejs/waline
-  walineCSS: '@waline/client@2.14.7/dist/waline.css'
-  walineJS: '@waline/client@2.14.7/dist/waline.js'
+  # vconsole@3.15.1 https://github.com/Tencent/vConsole
+  vconsoleJS: vconsole@3.15.1/dist/vconsole.min.js
+  # waline@2.15.8 https://github.com/walinejs/waline
+  walineCSS: '@waline/client@2.15.8/dist/waline.css'
+  walineJS: '@waline/client@2.15.8/dist/waline.js'
   

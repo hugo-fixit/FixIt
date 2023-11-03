@@ -48,13 +48,6 @@
     </td></tr>
 <tr>
     <td align="center">
-        <a href="https://github.com/maxlefou">
-            <img src="https://avatars.githubusercontent.com/u/6705075?v=4" width="100;" alt="maxlefou"/>
-            <br />
-            <sub><b>JM Fergeau</b></sub>
-        </a>
-    </td>
-    <td align="center">
         <a href="https://github.com/yureiita">
             <img src="https://avatars.githubusercontent.com/u/26035759?v=4" width="100;" alt="yureiita"/>
             <br />
@@ -88,15 +81,15 @@
             <br />
             <sub><b>Justin Chen</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/edte">
             <img src="https://avatars.githubusercontent.com/u/50194671?v=4" width="100;" alt="edte"/>
             <br />
             <sub><b>Edte</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/solarpowerinncr">
             <img src="https://avatars.githubusercontent.com/u/37186560?v=4" width="100;" alt="solarpowerinncr"/>
@@ -126,20 +119,20 @@
         </a>
     </td>
     <td align="center">
-        <a href="https://github.com/n0tr00teuorg">
-            <img src="https://avatars.githubusercontent.com/u/106423923?v=4" width="100;" alt="n0tr00teuorg"/>
+        <a href="https://github.com/0x020B">
+            <img src="https://avatars.githubusercontent.com/u/106423923?v=4" width="100;" alt="0x020B"/>
             <br />
             <sub><b>N0tr00t</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/dogukanerel">
             <img src="https://avatars.githubusercontent.com/u/19349444?v=4" width="100;" alt="dogukanerel"/>
             <br />
             <sub><b>Doğukan Erel</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/devandreacarratta">
             <img src="https://avatars.githubusercontent.com/u/46504271?v=4" width="100;" alt="devandreacarratta"/>
@@ -174,15 +167,15 @@
             <br />
             <sub><b>Mark-Daniel Lüthje</b></sub>
         </a>
-    </td></tr>
-<tr>
+    </td>
     <td align="center">
         <a href="https://github.com/mathieu-gilloots">
             <img src="https://avatars.githubusercontent.com/u/1282351?v=4" width="100;" alt="mathieu-gilloots"/>
             <br />
             <sub><b>Mathieu GILLOOTS</b></sub>
         </a>
-    </td>
+    </td></tr>
+<tr>
     <td align="center">
         <a href="https://github.com/NicoDreamzZ">
             <img src="https://avatars.githubusercontent.com/u/12086166?v=4" width="100;" alt="NicoDreamzZ"/>
@@ -202,6 +195,13 @@
             <img src="https://avatars.githubusercontent.com/u/28140438?v=4" width="100;" alt="SilkeHenderickx"/>
             <br />
             <sub><b>Silke Henderickx</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/stefanoginobili">
+            <img src="https://avatars.githubusercontent.com/u/67482642?v=4" width="100;" alt="stefanoginobili"/>
+            <br />
+            <sub><b>Stefano Ginobili</b></sub>
         </a>
     </td>
     <td align="center">

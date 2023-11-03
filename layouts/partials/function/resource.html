@@ -11,6 +11,11 @@
       {{- $resource = . -}}
     {{- end -}}
   {{- end -}}
+{{- else -}}
+  {{- $cacheRemoteImages := .CacheRemoteImages | default false -}}
+  {{- if $cacheRemoteImages -}}
+    {{- $resource = partial "function/get-remote-image.html" .Path -}}
+  {{- end -}}
 {{- end -}}
 
 {{- return $resource -}}
