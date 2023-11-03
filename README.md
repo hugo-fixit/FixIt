@@ -18,8 +18,8 @@ The FixIt theme inherits the excellent features of these themes, and adds new fe
 
 Head to the [getting started page](http://fixit.lruihao.cn/documentation/getting-started/) or start with a template:
 
-* [hugo-fixit/hugo-fixit-blog-git](https://github.com/hugo-fixit/hugo-fixit-blog-git)
-* [hugo-fixit/hugo-fixit-blog-go](https://github.com/hugo-fixit/hugo-fixit-blog-go)
+- [hugo-fixit/hugo-fixit-blog-git](https://github.com/hugo-fixit/hugo-fixit-blog-git)
+- [hugo-fixit/hugo-fixit-blog-go](https://github.com/hugo-fixit/hugo-fixit-blog-go)
 
 ## [Documentation](https://fixit.lruihao.cn/categories/documentation/)
 
@@ -58,11 +58,11 @@ Now the migration is finished and everything is ready 🎉
 
 The FixIt theme inherits the excellent features of themes such as LoveIt, and adds new features and optimizations on those basis, as detailed in [Features](#features). In addition, the FixIt theme has the following advantages:
 
-* Complete Chinese and English official documentations
-* Community support: Theme official website, Discussions and official QQ group
-* Continuously and actively update
-* Constantly incorporate suggestions and ideas from all sides
-* Highly open theme customizable section
+- Complete Chinese and English official documentations
+- Community support: Theme official website, Discussions and official QQ group
+- Continuously and actively update
+- Constantly incorporate suggestions and ideas from all sides
+- Highly open theme customizable section
 
 In short, if you prefer the design language and freedom of the FixIt theme, and if you like to personalize your own themes as I do, the FixIt theme may be more suitable for you.
 
@@ -74,88 +74,89 @@ To see this theme in action, here are some [live demo sites](https://fixit.lruih
 
 ### Performance and SEO
 
-* Optimized for **performance**: 99/100 on mobile and 100/100 on desktop in [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
-* Optimized SEO performance with a correct **SEO SCHEMA** based on JSON-LD
-* **[Google Analytics](https://analytics.google.com/analytics)** supported
-* **[Fathom Analytics](https://usefathom.com/)** supported
-* Search engine **verification** supported (Google, Bing, Yandex, Pinterest, Baidu, 360 and Sogou)
-* **CDN** for third-party libraries supported
+- Optimized for **performance**: 99/100 on mobile and 100/100 on desktop in [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
+- Optimized SEO performance with a correct **SEO SCHEMA** based on JSON-LD
+- **[Google Analytics](https://analytics.google.com/analytics)** supported
+- **[Fathom Analytics](https://usefathom.com/)** supported
+- Search engine **verification** supported (Google, Bing, Yandex, Pinterest, Baidu, 360 and Sogou)
+- **CDN** for third-party libraries supported
 
 ### Appearance and Layout
 
-* **Responsive** layout
-* **Light/Dark** mode
-* Globally consistent **design language**
-* **Pagination** supported
-* Easy-to-use and self-expanding **table of contents**
-* **Multilanguage** supported and i18n ready
-* Beautiful **CSS animation**
+- **Responsive** layout
+- **Light/Dark** mode
+- Globally consistent **design language**
+- **Pagination** supported
+- Easy-to-use and self-expanding **table of contents**
+- **Multilanguage** supported and i18n ready
+- Beautiful **CSS animation**
 
 ### Social and Comment Systems
 
-* **Gravatar** supported by [Gravatar](https://gravatar.com)
-* Local **Avatar** supported
-* Up to **87** social links supported
-* Up to **28** share sites supported
-* **Disqus** comment system supported by [Disqus](https://disqus.com)
-* **Gitalk** comment system supported by [Gitalk](https://github.com/gitalk/gitalk)
-* **Valine** comment system supported by [Valine](https://valine.js.org/)
-* **Waline** comment system supported by [Waline](https://waline.js.org/)
-* **Facebook comments** system supported by [Facebook](https://developers.facebook.com/docs/plugins/comments/)
-* **Telegram comments** system supported by [Telegram Comments](https://comments.app/)
-* **Commento** comment system supported by [Commento](https://commento.io/)
-* **Utterances** comment system supported by [Utterances](https://utteranc.es/)
-* **Artalk** comment system supported by [Artalk](https://artalk.js.org/)
-* **Twikoo** comment system supported by [Twikoo](https://twikoo.js.org/)
-* **giscus** comment system supported by [giscus](https://giscus.app/)
+- **Gravatar** supported by [Gravatar](https://gravatar.com)
+- Local **Avatar** supported
+- Up to **87** social links supported
+- Up to **28** share sites supported
+- **Disqus** comment system supported by [Disqus](https://disqus.com)
+- **Gitalk** comment system supported by [Gitalk](https://github.com/gitalk/gitalk)
+- **Valine** comment system supported by [Valine](https://valine.js.org/)
+- **Waline** comment system supported by [Waline](https://waline.js.org/)
+- **Facebook comments** system supported by [Facebook](https://developers.facebook.com/docs/plugins/comments/)
+- **Telegram comments** system supported by [Telegram Comments](https://comments.app/)
+- **Commento** comment system supported by [Commento](https://commento.io/)
+- **Utterances** comment system supported by [Utterances](https://utteranc.es/)
+- **Artalk** comment system supported by [Artalk](https://artalk.js.org/)
+- **Twikoo** comment system supported by [Twikoo](https://twikoo.js.org/)
+- **giscus** comment system supported by [giscus](https://giscus.app/)
 
 ### Extended Features
 
-* **PWA (Progressive Web App)** supported
-* **Sub Menu** supported
-* **Content Encryption** supported (Pages, Partial)
-* **Friends** page embedded template
-* **Search** supported by [Lunr.js](https://lunrjs.com/) or [algolia](https://www.algolia.com/) or [Fuse.js](https://fusejs.io/)
-* **Twemoji** supported
-* Automatically **highlighting** code
-* **Copy code** to clipboard with one click
-* **Images gallery** supported by [lightgallery](https://github.com/sachinchoolur/lightgallery)
-* Extended Markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
-* Extended Markdown syntax for **ruby annotation**
-* Extended Markdown syntax for **fraction**
-* **Mathematical formula** supported by [KaTeX](https://katex.org/)
-* **Diagrams** shortcode supported by [mermaid](https://github.com/knsv/mermaid)
-* **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
-* **Mapbox** shortcode supported by [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
-* **Music player** shortcode supported by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
-* **Bilibili player** shortcode
-* Kinds of **admonitions** shortcode
-* **Custom style** shortcode
-* **Custom script** shortcode
-* **Animated typing** supported by [TypeIt](https://typeitjs.com/)
-* **Cookie consent banner** supported by [cookieconsent](https://github.com/osano/cookieconsent)
-* **Web Watermark** supported by [cell-watermark](https://github.com/Lruihao/watermark)
-* **Chinese typesetting** supported by [pangu.js](https://github.com/vinta/pangu.js)
-* ...
+- **PWA (Progressive Web App)** supported
+- **Sub Menu** supported
+- **Content Encryption** supported (Pages, Partial)
+- **Friends** page embedded template
+- **Search** supported by [Lunr.js](https://lunrjs.com/) or [algolia](https://www.algolia.com/) or [Fuse.js](https://fusejs.io/)
+- **Twemoji** supported
+- Automatically **highlighting** code
+- **Copy code** to clipboard with one click
+- **Images gallery** supported by [lightgallery](https://github.com/sachinchoolur/lightgallery)
+- Extended Markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
+- Extended Markdown syntax for **ruby annotation**
+- Extended Markdown syntax for **fraction**
+- **Mathematical formula** supported by [KaTeX](https://katex.org/)
+- **Diagrams** shortcode supported by [mermaid](https://github.com/knsv/mermaid)
+- **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
+- **Mapbox** shortcode supported by [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
+- **Music player** shortcode supported by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
+- **Bilibili player** shortcode
+- Kinds of **admonitions** shortcode
+- **Custom style** shortcode
+- **Custom script** shortcode
+- **Animated typing** supported by [TypeIt](https://typeitjs.com/)
+- **Cookie consent banner** supported by [cookieconsent](https://github.com/osano/cookieconsent)
+- **Web Watermark** supported by [cell-watermark](https://github.com/Lruihao/watermark)
+- **Chinese typesetting** supported by [pangu.js](https://github.com/vinta/pangu.js)
+- Options to **cache remote image** locally
+- ...
 
 ## Multilingual and i18n
 
 FixIt supports the following languages:
 
-* English
-* Simplified Chinese
-* Traditional Chinese
-* French
-* Polish
-* Brazilian Portuguese
-* Italian
-* Spanish
-* German
-* Serbian
-* Russian
-* Romanian
-* Vietnamese
-* [Contribute with a new language](https://github.com/hugo-fixit/FixIt/pulls)
+- English
+- Simplified Chinese
+- Traditional Chinese
+- French
+- Polish
+- Brazilian Portuguese
+- Italian
+- Spanish
+- German
+- Serbian
+- Russian
+- Romanian
+- Vietnamese
+- [Contribute with a new language](https://github.com/hugo-fixit/FixIt/pulls)
 
 [Languages Compatibility](https://fixit.lruihao.cn/documentation/basics/#language-compatibility)
 
@@ -182,49 +183,49 @@ Make sure that you follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) while contrib
 <details open>
 <summary>Thanks to the authors of following resources included in the theme:</summary>
 
-* [normalize.css](https://github.com/necolas/normalize.css)
-* [Font Awesome](https://fontawesome.com/)
-* [Simple Icons](https://github.com/simple-icons/simple-icons)
-* [Animate.css](https://daneden.github.io/animate.css/)
-* [autocomplete-js](https://github.com/algolia/autocomplete)
-* [Lunr.js](https://lunrjs.com/)
-* [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
-* [Fuse.js](https://fusejs.io/)
-* [object-fit-images](https://github.com/fregante/object-fit-images)
-* [Twemoji](https://github.com/twitter/twemoji)
-* [emoji-data](https://github.com/iamcal/emoji-data)
-* [lightgallery](https://github.com/sachinchoolur/lightgallery)
-* [Sharer.js](https://github.com/ellisonleao/sharer.js)
-* [TypeIt](https://typeitjs.com/)
-* [KaTeX](https://katex.org/)
-* [mermaid](https://github.com/mermaid-js/mermaid)
-* [ECharts](https://echarts.apache.org/)
-* [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
-* [APlayer](https://github.com/MoePlayer/APlayer)
-* [MetingJS](https://github.com/metowolf/MetingJS)
-* [Gitalk](https://github.com/gitalk/gitalk)
-* [Valine](https://valine.js.org/)
-* [cookieconsent](https://github.com/osano/cookieconsent)
-* [cell-watermark](https://github.com/Lruihao/watermark)
-* [不蒜子](http://busuanzi.ibruce.info/)
-* [pangu.js](https://github.com/vinta/pangu.js)
-* [Artalk](https://artalk.js.org/)
-* [Waline](https://waline.js.org/)
-* [Twikoo](https://twikoo.js.org/)
-* [github-corners](https://github.com/tholman/github-corners)
-* [giscus](https://giscus.app/)
-* [crypto-js](https://github.com/brix/crypto-js)
-* [vConsole](https://github.com/Tencent/vConsole)
-* [eruda](https://github.com/liriliri/eruda)
-* [pace](https://github.com/CodeByZach/pace)
+- [normalize.css](https://github.com/necolas/normalize.css)
+- [Font Awesome](https://fontawesome.com/)
+- [Simple Icons](https://github.com/simple-icons/simple-icons)
+- [Animate.css](https://daneden.github.io/animate.css/)
+- [autocomplete-js](https://github.com/algolia/autocomplete)
+- [Lunr.js](https://lunrjs.com/)
+- [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
+- [Fuse.js](https://fusejs.io/)
+- [object-fit-images](https://github.com/fregante/object-fit-images)
+- [Twemoji](https://github.com/twitter/twemoji)
+- [emoji-data](https://github.com/iamcal/emoji-data)
+- [lightgallery](https://github.com/sachinchoolur/lightgallery)
+- [Sharer.js](https://github.com/ellisonleao/sharer.js)
+- [TypeIt](https://typeitjs.com/)
+- [KaTeX](https://katex.org/)
+- [mermaid](https://github.com/mermaid-js/mermaid)
+- [ECharts](https://echarts.apache.org/)
+- [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
+- [APlayer](https://github.com/MoePlayer/APlayer)
+- [MetingJS](https://github.com/metowolf/MetingJS)
+- [Gitalk](https://github.com/gitalk/gitalk)
+- [Valine](https://valine.js.org/)
+- [cookieconsent](https://github.com/osano/cookieconsent)
+- [cell-watermark](https://github.com/Lruihao/watermark)
+- [不蒜子](http://busuanzi.ibruce.info/)
+- [pangu.js](https://github.com/vinta/pangu.js)
+- [Artalk](https://artalk.js.org/)
+- [Waline](https://waline.js.org/)
+- [Twikoo](https://twikoo.js.org/)
+- [github-corners](https://github.com/tholman/github-corners)
+- [giscus](https://giscus.app/)
+- [crypto-js](https://github.com/brix/crypto-js)
+- [vConsole](https://github.com/Tencent/vConsole)
+- [eruda](https://github.com/liriliri/eruda)
+- [pace](https://github.com/CodeByZach/pace)
 
 </details>
 
 <details open>
 <summary>The FixIt also draws on some features of the following projects, and thanks to their authors as well:</summary>
 
-* [DoIt](https://github.com/HEIGE-PCloud/DoIt)
-* [NexT](https://github.com/next-theme/hexo-theme-next)
+- [DoIt](https://github.com/HEIGE-PCloud/DoIt)
+- [NexT](https://github.com/next-theme/hexo-theme-next)
 
 </details>
 
@@ -241,8 +242,8 @@ FixIt is licensed under the **MIT** license. Check the [LICENSE file](LICENSE) f
 Giving me a Star 🌟 is already the greatest encouragement and support for me.\
 If you enjoy the theme, please consider buying me a coffee ☕️.
 
-* [PayPal](https://paypal.me/Lruihao)
-* [Alipay](images/alipay.jpg)
-* [Wechat](images/wechatpay.jpg)
+- [PayPal](https://paypal.me/Lruihao)
+- [Alipay](images/alipay.jpg)
+- [Wechat](images/wechatpay.jpg)
 
 Thanks! ❤️
