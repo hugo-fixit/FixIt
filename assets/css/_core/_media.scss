@@ -66,7 +66,7 @@
     }
     // adjust the scroll margin top of the content anchors on the page
     body:not([data-header-desktop='auto']) &+.container .content [id] {
-      scroll-margin-top: calc(var(--#{$prefix}scroll-mt) + var(--#{$prefix}breadcrumb-offset));
+      scroll-margin-top: calc(var(--#{$prefix}scroll-mt) + var(--#{$prefix}breadcrumb-height));
     }
   }
 
@@ -95,7 +95,7 @@
     }
     // adjust the scroll margin top of the content anchors on the page
     body:not([data-header-mobile='auto']) &+.container .content [id] {
-      scroll-margin-top: calc(var(--#{$prefix}scroll-mt) + var(--#{$prefix}breadcrumb-offset));
+      scroll-margin-top: calc(var(--#{$prefix}scroll-mt) + var(--#{$prefix}breadcrumb-height));
     }
   }
 
