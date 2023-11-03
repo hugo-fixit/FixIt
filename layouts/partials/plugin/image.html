@@ -1,7 +1,5 @@
 {{- /* this method is only available for image resources that are raster images */ -}}
 {{- $src := .Src -}}
-{{- $srcSmall := .SrcSmall | default $src -}}
-{{- $srcLarge := .SrcLarge | default $src -}}
 {{- $class := .Class | default "" -}}
 {{- $style := "" -}}
 {{- $loading := .Loading | default "lazy" -}}
@@ -9,18 +7,18 @@
 {{- $onerror := "" -}}
 {{- $cacheRemoteImages := (.Params.cacheRemoteImages | default dict) | merge site.Params.cacheRemoteImages -}}
 {{- $suffixList := slice ".jpeg" ".jpg" ".png" ".gif" ".bmp" ".tif" ".tiff" ".webp" -}}
-{{- $suffixValid := dict "Path" $src "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
-{{- $suffixValidSmall := dict "Path" $srcSmall "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
-{{- $suffixValidLarge := dict "Path" $srcLarge "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
+{{- $suffixValid := dict "Path" .Src "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
+{{- $suffixValidSmall := dict "Path" .SrcSmall "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
+{{- $suffixValidLarge := dict "Path" .SrcLarge "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
 
 {{- /* handle for invalid suffix */ -}}
-{{- if not $suffixValid | and $src -}}
+{{- if not $suffixValid | and .Src -}}
   {{- $class = printf "%v suffix-invalid" $class -}}
 {{- end -}}
-{{- if not $suffixValidSmall | and $srcSmall -}}
+{{- if not $suffixValidSmall | and .SrcSmall -}}
   {{- $class = printf "%v suffix-invalid__small" $class -}}
 {{- end -}}
-{{- if not $suffixValidLarge | and $srcLarge -}}
+{{- if not $suffixValidLarge | and .SrcLarge -}}
   {{- $class = printf "%v suffix-invalid__large" $class -}}
 {{- end -}}
 
@@ -36,6 +34,7 @@
 {{- end -}}
 
 {{- /* handle for small size image */ -}}
+{{- $srcSmall := .SrcSmall | default $src -}}
 {{- with dict "Path" .SrcSmall "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
   {{- $url := urls.Parse $.SrcSmall -}}
   {{- if not $url.Host | or $cacheRemoteImages.replace -}}
@@ -47,6 +46,7 @@
 {{- end -}}
 
 {{- /* handle for large size image */ -}}
+{{- $srcLarge := .SrcLarge | default $src -}}
 {{- with dict "Path" .SrcLarge "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
   {{- $url := urls.Parse $.SrcLarge -}}
   {{- if not $url.Host | or $cacheRemoteImages.replace -}}
