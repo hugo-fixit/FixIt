@@ -1,6 +1,6 @@
 {
   "name": "fixit-src",
-  "version": "0.2.18-lts.3",
+  "version": "0.2.18-lts.4",
   "description": "FixIt theme source files",
   "private": true,
   "devDependencies": {
