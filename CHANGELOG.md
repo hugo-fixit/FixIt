@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/hugo-fixit/FixIt/releases -->
 
-## v0.2.18-lts.3 [2023.10.3]
+## v0.2.18-lts.4 [2023.11.6]
+
+> Snapshot: <https://fixit-git-v0218-lts-cell-x.vercel.app>
+
+- :sparkles: Perf: optimize lightgallery images rendering
+- :bug: Fix: add a option "Responsive" for plugin image fixed [#369](https://github.com/hugo-fixit/FixIt/issues/369)
+- :bug: Fix: fix featured image path error and show img tags in rss ([#373](https://github.com/hugo-fixit/FixIt/issues/373))
+- :bug: Fix: disable encrypted articles from rendering to rss ([#374](https://github.com/hugo-fixit/FixIt/issues/374))
+- :sparkles: Feat: add more options support for bilibili shortcode, e.g. `autoplay`, `muted` etc. ([#375](https://github.com/hugo-fixit/FixIt/issues/375))
+- **Full Changelog:** @Lruihao [`v0.2.18-lts.3...v0.2.18-lts.4`](https://github.com/hugo-fixit/FixIt/compare/v0.2.18-lts.3...v0.2.18-lts.4)
+
+## v0.2.18-lts.3 [2023.11.3]
 
 > Snapshot: <https://fixit-git-v0218-lts-cell-x.vercel.app>
 
@@ -13,7 +24,7 @@ All notable changes to this project will be documented in this file.
 - :arrow_up: Chore(deps-dev):
   - Bump core-js from 3.33.1 to 3.33.2
   - Bump browserify-sign from 4.2.1 to 4.2.2
-- **Full Changelog:** @Lruihao [`v0.2.18-lts.2...v0.2.18-lts.3`](https://github.com/hugo-fixit/FixIt/compare/v0.2.18.lts.2...v0.2.18-lts.3)
+- **Full Changelog:** @Lruihao [`v0.2.18-lts.2...v0.2.18-lts.3`](https://github.com/hugo-fixit/FixIt/compare/v0.2.18-lts.2...v0.2.18-lts.3)
 
 ## v0.2.18-lts.2 [2023.10.24]
 
@@ -53,11 +64,11 @@ _BTW, Happy Programmer's Day (1024)! :)_
 > This will be the last relatively stable 0.x release, after which the first major release will be incompatible with all previous 0.x releases
 > Snapshot: <https://fixit-bpkhreqhl-x-cell.vercel.app>
 
-## :boom: Breaking Updates
+### :boom: Breaking Updates
 
 - Refactor author data config [#288](https://github.com/hugo-fixit/FixIt/pull/288)
 
-## :new: What's New
+### :new: What's New
 
 - :tada: Feat: add natively support mermaid with code fences ([#230](https://github.com/hugo-fixit/FixIt/issues/230))
 - :tada: Feat: add breadcrumb navigation ([#309](https://github.com/hugo-fixit/FixIt/pull/309))
