@@ -33,7 +33,7 @@
     {{- "<![CDATA[" | safeHTML -}}
     {{- with $image -}}
       <div class="featured-image">
-        <img src="{{ . }}" referrerpolicy="no-referrer">
+        {{- dict "Src" . "Title" $.Page.Description "Alt" $.Page.Title "Resources" $.Page.Resources "Loading" "eager" "Referrerpolicy" "no-referrer" | partial "plugin/image.html" -}}
       </div>
     {{- end -}}
     {{- $content := .Page.Description -}}
