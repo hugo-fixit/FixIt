@@ -3,7 +3,7 @@
 {{- $p := cond .IsNamedParams (.Get "p") (.Get 1) | default 1 -}}
 {{- $autoplay := .Get "autoplay" | default false -}}
 {{- $poster := .Get "poster" | default true -}}
-{{- $muted := .Get "muted" | default true -}}
+{{- $muted := .Get "muted" | default false -}}
 {{- $danmaku := .Get "danmaku" | default true -}}
 {{- $t := .Get "t" | default 0 -}}
 
