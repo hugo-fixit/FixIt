@@ -93,6 +93,8 @@
   {{- with .Width }} width="{{ . }}"{{- end -}}
   {{- with .Height }} height="{{ . }}"{{- end -}}
   {{- with $class }} class="{{ trim . " " }}"{{- end -}}
+  {{- with .Decoding }} decoding="{{ . }}"{{- end -}}
+  {{- with .Referrerpolicy }} referrerpolicy="{{ . }}"{{- end -}}
   {{- with $style -}}{{ . }}{{- end -}}
   {{- with $onload -}}{{ . }}{{- end -}}
   {{- with $onerror -}}{{ . }}{{- end -}}
