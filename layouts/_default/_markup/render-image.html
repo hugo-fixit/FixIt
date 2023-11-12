@@ -6,6 +6,6 @@
     </figcaption>
   </figure>
 {{- else -}}
-  {{- $linked := (eq .Page.Site.Params.page.lightgallery "force") | or (eq .Page.Params.lightgallery "force") | or (ne .Title "") -}}
+  {{- $linked := (eq (.Page.Scratch.Get "params").lightgallery "force") | or (ne .Title "") -}}
   {{- dict "Src" .Destination "Alt" .Text "Title" .Title "Linked" $linked "Resources" .Page.Resources "Params" .Page.Params "Responsive" true | partial "plugin/image.html" -}}
 {{- end -}}
