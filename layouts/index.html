@@ -4,6 +4,27 @@
   {{- $posts := .Site.Params.home.posts -}}
 
   <div class="page home{{ if ne $posts.enable false }} posts{{ end }}">
+    <div id="weather"></div>
+    <script type="text/javascript">
+      function displayWeather(weatherData, city) {
+          console.log(weatherData)
+          var temperature = weatherData.current.temperature_2m.toFixed(2)
+          var weatherElement = document.getElementById("weather");
+          weatherElement.innerHTML = `${city}: ${temperature} °C`;
+      }
+      function handleLocation(locationData) {
+          console.log(locationData)
+          var lat = locationData.lat;
+          var lon = locationData.lon;
+          var url = `api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m`
+
+          fetch('https://' + url)
+          .then(response => response.json())
+          .then(weatherData => displayWeather(weatherData, locationData.city))
+      }
+    </script>
+    <script  src="http://ip-api.com/json?fields=213&lang=zh-CN&callback=handleLocation"></script>
+
     {{- /* Profile */ -}}
     {{- if ne $profile.enable false -}}
       {{- partial "home/profile.html" . -}}
