@@ -10,8 +10,11 @@
           var weatherElement = document.getElementById("weather");
           weatherElement.innerHTML = `ip: ${ipData.query} ${ipData.city}`;
       }
+      const url = 'http://ip-api.com/json?fields=8208&lang=zh-CN&callback=handleIpApi';
+      const script = document.createElement('script');
+      script.src = url;
+      document.body.appendChild(script);
     </script>
-    <script  src="http://ip-api.com/json?fields=8208&lang=zh-CN&callback=handleIpApi"></script>
 
     {{- /* Profile */ -}}
     {{- if ne $profile.enable false -}}
