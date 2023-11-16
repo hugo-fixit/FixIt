@@ -16,7 +16,7 @@
           .then(response => response.json())
           .then(weatherData => {
             var weatherElement = document.getElementById("weather");
-            weatherElement.innerHTML = `实时气温：${weatherData.current.temperature_2m}&deg;C`;
+            weatherElement.innerHTML = `实时气温：${weatherData.current.temperature_2m}&deg;C ${localData.city}`;
           })
       }
     </script>
