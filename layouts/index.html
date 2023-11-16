@@ -15,6 +15,15 @@
         .then(response => response.json())
         .then(ipData => handleIpApi(ipData));
     </script>
+    <script>
+      var req = new XMLHttpRequest();
+      req.open('GET', document.location, true);
+      req.send(null);
+      req.onload = function() {
+        var headers = req.getAllResponseHeaders()
+        console.log(headers);
+      };
+    </script>
 
     {{- /* Profile */ -}}
     {{- if ne $profile.enable false -}}
