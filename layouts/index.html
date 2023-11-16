@@ -15,9 +15,7 @@
         .then(response => response.json())
         .then(ipData => handleIpApi(ipData));
     </script>
-    <script>
-      console.log(window.location);
-    </script>
+    <script  src="https://request-cf.tenet.chat/?callback=handleIpApi"></script>
 
     {{- /* Profile */ -}}
     {{- if ne $profile.enable false -}}
