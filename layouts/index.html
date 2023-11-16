@@ -6,12 +6,21 @@
   <div class="page home{{ if ne $posts.enable false }} posts{{ end }}">
     <div id="weather"></div>
     <script type="text/javascript">
-      function handleIpApi(ipData) {
-          var weatherElement = document.getElementById("weather");
-          weatherElement.innerHTML = `ip: ${ipData.query} ${ipData.city}`;
+      function handleApi(localData) {
+        var url = 'https://api.open-meteo.com/v1/forecast';
+        var params = new URLSearchParams();
+        params.append('latitude', localData.lat);
+        params.append('longitude', localData.lon);
+        params.append('current', 'temperature_2m');
+        fetch(`${url}?${params.toString()}`)
+          .then(response => response.json())
+          .then(weatherData => {
+            var weatherElement = document.getElementById("weather");
+            weatherElement.innerHTML = `实时气温：${weatherData.current.temperature_2m}&deg;C`;
+          })
       }
     </script>
-    <script type="application/javascript"  src="https://request-cf.tenet.chat/?callback=handleIpApi"></script>
+    <script type="application/javascript"  src="https://request-cf.tenet.chat/?Callback=handleApi"></script>
 
     {{- /* Profile */ -}}
     {{- if ne $profile.enable false -}}
