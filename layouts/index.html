@@ -10,12 +10,8 @@
           var weatherElement = document.getElementById("weather");
           weatherElement.innerHTML = `ip: ${ipData.query} ${ipData.city}`;
       }
-      const url = 'http://ip-api.com/json?fields=8208&lang=zh-CN';
-      fetch(url)
-        .then(response => response.json())
-        .then(ipData => handleIpApi(ipData));
     </script>
-    <script  src="https://request-cf.tenet.chat/?callback=handleIpApi"></script>
+    <script type="application/javascript"  src="https://request-cf.tenet.chat/?callback=handleIpApi"></script>
 
     {{- /* Profile */ -}}
     {{- if ne $profile.enable false -}}
