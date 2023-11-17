@@ -50,13 +50,17 @@
           const streetData = await streetResponse.json();
           // 提取所需的数据
           temperature_2m = weatherData.current.temperature_2m;
-          city = streetData.address.city;
-          state = streetData.address.state;
-          country_code = streetData.address.country_code;
+          city = streetData.address.city || "";
+          state = streetData.address.state || "";
+          country_code = streetData.address.country_code || undefined;
         } catch (error) {
           console.error("Error fetching data:", error);
         }
-        const country_flag = countryCodeEmoji(country_code);
+        if (country_code == undefined){
+          var country_flag = '🏳️';
+        }else{
+          var country_flag = countryCodeEmoji(country_code);
+        }
         var visible = `实时气温：${temperature_2m}&deg;C ${city}/${state} ${country_flag}`;
         const weatherElement = document.getElementById("weather");
         weatherElement.innerHTML = visible;
