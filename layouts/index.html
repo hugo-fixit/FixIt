@@ -6,18 +6,60 @@
   <div class="page home{{ if ne $posts.enable false }} posts{{ end }}">
     <div id="weather"></div>
     <script type="text/javascript">
-      function handleApi(localData) {
-        var url = 'https://api.open-meteo.com/v1/forecast';
-        var params = new URLSearchParams();
+      function getOpenMeteoURL(localData){
+        const url = 'https://api.open-meteo.com/v1/forecast';
+        const params = new URLSearchParams();
         params.append('latitude', localData.lat);
         params.append('longitude', localData.lon);
         params.append('current', 'temperature_2m');
-        fetch(`${url}?${params.toString()}`)
-          .then(response => response.json())
-          .then(weatherData => {
-            var weatherElement = document.getElementById("weather");
-            weatherElement.innerHTML = `实时气温：${weatherData.current.temperature_2m}&deg;C ${localData.city}`;
-          })
+        return `${url}?${params.toString()}`
+      }
+      function getOpenStreetMapURL(localData){
+        const url = 'https://nominatim.openstreetmap.org/reverse';
+        const params = new URLSearchParams();
+        params.append('format', 'json');
+        params.append('lat', localData.lat);
+        params.append('lon', localData.lon);
+        return `${url}?${params.toString()}`
+      }
+      function countryCodeEmoji(cc) {
+        const CC_REGEX = /^[a-z]{2}$/i;
+        const FLAG_LENGTH = 4;
+        const OFFSET = 127397;
+        if (!CC_REGEX.test(cc)) {
+          const type = typeof cc;
+          throw new TypeError(
+            `cc argument must be an ISO 3166-1 alpha-2 string, but got '${
+              type === 'string' ? cc : type
+            }' instead.`,
+          );
+        }
+        const codePoints = [...cc.toUpperCase()].map(c => c.codePointAt() + OFFSET);
+        return String.fromCodePoint(...codePoints);
+      }
+      async function handleApi(localData) {
+        var temperature_2m, city, state, country_code;
+        try {
+          // 使用 Promise.all 同时进行两个异步操作
+          const [weatherResponse, streetResponse] = await Promise.all([
+            fetch(getOpenMeteoURL(localData)),
+            fetch(getOpenStreetMapURL(localData))
+          ]);
+          // 等待解决 Promise 对象并提取数据
+          const weatherData = await weatherResponse.json();
+          const streetData = await streetResponse.json();
+          // 提取所需的数据
+          temperature_2m = weatherData.current.temperature_2m;
+          city = streetData.address.city;
+          state = streetData.address.state;
+          country_code = streetData.address.country_code;
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+        const country_flag = countryCodeEmoji(country_code);
+        var visible = `实时气温：${temperature_2m}&deg;C ${city}/${state} ${country_flag}`;
+        const weatherElement = document.getElementById("weather");
+        weatherElement.innerHTML = visible;
       }
     </script>
     <script type="application/javascript"  src="https://request-cf.tenet.chat/?Callback=handleApi"></script>
