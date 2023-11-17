@@ -930,6 +930,7 @@ enableEmoji = true
         reactionsEnabled = "1"
         emitMetadata = "0"
         inputPosition = "bottom" # ["top", "bottom"]
+        lang = ""
         lightTheme = "light"
         darkTheme = "dark"
         lazyLoad = true

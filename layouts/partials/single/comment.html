@@ -315,7 +315,7 @@
             data-reactions-enabled="{{ .ReactionsEnabled }}"
             data-emit-metadata="{{ .EmitMetadata }}"
             data-input-position="{{ .InputPosition }}"
-            data-lang="{{ $.Site.LanguageCode }}"
+            data-lang="{{ .lang | default $.Site.LanguageCode }}"
             {{ if ne .LazyLoad false }}data-loading="lazy"{{ end }}
             crossorigin="anonymous"
             async
