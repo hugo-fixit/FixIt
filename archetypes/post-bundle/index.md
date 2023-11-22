@@ -19,6 +19,7 @@ categories:
   - draft
 hiddenFromHomePage: false
 hiddenFromSearch: false
+hiddenFromRss: false
 summary:
 resources:
   - name: featured-image

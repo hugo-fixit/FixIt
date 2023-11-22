@@ -359,6 +359,8 @@
     hiddenFromHomePage = false
     # FixIt 0.2.0 | NEW whether to hide a page from search results
     hiddenFromSearch = false
+    # FixIt 0.2.18-lts.5 | NEW whether to hide a page from RSS feed
+    hiddenFromRss = false
     # FixIt 0.2.0 | NEW whether to enable twemoji
     twemoji = false
     # whether to enable lightgallery
