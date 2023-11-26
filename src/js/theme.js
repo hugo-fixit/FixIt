@@ -675,7 +675,7 @@ class FixIt {
             break;
           }
         }
-        if (activeTocIndex !== -1) {
+        if (activeTocIndex !== -1 && $tocLinkElements[activeTocIndex]) {
           $tocLinkElements[activeTocIndex].classList.add('active');
           let $parent = $tocLinkElements[activeTocIndex].parentElement;
           while ($parent !== $tocCore) {
