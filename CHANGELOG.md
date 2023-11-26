@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 <!-- Releases see https://github.com/hugo-fixit/FixIt/releases -->
 
+## v0.2.18-lts.5 [2023.11.26]
+
+> Snapshot: <https://fixit-git-v0218-lts-cell-x.vercel.app>
+
+- :sparkles: Feat: add hiddenFromRss param and front matter
+- :zap: Perf: preload some stylesheet
+- :zap: Perf: optimize featured image rendering
+- :children_crossing: Feat: change bilibili shortcode `muted` default value
+- :bug: Style: fix the emoji style of valine comment ([#376](https://github.com/hugo-fixit/FixIt/issues/376))
+- :bug: Fix: active index of toc may result in error ([#305](https://github.com/hugo-fixit/FixIt/issues/305))
+- :memo: Docs: update the outputs configuration to avoid the "taxonomyterm" warning in versions above Hugo 0.112.0 (resolve [#354](https://github.com/hugo-fixit/FixIt/issues/354))
+- :wrench: Chore: update default config in `hugo.toml`
+- :wrench: Chore: change the theme minimum supported Hugo versions above **0.110.0**
+- **Full Changelog:** @Lruihao [`v0.2.18-lts.4...v0.2.18-lts.5`](https://github.com/hugo-fixit/FixIt/compare/v0.2.18-lts.4...v0.2.18-lts.5)
+
 ## v0.2.18-lts.4 [2023.11.6]
 
 > Snapshot: <https://fixit-git-v0218-lts-cell-x.vercel.app>

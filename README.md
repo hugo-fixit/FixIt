@@ -45,7 +45,7 @@ And later you can update the submodule in your site directory to the latest comm
 git submodule update --remote --merge
 ```
 
-Next, go to the `config.toml` and change the default theme to `FixIt`.
+Next, go to the `hugo.toml` and change the default theme to `FixIt`.
 
 ```diff
 - theme = "LoveIt"

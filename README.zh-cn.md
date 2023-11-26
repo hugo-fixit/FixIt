@@ -45,7 +45,7 @@ git submodule add https://github.com/hugo-fixit/FixIt.git themes/FixIt
 git submodule update --remote --merge
 ```
 
-接着，前往 `config.toml` 并将默认主题更改为 `FixIt`。
+接着，前往 `hugo.toml` 并将默认主题更改为 `FixIt`。
 
 ```diff
 - theme = "LoveIt"
