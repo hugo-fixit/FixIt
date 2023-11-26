@@ -4,6 +4,36 @@
 # =====================================================================================
 
 # -------------------------------------------------------------------------------------
+# Hugo Configuration
+# See: https://gohugo.io/getting-started/configuration/
+# -------------------------------------------------------------------------------------
+
+# website title
+title = "FixIt"
+# Hostname (and path) to the root
+baseURL = "http://localhost:1313"
+# theme list
+theme = ["FixIt"]
+# determines default content language ["en", "zh-cn", "fr", "pl", ...]
+defaultContentLanguage = "en"
+# language code ["en", "zh-CN", "fr", "pl", ...]
+languageCode = "en"
+# language name ["English", "简体中文", "Français", "Polski", ...]
+languageName = "English"
+# whether to include Chinese/Japanese/Korean
+hasCJKLanguage = false
+# default amount of posts in each pages
+paginate = 12
+# copyright description used only for seo schema
+copyright = ""
+# whether to use robots.txt
+enableRobotsTXT = true
+# whether to use git commit log
+enableGitInfo = true
+# whether to use emoji code
+enableEmoji = true
+
+# -------------------------------------------------------------------------------------
 # Menu Configuration
 # See: https://fixit.lruihao.cn/documentation/basics/#menu-configuration
 # -------------------------------------------------------------------------------------
@@ -842,7 +872,8 @@
 # Modules Configuration
 # See: https://gohugo.io/hugo-modules/configuration/#module-config-imports
 # -------------------------------------------------------------------------------------
+
 [module]
   [module.hugoVersion]
     extended = true
-    min = "0.109.0"
+    min = "0.110.0"
