@@ -1,8 +1,13 @@
+{{- /* reference https://player.bilibili.com/ */ -}}
+{{- $bvid := cond .IsNamedParams (.Get "id") (.Get 0) -}}
+{{- $p := cond .IsNamedParams (.Get "p") (.Get 1) | default 1 -}}
+{{- $autoplay := .Get "autoplay" | default false -}}
+{{- $poster := .Get "poster" | default true -}}
+{{- $muted := .Get "muted" | default false -}}
+{{- $danmaku := .Get "danmaku" | default true -}}
+{{- $t := .Get "t" | default 0 -}}
+
 <div class="bilibili">
-  {{- if .IsNamedParams -}}
-    <iframe src="//player.bilibili.com/player.html?bvid={{ .Get `id` }}&page={{ .Get `p` | default 1 }}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-  {{- else -}}
-    <iframe src="//player.bilibili.com/player.html?bvid={{ .Get 0 }}&page={{ .Get 1 | default 1 }}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-  {{- end -}}
+  <iframe src="//player.bilibili.com/player.html?bvid={{ $bvid }}&page={{ $p }}&autoplay={{ $autoplay }}&poster={{ $poster }}&muted={{ $muted }}&danmaku={{ $danmaku }}&t={{ $t }}" border="0" framespacing="0" allowfullscreen="true"></iframe>
 </div>
 {{- /* EOF */ -}}

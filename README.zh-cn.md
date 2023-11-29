@@ -1,7 +1,7 @@
 # FixIt 主题 | Hugo
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hugo-fixit/FixIt?style=flat)](https://github.com/hugo-fixit/FixIt/releases)
-[![Hugo](https://img.shields.io/badge/Hugo-%5E0.109.0-ff4088?style=flat&logo=hugo)](https://gohugo.io/)
+[![Hugo](https://img.shields.io/badge/Hugo-%5E0.110.0-ff4088?style=flat&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/hugo-fixit/FixIt?style=flat)](/LICENSE)
 
 👉 [English README](README.md) | 简体中文说明
@@ -45,7 +45,7 @@ git submodule add https://github.com/hugo-fixit/FixIt.git themes/FixIt
 git submodule update --remote --merge
 ```
 
-接着，前往 `config.toml` 并将默认主题更改为 `FixIt`。
+接着，前往 `hugo.toml` 并将默认主题更改为 `FixIt`。
 
 ```diff
 - theme = "LoveIt"

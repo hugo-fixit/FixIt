@@ -81,7 +81,7 @@
 {{- $math := .Scratch.Get "math" -}}
 {{- if $math.enable -}}
   {{- $source := $cdn.katexCSS | default "lib/katex/katex.min.css" -}}
-  {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+  {{- dict "Source" $source "Fingerprint" $fingerprint "Preload" true | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
   {{- $source := $cdn.katexJS | default "lib/katex/katex.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- $source := $cdn.katexAutoRenderJS | default "lib/katex/auto-render.min.js" -}}
@@ -133,7 +133,7 @@
 {{- /* Mapbox GL */ -}}
 {{- if (.Scratch.Get "this").mapbox -}}
   {{- $source := $cdn.mapboxGLCSS | default "lib/mapbox-gl/mapbox-gl.css" -}}
-  {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+  {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint "Preload" true | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
   {{- $source = $cdn.mapboxGLJS | default "lib/mapbox-gl/mapbox-gl.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- dict "Source" "lib/mapbox-gl/mapbox-gl-language.js" "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
@@ -144,7 +144,7 @@
 {{- if (.Scratch.Get "this").music -}}
   {{- /* APlayer */ -}}
   {{- $source := $cdn.aplayerCSS | default "lib/aplayer/APlayer.min.css" -}}
-  {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+  {{- dict "Source" $source "Fingerprint" $fingerprint "Preload" true | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
   {{- $options := dict "targetPath" "lib/aplayer/dark.min.css" "enableSourceMap" true -}}
   {{- dict "Source" "lib/aplayer/dark.scss" "ToCSS" $options "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
   {{- $source := $cdn.aplayerJS | default "lib/aplayer/APlayer.min.js" -}}

@@ -7,6 +7,13 @@
     {{- $authorName = . -}}
   {{- end -}}
 {{- end -}}
+{{- $image := $params.featuredimagepreview | default $params.featuredimage -}}
+{{- with .Page.Resources.GetMatch "featured-image" -}}
+  {{- $image = .Permalink -}}
+{{- end -}}
+{{- with .Page.Resources.GetMatch "featured-image-preview" -}}
+  {{- $image = .Permalink -}}
+{{- end -}}
 
 <item>
   <title>
@@ -24,9 +31,9 @@
   </guid>
   <description>
     {{- "<![CDATA[" | safeHTML -}}
-    {{- with $params.featuredimage -}}
+    {{- with $image -}}
       <div class="featured-image">
-        <img src="{{ . | relURL }}" referrerpolicy="no-referrer">
+        {{- dict "Src" . "Title" $.Page.Description "Alt" $.Page.Title "Resources" $.Page.Resources "Loading" "eager" "Referrerpolicy" "no-referrer" | partial "plugin/image.html" -}}
       </div>
     {{- end -}}
     {{- $content := .Page.Description -}}
@@ -37,7 +44,8 @@
         {{- $content = dict "Content" . "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" -}}
       {{- end -}}
     {{- end -}}
-    {{- $content | replaceRE `<figure[^>]*>.*</figure>` "" | replaceRE `<img[^>]*( /)?>` "" | safeHTML -}}
+    {{/*  {{- $content | replaceRE `<figure[^>]*>.*</figure>` "" | replaceRE `<img[^>]*( /)?>` "" | safeHTML -}}  */}}
+    {{- $content | safeHTML -}}
     {{- "]]>" | safeHTML -}}
   </description>
 </item>

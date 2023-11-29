@@ -1,7 +1,7 @@
 # FixIt Theme | Hugo
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hugo-fixit/FixIt?style=flat)](https://github.com/hugo-fixit/FixIt/releases)
-[![Hugo](https://img.shields.io/badge/Hugo-%5E0.109.0-ff4088?style=flat&logo=hugo)](https://gohugo.io/)
+[![Hugo](https://img.shields.io/badge/Hugo-%5E0.110.0-ff4088?style=flat&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/hugo-fixit/FixIt?style=flat)](/LICENSE)
 
 👉 English README | [简体中文说明](README.zh-cn.md)
@@ -45,7 +45,7 @@ And later you can update the submodule in your site directory to the latest comm
 git submodule update --remote --merge
 ```
 
-Next, go to the `config.toml` and change the default theme to `FixIt`.
+Next, go to the `hugo.toml` and change the default theme to `FixIt`.
 
 ```diff
 - theme = "LoveIt"

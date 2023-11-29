@@ -37,6 +37,8 @@
       {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
     {{ end }}
     {{- range where .Site.RegularPages "Type" "posts" | first (.Site.Params.home.rss | default 10) -}}
+      {{- $params := .Scratch.Get "params" -}}
+      {{- if $params.password | or $params.hiddenFromRss }}{{ continue }}{{ end -}}
       {{- dict "Page" . "Site" .Site | partial "rss/item.html" -}}
     {{- end -}}
   </channel>

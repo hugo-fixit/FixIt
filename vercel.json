@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/zh-cn/(.*)",
+      "status": 404,
+      "dest": "/zh-cn/404.html"
+    }
+  ]
+}

@@ -4,6 +4,36 @@
 # =====================================================================================
 
 # -------------------------------------------------------------------------------------
+# Hugo Configuration
+# See: https://gohugo.io/getting-started/configuration/
+# -------------------------------------------------------------------------------------
+
+# website title
+title = "FixIt"
+# Hostname (and path) to the root
+baseURL = "http://localhost:1313"
+# theme list
+theme = ["FixIt"]
+# determines default content language ["en", "zh-cn", "fr", "pl", ...]
+defaultContentLanguage = "en"
+# language code ["en", "zh-CN", "fr", "pl", ...]
+languageCode = "en"
+# language name ["English", "简体中文", "Français", "Polski", ...]
+languageName = "English"
+# whether to include Chinese/Japanese/Korean
+hasCJKLanguage = false
+# default amount of posts in each pages
+paginate = 12
+# copyright description used only for seo schema
+copyright = ""
+# whether to use robots.txt
+enableRobotsTXT = true
+# whether to use git commit log
+enableGitInfo = true
+# whether to use emoji code
+enableEmoji = true
+
+# -------------------------------------------------------------------------------------
 # Menu Configuration
 # See: https://fixit.lruihao.cn/documentation/basics/#menu-configuration
 # -------------------------------------------------------------------------------------
@@ -359,6 +389,8 @@
     hiddenFromHomePage = false
     # FixIt 0.2.0 | NEW whether to hide a page from search results
     hiddenFromSearch = false
+    # FixIt 0.2.18-lts.5 | NEW whether to hide a page from RSS feed
+    hiddenFromRss = false
     # FixIt 0.2.0 | NEW whether to enable twemoji
     twemoji = false
     # whether to enable lightgallery
@@ -371,7 +403,7 @@
     # FixIt 0.2.0 | NEW whether to enable the fontawesome extended syntax
     fontawesome = true
     # license info (HTML format is supported)
-    license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+    license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>'
     # whether to show link to Raw Markdown content of the content
     linkToMarkdown = true
     # FixIt 0.2.4 | NEW whether to show the full text content in RSS
@@ -840,7 +872,8 @@
 # Modules Configuration
 # See: https://gohugo.io/hugo-modules/configuration/#module-config-imports
 # -------------------------------------------------------------------------------------
+
 [module]
   [module.hugoVersion]
     extended = true
-    min = "0.109.0"
+    min = "0.110.0"
