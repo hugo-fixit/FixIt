@@ -33,7 +33,7 @@ FixIt 主题继承了这些主题的优秀功能，并在此基础上添加了�
 
 如果你现在正在使用 LoveIt 主题（或者一些其他的主题），你可以很容易地迁移至 FixIt。
 
-你可以将这个主题仓库添加为你的网站目录的子模块。或者，您可以通过 [其他方式](https://fixit.lruihao.cn/zh-cn/documentation/basics/#install-theme) 安装主题。
+你可以将这个主题仓库添加为你的网站目录的子模块。或者，你可以通过 [其他方式](https://fixit.lruihao.cn/zh-cn/documentation/basics/#install-theme) 安装主题。
 
 ```bash
 git submodule add https://github.com/hugo-fixit/FixIt.git themes/FixIt
@@ -174,7 +174,7 @@ FixIt 支持下列语言：
 
 确保在贡献和参与讨论时遵守 [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)。
 
-**贡献时，请先通过此存储库上的问题讨论您希望进行的更改，然后再进行实际更改**。
+**贡献时，请先通过此存储库上的问题讨论你希望进行的更改，然后再进行实际更改**。
 
 ## [所有贡献者](contributors.md)
 
