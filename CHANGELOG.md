@@ -47,7 +47,7 @@ This release is mainly for upgrading third-party libraries and development depen
 Snapshot: <https://fixit-iyi1zrhg9-cell-x.vercel.app/>
 
 > **Note**
-> **FixIt 0.2.18 will reach End of Life (EOL) on December 31st, 2024.** After that date, FixIt 0.2.18 will no longer receive updates, including security and browser compatibility fixes.
+> **FixIt 0.2.18 will reach End of Life (EOL) on December 31st, 2023.** After that date, FixIt 0.2.18 will no longer receive updates, including security and browser compatibility fixes.
 > Please stay tuned for the next version of FixIt under development!
 
 - :sparkles: Feat: add code block attributes support ([#330](https://github.com/hugo-fixit/FixIt/issues/330))
