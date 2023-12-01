@@ -1,7 +1,7 @@
 {{- $params := .Scratch.Get "params" -}}
 
-<meta name="author" content="{{ .Site.Author.name }}">
-<meta name="author-link" content="{{ .Site.Author.link }}">
+<meta name="author" content="{{ .Site.Params.author.name }}">
+<meta name="author-link" content="{{ .Site.Params.author.link }}">
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage | and .Summary }}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
 
 {{- $keywords := .Keywords -}}

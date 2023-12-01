@@ -3,7 +3,7 @@ title: {{ replace .TranslationBaseName "-" " " | title }}
 subtitle:
 type: friends
 date: {{ .Date }}
-description: "{{ .Site.Author.name }}'s friends"
+description: "{{ .Site.Params.author.name }}'s friends"
 keywords:
   - 'Hugo FixIt'
   - 'friends template'

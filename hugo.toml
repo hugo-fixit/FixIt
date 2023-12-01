@@ -112,6 +112,13 @@ enableEmoji = true
   # You can turn it off, but we would really appreciate if you don’t, as this is a good way to watch FixIt's popularity on the rise.
   disableThemeInject = false
 
+  # Author Configuration
+  [params.author]
+    name = ""
+    email = ""
+    link = ""
+    avatar = ""
+
   # FixIt 0.2.0 | NEW App icon config
   [params.app]
     # optional site title override for the app when added to an iOS home screen or Android launcher
