@@ -32,7 +32,7 @@
     {{- with .Site.LanguageCode -}}
       "inLanguage": "{{ . }}",
     {{- end -}}
-    {{- with .Site.Author.name -}}
+    {{- with .Site.Params.author.name -}}
       "author": {
         "@type": "Person",
         "name": {{ . | safeHTML }}
@@ -70,7 +70,7 @@
 
 {{- /* Page SEO */ -}}
 {{- else if .IsPage -}}
-  {{- $authorName := .Site.Author.name | default (T "single.author") -}}
+  {{- $authorName := .Site.Params.author.name | default (T "single.author") -}}
   {{- with .Params.author -}}
     {{- if reflect.IsMap . -}}
       {{- $authorName = cond (isset . "name") .name $authorName -}}

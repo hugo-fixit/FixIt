@@ -1,5 +1,5 @@
 {{- $params := .Page.Params | merge .Site.Params.Page -}}
-{{- $authorName := .Site.Author.name | default (T "single.author") -}}
+{{- $authorName := .Site.Params.author.name | default (T "single.author") -}}
 {{- with .Params.author -}}
   {{- if reflect.IsMap . -}}
     {{- $authorName = cond (isset . "name") .name $authorName -}}
