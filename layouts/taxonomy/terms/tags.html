@@ -1,0 +1,21 @@
+{{- /* Tags Page */ -}}
+{{- $tagCloud := .Site.Params.tagcloud -}}
+
+<div class="tag-cloud-tags{{ with $tagCloud.enable }} text-center{{ end }}">
+  {{- /* Tags Cloud */ -}}
+  {{- if $tagCloud.enable -}}
+    {{- $tags := cond (eq $tagCloud.orderby "name") $.Site.Taxonomies.tags.Alphabetical $.Site.Taxonomies.tags.ByCount -}}
+    {{- $baseGrade := div ($tagCloud.peakCount | default 10) 10.0 -}}
+    {{- $minFont := $tagCloud.min | default 16 -}}
+    {{- $baseFont := div (sub ($tagCloud.max | default 32) $minFont) 10.0 -}}
+    {{- range $tags -}}
+      {{- $grade := math.Min (math.Floor (div (sub .Count 1) $baseGrade)) 10 -}}
+      {{- $fontSize := add $minFont (mul $grade $baseFont) -}}
+      <a href='{{ partial "function/escapeurl.html" .Page.RelPermalink }}' class="tag-cloud-{{ $grade }}" style="--tag-font: {{ $fontSize }}px">{{ .Page.Title }} <sup>{{ .Count }}</sup></a>
+    {{- end -}}
+  {{- else -}}
+    {{- range $.Site.Taxonomies.tags.ByCount -}}
+      <a href='{{ partial "function/escapeurl.html" .Page.RelPermalink }}'>{{ .Page.Title }} <sup>{{ .Count }}</sup></a>
+    {{- end -}}
+  {{- end -}}
+</div>
