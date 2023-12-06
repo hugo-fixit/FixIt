@@ -29,6 +29,12 @@ other = "Категорија"
 [categories]
 other = "Категорије"
 
+[collection]
+other = ""
+
+[collections]
+other = ""
+
 [tag]
 other = "Таг"
 

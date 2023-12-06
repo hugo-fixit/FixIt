@@ -28,6 +28,12 @@ other = "Danh mục"
 [categories]
 other = "Danh mục"
 
+[collection]
+other = ""
+
+[collections]
+other = ""
+
 [tag]
 other = "Nhãn"
 

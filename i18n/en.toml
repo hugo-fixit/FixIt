@@ -27,6 +27,12 @@ other = "Category"
 [categories]
 other = "Categories"
 
+[collection]
+other = "Collection"
+
+[collections]
+other = "Collections"
+
 [tag]
 other = "Tag"
 
@@ -96,10 +102,10 @@ other = "Share on"
 
 # === posts/single.html ===
 [single]
-contents= "Contents"
-repost= "Repost"
-publishedOnDate= "published on {{ .Date }}"
-includedInCategories= "included in {{ .Categories }}"
+contents = "Contents"
+repost = "Repost"
+publishedOnDate = "published on {{ .Date }}"
+includedInCategories = "included in {{ .Categories }}"
 views = "views"
 comments = "comments"
 author = "Author"

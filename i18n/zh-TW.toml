@@ -28,6 +28,12 @@ other = "分類"
 [categories]
 other = "分類"
 
+[collection]
+other = "合集"
+
+[collections]
+other = "合集"
+
 [tag]
 other = "標籤"
 

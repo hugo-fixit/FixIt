@@ -29,6 +29,12 @@ other = "Categoria"
 [categories]
 other = "Categorias"
 
+[collection]
+other = ""
+
+[collections]
+other = ""
+
 [tag]
 other = "Tag"
 

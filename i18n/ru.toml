@@ -29,6 +29,12 @@ other = "Категория"
 [categories]
 other = "Категории"
 
+[collection]
+other = ""
+
+[collections]
+other = ""
+
 [tag]
 other = "Тэг"
 

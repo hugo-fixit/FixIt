@@ -5,18 +5,24 @@
 {{- define "content" -}}
   <div class="page archive">
     {{- /* Title */ -}}
+    {{- $taxonomy := .Data.Singular -}}
+    {{- $pageCount := len .Pages -}}
+    {{- $termIcon := "" -}}
+    {{- $termTitle := .Title -}}
+    {{- if eq $taxonomy "category" -}}
+      {{- $termIcon = "fa-regular fa-folder-open fa-fw" -}}
+    {{- else if eq $taxonomy "tag" -}}
+      {{- $termIcon = "fa-solid fa-tag fa-fw" -}}
+    {{- else if eq $taxonomy "collections" -}}
+      {{- $termIcon = "fa-solid fa-layer-group fa-fw" -}}
+    {{- else -}}
+      {{- $termTitle = printf "%v - %v" (T $taxonomy | default $taxonomy) .Title -}}
+    {{- end -}}
     <h2 class="single-title animate__animated animate__pulse animate__faster">
-      {{- $taxonomy := .Data.Singular -}}
-      {{- $pageCount := len .Pages -}}
-      {{- if eq $taxonomy "category" -}}
-        {{ dict "Class" "fa-regular fa-folder-open fa-fw" | partial "plugin/icon.html" }}
-        {{ .Title }}&nbsp;<sup>{{- $pageCount -}}</sup>
-      {{- else if eq $taxonomy "tag" -}}
-        {{ dict "Class" "fa-solid fa-tag fa-fw" | partial "plugin/icon.html" }}
-        {{ .Title }}&nbsp;<sup>{{- $pageCount -}}</sup>
-      {{- else -}}
-        {{- printf "%v - %v" (T $taxonomy | default $taxonomy) .Title -}}
-      {{- end -}}
+      {{- with $termIcon -}}
+        {{- dict "Class" . | partial "plugin/icon.html" }}
+      {{ end -}}
+      {{ $termTitle }}&nbsp;<sup>{{- $pageCount -}}</sup>
     </h2>
 
     {{- /* Paginate */ -}}
