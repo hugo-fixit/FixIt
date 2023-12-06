@@ -106,7 +106,6 @@ other = "Поделиться в"
 contents= "Содержание"
 repost= ""
 publishedOnDate= "Опубликовано {{ .Date }}"
-includedInCategories= "включен в {{ .Categories }}"
 views = "просмотров"
 comments = "комментариев"
 author = "Автор"
@@ -121,6 +120,11 @@ encryptedAbstract = ""
 encryptedMessage = ""
 password = "арготизм"
 encryptyAgain = ""
+
+[single.includedIn]
+categories = "включен в {{ .Categories }}"
+collections = "включен в {{ .Collections }}"
+both = "включен в {{ .Categories }} и {{ .Collections }}"
 
 [single.wordCount]
 one = "Одно слово"

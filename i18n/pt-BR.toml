@@ -106,7 +106,6 @@ other = "Compartilhe em"
 contents= "Conteúdos"
 repost= ""
 publishedOnDate= "publicado em {{ .Date }}"
-includedInCategories= "incluido em {{ .Categories }}"
 views = "visualizações"
 comments = "comentários"
 author = "Autor"
@@ -121,6 +120,11 @@ encryptedAbstract = ""
 encryptedMessage = ""
 password = "Contrasinha"
 encryptyAgain = ""
+
+[single.includedIn]
+categories = "incluido em {{ .Categories }}"
+collections = "incluido em {{ .Collections }}"
+both = "incluido em {{ .Categories }} e {{ .Collections }}"
 
 [single.wordCount]
 one = "Uma palavra"

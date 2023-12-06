@@ -105,7 +105,6 @@ other = "Chia sẻ trên"
 contents= "Nội dung"
 repost= ""
 publishedOnDate= "đăng ngày {{ .Date }}"
-includedInCategories= "trong {{ .Categories }}"
 views = "lượt xem"
 comments = "bình luận"
 author = "Tác giả"
@@ -120,6 +119,11 @@ encryptedAbstract = ""
 encryptedMessage = ""
 password = "Mật khẩu"
 encryptyAgain = ""
+
+[single.includedIn]
+categories = "trong {{ .Categories }}"
+collections = "trong {{ .Collections }}"
+both = "trong {{ .Categories }} và {{ .Collections }}"
 
 [single.wordCount]
 one = "One word"

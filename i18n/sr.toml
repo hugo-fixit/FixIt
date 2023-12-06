@@ -106,7 +106,6 @@ other = "Подели на"
 contents= "Садржаји"
 repost= ""
 publishedOnDate= "објављено {{ .Date }}"
-includedInCategories= "укључено {{ .Categories }}"
 views = "прегледа"
 comments = "коментари"
 author = "Аутор"
@@ -121,6 +120,11 @@ encryptedAbstract = ""
 encryptedMessage = ""
 password = "Паролица"
 encryptyAgain = ""
+
+[single.includedIn]
+categories = "укључено {{ .Categories }}"
+collections = "укључено {{ .Collections }}"
+both = "укључено {{ .Categories }} и {{ .Collections }}"
 
 [single.wordCount]
 one = "Једна реч"

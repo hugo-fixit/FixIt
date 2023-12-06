@@ -104,7 +104,6 @@ other = "分享到"
 contents= "目录"
 repost= "转载"
 publishedOnDate= "发布于 {{ .Date }}"
-includedInCategories= "收录于 {{ .Categories }}"
 views = "次阅读"
 comments = "条评论"
 author = "作者"
@@ -119,6 +118,11 @@ encryptedAbstract = "本文已加密，因此其原始内容不可见！"
 encryptedMessage = "请输入密码"
 password = "密码"
 encryptyAgain = "重新加密"
+
+[single.includedIn]
+categories = "收录于 {{ .Categories }}"
+collections = "收录于 {{ .Collections }}"
+both = "收录于 {{ .Categories }} 和 {{ .Collections }}"
 
 [single.wordCount]
 other = "{{ .Count }} 字"

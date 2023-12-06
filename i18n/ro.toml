@@ -106,7 +106,6 @@ other = "Distribuie pe"
 contents= "Cuprins"
 repost= ""
 publishedOnDate= "publicat la {{ .Date }}"
-includedInCategories= "inclus în {{ .Categories }}"
 views = "vizualizări"
 comments = "comentarii"
 author = "Autor"
@@ -121,6 +120,11 @@ encryptedAbstract = ""
 encryptedMessage = ""
 password = "Parolă"
 encryptyAgain = ""
+
+[single.includedIn]
+categories = "inclus în {{ .Categories }}"
+collections = "inclus în {{ .Collections }}"
+both = "inclus în {{ .Categories }} și {{ .Collections }}"
 
 [single.wordCount]
 one = "Un cuvânt"

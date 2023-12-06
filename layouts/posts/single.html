@@ -4,7 +4,7 @@
   {{- $params := .Scratch.Get "params" -}}
   {{- $toc := .Scratch.Get "toc" -}}
 
-  <aside class="toc" id="toc-auto">
+  <aside class="toc" id="toc-auto" aria-label="{{ T "single.contents" }}">
     {{- /* Auto TOC */ -}}
     {{- $tocEmpty := eq .TableOfContents `<nav id="TableOfContents"></nav>` -}}
     {{- if (ne $toc.enable false) | and (ne $tocEmpty true) -}}
@@ -16,7 +16,7 @@
     {{- end -}}
   </aside>
 
-  <aside class="aside-custom">
+  <aside class="aside-custom" aria-label="Custom Aside">
     <!-- put aside for later use -->
     {{- partial (.Scratch.Get "customFilePath").aside . -}}
   </aside>
@@ -48,17 +48,7 @@
     <div class="post-meta">
       <div class="post-meta-line">
         {{- partial "single/post-author.html" . -}}
-
-        {{- $categories := slice -}}
-        {{- range .Params.categories -}}
-          {{- $category := partialCached "function/path.html" . . | printf "/categories/%v" | $.Site.GetPage -}}
-          {{- $categories = $categories | append (printf `<a href="%v">%v %v</a>` (partial "function/escapeurl.html" $category.RelPermalink) (dict "Class" "fa-regular fa-folder fa-fw" | partial "plugin/icon.html") $category.Title) -}}
-        {{- end -}}
-        {{- with delimit $categories "&ensp;" }}
-          <span class="post-category">
-            {{- dict "Categories" . | T "single.includedInCategories" | safeHTML -}}
-          </span>
-        {{- end -}}
+        {{- partial "single/post-included-in.html" . -}}
       </div>
       <div class="post-meta-line">
         {{- with .PublishDate | dateFormat (.Site.Params.dateformat | default "2006-01-02") -}}

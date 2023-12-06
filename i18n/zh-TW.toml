@@ -104,7 +104,6 @@ other = "分享到"
 contents= "目錄"
 repost= "轉貼"
 publishedOnDate= "發佈於 {{ .Date }}"
-includedInCategories= "收錄於 {{ .Categories }}"
 views = "次閱讀"
 comments = "條評論"
 author = "作者"
@@ -119,6 +118,11 @@ encryptedAbstract = "本文已加密，囙此其原始內容不可見！"
 encryptedMessage = "請輸入密碼"
 password = "密碼"
 encryptyAgain = "重新加密"
+
+[single.includedIn]
+categories = "收錄於 {{ .Categories }}"
+collections = "收錄於 {{ .Collections }}"
+both = "收錄於 {{ .Categories }} 和 {{ .Collections }}"
 
 [single.wordCount]
 other = "{{ .Count }} 字"

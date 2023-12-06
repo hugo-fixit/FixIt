@@ -1,0 +1,37 @@
+{{- $categories := slice -}}
+{{- range .Params.categories -}}
+  {{- $category := partialCached "function/path.html" . . | printf "/categories/%v" | $.Site.GetPage -}}
+  {{- $categories = $categories | append (
+    printf `<a href="%v" class="post-category" title="%v">%v %v</a>`
+    (partial "function/escapeurl.html" $category.RelPermalink)
+    (printf "%v - %v" (T "category") $category.Title)
+    (dict "Class" "fa-regular fa-folder fa-fw" | partial "plugin/icon.html")
+    $category.Title
+  ) -}}
+{{- end -}}
+{{- $categoriesStr := delimit $categories "&ensp;" -}}
+
+{{- $collections := slice -}}
+{{- range .Params.collections -}}
+  {{- $collection := partialCached "function/path.html" . . | printf "/collections/%v" | $.Site.GetPage -}}
+  {{- $collections = $collections | append (
+    printf `<a href="%v" class="post-collection" title="%v">%v %v</a>`
+    (partial "function/escapeurl.html" $collection.RelPermalink)
+    (printf "%v - %v" (T "collection")  $collection.Title)
+    (dict "Class" "fa-solid fa-layer-group fa-fw" | partial "plugin/icon.html")
+    $collection.Title
+  ) -}}
+{{- end -}}
+{{- $collectionStr := delimit $collections "&ensp;" -}}
+
+{{- if .Params.categories | or .Params.collections -}}
+  <span class="post-included-in">
+    {{- if not .Params.collections -}}
+      &nbsp;{{- dict "Categories" $categoriesStr | T "single.includedIn.categories" | safeHTML -}}
+    {{- else if not .Params.categories -}}
+      &nbsp;{{- dict "Collections" $collectionStr | T "single.includedIn.collections" | safeHTML -}}
+    {{- else -}}
+      &nbsp;{{- dict "Categories" $categoriesStr "Collections" $collectionStr | T "single.includedIn.both" | safeHTML -}}
+    {{- end -}}
+  </span>
+{{- end -}}
