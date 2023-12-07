@@ -1,0 +1,23 @@
+{{- $excludePageUrl := .RelPermalink -}}
+
+{{ $related := .Site.RegularPages.Related . | first 5 }}
+{{ with $related }}
+<div class="related-posts">
+    <h2 id="related-posts-head">相关文章</h2>
+    <ul>
+        {{ range . }}
+        <li class="related-post-item">
+            <a class="related-post-link" href="{{ .RelPermalink }}" title="{{ .LinkTitle }}">{{ .LinkTitle }}</a>&nbsp;&nbsp;
+            {{- range $tag := .Params.Tags -}}
+            {{- $tag := partialCached "function/path.html" $tag $tag | printf "/tags/%v" | $.Site.GetPage -}}
+            {{ if in $.Params.tags $tag.Title }}
+            <a class="tag-same" href="{{ $tag.RelPermalink }}"><i class="fa fa-tag fa-fw"></i>{{ $tag.Title }}</a>&nbsp;
+            {{- else }}
+            <a class="tag-diff" href="{{ $tag.RelPermalink }}"><i class="fa fa-tag fa-fw"></i>{{ $tag.Title }}</a>&nbsp;
+            {{- end }}
+            {{- end }}
+        </li>
+        {{ end }}
+    </ul>
+</div>
+{{ end }}

@@ -198,6 +198,8 @@
       {{- end -}}
     </div>
 
+    {{- partial "single/related.html" . -}}
+
     {{- /* Footer and Reward */ -}}
     {{- $reward := .Scratch.Get "reward" -}}
     {{- if eq $reward.position "before" -}}
