@@ -6,7 +6,6 @@
   {{- else -}}
     {{- $src := .Source -}}
     {{- $integrity := .Integrity -}}
-    {{- $attrs := "" -}}
     {{- if $src | and (not (urls.Parse $src).Host) -}}
       {{- $resource := resources.Get $src -}}
       {{- with .Template -}}
@@ -23,9 +22,10 @@
         {{- $integrity = $resource.Data.Integrity -}}
       {{- end -}}
       {{- with $resource.RelPermalink -}}
-        {{- $attrs = printf `src="%v"` . | add $attrs -}}
+        {{- $src = $resource.RelPermalink -}}
       {{- end -}}
     {{- end -}}
+    {{- $attrs := printf `src="%v"` $src -}}
     {{- if .Crossorigin -}}
       {{- $attrs = ` crossorigin="anonymous"` | add $attrs -}}
     {{- end -}}
