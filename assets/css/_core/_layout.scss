@@ -11,18 +11,15 @@
     aside {
       flex: 1;
       padding-inline: 0.5rem;
-
-      &:first-child {
-        order: 2;
-      }
     }
-    
 
     &.container {
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      padding: 0 1rem;
+      padding-inline: 1rem;
+      // TODO remove watermark from container
+      // gap: 0.5rem;
 
       &.container-reverse {
         flex-direction: row-reverse;
@@ -35,7 +32,7 @@
   }
 }
 
-@import "_core/header";
-@import "_core/breadcrumb";
-@import "_core/footer";
-@import "_core/pagination";
+@import "_header";
+@import "_breadcrumb";
+@import "_footer";
+@import "_pagination";

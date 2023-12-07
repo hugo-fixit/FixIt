@@ -3,21 +3,12 @@
 {{- define "content" -}}
   {{- $params := .Scratch.Get "params" -}}
   {{- $toc := .Scratch.Get "toc" -}}
+  {{- $tocEmpty := eq .TableOfContents `<nav id="TableOfContents"></nav>` -}}
 
-  <aside class="toc" id="toc-auto" aria-label="{{ T "single.contents" }}">
-    {{- /* Auto TOC */ -}}
-    {{- $tocEmpty := eq .TableOfContents `<nav id="TableOfContents"></nav>` -}}
-    {{- if (ne $toc.enable false) | and (ne $tocEmpty true) -}}
-      <h2 class="toc-title{{ with $params.password }} d-none{{ end }}">
-        {{- T "single.contents" -}}&nbsp;
-        {{- dict "Class" "toc-icon fa-solid fa-angle-down fa-fw" | partial "plugin/icon.html" -}}
-      </h2>
-      <div class="toc-content{{ if eq $toc.auto false }} always-active{{ end }}{{ with $params.password }} d-none{{ end }}" id="toc-content-auto"></div>
-    {{- end -}}
-  </aside>
-
-  <aside class="aside-custom" aria-label="Custom Aside">
-    <!-- put aside for later use -->
+  <aside class="aside-collection" aria-label="{{ T "collections" }}">
+    {{- /* Collection List */ -}}
+    {{/*  {{- partial "single/collection-list.html" . -}}  */}}
+     {{- /* Custom part for aside */ -}}
     {{- partial (.Scratch.Get "customFilePath").aside . -}}
   </aside>
 
@@ -188,17 +179,35 @@
       {{- end -}}
     </div>
 
-    {{- /* Footer and Reward */ -}}
+    {{- /* Reward before Footer */ -}}
     {{- $reward := .Scratch.Get "reward" -}}
     {{- if eq $reward.position "before" -}}
       {{- partial "single/reward.html" . -}}
-      {{- partial "single/footer.html" . -}}
-    {{- else -}}
-      {{- partial "single/footer.html" . -}}
+    {{- end -}}
+
+    {{- /* Collection Navigation */ -}}
+    {{- partial "single/collection-nav.html" . -}}
+
+    {{- /* Footer */ -}}
+    {{- partial "single/footer.html" . -}}
+
+    {{- /* Reward after Footer */ -}}
+    {{- if eq $reward.position "after" -}}
       {{- partial "single/reward.html" . -}}
     {{- end -}}
 
     {{- /* Comment */ -}}
     {{- partial "single/comment.html" . -}}
   </article>
+
+  <aside class="toc" id="toc-auto" aria-label="{{ T "single.contents" }}">
+    {{- /* Auto TOC */ -}}
+    {{- if (ne $toc.enable false) | and (ne $tocEmpty true) -}}
+      <h2 class="toc-title{{ with $params.password }} d-none{{ end }}">
+        {{- T "single.contents" -}}&nbsp;
+        {{- dict "Class" "toc-icon fa-solid fa-angle-down fa-fw" | partial "plugin/icon.html" -}}
+      </h2>
+      <div class="toc-content{{ if eq $toc.auto false }} always-active{{ end }}{{ with $params.password }} d-none{{ end }}" id="toc-content-auto"></div>
+    {{- end -}}
+  </aside>
 {{- end -}}
