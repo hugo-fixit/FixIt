@@ -428,6 +428,10 @@ enableEmoji = true
     endFlag = ""
     # FixIt 0.2.18 | NEW whether to enable instant.page
     instantPage = false
+    # FixIt 0.3.0 | NEW whether to enable collection list at the sidebar
+    collectionList = false
+    # FixIt 0.3.0 | NEW whether to enable collection navigation at the end of the post
+    collectionNavigation = false
 
     # FixIt 0.2.15 | NEW Repost config
     [params.page.repost]

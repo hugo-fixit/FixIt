@@ -1,0 +1,53 @@
+{{- /* Collection List */ -}}
+{{- $params := .Scratch.Get "params" -}}
+
+{{- if .Params.collections | and $params.collectionList -}}
+  {{- range .Params.collections -}}
+    {{- $term := $.Site.GetPage "/collections" . -}}
+    {{- $pages := $term.Pages.ByDate -}}
+    {{- $open := eq (index $.Params.collections 0) . -}}
+    {{- $currentKey := 0 -}}
+
+    <div class="details collection-details{{ if $open }} open{{ end }}">
+      <div class="details-summary collection-summary">
+        <span class="collection-title">
+          {{ dict "Class" "fa-solid fa-layer-group fa-fw" | partial "plugin/icon.html" }}
+          <span class="collection-name">{{ T "collections" }}・{{ $term.LinkTitle }}</span>
+          <span class="text-secondary">{{ $pages.Len }}</span>
+        </span>
+        {{- dict "Class" "details-icon fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
+      </div>
+      <div class="details-content collection-content">
+        <nav>
+          <ul class="collection-list">
+            {{- range $key, $value := $pages -}}
+              {{- if $value.LinkTitle | eq $.LinkTitle -}}
+                {{- $currentKey = $key | add 1 -}}
+                <li class="collection-item"><span class="active" title="{{ $value.LinkTitle }}">{{ $value.LinkTitle }}</span></li>
+              {{- else }}
+                <li class="collection-item"><a href="{{ $value.RelPermalink }}" title="{{ $value.LinkTitle }}">{{ $value.LinkTitle }}</a></li>
+              {{- end }}
+            {{- end -}}
+          </ul>
+          <div class="collection-nav-simple">
+            {{- with $pages.Next $ -}}
+              <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ .LinkTitle }}">
+                {{- dict "Class" "fa-solid fa-angle-left fa-fw" | partial "plugin/icon.html" -}}
+              </a>
+            {{- else -}}
+              {{- dict "Class" "fa-solid fa-angle-left fa-fw collection-nav-item text-secondary" | partial "plugin/icon.html" -}}
+            {{- end -}}
+            <span class="text-secondary">{{ $currentKey }}/{{ $pages.Len }}</span>
+            {{- with $pages.Prev $ -}}
+              <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ .LinkTitle }}">
+                {{- dict "Class" "fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
+              </a>
+            {{- else -}}
+              {{- dict "Class" "fa-solid fa-angle-right fa-fw collection-nav-item text-secondary" | partial "plugin/icon.html" -}}
+            {{- end -}}
+          </div>
+        </nav>
+      </div>
+    </div>
+  {{- end -}}
+{{- end -}}

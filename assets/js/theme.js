@@ -482,7 +482,7 @@ class FixIt {
       $tocCore.parentElement.replaceChild($newTocCore, $tocCore);
       $tocCore = $newTocCore;
     }
-    if (document.getElementById('toc-static').dataset.kept === true || this.util.isTocStatic()) {
+    if (document.getElementById('toc-static').dataset.kept === 'true' || this.util.isTocStatic()) {
       const $tocContentStatic = document.getElementById('toc-content-static');
       if ($tocCore.parentElement !== $tocContentStatic) {
         $tocCore.parentElement.removeChild($tocCore);

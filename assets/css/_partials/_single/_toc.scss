@@ -17,6 +17,8 @@
         content: '|';
         font-weight: bolder;
         margin-right: 0.5rem;
+        position: relative;
+        bottom: 2px;
         color: $single-link-color;
 
         [data-theme='dark'] & {
@@ -71,6 +73,8 @@
       content: '|';
       font-weight: bolder;
       margin-right: 0.5rem;
+      position: relative;
+      bottom: 2px;
       color: $global-border-color;
 
       [data-theme='dark'] & {
