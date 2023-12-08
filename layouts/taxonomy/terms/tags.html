@@ -11,11 +11,11 @@
     {{- range $tags -}}
       {{- $grade := math.Min (math.Floor (div (sub .Count 1) $baseGrade)) 10 -}}
       {{- $fontSize := add $minFont (mul $grade $baseFont) -}}
-      <a href='{{ partial "function/escapeurl.html" .Page.RelPermalink }}' class="tag-cloud-{{ $grade }}" style="--tag-font: {{ $fontSize }}px">{{ .Page.Title }} <sup>{{ .Count }}</sup></a>
+      <a href='{{ partial "function/escapeurl.html" .Page.RelPermalink }}' class="tag-cloud-{{ $grade }}" style="--tag-font: {{ $fontSize }}px">{{ .Page.LinkTitle }} <sup>{{ .Count }}</sup></a>
     {{- end -}}
   {{- else -}}
     {{- range $.Site.Taxonomies.tags.ByCount -}}
-      <a href='{{ partial "function/escapeurl.html" .Page.RelPermalink }}'>{{ .Page.Title }} <sup>{{ .Count }}</sup></a>
+      <a href='{{ partial "function/escapeurl.html" .Page.RelPermalink }}'>{{ .Page.LinkTitle }} <sup>{{ .Count }}</sup></a>
     {{- end -}}
   {{- end -}}
 </div>

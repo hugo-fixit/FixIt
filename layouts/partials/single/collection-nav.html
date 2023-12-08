@@ -8,21 +8,21 @@
       $term.RelPermalink
       (dict "Class" "fa-solid fa-layer-group fa-fw" | partial "plugin/icon.html")
       (T "collection")
-      $term.Title
+      $term.LinkTitle
     -}}
     <div class="collection-card">
       <div class="collection-title text-secondary">
-        {{ dict "Collections" $termLink | T "single.includedIn.collections" | safeHTML }} {{ len $term.Pages }}
+        {{ dict "Collections" $termLink | T "single.includedIn.collections" | safeHTML }} {{ $term.Pages.Len }}
       </div>
       <div class="collection-nav">
         {{- with $term.Pages.Prev $ -}}
-          <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ .Title }}">
+          <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ .LinkTitle }}">
             {{- dict "Class" "fa-solid fa-angle-left fa-fw" | partial "plugin/icon.html" -}}
             <span>{{- .LinkTitle -}}</span>
           </a>
         {{- end -}}
         {{- with $term.Pages.Next $ -}}
-          <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ .Title }}">
+          <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ .LinkTitle }}">
             <span>{{- .LinkTitle -}}</span>
             {{- dict "Class" "fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
           </a>

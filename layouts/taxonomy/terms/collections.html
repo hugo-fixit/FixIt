@@ -15,7 +15,7 @@
         </h3>
         {{- range first 5 $pages -}}
           <article class="archive-item">
-            <a href="{{ .RelPermalink }}" class="archive-item-link">{{- .Title -}}</a>
+            <a href="{{ .RelPermalink }}" class="archive-item-link">{{- .LinkTitle -}}</a>
           </article>
         {{- end -}}
         {{- if gt (len $pages) 5 -}}

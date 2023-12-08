@@ -63,7 +63,7 @@
         {{- range $value := . -}}
           {{- $tag := partialCached "function/path.html" $value $value | printf "/tags/%v" | $.Site.GetPage -}}
           {{- with $tag -}}
-            <a href='{{ partial "function/escapeurl.html" .RelPermalink }}' class="post-tag">{{ .Title }}</a>
+            <a href='{{ partial "function/escapeurl.html" .RelPermalink }}' class="post-tag">{{ .LinkTitle }}</a>
           {{- end -}}
         {{- end -}}
       {{- end -}}
@@ -75,14 +75,14 @@
 
   <div class="post-nav">
     {{- with .Prev -}}
-      <a href="{{ .RelPermalink }}" class="post-nav-item" rel="prev" title="{{ .Title }}">
+      <a href="{{ .RelPermalink }}" class="post-nav-item" rel="prev" title="{{ .LinkTitle }}">
         {{- dict "Class" "fa-solid fa-angle-left fa-fw" | partial "plugin/icon.html" -}}
-        {{- .Title -}}
+        {{- .LinkTitle -}}
       </a>
     {{- end -}}
     {{ with .Next }}
-      <a href="{{ .RelPermalink }}" class="post-nav-item" rel="next" title="{{ .Title }}">
-        {{- .Title -}}
+      <a href="{{ .RelPermalink }}" class="post-nav-item" rel="next" title="{{ .LinkTitle }}">
+        {{- .LinkTitle -}}
         {{- dict "Class" "fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
       </a>
     {{- end -}}

@@ -4,9 +4,9 @@
   {{- $categories = $categories | append (
     printf `<a href="%v" class="post-category" title="%v">%v %v</a>`
     (partial "function/escapeurl.html" $category.RelPermalink)
-    (printf "%v - %v" (T "category") $category.Title)
+    (printf "%v - %v" (T "category") $category.LinkTitle)
     (dict "Class" "fa-regular fa-folder fa-fw" | partial "plugin/icon.html")
-    $category.Title
+    $category.LinkTitle
   ) -}}
 {{- end -}}
 {{- $categoriesStr := delimit $categories "&ensp;" -}}
@@ -17,9 +17,9 @@
   {{- $collections = $collections | append (
     printf `<a href="%v" class="post-collection" title="%v">%v %v</a>`
     (partial "function/escapeurl.html" $collection.RelPermalink)
-    (printf "%v - %v" (T "collection")  $collection.Title)
+    (printf "%v - %v" (T "collection")  $collection.LinkTitle)
     (dict "Class" "fa-solid fa-layer-group fa-fw" | partial "plugin/icon.html")
-    $collection.Title
+    $collection.LinkTitle
   ) -}}
 {{- end -}}
 {{- $collectionStr := delimit $collections "&ensp;" -}}
