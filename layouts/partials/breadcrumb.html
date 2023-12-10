@@ -3,7 +3,7 @@
     <ol class="breadcrumb">
       {{- range .Ancestors.Reverse -}}
         {{- if or .Site.Params.breadcrumb.showHome (not .IsHome) -}}
-          <li class="breadcrumb-item"><a href="{{ .RelPermalink }}" title="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage | and .Summary }}{{ .Summary }}{{ else }}{{ .LinkTitle }}{{ end }}{{ end }}">{{ cond (and .Site.Params.breadcrumb.showHome .IsHome) (T "single.home") .LinkTitle }}</a></li>
+          <li class="breadcrumb-item"><a href="{{ .RelPermalink }}" title="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage | and .Summary }}{{ .Summary }}{{ else }}{{ .LinkTitle }}{{ end }}{{ end }}">{{ cond (and .Site.Params.breadcrumb.showHome .IsHome) (T "single.home") ((lower .LinkTitle | T) | default .LinkTitle) }}</a></li>
         {{- end -}}
       {{- end -}}
       <li class="breadcrumb-item active" aria-current="page">{{ .LinkTitle }}</li>
