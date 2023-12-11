@@ -36,14 +36,14 @@
     </div>
   {{- end -}}
 
-  {{- with $profile.title -}}
-    <h1 class="home-title">
+  <h1 class="home-title">
+    {{- with $profile.title -}}
       {{- . | safeHTML -}}
-    </h1>
-  {{- end -}}
+    {{- end -}}
+  </h1>
 
   {{- with $profile.subtitle -}}
-    <h2 class="home-subtitle">
+    <p class="home-subtitle">
       {{- if $profile.typeit -}}
         {{- $id := dict "Content" . "Scratch" $.Scratch "Id" "typeit-profile-subtitle" | partial "function/id.html" -}}
         <span class="d-none">{{ . }}</span>
@@ -52,7 +52,7 @@
       {{- else -}}
         {{- . -}}
       {{- end -}}
-    </h2>
+    </p>
   {{- end -}}
 
   {{- if $profile.social -}}

@@ -29,7 +29,10 @@
       font-size: 1.25rem;
       font-weight: bold;
       margin: 0;
-      padding: 0.5rem;
+
+      &:not(:empty) {
+        padding: 0.5rem;
+      }
     }
 
     .home-subtitle {

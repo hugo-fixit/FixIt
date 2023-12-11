@@ -18,7 +18,7 @@
   {{- end -}}
 
   {{- /* Title */ -}}
-  <h1 class="single-title" itemprop="name headline">
+  <h2 class="single-title" itemprop="name headline">
     {{ $repost := $params.repost | default dict }}
     {{- with $repost -}}
       {{- if eq .Enable true -}}
@@ -28,7 +28,7 @@
       {{- end -}}
     {{- end -}}
     <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-  </h1>
+  </h2>
 
   {{- /* Meta */ -}}
   <div class="post-meta">
