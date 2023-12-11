@@ -2,26 +2,26 @@
 {{- $params := .Scratch.Get "params" -}}
 
 {{- if .Params.collections | and $params.collectionNavigation -}}
-  {{- range .Params.collections -}}
-    {{- $term := $.Site.GetPage "/collections" . -}}
+  {{- $collectionTerms := .GetTerms "collections" -}}
+  {{- range $collectionTerms -}}
     {{- $termLink := printf `<a href="%v">%v <span>%v・%v</span></span></a>`
-      $term.RelPermalink
+      .RelPermalink
       (dict "Class" "fa-solid fa-layer-group fa-fw" | partial "plugin/icon.html")
       (T "collection")
-      $term.LinkTitle
+      .LinkTitle
     -}}
     <div class="collection-card">
       <div class="collection-title text-secondary">
-        {{ dict "Collections" $termLink | T "single.includedIn.collections" | safeHTML }} {{ $term.Pages.Len }}
+        {{ dict "Collections" $termLink | T "single.includedIn.collections" | safeHTML }} {{ .Pages.Len }}
       </div>
       <div class="collection-nav">
-        {{- with $term.Pages.Prev $ -}}
+        {{- with .Pages.Prev $ -}}
           <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ .LinkTitle }}">
             {{- dict "Class" "fa-solid fa-angle-left fa-fw" | partial "plugin/icon.html" -}}
             <span>{{- .LinkTitle -}}</span>
           </a>
         {{- end -}}
-        {{- with $term.Pages.Next $ -}}
+        {{- with .Pages.Next $ -}}
           <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ .LinkTitle }}">
             <span>{{- .LinkTitle -}}</span>
             {{- dict "Class" "fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}

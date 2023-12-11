@@ -46,7 +46,7 @@
 
     .collection-nav-item {
       flex-grow: 1;
-      max-width: 50%;
+      max-width: calc(50% - 0.5rem);
       font-weight: 500;
       display: flex;
       align-items: center;

@@ -2,17 +2,17 @@
 {{- $params := .Scratch.Get "params" -}}
 
 {{- if .Params.collections | and $params.collectionList -}}
-  {{- range .Params.collections -}}
-    {{- $term := $.Site.GetPage "/collections" . -}}
-    {{- $pages := $term.Pages.ByDate -}}
-    {{- $open := eq (index $.Params.collections 0) . -}}
+  {{- $collectionTerms := .GetTerms "collections" -}}
+  {{- range $collectionTerms -}}
+    {{- $pages := .Pages.ByDate -}}
+    {{- $open := eq (index $collectionTerms 0) . -}}
     {{- $currentKey := 0 -}}
 
     <div class="details collection-details{{ if $open }} open{{ end }}">
       <div class="details-summary collection-summary">
         <span class="collection-title">
           {{ dict "Class" "fa-solid fa-layer-group fa-fw" | partial "plugin/icon.html" }}
-          <span class="collection-name">{{ T "collections" }}・{{ $term.LinkTitle }}</span>
+          <span class="collection-name">{{ T "collections" }}・{{ .LinkTitle }}</span>
           <span class="text-secondary">{{ $pages.Len }}</span>
         </span>
         {{- dict "Class" "details-icon fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
