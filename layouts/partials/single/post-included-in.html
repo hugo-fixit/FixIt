@@ -1,25 +1,23 @@
 {{- $categories := slice -}}
-{{- range .Params.categories -}}
-  {{- $category := partialCached "function/path.html" . . | printf "/categories/%v" | $.Site.GetPage -}}
+{{- range .GetTerms "categories" -}}
   {{- $categories = $categories | append (
     printf `<a href="%v" class="post-category" title="%v">%v %v</a>`
-    (partial "function/escapeurl.html" $category.RelPermalink)
-    (printf "%v - %v" (T "category") $category.LinkTitle)
+    (partial "function/escapeurl.html" .RelPermalink)
+    (printf "%v - %v" (T "category") .LinkTitle)
     (dict "Class" "fa-regular fa-folder fa-fw" | partial "plugin/icon.html")
-    $category.LinkTitle
+    .LinkTitle
   ) -}}
 {{- end -}}
 {{- $categoriesStr := delimit $categories "&ensp;" -}}
 
 {{- $collections := slice -}}
-{{- range .Params.collections -}}
-  {{- $collection := partialCached "function/path.html" . . | printf "/collections/%v" | $.Site.GetPage -}}
+{{- range .GetTerms "collections" -}}
   {{- $collections = $collections | append (
     printf `<a href="%v" class="post-collection" title="%v">%v %v</a>`
-    (partial "function/escapeurl.html" $collection.RelPermalink)
-    (printf "%v - %v" (T "collection")  $collection.LinkTitle)
+    (partial "function/escapeurl.html" .RelPermalink)
+    (printf "%v - %v" (T "collection")  .LinkTitle)
     (dict "Class" "fa-solid fa-layer-group fa-fw" | partial "plugin/icon.html")
-    $collection.LinkTitle
+    .LinkTitle
   ) -}}
 {{- end -}}
 {{- $collectionStr := delimit $collections "&ensp;" -}}

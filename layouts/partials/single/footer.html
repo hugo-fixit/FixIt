@@ -58,13 +58,11 @@
 
   <div class="post-info-more">
     <section class="post-tags">
-      {{- with .Params.tags -}}
+      {{- $tagTerms := .GetTerms "tags" -}}
+      {{- if $tagTerms -}}
         {{- dict "Class" "fa-solid fa-tags fa-fw me-1" | partial "plugin/icon.html" -}}
-        {{- range $value := . -}}
-          {{- $tag := partialCached "function/path.html" $value $value | printf "/tags/%v" | $.Site.GetPage -}}
-          {{- with $tag -}}
-            <a href='{{ partial "function/escapeurl.html" .RelPermalink }}' class="post-tag">{{ .LinkTitle }}</a>
-          {{- end -}}
+        {{- range $tagTerms -}}
+          <a href='{{ partial "function/escapeurl.html" .RelPermalink }}' class="post-tag">{{ .LinkTitle }}</a>
         {{- end -}}
       {{- end -}}
     </section>

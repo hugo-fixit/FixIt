@@ -55,14 +55,12 @@
   {{- /* Footer */ -}}
   <div class="post-footer">
     <a href="{{ .RelPermalink }}">{{ T "single.readMore" }}</a>
-    {{- with .Params.tags -}}
+    {{- $tagTerms := .GetTerms "tags" -}}
+    {{- if $tagTerms -}}
       <div class="post-tags">
         {{- dict "Class" "fa-solid fa-tags fa-fw me-1" | partial "plugin/icon.html" -}}
-        {{- range $value := . -}}
-          {{- $tag := partialCached "function/path.html" $value $value | printf "/tags/%v" | $.Site.GetPage -}}
-          {{- with $tag -}}
-            <a href='{{ partial "function/escapeurl.html" .RelPermalink }}' class="post-tag">{{ .LinkTitle }}</a>
-          {{- end -}}
+        {{- range $tagTerms -}}
+          <a href='{{ partial "function/escapeurl.html" .RelPermalink }}' class="post-tag">{{ .LinkTitle }}</a>
         {{- end -}}
       </div>
     {{- end -}}
