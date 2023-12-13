@@ -52,10 +52,9 @@
 #toc-auto {
   display: block;
   position: sticky;
-  top: var(--#{$prefix}scroll-mt);
+  top: calc(#{$header-height} + var(--#{$prefix}breadcrumb-height));
   box-sizing: border-box;
   visibility: hidden;
-  @include z-index(1);
   @include overflow-wrap(break-word);
   @include blur;
   @extend .print-d-none;

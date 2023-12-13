@@ -7,6 +7,7 @@
   position: relative;
   @include border-radius($global-border-radius * 1.5);
   @include user-select(none);
+  @extend .print-d-none;
 
   [data-theme='dark'] & {
     background-color: lighten($global-background-color-dark, 3%);
@@ -82,9 +83,18 @@
   }
 }
 
+// Collection aside container
+.aside-collection {
+  position: sticky;
+  top: calc(#{$header-height} + var(--#{$prefix}breadcrumb-height));
+  box-sizing: border-box;
+  @include overflow-wrap(break-word);
+  @include blur;
+  @extend .print-d-none;
+}
+
 // Collection List
 .collection-details {
-
   &:not(:last-of-type) {
     margin-bottom: 0.5rem;
   }

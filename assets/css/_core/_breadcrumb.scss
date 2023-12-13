@@ -1,8 +1,13 @@
 .breadcrumb-container {
   padding-inline: 1rem;
   font-size: 0.75rem;
+  background-color: $global-background-color;
   @include z-index(1);
   @extend .print-d-none;
+
+  [data-theme='dark'] & {
+    background-color: $global-background-color-dark;
+  }
 
   &.sticky {
     position: sticky;
@@ -16,12 +21,10 @@
     margin: 0 auto;
     list-style: none;
     border-bottom: 1px inset $global-border-color;
-    background-color: $global-background-color;
     @extend %page-style;
 
     [data-theme='dark'] & {
       border-bottom-color: $global-border-color-dark;
-      background-color: $global-background-color-dark;
     }
 
     .breadcrumb-item {

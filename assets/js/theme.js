@@ -330,7 +330,7 @@ class FixIt {
     const $breadcrumbContainer = document.querySelector('.breadcrumb-container.sticky')
     this.breadcrumbHeight = $breadcrumbContainer?.clientHeight ?? 0;
     if (this.breadcrumbHeight) {
-      document.querySelector('#content')?.style.setProperty('--fi-breadcrumb-height', `${this.breadcrumbHeight}px`);
+      document.querySelector('main.container')?.style.setProperty('--fi-breadcrumb-height', `${this.breadcrumbHeight}px`);
     }
   }
 
