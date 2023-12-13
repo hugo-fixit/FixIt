@@ -891,7 +891,7 @@ class FixIt {
     this.config.watermark?.enable &&
       new Watermark({
         content: this.config.watermark.content || `${document.querySelector('footer .fixit-icon')?.outerHTML ?? ''} FixIt Theme`,
-        appendTo: this.config.watermark.appendto || '.wrapper>main',
+        appendTo: '.widgets',
         opacity: this.config.watermark.opacity,
         width: this.config.watermark.width,
         height: this.config.watermark.height,

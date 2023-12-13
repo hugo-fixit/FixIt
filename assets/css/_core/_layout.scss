@@ -18,8 +18,7 @@
       align-items: flex-start;
       justify-content: center;
       padding-inline: 1rem;
-      // TODO remove watermark from container
-      // gap: 0.5rem;
+      gap: 0.5rem;
 
       &.container-reverse {
         flex-direction: row-reverse;
