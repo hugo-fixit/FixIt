@@ -156,12 +156,20 @@
         }
       }
 
-      .active {
+      .collection-item > .active {
         font-weight: bold;
         color: $single-link-color;
 
         [data-theme='dark'] & {
           color: $single-link-color-dark;
+        }
+
+        &::before {
+          color: $single-link-hover-color;
+  
+          [data-theme='dark'] & {
+            color: $single-link-hover-color-dark;
+          }
         }
       }
     }
