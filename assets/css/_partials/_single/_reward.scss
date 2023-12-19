@@ -1,11 +1,8 @@
 .post-reward {
   padding: 1rem;
   text-align: center;
+  margin-bottom: -1rem;
   @extend .print-d-none;
-
-  &~.post-footer {
-    margin-top: 0;
-  }
 
   &:has(.reward-ways:empty) {
     display: none;

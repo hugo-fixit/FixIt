@@ -1,13 +1,13 @@
 .post-footer {
   margin: 2rem 0;
 
-  &:has(~.post-reward) {
-    margin-bottom: 0;
+  &~.post-reward {
+    margin-block: -2rem 0;
   }
 
   .post-info {
     border-bottom: 1px solid $global-border-color;
-    padding: 1rem 0 0.3rem;
+    padding: 0.3rem 0;
 
     [data-theme='dark'] & {
       border-bottom: 1px solid $global-border-color-dark;
@@ -62,7 +62,7 @@
   }
 
   .post-info-more {
-    padding: 0.3rem 0 1rem;
+    padding: 0.3rem 0;
     display: flex;
     justify-content: space-between;
     font-size: 0.9rem;
@@ -91,6 +91,7 @@
     display: flex;
     justify-content: space-between;
     gap: 1.5rem;
+    padding-block: 0.5rem;
     @extend .print-d-none;
 
     .post-nav-item {
