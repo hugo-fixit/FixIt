@@ -20,6 +20,7 @@ categories:
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
+hiddenFromRelated: false
 summary:
 resources:
   - name: featured-image

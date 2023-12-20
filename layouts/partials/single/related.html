@@ -3,7 +3,13 @@
 {{- $params := .Scratch.Get "params" -}}
 
 {{- if $params.related.enable -}}
-  {{- $related := .Site.RegularPages.Related . | first ($params.related.count | default 5) -}}
+  {{- $posts := where .Site.RegularPages "Type" "posts" -}}
+  {{- if .Site.Params.page.hiddenFromRelated -}}
+    {{- $posts = where $posts "Params.hiddenfromrelated" false -}}
+  {{- else -}}
+    {{- $posts = where $posts "Params.hiddenfromrelated" "!=" true -}}
+  {{- end -}}
+  {{- $related := $posts.Related . | first ($params.related.count | default 5) -}}
   {{- with $related -}}
     <h2 id="see-also">{{ T "single.relatedContent" }}</h2>
     <ul>

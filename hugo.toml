@@ -398,6 +398,8 @@ enableEmoji = true
     hiddenFromSearch = false
     # FixIt 0.2.18-lts.5 | NEW whether to hide a page from RSS feed
     hiddenFromRss = false
+    # FixIt 0.3.0 | NEW whether to hide a page from related posts
+    hiddenFromRelated = false
     # FixIt 0.2.0 | NEW whether to enable twemoji
     twemoji = false
     # whether to enable lightgallery
@@ -699,7 +701,7 @@ enableEmoji = true
         name = ""
         logoUrl = ""
 
-    # FixIt 0.3.0 | NEW Related content config
+    # FixIt 0.3.0 | NEW Related content config (https://gohugo.io/content-management/related/)
     [params.page.related]
       enable = false
       count = 5
