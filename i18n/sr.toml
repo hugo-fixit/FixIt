@@ -120,6 +120,7 @@ encryptedAbstract = ""
 encryptedMessage = ""
 password = "Паролица"
 encryptyAgain = ""
+relatedContent = "Повезани садржај"
 
 [single.includedIn]
 categories = "укључено {{ .Categories }}"

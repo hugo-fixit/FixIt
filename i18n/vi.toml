@@ -119,6 +119,7 @@ encryptedAbstract = ""
 encryptedMessage = ""
 password = "Mật khẩu"
 encryptyAgain = ""
+relatedContent = "Nội dung liên quan"
 
 [single.includedIn]
 categories = "trong {{ .Categories }}"

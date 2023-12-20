@@ -120,6 +120,7 @@ encryptedAbstract = ""
 encryptedMessage = ""
 password = "Passwort"
 encryptyAgain = ""
+relatedContent = "Ähnliche Inhalte"
 
 [single.includedIn]
 categories = "enthalten in {{ .Categories }}"

@@ -120,6 +120,7 @@ encryptedAbstract = ""
 encryptedMessage = ""
 password = "Parolă"
 encryptyAgain = ""
+relatedContent = "Conținut înrudit"
 
 [single.includedIn]
 categories = "inclus în {{ .Categories }}"

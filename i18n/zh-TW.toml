@@ -118,6 +118,7 @@ encryptedAbstract = "本文已加密，囙此其原始內容不可見！"
 encryptedMessage = "請輸入密碼"
 password = "密碼"
 encryptyAgain = "重新加密"
+relatedContent = "相關內容"
 
 [single.includedIn]
 categories = "收錄於 {{ .Categories }}"

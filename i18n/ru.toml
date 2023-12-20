@@ -120,6 +120,7 @@ encryptedAbstract = ""
 encryptedMessage = ""
 password = "арготизм"
 encryptyAgain = ""
+relatedContent = "Связанный контент"
 
 [single.includedIn]
 categories = "включен в {{ .Categories }}"

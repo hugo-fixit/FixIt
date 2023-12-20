@@ -1,0 +1,27 @@
+{{- /* Related Content */ -}}
+{{- /* https://gohugo.io/content-management/related/ */ -}}
+{{- $params := .Scratch.Get "params" -}}
+
+{{- if $params.related.enable -}}
+  {{- $related := .Site.RegularPages.Related . | first ($params.related.count | default 5) -}}
+  {{- with $related -}}
+    <h2 id="see-also">{{ T "single.relatedContent" }}</h2>
+    <ul>
+      {{- range $i, $p := . -}}
+        <li>
+          <a href="{{ .RelPermalink }}" title="{{ .LinkTitle }}">{{ .LinkTitle }}</a>
+          {{- with .HeadingsFiltered -}}
+            <ul>
+              {{- range . -}}
+                {{- $link := printf "%s#%s" $p.RelPermalink .ID | safeURL -}}
+                <li>
+                  <a href="{{ $link }}" title="{{ .Title }}">{{ .Title }}</a>
+                </li>
+              {{- end -}}
+            </ul>
+          {{- end -}}
+        </li>
+      {{- end -}}
+    </ul>
+  {{- end -}}
+{{- end -}}

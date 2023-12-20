@@ -119,6 +119,7 @@ encryptedAbstract = "This article has been encrypted, so its raw content is invi
 encryptedMessage = "Please enter the password"
 password = "Password"
 encryptyAgain = "Encrypt again"
+relatedContent = "Related Content"
 
 [single.includedIn]
 categories = "included in {{ .Categories }}"

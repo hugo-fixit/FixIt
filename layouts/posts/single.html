@@ -179,6 +179,9 @@
       {{- end -}}
     </div>
 
+    {{- /* Related Content */ -}}
+    {{- partial "single/related.html" . -}}
+
     {{- /* Reward before Footer */ -}}
     {{- $reward := .Scratch.Get "reward" -}}
     {{- if eq $reward.position "before" -}}
