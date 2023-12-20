@@ -76,7 +76,7 @@
 {{- /* for details, see https://lruihao.cn/posts/native-img-loading-lazy/ */ -}}
 {{- if eq $loading "lazy" -}}
   {{- /* TODO move to theme.js */ -}}
-  {{- $commonScript := "this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}" -}}
+  {{- $commonScript := "this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}" -}}
   {{- $onload = printf " onload=\"%vthis.dataset.lazyloaded='';\"" $commonScript | safeHTMLAttr -}}
   {{- $onerror = printf " onerror=\"%v\"" $commonScript | safeHTMLAttr -}}
   {{- $style = printf " style=\"%vbackground: url(%v) no-repeat center;\"" $style (resources.Get "svg/loading.svg" | minify).RelPermalink | safeHTMLAttr -}}
@@ -86,10 +86,10 @@
 {{- if .Linked -}}
   <a class="lightgallery" href="{{ $srcLarge | safeURL }}" data-thumbnail="{{ $srcSmall | safeURL }}"{{ with $caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
 {{- end -}}
-<img loading="{{ $loading }}" src="{{ $src | safeURL }}"
+<img loading="{{ $loading }}" src="{{ $src | safeURL }}" alt="{{ $alt }}"
   {{- if .Responsive }} srcset="{{ $srcSmall | safeURL }}, {{ $srcMedium | safeURL }} 1.5x, {{ $srcLarge | safeURL }} 2x" sizes="auto"{{- end -}}
-  {{- if eq $loading "lazy" }} data-title="{{ .Title | default $alt }}" data-alt="{{ $alt }}"
-  {{- else }} title="{{ .Title | default $alt }}" alt="{{ $alt }}"{{- end -}}
+  {{- if eq $loading "lazy" }} data-title="{{ .Title | default $alt }}"
+  {{- else }} title="{{ .Title | default $alt }}"{{- end -}}
   {{- with .Width }} width="{{ . }}"{{- end -}}
   {{- with .Height }} height="{{ . }}"{{- end -}}
   {{- with $class }} class="{{ trim . " " }}"{{- end -}}
