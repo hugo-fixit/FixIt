@@ -1,5 +1,19 @@
 {{- $params := .Scratch.Get "params" -}}
-{{- $gitRepo := (strings.TrimSuffix "/" .Site.Params.gitRepo) -}}
+
+{{- /*  Git info  */ -}}
+{{- $gitRepo := "" -}}
+{{- $blobURL := "" -}}
+{{- $sourceURL := "" -}}
+{{- $editURL := "" -}}
+{{- $reportURL := "" -}}
+{{- with .Site.Params.gitInfo -}}
+  {{- if .Repo -}}
+    {{- $gitRepo = strings.TrimSuffix "/" .Repo -}}
+    {{- $blobURL = printf "%v/blob/%v/%v/{path}" $gitRepo .Branch .Dir -}}
+    {{- $editURL = printf "%v/edit/%v/%v/{path}" $gitRepo .Branch .Dir -}}
+    {{- $reportURL = printf "%v/issues/new?%v" $gitRepo .IssueTpl -}}
+  {{- end -}}
+{{- end -}}
 
 <div class="post-footer" id="post-footer">
   <div class="post-info">
@@ -27,25 +41,33 @@
     </div>
     <div class="post-info-line{{ with $params.password }} d-none{{ end }}">
       <div class="post-info-md">
-        {{- if $params.linktomarkdown -}}
+        {{- $linkOptions := slice -}}
+        {{- if $params.LinkToMarkdown -}}
           {{- with .OutputFormats.Get "markdown" -}}
-            <span>
-              {{- $options := dict "Class" "link-to-markdown" "Destination" .RelPermalink "Title" (T "single.readMarkdown") "Content" (T "single.readMarkdown") "externalIcon" false -}}
-              {{- partial "plugin/link.html" $options -}}
-            </span>
+            {{- $options := dict "Class" "link-to-markdown" "Destination" .RelPermalink "Title" (T "single.readMarkdown") "Content" (T "single.readMarkdown") "externalIcon" false -}}
+            {{- $linkOptions = $linkOptions | append $options -}}
           {{- end -}}
         {{- end -}}
-        {{- with $params.edit -}}
-          {{- if .Enable -}}
-            <span>
-              {{- $editUrl := printf "%v/%v" (strings.TrimSuffix "/" .Url) $.File.Path -}}
-              {{- if not (hasPrefix $editUrl "http") -}}
-                {{- $editUrl = printf "%v/%v" $gitRepo (strings.TrimPrefix "/" $editUrl) -}}
-              {{- end -}}
-              {{- $options := dict "Class" "link-to-edit" "Destination" $editUrl "Title" (T "single.editThisPage") "Content" (T "single.editThisPage") "externalIcon" false -}}
-              {{- partial "plugin/link.html" $options -}}
-            </span>
-          {{- end -}}
+        {{- if $params.LinkToSource | and $gitRepo -}}
+          {{- $link := replace $blobURL "{path}" $.File.Path -}}
+          {{- $sourceURL = add $link "?plain=1" -}}
+          {{- $options := dict "Class" "link-to-source" "Destination" $sourceURL "Title" (T "single.viewSource") "Content" (T "single.viewSource") "externalIcon" false -}}
+          {{- $linkOptions = $linkOptions | append $options -}}
+        {{- end -}}
+        {{- if $params.LinkToEdit | and $gitRepo -}}
+          {{- $link := replace $editURL "{path}" $.File.Path -}}
+          {{- $options := dict "Class" "link-to-edit" "Destination" $link "Title" (T "single.editThisPage") "Content" (T "single.editThisPage") "externalIcon" false -}}
+          {{- $linkOptions = $linkOptions | append $options -}}
+        {{- end -}}
+        {{- if $params.LinkToReport | and $gitRepo -}}
+          {{- $link := replace $reportURL "{title}" ($.Title | urlquery) -}}
+          {{- $link = replace $link "{URL}" $.Permalink -}}
+          {{- $link = replace $link "{sourceURL}" $sourceURL -}}
+          {{- $options := dict "Class" "link-to-report" "Destination" $link "Title" (T "single.reportIssue") "Content" (T "single.reportIssue") "externalIcon" false -}}
+          {{- $linkOptions = $linkOptions | append $options -}}
+        {{- end -}}
+        {{- range $linkOptions -}}
+          <span>{{ partial "plugin/link.html" . }}</span>
         {{- end -}}
       </div>
       <div class="post-info-share">

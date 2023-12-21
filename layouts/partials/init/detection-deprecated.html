@@ -16,6 +16,9 @@
     {{- $warns = $warns | append "The parameter `footer.siteTime` has changed to a Map since v0.2.17. Please correct the format!" -}}
   {{- end -}}
 {{- end -}}
+{{- with .Site.Params.gitRepo | or .Site.Params.page.edit -}}
+  {{- $warns = $warns | append "The parameter `params.gitRepo` and `params.page.edit` is deprecated since v0.3.0, use `params.gitInfo` instead." -}}
+{{- end -}}
 
 {{- if len $warns -}}
   {{- warnf "Deprecated parameter detection until %v\n  - %v\n\n" (.Scratch.Get "version") (delimit $warns "\n  - ") -}}
