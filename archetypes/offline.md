@@ -1,5 +1,5 @@
 ---
-type: offline
+layout: offline
 description: '{{ T "offlineTitle" }} - {{ .Site.Title }}'
 keywords: 
   - PWA

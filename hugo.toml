@@ -69,7 +69,7 @@ enableEmoji = true
     title = ""
     weight = 2
     [menu.main.params]
-      icon = "fa-solid fa-th"
+      icon = "fa-solid fa-folder-tree"
   [[menu.main]]
     identifier = "tags"
     pre = ""

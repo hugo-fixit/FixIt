@@ -1,7 +1,7 @@
 ---
 title: {{ replace .TranslationBaseName "-" " " | title }}
 subtitle:
-type: friends
+layout: friends
 date: {{ .Date }}
 description: "{{ .Site.Params.author.name }}'s friends"
 keywords:
