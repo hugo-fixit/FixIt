@@ -87,6 +87,15 @@ header {
       }
     }
 
+    .menu-link i {
+      @include transform(perspective(1rem));
+      @include transition(transform 0.4s ease);
+    }
+
+    .menu-link:hover i {
+      @include transform(perspective(1rem) translateZ(0.2rem));
+    }
+
     &.language-switch,
     &.theme-switch {
       cursor: pointer;
