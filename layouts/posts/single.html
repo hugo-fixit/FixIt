@@ -48,11 +48,13 @@
             {{- printf `<time datetime="%v">%v</time>` . . | safeHTML -}}
           </span>&nbsp;
         {{- end -}}
-        {{- with .Lastmod | dateFormat (.Site.Params.dateformat | default "2006-01-02") -}}
-          <span title="{{ dict "Date" ("2006-01-02 15:04:05" | $.Lastmod.Format) | T "single.updatedOnDate" }}">
-            {{- dict "Class" "fa-regular fa-edit fa-fw me-1" | partial "plugin/icon.html" -}}
-            {{- printf `<time datetime="%v">%v</time>` . . | safeHTML -}}
-          </span>&nbsp;
+        {{- if ne .Lastmod.Unix .PublishDate.Unix }}
+          {{- with .Lastmod | dateFormat (.Site.Params.dateformat | default "2006-01-02") -}}
+            <span title="{{ dict "Date" ("2006-01-02 15:04:05" | $.Lastmod.Format) | T "single.updatedOnDate" }}">
+              {{- dict "Class" "fa-regular fa-edit fa-fw me-1" | partial "plugin/icon.html" -}}
+              {{- printf `<time datetime="%v">%v</time>` . . | safeHTML -}}
+            </span>&nbsp;
+          {{- end -}}
         {{- end -}}
         {{- if $params.wordCount -}}
           <span title="{{ T "single.wordCount" .WordCount }}">
