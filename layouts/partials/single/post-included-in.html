@@ -15,7 +15,7 @@
   {{- $collections = $collections | append (
     printf `<a href="%v" class="post-collection" title="%v">%v %v</a>`
     (partial "function/escapeurl.html" .RelPermalink)
-    (printf "%v - %v" (T "collection")  .LinkTitle)
+    (printf "%v - %v" (T "collection") .LinkTitle)
     (dict "Class" "fa-solid fa-layer-group fa-fw" | partial "plugin/icon.html")
     .LinkTitle
   ) -}}

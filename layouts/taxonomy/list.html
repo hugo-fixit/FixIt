@@ -13,7 +13,7 @@
       {{- $termIcon = "fa-regular fa-folder-open fa-fw" -}}
     {{- else if eq $taxonomy "tag" -}}
       {{- $termIcon = "fa-solid fa-tag fa-fw" -}}
-    {{- else if eq $taxonomy "collections" -}}
+    {{- else if eq $taxonomy "collection" -}}
       {{- $termIcon = "fa-solid fa-layer-group fa-fw" -}}
     {{- else -}}
       {{- $termTitle = printf "%v - %v" (T $taxonomy | default $taxonomy) .Title -}}

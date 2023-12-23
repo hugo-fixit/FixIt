@@ -84,7 +84,7 @@
       {{- if $tagTerms -}}
         {{- dict "Class" "fa-solid fa-tags fa-fw me-1" | partial "plugin/icon.html" -}}
         {{- range $tagTerms -}}
-          <a href='{{ partial "function/escapeurl.html" .RelPermalink }}' class="post-tag">{{ .LinkTitle }}</a>
+          <a href="{{ partial "function/escapeurl.html" .RelPermalink }}" class="post-tag" title="{{ printf "%v - %v" (T "tags") .LinkTitle }}">{{ .LinkTitle }}</a>
         {{- end -}}
       {{- end -}}
     </section>
