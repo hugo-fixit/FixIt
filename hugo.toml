@@ -574,8 +574,8 @@ enableEmoji = true
         enable = false
         owner = "Reverier-Xu"
         repo = "blog_comment"
-        clientId = "04e3a9c7b8514d2532ba"
-        clientSecret = "b55ad7dd220563faca25d9b74dc517fd309dafa9"
+        clientId = ""
+        clientSecret = ""
       # Valine comment config (https://github.com/xCss/Valine)
       [params.page.comment.valine]
         enable = false
@@ -671,8 +671,8 @@ enableEmoji = true
         reactionsEnabled = "1"
         emitMetadata = "0"
         inputPosition = "top" # ["top", "bottom"]
-        lightTheme = "light"
-        darkTheme = "dark"
+        lightTheme = "noborder_light"
+        darkTheme = "noborder_dark"
         lazyLoad = true
     # FixIt 0.2.7 | NEW Third-party library config
     [params.page.library]
