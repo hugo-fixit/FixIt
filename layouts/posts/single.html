@@ -24,7 +24,7 @@
   <article class="page single">
     <div class="header">
       {{- /* Title */ -}}
-      <h1 class="single-title animate__animated animate__flipInX">
+      <h1 class="single-title">
         {{- $repost := $params.repost | default dict -}}
         {{- with $repost -}}
           {{- if eq .Enable true -}}
@@ -41,7 +41,7 @@
       </h1>
 
       {{- /* Subtitle */ -}}
-      {{- with $params.subtitle -}}<p class="single-subtitle animate__animated animate__fadeIn">{{ . }}</p>{{- end -}}
+      {{- with $params.subtitle -}}<p class="">{{ . }}</p>{{- end -}}
     </div>
 
     {{- /* Meta */ -}}

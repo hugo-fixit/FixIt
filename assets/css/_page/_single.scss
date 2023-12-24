@@ -3,11 +3,11 @@
 
 .single {
   .single-title {
-    padding: 1rem 0 0.5rem;
+    padding: 2rem 0 0.5rem;
     margin: 0;
-    font-size: 1.6rem;
+    font-size: 2rem;
     font-weight: bold;
-    line-height: 140%;
+    line-height: 150%;
 
     .icon-repost {
       color: var(--#{$prefix}success);
@@ -31,6 +31,7 @@
   .post-meta {
     font-size: 0.875rem;
     color: $global-font-secondary-color;
+    padding-bottom: 1rem;
 
     .comment-visitors,
     .comment-count {
@@ -48,7 +49,7 @@
     @include link(false, true);
 
     .author {
-      font-size: 1.05rem;
+      font-size: 0.875rem;
 
       img.avatar {
         width: 1.3rem;
@@ -157,7 +158,8 @@
     }
 
     p {
-      margin: 0.5rem 0;
+      margin: 1.5rem 0;
+      line-height: 1.5rem;
     }
 
     b,

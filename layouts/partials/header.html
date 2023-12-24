@@ -88,13 +88,13 @@
           {{- end -}}
         {{- end -}}
         {{- if .Site.Menus.main -}}
-          <li class="menu-item delimiter"></li>
+          <li class="menu-item delimiter"><span>|</span></li>
         {{- end -}}
         {{- if .Site.Params.search.enable -}}
           <li class="menu-item search" id="search-desktop">
             <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `assets.searchPlaceholder`) }}" id="search-input-desktop">
             <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="{{ T `assets.search` }}">
-              {{ dict "Class" "fa-solid fa-search fa-fw" | partial "plugin/icon.html" }}
+              [S]
             </a>
             <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="{{ T `assets.clear` }}">
               {{ dict "Class" "fa-solid fa-times-circle fa-fw" | partial "plugin/icon.html" }}
@@ -105,7 +105,7 @@
           </li>
         {{- end -}}
         <li class="menu-item theme-switch" title="{{ T "header.switchTheme" }}">
-          {{ dict "Class" "fa-solid fa-adjust fa-fw" | partial "plugin/icon.html" }}
+          [T]
         </li>
         {{- if .Site.IsMultiLingual -}}
           <li class="menu-item language-switch">
@@ -197,7 +197,7 @@
             <div class="search mobile" id="search-mobile">
               <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `assets.searchPlaceholder`) }}" id="search-input-mobile">
               <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="{{ T `assets.search` }}">
-                {{ dict "Class" "fa-solid fa-search fa-fw" | partial "plugin/icon.html" }}
+                [S]
               </a>
               <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="{{ T `assets.clear` }}">
                 {{ dict "Class" "fa-solid fa-times-circle fa-fw" | partial "plugin/icon.html" }}

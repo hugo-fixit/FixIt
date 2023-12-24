@@ -5,17 +5,11 @@ header {
   @include transition(box-shadow 0.3s ease);
   @extend .print-d-none;
 
-  [data-theme='dark'] & {
+  [data-theme="dark"] & {
     background-color: $header-background-color-dark;
   }
 
-  &:hover {
-    @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, 0.1));
-
-    [data-theme='dark'] & {
-      @include box-shadow(0 0 1.5rem 0 rgba(255, 255, 255, 0.1));
-    }
-  }
+  border-bottom: 1px solid #80808020;
 }
 
 .header-wrapper {
@@ -27,6 +21,8 @@ header {
 }
 
 .header-title {
+  display: flex;
+  align-items: center;
   font-family: $header-title-font-family;
   font-weight: bold;
   margin-right: 0.5rem;
@@ -37,10 +33,11 @@ header {
   @include flex(10);
 
   .logo {
-    min-height: 1.5em;
-    height: 1.5em;
+    min-height: 1.2em;
+    height: 1.2em;
     vertical-align: middle;
     width: auto;
+    display: none;
   }
 
   .header-title-text {
@@ -60,13 +57,17 @@ header {
 
   .menu-item {
     list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    line-height: 0.8*$header-height;
 
     & .dropdown-icon {
       margin-left: 0.25rem;
-      font-size: .875em;
+      font-size: 0.875em;
       color: $global-font-color;
 
-      [data-theme='dark'] & {
+      [data-theme="dark"] & {
         color: $global-font-color-dark;
       }
 
@@ -76,12 +77,12 @@ header {
     }
 
     &.active {
-      >.menu-link,
-      >.nested-item>.menu-link {
+      > .menu-link,
+      > .nested-item > .menu-link {
         font-weight: bold;
         color: $menu-active-color;
 
-        [data-theme='dark'] & {
+        [data-theme="dark"] & {
           color: $menu-active-color-dark;
         }
       }
@@ -141,10 +142,10 @@ header {
     input {
       color: $global-font-color;
       background-color: $search-background-color;
-      padding: 0 2rem 0 2rem;
+      padding: 0 2.5rem 0 2.5rem;
     }
 
-    [data-theme='dark'] & {
+    [data-theme="dark"] & {
       input {
         color: $global-font-color-dark;
         background-color: $search-background-color-dark;
@@ -158,7 +159,7 @@ header {
     .search-button {
       color: $global-font-secondary-color;
 
-      [data-theme='dark'] & {
+      [data-theme="dark"] & {
         color: $global-font-secondary-color-dark;
       }
     }
@@ -187,12 +188,12 @@ header {
 #header-desktop {
   display: block;
   position: sticky;
+  flex-shrink: 0;
   top: 0;
   height: $header-height;
-  line-height: $header-height;
-  box-sizing: border-box;
+  // line-height: $header-height;
 
-  [data-header-desktop='normal'] & {
+  [data-header-desktop="normal"] & {
     position: static;
   }
 
@@ -206,7 +207,7 @@ header {
     padding: 0 2rem 0 MAX(10vh, $header-height);
     height: 100%;
 
-    &[data-github-corner='right'] {
+    &[data-github-corner="right"] {
       padding-right: $header-height;
     }
 
@@ -221,7 +222,7 @@ header {
       flex-wrap: nowrap;
       float: right;
 
-      >.menu-item {
+      > .menu-item {
         &:hover .sub-menu {
           display: block;
           @include transform(translateX(-0.5rem));
@@ -236,11 +237,10 @@ header {
 
         &.delimiter {
           width: 0;
-          margin: 0.125rem 0.25rem;
+          margin: 1rem;
           padding: 0;
-          border-left: 1px dashed lighten($global-font-secondary-color, 15%);
 
-          [data-theme='dark'] & {
+          [data-theme="dark"] & {
             border-left-color: darken($global-font-secondary-color-dark, 15%);
           }
         }
@@ -258,14 +258,14 @@ header {
         @include transition(box-shadow 0.3s ease);
         @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, 0.1));
 
-        [data-theme='dark'] & {
+        [data-theme="dark"] & {
           background-color: $header-background-color-dark;
           border-color: $global-border-color-dark;
           @include box-shadow(0 0 1.5rem 0 rgba(255, 255, 255, 0.1));
         }
 
         .menu-item {
-          height: $header-height*0.5;
+          height: $header-height * 0.5;
           line-height: $header-height*0.5;
           max-width: 15rem;
           white-space: nowrap;
@@ -285,20 +285,25 @@ header {
 
 #header-mobile {
   display: none;
+  align-items: center;
   position: sticky;
   top: 0;
   min-height: $header-height;
-  line-height: $header-height;
+  // line-height: $header-height;
 
-  [data-header-mobile='normal'] & {
+  [data-header-mobile="normal"] & {
     position: static;
   }
 
   .header-container {
+    min-height: $header-height;
     padding: 0;
     margin: 0;
 
     .header-wrapper {
+      min-height: $header-height;
+      display: flex;
+      align-items: center;
       padding: 0 1rem;
       font-size: 1.125rem;
       @include transition(margin-top 0.3s ease);
@@ -309,34 +314,35 @@ header {
       }
 
       .menu-toggle {
-        line-height: 4rem;
+        // line-height:2rem;
         cursor: pointer;
+
         @include transition(width 0.3s ease);
 
         span {
           display: block;
           background: $global-font-color;
-          width: 1.5rem;
+          width: 1.2rem;
           height: 2px;
           @include border-radius(3px);
           @include transition(all 0.3s ease-in-out);
 
-          [data-theme='dark'] & {
+          [data-theme="dark"] & {
             background: $global-font-color-dark;
           }
         }
 
         span:nth-child(1) {
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.3rem;
         }
 
         span:nth-child(3) {
-          margin-top: 0.5rem;
+          margin-top: 0.3rem;
         }
 
         &.active {
           span:nth-child(1) {
-            @include transform(rotate(45deg) translate(0.4rem, 0.5rem));
+            @include transform(rotate(45deg) translate(0.3rem, 0.3rem));
           }
 
           span:nth-child(2) {
@@ -344,7 +350,7 @@ header {
           }
 
           span:nth-child(3) {
-            @include transform(rotate(-45deg) translate(0.4rem, -0.5rem));
+            @include transform(rotate(-45deg) translate(0.3rem, -0.3rem));
           }
         }
       }
@@ -358,10 +364,10 @@ header {
       max-height: 70vh;
       @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
 
-      [data-theme='dark'] & {
+      [data-theme="dark"] & {
         @include box-shadow(0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
       }
-      
+
       &::-webkit-scrollbar {
         width: 0;
       }
@@ -377,8 +383,8 @@ header {
         top: 0;
         background-color: $header-background-color;
         @include z-index(0, 50);
- 
-        [data-theme='dark'] & {
+
+        [data-theme="dark"] & {
           background-color: $header-background-color-dark;
         }
       }
@@ -394,7 +400,7 @@ header {
 
       .search-loading,
       .search-clear {
-        right:  0.5rem;
+        right: 0.5rem;
       }
 
       .search-button {
@@ -409,13 +415,13 @@ header {
       .menu-item {
         display: block;
         position: relative;
-        line-height: 2.5rem;
+        // line-height: 2.5rem;
         padding: 0 1rem;
 
         &:not(.menu-system):hover {
           background-color: lighten($global-font-secondary-color, 24%);
 
-          [data-theme='dark'] & {
+          [data-theme="dark"] & {
             background-color: darken($global-font-secondary-color-dark, 24%);
           }
         }
@@ -448,8 +454,8 @@ header {
         line-height: 2.5rem;
         padding: 0 1rem;
         background-color: $header-background-color;
- 
-        [data-theme='dark'] & {
+
+        [data-theme="dark"] & {
           background-color: $header-background-color-dark;
         }
 
@@ -482,7 +488,7 @@ header {
         .menu-item:hover {
           background-color: lighten($global-font-secondary-color, 20%);
 
-          [data-theme='dark'] & {
+          [data-theme="dark"] & {
             background-color: darken($global-font-secondary-color-dark, 20%);
           }
         }
@@ -492,7 +498,7 @@ header {
         display: block;
       }
 
-      [data-theme='dark'] & {
+      [data-theme="dark"] & {
         background: $header-background-color-dark;
         border-top-color: $global-border-color-dark;
       }
@@ -514,6 +520,7 @@ header {
 
       .search-cancel {
         display: inline;
+        flex-shrink: 0;
       }
     }
   }
@@ -525,7 +532,7 @@ header {
   @include z-index(2);
   @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
 
-  [data-theme='dark'] & {
+  [data-theme="dark"] & {
     @include box-shadow(0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
   }
 
@@ -543,7 +550,7 @@ header {
     right: 0 !important;
     background-color: $global-background-color;
 
-    [data-theme='dark'] & {
+    [data-theme="dark"] & {
       background-color: $global-background-color-dark;
     }
 
@@ -570,7 +577,7 @@ header {
           text-align: right;
           color: $global-font-secondary-color;
 
-          [data-theme='dark'] & {
+          [data-theme="dark"] & {
             color: $global-font-secondary-color-dark;
           }
         }
@@ -584,7 +591,7 @@ header {
           @include overflow-wrap(break-word);
           color: $global-font-secondary-color;
 
-          [data-theme='dark'] & {
+          [data-theme="dark"] & {
             color: $global-font-secondary-color-dark;
           }
         }
@@ -593,7 +600,7 @@ header {
           font-style: normal;
           background-color: $selection-color;
 
-          [data-theme='dark'] & {
+          [data-theme="dark"] & {
             background-color: $selection-color-dark;
           }
         }
@@ -601,7 +608,7 @@ header {
         &.cursor {
           background: darken($code-background-color, 5%);
 
-          [data-theme='dark'] & {
+          [data-theme="dark"] & {
             background: lighten($code-background-color-dark, 5%);
           }
         }
@@ -619,7 +626,7 @@ header {
       .search-query {
         font-weight: bold;
 
-        [data-theme='dark'] & {
+        [data-theme="dark"] & {
           color: #ddd;
         }
       }
@@ -631,7 +638,7 @@ header {
       font-size: 0.8rem;
       color: $global-font-secondary-color;
 
-      [data-theme='dark'] {
+      [data-theme="dark"] {
         color: $global-font-secondary-color-dark;
       }
 

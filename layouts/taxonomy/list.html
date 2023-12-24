@@ -5,7 +5,7 @@
 {{- define "content" -}}
   <div class="page archive">
     {{- /* Title */ -}}
-    <h2 class="single-title animate__animated animate__pulse animate__faster">
+    <h2 class="single-title ">
       {{- $taxonomy := .Data.Singular -}}
       {{- $pageCount := len .Pages -}}
       {{- if eq $taxonomy "category" -}}

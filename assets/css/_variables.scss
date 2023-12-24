@@ -7,7 +7,7 @@
 $prefix: fi- !default;
 
 // Font and Line Height
-$global-font-family: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif !default;
+$global-font-family: "JetBrains Mono", Menlo, -apple-system, "Noto Sans", "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft YaHei", Consolas, Courier, monospace !default;
 $global-font-size: 16px !default;
 $global-font-weight: 400 !default;
 $global-line-height: 1.5rem !default;
@@ -39,8 +39,8 @@ $global-link-hover-color: #2983bb !default; // 潮蓝
 $global-link-hover-color-dark: #fff !default;
 
 // Color of the border
-$global-border-color: #f0f0f0 !default;
-$global-border-color-dark: #363636 !default;
+$global-border-color: #80808040 !default;
+$global-border-color-dark: #80808040 !default;
 // ========== Global ========== //
 
 // ========== Scrollbar ========== //
@@ -67,7 +67,7 @@ $header-background-color-dark: #252627 !default;
 
 // Font style of the header title
 $header-title-font-family: $global-font-family !default;
-$header-title-font-size: 1.5rem !default;
+$header-title-font-size: 1rem !default;
 
 // Color of the active menu item
 $menu-active-color: #161209 !default;

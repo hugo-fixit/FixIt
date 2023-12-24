@@ -1,9 +1,12 @@
 .home {
+  min-height: 60vh;
   .home-profile {
     text-align: center;
 
     .home-avatar {
-      padding: 0.5rem;
+      margin-top: 6rem;
+
+      padding: 2rem;
 
       img {
         display: inline-block;

@@ -17,20 +17,20 @@ html {
   }
 }
 
-/* scrollbar, only support webkit */
-::-webkit-scrollbar {
-  width: 0.5rem;
-  height: 0.5rem;
-}
+// /* scrollbar, only support webkit */
+// ::-webkit-scrollbar {
+//   width: 0.5rem;
+//   height: 0.5rem;
+// }
 
-::-webkit-scrollbar-thumb {
-  background-color: $scrollbar-color;
-  @include border-radius($global-border-radius);
+// ::-webkit-scrollbar-thumb {
+//   background-color: $scrollbar-color;
+//   @include border-radius($global-border-radius);
 
-  &:hover {
-    background-color: $scrollbar-hover-color;
-  }
-}
+//   &:hover {
+//     background-color: $scrollbar-hover-color;
+//   }
+// }
 
 ::selection {
   background-color: $selection-color;
@@ -43,25 +43,25 @@ html {
 body {
   background-color: $global-background-color;
   color: $global-font-color;
-  scrollbar-color: auto;
+  // scrollbar-color: auto;
   @include overflow-wrap(break-word);
 
-  &::-webkit-scrollbar {
-    width: 0.75rem;
-    height: 0.75rem;
-    background-color: transparent;
-  }
+  // &::-webkit-scrollbar {
+  //   width: 0.75rem;
+  //   height: 0.75rem;
+  //   background-color: transparent;
+  // }
 
-  &::-webkit-scrollbar-thumb {
-    background-color: transparent;
-    background-clip: content-box;
-    border: 2px solid transparent;
-    @include border-radius(0.5rem);
-  }
+  // &::-webkit-scrollbar-thumb {
+  //   background-color: transparent;
+  //   background-clip: content-box;
+  //   border: 2px solid transparent;
+  //   @include border-radius(0.5rem);
+  // }
 
-  &[data-scroll]::-webkit-scrollbar-thumb {
-    background-color: $scrollbar-color;
-  }
+  // &[data-scroll]::-webkit-scrollbar-thumb {
+  //   background-color: $scrollbar-color;
+  // }
 
   &[data-theme='dark'] {
     color: $global-font-color-dark;

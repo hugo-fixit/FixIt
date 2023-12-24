@@ -9,23 +9,23 @@
 # -------------------------------------------------------------------------------------
 
 # website title
-title = "FixIt"
+title = "Reverier's Blog"
 # Hostname (and path) to the root
-baseURL = "http://localhost:1313"
+baseURL = "https://blog.woooo.tech"
 # theme list
 theme = ["FixIt"]
 # determines default content language ["en", "zh-cn", "fr", "pl", ...]
-defaultContentLanguage = "en"
+defaultContentLanguage = "zh-CN"
 # language code ["en", "zh-CN", "fr", "pl", ...]
-languageCode = "en"
+languageCode = "zh-CN"
 # language name ["English", "简体中文", "Français", "Polski", ...]
-languageName = "English"
+languageName = "简体中文"
 # whether to include Chinese/Japanese/Korean
-hasCJKLanguage = false
+hasCJKLanguage = true
 # default amount of posts in each pages
 paginate = 12
 # copyright description used only for seo schema
-copyright = ""
+copyright = "Reverier-Xu"
 # whether to use robots.txt
 enableRobotsTXT = true
 # whether to use git commit log
@@ -90,16 +90,16 @@ enableEmoji = true
   # FixIt 0.2.15 | CHANGED FixIt theme version
   version = "0.2.X" # e.g. "0.2.X", "0.2.15", "v0.2.15" etc.
   # site description
-  description = ""
+  description = "Creating reality with idealism."
   # site keywords
-  keywords = ["Hugo", "FixIt"]
+  keywords = []
   # site default theme ["light", "dark", "auto"]
   defaultTheme = "auto"
   # public git repo url only then enableGitInfo is true
-  gitRepo = ""
+  gitRepo = "https://github.com/Reverier-Xu"
   # FixIt 0.1.1 | NEW which hash function used for SRI, when empty, no SRI is used
   # ["sha256", "sha384", "sha512", "md5"]
-  fingerprint = ""
+  fingerprint = "sha256"
   # FixIt 0.2.0 | NEW date format
   dateFormat = "2006-01-02"
   # website images for Open Graph and Twitter Cards
@@ -114,10 +114,10 @@ enableEmoji = true
 
   # Author Configuration
   [params.author]
-    name = ""
-    email = ""
-    link = ""
-    avatar = ""
+    name = "Reverier-Xu"
+    email = "reverier.xu@woooo.tech"
+    link = "https://blog.woooo.tech"
+    avatar = "/img/avatar.png"
 
   # FixIt 0.2.0 | NEW App icon config
   [params.app]
@@ -138,7 +138,7 @@ enableEmoji = true
 
   # FixIt 0.2.0 | NEW Search config
   [params.search]
-    enable = false
+    enable = true
     # type of search engine ["lunr", "algolia", "fuse"]
     type = "lunr"
     # max index length of the chunked content
@@ -178,15 +178,15 @@ enableEmoji = true
     # FixIt 0.2.0 | NEW Header title config
     [params.header.title]
       # URL of the LOGO
-      logo = "/fixit.min.svg"
+      logo = "/img/avatar.png"
       # title name
-      name = "My Hugo FixIt Site"
+      name = "Reverier's Blog"
       # you can add extra information before the name (HTML format is supported), such as icons
-      pre = ""
+      pre = "<span class=\"color: #0078D6;\">~/</span>"
       # you can add extra information after the name (HTML format is supported), such as icons
       post = ""
       # FixIt 0.2.5 | NEW whether to use typeit animation for title name
-      typeit = false
+      typeit = true
     # FixIt 0.2.12 | NEW Header subtitle config
     [params.header.subtitle]
       # subtitle name
@@ -197,8 +197,8 @@ enableEmoji = true
   # FixIt 0.2.18 | NEW Breadcrumb config
   [params.breadcrumb]
     enable = false
-    sticky = false
-    showHome = false
+    sticky = true
+    showHome = true
 
   # Footer config
   [params.footer]
@@ -207,28 +207,28 @@ enableEmoji = true
     # For advanced use, see parameter `params.customFilePath.footer`
     custom = ""
     # FixIt 0.2.0 | NEW whether to show Hugo and theme info
-    hugo = true
+    hugo = false
     # FixIt 0.2.0 | NEW whether to show copyright info
     copyright = true
     # FixIt 0.2.0 | NEW whether to show the author
     author = true
     # Site creation year
-    since = ""
+    since = "2019"
     # FixIt 0.2.14 | NEW whether to show total word count of site content
-    wordCount = true
+    wordCount = false
     # FixIt 0.2.12 | NEW Public network security only in China (HTML format is supported)
     gov = ""
     # ICP info only in China (HTML format is supported)
-    icp = ""
+    icp = "<a href=\"https://beian.miit.gov.cn/\">豫ICP备20023182号-2</a>"
     # license info (HTML format is supported)
     license = ""
     # FixIt 0.2.17 | CHANGED Site creation time
     [params.footer.siteTime]
       enable = false
-      animate = true
-      icon = "fa-solid fa-heartbeat"
+      animate = false
+      icon = ""
       pre = ""
-      value = "" # e.g. "2021-12-18T16:15:22+08:00"
+      value = "2019-08-18T16:15:22+08:00" # e.g. "2021-12-18T16:15:22+08:00"
     # FixIt 0.2.17 | NEW footer lines order, optional values: ["first", 0, 1, 2, 3, 4, 5, "last"]
     [params.footer.order]
       powered = 0
@@ -275,26 +275,26 @@ enableEmoji = true
     rss = 10
     # Home page profile
     [params.home.profile]
-      enable = false
+      enable = true
       # Gravatar Email for preferred avatar in home page
       gravatarEmail = ""
       # URL of avatar shown in home page
-      avatarURL = ""
+      avatarURL = "/img/avatar.png"
       # FixIt 0.2.17 | NEW identifier of avatar menu link
       avatarMenu = ""
       # FixIt 0.2.7 | CHANGED title shown in home page (HTML format is supported)
       title = ""
       # subtitle shown in home page
-      subtitle = ""
+      subtitle = "Idealism is that you will probably never receive something back<br> but nonetheless still decide to give."
       # whether to use typeit animation for subtitle
       typeit = true
       # whether to show social links
-      social = true
+      social = false
       # FixIt 0.2.0 | NEW disclaimer (HTML format is supported)
       disclaimer = ""
     # Home page posts
     [params.home.posts]
-      enable = true
+      enable = false
       # special amount of posts in each home posts page
       paginate = 6
 
@@ -414,12 +414,12 @@ enableEmoji = true
     # whether to show link to Raw Markdown content of the content
     linkToMarkdown = true
     # FixIt 0.2.4 | NEW whether to show the full text content in RSS
-    rssFullText = false
+    rssFullText = true
     # FixIt 0.2.13 | NEW Page style ["narrow", "normal", "wide", ...]
-    pageStyle = "normal"
+    pageStyle = "narrow"
     # FixIt 0.2.17 | CHANGED Auto Bookmark Support
     # If true, save the reading progress when closing the page.
-    autoBookmark = false
+    autoBookmark = true
     # FixIt 0.2.17 | NEW whether to enable wordCount
     wordCount = true
     # FixIt 0.2.17 | NEW whether to enable readingTime
@@ -442,10 +442,10 @@ enableEmoji = true
       # whether to make the table of the contents in the sidebar automatically collapsed
       auto = true
       # FixIt 0.2.13 | NEW position of TOC ["left", "right"]
-      position = "right"
+      position = "left"
     # FixIt 0.2.13 | NEW Display a message at the beginning of an article to warn the reader that its content might be expired
     [params.page.expirationReminder]
-      enable = false
+      enable = true
       # Display the reminder if the last modified time is more than 90 days ago
       reminder = 90
       # Display warning if the last modified time is more than 180 days ago
@@ -470,7 +470,7 @@ enableEmoji = true
       # whether to show the copy button of the code block
       copy = true
       # FixIt 0.2.13 | NEW whether to show the edit button of the code block
-      edit = true
+      edit = false
       # the maximum number of lines of displayed code by default
       maxShownLines = 10
     # FixIt 0.2.14 | NEW Post edit
@@ -512,9 +512,9 @@ enableEmoji = true
         # bitcoin = "/images/bitcoin.png"
     # FixIt 0.2.0 | CHANGED social share links in post page
     [params.page.share]
-      enable = true
-      Twitter = true
-      Facebook = true
+      enable = false
+      Twitter = false
+      Facebook = false
       Linkedin = false
       Whatsapp = false
       Pinterest = false
@@ -528,7 +528,7 @@ enableEmoji = true
       Instapaper = false
       Pocket = false
       Flipboard = false
-      Weibo = true
+      Weibo = false
       Myspace = false
       Blogger = false
       Baidu = false
@@ -571,11 +571,11 @@ enableEmoji = true
         shortname = ""
       # FixIt 0.1.1 | NEW Gitalk comment config (https://github.com/gitalk/gitalk)
       [params.page.comment.gitalk]
-        enable = false
-        owner = ""
-        repo = ""
-        clientId = ""
-        clientSecret = ""
+        enable = true
+        owner = "Reverier-Xu"
+        repo = "blog_comment"
+        clientId = "04e3a9c7b8514d2532ba"
+        clientSecret = "b55ad7dd220563faca25d9b74dc517fd309dafa9"
       # Valine comment config (https://github.com/xCss/Valine)
       [params.page.comment.valine]
         enable = false
@@ -702,7 +702,7 @@ enableEmoji = true
     # blinking speed of the cursor (measured in milliseconds)
     cursorSpeed = 1000
     # character used for the cursor (HTML format is supported)
-    cursorChar = "|"
+    cursorChar = "<span style=\"color: #0078D6;\">_</span>"
     # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
     duration = -1
     # FixIt 0.2.18 | NEW whether your strings will continuously loop after completing
@@ -716,7 +716,7 @@ enableEmoji = true
   # FixIt 0.2.12 | NEW PanguJS config
   [params.pangu]
     # For Chinese writing
-    enable = false
+    enable = true
     selector = "article" # FixIt 0.2.17 | NEW
 
   # FixIt 0.2.12 | NEW Watermark config
@@ -827,20 +827,20 @@ enableEmoji = true
 
   # FixIt 0.2.16 | NEW Reading progress bar
   [params.readingProgress]
-    enable = false
+    enable = true
     # Available values: ["left", "right"]
     start = "left"
     # Available values: ["top", "bottom"]
-    position = "top"
+    position = "bottom"
     reversed = false
-    light = ""
-    dark = ""
+    light = "#0078D6"
+    dark = "#0078D6"
     height = "2px"
   
   # FixIt 0.2.17 | NEW Progress bar in the top during page loading.
   # For more information: https://github.com/CodeByZach/pace
   [params.pace]
-    enable = false
+    enable = true
     # All available colors:
     # ["black", "blue", "green", "orange", "pink", "purple", "red", "silver", "white", "yellow"]
     color = "blue"
