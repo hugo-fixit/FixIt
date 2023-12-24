@@ -539,7 +539,7 @@ enableEmoji = true
       Mix = false
     # FixIt 0.2.15 | CHANGED Comment config
     [params.page.comment]
-      enable = false
+      enable = true
       # FixIt 0.2.13 | NEW Artalk comment config (https://artalk.js.org/)
       [params.page.comment.artalk]
         enable = false
@@ -571,7 +571,7 @@ enableEmoji = true
         shortname = ""
       # FixIt 0.1.1 | NEW Gitalk comment config (https://github.com/gitalk/gitalk)
       [params.page.comment.gitalk]
-        enable = true
+        enable = false
         owner = "Reverier-Xu"
         repo = "blog_comment"
         clientId = "04e3a9c7b8514d2532ba"
@@ -660,17 +660,17 @@ enableEmoji = true
         katex = false
       # FixIt 0.2.14 | NEW Giscus comments config
       [params.page.comment.giscus]
-        enable = false
-        repo = ""
-        repoId = ""
-        category = ""
-        categoryId = ""
-        mapping = ""
+        enable = true
+        repo = "Reverier-Xu/blog_comment"
+        repoId = "MDEwOlJlcG9zaXRvcnkyNTg3NzMwNzY="
+        category = "Announcements"
+        categoryId = "DIC_kwDOD2yQVM4Cb9wY"
+        mapping = "title"
         strict = "0" # FixIt NEW | 0.2.18
         term = ""
         reactionsEnabled = "1"
         emitMetadata = "0"
-        inputPosition = "bottom" # ["top", "bottom"]
+        inputPosition = "top" # ["top", "bottom"]
         lightTheme = "light"
         darkTheme = "dark"
         lazyLoad = true
