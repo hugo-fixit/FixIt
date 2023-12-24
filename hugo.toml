@@ -283,7 +283,7 @@ enableEmoji = true
       # FixIt 0.2.17 | NEW identifier of avatar menu link
       avatarMenu = ""
       # FixIt 0.2.7 | CHANGED title shown in home page (HTML format is supported)
-      title = ""
+      title = "Hi, I'm Reverier-Xu."
       # subtitle shown in home page
       subtitle = "Idealism is that you will probably never receive something back<br> but nonetheless still decide to give."
       # whether to use typeit animation for subtitle
@@ -783,7 +783,7 @@ enableEmoji = true
 
   # FixIt 0.2.7 | NEW Cookie consent config
   [params.cookieconsent]
-    enable = true
+    enable = false
     # text strings used for Cookie consent banner
     [params.cookieconsent.content]
       message = ""
