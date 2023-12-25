@@ -460,14 +460,6 @@ class FixIt {
     });
   }
 
-  initHeaderLink() {
-    for (let num = 1; num <= 6; num++) {
-      this.util.forEach(document.querySelectorAll('.single .content > h' + num), ($header) => {
-        $header.classList.add('header-link');
-        $header.insertAdjacentHTML('afterbegin', `<a href="#${$header.id}" class="header-mark"></a>`);
-      });
-    }
-  }
   /**
    * init table of contents
    */
@@ -502,7 +494,7 @@ class FixIt {
       $toc.style.marginTop = `${$postMeta.offsetTop + $postMeta.clientHeight}px`;
       const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
       const $tocLiElements = $tocCore.getElementsByTagName('li');
-      const $headerLinkElements = document.getElementsByClassName('header-link');
+      const $headingElements = document.getElementsByClassName('heading-element');
       const headerHeight = document.getElementById('header-desktop').offsetHeight;
       document.querySelector('.container').addEventListener('resize', () => {
         $toc.style.marginBottom = `${document.querySelector('.container').clientHeight - document.querySelector('.post-footer').offsetTop}px`;
@@ -516,10 +508,10 @@ class FixIt {
           $tocLi.classList.remove('has-active');
         });
         const INDEX_SPACING = 20 + (document.body.dataset.headerDesktop !== 'normal' ? headerHeight : 0) + this.breadcrumbHeight;
-        let activeTocIndex = $headerLinkElements.length - 1;
-        for (let i = 0; i < $headerLinkElements.length - 1; i++) {
-          const thisTop = $headerLinkElements[i].getBoundingClientRect().top;
-          const nextTop = $headerLinkElements[i + 1].getBoundingClientRect().top;
+        let activeTocIndex = $headingElements.length - 1;
+        for (let i = 0; i < $headingElements.length - 1; i++) {
+          const thisTop = $headingElements[i].getBoundingClientRect().top;
+          const nextTop = $headingElements[i + 1].getBoundingClientRect().top;
           if ((i == 0 && thisTop > INDEX_SPACING) || (thisTop <= INDEX_SPACING && nextTop > INDEX_SPACING)) {
             activeTocIndex = i;
             break;
@@ -930,7 +922,6 @@ class FixIt {
         this.initLightGallery();
         this.initHighlight();
         this.initTable();
-        this.initHeaderLink();
         this.initMath();
         this.initMermaid();
         this.initEcharts();
@@ -1158,7 +1149,6 @@ class FixIt {
         this.initLightGallery();
         this.initHighlight();
         this.initTable();
-        this.initHeaderLink();
         this.initMath();
         this.initMermaid();
         this.initEcharts();

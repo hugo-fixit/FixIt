@@ -1,0 +1,61 @@
+{{- /* Read the config and format */ -}}
+{{- $params := .Page.Scratch.Get "params" -}}
+{{- $h1Format := $params.heading.number.format.h1 | default "{title}" -}}
+{{- $h2Format := $params.heading.number.format.h2 | default "{h2} {title}" -}}
+{{- $h3Format := $params.heading.number.format.h3 | default "{h2}.{h3} {title}" -}}
+{{- $h4Format := $params.heading.number.format.h4 | default "{h2}.{h3}.{h4} {title}" -}}
+{{- $h5Format := $params.heading.number.format.h5 | default "{h2}.{h3}.{h4}.{h5} {title}" -}}
+{{- $h6Format := $params.heading.number.format.h6 | default "{h2}.{h3}.{h4}.{h5}.{h6} {title}" -}}
+
+{{- if $params.heading.number.enable -}}
+  {{- /* Set the count for child level to 0 */ -}}
+  {{- .Page.Scratch.SetInMap "heading-counter" (string (add .Level 1)) 0 -}}
+{{- end -}}
+
+<h{{ .Level }} id="{{ .Anchor | safeURL }}" class="heading-element">
+  <a href="#{{ .Anchor | safeURL }}" class="heading-mark"></a>
+
+  {{- if $params.heading.number.enable -}}
+    {{- /* Add 1 to the current level */ -}}
+    {{- $headingMap := .Page.Scratch.Get "heading-counter" -}}
+    {{- $count := (string .Level) | index $headingMap | int | add 1 -}}
+    {{- .Page.Scratch.SetInMap "heading-counter" (string .Level) $count -}}
+
+    {{- /* Get the counters for all levels */ -}}
+    {{- $h1 := "1" | index $headingMap | int | string -}}
+    {{- $h2 := "2" | index $headingMap | int | string -}}
+    {{- $h3 := "3" | index $headingMap | int | string -}}
+    {{- $h4 := "4" | index $headingMap | int | string -}}
+    {{- $h5 := "5" | index $headingMap | int | string -}}
+    {{- $h6 := "6" | index $headingMap | int | string -}}
+
+    {{- /* Apply the level based on the format */ -}}
+    {{- $title := "" -}}
+    {{- if .Level | eq 1 -}}
+      {{- $title = $h1Format -}}
+    {{- else if .Level | eq 2 -}}
+      {{- $title = $h2Format -}}
+    {{- else if .Level | eq 3 -}}
+      {{- $title = $h3Format -}}
+    {{- else if .Level | eq 4 -}}
+      {{- $title = $h4Format -}}
+    {{- else if .Level | eq 5 -}}
+      {{- $title = $h5Format -}}
+    {{- else if .Level | eq 6 -}}
+      {{- $title = $h6Format -}}
+    {{- end -}}
+
+    {{- $title = replace $title "{h1}" $h1 -}}
+    {{- $title = replace $title "{h2}" $h2 -}}
+    {{- $title = replace $title "{h3}" $h3 -}}
+    {{- $title = replace $title "{h4}" $h4 -}}
+    {{- $title = replace $title "{h5}" $h5 -}}
+    {{- $title = replace $title "{h6}" $h6 -}}
+    {{- $title = replace $title "{title}" .Text -}}
+    {{- $title | safeHTML -}}
+
+  {{- else -}}
+    {{- .Text | safeHTML -}}
+  {{- end -}}
+</h{{ .Level }}>
+{{- /* EOF */ -}}

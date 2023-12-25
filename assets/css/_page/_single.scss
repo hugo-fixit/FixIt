@@ -142,7 +142,7 @@
     > h4,
     > h5,
     > h6 {
-      > .header-mark::before {
+      > .heading-mark::before {
         content: '|';
         margin-right: 0.3125rem;
         color: $single-link-color;
@@ -153,7 +153,7 @@
       }
     }
 
-    > h2 > .header-mark::before {
+    > h2 > .heading-mark::before {
       content: '#';
     }
 

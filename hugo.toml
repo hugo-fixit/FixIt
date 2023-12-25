@@ -473,6 +473,18 @@ enableEmoji = true
       warning = 180
       # If the article expires, close the comment or not
       closeComment = false
+    # FixIt 0.3.0 | NEW page heading config
+    [params.page.heading]
+      [params.page.heading.number]
+        # whether to enable auto heading numbering
+        enable = false
+        [params.page.heading.number.format]
+          h1 = "{title}"
+          h2 = "{h2} {title}"
+          h3 = "{h2}.{h3} {title}"
+          h4 = "{h2}.{h3}.{h4} {title}"
+          h5 = "{h2}.{h3}.{h4}.{h5} {title}"
+          h6 = "{h2}.{h3}.{h4}.{h5}.{h6} {title}"
     # FixIt 0.2.16 | CHANGED KaTeX mathematical formulas (https://katex.org)
     [params.page.math]
       enable = true
