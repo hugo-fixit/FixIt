@@ -475,6 +475,7 @@ enableEmoji = true
       closeComment = false
     # FixIt 0.3.0 | NEW page heading config
     [params.page.heading]
+      # used with `markup.tableOfContents.ordered` parameter
       [params.page.heading.number]
         # whether to enable auto heading numbering
         enable = false
@@ -984,6 +985,7 @@ enableEmoji = true
       unsafe = true
   # Table Of Contents settings
   [markup.tableOfContents]
+    ordered = false
     startLevel = 2
     endLevel = 6
 
