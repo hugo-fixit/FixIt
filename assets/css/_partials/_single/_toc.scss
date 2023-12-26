@@ -33,7 +33,7 @@
 
     ol {
       margin: 0;
-      padding-left: 2.4rem;
+      padding-left: 2.25rem;
 
       ol {
         padding-left: 1.25rem;
@@ -81,7 +81,7 @@
   }
 
   .toc-title {
-    margin: 0.5rem 0;
+    margin-block: 0 0.5rem;
     cursor: pointer;
     @include user-select(none);
 
@@ -226,7 +226,7 @@
       
       > ol {
         margin: 0;
-        padding: 0.4rem 1rem 0.4rem 2.4rem;
+        padding: 0.4rem 1rem 0.4rem 2.25rem;
 
         li:has(> a:hover)::marker,
         a:hover {

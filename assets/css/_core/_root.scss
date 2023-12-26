@@ -11,4 +11,7 @@
 
   // Scroll margin top and Stack sticky top related
   --#{$prefix}scroll-mt: calc(#{$header-height} + #{$global-scroll-margin-top});
+
+  // Set breadcrumb height to 0px if breadcrumb is disabled
+  --#{$prefix}breadcrumb-height: 0px;
 }
