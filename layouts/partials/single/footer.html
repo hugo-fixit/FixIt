@@ -94,13 +94,15 @@
   </div>
 
   <div class="post-nav">
-    {{- with .Prev -}}
+    {{- $prev := cond .Site.Params.navigationReverse .Next .Prev -}}
+    {{- $next := cond .Site.Params.navigationReverse .Prev .Next -}}
+    {{- with $prev -}}
       <a href="{{ .RelPermalink }}" class="post-nav-item" rel="prev" title="{{ .LinkTitle }}">
         {{- dict "Class" "fa-solid fa-angle-left fa-fw" | partial "plugin/icon.html" -}}
         {{- .LinkTitle -}}
       </a>
     {{- end -}}
-    {{ with .Next }}
+    {{ with $next }}
       <a href="{{ .RelPermalink }}" class="post-nav-item" rel="next" title="{{ .LinkTitle }}">
         {{- .LinkTitle -}}
         {{- dict "Class" "fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
