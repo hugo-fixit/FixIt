@@ -4,7 +4,7 @@
 {{- if .Params.collections | and $params.collectionList -}}
   {{- $collectionTerms := .GetTerms "collections" -}}
   {{- range $collectionTerms -}}
-    {{- $pages := .Pages.ByDate -}}
+    {{- $pages := .Pages -}}
     {{- $open := eq (index $collectionTerms 0) . -}}
     {{- $currentKey := 0 -}}
 
@@ -22,7 +22,7 @@
           <ul class="collection-list">
             {{- range $key, $value := $pages -}}
               {{- if $value.LinkTitle | eq $.LinkTitle -}}
-                {{- $currentKey = $key | add 1 -}}
+                {{- $currentKey = $key -}}
                 <li class="collection-item"><span class="active" title="{{ $value.LinkTitle }}">{{ $value.LinkTitle }}</span></li>
               {{- else }}
                 <li class="collection-item"><a href="{{ $value.RelPermalink }}" title="{{ $value.LinkTitle }}">{{ $value.LinkTitle }}</a></li>
@@ -30,15 +30,15 @@
             {{- end -}}
           </ul>
           <div class="collection-nav-simple">
-            {{- with $pages.Next $ -}}
+            {{- with $pages.Prev $ -}}
               <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ .LinkTitle }}">
                 {{- dict "Class" "fa-solid fa-angle-left fa-fw" | partial "plugin/icon.html" -}}
               </a>
             {{- else -}}
               {{- dict "Class" "fa-solid fa-angle-left fa-fw collection-nav-item text-secondary" | partial "plugin/icon.html" -}}
             {{- end -}}
-            <span class="text-secondary">{{ $currentKey }}/{{ $pages.Len }}</span>
-            {{- with $pages.Prev $ -}}
+            <span class="text-secondary">{{ sub $pages.Len $currentKey }}/{{ $pages.Len }}</span>
+            {{- with $pages.Next $ -}}
               <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ .LinkTitle }}">
                 {{- dict "Class" "fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
               </a>
