@@ -9,14 +9,14 @@
     font-size: $toc-content-font-size;
 
     ul {
-      text-indent: -0.8rem;
-      padding-left: 0.8rem;
+      text-indent: -0.8em;
+      padding-left: 0.8em;
       list-style: none;
 
       a:first-child::before {
         content: '|';
         font-weight: bolder;
-        margin-right: 0.5rem;
+        margin-right: 0.5em;
         position: relative;
         bottom: 2px;
         color: $single-link-color;
@@ -27,16 +27,16 @@
       }
 
       ul {
-        padding-left: 1rem;
+        padding-left: 1em;
       }
     }
 
     ol {
       margin: 0;
-      padding-left: 2.25rem;
+      padding-left: 2.25em;
 
       ol {
-        padding-left: 1.25rem;
+        padding-left: 1.25em;
       }
 
       li:has(> a:hover)::marker {
@@ -81,14 +81,14 @@
   }
 
   .toc-title {
-    margin-block: 0 0.5rem;
+    margin-block: 0 0.5em;
     cursor: pointer;
     @include user-select(none);
 
     &::before {
       content: '|';
       font-weight: bolder;
-      margin-right: 0.5rem;
+      margin-right: 0.5em;
       position: relative;
       bottom: 2px;
       color: $global-border-color;
@@ -185,7 +185,7 @@
 
 #toc-static {
   display: none;
-  margin: 0.8rem 0;
+  margin: 0.8em 0;
 
   &[data-kept='true'] {
     display: block;
@@ -195,7 +195,7 @@
     display: flex;
     justify-content: space-between;
     line-height: 2em;
-    padding: 0 0.75rem;
+    padding: 0 0.75em;
     background: darken($code-background-color, 3%);
 
     [data-theme='dark'] & {
@@ -209,7 +209,7 @@
     > nav {
       > ul {
         margin: 0;
-        padding: 0.4rem 1rem 0.4rem 1.8rem;
+        padding: 0.4em 1em 0.4em 1.8em;
 
         a:hover {
           font-weight: bold;
@@ -226,7 +226,7 @@
       
       > ol {
         margin: 0;
-        padding: 0.4rem 1rem 0.4rem 2.25rem;
+        padding: 0.4em 1em 0.4em 2.25em;
 
         li:has(> a:hover)::marker,
         a:hover {

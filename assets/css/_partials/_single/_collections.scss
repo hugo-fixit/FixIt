@@ -112,8 +112,8 @@
   .collection-summary {
     display: flex;
     align-items: baseline;
-    gap: 0.25rem;
-    padding: 0.2rem 0.5rem;
+    gap: 0.25em;
+    padding: 0.2em 0.5em;
     background-color: darken($global-background-color, 3%);
 
     [data-theme='dark'] & {
@@ -155,9 +155,9 @@
 
     .collection-list {
       margin: 0;
-      padding-inline: 1.6rem 0.8rem;
-      padding-block: 0.4rem;
-      text-indent: -0.8rem;
+      padding-inline: 1.6em 0.8em;
+      padding-block: 0.4em;
+      text-indent: -0.8em;
       list-style: none;
       overflow-y: scroll;
       max-height: 60vh;
@@ -170,7 +170,7 @@
       .collection-item > span::before {
         content: '|';
         font-weight: 600;
-        margin-right: 0.5rem;
+        margin-right: 0.5em;
         position: relative;
         bottom: 2px;
         color: $single-link-color;
@@ -202,7 +202,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.5em;
       background-color: darken($global-background-color, 3%);
 
       [data-theme='dark'] & {
