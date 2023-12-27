@@ -1,6 +1,6 @@
 ---
 layout: offline
-description: '{{ T "offlineTitle" }} - {{ .Site.Title }}'
+description: '{{ T "offlineTitle" }} | {{ .Site.Title }}'
 keywords: 
   - PWA
   - {{ T "offlineTitle" }}

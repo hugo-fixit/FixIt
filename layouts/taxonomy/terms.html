@@ -1,5 +1,5 @@
 {{- define "title" -}}
-  {{- .Params.Title | default (T .Data.Plural) | default .Data.Plural | dict "Some" | T "allSome" }} - {{ .Site.Title -}}
+  {{- .Params.Title | default (T .Data.Plural) | default .Data.Plural | dict "Some" | T "allSome" }} | {{ .Site.Title -}}
 {{- end -}}
 
 {{- define "content" -}}
