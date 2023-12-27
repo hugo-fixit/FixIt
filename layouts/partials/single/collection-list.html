@@ -4,9 +4,7 @@
 {{- if .Params.collections | and $params.collectionList -}}
   {{- $collectionTerms := .GetTerms "collections" -}}
   {{- range $collectionTerms -}}
-    {{- $pages := .Pages -}}
-    {{- $prev := cond $.Site.Params.navigationReverse ($pages.Next $) ($pages.Prev $) -}}
-    {{- $next := cond $.Site.Params.navigationReverse ($pages.Prev $) ($pages.Next $) -}}
+    {{- $pages := (where .Pages "Params.Weight" "!=" nil) | append (where .Pages "Params.Weight" "eq" nil).ByDate -}}
     {{- $open := eq (index $collectionTerms 0) . -}}
     {{- $currentKey := 0 -}}
 
@@ -30,7 +28,7 @@
             {{- end -}}
           </ul>
           <div class="collection-nav-simple">
-            {{- with $prev -}}
+            {{- with $pages.Next $ -}}
               <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ .LinkTitle }}">
                 {{- dict "Class" "fa-solid fa-angle-left fa-fw" | partial "plugin/icon.html" -}}
               </a>
@@ -38,7 +36,7 @@
               {{- dict "Class" "fa-solid fa-angle-left fa-fw collection-nav-item text-secondary" | partial "plugin/icon.html" -}}
             {{- end -}}
             <span class="text-secondary">{{ add $currentKey 1 }}/{{ $pages.Len }}</span>
-            {{- with $next -}}
+            {{- with $pages.Prev $ -}}
               <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ .LinkTitle }}">
                 {{- dict "Class" "fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
               </a>

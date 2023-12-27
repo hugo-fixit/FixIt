@@ -12,18 +12,17 @@
     -}}
     <div class="collection-card">
       <div class="collection-title text-secondary">
-        {{ dict "Collections" $termLink | T "single.includedIn.collections" | safeHTML }} {{ .Pages.Len }}
+        {{- dict "Collections" $termLink | T "single.includedIn.collections" | safeHTML }} {{ .Pages.Len -}}
       </div>
       <div class="collection-nav">
-        {{- $prev := cond $.Site.Params.navigationReverse (.Pages.Next $) (.Pages.Prev $) -}}
-        {{- $next := cond $.Site.Params.navigationReverse (.Pages.Prev $) (.Pages.Next $) -}}
-        {{- with $prev -}}
+        {{- $pages := (where .Pages "Params.Weight" "!=" nil) | append (where .Pages "Params.Weight" "eq" nil).ByDate -}}
+        {{- with $pages.Next $ -}}
           <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ .LinkTitle }}">
             {{- dict "Class" "fa-solid fa-angle-left fa-fw" | partial "plugin/icon.html" -}}
             <span>{{- .LinkTitle -}}</span>
           </a>
         {{- end -}}
-        {{- with $next -}}
+        {{- with $pages.Prev $ -}}
           <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ .LinkTitle }}">
             <span>{{- .LinkTitle -}}</span>
             {{- dict "Class" "fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
