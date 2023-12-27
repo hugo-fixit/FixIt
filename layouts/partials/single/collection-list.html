@@ -39,7 +39,7 @@
             {{- else -}}
               {{- dict "Class" "fa-solid fa-angle-left fa-fw collection-nav-item text-secondary" | partial "plugin/icon.html" -}}
             {{- end -}}
-            <span class="text-secondary">{{ sub $pages.Len $currentKey }}/{{ $pages.Len }}</span>
+            <span class="text-secondary">{{ add $currentKey 1 }}/{{ $pages.Len }}</span>
             {{- with $next -}}
               <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ .LinkTitle }}">
                 {{- dict "Class" "fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
