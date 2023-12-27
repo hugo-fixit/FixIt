@@ -102,9 +102,10 @@ other = "Partager via"
 
 # === posts/single.html ===
 [single]
-contents= "Contenus"
-repost= "Reposter"
-publishedOnDate= "publié le {{ .Date }}"
+contents = "Contenus"
+pin = ""
+repost = "Reposter"
+publishedOnDate = "publié le {{ .Date }}"
 views = "vues"
 comments = "commentaires"
 author = "Auteur"

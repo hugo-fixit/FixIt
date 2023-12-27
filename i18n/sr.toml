@@ -103,9 +103,10 @@ other = "Подели на"
 
 # === posts/single.html ===
 [single]
-contents= "Садржаји"
-repost= ""
-publishedOnDate= "објављено {{ .Date }}"
+contents = "Садржаји"
+pin = ""
+repost = ""
+publishedOnDate = "објављено {{ .Date }}"
 views = "прегледа"
 comments = "коментари"
 author = "Аутор"

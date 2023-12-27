@@ -103,9 +103,10 @@ other = "Distribuie pe"
 
 # === posts/single.html ===
 [single]
-contents= "Cuprins"
-repost= ""
-publishedOnDate= "publicat la {{ .Date }}"
+contents = "Cuprins"
+pin = ""
+repost = ""
+publishedOnDate = "publicat la {{ .Date }}"
 views = "vizualizări"
 comments = "comentarii"
 author = "Autor"

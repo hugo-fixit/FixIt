@@ -15,7 +15,13 @@
         </h3>
         {{- range first 5 $pages -}}
           <article class="archive-item">
-            <a href="{{ .RelPermalink }}" class="archive-item-link">{{- .LinkTitle -}}</a>
+            <a href="{{ .RelPermalink }}" class="archive-item-link">
+              {{- $repost := .Params.repost | default dict -}}
+              {{- if eq $repost.enable true -}}
+                {{- dict "Class" "fa-solid fa-share fa-fw text-success me-1" | partial "plugin/icon.html" -}}
+              {{- end -}}
+              {{- .LinkTitle -}}
+            </a>
           </article>
         {{- end -}}
         {{- if gt (len $pages) 5 -}}

@@ -103,9 +103,10 @@ other = "Udostępnij na"
 
 # === posts/single.html ===
 [single]
-contents= "Spis treści"
-repost= ""
-publishedOnDate= "opublikowano {{ .Date }}"
+contents = "Spis treści"
+pin = ""
+repost = ""
+publishedOnDate = "opublikowano {{ .Date }}"
 views = "wyświetleń"
 comments = "komentarzy"
 author = "Autor"

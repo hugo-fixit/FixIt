@@ -19,7 +19,11 @@
 
   {{- /* Title */ -}}
   <h2 class="single-title" itemprop="name headline">
-    {{ $repost := $params.repost | default dict }}
+    {{- with $params.weight -}}
+      {{- $icon := dict "Class" "fa-solid fa-thumbtack fa-fw" -}}
+      <span title="{{ T "single.pin" }}" class="icon-pin">{{- $icon | partial "plugin/icon.html" -}}</span>
+    {{- end -}}
+    {{- $repost := $params.repost | default dict -}}
     {{- with $repost -}}
       {{- if eq .Enable true -}}
         {{- $icon := dict "Class" "fa-solid fa-share fa-fw" -}}

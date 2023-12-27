@@ -101,9 +101,10 @@ other = "分享到"
 
 # === posts/single.html ===
 [single]
-contents= "目录"
-repost= "转载"
-publishedOnDate= "发布于 {{ .Date }}"
+contents = "目录"
+pin = "置顶"
+repost = "转载"
+publishedOnDate = "发布于 {{ .Date }}"
 views = "次阅读"
 comments = "条评论"
 author = "作者"

@@ -30,19 +30,19 @@
 
 .ms-1,
 .mx-1 {
-  margin-left: 0.25rem !important;
+  margin-left: 0.25em !important;
 }
 .me-1,
 .mx-1 {
-  margin-right: 0.25rem !important;
+  margin-right: 0.25em !important;
 }
 .ps-1,
 .px-1 {
-  padding-left: 0.25rem !important;
+  padding-left: 0.25em !important;
 }
 .pe-1,
 .px-1 {
-  padding-right: 0.25rem !important;
+  padding-right: 0.25em !important;
 }
 
 @each $color, $value in $theme-colors {

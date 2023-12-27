@@ -103,6 +103,7 @@ other = "Share on"
 # === posts/single.html ===
 [single]
 contents = "Contents"
+pin = "Pin to top"
 repost = "Repost"
 publishedOnDate = "published on {{ .Date }}"
 views = "views"

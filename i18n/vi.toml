@@ -102,9 +102,10 @@ other = "Chia sẻ trên"
 
 # === posts/single.html ===
 [single]
-contents= "Nội dung"
-repost= ""
-publishedOnDate= "đăng ngày {{ .Date }}"
+contents = "Nội dung"
+pin = ""
+repost = ""
+publishedOnDate = "đăng ngày {{ .Date }}"
 views = "lượt xem"
 comments = "bình luận"
 author = "Tác giả"

@@ -10,15 +10,19 @@
     font-weight: bold;
     line-height: 140%;
 
-    .icon-repost {
-      color: var(--#{$prefix}success);
+    .icon-pin {
       display: inline-block;
       width: max-content;
-      margin-right: 0.25rem;
+      transform: rotate(30deg);
+      margin-right: 0.25em;
+      @extend .text-danger;
+    }
 
-      [data-theme='dark'] & {
-        color: var(--#{$prefix}success-dark);
-      }
+    .icon-repost {
+      display: inline-block;
+      width: max-content;
+      margin-right: 0.25em;
+      @extend .text-success;
     }
   }
 

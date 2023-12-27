@@ -101,9 +101,10 @@ other = "分享到"
 
 # === posts/single.html ===
 [single]
-contents= "目錄"
-repost= "轉貼"
-publishedOnDate= "發佈於 {{ .Date }}"
+contents = "目錄"
+pin = "置頂"
+repost = "轉貼"
+publishedOnDate = "發佈於 {{ .Date }}"
 views = "次閱讀"
 comments = "條評論"
 author = "作者"
