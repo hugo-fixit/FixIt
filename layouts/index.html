@@ -1,3 +1,10 @@
+{{- define "title" -}}
+  {{- .Site.Title -}}
+  {{- if .Site.Params.indexWithSubtitle | and .Site.Params.header.subtitle.name -}}
+    {{- printf " - %v" .Site.Params.header.subtitle.name -}}
+  {{- end -}}
+{{- end -}}
+
 {{- define "content" -}}
   {{- $params := .Scratch.Get "params" -}}
   {{- $profile := .Site.Params.home.profile -}}
