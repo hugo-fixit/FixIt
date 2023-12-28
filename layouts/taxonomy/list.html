@@ -1,5 +1,6 @@
 {{- define "title" -}}
-  {{- .Title }} - {{ T .Data.Singular | default .Data.Singular }} | {{ .Site.Title -}}
+  {{- .Title }} - {{ T .Data.Singular | default .Data.Singular -}}
+  {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
 {{- end -}}
 
 {{- define "content" -}}

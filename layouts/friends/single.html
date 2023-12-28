@@ -1,7 +1,10 @@
 {{- /* TODO remove this template */ -}}
 {{- warnf "The `type:friends` in front matter is deprecated. Use `layout:friends` instead.\n" -}}
 {{- warnf "Front matter 参数 `type:friends` 已弃用。请改用 `layout:friends`。" -}}
-{{- define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end -}}
+{{- define "title" -}}
+  {{- .Title -}}
+  {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
+{{ end -}}
 
 {{- define "content" -}}
 {{- $params := .Scratch.Get "params" -}}

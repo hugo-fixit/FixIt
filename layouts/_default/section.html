@@ -1,5 +1,6 @@
-{{- define "title" }}
-  {{- .Params.Title | default (T .Section) | default .Section | dict "Some" | T "allSome" }} | {{ .Site.Title -}}
+{{- define "title" -}}
+  {{- .Params.Title | default (T .Section) | default .Section | dict "Some" | T "allSome" -}}
+  {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
 {{- end -}}
 
 {{- define "content" -}}

@@ -1,4 +1,7 @@
-{{- define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end -}}
+{{- define "title" -}}
+  {{- .Title -}}
+  {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
+{{- end -}}
 
 {{- define "content" -}}
 {{- $params := .Scratch.Get "params" -}}

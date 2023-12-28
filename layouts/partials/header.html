@@ -17,13 +17,13 @@
             <span id="{{ $id }}" class="typeit"></span>
             {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
           {{- else -}}
-            <span class="header-title-text">{{- .name -}}</span>
+            <span class="header-title-text">{{ .name | default $.Site.Title }}</span>
           {{- end -}}
           {{- with .post -}}
             <span class="header-title-post">{{ . | safeHTML }}</span>
           {{- end -}}
         {{- else -}}
-          <span class="header-title-text">{{- .Site.Title -}}</span>
+          <span class="header-title-text">{{ .Site.Title }}</span>
         {{- end -}}
       </a>
       {{- with .Site.Params.header.subtitle -}}
@@ -32,7 +32,7 @@
           <span id="{{ $id }}" class="typeit header-subtitle"></span>
           {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
         {{- else -}}
-          <span class="header-subtitle">{{- .name -}}</span>
+          <span class="header-subtitle">{{ .name }}</span>
         {{- end -}}
       {{- end -}}
     </div>

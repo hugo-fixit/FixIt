@@ -2,7 +2,8 @@
 {{- warnf "The `type:offline` in front matter is deprecated. Use `layout:offline` instead.\n" -}}
 {{- warnf "Front matter 参数 `type:offline` 已弃用。请改用 `layout:offline`。" -}}
 {{- define "title" -}}
-  {{- T "offlineTitle" }} | {{ .Site.Title -}}
+  {{- T "offlineTitle" -}}
+  {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
 {{- end -}}
 
 {{- define "content" -}}

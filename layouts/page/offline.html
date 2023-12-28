@@ -1,5 +1,6 @@
 {{- define "title" -}}
-  {{- T "offlineTitle" }} | {{ .Site.Title -}}
+  {{- T "offlineTitle" -}}
+  {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
 {{- end -}}
 
 {{- define "content" -}}

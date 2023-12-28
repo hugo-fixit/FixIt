@@ -1,7 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
     <title>
-      {{- .Title }} - {{ T .Data.Singular | default .Data.Singular }} | {{ .Site.Title -}}
+      {{- .Title }} - {{ T .Data.Singular | default .Data.Singular -}}
+      {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
     </title>
     <link>
       {{- .Permalink -}}

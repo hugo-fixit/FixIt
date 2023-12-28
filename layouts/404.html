@@ -1,5 +1,6 @@
 {{- define "title" -}}
-  {{- T "pageNotFound" | printf "404 %v" }} | {{ .Site.Title -}}
+  {{- T "pageNotFound" | printf "404 %v" -}}
+  {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
 {{- end -}}
 
 {{- define "content" -}}
