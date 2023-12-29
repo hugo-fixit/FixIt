@@ -21,6 +21,7 @@ noscript = "FixIt 主題在啟用 JavaScript 的情況下效果最佳。"
 # === Taxonomy ===
 [archives]
 other = "歸檔"
+
 [allSome]
 other = "所有{{ .Some }}"
 
