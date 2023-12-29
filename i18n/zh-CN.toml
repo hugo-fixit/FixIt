@@ -19,6 +19,9 @@ noscript = "FixIt 主题在启用 JavaScript 的情况下效果最佳。"
 # === baseof ===
 
 # === Taxonomy ===
+[archives]
+other = "归档"
+
 [allSome]
 other = "所有{{ .Some }}"
 

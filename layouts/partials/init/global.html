@@ -4,3 +4,8 @@
 {{- $customFilePath = dict "profile" ($customFilePath.profile | default "custom/profile.html") | merge $customFilePath -}}
 {{- $customFilePath = dict "footer" ($customFilePath.footer | default "custom/footer.html") | merge $customFilePath -}}
 {{- .Scratch.Set "customFilePath" $customFilePath -}}
+
+{{- /* Set site home relative permalink */ -}}
+{{- $homeRelPermalink := .Site.Home.RelPermalink -}}
+{{- $homeRelPermalink = strings.TrimSuffix "archives/" $homeRelPermalink -}}
+{{- .Scratch.Set "homeRelPermalink" $homeRelPermalink -}}

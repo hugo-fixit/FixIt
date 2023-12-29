@@ -11,19 +11,19 @@
     {{- $termIcon := "" -}}
     {{- $termTitle := .Title -}}
     {{- if eq $taxonomy "category" -}}
-      {{- $termIcon = "fa-regular fa-folder-open fa-fw" -}}
+      {{- $termIcon = "fa-regular fa-folder-open" -}}
     {{- else if eq $taxonomy "tag" -}}
-      {{- $termIcon = "fa-solid fa-tag fa-fw" -}}
+      {{- $termIcon = "fa-solid fa-tag" -}}
     {{- else if eq $taxonomy "collection" -}}
-      {{- $termIcon = "fa-solid fa-layer-group fa-fw" -}}
+      {{- $termIcon = "fa-solid fa-layer-group" -}}
     {{- else -}}
       {{- $termTitle = printf "%v - %v" (T $taxonomy | default $taxonomy) .Title -}}
     {{- end -}}
     <h2 class="single-title animate__animated animate__pulse animate__faster">
       {{- with $termIcon -}}
-        {{- dict "Class" . | partial "plugin/icon.html" }}
-      {{ end -}}
-      {{ $termTitle }}&nbsp;<sup>{{- $pageCount -}}</sup>
+        {{- dict "Class" (add . " fa-fw me-1") | partial "plugin/icon.html" -}}
+      {{- end -}}
+      {{- $termTitle }} <sup>{{ $pageCount }}</sup>
     </h2>
 
     {{- /* Paginate */ -}}

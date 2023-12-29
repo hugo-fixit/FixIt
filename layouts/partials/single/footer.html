@@ -89,7 +89,7 @@
       {{- end -}}
     </section>
     <section>
-      <span><a href="javascript:void(0);" onclick="window.history.back();">{{ T "single.back" }}</a></span>&nbsp;|&nbsp;<span><a href="{{ .Site.Home.RelPermalink }}">{{ T "single.home" }}</a></span>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">{{ T "single.back" }}</a></span>&nbsp;|&nbsp;<span><a href="{{ .Scratch.Get "homeRelPermalink" }}">{{ T "single.home" }}</a></span>
     </section>
   </div>
 
