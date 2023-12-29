@@ -225,6 +225,14 @@ enableEmoji = true
     mediaType = "text/plain"
     isPlainText = true
     isHTML = false
+  # FixIt 0.3.0 | NEW Options to make output /archives/index.html file
+  [archives]
+    path = "archives"
+    baseName = "index"
+    mediaType = "text/html"
+    isPlainText = false
+    isHTML = true
+    permalinkable = true
 
 # -------------------------------------------------------------------------------------
 # Customizing Output Formats
@@ -232,7 +240,7 @@ enableEmoji = true
 # -------------------------------------------------------------------------------------
 
 [outputs]
-  home = ["HTML", "RSS", "JSON", "BaiduUrls"]
+  home = ["HTML", "RSS", "JSON", "BaiduUrls", "archives"]
   page = ["HTML", "MarkDown"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML"]
