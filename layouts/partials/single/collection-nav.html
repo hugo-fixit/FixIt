@@ -12,7 +12,7 @@
     -}}
     <div class="collection-card">
       <div class="collection-title text-secondary">
-        {{- dict "Collections" $termLink | T "single.includedIn.collections" | safeHTML }} {{ .Pages.Len -}}
+        {{- dict "Collections" $termLink | T "single.includedIn.collections" | strings.FirstUpper | safeHTML }} {{ .Pages.Len -}}
       </div>
       <div class="collection-nav">
         {{- $pages := (where .Pages "Params.Weight" "!=" nil) | append (where .Pages "Params.Weight" "eq" nil).ByDate -}}
