@@ -8,7 +8,7 @@
   {{- $toc := .Scratch.Get "toc" -}}
   {{- $tocEmpty := eq .TableOfContents `<nav id="TableOfContents"></nav>` -}}
 
-  <aside class="aside-collection" aria-label="{{ T "collections" }}">
+  <aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="{{ T "collections" }}">
     {{- /* Collection List */ -}}
     {{- partial "single/collection-list.html" . -}}
      {{- /* Custom part for aside */ -}}
