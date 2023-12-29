@@ -1,7 +1,7 @@
 {{- /* Collection List */ -}}
 {{- $params := .Scratch.Get "params" -}}
 
-{{- if .Params.collections | and $params.collectionList -}}
+{{- if .Params.collections | and $params.collectionList | and (not $params.password) -}}
   {{- $collectionTerms := .GetTerms "collections" -}}
   {{- range $collectionTerms -}}
     {{- $pages := (where .Pages "Params.Weight" "!=" nil) | append (where .Pages "Params.Weight" "eq" nil).ByDate -}}

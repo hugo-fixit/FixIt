@@ -1,7 +1,7 @@
 {{- /* Collection Navigation */ -}}
 {{- $params := .Scratch.Get "params" -}}
 
-{{- if .Params.collections | and $params.collectionNavigation -}}
+{{- if .Params.collections | and $params.collectionNavigation | and (not $params.password) -}}
   {{- $collectionTerms := .GetTerms "collections" -}}
   {{- range $collectionTerms -}}
     {{- $termLink := printf `<a href="%v">%v <span>%v・%v</span></span></a>`

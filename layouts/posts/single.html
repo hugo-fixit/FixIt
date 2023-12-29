@@ -148,7 +148,7 @@
 
     {{- /* Static TOC */ -}}
     {{- if (ne $toc.enable false) | and (ne $tocEmpty true) -}}
-      <div class="details toc{{ with $params.password }} d-none{{ end }}" id="toc-static" data-kept="{{ if $toc.keepStatic }}true{{ else }}false{{ end }}">
+      <div class="details toc{{ with $params.password }} encrypted-hidden{{ end }}" id="toc-static" data-kept="{{ if $toc.keepStatic }}true{{ else }}false{{ end }}">
         <div class="details-summary toc-title">
           <span>{{ T "single.contents" }}</span>
           <span>{{ dict "Class" "details-icon fa-solid fa-angle-right" | partial "plugin/icon.html" }}</span>
@@ -180,8 +180,6 @@
         {{- /* Expiration Reminder */ -}}
         {{- partial "single/expiration-reminder.html" . -}}
         {{- $content -}}
-      {{- else -}}
-        {{- partial "single/fixit-decryptor.html" . -}}
       {{- end -}}
     </div>
 
@@ -196,6 +194,9 @@
 
     {{- /* Collection Navigation */ -}}
     {{- partial "single/collection-nav.html" . -}}
+
+    {{- /* FixIt Decryptor */ -}}
+    {{- partial "single/fixit-decryptor.html" . -}}
 
     {{- /* Footer */ -}}
     {{- partial "single/footer.html" . -}}
@@ -212,11 +213,11 @@
   <aside class="toc" id="toc-auto" aria-label="{{ T "single.contents" }}">
     {{- /* Auto TOC */ -}}
     {{- if (ne $toc.enable false) | and (ne $tocEmpty true) -}}
-      <h2 class="toc-title{{ with $params.password }} d-none{{ end }}">
+      <h2 class="toc-title{{ with $params.password }} encrypted-hidden{{ end }}">
         {{- T "single.contents" -}}&nbsp;
         {{- dict "Class" "toc-icon fa-solid fa-angle-down fa-fw" | partial "plugin/icon.html" -}}
       </h2>
-      <div class="toc-content{{ if eq $toc.auto false }} always-active{{ end }}{{ with $params.password }} d-none{{ end }}" id="toc-content-auto"></div>
+      <div class="toc-content{{ if eq $toc.auto false }} always-active{{ end }}{{ with $params.password }} encrypted-hidden{{ end }}" id="toc-content-auto"></div>
     {{- end -}}
   </aside>
 {{- end -}}

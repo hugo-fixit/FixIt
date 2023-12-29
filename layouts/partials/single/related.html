@@ -2,7 +2,7 @@
 {{- /* https://gohugo.io/content-management/related/ */ -}}
 {{- $params := .Scratch.Get "params" -}}
 
-{{- if $params.related.enable -}}
+{{- if $params.related.enable | and (not $params.password) -}}
   {{- $posts := where .Site.RegularPages "Type" "posts" -}}
   {{- if .Site.Params.page.hiddenFromRelated -}}
     {{- $posts = where $posts "Params.hiddenfromrelated" false -}}

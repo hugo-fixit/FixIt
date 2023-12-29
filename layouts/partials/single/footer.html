@@ -33,49 +33,53 @@
           {{- end -}}
         </span>
       </div>
-      {{- with $params.license | string -}}
-        <div class="post-info-license{{ with $params.password }} d-none{{ end }}">
-          <span>{{- . | safeHTML -}} </span>
-        </div>
+      {{- if not $params.password -}}
+        {{- with $params.license | string -}}
+          <div class="post-info-license">
+            <span>{{ . | safeHTML }}</span>
+          </div>
+        {{- end -}}
       {{- end -}}
     </div>
-    <div class="post-info-line{{ with $params.password }} d-none{{ end }}">
-      <div class="post-info-md">
-        {{- $linkOptions := slice -}}
-        {{- if $params.LinkToMarkdown -}}
-          {{- with .OutputFormats.Get "markdown" -}}
-            {{- $options := dict "Class" "link-to-markdown" "Destination" .RelPermalink "Title" (T "single.readMarkdown") "Content" (T "single.readMarkdown") "externalIcon" false -}}
+    {{- if not $params.password -}}
+      <div class="post-info-line">
+        <div class="post-info-md">
+          {{- $linkOptions := slice -}}
+          {{- if $params.LinkToMarkdown -}}
+            {{- with .OutputFormats.Get "markdown" -}}
+              {{- $options := dict "Class" "link-to-markdown" "Destination" .RelPermalink "Title" (T "single.readMarkdown") "Content" (T "single.readMarkdown") "externalIcon" false -}}
+              {{- $linkOptions = $linkOptions | append $options -}}
+            {{- end -}}
+          {{- end -}}
+          {{- if $params.LinkToSource | and $gitRepo -}}
+            {{- $link := replace $blobURL "{path}" $.File.Path -}}
+            {{- $sourceURL = add $link "?plain=1" -}}
+            {{- $options := dict "Class" "link-to-source" "Destination" $sourceURL "Title" (T "single.viewSource") "Content" (T "single.viewSource") "externalIcon" false -}}
             {{- $linkOptions = $linkOptions | append $options -}}
           {{- end -}}
-        {{- end -}}
-        {{- if $params.LinkToSource | and $gitRepo -}}
-          {{- $link := replace $blobURL "{path}" $.File.Path -}}
-          {{- $sourceURL = add $link "?plain=1" -}}
-          {{- $options := dict "Class" "link-to-source" "Destination" $sourceURL "Title" (T "single.viewSource") "Content" (T "single.viewSource") "externalIcon" false -}}
-          {{- $linkOptions = $linkOptions | append $options -}}
-        {{- end -}}
-        {{- if $params.LinkToEdit | and $gitRepo -}}
-          {{- $link := replace $editURL "{path}" $.File.Path -}}
-          {{- $options := dict "Class" "link-to-edit" "Destination" $link "Title" (T "single.editThisPage") "Content" (T "single.editThisPage") "externalIcon" false -}}
-          {{- $linkOptions = $linkOptions | append $options -}}
-        {{- end -}}
-        {{- if $params.LinkToReport | and $gitRepo -}}
-          {{- $link := replace $reportURL "{title}" ($.Title | urlquery) -}}
-          {{- $link = replace $link "{URL}" $.Permalink -}}
-          {{- $link = replace $link "{sourceURL}" $sourceURL -}}
-          {{- $options := dict "Class" "link-to-report" "Destination" $link "Title" (T "single.reportIssue") "Content" (T "single.reportIssue") "externalIcon" false -}}
-          {{- $linkOptions = $linkOptions | append $options -}}
-        {{- end -}}
-        {{- range $linkOptions -}}
-          <span>{{ partial "plugin/link.html" . }}</span>
-        {{- end -}}
+          {{- if $params.LinkToEdit | and $gitRepo -}}
+            {{- $link := replace $editURL "{path}" $.File.Path -}}
+            {{- $options := dict "Class" "link-to-edit" "Destination" $link "Title" (T "single.editThisPage") "Content" (T "single.editThisPage") "externalIcon" false -}}
+            {{- $linkOptions = $linkOptions | append $options -}}
+          {{- end -}}
+          {{- if $params.LinkToReport | and $gitRepo -}}
+            {{- $link := replace $reportURL "{title}" ($.Title | urlquery) -}}
+            {{- $link = replace $link "{URL}" $.Permalink -}}
+            {{- $link = replace $link "{sourceURL}" $sourceURL -}}
+            {{- $options := dict "Class" "link-to-report" "Destination" $link "Title" (T "single.reportIssue") "Content" (T "single.reportIssue") "externalIcon" false -}}
+            {{- $linkOptions = $linkOptions | append $options -}}
+          {{- end -}}
+          {{- range $linkOptions -}}
+            <span>{{ partial "plugin/link.html" . }}</span>
+          {{- end -}}
+        </div>
+        <div class="post-info-share">
+          <span>
+            {{- partial "plugin/share.html" . -}}
+          </span>
+        </div>
       </div>
-      <div class="post-info-share">
-        <span>
-          {{- partial "plugin/share.html" . -}}
-        </span>
-      </div>
-    </div>
+    {{- end -}}
   </div>
 
   <div class="post-info-more">

@@ -914,7 +914,6 @@ class FixIt {
   }
 
   initFixItDecryptor() {
-    const $tocNodes = document.querySelectorAll('#toc-auto>.d-none, #toc-static.d-none');
     this.decryptor = new FixItDecryptor({
       decrypted: () => {
         this.initTwemoji();
@@ -927,16 +926,16 @@ class FixIt {
         this.initEcharts();
         this.initTypeit();
         this.initMapbox();
-        this.util.forEach($tocNodes, ($element) => {
-          $element.classList.remove('d-none');
+        this.util.forEach(document.querySelectorAll('.encrypted-hidden'), ($element) => {
+          $element.classList.replace('encrypted-hidden', 'decrypted-shown');
         });
         this.initToc();
         this.initTocListener();
         this.initPangu();
       },
       reset: () => {
-        this.util.forEach($tocNodes, ($element) => {
-          $element.classList.add('d-none');
+        this.util.forEach(document.querySelectorAll('.decrypted-shown'), ($element) => {
+          $element.classList.replace('decrypted-shown', 'encrypted-hidden');
         });
       }
     });
