@@ -10,7 +10,10 @@
       {{- if ne .Lastmod.Unix .Date.Unix }}
         {{- $postCount = add $postCount 1 -}}
         {{- if eq $hasTitle false -}}
-          <h2 class="group-title">{{- T "section.recentlyUpdated" -}}</h2>
+          <h2 class="group-title">
+            {{- dict "Class" "fa-regular fa-calendar-check fa-fw me-1" | partial "plugin/icon.html" -}}
+            {{- T "section.recentlyUpdated" -}}
+          </h2>
           {{- $hasTitle = true -}}
         {{- end -}}
         <article class="archive-item">

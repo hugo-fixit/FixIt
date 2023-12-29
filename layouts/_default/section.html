@@ -8,6 +8,7 @@
     <div class="header">
       {{- /* Title */ -}}
       <h1 class="single-title animate__animated animate__pulse animate__faster">
+        {{- dict "Class" "fa-solid fa-feather fa-fw me-1" | partial "plugin/icon.html" -}}
         {{- .Params.Title | default (T .Section) | default .Section | dict "Some" | T "allSome" }} <sup>{{ .Pages.Len }}</sup>
       </h1>
       {{- /* Total word count */ -}}
@@ -37,7 +38,10 @@
       {{- end -}}
       {{- partial "recently-updated.html" . -}}
       {{- range $pages.PageGroups -}}
-        <h2 class="group-title">{{ .Key }}</h2>
+        <h2 class="group-title">
+          {{- dict "Class" "fa-regular fa-calendar fa-fw me-1" | partial "plugin/icon.html" -}}
+          {{- .Key -}}
+        </h2>
         {{- range .Pages -}}
           <article class="archive-item">
             <a href="{{ .RelPermalink }}" class="archive-item-link">
