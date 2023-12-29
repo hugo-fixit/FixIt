@@ -1,5 +1,5 @@
 {{- $msg := (.Scratch.Get "params").message | default (T "single.encryptedMessage") -}}
-{{- $loading := resources.Get "svg/loading.svg" | minify -}}
+{{- $loading := resources.Get "images/loading.svg" | minify -}}
 
 <div class="fixit-decryptor-container">
   <img class="fixit-decryptor-loading" src="{{ $loading.RelPermalink }}" alt="decryptor loading" />

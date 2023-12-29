@@ -79,7 +79,7 @@
   {{- $commonScript := "this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}" -}}
   {{- $onload = printf " onload=\"%vthis.dataset.lazyloaded='';\"" $commonScript | safeHTMLAttr -}}
   {{- $onerror = printf " onerror=\"%v\"" $commonScript | safeHTMLAttr -}}
-  {{- $style = printf " style=\"%vbackground: url(%v) no-repeat center;\"" $style (resources.Get "svg/loading.svg" | minify).RelPermalink | safeHTMLAttr -}}
+  {{- $style = printf " style=\"%vbackground: url(%v) no-repeat center;\"" $style (resources.Get "images/loading.svg" | minify).RelPermalink | safeHTMLAttr -}}
 {{- end -}}
 
 {{- /* structure of lightgallery or img */ -}}

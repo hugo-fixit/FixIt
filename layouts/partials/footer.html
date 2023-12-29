@@ -12,11 +12,11 @@
           {{- $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo %v">{hugoLogo}Hugo</a>` hugo.Version -}}
           {{- $theme := printf `<a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt %v">{themeLogo}FixIt</a>` (.Scratch.Get "version") -}}
           {{- if $footerConfig.powered.hugoLogo -}}
-          {{- $hugoLogo := printf `<img class="hugo-icon" src="%v" alt="Hugo logo" /> ` (resources.Get "svg/hugo.svg" | minify).RelPermalink -}}
+          {{- $hugoLogo := printf `<img class="hugo-icon" src="%v" alt="Hugo logo" /> ` (resources.Get "images/hugo.svg" | minify).RelPermalink -}}
             {{- $hugo = replace $hugo "{hugoLogo}" $hugoLogo -}}
           {{- end -}}
           {{- if $footerConfig.powered.themeLogo -}}
-            {{- $themeLogo := printf `<img class="fixit-icon" src="%v" alt="FixIt logo" /> ` (resources.Get "svg/fixit.svg" | minify).RelPermalink -}}
+            {{- $themeLogo := printf `<img class="fixit-icon" src="%v" alt="FixIt logo" /> ` (resources.Get "images/fixit.svg" | minify).RelPermalink -}}
             {{- $theme = replace $theme "{themeLogo}" $themeLogo -}}
           {{- end -}}
           {{- $hugo = replace $hugo "{hugoLogo}" "" -}}

@@ -562,7 +562,7 @@ csdn:
   Prefix: https://blog.csdn.net/
   Title: CSDN
   Icon:
-    Src: svg/icons/csdn.svg
+    Src: images/icons/csdn.svg
 
 # 072: Discord User Profile
 discord:
@@ -615,7 +615,7 @@ plume:
   Weight: 78
   Title: Plume
   Icon:
-    Src: svg/icons/plume.svg
+    Src: images/icons/plume.svg
 
 # 079: Hack The Box
 hackthebox:
@@ -631,7 +631,7 @@ rootme:
   Title: Root-Me
   Prefix: https://www.root-me.org/
   Icon:
-    Src: svg/icons/rootme.svg
+    Src: images/icons/rootme.svg
 
 # 081: Feishu
 feishu:
