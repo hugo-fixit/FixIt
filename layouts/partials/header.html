@@ -1,10 +1,11 @@
 {{- $buildDrafts := .Site.BuildDrafts -}}
+{{- $homeRelPermalink := .Scratch.Get "homeRelPermalink" -}}
 
 {{- /* Desktop header */ -}}
 <header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper"{{ if .Site.Params.githubCorner.enable }} data-github-corner="{{ .Site.Params.githubCorner.position }}"{{ end }}>
     <div class="header-title">
-      <a href="{{ .Site.Home.RelPermalink }}" title="{{ .Site.Title }}">
+      <a href="{{ $homeRelPermalink }}" title="{{ .Site.Title }}">
         {{- with .Site.Params.header.title -}}
           {{- with .logo -}}
             {{- dict "Src" . "Class" "logo" "Alt" $.Site.Title | partial "plugin/image.html" -}}
@@ -154,7 +155,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="{{ .Site.Home.RelPermalink }}" title="{{ .Site.Title }}">
+        <a href="{{ $homeRelPermalink }}" title="{{ .Site.Title }}">
           {{- with .Site.Params.header.title -}}
             {{- with .logo -}}
               {{- dict "Src" . "Class" "logo" | partial "plugin/image.html" -}}
@@ -167,13 +168,13 @@
               <span id="{{ $id }}" class="typeit"></span>
               {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
             {{- else -}}
-              <span class="header-title-text">{{- .name -}}</span>
+              <span class="header-title-text">{{ .name | default $.Site.Title }}</span>
             {{- end -}}
             {{- with .post -}}
               <span class="header-title-post">{{ . | safeHTML }}</span>
             {{- end -}}
           {{- else -}}
-            <span class="header-title-text">{{- .Site.Title -}}</span>
+            <span class="header-title-text">{{ .Site.Title }}</span>
           {{- end -}}
         </a>
         {{- with .Site.Params.header.subtitle -}}
