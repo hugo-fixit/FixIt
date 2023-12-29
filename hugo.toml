@@ -400,22 +400,23 @@ enableEmoji = true
     # FixIt 0.2.17 | CHANGED Custom content (HTML format is supported)
     # For advanced use, see parameter `params.customFilePath.footer`
     custom = ""
-    # whether to show Hugo and theme info
-    hugo = true
     # whether to show copyright info
     copyright = true
     # whether to show the author
     author = true
     # Site creation year
     since = ""
-    # FixIt 0.2.14 | NEW whether to show total word count of site content
-    wordCount = true
     # FixIt 0.2.12 | NEW Public network security only in China (HTML format is supported)
     gov = ""
     # ICP info only in China (HTML format is supported)
     icp = ""
     # license info (HTML format is supported)
     license = ""
+    # FixIt 0.3.0 | NEW whether to show Hugo and theme info
+    [params.footer.powered]
+      enable = true
+      hugoLogo = true
+      themeLogo = true
     # FixIt 0.2.17 | CHANGED Site creation time
     [params.footer.siteTime]
       enable = false
