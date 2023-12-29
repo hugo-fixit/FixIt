@@ -9,8 +9,8 @@
       <div class="card-item-wrapper">
         <h3 class="card-item-title">
           <a href='{{ partial "function/escapeurl.html" .RelPermalink }}'>
-            {{ dict "Class" "fa-solid fa-layer-group fa-fw" | partial "plugin/icon.html" }}
-            {{ .Page.Title }}&nbsp;<sup>{{- len $pages -}}</sup>
+            {{- dict "Class" "fa-solid fa-layer-group fa-fw me-1" | partial "plugin/icon.html" -}}
+            {{- .Page.Title }} <sup>{{ len $pages }}</sup>
           </a>
         </h3>
         {{- range first 5 $pages -}}

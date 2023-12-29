@@ -18,6 +18,9 @@ noscript = "Theme FixIt works best with JavaScript enabled."
 # === baseof ===
 
 # === Taxonomy ===
+[archives]
+other = "Archives"
+
 [allSome]
 other = "All {{ .Some }}"
 

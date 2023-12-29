@@ -423,15 +423,23 @@ enableEmoji = true
       visitor = 0
       beian = 0
 
-  # Section (all posts) page config
+  # FixIt 0.3.0 | NEW Archives page config (all pages of posts type)
+  [params.archives]
+    # special amount of posts in archives page
+    paginate = 20
+    # date format (month and day)
+    dateFormat = "01-02"
+
+  # Section page config (all pages in section)
   [params.section]
-    # special amount of posts in each section page
+    # special amount of pages in each section page
     paginate = 20
     # date format (month and day)
     dateFormat = "01-02"
     # amount of RSS pages
     rss = 10
-    # FixIt 0.2.13 | NEW recently updated posts settings
+    # FixIt 0.2.13 | NEW recently updated pages config
+    # TODO refactor to support archives, section, taxonomy and term
     [params.section.recentlyUpdated]
       enable = false
       rss = false

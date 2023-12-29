@@ -9,8 +9,7 @@
   <div class="page archive">
     {{- /* Title */ -}}
     <h2 class="single-title animate__animated animate__pulse animate__faster">
-      {{- .Params.Title | default (T $taxonomies) | default $taxonomies | dict "Some" | T "allSome" }}
-      <sup>{{- len .Data.Terms.ByCount -}}</sup>
+      {{- .Params.Title | default (T $taxonomies) | default $taxonomies | dict "Some" | T "allSome" }} <sup>{{ len .Data.Terms.ByCount }}</sup>
     </h2>
     {{- /* Render miscellaneous terms */ -}}
     {{- .Render (add "terms/" $taxonomies) -}}
