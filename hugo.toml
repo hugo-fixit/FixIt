@@ -122,19 +122,19 @@ enableEmoji = true
   # FixIt 0.2.0 | NEW App icon config
   [params.app]
     # optional site title override for the app when added to an iOS home screen or Android launcher
-    title = "FixIt"
+    title = "Reverier's Blog"
     # whether to omit favicon resource links
     noFavicon = false
     # modern SVG favicon to use in place of older style .png and .ico files
     svgFavicon = ""
     # Safari mask icon color
-    iconColor = "#5bbad5"
+    iconColor = "#0078D6"
     # Windows v8-10 tile color
-    tileColor = "#da532c"
+    tileColor = "#0078D6"
     # FixIt 0.2.12 | CHANGED Android browser theme color
     [params.app.themeColor]
-      light = "#f8f8f8"
-      dark = "#252627"
+      light = "#0078D6"
+      dark = "#0078D6"
 
   # FixIt 0.2.0 | NEW Search config
   [params.search]
@@ -196,7 +196,7 @@ enableEmoji = true
 
   # FixIt 0.2.18 | NEW Breadcrumb config
   [params.breadcrumb]
-    enable = false
+    enable = true
     sticky = true
     showHome = true
 
