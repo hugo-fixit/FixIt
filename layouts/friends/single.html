@@ -22,7 +22,7 @@
       {{ range $index, $friend := .Site.Data.friends }}
         <a class="friend-link" title="{{ $friend.description }}" href="{{ $friend.url | safeURL }}" rel="external noopener noreferrer" target="_blank">
           {{ if $friend.avatar }}
-            {{- dict "Src" $friend.avatar "Alt" $friend.nickname "Class" "friend-avatar" "Resources" $.Resources "Params" $.Params | partial "plugin/image.html" -}}
+            {{- dict "Src" $friend.avatar "Alt" $friend.nickname "Class" "friend-avatar" "Resources" $.Resources | partial "plugin/image.html" -}}
           {{ else }}
             <svg class="friend-avatar" aria-hidden="true">
               <use xlink:href="#icon-{{ add 1 $index }}"></use>

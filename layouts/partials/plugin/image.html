@@ -1,9 +1,10 @@
+{{- $params := page.Scratch.Get "params" -}}
 {{- $class := .Class | default "" -}}
 {{- $style := "" -}}
 {{- $loading := .Loading | default "lazy" -}}
 {{- $onload := "" -}}
 {{- $onerror := "" -}}
-{{- $cacheRemoteImages := (.Params.cacheRemoteImages | default dict) | merge site.Params.cacheRemoteImages -}}
+{{- $cacheRemoteImages := $params.cacheRemoteImages -}}
 {{- $suffixList := slice ".jpeg" ".jpg" ".png" ".gif" ".bmp" ".tif" ".tiff" ".webp" -}}
 
 {{- /* handle for default size image */ -}}

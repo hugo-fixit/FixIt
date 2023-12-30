@@ -717,6 +717,15 @@ enableEmoji = true
       scale = true
       # whether to add FullscreenControl
       fullscreen = true
+    # FixIt 0.3.0 | NEW [Experimental] cache remote images locally, see: https://github.com/hugo-fixit/FixIt/pull/362
+    [params.page.cacheRemoteImages]
+      enable = false
+      # replace remote image url with local image url (place in public/images/remote/)
+      replace = false
+    # FixIt 0.3.0 | NEW Related content config (https://gohugo.io/content-management/related/)
+    [params.page.related]
+      enable = false
+      count = 5
     # FixIt 0.2.17 | NEW Donate (Sponsor) settings
     [params.page.reward]
       enable = false
@@ -916,11 +925,6 @@ enableEmoji = true
         name = ""
         logoUrl = ""
 
-    # FixIt 0.3.0 | NEW Related content config (https://gohugo.io/content-management/related/)
-    [params.page.related]
-      enable = false
-      count = 5
-
   # TypeIt config
   [params.typeit]
     # typing speed between each step (measured in milliseconds)
@@ -1072,12 +1076,6 @@ enableEmoji = true
     # ["barber-shop", "big-counter", "bounce", "center-atom", "center-circle", "center-radar", "center-simple",
     # "corner-indicator", "fill-left", "flash", "flat-top", "loading-bar", "mac-osx", "material", "minimal"]
     theme = "minimal"
-  
-  # FixIt 0.3.0 | NEW [Experimental] cache remote images locally, see: https://github.com/hugo-fixit/FixIt/pull/362
-  [params.cacheRemoteImages]
-    enable = false
-    # replace remote image url with local image url
-    replace = false
   
   # FixIt 0.2.17 | NEW Define custom file paths
   # Create your custom files in site directory `layouts/partials/custom` and uncomment needed files below
