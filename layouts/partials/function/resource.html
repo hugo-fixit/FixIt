@@ -1,8 +1,9 @@
+{{- $Resources := .Resources | default page.Resources -}}
 {{- $resource := 0 -}}
 {{- $url := urls.Parse .Path -}}
 {{- if not $url.Host | and $url.Path | and (strings.HasSuffix $url.Path "/" | not) -}}
-  {{- if .Resources -}}
-    {{- with .Resources.GetMatch $url.Path -}}
+  {{- if $Resources -}}
+    {{- with $Resources.GetMatch $url.Path -}}
       {{- $resource = . -}}
     {{- end -}}
   {{- end -}}

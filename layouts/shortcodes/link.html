@@ -1,5 +1,5 @@
 {{- $destination := cond .IsNamedParams (.Get "href") (.Get 0) -}}
-{{- with dict "Path" $destination "Resources" .Page.Resources | partial "function/resource.html" -}}
+{{- with dict "Path" $destination | partial "function/resource.html" -}}
   {{- $destination = .RelPermalink -}}
 {{- end -}}
 {{- $options := dict "Destination" $destination -}}

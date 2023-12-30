@@ -42,7 +42,7 @@
       "description": {{ . | safeHTML }},
     {{- end -}}
     {{- $image := .Site.Params.seo.image -}}
-    {{- with dict "Path" $image "Resources" .Resources | partial "function/resource.html" -}}
+    {{- with dict "Path" $image | partial "function/resource.html" -}}
       "image": {
         "@type": "ImageObject",
         "url": "{{ .Permalink }}",
@@ -55,7 +55,7 @@
       {{- end -}}
     {{- end -}}
     {{- with .Site.Params.seo.thumbnailUrl -}}
-      {{- with dict "Path" . "Resources" $.Resources | partial "function/resource.html" -}}
+      {{- with dict "Path" . | partial "function/resource.html" -}}
         "thumbnailUrl": "{{ .Permalink }}",
       {{- else -}}
         "thumbnailUrl": "{{ . | absURL }}",
@@ -104,7 +104,7 @@
       "image": [
         {{- range $index, $value := . -}}
           {{- if gt $index 0 }},{{ end -}}
-          {{- with dict "Path" $value "Resources" $.Resources | partial "function/resource.html" -}}
+          {{- with dict "Path" $value | partial "function/resource.html" -}}
             {
               "@type": "ImageObject",
               "url": "{{ .Permalink }}",
@@ -142,7 +142,7 @@
       "@type": "Organization",
       "name": {{ $publisher.name | safeHTML }}
       {{- $logo := $publisher.logoUrl -}}
-      {{- with dict "Path" $logo "Resources" .Resources | partial "function/resource.html" -}}
+      {{- with dict "Path" $logo | partial "function/resource.html" -}}
         ,"logo": {
           "@type": "ImageObject",
           "url": "{{ .Permalink }}",

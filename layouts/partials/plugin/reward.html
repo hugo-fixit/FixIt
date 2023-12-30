@@ -12,7 +12,7 @@
         {{- with T (printf "single.reward.%v" $way) -}}{{ $way = . }}{{- end -}}
         {{- if $image -}}
           <div>
-            {{- dict "Src" $image "Alt" (printf "%v %v" $author $way) "Resources" $.Resources | partial "plugin/image.html" -}}
+            {{- dict "Src" $image "Alt" (printf "%v %v" $author $way) | partial "plugin/image.html" -}}
             <span{{ if $reward.animation }} data-animation{{ end }}>{{ $way }}</span>
           </div>
         {{- end -}}

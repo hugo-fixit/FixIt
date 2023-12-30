@@ -1,11 +1,11 @@
 {{- if .Title | and .Text -}}
   <figure>
-    {{- dict "Src" .Destination "Alt" .Text "Caption" .Text "Title" .Title "Linked" true "Resources" .Page.Resources "Responsive" true | partial "plugin/image.html" -}}
+    {{- dict "Src" .Destination "Alt" .Text "Caption" .Text "Title" .Title "Linked" true "Responsive" true | partial "plugin/image.html" -}}
     <figcaption class="image-caption">
       {{- .Text | safeHTML -}}
     </figcaption>
   </figure>
 {{- else -}}
   {{- $linked := (eq (.Page.Scratch.Get "params").lightgallery "force") | or (ne .Title "") -}}
-  {{- dict "Src" .Destination "Alt" .Text "Title" .Title "Linked" $linked "Resources" .Page.Resources "Responsive" true | partial "plugin/image.html" -}}
+  {{- dict "Src" .Destination "Alt" .Text "Title" .Title "Linked" $linked "Responsive" true | partial "plugin/image.html" -}}
 {{- end -}}

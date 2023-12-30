@@ -3,11 +3,11 @@
   {{- $theme = .Get "theme" | default $theme -}}
   {{- if .Get "url" -}}
     {{- $url := .Get "url" -}}
-    {{- with dict "Path" $url "Resources" .Page.Resources | partial "function/resource.html" -}}
+    {{- with dict "Path" $url | partial "function/resource.html" -}}
       {{- $url = .RelPermalink -}}
     {{- end -}}
     {{- $cover := .Get "cover" -}}
-    {{- with dict "Path" $cover "Resources" .Page.Resources | partial "function/resource.html" -}}
+    {{- with dict "Path" $cover | partial "function/resource.html" -}}
       {{- $cover = .RelPermalink -}}
     {{- end -}}
     <meting-js url="{{ $url }}" name="{{ .Get `name` }}" artist="{{ .Get `artist` }}" cover="{{ $cover }}" theme="{{ $theme }}"
