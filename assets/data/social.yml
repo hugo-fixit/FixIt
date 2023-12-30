@@ -547,7 +547,7 @@ qqgroup:
   Template: https://qm.qq.com/cgi-bin/qm/qr?k=%v&jump_from=webapi
   Title: QQ Group
   Icon:
-    Class: fa-solid fa-users
+    Simpleicons: tencentqq
 
 # 070: Diaspora
 diaspora:
