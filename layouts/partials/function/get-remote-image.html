@@ -9,7 +9,8 @@
       {{- warnf "%s" . -}}
     {{ else }}
       {{- if eq $remoteResource.ResourceType "image" -}}
-        {{- $resource = $remoteResource -}}
+        {{- /* placed remote image in public/images/remote/ */ -}}
+        {{- $resource = $remoteResource | resources.Copy (add "/images/remote/" $remoteResource.Name) -}}
       {{- end -}}
     {{- end -}}
   {{- end -}}
