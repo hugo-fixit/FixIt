@@ -233,6 +233,14 @@ enableEmoji = true
     isPlainText = false
     isHTML = true
     permalinkable = true
+  # FixIt 0.3.0 | NEW Options to make output /offline/index.html file
+  [offline]
+    path = "offline"
+    baseName = "index"
+    mediaType = "text/html"
+    isPlainText = false
+    isHTML = true
+    permalinkable = true
 
 # -------------------------------------------------------------------------------------
 # Customizing Output Formats
@@ -240,7 +248,7 @@ enableEmoji = true
 # -------------------------------------------------------------------------------------
 
 [outputs]
-  home = ["HTML", "RSS", "JSON", "BaiduUrls", "archives"]
+  home = ["HTML", "RSS", "JSON", "BaiduUrls", "archives", "offline"]
   page = ["HTML", "MarkDown"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML"]

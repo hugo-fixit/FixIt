@@ -8,4 +8,5 @@
 {{- /* Set site home relative permalink */ -}}
 {{- $homeRelPermalink := .Site.Home.RelPermalink -}}
 {{- $homeRelPermalink = strings.TrimSuffix "archives/" $homeRelPermalink -}}
+{{- $homeRelPermalink = strings.TrimSuffix "offline/" $homeRelPermalink -}}
 {{- .Scratch.Set "homeRelPermalink" $homeRelPermalink -}}
