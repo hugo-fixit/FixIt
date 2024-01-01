@@ -53,6 +53,9 @@ recentlyUpdated = "最近更新"
 
 [section.totalWordCount]
 other = "总计约 {{ .Count }} 字"
+
+[section.archiveCounter]
+other = "共计 {{ .Count }} 篇文章"
 # === Section ===
 
 # === Pagination ===

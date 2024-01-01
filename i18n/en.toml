@@ -54,6 +54,10 @@ recentlyUpdated = "Recently Updated"
 [section.totalWordCount]
 one = "Total one word"
 other = "Total {{ .Count }} words"
+
+[section.archiveCounter]
+one = "Only one article"
+other = "{{ .Count }} articles in total"
 # === Section ===
 
 # === Pagination ===

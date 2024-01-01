@@ -55,6 +55,10 @@ recentlyUpdated = "Ostatnio zaktualizowane"
 [section.totalWordCount]
 one = ""
 other = ""
+
+[section.archiveCounter]
+one = ""
+other = ""
 # === Section ===
 
 # === Pagination ===

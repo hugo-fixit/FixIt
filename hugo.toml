@@ -219,14 +219,8 @@ enableEmoji = true
     mediaType = "text/markdown"
     isPlainText = true
     isHTML = false
-  # FixIt 0.2.15 | NEW Options to make output baidu_urls.txt file
-  [outputFormats.BaiduUrls]
-    baseName = "baidu_urls"
-    mediaType = "text/plain"
-    isPlainText = true
-    isHTML = false
   # FixIt 0.3.0 | NEW Options to make output /archives/index.html file
-  [archives]
+  [outputFormats.archives]
     path = "archives"
     baseName = "index"
     mediaType = "text/html"
@@ -234,21 +228,39 @@ enableEmoji = true
     isHTML = true
     permalinkable = true
   # FixIt 0.3.0 | NEW Options to make output /offline/index.html file
-  [offline]
+  [outputFormats.offline]
     path = "offline"
     baseName = "index"
     mediaType = "text/html"
     isPlainText = false
     isHTML = true
     permalinkable = true
+  # FixIt 0.3.0 | NEW Options to make output readme.md file
+  [outputFormats.README]
+    baseName = "readme"
+    mediaType = "text/markdown"
+    isPlainText = true
+    isHTML = false
+  # FixIt 0.3.0 | CHANGED Options to make output baidu_urls.txt file
+  [outputFormats.baidu_urls]
+    baseName = "baidu_urls"
+    mediaType = "text/plain"
+    isPlainText = true
+    isHTML = false
 
 # -------------------------------------------------------------------------------------
 # Customizing Output Formats
 # See: https://gohugo.io/templates/output-formats/#customizing-output-formats
 # -------------------------------------------------------------------------------------
 
+# Options to make hugo output files, the optional values are below:
+# home: ["HTML", "RSS", "JSON", "archives", "offline", "README", "baidu_urls"]
+# page: ["HTML", "MarkDown"]
+# section: ["HTML", "RSS"]
+# taxonomy: ["HTML", "RSS"]
+# term: ["HTML", "RSS"]
 [outputs]
-  home = ["HTML", "RSS", "JSON", "BaiduUrls", "archives", "offline"]
+  home = ["HTML", "RSS", "JSON", "archives", "offline"]
   page = ["HTML", "MarkDown"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML"]
