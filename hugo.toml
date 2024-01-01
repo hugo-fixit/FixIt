@@ -40,13 +40,14 @@ enableEmoji = true
 
 [menu]
   [[menu.main]]
-    identifier = "posts"
+    identifier = "archives"
+    parent = ""
     # you can add extra information before the name (HTML format is supported), such as icons
     pre = ""
     # you can add extra information after the name (HTML format is supported), such as icons
     post = ""
-    name = "Posts"
-    url = "/posts/"
+    name = "Archives"
+    url = "/archives/"
     # title will be shown when you hover on this menu link
     title = ""
     weight = 1
@@ -62,6 +63,7 @@ enableEmoji = true
       type = ""
   [[menu.main]]
     identifier = "categories"
+    parent = ""
     pre = ""
     post = ""
     name = "Categories"
@@ -72,6 +74,7 @@ enableEmoji = true
       icon = "fa-solid fa-folder-tree"
   [[menu.main]]
     identifier = "tags"
+    parent = ""
     pre = ""
     post = ""
     name = "Tags"
