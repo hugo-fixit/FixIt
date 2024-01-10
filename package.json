@@ -20,10 +20,9 @@
   "author": "Lruihao (https://lruihao.cn)",
   "scripts": {
     "algolia": "atomic-algolia",
-    "build": "hugo -v --source=docs --gc --minify",
-    "server": "hugo server --source=docs -D --disableFastRender --navigateToChanged --ignoreCache --bind 0.0.0.0",
+    "build": "hugo -v --source=demo --gc --minify",
+    "server": "hugo server --source=demo -D --disableFastRender --navigateToChanged --ignoreCache --bind 0.0.0.0",
     "server:production": "npm run server -- -e production",
-    "update:docs": "git submodule update --remote --merge && git add docs && git commit -m ':memo: Docs: update theme docs'",
     "version": "sed -i '' \"s/v$npm_package_version-RC/v$npm_package_version/g\" layouts/partials/init/index.html && git add .",
     "postversion": "git push && git push --tags"
   },
