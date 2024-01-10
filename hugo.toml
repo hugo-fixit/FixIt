@@ -13,7 +13,7 @@ title = ""
 # Hostname (and path) to the root
 baseURL = "http://localhost:1313"
 # theme list
-theme = ["FixIt"]
+# theme = ["FixIt"] # enable in your site config file
 # determines default content language ["en", "zh-cn", "fr", "pl", ...]
 defaultContentLanguage = "en"
 # language code ["en", "zh-CN", "fr", "pl", ...]
