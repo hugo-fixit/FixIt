@@ -19,12 +19,12 @@
     {{- else -}}
       {{- $termTitle = printf "%v - %v" (T $taxonomy | default $taxonomy) .Title -}}
     {{- end -}}
-    <h2 class="single-title animate__animated animate__pulse animate__faster">
+    <h1 class="single-title animate__animated animate__pulse animate__faster">
       {{- with $termIcon -}}
         {{- dict "Class" (add . " fa-fw me-1") | partial "plugin/icon.html" -}}
       {{- end -}}
       {{- $termTitle }} <sup>{{ $pageCount }}</sup>
-    </h2>
+    </h1>
 
     {{- /* Paginate */ -}}
     {{- if .Pages -}}
@@ -35,7 +35,10 @@
         {{- $pages = .Paginate $pages -}}
       {{- end -}}
       {{- range $pages.PageGroups -}}
-        <h3 class="group-title">{{ .Key }}</h3>
+        <h2 class="group-title">
+          {{- dict "Class" "fa-regular fa-calendar fa-fw me-1" | partial "plugin/icon.html" -}}
+          {{- .Key -}}
+        </h2>
         {{- range .Pages -}}
           <article class="archive-item">
             <a href="{{ .RelPermalink }}" class="archive-item-link">

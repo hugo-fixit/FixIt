@@ -13,7 +13,7 @@ title = ""
 # Hostname (and path) to the root
 baseURL = "http://localhost:1313"
 # theme list
-theme = ["FixIt"]
+# theme = ["FixIt"] # enable in your site config file
 # determines default content language ["en", "zh-cn", "fr", "pl", ...]
 defaultContentLanguage = "en"
 # language code ["en", "zh-CN", "fr", "pl", ...]
@@ -263,7 +263,7 @@ enableEmoji = true
 # taxonomy: ["HTML", "RSS"]
 # term: ["HTML", "RSS"]
 [outputs]
-  home = ["HTML", "RSS", "JSON", "archives", "offline"]
+  home = ["HTML", "RSS", "JSON", "archives"]
   page = ["HTML", "MarkDown"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML"]
@@ -286,7 +286,7 @@ enableEmoji = true
 
 [params]
   # FixIt 0.2.15 | CHANGED FixIt theme version
-  version = "0.2.X" # e.g. "0.2.X", "0.2.15", "v0.2.15" etc.
+  version = "0.3.X" # e.g. "0.2.X", "0.2.15", "v0.2.15" etc.
   # site description
   description = ""
   # site keywords
