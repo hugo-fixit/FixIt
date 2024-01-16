@@ -10,3 +10,7 @@
 {{- $homeRelPermalink = strings.TrimSuffix "archives/" $homeRelPermalink -}}
 {{- $homeRelPermalink = strings.TrimSuffix "offline/" $homeRelPermalink -}}
 {{- .Scratch.Set "homeRelPermalink" $homeRelPermalink -}}
+
+{{- /* Set pages of main section */ -}}
+{{- $pages := where .Site.RegularPages "Type" "posts" -}}
+{{- .Scratch.Set "mainSectionPages" $pages -}}

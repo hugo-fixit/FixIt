@@ -1,6 +1,6 @@
 # {{ .Site.Title }}
 
-{{ $pages := where .Site.RegularPages "Type" "posts" -}}
+{{ $pages := .Scratch.Get "mainSectionPages" -}}
 {{- $pages = where $pages "Draft" "eq" false -}}
 {{- T "section.archiveCounter" (len $pages) }}
 {{ range $pages.GroupByPublishDate "2006" }}
