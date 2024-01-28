@@ -88,7 +88,7 @@
   <a class="lightgallery" href="{{ $srcLarge | safeURL }}" data-thumbnail="{{ $srcSmall | safeURL }}"{{ with $caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
 {{- end -}}
 <img loading="{{ $loading }}" src="{{ $src | safeURL }}" alt="{{ $alt }}"
-  {{- if .Responsive }} srcset="{{ $srcSmall | safeURL }}, {{ $srcMedium | safeURL }} 1.5x, {{ $srcLarge | safeURL }} 2x" sizes="auto"{{- end -}}
+  {{- if .Responsive }} srcset="{{ $srcSmall | safeURL }}, {{ $srcMedium | safeURL }} 1.5x, {{ $srcLarge | safeURL }} 2x"{{- end -}}
   {{- if eq $loading "lazy" }} data-title="{{ .Title | default $alt }}"
   {{- else }} title="{{ .Title | default $alt }}"{{- end -}}
   {{- with .Width }} width="{{ . }}"{{- end -}}
