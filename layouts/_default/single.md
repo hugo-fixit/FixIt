@@ -1,5 +1,5 @@
 {{- $params := .Scratch.Get "params" -}}
-{{- $author := .Scratch.Get "author" -}}
+{{- $author := .Store.Get "author" -}}
 # {{ .Title }}
 
 {{ if $params.password -}}
