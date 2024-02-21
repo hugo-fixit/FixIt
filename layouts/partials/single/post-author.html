@@ -1,5 +1,5 @@
-{{- $params := .Params | merge .Site.Params.page -}}
-{{- $author := .Store.Get "author" -}}
+{{- $params := .Scratch.Get "params" -}}
+{{- $author := .Scratch.Get "author" -}}
 
 <span class="post-author">
   {{- $content := $author.name -}}

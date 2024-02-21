@@ -3,7 +3,7 @@
 {{- $alipay := (.Get "alipay") | default (.Get 1) -}}
 {{- $paypal := (.Get "paypal") | default (.Get 2) -}}
 {{- $bitcoin := (.Get "bitcoin") | default (.Get 3) -}}
-{{- $author := (.Get "author") | default (.Get 4) | default (.Page.Store.Get "author").name -}}
+{{- $author := (.Get "author") | default (.Get 4) | default (.Page.Scratch.Get "author").name -}}
 {{- $comment := (.Get "comment") | default (.Get 5) -}}
 {{- $mode := (.Get "mode") | default (.Get 6) -}}
 {{- $reward := dict "enable" true "comment" $comment "mode" $mode -}}
