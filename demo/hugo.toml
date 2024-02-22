@@ -5,7 +5,7 @@
 title = "My Hugo FixIt Site"
 baseURL = "http://example.org/"
 # Change the default theme to be use when building the site with Hugo
-theme = "FixIt"
+# theme = "FixIt"
 
 [markup]
   # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
