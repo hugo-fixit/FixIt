@@ -1,35 +1,35 @@
 /**
- * Custom javascript for FixIt site.
+ * Custom JavaScript for FixIt blog site.
  * @author @Lruihao https://lruihao.cn
  */
-const FixItCustom = new (function () {
+class FixItBlog {
   /**
-   * Hello World
-   * You can define your own functions below.
-   * @returns {FixItCustom}
+   * say hello
+   * you can define your own functions below
+   * @returns {FixItBlog}
    */
-  this.hello = () => {
-    console.log('FixItCustom echo: Hello FixIt!');
+  hello() {
+    console.log('custom.js: Hello FixIt!');
     return this;
-  };
+  }
+
   /**
-   * Initialize.
-   * @returns {FixItCustom}
+   * initialize
+   * @returns {FixItBlog}
    */
-  this.init = () => {
-    // Custom infos.
+  init() {
     this.hello();
     return this;
-  };
-})();
+  }
+}
 
 /**
- * Immediate.
+ * immediate execution
  */
 (() => {
-  FixItCustom.init();
-  // It will be executed when the DOM tree is built.
+  window.fixitBlog = new FixItBlog();
+  // it will be executed when the DOM tree is built
   document.addEventListener('DOMContentLoaded', () => {
-    // FixItCustom.init();
+    window.fixitBlog.init();
   });
 })();
