@@ -1,4 +1,4 @@
-{{- $params := .Scratch.Get "params" -}}
+{{- $params := partial "function/params.html" -}}
 {{- $cdn := .Scratch.Get "cdn" | default dict -}}
 {{- $fingerprint := .Scratch.Get "fingerprint" -}}
 {{- $config := (.Scratch.Get "this").config -}}

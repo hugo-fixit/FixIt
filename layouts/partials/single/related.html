@@ -1,6 +1,6 @@
 {{- /* Related Content */ -}}
 {{- /* https://gohugo.io/content-management/related/ */ -}}
-{{- $params := .Scratch.Get "params" -}}
+{{- $params := partial "function/params.html" -}}
 
 {{- if $params.related.enable | and (not $params.password) -}}
   {{- $posts := .Scratch.Get "mainSectionPages" -}}

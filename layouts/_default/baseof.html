@@ -21,7 +21,7 @@
     <script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('{{ $theme }}' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '{{ $theme }}' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script>
 
     {{- /* Body wrapper */ -}}
-    <div class="wrapper" data-page-style="{{ (.Scratch.Get `params`).pageStyle | default `normal` }}">
+    <div class="wrapper" data-page-style="{{ (partial `function/params.html`).pageStyle | default `normal` }}">
       {{- partial "header.html" . -}}
       {{- partial "breadcrumb.html" . -}}
       {{- $toc := .Scratch.Get "toc" -}}

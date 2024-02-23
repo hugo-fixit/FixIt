@@ -1,7 +1,7 @@
-{{- $params := .Scratch.Get "params" -}}
+{{- $params := partial "function/params.html" -}}
 
 {{- if $params.password -}}
-  {{- $msg := (.Scratch.Get "params").message | default (T "single.encryptedMessage") -}}
+  {{- $msg := $params.message | default (T "single.encryptedMessage") -}}
   {{- $loading := resources.Get "images/loading.svg" | minify -}}
   <div class="fixit-decryptor-container">
     <img class="fixit-decryptor-loading" src="{{ $loading.RelPermalink }}" alt="decryptor loading" />

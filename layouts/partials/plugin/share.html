@@ -1,4 +1,4 @@
-{{- $share := (.Scratch.Get "params").share | default dict -}}
+{{- $share := (partial "function/params.html").share | default dict -}}
 
 {{- if $share.enable -}}
   {{- /* 001: Twitter */ -}}

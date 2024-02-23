@@ -1,5 +1,4 @@
 {{- .Scratch.Set "version" "v0.3.3-RC" -}}
-{{- .Scratch.Set "params" (.Params | merge .Site.Params.page) -}}
 {{- .Scratch.Set "this" (dict "version" (.Scratch.Get "version") | dict "config") -}}
 
 {{- partial "init/detection-env.html" . -}}

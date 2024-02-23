@@ -7,7 +7,7 @@
 {{ end -}}
 
 {{- define "content" -}}
-{{- $params := .Scratch.Get "params" -}}
+  {{- $params := partial "function/params.html" -}}
   <article class="page single special friends">
     <div class="header">
       {{- /* Title */ -}}

@@ -1,5 +1,5 @@
 {{- /* Collection Navigation */ -}}
-{{- $params := .Scratch.Get "params" -}}
+{{- $params := partial "function/params.html" -}}
 
 {{- if .Params.collections | and $params.collectionNavigation | and (not $params.password) -}}
   {{- $collectionTerms := .GetTerms "collections" -}}

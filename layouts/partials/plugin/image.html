@@ -1,4 +1,4 @@
-{{- $params := page.Scratch.Get "params" -}}
+{{- $params := partial "function/params.html" -}}
 {{- $class := .Class | default "" -}}
 {{- $style := "" -}}
 {{- $loading := .Loading | default "lazy" -}}

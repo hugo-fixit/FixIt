@@ -4,7 +4,7 @@
 {{- end -}}
 
 {{- define "content" -}}
-  {{- $params := .Scratch.Get "params" -}}
+  {{- $params := partial "function/params.html" -}}
   {{- $toc := .Scratch.Get "toc" -}}
   {{- $tocEmpty := eq .TableOfContents `<nav id="TableOfContents"></nav>` -}}
 

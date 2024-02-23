@@ -1,4 +1,4 @@
-{{- $params := .Scratch.Get "params" -}}
+{{- $params := partial "function/params.html" -}}
 
 <meta name="author" content="{{ .Site.Params.author.name }}">
 <meta name="author-link" content="{{ .Site.Params.author.link }}">

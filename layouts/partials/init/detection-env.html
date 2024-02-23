@@ -1,6 +1,6 @@
 {{- /* FixIt theme environment detection */ -}}
 
-{{- $params := .Scratch.Get "params" -}}
+{{- $params := partial "function/params.html" -}}
 
 {{- if hugo.IsProduction -}}
   {{- $cdn := .Site.Params.cdn -}}

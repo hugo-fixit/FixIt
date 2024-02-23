@@ -325,7 +325,7 @@
     {{- end -}}
   </div>
   {{- /* lightgallery for Artalk and Twikoo */ -}}
-  {{- $params := .Scratch.Get "params" -}}
+  {{- $params := partial "function/params.html" -}}
   {{- if not $params.lightgallery | and (($artalk.enable | and $artalk.lightgallery) | or ($twikoo.enable | and $twikoo.lightgallery)) -}}
     {{- $source := $cdn.lightgalleryCSS | default "lib/lightgallery/css/lightgallery-bundle.min.css" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}

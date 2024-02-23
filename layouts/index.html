@@ -6,7 +6,7 @@
 {{- end -}}
 
 {{- define "content" -}}
-  {{- $params := .Scratch.Get "params" -}}
+  {{- $params := partial "function/params.html" -}}
   {{- $profile := .Site.Params.home.profile -}}
   {{- $posts := .Site.Params.home.posts -}}
 

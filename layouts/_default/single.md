@@ -1,4 +1,4 @@
-{{- $params := .Scratch.Get "params" -}}
+{{- $params := partial "function/params.html" -}}
 {{- $author := .Store.Get "author" -}}
 # {{ .Title }}
 

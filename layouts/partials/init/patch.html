@@ -1,5 +1,5 @@
 {{- /* FixIt theme patches */ -}}
-{{- $params := .Scratch.Get "params" -}}
+{{- $params := partial "function/params.html" -}}
 
 {{- /* Toc data patch */ -}}
 {{- $toc := $params.toc -}}
