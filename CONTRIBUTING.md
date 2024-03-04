@@ -7,7 +7,7 @@ First, fork this repository by clicking the fork button.
 Next, clone your forked repo.
 
 ```bash
-git clone --recursive https://github.com/hugo-fixit/FixIt.git && cd FixIt
+git clone https://github.com/hugo-fixit/FixIt.git && cd FixIt
 ```
 
 Then, install the dev dependencies.
@@ -25,6 +25,12 @@ Here are some useful commands.
 npm run server
 # run a local debugging server with watch in production environment
 npm run server:production
+```
+
+If you want to do docs-related theme changes, the simplest way is to have both `FixIt` and `fixit-docs` cloned as sibling directories, and then run:
+
+```bash
+npm run server:docs
 ```
 
 Finally, create a new pull request at <https://github.com/hugo-fixit/FixIt/pulls> to submit your contribution 🎉

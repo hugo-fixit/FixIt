@@ -1,11 +1,41 @@
-{{- $params := .Scratch.Get "params" -}}
-{{- $author := .Scratch.Get "author" -}}
+{{- $params := .Params | merge .Site.Params.page -}}
+
+{{- /* Author data patch */ -}}
+{{- $authorDefault := dict "name" "" "link" "" "email" "" "avatar" "" -}}
+{{- $author := .Site.Params.author | merge $authorDefault -}}
+{{- $authorPost := dict -}}
+{{- if reflect.IsMap $params.author -}}
+  {{- $authorPost = $params.author -}}
+{{- else if isset $params "author" -}}
+  {{- warnf "检测到你的 author 参数格式错误，请参考主题文档设置为正常的格式。" -}}
+  {{- $authorPost = dict "name" $params.author -}}
+{{- end -}}
+{{- if isset $authorPost "name" | and (ne $authorPost.name .Site.Params.author.name) -}}
+  {{- $author = $authorPost | merge $authorDefault | merge $author -}}
+{{- else -}}
+  {{- with $authorPost.link -}}{{ $author = dict "link" . | merge $author }}{{- end -}}
+  {{- with $authorPost.email -}}{{ $author = dict "email" . | merge $author }}{{- end -}}
+  {{- with $authorPost.avatar -}}{{ $author = dict "avatar" . | merge $author }}{{- end -}}
+{{- end -}}
+
+{{- $gravatar := .Site.Params.gravatar -}}
+{{- if $gravatar.enable | and $author.email -}}
+  {{- with $gravatar -}}
+    {{- $author = dict "avatar" (printf "https://%v/avatar/%v?s=32&d=%v"
+      (path.Clean .Host | default "www.gravatar.com")
+      (md5 $author.email)
+      (.Style | default ""))
+      | merge $author 
+    -}}
+  {{- end -}}
+{{- end -}}
+{{- .Store.Set "author" $author -}}
 
 <span class="post-author">
-  {{- $content := $author.name -}}
+  {{- $content := $author.name | default "Anonymous" -}}
   {{- $icon := dict "Class" "fa-solid fa-user-circle" -}}
   {{- if $author.avatar | and $params.authorAvatar -}}
-    {{- $content = printf "%v&nbsp;%v" (dict "Src" $author.avatar "Class" "avatar" "Alt" $author.name | partial "plugin/image.html") $author.name -}}
+    {{- $content = printf "%v&nbsp;%v" (dict "Src" $author.avatar "Class" "avatar" "Alt" $content | partial "plugin/image.html") $content -}}
     {{- $icon = "" -}}
   {{- end -}}
   {{- if $author.link -}}

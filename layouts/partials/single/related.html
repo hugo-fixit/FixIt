@@ -3,7 +3,7 @@
 {{- $params := .Scratch.Get "params" -}}
 
 {{- if $params.related.enable | and (not $params.password) -}}
-  {{- $posts := where .Site.RegularPages "Type" "posts" -}}
+  {{- $posts := .Scratch.Get "mainSectionPages" -}}
   {{- if .Site.Params.page.hiddenFromRelated -}}
     {{- $posts = where $posts "Params.hiddenfromrelated" false -}}
   {{- else -}}

@@ -5,7 +5,7 @@
 
 {{- define "content" -}}
   {{- /* All Posts */ -}}
-  {{- $pages := where .Site.RegularPages "Type" "posts" -}}
+  {{- $pages := .Scratch.Get "mainSectionPages" -}}
 
   <div class="page archive">
     <div class="header">

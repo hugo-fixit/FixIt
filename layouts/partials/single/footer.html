@@ -98,8 +98,13 @@
   </div>
 
   <div class="post-nav">
-    {{- $prev := cond .Site.Params.navigationReverse .Next .Prev -}}
-    {{- $next := cond .Site.Params.navigationReverse .Prev .Next -}}
+    {{- $pages := .Scratch.Get "mainSectionPages" -}}
+    {{- $prev := $pages.Prev . -}}
+    {{- $next := $pages.Next . -}}
+    {{- if .Site.Params.navigationReverse -}}
+      {{- $prev = $pages.Next . -}}
+      {{- $next = $pages.Prev . -}}
+    {{- end -}}
     {{- with $prev -}}
       <a href="{{ .RelPermalink }}" class="post-nav-item" rel="prev" title="{{ .LinkTitle }}">
         {{- dict "Class" "fa-solid fa-angle-left fa-fw" | partial "plugin/icon.html" -}}

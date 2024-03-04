@@ -1,4 +1,4 @@
 {{- $reward := .Scratch.Get "reward" -}}
-{{- $author := .Scratch.Get "author" -}}
+{{- $author := .Store.Get "author" -}}
 {{- $options := dict "Reward" $reward "Id" "fi-reward" "Author" $author.name -}}
 {{- partial "plugin/reward.html" $options -}}
