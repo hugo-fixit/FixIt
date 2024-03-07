@@ -114,7 +114,7 @@
 {{- end -}}
 
 {{- /* mermaid */ -}}
-{{- if (.Scratch.Get "this").mermaid -}}
+{{- if (.HasShortcode "mermaid") | or (.Scratch.Get "this").mermaid -}}
   {{- $source := $cdn.mermaidJS | default "lib/mermaid/mermaid.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- $mermaid := .Site.Params.mermaid -}}
@@ -122,7 +122,7 @@
 {{- end -}}
 
 {{- /* ECharts */ -}}
-{{- if (.Scratch.Get "this").echarts -}}
+{{- if .HasShortcode "echarts" -}}
   {{- $source := $cdn.echartsJS | default "lib/echarts/echarts.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- $lightTheme := resources.Get "lib/echarts/theme/light.yml" | transform.Unmarshal -}}
@@ -131,7 +131,7 @@
 {{- end -}}
 
 {{- /* Mapbox GL */ -}}
-{{- if (.Scratch.Get "this").mapbox -}}
+{{- if .HasShortcode "mapbox" -}}
   {{- $source := $cdn.mapboxGLCSS | default "lib/mapbox-gl/mapbox-gl.css" -}}
   {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint "Preload" true | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
   {{- $source = $cdn.mapboxGLJS | default "lib/mapbox-gl/mapbox-gl.js" -}}
@@ -141,7 +141,7 @@
 {{- end -}}
 
 {{- /* Music */ -}}
-{{- if (.Scratch.Get "this").music -}}
+{{- if .HasShortcode "music" -}}
   {{- /* APlayer */ -}}
   {{- $source := $cdn.aplayerCSS | default "lib/aplayer/APlayer.min.css" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Preload" true | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
