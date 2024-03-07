@@ -57,9 +57,6 @@ libFiles:
   # TODO update to 3.x
   mapboxGLCSS: mapbox-gl@2.10.0/dist/mapbox-gl.css
   mapboxGLJS: mapbox-gl@2.10.0/dist/mapbox-gl.js
-  # mermaid@9.4.3 https://github.com/mermaid-js/mermaid
-  # TODO bump Mermaid from 9.x to 10.x
-  mermaidJS: mermaid@9.4.3/dist/mermaid.min.js
   # meting@2.0.1 https://github.com/metowolf/MetingJS
   metingJS: meting@2.0.1/dist/Meting.min.js
   # object-fit-images@3.2.4 https://github.com/fregante/object-fit-images

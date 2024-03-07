@@ -550,24 +550,23 @@ class FixIt {
     }
   }
 
-  switchMermaidTheme(theme) {
-    const $mermaidElements = document.getElementsByClassName('mermaid');
-    if ($mermaidElements.length) {
-      // TODO perf
-      const themes = this.config.mermaid.themes ?? ['default', 'dark', 'neutral'];
-      mermaid.initialize({ startOnLoad: false, theme: theme ?? (this.isDark ? themes[1] : themes[0]), securityLevel: 'loose' });
-      this.util.forEach($mermaidElements, $mermaid => {
-        mermaid.render('svg-' + $mermaid.id, this.data[$mermaid.id], svgCode => {
-          $mermaid.innerHTML = svgCode;
-        }, $mermaid);
-      });
-    }
-  };
-
   initMermaid() {
-    this.switchMermaidTheme();
-    this.switchThemeEventSet.add(() => { this.switchMermaidTheme(); });
-    this.beforeprintEventSet.add(() => { this.switchMermaidTheme('neutral'); });
+    if (!window.mermaid) {
+      return;
+    }
+    const themes = window.mermaid.themes ?? ['default', 'dark'];
+    window.mermaid.initialize({
+      securityLevel: 'loose',
+      startOnLoad: true,
+      theme: this.isDark ? themes[1] : themes[0],
+    });
+    this.switchThemeEventSet.add(() => {
+      // Mermaid does not provide a method for switching yet. When switching themes, refresh the page.
+      window.location.reload();
+    });
+    this.beforeprintEventSet.add(() => { 
+      // Set the theme to neutral when printing.
+    });
   }
 
   initEcharts() {
@@ -1101,7 +1100,6 @@ class FixIt {
             event();
           }
           this.initToc();
-          this.switchMermaidTheme();
           this.initSearch();
 
           const isMobile = this.util.isMobile()

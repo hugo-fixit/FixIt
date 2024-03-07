@@ -18,7 +18,7 @@ code {
 }
 
 // indented code
-pre {
+pre:not(.mermaid[data-processed='true']) {
   margin: 0;
   line-height: 1.45em;
   padding: 0.5rem;

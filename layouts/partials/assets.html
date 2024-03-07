@@ -114,11 +114,12 @@
 {{- end -}}
 
 {{- /* mermaid */ -}}
-{{- if (.HasShortcode "mermaid") | or (.Scratch.Get "this").mermaid -}}
-  {{- $source := $cdn.mermaidJS | default "lib/mermaid/mermaid.min.js" -}}
-  {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-  {{- $mermaid := .Site.Params.mermaid -}}
-  {{- $config = dict "themes" $mermaid.themes | dict "mermaid" | merge $config -}}
+{{- if .Store.Get "hasMermaid" -}}
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    window.mermaid = mermaid;
+    window.mermaid.themes = {{ .Site.Params.mermaid.themes }};
+  </script>
 {{- end -}}
 
 {{- /* ECharts */ -}}

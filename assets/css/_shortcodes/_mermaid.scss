@@ -1,5 +1,7 @@
 .mermaid {
-  text-align: center;
+  &[data-processed='true'] {
+    text-align: center;
+  }
 
   svg {
     max-width: 100%;

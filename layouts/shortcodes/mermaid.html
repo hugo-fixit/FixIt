@@ -1,3 +1,5 @@
-{{- $id := dict "Content" (trim (partial "function/dos2unix.html" .Inner) "\n") "Scratch" .Page.Scratch | partial "function/id.html" -}}
-<div class="mermaid" id="{{ $id }}"></div>
+<pre class="mermaid">
+  {{- .Inner | safeHTML }}
+</pre>
+{{- .Page.Store.Set "hasMermaid" true -}}
 {{- /* EOF */ -}}
