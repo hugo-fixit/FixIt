@@ -551,7 +551,7 @@ class FixIt {
   }
 
   initMermaid() {
-    if (!window.mermaid) {
+    if (!window.mermaid?.initialize) {
       return;
     }
     const themes = window.mermaid.themes ?? ['default', 'dark'];
