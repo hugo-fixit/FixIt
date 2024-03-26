@@ -1,4 +1,4 @@
-{{- if .Site.Params.search -}}
+{{- if .Site.Params.search.enable -}}
     {{- $index := slice -}}
     {{- $pages := where .Site.RegularPages "Params.password" "eq" nil -}}
     {{- if .Site.Params.page.hiddenFromSearch -}}
