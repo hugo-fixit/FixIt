@@ -97,7 +97,8 @@
 
     .featured-image-preview {
       width: 100%;
-      padding: 30% 0 0;
+      // use the same proportions as the cover image of https://dev.to/
+      aspect-ratio: auto 1000 / 420;
       position: relative;
       margin: 0.6rem auto;
       @include transition(transform 0.4s ease);
