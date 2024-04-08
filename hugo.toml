@@ -698,6 +698,8 @@ enableEmoji = true
       [params.page.heading.number]
         # whether to enable auto heading numbering
         enable = false
+        # FixIt 0.3.3 | NEW only enable in main section pages (default is posts)
+        onlyMainSection = true
         [params.page.heading.number.format]
           h1 = "{title}"
           h2 = "{h2} {title}"

@@ -15,7 +15,10 @@
 <h{{ .Level }} id="{{ .Anchor | safeURL }}" class="heading-element">
   <a href="#{{ .Anchor | safeURL }}" class="heading-mark"></a>
 
-  {{- if $params.heading.number.enable -}}
+
+  {{- /* Only enable in main section pages */ -}}
+  {{- $onlyMainSection := cond $params.heading.number.onlyMainSection (eq .Page.Type "posts") true -}}
+  {{- if $params.heading.number.enable | and $onlyMainSection -}}
     {{- /* Add 1 to the current level */ -}}
     {{- $headingMap := .Page.Scratch.Get "heading-counter" -}}
     {{- $count := (string .Level) | index $headingMap | int | add 1 -}}
