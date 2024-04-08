@@ -297,7 +297,7 @@
       {{- with $giscus -}}
         {{- $commentConfig = .lightTheme | default "light" | dict "lightTheme" | dict "giscus" | merge $commentConfig -}}
         {{- $commentConfig = .darkTheme | default "dark" | dict "darkTheme" | dict "giscus" | merge $commentConfig -}}
-        <div id="giscus">
+        <div id="giscus" class="comment">
           <script
             src="https://giscus.app/client.js"
             data-repo="{{ .Repo }}"

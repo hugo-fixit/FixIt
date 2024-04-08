@@ -125,7 +125,7 @@
                     </li>
                   {{- end -}}
                 {{- end -}}
-              {{- else if gt (len .AllTranslations) 1 -}}
+              {{- else if .IsTranslated -}}
                 {{- range .AllTranslations -}}
                   {{- if ne .Lang $.Lang -}}
                     <li class="menu-item">
