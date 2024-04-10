@@ -1,14 +1,10 @@
 {{- $version := .Scratch.Get "version" -}}
 {{- $latest := $version -}}
 {{- $devOpts := .Scratch.Get "devOpts" -}}
+{{- $header := .Scratch.Get "githubTokenHeader" -}}
 
 {{- /* Check for updates */ -}}
 {{- if $devOpts.c4u -}}
-  {{- /* Select the scope named "public_repo" to generate personal access token */ -}}
-  {{- $header := dict "Authorization" "" -}}
-  {{- with $devOpts.githubtoken -}}
-    {{- $header = dict "Authorization" (printf "token %v" .)  -}}
-  {{- end -}}
   {{- $latest = (getJSON "https://api.github.com/repos/hugo-fixit/FixIt/releases/latest" $header).tag_name -}}
 {{- end -}}
 
