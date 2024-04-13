@@ -1,4 +1,8 @@
 >#comments {
   padding: 2rem 0;
   @extend .print-d-none;
+
+  iframe {
+    width: 100%;
+  }
 }
