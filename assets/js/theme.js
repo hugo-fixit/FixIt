@@ -386,8 +386,13 @@ class FixIt {
         // code title
         const $title = document.createElement('span');
         $title.classList.add('code-title');
-        const hlAttrs = this.data[$chroma.parentNode.id];
-        $title.insertAdjacentHTML('afterbegin', `<i class="arrow fa-solid fa-chevron-right fa-fw" aria-hidden="true"></i><span class="title-inner">${hlAttrs?.title ?? ''}</span>`);
+        // insert code title inner
+        $title.insertAdjacentHTML(
+          'afterbegin',
+          $chroma.parentNode.title
+            ? `<i class="arrow fa-solid fa-chevron-right fa-fw" aria-hidden="true"></i><span class="title-inner">${$chroma.parentNode.title}</span>`
+            : '<i class="arrow fa-solid fa-chevron-right fa-fw" aria-hidden="true"></i>'
+        );
         $title.addEventListener('click', () => {
           $chroma.classList.toggle('open');
         }, false);

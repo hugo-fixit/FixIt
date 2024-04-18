@@ -1,3 +1,2 @@
-{{- $id := dict "Content" .Attributes "Scratch" .Page.Scratch | partial "function/id.html" -}}
-{{- $codeBlock := transform.Highlight .Inner .Type .Options -}}
-{{- replace $codeBlock "<div class=\"highlight\">" (printf "<div class=\"highlight\" id=\"%v\">" $id) 1 | safeHTML -}}
+{{- $result := transform.HighlightCodeBlock . -}}
+{{- $result.Wrapped -}}
