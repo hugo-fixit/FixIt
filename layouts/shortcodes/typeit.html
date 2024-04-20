@@ -36,6 +36,6 @@
 
 <div {{ $wrapperAttrs | safeHTMLAttr }}>
   {{- printf `<%v %v></%v>` $tag $innerAttrs $tag | safeHTML -}}
-  <template>{{ printf "%v" $content | safeHTML }}</template>
+  <template><pre>{{ printf "%v" $content | safeHTML }}</pre></template>
 </div>
 {{- .Page.Store.Set "hasTyped" true -}}

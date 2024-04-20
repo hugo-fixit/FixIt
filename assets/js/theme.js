@@ -682,7 +682,7 @@ class FixIt {
           const singleLoop = typeitElement.dataset.loop;
           // get the content of the typed element
           stagingElement.innerHTML = '';
-          stagingElement.appendChild(typeitElement.querySelector('template').content);
+          stagingElement.appendChild(typeitElement.querySelector('template').content.cloneNode(true));
           // for shortcodes usage
           let targetEle = typeitElement.firstElementChild
           // for system elements usage
@@ -690,9 +690,10 @@ class FixIt {
             typeitElement.innerHTML = '';
             targetEle = typeitElement
           }
+          const typedContents = stagingElement.querySelector('pre')?.innerHTML || stagingElement.innerHTML
           // create a new instance of TypeIt for each element
           const instance = new TypeIt(targetEle, {
-            strings: stagingElement.innerHTML,
+            strings: typedContents,
             speed: speed,
             lifeLike: true,
             cursorSpeed: cursorSpeed,
