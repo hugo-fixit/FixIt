@@ -1,5 +1,5 @@
 {{- .Scratch.Set "version" "v0.3.3-RC" -}}
-{{- .Scratch.Set "this" (dict "version" (.Scratch.Get "version") | dict "config") -}}
+{{- .Scratch.Set "this" dict -}}
 
 {{- partial "init/detection-env.html" . -}}
 {{- partial "init/detection-version.html" . -}}

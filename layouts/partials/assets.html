@@ -2,6 +2,7 @@
 {{- $cdn := .Scratch.Get "cdn" | default dict -}}
 {{- $fingerprint := .Scratch.Get "fingerprint" -}}
 {{- $config := (.Scratch.Get "this").config -}}
+{{- $config = dict "version" (.Scratch.Get "version") | merge $config -}}
 
 {{- /* Search */ -}}
 {{- if .Site.Params.search | and .Site.Params.search.enable -}}
@@ -70,11 +71,11 @@
 {{- end -}}
 
 {{- /* TypeIt */ -}}
-{{- with (.Scratch.Get "this").typeitMap -}}
-  {{- $typeit := $.Site.Params.typeit -}}
+{{- if .Store.Get "hasTyped" -}}
+  {{- $typeit := .Site.Params.typeit -}}
   {{- $source := $cdn.typeitJS | default "lib/typeit/index.umd.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
-  {{- $config = dict "speed" $typeit.speed "cursorSpeed" $typeit.cursorSpeed "cursorChar" $typeit.cursorChar "duration" $typeit.duration "loop" $typeit.loop "data" . | dict "typeit" | merge $config -}}
+  {{- $config = dict "speed" $typeit.speed "cursorSpeed" $typeit.cursorSpeed "cursorChar" $typeit.cursorChar "duration" $typeit.duration "loop" $typeit.loop | dict "typeit" | merge $config -}}
 {{- end -}}
 
 {{- /* KaTeX */ -}}

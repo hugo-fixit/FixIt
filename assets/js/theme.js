@@ -663,18 +663,42 @@ class FixIt {
       const cursorSpeed = typeitConfig.cursorSpeed || 1000;
       const cursorChar = typeitConfig.cursorChar || '|';
       const loop = typeitConfig.loop ?? false;
-      Object.values(typeitConfig.data).forEach((group) => {
+      // divide them into different groups according to the data-group attribute value of the element
+      // results in an object like {group1: [ele1, ele2], group2: [ele3, ele4]}
+      const typeitElements = document.querySelectorAll('.typeit')
+      const groupMap = Array.from(typeitElements).reduce((acc, ele) => {
+        const group = ele.dataset.group || ele.id || Math.random().toString(36).substring(2);
+        acc[group] = acc[group] || [];
+        acc[group].push(ele);
+        return acc;
+      }, {});
+      const stagingElement = document.createElement('div')
+      stagingElement.style.display = 'none';
+      document.body.appendChild(stagingElement);
+
+      Object.values(groupMap).forEach((group) => {
         const typeone = (i) => {
-          const id = group[i];
-          const shortcodeLoop = document.querySelector(`#${id}`).parentElement.dataset.loop;
-          const instance = new TypeIt(`#${id}`, {
-            strings: this.data[id],
+          const typeitElement = group[i];
+          const singleLoop = typeitElement.dataset.loop;
+          // get the content of the typed element
+          stagingElement.innerHTML = '';
+          stagingElement.appendChild(typeitElement.querySelector('template').content);
+          // for shortcodes usage
+          let targetEle = typeitElement.firstElementChild
+          // for system elements usage
+          if (typeitElement.firstElementChild.tagName === 'TEMPLATE') {
+            typeitElement.innerHTML = '';
+            targetEle = typeitElement
+          }
+          // create a new instance of TypeIt for each element
+          const instance = new TypeIt(targetEle, {
+            strings: stagingElement.innerHTML,
             speed: speed,
             lifeLike: true,
             cursorSpeed: cursorSpeed,
             cursorChar: cursorChar,
             waitUntilVisible: true,
-            loop: shortcodeLoop ? JSON.parse(shortcodeLoop) : loop,
+            loop: singleLoop ? JSON.parse(singleLoop) : loop,
             afterComplete: () => {
               if (i === group.length - 1) {
                 if (typeitConfig.duration >= 0) {
@@ -691,6 +715,7 @@ class FixIt {
         };
         typeone(0);
       });
+      document.body.removeChild(stagingElement);
     }
   }
 

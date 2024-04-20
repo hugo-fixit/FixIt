@@ -1,3 +1,4 @@
+{{- /* trim the newline */ -}}
 {{- $content := trim (partial "function/dos2unix.html" .Inner) "\n" -}}
 {{- $classList := slice -}}
 {{- with .Get "class" -}}
@@ -15,25 +16,26 @@
     {{- /* parsing code links */ -}}
     {{- $content = replaceRE `(<span[^<>]*>)([^<>]*)\[([^<>]+)\]\(([^<>]+)\)([^<>]*)(</span>)` "$1$2$6<a href=\"$4\">$3</a>$1$5$6" $content -}}
   {{- end -}}
-  {{- /* split multiline string */ -}}
-  {{- $content = split $content "\n" -}}
   {{- $classList = $classList | append "highlight" -}}
 {{- else -}}
   {{- $content = $content | .Page.RenderString -}}
 {{- end -}}
 
-{{- /* trim the newline */ -}}
-{{- $id := dict "Content" $content "Scratch" .Page.Scratch | partial "function/id.html" -}}
-{{- $key := .Get "group" | string | default $id -}}
-{{- $typeitMap := (.Page.Scratch.Get "this").typeitMap | default dict -}}
-{{- $group := index $typeitMap $key -}}
-{{- $group = $group | default slice | append $id -}}
-{{- dict $key $group | merge $typeitMap | .Page.Scratch.SetInMap "this" "typeitMap" -}}
-
-{{- $attrs := printf `id="%v"` $id -}}
-{{- with $classList -}}
-  {{- $attrs = delimit $classList " " | printf `%v class="%v"` $attrs -}}
+{{- $wrapperAttrs := `class="typeit"` -}}
+{{- with (.Get "group" | string) -}}
+  {{- $wrapperAttrs = printf `%v data-group="%v"` $wrapperAttrs . -}}
+{{- end -}}
+{{- with $loop -}}
+  {{- $wrapperAttrs = printf `%v data-loop="true"` $wrapperAttrs -}}
 {{- end -}}
 
-<div class="typeit"{{ if ne $loop "" }} data-loop="{{ $loop }}"{{ end }}>{{ printf `<%v %v></%v>` $tag $attrs $tag | safeHTML }}</div>
-{{- /* EOF */ -}}
+{{- $innerAttrs := "" -}}
+{{- with $classList -}}
+  {{- $innerAttrs = printf `class="%v"` (delimit $classList " ") -}}
+{{- end -}}
+
+<div {{ $wrapperAttrs | safeHTMLAttr }}>
+  {{- printf `<%v %v></%v>` $tag $innerAttrs $tag | safeHTML -}}
+  <template>{{ printf "%v" $content | safeHTML }}</template>
+</div>
+{{- .Page.Store.Set "hasTyped" true -}}

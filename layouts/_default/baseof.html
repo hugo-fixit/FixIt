@@ -28,7 +28,7 @@
       <main class="container{{ if (eq $toc.enable true) | and (eq $toc.position `left`) }} container-reverse{{ end }}">
         {{- block "content" . }}{{ end -}}
       </main>
-      {{- partial "footer.html" . -}}
+      {{- partialCached "footer.html" . -}}
     </div>
 
     {{- /* Theme widgets */ -}}
