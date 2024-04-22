@@ -608,7 +608,7 @@ class FixIt {
       mapboxgl.setRTLTextPlugin(this.config.mapbox.RTLTextPlugin);
       this._mapboxArr = this._mapboxArr || [];
       this.util.forEach(document.getElementsByClassName('mapbox'), ($mapbox) => {
-        const { lng, lat, zoom, lightStyle, darkStyle, marked, navigation, geolocate, scale, fullscreen } = this.data[$mapbox.id];
+        const { lng, lat, zoom, lightStyle, darkStyle, marked, navigation, geolocate, scale, fullscreen } = JSON.parse($mapbox.dataset.options);
         const mapbox = new mapboxgl.Map({
           container: $mapbox,
           center: [lng, lat],
@@ -647,7 +647,7 @@ class FixIt {
       this._mapboxOnSwitchTheme = this._mapboxOnSwitchTheme || (() => {
         this.util.forEach(this._mapboxArr, (mapbox) => {
           const $mapbox = mapbox.getContainer();
-          const { lightStyle, darkStyle } = this.data[$mapbox.id];
+          const { lightStyle, darkStyle } = JSON.parse($mapbox.dataset.options);
           mapbox.setStyle(this.isDark ? darkStyle : lightStyle);
           mapbox.addControl(new MapboxLanguage());
         });
