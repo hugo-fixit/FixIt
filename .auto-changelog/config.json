@@ -1,0 +1,22 @@
+{
+  "output": "CHANGELOG.md",
+  "template": ".auto-changelog/template.hbs",
+  "handlebarsSetup": ".auto-changelog/setup.js",
+  "sortCommits": "relevance",
+  "package": true,
+  "unreleased": true,
+  "commitLimit": false,
+  "unreleasedOnly": true,
+  "replaceText": {
+    "#(\\d+)": "[#$1](https://github.com/hugo-fixit/FixIt/issues/$1)",
+    "^(Feat|feat):": ":sparkles: Feat:",
+    "^(Fix|fix):": ":bug: Fix:",
+    "^(Build|build):": ":hammer: Build:",
+    "^(Refactor|refactor):": ":recycle: Refactor:",
+    "^(Style|style):": ":lipstick: Style:",
+    "^(Perf|perf):": ":zap: Perf:",
+    "^(Test|test):": ":white_check_mark: Test:",
+    "^(Docs|docs):": ":memo: Docs:",
+    "^(Chore|chore):": ":wrench: Chore:"
+  }
+}
