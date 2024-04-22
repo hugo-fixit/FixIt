@@ -1,11 +1,13 @@
+{{- $params := .Page.Params | merge site.Params.page -}}
 {{- if .Title | and .Text -}}
+  {{- $linked := ne $params.lightgallery false -}}
   <figure>
-    {{- dict "Src" .Destination "Alt" .Text "Caption" .Text "Title" .Title "Linked" true "Responsive" true | partial "plugin/image.html" -}}
+    {{- dict "Src" .Destination "Alt" .Text "Caption" .Text "Title" .Title "Linked" $linked "Responsive" true | partial "plugin/image.html" -}}
     <figcaption class="image-caption">
       {{- .Text | safeHTML -}}
     </figcaption>
   </figure>
 {{- else -}}
-  {{- $linked := (eq (partial "function/params.html").lightgallery "force") | or (ne .Title "") -}}
+  {{- $linked := (eq $params.lightgallery "force") | or ($params.lightgallery | and (ne .Title "")) -}}
   {{- dict "Src" .Destination "Alt" .Text "Title" .Title "Linked" $linked "Responsive" true | partial "plugin/image.html" -}}
 {{- end -}}
