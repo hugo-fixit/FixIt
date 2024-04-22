@@ -586,11 +586,14 @@ class FixIt {
         this._echartsArr[i].dispose();
       }
       this._echartsArr = [];
+      const stagingDOM = this.util.getStagingDOM()
       this.util.forEach(document.getElementsByClassName('echarts'), ($echarts) => {
         const chart = echarts.init($echarts, this.isDark ? 'dark' : 'light', { renderer: 'svg' });
-        chart.setOption(JSON.parse(this.data[$echarts.id]));
+        stagingDOM.stage($echarts.querySelector('template').content.cloneNode(true));
+        chart.setOption(stagingDOM.contentAsJson());
         this._echartsArr.push(chart);
       });
+      stagingDOM.destroy();
     });
     this.switchThemeEventSet.add(this._echartsOnSwitchTheme);
     this._echartsOnSwitchTheme();
@@ -672,17 +675,13 @@ class FixIt {
         acc[group].push(ele);
         return acc;
       }, {});
-      const stagingElement = document.createElement('div')
-      stagingElement.style.display = 'none';
-      document.body.appendChild(stagingElement);
+      const stagingDOM = this.util.getStagingDOM()
 
       Object.values(groupMap).forEach((group) => {
         const typeone = (i) => {
           const typeitElement = group[i];
           const singleLoop = typeitElement.dataset.loop;
-          // get the content of the typed element
-          stagingElement.innerHTML = '';
-          stagingElement.appendChild(typeitElement.querySelector('template').content.cloneNode(true));
+          stagingDOM.stage(typeitElement.querySelector('template').content.cloneNode(true));
           // for shortcodes usage
           let targetEle = typeitElement.firstElementChild
           // for system elements usage
@@ -690,10 +689,9 @@ class FixIt {
             typeitElement.innerHTML = '';
             targetEle = typeitElement
           }
-          const typedContents = stagingElement.querySelector('pre')?.innerHTML || stagingElement.innerHTML
           // create a new instance of TypeIt for each element
           const instance = new TypeIt(targetEle, {
-            strings: typedContents,
+            strings: stagingDOM.$el.querySelector('pre')?.innerHTML || stagingDOM.contentAsHtml(),
             speed: speed,
             lifeLike: true,
             cursorSpeed: cursorSpeed,
@@ -716,7 +714,7 @@ class FixIt {
         };
         typeone(0);
       });
-      document.body.removeChild(stagingElement);
+      stagingDOM.destroy();
     }
   }
 

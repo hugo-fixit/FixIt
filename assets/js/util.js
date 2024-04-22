@@ -55,4 +55,34 @@ export default class Util {
       behavior: 'smooth'
     });
   }
+
+  /**
+   * get a hidden element for temporary use
+   * @returns {Object} { $el: Element, destroy: Function }
+   */
+  getStagingDOM() {
+    const stagingElement = document.createElement('div')
+    stagingElement.style.display = 'none';
+    document.body.appendChild(stagingElement);
+
+    return {
+      $el: stagingElement,
+      stage(dom) {
+        stagingElement.innerHTML = '';
+        stagingElement.appendChild(dom);
+      },
+      contentAsHtml() {
+        return stagingElement.innerHTML;
+      },
+      contentAsText() {
+        return stagingElement.innerText;
+      },
+      contentAsJson() {
+        return JSON.parse(stagingElement.innerHTML);
+      },
+      destroy() {
+        document.body.removeChild(stagingElement);
+      }
+    }
+  }
 }
