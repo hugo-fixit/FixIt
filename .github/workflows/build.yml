@@ -18,4 +18,4 @@ jobs:
           hugo-version: latest
           extended: true
       - name: Build Hugo static files
-        run: hugo -v --source=docs --gc --minify
+        run: hugo -v --source=demo --gc --minify
