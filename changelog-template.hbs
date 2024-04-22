@@ -1,0 +1,42 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+{{#each releases}}
+## [{{title}}]({{href}})
+
+{{! List commits with `Breaking change: ` somewhere in the message }}
+{{#commit-list commits heading='### :boom: Breaking Changes' message='(Breaking change: |BREAKING CHANGE: )'}}
+- {{subject}} [`{{shorthash}}`]({{href}})
+{{/commit-list}}
+
+{{! List commits that add new features, but exclude those that have `:sparkles:` in the message}}
+{{#commit-list commits heading='### :tada: New Features' message='(:tada: |Feat: |feat:)' exclude=':sparkles: '}}
+- {{subject}} [`{{shorthash}}`]({{href}})
+{{/commit-list}}
+
+{{! List commits that enhance existing features, but exclude those that have `:tada:` in the message}}
+{{#commit-list commits heading='### :sparkles: Enhancements' message='(:sparkles: |Feat: |feat: |Perf: |perf:
+|Style: |style: )' exclude=':tada: '}}
+- {{subject}} [`{{shorthash}}`]({{href}})
+{{/commit-list}}
+
+{{! List commits that bug fixes }}
+{{#commit-list commits heading='### :bug: Bug Fixes' message='(Fix: |fix: |:bug: )'}}
+- {{subject}} [`{{shorthash}}`]({{href}})
+{{/commit-list}}
+
+{{! List commits that improve the documentation }}
+{{#commit-list commits heading='### :memo: Documentation' message='(Docs: |docs: )'}}
+- {{subject}} [`{{shorthash}}`]({{href}})
+{{/commit-list}}
+
+{{! List other changes commits }}
+{{#commit-list commits heading='### :wrench: Other Changes' message='(Refactor: |refactor: |Chore: |chore: |Build:
+|build: Test: |test: )'}}
+- {{subject}} [`{{shorthash}}`]({{href}})
+{{/commit-list}}
+
+- **Full Changelog**: {{href}}
+
+{{/each}}
