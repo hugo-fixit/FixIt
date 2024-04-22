@@ -3,7 +3,6 @@ import Util from './util';
 class FixIt {
   constructor() {
     this.config = window.config;
-    this.data = this.config.data || [];
     this.isDark = document.body.dataset.theme === 'dark';
     this.util = new Util();
     this.newScrollTop = this.util.getScrollTop();

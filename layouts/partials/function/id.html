@@ -8,7 +8,4 @@
   {{- $id = printf "id-%d" $count -}}
   {{- $count | add 1 | $.Scratch.SetInMap "this" "count" -}}
 {{- end -}}
-{{- with .Content -}}
-  {{- dict $id . | dict "data" | dict "config" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
-{{- end -}}
 {{- return $id -}}
