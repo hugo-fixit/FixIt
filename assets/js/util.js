@@ -63,6 +63,7 @@ export default class Util {
   getStagingDOM() {
     const stagingElement = document.createElement('div')
     stagingElement.style.display = 'none';
+    stagingElement.dataset.stagingId = Math.random().toString(36).slice(2);
     document.body.appendChild(stagingElement);
 
     return {
