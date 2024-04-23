@@ -15,18 +15,22 @@
     {{- $artalk := $comment.artalk | default dict -}}
     {{- if $artalk.enable -}}
       <div id="artalk" class="comment"></div>
-      {{- $source := $cdn.artalkCSS | default "lib/artalk/Artalk.css" -}}
+      {{- $source := $cdn.artalkCSS | default (add $artalk.server "/dist/Artalk.css") -}}
       {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
-      {{- $source := $cdn.artalkJS | default "lib/artalk/Artalk.js" -}}
+      {{- $source := $cdn.artalkJS | default (add $artalk.server "/dist/Artalk.js") -}}
       {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
       {{- $commentConfig = dict "el" "#artalk" "pageKey" .Permalink "pageTitle" .Title "pvEl" "artalk-visitor-count" "countEl" "artalk-comment-count" | dict "artalk" | merge $commentConfig -}}
       {{- if (eq $artalk.locale "") | and (eq $.Site.LanguageCode "en") -}}
         {{- $artalk = dict "locale" "en-US" | merge $artalk -}}
       {{- end -}}
       {{- $commentConfig = dict "locale" ($artalk.locale | default $.Site.LanguageCode | default "auto") | dict "artalk" | merge $commentConfig -}}
+      {{- if eq $artalk.usebackendconf false -}}
+        {{- $commentConfig = dict "useBackendConf" false | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
       {{- with .Site.Params.gravatar -}}
         {{/* See https://artalk.js.org/guide/frontend/config.html#gravatar-params */}}
-        {{- $commentConfig = dict "mirror" .Host "params" (printf "d=%v&s=240" .Style) | dict "gravatar" | dict "artalk" | merge $commentConfig -}}
+        {{- $gravatarMirror := printf "https://%v/avatar/" .Host -}}
+        {{- $commentConfig = dict "mirror" $gravatarMirror "params" (printf "d=%v&s=240" .Style) | dict "gravatar" | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
       {{- with $artalk.server -}}
         {{- $commentConfig = dict "server" . | dict "artalk" | merge $commentConfig -}}

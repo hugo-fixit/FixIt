@@ -802,6 +802,8 @@ enableEmoji = true
         enable = false
         server = "https://yourdomain"
         site = "默认站点"
+        # FixIt 0.3.3 | NEW whether use backend configuration
+        useBackendConf = false
         placeholder = ""
         noComment = ""
         sendBtn = ""
