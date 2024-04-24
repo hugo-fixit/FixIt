@@ -185,7 +185,7 @@
 {{- end -}}
 
 {{- /* Content Decryption */ -}}
-{{- $encryptPartial := (.Scratch.Get "this").encryptPartial -}}
+{{- $encryptPartial := .HasShortcode "fixit-encryptor" -}}
 {{- if $params.password | or $encryptPartial -}}
   {{- $cryptoCoreJS := $cdn.cryptoCoreJS | default "lib/crypto-js/core.js" -}}
   {{- $cryptoEncBase64JS := $cdn.cryptoEncBase64JS | default "lib/crypto-js/enc-base64.js" -}}
