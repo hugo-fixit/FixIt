@@ -1168,7 +1168,8 @@ class FixIt {
     try {
       if (this.config.encryption) {
         this.initFixItDecryptor();
-      } else if (!this.config.encryption?.all) {
+      }
+      if (!this.config.encryption?.all) {
         this.initTwemoji();
         this.initDetails();
         this.initLightGallery();
