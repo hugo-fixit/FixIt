@@ -559,17 +559,24 @@ class FixIt {
     if (!window.mermaid?.initialize) {
       return;
     }
-    const themes = window.mermaid.themes ?? ['default', 'dark'];
-    window.mermaid.initialize({
-      securityLevel: 'loose',
-      startOnLoad: false,
-      theme: this.isDark ? themes[1] : themes[0],
-    });
-    window.mermaid.run()
-    this.switchThemeEventSet.add((isDark) => {
-      // Mermaid does not provide a method for switching yet. When switching themes, refresh the page.
-      // TODO save the original mermaid pre and reload the mermaid render
-      window.location.reload();
+    const _initializeAndRun = () => {
+      const themes = window.mermaid.themes ?? ['default', 'dark'];
+      window.mermaid.initialize({
+        securityLevel: 'loose',
+        startOnLoad: false,
+        theme: this.isDark ? themes[1] : themes[0],
+      });
+      window.mermaid.run()
+    }
+    _initializeAndRun()
+    this.switchThemeEventSet.add(() => {
+      // Reinitialize and run mermaid when theme changes.
+      this.util.forEach(document.querySelectorAll('.mermaid[data-processed]'), ($mermaid) => {
+        $mermaid.dataset.processed = ''
+        $mermaid.innerHTML = ''
+        $mermaid.appendChild($mermaid.nextElementSibling.content.cloneNode(true))
+      })
+      _initializeAndRun()
     });
     this.beforeprintEventSet.add(() => { 
       // Set the theme to neutral when printing.
@@ -582,7 +589,6 @@ class FixIt {
     }
     echarts.registerTheme('light', this.config.echarts.lightTheme);
     echarts.registerTheme('dark', this.config.echarts.darkTheme);
-    // BUG 主题切换的时候有问题
     this._echartsOnSwitchTheme = this._echartsOnSwitchTheme || (() => {
       this._echartsArr = this._echartsArr || [];
       for (let i = 0; i < this._echartsArr.length; i++) {
@@ -591,10 +597,12 @@ class FixIt {
       this._echartsArr = [];
       const stagingDOM = this.util.getStagingDOM()
       this.util.forEach(document.getElementsByClassName('echarts'), ($echarts) => {
-        const chart = echarts.init($echarts, this.isDark ? 'dark' : 'light', { renderer: 'svg' });
-        stagingDOM.stage($echarts.querySelector('template').content.cloneNode(true));
-        chart.setOption(stagingDOM.contentAsJson());
-        this._echartsArr.push(chart);
+        if ($echarts.nextElementSibling.tagName === 'TEMPLATE') {
+          const chart = echarts.init($echarts, this.isDark ? 'dark' : 'light', { renderer: 'svg' });
+          stagingDOM.stage($echarts.nextElementSibling.content.cloneNode(true));
+          chart.setOption(stagingDOM.contentAsJson());
+          this._echartsArr.push(chart);
+        }
       });
       stagingDOM.destroy();
     });
@@ -615,7 +623,6 @@ class FixIt {
         mapboxgl.setRTLTextPlugin(this.config.mapbox.RTLTextPlugin);
         this._mapboxArr = this._mapboxArr || [];
       }
-      // BUG 切换主题时有问题
       this.util.forEach(document.querySelectorAll('.mapbox:empty'), ($mapbox) => {
         const { lng, lat, zoom, lightStyle, darkStyle, marked, navigation, geolocate, scale, fullscreen } = JSON.parse($mapbox.dataset.options);
         const mapbox = new mapboxgl.Map({
@@ -974,11 +981,11 @@ class FixIt {
         this.initHighlight();
         this.initTable($content);
         this.initMath($content);
-        // TODO this.initEcharts();
+        this.initMermaid();
+        this.initEcharts();
         this.initTypeit($content);
         this.initMapbox();
         this.initPangu();
-        window.mermaid.run && window.mermaid.run();
         this.util.forEach($content.querySelectorAll('.encrypted-hidden'), ($element) => {
           $element.classList.replace('encrypted-hidden', 'decrypted-shown');
         });
