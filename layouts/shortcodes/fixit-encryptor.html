@@ -25,6 +25,9 @@
       <label title='{{ T "single.password" }}'>
         <input type="password" class="fixit-decryptor-input" placeholder="🔑 {{ $message }}" />
       </label>
+      <button class="fixit-decryptor-btn">
+        {{- dict "Class" "fa-solid fa-unlock" | partial "plugin/icon.html" }} {{ T "single.enterBtn" -}}
+      </button>
     </div>
     <div data-password="{{ md5 $password }}" data-content="{{ $content }}"></div>
   </fixit-encryptor>

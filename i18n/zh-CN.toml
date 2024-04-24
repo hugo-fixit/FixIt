@@ -126,6 +126,7 @@ expirationReminder = "本文最后更新于 {{ .Date }}，文中内容可能已�
 encryptedAbstract = "本文已加密，因此其原始内容不可见！"
 encryptedMessage = "请输入密码"
 password = "密码"
+enterBtn = "进入"
 encryptyAgain = "重新加密"
 relatedContent = "相关内容"
 

@@ -48,8 +48,8 @@ class FixIt {
     });
   }
 
-  initTwemoji() {
-    this.config.twemoji && twemoji.parse(document.body);
+  initTwemoji(target = document.body) {
+    this.config.twemoji && twemoji.parse(target);
   }
 
   initMenu() {
@@ -93,7 +93,7 @@ class FixIt {
         this.isDark = !this.isDark;
         window.localStorage?.setItem('theme', this.isDark ? 'dark' : 'light');
         for (let event of this.switchThemeEventSet) {
-          event();
+          event(this.isDark);
         }
       }, false);
     });
@@ -333,8 +333,8 @@ class FixIt {
     }
   }
 
-  initDetails() {
-    this.util.forEach(document.getElementsByClassName('details'), ($details) => {
+  initDetails(target = document) {
+    this.util.forEach(target.getElementsByClassName('details'), ($details) => {
       const $summary = $details.querySelector('.details-summary');
       $summary.addEventListener('click', () => {
         $details.classList.toggle('open');
@@ -344,7 +344,8 @@ class FixIt {
 
   initLightGallery() {
     if (this.config.lightgallery) {
-      lightGallery(document.getElementById('content'), {
+      this.lg && this.lg.destroy(true);
+      this.lg = lightGallery(document.getElementById('content'), {
         plugins: [lgThumbnail, lgZoom],
         selector: '.lightgallery',
         speed: 400,
@@ -376,7 +377,7 @@ class FixIt {
       $preChroma.parentElement.replaceChild($chroma, $preChroma);
       $td.appendChild($preChroma);
     });
-    this.util.forEach(document.querySelectorAll('.highlight > .chroma'), ($chroma) => {
+    this.util.forEach(document.querySelectorAll('.highlight > .chroma:not(:has(.code-header))'), ($chroma) => {
       const $codeElements = $chroma.querySelectorAll('pre.chroma > code');
       if ($codeElements.length) {
         const $code = $codeElements[$codeElements.length - 1];
@@ -455,8 +456,8 @@ class FixIt {
     });
   }
 
-  initTable() {
-    this.util.forEach(document.querySelectorAll('.content table'), ($table) => {
+  initTable(target = document) {
+    this.util.forEach(target.querySelectorAll('.content table'), ($table) => {
       const $wrapper = document.createElement('div');
       $wrapper.className = 'table-wrapper';
       $table.parentElement.replaceChild($wrapper, $table);
@@ -548,9 +549,9 @@ class FixIt {
     }, false);
   }
 
-  initMath() {
+  initMath(target = document.body) {
     if (this.config.math) {
-      renderMathInElement(document.body, this.config.math);
+      renderMathInElement(target, this.config.math);
     }
   }
 
@@ -561,11 +562,13 @@ class FixIt {
     const themes = window.mermaid.themes ?? ['default', 'dark'];
     window.mermaid.initialize({
       securityLevel: 'loose',
-      startOnLoad: true,
+      startOnLoad: false,
       theme: this.isDark ? themes[1] : themes[0],
     });
-    this.switchThemeEventSet.add(() => {
+    window.mermaid.run()
+    this.switchThemeEventSet.add((isDark) => {
       // Mermaid does not provide a method for switching yet. When switching themes, refresh the page.
+      // TODO save the original mermaid pre and reload the mermaid render
       window.location.reload();
     });
     this.beforeprintEventSet.add(() => { 
@@ -579,6 +582,7 @@ class FixIt {
     }
     echarts.registerTheme('light', this.config.echarts.lightTheme);
     echarts.registerTheme('dark', this.config.echarts.darkTheme);
+    // BUG 主题切换的时候有问题
     this._echartsOnSwitchTheme = this._echartsOnSwitchTheme || (() => {
       this._echartsArr = this._echartsArr || [];
       for (let i = 0; i < this._echartsArr.length; i++) {
@@ -606,10 +610,13 @@ class FixIt {
 
   initMapbox() {
     if (this.config.mapbox) {
-      mapboxgl.accessToken = this.config.mapbox.accessToken;
-      mapboxgl.setRTLTextPlugin(this.config.mapbox.RTLTextPlugin);
-      this._mapboxArr = this._mapboxArr || [];
-      this.util.forEach(document.getElementsByClassName('mapbox'), ($mapbox) => {
+      if (!mapboxgl.accessToken) {
+        mapboxgl.accessToken = this.config.mapbox.accessToken;
+        mapboxgl.setRTLTextPlugin(this.config.mapbox.RTLTextPlugin);
+        this._mapboxArr = this._mapboxArr || [];
+      }
+      // BUG 切换主题时有问题
+      this.util.forEach(document.querySelectorAll('.mapbox:empty'), ($mapbox) => {
         const { lng, lat, zoom, lightStyle, darkStyle, marked, navigation, geolocate, scale, fullscreen } = JSON.parse($mapbox.dataset.options);
         const mapbox = new mapboxgl.Map({
           container: $mapbox,
@@ -658,7 +665,7 @@ class FixIt {
     }
   }
 
-  initTypeit() {
+  initTypeit(target = document) {
     if (this.config.typeit) {
       const typeitConfig = this.config.typeit;
       const speed = typeitConfig.speed || 100;
@@ -667,7 +674,7 @@ class FixIt {
       const loop = typeitConfig.loop ?? false;
       // divide them into different groups according to the data-group attribute value of the element
       // results in an object like {group1: [ele1, ele2], group2: [ele3, ele4]}
-      const typeitElements = document.querySelectorAll('.typeit')
+      const typeitElements = target.querySelectorAll('.typeit')
       const groupMap = Array.from(typeitElements).reduce((acc, ele) => {
         const group = ele.dataset.group || ele.id || Math.random().toString(36).substring(2);
         acc[group] = acc[group] || [];
@@ -953,12 +960,28 @@ class FixIt {
         this.initEcharts();
         this.initTypeit();
         this.initMapbox();
-        this.util.forEach(document.querySelectorAll('.encrypted-hidden'), ($element) => {
-          $element.classList.replace('encrypted-hidden', 'decrypted-shown');
-        });
         this.initToc();
         this.initTocListener();
         this.initPangu();
+        this.util.forEach(document.querySelectorAll('.encrypted-hidden'), ($element) => {
+          $element.classList.replace('encrypted-hidden', 'decrypted-shown');
+        });
+      },
+      partialDecrypted: ($content) => {
+        this.initTwemoji($content);
+        this.initDetails($content);
+        this.initLightGallery();
+        this.initHighlight();
+        this.initTable($content);
+        this.initMath($content);
+        // TODO this.initEcharts();
+        this.initTypeit($content);
+        this.initMapbox();
+        this.initPangu();
+        window.mermaid.run && window.mermaid.run();
+        this.util.forEach($content.querySelectorAll('.encrypted-hidden'), ($element) => {
+          $element.classList.replace('encrypted-hidden', 'decrypted-shown');
+        });
       },
       reset: () => {
         this.util.forEach(document.querySelectorAll('.decrypted-shown'), ($element) => {
@@ -968,6 +991,9 @@ class FixIt {
     });
     if (this.config.encryption?.shortcode) {
       this.decryptor.addEventListener('decrypted', () => {
+        this.decryptor.initShortcodes();
+      })
+      this.decryptor.addEventListener('partial-decrypted', () => {
         this.decryptor.initShortcodes();
       })
       this.decryptor.initShortcodes();

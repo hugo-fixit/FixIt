@@ -129,6 +129,7 @@ expirationReminder = "Este artículo se actualizó por última vez el {{ .Date }
 encryptedAbstract = ""
 encryptedMessage = ""
 password = "Contraseña"
+enterBtn = ""
 encryptyAgain = ""
 relatedContent = "Contenido relacionado"
 

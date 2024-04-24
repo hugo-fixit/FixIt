@@ -129,6 +129,7 @@ expirationReminder = "यह लेख अंतिम बार {{ .Date }} प
 encryptedAbstract = "यह लेख एन्क्रिप्ट किया गया है, इसलिए इसकी मूल सामग्री अदृश्य है!"
 encryptedMessage = "कृपया पासवर्ड दर्ज करें"
 password = "पासवर्ड"
+enterBtn = "दर्ज करें"
 encryptyAgain = "फिर से एन्क्रिप्ट करें"
 relatedContent = "संबंधित सामग्री"
 

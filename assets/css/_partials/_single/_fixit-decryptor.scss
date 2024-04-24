@@ -3,12 +3,8 @@
   text-align: center;
   margin-top: 3rem;
 
-  .fixit-encryptor-shortcode & {
-    margin-top: 1rem;
-  }
-
-  #fixit-decryptor-input,
   .fixit-decryptor-input,
+  .fixit-decryptor-btn,
   .fixit-encryptor-btn {
     display: inline-block;
     box-sizing: border-box;
@@ -40,9 +36,8 @@
     }
   }
 
-  #fixit-decryptor-input,
   .fixit-decryptor-input {
-    width: clamp(50%, 400px, 100%);
+    width: calc(clamp(50%, 450px, 100%) - 100px);
     height: 3rem;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -53,15 +48,30 @@
     }
   }
 
+  .fixit-decryptor-btn,
   .fixit-encryptor-btn {
     cursor: pointer;
     @include transition(all 0.1s ease-out);
-    padding: 0.6rem 1rem;
+    padding: 0.8rem 1rem;
 
     background-color: $header-background-color;
 
     [data-theme='dark'] & {
       background-color: $header-background-color-dark;
+    }
+  }
+}
+
+// fixit-encryptor shortcodes
+fixit-encryptor {
+  .fixit-decryptor-container {
+    margin-top: 1rem;
+  }
+  &.decrypted > .fixit-decryptor-container {
+    .fixit-decryptor-loading,
+    .fixit-decryptor-input,
+    .fixit-decryptor-btn {
+      display: none;
     }
   }
 }

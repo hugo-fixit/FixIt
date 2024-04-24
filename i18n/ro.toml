@@ -129,6 +129,7 @@ expirationReminder = "Acest articol a fost actualizat ultima dată pe {{ .Date }
 encryptedAbstract = ""
 encryptedMessage = ""
 password = "Parolă"
+enterBtn = ""
 encryptyAgain = ""
 relatedContent = "Conținut înrudit"
 

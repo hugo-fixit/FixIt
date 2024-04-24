@@ -128,6 +128,7 @@ expirationReminder = "This article was last updated on {{ .Date }}, the content 
 encryptedAbstract = "This article has been encrypted, so its raw content is invisible!"
 encryptedMessage = "Please enter the password"
 password = "Password"
+enterBtn = "Enter"
 encryptyAgain = "Encrypt again"
 relatedContent = "Related Content"
 

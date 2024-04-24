@@ -6,8 +6,11 @@
   <div class="fixit-decryptor-container">
     <img class="fixit-decryptor-loading" src="{{ $loading.RelPermalink }}" alt="decryptor loading" />
     <label for="fixit-decryptor-input" title='{{ T "single.password" }}'>
-      <input type="password" id="fixit-decryptor-input" class="d-none" placeholder="🔑 {{ $msg }}" />
+      <input type="password" id="fixit-decryptor-input" class="fixit-decryptor-input d-none" placeholder="🔑 {{ $msg }}" />
     </label>
+    <button class="fixit-decryptor-btn d-none">
+      {{- dict "Class" "fa-solid fa-unlock" | partial "plugin/icon.html" }} {{ T "single.enterBtn" -}}
+    </button>
     <button class="fixit-encryptor-btn d-none">
       {{- dict "Class" "fa-solid fa-lock" | partial "plugin/icon.html" }} {{ T "single.encryptyAgain" -}}
     </button>

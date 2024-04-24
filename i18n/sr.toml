@@ -129,6 +129,7 @@ expirationReminder = "Овај чланак је последњи пут ажу�
 encryptedAbstract = ""
 encryptedMessage = ""
 password = "Паролица"
+enterBtn = ""
 encryptyAgain = ""
 relatedContent = "Повезани садржај"
 

@@ -129,6 +129,7 @@ expirationReminder = "Эта статья последний раз обновл
 encryptedAbstract = ""
 encryptedMessage = ""
 password = "арготизм"
+enterBtn = ""
 encryptyAgain = ""
 relatedContent = "Связанный контент"
 
