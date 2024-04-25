@@ -233,7 +233,7 @@ class FixIt {
                 const results = {};
                 window._index.search(query).forEach(({ item, refIndex, matches }) => {
                   let title = item.title;
-                  let content = item.content;
+                  let content = item.content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
                   matches.forEach(({ indices, value, key }) => {
                     if (key === 'content') {
                       let offset = 0;
