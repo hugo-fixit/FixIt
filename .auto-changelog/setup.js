@@ -18,7 +18,7 @@ module.exports = function (Handlebars) {
    * @param {Boolean} [options.hash.linked=true] whether to return a linked username
    * @example {{githubUser "Cell"}} => "Lruihao"
    */
-  Handlebars.registerHelper('githubUser', function (context, { hash: { linked = true }}) {
+  Handlebars.registerHelper('githubUser', function (context, { hash: { linked = false }}) {
     const map = {
       'Cell': "Lruihao",
     }

@@ -1,6 +1,7 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+{{!-- if need, set replaceText in config.json "#(\\d+)": "[#$1](https://github.com/hugo-fixit/FixIt/issues/$1)" --}}
 
 {{#each releases}}
   {{#if href}}
@@ -53,7 +54,8 @@ All notable changes to this project will be documented in this file.
     #### Merged pull requests
 
     {{#each merges}}
-      - {{#if commit.breaking}}**Breaking change:** {{/if}}{{message}} {{#if href}}[`#{{id}}`]({{href}}){{/if}}
+      {{!-- {{#if href}}[`#{{id}}`]({{href}}){{/if}} --}}
+      - {{#if commit.breaking}}**Breaking change:** {{/if}}{{message}} by {{githubUser author}} in {{#if id}}#{{id}}{{/if}}
     {{/each}}
   {{/if}}
 
@@ -61,7 +63,7 @@ All notable changes to this project will be documented in this file.
     #### Closed issues
 
     {{#each fixes}}
-      - {{#if commit.breaking}}**Breaking change:** {{/if}}{{commit.subject}}{{#each fixes}} {{#if href}}[`#{{id}}`]({{href}}){{/if}}{{/each}}
+      - {{#if commit.breaking}}**Breaking change:** {{/if}}{{commit.subject}}{{#each fixes}} {{#if id}}#{{id}}{{/if}}{{/each}} by {{githubUser commit.author}}
     {{/each}}
   {{/if}}
 

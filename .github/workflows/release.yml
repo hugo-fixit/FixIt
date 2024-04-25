@@ -24,6 +24,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0    # Fetch all history for generating release notes
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -33,7 +35,7 @@ jobs:
       - name: Install dependencies and generate release notes
         run: |
           npm install
-          npm run release
+          npm run release -- --starting-version ${{ github.ref_name }}
 
       - name: GitHub Release
         uses: softprops/action-gh-release@v2

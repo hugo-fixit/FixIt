@@ -3,12 +3,8 @@
   "template": ".auto-changelog/template.hbs",
   "handlebarsSetup": ".auto-changelog/setup.js",
   "sortCommits": "relevance",
-  "package": true,
-  "unreleased": true,
   "commitLimit": false,
-  "unreleasedOnly": true,
   "replaceText": {
-    "#(\\d+)": "[#$1](https://github.com/hugo-fixit/FixIt/issues/$1)",
     "^(Feat|feat):": ":sparkles: Feat:",
     "^(Fix|fix):": ":bug: Fix:",
     "^(Build|build):": ":hammer: Build:",
