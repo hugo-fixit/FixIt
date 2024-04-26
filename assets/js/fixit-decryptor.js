@@ -89,13 +89,13 @@ FixItDecryptor = function (options = {}) {
 
     const decryptorHandler = () => {
       const $content = document.querySelector('#content');
-      _validatePassword(this.$el, $content, (password, salt) => {
+      _validatePassword(this.$el, $content, (passwordMD5, salt) => {
         // cache decryption statistics
         window.localStorage?.setItem(
           `fixit-decryptor/#${location.pathname}`,
           JSON.stringify({
             expiration: Math.ceil(Date.now() / 1000) + this.options.duration,
-            password,
+            password: passwordMD5,
             salt,
           })
         );
@@ -147,7 +147,7 @@ FixItDecryptor = function (options = {}) {
       const decryptorHandler = () => {
         const $decryptor = $shortcode.querySelector('.fixit-decryptor-container');
         const $content = $shortcode.querySelector('[data-password][data-content]');
-        _validatePassword($decryptor, $content, (password, salt) => {
+        _validatePassword($decryptor, $content, (passwordMD5, salt) => {
           _decryptContent($content, salt, false);
         });
       };
