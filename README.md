@@ -101,6 +101,10 @@ To see this theme in action, here are some [live demo sites](https://fixit.lruih
 - Options to **cache remote image** locally
 - ...
 
+### Theme Components
+
+The FixIt theme balances **simplicity** and **extensibility** with extra [Hugo theme components](https://fixit.lruihao.cn/components/) for customization.
+
 ## Multilingual and i18n
 
 FixIt supports the following languages:
