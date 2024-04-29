@@ -11,6 +11,7 @@
   {{- end -}}
   {{- $related := $posts.Related . | first ($params.related.count | default 5) -}}
   {{- with $related -}}
+    <hr class="awesome-hr" />
     <h2 id="see-also">{{ T "single.relatedContent" }}</h2>
     <ul>
       {{- range $i, $p := . -}}
