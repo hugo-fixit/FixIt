@@ -13,9 +13,7 @@
 {{- end -}}
 
 <h{{ .Level }} id="{{ .Anchor | safeURL }}" class="heading-element">
-  <a href="#{{ .Anchor | safeURL }}" class="heading-mark"></a>
-
-
+  {{- $title := .Text -}}
   {{- /* Only enable in main section pages */ -}}
   {{- $onlyMainSection := cond $params.heading.number.onlyMainSection (eq .Page.Type "posts") true -}}
   {{- if $params.heading.number.enable | and $onlyMainSection -}}
@@ -33,7 +31,7 @@
     {{- $h6 := "6" | index $headingMap | int | string -}}
 
     {{- /* Apply the level based on the format */ -}}
-    {{- $title := "" -}}
+    {{- $title = "" -}}
     {{- if .Level | eq 1 -}}
       {{- $title = $h1Format -}}
     {{- else if .Level | eq 2 -}}
@@ -55,10 +53,10 @@
     {{- $title = replace $title "{h5}" $h5 -}}
     {{- $title = replace $title "{h6}" $h6 -}}
     {{- $title = replace $title "{title}" .Text -}}
-    {{- $title | safeHTML -}}
-
-  {{- else -}}
-    {{- .Text | safeHTML -}}
   {{- end -}}
+  <span>{{ $title | safeHTML }}</span>
+  <a href="#{{ .Anchor | safeURL }}" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
 </h{{ .Level }}>
 {{- /* EOF */ -}}

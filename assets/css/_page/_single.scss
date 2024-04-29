@@ -97,68 +97,61 @@
   .content {
     > h1,
     > h2 {
-      font-size: 1.5rem;
-
-      & code {
-        font-size: 1.25rem;
-      }
+      font-size: 1.5em;
+      padding-bottom: 0.3em;
+      border-bottom: 1px solid $global-border-color;
     }
 
     > h3 {
-      font-size: 1.375rem;
-
-      & code {
-        font-size: 1.125rem;
-      }
+      font-size: 1.25em;
     }
 
     > h4 {
-      font-size: 1.25rem;
-
-      & code {
-        font-size: 1rem;
-      }
+      font-size: 1em;
     }
 
     > h5 {
-      font-size: 1.125rem;
+      font-size: 0.875em;
     }
 
     > h6 {
-      font-size: 1rem;
+      font-size: 0.85em;
     }
 
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
+    > .heading-element {
+      display: flex;
       font-weight: bold;
-      margin: 1.2rem 0;
+      line-height: 1.25;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
 
       [data-theme='dark'] & {
         font-weight: bolder;
       }
-    }
 
-    > h2,
-    > h3,
-    > h4,
-    > h5,
-    > h6 {
-      > .heading-mark::before {
-        content: '|';
-        margin-right: 0.3125rem;
-        color: $single-link-color;
+      code {
+        padding: 0 .2em;
+        font-size: inherit;
+      }
 
-        [data-theme='dark'] & {
-          color: $single-link-color-dark;
+      &:hover {
+        > .heading-mark {
+          opacity: 1;
         }
       }
-    }
 
-    > h2 > .heading-mark::before {
-      content: '#';
+      > .heading-mark {
+        display: inline-flex;
+        align-items: center;
+        opacity: 0;
+        padding-inline: 0.5rem;
+        transition: all 0.2s ease-in-out;
+        @include link(false, false);
+
+        svg {
+          fill: currentColor;
+        }
+      }
     }
 
     p {
