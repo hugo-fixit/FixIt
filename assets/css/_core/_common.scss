@@ -47,11 +47,7 @@
 
 @each $color, $value in $theme-colors {
   .text-#{$color} {
-    color: #{$value} !important;
-
-    [data-theme='dark'] & {
-      color: #{darken($value, 5%)} !important;
-    }
+    color: var(--#{$prefix}#{$color}) !important;
   }
 }
 

@@ -15,14 +15,14 @@
       width: max-content;
       transform: rotate(30deg);
       margin-right: 0.25em;
-      @extend .text-danger;
+      color: var(--#{$prefix}danger);
     }
 
     .icon-repost {
       display: inline-block;
       width: max-content;
       margin-right: 0.25em;
-      @extend .text-success;
+      color: var(--#{$prefix}success);
     }
   }
 

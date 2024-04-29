@@ -5,9 +5,6 @@
   @each $color, $value in $theme-colors {
     --#{$prefix}#{$color}: #{$value};
   }
-  @each $color, $value in $theme-colors {
-    --#{$prefix}#{$color}-dark: #{darken($value, 5%)};
-  }
 
   // Scroll margin top and Stack sticky top related
   --#{$prefix}scroll-mt: calc(#{$header-height} + #{$global-scroll-margin-top});
@@ -22,6 +19,10 @@
 
 // Dark theme
 [data-theme=dark] {
+  @each $color, $value in $theme-colors {
+    --#{$prefix}#{$color}: #{darken($value, 5%)};
+  }
+
   --#{$prefix}hr-background-color: #{lighten($global-border-color-dark, 5%)};
   --#{$prefix}hr-before-color: #{darken($global-link-hover-color-dark, 4%)};
 }

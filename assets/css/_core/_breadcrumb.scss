@@ -42,7 +42,7 @@
       }
 
       &.active {
-        @extend .text-secondary;
+        color: var(--#{$prefix}secondary);
       }
     }
   }
