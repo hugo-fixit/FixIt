@@ -76,11 +76,19 @@
     white-space: nowrap;
   }
 
-  &icon-globe {
+  &icon-shortcut {
     width: 4rem;
     height: 4rem;
     flex-shrink: 0;
     margin-left: 0.25rem;
+
+    &:is(i) {
+      text-align: center;
+      font-size: 3rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   [data-theme='dark'] & {

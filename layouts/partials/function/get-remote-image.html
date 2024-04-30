@@ -1,10 +1,13 @@
 {{- /* cache remote image locally */ -}}
 {{- $resource := 0 -}}
 {{- $suffixList := slice ".jpeg" ".jpg" ".png" ".gif" ".bmp" ".tif" ".tiff" ".webp" ".avif" ".svg" -}}
-{{- $suffixValid := (dict "Path" . "Suffixes" $suffixList | partial "function/suffix-validation.html") -}}
+{{- $suffixValid := (dict "Path" .Path "Suffixes" $suffixList | partial "function/suffix-validation.html") -}}
+{{- /* maybe could add domain validation */ -}}
+{{- $pass := $suffixValid | or .Pass -}}
 
-{{- if $suffixValid -}}
-  {{- with $remoteResource := resources.GetRemote . -}}
+{{- if $pass -}}
+  {{- with $remoteResource := resources.GetRemote .Path -}}
+    {{ printf "Remote image: %v" $remoteResource.ResourceType -}}
     {{- with .Err -}}
       {{- warnf "%s" . -}}
     {{ else }}

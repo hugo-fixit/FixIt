@@ -10,11 +10,13 @@
   {{- $options = dict "Rel" (.Get "rel") | merge $options -}}
   {{- $options = dict "Download" (.Get "download") | merge $options -}}
   {{- $options = dict "Card" (.Get "card") | merge $options -}}
+  {{- $options = dict "CardIcon" (.Get "card-icon") | merge $options -}}
   {{- $options = dict "Noreferrer" (.Get "noreferrer") | merge $options -}}
 {{- else -}}
   {{- $options = dict "Content" (.Get 1 | default (.Get 0)) | merge $options -}}
   {{- $options = dict "Title" (.Get 2) | merge $options -}}
   {{- $options = dict "Card" (.Get 3) | merge $options -}}
+  {{- $options = dict "CardIcon" (.Get 4) | merge $options -}}
 {{- end -}}
 {{- $options = dict "ExternalIcon" (.Get "external-icon" | default .Site.Params.externalIcon) | merge $options -}}
 {{- partial "plugin/link.html" $options -}}

@@ -15,7 +15,7 @@
 {{- else -}}
   {{- $cacheRemoteImages := .CacheRemoteImages | default false -}}
   {{- if $cacheRemoteImages -}}
-    {{- $resource = partial "function/get-remote-image.html" .Path -}}
+    {{- $resource = partial "function/get-remote-image.html" (dict "Path" .Path) -}}
   {{- end -}}
 {{- end -}}
 
