@@ -1115,12 +1115,12 @@ enableEmoji = true
     # footer = "custom/footer.html"
 
   # FixIt 0.2.15 | NEW Developer options
+  # Select the scope named `public_repo` to generate personal access token,
+  # Configure with environment variable `HUGO_PARAMS_GHTOKEN=xxx`, see https://gohugo.io/functions/os/getenv/#examples
   [params.dev]
     enable = false
     # Check for updates
     c4u = false
-    # Please do not expose to public!
-    githubToken = ""
     # Mobile Devtools config
     [params.dev.mDevtools]
       enable = false
