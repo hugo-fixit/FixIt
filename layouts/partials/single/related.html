@@ -15,8 +15,9 @@
     <h2 id="see-also">{{ T "single.relatedContent" }}</h2>
     <ul>
       {{- range $i, $p := . -}}
+        {{- $title := title .LinkTitle -}}
         <li>
-          <a href="{{ .RelPermalink }}" title="{{ .LinkTitle }}">{{ .LinkTitle }}</a>
+          <a href="{{ .RelPermalink }}" title="{{ $title }}">{{ $title }}</a>
           {{- with .HeadingsFiltered -}}
             <ul>
               {{- range . -}}

@@ -1,9 +1,9 @@
 {{- $params := partial "function/params.html" -}}
 {{- $author := .Store.Get "author" -}}
-# {{ .Title }}
+# {{ title .Title }}
 
 {{ if $params.password -}}
-  ***{{ T "single.encryptedAbstract" }}***
+  _**{{ T "single.encryptedAbstract" }}**_
 {{- else -}}
   {{ .RawContent | replaceRE "\n?{{% fixit-encryptor .+ %}}((\n|.)*){{% /fixit-encryptor %}}\n?" "" }}
 {{- end }}

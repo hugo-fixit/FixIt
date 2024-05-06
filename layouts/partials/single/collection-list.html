@@ -19,17 +19,18 @@
         <nav>
           <ul class="collection-list">
             {{- range $key, $value := $pages -}}
+              {{- $title := title $value.LinkTitle -}}
               {{- if $value.LinkTitle | eq $.LinkTitle -}}
                 {{- $currentKey = $key -}}
-                <li class="collection-item"><span class="active" title="{{ $value.LinkTitle }}">{{ $value.LinkTitle }}</span></li>
+                <li class="collection-item"><span class="active" title="{{ $title }}">{{ $title }}</span></li>
               {{- else }}
-                <li class="collection-item"><a href="{{ $value.RelPermalink }}" title="{{ $value.LinkTitle }}">{{ $value.LinkTitle }}</a></li>
+                <li class="collection-item"><a href="{{ $value.RelPermalink }}" title="{{ $title }}">{{ $title }}</a></li>
               {{- end }}
             {{- end -}}
           </ul>
           <div class="collection-nav-simple">
             {{- with $pages.Next $ -}}
-              <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ .LinkTitle }}">
+              <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ title .LinkTitle }}">
                 {{- dict "Class" "fa-solid fa-angle-left fa-fw" | partial "plugin/icon.html" -}}
               </a>
             {{- else -}}
@@ -37,7 +38,7 @@
             {{- end -}}
             <span class="text-secondary">{{ add $currentKey 1 }}/{{ $pages.Len }}</span>
             {{- with $pages.Prev $ -}}
-              <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ .LinkTitle }}">
+              <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ title .LinkTitle }}">
                 {{- dict "Class" "fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
               </a>
             {{- else -}}

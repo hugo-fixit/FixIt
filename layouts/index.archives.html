@@ -51,7 +51,7 @@
               {{- if eq $repost.enable true -}}
                 {{- dict "Class" "fa-solid fa-share fa-fw text-success me-1" | partial "plugin/icon.html" -}}
               {{- end -}}
-              {{- .LinkTitle -}}
+              {{- title .LinkTitle -}}
             </a>
             <span class="archive-item-date" title='{{ "2006-01-02 15:04:05" | .Date.Format }}'>
               {{- .Date | dateFormat ($.Site.Params.archives.dateFormat | default "01-02") -}}
