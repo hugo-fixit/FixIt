@@ -1,5 +1,5 @@
 {{- define "title" -}}
-  {{- .Params.Title | default (T .Section) | default .Section | dict "Some" | T "allSome" -}}
+  {{- title (.Params.Title | default ((T .Section) | default .Section | dict "Some" | T "allSome")) -}}
   {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
 {{- end -}}
 
@@ -8,8 +8,12 @@
     <div class="header">
       {{- /* Title */ -}}
       <h1 class="single-title animate__animated animate__pulse animate__faster">
-        {{- dict "Class" "fa-solid fa-feather fa-fw me-1" | partial "plugin/icon.html" -}}
-        {{- .Params.Title | default (T .Section) | default .Section | dict "Some" | T "allSome" }} <sup>{{ .Pages.Len }}</sup>
+        {{- $titleIcon := "fa-solid fa-feather" -}}
+        {{- with .Params.titleIcon -}}
+          {{- $titleIcon = . -}}
+        {{- end -}}
+        {{- dict "Class" (add $titleIcon " fa-fw me-1") | partial "plugin/icon.html" -}}
+        {{- title (.Params.Title | default ((T .Section) | default .Section | dict "Some" | T "allSome")) }} <sup>{{ .Pages.Len }}</sup>
       </h1>
       {{- /* Total word count */ -}}
       {{- /* See https://github.com/hugo-fixit/FixIt/issues/124 */ -}}
