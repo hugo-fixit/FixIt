@@ -19,7 +19,7 @@
   "license": "MIT",
   "author": "Lruihao (https://lruihao.cn)",
   "scripts": {
-    "build": "hugo --source=demo --themesDir ../.. --theme $PWD --gc --minify  --logLevel info",
+    "build": "hugo --source=demo --themesDir ../.. --theme $PWD --gc --minify --logLevel info",
     "server": "hugo server --source=demo --themesDir ../.. --theme $PWD -D --disableFastRender --navigateToChanged --ignoreCache",
     "server:production": "npm run server -- -e production",
     "server:docs": "hugo server --source=../fixit-docs -D --disableFastRender --navigateToChanged --ignoreCache",
