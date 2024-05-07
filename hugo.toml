@@ -694,6 +694,8 @@ enableEmoji = true
       closeComment = false
     # FixIt 0.3.0 | NEW page heading config
     [params.page.heading]
+      # FixIt 0.3.3 | NEW whether to capitalize automatic text of headings
+      capitalize = false
       # used with `markup.tableOfContents.ordered` parameter
       [params.page.heading.number]
         # whether to enable auto heading numbering
