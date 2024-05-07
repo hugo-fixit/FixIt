@@ -76,7 +76,7 @@
     white-space: nowrap;
   }
 
-  &shortcut-icon {
+  &icon-shortcut {
     width: 4rem;
     height: 4rem;
     flex-shrink: 0;
@@ -89,14 +89,6 @@
       align-items: center;
       justify-content: center;
     }
-  }
-
-  &shortcut-image {
-    width: 4rem;
-    height: 4rem !important;
-    flex-shrink: 0;
-    margin-left: 0.25rem;
-    object-fit: cover;
   }
 
   [data-theme='dark'] & {

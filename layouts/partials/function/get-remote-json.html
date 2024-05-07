@@ -1,6 +1,5 @@
 {{- $response := dict -}}
-{{- $options := .OPTIONS | default dict -}}
-{{- with resources.GetRemote .URL $options -}}
+{{- with resources.GetRemote .URL .OPTIONS -}}
   {{- with .Err -}}
     {{- erroridf "error-get-remote-json" "%s" . -}}
   {{- else -}}
