@@ -615,6 +615,186 @@ enableEmoji = true
     Phone = ""
     Email = ""
     RSS = true
+    # custom social links like the following
+    # [params.social.twitter]
+    #   id = "lruihao"
+    #   weight = 3
+    #   prefix = "https://twitter.com/"
+    #   Title = "Twitter"
+    #   [social.twitter.icon]
+    #     class = "fa-brands fa-x-twitter fa-fw"
+
+  # TypeIt config
+  [params.typeit]
+    # typing speed between each step (measured in milliseconds)
+    speed = 100
+    # blinking speed of the cursor (measured in milliseconds)
+    cursorSpeed = 1000
+    # character used for the cursor (HTML format is supported)
+    cursorChar = "|"
+    # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
+    duration = -1
+    # FixIt 0.2.18 | NEW whether your strings will continuously loop after completing
+    loop = false
+
+  # FixIt 0.2.15 | NEW Mermaid config
+  [params.mermaid]
+    # For values, see https://mermaid.js.org/config/theming.html#available-themes
+    themes = ["default", "dark"]
+
+  # FixIt 0.2.12 | NEW PanguJS config
+  [params.pangu]
+    # For Chinese writing
+    enable = false
+    selector = "article" # FixIt 0.2.17 | NEW
+
+  # FixIt 0.2.12 | NEW Watermark config
+  # Detail config see https://github.com/Lruihao/watermark#readme
+  [params.watermark]
+    enable = false
+    # watermark's text (HTML format is supported)
+    content = ""
+    # watermark's transparency
+    opacity = 0.1
+    # watermark's width. unit: px
+    width = 150
+    # watermark's height. unit: px
+    height = 20
+    # row spacing of watermarks. unit: px
+    rowSpacing = 60
+    # col spacing of watermarks. unit: px
+    colSpacing = 30
+    # watermark's tangent angle. unit: deg
+    rotate = 15
+    # watermark's fontSize. unit: rem
+    fontSize = 0.85
+    # FixIt 0.2.13 | NEW watermark's fontFamily
+    fontFamily = "inherit"
+
+  # FixIt 0.2.12 | NEW Busuanzi count
+  [params.ibruce]
+    enable = false
+    # Enable in post meta
+    enablePost = false
+
+  # Site verification code config for Google/Bing/Yandex/Pinterest/Baidu/360/Sogou
+  [params.verification]
+    google = ""
+    bing = ""
+    yandex = ""
+    pinterest = ""
+    baidu = ""
+    so = ""
+    sogou = ""
+
+  # Site SEO config
+  [params.seo]
+    # image URL
+    image = ""
+    # thumbnail URL
+    thumbnailUrl = ""
+
+  # Analytics config
+  [params.analytics]
+    enable = false
+    # Google Analytics
+    [params.analytics.google]
+      id = ""
+      # whether to anonymize IP
+      anonymizeIP = true
+    # Fathom Analytics
+    [params.analytics.fathom]
+      id = ""
+      # server url for your tracker if you're self hosting
+      server = ""
+
+  # Cookie consent config
+  [params.cookieconsent]
+    enable = true
+    # text strings used for Cookie consent banner
+    [params.cookieconsent.content]
+      message = ""
+      dismiss = ""
+      link = ""
+
+  # CDN config for third-party library files
+  [params.cdn]
+    # CDN data file name, disabled by default ["jsdelivr.yml", "unpkg.yml", ...]
+    # located in "themes/FixIt/assets/data/cdn/" directory
+    # you can store your own data files in the same path under your project: "assets/data/cdn/"
+    data = ""
+
+  # Compatibility config
+  [params.compatibility]
+    # whether to use Polyfill.io to be compatible with older browsers
+    polyfill = false
+    # whether to use object-fit-images to be compatible with older browsers
+    objectFit = false
+
+  # FixIt 0.2.14 | NEW GitHub banner in the top-right or top-left corner
+  [params.githubCorner]
+    enable = false
+    permalink = "https://github.com/hugo-fixit/FixIt"
+    title = "View source on GitHub"
+    position = "right" # ["left", "right"]
+
+  # FixIt 0.2.14 | NEW Gravatar config
+  [params.gravatar]
+    # FixIt 0.2.18 | NEW Depends on the author's email, if the author's email is not set, the local avatar will be used
+    enable = false
+    # Gravatar host, default: "www.gravatar.com"
+    host = "www.gravatar.com" # ["cravatar.cn", "gravatar.loli.net", ...]
+    style = "" # ["", "mp", "identicon", "monsterid", "wavatar", "retro", "blank", "robohash"]
+
+  # FixIt 0.2.16 | NEW Back to top
+  [params.backToTop]
+    enable = true
+    # Scroll percent label in b2t button
+    scrollpercent = false
+
+  # FixIt 0.2.16 | NEW Reading progress bar
+  [params.readingProgress]
+    enable = false
+    # Available values: ["left", "right"]
+    start = "left"
+    # Available values: ["top", "bottom"]
+    position = "top"
+    reversed = false
+    light = ""
+    dark = ""
+    height = "2px"
+  
+  # FixIt 0.2.17 | NEW Progress bar in the top during page loading.
+  # For more information: https://github.com/CodeByZach/pace
+  [params.pace]
+    enable = false
+    # All available colors:
+    # ["black", "blue", "green", "orange", "pink", "purple", "red", "silver", "white", "yellow"]
+    color = "blue"
+    # All available themes:
+    # ["barber-shop", "big-counter", "bounce", "center-atom", "center-circle", "center-radar", "center-simple",
+    # "corner-indicator", "fill-left", "flash", "flat-top", "loading-bar", "mac-osx", "material", "minimal"]
+    theme = "minimal"
+  
+  # FixIt 0.2.17 | NEW Define custom file paths
+  # Create your custom files in site directory `layouts/partials/custom` and uncomment needed files below
+  [params.customFilePath]
+    # aside = "custom/aside.html"
+    # profile = "custom/profile.html"
+    # footer = "custom/footer.html"
+
+  # FixIt 0.2.15 | NEW Developer options
+  # Select the scope named `public_repo` to generate personal access token,
+  # Configure with environment variable `HUGO_PARAMS_GHTOKEN=xxx`, see https://gohugo.io/functions/os/getenv/#examples
+  [params.dev]
+    enable = false
+    # Check for updates
+    c4u = false
+    # Mobile Devtools config
+    [params.dev.mDevtools]
+      enable = false
+      # "vConsole", "eruda" supported
+      type = "vConsole"
 
   # Page config
   [params.page]
@@ -956,175 +1136,3 @@ enableEmoji = true
       [params.page.seo.publisher]
         name = ""
         logoUrl = ""
-
-  # TypeIt config
-  [params.typeit]
-    # typing speed between each step (measured in milliseconds)
-    speed = 100
-    # blinking speed of the cursor (measured in milliseconds)
-    cursorSpeed = 1000
-    # character used for the cursor (HTML format is supported)
-    cursorChar = "|"
-    # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
-    duration = -1
-    # FixIt 0.2.18 | NEW whether your strings will continuously loop after completing
-    loop = false
-
-  # FixIt 0.2.15 | NEW Mermaid config
-  [params.mermaid]
-    # For values, see https://mermaid.js.org/config/theming.html#available-themes
-    themes = ["default", "dark"]
-
-  # FixIt 0.2.12 | NEW PanguJS config
-  [params.pangu]
-    # For Chinese writing
-    enable = false
-    selector = "article" # FixIt 0.2.17 | NEW
-
-  # FixIt 0.2.12 | NEW Watermark config
-  # Detail config see https://github.com/Lruihao/watermark#readme
-  [params.watermark]
-    enable = false
-    # watermark's text (HTML format is supported)
-    content = ""
-    # watermark's transparency
-    opacity = 0.1
-    # watermark's width. unit: px
-    width = 150
-    # watermark's height. unit: px
-    height = 20
-    # row spacing of watermarks. unit: px
-    rowSpacing = 60
-    # col spacing of watermarks. unit: px
-    colSpacing = 30
-    # watermark's tangent angle. unit: deg
-    rotate = 15
-    # watermark's fontSize. unit: rem
-    fontSize = 0.85
-    # FixIt 0.2.13 | NEW watermark's fontFamily
-    fontFamily = "inherit"
-
-  # FixIt 0.2.12 | NEW Busuanzi count
-  [params.ibruce]
-    enable = false
-    # Enable in post meta
-    enablePost = false
-
-  # Site verification code config for Google/Bing/Yandex/Pinterest/Baidu/360/Sogou
-  [params.verification]
-    google = ""
-    bing = ""
-    yandex = ""
-    pinterest = ""
-    baidu = ""
-    so = ""
-    sogou = ""
-
-  # Site SEO config
-  [params.seo]
-    # image URL
-    image = ""
-    # thumbnail URL
-    thumbnailUrl = ""
-
-  # Analytics config
-  [params.analytics]
-    enable = false
-    # Google Analytics
-    [params.analytics.google]
-      id = ""
-      # whether to anonymize IP
-      anonymizeIP = true
-    # Fathom Analytics
-    [params.analytics.fathom]
-      id = ""
-      # server url for your tracker if you're self hosting
-      server = ""
-
-  # Cookie consent config
-  [params.cookieconsent]
-    enable = true
-    # text strings used for Cookie consent banner
-    [params.cookieconsent.content]
-      message = ""
-      dismiss = ""
-      link = ""
-
-  # CDN config for third-party library files
-  [params.cdn]
-    # CDN data file name, disabled by default ["jsdelivr.yml", "unpkg.yml", ...]
-    # located in "themes/FixIt/assets/data/cdn/" directory
-    # you can store your own data files in the same path under your project: "assets/data/cdn/"
-    data = ""
-
-  # Compatibility config
-  [params.compatibility]
-    # whether to use Polyfill.io to be compatible with older browsers
-    polyfill = false
-    # whether to use object-fit-images to be compatible with older browsers
-    objectFit = false
-
-  # FixIt 0.2.14 | NEW GitHub banner in the top-right or top-left corner
-  [params.githubCorner]
-    enable = false
-    permalink = "https://github.com/hugo-fixit/FixIt"
-    title = "View source on GitHub"
-    position = "right" # ["left", "right"]
-
-  # FixIt 0.2.14 | NEW Gravatar config
-  [params.gravatar]
-    # FixIt 0.2.18 | NEW Depends on the author's email, if the author's email is not set, the local avatar will be used
-    enable = false
-    # Gravatar host, default: "www.gravatar.com"
-    host = "www.gravatar.com" # ["cravatar.cn", "gravatar.loli.net", ...]
-    style = "" # ["", "mp", "identicon", "monsterid", "wavatar", "retro", "blank", "robohash"]
-
-  # FixIt 0.2.16 | NEW Back to top
-  [params.backToTop]
-    enable = true
-    # Scroll percent label in b2t button
-    scrollpercent = false
-
-  # FixIt 0.2.16 | NEW Reading progress bar
-  [params.readingProgress]
-    enable = false
-    # Available values: ["left", "right"]
-    start = "left"
-    # Available values: ["top", "bottom"]
-    position = "top"
-    reversed = false
-    light = ""
-    dark = ""
-    height = "2px"
-  
-  # FixIt 0.2.17 | NEW Progress bar in the top during page loading.
-  # For more information: https://github.com/CodeByZach/pace
-  [params.pace]
-    enable = false
-    # All available colors:
-    # ["black", "blue", "green", "orange", "pink", "purple", "red", "silver", "white", "yellow"]
-    color = "blue"
-    # All available themes:
-    # ["barber-shop", "big-counter", "bounce", "center-atom", "center-circle", "center-radar", "center-simple",
-    # "corner-indicator", "fill-left", "flash", "flat-top", "loading-bar", "mac-osx", "material", "minimal"]
-    theme = "minimal"
-  
-  # FixIt 0.2.17 | NEW Define custom file paths
-  # Create your custom files in site directory `layouts/partials/custom` and uncomment needed files below
-  [params.customFilePath]
-    # aside = "custom/aside.html"
-    # profile = "custom/profile.html"
-    # footer = "custom/footer.html"
-
-  # FixIt 0.2.15 | NEW Developer options
-  # Select the scope named `public_repo` to generate personal access token,
-  # Configure with environment variable `HUGO_PARAMS_GHTOKEN=xxx`, see https://gohugo.io/functions/os/getenv/#examples
-  [params.dev]
-    enable = false
-    # Check for updates
-    c4u = false
-    # Mobile Devtools config
-    [params.dev.mDevtools]
-      enable = false
-      # "vConsole", "eruda" supported
-      type = "vConsole"
