@@ -2,20 +2,6 @@
 {{- $warns := slice -}}
 {{- $errors := slice -}}
 
-{{- with .Site.Params.home.profile.gravatarSite -}}
-  {{- $warns = $warns | append "The parameter `home.profile.gravatarSite` is deprecated since v0.2.14, use `gravatar.host` instead." -}}
-{{- end -}}
-{{- with .Site.Params.ibruce.siteTime -}}
-  {{- $warns = $warns | append "The parameter `ibruce.siteTime` is deprecated since v0.2.14, use `footer.siteTime` instead." -}}
-{{- end -}}
-{{- with .Site.Params.autoBookmark -}}
-  {{- $warns = $warns | append "The parameter `autoBookmark` is deprecated since v0.2.17, use `page.autoBookmark` instead." -}}
-{{- end -}}
-{{- with .Site.Params.footer.siteTime -}}
-  {{- if not (reflect.IsMap .) -}}
-    {{- $warns = $warns | append "The parameter `footer.siteTime` has changed to a Map since v0.2.17. Please correct the format!" -}}
-  {{- end -}}
-{{- end -}}
 {{- with .Site.Params.gitRepo | or .Site.Params.page.edit -}}
   {{- $warns = $warns | append "The parameter `params.gitRepo` and `params.page.edit` is deprecated since v0.3.0, use `params.gitInfo` instead." -}}
 {{- end -}}
