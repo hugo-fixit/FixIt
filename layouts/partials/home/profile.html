@@ -108,6 +108,9 @@
     </h3>
   {{- end -}}
 
-  {{- /* Custom Content */ -}}
+  {{- /* TODO remove Custom Content */ -}}
   {{- partial (.Scratch.Get "customFilePath").profile . -}}
+
+  {{- /* Custom Profile */ -}}
+  {{- block "custom-profile" . }}{{ end -}}
 </div>

@@ -49,11 +49,15 @@
       {{- if .Dark -}}
         {{- $style = printf "%v--bg-progress-dark: %v;" $style .Dark -}}
       {{- end -}}
-      <div class="reading-progress-bar" {{ printf "style=\"%v\"" $style | safeHTMLAttr }}></div>
+      <div class="reading-progress-bar" {{ printf `style="%v"` $style | safeHTMLAttr }}></div>
     {{- end -}}
   {{- end -}}
+
+  {{- /* Custom widgets */ -}}
+  {{- block "custom-widgets" . }}{{ end -}}
 
   <noscript>
     <div class="noscript-warning">{{ T "baseof.noscript" }}</div>
   </noscript>
 </div>
+{{- /* EOF */ -}}

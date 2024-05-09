@@ -12,8 +12,12 @@
   <aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="{{ T "collections" }}">
     {{- /* Collection List */ -}}
     {{- partial "single/collection-list.html" . -}}
-     {{- /* Custom part for aside */ -}}
+
+    {{- /* TODO remove Custom part for aside */ -}}
     {{- partial (.Scratch.Get "customFilePath").aside . -}}
+
+    {{- /* Custom Aside */ -}}
+    {{- block "custom-aside" . }}{{ end -}}
   </aside>
 
   <article class="page single">

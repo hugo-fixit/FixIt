@@ -3,8 +3,11 @@
 {{- if ne $footerConfig.enable false -}}
   <footer class="footer">
     <div class="footer-container">
-      {{- /* Custom Content */ -}}
+      {{- /* TODO remove Custom Content */ -}}
       {{- partial (.Scratch.Get "customFilePath").footer . -}}
+
+      {{- /*  Custom Footer */ -}}
+      {{- block "custom-footer" . }}{{ end -}}
 
       {{- /* Powered by Hugo and Theme - FixIt */ -}}
       {{- if ne $footerConfig.powered.enable false -}}

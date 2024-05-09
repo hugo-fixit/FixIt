@@ -1,4 +1,5 @@
 {{- partial "init/index.html" . -}}
+{{- partial "custom.html" . -}}
 
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="{{ .Site.LanguageCode }}">
@@ -14,6 +15,8 @@
     {{- partial "head/meta.html" . -}}
     {{- partial "head/link.html" . -}}
     {{- partial "head/seo.html" . -}}
+    {{- /* Custom head */ -}}
+    {{- block "custom-head" . }}{{ end -}}
   </head>
   <body data-header-desktop="{{ .Site.Params.header.desktopMode }}" data-header-mobile="{{ .Site.Params.header.mobileMode }}">
     {{- /* Check theme isDark before body rendering */ -}}
