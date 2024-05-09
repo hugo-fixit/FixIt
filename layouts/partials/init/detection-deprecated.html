@@ -6,6 +6,14 @@
   {{- $warns = $warns | append "The parameter `params.gitRepo` and `params.page.edit` is deprecated since v0.3.0, use `params.gitInfo` instead." -}}
 {{- end -}}
 
+{{- with .Site.Params.customFilePath -}}
+  {{- $warns = $warns | append "The parameter `params.customFilePath` is deprecated since v0.3.7, use `layouts/partials/custom.html` instead." -}}
+{{- end -}}
+
+{{- with .Site.Params.footer.custom -}}
+  {{- $warns = $warns | append "The parameter `params.footer.custom` is deprecated since v0.3.7, use `layouts/partials/custom.html` instead." -}}
+{{- end -}}
+
 {{- if len $warns -}}
   {{- warnf "Deprecated parameter detection until %v\n  - %v\n\n" (.Scratch.Get "version") (delimit $warns "\n  - ") -}}
 {{- end -}}
