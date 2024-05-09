@@ -4,6 +4,7 @@
   "handlebarsSetup": ".auto-changelog/setup.js",
   "sortCommits": "relevance",
   "commitLimit": false,
+  "ignoreCommitPattern": "\\(ignore\\)",
   "replaceText": {
     "^(Feat|feat):": ":sparkles: Feat:",
     "^(Fix|fix):": ":bug: Fix:",
