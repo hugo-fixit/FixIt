@@ -99,6 +99,7 @@ To see this theme in action, here are some [live demo sites](https://fixit.lruih
 - **Web Watermark** supported by [cell-watermark](https://github.com/Lruihao/watermark)
 - **Chinese typesetting** supported by [pangu.js](https://github.com/vinta/pangu.js)
 - Options to **cache remote image** locally
+- High **extensibility**
 - ...
 
 ### Theme Components

@@ -99,6 +99,7 @@
 - 支持基于 [cell-watermark](https://github.com/Lruihao/watermark) 的**网页水印**
 - 支持基于 [pangu.js](https://github.com/vinta/pangu.js) 的**中文排版**
 - 支持本地**缓存远程图床图片**
+- 高**扩展性**
 - ……
 
 ### 主题组件
