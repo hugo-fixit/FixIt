@@ -299,11 +299,12 @@
     {{- $giscus := $comment.giscus | default dict -}}
     {{- if $giscus.enable -}}
       {{- with $giscus -}}
+        {{- $commentConfig = .origin | default "https://giscus.app" | dict "origin" | dict "giscus" | merge $commentConfig -}}
         {{- $commentConfig = .lightTheme | default "light" | dict "lightTheme" | dict "giscus" | merge $commentConfig -}}
         {{- $commentConfig = .darkTheme | default "dark" | dict "darkTheme" | dict "giscus" | merge $commentConfig -}}
         <div id="giscus" class="comment">
           <script
-            src="https://giscus.app/client.js"
+            src="{{ .Origin }}/client.js"
             data-repo="{{ .Repo }}"
             data-repo-id="{{ .RepoId }}"
             data-category="{{ .Category }}"
