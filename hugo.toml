@@ -1109,6 +1109,7 @@ enableEmoji = true
         category = ""
         categoryId = ""
         mapping = ""
+        origin = "https://giscus.app" # Or set it to your self-hosted domain
         strict = "0" # FixIt NEW | 0.2.18
         term = ""
         reactionsEnabled = "1"
