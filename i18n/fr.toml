@@ -15,7 +15,7 @@ quicklyUpgrade = "La mise à jour rapide utilise la commande: "
 [baseof]
 backToTop = "Retour en Haut"
 viewComments = "Afficher les Commentaires"
-noscript = "Le thème FixIt fonctionne mieux quand JavaScript est activé."
+noscript = "Ce site Web fonctionne mieux quand JavaScript est activé."
 # === baseof ===
 
 # === Taxonomy ===

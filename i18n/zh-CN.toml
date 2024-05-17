@@ -15,7 +15,7 @@ quicklyUpgrade = "使用命令快速升级："
 [baseof]
 backToTop = "回到顶部"
 viewComments = "查看评论"
-noscript = "FixIt 主题在启用 JavaScript 的情况下效果最佳。"
+noscript = "该网站在启用 JavaScript 的情况下效果最佳。"
 # === baseof ===
 
 # === Taxonomy ===
