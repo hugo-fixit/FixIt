@@ -1,0 +1,7 @@
+{{- /* reference https://developer.open-douyin.com/docs/resource/zh-CN/dop/develop/openapi/video-management/douyin/iframe-player/get-iframe-by-video */ -}}
+{{- $id := cond .IsNamedParams (.Get "id") (.Get 0) -}}
+
+<div class="douyin">
+  <iframe src="//open.douyin.com/player/video?vid={{ $id }}&autoplay=0" border="0" framespacing="0" allowfullscreen="true"></iframe>
+</div>
+{{- /* EOF */ -}}
