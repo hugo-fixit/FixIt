@@ -3,9 +3,6 @@
 {{- if ne $footerConfig.enable false -}}
   <footer class="footer">
     <div class="footer-container">
-      {{- /* TODO remove Custom Content */ -}}
-      {{- partial (.Scratch.Get "customFilePath").footer . -}}
-
       {{- /*  Custom Footer */ -}}
       {{- block "custom-footer" . }}{{ end -}}
 

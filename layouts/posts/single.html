@@ -13,9 +13,6 @@
     {{- /* Collection List */ -}}
     {{- partial "single/collection-list.html" . -}}
 
-    {{- /* TODO remove Custom part for aside */ -}}
-    {{- partial (.Scratch.Get "customFilePath").aside . -}}
-
     {{- /* Custom Aside */ -}}
     {{- block "custom-aside" . }}{{ end -}}
   </aside>
