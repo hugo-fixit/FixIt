@@ -143,9 +143,9 @@ Make sure that you follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) while contrib
 
 **When contributing, please first discuss the change you wish to make via an issue on this repository before making the actual change**.
 
-## [Contributors](https://github.com/hugo-fixit/FixIt/graphs/contributors)
-
 ## Acknowledgements
+
+Thanks to all the [contributors](https://github.com/hugo-fixit/FixIt/graphs/contributors) for their support!
 
 <details>
 <summary>Thanks to the authors of following resources included in the theme:</summary>
