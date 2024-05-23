@@ -90,7 +90,7 @@ To see this theme in action, here are some [live demo sites](https://fixit.lruih
 - **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
 - **Mapbox** shortcode supported by [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
 - **Music player** shortcode supported by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
-- **Bilibili player** shortcode
+- **Bilibili player** and **Douyin player** shortcode
 - Kinds of **admonitions** shortcode
 - **Custom style** shortcode
 - **Custom script** shortcode
@@ -123,13 +123,12 @@ FixIt supports the following languages:
 - Russian
 - Romanian
 - Vietnamese
+- Hindi
 - [Contribute with a new language](https://github.com/hugo-fixit/FixIt/pulls)
 
 [Languages Compatibility](https://fixit.lruihao.cn/documentation/basics/#language-compatibility)
 
 ## [Roadmap](https://github.com/hugo-fixit/FixIt/projects/1)
-
-## [Changelog](/CHANGELOG.md)
 
 ## Questions, ideas, bugs, pull requests
 

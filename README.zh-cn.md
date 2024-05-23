@@ -90,7 +90,7 @@
 - 支持基于 [ECharts](https://echarts.apache.org/) 的**交互式数据可视化** shortcode
 - 支持基于 [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js) 的 **Mapbox** shortcode
 - 支持基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 的**音乐播放器** shortcode
-- 支持 **Bilibili 视频** shortcode
+- 支持 **Bilibili 视频** 和 **抖音视频** shortcode
 - 支持多种**注释**的 shortcode
 - 支持**自定义样式**的 shortcode
 - 支持**自定义脚本**的 shortcode
@@ -123,13 +123,12 @@ FixIt 支持下列语言：
 - 俄语
 - 罗马尼亚语
 - 越南语
+- 印地语
 - [贡献一种新的语言](https://github.com/hugo-fixit/FixIt/pulls)
 
 [语言兼容性](https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/#language-compatibility)
 
 ## [路线图](https://github.com/hugo-fixit/FixIt/projects/1)
-
-## [更新日志](/CHANGELOG.md)
 
 ## 问题、想法、bugs 和 PRs
 
