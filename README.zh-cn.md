@@ -143,7 +143,7 @@ FixIt 支持下列语言：
 
 **贡献时，请先通过此存储库上的问题讨论你希望进行的更改，然后再进行实际更改**。
 
-## [所有贡献者](contributors.md)
+## [所有贡献者](https://github.com/hugo-fixit/FixIt/graphs/contributors)
 
 ## 镜像
 
