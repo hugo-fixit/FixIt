@@ -1047,6 +1047,7 @@ enableEmoji = true
         texRenderer = false # FixIt 0.2.16 | NEW
         search = false # FixIt 0.2.16 | NEW
         recaptchaV3Key = "" # FixIt 0.2.16 | NEW
+        turnstileKey = ""
         reaction = false # FixIt 0.2.18 | NEW
       # Facebook comment config (https://developers.facebook.com/docs/plugins/comments)
       [params.page.comment.facebook]
