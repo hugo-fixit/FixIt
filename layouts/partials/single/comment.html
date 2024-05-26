@@ -194,6 +194,9 @@
       {{- with $waline.recaptchaV3Key -}}
         {{- $commentConfig = dict "recaptchaV3Key" . | dict "waline" | merge $commentConfig -}}
       {{- end -}}
+      {{- with $waline.turnstileKey -}}
+        {{- $commentConfig = dict "turnstileKey" . | dict "waline" | merge $commentConfig -}}
+      {{- end -}}
       {{- with $waline.reaction -}}
         {{- $commentConfig = dict "reaction" . | dict "waline" | merge $commentConfig -}}
       {{- end -}}
