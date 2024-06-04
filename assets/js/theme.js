@@ -1039,9 +1039,9 @@ class FixIt {
       return;
     }
     window.addEventListener('beforeunload', () => {
-      window.localStorage?.setItem(`fixit-bookmark/#${location.pathname}`, this.util.getScrollTop());
+      window.sessionStorage?.setItem(`fixit-bookmark/#${location.pathname}`, this.util.getScrollTop());
     });
-    const scrollTop = Number(window.localStorage?.getItem(`fixit-bookmark/#${location.pathname}`));
+    const scrollTop = Number(window.sessionStorage?.getItem(`fixit-bookmark/#${location.pathname}`));
     // If the page opens with a specific hash, just jump out
     if (scrollTop && location.hash === '') {
       window.scrollTo({ 
