@@ -14,19 +14,19 @@
 
 ## 主题文档
 
-- [安装篇](https://fixit.lruihao.cn/zh-cn/documentation/installation/)
-- [入门篇](https://fixit.lruihao.cn/zh-cn/documentation/getting-started/)
-- [内容管理](https://fixit.lruihao.cn/zh-cn/documentation/content-management/)
-- [进阶篇](https://fixit.lruihao.cn/zh-cn/documentation/advanced/)
+1. [安装篇](https://fixit.lruihao.cn/zh-cn/documentation/installation/)
+2. [入门篇](https://fixit.lruihao.cn/zh-cn/documentation/getting-started/)
+3. [内容管理](https://fixit.lruihao.cn/zh-cn/documentation/content-management/)
+4. [进阶篇](https://fixit.lruihao.cn/zh-cn/documentation/advanced/)
 
 或者在本地运行 [文档站点](https://fixit.lruihao.cn/zh-cn/)，更多细节详见 [hugo-fixit/docs](https://github.com/hugo-fixit/docs)。
 
 ## 模板仓库
 
-- [hugo-fixit/hugo-fixit-start](https://github.com/hugo-fixit/hugo-fixit-start)
-- [hugo-fixit/hugo-fixit-start1](https://github.com/hugo-fixit/hugo-fixit-start1)
-- [hugo-fixit/docs](https://github.com/hugo-fixit/docs)
-- [Lruihao/hugo-blog](https://github.com/Lruihao/hugo-blog)
+- [hugo-fixit/hugo-fixit-start](https://github.com/hugo-fixit/hugo-fixit-start/generate)
+- [hugo-fixit/hugo-fixit-start1](https://github.com/hugo-fixit/hugo-fixit-start1/generate)
+- [hugo-fixit/docs](https://github.com/hugo-fixit/docs/generate)
+- [Lruihao/hugo-blog](https://github.com/Lruihao/hugo-blog/generate)
 
 ## 谁在用 FixIt
 

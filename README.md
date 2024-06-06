@@ -14,19 +14,19 @@ It is based on the original [LoveIt Theme](https://github.com/dillonzq/LoveIt), 
 
 ## Getting started
 
-- [Installation](https://fixit.lruihao.cn/documentation/installation/)
-- [Getting Started](https://fixit.lruihao.cn/documentation/getting-started/)
-- [Content Management](https://fixit.lruihao.cn/documentation/content-management/)
-- [Advanced Usage](https://fixit.lruihao.cn/documentation/advanced/)
+1. [Installation](https://fixit.lruihao.cn/documentation/installation/)
+2. [Getting Started](https://fixit.lruihao.cn/documentation/getting-started/)
+3. [Content Management](https://fixit.lruihao.cn/documentation/content-management/)
+4. [Advanced Usage](https://fixit.lruihao.cn/documentation/advanced/)
 
 Alternatively, you can run the [documentation site](https://fixit.lruihao.cn/) locally. For more details, see [hugo-fixit/docs](https://github.com/hugo-fixit/docs).
 
 ## Template repository
 
-- [hugo-fixit/hugo-fixit-start](https://github.com/hugo-fixit/hugo-fixit-start)
-- [hugo-fixit/hugo-fixit-start1](https://github.com/hugo-fixit/hugo-fixit-start1)
-- [hugo-fixit/docs](https://github.com/hugo-fixit/docs)
-- [Lruihao/hugo-blog](https://github.com/Lruihao/hugo-blog)
+- [hugo-fixit/hugo-fixit-start](https://github.com/hugo-fixit/hugo-fixit-start/generate)
+- [hugo-fixit/hugo-fixit-start1](https://github.com/hugo-fixit/hugo-fixit-start1/generate)
+- [hugo-fixit/docs](https://github.com/hugo-fixit/docs/generate)
+- [Lruihao/hugo-blog](https://github.com/Lruihao/hugo-blog/generate)
 
 ## Who used FixIt
 
