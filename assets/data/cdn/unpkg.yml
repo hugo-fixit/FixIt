@@ -24,11 +24,11 @@ libFiles:
   # cookieconsent@3.1.1 https://github.com/osano/cookieconsent
   cookieconsentCSS: cookieconsent@3.1.1/build/cookieconsent.min.css
   cookieconsentJS: cookieconsent@3.1.1/build/cookieconsent.min.js
-  # crypto-js@4.1.1 https://github.com/brix/crypto-js
-  cryptoCoreJS: crypto-js@4.1.1/core.js
-  cryptoEncBase64JS: crypto-js@4.1.1/enc-base64.js
-  cryptoMd5JS: crypto-js@4.1.1/md5.js
-  cryptoSha256JS: crypto-js@4.1.1/sha256.js
+  # crypto-js@4.2.0 https://github.com/brix/crypto-js
+  cryptoCoreJS: crypto-js@4.2.0/core.js
+  cryptoEncBase64JS: crypto-js@4.2.0/enc-base64.js
+  cryptoMd5JS: crypto-js@4.2.0/md5.js
+  cryptoSha256JS: crypto-js@4.2.0/sha256.js
   # echarts@5.3.3 https://github.com/apache/echarts
   echartsJS: echarts@5.3.3/dist/echarts.min.js
   # eruda@3.0.1 https://github.com/liriliri/eruda

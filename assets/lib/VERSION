@@ -5,7 +5,7 @@ artalk@latest https://github.com/ArtalkJS/Artalk
 autocomplete-js@0.38.1 https://github.com/algolia/autocomplete
 cell-watermark@1.0.3 https://github.com/Lruihao/watermark
 cookieconsent@3.1.1 https://github.com/osano/cookieconsent
-crypto-js@4.1.1 https://github.com/brix/crypto-js
+crypto-js@4.2.0 https://github.com/brix/crypto-js
 echarts@5.3.3 https://github.com/apache/echarts
 TODO update emoji-data to 15.x
 emoji-data@14.0.0 https://github.com/iamcal/emoji-data
