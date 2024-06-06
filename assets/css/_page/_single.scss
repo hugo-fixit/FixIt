@@ -170,7 +170,8 @@
         font-size: inherit;
       }
 
-      &:hover {
+      &:hover,
+      &:target {
         > .heading-mark {
           opacity: 1;
         }
