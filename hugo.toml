@@ -1047,7 +1047,7 @@ enableEmoji = true
         texRenderer = false # FixIt 0.2.16 | NEW
         search = false # FixIt 0.2.16 | NEW
         recaptchaV3Key = "" # FixIt 0.2.16 | NEW
-        turnstileKey = ""
+        turnstileKey = "" # FixIt 0.3.8 | NEW
         reaction = false # FixIt 0.2.18 | NEW
       # Facebook comment config (https://developers.facebook.com/docs/plugins/comments)
       [params.page.comment.facebook]
@@ -1098,7 +1098,7 @@ enableEmoji = true
         category = ""
         categoryId = ""
         mapping = ""
-        origin = "https://giscus.app" # Or set it to your self-hosted domain
+        origin = "https://giscus.app" # FixIt NEW | 0.3.7 Or set it to your self-hosted domain
         strict = "0" # FixIt NEW | 0.2.18
         term = ""
         reactionsEnabled = "1"
