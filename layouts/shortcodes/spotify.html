@@ -1,0 +1,6 @@
+{{- $type := cond .IsNamedParams (.Get "type") (.Get 0) -}}
+{{- $id := cond .IsNamedParams (.Get "id") (.Get 1) -}}
+{{- $width := cond .IsNamedParams (.Get "width") (.Get 2) -}}
+{{- $height := cond .IsNamedParams (.Get "height") (.Get 3) -}}
+<iframe src="https://open.spotify.com/embed/{{ $type }}/{{ $id }}" width="{{ default "100%" $width }}" height="{{ default "380" $height }}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+{{- /* EOF */ -}}
