@@ -324,7 +324,9 @@
             crossorigin="anonymous"
             async
             defer
-          ></script>
+          >
+          document.querySelector("#giscus>script").setAttribute("data-theme",this.isDark ? "dark" : "light");
+        </script>
         </div>
         <noscript>
           Please enable JavaScript to view the comments powered by <a href="https://giscus.app/" rel="external nofollow noopener noreferrer">giscus</a>.
