@@ -161,10 +161,7 @@
       list-style: none;
       overflow-y: scroll;
       max-height: 60vh;
-
-      &::-webkit-scrollbar {
-        width: 0;
-      }
+      @include scrollbar-width(none, 0);
 
       .collection-item > a::before,
       .collection-item > span::before {

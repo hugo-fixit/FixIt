@@ -48,14 +48,6 @@
   .aplayer-list {
     background-color: #212121;
 
-    &::-webkit-scrollbar-thumb {
-      background-color: #999;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background-color: #bbb;
-    }
-
     li {
       color: #fff;
       border-top-color: #666;

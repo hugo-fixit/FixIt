@@ -366,13 +366,10 @@ header {
       overflow-y: overlay;
       max-height: 70vh;
       @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
+      @include scrollbar-width(none, 0);
 
       [data-theme='dark'] & {
         @include box-shadow(0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
-      }
-      
-      &::-webkit-scrollbar {
-        width: 0;
       }
 
       .search-wrapper {

@@ -1088,7 +1088,6 @@ class FixIt {
     const $fixedButtons = document.querySelector('.fixed-buttons');
     const $backToTop = document.querySelector('.back-to-top');
     const $readingProgressBar = document.querySelector('.reading-progress-bar');
-    let scrollTimer = void 0;
     if (document.body.dataset.headerDesktop === 'auto') {
       $headers.push(document.getElementById('header-desktop'));
     }
@@ -1107,12 +1106,6 @@ class FixIt {
       const $mask = document.getElementById('mask');
       this.newScrollTop = this.util.getScrollTop();
       const scroll = this.newScrollTop - this.oldScrollTop;
-      // body scrollbar style
-      document.body.toggleAttribute('data-scroll', true);
-      scrollTimer && window.clearTimeout(scrollTimer);
-      scrollTimer = window.setTimeout(() => {
-        document.body.toggleAttribute('data-scroll');
-      }, 500);
       // header animation
       this.util.forEach($headers, ($header) => {
         if (scroll > ACCURACY) {

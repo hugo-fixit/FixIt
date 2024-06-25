@@ -15,6 +15,13 @@
   // hr style
   --#{$prefix}hr-background-color: #{darken($global-border-color, 5%)};
   --#{$prefix}hr-before-color: #{lighten($single-link-hover-color, 4%)};
+
+  // Scrollbar related variables
+  --#{$prefix}scrollbar-thumb-color: #{$scrollbar-color};
+  --#{$prefix}scrollbar-thumb-hover-color: #{$scrollbar-hover-color};
+  --#{$prefix}scrollbar-track-color: transparent;
+  --#{$prefix}scrollbar-width: thin;
+  --#{$prefix}scrollbar-width-legacy: 12px;
 }
 
 // Dark theme

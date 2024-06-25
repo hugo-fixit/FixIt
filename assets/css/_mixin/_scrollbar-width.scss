@@ -1,0 +1,4 @@
+@mixin scrollbar-width($width: thin, $widthLegacy: 12px) {
+  --#{$prefix}scrollbar-width: #{$width};
+  --#{$prefix}scrollbar-width-legacy: #{$widthLegacy};
+}
