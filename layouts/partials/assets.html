@@ -284,6 +284,9 @@
 {{- end -}}
 {{- dict "Source" (resources.Get "js/theme.js") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 
+{{- /* Custom Assets */ -}}
+{{- block "custom-assets" . }}{{ end -}}
+
 {{- /* Custom script */ -}}
 {{- with ((resources.Get "js/custom.js") | default (resources.Get "js/_custom.js")) -}}
   {{- $options := dict "targetPath" "js/custom.min.js" "minify" hugo.IsProduction -}}
@@ -306,6 +309,3 @@
 {{- end -}}
 
 {{- partial "plugin/analytics.html" . -}}
-
-{{- /* Custom Assets */ -}}
-{{- block "custom-assets" . }}{{ end -}}
