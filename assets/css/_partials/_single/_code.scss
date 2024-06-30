@@ -78,6 +78,7 @@ pre:not(.mermaid[data-processed='true']) {
     position: relative;
 
     .code-header {
+      --#{$prefix}bg-code-header: #{darken($code-background-color, 3%)};
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -87,13 +88,13 @@ pre:not(.mermaid[data-processed='true']) {
       font-weight: bold;
       line-height: 1.4em;
       color: $code-info-color;
-      background-color: darken($code-background-color, 3%);
+      background-color: var(--#{$prefix}bg-code-header);
       @include border-radius($global-border-radius);
       @include transition(border-radius 0.2s ease);
 
       [data-theme='dark'] & {
         color: $code-info-color-dark;
-        background-color: darken($code-background-color-dark, 6%);
+        --#{$prefix}bg-code-header: #{darken($code-background-color-dark, 3%)};
       }
 
       &:hover {
@@ -119,6 +120,13 @@ pre:not(.mermaid[data-processed='true']) {
           position: absolute;
           left: 50%;
           transform: translateX(-50%);
+          background-color: var(--#{$prefix}bg-code-header);
+          padding-inline: 1em;
+          max-width: 80%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          @include z-index(0, 1);
         }
       }
 
@@ -217,11 +225,11 @@ pre:not(.mermaid[data-processed='true']) {
 
     &.open {
       .code-header {
-        background-color: darken($code-background-color, 6%);
+        --#{$prefix}bg-code-header: #{darken($code-background-color, 6%)};
         @include border-radius($global-border-radius $global-border-radius 0 0);
 
         [data-theme='dark'] & {
-          background-color: darken($code-background-color-dark, 3%);
+          --#{$prefix}bg-code-header: #{darken($code-background-color-dark, 6%)};
         }
       }
 
