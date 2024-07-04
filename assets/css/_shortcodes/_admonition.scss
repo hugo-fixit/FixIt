@@ -3,7 +3,7 @@
   margin: 1rem 0;
   padding: 0 0.75rem;
   border-left: .25rem solid;
-  overflow: auto;
+  overflow: hidden;
   @include border-radius($global-border-radius);
 
   .admonition-title {
