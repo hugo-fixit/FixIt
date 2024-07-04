@@ -356,11 +356,6 @@ pre:not(.mermaid[data-processed='true']) {
   }
 
   .table-wrapper {
-    --#{$prefix}scrollbar-thumb-color: #{$code-background-color};
-
-    [data-theme='dark'] & {
-      --#{$prefix}scrollbar-thumb-color: #{$code-background-color-dark};
-    }
     .highlight {
       background-color: $code-background-color;
 
