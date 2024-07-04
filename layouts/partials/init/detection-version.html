@@ -10,7 +10,7 @@
 {{- end -}}
 
 {{- /* FixIt theme version detection */ -}}
-{{- if eq .Site .Sites.First -}}
+{{- if eq .Site .Sites.Default -}}
   {{- if not .Site.Params.version -}}
     {{- errorf "FixIt %v\n%v\n\n" $version (T "init.configurationError") -}}
   {{- else if gt "0.2.0" (strings.TrimPrefix "v" .Site.Params.version) -}}

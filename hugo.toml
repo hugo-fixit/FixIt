@@ -133,7 +133,7 @@ enableEmoji = true
 [module]
   [module.hugoVersion]
     extended = true
-    min = "0.123.0"
+    min = "0.127.0"
 
 # -------------------------------------------------------------------------------------
 # Markup related configuration in Hugo
