@@ -157,10 +157,22 @@ enableEmoji = true
       definitionList = true
       footnote = true
       linkify = true
-      strikethrough = true
+      strikethrough = false
       table = true
       taskList = true
       typographer = true
+      # https://gohugo.io/getting-started/configuration-markup/#extras
+      [markup.goldmark.extensions.extras]
+        [markup.goldmark.extensions.extras.delete]
+          enable = true
+        [markup.goldmark.extensions.extras.insert]
+          enable = true
+        [markup.goldmark.extensions.extras.mark]
+          enable = true
+        [markup.goldmark.extensions.extras.subscript]
+          enable = true
+        [markup.goldmark.extensions.extras.superscript]
+          enable = true
     [markup.goldmark.renderer]
       # whether to use HTML tags directly in the document
       unsafe = true
