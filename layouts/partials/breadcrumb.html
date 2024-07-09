@@ -2,11 +2,31 @@
   <nav aria-label="breadcrumb" class="breadcrumb-container{{ if .Site.Params.breadcrumb.sticky }} sticky{{ end }}">
     <ol class="breadcrumb">
       {{- range .Ancestors.Reverse -}}
-        {{- if or .Site.Params.breadcrumb.showHome (not .IsHome) -}}
-          <li class="breadcrumb-item"><a href="{{ .RelPermalink }}" title="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage | and .Summary }}{{ .Summary }}{{ else }}{{ title .LinkTitle }}{{ end }}{{ end }}">{{ cond (and .Site.Params.breadcrumb.showHome .IsHome) (T "single.home") ((lower .LinkTitle | T) | default (title .LinkTitle)) }}</a></li>
+        {{- if .IsHome | and (not .Site.Params.breadcrumb.showHome) -}}
+          {{- continue -}}
         {{- end -}}
+
+        {{- $title := "" -}}
+        {{- with .Description -}}
+          {{- $title = . -}}
+        {{- else -}}
+          {{- $title = title .LinkTitle -}}
+          {{- if .IsPage | and .Summary -}}
+            {{- $title = .Summary -}}
+          {{- end -}}
+        {{- end -}}
+
+        {{- $innerText := "" -}}
+        {{- if .IsHome -}}
+          {{- $innerText = T "single.home" -}}
+        {{- else -}}
+          {{- $innerText = ((T (add .TranslationKey ".breadcrumbTitle")) | default (lower .LinkTitle | T) | default .LinkTitle) | title -}}
+        {{- end -}}
+
+        <li class="breadcrumb-item"><a href="{{ .RelPermalink }}" title="{{ $title }}">{{ $innerText }}</a></li>
       {{- end -}}
-      <li class="breadcrumb-item active" aria-current="page">{{ title .LinkTitle }}</li>
+
+      <li class="breadcrumb-item active" aria-current="page">{{ (T (add .TranslationKey ".breadcrumbTitle")) | default (lower .LinkTitle | T) | default .LinkTitle | title }}</li>
     </ol>
   </nav>
 {{- end -}}
