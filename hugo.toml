@@ -152,11 +152,14 @@ enableEmoji = true
     ########## necessary configurations ##########
     guessSyntax = true
   # Goldmark is from Hugo 0.60 the default library used for Markdown
+  # https://gohugo.io/getting-started/configuration-markup/#goldmark
   [markup.goldmark]
+    duplicateResourceFiles = false
     [markup.goldmark.extensions]
       definitionList = true
       footnote = true
       linkify = true
+      linkifyProtocol = 'https'
       strikethrough = false
       table = true
       taskList = true
@@ -173,9 +176,17 @@ enableEmoji = true
           enable = true
         [markup.goldmark.extensions.extras.superscript]
           enable = true
+    # TODO passthrough refactor https://gohugo.io/getting-started/configuration-markup/#parserattributeblock
+    # TODO hugo 0.122.0 https://gohugo.io/content-management/mathematics/
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+        title = true
     [markup.goldmark.renderer]
+      hardWraps = false
       # whether to use HTML tags directly in the document
       unsafe = true
+      xhtml = false
   # Table Of Contents settings
   [markup.tableOfContents]
     ordered = false
