@@ -1,14 +1,14 @@
 {{- /* Collection List */ -}}
 {{- $params := partial "function/params.html" -}}
 
-{{- if .Params.collections | and $params.collectionList | and (not $params.password) -}}
+{{- if .Params.collections | and $params.collectionList -}}
   {{- $collectionTerms := .GetTerms "collections" -}}
   {{- range $collectionTerms -}}
     {{- $pages := (where .Pages "Params.Weight" "!=" nil) | append (where .Pages "Params.Weight" "eq" nil).ByDate -}}
     {{- $open := eq (index $collectionTerms 0) . -}}
     {{- $currentKey := 0 -}}
 
-    <div class="details collection-details{{ if $open }} open{{ end }}">
+    <div class="details collection-details{{ with $params.password }} encrypted-hidden{{ end }}{{ if $open }} open{{ end }}">
       <div class="details-summary collection-summary">
         {{ dict "Class" "fa-solid fa-layer-group fa-fw" | partial "plugin/icon.html" }}
         <span class="collection-name" data-collections="{{ T "collections" }}">{{ .LinkTitle }}</span>
