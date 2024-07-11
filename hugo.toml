@@ -63,6 +63,8 @@ enableEmoji = true
       icon = "fa-solid fa-archive"
       # FixIt 0.2.16 | NEW set menu item type, optional values: ["mobile", "desktop"]
       type = ""
+      # FixIt 0.3.9 | NEW whether to show the submenu item divider line
+      divided = false
   [[menu.main]]
     identifier = "categories"
     parent = ""

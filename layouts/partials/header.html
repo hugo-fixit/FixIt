@@ -58,25 +58,28 @@
               {{- if .HasChildren -}}
                 {{ dict "Class" "dropdown-icon fa-solid fa-chevron-down" | partial "plugin/icon.html" }}
                 <ul class="sub-menu">
-                  {{ range .Children }}
-                    {{- $url := .URL | relLangURL -}}
-                    {{- with .Page -}}
+                  {{- range $k, $v := .Children -}}
+                    {{- $url := $v.URL | relLangURL -}}
+                    {{- with $v.Page -}}
                       {{- $url = .RelPermalink -}}
                     {{- end -}}
-                    {{- if (ne .Params.Draft true) | or $buildDrafts | and (ne .Params.Type "mobile") -}}
+                    {{- if (ne $v.Params.Draft true) | or $buildDrafts | and (ne $v.Params.Type "mobile") -}}
+                      {{- if $k | and $v.Params.Divided -}}
+                        <li class="menu-item-divider" aria-hidden="true"></li>
+                      {{- end -}}
                       <li
-                        class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}"
+                        class="menu-item{{ if $.IsMenuCurrent `main` $v | or ($.HasMenuCurrent `main` $v) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with $v.Params.Class }} {{ . }}{{ end }}"
                       >
                         <a
                           class="menu-link"
                           href="{{ $url }}"
-                          {{ with .Title }}title="{{ . }}"{{ end }}
+                          {{ with $v.Title }}title="{{ . }}"{{ end }}
                           {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
                         >
-                          {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
-                          {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
-                          {{- .Name }}
-                          {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
+                          {{- with $v.Pre -}}{{- . | safeHTML }} {{ end }}
+                          {{- with $v.Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
+                          {{- $v.Name }}
+                          {{- with $v.Post }} {{ . | safeHTML -}}{{- end -}}
                         </a>
                       </li>
                     {{- end -}}
@@ -234,25 +237,28 @@
                   {{ dict "Class" "dropdown-icon fa-solid fa-chevron-right" | partial "plugin/icon.html" }}
                 </span>
                 <ul class="sub-menu">
-                  {{ range .Children }}
-                    {{- $url := .URL | relLangURL -}}
-                    {{- with .Page -}}
+                  {{- range $k, $v := .Children -}}
+                    {{- $url := $v.URL | relLangURL -}}
+                    {{- with $v.Page -}}
                       {{- $url = .RelPermalink -}}
                     {{- end -}}
-                    {{- if (ne .Params.Draft true) | or $buildDrafts | and (ne .Params.Type "desktop") -}}
+                    {{- if (ne $v.Params.Draft true) | or $buildDrafts | and (ne $v.Params.Type "desktop") -}}
+                      {{- if $k | and $v.Params.Divided -}}
+                        <li class="menu-item menu-item-divider" aria-hidden="true"></li>
+                      {{- end -}}
                       <li
-                        class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}"
+                        class="menu-item{{ if $.IsMenuCurrent `main` $v | or ($.HasMenuCurrent `main` $v) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with $v.Params.Class }} {{ . }}{{ end }}"
                       >
                         <a
                           class="menu-link"
                           href="{{ $url }}"
-                          {{ with .Title }}title="{{ . }}"{{ end }}
+                          {{ with $v.Title }}title="{{ . }}"{{ end }}
                           {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
                         >
-                          {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
-                          {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
-                          {{- .Name }}
-                          {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
+                          {{- with $v.Pre -}}{{- . | safeHTML }} {{ end }}
+                          {{- with $v.Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
+                          {{- $v.Name }}
+                          {{- with $v.Post }} {{ . | safeHTML -}}{{- end -}}
                         </a>
                       </li>
                     {{- end -}}

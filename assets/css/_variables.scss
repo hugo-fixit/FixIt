@@ -73,6 +73,13 @@ $header-title-font-size: 1.5rem !default;
 $menu-active-color: #161209 !default;
 $menu-active-color-dark: #fff !default;
 
+// Border color of the menu item
+$menu-border-color: darken($global-border-color, 5%) !default;
+$menu-border-color-dark: lighten($global-border-color-dark, 5%) !default;
+
+// Height of the submenu item of desktop header
+$submenu-height: $header-height * 0.5 !default;
+
 // Color of the search background
 $search-background-color: #e9e9e9 !default;
 $search-background-color-dark: #363636 !default;
