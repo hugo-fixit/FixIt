@@ -1,48 +1,30 @@
-# -------------------------------------------------------------------------------------
+# =====================================================================================
 # The following is a necessary configuration for the FixIt theme.
+# =====================================================================================
+
+# -------------------------------------------------------------------------------------
+# Hugo Configuration
+# See: https://gohugo.io/getting-started/configuration/
 # -------------------------------------------------------------------------------------
 
-title = "My Hugo FixIt Site"
+title = "Hugo FixIt Demo"
 baseURL = "http://example.org/"
 # Change the default theme to be use when building the site with Hugo
 # theme = "FixIt"
 
 [markup]
-  # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
-  [markup.highlight]
-    ########## necessary configurations ##########
-    # https://github.com/hugo-fixit/FixIt/issues/43
-    codeFences = true
-    lineNos = true
-    lineNumbersInTable = true
-    noClasses = false
-    ########## necessary configurations ##########
-    guessSyntax = true
-  # Goldmark is from Hugo 0.60 the default library used for Markdown
-  [markup.goldmark]
-    [markup.goldmark.extensions]
-      definitionList = true
-      footnote = true
-      linkify = true
-      strikethrough = true
-      table = true
-      taskList = true
-      typographer = true
-    [markup.goldmark.renderer]
-      # whether to use HTML tags directly in the document
-      unsafe = true
-  # Table Of Contents settings
-  [markup.tableOfContents]
-    ordered = false
-    startLevel = 2
-    endLevel = 6
+  _merge = "shallow"
 
 [outputs]
-  home = ["HTML", "RSS", "JSON", "archives"]
-  page = ["HTML", "MarkDown"]
-  section = ["HTML", "RSS"]
-  taxonomy = ["HTML"]
-  term = ["HTML", "RSS"]
+  _merge = "shallow"
+
+# -------------------------------------------------------------------------------------
+# Taxonomies Configuration
+# See: https://gohugo.io/content-management/taxonomies/#configure-taxonomies
+# -------------------------------------------------------------------------------------
+
+[taxonomies]
+  _merge = "shallow"
 
 # -------------------------------------------------------------------------------------
 # Theme Core Configuration
