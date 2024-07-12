@@ -58,6 +58,7 @@ pre:not(.mermaid[data-processed='true']) {
   font-family: $code-font-family;
 
   .table-wrapper {
+    --#{$prefix}scrollbar-thumb-color: initial;
     > table,
     > table thead,
     > table tr,

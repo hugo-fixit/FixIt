@@ -257,13 +257,11 @@
     }
 
     .table-wrapper {
-      &:not(> .lntable) {
-        overflow-x: auto;
-        --#{$prefix}scrollbar-thumb-color: #{$table-background-color};
-  
-        [data-theme='dark'] & {
-          --#{$prefix}scrollbar-thumb-color: #{$table-background-color-dark};
-        }
+      overflow-x: auto;
+      --#{$prefix}scrollbar-thumb-color: #{$table-background-color};
+
+      [data-theme='dark'] & {
+        --#{$prefix}scrollbar-thumb-color: #{$table-background-color-dark};
       }
 
       > table {
