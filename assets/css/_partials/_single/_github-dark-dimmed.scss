@@ -1,73 +1,79 @@
 /**
- * Theme: GitHub Dark Dimmed
- * Description: Dark Dimmed theme as seen on github.com
- * Author: github.com
- * Maintainer: https://github.com/hugo-fixit/FixIt
- * Updated: 2022-03-01
+ * GitHub Dark Dimmed
+ * Copyright (c) 2012 - current GitHub, Inc.
+ * Licensed under MIT (https://github.com/primer/github-syntax-theme-generator/blob/master/LICENSE)
+ * Maintained by @Lruihao for FixIt theme
+ * Created on 2022-03-01
+ * Updated on 2024-07-14
  */
 & {
-  --color-fg-default: #adbac7;
-  --color-prettylights-syntax-comment: #768390;
-  --color-prettylights-syntax-constant: #6cb6ff;
-  --color-prettylights-syntax-entity: #dcbdfb;
-  --color-prettylights-syntax-storage-modifier-import: #adbac7;
-  --color-prettylights-syntax-entity-tag: #8ddb8c;
-  --color-prettylights-syntax-keyword: #f47067;
-  --color-prettylights-syntax-string: #96d0ff;
-  --color-prettylights-syntax-variable: #f69d50;
-  --color-prettylights-syntax-brackethighlighter-unmatched: #e5534b;
-  --color-prettylights-syntax-invalid-illegal-text: #cdd9e5;
-  --color-prettylights-syntax-invalid-illegal-bg: #922323;
-  --color-prettylights-syntax-carriage-return-text: #cdd9e5;
-  --color-prettylights-syntax-carriage-return-bg: #ad2e2c;
-  --color-prettylights-syntax-string-regexp: #8ddb8c;
-  --color-prettylights-syntax-markup-list: #eac55f;
-  --color-prettylights-syntax-markup-heading: #316dca;
-  --color-prettylights-syntax-markup-italic: #adbac7;
-  --color-prettylights-syntax-markup-bold: #adbac7;
-  --color-prettylights-syntax-markup-deleted-text: #ffd8d3;
-  --color-prettylights-syntax-markup-deleted-bg: #78191b;
-  --color-prettylights-syntax-markup-inserted-text: #b4f1b4;
-  --color-prettylights-syntax-markup-inserted-bg: #1b4721;
-  --color-prettylights-syntax-markup-changed-text: #ffddb0;
-  --color-prettylights-syntax-markup-changed-bg: #682d0f;
-  --color-prettylights-syntax-markup-ignored-text: #adbac7;
-  --color-prettylights-syntax-markup-ignored-bg: #255ab2;
-  --color-prettylights-syntax-meta-diff-range: #dcbdfb;
-  --color-prettylights-syntax-brackethighlighter-angle: #768390;
-  --color-prettylights-syntax-sublimelinter-gutter-mark: #545d68;
-  --color-prettylights-syntax-constant-other-reference-link: #96d0ff;
+  // Blob colors
+  --#{$prefix}color-blob-num: #778491;
+  --#{$prefix}color-blob-code-inner: #c5d1de;
+  // Syntax colors
+  --#{$prefix}color-prettylights-syntax-comment: #768390;
+  --#{$prefix}color-prettylights-syntax-constant: #6cb6ff;
+  --#{$prefix}color-prettylights-syntax-constant-other-reference-link: #96d0ff;
+  --#{$prefix}color-prettylights-syntax-entity: #dcbdfb;
+  --#{$prefix}color-prettylights-syntax-storage-modifier-import: #adbac7;
+  --#{$prefix}color-prettylights-syntax-entity-tag: #8ddb8c;
+  --#{$prefix}color-prettylights-syntax-keyword: #f47067;
+  --#{$prefix}color-prettylights-syntax-string: #96d0ff;
+  --#{$prefix}color-prettylights-syntax-variable: #f69d50;
+  --#{$prefix}color-prettylights-syntax-brackethighlighter-unmatched: #e5534b;
+  --#{$prefix}color-prettylights-syntax-brackethighlighter-angle: #768390;
+  --#{$prefix}color-prettylights-syntax-invalid-illegal-text: #cdd9e5;
+  --#{$prefix}color-prettylights-syntax-invalid-illegal-bg: #922323;
+  --#{$prefix}color-prettylights-syntax-carriage-return-text: #cdd9e5;
+  --#{$prefix}color-prettylights-syntax-carriage-return-bg: #ad2e2c;
+  --#{$prefix}color-prettylights-syntax-string-regexp: #8ddb8c;
+  --#{$prefix}color-prettylights-syntax-markup-list: #eac55f;
+  --#{$prefix}color-prettylights-syntax-markup-heading: #316dca;
+  --#{$prefix}color-prettylights-syntax-markup-italic: #adbac7;
+  --#{$prefix}color-prettylights-syntax-markup-bold: #adbac7;
+  --#{$prefix}color-prettylights-syntax-markup-deleted-text: #ffd8d3;
+  --#{$prefix}color-prettylights-syntax-markup-deleted-bg: #78191b;
+  --#{$prefix}color-prettylights-syntax-markup-inserted-text: #b4f1b4;
+  --#{$prefix}color-prettylights-syntax-markup-inserted-bg: #1b4721;
+  --#{$prefix}color-prettylights-syntax-markup-changed-text: #ffddb0;
+  --#{$prefix}color-prettylights-syntax-markup-changed-bg: #682d0f;
+  --#{$prefix}color-prettylights-syntax-markup-ignored-text: #adbac7;
+  --#{$prefix}color-prettylights-syntax-markup-ignored-bg: #255ab2;
+  --#{$prefix}color-prettylights-syntax-meta-diff-range: #dcbdfb;
+  --#{$prefix}color-prettylights-syntax-sublimelinter-gutter-mark: #545d68;
 
-  .blob-num,
+  .blob-num {
+    color: var(--#{$prefix}color-blob-num);
+  }
   .blob-code-inner {
-    color: val(--color-fg-default);
+    color: var(--#{$prefix}color-blob-code-inner);
   }
 
   .pl-c /* comment, punctuation.definition.comment, string.comment */ {
-    color: var(--color-prettylights-syntax-comment);
+    color: var(--#{$prefix}color-prettylights-syntax-comment);
   }
 
   .pl-c1 /* constant, entity.name.constant, variable.other.constant, variable.language, support, meta.property-name, support.constant, support.variable, meta.module-reference, markup.raw, meta.diff.header, meta.output */,
   .pl-s .pl-v /* string variable */ {
-    color: var(--color-prettylights-syntax-constant);
+    color: var(--#{$prefix}color-prettylights-syntax-constant);
   }
 
   .pl-e /* entity */,
   .pl-en /* entity.name */ {
-    color: var(--color-prettylights-syntax-entity);
+    color: var(--#{$prefix}color-prettylights-syntax-entity);
   }
 
   .pl-smi /* variable.parameter.function, storage.modifier.package, storage.modifier.import, storage.type.java, variable.other */,
   .pl-s .pl-s1 /* string source */ {
-    color: var(--color-prettylights-syntax-storage-modifier-import);
+    color: var(--#{$prefix}color-prettylights-syntax-storage-modifier-import);
   }
 
   .pl-ent /* entity.name.tag, markup.quote */ {
-    color: var(--color-prettylights-syntax-entity-tag);
+    color: var(--#{$prefix}color-prettylights-syntax-entity-tag);
   }
 
   .pl-k /* keyword, storage, storage.type */ {
-    color: var(--color-prettylights-syntax-keyword);
+    color: var(--#{$prefix}color-prettylights-syntax-keyword);
   }
 
   .pl-s /* string */,
@@ -77,26 +83,26 @@
   .pl-sr .pl-cce /* string.regexp constant.character.escape */,
   .pl-sr .pl-sre /* string.regexp source.ruby.embedded */,
   .pl-sr .pl-sra /* string.regexp string.regexp.arbitrary-repitition */ {
-    color: var(--color-prettylights-syntax-string);
+    color: var(--#{$prefix}color-prettylights-syntax-string);
   }
 
   .pl-v /* variable */,
   .pl-smw /* sublimelinter.mark.warning */ {
-    color: var(--color-prettylights-syntax-variable);
+    color: var(--#{$prefix}color-prettylights-syntax-variable);
   }
 
   .pl-bu /* invalid.broken, invalid.deprecated, invalid.unimplemented, message.error, brackethighlighter.unmatched, sublimelinter.mark.error */ {
-    color: var(--color-prettylights-syntax-brackethighlighter-unmatched);
+    color: var(--#{$prefix}color-prettylights-syntax-brackethighlighter-unmatched);
   }
 
   .pl-ii /* invalid.illegal */ {
-    color: var(--color-prettylights-syntax-invalid-illegal-text);
-    background-color: var(--color-prettylights-syntax-invalid-illegal-bg);
+    color: var(--#{$prefix}color-prettylights-syntax-invalid-illegal-text);
+    background-color: var(--#{$prefix}color-prettylights-syntax-invalid-illegal-bg);
   }
 
   .pl-c2 /* carriage-return */ {
-    color: var(--color-prettylights-syntax-carriage-return-text);
-    background-color: var(--color-prettylights-syntax-carriage-return-bg);
+    color: var(--#{$prefix}color-prettylights-syntax-carriage-return-text);
+    background-color: var(--#{$prefix}color-prettylights-syntax-carriage-return-bg);
   }
 
   .pl-c2::before /* carriage-return */ {
@@ -105,65 +111,65 @@
 
   .pl-sr .pl-cce /* string.regexp constant.character.escape */ {
     font-weight: bold;
-    color: var(--color-prettylights-syntax-string-regexp);
+    color: var(--#{$prefix}color-prettylights-syntax-string-regexp);
   }
 
   .pl-ml /* markup.list */ {
-    color: var(--color-prettylights-syntax-markup-list);
+    color: var(--#{$prefix}color-prettylights-syntax-markup-list);
   }
 
   .pl-mh /* markup.heading */,
   .pl-mh .pl-en /* markup.heading entity.name */,
   .pl-ms /* meta.separator */ {
     font-weight: bold;
-    color: var(--color-prettylights-syntax-markup-heading);
+    color: var(--#{$prefix}color-prettylights-syntax-markup-heading);
   }
 
   .pl-mi /* markup.italic */ {
     font-style: italic;
-    color: var(--color-prettylights-syntax-markup-italic);
+    color: var(--#{$prefix}color-prettylights-syntax-markup-italic);
   }
 
   .pl-mb /* markup.bold */ {
     font-weight: bold;
-    color: var(--color-prettylights-syntax-markup-bold);
+    color: var(--#{$prefix}color-prettylights-syntax-markup-bold);
   }
 
   .pl-md /* markup.deleted, meta.diff.header.from-file, punctuation.definition.deleted */ {
-    color: var(--color-prettylights-syntax-markup-deleted-text);
-    background-color: var(--color-prettylights-syntax-markup-deleted-bg);
+    color: var(--#{$prefix}color-prettylights-syntax-markup-deleted-text);
+    background-color: var(--#{$prefix}color-prettylights-syntax-markup-deleted-bg);
   }
 
   .pl-mi1 /* markup.inserted, meta.diff.header.to-file, punctuation.definition.inserted */ {
-    color: var(--color-prettylights-syntax-markup-inserted-text);
-    background-color: var(--color-prettylights-syntax-markup-inserted-bg);
+    color: var(--#{$prefix}color-prettylights-syntax-markup-inserted-text);
+    background-color: var(--#{$prefix}color-prettylights-syntax-markup-inserted-bg);
   }
 
   .pl-mc /* markup.changed, punctuation.definition.changed */ {
-    color: var(--color-prettylights-syntax-markup-changed-text);
-    background-color: var(--color-prettylights-syntax-markup-changed-bg);
+    color: var(--#{$prefix}color-prettylights-syntax-markup-changed-text);
+    background-color: var(--#{$prefix}color-prettylights-syntax-markup-changed-bg);
   }
 
   .pl-mi2 /* markup.ignored, markup.untracked */ {
-    color: var(--color-prettylights-syntax-markup-ignored-text);
-    background-color: var(--color-prettylights-syntax-markup-ignored-bg);
+    color: var(--#{$prefix}color-prettylights-syntax-markup-ignored-text);
+    background-color: var(--#{$prefix}color-prettylights-syntax-markup-ignored-bg);
   }
 
   .pl-mdr /* meta.diff.range */ {
     font-weight: bold;
-    color: var(--color-prettylights-syntax-meta-diff-range);
+    color: var(--#{$prefix}color-prettylights-syntax-meta-diff-range);
   }
 
   .pl-ba /* brackethighlighter.tag, brackethighlighter.curly, brackethighlighter.round, brackethighlighter.square, brackethighlighter.angle, brackethighlighter.quote */ {
-    color: var(--color-prettylights-syntax-brackethighlighter-angle);
+    color: var(--#{$prefix}color-prettylights-syntax-brackethighlighter-angle);
   }
 
   .pl-sg /* sublimelinter.gutter-mark */ {
-    color: var(--color-prettylights-syntax-sublimelinter-gutter-mark);
+    color: var(--#{$prefix}color-prettylights-syntax-sublimelinter-gutter-mark);
   }
 
   .pl-corl /* constant.other.reference.link, string.other.link */ {
     text-decoration: underline;
-    color: var(--color-prettylights-syntax-constant-other-reference-link);
+    color: var(--#{$prefix}color-prettylights-syntax-constant-other-reference-link);
   }
 }
