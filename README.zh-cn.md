@@ -128,13 +128,25 @@ FixIt 支持下列语言：
 
 [语言兼容性](https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/#language-compatibility)
 
-## [路线图](https://github.com/hugo-fixit/FixIt/projects/1)
+## 社区支持
 
-## 问题、想法、bugs 和 PRs
+所有的反馈都是欢迎的！详见 [Discussions][discussions]、[Pull requests][pulls] 和 [Issues][issues]。
 
-所有的反馈都是欢迎的！详见 [议题](https://github.com/hugo-fixit/FixIt/issues) 或者 [讨论](https://github.com/hugo-fixit/FixIt/discussions) 或者加入 QQ 群：`814031017`。
+| 社区                         | 说明                    |
+| :--------------------------- | :---------------------- |
+| [Discussions][discussions]   | 官方 GitHub 讨论区      |
+| [FixIt 主题交流群][qq-group] | 官方 QQ 群：`814031017` |
+| [Hugo FixIt 星球][zsxq]      | 官方知识星球            |
+
+[discussions]: https://github.com/hugo-fixit/FixIt/discussions
+[pulls]: https://github.com/hugo-fixit/FixIt/pulls
+[issues]: https://github.com/hugo-fixit/FixIt/issues
+[qq-group]: https://qm.qq.com/cgi-bin/qm/qr?k=awbwdTtSQ_-H5QGzeJxdWgv6JMbNehNM&jump_from=webapi
+[zsxq]: https://t.zsxq.com/oZYCt
 
 ## 参与贡献
+
+- [Hugo FixIt 路线图](https://github.com/orgs/hugo-fixit/projects/2)
 
 请参阅 [CONTRIBUTING.md](CONTRIBUTING.md) 以了解贡献该项目的基本信息。
 
@@ -212,9 +224,9 @@ Follow [Lruihao](https://github.com/Lruihao "在 GitHub 上关注我")
 
 如果你喜爱这个主题，请考虑给我买杯咖啡 ☕️，谢谢！
 
-- [PayPal](https://paypal.me/Lruihao)
-- [支付宝](images/alipay.jpg)
 - [微信支付](images/wechatpay.jpg)
+- [支付宝](images/alipay.jpg)
+- [PayPal](https://paypal.me/Lruihao)
 
 如果你喜欢这个主题，别忘了留下一颗 ⭐️ 哦，谢谢！
 
