@@ -180,8 +180,8 @@ $code-type-map: (
   "llvm": "LLVM",
   "lua": "Lua",
   "mako": "Mako",
-  "md": "markdown",
-  "mkd": "markdown",
+  "md": "Markdown",
+  "mkd": "Markdown",
   "mason": "Mason",
   "mathematica": "Mathematica",
   "mma": "Mathematica",
@@ -368,6 +368,6 @@ $code-type-map: (
   "zed": "Zed",
   "zig": "Zig",
   // Custom code type
-  "markdown": "markdown",
+  "markdown": "Markdown",
   "yml": "YAML"
 ) !default;
