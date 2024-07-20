@@ -57,7 +57,7 @@
     }
 
     &[data-node='dot']::before {
-      background-color: var(--timeline-circle-color);
+      background-color: var(--timeline-circle-color) !important;
     }
     &[data-size='small']::before {
       transform: scale(0.8) translateY(-50%);
