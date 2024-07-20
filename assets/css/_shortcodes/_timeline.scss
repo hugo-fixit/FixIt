@@ -1,0 +1,106 @@
+.#{$prefix}timeline {
+  list-style: none;
+  margin-block: 1rem;
+  --timeline-color: #{darken($global-border-color, 5%)};
+  --timeline-circle-color: #FF735A;
+  --timeline-circle-size: 10px;
+  --timeline-width: 2px;
+
+  &[data-animation] {
+    .#{$prefix}timeline-item::before {
+      border-color: var(--timeline-color);
+      animation-name: border-color-fade;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      animation-delay: calc(var(--timeline-index) * 0.3s);
+  
+      @keyframes border-color-fade {
+        0% {
+          border-color: var(--timeline-color);
+        }
+        50% {
+          border-color: var(--timeline-circle-color);
+        }
+        100% {
+          border-color: var(--timeline-color);
+        }
+      }
+    }
+  }
+
+  .#{$prefix}timeline-item {
+    position: relative;
+    padding: 0.5rem 1.75rem;
+
+    @each $color, $value in $theme-colors {
+      &[data-type='#{$color}'] {
+        --timeline-circle-color: var(--#{$prefix}#{$color});
+      }
+    }
+
+    .#{$prefix}timeline-item__timestamp {
+      font-size: 0.8125rem;
+      line-height: 1;
+      color: var(--#{$prefix}secondary);
+
+      &.is-top {
+        margin-bottom: 0.25rem;
+        padding-top: 0.34375rem;
+      }
+      &.is-bottom {
+        margin-top: 0.25rem;
+      }
+    }
+
+    .#{$prefix}timeline-item__content {
+      font-size: 0.875rem;
+    }
+
+    &[data-node='dot']::before {
+      background-color: var(--timeline-circle-color);
+    }
+    &[data-size='small']::before {
+      transform: scale(0.8) translateY(-50%);
+    }
+    &[data-size='large']::before {
+      transform: scale(1.2) translateY(-50%);
+    }
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 1.25rem;
+      transform: translateY(-50%);
+      left: 0;
+      width: var(--timeline-circle-size);
+      height: var(--timeline-circle-size);
+      font-size: var(--timeline-circle-size);
+      line-height: var(--timeline-circle-size);
+      text-align: center;
+      border-radius: 50%;
+      border-width: var(--timeline-width);
+      border-style: solid;
+      border-color: var(--timeline-circle-color);
+      background-color: $global-background-color;
+      color: transparent;
+      z-index: 1;
+  
+      [data-theme='dark'] & {
+        background-color: $global-background-color-dark;
+      }
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: calc(var(--timeline-circle-size) / 2 + var(--timeline-width) / 2);
+      width: var(--timeline-width);
+      height: 100%;
+      background-color: var(--timeline-color);
+    }
+  
+    [data-theme='dark'] & {
+      --timeline-color: #{darken($global-border-color, 50%)};
+    }
+  }  
+}
