@@ -1,0 +1,49 @@
+{{- /*
+Timeline support for code blocks, example usage:
+
+```timeline {reverse=false, placement=bottom, animation=false, size=medium, node=circle}
+- timestamp: "2024-07-20 18:52:00"  # [required] timestamp
+  content: "hello world"            # [required] content
+  hideTimestamp: false              # [optional] whether to hide timestamp, default false
+  placement: "top"                  # [optional] timestamp placement [top, bottom], default bottom
+  color: ""                         # [optional] node color, hsl/hsv/hex/rgb supported
+  type: ""                          # [optional] node type [primary, secondary, success, info, warning, danger]
+  size: ""                          # [optional] node size [small, medium, large], default medium
+  node: circle                      # [optional] node type [circle, dot], default circle
+```
+*/ -}}
+{{- $reverse := .Attributes.reverse | default false -}}
+{{- $placement := .Attributes.placement | default "bottom" -}}
+{{- $animation := .Attributes.animation | default false -}}
+{{- $size := .Attributes.size | default "medium" -}}
+{{- $node := .Attributes.node | default "circle" -}}
+{{- $events := sort (.Inner | transform.Unmarshal).events "timestamp" (cond $reverse "desc" "asc") -}}
+
+<ul class="fi-timeline"{{ with $animation }} data-animation{{ end }}>
+  {{- range $index, $item := $events -}}
+    {{- $itemStyle := printf "--timeline-index: %v;" (add $index 1) -}}
+    {{- with $item.color -}}
+      {{- $itemStyle = add $itemStyle (printf " --timeline-circle-color: %v;" .) -}}
+    {{- end -}}
+    {{- $itemStyle = (printf "style=\"%v\"" $itemStyle) | safeHTMLAttr -}}
+
+    <li
+      class="fi-timeline-item"
+      data-size="{{ $item.size | default $size }}"
+      data-node="{{ $item.node | default $node }}"
+      {{ $itemStyle }}
+      {{ with $item.type }} data-type="{{ . }}"{{ end }}
+    >
+      {{- if $item.hideTimestamp -}}
+        <div class="fi-timeline-item__content">{{ $item.content | $.Page.RenderString }}</div>
+      {{- else if eq ($item.placement | default $placement) "top" -}}
+        <div class="fi-timeline-item__timestamp is-top">{{ $item.timestamp }}</div>
+        <div class="fi-timeline-item__content">{{ $item.content | $.Page.RenderString }}</div>
+      {{- else -}}
+        <div class="fi-timeline-item__content">{{ $item.content | $.Page.RenderString }}</div>
+        <div class="fi-timeline-item__timestamp is-bottom">{{ $item.timestamp }}</div>
+      {{- end -}}
+  </li>
+  {{- end -}}
+</ul>
+{{- /* EOF */ -}}
