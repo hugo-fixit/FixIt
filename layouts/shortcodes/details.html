@@ -1,5 +1,12 @@
-<details>
-  <summary>{{ .Get "summary" | default (.Get 0) | .Page.RenderString }}</summary>
+{{- $summary := .Get "summary" | default (.Get 0) -}}
+{{- $open := .Get "open" | default (.Get 1) | default false -}}
+{{- $center := .Get "center" | default (.Get 2) | default false -}}
+<details
+  {{- with $open }} open{{ end -}}
+>
+  <summary
+    {{- if $center }} class="text-center"{{ end -}}
+  >{{ $summary | .Page.RenderString }}</summary>
   {{ .Inner | .Page.RenderString }}
 </details>
 {{- /* EOF */ -}}
