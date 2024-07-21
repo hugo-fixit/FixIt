@@ -438,7 +438,13 @@ class FixIt {
           $copy.insertAdjacentHTML('afterbegin', '<i class="fa-regular fa-copy fa-fw" aria-hidden="true"></i>');
           $copy.classList.add('copy');
           // remove the leading and trailing whitespace of the code string
-          const code = $code.innerText.trim();
+          let code = $code.innerText.trim();
+          // in the details element, the code string cannot be gotten directly.
+          if ($chroma.closest('details') !== null) {
+            const _tempEl = document.createElement('div');
+            _tempEl.appendChild($code.cloneNode(true));
+            code = _tempEl.innerText.trim();
+          }
           const forceOpen = $chroma.parentElement.dataset.open ? JSON.parse($chroma.parentElement.dataset.open) : void 0;
           if (forceOpen ?? (this.config.code.maxShownLines < 0 || code.split('\n').length < this.config.code.maxShownLines + 2)) {
             $chroma.classList.add('open');
