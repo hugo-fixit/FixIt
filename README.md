@@ -86,8 +86,9 @@ To see this theme in action, here are some [live demo sites](https://fixit.lruih
 - Extended Markdown syntax for **ruby annotation**
 - Extended Markdown syntax for **fraction**
 - **Mathematical formula** supported by [KaTeX](https://katex.org/)
-- **Diagrams** shortcode supported by [mermaid](https://github.com/knsv/mermaid)
-- **Interactive data visualization** shortcode supported by [ECharts](https://echarts.apache.org/)
+- **Diagrams** code fences extended and shortcode supported by [mermaid](https://github.com/knsv/mermaid)
+- **Interactive data visualization** shortcode and code fences extended supported by [ECharts](https://echarts.apache.org/)
+- **Timeline** code fences extended and shortcode supported
 - **Mapbox** shortcode supported by [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
 - **Music player** shortcode supported by [APlayer](https://github.com/MoePlayer/APlayer) and [MetingJS](https://github.com/metowolf/MetingJS)
 - **Bilibili player** and **Douyin player** shortcode
