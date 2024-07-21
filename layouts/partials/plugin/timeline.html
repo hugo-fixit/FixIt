@@ -1,0 +1,36 @@
+{{- /* Timeline support for code blocks and shortcodes. */ -}}
+{{- $reverse := .Options.reverse | default false -}}
+{{- $placement := .Options.placement | default "bottom" -}}
+{{- $animation := .Options.animation | default false -}}
+{{- $size := .Options.size | default "medium" -}}
+{{- $node := .Options.node | default "circle" -}}
+{{- $events := sort (.Inner | transform.Unmarshal).events "timestamp" (cond $reverse "desc" "asc") -}}
+
+<ul class="fi-timeline"{{ with $animation }} data-animation{{ end }}>
+  {{- range $index, $item := $events -}}
+    {{- $itemStyle := printf "--timeline-index: %v;" (add $index 1) -}}
+    {{- with $item.color -}}
+      {{- $itemStyle = add $itemStyle (printf " --timeline-circle-color: %v;" .) -}}
+    {{- end -}}
+    {{- $itemStyle = (printf "style=\"%v\"" $itemStyle) | safeHTMLAttr -}}
+
+    <li
+      class="fi-timeline-item"
+      data-size="{{ $item.size | default $size }}"
+      data-node="{{ $item.node | default $node }}"
+      {{ $itemStyle }}
+      {{ with $item.type }} data-type="{{ . }}"{{ end }}
+    >
+      {{- if $item.hideTimestamp -}}
+        <div class="fi-timeline-item__content">{{ $item.content | page.RenderString }}</div>
+      {{- else if eq ($item.placement | default $placement) "top" -}}
+        <div class="fi-timeline-item__timestamp is-top">{{ $item.timestamp }}</div>
+        <div class="fi-timeline-item__content">{{ $item.content | page.RenderString }}</div>
+      {{- else -}}
+        <div class="fi-timeline-item__content">{{ $item.content | page.RenderString }}</div>
+        <div class="fi-timeline-item__timestamp is-bottom">{{ $item.timestamp }}</div>
+      {{- end -}}
+  </li>
+  {{- end -}}
+</ul>
+{{- /* EOF */ -}}

@@ -1,0 +1,6 @@
+{{- $options := .Get "reverse" | default (.Get 0) | dict "reverse" -}}
+{{- $options = .Get "placement" | default (.Get 1) | dict "placement" | merge $options -}}
+{{- $options = .Get "animation" | default (.Get 2) | dict "animation" | merge $options -}}
+{{- $options = .Get "size" | default (.Get 3) | dict "size" | merge $options -}}
+{{- $options = .Get "node" | default (.Get 4) | dict "node" | merge $options -}}
+{{- dict "Options" $options "Inner" .Inner | partial "plugin/timeline.html" -}}
