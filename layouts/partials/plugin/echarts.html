@@ -1,0 +1,7 @@
+{{- /* Echarts support for code fences extended and shortcodes. */ -}}
+{{- $width := .Options.width | default "100%" -}}
+{{- $height := .Options.height | default "30rem" -}}
+{{- $attrs := printf `style="width: %v; height: %v;"` $width $height -}}
+<div class="echarts" {{ $attrs | safeHTMLAttr }}></div>
+<template>{{ .Inner | transform.Unmarshal | jsonify }}</template>
+{{- page.Store.Set "hasEcharts" true -}}

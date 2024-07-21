@@ -124,7 +124,7 @@
 {{- end -}}
 
 {{- /* ECharts */ -}}
-{{- if .HasShortcode "echarts" -}}
+{{- if .Store.Get "hasEcharts" -}}
   {{- $source := $cdn.echartsJS | default "lib/echarts/echarts.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- $lightTheme := resources.Get "lib/echarts/theme/light.yml" | transform.Unmarshal -}}

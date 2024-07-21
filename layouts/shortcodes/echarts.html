@@ -1,7 +1,3 @@
-{{- $content := .Inner | transform.Unmarshal | jsonify -}}
-{{- $width := cond .IsNamedParams (.Get "width") (.Get 0) | default "100%" -}}
-{{- $height := cond .IsNamedParams (.Get "height") (.Get 1) | default "30rem" -}}
-{{- $attrs := printf `style="width: %v; height: %v;"` $width $height -}}
-<div class="echarts" {{ $attrs | safeHTMLAttr }}></div>
-<template>{{ $content }}</template>
-{{- /* EOF */ -}}
+{{- $options := .Get "width" | default (.Get 0) | dict "width" -}}
+{{- $options = .Get "height" | default (.Get 1) | dict "height" | merge $options -}}
+{{- dict "Options" $options "Inner" .Inner | partial "plugin/echarts.html" -}}
