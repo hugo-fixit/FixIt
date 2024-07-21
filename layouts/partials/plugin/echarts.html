@@ -4,4 +4,4 @@
 {{- $attrs := printf `style="width: %v; height: %v;"` $width $height -}}
 <div class="echarts" {{ $attrs | safeHTMLAttr }}></div>
 <template>{{ .Inner | transform.Unmarshal | jsonify }}</template>
-{{- page.Store.Set "hasEcharts" true -}}
+{{- /* EOF */ -}}

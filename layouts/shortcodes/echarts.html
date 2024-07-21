@@ -1,3 +1,4 @@
 {{- $options := .Get "width" | default (.Get 0) | dict "width" -}}
 {{- $options = .Get "height" | default (.Get 1) | dict "height" | merge $options -}}
 {{- dict "Options" $options "Inner" .Inner | partial "plugin/echarts.html" -}}
+{{- .Page.Store.Set "hasEcharts" true -}}
