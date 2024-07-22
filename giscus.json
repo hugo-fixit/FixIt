@@ -10,5 +10,5 @@
     "https://docs-[A-z0-9]{9}-cell-x\\.vercel\\.app",
     "http://localhost:[0-9]+"
   ],
-  "defaultCommentOrder": "oldest"
+  "defaultCommentOrder": "newest"
 }
