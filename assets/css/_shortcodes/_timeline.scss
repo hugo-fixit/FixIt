@@ -1,6 +1,8 @@
 .#{$prefix}timeline {
   list-style: none;
-  margin-block: 1rem;
+  box-sizing: border-box;
+  overflow: auto;
+  margin: 1rem auto;
   --timeline-color: #{darken($global-border-color, 5%)};
   --timeline-circle-color: #FF735A;
   --timeline-circle-size: 10px;

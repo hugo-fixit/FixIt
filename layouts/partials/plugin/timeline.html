@@ -4,22 +4,47 @@
 {{- $animation := .Options.animation | default false -}}
 {{- $size := .Options.size | default "medium" -}}
 {{- $node := .Options.node | default "circle" -}}
-{{- $events := sort (.Inner | transform.Unmarshal).events "timestamp" (cond $reverse "desc" "asc") -}}
 
-<ul class="fi-timeline"{{ with $animation }} data-animation{{ end }}>
+{{- /* Set Timeline style  */ -}}
+{{- $style := "" -}}
+{{- with .Options.width -}}
+  {{- $style = printf "width: %v;" . -}}
+{{- end -}}
+{{- with .Options.height -}}
+  {{- $style = add $style (printf "height: %v;" .) -}}
+{{- end -}}
+{{- with $style -}}
+  {{- $style = printf `style="%v"` $style -}}
+{{- end -}}
+
+{{- /* Get Timeline events */ -}}
+{{- $events := slice -}}
+{{- with .Inner -}}
+  {{- $events = (. | transform.Unmarshal).events -}}
+  {{- end -}}
+{{- with .Events -}}
+  {{- $events = . -}}
+{{- end -}}
+{{- $events = sort $events "timestamp" (cond $reverse "desc" "asc") -}}
+
+<ul
+  class="fi-timeline{{ with .Options.class }} {{ . }}{{ end }}"
+  {{ $style | safeHTMLAttr }}
+  {{- with $animation }} data-animation{{- end -}}
+>
   {{- range $index, $item := $events -}}
     {{- $itemStyle := printf "--timeline-index: %v;" (add $index 1) -}}
     {{- with $item.color -}}
-      {{- $itemStyle = add $itemStyle (printf " --timeline-circle-color: %v;" .) -}}
+      {{- $itemStyle = add $itemStyle (printf "--timeline-circle-color: %v;" .) -}}
     {{- end -}}
-    {{- $itemStyle = (printf "style=\"%v\"" $itemStyle) | safeHTMLAttr -}}
+    {{- $itemStyle = printf `style="%v"` $itemStyle -}}
 
     <li
       class="fi-timeline-item"
       data-size="{{ $item.size | default $size }}"
       data-node="{{ $item.node | default $node }}"
-      {{ $itemStyle }}
-      {{ with $item.type }} data-type="{{ . }}"{{ end }}
+      {{ $itemStyle | safeHTMLAttr }}
+      {{- with $item.type }} data-type="{{ . }}"{{- end -}}
     >
       {{- if $item.hideTimestamp -}}
         <div class="fi-timeline-item__content">{{ $item.content | page.RenderString }}</div>
