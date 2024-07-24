@@ -363,6 +363,10 @@ class FixIt {
   }
 
   initHighlight() {
+    if (!this.config.code) {
+      return
+    }
+    // if markup.highlight.lineNumbersInTable set to false
     this.util.forEach(document.querySelectorAll('.highlight > pre.chroma'), ($preChroma) => {
       const $chroma = document.createElement('div');
       $chroma.className = $preChroma.className;

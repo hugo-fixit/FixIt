@@ -15,6 +15,7 @@
         {{- dict "Collections" $termLink | T "single.includedIn.collections" | strings.FirstUpper | safeHTML }} {{ .Pages.Len -}}
       </div>
       <div class="collection-nav">
+        {{/*  TODO JS 实现 reverse 翻转顺序  */}}
         {{- $pages := (where .Pages "Params.Weight" "!=" nil) | append (where .Pages "Params.Weight" "eq" nil).ByDate -}}
         {{- with $pages.Next $ -}}
           <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ title .LinkTitle }}">

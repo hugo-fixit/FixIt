@@ -93,6 +93,13 @@ pre:not(.mermaid[data-processed='true']) {
       @include border-radius($global-border-radius);
       @include transition(border-radius 0.2s ease);
 
+      // delayed loading table-wrapper
+      & + .table-wrapper {
+        max-height: 0;
+        @include border-radius(0 0 $global-border-radius $global-border-radius);
+        @include details-transition-open;
+      }
+
       [data-theme='dark'] & {
         color: $code-info-color-dark;
         --#{$prefix}bg-code-header: #{darken($code-background-color-dark, 3%)};
@@ -164,10 +171,8 @@ pre:not(.mermaid[data-processed='true']) {
 
     // delayed loading table-wrapper
     .table-wrapper {
-      max-height: 0;
       overflow: hidden;
-      @include border-radius(0 0 $global-border-radius $global-border-radius);
-      @include details-transition-open;
+      @include border-radius($global-border-radius);
     }
 
     table {

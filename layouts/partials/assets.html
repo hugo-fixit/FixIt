@@ -51,17 +51,16 @@
   {{- $config = dict "lightgallery" true | merge $config -}}
 {{- end -}}
 
+{{- /* Code wrapper */ -}}
 {{- $code := $params.code | default dict -}}
-{{- $config = cond (ne $code.maxShownLines nil) $code.maxShownLines 10 | dict "maxShownLines" | dict "code" | merge $config -}}
-
-{{- /* edit code */ -}}
-{{- if ne $code.edit false -}}
-  {{- $config = dict "editable" true "editLockTitle" (T "assets.editLockTitle") "editUnLockTitle" (T "assets.editUnLockTitle") | dict "code" | merge $config -}}
-{{- end -}}
-
-{{- /* copy code */ -}}
-{{- if ne $code.copy false -}}
-  {{- $config = T "assets.copyToClipboard" | dict "copyTitle" | dict "code" | merge $config -}}
+{{- if $code.enable -}}
+  {{- $config = $code.maxShownLines | dict "maxShownLines" | dict "code" | merge $config -}}
+  {{- if ne $code.edit false -}}
+    {{- $config = dict "editable" true "editLockTitle" (T "assets.editLockTitle") "editUnLockTitle" (T "assets.editUnLockTitle") | dict "code" | merge $config -}}
+  {{- end -}}
+  {{- if ne $code.copy false -}}
+    {{- $config = T "assets.copyToClipboard" | dict "copyTitle" | dict "code" | merge $config -}}
+  {{- end -}}
 {{- end -}}
 
 {{- /* Sharer.js */ -}}
