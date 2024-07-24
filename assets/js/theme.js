@@ -362,8 +362,12 @@ class FixIt {
     }
   }
 
-  initHighlight() {
+  /**
+   * init code wrapper
+   */
+  initCodeWrapper() {
     if (!this.config.code) {
+      this.initCopyCode();
       return
     }
     // if markup.highlight.lineNumbersInTable set to false
@@ -385,6 +389,7 @@ class FixIt {
     this.util.forEach(document.querySelectorAll('.highlight > .chroma:not([data-init])'), ($chroma) => {
       $chroma.dataset.init = 'true';
       if ($chroma.parentElement.classList.contains('no-header')) {
+        this.initCopyCode($chroma);
         return;
       }
       const $codeElements = $chroma.querySelectorAll('pre.chroma > code');
@@ -479,6 +484,15 @@ class FixIt {
       $table.parentElement.replaceChild($wrapper, $table);
       $wrapper.appendChild($table);
     });
+  }
+
+  /**
+   * init simple copy code when there is no code header
+   * https://github.com/github/clipboard-copy-element
+   * @param {ELement} singleCode single code block
+   */
+  initCopyCode(singleCode) {
+    // TODO
   }
 
   /**
@@ -976,7 +990,7 @@ class FixIt {
         this.initTwemoji();
         this.initDetails();
         this.initLightGallery();
-        this.initHighlight();
+        this.initCodeWrapper();
         this.initTable();
         this.initMath();
         this.initMermaid();
@@ -994,7 +1008,7 @@ class FixIt {
         this.initTwemoji($content);
         this.initDetails($content);
         this.initLightGallery();
-        this.initHighlight();
+        this.initCodeWrapper();
         this.initTable($content);
         this.initMath($content);
         this.initMermaid();
@@ -1215,7 +1229,7 @@ class FixIt {
         this.initTwemoji();
         this.initDetails();
         this.initLightGallery();
-        this.initHighlight();
+        this.initCodeWrapper();
         this.initTable();
         this.initMath();
         this.initMermaid();
