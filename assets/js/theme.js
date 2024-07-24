@@ -499,15 +499,9 @@ class FixIt {
    * init table of contents
    */
   initToc() {
-    let $tocCore = document.getElementById('TableOfContents');
+    const $tocCore = document.getElementById('TableOfContents');
     if ($tocCore === null) {
       return;
-    }
-    // It's a dirty hack to fix the bug of APlayer, see https://github.com/hugo-fixit/FixIt/issues/292
-    if (typeof APlayer === 'function') {
-      const $newTocCore = $tocCore.cloneNode(true);
-      $tocCore.parentElement.replaceChild($newTocCore, $tocCore);
-      $tocCore = $newTocCore;
     }
     if (document.getElementById('toc-static').dataset.kept === 'true' || this.util.isTocStatic()) {
       const $tocContentStatic = document.getElementById('toc-content-static');
@@ -577,6 +571,25 @@ class FixIt {
       this.util.animateCSS($tocContentAuto, animation, true);
       $toc.classList.toggle('toc-hidden');
     }, false);
+  }
+
+  /**
+   * It's a dirty hack to fix the bug of APlayer and smoothScroll. 
+   * see https://github.com/hugo-fixit/FixIt/issues/292
+   */
+  fixTocScroll() {
+    if (typeof APlayer === 'function') {
+      // remove APlayer click event listener of the toc link
+      let $tocCore = document.getElementById('TableOfContents');
+      const $newTocCore = $tocCore.cloneNode(true);
+      $tocCore.parentElement.replaceChild($newTocCore, $tocCore);
+      $tocCore = $newTocCore;
+      // remove APlayer click event listener of the heading mark
+      this.util.forEach(document.querySelectorAll('.heading-mark'), ($headingMark) => {
+        const $newHeadingMark = $headingMark.cloneNode(true);
+        $headingMark.parentElement.replaceChild($newHeadingMark, $headingMark);
+      });
+    }
   }
 
   initMath(target = document.body) {
@@ -1000,6 +1013,7 @@ class FixIt {
         this.initToc();
         this.initTocListener();
         this.initPangu();
+        this.fixTocScroll();
         this.util.forEach(document.querySelectorAll('.encrypted-hidden'), ($element) => {
           $element.classList.replace('encrypted-hidden', 'decrypted-shown');
         });
@@ -1257,6 +1271,7 @@ class FixIt {
         if (!this.config.encryption?.all) {
           this.initToc();
           this.initTocListener();
+          this.fixTocScroll();
         }
         this.onScroll();
         this.onResize();
