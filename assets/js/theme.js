@@ -914,7 +914,7 @@ class FixIt {
   }
 
   initCookieconsent() {
-    this.config.cookieconsent && cookieconsent.initialise(this.config.cookieconsent);
+    this.config.cookieconsent && window.cookieconsent?.initialise(this.config.cookieconsent);
   }
 
   getSiteTime = () => {
