@@ -581,9 +581,11 @@ class FixIt {
     if (typeof APlayer === 'function') {
       // remove APlayer click event listener of the toc link
       let $tocCore = document.getElementById('TableOfContents');
-      const $newTocCore = $tocCore.cloneNode(true);
-      $tocCore.parentElement.replaceChild($newTocCore, $tocCore);
-      $tocCore = $newTocCore;
+      if ($tocCore) {
+        const $newTocCore = $tocCore.cloneNode(true);
+        $tocCore.parentElement.replaceChild($newTocCore, $tocCore);
+        $tocCore = $newTocCore;
+      }
       // remove APlayer click event listener of the heading mark
       this.util.forEach(document.querySelectorAll('.heading-mark'), ($headingMark) => {
         const $newHeadingMark = $headingMark.cloneNode(true);
