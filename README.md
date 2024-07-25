@@ -133,17 +133,19 @@ FixIt supports the following languages:
 
 All feedback is welcome! Head over to the [discussions][discussions], [Pull requests][pulls] and [issues][issues] tracker.
 
-| Community                  | Description                      |
-| :------------------------- | :------------------------------- |
-| [Discussions][discussions] | Official GitHub discussion forum |
-| [FixIt QQ group][qq-group] | Official QQ group: `814031017`   |
-| [Hugo FixIt Planet][zsxq]  | Official Knowledge Planet[^2]    |
+| Official Community          | Description                     |
+| :-------------------------- | :------------------------------ |
+| [Discussions][discussions]  | GitHub discussion forum         |
+| [FixIt WeChat group][wx-mp] | Follow and reply "FixIt" to get |
+| [FixIt QQ group][qq-group]  | QQ group: `814031017`           |
+| [Hugo FixIt Planet][zsxq]   | Paid knowledge Planet           |
 
 [discussions]: https://github.com/hugo-fixit/FixIt/discussions
 [pulls]: https://github.com/hugo-fixit/FixIt/pulls
 [issues]: https://github.com/hugo-fixit/FixIt/issues
 [qq-group]: https://qm.qq.com/cgi-bin/qm/qr?k=awbwdTtSQ_-H5QGzeJxdWgv6JMbNehNM&jump_from=webapi
-[zsxq]: https://t.zsxq.com/oZYCt
+[zsxq]: https://t.zsxq.com/GgKEW
+[wx-mp]: https://lruihao.cn/images/qr-wx-mp.webp
 
 ## Contributing
 
@@ -229,4 +231,3 @@ Don't forget to leave a ⭐️ if you like this theme, thanks!
 
 <!-- footnote reference definition -->
 [^1]: The theme name is interesting: "leave it, keep it, love it, fix it". Appears and leaves, loves but cannot keep. Doesn't it look like that damn love and BUG? 🤣
-[^2]: Knowledge Planet is a paid community platform for knowledge sharing and communication. If you need more help and support, you can join our Knowledge Planet. ([Newcomer Coupon～](https://t.zsxq.com/BQcpe))
