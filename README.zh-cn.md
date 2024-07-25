@@ -137,7 +137,7 @@ FixIt 支持下列语言：
 | :--------------------------- | :---------------------- |
 | [Discussions][discussions]   | 官方 GitHub 讨论区      |
 | [FixIt 主题交流群][qq-group] | 官方 QQ 群：`814031017` |
-| [Hugo FixIt 星球][zsxq]      | 官方知识星球            |
+| [Hugo FixIt 星球][zsxq]      | 官方知识星球[^2]        |
 
 [discussions]: https://github.com/hugo-fixit/FixIt/discussions
 [pulls]: https://github.com/hugo-fixit/FixIt/pulls
@@ -215,10 +215,6 @@ FixIt 支持下列语言：
 
 FixIt 根据 **MIT** 许可协议授权。更多信息请查看 [LICENSE 文件](LICENSE)。
 
-## 作者
-
-Follow [Lruihao](https://github.com/Lruihao "在 GitHub 上关注我")
-
 ## 赞助支持
 
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/hugo-fixit/FixIt)
@@ -229,6 +225,12 @@ Follow [Lruihao](https://github.com/Lruihao "在 GitHub 上关注我")
 - [支付宝](images/alipay.jpg)
 - [PayPal](https://paypal.me/Lruihao)
 
+## 作者
+
+Follow [Lruihao](https://github.com/Lruihao "在 GitHub 上关注我")
+
 如果你喜欢这个主题，别忘了留下一颗 ⭐️ 哦，谢谢！
 
+<!-- footnote reference definition -->
 [^1]: 主题名称趣谈：“leave it, keep it，love it，fix it”。出现又离开，爱而不得。这像不像那该死的爱情和 BUG 呢？🤣
+[^2]: 知识星球是一个付费的知识分享和交流社区平台。如果你需要更多的帮助和支持，可以加入我们的知识星球。（[新人优惠券～](https://t.zsxq.com/BQcpe)）

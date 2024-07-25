@@ -11,16 +11,20 @@
   &[data-animation] {
     .#{$prefix}timeline-item::before {
       border-color: var(--timeline-color);
-      animation-name: change-border-color;
-      animation-duration: 0.9s;
-      animation-direction: alternate;
+      animation-name: border-color-fade;
+      animation-duration: 2s;
       animation-iteration-count: infinite;
-      animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
       animation-delay: calc(var(--timeline-index) * 0.3s);
   
-      @keyframes change-border-color {
-        to {
+      @keyframes border-color-fade {
+        0% {
+          border-color: var(--timeline-color);
+        }
+        50% {
           border-color: var(--timeline-circle-color);
+        }
+        100% {
+          border-color: var(--timeline-color);
         }
       }
     }

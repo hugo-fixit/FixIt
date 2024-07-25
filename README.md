@@ -137,7 +137,7 @@ All feedback is welcome! Head over to the [discussions][discussions], [Pull requ
 | :------------------------- | :------------------------------- |
 | [Discussions][discussions] | Official GitHub discussion forum |
 | [FixIt QQ group][qq-group] | Official QQ group: `814031017`   |
-| [Hugo FixIt Planet][zsxq]  | Official Knowledge Planet        |
+| [Hugo FixIt Planet][zsxq]  | Official Knowledge Planet[^2]    |
 
 [discussions]: https://github.com/hugo-fixit/FixIt/discussions
 [pulls]: https://github.com/hugo-fixit/FixIt/pulls
@@ -211,10 +211,6 @@ Thanks to all the [contributors](https://github.com/hugo-fixit/FixIt/graphs/cont
 
 FixIt is licensed under the **MIT** license. Check the [LICENSE file](LICENSE) for details.
 
-## Author
-
-Follow [Lruihao](https://github.com/Lruihao "Follow me on GitHub")
-
 ## Sponsor
 
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/hugo-fixit/FixIt)
@@ -225,6 +221,12 @@ If you enjoy the theme, please consider buying me a coffee ☕️. Thanks!
 - [Alipay](images/alipay.jpg)
 - [PayPal](https://paypal.me/Lruihao)
 
+## Author
+
+Follow [Lruihao](https://github.com/Lruihao "Follow me on GitHub")
+
 Don't forget to leave a ⭐️ if you like this theme, thanks!
 
+<!-- footnote reference definition -->
 [^1]: The theme name is interesting: "leave it, keep it, love it, fix it". Appears and leaves, loves but cannot keep. Doesn't it look like that damn love and BUG? 🤣
+[^2]: Knowledge Planet is a paid community platform for knowledge sharing and communication. If you need more help and support, you can join our Knowledge Planet. ([Newcomer Coupon～](https://t.zsxq.com/BQcpe))
