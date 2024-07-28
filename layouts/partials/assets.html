@@ -230,7 +230,7 @@
 {{- end -}}
 
 {{- /* PWA */ -}}
-{{- if .Site.Params.enablePWA | and hugo.IsProduction -}}
+{{- if not hugo.IsServer | and .Site.Params.enablePWA | and hugo.IsProduction -}}
   {{- $options := dict "targetPath" "service-worker.min.js" "minify" true -}}
   {{- $source := resources.Get "js/service-worker.js" | js.Build $options -}}
   {{- $_ := $source.RelPermalink -}}
