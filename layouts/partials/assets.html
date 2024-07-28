@@ -210,7 +210,7 @@
 {{- end -}}
 
 {{- /* 不蒜子 */ -}}
-{{- if eq .Site.Params.busuanzi.enable true -}}
+{{- if .Site.Params.busuanzi.enable | and hugo.IsProduction -}}
   {{- $source := "https://vercount.one/js" -}}
   {{- if eq .Lang "zh-cn" -}}
     {{- $source = "https://cn.vercount.one/js" -}}

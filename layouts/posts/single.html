@@ -103,7 +103,7 @@
           <span id="{{ .RelPermalink }}" class="comment-visitors" data-flag-title="{{ $title }}">
             {{- $visitorIcon }}<span id="twikoo_visitors">-</span>&nbsp;{{ T "single.views" }}
           </span>&nbsp;
-        {{- else if .Site.Params.busuanzi.enable | and .Site.Params.busuanzi.pageViews -}}
+        {{- else if .Site.Params.busuanzi.enable | and .Site.Params.busuanzi.pageViews | and hugo.IsProduction -}}
           <span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="{{ $title }}">
             {{- $visitorIcon }}<span id="busuanzi_value_page_pv">-</span>&nbsp;{{ T "single.views" }}
           </span>&nbsp;
