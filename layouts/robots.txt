@@ -65,4 +65,36 @@ Disallow: /
 User-agent: ZoominfoBot
 Disallow: /
 
+# OpenAI, ChatGPT
+User-agent: GPTBot
+Disallow: /
+
+# Google AI (Bard, etc)
+User-agent: Google-Extended
+Disallow: /
+
+# Block common crawl
+User-agent: CCBot
+Disallow: /
+
+# Facebook
+User-agent: FacebookBot
+Disallow: /
+
+# Cohere.ai
+User-agent: cohere-ai
+Disallow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Disallow: /
+
+# Anthropic
+User-agent: anthropic-ai
+Disallow: /
+
+# Claudebot by Anthropic
+User-agent: ClaudeBot
+Disallow: /
+
 Sitemap: {{ "/sitemap.xml" | absURL }}
