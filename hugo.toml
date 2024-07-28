@@ -693,11 +693,16 @@ enableEmoji = true
     # FixIt 0.2.13 | NEW watermark's fontFamily
     fontFamily = "inherit"
 
-  # FixIt 0.2.12 | NEW Busuanzi count
-  [params.ibruce]
+  # FixIt 0.3.10 | NEW Busuanzi count
+  [params.busuanzi]
+    # whether to enable busuanzi count
     enable = false
-    # Enable in post meta
-    enablePost = false
+    # busuanzi count core ["vercount", "busuanzi"], default: "vercount"
+    core = "vercount"
+    # whether to show the site views
+    siteViews = true
+    # whether to show the page views
+    pageViews = true
 
   # Site verification code config for Google/Bing/Yandex/Pinterest/Baidu/360/Sogou
   [params.verification]

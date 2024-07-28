@@ -192,6 +192,7 @@ FixIt 支持下列语言：
 - [cookieconsent](https://github.com/osano/cookieconsent)
 - [cell-watermark](https://github.com/Lruihao/watermark)
 - [不蒜子](http://busuanzi.ibruce.info/)
+- [Vercount](https://github.com/EvanNotFound/vercount)
 - [pangu.js](https://github.com/vinta/pangu.js)
 - [Artalk](https://artalk.js.org/)
 - [Waline](https://waline.js.org/)

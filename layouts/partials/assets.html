@@ -210,9 +210,15 @@
 {{- end -}}
 
 {{- /* 不蒜子 */ -}}
-{{- if eq .Site.Params.ibruce.enable true -}}
-  {{- $source := "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" -}}
-  {{- dict "Source" $source "Fingerprint" $fingerprint "Async" true "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+{{- if eq .Site.Params.busuanzi.enable true -}}
+  {{- $source := "https://vercount.one/js" -}}
+  {{- if eq .Lang "zh-cn" -}}
+    {{- $source = "https://cn.vercount.one/js" -}}
+  {{- end -}}
+  {{- if eq .Site.Params.busuanzi.core "busuanzi" -}}
+    {{- $source = "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" -}}
+  {{- end -}}
+  {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 {{- end -}}
 
 {{- /* Site creation time */ -}}
