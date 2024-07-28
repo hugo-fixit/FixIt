@@ -95,8 +95,12 @@ $tag-cloud-end-dark: $global-font-color-dark!default;
 
 // ========== Single Content ========== //
 // Font size of the TOC
-$toc-title-font-size: 1.2rem !default;
-$toc-content-font-size: 1rem !default;
+$toc-title-font-size: 1rem !default;
+$toc-content-font-size: 0.875rem !default;
+
+// Font size of the Collection List
+$collection-title-font-size: 1rem !default;
+$collection-list-font-size: 0.875rem !default;
 
 // Color of the single link
 $single-link-color: #2376b7 !default; // 花青

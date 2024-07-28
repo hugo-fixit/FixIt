@@ -1,9 +1,9 @@
 @media only screen and (min-width: 1441px) {
   %page-style {
-    width: 60%;
+    width: Round(60%, 2px);
 
     [data-page-style='wide'] & {
-      width: 64%;
+      width: Round(64%, 2px);
     }
 
     [data-page-style='narrow'] & {
@@ -14,20 +14,20 @@
 
 @media only screen and (max-width: 1440px) {
   %page-style {
-    width: 56%;
+    width: Round(56%, 2px);
 
     [data-page-style='wide'] & {
-      width: 60%;
+      width: Round(60%, 2px);
     }
   }
 }
 
 @media only screen and (max-width: 1200px) {
   %page-style {
-    width: 52%;
+    width: Round(52%, 2px);
 
     [data-page-style='wide'] & {
-      width: 56%;
+      width: Round(56%, 2px);
     }
   }
 
@@ -42,7 +42,7 @@
 
 @media only screen and (max-width: 960px) {
   %page-style {
-    width: 80% !important;
+    width: Round(80%, 2px) !important;
   }
   
   aside {

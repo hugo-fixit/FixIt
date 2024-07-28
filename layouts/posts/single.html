@@ -87,31 +87,25 @@
         {{- $visitorIcon := dict "Class" "fa-regular fa-eye fa-fw me-1" | partial "plugin/icon.html" -}}
         {{- $commentIcon := dict "Class" "fa-regular fa-comments fa-fw me-1" | partial "plugin/icon.html" -}}
         {{- /* Visitor Count */ -}}
-        {{- if $comment.enable -}}
-          {{- if $comment.artalk.enable -}}
-            <span class="comment-visitors" data-flag-title="{{ $title }}">
-              {{ $visitorIcon }}<span class="artalk-visitor-count" data-page-key="{{ .RelPermalink }}">-</span>&nbsp;{{ T "single.views" }}
-            </span>&nbsp;
-          {{- else if ($comment.valine.enable | and $comment.valine.visitor) -}}
-            <span id="{{ .RelPermalink }}" class="leancloud_visitors comment-visitors" data-flag-title="{{ $title }}">
-              {{ $visitorIcon }}<span class="leancloud-visitors-count">-</span>&nbsp;{{ T "single.views" }}
-            </span>&nbsp;
-          {{- else if $comment.waline.enable | and $comment.waline.pageview -}}
-            <span class="comment-visitors" data-flag-title="{{ $title }}">
-              {{ $visitorIcon }}<span data-path="{{ .RelPermalink }}" class="waline-pageview-count">-</span>&nbsp;{{ T "single.views" }}
-            </span>&nbsp;
-          {{- else if $comment.twikoo.enable | and $comment.twikoo.visitor -}}
-            <span id="{{ .RelPermalink }}" class="comment-visitors" data-flag-title="{{ $title }}">
-              {{ $visitorIcon }}<span id="twikoo_visitors">-</span>&nbsp;{{ T "single.views" }}
-            </span>&nbsp;
-          {{- else if .Site.Params.ibruce.enable | and .Site.Params.ibruce.enablePost -}}
-            <span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="{{ $title }}">
-              {{ $visitorIcon }}<span id="busuanzi_value_page_pv">-</span>&nbsp;{{ T "single.views" }}
-            </span>&nbsp;
-          {{- end -}}
-        {{- else if .Site.Params.ibruce.enable | and .Site.Params.ibruce.enablePost -}}
+        {{- if $comment.enable | and $comment.artalk.enable -}}
+          <span class="comment-visitors" data-flag-title="{{ $title }}">
+            {{- $visitorIcon }}<span class="artalk-visitor-count" data-page-key="{{ .RelPermalink }}">-</span>&nbsp;{{ T "single.views" }}
+          </span>&nbsp;
+        {{- else if $comment.enable | and $comment.valine.enable | and $comment.valine.visitor -}}
+          <span id="{{ .RelPermalink }}" class="leancloud_visitors comment-visitors" data-flag-title="{{ $title }}">
+            {{- $visitorIcon }}<span class="leancloud-visitors-count">-</span>&nbsp;{{ T "single.views" }}
+          </span>&nbsp;
+        {{- else if $comment.enable | and $comment.waline.enable | and $comment.waline.pageview -}}
+          <span class="comment-visitors" data-flag-title="{{ $title }}">
+            {{- $visitorIcon }}<span data-path="{{ .RelPermalink }}" class="waline-pageview-count">-</span>&nbsp;{{ T "single.views" }}
+          </span>&nbsp;
+        {{- else if $comment.enable | and $comment.twikoo.enable | and $comment.twikoo.visitor -}}
+          <span id="{{ .RelPermalink }}" class="comment-visitors" data-flag-title="{{ $title }}">
+            {{- $visitorIcon }}<span id="twikoo_visitors">-</span>&nbsp;{{ T "single.views" }}
+          </span>&nbsp;
+        {{- else if .Site.Params.busuanzi.enable | and .Site.Params.busuanzi.pageViews -}}
           <span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="{{ $title }}">
-            {{ $visitorIcon }}<span id="busuanzi_value_page_pv">-</span>&nbsp;{{ T "single.views" }}
+            {{- $visitorIcon }}<span id="busuanzi_value_page_pv">-</span>&nbsp;{{ T "single.views" }}
           </span>&nbsp;
         {{- end -}}
         {{- /* Comment Count */ -}}
@@ -207,6 +201,9 @@
     {{- if eq $reward.position "after" -}}
       {{- partial "single/reward.html" . -}}
     {{- end -}}
+
+    {{- /* Custom post footer */ -}}
+    {{- block "custom-post__footer" . }}{{ end -}}
 
     {{- /* Comment */ -}}
     {{- partial "single/comment.html" . -}}
