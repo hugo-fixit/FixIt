@@ -127,6 +127,7 @@
     .collection-name {
       flex-grow: 1;
       font-weight: bold;
+      font-size: $collection-title-font-size;
 
       &::before {
         content: attr(data-collections) '・';
@@ -146,7 +147,7 @@
   }
 
   .collection-content {
-    font-size: $toc-content-font-size;
+    font-size: $collection-list-font-size;
     background-color: darken($global-background-color, 2%);
 
     [data-theme='dark'] & {
