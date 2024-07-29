@@ -18,3 +18,51 @@
   -webkit-animation-name: #{$prefix}pulse !important;
   animation-name: #{$prefix}pulse !important;
 }
+
+/**
+ * After the CSS round() function exceeds 90% browser support in the future, this code can be removed
+ * See https://caniuse.com/mdn-css_types_round
+ */
+@supports not (width: ROUND(60%, 2px)) {
+  @media only screen and (min-width: 1441px) {
+    %page-style {
+      width: 60%;
+  
+      [data-page-style='wide'] & {
+        width: 64%;
+      }
+  
+      [data-page-style='narrow'] & {
+        max-width: 800px;
+      }
+    }
+  }
+  @media only screen and (max-width: 1440px) {
+    %page-style {
+      width: 56%;
+  
+      [data-page-style='wide'] & {
+        width: 60%;
+      }
+    }
+  }
+  @media only screen and (max-width: 1200px) {
+    %page-style {
+      width: 52%;
+  
+      [data-page-style='wide'] & {
+        width: 56%;
+      }
+    }
+  }
+  @media only screen and (max-width: 960px) {
+    %page-style {
+      width: 80% !important;
+    }
+  }
+  @media only screen and (max-width: 680px) {
+    %page-style {
+      width: 100% !important;
+    }
+  }
+}

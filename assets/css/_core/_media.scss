@@ -1,9 +1,9 @@
 @media only screen and (min-width: 1441px) {
   %page-style {
-    width: Round(60%, 2px);
+    width: ROUND(60%, 2px);
 
     [data-page-style='wide'] & {
-      width: Round(64%, 2px);
+      width: ROUND(64%, 2px);
     }
 
     [data-page-style='narrow'] & {
@@ -14,20 +14,20 @@
 
 @media only screen and (max-width: 1440px) {
   %page-style {
-    width: Round(56%, 2px);
+    width: ROUND(56%, 2px);
 
     [data-page-style='wide'] & {
-      width: Round(60%, 2px);
+      width: ROUND(60%, 2px);
     }
   }
 }
 
 @media only screen and (max-width: 1200px) {
   %page-style {
-    width: Round(52%, 2px);
+    width: ROUND(52%, 2px);
 
     [data-page-style='wide'] & {
-      width: Round(56%, 2px);
+      width: ROUND(56%, 2px);
     }
   }
 
@@ -42,7 +42,7 @@
 
 @media only screen and (max-width: 960px) {
   %page-style {
-    width: Round(80%, 2px) !important;
+    width: ROUND(80%, 2px) !important;
   }
   
   aside {
@@ -57,7 +57,6 @@
     padding-left: 1rem;
   }
 }
-
 
 @media only screen and (min-width: 681px) {
   .breadcrumb-container.sticky {
