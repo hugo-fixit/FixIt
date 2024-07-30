@@ -211,14 +211,8 @@
 
 {{- /* 不蒜子 */ -}}
 {{- if .Site.Params.busuanzi.enable | and hugo.IsProduction -}}
-  {{- $source := "https://vercount.one/js" -}}
-  {{- if eq .Lang "zh-cn" -}}
-    {{- $source = "https://cn.vercount.one/js" -}}
-  {{- end -}}
-  {{- if eq .Site.Params.busuanzi.core "busuanzi" -}}
-    {{- $source = "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" -}}
-  {{- end -}}
-  {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+  {{- $source := .Site.Params.busuanzi.source | default "https://vercount.one/js" -}}
+  {{- dict "Source" $source "Fingerprint" $fingerprint "Async" true "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 {{- end -}}
 
 {{- /* Site creation time */ -}}

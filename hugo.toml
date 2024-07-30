@@ -697,8 +697,8 @@ enableEmoji = true
   [params.busuanzi]
     # whether to enable busuanzi count
     enable = false
-    # busuanzi count core ["vercount", "busuanzi"], default: "vercount"
-    core = "vercount"
+    # busuanzi count core script source. Default is https://vercount.one/js
+    source = "https://vercount.one/js"
     # whether to show the site views
     siteViews = true
     # whether to show the page views
