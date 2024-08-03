@@ -331,6 +331,9 @@
         </noscript>
       {{- end -}}
     {{- end -}}
+
+    {{- /* Custom Comment System */ -}}
+    {{- block "custom-comment" . }}{{ end -}}
   </div>
   {{- /* lightgallery for Artalk and Twikoo */ -}}
   {{- $params := partial "function/params.html" -}}

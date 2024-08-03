@@ -13,6 +13,9 @@
     {{- /* Collection List */ -}}
     {{- partial "single/collection-list.html" . -}}
 
+    {{- /* TODO Related Content */ -}}
+    {{/*  {{- partial "single/related.html" . -}}  */}}
+
     {{- /* Custom Aside */ -}}
     {{- block "custom-aside" . }}{{ end -}}
   </aside>
@@ -194,16 +197,19 @@
     {{- /* FixIt Decryptor */ -}}
     {{- partial "single/fixit-decryptor.html" . -}}
 
+    {{- /* Custom block before post footer */ -}}
+    {{- block "custom-post__footer:before" . }}{{ end -}}
+
     {{- /* Footer */ -}}
     {{- partial "single/footer.html" . -}}
 
-    {{- /* Reward after Footer */ -}}
+    {{- /* Reward after post footer */ -}}
     {{- if eq $reward.position "after" -}}
       {{- partial "single/reward.html" . -}}
     {{- end -}}
 
-    {{- /* Custom post footer */ -}}
-    {{- block "custom-post__footer" . }}{{ end -}}
+    {{- /* Custom block after post footer */ -}}
+    {{- block "custom-post__footer:after" . }}{{ end -}}
 
     {{- /* Comment */ -}}
     {{- partial "single/comment.html" . -}}
