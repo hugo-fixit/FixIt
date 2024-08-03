@@ -73,7 +73,7 @@
   }
 
   .featured-image {
-    margin: 0.5rem 0 1rem 0;
+    margin: 1rem 0;
 
     img {
       display: block;
@@ -131,6 +131,7 @@
   }
 
   .content {
+    margin-block: 1rem;
     > h1,
     > h2 {
       font-size: 1.5em;

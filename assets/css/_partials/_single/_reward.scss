@@ -1,7 +1,6 @@
 .post-reward {
   padding: 1rem;
   text-align: center;
-  margin-bottom: -1rem;
   @extend .print-d-none;
 
   &:has(.reward-ways:empty) {

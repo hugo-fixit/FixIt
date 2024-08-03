@@ -2,7 +2,7 @@
 .collection-card {
   font-size: 0.875rem;
   background-color: darken($global-background-color, 3%);
-  margin-block: 2rem -1rem;
+  margin-block: 1rem;
   padding: 1rem 1.25rem;
   position: relative;
   @include border-radius($global-border-radius * 1.5);
