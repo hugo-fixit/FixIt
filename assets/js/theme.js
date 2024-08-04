@@ -738,7 +738,7 @@ class FixIt {
       Object.values(groupMap).forEach((group) => {
         const typeone = (i) => {
           const typeitElement = group[i];
-          const singleLoop = typeitElement.dataset.loop;
+          const singleData = typeitElement.dataset;
           stagingDOM.stage(typeitElement.querySelector('template').content.cloneNode(true));
           // for shortcodes usage
           let targetEle = typeitElement.firstElementChild
@@ -750,18 +750,19 @@ class FixIt {
           // create a new instance of TypeIt for each element
           const instance = new TypeIt(targetEle, {
             strings: stagingDOM.$el.querySelector('pre')?.innerHTML || stagingDOM.contentAsHtml(),
-            speed: speed,
+            speed: Number(singleData.speed) >= 0 ? Number(singleData.speed) : speed,
             lifeLike: true,
-            cursorSpeed: cursorSpeed,
-            cursorChar: cursorChar,
+            cursorSpeed: Number(singleData.cursorSpeed) >= 0 ? Number(singleData.cursorSpeed) : cursorSpeed,
+            cursorChar: singleData.cursorChar || cursorChar,
             waitUntilVisible: true,
-            loop: singleLoop ? JSON.parse(singleLoop) : loop,
+            loop: singleData.loop ? singleData.loop === 'true' : loop,
             afterComplete: () => {
+              const duration = Number(singleData.duration ?? vtypeitConfig.duration);
               if (i === group.length - 1) {
-                if (typeitConfig.duration >= 0) {
+                if (duration >= 0) {
                   window.setTimeout(() => {
                     instance.destroy();
-                  }, typeitConfig.duration);
+                  }, duration);
                 }
                 return;
               }

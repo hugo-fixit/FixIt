@@ -25,6 +25,18 @@
 {{- with (.Get "group" | string) -}}
   {{- $wrapperAttrs = printf `%v data-group="%v"` $wrapperAttrs . -}}
 {{- end -}}
+{{- with .Get "speed" -}}
+  {{- $wrapperAttrs = printf `%v data-speed="%v"` $wrapperAttrs . -}}
+{{- end -}}
+{{- with .Get "cursorSpeed" -}}
+  {{- $wrapperAttrs = printf `%v data-cursor-speed="%v"` $wrapperAttrs . -}}
+{{- end -}}
+{{- with .Get "cursorChar" -}}
+  {{- $wrapperAttrs = printf `%v data-cursor-char="%v"` $wrapperAttrs . -}}
+{{- end -}}
+{{- with .Get "duration" -}}
+  {{- $wrapperAttrs = printf `%v data-duration="%v"` $wrapperAttrs . -}}
+{{- end -}}
 {{- with $loop -}}
   {{- $wrapperAttrs = printf `%v data-loop="true"` $wrapperAttrs -}}
 {{- end -}}
