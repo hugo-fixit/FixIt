@@ -59,6 +59,9 @@
 }
 
 @media only screen and (min-width: 681px) {
+  .d-none-desktop {
+    display: none;
+  }
   .breadcrumb-container.sticky {
     body:not([data-header-desktop='sticky']) & {
       top: 0;
@@ -79,8 +82,7 @@
     display: none;
   }
 
-  #header-mobile,
-  .d-none-desktop {
+  #header-mobile {
     display: block;
   }
 
