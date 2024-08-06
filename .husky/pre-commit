@@ -1,0 +1,1 @@
+node build/update-version.js --stage commit

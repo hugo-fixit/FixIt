@@ -1,10 +1,10 @@
 {
   "output": "CHANGELOG.md",
-  "template": ".auto-changelog/template.hbs",
-  "handlebarsSetup": ".auto-changelog/setup.js",
+  "template": "build/changelog/template.hbs",
+  "handlebarsSetup": "build/changelog/setup.cjs",
   "sortCommits": "relevance",
   "commitLimit": false,
-  "ignoreCommitPattern": "\\(ignore\\)",
+  "ignoreCommitPattern": "(Chore|chore):|\\(ignore\\)",
   "replaceText": {
     "^(Feat|feat):": ":sparkles: Feat:",
     "^(Fix|fix):": ":bug: Fix:",

@@ -18,16 +18,19 @@
   },
   "license": "MIT",
   "author": "Lruihao (https://lruihao.cn)",
+  "type": "module",
   "scripts": {
     "build": "hugo --source=demo --themesDir ../.. --theme $PWD --gc --minify --logLevel info",
     "server": "hugo server --source=demo --themesDir ../.. --theme $PWD -D --disableFastRender --navigateToChanged --ignoreCache",
     "server:production": "npm run server -- -e production",
     "server:docs": "hugo server --source=../fixit-docs -D --disableFastRender --navigateToChanged --ignoreCache",
-    "version": "sed -i '' \"s/v$npm_package_version-RC/v$npm_package_version/g\" layouts/partials/init/index.html && git add .",
+    "version": "node build/update-version.js --stage version",
     "postversion": "git push && git push --tags && npm run release",
-    "release": "auto-changelog --config .auto-changelog/config.json"
+    "release": "auto-changelog --config build/changelog/config.json",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "auto-changelog": "^2.4.0"
+    "auto-changelog": "^2.4.0",
+    "husky": "^9.1.4"
   }
 }
