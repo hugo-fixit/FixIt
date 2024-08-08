@@ -3,6 +3,7 @@
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hugo-fixit/FixIt?style=flat)](https://github.com/hugo-fixit/FixIt/releases)
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.127.0-ff4088?style=flat&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/hugo-fixit/FixIt?style=flat)](/LICENSE)
+[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/hugo-fixit/FixIt)
 
 👉 English README | [简体中文说明](README.zh-cn.md)
 
@@ -140,6 +141,8 @@ All feedback is welcome! Head over to the [discussions][discussions], [Pull requ
 | [FixIt QQ group][qq-group]  | QQ group: `814031017`           |
 | [Hugo FixIt Planet][zsxq]   | Paid knowledge Planet           |
 
+Don't forget to leave a ⭐️ if you like this theme, thanks!
+
 [discussions]: https://github.com/hugo-fixit/FixIt/discussions
 [pulls]: https://github.com/hugo-fixit/FixIt/pulls
 [issues]: https://github.com/hugo-fixit/FixIt/issues
@@ -216,8 +219,6 @@ FixIt is licensed under the **MIT** license. Check the [LICENSE file](LICENSE) f
 
 ## Sponsor
 
-[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/hugo-fixit/FixIt)
-
 If you enjoy the theme, please consider buying me a coffee ☕️. Thanks!
 
 - [Wechat](images/wechatpay.jpg)
@@ -226,9 +227,7 @@ If you enjoy the theme, please consider buying me a coffee ☕️. Thanks!
 
 ## Author
 
-Follow [Lruihao](https://github.com/Lruihao "Follow me on GitHub")
-
-Don't forget to leave a ⭐️ if you like this theme, thanks!
+[Lruihao](https://github.com/Lruihao "Follow me on GitHub")
 
 <!-- footnote reference definition -->
 [^1]: The theme name is interesting: "leave it, keep it, love it, fix it". Appears and leaves, loves but cannot keep. Doesn't it look like that damn love and BUG? 🤣
