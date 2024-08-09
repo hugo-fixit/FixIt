@@ -16,8 +16,8 @@
   {{- else if gt "0.2.0" (strings.TrimPrefix "v" .Site.Params.version) -}}
     {{- errorf "FixIt %v\n%v\n\n" $version (dict "From" .Site.Params.version "To" $version | T "init.compatibilityError")  -}}
   {{- end -}}
-  {{- if (strings.HasSuffix $version "RC") | and $devOpts.c4u -}}
-    {{- warnf "FixIt %v\n%v\n\n" $version (T "init.RCVersionWarn") -}}
+  {{- if gt (len (findRE "^v[0-9]+\\.[0-9]+\\.[0-9]+-[0-9a-f]+$" $version)) 0 -}}
+    {{- warnidf "warning-dev-version" "FixIt %v\n%v" $version (T "init.devVersionWarn") -}}
   {{- end -}}
   {{- if (gt $latest $version) | and $devOpts.c4u -}}
     {{- warnf "FixIt %v (⬆️ %v)\n%v`git submodule update --remote --merge`\n\n" $version $latest (T "init.quicklyUpgrade") -}}

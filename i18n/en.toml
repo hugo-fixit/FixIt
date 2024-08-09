@@ -5,7 +5,7 @@
 [init]
 configurationError = "Configuration Error\nYou haven't configured the FixIt version param correctly yet. See https://fixit.lruihao.cn/documentation/basics/#theme-configuration"
 compatibilityError = "Compatibility Error ({{ .From }} -> {{ .To }}):\nYou have an incompatible update. See https://github.com/hugo-fixit/FixIt/releases"
-RCVersionWarn = "You are using a development version of FixIt. Please consider using a stable version.\nSee https://github.com/hugo-fixit/FixIt/releases"
+devVersionWarn = "You are using a development version of FixIt. Please consider using a stable version.\nSee https://github.com/hugo-fixit/FixIt/releases"
 devEnvWarn = "Current environment is \"development\". The \"comment system\", \"PWA\", \"CDN\" and \"fingerprint\" will be disabled."
 quicklyUpgrade = "Quickly upgrade use command: "
 # === init ===
