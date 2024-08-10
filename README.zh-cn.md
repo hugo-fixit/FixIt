@@ -203,8 +203,6 @@ FixIt 支持下列语言：
 - [github-corners](https://github.com/tholman/github-corners)
 - [giscus](https://giscus.app/zh-CN)
 - [crypto-js](https://github.com/brix/crypto-js)
-- [vConsole](https://github.com/Tencent/vConsole)
-- [eruda](https://github.com/liriliri/eruda)
 - [pace](https://github.com/CodeByZach/pace)
 
 </details>

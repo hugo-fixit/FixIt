@@ -198,17 +198,6 @@
   {{- $config = dict "all" (isset $params "password") "shortcode" ($encryptPartial | default false) | dict "encryption" | merge $config -}}
 {{- end -}}
 
-{{- /* Mobile Devtools */ -}}
-{{- $mDevtools := (.Scratch.Get "devOpts").mDevtools -}}
-{{- if $mDevtools.enable -}}
-  {{- $devtoolsJS := $cdn.vconsoleJS | default "lib/vconsole/vconsole.min.js" -}}
-  {{- if eq $mDevtools.type "eruda" -}}
-    {{- $devtoolsJS = $cdn.erudaJS | default "lib/eruda/eruda.js" -}}
-  {{- end -}}
-  {{- dict "Source" $devtoolsJS "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-  {{- $config = dict "mDevtools" ($mDevtools.type | default "vConsole") | merge $config -}}
-{{- end -}}
-
 {{- /* 不蒜子 */ -}}
 {{- if .Site.Params.busuanzi.enable | and hugo.IsProduction -}}
   {{- $source := .Site.Params.busuanzi.source | default "https://vercount.one/js" -}}

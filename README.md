@@ -199,8 +199,6 @@ Thanks to all the [contributors](https://github.com/hugo-fixit/FixIt/graphs/cont
 - [github-corners](https://github.com/tholman/github-corners)
 - [giscus](https://giscus.app/)
 - [crypto-js](https://github.com/brix/crypto-js)
-- [vConsole](https://github.com/Tencent/vConsole)
-- [eruda](https://github.com/liriliri/eruda)
 - [pace](https://github.com/CodeByZach/pace)
 
 </details>

@@ -810,11 +810,6 @@ enableEmoji = true
     enable = false
     # Check for updates
     c4u = false
-    # Mobile Devtools config
-    [params.dev.mDevtools]
-      enable = false
-      # "vConsole", "eruda" supported
-      type = "vConsole"
 
   # Page config
   [params.page]
