@@ -98,11 +98,18 @@
     </section>
   </div>
 
+  {{- $navigation := .Site.Params.navigation -}}
   <div class="post-nav">
     {{- $pages := .Scratch.Get "mainSectionPages" -}}
     {{- $prev := $pages.Prev . -}}
     {{- $next := $pages.Next . -}}
-    {{- if .Site.Params.navigationReverse -}}
+    {{- /* Show the post navigation in section pages */ -}}
+    {{- if $navigation.inSection -}}
+      {{- $prev = .PrevInSection -}}
+      {{- $next = .NextInSection -}}
+    {{- end -}}
+    {{- /* Reverse the next/previous post navigation order */ -}}
+    {{- if $navigation.reverse -}}
       {{- $prev = $pages.Next . -}}
       {{- $next = $pages.Prev . -}}
     {{- end -}}

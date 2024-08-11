@@ -331,8 +331,6 @@ enableEmoji = true
   enablePWA = false
   # FixIt 0.2.14 | NEW whether to add external Icon for external links automatically
   externalIcon = false
-  # FixIt 0.3.0 | NEW whether to reverse the order of the navigation menu
-  navigationReverse = false
   # FixIt 0.3.0 | NEW whether to add site title to the title of every page
   # remember to set up your site title in `hugo.toml` (e.g. title = "title")
   withSiteTitle = true
@@ -443,6 +441,13 @@ enableEmoji = true
     enable = false
     sticky = false
     showHome = false
+
+  # FixIt 0.3.10 | NEW Post navigation config
+  [params.navigation]
+    # whether to show the post navigation in section pages scope
+    inSection = false
+    # whether to reverse the next/previous post navigation order
+    reverse = false
 
   # Footer config
   [params.footer]
