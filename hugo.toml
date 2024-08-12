@@ -231,12 +231,12 @@ enableEmoji = true
 # -------------------------------------------------------------------------------------
 
 [mediaTypes]
-  # Options to make output .md files
-  [mediaTypes."text/markdown"]
-    suffixes = ["md"]
   # Options to make output .txt files
   [mediaTypes."text/plain"]
     suffixes = ["txt"]
+  # Options to make output feed.json files
+  [mediaTypes."application/feed+json"]
+    suffixes = ["json"]
 
 # -------------------------------------------------------------------------------------
 # Output Format Definitions
@@ -244,11 +244,6 @@ enableEmoji = true
 # -------------------------------------------------------------------------------------
 
 [outputFormats]
-  # Options to make output .md files
-  [outputFormats.MarkDown]
-    mediaType = "text/markdown"
-    isPlainText = true
-    isHTML = false
   # FixIt 0.3.0 | NEW Options to make output /archives/index.html file
   [outputFormats.archives]
     path = "archives"
@@ -257,6 +252,7 @@ enableEmoji = true
     isPlainText = false
     isHTML = true
     permalinkable = true
+    notAlternative = true
   # FixIt 0.3.0 | NEW Options to make output /offline/index.html file
   [outputFormats.offline]
     path = "offline"
@@ -265,18 +261,35 @@ enableEmoji = true
     isPlainText = false
     isHTML = true
     permalinkable = true
+    notAlternative = true
   # FixIt 0.3.0 | NEW Options to make output readme.md file
-  [outputFormats.README]
+  [outputFormats.readme]
     baseName = "readme"
     mediaType = "text/markdown"
     isPlainText = true
     isHTML = false
+    notAlternative = true
   # FixIt 0.3.0 | CHANGED Options to make output baidu_urls.txt file
   [outputFormats.baidu_urls]
     baseName = "baidu_urls"
     mediaType = "text/plain"
     isPlainText = true
     isHTML = false
+    notAlternative = true
+  # FixIt 0.3.10 | NEW Options to make output feed.json file
+  [outputFormats.feed]
+    baseName = "feed"
+    mediaType = "application/feed+json"
+    isPlainText = true
+    isHTML = false
+  # FixIt 0.3.10 | NEW Options to make output search.json file
+  [outputFormats.search]
+    baseName = "search"
+    mediaType = "application/json"
+    rel = "search"
+    isPlainText = true
+    isHTML = false
+    permalinkable = true
 
 # -------------------------------------------------------------------------------------
 # Customizing Output Formats
@@ -284,17 +297,17 @@ enableEmoji = true
 # -------------------------------------------------------------------------------------
 
 # Options to make hugo output files, the optional values are below:
-# home: ["HTML", "RSS", "JSON", "archives", "offline", "README", "baidu_urls"]
-# page: ["HTML", "MarkDown"]
-# section: ["HTML", "RSS"]
-# taxonomy: ["HTML", "RSS"]
-# term: ["HTML", "RSS"]
+# home: html, rss, json, feed, archives, offline, readme, baidu_urls, search etc.
+# page: html, markdown
+# section: html, rss
+# taxonomy: html, rss
+# term: html, rss
 [outputs]
-  home = ["HTML", "RSS", "JSON", "archives"]
-  page = ["HTML", "MarkDown"]
-  section = ["HTML", "RSS"]
-  taxonomy = ["HTML"]
-  term = ["HTML", "RSS"]
+  home = ["html", "rss", "feed", "archives", "offline", "readme", "baidu_urls", "search"]
+  page = ["html", "markdown"]
+  section = ["html", "rss"]
+  taxonomy = ["html", "rss"]
+  term = ["html", "rss"]
 
 # -------------------------------------------------------------------------------------
 # Taxonomies Configuration
