@@ -1,10 +1,13 @@
 {{- $pages := .Pages -}}
+{{- /* Front matter: password */ -}}
+{{- $pages = where $pages "Params.password" "eq" nil -}}
+{{- /* Front matter: hiddenFromFeed */ -}}
+{{- $pages = where $pages "Params.hiddenFromFeed" "ne" true -}}
 {{- $limit := .Site.Params.feed.limit -}}
 {{- if ge $limit 1 -}}
   {{- $pages = $pages | first $limit -}}
 {{- end -}}
 {{- $length := $pages.Len -}}
-{{- /* TODO 加密的不显示，加入 hiddenFromFeed */ -}}
 
 {
   "version": "https://jsonfeed.org/version/1.1",

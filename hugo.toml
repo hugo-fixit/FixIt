@@ -824,7 +824,7 @@ enableEmoji = true
   # FixIt 0.3.10 | NEW Feed config for RSS, Atom and JSON feed.
   [params.feed]
     # The number of posts to include in the feed. Default is -1, which means all posts.
-    limit = 10
+    limit = -1
     # whether to show the full text content in feed.
     fullText = false
 
