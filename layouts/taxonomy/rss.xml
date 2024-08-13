@@ -1,42 +1,8 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-  <channel>
-    <title>
-      {{- .Title }} - {{ T .Data.Singular | default .Data.Singular -}}
-      {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
-    </title>
-    <link>
-      {{- .Permalink -}}
-    </link>
-    <description>
-      {{- .Title }} - {{ T .Data.Singular | default .Data.Singular }} | {{ .Site.Title -}}
-    </description>
-    <generator>Hugo -- gohugo.io</generator>
-    {{- with .Site.LanguageCode -}}
-      <language>
-        {{- . -}}
-      </language>
-    {{- end -}}
-    {{- with .Site.Params.author.email -}}
-      <managingEditor>
-        {{- . }}{{ with $.Site.Params.author.name }} ({{ . }}){{ end -}}
-      </managingEditor>
-      <webMaster>
-        {{- . }}{{ with $.Site.Params.author.name }} ({{ . }}){{ end -}}
-      </webMaster>
-    {{- end -}}
-    {{- with .Site.Copyright -}}
-      <copyright>
-        {{- . -}}
-      </copyright>
-    {{- end -}}
-    {{- if not .Date.IsZero -}}
-      <lastBuildDate>
-        {{- .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" -}}
-      </lastBuildDate>
-    {{- end -}}
-    <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml" />
-    {{- range .Pages | first (.Site.Params.list.rss | default 10) -}}
-      {{- dict "Page" . "Site" .Site | partial "rss/item.html" -}}
-    {{- end -}}
-  </channel>
-</rss>
+{{- $title := printf "%s %s" .Title (T .Data.Singular | default .Data.Singular) -}}
+{{- if .Site.Params.withSiteTitle -}}
+  {{- $title = printf "%s %s %s" $title .Site.Params.titleDelimiter .Site.Title -}}
+{{- end -}}
+{{- $options := dict "Site" .Site "OutputFormats" .OutputFormats -}}
+{{- $options = dict "Permalink" .Permalink "Version" (.Scratch.Get "version") | merge $options -}}
+{{- $options = dict "Title" $title "Pages" .Pages | merge $options -}}
+{{- partial "feed/rss.html" $options -}}

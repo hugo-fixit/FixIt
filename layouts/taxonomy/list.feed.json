@@ -2,6 +2,6 @@
 {{- if .Site.Params.withSiteTitle -}}
   {{- $title = printf "%s %s %s" $title .Site.Params.titleDelimiter .Site.Title -}}
 {{- end -}}
-{{- $options := dict "Page" . "Site" .Site "OutputFormats" .OutputFormats -}}
+{{- $options := dict "Site" .Site "OutputFormats" .OutputFormats -}}
 {{- $options = dict "Title" $title "Pages" .Pages | merge $options -}}
 {{- partial "feed/json-feed.html" $options -}}

@@ -1,56 +1,8 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-  <channel>
-    <title>
-      {{- title (.Params.Title | default ((T .Section) | default .Section | dict "Some" | T "allSome")) -}}
-      {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
-    </title>
-    <link>
-      {{- .Permalink -}}
-    </link>
-    <description>
-      {{- title (.Params.Title | default ((T .Section) | default .Section | dict "Some" | T "allSome")) }} | {{ .Site.Title -}}
-    </description>
-    <generator>Hugo -- gohugo.io</generator>
-    {{- with .Site.LanguageCode -}}
-      <language>
-        {{- . -}}
-      </language>
-    {{- end -}}
-    {{- with .Site.Params.author.email -}}
-      <managingEditor>
-        {{- . }}{{ with $.Site.Params.author.name }} ({{ . }}){{ end -}}
-      </managingEditor>
-      <webMaster>
-        {{- . }}{{ with $.Site.Params.author.name }} ({{ . }}){{ end -}}
-      </webMaster>
-    {{- end -}}
-    {{- with .Site.Copyright -}}
-      <copyright>
-        {{- . -}}
-      </copyright>
-    {{- end -}}
-    {{- if not .Date.IsZero -}}
-      <lastBuildDate>
-        {{- .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" -}}
-      </lastBuildDate>
-    {{- end -}}
-    <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml" />
-    {{- if .Site.Params.section.recentlyUpdated.rss -}}
-      {{- $postCount := 0 -}}
-      {{- $maxPostCount := .Site.Params.section.recentlyUpdated.maxCount | default 10 -}}
-      {{- $days := .Site.Params.section.recentlyUpdated.days | default 30 -}}
-      {{- range (where .Data.Pages.ByLastmod.Reverse "Section" "!=" "") -}}
-        {{- if gt (add .Lastmod.Unix (mul 86900 $days)) now.Unix -}}
-          {{- if lt $postCount $maxPostCount -}}
-            {{- if ne .Lastmod.Unix .Date.Unix }}
-              {{- dict "Page" . "Site" .Site | partial "rss/item.html" -}}
-            {{- end -}}
-          {{- end -}}
-        {{- end -}}
-      {{- end -}}
-    {{- end -}}
-    {{- range .Pages | first (.Site.Params.section.rss | default 10) -}}
-      {{- dict "Page" . "Site" .Site | partial "rss/item.html" -}}
-    {{- end -}}
-  </channel>
-</rss>
+{{- $title := title (.Params.Title | default ((T .Section) | default .Section | dict "Some" | T "allSome")) -}}
+{{- if .Site.Params.withSiteTitle -}}
+  {{- $title = printf "%s %s %s" $title .Site.Params.titleDelimiter .Site.Title -}}
+{{- end -}}
+{{- $options := dict "Site" .Site "OutputFormats" .OutputFormats -}}
+{{- $options = dict "Permalink" .Permalink "Version" (.Scratch.Get "version") | merge $options -}}
+{{- $options = dict "Title" $title "Pages" .Pages | merge $options -}}
+{{- partial "feed/rss.html" $options -}}
