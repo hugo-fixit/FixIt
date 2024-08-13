@@ -6,7 +6,7 @@
   "title" : "{{- .Site.Title -}}",
   "description": "{{- .Site.Params.description | default .Site.Title -}}",
   "home_page_url" : "{{ .Site.BaseURL }}",
-  {{ with .OutputFormats.Get "JSONFeed" -}}
+  {{ with .OutputFormats.Get "feed" -}}
   "feed_url" : "{{ .Permalink }}",
   {{ end -}}
   "icon" : "{{ `/apple-touch-icon.png` | absURL }}",

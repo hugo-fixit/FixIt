@@ -33,7 +33,7 @@
         {{- .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" -}}
       </lastBuildDate>
     {{- end -}}
-    {{ with .OutputFormats.Get "RSS" }}
+    {{ with .OutputFormats.Get "rss" }}
       {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
     {{ end }}
     {{- range .Scratch.Get "mainSectionPages" | first (.Site.Params.home.rss | default 10) -}}
