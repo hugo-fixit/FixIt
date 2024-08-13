@@ -299,15 +299,15 @@ enableEmoji = true
 # Options to make hugo output files, the optional values are below:
 # home: html, rss, json, feed, archives, offline, readme, baidu_urls, search etc.
 # page: html, markdown
-# section: html, rss
-# taxonomy: html, rss
-# term: html, rss
+# section: html, rss, feed
+# taxonomy: html, rss, feed
+# term: html, rss, feed
 [outputs]
   home = ["html", "rss", "feed", "archives", "offline", "readme", "baidu_urls", "search"]
   page = ["html", "markdown"]
-  section = ["html", "rss"]
-  taxonomy = ["html", "rss"]
-  term = ["html", "rss"]
+  section = ["html", "rss", "feed"]
+  taxonomy = ["html", "rss", "feed"]
+  term = ["html", "rss", "feed"]
 
 # -------------------------------------------------------------------------------------
 # Taxonomies Configuration
