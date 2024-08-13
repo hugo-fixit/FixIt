@@ -4,4 +4,4 @@
 {{- end -}}
 {{- $options := dict "Site" .Site "OutputFormats" .OutputFormats -}}
 {{- $options = dict "Title" $title "Pages" .Pages | merge $options -}}
-{{- partial "feed/json-feed.html" $options -}}
+{{- partial "feed/json.html" $options -}}
