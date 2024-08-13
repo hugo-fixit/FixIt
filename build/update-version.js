@@ -39,8 +39,8 @@ const latestVersion = stage === 'version' ? version : devVersion;
 const lastVersion = initHtml.match(/v\d+\.\d+\.\d+(-\w+)?/)[0];
 const newInitHtml = initHtml.replace(/v\d+\.\d+\.\d+(-\w+)?/, `v${latestVersion}`);
 fs.writeFileSync(initHtmlPath, newInitHtml);
-// Add the updated file to the git stage
-execSync('git add .');
+// Add the updated files to the git stage
+execSync('git add layouts/partials/init/index.html package.json package-lock.json');
 console.log(`Update the FixIt version from ${lastVersion} to v${latestVersion}.`);
 
 export default latestVersion;
