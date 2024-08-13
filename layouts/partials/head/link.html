@@ -1,6 +1,6 @@
 {{- $cdn := .Scratch.Get "cdn" | default dict -}}
 {{- $fingerprint := .Scratch.Get "fingerprint" -}}
-{{- $title := printf "%s | %s" .Title site.Title -}}
+{{- $title := printf "%s %s %s" .Title .Site.Params.titleDelimiter .Site.Title -}}
 {{- if .IsHome -}}
   {{- $title = site.Title -}}
 {{- end -}}

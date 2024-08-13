@@ -1,0 +1,64 @@
+{{- $pages := .Scratch.Get "mainSectionPages" -}}
+{{- $limit := .Site.Params.feed.limit -}}
+{{- if ge $limit 1 -}}
+  {{- $pages = $pages | first $limit }}
+{{- end -}}
+{{- $length := $pages.Len -}}
+{{- $fullText := (.Param "feed").fullText -}}
+{{- $title := title (.Params.Title | default ((T .Section) | default .Section | dict "Some" | T "allSome")) -}}
+{{- if .Site.Params.withSiteTitle -}}
+  {{- $title = printf "%s %s %s" $title .Site.Params.titleDelimiter .Site.Title -}}
+{{- end -}}
+{{- if .IsHome -}}
+  {{- $title = .Site.Title -}}
+{{- end -}}
+
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "{{- $title -}}",
+  "description": "{{- .Site.Params.description | default .Site.Title -}}",
+  "home_page_url": "{{ .Site.BaseURL }}",
+  {{ with .OutputFormats.Get "feed" -}}
+  "feed_url": "{{ .Permalink }}",
+  {{ end -}}
+  {{ with .Site.LanguageCode -}}
+  "language": "{{ . }}",
+  {{ end -}}
+  "icon": "{{ `/apple-touch-icon.png` | absURL }}",
+  "favicon": "{{ `/favicon.ico` | absURL }}",
+  {{ with .Site.Params.author.name -}}
+  "author": {
+    "name": "{{ . }}"{{ with $.Site.Params.author.link }},
+    "url": "{{ . }}"{{ end }}{{ with $.Site.Params.author.avatar }},
+    "avatar": "{{ . | absURL }}"{{ end }}
+  },
+  {{ end -}}
+  "items": [
+    {{ range $index, $element := $pages -}}
+    {
+      "title": {{ .Title | jsonify }},
+      "date_published": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+      "date_modified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+      "id": "{{ .Permalink }}",
+      "url": "{{ .Permalink }}",
+      {{ with .Params.author.name -}}
+      "author": {
+        "name": "{{ . }}"{{ with $.Params.author.link }},
+        "url": "{{ . }}"{{ end }}{{ with $.Params.author.avatar }},
+        "avatar": "{{ . | absURL }}"{{ end }}
+      },
+      {{ end -}}
+      {{ with .Summary -}}
+      "summary": {{ . | plainify | jsonify }},
+      {{ if not $fullText -}}
+      "content_html": {{ . | plainify | jsonify }}
+      {{- end }}
+      {{- end -}}
+      {{- if $fullText -}}
+      "content_html": {{ .Content | jsonify }}
+      {{- end }}
+    }{{ if ne (add $index 1) $pages.Len }},
+    {{ end }}
+    {{- end }}
+  ]
+}

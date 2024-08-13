@@ -297,16 +297,16 @@ enableEmoji = true
 # -------------------------------------------------------------------------------------
 
 # Options to make hugo output files, the optional values are below:
-# home: html, rss, json, feed, archives, offline, readme, baidu_urls, search etc.
+# home: html, rss, feed, archives, offline, readme, baidu_urls, search etc.
 # page: html, markdown
 # section: html, rss, feed
-# taxonomy: html, rss, feed
+# taxonomy: html
 # term: html, rss, feed
 [outputs]
   home = ["html", "rss", "feed", "archives", "offline", "readme", "baidu_urls", "search"]
   page = ["html", "markdown"]
   section = ["html", "rss", "feed"]
-  taxonomy = ["html", "rss", "feed"]
+  taxonomy = ["html"]
   term = ["html", "rss", "feed"]
 
 # -------------------------------------------------------------------------------------
@@ -820,6 +820,13 @@ enableEmoji = true
     # ["barber-shop", "big-counter", "bounce", "center-atom", "center-circle", "center-radar", "center-simple",
     # "corner-indicator", "fill-left", "flash", "flat-top", "loading-bar", "mac-osx", "material", "minimal"]
     theme = "minimal"
+  
+  # FixIt 0.3.10 | NEW Feed config for RSS, Atom and JSON feed.
+  [params.feed]
+    # The number of posts to include in the feed. Default is -1, which means all posts.
+    limit = 10
+    # whether to show the full text content in feed.
+    fullText = false
 
   # FixIt 0.2.15 | NEW Developer options
   # Select the scope named `public_repo` to generate personal access token,
