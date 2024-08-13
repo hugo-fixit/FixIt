@@ -23,11 +23,7 @@
   {
     "title" : {{ .Title | jsonify }},
     "date_published" : "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
-    {{ if .Lastmod -}}
-    "date_modified" : "{{ .LastMod.Format "2006-01-02T15:04:05Z07:00" }}",
-    {{ else -}}
-    "date_modified" : "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
-    {{ end -}}
+    "date_modified" : "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
     "id" : "{{ .Permalink }}",
     "url" : "{{ .Permalink }}",
     {{ with .Summary -}}
