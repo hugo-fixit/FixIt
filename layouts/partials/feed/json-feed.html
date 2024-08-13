@@ -45,6 +45,9 @@
         "avatar": "{{ . | absURL }}"{{ end }}
       },
       {{ end -}}
+      {{ with .Params.tags -}}
+      "tags": {{ . | jsonify }},
+      {{ end -}}
       {{ with .Summary -}}
       "summary": {{ . | plainify | jsonify }},
       {{ if not $fullText -}}
