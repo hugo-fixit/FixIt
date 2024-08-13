@@ -1,1 +1,3 @@
-{{- partial "feed/json-feed.html" . -}}
+{{- $options := dict "Page" . "Site" .Site "OutputFormats" .OutputFormats -}}
+{{- $options = dict "Title" .Site.Title "Pages" (.Scratch.Get "mainSectionPages") | merge $options -}}
+{{- partial "feed/json-feed.html" $options -}}

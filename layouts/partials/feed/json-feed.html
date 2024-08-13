@@ -1,21 +1,14 @@
-{{- $pages := .Scratch.Get "mainSectionPages" -}}
+{{- $pages := .Pages -}}
 {{- $limit := .Site.Params.feed.limit -}}
 {{- if ge $limit 1 -}}
-  {{- $pages = $pages | first $limit }}
+  {{- $pages = $pages | first $limit -}}
 {{- end -}}
 {{- $length := $pages.Len -}}
-{{- $fullText := (.Param "feed").fullText -}}
-{{- $title := title (.Params.Title | default ((T .Section) | default .Section | dict "Some" | T "allSome")) -}}
-{{- if .Site.Params.withSiteTitle -}}
-  {{- $title = printf "%s %s %s" $title .Site.Params.titleDelimiter .Site.Title -}}
-{{- end -}}
-{{- if .IsHome -}}
-  {{- $title = .Site.Title -}}
-{{- end -}}
+{{- /* TODO 加密的不显示，加入 hiddenFromFeed */ -}}
 
 {
   "version": "https://jsonfeed.org/version/1.1",
-  "title": "{{- $title -}}",
+  "title": "{{- .Title -}}",
   "description": "{{- .Site.Params.description | default .Site.Title -}}",
   "home_page_url": "{{ .Site.BaseURL }}",
   {{ with .OutputFormats.Get "feed" -}}
@@ -35,6 +28,7 @@
   {{ end -}}
   "items": [
     {{ range $index, $element := $pages -}}
+    {{- $fullText := (.Param "feed").fullText -}}
     {
       "title": {{ .Title | jsonify }},
       "date_published": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
