@@ -231,12 +231,10 @@ enableEmoji = true
 # -------------------------------------------------------------------------------------
 
 [mediaTypes]
-  # Options to make output .txt files
-  [mediaTypes."text/plain"]
-    suffixes = ["txt"]
-  # Options to make output feed.json files
-  [mediaTypes."application/feed+json"]
-    suffixes = ["json"]
+  # FixIt 0.3.10 | NEW Options to make output feed.json files
+  # Warning: The application/feed+json media type will cause an unknown error in resources.GetRemote!
+  # [mediaTypes."application/feed+json"]
+  #   suffixes = ["json"]
 
 # -------------------------------------------------------------------------------------
 # Output Format Definitions
@@ -279,7 +277,8 @@ enableEmoji = true
   # FixIt 0.3.10 | NEW Options to make output feed.json file
   [outputFormats.feed]
     baseName = "feed"
-    mediaType = "application/feed+json"
+    # Warning: The application/feed+json media type will cause an unknown error in resources.GetRemote!
+    mediaType = "application/json"
     isPlainText = true
     isHTML = false
   # FixIt 0.3.10 | NEW Options to make output search.json file
@@ -297,11 +296,11 @@ enableEmoji = true
 # -------------------------------------------------------------------------------------
 
 # Options to make hugo output files, the optional values are below:
-# home: html, rss, feed, archives, offline, readme, baidu_urls, search etc.
-# page: html, markdown
-# section: html, rss, feed
-# taxonomy: html
-# term: html, rss, feed
+# home = ["html", "rss", "feed", "archives", "offline", "readme", "baidu_urls", "search"]
+# page = ["html", "markdown"]
+# section = ["html", "rss", "feed"]
+# taxonomy = ["html"]
+# term = ["html", "rss", "feed"]
 [outputs]
   home = ["html", "rss", "feed", "archives", "offline", "readme", "baidu_urls", "search"]
   page = ["html", "markdown"]

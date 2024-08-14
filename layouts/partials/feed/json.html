@@ -23,11 +23,13 @@
   "icon": "{{ `/apple-touch-icon.png` | absURL }}",
   "favicon": "{{ `/favicon.ico` | absURL }}",
   {{ with .Site.Params.author.name -}}
-  "author": {
-    "name": "{{ . }}"{{ with $.Site.Params.author.link }},
-    "url": "{{ . }}"{{ end }}{{ with $.Site.Params.author.avatar }},
-    "avatar": "{{ . | absURL }}"{{ end }}
-  },
+  "authors": [
+    {
+      "name": "{{ . }}"{{ with $.Site.Params.author.link }},
+      "url": "{{ . }}"{{ end }}{{ with $.Site.Params.author.avatar }},
+      "avatar": "{{ . | absURL }}"{{ end }}
+    }
+  ],
   {{ end -}}
   "items": [
     {{ range $index, $element := $pages -}}
@@ -39,11 +41,13 @@
       "id": "{{ .Permalink }}",
       "url": "{{ .Permalink }}",
       {{ with .Params.author.name -}}
-      "author": {
-        "name": "{{ . }}"{{ with $.Params.author.link }},
-        "url": "{{ . }}"{{ end }}{{ with $.Params.author.avatar }},
-        "avatar": "{{ . | absURL }}"{{ end }}
-      },
+      "authors": [
+        {
+          "name": "{{ . }}"{{ with $.Params.author.link }},
+          "url": "{{ . }}"{{ end }}{{ with $.Params.author.avatar }},
+          "avatar": "{{ . | absURL }}"{{ end }}
+        }
+      ],
       {{ end -}}
       {{ with .Params.tags -}}
       "tags": {{ . | jsonify }},
