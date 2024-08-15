@@ -8,7 +8,7 @@
   {{- $pages = $pages | first $limit -}}
 {{- end -}}
 {{- $length := $pages.Len -}}
-{{- /* TODO 封面图、文章内图片链接、分类、标签等处理 */ -}}
+{{- /* TODO 文章内图片链接、分类、标签等处理 */ -}}
 
 {{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
@@ -25,10 +25,23 @@
     {{- with .OutputFormats.Get "rss" }}
     {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
     {{- end }}
-    {{- range $pages }}
+    {{- range $page := $pages }}
     {{- $params := .Params | merge .Site.Params.Page }}
     {{- $fullText := (.Param "feed").fullText }}
-    {{- $author := partial "function/get-author-map.html" .Params.author -}}
+    {{- $author := partial "function/get-author-map.html" .Params.author }}
+    {{- $image := $params.featuredimagepreview | default $params.featuredimage }}
+    {{- with $image }}
+      {{- if not (hasPrefix . "/") }}
+        {{- $image = (printf "%s%s" $page.RelPermalink .) | safeURL }}
+      {{- end }}
+      {{- $image = $image | absURL }}
+    {{- end }}
+    {{- with .Resources.GetMatch "featured-image" }}
+      {{- $image = .Permalink }}
+    {{- end }}
+    {{- with .Resources.GetMatch "featured-image-preview" }}
+      {{- $image = .Permalink }}
+    {{- end }}
     <item>
       <title>{{ .Title }}</title>
       <link>{{ .Permalink }}</link>
@@ -40,11 +53,14 @@
         {{- "<![CDATA[" | safeHTML }}
         {{- $content := dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" }}
         {{- /* {{- $content | replaceRE `<figure[^>]*>.*</figure>` "" | replaceRE `<img[^>]*( /)?>` "" | safeHTML -}} */ -}}
+        {{- with $image }}
+          {{- $content = add (printf "<img src=%q alt=%q referrerpolicy=%q>" . "featured image" "no-referrer") $content | safeHTML }}
+        {{- end }}
         {{- $content | transform.XMLEscape | safeHTML }}
         {{- "]]>" | safeHTML -}}
       </description>
       {{- else }}
-      <description>{{ .Summary | transform.XMLEscape | safeHTML }}</description>
+      <description>{{ (.Summary | default .Description | default .Title) | transform.XMLEscape | safeHTML }}</description>
       {{- end }}
     </item>
     {{- end }}
