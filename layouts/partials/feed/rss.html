@@ -28,11 +28,12 @@
     {{- range $pages }}
     {{- $params := .Params | merge .Site.Params.Page }}
     {{- $fullText := (.Param "feed").fullText }}
+    {{- $author := partial "function/get-author-map.html" .Params.author -}}
     <item>
       <title>{{ .Title }}</title>
       <link>{{ .Permalink }}</link>
       <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
-      {{- with .Params.author.email }}<author>{{ . }}{{ with $.Params.author.name }} ({{ . }}){{ end }}</author>{{ end }}
+      {{- with $author.email }}<author>{{ . }}{{ with $author.name }} ({{ . }}){{ end }}</author>{{ end }}
       <guid>{{ .Permalink }}</guid>
       {{- if $fullText }}
       <description>
