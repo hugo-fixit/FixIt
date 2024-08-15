@@ -1,37 +1,57 @@
-# FixIt Theme | Hugo
+<!-- markdownlint-disable-file MD033 MD041 -->
+![Hugo Theme FixIt](https://fixit.lruihao.cn/images/apple-devices-preview.png)
+
+<div align="center">English | <a href="README.zh-cn.md">简体中文</a></div>
+
+<a title="FixIt website" href="https://fixit.lruihao.cn"><img align="right" alt="FixIt logo" width="70" height="70" src="https://avatars.githubusercontent.com/u/110414864?s=200&v=4"></a>
+
+# FixIt
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hugo-fixit/FixIt?style=flat)](https://github.com/hugo-fixit/FixIt/releases)
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.127.0-ff4088?style=flat&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/hugo-fixit/FixIt?style=flat)](/LICENSE)
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/hugo-fixit/FixIt)
 
-👉 English README | [简体中文说明](README.zh-cn.md)
+> «FixIt» is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/).
 
-[FixIt](https://github.com/hugo-fixit/FixIt) is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/).
+It is based on the original [LoveIt](https://github.com/dillonzq/LoveIt) Theme, [KeepIt](https://github.com/Fastbyte01/KeepIt) Theme and [LeaveIt](https://github.com/liuzc/LeaveIt) Theme.
 
-It is based on the original [LoveIt Theme](https://github.com/dillonzq/LoveIt), [KeepIt Theme](https://github.com/Fastbyte01/KeepIt) and [LeaveIt Theme](https://github.com/liuzc/LeaveIt).[^1]
+## Live Preview
 
-![Hugo Theme FixIt](https://fixit.lruihao.cn/images/apple-devices-preview.webp)
+<p align="center">
+  💟 <a href="https://fixit.lruihao.cn">Production</a> | ❇️ <a href="https://pre.fixit.lruihao.cn">Preview</a> | 🚼 <a href="https://demo.fixit.lruihao.cn">Demo</a> | 🆕 <a href="https://hugo-fixit.github.io/hugo-fixit-starter/">Starter</a>
+<br>
+<br>
+  More «FixIt» examples <a href="https://fixit.lruihao.cn/showcase/">here</a>.
+</p>
 
-## Getting started
+## Documentation
 
-1. [Installation](https://fixit.lruihao.cn/documentation/installation/)
-2. [Getting Started](https://fixit.lruihao.cn/documentation/getting-started/)
-3. [Content Management](https://fixit.lruihao.cn/documentation/content-management/)
-4. [Advanced Usage](https://fixit.lruihao.cn/documentation/advanced/)
+Head to the [Quick Start](https://fixit.lruihao.cn/documentation/getting-started/quick-start/) page for a step-by-step guide on how to create a new website with FixIt.
 
-Alternatively, you can run the [documentation site](https://fixit.lruihao.cn/) locally. For more details, see [hugo-fixit/docs](https://github.com/hugo-fixit/docs).
+Outline: [Installation](https://fixit.lruihao.cn/documentation/installation/) ➜ [Getting Started](https://fixit.lruihao.cn/documentation/getting-started/) ➜ [Content Management](https://fixit.lruihao.cn/documentation/content-management/) ➜ [Advanced Usage](https://fixit.lruihao.cn/documentation/advanced/)
 
 ## Template repository
 
-- [hugo-fixit/hugo-fixit-start](https://github.com/hugo-fixit/hugo-fixit-start/generate)
-- [hugo-fixit/hugo-fixit-start1](https://github.com/hugo-fixit/hugo-fixit-start1/generate)
-- [hugo-fixit/docs](https://github.com/hugo-fixit/docs/generate)
-- [Lruihao/hugo-blog](https://github.com/Lruihao/hugo-blog/generate)
+Click the following links to generate a new repository with template:
 
-## Who used FixIt
+| Template repository                        | Generate link                  |
+| :----------------------------------------- | :----------------------------: |
+| [hugo-fixit/hugo-fixit-starter][starter]   | [Click][starter:generate]      |
+| [hugo-fixit/hugo-fixit-starter1][starter1] | [Click][starter1:generate]     |
+| [hugo-fixit/docs][docs]                    | [Click][docs:generate]         |
+| [Lruihao/hugo-blog][lruihao-blog]          | [Click][lruihao-blog:generate] |
 
-To see this theme in action, here are some [live demo sites](https://fixit.lruihao.cn/friends/) which are rendered with **FixIt** theme.
+[starter]: https://github.com/hugo-fixit/hugo-fixit-starter
+[starter:generate]: https://github.com/hugo-fixit/hugo-fixit-starter/generate
+[starter1]: https://github.com/hugo-fixit/hugo-fixit-starter1
+[starter1:generate]: https://github.com/hugo-fixit/hugo-fixit-starter1/generate
+[docs]: https://github.com/hugo-fixit/docs
+[docs:generate]: https://github.com/hugo-fixit/docs/generate
+[lruihao-blog]: https://github.com/Lruihao/hugo-blog
+[lruihao-blog:generate]: https://github.com/Lruihao/hugo-blog/generate
+
+<!-- ## Why choose FixIt -->
 
 ## Features
 
@@ -96,12 +116,12 @@ To see this theme in action, here are some [live demo sites](https://fixit.lruih
 - Kinds of **admonitions** shortcode
 - **Custom style** shortcode
 - **Custom script** shortcode
+- Open more **custom blocks**
 - **Animated typing** supported by [TypeIt](https://typeitjs.com/)
 - **Cookie consent banner** supported by [cookieconsent](https://github.com/osano/cookieconsent)
 - **Web Watermark** supported by [cell-watermark](https://github.com/Lruihao/watermark)
 - **Chinese typesetting** supported by [pangu.js](https://github.com/vinta/pangu.js)
 - Options to **cache remote image** locally
-- High **extensibility**
 - ...
 
 ### Theme Components
@@ -152,13 +172,12 @@ Don't forget to leave a ⭐️ if you like this theme, thanks!
 
 ## Contributing
 
-- [Roadmap of FixIt](https://github.com/orgs/hugo-fixit/projects/2)
+We welcome you to join the development of FixIt. Please see [contributing document](CONTRIBUTING.md). 🤗
 
-Please see [CONTRIBUTING.md](CONTRIBUTING.md) for getting started with the contribution.
+Also, we welcome Issue or PR to our [official-components](https://github.com/hugo-fixit).
 
-Make sure that you follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) while contributing and engaging in the discussions.
-
-**When contributing, please first discuss the change you wish to make via an issue on this repository before making the actual change**.
+> [!note]
+> When contributing, please first discuss the change you wish to make via a discussion on this repository before making the actual change.
 
 ## Acknowledgements
 
@@ -226,6 +245,3 @@ If you enjoy the theme, please consider buying me a coffee ☕️. Thanks!
 ## Author
 
 [Lruihao](https://github.com/Lruihao "Follow me on GitHub")
-
-<!-- footnote reference definition -->
-[^1]: The theme name is interesting: "leave it, keep it, love it, fix it". Appears and leaves, loves but cannot keep. Doesn't it look like that damn love and BUG? 🤣
