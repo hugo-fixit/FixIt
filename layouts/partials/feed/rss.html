@@ -3,9 +3,8 @@
 {{- $pages = where $pages "Params.password" "eq" nil -}}
 {{- /* Front matter: hiddenFromFeed */ -}}
 {{- $pages = where $pages "Params.hiddenFromFeed" "ne" true -}}
-{{- $limit := .Site.Params.feed.limit -}}
-{{- if ge $limit 1 -}}
-  {{- $pages = $pages | first $limit -}}
+{{- if ge .Config.limit 1 -}}
+  {{- $pages = $pages | first .Config.limit -}}
 {{- end -}}
 {{- $length := $pages.Len -}}
 {{- /* TODO 文章内图片链接、分类、标签等处理 */ -}}
@@ -27,7 +26,7 @@
     {{- end }}
     {{- range $page := $pages }}
     {{- $params := .Params | merge .Site.Params.Page }}
-    {{- $fullText := (.Param "feed").fullText }}
+    {{- $fullText := ((.Params.feed | default dict) | merge $.Config ).fullText }}
     {{- $author := partial "function/get-author-map.html" .Params.author }}
     {{- $image := $params.featuredimagepreview | default $params.featuredimage }}
     {{- with $image }}
@@ -48,6 +47,11 @@
       <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       {{- with $author.email }}<author>{{ . }}{{ with $author.name }} ({{ . }}){{ end }}</author>{{ end }}
       <guid>{{ .Permalink }}</guid>
+      {{- with .GetTerms "categories" }}
+      {{- range . }}
+      <category domain="{{ .Permalink }}">{{ .LinkTitle }}</category>
+      {{- end }}
+      {{- end }}
       {{- if $fullText }}
       <description>
         {{- "<![CDATA[" | safeHTML }}

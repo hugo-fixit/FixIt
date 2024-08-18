@@ -509,8 +509,12 @@ enableEmoji = true
     paginate = 20
     # date format (month and day)
     dateFormat = "01-02"
-    # amount of RSS pages
-    rss = 10
+    # FixIt 0.3.10 | NEW Section feed config for RSS, Atom and JSON feed.
+    [params.section.feed]
+      # The number of posts to include in the feed. Default is -1, which means all posts.
+      limit = -1
+      # whether to show the full text content in feed.
+      fullText = false
     # FixIt 0.2.13 | NEW recently updated pages config
     # TODO refactor to support archives, section, taxonomy and term
     [params.section.recentlyUpdated]
@@ -519,14 +523,18 @@ enableEmoji = true
       days = 30
       maxCount = 10
 
-  # List (category or tag) page config
+  # Term list (category or tag) page config
   [params.list]
     # special amount of posts in each list page
     paginate = 20
     # date format (month and day)
     dateFormat = "01-02"
-    # amount of RSS pages
-    rss = 10
+    # FixIt 0.3.10 | NEW Term list feed config for RSS, Atom and JSON feed.
+    [params.list.feed]
+      # The number of posts to include in the feed. Default is -1, which means all posts.
+      limit = -1
+      # whether to show the full text content in feed.
+      fullText = false
 
   # FixIt 0.2.17 | NEW TagCloud config for tags page
   [params.tagcloud]
@@ -538,8 +546,6 @@ enableEmoji = true
 
   # Home page config
   [params.home]
-    # amount of RSS pages
-    rss = 10
     # Home page profile
     [params.home.profile]
       enable = false
@@ -820,12 +826,12 @@ enableEmoji = true
     # "corner-indicator", "fill-left", "flash", "flat-top", "loading-bar", "mac-osx", "material", "minimal"]
     theme = "minimal"
   
-  # FixIt 0.3.10 | NEW Feed config for RSS, Atom and JSON feed.
+  # FixIt 0.3.10 | NEW Global Feed config for RSS, Atom and JSON feed.
   [params.feed]
     # The number of posts to include in the feed. Default is -1, which means all posts.
-    limit = -1
+    limit = 10
     # whether to show the full text content in feed.
-    fullText = false
+    fullText = true
 
   # FixIt 0.2.15 | NEW Developer options
   # Select the scope named `public_repo` to generate personal access token,
@@ -843,10 +849,10 @@ enableEmoji = true
     hiddenFromHomePage = false
     # whether to hide a page from search results
     hiddenFromSearch = false
-    # FixIt 0.3.0 | NEW whether to hide a page from RSS feed
-    hiddenFromRss = false
     # FixIt 0.3.0 | NEW whether to hide a page from related posts
     hiddenFromRelated = false
+    # FixIt 0.3.10 | NEW whether to hide a page from RSS, Atom and JSON feed
+    hiddenFromFeed = false
     # whether to enable twemoji
     twemoji = false
     # FixIt 0.2.18 | CHANGED whether to enable lightgallery
