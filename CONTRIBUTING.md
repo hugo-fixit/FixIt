@@ -1,5 +1,7 @@
 # CONTRIBUTING
 
+Make sure that you follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) while contributing and engaging in the discussions.
+
 ## How to contribute to this project
 
 First, fork this repository by clicking the fork button.

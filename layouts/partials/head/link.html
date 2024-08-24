@@ -1,5 +1,9 @@
 {{- $cdn := .Scratch.Get "cdn" | default dict -}}
 {{- $fingerprint := .Scratch.Get "fingerprint" -}}
+{{- $title := printf "%s %s %s" .Title .Site.Params.titleDelimiter .Site.Title -}}
+{{- if .IsHome -}}
+  {{- $title = site.Title -}}
+{{- end -}}
 
 {{- if not .Site.Params.app.noFavicon -}}
   {{- with .Site.Params.app.svgFavicon -}}
@@ -18,17 +22,18 @@
   {{- end -}}
 {{- end -}}
 
-<link rel="canonical" href="{{ .Permalink }}" />
-{{- if .Prev -}}
-  <link rel="prev" href="{{ .Prev.Permalink }}" />
+<link rel="canonical" type="text/html" href="{{ .Permalink }}" title="{{ $title }}" />
+{{- with .Prev -}}
+  <link rel="prev" type="text/html" href="{{ .Permalink }}" title="{{ .Title }}" />
 {{- end -}}
-{{- if .Next -}}
-  <link rel="next" href="{{ .Next.Permalink }}" />
+{{- with .Next -}}
+  <link rel="next" type="text/html" href="{{ .Permalink }}" title="{{ .Title }}" />
 {{- end -}}
-
-{{- with .OutputFormats.Get "RSS" -}}
-  <link rel="alternate" href="{{ .RelPermalink }}" type="application/rss+xml" title="{{ $.Site.Title }}">
-  <link rel="feed" href="{{ .RelPermalink }}" type="application/rss+xml" title="{{ $.Site.Title }}">
+{{- range .AlternativeOutputFormats -}}
+  {{- printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink $title | safeHTML -}}
+{{- end -}}
+{{- with .OutputFormats.Get "feed" -}}
+  <link rel="alternate" type="application/feed+json" href="{{ .Permalink }}" title="{{ $title }}" />
 {{- end -}}
 
 {{- /* style.min.css */ -}}

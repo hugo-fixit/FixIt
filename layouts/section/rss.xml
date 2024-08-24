@@ -1,8 +1,8 @@
-{{- $title := printf "%s - %s" .Title (T .Data.Singular | default .Data.Singular) -}}
+{{- $title := title (.Params.Title | default ((T .Section) | default .Section | dict "Some" | T "allSome")) -}}
 {{- if .Site.Params.withSiteTitle -}}
   {{- $title = printf "%s %s %s" $title .Site.Params.titleDelimiter .Site.Title -}}
 {{- end -}}
-{{- $config := (.Params.feed | default dict) | merge .Site.Params.list.feed | merge .Site.Params.feed -}}
+{{- $config := (.Params.feed | default dict) | merge .Site.Params.section.feed | merge .Site.Params.feed -}}
 {{- $options := dict "Site" .Site "Config" $config "OutputFormats" .OutputFormats -}}
 {{- $options = dict "Permalink" .Permalink "Version" (.Scratch.Get "version") | merge $options -}}
 {{- $options = dict "Title" $title "Pages" .Pages | merge $options -}}

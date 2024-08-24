@@ -15,7 +15,7 @@ All notable changes to this project will be documented in this file.
   {{/if}}
 
   {{!-- List commits with `Breaking change: ` somewhere in the message --}}
-  {{#commit-list commits heading='### :boom: Breaking Changes' message='^(Breaking change|BREAKING CHANGE):'}}
+  {{#commit-list commits heading='### :boom: Breaking Changes' message='(:boom:|Breaking change:|BREAKING CHANGE:)'}}
   - {{subject}} [`{{shorthash}}`]({{href}}) by {{githubUser author}}
   {{/commit-list}}
 

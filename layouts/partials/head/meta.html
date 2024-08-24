@@ -1,8 +1,7 @@
-{{- $params := partial "function/params.html" -}}
+{{- $author := partial "function/get-author-map.html" .Params.author -}}
 
-<meta name="author" content="{{ .Site.Params.author.name }}">
-<meta name="author-link" content="{{ .Site.Params.author.link }}">
-<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage | and .Summary }}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+<meta name="author" content="{{ $author.name }}">
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage | and .Summary }}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
 
 {{- $keywords := .Keywords -}}
 {{- if not $keywords -}}
@@ -13,12 +12,15 @@
   {{- end -}}
 {{- end -}}
 {{- with $keywords -}}
-  <meta name="keywords" content='{{ delimit . ", " }}' />
+  <meta name="keywords" content='{{ delimit . ", " }}'>
 {{- end -}}
 
 {{- template "_internal/schema.html" . -}}
 {{- template "_internal/opengraph.html" . -}}
 {{- template "_internal/twitter_cards.html" . -}}
+{{- with .Site.Params.social.Twitter -}}
+  <meta name="twitter:creator" content="@{{ . }}" />
+{{- end -}}
 
 <meta name="application-name" content="{{ .Site.Params.app.title | default .Site.Title }}">
 <meta name="apple-mobile-web-app-title" content="{{ .Site.Params.app.title | default .Site.Title }}">

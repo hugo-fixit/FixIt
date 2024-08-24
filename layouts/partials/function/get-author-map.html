@@ -1,0 +1,46 @@
+{{- /* 
+Get author in map format.
+
+@param {String|Map} . the author name or map
+@returns {Map}
+
+@example {{- $author := partial "function/get-author-map.html" .Params.author -}}
+*/ -}}
+
+{{- if not (reflect.IsMap site.Params.author) -}}
+  {{- errorf "FixIt params error: site.Params.author must be a map, got %T." site.Params.author -}}
+{{- end -}}
+
+{{- $default := dict "name" "" "link" "" "email" "" "avatar" "" -}}
+{{- $author := site.Params.author | merge $default -}}
+{{- $authorParam := dict -}}
+{{- if reflect.IsMap . -}}
+  {{- $authorParam = . -}}
+{{- else -}}
+  {{- with . -}}
+    {{- $authorParam = dict "name" . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if isset $authorParam "name" | and (ne $authorParam.name site.Params.author.name) -}}
+  {{- $author = $authorParam | merge $default | merge $author -}}
+{{- else -}}
+  {{- with $authorParam.link -}}{{ $author = dict "link" . | merge $author }}{{- end -}}
+  {{- with $authorParam.email -}}{{ $author = dict "email" . | merge $author }}{{- end -}}
+  {{- with $authorParam.avatar -}}{{ $author = dict "avatar" . | merge $author }}{{- end -}}
+{{- end -}}
+
+{{- $gravatar := site.Params.gravatar -}}
+{{- if $gravatar.enable | and $author.email -}}
+  {{- with $gravatar -}}
+    {{- /* TODO migrate to gravatar */ -}}
+    {{- $author = dict "avatar" (printf "https://%v/avatar/%v?s=32&d=%v"
+      (path.Clean .Host | default "www.gravatar.com")
+      (md5 $author.email)
+      (.Style | default ""))
+      | merge $author 
+    -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $author -}}
