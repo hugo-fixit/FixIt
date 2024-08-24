@@ -27,7 +27,6 @@ libFiles:
   # crypto-js@4.2.0 https://github.com/brix/crypto-js
   cryptoCoreJS: crypto-js@4.2.0/core.js
   cryptoEncBase64JS: crypto-js@4.2.0/enc-base64.js
-  cryptoMd5JS: crypto-js@4.2.0/md5.js
   cryptoSha256JS: crypto-js@4.2.0/sha256.js
   # echarts@5.3.3 https://github.com/apache/echarts
   echartsJS: echarts@5.3.3/dist/echarts.min.js
@@ -76,4 +75,6 @@ libFiles:
   # waline@2.15.8 https://github.com/walinejs/waline
   walineCSS: '@waline/client@2.15.8/dist/waline.css'
   walineJS: '@waline/client@2.15.8/dist/waline.js'
+  # xxhash-wasm@1.0.2 https://github.com/jungomi/xxhash-wasm
+  xxhashWasmJS: xxhash-wasm@1.0.2/umd/xxhash-wasm.js
   

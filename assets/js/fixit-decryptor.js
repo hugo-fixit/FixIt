@@ -57,11 +57,12 @@ FixItDecryptor = function (options = {}) {
    * @param {Function} callback callback function after password validation
    * @returns 
    */
-  var _validatePassword = ($decryptor, $content, callback) => {
+  var _validatePassword = async ($decryptor, $content, callback) => {
     const password = $content.getAttribute('data-password');
     const inputEl = $decryptor.querySelector('.fixit-decryptor-input');
     const input = inputEl.value.trim();
-    const inputMd5 = CryptoJS.MD5(input).toString();
+    const { h64ToString } = await xxhash();
+    const inputHash = h64ToString(input);
     const inputSha256 = CryptoJS.SHA256(input).toString();
     const saltLen = input.length % 2 ? input.length : input.length + 1;
 
@@ -71,11 +72,11 @@ FixItDecryptor = function (options = {}) {
       alert('Please enter the correct password!');
       return console.warn('Please enter the correct password!');
     }
-    if (inputMd5 !== password) {
+    if (inputHash !== password) {
       alert(`Password error: ${input} not the correct password!`);
       return console.warn(`Password error: ${input} not the correct password!`);
     }
-    callback(inputMd5, inputSha256.slice(saltLen));
+    callback(inputHash, inputSha256.slice(saltLen));
   }
 
   /**
@@ -89,13 +90,13 @@ FixItDecryptor = function (options = {}) {
 
     const decryptorHandler = () => {
       const $content = document.querySelector('#content');
-      _validatePassword(this.$el, $content, (passwordMD5, salt) => {
+      _validatePassword(this.$el, $content, (passwordHash, salt) => {
         // cache decryption statistics
         window.localStorage?.setItem(
           `fixit-decryptor/#${location.pathname}`,
           JSON.stringify({
             expiration: Math.ceil(Date.now() / 1000) + this.options.duration,
-            password: passwordMD5,
+            password: passwordHash,
             salt,
           })
         );
@@ -147,7 +148,7 @@ FixItDecryptor = function (options = {}) {
       const decryptorHandler = () => {
         const $decryptor = $shortcode.querySelector('.fixit-decryptor-container');
         const $content = $shortcode.querySelector('[data-password][data-content]');
-        _validatePassword($decryptor, $content, (passwordMD5, salt) => {
+        _validatePassword($decryptor, $content, (passwordHash, salt) => {
           _decryptContent($content, salt, false);
         });
       };

@@ -188,12 +188,12 @@
 {{- if $params.password | or $encryptPartial -}}
   {{- $cryptoCoreJS := $cdn.cryptoCoreJS | default "lib/crypto-js/core.js" -}}
   {{- $cryptoEncBase64JS := $cdn.cryptoEncBase64JS | default "lib/crypto-js/enc-base64.js" -}}
-  {{- $cryptoMd5JS := $cdn.cryptoMd5JS | default "lib/crypto-js/md5.js" -}}
   {{- $cryptoSha256JS := $cdn.cryptoSha256JS | default "lib/crypto-js/sha256.js" -}}
+  {{- $xxhashWasmJS := $cdn.xxhashWasmJS | default "lib/xxhash-wasm/xxhash-wasm.js" -}}
   {{- dict "Source" $cryptoCoreJS "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- dict "Source" $cryptoEncBase64JS "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-  {{- dict "Source" $cryptoMd5JS "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- dict "Source" $cryptoSha256JS "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+  {{- dict "Source" $xxhashWasmJS "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- dict "Source" "js/fixit-decryptor.js" "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- $config = dict "all" (isset $params "password") "shortcode" ($encryptPartial | default false) | dict "encryption" | merge $config -}}
 {{- end -}}

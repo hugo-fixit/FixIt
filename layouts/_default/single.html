@@ -26,11 +26,9 @@
         (substr $base64EncodeContent $saltLen)
       -}}
     {{- end -}}
-    <div
-      class="content"
-      id="content"
-      {{ with $params.password }}data-password="{{ md5 $params.password }}"{{ end }}
-      {{ with $params.password }}data-content="{{ $content }}"{{ end }}
+    <div class="content" id="content"
+      {{- with $params.password }} data-password="{{ hash.XxHash . }}"{{ end }}
+      {{- with $params.password }} data-content="{{ $content }}"{{ end -}}
     >
       {{- if not $params.password -}}
         {{- $content -}}
