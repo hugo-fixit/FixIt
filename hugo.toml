@@ -231,8 +231,6 @@ enableEmoji = true
 # -------------------------------------------------------------------------------------
 
 [mediaTypes]
-  # FixIt 0.3.10 | NEW Options to make output feed.json files
-  # Warning: The application/feed+json media type will cause an unknown error in resources.GetRemote!
   # [mediaTypes."application/feed+json"]
   #   suffixes = ["json"]
 
@@ -274,13 +272,6 @@ enableEmoji = true
     isPlainText = true
     isHTML = false
     notAlternative = true
-  # FixIt 0.3.10 | NEW Options to make output feed.json file
-  [outputFormats.feed]
-    baseName = "feed"
-    # Warning: The application/feed+json media type will cause an unknown error in resources.GetRemote!
-    mediaType = "application/json"
-    isPlainText = true
-    isHTML = false
   # FixIt 0.3.10 | NEW Options to make output search.json file
   [outputFormats.search]
     baseName = "search"
@@ -296,17 +287,17 @@ enableEmoji = true
 # -------------------------------------------------------------------------------------
 
 # Options to make hugo output files, the optional values are below:
-# home = ["html", "rss", "feed", "archives", "offline", "readme", "baidu_urls", "search"]
+# home = ["html", "rss", "archives", "offline", "readme", "baidu_urls", "search"]
 # page = ["html", "markdown"]
-# section = ["html", "rss", "feed"]
+# section = ["html", "rss"]
 # taxonomy = ["html"]
-# term = ["html", "rss", "feed"]
+# term = ["html", "rss"]
 [outputs]
-  home = ["html", "rss", "feed", "archives", "offline", "readme", "baidu_urls", "search"]
+  home = ["html", "rss", "archives", "offline", "readme", "baidu_urls", "search"]
   page = ["html", "markdown"]
-  section = ["html", "rss", "feed"]
+  section = ["html", "rss"]
   taxonomy = ["html"]
-  term = ["html", "rss", "feed"]
+  term = ["html", "rss"]
 
 # -------------------------------------------------------------------------------------
 # Taxonomies Configuration

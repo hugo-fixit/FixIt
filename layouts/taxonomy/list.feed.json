@@ -1,8 +1,0 @@
-{{- $title := printf "%s %s" .Title (T .Data.Singular | default .Data.Singular) -}}
-{{- if .Site.Params.withSiteTitle -}}
-  {{- $title = printf "%s %s %s" $title .Site.Params.titleDelimiter .Site.Title -}}
-{{- end -}}
-{{- $config := (.Params.feed | default dict) | merge .Site.Params.list.feed | merge .Site.Params.feed -}}
-{{- $options := dict "Site" .Site "Config" $config "OutputFormats" .OutputFormats -}}
-{{- $options = dict "Title" $title "Pages" .Pages | merge $options -}}
-{{- partial "feed/json.html" $options -}}
