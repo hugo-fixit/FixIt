@@ -293,7 +293,7 @@ enableEmoji = true
 # taxonomy = ["html"]
 # term = ["html", "rss"]
 [outputs]
-  home = ["html", "rss", "archives", "offline", "readme", "baidu_urls", "search"]
+  home = ["html", "rss", "archives", "search"]
   page = ["html", "markdown"]
   section = ["html", "rss"]
   taxonomy = ["html"]
@@ -502,7 +502,7 @@ enableEmoji = true
     dateFormat = "01-02"
     # FixIt 0.3.10 | NEW Section feed config for RSS, Atom and JSON feed.
     [params.section.feed]
-      # The number of posts to include in the feed. Default is -1, which means all posts.
+      # The number of posts to include in the feed. If set to -1, all posts.
       limit = -1
       # whether to show the full text content in feed.
       fullText = false
@@ -522,7 +522,7 @@ enableEmoji = true
     dateFormat = "01-02"
     # FixIt 0.3.10 | NEW Term list feed config for RSS, Atom and JSON feed.
     [params.list.feed]
-      # The number of posts to include in the feed. Default is -1, which means all posts.
+      # The number of posts to include in the feed. If set to -1, all posts.
       limit = -1
       # whether to show the full text content in feed.
       fullText = false
@@ -819,7 +819,7 @@ enableEmoji = true
   
   # FixIt 0.3.10 | NEW Global Feed config for RSS, Atom and JSON feed.
   [params.feed]
-    # The number of posts to include in the feed. Default is -1, which means all posts.
+    # The number of posts to include in the feed. If set to -1, all posts.
     limit = 10
     # whether to show the full text content in feed.
     fullText = true
@@ -866,8 +866,6 @@ enableEmoji = true
     linkToEdit = true
     # FixIt 0.3.0 | NEW whether to show link to report issue for the post
     linkToReport = true
-    # whether to show the full text content in RSS
-    rssFullText = false
     # FixIt 0.3.10 | CHANGED Page style ["narrow", "normal", "wide", ...]
     pageStyle = "normal"
     # FixIt 0.2.17 | CHANGED Auto Bookmark Support
