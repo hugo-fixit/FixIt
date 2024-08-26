@@ -1,0 +1,14 @@
+{{- $content := .Content -}}
+
+{{- if .Password -}}
+  {{- $saltLen := strings.RuneCount (trim .Password " ") -}}
+  {{- $saltLen = cond (eq (mod $saltLen 2) 0) (add $saltLen 1) $saltLen -}}
+  {{- $base64EncodeContent := $content | base64Encode -}}
+  {{- $content = printf "%v%v%v"
+    (substr $base64EncodeContent 0 $saltLen)
+    (substr (sha256 .Password) $saltLen)
+    (substr $base64EncodeContent $saltLen)
+  -}}
+{{- end -}}
+
+{{- return $content -}}

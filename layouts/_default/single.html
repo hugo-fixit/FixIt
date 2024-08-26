@@ -16,16 +16,8 @@
 
     {{- /* Content */ -}}
     {{- $content := dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
-    {{- if $params.password -}}
-      {{- $saltLen := strings.RuneCount (trim $params.password " ") -}}
-      {{- $saltLen = cond (eq (mod $saltLen 2) 0) (add $saltLen 1) $saltLen -}}
-      {{- $base64EncodeContent := $content | base64Encode -}}
-      {{- $content = printf "%v%v%v"
-        (substr $base64EncodeContent 0 $saltLen)
-        (substr (sha256 $params.password) $saltLen)
-        (substr $base64EncodeContent $saltLen)
-      -}}
-    {{- end -}}
+    {{- /* Content Encryption */ -}}
+    {{- $content = dict "Content" $content "Password" $params.password | partial "function/content-encryption.html" | safeHTML -}}
     <div class="content" id="content"
       {{- with $params.password }} data-password="{{ hash.XxHash . }}"{{ end }}
       {{- with $params.password }} data-content="{{ $content }}"{{ end -}}
