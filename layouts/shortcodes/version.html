@@ -8,7 +8,7 @@
 {{- $resource := resources.Get "images/version.template.svg" -}}
 {{- $resource = $resource | resources.ExecuteAsTemplate $path (dict "version" $version "label" $label "color" $color "isCJK" .Page.Params.IsCJKLanguage) | minify -}}
 {{- $alt := printf "FixIt %v | %v" $version $label -}}
-<a href="{{ $url }}" rel="external nofollow noopener noreferrer" target="_blank">
+<a href="{{ $url }}" rel="external nofollow noopener" target="_blank">
   {{- dict "Src" $resource.RelPermalink "Alt" $alt "Class" "version" | partial "plugin/image.html" -}}
 </a>
 {{- /* EOF */ -}}
