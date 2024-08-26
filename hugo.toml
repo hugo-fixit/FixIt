@@ -293,7 +293,7 @@ enableEmoji = true
 # taxonomy = ["html"]
 # term = ["html", "rss"]
 [outputs]
-  home = ["html", "rss", "archives", "search"]
+  home = ["html", "rss", "archives", "offline", "search"]
   page = ["html", "markdown"]
   section = ["html", "rss"]
   taxonomy = ["html"]

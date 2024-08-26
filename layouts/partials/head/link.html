@@ -32,7 +32,8 @@
 {{- range .AlternativeOutputFormats -}}
   {{- printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink $title | safeHTML -}}
 {{- end -}}
-{{- with .OutputFormats.Get "feed" -}}
+{{- /* Compatible with https://github.com/hugo-fixit/hugo-json-feed */ -}}
+{{- with .OutputFormats.Get "jsonfeed" -}}
   <link rel="alternate" type="application/feed+json" href="{{ .Permalink }}" title="{{ $title }}" />
 {{- end -}}
 
