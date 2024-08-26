@@ -29,7 +29,7 @@
         {{- dict "Class" "fa-solid fa-unlock" | partial "plugin/icon.html" }} {{ T "single.enterBtn" -}}
       </button>
     </div>
-    <div data-password="{{ md5 $password }}" data-content="{{ $content }}"></div>
+    <div data-password="{{ xxhash $password }}" data-content="{{ $content }}"></div>
   </fixit-encryptor>
   {{- .Page.Scratch.SetInMap "this" "encryptPartial" true -}}
 {{- else -}}

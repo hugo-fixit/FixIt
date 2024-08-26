@@ -172,7 +172,7 @@
     {{- end -}}
     <div class="content" id="content"
       {{- with $params.endFlag }} data-end-flag="{{ . }}"{{ end }}
-      {{- with $params.password }} data-password="{{ hash.XxHash . }}"{{ end }}
+      {{- with $params.password }} data-password="{{ xxhash . }}"{{ end }}
       {{- with $params.password }} data-content="{{ $content }}"{{ end -}}
     >
       {{- if not $params.password -}}

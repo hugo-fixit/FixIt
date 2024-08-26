@@ -139,10 +139,11 @@ FixItDecryptor = function (options = {}) {
 
   /**
    * initialize fixit-encryptor shortcodes
+   * @param {Element} [$container=document] container element
    */
-  _proto.initShortcodes = () => {
+  _proto.initShortcodes = ($container = document) => {
     customElements.get('fixit-encryptor') || customElements.define('fixit-encryptor', class extends HTMLElement {});
-    const $shortcodes = document.querySelectorAll('fixit-encryptor:not(:has(.decrypted))');
+    const $shortcodes = $container.querySelectorAll('fixit-encryptor:not(:has(.decrypted))');
 
     $shortcodes.forEach($shortcode => {
       const decryptorHandler = () => {
