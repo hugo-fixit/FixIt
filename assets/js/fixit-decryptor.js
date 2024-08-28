@@ -14,52 +14,41 @@ FixItDecryptor = function (options = {}) {
   this.decryptedEventSet = new Set();
   this.partialDecryptedEventSet = new Set();
   this.resetEventSet = new Set();
-  this.$el = document.querySelector('.fixit-decryptor-container');
+  customElements.get('fixit-encryptor') || customElements.define('fixit-encryptor', class extends HTMLElement {});
+  customElements.get('cipher-text') || customElements.define('cipher-text', class extends HTMLElement {});
 
   /**
    * decrypt content
-   * @param {Element} $content content element
+   * @param {Element} $cipherText cipher text element
+   * @param {Element} $target target content element
    * @param {String} salt salt string
-   * @param {Boolean} [isAll=true] whether to decrypt all content
    */
-  var _decryptContent = ($content, salt, isAll=true) => {
+  var _decryptContent = ($cipherText, $target, salt) => {
     try {
-      if (isAll) {
-        // decrypt all content
-        this.$el.querySelector('.fixit-decryptor-loading').classList.add('d-none');
-        this.$el.querySelector('.fixit-decryptor-input').classList.add('d-none');
-        this.$el.querySelector('.fixit-decryptor-btn').classList.add('d-none');
-        this.$el.querySelector('.fixit-encryptor-btn').classList.remove('d-none');
-      } else {
-        // decrypt shortcode content
-        $content.parentElement.classList.add('decrypted');
-      }
-      $content.insertAdjacentHTML(
-        'afterbegin',
-        CryptoJS.enc.Base64
-          .parse($content.getAttribute('data-content').replace(salt, ''))
-          .toString(CryptoJS.enc.Utf8)
-      );
+      $target.innerHTML = CryptoJS.enc.Base64
+          .parse($cipherText.innerText.replace(salt, ''))
+          .toString(CryptoJS.enc.Utf8);
+      $cipherText.parentElement.classList.add('decrypted');
     } catch (err) {
       return console.error(err);
     }
     // decrypted hook
-    const eventSet = isAll ? this.decryptedEventSet : this.partialDecryptedEventSet;
+    const eventSet = $target.id === 'content' ? this.decryptedEventSet : this.partialDecryptedEventSet;
     for (const event of eventSet) {
-      event($content);
+      event($target);
     }
   };
 
   /**
    * validate password
-   * @param {Element} $decryptor decryptor element
-   * @param {Element} $content content element
+   * @param {Element} $encryptor fixit-encryptor element
    * @param {Function} callback callback function after password validation
    * @returns 
    */
-  var _validatePassword = async ($decryptor, $content, callback) => {
-    const password = $content.getAttribute('data-password');
-    const inputEl = $decryptor.querySelector('.fixit-decryptor-input');
+  var _validatePassword = async ($encryptor, callback) => {
+    const $cipherText = $encryptor.querySelector('cipher-text');
+    const password = $cipherText.dataset.password;
+    const inputEl = $encryptor.querySelector('.fixit-decryptor-input');
     const input = inputEl.value.trim();
     const { h64ToString } = await xxhash();
     const inputHash = h64ToString(input);
@@ -76,21 +65,45 @@ FixItDecryptor = function (options = {}) {
       alert(`Password error: ${input} not the correct password!`);
       return console.warn(`Password error: ${input} not the correct password!`);
     }
-    callback(inputHash, inputSha256.slice(saltLen));
+    callback($cipherText, inputHash, inputSha256.slice(saltLen));
   }
 
   /**
    * initialize FixIt decryptor
+   * @param {Object} options
+   * @param {Boolean} options.all whether to decrypt all content
+   * @param {String} options.shortcode whether to decrypt fixit-encryptor shortcode
    */
-  _proto.init = () => {
+  _proto.init = ({ all, shortcode }) => {
     this.addEventListener('decrypted', this.options?.decrypted);
     this.addEventListener('partial-decrypted', this.options?.partialDecrypted);
     this.addEventListener('reset', this.options?.reset);
+    const $content = document.querySelector('#content');
+    if (shortcode) {
+      this.addEventListener('decrypted', () => {
+        this.initShortcodes($content);
+      });
+      this.addEventListener('partial-decrypted', ($parent) => {
+        this.initShortcodes($parent);
+      });
+    }
+    if (all) {
+      this.initPage();
+    } else if (shortcode) {
+      this.initShortcodes($content);
+    }
+  };
+
+  /**
+   * initialize FixIt decryptor for the encrypted pages
+   */
+  _proto.initPage = () => {
     this.validateCache();
+    const $encryptor = document.querySelector('article > fixit-encryptor');
+    const $content = document.querySelector('#content');
 
     const decryptorHandler = () => {
-      const $content = document.querySelector('#content');
-      _validatePassword(this.$el, $content, (passwordHash, salt) => {
+      _validatePassword($encryptor, ($cipherText, passwordHash, salt) => {
         // cache decryption statistics
         window.localStorage?.setItem(
           `fixit-decryptor/#${location.pathname}`,
@@ -100,12 +113,12 @@ FixItDecryptor = function (options = {}) {
             salt,
           })
         );
-        _decryptContent($content, salt);
+        _decryptContent($cipherText, $content, salt);
       });
     };
 
     // bind decryptor input enter keydown event
-    this.$el.querySelector('#fixit-decryptor-input')?.addEventListener('keydown', (e) => {
+    $encryptor.querySelector('.fixit-decryptor-input')?.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
         decryptorHandler();
@@ -113,44 +126,38 @@ FixItDecryptor = function (options = {}) {
     });
     
     // bind decryptor button click event
-    this.$el.querySelector('.fixit-decryptor-btn')?.addEventListener('click', (e) => {
+    $encryptor.querySelector('.fixit-decryptor-btn')?.addEventListener('click', (e) => {
       e.preventDefault();
       decryptorHandler();
     });
 
     // bind encryptor button click event
-    this.$el.querySelector('.fixit-encryptor-btn')?.addEventListener('click',  (e) => {
+    $encryptor.querySelector('.fixit-encryptor-btn')?.addEventListener('click',  (e) => {
       e.preventDefault();
-      e.target.classList.add('d-none')
-      this.$el.querySelector('.fixit-decryptor-input').classList.remove('d-none');
-      this.$el.querySelector('.fixit-decryptor-btn').classList.remove('d-none');
-      document.querySelector('#content').innerHTML = '';
-      document.querySelector('#content').insertAdjacentElement(
-        'afterbegin',
-        this.$el
-      );
+      $encryptor.classList.remove('decrypted');
+      $content.innerHTML = '';
       window.localStorage?.removeItem(`fixit-decryptor/#${location.pathname}`);
       // reset hook
       for (const event of this.resetEventSet) {
         event();
       }
     });
+
+    $encryptor.classList.add('initialized');
   };
 
   /**
-   * initialize fixit-encryptor shortcodes
-   * @param {Element} [$container=document] container element
+   * initialize FixIt decryptor for fixit-encryptor shortcodes
+   * @param {Element} $parent parent element
    */
-  _proto.initShortcodes = ($container = document) => {
-    customElements.get('fixit-encryptor') || customElements.define('fixit-encryptor', class extends HTMLElement {});
-    const $shortcodes = $container.querySelectorAll('fixit-encryptor:not(:has(.decrypted))');
+  _proto.initShortcodes = ($parent) => {
+    const $shortcodes = $parent.querySelectorAll('fixit-encryptor:not(.initialized)');
 
     $shortcodes.forEach($shortcode => {
       const decryptorHandler = () => {
-        const $decryptor = $shortcode.querySelector('.fixit-decryptor-container');
-        const $content = $shortcode.querySelector('[data-password][data-content]');
-        _validatePassword($decryptor, $content, (passwordHash, salt) => {
-          _decryptContent($content, salt, false);
+        const $content = $shortcode.querySelector('.decryptor-content');
+        _validatePassword($shortcode, ($cipherText, passwordHash, salt) => {
+          _decryptContent($cipherText, $content, salt);
         });
       };
 
@@ -167,6 +174,8 @@ FixItDecryptor = function (options = {}) {
         e.preventDefault();
         decryptorHandler();
       });
+
+      $shortcode.classList.add('initialized');
     });
   };
 
@@ -176,23 +185,19 @@ FixItDecryptor = function (options = {}) {
    */
   _proto.validateCache = () => {
     const $content = document.querySelector('#content');
-    const password = $content.getAttribute('data-password');
+    const $encryptor = document.querySelector('article > fixit-encryptor');
+    const $cipherText = $encryptor.querySelector('cipher-text');
+    const password = $cipherText.dataset.password;
     const cachedStat = JSON.parse(window.localStorage?.getItem(`fixit-decryptor/#${location.pathname}`));
 
-    if (!cachedStat) {
-      this.$el.querySelector('.fixit-decryptor-loading').classList.add('d-none');
-      this.$el.querySelector('.fixit-decryptor-input').classList.remove('d-none');
-      this.$el.querySelector('.fixit-decryptor-btn').classList.remove('d-none');
+    if (!cachedStat || cachedStat?.password !== password || Number(cachedStat?.expiration) < Math.ceil(Date.now() / 1000)) {
+      if (cachedStat) {
+        window.localStorage?.removeItem(`fixit-decryptor/#${location.pathname}`);
+        console.warn('The password has expired, please re-enter!');
+      }
       return this;
     }
-    if (cachedStat?.password !== password || Number(cachedStat?.expiration) < Math.ceil(Date.now() / 1000)) {
-      this.$el.querySelector('.fixit-decryptor-loading').classList.add('d-none');
-      this.$el.querySelector('.fixit-decryptor-input').classList.remove('d-none');
-      window.localStorage?.removeItem(`fixit-decryptor/#${location.pathname}`);
-      console.warn('The password has expired, please re-enter!');
-      return this;
-    }
-    _decryptContent($content, cachedStat.salt);
+    _decryptContent($cipherText, $content, cachedStat.salt);
     return this;
   };
 

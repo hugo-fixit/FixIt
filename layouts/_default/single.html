@@ -16,18 +16,14 @@
 
     {{- /* Content */ -}}
     {{- $content := dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
-    {{- /* Content Encryption */ -}}
-    {{- $content = dict "Content" $content "Password" $params.password | partial "function/content-encryption.html" | safeHTML -}}
-    <div class="content" id="content"
-      {{- with $params.password }} data-password="{{ hash.XxHash . }}"{{ end }}
-      {{- with $params.password }} data-content="{{ $content }}"{{ end -}}
-    >
+    <div class="content" id="content">
       {{- if not $params.password -}}
         {{- $content -}}
-      {{- else -}}
-        {{- partial "single/fixit-decryptor.html" . -}}
       {{- end -}}
     </div>
+
+    {{- /* Content Encryption */ -}}
+    {{- dict "Content" $content "Password" $params.password "Message" $params.message | partial "plugin/fixit-encryptor.html" -}}
 
     {{- /* Comment */ -}}
     {{- partial "single/comment.html" . -}}

@@ -1043,16 +1043,7 @@ class FixIt {
         });
       }
     });
-    if (this.config.encryption?.shortcode) {
-      this.decryptor.addEventListener('decrypted', () => {
-        this.decryptor.initShortcodes();
-      })
-      this.decryptor.addEventListener('partial-decrypted', ($content) => {
-        this.decryptor.initShortcodes($content);
-      })
-      this.decryptor.initShortcodes();
-    }
-    this.config.encryption?.all && this.decryptor.init();
+    this.decryptor.init(this.config.encryption);
   }
 
   initAutoMark() {

@@ -160,13 +160,7 @@
 
     {{- /* Content */ -}}
     {{- $content := dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
-    {{- /* Content Encryption */ -}}
-    {{- $content = dict "Content" $content "Password" $params.password | partial "function/content-encryption.html" | safeHTML -}}
-    <div class="content" id="content"
-      {{- with $params.endFlag }} data-end-flag="{{ . }}"{{ end }}
-      {{- with $params.password }} data-password="{{ xxhash . }}"{{ end }}
-      {{- with $params.password }} data-content="{{ $content }}"{{ end -}}
-    >
+    <div class="content" id="content"{{ with $params.endFlag }} data-end-flag="{{ . }}"{{ end }}>
       {{- if not $params.password -}}
         {{- /* Expiration Reminder */ -}}
         {{- partial "single/expiration-reminder.html" . -}}
@@ -186,8 +180,8 @@
     {{- /* Collection Navigation */ -}}
     {{- partial "single/collection-nav.html" . -}}
 
-    {{- /* FixIt Decryptor */ -}}
-    {{- partial "single/fixit-decryptor.html" . -}}
+    {{- /* Content Encryption */ -}}
+    {{- dict "Content" $content "Password" $params.password "Message" $params.message | partial "plugin/fixit-encryptor.html" -}}
 
     {{- /* Custom block before post footer */ -}}
     {{- block "custom-post__footer:before" . }}{{ end -}}
