@@ -1,0 +1,16 @@
+// Color map of alert [$type $border-color $color, ... ]
+$alert-color-map:
+  'note' #0969da #0969da,
+  'tip' #1a7f37 #1a7f37,
+  'important' #8250df #8250df,
+  'warning' #bf8700 #9a6700,
+  'caution' #cf222e #d1242f,
+  !default;
+
+$alert-color-map-dark:
+  'note' #316dca #478be6,
+  'tip' #347d39 #57ab5a,
+  'important' #8256d0 #986ee2,
+  'warning' #966600 #c69026,
+  'caution' #c93c37 #e5534b,
+  !default;
