@@ -1,10 +1,10 @@
-.blockquote-center {
+blockquote.blockquote-center {
   border-left: none;
   margin: 40px 0;
   padding: 0;
   position: relative;
   text-align: center;
-  color: initial;
+  color: inherit;
 
   &::after,
   &::before {
