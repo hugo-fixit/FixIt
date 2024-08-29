@@ -6,8 +6,20 @@
     {{- $prefix := $.Prefix | default "lib/simple-icons/icons" | strings.TrimSuffix "/" -}}
     {{- $src = printf "%v/%v.svg" $prefix . -}}
   {{- end -}}
-  {{- if (urls.Parse $src).Host | not -}}
-    {{- $src = (resources.Get $src | minify).RelPermalink -}}
+
+  {{ if not $src }}
+    {{- errorf "Icon src is missing" -}}
   {{- end -}}
-  <i data-svg-src="{{ $src }}" aria-hidden="true"></i>
+
+  {{- if (urls.Parse $src).Host | not -}}
+    {{- $resource := resources.Get $src | minify -}}
+    {{ if not $resource }}
+      {{- errorf "Icon does not exist %v" $src -}}
+    {{- end -}}
+    {{- $resource := $resource.Content -}}
+    {{- $resource | replaceRE `<svg ` `<svg class="icon" ` | safeHTML -}}
+  {{- else -}}
+    {{- /* fetch svg icon from external source */ -}}
+    <i data-svg-src="{{ $src }}" aria-hidden="true"></i>
+  {{- end -}}
 {{- end -}}
