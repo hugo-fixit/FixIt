@@ -173,6 +173,15 @@ other = "disconnesso"
 other = "Non sei connesso a Internet, saranno disponibili solo le pagine memorizzate nella cache."
 # === offline ===
 
+# === GitHub Alert ===
+[alert]
+note = ""
+tip = ""
+important = ""
+warning = ""
+caution = ""
+# === GitHub Alert ===
+
 # === shortcodes/admonition.html ===
 [admonition]
 note = "Note"

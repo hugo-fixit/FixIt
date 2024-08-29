@@ -24,7 +24,7 @@
     {{- $icon := index $icons .AlertType -}}
     <p class="alert-title">
       {{- dict "Src" $icon | partial "plugin/icon.html" }}
-      {{- or (T .AlertType) (title .AlertType) -}}
+      {{- or (T (printf "alert.%v" .AlertType)) (title .AlertType) -}}
     </p>
     {{- .Text | safeHTML -}}
   </div>

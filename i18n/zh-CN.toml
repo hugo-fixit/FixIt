@@ -168,6 +168,15 @@ other = "离线"
 other = "您没有连接到 Internet，只有缓存的页面可用。"
 # === offline ===
 
+# === GitHub Alert ===
+[alert]
+note = "注意"
+tip = "提示"
+important = "重要"
+warning = "警告"
+caution = "小心"
+# === GitHub Alert ===
+
 # === shortcodes/admonition.html ===
 [admonition]
 note = "注意"

@@ -172,6 +172,15 @@ other = "ngoại tuyến"
 other = "Bạn chưa kết nối với Internet, chỉ các trang được lưu trong bộ nhớ cache sẽ khả dụng."
 # === offline ===
 
+# === GitHub Alert ===
+[alert]
+note = ""
+tip = ""
+important = ""
+warning = ""
+caution = ""
+# === GitHub Alert ===
+
 # === shortcodes/admonition.html ===
 [admonition]
 note = "Ghi chú"

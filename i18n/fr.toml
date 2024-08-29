@@ -172,6 +172,15 @@ other = "Hors ligne"
 other = "Vous n'êtes pas connecté à Internet, seules les pages mises en cache seront disponibles."
 # === offline ===
 
+# === GitHub Alert ===
+[alert]
+note = ""
+tip = ""
+important = ""
+warning = ""
+caution = ""
+# === GitHub Alert ===
+
 # === shortcodes/admonition.html ===
 [admonition]
 note = "Remarque"
