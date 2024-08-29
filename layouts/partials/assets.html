@@ -194,7 +194,12 @@
   {{- dict "Source" $cryptoEncBase64JS "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- dict "Source" $cryptoSha256JS "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- dict "Source" $xxhashWasmJS "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-  {{- dict "Source" "js/fixit-decryptor.js" "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+  {{- /* Decryption script */ -}}
+  {{- $options := dict "targetPath" "js/fixit-decryptor.min.js" "minify" hugo.IsProduction -}}
+  {{- if not hugo.IsProduction -}}
+    {{- $options = dict "sourceMap" "external" | merge $options -}}
+  {{- end -}}
+  {{- dict "Source" (resources.Get "js/fixit-decryptor.js") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- $config = dict "all" (isset $params "password") "shortcode" ($encryptPartial | default false) | dict "encryption" | merge $config -}}
 {{- end -}}
 

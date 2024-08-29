@@ -6,7 +6,6 @@
   {{- $content := .Inner | .Page.RenderString -}}
   {{- /* Content Encryption */ -}}
   {{- dict "Content" $content "Password" $password "Message" $message "IsPartial" true | partial "plugin/fixit-encryptor.html" -}}
-  {{- .Page.Scratch.SetInMap "this" "encryptPartial" true -}}
 {{- else -}}
   {{- .Inner -}}
 {{- end -}}

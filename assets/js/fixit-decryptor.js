@@ -1,21 +1,20 @@
-/**
- * FixIt decryptor for encrypted pages and fixit-encryptor shortcode
- * @param {Object} options
- * @param {Function} [options.decrypted] [Lifecycle Hooks] handler after decrypting
- * @param {Function} [options.reset] [Lifecycle Hooks] handler after encrypting again
- * @param {Number} [options.duration=86400] number of seconds to cache decryption statistics. unit: s
- * @author @Lruihao https://lruihao.cn
- * @since v0.2.15
- */
-FixItDecryptor = function (options = {}) {
-  var _proto = FixItDecryptor.prototype;
-  this.options = options || {};
-  this.options.duration = this.options.duration || 24 * 60 * 60; // default cache one day
-  this.decryptedEventSet = new Set();
-  this.partialDecryptedEventSet = new Set();
-  this.resetEventSet = new Set();
-  customElements.get('fixit-encryptor') || customElements.define('fixit-encryptor', class extends HTMLElement {});
-  customElements.get('cipher-text') || customElements.define('cipher-text', class extends HTMLElement {});
+class FixItDecryptor {
+  /**
+   * FixIt decryptor for encrypted pages and fixit-encryptor shortcode
+   * @param {Object} options
+   * @param {Function} [options.decrypted] [Lifecycle Hooks] handler after decrypting
+   * @param {Function} [options.reset] [Lifecycle Hooks] handler after encrypting again
+   * @param {Number} [options.duration=86400] number of seconds to cache decryption statistics. unit: s
+   */
+  constructor(options = {}) {
+    this.options = options || {};
+    this.options.duration = this.options.duration || 24 * 60 * 60; // default cache one day
+    this.decryptedEventSet = new Set();
+    this.partialDecryptedEventSet = new Set();
+    this.resetEventSet = new Set();
+    customElements.get('fixit-encryptor') || customElements.define('fixit-encryptor', class extends HTMLElement {});
+    customElements.get('cipher-text') || customElements.define('cipher-text', class extends HTMLElement {});
+  }
 
   /**
    * decrypt content
@@ -23,11 +22,11 @@ FixItDecryptor = function (options = {}) {
    * @param {Element} $target target content element
    * @param {String} salt salt string
    */
-  var _decryptContent = ($cipherText, $target, salt) => {
+  #decryptContent($cipherText, $target, salt) {
     try {
       $target.innerHTML = CryptoJS.enc.Base64
-          .parse($cipherText.innerText.replace(salt, ''))
-          .toString(CryptoJS.enc.Utf8);
+        .parse($cipherText.innerText.replace(salt, ''))
+        .toString(CryptoJS.enc.Utf8);
       $cipherText.parentElement.classList.add('decrypted');
     } catch (err) {
       return console.error(err);
@@ -37,7 +36,7 @@ FixItDecryptor = function (options = {}) {
     for (const event of eventSet) {
       event($target);
     }
-  };
+  }
 
   /**
    * validate password
@@ -45,11 +44,12 @@ FixItDecryptor = function (options = {}) {
    * @param {Function} callback callback function after password validation
    * @returns 
    */
-  var _validatePassword = async ($encryptor, callback) => {
+  async #validatePassword($encryptor, callback) {
     const $cipherText = $encryptor.querySelector('cipher-text');
     const password = $cipherText.dataset.password;
     const inputEl = $encryptor.querySelector('.fixit-decryptor-input');
     const input = inputEl.value.trim();
+    // Warning: insufficient-password-hash Weak hashing algorithms for passwords poses security risks.
     const { h64ToString } = await xxhash();
     const inputHash = h64ToString(input);
     const inputSha256 = CryptoJS.SHA256(input).toString();
@@ -74,7 +74,7 @@ FixItDecryptor = function (options = {}) {
    * @param {Boolean} options.all whether to decrypt all content
    * @param {String} options.shortcode whether to decrypt fixit-encryptor shortcode
    */
-  _proto.init = ({ all, shortcode }) => {
+  init({ all, shortcode }) {
     this.addEventListener('decrypted', this.options?.decrypted);
     this.addEventListener('partial-decrypted', this.options?.partialDecrypted);
     this.addEventListener('reset', this.options?.reset);
@@ -92,18 +92,18 @@ FixItDecryptor = function (options = {}) {
     } else if (shortcode) {
       this.initShortcodes($content);
     }
-  };
+  }
 
   /**
    * initialize FixIt decryptor for the encrypted pages
    */
-  _proto.initPage = () => {
+  initPage() {
     this.validateCache();
     const $encryptor = document.querySelector('article > fixit-encryptor');
     const $content = document.querySelector('#content');
 
     const decryptorHandler = () => {
-      _validatePassword($encryptor, ($cipherText, passwordHash, salt) => {
+      this.#validatePassword($encryptor, ($cipherText, passwordHash, salt) => {
         // cache decryption statistics
         window.localStorage?.setItem(
           `fixit-decryptor/#${location.pathname}`,
@@ -113,7 +113,7 @@ FixItDecryptor = function (options = {}) {
             salt,
           })
         );
-        _decryptContent($cipherText, $content, salt);
+        this.#decryptContent($cipherText, $content, salt);
       });
     };
 
@@ -124,7 +124,7 @@ FixItDecryptor = function (options = {}) {
         decryptorHandler();
       }
     });
-    
+
     // bind decryptor button click event
     $encryptor.querySelector('.fixit-decryptor-btn')?.addEventListener('click', (e) => {
       e.preventDefault();
@@ -132,7 +132,7 @@ FixItDecryptor = function (options = {}) {
     });
 
     // bind encryptor button click event
-    $encryptor.querySelector('.fixit-encryptor-btn')?.addEventListener('click',  (e) => {
+    $encryptor.querySelector('.fixit-encryptor-btn')?.addEventListener('click', (e) => {
       e.preventDefault();
       $encryptor.classList.remove('decrypted');
       $content.innerHTML = '';
@@ -144,20 +144,20 @@ FixItDecryptor = function (options = {}) {
     });
 
     $encryptor.classList.add('initialized');
-  };
+  }
 
   /**
    * initialize FixIt decryptor for fixit-encryptor shortcodes
    * @param {Element} $parent parent element
    */
-  _proto.initShortcodes = ($parent) => {
+  initShortcodes($parent) {
     const $shortcodes = $parent.querySelectorAll('fixit-encryptor:not(.initialized)');
 
     $shortcodes.forEach($shortcode => {
       const decryptorHandler = () => {
         const $content = $shortcode.querySelector('.decryptor-content');
-        _validatePassword($shortcode, ($cipherText, passwordHash, salt) => {
-          _decryptContent($cipherText, $content, salt);
+        this.#validatePassword($shortcode, ($cipherText, passwordHash, salt) => {
+          this.#decryptContent($cipherText, $content, salt);
         });
       };
 
@@ -177,13 +177,13 @@ FixItDecryptor = function (options = {}) {
 
       $shortcode.classList.add('initialized');
     });
-  };
+  }
 
   /**
    * validate the cached decryption statistics in localStorage
    * @returns {FixItDecryptor}
    */
-  _proto.validateCache = () => {
+  validateCache() {
     const $content = document.querySelector('#content');
     const $encryptor = document.querySelector('article > fixit-encryptor');
     const $cipherText = $encryptor.querySelector('cipher-text');
@@ -197,9 +197,9 @@ FixItDecryptor = function (options = {}) {
       }
       return this;
     }
-    _decryptContent($cipherText, $content, cachedStat.salt);
+    this.#decryptContent($cipherText, $content, cachedStat.salt);
     return this;
-  };
+  }
 
   /**
    * add event listener for FixIt Decryptor
@@ -207,7 +207,7 @@ FixItDecryptor = function (options = {}) {
    * @param {Function} listener event handler
    * @returns {FixItDecryptor}
    */
-  _proto.addEventListener = (event, listener) => {
+  addEventListener(event, listener) {
     if (typeof listener !== 'function') {
       return this;
     }
@@ -226,7 +226,7 @@ FixItDecryptor = function (options = {}) {
         break;
     }
     return this;
-  };
+  }
 
   /**
    * remove event listener for FixIt Decryptor
@@ -234,7 +234,7 @@ FixItDecryptor = function (options = {}) {
    * @param {Function} listener event handler
    * @returns {FixItDecryptor}
    */
-  _proto.removeEventListener = (event, listener) => {
+  removeEventListener(event, listener) {
     if (typeof listener !== 'function') {
       return this;
     }
@@ -253,5 +253,8 @@ FixItDecryptor = function (options = {}) {
         break;
     }
     return this;
-  };
-};
+  }
+}
+
+window.FixItDecryptor = FixItDecryptor;
+
