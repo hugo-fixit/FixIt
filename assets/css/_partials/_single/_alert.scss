@@ -1,0 +1,44 @@
+.alert {
+  padding: 0.5rem 1rem;
+  margin-block: 1rem;
+  color: inherit;
+  border-left: 0.25em solid var(--#{$prefix}alert-border-color);
+
+  > :first-child {
+    margin-top: 0;
+  }
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  .alert-title {
+    display: flex;
+    font-weight: 500;
+    align-items: center;
+    line-height: 1;
+    margin-bottom: 1rem;
+    color: var(--#{$prefix}alert-color);
+
+    > svg.icon {
+      width: initial;
+      height: initial;
+      margin-right: 0.5rem;
+    }
+  }
+
+  @each $type, $border-color, $color in $alert-color-map {
+    &.alert-#{$type} {
+      --#{$prefix}alert-border-color: #{$border-color};
+      --#{$prefix}alert-color: #{$color};
+    }
+  }
+
+  [data-theme='dark'] & {
+    @each $type, $border-color, $color in $alert-color-map-dark {
+      &.alert-#{$type} {
+        --#{$prefix}alert-border-color: #{$border-color};
+        --#{$prefix}alert-color: #{$color};
+      }
+    }
+  }
+}
