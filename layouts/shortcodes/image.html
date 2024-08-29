@@ -2,6 +2,7 @@
 {{- $options = cond .IsNamedParams (.Get "alt") (.Get 1) | .Page.RenderString | dict "Alt" | merge $options -}}
 {{- $caption := cond .IsNamedParams (.Get "caption") (.Get 2) | .Page.RenderString -}}
 {{- $options = dict "Caption" $caption | merge $options -}}
+{{- $options = dict "Resources" .Page.Resources | merge $options -}}
 
 {{- if .IsNamedParams -}}
   {{- $options = dict "Title" (.Get "title") | merge $options -}}
