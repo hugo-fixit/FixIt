@@ -1,0 +1,30 @@
+{{- if .Password -}}
+  {{- /* Content Encryption */ -}}
+  {{- $content := dict "Content" .Content "Password" .Password | partial "function/content-encryption.html" -}}
+
+  {{- /* Generating fixit-encryptor DOM */ -}}
+  {{- $message := .Message | default (T "single.encryptedMessage") -}}
+  {{- $loading := resources.Get "images/loading.svg" | minify -}}
+  {{- $id := "fixit-decryptor-input" -}}
+  {{- if .IsPartial -}}
+    {{- $id = dict "Scratch" page.Scratch | partial "function/id.html" -}}
+  {{- end -}}
+  <fixit-encryptor>
+    <div class="fixit-decryptor-container">
+      <img class="fixit-decryptor-loading" src="{{ $loading.RelPermalink }}" alt="decryptor loading" width="48" height="48" />
+      <label for="{{ $id }}" title="{{ T `single.password` }}">
+        <input type="password" id="{{ $id }}" class="fixit-decryptor-input" placeholder="🔑 {{ $message }}" />
+      </label>
+      <button class="fixit-decryptor-btn">
+        {{- dict "Class" "fa-solid fa-unlock" | partial "plugin/icon.html" }} {{ T "single.enterBtn" -}}
+      </button>
+      {{- if not .IsPartial -}}
+        <button class="fixit-encryptor-btn">
+          {{- dict "Class" "fa-solid fa-lock" | partial "plugin/icon.html" }} {{ T "single.encryptyAgain" -}}
+        </button>
+      {{- end -}}
+    </div>
+    {{- if .IsPartial }}<div class="decryptor-content"></div>{{ end -}}
+    <cipher-text data-password="{{ xxhash .Password }}">{{ $content }}</cipher-text>
+  </fixit-encryptor>
+{{- end -}}

@@ -1,12 +1,16 @@
 .fixit-decryptor-container {
   font-family: $global-font-family;
   text-align: center;
-  margin-top: 3rem;
+  margin-block: var(--fixit-decryptor-margin-block);
+
+  .fixit-decryptor-loading {
+    vertical-align: middle;
+  }
 
   .fixit-decryptor-input,
   .fixit-decryptor-btn,
   .fixit-encryptor-btn {
-    display: inline-block;
+    display: none;
     box-sizing: border-box;
     outline: none;
     color: $global-font-color;
@@ -60,12 +64,33 @@
       background-color: $header-background-color-dark;
     }
   }
+
+  .fixit-encryptor-btn {
+    display: none;
+  }
 }
 
-// fixit-encryptor shortcodes
 fixit-encryptor {
+  &.initialized > .fixit-decryptor-container {
+    .fixit-decryptor-input,
+    .fixit-decryptor-btn {
+      display: inline-block;
+    }
+
+    .fixit-decryptor-loading {
+      display: none;
+    }
+  }
+
+  cipher-text {
+    display: none !important;
+  }
+}
+
+// fixit-encryptor for for the encrypted pages
+article fixit-encryptor {
   .fixit-decryptor-container {
-    margin-top: 1rem;
+    --fixit-decryptor-margin-block: 2rem;
   }
   &.decrypted > .fixit-decryptor-container {
     .fixit-decryptor-loading,
@@ -73,6 +98,20 @@ fixit-encryptor {
     .fixit-decryptor-btn {
       display: none;
     }
+
+    .fixit-encryptor-btn {
+      display: inline-block;
+    }
+  }
+}
+
+// fixit-encryptor shortcodes
+#content fixit-encryptor {
+  .fixit-decryptor-container {
+    --fixit-decryptor-margin-block: 1rem;
+  }
+  &.decrypted > .fixit-decryptor-container {
+    display: none;
   }
 }
 

@@ -1,37 +1,11 @@
-{{- $password := "" -}}
-{{- $message := "" -}}
-
-{{- if .IsNamedParams -}}
-  {{- $password = .Get "password" | default "" -}}
-  {{- $message = .Get "message" | default (T "single.encryptedMessage") -}}
-{{- else -}}
-  {{- $password = .Get 0 | default "" -}}
-  {{- $message = .Get 1 | default (T "single.encryptedMessage") -}}
-{{- end -}}
+{{- $password := cond .IsNamedParams (.Get "password") (.Get 0) | default "" -}}
+{{- $message := cond .IsNamedParams (.Get "message") (.Get 1) | default (T "single.encryptedMessage") -}}
 
 {{- if $password -}}
+  {{- /* Content */ -}}
   {{- $content := .Inner | .Page.RenderString -}}
-  {{- $saltLen := strings.RuneCount (trim $password "") -}}
-  {{- $saltLen = cond (eq (mod $saltLen 2) 0) (add $saltLen 1) $saltLen -}}
-  {{- $base64EncodeContent := $content | base64Encode -}}
-  {{- $content = printf "%v%v%v"
-    (substr $base64EncodeContent 0 $saltLen)
-    (substr (sha256 $password) $saltLen)
-    (substr $base64EncodeContent $saltLen)
-  -}}
-
-  <fixit-encryptor class="fixit-encryptor-shortcode">
-    <div class="fixit-decryptor-container">
-      <label title='{{ T "single.password" }}'>
-        <input type="password" class="fixit-decryptor-input" placeholder="🔑 {{ $message }}" />
-      </label>
-      <button class="fixit-decryptor-btn">
-        {{- dict "Class" "fa-solid fa-unlock" | partial "plugin/icon.html" }} {{ T "single.enterBtn" -}}
-      </button>
-    </div>
-    <div data-password="{{ md5 $password }}" data-content="{{ $content }}"></div>
-  </fixit-encryptor>
-  {{- .Page.Scratch.SetInMap "this" "encryptPartial" true -}}
+  {{- /* Content Encryption */ -}}
+  {{- dict "Content" $content "Password" $password "Message" $message "IsPartial" true | partial "plugin/fixit-encryptor.html" -}}
 {{- else -}}
   {{- .Inner -}}
 {{- end -}}

@@ -3,8 +3,9 @@ import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import { execSync } from 'child_process';
 
-// node build/update-version.js --stage [stage]
+// node build/update-version.js --stage [version/commit]
 const stage = process.argv[3] || 'commit';
+const branch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
 const match = [
   'archetypes/',
   'assets/',
@@ -18,9 +19,17 @@ const match = [
   'theme.toml',
 ];
 const gitDiff = execSync('git diff --cached --name-only').toString().trim();
-if (stage !== 'version' && !match.some((item) => gitDiff.includes(item))) {
-  // console.log('No need to update the FixIt version.');
-  process.exit(0);
+
+if (stage !== 'version') {
+  // Avoid conflicts when creating a Pull Request
+  if (!['dev', 'master'].includes(branch)) {
+    console.log(`The current branch is ${branch}, no need to update the FixIt version.`);
+    process.exit(0);
+  }
+  if (!match.some((item) => gitDiff.includes(item))) {
+    console.log('No need to update the FixIt version.');
+    process.exit(0);
+  }
 }
 
 const __root = join(dirname(fileURLToPath(import.meta.url)), '../');
@@ -32,12 +41,12 @@ const version = packageJson.version;
 const shortHash = execSync('git rev-parse --short HEAD').toString().trim();
 // Build the development version v{major}.{minor}.{patch+1}-{shortHash}
 const devVersion = `${version.replace(/(\d+)$/, (match, part) => parseInt(part) + 1)}-${shortHash}`;
-
 // Update the version number in layouts/partials/init/index.html
 const initHtml = fs.readFileSync(initHtmlPath, 'utf8');
 const latestVersion = stage === 'version' ? version : devVersion;
 const lastVersion = initHtml.match(/v\d+\.\d+\.\d+(-\w+)?/)[0];
 const newInitHtml = initHtml.replace(/v\d+\.\d+\.\d+(-\w+)?/, `v${latestVersion}`);
+
 fs.writeFileSync(initHtmlPath, newInitHtml);
 // Add the updated files to the git stage
 execSync('git add layouts/partials/init/index.html package.json package-lock.json');
