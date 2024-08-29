@@ -173,6 +173,15 @@ other = "ऑफलाइन"
 other = "आप इंटरनेट से कनेक्ट नहीं हैं, केवल कैश्ड पेज ही उपलब्ध होंगे।"
 # === offline ===
 
+# === GitHub Alert ===
+[alert]
+note = ""
+tip = ""
+important = ""
+warning = ""
+caution = ""
+# === GitHub Alert ===
+
 # === shortcodes/admonition.html ===
 [admonition]
 note = "ध्यान दें"

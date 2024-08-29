@@ -173,6 +173,15 @@ other = "Deconectat"
 other = "Nu sunteți conectat la Internet, vor fi disponibile doar paginile stocate în cache."
 # === offline ===
 
+# === GitHub Alert ===
+[alert]
+note = ""
+tip = ""
+important = ""
+warning = ""
+caution = ""
+# === GitHub Alert ===
+
 # === shortcodes/admonition.html ===
 [admonition]
 note = "Notă"

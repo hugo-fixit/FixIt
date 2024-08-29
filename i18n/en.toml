@@ -172,6 +172,15 @@ other = "Offline"
 other = "You are not connected to the Internet, only cached pages will be available."
 # === offline ===
 
+# === GitHub Alert ===
+[alert]
+note = "Note"
+tip = "Tip"
+important = "Important"
+warning = "Warning"
+caution = "Caution"
+# === GitHub Alert ===
+
 # === shortcodes/admonition.html ===
 [admonition]
 note = "Note"

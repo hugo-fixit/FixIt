@@ -173,6 +173,15 @@ other = "Не в сети"
 other = "Вы не подключены к интернету, будут доступны только кешированные страницы."
 # === offline ===
 
+# === GitHub Alert ===
+[alert]
+note = ""
+tip = ""
+important = ""
+warning = ""
+caution = ""
+# === GitHub Alert ===
+
 # === shortcodes/admonition.html ===
 [admonition]
 note = "Замечание"
