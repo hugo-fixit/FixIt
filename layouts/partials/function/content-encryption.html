@@ -1,5 +1,6 @@
 {{- $content := .Content -}}
 
+{{- /* If Hugo Support AES, refactor with AES. */ -}}
 {{- if .Password -}}
   {{- $saltLen := strings.RuneCount (trim .Password " ") -}}
   {{- $saltLen = cond (eq (mod $saltLen 2) 0) (add $saltLen 1) $saltLen -}}

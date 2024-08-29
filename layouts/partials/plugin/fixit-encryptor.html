@@ -1,5 +1,3 @@
-{{- /* If Hugo Support AES, refactor with AES. */ -}}
-
 {{- if .Password -}}
   {{- /* Content Encryption */ -}}
   {{- $content := dict "Content" .Content "Password" .Password | partial "function/content-encryption.html" -}}
@@ -30,4 +28,3 @@
     <cipher-text data-password="{{ xxhash .Password }}">{{ $content }}</cipher-text>
   </fixit-encryptor>
 {{- end -}}
-
