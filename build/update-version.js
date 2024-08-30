@@ -46,8 +46,8 @@ const latestVersion = stage === 'version' ? version : devVersion;
 const lastVersion = initHtml.match(/v\d+\.\d+\.\d+(-\w+)?/)[0].slice(1);
 const newInitHtml = initHtml.replace(/v\d+\.\d+\.\d+(-\w+)?/, `v${latestVersion}`);
 
-if (lastVersion === version) {
-  // After running `npm version`, the version number is updated
+if (lastVersion === version && gitDiff.includes('layouts/partials/init/index.html')) {
+  // After running `npm version` or manually modifying the version number, skip the update
   console.log(`The FixIt version has been updated to v${lastVersion}.`);
   process.exit(0);
 }
