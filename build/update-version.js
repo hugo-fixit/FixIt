@@ -41,15 +41,21 @@ const version = packageJson.version;
 const shortHash = execSync('git rev-parse --short HEAD').toString().trim();
 // Build the development version v{major}.{minor}.{patch+1}-{shortHash}
 const devVersion = `${version.replace(/(\d+)$/, (match, part) => parseInt(part) + 1)}-${shortHash}`;
-// Update the version number in layouts/partials/init/index.html
 const initHtml = fs.readFileSync(initHtmlPath, 'utf8');
 const latestVersion = stage === 'version' ? version : devVersion;
-const lastVersion = initHtml.match(/v\d+\.\d+\.\d+(-\w+)?/)[0];
+const lastVersion = initHtml.match(/v\d+\.\d+\.\d+(-\w+)?/)[0].slice(1);
 const newInitHtml = initHtml.replace(/v\d+\.\d+\.\d+(-\w+)?/, `v${latestVersion}`);
 
+if (lastVersion === version) {
+  // After running `npm version`, the version number is updated
+  console.log(`The FixIt version has been updated to v${lastVersion}.`);
+  process.exit(0);
+}
+
+// Update the version number in layouts/partials/init/index.html
 fs.writeFileSync(initHtmlPath, newInitHtml);
 // Add the updated files to the git stage
 execSync('git add layouts/partials/init/index.html package.json package-lock.json');
-console.log(`Update the FixIt version from ${lastVersion} to v${latestVersion}.`);
+console.log(`Update the FixIt version from v${lastVersion} to v${latestVersion}.`);
 
 export default latestVersion;
