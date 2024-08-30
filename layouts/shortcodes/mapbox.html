@@ -31,4 +31,4 @@
 
 {{- $attrs := printf `style="width: %v; height: %v;"` $width $height -}}
 <div class="mapbox" data-options="{{ $options | jsonify }}" {{ $attrs | safeHTMLAttr }}></div>
-{{- /*  EOF  */ -}}
+{{- /* EOF */ -}}

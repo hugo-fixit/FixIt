@@ -1,33 +1,11 @@
-{{- $icons := dict
-  "caution" "images/icons/alerts/stop.svg"
-  "important" "images/icons/alerts/report.svg"
-  "note" "images/icons/alerts/info.svg"
-  "tip" "images/icons/alerts/light-bulb.svg"
-  "warning" "images/icons/alerts/alert.svg"
--}}
-
-{{- $Attrs := "" }}
+{{- $attrs := "" }}
 {{- range $key, $value := .Attributes }}
-  {{- if $value }}
-    {{- $Attrs = printf "%s %s=%q" $Attrs $key $value }}
-  {{- end }}
+  {{- $attrs = printf "%s %s=%q" $attrs $key $value }}
 {{- end }}
-{{- $Attrs = trim $Attrs " " }}
+{{- $attrs = trim $attrs " " }}
 
 {{- if eq .Type "alert" -}}
-  {{- with .Attributes.class }}
-    {{- $Attrs = trim (replace $Attrs . (printf "alert alert-%s %s" $.AlertType .)) " " }}
-  {{- else }}
-    {{- $Attrs = trim (printf "class=%q %s" (printf "alert alert-%s" $.AlertType) $Attrs) " " }}
-  {{- end -}}
-  <div {{ $Attrs | safeHTMLAttr }}>
-    {{- $icon := index $icons .AlertType -}}
-    <p class="alert-title">
-      {{- dict "Src" $icon | partial "plugin/icon.html" }}
-      {{- or (T (printf "alert.%v" .AlertType)) (title .AlertType) -}}
-    </p>
-    {{- .Text | safeHTML -}}
-  </div>
+  {{- dict "Text" .Text "Type" .AlertType "Attributes" .Attributes | partial "plugin/alert.html" -}}
 {{- else -}}
-  <blockquote {{- with $Attrs }} {{ . | safeHTMLAttr }}{{ end }}>{{ .Text | safeHTML }}</blockquote>
+  <blockquote {{- with $attrs }} {{ . | safeHTMLAttr }}{{ end }}>{{ .Text | safeHTML }}</blockquote>
 {{- end -}}

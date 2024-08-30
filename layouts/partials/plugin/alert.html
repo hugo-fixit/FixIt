@@ -1,0 +1,37 @@
+{{- /*
+  This partial is used to render an alert box.
+  @param {String} .Type the type of the alert box
+  @param {String} .Text the content of the alert box
+  @param {Map} [.Attributes] the attributes of the alert box
+  @example {{- dict "Text" .Text "Type" .AlertType "Attributes" .Attributes | partial "plugin/alert.html" -}}
+*/ -}}
+
+{{- $icons := dict
+  "caution" "images/icons/alerts/stop.svg"
+  "important" "images/icons/alerts/report.svg"
+  "note" "images/icons/alerts/info.svg"
+  "tip" "images/icons/alerts/light-bulb.svg"
+  "warning" "images/icons/alerts/alert.svg"
+-}}
+
+{{- $attrs := "" }}
+{{- range $key, $value := .Attributes }}
+  {{- $attrs = printf "%s %s=%q" $attrs $key $value }}
+{{- end }}
+
+{{- with .Attributes.class }}
+  {{- $attrs = replace $attrs . (printf "alert alert-%s %s" $.Type .) }}
+{{- else }}
+  {{- $attrs = printf "class=%q %s" (printf "alert alert-%s" $.Type) $attrs }}
+{{- end }}
+{{- $attrs = trim $attrs " " -}}
+
+<div {{ $attrs | safeHTMLAttr }}>
+  {{- $icon := index $icons .Type -}}
+  <p class="alert-title">
+    {{- dict "Src" $icon | partial "plugin/icon.html" }}
+    {{- or (T (printf "alert.%v" .Type)) (title .Type) -}}
+  </p>
+  {{- .Text | safeHTML -}}
+</div>
+{{- /* EOF */ -}}

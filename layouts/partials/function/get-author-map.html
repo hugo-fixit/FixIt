@@ -1,10 +1,8 @@
 {{- /* 
-Get author in map format.
-
-@param {String|Map} . the author name or map
-@returns {Map}
-
-@example {{- $author := partial "function/get-author-map.html" .Params.author -}}
+  Get author in map format.
+  @param {String|Map} . the author name or map
+  @returns {Map}
+  @example {{- $author := partial "function/get-author-map.html" .Params.author -}}
 */ -}}
 
 {{- if not (reflect.IsMap site.Params.author) -}}
