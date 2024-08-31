@@ -4,5 +4,7 @@
 {{- printf `<%v id="%v">%v</%v>` $tag $id $content $tag | safeHTML -}}
 
 {{- $style := .Get 0 | printf "#%v{%v}" $id -}}
-{{- $styleArr := (.Page.Scratch.Get "this").styleArr | default slice -}}
-{{- $styleArr | append $style | .Page.Scratch.SetInMap "this" "styleArr" -}}
+{{- $styleArr := .Page.Store.Get "styleArr" | default slice -}}
+{{- if not (in $styleArr $style) -}}
+  {{- $styleArr | append $style | .Page.Store.Set "styleArr" -}}
+{{- end -}}

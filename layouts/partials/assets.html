@@ -260,8 +260,8 @@
   {{- dict "Source" . "Fingerprint" $fingerprint "Defer" true | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
 {{- end -}}
 
-{{- with (.Scratch.Get "this").styleArr -}}
-  {{- $content := delimit . "" -}}
+{{- with .Store.Get "styleArr" -}}
+  {{- $content := delimit . " " -}}
   {{- $path := substr (md5 $content) 0 6 | printf "css/%v" -}}
   {{- $options := printf "%v.min.css" $path | dict "targetPath" -}}
   {{- dict "Content" $content "Path" (printf "%v.scss" $path) "ToCSS" $options | dict "Scratch" $.Scratch "Data" | partial "scratch/style.html" -}}
@@ -289,7 +289,7 @@
   {{- dict "Source" . "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
 {{- end -}}
 
-{{- with (.Scratch.Get "this").scriptArr -}}
+{{- with .Store.Get "scriptArr" -}}
   {{- delimit . "\n" | dict "Content" | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
 {{- end -}}
 

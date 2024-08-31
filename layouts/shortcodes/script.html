@@ -1,2 +1,5 @@
-{{- $scriptArr := (.Page.Scratch.Get "this").scriptArr | default slice -}}
-{{- $scriptArr | append (trim (partial "function/dos2unix.html" .Inner) "\n") | .Page.Scratch.SetInMap "this" "scriptArr" -}}
+{{- $scriptArr := .Page.Store.Get "scriptArr" | default slice -}}
+{{- $content := trim (partial "function/dos2unix.html" .Inner) "\n" -}}
+{{- if not (in $scriptArr $content) -}}
+  {{- $scriptArr | append $content | .Page.Store.Set "scriptArr" -}}
+{{- end -}}
