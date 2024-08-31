@@ -262,13 +262,17 @@
 
 {{- with .Store.Get "styleArr" -}}
   {{- $content := delimit . " " -}}
-  {{- $path := substr (md5 $content) 0 6 | printf "css/%v" -}}
+  {{- $path := substr (md5 $.RelPermalink) 0 8 | printf "css/%v" -}}
   {{- $options := printf "%v.min.css" $path | dict "targetPath" -}}
   {{- dict "Content" $content "Path" (printf "%v.scss" $path) "ToCSS" $options | dict "Scratch" $.Scratch "Data" | partial "scratch/style.html" -}}
 {{- end -}}
 
 {{- /* Config script */ -}}
-{{- $config | jsonify | printf "window.config=%s;" | dict "Content" | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+{{- $configJS := $config | jsonify | printf "window.config=%s;" -}}
+{{- if hugo.IsServer -}}
+  {{- $configJS = add $configJS "console.log('Page config:', window.config);" -}}
+{{- end -}}
+{{- $configJS | dict "Content" | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
 
 {{- /* Theme script */ -}}
 {{- $options := dict "targetPath" "js/theme.min.js" "minify" hugo.IsProduction -}}
@@ -290,7 +294,9 @@
 {{- end -}}
 
 {{- with .Store.Get "scriptArr" -}}
-  {{- delimit . "\n" | dict "Content" | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
+  {{- $content := delimit . "\n" -}}
+  {{- $targetPath := substr (md5 $.RelPermalink) 0 8 | printf "js/%v.js" -}}
+  {{- dict "Content" $content "Path" $targetPath "Defer" true | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
 {{- end -}}
 
 {{- range (.Scratch.Get "this").style -}}
