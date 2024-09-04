@@ -684,7 +684,7 @@ email:
 # RSS
 rss:
   Weight: 999
-  Url: /index.xml
+  Url: index.xml
   Title: RSS
   Newtab: true
   Icon:
