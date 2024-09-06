@@ -24,13 +24,13 @@
     "server": "hugo server --source=demo --themesDir ../.. --theme $PWD -D --disableFastRender --navigateToChanged --ignoreCache",
     "server:production": "npm run server -- -e production",
     "server:docs": "hugo server --source=../fixit-docs -D --disableFastRender --navigateToChanged --ignoreCache",
-    "version": "node build/update-version.js --stage version",
+    "version": "fixit-releaser version --prod",
     "postversion": "git push && git push --tags && npm run release",
-    "release": "auto-changelog --config build/changelog/config.json",
+    "release": "fixit-releaser changelog",
     "prepare": "husky"
   },
   "devDependencies": {
-    "auto-changelog": "^2.4.0",
+    "@hugo-fixit/fixit-releaser": "^1.0.1",
     "husky": "^9.1.4"
   }
 }
