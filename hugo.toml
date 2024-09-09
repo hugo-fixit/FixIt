@@ -219,7 +219,7 @@ enableEmoji = true
     # FixIt 0.2.12 | NEW Public network security only in China (HTML format is supported)
     gov = ""
     # ICP info only in China (HTML format is supported)
-    icp = "<a href=\"https://beian.miit.gov.cn/\">豫ICP备20023182号-2</a>"
+    icp = "<a href=\"https://beian.miit.gov.cn/\">豫ICP备20023182号-2</a> | <a href=\"https://icp.gov.moe/?keyword=20243307\" target=\"_blank\">萌ICP备20243307号</a>"
     # license info (HTML format is supported)
     license = ""
     # FixIt 0.2.17 | CHANGED Site creation time
