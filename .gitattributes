@@ -1,1 +1,2 @@
 assets/lib/**/* linguist-vendored
+*.html linguist-language=go
