@@ -68,8 +68,8 @@ libFiles:
   twemojiJS: twemoji@14.0.2/dist/twemoji.min.js
   # twikoo@1.6.22 https://github.com/imaegoo/twikoo
   twikooJS: twikoo@1.6.22/dist/twikoo.all.min.js
-  # typeit@8.7.1 https://github.com/alexmacarthur/typeit
-  typeitJS: typeit@8.7.1/dist/index.umd.js
+  # typeit@8.8.4 https://github.com/alexmacarthur/typeit
+  typeitJS: typeit@8.8.4/dist/index.umd.js
   # valine@1.5.2 https://github.com/xCss/Valine
   valineJS: valine@1.5.2/dist/Valine.min.js
   # waline@2.15.8 https://github.com/walinejs/waline
