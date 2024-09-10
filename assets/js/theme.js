@@ -757,7 +757,7 @@ class FixIt {
             waitUntilVisible: true,
             loop: singleData.loop ? singleData.loop === 'true' : loop,
             afterComplete: () => {
-              const duration = Number(singleData.duration ?? vtypeitConfig.duration);
+              const duration = Number(singleData.duration ?? typeitConfig.duration);
               if (i === group.length - 1) {
                 if (duration >= 0) {
                   window.setTimeout(() => {

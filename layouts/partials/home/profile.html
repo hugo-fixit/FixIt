@@ -47,7 +47,7 @@
       {{- if $profile.typeit -}}
         <span class="d-none">{{ . }}</span>
         {{- $.Store.Set "hasTyped" true -}}
-        <span class="typeit"><template>{{ . }}</template></span>
+        <span class="typeit"><template>{{ . | safeHTML }}</template></span>
       {{- else -}}
         {{- . | safeHTML -}}
       {{- end -}}
