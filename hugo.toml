@@ -548,7 +548,7 @@ enableEmoji = true
       avatarMenu = ""
       # title shown in home page (HTML format is supported)
       title = ""
-      # subtitle shown in home page
+      # subtitle shown in home page (HTML format is supported)
       subtitle = ""
       # whether to use typeit animation for subtitle
       typeit = true

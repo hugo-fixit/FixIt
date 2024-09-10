@@ -49,7 +49,7 @@
         {{- $.Store.Set "hasTyped" true -}}
         <span class="typeit"><template>{{ . }}</template></span>
       {{- else -}}
-        {{- . -}}
+        {{- . | safeHTML -}}
       {{- end -}}
     </p>
   {{- end -}}
