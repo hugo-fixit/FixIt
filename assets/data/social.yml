@@ -665,6 +665,14 @@ tiktok:
   Icon:
     Class: fa-brands fa-tiktok
 
+# 085 Credly
+credly:
+  Weight: 85
+  Title: Credly
+  Prefix: https://www.credly.com/users/
+  Icon:
+    Class: fa-solid fa-certificate
+
 # Phone
 phone:
   Weight: 997
