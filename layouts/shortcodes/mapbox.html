@@ -1,4 +1,4 @@
-{{- $mapbox := (partial "function/params.html").mapbox | default dict -}}
+{{- $mapbox := (.Page.Params | merge .Site.Params.page).mapbox | default dict -}}
 
 {{- $lng := cond .IsNamedParams (.Get "lng") (.Get 0) -}}
 {{- $lat := cond .IsNamedParams (.Get "lat") (.Get 1) -}}
