@@ -669,7 +669,7 @@ class FixIt {
         this._mapboxArr = this._mapboxArr || [];
       }
       this.util.forEach(document.querySelectorAll('.mapbox:empty'), ($mapbox) => {
-        const { lng, lat, zoom, lightStyle, darkStyle, marked, markers, navigation, geolocate, scale, fullscreen} = JSON.parse($mapbox.dataset.options);
+        const { lng, lat, zoom, lightStyle, darkStyle, marked, markers, navigation, geolocate, scale, fullscreen } = JSON.parse($mapbox.dataset.options);
         const mapbox = new mapboxgl.Map({
           container: $mapbox,
           center: [lng, lat],

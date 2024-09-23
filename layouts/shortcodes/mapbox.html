@@ -4,7 +4,7 @@
 {{- $lat := cond .IsNamedParams (.Get "lat") (.Get 1) -}}
 {{- $zoom := cond .IsNamedParams (.Get "zoom") (.Get 2) | default 10 -}}
 {{- $marked := cond .IsNamedParams (.Get "marked") (.Get 3) | ne false -}}
-{{- $markers := .Get "markers" | default "[]" -}}
+{{- $markers := cond .IsNamedParams (.Get "markers") (.Get 6) | default "[]" -}}
 {{- $lightStyle := $mapbox.lightStyle -}}
 {{- $darkStyle := $mapbox.darkStyle -}}
 {{- $navigation := $mapbox.navigation -}}
@@ -23,15 +23,13 @@
   {{- $fullscreen = .Get "fullscreen" | ne false | and $fullscreen -}}
   {{- $width = .Get "width" | default $width -}}
   {{- $height = .Get "height" | default $height -}}
-  {{- $markers := .Get "markers" | default "[]" -}}
 {{- else -}}
-  {{- $markers := .Get 4 | default "[]" -}}
-  {{- $lightStyle = .Get 5 | default $lightStyle -}}
-  {{- $darkStyle = .Get 6 | default $darkStyle -}}
+  {{- $lightStyle = .Get 4 | default $lightStyle -}}
+  {{- $darkStyle = .Get 5 | default $darkStyle -}}
 {{- end -}}
 
 {{- $darkStyle = $darkStyle | default $lightStyle -}}
-{{- $options := dict "lng" $lng "lat" $lat "zoom" $zoom "marked" $marked "markers" ($markers)  "lightStyle" $lightStyle "darkStyle" $darkStyle "geolocate" $geolocate "navigation" $navigation "scale" $scale "fullscreen" $fullscreen -}}
+{{- $options := dict "lng" $lng "lat" $lat "zoom" $zoom "marked" $marked "markers" $markers "lightStyle" $lightStyle "darkStyle" $darkStyle "geolocate" $geolocate "navigation" $navigation "scale" $scale "fullscreen" $fullscreen -}}
 
 {{- $attrs := printf `style="width: %v; height: %v;"` $width $height -}}
 <div class="mapbox" data-options="{{ $options | jsonify }}" {{ $attrs | safeHTMLAttr }}></div>
