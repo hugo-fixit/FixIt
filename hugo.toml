@@ -825,6 +825,20 @@ enableEmoji = true
     # whether to show the full text content in feed.
     fullText = true
 
+  # FixIt 0.3.12 | NEW Custom partials config
+  # Custom partials must be stored in the /layouts/partials/ directory.
+  # Depends on open custom blocks https://fixit.lruihao.cn/references/blocks/
+  [params.customPartials]
+    head = []
+    profile = []
+    aside = []
+    comment = []
+    footer = []
+    widgets = []
+    assets = []
+    postFooterBefore = []
+    postFooterAfter = []
+
   # FixIt 0.2.15 | NEW Developer options
   # Select the scope named `public_repo` to generate personal access token,
   # Configure with environment variable `HUGO_PARAMS_GHTOKEN=xxx`, see https://gohugo.io/functions/os/getenv/#examples

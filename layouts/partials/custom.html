@@ -1,31 +1,62 @@
-{{- /*
-  To avoid upgrade conflicts and facilitate the reference of theme components,
-  it's strongly recommended to copy this file from the theme to your project and override it.
-*/ -}}
-
 {{- define "custom-head" -}}
+  {{- $ctx := . -}}
+  {{- range .Site.Params.customPartials.head -}}
+    {{- partial . $ctx -}}
+  {{- end -}}
 {{- end -}}
 
 {{- define "custom-profile" -}}
+  {{- $ctx := . -}}
+  {{- range .Site.Params.customPartials.profile -}}
+    {{- partial . $ctx -}}
+  {{- end -}}
 {{- end -}}
 
 {{- define "custom-aside" -}}
+  {{- $ctx := . -}}
+  {{- range .Site.Params.customPartials.aside -}}
+    {{- partial . $ctx -}}
+  {{- end -}}
 {{- end -}}
 
 {{- define "custom-comment" -}}
+  {{- $ctx := . -}}
+  {{- range .Site.Params.customPartials.comment -}}
+    {{- partial . $ctx -}}
+  {{- end -}}
 {{- end -}}
 
 {{- define "custom-footer" -}}
+  {{- $ctx := . -}}
+  {{- range .Site.Params.customPartials.footer -}}
+    {{- partial . $ctx -}}
+  {{- end -}}
 {{- end -}}
 
 {{- define "custom-widgets" -}}
+  {{- $ctx := . -}}
+  {{- range .Site.Params.customPartials.widgets -}}
+    {{- partial . $ctx -}}
+  {{- end -}}
 {{- end -}}
 
 {{- define "custom-assets" -}}
+  {{- $ctx := . -}}
+  {{- range .Site.Params.customPartials.assets -}}
+    {{- partial . $ctx -}}
+  {{- end -}}
 {{- end -}}
 
 {{- define "custom-post__footer:before" -}}
+  {{- $ctx := . -}}
+  {{- range .Site.Params.customPartials.postFooterBefore -}}
+    {{- partial . $ctx -}}
+  {{- end -}}
 {{- end -}}
 
 {{- define "custom-post__footer:after" -}}
+  {{- $ctx := . -}}
+  {{- range .Site.Params.customPartials.postFooterAfter -}}
+    {{- partial . $ctx -}}
+  {{- end -}}
 {{- end -}}
