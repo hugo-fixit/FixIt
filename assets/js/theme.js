@@ -3,7 +3,7 @@ import Util from './util';
 class FixIt {
   constructor() {
     this.config = window.config;
-    this.isDark = document.body.dataset.theme === 'dark';
+    this.isDark = document.documentElement.dataset.theme === 'dark';
     this.util = new Util();
     this.newScrollTop = this.util.getScrollTop();
     this.oldScrollTop = this.newScrollTop;
@@ -89,7 +89,7 @@ class FixIt {
   initSwitchTheme() {
     this.util.forEach(document.getElementsByClassName('theme-switch'), ($themeSwitch) => {
       $themeSwitch.addEventListener('click', () => {
-        document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = this.isDark ? 'light' : 'dark';
         this.isDark = !this.isDark;
         window.localStorage?.setItem('theme', this.isDark ? 'dark' : 'light');
         for (let event of this.switchThemeEventSet) {

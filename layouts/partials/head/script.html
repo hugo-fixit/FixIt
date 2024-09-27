@@ -1,0 +1,9 @@
+{{- $fingerprint := .Scratch.Get "fingerprint" -}}
+
+{{- /* Check theme isDark before body rendering */ -}}
+{{- $options := dict "targetPath" "js/head/color-scheme.min.js" "minify" hugo.IsProduction -}}
+{{- $options := dict "defaultTheme" .Site.Params.defaulttheme | dict "params" | merge $options -}}
+{{- if not hugo.IsProduction -}}
+  {{- $options = dict "sourceMap" "external" | merge $options -}}
+{{- end -}}
+{{- dict "Source" (resources.Get "js/head/color-scheme.js") "Build" $options "Fingerprint" $fingerprint | partial "plugin/script.html" -}}

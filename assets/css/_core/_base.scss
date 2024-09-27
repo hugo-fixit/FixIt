@@ -30,7 +30,7 @@ body {
   color: $global-font-color;
   @include overflow-wrap(break-word);
 
-  &[data-theme='dark'] {
+  [data-theme='dark'] & {
     color: $global-font-color-dark;
     background-color: $global-background-color-dark;
   }
