@@ -1,5 +1,6 @@
 {{- /* Read the config and format */ -}}
 {{- $params := .Page.Params | merge site.Params.page -}}
+{{- $ordered := $params.toc.ordered | and -}}
 {{- $h1Format := $params.heading.number.format.h1 | default "{title}" -}}
 {{- $h2Format := $params.heading.number.format.h2 | default "{h2} {title}" -}}
 {{- $h3Format := $params.heading.number.format.h3 | default "{h2}.{h3} {title}" -}}
@@ -7,7 +8,7 @@
 {{- $h5Format := $params.heading.number.format.h5 | default "{h2}.{h3}.{h4}.{h5} {title}" -}}
 {{- $h6Format := $params.heading.number.format.h6 | default "{h2}.{h3}.{h4}.{h5}.{h6} {title}" -}}
 
-{{- if $params.heading.number.enable -}}
+{{- if $ordered -}}
   {{- /* Set the count for child level to 0 */ -}}
   {{- .Page.Scratch.SetInMap "heading-counter" (string (add .Level 1)) 0 -}}
 {{- end -}}
@@ -16,7 +17,7 @@
   {{- $title := .Text -}}
   {{- /* Only enable in main section pages */ -}}
   {{- $onlyMainSection := cond $params.heading.number.onlyMainSection (eq .Page.Type "posts") true -}}
-  {{- if $params.heading.number.enable | and $onlyMainSection -}}
+  {{- if $ordered | and $onlyMainSection -}}
     {{- /* Add 1 to the current level */ -}}
     {{- $headingMap := .Page.Scratch.Get "heading-counter" -}}
     {{- $count := (string .Level) | index $headingMap | int | add 1 -}}
