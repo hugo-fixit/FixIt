@@ -7,7 +7,7 @@
   {{- $title := title .Title -}}
   {{- $params := partial "function/params.html" -}}
   {{- $toc := .Scratch.Get "toc" -}}
-  {{- $tocEmpty := eq .TableOfContents `<nav id="TableOfContents"></nav>` -}}
+  {{- $showToc := $toc.enable | and (gt (len .Fragments.Headings) 0) -}}
 
   <aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="{{ T "collections" }}">
     {{- /* Collection List */ -}}
@@ -146,14 +146,15 @@
     {{- end -}}
 
     {{- /* Static TOC */ -}}
-    {{- if (ne $toc.enable false) | and (ne $tocEmpty true) -}}
+    {{- if $showToc -}}
+      {{- $tableOfContents := .Fragments.ToHTML ($toc.startLevel | int) ($toc.endLevel | int) ($toc.ordered | default false) -}}
       <div class="details toc{{ with $params.password }} encrypted-hidden{{ end }}" id="toc-static" data-kept="{{ if $toc.keepStatic }}true{{ else }}false{{ end }}">
         <div class="details-summary toc-title">
           <span>{{ T "single.contents" }}</span>
           <span>{{ dict "Class" "details-icon fa-solid fa-angle-right" | partial "plugin/icon.html" }}</span>
         </div>
         <div class="details-content toc-content" id="toc-content-static">
-          {{- dict "Content" .TableOfContents "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+          {{- dict "Content" $tableOfContents "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
         </div>
       </div>
     {{- end -}}
@@ -203,7 +204,7 @@
 
   <aside class="toc" id="toc-auto" aria-label="{{ T "single.contents" }}">
     {{- /* Auto TOC */ -}}
-    {{- if (ne $toc.enable false) | and (ne $tocEmpty true) -}}
+    {{- if $showToc -}}
       <h2 class="toc-title{{ with $params.password }} encrypted-hidden{{ end }}">
         {{- T "single.contents" -}}&nbsp;
         {{- dict "Class" "toc-icon fa-solid fa-angle-down fa-fw" | partial "plugin/icon.html" -}}

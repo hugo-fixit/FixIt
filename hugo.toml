@@ -189,11 +189,6 @@ enableEmoji = true
       # whether to use HTML tags directly in the document
       unsafe = true
       xhtml = false
-  # Table Of Contents settings
-  [markup.tableOfContents]
-    ordered = false
-    startLevel = 2
-    endLevel = 6
 
 # -------------------------------------------------------------------------------------
 # Sitemap Configuration
@@ -913,6 +908,10 @@ enableEmoji = true
       auto = true
       # FixIt 0.2.13 | NEW position of TOC ["left", "right"]
       position = "right"
+      # FixIt 0.3.12 | NEW supersede `markup.tableOfContents` settings
+      ordered = false
+      startLevel = 2
+      endLevel = 6
     # FixIt 0.2.13 | NEW Display a message at the beginning of an article to warn the reader that its content might be expired
     [params.page.expirationReminder]
       enable = false
@@ -926,7 +925,7 @@ enableEmoji = true
     [params.page.heading]
       # FixIt 0.3.3 | NEW whether to capitalize automatic text of headings
       capitalize = false
-      # used with `markup.tableOfContents.ordered` parameter
+      # FixIt 0.3.12 | CHANGED must set `params.page.toc.ordered` to true
       [params.page.heading.number]
         # whether to enable auto heading numbering
         enable = false
