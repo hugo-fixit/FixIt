@@ -7,7 +7,8 @@
   {{- $title := title .Title -}}
   {{- $params := partial "function/params.html" -}}
   {{- $toc := .Scratch.Get "toc" -}}
-  {{- $showToc := $toc.enable | and (gt (len .Fragments.Headings) 0) -}}
+  {{- $tableOfContents := .Fragments.ToHTML ($toc.startLevel | int) ($toc.endLevel | int) ($toc.ordered | default false) -}}
+  {{- $showToc := $toc.enable | and (ne $tableOfContents `<nav id="TableOfContents"></nav>`) -}}
 
   <aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="{{ T "collections" }}">
     {{- /* Collection List */ -}}
@@ -147,7 +148,6 @@
 
     {{- /* Static TOC */ -}}
     {{- if $showToc -}}
-      {{- $tableOfContents := .Fragments.ToHTML ($toc.startLevel | int) ($toc.endLevel | int) ($toc.ordered | default false) -}}
       <div class="details toc{{ with $params.password }} encrypted-hidden{{ end }}" id="toc-static" data-kept="{{ if $toc.keepStatic }}true{{ else }}false{{ end }}">
         <div class="details-summary toc-title">
           <span>{{ T "single.contents" }}</span>
