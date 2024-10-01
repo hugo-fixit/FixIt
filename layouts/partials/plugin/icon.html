@@ -7,7 +7,7 @@
     {{- $src = printf "%v/%v.svg" $prefix . -}}
   {{- end -}}
 
-  {{ if not $src }}
+  {{- if not $src -}}
     {{- errorf "Icon src is missing" -}}
   {{- end -}}
 

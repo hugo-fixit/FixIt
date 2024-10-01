@@ -1,4 +1,5 @@
 {{- if (gt (len .Ancestors.Reverse) 1) | and (eq .Site.Params.breadcrumb.enable true) -}}
+  {{- $separator := .Site.Params.breadcrumb.separator | default "/" -}}
   <nav aria-label="breadcrumb" class="breadcrumb-container{{ if .Site.Params.breadcrumb.sticky }} sticky{{ end }}">
     <ol class="breadcrumb">
       {{- range .Ancestors.Reverse -}}
@@ -20,13 +21,16 @@
         {{- if .IsHome -}}
           {{- $innerText = T "single.home" -}}
         {{- else -}}
-          {{- $innerText = ((T (add .TranslationKey ".breadcrumbTitle")) | default (lower .LinkTitle | T) | default .LinkTitle) | title -}}
+          {{- $innerText = (T (add .TranslationKey ".breadcrumbTitle")) | default (lower .LinkTitle | T) | default .LinkTitle -}}
+          {{- $innerText = cond (.Param "breadcrumb.capitalize") (title $innerText) $innerText -}}
         {{- end -}}
 
-        <li class="breadcrumb-item"><a href="{{ .RelPermalink }}" title="{{ $title }}">{{ $innerText }}</a></li>
+        <li class="breadcrumb-item" data-separator="{{ $separator }}"><a href="{{ .RelPermalink }}" title="{{ $title }}">{{ $innerText }}</a></li>
       {{- end -}}
 
-      <li class="breadcrumb-item active" aria-current="page">{{ (T (add .TranslationKey ".breadcrumbTitle")) | default (lower .LinkTitle | T) | default .LinkTitle | title }}</li>
+      {{- $currentText := (T (add .TranslationKey ".breadcrumbTitle")) | default (lower .LinkTitle | T) | default .LinkTitle -}}
+      {{- $currentText = cond (.Param "breadcrumb.capitalize") (title $currentText) $currentText -}}
+      <li class="breadcrumb-item active" data-separator="{{ $separator }}" aria-current="page">{{ $currentText }}</li>
     </ol>
   </nav>
 {{- end -}}

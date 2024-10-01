@@ -18,13 +18,14 @@
       <div class="details-content collection-content">
         <nav>
           <ul class="collection-list">
-            {{- range $key, $value := $pages -}}
-              {{- $title := title $value.LinkTitle -}}
-              {{- if $value.LinkTitle | eq $.LinkTitle -}}
+            {{- range $key, $page := $pages -}}
+              {{- /* whether to capitalize the title, consistent with breadcrumb */ -}}
+              {{- $title := cond ($page.Param "breadcrumb.capitalize") (title $page.LinkTitle) $page.LinkTitle -}}
+              {{- if $page.LinkTitle | eq $.LinkTitle -}}
                 {{- $currentKey = $key -}}
                 <li class="collection-item"><span class="active" title="{{ $title }}">{{ $title }}</span></li>
               {{- else }}
-                <li class="collection-item"><a href="{{ $value.RelPermalink }}" title="{{ $title }}">{{ $title }}</a></li>
+                <li class="collection-item"><a href="{{ $page.RelPermalink }}" title="{{ $title }}">{{ $title }}</a></li>
               {{- end }}
             {{- end -}}
           </ul>

@@ -29,7 +29,7 @@
     {{- end -}}
     {{- if 
       (.ExternalIcon | default false) 
-      | and $external | and (eq (hasPrefix .Content `<img` ) false)
+      | and $external | and (eq (hasPrefix .Content `<img`) false)
       | and (eq ((strings.HasSuffix .Content `</i>`) | or (strings.HasSuffix .Content `):`)) false)
     -}}
       {{- if .Download -}}

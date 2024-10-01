@@ -30,8 +30,8 @@
     .breadcrumb-item {
       display: flex;
 
-      +.breadcrumb-item::before {
-        content: "/";
+      + .breadcrumb-item::before {
+        content: attr(data-separator);
         display: inline-block;
         padding-inline: 0.5rem;
         color: $global-font-secondary-color;
