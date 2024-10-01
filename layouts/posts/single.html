@@ -21,7 +21,7 @@
     {{- block "custom-aside" . }}{{ end -}}
   </aside>
 
-  <article class="page single">
+  <article class="page single"{{ with .Params.fromAdapters }} data-adapters="{{ . }}"{{ end }}>
     <div class="header">
       {{- /* Title */ -}}
       <h1 class="single-title animate__animated animate__flipInX">
