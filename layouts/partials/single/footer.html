@@ -54,13 +54,14 @@
           {{- end -}}
           {{- if $params.LinkToSource | and $gitRepo -}}
             {{- $link := replace $blobURL "{path}" $.File.Path -}}
-            {{- $sourceURL = add $link "?plain=1" -}}
+            {{- $sourceURL = $params.sourceURL | default (add $link "?plain=1") -}}
             {{- $options := dict "Class" "link-to-source" "Destination" $sourceURL "Title" (T "single.viewSource") "Content" (T "single.viewSource") "externalIcon" false -}}
             {{- $linkOptions = $linkOptions | append $options -}}
           {{- end -}}
           {{- if $params.LinkToEdit | and $gitRepo -}}
             {{- $link := replace $editURL "{path}" $.File.Path -}}
-            {{- $options := dict "Class" "link-to-edit" "Destination" $link "Title" (T "single.editThisPage") "Content" (T "single.editThisPage") "externalIcon" false -}}
+            {{- $editURL = $params.editURL | default $link -}}
+            {{- $options := dict "Class" "link-to-edit" "Destination" $editURL "Title" (T "single.editThisPage") "Content" (T "single.editThisPage") "externalIcon" false -}}
             {{- $linkOptions = $linkOptions | append $options -}}
           {{- end -}}
           {{- if $params.LinkToReport | and $gitRepo -}}
