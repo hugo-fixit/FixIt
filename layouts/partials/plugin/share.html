@@ -1,7 +1,7 @@
 {{- $share := (partial "function/params.html").share | default dict -}}
 
 {{- if $share.enable -}}
-  {{- $title := title .Title -}}
+  {{- $title := cond (.Param "capitalizeTitles") (title .Title) .Title -}}
   {{- /* 001: Twitter */ -}}
   {{- if $share.Twitter -}}
     <a href="javascript:void(0);" title="{{ T `shareOn` }} X" data-sharer="twitter" data-url="{{ .Permalink }}" data-title="{{ $title }}"{{ with .Site.Params.Social.Twitter }} data-via="{{ . }}"{{ end }}{{ with .Params.tags }} data-hashtags="{{ delimit . `,` }}"{{ end }}>

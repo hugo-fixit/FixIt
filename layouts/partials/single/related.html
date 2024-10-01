@@ -15,7 +15,7 @@
     <h2 id="see-also">{{ T "single.relatedContent" }}</h2>
     <ul>
       {{- range $i, $p := . -}}
-        {{- $title := title .LinkTitle -}}
+        {{- $title := cond (.Param "capitalizeTitles") (title .LinkTitle) .LinkTitle -}}
         <li>
           <a href="{{ .RelPermalink }}" title="{{ $title }}">{{ $title }}</a>
           {{- with .HeadingsFiltered -}}

@@ -19,8 +19,8 @@
         <nav>
           <ul class="collection-list">
             {{- range $key, $page := $pages -}}
-              {{- /* whether to capitalize the title, consistent with breadcrumb */ -}}
-              {{- $title := cond ($page.Param "breadcrumb.capitalize") (title $page.LinkTitle) $page.LinkTitle -}}
+              {{- $capitalizeTitles := $page.Param "capitalizeTitles" -}}
+              {{- $title := cond $capitalizeTitles (title $page.LinkTitle) $page.LinkTitle -}}
               {{- if $page.LinkTitle | eq $.LinkTitle -}}
                 {{- $currentKey = $key -}}
                 <li class="collection-item"><span class="active" title="{{ $title }}">{{ $title }}</span></li>
@@ -31,7 +31,8 @@
           </ul>
           <div class="collection-nav-simple">
             {{- with $pages.Next $ -}}
-              <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ title .LinkTitle }}">
+              {{- $capitalizeTitles := .Param "capitalizeTitles" -}}
+              <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ cond $capitalizeTitles (title .LinkTitle) .LinkTitle }}">
                 {{- dict "Class" "fa-solid fa-angle-left fa-fw" | partial "plugin/icon.html" -}}
               </a>
             {{- else -}}
@@ -39,7 +40,8 @@
             {{- end -}}
             <span class="text-secondary">{{ add $currentKey 1 }}/{{ $pages.Len }}</span>
             {{- with $pages.Prev $ -}}
-              <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ title .LinkTitle }}">
+              {{- $capitalizeTitles := .Param "capitalizeTitles" -}}
+              <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ cond $capitalizeTitles (title .LinkTitle) .LinkTitle }}">
                 {{- dict "Class" "fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
               </a>
             {{- else -}}

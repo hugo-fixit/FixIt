@@ -8,10 +8,11 @@
         {{- end -}}
 
         {{- $title := "" -}}
+        {{- $capitalizeTitles := .Param "capitalizeTitles" -}}
         {{- with .Description -}}
           {{- $title = . -}}
         {{- else -}}
-          {{- $title = title .LinkTitle -}}
+          {{- $title = cond $capitalizeTitles (title .LinkTitle) .LinkTitle -}}
           {{- if .IsPage | and .Summary -}}
             {{- $title = .Summary -}}
           {{- end -}}
@@ -22,14 +23,14 @@
           {{- $innerText = T "single.home" -}}
         {{- else -}}
           {{- $innerText = (T (add .TranslationKey ".breadcrumbTitle")) | default (lower .LinkTitle | T) | default .LinkTitle -}}
-          {{- $innerText = cond (.Param "breadcrumb.capitalize") (title $innerText) $innerText -}}
+          {{- $innerText = cond ((.Param "breadcrumb.capitalize") | and $capitalizeTitles) (title $innerText) $innerText -}}
         {{- end -}}
 
         <li class="breadcrumb-item" data-separator="{{ $separator }}"><a href="{{ .RelPermalink }}" title="{{ $title }}">{{ $innerText }}</a></li>
       {{- end -}}
 
       {{- $currentText := (T (add .TranslationKey ".breadcrumbTitle")) | default (lower .LinkTitle | T) | default .LinkTitle -}}
-      {{- $currentText = cond (.Param "breadcrumb.capitalize") (title $currentText) $currentText -}}
+      {{- $currentText = cond ((.Param "breadcrumb.capitalize") | and (.Param "capitalizeTitles")) (title $currentText) $currentText -}}
       <li class="breadcrumb-item active" data-separator="{{ $separator }}" aria-current="page">{{ $currentText }}</li>
     </ol>
   </nav>

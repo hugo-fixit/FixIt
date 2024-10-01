@@ -329,6 +329,8 @@ enableEmoji = true
   enablePWA = false
   # FixIt 0.2.14 | NEW whether to add external Icon for external links automatically
   externalIcon = false
+  # FixIt 0.3.13 | NEW whether to capitalize titles
+  capitalizeTitles = true
   # FixIt 0.3.0 | NEW whether to add site title to the title of every page
   # remember to set up your site title in `hugo.toml` (e.g. title = "title")
   withSiteTitle = true
@@ -441,7 +443,7 @@ enableEmoji = true
     showHome = false
     # FixIt 0.3.13 | NEW
     separator = "/"
-    capitalize = false
+    capitalize = true
 
   # FixIt 0.3.10 | NEW Post navigation config
   [params.navigation]

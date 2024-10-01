@@ -20,7 +20,7 @@
               {{- if eq $repost.enable true -}}
                 {{- dict "Class" "fa-solid fa-share fa-fw text-success me-1" | partial "plugin/icon.html" -}}
               {{- end -}}
-              {{- title .LinkTitle -}}
+              {{- cond (.Param "capitalizeTitles") (title .LinkTitle) .LinkTitle -}}
             </a>
           </article>
         {{- end -}}

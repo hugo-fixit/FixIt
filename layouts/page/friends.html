@@ -1,5 +1,5 @@
 {{- define "title" -}}
-  {{- title .Title -}}
+  {{- cond (.Param "capitalizeTitles") (title .Title) .Title -}}
   {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
 {{- end -}}
 
@@ -8,7 +8,7 @@
   <article class="page single special friends">
     <div class="header">
       {{- /* Title */ -}}
-      <h1 class="single-title animate__animated animate__pulse animate__faster">{{- title .Title -}}</h1>
+      <h1 class="single-title animate__animated animate__pulse animate__faster">{{- cond (.Param "capitalizeTitles") (title .Title) .Title -}}</h1>
       {{- /* Subtitle */ -}}
       {{- with $params.subtitle -}}<p class="single-subtitle animate__animated animate__fadeIn">{{ . }}</p>{{- end -}}
     </div>

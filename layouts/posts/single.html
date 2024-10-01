@@ -1,10 +1,10 @@
 {{- define "title" -}}
-  {{- title .Title -}}
+  {{- cond (.Param "capitalizeTitles") (title .Title) .Title -}}
   {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
 {{- end -}}
 
 {{- define "content" -}}
-  {{- $title := title .Title -}}
+  {{- $title := cond (.Param "capitalizeTitles") (title .Title) .Title -}}
   {{- $params := partial "function/params.html" -}}
   {{- $toc := .Scratch.Get "toc" -}}
   {{- $tableOfContents := .Fragments.ToHTML ($toc.startLevel | int) ($toc.endLevel | int) ($toc.ordered | default false) -}}

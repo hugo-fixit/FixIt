@@ -1,6 +1,6 @@
 {{- $params := partial "function/params.html" -}}
 {{- $author := .Store.Get "author" -}}
-# {{ title .Title }}
+# {{ cond (.Param "capitalizeTitles") (title .Title) .Title }}
 
 {{ if $params.password -}}
   _**{{ T "single.encryptedAbstract" }}**_

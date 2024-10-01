@@ -115,14 +115,16 @@
       {{- $next = $pages.Prev . -}}
     {{- end -}}
     {{- with $prev -}}
-      <a href="{{ .RelPermalink }}" class="post-nav-item" rel="prev" title="{{ title .LinkTitle }}">
+      {{- $capitalizeTitles := .Param "capitalizeTitles" -}}
+      <a href="{{ .RelPermalink }}" class="post-nav-item" rel="prev" title="{{ cond $capitalizeTitles (title .LinkTitle) .LinkTitle }}">
         {{- dict "Class" "fa-solid fa-angle-left fa-fw" | partial "plugin/icon.html" -}}
-        {{- title .LinkTitle -}}
+        {{- cond $capitalizeTitles (title .LinkTitle) .LinkTitle -}}
       </a>
     {{- end -}}
     {{ with $next }}
-      <a href="{{ .RelPermalink }}" class="post-nav-item" rel="next" title="{{ title .LinkTitle }}">
-        {{- title .LinkTitle -}}
+      {{- $capitalizeTitles := .Param "capitalizeTitles" -}}
+      <a href="{{ .RelPermalink }}" class="post-nav-item" rel="next" title="{{ cond $capitalizeTitles (title .LinkTitle) .LinkTitle }}">
+        {{- cond $capitalizeTitles (title .LinkTitle) .LinkTitle -}}
         {{- dict "Class" "fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
       </a>
     {{- end -}}
