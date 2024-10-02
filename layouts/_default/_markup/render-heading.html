@@ -1,6 +1,11 @@
 {{- /* Read the config and format */ -}}
 {{- $params := .Page.Params | merge site.Params.page -}}
-{{- $ordered := $params.toc.ordered | and $params.heading.number.enable -}}
+{{- /* Toc data patch */ -}}
+{{- $toc := $params.toc -}}
+{{- if not (reflect.IsMap $toc) -}}
+  {{- $toc = dict "enable" $toc | merge site.Params.page.toc -}}
+{{- end -}}
+{{- $ordered := $toc.ordered | and $params.heading.number.enable -}}
 {{- $h1Format := $params.heading.number.format.h1 | default "{title}" -}}
 {{- $h2Format := $params.heading.number.format.h2 | default "{h2} {title}" -}}
 {{- $h3Format := $params.heading.number.format.h3 | default "{h2}.{h3} {title}" -}}

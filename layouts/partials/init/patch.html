@@ -3,10 +3,8 @@
 
 {{- /* Toc data patch */ -}}
 {{- $toc := $params.toc -}}
-{{- if eq $toc true -}}
-  {{- $toc = dict "enable" true | merge .Site.Params.page.toc -}}
-{{- else if eq $toc false -}}
-  {{- $toc = dict "enable" false | merge .Site.Params.page.toc -}}
+{{- if not (reflect.IsMap $toc) -}}
+  {{- $toc = dict "enable" $toc | merge .Site.Params.page.toc -}}
 {{- end -}}
 {{- .Scratch.Set "toc" $toc -}}
 
