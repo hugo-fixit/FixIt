@@ -41,7 +41,7 @@
       </h1>
 
       {{- /* Subtitle */ -}}
-      {{- with $params.subtitle -}}<p class="single-subtitle animate__animated animate__fadeIn">{{ . }}</p>{{- end -}}
+      {{- with $params.subtitle -}}<p class="single-subtitle animate__animated animate__fadeIn">{{ . | $.RenderString }}</p>{{- end -}}
     </div>
 
     {{- /* Meta */ -}}
