@@ -422,6 +422,16 @@
         margin-block: 1em;
         padding-left: 1rem;
       }
+      
+      hr {
+        background-color: var(--#{$prefix}hr-background-color);
+        height: 1px;
+        margin-block: 1em;
+      }
+
+      code {
+        font-size: 0.75rem;
+      }
 
       a:not(.footnote-backref) {
         color: inherit;
@@ -441,14 +451,6 @@
 
     hr {
       margin-block: 0;
-    }
-
-    .footnotes {
-      hr {
-        background-color: var(--#{$prefix}hr-background-color);
-        height: 1px;
-        margin-block: 1em;
-      }
     }
 
     kbd {
