@@ -1,0 +1,29 @@
+{{- if .AlertTitle -}}
+  {{- /* The extended syntax is compatible with Obsidian and FixIt admonition shortcode. */ -}}
+  {{- /* === Dirty hack === */ -}}
+  {{- $title := .AlertTitle -}}
+  {{- if ne .AlertTitle (.AlertTitle | plainify) -}}
+    {{- /* BUG of Hugo https://github.com/gohugoio/hugo/issues/12913 */ -}}
+    {{- $title = add .AlertTitle ">" -}}
+  {{- end -}}
+  {{- /* === Dirty hack === */ -}}
+  {{- $openMap := dict "+" true "-" false -}}
+  {{- $open := index $openMap .AlertSign | default true -}}
+  {{- $foldable := ne .AlertSign "" -}}
+  {{- dict
+    "Type" .AlertType
+    "Title" $title
+    "Open" $open
+    "Text" .Text
+    "Foldable" $foldable
+    | partial "plugin/admonition.html"
+  -}}
+{{- else -}}
+  {{- /* The basic syntax is compatible with GitHub, Obsidian, and Typora. */ -}}
+  {{- dict
+    "Type" .AlertType
+    "Text" .Text
+    "Attributes" .Attributes
+    | partial "plugin/alert.html"
+  -}}
+{{- end -}}

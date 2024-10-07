@@ -1,41 +1,12 @@
+{{- $type := cond .IsNamedParams (.Get "type") (.Get 0) -}}
+{{- $title := cond .IsNamedParams (.Get "title") (.Get 1) | .Page.RenderString -}}
+{{- $open := cond .IsNamedParams (.Get "open") (.Get 2) -}}
 {{- $inner := .Inner | .Page.RenderString -}}
 
-{{- $iconMap := dict "note" "fa-solid fa-pencil-alt fa-fw" -}}
-{{- $iconMap  = dict "abstract" "fa-solid fa-list-ul fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "info" "fa-solid fa-info-circle fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "tip" "fa-solid fa-lightbulb fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "success" "fa-solid fa-check-circle fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "question" "fa-solid fa-question-circle fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "warning" "fa-solid fa-exclamation-triangle fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "failure" "fa-solid fa-times-circle fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "danger" "fa-solid fa-skull-crossbones fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "bug" "fa-solid fa-bug fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "example" "fa-solid fa-list-ol fa-fw" | merge $iconMap -}}
-{{- $iconMap  = dict "quote" "fa-solid fa-quote-right fa-fw" | merge $iconMap -}}
-{{- $iconDetails := "fa-solid fa-angle-right fa-fw" -}}
-
-{{- if .IsNamedParams -}}
-  {{- $type := .Get "type" | default "note" -}}
-  <div class="details admonition {{ $type }}{{ if .Get `open` | ne false }} open{{ end }}">
-    <div class="details-summary admonition-title">
-      <i class="icon {{ index $iconMap $type | default (index $iconMap "note") }}" aria-hidden="true"></i>{{ .Get "title" | .Page.RenderString | default (T (printf "admonition.%v" $type)) }}<i class="details-icon {{ $iconDetails }}" aria-hidden="true"></i>
-    </div>
-    <div class="details-content">
-      <div class="admonition-content">
-        {{- $inner -}}
-      </div>
-    </div>
-  </div>
-{{- else -}}
-  {{- $type := .Get 0 | default "note" -}}
-  <div class="details admonition {{ $type }}{{ if .Get 2 | ne false }} open{{ end }}">
-    <div class="details-summary admonition-title">
-      <i class="icon {{ index $iconMap $type | default (index $iconMap "note") }}" aria-hidden="true"></i>{{ .Get 1 | .Page.RenderString | default (T (printf "admonition.%v" $type)) }}<i class="details-icon {{ $iconDetails }}" aria-hidden="true"></i>
-    </div>
-    <div class="details-content">
-      <div class="admonition-content">
-        {{- $inner -}}
-      </div>
-    </div>
-  </div>
-{{- end -}}
+{{- dict
+  "Type" $type
+  "Title" $title
+  "Open" $open
+  "Text" $inner
+  | partial "plugin/admonition.html"
+-}}

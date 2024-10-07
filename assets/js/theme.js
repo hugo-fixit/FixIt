@@ -334,7 +334,7 @@ class FixIt {
   }
 
   initDetails(target = document) {
-    this.util.forEach(target.getElementsByClassName('details'), ($details) => {
+    this.util.forEach(target.querySelectorAll('.details:not(.disabled)'), ($details) => {
       const $summary = $details.querySelector('.details-summary');
       $summary.addEventListener('click', () => {
         $details.classList.toggle('open');

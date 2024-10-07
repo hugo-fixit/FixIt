@@ -16,6 +16,19 @@
 
   .admonition-content {
     padding: 0.5rem 0;
+    
+    // for extended alert syntax
+    > p {
+      margin: 0;
+    }
+    // title-only alert
+    &:empty {
+      display: none;
+    }
+    // BUG of Hugo https://github.com/gohugoio/hugo/issues/12913
+    &:has(> p:only-child:empty) {
+      display: none;
+    }
   }
 
   i.icon {
@@ -36,17 +49,17 @@
       background-color: $background-color;
       border-left-color: $color;
 
-      .admonition-title {
+      > .admonition-title {
         border-bottom-color: $background-color;
         background-color: opacify($background-color, 0.15);
+
+        i.icon {
+          color: $color;
+        }
       }
 
-      &.open .admonition-title {
+      &.open > .admonition-title {
         background-color: $background-color;
-      }
-
-      i.icon {
-        color: $color;
       }
     }
     
@@ -55,17 +68,17 @@
         background-color: $background-color;
         border-left-color: $color;
 
-        .admonition-title {
+        > .admonition-title {
           border-bottom-color: $background-color;
           background-color: opacify($background-color, 0.15);
+
+          i.icon {
+            color: $color;
+          }
         }
 
-        &.open .admonition-title {
+        &.open > .admonition-title {
           background-color: $background-color;
-        }
-
-        i.icon {
-          color: $color;
         }
       }
     }
