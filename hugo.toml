@@ -135,7 +135,7 @@ enableEmoji = true
 [module]
   [module.hugoVersion]
     extended = true
-    min = "0.134.0"
+    min = "0.134.1"
 
 # -------------------------------------------------------------------------------------
 # Markup related configuration in Hugo
@@ -678,6 +678,12 @@ enableEmoji = true
   [params.mermaid]
     # For values, see https://mermaid.js.org/config/theming.html#available-themes
     themes = ["default", "dark"]
+
+  # FixIt 0.3.13 | NEW Admonitions custom config
+  # See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/admonition/#custom-admonitions
+  # syntax: <type> = <icon>
+  [params.admonition]
+    # ban = "fa-solid fa-ban"
 
   # FixIt 0.2.12 | NEW PanguJS config
   [params.pangu]

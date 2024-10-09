@@ -1,16 +1,46 @@
-// Color map of alert [$type $border-color $color, ... ]
-$alert-color-map:
-  'note' #0969da #0969da,
-  'tip' #1a7f37 #1a7f37,
-  'important' #8250df #8250df,
-  'warning' #bf8700 #9a6700,
-  'caution' #cf222e #d1242f,
-  !default;
+// Color map of basic alerts
+$alert-color-map: (
+  note: (
+    border-color: #0969da,
+    color: #0969da,
+  ),
+  tip: (
+    border-color: #1a7f37,
+    color: #1a7f37,
+  ),
+  important: (
+    border-color: #8250df,
+    color: #8250df,
+  ),
+  warning: (
+    border-color: #bf8700,
+    color: #9a6700,
+  ),
+  caution: (
+    border-color: #cf222e,
+    color: #d1242f,
+  ),
+) !default;
 
-$alert-color-map-dark:
-  'note' #316dca #478be6,
-  'tip' #347d39 #57ab5a,
-  'important' #8256d0 #986ee2,
-  'warning' #966600 #c69026,
-  'caution' #c93c37 #e5534b,
-  !default;
+$alert-color-map-dark: (
+  note: (
+    border-color: #316dca,
+    color: #478be6,
+  ),
+  tip: (
+    border-color: #347d39,
+    color: #57ab5a,
+  ),
+  important: (
+    border-color: #8256d0,
+    color: #986ee2,
+  ),
+  warning: (
+    border-color: #966600,
+    color: #c69026,
+  ),
+  caution: (
+    border-color: #c93c37,
+    color: #e5534b,
+  ),
+) !default;

@@ -26,18 +26,18 @@
     }
   }
 
-  @each $type, $border-color, $color in $alert-color-map {
+  @each $type, $item in $alert-color-map {
     &.alert-#{$type} {
-      --#{$prefix}alert-border-color: #{$border-color};
-      --#{$prefix}alert-color: #{$color};
+      --#{$prefix}alert-border-color: #{map-get($item, border-color)};
+      --#{$prefix}alert-color: #{map-get($item, color)};
     }
   }
 
   [data-theme='dark'] & {
-    @each $type, $border-color, $color in $alert-color-map-dark {
+    @each $type, $item in $alert-color-map-dark {
       &.alert-#{$type} {
-        --#{$prefix}alert-border-color: #{$border-color};
-        --#{$prefix}alert-color: #{$color};
+        --#{$prefix}alert-border-color: #{map-get($item, border-color)};
+        --#{$prefix}alert-color: #{map-get($item, color)};
       }
     }
   }

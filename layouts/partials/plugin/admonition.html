@@ -6,7 +6,7 @@
   * @param {String} [.Title] the title of the admonition box
   * @param {Boolean} [.Open] whether the admonition box is open, default is true
   * @param {Boolean} [.Foldable] whether the admonition box is foldable, default is true
-  * TODO support customize admonitions by any .AlertType (add params to config iconMap)
+  * For custom admonitions, see https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/admonition/#customize-admonitions
 */ -}}
 
 {{- $iconMap := dict
@@ -24,6 +24,8 @@
   "example" "fa-solid fa-list-ul"
   "quote" "fa-solid fa-quote-right"
 -}}
+{{- /* Custom admonitions */ -}}
+{{- $iconMap = site.Params.admonition | merge $iconMap -}}
 {{- $aliasMap := dict
   "summary" "abstract"
   "tldr" "abstract"

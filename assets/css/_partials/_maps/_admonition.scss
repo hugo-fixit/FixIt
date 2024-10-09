@@ -1,16 +1,55 @@
-// Color map of admonition [$type $color $background-color, ... ]
-$admonition-color-map:
-  'note' #448aff rgba(68, 138, 255, 0.1),
-  'abstract' #00b0ff rgba(0, 176, 255, 0.1),
-  'info' #00b8d4 rgba(0, 184, 212, 0.1),
-  'todo' #5e9aff rgba(94, 154, 255, 0.1),
-  'tip' #00bfa5 rgba(0, 191, 165, 0.1),
-  'success' #00c853 rgba(0, 200, 83, 0.1),
-  'question' #ffbd67 rgba(255, 190, 0, 0.1),
-  'warning' #ff9100 rgba(255, 145, 0, 0.1),
-  'failure' #ff5252 rgba(255, 82, 82, 0.1),
-  'danger' #ff1744 rgba(255, 23, 68, 0.1),
-  'bug' #f50057 rgba(245, 0, 87, 0.1),
-  'example' #651fff rgba(101, 31, 255, 0.1),
-  'quote' #9e9e9e rgba(159, 159, 159, 0.1)
-  !default;
+// Color map of admonitions
+$admonition-color-map: (
+  note: (
+    color: #448aff,
+    bg-color: rgba(68, 138, 255, 0.1),
+  ),
+  abstract: (
+    color: #00b0ff,
+    bg-color: rgba(0, 176, 255, 0.1),
+  ),
+  info: (
+    color: #00b8d4,
+    bg-color: rgba(0, 184, 212, 0.1),
+  ),
+  todo: (
+    color: #5e9aff,
+    bg-color: rgba(94, 154, 255, 0.1),
+  ),
+  tip: (
+    color: #00bfa5,
+    bg-color: rgba(0, 191, 165, 0.1),
+  ),
+  success: (
+    color: #00c853,
+    bg-color: rgba(0, 200, 83, 0.1),
+  ),
+  question: (
+    color: #ffbd67,
+    bg-color: rgba(255, 190, 0, 0.1),
+  ),
+  warning: (
+    color: #ff9100,
+    bg-color: rgba(255, 145, 0, 0.1),
+  ),
+  failure: (
+    color: #ff5252,
+    bg-color: rgba(255, 82, 82, 0.1),
+  ),
+  danger: (
+    color: #ff1744,
+    bg-color: rgba(255, 23, 68, 0.1),
+  ),
+  bug: (
+    color: #f50057,
+    bg-color: rgba(245, 0, 87, 0.1),
+  ),
+  example: (
+    color: #651fff,
+    bg-color: rgba(101, 31, 255, 0.1),
+  ),
+  quote: (
+    color: #9e9e9e,
+    bg-color: rgba(159, 159, 159, 0.1),
+  ),
+) !default;
