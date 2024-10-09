@@ -1,4 +1,6 @@
-{{- if .AlertTitle -}}
+{{- $basicTypes := slice "note" "tip" "important" "warning" "caution" -}}
+
+{{- if .AlertTitle | or .AlertSign | or (.AlertType | in $basicTypes | not) -}}
   {{- /* The extended syntax is compatible with Obsidian and FixIt admonition shortcode. */ -}}
   {{- /* === Dirty hack === */ -}}
   {{- /* BUG of Hugo https://github.com/gohugoio/hugo/issues/12913 */ -}}
