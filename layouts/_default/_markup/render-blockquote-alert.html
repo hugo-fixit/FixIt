@@ -1,11 +1,8 @@
 {{- if .AlertTitle -}}
   {{- /* The extended syntax is compatible with Obsidian and FixIt admonition shortcode. */ -}}
   {{- /* === Dirty hack === */ -}}
-  {{- $title := .AlertTitle -}}
-  {{- if ne .AlertTitle (.AlertTitle | plainify) -}}
-    {{- /* BUG of Hugo https://github.com/gohugoio/hugo/issues/12913 */ -}}
-    {{- $title = add .AlertTitle ">" -}}
-  {{- end -}}
+  {{- /* BUG of Hugo https://github.com/gohugoio/hugo/issues/12913 */ -}}
+  {{- $title := replaceRE "</([a-zA-Z]+)$" "</$1>" .AlertTitle -}}
   {{- /* === Dirty hack === */ -}}
   {{- $openMap := dict "+" true "-" false -}}
   {{- $open := index $openMap .AlertSign | default true -}}
