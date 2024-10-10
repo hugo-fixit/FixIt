@@ -16,6 +16,19 @@
 
   .admonition-content {
     padding: 0.5rem 0;
+    
+    // for extended alert syntax
+    > p {
+      margin: 0;
+    }
+    // title-only alert
+    &:empty {
+      display: none;
+    }
+    // BUG of Hugo https://github.com/gohugoio/hugo/issues/12913
+    &:has(> p:only-child:empty) {
+      display: none;
+    }
   }
 
   i.icon {
@@ -30,43 +43,35 @@
     top: 0.6rem;
     right: 0.3rem;
   }
+  
+  background-color: var(--#{$prefix}admonition-bg-color);
+  border-left-color: var(--#{$prefix}admonition-color);
 
-  @each $type, $color, $background-color in $admonition-color-map {
-    @if $type == 'note' {
-      background-color: $background-color;
-      border-left-color: $color;
+  > .admonition-title {
+    border-bottom-color: var(--#{$prefix}admonition-bg-color);
+    background-color: var(--#{$prefix}admonition-bg-color-collapsed);
 
-      .admonition-title {
-        border-bottom-color: $background-color;
-        background-color: opacify($background-color, 0.15);
-      }
-
-      &.open .admonition-title {
-        background-color: $background-color;
-      }
-
-      i.icon {
-        color: $color;
-      }
+    i.icon {
+      color: var(--#{$prefix}admonition-color);
     }
-    
-    @else {
+  }
+
+  &.open > .admonition-title {
+    background-color: var(--#{$prefix}admonition-bg-color);
+  }
+
+  // default admonition type is note
+  --#{$prefix}admonition-color: #{map-get(map-get($admonition-color-map, note), color)};
+  --#{$prefix}admonition-bg-color: #{map-get(map-get($admonition-color-map, note), bg-color)};
+  --#{$prefix}admonition-bg-color-collapsed: #{opacify(map-get(map-get($admonition-color-map, note), bg-color), 0.15)};
+
+  // set color for each admonition type
+  @each $type, $item in $admonition-color-map {
+    @if $type != 'note' {
       &.#{$type} {
-        background-color: $background-color;
-        border-left-color: $color;
-
-        .admonition-title {
-          border-bottom-color: $background-color;
-          background-color: opacify($background-color, 0.15);
-        }
-
-        &.open .admonition-title {
-          background-color: $background-color;
-        }
-
-        i.icon {
-          color: $color;
-        }
+        --#{$prefix}admonition-color: #{map-get($item, color)};
+        --#{$prefix}admonition-bg-color: #{map-get($item, bg-color)};
+        --#{$prefix}admonition-bg-color-collapsed: #{opacify(map-get($item, bg-color), 0.15)};
       }
     }
   }

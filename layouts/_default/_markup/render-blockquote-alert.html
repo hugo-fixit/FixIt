@@ -1,0 +1,28 @@
+{{- $basicTypes := slice "note" "tip" "important" "warning" "caution" -}}
+
+{{- if .AlertTitle | or .AlertSign | or (.AlertType | in $basicTypes | not) -}}
+  {{- /* The extended syntax is compatible with Obsidian and FixIt admonition shortcode. */ -}}
+  {{- /* === Dirty hack === */ -}}
+  {{- /* BUG of Hugo https://github.com/gohugoio/hugo/issues/12913 */ -}}
+  {{- $title := replaceRE "</([a-zA-Z]+)$" "</$1>" .AlertTitle -}}
+  {{- /* === Dirty hack === */ -}}
+  {{- $openMap := dict "+" true "-" false -}}
+  {{- $open := index $openMap .AlertSign | default true -}}
+  {{- $foldable := ne .AlertSign "" -}}
+  {{- dict
+    "Type" .AlertType
+    "Title" $title
+    "Open" $open
+    "Text" .Text
+    "Foldable" $foldable
+    | partial "plugin/admonition.html"
+  -}}
+{{- else -}}
+  {{- /* The basic syntax is compatible with GitHub, Obsidian, and Typora. */ -}}
+  {{- dict
+    "Type" .AlertType
+    "Text" .Text
+    "Attributes" .Attributes
+    | partial "plugin/alert.html"
+  -}}
+{{- end -}}
