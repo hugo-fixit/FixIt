@@ -197,6 +197,7 @@ enableEmoji = true
 
 [sitemap]
   changefreq = "weekly"
+  disable = false
   filename = "sitemap.xml"
   priority = 0.5
 
