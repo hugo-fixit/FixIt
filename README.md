@@ -1,7 +1,7 @@
 <!-- markdownlint-disable-file MD033 MD041 -->
 ![Hugo Theme FixIt](https://fixit.lruihao.cn/images/apple-devices-preview.png)
 
-<div align="center">English | <a href="README.zh-cn.md">简体中文</a></div>
+<div align="center">English | <a href="/README.zh-cn.md">简体中文</a></div>
 
 <a title="FixIt website" href="https://fixit.lruihao.cn"><img align="right" alt="FixIt logo" width="70" height="70" src="https://avatars.githubusercontent.com/u/110414864?s=200&v=4"></a>
 
@@ -51,7 +51,11 @@ Click the following links to generate a new repository with template:
 [lruihao-blog]: https://github.com/Lruihao/hugo-blog
 [lruihao-blog:generate]: https://github.com/Lruihao/hugo-blog/generate
 
-<!-- ## Why choose FixIt -->
+## Why choose FixIt
+
+I don't know why 🤷
+
+<!-- Too lazy to write... -->
 
 ## Features
 
@@ -172,7 +176,7 @@ Don't forget to leave a ⭐️ if you like this theme, thanks!
 
 ## Contributing
 
-We welcome you to join the development of FixIt. Please see [contributing document](CONTRIBUTING.md). 🤗
+We welcome you to join the development of FixIt. Please see [contributing document](/CONTRIBUTING.md). 🤗
 
 Also, we welcome Issue or PR to our [official-components](https://github.com/hugo-fixit).
 
@@ -233,7 +237,7 @@ Thanks to all the [contributors](https://github.com/hugo-fixit/FixIt/graphs/cont
 
 ## License
 
-FixIt is licensed under the **MIT** license. Check the [LICENSE file](LICENSE) for details.
+FixIt is licensed under the **MIT** license. Check the [LICENSE file](/LICENSE) for details.
 
 ## Sponsor
 

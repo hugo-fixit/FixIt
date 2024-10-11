@@ -1,7 +1,7 @@
 <!-- markdownlint-disable-file MD033 MD041 -->
 ![Hugo Theme FixIt](https://fixit.lruihao.cn/images/apple-devices-preview.png)
 
-<div align="center"><a href="README.md">English</a> | 简体中文</div>
+<div align="center"><a href="/README.md">English</a> | 简体中文</div>
 
 <a title="FixIt 官网" href="https://fixit.lruihao.cn/zh-cn/"><img align="right" alt="FixIt logo" width="70" height="70" src="https://avatars.githubusercontent.com/u/110414864?s=200&v=4"></a>
 
@@ -51,7 +51,11 @@
 [lruihao-blog]: https://github.com/Lruihao/hugo-blog
 [lruihao-blog:generate]: https://github.com/Lruihao/hugo-blog/generate
 
-<!-- ## 为什么选择 FixIt -->
+## 为什么选择 FixIt
+
+我也不知道为什么 🤷
+
+<!-- 懒的写…… -->
 
 ## 特性
 
@@ -176,7 +180,7 @@ Gitee 镜像仓库：<https://gitee.com/lruihao/FixIt>
 
 ## 参与贡献
 
-我们欢迎你加入 FixIt 的开发，贡献出你的一份力量。请看开源 [贡献指南](CONTRIBUTING.md)。 🤗
+我们欢迎你加入 FixIt 的开发，贡献出你的一份力量。请看开源 [贡献指南](/CONTRIBUTING.md)。 🤗
 
 你也可以随时向我们的 [官方插件](https://github.com/hugo-fixit) 提交 Issue 或 Pull Request。
 
@@ -237,7 +241,7 @@ Gitee 镜像仓库：<https://gitee.com/lruihao/FixIt>
 
 ## 许可协议
 
-FixIt 根据 **MIT** 许可协议授权。更多信息请查看 [LICENSE 文件](LICENSE)。
+FixIt 根据 **MIT** 许可协议授权。更多信息请查看 [LICENSE 文件](/LICENSE)。
 
 ## 赞助支持
 
