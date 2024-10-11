@@ -34,6 +34,7 @@
       {{- else -}}
         {{- $pages = .Paginate $pages -}}
       {{- end -}}
+      {{- partial "recently-updated.html" . -}}
       {{- range $pages.PageGroups -}}
         <h2 class="group-title">
           {{- dict "Class" "fa-regular fa-calendar fa-fw me-1" | partial "plugin/icon.html" -}}

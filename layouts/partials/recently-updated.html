@@ -1,11 +1,25 @@
-{{- /* Recently updated pages */ -}}
-{{- /* TODO refactor to support archives, section, taxonomy and term. */ -}}
-{{- if and .Site.Params.section.recentlyUpdated.enable (eq $.Paginator.PageNumber 1) -}}
+{{- /* Recently updated pages for archives, section and term list */ -}}
+{{- $kindMap := dict
+  "home" "archives"
+  "section" "section"
+  "term" "list"
+-}}
+{{- $recentlyUpdatedConfig := .Site.Params.recentlyUpdated -}}
+{{- $scope := index $kindMap .Kind -}}
+{{- $scopeEnable := index $recentlyUpdatedConfig $scope | default false -}}
+{{- if $scopeEnable | and (eq $.Paginator.PageNumber 1) -}}
   {{- $hasTitle := false }}
   {{- $postCount := 0 -}}
-  {{- $maxPostCount := .Site.Params.section.recentlyUpdated.maxCount | default 10 -}}
-  {{- $days := .Site.Params.section.recentlyUpdated.days | default 30 -}}
-  {{- range first $maxPostCount (where .Data.Pages.ByLastmod.Reverse "Section" "!=" "") -}}
+  {{- $maxPostCount := $recentlyUpdatedConfig.maxCount | default 10 -}}
+  {{- $days := $recentlyUpdatedConfig.days | default 30 -}}
+  {{- $dateformat := (index .Site.Params $scope).dateformat | default "01-02" -}}
+  {{- $scopePages := .Pages -}}
+  {{- if eq $scope "archives" -}}
+    {{- $scopePages = .Scratch.Get "mainSectionPages" -}}
+  {{- end -}}
+  {{- $scopePages = where $scopePages.ByLastmod.Reverse "Section" "!=" "" -}}
+  {{- /* {{- $scopePages = where $scopePages "File.IsContentAdapter" "ne" true -}} */ -}}
+  {{- range first $maxPostCount $scopePages -}}
     {{- if gt (add .Lastmod.Unix (mul 86900 $days)) now.Unix -}}
       {{- if ne .Lastmod.Unix .Date.Unix }}
         {{- $postCount = add $postCount 1 -}}
@@ -22,10 +36,14 @@
             {{- if eq $repost.enable true -}}
               {{- dict "Class" "fa-solid fa-share fa-fw text-success me-1" | partial "plugin/icon.html" -}}
             {{- end -}}
-            {{- cond (.Param "capitalizeTitles") (title .LinkTitle) .LinkTitle -}}
+            {{- if eq $scope "archives" -}}
+              {{- cond (.Param "capitalizeTitles") (title .Title) .Title -}}
+            {{- else -}}
+              {{- cond (.Param "capitalizeTitles") (title .LinkTitle) .LinkTitle -}}
+            {{- end -}}
           </a>
           <span class="archive-item-date" title='{{ "2006-01-02 15:04:05" | .Lastmod.Format }}'>
-            {{- with .Lastmod | dateFormat (.Site.Params.section.dateformat | default "01-02") -}}
+            {{- with .Lastmod | dateFormat $dateformat -}}
               {{- dict "Date" . | T "single.updatedOnDate" -}}
             {{- end -}}
           </span>

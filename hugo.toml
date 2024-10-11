@@ -507,13 +507,6 @@ enableEmoji = true
       limit = -1
       # whether to show the full text content in feed.
       fullText = false
-    # FixIt 0.2.13 | NEW recently updated pages config
-    # TODO refactor to support archives, section, taxonomy and term
-    [params.section.recentlyUpdated]
-      enable = false
-      rss = false
-      days = 30
-      maxCount = 10
 
   # Term list (category or tag) page config
   [params.list]
@@ -527,6 +520,14 @@ enableEmoji = true
       limit = -1
       # whether to show the full text content in feed.
       fullText = false
+
+  # FixIt 0.3.13 | NEW recently updated pages config for archives, section and term list
+  [params.recentlyUpdated]
+    archives = true
+    section = true
+    list = true
+    days = 30
+    maxCount = 10
 
   # FixIt 0.2.17 | NEW TagCloud config for tags page
   [params.tagcloud]
