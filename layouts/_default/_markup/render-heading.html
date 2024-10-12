@@ -5,28 +5,41 @@
 {{- if not (reflect.IsMap $toc) -}}
   {{- $toc = dict "enable" $toc | merge site.Params.page.toc -}}
 {{- end -}}
-{{- $ordered := $toc.ordered | and $params.heading.number.enable -}}
-{{- $h1Format := $params.heading.number.format.h1 | default "{title}" -}}
-{{- $h2Format := $params.heading.number.format.h2 | default "{h2} {title}" -}}
-{{- $h3Format := $params.heading.number.format.h3 | default "{h2}.{h3} {title}" -}}
-{{- $h4Format := $params.heading.number.format.h4 | default "{h2}.{h3}.{h4} {title}" -}}
-{{- $h5Format := $params.heading.number.format.h5 | default "{h2}.{h3}.{h4}.{h5} {title}" -}}
-{{- $h6Format := $params.heading.number.format.h6 | default "{h2}.{h3}.{h4}.{h5}.{h6} {title}" -}}
+{{- $headingConfig := $params.heading -}}
+{{- /* Only enable in main section pages */ -}}
+{{- $onlyMainSection := cond $headingConfig.number.onlyMainSection (eq .Page.Type "posts") true -}}
+{{- $ordered := $toc.ordered | and $headingConfig.number.enable | and $onlyMainSection -}}
+{{- $h1Format := $headingConfig.number.format.h1 | default "{title}" -}}
+{{- $h2Format := $headingConfig.number.format.h2 | default "{h2} {title}" -}}
+{{- $h3Format := $headingConfig.number.format.h3 | default "{h2}.{h3} {title}" -}}
+{{- $h4Format := $headingConfig.number.format.h4 | default "{h2}.{h3}.{h4} {title}" -}}
+{{- $h5Format := $headingConfig.number.format.h5 | default "{h2}.{h3}.{h4}.{h5} {title}" -}}
+{{- $h6Format := $headingConfig.number.format.h6 | default "{h2}.{h3}.{h4}.{h5}.{h6} {title}" -}}
+{{- $level := .Level -}}
+{{- $maxMarkupLevel := 2 -}}
+
+{{- /* Disable ordered headings on home page */ -}}
+{{- if eq hugo.Context.MarkupScope "home" -}}
+  {{- $ordered = false -}}
+  {{- /* Decrease the level to match the correct HTML level */ -}}
+  {{- $level = add $level 1 -}}
+  {{- $maxMarkupLevel = 3 -}}
+{{- end -}}
 
 {{- if $ordered -}}
   {{- /* Set the count for child level to 0 */ -}}
-  {{- .Page.Scratch.SetInMap "heading-counter" (string (add .Level 1)) 0 -}}
+  {{- .Page.Scratch.SetInMap "heading-counter" (string (add $level 1)) 0 -}}
 {{- end -}}
 
-<h{{ .Level }} id="{{ .Anchor | safeURL }}" class="heading-element">
+{{- /* Force decrease the markup level to avoid multiple h1 */ -}}
+{{- $markupLevel := cond (gt $maxMarkupLevel $level) $maxMarkupLevel $level -}}
+<h{{ $markupLevel }} id="{{ .Anchor | safeURL }}" class="heading-element">
   {{- $title := .Text -}}
-  {{- /* Only enable in main section pages */ -}}
-  {{- $onlyMainSection := cond $params.heading.number.onlyMainSection (eq .Page.Type "posts") true -}}
-  {{- if $ordered | and $onlyMainSection -}}
+  {{- if $ordered -}}
     {{- /* Add 1 to the current level */ -}}
     {{- $headingMap := .Page.Scratch.Get "heading-counter" -}}
-    {{- $count := (string .Level) | index $headingMap | int | add 1 -}}
-    {{- .Page.Scratch.SetInMap "heading-counter" (string .Level) $count -}}
+    {{- $count := (string $level) | index $headingMap | int | add 1 -}}
+    {{- .Page.Scratch.SetInMap "heading-counter" (string $level) $count -}}
 
     {{- /* Get the counters for all levels */ -}}
     {{- $h1 := "1" | index $headingMap | int | string -}}
@@ -38,17 +51,17 @@
 
     {{- /* Apply the level based on the format */ -}}
     {{- $title = "" -}}
-    {{- if .Level | eq 1 -}}
+    {{- if $level | eq 1 -}}
       {{- $title = $h1Format -}}
-    {{- else if .Level | eq 2 -}}
+    {{- else if $level | eq 2 -}}
       {{- $title = $h2Format -}}
-    {{- else if .Level | eq 3 -}}
+    {{- else if $level | eq 3 -}}
       {{- $title = $h3Format -}}
-    {{- else if .Level | eq 4 -}}
+    {{- else if $level | eq 4 -}}
       {{- $title = $h4Format -}}
-    {{- else if .Level | eq 5 -}}
+    {{- else if $level | eq 5 -}}
       {{- $title = $h5Format -}}
-    {{- else if .Level | eq 6 -}}
+    {{- else if $level | eq 6 -}}
       {{- $title = $h6Format -}}
     {{- end -}}
 
@@ -60,12 +73,12 @@
     {{- $title = replace $title "{h6}" $h6 -}}
     {{- $title = replace $title "{title}" .Text -}}
   {{- end -}}
-  {{- if $params.heading.capitalize -}}
+  {{- if $headingConfig.capitalize -}}
     {{- $title = replace $title .PlainText (title .PlainText) -}}
   {{- end -}}
   <span>{{ $title | safeHTML }}</span>
   <a href="#{{ .Anchor | safeURL }}" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h{{ .Level }}>
+</h{{ $markupLevel }}>
 {{- /* EOF */ -}}

@@ -1,7 +1,7 @@
 {{- $author := partial "function/get-author-map.html" .Params.author -}}
 
 <meta name="author" content="{{ $author.name }}">
-<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage | and .Summary }}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage | and .Summary }}{{ .Summary | plainify }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
 
 {{- $keywords := .Keywords -}}
 {{- if not $keywords -}}

@@ -49,8 +49,14 @@
 
   {{- /* Summary content */ -}}
   <div class="content">
-    {{- with .Summary -}}
-      {{- dict "Content" . "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+    {{- if .Summary -}}
+      {{- $plainify := (.Param "summaryPlainify") | default false -}}
+      {{- with .Markup "home" -}}
+        {{- with .Render -}}
+          {{- $summary := dict "Content" .Summary.Text "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+          {{- cond $plainify ($summary | plainify) $summary -}}
+        {{- end -}}
+      {{- end -}}
     {{- else -}}
       {{- .Description | safeHTML -}}
     {{- end -}}
@@ -70,3 +76,4 @@
     {{- end -}}
   </div>
 </article>
+{{- /* EOF */ -}}

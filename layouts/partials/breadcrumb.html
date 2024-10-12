@@ -14,7 +14,7 @@
         {{- else -}}
           {{- $title = cond $capitalizeTitles (title .LinkTitle) .LinkTitle -}}
           {{- if .IsPage | and .Summary -}}
-            {{- $title = .Summary -}}
+            {{- $title = .Summary | plainify -}}
           {{- end -}}
         {{- end -}}
 
