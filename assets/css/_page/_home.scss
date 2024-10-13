@@ -124,36 +124,11 @@
     }
 
     .content {
-      display: block;
       margin-top: 0.3rem;
-      width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      @include overflow-wrap(break-word);
       color: $global-font-secondary-color;
 
       [data-theme='dark'] & {
         color: $global-font-secondary-color-dark;
-      }
-
-      h2,
-      h3,
-      h4,
-      h5,
-      h6,
-      p {
-        font-size: 1rem;
-        line-height: 1.5;
-        display: inline;
-
-        &::after {
-          content: '\A';
-          white-space: pre;
-        }
-      }
-
-      h2 {
-        font-size: 1.125rem;
       }
 
       @include link(false, true);
