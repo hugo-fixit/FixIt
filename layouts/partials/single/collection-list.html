@@ -21,12 +21,14 @@
             {{- range $key, $page := $pages -}}
               {{- $capitalizeTitles := $page.Param "capitalizeTitles" -}}
               {{- $title := cond $capitalizeTitles (title $page.LinkTitle) $page.LinkTitle -}}
-              {{- if $page.LinkTitle | eq $.LinkTitle -}}
-                {{- $currentKey = $key -}}
-                <li class="collection-item"><span class="active" title="{{ $title }}">{{ $title }}</span></li>
-              {{- else }}
-                <li class="collection-item"><a href="{{ $page.RelPermalink }}" title="{{ $title }}">{{ $title }}</a></li>
-              {{- end }}
+              <li class="collection-item">
+                {{- if $.Eq $page -}}
+                  {{- $currentKey = $key -}}
+                  <span class="active" title="{{ $title }}">{{ $title }}</span>
+                {{- else -}}
+                  <a href="{{ $page.RelPermalink }}" title="{{ $title }}">{{ $title }}</a>
+                {{- end -}}
+              </li>
             {{- end -}}
           </ul>
           <div class="collection-nav-simple">
