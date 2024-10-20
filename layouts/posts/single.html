@@ -24,7 +24,7 @@
   <article class="page single"{{ with .Params.fromAdapters }} data-adapters="{{ . }}"{{ end }}>
     <div class="header">
       {{- /* Title */ -}}
-      <h1 class="single-title animate__animated animate__flipInX">
+      <h1 class="single-title">
         {{- $repost := $params.repost | default dict -}}
         {{- with $repost -}}
           {{- if eq .Enable true -}}
