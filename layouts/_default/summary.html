@@ -19,14 +19,25 @@
 
   {{- /* Title */ -}}
   <h2 class="single-title" itemprop="name headline">
-    <div class="title-date-container">
-      <a href="{{ .RelPermalink }}">{{ cond (.Param "capitalizeTitles") (title .Title) .Title }}</a>
-      <span class="post-publish" title='{{ "2006-01-02 15:04:05" | $.PublishDate.Format }}'>
-        <time datetime="{{ $.PublishDate.Format '2006-01-02' }}">{{- printf `<time datetime="%v">%v</time>` . . | dict "Date" | T "single.publishedOnDate" | safeHTML -}}</time>
-      </span>
-    </div>
+    {{- with $params.weight -}}
+      {{- $icon := dict "Class" "fa-solid fa-thumbtack fa-fw" -}}
+      <span title="{{ T "single.pin" }}" class="icon-pin">{{- $icon | partial "plugin/icon.html" -}}</span>
+    {{- end -}}
+    {{- $repost := $params.repost | default dict -}}
+    {{- with $repost -}}
+      {{- if eq .Enable true -}}
+        {{- $icon := dict "Class" "fa-solid fa-share fa-fw" -}}
+        {{- $title := cond (hasPrefix .Url "http") (printf "%v -> %v" (T "single.repost") .Url ) (T "single.repost") -}}
+        <span title="{{ $title }}" class="icon-repost">{{- $icon | partial "plugin/icon.html" -}}</span>
+      {{- end -}}
+    {{- end -}}
+    <a href="{{ .RelPermalink }}">{{ cond (.Param "capitalizeTitles") (title .Title) .Title }}</a>
+    &nbsp;<span class="post-publish" title='{{ "2006-01-02 15:04:05" | $.PublishDate.Format }}'>
+      {{- printf `<time datetime="%v">%v</time>` . . | dict "Date" | T "single.publishedOnDate" | safeHTML -}}
+    </span>
   </h2>
-  
+
+
   {{- /* Summary content */ -}}
   <div class="content">
     {{- if .Summary -}}
