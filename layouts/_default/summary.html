@@ -22,11 +22,11 @@
     <div class="title-date-container">
       <a href="{{ .RelPermalink }}">{{ cond (.Param "capitalizeTitles") (title .Title) .Title }}</a>
       <span class="post-publish" title='{{ "2006-01-02 15:04:05" | $.PublishDate.Format }}'>
-        <time datetime="{{ $.PublishDate.Format '2006-01-02' }}">{{ $.PublishDate.Format '2006-01-02' }}</time>
+        <time datetime="{{ $.PublishDate.Format '2006-01-02' }}">{{- printf `<time datetime="%v">%v</time>` . . | dict "Date" | T "single.publishedOnDate" | safeHTML -}}</time>
       </span>
     </div>
   </h2>
-
+  
   {{- /* Summary content */ -}}
   <div class="content">
     {{- if .Summary -}}
