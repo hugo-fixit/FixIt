@@ -32,20 +32,11 @@
       {{- end -}}
     {{- end -}}
     <a href="{{ .RelPermalink }}">{{ cond (.Param "capitalizeTitles") (title .Title) .Title }}</a>
+    &nbsp;<span class="post-publish" title='{{ "2006-01-02 15:04:05" | $.PublishDate.Format }}'>
+      {{- printf `<time datetime="%v">%v</time>` . . | dict "Date" | T "single.publishedOnDate" | safeHTML -}}
+    </span>
   </h2>
 
-  {{- /* Meta */ -}}
-  <div class="post-meta">
-    {{- partial "single/post-author.html" . -}}
-
-    {{- with .PublishDate | dateFormat (.Site.Params.dateFormat | default "2006-01-02") -}}
-      &nbsp;<span class="post-publish" title='{{ "2006-01-02 15:04:05" | $.PublishDate.Format }}'>
-        {{- printf `<time datetime="%v">%v</time>` . . | dict "Date" | T "single.publishedOnDate" | safeHTML -}}
-      </span>
-    {{- end -}}
-
-    {{- partial "single/post-included-in.html" . -}}
-  </div>
 
   {{- /* Summary content */ -}}
   <div class="content">
