@@ -39,9 +39,9 @@
     {{- partial "single/post-author.html" . -}}
 
     {{- with .PublishDate | dateFormat (.Site.Params.dateFormat | default "2006-01-02") -}}
-      &nbsp;<span class="post-publish" title='{{ "2006-01-02 15:04:05" | $.PublishDate.Format }}'>
-        {{- printf `<time datetime="%v">%v</time>` . . | dict "Date" | T "single.publishedOnDate" | safeHTML -}}
-      </span>
+    &nbsp;<span class="post-publish" title="{{ $.PublishDate.Format '2006-01-02 15:04:05' }}">
+      <time datetime="{{ $.PublishDate.Format '2006-01-02' }}">{{ $.PublishDate.Format '2006-01-02' }}</time>
+    </span>    
     {{- end -}}
 
     {{- partial "single/post-included-in.html" . -}}

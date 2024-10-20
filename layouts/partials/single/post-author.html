@@ -3,23 +3,5 @@
 {{- .Store.Set "author" $author -}}
 
 <span class="post-author">
-  {{- $content := $author.name | default "Anonymous" -}}
-  {{- $icon := dict "Class" "fa-solid fa-user-circle" -}}
-  {{- /* Deprecate $params.authorAvatar in favor of $params.showAvatar and dd front matter gravatar {bool} */ -}}
-  {{- if $author.avatar | and $params.authorAvatar -}}
-    {{- $content = printf "%v&nbsp;%v" (dict "Src" $author.avatar "Class" "avatar" "Alt" $content "Width" 20 "Height" 20 | partial "plugin/image.html") $content -}}
-    {{- $icon = "" -}}
-  {{- end -}}
-  {{- if $author.link -}}
-    {{- $options := dict "Class" "author" "Destination" $author.link "Title" (T "single.author") "Rel" "author" "Icon" $icon "Content" $content -}}
-    {{- partial "plugin/link.html" $options -}}
-  {{- else -}}
-    <span class="author">
-      {{- with $icon -}}
-        {{- . | partial "plugin/icon.html" }}
-      {{ end -}}
-      {{- $content | safeHTML -}}
-    </span>
-  {{- end -}}
 </span>
 {{- /* EOF */ -}}
