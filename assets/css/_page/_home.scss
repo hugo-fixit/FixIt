@@ -118,11 +118,25 @@
     }
 
     .single-title {
+      display: flex; /* Align elements horizontally */
+      align-items: center; /* Vertical alignment */
+      justify-content: space-between; /* Optional: spread the title and date apart */
+      gap: 10px; /* Space between title and date */
+      margin: 0.4rem 0;
       font-size: 1.25rem;
       line-height: 140%;
-      margin: 0.4rem 0;
     }
-
+    
+    .title-container {
+      flex: 1; /* Allow the title to take up available space */
+    }
+    
+    .date-container {
+      white-space: nowrap; 
+      font-size: 0.9rem; 
+      color: $global-font-color;
+    }
+    
     .content {
       display: block;
       margin-top: 0.3rem;

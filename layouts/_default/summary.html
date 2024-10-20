@@ -17,6 +17,7 @@
     </div>
   {{- end -}}
 
+  <!--
   {{- /* Title */ -}}
   <h2 class="single-title" itemprop="name headline">
     {{- with $params.weight -}}
@@ -32,11 +33,47 @@
       {{- end -}}
     {{- end -}}
     <a href="{{ .RelPermalink }}">{{ cond (.Param "capitalizeTitles") (title .Title) .Title }}</a>
-    &nbsp;<span class="post-publish" title='{{ "2006-01-02 15:04:05" | $.PublishDate.Format }}'>
-      {{- printf `<time datetime="%v">%v</time>` . . | dict "Date" | T "single.publishedOnDate" | safeHTML -}}
-    </span>
   </h2>
 
+  {{- /* Meta */ -}}
+  <div class="post-meta">
+    {{- partial "single/post-author.html" . -}}
+
+    {{- with .PublishDate | dateFormat (.Site.Params.dateFormat | default "2006-01-02") -}}
+      &nbsp;<span class="post-publish" title='{{ "2006-01-02 15:04:05" | $.PublishDate.Format }}'>
+        {{- printf `<time datetime="%v">%v</time>` . . | dict "Date" | T "single.publishedOnDate" | safeHTML -}}
+      </span>
+    {{- end -}}
+
+    {{- partial "single/post-included-in.html" . -}}
+  </div>
+  -->
+
+  <h2 class="single-title" itemprop="name headline">
+    <div class="title-container">
+      {{- with $params.weight -}}
+        {{- $icon := dict "Class" "fa-solid fa-thumbtack fa-fw" -}}
+        <span title="{{ T "single.pin" }}" class="icon-pin">{{- $icon | partial "plugin/icon.html" -}}</span>
+      {{- end -}}
+      {{- $repost := $params.repost | default dict -}}
+      {{- with $repost -}}
+        {{- if eq .Enable true -}}
+          {{- $icon := dict "Class" "fa-solid fa-share fa-fw" -}}
+          {{- $title := cond (hasPrefix .Url "http") (printf "%v -> %v" (T "single.repost") .Url ) (T "single.repost") -}}
+          <span title="{{ $title }}" class="icon-repost">{{- $icon | partial "plugin/icon.html" -}}</span>
+        {{- end -}}
+      {{- end -}}
+      <a href="{{ .RelPermalink }}">{{ cond (.Param "capitalizeTitles") (title .Title) .Title }}</a>
+    </div>
+  
+    <div class="date-container">
+      {{- with .PublishDate | dateFormat (.Site.Params.dateFormat | default "2006-01-02") -}}
+        <span class="post-publish" title='{{ "2006-01-02 15:04:05" | $.PublishDate.Format }}'>
+          {{- printf `<time datetime="%v">%v</time>` . . | dict "Date" | T "single.publishedOnDate" | safeHTML -}}
+        </span>
+      {{- end -}}
+    </div>
+  </h2>
 
   {{- /* Summary content */ -}}
   <div class="content">
