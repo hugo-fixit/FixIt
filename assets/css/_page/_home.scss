@@ -133,8 +133,14 @@
     
     .date-container {
       white-space: nowrap; 
-      font-size: 0.9rem; 
+      font-size: 16px; 
+      font-weight: 400;
       color: $global-font-color;
+
+      [data-theme='dark'] & {
+        color: $global-font-color-dark;
+      }
+
     }
     
     .content {
