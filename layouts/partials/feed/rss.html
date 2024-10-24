@@ -65,11 +65,11 @@
         {{- with $image }}
           {{- $content = add (printf "<img src=%q alt=%q referrerpolicy=%q>" . "featured image" "no-referrer") $content | safeHTML }}
         {{- end }}
-        {{- $content | transform.XMLEscape | safeHTML }}
+        {{- $content | safeHTML }}
         {{- "]]>" | safeHTML -}}
       </description>
       {{- else }}
-      <description>{{ (.Summary | default .Description | default .Title) | transform.XMLEscape | safeHTML }}</description>
+      <description>{{ (.Summary | default .Description | default .Title) | safeHTML }}</description>
       {{- end }}
     </item>
     {{- end }}
