@@ -601,11 +601,11 @@ class FixIt {
   }
 
   initMermaid() {
-    if (!window.mermaid?.initialize) {
+    if (!this.config.mermaid) {
       return;
     }
     const _initializeAndRun = () => {
-      const themes = window.mermaid.themes ?? ['default', 'dark'];
+      const themes = this.config.mermaid.themes ?? ['default', 'dark'];
       window.mermaid.initialize({
         securityLevel: 'loose',
         startOnLoad: false,
