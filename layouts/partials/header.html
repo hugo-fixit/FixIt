@@ -2,7 +2,7 @@
 {{- $homeRelPermalink := .Scratch.Get "homeRelPermalink" -}}
 
 {{- /* Desktop header */ -}}
-<header class="desktop animate__faster" id="header-desktop">
+<header class="desktop" id="header-desktop">
   <div class="header-wrapper"{{ if .Site.Params.githubCorner.enable }} data-github-corner="{{ .Site.Params.githubCorner.position }}"{{ end }}>
     <div class="header-title">
       <a href="{{ $homeRelPermalink }}" title="{{ .Site.Title }}">
@@ -152,7 +152,7 @@
 </header>
 
 {{- /* Mobile header */ -}}
-<header class="mobile animate__faster" id="header-mobile">
+<header class="mobile" id="header-mobile">
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">

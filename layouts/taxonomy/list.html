@@ -19,7 +19,7 @@
     {{- else -}}
       {{- $termTitle = printf "%v - %v" (T $taxonomy | default $taxonomy) .Title -}}
     {{- end -}}
-    <h1 class="single-title animate__animated animate__pulse animate__faster">
+    <h1 class="single-title">
       {{- with $termIcon -}}
         {{- dict "Class" (add . " fa-fw me-1") | partial "plugin/icon.html" -}}
       {{- end -}}

@@ -11,7 +11,7 @@
       <h1 class="single-title">{{- cond (.Param "capitalizeTitles") (title .Title) .Title -}}</h1>
 
       {{- /* Subtitle */ -}}
-      {{- with $params.subtitle -}}<p class="single-subtitle animate__animated animate__fadeIn">{{ . | $.RenderString }}</p>{{- end -}}
+      {{- with $params.subtitle -}}<p class="single-subtitle">{{ . | $.RenderString }}</p>{{- end -}}
     </div>
 
     {{- /* Content */ -}}

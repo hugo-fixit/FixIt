@@ -10,7 +10,7 @@
   <div class="page archive">
     <div class="header">
       {{- /* Title */ -}}
-      <h1 class="single-title animate__animated animate__pulse animate__faster">
+      <h1 class="single-title">
         {{- dict "Class" "fa-solid fa-box-archive fa-fw me-1" | partial "plugin/icon.html" -}}
         {{- .Params.Title | default (T "archives") }} <sup>{{ $pages.Len }}</sup>
       </h1>

@@ -10,7 +10,7 @@
   {{- $tableOfContents := .Fragments.ToHTML ($toc.startlevel | int) ($toc.endlevel | int) ($toc.ordered | default false) -}}
   {{- $showToc := $toc.enable | and (ne $tableOfContents `<nav id="TableOfContents"></nav>`) -}}
 
-  <aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="{{ T "collections" }}">
+  <aside class="aside-collection" aria-label="{{ T "collections" }}">
     {{- /* Collection List */ -}}
     {{- partial "single/collection-list.html" . -}}
 
@@ -41,7 +41,7 @@
       </h1>
 
       {{- /* Subtitle */ -}}
-      {{- with $params.subtitle -}}<p class="single-subtitle animate__animated animate__fadeIn">{{ . | $.RenderString }}</p>{{- end -}}
+      {{- with $params.subtitle -}}<p class="single-subtitle">{{ . | $.RenderString }}</p>{{- end -}}
     </div>
     <!--
     {{- /* Meta */ -}}
