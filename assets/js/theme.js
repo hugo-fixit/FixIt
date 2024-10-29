@@ -464,7 +464,7 @@ class FixIt {
           }
           $copy.title = this.config.code.copyTitle;
           $copy.addEventListener('click', () => {
-            navigator.clipboard.writeText(code).then(() => {
+            this.util.copyText(code).then(() => {
               this.util.animateCSS($code, 'animate__flash');
             }, () => {
               console.error('Clipboard write failed!', 'Your browser does not support clipboard API!');

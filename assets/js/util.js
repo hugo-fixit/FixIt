@@ -86,4 +86,29 @@ export default class Util {
       }
     }
   }
+
+  /**
+   * copy text to clipboard
+   * @param {String} text text to copy
+   * @returns {Promise} promise
+   */
+  copyText(text) {
+    if (navigator.clipboard) {
+      this.copyText = (text) => navigator.clipboard.writeText(text);
+      return this.copyText(text);
+    }
+    this.copyText = (text) => new Promise((resolve, reject) => {
+      const input = document.createElement('input');
+      input.value = text;
+      document.body.appendChild(input);
+      input.select();
+      if (document.execCommand('copy')) {
+        document.body.removeChild(input);
+        resolve();
+      } else {
+        reject();
+      }
+    });
+    return this.copyText(text); 
+  }
 }
