@@ -98,6 +98,10 @@ header {
       }
     }
 
+    .menu-link[href="javascript:void(0);"] {
+      color: inherit;
+    }
+
     .menu-link i {
       @include transform(perspective(1rem));
       @include transition(transform 0.4s ease);

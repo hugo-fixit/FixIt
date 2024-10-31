@@ -38,17 +38,19 @@
     <nav>
       <ul class="menu">
         {{- range .Site.Menus.main -}}
-          {{- $url := .URL | relLangURL -}}
+          {{- $url := .URL -}}
+          {{- with $url -}}
+            {{- $url = . | relLangURL -}}
+          {{- end -}}
           {{- with .Page -}}
             {{- $url = .RelPermalink -}}
           {{- end -}}
           {{- if (ne .Params.Draft true) | or $buildDrafts | and (ne .Params.Type "mobile") -}}
             <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}{{ if .HasChildren }} has-children{{ end }}">
-              <a
-                class="menu-link"
-                href="{{ $url }}"
-                {{ with .Title }}title="{{ . }}"{{ end }}
-                {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
+              <a class="menu-link"
+                {{- with $url }} href="{{ $url }}"{{ else }} href="javascript:void(0);"{{ end }}
+                {{- with .Title }} title="{{ . }}"{{ end }}
+                {{- if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end -}}
               >
                 {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
                 {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
@@ -59,7 +61,10 @@
                 {{ dict "Class" "dropdown-icon fa-solid fa-chevron-down" | partial "plugin/icon.html" }}
                 <ul class="sub-menu">
                   {{- range $k, $v := .Children -}}
-                    {{- $url := $v.URL | relLangURL -}}
+                    {{- $url := $v.URL -}}
+                    {{- with $url -}}
+                      {{- $url = . | relLangURL -}}
+                    {{- end -}}
                     {{- with $v.Page -}}
                       {{- $url = .RelPermalink -}}
                     {{- end -}}
@@ -67,14 +72,11 @@
                       {{- if $k | and $v.Params.Divided -}}
                         <li class="menu-item-divider" aria-hidden="true"></li>
                       {{- end -}}
-                      <li
-                        class="menu-item{{ if $.IsMenuCurrent `main` $v | or ($.HasMenuCurrent `main` $v) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with $v.Params.Class }} {{ . }}{{ end }}"
-                      >
-                        <a
-                          class="menu-link"
-                          href="{{ $url }}"
-                          {{ with $v.Title }}title="{{ . }}"{{ end }}
-                          {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
+                      <li class="menu-item{{ if $.IsMenuCurrent `main` $v | or ($.HasMenuCurrent `main` $v) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with $v.Params.Class }} {{ . }}{{ end }}">
+                        <a class="menu-link"
+                          {{- with $url }} href="{{ $url }}"{{ else }} href="javascript:void(0);"{{ end }}
+                          {{- with $v.Title }} title="{{ . }}"{{ end }}
+                          {{- if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end -}}
                         >
                           {{- with $v.Pre -}}{{- . | safeHTML }} {{ end }}
                           {{- with $v.Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
@@ -128,17 +130,13 @@
                 {{- end -}}
               {{- else if .IsTranslated -}}
                 {{- range .AllTranslations -}}
-                  {{- if ne .Lang $.Lang -}}
-                    <li class="menu-item">
-                      <a href="{{ .RelPermalink }}" class="menu-link" title="{{ .Language.LanguageName }}">
-                        {{- .Language.LanguageName -}}
-                      </a>
-                    </li>
-                  {{- else -}}
-                    <li class="menu-item">
-                      <span class="menu-link text-secondary" title="{{ .Language.LanguageName }}">{{ .Language.LanguageName }}</span>
-                    </li>
-                  {{- end -}}
+                  <li class="menu-item">
+                    {{- if ne .Lang $.Lang -}}
+                      <a href="{{ .RelPermalink }}" class="menu-link" title="{{ .Language.LanguageName }}">{{ .Language.LanguageName }}</a>
+                    {{- else -}}
+                      <span class="text-secondary" title="{{ .Language.LanguageName }}">{{ .Language.LanguageName }}</span>
+                    {{- end -}}
+                  </li>
                 {{- end -}}
               {{- else -}}
                 <li class="menu-item">{{- T "header.noMoretTranslations" -}}</li>
@@ -213,21 +211,21 @@
         {{- end -}}
         {{- $currentPage := . -}}
         {{- range .Site.Menus.main -}}
-          {{- $url := .URL | relLangURL -}}
+          {{- $url := .URL -}}
+          {{- with $url -}}
+            {{- $url = . | relLangURL -}}
+          {{- end -}}
           {{- with .Page -}}
             {{- $url = .RelPermalink -}}
           {{- end -}}
           {{- if (ne .Params.Draft true) | or $buildDrafts | and (ne .Params.Type "desktop") -}}
-            <li
-              class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}"
-            >
+            <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}">
               {{- if .HasChildren -}}
                 <span class="nested-item">
-                  <a
-                    class="menu-link"
-                    href="{{ $url }}"
-                    {{ with .Title }}title="{{ . }}"{{ end }}
-                    {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
+                  <a class="menu-link"
+                    {{- with $url }} href="{{ $url }}"{{ else }} href="javascript:void(0);"{{ end }}
+                    {{- with .Title }} title="{{ . }}"{{ end }}
+                    {{- if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end -}}
                   >
                     {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
                     {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
@@ -238,7 +236,10 @@
                 </span>
                 <ul class="sub-menu">
                   {{- range $k, $v := .Children -}}
-                    {{- $url := $v.URL | relLangURL -}}
+                    {{- $url := $v.URL -}}
+                    {{- with $url -}}
+                      {{- $url = . | relLangURL -}}
+                    {{- end -}}
                     {{- with $v.Page -}}
                       {{- $url = .RelPermalink -}}
                     {{- end -}}
@@ -246,14 +247,11 @@
                       {{- if $k | and $v.Params.Divided -}}
                         <li class="menu-item menu-item-divider" aria-hidden="true"></li>
                       {{- end -}}
-                      <li
-                        class="menu-item{{ if $.IsMenuCurrent `main` $v | or ($.HasMenuCurrent `main` $v) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with $v.Params.Class }} {{ . }}{{ end }}"
-                      >
-                        <a
-                          class="menu-link"
-                          href="{{ $url }}"
-                          {{ with $v.Title }}title="{{ . }}"{{ end }}
-                          {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
+                      <li class="menu-item{{ if $.IsMenuCurrent `main` $v | or ($.HasMenuCurrent `main` $v) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with $v.Params.Class }} {{ . }}{{ end }}">
+                        <a class="menu-link"
+                          {{- with $url }} href="{{ $url }}"{{ else }} href="javascript:void(0);"{{ end }}
+                          {{- with $v.Title }} title="{{ . }}"{{ end }}
+                          {{- if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end -}}
                         >
                           {{- with $v.Pre -}}{{- . | safeHTML }} {{ end }}
                           {{- with $v.Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
@@ -265,11 +263,10 @@
                   {{- end -}}
                 </ul>
               {{- else -}}
-                <a
-                  class="menu-link"
-                  href="{{ $url }}"
-                  {{ with .Title }}title="{{ . }}"{{ end }}
-                  {{ if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end }}
+                <a class="menu-link"
+                  {{- with $url }} href="{{ $url }}"{{ else }} href="javascript:void(0);"{{ end }}
+                  {{- with .Title }} title="{{ . }}"{{ end }}
+                  {{- if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end -}}
                 >
                   {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
                   {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
