@@ -1,0 +1,38 @@
+{{- /* Task lists rendering */ -}}
+{{- /* If Hugo supports the list rendering hook, refactor this snippet. */ -}}
+
+{{- $iconMap := dict
+  " " "fa-regular fa-square"
+  "x" "fa-solid fa-check-square"
+  ">" "fa-solid fa-calendar"
+  "<" "fa-solid fa-calendar-check"
+-}}
+{{- $extendedSigns := slice -}}
+{{- range $sign, $icon := $iconMap -}}
+  {{- $extendedSigns = $extendedSigns | append $sign -}}
+{{- end -}}
+
+{{- /*
+  The basic syntax is compatible with GitHub, Obsidian, and Typora.
+  The basic format is as follows:
+  - [ ] Unchecked
+  - [x] Checked
+*/ -}}
+{{- $icon := dict "Class" (add "checkbox-icon fa-fw " (index $iconMap " ")) | partial "plugin/icon.html" -}}
+{{- $content := replaceRE `<li><input disabled="" type="checkbox"> (.+?)</li>` (printf `<li data-task=" ">%s $1</li>` $icon) . -}}
+{{- $icon := dict "Class" (add "checkbox-icon fa-fw " (index $iconMap "x")) | partial "plugin/icon.html" -}}
+{{- $content = replaceRE `<li><input checked="" disabled="" type="checkbox"> (.+?)</li>` (printf `<li data-task="x">%s $1</li>` $icon) $content -}}
+
+{{- /*
+  The extended syntax is compatible with Obsidian.
+  The extended format is as follows:
+  - [>] Scheduled
+  - [<] Rescheduled
+*/ -}}
+{{- range $extendedSigns -}}
+  {{- $class := index $iconMap . | default "fa-solid fa-check-square" -}}
+  {{- $icon := dict "Class" (add "checkbox-icon fa-fw " $class) | partial "plugin/icon.html" -}}
+  {{- $content = replaceRE (printf `<li>\[%s\] (.+?)</li>` (htmlEscape .)) (printf `<li data-task="%s">%s $1</li>` . $icon) $content -}}
+{{- end -}}
+
+{{- return $content -}}
