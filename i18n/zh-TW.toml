@@ -177,6 +177,18 @@ warning = "警告"
 caution = "小心"
 # === GitHub Alert ===
 
+# === Task lists ===
+[taskList]
+" " = "未完成"
+"x" = "已完成"
+"-" = "已取消"
+"/" = "進行中"
+"<" = "已計劃"
+">" = "已重新計劃"
+"!" = "重要"
+"?" = "問題"
+# === Task lists ===
+
 # === shortcodes/admonition.html ===
 [admonition]
 note = "注意"

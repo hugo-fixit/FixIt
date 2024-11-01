@@ -181,6 +181,18 @@ warning = "Warning"
 caution = "Caution"
 # === GitHub Alert ===
 
+# === Task lists ===
+[taskList]
+" " = "Unchecked"
+"x" = "Checked"
+"-" = "Cancelled"
+"/" = "In Progress"
+"<" = "Scheduled"
+">" = "Rescheduled"
+"!" = "Important"
+"?" = "Question"
+# === Task lists ===
+
 # === shortcodes/admonition.html ===
 [admonition]
 note = "Note"

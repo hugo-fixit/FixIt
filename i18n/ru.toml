@@ -182,6 +182,18 @@ warning = ""
 caution = ""
 # === GitHub Alert ===
 
+# === Task lists ===
+[taskList]
+" " = ""
+"x" = ""
+"-" = ""
+"/" = ""
+"<" = ""
+">" = ""
+"!" = ""
+"?" = ""
+# === Task lists ===
+
 # === shortcodes/admonition.html ===
 [admonition]
 note = "Замечание"
