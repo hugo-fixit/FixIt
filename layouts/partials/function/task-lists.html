@@ -4,13 +4,19 @@
 {{- $iconMap := dict
   " " "fa-regular fa-square"
   "x" "fa-solid fa-check-square"
-  ">" "fa-solid fa-calendar"
-  "<" "fa-solid fa-calendar-check"
+  "/" "fa-regular fa-square"
+  "-" "fa-solid fa-square-xmark"
+  "<" "fa-regular fa-calendar-plus"
+  ">" "fa-regular fa-calendar-minus"
+  "!" "fa-solid fa-circle-exclamation"
+  "\\?" "fa-regular fa-circle-question"
 -}}
 {{- $extendedSigns := slice -}}
 {{- range $sign, $icon := $iconMap -}}
   {{- $extendedSigns = $extendedSigns | append $sign -}}
 {{- end -}}
+
+{{- /* TODO merge from config */ -}}
 
 {{- /*
   The basic syntax is compatible with GitHub, Obsidian, and Typora.
@@ -19,20 +25,29 @@
   - [x] Checked
 */ -}}
 {{- $icon := dict "Class" (add "checkbox-icon fa-fw " (index $iconMap " ")) | partial "plugin/icon.html" -}}
-{{- $content := replaceRE `<li><input disabled="" type="checkbox"> (.+?)</li>` (printf `<li data-task=" ">%s $1</li>` $icon) . -}}
+{{- $label := T (printf "taskList.%v" " ") -}}
+{{- $content := replaceRE `<li><input disabled="" type="checkbox"> (.+?)</li>` (printf `<li data-task=" " title=%q>%s$1</li>` $label $icon) . -}}
+{{- $label := T (printf "taskList.%v" "x") -}}
 {{- $icon := dict "Class" (add "checkbox-icon fa-fw " (index $iconMap "x")) | partial "plugin/icon.html" -}}
-{{- $content = replaceRE `<li><input checked="" disabled="" type="checkbox"> (.+?)</li>` (printf `<li data-task="x">%s $1</li>` $icon) $content -}}
+{{- $content = replaceRE `<li><input checked="" disabled="" type="checkbox"> (.+?)</li>` (printf `<li data-task="x" title=%q>%s$1</li>` $label $icon) $content -}}
 
 {{- /*
   The extended syntax is compatible with Obsidian.
   The extended format is as follows:
-  - [>] Scheduled
-  - [<] Rescheduled
+  - [-] Cancelled
+  - [/] In Progress
+  - [<] Scheduled
+  - [>] Rescheduled
+  - [!] Important
+  - [?] Question
 */ -}}
 {{- range $extendedSigns -}}
   {{- $class := index $iconMap . | default "fa-solid fa-check-square" -}}
   {{- $icon := dict "Class" (add "checkbox-icon fa-fw " $class) | partial "plugin/icon.html" -}}
-  {{- $content = replaceRE (printf `<li>\[%s\] (.+?)</li>` (htmlEscape .)) (printf `<li data-task="%s">%s $1</li>` . $icon) $content -}}
+  {{- $sign := htmlEscape . -}}
+  {{- $originSign := replace . "\\" "" -}}
+  {{- $label := (T (printf "taskList.%v" $originSign)) | default (T (printf "taskList.%v" " ")) -}}
+  {{- $content = replaceRE (printf `<li>\[%s\] (.+?)</li>` $sign) (printf `<li data-task=%q title=%q>%s$1</li>` $originSign $label $icon) $content -}}
 {{- end -}}
 
 {{- return $content -}}

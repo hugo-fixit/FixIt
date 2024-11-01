@@ -1,7 +1,7 @@
 :root {
   // Note: Custom variable values only support SassScript inside `#{}`.
 
-  // Theme colors varibles
+  // Theme colors variables
   @each $color, $value in $theme-colors {
     --#{$prefix}#{$color}: #{$value};
   }
@@ -22,6 +22,8 @@
   --#{$prefix}scrollbar-track-color: transparent;
   --#{$prefix}scrollbar-width: thin;
   --#{$prefix}scrollbar-width-legacy: 12px;
+
+  // TODO  migrate SCSS variables to CSS variables
 }
 
 // Dark theme

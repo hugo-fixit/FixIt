@@ -230,6 +230,38 @@
 
     ul {
       list-style-type: disc;
+
+      // Task lists
+      li[data-task] {
+        list-style: none;
+        margin-left: -1.5rem;
+      }
+    }
+
+    // Task lists
+    li[data-task] {
+      color: var(--#{$prefix}task-color);
+      .checkbox-icon {
+        margin-right: 0.25em;
+        color: var(--#{$prefix}checkbox-color);
+      }
+    }
+    li[data-task='x'],
+    li[data-task='-'] {
+      --#{$prefix}task-color: var(--#{$prefix}secondary);
+      text-decoration: line-through;
+    }
+    li[data-task='x'] {
+      --#{$prefix}checkbox-color: var(--#{$prefix}primary);
+    }
+    li[data-task='/'] {
+      --#{$prefix}task-color: var(--#{$prefix}success);
+    }
+    li[data-task='!'] {
+      --#{$prefix}checkbox-color: var(--#{$prefix}danger);
+    }
+    li[data-task='?'] {
+      --#{$prefix}checkbox-color: var(--#{$prefix}warning);
     }
 
     dl {
