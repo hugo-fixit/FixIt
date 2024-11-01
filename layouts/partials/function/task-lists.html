@@ -11,12 +11,14 @@
   "!" "fa-solid fa-circle-exclamation"
   "\\?" "fa-regular fa-circle-question"
 -}}
+{{- /* Custom Task lists */ -}}
+{{- $iconMap = site.Params.taskList | merge $iconMap -}}
+
+{{- /* Get the extended signs */ -}}
 {{- $extendedSigns := slice -}}
 {{- range $sign, $icon := $iconMap -}}
   {{- $extendedSigns = $extendedSigns | append $sign -}}
 {{- end -}}
-
-{{- /* TODO merge from config */ -}}
 
 {{- /*
   The basic syntax is compatible with GitHub, Obsidian, and Typora.
