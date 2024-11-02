@@ -999,6 +999,8 @@ class FixIt {
     }
     const selector = this.config.pangu.selector;
     if (selector) {
+      // to avoid extra spaces for extended Markdown syntax fraction in Chinese
+      pangu.ignoredTags = /^(script|code|pre|textarea|sup|sub)$/i;
       if (selector.startsWith('#')) {
         pangu.spacingElementById(selector.slice(1));
       } else if (selector.startsWith('.')) {
