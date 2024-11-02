@@ -688,6 +688,12 @@ enableEmoji = true
   # syntax: <type> = <icon>
   [params.admonition]
     # ban = "fa-solid fa-ban"
+  
+  # FixIt 0.3.14 | NEW Task lists custom config
+  # See https://fixit.lruihao.cn/documentation/content-management/advanced/#custom-task-lists
+  # syntax: <sign> = <icon>
+  [params.taskList]
+    # tip = "fa-regular fa-lightbulb"
 
   # FixIt 0.2.12 | NEW PanguJS config
   [params.pangu]

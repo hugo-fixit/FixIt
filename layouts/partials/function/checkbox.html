@@ -1,9 +1,0 @@
-{{- /* Checkbox unchecked */ -}}
-{{- $old := `<input disabled="" type="checkbox">` -}}
-{{- $new := dict "Class" "fa-regular fa-square fa-fw" | partial "plugin/icon.html" -}}
-{{- $content := replace . $old $new -}}
-
-{{- /* Checkbox checked */ -}}
-{{- $old = `<input checked="" disabled="" type="checkbox">` -}}
-{{- $new := dict "Class" "fa-regular fa-check-square fa-fw" | partial "plugin/icon.html" -}}
-{{- return replace $content $old $new -}}
