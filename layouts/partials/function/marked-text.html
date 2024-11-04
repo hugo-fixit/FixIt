@@ -1,0 +1,10 @@
+{{- /*
+  Marked texts rendering
+  This is an experimental syntax highlighting for the marked texts.
+  Embed types: default, primary, secondary, success, warning, danger
+*/ -}}
+
+{{- $content := replaceRE `<mark>(.+?)</mark>\[(.+?)\]` `<mark class="mark-$2">$1</mark>` . -}}
+{{- $content = replaceRE `<mark>(.+?)</mark>` `<mark class="mark-default">$1</mark>` $content -}}
+
+{{- return $content -}}
