@@ -289,6 +289,20 @@
       }
     }
 
+    mark {
+      padding: 0.14em 0.28em;
+      background-color: var(--#{$prefix}mark-background-color, mark);
+      color: var(--#{$prefix}mark-color, marktext);
+      @include border-radius($global-border-radius);
+
+      @each $color, $value in $theme-colors {
+        &.mark-#{$color} {
+          --#{$prefix}mark-color: #fff;
+          --#{$prefix}mark-background-color: var(--#{$prefix}#{$color});
+        }
+      }
+    }
+
     .table-wrapper {
       overflow-x: auto;
       --#{$prefix}scrollbar-thumb-color: #{$table-background-color};
