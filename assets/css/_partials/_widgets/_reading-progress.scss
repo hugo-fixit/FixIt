@@ -26,4 +26,12 @@
     from { transform: scaleX(1); }
     to { transform: scaleX(0); }
   }
+
+  /**
+   * After the CSS property `animation-timeline: scroll()` exceeds 90% browser support in the future, this code can be removed
+   * See https://caniuse.com/mdn-css_properties_animation-timeline_scroll
+   */
+  @supports not (animation-timeline: scroll()) {
+    display: none;
+  }
 }
