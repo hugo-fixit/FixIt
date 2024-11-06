@@ -695,6 +695,13 @@ enableEmoji = true
   [params.taskList]
     # tip = "fa-regular fa-lightbulb"
 
+  # FixIt 0.3.15 | NEW version shortcode config
+  [params.repoVersion]
+    # url prefix for the release tag
+    url = "https://github.com/hugo-fixit/FixIt/releases/tag/v"
+    # project name
+    name = "FixIt"
+
   # FixIt 0.2.12 | NEW PanguJS config
   [params.pangu]
     # For Chinese writing
