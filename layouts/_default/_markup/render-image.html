@@ -1,3 +1,4 @@
+{{- /* TODO refactor */ -}}
 {{- $params := .Page.Params | merge site.Params.page -}}
 {{- if .Title | and .Text -}}
   {{- $linked := ne $params.lightgallery false -}}

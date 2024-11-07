@@ -7,6 +7,11 @@
 {{- $onerror := "" -}}
 {{- $cacheRemoteImages := $params.cacheRemoteImages -}}
 {{- $suffixList := slice ".jpeg" ".jpg" ".png" ".gif" ".bmp" ".tif" ".tiff" ".webp" -}}
+{{- $responsive := .Responsive -}}
+
+{{- if hasPrefix .Src "data:image" -}}
+  {{- $responsive = false -}}
+{{- end -}}
 
 {{- /* handle for default size image */ -}}
 {{- $src := .Src -}}
@@ -17,7 +22,7 @@
     {{- $src = .RelPermalink -}}
   {{- end -}}
   {{- /* only available for image resources that are raster images */ -}}
-  {{- if (eq .ResourceType "image") | and $suffixValid | and $.Responsive -}}
+  {{- if (eq .ResourceType "image") | and $suffixValid | and $responsive -}}
     {{- $style = printf "--width: %vpx;--aspect-ratio: %v / %v;" .Width .Width .Height | safeHTMLAttr -}}
   {{- end -}}
 {{- end -}}
@@ -26,7 +31,7 @@
 {{- $srcMedium := $src -}}
 {{- $srcLarge := .SrcLarge | default $src -}}
 
-{{- if .Responsive }}
+{{- if $responsive }}
   {{- /* handle for small size image */ -}}
   {{- $suffixValidSmall := dict "Path" $srcSmall "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
   {{- with dict "Path" .SrcSmall "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
@@ -89,7 +94,7 @@
   <a class="lightgallery" href="{{ $srcLarge | safeURL }}" data-thumbnail="{{ $srcSmall | safeURL }}"{{ with $caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
 {{- end -}}
 <img loading="{{ $loading }}" src="{{ $src | safeURL }}" alt="{{ $alt }}"
-  {{- if .Responsive }} srcset="{{ $srcSmall | safeURL }}, {{ $srcMedium | safeURL }} 1.5x, {{ $srcLarge | safeURL }} 2x"{{- end -}}
+  {{- if $responsive }} srcset="{{ $srcSmall | safeURL }}, {{ $srcMedium | safeURL }} 1.5x, {{ $srcLarge | safeURL }} 2x"{{- end -}}
   {{- if eq $loading "lazy" }} data-title="{{ .Title | default $alt }}"
   {{- else }} title="{{ .Title | default $alt }}"{{- end -}}
   {{- with .Width }} width="{{ . }}"{{- end -}}
