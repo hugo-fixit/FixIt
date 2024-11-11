@@ -1111,6 +1111,7 @@ class FixIt {
     const ACCURACY = 20;
     const $fixedButtons = document.querySelector('.fixed-buttons');
     const $backToTop = document.querySelector('.back-to-top');
+    const $readingProgressBar = document.querySelector('.reading-progress-bar');
     if (document.body.dataset.headerDesktop === 'auto') {
       $headers.push(document.getElementById('header-desktop'));
     }
@@ -1143,6 +1144,9 @@ class FixIt {
       });
       const contentHeight = document.body.scrollHeight - window.innerHeight;
       const scrollPercent = Math.max(Math.min(100 * Math.max(this.newScrollTop, 0) / contentHeight, 100), 0);
+      if ($readingProgressBar) {
+        $readingProgressBar.style.setProperty('--progress', `${scrollPercent.toFixed(2)}%`);
+      }
       // whether to show fixed buttons
       if ($fixedButtons) {
         if (scrollPercent > 1) {
