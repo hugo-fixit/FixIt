@@ -1,13 +1,37 @@
 .reading-progress-bar {
-  --progress: 0;
-  height: var(--progress-h, 2px);
-  width: var(--progress);
-  background-color: var(--bg-progress, var(--#{$prefix}info));
+  height: var(--#{$prefix}progress-h, 2px);
+  background-color: var(--#{$prefix}progress-bg, var(--#{$prefix}info));
   position: fixed;
+  left: 0;
+  right: 0;
+  transform-origin: var(--#{$prefix}progress-start, left) 50%;
+  animation: grow-progress 3s linear;
+  animation-timeline: scroll();
   @include z-index(2);
   @extend .print-d-none;
+
+  &[data-reversed=true] {
+    animation-name: grow-progress-reversed;
+  }
   
   [data-theme="dark"] & {
-    background-color: var(--bg-progress-dark, var(--#{$prefix}info-dark));
+    background-color: var(--#{$prefix}progress-bg-dark, var(--#{$prefix}info-dark));
+  }
+
+  @keyframes grow-progress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes grow-progress-reversed {
+    from { transform: scaleX(1); }
+    to { transform: scaleX(0); }
+  }
+
+  /**
+   * After the CSS property `animation-timeline: scroll()` exceeds 90% browser support in the future, this code can be removed
+   * See https://caniuse.com/mdn-css_properties_animation-timeline_scroll
+   */
+  @supports not (animation-timeline: scroll()) {
+    display: none;
   }
 }
