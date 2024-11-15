@@ -384,6 +384,8 @@ header {
       @include scrollbar-width(none, 0);
 
       [data-theme='dark'] & {
+        background: $header-background-color-dark;
+        border-top-color: $global-border-color-dark;
         @include box-shadow(0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
       }
 
@@ -511,11 +513,6 @@ header {
 
       &.active {
         display: block;
-      }
-
-      [data-theme='dark'] & {
-        background: $header-background-color-dark;
-        border-top-color: $global-border-color-dark;
       }
     }
   }

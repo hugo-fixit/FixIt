@@ -97,6 +97,7 @@
   hr {
     position: relative;
     height: 1em;
+    margin-block: 1em;
     background: linear-gradient(to right, var(--#{$prefix}hr-background-color) 50%, transparent 50%);
     background-size: 10px 2px;
     background-position: center;
@@ -104,8 +105,6 @@
     border: none;
 
     &.awesome-hr {
-      margin-block: 0.5em;
-
       &::before {
         display: inline-block;
         font-weight: 600;
@@ -493,10 +492,6 @@
       p {
         margin: 0.25rem 0;
       }
-    }
-
-    hr {
-      margin-block: 0;
     }
 
     kbd {
