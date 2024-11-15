@@ -178,11 +178,11 @@
       {{- partial "single/reward.html" . -}}
     {{- end -}}
 
-    {{- /* Collection Navigation */ -}}
-    {{- partial "single/collection-nav.html" . -}}
-
     {{- /* Content Encryption */ -}}
     {{- dict "Content" $content "Password" $params.password "Message" $params.message | partial "plugin/fixit-encryptor.html" -}}
+
+    {{- /* Collection Navigation */ -}}
+    {{- partial "single/collection-nav.html" . -}}
 
     {{- /* Custom block before post footer */ -}}
     {{- block "custom-post__footer:before" . }}{{ end -}}
