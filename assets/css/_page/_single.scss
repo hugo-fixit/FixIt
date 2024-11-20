@@ -521,6 +521,7 @@
     .katex-display {
       max-width: 100%;
       overflow-x: auto;
+      padding-block: 2px;
     }
 
     @import '../_partials/_single/alert';
