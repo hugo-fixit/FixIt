@@ -306,6 +306,7 @@
     }
 
     .table-wrapper {
+      position: relative;
       overflow-x: auto;
       --#{$prefix}scrollbar-thumb-color: #{$table-background-color};
 
@@ -514,6 +515,12 @@
         color: $code-color-dark;
         @include box-shadow(inset 0 -1px 0 $global-border-color-dark);
       }
+    }
+
+    // Katex styles
+    .katex-display {
+      max-width: 100%;
+      overflow-x: auto;
     }
 
     @import '../_partials/_single/alert';
