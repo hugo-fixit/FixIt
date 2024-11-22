@@ -65,6 +65,11 @@ I don't know why 🤷
 - Optimized SEO performance with a correct **SEO SCHEMA** based on JSON-LD
 - **[Google Analytics](https://analytics.google.com/analytics)** supported
 - **[Fathom Analytics](https://usefathom.com/)** supported
+- **[Baidu Analytics](https://tongji.baidu.com/)** supported
+- **[Umami Analytics](https://umami.is/)** supported
+- **[Plausible Analytics](https://plausible.io/)** supported
+- **[Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics)** supported
+- **[Splitbee Analytics](https://splitbee.io)** supported
 - Search engine **verification** supported (Google, Bing, Yandex, Pinterest, Baidu, 360 and Sogou)
 - **CDN** for third-party libraries supported
 

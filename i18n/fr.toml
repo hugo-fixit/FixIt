@@ -7,7 +7,7 @@
 configurationError = "Erreur de configuration\nVous n'avez pas configuré la version de FixIt correctement. Voir https://fixit.lruihao.cn/documentation/basics/#theme-configuration"
 compatibilityError = "Erreur de compatibilité ({{ .From }} -> {{ .To }}):\nVous avez une mise à jour incompatible. Voir https://github.com/hugo-fixit/FixIt/releases"
 devVersionWarn = "Vous utilisez une version de développement de FixIt. Veuillez considérer l'utilisation d'une version stable.\nVoir https://github.com/hugo-fixit/FixIt/releases"
-devEnvWarn = "L'environnement actuel est \"développement\". Le \"système de commentaires\", le \"PWA\", le \"CDN\" et la \"prise d'empreinte\" seront désactivés."
+devEnvWarn = "L'environnement actuel est \"développement\". Le \"système de commentaires\", le \"PWA\", le \"CDN\", le \"prise d'empreinte\" et la \"analyses\" seront désactivés."
 quicklyUpgrade = "La mise à jour rapide utilise la commande: "
 # === init ===
 

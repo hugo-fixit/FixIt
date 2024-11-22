@@ -65,6 +65,11 @@
 - 使用基于 JSON-LD 格式 的 **SEO SCHEMA** 文件进行 SEO 优化
 - 支持 **[Google Analytics](https://analytics.google.com/analytics)**
 - 支持 **[Fathom Analytics](https://usefathom.com/)**
+- 支持 **[百度统计](https://tongji.baidu.com/)**
+- 支持 **[Umami Analytics](https://umami.is/)**
+- 支持 **[Plausible Analytics](https://plausible.io/)**
+- 支持 **[Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics)**
+- 支持 **[Splitbee Analytics](https://splitbee.io)**
 - 支持搜索引擎的**网站验证** (Google, Bing, Yandex, Pinterest, Baidu, 360 and Sogou)
 - 支持所有第三方库的 **CDN**
 
