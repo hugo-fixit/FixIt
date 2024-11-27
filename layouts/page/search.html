@@ -1,0 +1,37 @@
+{{- /*
+  TODO Adapting to dark mode, maybe use css variables
+*/ -}}
+{{- define "title" -}}
+  {{- cond (.Param "capitalizeTitles") (title .Title) .Title -}}
+  {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
+{{- end -}}
+
+{{- define "content" -}}
+  {{- $params := partial "function/params.html" -}}
+  {{- $cse := .Site.Params.search.cse -}}
+  <article class="page single special cse">
+    <div class="header">
+      {{- /* Title */ -}}
+      <h1 class="single-title animate__animated animate__pulse animate__faster">{{- cond (.Param "capitalizeTitles") (title .Title) .Title -}}</h1>
+
+      {{- /* Subtitle */ -}}
+      {{- with $params.subtitle -}}<p class="single-subtitle animate__animated animate__fadeIn">{{ . | $.RenderString }}</p>{{- end -}}
+    </div>
+
+    {{- /* Content */ -}}
+    <div class="content" id="content">
+      {{- dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+    </div>
+
+    {{- /* Google CSE */ -}}
+    {{- if eq $cse.engine "google" -}}
+      {{- with $cse.cx -}}
+        <script async defer src="https://cse.google.com/cse.js?cx={{ . }}"></script>
+        <div class="gcse-searchbox"></div>
+        <div class="gcse-searchresults"></div>
+      {{- end -}}
+    {{- end -}}
+
+    {{- /* TODO Bing CSE */ -}}
+  </article>
+{{- end -}}
