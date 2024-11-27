@@ -420,13 +420,12 @@ enableEmoji = true
       ignoreFieldNorm = false
     # FixIt 0.3.16 | NEW Custom Search Engine (CSE)
     [params.search.cse]
-      # support cse engine: ["google", "bing"]
+      # CSE engine: ["google", "bing"]
       engine = "google"
       # Google: https://programmablesearchengine.google.com/
       # Google Custom Search Engine Context
       cx = ""
-      # Bing: https://www.customsearch.ai/
-      # TODO
+      # Bing (Unsupported): https://www.customsearch.ai/
 
   # Header config
   [params.header]

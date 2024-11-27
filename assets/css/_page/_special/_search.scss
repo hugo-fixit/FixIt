@@ -1,0 +1,9 @@
+// Style of layout named 'search'
+
+// Google CSE
+.gcse-searchbox:empty,
+.gcse-searchresults:empty {
+  display: none;
+}
+
+// Bing CSE (Unsupported)

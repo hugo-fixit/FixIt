@@ -9,7 +9,7 @@
 {{- define "content" -}}
   {{- $params := partial "function/params.html" -}}
   {{- $cse := .Site.Params.search.cse -}}
-  <article class="page single special cse">
+  <article class="page single special search">
     <div class="header">
       {{- /* Title */ -}}
       <h1 class="single-title animate__animated animate__pulse animate__faster">{{- cond (.Param "capitalizeTitles") (title .Title) .Title -}}</h1>
@@ -32,6 +32,6 @@
       {{- end -}}
     {{- end -}}
 
-    {{- /* TODO Bing CSE */ -}}
+    {{- /* Bing CSE (Unsupported) */ -}}
   </article>
 {{- end -}}
