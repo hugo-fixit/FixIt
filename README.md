@@ -35,12 +35,12 @@ Outline: [Installation](https://fixit.lruihao.cn/documentation/installation/) �
 
 Click the following links to generate a new repository with template:
 
-| Template repository                        | Generate link                  |
-| :----------------------------------------- | :----------------------------: |
-| [hugo-fixit/hugo-fixit-starter][starter]   | [Click][starter:generate]      |
-| [hugo-fixit/hugo-fixit-starter1][starter1] | [Click][starter1:generate]     |
-| [hugo-fixit/docs][docs]                    | [Click][docs:generate]         |
-| [Lruihao/hugo-blog][lruihao-blog]          | [Click][lruihao-blog:generate] |
+| Template                                      | repository                        | Generate link                  |
+| :-------------------------------------------- | :-------------------------------- | :----------------------------: |
+| A quick-start template base on Hugo Modules.  | [hugo-fixit-starter][starter]     | [Click][starter:generate]      |
+| A quick-start template base on Git submodule. | [hugo-fixit-starter1][starter1]   | [Click][starter1:generate]     |
+| Build multilingual sites using Fixit theme.   | [docs][docs]                      | [Click][docs:generate]         |
+| Customize with FixIt theme.                   | [Lruihao/hugo-blog][lruihao-blog] | [Click][lruihao-blog:generate] |
 
 [starter]: https://github.com/hugo-fixit/hugo-fixit-starter
 [starter:generate]: https://github.com/hugo-fixit/hugo-fixit-starter/generate
@@ -248,8 +248,8 @@ FixIt is licensed under the **MIT** license. Check the [LICENSE file](/LICENSE) 
 
 If you enjoy the theme, please consider buying me a coffee ☕️. Thanks!
 
-- [Wechat](images/wechatpay.jpg)
-- [Alipay](images/alipay.jpg)
+- [Wechat](/images/wechatpay.jpg)
+- [Alipay](/images/alipay.jpg)
 - [PayPal](https://paypal.me/Lruihao)
 
 ## Author

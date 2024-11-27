@@ -35,12 +35,12 @@
 
 点击以下链接使用模板生成一个新的仓库：
 
-| 模板仓库                                   | 生成链接                          |
-| :----------------------------------------- | :-------------------------------: |
-| [hugo-fixit/hugo-fixit-starter][starter]   | [点击生成][starter:generate]      |
-| [hugo-fixit/hugo-fixit-starter1][starter1] | [点击生成][starter1:generate]     |
-| [hugo-fixit/docs][docs]                    | [点击生成][docs:generate]         |
-| [Lruihao/hugo-blog][lruihao-blog]          | [点击生成][lruihao-blog:generate] |
+| 模板                                | 仓库                              | 生成链接                          |
+| :---------------------------------- | :-------------------------------- | :-------------------------------: |
+| 基于 Hugo Modules 的快速入门模板。  | [hugo-fixit-starter][starter]     | [点击生成][starter:generate]      |
+| 基于 Git submodule 的快速入门模板。 | [hugo-fixit-starter1][starter1]   | [点击生成][starter1:generate]     |
+| 使用 Fixit 主题构建多语言网站。     | [docs][docs]                      | [点击生成][docs:generate]         |
+| 基于 FixIt 主题进行自定义设置。     | [Lruihao/hugo-blog][lruihao-blog] | [点击生成][lruihao-blog:generate] |
 
 [starter]: https://github.com/hugo-fixit/hugo-fixit-starter
 [starter:generate]: https://github.com/hugo-fixit/hugo-fixit-starter/generate
@@ -252,8 +252,8 @@ FixIt 根据 **MIT** 许可协议授权。更多信息请查看 [LICENSE 文件]
 
 如果你喜爱这个主题，请考虑给我买杯咖啡 ☕️，谢谢！
 
-- [微信支付](images/wechatpay.jpg)
-- [支付宝](images/alipay.jpg)
+- [微信支付](/images/wechatpay.jpg)
+- [支付宝](/images/alipay.jpg)
 - [PayPal](https://paypal.me/Lruihao)
 
 ## 作者
