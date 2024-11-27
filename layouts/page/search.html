@@ -1,6 +1,3 @@
-{{- /*
-  TODO Adapting to dark mode, maybe use css variables
-*/ -}}
 {{- define "title" -}}
   {{- cond (.Param "capitalizeTitles") (title .Title) .Title -}}
   {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
