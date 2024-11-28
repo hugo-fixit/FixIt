@@ -92,6 +92,8 @@ facebookLanguageCode = "hi"
 [assets]
 search = "खोज"
 searchPlaceholder = "शीर्षक या सामग्री खोजें ..."
+searchIn = "{{ . }} में खोजें"
+gotoResultsPage = "खोज परिणाम पेज पर जाएं ..."
 clear = "साफ़ करें"
 cancel = "रद्द करें"
 noResultsFound = "कोई परिणाम नहीं मिला"
@@ -175,23 +177,23 @@ other = "आप इंटरनेट से कनेक्ट नहीं ह
 
 # === GitHub Alert ===
 [alert]
-note = ""
-tip = ""
-important = ""
-warning = ""
-caution = ""
+note = "ध्यान दें"
+tip = "टिप"
+important = "महत्वपूर्ण"
+warning = "चेतावनी"
+caution = "सावधान"
 # === GitHub Alert ===
 
 # === Task lists ===
 [taskList]
-" " = ""
-"x" = ""
-"/" = ""
-"-" = ""
-"<" = ""
-">" = ""
-"!" = ""
-"?" = ""
+" " = "जांच नहीं की गई"
+"x" = "जांच की गई"
+"/" = "काम जारी है"
+"-" = "रद्द किया गया"
+"<" = "अनुसूचित"
+">" = "पुनः अनुसूचित"
+"!" = "महत्वपूर्ण"
+"?" = "सवाल"
 # === Task lists ===
 
 # === shortcodes/admonition.html ===

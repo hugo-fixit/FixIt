@@ -1,27 +1,26 @@
 # Translations for Romanian
 # Traduceri pentru limba română
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
-# TODO Some fields are waiting for your translation
 
 # === init ===
 [init]
-configurationError = ""
-compatibilityError = ""
-devVersionWarn = ""
-devEnvWarn = ""
-quicklyUpgrade = ""
+configurationError = "Eroare de configurare\nNu ați configurat corect parametrul versiunii FixIt. Consultați https://fixit.lruihao.cn/documentation/basics/#theme-configuration"
+compatibilityError = "Eroare de compatibilitate ({{ .From }} -> {{ .To }}):\nAveți o actualizare incompatibilă. Consultați https://github.com/hugo-fixit/FixIt/releases"
+devVersionWarn = "Utilizați o versiune de dezvoltare a FixIt. Vă rugăm să luați în considerare utilizarea unei versiuni stabile.\nConsultați https://github.com/hugo-fixit/FixIt/releases"
+devEnvWarn = "Mediul curent este \"dezvoltare\". \"Sistemul de comentarii\", \"PWA\", \"CDN\", \"amprentă\" și \"analize\" vor fi dezactivate."
+quicklyUpgrade = "Actualizare rapidă utilizați comanda: "
 # === init ===
 
 # === baseof ===
 [baseof]
 backToTop = "Înapoi Sus"
 viewComments = "Vizualizare Comentarii"
-noscript = ""
+noscript = "Acest site funcționează cel mai bine cu JavaScript activat."
 # === baseof ===
 
 # === Taxonomy ===
 [archives]
-other = ""
+other = "Arhive"
 
 [allSome]
 other = "Toate {{ .Some }}"
@@ -33,10 +32,10 @@ other = "Categorie"
 other = "Categorii"
 
 [collection]
-other = ""
+other = "Colecție"
 
 [collections]
-other = ""
+other = "Colecții"
 
 [tag]
 other = "Etichetă"
@@ -53,12 +52,12 @@ other = "Articole"
 recentlyUpdated = "Actualizat recent"
 
 [section.totalWordCount]
-one = ""
-other = ""
+one = "Un cuvânt"
+other = "Total {{ .Count }} cuvinte"
 
 [section.archiveCounter]
-one = ""
-other = ""
+one = "Un singur articol"
+other = "{{ .Count }} articole în total"
 # === Section ===
 
 # === Pagination ===
@@ -92,6 +91,8 @@ facebookLanguageCode = "ro_RO"
 [assets]
 search = "Căutare"
 searchPlaceholder = "Căutarea titlului sau conținutului articolului ..."
+searchIn = "Căutare în {{ . }}"
+gotoResultsPage = "Mergi la pagina de rezultate a căutării ..."
 clear = "Golire"
 cancel = "Anulare"
 noResultsFound = "Nici un rezultat gasit"
@@ -111,26 +112,26 @@ other = "Distribuie pe"
 # === posts/single.html ===
 [single]
 contents = "Cuprins"
-pin = ""
-repost = ""
+pin = "Fixează în partea de sus"
+repost = "Repostează"
 publishedOnDate = "publicat la {{ .Date }}"
 views = "vizualizări"
 comments = "comentarii"
 author = "Autor"
 updatedOnDate = "Actualizat la {{ .Date }}"
 readMarkdown = "Citire Markdown"
-viewSource = ""
+viewSource = "Vezi sursa"
 editThisPage = "Editați această pagină"
-reportIssue = ""
+reportIssue = "Raportează o problemă"
 back = "Înapoi"
 home = "Acasă"
 readMore = "Citește mai mult"
 expirationReminder = "Acest articol a fost actualizat ultima dată pe {{ .Date }}, conținutul poate fi depășit."
-encryptedAbstract = ""
-encryptedMessage = ""
+encryptedAbstract = "Acest articol a fost criptat, astfel încât conținutul său brut este invizibil!"
+encryptedMessage = "Vă rugăm să introduceți parola"
 password = "Parolă"
-enterBtn = ""
-encryptyAgain = ""
+enterBtn = "Intră"
+encryptyAgain = "Criptează din nou"
 relatedContent = "Conținut înrudit"
 
 [single.includedIn]
@@ -150,11 +151,11 @@ one = "Un minut"
 other = "{{ .Count }} minute"
 
 [single.reward]
-donate = ""
-wechatpay = ""
-alipay = ""
-paypal = ""
-bitcoin = ""
+# donate = "Donați"
+wechatpay = "WeChat Pay"
+alipay = "Alipay"
+paypal = "PayPal"
+bitcoin = "Bitcoin"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -175,23 +176,23 @@ other = "Nu sunteți conectat la Internet, vor fi disponibile doar paginile stoc
 
 # === GitHub Alert ===
 [alert]
-note = ""
-tip = ""
-important = ""
-warning = ""
-caution = ""
+note = "Notă"
+tip = "Sfat"
+important = "Important"
+warning = "Avertisment"
+caution = "Atenție"
 # === GitHub Alert ===
 
 # === Task lists ===
 [taskList]
-" " = ""
-"x" = ""
-"/" = ""
-"-" = ""
-"<" = ""
-">" = ""
-"!" = ""
-"?" = ""
+" " = "Necontrolat"
+"x" = "Controlat"
+"/" = "În progres"
+"-" = "Anulat"
+"<" = "Programat"
+">" = "Reprogramat"
+"!" = "Important"
+"?" = "Întrebare"
 # === Task lists ===
 
 # === shortcodes/admonition.html ===
