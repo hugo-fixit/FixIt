@@ -1,27 +1,26 @@
 # Translations for Russian
 # Переводы на русский
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
-# TODO Some fields are waiting for your translation
 
 # === init ===
 [init]
-configurationError = ""
-compatibilityError = ""
-devVersionWarn = ""
-devEnvWarn = ""
-quicklyUpgrade = ""
+configurationError = "Ошибка конфигурации\nВы еще не настроили параметр версии FixIt правильно. См. https://fixit.lruihao.cn/documentation/basics/#theme-configuration"
+compatibilityError = "Ошибка совместимости ({{ .From }} -> {{ .To }}):\nУ вас есть несовместимое обновление. См. https://github.com/hugo-fixit/FixIt/releases"
+devVersionWarn = "Вы используете версию разработки FixIt. Пожалуйста, рассмотрите возможность использования стабильной версии.\nСм. https://github.com/hugo-fixit/FixIt/releases"
+devEnvWarn = "Текущая среда - \"разработка\". \"Система комментариев\", \"PWA\", \"CDN\", \"отпечаток\" и \"аналитика\" будут отключены."
+quicklyUpgrade = "Быстрое обновление используйте команду: "
 # === init ===
 
 # === baseof ===
 [baseof]
 backToTop = "Наверх"
 viewComments = "Посмотреть комментарии"
-noscript = ""
+noscript = "Этот сайт работает лучше с включенным JavaScript."
 # === baseof ===
 
 # === Taxonomy ===
 [archives]
-other = ""
+other = "Архив"
 
 [allSome]
 other = "Все {{ .Some }}"
@@ -33,10 +32,10 @@ other = "Категория"
 other = "Категории"
 
 [collection]
-other = ""
+other = "Collection"
 
 [collections]
-other = ""
+other = "Collections"
 
 [tag]
 other = "Тэг"
@@ -53,12 +52,12 @@ other = "Статьи"
 recentlyUpdated = "Недавно обновленные"
 
 [section.totalWordCount]
-one = ""
-other = ""
+one = "Всего одно слово"
+other = "Всего {{ .Count }} слов"
 
 [section.archiveCounter]
-one = ""
-other = ""
+one = "Только одна статья"
+other = "Всего {{ .Count }} статей"
 # === Section ===
 
 # === Pagination ===
@@ -113,26 +112,26 @@ other = "Поделиться в"
 # === posts/single.html ===
 [single]
 contents = "Содержание"
-pin = ""
-repost = ""
+pin = "Закрепить наверху"
+repost = "Перепостить"
 publishedOnDate = "Опубликовано {{ .Date }}"
 views = "просмотров"
 comments = "комментариев"
 author = "Автор"
 updatedOnDate = "Oбновлена {{ .Date }}"
 readMarkdown = "Читать Markdown"
-viewSource = ""
+viewSource = "Просмотреть источник"
 editThisPage = "Редактировать эту страницу"
-reportIssue = ""
+reportIssue = "Сообщить о проблеме"
 back = "Назад"
 home = "Домой"
 readMore = "Читать больше"
 expirationReminder = "Эта статья последний раз обновлялась {{ .Date }}, содержание может быть устаревшим."
-encryptedAbstract = ""
-encryptedMessage = ""
+encryptedAbstract = "Эта статья была зашифрована, поэтому ее исходное содержание невидимо!"
+encryptedMessage = "Пожалуйста, введите пароль"
 password = "арготизм"
-enterBtn = ""
-encryptyAgain = ""
+enterBtn = "Войти"
+encryptyAgain = "Зашифровать снова"
 relatedContent = "Связанный контент"
 
 [single.includedIn]
@@ -177,23 +176,23 @@ other = "Вы не подключены к интернету, будут дос
 
 # === GitHub Alert ===
 [alert]
-note = ""
-tip = ""
-important = ""
-warning = ""
-caution = ""
+note = "Примечание"
+tip = "Совет"
+important = "Важно"
+warning = "Предупреждение"
+caution = "Осторожно"
 # === GitHub Alert ===
 
 # === Task lists ===
 [taskList]
-" " = ""
-"x" = ""
-"/" = ""
-"-" = ""
-"<" = ""
-">" = ""
-"!" = ""
-"?" = ""
+" " = "Не проверено"
+"x" = "Проверено"
+"/" = "В процессе"
+"-" = "Отменено"
+"<" = "Запланировано"
+">" = "Перенесено"
+"!" = "Важно"
+"?" = "Вопрос"
 # === Task lists ===
 
 # === shortcodes/admonition.html ===

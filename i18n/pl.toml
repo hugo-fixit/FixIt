@@ -1,27 +1,26 @@
 # Translations for Polish
 # Tłumaczenie na język polski
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
-# TODO Some fields are waiting for your translation
 
 # === init ===
 [init]
-configurationError = ""
-compatibilityError = ""
-devVersionWarn = ""
-devEnvWarn = ""
-quicklyUpgrade = ""
+configurationError = "Błąd konfiguracji\nNie skonfigurowałeś jeszcze poprawnie parametru wersji FixIt. Zobacz https://fixit.lruihao.cn/documentation/basics/#theme-configuration"
+compatibilityError = "Błąd zgodności ({{ .From }} -> {{ .To }}):\nMasz niekompatybilną aktualizację. Zobacz https://github.com/hugo-fixit/FixIt/releases"
+devVersionWarn = "Używasz wersji deweloperskiej FixIt. Proszę rozważyć użycie stabilnej wersji.\nZobacz https://github.com/hugo-fixit/FixIt/releases"
+devEnvWarn = "Obecne środowisko to \"rozwój\". \"System komentarzy\", \"PWA\", \"CDN\", \"odcisk palca\" i \"analiza\" będą wyłączone."
+quicklyUpgrade = "Szybka aktualizacja użyj polecenia: "
 # === init ===
 
 # === baseof ===
 [baseof]
 backToTop = "Powrót do góry"
 viewComments = "Zobacz komentarze"
-noscript = ""
+noscript = "Ta strona działa najlepiej z włączonym JavaScriptem."
 # === baseof ===
 
 # === Taxonomy ===
 [archives]
-other = ""
+other = "Archiwum"
 
 [allSome]
 other = "Wszystkie {{ .Some }}"
@@ -33,10 +32,10 @@ other = "Kategoria"
 other = "Kategorie"
 
 [collection]
-other = ""
+other = "Collection"
 
 [collections]
-other = ""
+other = "Collections"
 
 [tag]
 other = "Tag"
@@ -53,12 +52,12 @@ other = "Posty"
 recentlyUpdated = "Ostatnio zaktualizowane"
 
 [section.totalWordCount]
-one = ""
-other = ""
+one = "Jedno słowo"
+other = "Łącznie {{ .Count }} słów"
 
 [section.archiveCounter]
-one = ""
-other = ""
+one = "Tylko jeden artykuł"
+other = "Łącznie {{ .Count }} artykułów"
 # === Section ===
 
 # === Pagination ===
@@ -113,26 +112,26 @@ other = "Udostępnij na"
 # === posts/single.html ===
 [single]
 contents = "Spis treści"
-pin = ""
-repost = ""
+pin = "Przypnij na górze"
+repost = "Prześlij ponownie"
 publishedOnDate = "opublikowano {{ .Date }}"
 views = "wyświetleń"
 comments = "komentarzy"
 author = "Autor"
 updatedOnDate = "Zaktualizowano {{ .Date }}"
 readMarkdown = "Zobacz Markdown"
-viewSource = ""
+viewSource = "Zobacz źródło"
 editThisPage = "Edytuj tą stronę"
-reportIssue = ""
+reportIssue = "Zgłoś problem"
 back = "Wstecz"
 home = "Strona główna"
 readMore = "Czytaj więcej"
 expirationReminder = "Ten artykuł był ostatnio aktualizowany {{ .Date }}, jego treść może być nieaktualna."
-encryptedAbstract = ""
-encryptedMessage = ""
+encryptedAbstract = "Ten artykuł został zaszyfrowany, więc jego surowa treść jest niewidoczna!"
+encryptedMessage = "Proszę wprowadzić hasło"
 password = "Hasło"
-enterBtn = ""
-encryptyAgain = ""
+enterBtn = "Wejdź"
+encryptyAgain = "Zaszyfruj ponownie"
 relatedContent = "Powiązane treści"
 
 [single.includedIn]
@@ -152,11 +151,11 @@ one = "Jedna minuta"
 other = "{{ .Count }} minuty"
 
 [single.reward]
-donate = ""
-wechatpay = ""
-alipay = ""
-paypal = ""
-bitcoin = ""
+donate = "Wesprzyj"
+wechatpay = "WeChat Pay"
+alipay = "Alipay"
+paypal = "PayPal"
+bitcoin = "Bitcoin"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -177,23 +176,23 @@ other = "Nie masz połączenia z Internetem, dostępne będą tylko strony z pam
 
 # === GitHub Alert ===
 [alert]
-note = ""
-tip = ""
-important = ""
-warning = ""
-caution = ""
+note = "Notatka"
+tip = "Wskazówka"
+important = "Ważne"
+warning = "Ostrzeżenie"
+caution = "Ostrożność"
 # === GitHub Alert ===
 
 # === Task lists ===
 [taskList]
-" " = ""
-"x" = ""
-"/" = ""
-"-" = ""
-"<" = ""
-">" = ""
-"!" = ""
-"?" = ""
+" " = "Niezweryfikowane"
+"x" = "Zweryfikowane"
+"/" = "W toku"
+"-" = "Anulowane"
+"<" = "Zaplanowane"
+">" = "Przełożone"
+"!" = "Ważne"
+"?" = "Pytanie"
 # === Task lists ===
 
 # === shortcodes/admonition.html ===

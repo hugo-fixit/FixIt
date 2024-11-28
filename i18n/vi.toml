@@ -1,26 +1,25 @@
 # Translations for Vietnamese
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
-# TODO Some fields are waiting for your translation
 
 # === init ===
 [init]
-configurationError = ""
-compatibilityError = ""
-devVersionWarn = ""
-devEnvWarn = ""
-quicklyUpgrade = ""
+configurationError = "Lỗi cấu hình\nBạn chưa cấu hình tham số phiên bản FixIt đúng cách. Xem https://fixit.lruihao.cn/documentation/basics/#theme-configuration"
+compatibilityError = "Lỗi tương thích ({{ .From }} -> {{ .To }}):\nBạn có một bản cập nhật không tương thích. Xem https://github.com/hugo-fixit/FixIt/releases"
+devVersionWarn = "Bạn đang sử dụng một phiên bản phát triển của FixIt. Vui lòng xem xét sử dụng một phiên bản ổn định.\nXem https://github.com/hugo-fixit/FixIt/releases"
+devEnvWarn = "Môi trường hiện tại là \"development\". \"Hệ thống bình luận\", \"PWA\", \"CDN\", \"vân tay\" và \"thống kê\" sẽ bị vô hiệu hóa."
+quicklyUpgrade = "Nâng cấp nhanh bằng lệnh: "
 # === init ===
 
 # === baseof ===
 [baseof]
 backToTop = "Lên trên"
 viewComments = "Xem bình luận"
-noscript = ""
+noscript = "Trang web này hoạt động tốt nhất khi JavaScript được kích hoạt."
 # === baseof ===
 
 # === Taxonomy ===
 [archives]
-other = ""
+other = "Bài viết cũ"
 
 [allSome]
 other = "Tất cả {{ .Some }}"
@@ -32,10 +31,10 @@ other = "Danh mục"
 other = "Danh mục"
 
 [collection]
-other = ""
+other = "Collection"
 
 [collections]
-other = ""
+other = "Collections"
 
 [tag]
 other = "Nhãn"
@@ -52,12 +51,12 @@ other = "Bài viết"
 recentlyUpdated = "Mới nhất"
 
 [section.totalWordCount]
-one = ""
-other = ""
+one = "Chỉ một từ"
+other = "Tổng cộng {{ .Count }} từ"
 
 [section.archiveCounter]
-one = ""
-other = ""
+one = "Chỉ một bài viết"
+other = "{{ .Count }} bài viết"
 # === Section ===
 
 # === Pagination ===
@@ -112,26 +111,26 @@ other = "Chia sẻ trên"
 # === posts/single.html ===
 [single]
 contents = "Nội dung"
-pin = ""
-repost = ""
+pin = "Ghim ở đầu trang"
+repost = "Đăng lại"
 publishedOnDate = "đăng ngày {{ .Date }}"
 views = "lượt xem"
 comments = "bình luận"
 author = "Tác giả"
 updatedOnDate = "Cập nhật ngày {{ .Date }}"
 readMarkdown = "Đọc với định dạng Markdown"
-viewSource = ""
+viewSource = "Xem mã nguồn"
 editThisPage = "Chỉnh sửa trang này"
-reportIssue = ""
+reportIssue = "Báo cáo lỗi"
 back = "Quay lại"
 home = "Trang chủ"
 readMore = "Đọc thêm"
 expirationReminder = "Bài viết này được cập nhật lần cuối vào {{ .Date }}, nội dung có thể đã lỗi thời."
-encryptedAbstract = ""
-encryptedMessage = ""
+encryptedAbstract = "Bài viết này đã được mã hóa, nên nội dung gốc không thể nhìn thấy!"
+encryptedMessage = "Vui lòng nhập mật khẩu"
 password = "Mật khẩu"
-enterBtn = ""
-encryptyAgain = ""
+enterBtn = "Nhập"
+encryptyAgain = "Mã hóa lại"
 relatedContent = "Nội dung liên quan"
 
 [single.includedIn]
@@ -151,11 +150,11 @@ one = "One minute"
 other = "{{ .Count }} phút"
 
 [single.reward]
-donate = ""
-wechatpay = ""
-alipay = ""
-paypal = ""
-bitcoin = ""
+donate = "Ủng hộ"
+wechatpay = "WeChat Pay"
+alipay = "Alipay"
+paypal = "PayPal"
+bitcoin = "Bitcoin"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -176,23 +175,23 @@ other = "Bạn chưa kết nối với Internet, chỉ các trang được lưu 
 
 # === GitHub Alert ===
 [alert]
-note = ""
-tip = ""
-important = ""
-warning = ""
-caution = ""
+note = "Ghi chú"
+tip = "Mẹo"
+important = "Quan trọng"
+warning = "Cảnh báo"
+caution = "Chú ý"
 # === GitHub Alert ===
 
 # === Task lists ===
 [taskList]
-" " = ""
-"x" = ""
-"/" = ""
-"-" = ""
-"<" = ""
-">" = ""
-"!" = ""
-"?" = ""
+" " = "Chưa kiểm tra"
+"x" = "Đã kiểm tra"
+"/" = "Đang tiến hành"
+"-" = "Đã hủy"
+"<" = "Đã lên lịch"
+">" = "Đã lên lịch lại"
+"!" = "Quan trọng"
+"?" = "Câu hỏi"
 # === Task lists ===
 
 # === shortcodes/admonition.html ===
