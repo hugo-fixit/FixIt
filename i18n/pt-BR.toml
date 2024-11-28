@@ -1,27 +1,26 @@
 # Translations for Brazilian Portuguese
 # Tradução para português do Brasil
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
-# TODO Some fields are waiting for your translation
 
 # === init ===
 [init]
-configurationError = ""
-compatibilityError = ""
-devVersionWarn = ""
-devEnvWarn = ""
-quicklyUpgrade = ""
+configurationError = "Erro de configuração\nVocê ainda não configurou o parâmetro da versão do FixIt corretamente. Consulte https://fixit.lruihao.cn/documentation/basics/#theme-configuration"
+compatibilityError = "Erro de compatibilidade ({{ .From }} -> {{ .To }}):\nVocê tem uma atualização incompatível. Consulte https://github.com/hugo-fixit/FixIt/releases"
+devVersionWarn = "Você está usando a versão de desenvolvedor do FixIt. Por favor, use uma versão estável. \nConsulte https://github.com/hugo-fixit/FixIt/releases"
+devEnvWarn = "O ambiente atual é \"development\". O \"comment system\", \"PWA\", \"CDN\", \"fingerprint\" e \"analytics\" serão desativados."
+quicklyUpgrade = "Utilize o comando para atualizar rapidamente:"
 # === init ===
 
 # === baseof ===
 [baseof]
 backToTop = "Voltar ao topo"
 viewComments = "Ver comentários"
-noscript = ""
+noscript = "Este site funciona melhor com o JavaScript ativado."
 # === baseof ===
 
 # === Taxonomy ===
 [archives]
-other = ""
+other = "Arquivos"
 
 [allSome]
 other = "{{ .Some }}"
@@ -33,10 +32,10 @@ other = "Categoria"
 other = "Categorias"
 
 [collection]
-other = ""
+other = "Coleção"
 
 [collections]
-other = ""
+other = "Coleções"
 
 [tag]
 other = "Tag"
@@ -46,6 +45,7 @@ other = "Tags"
 
 [posts]
 other = "Posts"
+
 # === Taxonomy ===
 
 # === Section ===
@@ -53,12 +53,12 @@ other = "Posts"
 recentlyUpdated = "Recentemente atualizado"
 
 [section.totalWordCount]
-one = ""
-other = ""
+one = "Apenas uma palavra"
+other = "Total de {{ .Count }} palavras"
 
 [section.archiveCounter]
-one = ""
-other = ""
+one = "Apenas um artigo"
+other = "{{ .Count }} artigos no total"
 # === Section ===
 
 # === Pagination ===
@@ -75,86 +75,86 @@ switchTheme = "Trocar tema"
 
 # === partials/footer.html ===
 [footer]
-poweredBySome = "Possibilitado por {{ .Hugo }} | Tema - {{ .Theme }}"
+poweredBySome = "Criado com {{ .Hugo }} | Tema - {{ .Theme }}"
 siteUV = "Total de visitantes"
 sitePV = "Total de visitas"
-siteRunning = "Website running ..."
+siteRunning = "Site no ar..."
 # === partials/footer.html ===
 
 # === partials/comment.html ===
 [comment]
 valineLang = "en" # Valine não suporta português
-valinePlaceholder = "O seu comentário ..."
+valinePlaceholder = "O seu comentário..."
 facebookLanguageCode = "pt_BR"
 # === partials/comment.html ===
 
 # === partials/assets.html ===
 [assets]
 search = "Pesquisa"
-searchPlaceholder = "Pesquisar títulos ou conteúdos ..."
+searchPlaceholder = "Pesquisar títulos ou conteúdos..."
 clear = "Limpar"
 cancel = "Cancelar"
 noResultsFound = "Nenhum resultado encontrado"
 copyToClipboard = "Copiar para a área de transferência"
 editLockTitle = "Bloquear bloco de código editável"
-editUnLockTitle = "Desbloqueie o bloco de código editável"
+editUnLockTitle = "Desbloquear o bloco de código editável"
 cookieconsentMessage = "Este site usa Cookies para melhorar sua experiência."
-cookieconsentDismiss = "Aceita"
+cookieconsentDismiss = "Aceitar"
 cookieconsentLink = "Saber mais"
 # === partials/assets.html ===
 
 # === partials/plugin/share.html ===
 [shareOn]
-other = "Compartilhe em"
+other = "Compartilhar em"
 # === partials/plugin/share.html ===
 
 # === posts/single.html ===
 [single]
 contents = "Conteúdos"
-pin = ""
-repost = ""
+pin = "Fixar no topo"
+repost = "Repostar"
 publishedOnDate = "publicado em {{ .Date }}"
 views = "visualizações"
 comments = "comentários"
 author = "Autor"
 updatedOnDate = "Atualizado em {{ .Date }}"
 readMarkdown = "Leia em Markdown"
-viewSource = ""
+viewSource = "Ver a fonte"
 editThisPage = "Editar esta página"
-reportIssue = ""
+reportIssue = "Reportar problema"
 back = "Voltar"
 home = "Home"
 readMore = "Leia mais"
 expirationReminder = "Este artigo foi atualizado pela última vez em {{ .Date }}, o conteúdo pode estar desatualizado."
-encryptedAbstract = ""
-encryptedMessage = ""
-password = "Contrasinha"
-enterBtn = ""
-encryptyAgain = ""
+encryptedAbstract = "Este artigo foi encriptado, então seu contéudo bruto é invisível!"
+encryptedMessage = "Por favor, insira a senha"
+password = "Senha"
+enterBtn = "Entrar"
+encryptyAgain = "Encripte novamente"
 relatedContent = "Conteúdo relacionado"
 
 [single.includedIn]
-categories = "incluido em {{ .Categories }}"
-collections = "incluido em {{ .Collections }}"
-both = "incluido em {{ .Categories }} e {{ .Collections }}"
+categories = "incluído em {{ .Categories }}"
+collections = "incluído em {{ .Collections }}"
+both = "incluído em {{ .Categories }} e {{ .Collections }}"
 
 [single.wordCount]
 one = "Uma palavra"
 other = "{{ .Count }} palavras"
 
 [single.fuzzyWordCount]
-other = ""
+other = "Cerca de {{ .Count }} palavras"
 
 [single.readingTime]
 one = "Um minuto"
 other = "{{ .Count }} minutos"
 
 [single.reward]
-donate = ""
-wechatpay = ""
-alipay = ""
-paypal = ""
-bitcoin = ""
+donate = "Doe"
+wechatpay = "Pague pelo WeChat"
+alipay = "Alipay"
+paypal = "PayPal"
+bitcoin = "Bitcoin"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -162,7 +162,7 @@ bitcoin = ""
 other = "Página não encontrada"
 
 [pageNotFoundText]
-other = "A página que você procura não existe. Desculpe"
+other = "A página que você procura não existe. Desculpe."
 # === 404.html ===
 
 # === offline ===
@@ -175,34 +175,34 @@ other = "Você não está conectado à Internet, apenas as páginas em cache est
 
 # === GitHub Alert ===
 [alert]
-note = ""
-tip = ""
-important = ""
-warning = ""
-caution = ""
+note = "Nota"
+tip = "Sugestão"
+important = "Importante"
+warning = "Aviso"
+caution = "Cuidado"
 # === GitHub Alert ===
 
 # === Task lists ===
 [taskList]
-" " = ""
-"x" = ""
-"/" = ""
-"-" = ""
-"<" = ""
-">" = ""
-"!" = ""
-"?" = ""
+" " = "Não verificado"
+"x" = "Verificado"
+"/" = "Em progresso"
+"-" = "Cancelado"
+"<" = "Agendado"
+">" = "Reagendado"
+"!" = "Importante"
+"?" = "Dúvida"
 # === Task lists ===
 
 # === shortcodes/admonition.html ===
 [admonition]
 note = "Nota"
-abstract = "Abstrato"
+abstract = "Resumo"
 info = "Info"
 todo = "A fazer"
 tip = "Dica"
 success = "Sucesso"
-question = "Pergunta"
+question = "Dúvida"
 warning = "Aviso"
 failure = "Falha"
 danger = "Perigo"
