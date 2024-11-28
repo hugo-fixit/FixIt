@@ -418,14 +418,19 @@ enableEmoji = true
       ignoreLocation = false
       useExtendedSearch = false
       ignoreFieldNorm = false
-    # FixIt 0.3.16 | NEW Custom Search Engine (CSE)
-    [params.search.cse]
-      # CSE engine: ["google", "bing"]
-      engine = "google"
-      # Google: https://programmablesearchengine.google.com/
-      # Google Custom Search Engine Context
+
+  # FixIt 0.3.16 | NEW Custom Search Engine (CSE)
+  [params.cse]
+    # Search Engine: ["google", "bing"]
+    engine = ""
+    # Search results page URL (layout: search)
+    resultsPage = "/search/"
+    # Google: https://programmablesearchengine.google.com/
+    # Google Custom Search Engine Context
+    [params.cse.google]
       cx = ""
-      # Bing (Unsupported): https://www.customsearch.ai/
+    # Bing (Unsupported): https://www.customsearch.ai/
+    [params.cse.bing]
 
   # Header config
   [params.header]

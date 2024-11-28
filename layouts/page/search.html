@@ -5,7 +5,7 @@
 
 {{- define "content" -}}
   {{- $params := partial "function/params.html" -}}
-  {{- $cse := .Site.Params.search.cse -}}
+  {{- $cse := .Site.Params.cse -}}
   <article class="page single special search">
     <div class="header">
       {{- /* Title */ -}}
@@ -22,7 +22,7 @@
 
     {{- /* Google CSE */ -}}
     {{- if eq $cse.engine "google" -}}
-      {{- with $cse.cx -}}
+      {{- with $cse.google.cx -}}
         <script async defer src="https://cse.google.com/cse.js?cx={{ . }}"></script>
         <div class="gcse-searchbox"></div>
         <div class="gcse-searchresults"></div>
