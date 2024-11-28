@@ -92,6 +92,8 @@ facebookLanguageCode = "it"
 [assets]
 search = "Cerca"
 searchPlaceholder = "Cerca il titolo o il contenuto dell'articolo ..."
+searchIn = "Cerca in"
+gotoResultsPage = "Vai alla pagina dei risultati della ricerca ..."
 clear = "Chiaro"
 cancel = "Annulla"
 noResultsFound = "Nessun risultato trovato"

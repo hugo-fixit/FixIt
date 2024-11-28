@@ -92,6 +92,8 @@ facebookLanguageCode = "sr_RS"
 [assets]
 search = "Претрага"
 searchPlaceholder = "Претражи наслове или садржај..."
+searchIn = "Претражи у {{ . }}"
+gotoResultsPage = "Иди на страницу резултата претраге ..."
 clear = "Очисти"
 cancel = "Поништи"
 noResultsFound = "Без резултата"

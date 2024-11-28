@@ -92,6 +92,8 @@ facebookLanguageCode = "ro_RO"
 [assets]
 search = "Căutare"
 searchPlaceholder = "Căutarea titlului sau conținutului articolului ..."
+searchIn = "Căutare în {{ . }}"
+gotoResultsPage = "Mergi la pagina de rezultate a căutării ..."
 clear = "Golire"
 cancel = "Anulare"
 noResultsFound = "Nici un rezultat gasit"

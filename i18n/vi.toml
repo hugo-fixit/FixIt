@@ -91,6 +91,8 @@ facebookLanguageCode = "vi"
 [assets]
 search = "Tìm kiếm"
 searchPlaceholder = "Tìm tiêu đề hoặc nội dung..."
+searchIn = "Tìm kiếm trong {{ . }}"
+gotoResultsPage = "Đi đến trang kết quả tìm kiếm ..."
 clear = "Xoá"
 cancel = "Huỷ"
 noResultsFound = "Không tìm thấy"

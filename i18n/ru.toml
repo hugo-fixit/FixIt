@@ -92,6 +92,8 @@ facebookLanguageCode = "ru_RU"
 [assets]
 search = "Поиск"
 searchPlaceholder = "Поиск заголовков или содержимого ..."
+searchIn = "Поиск в {{ . }}"
+gotoResultsPage = "Перейти на страницу результатов поиска ..."
 clear = "Очистить"
 cancel = "Отменить"
 noResultsFound = "Результатов не найдено"

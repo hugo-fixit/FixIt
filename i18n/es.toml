@@ -92,6 +92,8 @@ facebookLanguageCode = "es_MX"
 [assets]
 search = "Buscar"
 searchPlaceholder = "Busca títulos o contenido..."
+searchIn = "Buscar en {{ . }}"
+gotoResultsPage = "Ir a la página de resultados de búsqueda ..."
 clear = "Limpiar"
 cancel = "Cancelar"
 noResultsFound = "No se encontraron resultados"

@@ -89,6 +89,8 @@ facebookLanguageCode = "zh-TW"
 [assets]
 search = "搜尋"
 searchPlaceholder = "搜尋文章標題或內容……"
+searchIn = "在 {{ . }} 中搜尋"
+gotoResultsPage = "前往搜尋結果頁面……"
 clear = "清除"
 cancel = "取消"
 noResultsFound = "沒有找到結果"

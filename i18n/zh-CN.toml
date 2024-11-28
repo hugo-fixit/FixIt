@@ -89,6 +89,8 @@ facebookLanguageCode = "zh_CN"
 [assets]
 search = "搜索"
 searchPlaceholder = "搜索文章标题或内容……"
+searchIn = "在 {{ . }} 中搜索"
+gotoResultsPage = "前往搜索结果页面……"
 clear = "清空"
 cancel = "取消"
 noResultsFound = "没有找到结果"
