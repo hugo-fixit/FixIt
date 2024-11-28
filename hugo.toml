@@ -389,7 +389,7 @@ enableEmoji = true
   # Search config
   [params.search]
     enable = false
-    # type of search engine ["algolia", "fuse"]
+    # type of search engine ["algolia", "fuse", "cse"]
     type = "fuse"
     # max index length of the chunked content
     contentLength = 4000
@@ -418,6 +418,19 @@ enableEmoji = true
       ignoreLocation = false
       useExtendedSearch = false
       ignoreFieldNorm = false
+
+  # FixIt 0.3.16 | NEW Custom Search Engine (CSE)
+  [params.cse]
+    # Search Engine: ["google", "bing"]
+    engine = ""
+    # Search results page URL (layout: search)
+    resultsPage = "/search/"
+    # Google: https://programmablesearchengine.google.com/
+    # Google Custom Search Engine Context
+    [params.cse.google]
+      cx = ""
+    # Bing (Unsupported): https://www.customsearch.ai/
+    [params.cse.bing]
 
   # Header config
   [params.header]
