@@ -105,6 +105,8 @@
 
     .featured-image-preview {
       width: 100%;
+      // resolve the aspect ratio issue temporarily
+      max-width: 1000px;
       // use the same proportions as the cover image of https://dev.to/
       aspect-ratio: auto 1000 / 420;
       position: relative;
