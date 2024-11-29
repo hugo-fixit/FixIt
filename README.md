@@ -107,7 +107,8 @@ I don't know why 🤷
 - **Sub Menu** supported
 - **Content Encryption** supported (Pages, Partial)
 - **Friends** page embedded template
-- **Search** supported by [algolia](https://www.algolia.com/) or [Fuse.js](https://fusejs.io/)
+- **Search** supported by [algolia](https://www.algolia.com/), [Fuse.js](https://fusejs.io/) or CSE
+- **Custom Search Engine (CSE)** supported by [Google](https://programmablesearchengine.google.com/)
 - **Twemoji** supported
 - Automatically **highlighting** code
 - **Copy code** to clipboard with one click
