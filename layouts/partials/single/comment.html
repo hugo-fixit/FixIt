@@ -145,13 +145,12 @@
 
     {{- /* Waline Comment System */ -}}
     {{- /* see https://waline.js.org/reference/component.html */ -}}
-    {{- /* TODO adapted to Waline 2.15.8 */ -}}
     {{- $waline := $comment.waline | default dict -}}
     {{- if $waline.enable -}}
       <div id="waline" class="comment"></div>
       {{- $source := $cdn.walineCSS | default "lib/waline/waline.css" -}}
       {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
-      {{- $source := $cdn.walineJS | default "lib/waline/waline.js" -}}
+      {{- $source := $cdn.walineJS | default "lib/waline/waline.umd.js" -}}
       {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
       {{- $commentConfig = dict "el" "#waline" "serverURL" $waline.serverURL "lang" .Lang "dark" "html[data-theme='dark']" | dict "waline" | merge $commentConfig -}}
       {{- $commentConfig = dict "copyright" true "imageUploader" false "highlighter" false "texRenderer" false "search" false | dict "waline" | merge $commentConfig -}}
