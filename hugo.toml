@@ -901,6 +901,8 @@ enableEmoji = true
   # Depends on open custom blocks https://fixit.lruihao.cn/references/blocks/
   [params.customPartials]
     head = []
+    menuDesktop = []
+    menuMobile = []
     profile = []
     aside = []
     comment = []

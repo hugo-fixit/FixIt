@@ -144,6 +144,9 @@
             </ul>
           </li>
         {{- end -}}
+
+        {{- /* Custom menu items in the desktop header */ -}}
+        {{- block "custom-menu:desktop" . }}{{ end -}}
       </ul>
     </nav>
   </div>
@@ -305,6 +308,9 @@
               </select>
             </span>
           {{- end -}}
+
+          {{- /* Custom menu items in the mobile header */ -}}
+          {{- block "custom-menu:mobile" . }}{{ end -}}
         </li>
       </ul>
     </nav>

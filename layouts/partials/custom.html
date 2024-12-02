@@ -5,6 +5,20 @@
   {{- end -}}
 {{- end -}}
 
+{{- define "custom-menu:desktop" -}}
+  {{- $ctx := . -}}
+  {{- range .Site.Params.customPartials.menuDesktop -}}
+    {{- partial . $ctx -}}
+  {{- end -}}
+{{- end -}}
+
+{{- define "custom-menu:mobile" -}}
+  {{- $ctx := . -}}
+  {{- range .Site.Params.customPartials.menuMobile -}}
+    {{- partial . $ctx -}}
+  {{- end -}}
+{{- end -}}
+
 {{- define "custom-profile" -}}
   {{- $ctx := . -}}
   {{- range .Site.Params.customPartials.profile -}}
