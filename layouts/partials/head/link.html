@@ -37,6 +37,39 @@
   <link rel="alternate" type="application/feed+json" href="{{ .Permalink }}" title="{{ $title }}" />
 {{- end -}}
 
+{{- /* Mastodon Validation for the site */ -}}
+{{- with .Site.Params.social.Mastodon -}}
+  {{- $mastodonConfig := . -}}
+  {{- $id := "" -}}
+  {{- $prefix := "https://mastodon.social/" -}}
+
+  {{- /* Check if Mastodon is a string */ -}}
+  {{- if printf "%T" $mastodonConfig | eq "string" -}}
+    {{- $id = strings.TrimPrefix "@" $mastodonConfig -}}
+
+  {{- /* Check if Mastodon is a map/object */ -}}
+  {{- else if printf "%T" $mastodonConfig | eq "map[string]interface {}" -}}
+    {{- $id = .Id | default .id | default "" | strings.TrimPrefix "@" -}}
+    {{- $prefix = .Prefix | default .prefix | default $prefix -}}
+  
+  {{- /* If it's neither a string nor a map, do nothing */ -}}
+  {{- else -}}
+    {{- errorf "Invalid Mastodon configuration: %#v" $mastodonConfig -}}
+  {{- end -}}
+
+  {{- /* Remove trailing slash from prefix */ -}}
+  {{- $prefix = strings.TrimSuffix "/" $prefix -}}
+
+  {{- /* Construct profile URL */ -}}
+  {{- $profileUrl := printf "%s/@%s" $prefix $id -}}
+
+  {{- /* Only proceed if we have a valid ID */ -}}
+  {{- if $id -}}
+    <link rel="me" href="{{ $profileUrl }}" />
+    <meta name="fediverse:creator" content="{{ $id }}@{{ (urls.Parse $prefix).Host }}" />
+  {{- end -}}
+{{- end -}}
+
 {{- /* style.min.css */ -}}
 {{- $options := dict "Source" "css/style.scss" "Fingerprint" $fingerprint -}}
 {{- $toCSS := dict "targetPath" "css/style.min.css" "enableSourceMap" true -}}
