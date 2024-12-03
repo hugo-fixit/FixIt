@@ -9,7 +9,7 @@ crypto-js@4.2.0 https://github.com/brix/crypto-js
 echarts@5.3.3 https://github.com/apache/echarts
 TODO update emoji-data to 15.x
 emoji-data@14.0.0 https://github.com/iamcal/emoji-data
-fontawesome-free@6.4.2 https://github.com/FortAwesome/Font-Awesome
+fontawesome-free@6.7.1 https://github.com/FortAwesome/Font-Awesome
 fusejs@6.6.2 https://github.com/krisk/fuse
 gitalk@1.7.2 https://github.com/gitalk/gitalk
 instant.page@5.2.0 https://github.com/instantpage/instant.page
@@ -26,5 +26,5 @@ twemoji@14.0.2 https://github.com/twitter/twemoji
 twikoo@1.6.22 https://github.com/imaegoo/twikoo
 typeit@8.8.4 https://github.com/alexmacarthur/typeit
 valine@1.5.2 https://github.com/xCss/Valine
-waline@2.15.8 https://github.com/walinejs/waline
+waline@3.4.1 https://github.com/walinejs/waline
 xxhash-wasm@1.0.2 https://github.com/jungomi/xxhash-wasm

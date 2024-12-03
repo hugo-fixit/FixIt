@@ -10,7 +10,7 @@
       (T "collection")
       .LinkTitle
     -}}
-    <div class="collection-card{{ with $params.password }} encrypted-hidden{{ end }}">
+    <div class="collection-card">
       <div class="collection-title text-secondary">
         {{- dict "Collections" $termLink | T "single.includedIn.collections" | strings.FirstUpper | safeHTML }} {{ .Pages.Len -}}
       </div>

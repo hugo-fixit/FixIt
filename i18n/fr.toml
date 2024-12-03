@@ -7,7 +7,7 @@
 configurationError = "Erreur de configuration\nVous n'avez pas configuré la version de FixIt correctement. Voir https://fixit.lruihao.cn/documentation/basics/#theme-configuration"
 compatibilityError = "Erreur de compatibilité ({{ .From }} -> {{ .To }}):\nVous avez une mise à jour incompatible. Voir https://github.com/hugo-fixit/FixIt/releases"
 devVersionWarn = "Vous utilisez une version de développement de FixIt. Veuillez considérer l'utilisation d'une version stable.\nVoir https://github.com/hugo-fixit/FixIt/releases"
-devEnvWarn = "L'environnement actuel est \"développement\". Le \"système de commentaires\", le \"PWA\", le \"CDN\" et la \"prise d'empreinte\" seront désactivés."
+devEnvWarn = "L'environnement actuel est \"développement\". Le \"système de commentaires\", le \"PWA\", le \"CDN\", le \"prise d'empreinte\" et la \"analyses\" seront désactivés."
 quicklyUpgrade = "La mise à jour rapide utilise la commande: "
 # === init ===
 
@@ -20,7 +20,7 @@ noscript = "Ce site Web fonctionne mieux quand JavaScript est activé."
 
 # === Taxonomy ===
 [archives]
-other = ""
+other = "Archives"
 
 [allSome]
 other = "Tous les {{ .Some }}"
@@ -32,10 +32,10 @@ other = "Catégorie"
 other = "Catégories"
 
 [collection]
-other = ""
+other = "Collection"
 
 [collections]
-other = ""
+other = "Collections"
 
 [tag]
 other = "Tag"
@@ -56,8 +56,8 @@ one = "Nombre de mots: 1"
 other = "Nombre de mots: {{ .Count }}"
 
 [section.archiveCounter]
-one = ""
-other = ""
+one = "Seulement un article"
+other = "{{ .Count }} articles au total"
 # === Section ===
 
 # === Pagination ===
@@ -91,6 +91,8 @@ facebookLanguageCode = "fr"
 [assets]
 search = "Chercher"
 searchPlaceholder = "Rechercher des titres, des contenus..."
+searchIn = "Rechercher dans {{ . }}"
+gotoResultsPage = "Aller à la page de résultats de recherche ..."
 clear = "Effacer"
 cancel = "Annuler"
 noResultsFound = "Aucun résultat trouvé"
@@ -110,7 +112,7 @@ other = "Partager via"
 # === posts/single.html ===
 [single]
 contents = "Contenus"
-pin = ""
+pin = "Épingler en haut"
 repost = "Reposter"
 publishedOnDate = "publié le {{ .Date }}"
 views = "vues"
@@ -118,9 +120,9 @@ comments = "commentaires"
 author = "Auteur"
 updatedOnDate = "Mis à jour le {{ .Date }}"
 readMarkdown = "Ouvrir le Markdown"
-viewSource = ""
+viewSource = "Voir la source"
 editThisPage = "Modifier cette page"
-reportIssue = ""
+reportIssue = "Signaler un problème"
 back = "Retour"
 home = "Accueil"
 readMore = "En savoir plus"
@@ -174,23 +176,23 @@ other = "Vous n'êtes pas connecté à Internet, seules les pages mises en cache
 
 # === GitHub Alert ===
 [alert]
-note = ""
-tip = ""
-important = ""
-warning = ""
-caution = ""
+note = "Remarque"
+tip = "Astuce"
+important = "Important"
+warning = "Avertissement"
+caution = "Attention"
 # === GitHub Alert ===
 
 # === Task lists ===
 [taskList]
-" " = ""
-"x" = ""
-"/" = ""
-"-" = ""
-"<" = ""
-">" = ""
-"!" = ""
-"?" = ""
+" " = "Non vérifié"
+"x" = "Vérifié"
+"/" = "En cours"
+"-" = "Annulé"
+"<" = "Planifié"
+">" = "Replanifié"
+"!" = "Important"
+"?" = "Question"
 # === Task lists ===
 
 # === shortcodes/admonition.html ===

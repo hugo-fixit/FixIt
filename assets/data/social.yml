@@ -673,6 +673,14 @@ credly:
   Icon:
     Class: fa-solid fa-certificate
 
+# 086: Bluesky
+bluesky:
+  Weight: 86
+  Title: Bluesky
+  Prefix: https://bsky.app/profile/
+  Icon:
+    Class: fa-brands fa-bluesky
+
 # Phone
 phone:
   Weight: 997

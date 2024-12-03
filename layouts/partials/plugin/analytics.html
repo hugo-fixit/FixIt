@@ -19,4 +19,47 @@
     </script>
     {{- dict "Source" ($analytics.fathom.server | default "cdn.usefathom.com" | printf "https://%v/tracker.js") "Async" true "Attr" "id=fathom-script" | partial "plugin/script.html" -}}
   {{- end -}}
+
+  {{- /* Baidu Analytics */ -}}
+  {{- with $analytics.baidu.id -}}
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?{{ . }}";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  {{- end -}}
+
+  {{- /* Umami Analytics */ -}}
+  {{- with $analytics.umami.data_website_id -}}
+    <script async defer data-website-id="{{ . }}" src="{{ $analytics.umami.src }}" {{ with $analytics.umami.data_host_url }} data-host-url="{{ . }}" {{ end }} {{ with $analytics.umami.data_domains }} data-domains="{{ . }}" {{ end }}></script>
+  {{- end -}}
+
+  {{- /* Plausible Analytics */ -}}
+  {{- with $analytics.plausible.data_domain -}}
+    <script async defer data-domain="{{ . }}" src="{{ $analytics.plausible.src }}"></script>
+  {{- end -}}
+
+  {{- /* Cloudflare Analytics */ -}}
+  {{- with $analytics.cloudflare.token -}}
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "{{ $analytics.cloudflare.token }}"}'></script>
+  {{- end -}}
+
+  {{- /* Splitbee Analytics */ -}}
+  {{- if $analytics.splitbee.enable -}}
+    {{- $attr := "" -}}
+    {{- if $analytics.splitbee.do_not_track -}}
+      {{- $attr = printf `%v data-respect-dnt` $attr -}}
+    {{- end -}}
+    {{- if $analytics.splitbee.no_cookie -}}
+      {{- $attr = printf `%v data-no-cookie` $attr -}}
+    {{- end -}}
+    {{- with $analytics.splitbee.data_token -}}
+      {{- $attr = printf `%v data-token="%v"` $attr . -}}
+    {{- end -}}
+    <script defer {{ with $attr }} {{ . | safeHTMLAttr }} {{ end }} src="https://cdn.splitbee.io/sb.js"></script>
+  {{- end -}}
 {{- end -}}

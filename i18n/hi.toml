@@ -7,7 +7,7 @@
 configurationError = "कन्फ़िग्यरेशन त्रुटि \nआपने फिक्सइट संस्करण पैरामीटर को सही ढंग से कॉन्फ़िगर नहीं किया है।. यह देखें: https://fixit.lruihao.cn/documentation/basics/#theme-configuration"
 compatibilityError = "संगतता त्रुटि ({{ .From }} -> {{ .To }}):\nआपके पास एक असंगत अपडेट है. यह देखें: https://github.com/hugo-fixit/FixIt/releases"
 devVersionWarn = "आप फिक्सइट के डिवेलपर संस्करण का उपयोग कर रहे हैं। कृपया एक स्थिर संस्करण का उपयोग करने पर विचार करें।\nयह देखें: https://github.com/hugo-fixit/FixIt/releases"
-devEnvWarn = "वर्तमान परिवेश \"डिवेलप्मेंट\" का है। \"टिप्पणी प्रणाली\", \"पीडब्ल्यूए\", \"सीडीएन\" और \"फ़िंगरप्रिंट\" अक्षम कर दिए जाएंगे। "
+devEnvWarn = "वर्तमान परिवेश \"डिवेलप्मेंट\" का है। \"टिप्पणी प्रणाली\", \"पीडब्ल्यूए\", \"सीडीएन\", \"फ़िंगरप्रिंट\" और \"विश्लेषण\" अक्षम कर दिए जाएंगे।"
 quicklyUpgrade = "शीघ्रता से अपग्रेड यह कमांड का उपयोग करें: "
 # === init ===
 
@@ -92,6 +92,8 @@ facebookLanguageCode = "hi"
 [assets]
 search = "खोज"
 searchPlaceholder = "शीर्षक या सामग्री खोजें ..."
+searchIn = "{{ . }} में खोजें"
+gotoResultsPage = "खोज परिणाम पेज पर जाएं ..."
 clear = "साफ़ करें"
 cancel = "रद्द करें"
 noResultsFound = "कोई परिणाम नहीं मिला"
@@ -175,23 +177,23 @@ other = "आप इंटरनेट से कनेक्ट नहीं ह
 
 # === GitHub Alert ===
 [alert]
-note = ""
-tip = ""
-important = ""
-warning = ""
-caution = ""
+note = "ध्यान दें"
+tip = "टिप"
+important = "महत्वपूर्ण"
+warning = "चेतावनी"
+caution = "सावधान"
 # === GitHub Alert ===
 
 # === Task lists ===
 [taskList]
-" " = ""
-"x" = ""
-"/" = ""
-"-" = ""
-"<" = ""
-">" = ""
-"!" = ""
-"?" = ""
+" " = "जांच नहीं की गई"
+"x" = "जांच की गई"
+"/" = "काम जारी है"
+"-" = "रद्द किया गया"
+"<" = "अनुसूचित"
+">" = "पुनः अनुसूचित"
+"!" = "महत्वपूर्ण"
+"?" = "सवाल"
 # === Task lists ===
 
 # === shortcodes/admonition.html ===

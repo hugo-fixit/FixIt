@@ -1,8 +1,8 @@
 {
-  "name": "fixit-src",
+  "name": "fixit-core",
   "version": "0.3.15",
   "private": true,
-  "description": "FixIt theme source files",
+  "description": "Hugo FixIt core theme component source files",
   "keywords": [
     "hugo",
     "theme",
@@ -21,9 +21,9 @@
   "type": "module",
   "scripts": {
     "build": "hugo --source=demo --themesDir ../.. --theme $PWD --gc --minify --logLevel info",
-    "server": "hugo server --source=demo --themesDir ../.. --theme $PWD -D --disableFastRender --navigateToChanged --ignoreCache",
+    "server": "hugo server --source=demo --themesDir ../.. --theme $PWD -D --disableFastRender --navigateToChanged --ignoreCache -O",
     "server:production": "npm run server -- -e production",
-    "server:docs": "hugo server --source=../fixit-docs -D --disableFastRender --navigateToChanged --ignoreCache",
+    "server:docs": "hugo server --source=../fixit-docs -D --disableFastRender --navigateToChanged --ignoreCache -O",
     "version": "fixit-releaser version --prod",
     "postversion": "git push && git push --tags && npm run release",
     "release": "fixit-releaser changelog",
@@ -31,6 +31,9 @@
   },
   "devDependencies": {
     "@hugo-fixit/fixit-releaser": "^1.0.1",
-    "husky": "^9.1.6"
+    "husky": "^9.1.7"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

@@ -7,7 +7,7 @@
 configurationError = "配置文件错误\n您还没有正确配置 FixIt 的版本参数。参考 https://fixit.lruihao.cn/zh-cn/documentation/basics/#theme-configuration"
 compatibilityError = "兼容性错误 ({{ .From }} -> {{ .To }}):\n您进行了一次不兼容的更新。参考 https://github.com/hugo-fixit/FixIt/releases"
 devVersionWarn = "您正在使用开发版的 FixIt，请考虑使用稳定版。\n见 https://github.com/hugo-fixit/FixIt/releases"
-devEnvWarn = "当前运行环境是“development”。“评论系统”、“PWA”、“CDN”和“fingerprint”不会启用。"
+devEnvWarn = "当前运行环境是“development”。“评论系统”、“PWA”、“CDN”、“fingerprint”和“统计”不会启用。"
 quicklyUpgrade = "使用命令快速升级："
 # === init ===
 
@@ -89,6 +89,8 @@ facebookLanguageCode = "zh_CN"
 [assets]
 search = "搜索"
 searchPlaceholder = "搜索文章标题或内容……"
+searchIn = "在 {{ . }} 中搜索"
+gotoResultsPage = "前往搜索结果页面……"
 clear = "清空"
 cancel = "取消"
 noResultsFound = "没有找到结果"

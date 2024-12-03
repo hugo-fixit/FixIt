@@ -97,6 +97,7 @@
   hr {
     position: relative;
     height: 1em;
+    margin-block: 1em;
     background: linear-gradient(to right, var(--#{$prefix}hr-background-color) 50%, transparent 50%);
     background-size: 10px 2px;
     background-position: center;
@@ -104,8 +105,6 @@
     border: none;
 
     &.awesome-hr {
-      margin-block: 0.5em;
-
       &::before {
         display: inline-block;
         font-weight: 600;
@@ -249,10 +248,13 @@
     li[data-task='x'],
     li[data-task='-'] {
       --#{$prefix}task-color: var(--#{$prefix}secondary);
-      text-decoration: line-through;
+      text-decoration: line-through rgba(145, 145, 145, 0.6);
     }
     li[data-task='x'] {
       --#{$prefix}checkbox-color: var(--#{$prefix}primary);
+    }
+    li[data-task='-'] {
+      opacity: 0.6;
     }
     li[data-task='/'] {
       --#{$prefix}task-color: var(--#{$prefix}success);
@@ -304,6 +306,7 @@
     }
 
     .table-wrapper {
+      position: relative;
       overflow-x: auto;
       --#{$prefix}scrollbar-thumb-color: #{$table-background-color};
 
@@ -495,10 +498,6 @@
       }
     }
 
-    hr {
-      margin-block: 0;
-    }
-
     kbd {
       display: inline-block;
       padding: 0 0.25rem;
@@ -516,6 +515,13 @@
         color: $code-color-dark;
         @include box-shadow(inset 0 -1px 0 $global-border-color-dark);
       }
+    }
+
+    // Katex styles
+    .katex-display {
+      max-width: 100%;
+      overflow-x: auto;
+      padding-block: 2px;
     }
 
     @import '../_partials/_single/alert';

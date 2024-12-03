@@ -178,8 +178,13 @@ enableEmoji = true
           enable = true
         [markup.goldmark.extensions.extras.superscript]
           enable = true
-    # TODO passthrough refactor https://gohugo.io/getting-started/configuration-markup/#parserattributeblock
+    # TODO passthrough refactor https://gohugo.io/render-hooks/passthrough/
     # TODO hugo 0.122.0 https://gohugo.io/content-management/mathematics/
+    # [markup.goldmark.extensions.passthrough]
+    #   enable = true
+    #   [markup.goldmark.extensions.passthrough.delimiters]
+    #     block = [['\[', '\]'], ['$$', '$$']]
+    #     inline = [['\(', '\)'], ['$', '$']]
     [markup.goldmark.parser]
       [markup.goldmark.parser.attribute]
         block = true
@@ -384,7 +389,7 @@ enableEmoji = true
   # Search config
   [params.search]
     enable = false
-    # type of search engine ["algolia", "fuse"]
+    # type of search engine ["algolia", "fuse", "cse"]
     type = "fuse"
     # max index length of the chunked content
     contentLength = 4000
@@ -413,6 +418,19 @@ enableEmoji = true
       ignoreLocation = false
       useExtendedSearch = false
       ignoreFieldNorm = false
+
+  # FixIt 0.3.16 | NEW Custom Search Engine (CSE)
+  [params.cse]
+    # Search Engine: ["google", "bing"]
+    engine = ""
+    # Search results page URL (layout: search)
+    resultsPage = "/search/"
+    # Google: https://programmablesearchengine.google.com/
+    # Google Custom Search Engine Context
+    [params.cse.google]
+      cx = ""
+    # Bing (Unsupported): https://www.customsearch.ai/
+    [params.cse.bing]
 
   # Header config
   [params.header]
@@ -653,6 +671,7 @@ enableEmoji = true
     Douyin = ""
     TikTok = ""
     Credly = ""
+    Bluesky = ""
     Phone = ""
     Email = ""
     RSS = true
@@ -772,6 +791,31 @@ enableEmoji = true
       id = ""
       # server url for your tracker if you're self hosting
       server = ""
+    # FixIt 0.3.16 | NEW Baidu Analytics
+    [params.analytics.baidu]
+      id = ""
+    # FixIt 0.3.16 | NEW Umami Analytics
+    [params.analytics.umami]
+      data_website_id = ""
+      src = ""
+      data_host_url = ""
+      data_domains = ""
+    # FixIt 0.3.16 | NEW Plausible Analytics
+    [params.analytics.plausible]
+      data_domain = ""
+      src = ""
+    # FixIt 0.3.16 | NEW Cloudflare Analytics
+    [params.analytics.cloudflare]
+      token = ""
+    # FixIt 0.3.16 | NEW Splitbee Analytics
+    [params.analytics.splitbee]
+      enable = false
+      # no cookie mode
+      no_cookie = true
+      # respect the do not track setting of the browser
+      do_not_track = true
+      # token(optional), more info on https://splitbee.io/docs/embed-the-script
+      data_token = ""
 
   # Cookie consent config
   [params.cookieconsent]

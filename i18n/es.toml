@@ -1,27 +1,26 @@
 # Translations for Spanish
 # Traducciones para español
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
-# TODO Some fields are waiting for your translation
 
 # === init ===
 [init]
-configurationError = ""
-compatibilityError = ""
-devVersionWarn = ""
-devEnvWarn = ""
-quicklyUpgrade = ""
+configurationError = "Error de configuración\nAún no ha configurado correctamente el parámetro de versión de FixIt. Consulte https://fixit.lruihao.cn/documentation/basics/#theme-configuration"
+compatibilityError = "Error de compatibilidad ({{ .From }} -> {{ .To }}):\nTiene una actualización incompatible. Consulte https://github.com/hugo-fixit/FixIt/releases"
+devVersionWarn = "Está utilizando una versión de desarrollo de FixIt. Considere usar una versión estable.\nConsulte https://github.com/hugo-fixit/FixIt/releases"
+devEnvWarn = "El entorno actual es \"desarrollo\". El \"sistema de comentarios\", \"PWA\", \"CDN\", \"huella digital\" y \"análisis\" estarán deshabilitados."
+quicklyUpgrade = "Actualización rápida use el comando: "
 # === init ===
 
 # === baseof ===
 [baseof]
 backToTop = "Volver arriba"
 viewComments = "Ver comentarios"
-noscript = ""
+noscript = "Este sitio web funciona mejor con JavaScript habilitado."
 # === baseof ===
 
 # === Taxonomy ===
 [archives]
-other = ""
+other = "Total {{ .Count }} artículos"
 
 [allSome]
 other = "Todo {{ .Some }}"
@@ -33,10 +32,10 @@ other = "Categoría"
 other = "Categorías"
 
 [collection]
-other = ""
+other = "Colección"
 
 [collections]
-other = ""
+other = "Colecciones"
 
 [tag]
 other = "Etiqueta"
@@ -53,12 +52,12 @@ other = "Artículos"
 recentlyUpdated = "Actualizado recientemente"
 
 [section.totalWordCount]
-one = ""
-other = ""
+one = "Una palabra"
+other = "Total {{ .Count }} palabras"
 
 [section.archiveCounter]
-one = ""
-other = ""
+one = "Solo un artículo"
+other = "Total {{ .Count }} artículos"
 # === Section ===
 
 # === Pagination ===
@@ -92,6 +91,8 @@ facebookLanguageCode = "es_MX"
 [assets]
 search = "Buscar"
 searchPlaceholder = "Busca títulos o contenido..."
+searchIn = "Buscar en {{ . }}"
+gotoResultsPage = "Ir a la página de resultados de búsqueda ..."
 clear = "Limpiar"
 cancel = "Cancelar"
 noResultsFound = "No se encontraron resultados"
@@ -111,26 +112,26 @@ other = "Compartir en"
 # === posts/single.html ===
 [single]
 contents = "Contenido"
-pin = ""
-repost = ""
+pin = "Fijar en la parte superior"
+repost = "Repostear"
 publishedOnDate = "publicado el {{ .Date }}"
 views = "vistas"
 comments = "Comentarios"
 author = "Autor"
 updatedOnDate = "Actualizado el {{ .Date }}"
 readMarkdown = "Leer Markdown"
-viewSource = ""
+viewSource = "Ver fuente"
 editThisPage = "Editar esta página"
-reportIssue = ""
+reportIssue = "Reportar problema"
 back = "Regresar"
 home = "Inicio"
 readMore = "Leer más"
 expirationReminder = "Este artículo se actualizó por última vez el {{ .Date }}, es posible que el contenido no esté actualizado."
-encryptedAbstract = ""
-encryptedMessage = ""
+encryptedAbstract = "Este artículo ha sido encriptado, por lo que su contenido bruto es invisible!"
+encryptedMessage = "Por favor, ingrese la contraseña"
 password = "Contraseña"
-enterBtn = ""
-encryptyAgain = ""
+enterBtn = "Entrar"
+encryptyAgain = "Encriptar de nuevo"
 relatedContent = "Contenido relacionado"
 
 [single.includedIn]
@@ -150,11 +151,11 @@ one = "Un minuto"
 other = "{{ .Count }} minutos"
 
 [single.reward]
-donate = ""
-wechatpay = ""
-alipay = ""
-paypal = ""
-bitcoin = ""
+donate = "Donar"
+wechatpay = "WeChat Pay"
+alipay = "Alipay"
+paypal = "PayPal"
+bitcoin = "Bitcoin"
 # === posts/single.html ===
 
 # === 404.html ===
@@ -175,23 +176,23 @@ other = "No está conectado a Internet, solo estarán disponibles las páginas a
 
 # === GitHub Alert ===
 [alert]
-note = ""
-tip = ""
-important = ""
-warning = ""
-caution = ""
+note = "Nota"
+tip = "Consejo"
+important = "Importante"
+warning = "Advertencia"
+caution = "Precaución"
 # === GitHub Alert ===
 
 # === Task lists ===
 [taskList]
-" " = ""
-"x" = ""
-"/" = ""
-"-" = ""
-"<" = ""
-">" = ""
-"!" = ""
-"?" = ""
+" " = "No verificado"
+"x" = "Verificado"
+"/" = "En progreso"
+"-" = "Cancelado"
+"<" = "Programado"
+">" = "Reprogramado"
+"!" = "Importante"
+"?" = "Pregunta"
 # === Task lists ===
 
 # === shortcodes/admonition.html ===

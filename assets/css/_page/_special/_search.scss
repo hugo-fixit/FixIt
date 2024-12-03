@@ -1,0 +1,10 @@
+// Style of layout named 'search'
+// TODO Adapting to dark mode, maybe use css variables
+
+// Google CSE
+.gcse-searchbox:empty,
+.gcse-searchresults:empty {
+  display: none;
+}
+
+// Bing CSE (Unsupported)

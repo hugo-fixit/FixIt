@@ -35,12 +35,12 @@ Outline: [Installation](https://fixit.lruihao.cn/documentation/installation/) �
 
 Click the following links to generate a new repository with template:
 
-| Template repository                        | Generate link                  |
-| :----------------------------------------- | :----------------------------: |
-| [hugo-fixit/hugo-fixit-starter][starter]   | [Click][starter:generate]      |
-| [hugo-fixit/hugo-fixit-starter1][starter1] | [Click][starter1:generate]     |
-| [hugo-fixit/docs][docs]                    | [Click][docs:generate]         |
-| [Lruihao/hugo-blog][lruihao-blog]          | [Click][lruihao-blog:generate] |
+| Template                                      | repository                        | Generate link                  |
+| :-------------------------------------------- | :-------------------------------- | :----------------------------: |
+| A quick-start template base on Hugo Modules.  | [hugo-fixit-starter][starter]     | [Click][starter:generate]      |
+| A quick-start template base on Git submodule. | [hugo-fixit-starter1][starter1]   | [Click][starter1:generate]     |
+| Build multilingual sites using Fixit theme.   | [docs][docs]                      | [Click][docs:generate]         |
+| Customize with FixIt theme.                   | [Lruihao/hugo-blog][lruihao-blog] | [Click][lruihao-blog:generate] |
 
 [starter]: https://github.com/hugo-fixit/hugo-fixit-starter
 [starter:generate]: https://github.com/hugo-fixit/hugo-fixit-starter/generate
@@ -65,6 +65,11 @@ I don't know why 🤷
 - Optimized SEO performance with a correct **SEO SCHEMA** based on JSON-LD
 - **[Google Analytics](https://analytics.google.com/analytics)** supported
 - **[Fathom Analytics](https://usefathom.com/)** supported
+- **[Baidu Analytics](https://tongji.baidu.com/)** supported
+- **[Umami Analytics](https://umami.is/)** supported
+- **[Plausible Analytics](https://plausible.io/)** supported
+- **[Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics)** supported
+- **[Splitbee Analytics](https://splitbee.io)** supported
 - Search engine **verification** supported (Google, Bing, Yandex, Pinterest, Baidu, 360 and Sogou)
 - **CDN** for third-party libraries supported
 
@@ -102,7 +107,8 @@ I don't know why 🤷
 - **Sub Menu** supported
 - **Content Encryption** supported (Pages, Partial)
 - **Friends** page embedded template
-- **Search** supported by [algolia](https://www.algolia.com/) or [Fuse.js](https://fusejs.io/)
+- **Search** supported by [algolia](https://www.algolia.com/), [Fuse.js](https://fusejs.io/) or CSE
+- **Custom Search Engine (CSE)** supported by [Google](https://programmablesearchengine.google.com/)
 - **Twemoji** supported
 - Automatically **highlighting** code
 - **Copy code** to clipboard with one click
@@ -243,8 +249,8 @@ FixIt is licensed under the **MIT** license. Check the [LICENSE file](/LICENSE) 
 
 If you enjoy the theme, please consider buying me a coffee ☕️. Thanks!
 
-- [Wechat](images/wechatpay.jpg)
-- [Alipay](images/alipay.jpg)
+- [Wechat](/images/wechatpay.jpg)
+- [Alipay](/images/alipay.jpg)
 - [PayPal](https://paypal.me/Lruihao)
 
 ## Author

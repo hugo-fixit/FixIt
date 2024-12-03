@@ -1,0 +1,14 @@
+.special {
+  .single-title,
+  .single-subtitle {
+    text-align: right;
+  }
+
+  &.friends {
+    @import '_friends';
+  }
+
+  &.search {
+    @import '_search';
+  }
+}
