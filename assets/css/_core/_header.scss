@@ -279,6 +279,8 @@ header {
         border-radius: $global-border-radius;
         border: 1px solid $menu-border-color;
         background-color: $header-background-color;
+        max-height: 60vh;
+        overflow-y: auto;
         @include transition(box-shadow 0.3s ease);
         @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, 0.1));
 
