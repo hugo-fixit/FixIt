@@ -296,7 +296,7 @@
                       {{- .Language.LanguageName -}}
                     </option>
                   {{- end -}}
-                {{- else if gt (len .AllTranslations) 1 -}}
+                {{- else if .IsTranslated -}}
                   {{- range .AllTranslations -}}
                     <option value="{{ .RelPermalink }}"{{ if eq .Lang $.Lang }} selected disabled{{ end }}>
                       {{- .Language.LanguageName -}}
