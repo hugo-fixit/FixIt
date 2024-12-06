@@ -11,7 +11,7 @@
     <div class="details collection-details{{ if $open }} open{{ end }}">
       <div class="details-summary collection-summary">
         {{ dict "Class" "fa-solid fa-layer-group fa-fw" | partial "plugin/icon.html" }}
-        <span class="collection-name" data-collections="{{ T "collections" }}">{{ .LinkTitle }}</span>
+        <span class="collection-name" title="{{ T "collections" }}">{{ .LinkTitle }}</span>
         <span class="collection-count">{{ $pages.Len }}</span>
         {{- dict "Class" "details-icon fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
       </div>

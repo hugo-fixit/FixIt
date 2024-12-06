@@ -130,7 +130,7 @@
       font-size: $collection-title-font-size;
 
       &::before {
-        content: attr(data-collections) '・';
+        content: attr(title) '・';
       }
     }
 
