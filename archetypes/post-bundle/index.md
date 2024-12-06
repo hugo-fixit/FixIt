@@ -22,6 +22,7 @@ hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRelated: false
 hiddenFromFeed: false
+hiddenFromSiteMap: false
 summary:
 resources:
   - name: featured-image

@@ -932,6 +932,8 @@ enableEmoji = true
     hiddenFromRelated = false
     # FixIt 0.3.10 | NEW whether to hide a page from RSS, Atom and JSON feed
     hiddenFromFeed = false
+    # whether to hide a page from sitemap.xml
+    hiddenFromSiteMap = false
     # whether to enable twemoji
     twemoji = false
     # FixIt 0.2.18 | CHANGED whether to enable lightgallery
