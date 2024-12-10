@@ -1,7 +1,18 @@
 <!-- markdownlint-disable-file MD033 MD041 -->
 ![Hugo Theme FixIt](https://fixit.lruihao.cn/images/apple-devices-preview.png)
 
-<div align="center">English | <a href="/README.zh-cn.md">简体中文</a></div>
+<div align="center">
+  English |
+  <a href="/README.zh-cn.md">简体中文</a> |
+  <a href="https://fixit.lruihao.cn/zh-cn/ecosystem/hugo-fixit/fixit/?lang=chinese_traditional">繁體中文</a> |
+  <a href="https://fixit.lruihao.cn/ecosystem/hugo-fixit/fixit/?lang=french">Français</a> |
+  <a href="https://fixit.lruihao.cn/ecosystem/hugo-fixit/fixit/?lang=russian">Русский язык</a> |
+  <a href="https://fixit.lruihao.cn/ecosystem/hugo-fixit/fixit/?lang=spanish">Español</a> |
+  <a href="https://fixit.lruihao.cn/ecosystem/hugo-fixit/fixit/?lang=hindi">हिन्दी</a> |
+  <a href="https://fixit.lruihao.cn/ecosystem/hugo-fixit/fixit/?lang=german">deutsch</a> |
+  <a href="https://fixit.lruihao.cn/ecosystem/hugo-fixit/fixit/?lang=korean">한국어</a> |
+  <a href="https://fixit.lruihao.cn/ecosystem/hugo-fixit/fixit/?lang=japanese">しろうと</a>
+</div>
 
 <a title="FixIt website" href="https://fixit.lruihao.cn"><img align="right" alt="FixIt logo" width="70" height="70" src="https://avatars.githubusercontent.com/u/110414864?s=200&v=4"></a>
 
@@ -252,6 +263,10 @@ If you enjoy the theme, please consider buying me a coffee ☕️. Thanks!
 - [Wechat](/images/wechatpay.jpg)
 - [Alipay](/images/alipay.jpg)
 - [PayPal](https://paypal.me/Lruihao)
+
+Thanks to the following sponsors for their support:
+
+- [translate.js](https://github.com/xnx3/translate) Sponsoring [Enterprise Translation Channel](https://translate.zvo.cn/4087.html).
 
 ## Author
 
