@@ -25,10 +25,6 @@
     &:empty {
       display: none;
     }
-    // BUG of Hugo https://github.com/gohugoio/hugo/issues/12913
-    &:has(> p:only-child:empty) {
-      display: none;
-    }
   }
 
   i.icon {
