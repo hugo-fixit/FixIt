@@ -1,7 +1,8 @@
 <!-- markdownlint-disable-file MD033 MD041 -->
 ![Hugo Theme FixIt](https://fixit.lruihao.cn/images/apple-devices-preview.png)
 
-<div align="center">
+<div align="center" class="ignore">
+  <p>FixIt is a clean, elegant but advanced blog theme for <a href="https://gohugo.io/">Hugo</a>.</p>
   English |
   <a href="/README.zh-cn.md">简体中文</a> |
   <a href="https://fixit.lruihao.cn/zh-cn/ecosystem/hugo-fixit/fixit/?lang=chinese_traditional">繁體中文</a> |
@@ -18,14 +19,12 @@
 
 # FixIt
 
+> It is based on the original [LoveIt](https://github.com/dillonzq/LoveIt) Theme, [KeepIt](https://github.com/Fastbyte01/KeepIt) Theme and [LeaveIt](https://github.com/liuzc/LeaveIt) Theme.
+
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hugo-fixit/FixIt?style=flat)](https://github.com/hugo-fixit/FixIt/releases)
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.134.1-ff4088?style=flat&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/hugo-fixit/FixIt?style=flat)](/LICENSE)
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/hugo-fixit/FixIt)
-
-> «FixIt» is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/).
-
-It is based on the original [LoveIt](https://github.com/dillonzq/LoveIt) Theme, [KeepIt](https://github.com/Fastbyte01/KeepIt) Theme and [LeaveIt](https://github.com/liuzc/LeaveIt) Theme.
 
 ## Live Preview
 
@@ -33,7 +32,7 @@ It is based on the original [LoveIt](https://github.com/dillonzq/LoveIt) Theme, 
   💟 <a href="https://fixit.lruihao.cn">Production</a> | ❇️ <a href="https://pre.fixit.lruihao.cn">Preview</a> | 🚼 <a href="https://demo.fixit.lruihao.cn">Demo</a> | 🆕 <a href="https://hugo-fixit.github.io/hugo-fixit-starter/">Starter</a>
 <br>
 <br>
-  More «FixIt» examples <a href="https://fixit.lruihao.cn/showcase/">here</a>.
+  More FixIt examples <a href="https://fixit.lruihao.cn/showcase/">here</a>.
 </p>
 
 ## Documentation
@@ -147,7 +146,14 @@ I don't know why 🤷
 
 ### Theme Components
 
-The FixIt theme balances **simplicity** and **extensibility** with extra [Hugo theme components](https://fixit.lruihao.cn/components/) for customization.
+The FixIt theme balances **simplicity** and **extensibility** with extra [Hugo theme components](https://fixit.lruihao.cn/ecosystem/#-components) for customization.
+
+- GitHub projects card supported by [component-projects](https://github.com/hugo-fixit/component-projects)
+- Automatic Translation supported by [cmpt-translate](https://github.com/hugo-fixit/cmpt-translate)
+- JSON feed supported by [hugo-json-feed](https://github.com/hugo-fixit/hugo-json-feed)
+- `reward-log` shortcode supported by [shortcode-reward](https://github.com/hugo-fixit/shortcode-rewards)
+- `caniuse` shortcode supported by [shortcode-caniuse](https://github.com/hugo-fixit/shortcode-caniuse)
+- ...
 
 ## Multilingual and i18n
 

@@ -1,7 +1,8 @@
 <!-- markdownlint-disable-file MD033 MD041 -->
 ![Hugo Theme FixIt](https://fixit.lruihao.cn/images/apple-devices-preview.png)
 
-<div align="center">
+<div align="center" class="ignore">
+  <p>FixIt 是一个简洁、优雅且高效的 <a href="https://gohugo.io/">Hugo</a> 博客主题。</p>
   <a href="/README.md">English</a> |
   简体中文 |
   <a href="https://fixit.lruihao.cn/zh-cn/ecosystem/hugo-fixit/fixit/?lang=chinese_traditional">繁體中文</a> |
@@ -18,14 +19,12 @@
 
 # FixIt
 
+> 它的原型基于 [LoveIt](https://github.com/dillonzq/LoveIt) 主题，[KeepIt](https://github.com/Fastbyte01/KeepIt) 主题和 [LeaveIt](https://github.com/liuzc/LeaveIt) 主题。
+
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hugo-fixit/FixIt?style=flat)](https://github.com/hugo-fixit/FixIt/releases)
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.134.1-ff4088?style=flat&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/hugo-fixit/FixIt?style=flat)](/LICENSE)
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/hugo-fixit/FixIt)
-
-> «FixIt» 是一个**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。
-
-它的原型基于 [LoveIt](https://github.com/dillonzq/LoveIt) 主题，[KeepIt](https://github.com/Fastbyte01/KeepIt) 主题和 [LeaveIt](https://github.com/liuzc/LeaveIt) 主题。
 
 ## 即时预览
 
@@ -33,7 +32,7 @@
   💟 <a href="https://fixit.lruihao.cn/zh-cn/">Production</a> | ❇️ <a href="https://pre.fixit.lruihao.cn/zh-cn/">Preview</a> | 🚼 <a href="https://demo.fixit.lruihao.cn">Demo</a> | 🆕 <a href="https://hugo-fixit.github.io/hugo-fixit-starter/">Starter</a>
 <br>
 <br>
-  更多 «FixIt» 的例子参见 <a href="https://fixit.lruihao.cn/zh-cn/showcase/">这里</a>。
+  更多 FixIt 的例子参见 <a href="https://fixit.lruihao.cn/zh-cn/showcase/">这里</a>。
 </p>
 
 ## 主题文档
@@ -147,7 +146,14 @@
 
 ### 主题组件
 
-FixIt 主题旨在在**简洁性**和**可扩展性**之间取得平衡。为此，我们开发了一系列额外的 [Hugo 主题组件](https://fixit.lruihao.cn/zh-cn/components/) 供用户选择。
+FixIt 主题旨在在**简洁性**和**可扩展性**之间取得平衡。为此，我们开发了一系列额外的 [Hugo 主题组件](https://fixit.lruihao.cn/zh-cn/ecosystem/#-组件) 供用户选择。
+
+- GitHub 项目卡片支持 [component-projects](https://github.com/hugo-fixit/component-projects)
+- 自动翻译支持 [cmpt-translate](https://github.com/hugo-fixit/cmpt-translate)
+- JSON feed 支持 [hugo-json-feed](https://github.com/hugo-fixit/hugo-json-feed)
+- `reward-log` shortcode 支持 [shortcode-reward](https://github.com/hugo-fixit/shortcode-rewards)
+- `caniuse` shortcode 支持 [shortcode-caniuse](https://github.com/hugo-fixit/shortcode-caniuse)
+- ……
 
 ## 多语言和国际化
 
