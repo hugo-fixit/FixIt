@@ -835,7 +835,8 @@ enableEmoji = true
 
   # Compatibility config
   [params.compatibility]
-    # whether to use Polyfill.io to be compatible with older browsers
+    # whether to use Polyfill.io on cdnjs to be compatible with older browsers
+    # https://cdnjs.cloudflare.com/polyfill
     polyfill = false
     # whether to use object-fit-images to be compatible with older browsers
     objectFit = false
