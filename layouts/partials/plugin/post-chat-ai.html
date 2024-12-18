@@ -5,8 +5,14 @@
   TODO dark/light mode switch
 */ -}}
 {{- $params := partial "function/params.html" -}}
-{{- $chatConfig := .Param "postChat" -}}
-{{- $summaryConfig := .Param "postSummary" -}}
+{{- $chatConfig := .Site.Params.postChat -}}
+{{- $summaryConfig := .Site.Params.postSummary -}}
+{{- with .Params.postChat -}}
+  {{- $chatConfig = . | merge .Site.Params.postChat -}}
+{{- end -}}
+{{- with .Params.postSummary -}}
+  {{- $summaryConfig = . | merge .Site.Params.postSummary -}}
+{{- end -}}
 {{- $key := $chatConfig.key | default $summaryConfig.key -}}
 {{- $sourcePrefix := "https://ai.tianli0.top/static/public/" -}}
 {{- $jsMap := dict
@@ -65,8 +71,8 @@
     {{- $blackDom := slice
       ".expiration-reminder"
       "meting-js"
+      ".lnt"
     -}}
-    {{/*  合并 $blackDom 和 $chatConfig.blackDom  */}}
     {{- with $chatConfig.blackDom -}}
       {{- $blackDom = $blackDom | append . -}}
     {{- end -}}
@@ -79,7 +85,7 @@
       "height" $chatConfig.height
       "fill" $chatConfig.fill
       "backgroundColor" $chatConfig.backgroundColor
-      "upLoadWeb" $chatConfig.upLoadWeb
+      "upLoadWeb" (cond .IsHome false $chatConfig.upLoadWeb)
       "showInviteLink" $chatConfig.showInviteLink
       "userTitle" $chatConfig.userTitle
       "userDesc" $chatConfig.userDesc
