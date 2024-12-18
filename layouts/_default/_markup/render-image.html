@@ -1,4 +1,26 @@
-{{- /* TODO refactor */ -}}
+{{- /*
+  TODO refactor
+  The current image rendering is too complicated, and some image rendering sizes do not meet expectations.
+
+  There are several things to consider when refactoring:
+
+  - [ ] Regular images (different formats)
+  - [ ] Remote images (different formats)
+  - [ ] Base64 images
+
+  There are also different rendering ways to consider:
+
+  - [ ] Image render hook (Markdown)
+  - [ ] Image shortcode
+  - [ ] `img` tag (HTML) 
+
+  Other dimensions to consider:
+
+  - [ ] lightgallery render (maybe the plugin will be changed)
+  - [ ] Responsive images
+  - [ ] Lazy Loading
+*/ -}}
+
 {{- $params := .Page.Params | merge site.Params.page -}}
 {{- if .Title | and .Text -}}
   {{- $linked := ne $params.lightgallery false -}}
