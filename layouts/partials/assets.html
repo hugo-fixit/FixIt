@@ -265,6 +265,9 @@
   {{- end -}}
 {{- end -}}
 
+{{- /* PostChat */ -}}
+{{- partial "plugin/post-chat-ai.html" . -}}
+
 {{- range $params.library.css -}}
   {{- dict "Source" . "Fingerprint" $fingerprint | dict "Scratch" $.Scratch "Data" | partial "scratch/style.html" -}}
 {{- end -}}

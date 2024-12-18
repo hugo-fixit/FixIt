@@ -1,11 +1,12 @@
 {{- /*
-  PostChat AI service for single page. (Only for type "posts")
+  PostChat AI service.
   PostChat: https://postchat.zhheo.com/addCode.html
   PostSummary: https://postchat.zhheo.com/summary.html
+  TODO dark/light mode switch
 */ -}}
+{{- $params := partial "function/params.html" -}}
 {{- $chatConfig := .Param "postChat" -}}
 {{- $summaryConfig := .Param "postSummary" -}}
-{{- $enable := $chatConfig.enable | or $summaryConfig.enable -}}
 {{- $key := $chatConfig.key | default $summaryConfig.key -}}
 {{- $sourcePrefix := "https://ai.tianli0.top/static/public/" -}}
 {{- $jsMap := dict
@@ -13,6 +14,10 @@
   "summary" "tianli_gpt.min.js"
   "both" "postChatUser_summary.min.js"
 -}}
+{{- /* PostSummary only for public posts */ -}}
+{{- $isPost := (eq .Kind "page") | and (eq .Type "posts") | and (not $params.password) -}}
+{{- $summaryEnable := cond $isPost $summaryConfig.enable false -}}
+{{- $enable := $chatConfig.enable | or $summaryEnable -}}
 
 {{- if $enable | and $key -}}
   {{- $configJS := "" -}}
@@ -20,7 +25,7 @@
   {{- $sourceOpts := dict "Fingerprint" $fingerprint "Defer" true -}}
 
   {{- /* PostSummary */ -}}
-  {{- if $summaryConfig.enable -}}
+  {{- if $summaryEnable -}}
     {{- $postChatCSS := "https://ai.tianli0.top/static/public/postChatUser_summary.min.css" -}}
     {{- dict "Source" $postChatCSS "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
     {{- $p := "tianliGPT" -}}
@@ -94,11 +99,11 @@
 
   {{- /* Insert script */ -}}
   {{- $postChatJS := "" -}}
-  {{- if $chatConfig.enable | and $summaryConfig.enable -}}
+  {{- if $chatConfig.enable | and $summaryEnable -}}
     {{- $postChatJS = add $sourcePrefix (index $jsMap "both") -}}
   {{- else if $chatConfig.enable -}}
     {{- $postChatJS = add $sourcePrefix (index $jsMap "chat") -}}
-  {{- else if $summaryConfig.enable -}}
+  {{- else if $summaryEnable -}}
     {{- $postChatJS = add $sourcePrefix (index $jsMap "summary") -}}
   {{- end -}}
   {{- $sourceOpts = dict "Source" $postChatJS | merge $sourceOpts -}}
