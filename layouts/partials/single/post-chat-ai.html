@@ -57,6 +57,14 @@
   {{- /* PostChat */ -}}
   {{- if $chatConfig.enable -}}
     {{- $sourceOpts = dict "Attr" (printf "data-postChat_key=%q" $key) | merge $sourceOpts -}}
+    {{- $blackDom := slice
+      ".expiration-reminder"
+      "meting-js"
+    -}}
+    {{/*  合并 $blackDom 和 $chatConfig.blackDom  */}}
+    {{- with $chatConfig.blackDom -}}
+      {{- $blackDom = $blackDom | append . -}}
+    {{- end -}}
     {{- $postChatConfig := dict
       "userMode" $chatConfig.userMode
       "defaultInput" $chatConfig.defaultInput
@@ -71,7 +79,7 @@
       "userTitle" $chatConfig.userTitle
       "userDesc" $chatConfig.userDesc
       "addButton" $chatConfig.addButton
-      "blackDom" $chatConfig.blackDom
+      "blackDom" $blackDom
       "frameWidth" $chatConfig.frameWidth
       "frameHeight" $chatConfig.frameHeight
       "userIcon" $chatConfig.userIcon
