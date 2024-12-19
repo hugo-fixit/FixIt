@@ -113,13 +113,13 @@ I don't know why 🤷
 
 ### Extended Features
 
+- **AI Summary**, **AI Search** and **AI Chatbot** supported by [PostChat](https://ai.tianli0.top/?InviteID=IRE1S88Z)
 - **PWA (Progressive Web App)** supported
 - **Sub Menu** supported
 - **Content Encryption** supported (Pages, Partial)
 - **Friends** page embedded template
 - **Search** supported by [algolia](https://www.algolia.com/), [Fuse.js](https://fusejs.io/), CSE or [PostChat](https://ai.tianli0.top/?InviteID=IRE1S88Z)
 - **Custom Search Engine (CSE)** supported by [Google](https://programmablesearchengine.google.com/)
-- **AI Summary**, **AI Search** and **AI Chatbot** supported by [PostChat](https://ai.tianli0.top/?InviteID=IRE1S88Z)
 - **Twemoji** supported
 - Automatically **highlighting** code
 - **Copy code** to clipboard with one click
