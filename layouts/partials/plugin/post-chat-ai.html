@@ -5,15 +5,9 @@
   TODO dark/light mode switch
   TODO chat API development
 */ -}}
-{{- $params := partial "function/params.html" -}}
-{{- $chatConfig := .Site.Params.postChat -}}
-{{- $summaryConfig := .Site.Params.postSummary -}}
-{{- with .Params.postChat -}}
-  {{- $chatConfig = . | merge .Site.Params.postChat -}}
-{{- end -}}
-{{- with .Params.postSummary -}}
-  {{- $summaryConfig = . | merge .Site.Params.postSummary -}}
-{{- end -}}
+{{- $params := .Params | merge .Site.Params -}}
+{{- $chatConfig := $params.postChat -}}
+{{- $summaryConfig := $params.postSummary -}}
 {{- $key := $chatConfig.key | default $summaryConfig.key -}}
 {{- $sourcePrefix := "https://ai.tianli0.top/static/public/" -}}
 {{- $jsMap := dict
@@ -22,7 +16,8 @@
   "both" "postChatUser_summary.min.js"
 -}}
 {{- /* PostSummary only for public posts */ -}}
-{{- $isPost := (eq .Kind "page") | and (eq .Type "posts") | and (not $params.password) -}}
+{{- $password := .Params.password | default .Site.Params.page.password -}}
+{{- $isPost := (eq .Kind "page") | and (eq .Type "posts") | and (not $password) -}}
 {{- $summaryEnable := cond $isPost $summaryConfig.enable false -}}
 {{- $enable := $chatConfig.enable | or $summaryEnable -}}
 
@@ -77,6 +72,7 @@
     {{- with $chatConfig.blackDom -}}
       {{- $blackDom = $blackDom | append . -}}
     {{- end -}}
+    {{- $upLoadWeb := cond (.IsHome | or $password) false $chatConfig.upLoadWeb -}}
     {{- $postChatConfig := dict
       "userMode" $chatConfig.userMode
       "defaultInput" $chatConfig.defaultInput
@@ -86,7 +82,7 @@
       "height" $chatConfig.height
       "fill" $chatConfig.fill
       "backgroundColor" $chatConfig.backgroundColor
-      "upLoadWeb" (cond .IsHome false $chatConfig.upLoadWeb)
+      "upLoadWeb" $upLoadWeb
       "showInviteLink" $chatConfig.showInviteLink
       "userTitle" $chatConfig.userTitle
       "userDesc" $chatConfig.userDesc
