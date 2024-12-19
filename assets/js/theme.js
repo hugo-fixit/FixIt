@@ -1130,6 +1130,22 @@ class FixIt {
     this.scrollEventSet.add(_closeRewardExclude);
   }
 
+  initPostChatUser() {
+    window.postChat_mode = postChatConfig.userMode || 'iframe';
+    if (window.postChat_mode !== 'iframe' || !window.postChatUser) {
+      return;
+    }
+    postChat_theme = this.isDark ? 'dark' : 'light';
+    this.switchThemeEventSet.add((isDark) => {
+      const targetFrame = document.getElementById("postChat_iframeContainer")
+      if (targetFrame) {
+        window.postChatUser.setPostChatTheme(isDark ? 'dark' : 'light');
+      } else {
+        postChat_theme  = isDark ? 'dark' : 'light';
+      }
+    });
+  }
+
   onScroll() {
     const $headers = [];
     const ACCURACY = 20;
@@ -1269,6 +1285,7 @@ class FixIt {
       this.initWatermark();
       this.initAutoMark();
       this.initReward();
+      this.initPostChatUser();
 
       window.setTimeout(() => {
         this.initComment();
