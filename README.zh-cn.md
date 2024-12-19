@@ -117,8 +117,9 @@
 - 支持**二级菜单**
 - 支持**内容加密**（页面、局部）
 - 支持**友情链接**的页面模板
-- 支持基于 [algolia](https://www.algolia.com/)、[Fuse.js](https://fusejs.io/) 或 **CSE** 的**搜索**
+- 支持基于 [algolia](https://www.algolia.com/)、[Fuse.js](https://fusejs.io/)、 **CSE** 或 [PostChat](https://ai.tianli0.top/?InviteID=IRE1S88Z) 的**搜索**
 - 支持基于 [Google](https://programmablesearchengine.google.com/) 的**自定义搜索引擎 (CSE)**
+- 支持基于 [PostChat](https://ai.tianli0.top/?InviteID=IRE1S88Z) 的 **AI 摘要**、**AI 搜索** 和 **AI 智能客服**
 - 支持 **Twemoji**
 - 支持**代码高亮**
 - 一键**复制代码**到剪贴板

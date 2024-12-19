@@ -389,7 +389,7 @@ enableEmoji = true
   # Search config
   [params.search]
     enable = false
-    # type of search engine ["algolia", "fuse", "cse"]
+    # type of search engine ["algolia", "fuse", "cse", "post-chat"]
     type = "fuse"
     # max index length of the chunked content
     contentLength = 4000
@@ -887,12 +887,11 @@ enableEmoji = true
     theme = "minimal"
   
   # FixIt 0.3.17 | NEW PostChat AI config
-  # Summary AI, knowledge base search and knowledge base dialogue support
-  # Docs: https://postchat.zhheo.com/
+  # Based on your posts to build a knowledge base, support AI summary, AI search, and AI Chatbot.
+  # Get PostChat Key from my invitation link, thanks for your support!
+  # https://ai.tianli0.top/?InviteID=IRE1S88Z
   [params.postChat]
     enable = false
-    # Get PostChat Key from my invitation link, thanks for your support!
-    # https://ai.tianli0.top/?InviteID=IRE1S88Z
     key = "ed872bf9336506bea545183089f5034f81fea6af"
     # How users initiate chats: ["iframe", "magic"]
     userMode = "magic"
