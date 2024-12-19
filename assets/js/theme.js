@@ -124,6 +124,21 @@ class FixIt {
     const $searchToggle = document.getElementById(`search-toggle-${suffix}`);
     const $searchLoading = document.getElementById(`search-loading-${suffix}`);
     const $searchClear = document.getElementById(`search-clear-${suffix}`);
+    const $searchCancel = document.getElementById('search-cancel-mobile');
+
+    // goto the PostChat panel rather than search results
+    if (searchConfig.type === 'post-chat' && window.postChatUser) {
+      if (isMobile) {
+        $searchInput.addEventListener('focus', () => {
+          window.postChatUser.setSearchInput('');
+        }, false);
+      } else {
+        $searchToggle.addEventListener('click', () => {
+          window.postChatUser.setSearchInput('');
+        }, false);
+      }
+      return;      
+    }
 
     if (isMobile) {
       this._searchMobileOnce = true;
@@ -132,7 +147,7 @@ class FixIt {
         document.body.classList.add('blur');
         $header.classList.add('open');
       }, false);
-      document.getElementById('search-cancel-mobile').addEventListener('click', () => {
+      $searchCancel.addEventListener('click', () => {
         this.disableScrollEvent = false;
         $header.classList.remove('open');
         document.body.classList.remove('blur');
@@ -301,6 +316,8 @@ class FixIt {
                   context: cseConfig.gotoResultsPage
                 }]);
               }
+            } else {
+              finish([]);
             }
           },
           templates: {
@@ -1130,6 +1147,22 @@ class FixIt {
     this.scrollEventSet.add(_closeRewardExclude);
   }
 
+  initPostChatUser() {
+    window.postChat_mode = postChatConfig.userMode || 'iframe';
+    if (window.postChat_mode !== 'iframe' || !window.postChatUser) {
+      return;
+    }
+    postChat_theme = this.isDark ? 'dark' : 'light';
+    this.switchThemeEventSet.add((isDark) => {
+      const targetFrame = document.getElementById("postChat_iframeContainer")
+      if (targetFrame) {
+        window.postChatUser.setPostChatTheme(isDark ? 'dark' : 'light');
+      } else {
+        postChat_theme  = isDark ? 'dark' : 'light';
+      }
+    });
+  }
+
   onScroll() {
     const $headers = [];
     const ACCURACY = 20;
@@ -1269,6 +1302,7 @@ class FixIt {
       this.initWatermark();
       this.initAutoMark();
       this.initReward();
+      this.initPostChatUser();
 
       window.setTimeout(() => {
         this.initComment();

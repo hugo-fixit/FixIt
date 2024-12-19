@@ -1,0 +1,112 @@
+{{- /*
+  PostChat AI service.
+  PostChat: https://postchat.zhheo.com/addCode.html
+  PostSummary: https://postchat.zhheo.com/summary.html
+*/ -}}
+{{- $params := .Params | merge .Site.Params -}}
+{{- $chatConfig := $params.postChat -}}
+{{- $summaryConfig := $params.postSummary -}}
+{{- $key := $chatConfig.key | default $summaryConfig.key -}}
+{{- $sourcePrefix := "https://ai.tianli0.top/static/public/" -}}
+{{- $jsMap := dict
+  "chat" "postChatUser.min.js"
+  "summary" "tianli_gpt.min.js"
+  "both" "postChatUser_summary.min.js"
+-}}
+{{- /* PostSummary only for public posts */ -}}
+{{- $password := .Params.password | default .Site.Params.page.password -}}
+{{- $isPost := (eq .Kind "page") | and (eq .Type "posts") | and (not $password) -}}
+{{- $summaryEnable := cond $isPost $summaryConfig.enable false -}}
+{{- $enable := $chatConfig.enable | or $summaryEnable -}}
+
+{{- if $enable | and $key -}}
+  {{- $configJS := "" -}}
+  {{- $fingerprint := .Scratch.Get "fingerprint" -}}
+  {{- $sourceOpts := dict "Fingerprint" $fingerprint "Defer" true -}}
+
+  {{- /* PostSummary */ -}}
+  {{- if $summaryEnable -}}
+    {{- $postChatCSS := "https://ai.tianli0.top/static/public/postChatUser_summary.min.css" -}}
+    {{- dict "Source" $postChatCSS "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+    {{- $p := "tianliGPT" -}}
+    {{- $postSummaryConfig := printf "let %v_postSelector='#content';" $p -}}
+    {{- with $summaryConfig.title -}}
+      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_Title='%v';" $p .) -}}
+    {{- end -}}
+    {{- with $summaryConfig.theme -}}
+      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_theme='%v';" $p .) -}}
+    {{- end -}}
+    {{- with $summaryConfig.postURL -}}
+      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_postURL='%v';" $p .) -}}
+    {{- end -}}
+    {{- with $summaryConfig.blacklist -}}
+      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_blacklist='%v';" $p .) -}}
+    {{- end -}}
+    {{- with $summaryConfig.wordLimit -}}
+      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_wordLimit='%v';" $p .) -}}
+    {{- end -}}
+    {{- if eq $summaryConfig.typingAnimate false -}}
+      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_typingAnimate=false;" $p) -}}
+    {{- end -}}
+    {{- with $summaryConfig.beginningText -}}
+      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_BeginningText='%v';" $p .) -}}
+    {{- end -}}
+    {{- if $chatConfig.enable -}}
+      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_recommendation=true;" $p) -}}
+    {{- else -}}
+      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_key='%v';" $p $key) -}}
+    {{- end -}}
+    {{- $configJS = add $configJS $postSummaryConfig -}}
+  {{- end -}}
+
+  {{- /* PostChat */ -}}
+  {{- if $chatConfig.enable -}}
+    {{- $sourceOpts = dict "Attr" (printf "data-postChat_key=%q" $key) | merge $sourceOpts -}}
+    {{- $blackDom := slice
+      ".expiration-reminder"
+      "meting-js"
+      ".lnt"
+    -}}
+    {{- with $chatConfig.blackDom -}}
+      {{- $blackDom = $blackDom | append . -}}
+    {{- end -}}
+    {{- $upLoadWeb := cond (.IsHome | or $password) false $chatConfig.upLoadWeb -}}
+    {{- $postChatConfig := dict
+      "userMode" $chatConfig.userMode
+      "defaultInput" $chatConfig.defaultInput
+      "left" $chatConfig.left
+      "bottom" $chatConfig.bottom
+      "width" $chatConfig.width
+      "height" $chatConfig.height
+      "fill" $chatConfig.fill
+      "backgroundColor" $chatConfig.backgroundColor
+      "upLoadWeb" $upLoadWeb
+      "showInviteLink" $chatConfig.showInviteLink
+      "userTitle" $chatConfig.userTitle
+      "userDesc" $chatConfig.userDesc
+      "addButton" $chatConfig.addButton
+      "blackDom" $blackDom
+      "frameWidth" $chatConfig.frameWidth
+      "frameHeight" $chatConfig.frameHeight
+      "userIcon" $chatConfig.userIcon
+      "defaultChatQuestions" $chatConfig.defaultChatQuestions
+      "defaultSearchQuestions" $chatConfig.defaultSearchQuestions
+    -}}
+    {{- $configJS = add $configJS ($postChatConfig | jsonify | printf "var postChatConfig=%s") -}}
+  {{- end -}}
+
+  {{- /* Insert config */ -}}
+  {{- $configJS | dict "Content" | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+
+  {{- /* Insert script */ -}}
+  {{- $postChatJS := "" -}}
+  {{- if $chatConfig.enable | and $summaryEnable -}}
+    {{- $postChatJS = add $sourcePrefix (index $jsMap "both") -}}
+  {{- else if $chatConfig.enable -}}
+    {{- $postChatJS = add $sourcePrefix (index $jsMap "chat") -}}
+  {{- else if $summaryEnable -}}
+    {{- $postChatJS = add $sourcePrefix (index $jsMap "summary") -}}
+  {{- end -}}
+  {{- $sourceOpts = dict "Source" $postChatJS | merge $sourceOpts -}}
+  {{- $sourceOpts | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
+{{- end -}}
