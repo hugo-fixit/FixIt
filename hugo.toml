@@ -892,9 +892,9 @@ enableEmoji = true
   # https://ai.tianli0.top/?InviteID=IRE1S88Z
   [params.postChat]
     enable = false
-    key = "ed872bf9336506bea545183089f5034f81fea6af"
+    key = ""
     # How users initiate chats: ["iframe", "magic"]
-    userMode = "magic"
+    userMode = "iframe"
     addButton = true
     defaultInput = false
     left = ""
