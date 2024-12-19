@@ -1148,8 +1148,7 @@ class FixIt {
   }
 
   initPostChatUser() {
-    window.postChat_mode = postChatConfig.userMode || 'iframe';
-    if (window.postChat_mode !== 'iframe' || !window.postChatUser) {
+    if (!window.postChatUser || !postChatConfig || postChatConfig.userMode === 'magic') {
       return;
     }
     postChat_theme = this.isDark ? 'dark' : 'light';
