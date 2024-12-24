@@ -70,7 +70,7 @@
     {{- with $chatConfig.blackDom -}}
       {{- $blackDom = $blackDom | append . -}}
     {{- end -}}
-    {{- $upLoadWeb := cond (.IsHome | or $password) false $chatConfig.upLoadWeb -}}
+    {{- $upLoadWeb := cond (.IsHome | or $password | or (eq .Kind "404")) false $chatConfig.upLoadWeb -}}
     {{- $postChatConfig := dict
       "userMode" $chatConfig.userMode
       "defaultInput" $chatConfig.defaultInput
