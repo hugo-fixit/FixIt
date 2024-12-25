@@ -955,13 +955,24 @@ class FixIt {
         document.querySelector('.giscus-frame')?.contentWindow.postMessage({ giscus: message }, giscusConfig.origin);
       });
       this.switchThemeEventSet.add(this._giscusOnSwitchTheme);
-      this.giscus2parentMsg = window.addEventListener('message', (event) => {
+      // gicuss to parent message
+      this._messageListener = (event) => {
+        if (event.origin !== giscusConfig.origin) return;
         const $script = document.querySelector('#giscus>script');
         if ($script){
-          this._giscusOnSwitchTheme();
           $script.parentElement.removeChild($script);
         }
-      }, { once: true });
+        const frame = document.querySelector('.giscus-frame');
+        if (frame.getAttribute('loading') === 'lazy') {
+          frame.addEventListener('load', (e) => {
+            this._giscusOnSwitchTheme();
+          }, { once: true });
+        } else {
+          this._giscusOnSwitchTheme();
+        }
+        window.removeEventListener('message', this._messageListener, false);
+      };
+      window.addEventListener('message', this._messageListener, false);
       return;
     }
   }
