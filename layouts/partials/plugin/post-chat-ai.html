@@ -51,6 +51,9 @@
     {{- with $summaryConfig.beginningText -}}
       {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_BeginningText='%v';" $p .) -}}
     {{- end -}}
+    {{- with eq $summaryConfig.loadingText false -}}
+      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_loadingText=false;" $p) -}}
+    {{- end -}}
     {{- if $chatConfig.enable -}}
       {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_recommendation=true;" $p) -}}
     {{- else -}}

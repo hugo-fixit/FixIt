@@ -931,6 +931,7 @@ enableEmoji = true
     wordLimit = 1000
     typingAnimate = true
     beginningText = ""
+    loadingText = true
 
   # FixIt 0.3.10 | NEW Global Feed config for RSS, Atom and JSON feed.
   [params.feed]
