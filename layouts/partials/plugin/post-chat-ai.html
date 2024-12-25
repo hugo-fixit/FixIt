@@ -43,7 +43,7 @@
       {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_blacklist='%v';" $p .) -}}
     {{- end -}}
     {{- with $summaryConfig.wordLimit -}}
-      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_wordLimit='%v';" $p .) -}}
+      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_wordLimit=%d;" $p .) -}}
     {{- end -}}
     {{- if eq $summaryConfig.typingAnimate false -}}
       {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_typingAnimate=false;" $p) -}}
