@@ -5,7 +5,7 @@
 <span class="post-author">
   {{- $content := $author.name | default "Anonymous" -}}
   {{- $icon := dict "Class" "fa-solid fa-user-circle" -}}
-  {{- /* Deprecate $params.authorAvatar in favor of $params.showAvatar and dd front matter gravatar {bool} */ -}}
+  {{- /* Deprecate $params.authorAvatar in favor of $params.showAvatar and add front matter gravatar {bool} */ -}}
   {{- if $author.avatar | and $params.authorAvatar -}}
     {{- $content = printf "%v&nbsp;%v" (dict "Src" $author.avatar "Class" "avatar" "Alt" $content "Width" 20 "Height" 20 | partial "plugin/image.html") $content -}}
     {{- $icon = "" -}}

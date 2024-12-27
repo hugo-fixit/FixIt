@@ -159,6 +159,9 @@
       </div>
     {{- end -}}
 
+    {{- /* Custom block before post content */ -}}
+    {{- block "custom-post__content:before" . }}{{ end -}}
+
     {{- /* Content */ -}}
     {{- $content := dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
     <div class="content" id="content"{{ with $params.endFlag }} data-end-flag="{{ . }}"{{ end }}>
@@ -168,6 +171,9 @@
         {{- $content -}}
       {{- end -}}
     </div>
+
+    {{- /* Custom block after post content */ -}}
+    {{- block "custom-post__content:after" . }}{{ end -}}
 
     {{- /* Related Content */ -}}
     {{- partial "single/related.html" . -}}
@@ -203,6 +209,9 @@
   </article>
 
   <aside class="toc" id="toc-auto" aria-label="{{ T "single.contents" }}">
+    {{- /* Custom block before post toc */ -}}
+    {{- block "custom-post__toc:before" . }}{{ end -}}
+
     {{- /* Auto TOC */ -}}
     {{- if $showToc -}}
       <h2 class="toc-title{{ with $params.password }} encrypted-hidden{{ end }}">
@@ -211,5 +220,8 @@
       </h2>
       <div class="toc-content{{ if eq $toc.auto false }} always-active{{ end }}{{ with $params.password }} encrypted-hidden{{ end }}" id="toc-content-auto"></div>
     {{- end -}}
+
+    {{- /* Custom block after post toc */ -}}
+    {{- block "custom-post__toc:after" . }}{{ end -}}
   </aside>
 {{- end -}}

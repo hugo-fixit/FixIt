@@ -61,6 +61,34 @@
   {{- end -}}
 {{- end -}}
 
+{{- define "custom-post__toc:before" -}}
+  {{- $ctx := . -}}
+  {{- range .Site.Params.customPartials.postTocBefore -}}
+    {{- partial . $ctx -}}
+  {{- end -}}
+{{- end -}}
+
+{{- define "custom-post__toc:after" -}}
+  {{- $ctx := . -}}
+  {{- range .Site.Params.customPartials.postTocAfter -}}
+    {{- partial . $ctx -}}
+  {{- end -}}
+{{- end -}}
+
+{{- define "custom-post__content:before" -}}
+  {{- $ctx := . -}}
+  {{- range .Site.Params.customPartials.postContentBefore -}}
+    {{- partial . $ctx -}}
+  {{- end -}}
+{{- end -}}
+
+{{- define "custom-post__content:after" -}}
+  {{- $ctx := . -}}
+  {{- range .Site.Params.customPartials.postContentAfter -}}
+    {{- partial . $ctx -}}
+  {{- end -}}
+{{- end -}}
+
 {{- define "custom-post__footer:before" -}}
   {{- $ctx := . -}}
   {{- range .Site.Params.customPartials.postFooterBefore -}}

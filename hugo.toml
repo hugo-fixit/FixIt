@@ -957,6 +957,10 @@ enableEmoji = true
     footer = []
     widgets = []
     assets = []
+    postTocBefore = []
+    postTocAfter = []
+    postContentBefore = []
+    postContentAfter = []
     postFooterBefore = []
     postFooterAfter = []
 
