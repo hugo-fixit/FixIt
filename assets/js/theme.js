@@ -962,14 +962,7 @@ class FixIt {
         if ($script){
           $script.parentElement.removeChild($script);
         }
-        const frame = document.querySelector('.giscus-frame');
-        if (frame.getAttribute('loading') === 'lazy') {
-          frame.addEventListener('load', (e) => {
-            this._giscusOnSwitchTheme();
-          }, { once: true });
-        } else {
-          this._giscusOnSwitchTheme();
-        }
+        this._giscusOnSwitchTheme()
         window.removeEventListener('message', this._messageListener, false);
       };
       window.addEventListener('message', this._messageListener, false);
