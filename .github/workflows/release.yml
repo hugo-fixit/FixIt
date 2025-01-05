@@ -36,6 +36,7 @@ jobs:
         run: |
           npm install
           npm run release -- --starting-version ${{ github.ref_name }}
+          sed -i '1,4d' CHANGELOG.md
 
       - name: GitHub Release
         uses: softprops/action-gh-release@v2
