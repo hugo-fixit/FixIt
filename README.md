@@ -2,7 +2,10 @@
 ![Hugo Theme FixIt](https://fixit.lruihao.cn/images/apple-devices-preview.png)
 
 <div align="center" class="ignore">
-  <p>FixIt is a clean, elegant but advanced blog theme for <a href="https://gohugo.io/">Hugo</a>.</p>
+  <p>
+    FixIt is a clean, elegant but advanced blog theme for <a href="https://gohugo.io/">Hugo</a>.<br>
+    <em><sub>Don't forget to leave a ⭐️ if you like this theme, thanks!</sub></em>
+  </p>
   English |
   <a href="/README.zh-cn.md">简体中文</a> |
   <a href="https://fixit.lruihao.cn/zh-cn/ecosystem/hugo-fixit/fixit/?lang=chinese_traditional">繁體中文</a> |
@@ -35,13 +38,31 @@
   More FixIt examples <a href="https://fixit.lruihao.cn/showcase/">here</a>.
 </p>
 
-## Documentation
+## Why choose FixIt
+
+I don't know why 🤷.
+
+<!-- Too lazy to write... -->
+
+## Usage
+
+### Documentation
 
 Head to the [Quick Start](https://fixit.lruihao.cn/documentation/getting-started/quick-start/) page for a step-by-step guide on how to create a new website with FixIt.
 
 Outline: [Installation](https://fixit.lruihao.cn/documentation/installation/) ➜ [Getting Started](https://fixit.lruihao.cn/documentation/getting-started/) ➜ [Content Management](https://fixit.lruihao.cn/documentation/content-management/) ➜ [Advanced Usage](https://fixit.lruihao.cn/documentation/advanced/)
 
-## Template repository
+### Starter Wizard
+
+We provided a CLI tool to help you create a new project with FixIt by a single command.
+
+```bash
+pnpx fixit-cli create my-blog
+```
+
+[![asciicast](https://asciinema.org/a/697494.svg)](https://asciinema.org/a/697494)
+
+### Templates
 
 Click the following links to generate a new repository with template:
 
@@ -60,12 +81,6 @@ Click the following links to generate a new repository with template:
 [docs:generate]: https://github.com/hugo-fixit/docs/generate
 [lruihao-blog]: https://github.com/Lruihao/hugo-blog
 [lruihao-blog:generate]: https://github.com/Lruihao/hugo-blog/generate
-
-## Why choose FixIt
-
-I don't know why 🤷
-
-<!-- Too lazy to write... -->
 
 ## Features
 
@@ -188,8 +203,6 @@ All feedback is welcome! Head over to the [discussions][discussions], [Pull requ
 | [FixIt WeChat group][wx-mp] | Follow and reply "FixIt" to get |
 | [FixIt QQ group][qq-group]  | QQ group: `814031017`           |
 | [Hugo FixIt Planet][zsxq]   | Paid knowledge Planet           |
-
-Don't forget to leave a ⭐️ if you like this theme, thanks!
 
 [discussions]: https://github.com/hugo-fixit/FixIt/discussions
 [pulls]: https://github.com/hugo-fixit/FixIt/pulls
