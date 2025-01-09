@@ -30,7 +30,7 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@hugo-fixit/fixit-releaser": "^1.0.1",
+    "@hugo-fixit/fixit-releaser": "^1.0.4",
     "husky": "^9.1.7"
   },
   "engines": {
