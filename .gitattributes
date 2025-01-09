@@ -1,1 +1,3 @@
 assets/lib/**/* linguist-vendored
+*.toml linguist-detectable
+*.md linguist-detectable
