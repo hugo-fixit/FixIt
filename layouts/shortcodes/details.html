@@ -1,12 +1,71 @@
-{{- $summary := .Get "summary" | default (.Get 0) -}}
+{{- /*
+Renders an HTML details element.
+
+@param {string} [class] The value of the element's class attribute.
+@param {string} [name] The value of the element's name attribute.
+@param {string} [summary] The content of the child summary element.
+@param {string} [title] The value of the element's title attribute.
+@param {bool} [open=false] Whether to initially display the content of the details element.
+
+@reference https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details
+
+@examples
+
+  {{< details >}}
+  A basic collapsible section.
+  {{< /details >}}
+
+  {{< details summary="Custom Summary Text" >}}
+  Showing custom `summary` text.
+  {{< /details >}}
+
+  {{< details summary="Open Details" open=true >}}
+  Contents displayed initially by using `open`.
+  {{< /details >}}
+
+  {{< details summary="Styled Content" class="my-custom-class" >}}
+  Content can be styled with CSS by specifying a `class`.
+
+  Target details element:
+
+  ```css
+  details.my-custom-class { }
+  ```
+
+  Target summary element:
+
+  ```css
+  details.my-custom-class > summary > * { }
+  ```
+
+  Target inner content:
+
+  ```css
+  details.my-custom-class > :not(summary) { }
+  ```
+  {{< /details >}}
+
+  {{< details summary="Grouped Details" name="my-details" >}}
+  Specifying a `name` allows elements to be connected, with only one able to be open at a time.
+  {{< /details >}}
+
+*/}}
+
+{{- /* Get arguments. */}}
+{{- $summary := .Get "summary" | default (.Get 0) | default  "Details" }}
 {{- $open := .Get "open" | default (.Get 1) | default false -}}
-{{- $center := .Get "center" | default (.Get 2) | default false -}}
+{{- $class := .Get "class" | default (.Get 2) | default "" }}
+{{- $name := or (.Get "name") "" }}
+{{- $title := or (.Get "title") "" }}
+
+{{- /* Render. */}}
 <details
-  {{- with $open }} open{{ end -}}
+  {{- with $class }} class="{{ . }}" {{- end }}
+  {{- with $name }} name="{{ . }}" {{- end }}
+  {{- with $open }} open {{- end }}
+  {{- with $title }} title="{{ . }}" {{- end -}}
 >
-  <summary
-    {{- if $center }} class="text-center"{{ end -}}
-  >{{ $summary | .Page.RenderString }}</summary>
-  {{ .Inner | .Page.RenderString }}
+  <summary>{{ $summary | .Page.RenderString }}</summary>
+  {{ .Inner | .Page.RenderString (dict "display" "block") -}}
 </details>
 {{- /* EOF */ -}}

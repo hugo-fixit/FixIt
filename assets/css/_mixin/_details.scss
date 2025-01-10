@@ -5,3 +5,11 @@
 @mixin details-transition-close {
   @include transition(max-height 0.2s cubic-bezier(0.5, 0, 1, 0) 0s);
 }
+
+details {
+  &.center {
+    summary {
+      text-align: center;
+    }
+  }
+}
