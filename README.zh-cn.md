@@ -86,7 +86,10 @@ pnpx fixit-cli create my-blog
 
 Gitee 镜像仓库：<https://gitee.com/lruihao/FixIt>
 
-## 特性
+## 特色
+
+<details>
+<summary>点击展开</summary>
 
 ### 性能和 SEO
 
@@ -164,20 +167,14 @@ Gitee 镜像仓库：<https://gitee.com/lruihao/FixIt>
 - 支持本地**缓存远程图床图片**
 - ……
 
-### 主题组件
-
-FixIt 主题旨在在**简洁性**和**可扩展性**之间取得平衡。为此，我们开发了一系列额外的 [Hugo 主题组件](https://fixit.lruihao.cn/zh-cn/ecosystem/#-组件) 供用户选择。
-
-- GitHub 项目卡片支持 [component-projects](https://github.com/hugo-fixit/component-projects)
-- 自动翻译支持 [cmpt-translate](https://github.com/hugo-fixit/cmpt-translate)
-- JSON feed 支持 [hugo-json-feed](https://github.com/hugo-fixit/hugo-json-feed)
-- `reward-log` shortcode 支持 [shortcode-reward](https://github.com/hugo-fixit/shortcode-rewards)
-- `caniuse` shortcode 支持 [shortcode-caniuse](https://github.com/hugo-fixit/shortcode-caniuse)
-- ……
+</details>
 
 ## 多语言和国际化
 
-FixIt 支持下列语言：
+FixIt 主题多语言基本配置及自动翻译等详见 [内容管理](https://fixit.lruihao.cn/zh-cn/documentation/content-management/introduction#multilingual) 文档，欢迎 [贡献一种新的语言](https://github.com/hugo-fixit/FixIt/pulls)。
+
+<details>
+<summary>FixIt 支持下列语言。</summary>
 
 - 英语
 - 简体中文
@@ -193,9 +190,21 @@ FixIt 支持下列语言：
 - 罗马尼亚语
 - 越南语
 - 印地语
-- [贡献一种新的语言](https://github.com/hugo-fixit/FixIt/pulls)
 
-[语言兼容性](https://fixit.lruihao.cn/zh-cn/theme-documentation-basics/#language-compatibility)
+</details>
+
+## 主题组件
+
+FixIt 主题旨在在**简洁性**和**可扩展性**之间取得平衡。为此，我们开发了一系列额外的 [Hugo 主题组件](https://fixit.lruihao.cn/zh-cn/ecosystem/#-组件) 供用户选择。
+
+<details>
+<summary>点击展开</summary>
+
+<!-- COMPONENT_LIST_START -->
+
+<!-- COMPONENT_LIST_END -->
+
+</details>
 
 ## 社区支持
 

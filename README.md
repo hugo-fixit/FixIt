@@ -84,6 +84,9 @@ Click the following links to generate a new repository with template:
 
 ## Features
 
+<details>
+<summary>Click to view.</summary>
+
 ### Performance and SEO
 
 - Optimized for **performance**: 99/100 on mobile and 100/100 on desktop in [Google PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights)
@@ -160,20 +163,14 @@ Click the following links to generate a new repository with template:
 - Options to **cache remote image** locally
 - ...
 
-### Theme Components
-
-The FixIt theme balances **simplicity** and **extensibility** with extra [Hugo theme components](https://fixit.lruihao.cn/ecosystem/#-components) for customization.
-
-- GitHub projects card supported by [component-projects](https://github.com/hugo-fixit/component-projects)
-- Automatic Translation supported by [cmpt-translate](https://github.com/hugo-fixit/cmpt-translate)
-- JSON feed supported by [hugo-json-feed](https://github.com/hugo-fixit/hugo-json-feed)
-- `reward-log` shortcode supported by [shortcode-reward](https://github.com/hugo-fixit/shortcode-rewards)
-- `caniuse` shortcode supported by [shortcode-caniuse](https://github.com/hugo-fixit/shortcode-caniuse)
-- ...
+</details>
 
 ## Multilingual and i18n
 
-FixIt supports the following languages:
+FixIt supports multilingual and i18n. For more information, see the [Content Management](https://fixit.lruihao.cn/documentation/content-management/introduction#multilingual) documentation. You are welcome to [contribute with a new language](https://github.com/hugo-fixit/FixIt/pulls).
+
+<details>
+<summary>FixIt supports the following languages.</summary>
 
 - English
 - Simplified Chinese
@@ -189,9 +186,21 @@ FixIt supports the following languages:
 - Romanian
 - Vietnamese
 - Hindi
-- [Contribute with a new language](https://github.com/hugo-fixit/FixIt/pulls)
 
-[Languages Compatibility](https://fixit.lruihao.cn/documentation/basics/#language-compatibility)
+</details>
+
+## Theme Components
+
+The FixIt theme balances **simplicity** and **extensibility** with extra [Hugo theme components](https://fixit.lruihao.cn/ecosystem/#-components) for customization.
+
+<details>
+<summary>Click to view.</summary>
+
+<!-- COMPONENT_LIST_START -->
+
+<!-- COMPONENT_LIST_END -->
+
+</details>
 
 ## Community
 
