@@ -3,7 +3,7 @@
 
 name = "FixIt"
 license = "MIT"
-licenselink = "https://github.com/hugo-fixit/FixIt/blob/master/LICENSE"
+licenselink = "https://github.com/hugo-fixit/FixIt/blob/main/LICENSE"
 description = "A Clean, Elegant but Advanced Hugo Theme for Hugo."
 homepage = "https://github.com/hugo-fixit/FixIt"
 demosite = "https://fixit.lruihao.cn"

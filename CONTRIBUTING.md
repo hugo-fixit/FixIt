@@ -41,19 +41,17 @@ Finally, create a new pull request at <https://github.com/hugo-fixit/FixIt/pulls
 
 ### Branches
 
-| Branch | Description |
-| :-- | :-- |
-| master | _The branch open to the public and release versions_ |
-| dev | _The development branch of the next version_ |
-| single feature | _The branch to enhancements or fixes_ |
+| Branch         | Description                                            |
+| :------------- | :----------------------------------------------------- |
+| main           | _The development branch, may contain unstable updates_ |
+| single feature | _The branch to enhancements or fixes_                  |
 
 ### Merge events
 
-| event | merge |
-| :-- | :-- |
-| release | **dev => master:** `--rebase` |
-| PR | **others:master => master:** `--rebase` |
-| single feature| **feature branch => dev/master:** `--merge` |
+| event          | merge                                 |
+| :------------- | :------------------------------------ |
+| PR             | **others:main => main:** `--rebase`   |
+| single feature | **feature branch => main:** `--merge` |
 
 ### Commit message
 
