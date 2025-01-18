@@ -6,17 +6,17 @@
 {{- $pass := $suffixValid | or .Pass -}}
 
 {{- if $pass -}}
-  {{- with $remoteResource := resources.GetRemote .Path -}}
+  {{- with try ($remoteResource := resources.GetRemote .Path) -}}
     {{- with .Err -}}
       {{- erroridf "error-get-remote-image" "%s" . -}}
-    {{- else -}}
+    {{- else with .Value -}}
       {{- if eq $remoteResource.ResourceType "image" -}}
         {{- /* placed remote image in public/images/remote/ */ -}}
         {{- $resource = $remoteResource | resources.Copy (add "/images/remote/" $remoteResource.Name) -}}
       {{- end -}}
+    {{- else -}}
+      {{- erroridf "error-get-remote-image" "Unable to get remote image %q" $.Path -}}
     {{- end -}}
-  {{- else -}}
-    {{- erroridf "error-get-remote-image" "Unable to get remote image %q" .Path -}}
   {{- end -}}
 {{- end -}}
 {{- return $resource -}}
