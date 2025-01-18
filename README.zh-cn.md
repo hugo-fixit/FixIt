@@ -200,9 +200,9 @@ FixIt 主题旨在在**简洁性**和**可扩展性**之间取得平衡。为此
 <details>
 <summary>点击展开</summary>
 
-<!-- COMPONENT_LIST_START -->
+<!-- HUGO_FIXIT_COMPONENTS:START -->
 
-<!-- COMPONENT_LIST_END -->
+<!-- HUGO_FIXIT_COMPONENTS:END -->
 
 </details>
 

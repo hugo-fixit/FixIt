@@ -196,9 +196,9 @@ The FixIt theme balances **simplicity** and **extensibility** with extra [Hugo t
 <details>
 <summary>Click to view.</summary>
 
-<!-- COMPONENT_LIST_START -->
+<!-- HUGO_FIXIT_COMPONENTS:START -->
 
-<!-- COMPONENT_LIST_END -->
+<!-- HUGO_FIXIT_COMPONENTS:END -->
 
 </details>
 

@@ -1,0 +1,28 @@
+name: Generate hugo-fixit component list
+on:
+  schedule: # Run workflow automatically
+    - cron: '0 0 * * *' # Runs every day at 00:00 UTC
+  workflow_dispatch: # Run workflow manually (without waiting for the cron to be called), through the GitHub Actions Workflow page directly
+permissions:
+  contents: write # To write the generated contents to the readme
+
+jobs:
+  generate-component-list:
+    name: Update this repo's README with the list of hugo-fixit theme components
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Generate hugo-fixit component list
+        uses: hugo-fixit/action-component-list@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          comment_tag_name: HUGO_FIXIT_COMPONENTS
+          readme_path: 'README.md,README.zh-cn.md'
+          template: "- [{$repo.name}]({$repo.html_url})\\\n  {$repo.description}"
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: ':memo: Docs: update hugo-fixit component list'
+          commit_author: 'github-actions[bot] <github-actions[bot]@users.noreply.github.com>'
