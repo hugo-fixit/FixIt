@@ -1,111 +1,90 @@
-{{- /* TODO refactor */ -}}
-{{- $params := partial "function/params.html" -}}
-{{- $class := .Class | default "" -}}
-{{- $style := "" -}}
-{{- $loading := .Loading | default "lazy" -}}
-{{- $onload := "" -}}
-{{- $onerror := "" -}}
-{{- $cacheRemoteImages := $params.cacheRemoteImages -}}
-{{- $suffixList := slice ".jpeg" ".jpg" ".png" ".gif" ".bmp" ".tif" ".tiff" ".webp" -}}
-{{- $responsive := .Responsive -}}
+{{- /*  
+The image plugin is a partial that handles image resources.
 
-{{- if hasPrefix .Src "data:image" -}}
-  {{- $responsive = false -}}
+Parameters:
+- Src: The path to the image. 
+    It can be a page resource (inside a page bundle) https://gohugo.io/methods/page/resources/
+    or a global resource (inside the assets directory) https://gohugo.io/functions/resources/get/
+    or a link to a remote resource, which can be cached if the site parameter is set https://gohugo.io/functions/resources/getremote/
+- Resources: If the image is a page resource, this parameter is required. It is the .Resources of the page.
+- OptimConfig: optimisation parameter, defined like 
+    {{- $optim := slice 
+        (dict "Process" "resize 800x Center webp q75" "descriptor" "800w")
+        (dict "Process" "resize 1200x Center webp q75" "descriptor" "1200w")
+        (dict "Process" "resize 1600x Center webp q75" "descriptor" "1600w")
+    -}}
+    See https://gohugo.io/content-management/image-processing/ for more information.
+- Alt: alt text for the image. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#alt
+- Height: The intrinsic height of the image, in pixels. Must be an integer without a unit.
+    We try to generate this value automatically if possible. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#height
+- Width: The intrinsic width of the image, in pixels. Must be an integer without a unit.
+    We try to generate this value automatically if possible. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#width
+- Loading: Indicates how the browser should load the image: eager or lazy. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#loading
+- Optimise: Override the site parameter to optimise the image.
+- CacheRemote: Override the site parameter to cache remote images.
+
+Thanks @HEIGE-PCloud for the original code in the DoIt theme.
+https://github.com/HEIGE-PCloud/DoIt/blob/main/layouts/partials/plugin/image.html
+*/ -}}
+
+{{- $isInline := strings.HasPrefix .Src "data:image" -}}
+{{- $isRemote := urls.Parse .Src | partial "function/is-url-remote.html" -}}
+{{- $resource := dict -}}
+
+{{- if not $isRemote | and (not $isInline) -}}
+  {{- $resource = (.Resources.Get .Src) | default (resources.Get .Src) -}}
 {{- end -}}
 
-{{- /* handle for default size image */ -}}
-{{- $src := .Src -}}
-{{- $suffixValid := dict "Path" $src "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
-{{- with dict "Path" $src "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
-  {{- $url := urls.Parse $src -}}
-  {{- if not $url.Host | or $cacheRemoteImages.replace -}}
-    {{- $src = .RelPermalink -}}
-  {{- end -}}
-  {{- /* only available for image resources that are raster images */ -}}
-  {{- if (eq .ResourceType "image") | and $suffixValid | and $responsive -}}
-    {{- $style = printf "--width: %vpx;--aspect-ratio: %v / %v;" .Width .Width .Height | safeHTMLAttr -}}
-  {{- end -}}
-{{- end -}}
+{{- $cacheRemote := .CacheRemote | default site.Params.image.cacheRemote | default false -}}
+{{- $optimise := .Optimise | default site.Params.image.optimise | default false -}}
 
-{{- $srcSmall := .SrcSmall | default $src -}}
-{{- $srcMedium := $src -}}
-{{- $srcLarge := .SrcLarge | default $src -}}
-
-{{- if $responsive }}
-  {{- /* handle for small size image */ -}}
-  {{- $suffixValidSmall := dict "Path" $srcSmall "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
-  {{- with dict "Path" .SrcSmall "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
-    {{- $url := urls.Parse $.SrcSmall -}}
-    {{- if not $url.Host | or $cacheRemoteImages.replace -}}
-      {{- $srcSmall = .RelPermalink -}}
+{{- if not $resource | and $isRemote | and $cacheRemote -}}
+  {{- with try (resources.GetRemote .Src) -}}
+    {{- with .Err -}}
+      {{- warnf "%s" . -}}
+    {{- else with .Value -}}
+      {{- if .ResourceType | eq "image" -}}
+        {{- /* placed remote image in public/images/remote/ */ -}}
+        {{- $resource = . | resources.Copy (add "/images/remote/" .Name) -}}
+      {{- end -}}
+    {{- else -}}
+      {{- warnf "Unable to get remote image %q" .Src -}}
     {{- end -}}
-    {{- if (eq .ResourceType "image") | and $suffixValidSmall -}}
-      {{- $style = printf "%v--width-small: %vpx;--aspect-ratio-small: %v / %v;" $style .Width .Width .Height | safeHTMLAttr -}}
-    {{- end -}}
-  {{- end -}}
-
-  {{- /* handle for large size image */ -}}
-  {{- $suffixValidLarge := dict "Path" $srcLarge "Suffixes" $suffixList | partial "function/suffix-validation.html" -}}
-  {{- with dict "Path" .SrcLarge "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" -}}
-    {{- $url := urls.Parse $.SrcLarge -}}
-    {{- if not $url.Host | or $cacheRemoteImages.replace -}}
-      {{- $srcLarge = .RelPermalink -}}
-    {{- end -}}
-    {{- if (eq .ResourceType "image") | and $suffixValidLarge -}}
-      {{- $style = printf "%v--width-large: %vpx;--aspect-ratio-large: %v / %v;" $style .Width .Width .Height | safeHTMLAttr -}}
-    {{- end -}}
-  {{- end -}}
-
-  {{- /* handle for invalid suffix */ -}}
-  {{- if not $suffixValid | and $src -}}
-    {{- $class = printf "%v suffix-invalid" $class -}}
-  {{- end -}}
-  {{- if not $suffixValidSmall | and $srcSmall -}}
-    {{- $class = printf "%v suffix-invalid__small" $class -}}
-  {{- end -}}
-  {{- if not $suffixValidLarge | and $srcLarge -}}
-    {{- $class = printf "%v suffix-invalid__large" $class -}}
-  {{- end -}}
-
-  {{- /* set image srcset */ -}}
-  {{- if (eq $src $srcSmall) | and (eq $src $srcLarge) -}}
-    {{- $srcSmall = printf (cond (strings.Contains $srcSmall "?") "%v&size=small" "%v?size=small") $srcSmall -}}
-    {{- $srcMedium = printf (cond (strings.Contains $srcMedium "?") "%v&size=medium" "%v?size=medium") $srcMedium -}}
-    {{- $srcLarge = printf (cond (strings.Contains $srcLarge "?") "%v&size=large" "%v?size=large") $srcLarge -}}
   {{- end -}}
 {{- end -}}
 
-{{- /* set image alt and caption */ -}}
+{{- $isSvg := false -}}
+{{- if $resource -}}
+  {{- $isSvg = (eq $resource.MediaType.SubType "svg") -}}
+{{- end -}}
+
+{{- $optim := .OptimConfig -}}
+{{- $srcset := "" -}}
+{{- if $optim | and $resource | and $optimise | and (not $isSvg) -}}
+  {{ $srcsetSlice := slice -}}
+  {{- range $optim -}}
+    {{- if .Process -}}
+      {{- $processed := $resource.Process .Process -}}
+      {{- $srcsetSlice = $srcsetSlice | append (printf "%s %s" $processed.RelPermalink .descriptor) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $srcset = delimit $srcsetSlice ", " -}}
+{{- end -}}
+
+{{- $src := $resource.RelPermalink | default .Src -}}
 {{- $alt := .Alt | default $src -}}
 {{- $caption := .Caption | default $alt -}}
-
-{{- /* set image lazy loading */ -}}
-{{- /* for details, see https://lruihao.cn/posts/native-img-loading-lazy/ */ -}}
-{{- if eq $loading "lazy" -}}
-  {{- /* TODO move to theme.js */ -}}
-  {{- $commonScript := "this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}" -}}
-  {{- $onload = printf " onload=\"%vthis.dataset.lazyloaded='';\"" $commonScript | safeHTMLAttr -}}
-  {{- $onerror = printf " onerror=\"%v\"" $commonScript | safeHTMLAttr -}}
-  {{- $style = printf " style=\"%vbackground: url(%v) no-repeat center;\"" $style (resources.Get "images/loading.svg" | minify).RelPermalink | safeHTMLAttr -}}
+{{- $height := .Height -}}
+{{- $width := .Width -}}
+{{- if not $isSvg -}}
+  {{- $height = $height | default $resource.Height | default "" -}}
+  {{- $width = $width | default $resource.Width | default "" -}}
 {{- end -}}
 
-{{- /* structure of lightgallery or img */ -}}
 {{- if .Linked -}}
-  <a class="lightgallery" href="{{ $srcLarge | safeURL }}" data-thumbnail="{{ $srcSmall | safeURL }}"{{ with $caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
+<a class="lightgallery" href="{{ $src }}" title="{{ .Title | default $alt }}" data-thumbnail="{{ $src }}"{{ with $caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
 {{- end -}}
-<img loading="{{ $loading }}" src="{{ $src | safeURL }}" alt="{{ $alt }}"
-  {{- if $responsive }} srcset="{{ $srcSmall | safeURL }}, {{ $srcMedium | safeURL }} 1.5x, {{ $srcLarge | safeURL }} 2x"{{- end -}}
-  {{- if eq $loading "lazy" }} data-title="{{ .Title | default $alt }}"
-  {{- else }} title="{{ .Title | default $alt }}"{{- end -}}
-  {{- with .Width }} width="{{ . }}"{{- end -}}
-  {{- with .Height }} height="{{ . }}"{{- end -}}
-  {{- with $class }} class="{{ trim . " " }}"{{- end -}}
-  {{- with .Decoding }} decoding="{{ . }}"{{- end -}}
-  {{- with .Referrerpolicy }} referrerpolicy="{{ . }}"{{- end -}}
-  {{- with $style -}}{{ . }}{{- end -}}
-  {{- with $onload -}}{{ . }}{{- end -}}
-  {{- with $onerror -}}{{ . }}{{- end -}}
-/>
+<img {{- with .Class }} class="{{ . }}"{{ end }}{{ with .Loading }} loading="{{ . }}"{{ end }} {{ printf "src='%v'" $src | safeHTMLAttr }}{{ with $srcset }} srcset="{{ . }}"{{ end }}{{ with .Sizes }} sizes="{{ . }}"{{ end }}{{ with $alt }} alt="{{ . }}"{{ end }}{{ with $height }} height="{{ . }}"{{ end }}{{ with $width }} width="{{ . }}"{{ end }}{{ with .Decoding }} decoding="{{ . }}"{{ end }}{{ with .Referrerpolicy }} referrerpolicy="{{ . }}"{{ end }}>
 {{- if .Linked -}}
-  </a>
+</a>
 {{- end -}}

@@ -943,6 +943,13 @@ enableEmoji = true
     [params.feed.follow]
       feedId = ""
       userId = ""
+  
+  # FixIt 0.3.17 | NEW Image config
+  [params.image]
+    # cache remote images for better optimisations
+    cacheRemote = false
+    # Image resizing and optimisation
+    optimise = false
 
   # FixIt 0.3.12 | NEW Custom partials config
   # Custom partials must be stored in the /layouts/partials/ directory.
@@ -1107,11 +1114,6 @@ enableEmoji = true
       scale = true
       # whether to add FullscreenControl
       fullscreen = true
-    # FixIt 0.3.0 | NEW [Experimental] cache remote images locally, see: https://github.com/hugo-fixit/FixIt/pull/362
-    [params.page.cacheRemoteImages]
-      enable = false
-      # replace remote image url with local image url (place in public/images/remote/)
-      replace = false
     # FixIt 0.3.0 | NEW Related content config (https://gohugo.io/content-management/related/)
     [params.page.related]
       enable = false

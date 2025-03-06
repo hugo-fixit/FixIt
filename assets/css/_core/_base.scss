@@ -54,6 +54,15 @@ abbr[title] {
   text-decoration-skip-ink: none;
 }
 
+img {
+  object-fit: cover;
+}
+
+img,video {
+  max-width: 100%;
+  height: auto;
+}
+
 @include link(true, true);
 
 @import '../_partials/scrollbar';

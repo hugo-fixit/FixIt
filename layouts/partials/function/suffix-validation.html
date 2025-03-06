@@ -1,3 +1,8 @@
+{{- /*  
+Example:
+{{- $suffixList := slice ".jpeg" ".jpg" ".png" ".gif" ".bmp" ".tif" ".tiff" ".webp" ".avif" ".svg" -}}
+{{- $suffixValid := (dict "Path" .Path "Suffixes" $suffixList | partial "function/suffix-validation.html") -}}
+*/ -}}
 {{- $url := urls.Parse .Path -}}
 {{- $path := path.Clean ((printf "%v%v" $url.Host $url.Path) | lower) -}}
 {{- with $url.Scheme -}}

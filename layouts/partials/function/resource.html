@@ -1,21 +1,17 @@
 {{- $Resources := .Resources | default page.Resources -}}
 {{- $resource := 0 -}}
 {{- $url := urls.Parse .Path -}}
-{{- if not $url.Host | and $url.Path | and (strings.HasSuffix $url.Path "/" | not) -}}
+{{- if not (partial "function/is-url-remote.html" $url) -}}
+  {{- $dest := strings.TrimPrefix "./" $url.Path -}}
   {{- if $Resources -}}
-    {{- with $Resources.GetMatch $url.Path -}}
+    {{- with $Resources.GetMatch $dest -}}
       {{- $resource = . -}}
     {{- end -}}
   {{- end -}}
   {{- if not $resource -}}
-    {{- with resources.Get $url.Path -}}
+    {{- with resources.Get $dest -}}
       {{- $resource = . -}}
     {{- end -}}
-  {{- end -}}
-{{- else -}}
-  {{- $cacheRemoteImages := .CacheRemoteImages | default false -}}
-  {{- if $cacheRemoteImages -}}
-    {{- $resource = partial "function/get-remote-image.html" (dict "Path" .Path) -}}
   {{- end -}}
 {{- end -}}
 
