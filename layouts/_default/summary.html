@@ -3,6 +3,9 @@
 <article class="single summary" itemscope itemtype="http://schema.org/Article">
   {{- /* Featured image */ -}}
   {{- $image := $params.featuredimagepreview | default $params.featuredimage -}}
+  {{- with dict "Path" $image "Resources" .Resources | partial "function/resource.html" }}
+    {{- $image = .RelPermalink }}
+  {{- end }}
   {{- with .Resources.GetMatch "featured-image" -}}
     {{- $image = .RelPermalink -}}
   {{- end -}}
@@ -12,7 +15,12 @@
   {{- with $image -}}
     <div class="featured-image-preview">
       <a href="{{ $.RelPermalink }}" aria-label="{{ $.Title }}">
-        {{- dict "Src" . "Title" $.Description "Alt" $.Title "Resources" $.Resources "Width" "50%" "Height" "50%" | partial "plugin/image.html" -}}
+        {{- $optim := slice 
+          (dict "Process" "fill 800x240 Center webp q75" "descriptor" "800w")
+          (dict "Process" "fill 1200x360 Center webp q75" "descriptor" "1200w")
+          (dict "Process" "fill 1600x480 Center webp q75" "descriptor" "1600w") 
+        -}}
+        {{- dict "Src" . "Title" $.Title "Resources" $.Resources "Loading" "eager" "Width" "800" "Height" "240" "Sizes" "(max-width: 680px) 100vw, (max-width: 960px) 80vw, (max-width: 1440px) 56vw, 800px" "OptimConfig" $optim "Alt" (printf "Featured image for %v" $.Title) | partial "plugin/image.html" -}}
       </a>
     </div>
   {{- end -}}

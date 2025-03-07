@@ -368,31 +368,6 @@
       max-width: 100%;
       min-height: 1em;
 
-      &:not([height]) {
-        height: auto;
-      }
-
-      &[loading='lazy'][srcset]:not([data-lazyloaded]) {
-        &:not(.suffix-invalid__small) {
-          width: var(--width-small, var(--width));
-          aspect-ratio: var(--aspect-ratio-small, var(--aspect-ratio));
-        }
-
-        &:not(.suffix-invalid) {
-          @media (min-resolution: 1.01dppx) and (max-resolution: 1.5dppx) {
-            width: calc(var(--width) / 1.5);
-            aspect-ratio: var(--aspect-ratio);
-          }
-        }
-
-        &:not(.suffix-invalid__large) {
-          @media (min-resolution: 1.51dppx) {
-            width: calc(var(--width-large, var(--width)) / 2);
-            aspect-ratio: var(--aspect-ratio-large, var(--aspect-ratio));
-          }
-        }
-      }
-
       &.version {
         height: 1.25em;
         vertical-align: text-bottom;
@@ -419,6 +394,7 @@
       img {
         display: block;
         margin: 0 auto;
+        height: auto;
         overflow: hidden;
       }
     }

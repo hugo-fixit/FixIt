@@ -8,7 +8,7 @@
       <a href="{{ $homeRelPermalink }}" title="{{ .Site.Title }}">
         {{- with .Site.Params.header.title -}}
           {{- with .logo -}}
-            {{- dict "Src" . "Class" "logo" "Alt" $.Site.Title "Width" 26 "Height" 26 | partial "plugin/image.html" -}}
+            {{- dict "Src" . "Class" "logo" "Alt" $.Site.Title "Width" 32 "Height" 32 | partial "plugin/image.html" -}}
           {{- end -}}
           {{- with .pre -}}
             <span class="header-title-pre">{{ . | safeHTML }}</span>

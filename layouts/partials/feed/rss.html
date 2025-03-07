@@ -32,13 +32,9 @@
     {{- $params := .Params | merge .Site.Params.Page }}
     {{- $fullText := ((.Params.feed | default dict) | merge $.Config ).fulltext }}
     {{- $author := partial "function/get-author-map.html" .Params.author }}
-    {{- $cacheRemoteImages := $params.cacheRemoteImages }}
     {{- $image := $params.featuredimagepreview | default $params.featuredimage }}
-    {{- with dict "Path" $image "Resources" .Resources "CacheRemoteImages" $cacheRemoteImages.enable | partial "function/resource.html" }}
-      {{- $url := urls.Parse $image }}
-      {{- if not $url.Host | or $cacheRemoteImages.replace }}
-        {{- $image = .Permalink }}
-      {{- end }}
+    {{- with dict "Path" $image "Resources" .Resources | partial "function/resource.html" }}
+      {{- $image = .Permalink }}
     {{- end }}
     {{- with .Resources.GetMatch "featured-image" }}
       {{- $image = .Permalink }}

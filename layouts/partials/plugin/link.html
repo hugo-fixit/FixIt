@@ -42,15 +42,6 @@
     {{- end -}}
   {{- else -}}
     {{- $cardIcon := .CardIcon -}}
-    {{- if $url.Host | and (eq .CardIcon true) -}}
-      {{- $cardIcon = false -}}
-      {{- /* 实验性功能：中国大陆地区无法使用，如果你有更好的 API 或者方案，欢迎 PR！ */ -}}
-      {{- $favicon := partial "function/get-remote-image.html" (dict "Path" (add "https://www.google.com/s2/favicons?sz=64&domain=" $url.Host) "Pass" true) -}}
-      {{- with $favicon -}}
-        {{- $cardIcon = .RelPermalink -}}
-      {{- end -}}
-    {{- end -}}
-
     {{- $attrs := `class="cl-backdrop"` -}}
     {{- $attrs = printf ` style="--cl-bg-url: url(%v);"` (resources.Get "images/fixit.svg" | minify).RelPermalink | add $attrs -}}
     <span {{ $attrs | safeHTMLAttr }}></span>
