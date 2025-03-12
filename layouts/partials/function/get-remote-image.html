@@ -1,0 +1,19 @@
+{{- /* cache remote image locally */ -}}
+{{- $resource := 0 -}}
+{{- $isRemote := urls.Parse .Src | partial "function/is-url-remote.html" -}}
+
+{{- if $isRemote -}}
+  {{- with try (resources.GetRemote .Src) -}}
+    {{- with .Err -}}
+      {{- warnf "%s" . -}}
+    {{- else with .Value -}}
+      {{- if .ResourceType | eq "image" -}}
+        {{- /* placed remote image in public/images/remote/ */ -}}
+        {{- $resource = . | resources.Copy (add "/images/remote/" .Name) -}}
+      {{- end -}}
+    {{- else -}}
+      {{- warnf "Unable to get remote image %q" .Src -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $resource -}}

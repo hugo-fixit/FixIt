@@ -38,18 +38,9 @@ https://github.com/HEIGE-PCloud/DoIt/blob/main/layouts/partials/plugin/image.htm
 {{- $cacheRemote := .CacheRemote | default site.Params.image.cacheRemote | default false -}}
 {{- $optimise := .Optimise | default site.Params.image.optimise | default false -}}
 
-{{- if not $resource | and $isRemote | and $cacheRemote -}}
-  {{- with try (resources.GetRemote .Src) -}}
-    {{- with .Err -}}
-      {{- warnf "%s" . -}}
-    {{- else with .Value -}}
-      {{- if .ResourceType | eq "image" -}}
-        {{- /* placed remote image in public/images/remote/ */ -}}
-        {{- $resource = . | resources.Copy (add "/images/remote/" .Name) -}}
-      {{- end -}}
-    {{- else -}}
-      {{- warnf "Unable to get remote image %q" .Src -}}
-    {{- end -}}
+{{- if not $resource | and $cacheRemote -}}
+  {{- with partial "function/get-remote-image.html" (dict "Src" .Src) -}}
+    {{- $resource = . -}}
   {{- end -}}
 {{- end -}}
 

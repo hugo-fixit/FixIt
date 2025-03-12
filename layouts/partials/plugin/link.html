@@ -42,6 +42,12 @@
     {{- end -}}
   {{- else -}}
     {{- $cardIcon := .CardIcon -}}
+    {{- if not $cardIcon -}}
+      {{- with partial "function/get-remote-image.html" (dict "Src" (add "https://favicon.im/" $url.Host)) -}}
+        {{- $cardIcon = .RelPermalink -}}
+      {{- end -}}
+    {{- end -}}
+
     {{- $attrs := `class="cl-backdrop"` -}}
     {{- $attrs = printf ` style="--cl-bg-url: url(%v);"` (resources.Get "images/fixit.svg" | minify).RelPermalink | add $attrs -}}
     <span {{ $attrs | safeHTMLAttr }}></span>
