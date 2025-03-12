@@ -1,0 +1,7 @@
+{{- $link := .Get "link"  -}}
+{{- $query := querify "url" $link -}}
+{{- $request := printf "https://embed.bsky.app/oembed?%s" $query -}}
+{{- $jsonOembed := resources.GetRemote $request -}}
+{{- $jsonOembed = $jsonOembed | transform.Unmarshal -}}
+{{- $jsonOHTML := $jsonOembed.html -}}
+{{- $jsonOHTML | safeHTML -}}
