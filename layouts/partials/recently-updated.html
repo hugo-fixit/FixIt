@@ -18,7 +18,10 @@
     {{- $scopePages = .Scratch.Get "mainSectionPages" -}}
   {{- end -}}
   {{- $scopePages = where $scopePages.ByLastmod.Reverse "Section" "!=" "" -}}
-  {{- /* {{- $scopePages = where $scopePages "File.IsContentAdapter" "ne" true -}} */ -}}
+  {{- $hiddenAdapters := .Param "hiddenAdapters" | default false -}}
+  {{- if $hiddenAdapters -}}
+    {{- $scopePages = where $scopePages "File.IsContentAdapter" "ne" true -}}
+  {{- end -}}
   {{- range first $maxPostCount $scopePages -}}
     {{- if gt (add .Lastmod.Unix (mul 86900 $days)) now.Unix -}}
       {{- if ne .Lastmod.Unix .Date.Unix }}
