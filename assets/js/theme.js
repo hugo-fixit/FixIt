@@ -1071,10 +1071,10 @@ class FixIt {
         this.initEcharts();
         this.initTypeit();
         this.initMapbox();
+        this.fixTocScroll();
         this.initToc();
         this.initTocListener();
         this.initPangu();
-        this.fixTocScroll();
         this.util.forEach(document.querySelectorAll('.encrypted-hidden'), ($element) => {
           $element.classList.replace('encrypted-hidden', 'decrypted-shown');
         });
@@ -1310,9 +1310,9 @@ class FixIt {
       window.setTimeout(() => {
         this.initComment();
         if (!this.config.encryption?.all) {
+          this.fixTocScroll();
           this.initToc();
           this.initTocListener();
-          this.fixTocScroll();
         }
         this.onScroll();
         this.onResize();
