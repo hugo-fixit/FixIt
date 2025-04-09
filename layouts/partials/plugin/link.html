@@ -45,6 +45,8 @@
     {{- if not $cardIcon -}}
       {{- with partial "function/get-remote-image.html" (dict "Src" (add "https://favicon.im/" $url.Host)) -}}
         {{- $cardIcon = .RelPermalink -}}
+      {{- else with partial "function/get-remote-image.html" (dict "Src" (add "https://api.lruihao.cn/google/s2/favicons?sz=64&domain=" $url.Host)) -}}
+        {{- $cardIcon = .RelPermalink -}}
       {{- end -}}
     {{- end -}}
 
