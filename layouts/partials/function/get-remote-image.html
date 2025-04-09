@@ -12,7 +12,7 @@
         {{- $resource = . | resources.Copy (add "/images/remote/" .Name) -}}
       {{- end -}}
     {{- else -}}
-      {{- warnf "Unable to get remote image %q" .Src -}}
+      {{- warnf "Unable to get remote image %q" $.Src -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
