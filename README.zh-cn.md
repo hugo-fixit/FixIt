@@ -221,6 +221,8 @@ FixIt 主题旨在在**简洁性**和**可扩展性**之间取得平衡。为此
   一个含有 caniuse shortcode 的 Hugo 主题组件。
 - [shortcode-docs-bookmark](https://github.com/hugo-fixit/shortcode-docs-bookmark)\
   🔖 Embed bookmark of FixIt Docs.
+- [shortcode-mmt-netease](https://github.com/hugo-fixit/shortcode-mmt-netease)\
+  🎶 A Hugo theme component with a NetEase Cloud random comment shortcode.
 - [shortcode-rewards](https://github.com/hugo-fixit/shortcode-rewards)\
   A Hugo theme component with reward-log or sponsor-log shortcode.
 <!-- HUGO_FIXIT_COMPONENTS:END -->
