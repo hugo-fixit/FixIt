@@ -23,6 +23,6 @@
       {{- .Params.Title | default (T $taxonomies) | default $taxonomies | dict "Some" | T "allSome" }} <sup>{{ len .Data.Terms.ByCount }}</sup>
     </h1>
     {{- /* Render miscellaneous terms */ -}}
-    {{- .Render (add "terms/" $taxonomies) -}}
+    {{- .Render $taxonomies -}}
   </div>
 {{- end -}}
