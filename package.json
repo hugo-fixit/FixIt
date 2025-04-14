@@ -2,6 +2,7 @@
   "name": "fixit-core",
   "version": "0.3.16",
   "private": true,
+  "packageManager": "pnpm@10.5.2",
   "description": "Hugo FixIt core theme component source files",
   "keywords": [
     "hugo",
@@ -30,7 +31,7 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@hugo-fixit/fixit-releaser": "^1.1.4",
+    "@hugo-fixit/fixit-releaser": "^1.1.5",
     "husky": "^9.1.7"
   },
   "engines": {

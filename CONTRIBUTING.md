@@ -15,7 +15,7 @@ git clone https://github.com/hugo-fixit/FixIt.git && cd FixIt
 Then, install the dev dependencies.
 
 ```bash
-npm install
+pnpm install
 ```
 
 And now you are ready to go!
@@ -24,15 +24,15 @@ Here are some useful commands.
 
 ```bash
 # run a local debugging server with watch
-npm run server
+pnpm server
 # run a local debugging server with watch in production environment
-npm run server:production
+pnpm server:production
 ```
 
 If you want to do docs-related theme changes, the simplest way is to have both `FixIt` and `fixit-docs` cloned as sibling directories, and then run:
 
 ```bash
-npm run server:docs
+pnpm server:docs
 ```
 
 Finally, create a new pull request at <https://github.com/hugo-fixit/FixIt/pulls> to submit your contribution 🎉

@@ -10,7 +10,9 @@ jsconfig.json
 node_modules/
 
 # VSCode
-.vscode
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
 
 # OS Files
 ## Windows
