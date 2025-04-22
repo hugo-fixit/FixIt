@@ -1,7 +1,18 @@
 {{- /* Echarts support for code fences extended and shortcodes. */ -}}
 {{- $width := .Options.width | default "100%" -}}
 {{- $height := .Options.height | default "30rem" -}}
+{{- $js := .Options.js | default false -}}
 {{- $attrs := printf `style="width: %v; height: %v;"` $width $height -}}
 <div class="echarts" {{ $attrs | safeHTMLAttr }}></div>
-<template>{{ .Inner | transform.Unmarshal | jsonify }}</template>
-{{- /* EOF */ -}}
+{{- if $js -}}
+  {{- $content := strings.TrimSpace .Inner -}}
+  {{- if hugo.IsProduction -}}
+    {{- $content = replaceRE `[\s]+` " " $content -}}
+  {{- end -}}
+  {{- if not ((hasPrefix $content "{") | and (hasSuffix $content "}")) -}}
+    {{- errorf "ECharts format error\nPlease use JS object literal for Echarts, see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#object_literals" -}}
+  {{- end -}}
+  <template data-fmt="js">{{ $content | safeJS }}</template>
+{{- else -}}
+  <template>{{ .Inner | transform.Unmarshal | jsonify }}</template>
+{{- end -}}

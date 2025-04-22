@@ -686,7 +686,12 @@ class FixIt {
         if ($echarts.nextElementSibling.tagName === 'TEMPLATE') {
           const chart = echarts.init($echarts, this.isDark ? 'dark' : 'light', { renderer: 'svg' });
           stagingDOM.stage($echarts.nextElementSibling.content.cloneNode(true));
-          chart.setOption(stagingDOM.contentAsJson());
+          // support both JSON and JS object literal
+          if ($echarts.nextElementSibling.dataset.fmt === 'js') {
+            eval(`chart.setOption(${stagingDOM.contentAsText()})`);
+          } else {
+            chart.setOption(stagingDOM.contentAsJson());
+          }
           this._echartsArr.push(chart);
         }
       });
