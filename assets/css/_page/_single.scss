@@ -366,7 +366,10 @@
 
     img {
       max-width: 100%;
-      min-height: 1em;
+      // SVG performs differently in Safari compared to other browsers
+      &:not([src*='.svg']) {
+        min-height: 1em;
+      }
 
       &.version {
         height: 1.25em;
