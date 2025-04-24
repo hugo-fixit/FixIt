@@ -24,8 +24,11 @@
             {{- dict "Date" . | T "single.updatedOnDate" -}}&nbsp;
             {{- if $gitRepo -}}
               {{- with $.GitInfo -}}
-                {{/*  TODO add Git .Body  */}}
-                <a class="git-hash" href="{{ printf `%v/commit/%v` $gitRepo .Hash }}" rel="external nofollow noopener noreferrer" target="_blank" title="commit by {{ .AuthorName }}({{ .AuthorEmail }}) {{ .Hash }}: {{ .Subject }}">
+                {{- $title := printf "%v&#10%v&#10Commit: %v [%v]&#10Author: %v<%v>&#10Date: %v" .Subject .Body .Hash .AbbreviatedHash .AuthorName .AuthorEmail (.AuthorDate | dateFormat "2006-01-02 15:04:05") -}}
+                {{- if ne .AuthorDate .CommitDate -}}
+                  {{- $title = printf "%s&#10Commit Date: %v" $title (.CommitDate | dateFormat "2006-01-02 15:04:05") -}}
+                {{- end -}}
+                <a class="git-hash" href="{{ printf `%v/commit/%v` $gitRepo .Hash }}" rel="external nofollow noopener noreferrer" target="_blank" title="{{ $title | safeHTML }}">
                   {{- dict "Class" "fa-solid fa-hashtag fa-fw" | partial "plugin/icon.html" -}}
                   {{- .AbbreviatedHash -}}
                 </a>
