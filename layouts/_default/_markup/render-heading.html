@@ -31,9 +31,21 @@
   {{- .Page.Scratch.SetInMap "heading-counter" (string (add $level 1)) 0 -}}
 {{- end -}}
 
+{{- $attrs := "" }}
+{{- range $key, $value := .Attributes }}
+  {{- $attrs = printf "%s %s=%q" $attrs $key $value }}
+{{- end }}
+
+{{- with .Attributes.class }}
+  {{- $attrs = replace $attrs . (printf "heading-element %s" .) }}
+{{- else }}
+  {{- $attrs = printf "class=%q %s" "heading-element" $attrs }}
+{{- end }}
+{{- $attrs = partial "function/trim.html" $attrs -}}
+
 {{- /* Force decrease the markup level to avoid multiple h1 */ -}}
 {{- $markupLevel := cond (gt $maxMarkupLevel $level) $maxMarkupLevel $level -}}
-<h{{ $markupLevel }} id="{{ .Anchor | safeURL }}" class="heading-element">
+<h{{ $markupLevel }} {{ $attrs | safeHTMLAttr }}>
   {{- $title := .Text -}}
   {{- if $ordered -}}
     {{- /* Add 1 to the current level */ -}}

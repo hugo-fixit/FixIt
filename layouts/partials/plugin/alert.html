@@ -24,7 +24,7 @@
 {{- else }}
   {{- $attrs = printf "class=%q %s" (printf "alert alert-%s" $.Type) $attrs }}
 {{- end }}
-{{- $attrs = trim $attrs " " -}}
+{{- $attrs = partial "function/trim.html" $attrs -}}
 
 <div {{ $attrs | safeHTMLAttr }}>
   {{- $icon := index $iconMap .Type -}}
