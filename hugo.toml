@@ -1013,6 +1013,8 @@ enableEmoji = true
     linkToEdit = true
     # FixIt 0.3.0 | NEW whether to show link to report issue for the post
     linkToReport = true
+    # FixIt 0.3.20 | NEW whether to show link to view the post in VSCode
+    linkToVscode = true
     # FixIt 0.3.10 | CHANGED Page style ["narrow", "normal", "wide", ...]
     pageStyle = "normal"
     # FixIt 0.2.17 | CHANGED Auto Bookmark Support

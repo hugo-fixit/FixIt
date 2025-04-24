@@ -48,27 +48,32 @@
           {{- $linkOptions := slice -}}
           {{- if $params.LinkToMarkdown -}}
             {{- with .OutputFormats.Get "markdown" -}}
-              {{- $options := dict "Class" "link-to-markdown" "Destination" .RelPermalink "Title" (T "single.readMarkdown") "Content" (T "single.readMarkdown") "externalIcon" false -}}
+              {{- $options := dict "Class" "link-to-markdown" "Destination" .RelPermalink "Title" (T "single.readMarkdown") "Content" (T "single.readMarkdown") -}}
               {{- $linkOptions = $linkOptions | append $options -}}
             {{- end -}}
           {{- end -}}
           {{- if $params.LinkToSource | and $gitRepo -}}
             {{- $link := replace $blobURL "{path}" $.File.Path -}}
             {{- $sourceURL = $params.sourceURL | default (add $link "?plain=1") -}}
-            {{- $options := dict "Class" "link-to-source" "Destination" $sourceURL "Title" (T "single.viewSource") "Content" (T "single.viewSource") "externalIcon" false -}}
+            {{- $options := dict "Class" "link-to-source" "Destination" $sourceURL "Title" (T "single.viewSource") "Content" (T "single.viewSource") -}}
             {{- $linkOptions = $linkOptions | append $options -}}
           {{- end -}}
           {{- if $params.LinkToEdit | and $gitRepo -}}
             {{- $link := replace $editURL "{path}" $.File.Path -}}
             {{- $editURL = $params.editURL | default $link -}}
-            {{- $options := dict "Class" "link-to-edit" "Destination" $editURL "Title" (T "single.editThisPage") "Content" (T "single.editThisPage") "externalIcon" false -}}
+            {{- $options := dict "Class" "link-to-edit" "Destination" $editURL "Title" (T "single.editThisPage") "Content" (T "single.editThisPage") -}}
             {{- $linkOptions = $linkOptions | append $options -}}
           {{- end -}}
           {{- if $params.LinkToReport | and $gitRepo -}}
             {{- $link := replace $reportURL "{title}" ($.Title | urlquery) -}}
             {{- $link = replace $link "{URL}" $.Permalink -}}
             {{- $link = replace $link "{sourceURL}" $sourceURL -}}
-            {{- $options := dict "Class" "link-to-report" "Destination" $link "Title" (T "single.reportIssue") "Content" (T "single.reportIssue") "externalIcon" false -}}
+            {{- $options := dict "Class" "link-to-report" "Destination" $link "Title" (T "single.reportIssue") "Content" (T "single.reportIssue") -}}
+            {{- $linkOptions = $linkOptions | append $options -}}
+          {{- end -}}
+          {{- if $params.LinkToVscode | and hugo.IsServer -}}
+            {{- $link := printf "vscode://file/%v" $.File.Filename -}}
+            {{- $options := dict "Class" "link-to-vscode" "Destination" $link "Title" (T "single.openInEditor") "Content" (T "single.openInEditor") -}}
             {{- $linkOptions = $linkOptions | append $options -}}
           {{- end -}}
           {{- range $linkOptions -}}
