@@ -7,7 +7,8 @@
 {{- end -}}
 {{- $headingConfig := $params.heading -}}
 {{- /* Only enable in main section pages */ -}}
-{{- $onlyMainSection := cond $headingConfig.number.onlyMainSection (eq .Page.Type "posts") true -}}
+{{- $intersect := (slice .Page.Section .Page.Type) | intersect site.MainSections -}}
+{{- $onlyMainSection := cond $headingConfig.number.onlyMainSection ((gt (len $intersect) 0) | and (eq .Page.Kind "page")) true -}}
 {{- $ordered := $toc.ordered | and $headingConfig.number.enable | and $onlyMainSection -}}
 {{- $h1Format := $headingConfig.number.format.h1 | default "{title}" -}}
 {{- $h2Format := $headingConfig.number.format.h2 | default "{h2} {title}" -}}

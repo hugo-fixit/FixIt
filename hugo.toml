@@ -34,6 +34,8 @@ enableRobotsTXT = true
 enableGitInfo = true
 # whether to use emoji code
 enableEmoji = true
+# the main sections of a site
+mainSections = []
 
 # -------------------------------------------------------------------------------------
 # Menu Configuration
