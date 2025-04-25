@@ -1,0 +1,73 @@
+// Related Content List (aside)
+.related-details {
+  &:not(:first-of-type)::before {
+    content: '';
+    display: block;
+    border: 0;
+    padding-top: 1px;
+    background: var(--#{$prefix}divider-edge-weak);
+    margin-block: 1rem 0.5rem;
+  }
+
+  &:not(:last-of-type) {
+    margin-bottom: 0.5rem;
+  }
+
+  .related-summary {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25em;
+    padding: 0.2em 0.5em;
+    
+    > i.fa-layer-group {
+      flex-shrink: 0;
+    }
+
+    .related-title {
+      font-weight: bold;
+      font-size: $related-title-font-size;
+    }
+
+    .related-count {
+      flex-shrink: 0;
+      color: var(--#{$prefix}secondary);
+    }
+
+    .details-icon {
+      flex-shrink: 0;
+    }
+
+    @include user-select(none);
+  }
+
+  .related-content {
+    font-size: $related-list-font-size;
+
+    .related-list {
+      margin: 0;
+      padding-inline: 1.6em 0.8em;
+      padding-block: 0.4em;
+      text-indent: -0.8em;
+      list-style: none;
+      overflow-y: scroll;
+      max-height: 60vh;
+      @include scrollbar-width(none, 0);
+
+      .related-item > a::before,
+      .related-item > span::before {
+        content: '|';
+        font-weight: 600;
+        margin-right: 0.5em;
+        position: relative;
+        bottom: 2px;
+        color: $single-link-color;
+
+        [data-theme='dark'] & {
+          color: $single-link-color-dark;
+        }
+      }
+    }
+  }
+}
+
+

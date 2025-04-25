@@ -16,9 +16,10 @@
   // Set breadcrumb height to 0px if breadcrumb is disabled
   --#{$prefix}breadcrumb-height: 0px;
 
-  // hr style
+  // hr / divider style
   --#{$prefix}hr-background-color: #{darken($global-border-color, 5%)};
   --#{$prefix}hr-before-color: #{lighten($single-link-hover-color, 4%)};
+  --#{$prefix}divider-edge-weak: linear-gradient(to right, transparent, var(--#{$prefix}divider-bg, #d0d0d5), transparent);
 
   // Scrollbar related variables
   --#{$prefix}scrollbar-thumb-color: #{$scrollbar-color};

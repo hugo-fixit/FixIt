@@ -1122,6 +1122,8 @@ mainSections = []
     [params.page.related]
       enable = false
       count = 5
+      # FixIt 0.3.20 | NEW position of related content, optional values: ["aside", "footer"]
+      position = ["aside", "footer"]
     # FixIt 0.2.17 | NEW Donate (Sponsor) settings
     [params.page.reward]
       enable = false
