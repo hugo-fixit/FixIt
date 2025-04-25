@@ -74,7 +74,7 @@
             {{- $options := dict "Class" "link-to-report" "Destination" $link "Title" (T "single.reportIssue") "Content" (T "single.reportIssue") -}}
             {{- $linkOptions = $linkOptions | append $options -}}
           {{- end -}}
-          {{- if $params.LinkToVscode | and hugo.IsServer -}}
+          {{- if $params.LinkToVscode | and hugo.IsServer | and (not $.File.IsContentAdapter) -}}
             {{- $link := printf "vscode://file/%v" $.File.Filename -}}
             {{- $options := dict "Class" "link-to-vscode" "Destination" $link "Title" (T "single.openInEditor") "Content" (T "single.openInEditor") -}}
             {{- $linkOptions = $linkOptions | append $options -}}
