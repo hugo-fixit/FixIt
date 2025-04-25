@@ -9,9 +9,6 @@
   {{- if hugo.IsProduction -}}
     {{- $content = replaceRE `[\s]+` " " $content -}}
   {{- end -}}
-  {{- if not ((hasPrefix $content "{") | and (hasSuffix $content "}")) -}}
-    {{- errorf "ECharts format error\nPlease use JS object literal for Echarts, see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#object_literals" -}}
-  {{- end -}}
   <template data-fmt="js">{{ $content | safeJS }}</template>
 {{- else -}}
   <template>{{ .Inner | transform.Unmarshal | jsonify }}</template>

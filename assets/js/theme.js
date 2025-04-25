@@ -1,3 +1,4 @@
+// TODO use ESLint to check the code style
 import Util from './util';
 
 class FixIt {
@@ -686,12 +687,20 @@ class FixIt {
         if ($echarts.nextElementSibling.tagName === 'TEMPLATE') {
           const chart = echarts.init($echarts, this.isDark ? 'dark' : 'light', { renderer: 'svg' });
           stagingDOM.stage($echarts.nextElementSibling.content.cloneNode(true));
-          // support both JSON and JS object literal
+          let option;
           if ($echarts.nextElementSibling.dataset.fmt === 'js') {
-            eval(`chart.setOption(${stagingDOM.contentAsText()})`);
+            // support JS object literal or JS code
+            const jsCodes = stagingDOM.contentAsText();
+            option = new Function(
+              this.util.isObjectString(jsCodes)
+                ? `return ${jsCodes}`
+                : `${jsCodes} return option`
+            )();
           } else {
-            chart.setOption(stagingDOM.contentAsJson());
+            // support JSON
+            option = stagingDOM.contentAsJson();
           }
+          chart.setOption(option);
           this._echartsArr.push(chart);
         }
       });

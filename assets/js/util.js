@@ -42,7 +42,7 @@ export default class Util {
   isValidDate(date) {
     return date instanceof Date && !isNaN(date.getTime());
   }
-  
+
   /**
    * scroll some element into view
    * @param {String} selector element to scroll
@@ -109,6 +109,23 @@ export default class Util {
         reject();
       }
     });
-    return this.copyText(text); 
+    return this.copyText(text);
+  }
+
+  /**
+   * check if a string is a JS object string
+   * @example isObjectString("{a:1,b:2}") // true
+   * @param {String} str 
+   * @returns 
+   */
+  isObjectString(str) {
+    if (typeof str !== 'string') {
+      return false;
+    }
+    str = str.replace(/\s+/g, ' ').trim();
+    if (str.startsWith('{') && str.endsWith('}')) {
+      return true;
+    }
+    return false;
   }
 }
