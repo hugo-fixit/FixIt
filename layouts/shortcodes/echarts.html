@@ -1,5 +1,7 @@
 {{- $options := .Get "width" | default (.Get 0) | dict "width" -}}
 {{- $options = .Get "height" | default (.Get 1) | dict "height" | merge $options -}}
-{{- $options = .Get "js" | default (.Get 2) | dict "js" | merge $options -}}
+{{- $options = .Get "js" | default false | dict "js" | merge $options -}}
+{{- $options = .Get "async" | default false | dict "async" | merge $options -}}
+{{- $options = .Get "data" | dict "data" | merge $options -}}
 {{- dict "Options" $options "Inner" .Inner | partial "plugin/echarts.html" -}}
 {{- .Page.Store.Set "hasEcharts" true -}}
