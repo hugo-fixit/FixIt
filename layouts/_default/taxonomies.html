@@ -1,6 +1,11 @@
-{{- /* Collections Page */ -}}
+{{- /* Taxonomies Page */ -}}
+{{- $iconMap := dict
+  "category" "fa-regular fa-folder"
+  "collection" "fa-solid fa-layer-group"
+-}}
+{{- $icon := index $iconMap .Data.Singular | default $iconMap.category -}}
 
-<div class="collections-card">
+<div class="taxonomy-cards {{ .Data.Plural }}">
   {{- range .Data.Terms.ByCount -}}
     {{- $term := .Term -}}
     {{- $pages := .Pages -}}
@@ -9,7 +14,7 @@
       <div class="card-item-wrapper">
         <h2 class="card-item-title">
           <a href='{{ partial "function/escapeurl.html" .RelPermalink }}'>
-            {{- dict "Class" "fa-solid fa-layer-group fa-fw me-1" | partial "plugin/icon.html" -}}
+            {{- dict "Class" (add $icon " fa-fw me-1") | partial "plugin/icon.html" -}}
             {{- .Page.Title }} <sup>{{ len $pages }}</sup>
           </a>
         </h2>
@@ -34,3 +39,4 @@
     {{- end -}}
   {{- end -}}
 </div>
+{{- /* EOF */ -}}
