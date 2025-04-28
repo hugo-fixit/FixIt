@@ -1,2 +1,2 @@
-{{- dict "Options" .Attributes "Inner" .Inner | partial "plugin/echarts.html" -}}
+{{- dict "Options" .Attributes "Inner" .Inner "Resources" .Page.Resources | partial "plugin/echarts.html" -}}
 {{- .Page.Store.Set "hasEcharts" true -}}

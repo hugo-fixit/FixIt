@@ -4,10 +4,14 @@
 {{- $js := .Options.js | default false -}}
 {{- $async := .Options.async | default false -}}
 {{- $data := .Options.data -}}
+{{- $file := .Options.file -}}
 {{- $attrs := printf `style="width: %v; height: %v;"` $width $height -}}
 <div class="echarts" {{ $attrs | safeHTMLAttr }}></div>
 {{- $content := strings.TrimSpace .Inner -}}
-{{- if $js -}}
+{{- if $js | or (hasSuffix $file ".js") -}}
+  {{- with dict "Path" $file "Resources" .Resources | partial "function/resource.html" }}
+    {{- $content = .Content -}}
+  {{- end }}
   {{- if hugo.IsProduction -}}
     {{- $content = replaceRE `[\s]+` " " $content -}}
   {{- end -}}
@@ -22,6 +26,9 @@
       {{- warnf "ECharts data not found, please ensure the data file \"/data/echarts/%s.{json|yml|yaml|toml}\" exists." . -}}
     {{- end -}}
   {{- else -}}
+    {{- with dict "Path" $file "Resources" .Resources | partial "function/resource.html" }}
+      {{- $content = .Content -}}
+    {{- end }}
     {{- $content = $content | transform.Unmarshal -}}
     {{- if not $content -}}
       {{- warnf "ECharts option is empty, please check the content." -}}

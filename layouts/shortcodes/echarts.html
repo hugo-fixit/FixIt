@@ -3,5 +3,6 @@
 {{- $options = .Get "js" | default false | dict "js" | merge $options -}}
 {{- $options = .Get "async" | default false | dict "async" | merge $options -}}
 {{- $options = .Get "data" | dict "data" | merge $options -}}
-{{- dict "Options" $options "Inner" .Inner | partial "plugin/echarts.html" -}}
+{{- $options = .Get "file" | dict "file" | merge $options -}}
+{{- dict "Options" $options "Inner" .Inner "Resources" .Page.Resources  | partial "plugin/echarts.html" -}}
 {{- .Page.Store.Set "hasEcharts" true -}}
