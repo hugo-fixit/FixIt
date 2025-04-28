@@ -128,6 +128,23 @@
 }
 
 @media only print {
+
+  // 确保打印时没有 scrollbar
+  :root {
+    --fi-scrollbar-width: none !important;
+  }
+
+  *::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  
   @page {
     size: A4 portrait;
     margin: 1.27cm;
