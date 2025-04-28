@@ -114,15 +114,15 @@ export default class Util {
 
   /**
    * check if a string is a JS object string
-   * @example isObjectString("{a:1,b:2}") // true
-   * @param {String} str 
-   * @returns 
+   * @example isObjectLiteral("{a:1,b:2}") // true
+   * @param {String} str string to check
+   * @returns {Boolean} whether the string is a JS object string
    */
-  isObjectString(str) {
+  isObjectLiteral(str) {
     if (typeof str !== 'string') {
       return false;
     }
-    str = str.replace(/\s+/g, ' ').trim();
+    str = str.replace(/\s+/g, ' ').trim().replace(/;$/, '')
     if (str.startsWith('{') && str.endsWith('}')) {
       return true;
     }

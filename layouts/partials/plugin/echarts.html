@@ -2,14 +2,30 @@
 {{- $width := .Options.width | default "100%" -}}
 {{- $height := .Options.height | default "30rem" -}}
 {{- $js := .Options.js | default false -}}
+{{- $async := .Options.async | default false -}}
+{{- $data := .Options.data -}}
 {{- $attrs := printf `style="width: %v; height: %v;"` $width $height -}}
 <div class="echarts" {{ $attrs | safeHTMLAttr }}></div>
+{{- $content := strings.TrimSpace .Inner -}}
 {{- if $js -}}
-  {{- $content := strings.TrimSpace .Inner -}}
   {{- if hugo.IsProduction -}}
     {{- $content = replaceRE `[\s]+` " " $content -}}
   {{- end -}}
-  <template data-fmt="js">{{ $content | safeJS }}</template>
+  {{- if not $content -}}
+    {{- warnf "ECharts JS Code is empty, please check the content." -}}
+  {{- end -}}
+  <template data-fmt="js" data-async="{{ $async }}">{{ $content | safeJS }}</template>
 {{- else -}}
-  <template>{{ .Inner | transform.Unmarshal | jsonify }}</template>
+  {{ with $data }}
+    {{- $content = index site.Data.echarts . -}}
+    {{- if not $content -}}
+      {{- warnf "ECharts data not found, please ensure the data file \"/data/echarts/%s.{json|yml|yaml|toml}\" exists." . -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $content = $content | transform.Unmarshal -}}
+    {{- if not $content -}}
+      {{- warnf "ECharts option is empty, please check the content." -}}
+    {{- end -}}
+  {{- end -}}
+  <template>{{ $content | jsonify }}</template>
 {{- end -}}
