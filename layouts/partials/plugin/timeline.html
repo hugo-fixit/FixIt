@@ -10,7 +10,7 @@
 {{- /* Get Timeline events */ -}}
 {{- $content := .Inner -}}
 {{ with $data }}
-  {{- $content = index site.Data.timeline . -}}
+  {{- $content = index site.Data.timeline (printf "%v.%v" . page.Language) | default (index site.Data.timeline .) -}}
   {{- if not $content -}}
     {{- warnf "Timeline: data not found, please ensure the data file \"data/timeline/%s.{json|yml|yaml|toml}\" exists." . -}}
   {{- end -}}

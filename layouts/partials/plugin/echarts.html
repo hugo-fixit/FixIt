@@ -21,7 +21,7 @@
   <template data-fmt="js" data-async="{{ $async }}">{{ $content | safeJS }}</template>
 {{- else -}}
   {{ with $data }}
-    {{- $content = index site.Data.echarts . -}}
+    {{- $content = index site.Data.echarts (printf "%v.%v" . page.Language) | default (index site.Data.echarts .) -}}
     {{- if not $content -}}
       {{- warnf "ECharts: data not found, please ensure the data file \"data/echarts/%s.{json|yml|yaml|toml}\" exists." . -}}
     {{- end -}}
