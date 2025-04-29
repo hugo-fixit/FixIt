@@ -4,16 +4,32 @@
 {{- $animation := .Options.animation | default false -}}
 {{- $size := .Options.size | default "medium" -}}
 {{- $node := .Options.node | default "circle" -}}
+{{- $data := .Options.data -}}
+{{- $file := .Options.file -}}
 
 {{- /* Get Timeline events */ -}}
-{{- $events := slice -}}
-{{- with .Inner -}}
-  {{- $events = (. | transform.Unmarshal).events -}}
+{{- $content := .Inner -}}
+{{ with $data }}
+  {{- $content = index site.Data.timeline . -}}
+  {{- if not $content -}}
+    {{- warnf "Timeline: data not found, please ensure the data file \"data/timeline/%s.{json|yml|yaml|toml}\" exists." . -}}
   {{- end -}}
+{{- else -}}
+  {{- with dict "Path" $file "Resources" .Resources | partial "function/resource.html" }}
+    {{- $content = .Content -}}
+  {{- else with $file -}}
+    {{- warnf "Timeline: no such data file: %s" . -}}
+  {{- end -}}
+  {{- $content = $content | transform.Unmarshal -}}
+{{- end -}}
+{{- $events := $content.events | default slice -}}
 {{- with .Events -}}
   {{- $events = . -}}
 {{- end -}}
 {{- $events = sort $events "timestamp" (cond $reverse "desc" "asc") -}}
+{{- if not $events -}}
+  {{- warnf "Timeline: events is empty, executing in file %s" $.Position -}}
+{{- end -}}
 
 {{- /* Set Timeline style  */ -}}
 {{- $style := "" -}}
