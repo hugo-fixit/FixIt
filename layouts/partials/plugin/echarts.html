@@ -16,23 +16,25 @@
     {{- $content = replaceRE `[\s]+` " " $content -}}
   {{- end -}}
   {{- if not $content -}}
-    {{- warnf "ECharts JS Code is empty, please check the content." -}}
+    {{- warnf "ECharts: JS Code is empty, executing in file %s" $.Position -}}
   {{- end -}}
   <template data-fmt="js" data-async="{{ $async }}">{{ $content | safeJS }}</template>
 {{- else -}}
   {{ with $data }}
     {{- $content = index site.Data.echarts . -}}
     {{- if not $content -}}
-      {{- warnf "ECharts data not found, please ensure the data file \"/data/echarts/%s.{json|yml|yaml|toml}\" exists." . -}}
+      {{- warnf "ECharts: data not found, please ensure the data file \"data/echarts/%s.{json|yml|yaml|toml}\" exists." . -}}
     {{- end -}}
   {{- else -}}
     {{- with dict "Path" $file "Resources" .Resources | partial "function/resource.html" }}
       {{- $content = .Content -}}
-    {{- end }}
-    {{- $content = $content | transform.Unmarshal -}}
-    {{- if not $content -}}
-      {{- warnf "ECharts option is empty, please check the content." -}}
+    {{- else with $file -}}
+      {{- warnf "ECharts: no such data file: %s" . -}}
     {{- end -}}
+    {{- $content = $content | transform.Unmarshal -}}
+  {{- end -}}
+  {{- if not $content -}}
+    {{- warnf "ECharts: option is empty, executing in file %s" $.Position -}}
   {{- end -}}
   <template>{{ $content | jsonify }}</template>
 {{- end -}}
