@@ -1,11 +1,16 @@
-{{- /* How to use */ -}}
-{{- /* partial "function/format-number" (dict "PRECISION" 2 "NUMBER" 5201314 */ -}}
+{{- /*
+  Format a number with a specific precision and add 'k' if it's greater than 1000
+  Usage: {{ partial "function/format-number" (dict "PRECISION" 2 "NUMBER" 5201314) }}
+  Example Output: 19980.52k
+*/ -}}
+
 {{- $number := .NUMBER -}}
 {{- $precision := .PRECISION | default 1 -}}
 {{- with $number -}}
   {{- if ge . 1000 -}}
-    {{- $number = printf "%vk" (lang.FormatNumberCustom $precision (div . 1000.0) "- .") -}}
-    {{ printf "%v" $number }}
+    {{- $fmtNum := lang.FormatNumberCustom $precision (div . 1000.0) "- ." -}}
+    {{- $fmtNum = $fmtNum | strings.TrimSuffix "0" | strings.TrimSuffix "."  -}}
+    {{- $number = printf "%vk" $fmtNum -}}
   {{- end -}}
 {{- end -}}
 
