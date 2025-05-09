@@ -36,3 +36,19 @@
 {{- with .Site.Params.app.tileColor -}}
   <meta name="msapplication-TileColor" content="{{ . }}">
 {{- end -}}
+
+{{- /* Mastodon Validation for the site */ -}}
+{{- with .Site.Params.social.Mastodon -}}
+  {{- $id := "" -}}
+  {{- $prefix := "https://mastodon.social/" -}}
+  {{- if reflect.IsMap . -}}
+    {{- $id = .Id | default .id -}}
+    {{- $prefix = .Prefix | default .prefix | default $prefix -}}
+  {{- end -}}
+  {{- if $id | and $prefix -}}
+    {{- $link := printf "%s/%s" $prefix $id -}}
+    {{- $email := printf "%s@%s" (strings.TrimPrefix "@" $id) (urls.Parse $prefix).Host -}}
+    <link rel="me" href="{{ $link }}" />
+    <meta name="fediverse:creator" content="{{ $email }}" />
+  {{- end -}}
+{{- end -}}

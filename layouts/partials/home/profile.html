@@ -89,7 +89,17 @@
               {{- $social = dict "Newtab" . | merge $social -}}
             {{- end -}}
             {{- with $value.icon -}}
-              {{- $social = dict "Icon" . | merge $social -}}
+              {{- $icon := dict -}}
+              {{- with .class -}}
+                {{- $icon = dict "Class" . | merge $icon -}}
+              {{- end -}}
+              {{- with .simpleicons -}}
+                {{- $icon = dict "Simpleicons" . | merge $icon -}}
+              {{- end -}}
+              {{- with .src -}}
+                {{- $icon = dict "Src" . | merge $icon -}}
+              {{- end -}}
+              {{- $social = dict "Icon" $icon | merge $social -}}
             {{- end -}}
           {{- else if ne $value true -}}
             {{- $social = dict "Id" $value | merge $social -}}
