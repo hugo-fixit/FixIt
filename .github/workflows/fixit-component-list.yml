@@ -5,6 +5,7 @@ on:
   workflow_dispatch: # Run workflow manually (without waiting for the cron to be called), through the GitHub Actions Workflow page directly
 permissions:
   contents: write # To write the generated contents to the readme
+  pull-requests: write # To create a pull request
 
 jobs:
   generate-component-list:
@@ -21,8 +22,18 @@ jobs:
           comment_tag_name: HUGO_FIXIT_COMPONENTS
           readme_path: 'README.md,README.zh-cn.md'
           template: "- [{$repo.name}]({$repo.html_url})\\\n  {$repo.description}"
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+      # - name: Commit changes
+      #   uses: stefanzweifel/git-auto-commit-action@v5
+      #   with:
+      #     commit_message: ':memo: Docs: update hugo-fixit component list'
+      #     commit_author: 'github-actions[bot] <github-actions[bot]@users.noreply.github.com>'
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
         with:
-          commit_message: ':memo: Docs: update hugo-fixit component list'
-          commit_author: 'github-actions[bot] <github-actions[bot]@users.noreply.github.com>'
+          title: 'Update hugo-fixit component list'
+          commit-message: ':memo: Docs: update hugo-fixit component list'
+          body: 'This PR updates the hugo-fixit component list in the README.'
+          base: main
+          branch: update-component-list
+          labels: documentation
+          reviewers: Lruihao
