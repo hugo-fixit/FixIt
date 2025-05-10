@@ -8,6 +8,10 @@
   .toc-content {
     font-size: $toc-content-font-size;
 
+    code {
+      @extend %code;
+    }
+
     ul {
       text-indent: -0.8em;
       padding-left: 0.8em;

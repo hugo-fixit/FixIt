@@ -164,7 +164,8 @@ $code-info-color: #9c9c9c !default;
 $code-info-color-dark: #b1b0b0 !default;
 
 // Font size of the code
-$code-font-size: 0.875rem !default;
+$code-font-size: 0.875em !default;
+$code-block-font-size: 0.875rem !default;
 
 // Font family of the code
 $code-font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace, $global-font-family !default;

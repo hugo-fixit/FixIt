@@ -1,20 +1,6 @@
 // inline code
 code {
-  padding: 0.2em 0.4em;
-  margin: 0;
-  font-size: $code-font-size;
-  font-family: $code-font-family;
-  color: $code-color;
-  background-color: rgba(175, 184, 193, 0.2);
-  text-decoration: inherit;
-  @include border-radius($global-border-radius);
-  @include overflow-wrap(break-word);
-  @include line-break(auto);
-
-  [data-theme='dark'] & {
-    color: $code-color-dark;
-    background-color: rgba(99, 110, 123, 0.4);
-  }
+  @extend %code;
 }
 
 // indented code
@@ -23,7 +9,7 @@ pre:not(.mermaid[data-processed='true']) {
   line-height: 1.45em;
   padding: 0.5rem;
   overflow: auto;
-  font-size: $code-font-size;
+  font-size: $code-block-font-size;
   font-family: $code-font-family;
   @include border-radius($global-border-radius);
   @include tab-size(4);
@@ -54,7 +40,7 @@ pre:not(.mermaid[data-processed='true']) {
 
 .highlight,
 .gist {
-  font-size: $code-font-size;
+  font-size: $code-block-font-size;
   font-family: $code-font-family;
 
   .table-wrapper {
