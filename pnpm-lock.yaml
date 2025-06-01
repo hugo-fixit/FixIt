@@ -9,16 +9,16 @@ importers:
   .:
     devDependencies:
       '@hugo-fixit/fixit-releaser':
-        specifier: ^1.1.5
-        version: 1.1.5
+        specifier: ^1.1.6
+        version: 1.1.6
       husky:
         specifier: ^9.1.7
         version: 9.1.7
 
 packages:
 
-  '@hugo-fixit/fixit-releaser@1.1.5':
-    resolution: {integrity: sha512-QEVSLlgn1h6MZ+IuowmCYP9N5tJsinNyWsq2OJgr/iwNuaykMZ3N8z3BY99//uTJNzejfFy+o3MyFKuqPgWW/A==}
+  '@hugo-fixit/fixit-releaser@1.1.6':
+    resolution: {integrity: sha512-lucRsy0MsZJEGiV1AmlzNhr0i2x2FEV81DYOgj5/zNAf+R3cYq3Kg9t3XgQr3mYgLUNAlDgIn3PCSFAC2bRQAA==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -73,8 +73,8 @@ packages:
     resolution: {integrity: sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==}
     engines: {node: '>=8'}
 
-  semver@7.7.1:
-    resolution: {integrity: sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA==}
+  semver@7.7.2:
+    resolution: {integrity: sha512-RF0Fw+rO5AMf9MAyaRXI4AV0Ulj5lMHqVxxdSgiVbixSCXoEmmX/jk0CuJw4+3SqroYO9VoUh+HcuJivvtJemA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -101,7 +101,7 @@ packages:
 
 snapshots:
 
-  '@hugo-fixit/fixit-releaser@1.1.5':
+  '@hugo-fixit/fixit-releaser@1.1.6':
     dependencies:
       auto-changelog: 2.5.0
     transitivePeerDependencies:
@@ -114,7 +114,7 @@ snapshots:
       import-cwd: 3.0.0
       node-fetch: 2.7.0
       parse-github-url: 1.0.3
-      semver: 7.7.1
+      semver: 7.7.2
     transitivePeerDependencies:
       - encoding
 
@@ -151,7 +151,7 @@ snapshots:
 
   resolve-from@5.0.0: {}
 
-  semver@7.7.1: {}
+  semver@7.7.2: {}
 
   source-map@0.6.1: {}
 
