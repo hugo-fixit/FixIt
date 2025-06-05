@@ -891,7 +891,7 @@ mainSections = []
   # FixIt 0.3.17 | NEW PostChat AI config
   # Based on your posts to build a knowledge base, support AI summary, AI search, and AI Chatbot.
   # Get PostChat Key from my invitation link, thanks for your support!
-  # https://ai.tianli0.top/?InviteID=IRE1S88Z
+  # https://ai.zhheo.com/console/login?InviteID=85041330
   [params.postChat]
     enable = false
     key = ""
@@ -918,9 +918,11 @@ mainSections = []
     userIcon = ""
     defaultChatQuestions = []
     defaultSearchQuestions = []
+    # FixIt 0.4.0 | NEW
+    hotWords = true
 
   # FixIt 0.3.17 | NEW Summary AI config
-  # See https://postchat.zhheo.com/summary.html
+  # See https://ai.zhheo.com/docs/summary.html
   [params.postSummary]
     enable = false
     # If you set `params.postChat.key`, you don't need to set `params.postSummary.key`

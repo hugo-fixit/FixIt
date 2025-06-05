@@ -131,12 +131,12 @@ Click the following links to generate a new repository with template:
 
 ### Extended Features
 
-- **AI Summary**, **AI Search** and **AI Chatbot** supported by [PostChat](https://ai.tianli0.top/?InviteID=IRE1S88Z)
+- **AI Summary**, **AI Search** and **AI Chatbot** supported by [PostChat](https://ai.zhheo.com/console/login?InviteID=85041330)
 - **PWA (Progressive Web App)** supported
 - **Sub Menu** supported
 - **Content Encryption** supported (Pages, Partial)
 - **Friends** page embedded template
-- **Search** supported by [algolia](https://www.algolia.com/), [Fuse.js](https://fusejs.io/), CSE or [PostChat](https://ai.tianli0.top/?InviteID=IRE1S88Z)
+- **Search** supported by [algolia](https://www.algolia.com/), [Fuse.js](https://fusejs.io/), CSE or [PostChat](https://ai.zhheo.com/console/login?InviteID=85041330)
 - **Custom Search Engine (CSE)** supported by [Google](https://programmablesearchengine.google.com/)
 - **Twemoji** supported
 - Automatically **highlighting** code
