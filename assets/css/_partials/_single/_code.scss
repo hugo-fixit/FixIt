@@ -23,6 +23,7 @@ pre:not(.mermaid[data-processed='true']) {
   code {
     padding: 0;
     background-color: transparent;
+    font-size: inherit;
     @include border-radius(0);
     @include max-content(min-width);
 
@@ -40,7 +41,6 @@ pre:not(.mermaid[data-processed='true']) {
 
 .highlight,
 .gist {
-  font-size: $code-block-font-size;
   font-family: $code-font-family;
 
   .table-wrapper {
@@ -340,6 +340,7 @@ pre:not(.mermaid[data-processed='true']) {
   .gist-meta {
     padding: 0.4rem 0.8rem;
     @include link(false, false);
+    @include border-radius(0 0 $global-border-radius $global-border-radius);
     background-color: darken($code-background-color, 5%);
 
     [data-theme='dark'] & {
@@ -348,12 +349,15 @@ pre:not(.mermaid[data-processed='true']) {
   }
 
   .table-wrapper {
-    .highlight {
-      background-color: $code-background-color;
+    padding-block: 0.25rem;
+    @include border-radius($global-border-radius $global-border-radius 0 0);
+    background-color: $code-background-color;
 
-      [data-theme='dark'] & {
-        background-color: $code-background-color-dark;
-      }
+    [data-theme='dark'] & {
+      background-color: $code-background-color-dark;
+    }
+    .highlight {
+      background-color: transparent;
     }
   }
 
