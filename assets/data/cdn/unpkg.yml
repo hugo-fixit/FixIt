@@ -66,8 +66,8 @@ libFiles:
   sharerJS: sharer.js@0.5.1/sharer.min.js
   # twemoji@14.0.2 https://github.com/twitter/twemoji
   twemojiJS: twemoji@14.0.2/dist/twemoji.min.js
-  # twikoo@1.6.22 https://github.com/imaegoo/twikoo
-  twikooJS: twikoo@1.6.22/dist/twikoo.all.min.js
+  # twikoo@1.6.44 https://github.com/imaegoo/twikoo
+  twikooJS: twikoo@1.6.44/dist/twikoo.all.min.js
   # typeit@8.8.4 https://github.com/alexmacarthur/typeit
   typeitJS: typeit@8.8.4/dist/index.umd.js
   # valine@1.5.2 https://github.com/xCss/Valine
