@@ -7,11 +7,11 @@
 {{- end -}}
 
 {{- with .Site.Params.customFilePath -}}
-  {{- $warns = $warns | append "The parameter `params.customFilePath` is deprecated since v0.3.7, use `layouts/partials/custom.html` instead." -}}
+  {{- $warns = $warns | append "The parameter `params.customFilePath` is deprecated since v0.3.7, use `layouts/_partials/custom.html` instead." -}}
 {{- end -}}
 
 {{- with .Site.Params.footer.custom -}}
-  {{- $warns = $warns | append "The parameter `params.footer.custom` is deprecated since v0.3.7, use `layouts/partials/custom.html` instead." -}}
+  {{- $warns = $warns | append "The parameter `params.footer.custom` is deprecated since v0.3.7, use `layouts/_partials/custom.html` instead." -}}
 {{- end -}}
 
 {{- with .Site.Params.ibruce -}}
