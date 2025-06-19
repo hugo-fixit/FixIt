@@ -1,5 +1,5 @@
 {{- $params := partial "function/params.html" -}}
-{{- $author := .Store.Get "author" -}}
+{{- $author := .Store.Get "author" | default (partial "function/get-author-map.html" .Params.author) -}}
 # {{ cond (.Param "capitalizeTitles") (title .Title) .Title }}
 
 {{ if $params.password -}}
