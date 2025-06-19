@@ -1089,7 +1089,7 @@ mainSections = []
       # default block delimiter is $$ ... $$, \[ ... \], \begin{equation} ... \end{equation} and some other functions
       blockLeftDelimiter = ""
       blockRightDelimiter = ""
-      # KaTeX extension copy_tex
+      # KaTeX extension copy-tex
       copyTex = true
       # KaTeX extension mhchem
       mhchem = true

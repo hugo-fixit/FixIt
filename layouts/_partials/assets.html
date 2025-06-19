@@ -94,16 +94,17 @@
 {{- if $math.enable | or (.Store.Get "hasMath") -}}
   {{- $source := $cdn.katexCSS | default "lib/katex/katex.min.css" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Preload" true | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+  {{- /* Copy-tex extension */ -}}
+  {{- if $math.copyTex -}}
+    {{- $source := $cdn.katexCopyTexJS | default "lib/katex/copy-tex.min.js" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+  {{- end -}}
 {{- end -}}
 {{- if $math.enable -}}
   {{- $source := $cdn.katexJS | default "lib/katex/katex.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- $source := $cdn.katexAutoRenderJS | default "lib/katex/auto-render.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-  {{- if $math.copyTex -}}
-    {{- $source := $cdn.katexCopyTexJS | default "lib/katex/copy-tex.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-  {{- end -}}
   {{- if $math.mhchem -}}
     {{- $source := $cdn.katexMhchemJS | default "lib/katex/mhchem.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
