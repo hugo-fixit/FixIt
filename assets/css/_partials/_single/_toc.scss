@@ -114,7 +114,8 @@
 
   .toc-content {
     overflow-y: scroll;
-    max-height: calc(100vh - #{2*$header-height});
+    // TODO 这里计算错误，待重构
+    max-height: calc(100vh - #{2 * $header-height});
     @include scrollbar-width(none, 0);
 
     &.always-active ul,
