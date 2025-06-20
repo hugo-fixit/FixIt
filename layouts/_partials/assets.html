@@ -89,19 +89,46 @@
   {{- $config = dict "speed" $typeit.speed "cursorSpeed" $typeit.cursorSpeed "cursorChar" $typeit.cursorChar "duration" $typeit.duration "loop" $typeit.loop | dict "typeit" | merge $config -}}
 {{- end -}}
 
-{{- /* KaTeX */ -}}
-{{- $math := .Scratch.Get "math" -}}
+{{- /* Mathematical formulas */ -}}
+{{- $math := .Store.Get "math" -}}
 {{- if $math.enable -}}
-  {{- $source := $cdn.katexCSS | default "lib/katex/katex.min.css" -}}
-  {{- dict "Source" $source "Fingerprint" $fingerprint "Preload" true | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+  {{- /* KaTeX */ -}}
+  {{- if (eq $math.type "katex") | and (.Store.Get "hasKaTeX") -}}
+    {{- $source := $cdn.katexCSS | default "lib/katex/katex.min.css" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint "Preload" true | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+    {{- /* Copy-tex extension */ -}}
+    {{- if $math.katex.copyTex -}}
+      {{- $source := $cdn.katexCopyTexJS | default "lib/katex/copy-tex.min.js" -}}
+      {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- /* MathJax */ -}}
+  {{- if eq $math.type "mathjax" -}}
+    {{/*  TODO improve MathJax setup. e.g. content encryption, Twikoo math etc.  */}}
+    {{/*  
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>
+      MathJax = {
+        tex: {
+          displayMath: [['\\[', '\\]'], ['$$', '$$']],
+          inlineMath: [['\\(', '\\)'], ['$', '$']]
+        },
+        loader:{
+          load: ['ui/safe']
+        },
+      };
+    </script>
+    */}}
+  {{- end -}}
+{{- end -}}
+
+{{/*
+{{- if $math.enable -}}
   {{- $source := $cdn.katexJS | default "lib/katex/katex.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- $source := $cdn.katexAutoRenderJS | default "lib/katex/auto-render.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-  {{- if $math.copyTex -}}
-    {{- $source := $cdn.katexCopyTexJS | default "lib/katex/copy-tex.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-  {{- end -}}
   {{- if $math.mhchem -}}
     {{- $source := $cdn.katexMhchemJS | default "lib/katex/mhchem.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
@@ -124,6 +151,7 @@
   {{- end -}}
   {{- $config = dict "strict" false "delimiters" $delimiters | dict "math" | merge $config -}}
 {{- end -}}
+*/}}
 
 {{- /* mermaid */ -}}
 {{- if .Store.Get "hasMermaid" -}}

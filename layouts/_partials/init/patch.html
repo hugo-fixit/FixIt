@@ -24,7 +24,7 @@
 {{- else if eq $math false -}}
   {{- $math = dict "enable" false -}}
 {{- end -}}
-{{- .Scratch.Set "math" $math -}}
+{{- .Store.Set "math" $math -}}
 
 {{- /*  SiteTime config patch  */ -}}
 {{- $siteTime := dict "Animate" true "Icon" "fa-solid fa-heartbeat" -}}

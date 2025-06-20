@@ -498,6 +498,12 @@
       overflow-x: auto;
       padding-block: 2px;
     }
+    .katex-error {
+      padding: 0.14em 0.28em;
+      background-color: mark;
+      cursor: help;
+      @include border-radius($global-border-radius);
+    }
 
     @import '../_partials/_single/alert';
     @import '../_partials/_single/code';
