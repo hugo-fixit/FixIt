@@ -11,19 +11,21 @@
     - KaTeX server-side rendering
     - MathJax client-side rendering
   Regular passthrough rendering:
-    - [ ] [todo] in future
+    - [todo] support more features in future
 */ -}}
 {{- if $math.enable -}}
   {{- if eq $math.type "katex" -}}
+    {{- $katex := $math.katex -}}
     {{- $opts := dict "output" "htmlAndMathml" "displayMode" (eq $.Type "block") }}
+    {{- $opts = dict "throwOnError" $katex.throwOnError "errorColor" $katex.errorColor | merge $opts }}
+    {{- $macros := $katex.macros | default dict -}}
+    {{- if $macros -}}
+      {{- $opts = dict "macros" $macros | merge $opts -}}
+    {{- end -}}
+    {{- /* render mathematical markup to HTML */ -}}
     {{- with try (transform.ToMath .Inner $opts) }}
       {{- with .Err }}
-        {{- warnf "Unable to render mathematical markup to HTML using the transform.ToMath function. The KaTeX display engine threw the following error: %s: see %s." . $.Position }}
-        {{- if eq $.Type "block" -}}
-          <p><mark class="text-danger">KaTeX parse error!</mark></p>
-        {{- else -}}
-          <mark class="text-danger">KaTeX parse error!</mark>
-        {{- end -}}
+        {{- errorf "Unable to render mathematical markup to HTML using the transform.ToMath function. The KaTeX display engine threw the following error: %s: see %s." . $.Position }}
       {{- else }}
         {{- .Value }}
         {{- $.Page.Store.Set "hasKaTeX" true -}}

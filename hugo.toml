@@ -1080,19 +1080,26 @@ mainSections = []
           h4 = "{h2}.{h3}.{h4} {title}"
           h5 = "{h2}.{h3}.{h4}.{h5} {title}"
           h6 = "{h2}.{h3}.{h4}.{h5}.{h6} {title}"
-    # FixIt 0.2.16 | CHANGED KaTeX mathematical formulas (https://katex.org)
+    # FixIt 0.4.0 | CHANGED mathematical formulas configation
     [params.page.math]
       enable = true
-      # mathematical formula rendering engines, optional values: ["katex", "mathjax"]
-      type = "mathjax"
-      # KaTeX server-side rendering config
+      # mathematical formulas rendering engines, optional values: ["katex", "mathjax"]
+      type = "katex"
+      # KaTeX server-side rendering (https://katex.org)
+      # partial config: https://gohugo.io/functions/transform/tomath/#options
       [params.page.math.katex]
         # KaTeX extension copy-tex
         copyTex = true
-        # TODO https://gohugo.io/functions/transform/tomath/#options
-      # MathJax server-side rendering config
+        throwOnError = false
+        errorColor = "#ff4949"
+        # custom macros map
+        # syntax: <macro> = <definition>
+        # [todo] See theme documentation link for more macros 
+        [params.page.math.katex.macros]
+          # "\\f" = "#1f(#2)"   # usage: $\f{a}{b}$
+      # MathJax server-side rendering (https://www.mathjax.org)
       [params.page.math.mathjax]
-        # TODO MathJax configuration
+        # [todo] MathJax configuration
     # Code wrapper config
     [params.page.code]
       # FixIt 0.3.9 | NEW whether to enable the code wrapper
