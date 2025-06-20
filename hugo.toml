@@ -1083,16 +1083,16 @@ mainSections = []
     # FixIt 0.2.16 | CHANGED KaTeX mathematical formulas (https://katex.org)
     [params.page.math]
       enable = true
-      # default inline delimiter is $ ... $ and \( ... \)
-      inlineLeftDelimiter = ""
-      inlineRightDelimiter = ""
-      # default block delimiter is $$ ... $$, \[ ... \], \begin{equation} ... \end{equation} and some other functions
-      blockLeftDelimiter = ""
-      blockRightDelimiter = ""
-      # KaTeX extension copy-tex
-      copyTex = true
-      # KaTeX extension mhchem
-      mhchem = true
+      # mathematical formula rendering engines, optional values: ["katex", "mathjax"]
+      type = "mathjax"
+      # KaTeX server-side rendering config
+      [params.page.math.katex]
+        # KaTeX extension copy-tex
+        copyTex = true
+        # TODO https://gohugo.io/functions/transform/tomath/#options
+      # MathJax server-side rendering config
+      [params.page.math.mathjax]
+        # TODO MathJax configuration
     # Code wrapper config
     [params.page.code]
       # FixIt 0.3.9 | NEW whether to enable the code wrapper

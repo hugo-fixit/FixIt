@@ -1,14 +1,43 @@
-{{- $opts := dict "output" "htmlAndMathml" "displayMode" (eq $.Type "block") }}
-{{- with try (transform.ToMath .Inner $opts) }}
-  {{- with .Err }}
-    {{- warnf "Unable to render mathematical markup to HTML using the transform.ToMath function. The KaTeX display engine threw the following error: %s: see %s." . $.Position }}
-    {{- if eq $.Type "block" -}}
-      <p><mark class="text-danger">KaTeX rendering error!</mark></p>
-    {{- else -}}
-      <mark class="text-danger">KaTeX rendering error</mark>
+{{- $params := .Page.Params | merge site.Params.page -}}
+{{- $math := $params.math -}}
+{{- if eq $math true -}}
+  {{- $math = dict "enable" true | merge site.Params.page.math -}}
+{{- else if eq $math false -}}
+  {{- $math = dict "enable" false -}}
+{{- end -}}
+
+{{- /* 
+  Mathematical formulas rendering:
+    - KaTeX server-side rendering
+    - MathJax client-side rendering
+  Regular passthrough rendering:
+    - [ ] [todo] in future
+*/ -}}
+{{- if $math.enable -}}
+  {{- if eq $math.type "katex" -}}
+    {{- $opts := dict "output" "htmlAndMathml" "displayMode" (eq $.Type "block") }}
+    {{- with try (transform.ToMath .Inner $opts) }}
+      {{- with .Err }}
+        {{- warnf "Unable to render mathematical markup to HTML using the transform.ToMath function. The KaTeX display engine threw the following error: %s: see %s." . $.Position }}
+        {{- if eq $.Type "block" -}}
+          <p><mark class="text-danger">KaTeX parse error!</mark></p>
+        {{- else -}}
+          <mark class="text-danger">KaTeX parse error!</mark>
+        {{- end -}}
+      {{- else }}
+        {{- .Value }}
+        {{- $.Page.Store.Set "hasKaTeX" true -}}
+      {{- end }}
     {{- end -}}
-  {{- else }}
-    {{- .Value }}
-    {{- $.Page.Store.Set "hasMath" true -}}
-  {{- end }}
+  {{- else if eq $math.type "mathjax" -}}
+    {{- if eq $.Type "block" -}}
+      $${{- .Inner -}}$$
+    {{- else -}}
+      ${{ .Inner }}$
+    {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{- /* Regular passthrough rendering */ -}}
+  {{- /* waiting for Hugo interface to get delimiters */ -}}
+  {{- .Inner -}}
 {{- end -}}
