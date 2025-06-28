@@ -106,20 +106,20 @@
   {{- /* MathJax */ -}}
   {{- if eq $math.type "mathjax" -}}
     {{/*  TODO improve MathJax setup. e.g. content encryption, Twikoo math etc.  */}}
-    {{/*  
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-    <script>
-      MathJax = {
-        tex: {
-          displayMath: [['\\[', '\\]'], ['$$', '$$']],
-          inlineMath: [['\\(', '\\)'], ['$', '$']]
-        },
-        loader:{
-          load: ['ui/safe']
-        },
-      };
-    </script>
-    */}}
+    {{- $mathjax := $math.mathjax -}}
+    {{- $source := "js/lib/load-mathjax.js" -}}
+    {{- $options := dict "targetPath" "js/lib/load-mathjax.min.js" "minify" hugo.IsProduction -}}
+    {{- $params := dict
+      "packages" ($mathjax.packages | default dict)
+      "macros" ($mathjax.macros | default dict)
+      "loader" ($mathjax.loader | default dict)
+      "options" ($mathjax.options | default dict)
+    -}}
+    {{- $options = dict "params" $params | merge $options -}}
+    {{- if not hugo.IsProduction -}}
+      {{- $options = dict "sourceMap" "external" | merge $options -}}
+    {{- end -}}
+    {{- dict "Source" $source "Build" $options "Fingerprint" $fingerprint "Async" true "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- end -}}
 {{- end -}}
 

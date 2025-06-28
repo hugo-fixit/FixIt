@@ -1086,7 +1086,7 @@ mainSections = []
       # mathematical formulas rendering engines, optional values: ["katex", "mathjax"]
       type = "katex"
       # KaTeX server-side rendering (https://katex.org)
-      # partial config: https://gohugo.io/functions/transform/tomath/#options
+      # KaTeX partial config: https://gohugo.io/functions/transform/tomath/#options
       [params.page.math.katex]
         # KaTeX extension copy-tex
         copyTex = true
@@ -1094,12 +1094,27 @@ mainSections = []
         errorColor = "#ff4949"
         # custom macros map
         # syntax: <macro> = <definition>
-        # [todo] See theme documentation link for more macros 
+        # [todo] See theme documentation link for more macros
         [params.page.math.katex.macros]
           # "\\f" = "#1f(#2)"   # usage: $\f{a}{b}$
       # MathJax server-side rendering (https://www.mathjax.org)
+      # MathJax config: https://docs.mathjax.org/en/latest/options/index.html
+      # [todo] theme documentation
       [params.page.math.mathjax]
-        # [todo] MathJax configuration
+        [params.page.math.mathjax.packages]
+          # '[+]' = ['configmacros']
+        # custom macros map
+        # syntax: <macro> = <definition>
+        [params.page.math.mathjax.macros]
+          # "bold" = ["{\\bf #1}", 1]   # usage: $\bold{math}$
+        [params.page.math.mathjax.loader]
+          load = ['ui/safe']
+          [params.page.math.mathjax.loader.paths]
+            # custom = "https://cdn.jsdelivr.net/gh/sonoisa/XyJax-v3@3.0.1/build/"
+          # more loader config e.g source, dependencies, provides etc.
+        [params.page.math.mathjax.options]
+          enableMenu = true
+          # more options e.g. skipHtmlTags, ignoreHtmlClass etc.
     # Code wrapper config
     [params.page.code]
       # FixIt 0.3.9 | NEW whether to enable the code wrapper
