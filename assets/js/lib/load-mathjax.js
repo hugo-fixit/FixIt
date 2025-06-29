@@ -16,8 +16,8 @@ function loadMathJax() {
  */
 window.MathJax = {
   tex: {
-    displayMath: [['$$', '$$']],
-    inlineMath: [['$', '$']],
+    displayMath: [['\\[', '\\]'], ['$$', '$$']],
+    inlineMath: [['\\(', '\\)'], ['$', '$']],
     packages: {
       ...params.packages,
     },
