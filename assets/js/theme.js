@@ -1094,6 +1094,10 @@ class FixIt {
     pangu.autoSpacingPage();
   }
 
+  initMathJax() {
+    window.MathJax?.typeset && window.MathJax.typeset();
+  }
+
   initFixItDecryptor() {
     this.decryptor = new FixItDecryptor({
       decrypted: () => {
@@ -1110,6 +1114,7 @@ class FixIt {
         this.initToc();
         this.initTocListener();
         this.initPangu();
+        this.initMathJax();
         this.util.forEach(document.querySelectorAll('.encrypted-hidden'), ($element) => {
           $element.classList.replace('encrypted-hidden', 'decrypted-shown');
         });
@@ -1125,6 +1130,7 @@ class FixIt {
         this.initTypeit($content);
         this.initMapbox();
         this.initPangu();
+        this.initMathJax();
         this.util.forEach($content.querySelectorAll('.encrypted-hidden'), ($element) => {
           $element.classList.replace('encrypted-hidden', 'decrypted-shown');
         });
