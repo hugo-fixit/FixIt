@@ -24,7 +24,7 @@ window.MathJax = {
     // custom macros
     macros: {
       // make \KaTeX command work in MathJax
-      KaTeX: '{\\text{KaTeX}}',
+      KaTeX: '{K\\kern-.325em\\raise.21em{\\scriptstyle{A}}\\kern-.17em\\TeX}',
       ...params.macros,
     },
   },
