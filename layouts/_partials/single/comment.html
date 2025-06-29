@@ -347,14 +347,12 @@
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- end -}}
   {{- /* KaTeX for Twikoo */ -}}
-  {{/*  TODO  */}}
-  {{- $math := .Store.Get "math" -}}
-  {{- if not $math.enable | and $twikoo.enable | and $twikoo.katex -}}
-    {{- $source := $cdn.katexCSS | default "lib/katex/katex.min.css" -}}
+  {{- if $twikoo.enable | and $twikoo.katex -}}
+    {{- $source := "https://cdn.jsdelivr.net/npm//katex@0.16.22/dist/katex.min.css" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
-    {{- $source := $cdn.katexJS | default "lib/katex/katex.min.js" -}}
+    {{- $source := "https://cdn.jsdelivr.net/npm//katex@0.16.22/dist/katex.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-    {{- $source := $cdn.katexAutoRenderJS | default "lib/katex/auto-render.min.js" -}}
+    {{- $source := "https://cdn.jsdelivr.net/npm//katex@0.16.22/dist/contrib/auto-render.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- end -}}
 {{- end -}}
