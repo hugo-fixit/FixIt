@@ -109,11 +109,14 @@
     {{- $mathjax := $math.mathjax -}}
     {{- $source := "js/lib/load-mathjax.js" -}}
     {{- $options := dict "targetPath" "js/lib/load-mathjax.min.js" "minify" hugo.IsProduction -}}
+    {{- $mathjaxOpts := $mathjax.options | default dict -}}
+    {{- $mathjaxOpts = dict "enableMenu" $mathjaxOpts.enablemenu | merge $mathjaxOpts -}}
     {{- $params := dict
+      "cdn" $mathjax.cdn
       "packages" ($mathjax.packages | default dict)
       "macros" ($mathjax.macros | default dict)
       "loader" ($mathjax.loader | default dict)
-      "options" ($mathjax.options | default dict)
+      "options" $mathjaxOpts
     -}}
     {{- $options = dict "params" $params | merge $options -}}
     {{- if not hugo.IsProduction -}}

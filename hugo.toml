@@ -1101,6 +1101,7 @@ mainSections = []
       # MathJax config: https://docs.mathjax.org/en/latest/options/index.html
       # [todo] theme documentation
       [params.page.math.mathjax]
+        cdn = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
         [params.page.math.mathjax.packages]
           # '[+]' = ['configmacros']
         # custom macros map
@@ -1114,7 +1115,7 @@ mainSections = []
           # more loader config e.g source, dependencies, provides etc.
         [params.page.math.mathjax.options]
           enableMenu = true
-          # more options e.g. skipHtmlTags, ignoreHtmlClass etc.
+          # more options config e.g. skipHtmlTags, ignoreHtmlClass etc.
     # Code wrapper config
     [params.page.code]
       # FixIt 0.3.9 | NEW whether to enable the code wrapper
