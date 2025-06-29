@@ -126,36 +126,6 @@
   {{- end -}}
 {{- end -}}
 
-{{/*
-{{- if $math.enable -}}
-  {{- $source := $cdn.katexJS | default "lib/katex/katex.min.js" -}}
-  {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-  {{- $source := $cdn.katexAutoRenderJS | default "lib/katex/auto-render.min.js" -}}
-  {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-  {{- if $math.mhchem -}}
-    {{- $source := $cdn.katexMhchemJS | default "lib/katex/mhchem.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-  {{- end -}}
-  {{- $delimiters := slice (dict "left" "$$" "right" "$$" "display" true) (dict "left" "\\[" "right" "\\]" "display" true) -}}
-  {{- $delimiters = $delimiters | append (dict "left" "\\begin{equation}" "right" "\\end{equation}" "display" true) -}}
-  {{- $delimiters = $delimiters | append (dict "left" "\\begin{equation*}" "right" "\\end{equation*}" "display" true) -}}
-  {{- $delimiters = $delimiters | append (dict "left" "\\begin{align}" "right" "\\end{align}" "display" true) -}}
-  {{- $delimiters = $delimiters | append (dict "left" "\\begin{align*}" "right" "\\end{align*}" "display" true) -}}
-  {{- $delimiters = $delimiters | append (dict "left" "\\begin{alignat}" "right" "\\end{alignat}" "display" true) -}}
-  {{- $delimiters = $delimiters | append (dict "left" "\\begin{alignat*}" "right" "\\end{alignat*}" "display" true) -}}
-  {{- $delimiters = $delimiters | append (dict "left" "\\begin{gather}" "right" "\\end{gather}" "display" true) -}}
-  {{- $delimiters = $delimiters | append (dict "left" "\\begin{CD}" "right" "\\end{CD}" "display" true) -}}
-  {{- if and $math.blockLeftDelimiter $math.blockRightDelimiter -}}
-    {{- $delimiters = $delimiters | append (dict "left" $math.blockLeftDelimiter "right" $math.blockRightDelimiter "display" true) -}}
-  {{- end -}}
-  {{- $delimiters = $delimiters | append (dict "left" "$" "right" "$" "display" false) (dict "left" "\\(" "right" "\\)" "display" false) -}}
-  {{- if and $math.inlineLeftDelimiter $math.inlineRightDelimiter -}}
-    {{- $delimiters = $delimiters | append (dict "left" $math.inlineRightDelimiter "right" $math.inlineRightDelimiter "display" false) -}}
-  {{- end -}}
-  {{- $config = dict "strict" false "delimiters" $delimiters | dict "math" | merge $config -}}
-{{- end -}}
-*/}}
-
 {{- /* mermaid */ -}}
 {{- if .Store.Get "hasMermaid" -}}
   {{- $config = dict "themes" .Site.Params.mermaid.themes | dict "mermaid" | merge $config -}}
