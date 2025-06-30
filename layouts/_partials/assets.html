@@ -89,40 +89,42 @@
   {{- $config = dict "speed" $typeit.speed "cursorSpeed" $typeit.cursorSpeed "cursorChar" $typeit.cursorChar "duration" $typeit.duration "loop" $typeit.loop | dict "typeit" | merge $config -}}
 {{- end -}}
 
-{{- /* KaTeX */ -}}
-{{- $math := .Scratch.Get "math" -}}
+{{- /* Mathematical formulas */ -}}
+{{- $math := .Store.Get "math" -}}
 {{- if $math.enable -}}
-  {{- $source := $cdn.katexCSS | default "lib/katex/katex.min.css" -}}
-  {{- dict "Source" $source "Fingerprint" $fingerprint "Preload" true | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
-  {{- $source := $cdn.katexJS | default "lib/katex/katex.min.js" -}}
-  {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-  {{- $source := $cdn.katexAutoRenderJS | default "lib/katex/auto-render.min.js" -}}
-  {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
-  {{- if $math.copyTex -}}
-    {{- $source := $cdn.katexCopyTexJS | default "lib/katex/copy-tex.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+  {{- /* KaTeX */ -}}
+  {{- if (eq $math.type "katex") | and (.Store.Get "hasKaTeX") -}}
+    {{- $source := $cdn.katexCSS | default "lib/katex/katex.min.css" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint "Preload" true | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+    {{- /* Copy-tex extension */ -}}
+    {{- if $math.katex.copyTex -}}
+      {{- $source := $cdn.katexCopyTexJS | default "lib/katex/copy-tex.min.js" -}}
+      {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+    {{- end -}}
   {{- end -}}
-  {{- if $math.mhchem -}}
-    {{- $source := $cdn.katexMhchemJS | default "lib/katex/mhchem.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+
+  {{- /* MathJax */ -}}
+  {{- if eq $math.type "mathjax" -}}
+    {{/*  TODO improve MathJax setup. e.g. content encryption, Twikoo math etc.  */}}
+    {{- $mathjax := $math.mathjax -}}
+    {{- $source := "js/lib/load-mathjax.js" -}}
+    {{- $options := dict "targetPath" "js/lib/load-mathjax.min.js" "minify" hugo.IsProduction -}}
+    {{- $mathjaxOpts := $mathjax.options | default dict -}}
+    {{- $mathjaxOpts = dict "enableMenu" $mathjaxOpts.enablemenu | merge $mathjaxOpts -}}
+    {{- $params := dict
+      "cdn" $mathjax.cdn
+      "tex" ($mathjax.tex | default dict)
+      "packages" ($mathjax.packages | default dict)
+      "macros" ($mathjax.macros | default dict)
+      "loader" ($mathjax.loader | default dict)
+      "options" $mathjaxOpts
+    -}}
+    {{- $options = dict "params" $params | merge $options -}}
+    {{- if not hugo.IsProduction -}}
+      {{- $options = dict "sourceMap" "external" | merge $options -}}
+    {{- end -}}
+    {{- dict "Source" $source "Build" $options "Fingerprint" $fingerprint "Async" true "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
   {{- end -}}
-  {{- $delimiters := slice (dict "left" "$$" "right" "$$" "display" true) (dict "left" "\\[" "right" "\\]" "display" true) -}}
-  {{- $delimiters = $delimiters | append (dict "left" "\\begin{equation}" "right" "\\end{equation}" "display" true) -}}
-  {{- $delimiters = $delimiters | append (dict "left" "\\begin{equation*}" "right" "\\end{equation*}" "display" true) -}}
-  {{- $delimiters = $delimiters | append (dict "left" "\\begin{align}" "right" "\\end{align}" "display" true) -}}
-  {{- $delimiters = $delimiters | append (dict "left" "\\begin{align*}" "right" "\\end{align*}" "display" true) -}}
-  {{- $delimiters = $delimiters | append (dict "left" "\\begin{alignat}" "right" "\\end{alignat}" "display" true) -}}
-  {{- $delimiters = $delimiters | append (dict "left" "\\begin{alignat*}" "right" "\\end{alignat*}" "display" true) -}}
-  {{- $delimiters = $delimiters | append (dict "left" "\\begin{gather}" "right" "\\end{gather}" "display" true) -}}
-  {{- $delimiters = $delimiters | append (dict "left" "\\begin{CD}" "right" "\\end{CD}" "display" true) -}}
-  {{- if and $math.blockLeftDelimiter $math.blockRightDelimiter -}}
-    {{- $delimiters = $delimiters | append (dict "left" $math.blockLeftDelimiter "right" $math.blockRightDelimiter "display" true) -}}
-  {{- end -}}
-  {{- $delimiters = $delimiters | append (dict "left" "$" "right" "$" "display" false) (dict "left" "\\(" "right" "\\)" "display" false) -}}
-  {{- if and $math.inlineLeftDelimiter $math.inlineRightDelimiter -}}
-    {{- $delimiters = $delimiters | append (dict "left" $math.inlineRightDelimiter "right" $math.inlineRightDelimiter "display" false) -}}
-  {{- end -}}
-  {{- $config = dict "strict" false "delimiters" $delimiters | dict "math" | merge $config -}}
 {{- end -}}
 
 {{- /* mermaid */ -}}

@@ -1,3 +1,3 @@
 
 {{- $tag := .Get "tag" | default (.Get 0) | default "div" -}}
-{{- printf `<%v class="fi-row">%v</%v>` $tag .Inner $tag | safeHTML -}}
+{{- printf `<%v class="fi-raw">%v</%v>` $tag .Inner $tag | safeHTML -}}
