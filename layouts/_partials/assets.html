@@ -113,6 +113,7 @@
     {{- $mathjaxOpts = dict "enableMenu" $mathjaxOpts.enablemenu | merge $mathjaxOpts -}}
     {{- $params := dict
       "cdn" $mathjax.cdn
+      "tex" ($mathjax.tex | default dict)
       "packages" ($mathjax.packages | default dict)
       "macros" ($mathjax.macros | default dict)
       "loader" ($mathjax.loader | default dict)

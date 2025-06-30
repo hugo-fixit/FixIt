@@ -27,6 +27,7 @@ window.MathJax = {
       KaTeX: '{K\\kern-.325em\\raise.21em{\\scriptstyle{A}}\\kern-.17em\\TeX}',
       ...params.macros,
     },
+    ...params.tex,
   },
   loader: {
     ...params.loader,

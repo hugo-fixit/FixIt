@@ -1081,6 +1081,7 @@ mainSections = []
           h5 = "{h2}.{h3}.{h4}.{h5} {title}"
           h6 = "{h2}.{h3}.{h4}.{h5}.{h6} {title}"
     # FixIt 0.4.0 | CHANGED mathematical formulas configation
+    # See http://fixit.lruihao.cn/documentation/content-management/markdown-syntax/extended/#formula
     [params.page.math]
       enable = true
       # mathematical formulas rendering engines, optional values: ["katex", "mathjax"]
@@ -1094,22 +1095,20 @@ mainSections = []
         errorColor = "#ff4949"
         # custom macros map
         # syntax: <macro> = <definition>
-        # [todo] See theme documentation link for more macros
         [params.page.math.katex.macros]
           # "\\f" = "#1f(#2)"   # usage: $\f{a}{b}$
       # MathJax server-side rendering (https://www.mathjax.org)
       # MathJax config: https://docs.mathjax.org/en/latest/options/index.html
-      # [todo] theme documentation
       [params.page.math.mathjax]
         cdn = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
         [params.page.math.mathjax.packages]
-          # '[+]' = ['configmacros']
+          # "[+]" = ["configmacros"]
         # custom macros map
         # syntax: <macro> = <definition>
         [params.page.math.mathjax.macros]
           # "bold" = ["{\\bf #1}", 1]   # usage: $\bold{math}$
         [params.page.math.mathjax.loader]
-          load = ['ui/safe']
+          load = ["ui/safe"]
           [params.page.math.mathjax.loader.paths]
             # custom = "https://cdn.jsdelivr.net/gh/sonoisa/XyJax-v3@3.0.1/build/"
           # more loader config e.g source, dependencies, provides etc.
