@@ -137,7 +137,7 @@ mainSections = []
 [module]
   [module.hugoVersion]
     extended = true
-    min = "0.146.0"
+    min = "0.147.7"
 
 # -------------------------------------------------------------------------------------
 # Markup related configuration in Hugo
@@ -1080,7 +1080,7 @@ mainSections = []
           h4 = "{h2}.{h3}.{h4} {title}"
           h5 = "{h2}.{h3}.{h4}.{h5} {title}"
           h6 = "{h2}.{h3}.{h4}.{h5}.{h6} {title}"
-    # FixIt 0.4.0 | CHANGED mathematical formulas configation
+    # FixIt 0.4.0 | CHANGED mathematical formulas configuration
     # See http://fixit.lruihao.cn/documentation/content-management/markdown-syntax/extended/#formula
     [params.page.math]
       enable = true
