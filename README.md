@@ -145,7 +145,7 @@ Click the following links to generate a new repository with template:
 - Extended Markdown syntax for **[Font Awesome](https://fontawesome.com/) icons**
 - Extended Markdown syntax for **ruby annotation**
 - Extended Markdown syntax for **fraction**
-- **Mathematical formula** supported by [KaTeX](https://katex.org/)
+- **Mathematical formula** supported by [KaTeX](https://katex.org/) or [MathJax](https://www.mathjax.org)
 - **Diagrams** code fences extended and shortcode supported by [mermaid](https://github.com/knsv/mermaid)
 - **Interactive data visualization** shortcode and code fences extended supported by [ECharts](https://echarts.apache.org/)
 - **Timeline** code fences extended and shortcode supported
@@ -273,6 +273,7 @@ Thanks to all the [contributors](https://github.com/hugo-fixit/FixIt/graphs/cont
 - [Sharer.js](https://github.com/ellisonleao/sharer.js)
 - [TypeIt](https://typeitjs.com/)
 - [KaTeX](https://katex.org/)
+- [MathJax](https://www.mathjax.org)
 - [mermaid](https://github.com/mermaid-js/mermaid)
 - [ECharts](https://echarts.apache.org/)
 - [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
