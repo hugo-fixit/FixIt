@@ -15,7 +15,7 @@
   {{- $dateformat := (index .Site.Params $scope).dateformat | default "01-02" -}}
   {{- $scopePages := .Pages -}}
   {{- if eq $scope "archives" -}}
-    {{- $scopePages = .Scratch.Get "mainSectionPages" -}}
+    {{- $scopePages = .Site.Store.Get "mainSectionPages" -}}
   {{- end -}}
   {{- $scopePages = where $scopePages.ByLastmod.Reverse "Section" "!=" "" -}}
   {{- $hiddenAdapters := .Param "hiddenAdapters" | default false -}}

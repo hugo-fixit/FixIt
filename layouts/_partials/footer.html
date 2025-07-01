@@ -10,7 +10,7 @@
       {{- if ne $footerConfig.powered.enable false -}}
         <div class="footer-line powered{{ with $footerConfig.order.powered }} order-{{ . }}{{ end }}">
           {{- $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo %v">{hugoLogo}Hugo</a>` hugo.Version -}}
-          {{- $theme := printf `<a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt %v">{themeLogo}FixIt</a>` (.Scratch.Get "version") -}}
+          {{- $theme := printf `<a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt %v">{themeLogo}FixIt</a>` (hugo.Store.Get "version") -}}
           {{- if $footerConfig.powered.hugoLogo -}}
           {{- $hugoLogo := printf `<img class="hugo-icon" src="%v" alt="Hugo logo" /> ` (resources.Get "images/hugo.svg" | minify).RelPermalink -}}
             {{- $hugo = replace $hugo "{hugoLogo}" $hugoLogo -}}
@@ -42,7 +42,7 @@
           {{- /* Author */ -}}
           {{- if ne $footerConfig.author false -}}
             <span class="author" itemprop="copyrightHolder">
-              {{ partial "plugin/link.html" (dict "Destination" ($.Site.Params.author.link | default (.Scratch.Get "homeRelPermalink")) "Content" .Site.Params.author.name) -}}
+              {{ partial "plugin/link.html" (dict "Destination" ($.Site.Params.author.link | default (.Site.Store.Get "homeRelPermalink")) "Content" .Site.Params.author.name) -}}
             </span>
           {{- end -}}
 
@@ -53,7 +53,7 @@
         </div>
       {{- end -}}
 
-      {{- $siteTime := .Scratch.Get "siteTime" -}}
+      {{- $siteTime := .Site.Store.Get "siteTime" -}}
       {{- if $siteTime.enable -}}
         <div class="footer-line statistics{{ with $footerConfig.order.statistics }} order-{{ . }}{{ end }}">
           {{- if $siteTime.enable | and $siteTime.value -}}

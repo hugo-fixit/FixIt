@@ -21,7 +21,7 @@
 
 {{- if $enable | and $key -}}
   {{- $configJS := "" -}}
-  {{- $fingerprint := .Scratch.Get "fingerprint" -}}
+  {{- $fingerprint := .Site.Store.Get "fingerprint" -}}
   {{- $sourceOpts := dict "Fingerprint" $fingerprint "Defer" true -}}
 
   {{- /* PostSummary */ -}}

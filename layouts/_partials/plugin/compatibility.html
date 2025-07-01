@@ -1,6 +1,6 @@
 {{- $compatibility := .Site.Params.compatibility | default dict -}}
-{{- $cdn := .Scratch.Get "cdn" | default dict -}}
-{{- $fingerprint := .Scratch.Get "fingerprint" -}}
+{{- $cdn := .Site.Store.Get "cdn" | default dict -}}
+{{- $fingerprint := .Site.Store.Get "fingerprint" -}}
 
 {{- /* Polyfill.io */ -}}
 {{- if $compatibility.polyfill -}}

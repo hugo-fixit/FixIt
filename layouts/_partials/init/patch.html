@@ -35,4 +35,4 @@
     {{- $siteTime = dict "enable" true "value" . | merge $siteTime -}}
   {{- end -}}
 {{- end -}}
-{{- .Scratch.Set "siteTime" $siteTime -}}
+{{- .Site.Store.Set "siteTime" $siteTime -}}

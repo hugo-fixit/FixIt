@@ -1,8 +1,8 @@
 {{- $params := partial "function/params.html" -}}
-{{- $cdn := .Scratch.Get "cdn" | default dict -}}
-{{- $fingerprint := .Scratch.Get "fingerprint" -}}
+{{- $cdn := .Site.Store.Get "cdn" | default dict -}}
+{{- $fingerprint := .Site.Store.Get "fingerprint" -}}
 {{- $config := (.Scratch.Get "this").config -}}
-{{- $config = dict "version" (.Scratch.Get "version") | merge $config -}}
+{{- $config = dict "version" (hugo.Store.Get "version") | merge $config -}}
 
 {{- /* Search */ -}}
 {{- if .Site.Params.search | and .Site.Params.search.enable -}}
@@ -227,7 +227,7 @@
 {{- end -}}
 
 {{- /* Site creation time */ -}}
-{{- $siteTime := .Scratch.Get "siteTime" -}}
+{{- $siteTime := .Site.Store.Get "siteTime" -}}
 {{- if $siteTime.enable -}}
   {{- with $siteTime.value -}}
     {{- $config = dict "siteTime" . | merge $config -}}

@@ -1,16 +1,16 @@
 {{- if gt .Paginator.TotalPages 1 -}}
   <ul class="pagination">
-    {{- .Scratch.Set "paginator.ellipsed" false -}}
+    {{- .Site.Store.Set "paginator.ellipsed" false -}}
     {{- range $.Paginator.Pagers -}}
       {{- $right := sub .TotalPages .PageNumber -}}
       {{- $showNumber := or (le .PageNumber 1) (eq $right 0) -}}
       {{- $showNumber := or $showNumber (and (gt .PageNumber (sub $.Paginator.PageNumber 3)) (lt .PageNumber (add $.Paginator.PageNumber 3))) -}}
       {{- if $showNumber -}}
-        {{- $.Scratch.Set "paginator.ellipsed" false -}}
-        {{- $.Scratch.Set "paginator.shouldEllipse" false -}}
+        {{- $.Site.Store.Set "paginator.ellipsed" false -}}
+        {{- $.Site.Store.Set "paginator.shouldEllipse" false -}}
       {{- else -}}
-        {{- $.Scratch.Set "paginator.shouldEllipse" (not ($.Scratch.Get "paginator.ellipsed") ) -}}
-        {{- $.Scratch.Set "paginator.ellipsed" true -}}
+        {{- $.Site.Store.Set "paginator.shouldEllipse" (not ($.Site.Store.Get "paginator.ellipsed") ) -}}
+        {{- $.Site.Store.Set "paginator.ellipsed" true -}}
       {{- end -}}
       {{- if $showNumber -}}
         <li class="page-item{{ if eq . $.Paginator }} active{{ end }}">
@@ -18,7 +18,7 @@
             <a href="{{ .URL }}">{{ .PageNumber }}</a>
           </span>
         </li>
-      {{- else if ($.Scratch.Get "paginator.shouldEllipse") -}}
+      {{- else if ($.Site.Store.Get "paginator.shouldEllipse") -}}
         <li class="page-item">
           <span class="page-link" aria-hidden="true">&hellip;</span>
         </li>

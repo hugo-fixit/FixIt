@@ -2,26 +2,14 @@
 {{- $warns := slice -}}
 {{- $errors := slice -}}
 
-{{- with .Site.Params.gitRepo | or .Site.Params.page.edit -}}
-  {{- $warns = $warns | append "The parameter `params.gitRepo` and `params.page.edit` is deprecated since v0.3.0, use `params.gitInfo` instead." -}}
-{{- end -}}
-
-{{- with .Site.Params.customFilePath -}}
-  {{- $warns = $warns | append "The parameter `params.customFilePath` is deprecated since v0.3.7, use `layouts/_partials/custom.html` instead." -}}
-{{- end -}}
-
-{{- with .Site.Params.footer.custom -}}
-  {{- $warns = $warns | append "The parameter `params.footer.custom` is deprecated since v0.3.7, use `layouts/_partials/custom.html` instead." -}}
-{{- end -}}
-
 {{- with .Site.Params.ibruce -}}
   {{- $warns = $warns | append "The parameter `params.ibruce` is deprecated since v0.3.9, use `params.busuanzi` instead." -}}
 {{- end -}}
 
 {{- if len $warns -}}
-  {{- warnf "Deprecated parameter detection until %v\n  - %v\n\n" (.Scratch.Get "version") (delimit $warns "\n  - ") -}}
+  {{- warnf "Deprecated parameter detection until %v\n  - %v\n\n" (hugo.Store.Get "version") (delimit $warns "\n  - ") -}}
 {{- end -}}
 
 {{- if len $errors -}}
-  {{- errorf "Deprecated parameter detection until %v\n  - %v\n\n" (.Scratch.Get "version") (delimit $errors "\n  - ") -}}
+  {{- errorf "Deprecated parameter detection until %v\n  - %v\n\n" (hugo.Store.Get "version") (delimit $errors "\n  - ") -}}
 {{- end -}}

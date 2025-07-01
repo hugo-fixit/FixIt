@@ -1,6 +1,6 @@
-{{- $cdn := .Scratch.Get "cdn" | default dict -}}
-{{- $fingerprint := .Scratch.Get "fingerprint" -}}
-{{- $comment := .Scratch.Get "comment" | default dict -}}
+{{- $cdn := .Site.Store.Get "cdn" | default dict -}}
+{{- $fingerprint := .Site.Store.Get "fingerprint" -}}
+{{- $comment := .Store.Get "comment" | default dict -}}
 {{- $commentConfig := dict "enable" false -}}
 
 {{- if $comment.enable -}}

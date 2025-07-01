@@ -3,7 +3,7 @@
 {{- $params := partial "function/params.html" -}}
 
 {{- if $params.related.enable | and ("aside" | in $params.related.position) | and (not $params.password) -}}
-  {{- $posts := .Scratch.Get "mainSectionPages" -}}
+  {{- $posts := .Site.Store.Get "mainSectionPages" -}}
   {{- if .Site.Params.page.hiddenFromRelated -}}
     {{- $posts = where $posts "Params.hiddenfromrelated" false -}}
   {{- else -}}

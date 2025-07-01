@@ -103,13 +103,13 @@
       {{- end -}}
     </section>
     <section>
-      <span><a href="javascript:void(0);" onclick="window.history.back();">{{ T "single.back" }}</a></span>&nbsp;|&nbsp;<span><a href="{{ .Scratch.Get "homeRelPermalink" }}">{{ T "single.home" }}</a></span>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">{{ T "single.back" }}</a></span>&nbsp;|&nbsp;<span><a href="{{ .Site.Store.Get "homeRelPermalink" }}">{{ T "single.home" }}</a></span>
     </section>
   </div>
 
   {{- $navigation := .Site.Params.navigation -}}
   <div class="post-nav">
-    {{- $pages := .Scratch.Get "mainSectionPages" -}}
+    {{- $pages := .Site.Store.Get "mainSectionPages" -}}
     {{- $prev := $pages.Prev . -}}
     {{- $next := $pages.Next . -}}
     {{- /* Show the post navigation in section pages */ -}}

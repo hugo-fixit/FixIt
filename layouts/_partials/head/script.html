@@ -1,4 +1,4 @@
-{{- $fingerprint := .Scratch.Get "fingerprint" -}}
+{{- $fingerprint := .Site.Store.Get "fingerprint" -}}
 
 {{- /* Check theme isDark before body rendering */ -}}
 {{- $options := dict "targetPath" "js/head/color-scheme.min.js" "minify" hugo.IsProduction -}}

@@ -87,7 +87,7 @@
           | and $expirationReminder.closeComment -}}
           {{- .Scratch.Set "commentExpired" true -}}
         {{- end -}}
-        {{- $comment := .Scratch.Get "comment" | default dict -}}
+        {{- $comment := .Store.Get "comment" | default dict -}}
         {{- $visitorIcon := dict "Class" "fa-regular fa-eye fa-fw me-1" | partial "plugin/icon.html" -}}
         {{- $commentIcon := dict "Class" "fa-regular fa-comments fa-fw me-1" | partial "plugin/icon.html" -}}
         {{- /* Visitor Count */ -}}
