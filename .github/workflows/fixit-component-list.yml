@@ -9,6 +9,7 @@ permissions:
 
 jobs:
   generate-component-list:
+    if: github.repository == 'hugo-fixit/FixIt'
     name: Update this repo's README with the list of hugo-fixit theme components
     runs-on: ubuntu-latest
     steps:
