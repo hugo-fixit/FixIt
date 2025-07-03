@@ -27,7 +27,7 @@
   {{- /* PostSummary */ -}}
   {{- if $summaryEnable -}}
     {{- $postChatCSS := "https://ai.zhheo.com/static/public/postChatUser_summary.min.css" -}}
-    {{- dict "Source" $postChatCSS "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "scratch/style.html" -}}
+    {{- dict "Source" $postChatCSS "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
     {{- $p := "tianliGPT" -}}
     {{- $postSummaryConfig := printf "let %v_postSelector='#content';" $p -}}
     {{- with $summaryConfig.title -}}
@@ -100,7 +100,7 @@
   {{- end -}}
 
   {{- /* Insert config */ -}}
-  {{- $configJS | dict "Content" | dict "Page" . "Data" | partial "scratch/script.html" -}}
+  {{- $configJS | dict "Content" | dict "Page" . "Data" | partial "store/script.html" -}}
 
   {{- /* Insert script */ -}}
   {{- $postChatJS := "" -}}
@@ -112,5 +112,5 @@
     {{- $postChatJS = add $sourcePrefix (index $jsMap "summary") -}}
   {{- end -}}
   {{- $sourceOpts = dict "Source" $postChatJS | merge $sourceOpts -}}
-  {{- $sourceOpts | dict "Page" . "Data" | partial "scratch/script.html" -}}
+  {{- $sourceOpts | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
