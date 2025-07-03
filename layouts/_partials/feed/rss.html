@@ -19,7 +19,7 @@
       <userId>{{ .Site.Params.feed.follow.userId }}</userId>
     </follow_challenge>
     {{- end }}
-    <generator>Hugo {{ hugo.Version }} &amp; FixIt {{ .Version }}</generator>
+    <generator>Hugo {{ hugo.Version }} &amp; FixIt {{ hugo.Store.Get "version" }}</generator>
     <language>{{ .Site.Language.LanguageCode }}</language>{{ with .Site.Params.author.email }}
     <managingEditor>{{.}}{{ with $.Site.Params.author.name }} ({{ . }}){{ end }}</managingEditor>{{ end }}{{ with .Site.Params.author.email }}
     <webMaster>{{ . }}{{ with $.Site.Params.author.name }} ({{ . }}){{ end }}</webMaster>{{ end }}{{ with .Site.Copyright }}

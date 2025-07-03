@@ -2,7 +2,7 @@
 
 > {{ .Site.Params.description }}
 
-{{ $pages := .Scratch.Get "mainSectionPages" -}}
+{{ $pages := .Site.Store.Get "mainSectionPages" -}}
 {{- $pages = where $pages "Draft" "eq" false -}}
 {{- T "section.archiveCounter" (len $pages) }} by [{{ .Site.Params.author.name }}]({{ .Site.Params.author.link }}).
 {{ range $pages.GroupByPublishDate "2006" }}

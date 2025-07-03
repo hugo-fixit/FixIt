@@ -4,6 +4,6 @@
 {{- end -}}
 {{- $config := (.Params.feed | default dict) | merge .Site.Params.list.feed | merge .Site.Params.feed -}}
 {{- $options := dict "Site" .Site "Config" $config "OutputFormats" .OutputFormats -}}
-{{- $options = dict "Permalink" .Permalink "Version" (.Scratch.Get "version") | merge $options -}}
+{{- $options = dict "Permalink" .Permalink | merge $options -}}
 {{- $options = dict "Title" $title "Pages" .Pages | merge $options -}}
 {{- partial "feed/rss.html" $options -}}

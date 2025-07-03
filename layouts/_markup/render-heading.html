@@ -29,7 +29,7 @@
 
 {{- if $ordered -}}
   {{- /* Set the count for child level to 0 */ -}}
-  {{- .Page.Scratch.SetInMap "heading-counter" (string (add $level 1)) 0 -}}
+  {{- .Page.Store.SetInMap "heading-counter" (string (add $level 1)) 0 -}}
 {{- end -}}
 
 {{- $attrs := "" }}
@@ -50,9 +50,9 @@
   {{- $title := .Text -}}
   {{- if $ordered -}}
     {{- /* Add 1 to the current level */ -}}
-    {{- $headingMap := .Page.Scratch.Get "heading-counter" -}}
+    {{- $headingMap := .Page.Store.Get "heading-counter" -}}
     {{- $count := (string $level) | index $headingMap | int | add 1 -}}
-    {{- .Page.Scratch.SetInMap "heading-counter" (string $level) $count -}}
+    {{- .Page.Store.SetInMap "heading-counter" (string $level) $count -}}
 
     {{- /* Get the counters for all levels */ -}}
     {{- $h1 := "1" | index $headingMap | int | string -}}

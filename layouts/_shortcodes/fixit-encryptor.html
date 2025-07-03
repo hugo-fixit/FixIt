@@ -5,7 +5,7 @@
   {{- /* Content */ -}}
   {{- $content := .Inner | .Page.RenderString -}}
   {{- /* Content Encryption */ -}}
-  {{- dict "Content" $content "Password" $password "Message" $message "IsPartial" true | partial "plugin/fixit-encryptor.html" -}}
+  {{- dict "Content" $content "Password" $password "Message" $message "IsPartial" true "Page" .Page | partial "plugin/fixit-encryptor.html" -}}
 {{- else -}}
   {{- .Inner -}}
 {{- end -}}

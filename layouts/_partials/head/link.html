@@ -1,5 +1,5 @@
-{{- $cdn := .Scratch.Get "cdn" | default dict -}}
-{{- $fingerprint := .Scratch.Get "fingerprint" -}}
+{{- $cdn := .Site.Store.Get "cdn" | default dict -}}
+{{- $fingerprint := .Site.Store.Get "fingerprint" -}}
 {{- $title := printf "%s %s %s" .Title .Site.Params.titleDelimiter .Site.Title -}}
 {{- if .IsHome -}}
   {{- $title = site.Title -}}

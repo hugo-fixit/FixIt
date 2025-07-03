@@ -1,11 +1,12 @@
 {{- /* ID */ -}}
+{{- $noop := .Page.WordCount -}}
 {{- $id := "" -}}
 {{- with .Id -}}
   {{- /* If an ID is specified, then just use it.*/ -}}
   {{- $id = printf "%v" . -}}
 {{- else -}}
-  {{- $count := ($.Scratch.Get "this").count | default 1 -}}
+  {{- $count := ($.Page.Store.Get "this").count | default 1 -}}
   {{- $id = printf "id-%d" $count -}}
-  {{- $count | add 1 | $.Scratch.SetInMap "this" "count" -}}
+  {{- $count | add 1 | $.Page.Store.SetInMap "this" "count" -}}
 {{- end -}}
 {{- return $id -}}

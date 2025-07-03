@@ -4,7 +4,7 @@
 <html itemscope itemtype="http://schema.org/WebPage" lang="{{ .Site.LanguageCode }}">
   <head>
     {{ if .IsHome | and (ne .Site.Params.disableThemeInject true) }}
-      <meta name="theme" content='FixIt {{ .Scratch.Get "version" }}'>
+      <meta name="theme" content='FixIt {{ hugo.Store.Get "version" }}'>
     {{ end }}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -25,7 +25,7 @@
     <div class="wrapper" data-page-style="{{ (partial `function/params.html`).pageStyle | default `normal` }}">
       {{- partial "header.html" . -}}
       {{- partial "breadcrumb.html" . -}}
-      {{- $toc := .Scratch.Get "toc" -}}
+      {{- $toc := .Store.Get "toc" -}}
       <main class="container{{ if (eq $toc.enable true) | and (eq $toc.position `left`) }} container-reverse{{ end }}">
         {{- block "content" . }}{{ end -}}
       </main>

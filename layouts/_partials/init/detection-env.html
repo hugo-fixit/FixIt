@@ -1,5 +1,4 @@
 {{- /* FixIt theme environment detection */ -}}
-
 {{- $params := partial "function/params.html" -}}
 
 {{- if hugo.IsProduction -}}
@@ -12,21 +11,21 @@
       {{- $cdn = printf "%v%v" $prefix $value | dict $key | merge $cdn -}}
     {{- end -}}
   {{- end -}}
-  {{- .Scratch.Set "cdn" $cdn -}}
-  {{- .Scratch.Set "fingerprint" .Site.Params.fingerprint -}}
-  {{- .Scratch.Set "analytics" .Site.Params.analytics -}}
-  {{- .Scratch.Set "comment" $params.comment -}}
+  {{- .Site.Store.Set "cdn" $cdn -}}
+  {{- .Site.Store.Set "fingerprint" .Site.Params.fingerprint -}}
+  {{- .Site.Store.Set "analytics" .Site.Params.analytics -}}
+  {{- .Store.Set "comment" $params.comment -}}
   {{- if eq .Params.comment true -}}
-    {{- .Scratch.Set "comment" .Site.Params.page.comment -}}
+    {{- .Store.Set "comment" .Site.Params.page.comment -}}
   {{- else if eq .Params.comment false -}}
-    {{- .Scratch.Set "comment" (dict "enable" false) -}}
+    {{- .Store.Set "comment" (dict "enable" false) -}}
   {{- end -}}
 {{- else -}}
-  {{- .Scratch.Set "devOpts" .Site.Params.dev -}}
+  {{- .Site.Store.Set "devOpts" .Site.Params.dev -}}
   {{- if ne .Site.Params.dev.enable true -}}
-    {{- .Scratch.Set "devOpts" dict -}}
+    {{- .Site.Store.Set "devOpts" dict -}}
   {{- end -}}
   {{- if eq .Site .Sites.Default -}}
-    {{- warnf "FixIt %v\n%v\n\n" (.Scratch.Get "version") (T "init.devEnvWarn") -}}
+    {{- warnf "FixIt %v\n%v\n\n" (hugo.Store.Get "version") (T "init.devEnvWarn") -}}
   {{- end -}}
 {{- end -}}

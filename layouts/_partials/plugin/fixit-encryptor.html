@@ -7,7 +7,7 @@
   {{- $loading := resources.Get "images/loading.svg" | minify -}}
   {{- $id := "fixit-decryptor-input" -}}
   {{- if .IsPartial -}}
-    {{- $id = dict "Scratch" page.Scratch | partial "function/id.html" -}}
+    {{- $id = dict "Page" .Page | partial "function/id.html" -}}
   {{- end -}}
   <fixit-encryptor>
     <div class="fixit-decryptor-container">

@@ -6,7 +6,7 @@
 {{- if not (reflect.IsMap $toc) -}}
   {{- $toc = dict "enable" $toc | merge .Site.Params.page.toc -}}
 {{- end -}}
-{{- .Scratch.Set "toc" $toc -}}
+{{- .Store.Set "toc" $toc -}}
 
 {{- /* Reward data patch */ -}}
 {{- $reward := $params.reward -}}
@@ -15,7 +15,7 @@
 {{- else if eq $reward false -}}
   {{- $reward = dict "enable" false -}}
 {{- end -}}
-{{- .Scratch.Set "reward" $reward -}}
+{{- .Store.Set "reward" $reward -}}
 
 {{- /* KaTeX data patch */ -}}
 {{- $math := $params.math -}}
@@ -35,4 +35,4 @@
     {{- $siteTime = dict "enable" true "value" . | merge $siteTime -}}
   {{- end -}}
 {{- end -}}
-{{- .Scratch.Set "siteTime" $siteTime -}}
+{{- .Site.Store.Set "siteTime" $siteTime -}}

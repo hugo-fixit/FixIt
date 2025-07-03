@@ -1,6 +1,6 @@
 <div class="widgets">
   {{- $backToTop := .Site.Params.backToTop -}}
-  {{- $comment := .Scratch.Get "comment" -}}
+  {{- $comment := .Store.Get "comment" -}}
   {{- if $backToTop.enable | or $comment.enable -}}
     <div class="fixed-buttons animate__faster d-none">
       {{- /* back to top button */ -}}

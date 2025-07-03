@@ -28,7 +28,7 @@
     {{- /* Posts */ -}}
     {{- if ne $posts.enable false | and .Site.RegularPages -}}
       {{- /* Paginate */ -}}
-      {{- $pages := .Scratch.Get "mainSectionPages" -}}
+      {{- $pages := .Site.Store.Get "mainSectionPages" -}}
       {{- if .Site.Params.page.hiddenFromHomePage -}}
         {{- $pages = where $pages "Params.hiddenfromhomepage" false -}}
       {{- else -}}

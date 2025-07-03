@@ -5,7 +5,7 @@
 
 {{- define "content" -}}
   {{- /* All Posts */ -}}
-  {{- $pages := .Scratch.Get "mainSectionPages" -}}
+  {{- $pages := .Site.Store.Get "mainSectionPages" -}}
 
   <div class="page archive">
     <div class="header">

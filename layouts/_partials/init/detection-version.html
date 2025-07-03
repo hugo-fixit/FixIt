@@ -1,11 +1,11 @@
-{{- $version := .Scratch.Get "version" -}}
+{{- $version := hugo.Store.Get "version" -}}
 {{- $latest := $version -}}
-{{- $devOpts := .Scratch.Get "devOpts" -}}
+{{- $devOpts := .Site.Store.Get "devOpts" -}}
 
 {{- /* Check for updates */ -}}
 {{- if $devOpts.c4u -}}
   {{- $url := "https://api.github.com/repos/hugo-fixit/FixIt/releases/latest" -}}
-  {{- $options := dict "headers" (.Scratch.Get "githubTokenHeader") -}}
+  {{- $options := dict "headers" (hugo.Store.Get "githubTokenHeader") -}}
   {{- $latest = (partial "function/get-remote-json" (dict "URL" $url "OPTIONS" $options )).tag_name -}}
 {{- end -}}
 
@@ -24,4 +24,4 @@
   {{- end -}}
 {{- end -}}
 
-{{- .Scratch.Set "latest" $latest -}}
+{{- hugo.Store.Set "latest" $latest -}}

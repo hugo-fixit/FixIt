@@ -1,4 +1,5 @@
-{{- $this := .Scratch.Get "this" -}}
+{{- $noop := .Page.WordCount -}}
+{{- $this := .Page.Store.Get "this" -}}
 {{- $script := $this.script | default slice -}}
 {{- $script = $script | append (slice .Data) -}}
-{{- .Scratch.SetInMap "this" "script" $script -}}
+{{- .Page.Store.SetInMap "this" "script" $script -}}
