@@ -4,7 +4,7 @@
 {{- $commentConfig := dict "enable" false -}}
 
 {{- if $comment.enable -}}
-  {{- $commentConfig = dict "enable" true "expired" (.Scratch.Get "commentExpired" | default false) -}}
+  {{- $commentConfig = dict "enable" true "expired" (.Store.Get "commentExpired" | default false) -}}
   <div id="comments">
     {{- /* Artalk Comment System */ -}}
     {{/*
@@ -16,9 +16,9 @@
     {{- if $artalk.enable -}}
       <div id="artalk" class="comment"></div>
       {{- $source := $cdn.artalkCSS | default (add $artalk.server "/dist/Artalk.css") -}}
-      {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+      {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "scratch/style.html" -}}
       {{- $source := $cdn.artalkJS | default (add $artalk.server "/dist/Artalk.js") -}}
-      {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+      {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "scratch/script.html" -}}
       {{- $commentConfig = dict "el" "#artalk" "pageKey" .Permalink "pageTitle" .Title "pvEl" "artalk-visitor-count" "countEl" "artalk-comment-count" | dict "artalk" | merge $commentConfig -}}
       {{- if (eq $artalk.locale "") | and (eq $.Site.LanguageCode "en") -}}
         {{- $artalk = dict "locale" "en-US" | merge $artalk -}}
@@ -93,7 +93,7 @@
     {{- if $disqus.enable -}}
       <div id="disqus_thread" class="comment"></div>
       {{- $source := printf "https://%v.disqus.com/embed.js" $disqus.shortname -}}
-      {{- dict "Source" $source "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+      {{- dict "Source" $source "Defer" true | dict "Page" . "Data" | partial "scratch/script.html" -}}
       <noscript>
         Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript" rel="external nofollow noopener noreferrer">Disqus</a>.
       </noscript>
@@ -104,9 +104,9 @@
     {{- if $gitalk.enable -}}
       <div id="gitalk" class="comment"></div>
       {{- $source := $cdn.gitalkCSS | default "lib/gitalk/gitalk.css" -}}
-      {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+      {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "scratch/style.html" -}}
       {{- $source := $cdn.gitalkJS | default "lib/gitalk/gitalk.min.js" -}}
-      {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+      {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "scratch/script.html" -}}
       {{- $commentConfig = dict "id" .Date "title" .Title "clientID" $gitalk.clientId "clientSecret" $gitalk.clientSecret "repo" $gitalk.repo "owner" $gitalk.owner "admin" (slice $gitalk.owner) | dict "gitalk" | merge $commentConfig -}}
       <noscript>
         Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk" rel="external nofollow noopener noreferrer">Gitalk</a>.
@@ -118,9 +118,9 @@
     {{- if $valine.enable -}}
       <div id="valine" class="comment"></div>
       {{- $options := dict "targetPath" "lib/valine/valine.min.css" -}}
-      {{- dict "Source" "lib/valine/valine.scss" "ToCSS" $options | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+      {{- dict "Source" "lib/valine/valine.scss" "ToCSS" $options | dict "Page" . "Data" | partial "scratch/style.html" -}}
       {{- $source := $cdn.valineJS | default "lib/valine/Valine.min.js" -}}
-      {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+      {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "scratch/script.html" -}}
       {{- $commentConfig = dict "el" "#valine" "appId" $valine.appId "appKey" $valine.appKey "lang" ($valine.lang | default (T "valineLang")) "visitor" $valine.visitor "recordIP" $valine.recordIP "placeholder" ($valine.placeholder | default (T "comment.valinePlaceholder")) "highlight" (ne $valine.highlight false) "enableQQ" $valine.enableQQ | dict "valine" | merge $commentConfig -}}
       {{- with $valine.avatar -}}
         {{- $commentConfig = dict "avatar" . | dict "valine" | merge $commentConfig -}}
@@ -149,9 +149,9 @@
     {{- if $waline.enable -}}
       <div id="waline" class="comment"></div>
       {{- $source := $cdn.walineCSS | default "lib/waline/waline.css" -}}
-      {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+      {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "scratch/style.html" -}}
       {{- $source := $cdn.walineJS | default "lib/waline/waline.umd.js" -}}
-      {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+      {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "scratch/script.html" -}}
       {{- $commentConfig = dict "el" "#waline" "serverURL" $waline.serverURL "lang" .Lang "dark" "html[data-theme='dark']" | dict "waline" | merge $commentConfig -}}
       {{- $commentConfig = dict "copyright" true "imageUploader" false "highlighter" false "texRenderer" false "search" false | dict "waline" | merge $commentConfig -}}
       {{- with $waline.pageview -}}
@@ -215,7 +215,7 @@
         data-numposts="{{ $facebook.numPosts }}"
       ></div>
       {{- $source := printf "https://connect.facebook.net/%v/sdk.js#xfbml=1&version=v5.0&appId=%v&autoLogAppEvents=1" ($facebook.languageCode | default (T "comment.facebookLanguageCode")) $facebook.appId -}}
-      {{- dict "Source" $source "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+      {{- dict "Source" $source "Defer" true | dict "Page" . "Data" | partial "scratch/script.html" -}}
       <noscript>
         Please enable JavaScript to view the comments powered by <a href="https://developers.facebook.com/docs/plugins/comments/" rel="external nofollow noopener noreferrer">Facebook</a>.
       </noscript>
@@ -242,7 +242,7 @@
       {{- if $telegram.outlined -}}
         {{- $attr = printf `%v data-outlined="1"` $attr -}}
       {{- end -}}
-      {{- dict "Source" "https://comments.app/js/widget.js?2" "Defer" true "Attr" $attr | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+      {{- dict "Source" "https://comments.app/js/widget.js?2" "Defer" true "Attr" $attr | dict "Page" . "Data" | partial "scratch/script.html" -}}
       <noscript>
         Please enable JavaScript to view the comments powered by <a href="https://comments.app/" rel="external nofollow noopener noreferrer">Telegram Comments</a>.
       </noscript>
@@ -252,7 +252,7 @@
     {{- $commento := $comment.commento | default dict -}}
     {{- if $commento.enable -}}
       <div id="commento" class="comment"></div>
-      {{- dict "Source" "https://cdn.commento.io/js/commento.js" "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+      {{- dict "Source" "https://cdn.commento.io/js/commento.js" "Defer" true | dict "Page" . "Data" | partial "scratch/script.html" -}}
       <noscript>
         Please enable JavaScript to view the comments powered by <a href="https://commento.io/" rel="external nofollow noopener noreferrer">Commento</a>.
       </noscript>
@@ -278,7 +278,7 @@
     {{- if $twikoo.enable -}}
       <div id="twikoo"></div>
       {{- $source := $cdn.twikooJS | default "lib/twikoo/twikoo.all.min.js" -}}
-      {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+      {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "scratch/script.html" -}}
       {{- $commentConfig = dict "el" "#twikoo" "envId" $twikoo.envId "lang" .Lang | dict "twikoo" | merge $commentConfig -}}
       {{- with $twikoo.region -}}
         {{- $commentConfig = dict "region" . | dict "twikoo" | merge $commentConfig -}}
@@ -338,23 +338,23 @@
   {{- $params := partial "function/params.html" -}}
   {{- if not $params.lightgallery | and (($artalk.enable | and $artalk.lightgallery) | or ($twikoo.enable | and $twikoo.lightgallery)) -}}
     {{- $source := $cdn.lightgalleryCSS | default "lib/lightgallery/css/lightgallery-bundle.min.css" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "scratch/style.html" -}}
     {{- $source := $cdn.lightgalleryJS | default "lib/lightgallery/lightgallery.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "scratch/script.html" -}}
     {{- $source := $cdn.lightgalleryThumbnailJS | default "lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "scratch/script.html" -}}
     {{- $source := $cdn.lightgalleryZoomJS | default "lib/lightgallery/plugins/zoom/lg-zoom.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "scratch/script.html" -}}
   {{- end -}}
   {{- /* KaTeX for Twikoo */ -}}
   {{- if $twikoo.enable | and $twikoo.katex -}}
     {{- $source := "https://cdn.jsdelivr.net/npm//katex@0.16.22/dist/katex.min.css" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/style.html" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "scratch/style.html" -}}
     {{- $source := "https://cdn.jsdelivr.net/npm//katex@0.16.22/dist/katex.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "scratch/script.html" -}}
     {{- $source := "https://cdn.jsdelivr.net/npm//katex@0.16.22/dist/contrib/auto-render.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "scratch/script.html" -}}
   {{- end -}}
 {{- end -}}
 
-{{- dict "comment" $commentConfig | dict "config" | merge (.Scratch.Get "this") | .Scratch.Set "this" -}}
+{{- dict "comment" $commentConfig | dict "config" | merge (.Store.Get "this") | .Store.Set "this" -}}

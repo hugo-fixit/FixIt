@@ -6,7 +6,7 @@
 {{- define "content" -}}
   {{- $title := cond (.Param "capitalizeTitles") (title .Title) .Title -}}
   {{- $params := partial "function/params.html" -}}
-  {{- $toc := .Scratch.Get "toc" -}}
+  {{- $toc := .Store.Get "toc" -}}
   {{- $tableOfContents := .Fragments.ToHTML ($toc.startlevel | int) ($toc.endlevel | int) ($toc.ordered | default false) -}}
   {{- $showToc := $toc.enable | and (ne $tableOfContents `<nav id="TableOfContents"></nav>`) -}}
 
@@ -85,7 +85,7 @@
           $expirationReminder.enable
           | and (gt (div (sub now.Unix .Lastmod.Unix) 86400) ($expirationReminder.warning | default 180))
           | and $expirationReminder.closeComment -}}
-          {{- .Scratch.Set "commentExpired" true -}}
+          {{- .Store.Set "commentExpired" true -}}
         {{- end -}}
         {{- $comment := .Store.Get "comment" | default dict -}}
         {{- $visitorIcon := dict "Class" "fa-regular fa-eye fa-fw me-1" | partial "plugin/icon.html" -}}
@@ -187,13 +187,13 @@
     {{- partial "single/related.html" . -}}
 
     {{- /* Reward before Footer */ -}}
-    {{- $reward := .Scratch.Get "reward" -}}
+    {{- $reward := .Store.Get "reward" -}}
     {{- if eq $reward.position "before" -}}
       {{- partial "single/reward.html" . -}}
     {{- end -}}
 
     {{- /* Content Encryption */ -}}
-    {{- dict "Content" $content "Password" $params.password "Message" $params.message | partial "plugin/fixit-encryptor.html" -}}
+    {{- dict "Content" $content "Password" $params.password "Message" $params.message "Page" . | partial "plugin/fixit-encryptor.html" -}}
 
     {{- /* Collection Navigation */ -}}
     {{- partial "single/collection-nav.html" . -}}
