@@ -1361,6 +1361,12 @@ class FixIt {
     } catch (err) {
       console.error(err);
     }
+    console.log(
+      `%c FixIt ${this.config.version} %c https://github.com/hugo-fixit %c`,
+      `background: #FF735A;border:1px solid #FF735A; padding: 1px; border-radius: 2px 0 0 2px; color: #fff;`,
+      `border:1px solid #FF735A; padding: 1px; border-radius: 0 2px 2px 0; color: #FF735A;`,
+      'background:transparent;'
+    );
   }
 }
 
