@@ -9,16 +9,16 @@ importers:
   .:
     devDependencies:
       '@hugo-fixit/fixit-releaser':
-        specifier: ^1.2.2
-        version: 1.2.2
+        specifier: ^1.2.3
+        version: 1.2.3
       husky:
         specifier: ^9.1.7
         version: 9.1.7
 
 packages:
 
-  '@hugo-fixit/fixit-releaser@1.2.2':
-    resolution: {integrity: sha512-O7K+YY3eIMkIl4Bu0B31y04BXmr4bwbA2xvJUCATcANQNXf46Kqrp8n5hHZqUwx0MLyHRc/ei6grTU9gI/PP7A==}
+  '@hugo-fixit/fixit-releaser@1.2.3':
+    resolution: {integrity: sha512-7L+QDgnrG/aWV5b2ikoAbbYTsKL7ml7FD43j/txM3IWBnQDp3WVCIWiEvGtAvms9dMJPEOnA2ARhitDFq57EDw==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -101,7 +101,7 @@ packages:
 
 snapshots:
 
-  '@hugo-fixit/fixit-releaser@1.2.2':
+  '@hugo-fixit/fixit-releaser@1.2.3':
     dependencies:
       auto-changelog: 2.5.0
     transitivePeerDependencies:
