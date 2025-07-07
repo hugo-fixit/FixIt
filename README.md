@@ -200,7 +200,7 @@ The FixIt theme balances **simplicity** and **extensibility** with extra [Hugo t
 - [fixit-bundle](https://github.com/hugo-fixit/fixit-bundle)\
   🌲 Bundles the FixIt core theme and all hugo-fixit components into a single component.
 - [cmpt-flyfish](https://github.com/hugo-fixit/cmpt-flyfish)\
-  🐟 A canvas implemented animation effect of small fish swimming.
+  ���� A canvas implemented animation effect of small fish swimming.
 - [cmpt-mdevtools](https://github.com/hugo-fixit/cmpt-mdevtools)\
   Mobile devtools component powered by vConsole and eruda.
 - [cmpt-translate](https://github.com/hugo-fixit/cmpt-translate)\
