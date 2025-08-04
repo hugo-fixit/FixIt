@@ -27,7 +27,7 @@
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hugo-fixit/FixIt?style=flat)](https://github.com/hugo-fixit/FixIt/releases)
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.147.7-ff4088?style=flat&logo=hugo)](https://gohugo.io/)
 [![License](https://img.shields.io/github/license/hugo-fixit/FixIt?style=flat)](/LICENSE)
-[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/hugo-fixit/FixIt)
+[![Gitee star of FixIt](https://gitee.com/lruihao/FixIt/badge/star.svg?theme=dark)](https://gitee.com/lruihao/FixIt/stargazers)
 
 ## 即时预览
 
@@ -81,10 +81,6 @@ pnpx fixit-cli create my-blog
 [docs:generate]: https://github.com/hugo-fixit/docs/generate
 [lruihao-blog]: https://github.com/Lruihao/hugo-blog
 [lruihao-blog:generate]: https://github.com/Lruihao/hugo-blog/generate
-
-### 镜像
-
-Gitee 镜像仓库：<https://gitee.com/lruihao/FixIt>
 
 ## 特色
 
