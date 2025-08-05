@@ -19,15 +19,19 @@
         {{- $pages := (where .Pages "Params.Weight" "!=" nil) | append (where .Pages "Params.Weight" "eq" nil).ByDate -}}
         {{- with $pages.Next $ -}}
           {{- $capitalizeTitles := .Param "capitalizeTitles" -}}
-          <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ cond $capitalizeTitles (title .LinkTitle) .LinkTitle }}">
+          {{- $title := .Params.shortTitle | default .LinkTitle -}}
+          {{- $title = cond $capitalizeTitles (title $title) $title -}}
+          <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ $title }}">
             {{- dict "Class" "fa-solid fa-angle-left fa-fw" | partial "plugin/icon.html" -}}
-            <span>{{- cond $capitalizeTitles (title .LinkTitle) .LinkTitle -}}</span>
+            <span>{{ $title }}</span>
           </a>
         {{- end -}}
         {{- with $pages.Prev $ -}}
           {{- $capitalizeTitles := .Param "capitalizeTitles" -}}
-          <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ cond $capitalizeTitles (title .LinkTitle) .LinkTitle }}">
-            <span>{{- cond $capitalizeTitles (title .LinkTitle) .LinkTitle -}}</span>
+          {{- $title := .Params.shortTitle | default .LinkTitle -}}
+          {{- $title = cond $capitalizeTitles (title $title) $title -}}
+          <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ $title }}">
+            <span>{{ $title }}</span>
             {{- dict "Class" "fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
           </a>
         {{- end -}}

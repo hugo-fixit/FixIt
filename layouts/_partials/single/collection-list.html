@@ -20,7 +20,8 @@
           <ul class="collection-list">
             {{- range $key, $page := $pages -}}
               {{- $capitalizeTitles := $page.Param "capitalizeTitles" -}}
-              {{- $title := cond $capitalizeTitles (title $page.LinkTitle) $page.LinkTitle -}}
+              {{- $title := $page.Params.shortTitle | default $page.LinkTitle -}}
+              {{- $title = cond $capitalizeTitles (title $title) $title -}}
               <li class="collection-item">
                 {{- if $.Eq $page -}}
                   {{- $currentKey = $key -}}
