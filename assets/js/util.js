@@ -1,9 +1,14 @@
 export default class Util {
   forEach(elements, handler) {
     elements = elements || [];
+    const promises = [];
     for (let i = 0; i < elements.length; i++) {
-      handler(elements[i]);
+      const result = handler(elements[i], i);
+      if (result instanceof Promise) {
+        promises.push(result);
+      }
     }
+    return Promise.all(promises);
   }
 
   getScrollTop() {
