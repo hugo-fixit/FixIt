@@ -699,7 +699,12 @@ mainSections = []
     loop = false
 
   # FixIt 0.2.15 | NEW Mermaid config
+  # See https://github.com/mermaid-js/mermaid
   [params.mermaid]
+    # FixIt 0.4.0 | NEW Mermaid ESM module CDN source
+    cdn = "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs"
+    # FixIt 0.4.0 | NEW ZenUML ESM module CDN source
+    zenuml = "https://cdn.jsdelivr.net/npm/@mermaid-js/mermaid-zenuml/dist/mermaid-zenuml.esm.min.mjs"
     # For values, see https://mermaid.js.org/config/theming.html#available-themes
     themes = ["default", "dark"]
 

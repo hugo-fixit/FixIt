@@ -371,7 +371,7 @@ class FixIt {
     const $breadcrumbContainer = document.querySelector('.breadcrumb-container.sticky')
     this.breadcrumbHeight = $breadcrumbContainer?.clientHeight ?? 0;
     if (this.breadcrumbHeight) {
-      document.querySelector('main.container')?.style.setProperty('--fi-breadcrumb-height', `${this.breadcrumbHeight}px`);
+      document.querySelector('main.fi-container')?.style.setProperty('--fi-breadcrumb-height', `${this.breadcrumbHeight}px`);
     }
   }
 
@@ -567,11 +567,11 @@ class FixIt {
       const $tocLiElements = $tocCore.getElementsByTagName('li');
       const $headingElements = document.getElementsByClassName('heading-element');
       const headerHeight = document.getElementById('header-desktop').offsetHeight;
-      document.querySelector('.container').addEventListener('resize', () => {
-        $toc.style.marginBottom = `${document.querySelector('.container').clientHeight - document.querySelector('.post-footer').offsetTop}px`;
+      document.querySelector('.fi-container').addEventListener('resize', () => {
+        $toc.style.marginBottom = `${document.querySelector('.fi-container').clientHeight - document.querySelector('.post-footer').offsetTop}px`;
       });
       this._tocOnScroll = this._tocOnScroll || (() => {
-        $toc.style.marginBottom = `${document.querySelector('.container').clientHeight - document.querySelector('.post-footer').offsetTop}px`;
+        $toc.style.marginBottom = `${document.querySelector('.fi-container').clientHeight - document.querySelector('.post-footer').offsetTop}px`;
         this.util.forEach($tocLinkElements, ($tocLink) => {
           $tocLink.classList.remove('active');
         });
