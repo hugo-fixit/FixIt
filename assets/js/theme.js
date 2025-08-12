@@ -635,33 +635,49 @@ class FixIt {
       });
     }
   }
-
   initMermaid() {
-    if (!this.config.mermaid) {
-      return;
-    }
-    const _initializeAndRun = () => {
-      const themes = this.config.mermaid.themes ?? ['default', 'dark'];
+    if (!this.config.mermaid) return;
+
+    const themes = this.config.mermaid.themes ?? ['default', 'dark'];
+    let processing = false;
+    let delayTask = null;
+
+    const loadMermaid = async () => {
+      processing = true;
       window.mermaid.initialize({
-        securityLevel: 'loose',
-        startOnLoad: false,
         theme: this.isDark ? themes[1] : themes[0],
       });
-      window.mermaid.run()
-    }
-    _initializeAndRun()
+      await window.mermaid.run();
+      processing = false;
+      if (delayTask && delayTask instanceof Function) {
+        delayTask()
+        delayTask = null;
+      }
+    };
+
+    const reloadMermaid = async () => {
+      await this.util.forEach(document.querySelectorAll('.mermaid[data-processed]'), (el) => {
+        el.replaceChild(el.nextElementSibling.content.cloneNode(true), el.firstChild);
+        el.removeAttribute('data-processed');
+      });
+      loadMermaid()
+    };
+
     this.switchThemeEventSet.add(() => {
-      // Reinitialize and run mermaid when theme changes.
-      this.util.forEach(document.querySelectorAll('.mermaid[data-processed]'), ($mermaid) => {
-        $mermaid.dataset.processed = ''
-        $mermaid.innerHTML = ''
-        $mermaid.appendChild($mermaid.nextElementSibling.content.cloneNode(true))
-      })
-      _initializeAndRun()
+      if (processing) {
+        // console.log('delay the reload');
+        delayTask = reloadMermaid;
+        return;
+      }
+      // console.log('reload immediately');
+      reloadMermaid();
     });
-    this.beforeprintEventSet.add(() => { 
-      // Set the theme to neutral when printing.
+
+    this.beforeprintEventSet.add(() => {
+      // Optionally set theme to 'neutral' for printing if required
     });
+
+    loadMermaid();
   }
 
   initEcharts() {
