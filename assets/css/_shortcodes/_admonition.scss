@@ -7,11 +7,24 @@
   @include border-radius($global-border-radius);
 
   .admonition-title {
-    font-weight: bold;
+    font-weight: var(--admonition-title-font-weight, bold);
     margin: 0 -0.75rem;
     padding: 0.25rem 1.8rem;
     border-bottom: 1px solid;
     @include border-radius(0);
+
+    strong {
+      font-weight: bolder;
+      text-shadow: 0 0.05rem 0.05rem rgba(0, 0, 0, 0.2);
+
+      [data-theme='dark'] & {
+        text-shadow: 0 0.05rem 0.05rem rgba(255, 255, 255, 0.2);
+      }
+    }
+
+    &:has(+ .details-content > .admonition-content:empty) {
+      --admonition-title-font-weight: normal;
+    }
   }
 
   .admonition-content {
