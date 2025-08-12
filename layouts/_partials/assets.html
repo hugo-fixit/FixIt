@@ -130,14 +130,10 @@
 
 {{- /* mermaid */ -}}
 {{- if .Store.Get "hasMermaid" -}}
-  {{- $config = dict "themes" .Site.Params.mermaid.themes | dict "mermaid" | merge $config -}}
-  <script type="module">
-    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.3.0/dist/mermaid.esm.min.mjs';
-    // Style conflict with ZenUML
-    // import zenuml from 'https://cdn.jsdelivr.net/npm/@mermaid-js/mermaid-zenuml@0.2.0/dist/mermaid-zenuml.esm.min.mjs'
-    // await mermaid.registerExternalDiagrams([zenuml]);
-    window.mermaid = mermaid;
-  </script>
+  {{- $mermaid := .Param "mermaid" -}}
+  {{- $content := printf "import mermaid from %q; import zenuml from %q; await mermaid.registerExternalDiagrams([zenuml]); window.mermaid = mermaid;" $mermaid.cdn $mermaid.zenuml -}}
+  {{- dict "Content" $content "Attr" `type="module"` | dict "Page" $ "Data" | partial "store/script.html" -}}
+  {{- $config = dict "themes" $mermaid.themes | dict "mermaid" | merge $config -}}
 {{- end -}}
 
 {{- /* ECharts */ -}}

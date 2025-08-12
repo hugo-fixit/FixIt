@@ -50,7 +50,7 @@
     <script {{ $attrs | safeHTMLAttr }}></script>
   {{- else -}}
     {{- with .Content -}}
-      <script>{{ . | safeJS }}</script>
+      <script{{ with $.Attr }} {{ . | safeHTMLAttr }}{{ end }}>{{ . | safeJS }}</script>
     {{- end -}}
   {{- end -}}
 {{- end -}}

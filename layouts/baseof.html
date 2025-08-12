@@ -26,7 +26,7 @@
       {{- partial "header.html" . -}}
       {{- partial "breadcrumb.html" . -}}
       {{- $toc := .Store.Get "toc" -}}
-      <main class="container{{ if (eq $toc.enable true) | and (eq $toc.position `left`) }} container-reverse{{ end }}">
+      <main class="fi-container"{{ if (eq $toc.enable true) | and (eq $toc.position `left`) }} data-reverse{{ end }}>
         {{- block "content" . }}{{ end -}}
       </main>
       {{- partialCached "footer.html" . -}}
