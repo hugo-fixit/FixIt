@@ -519,6 +519,27 @@ class FixIt {
     });
   }
 
+  /**
+   * init diagram copy button
+   */
+  initDiagramCopyBtn() {
+    this.util.forEach(document.querySelectorAll('.diagram-copy-btn'), ($btn) => {
+      $btn.addEventListener('click', () => {
+        const _tempEl = document.createElement('div');
+        _tempEl.appendChild($btn.parentElement.querySelector('template').content.cloneNode(true));
+        const code = _tempEl.innerText.trim();
+        this.util.copyText(code).then(() => {
+          $btn.toggleAttribute('data-copied', true);
+          setTimeout(() => {
+            $btn.toggleAttribute('data-copied', false);
+          }, 2000);
+        }, () => {
+          console.error('Clipboard write failed!', 'Your browser does not support clipboard API!');
+        });
+      }, false);
+    });
+  }
+
   initTable(target = document) {
     this.util.forEach(target.querySelectorAll('.content table'), ($table) => {
       const $wrapper = document.createElement('div');
@@ -1123,6 +1144,7 @@ class FixIt {
         this.initDetails();
         this.initLightGallery();
         this.initCodeWrapper();
+        this.initDiagramCopyBtn();
         this.initTable();
         this.initMermaid();
         this.initEcharts();
@@ -1142,6 +1164,7 @@ class FixIt {
         this.initDetails($content);
         this.initLightGallery();
         this.initCodeWrapper();
+        this.initDiagramCopyBtn();
         this.initTable($content);
         this.initMermaid();
         this.initEcharts();
@@ -1343,6 +1366,7 @@ class FixIt {
         this.initDetails();
         this.initLightGallery();
         this.initCodeWrapper();
+        this.initDiagramCopyBtn();
         this.initTable();
         this.initMermaid();
         this.initEcharts();

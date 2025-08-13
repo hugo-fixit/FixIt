@@ -5,6 +5,7 @@
   {{- $title = site.Title -}}
 {{- end -}}
 
+{{/*  FIXME)) use relURL for rel permalink */}}
 {{- if not .Site.Params.app.noFavicon -}}
   {{- with .Site.Params.app.svgFavicon -}}
     <link rel="icon" href="{{ . }}">
