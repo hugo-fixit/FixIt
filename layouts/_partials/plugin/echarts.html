@@ -1,4 +1,4 @@
-{{- /* Echarts support for code fences extended and shortcodes. */ -}}
+{{- /* ECharts support for code fences extended and shortcodes. */ -}}
 {{- $width := .Options.width | default "100%" -}}
 {{- $height := .Options.height | default "30rem" -}}
 {{- $js := .Options.js | default false -}}
@@ -6,6 +6,9 @@
 {{- $data := .Options.data -}}
 {{- $file := .Options.file -}}
 {{- $attrs := printf `style="width: %v; height: %v;"` $width $height -}}
+
+<div class="echarts-container">
+{{- dict "Label" "Copy ECharts code" | partial "plugin/diagram-copy-btn.html" -}}
 <div class="echarts" {{ $attrs | safeHTMLAttr }}></div>
 {{- $content := strings.TrimSpace .Inner -}}
 {{- if $js | or (hasSuffix $file ".js") -}}
@@ -38,3 +41,5 @@
   {{- end -}}
   <template>{{ $content | jsonify }}</template>
 {{- end -}}
+</div>
+{{- /* EOF */ -}}
