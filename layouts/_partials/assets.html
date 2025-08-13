@@ -106,7 +106,6 @@
 
   {{- /* MathJax */ -}}
   {{- if eq $math.type "mathjax" -}}
-    {{/*  TODO improve MathJax setup. e.g. content encryption, Twikoo math etc.  */}}
     {{- $mathjax := $math.mathjax -}}
     {{- $source := "js/lib/load-mathjax.js" -}}
     {{- $options := dict "targetPath" "js/lib/load-mathjax.min.js" "minify" hugo.IsProduction -}}
