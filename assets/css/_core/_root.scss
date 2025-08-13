@@ -2,42 +2,42 @@
   // Note: Custom variable values only support SassScript inside `#{}`.
   // TODO migrate SCSS variables to CSS variables
 
-  --#{$prefix}global-font-color: #{$global-font-color};
-  --#{$prefix}global-border-color: #{$global-border-color};
+  #{$rootPrefix}global-font-color: #{$global-font-color};
+  #{$rootPrefix}global-border-color: #{$global-border-color};
 
   // Theme colors variables
   @each $color, $value in $theme-colors {
-    --#{$prefix}#{$color}: #{$value};
+    #{$rootPrefix}#{$color}: #{$value};
   }
 
   // Scroll margin top and Stack sticky top related
-  --#{$prefix}scroll-mt: calc(#{$header-height} + #{$global-scroll-margin-top});
+  #{$rootPrefix}scroll-mt: calc(#{$header-height} + #{$global-scroll-margin-top});
 
   // Set breadcrumb height to 0px if breadcrumb is disabled
-  --#{$prefix}breadcrumb-height: 0px;
+  #{$rootPrefix}breadcrumb-height: 0px;
 
   // hr / divider style
-  --#{$prefix}hr-background-color: #{darken($global-border-color, 5%)};
-  --#{$prefix}hr-before-color: #{lighten($single-link-hover-color, 4%)};
-  --#{$prefix}divider-edge-weak: linear-gradient(to right, transparent, var(--#{$prefix}divider-bg, #d0d0d5), transparent);
+  #{$rootPrefix}hr-background-color: #{darken($global-border-color, 5%)};
+  #{$rootPrefix}hr-before-color: #{lighten($single-link-hover-color, 4%)};
+  #{$rootPrefix}divider-edge-weak: linear-gradient(to right, transparent, var(#{$rootPrefix}divider-bg, #d0d0d5), transparent);
 
   // Scrollbar related variables
-  --#{$prefix}scrollbar-thumb-color: #{$scrollbar-color};
-  --#{$prefix}scrollbar-thumb-hover-color: #{$scrollbar-hover-color};
-  --#{$prefix}scrollbar-track-color: transparent;
-  --#{$prefix}scrollbar-width: thin;
-  --#{$prefix}scrollbar-width-legacy: 12px;
+  #{$rootPrefix}scrollbar-thumb-color: #{$scrollbar-color};
+  #{$rootPrefix}scrollbar-thumb-hover-color: #{$scrollbar-hover-color};
+  #{$rootPrefix}scrollbar-track-color: transparent;
+  #{$rootPrefix}scrollbar-width: thin;
+  #{$rootPrefix}scrollbar-width-legacy: 12px;
 }
 
 // Dark theme
 [data-theme=dark] {
-  --#{$prefix}global-font-color: #{$global-font-color-dark};
-  --#{$prefix}global-border-color: #{$global-border-color-dark};
+  #{$rootPrefix}global-font-color: #{$global-font-color-dark};
+  #{$rootPrefix}global-border-color: #{$global-border-color-dark};
 
   @each $color, $value in $theme-colors {
-    --#{$prefix}#{$color}: #{darken($value, 5%)};
+    #{$rootPrefix}#{$color}: #{darken($value, 5%)};
   }
 
-  --#{$prefix}hr-background-color: #{lighten($global-border-color-dark, 5%)};
-  --#{$prefix}hr-before-color: #{darken($global-link-hover-color-dark, 4%)};
+  #{$rootPrefix}hr-background-color: #{lighten($global-border-color-dark, 5%)};
+  #{$rootPrefix}hr-before-color: #{darken($global-link-hover-color-dark, 4%)};
 }

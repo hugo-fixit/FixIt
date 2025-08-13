@@ -19,7 +19,8 @@
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="{{ dict "Date" ("2006-01-02 15:04:05" | .Lastmod.Format) | T "single.updatedOnDate" }}">
+        {{- $updateTitle := dict "Date" ("2006-01-02 15:04:05" | .Lastmod.Format) | T "single.updatedOnDate" -}}
+        <span title="{{ $updateTitle }}">
           {{- with .Lastmod | dateFormat (.Site.Params.dateformat | default "2006-01-02") -}}
             {{- dict "Date" . | T "single.updatedOnDate" -}}&nbsp;
             {{- if $gitRepo -}}
@@ -98,12 +99,15 @@
       {{- if $tagTerms -}}
         {{- dict "Class" "fa-solid fa-tags fa-fw me-1" | partial "plugin/icon.html" -}}
         {{- range $tagTerms -}}
-          <a href="{{ partial "function/escapeurl.html" .RelPermalink }}" class="post-tag" title="{{ printf "%v - %v" (T "tags") .LinkTitle }}">{{ .LinkTitle }}</a>
+          {{- $href := partial "function/escapeurl.html" .RelPermalink -}}
+          {{- $title := printf "%v - %v" (T "tags") .LinkTitle -}}
+          <a href="{{ $href }}" class="post-tag" title="{{ $title }}">{{ .LinkTitle }}</a>
         {{- end -}}
       {{- end -}}
     </section>
     <section>
-      <span><a href="javascript:void(0);" onclick="window.history.back();">{{ T "single.back" }}</a></span>&nbsp;|&nbsp;<span><a href="{{ .Site.Store.Get "homeRelPermalink" }}">{{ T "single.home" }}</a></span>
+      {{- $relURL := relURL "" -}}
+      <span><a href="javascript:void(0);" onclick="window.history.back();">{{ T "single.back" }}</a></span>&nbsp;|&nbsp;<span><a href="{{ $relURL }}">{{ T "single.home" }}</a></span>
     </section>
   </div>
 

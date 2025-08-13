@@ -131,7 +131,7 @@
 
   // 确保打印时没有 scrollbar
   :root {
-    --fi-scrollbar-width: none !important;
+    #{$rootPrefix}scrollbar-width: none !important;
   }
 
   *::-webkit-scrollbar {

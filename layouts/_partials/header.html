@@ -1,11 +1,11 @@
 {{- $buildDrafts := .Site.BuildDrafts -}}
-{{- $homeRelPermalink := .Site.Store.Get "homeRelPermalink" -}}
+{{- $relURL := relURL "" -}}
 
 {{- /* Desktop header */ -}}
 <header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper"{{ if .Site.Params.githubCorner.enable }} data-github-corner="{{ .Site.Params.githubCorner.position }}"{{ end }}>
     <div class="header-title">
-      <a href="{{ $homeRelPermalink }}" title="{{ .Site.Title }}">
+      <a href="{{ $relURL }}" title="{{ .Site.Title }}">
         {{- with .Site.Params.header.title -}}
           {{- with .logo -}}
             {{- dict "Src" . "Class" "logo" "Alt" $.Site.Title "Width" 32 "Height" 32 | partial "plugin/image.html" -}}
@@ -157,7 +157,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="{{ $homeRelPermalink }}" title="{{ .Site.Title }}">
+        <a href="{{ $relURL }}" title="{{ .Site.Title }}">
           {{- with .Site.Params.header.title -}}
             {{- with .logo -}}
               {{- dict "Src" . "Class" "logo" "Alt" $.Site.Title "Width" 26 "Height" 26 | partial "plugin/image.html" -}}

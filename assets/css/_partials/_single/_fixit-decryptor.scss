@@ -1,7 +1,7 @@
 .fixit-decryptor-container {
   font-family: $global-font-family;
   text-align: center;
-  margin-block: var(--fixit-decryptor-margin-block);
+  margin-block: var(#{$rootPrefix}decryptor-margin-block);
 
   .fixit-decryptor-loading {
     vertical-align: middle;
@@ -90,7 +90,7 @@ fixit-encryptor {
 // fixit-encryptor for for the encrypted pages
 article fixit-encryptor {
   .fixit-decryptor-container {
-    --fixit-decryptor-margin-block: 2rem;
+    #{$rootPrefix}decryptor-margin-block: 2rem;
   }
   &.decrypted > .fixit-decryptor-container {
     .fixit-decryptor-loading,
@@ -108,7 +108,7 @@ article fixit-encryptor {
 // fixit-encryptor shortcodes
 #content fixit-encryptor {
   .fixit-decryptor-container {
-    --fixit-decryptor-margin-block: 1rem;
+    #{$rootPrefix}decryptor-margin-block: 1rem;
   }
   &.decrypted > .fixit-decryptor-container {
     display: none;

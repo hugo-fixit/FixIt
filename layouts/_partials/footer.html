@@ -42,7 +42,7 @@
           {{- /* Author */ -}}
           {{- if ne $footerConfig.author false -}}
             <span class="author" itemprop="copyrightHolder">
-              {{ partial "plugin/link.html" (dict "Destination" ($.Site.Params.author.link | default (.Site.Store.Get "homeRelPermalink")) "Content" .Site.Params.author.name) -}}
+              {{ partial "plugin/link.html" (dict "Destination" ($.Site.Params.author.link | default (relURL "")) "Content" .Site.Params.author.name) -}}
             </span>
           {{- end -}}
 

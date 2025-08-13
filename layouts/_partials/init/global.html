@@ -1,9 +1,3 @@
-{{- /* Set site home relative permalink */ -}}
-{{- $homeRelPermalink := .Site.Home.RelPermalink -}}
-{{- $homeRelPermalink = strings.TrimSuffix "archives/" $homeRelPermalink -}}
-{{- $homeRelPermalink = strings.TrimSuffix "offline/" $homeRelPermalink -}}
-{{- .Site.Store.Set "homeRelPermalink" $homeRelPermalink -}}
-
 {{- /* Set pages of main sections */ -}}
 {{- $pages := where .Site.RegularPages "Section" "in" .Site.MainSections -}}
 {{- $pages = $pages | union (where .Site.RegularPages "Type" "in" .Site.MainSections) -}}

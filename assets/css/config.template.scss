@@ -1,0 +1,11 @@
+{{- $loading := resources.Get "images/loading.svg" | minify -}}
+
+@charset "utf-8";
+
+@import "_variables";
+$base: "{{ relURL "" }}" !default;
+
+:root {
+  #{$rootPrefix}base: "#{$base}";
+  #{$rootPrefix}loading-img: url("{{ $loading.RelPermalink }}");
+}
