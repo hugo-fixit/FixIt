@@ -649,8 +649,8 @@ class FixIt {
       });
       await window.mermaid.run();
       processing = false;
-      if (delayTask && delayTask instanceof Function) {
-        delayTask()
+      if (delayTask && typeof delayTask === 'function') {
+        await delayTask();
         delayTask = null;
       }
     };
@@ -660,7 +660,7 @@ class FixIt {
         el.replaceChild(el.nextElementSibling.content.cloneNode(true), el.firstChild);
         el.removeAttribute('data-processed');
       });
-      loadMermaid()
+      await loadMermaid();
     };
 
     this.switchThemeEventSet.add(() => {
@@ -670,7 +670,7 @@ class FixIt {
         return;
       }
       // console.log('reload immediately');
-      reloadMermaid();
+      reloadMermaid().catch(console.error);
     });
 
     this.beforeprintEventSet.add(() => {

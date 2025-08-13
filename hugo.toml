@@ -702,9 +702,12 @@ mainSections = []
   # See https://github.com/mermaid-js/mermaid
   [params.mermaid]
     # FixIt 0.4.0 | NEW Mermaid ESM module CDN source
-    cdn = "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs"
+    # default is https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs
+    cdn = ""
     # FixIt 0.4.0 | NEW ZenUML ESM module CDN source
-    zenuml = "https://cdn.jsdelivr.net/npm/@mermaid-js/mermaid-zenuml/dist/mermaid-zenuml.esm.min.mjs"
+    # default is empty, you can set it to a CDN source to enable ZenUML support
+    # e.g. https://cdn.jsdelivr.net/npm/@mermaid-js/mermaid-zenuml/dist/mermaid-zenuml.esm.min.mjs
+    zenuml = ""
     # For values, see https://mermaid.js.org/config/theming.html#available-themes
     themes = ["default", "dark"]
 

@@ -131,7 +131,12 @@
 {{- /* mermaid */ -}}
 {{- if .Store.Get "hasMermaid" -}}
   {{- $mermaid := .Param "mermaid" -}}
-  {{- $content := printf "import mermaid from %q; import zenuml from %q; await mermaid.registerExternalDiagrams([zenuml]); window.mermaid = mermaid;" $mermaid.cdn $mermaid.zenuml -}}
+  {{- $mermaidCDN := $mermaid.cdn | default "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs" -}}
+  {{- $content := printf "import mermaid from %q;" $mermaidCDN -}}
+  {{- with $mermaid.zenuml -}}
+    {{- $content = printf "%v import zenuml from %q; await mermaid.registerExternalDiagrams([zenuml]);" $content . -}}
+  {{- end -}}
+  {{- $content = printf "%v window.mermaid = mermaid;" $content -}}
   {{- dict "Content" $content "Attr" `type="module"` | dict "Page" $ "Data" | partial "store/script.html" -}}
   {{- $config = dict "themes" $mermaid.themes | dict "mermaid" | merge $config -}}
 {{- end -}}
