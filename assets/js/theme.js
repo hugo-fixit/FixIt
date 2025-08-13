@@ -645,6 +645,8 @@ class FixIt {
     const loadMermaid = async () => {
       processing = true;
       window.mermaid.initialize({
+        securityLevel: 'loose',
+        startOnLoad: false,
         theme: this.isDark ? themes[1] : themes[0],
       });
       await window.mermaid.run();
