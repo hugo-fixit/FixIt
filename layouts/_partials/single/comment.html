@@ -348,11 +348,12 @@
   {{- end -}}
   {{- /* KaTeX for Twikoo */ -}}
   {{- if $twikoo.enable | and $twikoo.katex -}}
-    {{- $source := "https://cdn.jsdelivr.net/npm//katex@0.16.22/dist/katex.min.css" -}}
+    {{- $katexVersion := "0.16.22" -}}
+    {{- $source := printf "https://cdn.jsdelivr.net/npm/katex@%s/dist/katex.min.css" $katexVersion -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
-    {{- $source := "https://cdn.jsdelivr.net/npm//katex@0.16.22/dist/katex.min.js" -}}
+    {{- $source := printf "https://cdn.jsdelivr.net/npm/katex@%s/dist/katex.min.js" $katexVersion -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-    {{- $source := "https://cdn.jsdelivr.net/npm//katex@0.16.22/dist/contrib/auto-render.min.js" -}}
+    {{- $source := printf "https://cdn.jsdelivr.net/npm/katex@%s/dist/contrib/auto-render.min.js" $katexVersion -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- end -}}
 {{- end -}}

@@ -107,8 +107,8 @@
   {{- /* MathJax */ -}}
   {{- if eq $math.type "mathjax" -}}
     {{- $mathjax := $math.mathjax -}}
-    {{- $source := "js/lib/load-mathjax.js" -}}
-    {{- $options := dict "targetPath" "js/lib/load-mathjax.min.js" "minify" hugo.IsProduction -}}
+    {{- $source := "js/lib/mathjax.js" -}}
+    {{- $options := dict "targetPath" "js/lib/mathjax.min.js" "minify" hugo.IsProduction -}}
     {{- $mathjaxOpts := $mathjax.options | default dict -}}
     {{- $mathjaxOpts = dict "enableMenu" $mathjaxOpts.enablemenu | merge $mathjaxOpts -}}
     {{- $params := dict
