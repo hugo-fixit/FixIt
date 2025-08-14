@@ -695,21 +695,33 @@ class FixIt {
       await loadMermaid();
     };
 
-    this.switchThemeEventSet.add(() => {
-      if (processing) {
-        console.warn('Mermaid is still processing, delaying the reload.');
-        delayTask = reloadMermaid;
-        return;
-      }
-      // console.log('reload immediately');
-      reloadMermaid().catch(console.error);
-    });
+    const waitForMermaid = () => {
+      return new Promise((resolve) => {
+        const timer = setInterval(() => {
+          if (window.mermaid && window.mermaid.initialize) {
+            clearInterval(timer);
+            resolve();
+          }
+        }, 100);
+      });
+    };
 
-    this.beforeprintEventSet.add(() => {
-      // Optionally set theme to 'neutral' for printing if required
-    });
+    waitForMermaid().then(() => {
+      loadMermaid();
+      this.switchThemeEventSet.add(() => {
+        if (processing) {
+          console.warn('Mermaid is still processing, delaying the reload.');
+          delayTask = reloadMermaid;
+          return;
+        }
+        // console.log('reload immediately');
+        reloadMermaid().catch(console.error);
+      });
 
-    loadMermaid();
+      this.beforeprintEventSet.add(() => {
+        // Optionally set theme to 'neutral' for printing if required
+      });
+    })
   }
 
   initEcharts() {
