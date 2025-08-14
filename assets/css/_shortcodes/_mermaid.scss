@@ -2,11 +2,11 @@
   position: relative;
   overflow: hidden !important;
 
-  &[data-rendered] {
+  &[data-processed] {
     text-align: center;
   }
 
-  &:not([data-rendered])::before {
+  &:not([data-processed])::before {
     content: '';
     position: absolute;
     top: 0;

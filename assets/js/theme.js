@@ -665,16 +665,18 @@ class FixIt {
 
     const loadMermaid = async () => {
       processing = true;
+      // https://mermaid.js.org/config/schema-docs/config.html
       window.mermaid.initialize({
-        securityLevel: 'loose',
         startOnLoad: false,
+        darkMode: this.isDark,
         theme: this.isDark ? themes[1] : themes[0],
+        securityLevel: this.config.mermaid.securityLevel,
+        look: this.config.mermaid.look,
+        fontFamily: this.config.mermaid.fontFamily,
+        altFontFamily: this.config.mermaid.fontFamily
       });
       await window.mermaid.run({
         querySelector: '.mermaid',
-        postRenderCallback: (id) => {
-          document.getElementById(id).parentElement.setAttribute('data-rendered', 'true');
-        },
         suppressErrors: true,
       });
       processing = false;
@@ -686,10 +688,9 @@ class FixIt {
     };
 
     const reloadMermaid = async () => {
-      await this.util.forEach(document.querySelectorAll('.mermaid[data-rendered]'), (el) => {
+      await this.util.forEach(document.querySelectorAll('.mermaid[data-processed]'), (el) => {
         el.removeAttribute('data-processed');
-        el.removeAttribute('data-rendered');
-        el.replaceChild(el.nextElementSibling.content.cloneNode(true), el.firstChild);
+        el.parentElement.replaceChild(el.nextElementSibling.content.cloneNode(true), el);
       });
       await loadMermaid();
     };

@@ -2,6 +2,6 @@
 <div class="diagram-container">
   {{- dict "Label" "Copy Mermaid code" | partial "plugin/diagram-copy-btn.html" -}}
   <pre class="mermaid">{{ .Inner | safeHTML }}</pre>
-  <template>{{ .Inner | safeHTML }}</template>
+  <template><pre class="mermaid">{{ .Inner | safeHTML }}</pre></template>
 </div>
 {{- /* EOF */ -}}

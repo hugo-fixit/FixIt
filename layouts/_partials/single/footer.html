@@ -106,8 +106,8 @@
       {{- end -}}
     </section>
     <section>
-      {{- $relURL := relURL "" -}}
-      <span><a href="javascript:void(0);" onclick="window.history.back();">{{ T "single.back" }}</a></span>&nbsp;|&nbsp;<span><a href="{{ $relURL }}">{{ T "single.home" }}</a></span>
+      {{- $relLangURL := relLangURL "" -}}
+      <span><a href="javascript:void(0);" onclick="window.history.back();">{{ T "single.back" }}</a></span>&nbsp;|&nbsp;<span><a href="{{ $relLangURL }}">{{ T "single.home" }}</a></span>
     </section>
   </div>
 
