@@ -7,7 +7,7 @@
 {{- $file := .Options.file -}}
 {{- $attrs := printf `style="width: %v; height: %v;"` $width $height -}}
 
-<div class="echarts-container">
+<div class="diagram-container">
 {{- dict "Label" "Copy ECharts code" | partial "plugin/diagram-copy-btn.html" -}}
 <div class="echarts" {{ $attrs | safeHTMLAttr }}></div>
 {{- $content := strings.TrimSpace .Inner -}}

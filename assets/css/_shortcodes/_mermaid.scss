@@ -1,7 +1,8 @@
 .mermaid {
   position: relative;
+  overflow: hidden !important;
 
-  &[data-processed='true'] {
+  &[data-processed] {
     text-align: center;
   }
 

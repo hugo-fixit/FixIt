@@ -699,7 +699,7 @@ mainSections = []
     loop = false
 
   # FixIt 0.2.15 | NEW Mermaid config
-  # See https://github.com/mermaid-js/mermaid
+  # See http://fixit.lruihao.cn/documentation/content-management/diagrams-support/mermaid/
   [params.mermaid]
     # FixIt 0.4.0 | NEW Mermaid ESM module CDN source
     # default is https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs
@@ -710,6 +710,14 @@ mainSections = []
     zenuml = ""
     # For values, see https://mermaid.js.org/config/theming.html#available-themes
     themes = ["default", "dark"]
+    # FixIt 0.4.0 | NEW The security level for Mermaid diagrams
+    # optional values: ["strict", "loose", "antiscript", "sandbox"]
+    securityLevel = "loose"
+    # FixIt 0.4.0 | NEW The appearance style for Mermaid diagrams
+    # optional values: ["classic", "handDrawn"]
+    look = "handDrawn"
+    # FixIt 0.4.0 | NEW Specifies the font to be used in the rendered diagrams
+    fontFamily = ""
 
   # FixIt 0.3.13 | NEW Admonitions custom config
   # See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/admonition/#custom-admonitions

@@ -1,3 +1,8 @@
+// Diagram container
+.diagram-container {
+  position: relative;
+}
+
 // Diagram copy button styles
 .diagram-copy-btn {
   position: absolute;
@@ -50,8 +55,15 @@
   }
 }
 
-// Diagram containers
-.mermaid-container,
-.echarts-container {
-  position: relative;
+@media only screen and (min-width: 1201px) {
+  .diagram-container {
+    .diagram-copy-btn {
+      display: none;
+    }
+    &:hover {
+      .diagram-copy-btn {
+        display: block;
+      }
+    }
+  }
 }
