@@ -130,14 +130,10 @@
 {{- /* mermaid */ -}}
 {{- if .Store.Get "hasMermaid" -}}
   {{- $mermaid := .Param "mermaid" -}}
-  {{- $mermaidCDN := $mermaid.cdn | default "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs" -}}
-  {{- $content := printf "import mermaid from %q;" $mermaidCDN -}}
-  {{- with $mermaid.zenuml -}}
-    {{- $content = printf "%v import zenuml from %q; await mermaid.registerExternalDiagrams([zenuml]);" $content . -}}
-  {{- end -}}
-  {{- $content = printf "%v window.mermaid = mermaid;" $content -}}
-  {{- dict "Content" $content "Attr" `type="module"` | dict "Page" $ "Data" | partial "store/script.html" -}}
   {{- $config = dict "themes" $mermaid.themes | dict "mermaid" | merge $config -}}
+  {{- $options := dict "Source" "js/lib/mermaid.js" "Template" "js/lib/mermaid.min.js" -}}
+  {{- $options = dict "Context" . "Minify" true "Fingerprint" $fingerprint "Attr" `type="module"` | merge $options -}}
+  {{- $options | dict "Page" $ "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* ECharts */ -}}

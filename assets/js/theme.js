@@ -670,25 +670,33 @@ class FixIt {
         startOnLoad: false,
         theme: this.isDark ? themes[1] : themes[0],
       });
-      await window.mermaid.run();
+      await window.mermaid.run({
+        querySelector: '.mermaid',
+        postRenderCallback: (id) => {
+          document.getElementById(id).parentElement.setAttribute('data-rendered', 'true');
+        },
+        suppressErrors: true,
+      });
       processing = false;
       if (delayTask && typeof delayTask === 'function') {
-        await delayTask();
+        delayTask();
         delayTask = null;
+        // console.log('Delayed task executed');
       }
     };
 
     const reloadMermaid = async () => {
-      await this.util.forEach(document.querySelectorAll('.mermaid[data-processed]'), (el) => {
-        el.replaceChild(el.nextElementSibling.content.cloneNode(true), el.firstChild);
+      await this.util.forEach(document.querySelectorAll('.mermaid[data-rendered]'), (el) => {
         el.removeAttribute('data-processed');
+        el.removeAttribute('data-rendered');
+        el.replaceChild(el.nextElementSibling.content.cloneNode(true), el.firstChild);
       });
       await loadMermaid();
     };
 
     this.switchThemeEventSet.add(() => {
       if (processing) {
-        // console.log('delay the reload');
+        console.warn('Mermaid is still processing, delaying the reload.');
         delayTask = reloadMermaid;
         return;
       }

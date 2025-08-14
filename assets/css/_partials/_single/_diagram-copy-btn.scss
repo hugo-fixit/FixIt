@@ -1,5 +1,17 @@
+// Diagram container
+.diagram-container {
+  position: relative;
+
+  &:hover {
+    .diagram-copy-btn {
+      display: block;
+    }
+  }
+}
+
 // Diagram copy button styles
 .diagram-copy-btn {
+  display: none;
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
@@ -48,10 +60,4 @@
       display: none;
     }
   }
-}
-
-// Diagram containers
-.mermaid-container,
-.echarts-container {
-  position: relative;
 }
