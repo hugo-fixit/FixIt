@@ -1,7 +1,9 @@
 {{- /* Mermaid support for code fences extended and shortcodes. */ -}}
 <div class="diagram-container">
-  {{- dict "Label" "Copy Mermaid code" | partial "plugin/diagram-copy-btn.html" -}}
   <pre class="mermaid">{{ .Inner | safeHTML }}</pre>
-  <template><pre class="mermaid">{{ .Inner | safeHTML }}</pre></template>
+  <pre class="mermaid-dark">{{ .Inner | safeHTML }}</pre>
+  <pre class="mermaid-neutral">{{ .Inner | safeHTML }}</pre>
+  {{- dict "Label" "Copy Mermaid code" | partial "plugin/diagram-copy-btn.html" -}}
+  <template><pre>{{ .Inner | safeHTML }}</pre></template>
 </div>
 {{- /* EOF */ -}}

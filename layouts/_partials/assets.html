@@ -129,13 +129,6 @@
 
 {{- /* mermaid */ -}}
 {{- if .Store.Get "hasMermaid" -}}
-  {{- $mermaid := .Param "mermaid" -}}
-  {{- $config = dict
-    "themes" $mermaid.themes
-    "securityLevel" $mermaid.securityLevel
-    "look" $mermaid.look
-    "fontFamily" $mermaid.fontFamily
-    | dict "mermaid" | merge $config -}}
   {{- $options := dict "Source" "js/lib/mermaid.js" "Template" "js/lib/mermaid.min.js" -}}
   {{- $options = dict "Context" . "Minify" true "Fingerprint" $fingerprint "Attr" `type="module"` | merge $options -}}
   {{- $options | dict "Page" $ "Data" | partial "store/script.html" -}}
