@@ -17,7 +17,7 @@
 {{- $h5Format := $headingConfig.number.format.h5 | default "{h2}.{h3}.{h4}.{h5} {title}" -}}
 {{- $h6Format := $headingConfig.number.format.h6 | default "{h2}.{h3}.{h4}.{h5}.{h6} {title}" -}}
 {{- $level := .Level -}}
-{{- $maxMarkupLevel := 2 -}}
+{{- $maxMarkupLevel := cond $toc.decreaseH1 2 1 -}}
 
 {{- /* Disable ordered headings on home page */ -}}
 {{- if eq hugo.Context.MarkupScope "home" -}}
@@ -45,8 +45,9 @@
 {{- $attrs = partial "function/trim.html" $attrs -}}
 
 {{- /* Force decrease the markup level to avoid multiple h1 */ -}}
-{{- $markupLevel := cond (gt $maxMarkupLevel $level) $maxMarkupLevel $level -}}
-<h{{ $markupLevel }} {{ $attrs | safeHTMLAttr }}>
+{{- $decreased := gt $maxMarkupLevel $level -}}
+{{- $markupLevel := cond $decreased $maxMarkupLevel $level -}}
+<h{{ $markupLevel }} {{ $attrs | safeHTMLAttr }}{{ with $decreased }} data-decreased{{ end }}>
   {{- $title := .Text -}}
   {{- if $ordered -}}
     {{- /* Add 1 to the current level */ -}}

@@ -1070,6 +1070,8 @@ mainSections = []
       ordered = false
       startLevel = 2
       endLevel = 6
+      # FixIt 0.4.0 | NEW whether to decrease the H1 heading level in content
+      decreaseH1 = false
     # FixIt 0.2.13 | NEW Display a message at the beginning of an article to warn the reader that its content might be expired
     [params.page.expirationReminder]
       enable = false
