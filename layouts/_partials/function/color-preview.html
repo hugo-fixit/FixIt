@@ -1,0 +1,34 @@
+{{- /*
+  Color preview rendering
+  This function adds color visualization to code elements that contain ONLY color values.
+  Supports HEX, RGB, and HSL color formats like GitHub's color preview feature.
+  
+  Examples:
+  `#0969DA` -> displays a blue color preview circle
+  `rgb(9, 105, 218)` -> displays a blue color preview circle  
+  `hsl(212, 92%, 45%)` -> displays a blue color preview circle
+  
+  But excludes:
+  `` `#0969DA` `` -> renders as normal code (syntax example)
+  `test #0969DA` -> renders as normal code (has leading text)
+  ` #0969DA` -> renders as normal code (has leading space)
+  `#0969DA ` -> renders as normal code (has trailing space)
+*/ -}}
+
+{{- $content := . -}}
+
+{{- /* Only apply color preview to code elements that contain EXACTLY a color value and nothing else */ -}}
+
+{{- /* HEX color pattern: code must contain ONLY #RRGGBB (6 digits) */ -}}
+{{- $content = replaceRE `<code>(#[0-9a-fA-F]{6})</code>` `<code class="color-code"><span class="color-preview" style="background-color: $1;" title="Color: $1"></span>$1</code>` $content -}}
+
+{{- /* HEX color pattern: code must contain ONLY #RGB (3 digits) */ -}}
+{{- $content = replaceRE `<code>(#[0-9a-fA-F]{3})</code>` `<code class="color-code"><span class="color-preview" style="background-color: $1;" title="Color: $1"></span>$1</code>` $content -}}
+
+{{- /* RGB color pattern: code must contain ONLY rgb(r,g,b) */ -}}
+{{- $content = replaceRE `<code>(rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\))</code>` `<code class="color-code"><span class="color-preview" style="background-color: $1;" title="Color: $1"></span>$1</code>` $content -}}
+
+{{- /* HSL color pattern: code must contain ONLY hsl(h,s%,l%) */ -}}
+{{- $content = replaceRE `<code>(hsl\(\s*\d+\s*,\s*\d+%\s*,\s*\d+%\s*\))</code>` `<code class="color-code"><span class="color-preview" style="background-color: $1;" title="Color: $1"></span>$1</code>` $content -}}
+
+{{- return $content -}}

@@ -1,0 +1,22 @@
+// Color preview styles for inline code
+.color-code {
+  position: relative;
+  #{$rootPrefix}color-code-size: 0.64em;
+
+  .color-preview {
+    display: inline-block;
+    width: var(#{$rootPrefix}color-code-size);
+    height: var(#{$rootPrefix}color-code-size);
+    border-radius: 50%;
+    margin-right: 0.25em;
+    vertical-align: middle;
+    border: 1px solid;
+    border-color: var(#{$rootPrefix}color-preview-border-color, #d1d9e0b3);
+    pointer-events: none;
+    transform: translateY(-1px);
+
+    [data-theme='dark'] & {
+      #{$rootPrefix}color-preview-border-color: #3d444db3;
+    }
+  }
+}
