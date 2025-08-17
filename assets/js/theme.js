@@ -523,11 +523,11 @@ class FixIt {
    * init diagram copy button
    */
   initDiagramCopyBtn() {
+    const stagingDOM = this.util.getStagingDOM()
     this.util.forEach(document.querySelectorAll('.diagram-copy-btn'), ($btn) => {
       $btn.addEventListener('click', () => {
-        const _tempEl = document.createElement('div');
-        _tempEl.appendChild($btn.parentElement.querySelector('template').content.cloneNode(true));
-        const code = _tempEl.innerText.trim();
+        stagingDOM.stage($btn.parentElement.querySelector('template').content.cloneNode(true))
+        const code = stagingDOM.contentAsText();
         this.util.copyText(code).then(() => {
           $btn.toggleAttribute('data-copied', true);
           setTimeout(() => {
@@ -538,6 +538,7 @@ class FixIt {
         });
       }, false);
     });
+    stagingDOM.destroy();
   }
 
   initTable(target = document) {
@@ -655,73 +656,6 @@ class FixIt {
         $headingMark.parentElement.replaceChild($newHeadingMark, $headingMark);
       });
     }
-  }
-  initMermaid() {
-    if (!this.config.mermaid) return;
-
-    const themes = this.config.mermaid.themes ?? ['default', 'dark'];
-    let processing = false;
-    let delayTask = null;
-
-    const loadMermaid = async () => {
-      processing = true;
-      // https://mermaid.js.org/config/schema-docs/config.html
-      window.mermaid.initialize({
-        startOnLoad: false,
-        darkMode: this.isDark,
-        theme: this.isDark ? themes[1] : themes[0],
-        securityLevel: this.config.mermaid.securityLevel,
-        look: this.config.mermaid.look,
-        fontFamily: this.config.mermaid.fontFamily,
-        altFontFamily: this.config.mermaid.fontFamily
-      });
-      await window.mermaid.run({
-        querySelector: '.mermaid',
-        suppressErrors: true,
-      });
-      processing = false;
-      if (delayTask && typeof delayTask === 'function') {
-        delayTask();
-        delayTask = null;
-        // console.log('Delayed task executed');
-      }
-    };
-
-    const reloadMermaid = async () => {
-      await this.util.forEach(document.querySelectorAll('.mermaid[data-processed]'), (el) => {
-        el.removeAttribute('data-processed');
-        el.parentElement.replaceChild(el.nextElementSibling.content.cloneNode(true), el);
-      });
-      await loadMermaid();
-    };
-
-    const waitForMermaid = () => {
-      return new Promise((resolve) => {
-        const timer = setInterval(() => {
-          if (window.mermaid && window.mermaid.initialize) {
-            clearInterval(timer);
-            resolve();
-          }
-        }, 100);
-      });
-    };
-
-    waitForMermaid().then(() => {
-      loadMermaid();
-      this.switchThemeEventSet.add(() => {
-        if (processing) {
-          console.warn('Mermaid is still processing, delaying the reload.');
-          delayTask = reloadMermaid;
-          return;
-        }
-        // console.log('reload immediately');
-        reloadMermaid().catch(console.error);
-      });
-
-      this.beforeprintEventSet.add(() => {
-        // Optionally set theme to 'neutral' for printing if required
-      });
-    })
   }
 
   initEcharts() {
@@ -1167,7 +1101,6 @@ class FixIt {
         this.initCodeWrapper();
         this.initDiagramCopyBtn();
         this.initTable();
-        this.initMermaid();
         this.initEcharts();
         this.initTypeit();
         this.initMapbox();
@@ -1176,6 +1109,7 @@ class FixIt {
         this.initTocListener();
         this.initPangu();
         this.initMathJax();
+        window.FixItMermaid?.init?.();
         this.util.forEach(document.querySelectorAll('.encrypted-hidden'), ($element) => {
           $element.classList.replace('encrypted-hidden', 'decrypted-shown');
         });
@@ -1187,12 +1121,12 @@ class FixIt {
         this.initCodeWrapper();
         this.initDiagramCopyBtn();
         this.initTable($content);
-        this.initMermaid();
         this.initEcharts();
         this.initTypeit($content);
         this.initMapbox();
         this.initPangu();
         this.initMathJax();
+        window.FixItMermaid?.init?.();
         this.util.forEach($content.querySelectorAll('.encrypted-hidden'), ($element) => {
           $element.classList.replace('encrypted-hidden', 'decrypted-shown');
         });
@@ -1389,7 +1323,6 @@ class FixIt {
         this.initCodeWrapper();
         this.initDiagramCopyBtn();
         this.initTable();
-        this.initMermaid();
         this.initEcharts();
         this.initTypeit();
         this.initMapbox();

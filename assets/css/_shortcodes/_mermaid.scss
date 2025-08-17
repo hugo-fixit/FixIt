@@ -1,9 +1,12 @@
-.mermaid {
+.mermaid,
+.mermaid-dark,
+.mermaid-neutral {
   position: relative;
   overflow: hidden !important;
 
   &[data-processed] {
     text-align: center;
+    margin-block: 0.5rem;
   }
 
   &:not([data-processed])::before {
@@ -13,7 +16,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    backdrop-filter: blur(0.5rem);
+    backdrop-filter: blur(1rem);
     background-position: center;
     background-repeat: no-repeat;
     background-image: var(#{$rootPrefix}loading-img);
@@ -23,5 +26,39 @@
   svg {
     max-width: 100%;
     height: auto; 
+  }
+}
+
+.mermaid {
+  [data-theme='dark'] & {
+    height: 0;
+    padding: 0;
+  }
+}
+
+.mermaid-dark {
+  height: 0;
+  padding: 0 !important;
+
+  [data-theme='dark'] & {
+    height: auto;
+    padding: 0.5rem !important;
+  }
+}
+
+// for print view
+.mermaid-neutral {
+  height: 0;
+  padding: 0 !important;
+}
+
+@media only print {
+  .mermaid,
+  .mermaid-dark {
+    display: none;
+  }
+  .mermaid-neutral {
+    height: auto;
+    padding: 0.5rem !important;
   }
 }
