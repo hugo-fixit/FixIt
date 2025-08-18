@@ -70,8 +70,11 @@ pnpm test:production
 ### Building
 
 ```bash
-# Build the theme (production build with minification)
+# Build demo site
 pnpm build
+
+# Build test site
+pnpm build:test
 ```
 
 ## Project Structure
