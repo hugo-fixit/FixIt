@@ -34,3 +34,12 @@ baseURL = "http://example.org/"
   # FixIt theme version
   version = "0.3.X" # e.g. "0.2.X", "0.2.15", "v0.2.15" etc.
   # ...
+  [params.page]
+    collectionList = true
+    collectionNavigation = true
+  
+  [params.author]
+    name = "Lruihao"
+    email = ""
+    link = "https://lruihao.cn"
+    avatar = "https://lruihao.cn/images/avatar.jpg"

@@ -25,6 +25,8 @@
     "server": "hugo server --source=demo --themesDir ../.. --theme $PWD -D --disableFastRender --navigateToChanged --ignoreCache -O",
     "server:production": "npm run server -- -e production",
     "server:docs": "hugo server --source=../fixit-docs -D --disableFastRender --navigateToChanged --ignoreCache -O",
+    "test": "hugo server --source=test --themesDir ../.. --theme $PWD -D --disableFastRender --navigateToChanged --ignoreCache -O",
+    "test:production": "npm run test -- -e production",
     "version": "fixit-releaser version --prod",
     "postversion": "git push && git push --tags && npm run release",
     "release": "fixit-releaser changelog",
