@@ -2,6 +2,22 @@
 
 Make sure that you follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) while contributing and engaging in the discussions.
 
+## Prerequisites
+
+Before you start contributing, make sure you have the following tools installed:
+
+- **Node.js** (>= 18.0.0) - Required for package management and build tools
+- **Hugo Extended** (>= 0.147.7) - The static site generator
+- **pnpm** - Package manager (recommended)
+
+You can check your installed versions:
+
+```bash
+node --version
+hugo version
+pnpm --version
+```
+
 ## How to contribute to this project
 
 First, fork this repository by clicking the fork button.
@@ -20,20 +36,83 @@ pnpm install
 
 And now you are ready to go!
 
-Here are some useful commands.
+Here are some useful commands for development:
+
+### Development Server
 
 ```bash
-# run a local debugging server with watch
+# Run a local development server with live reload
 pnpm server
-# run a local debugging server with watch in production environment
+
+# Run a local development server in production environment
 pnpm server:production
 ```
 
-If you want to do docs-related theme changes, the simplest way is to have both `FixIt` and `fixit-docs` cloned as sibling directories, and then run:
+### Documentation Development
+
+If you want to work on documentation-related theme changes, the simplest way is to have both `FixIt` and `fixit-docs` cloned as sibling directories, and then run:
 
 ```bash
+# Run documentation server
 pnpm server:docs
 ```
+
+### Testing
+
+```bash
+# Run test server with test content
+pnpm test
+
+# Run test server in production environment
+pnpm test:production
+```
+
+### Building
+
+```bash
+# Build the theme (production build with minification)
+pnpm build
+```
+
+## Project Structure
+
+Understanding the project structure will help you contribute more effectively:
+
+```
+FixIt/
+├── archetypes/         # Content templates
+├── archetypes/         # Archetypes 
+├── assets/             # Theme assets (CSS, JS, images)
+│   ├── css/            # SCSS stylesheets
+│   ├── js/             # JavaScript files
+│   └── lib/            # Third-party libraries
+├── demo/               # Demo site for development
+├── i18n/               # Internationalization files
+├── layouts/            # Hugo template files
+│   ├── _markup/        # Hugo render hooks
+│   ├── _partials/      # Reusable template components
+│   └── _shortcodes/    # Custom shortcodes
+├── static/             # Static files
+├── test/               # Test site content
+├── package.json        # npm scripts and dependencies
+└── hugo.toml           # Default theme configuration
+```
+
+## Development Workflow
+
+1. **Make your changes** in the appropriate directories
+2. **Test locally** using `pnpm server` or `pnpm test`
+3. **Check different environments** with production builds
+4. **Verify documentation** changes with `pnpm server:docs` (if applicable)
+5. **Commit your changes** following the commit message format below
+
+## Pull Request Guidelines
+
+- Create a feature branch from `main`
+- Make your changes with clear, focused commits
+- Test your changes thoroughly
+- Update documentation if needed
+- Submit a pull request with a clear description
 
 Finally, create a new pull request at <https://github.com/hugo-fixit/FixIt/pulls> to submit your contribution 🎉
 
@@ -85,6 +164,6 @@ example:
 | :pencil:<br>:pencil2:                         | Docs     | Docs: revise comments/update documents                       | Adjustment of documents and notes                                                                                                        |
 | :wrench:                                      | Chore    | Chore: update plugin version                                 | Changes in the construction process or auxiliary tools                                                                                   |
 
-> [!note]
+> [!NOTE]
 > The change log is automatically generated based on the commit message.\
-> Use `Chore` type or add `(ignore)` scope to ignore including in.
+> A add `(ignore)` or `(i)` scope to ignore including in.
