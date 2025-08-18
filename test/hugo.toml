@@ -1,15 +1,10 @@
-# =====================================================================================
-# The following is a necessary configuration for the FixIt theme.
-# =====================================================================================
-
 # -------------------------------------------------------------------------------------
 # Hugo Configuration
 # See: https://gohugo.io/getting-started/configuration/
 # -------------------------------------------------------------------------------------
 
-title = "Hugo FixIt Demo"
+title = "Hugo FixIt TEST"
 baseURL = "http://example.org/"
-# theme = "FixIt"
 
 [markup]
   _merge = "shallow"

@@ -1,4 +1,4 @@
-name: Hugo build check
+name: FixIt Test Build
 on:
   pull_request:
     branches: [ main ]
@@ -18,4 +18,4 @@ jobs:
           hugo-version: ${{ vars.HUGO_VERSION || 'latest' }}
           extended: true
       - name: Build Hugo static files
-        run: hugo --source=demo --gc --minify --logLevel info
+        run: hugo --source=test --themesDir ../.. --theme $PWD --gc --minify --logLevel info

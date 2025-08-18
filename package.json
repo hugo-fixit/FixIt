@@ -22,6 +22,7 @@
   "type": "module",
   "scripts": {
     "build": "hugo --source=demo --themesDir ../.. --theme $PWD --gc --minify --logLevel info",
+    "build:test": "hugo --source=test --themesDir ../.. --theme $PWD --gc --minify --logLevel info",
     "server": "hugo server --source=demo --themesDir ../.. --theme $PWD -D --disableFastRender --navigateToChanged --ignoreCache -O",
     "server:production": "npm run server -- -e production",
     "server:docs": "hugo server --source=../fixit-docs -D --disableFastRender --navigateToChanged --ignoreCache -O",
