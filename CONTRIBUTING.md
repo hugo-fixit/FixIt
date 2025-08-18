@@ -84,7 +84,6 @@ Understanding the project structure will help you contribute more effectively:
 ```
 FixIt/
 ├── archetypes/         # Content templates
-├── archetypes/         # Archetypes 
 ├── assets/             # Theme assets (CSS, JS, images)
 │   ├── css/            # SCSS stylesheets
 │   ├── js/             # JavaScript files
