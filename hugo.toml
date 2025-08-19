@@ -348,6 +348,11 @@ mainSections = []
   indexWithSubtitle = false
   # FixIt 0.3.13 | NEW whether to show summary in plain text
   summaryPlainify = false
+  # FixIt 0.4.0 | NEW whether to enable merging missing translations from other languages
+  # when set to true, missing translations from other languages will be merged and displayed
+  # default is false for better performance, especially for single-language sites
+  # set to true if your site has multiple languages and you want to show all content
+  enableTranslationMerge = false
   # FixIt 0.2.14 | NEW FixIt will, by default, inject a theme meta tag in the HTML head on the home page only.
   # You can turn it off, but we would really appreciate if you don’t, as this is a good way to watch FixIt's popularity on the rise.
   disableThemeInject = false
