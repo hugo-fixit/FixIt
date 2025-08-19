@@ -1,5 +1,14 @@
+{{- $pages := .Site.RegularPages }}
+
+{{- /* Merge missing translations from other languages */ -}}
+{{- if .Site.Params.enableTranslationMerge -}}
+  {{- range .Site.Home.Translations -}}
+    {{- $pages = $pages | lang.Merge .Site.RegularPages -}}
+  {{- end -}}
+{{- end -}}
+
 {{- /* Set pages of main sections */ -}}
-{{- $pages := where .Site.RegularPages "Section" "in" .Site.MainSections -}}
+{{- $pages = where $pages "Section" "in" .Site.MainSections -}}
 {{- $pages = $pages | union (where .Site.RegularPages "Type" "in" .Site.MainSections) -}}
 {{- .Site.Store.Set "mainSectionPages" $pages -}}
 
