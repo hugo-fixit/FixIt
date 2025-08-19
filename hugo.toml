@@ -212,9 +212,13 @@ mainSections = []
 # See: https://gohugo.io/content-management/urls/#permalinks
 # -------------------------------------------------------------------------------------
 
-[Permalinks]
-  # posts = ":year/:month/:filename"
-  posts = "posts/:slugorfilename"
+[permalinks]
+  [permalinks.page]
+    # posts = "/p/:slugorcontentbasename"
+  [permalinks.section]
+    # posts = "/posts/:slugorcontentbasename"
+  [permalinks.taxonomy]
+  [permalinks.term]
 
 # -------------------------------------------------------------------------------------
 # Privacy Configuration

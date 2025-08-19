@@ -4,7 +4,13 @@
 # -------------------------------------------------------------------------------------
 
 title = "Hugo FixIt TEST"
-baseURL = "http://example.org/"
+baseURL = "https://demo.fixit.lruihao.cn/test/"
+
+[permalinks]
+  [permalinks.page]
+    posts = "/units/:slugorcontentbasename"
+  [permalinks.section]
+    posts = "/units/"
 
 [markup]
   _merge = "shallow"

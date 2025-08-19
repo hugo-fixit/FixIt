@@ -6,7 +6,7 @@ Make sure that you follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) while contrib
 
 Before you start contributing, make sure you have the following tools installed:
 
-- **Node.js** (>= 18.0.0) - Required for package management and build tools
+- **Node.js** (>= 20.0.0) - Required for package management and build tools
 - **Hugo Extended** (>= 0.147.7) - The static site generator
 - **pnpm** - Package manager (recommended)
 
@@ -38,34 +38,23 @@ And now you are ready to go!
 
 Here are some useful commands for development:
 
-### Development Server
+### Development
 
 ```bash
-# Run a local development server with live reload
-pnpm server
+# Run local server with demo content
+pnpm dev
 
-# Run a local development server in production environment
-pnpm server:production
-```
-
-### Documentation Development
-
-If you want to work on documentation-related theme changes, the simplest way is to have both `FixIt` and `fixit-docs` cloned as sibling directories, and then run:
-
-```bash
-# Run documentation server
-pnpm server:docs
-```
-
-### Testing
-
-```bash
-# Run test server with test content
+# Run local server with test content
 pnpm test
 
-# Run test server in production environment
-pnpm test:production
+# Run local server with documentation (requires fixit-docs as sibling directory)
+pnpm dev:docs
 ```
+
+> [!TIP]
+>
+> - You can run `pnpm dev -e production` or `pnpm test -e production` to check the production environment.
+> - If you want to work on documentation-related theme changes, the simplest way is to have both `FixIt` and `fixit-docs` cloned as sibling directories.
 
 ### Building
 
@@ -75,6 +64,16 @@ pnpm build
 
 # Build test site
 pnpm build:test
+
+# Build both demo and test sites for deployment (includes public directory reorganization)
+pnpm build:vercel
+```
+
+### Preview
+
+```bash
+# Preview the built site locally (requires build:vercel first)
+pnpm preview
 ```
 
 ## Project Structure
@@ -103,9 +102,9 @@ FixIt/
 ## Development Workflow
 
 1. **Make your changes** in the appropriate directories
-2. **Test locally** using `pnpm server` or `pnpm test`
+2. **Test locally** using `pnpm dev` or `pnpm test`
 3. **Check different environments** with production builds
-4. **Verify documentation** changes with `pnpm server:docs` (if applicable)
+4. **Verify documentation** changes with `pnpm dev:docs` (if applicable)
 5. **Commit your changes** following the commit message format below
 
 ## Pull Request Guidelines

@@ -3,6 +3,10 @@ title: Exact Color Match Test
 date: 2025-08-17T17:20:00+08:00
 collections:
   - Tests
+categories:
+  - Markdown
+tags:
+  - Color Preview
 ---
 
 ## 📝 Syntax
