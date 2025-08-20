@@ -47,3 +47,6 @@ baseURL = "https://demo.fixit.lruihao.cn/test/"
 
   [params.mermaid]
     zenuml = "https://cdn.jsdelivr.net/npm/@mermaid-js/mermaid-zenuml/dist/mermaid-zenuml.esm.min.mjs"
+
+  [params.home.posts]
+    paginate = 1

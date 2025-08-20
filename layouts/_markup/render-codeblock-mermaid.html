@@ -1,2 +1,5 @@
 {{- dict "Options" .Attributes "Inner" .Inner | partial "plugin/mermaid.html" -}}
 {{- .Page.Store.Set "hasMermaid" true -}}
+{{- if eq hugo.Context.MarkupScope "home" -}}
+  {{- site.Home.Store.Set "hasMermaid" true -}}
+{{- end -}}

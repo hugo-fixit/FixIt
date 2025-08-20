@@ -17,8 +17,6 @@ The FixIt theme supports two ways to use Mermaid: code block syntax and shortcod
 
 ## Flowchart
 
-### Code Block Syntax
-
 ```mermaid
 flowchart TD
     A[Start] --> B{Is it?}
@@ -28,15 +26,7 @@ flowchart TD
     B ---->|No| E[End]
 ```
 
-### Shortcode Syntax
-
-{{< mermaid >}}
-flowchart LR
-    A[Hard edge] -->|Link text| B(Round edge)
-    B --> C{Decision}
-    C -->|One| D[Result one]
-    C -->|Two| E[Result two]
-{{< /mermaid >}}
+<!--more-->
 
 ## Sequence Diagram
 

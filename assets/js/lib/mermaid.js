@@ -78,8 +78,12 @@ async function loadMermaid({ theme, darkMode, selector }) {
 }
 
 async function initMermaid() {
-  const contentEl = document.getElementById('content');
-  if (!contentEl || !contentEl.innerHTML) return  
+	const mermaidElements = document.querySelectorAll('.mermaid, .mermaid-dark, .mermaid-neutral')
+  if (!mermaidElements.length) return
+	console.log(
+		`%c💫 FixIt Mermaid`,
+		'color: #FF3670; font-weight: bold; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);',
+	)
   const currentTheme = getTheme()
   const nextTheme = getTheme(true)
   const darkMode = document.documentElement.dataset.theme === 'dark'
@@ -94,11 +98,6 @@ window.FixItMermaid = {
   init: initMermaid,
 }
 window.mermaid = mermaid
-
-console.log(
-  `%c💫 FixIt Mermaid`,
-  'color: #FF3670; font-weight: bold; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);',
-)
 
 if (document.readyState !== 'loading') {
   initMermaid()
