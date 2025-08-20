@@ -44,3 +44,6 @@ baseURL = "https://demo.fixit.lruihao.cn/test/"
     email = ""
     link = "https://lruihao.cn"
     avatar = "https://lruihao.cn/images/avatar.jpg"
+
+  [params.mermaid]
+    zenuml = "https://cdn.jsdelivr.net/npm/@mermaid-js/mermaid-zenuml/dist/mermaid-zenuml.esm.min.mjs"

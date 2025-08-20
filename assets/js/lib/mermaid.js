@@ -1,4 +1,4 @@
-{{- $mermaid := .Param "mermaid" -}}
+{{- $mermaid := .Site.Params.mermaid -}}
 {{- $mermaidCDN := $mermaid.cdn | default "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs" -}}
 
 import mermaid from "{{ $mermaidCDN }}"
@@ -54,10 +54,10 @@ async function loadMermaid({ theme, darkMode, selector }) {
     startOnLoad: false,
     darkMode: isDarkMode,
     theme: currentTheme,
-    securityLevel: mermaidConfig.securityLevel,
+    securityLevel: mermaidConfig.securitylevel,
     look: mermaidConfig.look,
-    fontFamily: mermaidConfig.fontFamily,
-    altFontFamily: mermaidConfig.fontFamily
+    fontFamily: mermaidConfig.fontfamily,
+    altFontFamily: mermaidConfig.fontfamily
   })
   // skip data-processed elements in Mermaid run function, so this won't re-render
   await mermaid.run({
