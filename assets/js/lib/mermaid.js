@@ -4,8 +4,24 @@
 import mermaid from "{{ $mermaidCDN }}"
 {{- with $mermaid.zenuml }}
 import zenuml from "{{ . }}"
+{{- end }}
+{{- $loadersArr := slice }}
+{{- range $i, $loaders := $mermaid.layoutloaders }}
+import loaders{{ $i }} from "{{ $loaders }}"
+{{- $loadersArr = $loadersArr | append (printf "loaders%d" $i) }}
+{{- end }}
+{{- if $mermaid.zenuml }}
 await mermaid.registerExternalDiagrams([zenuml])
 {{- end }}
+const loaders = []
+for(const item of {{ $loadersArr }}) {
+	if(Array.isArray(item)) {
+		loaders.push(...item)
+	} else {
+		loaders.push(item)
+	}
+}
+mermaid.registerLayoutLoaders(loaders)
 mermaid.startOnLoad = false;
 const mermaidConfig = {{ $mermaid | jsonify }}
 let processing = false
@@ -56,6 +72,7 @@ async function loadMermaid({ theme, darkMode, selector }) {
     theme: currentTheme,
     securityLevel: mermaidConfig.securitylevel,
     look: mermaidConfig.look,
+    layout: mermaidConfig.layout,
     fontFamily: mermaidConfig.fontfamily,
     altFontFamily: mermaidConfig.fontfamily
   })
