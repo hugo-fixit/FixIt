@@ -4,13 +4,16 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  on-headers: '>=1.1.0'
+
 importers:
 
   .:
     devDependencies:
       '@hugo-fixit/fixit-releaser':
-        specifier: ^1.2.3
-        version: 1.2.3
+        specifier: ^1.2.4
+        version: 1.2.4
       husky:
         specifier: ^9.1.7
         version: 9.1.7
@@ -20,8 +23,8 @@ importers:
 
 packages:
 
-  '@hugo-fixit/fixit-releaser@1.2.3':
-    resolution: {integrity: sha512-7L+QDgnrG/aWV5b2ikoAbbYTsKL7ml7FD43j/txM3IWBnQDp3WVCIWiEvGtAvms9dMJPEOnA2ARhitDFq57EDw==}
+  '@hugo-fixit/fixit-releaser@1.2.4':
+    resolution: {integrity: sha512-Xin3kXtSsTKDiONc39vYZLULsBAXi8KBHGr30Jg2Z0lAYei9OxHjmcUEN8hDUYJhhHex/c61oswbB77rER+IIw==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -277,8 +280,8 @@ packages:
     resolution: {integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==}
     engines: {node: '>=8'}
 
-  on-headers@1.0.2:
-    resolution: {integrity: sha512-pZAE+FJLoyITytdqK0U5s+FIpjN0JP3OzFi/u8Rx+EV5/W+JTWGXG8xFzevE7AjBfDqHv/8vL8qQsIhHnqRkrA==}
+  on-headers@1.1.0:
+    resolution: {integrity: sha512-737ZY3yNnXy37FHkQxPzt4UZ2UWPWiCZWLvFZ4fu5cueciegX0zGPnrlY6bwRg4FdQOe9YU8MkmJwGhoMybl8A==}
     engines: {node: '>= 0.8'}
 
   onetime@5.1.2:
@@ -435,7 +438,7 @@ packages:
 
 snapshots:
 
-  '@hugo-fixit/fixit-releaser@1.2.3':
+  '@hugo-fixit/fixit-releaser@1.2.4':
     dependencies:
       auto-changelog: 2.5.0
     transitivePeerDependencies:
@@ -543,7 +546,7 @@ snapshots:
       bytes: 3.0.0
       compressible: 2.0.18
       debug: 2.6.9
-      on-headers: 1.0.2
+      on-headers: 1.1.0
       safe-buffer: 5.1.2
       vary: 1.1.2
     transitivePeerDependencies:
@@ -666,7 +669,7 @@ snapshots:
     dependencies:
       path-key: 3.1.1
 
-  on-headers@1.0.2: {}
+  on-headers@1.1.0: {}
 
   onetime@5.1.2:
     dependencies:

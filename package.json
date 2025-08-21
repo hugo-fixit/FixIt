@@ -34,11 +34,16 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@hugo-fixit/fixit-releaser": "^1.2.3",
+    "@hugo-fixit/fixit-releaser": "^1.2.4",
     "husky": "^9.1.7",
     "serve": "^14.2.4"
   },
   "engines": {
     "node": ">=20"
+  },
+  "pnpm": {
+    "overrides": {
+      "on-headers": ">=1.1.0"
+    }
   }
 }
