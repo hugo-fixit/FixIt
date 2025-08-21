@@ -727,6 +727,14 @@ mainSections = []
     look = "handDrawn"
     # FixIt 0.4.0 | NEW Specifies the font to be used in the rendered diagrams
     fontFamily = ""
+    # FixIt 0.4.0 | NEW Layout loaders from ESM module CDN sources (e.g., ELK layout engine)
+    # Example: ["https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk/dist/mermaid-layout-elk.esm.min.mjs"]
+    # This will enable additional layout options: ["elk", "elk.layered", "elk.stress", "elk.force", "elk.mrtree"]
+    layoutLoaders = []
+    # Default layout algorithm for rendering diagrams
+    # Available options: "dagre" (default), "elk", "elk.layered", "elk.stress", "elk.force", "elk.mrtree"
+    # Note: ELK layouts require layoutLoaders to be configured first
+    layout = "dagre"
 
   # FixIt 0.3.13 | NEW Admonitions custom config
   # See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/admonition/#custom-admonitions
