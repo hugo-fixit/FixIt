@@ -34,7 +34,7 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@hugo-fixit/fixit-releaser": "^1.2.4",
+    "@hugo-fixit/fixit-releaser": "^1.3.2",
     "husky": "^9.1.7",
     "serve": "^14.2.4"
   },
