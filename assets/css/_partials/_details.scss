@@ -17,9 +17,9 @@
   }
 
   > .details-content {
-    max-height: 0;
+    height: 0;
     overflow-y: hidden;
-    @include details-transition-open;
+    @include transition(height 0.5s ease-out);
   }
 
   &.open {
@@ -32,9 +32,8 @@
     }
 
     > .details-content {
-      max-height: 100%;
+      height: auto;
       @include border-radius(0 0 $global-border-radius $global-border-radius);
-      @include details-transition-close;
     }
   }
 
