@@ -82,9 +82,9 @@ pre:not([data-processed]) {
 
       // delayed loading table-wrapper
       & + .table-wrapper {
-        max-height: 0;
+        height: 0;
         @include border-radius(0 0 $global-border-radius $global-border-radius);
-        @include details-transition-open;
+        @include transition(height 0.5s ease-out);
       }
 
       [data-theme='dark'] & {
@@ -227,8 +227,7 @@ pre:not([data-processed]) {
       }
 
       .table-wrapper {
-        max-height: 100%;
-        @include details-transition-close;
+        height: auto;
       }
 
       .arrow {

@@ -27,6 +27,8 @@
   #{$rootPrefix}scrollbar-track-color: transparent;
   #{$rootPrefix}scrollbar-width: thin;
   #{$rootPrefix}scrollbar-width-legacy: 12px;
+
+  interpolate-size: allow-keywords;
 }
 
 // Dark theme

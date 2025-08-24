@@ -63,6 +63,14 @@ img,video {
   height: auto;
 }
 
+details {
+  &.center {
+    summary {
+      text-align: center;
+    }
+  }
+}
+
 %code {
   padding: 0.2em 0.4em;
   margin: 0;
