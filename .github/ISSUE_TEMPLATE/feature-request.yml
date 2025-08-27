@@ -1,22 +1,35 @@
-name: "Feature request 功能请求"
-description: "Suggest an idea for this project 为这个项目提供一个建议"
-title: "[FEATURE] Some feature"
-labels: ["enhancement"]
+name: Feature Request
+description: Suggest an idea for this project
+title: "[Feature request] "
 body:
-    - type: textarea
-      id: describe
-      attributes:
-        label: Describe the feature you want 描述你的功能需求
-        description: |
-            Please submit new issues for different features.
-            请针对不同的功能建议提交新的 issue。
-        placeholder: |
-          I recommend adding this feature ...
-          我希望添加这样的一个功能……
-    - type: textarea
-      id: reference
-      attributes:
-        label: Useful reference 有价值的参考
-        description: |
-          If available, provide useful links to fulfill the feature. 
-          如果可以的话，提供实现这个功能的相关参考链接。
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your interest in the project and taking the time to fill out this feature request!
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Clear and concise description of the problem
+      description: As a user or developer using FixIt, what feature your want in details. If you intend to submit a PR for this issue, tell us in the description. Thanks!
+      placeholder: Feature description
+    validations:
+      required: true
+  - type: textarea
+    id: suggested-solution
+    attributes:
+      label: Suggested solution
+      description: We could provide following implementation...
+      placeholder: Suggested solution
+    validations:
+      required: true
+  - type: textarea
+    id: alternative
+    attributes:
+      label: Alternative
+      description: Clear and concise description of any alternative solutions or features you've considered.
+      placeholder: Alternative solution
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Any other context or screenshots about the feature request here.
