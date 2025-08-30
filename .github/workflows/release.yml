@@ -30,12 +30,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version-file: .nvmrc
 
-      - name: Install dependencies and generate release notes
+      - name: Generate release notes
         run: |
-          npm install
-          npm run release -- --starting-version ${{ github.ref_name }}
+          npx fixit-releaser changelog --starting-version ${{ github.ref_name }}
           sed -i '1,4d' CHANGELOG.md
 
       - name: GitHub Release

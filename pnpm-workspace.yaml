@@ -1,5 +1,3 @@
 packages:
   - apps/*
   - packages/*
-onlyBuiltDependencies:
-  - esbuild

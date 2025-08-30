@@ -1,5 +1,5 @@
 {
-  "name": "fixit-core",
+  "name": "@hugo-fixit/core",
   "type": "module",
   "version": "0.4.0-alpha",
   "private": true,
@@ -32,17 +32,19 @@
     "build": "pnpm build:demo && pnpm build:test && pnpm -F integration start",
     "preview": "serve public",
     "lint": "eslint --cache .",
-    "version": "pnpm -F versioning start prod",
-    "release": "fixit-releaser changelog",
-    "prepare": "husky"
+    "version": "pnpm -F versioning start prod && pnpm changelog -p",
+    "postversion": "git push && git push --tags",
+    "changelog": "fixit-releaser changelog",
+    "prepare": "simple-git-hooks"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.2.1",
     "@hugo-fixit/fixit-releaser": "^1.5.1",
     "@types/node": "^24.3.0",
     "eslint": "^9.34.0",
-    "husky": "^9.1.7",
+    "lint-staged": "^16.1.5",
     "serve": "^14.2.4",
+    "simple-git-hooks": "^2.9.0",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2"
   },
@@ -50,5 +52,11 @@
     "overrides": {
       "on-headers": ">=1.1.0"
     }
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm -F versioning start dev && pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }
