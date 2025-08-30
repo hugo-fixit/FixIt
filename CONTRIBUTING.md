@@ -119,4 +119,4 @@ Finally, create a new pull request at <https://github.com/hugo-fixit/FixIt/pulls
 
 ## Git Commit Guidelines
 
-We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification for commit messages. This enables automatic changelog generation using our custom template: [conventional.hbs](https://github.com/hugo-fixit/fixit-releaser/blob/main/changelog/conventional.hbs).
+We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification for commit messages. This enables automatic changelog generation using our custom template: [conventional.hbs](https://github.com/hugo-fixit/fixit-releaser/blob/main/src/changelog/conventional.hbs).

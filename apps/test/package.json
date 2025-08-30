@@ -1,0 +1,8 @@
+{
+  "name": "@fixit/test",
+  "private": true,
+  "scripts": {
+    "build": "hugo --themesDir ../../.. --theme $PWD/../.. --gc --minify --logLevel info",
+    "dev": "hugo server --themesDir ../../.. --theme $PWD/../.. -D --disableFastRender --navigateToChanged --ignoreCache -O"
+  }
+}

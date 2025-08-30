@@ -1,0 +1,12 @@
+{
+  "name": "@fixit/integration",
+  "private": true,
+  "scripts": {
+    "start": "tsx src/index.ts"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^24.3.0",
+    "fs-extra": "^11.3.1"
+  }
+}
