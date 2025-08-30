@@ -81,7 +81,7 @@ FixIt/
    ```scss
    .element {
      color: $global-font-color;
-     
+
      [data-theme='dark'] & {
        color: $global-font-color-dark;
      }
@@ -121,29 +121,21 @@ FixIt/
 ```javascript
 // 使用 ES6 类
 export default class Util {
-  /**
-   * 工具函数示例
-   * @param {String} text 要复制的文本
-   * @returns {Promise} 返回 Promise
-   */
   copyText(text) {
-    if (navigator.clipboard) {
-      return navigator.clipboard.writeText(text);
-    }
-    // 降级方案...
+    // ...
   }
 }
 
 // 主题类组织
 class FixIt {
   constructor() {
-    this.config = window.config;
-    this.util = new Util();
+    this.config = window.config
+    this.util = new Util()
   }
-  
+
   init() {
-    this.initTheme();
-    this.initComponents();
+    this.initTheme()
+    this.initComponents()
   }
 }
 ```

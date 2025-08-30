@@ -1,25 +1,28 @@
 {
   "name": "fixit-core",
+  "type": "module",
   "version": "0.4.0-alpha",
   "private": true,
   "packageManager": "pnpm@10.5.2",
   "description": "Hugo FixIt core theme component source files",
+  "author": "Lruihao (https://lruihao.cn)",
+  "license": "MIT",
+  "homepage": "https://fixit.lruihao.cn",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hugo-fixit/FixIt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hugo-fixit/FixIt/issues"
+  },
   "keywords": [
     "hugo",
     "theme",
     "fixit"
   ],
-  "homepage": "https://fixit.lruihao.cn",
-  "bugs": {
-    "url": "https://github.com/hugo-fixit/FixIt/issues"
+  "engines": {
+    "node": ">=20"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hugo-fixit/FixIt.git"
-  },
-  "license": "MIT",
-  "author": "Lruihao (https://lruihao.cn)",
-  "type": "module",
   "scripts": {
     "dev:demo": "pnpm -F demo dev",
     "dev:test": "pnpm -F test dev",
@@ -28,20 +31,20 @@
     "build:test": "pnpm -F test build",
     "build": "pnpm build:demo && pnpm build:test && pnpm -F integration start",
     "preview": "serve public",
+    "lint": "eslint --cache .",
     "version": "fixit-releaser version --prod",
     "postversion": "git push && git push --tags && pnpm release",
     "release": "fixit-releaser changelog",
     "prepare": "husky"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^5.2.1",
     "@hugo-fixit/fixit-releaser": "^1.5.1",
+    "eslint": "^9.34.0",
     "husky": "^9.1.7",
     "serve": "^14.2.4",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2"
-  },
-  "engines": {
-    "node": ">=20"
   },
   "pnpm": {
     "overrides": {

@@ -25,13 +25,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0    # Fetch all history for generating release notes
+          fetch-depth: 0 # Fetch all history for generating release notes
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
-      
+
       - name: Install dependencies and generate release notes
         run: |
           npm install

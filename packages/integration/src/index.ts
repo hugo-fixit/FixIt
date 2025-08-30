@@ -1,5 +1,5 @@
-import path from 'node:path';
-import fsExtra from 'fs-extra';
+import path from 'node:path'
+import fsExtra from 'fs-extra'
 
 const { copySync, removeSync } = fsExtra
 const workspace = path.resolve(__dirname, '../../../')
