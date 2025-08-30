@@ -1,5 +1,5 @@
 {
-  "name": "@fixit/demo",
+  "name": "@hugo-fixit/demo",
   "private": true,
   "scripts": {
     "build": "hugo --themesDir ../../.. --theme $PWD/../.. --gc --minify --logLevel info",

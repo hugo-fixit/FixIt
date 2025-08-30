@@ -17,6 +17,9 @@ importers:
       '@hugo-fixit/fixit-releaser':
         specifier: ^1.5.1
         version: 1.5.1
+      '@types/node':
+        specifier: ^24.3.0
+        version: 24.3.0
       eslint:
         specifier: ^9.34.0
         version: 9.34.0
@@ -39,15 +42,23 @@ importers:
 
   packages/integration:
     devDependencies:
+      '@hugo-fixit/shared':
+        specifier: workspace:*
+        version: link:../shared
       '@types/fs-extra':
         specifier: ^11.0.4
         version: 11.0.4
-      '@types/node':
-        specifier: ^24.3.0
-        version: 24.3.0
       fs-extra:
         specifier: ^11.3.1
         version: 11.3.1
+
+  packages/shared: {}
+
+  packages/versioning:
+    devDependencies:
+      '@hugo-fixit/shared':
+        specifier: workspace:*
+        version: link:../shared
 
 packages:
 

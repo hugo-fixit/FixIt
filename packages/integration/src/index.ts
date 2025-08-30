@@ -1,9 +1,9 @@
 import path from 'node:path'
+import { workspaceRoot } from '@hugo-fixit/shared'
 import fsExtra from 'fs-extra'
 
 const { copySync, removeSync } = fsExtra
-const workspace = path.resolve(__dirname, '../../../')
 
-removeSync(path.join(workspace, 'public'))
-copySync(path.join(workspace, 'apps/demo/public'), path.join(workspace, 'public'), { overwrite: true })
-copySync(path.join(workspace, 'apps/test/public'), path.join(workspace, 'public/test'), { overwrite: true })
+removeSync(path.join(workspaceRoot, 'public'))
+copySync(path.join(workspaceRoot, 'apps/demo/public'), path.join(workspaceRoot, 'public'), { overwrite: true })
+copySync(path.join(workspaceRoot, 'apps/test/public'), path.join(workspaceRoot, 'public/test'), { overwrite: true })

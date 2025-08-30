@@ -1,12 +1,15 @@
 {
-  "name": "@fixit/integration",
+  "name": "@hugo-fixit/integration",
+  "version": "0.1.0",
   "private": true,
+  "description": "Integration utilities for the FixIt theme",
+  "author": "Lruihao",
   "scripts": {
     "start": "tsx src/index.ts"
   },
   "devDependencies": {
+    "@hugo-fixit/shared": "workspace:*",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^24.3.0",
     "fs-extra": "^11.3.1"
   }
 }
