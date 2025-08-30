@@ -1,0 +1,13 @@
+{
+  "name": "@hugo-fixit/versioning",
+  "private": true,
+  "description": "Versioning utilities for the FixIt theme",
+  "author": "Lruihao",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "tsx src/index.ts"
+  },
+  "devDependencies": {
+    "@hugo-fixit/shared": "workspace:*"
+  }
+}

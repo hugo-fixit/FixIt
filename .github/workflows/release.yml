@@ -25,17 +25,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0    # Fetch all history for generating release notes
+          fetch-depth: 0 # Fetch all history for generating release notes
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
-      
-      - name: Install dependencies and generate release notes
+          node-version-file: .nvmrc
+
+      - name: Generate release notes
         run: |
-          npm install
-          npm run release -- --starting-version ${{ github.ref_name }}
+          npx fixit-releaser changelog --starting-version ${{ github.ref_name }}
           sed -i '1,4d' CHANGELOG.md
 
       - name: GitHub Release

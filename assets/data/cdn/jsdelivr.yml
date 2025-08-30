@@ -74,4 +74,3 @@ libFiles:
   walineJS: '@waline/client@3.4.1/dist/waline.umd.js'
   # xxhash-wasm@1.0.2 https://github.com/jungomi/xxhash-wasm
   xxhashWasmJS: xxhash-wasm@1.0.2/umd/xxhash-wasm.js
-  

@@ -8,6 +8,7 @@ jsconfig.json
 
 # NPM
 node_modules/
+.eslintcache
 
 # VSCode
 .vscode/*

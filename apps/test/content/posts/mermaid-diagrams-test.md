@@ -11,8 +11,6 @@ tags:
   - Diagrams
 ---
 
-
-
 The FixIt theme supports two ways to use Mermaid: code block syntax and shortcode syntax.
 
 ## Flowchart
@@ -104,7 +102,7 @@ erDiagram
     CUSTOMER ||--o{ ORDER : places
     ORDER ||--|{ LINE-ITEM : contains
     CUSTOMER }|..|{ DELIVERY-ADDRESS : uses
-    
+
     CUSTOMER {
         string name
         string custNumber
@@ -472,7 +470,7 @@ kanban
 
     In Progress
         [Push to main]
-    
+
     Done
         [Merge PR]
 ```
