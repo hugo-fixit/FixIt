@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { execSync } from 'node:child_process'
+import { execSync, execFileSync } from 'node:child_process'
 import fs from 'node:fs'
 import { join } from 'node:path'
 import process from 'node:process'
@@ -71,7 +71,7 @@ export function updateVersion(type: 'dev' | 'prod') {
   toStageFiles.forEach((file) => {
     const stageFile = join(workspaceRoot, file)
     if (fs.existsSync(stageFile)) {
-      execSync(`git add ${stageFile}`)
+      execFileSync('git', ['add', stageFile])
     }
   })
   console.log(`Update the FixIt version from v${lastVersion} to v${latestVersion}.`)
