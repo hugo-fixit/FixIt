@@ -39,12 +39,12 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.2.1",
-    "@hugo-fixit/fixit-releaser": "^1.5.1",
+    "@hugo-fixit/fixit-releaser": "^1.6.0",
     "@types/node": "^24.3.0",
     "eslint": "^9.34.0",
     "lint-staged": "^16.1.5",
     "serve": "^14.2.4",
-    "simple-git-hooks": "^2.9.0",
+    "simple-git-hooks": "^2.13.1",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2"
   },
