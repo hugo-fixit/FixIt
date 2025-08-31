@@ -1,49 +1,66 @@
 {
-  "name": "fixit-core",
+  "name": "@hugo-fixit/core",
+  "type": "module",
   "version": "0.4.0-alpha",
   "private": true,
   "packageManager": "pnpm@10.5.2",
   "description": "Hugo FixIt core theme component source files",
+  "author": {
+    "name": "Lruihao",
+    "email": "1024@lruihao.cn",
+    "url": "https://lruihao.cn"
+  },
+  "license": "MIT",
+  "homepage": "https://fixit.lruihao.cn",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hugo-fixit/FixIt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hugo-fixit/FixIt/issues"
+  },
   "keywords": [
     "hugo",
     "theme",
     "fixit"
   ],
-  "homepage": "https://fixit.lruihao.cn",
-  "bugs": {
-    "url": "https://github.com/hugo-fixit/FixIt/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hugo-fixit/FixIt.git"
-  },
-  "license": "MIT",
-  "author": "Lruihao (https://lruihao.cn)",
-  "type": "module",
-  "scripts": {
-    "build": "hugo --source=demo --themesDir ../.. --theme $PWD --gc --minify --logLevel info",
-    "build:test": "hugo --source=test --themesDir ../.. --theme $PWD --gc --minify --logLevel info",
-    "build:vercel": "npm run build && npm run build:test && ./move-public.sh",
-    "preview": "npm run build:vercel && serve public",
-    "dev": "hugo server --source=demo --themesDir ../.. --theme $PWD -D --disableFastRender --navigateToChanged --ignoreCache -O",
-    "test": "hugo server --source=test --themesDir ../.. --theme $PWD -D --disableFastRender --navigateToChanged --ignoreCache -O",
-    "dev:docs": "hugo server --source=../fixit-docs -D --disableFastRender --navigateToChanged --ignoreCache -O",
-    "version": "fixit-releaser version --prod",
-    "postversion": "git push && git push --tags && npm run release",
-    "release": "fixit-releaser changelog",
-    "prepare": "husky"
-  },
-  "devDependencies": {
-    "@hugo-fixit/fixit-releaser": "^1.3.2",
-    "husky": "^9.1.7",
-    "serve": "^14.2.4"
-  },
   "engines": {
     "node": ">=20"
+  },
+  "scripts": {
+    "dev:demo": "pnpm -F demo dev",
+    "dev:test": "pnpm -F test dev",
+    "dev:docs": "hugo server --source=../fixit-docs -D --disableFastRender --navigateToChanged --ignoreCache -O",
+    "build:demo": "pnpm -F demo build",
+    "build:test": "pnpm -F test build",
+    "build": "pnpm build:demo && pnpm build:test && pnpm -F integration start",
+    "preview": "serve public",
+    "lint": "eslint --cache .",
+    "version": "pnpm -F versioning start prod && pnpm changelog -p",
+    "postversion": "git push && git push --tags",
+    "changelog": "fixit-releaser changelog",
+    "prepare": "simple-git-hooks"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^5.2.1",
+    "@hugo-fixit/fixit-releaser": "^1.6.0",
+    "@types/node": "^24.3.0",
+    "eslint": "^9.34.0",
+    "lint-staged": "^16.1.5",
+    "serve": "^14.2.4",
+    "simple-git-hooks": "^2.13.1",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
   },
   "pnpm": {
     "overrides": {
       "on-headers": ">=1.1.0"
     }
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm -F versioning start dev && pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }

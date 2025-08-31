@@ -41,38 +41,34 @@ Here are some useful commands for development:
 ### Development
 
 ```bash
-# Run local server with demo content
-pnpm dev
-
-# Run local server with test content
-pnpm test
-
-# Run local server with documentation (requires fixit-docs as sibling directory)
+# Start demo site development server
+pnpm dev:demo
+# Start test site development server
+pnpm dev:test
+# Start documentation development server (requires fixit-docs as sibling directory)
 pnpm dev:docs
 ```
 
 > [!TIP]
 >
-> - You can run `pnpm dev -e production` or `pnpm test -e production` to check the production environment.
-> - If you want to work on documentation-related theme changes, the simplest way is to have both `FixIt` and `fixit-docs` cloned as sibling directories.
+> - Add `-e production` to the development command to check the production environment, e.g. `pnpm dev:test -e production`.
+> - For documentation-related theme changes, it is recommended to clone both `FixIt` and `fixit-docs` as sibling directories.
 
 ### Building
 
 ```bash
 # Build demo site
-pnpm build
-
+pnpm build:demo
 # Build test site
 pnpm build:test
-
-# Build both demo and test sites for deployment (includes public directory reorganization)
-pnpm build:vercel
+# Build all sites
+pnpm build
 ```
 
 ### Preview
 
 ```bash
-# Preview the built site locally (requires build:vercel first)
+# Preview the built site locally (requires build first)
 pnpm preview
 ```
 
@@ -82,21 +78,24 @@ Understanding the project structure will help you contribute more effectively:
 
 ```
 FixIt/
+├── apps/               # Minimal sites
+│   ├── demo/           # Demo site
+│   └── test/           # Test site
 ├── archetypes/         # Content templates
-├── assets/             # Theme assets (CSS, JS, images)
+├── assets/             # Theme assets
 │   ├── css/            # SCSS stylesheets
 │   ├── js/             # JavaScript files
+│   ├── images/         # Image assets
 │   └── lib/            # Third-party libraries
-├── demo/               # Demo site for development
 ├── i18n/               # Internationalization files
 ├── layouts/            # Hugo template files
 │   ├── _markup/        # Hugo render hooks
 │   ├── _partials/      # Reusable template components
 │   └── _shortcodes/    # Custom shortcodes
+├── packages/           # Theme-related packages
 ├── static/             # Static files
-├── test/               # Test site content
-├── package.json        # npm scripts and dependencies
-└── hugo.toml           # Default theme configuration
+├── hugo.toml           # Default theme configuration
+└── package.json        # npm scripts and dependencies
 ```
 
 ## Development Workflow
@@ -119,4 +118,4 @@ Finally, create a new pull request at <https://github.com/hugo-fixit/FixIt/pulls
 
 ## Git Commit Guidelines
 
-We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification for commit messages. This enables automatic changelog generation using our custom template: [conventional.hbs](https://github.com/hugo-fixit/fixit-releaser/blob/main/changelog/conventional.hbs).
+We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification for commit messages. This enables automatic changelog generation using our custom template: [conventional.hbs](https://github.com/hugo-fixit/fixit-releaser/blob/main/src/changelog/conventional.hbs).

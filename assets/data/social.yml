@@ -329,7 +329,7 @@ strava:
 # 042: Skype
 skype:
   Weight: 42
-  Template: "skype:"
+  Template: 'skype:'
   Title: Skype
   Icon:
     Class: fa-brands fa-skype fa-fw

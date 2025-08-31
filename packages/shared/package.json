@@ -1,0 +1,8 @@
+{
+  "name": "@hugo-fixit/shared",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Internal utilities shared across @hugo-fixit packages",
+  "author": "Lruihao",
+  "main": "src/index.ts"
+}

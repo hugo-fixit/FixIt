@@ -5,30 +5,44 @@
 
 version: 2
 updates:
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  - package-ecosystem: npm # See documentation for possible values
+    directory: / # Location of package manifests
     schedule:
-      interval: "monthly"
+      interval: monthly
     open-pull-requests-limit: 1000
     assignees:
-      - "Lruihao"
+      - Lruihao
     labels:
-      - "dependencies"
-  - package-ecosystem: "github-actions"
-    directory: "/"
+      - dependencies
+    ignore:
+      - dependency-name: '@types/node'
+        update-types:
+          - 'version-update:semver-major'
+    groups:
+      npm-development:
+        dependency-type: development
+        update-types:
+          - minor
+          - patch
+      npm-production:
+        dependency-type: production
+        update-types:
+          - patch
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "monthly"
+      interval: monthly
     open-pull-requests-limit: 1000
     assignees:
-      - "Lruihao"
+      - Lruihao
     labels:
-      - "dependencies"
-  - package-ecosystem: "gitsubmodule"
-    directory: "/"
+      - dependencies
+  - package-ecosystem: gitsubmodule
+    directory: /
     schedule:
-      interval: "weekly"
+      interval: weekly
     open-pull-requests-limit: 1000
     assignees:
-      - "Lruihao"
+      - Lruihao
     labels:
-      - "dependencies"
+      - dependencies
