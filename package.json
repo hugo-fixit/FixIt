@@ -5,7 +5,11 @@
   "private": true,
   "packageManager": "pnpm@10.5.2",
   "description": "Hugo FixIt core theme component source files",
-  "author": "Lruihao (https://lruihao.cn)",
+  "author": {
+    "name": "Lruihao",
+    "email": "1024@lruihao.cn",
+    "url": "https://lruihao.cn"
+  },
   "license": "MIT",
   "homepage": "https://fixit.lruihao.cn",
   "repository": {
