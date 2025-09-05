@@ -38,13 +38,13 @@
     "lint": "eslint --cache .",
     "version": "pnpm -F versioning start prod && pnpm changelog -p",
     "postversion": "git push && git push --tags",
-    "changelog": "fixit-releaser changelog",
+    "changelog": "auto-changelog-plus",
     "prepare": "simple-git-hooks"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.2.1",
-    "@hugo-fixit/fixit-releaser": "^1.6.0",
     "@types/node": "^24.3.0",
+    "auto-changelog-plus": "^1.0.0",
     "eslint": "^9.34.0",
     "lint-staged": "^16.1.5",
     "serve": "^14.2.4",
