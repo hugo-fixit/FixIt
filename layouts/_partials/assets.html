@@ -142,8 +142,8 @@
 
 {{- /* mermaid */ -}}
 {{- if .Store.Get "hasMermaid" -}}
-  {{- $options := dict "Source" "js/lib/mermaid.js" "Template" "js/lib/mermaid.min.js" -}}
-  {{- $options = dict "Context" . "Minify" true "Fingerprint" $fingerprint "Attr" `type="module"` | merge $options -}}
+  {{- $options := dict "Source" "js/lib/mermaid.js" "Template" "js/lib/mermaid.js" -}}
+  {{- $options = dict "Context" . "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Attr" `type="module"` | merge $options -}}
   {{- $options | dict "Page" $ "Data" | partial "store/script.html" -}}
 {{- end -}}
 
