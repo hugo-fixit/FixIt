@@ -111,7 +111,7 @@
     {{- $source := "js/lib/mathjax.js" -}}
     {{- $options := dict "targetPath" "js/lib/mathjax.min.js" "minify" hugo.IsProduction -}}
     {{- $mathjaxOptsConfig := $mathjax.options | default dict -}}
-    {{- $mathjaxOpts := default dict -}}
+    {{- $mathjaxOpts := dict -}}
     {{- with $mathjaxOptsConfig.enableMenu -}}
       {{- $mathjaxOpts = dict "enableMenu" . | merge $mathjaxOpts -}}
     {{- end -}}
