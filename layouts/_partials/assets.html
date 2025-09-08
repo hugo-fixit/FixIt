@@ -4,6 +4,7 @@
 {{- $fingerprint := .Site.Store.Get "fingerprint" -}}
 {{- $config := (.Store.Get "this").config -}}
 {{- $config = dict "version" (hugo.Store.Get "version") | merge $config -}}
+{{- $author := partial "function/get-author-map.html" .Params.author -}}
 
 {{- /* Search */ -}}
 {{- if .Site.Params.search | and .Site.Params.search.enable -}}
@@ -109,8 +110,20 @@
     {{- $mathjax := $math.mathjax -}}
     {{- $source := "js/lib/mathjax.js" -}}
     {{- $options := dict "targetPath" "js/lib/mathjax.min.js" "minify" hugo.IsProduction -}}
-    {{- $mathjaxOpts := $mathjax.options | default dict -}}
-    {{- $mathjaxOpts = dict "enableMenu" $mathjaxOpts.enablemenu | merge $mathjaxOpts -}}
+    {{- $mathjaxOptsConfig := $mathjax.options | default dict -}}
+    {{- $mathjaxOpts := dict -}}
+    {{- with $mathjaxOptsConfig.enableMenu -}}
+      {{- $mathjaxOpts = dict "enableMenu" . | merge $mathjaxOpts -}}
+    {{- end -}}
+    {{- with $mathjaxOptsConfig.ignoreHtmlClass -}}
+      {{- $mathjaxOpts = dict "ignoreHtmlClass" . | merge $mathjaxOpts -}}
+    {{- end -}}
+    {{- with $mathjaxOptsConfig.skipHtmlTags -}}
+      {{- $mathjaxOpts = dict "skipHtmlTags" . | merge $mathjaxOpts -}}
+    {{- end -}}
+    {{- with $mathjaxOptsConfig.includeHtmlTags -}}
+      {{- $mathjaxOpts = dict "includeHtmlTags" . | merge $mathjaxOpts -}}
+    {{- end -}}
     {{- $params := dict
       "cdn" $mathjax.cdn
       "tex" ($mathjax.tex | default dict)
@@ -191,8 +204,17 @@
 {{- if eq .Site.Params.watermark.enable true -}}
   {{- $source := $cdn.cellWatermarkJS | default "lib/cell-watermark/watermark.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-  {{- /* Hugo bug: case insensitive for `.Site.Params` */ -}}
-  {{- $config = dict "watermark" .Site.Params.watermark | merge $config -}}
+  {{- $watermarkConfig := .Site.Params.watermark | default dict -}}
+  {{- $watermarkConfig = dict
+    "appendTo" ".widgets"
+    "content" ($watermarkConfig.content | default $author.name | default .Site.Title)
+    "rowSpacing" $watermarkConfig.rowSpacing
+    "colSpacing" $watermarkConfig.colSpacing
+    "fontSize" $watermarkConfig.fontSize
+    "fontFamily" $watermarkConfig.fontFamily
+    | merge $watermarkConfig
+  -}}
+  {{- $config = dict "watermark" $watermarkConfig | merge $config -}}
 {{- end -}}
 
 {{- /* Content Decryption */ -}}

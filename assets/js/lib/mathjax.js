@@ -36,7 +36,6 @@ window.MathJax = {
     },
   },
   options: {
-    ignoreHtmlClass: 'comment',
     processHtmlClass: 'content',
     ...params.options,
   }

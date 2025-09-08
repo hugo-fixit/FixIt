@@ -1053,19 +1053,10 @@ class FixIt {
   }
 
   initWatermark() {
-    this.config.watermark?.enable &&
-      new Watermark({
-        content: this.config.watermark.content || `${document.querySelector('footer .fixit-icon')?.outerHTML ?? ''} FixIt Theme`,
-        appendTo: '.widgets',
-        opacity: this.config.watermark.opacity,
-        width: this.config.watermark.width,
-        height: this.config.watermark.height,
-        rowSpacing: this.config.watermark.rowspacing,
-        colSpacing: this.config.watermark.colspacing,
-        rotate: this.config.watermark.rotate,
-        fontSize: this.config.watermark.fontsize,
-        fontFamily: this.config.watermark.fontfamily
-      });
+    if (!this.config.watermark?.enable) {
+      return;
+    }
+    new Watermark(this.config.watermark);
   }
 
   initPangu() {
