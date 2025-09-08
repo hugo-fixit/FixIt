@@ -4,6 +4,7 @@
 {{- $fingerprint := .Site.Store.Get "fingerprint" -}}
 {{- $config := (.Store.Get "this").config -}}
 {{- $config = dict "version" (hugo.Store.Get "version") | merge $config -}}
+{{- $author := partial "function/get-author-map.html" .Params.author -}}
 
 {{- /* Search */ -}}
 {{- if .Site.Params.search | and .Site.Params.search.enable -}}
@@ -191,8 +192,18 @@
 {{- if eq .Site.Params.watermark.enable true -}}
   {{- $source := $cdn.cellWatermarkJS | default "lib/cell-watermark/watermark.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-  {{- /* Hugo bug: case insensitive for `.Site.Params` */ -}}
-  {{- $config = dict "watermark" .Site.Params.watermark | merge $config -}}
+  {{- /* All the Params configurations are case insensitive since Hugo 0.18 */ -}}
+  {{- $watermarkConfig := .Site.Params.watermark | default dict -}}
+  {{- $watermarkConfig = dict
+    "appendTo" ".widgets"
+    "content" ($watermarkConfig.content | default $author.name | default .Site.Title)
+    "rowSpacing" $watermarkConfig.rowspacing
+    "colSpacing" $watermarkConfig.colspacing
+    "fontSize" $watermarkConfig.fontsize
+    "fontFamily" $watermarkConfig.fontfamily
+    | merge $watermarkConfig
+  -}}
+  {{- $config = dict "watermark" $watermarkConfig | merge $config -}}
 {{- end -}}
 
 {{- /* Content Decryption */ -}}
