@@ -110,8 +110,20 @@
     {{- $mathjax := $math.mathjax -}}
     {{- $source := "js/lib/mathjax.js" -}}
     {{- $options := dict "targetPath" "js/lib/mathjax.min.js" "minify" hugo.IsProduction -}}
-    {{- $mathjaxOpts := $mathjax.options | default dict -}}
-    {{- $mathjaxOpts = dict "enableMenu" $mathjaxOpts.enablemenu | merge $mathjaxOpts -}}
+    {{- $mathjaxOptsConfig := $mathjax.options | default dict -}}
+    {{- $mathjaxOpts := default dict -}}
+    {{- with $mathjaxOptsConfig.enableMenu -}}
+      {{- $mathjaxOpts = dict "enableMenu" . | merge $mathjaxOpts -}}
+    {{- end -}}
+    {{- with $mathjaxOptsConfig.ignoreHtmlClass -}}
+      {{- $mathjaxOpts = dict "ignoreHtmlClass" . | merge $mathjaxOpts -}}
+    {{- end -}}
+    {{- with $mathjaxOptsConfig.skipHtmlTags -}}
+      {{- $mathjaxOpts = dict "skipHtmlTags" . | merge $mathjaxOpts -}}
+    {{- end -}}
+    {{- with $mathjaxOptsConfig.includeHtmlTags -}}
+      {{- $mathjaxOpts = dict "includeHtmlTags" . | merge $mathjaxOpts -}}
+    {{- end -}}
     {{- $params := dict
       "cdn" $mathjax.cdn
       "tex" ($mathjax.tex | default dict)
@@ -192,15 +204,14 @@
 {{- if eq .Site.Params.watermark.enable true -}}
   {{- $source := $cdn.cellWatermarkJS | default "lib/cell-watermark/watermark.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-  {{- /* All the Params configurations are case insensitive since Hugo 0.18 */ -}}
   {{- $watermarkConfig := .Site.Params.watermark | default dict -}}
   {{- $watermarkConfig = dict
     "appendTo" ".widgets"
     "content" ($watermarkConfig.content | default $author.name | default .Site.Title)
-    "rowSpacing" $watermarkConfig.rowspacing
-    "colSpacing" $watermarkConfig.colspacing
-    "fontSize" $watermarkConfig.fontsize
-    "fontFamily" $watermarkConfig.fontfamily
+    "rowSpacing" $watermarkConfig.rowSpacing
+    "colSpacing" $watermarkConfig.colSpacing
+    "fontSize" $watermarkConfig.fontSize
+    "fontFamily" $watermarkConfig.fontFamily
     | merge $watermarkConfig
   -}}
   {{- $config = dict "watermark" $watermarkConfig | merge $config -}}
