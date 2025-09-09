@@ -1,0 +1,26 @@
+{{- $tabs := .Store.Get "tabs" -}}
+{{- if not $tabs -}}
+  {{- errorf "No tabs found. Please add at least one tab to the tabs shortcode. See %s %s" .Name .Position -}}
+{{- end -}}
+{{- $lenTabs := len $tabs -}}
+{{- $defaultTab := .Get "defaultTab" | default 0 -}}
+{{- $vertical := .Get "vertical" | default false -}}
+{{- $class := .Get "class" | default "" -}}
+{{- if ge $defaultTab $lenTabs -}}
+  {{- warnf "The defaultTab value %v is out of range [0, %v]. See %s %s" $defaultTab (sub $lenTabs 1) .Name .Position -}}
+  {{- $defaultTab = 0 -}}
+{{- end -}}
+
+<tab-container default-tab="{{ $defaultTab }}"{{ if $vertical }} vertical{{ end }}{{ if $class }} class="{{ $class }}"{{ end }}>
+  {{- range $index, $tab := $tabs -}}
+    {{- $title := $tab.title | default (printf "Untitled%v" $index) -}}
+    {{- $id := $tab.id -}}
+    {{- $tabindex := 0 -}}
+    {{- if ne $index 0 -}}
+      {{- $tabindex = -1 -}}
+    {{- end -}}
+    <button class="tab-button" type="button" role="tab" id="tab-{{ $id }}" aria-selected="{{ eq $index $defaultTab }}">{{ $title | $.Page.RenderString }}</button>
+  {{- end -}}
+  {{- .Inner -}}
+</tab-container>
+{{- /* EOF */ -}}
