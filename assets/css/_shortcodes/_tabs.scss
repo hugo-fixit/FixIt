@@ -3,124 +3,180 @@
 // ========================================
 
 tab-container {
-  display: block;
-  margin-block: 1.5rem;
-  font-family: $global-font-family;
+  display: flex;
+  gap: 0.75rem;
+  padding-block: 1rem;
+
+  .tab-button {
+    flex-shrink: 0;
+  }
+
+  .tab-panel {
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &::part(tablist-tab-wrapper) {
+    flex: 1 0 auto;
+  }
+
+  &::part(tablist) {
+    display: flex;
+  }
+
+  &[placement='top'],
+  &[placement='bottom'] {
+    &::part(tablist-wrapper) {
+      max-width: 100%;
+    }
+
+    &::part(tablist) {
+      gap: 1rem;
+    }
+  }
+
+  &[placement='left'],
+  &[placement='right'] {
+    max-width: 100%;
+    overflow: hidden;
+
+    &::part(tablist-wrapper) {
+      min-height: 100px;
+    }
+
+    &::part(tablist) {
+      flex-direction: column;
+    }
+
+    .tab-button {
+      max-width: 300px;
+    }
+
+    .tab-panel {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+
+  &[placement='top'] {
+    flex-direction: column;
+  }
+
+  &[placement='bottom'] {
+    flex-direction: column-reverse;
+  }
+
+  &[placement='right'] {
+    flex-direction: row-reverse;
+  }
 
   // ========================================
   // Style 1: Underline Style (Default)
   // Clean, minimal with bottom border
   // ========================================
-  &:not([class*="style-"]) {
-    // Horizontal layout
-    &:not([vertical]) {
-      .tab-button {
-        display: inline-flex;
-        align-items: center;
-        position: relative;
-        padding: 1rem 1.5rem 0.75rem;
-        margin: 0 2rem 0 0;
-        border: none;
-        background: transparent;
-        color: $global-font-color;
-        font-family: inherit;
-        font-size: 0.9rem;
-        font-weight: 500;
-        cursor: pointer;
-        @include transition(all 0.3s ease);
-        border-bottom: 2px solid transparent;
+  &:not([type]) {
+    &::part(tablist-tab-wrapper) {
+      --border-color: #{$global-border-color};
 
-        [data-theme='dark'] & {
-          color: $global-font-color-dark;
-        }
-
-        &:hover {
-          color: $global-link-color;
-          border-bottom-color: rgba($global-link-color, 0.3);
-
-          [data-theme='dark'] & {
-            color: $global-link-color-dark;
-            border-bottom-color: rgba($global-link-color-dark, 0.3);
-          }
-        }
-
-        &[aria-selected='true'] {
-          color: $global-link-color;
-          font-weight: 600;
-          border-bottom-color: $global-link-color;
-
-          [data-theme='dark'] & {
-            color: $global-link-color-dark;
-            border-bottom-color: $global-link-color-dark;
-          }
-        }
-      }
-
-      .tab-panel {
-        padding: 2rem 0 0;
-        margin-top: 1rem;
-        border-top: 1px solid $global-border-color;
-
-        [data-theme='dark'] & {
-          border-top-color: $global-border-color-dark;
-        }
-
-        &[hidden] { display: none; }
+      [data-theme='dark'] & {
+        --border-color: #{$global-border-color-dark};
       }
     }
 
-    // Vertical layout
-    &[vertical] {
-      display: flex;
-      gap: 2rem;
+    .tab-button {
+      display: block;
+      align-items: center;
+      position: relative;
+      padding-block: 0.75rem;
+      border: none;
+      background: transparent;
+      color: inherit;
+      font-size: 0.9em;
+      font-weight: 500;
+      cursor: pointer;
+      --border-color: transparent;
+      @include transition(all 0.3s ease);
 
-      .tab-button {
-        display: block;
-        width: 200px;
-        padding: 1rem 0 1rem 1.5rem;
-        margin: 0 0 0.5rem 0;
-        border: none;
-        background: transparent;
-        color: $global-font-color;
-        font-family: inherit;
-        font-size: 0.9rem;
-        font-weight: 500;
-        text-align: left;
-        cursor: pointer;
-        @include transition(all 0.3s ease);
-        border-left: 3px solid transparent;
-
-        [data-theme='dark'] & {
-          color: $global-font-color-dark;
-        }
-
-        &:hover {
-          color: $global-link-color;
-          border-left-color: rgba($global-link-color, 0.3);
-
-          [data-theme='dark'] & {
-            color: $global-link-color-dark;
-            border-left-color: rgba($global-link-color-dark, 0.3);
-          }
-        }
-
-        &[aria-selected='true'] {
-          color: $global-link-color;
-          font-weight: 600;
-          border-left-color: $global-link-color;
-
-          [data-theme='dark'] & {
-            color: $global-link-color-dark;
-            border-left-color: $global-link-color-dark;
-          }
-        }
+      &[aria-selected='true'],
+      &[aria-selected='false']:hover {
+        color: var(#{$rootPrefix}primary);
+        --border-color: var(#{$rootPrefix}primary);
       }
 
-      .tab-panel {
-        flex: 1;
-        padding: 0;
+      &[aria-selected='false']:hover {
+        opacity: 0.7;
+      }
+    }
 
-        &[hidden] { display: none; }
+    &[placement='top'],
+    &[placement='bottom'] {
+      gap: 0.5rem;
+
+      .tab-button {
+        padding-inline: 1.5rem;
+      }
+
+      &::part(tablist-wrapper) {
+        overflow-x: scroll;
+        overflow-y: hidden;
+      }
+    }
+
+    &[placement='left'],
+    &[placement='right'] {
+      .tab-button {
+        padding-inline: 1rem;
+      }
+    }
+
+    // Top placement
+    &[placement='top'] {
+      &::part(tablist-tab-wrapper) {
+        border-bottom: 2px solid var(--border-color);
+      }
+
+      .tab-button {
+        translate: 0 2px;
+        border-bottom: 2px solid var(--border-color);
+      }
+    }
+
+    // Bottom placement
+    &[placement='bottom'] {
+      &::part(tablist-tab-wrapper) {
+        border-top: 2px solid var(--border-color);
+      }
+
+      .tab-button {
+        translate: 0 -2px;
+        border-top: 2px solid var(--border-color);
+      }
+    }
+
+    // Left placement
+    &[placement='left'] {
+      &::part(tablist-tab-wrapper) {
+        border-right: 2px solid var(--border-color);
+      }
+
+      .tab-button {
+        text-align: right;
+        translate: 2px 0;
+        border-right: 2px solid var(--border-color);
+      }
+    }
+
+    // Right placement
+    &[placement='right'] {
+      &::part(tablist-tab-wrapper) {
+        border-left: 2px solid var(--border-color);
+      }
+
+      .tab-button {
+        text-align: left;
+        translate: -2px 0;
+        border-left: 2px solid var(--border-color);
       }
     }
   }
@@ -129,114 +185,100 @@ tab-container {
   // Style 2: Pill Style
   // Rounded buttons with background
   // ========================================
-  &.style-pill {
-    &:not([vertical]) {
-      .tab-button {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.75rem 1.25rem;
-        margin: 0 0.5rem 0 0;
-        border: none;
-        background: $code-background-color;
-        color: $global-font-color;
-        font-family: inherit;
-        font-size: 0.875rem;
-        font-weight: 500;
-        cursor: pointer;
-        @include border-radius(25px);
-        @include transition(all 0.2s ease);
+  &[type='pill'] {
+    .tab-button {
+      display: block;
+      align-items: center;
+      padding: 0.75rem 1.25rem;
+      border: none;
+      background: var(#{$rootPrefix}code-inline-background-color);
+      color: inherit;
+      font-size: 0.9em;
+      font-weight: 500;
+      cursor: pointer;
+      @include border-radius(2em);
+      @include transition(all 0.3s ease);
+
+      &[aria-selected='true'] {
+        color: #ffffff;
+        background: var(#{$rootPrefix}primary);
+        @include box-shadow(0 0.125rem 0.5rem rgba(0, 0, 0, 0.3));
 
         [data-theme='dark'] & {
-          background: $code-background-color-dark;
-          color: $global-font-color-dark;
-        }
-
-        &:hover {
-          background: rgba($global-link-color, 0.1);
-          color: $global-link-color;
-          @include transform(translateY(-1px));
-
-          [data-theme='dark'] & {
-            background: rgba($global-link-color-dark, 0.1);
-            color: $global-link-color-dark;
-          }
-        }
-
-        &[aria-selected='true'] {
-          background: $global-link-color;
-          color: white;
-          @include box-shadow(0 4px 12px rgba($global-link-color, 0.3));
-
-          [data-theme='dark'] & {
-            background: $global-link-color-dark;
-            color: $global-background-color;
-            @include box-shadow(0 4px 12px rgba($global-link-color-dark, 0.3));
-          }
+          background: var(#{$rootPrefix}primary);
+          @include box-shadow(0 0.125rem 0.5rem rgba(255, 255, 255, 0.3));
         }
       }
 
-      .tab-panel {
-        padding: 2rem 0 0;
-        margin-top: 1rem;
+      &[aria-selected='false']:hover {
+        background: rgba(175, 184, 193, 0.4);
 
-        &[hidden] { display: none; }
+        [data-theme='dark'] & {
+          background: rgba(99, 110, 123, 0.6);
+        }
       }
     }
 
-    &[vertical] {
-      display: flex;
-      gap: 1.5rem;
-
-      .tab-button {
-        display: block;
-        width: 200px;
-        padding: 1rem 1.25rem;
-        margin: 0 0 0.5rem 0;
-        border: none;
-        background: $code-background-color;
-        color: $global-font-color;
-        font-family: inherit;
-        font-size: 0.875rem;
-        font-weight: 500;
-        text-align: left;
-        cursor: pointer;
-        @include border-radius(12px);
-        @include transition(all 0.2s ease);
-
-        [data-theme='dark'] & {
-          background: $code-background-color-dark;
-          color: $global-font-color-dark;
-        }
-
-        &:hover {
-          background: rgba($global-link-color, 0.1);
-          color: $global-link-color;
-          @include transform(translateX(4px));
-
-          [data-theme='dark'] & {
-            background: rgba($global-link-color-dark, 0.1);
-            color: $global-link-color-dark;
-          }
-        }
-
-        &[aria-selected='true'] {
-          background: $global-link-color;
-          color: white;
-          @include box-shadow(0 4px 12px rgba($global-link-color, 0.3));
-
-          [data-theme='dark'] & {
-            background: $global-link-color-dark;
-            color: $global-background-color;
-            @include box-shadow(0 4px 12px rgba($global-link-color-dark, 0.3));
-          }
-        }
+    &[placement='top'],
+    &[placement='bottom'] {
+      &::part(tablist-tab-wrapper) {
+        max-width: 100%;
       }
 
-      .tab-panel {
-        flex: 1;
-        padding: 0;
+      &::part(tablist) {
+        flex-wrap: wrap;
+        row-gap: 0.5rem;
+      }
+    }
 
-        &[hidden] { display: none; }
+    &[placement='left'],
+    &[placement='right'] {
+      &::part(tablist) {
+        gap: 0.75rem;
+      }
+    }
+
+    // Top placement
+    &[placement='top'] {
+      .tab-button {
+        &:hover {
+          translate: 0 2px;
+        }
+      }
+    }
+
+    // Bottom placement
+    &[placement='bottom'] {
+      .tab-button {
+        &:hover {
+          translate: 0 -2px;
+        }
+      }
+    }
+
+    // Left placement
+    &[placement='left'] {
+      &::part(tablist) {
+        margin-left: 0.5rem;
+      }
+
+      .tab-button {
+        &:hover {
+          translate: 2px 0;
+        }
+      }
+    }
+
+    // Right placement
+    &[placement='right'] {
+      &::part(tablist) {
+        margin-right: 0.5rem;
+      }
+
+      .tab-button {
+        &:hover {
+          translate: -2px 0;
+        }
       }
     }
   }
@@ -245,315 +287,231 @@ tab-container {
   // Style 3: Card Style
   // Card-like appearance with borders
   // ========================================
-  &.style-card {
-    &:not([vertical]) {
-      .tab-button {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.875rem 1.5rem;
-        margin: 0 0.25rem -1px 0;
-        border: 1px solid $global-border-color;
-        background: $code-background-color;
-        color: $global-font-color;
-        font-family: inherit;
-        font-size: 0.875rem;
-        font-weight: 500;
-        cursor: pointer;
-        @include border-radius(8px 8px 0 0);
-        @include transition(all 0.2s ease);
-        position: relative;
-        z-index: 1;
+  &[type='card'] {
+    gap: 0;
 
-        [data-theme='dark'] & {
-          border-color: $global-border-color-dark;
-          background: $code-background-color-dark;
-          color: $global-font-color-dark;
-        }
+    &::part(tablist-tab-wrapper) {
+      --border-color: #{$global-border-color};
 
-        &:hover {
-          background: $global-background-color;
-          color: $global-link-color;
-          z-index: 2;
-
-          [data-theme='dark'] & {
-            background: $global-background-color-dark;
-            color: $global-link-color-dark;
-          }
-        }
-
-        &[aria-selected='true'] {
-          background: $global-background-color;
-          color: $global-link-color;
-          font-weight: 600;
-          border-bottom-color: $global-background-color;
-          z-index: 3;
-
-          [data-theme='dark'] & {
-            background: $global-background-color-dark;
-            color: $global-link-color-dark;
-            border-bottom-color: $global-background-color-dark;
-          }
-        }
-      }
-
-      .tab-panel {
-        padding: 2rem;
-        background: $global-background-color;
-        border: 1px solid $global-border-color;
-        @include border-radius(0 8px 8px 8px);
-
-        [data-theme='dark'] & {
-          background: $global-background-color-dark;
-          border-color: $global-border-color-dark;
-        }
-
-        &[hidden] { display: none; }
+      [data-theme='dark'] & {
+        --border-color: #{$global-border-color-dark};
       }
     }
 
-    &[vertical] {
-      display: flex;
-      gap: 1rem;
+    &::part(tablist) {
+      gap: 0.25rem;
+    }
 
-      .tab-button {
-        display: block;
-        width: 200px;
-        padding: 1rem 1.25rem;
-        margin: 0 -1px 0.25rem 0;
-        border: 1px solid $global-border-color;
-        background: $code-background-color;
-        color: $global-font-color;
-        font-family: inherit;
-        font-size: 0.875rem;
-        font-weight: 500;
-        text-align: left;
-        cursor: pointer;
-        @include border-radius(8px 0 0 8px);
-        @include transition(all 0.2s ease);
-        position: relative;
+    .tab-button {
+      display: block;
+      align-items: center;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid $global-border-color;
+      background: $code-background-color;
+      color: inherit;
+      font-size: 0.9em;
+      font-weight: 500;
+      cursor: pointer;
+      @include transition(all 0.3s ease);
+      position: relative;
+
+      [data-theme='dark'] & {
+        border-color: $global-border-color-dark;
+        background: $code-background-color-dark;
+      }
+
+      &[aria-selected='true'] {
+        background: $global-background-color;
+        color: $global-link-color;
+        z-index: 1;
+        --border-active-color: #{$global-background-color};
+
+        [data-theme='dark'] & {
+          background: $global-background-color-dark;
+          color: $global-link-color-dark;
+          --border-active-color: #{$global-background-color-dark};
+        }
+      }
+
+      &[aria-selected='false']:hover {
+        background: $global-background-color;
+        color: $global-link-color;
         z-index: 1;
 
         [data-theme='dark'] & {
-          border-color: $global-border-color-dark;
-          background: $code-background-color-dark;
-          color: $global-font-color-dark;
+          background: $global-background-color-dark;
+          color: $global-link-color-dark;
         }
+      }
+    }
 
-        &:hover {
-          background: $global-background-color;
-          color: $global-link-color;
+    .tab-panel {
+      padding: 0.75rem;
+      background: $global-background-color;
+      border: 1px solid $global-border-color;
+
+      [data-theme='dark'] & {
+        background: $global-background-color-dark;
+        border-color: $global-border-color-dark;
+      }
+    }
+
+    &[placement='top'],
+    &[placement='bottom'] {
+      &::part(tablist-wrapper) {
+        overflow-x: scroll;
+        overflow-y: hidden;
+      }
+
+      .tab-button {
+        &:first-of-type {
+          position: sticky;
+          left: 0;
           z-index: 2;
-
-          [data-theme='dark'] & {
-            background: $global-background-color-dark;
-            color: $global-link-color-dark;
-          }
         }
+
+        &:last-of-type {
+          position: sticky;
+          right: 0;
+          z-index: 2;
+        }
+      }
+    }
+
+    // Top placement
+    &[placement='top'] {
+      &::part(tablist-tab-wrapper) {
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .tab-button {
+        translate: 0 1px;
+        @include border-radius($global-border-radius $global-border-radius 0 0);
 
         &[aria-selected='true'] {
-          background: $global-background-color;
-          color: $global-link-color;
-          font-weight: 600;
-          border-right-color: $global-background-color;
-          z-index: 3;
-
-          [data-theme='dark'] & {
-            background: $global-background-color-dark;
-            color: $global-link-color-dark;
-            border-right-color: $global-background-color-dark;
-          }
+          border-bottom-color: var(--border-active-color);
         }
       }
 
       .tab-panel {
-        flex: 1;
-        padding: 2rem;
-        background: $global-background-color;
-        border: 1px solid $global-border-color;
-        @include border-radius(0 8px 8px 8px);
+        border-top: none;
+        @include border-radius(0 0 $global-border-radius $global-border-radius);
+      }
+    }
 
-        [data-theme='dark'] & {
-          background: $global-background-color-dark;
-          border-color: $global-border-color-dark;
+    // Bottom placement
+    &[placement='bottom'] {
+      &::part(tablist-tab-wrapper) {
+        border-top: 1px solid var(--border-color);
+      }
+
+      .tab-button {
+        translate: 0 -1px;
+        @include border-radius(0 0 $global-border-radius $global-border-radius);
+
+        &[aria-selected='true'] {
+          border-top-color: var(--border-active-color);
         }
+      }
 
-        &[hidden] { display: none; }
+      .tab-panel {
+        border-bottom: none;
+        @include border-radius($global-border-radius $global-border-radius 0 0);
+      }
+    }
+
+    // Left placement
+    &[placement='left'] {
+      &::part(tablist-tab-wrapper) {
+        border-right: 1px solid var(--border-color);
+      }
+
+      .tab-button {
+        translate: 1px 0;
+        @include border-radius($global-border-radius 0 0 $global-border-radius);
+
+        &[aria-selected='true'] {
+          border-right-color: var(--border-active-color);
+        }
+      }
+
+      .tab-panel {
+        border-left: none;
+        @include border-radius(0 $global-border-radius $global-border-radius 0);
+      }
+    }
+
+    // Right placement
+    &[placement='right'] {
+      &::part(tablist-tab-wrapper) {
+        border-left: 1px solid var(--border-color);
+      }
+
+      .tab-button {
+        translate: -1px 0;
+        @include border-radius(0 $global-border-radius $global-border-radius 0);
+
+        &[aria-selected='true'] {
+          border-left-color: var(--border-active-color);
+        }
+      }
+
+      .tab-panel {
+        border-right: none;
+        @include border-radius($global-border-radius 0 0 $global-border-radius);
       }
     }
   }
 
   // ========================================
-  // Style 4: Segmented Style
-  // iOS-like segmented control
+  // Style 4: Segment Style (only top placement support)
+  // iOS-like segment control
   // ========================================
-  &.style-segmented {
-    &:not([vertical]) {
+  &[type='segment'] {
+    &::part(tablist-tab-wrapper) {
+      padding: 0.25rem;
       background: $code-background-color;
-      @include border-radius(12px);
-      padding: 4px;
-      display: inline-block;
+      @include border-radius($global-border-radius);
 
       [data-theme='dark'] & {
         background: $code-background-color-dark;
       }
+    }
 
-      .tab-button {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.75rem 1.25rem;
-        margin: 0;
-        border: none;
-        background: transparent;
-        color: $global-font-color;
-        font-family: inherit;
-        font-size: 0.875rem;
+    &::part(tablist) {
+      gap: 0;
+    }
+
+    .tab-button {
+      display: block;
+      align-items: center;
+      padding: 0.75rem 1.25rem;
+      margin: 0;
+      border: none;
+      background: transparent;
+      color: inherit;
+      font-size: 0.9em;
+      font-weight: 400;
+      cursor: pointer;
+      flex-grow: 1;
+      @include border-radius($global-border-radius);
+      @include transition(all 0.3s ease);
+      position: relative;
+
+      &:hover {
         font-weight: 500;
-        cursor: pointer;
-        @include border-radius(8px);
-        @include transition(all 0.2s ease);
-        position: relative;
-
-        [data-theme='dark'] & {
-          color: $global-font-color-dark;
-        }
-
-        &:hover {
-          color: $global-link-color;
-
-          [data-theme='dark'] & {
-            color: $global-link-color-dark;
-          }
-        }
-
-        &[aria-selected='true'] {
-          background: $global-background-color;
-          color: $global-link-color;
-          font-weight: 600;
-          @include box-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-
-          [data-theme='dark'] & {
-            background: $global-background-color-dark;
-            color: $global-link-color-dark;
-            @include box-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-          }
-        }
       }
 
-      + .tab-panel {
-        padding: 2rem 0 0;
-        margin-top: 1rem;
-
-        &[hidden] { display: none; }
-      }
-    }
-
-    &[vertical] {
-      display: flex;
-      gap: 1rem;
-
-      > div:first-child {
-        background: $code-background-color;
-        @include border-radius(12px);
-        padding: 4px;
-        width: 200px;
-
-        [data-theme='dark'] & {
-          background: $code-background-color-dark;
-        }
-      }
-
-      .tab-button {
-        display: block;
-        width: 100%;
-        padding: 1rem 1.25rem;
-        margin: 0 0 4px 0;
-        border: none;
-        background: transparent;
-        color: $global-font-color;
-        font-family: inherit;
-        font-size: 0.875rem;
+      &[aria-selected='true'] {
+        background: $global-background-color;
         font-weight: 500;
-        text-align: left;
-        cursor: pointer;
-        @include border-radius(8px);
-        @include transition(all 0.2s ease);
-
+        @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
+        
         [data-theme='dark'] & {
-          color: $global-font-color-dark;
-        }
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-
-        &:hover {
-          color: $global-link-color;
-
-          [data-theme='dark'] & {
-            color: $global-link-color-dark;
-          }
-        }
-
-        &[aria-selected='true'] {
-          background: $global-background-color;
-          color: $global-link-color;
-          font-weight: 600;
-          @include box-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-
-          [data-theme='dark'] & {
-            background: $global-background-color-dark;
-            color: $global-link-color-dark;
-            @include box-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-          }
+          background: $global-background-color-dark;
+          @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.3));
         }
       }
-
-      .tab-panel {
-        flex: 1;
-        padding: 0;
-
-        &[hidden] { display: none; }
-      }
-    }
-  }
-
-  // ========================================
-  // Responsive Design
-  // ========================================
-  @media only screen and (max-width: 768px) {
-    &[vertical] {
-      flex-direction: column;
-      gap: 1rem;
-      
-      .tab-button {
-        width: 100% !important;
-        text-align: center !important;
-      }
-
-      .tab-panel {
-        width: 100%;
-      }
-    }
-
-    // Segmented style adjustments for mobile
-    &.style-segmented:not([vertical]) {
-      width: 100%;
-      
-      .tab-button {
-        flex: 1;
-        justify-content: center;
-      }
-    }
-  }
-
-  @media only screen and (max-width: 480px) {
-    &:not([vertical]) .tab-button {
-      padding: 0.625rem 1rem;
-      font-size: 0.8rem;
-    }
-
-    .tab-panel {
-      padding: 1.5rem !important;
     }
   }
 }
@@ -566,6 +524,7 @@ tab-container {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

@@ -5,13 +5,20 @@
 {{- $lenTabs := len $tabs -}}
 {{- $defaultTab := .Get "defaultTab" | default 0 -}}
 {{- $vertical := .Get "vertical" | default false -}}
-{{- $class := .Get "class" | default "" -}}
+{{- $type := .Get "type" | default "" -}}
+{{- $placement := .Get "placement" | default "top" -}}
+{{- $placementMap := slice "top" "bottom" "left" "right" -}}
 {{- if ge $defaultTab $lenTabs -}}
   {{- warnf "The defaultTab value %v is out of range [0, %v]. See %s %s" $defaultTab (sub $lenTabs 1) .Name .Position -}}
   {{- $defaultTab = 0 -}}
 {{- end -}}
+{{- if not (in $placementMap $placement) -}}
+  {{- warnf "The placement value %q is invalid. Supported values are: %v. See %s %s" $placement (delimit $placementMap ", ") .Name .Position -}}
+  {{- $placement = "top" -}}
+{{- end -}}
 
-<tab-container default-tab="{{ $defaultTab }}"{{ if $vertical }} vertical{{ end }}{{ if $class }} class="{{ $class }}"{{ end }}>
+{{- /* Tabs Container */ -}}
+<tab-container default-tab="{{ $defaultTab }}" placement="{{ $placement }}"{{ with $type }} type="{{ . }}"{{ end }}>
   {{- range $index, $tab := $tabs -}}
     {{- $title := $tab.title | default (printf "Untitled%v" $index) -}}
     {{- $id := $tab.id -}}
