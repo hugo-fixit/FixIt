@@ -506,7 +506,7 @@ tab-container {
         background: $global-background-color;
         font-weight: 500;
         @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
-        
+
         [data-theme='dark'] & {
           background: $global-background-color-dark;
           @include box-shadow(0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));

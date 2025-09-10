@@ -3,6 +3,6 @@
 {{- .Parent.Store.Add "tabs" (slice (dict "title" $title "id" $id)) -}}
 {{- $content := trim .Inner "\r\n" -}}
 {{- /* Remove p tags around complete tab-container structure */ -}}
-{{- $content = $content | replaceRE `<p>(<tab-container[^>]*>.*?</button>)</p>` "$1" -}}
+{{- $content = $content | replaceRE `<p>(<tab-container[^>]*>[\s\S]*?</button>)</p>` "$1" -}}
 <div role="tabpanel" aria-labelledby="tab-{{ $id }}" class="tab-panel">{{ $content | safeHTML }}</div>
 {{- /* EOF */ -}}

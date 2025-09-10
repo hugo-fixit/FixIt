@@ -22,10 +22,6 @@
   {{- range $index, $tab := $tabs -}}
     {{- $title := $tab.title | default (printf "Untitled%v" $index) -}}
     {{- $id := $tab.id -}}
-    {{- $tabindex := 0 -}}
-    {{- if ne $index 0 -}}
-      {{- $tabindex = -1 -}}
-    {{- end -}}
     <button class="tab-button" type="button" role="tab" id="tab-{{ $id }}" aria-selected="{{ eq $index $defaultTab }}">{{ $title | $.Page.RenderString }}</button>
   {{- end -}}
   {{- .Inner -}}
