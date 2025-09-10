@@ -292,6 +292,7 @@ Thanks to all the [contributors](https://github.com/hugo-fixit/FixIt/graphs/cont
 - [crypto-js](https://github.com/brix/crypto-js)
 - [pace](https://github.com/CodeByZach/pace)
 - [xxhash-wasm](https://github.com/jungomi/xxhash-wasm)
+- [`<tab-container>` element](https://github.com/github/tab-container-element)
 
 </details>
 

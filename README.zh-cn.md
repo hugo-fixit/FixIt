@@ -292,6 +292,7 @@ FixIt 主题旨在在**简洁性**和**可扩展性**之间取得平衡。为此
 - [crypto-js](https://github.com/brix/crypto-js)
 - [pace](https://github.com/CodeByZach/pace)
 - [xxhash-wasm](https://github.com/jungomi/xxhash-wasm)
+- [`<tab-container>` element](https://github.com/github/tab-container-element)
 
 </details>
 
