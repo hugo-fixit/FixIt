@@ -182,7 +182,7 @@
 {{- end -}}
 
 {{- /* Tabs and tab */ -}}
-{{- if .HasShortcode "tabs" -}}
+{{- if .Store.Get "hasTabs" -}}
   {{- $source := $cdn.tabContainerElementJS | default "lib/tab-container-element/bundle.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Attr" `type="module"` "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}

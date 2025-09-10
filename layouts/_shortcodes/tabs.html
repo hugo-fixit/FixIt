@@ -26,4 +26,7 @@
   {{- end -}}
   {{- .Inner -}}
 </tab-container>
-{{- /* EOF */ -}}
+{{- .Page.Store.Set "hasTabs" true -}}
+{{- if eq hugo.Context.MarkupScope "home" -}}
+  {{- site.Home.Store.Set "hasTabs" true -}}
+{{- end -}}
