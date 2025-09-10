@@ -1,5 +1,9 @@
 <!-- Thank you for contributing! -->
 
+### Description
+
+<!-- Please insert your description here and provide especially info about the "what" this PR is solving -->
+
 ### Before submitting the PR, please make sure you do the following <!-- (put an "X" next to an item) -->
 
 - [ ] Read the [Contributing Guidelines](https://github.com/hugo-fixit/FixIt/blob/main/CONTRIBUTING.md).
@@ -10,10 +14,6 @@
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Other
-
-### Description
-
-<!-- Please insert your description here and provide especially info about the "what" this PR is solving -->
 
 ### Screenshots
 
