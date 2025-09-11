@@ -54,9 +54,7 @@ Testing various configurations and nested scenarios for the Tabs shortcode.
 
 ### Segment
 
-<!-- placement: top, bottom, left, right -->
-
-{{< tabs type="segment" placement="top" >}}
+{{< tabs type="segment" >}}
 {{% tab title="Tab 1" %}}Content for segment style tab 1{{% /tab %}}
 {{% tab title="Tab 2" %}}Content for segment style tab 2{{% /tab %}}
 {{% tab title="Tab 3" %}}Content for segment style tab 3{{% /tab %}}
