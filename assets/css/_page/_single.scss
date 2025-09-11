@@ -17,14 +17,14 @@
       width: max-content;
       transform: rotate(30deg);
       margin-right: 0.25em;
-      color: var(--#{$prefix}danger);
+      color: var(#{$rootPrefix}danger);
     }
 
     .icon-repost {
       display: inline-block;
       width: max-content;
       margin-right: 0.25em;
-      color: var(--#{$prefix}success);
+      color: var(#{$rootPrefix}success);
     }
   }
 
@@ -100,7 +100,7 @@
     position: relative;
     height: 1em;
     margin-block: 1em;
-    background: linear-gradient(to right, var(--#{$prefix}hr-background-color) 50%, transparent 50%);
+    background: linear-gradient(to right, var(#{$rootPrefix}hr-background-color) 50%, transparent 50%);
     background-size: 10px 2px;
     background-position: center;
     background-repeat: repeat-x;
@@ -118,7 +118,7 @@
         top: 50%;
         transform: translateY(-50%);
         z-index: 1;
-        color: var(--#{$prefix}hr-before-color);
+        color: var(#{$rootPrefix}hr-before-color);
         content: '\f0c4';
         font-size: 20px;
         line-height: 1;
@@ -236,31 +236,31 @@
 
     // Task lists
     li[data-task] {
-      color: var(--#{$prefix}task-color);
+      color: var(#{$rootPrefix}task-color);
       .checkbox-icon {
         margin-right: 0.25em;
-        color: var(--#{$prefix}checkbox-color);
+        color: var(#{$rootPrefix}checkbox-color);
       }
     }
     li[data-task='x'],
     li[data-task='-'] {
-      --#{$prefix}task-color: var(--#{$prefix}secondary);
+      #{$rootPrefix}task-color: var(#{$rootPrefix}secondary);
       text-decoration: line-through rgba(145, 145, 145, 0.6);
     }
     li[data-task='x'] {
-      --#{$prefix}checkbox-color: var(--#{$prefix}primary);
+      #{$rootPrefix}checkbox-color: var(#{$rootPrefix}primary);
     }
     li[data-task='-'] {
       opacity: 0.6;
     }
     li[data-task='/'] {
-      --#{$prefix}task-color: var(--#{$prefix}success);
+      #{$rootPrefix}task-color: var(#{$rootPrefix}success);
     }
     li[data-task='!'] {
-      --#{$prefix}checkbox-color: var(--#{$prefix}danger);
+      #{$rootPrefix}checkbox-color: var(#{$rootPrefix}danger);
     }
     li[data-task='?'] {
-      --#{$prefix}checkbox-color: var(--#{$prefix}warning);
+      #{$rootPrefix}checkbox-color: var(#{$rootPrefix}warning);
     }
 
     dl {
@@ -290,14 +290,14 @@
 
     mark {
       padding: 0.14em 0.28em;
-      background-color: var(--#{$prefix}mark-background-color, mark);
-      color: var(--#{$prefix}mark-color, marktext);
+      background-color: var(#{$rootPrefix}mark-background-color, mark);
+      color: var(#{$rootPrefix}mark-color, marktext);
       @include border-radius($global-border-radius);
 
       @each $color, $value in $theme-colors {
         &.mark-#{$color} {
-          --#{$prefix}mark-color: #fff;
-          --#{$prefix}mark-background-color: var(--#{$prefix}#{$color});
+          #{$rootPrefix}mark-color: #fff;
+          #{$rootPrefix}mark-background-color: var(#{$rootPrefix}#{$color});
         }
       }
     }
@@ -305,10 +305,10 @@
     .table-wrapper {
       position: relative;
       overflow-x: auto;
-      --#{$prefix}scrollbar-thumb-color: #{$table-background-color};
+      #{$rootPrefix}scrollbar-thumb-color: #{$table-background-color};
 
       [data-theme='dark'] & {
-        --#{$prefix}scrollbar-thumb-color: #{$table-background-color-dark};
+        #{$rootPrefix}scrollbar-thumb-color: #{$table-background-color-dark};
       }
 
       > table {
@@ -449,7 +449,7 @@
       }
       
       hr {
-        background-color: var(--#{$prefix}hr-background-color);
+        background-color: var(#{$rootPrefix}hr-background-color);
         height: 1px;
         margin-block: 1em;
       }

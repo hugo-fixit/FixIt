@@ -61,6 +61,8 @@ libFiles:
   paceJS: pace-js@1.2.4
   # sharer.js@0.5.1 https://github.com/ellisonleao/sharer.js
   sharerJS: sharer.js@0.5.1/sharer.min.js
+  # @github/tab-container-element@4.8.2 https://github.com/github/tab-container-element
+  tabContainerElementJS: '@github/tab-container-element@4.8.2/dist/index.min.js'
   # twemoji@14.0.2 https://github.com/twitter/twemoji
   twemojiJS: twemoji@14.0.2/dist/twemoji.min.js
   # twikoo@1.6.44 https://github.com/imaegoo/twikoo

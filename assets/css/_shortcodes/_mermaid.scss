@@ -10,17 +10,7 @@
   }
 
   &:not([data-processed])::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(1rem);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: var(#{$rootPrefix}loading-img);
-    background-size: 60px;
+    @include loading;
   }
 
   svg {

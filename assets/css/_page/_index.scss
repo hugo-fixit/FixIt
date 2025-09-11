@@ -4,7 +4,7 @@
 
   .content {
     [id] {
-      scroll-margin-top: var(--#{$prefix}scroll-mt);
+      scroll-margin-top: var(#{$rootPrefix}scroll-mt);
     }
   }
 

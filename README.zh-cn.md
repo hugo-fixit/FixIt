@@ -138,9 +138,11 @@ pnpx fixit-cli create my-blog
 - 支持**代码高亮**
 - 一键**复制代码**到剪贴板
 - 支持基于 [lightgallery](https://github.com/sachinchoolur/lightgallery) 的**图片画廊**
-- 支持 **[Font Awesome](https://fontawesome.com/) 图标**的扩展 Markdown 语法
-- 支持**上标注释**的扩展 Markdown 语法
-- 支持**分数**的扩展 Markdown 语法
+- 支持 **[Font Awesome](https://fontawesome.com/) 图标**的 Markdown 扩展语法
+- 支持**上标注释**的 Markdown 扩展语法
+- 支持**分数**的 Markdown 扩展语法
+- 支持多种 **admonitions** shortcode 或 **alerts** 的 Markdown 扩展语法
+- 支持**标签页**的 shortcode，提供多种设计样式
 - 支持基于 [KaTeX](https://katex.org/) 或 [MathJax](https://www.mathjax.org) 的**数学公式**
 - 支持基于 [mermaid](https://github.com/knsv/mermaid) 的**图表** 代码块扩展语法和 shortcode
 - 支持基于 [ECharts](https://echarts.apache.org/) 的**交互式数据可视化** 代码块扩展语法和 shortcode
@@ -148,7 +150,6 @@ pnpx fixit-cli create my-blog
 - 支持基于 [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js) 的 **Mapbox** shortcode
 - 支持基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 的**音乐播放器** shortcode
 - 支持 **Bilibili 视频** 和 **抖音视频** shortcode
-- 支持多种**注释**的 shortcode
 - 支持**自定义样式**的 shortcode
 - 支持**自定义脚本**的 shortcode
 - 支持**自定义模板块**
@@ -292,6 +293,7 @@ FixIt 主题旨在在**简洁性**和**可扩展性**之间取得平衡。为此
 - [crypto-js](https://github.com/brix/crypto-js)
 - [pace](https://github.com/CodeByZach/pace)
 - [xxhash-wasm](https://github.com/jungomi/xxhash-wasm)
+- [`<tab-container>` element](https://github.com/github/tab-container-element)
 
 </details>
 

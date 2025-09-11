@@ -77,7 +77,7 @@ details {
   font-size: $code-font-size;
   font-family: $code-font-family;
   color: $code-color;
-  background-color: rgba(175, 184, 193, 0.2);
+  background-color: var(#{$rootPrefix}code-inline-background-color);
   text-decoration: inherit;
   @include border-radius($global-border-radius);
   @include overflow-wrap(break-word);
@@ -85,7 +85,6 @@ details {
 
   [data-theme='dark'] & {
     color: $code-color-dark;
-    background-color: rgba(99, 110, 123, 0.4);
   }
 }
 

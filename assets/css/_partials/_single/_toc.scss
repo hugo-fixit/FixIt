@@ -73,7 +73,7 @@
 #toc-auto {
   display: block;
   position: sticky;
-  top: calc(#{$header-height} + var(--#{$prefix}breadcrumb-height));
+  top: calc(#{$header-height} + var(#{$rootPrefix}breadcrumb-height));
   box-sizing: border-box;
   visibility: hidden;
   @include overflow-wrap(break-word);
@@ -81,7 +81,7 @@
   @extend .print-d-none;
 
   [data-header-desktop='normal'] & {
-    --#{$prefix}scroll-mt: #{$global-scroll-margin-top};
+    #{$rootPrefix}scroll-mt: #{$global-scroll-margin-top};
   }
 
   .toc-title {

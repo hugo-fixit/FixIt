@@ -42,7 +42,7 @@
       }
 
       &.active {
-        color: var(--#{$prefix}secondary);
+        color: var(#{$rootPrefix}secondary);
       }
     }
   }

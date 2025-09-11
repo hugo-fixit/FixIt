@@ -82,7 +82,7 @@
 
   .summary {
     padding-block: 1rem;
-    color: var(--#{$prefix}global-font-color);
+    color: var(#{$rootPrefix}global-font-color);
 
     &:not(:last-of-type)::after {
       content: '';
@@ -92,8 +92,8 @@
       transform: translateY(18px);
       background: repeating-linear-gradient(
         135deg,
-        var(--#{$prefix}hr-background-color) 0px,
-        var(--#{$prefix}hr-background-color) 4px,
+        var(#{$rootPrefix}hr-background-color) 0px,
+        var(#{$rootPrefix}hr-background-color) 4px,
         transparent 4px,
         transparent 8px
       );

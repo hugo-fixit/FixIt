@@ -1,0 +1,572 @@
+// ========================================
+// Tabs shortcode - Multiple Design Styles
+// ========================================
+
+@mixin tab-button-size($padding-inline: 1.25rem, $padding-block: 0.75rem) {
+  @if $padding-inline !=0 {
+    padding-inline: $padding-inline;
+  }
+
+  @if $padding-block !=0 {
+    padding-block: $padding-block;
+  }
+}
+
+tab-container {
+  display: flex;
+  gap: 0.75rem;
+  padding-block: 1rem;
+  position: relative;
+
+  // loading before defined
+  &:not(:defined) {
+    &::before {
+      @include loading;
+    }
+  }
+
+  > .tab-button {
+    position: relative;
+    display: block;
+    border: none;
+    color: inherit;
+    background: transparent;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    flex-shrink: 0;
+    @include transition(all 0.3s ease);
+  }
+
+  > .tab-panel {
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &::part(tablist-tab-wrapper) {
+    flex: 1 0 auto;
+  }
+
+  &::part(tablist) {
+    display: flex;
+  }
+
+  &[placement='top'],
+  &[placement='bottom'] {
+    &::part(tablist-wrapper) {
+      max-width: 100%;
+    }
+
+    &::part(tablist) {
+      gap: 1rem;
+    }
+  }
+
+  &[placement='left'],
+  &[placement='right'] {
+    max-width: 100%;
+    overflow: hidden;
+
+    &::part(tablist-wrapper) {
+      min-height: 100px;
+    }
+
+    &::part(tablist) {
+      flex-direction: column;
+    }
+
+    > .tab-button {
+      max-width: 300px;
+    }
+
+    > .tab-panel {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+
+  &[placement='top'] {
+    flex-direction: column;
+  }
+
+  &[placement='bottom'] {
+    flex-direction: column-reverse;
+  }
+
+  &[placement='right'] {
+    flex-direction: row-reverse;
+  }
+
+  // ========================================
+  // Style 1: Underline Style (Default)
+  // Clean, minimal with bottom border
+  // ========================================
+  &[type='underline'] {
+    &::part(tablist-tab-wrapper) {
+      --border-color: #{$global-border-color};
+
+      [data-theme='dark'] & {
+        --border-color: #{$global-border-color-dark};
+      }
+    }
+
+    > .tab-button {
+      --border-color: transparent;
+      @include tab-button-size(0);
+
+      &[aria-selected='true'],
+      &[aria-selected='false']:hover {
+        color: var(#{$rootPrefix}primary);
+        --border-color: var(#{$rootPrefix}primary);
+      }
+
+      &[aria-selected='false']:hover {
+        opacity: 0.7;
+      }
+    }
+
+    &[placement='top'],
+    &[placement='bottom'] {
+      gap: 0.5rem;
+
+      > .tab-button {
+        @include tab-button-size(1.5rem, 0);
+      }
+
+      &::part(tablist-wrapper) {
+        overflow-x: scroll;
+        overflow-y: hidden;
+      }
+    }
+
+    &[placement='left'],
+    &[placement='right'] {
+      > .tab-button {
+        @include tab-button-size(1rem, 0);
+      }
+    }
+
+    // Top placement
+    &[placement='top'] {
+      &::part(tablist-tab-wrapper) {
+        border-bottom: 2px solid var(--border-color);
+      }
+
+      > .tab-button {
+        translate: 0 2px;
+        border-bottom: 2px solid var(--border-color);
+      }
+    }
+
+    // Bottom placement
+    &[placement='bottom'] {
+      &::part(tablist-tab-wrapper) {
+        border-top: 2px solid var(--border-color);
+      }
+
+      > .tab-button {
+        translate: 0 -2px;
+        border-top: 2px solid var(--border-color);
+      }
+    }
+
+    // Left placement
+    &[placement='left'] {
+      &::part(tablist-tab-wrapper) {
+        border-right: 2px solid var(--border-color);
+      }
+
+      > .tab-button {
+        text-align: right;
+        translate: 2px 0;
+        border-right: 2px solid var(--border-color);
+      }
+    }
+
+    // Right placement
+    &[placement='right'] {
+      &::part(tablist-tab-wrapper) {
+        border-left: 2px solid var(--border-color);
+      }
+
+      > .tab-button {
+        text-align: left;
+        translate: -2px 0;
+        border-left: 2px solid var(--border-color);
+      }
+    }
+  }
+
+  // ========================================
+  // Style 2: Pill Style
+  // Rounded buttons with background
+  // ========================================
+  &[type='pill'] {
+    > .tab-button {
+      background: var(#{$rootPrefix}code-inline-background-color);
+      @include tab-button-size;
+      @include border-radius(2em);
+
+      &[aria-selected='true'] {
+        color: #ffffff;
+        background: var(#{$rootPrefix}primary);
+        @include box-shadow(0 0.125rem 0.5rem rgba(0, 0, 0, 0.3));
+
+        [data-theme='dark'] & {
+          background: var(#{$rootPrefix}primary);
+          @include box-shadow(0 0.125rem 0.5rem rgba(255, 255, 255, 0.3));
+        }
+      }
+
+      &[aria-selected='false']:hover {
+        background: rgba(175, 184, 193, 0.4);
+
+        [data-theme='dark'] & {
+          background: rgba(99, 110, 123, 0.6);
+        }
+      }
+    }
+
+    &[placement='top'],
+    &[placement='bottom'] {
+      &::part(tablist-tab-wrapper) {
+        max-width: 100%;
+      }
+
+      &::part(tablist) {
+        flex-wrap: wrap;
+        row-gap: 0.5rem;
+      }
+    }
+
+    &[placement='left'],
+    &[placement='right'] {
+      &::part(tablist) {
+        gap: 0.75rem;
+      }
+    }
+
+    // Top placement
+    &[placement='top'] {
+      > .tab-button {
+        &:hover {
+          translate: 0 2px;
+        }
+      }
+    }
+
+    // Bottom placement
+    &[placement='bottom'] {
+      > .tab-button {
+        &:hover {
+          translate: 0 -2px;
+        }
+      }
+    }
+
+    // Left placement
+    &[placement='left'] {
+      &::part(tablist) {
+        margin-left: 0.5rem;
+      }
+
+      > .tab-button {
+        &:hover {
+          translate: 2px 0;
+        }
+      }
+    }
+
+    // Right placement
+    &[placement='right'] {
+      &::part(tablist) {
+        margin-right: 0.5rem;
+      }
+
+      > .tab-button {
+        &:hover {
+          translate: -2px 0;
+        }
+      }
+    }
+  }
+
+  // ========================================
+  // Style 3: Card Style
+  // Card-like appearance with borders
+  // ========================================
+  &[type='card'] {
+    gap: 0;
+
+    &::part(tablist-tab-wrapper) {
+      --border-color: #{$global-border-color};
+
+      [data-theme='dark'] & {
+        --border-color: #{$global-border-color-dark};
+      }
+    }
+
+    &::part(tablist) {
+      gap: 0.25rem;
+    }
+
+    > .tab-button {
+      border: 1px solid $global-border-color;
+      background: $code-background-color;
+      @include tab-button-size(1.5rem);
+
+      [data-theme='dark'] & {
+        border-color: $global-border-color-dark;
+        background: $code-background-color-dark;
+      }
+
+      &[aria-selected='true'] {
+        background: $global-background-color;
+        color: $global-link-color;
+        z-index: 1;
+        --border-active-color: #{$global-background-color};
+
+        [data-theme='dark'] & {
+          background: $global-background-color-dark;
+          color: $global-link-color-dark;
+          --border-active-color: #{$global-background-color-dark};
+        }
+      }
+
+      &[aria-selected='false']:hover {
+        background: $global-background-color;
+        color: $global-link-color;
+        z-index: 1;
+
+        [data-theme='dark'] & {
+          background: $global-background-color-dark;
+          color: $global-link-color-dark;
+        }
+      }
+    }
+
+    > .tab-panel {
+      padding: 0.75rem;
+      background: $global-background-color;
+      border: 1px solid $global-border-color;
+
+      [data-theme='dark'] & {
+        background: $global-background-color-dark;
+        border-color: $global-border-color-dark;
+      }
+    }
+
+    &[placement='top'],
+    &[placement='bottom'] {
+      &::part(tablist-wrapper) {
+        overflow-x: scroll;
+        overflow-y: hidden;
+      }
+
+      > .tab-button {
+        &:first-of-type {
+          position: sticky;
+          left: 0;
+          z-index: 2;
+        }
+
+        &:last-of-type {
+          position: sticky;
+          right: 0;
+          z-index: 2;
+        }
+      }
+    }
+
+    // Top placement
+    &[placement='top'] {
+      &::part(tablist-tab-wrapper) {
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      > .tab-button {
+        translate: 0 1px;
+        @include border-radius($global-border-radius $global-border-radius 0 0);
+
+        &[aria-selected='true'] {
+          border-bottom-color: var(--border-active-color);
+        }
+      }
+
+      > .tab-panel {
+        border-top: none;
+        @include border-radius(0 0 $global-border-radius $global-border-radius);
+      }
+    }
+
+    // Bottom placement
+    &[placement='bottom'] {
+      &::part(tablist-tab-wrapper) {
+        border-top: 1px solid var(--border-color);
+      }
+
+      > .tab-button {
+        translate: 0 -1px;
+        @include border-radius(0 0 $global-border-radius $global-border-radius);
+
+        &[aria-selected='true'] {
+          border-top-color: var(--border-active-color);
+        }
+      }
+
+      > .tab-panel {
+        border-bottom: none;
+        @include border-radius($global-border-radius $global-border-radius 0 0);
+      }
+    }
+
+    // Left placement
+    &[placement='left'] {
+      &::part(tablist-tab-wrapper) {
+        border-right: 1px solid var(--border-color);
+      }
+
+      > .tab-button {
+        translate: 1px 0;
+        @include border-radius($global-border-radius 0 0 $global-border-radius);
+
+        &[aria-selected='true'] {
+          border-right-color: var(--border-active-color);
+        }
+      }
+
+      > .tab-panel {
+        border-left: none;
+        @include border-radius(0 $global-border-radius $global-border-radius 0);
+      }
+    }
+
+    // Right placement
+    &[placement='right'] {
+      &::part(tablist-tab-wrapper) {
+        border-left: 1px solid var(--border-color);
+      }
+
+      > .tab-button {
+        translate: -1px 0;
+        @include border-radius(0 $global-border-radius $global-border-radius 0);
+
+        &[aria-selected='true'] {
+          border-left-color: var(--border-active-color);
+        }
+      }
+
+      > .tab-panel {
+        border-right: none;
+        @include border-radius($global-border-radius 0 0 $global-border-radius);
+      }
+    }
+  }
+
+  // ========================================
+  // Style 4: Segment Style
+  // only top placement support
+  // ========================================
+  &[type='segment'] {
+    &::part(tablist-wrapper) {
+      overflow-x: scroll;
+      overflow-y: hidden;
+    }
+
+    &::part(tablist-tab-wrapper) {
+      padding: 0.25rem;
+      background: $code-background-color;
+      @include border-radius($global-border-radius);
+
+      [data-theme='dark'] & {
+        background: $code-background-color-dark;
+      }
+    }
+
+    &::part(tablist) {
+      gap: 0;
+    }
+
+    > .tab-button {
+      font-weight: 400;
+      flex-grow: 1;
+
+      @include tab-button-size;
+      @include border-radius($global-border-radius);
+
+      &[aria-selected='true'],
+      &:hover {
+        font-weight: 500;
+      }
+
+      &[aria-selected='true'] {
+        background: $global-background-color;
+        @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
+
+        [data-theme='dark'] & {
+          background: $global-background-color-dark;
+          @include box-shadow(0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
+        }
+      }
+    }
+  }
+}
+
+// ========================================
+// Responsive design for smaller screens
+// ========================================
+@media only screen and (max-width: 680px) {
+  tab-container {
+    &[type='underline'] {
+      &[placement='top'],
+      &[placement='bottom'] {
+        > .tab-button {
+          @include tab-button-size(0.875rem, 0);
+        }
+
+        &::part(tablist) {
+          gap: 0;
+        }
+      }
+    }
+
+    &[type='pill'] {
+      &[placement='top'],
+      &[placement='bottom'] {
+        > .tab-button {
+          @include tab-button-size(1rem, 0);
+        }
+
+        &::part(tablist) {
+          gap: 0.375rem 0.5rem;
+        }
+      }
+    }
+
+    &[type='card'] {
+      > .tab-button {
+        @include tab-button-size(1rem);
+      }
+    }
+  }
+}
+
+// ========================================
+// Smooth animations
+// ========================================
+@keyframes tabSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+tab-container .tab-panel:not([hidden]) {
+  animation: tabSlideIn 0.3s ease-out;
+}
