@@ -4,7 +4,7 @@
 {{- end -}}
 {{- $lenTabs := len $tabs -}}
 {{- $defaultTab := .Get "defaultTab" | default 0 -}}
-{{- $type := .Get "type" | default "" -}}
+{{- $type := .Get "type" | default "underline" -}}
 {{- $placement := .Get "placement" | default "top" -}}
 {{- $placementMap := slice "top" "bottom" "left" "right" -}}
 {{- if ge $defaultTab $lenTabs -}}

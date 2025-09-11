@@ -102,7 +102,7 @@ tab-container {
   // Style 1: Underline Style (Default)
   // Clean, minimal with bottom border
   // ========================================
-  &:not([type]) {
+  &[type='underline'] {
     &::part(tablist-tab-wrapper) {
       --border-color: #{$global-border-color};
 
@@ -518,7 +518,7 @@ tab-container {
 // ========================================
 @media only screen and (max-width: 680px) {
   tab-container {
-    &:not([type]) {
+    &[type='underline'] {
       &[placement='top'],
       &[placement='bottom'] {
         .tab-button {
