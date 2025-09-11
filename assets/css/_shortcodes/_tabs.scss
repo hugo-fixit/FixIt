@@ -2,13 +2,39 @@
 // Tabs shortcode - Multiple Design Styles
 // ========================================
 
+@mixin tab-button-size($padding-inline: 1.25rem, $padding-block: 0.75rem) {
+  @if $padding-inline != 0 {
+    padding-inline: $padding-inline;
+  }
+  @if $padding-block != 0 {
+    padding-block: $padding-block;
+  }
+}
+
 tab-container {
   display: flex;
   gap: 0.75rem;
   padding-block: 1rem;
+  position: relative;
+
+  // loading before defined
+  &:not(:defined) {
+    &::before {
+      @include loading;
+    }
+  }
 
   .tab-button {
+    position: relative;
+    display: block;
+    border: none;
+    color: inherit;
+    background: transparent;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
     flex-shrink: 0;
+    @include transition(all 0.3s ease);
   }
 
   .tab-panel {
@@ -85,18 +111,8 @@ tab-container {
     }
 
     .tab-button {
-      display: block;
-      align-items: center;
-      position: relative;
-      padding-block: 0.75rem;
-      border: none;
-      background: transparent;
-      color: inherit;
-      font-size: 0.9em;
-      font-weight: 500;
-      cursor: pointer;
       --border-color: transparent;
-      @include transition(all 0.3s ease);
+      @include tab-button-size(0);
 
       &[aria-selected='true'],
       &[aria-selected='false']:hover {
@@ -114,7 +130,7 @@ tab-container {
       gap: 0.5rem;
 
       .tab-button {
-        padding-inline: 1.5rem;
+        @include tab-button-size(1.5rem, 0);
       }
 
       &::part(tablist-wrapper) {
@@ -126,7 +142,7 @@ tab-container {
     &[placement='left'],
     &[placement='right'] {
       .tab-button {
-        padding-inline: 1rem;
+        @include tab-button-size(1rem, 0);
       }
     }
 
@@ -187,17 +203,9 @@ tab-container {
   // ========================================
   &[type='pill'] {
     .tab-button {
-      display: block;
-      align-items: center;
-      padding: 0.75rem 1.25rem;
-      border: none;
       background: var(#{$rootPrefix}code-inline-background-color);
-      color: inherit;
-      font-size: 0.9em;
-      font-weight: 500;
-      cursor: pointer;
+      @include tab-button-size;
       @include border-radius(2em);
-      @include transition(all 0.3s ease);
 
       &[aria-selected='true'] {
         color: #ffffff;
@@ -303,18 +311,10 @@ tab-container {
     }
 
     .tab-button {
-      display: block;
-      align-items: center;
-      padding: 0.75rem 1.5rem;
       border: 1px solid $global-border-color;
       background: $code-background-color;
-      color: inherit;
-      font-size: 0.9em;
-      font-weight: 500;
-      cursor: pointer;
-      @include transition(all 0.3s ease);
-      position: relative;
-
+      @include tab-button-size(1.5rem);
+      
       [data-theme='dark'] & {
         border-color: $global-border-color-dark;
         background: $code-background-color-dark;
@@ -464,10 +464,15 @@ tab-container {
   }
 
   // ========================================
-  // Style 4: Segment Style (only top placement support)
-  // iOS-like segment control
+  // Style 4: Segment Style
+  // only top placement support
   // ========================================
   &[type='segment'] {
+    &::part(tablist-wrapper) {
+      overflow-x: scroll;
+      overflow-y: hidden;
+    }
+
     &::part(tablist-tab-wrapper) {
       padding: 0.25rem;
       background: $code-background-color;
@@ -483,28 +488,19 @@ tab-container {
     }
 
     .tab-button {
-      display: block;
-      align-items: center;
-      padding: 0.75rem 1.25rem;
-      margin: 0;
-      border: none;
-      background: transparent;
-      color: inherit;
-      font-size: 0.9em;
       font-weight: 400;
-      cursor: pointer;
       flex-grow: 1;
-      @include border-radius($global-border-radius);
-      @include transition(all 0.3s ease);
-      position: relative;
 
+      @include tab-button-size;
+      @include border-radius($global-border-radius);
+
+      &[aria-selected='true'],
       &:hover {
         font-weight: 500;
       }
 
       &[aria-selected='true'] {
         background: $global-background-color;
-        font-weight: 500;
         @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
 
         [data-theme='dark'] & {

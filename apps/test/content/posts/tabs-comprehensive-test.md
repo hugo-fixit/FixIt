@@ -103,11 +103,12 @@ Nested tab B content with a list:
 {{% tab title="Inner C" %}}
 Nested tab C with a table:
 
-| Feature | Status | Notes |
-||--|-|
-| Responsive | ✅ | Works on all devices |
-| Accessible | ✅ | Screen reader friendly |
-| Fast | ✅ | Optimized performance |
+| Feature    | Status | Notes                  |
+| :--------- | :----- | :--------------------- |
+| Responsive | ✅     | Works on all devices   |
+| Accessible | ✅     | Screen reader friendly |
+| Fast       | ✅     | Optimized performance  |
+
 {{% /tab %}}
 
 {{< /tabs >}}
