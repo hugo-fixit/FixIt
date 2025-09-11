@@ -25,7 +25,7 @@ tab-container {
     }
   }
 
-  .tab-button {
+  > .tab-button {
     position: relative;
     display: block;
     border: none;
@@ -38,7 +38,7 @@ tab-container {
     @include transition(all 0.3s ease);
   }
 
-  .tab-panel {
+  > .tab-panel {
     &[hidden] {
       display: none;
     }
@@ -76,11 +76,11 @@ tab-container {
       flex-direction: column;
     }
 
-    .tab-button {
+    > .tab-button {
       max-width: 300px;
     }
 
-    .tab-panel {
+    > .tab-panel {
       flex: 1;
       min-width: 0;
     }
@@ -111,7 +111,7 @@ tab-container {
       }
     }
 
-    .tab-button {
+    > .tab-button {
       --border-color: transparent;
       @include tab-button-size(0);
 
@@ -130,7 +130,7 @@ tab-container {
     &[placement='bottom'] {
       gap: 0.5rem;
 
-      .tab-button {
+      > .tab-button {
         @include tab-button-size(1.5rem, 0);
       }
 
@@ -142,7 +142,7 @@ tab-container {
 
     &[placement='left'],
     &[placement='right'] {
-      .tab-button {
+      > .tab-button {
         @include tab-button-size(1rem, 0);
       }
     }
@@ -153,7 +153,7 @@ tab-container {
         border-bottom: 2px solid var(--border-color);
       }
 
-      .tab-button {
+      > .tab-button {
         translate: 0 2px;
         border-bottom: 2px solid var(--border-color);
       }
@@ -165,7 +165,7 @@ tab-container {
         border-top: 2px solid var(--border-color);
       }
 
-      .tab-button {
+      > .tab-button {
         translate: 0 -2px;
         border-top: 2px solid var(--border-color);
       }
@@ -177,7 +177,7 @@ tab-container {
         border-right: 2px solid var(--border-color);
       }
 
-      .tab-button {
+      > .tab-button {
         text-align: right;
         translate: 2px 0;
         border-right: 2px solid var(--border-color);
@@ -190,7 +190,7 @@ tab-container {
         border-left: 2px solid var(--border-color);
       }
 
-      .tab-button {
+      > .tab-button {
         text-align: left;
         translate: -2px 0;
         border-left: 2px solid var(--border-color);
@@ -203,7 +203,7 @@ tab-container {
   // Rounded buttons with background
   // ========================================
   &[type='pill'] {
-    .tab-button {
+    > .tab-button {
       background: var(#{$rootPrefix}code-inline-background-color);
       @include tab-button-size;
       @include border-radius(2em);
@@ -249,7 +249,7 @@ tab-container {
 
     // Top placement
     &[placement='top'] {
-      .tab-button {
+      > .tab-button {
         &:hover {
           translate: 0 2px;
         }
@@ -258,7 +258,7 @@ tab-container {
 
     // Bottom placement
     &[placement='bottom'] {
-      .tab-button {
+      > .tab-button {
         &:hover {
           translate: 0 -2px;
         }
@@ -271,7 +271,7 @@ tab-container {
         margin-left: 0.5rem;
       }
 
-      .tab-button {
+      > .tab-button {
         &:hover {
           translate: 2px 0;
         }
@@ -284,7 +284,7 @@ tab-container {
         margin-right: 0.5rem;
       }
 
-      .tab-button {
+      > .tab-button {
         &:hover {
           translate: -2px 0;
         }
@@ -311,7 +311,7 @@ tab-container {
       gap: 0.25rem;
     }
 
-    .tab-button {
+    > .tab-button {
       border: 1px solid $global-border-color;
       background: $code-background-color;
       @include tab-button-size(1.5rem);
@@ -346,7 +346,7 @@ tab-container {
       }
     }
 
-    .tab-panel {
+    > .tab-panel {
       padding: 0.75rem;
       background: $global-background-color;
       border: 1px solid $global-border-color;
@@ -364,7 +364,7 @@ tab-container {
         overflow-y: hidden;
       }
 
-      .tab-button {
+      > .tab-button {
         &:first-of-type {
           position: sticky;
           left: 0;
@@ -385,7 +385,7 @@ tab-container {
         border-bottom: 1px solid var(--border-color);
       }
 
-      .tab-button {
+      > .tab-button {
         translate: 0 1px;
         @include border-radius($global-border-radius $global-border-radius 0 0);
 
@@ -394,7 +394,7 @@ tab-container {
         }
       }
 
-      .tab-panel {
+      > .tab-panel {
         border-top: none;
         @include border-radius(0 0 $global-border-radius $global-border-radius);
       }
@@ -406,7 +406,7 @@ tab-container {
         border-top: 1px solid var(--border-color);
       }
 
-      .tab-button {
+      > .tab-button {
         translate: 0 -1px;
         @include border-radius(0 0 $global-border-radius $global-border-radius);
 
@@ -415,7 +415,7 @@ tab-container {
         }
       }
 
-      .tab-panel {
+      > .tab-panel {
         border-bottom: none;
         @include border-radius($global-border-radius $global-border-radius 0 0);
       }
@@ -427,7 +427,7 @@ tab-container {
         border-right: 1px solid var(--border-color);
       }
 
-      .tab-button {
+      > .tab-button {
         translate: 1px 0;
         @include border-radius($global-border-radius 0 0 $global-border-radius);
 
@@ -436,7 +436,7 @@ tab-container {
         }
       }
 
-      .tab-panel {
+      > .tab-panel {
         border-left: none;
         @include border-radius(0 $global-border-radius $global-border-radius 0);
       }
@@ -448,7 +448,7 @@ tab-container {
         border-left: 1px solid var(--border-color);
       }
 
-      .tab-button {
+      > .tab-button {
         translate: -1px 0;
         @include border-radius(0 $global-border-radius $global-border-radius 0);
 
@@ -457,7 +457,7 @@ tab-container {
         }
       }
 
-      .tab-panel {
+      > .tab-panel {
         border-right: none;
         @include border-radius($global-border-radius 0 0 $global-border-radius);
       }
@@ -488,7 +488,7 @@ tab-container {
       gap: 0;
     }
 
-    .tab-button {
+    > .tab-button {
       font-weight: 400;
       flex-grow: 1;
 
@@ -521,7 +521,7 @@ tab-container {
     &[type='underline'] {
       &[placement='top'],
       &[placement='bottom'] {
-        .tab-button {
+        > .tab-button {
           @include tab-button-size(0.875rem, 0);
         }
 
@@ -534,7 +534,7 @@ tab-container {
     &[type='pill'] {
       &[placement='top'],
       &[placement='bottom'] {
-        .tab-button {
+        > .tab-button {
           @include tab-button-size(1rem, 0);
         }
 
@@ -545,7 +545,7 @@ tab-container {
     }
 
     &[type='card'] {
-      .tab-button {
+      > .tab-button {
         @include tab-button-size(1rem);
       }
     }
