@@ -3,10 +3,11 @@
 // ========================================
 
 @mixin tab-button-size($padding-inline: 1.25rem, $padding-block: 0.75rem) {
-  @if $padding-inline != 0 {
+  @if $padding-inline !=0 {
     padding-inline: $padding-inline;
   }
-  @if $padding-block != 0 {
+
+  @if $padding-block !=0 {
     padding-block: $padding-block;
   }
 }
@@ -314,7 +315,7 @@ tab-container {
       border: 1px solid $global-border-color;
       background: $code-background-color;
       @include tab-button-size(1.5rem);
-      
+
       [data-theme='dark'] & {
         border-color: $global-border-color-dark;
         background: $code-background-color-dark;
@@ -507,6 +508,45 @@ tab-container {
           background: $global-background-color-dark;
           @include box-shadow(0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
         }
+      }
+    }
+  }
+}
+
+// ========================================
+// Responsive design for smaller screens
+// ========================================
+@media only screen and (max-width: 680px) {
+  tab-container {
+    &:not([type]) {
+      &[placement='top'],
+      &[placement='bottom'] {
+        .tab-button {
+          @include tab-button-size(0.875rem, 0);
+        }
+
+        &::part(tablist) {
+          gap: 0;
+        }
+      }
+    }
+
+    &[type='pill'] {
+      &[placement='top'],
+      &[placement='bottom'] {
+        .tab-button {
+          @include tab-button-size(1rem, 0);
+        }
+
+        &::part(tablist) {
+          gap: 0.375rem 0.5rem;
+        }
+      }
+    }
+
+    &[type='card'] {
+      .tab-button {
+        @include tab-button-size(1rem);
       }
     }
   }
