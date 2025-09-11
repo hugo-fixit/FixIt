@@ -41,7 +41,7 @@
 
 @each $color, $value in $theme-colors {
   .text-#{$color} {
-    color: var(--#{$prefix}#{$color}) !important;
+    color: var(#{$rootPrefix}#{$color}) !important;
   }
 }
 

@@ -86,7 +86,7 @@
 // Collection aside container
 .aside-collection {
   position: sticky;
-  top: calc(#{$header-height} + var(--#{$prefix}breadcrumb-height));
+  top: calc(#{$header-height} + var(#{$rootPrefix}breadcrumb-height));
   box-sizing: border-box;
   @include overflow-wrap(break-word);
   @include blur;
@@ -136,7 +136,7 @@
 
     .collection-count {
       flex-shrink: 0;
-      color: var(--#{$prefix}secondary);
+      color: var(#{$rootPrefix}secondary);
     }
 
     .details-icon {
