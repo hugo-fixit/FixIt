@@ -1,5 +1,5 @@
 .noscript-warning {
-  background-color: var(--#{$prefix}danger);
+  background-color: var(#{$rootPrefix}danger);
   color: white;
   font-size: 1rem;
   font-weight: bold;
@@ -11,6 +11,6 @@
   @include z-index(2);
 
   [data-theme='dark'] & {
-    background-color: var(--#{$prefix}danger-dark);
+    background-color: var(#{$rootPrefix}danger-dark);
   }
 }

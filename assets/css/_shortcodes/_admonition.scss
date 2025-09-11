@@ -53,34 +53,34 @@
     right: 0.3rem;
   }
   
-  background-color: var(--#{$prefix}admonition-bg-color);
-  border-left-color: var(--#{$prefix}admonition-color);
+  background-color: var(#{$rootPrefix}admonition-bg-color);
+  border-left-color: var(#{$rootPrefix}admonition-color);
 
   > .admonition-title {
-    border-bottom-color: var(--#{$prefix}admonition-bg-color);
-    background-color: var(--#{$prefix}admonition-bg-color-collapsed);
+    border-bottom-color: var(#{$rootPrefix}admonition-bg-color);
+    background-color: var(#{$rootPrefix}admonition-bg-color-collapsed);
 
     i.icon {
-      color: var(--#{$prefix}admonition-color);
+      color: var(#{$rootPrefix}admonition-color);
     }
   }
 
   &.open > .admonition-title {
-    background-color: var(--#{$prefix}admonition-bg-color);
+    background-color: var(#{$rootPrefix}admonition-bg-color);
   }
 
   // default admonition type is note
-  --#{$prefix}admonition-color: #{map-get(map-get($admonition-color-map, note), color)};
-  --#{$prefix}admonition-bg-color: #{map-get(map-get($admonition-color-map, note), bg-color)};
-  --#{$prefix}admonition-bg-color-collapsed: #{opacify(map-get(map-get($admonition-color-map, note), bg-color), 0.15)};
+  #{$rootPrefix}admonition-color: #{map-get(map-get($admonition-color-map, note), color)};
+  #{$rootPrefix}admonition-bg-color: #{map-get(map-get($admonition-color-map, note), bg-color)};
+  #{$rootPrefix}admonition-bg-color-collapsed: #{opacify(map-get(map-get($admonition-color-map, note), bg-color), 0.15)};
 
   // set color for each admonition type
   @each $type, $item in $admonition-color-map {
     @if $type != 'note' {
       &.#{$type} {
-        --#{$prefix}admonition-color: #{map-get($item, color)};
-        --#{$prefix}admonition-bg-color: #{map-get($item, bg-color)};
-        --#{$prefix}admonition-bg-color-collapsed: #{opacify(map-get($item, bg-color), 0.15)};
+        #{$rootPrefix}admonition-color: #{map-get($item, color)};
+        #{$rootPrefix}admonition-bg-color: #{map-get($item, bg-color)};
+        #{$rootPrefix}admonition-bg-color-collapsed: #{opacify(map-get($item, bg-color), 0.15)};
       }
     }
   }

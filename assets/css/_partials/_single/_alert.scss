@@ -2,7 +2,7 @@
   padding: 0.5rem 1rem;
   margin-block: 1rem;
   color: inherit;
-  border-left: 0.25em solid var(--#{$prefix}alert-border-color);
+  border-left: 0.25em solid var(#{$rootPrefix}alert-border-color);
 
   > :first-child {
     margin-top: 0;
@@ -17,7 +17,7 @@
     align-items: center;
     line-height: 1;
     margin-bottom: 1rem;
-    color: var(--#{$prefix}alert-color);
+    color: var(#{$rootPrefix}alert-color);
 
     > svg.icon {
       width: initial;
@@ -28,16 +28,16 @@
 
   @each $type, $item in $alert-color-map {
     &.alert-#{$type} {
-      --#{$prefix}alert-border-color: #{map-get($item, border-color)};
-      --#{$prefix}alert-color: #{map-get($item, color)};
+      #{$rootPrefix}alert-border-color: #{map-get($item, border-color)};
+      #{$rootPrefix}alert-color: #{map-get($item, color)};
     }
   }
 
   [data-theme='dark'] & {
     @each $type, $item in $alert-color-map-dark {
       &.alert-#{$type} {
-        --#{$prefix}alert-border-color: #{map-get($item, border-color)};
-        --#{$prefix}alert-color: #{map-get($item, color)};
+        #{$rootPrefix}alert-border-color: #{map-get($item, border-color)};
+        #{$rootPrefix}alert-color: #{map-get($item, color)};
       }
     }
   }

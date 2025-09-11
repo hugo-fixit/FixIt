@@ -36,14 +36,14 @@
 
     @each $color, $value in $theme-colors {
       &[data-type='#{$color}'] {
-        --timeline-circle-color: var(--#{$prefix}#{$color});
+        --timeline-circle-color: var(#{$rootPrefix}#{$color});
       }
     }
 
     .#{$prefix}timeline-item__timestamp {
       font-size: 0.8125rem;
       line-height: 1;
-      color: var(--#{$prefix}secondary);
+      color: var(#{$rootPrefix}secondary);
 
       &.is-top {
         margin-bottom: 0.25rem;
