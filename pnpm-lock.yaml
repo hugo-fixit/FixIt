@@ -18,8 +18,8 @@ importers:
         specifier: ^24.3.0
         version: 24.3.0
       auto-changelog-plus:
-        specifier: ^1.0.0
-        version: 1.0.0
+        specifier: ^1.1.0
+        version: 1.1.0
       eslint:
         specifier: ^9.34.0
         version: 9.34.0
@@ -588,8 +588,8 @@ packages:
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
 
-  auto-changelog-plus@1.0.0:
-    resolution: {integrity: sha512-YMzGIPNAVMRRBiINYrD2/2Kx4XkoJc9caP/QVx8uiBC1B2P1JmAltzFk1UDBmv1OXQSAn7Z9numDrEW7kaHI3g==}
+  auto-changelog-plus@1.1.0:
+    resolution: {integrity: sha512-AKkt9vh8uOJ7FEnW2QfiDzVkD25PZPo790vdUmeNwSBzlOW8LJdbJ/68dU1h1JPKg/iJP21N8R2r72iSfVsVww==}
     hasBin: true
 
   auto-changelog@2.5.0:
@@ -2494,7 +2494,7 @@ snapshots:
 
   argparse@2.0.1: {}
 
-  auto-changelog-plus@1.0.0:
+  auto-changelog-plus@1.1.0:
     dependencies:
       auto-changelog: 2.5.0
     transitivePeerDependencies:
