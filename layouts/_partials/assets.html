@@ -93,51 +93,49 @@
 
 {{- /* Mathematical formulas */ -}}
 {{- $math := .Store.Get "math" -}}
-{{- if $math.enable -}}
-  {{- /* KaTeX */ -}}
-  {{- if (eq $math.type "katex") | and (.Store.Get "hasKaTeX") -}}
-    {{- $source := $cdn.katexCSS | default "lib/katex/katex.min.css" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint "Preload" true | dict "Page" . "Data" | partial "store/style.html" -}}
-    {{- /* Copy-tex extension */ -}}
-    {{- if $math.katex.copyTex -}}
-      {{- $source := $cdn.katexCopyTexJS | default "lib/katex/copy-tex.min.js" -}}
-      {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-    {{- end -}}
+{{- /* KaTeX */ -}}
+{{- if .Store.Get "hasKaTeX" -}}
+  {{- $source := $cdn.katexCSS | default "lib/katex/katex.min.css" -}}
+  {{- dict "Source" $source "Fingerprint" $fingerprint "Preload" true | dict "Page" . "Data" | partial "store/style.html" -}}
+  {{- /* Copy-tex extension */ -}}
+  {{- if $math.katex.copyTex -}}
+    {{- $source := $cdn.katexCopyTexJS | default "lib/katex/copy-tex.min.js" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- end -}}
+{{- end -}}
 
-  {{- /* MathJax */ -}}
-  {{- if eq $math.type "mathjax" -}}
-    {{- $mathjax := $math.mathjax -}}
-    {{- $source := "js/lib/mathjax.js" -}}
-    {{- $options := dict "targetPath" "js/lib/mathjax.min.js" "minify" hugo.IsProduction -}}
-    {{- $mathjaxOptsConfig := $mathjax.options | default dict -}}
-    {{- $mathjaxOpts := dict -}}
-    {{- if eq $mathjaxOptsConfig.enableMenu false -}}
-      {{- $mathjaxOpts = dict "enableMenu" false | merge $mathjaxOpts -}}
-    {{- end -}}
-    {{- with $mathjaxOptsConfig.ignoreHtmlClass -}}
-      {{- $mathjaxOpts = dict "ignoreHtmlClass" . | merge $mathjaxOpts -}}
-    {{- end -}}
-    {{- with $mathjaxOptsConfig.skipHtmlTags -}}
-      {{- $mathjaxOpts = dict "skipHtmlTags" . | merge $mathjaxOpts -}}
-    {{- end -}}
-    {{- with $mathjaxOptsConfig.includeHtmlTags -}}
-      {{- $mathjaxOpts = dict "includeHtmlTags" . | merge $mathjaxOpts -}}
-    {{- end -}}
-    {{- $params := dict
-      "cdn" $mathjax.cdn
-      "tex" ($mathjax.tex | default dict)
-      "packages" ($mathjax.packages | default dict)
-      "macros" ($mathjax.macros | default dict)
-      "loader" ($mathjax.loader | default dict)
-      "options" $mathjaxOpts
-    -}}
-    {{- $options = dict "params" $params | merge $options -}}
-    {{- if not hugo.IsProduction -}}
-      {{- $options = dict "sourceMap" "external" | merge $options -}}
-    {{- end -}}
-    {{- dict "Source" $source "Build" $options "Fingerprint" $fingerprint "Async" true "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+{{- /* MathJax */ -}}
+{{- if .Store.Get "hasMathJax" -}}
+  {{- $mathjax := $math.mathjax -}}
+  {{- $source := "js/lib/mathjax.js" -}}
+  {{- $options := dict "targetPath" "js/lib/mathjax.min.js" "minify" hugo.IsProduction -}}
+  {{- $mathjaxOptsConfig := $mathjax.options | default dict -}}
+  {{- $mathjaxOpts := dict -}}
+  {{- if eq $mathjaxOptsConfig.enableMenu false -}}
+    {{- $mathjaxOpts = dict "enableMenu" false | merge $mathjaxOpts -}}
   {{- end -}}
+  {{- with $mathjaxOptsConfig.ignoreHtmlClass -}}
+    {{- $mathjaxOpts = dict "ignoreHtmlClass" . | merge $mathjaxOpts -}}
+  {{- end -}}
+  {{- with $mathjaxOptsConfig.skipHtmlTags -}}
+    {{- $mathjaxOpts = dict "skipHtmlTags" . | merge $mathjaxOpts -}}
+  {{- end -}}
+  {{- with $mathjaxOptsConfig.includeHtmlTags -}}
+    {{- $mathjaxOpts = dict "includeHtmlTags" . | merge $mathjaxOpts -}}
+  {{- end -}}
+  {{- $params := dict
+    "cdn" $mathjax.cdn
+    "tex" ($mathjax.tex | default dict)
+    "packages" ($mathjax.packages | default dict)
+    "macros" ($mathjax.macros | default dict)
+    "loader" ($mathjax.loader | default dict)
+    "options" $mathjaxOpts
+  -}}
+  {{- $options = dict "params" $params | merge $options -}}
+  {{- if not hugo.IsProduction -}}
+    {{- $options = dict "sourceMap" "external" | merge $options -}}
+  {{- end -}}
+  {{- dict "Source" $source "Build" $options "Fingerprint" $fingerprint "Async" true "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* mermaid */ -}}

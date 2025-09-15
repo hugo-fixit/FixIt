@@ -29,6 +29,9 @@
       {{- else }}
         {{- .Value }}
         {{- $.Page.Store.Set "hasKaTeX" true -}}
+        {{- if eq hugo.Context.MarkupScope "home" -}}
+          {{- site.Home.Store.Set "hasKaTeX" true -}}
+        {{- end -}}
       {{- end }}
     {{- end -}}
   {{- else if eq $math.type "mathjax" -}}
@@ -36,6 +39,10 @@
       $${{- .Inner -}}$$
     {{- else -}}
       ${{ .Inner }}$
+    {{- end -}}
+    {{- $.Page.Store.Set "hasMathJax" true -}}
+    {{- if eq hugo.Context.MarkupScope "home" -}}
+      {{- site.Home.Store.Set "hasMathJax" true -}}
     {{- end -}}
   {{- end -}}
 {{- else -}}

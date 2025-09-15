@@ -24,7 +24,7 @@ math:
         arrowdel: false
 ---
 
-Testing MathJax rendering in FixIt theme.
+Testing $\text{MathJax}$ rendering in FixIt theme.
 
 <!--more-->
 

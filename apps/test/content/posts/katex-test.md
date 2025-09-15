@@ -1,5 +1,5 @@
 ---
-title: KaTex Test
+title: KaTeX Test
 date: 2025-09-15T21:05:17+08:00
 collections:
   - Tests
@@ -9,7 +9,7 @@ tags:
   - Math
 ---
 
-Testing KaTex rendering in FixIt theme.
+Testing $\KaTeX$ rendering in FixIt theme.
 
 <!--more-->
 
