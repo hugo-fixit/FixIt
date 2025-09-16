@@ -25,9 +25,8 @@
       </div>
     {{- end -}}
 
-    {{- /* Posts */ -}}
-    {{- if ne $posts.enable false | and .Site.RegularPages -}}
-      {{- /* Paginate */ -}}
+    {{- /* Paginate */ -}}
+    {{- if ne $posts.enable false -}}
       {{- $pages := .Site.Store.Get "mainSectionPages" -}}
       {{- if .Site.Params.page.hiddenFromHomePage -}}
         {{- $pages = where $pages "Params.hiddenfromhomepage" false -}}
