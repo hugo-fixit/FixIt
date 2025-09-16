@@ -308,12 +308,16 @@
   {{- dict "Content" $content "Path" (printf "%v.scss" $path) "ToCSS" $options | dict "Page" $ "Data" | partial "store/style.html" -}}
 {{- end -}}
 
-{{- /* Config script */ -}}
+{{- /* Config scripts */ -}}
 {{- $configJS := $config | jsonify | printf "window.config=%s;" -}}
 {{- if hugo.IsServer -}}
   {{- $configJS = add $configJS "console.log('Page config:', window.config);" -}}
 {{- end -}}
-{{- $configJS | dict "Content" | dict "Page" . "Data" | partial "store/script.html" -}}
+{{- $targetPath := "js/config.js" -}}
+{{- if in .Site.RegularPages.ByTitle .Page -}}
+  {{- $targetPath = strings.TrimPrefix (relLangURL "") $.RelPermalink | printf "%s/config.js" -}}
+{{- end -}}
+{{- dict "Content" $configJS "Path" $targetPath "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
 {{- /* Theme script */ -}}
 {{- $options := dict "targetPath" "js/theme.min.js" "minify" hugo.IsProduction -}}
