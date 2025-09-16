@@ -24,8 +24,6 @@ languageCode = "en"
 languageName = "English"
 # whether to include Chinese/Japanese/Korean
 hasCJKLanguage = false
-# default amount of posts in each pages
-paginate = 12
 # copyright description used only for seo schema
 copyright = ""
 # whether to use robots.txt
@@ -35,7 +33,9 @@ enableGitInfo = true
 # whether to use emoji code
 enableEmoji = true
 # the main sections of a site
-mainSections = []
+# if set, the MainSections method on the Site object returns the given sections,
+# otherwise it returns the section with the most pages.
+# mainSections = ["posts"]
 
 # -------------------------------------------------------------------------------------
 # Menu Configuration
@@ -226,7 +226,7 @@ mainSections = []
 # -------------------------------------------------------------------------------------
 
 [privacy]
-  [privacy.twitter]
+  [privacy.x]
     enableDNT = true
   [privacy.youtube]
     privacyEnhanced = true
