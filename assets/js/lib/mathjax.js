@@ -1,4 +1,4 @@
-import params from '@params'
+const params = window.config.mathjax || {}
 
 /**
  * Load MathJax script dynamically

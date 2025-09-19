@@ -18,8 +18,6 @@ Testing custom script and style by shortcode in FixIt theme.
 
 {{< script >}}
 console.log('Hello FixIt!');
-
-console.log('Hello FixIt1!');
 {{< /script >}}
 
 See the output in the console of the developer tool.
