@@ -1,3 +1,17 @@
+{{- /*
+FixIt theme assets partial
+===============================================
+- Third-party libraries and plugins
+- Theme assets and plugins
+  - Config script
+  - MathJax plugin
+  - Mermaid plugin
+  - Theme script
+  - Custom Assets block
+  - Custom script
+===============================================
+*/ -}}
+
 {{- $noop := .WordCount -}}
 {{- $params := partial "function/params.html" -}}
 {{- $cdn := .Site.Store.Get "cdn" | default dict -}}
@@ -5,6 +19,7 @@
 {{- $config := (.Store.Get "this").config -}}
 {{- $config = dict "version" (hugo.Store.Get "version") | merge $config -}}
 {{- $author := partial "function/get-author-map.html" .Params.author -}}
+{{- $noBaseRelPermalink := strings.TrimPrefix (relLangURL "") $.RelPermalink -}}
 
 {{- /* Search */ -}}
 {{- if .Site.Params.search | and .Site.Params.search.enable -}}
@@ -91,9 +106,8 @@
   {{- $config = dict "speed" $typeit.speed "cursorSpeed" $typeit.cursorSpeed "cursorChar" $typeit.cursorChar "duration" $typeit.duration "loop" $typeit.loop | dict "typeit" | merge $config -}}
 {{- end -}}
 
-{{- /* Mathematical formulas */ -}}
-{{- $math := .Store.Get "math" -}}
 {{- /* KaTeX */ -}}
+{{- $math := .Store.Get "math" -}}
 {{- if .Store.Get "hasKaTeX" -}}
   {{- $source := $cdn.katexCSS | default "lib/katex/katex.min.css" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Preload" true | dict "Page" . "Data" | partial "store/style.html" -}}
@@ -107,42 +121,30 @@
 {{- /* MathJax */ -}}
 {{- if .Store.Get "hasMathJax" -}}
   {{- $mathjax := $math.mathjax -}}
-  {{- $source := "js/lib/mathjax.js" -}}
-  {{- $options := dict "targetPath" "js/lib/mathjax.min.js" "minify" hugo.IsProduction -}}
-  {{- $mathjaxOptsConfig := $mathjax.options | default dict -}}
-  {{- $mathjaxOpts := dict -}}
-  {{- if eq $mathjaxOptsConfig.enableMenu false -}}
-    {{- $mathjaxOpts = dict "enableMenu" false | merge $mathjaxOpts -}}
+  {{- $mjoc := $mathjax.options | default dict -}}
+  {{- $mjo := dict -}}
+  {{- if eq $mjoc.enableMenu false -}}
+    {{- $mjo = dict "enableMenu" false | merge $mjo -}}
   {{- end -}}
-  {{- with $mathjaxOptsConfig.ignoreHtmlClass -}}
-    {{- $mathjaxOpts = dict "ignoreHtmlClass" . | merge $mathjaxOpts -}}
+  {{- with $mjoc.ignoreHtmlClass -}}
+    {{- $mjo = dict "ignoreHtmlClass" . | merge $mjo -}}
   {{- end -}}
-  {{- with $mathjaxOptsConfig.skipHtmlTags -}}
-    {{- $mathjaxOpts = dict "skipHtmlTags" . | merge $mathjaxOpts -}}
+  {{- with $mjoc.skipHtmlTags -}}
+    {{- $mjo = dict "skipHtmlTags" . | merge $mjo -}}
   {{- end -}}
-  {{- with $mathjaxOptsConfig.includeHtmlTags -}}
-    {{- $mathjaxOpts = dict "includeHtmlTags" . | merge $mathjaxOpts -}}
+  {{- with $mjoc.includeHtmlTags -}}
+    {{- $mjo = dict "includeHtmlTags" . | merge $mjo -}}
   {{- end -}}
-  {{- $params := dict
+  {{- $config = dict
     "cdn" $mathjax.cdn
     "tex" ($mathjax.tex | default dict)
     "packages" ($mathjax.packages | default dict)
     "macros" ($mathjax.macros | default dict)
     "loader" ($mathjax.loader | default dict)
-    "options" $mathjaxOpts
+    "options" $mjo
+    | dict "mathjax"
+    | merge $config
   -}}
-  {{- $options = dict "params" $params | merge $options -}}
-  {{- if not hugo.IsProduction -}}
-    {{- $options = dict "sourceMap" "external" | merge $options -}}
-  {{- end -}}
-  {{- dict "Source" $source "Build" $options "Fingerprint" $fingerprint "Async" true "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-{{- end -}}
-
-{{- /* mermaid */ -}}
-{{- if .Store.Get "hasMermaid" -}}
-  {{- $options := dict "Source" "js/lib/mermaid.js" "Template" "js/lib/mermaid.js" -}}
-  {{- $options = dict "Context" . "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Attr" `type="module"` | merge $options -}}
-  {{- $options | dict "Page" $ "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* ECharts */ -}}
@@ -301,19 +303,36 @@
   {{- dict "Source" . "Fingerprint" $fingerprint "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
 {{- end -}}
 
-{{- with .Store.Get "styleArr" -}}
-  {{- $content := delimit . " " -}}
-  {{- $path := substr (md5 $.RelPermalink) 0 8 | printf "css/%v" -}}
-  {{- $options := printf "%v.min.css" $path | dict "targetPath" -}}
-  {{- dict "Content" $content "Path" (printf "%v.scss" $path) "ToCSS" $options | dict "Page" $ "Data" | partial "store/style.html" -}}
-{{- end -}}
-
-{{- /* Config script */ -}}
+{{- /* Config scripts */ -}}
 {{- $configJS := $config | jsonify | printf "window.config=%s;" -}}
 {{- if hugo.IsServer -}}
   {{- $configJS = add $configJS "console.log('Page config:', window.config);" -}}
 {{- end -}}
-{{- $configJS | dict "Content" | dict "Page" . "Data" | partial "store/script.html" -}}
+{{- $targetPath := "js/config.js" -}}
+{{- if in .Site.RegularPages .Page -}}
+  {{- $targetPath = $noBaseRelPermalink | printf "%s/config.js" -}}
+{{- end -}}
+{{- dict "Content" $configJS "Path" $targetPath "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+
+{{- /* MathJax plugin */ -}}
+{{- if .Store.Get "hasMathJax" -}}
+  {{- $targetPath := "js/lib/mathjax.min.js" -}}
+  {{- if in .Site.RegularPages .Page -}}
+    {{- $targetPath = $noBaseRelPermalink | printf "%s/mathjax.min.js" -}}
+  {{- end -}}
+  {{- $options := dict "targetPath" $targetPath "minify" hugo.IsProduction -}}
+  {{- if not hugo.IsProduction -}}
+    {{- $options = dict "sourceMap" "external" | merge $options -}}
+  {{- end -}}
+  {{- dict "Source" (resources.Get "js/lib/mathjax.js") "Build" $options "Fingerprint" $fingerprint "Async" true "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+{{- end -}}
+
+{{- /* Mermaid plugin */ -}}
+{{- if .Store.Get "hasMermaid" -}}
+  {{- $options := dict "Source" "js/lib/mermaid.js" "Template" "js/lib/mermaid.js" -}}
+  {{- $options = dict "Context" . "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Attr" `type="module"` | merge $options -}}
+  {{- $options | dict "Page" $ "Data" | partial "store/script.html" -}}
+{{- end -}}
 
 {{- /* Theme script */ -}}
 {{- $options := dict "targetPath" "js/theme.min.js" "minify" hugo.IsProduction -}}
@@ -329,14 +348,21 @@
 {{- with ((resources.Get "js/custom.js") | default (resources.Get "js/_custom.js")) -}}
   {{- $options := dict "targetPath" "js/custom.min.js" "minify" hugo.IsProduction -}}
   {{- if not hugo.IsProduction -}}
-    {{- $options = dict "sourceMap" "inline" | merge $options -}}
+    {{- $options = dict "sourceMap" "external" | merge $options -}}
   {{- end -}}
   {{- dict "Source" . "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
 {{- end -}}
 
+{{- with .Store.Get "styleArr" -}}
+  {{- $content := delimit . " " -}}
+  {{- $path := $noBaseRelPermalink | printf "%s/index.scss" -}}
+  {{- $options := printf "%s/index.min.css" $noBaseRelPermalink | dict "targetPath" -}}
+  {{- dict "Content" $content "Path" $path "ToCSS" $options | dict "Page" $ "Data" | partial "store/style.html" -}}
+{{- end -}}
+
 {{- with .Store.Get "scriptArr" -}}
   {{- $content := delimit . "\n" -}}
-  {{- $targetPath := substr (md5 $.RelPermalink) 0 8 | printf "js/%v.js" -}}
+  {{- $targetPath := $noBaseRelPermalink | printf "%s/index.js" -}}
   {{- dict "Content" $content "Path" $targetPath "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
 {{- end -}}
 
