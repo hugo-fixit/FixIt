@@ -324,7 +324,7 @@ FixIt theme assets partial
   {{- if not hugo.IsProduction -}}
     {{- $options = dict "sourceMap" "external" | merge $options -}}
   {{- end -}}
-  {{- dict "Source" (resources.Get "js/lib/mathjax.js") "Build" $options "Fingerprint" $fingerprint "Async" true "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" (resources.Get "js/lib/mathjax.js") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* Mermaid plugin */ -}}

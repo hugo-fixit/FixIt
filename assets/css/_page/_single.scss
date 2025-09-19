@@ -511,6 +511,17 @@
       max-width: 100%;
       overflow-x: auto;
       overflow-y: hidden;
+
+      // fix the color of xypic diagrams
+      mjx-xypic {
+        g {
+          stroke: currentColor !important;
+        }
+        mjx-xypic-object {
+          color: currentColor !important;
+          fill: currentColor !important;
+        }
+      }
     }
 
     @import '../_partials/_single/alert';
