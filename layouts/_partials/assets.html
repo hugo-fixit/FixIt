@@ -33,8 +33,17 @@ FixIt theme assets partial
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
     {{- $config = dict "type" "algolia" "algoliaIndex" $search.algolia.index "algoliaAppID" $search.algolia.appID "algoliaSearchKey" $search.algolia.searchKey | dict "search" | merge $config -}}
   {{- else if eq $search.type "fuse" -}}
+    {{- $searchURL := "" -}}
     {{- with .Site.Home.OutputFormats.Get "search" -}}
-      {{- $config = dict "type" "fuse" "fuseIndexURL" .RelPermalink | dict "search" | merge $config -}}
+      {{- $searchURL = .RelPermalink -}}
+    {{- end -}}
+    {{- if .IsTranslated -}}
+      {{- with .OutputFormats.Get "search" -}}
+        {{- $searchURL = .RelPermalink -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if $searchURL -}}
+      {{- $config = dict "type" "fuse" "fuseIndexURL" $searchURL | dict "search" | merge $config -}}
     {{- end -}}
     {{- $source := $cdn.fuseJS | default "lib/fuse/fuse.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
@@ -311,6 +320,9 @@ FixIt theme assets partial
 {{- $targetPath := "js/config.js" -}}
 {{- if in .Site.RegularPages .Page -}}
   {{- $targetPath = $noBaseRelPermalink | printf "%s/config.js" -}}
+{{- else -}}
+  {{- $langPrefix := strings.TrimPrefix "/" (relLangURL "") -}}
+  {{- $targetPath = printf "%sjs/config.js" $langPrefix -}}
 {{- end -}}
 {{- dict "Content" $configJS "Path" $targetPath "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
