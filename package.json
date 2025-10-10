@@ -42,15 +42,15 @@
     "prepare": "simple-git-hooks"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^5.2.1",
-    "@types/node": "^24.3.0",
-    "auto-changelog-plus": "^1.1.0",
-    "eslint": "^9.34.0",
-    "lint-staged": "^16.1.5",
-    "serve": "^14.2.4",
+    "@antfu/eslint-config": "^5.4.1",
+    "@types/node": "^24.7.1",
+    "auto-changelog-plus": "^1.2.1",
+    "eslint": "^9.37.0",
+    "lint-staged": "^16.2.3",
+    "serve": "^14.2.5",
     "simple-git-hooks": "^2.13.1",
-    "tsx": "^4.20.5",
-    "typescript": "^5.9.2"
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
   },
   "pnpm": {
     "overrides": {
