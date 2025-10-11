@@ -185,8 +185,8 @@ caution = "Chú ý"
 
 # === Task lists ===
 [taskList]
+x = "Đã kiểm tra"
 " " = "Chưa kiểm tra"
-"x" = "Đã kiểm tra"
 "/" = "Đang tiến hành"
 "-" = "Đã hủy"
 "<" = "Đã lên lịch"

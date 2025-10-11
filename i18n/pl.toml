@@ -186,8 +186,8 @@ caution = "Ostrożność"
 
 # === Task lists ===
 [taskList]
+x = "Zweryfikowane"
 " " = "Niezweryfikowane"
-"x" = "Zweryfikowane"
 "/" = "W toku"
 "-" = "Anulowane"
 "<" = "Zaplanowane"

@@ -11,6 +11,5 @@ export default antfu({
     'layouts/**/*.md',
     // 临时忽略
     'assets/js/**',
-    '**/*.toml',
   ],
 })

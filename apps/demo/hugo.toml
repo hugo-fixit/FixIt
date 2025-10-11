@@ -12,10 +12,10 @@ baseURL = "https://demo.fixit.lruihao.cn/"
 # theme = "FixIt"
 
 [markup]
-  _merge = "shallow"
+_merge = "shallow"
 
 [outputs]
-  _merge = "shallow"
+_merge = "shallow"
 
 # -------------------------------------------------------------------------------------
 # Taxonomies Configuration
@@ -23,7 +23,7 @@ baseURL = "https://demo.fixit.lruihao.cn/"
 # -------------------------------------------------------------------------------------
 
 [taxonomies]
-  _merge = "shallow"
+_merge = "shallow"
 
 # -------------------------------------------------------------------------------------
 # Theme Core Configuration
@@ -31,6 +31,6 @@ baseURL = "https://demo.fixit.lruihao.cn/"
 # -------------------------------------------------------------------------------------
 
 [params]
-  # FixIt theme version
-  version = "0.3.X" # e.g. "0.2.X", "0.2.15", "v0.2.15" etc.
-  # ...
+# FixIt theme version
+version = "0.3.X" # e.g. "0.2.X", "0.2.15", "v0.2.15" etc.
+# ...

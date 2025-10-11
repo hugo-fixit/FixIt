@@ -8,7 +8,6 @@ description = "A Clean, Elegant but Advanced Hugo Theme for Hugo."
 homepage = "https://github.com/hugo-fixit/FixIt"
 demosite = "https://fixit.lruihao.cn"
 min_version = "0.147.7"
-
 tags = [
   "blog",
   "clean",
@@ -33,10 +32,10 @@ features = [
 ]
 
 [author]
-  name = "Lruihao"
-  homepage = "https://lruihao.cn"
+name = "Lruihao"
+homepage = "https://lruihao.cn"
 
 [original]
-  name = "Dillon"
-  homepage = "https://dillonzq.com"
-  repo = "https://github.com/dillonzq/LoveIt"
+name = "Dillon"
+homepage = "https://dillonzq.com"
+repo = "https://github.com/dillonzq/LoveIt"

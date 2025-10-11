@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { execSync, execFileSync } from 'node:child_process'
+import { execFileSync, execSync } from 'node:child_process'
 import fs from 'node:fs'
 import { join } from 'node:path'
 import process from 'node:process'

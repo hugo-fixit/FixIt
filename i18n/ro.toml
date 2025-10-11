@@ -186,8 +186,8 @@ caution = "Atenție"
 
 # === Task lists ===
 [taskList]
+x = "Controlat"
 " " = "Necontrolat"
-"x" = "Controlat"
 "/" = "În progres"
 "-" = "Anulat"
 "<" = "Programat"

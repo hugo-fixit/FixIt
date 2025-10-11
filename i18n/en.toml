@@ -186,8 +186,8 @@ caution = "Caution"
 
 # === Task lists ===
 [taskList]
+x = "Checked"
 " " = "Unchecked"
-"x" = "Checked"
 "/" = "In Progress"
 "-" = "Cancelled"
 "<" = "Scheduled"
