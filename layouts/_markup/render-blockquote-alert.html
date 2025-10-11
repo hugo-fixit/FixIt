@@ -1,6 +1,9 @@
 {{- $basicTypes := slice "note" "tip" "important" "warning" "caution" -}}
 
-{{- if .AlertTitle | or .AlertSign | or (.AlertType | in $basicTypes | not) -}}
+{{- if eq .AlertType "center" -}}
+  {{- /* The "center" type is a special case for centering content. */ -}}
+  <blockquote class="blockquote-center">{{ .Text }}</blockquote>
+{{- else if .AlertTitle | or .AlertSign | or (.AlertType | in $basicTypes | not) -}}
   {{- /* The extended syntax is compatible with Obsidian and FixIt admonition shortcode. */ -}}
   {{- $openMap := dict "+" true "-" false -}}
   {{- $open := index $openMap .AlertSign | default true -}}

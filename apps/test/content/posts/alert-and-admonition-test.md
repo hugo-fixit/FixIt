@@ -154,3 +154,8 @@ This is the default example type admonition.
 {{< admonition quote "" false >}}
 This is the default quote type admonition. Aliases: `cite`
 {{< /admonition >}}
+
+## Special Types
+
+> [!center]
+> This paragraph is **center-aligned**.
