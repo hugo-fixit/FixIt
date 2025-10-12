@@ -317,9 +317,9 @@ FixIt theme assets partial
 {{- if hugo.IsServer -}}
   {{- $configJS = add $configJS "console.log('Page config:', window.config);" -}}
 {{- end -}}
-{{- $targetPath := relLangURL "/js/config.js" -}}
+{{- $targetPath := relLangURL "/js/config/page.js" -}}
 {{- if in .Site.RegularPages .Page -}}
-  {{- $targetPath = $noBaseRelPermalink | printf "%s/config.js" -}}
+  {{- $targetPath = $noBaseRelPermalink | printf "%s/config/page.js" -}}
 {{- end -}}
 {{- dict "Content" $configJS "Path" $targetPath "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
