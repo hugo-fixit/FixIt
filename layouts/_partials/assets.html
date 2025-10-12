@@ -33,17 +33,8 @@ FixIt theme assets partial
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
     {{- $config = dict "type" "algolia" "algoliaIndex" $search.algolia.index "algoliaAppID" $search.algolia.appID "algoliaSearchKey" $search.algolia.searchKey | dict "search" | merge $config -}}
   {{- else if eq $search.type "fuse" -}}
-    {{- $searchURL := "" -}}
     {{- with .Site.Home.OutputFormats.Get "search" -}}
-      {{- $searchURL = .RelPermalink -}}
-    {{- end -}}
-    {{- if .IsTranslated -}}
-      {{- with .OutputFormats.Get "search" -}}
-        {{- $searchURL = .RelPermalink -}}
-      {{- end -}}
-    {{- end -}}
-    {{- if $searchURL -}}
-      {{- $config = dict "type" "fuse" "fuseIndexURL" $searchURL | dict "search" | merge $config -}}
+      {{- $config = dict "type" "fuse" "fuseIndexURL" .RelPermalink | dict "search" | merge $config -}}
     {{- end -}}
     {{- $source := $cdn.fuseJS | default "lib/fuse/fuse.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
