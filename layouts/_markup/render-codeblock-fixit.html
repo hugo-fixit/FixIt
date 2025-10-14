@@ -13,8 +13,5 @@ Don't worry, the easter egg will only be triggered in development mode.
     | dict "FixIt"
     | jsonify (dict "prefix" " " "indent" "  ")
     -}}
-  {{- printf "```json {title=\"🧐 Oh, you found a FixIt easter egg 🥚~\"}\n%s\n```" $FixIt | $.Page.RenderString -}}
-{{- else -}}
-  {{- $result := transform.HighlightCodeBlock . -}}
-  {{- $result.Wrapped -}}
+  {{- printf "```json {title=\"🧐 Oh, you found a FixIt easter egg 🥚~\", expandDepth=2}\n%s\n```" $FixIt | $.Page.RenderString -}}
 {{- end -}}
