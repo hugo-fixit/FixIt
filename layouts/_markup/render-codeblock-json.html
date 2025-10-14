@@ -1,0 +1,22 @@
+{{- $jsonViewer := .Attributes | merge (.Page.Param "jsonViewer") -}}
+{{- if $jsonViewer.enable -}}
+  {{- $attrs := printf `expand-depth="%v"` $jsonViewer.expanddepth -}}
+  {{- $copyable := false -}}
+  {{- with $jsonViewer.copyable -}}
+    {{- $copyable = dict "copyText" (T "assets.copyText") "copiedText" (T "assets.copiedText") -}}
+  {{- end -}}
+  {{- with $jsonViewer.sort -}}
+    {{- $attrs = " sort" | add $attrs -}}
+  {{- end -}}
+  {{- with $jsonViewer.boxed -}}
+    {{- $attrs = " boxed" | add $attrs -}}
+  {{- end -}}
+  <json-viewer value="{{ .Inner | jsonify }}" {{ $attrs | safeHTMLAttr }}{{ with $copyable}} copyable="{{ . | jsonify }}"{{ end }}></json-viewer>
+  {{- .Page.Store.Set "hasJsonViewer" true -}}
+  {{- if eq hugo.Context.MarkupScope "home" -}}
+    {{- site.Home.Store.Set "hasJsonViewer" true -}}
+  {{- end -}}
+{{- else -}}
+  {{- $result := transform.HighlightCodeBlock . -}}
+  {{- $result.Wrapped -}}
+{{- end -}}

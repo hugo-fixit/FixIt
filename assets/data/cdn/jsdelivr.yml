@@ -39,6 +39,8 @@ libFiles:
   gitalkJS: gitalk@1.7.2/dist/gitalk.min.js
   # instant.page@5.2.0 https://github.com/instantpage/instant.page
   instantPage: instant.page@5.2.0/instantpage.min.js
+  # json-viewer-element@1.0.0 https://github.com/Lruihao/json-viewer-element
+  jsonViewerElementJS: json-viewer-element@1.0.0/dist/json-viewer-element.umd.js
   # katex@0.16.22 https://github.com/KaTeX/KaTeX
   katexCopyTexJS: katex@0.16.22/dist/contrib/copy-tex.min.js
   katexCSS: katex@0.16.22/dist/katex.min.css
