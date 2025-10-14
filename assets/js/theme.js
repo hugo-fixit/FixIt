@@ -1083,6 +1083,19 @@ class FixIt {
     window.MathJax?.typeset && window.MathJax.typeset();
   }
 
+  initJsonViewer() {
+    if (!window.JsonViewerElement) {
+      return;
+    }
+    this._jsonViewerOnSwitchTheme = this._jsonViewerOnSwitchTheme || (() => {
+      this.util.forEach(document.getElementsByTagName('json-viewer'), ($el) => {
+        $el.setAttribute('theme', this.isDark ? 'dark' : 'light');
+      });
+    });
+    this.switchThemeEventSet.add(this._jsonViewerOnSwitchTheme);
+    this._jsonViewerOnSwitchTheme();
+  }
+
   initFixItDecryptor() {
     this.decryptor = new FixItDecryptor({
       decrypted: () => {
@@ -1100,6 +1113,7 @@ class FixIt {
         this.initTocListener();
         this.initPangu();
         this.initMathJax();
+        this.initJsonViewer();
         window.FixItMermaid?.init?.();
         this.util.forEach(document.querySelectorAll('.encrypted-hidden'), ($element) => {
           $element.classList.replace('encrypted-hidden', 'decrypted-shown');
@@ -1117,6 +1131,7 @@ class FixIt {
         this.initMapbox();
         this.initPangu();
         this.initMathJax();
+        this.initJsonViewer();
         window.FixItMermaid?.init?.();
         this.util.forEach($content.querySelectorAll('.encrypted-hidden'), ($element) => {
           $element.classList.replace('encrypted-hidden', 'decrypted-shown');
@@ -1318,6 +1333,7 @@ class FixIt {
         this.initTypeit();
         this.initMapbox();
         this.initPangu();
+        this.initJsonViewer();
       }
       this.initThemeColor();
       this.initSVGIcon();
