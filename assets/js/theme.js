@@ -527,7 +527,10 @@ class FixIt {
     this.util.forEach(document.querySelectorAll('.diagram-copy-btn'), ($btn) => {
       $btn.addEventListener('click', () => {
         stagingDOM.stage($btn.parentElement.querySelector('template').content.cloneNode(true))
-        const code = stagingDOM.contentAsText();
+        let code = stagingDOM.contentAsText();
+        try {
+          code = JSON.stringify(JSON.parse(code), null, 2);
+        } catch {}
         this.util.copyText(code).then(() => {
           $btn.toggleAttribute('data-copied', true);
           setTimeout(() => {
