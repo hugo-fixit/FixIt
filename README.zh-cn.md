@@ -255,8 +255,10 @@ FixIt 主题旨在在**简洁性**和**可扩展性**之间取得平衡。为此
 
 感谢 [所有贡献者](https://github.com/hugo-fixit/FixIt/graphs/contributors) 的支持！
 
+感谢 [Hugo DoIt](https://github.com/HEIGE-PCloud/DoIt) 主题和 [Hexo NexT](https://github.com/next-theme/hexo-theme-next) 主题给予的灵感和借鉴。
+
 <details>
-<summary>FixIt 主题中用到了以下项目，感谢它们的作者：</summary>
+<summary>感谢 FixIt 主题中使用的所有开源项目。</summary>
 
 - [normalize.css](https://github.com/necolas/normalize.css)
 - [Font Awesome](https://fontawesome.com/)
@@ -294,14 +296,7 @@ FixIt 主题旨在在**简洁性**和**可扩展性**之间取得平衡。为此
 - [pace](https://github.com/CodeByZach/pace)
 - [xxhash-wasm](https://github.com/jungomi/xxhash-wasm)
 - [`<tab-container>` element](https://github.com/github/tab-container-element)
-
-</details>
-
-<details>
-<summary>FixIt 主题还借鉴了以下项目的部分功能，同样感谢它们的作者：</summary>
-
-- [DoIt](https://github.com/HEIGE-PCloud/DoIt)
-- [NexT](https://github.com/next-theme/hexo-theme-next)
+- [`<json-viewer>` element](https://github.com/Lruihao/json-viewer-element)
 
 </details>
 

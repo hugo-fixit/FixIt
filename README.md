@@ -253,10 +253,12 @@ Also, we welcome Issue or PR to our [official-components](https://github.com/hug
 
 ## Acknowledgements
 
-Thanks to all the [contributors](https://github.com/hugo-fixit/FixIt/graphs/contributors) for their support!
+Thanks to the support of [all contributors](https://github.com/hugo-fixit/FixIt/graphs/contributors)!
+
+Thanks to the [Hugo DoIt](https://github.com/HEIGE-PCloud/DoIt) theme and [Hexo NexT](https://github.com/next-theme/hexo-theme-next) theme for inspiration and reference.
 
 <details>
-<summary>Thanks to the authors of following resources included in the theme:</summary>
+<summary>Thanks to all the open source projects used in the FixIt theme.</summary>
 
 - [normalize.css](https://github.com/necolas/normalize.css)
 - [Font Awesome](https://fontawesome.com/)
@@ -289,19 +291,12 @@ Thanks to all the [contributors](https://github.com/hugo-fixit/FixIt/graphs/cont
 - [Waline](https://waline.js.org/)
 - [Twikoo](https://twikoo.js.org/)
 - [github-corners](https://github.com/tholman/github-corners)
-- [giscus](https://giscus.app/)
+- [giscus](https://giscus.app/zh-CN)
 - [crypto-js](https://github.com/brix/crypto-js)
 - [pace](https://github.com/CodeByZach/pace)
 - [xxhash-wasm](https://github.com/jungomi/xxhash-wasm)
 - [`<tab-container>` element](https://github.com/github/tab-container-element)
-
-</details>
-
-<details>
-<summary>The FixIt also draws on some features of the following projects, and thanks to their authors as well:</summary>
-
-- [DoIt](https://github.com/HEIGE-PCloud/DoIt)
-- [NexT](https://github.com/next-theme/hexo-theme-next)
+- [`<json-viewer>` element](https://github.com/Lruihao/json-viewer-element)
 
 </details>
 
@@ -309,17 +304,17 @@ Thanks to all the [contributors](https://github.com/hugo-fixit/FixIt/graphs/cont
 
 FixIt is licensed under the **MIT** license. Check the [LICENSE file](/LICENSE) for details.
 
-## Sponsor
+## Sponsor Support
 
-If you enjoy the theme, please consider buying me a coffee ☕️. Thanks!
+If you enjoy the theme, please consider buying me a cup of coffee ☕️. Thanks!
 
-- [Wechat](/images/wechatpay.jpg)
+- [WeChat Pay](/images/wechatpay.jpg)
 - [Alipay](/images/alipay.jpg)
 - [PayPal](https://paypal.me/Lruihao)
 
-Thanks to the following sponsors for their support:
+Thanks to the following sponsors for their great support:
 
-- [translate.js](https://github.com/xnx3/translate) Sponsoring [Enterprise Translation Channel](https://translate.zvo.cn/4087.html).
+- [translate.js](https://github.com/xnx3/translate) sponsored [Enterprise Translation Channel](https://translate.zvo.cn/4087.html).
 
 ## Author
 
