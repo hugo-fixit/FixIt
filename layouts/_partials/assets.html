@@ -173,7 +173,7 @@ FixIt theme assets partial
 {{- end -}}
 
 {{- /* Music */ -}}
-{{- if .HasShortcode "music" -}}
+{{- if (.HasShortcode "aplayer") | or (.HasShortcode "music") -}}
   {{- /* APlayer */ -}}
   {{- $source := $cdn.aplayerCSS | default "lib/aplayer/APlayer.min.css" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Preload" true | dict "Page" . "Data" | partial "store/style.html" -}}
@@ -182,9 +182,17 @@ FixIt theme assets partial
   {{- $source := $cdn.aplayerJS | default "lib/aplayer/APlayer.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
-  {{- /* MetingJS */ -}}
-  {{- $source := $cdn.metingJS | default "lib/meting/Meting.min.js" -}}
-  {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- if .HasShortcode "music" -}}
+    {{- /* MetingJS */ -}}
+    {{- $source := $cdn.metingJS | default "lib/meting/Meting.min.js" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- else -}}
+    {{- $options := dict "targetPath" "js/lib/aplayer.min.js" "minify" hugo.IsProduction -}}
+    {{- if not hugo.IsProduction -}}
+      {{- $options = dict "sourceMap" "external" | merge $options -}}
+    {{- end -}}
+    {{- dict "Source" (resources.Get "js/lib/aplayer.js") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- end -}}
 {{- end -}}
 
 {{- /* Tabs and tab */ -}}

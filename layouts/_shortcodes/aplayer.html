@@ -1,0 +1,23 @@
+{{- if .IsNamedParams -}}
+  {{- $options := dict -}}
+  {{- with .Get "fixed" -}}{{- $options = dict "fixed" . | merge $options -}}{{- end -}}
+  {{- with .Get "mini" -}}{{- $options = dict "mini" . | merge $options -}}{{- end -}}
+  {{- with .Get "autoplay" -}}{{- $options = dict "autoplay" . | merge $options -}}{{- end -}}
+  {{- with .Get "theme" -}}{{- $options = dict "theme" . | merge $options -}}{{- end -}}
+  {{- with .Get "loop" -}}{{- $options = dict "loop" . | merge $options -}}{{- end -}}
+  {{- with .Get "order" -}}{{- $options = dict "order" . | merge $options -}}{{- end -}}
+  {{- with .Get "preload" -}}{{- $options = dict "preload" . | merge $options -}}{{- end -}}
+  {{- with .Get "volume" -}}{{- $options = dict "volume" . | merge $options -}}{{- end -}}
+  {{- with .Get "mutex" -}}{{- $options = dict "mutex" . | merge $options -}}{{- end -}}
+  {{- with .Get "lrcType" -}}{{- $options = dict "lrcType" . | merge $options -}}{{- end -}}
+  {{- with .Get "listFolded" -}}{{- $options = dict "listFolded" . | merge $options -}}{{- end -}}
+  {{- with .Get "listMaxHeight" -}}{{- $options = dict "listMaxHeight" . | merge $options -}}{{- end -}}
+  {{- with .Get "storageName" -}}{{- $options = dict "storageName" . | merge $options -}}{{- end -}}
+  {{- $options = $options | jsonify -}}
+  {{- $audio := trim .Inner " \r\n" -}}
+  {{- $audio = replace $audio "}" "}," | printf "[%s]" -}}
+  {{- $audio = replace $audio ",]" "]" -}}
+  <div class="aplayer-shortcode" data-audio="{{ $audio }}" data-options="{{ $options }}"></div>
+{{- else -}}
+  {{- errorf "Only named params is supported: %s" .Position -}}
+{{- end -}}
