@@ -3,7 +3,7 @@
     {{- errorf "Found shortcode %q enclosed inside a %q block, must be enclosed inside a %q block. Error position: %s" $.Name $.Parent.Name "tabs" $.Position -}}
   {{- end -}}
 {{- else -}}
-  {{- errorf "shortcode %q must be enclosed inside a %q block, but no parent block was found. Error position: %s" $.Name "tabs" $.Position -}}
+  {{- errorf "The shortcode %q must be enclosed inside a %q block, but no parent block was found. Error position: %s" $.Name "tabs" $.Position -}}
 {{- end -}}
 
 {{- $id := dict "Page" .Page | partial "function/id.html" -}}

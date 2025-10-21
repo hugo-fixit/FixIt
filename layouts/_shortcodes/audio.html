@@ -1,0 +1,40 @@
+{{- with $.Parent -}}
+  {{- if ne $.Parent.Name "aplayer" -}}
+    {{- errorf "Found shortcode %q enclosed inside a %q block, must be enclosed inside a %q block. Error position: %s" $.Name $.Parent.Name "aplayer" $.Position -}}
+  {{- end -}}
+{{- else -}}
+  {{- errorf "The shortcode %q must be enclosed inside a %q block, but no parent block was found. Error position: %s" $.Name "aplayer" $.Position -}}
+{{- end -}}
+
+{{- if .IsNamedParams -}}
+  {{- $options := dict -}}
+  {{- with .Get "name" -}}{{- $options = dict "name" . | merge $options -}}{{- end -}}
+  {{- with .Get "artist" -}}{{- $options = dict "artist" . | merge $options -}}{{- end -}}
+  {{- with .Get "url" -}}
+    {{- $url := . -}}
+    {{- with dict "Path" $url | partial "function/resource.html" -}}
+      {{- $url = .RelPermalink -}}
+    {{- end -}}
+    {{- $options = dict "url" $url | merge $options -}}
+  {{- end -}}
+  {{- with .Get "cover" -}}
+    {{- $cover := . -}}
+    {{- with dict "Path" $cover | partial "function/resource.html" -}}
+      {{- $cover = .RelPermalink -}}
+    {{- end -}}
+    {{- $options = dict "cover" $cover | merge $options -}}
+  {{- end -}}
+  {{- with .Get "lrc" -}}
+    {{- $lrc := . -}}
+    {{- with dict "Path" $lrc | partial "function/resource.html" -}}
+      {{- $lrc = .RelPermalink -}}
+    {{- end -}}
+    {{- $options = dict "lrc" $lrc | merge $options -}}
+  {{- end -}}
+  {{- with .Inner -}}{{- $options = dict "lrc" . | merge $options -}}{{- end -}}
+  {{- with .Get "theme" -}}{{- $options = dict "theme" . | merge $options -}}{{- end -}}
+  {{- with .Get "type" -}}{{- $options = dict "type" . | merge $options -}}{{- end -}}
+  {{- $options | jsonify -}}
+{{- else -}}
+  {{- errorf "Only named params is supported: %s" .Position -}}
+{{- end -}}

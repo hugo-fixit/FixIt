@@ -1118,6 +1118,7 @@ class FixIt {
         this.initMathJax();
         this.initJsonViewer();
         window.FixItMermaid?.init?.();
+        window.FixItAPlayer?.init?.();
         this.util.forEach(document.querySelectorAll('.encrypted-hidden'), ($element) => {
           $element.classList.replace('encrypted-hidden', 'decrypted-shown');
         });
@@ -1136,6 +1137,7 @@ class FixIt {
         this.initMathJax();
         this.initJsonViewer();
         window.FixItMermaid?.init?.();
+        window.FixItAPlayer?.init?.();
         this.util.forEach($content.querySelectorAll('.encrypted-hidden'), ($element) => {
           $element.classList.replace('encrypted-hidden', 'decrypted-shown');
         });
