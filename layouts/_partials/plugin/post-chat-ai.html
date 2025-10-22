@@ -100,9 +100,9 @@
   {{- end -}}
 
   {{- /* Insert config */ -}}
-  {{- $targetPath := relLangURL "/js/config/post-chat.js" -}}
-  {{- if in .Site.RegularPages .Page -}}
-    {{- $targetPath = (strings.TrimPrefix (relURL "") $.RelPermalink) | printf "%s/config/post-chat.js" -}}
+  {{- $targetPath := (strings.TrimPrefix (relURL "") $.RelPermalink) | printf "%s/config/post-chat.js" -}}
+  {{- if (path.Ext .Page.RelPermalink) -}}
+    {{- $targetPath = "" -}}
   {{- end -}}
   {{- dict "Content" $configJS "Path" $targetPath "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
