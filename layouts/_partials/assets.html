@@ -324,7 +324,7 @@ FixIt theme assets partial
   {{- $configJS = add $configJS "console.log('Page config:', window.config);" -}}
 {{- end -}}
 {{- $targetPath := $noBaseRelPermalink | printf "%s/config/page.js" -}}
-{{- if (path.Ext .Page.RelPermalink) -}}
+{{- if (path.Ext .Page.RelPermalink) | or .IsHome -}}
   {{- $targetPath = "" -}}
 {{- end -}}
 {{- dict "Content" $configJS "Path" $targetPath "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
@@ -332,7 +332,7 @@ FixIt theme assets partial
 {{- /* MathJax plugin */ -}}
 {{- if .Store.Get "hasMathJax" -}}
   {{- $targetPath := $noBaseRelPermalink | printf "%s/mathjax.min.js" -}}
-  {{- if (path.Ext .Page.RelPermalink) -}}
+  {{- if (path.Ext .Page.RelPermalink) | or .IsHome -}}
     {{- $targetPath = "" -}}
   {{- end -}}
   {{- $options := dict "targetPath" $targetPath "minify" hugo.IsProduction -}}

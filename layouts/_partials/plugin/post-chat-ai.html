@@ -101,7 +101,7 @@
 
   {{- /* Insert config */ -}}
   {{- $targetPath := (strings.TrimPrefix (relURL "") $.RelPermalink) | printf "%s/config/post-chat.js" -}}
-  {{- if (path.Ext .Page.RelPermalink) -}}
+  {{- if (path.Ext .Page.RelPermalink) | or .IsHome -}}
     {{- $targetPath = "" -}}
   {{- end -}}
   {{- dict "Content" $configJS "Path" $targetPath "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}

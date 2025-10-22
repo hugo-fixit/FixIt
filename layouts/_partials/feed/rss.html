@@ -57,6 +57,8 @@
       <description>
         {{- $content := dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" }}
         {{- /* {{- $content | replaceRE `<figure[^>]*>.*</figure>` "" | replaceRE `<img[^>]*( /)?>` "" | safeHTML -}} */ -}}
+        {{- /* Hide line number column of code block */ -}}
+        {{- $content = $content | replaceRE `(<table class="lntable"[^>]*>.*?<td class="lntd")` `${1} style="display:none"` }}
         {{- with $image }}
           {{- $content = add (printf "<img src=%q alt=%q referrerpolicy=%q>" . "featured image" "no-referrer") $content | safeHTML }}
         {{- end }}
