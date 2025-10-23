@@ -1,0 +1,70 @@
+{{- $content := .Content -}}
+
+{{- if $content -}}
+
+  {{- $content = dict "Content" .Content "Ruby" .Ruby "Fraction" .Fraction "Fontawesome" .Fontawesome | partial "function/content.html" }}
+
+  {{- /* Keep only the code content: remove highlight/chroma/lntable wrapper and line numbers */ -}}
+  {{- $content = $content | replaceRE `(?s)<div[^>]*class="highlight"[^>]*>.*?<div[^>]*class="chroma"[^>]*>.*?<table[^>]*class="lntable"[^>]*>.*?(?:<tbody[^>]*>\s*)?<tr[^>]*>\s*<td[^>]*class="lntd"[^>]*>.*?</td>\s*<td[^>]*class="lntd"[^>]*>(.*?)</td>\s*</tr>\s*(?:</tbody>\s*)?.*?</table>.*?</div>\s*</div>` "$1" -}}
+  {{- $codeBlocks := findRE `(?s)<code[^>]*>.*?</code>` $content -}}
+  {{- if gt (len $codeBlocks) 0 -}}
+    {{- range $i, $block := $codeBlocks -}}
+      {{- $newBlock := $block -}}
+      {{- $textMatches := findRE `>([^<]+)<` $block -}}
+      {{- if gt (len $textMatches) 0 -}}
+        {{- range $j, $m := $textMatches -}}
+          {{- $inner := $m | replaceRE `^>([^<]+)<$` "$1" -}}
+          {{- $newInner := replace $inner " " "&ensp;" -}}
+          {{- $newMatch := printf ">%s<" $newInner -}}
+          {{- $newBlock = replace $newBlock $m $newMatch -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $content = replace $content $block $newBlock -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- /* Keep only the first <pre class="mermaid">...</pre> inside a diagram-container */ -}}
+  {{- $content = $content | replaceRE `(?s)<div[^>]*class="diagram-container"[^>]*>.*?(<pre[^>]*class="mermaid"[^>]*>.*?</pre>).*?</div>\s*(?:<template[^>]*>.*?</template>\s*)?` "$1" }}
+  {{- $mermaidMatches := findRE `(?s)<pre[^>]*class="mermaid"[^>]*>.*?</pre>` $content -}}
+  {{- if gt (len $mermaidMatches) 0 -}}
+    {{- range $i, $m := $mermaidMatches -}}
+      {{- $attrs := $m | replaceRE `(?s)<pre([^>]*)>.*?</pre>` "$1" -}}
+      {{- $inner := $m | replaceRE `(?s)<pre[^>]*>(.*?)</pre>` "$1" -}}
+      {{- $inner = replace $inner " " "&ensp;" -}}
+      {{- $newPre := printf "<pre%s>%s</pre>" $attrs $inner -}}
+      {{- $content = replace $content $m $newPre -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- /* Remove echarts diagram containers entirely */ -}}
+  {{- $content = $content | replaceRE `(?s)<div[^>]*class="diagram-container"[^>]*>.*?<div[^>]*class="echarts"[^>]*>.*?</div>\s*(?:<template[^>]*>.*?</template>\s*)?.*?</div>` "" -}}
+
+  {{- /* Replace json-viewer components with JSON code blocks */ -}}
+  {{- $matches := findRE `(?s)<json-viewer\b[^>]*\bvalue="[^"]*"[^>]*>(?:</json-viewer>)?` $content -}}
+  {{- if gt (len $matches) 0 -}}
+    {{- range $i, $m := $matches -}}
+      {{- /* extract the value="...": use replaceRE on the full match to get the captured group */ -}}
+      {{- $rawVal := $m | replaceRE `(?s).*value="([^"]*)".*` "$1" -}}
+      {{- /* decode HTML entities, strip outer quotes if present, unescape JSON-style escapes */ -}}
+      {{- $jsonStr := $rawVal | htmlUnescape | replaceRE `^"(.*)"$` "$1" | replaceRE `\\\\` `\` | replaceRE `\\\"` `"` | replaceRE `\\n` "\n" | replaceRE `\\r` "" | replaceRE `\\t` "\t" -}}
+      {{- /* try to unmarshal into object */ -}}
+      {{- $obj := transform.Unmarshal $jsonStr | default dict -}}
+      {{- /* serialize back to JSON */ -}}
+      {{- $pretty := $obj | jsonify (dict "indent" "&ensp;&ensp;") -}}
+      {{- /* build replacement pre/code block */ -}}
+      {{- $replacement := printf "<pre><code>%s</code></pre>" $pretty -}}
+      {{- /* replace the full original match with the rendered block */ -}}
+      {{- $content = replace $content $m $replacement -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- with .FeaturedImage }}
+    {{- $content = add (printf "<img src=%q alt=%q referrerpolicy=%q>" . "featured image" "no-referrer") $content }}
+  {{- end }}
+
+  {{- $content = $content | transform.XMLEscape | safeHTML -}}
+
+{{- end }}
+
+
+{{- return $content -}}
