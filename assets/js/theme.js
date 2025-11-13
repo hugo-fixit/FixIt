@@ -49,7 +49,7 @@ class FixIt {
     });
   }
 
-  initTwemoji(target = document.body) {
+  initTwemoji(target = document) {
     this.config.twemoji && twemoji.parse(target);
   }
 
@@ -1360,6 +1360,7 @@ class FixIt {
       this.initReward();
       this.initPostChatUser();
 
+      // 【todo] refactor async init toc
       window.setTimeout(() => {
         this.initComment();
         if (!this.config.encryption?.all) {
