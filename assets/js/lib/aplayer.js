@@ -11,9 +11,3 @@ window.FixItAPlayer = {
     })
   },
 }
-
-if (document.readyState !== 'loading') {
-  window.FixItAPlayer.init()
-} else {
-  document.addEventListener('DOMContentLoaded', window.FixItAPlayer.init, false)
-}

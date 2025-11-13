@@ -49,7 +49,7 @@ class FixIt {
     });
   }
 
-  initTwemoji(target = document.body) {
+  initTwemoji(target = document) {
     this.config.twemoji && twemoji.parse(target);
   }
 
@@ -98,6 +98,38 @@ class FixIt {
         }
       }, false);
     });
+  }
+
+  /**
+   * Helper method to apply highlight tags to text based on match indices
+   * @param {String} text - The text to highlight
+   * @param {Array} indices - Array of match indices
+   * @param {String} highlightTag - The HTML tag to use for highlighting
+   * @returns {String} The highlighted text
+   */
+  _applyHighlightToText(text, indices, highlightTag) {
+    let offset = 0;
+    for (let i = 0; i < indices.length; i++) {
+      const substr = text.substring(indices[i][0] + offset, indices[i][1] + 1 + offset);
+      const tag = `<${highlightTag}>` + substr + `</${highlightTag}>`;
+      text = text.substring(0, indices[i][0] + offset) + tag + text.substring(indices[i][1] + 1 + offset, text.length);
+      offset += highlightTag.length * 2 + 5;
+    }
+    return text;
+  }
+
+  /**
+   * Helper method to reset search UI elements
+   * @param {Element} $header - The header element
+   * @param {Element} $searchLoading - The loading indicator element
+   * @param {Element} $searchClear - The clear button element
+   * @param {Object} searchInstance - The search autocomplete instance
+   */
+  _resetSearchUI($header, $searchLoading, $searchClear, searchInstance) {
+    $header.classList.remove('open');
+    $searchLoading.style.display = 'none';
+    $searchClear.style.display = 'none';
+    searchInstance && searchInstance.autocomplete.setVal('');
   }
 
   initSearch() {
@@ -150,23 +182,17 @@ class FixIt {
       }, false);
       $searchCancel.addEventListener('click', () => {
         this.disableScrollEvent = false;
-        $header.classList.remove('open');
         document.body.classList.remove('blur');
         document.getElementById('menu-toggle-mobile').classList.remove('active');
         document.getElementById('menu-mobile').classList.remove('active');
-        $searchLoading.style.display = 'none';
-        $searchClear.style.display = 'none';
-        this._searchMobile && this._searchMobile.autocomplete.setVal('');
+        this._resetSearchUI($header, $searchLoading, $searchClear, this._searchMobile);
       }, false);
       $searchClear.addEventListener('click', () => {
         $searchClear.style.display = 'none';
         this._searchMobile && this._searchMobile.autocomplete.setVal('');
       }, false);
       this._searchMobileOnClickMask = this._searchMobileOnClickMask || (() => {
-        $header.classList.remove('open');
-        $searchLoading.style.display = 'none';
-        $searchClear.style.display = 'none';
-        this._searchMobile && this._searchMobile.autocomplete.setVal('');
+        this._resetSearchUI($header, $searchLoading, $searchClear, this._searchMobile);
       });
       this.clickMaskEventSet.add(this._searchMobileOnClickMask);
     } else {
@@ -183,10 +209,7 @@ class FixIt {
         this._searchDesktop && this._searchDesktop.autocomplete.setVal('');
       }, false);
       this._searchDesktopOnClickMask = this._searchDesktopOnClickMask ||(() => {
-          $header.classList.remove('open');
-          $searchLoading.style.display = 'none';
-          $searchClear.style.display = 'none';
-          this._searchDesktop && this._searchDesktop.autocomplete.setVal('');
+          this._resetSearchUI($header, $searchLoading, $searchClear, this._searchDesktop);
         });
       this.clickMaskEventSet.add(this._searchDesktopOnClickMask);
     }
@@ -254,21 +277,9 @@ class FixIt {
                   let content = item.content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
                   matches.forEach(({ indices, value, key }) => {
                     if (key === 'content') {
-                      let offset = 0;
-                      for (let i = 0; i < indices.length; i++) {
-                        const substr = content.substring(indices[i][0] + offset, indices[i][1] + 1 + offset);
-                        const tag = `<${highlightTag}>` + substr + `</${highlightTag}>`;
-                        content = content.substring(0, indices[i][0] + offset) + tag + content.substring(indices[i][1] + 1 + offset, content.length);
-                        offset += highlightTag.length * 2 + 5;
-                      }
+                      content = this._applyHighlightToText(content, indices, highlightTag);
                     } else if (key === 'title') {
-                      let offset = 0;
-                      for (let i = 0; i < indices.length; i++) {
-                        const substr = title.substring(indices[i][0] + offset, indices[i][1] + 1 + offset);
-                        const tag = `<${highlightTag}>` + substr + `</${highlightTag}>`;
-                        title = title.substring(0, indices[i][0] + offset) + tag + title.substring(indices[i][1] + 1 + offset, content.length);
-                        offset += highlightTag.length * 2 + 5;
-                      }
+                      title = this._applyHighlightToText(title, indices, highlightTag);
                     }
                   });
                   results[item.uri] = {
@@ -1099,53 +1110,58 @@ class FixIt {
     this._jsonViewerOnSwitchTheme();
   }
 
+  /**
+   * Helper method to initialize content components
+   * @param {Element} target - The target element (optional, defaults to document)
+   * @param {Boolean} includeToc - Whether to initialize TOC-related components
+   */
+  _initContentComponents(target = document, includeToc = false) {
+    this.initTwemoji(target);
+    this.initDetails(target);
+    this.initLightGallery();
+    this.initCodeWrapper();
+    this.initDiagramCopyBtn();
+    this.initTable(target);
+    this.initEcharts();
+    this.initTypeit(target);
+    this.initMapbox();
+    if (includeToc) {
+      this.fixTocScroll();
+      this.initToc();
+      this.initTocListener();
+    }
+    this.initPangu();
+    this.initMathJax();
+    this.initJsonViewer();
+    window.FixItMermaid?.init?.();
+    window.FixItAPlayer?.init?.();
+  }
+
+  /**
+   * Helper method to toggle encrypted content visibility
+   * @param {Element} container - The container element
+   * @param {Boolean} show - true to show decrypted content, false to hide
+   */
+  _toggleEncryptedClass(container, show) {
+    const fromClass = show ? 'encrypted-hidden' : 'decrypted-shown';
+    const toClass = show ? 'decrypted-shown' : 'encrypted-hidden';
+    this.util.forEach(container.querySelectorAll(`.${fromClass}`), ($element) => {
+      $element.classList.replace(fromClass, toClass);
+    });
+  }
+
   initFixItDecryptor() {
     this.decryptor = new FixItDecryptor({
       decrypted: () => {
-        this.initTwemoji();
-        this.initDetails();
-        this.initLightGallery();
-        this.initCodeWrapper();
-        this.initDiagramCopyBtn();
-        this.initTable();
-        this.initEcharts();
-        this.initTypeit();
-        this.initMapbox();
-        this.fixTocScroll();
-        this.initToc();
-        this.initTocListener();
-        this.initPangu();
-        this.initMathJax();
-        this.initJsonViewer();
-        window.FixItMermaid?.init?.();
-        window.FixItAPlayer?.init?.();
-        this.util.forEach(document.querySelectorAll('.encrypted-hidden'), ($element) => {
-          $element.classList.replace('encrypted-hidden', 'decrypted-shown');
-        });
+        this._initContentComponents(document, true);
+        this._toggleEncryptedClass(document, true);
       },
       partialDecrypted: ($content) => {
-        this.initTwemoji($content);
-        this.initDetails($content);
-        this.initLightGallery();
-        this.initCodeWrapper();
-        this.initDiagramCopyBtn();
-        this.initTable($content);
-        this.initEcharts();
-        this.initTypeit($content);
-        this.initMapbox();
-        this.initPangu();
-        this.initMathJax();
-        this.initJsonViewer();
-        window.FixItMermaid?.init?.();
-        window.FixItAPlayer?.init?.();
-        this.util.forEach($content.querySelectorAll('.encrypted-hidden'), ($element) => {
-          $element.classList.replace('encrypted-hidden', 'decrypted-shown');
-        });
+        this._initContentComponents($content, false);
+        this._toggleEncryptedClass($content, true);
       },
       reset: () => {
-        this.util.forEach(document.querySelectorAll('.decrypted-shown'), ($element) => {
-          $element.classList.replace('decrypted-shown', 'encrypted-hidden');
-        });
+        this._toggleEncryptedClass(document, false);
       }
     });
     this.decryptor.init(this.config.encryption);
@@ -1328,17 +1344,7 @@ class FixIt {
         this.initFixItDecryptor();
       }
       if (!this.config.encryption?.all) {
-        this.initTwemoji();
-        this.initDetails();
-        this.initLightGallery();
-        this.initCodeWrapper();
-        this.initDiagramCopyBtn();
-        this.initTable();
-        this.initEcharts();
-        this.initTypeit();
-        this.initMapbox();
-        this.initPangu();
-        this.initJsonViewer();
+        this._initContentComponents(document, false);
       }
       this.initThemeColor();
       this.initSVGIcon();
@@ -1354,6 +1360,7 @@ class FixIt {
       this.initReward();
       this.initPostChatUser();
 
+      // 【todo] refactor async init toc
       window.setTimeout(() => {
         this.initComment();
         if (!this.config.encryption?.all) {
