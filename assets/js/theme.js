@@ -1140,10 +1140,11 @@ class FixIt {
   /**
    * Helper method to toggle encrypted content visibility
    * @param {Element} container - The container element
-   * @param {String} fromClass - The class to replace
-   * @param {String} toClass - The class to replace with
+   * @param {Boolean} show - true to show decrypted content, false to hide
    */
-  _toggleEncryptedClass(container, fromClass, toClass) {
+  _toggleEncryptedClass(container, show) {
+    const fromClass = show ? 'encrypted-hidden' : 'decrypted-shown';
+    const toClass = show ? 'decrypted-shown' : 'encrypted-hidden';
     this.util.forEach(container.querySelectorAll(`.${fromClass}`), ($element) => {
       $element.classList.replace(fromClass, toClass);
     });
@@ -1153,14 +1154,14 @@ class FixIt {
     this.decryptor = new FixItDecryptor({
       decrypted: () => {
         this._initContentComponents(document, true);
-        this._toggleEncryptedClass(document, 'encrypted-hidden', 'decrypted-shown');
+        this._toggleEncryptedClass(document, true);
       },
       partialDecrypted: ($content) => {
         this._initContentComponents($content, false);
-        this._toggleEncryptedClass($content, 'encrypted-hidden', 'decrypted-shown');
+        this._toggleEncryptedClass($content, true);
       },
       reset: () => {
-        this._toggleEncryptedClass(document, 'decrypted-shown', 'encrypted-hidden');
+        this._toggleEncryptedClass(document, false);
       }
     });
     this.decryptor.init(this.config.encryption);
