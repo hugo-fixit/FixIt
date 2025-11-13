@@ -150,7 +150,7 @@ pre:not([data-processed]) {
       }
 
       @each $type, $text in $code-type-map {
-        &.language-#{$type} .code-title::after {
+        &.language-#{to-lower-case($type)} .code-title::after {
           content: $text;
         }
       }
