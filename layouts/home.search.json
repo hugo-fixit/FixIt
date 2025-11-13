@@ -11,7 +11,7 @@
     {{- if $.Site.Params.search.absoluteURL -}}
       {{- $uri = .Permalink -}}
     {{- end -}}
-    {{- $meta := dict "uri" $uri "title" .Title "tags" .Params.tags "categories" .Params.categories -}}
+    {{- $meta := dict "uri" $uri "title" .Title "tags" .Params.tags "categories" .Params.categories "collections" .Params.collections -}}
     {{- $meta = $.Site.Params.dateFormat | default "2006-01-02" | .PublishDate.Format | dict "date" | merge $meta -}}
     {{- with .Description -}}
       {{- $index = $index | append (dict "content" . "objectID" $uri | merge $meta) -}}
@@ -21,22 +21,50 @@
     {{- $content := dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" -}}
     {{/* Remove line number for code */}}
     {{- $content = $content | replaceRE `<span class="lnt?"> *\d*\n?</span>` "" -}}
-    {{- range $i, $contenti := split $content "<h2 id=" -}}
-      {{- if gt $i 0 -}}
-        {{- $contenti = printf "<h2 id=%v" $contenti -}}
+    {{- $content = $content | replaceRE ` class="heading-element"` "" -}}
+    {{- $anchor := "" -}}
+    {{- range $h, $contenth := split $content "<h1 id=" -}}
+      {{- if gt $h 0 -}}
+        {{- $anchor = replace (index (split $contenth ">") 0) `"` "" -}}
+        {{- $contenth = printf "<h1 id=%v" $contenth -}}
       {{- end -}}
-      {{- range $j, $contentj := split $contenti "<h3 id=" -}}
-        {{- if gt $j 0 -}}
-          {{- $contentj = printf "<h3 id=%v" $contentj -}}
+      {{- range $i, $contenti := split $contenth "<h2 id=" -}}
+        {{- if gt $i 0 -}}
+          {{- $anchor = replace (index (split $contenti ">") 0) `"` "" -}}
+          {{- $contenti = printf "<h2 id=%v" $contenti -}}
         {{- end -}}
-        {{/* Plainify, unescape and remove (\n, \t) */}}
-        {{- $contentj = $contentj | plainify | htmlUnescape | replaceRE `[\n\t ]+` " " -}}
-        {{- if gt $.Site.Params.search.contentLength 0 -}}
-          {{- $contentj = substr $contentj 0 $.Site.Params.search.contentLength -}}
-        {{- end -}}
-        {{- if $contentj | and (ne $contentj " ") -}}
-          {{- $one := printf "%v:%v:%v" $uri $i $j | dict "content" $contentj "objectID" | merge $meta -}}
-          {{- $index = $index | append $one -}}
+        {{- range $j, $contentj := split $contenti "<h3 id=" -}}
+          {{- if gt $j 0 -}}
+            {{- $anchor = replace (index (split $contentj ">") 0) `"` "" -}}
+            {{- $contentj = printf "<h3 id=%v" $contentj -}}
+          {{- end -}}
+          {{- range $k, $contentk := split $contentj "<h4 id=" -}}
+            {{- if gt $k 0 -}}
+              {{- $anchor = replace (index (split $contentk ">") 0) `"` "" -}}
+              {{- $contentk = printf "<h4 id=%v" $contentk -}}
+            {{- end -}}
+            {{- range $l, $contentl := split $contentk "<h5 id=" -}}
+              {{- if gt $l 0 -}}
+                {{- $anchor = replace (index (split $contentl ">") 0) `"` "" -}}
+                {{- $contentk = printf "<h5 id=%v" $contentl -}}
+              {{- end -}}
+              {{- range $m, $contentm := split $contentl "<h6 id=" -}}
+                {{- if gt $m 0 -}}
+                  {{- $anchor = replace (index (split $contentm ">") 0) `"` "" -}}
+                  {{- $contentm = printf "<h6 id=%v" $contentm -}}
+                {{- end -}}
+                {{/* Plainify, unescape and remove (\n, \t) */}}
+                {{- $contentj = $contentj | plainify | htmlUnescape | replaceRE `[\n\t ]+` " " -}}
+                {{- if gt $.Site.Params.search.contentLength 0 -}}
+                  {{- $contentj = substr $contentj 0 $.Site.Params.search.contentLength -}}
+                {{- end -}}
+                {{- if $contentj | and (ne $contentj " ") -}}
+                  {{- $one := printf "%v:%v:%v" $uri $i $j | dict "content" $contentj "uri" (printf "%v#%v" $uri $anchor) "objectID" | merge $meta -}}
+                  {{- $index = $index | append $one -}}
+                {{- end -}}
+              {{- end -}}
+            {{- end -}}
+          {{- end -}}
         {{- end -}}
       {{- end -}}
     {{- end -}}

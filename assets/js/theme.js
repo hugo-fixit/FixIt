@@ -240,12 +240,17 @@ class FixIt {
             };
             if (searchConfig.type === 'algolia') {
               this._algoliaIndex =
-                this._algoliaIndex || algoliasearch(searchConfig.algoliaAppID, searchConfig.algoliaSearchKey).initIndex(searchConfig.algoliaIndex);
+                this._algoliaIndex ||
+                algoliasearch(
+                  searchConfig.algoliaAppID,
+                  searchConfig.algoliaSearchKey
+                ).initIndex(searchConfig.algoliaIndex);
               this._algoliaIndex
                 .search(query, {
                   offset: 0,
                   length: maxResultLength * 8,
                   attributesToHighlight: ['title'],
+                  attributesToRetrieve: ['*'],
                   attributesToSnippet: [`content:${snippetLength}`],
                   highlightPreTag: `<${highlightTag}>`,
                   highlightPostTag: `</${highlightTag}>`
@@ -333,8 +338,8 @@ class FixIt {
             }
           },
           templates: {
-            suggestion: ({ title, date, context }) =>
-              `<div><span class="suggestion-title">${title}</span><span class="suggestion-date">${date}</span></div><div class="suggestion-context">${context}</div>`,
+            suggestion: ({ title, uri, date, context }) =>
+              `<div><a href="${uri}"><span class="suggestion-title">${title}</span></a><span class="suggestion-date">${date}</span></div><div class="suggestion-context">${context}</div>`,
             empty: ({ query }) => `<div class="search-empty">${searchConfig.noResultsFound}: <span class="search-query">"${query}"</span></div>`,
             footer: ({}) => {
               let searchType, icon, href;
@@ -1360,7 +1365,7 @@ class FixIt {
       this.initReward();
       this.initPostChatUser();
 
-      // 【todo] refactor async init toc
+      // [todo] refactor async init toc
       window.setTimeout(() => {
         this.initComment();
         if (!this.config.encryption?.all) {
