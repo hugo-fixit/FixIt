@@ -2,7 +2,7 @@
  * Service Worker
  * imported from https://github.com/HEIGE-PCloud/DoIt/blob/v0.2.11/src/js/sw.js
  */
-CACHE_VERSION = 1;
+const CACHE_VERSION = 1;
 
 const BASE_CACHE_FILES = [
   '/css/style.min.css',
