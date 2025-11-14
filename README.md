@@ -13,7 +13,7 @@
   <a href="https://fixit.lruihao.cn/ecosystem/hugo-fixit/fixit/?lang=russian">Русский язык</a> |
   <a href="https://fixit.lruihao.cn/ecosystem/hugo-fixit/fixit/?lang=spanish">Español</a> |
   <a href="https://fixit.lruihao.cn/ecosystem/hugo-fixit/fixit/?lang=hindi">हिन्दी</a> |
-  <a href="https://fixit.lruihao.cn/ecosystem/hugo-fixit/fixit/?lang=german">deutsch</a> |
+  <a href="https://fixit.lruihao.cn/ecosystem/hugo-fixit/fixit/?lang=deutsch">deutsch</a> |
   <a href="https://fixit.lruihao.cn/ecosystem/hugo-fixit/fixit/?lang=korean">한국어</a> |
   <a href="https://fixit.lruihao.cn/ecosystem/hugo-fixit/fixit/?lang=japanese">しろうと</a>
 </div>
