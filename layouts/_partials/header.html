@@ -288,7 +288,7 @@
                 {{- .Language.LanguageName -}}
                 {{- dict "Class" "dropdown-icon fa-solid fa-chevron-down" | partial "plugin/icon.html" -}}
               </span>
-              <select class="language-select" onchange="location = this.value;">
+              <select id="language-select" class="language-select" onchange="location = this.value;">
                 {{- if eq .Kind "404" -}}
                   {{- range .Sites -}}
                     {{- $link := printf "%v/404.html" .LanguagePrefix -}}
