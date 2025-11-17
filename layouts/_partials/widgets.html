@@ -1,11 +1,12 @@
 <div class="widgets">
   {{- $backToTop := .Site.Params.backToTop -}}
+  {{- $params := partial "function/params.html" -}}
   {{- $comment := .Store.Get "comment" -}}
   {{- if $backToTop.enable | or $comment.enable -}}
     <div class="fixed-buttons animate__faster d-none">
       {{- /* toc dialog button */ -}}
       {{- if .Page.Store.Get "enableTocDialog" -}}
-        <div id="toc-drawer-button" class="fixed-button toc-drawer-button" role="button" aria-label="{{ T `single.contents` }}">
+        <div id="toc-drawer-button" class="fixed-button toc-drawer-button{{ with $params.password }} encrypted-hidden{{ end }}" role="button" aria-label="{{ T `single.contents` }}">
           {{- dict "Class" "fa-solid fa-bars fa-fw" | partial "plugin/icon.html" -}}
         </div>
       {{- end -}}

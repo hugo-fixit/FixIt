@@ -40,6 +40,12 @@
   }
 }
 
+@media only screen and (min-width: 961px) {
+  #toc-drawer-button {
+    display: none;
+  }
+}
+
 @media only screen and (max-width: 960px) {
   %page-style {
     width: ROUND(80%, 2px) !important;

@@ -656,6 +656,22 @@ class FixIt {
     }, false);
   }
 
+  initTocDialog() {
+    // HTMLDialogElement
+    const dialog = document.querySelector("#toc-dialog");
+    const openButton = document.querySelector("#toc-drawer-button");
+    if (!dialog || !openButton) {
+      return;
+    }
+    openButton.addEventListener("click", () => {
+      dialog.showModal();
+      document.activeElement?.blur();
+    });
+    dialog.addEventListener("click", (e) => {
+      dialog.close();
+    });
+  }
+
   /**
    * It's a dirty hack to fix the bug of APlayer and smoothScroll. 
    * see https://github.com/hugo-fixit/FixIt/issues/292
@@ -1134,6 +1150,7 @@ class FixIt {
       this.fixTocScroll();
       this.initToc();
       this.initTocListener();
+      this.initTocDialog();
     }
     this.initPangu();
     this.initMathJax();
@@ -1372,6 +1389,7 @@ class FixIt {
           this.fixTocScroll();
           this.initToc();
           this.initTocListener();
+          this.initTocDialog();
         }
         this.onScroll();
         this.onResize();

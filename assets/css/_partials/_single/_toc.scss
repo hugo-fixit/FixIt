@@ -123,7 +123,7 @@
       display: block;
     }
 
-    > nav > ul {
+    >nav>ul {
       margin: 0;
     }
 
@@ -140,7 +140,7 @@
         font-weight: bold;
       }
 
-      > a {
+      >a {
         color: $single-link-color;
 
         [data-theme='dark'] & {
@@ -155,7 +155,7 @@
         display: none;
       }
 
-      .has-active > ul {
+      .has-active>ul {
         display: block;
       }
 
@@ -174,7 +174,7 @@
         display: none;
       }
 
-      .has-active > ol {
+      .has-active>ol {
         display: block;
       }
     }
@@ -208,8 +208,8 @@
   .toc-content {
     background-color: $code-background-color;
 
-    > nav {
-      > ul {
+    >nav {
+      >ul {
         margin: 0;
         padding: 0.4em 1em 0.4em 1.8em;
 
@@ -218,15 +218,15 @@
 
           &::before {
             color: $single-link-hover-color;
-  
+
             [data-theme='dark'] & {
               color: $single-link-hover-color-dark;
             }
           }
         }
       }
-      
-      > ol {
+
+      >ol {
         margin: 0;
         padding: 0.4em 1em 0.4em 2.25em;
 
@@ -251,4 +251,73 @@
       }
     }
   }
+}
+
+#toc-dialog {
+  transition:
+    display 0.2s allow-discrete,
+    overlay 0.2s allow-discrete,
+    translate 0.2s,
+    opacity 0.2s 0.4s;
+  opacity: 0;
+  translate: 100vw 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  margin-left: 4rem;
+  border: none;
+
+  .toc {
+    max-width: 100%;
+    margin-inline: 1rem;
+
+    .toc-title {
+      font-size: $toc-title-font-size * 1.5;
+      line-height: $toc-title-font-size * 2;
+      margin-block: $toc-title-font-size;
+    }
+
+    .toc-content {
+      font-size: max($toc-content-font-size, 1rem);
+    }
+  }
+
+  &::backdrop {
+    transition:
+      display 0.5s allow-discrete,
+      overlay 0.5s allow-discrete,
+      opacity 0.2s 0.4s;
+    opacity: 0;
+  }
+
+  &[open],
+  &[open]::backdrop {
+    opacity: 1;
+    transition:
+      display 0.2s allow-discrete,
+      overlay 0.2s allow-discrete,
+      translate 0.2s,
+      opacity 0.2s;
+  }
+
+  &[open] {
+    translate: 0 0;
+  }
+
+  @starting-style {
+
+    &[open],
+    &[open]::backdrop {
+      opacity: 0;
+    }
+
+    &[open] {
+      translate: 100vw 0;
+    }
+  }
+}
+
+html:has(#toc-dialog[open]) {
+  overflow: hidden;
 }
