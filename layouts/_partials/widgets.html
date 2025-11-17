@@ -3,17 +3,23 @@
   {{- $comment := .Store.Get "comment" -}}
   {{- if $backToTop.enable | or $comment.enable -}}
     <div class="fixed-buttons animate__faster d-none">
-      {{- /* back to top button */ -}}
-      {{- if $backToTop.enable -}}
-        <div class="fixed-button back-to-top" role="button" aria-label="{{ T `baseof.backToTop` }}">
-          {{- dict "Class" "fa-solid fa-arrow-up fa-fw" | partial "plugin/icon.html" -}}
-          <span class="variant-numeric{{ if not $backToTop.scrollpercent }} d-none{{ end }}">0%</span>
+      {{- /* toc dialog button */ -}}
+      {{- if .Page.Store.Get "enableTocDialog" -}}
+        <div id="toc-drawer-button" class="fixed-button toc-drawer-button" role="button" aria-label="{{ T `single.contents` }}">
+          {{- dict "Class" "fa-solid fa-bars fa-fw" | partial "plugin/icon.html" -}}
         </div>
       {{- end -}}
       {{- /* comment button */ -}}
       {{- if $comment.enable -}}
         <div class="fixed-button view-comments d-none" role="button" aria-label="{{ T `baseof.viewComments` }}">
           {{- dict "Class" "fa-solid fa-comment fa-fw" | partial "plugin/icon.html" -}}
+        </div>
+      {{- end -}}
+      {{- /* back to top button */ -}}
+      {{- if $backToTop.enable -}}
+        <div class="fixed-button back-to-top" role="button" aria-label="{{ T `baseof.backToTop` }}">
+          {{- dict "Class" "fa-solid fa-arrow-up fa-fw" | partial "plugin/icon.html" -}}
+          <span class="variant-numeric{{ if not $backToTop.scrollpercent }} d-none{{ end }}">0%</span>
         </div>
       {{- end -}}
     </div>
