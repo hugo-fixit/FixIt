@@ -20,6 +20,9 @@ FixIt theme assets partial
 {{- $config = dict "version" (hugo.Store.Get "version") | merge $config -}}
 {{- $author := partial "function/get-author-map.html" .Params.author -}}
 {{- $noBaseRelPermalink := strings.TrimPrefix (relURL "") $.RelPermalink -}}
+{{- with .File -}}
+  {{- $noBaseRelPermalink = replace $noBaseRelPermalink (.BaseFileName | urlize) .BaseFileName  -}}
+{{- end -}}
 
 {{- /* Search */ -}}
 {{- if .Site.Params.search | and .Site.Params.search.enable -}}
