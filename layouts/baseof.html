@@ -16,11 +16,10 @@
     {{- partial "head/seo.html" . -}}
     {{- partial "head/script.html" . -}}
     {{- /* TODO preload script https://developer.mozilla.org/zh-CN/docs/Web/HTML/Attributes/rel/preload */ -}}
-    {{- /* TODO add config and page config to config.js (static) */ -}}
     {{- /* Custom head */ -}}
     {{- block "custom-head" . }}{{ end -}}
   </head>
-  <body data-header-desktop="{{ .Site.Params.header.desktopMode }}" data-header-mobile="{{ .Site.Params.header.mobileMode }}">
+  <body data-instant-intensity="viewport" data-header-desktop="{{ .Site.Params.header.desktopMode }}" data-header-mobile="{{ .Site.Params.header.mobileMode }}">
     {{- /* Body wrapper */ -}}
     <div class="wrapper" data-page-style="{{ (partial `function/params.html`).pageStyle | default `normal` }}">
       {{- partial "header.html" . -}}
