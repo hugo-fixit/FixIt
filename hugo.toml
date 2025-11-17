@@ -988,7 +988,7 @@ style = "" # ["", "mp", "identicon", "monsterid", "wavatar", "retro", "blank", "
 # FixIt 0.2.16 | NEW Back to top
 [params.backToTop]
 enable = true
-# Scroll percent label in b2t button
+# FixIt 0.4.0 | CHANGED whether to show the scroll percent indicator around the back to top button
 scrollpercent = false
 
 # FixIt 0.2.16 | NEW Reading progress bar

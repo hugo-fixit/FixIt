@@ -1254,7 +1254,6 @@ class FixIt {
   onScroll() {
     const $headers = [];
     const ACCURACY = 20;
-    const $fixedButtons = document.querySelector('.fixed-buttons');
     const $backToTop = document.querySelector('.back-to-top');
     const $readingProgressBar = document.querySelector('.reading-progress-bar');
     if (document.body.dataset.headerDesktop === 'auto') {
@@ -1292,20 +1291,19 @@ class FixIt {
       if ($readingProgressBar) {
         $readingProgressBar.style.setProperty('--progress', `${scrollPercent.toFixed(2)}%`);
       }
-      // whether to show fixed buttons
-      if ($fixedButtons) {
+      // whether to show back to top button
+      if ($backToTop) {
         if (scrollPercent > 1) {
-          $fixedButtons.classList.remove('d-none', 'animate__fadeOut');
-          this.util.animateCSS($fixedButtons, ['animate__fadeIn'], true);
+          $backToTop.classList.remove('d-none', 'animate__fadeOut');
+          this.util.animateCSS($backToTop, ['animate__fadeIn'], true);
         } else {
-          $fixedButtons.classList.remove('animate__fadeIn');
-          this.util.animateCSS($fixedButtons, ['animate__fadeOut'], true, () => {
-            $fixedButtons.classList.contains('animate__fadeOut') && $fixedButtons.classList.add('d-none');
+          $backToTop.classList.remove('animate__fadeIn');
+          this.util.animateCSS($backToTop, ['animate__fadeOut'], true, () => {
+            $backToTop.classList.contains('animate__fadeOut') && $backToTop.classList.add('d-none');
           });
         }
-        if ($backToTop) {
-          $backToTop.querySelector('span').innerText = `${Math.round(scrollPercent)}%`;
-        }
+        // [todo] Shares the scrollPercent variable with readingProgressBar
+        $backToTop.style.setProperty('--scroll-percent', scrollPercent.toFixed(2));
       }
       for (let event of this.scrollEventSet) {
         event();
