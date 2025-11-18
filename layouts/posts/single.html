@@ -235,13 +235,15 @@
   </aside>
 
   {{- /* TOC Dialog */ -}}
-  {{- .Page.Store.Set "enableTocDialog" true -}}
-  <dialog id="toc-dialog">
-    <div class="toc">
-      <h2 class="toc-title">{{ T "single.contents" }}</h2>
-      <div class="toc-content" id="toc-content-drawer">
-        {{- replace $tableOfContents `id="TableOfContents"` "" | safeHTML -}}
+  {{- if $showToc -}}
+    {{- .Page.Store.Set "enableTocDialog" true -}}
+    <dialog id="toc-dialog" aria-labelledby="toc-dialog-title" role="dialog">
+      <div class="toc">
+        <h2 class="toc-title">{{ T "single.contents" }}</h2>
+        <div class="toc-content" id="toc-content-drawer">
+          {{- replace $tableOfContents `id="TableOfContents"` "" | safeHTML -}}
+        </div>
       </div>
-    </div>
-  </dialog>
+    </dialog>
+  {{- end -}}
 {{- end -}}

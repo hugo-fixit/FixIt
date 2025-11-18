@@ -51,6 +51,8 @@
   --b2t-bg: #{$global-border-color};
   // Progress color
   --b2t-prog: #FF7359;
+  // 2π×50 ≈ 314 (radius 50 for viewBox 100)
+  --b2t-circumference: 314;
 
   [data-theme='dark'] & {
     --b2t-bg: #{$global-border-color-dark};
@@ -80,9 +82,8 @@
     stroke: var(--b2t-prog);
     stroke-width: var(--b2t-stroke);
     stroke-linecap: round;
-    // 2π×50 ≈ 314 (radius 50 for viewBox 100)
-    stroke-dasharray: 314;
-    stroke-dashoffset: calc(314 - 314 * var(--scroll-percent, 0) / 100);
+    stroke-dasharray: var(--b2t-circumference);
+    stroke-dashoffset: calc(var(--b2t-circumference) - var(--b2t-circumference) * var(--scroll-percent, 0) / 100);
     transition: stroke-dashoffset .1s linear;
   }
 }

@@ -669,7 +669,17 @@ class FixIt {
       document.activeElement?.blur();
     });
     dialog.addEventListener("click", (e) => {
-      dialog.close();
+      // only close if clicking on the backdrop, not inside the dialog content
+      console.log(e.target)
+      if (e.target === dialog) {  
+        dialog.close();  
+      }
+    });
+    dialog.addEventListener("keydown", (e) => {
+      // ensure Escape key closes the dialog (for robustness)
+      if (e.key === "Escape" && dialog.open) {
+        dialog.close();
+      }
     });
   }
 

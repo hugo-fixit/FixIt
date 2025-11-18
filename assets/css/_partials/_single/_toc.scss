@@ -123,7 +123,7 @@
       display: block;
     }
 
-    >nav>ul {
+    > nav > ul {
       margin: 0;
     }
 
@@ -140,7 +140,7 @@
         font-weight: bold;
       }
 
-      >a {
+      > a {
         color: $single-link-color;
 
         [data-theme='dark'] & {
@@ -155,7 +155,7 @@
         display: none;
       }
 
-      .has-active>ul {
+      .has-active > ul {
         display: block;
       }
 
@@ -174,7 +174,7 @@
         display: none;
       }
 
-      .has-active>ol {
+      .has-active > ol {
         display: block;
       }
     }
@@ -208,8 +208,8 @@
   .toc-content {
     background-color: $code-background-color;
 
-    >nav {
-      >ul {
+    > nav {
+      > ul {
         margin: 0;
         padding: 0.4em 1em 0.4em 1.8em;
 
@@ -226,7 +226,7 @@
         }
       }
 
-      >ol {
+      > ol {
         margin: 0;
         padding: 0.4em 1em 0.4em 2.25em;
 
