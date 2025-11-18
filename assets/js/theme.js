@@ -91,6 +91,7 @@ class FixIt {
     this.util.forEach(document.getElementsByClassName('theme-switch'), ($themeSwitch) => {
       $themeSwitch.addEventListener('click', () => {
         document.documentElement.dataset.theme = this.isDark ? 'light' : 'dark';
+        document.documentElement.style.setProperty('color-scheme', this.isDark ? 'light' : 'dark');
         this.isDark = !this.isDark;
         window.localStorage?.setItem('theme', this.isDark ? 'dark' : 'light');
         for (let event of this.switchThemeEventSet) {

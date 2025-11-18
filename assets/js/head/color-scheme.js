@@ -18,4 +18,5 @@ import params from '@params';
       params.defaultTheme === 'dark';
   }
   isDark && (document.documentElement.dataset.theme = 'dark');
+  document.documentElement.style.setProperty('color-scheme', isDark ? 'dark' : 'light');
 })();
