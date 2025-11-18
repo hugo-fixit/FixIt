@@ -1,12 +1,19 @@
-.fixed-button {
+.fixed-buttons {
   position: fixed;
   right: 1.5rem;
+  bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  @include z-index(1);
+}
+
+.fixed-button {
   font-size: 1rem;
   line-height: 1.5rem;
   padding: 0.5rem 0.625rem;
-  color: $global-font-secondary-color;
+  color: $global-font-color;
   background-color: $header-background-color;
-  @include z-index(1);
   @include border-radius(1.25rem);
   @include transition(color 0.4s ease);
   @include blur;
@@ -25,7 +32,7 @@
   }
 
   [data-theme='dark'] & {
-    color: $global-font-secondary-color-dark;
+    color: $global-font-color-dark;
     background-color: $header-background-color-dark;
 
     &:hover,
@@ -36,9 +43,47 @@
 }
 
 .back-to-top {
-  bottom: 1.5rem;
-}
+  overflow: hidden;
+  position: relative;
+  // Ring stroke width
+  --b2t-stroke: 0.5rem;
+  // Ring background color
+  --b2t-bg: #{$global-border-color};
+  // Progress color
+  --b2t-prog: #FF7359;
+  // 2π×50 ≈ 314 (radius 50 for viewBox 100)
+  --b2t-circumference: 314;
 
-.view-comments {
-  bottom: 4.5rem;
+  [data-theme='dark'] & {
+    --b2t-bg: #{$global-border-color-dark};
+    --b2t-prog: #{$global-font-color-dark};
+  }
+
+  // SVG circular progress ring
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    // Rotate to start from top
+    transform: rotate(-90deg);
+  }
+
+  .bg {
+    fill: none;
+    stroke: var(--b2t-bg);
+    stroke-width: var(--b2t-stroke);
+  }
+
+  // Progress ring
+  .progress {
+    fill: none;
+    stroke: var(--b2t-prog);
+    stroke-width: var(--b2t-stroke);
+    stroke-linecap: round;
+    stroke-dasharray: var(--b2t-circumference);
+    stroke-dashoffset: calc(var(--b2t-circumference) - var(--b2t-circumference) * var(--scroll-percent, 0) / 100);
+    transition: stroke-dashoffset .1s linear;
+  }
 }

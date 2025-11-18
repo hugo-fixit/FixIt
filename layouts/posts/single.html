@@ -9,6 +9,7 @@
   {{- $toc := .Store.Get "toc" -}}
   {{- $tableOfContents := .Fragments.ToHTML ($toc.startlevel | int) ($toc.endlevel | int) ($toc.ordered | default false) -}}
   {{- $showToc := $toc.enable | and (ne $tableOfContents `<nav id="TableOfContents"></nav>`) -}}
+  {{- $tableOfContents = dict "Content" $tableOfContents "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
 
   <aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="{{ T "collections" }}">
     {{- /* Collection List */ -}}
@@ -162,7 +163,7 @@
           <span>{{ dict "Class" "details-icon fa-solid fa-angle-right" | partial "plugin/icon.html" }}</span>
         </div>
         <div class="details-content toc-content" id="toc-content-static">
-          {{- dict "Content" $tableOfContents "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+          {{- $tableOfContents -}}
         </div>
       </div>
     {{- end -}}
@@ -232,4 +233,17 @@
     {{- /* Custom block after post toc */ -}}
     {{- block "custom-post__toc:after" . }}{{ end -}}
   </aside>
+
+  {{- /* TOC Dialog */ -}}
+  {{- if $showToc -}}
+    {{- .Page.Store.Set "enableTocDialog" true -}}
+    <dialog id="toc-dialog" aria-labelledby="toc-dialog-title" role="dialog">
+      <div class="toc">
+        <h2 class="toc-title">{{ T "single.contents" }}</h2>
+        <div class="toc-content" id="toc-content-drawer">
+          {{- replace $tableOfContents `id="TableOfContents"` "" | safeHTML -}}
+        </div>
+      </div>
+    </dialog>
+  {{- end -}}
 {{- end -}}
