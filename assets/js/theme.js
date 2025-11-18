@@ -651,8 +651,14 @@ class FixIt {
       const animation = ['animate__faster'];
       const tocHidden = $toc.classList.contains('toc-hidden');
       animation.push(tocHidden ? 'animate__fadeIn' : 'animate__fadeOut');
-      $tocContentAuto.classList.remove(tocHidden ? 'animate__fadeOut' : 'animate__fadeIn');
-      this.util.animateCSS($tocContentAuto, animation, true);
+      if (tocHidden) {
+        $tocContentAuto.classList.remove('d-none', 'animate__fadeOut');
+      } else {
+        $tocContentAuto.classList.remove('animate__fadeIn');
+      }
+      this.util.animateCSS($tocContentAuto, animation, true, () => {
+        $tocContentAuto.classList.contains('animate__fadeOut') && $tocContentAuto.classList.add('d-none');
+      });
       $toc.classList.toggle('toc-hidden');
     }, false);
   }
@@ -669,11 +675,7 @@ class FixIt {
       document.activeElement?.blur();
     });
     dialog.addEventListener("click", (e) => {
-      // only close if clicking on the backdrop, not inside the dialog content
-      console.log(e.target)
-      if (e.target === dialog) {  
-        dialog.close();  
-      }
+      dialog.close();
     });
     dialog.addEventListener("keydown", (e) => {
       // ensure Escape key closes the dialog (for robustness)
