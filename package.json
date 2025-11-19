@@ -43,19 +43,14 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.2.0",
-    "@types/node": "^24.9.2",
+    "@types/node": "^24.10.1",
     "auto-changelog-plus": "^1.2.2",
-    "eslint": "^9.39.0",
+    "eslint": "^9.39.1",
     "lint-staged": "^16.2.6",
     "serve": "^14.2.5",
     "simple-git-hooks": "^2.13.1",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
-  },
-  "pnpm": {
-    "overrides": {
-      "on-headers": ">=1.1.0"
-    }
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm -F versioning start dev && pnpm lint-staged"
