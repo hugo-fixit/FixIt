@@ -677,12 +677,6 @@ class FixIt {
     dialog.addEventListener("click", (e) => {
       dialog.close();
     });
-    dialog.addEventListener("keydown", (e) => {
-      // ensure Escape key closes the dialog (for robustness)
-      if (e.key === "Escape" && dialog.open) {
-        dialog.close();
-      }
-    });
   }
 
   /**
