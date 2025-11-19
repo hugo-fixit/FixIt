@@ -171,7 +171,7 @@ class FixIt {
           window.postChatUser.setSearchInput('');
         }, false);
       }
-      return;      
+      return;
     }
 
     if (isMobile) {
@@ -209,9 +209,9 @@ class FixIt {
         $searchClear.style.display = 'none';
         this._searchDesktop && this._searchDesktop.autocomplete.setVal('');
       }, false);
-      this._searchDesktopOnClickMask = this._searchDesktopOnClickMask ||(() => {
-          this._resetSearchUI($header, $searchLoading, $searchClear, this._searchDesktop);
-        });
+      this._searchDesktopOnClickMask = this._searchDesktopOnClickMask || (() => {
+        this._resetSearchUI($header, $searchLoading, $searchClear, this._searchDesktop);
+      });
       this.clickMaskEventSet.add(this._searchDesktopOnClickMask);
     }
     $searchInput.addEventListener('input', () => {
@@ -342,7 +342,7 @@ class FixIt {
             suggestion: ({ title, uri, date, context }) =>
               `<div><a href="${uri}"><span class="suggestion-title">${title}</span></a><span class="suggestion-date">${date}</span></div><div class="suggestion-context">${context}</div>`,
             empty: ({ query }) => `<div class="search-empty">${searchConfig.noResultsFound}: <span class="search-query">"${query}"</span></div>`,
-            footer: ({}) => {
+            footer: ({ }) => {
               let searchType, icon, href;
               switch (searchConfig.type) {
                 case 'algolia':
@@ -547,7 +547,7 @@ class FixIt {
         let code = stagingDOM.contentAsText();
         try {
           code = JSON.stringify(JSON.parse(code), null, 2);
-        } catch {}
+        } catch { }
         this.util.copyText(code).then(() => {
           $btn.toggleAttribute('data-copied', true);
           setTimeout(() => {
@@ -580,6 +580,46 @@ class FixIt {
   }
 
   /**
+   * Helper method to update TOC active state based on scroll position
+   * @param {HTMLElement} $tocContainer - TOC container element for parent traversal
+   * @param {HTMLCollection} $headingElements - Heading elements to track
+   * @param {number} indexOffset - Offset for active state calculation
+   */
+  _updateTocActiveState($tocContainer, $headingElements, indexOffset) {
+    const $tocLinkElements = $tocContainer.querySelectorAll('a:first-child');
+    const $tocLiElements = $tocContainer.getElementsByTagName('li');
+
+    // Remove all active classes
+    this.util.forEach($tocLinkElements, ($tocLink) => {
+      $tocLink.classList.remove('active');
+    });
+    this.util.forEach($tocLiElements, ($tocLi) => {
+      $tocLi.classList.remove('has-active');
+    });
+
+    // Calculate active TOC index
+    let activeTocIndex = $headingElements.length - 1;
+    for (let i = 0; i < $headingElements.length - 1; i++) {
+      const thisTop = $headingElements[i].getBoundingClientRect().top;
+      const nextTop = $headingElements[i + 1].getBoundingClientRect().top;
+      if ((i == 0 && thisTop > indexOffset) || (thisTop <= indexOffset && nextTop > indexOffset)) {
+        activeTocIndex = i;
+        break;
+      }
+    }
+
+    // Add active classes
+    if (activeTocIndex !== -1 && $tocLinkElements[activeTocIndex]) {
+      $tocLinkElements[activeTocIndex].classList.add('active');
+      let $parent = $tocLinkElements[activeTocIndex].parentElement;
+      while ($parent !== $tocContainer) {
+        $parent.classList.add('has-active');
+        $parent = $parent.parentElement.parentElement;
+      }
+    }
+  }
+
+  /**
    * init table of contents
    */
   initToc() {
@@ -587,61 +627,53 @@ class FixIt {
     if ($tocCore === null) {
       return;
     }
-    if (document.getElementById('toc-static').dataset.kept === 'true' || this.util.isTocStatic()) {
+    const $headingElements = document.getElementsByClassName('heading-element');
+    const INDEX_OFFSET = 20 + this.breadcrumbHeight + (
+      document.body.dataset.headerDesktop !== 'normal' ? document.getElementById('header-desktop').offsetHeight : 0
+    );
+
+    // TOC Static and TOC Dialog
+    if (this.util.isTocStatic()) {
       const $tocContentStatic = document.getElementById('toc-content-static');
       if ($tocCore.parentElement !== $tocContentStatic) {
         $tocCore.parentElement.removeChild($tocCore);
         $tocContentStatic.appendChild($tocCore);
       }
+      this._tocDialogOnScroll = this._tocDialogOnScroll || (() => {
+        this._updateTocActiveState(
+          document.querySelector('#toc-content-drawer>nav'),
+          $headingElements,
+          INDEX_OFFSET
+        );
+      });
+      this._tocDialogOnScroll();
+      this.scrollEventSet.add(this._tocDialogOnScroll);
       this._tocOnScroll && this.scrollEventSet.delete(this._tocOnScroll);
-    } else {
-      const $tocContentAuto = document.getElementById('toc-content-auto');
-      if ($tocCore.parentElement !== $tocContentAuto) {
-        $tocCore.parentElement.removeChild($tocCore);
-        $tocContentAuto.appendChild($tocCore);
-      }
-      const $toc = document.getElementById('toc-auto');
-      $toc.style.visibility = 'visible';
-      this.util.animateCSS($toc, ['animate__fadeIn', 'animate__faster'], true);
-      const $postMeta = document.querySelector('.post-meta');
-      $toc.style.marginTop = `${$postMeta.offsetTop + $postMeta.clientHeight}px`;
-      const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
-      const $tocLiElements = $tocCore.getElementsByTagName('li');
-      const $headingElements = document.getElementsByClassName('heading-element');
-      const headerHeight = document.getElementById('header-desktop').offsetHeight;
-      document.querySelector('.fi-container').addEventListener('resize', () => {
-        $toc.style.marginBottom = `${document.querySelector('.fi-container').clientHeight - document.querySelector('.post-footer').offsetTop}px`;
-      });
-      this._tocOnScroll = this._tocOnScroll || (() => {
-        $toc.style.marginBottom = `${document.querySelector('.fi-container').clientHeight - document.querySelector('.post-footer').offsetTop}px`;
-        this.util.forEach($tocLinkElements, ($tocLink) => {
-          $tocLink.classList.remove('active');
-        });
-        this.util.forEach($tocLiElements, ($tocLi) => {
-          $tocLi.classList.remove('has-active');
-        });
-        const INDEX_SPACING = 20 + (document.body.dataset.headerDesktop !== 'normal' ? headerHeight : 0) + this.breadcrumbHeight;
-        let activeTocIndex = $headingElements.length - 1;
-        for (let i = 0; i < $headingElements.length - 1; i++) {
-          const thisTop = $headingElements[i].getBoundingClientRect().top;
-          const nextTop = $headingElements[i + 1].getBoundingClientRect().top;
-          if ((i == 0 && thisTop > INDEX_SPACING) || (thisTop <= INDEX_SPACING && nextTop > INDEX_SPACING)) {
-            activeTocIndex = i;
-            break;
-          }
-        }
-        if (activeTocIndex !== -1 && $tocLinkElements[activeTocIndex]) {
-          $tocLinkElements[activeTocIndex].classList.add('active');
-          let $parent = $tocLinkElements[activeTocIndex].parentElement;
-          while ($parent !== $tocCore) {
-            $parent.classList.add('has-active');
-            $parent = $parent.parentElement.parentElement;
-          }
-        }
-      });
-      this._tocOnScroll();
-      this.scrollEventSet.add(this._tocOnScroll);
+      return;
     }
+
+    // TOC Auto
+    const $tocContentAuto = document.getElementById('toc-content-auto');
+    if ($tocCore.parentElement !== $tocContentAuto) {
+      $tocCore.parentElement.removeChild($tocCore);
+      $tocContentAuto.appendChild($tocCore);
+    }
+    const $toc = document.getElementById('toc-auto');
+    $toc.style.visibility = 'visible';
+    this.util.animateCSS($toc, ['animate__fadeIn', 'animate__faster'], true);
+    const $postMeta = document.querySelector('.post-meta');
+    $toc.style.marginTop = `${$postMeta.offsetTop + $postMeta.clientHeight}px`;
+
+    document.querySelector('.fi-container').addEventListener('resize', () => {
+      $toc.style.marginBottom = `${document.querySelector('.fi-container').clientHeight - document.querySelector('.post-footer').offsetTop}px`;
+    });
+    this._tocOnScroll = this._tocOnScroll || (() => {
+      $toc.style.marginBottom = `${document.querySelector('.fi-container').clientHeight - document.querySelector('.post-footer').offsetTop}px`;
+      this._updateTocActiveState($tocCore, $headingElements, INDEX_OFFSET);
+    });
+    this._tocOnScroll();
+    this.scrollEventSet.add(this._tocOnScroll);
+    this._tocDialogOnScroll && this.scrollEventSet.delete(this._tocDialogOnScroll);
   }
 
   initTocListener() {
@@ -670,6 +702,7 @@ class FixIt {
     if (!dialog || !openButton) {
       return;
     }
+    openButton.classList.toggle('d-none', !this.util.isTocStatic());
     openButton.addEventListener("click", () => {
       dialog.showModal();
       document.activeElement?.blur();
@@ -798,7 +831,7 @@ class FixIt {
         if (Array.isArray(markerArray) && markerArray.length > 0) {
           markerArray.forEach(marker => {
             const { lng: markerLng, lat: markerLat, description } = marker;
-            const popup = new mapboxgl.Popup({ offset: 25 }).setText(description); 
+            const popup = new mapboxgl.Popup({ offset: 25 }).setText(description);
             new mapboxgl.Marker()
               .setLngLat([markerLng, markerLat])
               .setPopup(popup)
@@ -1023,7 +1056,7 @@ class FixIt {
     if (this.config.comment.giscus) {
       const giscusConfig = this.config.comment.giscus;
       this._giscusOnSwitchTheme = this._giscusOnSwitchTheme || (() => {
-        const message = { setConfig: { theme: this.isDark ? giscusConfig.darkTheme : giscusConfig.lightTheme }};
+        const message = { setConfig: { theme: this.isDark ? giscusConfig.darkTheme : giscusConfig.lightTheme } };
         document.querySelector('.giscus-frame')?.contentWindow.postMessage({ giscus: message }, giscusConfig.origin);
       });
       this.switchThemeEventSet.add(this._giscusOnSwitchTheme);
@@ -1031,7 +1064,7 @@ class FixIt {
       this._messageListener = (event) => {
         if (event.origin !== giscusConfig.origin) return;
         const $script = document.querySelector('#giscus>script');
-        if ($script){
+        if ($script) {
           $script.parentElement.removeChild($script);
         }
         this._giscusOnSwitchTheme()
@@ -1089,8 +1122,8 @@ class FixIt {
       navigator.serviceWorker
         .ready
         .then(function (registration) {
-        // console.log('Service Worker Ready');
-      });
+          // console.log('Service Worker Ready');
+        });
     }
   }
 
@@ -1206,7 +1239,7 @@ class FixIt {
     const scrollTop = Number(window.sessionStorage?.getItem(`fixit-bookmark/#${location.pathname}`));
     // If the page opens with a specific hash, just jump out
     if (scrollTop && location.hash === '') {
-      window.scrollTo({ 
+      window.scrollTo({
         top: scrollTop,
         behavior: 'smooth'
       });
@@ -1253,7 +1286,7 @@ class FixIt {
       if (targetFrame) {
         window.postChatUser.setPostChatTheme(isDark ? 'dark' : 'light');
       } else {
-        postChat_theme  = isDark ? 'dark' : 'light';
+        postChat_theme = isDark ? 'dark' : 'light';
       }
     });
   }

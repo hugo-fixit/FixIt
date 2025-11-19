@@ -20,7 +20,7 @@ export default class Util {
   }
 
   isTocStatic() {
-    return window.matchMedia('only screen and (max-width: 960px)').matches;
+    return document.getElementById('toc-static').dataset.kept === 'true' || window.matchMedia('only screen and (max-width: 960px)').matches;
   }
 
   /**

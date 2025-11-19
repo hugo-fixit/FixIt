@@ -18,7 +18,7 @@
       {{- end -}}
       {{- /* toc dialog button */ -}}
       {{- if .Page.Store.Get "enableTocDialog" -}}
-        <div id="toc-drawer-button" class="fixed-button toc-drawer-button{{ with $params.password }} encrypted-hidden{{ end }}" role="button" aria-label="{{ T `single.contents` }}">
+        <div id="toc-drawer-button" class="fixed-button toc-drawer-button d-none{{ with $params.password }} encrypted-hidden{{ end }}" role="button" aria-label="{{ T `single.contents` }}">
           {{- dict "Class" "fa-solid fa-bars fa-fw" | partial "plugin/icon.html" -}}
         </div>
       {{- end -}}

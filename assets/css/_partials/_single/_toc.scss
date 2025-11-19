@@ -1,3 +1,4 @@
+// Common styles for all TOC types
 .toc {
   .toc-title {
     font-size: $toc-title-font-size;
@@ -70,6 +71,48 @@
   }
 }
 
+// Common active state styles for auto and dialog TOC
+#toc-auto,
+#toc-dialog {
+  .toc-content {
+    li.has-active {
+      &::marker {
+        color: $single-link-color;
+
+        [data-theme='dark'] & {
+          color: $single-link-color-dark;
+        }
+      }
+
+      &:has(> .active)::marker {
+        font-weight: bold;
+      }
+
+      > a {
+        color: $single-link-color;
+
+        [data-theme='dark'] & {
+          color: $single-link-color-dark;
+        }
+      }
+    }
+
+    ul {
+      a.active::before {
+        color: $single-link-hover-color;
+
+        [data-theme='dark'] & {
+          color: $single-link-hover-color-dark;
+        }
+      }
+    }
+
+    a.active {
+      font-weight: bold;
+    }
+  }
+}
+
 #toc-auto {
   display: block;
   position: sticky;
@@ -127,28 +170,6 @@
       margin: 0;
     }
 
-    li.has-active {
-      &::marker {
-        color: $single-link-color;
-
-        [data-theme='dark'] & {
-          color: $single-link-color-dark;
-        }
-      }
-
-      &:has(> .active)::marker {
-        font-weight: bold;
-      }
-
-      > a {
-        color: $single-link-color;
-
-        [data-theme='dark'] & {
-          color: $single-link-color-dark;
-        }
-      }
-    }
-
     // for unordered list automatically collapsed
     ul {
       ul {
@@ -157,14 +178,6 @@
 
       .has-active > ul {
         display: block;
-      }
-
-      a.active::before {
-        color: $single-link-hover-color;
-
-        [data-theme='dark'] & {
-          color: $single-link-hover-color-dark;
-        }
       }
     }
 
@@ -177,10 +190,6 @@
       .has-active > ol {
         display: block;
       }
-    }
-
-    a.active {
-      font-weight: bold;
     }
   }
 }
@@ -261,11 +270,11 @@
     opacity 0.2s 0.4s;
   opacity: 0;
   translate: 100vw 0;
-  width: 100%;
+  width: MIN(calc(100% - 4rem), 500px);
   height: 100%;
   max-width: 100%;
   max-height: 100%;
-  margin-left: 4rem;
+  margin-right: 0;
   border: none;
 
   .toc {
