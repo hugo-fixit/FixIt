@@ -631,7 +631,11 @@ class FixIt {
     const INDEX_OFFSET = 20 + this.breadcrumbHeight + (
       document.body.dataset.headerDesktop !== 'normal' ? document.getElementById('header-desktop').offsetHeight : 0
     );
-
+    // TOC Drawer Button Visibility
+    const openButton = document.querySelector("#toc-drawer-button");
+    if (openButton) {
+      openButton.classList.toggle('d-none', !this.util.isTocStatic());
+    }
     // TOC Static and TOC Dialog
     if (this.util.isTocStatic()) {
       const $tocContentStatic = document.getElementById('toc-content-static');
@@ -702,7 +706,6 @@ class FixIt {
     if (!dialog || !openButton) {
       return;
     }
-    openButton.classList.toggle('d-none', !this.util.isTocStatic());
     openButton.addEventListener("click", () => {
       dialog.showModal();
       document.activeElement?.blur();
