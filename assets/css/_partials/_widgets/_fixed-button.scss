@@ -50,7 +50,7 @@
   // Ring background color
   #{$rootPrefix}b2t-bg: #{$global-border-color};
   // Progress color
-  #{$rootPrefix}b2t-prog: #FF7359;
+  #{$rootPrefix}b2t-prog: var(#{$rootPrefix}success);
   // dasharray = circumference = 2πr
   // dashoffset = circumference * (1 - scrollPercent / 100)
   #{$rootPrefix}b2t-dasharray: 314.15;
