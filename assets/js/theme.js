@@ -1305,7 +1305,6 @@ class FixIt {
     if (document.body.dataset.headerMobile === 'auto') {
       $headers.push(document.getElementById('header-mobile'));
     }
-    // b2t button click event
     $backToTop?.addEventListener('click', () => {
       this.util.scrollIntoView('body');
     });
@@ -1345,8 +1344,13 @@ class FixIt {
             $backToTop.classList.contains('animate__fadeOut') && $backToTop.classList.add('d-none');
           });
         }
-        // [todo] Shares the scrollPercent variable with readingProgressBar
-        $backToTop.style.setProperty('--scroll-percent', scrollPercent.toFixed(2));
+        // Set progress as 0-100 value for CSS calculation
+        $backToTop.style.setProperty('--fi-b2t-progress', scrollPercent.toFixed(2));
+        // Calculate stroke-dashoffset for Firefox compatibility
+        if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+          const dashoffset = 2 * Math.PI * 50 * (1 - scrollPercent / 100);
+          $backToTop.querySelector('circle.progress').style.strokeDashoffset = dashoffset.toFixed(2);
+        }
       }
       for (let event of this.scrollEventSet) {
         event();
