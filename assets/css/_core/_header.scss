@@ -27,6 +27,7 @@ header {
 }
 
 .header-title {
+  font-size: $header-title-font-size;
   font-family: $header-title-font-family;
   font-weight: bold;
   margin-right: 0.5rem;
@@ -39,8 +40,9 @@ header {
   .logo {
     min-height: 1.5em;
     height: 1.5em;
-    vertical-align: middle;
     width: auto;
+    vertical-align: top;
+    transform: translateY(calc(#{$header-height} / 2 - 50%));
   }
 
   .header-title-text {
@@ -72,7 +74,7 @@ header {
   .menu-item {
     list-style: none;
 
-    & .dropdown-icon {
+    .dropdown-icon {
       margin-left: 0.25rem;
       font-size: .875em;
       color: $global-font-color;
@@ -109,11 +111,6 @@ header {
 
     .menu-link:hover i {
       @include transform(perspective(1rem) translateZ(0.2rem));
-    }
-
-    &.language-switch,
-    &.theme-switch {
-      cursor: pointer;
     }
   }
 }
@@ -200,11 +197,7 @@ header {
 .theme-switch {
   i {
     @include transform(rotate(225deg));
-    @include transition(transform 0.4s ease);
-  }
-
-  &:hover i {
-    @include transform(rotate(45deg));
+    @include transition(all 0.4s ease);
   }
 }
 
@@ -235,7 +228,6 @@ header {
     }
 
     .header-title {
-      font-size: $header-title-font-size;
       height: 100%;
     }
 
@@ -245,10 +237,15 @@ header {
       flex-wrap: nowrap;
       float: right;
 
-      >.menu-item {
+      > .menu-item {
         &:hover .sub-menu {
           display: block;
           @include transform(translateX(-0.5rem));
+        }
+        &.theme-switch {
+          &:hover i {
+            @include transform(rotate(45deg));
+          }
         }
         &.language-switch:hover .sub-menu {
           @include transform(translateX(calc(1.75rem - 100%)));
@@ -330,19 +327,18 @@ header {
       @include transition(margin-top 0.3s ease);
 
       .header-title {
-        font-size: $header-title-font-size;
         max-width: 80%;
       }
 
-      .menu-toggle {
-        line-height: 4rem;
-        cursor: pointer;
-        @include transition(width 0.3s ease);
+      .theme-switch {
+        line-height: 1.25em;
+      }
 
+      .menu-toggle {
         span {
           display: block;
           background: $global-font-color;
-          width: 1.5rem;
+          width: 20px;
           height: 2px;
           @include border-radius(3px);
           @include transition(all 0.3s ease-in-out);
@@ -352,17 +348,13 @@ header {
           }
         }
 
-        span:nth-child(1) {
-          margin-bottom: 0.5rem;
-        }
-
-        span:nth-child(3) {
-          margin-top: 0.5rem;
+        span:not(:last-child) {
+          margin-bottom: 6px;
         }
 
         &.active {
           span:nth-child(1) {
-            @include transform(rotate(45deg) translate(0.4rem, 0.5rem));
+            @include transform(translateY(8px) rotate(45deg));
           }
 
           span:nth-child(2) {
@@ -370,7 +362,7 @@ header {
           }
 
           span:nth-child(3) {
-            @include transform(rotate(-45deg) translate(0.4rem, -0.5rem));
+            @include transform(translateY(-8px) rotate(-45deg));
           }
         }
       }

@@ -108,8 +108,8 @@
             </span>
           </li>
         {{- end -}}
-        <li class="menu-item theme-switch" title="{{ T "header.switchTheme" }}">
-          {{ dict "Class" "fa-solid fa-adjust fa-fw" | partial "plugin/icon.html" }}
+        <li class="menu-item theme-switch" role="button" aria-label="{{ T "header.switchTheme" }}" title="{{ T "header.switchTheme" }}">
+          {{- dict "Class" "fa-solid fa-adjust fa-fw" | partial "plugin/icon.html" -}}
         </li>
         {{- if hugo.IsMultilingual -}}
           <li class="menu-item language-switch">
@@ -187,7 +187,10 @@
           {{- end -}}
         {{- end -}}
       </div>
-      <div class="menu-toggle" id="menu-toggle-mobile">
+      <div class="theme-switch" role="button" aria-label="{{ T "header.switchTheme" }}">
+        {{- dict "Class" "fa-solid fa-adjust fa-fw" | partial "plugin/icon.html" -}}
+      </div>
+      <div class="menu-toggle" id="menu-toggle-mobile" role="button" aria-labelledby="menu-mobile">
         <span></span><span></span><span></span>
       </div>
     </div>
@@ -281,7 +284,6 @@
           {{- end -}}
         {{- end -}}
         <li class="menu-item menu-system">
-          <span class="menu-system-item theme-switch" title="{{ T "header.switchTheme" }}">{{ dict "Class" "fa-solid fa-adjust fa-fw" | partial "plugin/icon.html" }}</span>
           {{- if hugo.IsMultilingual -}}
             <span class="menu-system-item language-switch">
               <span role="button" aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}">
