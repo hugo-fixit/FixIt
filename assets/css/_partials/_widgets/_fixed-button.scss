@@ -12,7 +12,7 @@
   font-size: 1rem;
   line-height: 1.5rem;
   padding: 0.5rem 0.625rem;
-  color: $global-font-color;
+  color: darken($global-font-secondary-color, 10%);
   background-color: $header-background-color;
   @include border-radius(1.25rem);
   @include transition(color 0.4s ease);
@@ -32,7 +32,7 @@
   }
 
   [data-theme='dark'] & {
-    color: $global-font-color-dark;
+    color: $global-font-secondary-color-dark;
     background-color: $header-background-color-dark;
 
     &:hover,
