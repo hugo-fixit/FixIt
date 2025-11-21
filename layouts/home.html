@@ -9,35 +9,43 @@
   {{- $params := partial "function/params.html" -}}
   {{- $profile := .Site.Params.home.profile -}}
   {{- $posts := .Site.Params.home.posts -}}
+  {{- $pages := slice -}}
+
+  {{- /* Paginate calculation */ -}}
+  {{- if ne $posts.enable false -}}
+    {{- $pages = .Site.Store.Get "mainSectionPages" -}}
+    {{- if .Site.Params.page.hiddenFromHomePage -}}
+      {{- $pages = where $pages "Params.hiddenfromhomepage" false -}}
+    {{- else -}}
+      {{- $pages = where $pages "Params.hiddenfromhomepage" "!=" true -}}
+    {{- end -}}
+    {{- with $posts.paginate | default .Site.Params.paginate -}}
+      {{- $pages = $.Paginate $pages . -}}
+    {{- else -}}
+      {{- $pages = .Paginate $pages -}}
+    {{- end -}}
+  {{- end -}}
 
   <div class="page home{{ if ne $posts.enable false }} posts{{ end }}">
-    {{- /* Profile */ -}}
-    {{- if ne $profile.enable false -}}
-      {{- partial "home/profile.html" . -}}
-    {{- end -}}
+    {{- /* Only show profile and content on first page */ -}}
+    {{- if eq $.Paginator.PageNumber 1 -}}
+      {{- /* Profile */ -}}
+      {{- if ne $profile.enable false -}}
+        {{- partial "home/profile.html" . -}}
+      {{- end -}}
 
-    {{- /* Content */ -}}
-    {{- if .Content -}}
-      <div class="single">
-        <div class="content" id="content">
-          {{- dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+      {{- /* Content */ -}}
+      {{- if .Content -}}
+        <div class="single">
+          <div class="content" id="content">
+            {{- dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+          </div>
         </div>
-      </div>
+      {{- end -}}
     {{- end -}}
 
-    {{- /* Paginate */ -}}
+    {{- /* Paginate rendering */ -}}
     {{- if ne $posts.enable false -}}
-      {{- $pages := .Site.Store.Get "mainSectionPages" -}}
-      {{- if .Site.Params.page.hiddenFromHomePage -}}
-        {{- $pages = where $pages "Params.hiddenfromhomepage" false -}}
-      {{- else -}}
-        {{- $pages = where $pages "Params.hiddenfromhomepage" "!=" true -}}
-      {{- end -}}
-      {{- with $posts.paginate | default .Site.Params.paginate -}}
-        {{- $pages = $.Paginate $pages . -}}
-      {{- else -}}
-        {{- $pages = .Paginate $pages -}}
-      {{- end -}}
       {{- range $pages.Pages -}}
         {{- .Render "summary" -}}
       {{- end -}}
