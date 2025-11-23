@@ -203,7 +203,7 @@ The FixIt theme balances **simplicity** and **extensibility** with extra [Hugo t
 - [cmpt-translate](https://github.com/hugo-fixit/cmpt-translate)\
   🌐 A component for site automatic translation.
 - [component-projects](https://github.com/hugo-fixit/component-projects)\
-  🐙 Display your GitHub projects in the FixIt theme and generate blog posts from readme.
+  ��� Display your GitHub projects in the FixIt theme and generate blog posts from readme.
 - [hugo-atom-feed](https://github.com/hugo-fixit/hugo-atom-feed)\
   Hugo theme component for ATOM feed custom Output Format.
 - [hugo-json-feed](https://github.com/hugo-fixit/hugo-json-feed)\
