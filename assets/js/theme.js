@@ -1158,7 +1158,11 @@ class FixIt {
   }
 
   initMathJax() {
-    window.MathJax?.typeset && window.MathJax.typeset();
+    if (window.MathJax?.typesetPromise) {
+      window.MathJax.typesetPromise().then(() => {
+        // Do something else after typesetting is complete
+      }).catch((err) => console.log(err.message));
+    }
   }
 
   initJsonViewer() {
