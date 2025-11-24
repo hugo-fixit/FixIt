@@ -107,82 +107,108 @@
     </a>
   {{ end -}}
 
-  {{- /* 016: Digg */ -}}
-  {{- /* Removed in sharer.js 0.5.0 */ -}}
-
-  {{- /* 017: StumbleUpon */ -}}
-  {{- /* Removed in sharer.js 0.5.0 */ -}}
-
-  {{- /* 018: Flipboard */ -}}
+  {{- /* 016: Flipboard */ -}}
   {{- if $share.Flipboard -}}
     <a href="javascript:void(0);" title="{{ T `shareOn` }} Flipboard" data-sharer="flipboard" data-url="{{ .Permalink }}" data-title="{{ $title }}">
       {{- dict "Class" "fa-brands fa-flipboard fa-fw" | partial "plugin/icon.html" -}}
     </a>
   {{ end -}}
 
-  {{- /* 019: 微博 */ -}}
+  {{- /* 017: 微博 */ -}}
   {{- if $share.Weibo -}}
     <a href="javascript:void(0);" title="{{ T `shareOn` }} 微博" data-sharer="weibo" data-url="{{ .Permalink }}" data-title="{{ $title }}"{{ with .Params.featuredImage }} data-image="{{ . }}"{{ end }}{{ with .Site.Params.Social.Weibo }} data-ralateuid="{{ . }}"{{ end }}>
       {{- dict "Class" "fa-brands fa-weibo fa-fw" | partial "plugin/icon.html" -}}
     </a>
   {{ end -}}
 
-  {{- /* 020: 人人 */ -}}
-  {{- /* Removed in sharer.js 0.5.0 */ -}}
-
-  {{- /* 021: Myspace */ -}}
+  {{- /* 018: Myspace */ -}}
   {{- if $share.Myspace -}}
     <a href="javascript:void(0);" title="{{ T `shareOn` }} Myspace" data-sharer="myspace" data-url="{{ .Permalink }}" data-title="{{ $title }}" data-description="{{ .Description }}">
       {{- dict "Simpleicons" "myspace" "Prefix" (.Site.Store.Get "cdn" | default dict).simpleIconsPrefix | partial "plugin/icon.html" -}}
     </a>
   {{ end -}}
 
-  {{- /* 022: Blogger */ -}}
+  {{- /* 019: Blogger */ -}}
   {{- if $share.Blogger -}}
     <a href="javascript:void(0);" title="{{ T `shareOn` }} Blogger" data-sharer="blogger" data-url="{{ .Permalink }}" data-title="{{ $title }}" data-description="{{ .Description }}">
       {{- dict "Class" "fa-brands fa-blogger fa-fw" | partial "plugin/icon.html" -}}
     </a>
   {{ end -}}
 
-  {{- /* 023: 百度 */ -}}
+  {{- /* 020: 百度 */ -}}
   {{- if $share.Baidu -}}
     <a href="javascript:void(0);" title="{{ T `shareOn` }} 百度" data-sharer="baidu" data-url="{{ .Permalink }}" data-title="{{ $title }}">
       {{- dict "Simpleicons" "baidu" "Prefix" (.Site.Store.Get "cdn" | default dict).simpleIconsPrefix | partial "plugin/icon.html" -}}
     </a>
   {{ end -}}
 
-  {{- /* 024: OK.RU */ -}}
+  {{- /* 021: OK.RU */ -}}
   {{- if $share.Odnoklassniki -}}
     <a href="javascript:void(0);" title="{{ T `shareOn` }} OK.RU" data-sharer="okru" data-url="{{ .Permalink }}" data-title="{{ $title }}">
       {{- dict "Class" "fa-brands fa-odnoklassniki fa-fw" | partial "plugin/icon.html" -}}
     </a>
   {{ end -}}
 
-  {{- /* 025: Evernote */ -}}
+  {{- /* 022: Evernote */ -}}
   {{- if $share.Evernote -}}
     <a href="javascript:void(0);" title="{{ T `shareOn` }} Evernote" data-sharer="evernote" data-url="{{ .Permalink }}" data-title="{{ $title }}">
       {{- dict "Class" "fa-brands fa-evernote fa-fw" | partial "plugin/icon.html" -}}
     </a>
   {{ end -}}
 
-  {{- /* 026: Skype */ -}}
+  {{- /* 023: Skype */ -}}
   {{- if $share.Skype -}}
     <a href="javascript:void(0);" title="{{ T `shareOn` }} Skype" data-sharer="skype" data-url="{{ .Permalink }}" data-title="{{ $title }}">
       {{- dict "Class" "fa-brands fa-skype fa-fw" | partial "plugin/icon.html" -}}
     </a>
   {{ end -}}
 
-  {{- /* 027: Trello */ -}}
+  {{- /* 024: Trello */ -}}
   {{- if $share.Trello -}}
     <a href="javascript:void(0);" title="{{ T `shareOn` }} Trello" data-sharer="trello" data-url="{{ .Permalink }}" data-title="{{ $title }}" data-description="{{ .Description }}">
       {{- dict "Class" "fa-brands fa-trello fa-fw" | partial "plugin/icon.html" -}}
     </a>
   {{ end -}}
 
-  {{- /* 028: Mix */ -}}
+  {{- /* 025: Mix */ -}}
   {{- if $share.Mix -}}
     <a href="//mix.com/add?url={{ .Permalink }}&amp;description={{ $title }}" target="_blank" title="{{ T `shareOn` }} Mix">
       {{- dict "Class" "fa-brands fa-mix fa-fw" | partial "plugin/icon.html" -}}
     </a>
   {{ end -}}
+
+  {{- $shareArray := slice
+    "Twitter"
+    "Facebook"
+    "Linkedin"
+    "Whatsapp"
+    "Viber"
+    "Pinterest"
+    "Tumblr"
+    "Hackernews"
+    "Reddit"
+    "VK"
+    "Buffer"
+    "Xing"
+    "Line"
+    "Instapaper"
+    "Pocket"
+    "Flipboard"
+    "Weibo"
+    "Myspace"
+    "Blogger"
+    "Baidu"
+    "Odnoklassniki"
+    "Evernote"
+    "Skype"
+    "Trello"
+    "Mix"
+  -}}
+
+  {{- range $shareArray -}}
+    {{- if index $share . -}}
+      {{- $.Store.Set "hasSharer" true -}}
+      {{- break -}}
+    {{- end -}}
+  {{- end -}}
 {{- end -}}

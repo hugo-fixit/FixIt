@@ -102,7 +102,7 @@ FixIt theme assets partial
 {{- end -}}
 
 {{- /* Sharer.js */ -}}
-{{- if $params.share.enable -}}
+{{- if .Store.Get "hasSharer" -}}
   {{- $source := $cdn.sharerJS | default "lib/sharer/sharer.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Async" true "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
