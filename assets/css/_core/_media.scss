@@ -41,16 +41,38 @@
 }
 
 @media only screen and (max-width: 1200px) and (min-width: 961px) {
-  .wrapper main {
-    // Hide empty aside and expand article when only one aside is empty
-    aside:first-child:empty:has(~ aside:not(:empty)),
-    aside:first-child:not(:empty) ~ aside#toc-auto:empty {
-      display: none;
+  .wrapper {
+    main {
+      // Hide empty aside and expand article when only one aside is empty
+      aside:first-child:empty:has(~ aside:not(:empty)),
+      aside:first-child:not(:empty) ~ aside#toc-auto:empty {
+        display: none;
+      }
+  
+      aside:first-child:empty:has(~ aside:not(:empty)) ~ article,
+      aside:first-child:not(:empty) ~ article:has(~ aside:empty) {
+        flex: 3;
+      }
     }
 
-    aside:first-child:empty:has(~ aside:not(:empty)) ~ article,
-    aside:first-child:not(:empty) ~ article:has(~ aside:empty) {
-      flex: 3;
+    // Adjust breadcrumb flex when asides are empty
+    &:has(main > aside:first-child:empty ~ aside:not(:empty)) .breadcrumb-container {
+      .breadcrumb {
+        flex: 3;
+      }
+
+      &::before {
+        display: none;
+      }
+    }
+    &:has(main > aside:first-child:not(:empty) ~ aside#toc-auto:empty) .breadcrumb-container {
+      .breadcrumb {
+        flex: 3;
+      }
+
+      &::after {
+        display: none;
+      }
     }
   }
 }
