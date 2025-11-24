@@ -101,12 +101,13 @@
 
   {{- /* Insert config */ -}}
   {{- $uniqueFileId := "" -}}
+  {{- $languagePrefix := .Site.LanguagePrefix -}}
   {{- with .File -}}
     {{- $uniqueFileId = .UniqueID -}}
   {{- end -}}
   {{- $targetPath := "" -}}
   {{- if $uniqueFileId -}}
-    {{- $targetPath = $uniqueFileId | printf "js/config/post-chat/%s.js" -}}
+    {{- $targetPath = printf "%s/js/config/post-chat/%s.js" $languagePrefix $uniqueFileId -}}
   {{- end -}}
   {{- dict "Content" $configJS "Path" $targetPath "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
