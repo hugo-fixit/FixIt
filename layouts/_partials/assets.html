@@ -19,6 +19,7 @@ FixIt theme assets partial
 {{- $config := (.Store.Get "this").config -}}
 {{- $config = dict "version" (hugo.Store.Get "version") | merge $config -}}
 {{- $author := partial "function/get-author-map.html" .Params.author -}}
+{{- $isArchivesOrOffline := (eq .Kind "home") | and (in .RelPermalink "archives") | or (in .RelPermalink "offline")  -}}
 {{- $uniqueFileId := "" -}}
 {{- $languagePrefix := .Site.LanguagePrefix -}}
 {{- with .File -}}
@@ -65,7 +66,7 @@ FixIt theme assets partial
 {{- end -}}
 
 {{- /* JSON Viewer */ -}}
-{{- if .Store.Get "hasJsonViewer" -}}
+{{- if .Store.Get "hasJsonViewer" | and (not $isArchivesOrOffline) -}}
   {{- $source := $cdn.jsonViewerElementJS | default "lib/json-viewer-element/json-viewer-element.umd.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
@@ -118,7 +119,7 @@ FixIt theme assets partial
 
 {{- /* KaTeX */ -}}
 {{- $math := .Store.Get "math" -}}
-{{- if .Store.Get "hasKaTeX" -}}
+{{- if .Store.Get "hasKaTeX" | and (not $isArchivesOrOffline) -}}
   {{- $source := $cdn.katexCSS | default "lib/katex/katex.min.css" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Preload" true | dict "Page" . "Data" | partial "store/style.html" -}}
   {{- /* Copy-tex extension */ -}}
@@ -129,7 +130,7 @@ FixIt theme assets partial
 {{- end -}}
 
 {{- /* MathJax */ -}}
-{{- if .Store.Get "hasMathJax" -}}
+{{- if .Store.Get "hasMathJax" | and (not $isArchivesOrOffline) -}}
   {{- $mathjax := $math.mathjax -}}
   {{- $mjoc := $mathjax.options | default dict -}}
   {{- $mjo := dict -}}
@@ -158,7 +159,7 @@ FixIt theme assets partial
 {{- end -}}
 
 {{- /* ECharts */ -}}
-{{- if .Store.Get "hasEcharts" -}}
+{{- if .Store.Get "hasEcharts" | and (not $isArchivesOrOffline) -}}
   {{- $source := $cdn.echartsJS | default "lib/echarts/echarts.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $lightTheme := resources.Get "lib/echarts/theme/light.yml" | transform.Unmarshal -}}
@@ -201,7 +202,7 @@ FixIt theme assets partial
 {{- end -}}
 
 {{- /* Tabs and tab */ -}}
-{{- if .Store.Get "hasTabs" -}}
+{{- if .Store.Get "hasTabs" | and (not $isArchivesOrOffline) -}}
   {{- $source := $cdn.tabContainerElementJS | default "lib/tab-container-element/bundle.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Attr" `type="module"` "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
@@ -334,7 +335,7 @@ FixIt theme assets partial
 {{- dict "Content" $configJS "Path" $targetPath "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
 {{- /* MathJax plugin */ -}}
-{{- if .Store.Get "hasMathJax" -}}
+{{- if .Store.Get "hasMathJax" | and (not $isArchivesOrOffline) -}}
   {{- $targetPath := "" -}}
   {{- if $uniqueFileId -}}
     {{- $targetPath = printf "%s/js/lib/mathjax/%s.min.js" $languagePrefix $uniqueFileId -}}
@@ -347,7 +348,7 @@ FixIt theme assets partial
 {{- end -}}
 
 {{- /* Mermaid plugin */ -}}
-{{- if .Store.Get "hasMermaid" -}}
+{{- if .Store.Get "hasMermaid" | and (not $isArchivesOrOffline) -}}
   {{- $options := dict "Source" "js/lib/mermaid.js" "Template" "js/lib/mermaid.js" -}}
   {{- $options = dict "Context" . "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Attr" `type="module"` | merge $options -}}
   {{- $options | dict "Page" $ "Data" | partial "store/script.html" -}}
