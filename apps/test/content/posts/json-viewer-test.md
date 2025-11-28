@@ -55,10 +55,6 @@ disabled copy:
 }
 ```
 
-```fixit
-🎉🥚 in development mode!
-```
-
 ## JSON Code
 
 ```json {enable=false}

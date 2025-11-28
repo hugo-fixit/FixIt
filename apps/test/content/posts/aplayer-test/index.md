@@ -9,6 +9,8 @@ tags:
   - APlayer
 ---
 
+Testing APlayer shortcode in FixIt theme.
+
 <!--more-->
 
 {{< aplayer fixed=false mini=false autoplay=false theme="#b7daff" loop="all" order="list" preload="auto" volume=0.7 mutex=true lrcType=3 listFolded=false listMaxHeight="" storageName="aplayer-setting" >}}
