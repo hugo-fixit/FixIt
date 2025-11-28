@@ -236,7 +236,7 @@
 
   {{- /* TOC Dialog */ -}}
   {{- if $showToc -}}
-    {{- .Page.Store.Set "enableTocDialog" true -}}
+    {{- .Page.Store.Set "hasToc" true -}}
     <dialog id="toc-dialog" aria-labelledby="toc-dialog-title" role="dialog">
       <div class="toc">
         <h2 class="toc-title">{{ T "single.contents" }}</h2>
