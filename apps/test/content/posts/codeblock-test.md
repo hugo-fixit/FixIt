@@ -16,6 +16,20 @@ Testing code block in FixIt theme.
 🎉🥚 in development mode!
 ```
 
+## Code title
+
+```js {title="test.js"}
+console.log('hello FixIt!')
+```
+
+## No Header
+
+```js {.no-header}
+function add(a, b) {
+  return a + b
+}
+```
+
 ## Diff Code
 
 ```diff

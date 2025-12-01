@@ -285,27 +285,39 @@ pre:not([data-processed]) {
     }
   }
 
-  // ========== Higtlight Color ========== //
+  // ========== Highlight Color ========== //
 
   /* Error */
   .err {
     font-style: italic;
     border-bottom: 1px dotted $code-error-color;
   }
-  /* GenericDeleted */
-  .gd {
-    background-color: #ffebe9;
+  .language-diff {
+    /* GenericDeleted */
+    .gd {
+      background-color: #ffebe9;
 
-    [data-theme='dark'] & {
-      background-color: #78191b;
+      [data-theme='dark'] & {
+        background-color: #78191b;
+      }
     }
-  }
-  /* GenericInserted */
-  .gi {
-    background-color: #dafbe1;
+    /* GenericInserted */
+    .gi {
+      background-color: #dafbe1;
 
-    [data-theme='dark'] & {
-      background-color: #1b4721;
+      [data-theme='dark'] & {
+        background-color: #1b4721;
+      }
+    }
+    .gs {
+      font-weight: normal;
+      color: #953800;
+      background-color: #ffd8b5;
+
+      [data-theme='dark'] & {
+        color: #ffddb0;
+        background-color: #682d0f;
+      }
     }
   }
 
@@ -322,7 +334,7 @@ pre:not([data-processed]) {
       }
     }
   }
-  // ========== Higtlight Color ========== //
+  // ========== Highlight Color ========== //
 }
 
 // gist shortcode
