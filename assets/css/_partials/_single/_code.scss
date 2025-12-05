@@ -96,9 +96,9 @@ pre:not([data-processed]) {
         cursor: pointer;
       }
 
-      .ellipses,
-      .edit,
-      .copy {
+      .ellipses-btn,
+      .edit-btn,
+      .copy-btn {
         @extend .print-d-none;
       }
 
@@ -130,17 +130,16 @@ pre:not([data-processed]) {
         content: 'Code';
       }
 
-      .ellipses {
+      .ellipses-btn {
         padding: 0.4rem;
       }
 
-      .edit,
-      .copy {
+      .edit-btn,
+      .copy-btn {
         display: none;
         padding: 0.4rem;
 
         &:hover {
-          cursor: pointer;
           color: $global-link-hover-color;
 
           [data-theme='dark'] & {
@@ -234,12 +233,12 @@ pre:not([data-processed]) {
         @include transform(rotate(90deg));
       }
 
-      .ellipses {
+      .ellipses-btn {
         display: none;
       }
 
-      .edit,
-      .copy {
+      .edit-btn,
+      .copy-btn {
         display: inline;
       }
     }

@@ -11,6 +11,7 @@ tags:
 Testing code block in FixIt theme.
 
 <!--more-->
+<!-- markdownlint-disable-file blanks-around-lists ul-style ul-indent code-block-style -->
 
 ```fixit
 🎉🥚 in development mode!
@@ -24,7 +25,7 @@ console.log('hello FixIt!')
 
 ## No Header
 
-```js {.no-header}
+```js {wrapped=false}
 function add(a, b) {
   return a + b
 }
@@ -93,5 +94,3 @@ function isObjectLiteral(str) {
 ## Gist Embed
 
 {{< gist Lruihao fb8b2d0353465c4d40bf74818db80710 >}}
-
-<!-- markdownlint-disable-file blanks-around-lists ul-style ul-indent code-block-style -->

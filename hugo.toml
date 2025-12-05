@@ -258,11 +258,11 @@ priority = 0.5
 [permalinks]
 
 [permalinks.page]
-
 # posts = "/p/:slugorcontentbasename"
-[permalinks.section]
 
+[permalinks.section]
 # posts = "/posts/:slugorcontentbasename"
+
 [permalinks.taxonomy]
 
 [permalinks.term]
@@ -489,8 +489,8 @@ index = ""
 appID = ""
 searchKey = ""
 
-[params.search.fuse]
 # FixIt 0.2.17 | NEW https://fusejs.io/api/options.html
+[params.search.fuse]
 isCaseSensitive = false
 minMatchCharLength = 2
 findAllMatches = false
@@ -1083,6 +1083,19 @@ cacheRemote = false
 # Image resizing and optimisation
 optimise = false
 
+# FixIt 0.4.0 | NEW Code block wrapper config
+[params.codeblock]
+# whether to enable the code block wrapper
+wrapped = true
+# available styles: ["normal", "github", "mac"]
+style = "normal"
+# whether to show the copy button
+copyable = true
+# NEW whether to show the edit button
+editable = false
+# the maximum number of lines of displayed code block
+maxShownLines = 10
+
 # FixIt 0.4.0 | NEW JSON Viewer config
 # See https://github.com/Lruihao/json-viewer-element
 [params.jsonViewer]
@@ -1240,32 +1253,32 @@ type = "katex"
 copyTex = true
 throwOnError = false
 errorColor = "#ff4949"
-
 # custom macros map
 # syntax: <macro> = <definition>
-[params.page.math.katex.macros]
 
+[params.page.math.katex.macros]
 # "\\f" = "#1f(#2)"   # usage: $\f{a}{b}$
 # MathJax server-side rendering (https://www.mathjax.org)
 # MathJax config: https://docs.mathjax.org/en/latest/options/index.html
+
 [params.page.math.mathjax]
 cdn = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 
 [params.page.math.mathjax.packages]
-
 # "[+]" = ["configmacros"]
 # custom macros map
 # syntax: <macro> = <definition>
-[params.page.math.mathjax.macros]
 
+[params.page.math.mathjax.macros]
 # "bold" = ["{\\bf #1}", 1]   # usage: $\bold{math}$
+
 [params.page.math.mathjax.loader]
 load = [ "ui/safe" ]
 
 [params.page.math.mathjax.loader.paths]
-
 # custom = "https://cdn.jsdelivr.net/gh/sonoisa/XyJax-v3@3.0.1/build/"
 # more loader config e.g source, dependencies, provides etc.
+
 [params.page.math.mathjax.options]
 enableMenu = true
 # HTML tags that won't be searched for math
@@ -1286,20 +1299,9 @@ ignoreHtmlClass = "mathjax_ignore"
 
 # HTML tags that can appear within math
 [params.page.math.mathjax.options.includeHtmlTags]
-
 # "#comment" = ""
 # br = "\n"
 # wbr = ""
-# Code wrapper config
-[params.page.code]
-# FixIt 0.3.9 | NEW whether to enable the code wrapper
-enable = true
-# whether to show the copy button of the code wrapper
-copy = true
-# FixIt 0.2.13 | NEW whether to show the edit button of the code wrapper
-edit = true
-# the maximum number of lines of displayed code by default
-maxShownLines = 10
 
 # Mapbox GL JS config (https://docs.mapbox.com/mapbox-gl-js)
 [params.page.mapbox]
@@ -1339,12 +1341,12 @@ position = "after"
 mode = "static"
 
 [params.page.reward.ways]
-
 # wechatpay = "/images/wechatpay.png"
 # alipay = "/images/alipay.png"
 # paypal = "/images/paypal.png"
 # bitcoin = "/images/bitcoin.png"
 # social share links in post page
+
 [params.page.share]
 enable = true
 Twitter = true
@@ -1540,17 +1542,17 @@ lazyLoad = true
 [params.page.library]
 
 [params.page.library.css]
-
 # someCSS = "some.css"
 # located in "assets/"
 # Or
 # someCSS = "https://cdn.example.com/some.css"
-[params.page.library.js]
 
+[params.page.library.js]
 # someJavascript = "some.js"
 # located in "assets/"
 # Or
 # someJavascript = "https://cdn.example.com/some.js"
+
 # Page SEO config
 [params.page.seo]
 # image URL

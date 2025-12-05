@@ -425,7 +425,7 @@ class FixIt {
    * init code wrapper
    */
   initCodeWrapper() {
-    if (!this.config.code) {
+    if (!this.config.codeblock) {
       this.initCopyCode();
       return
     }
@@ -447,68 +447,50 @@ class FixIt {
     // render code header
     this.util.forEach(document.querySelectorAll('.highlight > .chroma:not([data-init])'), ($chroma) => {
       $chroma.dataset.init = 'true';
-      if ($chroma.parentElement.classList.contains('no-header')) {
-        this.initCopyCode($chroma);
-        return;
-      }
       const $codeElements = $chroma.querySelectorAll('pre.chroma > code');
       if ($codeElements.length) {
         const $code = $codeElements[$codeElements.length - 1];
-        const $header = document.createElement('div');
-        $header.className = 'code-header ' + $code.className.toLowerCase();
+        const $codeHeader = $chroma.querySelector('.code-header');
+        if (!$codeHeader) {
+          // skip highlight shortcode
+          return;
+        }
         // code title
-        const $title = document.createElement('span');
-        $title.classList.add('code-title');
-        // insert code title inner
-        $title.insertAdjacentHTML(
-          'afterbegin',
-          $chroma.parentNode.title
-            ? `<i class="arrow fa-solid fa-chevron-right fa-fw" aria-hidden="true"></i><span class="title-inner">${$chroma.parentNode.title}</span>`
-            : '<i class="arrow fa-solid fa-chevron-right fa-fw" aria-hidden="true"></i>'
-        );
+        const $title = $codeHeader.querySelector('.code-title');
         $title.addEventListener('click', () => {
           $chroma.classList.toggle('open');
         }, false);
-        $header.appendChild($title);
         // ellipses icon
-        const $ellipses = document.createElement('span');
-        $ellipses.insertAdjacentHTML('afterbegin', '<i class="fa-solid fa-ellipsis-h fa-fw" aria-hidden="true"></i>');
-        $ellipses.classList.add('ellipses');
-        $ellipses.addEventListener('click', () => {
+        const $ellipsesBtn = $codeHeader.querySelector('.ellipses-btn');
+        $ellipsesBtn.addEventListener('click', () => {
           $chroma.classList.add('open');
         }, false);
-        $header.appendChild($ellipses);
         // edit button
-        if (this.config.code.editable) {
-          const $edit = document.createElement('span');
-          $edit.classList.add('edit');
-          $edit.insertAdjacentHTML('afterbegin', `<i class="fa-solid fa-pen-to-square fa-fw" title="${this.config.code.editUnLockTitle}" aria-hidden="true"></i>`);
-          $edit.addEventListener('click', () => {
-            const $iconKey = $edit.querySelector('.fa-pen-to-square');
-            const $iconLock = $edit.querySelector('.fa-lock');
-            const $preChromas = $edit.parentElement.parentElement.querySelectorAll('pre.chroma');
+        if (this.config.codeblock.editable) {
+          const $editBtn = $codeHeader.querySelector('.edit-btn');
+          $editBtn.addEventListener('click', () => {
+            const $iconKey = $editBtn.querySelector('.fa-pen-to-square');
+            const $iconLock = $editBtn.querySelector('.fa-lock');
+            const $preChromas = $editBtn.parentElement.parentElement.querySelectorAll('pre.chroma');
             const $preChroma = $preChromas.length === 2 ? $preChromas[1] : $preChromas[0];
             if ($iconKey) {
               $iconKey.classList.add('fa-lock');
               $iconKey.classList.remove('fa-pen-to-square');
-              $iconKey.title = this.config.code.editLockTitle;
+              $iconKey.title = this.config.codeblock.editLockTitle;
               $preChroma.setAttribute('contenteditable', true);
               $preChroma.focus();
             } else {
               $iconLock.classList.add('fa-pen-to-square');
               $iconLock.classList.remove('fa-lock');
-              $iconLock.title = this.config.code.editUnLockTitle;
+              $iconLock.title = this.config.codeblock.editUnLockTitle;
               $preChroma.setAttribute('contenteditable', false);
               $preChroma.blur();
             }
           }, false);
-          $header.appendChild($edit);
         }
         // copy button
-        if (this.config.code.copyTitle) {
-          const $copy = document.createElement('span');
-          $copy.insertAdjacentHTML('afterbegin', '<i class="fa-regular fa-copy fa-fw" aria-hidden="true"></i>');
-          $copy.classList.add('copy');
+        if (this.config.codeblock.copyable) {
+          const $copyBtn = $codeHeader.querySelector('.copy-btn');
           // remove the leading and trailing whitespace of the code string
           let code = $code.innerText.trim();
           // in the details element, the code string cannot be gotten directly.
@@ -518,20 +500,17 @@ class FixIt {
             code = _tempEl.innerText.trim();
           }
           const forceOpen = $chroma.parentElement.dataset.open ? JSON.parse($chroma.parentElement.dataset.open) : void 0;
-          if (forceOpen ?? (this.config.code.maxShownLines < 0 || code.split('\n').length < this.config.code.maxShownLines + 2)) {
+          if (forceOpen ?? (this.config.codeblock.maxShownLines < 0 || code.split('\n').length < this.config.codeblock.maxShownLines + 2)) {
             $chroma.classList.add('open');
           }
-          $copy.title = this.config.code.copyTitle;
-          $copy.addEventListener('click', () => {
+          $copyBtn.addEventListener('click', () => {
             this.util.copyText(code).then(() => {
               this.util.animateCSS($code, 'animate__flash');
             }, () => {
               console.error('Clipboard write failed!', 'Your browser does not support clipboard API!');
             });
           }, false);
-          $header.appendChild($copy);
         }
-        $chroma.insertBefore($header, $chroma.firstChild);
       }
     });
   }
