@@ -421,6 +421,10 @@ class FixIt {
     }
   }
 
+  _getCodeText($pre) {
+    return $pre.innerText.trim();
+  }
+
   /**
    * init code wrapper
    */
@@ -447,13 +451,16 @@ class FixIt {
     // render code header
     this.util.forEach(document.querySelectorAll('.highlight > .chroma:not([data-init])'), ($chroma) => {
       $chroma.dataset.init = 'true';
-      const $codeElements = $chroma.querySelectorAll('pre.chroma > code');
-      if ($codeElements.length) {
-        const $code = $codeElements[$codeElements.length - 1];
-        const $codeHeader = $chroma.querySelector('.code-header');
-        if (!$codeHeader) {
-          // skip highlight shortcode
-          return;
+      const $codeHeader = $chroma.querySelector('.code-header');
+      const $preElements = $chroma.querySelectorAll('pre.chroma');
+      if ($codeHeader && $preElements.length) {
+        const $preEl = $preElements[$preElements.length - 1];
+        // auto open code block
+        const maxShownLines = this.config.codeblock.maxShownLines;
+        const code = this._getCodeText($preEl);
+        const forceOpen = $chroma.parentElement.dataset.open ? JSON.parse($chroma.parentElement.dataset.open) : void 0;
+        if (forceOpen ?? (maxShownLines < 0 || code.split('\n').length <= maxShownLines)) {
+          $chroma.classList.add('open');
         }
         // code title
         const $title = $codeHeader.querySelector('.code-title');
@@ -469,15 +476,18 @@ class FixIt {
         if (this.config.codeblock.editable) {
           const $editBtn = $codeHeader.querySelector('.edit-btn');
           $editBtn.addEventListener('click', () => {
-            const $iconKey = $editBtn.querySelector('.fa-pen-to-square');
+            const $iconEdit = $editBtn.querySelector('.fa-pen-to-square');
             const $iconLock = $editBtn.querySelector('.fa-lock');
             const $preChromas = $editBtn.parentElement.parentElement.querySelectorAll('pre.chroma');
             const $preChroma = $preChromas.length === 2 ? $preChromas[1] : $preChromas[0];
-            if ($iconKey) {
-              $iconKey.classList.add('fa-lock');
-              $iconKey.classList.remove('fa-pen-to-square');
-              $iconKey.title = this.config.codeblock.editLockTitle;
+            if ($iconEdit) {
+              $iconEdit.classList.add('fa-lock');
+              $iconEdit.classList.remove('fa-pen-to-square');
+              $iconEdit.title = this.config.codeblock.editLockTitle;
               $preChroma.setAttribute('contenteditable', true);
+              this.util.forEach($chroma.querySelectorAll('.hl'), ($hl) => {
+                $hl.classList.remove('hl');
+              });
               $preChroma.focus();
             } else {
               $iconLock.classList.add('fa-pen-to-square');
@@ -490,22 +500,11 @@ class FixIt {
         }
         // copy button
         if (this.config.codeblock.copyable) {
-          const $copyBtn = $codeHeader.querySelector('.copy-btn');
-          // remove the leading and trailing whitespace of the code string
-          let code = $code.innerText.trim();
-          // in the details element, the code string cannot be gotten directly.
-          if ($chroma.closest('details') !== null) {
-            const _tempEl = document.createElement('div');
-            _tempEl.appendChild($code.cloneNode(true));
-            code = _tempEl.innerText.trim();
-          }
-          const forceOpen = $chroma.parentElement.dataset.open ? JSON.parse($chroma.parentElement.dataset.open) : void 0;
-          if (forceOpen ?? (this.config.codeblock.maxShownLines < 0 || code.split('\n').length < this.config.codeblock.maxShownLines + 2)) {
-            $chroma.classList.add('open');
-          }
-          $copyBtn.addEventListener('click', () => {
-            this.util.copyText(code).then(() => {
-              this.util.animateCSS($code, 'animate__flash');
+          $codeHeader.querySelector('.copy-btn').addEventListener('click', () => {
+            this.util.forEach($chroma.querySelectorAll('.hl'), $hl => $hl.classList.replace('hl', 'hl-disable'));
+            this.util.copyText(this._getCodeText($preEl)).then(() => {
+              this.util.animateCSS($preEl, 'animate__flash');
+              this.util.forEach($chroma.querySelectorAll('.hl-disable'), $hl => $hl.classList.replace('hl-disable', 'hl'));
             }, () => {
               console.error('Clipboard write failed!', 'Your browser does not support clipboard API!');
             });
