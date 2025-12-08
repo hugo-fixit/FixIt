@@ -123,12 +123,14 @@ function isObjectLiteral(str) {
 ## Multiple modes
 
 ```js {mode="mac"}
+// Mac mode code block
 function add(a, b) {
   return a + b
 }
 ```
 
 ```js {mode="simple"}
+// Simple mode code block
 function add(a, b) {
   return a + b
 }

@@ -1088,7 +1088,7 @@ optimise = false
 # whether to enable the code block wrapper
 wrapped = true
 # available modes: ["normal", "mac", "simple"]
-mode = "mac"
+mode = "normal"
 # whether to show the copy button
 copyable = true
 # [Experimental] whether to show the edit button (only works when mode is "normal")

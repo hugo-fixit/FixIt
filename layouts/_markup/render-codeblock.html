@@ -8,6 +8,7 @@
   {{- else if ne $codeblock.mode "simple" -}}
     {{- $wrapper = partial "code-wrapper/normal.html" (dict "Wrapper" $wrapper "Opts" $codeblock "Type" .Type) -}}
   {{- end -}}
+  {{- $wrapper = replace $wrapper `class="highlight"` `class="code-block highlight"` -}}
 {{- end -}}
 
 {{- $wrapper | safeHTML -}}

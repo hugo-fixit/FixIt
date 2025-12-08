@@ -431,7 +431,29 @@ class FixIt {
    * @param {HTMLElement} codePreEl single code block pre element
    */
   initCopyCode(wrapper, codePreEl) {
-    // TODO 在 wrapper 下添加一个复制按钮，并绑定点击事件，点击后复制 codePreEl 的内容到剪贴板
+    const copyBtn = document.createElement('div');
+    copyBtn.className = 'code-copy-btn';
+    copyBtn.ariaLabel = 'Copy to clipboard';
+    copyBtn.title = 'Copy to clipboard';
+    copyBtn.role = 'button';
+    copyBtn.insertAdjacentHTML('afterbegin', '<i class="fa-regular fa-clone" aria-hidden="true"></i>');
+    copyBtn.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-check text-success" aria-hidden="true"></i>');
+
+    copyBtn.addEventListener('click', () => {
+      this.util.forEach(wrapper.querySelectorAll('.hl'), $hl => $hl.classList.replace('hl', 'hl-disable'));
+      this.util.copyText(this._getCodeText(codePreEl)).then(() => {
+        this.util.animateCSS(codePreEl, 'animate__flash');
+        this.util.forEach(wrapper.querySelectorAll('.hl-disable'), $hl => $hl.classList.replace('hl-disable', 'hl'));
+        copyBtn.toggleAttribute('data-copied', true);
+        setTimeout(() => {
+          copyBtn.toggleAttribute('data-copied', false);
+        }, 2000);
+      }, () => {
+        console.error('Clipboard write failed!', 'Your browser does not support clipboard API!');
+      });
+    }, false);
+
+    wrapper.appendChild(copyBtn);
   }
 
   /**
@@ -442,7 +464,7 @@ class FixIt {
       return
     }
     // render code header
-    this.util.forEach(document.querySelectorAll('.highlight:not([data-init])'), ($highlight) => {
+    this.util.forEach(document.querySelectorAll('.code-block:not([data-init])'), ($highlight) => {
       $highlight.dataset.init = 'true';
       const $preElements = $highlight.querySelectorAll('pre.chroma');
       if (!$preElements.length) {

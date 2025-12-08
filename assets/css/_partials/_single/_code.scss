@@ -61,6 +61,7 @@ pre:not([data-processed]) {
 // block fenced code
 .highlight {
   margin: 0.5rem 0;
+  position: relative;
 
   > .chroma {
     position: relative;
@@ -248,11 +249,15 @@ pre:not([data-processed]) {
     }
   }
 
-  &.is-wrap {
-    code:last-of-type {
-      text-wrap: wrap;
-    }
+  .code-copy-btn {
+    @extend .diagram-copy-btn;
   }
+
+  // &.is-wrap {
+  //   code:last-of-type {
+  //     text-wrap: wrap;
+  //   }
+  // }
 
   /* LineHighlight */
   .hl {
