@@ -3,11 +3,9 @@
 {{- $wrapper := $result.Wrapped -}}
 
 {{- if $codeblock.wrapped -}}
-  {{- if eq $codeblock.mode "simple" -}}
-    {{- $wrapper = partial "code-wrapper/simple.html" (dict "Wrapper" $wrapper "Opts" $codeblock) -}}
-  {{- else if eq $codeblock.mode "mac" -}}
+  {{- if eq $codeblock.mode "mac" -}}
     {{- $wrapper = partial "code-wrapper/mac.html" (dict "Wrapper" $wrapper "Opts" $codeblock) -}}
-  {{- else -}}
+  {{- else if ne $codeblock.mode "simple" -}}
     {{- $wrapper = partial "code-wrapper/normal.html" (dict "Wrapper" $wrapper "Opts" $codeblock "Type" .Type) -}}
   {{- end -}}
 {{- end -}}

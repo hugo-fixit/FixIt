@@ -426,23 +426,35 @@ class FixIt {
   }
 
   /**
+   * init simple copy code when there is no code header
+   * @param {HTMLElement} wrapper code block wrapper element .highlight
+   * @param {HTMLElement} codePreEl single code block pre element
+   */
+  initCopyCode(wrapper, codePreEl) {
+    // TODO 在 wrapper 下添加一个复制按钮，并绑定点击事件，点击后复制 codePreEl 的内容到剪贴板
+  }
+
+  /**
    * init code wrapper
    */
   initCodeWrapper() {
     if (!this.config.codeblock) {
-      this.initCopyCode();
       return
     }
     // render code header
     this.util.forEach(document.querySelectorAll('.highlight:not([data-init])'), ($highlight) => {
       $highlight.dataset.init = 'true';
-      const $codeHeader = $highlight.querySelector('.code-header');
       const $preElements = $highlight.querySelectorAll('pre.chroma');
-      if ($codeHeader && $preElements.length) {
-        const $preEl = $preElements[$preElements.length - 1];
+      if (!$preElements.length) {
+        return;
+      }
+      
+      const $codePreEl = $preElements[$preElements.length - 1];
+      const $codeHeader = $highlight.querySelector('.code-header');
+      if ($codeHeader) {
         // auto open code block
         const maxShownLines = this.config.codeblock.maxShownLines;
-        const code = this._getCodeText($preEl);
+        const code = this._getCodeText($codePreEl);
         const forceOpen = $highlight.dataset.open ? JSON.parse($highlight.dataset.open) : void 0;
         if (forceOpen ?? (maxShownLines < 0 || code.split('\n').length <= maxShownLines)) {
           $highlight.classList.add('open');
@@ -487,14 +499,16 @@ class FixIt {
         if (this.config.codeblock.copyable) {
           $codeHeader.querySelector('.copy-btn').addEventListener('click', () => {
             this.util.forEach($highlight.querySelectorAll('.hl'), $hl => $hl.classList.replace('hl', 'hl-disable'));
-            this.util.copyText(this._getCodeText($preEl)).then(() => {
-              this.util.animateCSS($preEl, 'animate__flash');
+            this.util.copyText(this._getCodeText($codePreEl)).then(() => {
+              this.util.animateCSS($codePreEl, 'animate__flash');
               this.util.forEach($highlight.querySelectorAll('.hl-disable'), $hl => $hl.classList.replace('hl-disable', 'hl'));
             }, () => {
               console.error('Clipboard write failed!', 'Your browser does not support clipboard API!');
             });
           }, false);
         }
+      } else {
+        this.initCopyCode($highlight, $codePreEl);
       }
     });
   }
@@ -531,15 +545,6 @@ class FixIt {
       $table.parentElement.replaceChild($wrapper, $table);
       $wrapper.appendChild($table);
     });
-  }
-
-  /**
-   * init simple copy code when there is no code header
-   * https://github.com/github/clipboard-copy-element
-   * @param {ELement} singleCode single code block
-   */
-  initCopyCode(singleCode) {
-    // TODO
   }
 
   /**

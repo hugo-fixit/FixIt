@@ -248,6 +248,12 @@ pre:not([data-processed]) {
     }
   }
 
+  &.is-wrap {
+    code:last-of-type {
+      text-wrap: wrap;
+    }
+  }
+
   /* LineHighlight */
   .hl {
     display: block;

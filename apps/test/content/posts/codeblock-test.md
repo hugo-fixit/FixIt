@@ -51,6 +51,9 @@ function add(a, b) {
 
 ## lineNumbersInTable=false
 
+> [!WARNING]
+> Not recommended!
+
 ```js {lineNumbersInTable=false}
 function add(a, b) {
   return a + b
@@ -120,6 +123,12 @@ function isObjectLiteral(str) {
 ## Multiple modes
 
 ```js {mode="mac"}
+function add(a, b) {
+  return a + b
+}
+```
+
+```js {mode="simple"}
 function add(a, b) {
   return a + b
 }
