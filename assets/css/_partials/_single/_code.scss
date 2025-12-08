@@ -7,7 +7,7 @@ code {
 pre:not([data-processed]) {
   margin: 0;
   line-height: 1.45em;
-  padding: 0.5rem;
+  padding: 0.5rem 0.75rem;
   overflow: auto;
   font-size: $code-block-font-size;
   font-family: $code-font-family;
@@ -64,6 +64,10 @@ pre:not([data-processed]) {
 
   > .chroma {
     position: relative;
+
+    &:is(pre):has( .ln) {
+      padding: 0.5rem;
+    }
 
     .code-header {
       #{$rootPrefix}bg-code-header: #{darken($code-background-color, 3%)};
@@ -178,7 +182,7 @@ pre:not([data-processed]) {
       }
 
       pre {
-        padding: 0.25rem;
+        padding-right: 0.25rem;
         outline-offset: -1px;
         @include border-radius(0);
       }
@@ -195,10 +199,6 @@ pre:not([data-processed]) {
         text-align: right;
         position: sticky;
         left: 0;
-
-        pre {
-          @include user-select(none);
-        }
       }
       // code content
       .lntd:last-child {
@@ -269,15 +269,15 @@ pre:not([data-processed]) {
   }
   /* lineNumbersInTable=false */
   .ln {
-    padding-right: 0.5rem;
+    padding-inline: 0.25rem 0.75rem;
     display: inline-block;
-    min-width: 1.1rem;
     text-align: right;
   }
   /* LineNumbers */
   .lnt,
   .ln {
     color: $global-font-secondary-color;
+    @include user-select(none);
 
     [data-theme='dark'] & {
       color: $global-font-secondary-color-dark;
@@ -334,6 +334,31 @@ pre:not([data-processed]) {
     }
   }
   // ========== Highlight Color ========== //
+
+  &[data-style='mac'] {
+
+    pre.chroma:last-of-type {
+      padding-top: 30px;
+
+      &::after {
+        background: var(#{$rootPrefix}mac-red, #fc625d);
+        box-shadow: 20px 0 var(#{$rootPrefix}mac-yellow, #fdbc40), 40px 0 var(#{$rootPrefix}mac-green, #35cd4b);
+        left: 8px;
+        top: 8px;
+        position: absolute;
+        border-radius: 50%;
+        content: ' ';
+        height: 12px;
+        width: 12px;
+
+        [data-theme='dark'] & {
+          #{$rootPrefix}mac-red-dark: #ff5f56;
+          #{$rootPrefix}mac-yellow-dark: #febc2e;
+          #{$rootPrefix}mac-green-dark: #28c840;
+        }
+      }
+    }
+  }
 }
 
 // gist shortcode

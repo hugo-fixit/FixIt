@@ -20,12 +20,38 @@ Testing code block in FixIt theme.
 ## Code title
 
 ```js {title="test.js"}
-console.log('hello FixIt!')
+function add(a, b) {
+  return a + b
+}
 ```
 
-## No Header
+## No wrapper
+
+Set `wrapped=false` to disable code wrapper.
 
 ```js {wrapped=false}
+function add(a, b) {
+  return a + b
+}
+```
+
+```js {wrapped=false, linenos=false}
+function add(a, b) {
+  return a + b
+}
+```
+
+## linenos=false
+
+```js {linenos=false}
+function add(a, b) {
+  return a + b
+}
+```
+
+## lineNumbersInTable=false
+
+```js {lineNumbersInTable=false}
 function add(a, b) {
   return a + b
 }
@@ -90,6 +116,14 @@ function isObjectLiteral(str) {
   return false
 }
 {{< /highlight >}}
+
+## Multiple modes
+
+```js {mode="mac"}
+function add(a, b) {
+  return a + b
+}
+```
 
 ## Gist Embed
 

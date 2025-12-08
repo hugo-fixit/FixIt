@@ -434,20 +434,20 @@ class FixIt {
       return
     }
     // if markup.highlight.lineNumbersInTable set to false
-    this.util.forEach(document.querySelectorAll('.highlight > pre.chroma'), ($preChroma) => {
-      const $chroma = document.createElement('div');
-      $chroma.className = $preChroma.className;
-      const $table = document.createElement('table');
-      $chroma.appendChild($table);
-      const $tbody = document.createElement('tbody');
-      $table.appendChild($tbody);
-      const $tr = document.createElement('tr');
-      $tbody.appendChild($tr);
-      const $td = document.createElement('td');
-      $tr.appendChild($td);
-      $preChroma.parentElement.replaceChild($chroma, $preChroma);
-      $td.appendChild($preChroma);
-    });
+    // this.util.forEach(document.querySelectorAll('.highlight > pre.chroma'), ($preChroma) => {
+    //   const $chroma = document.createElement('div');
+    //   $chroma.className = $preChroma.className;
+    //   const $table = document.createElement('table');
+    //   $chroma.appendChild($table);
+    //   const $tbody = document.createElement('tbody');
+    //   $table.appendChild($tbody);
+    //   const $tr = document.createElement('tr');
+    //   $tbody.appendChild($tr);
+    //   const $td = document.createElement('td');
+    //   $tr.appendChild($td);
+    //   $preChroma.parentElement.replaceChild($chroma, $preChroma);
+    //   $td.appendChild($preChroma);
+    // });
     // render code header
     this.util.forEach(document.querySelectorAll('.highlight > .chroma:not([data-init])'), ($chroma) => {
       $chroma.dataset.init = 'true';

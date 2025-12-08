@@ -1,0 +1,25 @@
+{{- /* Normal Code Block Wrapper */ -}}
+{{- $codeblock := .Opts -}}
+{{- $wrapper := .Wrapper -}}
+{{- $editBtn := "" -}}
+{{- $copyBtn := "" -}}
+{{- $foldIcon := dict "Class" "arrow fa-solid fa-chevron-right fa-fw" | partial "plugin/icon.html" -}}
+{{- $titleEl := printf `<span class="code-title">%s</span>` $foldIcon -}}
+{{- $ellipsisBtn := printf `<span class="ellipses-btn" aria-label="Show more options" role="button">%s</span>` (dict "Class" "fa-solid fa-ellipsis-h fa-fw" | partial "plugin/icon.html") -}}
+
+{{- /* Code Header */ -}}
+{{- if $codeblock.title -}}
+  {{- $titleEl = printf `<span class="code-title">%s<span class="title-inner">%s</span></span>` $foldIcon $codeblock.title -}}
+{{- end -}}
+{{- if $codeblock.editable -}}
+  {{- $editIcon := dict "Class" "fa-solid fa-pen-to-square fa-fw" | partial "plugin/icon.html" -}}
+  {{- $editBtn = printf `<span class="edit-btn" aria-label="Edit the code block" role="button" title="%s">%s</span>` (T "assets.editUnLockTitle") $editIcon -}}
+{{- end -}}
+{{- if $codeblock.copyable -}}
+  {{- $copyIcon := dict "Class" "fa-regular fa-copy fa-fw" | partial "plugin/icon.html" -}}
+  {{- $copyBtn = printf `<span class="copy-btn" aria-label="Copy to clipboard" role="button" title="%s">%s</span>` (T "assets.copyToClipboard") $copyIcon -}}
+{{- end -}}
+{{- $codeHeader := printf `<div class="code-header language-%s">%s</span>%s%s%s</div>` (lower .Type) $titleEl $ellipsisBtn $editBtn $copyBtn -}}
+{{- $wrapper = replaceRE `(<table class="lntable">)` (printf "%s$1" $codeHeader) $wrapper -}}
+
+{{- return $wrapper -}}
