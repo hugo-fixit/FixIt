@@ -20,6 +20,12 @@
   {{- $copyBtn = printf `<span class="copy-btn" aria-label="Copy to clipboard" role="button" title="%s">%s</span>` (T "assets.copyToClipboard") $copyIcon -}}
 {{- end -}}
 {{- $codeHeader := printf `<div class="code-header language-%s">%s</span>%s%s%s</div>` (lower .Type) $titleEl $ellipsisBtn $editBtn $copyBtn -}}
-{{- $wrapper = replaceRE `(<table class="lntable">)` (printf "%s$1" $codeHeader) $wrapper -}}
+
+{{- if strings.Contains $wrapper `<table class="lntable">` -}}
+  {{- $wrapper = replaceRE `(<table class="lntable">)` (printf "%s$1" $codeHeader) $wrapper -}}
+{{- else -}}
+  {{- /* linenos=false or lineNumbersInTable=false */ -}}
+  {{- $wrapper = replaceRE `(<pre[^>]*class="[^"]*chroma[^"]*">[\s\S]*?<\/pre>)` (printf `%s<div class="table-wrapper">$1</div>` $codeHeader) $wrapper -}}
+{{- end -}}
 
 {{- return $wrapper -}}

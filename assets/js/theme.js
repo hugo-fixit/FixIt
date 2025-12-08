@@ -433,44 +433,29 @@ class FixIt {
       this.initCopyCode();
       return
     }
-    // if markup.highlight.lineNumbersInTable set to false
-    // this.util.forEach(document.querySelectorAll('.highlight > pre.chroma'), ($preChroma) => {
-    //   const $chroma = document.createElement('div');
-    //   $chroma.className = $preChroma.className;
-    //   const $table = document.createElement('table');
-    //   $chroma.appendChild($table);
-    //   const $tbody = document.createElement('tbody');
-    //   $table.appendChild($tbody);
-    //   const $tr = document.createElement('tr');
-    //   $tbody.appendChild($tr);
-    //   const $td = document.createElement('td');
-    //   $tr.appendChild($td);
-    //   $preChroma.parentElement.replaceChild($chroma, $preChroma);
-    //   $td.appendChild($preChroma);
-    // });
     // render code header
-    this.util.forEach(document.querySelectorAll('.highlight > .chroma:not([data-init])'), ($chroma) => {
-      $chroma.dataset.init = 'true';
-      const $codeHeader = $chroma.querySelector('.code-header');
-      const $preElements = $chroma.querySelectorAll('pre.chroma');
+    this.util.forEach(document.querySelectorAll('.highlight:not([data-init])'), ($highlight) => {
+      $highlight.dataset.init = 'true';
+      const $codeHeader = $highlight.querySelector('.code-header');
+      const $preElements = $highlight.querySelectorAll('pre.chroma');
       if ($codeHeader && $preElements.length) {
         const $preEl = $preElements[$preElements.length - 1];
         // auto open code block
         const maxShownLines = this.config.codeblock.maxShownLines;
         const code = this._getCodeText($preEl);
-        const forceOpen = $chroma.parentElement.dataset.open ? JSON.parse($chroma.parentElement.dataset.open) : void 0;
+        const forceOpen = $highlight.dataset.open ? JSON.parse($highlight.dataset.open) : void 0;
         if (forceOpen ?? (maxShownLines < 0 || code.split('\n').length <= maxShownLines)) {
-          $chroma.classList.add('open');
+          $highlight.classList.add('open');
         }
         // code title
         const $title = $codeHeader.querySelector('.code-title');
         $title.addEventListener('click', () => {
-          $chroma.classList.toggle('open');
+          $highlight.classList.toggle('open');
         }, false);
         // ellipses icon
         const $ellipsesBtn = $codeHeader.querySelector('.ellipses-btn');
         $ellipsesBtn.addEventListener('click', () => {
-          $chroma.classList.add('open');
+          $highlight.classList.add('open');
         }, false);
         // edit button
         if (this.config.codeblock.editable) {
@@ -485,7 +470,7 @@ class FixIt {
               $iconEdit.classList.remove('fa-pen-to-square');
               $iconEdit.title = this.config.codeblock.editLockTitle;
               $preChroma.setAttribute('contenteditable', true);
-              this.util.forEach($chroma.querySelectorAll('.hl'), ($hl) => {
+              this.util.forEach($highlight.querySelectorAll('.hl'), ($hl) => {
                 $hl.classList.remove('hl');
               });
               $preChroma.focus();
@@ -501,10 +486,10 @@ class FixIt {
         // copy button
         if (this.config.codeblock.copyable) {
           $codeHeader.querySelector('.copy-btn').addEventListener('click', () => {
-            this.util.forEach($chroma.querySelectorAll('.hl'), $hl => $hl.classList.replace('hl', 'hl-disable'));
+            this.util.forEach($highlight.querySelectorAll('.hl'), $hl => $hl.classList.replace('hl', 'hl-disable'));
             this.util.copyText(this._getCodeText($preEl)).then(() => {
               this.util.animateCSS($preEl, 'animate__flash');
-              this.util.forEach($chroma.querySelectorAll('.hl-disable'), $hl => $hl.classList.replace('hl-disable', 'hl'));
+              this.util.forEach($highlight.querySelectorAll('.hl-disable'), $hl => $hl.classList.replace('hl-disable', 'hl'));
             }, () => {
               console.error('Clipboard write failed!', 'Your browser does not support clipboard API!');
             });

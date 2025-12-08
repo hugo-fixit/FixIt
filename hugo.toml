@@ -1091,7 +1091,7 @@ wrapped = true
 mode = "normal"
 # whether to show the copy button
 copyable = true
-# [Experimental] whether to show the edit button (only works when style is "normal")
+# [Experimental] whether to show the edit button (only works when mode is "normal")
 editable = false
 # the maximum number of lines of displayed code block
 maxShownLines = 10
