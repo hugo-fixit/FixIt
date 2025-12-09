@@ -15,10 +15,14 @@
   {{- end -}}
 
   {{- /* add data attributes */ -}}
+  {{- if $codeblock.editable -}}
+    {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-editable="%v"` $class $codeblock.editable) -}}
+  {{- end -}}
+  {{- if $codeblock.copyable -}}
+    {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-copyable="%v"` $class $codeblock.copyable) -}}
+  {{- end -}}
   {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-mode="%s"` $class $mode) -}}
-  {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-copyable="%v"` $class $codeblock.copyable) -}}
   {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-max="%v"` $class $codeblock.maxshownlines) -}}
-  {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-editable="%v"` $class $codeblock.editable) -}}
   {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-lines="%d"` $class (len $codeArr)) -}}
   {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="code-block %s"` $class) -}}
 

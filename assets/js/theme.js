@@ -428,6 +428,10 @@ class FixIt {
    * @param {HTMLElement} [button] optional copy button element
    */
   initCopyCode(codeBlock, codePreEl, button) {
+    const copyable = codeBlock.dataset.copyable === 'true';
+    if (!copyable) {
+      return;
+    }
     let copyBtn = button;
     if (!copyBtn) {
       copyBtn = document.createElement('div');
@@ -517,11 +521,7 @@ class FixIt {
           }, false);
         }
         // copy button
-        const copyable = $codeBlock.dataset.copyable === 'true';
-        const $copyBtn = $codeHeader.querySelector('.copy-btn');
-        if (copyable && $copyBtn) {
-          this.initCopyCode($codeBlock, $codePreEl, $copyBtn);
-        }
+        this.initCopyCode($codeBlock, $codePreEl, $codeHeader.querySelector('.copy-btn'));
       } else {
         this.initCopyCode($codeBlock, $codePreEl);
       }
@@ -663,6 +663,7 @@ class FixIt {
     this._tocDialogOnScroll && this.scrollEventSet.delete(this._tocDialogOnScroll);
   }
 
+  // TODO refactor use allow-discrete display property
   initTocListener() {
     const $toc = document.getElementById('toc-auto');
     const $tocContentAuto = document.getElementById('toc-content-auto');
