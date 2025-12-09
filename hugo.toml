@@ -1087,7 +1087,7 @@ optimise = false
 [params.codeblock]
 # whether to enable the code block wrapper
 wrapped = true
-# available modes: ["normal", "mac", "simple"]
+# available modes: ["normal", "mac", "simple", ...]
 mode = "normal"
 # whether to show the copy button
 copyable = true

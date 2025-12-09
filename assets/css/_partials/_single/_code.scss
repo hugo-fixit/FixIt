@@ -335,7 +335,7 @@ pre:not([data-processed]) {
   }
   // ========== Highlight Color ========== //
 
-  &[data-style='mac'] {
+  &[data-mode='mac'] {
 
     pre.chroma:last-of-type {
       padding-top: 30px;

@@ -3,11 +3,18 @@
 {{- $wrapper := $result.Wrapped -}}
 
 {{- if $codeblock.wrapped -}}
-  {{- if eq $codeblock.mode "mac" -}}
-    {{- $wrapper = partial "code-wrapper/mac.html" (dict "Wrapper" $wrapper "Opts" $codeblock) -}}
-  {{- else if ne $codeblock.mode "simple" -}}
+  {{- $mode := $codeblock.mode | default "normal" -}}
+  {{- $codeArr := slice -}}
+  {{- with .Inner -}}
+    {{- $codeArr = split . "\n" -}}
+  {{- end -}}
+
+  {{- if eq $mode "normal" -}}
     {{- $wrapper = partial "code-wrapper/normal.html" (dict "Wrapper" $wrapper "Opts" $codeblock "Type" .Type) -}}
   {{- end -}}
+
+  {{- $wrapper = replace $wrapper `class="highlight"` (printf `class="highlight" data-mode="%s"` $mode) -}}
+  {{- $wrapper = replace $wrapper `class="highlight"` (printf `class="highlight" data-len="%d"` (len $codeArr)) -}}
   {{- $wrapper = replace $wrapper `class="highlight"` `class="code-block highlight"` -}}
 {{- end -}}
 
