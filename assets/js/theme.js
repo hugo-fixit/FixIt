@@ -421,27 +421,28 @@ class FixIt {
     }
   }
 
-  _getCodeText($pre) {
-    return $pre.innerText.trim();
-  }
-
   /**
    * init copy code button for simple/mac mode code block
    * @param {HTMLElement} codeBlock code block wrapper element
    * @param {HTMLElement} codePreEl single code block pre element
+   * @param {HTMLElement} [button] optional copy button element
    */
-  initCopyCode(codeBlock, codePreEl) {
-    const copyBtn = document.createElement('div');
-    copyBtn.className = 'code-copy-btn';
-    copyBtn.ariaLabel = 'Copy to clipboard';
-    copyBtn.title = this.config.codeblock?.copyToClipboard || copyBtn.ariaLabel;
-    copyBtn.role = 'button';
-    copyBtn.insertAdjacentHTML('afterbegin', '<i class="fa-regular fa-clone" aria-hidden="true"></i>');
-    copyBtn.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-check text-success" aria-hidden="true"></i>');
+  initCopyCode(codeBlock, codePreEl, button) {
+    let copyBtn = button;
+    if (!copyBtn) {
+      copyBtn = document.createElement('div');
+      copyBtn.className = 'code-copy-btn';
+      copyBtn.ariaLabel = 'Copy to clipboard';
+      copyBtn.title = this.config.codeblock?.copyToClipboard || copyBtn.ariaLabel;
+      copyBtn.role = 'button';
+      copyBtn.insertAdjacentHTML('afterbegin', '<i class="fa-regular fa-clone" aria-hidden="true"></i>');
+      copyBtn.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-check text-success" aria-hidden="true"></i>');
+      codeBlock.appendChild(copyBtn);
+    }
 
     copyBtn.addEventListener('click', () => {
       this.util.forEach(codeBlock.querySelectorAll('.hl'), $hl => $hl.classList.replace('hl', 'hl-disable'));
-      this.util.copyText(this._getCodeText(codePreEl)).then(() => {
+      this.util.copyText(codePreEl.innerText.trim()).then(() => {
         this.util.animateCSS(codePreEl, 'animate__flash');
         this.util.forEach(codeBlock.querySelectorAll('.hl-disable'), $hl => $hl.classList.replace('hl-disable', 'hl'));
         copyBtn.toggleAttribute('data-copied', true);
@@ -452,8 +453,6 @@ class FixIt {
         console.error('Clipboard write failed!', 'Your browser does not support clipboard API!');
       });
     }, false);
-
-    codeBlock.appendChild(copyBtn);
   }
 
   /**
@@ -521,15 +520,7 @@ class FixIt {
         const copyable = $codeBlock.dataset.copyable === 'true';
         const $copyBtn = $codeHeader.querySelector('.copy-btn');
         if (copyable && $copyBtn) {
-          $copyBtn.addEventListener('click', () => {
-            this.util.forEach($codeBlock.querySelectorAll('.hl'), $hl => $hl.classList.replace('hl', 'hl-disable'));
-            this.util.copyText(this._getCodeText($codePreEl)).then(() => {
-              this.util.animateCSS($codePreEl, 'animate__flash');
-              this.util.forEach($codeBlock.querySelectorAll('.hl-disable'), $hl => $hl.classList.replace('hl-disable', 'hl'));
-            }, () => {
-              console.error('Clipboard write failed!', 'Your browser does not support clipboard API!');
-            });
-          }, false);
+          this.initCopyCode($codeBlock, $codePreEl, $copyBtn);
         }
       } else {
         this.initCopyCode($codeBlock, $codePreEl);
