@@ -1091,10 +1091,10 @@ wrapped = true
 mode = "normal"
 # whether to show the copy button
 copyable = true
-# [Experimental] whether to show the edit button (only works when mode is "normal")
-editable = false
 # the maximum number of lines of displayed code block
 maxShownLines = 10
+# [Experimental] whether to show the edit button (only works when mode is "normal")
+editable = false
 
 # FixIt 0.4.0 | NEW JSON Viewer config
 # See https://github.com/Lruihao/json-viewer-element

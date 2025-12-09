@@ -30,7 +30,12 @@
   #{$rootPrefix}scrollbar-width: thin;
   #{$rootPrefix}scrollbar-width-legacy: 12px;
 
+  // Code related variables
   #{$rootPrefix}code-inline-background-color: rgba(175, 184, 193, 0.2);
+  #{$rootPrefix}code-block-background-color: #{$code-background-color};
+  #{$rootPrefix}code-header-color: #{$code-header-color};
+  #{$rootPrefix}code-header-bg: #{darken($code-background-color, 3%)};
+  #{$rootPrefix}gist-meta-background-color: #{darken($code-background-color, 5%)};
 }
 
 // Dark theme
@@ -46,4 +51,8 @@
   #{$rootPrefix}hr-before-color: #{darken($global-link-hover-color-dark, 4%)};
 
   #{$rootPrefix}code-inline-background-color: rgba(99, 110, 123, 0.4);
+  #{$rootPrefix}code-block-background-color: #{$code-background-color-dark};
+  #{$rootPrefix}code-header-color: #{$code-header-color-dark};
+  #{$rootPrefix}code-header-bg: #{darken($code-background-color-dark, 3%)};
+  #{$rootPrefix}gist-meta-background-color: #{darken($code-background-color-dark, 5%)};
 }

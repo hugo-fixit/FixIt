@@ -11,14 +11,9 @@ pre:not([data-processed]) {
   overflow: auto;
   font-size: $code-block-font-size;
   font-family: $code-font-family;
+  background-color: var(#{$rootPrefix}code-block-background-color);
   @include border-radius($global-border-radius);
   @include tab-size(4);
-
-  background-color: $code-background-color;
-
-  [data-theme='dark'] & {
-    background-color: $code-background-color-dark;
-  }
 
   code {
     padding: 0;
@@ -81,11 +76,7 @@ pre:not([data-processed]) {
       width: auto;
       overflow: auto;
       display: block;
-      background-color: $code-background-color;
-
-      [data-theme='dark'] & {
-        background-color: $code-background-color-dark;
-      }
+      background-color: var(#{$rootPrefix}code-block-background-color);
 
       td {
         vertical-align: top;
@@ -128,7 +119,6 @@ pre:not([data-processed]) {
   }
 
   .code-header {
-    #{$rootPrefix}bg-code-header: #{darken($code-background-color, 3%)};
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -137,8 +127,8 @@ pre:not([data-processed]) {
     font-family: $global-font-family;
     font-weight: bold;
     line-height: 1.4em;
-    color: $code-info-color;
-    background-color: var(#{$rootPrefix}bg-code-header);
+    color: var(#{$rootPrefix}code-header-color);
+    background-color: var(#{$rootPrefix}code-header-bg);
     @include border-radius($global-border-radius);
     @include transition(border-radius 0.2s ease 0.3s);
 
@@ -151,11 +141,6 @@ pre:not([data-processed]) {
       > pre.chroma {
         @include border-radius(0 0 $global-border-radius $global-border-radius);
       }
-    }
-    
-    [data-theme='dark'] & {
-      color: $code-info-color-dark;
-      #{$rootPrefix}bg-code-header: #{darken($code-background-color-dark, 3%)};
     }
 
     &:hover {
@@ -181,7 +166,7 @@ pre:not([data-processed]) {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        background-color: var(#{$rootPrefix}bg-code-header);
+        background-color: var(#{$rootPrefix}code-header-bg);
         padding-inline: 1em;
         max-width: 80%;
         white-space: nowrap;
@@ -222,12 +207,12 @@ pre:not([data-processed]) {
   }
   &.open {
     .code-header {
-      #{$rootPrefix}bg-code-header: #{darken($code-background-color, 6%)};
+      #{$rootPrefix}code-header-bg: #{darken($code-background-color, 6%)};
       @include border-radius($global-border-radius $global-border-radius 0 0);
       @include transition(border-radius 0s);
 
       [data-theme='dark'] & {
-        #{$rootPrefix}bg-code-header: #{darken($code-background-color-dark, 6%)};
+        #{$rootPrefix}code-header-bg: #{darken($code-background-color-dark, 6%)};
       }
 
       + .table-wrapper {
@@ -392,23 +377,23 @@ pre:not([data-processed]) {
     padding: 0.4rem 0.8rem;
     @include link(false, false);
     @include border-radius(0 0 $global-border-radius $global-border-radius);
-    background-color: darken($code-background-color, 5%);
-
-    [data-theme='dark'] & {
-      background-color: darken($code-background-color-dark, 5%);
-    }
+    background-color: var(#{$rootPrefix}gist-meta-background-color);
   }
 
   .table-wrapper {
-    padding-block: 0.25rem;
+    padding-block: 0.5rem;
+    background-color: var(#{$rootPrefix}code-block-background-color);
     @include border-radius($global-border-radius $global-border-radius 0 0);
-    background-color: $code-background-color;
 
-    [data-theme='dark'] & {
-      background-color: $code-background-color-dark;
-    }
     .highlight {
       background-color: transparent;
+
+      td.blob-num {
+        position: sticky;
+        left: 0;
+        background-color: var(#{$rootPrefix}code-block-background-color);
+        @include z-index(0, 1);
+      }
     }
   }
 
