@@ -426,24 +426,24 @@ class FixIt {
   }
 
   /**
-   * init simple copy code when there is no code header
-   * @param {HTMLElement} wrapper code block wrapper element .highlight
+   * init copy code button for simple/mac mode code block
+   * @param {HTMLElement} codeBlock code block wrapper element
    * @param {HTMLElement} codePreEl single code block pre element
    */
-  initCopyCode(wrapper, codePreEl) {
+  initCopyCode(codeBlock, codePreEl) {
     const copyBtn = document.createElement('div');
     copyBtn.className = 'code-copy-btn';
     copyBtn.ariaLabel = 'Copy to clipboard';
-    copyBtn.title = 'Copy to clipboard';
+    copyBtn.title = this.config.codeblock?.copyToClipboard || copyBtn.ariaLabel;
     copyBtn.role = 'button';
     copyBtn.insertAdjacentHTML('afterbegin', '<i class="fa-regular fa-clone" aria-hidden="true"></i>');
     copyBtn.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-check text-success" aria-hidden="true"></i>');
 
     copyBtn.addEventListener('click', () => {
-      this.util.forEach(wrapper.querySelectorAll('.hl'), $hl => $hl.classList.replace('hl', 'hl-disable'));
+      this.util.forEach(codeBlock.querySelectorAll('.hl'), $hl => $hl.classList.replace('hl', 'hl-disable'));
       this.util.copyText(this._getCodeText(codePreEl)).then(() => {
         this.util.animateCSS(codePreEl, 'animate__flash');
-        this.util.forEach(wrapper.querySelectorAll('.hl-disable'), $hl => $hl.classList.replace('hl-disable', 'hl'));
+        this.util.forEach(codeBlock.querySelectorAll('.hl-disable'), $hl => $hl.classList.replace('hl-disable', 'hl'));
         copyBtn.toggleAttribute('data-copied', true);
         setTimeout(() => {
           copyBtn.toggleAttribute('data-copied', false);
@@ -453,7 +453,7 @@ class FixIt {
       });
     }, false);
 
-    wrapper.appendChild(copyBtn);
+    codeBlock.appendChild(copyBtn);
   }
 
   /**
@@ -463,37 +463,37 @@ class FixIt {
     if (!this.config.codeblock) {
       return
     }
-    // render code header
-    this.util.forEach(document.querySelectorAll('.code-block:not([data-init])'), ($highlight) => {
-      $highlight.dataset.init = 'true';
-      const $preElements = $highlight.querySelectorAll('pre.chroma');
+    this.util.forEach(document.querySelectorAll('.code-block:not([data-init])'), ($codeBlock) => {
+      $codeBlock.dataset.init = 'true';
+      const $preElements = $codeBlock.querySelectorAll('pre.chroma');
       if (!$preElements.length) {
         return;
       }
-      
+
       const $codePreEl = $preElements[$preElements.length - 1];
-      const $codeHeader = $highlight.querySelector('.code-header');
+      const $codeHeader = $codeBlock.querySelector('.code-header');
+      // init code header for normal mode
       if ($codeHeader) {
         // auto open code block
-        const maxShownLines = this.config.codeblock.maxShownLines;
-        const code = this._getCodeText($codePreEl);
-        const forceOpen = $highlight.dataset.open ? JSON.parse($highlight.dataset.open) : void 0;
-        if (forceOpen ?? (maxShownLines < 0 || code.split('\n').length <= maxShownLines)) {
-          $highlight.classList.add('open');
+        const maxShownLines = Number($codeBlock.dataset.max) ?? 10;
+        const codeLines = Number($codeBlock.dataset.lines) ?? 0;
+        if (maxShownLines <= 0 || codeLines <= maxShownLines) {
+          $codeBlock.classList.add('open');
         }
         // code title
         const $title = $codeHeader.querySelector('.code-title');
         $title.addEventListener('click', () => {
-          $highlight.classList.toggle('open');
+          $codeBlock.classList.toggle('open');
         }, false);
         // ellipses icon
         const $ellipsesBtn = $codeHeader.querySelector('.ellipses-btn');
         $ellipsesBtn.addEventListener('click', () => {
-          $highlight.classList.add('open');
+          $codeBlock.classList.add('open');
         }, false);
         // edit button
-        if (this.config.codeblock.editable) {
-          const $editBtn = $codeHeader.querySelector('.edit-btn');
+        const editable = $codeBlock.dataset.editable === 'true';
+        const $editBtn = $codeHeader.querySelector('.edit-btn');
+        if (editable && $editBtn) {
           $editBtn.addEventListener('click', () => {
             const $iconEdit = $editBtn.querySelector('.fa-pen-to-square');
             const $iconLock = $editBtn.querySelector('.fa-lock');
@@ -504,7 +504,7 @@ class FixIt {
               $iconEdit.classList.remove('fa-pen-to-square');
               $iconEdit.title = this.config.codeblock.editLockTitle;
               $preChroma.setAttribute('contenteditable', true);
-              this.util.forEach($highlight.querySelectorAll('.hl'), ($hl) => {
+              this.util.forEach($codeBlock.querySelectorAll('.hl'), ($hl) => {
                 $hl.classList.remove('hl');
               });
               $preChroma.focus();
@@ -518,19 +518,21 @@ class FixIt {
           }, false);
         }
         // copy button
-        if (this.config.codeblock.copyable) {
-          $codeHeader.querySelector('.copy-btn').addEventListener('click', () => {
-            this.util.forEach($highlight.querySelectorAll('.hl'), $hl => $hl.classList.replace('hl', 'hl-disable'));
+        const copyable = $codeBlock.dataset.copyable === 'true';
+        const $copyBtn = $codeHeader.querySelector('.copy-btn');
+        if (copyable && $copyBtn) {
+          $copyBtn.addEventListener('click', () => {
+            this.util.forEach($codeBlock.querySelectorAll('.hl'), $hl => $hl.classList.replace('hl', 'hl-disable'));
             this.util.copyText(this._getCodeText($codePreEl)).then(() => {
               this.util.animateCSS($codePreEl, 'animate__flash');
-              this.util.forEach($highlight.querySelectorAll('.hl-disable'), $hl => $hl.classList.replace('hl-disable', 'hl'));
+              this.util.forEach($codeBlock.querySelectorAll('.hl-disable'), $hl => $hl.classList.replace('hl-disable', 'hl'));
             }, () => {
               console.error('Clipboard write failed!', 'Your browser does not support clipboard API!');
             });
           }, false);
         }
       } else {
-        this.initCopyCode($highlight, $codePreEl);
+        this.initCopyCode($codeBlock, $codePreEl);
       }
     });
   }

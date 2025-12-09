@@ -48,6 +48,14 @@ function add(a, b) {
 }
 ```
 
+## Opened by default
+
+````md
+```js {.open}
+// This code block is opened by default regardless of its length.
+```
+````
+
 ## No wrapper
 
 Set `wrapped=false` to disable code wrapper.

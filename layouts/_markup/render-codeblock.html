@@ -4,18 +4,35 @@
 
 {{- if $codeblock.wrapped -}}
   {{- $mode := $codeblock.mode | default "normal" -}}
+  {{- $class := "highlight" -}}
   {{- $codeArr := slice -}}
+
+  {{- with $codeblock.class -}}
+    {{- $class = add $class " " . -}}
+  {{- end -}}
   {{- with .Inner -}}
     {{- $codeArr = split . "\n" -}}
   {{- end -}}
 
+  {{- /* add data attributes */ -}}
+  {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-mode="%s"` $class $mode) -}}
+  {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-copyable="%v"` $class $codeblock.copyable) -}}
+  {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-max="%v"` $class $codeblock.maxshownlines) -}}
+  {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-editable="%v"` $class $codeblock.editable) -}}
+  {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-lines="%d"` $class (len $codeArr)) -}}
+  {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="code-block %s"` $class) -}}
+
+  {{- /* remove redundant attributes */ -}}
+  {{- $wrapper = replaceRE ` wrapped="[^"]*"` "" $wrapper -}}
+  {{- $wrapper = replaceRE ` mode="[^"]*"` "" $wrapper -}}
+  {{- $wrapper = replaceRE ` copyable="[^"]*"` "" $wrapper -}}
+  {{- $wrapper = replaceRE ` maxshownlines="[^"]*"` "" $wrapper -}}
+  {{- $wrapper = replaceRE ` editable="[^"]*"` "" $wrapper -}}
+
+  {{- /* Code Block Wrapper Modes */ -}}
   {{- if eq $mode "normal" -}}
     {{- $wrapper = partial "code-wrapper/normal.html" (dict "Wrapper" $wrapper "Opts" $codeblock "Type" .Type) -}}
   {{- end -}}
-
-  {{- $wrapper = replace $wrapper `class="highlight"` (printf `class="highlight" data-mode="%s"` $mode) -}}
-  {{- $wrapper = replace $wrapper `class="highlight"` (printf `class="highlight" data-len="%d"` (len $codeArr)) -}}
-  {{- $wrapper = replace $wrapper `class="highlight"` `class="code-block highlight"` -}}
 {{- end -}}
 
 {{- $wrapper | safeHTML -}}

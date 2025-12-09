@@ -93,15 +93,12 @@ FixIt theme assets partial
 
 {{- /* Code block wrapper */ -}}
 {{- $codeblock := .Page.Param "codeblock" -}}
-{{- if $codeblock.wrapped -}}
-  {{- $config = $codeblock.maxShownLines | dict "maxShownLines" | dict "codeblock" | merge $config -}}
-  {{- if ne $codeblock.editable false -}}
-    {{- $config = dict "editable" true "editLockTitle" (T "assets.editLockTitle") "editUnLockTitle" (T "assets.editUnLockTitle") | dict "codeblock" | merge $config -}}
-  {{- end -}}
-  {{- if ne $codeblock.copyable false -}}
-    {{- $config = dict "copyable" true | dict "codeblock" | merge $config -}}
-  {{- end -}}
-{{- end -}}
+{{- $config = dict
+  "copyToClipboard" (T "assets.copyToClipboard")
+  "editLockTitle" (T "assets.editLockTitle")
+  "editUnLockTitle" (T "assets.editUnLockTitle")
+  | dict "codeblock" | merge $config
+-}}
 
 {{- /* Sharer.js */ -}}
 {{- if .Store.Get "hasSharer" -}}
