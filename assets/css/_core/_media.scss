@@ -22,6 +22,19 @@
   }
 }
 
+@media only screen and (min-width: 1201px) {
+  :is(.code-block, .diagram-container) {
+    :is(.diagram-copy-btn, .code-copy-btn) {
+      display: none;
+    }
+    &:hover {
+      :is(.diagram-copy-btn, .code-copy-btn) {
+        display: block;
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 1200px) {
   %page-style {
     width: ROUND(52%, 2px);

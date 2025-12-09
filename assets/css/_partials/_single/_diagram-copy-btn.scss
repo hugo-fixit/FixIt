@@ -54,16 +54,3 @@
     }
   }
 }
-
-@media only screen and (min-width: 1201px) {
-  .diagram-container {
-    .diagram-copy-btn {
-      display: none;
-    }
-    &:hover {
-      .diagram-copy-btn {
-        display: block;
-      }
-    }
-  }
-}

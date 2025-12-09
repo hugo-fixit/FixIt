@@ -17,6 +17,29 @@ Testing code block in FixIt theme.
 🎉🥚 in development mode!
 ```
 
+## Multiple modes
+
+```js
+// Normal mode code block
+function add(a, b) {
+  return a + b
+}
+```
+
+```js {mode="mac"}
+// Mac mode code block
+function add(a, b) {
+  return a + b
+}
+```
+
+```js {mode="simple"}
+// Simple mode code block
+function add(a, b) {
+  return a + b
+}
+```
+
 ## Code title
 
 ```js {title="test.js"}
@@ -119,22 +142,6 @@ function isObjectLiteral(str) {
   return false
 }
 {{< /highlight >}}
-
-## Multiple modes
-
-```js {mode="mac"}
-// Mac mode code block
-function add(a, b) {
-  return a + b
-}
-```
-
-```js {mode="simple"}
-// Simple mode code block
-function add(a, b) {
-  return a + b
-}
-```
 
 ## Gist Embed
 
