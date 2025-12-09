@@ -18,7 +18,7 @@
   border-color: var(#{$rootPrefix}dcb-border-color, #d1d9e0);
   background-color: var(#{$rootPrefix}dcb-background-color, #f6f8fa);
   box-shadow: var(#{$rootPrefix}dcb-box-shadow, 0px 1px 0px 0px #1f23280a);
-  transition: 80ms cubic-bezier(0.33, 1, 0.68, 1);
+  transition-duration: 0.1s;
   transition-property: color, background-color, box-shadow, border-color;
   @extend .print-d-none;
 
@@ -32,7 +32,6 @@
   &:hover {
     #{$rootPrefix}dcb-border-color: #d1d9e0;
     #{$rootPrefix}dcb-background-color: #eff2f5;
-    transition-duration: .1s;
 
     [data-theme='dark'] & {
       #{$rootPrefix}dcb-border-color: #3d444d;

@@ -23,13 +23,31 @@
 }
 
 @media only screen and (min-width: 1201px) {
-  :is(.code-block, .diagram-container) {
-    :is(.diagram-copy-btn, .code-copy-btn) {
-      display: none;
-    }
-    &:hover {
-      :is(.diagram-copy-btn, .code-copy-btn) {
-        display: block;
+  .single .content {
+    :is(.code-block, .diagram-container) {
+      :is(.code-copy-btn, .diagram-copy-btn) {
+        display: none;
+        opacity: 0;
+        transform: scale(0.9);
+        transition:
+          display 0.25s allow-discrete,
+          opacity 0.25s,
+          transform 0.25s,
+          color 0.1s,
+          background-color 0.1s,
+          box-shadow 0.1s,
+          border-color 0.1s;
+      }
+      &:hover {
+        :is(.code-copy-btn, .diagram-copy-btn) {
+          display: block;
+          opacity: 1;
+          transform: scale(1);
+          @starting-style {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+        }
       }
     }
   }
