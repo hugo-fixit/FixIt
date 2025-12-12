@@ -48,7 +48,7 @@ function add(a, b) {
 }
 ```
 
-## Default collapsed or expanded
+## Collapsed/Expanded classic
 
 ````md
 ```js {.is-collapsed}
@@ -117,7 +117,7 @@ function add(a, b) {
 
 Highlighting in code fences is enabled by default.
 
-```js {linenos=table,linenostart=287,hl_lines=[2,"8-10"]}
+```js {linenostart=287,hl_lines=[2,"8-10"]}
 /**
  * check if a string is a JS object string
  * @example isObjectLiteral("{a:1,b:2}") // true
@@ -138,7 +138,7 @@ function isObjectLiteral(str) {
 
 Highlighting in shortcode highlight.
 
-{{< highlight javascript "linenos=table,hl_lines=2 8-10,linenostart=287" >}}
+{{< highlight javascript "hl_lines=2 8-10,linenostart=287" >}}
 /**
  * check if a string is a JS object string
  * @example isObjectLiteral("{a:1,b:2}") // true

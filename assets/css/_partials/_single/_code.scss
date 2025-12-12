@@ -210,7 +210,7 @@ pre:not([data-processed]) {
     .code-header {
       #{$rootPrefix}code-header-bg: #{darken($code-background-color, 3%)};
       @include border-radius($global-border-radius);
-      @include transition(border-radius 0.2s ease 0.3s);
+      @include transition(border-radius 0.2s ease 0.2s);
 
       [data-theme='dark'] & {
         #{$rootPrefix}code-header-bg: #{darken($code-background-color-dark, 3%)};
@@ -259,9 +259,11 @@ pre:not([data-processed]) {
     }
 
     .fa-angles-down {
+      opacity: 0;
       animation-name: fadeOutDown;
       animation-duration: 1.5s;
       animation-iteration-count: infinite;
+      animation-delay: 0.3s;
       @include transition(transform 0.2s ease);
     }
   }
