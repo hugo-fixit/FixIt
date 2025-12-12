@@ -113,7 +113,9 @@
     width: ROUND(80%, 2px) !important;
   }
   
-  aside {
+  aside,
+  .breadcrumb-container::before,
+  .breadcrumb-container::after {
     display: none !important;
   }
 
