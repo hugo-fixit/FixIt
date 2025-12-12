@@ -212,12 +212,12 @@ pre:not([data-processed]) {
 
   &.is-collapsed {
     .code-header {
-      #{$rootPrefix}code-header-bg: #{darken($code-background-color, 3%)};
+      #{$rootPrefix}code-header-bg: #{darken($code-background-color, 6%)};
       @include border-radius($global-border-radius);
       @include transition(border-radius 0.2s ease 0.2s);
 
       [data-theme='dark'] & {
-        #{$rootPrefix}code-header-bg: #{darken($code-background-color-dark, 3%)};
+        #{$rootPrefix}code-header-bg: #{darken($code-background-color-dark, 6%)};
       }
 
       + .table-wrapper {
