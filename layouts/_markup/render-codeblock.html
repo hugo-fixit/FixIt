@@ -33,8 +33,8 @@
   {{- $wrapper = replaceRE ` maxshownlines="[^"]*"` "" $wrapper -}}
   {{- $wrapper = replaceRE ` editable="[^"]*"` "" $wrapper -}}
 
-  {{- if eq $mode "normal" -}}
-    {{- $wrapper = partial "code-wrapper/code-header.html" (dict "Wrapper" $wrapper "Opts" $codeblock "Type" .Type) -}}
+  {{- if eq $mode "classic" -}}
+    {{- $wrapper = partial "function/code-header.html" (dict "Wrapper" $wrapper "Opts" $codeblock "Type" .Type) -}}
   {{- end -}}
 {{- end -}}
 

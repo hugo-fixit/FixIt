@@ -1087,13 +1087,13 @@ optimise = false
 [params.codeblock]
 # whether to enable the code block wrapper
 wrapped = true
-# available modes: ["normal", "mac", "simple", ...]
-mode = "normal"
+# available modes: ["classic", "mac", "simple", ...]
+mode = "classic"
 # whether to show the copy button
 copyable = true
 # the maximum number of lines of displayed code block
 maxShownLines = 10
-# [Experimental] whether to show the edit button (only works when mode is "normal")
+# [Experimental] whether to show the edit button (only works when mode is "classic")
 editable = false
 
 # FixIt 0.4.0 | NEW JSON Viewer config

@@ -20,7 +20,7 @@ Testing code block in FixIt theme.
 ## Multiple modes
 
 ```js
-// Normal mode code block
+// Classic mode code block
 function add(a, b) {
   return a + b
 }
@@ -48,11 +48,17 @@ function add(a, b) {
 }
 ```
 
-## Opened by default
+## Default collapsed or expanded
 
 ````md
-```js {.open}
-// This code block is opened by default regardless of its length.
+```js {.is-collapsed}
+// This code block is collapsed by default.
+```
+````
+
+````md
+```js {.is-expanded}
+// This code block is expanded regardless of its length.
 ```
 ````
 

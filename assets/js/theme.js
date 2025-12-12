@@ -459,6 +459,30 @@ class FixIt {
     }, false);
   }
 
+  initCodeExpandBtn(codeBlock) {
+    const maxShownLines = Number(codeBlock.dataset.max) ?? 10;
+    const codeLines = Number(codeBlock.dataset.lines) ?? 0;
+    if (codeLines <= 0 || maxShownLines <= 0 || codeLines <= maxShownLines) {
+      return;
+    }
+    // add expand button
+    const expandBtn = document.createElement('div');
+    expandBtn.className = 'code-expand-btn';
+    expandBtn.ariaLabel = 'Expand or collapse code';
+    expandBtn.role = 'button';
+    expandBtn.insertAdjacentHTML('afterbegin', '<i class="fa-solid fa-angles-down" aria-hidden="true"></i>');
+    codeBlock.appendChild(expandBtn);
+
+    expandBtn.addEventListener('click', () => {
+      codeBlock.classList.toggle('is-expanded', !codeBlock.classList.contains('is-expanded'));
+    }, false);
+
+    // compatibility for non-Chromium browsers (https://caniuse.com/css3-attr)
+    if (!navigator.userAgent.toLowerCase().includes('chrome')) {
+      codeBlock.style.setProperty('--fi-max-shown-lines', maxShownLines);
+    }
+  }
+
   /**
    * init code wrapper
    */
@@ -477,21 +501,15 @@ class FixIt {
       const $codeHeader = $codeBlock.querySelector('.code-header');
       // init code header for normal mode
       if ($codeHeader) {
-        // auto open code block
-        const maxShownLines = Number($codeBlock.dataset.max) ?? 10;
-        const codeLines = Number($codeBlock.dataset.lines) ?? 0;
-        if (maxShownLines <= 0 || codeLines <= maxShownLines) {
-          $codeBlock.classList.add('open');
-        }
         // code title
         const $title = $codeHeader.querySelector('.code-title');
         $title.addEventListener('click', () => {
-          $codeBlock.classList.toggle('open');
+          $codeBlock.classList.toggle('is-collapsed');
         }, false);
         // ellipses icon
         const $ellipsesBtn = $codeHeader.querySelector('.ellipses-btn');
         $ellipsesBtn.addEventListener('click', () => {
-          $codeBlock.classList.add('open');
+          $codeBlock.classList.add('is-collapsed');
         }, false);
         // edit button
         const editable = $codeBlock.dataset.editable === 'true';
@@ -525,6 +543,7 @@ class FixIt {
       } else {
         this.initCopyCode($codeBlock, $codePreEl);
       }
+      this.initCodeExpandBtn($codeBlock);
     });
   }
 
