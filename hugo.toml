@@ -141,7 +141,7 @@ weight = 80
 
 # -------------------------------------------------------------------------------------
 # Modules Configuration
-# See: https://gohugo.io/hugo-modules/configuration/#module-config-imports
+# See: https://gohugo.io/configuration/module/
 # -------------------------------------------------------------------------------------
 
 [module]
@@ -151,25 +151,27 @@ extended = true
 min = "0.147.7"
 
 # -------------------------------------------------------------------------------------
-# Markup related configuration in Hugo
-# See: https://gohugo.io/getting-started/configuration-markup/
+# Markup Configuration
+# See: https://gohugo.io/configuration/markup/
 # -------------------------------------------------------------------------------------
 
 [markup]
+_merge = "shallow"
 
 # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
 [markup.highlight]
-# ######### necessary configurations ##########
+# ~~~~~~~~~~ necessary configurations ~~~~~~~~~~
 # https://github.com/hugo-fixit/FixIt/issues/43
 codeFences = true
+noClasses = false
+# ~~~~~~~~~~ necessary configurations ~~~~~~~~~~
+anchorLineNos = false
+guessSyntax = true
 lineNos = true
 lineNumbersInTable = true
-noClasses = false
-# ######### necessary configurations ##########
-guessSyntax = true
 
 # Goldmark is from Hugo 0.60 the default library used for Markdown
-# https://gohugo.io/getting-started/configuration-markup/#goldmark
+# See: https://gohugo.io/configuration/markup/#goldmark
 [markup.goldmark]
 duplicateResourceFiles = false
 
@@ -183,7 +185,7 @@ table = true
 taskList = true
 typographer = true
 
-# https://gohugo.io/getting-started/configuration-markup/#extras
+# See: https://gohugo.io/configuration/markup/#extras
 [markup.goldmark.extensions.extras]
 
 [markup.goldmark.extensions.extras.delete]
@@ -269,7 +271,7 @@ priority = 0.5
 
 # -------------------------------------------------------------------------------------
 # Privacy Configuration
-# See: https://gohugo.io/about/hugo-and-gdpr/
+# See: https://gohugo.io/configuration/privacy/
 # -------------------------------------------------------------------------------------
 
 [privacy]
@@ -281,8 +283,8 @@ enableDNT = true
 privacyEnhanced = true
 
 # -------------------------------------------------------------------------------------
-# Media Types
-# See: https://gohugo.io/templates/output-formats/#media-types
+# Media Types Configuration
+# See: https://gohugo.io/configuration/media-types/
 # -------------------------------------------------------------------------------------
 
 [mediaTypes]
@@ -290,8 +292,8 @@ privacyEnhanced = true
 #   suffixes = ["json"]
 
 # -------------------------------------------------------------------------------------
-# Output Format Definitions
-# See: https://gohugo.io/templates/output-formats/#output-format-definitions
+# Output Format Configuration
+# See: https://gohugo.io/configuration/output-formats/
 # -------------------------------------------------------------------------------------
 
 [outputFormats]
@@ -342,8 +344,8 @@ isHTML = false
 permalinkable = true
 
 # -------------------------------------------------------------------------------------
-# Customizing Output Formats
-# See: https://gohugo.io/templates/output-formats/#customizing-output-formats
+# Output Configuration
+# See: https://gohugo.io/configuration/outputs/
 # -------------------------------------------------------------------------------------
 
 # Options to make hugo output files, the optional values are below:
@@ -353,6 +355,7 @@ permalinkable = true
 # taxonomy = ["html"]
 # term = ["html", "rss"]
 [outputs]
+_merge = "shallow"
 home = [
   "html",
   "rss",
@@ -376,10 +379,11 @@ term = [
 
 # -------------------------------------------------------------------------------------
 # Taxonomies Configuration
-# See: https://gohugo.io/content-management/taxonomies/#configure-taxonomies
+# See: https://gohugo.io/configuration/taxonomies/
 # -------------------------------------------------------------------------------------
 
 [taxonomies]
+_merge = "shallow"
 category = "categories"
 tag = "tags"
 collection = "collections"

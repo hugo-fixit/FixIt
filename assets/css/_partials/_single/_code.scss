@@ -15,6 +15,10 @@ pre:not([data-processed]) {
   @include border-radius($global-border-radius);
   @include tab-size(4);
 
+  + pre:not([data-processed]) {
+    margin-top: 0.5rem;
+  }
+
   code {
     padding: 0;
     background-color: transparent;

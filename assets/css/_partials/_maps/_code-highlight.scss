@@ -1,4 +1,11 @@
-// Color map of the code highlight
+/**
+ * Color map of the code highlight for Chroma
+ *
+ * To generate syntax highlighting styles from the command line,
+ * See https://gohugo.io/quick-reference/syntax-highlighting-styles/#styles
+ * For example:
+ *   hugo gen chromastyles --style=monokai
+ */
 $code-highlight-color-map: (
   /* Error */ 'err': $code-error-color,
   /* Keyword */ 'k': #cf222e,
