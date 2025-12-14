@@ -37,9 +37,9 @@
   {{- $wrapper = replaceRE ` editable="[^"]*"` "" $wrapper -}}
 
   {{- if eq $mode "classic" -}}
-    {{- $wrapper = partial "function/code-header.html" (dict "Wrapper" $wrapper "Opts" $codeblock "Type" .Type) -}}
+    {{- $wrapper = dict "Wrapper" $wrapper "Opts" $codeblock "Type" .Type | partial "function/code-header.html" -}}
   {{- else -}}
-    {{- $wrapper = dict "Wrapper" $wrapper | partial "function/code-copy-btn.html" -}}
+    {{- $wrapper = dict "Wrapper" $wrapper "Opts" $codeblock | partial "function/code-copy-btn.html" -}}
   {{- end -}}
 {{- end -}}
 
