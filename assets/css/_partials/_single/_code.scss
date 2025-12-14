@@ -61,6 +61,7 @@ pre:not([data-processed]) {
 .highlight {
   margin: 0.5rem 0;
   position: relative;
+  @include border-radius($global-border-radius);
   // compatibility for non-Chromium browsers (https://caniuse.com/css3-attr)
   #{$rootPrefix}max-shown-lines: attr(data-max number, 10);
 
@@ -202,6 +203,14 @@ pre:not([data-processed]) {
         }
       }
     }
+    
+    &:has(+ .table-wrapper [contenteditable='true']) .edit-btn {
+      color: $global-link-hover-color;
+
+      [data-theme='dark'] & {
+        color: $global-link-hover-color-dark;
+      }
+    }
 
     @each $type, $text in $code-type-map {
       &.language-#{to-lower-case($type)} .code-title::after {
@@ -252,6 +261,7 @@ pre:not([data-processed]) {
       rgba($code-background-color, 0.9) 60%,
       $code-background-color 100%
     );
+    @include z-index(0, 1);
 
     [data-theme='dark'] & {
       background: linear-gradient(
@@ -300,6 +310,14 @@ pre:not([data-processed]) {
 
   .code-copy-btn {
     @extend .diagram-copy-btn;
+  }
+
+  &:not([data-mode='classic']) {
+    border: 1px solid darken($code-background-color, 3%);
+
+    [data-theme='dark'] & {
+      border-color: darken($code-background-color-dark, 3%);
+    }
   }
 
   // &.is-wrap {
@@ -400,8 +418,7 @@ pre:not([data-processed]) {
   // ========== Highlight Color ========== //
 
   &[data-mode='mac'] {
-
-    pre.chroma:last-of-type {
+    pre.chroma {
       padding-top: 30px;
 
       &::after {

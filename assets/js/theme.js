@@ -19,9 +19,7 @@ class FixIt {
 
   initThemeColor() {
     const $meta = document.querySelector('[name="theme-color"]');
-    if (!$meta) {
-      return;
-    }
+    if (!$meta) return;
     this._themeColorOnSwitchTheme = this._themeColorOnSwitchTheme || (() => {
       $meta.content = this.isDark ? $meta.dataset.dark : $meta.dataset.light;
     });
@@ -136,9 +134,12 @@ class FixIt {
   initSearch() {
     const searchConfig = this.config.search;
     const isMobile = this.util.isMobile();
-    if (!searchConfig || (isMobile && this._searchMobileOnce) || (!isMobile && this._searchDesktopOnce)) {
+    if (
+      !searchConfig ||
+      (isMobile && this._searchMobileOnce) ||
+      (!isMobile && this._searchDesktopOnce)
+    )
       return;
-    }
     // Initialize default search config
     const maxResultLength = searchConfig.maxResultLength ?? 10;
     const snippetLength = searchConfig.snippetLength ?? 50;
@@ -259,9 +260,7 @@ class FixIt {
                 .then(({ hits }) => {
                   const results = {};
                   hits.forEach(({ uri, date, _highlightResult: { title }, _snippetResult: { content } }) => {
-                    if (results[uri] && results[uri].context.length > content.value) {
-                      return;
-                    }
+                    if (results[uri] && results[uri].context.length > content.value) return;
                     results[uri] = {
                       uri: uri,
                       title: title.value,
@@ -425,25 +424,12 @@ class FixIt {
    * init copy code button for simple/mac mode code block
    * @param {HTMLElement} codeBlock code block wrapper element
    * @param {HTMLElement} codePreEl single code block pre element
-   * @param {HTMLElement} [button] optional copy button element
    */
-  initCopyCode(codeBlock, codePreEl, button) {
-    const copyable = codeBlock.dataset.copyable === 'true';
-    if (!copyable) {
-      return;
-    }
-    let copyBtn = button;
-    if (!copyBtn) {
-      copyBtn = document.createElement('div');
-      copyBtn.className = 'code-copy-btn';
-      copyBtn.ariaLabel = 'Copy to clipboard';
-      copyBtn.title = this.config.codeblock?.copyToClipboard || copyBtn.ariaLabel;
-      copyBtn.role = 'button';
-      copyBtn.insertAdjacentHTML('afterbegin', '<i class="fa-regular fa-clone" aria-hidden="true"></i>');
-      copyBtn.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-check text-success" aria-hidden="true"></i>');
-      codeBlock.appendChild(copyBtn);
-    }
-
+  initCopyCode(codeBlock, codePreEl) {
+    const copyBtn = codeBlock.dataset.mode === 'classic'
+      ? codeBlock.querySelector('.code-header .copy-btn')
+      : codeBlock.querySelector('.code-copy-btn');
+    if (codeBlock.dataset.copyable !== 'true' || !copyBtn) return;
     copyBtn.addEventListener('click', () => {
       this.util.forEach(codeBlock.querySelectorAll('.hl'), $hl => $hl.classList.replace('hl', 'hl-disable'));
       this.util.copyText(codePreEl.innerText.trim()).then(() => {
@@ -460,26 +446,13 @@ class FixIt {
   }
 
   initCodeExpandBtn(codeBlock) {
-    const maxShownLines = Number(codeBlock.dataset.max) ?? 10;
-    const codeLines = Number(codeBlock.dataset.lines) ?? 0;
-    if (codeLines <= 0 || maxShownLines <= 0 || codeLines <= maxShownLines) {
-      return;
-    }
-    // add expand button
-    const expandBtn = document.createElement('div');
-    expandBtn.className = 'code-expand-btn';
-    expandBtn.ariaLabel = 'Expand or collapse code';
-    expandBtn.role = 'button';
-    expandBtn.insertAdjacentHTML('afterbegin', '<i class="fa-solid fa-angles-down" aria-hidden="true"></i>');
-    codeBlock.appendChild(expandBtn);
-
-    expandBtn.addEventListener('click', () => {
+    codeBlock.querySelector('.code-expand-btn')?.addEventListener('click', () => {
       codeBlock.classList.toggle('is-expanded', !codeBlock.classList.contains('is-expanded'));
     }, false);
 
     // compatibility for non-Chromium browsers (https://caniuse.com/css3-attr)
     if (!navigator.userAgent.toLowerCase().includes('chrome')) {
-      codeBlock.style.setProperty('--fi-max-shown-lines', maxShownLines);
+      codeBlock.style.setProperty('--fi-max-shown-lines', Number(codeBlock.dataset.max));
     }
   }
 
@@ -487,20 +460,20 @@ class FixIt {
    * init code wrapper
    */
   initCodeWrapper() {
-    if (!this.config.codeblock) {
-      return
-    }
-    this.util.forEach(document.querySelectorAll('.code-block:not([data-init])'), ($codeBlock) => {
-      $codeBlock.dataset.init = 'true';
+    const $codeBlocks = document.querySelectorAll('.code-block.highlight:not([data-init])');
+    this.util.forEach($codeBlocks, ($codeBlock) => {
       const $preElements = $codeBlock.querySelectorAll('pre.chroma');
-      if (!$preElements.length) {
-        return;
-      }
-
+      if (!$preElements.length) return;
       const $codePreEl = $preElements[$preElements.length - 1];
-      const $codeHeader = $codeBlock.querySelector('.code-header');
-      // init code header for normal mode
-      if ($codeHeader) {
+      $codeBlock.dataset.init = 'true';
+
+      this.initCopyCode($codeBlock, $codePreEl);
+      this.initCodeExpandBtn($codeBlock);
+
+      // classic mode code block interactions
+      if ($codeBlock.dataset.mode === 'classic') {
+        const $codeHeader = $codeBlock.querySelector('.code-header');
+        if (!$codeHeader) return;
         // code title
         const $title = $codeHeader.querySelector('.code-title');
         $title.addEventListener('click', () => {
@@ -516,34 +489,20 @@ class FixIt {
         const $editBtn = $codeHeader.querySelector('.edit-btn');
         if (editable && $editBtn) {
           $editBtn.addEventListener('click', () => {
-            const $iconEdit = $editBtn.querySelector('.fa-pen-to-square');
-            const $iconLock = $editBtn.querySelector('.fa-lock');
-            const $preChromas = $editBtn.parentElement.parentElement.querySelectorAll('pre.chroma');
-            const $preChroma = $preChromas.length === 2 ? $preChromas[1] : $preChromas[0];
-            if ($iconEdit) {
-              $iconEdit.classList.add('fa-lock');
-              $iconEdit.classList.remove('fa-pen-to-square');
-              $iconEdit.title = this.config.codeblock.editLockTitle;
-              $preChroma.setAttribute('contenteditable', true);
+            const isEditable = $codePreEl.getAttribute('contenteditable') === 'true'
+            if (isEditable) {
+              $codePreEl.setAttribute('contenteditable', false);
+              $codePreEl.blur();
+            } else {
               this.util.forEach($codeBlock.querySelectorAll('.hl'), ($hl) => {
                 $hl.classList.remove('hl');
               });
-              $preChroma.focus();
-            } else {
-              $iconLock.classList.add('fa-pen-to-square');
-              $iconLock.classList.remove('fa-lock');
-              $iconLock.title = this.config.codeblock.editUnLockTitle;
-              $preChroma.setAttribute('contenteditable', false);
-              $preChroma.blur();
+              $codePreEl.setAttribute('contenteditable', true);
+              $codePreEl.focus();
             }
           }, false);
         }
-        // copy button
-        this.initCopyCode($codeBlock, $codePreEl, $codeHeader.querySelector('.copy-btn'));
-      } else {
-        this.initCopyCode($codeBlock, $codePreEl);
       }
-      this.initCodeExpandBtn($codeBlock);
     });
   }
 
@@ -626,9 +585,7 @@ class FixIt {
    */
   initToc() {
     const $tocCore = document.getElementById('TableOfContents');
-    if ($tocCore === null) {
-      return;
-    }
+    if ($tocCore === null) return;
     const $headingElements = document.getElementsByClassName('heading-element');
     const INDEX_OFFSET = 20 + this.breadcrumbHeight + (
       document.body.dataset.headerDesktop !== 'normal' ? document.getElementById('header-desktop').offsetHeight : 0
@@ -706,9 +663,7 @@ class FixIt {
     // HTMLDialogElement
     const dialog = document.querySelector("#toc-dialog");
     const openButton = document.querySelector("#toc-drawer-button");
-    if (!dialog || !openButton) {
-      return;
-    }
+    if (!dialog || !openButton) return;
     openButton.addEventListener("click", () => {
       dialog.showModal();
       document.activeElement?.blur();
@@ -740,9 +695,7 @@ class FixIt {
   }
 
   initEcharts() {
-    if (!this.config.echarts) {
-      return;
-    }
+    if (!this.config.echarts) return;
     echarts.registerTheme('light', this.config.echarts.lightTheme);
     echarts.registerTheme('dark', this.config.echarts.darkTheme);
     this._echartsOnSwitchTheme = this._echartsOnSwitchTheme || (() => {
@@ -754,9 +707,7 @@ class FixIt {
       const stagingDOM = this.util.getStagingDOM()
       this.util.forEach(document.getElementsByClassName('echarts'), ($echarts) => {
         const $dataEl = $echarts.nextElementSibling;
-        if ($dataEl.tagName !== 'TEMPLATE') {
-          return;
-        }
+        if ($dataEl.tagName !== 'TEMPLATE') return;
         const chart = echarts.init($echarts, this.isDark ? 'dark' : 'light', { renderer: 'svg' });
         chart.showLoading();
         stagingDOM.stage($dataEl.content.cloneNode(true));
@@ -963,9 +914,7 @@ class FixIt {
   }
 
   initComment() {
-    if (!this.config.comment?.enable) {
-      return;
-    }
+    if (!this.config.comment?.enable) return;
     // whether to show the view comments button
     if (document.querySelector('#comments')) {
       const $viewCommentsBtn = document.querySelector('.view-comments');
@@ -1134,16 +1083,12 @@ class FixIt {
   }
 
   initWatermark() {
-    if (!this.config.watermark?.enable) {
-      return;
-    }
+    if (!this.config.watermark?.enable) return;
     new Watermark(this.config.watermark);
   }
 
   initPangu() {
-    if (!this.config.pangu?.enable) {
-      return;
-    }
+    if (!this.config.pangu?.enable) return;
     const selector = this.config.pangu.selector;
     if (selector) {
       // to avoid extra spaces for extended Markdown syntax fraction in Chinese
@@ -1169,9 +1114,7 @@ class FixIt {
   }
 
   initJsonViewer() {
-    if (!window.JsonViewerElement) {
-      return;
-    }
+    if (!window.JsonViewerElement) return;
     this._jsonViewerOnSwitchTheme = this._jsonViewerOnSwitchTheme || (() => {
       this.util.forEach(document.getElementsByTagName('json-viewer'), ($el) => {
         $el.setAttribute('theme', this.isDark ? 'dark' : 'light');
@@ -1240,9 +1183,7 @@ class FixIt {
   }
 
   initAutoMark() {
-    if (!this.config.autoBookmark) {
-      return;
-    }
+    if (!this.config.autoBookmark) return;
     window.addEventListener('beforeunload', () => {
       window.sessionStorage?.setItem(`fixit-bookmark/#${location.pathname}`, this.util.getScrollTop());
     });
@@ -1258,9 +1199,7 @@ class FixIt {
 
   initReward() {
     const $rewards = document.querySelectorAll('.post-reward [data-mode="fixed"]');
-    if (!$rewards.length) {
-      return;
-    }
+    if (!$rewards.length) return;
     // `fixed` mode only supports desktop
     if (this.util.isMobile()) {
       this.util.forEach($rewards, ($reward) => {
@@ -1287,9 +1226,7 @@ class FixIt {
   }
 
   initPostChatUser() {
-    if (!window.postChatUser || !postChatConfig || postChatConfig.userMode === 'magic') {
-      return;
-    }
+    if (!window.postChatUser || !postChatConfig || postChatConfig.userMode === 'magic') return;
     postChat_theme = this.isDark ? 'dark' : 'light';
     this.switchThemeEventSet.add((isDark) => {
       const targetFrame = document.getElementById("postChat_iframeContainer")
@@ -1390,9 +1327,7 @@ class FixIt {
 
   onClickMask() {
     document.getElementById('mask').addEventListener('click', () => {
-      if (!document.body.classList.contains('blur')) {
-        return;
-      }
+      if (!document.body.classList.contains('blur')) return;
       for (let event of this.clickMaskEventSet) {
         event();
       }

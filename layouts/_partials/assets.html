@@ -91,15 +91,6 @@ FixIt theme assets partial
   {{- $config = dict "lightgallery" true | merge $config -}}
 {{- end -}}
 
-{{- /* Code block wrapper */ -}}
-{{- $codeblock := .Page.Param "codeblock" -}}
-{{- $config = dict
-  "copyToClipboard" (T "assets.copyToClipboard")
-  "editLockTitle" (T "assets.editLockTitle")
-  "editUnLockTitle" (T "assets.editUnLockTitle")
-  | dict "codeblock" | merge $config
--}}
-
 {{- /* Sharer.js */ -}}
 {{- if .Store.Get "hasSharer" -}}
   {{- $source := $cdn.sharerJS | default "lib/sharer/sharer.min.js" -}}

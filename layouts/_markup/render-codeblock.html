@@ -3,28 +3,31 @@
 {{- $wrapper := $result.Wrapped -}}
 
 {{- if $codeblock.wrapped -}}
-  {{- $mode := $codeblock.mode | default "normal" -}}
+  {{- $mode := $codeblock.mode | default "classic" -}}
+  {{- $lines := cond .Inner (len (split .Inner "\n")) 0 -}}
+  {{- $maxShownLines := $codeblock.maxshownlines -}}
   {{- $class := "highlight" -}}
-  {{- $codeArr := slice -}}
-
   {{- with $codeblock.class -}}
     {{- $class = add $class " " . -}}
   {{- end -}}
-  {{- with .Inner -}}
-    {{- $codeArr = split . "\n" -}}
-  {{- end -}}
 
-  {{- /* add data attributes */ -}}
+  {{- /* add data attributes and class */ -}}
   {{- if $codeblock.editable -}}
     {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-editable="%v"` $class $codeblock.editable) -}}
   {{- end -}}
   {{- if $codeblock.copyable -}}
     {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-copyable="%v"` $class $codeblock.copyable) -}}
   {{- end -}}
-  {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-mode="%s"` $class $mode) -}}
-  {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-max="%v"` $class $codeblock.maxshownlines) -}}
-  {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-lines="%d"` $class (len $codeArr)) -}}
-  {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="code-block %s"` $class) -}}
+  {{- $wrapper =
+    replace $wrapper
+    (printf `class="%s"` $class)
+    (printf `class="code-block %s" data-mode="%s" data-max="%v"` $class $mode $maxShownLines)
+  -}}
+
+  {{- /* add code expand button */ -}}
+  {{- if (gt $lines $maxShownLines) | and (gt $lines 0) | and (gt $maxShownLines 0) -}}
+    {{- $wrapper = dict "Wrapper" $wrapper | partial "function/code-expand-btn.html" -}}
+  {{- end -}}
 
   {{- /* remove redundant attributes */ -}}
   {{- $wrapper = replaceRE ` wrapped="[^"]*"` "" $wrapper -}}
@@ -35,6 +38,8 @@
 
   {{- if eq $mode "classic" -}}
     {{- $wrapper = partial "function/code-header.html" (dict "Wrapper" $wrapper "Opts" $codeblock "Type" .Type) -}}
+  {{- else -}}
+    {{- $wrapper = dict "Wrapper" $wrapper | partial "function/code-copy-btn.html" -}}
   {{- end -}}
 {{- end -}}
 

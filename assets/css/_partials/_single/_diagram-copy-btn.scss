@@ -10,7 +10,6 @@
   right: 0.5rem;
   line-height: 1;
   padding: 0.5rem;
-  z-index: 1;
   user-select: none;
   border: 1px solid;
   border-radius: 6px;
@@ -20,6 +19,7 @@
   box-shadow: var(#{$rootPrefix}dcb-box-shadow, 0px 1px 0px 0px #1f23280a);
   transition-duration: 0.1s;
   transition-property: color, background-color, box-shadow, border-color;
+  @include z-index(0, 1);
   @extend .print-d-none;
 
   [data-theme='dark'] & {
