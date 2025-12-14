@@ -288,14 +288,14 @@ pre:not([data-processed]) {
   }
 
   &.is-expanded {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     &:has([contenteditable='true']) .code-expand-btn {
       display: none;
     }
     .code-expand-btn {
       background: transparent;
       padding-block: 0;
-      transform: translateY(1.5rem);
+      transform: translateY(1rem);
 
       .fa-angles-down {
         animation-name: fadeOutRotate;
