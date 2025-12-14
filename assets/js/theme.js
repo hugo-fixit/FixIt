@@ -497,6 +497,7 @@ class FixIt {
               this.util.forEach($codeBlock.querySelectorAll('.hl'), ($hl) => {
                 $hl.classList.remove('hl');
               });
+              $codeBlock.classList.add('is-expanded');
               $codePreEl.setAttribute('contenteditable', true);
               $codePreEl.focus();
             }

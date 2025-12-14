@@ -288,8 +288,14 @@ pre:not([data-processed]) {
   }
 
   &.is-expanded {
+    margin-bottom: 2rem;
+    &:has([contenteditable='true']) .code-expand-btn {
+      display: none;
+    }
     .code-expand-btn {
       background: transparent;
+      padding-block: 0;
+      transform: translateY(1.5rem);
 
       .fa-angles-down {
         animation-name: fadeOutRotate;
@@ -297,11 +303,11 @@ pre:not([data-processed]) {
         @keyframes fadeOutRotate {
           0% {
             opacity: 1;
-            transform: rotate(180deg) translate3d(0, -100%, 0);
+            transform: rotate(180deg);
           }
           100% {
             opacity: 0;
-            transform: rotate(180deg);
+            transform: rotate(180deg) translate3d(0, 100%, 0);
           }
         }
       }
@@ -310,14 +316,6 @@ pre:not([data-processed]) {
 
   .code-copy-btn {
     @extend .diagram-copy-btn;
-  }
-
-  &:not([data-mode='classic']) {
-    border: 1px solid darken($code-background-color, 3%);
-
-    [data-theme='dark'] & {
-      border-color: darken($code-background-color-dark, 3%);
-    }
   }
 
   // &.is-wrap {
@@ -438,6 +436,14 @@ pre:not([data-processed]) {
           #{$rootPrefix}mac-green-dark: #28c840;
         }
       }
+    }
+  }
+
+  &:not([data-mode='classic']) {
+    border: 1px solid darken($code-background-color, 3%);
+
+    [data-theme='dark'] & {
+      border-color: darken($code-background-color-dark, 3%);
     }
   }
 }
