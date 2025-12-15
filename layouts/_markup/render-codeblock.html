@@ -1,46 +1,65 @@
-{{- $codeblock := .Attributes | merge (.Page.Param "codeblock") -}}
+{{- $config := .Attributes | merge (.Page.Param "codeblock") -}}
 {{- $result := transform.HighlightCodeBlock . -}}
 {{- $wrapper := $result.Wrapped -}}
 
-{{- if $codeblock.wrapped -}}
-  {{- $mode := $codeblock.mode | default "classic" -}}
-  {{- $lines := cond .Inner (len (split .Inner "\n")) 0 -}}
-  {{- $maxShownLines := $codeblock.maxshownlines -}}
+{{- if $config.wrapper -}}
+  {{- $mode := $config.mode | default "classic" -}}
   {{- $class := "highlight" -}}
-  {{- with $codeblock.class -}}
-    {{- $class = add $class " " . -}}
-  {{- end -}}
-
-  {{- /* add data attributes and class */ -}}
-  {{- if $codeblock.editable -}}
-    {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-editable="%v"` $class $codeblock.editable) -}}
-  {{- end -}}
-  {{- if $codeblock.copyable -}}
-    {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-copyable="%v"` $class $codeblock.copyable) -}}
-  {{- end -}}
-  {{- $wrapper =
-    replace $wrapper
-    (printf `class="%s"` $class)
-    (printf `class="code-block %s" data-mode="%s" data-max="%v"` $class $mode $maxShownLines)
-  -}}
+  {{- with $config.class -}}{{ $class = add $class " " . }}{{- end -}}
+  {{- $targetClass := add "code-block " $class -}}
+  {{- with $config.wrapperclass -}}{{ $targetClass = add $targetClass " " . }}{{- end -}}
 
   {{- /* add code expand button */ -}}
+  {{- $lines := cond .Inner (len (split .Inner "\n")) 0 -}}
+  {{- $maxShownLines := $config.maxshownlines -}}
   {{- if (gt $lines $maxShownLines) | and (gt $lines 0) | and (gt $maxShownLines 0) -}}
     {{- $wrapper = dict "Wrapper" $wrapper | partial "function/code-expand-btn.html" -}}
   {{- end -}}
 
-  {{- /* remove redundant attributes */ -}}
-  {{- $wrapper = replaceRE ` wrapped="[^"]*"` "" $wrapper -}}
-  {{- $wrapper = replaceRE ` mode="[^"]*"` "" $wrapper -}}
-  {{- $wrapper = replaceRE ` copyable="[^"]*"` "" $wrapper -}}
-  {{- $wrapper = replaceRE ` maxshownlines="[^"]*"` "" $wrapper -}}
-  {{- $wrapper = replaceRE ` editable="[^"]*"` "" $wrapper -}}
-
+  {{- /* render for different modes */ -}}
   {{- if eq $mode "classic" -}}
-    {{- $wrapper = dict "Wrapper" $wrapper "Opts" $codeblock "Type" .Type | partial "function/code-header.html" -}}
+    {{- $wrapper = dict "Wrapper" $wrapper "Config" $config "Type" .Type | partial "function/code-header.html" -}}
+    {{- if eq .Options.linenos false -}}
+      {{- $targetClass = add $targetClass " line-nos-hidden" -}}
+    {{- end -}}
   {{- else -}}
-    {{- $wrapper = dict "Wrapper" $wrapper "Opts" $codeblock | partial "function/code-copy-btn.html" -}}
+    {{- $wrapper = dict "Wrapper" $wrapper "Config" $config | partial "function/code-copy-btn.html" -}}
   {{- end -}}
+
+  {{- /* add data attributes and class */ -}}
+  {{- if $config.editable -}}
+    {{- $wrapper =
+      replace $wrapper
+      (printf `class="%s"` $class)
+      (printf `class="%s" data-editable="%v"` $class $config.editable)
+    -}}
+  {{- end -}}
+  {{- if $config.copyable -}}
+    {{- $wrapper =
+      replace $wrapper
+      (printf `class="%s"` $class)
+      (printf `class="%s" data-copyable="%v"` $class $config.copyable)
+    -}}
+  {{- end -}}
+  {{- if ne .Options.linenostart nil -}}
+    {{- $wrapper =
+      replace $wrapper
+      (printf `class="%s"` $class)
+      (printf `class="%s" data-linenostart="%v"` $class .Options.linenostart)
+    -}}
+  {{- end -}}
+  {{- $wrapper =
+    replace $wrapper
+    (printf `class="%s"` $class)
+    (printf `class="%s" data-mode="%s" data-max="%v" data-lines="%d"` $targetClass $mode $maxShownLines $lines)
+  -}}
+
+  {{- /* remove redundant attributes */ -}}
+  {{- $configKeys := slice -}}
+  {{- range $key, $_ := .Page.Param "codeblock" -}}
+    {{- $configKeys = $configKeys | append $key -}}
+  {{- end -}}
+  {{- $wrapper = replaceRE (printf `\s+(?:%s)="[^"]*"` (delimit $configKeys "|")) "" $wrapper -}}
 {{- end -}}
 
 {{- $wrapper | safeHTML -}}

@@ -1088,16 +1088,30 @@ cacheRemote = false
 optimise = false
 
 # FixIt 0.4.0 | NEW Code block wrapper config
+# you can override the global config via markdown attributes,
+# e.g.
+# ```lang {mode="mac", maxShownLines=5}
+# code here
+# ```
 [params.codeblock]
 # whether to enable the code block wrapper
-wrapped = true
+wrapper = true
+# code block mode
 # available modes: ["classic", "mac", "simple", ...]
+# if you set to custom value, you need to create a custom CSS for data-mode attribute
 mode = "classic"
-# whether to show the copy button
-copyable = true
+# additional classes for the code block wrapper
+# e.g. "is-collapsed is-expanded line-nos-hidden line-wrapping"
+wrapperClass = ""
 # the maximum number of lines of displayed code block
 maxShownLines = 10
-# [Experimental] whether to show the edit button (only works when mode is "classic")
+# whether to enable code copy button
+copyable = true
+# [classic] whether to enable line numbers toggle button in the code block header
+lineNosToggler = true
+# [classic] whether to enable toggle line wrapping in the code block header
+lineWrapToggler = true
+# [Experimental] whether to enable code edit button in the code block header
 editable = false
 
 # FixIt 0.4.0 | NEW JSON Viewer config

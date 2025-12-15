@@ -61,9 +61,11 @@ pre:not([data-processed]) {
 .highlight {
   margin: 0.5rem 0;
   position: relative;
+  counter-reset: codeNos calc(var(#{$rootPrefix}linenostart) - 1);
   @include border-radius($global-border-radius);
-  // compatibility for non-Chromium browsers (https://caniuse.com/css3-attr)
+  // only Chromium-based browsers support attr() function for all properties (https://caniuse.com/css3-attr)
   #{$rootPrefix}max-shown-lines: attr(data-max number, 10);
+  #{$rootPrefix}linenostart: attr(data-linenostart number, 1);
 
   .table-wrapper {
     overflow: hidden;
@@ -79,7 +81,7 @@ pre:not([data-processed]) {
       padding: 0.5rem;
     }
 
-    table {
+    .lntable {
       border-spacing: 0;
       width: auto;
       overflow: auto;
@@ -92,7 +94,6 @@ pre:not([data-processed]) {
       }
 
       pre {
-        padding-right: 0.25rem;
         outline-offset: -1px;
         @include border-radius(0);
       }
@@ -105,19 +106,12 @@ pre:not([data-processed]) {
       // ========== lineNumbersInTable ========== //
       // line numbers
       .lntd:first-child {
-        min-width: 1.6rem;
-        text-align: right;
         position: sticky;
         left: 0;
       }
       // code content
       .lntd:last-child {
         width: 100%;
-
-        pre {
-          padding-left: 0.5rem;
-          padding-right: 0.5rem;
-        }
         code {
           width: 100%;
         }
@@ -150,12 +144,6 @@ pre:not([data-processed]) {
 
     &:hover {
       cursor: pointer;
-    }
-
-    .ellipses-btn,
-    .edit-btn,
-    .copy-btn {
-      @extend .print-d-none;
     }
 
     .code-title {
@@ -191,25 +179,9 @@ pre:not([data-processed]) {
       padding: 0.4rem;
     }
 
-    .edit-btn,
-    .copy-btn {
+    [role='button'] {
       padding: 0.4rem;
-
-      &:hover {
-        color: $global-link-hover-color;
-
-        [data-theme='dark'] & {
-          color: $global-link-hover-color-dark;
-        }
-      }
-    }
-    
-    &:has(+ .table-wrapper [contenteditable='true']) .edit-btn {
-      color: $global-link-hover-color;
-
-      [data-theme='dark'] & {
-        color: $global-link-hover-color-dark;
-      }
+      @extend .print-d-none;
     }
 
     @each $type, $text in $code-type-map {
@@ -219,34 +191,8 @@ pre:not([data-processed]) {
     }
   }
 
-  &.is-collapsed {
-    .code-header {
-      #{$rootPrefix}code-header-bg: #{darken($code-background-color, 6%)};
-      @include border-radius($global-border-radius);
-      @include transition(border-radius 0.2s ease 0.2s);
-
-      [data-theme='dark'] & {
-        #{$rootPrefix}code-header-bg: #{darken($code-background-color-dark, 6%)};
-      }
-
-      + .table-wrapper {
-        height: 0;
-      }
-    }
-
-    .arrow {
-      @include transform(rotate(-90deg));
-    }
-
-    .ellipses-btn {
-      display: inline;
-    }
-
-    .edit-btn,
-    .copy-btn,
-    .code-expand-btn {
-      display: none;
-    }
+  .code-copy-btn {
+    @extend .diagram-copy-btn;
   }
 
   .code-expand-btn {
@@ -281,9 +227,53 @@ pre:not([data-processed]) {
       @include transition(transform 0.2s ease);
     }
   }
+
   &:has(.code-expand-btn):not(.is-expanded, .is-collapsed) {
     .table-wrapper {
-      height: calc(1.45em * var(#{$rootPrefix}max-shown-lines) + 0.5rem);
+      height: calc(1.45em * var(#{$rootPrefix}max-shown-lines) + var(#{$rootPrefix}code-expand-offset, 0.5rem));
+    }
+    &[data-mode='mac'] .table-wrapper {
+      #{$rootPrefix}code-expand-offset: 1.875rem + 0.5rem;
+    }
+  }
+
+  &.line-wrapping .line-wrap-btn,
+  &:not(.line-nos-hidden) .line-nos-btn,
+  .code-header [role='button']:hover,
+  &:has([contenteditable='true']) .edit-btn {
+    color: $global-link-hover-color;
+
+    [data-theme='dark'] & {
+      color: $global-link-hover-color-dark;
+    }
+  }
+
+  &.is-collapsed {
+    .code-header {
+      #{$rootPrefix}code-header-bg: #{darken($code-background-color, 6%)};
+      @include border-radius($global-border-radius);
+      @include transition(border-radius 0.2s ease 0.2s);
+
+      [data-theme='dark'] & {
+        #{$rootPrefix}code-header-bg: #{darken($code-background-color-dark, 6%)};
+      }
+
+      + .table-wrapper {
+        height: 0;
+      }
+    }
+
+    .arrow {
+      @include transform(rotate(-90deg));
+    }
+
+    .ellipses-btn {
+      display: inline;
+    }
+
+    .code-header [role='button']:not(.ellipses-btn),
+    .code-expand-btn {
+      display: none;
     }
   }
 
@@ -314,21 +304,77 @@ pre:not([data-processed]) {
     }
   }
 
-  .code-copy-btn {
-    @extend .diagram-copy-btn;
+  &.line-nos-hidden {
+    > .chroma .lntable {
+      width: 100%;
+      display: table;
+    }
+    // hide original line number column
+    .lntd:first-child,
+    .ln {
+      display: none;
+    }
   }
 
-  // &.is-wrap {
-  //   code:last-of-type {
-  //     text-wrap: wrap;
-  //   }
-  // }
+  &.line-wrapping {
+    > .chroma .lntable {
+      width: 100%;
+      display: table;
+
+      // hide original line number column
+      .lntd:first-child {
+        display: none;
+      }
+    }
+    .lntd:last-child pre.chroma,
+    .table-wrapper > pre.chroma {
+      code {
+        text-wrap: wrap;
+      }
+    }
+  }
+
+  // line number for code block with line wrapping or lineNos=false
+  &.line-wrapping:not(.line-nos-hidden) .lntd:last-child pre.chroma,
+  &:not(.line-nos-hidden) .table-wrapper > pre.chroma:not(:has(.ln)) {
+    padding-left: 0;
+    > code > .line {
+      display: flex;
+
+      &::before {
+        counter-increment: codeNos;
+        content: counter(codeNos);
+        text-wrap: nowrap;
+        text-align: right;
+        min-width: var(#{$rootPrefix}line-nos-width, 1ch);
+        padding-inline: 0.75rem;
+        flex-shrink: 0;
+        color: var(#{$rootPrefix}global-font-secondary-color);
+      }
+    }
+  }
+
+  // add sticky effect for line number column when lineNos=false
+  &:not(.line-nos-hidden) .table-wrapper > pre.chroma > code > .line::after {
+    position: sticky;
+    left: 0;
+  }
+
+  &:not(.line-nos-hidden) {
+    > .chroma {
+      .lntable {
+        .lntd:last-child pre.chroma {
+          padding-left: 0;
+        }
+      }
+    }
+  }
 
   /* LineHighlight */
   .hl {
     display: block;
     background-color: var(#{$rootPrefix}code-highlight-color);
-    box-shadow: -0.75rem 0 0 var(#{$rootPrefix}code-highlight-color), 0.5rem 0 0 var(#{$rootPrefix}code-highlight-color);
+    box-shadow: -0.75rem 0 0 var(#{$rootPrefix}code-highlight-color), 0.75rem 0 0 var(#{$rootPrefix}code-highlight-color);
     #{$rootPrefix}code-highlight-color: #{$code-highlight-color};
 
     [data-theme='dark'] & {
@@ -349,19 +395,15 @@ pre:not([data-processed]) {
   }
   /* lineNumbersInTable=false */
   .ln {
-    padding-inline: 0.25rem 0.75rem;
+    padding-right: 0.75rem;
     display: inline-block;
     text-align: right;
   }
   /* LineNumbers */
   .lnt,
   .ln {
-    color: $global-font-secondary-color;
+    color: var(#{$rootPrefix}global-font-secondary-color);
     @include user-select(none);
-
-    [data-theme='dark'] & {
-      color: $global-font-secondary-color-dark;
-    }
   }
 
   // ========== Highlight Color ========== //
@@ -417,7 +459,7 @@ pre:not([data-processed]) {
 
   &[data-mode='mac'] {
     pre.chroma {
-      padding-top: 30px;
+      padding-top: 1.875rem;
 
       &::after {
         background: var(#{$rootPrefix}mac-red, #fc625d);

@@ -447,12 +447,24 @@ class FixIt {
 
   initCodeExpandBtn(codeBlock) {
     codeBlock.querySelector('.code-expand-btn')?.addEventListener('click', () => {
-      codeBlock.classList.toggle('is-expanded', !codeBlock.classList.contains('is-expanded'));
+      codeBlock.classList.toggle('is-expanded');
     }, false);
+  }
 
-    // compatibility for non-Chromium browsers (https://caniuse.com/css3-attr)
-    if (!navigator.userAgent.toLowerCase().includes('chrome')) {
-      codeBlock.style.setProperty('--fi-max-shown-lines', Number(codeBlock.dataset.max));
+  /**
+   * Browsers compatible with non-Chromium engines (https://caniuse.com/css3-attr)
+   * @param {HTMLElement} codeBlock code block wrapper element
+   */
+  initCodeCompatibility(codeBlock) {
+    if (navigator.userAgent.toLowerCase().includes('chrome')) return;
+    codeBlock.style.setProperty('--fi-max-shown-lines', Number(codeBlock.dataset.max));
+    codeBlock.style.setProperty('--fi-linenostart', Number(codeBlock.dataset.linenostart));
+  }
+
+  initLineNosWidth(codeBlock) {
+    const digit = this.util.digitCount(codeBlock.dataset.lines);
+    if (digit > 1) {
+      codeBlock.style.setProperty('--fi-line-nos-width', `${digit}ch`);
     }
   }
 
@@ -469,26 +481,32 @@ class FixIt {
 
       this.initCopyCode($codeBlock, $codePreEl);
       this.initCodeExpandBtn($codeBlock);
+      this.initCodeCompatibility($codeBlock);
+      this.initLineNosWidth($codeBlock);
 
       // classic mode code block interactions
       if ($codeBlock.dataset.mode === 'classic') {
         const $codeHeader = $codeBlock.querySelector('.code-header');
         if (!$codeHeader) return;
         // code title
-        const $title = $codeHeader.querySelector('.code-title');
-        $title.addEventListener('click', () => {
+        $codeHeader.querySelector('.code-title').addEventListener('click', () => {
           $codeBlock.classList.toggle('is-collapsed');
         }, false);
         // ellipses icon
-        const $ellipsesBtn = $codeHeader.querySelector('.ellipses-btn');
-        $ellipsesBtn.addEventListener('click', () => {
-          $codeBlock.classList.add('is-collapsed');
+        $codeHeader.querySelector('.ellipses-btn').addEventListener('click', () => {
+          $codeBlock.classList.remove('is-collapsed');
         }, false);
-        // edit button
-        const editable = $codeBlock.dataset.editable === 'true';
-        const $editBtn = $codeHeader.querySelector('.edit-btn');
-        if (editable && $editBtn) {
-          $editBtn.addEventListener('click', () => {
+        // line numbers toggle button
+        $codeHeader.querySelector('.line-nos-btn')?.addEventListener('click', () => {
+          $codeBlock.classList.toggle('line-nos-hidden');
+        }, false);
+        // line wrapping toggle button
+        $codeHeader.querySelector('.line-wrap-btn')?.addEventListener('click', () => {
+          $codeBlock.classList.toggle('line-wrapping');
+        }, false);
+        // edit button toggle button
+        if ($codeBlock.dataset.editable === 'true') {
+          $codeHeader.querySelector('.edit-btn')?.addEventListener('click', () => {
             const isEditable = $codePreEl.getAttribute('contenteditable') === 'true'
             if (isEditable) {
               $codePreEl.setAttribute('contenteditable', false);

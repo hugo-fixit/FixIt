@@ -19,7 +19,7 @@ Testing code block in FixIt theme.
 
 ## Multiple modes
 
-```js
+```js {mode="classic"}
 // Classic mode
 function add(a, b) {
   return a + b
@@ -85,23 +85,23 @@ it(B = "\\\\")./*           G####B" #       */join(B+B).split\
 
 ## No wrapper
 
-Set `wrapped=false` to disable code wrapper.
+Set `wrapper=false` to disable code wrapper.
 
-```js {wrapped=false}
+```js {wrapper=false}
 function add(a, b) {
   return a + b
 }
 ```
 
-```js {wrapped=false, linenos=false}
+```js {wrapper=false, lineNos=false}
 function add(a, b) {
   return a + b
 }
 ```
 
-## linenos=false
+## lineNos=false
 
-```js {linenos=false}
+```js {lineNos=false}
 function add(a, b) {
   return a + b
 }
