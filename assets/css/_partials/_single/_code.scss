@@ -370,29 +370,6 @@ pre:not([data-processed]) {
     }
   }
 
-  /* LineHighlight */
-  .hl {
-    display: block;
-    background-color: var(#{$rootPrefix}code-highlight-color);
-    box-shadow: -0.75rem 0 0 var(#{$rootPrefix}code-highlight-color), 0.75rem 0 0 var(#{$rootPrefix}code-highlight-color);
-    #{$rootPrefix}code-highlight-color: #{$code-highlight-color};
-
-    [data-theme='dark'] & {
-      #{$rootPrefix}code-highlight-color: #{$code-highlight-color-dark};
-    }
-  }
-  /* GenericUnderline */
-  .gl {
-    text-decoration: underline;
-  }
-  /* GenericStrong */
-  .gs {
-    font-weight: bold;
-  }
-  /* GenericEmph */
-  .ge {
-    font-style: italic;
-  }
   /* lineNumbersInTable=false */
   .ln {
     padding-right: 0.75rem;
@@ -405,57 +382,6 @@ pre:not([data-processed]) {
     color: var(#{$rootPrefix}global-font-secondary-color);
     @include user-select(none);
   }
-
-  // ========== Highlight Color ========== //
-
-  /* Error */
-  .err {
-    font-style: italic;
-    border-bottom: 1px dotted $code-error-color;
-  }
-  .language-diff {
-    /* GenericDeleted */
-    .gd {
-      background-color: #ffebe9;
-
-      [data-theme='dark'] & {
-        background-color: #78191b;
-      }
-    }
-    /* GenericInserted */
-    .gi {
-      background-color: #dafbe1;
-
-      [data-theme='dark'] & {
-        background-color: #1b4721;
-      }
-    }
-    .gs {
-      font-weight: normal;
-      color: #953800;
-      background-color: #ffd8b5;
-
-      [data-theme='dark'] & {
-        color: #ffddb0;
-        background-color: #682d0f;
-      }
-    }
-  }
-
-  @each $class, $color in $code-highlight-color-map {
-    .#{$class} {
-      color: $color;
-    }
-  }
-
-  [data-theme='dark'] & {
-    @each $class, $color in $code-highlight-color-map-dark {
-      .#{$class} {
-        color: $color;
-      }
-    }
-  }
-  // ========== Highlight Color ========== //
 
   &[data-mode='mac'] {
     pre.chroma {
@@ -489,6 +415,8 @@ pre:not([data-processed]) {
     }
   }
 }
+
+@import '../_code-syntax/index';
 
 // gist shortcode
 .gist {
@@ -527,6 +455,6 @@ pre:not([data-processed]) {
   }
 
   [data-theme='dark'] & {
-    @import './github-dark-dimmed';
+    @import '../_code-syntax/github-dark-dimmed';
   }
 }
