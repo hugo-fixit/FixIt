@@ -7,7 +7,7 @@
 
 # -------------------------------------------------------------------------------------
 # Hugo Configuration
-# See: https://gohugo.io/getting-started/configuration/
+# See: https://gohugo.io/configuration/all/
 # -------------------------------------------------------------------------------------
 
 # website title
@@ -98,7 +98,7 @@ icon = "fa-solid fa-tags"
 
 # -------------------------------------------------------------------------------------
 # Related content Configuration
-# See: https://gohugo.io/content-management/related/
+# See: https://gohugo.io/content-management/related-content/
 # -------------------------------------------------------------------------------------
 
 [related]
@@ -1088,8 +1088,7 @@ cacheRemote = false
 optimise = false
 
 # FixIt 0.4.0 | NEW Code block wrapper config
-# you can override the global config via markdown attributes,
-# e.g.
+# you can override the global config via Markdown attributes, for example:
 # ```lang {mode="mac", maxShownLines=5}
 # code here
 # ```
@@ -1103,7 +1102,7 @@ mode = "classic"
 # additional classes for the code block wrapper
 # e.g. "is-collapsed is-expanded line-nos-hidden line-wrapping"
 wrapperClass = ""
-# the maximum number of lines of displayed code block
+# the maximum number of lines to show in the code block preview
 maxShownLines = 10
 # whether to enable code copy button
 copyable = true
@@ -1271,32 +1270,32 @@ type = "katex"
 copyTex = true
 throwOnError = false
 errorColor = "#ff4949"
+
 # custom macros map
 # syntax: <macro> = <definition>
-
 [params.page.math.katex.macros]
-# "\\f" = "#1f(#2)"   # usage: $\f{a}{b}$
+# "\\f" = "#1f(#2)"  # usage: $\f{a}{b}$
+
 # MathJax server-side rendering (https://www.mathjax.org)
 # MathJax config: https://docs.mathjax.org/en/latest/options/index.html
-
 [params.page.math.mathjax]
 cdn = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 
 [params.page.math.mathjax.packages]
 # "[+]" = ["configmacros"]
+
 # custom macros map
 # syntax: <macro> = <definition>
-
 [params.page.math.mathjax.macros]
-# "bold" = ["{\\bf #1}", 1]   # usage: $\bold{math}$
+# bold = ["{\\bf #1}", 1]  # usage: $\bold{math}$
 
 [params.page.math.mathjax.loader]
 load = [ "ui/safe" ]
 
 [params.page.math.mathjax.loader.paths]
 # custom = "https://cdn.jsdelivr.net/gh/sonoisa/XyJax-v3@3.0.1/build/"
-# more loader config e.g source, dependencies, provides etc.
 
+# more loader config e.g source, dependencies, provides etc.
 [params.page.math.mathjax.options]
 enableMenu = true
 # HTML tags that won't be searched for math
@@ -1338,6 +1337,14 @@ scale = true
 # whether to add FullscreenControl
 fullscreen = true
 
+# FixIt 0.3.0 | NEW [Experimental] cache remote images locally
+# See: https://github.com/hugo-fixit/FixIt/pull/362
+# TODO remove (works on image-legacy.html)
+[params.page.cacheRemoteImages]
+enable = false
+# replace remote image URL with local image URL (place in public/images/remote/)
+replace = false
+
 # FixIt 0.3.0 | NEW Related content config (https://gohugo.io/content-management/related/)
 [params.page.related]
 enable = false
@@ -1363,8 +1370,8 @@ mode = "static"
 # alipay = "/images/alipay.png"
 # paypal = "/images/paypal.png"
 # bitcoin = "/images/bitcoin.png"
-# social share links in post page
 
+# Social share links in post page
 [params.page.share]
 enable = true
 Twitter = true
