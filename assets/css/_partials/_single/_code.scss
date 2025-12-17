@@ -150,6 +150,16 @@ pre:not([data-processed]) {
       width: 100%;
       padding: 0.4rem;
 
+      &::after {
+        padding-left: 0.2rem;
+        content: attr(data-name, var(#{$rootPrefix}code-type, 'Code'));
+      }
+
+      // filename for code block
+      &[data-name]::after {
+        @include overflow-wrap(break-word);
+      }
+
       .arrow {
         padding: 0 0.2rem;
         @include transition(transform 0.2s ease);
@@ -169,11 +179,6 @@ pre:not([data-processed]) {
       }
     }
 
-    .code-title::after {
-      padding-left: 0.2rem;
-      content: 'Code';
-    }
-
     .ellipses-btn {
       display: none;
       padding: 0.4rem;
@@ -185,8 +190,8 @@ pre:not([data-processed]) {
     }
 
     @each $type, $text in $code-type-map {
-      &.language-#{to-lower-case($type)} .code-title::after {
-        content: $text;
+      &.language-#{to-lower-case($type)} {
+        #{$rootPrefix}code-type: $text;
       }
     }
   }

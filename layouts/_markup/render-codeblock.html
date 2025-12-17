@@ -59,7 +59,7 @@
   {{- range $key, $_ := .Page.Param "codeblock" -}}
     {{- $configKeys = $configKeys | append $key -}}
   {{- end -}}
-  {{- $wrapper = replaceRE (printf `\s+(?:%s)="[^"]*"` (delimit $configKeys "|")) "" $wrapper -}}
+  {{- $wrapper = replaceRE (printf `\s+(?:%s|name)="[^"]*"` (delimit $configKeys "|")) "" $wrapper -}}
 {{- end -}}
 
 {{- $wrapper | safeHTML -}}

@@ -50,6 +50,19 @@ function add(a, b) {
 D=Date()[16+(x/8|0)])?30:D*3,i+3),36)&1<<(x/2|0)%4+3*y},100))()
 ```
 
+## Code File Name
+
+```js {name="hello.js"}
+function hello(x = 'world') {
+  console.log(`Hello, ${x}!`)
+}
+
+hello()
+// Hello, world!
+hello('FixIt')
+// Hello, FixIt!
+```
+
 ## Collapsed/Expanded
 
 ```

@@ -2,6 +2,7 @@
 {{- $config := .Config -}}
 {{- $wrapper := .Wrapper -}}
 {{- $type := lower .Type | default "fallback" -}}
+{{- $name := $config.name -}}
 {{- $lineNosBtn := "" -}}
 {{- $lineWrapBtn := "" -}}
 {{- $editBtn := "" -}}
@@ -28,6 +29,9 @@
 {{- if $config.copyable -}}
   {{- $copyIcon := dict "Class" "fa-regular fa-clone fa-fw" | partial "plugin/icon.html" -}}
   {{- $copyBtn = printf `<span class="copy-btn" aria-label="%s" role="button" title="%s">%s</span>` (T "assets.copyToClipboard") (T "assets.copyToClipboard") $copyIcon -}}
+{{- end -}}
+{{- with $config.name -}}
+  {{- $titleEl = replace $titleEl `<span class="code-title">` (printf `<span class="code-title" data-name="%s">` .) -}}
 {{- end -}}
 {{- $codeHeader := printf `<div class="code-header language-%s">%s</span>%s%s%s%s%s</div>` $type $titleEl $ellipsisBtn $lineNosBtn $lineWrapBtn $editBtn $copyBtn -}}
 
