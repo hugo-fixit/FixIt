@@ -350,12 +350,14 @@ pre:not([data-processed]) {
         padding-inline: 0.75rem;
         flex-shrink: 0;
         color: var(#{$rootPrefix}global-font-secondary-color);
+        background-color: var(#{$rootPrefix}code-block-background-color);
       }
     }
   }
 
   // add sticky effect for line number column when lineNos=false
-  &:not(.line-nos-hidden) .table-wrapper > pre.chroma > code > .line::after {
+  &:not(.line-nos-hidden) .table-wrapper > pre.chroma > code > .line::before {
+    background-color: #fff;
     position: sticky;
     left: 0;
   }
