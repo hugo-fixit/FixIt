@@ -1,0 +1,12 @@
+{{- /* Code copy button for no-classic mode code blocks */ -}}
+{{- $config := .Config -}}
+{{- $wrapper := .Wrapper -}}
+
+{{- if $config.copyable -}}
+  {{- $copyIcon := dict "Class" "fa-regular fa-clone" | partial "plugin/icon.html" -}}
+  {{- $successIcon := dict "Class" "fa-solid fa-check text-success" | partial "plugin/icon.html" -}}
+  {{- $copyBtn := printf `<div class="code-copy-btn" aria-label="%s" role="button" title="%s">%s%s</div>` (T "assets.copyToClipboard") (T "assets.copyToClipboard") $copyIcon $successIcon -}}
+  {{- $wrapper = replaceRE `(<div class="highlight[^>]*>)` (printf `$1%s` $copyBtn) $wrapper -}}
+{{- end -}}
+
+{{- return $wrapper -}}

@@ -1,7 +1,7 @@
 ---
 title: Encryption Test
 date: 2022-05-21T22:31:22+08:00
-description: Test for encrypting content
+description: Test for encrypting content.
 password: 1212
 message: Password is 1212
 collections:
@@ -12,9 +12,9 @@ tags:
   - Encryption
 ---
 
-I was shy, so I hid.
-
 <!--more-->
+
+I was shy, so I hid.
 
 ## Ruby
 

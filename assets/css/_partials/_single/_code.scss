@@ -7,17 +7,16 @@ code {
 pre:not([data-processed]) {
   margin: 0;
   line-height: 1.45em;
-  padding: 0.5rem;
+  padding: 0.5rem 0.75rem;
   overflow: auto;
   font-size: $code-block-font-size;
   font-family: $code-font-family;
+  background-color: var(#{$rootPrefix}code-block-background-color);
   @include border-radius($global-border-radius);
   @include tab-size(4);
 
-  background-color: $code-background-color;
-
-  [data-theme='dark'] & {
-    background-color: $code-background-color-dark;
+  + pre:not([data-processed]) {
+    margin-top: 0.5rem;
   }
 
   code {
@@ -61,117 +60,34 @@ pre:not([data-processed]) {
 // block fenced code
 .highlight {
   margin: 0.5rem 0;
+  position: relative;
+  counter-reset: codeNos calc(var(#{$rootPrefix}linenostart) - 1);
+  @include border-radius($global-border-radius);
+  // attr() for arbitrary properties is currently only supported in Chromium-based browsers (see https://caniuse.com/css3-attr);
+  // non-supporting browsers fall back to values set via initCodeCompatibility() in JavaScript.
+  #{$rootPrefix}max-shown-lines: attr(data-max number, 10);
+  #{$rootPrefix}linenostart: attr(data-linenostart number, 1);
+
+  .table-wrapper {
+    overflow: hidden;
+    height: auto;
+    @include transition(height 0.5s ease-out);
+    @include border-radius($global-border-radius);
+  }
 
   > .chroma {
     position: relative;
 
-    .code-header {
-      #{$rootPrefix}bg-code-header: #{darken($code-background-color, 3%)};
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-sizing: border-box;
-      width: 100%;
-      font-family: $global-font-family;
-      font-weight: bold;
-      line-height: 1.4em;
-      color: $code-info-color;
-      background-color: var(#{$rootPrefix}bg-code-header);
-      @include border-radius($global-border-radius);
-      @include transition(border-radius 0.2s ease);
-
-      // delayed loading table-wrapper
-      & + .table-wrapper {
-        height: 0;
-        @include border-radius(0 0 $global-border-radius $global-border-radius);
-        @include transition(height 0.5s ease-out);
-      }
-
-      [data-theme='dark'] & {
-        color: $code-info-color-dark;
-        #{$rootPrefix}bg-code-header: #{darken($code-background-color-dark, 3%)};
-      }
-
-      &:hover {
-        cursor: pointer;
-      }
-
-      .ellipses,
-      .edit,
-      .copy {
-        @extend .print-d-none;
-      }
-
-      .code-title {
-        width: 100%;
-        padding: 0.4rem;
-
-        .arrow {
-          padding: 0 0.2rem;
-          @include transition(transform 0.2s ease);
-        }
-
-        .title-inner {
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-          background-color: var(#{$rootPrefix}bg-code-header);
-          padding-inline: 1em;
-          max-width: 80%;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          @include z-index(0, 1);
-        }
-      }
-
-      .code-title::after {
-        padding-left: 0.2rem;
-        content: 'Code';
-      }
-
-      .ellipses {
-        padding: 0.4rem;
-      }
-
-      .edit,
-      .copy {
-        display: none;
-        padding: 0.4rem;
-
-        &:hover {
-          cursor: pointer;
-          color: $global-link-hover-color;
-
-          [data-theme='dark'] & {
-            color: $global-link-hover-color-dark;
-          }
-        }
-      }
-
-      @each $type, $text in $code-type-map {
-        &.language-#{to-lower-case($type)} .code-title::after {
-          content: $text;
-        }
-      }
+    &:is(pre):has(.ln) {
+      padding: 0.5rem;
     }
 
-    // delayed loading table-wrapper
-    .table-wrapper {
-      overflow: hidden;
-      @include border-radius($global-border-radius);
-    }
-
-    table {
+    .lntable {
       border-spacing: 0;
       width: auto;
       overflow: auto;
       display: block;
-      background-color: $code-background-color;
-
-      [data-theme='dark'] & {
-        background-color: $code-background-color-dark;
-      }
+      background-color: var(#{$rootPrefix}code-block-background-color);
 
       td {
         vertical-align: top;
@@ -179,7 +95,6 @@ pre:not([data-processed]) {
       }
 
       pre {
-        padding: 0.25rem;
         outline-offset: -1px;
         @include border-radius(0);
       }
@@ -192,138 +107,323 @@ pre:not([data-processed]) {
       // ========== lineNumbersInTable ========== //
       // line numbers
       .lntd:first-child {
-        min-width: 1.6rem;
-        text-align: right;
         position: sticky;
         left: 0;
-
-        pre {
-          @include user-select(none);
-        }
       }
       // code content
       .lntd:last-child {
         width: 100%;
-
-        pre {
-          padding-left: 0.5rem;
-          padding-right: 0.5rem;
-        }
         code {
           width: 100%;
         }
       }
       // ========== lineNumbersInTable ========== //
     }
+  }
 
-    &.open {
-      .code-header {
-        #{$rootPrefix}bg-code-header: #{darken($code-background-color, 6%)};
-        @include border-radius($global-border-radius $global-border-radius 0 0);
+  .code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    font-family: $global-font-family;
+    font-weight: bold;
+    line-height: 1.4em;
+    color: var(#{$rootPrefix}code-header-color);
+    background-color: var(#{$rootPrefix}code-header-bg);
+    @include border-radius($global-border-radius $global-border-radius 0 0);
+    @include transition(border-radius 0s);
 
-        [data-theme='dark'] & {
-          #{$rootPrefix}bg-code-header: #{darken($code-background-color-dark, 6%)};
-        }
+    + .table-wrapper {
+      @include border-radius(0 0 $global-border-radius $global-border-radius);
+
+      > pre.chroma {
+        @include border-radius(0 0 $global-border-radius $global-border-radius);
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .code-title {
+      width: 100%;
+      padding: 0.4rem;
+
+      &::after {
+        padding-left: 0.2rem;
+        content: attr(data-name, var(#{$rootPrefix}code-type, 'Code'));
       }
 
-      .table-wrapper {
-        height: auto;
+      // filename for code block
+      &[data-name]::after {
+        @include overflow-wrap(break-word);
       }
 
       .arrow {
-        @include transform(rotate(90deg));
+        padding: 0 0.2rem;
+        @include transition(transform 0.2s ease);
       }
 
-      .ellipses {
-        display: none;
+      .title-inner {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(#{$rootPrefix}code-header-bg);
+        padding-inline: 1em;
+        max-width: 80%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        @include z-index(0, 1);
       }
+    }
 
-      .edit,
-      .copy {
-        display: inline;
+    .ellipses-btn {
+      display: none;
+      padding: 0.4rem;
+    }
+
+    [role='button'] {
+      padding: 0.4rem;
+      @extend .print-d-none;
+    }
+
+    @each $type, $text in $code-type-map {
+      &.language-#{to-lower-case($type)} {
+        #{$rootPrefix}code-type: $text;
       }
     }
   }
 
-  /* LineHighlight */
-  .hl {
-    display: block;
-    background-color: $code-hightlight-color;
-    box-shadow: -0.5rem 0 0 $code-hightlight-color, 0.5rem 0 0 $code-hightlight-color;
+  .code-copy-btn {
+    @extend .diagram-copy-btn;
+  }
+
+  .code-expand-btn {
+    width: 100%;
+    padding-block: 1rem;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    background: linear-gradient(
+      180deg,
+      rgba($code-background-color, 0) 0%,
+      rgba($code-background-color, 0.9) 60%,
+      $code-background-color 100%
+    );
+    @include z-index(0, 1);
 
     [data-theme='dark'] & {
-      background-color: $code-hightlight-color-dark;
-      box-shadow: -0.5rem 0 0 $code-hightlight-color-dark, 0.5rem 0 0 $code-hightlight-color-dark;
+      background: linear-gradient(
+        180deg,
+        rgba($code-background-color-dark, 0) 0%,
+        rgba($code-background-color-dark, 0.9) 60%,
+        $code-background-color-dark 100%
+      );
+    }
+
+    .fa-angles-down {
+      opacity: 0;
+      animation-name: fadeOutDown;
+      animation-duration: 1.5s;
+      animation-iteration-count: infinite;
+      animation-delay: 0.3s;
+      @include transition(transform 0.2s ease);
     }
   }
-  /* GenericUnderline */
-  .gl {
-    text-decoration: underline;
+
+  &:has(.code-expand-btn):not(.is-expanded, .is-collapsed) {
+    .table-wrapper {
+      height: calc(1.45em * var(#{$rootPrefix}max-shown-lines) + var(#{$rootPrefix}code-expand-offset, 0.5rem));
+    }
+    &[data-mode='mac'] .table-wrapper {
+      #{$rootPrefix}code-expand-offset: 1.875rem + 0.5rem;
+    }
   }
-  /* GenericStrong */
-  .gs {
-    font-weight: bold;
+
+  &.line-wrapping .line-wrap-btn,
+  &:not(.line-nos-hidden) .line-nos-btn,
+  .code-header [role='button']:hover,
+  &:has([contenteditable='true']) .edit-btn {
+    color: $global-link-hover-color;
+
+    [data-theme='dark'] & {
+      color: $global-link-hover-color-dark;
+    }
   }
-  /* GenericEmph */
-  .ge {
-    font-style: italic;
+
+  &.is-collapsed {
+    .code-header {
+      #{$rootPrefix}code-header-bg: #{darken($code-background-color, 6%)};
+      @include border-radius($global-border-radius);
+      @include transition(border-radius 0.2s ease 0.2s);
+
+      [data-theme='dark'] & {
+        #{$rootPrefix}code-header-bg: #{darken($code-background-color-dark, 6%)};
+      }
+
+      + .table-wrapper {
+        height: 0;
+      }
+    }
+
+    .arrow {
+      @include transform(rotate(-90deg));
+    }
+
+    .ellipses-btn {
+      display: inline;
+    }
+
+    .code-header [role='button']:not(.ellipses-btn),
+    .code-expand-btn {
+      display: none;
+    }
   }
+
+  &.is-expanded {
+    margin-bottom: 1rem;
+    &:has([contenteditable='true']) .code-expand-btn {
+      display: none;
+    }
+    .code-expand-btn {
+      background: transparent;
+      padding-block: 0;
+      transform: translateY(1rem);
+
+      .fa-angles-down {
+        animation-name: fadeOutRotate;
+
+        @keyframes fadeOutRotate {
+          0% {
+            opacity: 1;
+            transform: rotate(180deg);
+          }
+          100% {
+            opacity: 0;
+            transform: rotate(180deg) translate3d(0, 100%, 0);
+          }
+        }
+      }
+    }
+  }
+
+  &.line-nos-hidden {
+    > .chroma .lntable {
+      width: 100%;
+      display: table;
+    }
+    // hide original line number column
+    .lntd:first-child,
+    .ln {
+      display: none;
+    }
+  }
+
+  &.line-wrapping {
+    > .chroma .lntable {
+      width: 100%;
+      display: table;
+
+      // hide original line number column
+      .lntd:first-child {
+        display: none;
+      }
+    }
+    .lntd:last-child pre.chroma,
+    .table-wrapper > pre.chroma {
+      code {
+        text-wrap: wrap;
+      }
+    }
+  }
+
+  // line number for code block with line wrapping or lineNos=false
+  &.line-wrapping:not(.line-nos-hidden) .lntd:last-child pre.chroma,
+  &:not(.line-nos-hidden) .table-wrapper > pre.chroma:not(:has(.ln)) {
+    padding-left: 0;
+    > code > .line {
+      display: flex;
+
+      &::before {
+        counter-increment: codeNos;
+        content: counter(codeNos);
+        text-wrap: nowrap;
+        text-align: right;
+        min-width: var(#{$rootPrefix}line-nos-width, 1ch);
+        padding-inline: 0.75rem;
+        flex-shrink: 0;
+        color: var(#{$rootPrefix}global-font-secondary-color);
+        background-color: var(#{$rootPrefix}code-block-background-color);
+      }
+    }
+  }
+
+  // add sticky effect for line number column when lineNos=false
+  &:not(.line-nos-hidden) .table-wrapper > pre.chroma > code > .line::before {
+    position: sticky;
+    left: 0;
+  }
+
+  &:not(.line-nos-hidden) {
+    > .chroma {
+      .lntable {
+        .lntd:last-child pre.chroma {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+
   /* lineNumbersInTable=false */
   .ln {
-    padding-right: 0.5rem;
+    padding-right: 0.75rem;
     display: inline-block;
-    min-width: 1.1rem;
     text-align: right;
   }
   /* LineNumbers */
   .lnt,
   .ln {
-    color: $global-font-secondary-color;
-
-    [data-theme='dark'] & {
-      color: $global-font-secondary-color-dark;
-    }
+    color: var(#{$rootPrefix}global-font-secondary-color);
+    @include user-select(none);
   }
 
-  // ========== Higtlight Color ========== //
+  &[data-mode='mac'] {
+    pre.chroma {
+      padding-top: 1.875rem;
 
-  /* Error */
-  .err {
-    font-style: italic;
-    border-bottom: 1px dotted $code-error-color;
-  }
-  /* GenericDeleted */
-  .gd {
-    background-color: #ffebe9;
+      &::after {
+        background: var(#{$rootPrefix}mac-red, #fc625d);
+        box-shadow: 20px 0 var(#{$rootPrefix}mac-yellow, #fdbc40), 40px 0 var(#{$rootPrefix}mac-green, #35cd4b);
+        left: 8px;
+        top: 8px;
+        position: absolute;
+        border-radius: 50%;
+        content: ' ';
+        height: 12px;
+        width: 12px;
 
-    [data-theme='dark'] & {
-      background-color: #78191b;
-    }
-  }
-  /* GenericInserted */
-  .gi {
-    background-color: #dafbe1;
-
-    [data-theme='dark'] & {
-      background-color: #1b4721;
-    }
-  }
-
-  @each $class, $color in $code-highlight-color-map {
-    .#{$class} {
-      color: $color;
-    }
-  }
-
-  [data-theme='dark'] & {
-    @each $class, $color in $code-highlight-color-map-dark {
-      .#{$class} {
-        color: $color;
+        [data-theme='dark'] & {
+          #{$rootPrefix}mac-red-dark: #ff5f56;
+          #{$rootPrefix}mac-yellow-dark: #febc2e;
+          #{$rootPrefix}mac-green-dark: #28c840;
+        }
       }
     }
   }
-  // ========== Higtlight Color ========== //
+
+  &:not([data-mode='classic']) {
+    border: 1px solid darken($code-background-color, 3%);
+
+    [data-theme='dark'] & {
+      border-color: darken($code-background-color-dark, 3%);
+    }
+  }
 }
+
+@import '../_code-syntax/index';
 
 // gist shortcode
 .gist {
@@ -341,27 +441,27 @@ pre:not([data-processed]) {
     padding: 0.4rem 0.8rem;
     @include link(false, false);
     @include border-radius(0 0 $global-border-radius $global-border-radius);
-    background-color: darken($code-background-color, 5%);
-
-    [data-theme='dark'] & {
-      background-color: darken($code-background-color-dark, 5%);
-    }
+    background-color: var(#{$rootPrefix}gist-meta-background-color);
   }
 
   .table-wrapper {
-    padding-block: 0.25rem;
+    padding-block: 0.5rem;
+    background-color: var(#{$rootPrefix}code-block-background-color);
     @include border-radius($global-border-radius $global-border-radius 0 0);
-    background-color: $code-background-color;
 
-    [data-theme='dark'] & {
-      background-color: $code-background-color-dark;
-    }
     .highlight {
       background-color: transparent;
+
+      td.blob-num {
+        position: sticky;
+        left: 0;
+        background-color: var(#{$rootPrefix}code-block-background-color);
+        @include z-index(0, 1);
+      }
     }
   }
 
   [data-theme='dark'] & {
-    @import './github-dark-dimmed';
+    @import '../_code-syntax/github-dark-dimmed';
   }
 }

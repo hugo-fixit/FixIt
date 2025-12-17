@@ -133,4 +133,17 @@ export default class Util {
     }
     return false;
   }
+
+  /**
+   * count digits of a number
+   * @param {Number} n integer number
+   * @returns {Number} digit count
+   */
+  digitCount(n) {
+    const t = Number(n);
+    if (!Number.isInteger(t)) {
+      throw new Error('The parameter must be an integer number.');
+    }
+    return Math.abs(t).toString().length;
+  }
 }

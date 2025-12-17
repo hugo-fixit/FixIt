@@ -19,9 +19,7 @@ class FixIt {
 
   initThemeColor() {
     const $meta = document.querySelector('[name="theme-color"]');
-    if (!$meta) {
-      return;
-    }
+    if (!$meta) return;
     this._themeColorOnSwitchTheme = this._themeColorOnSwitchTheme || (() => {
       $meta.content = this.isDark ? $meta.dataset.dark : $meta.dataset.light;
     });
@@ -136,9 +134,12 @@ class FixIt {
   initSearch() {
     const searchConfig = this.config.search;
     const isMobile = this.util.isMobile();
-    if (!searchConfig || (isMobile && this._searchMobileOnce) || (!isMobile && this._searchDesktopOnce)) {
+    if (
+      !searchConfig ||
+      (isMobile && this._searchMobileOnce) ||
+      (!isMobile && this._searchDesktopOnce)
+    )
       return;
-    }
     // Initialize default search config
     const maxResultLength = searchConfig.maxResultLength ?? 10;
     const snippetLength = searchConfig.snippetLength ?? 50;
@@ -259,9 +260,7 @@ class FixIt {
                 .then(({ hits }) => {
                   const results = {};
                   hits.forEach(({ uri, date, _highlightResult: { title }, _snippetResult: { content } }) => {
-                    if (results[uri] && results[uri].context.length > content.value) {
-                      return;
-                    }
+                    if (results[uri] && results[uri].context.length > content.value) return;
                     results[uri] = {
                       uri: uri,
                       title: title.value,
@@ -422,116 +421,106 @@ class FixIt {
   }
 
   /**
+   * init copy code button for code blocks in all modes (classic and non-classic)
+   * @param {HTMLElement} codeBlock code block wrapper element
+   * @param {HTMLElement} codePreEl single code block pre element
+   */
+  initCopyCode(codeBlock, codePreEl) {
+    const copyBtn = codeBlock.dataset.mode === 'classic'
+      ? codeBlock.querySelector('.code-header .copy-btn')
+      : codeBlock.querySelector('.code-copy-btn');
+    if (codeBlock.dataset.copyable !== 'true' || !copyBtn) return;
+    copyBtn.addEventListener('click', () => {
+      this.util.forEach(codeBlock.querySelectorAll('.hl'), $hl => $hl.classList.replace('hl', 'hl-disable'));
+      this.util.copyText(codePreEl.innerText.trim()).then(() => {
+        this.util.animateCSS(codePreEl, 'animate__flash');
+        this.util.forEach(codeBlock.querySelectorAll('.hl-disable'), $hl => $hl.classList.replace('hl-disable', 'hl'));
+        copyBtn.toggleAttribute('data-copied', true);
+        setTimeout(() => {
+          copyBtn.toggleAttribute('data-copied', false);
+        }, 2000);
+      }, () => {
+        console.error('Clipboard write failed!', 'Your browser does not support clipboard API!');
+      });
+    }, false);
+  }
+
+  initCodeExpandBtn(codeBlock) {
+    codeBlock.querySelector('.code-expand-btn')?.addEventListener('click', () => {
+      codeBlock.classList.toggle('is-expanded');
+    }, false);
+  }
+
+  /**
+   * Browsers compatible with non-Chromium engines (https://caniuse.com/css3-attr)
+   * @param {HTMLElement} codeBlock code block wrapper element
+   */
+  initCodeCompatibility(codeBlock) {
+    if (navigator.userAgent.toLowerCase().includes('chrome')) return;
+    codeBlock.style.setProperty('--fi-max-shown-lines', Number(codeBlock.dataset.max));
+    codeBlock.style.setProperty('--fi-linenostart', Number(codeBlock.dataset.linenostart));
+  }
+
+  initLineNosWidth(codeBlock) {
+    const digit = this.util.digitCount(codeBlock.dataset.lines);
+    if (digit > 1) {
+      codeBlock.style.setProperty('--fi-line-nos-width', `${digit}ch`);
+    }
+  }
+
+  /**
    * init code wrapper
    */
   initCodeWrapper() {
-    if (!this.config.code) {
-      this.initCopyCode();
-      return
-    }
-    // if markup.highlight.lineNumbersInTable set to false
-    this.util.forEach(document.querySelectorAll('.highlight > pre.chroma'), ($preChroma) => {
-      const $chroma = document.createElement('div');
-      $chroma.className = $preChroma.className;
-      const $table = document.createElement('table');
-      $chroma.appendChild($table);
-      const $tbody = document.createElement('tbody');
-      $table.appendChild($tbody);
-      const $tr = document.createElement('tr');
-      $tbody.appendChild($tr);
-      const $td = document.createElement('td');
-      $tr.appendChild($td);
-      $preChroma.parentElement.replaceChild($chroma, $preChroma);
-      $td.appendChild($preChroma);
-    });
-    // render code header
-    this.util.forEach(document.querySelectorAll('.highlight > .chroma:not([data-init])'), ($chroma) => {
-      $chroma.dataset.init = 'true';
-      if ($chroma.parentElement.classList.contains('no-header')) {
-        this.initCopyCode($chroma);
-        return;
-      }
-      const $codeElements = $chroma.querySelectorAll('pre.chroma > code');
-      if ($codeElements.length) {
-        const $code = $codeElements[$codeElements.length - 1];
-        const $header = document.createElement('div');
-        $header.className = 'code-header ' + $code.className.toLowerCase();
+    const $codeBlocks = document.querySelectorAll('.code-block.highlight:not([data-init])');
+    this.util.forEach($codeBlocks, ($codeBlock) => {
+      const $preElements = $codeBlock.querySelectorAll('pre.chroma');
+      if (!$preElements.length) return;
+      const $codePreEl = $preElements[$preElements.length - 1];
+      $codeBlock.dataset.init = 'true';
+
+      this.initCopyCode($codeBlock, $codePreEl);
+      this.initCodeExpandBtn($codeBlock);
+      this.initCodeCompatibility($codeBlock);
+      this.initLineNosWidth($codeBlock);
+
+      // classic mode code block interactions
+      if ($codeBlock.dataset.mode === 'classic') {
+        const $codeHeader = $codeBlock.querySelector('.code-header');
+        if (!$codeHeader) return;
         // code title
-        const $title = document.createElement('span');
-        $title.classList.add('code-title');
-        // insert code title inner
-        $title.insertAdjacentHTML(
-          'afterbegin',
-          $chroma.parentNode.title
-            ? `<i class="arrow fa-solid fa-chevron-right fa-fw" aria-hidden="true"></i><span class="title-inner">${$chroma.parentNode.title}</span>`
-            : '<i class="arrow fa-solid fa-chevron-right fa-fw" aria-hidden="true"></i>'
-        );
-        $title.addEventListener('click', () => {
-          $chroma.classList.toggle('open');
+        $codeHeader.querySelector('.code-title').addEventListener('click', () => {
+          $codeBlock.classList.toggle('is-collapsed');
         }, false);
-        $header.appendChild($title);
         // ellipses icon
-        const $ellipses = document.createElement('span');
-        $ellipses.insertAdjacentHTML('afterbegin', '<i class="fa-solid fa-ellipsis-h fa-fw" aria-hidden="true"></i>');
-        $ellipses.classList.add('ellipses');
-        $ellipses.addEventListener('click', () => {
-          $chroma.classList.add('open');
+        $codeHeader.querySelector('.ellipses-btn').addEventListener('click', () => {
+          $codeBlock.classList.remove('is-collapsed');
         }, false);
-        $header.appendChild($ellipses);
-        // edit button
-        if (this.config.code.editable) {
-          const $edit = document.createElement('span');
-          $edit.classList.add('edit');
-          $edit.insertAdjacentHTML('afterbegin', `<i class="fa-solid fa-pen-to-square fa-fw" title="${this.config.code.editUnLockTitle}" aria-hidden="true"></i>`);
-          $edit.addEventListener('click', () => {
-            const $iconKey = $edit.querySelector('.fa-pen-to-square');
-            const $iconLock = $edit.querySelector('.fa-lock');
-            const $preChromas = $edit.parentElement.parentElement.querySelectorAll('pre.chroma');
-            const $preChroma = $preChromas.length === 2 ? $preChromas[1] : $preChromas[0];
-            if ($iconKey) {
-              $iconKey.classList.add('fa-lock');
-              $iconKey.classList.remove('fa-pen-to-square');
-              $iconKey.title = this.config.code.editLockTitle;
-              $preChroma.setAttribute('contenteditable', true);
-              $preChroma.focus();
+        // line numbers toggle button
+        $codeHeader.querySelector('.line-nos-btn')?.addEventListener('click', () => {
+          $codeBlock.classList.toggle('line-nos-hidden');
+        }, false);
+        // line wrapping toggle button
+        $codeHeader.querySelector('.line-wrap-btn')?.addEventListener('click', () => {
+          $codeBlock.classList.toggle('line-wrapping');
+        }, false);
+        // edit button toggle button
+        if ($codeBlock.dataset.editable === 'true') {
+          $codeHeader.querySelector('.edit-btn')?.addEventListener('click', () => {
+            const isEditable = $codePreEl.getAttribute('contenteditable') === 'true'
+            if (isEditable) {
+              $codePreEl.setAttribute('contenteditable', false);
+              $codePreEl.blur();
             } else {
-              $iconLock.classList.add('fa-pen-to-square');
-              $iconLock.classList.remove('fa-lock');
-              $iconLock.title = this.config.code.editUnLockTitle;
-              $preChroma.setAttribute('contenteditable', false);
-              $preChroma.blur();
+              this.util.forEach($codeBlock.querySelectorAll('.hl'), ($hl) => {
+                $hl.classList.remove('hl');
+              });
+              $codeBlock.classList.add('is-expanded');
+              $codePreEl.setAttribute('contenteditable', true);
+              $codePreEl.focus();
             }
           }, false);
-          $header.appendChild($edit);
         }
-        // copy button
-        if (this.config.code.copyTitle) {
-          const $copy = document.createElement('span');
-          $copy.insertAdjacentHTML('afterbegin', '<i class="fa-regular fa-copy fa-fw" aria-hidden="true"></i>');
-          $copy.classList.add('copy');
-          // remove the leading and trailing whitespace of the code string
-          let code = $code.innerText.trim();
-          // in the details element, the code string cannot be gotten directly.
-          if ($chroma.closest('details') !== null) {
-            const _tempEl = document.createElement('div');
-            _tempEl.appendChild($code.cloneNode(true));
-            code = _tempEl.innerText.trim();
-          }
-          const forceOpen = $chroma.parentElement.dataset.open ? JSON.parse($chroma.parentElement.dataset.open) : void 0;
-          if (forceOpen ?? (this.config.code.maxShownLines < 0 || code.split('\n').length < this.config.code.maxShownLines + 2)) {
-            $chroma.classList.add('open');
-          }
-          $copy.title = this.config.code.copyTitle;
-          $copy.addEventListener('click', () => {
-            this.util.copyText(code).then(() => {
-              this.util.animateCSS($code, 'animate__flash');
-            }, () => {
-              console.error('Clipboard write failed!', 'Your browser does not support clipboard API!');
-            });
-          }, false);
-          $header.appendChild($copy);
-        }
-        $chroma.insertBefore($header, $chroma.firstChild);
       }
     });
   }
@@ -568,15 +557,6 @@ class FixIt {
       $table.parentElement.replaceChild($wrapper, $table);
       $wrapper.appendChild($table);
     });
-  }
-
-  /**
-   * init simple copy code when there is no code header
-   * https://github.com/github/clipboard-copy-element
-   * @param {ELement} singleCode single code block
-   */
-  initCopyCode(singleCode) {
-    // TODO
   }
 
   /**
@@ -624,9 +604,7 @@ class FixIt {
    */
   initToc() {
     const $tocCore = document.getElementById('TableOfContents');
-    if ($tocCore === null) {
-      return;
-    }
+    if ($tocCore === null) return;
     const $headingElements = document.getElementsByClassName('heading-element');
     const INDEX_OFFSET = 20 + this.breadcrumbHeight + (
       document.body.dataset.headerDesktop !== 'normal' ? document.getElementById('header-desktop').offsetHeight : 0
@@ -680,6 +658,7 @@ class FixIt {
     this._tocDialogOnScroll && this.scrollEventSet.delete(this._tocDialogOnScroll);
   }
 
+  // TODO refactor use allow-discrete display property
   initTocListener() {
     const $toc = document.getElementById('toc-auto');
     const $tocContentAuto = document.getElementById('toc-content-auto');
@@ -703,9 +682,7 @@ class FixIt {
     // HTMLDialogElement
     const dialog = document.querySelector("#toc-dialog");
     const openButton = document.querySelector("#toc-drawer-button");
-    if (!dialog || !openButton) {
-      return;
-    }
+    if (!dialog || !openButton) return;
     openButton.addEventListener("click", () => {
       dialog.showModal();
       document.activeElement?.blur();
@@ -737,9 +714,7 @@ class FixIt {
   }
 
   initEcharts() {
-    if (!this.config.echarts) {
-      return;
-    }
+    if (!this.config.echarts) return;
     echarts.registerTheme('light', this.config.echarts.lightTheme);
     echarts.registerTheme('dark', this.config.echarts.darkTheme);
     this._echartsOnSwitchTheme = this._echartsOnSwitchTheme || (() => {
@@ -751,9 +726,7 @@ class FixIt {
       const stagingDOM = this.util.getStagingDOM()
       this.util.forEach(document.getElementsByClassName('echarts'), ($echarts) => {
         const $dataEl = $echarts.nextElementSibling;
-        if ($dataEl.tagName !== 'TEMPLATE') {
-          return;
-        }
+        if ($dataEl.tagName !== 'TEMPLATE') return;
         const chart = echarts.init($echarts, this.isDark ? 'dark' : 'light', { renderer: 'svg' });
         chart.showLoading();
         stagingDOM.stage($dataEl.content.cloneNode(true));
@@ -960,9 +933,7 @@ class FixIt {
   }
 
   initComment() {
-    if (!this.config.comment?.enable) {
-      return;
-    }
+    if (!this.config.comment?.enable) return;
     // whether to show the view comments button
     if (document.querySelector('#comments')) {
       const $viewCommentsBtn = document.querySelector('.view-comments');
@@ -1131,16 +1102,12 @@ class FixIt {
   }
 
   initWatermark() {
-    if (!this.config.watermark?.enable) {
-      return;
-    }
+    if (!this.config.watermark?.enable) return;
     new Watermark(this.config.watermark);
   }
 
   initPangu() {
-    if (!this.config.pangu?.enable) {
-      return;
-    }
+    if (!this.config.pangu?.enable) return;
     const selector = this.config.pangu.selector;
     if (selector) {
       // to avoid extra spaces for extended Markdown syntax fraction in Chinese
@@ -1166,9 +1133,7 @@ class FixIt {
   }
 
   initJsonViewer() {
-    if (!window.JsonViewerElement) {
-      return;
-    }
+    if (!window.JsonViewerElement) return;
     this._jsonViewerOnSwitchTheme = this._jsonViewerOnSwitchTheme || (() => {
       this.util.forEach(document.getElementsByTagName('json-viewer'), ($el) => {
         $el.setAttribute('theme', this.isDark ? 'dark' : 'light');
@@ -1237,9 +1202,7 @@ class FixIt {
   }
 
   initAutoMark() {
-    if (!this.config.autoBookmark) {
-      return;
-    }
+    if (!this.config.autoBookmark) return;
     window.addEventListener('beforeunload', () => {
       window.sessionStorage?.setItem(`fixit-bookmark/#${location.pathname}`, this.util.getScrollTop());
     });
@@ -1255,9 +1218,7 @@ class FixIt {
 
   initReward() {
     const $rewards = document.querySelectorAll('.post-reward [data-mode="fixed"]');
-    if (!$rewards.length) {
-      return;
-    }
+    if (!$rewards.length) return;
     // `fixed` mode only supports desktop
     if (this.util.isMobile()) {
       this.util.forEach($rewards, ($reward) => {
@@ -1284,9 +1245,7 @@ class FixIt {
   }
 
   initPostChatUser() {
-    if (!window.postChatUser || !postChatConfig || postChatConfig.userMode === 'magic') {
-      return;
-    }
+    if (!window.postChatUser || !postChatConfig || postChatConfig.userMode === 'magic') return;
     postChat_theme = this.isDark ? 'dark' : 'light';
     this.switchThemeEventSet.add((isDark) => {
       const targetFrame = document.getElementById("postChat_iframeContainer")
@@ -1387,9 +1346,7 @@ class FixIt {
 
   onClickMask() {
     document.getElementById('mask').addEventListener('click', () => {
-      if (!document.body.classList.contains('blur')) {
-        return;
-      }
+      if (!document.body.classList.contains('blur')) return;
       for (let event of this.clickMaskEventSet) {
         event();
       }

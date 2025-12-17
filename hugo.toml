@@ -7,7 +7,7 @@
 
 # -------------------------------------------------------------------------------------
 # Hugo Configuration
-# See: https://gohugo.io/getting-started/configuration/
+# See: https://gohugo.io/configuration/all/
 # -------------------------------------------------------------------------------------
 
 # website title
@@ -98,7 +98,7 @@ icon = "fa-solid fa-tags"
 
 # -------------------------------------------------------------------------------------
 # Related content Configuration
-# See: https://gohugo.io/content-management/related/
+# See: https://gohugo.io/content-management/related-content/
 # -------------------------------------------------------------------------------------
 
 [related]
@@ -141,7 +141,7 @@ weight = 80
 
 # -------------------------------------------------------------------------------------
 # Modules Configuration
-# See: https://gohugo.io/hugo-modules/configuration/#module-config-imports
+# See: https://gohugo.io/configuration/module/
 # -------------------------------------------------------------------------------------
 
 [module]
@@ -151,25 +151,27 @@ extended = true
 min = "0.147.7"
 
 # -------------------------------------------------------------------------------------
-# Markup related configuration in Hugo
-# See: https://gohugo.io/getting-started/configuration-markup/
+# Markup Configuration
+# See: https://gohugo.io/configuration/markup/
 # -------------------------------------------------------------------------------------
 
 [markup]
+_merge = "shallow"
 
 # Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
 [markup.highlight]
-# ######### necessary configurations ##########
+# ~~~~~~~~~~ necessary configurations ~~~~~~~~~~
 # https://github.com/hugo-fixit/FixIt/issues/43
 codeFences = true
+noClasses = false
+# ~~~~~~~~~~ necessary configurations ~~~~~~~~~~
+anchorLineNos = false
+guessSyntax = true
 lineNos = true
 lineNumbersInTable = true
-noClasses = false
-# ######### necessary configurations ##########
-guessSyntax = true
 
 # Goldmark is from Hugo 0.60 the default library used for Markdown
-# https://gohugo.io/getting-started/configuration-markup/#goldmark
+# See: https://gohugo.io/configuration/markup/#goldmark
 [markup.goldmark]
 duplicateResourceFiles = false
 
@@ -183,7 +185,7 @@ table = true
 taskList = true
 typographer = true
 
-# https://gohugo.io/getting-started/configuration-markup/#extras
+# See: https://gohugo.io/configuration/markup/#extras
 [markup.goldmark.extensions.extras]
 
 [markup.goldmark.extensions.extras.delete]
@@ -258,18 +260,18 @@ priority = 0.5
 [permalinks]
 
 [permalinks.page]
-
 # posts = "/p/:slugorcontentbasename"
-[permalinks.section]
 
+[permalinks.section]
 # posts = "/posts/:slugorcontentbasename"
+
 [permalinks.taxonomy]
 
 [permalinks.term]
 
 # -------------------------------------------------------------------------------------
 # Privacy Configuration
-# See: https://gohugo.io/about/hugo-and-gdpr/
+# See: https://gohugo.io/configuration/privacy/
 # -------------------------------------------------------------------------------------
 
 [privacy]
@@ -281,8 +283,8 @@ enableDNT = true
 privacyEnhanced = true
 
 # -------------------------------------------------------------------------------------
-# Media Types
-# See: https://gohugo.io/templates/output-formats/#media-types
+# Media Types Configuration
+# See: https://gohugo.io/configuration/media-types/
 # -------------------------------------------------------------------------------------
 
 [mediaTypes]
@@ -290,8 +292,8 @@ privacyEnhanced = true
 #   suffixes = ["json"]
 
 # -------------------------------------------------------------------------------------
-# Output Format Definitions
-# See: https://gohugo.io/templates/output-formats/#output-format-definitions
+# Output Format Configuration
+# See: https://gohugo.io/configuration/output-formats/
 # -------------------------------------------------------------------------------------
 
 [outputFormats]
@@ -342,8 +344,8 @@ isHTML = false
 permalinkable = true
 
 # -------------------------------------------------------------------------------------
-# Customizing Output Formats
-# See: https://gohugo.io/templates/output-formats/#customizing-output-formats
+# Output Configuration
+# See: https://gohugo.io/configuration/outputs/
 # -------------------------------------------------------------------------------------
 
 # Options to make hugo output files, the optional values are below:
@@ -353,6 +355,7 @@ permalinkable = true
 # taxonomy = ["html"]
 # term = ["html", "rss"]
 [outputs]
+_merge = "shallow"
 home = [
   "html",
   "rss",
@@ -376,10 +379,11 @@ term = [
 
 # -------------------------------------------------------------------------------------
 # Taxonomies Configuration
-# See: https://gohugo.io/content-management/taxonomies/#configure-taxonomies
+# See: https://gohugo.io/configuration/taxonomies/
 # -------------------------------------------------------------------------------------
 
 [taxonomies]
+_merge = "shallow"
 category = "categories"
 tag = "tags"
 collection = "collections"
@@ -489,8 +493,8 @@ index = ""
 appID = ""
 searchKey = ""
 
-[params.search.fuse]
 # FixIt 0.2.17 | NEW https://fusejs.io/api/options.html
+[params.search.fuse]
 isCaseSensitive = false
 minMatchCharLength = 2
 findAllMatches = false
@@ -1083,6 +1087,32 @@ cacheRemote = false
 # Image resizing and optimisation
 optimise = false
 
+# FixIt 0.4.0 | NEW Code block wrapper config
+# you can override the global config via Markdown attributes, for example:
+# ```lang {mode="mac", maxShownLines=5}
+# code here
+# ```
+[params.codeblock]
+# whether to enable the code block wrapper
+wrapper = true
+# code block mode
+# available modes: ["classic", "mac", "simple", ...]
+# if you set to custom value, you need to create a custom CSS for data-mode attribute
+mode = "classic"
+# additional classes for the code block wrapper
+# e.g. "is-collapsed is-expanded line-nos-hidden line-wrapping"
+wrapperClass = ""
+# the maximum number of lines to show in the code block preview
+maxShownLines = 10
+# whether to enable code copy button
+copyable = true
+# [classic] whether to enable line numbers toggle button in the code block header
+lineNosToggler = true
+# [classic] whether to enable toggle line wrapping in the code block header
+lineWrapToggler = true
+# [classic][Experimental] whether to enable code edit button in the code block header
+editable = false
+
 # FixIt 0.4.0 | NEW JSON Viewer config
 # See https://github.com/Lruihao/json-viewer-element
 [params.jsonViewer]
@@ -1244,27 +1274,27 @@ errorColor = "#ff4949"
 # custom macros map
 # syntax: <macro> = <definition>
 [params.page.math.katex.macros]
+# "\\f" = "#1f(#2)"  # usage: $\f{a}{b}$
 
-# "\\f" = "#1f(#2)"   # usage: $\f{a}{b}$
 # MathJax server-side rendering (https://www.mathjax.org)
 # MathJax config: https://docs.mathjax.org/en/latest/options/index.html
 [params.page.math.mathjax]
 cdn = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 
 [params.page.math.mathjax.packages]
-
 # "[+]" = ["configmacros"]
+
 # custom macros map
 # syntax: <macro> = <definition>
 [params.page.math.mathjax.macros]
+# bold = ["{\\bf #1}", 1]  # usage: $\bold{math}$
 
-# "bold" = ["{\\bf #1}", 1]   # usage: $\bold{math}$
 [params.page.math.mathjax.loader]
 load = [ "ui/safe" ]
 
 [params.page.math.mathjax.loader.paths]
-
 # custom = "https://cdn.jsdelivr.net/gh/sonoisa/XyJax-v3@3.0.1/build/"
+
 # more loader config e.g source, dependencies, provides etc.
 [params.page.math.mathjax.options]
 enableMenu = true
@@ -1286,20 +1316,9 @@ ignoreHtmlClass = "mathjax_ignore"
 
 # HTML tags that can appear within math
 [params.page.math.mathjax.options.includeHtmlTags]
-
 # "#comment" = ""
 # br = "\n"
 # wbr = ""
-# Code wrapper config
-[params.page.code]
-# FixIt 0.3.9 | NEW whether to enable the code wrapper
-enable = true
-# whether to show the copy button of the code wrapper
-copy = true
-# FixIt 0.2.13 | NEW whether to show the edit button of the code wrapper
-edit = true
-# the maximum number of lines of displayed code by default
-maxShownLines = 10
 
 # Mapbox GL JS config (https://docs.mapbox.com/mapbox-gl-js)
 [params.page.mapbox]
@@ -1317,6 +1336,14 @@ geolocate = true
 scale = true
 # whether to add FullscreenControl
 fullscreen = true
+
+# FixIt 0.3.0 | NEW [Experimental] cache remote images locally
+# See: https://github.com/hugo-fixit/FixIt/pull/362
+# TODO remove (works on image-legacy.html)
+[params.page.cacheRemoteImages]
+enable = false
+# replace remote image URL with local image URL (place in public/images/remote/)
+replace = false
 
 # FixIt 0.3.0 | NEW Related content config (https://gohugo.io/content-management/related/)
 [params.page.related]
@@ -1339,12 +1366,12 @@ position = "after"
 mode = "static"
 
 [params.page.reward.ways]
-
 # wechatpay = "/images/wechatpay.png"
 # alipay = "/images/alipay.png"
 # paypal = "/images/paypal.png"
 # bitcoin = "/images/bitcoin.png"
-# social share links in post page
+
+# Social share links in post page
 [params.page.share]
 enable = true
 Twitter = true
@@ -1540,17 +1567,17 @@ lazyLoad = true
 [params.page.library]
 
 [params.page.library.css]
-
 # someCSS = "some.css"
 # located in "assets/"
 # Or
 # someCSS = "https://cdn.example.com/some.css"
-[params.page.library.js]
 
+[params.page.library.js]
 # someJavascript = "some.js"
 # located in "assets/"
 # Or
 # someJavascript = "https://cdn.example.com/some.js"
+
 # Page SEO config
 [params.page.seo]
 # image URL

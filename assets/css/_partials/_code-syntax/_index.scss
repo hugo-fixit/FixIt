@@ -1,0 +1,34 @@
+/**
+ * Code syntax highlighting for Chroma
+ *
+ * To generate syntax highlighting styles from the command line,
+ * See https://gohugo.io/quick-reference/syntax-highlighting-styles/#styles
+ * For example:
+ *   hugo gen chromastyles --style=github > assets/css/_partials/_code-syntax/light.scss
+ *   hugo gen chromastyles --style=github-dark > assets/css/_partials/_code-syntax/dark.scss
+ */
+.highlight {
+  /* LineLink */
+  .lnlinks {
+    outline: none;
+    text-decoration: none;
+    color: inherit;
+  }
+  /* LineHighlight */
+  .hl {
+    display: block;
+    background-color: var(#{$rootPrefix}code-highlight-color);
+    box-shadow: -0.75rem 0 0 var(#{$rootPrefix}code-highlight-color), 0.75rem 0 0 var(#{$rootPrefix}code-highlight-color);
+    #{$rootPrefix}code-highlight-color: #{$code-highlight-color};
+
+    [data-theme='dark'] & {
+      #{$rootPrefix}code-highlight-color: #{$code-highlight-color-dark};
+    }
+  }
+
+  @import '../_code-syntax/light';
+
+  [data-theme='dark'] & {
+    @import '../_code-syntax/dark';
+  }
+}

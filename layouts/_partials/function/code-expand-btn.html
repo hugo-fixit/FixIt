@@ -1,0 +1,7 @@
+{{- /* Code expand button for code blocks */ -}}
+{{- $wrapper := .Wrapper -}}
+{{- $expandIcon := dict "Class" "fa-solid fa-angles-down" | partial "plugin/icon.html" -}}
+{{- $expandBtn := printf `<div class="code-expand-btn" aria-label="%s" role="button">%s</div>` (T "assets.expandCode") $expandIcon -}}
+{{- $wrapper = replaceRE `(<div class="highlight[^>]*>)` (printf `$1%s` $expandBtn) $wrapper -}}
+
+{{- return $wrapper -}}

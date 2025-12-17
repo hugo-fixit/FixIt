@@ -1,0 +1,45 @@
+{{- /* Code header for classic mode code blocks */ -}}
+{{- $config := .Config -}}
+{{- $wrapper := .Wrapper -}}
+{{- $type := lower .Type | default "fallback" -}}
+{{- $name := $config.name -}}
+{{- $lineNosBtn := "" -}}
+{{- $lineWrapBtn := "" -}}
+{{- $editBtn := "" -}}
+{{- $copyBtn := "" -}}
+{{- $foldIcon := dict "Class" "arrow fa-solid fa-chevron-down fa-fw" | partial "plugin/icon.html" -}}
+{{- $titleEl := printf `<span class="code-title">%s</span>` $foldIcon -}}
+{{- $ellipsisBtn := printf `<span class="ellipses-btn" aria-label="Show more options" role="button">%s</span>` (dict "Class" "fa-solid fa-ellipsis-h fa-fw" | partial "plugin/icon.html") -}}
+
+{{- if $config.title -}}
+  {{- $titleEl = printf `<span class="code-title">%s<span class="title-inner">%s</span></span>` $foldIcon $config.title -}}
+{{- end -}}
+{{- if $config.linenostoggler -}}
+  {{- $lineNosIcon := dict "Class" "fa-solid fa-list-ol fa-fw" | partial "plugin/icon.html" -}}
+  {{- $lineNosBtn = printf `<span class="line-nos-btn" aria-label="%s" role="button" title="%s">%s</span>` (T "assets.toggleLineNumbers") (T "assets.toggleLineNumbers") $lineNosIcon -}}
+{{- end -}}
+{{- if $config.linewraptoggler -}}
+  {{- $lineWrapIcon := dict "Class" "fa-solid fa-right-left fa-fw" | partial "plugin/icon.html" -}}
+  {{- $lineWrapBtn = printf `<span class="line-wrap-btn" aria-label="%s" role="button" title="%s">%s</span>` (T "assets.toggleLineWrap") (T "assets.toggleLineWrap") $lineWrapIcon -}}
+{{- end -}}
+{{- if $config.editable -}}
+  {{- $editIcon := dict "Class" "fa-solid fa-pen-to-square fa-fw" | partial "plugin/icon.html" -}}
+  {{- $editBtn = printf `<span class="edit-btn" aria-label="%s" role="button" title="%s">%s</span>` (T "assets.toggleCodeEditable") (T "assets.toggleCodeEditable") $editIcon -}}
+{{- end -}}
+{{- if $config.copyable -}}
+  {{- $copyIcon := dict "Class" "fa-regular fa-clone fa-fw" | partial "plugin/icon.html" -}}
+  {{- $copyBtn = printf `<span class="copy-btn" aria-label="%s" role="button" title="%s">%s</span>` (T "assets.copyToClipboard") (T "assets.copyToClipboard") $copyIcon -}}
+{{- end -}}
+{{- with $config.name -}}
+  {{- $titleEl = replace $titleEl `<span class="code-title">` (printf `<span class="code-title" data-name="%s">` .) -}}
+{{- end -}}
+{{- $codeHeader := printf `<div class="code-header language-%s">%s%s%s%s%s%s</div>` $type $titleEl $ellipsisBtn $lineNosBtn $lineWrapBtn $editBtn $copyBtn -}}
+
+{{- if strings.Contains $wrapper `<table class="lntable">` -}}
+  {{- $wrapper = replaceRE `(<table class="lntable">)` (printf "%s$1" $codeHeader) $wrapper -}}
+{{- else -}}
+  {{- /* linenos=false or lineNumbersInTable=false */ -}}
+  {{- $wrapper = replaceRE `(<pre[^>]*class="[^"]*chroma[^"]*">[\s\S]*?<\/pre>)` (printf `%s<div class="table-wrapper">$1</div>` $codeHeader) $wrapper -}}
+{{- end -}}
+
+{{- return $wrapper -}}
