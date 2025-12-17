@@ -1111,7 +1111,7 @@ copyable = true
 lineNosToggler = true
 # [classic] whether to enable toggle line wrapping in the code block header
 lineWrapToggler = true
-# [Experimental] whether to enable code edit button in the code block header
+# [classic][Experimental] whether to enable code edit button in the code block header
 editable = false
 
 # FixIt 0.4.0 | NEW JSON Viewer config

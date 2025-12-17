@@ -63,7 +63,8 @@ pre:not([data-processed]) {
   position: relative;
   counter-reset: codeNos calc(var(#{$rootPrefix}linenostart) - 1);
   @include border-radius($global-border-radius);
-  // only Chromium-based browsers support attr() function for all properties (https://caniuse.com/css3-attr)
+  // attr() for arbitrary properties is currently only supported in Chromium-based browsers (see https://caniuse.com/css3-attr);
+  // non-supporting browsers fall back to values set via initCodeCompatibility() in JavaScript.
   #{$rootPrefix}max-shown-lines: attr(data-max number, 10);
   #{$rootPrefix}linenostart: attr(data-linenostart number, 1);
 
@@ -362,7 +363,6 @@ pre:not([data-processed]) {
 
   // add sticky effect for line number column when lineNos=false
   &:not(.line-nos-hidden) .table-wrapper > pre.chroma > code > .line::before {
-    background-color: #fff;
     position: sticky;
     left: 0;
   }

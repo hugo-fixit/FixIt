@@ -421,7 +421,7 @@ class FixIt {
   }
 
   /**
-   * init copy code button for simple/mac mode code block
+   * init copy code button for code blocks in all modes (classic and non-classic)
    * @param {HTMLElement} codeBlock code block wrapper element
    * @param {HTMLElement} codePreEl single code block pre element
    */

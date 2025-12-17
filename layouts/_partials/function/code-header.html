@@ -33,7 +33,7 @@
 {{- with $config.name -}}
   {{- $titleEl = replace $titleEl `<span class="code-title">` (printf `<span class="code-title" data-name="%s">` .) -}}
 {{- end -}}
-{{- $codeHeader := printf `<div class="code-header language-%s">%s</span>%s%s%s%s%s</div>` $type $titleEl $ellipsisBtn $lineNosBtn $lineWrapBtn $editBtn $copyBtn -}}
+{{- $codeHeader := printf `<div class="code-header language-%s">%s%s%s%s%s%s</div>` $type $titleEl $ellipsisBtn $lineNosBtn $lineWrapBtn $editBtn $copyBtn -}}
 
 {{- if strings.Contains $wrapper `<table class="lntable">` -}}
   {{- $wrapper = replaceRE `(<table class="lntable">)` (printf "%s$1" $codeHeader) $wrapper -}}
