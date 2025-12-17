@@ -1,0 +1,221 @@
+# Translations for Korean
+# 한국어 번역
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === init ===
+[init]
+configurationError = "구성 파일 오류\n아직 FixIt의 버전 매개변수를 올바르게 구성하지 않았습니다. https://fixit.lruihao.cn/ko/documentation/basics/#theme-configuration을 참조하세요."
+compatibilityError = "호환성 오류 ({{ .From }} -> {{ .To }}):\n비호환 업데이트를 수행했습니다. https://github.com/hugo-fixit/FixIt/releases를 참조하세요."
+devVersionWarn = "현재 개발 버전의 FixIt을 사용 중입니다. 안정적인 버전을 사용하는 것이 좋습니다.\n자세한 내용은 https://github.com/hugo-fixit/FixIt/releases를 참조하세요."
+devEnvWarn = "현재 실행 환경이 'development'입니다. '댓글 시스템', 'PWA', 'CDN', '지문 인식' 및 '통계'가 활성화되지 않습니다."
+quicklyUpgrade = "명령어를 사용하여 빠르게 업그레이드하세요:"
+# === init ===
+
+# === baseof ===
+[baseof]
+backToTop = "맨 위로"
+viewComments = "댓글 보기"
+noscript = "이 사이트는 JavaScript가 활성화된 상태에서 최상의 성능을 발휘합니다."
+# === baseof ===
+
+# === Taxonomy ===
+[archives]
+other = "보관함"
+
+[allSome]
+other = "모두 {{ .Some }}"
+
+[category]
+other = "분류"
+
+[categories]
+other = "분류"
+
+[collection]
+other = "모음집"
+
+[collections]
+other = "모음집"
+
+[tag]
+other = "태그"
+
+[tags]
+other = "태그"
+
+[posts]
+other = "게시물"
+# === Taxonomy ===
+
+# === Section ===
+[section]
+recentlyUpdated = "최근 업데이트"
+
+[section.totalWordCount]
+other = "총 약 {{ .Count }} 자"
+
+[section.archiveCounter]
+other = "총 {{ .Count }} 개의 게시물"
+# === Section ===
+
+# === Pagination ===
+[pagination]
+more = "더 보기"
+# === Pagination ===
+
+# === partials/header.html ===
+[header]
+selectLanguage = "언어 선택"
+noMoretTranslations = "더 이상 번역이 없습니다"
+switchTheme = "테마 전환"
+# === partials/header.html ===
+
+# === partials/footer.html ===
+[footer]
+poweredBySome = "{{ .Hugo }}로 구동 | 테마 - {{ .Theme }}"
+siteUV = "총 방문자 수"
+sitePV = "총 페이지 뷰 수"
+siteRunning = "사이트 운영 중……"
+# === partials/footer.html ===
+
+# === partials/comment.html ===
+[comment]
+valineLang = "ko"
+valinePlaceholder = "당신의 댓글……"
+facebookLanguageCode = "ko_KR"
+# === partials/comment.html ===
+
+# === partials/assets.html ===
+[assets]
+search = "검색"
+searchPlaceholder = "제목 또는 내용을 검색하세요..."
+searchIn = "{{ . }}에서 검색"
+gotoResultsPage = "검색 결과 페이지로 이동..."
+clear = "지우기"
+cancel = "취소"
+noResultsFound = "결과를 찾을 수 없습니다"
+copyToClipboard = "클립보드에 복사"
+copyText = "복사"
+copiedText = "복사됨"
+toggleLineNumbers = "줄 번호 전환"
+toggleLineWrap = "자동 줄 바꿈 전환"
+toggleCodeEditable = "코드 블록 편집 전환"
+expandCode = "코드 블록 확장/축소"
+cookieconsentMessage = "이 웹사이트는 쿠키를 사용하여 경험을 향상시킵니다."
+cookieconsentDismiss = "동의"
+cookieconsentLink = "자세히 알아보기"
+# === partials/assets.html ===
+
+# === partials/plugin/share.html ===
+[shareOn]
+other = "공유하기"
+# === partials/plugin/share.html ===
+
+# === posts/single.html ===
+[single]
+contents = "목차"
+pin = "고정"
+repost = "재게시"
+publishedOnDate = "발행일: {{ .Date }}"
+views = "조회수"
+comments = "댓글 수"
+author = "저자"
+updatedOnDate = "업데이트일: {{ .Date }}"
+readMarkdown = "원본 문서 읽기"
+viewSource = "소스 보기"
+editThisPage = "이 페이지 편집"
+reportIssue = "문제 보고"
+openInEditor = "편집기에서 열기"
+back = "뒤로"
+home = "홈"
+readMore = "더 읽기"
+expirationReminder = "이 문서는 {{ .Date }}에 마지막으로 업데이트되었으며, 내용이 오래되었을 수 있습니다."
+encryptedAbstract = "이 문서는 암호화되어 원본 내용을 볼 수 없습니다!"
+encryptedMessage = "비밀번호를 입력하세요"
+password = "비밀번호"
+enterBtn = "입장"
+encryptyAgain = "다시 암호화"
+relatedContent = "관련 콘텐츠"
+
+[single.includedIn]
+categories = "{{ .Categories }}에 포함"
+collections = "{{ .Collections }}에 포함"
+both = "{{ .Categories }}와 {{ .Collections }}에 포함"
+
+[single.wordCount]
+other = "{{ .Count }} 자"
+
+[single.fuzzyWordCount]
+other = "약 {{ .Count }} 자"
+
+[single.readingTime]
+other = "예상 독서 시간 {{ .Count }} 분"
+
+[single.reward]
+donate = "후원"
+wechatpay = "위챗페이"
+alipay = "알리페이"
+paypal = "페이팔"
+bitcoin = "비트코인"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "페이지를 찾을 수 없습니다"
+
+[pageNotFoundText]
+other = "죄송합니다. 찾고 있는 페이지가 존재하지 않습니다."
+# === 404.html ===
+
+# === offline ===
+[offlineTitle]
+other = "오프라인"
+
+[offlineText]
+other = "인터넷에 연결되어 있지 않으며, 캐시된 페이지만 사용할 수 있습니다."
+# === offline ===
+
+# === GitHub Alert ===
+[alert]
+note = "노트"
+tip = "팁"
+important = "중요"
+warning = "경고"
+caution = "주의"
+# === GitHub Alert ===
+
+# === Task lists ===
+[taskList]
+x = "완료"
+" " = "미완료"
+"/" = "진행 중"
+"-" = "취소됨"
+"<" = "계획됨"
+">" = "다시 계획됨"
+"!" = "중요"
+"?" = "문제"
+# === Task lists ===
+
+# === shortcodes/admonition.html ===
+[admonition]
+note = "노트"
+abstract = "초록"
+info = "정보"
+todo = "할 일"
+tip = "팁"
+success = "성공"
+question = "질문"
+warning = "경고"
+failure = "실패"
+danger = "위험"
+bug = "버그"
+example = "예시"
+quote = "인용"
+# === shortcodes/admonition.html ===
+
+# === shortcodes/version.html ===
+[version]
+new = "추가됨"
+changed = "변경됨"
+deleted = "삭제됨"
+# === shortcodes/version.html ===

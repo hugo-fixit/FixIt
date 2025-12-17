@@ -20,7 +20,7 @@
 {{- end -}}
 {{- if $config.linewraptoggler -}}
   {{- $lineWrapIcon := dict "Class" "fa-solid fa-right-left fa-fw" | partial "plugin/icon.html" -}}
-  {{- $lineWrapBtn = printf `<span class="line-wrap-btn" aria-label="%s" role="button" title="%s">%s</span>` (T "assets.toggleCodeWrapping") (T "assets.toggleCodeWrapping") $lineWrapIcon -}}
+  {{- $lineWrapBtn = printf `<span class="line-wrap-btn" aria-label="%s" role="button" title="%s">%s</span>` (T "assets.toggleLineWrap") (T "assets.toggleLineWrap") $lineWrapIcon -}}
 {{- end -}}
 {{- if $config.editable -}}
   {{- $editIcon := dict "Class" "fa-solid fa-pen-to-square fa-fw" | partial "plugin/icon.html" -}}

@@ -183,6 +183,8 @@ FixIt supports multilingual and i18n. For more information, see the [Content Man
 - Romanian
 - Vietnamese
 - Hindi
+- Japanese
+- Korean
 
 </details>
 
