@@ -26,11 +26,7 @@
     }
 
     sup {
-      color: $global-font-secondary-color;
-
-      [data-theme='dark'] & {
-        color: $global-font-secondary-color-dark;
-      }
+      color: var(#{$rootPrefix}global-font-secondary-color);
     }
   }
 }

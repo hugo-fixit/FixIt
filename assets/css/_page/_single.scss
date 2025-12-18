@@ -37,7 +37,7 @@
 
   .post-meta {
     font-size: 0.875rem;
-    color: $global-font-secondary-color;
+    color: var(#{$rootPrefix}global-font-secondary-color);
 
     .comment-visitors,
     .comment-count {
@@ -46,10 +46,6 @@
 
     span {
       display: inline-block;
-    }
-
-    [data-theme='dark'] & {
-      color: $global-font-secondary-color-dark;
     }
 
     @include link(false, true);
@@ -91,9 +87,9 @@
     content: attr(data-end-flag);
     display: block;
     text-align: center;
-    color: $global-font-secondary-color;
     font-size: 15px;
     padding: 5px;
+    color: var(#{$rootPrefix}global-font-secondary-color);
   }
 
   hr {
@@ -273,18 +269,10 @@
     }
 
     ruby {
-      background: $code-background-color;
+      background-color: var(#{$rootPrefix}code-block-background-color);
 
       rt {
-        color: $global-font-secondary-color;
-      }
-
-      [data-theme='dark'] & {
-        background: $code-background-color-dark;
-
-        rt {
-          color: $global-font-secondary-color-dark;
-        }
+        color: var(#{$rootPrefix}global-font-secondary-color);
       }
     }
 

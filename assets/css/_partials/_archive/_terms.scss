@@ -71,13 +71,9 @@
 
 .archive-item-date {
   text-align: right;
-  color: $global-font-secondary-color;
+  color: var(#{$rootPrefix}global-font-secondary-color);
   white-space: nowrap;
   font-variant-numeric: tabular-nums lining-nums;
-
-  [data-theme='dark'] & {
-    color: $global-font-secondary-color-dark;
-  }
 }
 
 .more-post {

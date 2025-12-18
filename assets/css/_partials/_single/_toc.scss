@@ -56,18 +56,10 @@
   }
 
   ruby {
-    background: $code-background-color;
+    background-color: var(#{$rootPrefix}code-block-background-color);
 
     rt {
-      color: $global-font-secondary-color;
-    }
-
-    [data-theme='dark'] & {
-      background: $code-background-color-dark;
-
-      rt {
-        color: $global-font-secondary-color-dark;
-      }
+      color: var(#{$rootPrefix}global-font-secondary-color);
     }
   }
 }

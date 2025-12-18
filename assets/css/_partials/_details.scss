@@ -7,12 +7,8 @@
     }
 
     i.details-icon {
-      color: $global-font-secondary-color;
+      color: var(#{$rootPrefix}global-font-secondary-color);
       @include transition(transform 0.2s ease);
-
-      [data-theme='dark'] & {
-        color: $global-font-secondary-color-dark;
-      }
     }
   }
 

@@ -62,11 +62,7 @@
       font-weight: normal;
       margin: 0;
       padding: 0.5rem;
-      color: $global-font-secondary-color;
-
-      [data-theme='dark'] & {
-        color: $global-font-secondary-color-dark;
-      }
+      color: var(#{$rootPrefix}global-font-secondary-color);
     }
   }
 }
@@ -133,21 +129,12 @@
 
     .content {
       margin-top: 0.3rem;
-      color: $global-font-secondary-color;
-
-      [data-theme='dark'] & {
-        color: $global-font-secondary-color-dark;
-      }
-
+      color: var(#{$rootPrefix}global-font-secondary-color);
       @include link(false, true);
 
       b,
       strong {
-        color: $global-font-secondary-color;
-
-        [data-theme='dark'] & {
-          color: $global-font-secondary-color-dark;
-        }
+        color: var(#{$rootPrefix}global-font-secondary-color);
       }
     }
 

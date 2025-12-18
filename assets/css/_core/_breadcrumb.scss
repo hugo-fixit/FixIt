@@ -47,11 +47,7 @@
         content: attr(data-separator);
         display: inline-block;
         padding-inline: 0.5rem;
-        color: $global-font-secondary-color;
-
-        [data-theme='dark'] & {
-          color: $global-font-secondary-color-dark;
-        }
+        color: var(#{$rootPrefix}global-font-secondary-color);
       }
 
       &.active {

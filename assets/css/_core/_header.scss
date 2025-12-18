@@ -177,11 +177,7 @@ header {
     @include placeholder($global-font-secondary-color);
 
     .search-button {
-      color: $global-font-secondary-color;
-
-      [data-theme='dark'] & {
-        color: $global-font-secondary-color-dark;
-      }
+      color: var(#{$rootPrefix}global-font-secondary-color);
     }
 
     .search-clear:hover {
@@ -580,25 +576,18 @@ header {
           font-size: 0.875rem;
           float: right;
           text-align: right;
-          color: $global-font-secondary-color;
-
-          [data-theme='dark'] & {
-            color: $global-font-secondary-color-dark;
-          }
+          color: var(#{$rootPrefix}global-font-secondary-color);
         }
 
         .suggestion-context {
           line-height: 1.25rem;
           @include box(vertical);
           -webkit-line-clamp: 2;
+          line-clamp: 2;
           overflow: hidden;
           text-overflow: ellipsis;
           @include overflow-wrap(break-word);
-          color: $global-font-secondary-color;
-
-          [data-theme='dark'] & {
-            color: $global-font-secondary-color-dark;
-          }
+          color: var(#{$rootPrefix}global-font-secondary-color);
         }
 
         em {
@@ -641,11 +630,7 @@ header {
       padding: 0.5rem 1rem;
       float: right;
       font-size: 0.8rem;
-      color: $global-font-secondary-color;
-
-      [data-theme='dark'] {
-        color: $global-font-secondary-color-dark;
-      }
+      color: var(#{$rootPrefix}global-font-secondary-color);
 
       @include link(false, false);
 

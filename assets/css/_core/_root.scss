@@ -8,11 +8,6 @@
   #{$rootPrefix}global-font-secondary-color: #{$global-font-secondary-color};
   #{$rootPrefix}global-border-color: #{$global-border-color};
 
-  // Theme colors variables
-  @each $color, $value in $theme-colors {
-    #{$rootPrefix}#{$color}: #{$value};
-  }
-
   // Scroll margin top and Stack sticky top related
   #{$rootPrefix}scroll-mt: calc(#{$header-height} + #{$global-scroll-margin-top});
 
@@ -37,6 +32,11 @@
   #{$rootPrefix}code-header-color: #{$code-header-color};
   #{$rootPrefix}code-header-bg: #{darken($code-background-color, 5%)};
   #{$rootPrefix}gist-meta-background-color: #{darken($code-background-color, 5%)};
+
+  // Theme colors variables
+  @each $color, $value in $theme-colors {
+    #{$rootPrefix}#{$color}: #{$value};
+  }
 }
 
 // Dark theme
@@ -44,10 +44,6 @@
   #{$rootPrefix}global-font-color: #{$global-font-color-dark};
   #{$rootPrefix}global-font-secondary-color: #{$global-font-secondary-color-dark};
   #{$rootPrefix}global-border-color: #{$global-border-color-dark};
-
-  @each $color, $value in $theme-colors {
-    #{$rootPrefix}#{$color}: #{darken($value, 5%)};
-  }
 
   #{$rootPrefix}hr-background-color: #{lighten($global-border-color-dark, 5%)};
   #{$rootPrefix}hr-before-color: #{darken($global-link-hover-color-dark, 4%)};
@@ -57,4 +53,8 @@
   #{$rootPrefix}code-header-color: #{$code-header-color-dark};
   #{$rootPrefix}code-header-bg: #{darken($code-background-color-dark, 5%)};
   #{$rootPrefix}gist-meta-background-color: #{darken($code-background-color-dark, 5%)};
+
+  @each $color, $value in $theme-colors {
+    #{$rootPrefix}#{$color}: #{darken($value, 5%)};
+  }
 }

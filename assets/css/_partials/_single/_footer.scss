@@ -19,22 +19,14 @@
 
       .post-info-mod {
         font-size: 0.8em;
-        color: $global-font-secondary-color;
-
-        [data-theme='dark'] & {
-          color: $global-font-secondary-color-dark;
-        }
+        color: var(#{$rootPrefix}global-font-secondary-color);
 
         @include link(false, false);
       }
 
       .post-info-license {
         font-size: 0.8em;
-        color: $global-font-secondary-color;
-
-        [data-theme='dark'] & {
-          color: $global-font-secondary-color-dark;
-        }
+        color: var(#{$rootPrefix}global-font-secondary-color);
 
         @include link(false, false);
       }
