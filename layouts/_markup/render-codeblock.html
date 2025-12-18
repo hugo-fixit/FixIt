@@ -9,6 +9,18 @@
   {{- $targetClass := add "code-block " $class -}}
   {{- with $config.wrapperclass -}}{{ $targetClass = add $targetClass " " . }}{{- end -}}
 
+  {{- /* add code wrapper */ -}}
+  {{- $REin := cond (strings.Contains $wrapper `<table class="lntable">`)
+    `(<table class="lntable">[\s\S]*?<\/table>)`
+    `(<pre tabindex="0" class="chroma">[\s\S]*?<\/pre>)` -}}
+  {{- $REout := printf `<div class="code-wrapper">$1</div>` -}}
+  {{- $wrapper = replaceRE $REin $REout $wrapper -}}
+
+  {{- /* hide line numbers if linenos=false */ -}}
+  {{- if not (strings.Contains $wrapper `class="lnt"`) | and (not (strings.Contains $wrapper `class="ln"`)) -}}
+    {{- $targetClass = add $targetClass " line-nos-hidden" -}}
+  {{- end -}}
+
   {{- /* add code expand button */ -}}
   {{- $lines := cond .Inner (len (split .Inner "\n")) 0 -}}
   {{- $maxShownLines := $config.maxshownlines -}}
@@ -19,9 +31,6 @@
   {{- /* render for different modes */ -}}
   {{- if eq $mode "classic" -}}
     {{- $wrapper = dict "Wrapper" $wrapper "Config" $config "Type" .Type | partial "function/code-header.html" -}}
-    {{- if eq .Options.linenos false -}}
-      {{- $targetClass = add $targetClass " line-nos-hidden" -}}
-    {{- end -}}
   {{- else -}}
     {{- $wrapper = dict "Wrapper" $wrapper "Config" $config | partial "function/code-copy-btn.html" -}}
   {{- end -}}

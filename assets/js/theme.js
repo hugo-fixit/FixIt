@@ -552,8 +552,13 @@ class FixIt {
 
   initTable(target = document) {
     this.util.forEach(target.querySelectorAll('.content table'), ($table) => {
+      if ($table.parentElement.classList.contains('table-wrapper') || $table.closest('.gist')) return;
       const $wrapper = document.createElement('div');
       $wrapper.className = 'table-wrapper';
+      // highlight shortcode
+      if ($table.closest('.highlight')) {
+        $wrapper.className = 'code-wrapper';
+      }
       $table.parentElement.replaceChild($wrapper, $table);
       $wrapper.appendChild($table);
     });
