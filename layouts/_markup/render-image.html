@@ -13,7 +13,7 @@ A Markdown image has three components: the image description, the image destinat
   (dict "Process" "resize 1200x webp q75" "descriptor" "1200w")
   (dict "Process" "resize 1600x webp q75" "descriptor" "1600w")
 -}}
-{{- if .Title | and .Text -}}
+{{- if .Title -}}
   {{- $linked := ne $params.lightgallery false -}}
   <figure>
     {{- dict "Src" .Destination "Alt" .PlainText "Title" .Title "Caption" .Text "Linked" $linked "Loading" "lazy" "Resources" .Page.Resources "OptimConfig" $optim | partial "plugin/image.html" -}}

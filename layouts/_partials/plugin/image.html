@@ -73,7 +73,7 @@ https://github.com/HEIGE-PCloud/DoIt/blob/main/layouts/_partials/plugin/image.ht
 {{- end -}}
 
 {{- if .Linked -}}
-<a class="lightgallery" href="{{ $src }}" title="{{ .Title | default $alt }}" data-thumbnail="{{ $src }}"{{ with $caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
+<a class="lightgallery" target="_blank" href="{{ $src }}" title="{{ .Title | default $alt }}" data-thumbnail="{{ $src }}"{{ with $caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
 {{- end -}}
 <img {{- with .Class }} class="{{ . }}"{{ end }}{{ with .Loading }} loading="{{ . }}"{{ end }} {{ printf "src='%v'" $src | safeHTMLAttr }}{{ with $srcset }} srcset="{{ . }}"{{ end }}{{ with .Sizes }} sizes="{{ . }}"{{ end }}{{ with $alt }} alt="{{ . }}"{{ end }}{{ with $height }} height="{{ . }}"{{ end }}{{ with $width }} width="{{ . }}"{{ end }}{{ with .Decoding }} decoding="{{ . }}"{{ end }}{{ with .Referrerpolicy }} referrerpolicy="{{ . }}"{{ end }}>
 {{- if .Linked -}}
