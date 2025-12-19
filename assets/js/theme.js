@@ -452,23 +452,6 @@ class FixIt {
   }
 
   /**
-   * Browsers compatible with non-Chromium engines (https://caniuse.com/css3-attr)
-   * @param {HTMLElement} codeBlock code block wrapper element
-   */
-  initCodeCompatibility(codeBlock) {
-    if (navigator.userAgent.toLowerCase().includes('chrome')) return;
-    codeBlock.style.setProperty('--fi-max-shown-lines', Number(codeBlock.dataset.max));
-    codeBlock.style.setProperty('--fi-linenostart', Number(codeBlock.dataset.linenostart));
-  }
-
-  initLineNosWidth(codeBlock) {
-    const digit = this.util.digitCount(codeBlock.dataset.lines);
-    if (digit > 1) {
-      codeBlock.style.setProperty('--fi-line-nos-width', `${digit}ch`);
-    }
-  }
-
-  /**
    * init code wrapper
    */
   initCodeWrapper() {
@@ -481,8 +464,6 @@ class FixIt {
 
       this.initCopyCode($codeBlock, $codePreEl);
       this.initCodeExpandBtn($codeBlock);
-      this.initCodeCompatibility($codeBlock);
-      this.initLineNosWidth($codeBlock);
 
       // classic mode code block interactions
       if ($codeBlock.dataset.mode === 'classic') {

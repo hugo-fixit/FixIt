@@ -289,7 +289,7 @@ privacyEnhanced = true
 
 [mediaTypes]
 # [mediaTypes."application/feed+json"]
-#   suffixes = ["json"]
+# suffixes = ["json"]
 
 # -------------------------------------------------------------------------------------
 # Output Format Configuration

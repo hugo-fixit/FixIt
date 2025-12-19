@@ -69,18 +69,19 @@ pre:not([data-processed]) {
 .highlight {
   margin: 0.5rem 0;
   position: relative;
-  counter-reset: codeNos calc(var(#{$rootPrefix}linenostart) - 1);
-  @include border-radius($global-border-radius);
-  // attr() for arbitrary properties is currently only supported in Chromium-based browsers (see https://caniuse.com/css3-attr);
-  // non-supporting browsers fall back to values set via initCodeCompatibility() in JavaScript.
-  #{$rootPrefix}max-shown-lines: attr(data-max number, 10);
-  #{$rootPrefix}linenostart: attr(data-linenostart number, 1);
 
   .code-wrapper {
     overflow: hidden;
     height: auto;
+    counter-reset: codeNos calc(var(#{$rootPrefix}line-start) - 1);
+    @include border-radius($global-border-radius);
     @include transition(height 0.5s ease-out);
     @include border-radius($global-border-radius);
+    // attr() for arbitrary properties is currently only supported in Chromium-based browsers (see https://caniuse.com/css3-attr);
+    // non-supporting browsers fall back to values set via Hugo templating in render-codeblock.html
+    #{$rootPrefix}max-shown-lines: attr(data-max number, 10);
+    #{$rootPrefix}line-start: attr(data-line-start number, 1);
+    #{$rootPrefix}line-digit: attr(data-line-digit number, 1);
   }
 
   > .chroma {
@@ -359,7 +360,7 @@ pre:not([data-processed]) {
         content: counter(codeNos);
         text-wrap: nowrap;
         text-align: right;
-        min-width: var(#{$rootPrefix}line-nos-width, 1ch);
+        min-width: calc(var(#{$rootPrefix}line-digit) * 1ch);
         padding-inline: 0.75rem;
         flex-shrink: 0;
         color: var(#{$rootPrefix}global-font-secondary-color);
