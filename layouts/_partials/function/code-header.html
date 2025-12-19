@@ -1,7 +1,7 @@
 {{- /* Code header for classic mode code blocks */ -}}
 {{- $config := .Config -}}
 {{- $wrapper := .Wrapper -}}
-{{- $type := lower .Type | default "fallback" -}}
+{{- $lang := cond (transform.CanHighlight .Type) (lower .Type) "fallback" -}}
 {{- $name := $config.name -}}
 {{- $lineNosBtn := "" -}}
 {{- $lineWrapBtn := "" -}}
@@ -33,7 +33,7 @@
 {{- with $config.name -}}
   {{- $titleEl = replace $titleEl `<span class="code-title">` (printf `<span class="code-title" data-name="%s">` .) -}}
 {{- end -}}
-{{- $codeHeader := printf `<div class="code-header language-%s">%s%s%s%s%s%s</div>` $type $titleEl $ellipsisBtn $lineNosBtn $lineWrapBtn $editBtn $copyBtn -}}
+{{- $codeHeader := printf `<div class="code-header language-%s">%s%s%s%s%s%s</div>` $lang $titleEl $ellipsisBtn $lineNosBtn $lineWrapBtn $editBtn $copyBtn -}}
 {{- $wrapper = replaceRE `(<div class="code-wrapper">)` (printf "%s$1" $codeHeader) $wrapper -}}
 
 {{- return $wrapper -}}
