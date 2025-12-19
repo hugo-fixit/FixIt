@@ -1,0 +1,22 @@
+{{- /*
+  Override the default highlight shortcode
+  Add a code wrapper to better style for highlight shortcode code blocks
+  See https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_shortcodes/highlight.html
+  Usage:
+  ```
+  {{< highlight LANG [OPTIONS] >}}
+  CODE
+  {{< /highlight >}}
+  ```
+  Recommended to use the Markdown code fences extended syntax:
+  ```LANG [OPTIONS]
+  CODE
+  ```
+  See: https://fixit.lruihao.cn/documentation/content-management/markdown-syntax/extended/#options
+*/ -}}
+{{- $code := trim .InnerDeindent "\n\r" -}}
+{{- $lang := .Get 0 -}}
+{{- $options := .Get 1 -}}
+{{- $wrapper := highlight $code $lang $options -}}
+{{- $wrapper = partial "function/code-wrapper.html" $wrapper -}}
+{{- $wrapper | safeHTML -}}

@@ -10,11 +10,7 @@
   {{- with $config.wrapperclass -}}{{ $targetClass = add $targetClass " " . }}{{- end -}}
 
   {{- /* add code wrapper */ -}}
-  {{- $REin := cond (strings.Contains $wrapper `<table class="lntable">`)
-    `(<table class="lntable">[\s\S]*?<\/table>)`
-    `(<pre tabindex="0" class="chroma">[\s\S]*?<\/pre>)` -}}
-  {{- $REout := printf `<div class="code-wrapper">$1</div>` -}}
-  {{- $wrapper = replaceRE $REin $REout $wrapper -}}
+  {{- $wrapper = partial "function/code-wrapper.html" $wrapper -}}
 
   {{- /* hide line numbers if linenos=false */ -}}
   {{- if not (strings.Contains $wrapper `class="lnt"`) | and (not (strings.Contains $wrapper `class="ln"`)) -}}

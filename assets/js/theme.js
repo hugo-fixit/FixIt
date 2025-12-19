@@ -550,20 +550,6 @@ class FixIt {
     stagingDOM.destroy();
   }
 
-  initTable(target = document) {
-    this.util.forEach(target.querySelectorAll('.content table'), ($table) => {
-      if ($table.parentElement.classList.contains('table-wrapper') || $table.closest('.gist')) return;
-      const $wrapper = document.createElement('div');
-      $wrapper.className = 'table-wrapper';
-      // highlight shortcode
-      if ($table.closest('.highlight')) {
-        $wrapper.className = 'code-wrapper';
-      }
-      $table.parentElement.replaceChild($wrapper, $table);
-      $wrapper.appendChild($table);
-    });
-  }
-
   /**
    * Helper method to update TOC active state based on scroll position
    * @param {HTMLElement} $tocContainer - TOC container element for parent traversal
@@ -1159,7 +1145,6 @@ class FixIt {
     this.initLightGallery();
     this.initCodeWrapper();
     this.initDiagramCopyBtn();
-    this.initTable(target);
     this.initEcharts();
     this.initTypeit(target);
     this.initMapbox();

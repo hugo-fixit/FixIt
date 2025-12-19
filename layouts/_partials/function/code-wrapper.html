@@ -1,0 +1,6 @@
+{{- /* Code wrapper */ -}}
+{{- $REin := cond (strings.Contains . `<table class="lntable">`)
+  `(<table class="lntable">[\s\S]*?<\/table>)`
+  `(<pre tabindex="0" class="chroma">[\s\S]*?<\/pre>)` -}}
+{{- $REout := printf `<div class="code-wrapper">$1</div>` -}}
+{{- return replaceRE $REin $REout . -}}
