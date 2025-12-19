@@ -17,6 +17,5 @@
     {{- site.Home.Store.Set "hasJsonViewer" true -}}
   {{- end -}}
 {{- else -}}
-  {{- $result := transform.HighlightCodeBlock . -}}
-  {{- $result.Wrapped -}}
+  {{- partial "plugin/code-block-wrapper.html" . -}}
 {{- end -}}

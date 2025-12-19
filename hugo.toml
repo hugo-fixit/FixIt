@@ -1108,7 +1108,7 @@ maxShownLines = 10
 copyable = true
 # [classic] whether to enable line numbers toggle button in the code block header
 lineNosToggler = true
-# [classic] whether to enable toggle line wrapping in the code block header
+# [classic] whether to enable toggle line wrapping button in the code block header
 lineWrapToggler = true
 # [classic][Experimental] whether to enable code edit button in the code block header
 editable = false

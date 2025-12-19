@@ -42,60 +42,44 @@ pre:not([data-processed]) {
 .gist {
   font-size: $code-block-font-size;
   font-family: $code-font-family;
+  #{$rootPrefix}scrollbar-thumb-color: inherit;
 
-  .code-wrapper {
-    position: relative;
-    #{$rootPrefix}scrollbar-thumb-color: initial;
+  table {
+    width: 100%;
+    max-width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+  }
 
-    > table {
-      width: 100%;
-      max-width: 100%;
-      border-spacing: 0;
-      border-collapse: collapse;
-    }
-
-    > table,
-    > table thead,
-    > table tr,
-    > table td {
-      margin: 0;
-      padding: 0;
-      border: none;
-    }
+  table,
+  table thead,
+  table tr,
+  table td {
+    margin: 0;
+    padding: 0;
+    border: none;
   }
 }
 
-// block fenced code
+// Code fences blocks or highlight shortcodes
 .highlight {
   margin: 0.5rem 0;
   position: relative;
 
-  .code-wrapper {
-    overflow: hidden;
-    height: auto;
-    counter-reset: codeNos calc(var(#{$rootPrefix}line-start) - 1);
-    @include border-radius($global-border-radius);
-    @include transition(height 0.5s ease-out);
-    @include border-radius($global-border-radius);
-    // attr() for arbitrary properties is currently only supported in Chromium-based browsers (see https://caniuse.com/css3-attr);
-    // non-supporting browsers fall back to values set via Hugo templating in render-codeblock.html
-    #{$rootPrefix}max-shown-lines: attr(data-max number, 10);
-    #{$rootPrefix}line-start: attr(data-line-start number, 1);
-    #{$rootPrefix}line-digit: attr(data-line-digit number, 1);
-  }
-
   > .chroma {
     position: relative;
+    background-color: var(#{$rootPrefix}code-block-background-color);
+    @include border-radius($global-border-radius);
 
     &:is(pre):has(.ln) {
       padding: 0.5rem;
     }
 
     .lntable {
-      width: auto;
       overflow: auto;
       display: block;
       background-color: var(#{$rootPrefix}code-block-background-color);
+      @include border-radius($global-border-radius);
 
       td {
         vertical-align: top;
@@ -105,11 +89,6 @@ pre:not([data-processed]) {
       pre {
         outline-offset: -1px;
         @include border-radius(0);
-      }
-
-      /* lineNumbersInTable=false */
-      .ln {
-        min-width: 1.25rem;
       }
 
       // ========== lineNumbersInTable ========== //
@@ -129,311 +108,349 @@ pre:not([data-processed]) {
     }
   }
 
-  .code-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    width: 100%;
-    font-family: $global-font-family;
-    font-weight: bold;
-    line-height: 1.4em;
-    color: var(#{$rootPrefix}code-header-color);
-    background-color: var(#{$rootPrefix}code-header-bg);
-    @include border-radius($global-border-radius $global-border-radius 0 0);
-    @include transition(border-radius 0s);
-
-    + .code-wrapper {
-      @include border-radius(0 0 $global-border-radius $global-border-radius);
-
-      > pre.chroma {
-        @include border-radius(0 0 $global-border-radius $global-border-radius);
-      }
-    }
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    .code-title {
-      width: 100%;
-      padding: 0.4rem;
-
-      &::after {
-        padding-left: 0.2rem;
-        content: attr(data-name, var(#{$rootPrefix}code-type, 'Code'));
-      }
-
-      // filename for code block
-      &[data-name]::after {
-        @include overflow-wrap(break-word);
-      }
-
-      .arrow {
-        padding: 0 0.2rem;
-        @include transition(transform 0.2s ease);
-      }
-
-      .title-inner {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: var(#{$rootPrefix}code-header-bg);
-        padding-inline: 1em;
-        max-width: 80%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        @include z-index(0, 1);
-      }
-    }
-
-    .ellipses-btn {
-      display: none;
-      padding: 0.4rem;
-    }
-
-    [role='button'] {
-      padding: 0.4rem;
-      @extend .print-d-none;
-    }
-
-    @each $type, $text in $code-type-map {
-      &.language-#{to-lower-case($type)} {
-        #{$rootPrefix}code-type: $text;
-      }
-    }
-  }
-
-  .code-copy-btn {
-    @extend .diagram-copy-btn;
-  }
-
-  .code-expand-btn {
-    width: 100%;
-    padding-block: 1rem;
-    text-align: center;
-    position: absolute;
-    bottom: 0;
-    background: linear-gradient(
-      180deg,
-      rgba($code-background-color, 0) 0%,
-      rgba($code-background-color, 0.9) 60%,
-      $code-background-color 100%
-    );
-    @include z-index(0, 1);
-
-    [data-theme='dark'] & {
-      background: linear-gradient(
-        180deg,
-        rgba($code-background-color-dark, 0) 0%,
-        rgba($code-background-color-dark, 0.9) 60%,
-        $code-background-color-dark 100%
-      );
-    }
-
-    .fa-angles-down {
-      opacity: 0;
-      animation-name: fadeOutDown;
-      animation-duration: 1.5s;
-      animation-iteration-count: infinite;
-      animation-delay: 0.3s;
-      @include transition(transform 0.2s ease);
-    }
-  }
-
-  &:has(.code-expand-btn):not(.is-expanded, .is-collapsed) {
-    .code-wrapper {
-      height: calc(1.45em * var(#{$rootPrefix}max-shown-lines) + var(#{$rootPrefix}code-expand-offset, 0.5rem));
-    }
-    &[data-mode='mac'] .code-wrapper {
-      #{$rootPrefix}code-expand-offset: 1.875rem + 0.5rem;
-    }
-  }
-
-  &.line-wrapping .line-wrap-btn,
-  &:not(.line-nos-hidden) .line-nos-btn,
-  .code-header [role='button']:hover,
-  &:has([contenteditable='true']) .edit-btn {
-    color: $global-link-hover-color;
-
-    [data-theme='dark'] & {
-      color: $global-link-hover-color-dark;
-    }
-  }
-
-  &.is-collapsed {
-    .code-header {
-      #{$rootPrefix}code-header-bg: #{darken($code-background-color, 6%)};
-      @include border-radius($global-border-radius);
-      @include transition(border-radius 0.2s ease 0.2s);
-
-      [data-theme='dark'] & {
-        #{$rootPrefix}code-header-bg: #{darken($code-background-color-dark, 6%)};
-      }
-
-      + .code-wrapper {
-        height: 0;
-      }
-    }
-
-    .arrow {
-      @include transform(rotate(-90deg));
-    }
-
-    .ellipses-btn {
-      display: inline;
-    }
-
-    .code-header [role='button']:not(.ellipses-btn),
-    .code-expand-btn {
-      display: none;
-    }
-  }
-
-  &.is-expanded {
-    margin-bottom: 1rem;
-    &:has([contenteditable='true']) .code-expand-btn {
-      display: none;
-    }
-    .code-expand-btn {
-      background: transparent;
-      padding-block: 0;
-      transform: translateY(1rem);
-
-      .fa-angles-down {
-        animation-name: fadeOutRotate;
-
-        @keyframes fadeOutRotate {
-          0% {
-            opacity: 1;
-            transform: rotate(180deg);
-          }
-          100% {
-            opacity: 0;
-            transform: rotate(180deg) translate3d(0, 100%, 0);
-          }
-        }
-      }
-    }
-  }
-
-  &.line-nos-hidden {
-    > .chroma .lntable {
-      width: 100%;
-      display: table;
-    }
-    // hide original line number column
-    .lntd:first-child,
-    .ln {
-      display: none;
-    }
-  }
-
-  &.line-wrapping {
-    > .chroma .lntable {
-      width: 100%;
-      display: table;
-
-      // hide original line number column
-      .lntd:first-child {
-        display: none;
-      }
-    }
-    .lntd:last-child pre.chroma,
-    .code-wrapper > pre.chroma {
-      code {
-        text-wrap: wrap;
-      }
-    }
-  }
-
-  // line number for code block with line wrapping or lineNos=false
-  &.line-wrapping:not(.line-nos-hidden) .lntd:last-child pre.chroma,
-  &:not(.line-nos-hidden) .code-wrapper > pre.chroma:not(:has(.ln)) {
-    padding-left: 0;
-    > code > .line {
-      display: flex;
-
-      &::before {
-        counter-increment: codeNos;
-        content: counter(codeNos);
-        text-wrap: nowrap;
-        text-align: right;
-        min-width: calc(var(#{$rootPrefix}line-digit) * 1ch);
-        padding-inline: 0.75rem;
-        flex-shrink: 0;
-        color: var(#{$rootPrefix}global-font-secondary-color);
-        background-color: var(#{$rootPrefix}code-block-background-color);
-      }
-    }
-  }
-
-  // add sticky effect for line number column when lineNos=false
-  &:not(.line-nos-hidden) .code-wrapper > pre.chroma > code > .line::before {
-    position: sticky;
-    left: 0;
-  }
-
-  &:not(.line-nos-hidden) {
-    > .chroma {
-      .lntable {
-        .lntd:last-child pre.chroma {
-          padding-left: 0;
-        }
-      }
-    }
-  }
-
-  /* lineNumbersInTable=false */
+  // lineNumbersInTable=false
   .ln {
     padding-right: 0.75rem;
     display: inline-block;
     text-align: right;
+    position: sticky;
+    left: 0;
   }
-  /* LineNumbers */
+  // Line numbers
   .lnt,
   .ln {
     color: var(#{$rootPrefix}global-font-secondary-color);
     @include user-select(none);
   }
 
-  &[data-mode='mac'] {
-    pre.chroma {
-      padding-top: 1.875rem;
+  &:not(.code-block) {
+    .lntd:last-child pre.chroma {
+      padding-left: 0;
+    }
+  }
 
-      &::after {
-        background: var(#{$rootPrefix}mac-red, #fc625d);
-        box-shadow: 20px 0 var(#{$rootPrefix}mac-yellow, #fdbc40), 40px 0 var(#{$rootPrefix}mac-green, #35cd4b);
-        left: 8px;
-        top: 8px;
-        position: absolute;
-        border-radius: 50%;
-        content: ' ';
-        height: 12px;
-        width: 12px;
+  // code fences blocks wrapped
+  &.code-block {
+    .code-wrapper {
+      overflow: hidden;
+      height: auto;
+      position: relative;
+      counter-reset: codeNos calc(var(#{$rootPrefix}line-start) - 1);
+      @include border-radius($global-border-radius);
+      @include transition(height 0.5s ease-out);
+      @include border-radius($global-border-radius);
+      // attr() for arbitrary properties is currently only supported in Chromium-based browsers (see https://caniuse.com/css3-attr);
+      // non-supporting browsers fall back to values set via Hugo templating in render-codeblock.html
+      #{$rootPrefix}max-shown-lines: attr(data-max number, 10);
+      #{$rootPrefix}line-start: attr(data-line-start number, 1);
+      #{$rootPrefix}line-digit: attr(data-line-digit number, 1);
+    }
 
-        [data-theme='dark'] & {
-          #{$rootPrefix}mac-red-dark: #ff5f56;
-          #{$rootPrefix}mac-yellow-dark: #febc2e;
-          #{$rootPrefix}mac-green-dark: #28c840;
+    // code preview
+    &:has(.code-expand-btn):not(.is-expanded, .is-collapsed) {
+      .code-wrapper {
+        height: calc(1.45em * var(#{$rootPrefix}max-shown-lines) + var(#{$rootPrefix}code-expand-offset, 0.5rem));
+      }
+      &[data-mode='mac'] .code-wrapper {
+        #{$rootPrefix}code-expand-offset: 1.875rem + 0.5rem;
+      }
+    }
+    
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+      width: 100%;
+      font-family: $global-font-family;
+      font-weight: bold;
+      line-height: 1.4em;
+      color: var(#{$rootPrefix}code-header-color);
+      background-color: var(#{$rootPrefix}code-header-background-color);
+      @include border-radius($global-border-radius $global-border-radius 0 0);
+      @include transition(border-radius 0s);
+
+      + .code-wrapper {
+        @include border-radius(0 0 $global-border-radius $global-border-radius);
+
+        > pre.chroma {
+          @include border-radius(0 0 $global-border-radius $global-border-radius);
+        }
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      .code-title {
+        width: 100%;
+        padding: 0.4rem;
+
+        &::after {
+          padding-left: 0.2rem;
+          content: attr(data-name, var(#{$rootPrefix}code-type, 'Code'));
+        }
+
+        // filename for code block
+        &[data-name]::after {
+          @include overflow-wrap(break-word);
+        }
+
+        .arrow {
+          padding: 0 0.2rem;
+          @include transition(transform 0.2s ease);
+        }
+
+        .title-inner {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: var(#{$rootPrefix}code-header-background-color);
+          padding-inline: 1em;
+          max-width: 80%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          @include z-index(0, 1);
+        }
+      }
+
+      .ellipses-btn {
+        display: none;
+        padding: 0.4rem;
+      }
+
+      [role='button'] {
+        padding: 0.4rem;
+        @extend .print-d-none;
+      }
+
+      @each $type, $text in $code-type-map {
+        &.language-#{to-lower-case($type)} {
+          #{$rootPrefix}code-type: $text;
         }
       }
     }
-  }
 
-  &[data-mode='simple'] {
-    pre.chroma {
-      padding-block: 0.875rem;
+    &.line-wrapping .line-wrap-btn,
+    &:not(.line-nos-hidden) .line-nos-btn,
+    .code-header [role='button']:hover,
+    &:has([contenteditable='true']) .edit-btn {
+      color: $global-link-hover-color;
+
+      [data-theme='dark'] & {
+        color: $global-link-hover-color-dark;
+      }
     }
-  }
 
-  // add border for non-classic mode
-  &.code-block:not([data-mode='classic']) {
-    border: 1px solid darken($code-background-color, 3%);
+    .code-expand-btn {
+      width: 100%;
+      padding-block: 1rem;
+      text-align: center;
+      position: absolute;
+      bottom: 0;
+      background: linear-gradient(
+        180deg,
+        rgba($code-background-color, 0) 0%,
+        rgba($code-background-color, 0.9) 60%,
+        $code-background-color 100%
+      );
+      @include z-index(0, 1);
 
-    [data-theme='dark'] & {
-      border-color: darken($code-background-color-dark, 3%);
+      [data-theme='dark'] & {
+        background: linear-gradient(
+          180deg,
+          rgba($code-background-color-dark, 0) 0%,
+          rgba($code-background-color-dark, 0.9) 60%,
+          $code-background-color-dark 100%
+        );
+      }
+
+      .fa-angles-down {
+        opacity: 0;
+        animation-name: fadeOutDown;
+        animation-duration: 1.5s;
+        animation-iteration-count: infinite;
+        animation-delay: 0.3s;
+        @include transition(transform 0.2s ease);
+      }
+    }
+
+    .code-copy-btn {
+      @extend .diagram-copy-btn;
+    }
+
+    // classic mode code block collapsed
+    &.is-collapsed {
+      .code-header {
+        #{$rootPrefix}code-header-background-color: #{darken($code-background-color, 6%)};
+        @include border-radius($global-border-radius);
+        @include transition(border-radius 0.2s ease 0.2s);
+
+        [data-theme='dark'] & {
+          #{$rootPrefix}code-header-background-color: #{darken($code-background-color-dark, 6%)};
+        }
+
+        + .code-wrapper {
+          height: 0;
+        }
+      }
+
+      .arrow {
+        @include transform(rotate(-90deg));
+      }
+
+      .ellipses-btn {
+        display: inline;
+      }
+
+      .code-header [role='button']:not(.ellipses-btn),
+      .code-expand-btn {
+        display: none;
+      }
+    }
+
+    // code preview expanded
+    &.is-expanded {
+      margin-bottom: 1rem;
+      &:has([contenteditable='true']) .code-expand-btn {
+        display: none;
+      }
+      .code-expand-btn {
+        background: transparent;
+        padding-block: 0;
+        transform: translateY(1rem);
+
+        .fa-angles-down {
+          animation-name: fadeOutRotate;
+
+          @keyframes fadeOutRotate {
+            0% {
+              opacity: 1;
+              transform: rotate(180deg);
+            }
+            100% {
+              opacity: 0;
+              transform: rotate(180deg) translate3d(0, 100%, 0);
+            }
+          }
+        }
+      }
+    }
+
+    // hide original line numbers
+    &.line-nos-hidden {
+      > .chroma .lntable {
+        width: 100%;
+        display: table;
+      }
+      .lntd:first-child,
+      .ln {
+        display: none;
+      }
+    }
+
+    // line wrapping
+    &.line-wrapping {
+      > .chroma .lntable {
+        width: 100%;
+        display: table;
+
+        // hide original line numbers
+        .lntd:first-child {
+          display: none;
+        }
+      }
+      .lntd:last-child pre.chroma,
+      .code-wrapper > pre.chroma {
+        code {
+          text-wrap: wrap;
+          white-space: pre-wrap;
+          @include overflow-wrap(break-word);
+        }
+      }
+    }
+
+    // line numbers (pseudo-elements) for code block with line wrapping or lineNos=false
+    &.line-wrapping:not(.line-nos-hidden) .lntd:last-child pre.chroma,
+    &:not(.line-nos-hidden) .code-wrapper > pre.chroma:not(:has(.ln)) {
+      padding-left: 0;
+      > code > .line {
+        display: flex;
+
+        &::before {
+          counter-increment: codeNos;
+          content: counter(codeNos);
+          white-space: nowrap;
+          text-align: right;
+          min-width: calc(var(#{$rootPrefix}line-digit) * 1ch);
+          padding-inline: 0.75rem;
+          flex-shrink: 0;
+          color: var(#{$rootPrefix}global-font-secondary-color);
+          background-color: var(#{$rootPrefix}code-block-background-color);
+        }
+
+        // highlight for line numbers
+        &.hl::before {
+          background-color: transparent;
+        }
+      }
+    }
+
+    // add sticky effect for line numbers when lineNos=false
+    &:not(.line-nos-hidden) .code-wrapper > pre.chroma > code > .line::before {
+      position: sticky;
+      left: 0;
+    }
+
+    // when line numbers shown
+    &:not(.line-nos-hidden) {
+      > .chroma {
+        .lntable {
+          .lntd:last-child pre.chroma {
+            padding-left: 0;
+          }
+        }
+      }
+    }
+
+    // add border for non-classic mode
+    &:not([data-mode='classic']) {
+      border: 1px solid darken($code-background-color, 3%);
+
+      [data-theme='dark'] & {
+        border-color: darken($code-background-color-dark, 3%);
+      }
+    }
+
+    &[data-mode='mac'] {
+      pre.chroma {
+        padding-top: 1.875rem;
+
+        &::after {
+          background: var(#{$rootPrefix}mac-red, #fc625d);
+          box-shadow: 20px 0 var(#{$rootPrefix}mac-yellow, #fdbc40), 40px 0 var(#{$rootPrefix}mac-green, #35cd4b);
+          left: 8px;
+          top: 8px;
+          position: absolute;
+          border-radius: 50%;
+          content: ' ';
+          height: 12px;
+          width: 12px;
+
+          [data-theme='dark'] & {
+            #{$rootPrefix}mac-red-dark: #ff5f56;
+            #{$rootPrefix}mac-yellow-dark: #febc2e;
+            #{$rootPrefix}mac-green-dark: #28c840;
+          }
+        }
+      }
+    }
+
+    &[data-mode='simple'] {
+      pre.chroma {
+        padding-block: 0.875rem;
+      }
     }
   }
 }
@@ -456,6 +473,22 @@ pre:not([data-processed]) {
 
     .blob-wrapper {
       padding-block: 0.5rem;
+
+      table.highlight {
+        background-color: inherit;
+        overflow: initial;
+
+        td.blob-num {
+          position: sticky;
+          left: 0;
+          background-color: var(#{$rootPrefix}code-block-background-color);
+          @include z-index(0, 1);
+        }
+
+        td.blob-code {
+          padding-left: 2px !important;
+        }
+      }
     }
   }
 
@@ -464,18 +497,6 @@ pre:not([data-processed]) {
     @include link(false, false);
     @include border-radius(0 0 $global-border-radius $global-border-radius);
     background-color: var(#{$rootPrefix}gist-meta-background-color);
-  }
-
-  table.highlight {
-    margin: 0;
-    background-color: inherit;
-
-    td.blob-num {
-      position: sticky;
-      left: 0;
-      background-color: var(#{$rootPrefix}code-block-background-color);
-      @include z-index(0, 1);
-    }
   }
 
   [data-theme='dark'] & {

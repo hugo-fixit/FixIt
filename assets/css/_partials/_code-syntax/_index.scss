@@ -19,11 +19,6 @@
     display: block;
     background-color: var(#{$rootPrefix}code-highlight-color);
     box-shadow: -0.75rem 0 0 var(#{$rootPrefix}code-highlight-color), 0.75rem 0 0 var(#{$rootPrefix}code-highlight-color);
-    #{$rootPrefix}code-highlight-color: #{$code-highlight-color};
-
-    [data-theme='dark'] & {
-      #{$rootPrefix}code-highlight-color: #{$code-highlight-color-dark};
-    }
   }
 
   @import '../_code-syntax/light';

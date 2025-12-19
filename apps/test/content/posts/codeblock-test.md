@@ -193,4 +193,8 @@ function isObjectLiteral(str) {
 
 ## Gist Embed
 
-{{< gist Lruihao fb8b2d0353465c4d40bf74818db80710 >}}
+```md
+{{</* gist Lruihao fb8b2d0353465c4d40bf74818db80710 */>}}
+```
+
+<!-- {{< gist Lruihao fb8b2d0353465c4d40bf74818db80710 >}} -->

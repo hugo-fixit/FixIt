@@ -1,0 +1,90 @@
+{{- /* Hook for code blocks rendering */ -}}
+{{- $config := .Attributes | merge (.Page.Param "codeblock") -}}
+{{- $result := transform.HighlightCodeBlock . -}}
+{{- $wrapper := $result.Wrapped -}}
+
+{{- /* If wrapper is enabled, add code wrapper and more features */ -}}
+{{- if $config.wrapper -}}
+  {{- $mode := $config.mode | default "classic" -}}
+  {{- $lines := cond .Inner (len (split .Inner "\n")) 0 -}}
+  {{- $maxShownLines := $config.maxshownlines -}}
+  {{- $lineNoStart := cond (ne .Options.linenostart nil) .Options.linenostart 1 -}}
+  {{- $lineNosDigit := strings.RuneCount (add $lines $lineNoStart) -}}
+  {{- $class := "highlight" -}}
+  {{- with $config.class -}}{{ $class = add $class " " . }}{{- end -}}
+  {{- $targetClass := add "code-block " $class -}}
+  {{- with $config.wrapperclass -}}{{ $targetClass = add $targetClass " " . }}{{- end -}}
+
+  {{- /* Add code wrapper around the table or pre */ -}}
+  {{- $REin := cond (strings.Contains $wrapper `<table class="lntable">`)
+    `(<table class="lntable">[\s\S]*?<\/table>)`
+    `(<pre tabindex="0" class="chroma">[\s\S]*?<\/pre>)` -}}
+  {{- $REout := printf `<div class="code-wrapper">$1</div>` -}}
+  {{- $wrapper = replaceRE $REin $REout $wrapper -}}
+
+  {{- /* Hide line numbers if linenos=false */ -}}
+  {{- if (not (strings.Contains $wrapper `class="lnt"`)) | and (not (strings.Contains $wrapper `class="ln"`)) -}}
+    {{- $targetClass = add $targetClass " line-nos-hidden" -}}
+  {{- end -}}
+
+  {{- /* Add code expand button */ -}}
+  {{- if (gt $lines $maxShownLines) | and (gt $lines 0) | and (gt $maxShownLines 0) -}}
+    {{- $wrapper = dict "Wrapper" $wrapper | partial "function/code-expand-btn.html" -}}
+  {{- end -}}
+
+  {{- /* Render for different modes */ -}}
+  {{- if eq $mode "classic" -}}
+    {{- $wrapper = dict "Wrapper" $wrapper "Config" $config "Type" .Type | partial "function/code-header.html" -}}
+  {{- else -}}
+    {{- $wrapper = dict "Wrapper" $wrapper "Config" $config | partial "function/code-copy-btn.html" -}}
+  {{- end -}}
+
+  {{- /* 
+    Add data attributes and class
+    Directly set CSS variables to ensure compatibility with non-Chromium-based browsers
+    See https://caniuse.com/css3-attr for attr() support status
+  */ -}}
+  {{- if $config.editable -}}
+    {{- $wrapper =
+      replace $wrapper
+      (printf `class="%s"` $class)
+      (printf `class="%s" data-editable="%v"` $class $config.editable)
+    -}}
+  {{- end -}}
+  {{- if $config.copyable -}}
+    {{- $wrapper =
+      replace $wrapper
+      (printf `class="%s"` $class)
+      (printf `class="%s" data-copyable="%v"` $class $config.copyable)
+    -}}
+  {{- end -}}
+  {{- if ne .Options.linenostart nil -}}
+    {{- $wrapper =
+      replace $wrapper
+      `class="code-wrapper"`
+      (printf `class="code-wrapper" data-line-start="%v"` .)
+    -}}
+  {{- end -}}
+  {{- $wrapperStyle := printf "--fi-max-shown-lines:%v;--fi-line-digit:%v;--fi-line-start:%v;" $maxShownLines $lineNosDigit $lineNoStart -}}
+  {{- $wrapper =
+    replace $wrapper
+    `class="code-wrapper"`
+    (printf `class="code-wrapper" style="%s"` $wrapperStyle)
+  -}}
+  {{- $wrapper =
+    replace $wrapper
+    `class="code-wrapper"`
+    (printf
+      `class="code-wrapper" data-max="%v" data-line-digit="%d"`
+      $maxShownLines
+      $lineNosDigit
+    )
+  -}}
+  {{- $wrapper =
+    replace $wrapper
+    (printf `class="%s"` $class)
+    (printf `class="%s" data-mode="%s"` $targetClass $mode)
+  -}}
+{{- end -}}
+
+{{- $wrapper | safeHTML -}}

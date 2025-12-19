@@ -83,6 +83,7 @@
   -webkit-appearance: $value;
 }
 
+// TODO Superseded by text-wrap: wrap; in modern browsers
 @mixin overflow-wrap($value) {
   word-wrap: $value;
   overflow-wrap: $value;
