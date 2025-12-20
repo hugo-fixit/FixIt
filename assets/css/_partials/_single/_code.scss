@@ -4,7 +4,7 @@ code {
 }
 
 // indented code
-pre:not([data-processed]) {
+pre {
   margin: 0;
   line-height: 1.45em;
   padding: 0.5rem 0.75rem;
@@ -15,7 +15,7 @@ pre:not([data-processed]) {
   @include border-radius($global-border-radius);
   @include tab-size(4);
 
-  + pre:not([data-processed]) {
+  + pre {
     margin-top: 0.5rem;
   }
 
@@ -65,6 +65,7 @@ pre:not([data-processed]) {
 .highlight {
   margin: 0.5rem 0;
   position: relative;
+  @include border-radius($global-border-radius);
 
   // lineNumbersInTable=true
   > .chroma {

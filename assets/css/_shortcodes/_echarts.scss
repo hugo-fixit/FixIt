@@ -1,4 +1,7 @@
 .echarts {
-  margin: 0.5rem 0;
   text-align: center;
+
+  &:not([_echarts_instance_])::before {
+    @include loading;
+  }
 }

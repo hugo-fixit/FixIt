@@ -2,11 +2,12 @@
 .mermaid-dark,
 .mermaid-neutral {
   position: relative;
+  margin: 0;
   overflow: hidden !important;
 
   &[data-processed] {
     text-align: center;
-    margin-block: 0.5rem;
+    background-color: transparent;
   }
 
   &:not([data-processed])::before {
@@ -28,18 +29,18 @@
 
 .mermaid-dark {
   height: 0;
-  padding: 0 !important;
+  padding: 0;
 
   [data-theme='dark'] & {
     height: auto;
-    padding: 0.5rem !important;
+    padding: 0.5rem 0.75rem;
   }
 }
 
 // for print view
 .mermaid-neutral {
   height: 0;
-  padding: 0 !important;
+  padding: 0;
 }
 
 @media only print {
@@ -49,6 +50,6 @@
   }
   .mermaid-neutral {
     height: auto;
-    padding: 0.5rem !important;
+    padding: 0.5rem 0.75rem;
   }
 }

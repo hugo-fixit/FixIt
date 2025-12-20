@@ -11,5 +11,5 @@
   background-repeat: no-repeat;
   background-image: var(#{$rootPrefix}loading-img);
   background-size: 60px;
-  z-index: 1;
+  @include z-index(0, 10);
 }
