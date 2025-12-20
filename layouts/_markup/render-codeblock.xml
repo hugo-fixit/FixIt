@@ -1,0 +1,11 @@
+{{- if eq .Type "timeline" -}}
+  {{- dict
+    "Options" .Attributes
+    "Inner" .Inner
+    "Resources" .Page.Resources
+    "Position" .Position
+    | partial "plugin/timeline.html"
+  -}}
+{{- else -}}
+  <pre><code>{{ .Inner }}</code></pre>
+{{- end -}}

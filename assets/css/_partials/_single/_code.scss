@@ -66,6 +66,7 @@ pre:not([data-processed]) {
   margin: 0.5rem 0;
   position: relative;
 
+  // lineNumbersInTable=true
   > .chroma {
     position: relative;
     background-color: var(#{$rootPrefix}code-block-background-color);
@@ -91,24 +92,15 @@ pre:not([data-processed]) {
         @include border-radius(0);
       }
 
-      // ========== lineNumbersInTable ========== //
       // line numbers
       .lntd:first-child {
         position: sticky;
         left: 0;
       }
-      // code content
-      .lntd:last-child {
-        width: 100%;
-        code {
-          width: 100%;
-        }
-      }
-      // ========== lineNumbersInTable ========== //
     }
   }
 
-  // lineNumbersInTable=false
+  // line numbers (lineNumbersInTable=false)
   .ln {
     padding-right: 0.75rem;
     display: inline-block;
@@ -363,18 +355,20 @@ pre:not([data-processed]) {
       }
       .lntd:last-child pre.chroma,
       .code-wrapper > pre.chroma {
+        max-width: 100%;
+        box-sizing: border-box;
+
         code {
           text-wrap: wrap;
-          white-space: pre-wrap;
-          @include overflow-wrap(break-word);
+          word-break: break-all;
+          overflow-wrap: break-word;
         }
       }
     }
 
-    // line numbers (pseudo-elements) for code block with line wrapping or lineNos=false
+    // line numbers (pseudo-elements) for code blocks
     &.line-wrapping:not(.line-nos-hidden) .lntd:last-child pre.chroma,
     &:not(.line-nos-hidden) .code-wrapper > pre.chroma:not(:has(.ln)) {
-      padding-left: 0;
       > code > .line {
         display: flex;
 
@@ -405,12 +399,9 @@ pre:not([data-processed]) {
 
     // when line numbers shown
     &:not(.line-nos-hidden) {
-      > .chroma {
-        .lntable {
-          .lntd:last-child pre.chroma {
-            padding-left: 0;
-          }
-        }
+      .lntd:last-child pre.chroma,
+      .code-wrapper > pre.chroma:not(:has(.ln)) {
+        padding-left: 0;
       }
     }
 

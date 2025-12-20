@@ -1,3 +1,0 @@
-{{- $result := transform.HighlightCodeBlock . -}}
-<pre><code>{{ $result.Inner }}</code></pre>
-{{- /* EOF */ -}}
