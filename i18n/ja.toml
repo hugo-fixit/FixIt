@@ -218,4 +218,5 @@ quote = "引用"
 new = "新規"
 changed = "変更"
 deleted = "削除"
+deprecated = "非推奨"
 # === shortcodes/version.html ===

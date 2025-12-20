@@ -222,4 +222,5 @@ quote = "Citat"
 new = "NOU"
 changed = "SCHIMBAT"
 deleted = "ȘTERS"
+deprecated = "DEPRECIAȚI"
 # === shortcodes/version.html ===

@@ -1,5 +1,6 @@
 {{- /* https://img.shields.io/badge/$label-$version-$color?style=flat&labelColor=403c3d */ -}}
-{{- $labelWidth := strings.RuneCount .label | mul (cond .isCJK 11.5 8.5) | add 10 -}}
+{{- $letterWidth := cond .isCJK 11.5 8.5 -}}
+{{- $labelWidth := strings.RuneCount .label | mul $letterWidth | add 10 -}}
 {{- $versionWidth := strings.RuneCount .version | mul 6 | add 10 -}}
 {{- $width := add $labelWidth $versionWidth -}}
 {{- $labelLength := sub $labelWidth 10 | mul 10 -}}

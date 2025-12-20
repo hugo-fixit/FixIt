@@ -223,4 +223,5 @@ quote = "Citação"
 new = "NOVO"
 changed = "ALTERADO"
 deleted = "EXCLUÍDO"
+deprecated = "OBSOLETO"
 # === shortcodes/version.html ===

@@ -218,4 +218,5 @@ quote = "인용"
 new = "추가됨"
 changed = "변경됨"
 deleted = "삭제됨"
+deprecated = "더 이상 사용되지 않음"
 # === shortcodes/version.html ===

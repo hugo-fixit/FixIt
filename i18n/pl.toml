@@ -222,4 +222,5 @@ quote = "Cytat"
 new = "Dodano"
 changed = "Zmieniono"
 deleted = "Usunięte"
+deprecated = "Przestarzałe"
 # === shortcodes/version.html ===

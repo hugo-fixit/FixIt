@@ -221,4 +221,5 @@ quote = "Trích dẫn"
 new = "MỚI"
 changed = "THAY ĐỔI"
 deleted = "XOÁ"
+deprecated = "KHÔNG CÒN SỬ DỤNG"
 # === shortcodes/version.html ===

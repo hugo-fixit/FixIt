@@ -355,11 +355,6 @@
       &:not([src*='.svg']) {
         min-height: 1em;
       }
-
-      &.version {
-        height: 1.25em;
-        vertical-align: text-bottom;
-      }
     }
     svg {
       max-width: 100%;

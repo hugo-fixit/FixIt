@@ -1,0 +1,4 @@
+{{- $cjk := slice "zh-cn" "zh-tw" "ja" "ko" -}}
+{{- $isCJK := (in $cjk .Page.Language.Lang) | default .Page.Params.IsCJKLanguage -}}
+
+{{- return $isCJK -}}

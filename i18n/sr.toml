@@ -222,4 +222,5 @@ quote = "Цитат"
 new = "НОВО"
 changed = "ПРОМЕЊЕНО"
 deleted = "ОБРИСАНО"
+deprecated = "ЗАСТАРЕЛО"
 # === shortcodes/version.html ===

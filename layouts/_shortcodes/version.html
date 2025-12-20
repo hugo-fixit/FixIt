@@ -1,15 +1,23 @@
 {{- $rvc := .Page.Param "repoVersion" -}}
 {{- $version := .Get 0 -}}
 {{- $type := .Get 1 | default "new" | lower -}}
+{{- $label := T (printf "version.%v" $type) | default (upper $type) -}}
+{{- $isCJK := partial "function/is-cjk.html" . -}}
 {{- $url := printf "%v%v" (.Get 2 | default $rvc.url) $version -}}
-{{- $label := T (printf "version.%v" $type) -}}
-{{- $color := cond (eq $type "changed") "ff9101" "00b1ff" | cond (eq $type "deleted") "ff5252" -}}
+{{- $colorMap := dict
+  "new" "00b1ff"
+  "changed" "81bd65"
+  "deleted" "ff5252"
+  "deprecated" "ff9101"
+-}}
+{{- $color := index $colorMap $type | default (index $colorMap "new") -}}
+{{- $repoName := .Get 3 | default $rvc.name -}}
 {{- $pathTemplate := cond hugo.IsMultilingual (printf "images/version/%%v-%%v.%v.svg" .Page.Language.Lang) "images/version/%v-%v.svg" -}}
 {{- $path := printf $pathTemplate $version $type -}}
 {{- $resource := resources.Get "images/version.template.svg" -}}
-{{- $resource = $resource | resources.ExecuteAsTemplate $path (dict "version" $version "label" $label "color" $color "isCJK" .Page.Params.IsCJKLanguage) | minify -}}
-{{- $alt := printf "%v %v | %v" (.Get 3 | default $rvc.name) $version $label -}}
-<a href="{{ $url }}" rel="external" target="_blank">
+{{- $resource = $resource | resources.ExecuteAsTemplate $path (dict "version" $version "label" $label "color" $color "isCJK" $isCJK) | minify -}}
+{{- $alt := printf "%v %v | %v" $repoName $version $label -}}
+<a href="{{ $url }}" rel="external" target="_blank" class="version-link">
   {{- dict "Src" $resource.RelPermalink "Alt" $alt "Class" "version" | partial "plugin/image.html" -}}
 </a>
 {{- /* EOF */ -}}

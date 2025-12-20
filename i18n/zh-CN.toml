@@ -218,4 +218,5 @@ quote = "引用"
 new = "新增"
 changed = "更改"
 deleted = "删除"
+deprecated = "弃用"
 # === shortcodes/version.html ===

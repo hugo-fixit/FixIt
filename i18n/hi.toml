@@ -223,4 +223,5 @@ quote = "उद्धरण"
 new = "नया"
 changed = "बदला हुआ"
 deleted = "हटाए गए"
+deprecated = "अप्रचलित"
 # === shortcodes/version.html ===
