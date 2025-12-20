@@ -54,19 +54,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-
-  &:hover {
-    color: $global-link-hover-color;
-    background-color: transparent;
-  }
-
-  [data-theme='dark'] & {
-    color: $global-link-color-dark;
-
-    &:hover {
-      color: $global-link-hover-color-dark;
-    }
-  }
+  @include link(true, true);
 }
 
 .archive-item-date {

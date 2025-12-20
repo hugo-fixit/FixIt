@@ -4,9 +4,12 @@
 
   interpolate-size: allow-keywords;
 
+  // Global colors variables
   #{$rootPrefix}global-font-color: #{$global-font-color};
   #{$rootPrefix}global-font-secondary-color: #{$global-font-secondary-color};
   #{$rootPrefix}global-border-color: #{$global-border-color};
+  #{$rootPrefix}global-link-color: #{$global-link-color};
+  #{$rootPrefix}global-link-hover-color: #{$global-link-hover-color};
 
   // Scroll margin top and Stack sticky top related
   #{$rootPrefix}scroll-mt: calc(#{$header-height} + #{$global-scroll-margin-top});
@@ -45,6 +48,8 @@
   #{$rootPrefix}global-font-color: #{$global-font-color-dark};
   #{$rootPrefix}global-font-secondary-color: #{$global-font-secondary-color-dark};
   #{$rootPrefix}global-border-color: #{$global-border-color-dark};
+  #{$rootPrefix}global-link-color: #{$global-link-color-dark};
+  #{$rootPrefix}global-link-hover-color: #{$global-link-hover-color-dark};
 
   #{$rootPrefix}hr-background-color: #{lighten($global-border-color-dark, 5%)};
   #{$rootPrefix}hr-before-color: #{darken($global-link-hover-color-dark, 4%)};

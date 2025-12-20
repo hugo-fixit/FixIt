@@ -431,10 +431,14 @@ class FixIt {
       : codeBlock.querySelector('.code-copy-btn');
     if (codeBlock.dataset.copyable !== 'true' || !copyBtn) return;
     copyBtn.addEventListener('click', () => {
-      this.util.forEach(codeBlock.querySelectorAll('.hl'), $hl => $hl.classList.replace('hl', 'hl-disable'));
+      const iswWrap = codeBlock.classList.contains('line-wrapping');
+      const highlightLines = codeBlock.querySelectorAll('.hl');
+      iswWrap && codeBlock.classList.toggle('line-wrapping');
+      this.util.forEach(highlightLines, $hl => $hl.classList.toggle('hl'));
       this.util.copyText(codePreEl.innerText.trim()).then(() => {
         this.util.animateCSS(codePreEl, 'animate__flash');
-        this.util.forEach(codeBlock.querySelectorAll('.hl-disable'), $hl => $hl.classList.replace('hl-disable', 'hl'));
+        iswWrap && codeBlock.classList.toggle('line-wrapping');
+        this.util.forEach(highlightLines, $hl => $hl.classList.toggle('hl'));
         copyBtn.toggleAttribute('data-copied', true);
         setTimeout(() => {
           copyBtn.toggleAttribute('data-copied', false);

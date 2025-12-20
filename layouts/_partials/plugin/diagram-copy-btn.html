@@ -1,9 +1,6 @@
 {{- /* Diagram copy button */ -}}
 {{- $label := .Label | default "Copy Diagram code" -}}
-{{- $iconCopy := dict "Class" "fa-regular fa-clone" -}}
-{{- $iconCheck := dict "Class" "fa-solid fa-check text-success" -}}
 
 <div class="diagram-copy-btn" aria-label="{{ $label }}" role="button">
-  {{- $iconCopy | partial "plugin/icon.html" -}}
-  {{- $iconCheck | partial "plugin/icon.html" -}}
+  {{- dict "Class" "fa-regular fa-clone" | partial "plugin/icon.html" -}}
 </div>

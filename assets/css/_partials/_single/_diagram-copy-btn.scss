@@ -39,17 +39,11 @@
     }
   }
 
-  .fa-check {
-    padding-inline: 1px;
-    display: none;
-  }
-
   &[data-copied] {
-    .fa-check {
-      display: inline-block;
-    }
     .fa-clone {
-      display: none;
+      --fa: "\f00c";
+      font-weight: 900;
+      color: var(#{$rootPrefix}global-link-hover-color);
     }
   }
 }

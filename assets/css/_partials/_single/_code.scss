@@ -97,6 +97,13 @@ pre:not([data-processed]) {
         position: sticky;
         left: 0;
       }
+      // code content
+      .lntd:last-child {
+        width: 100%;
+        code {
+          width: 100%;
+        }
+      }
     }
   }
 
@@ -217,6 +224,12 @@ pre:not([data-processed]) {
         @extend .print-d-none;
       }
 
+      .copy-btn[data-copied] .fa-clone {
+        --fa: "\f00c";
+        font-weight: 900;
+        color: var(#{$rootPrefix}global-link-hover-color);
+      }
+
       @each $type, $text in $code-type-map {
         &.language-#{to-lower-case($type)} {
           #{$rootPrefix}code-type: $text;
@@ -228,11 +241,7 @@ pre:not([data-processed]) {
     &:not(.line-nos-hidden) .line-nos-btn,
     .code-header [role='button']:hover,
     &:has([contenteditable='true']) .edit-btn {
-      color: $global-link-hover-color;
-
-      [data-theme='dark'] & {
-        color: $global-link-hover-color-dark;
-      }
+      color: var(#{$rootPrefix}global-link-hover-color);
     }
 
     .code-expand-btn {
