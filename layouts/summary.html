@@ -3,16 +3,13 @@
 <article class="single summary" itemscope itemtype="http://schema.org/Article">
   {{- /* Featured image */ -}}
   {{- $image := $params.featuredimagepreview | default $params.featuredimage -}}
-  {{- with dict "Path" $image "Resources" .Resources | partial "function/resource.html" }}
-    {{- $image = .RelPermalink }}
-  {{- end }}
-  {{- with .Resources.GetMatch "featured-image" -}}
-    {{- $image = .RelPermalink -}}
+  {{- $matches := slice -}}
+  {{- if .Resources.GetMatch "featured-image-preview" -}}
+    {{- $matches = $matches | append "featured-image-preview" -}}
+  {{- else if .Resources.GetMatch "featured-image" -}}
+    {{- $matches = $matches | append "featured-image" -}}
   {{- end -}}
-  {{- with .Resources.GetMatch "featured-image-preview" -}}
-    {{- $image = .RelPermalink -}}
-  {{- end -}}
-  {{- with $image -}}
+  {{- if $image | or (gt (len $matches) 0) -}}
     <div class="featured-image-preview">
       <a href="{{ $.RelPermalink }}" aria-label="{{ $.Title }}">
         {{- $optim := slice 
@@ -20,7 +17,7 @@
           (dict "Process" "fill 1200x360 Center webp q75" "descriptor" "1200w")
           (dict "Process" "fill 1600x480 Center webp q75" "descriptor" "1600w") 
         -}}
-        {{- dict "Src" . "Title" $.Title "Resources" $.Resources "Loading" "eager" "Width" "800" "Height" "240" "Sizes" "(max-width: 680px) 100vw, (max-width: 960px) 80vw, (max-width: 1440px) 56vw, 800px" "OptimConfig" $optim "Alt" (printf "Featured image for %v" $.Title) | partial "plugin/image.html" -}}
+        {{- dict "Src" $image "Title" $.Title "Resources" $.Resources "Matches" $matches "Loading" "eager" "Width" "800" "Height" "240" "Sizes" "(max-width: 680px) 100vw, (max-width: 960px) 80vw, (max-width: 1440px) 56vw, 800px" "OptimConfig" $optim "Alt" (printf "Featured image for %v" $.Title) | partial "plugin/image.html" -}}
       </a>
     </div>
   {{- end -}}

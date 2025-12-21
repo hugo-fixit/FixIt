@@ -21,26 +21,34 @@ Parameters:
     We try to generate this value automatically if possible. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#width
 - Loading: Indicates how the browser should load the image: eager or lazy. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#loading
 - Optimise: Override the site parameter to optimise the image.
-- Blacklist: A list of image file names or patterns to exclude from optimisation.
 - CacheRemote: Override the site parameter to cache remote images.
+- BlackList: A list of image file names or patterns to exclude from optimisation, default is from site parameter.
+- Matches: If the image is a page resource, this parameter can help to find the resource by names. e.g. ["featured-image", "featured-image-preview"].
 
 Thanks @HEIGE-PCloud for the original code in the DoIt theme.
 https://github.com/HEIGE-PCloud/DoIt/blob/main/layouts/_partials/plugin/image.html
 */ -}}
 
 {{- $config := site.Params.image -}}
+{{- $Resources := .Resources | default page.Resources -}}
 {{- $isInline := strings.HasPrefix .Src "data:image" -}}
 {{- $isRemote := urls.Parse .Src | partial "function/is-url-remote.html" -}}
 {{- $resource := dict -}}
 
+{{- /* Get local image resource */ -}}
 {{- if not $isRemote | and (not $isInline) -}}
-  {{- $resource = (.Resources.Get .Src) | default (resources.Get .Src) -}}
+  {{- /* Try to get resource by matched names */ -}}
+  {{- $matchNames := .Matches | default (slice (strings.TrimPrefix "./" (urls.Parse .Src).Path)) -}}
+  {{- range $matchNames -}}
+    {{- $resource = $Resources.GetMatch . -}}
+    {{- if $resource -}}{{- break -}}{{- end -}}
+  {{- end -}}
+  {{- /* Try to get resource from page or global resources */ -}}
+  {{- $resource = $resource | default ($Resources.Get .Src) | default (resources.Get .Src) -}}
 {{- end -}}
 
+{{- /* Get remote image resource */ -}}
 {{- $cacheRemote := .CacheRemote | default $config.cacheRemote | default false -}}
-{{- $optimise := .Optimise | default $config.optimise | default false -}}
-{{- $blacklist := .Blacklist | default $config.blacklist | default slice -}}
-
 {{- if not $resource | and $cacheRemote -}}
   {{- with partial "function/get-remote-image.html" (dict "Src" .Src) -}}
     {{- $resource = . -}}
@@ -48,11 +56,12 @@ https://github.com/HEIGE-PCloud/DoIt/blob/main/layouts/_partials/plugin/image.ht
 {{- end -}}
 
 {{- /* Check if the image is blocked from optimisation */ -}}
-{{- $disableImageTypes := slice "svg" "gif" -}}
-{{- $regex := "" -}}
+{{- $blackList := .BlackList | default $config.blackList | default slice -}}
 {{- $isBlocked := false -}}
+{{- $regex := "" -}}
+{{- $disableImageTypes := slice "svg" "gif" -}}
 {{- $isSvg := false -}}
-{{- with $blacklist -}}
+{{- with $blackList -}}
   {{- $regex = replace (delimit . "|") "." "\\." -}}
   {{- $regex = replace $regex "*" ".*" -}}
 {{- end -}}
@@ -66,7 +75,9 @@ https://github.com/HEIGE-PCloud/DoIt/blob/main/layouts/_partials/plugin/image.ht
   {{- $isSvg = eq $resource.MediaType.SubType "svg" -}}
 {{- end -}}
 
+{{- /* Optimise image and generate srcset processing */ -}}
 {{- $optim := .OptimConfig -}}
+{{- $optimise := .Optimise | default $config.optimise | default false -}}
 {{- $srcset := "" -}}
 {{- if $optim | and $resource | and $optimise | and (not $isBlocked) -}}
   {{ $srcsetSlice := slice -}}
