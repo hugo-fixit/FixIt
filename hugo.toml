@@ -1086,6 +1086,9 @@ userId = ""
 cacheRemote = false
 # Image resizing and optimisation
 optimise = false
+# FixIt 0.4.0 | NEW A list of image file names or patterns to exclude from optimisation
+# e.g. ["no-optimize.jpg", "*.gif", "images/exclude-*.webp"]
+blackList = []
 
 # FixIt 0.4.0 | NEW Code block wrapper config
 # you can override the global config via Markdown attributes, for example:

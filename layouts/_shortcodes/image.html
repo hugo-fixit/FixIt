@@ -9,6 +9,8 @@
   (dict "Process" "resize 1600x webp q75" "descriptor" "1600w")
 -}}
 {{- $options = dict "OptimConfig" $optim | merge $options -}}
+{{- $optimise := .Get "optimise" -}}
+{{- $cacheRemote := .Get "cacheRemote" -}}
 
 {{- if .IsNamedParams -}}
   {{- $options = dict "Title" (.Get "title") | merge $options -}}
@@ -17,8 +19,8 @@
   {{- $options = .Get "linked" | ne false | dict "Linked" | merge $options -}}
   {{- $options = dict "Rel" (.Get "rel") | merge $options -}}
   {{- $options = dict "Loading" (.Get "loading" | default "lazy") | merge $options -}}
-  {{- with (.Get "optimise") -}}{{- $options = dict "Optimise" . | merge $options -}}{{- end -}}
-  {{- with (.Get "cacheRemote") -}}{{- $options = dict "CacheRemote" . | merge $options -}}{{- end -}}
+  {{- if ne $optimise nil -}}{{- $options = dict "Optimise" $optimise | merge $options -}}{{- end -}}
+  {{- if ne $cacheRemote nil -}}{{- $options = dict "CacheRemote" $cacheRemote | merge $options -}}{{- end -}}
 {{- else -}}
   {{- $options = cond $caption true false | dict "Linked" | merge $options -}}
 {{- end -}}

@@ -21,12 +21,14 @@ Parameters:
     We try to generate this value automatically if possible. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#width
 - Loading: Indicates how the browser should load the image: eager or lazy. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#loading
 - Optimise: Override the site parameter to optimise the image.
+- Blacklist: A list of image file names or patterns to exclude from optimisation.
 - CacheRemote: Override the site parameter to cache remote images.
 
 Thanks @HEIGE-PCloud for the original code in the DoIt theme.
 https://github.com/HEIGE-PCloud/DoIt/blob/main/layouts/_partials/plugin/image.html
 */ -}}
 
+{{- $config := site.Params.image -}}
 {{- $isInline := strings.HasPrefix .Src "data:image" -}}
 {{- $isRemote := urls.Parse .Src | partial "function/is-url-remote.html" -}}
 {{- $resource := dict -}}
@@ -35,8 +37,9 @@ https://github.com/HEIGE-PCloud/DoIt/blob/main/layouts/_partials/plugin/image.ht
   {{- $resource = (.Resources.Get .Src) | default (resources.Get .Src) -}}
 {{- end -}}
 
-{{- $cacheRemote := .CacheRemote | default site.Params.image.cacheRemote | default false -}}
-{{- $optimise := .Optimise | default site.Params.image.optimise | default false -}}
+{{- $cacheRemote := .CacheRemote | default $config.cacheRemote | default false -}}
+{{- $optimise := .Optimise | default $config.optimise | default false -}}
+{{- $blacklist := .Blacklist | default $config.blacklist | default slice -}}
 
 {{- if not $resource | and $cacheRemote -}}
   {{- with partial "function/get-remote-image.html" (dict "Src" .Src) -}}
@@ -44,14 +47,28 @@ https://github.com/HEIGE-PCloud/DoIt/blob/main/layouts/_partials/plugin/image.ht
   {{- end -}}
 {{- end -}}
 
+{{- /* Check if the image is blocked from optimisation */ -}}
+{{- $disableImageTypes := slice "svg" "gif" -}}
+{{- $regex := "" -}}
+{{- $isBlocked := false -}}
 {{- $isSvg := false -}}
+{{- with $blacklist -}}
+  {{- $regex = replace (delimit . "|") "." "\\." -}}
+  {{- $regex = replace $regex "*" ".*" -}}
+{{- end -}}
 {{- if $resource -}}
-  {{- $isSvg = (eq $resource.MediaType.SubType "svg") -}}
+  {{- if $regex -}}
+    {{- $isBlocked = gt (findRE $regex $resource.Name | len) 0 -}}
+  {{- end -}}
+  {{- if not $isBlocked -}}
+    {{- $isBlocked = in $disableImageTypes $resource.MediaType.SubType -}}
+  {{- end -}}
+  {{- $isSvg = eq $resource.MediaType.SubType "svg" -}}
 {{- end -}}
 
 {{- $optim := .OptimConfig -}}
 {{- $srcset := "" -}}
-{{- if $optim | and $resource | and $optimise | and (not $isSvg) -}}
+{{- if $optim | and $resource | and $optimise | and (not $isBlocked) -}}
   {{ $srcsetSlice := slice -}}
   {{- range $optim -}}
     {{- if .Process -}}
