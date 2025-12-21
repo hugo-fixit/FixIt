@@ -23,6 +23,7 @@ pre {
     padding: 0;
     background-color: transparent;
     font-size: inherit;
+    line-height: inherit;
     @include border-radius(0);
     @include max-content(min-width);
 

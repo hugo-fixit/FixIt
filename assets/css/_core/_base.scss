@@ -79,6 +79,7 @@ details {
   padding: 0.2em 0.4em;
   margin: 0;
   font-size: $code-font-size;
+  line-height: $code-font-size;
   font-family: $code-font-family;
   color: $code-color;
   background-color: var(#{$rootPrefix}code-inline-background-color);
