@@ -138,20 +138,18 @@
 
     {{- /* Featured image */ -}}
     {{- $image := $params.featuredimage -}}
-    {{- with dict "Path" $image "Resources" .Resources | partial "function/resource.html" }}
-      {{- $image = .RelPermalink }}
-    {{- end }}
-    {{- with .Resources.GetMatch "featured-image" -}}
-      {{- $image = .RelPermalink -}}
+    {{- $matches := slice -}}
+    {{- if .Resources.GetMatch "featured-image" -}}
+      {{- $matches = $matches | append "featured-image" -}}
     {{- end -}}
-    {{- with $image -}}
+    {{- if $image | or (gt (len $matches) 0) -}}
       <div class="featured-image">
         {{- $optim := slice 
           (dict "Process" "resize 800x webp q75" "descriptor" "800w")
           (dict "Process" "resize 1200x webp q75" "descriptor" "1200w")
           (dict "Process" "resize 1600x webp q75" "descriptor" "1600w") 
         -}}
-        {{- dict "Src" . "Title" $.Description "OptimConfig" $optim | partial "plugin/image.html" -}}
+        {{- dict "Src" $image "Title" $.Description "Resources" .Resources "Matches" $matches "Loading" "eager" "OptimConfig" $optim | partial "plugin/image.html" -}}
       </div>
     {{- end -}}
 
