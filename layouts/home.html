@@ -28,7 +28,7 @@
 
   <div class="page home{{ if ne $posts.enable false }} posts{{ end }}">
     {{- /* Only show profile and content on first page */ -}}
-    {{- if eq $.Paginator.PageNumber 1 -}}
+    {{- if (not $profile.onlyFirstPage) | or (eq $.Paginator.PageNumber 1) -}}
       {{- /* Profile */ -}}
       {{- if ne $profile.enable false -}}
         {{- partial "home/profile.html" . -}}
