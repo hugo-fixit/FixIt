@@ -5,14 +5,14 @@
 {{- if $isRemote -}}
   {{- with try (resources.GetRemote .Src) -}}
     {{- with .Err -}}
-      {{- warnf "%s" . -}}
+      {{- warnidf "warning-remote-image" "%s" . -}}
     {{- else with .Value -}}
       {{- if .ResourceType | eq "image" -}}
         {{- /* placed remote image in public/images/remote/ */ -}}
         {{- $resource = . | resources.Copy (add "/images/remote/" .Name) -}}
       {{- end -}}
     {{- else -}}
-      {{- warnf "Unable to get remote image %q" $.Src -}}
+      {{- warnidf "warning-remote-image" "Failed to get remote image %q" $.Src -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
