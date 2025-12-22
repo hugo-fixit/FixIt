@@ -1,9 +1,11 @@
 @media only screen and (min-width: 1441px) {
   %page-style {
     width: ROUND(60%, 2px);
+    max-width: 1200px;
 
     [data-page-style='wide'] & {
       width: ROUND(64%, 2px);
+      max-width: 1600px;
     }
 
     [data-page-style='narrow'] & {
