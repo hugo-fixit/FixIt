@@ -194,8 +194,6 @@ function isObjectLiteral(str) {
 
 ## Gist Embed
 
-```md
-{{</* gist Lruihao fb8b2d0353465c4d40bf74818db80710 */>}}
-```
-
-<!-- {{< gist Lruihao fb8b2d0353465c4d40bf74818db80710 >}} -->
+{{< env "production" >}}
+{{< gist Lruihao fb8b2d0353465c4d40bf74818db80710 >}}
+{{< /env >}}
