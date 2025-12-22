@@ -1,0 +1,23 @@
+{{- /* 
+  Get Gravatar URL.
+  @param {String} Email the email address
+  @param {String} Size the size in pixels (optional, default: 200)
+  @returns {String} the Gravatar URL
+  @example {{- $gravatar := dict "Email" "user@example.com" "Size" "32" | partial "function/get-gravatar.html" -}}
+*/ -}}
+
+{{- $config := site.Params.gravatar -}}
+{{- $gravatar := "" -}}
+{{- if $config.enable | and .Email -}}
+  {{- with $config -}}
+    {{- $gravatar =
+      printf "https://%v/avatar/%v?s=%v&d=%v"
+      (path.Clean ($.Host | default .Host) | default "www.gravatar.com")
+      (md5 $.Email)
+      ($.Size | default 200)
+      (.Style | default "")
+    -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $gravatar -}}

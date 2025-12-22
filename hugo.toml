@@ -661,7 +661,7 @@ orderby = "name" # Order of tags, optional values: ["name", "count"]
 enable = false
 # Gravatar Email for preferred avatar in home page
 gravatarEmail = ""
-# URL of avatar shown in home page
+# URL of avatar shown in home page, default is author's avatar
 avatarURL = ""
 # FixIt 0.2.17 | NEW identifier of avatar menu link
 avatarMenu = ""

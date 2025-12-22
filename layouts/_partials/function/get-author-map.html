@@ -28,17 +28,9 @@
   {{- with $authorParam.avatar -}}{{ $author = dict "avatar" . | merge $author }}{{- end -}}
 {{- end -}}
 
-{{- $gravatar := site.Params.gravatar -}}
-{{- if $gravatar.enable | and $author.email -}}
-  {{- with $gravatar -}}
-    {{- /* TODO migrate to gravatar */ -}}
-    {{- $author = dict "avatar" (printf "https://%v/avatar/%v?s=32&d=%v"
-      (path.Clean .Host | default "www.gravatar.com")
-      (md5 $author.email)
-      (.Style | default ""))
-      | merge $author 
-    -}}
-  {{- end -}}
+{{- $gravatar := dict "Email" $author.email "Size" "32" | partial "function/get-gravatar.html" -}}
+{{- with $gravatar -}}
+  {{- $author = dict "avatar" . | merge $author -}}
 {{- end -}}
 
 {{- return $author -}}

@@ -1,16 +1,8 @@
 {{- $profile := .Site.Params.home.profile -}}
+{{- $author := partial "function/get-author-map.html" .Params.author -}}
+
 <div class="home-profile">
-  {{- $avatar := $profile.avatarURL -}}
-  {{- $gravatar := .Site.Params.gravatar -}}
-  {{- if $gravatar.enable | and $profile.gravatarEmail -}}
-    {{- with $gravatar -}}
-      {{- $avatar = printf "https://%v/avatar/%v?s=240&d=%v"
-        (path.Clean .Host | default "www.gravatar.com")
-        (md5 $profile.gravatarEmail)
-        (.Style | default "mp")
-      -}}
-    {{- end -}}
-  {{- end -}}
+  {{- $avatar := dict "Email" $profile.gravatarEmail "Size" "96" | partial "function/get-gravatar.html" | default $profile.avatarURL | default $author.avatar -}}
   {{- if $avatar -}}
     <div class="home-avatar">
       {{- $menus := $.Site.Menus.main | default slice -}}
