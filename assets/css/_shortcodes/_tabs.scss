@@ -15,7 +15,7 @@
 tab-container {
   display: flex;
   gap: 0.75rem;
-  padding-block: 1rem;
+  margin-block: 0.5rem;
   position: relative;
 
   // loading before defined
@@ -23,6 +23,10 @@ tab-container {
     &::before {
       @include loading;
     }
+  }
+
+  tab-container {
+    margin-block: 1rem;
   }
 
   > .tab-button {
@@ -242,6 +246,8 @@ tab-container {
 
     &[placement='left'],
     &[placement='right'] {
+      padding-bottom: 0.5rem;
+
       &::part(tablist) {
         gap: 0.75rem;
       }
