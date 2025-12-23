@@ -9,9 +9,9 @@ A Markdown image has three components: the image description, the image destinat
 */ -}}
 {{- $params := .Page.Params | merge site.Params.page -}}
 {{- $optim := slice 
-  (dict "Process" "resize 800x webp q75" "descriptor" "800w")
-  (dict "Process" "resize 1200x webp q75" "descriptor" "1200w")
-  (dict "Process" "resize 1600x webp q75" "descriptor" "1600w")
+  (dict "Process" "resize 800x webp" "descriptor" "800w")
+  (dict "Process" "resize 1200x webp" "descriptor" "1200w")
+  (dict "Process" "resize 1600x webp" "descriptor" "1600w")
 -}}
 {{- if .Title -}}
   {{- $linked := ne $params.lightgallery false -}}

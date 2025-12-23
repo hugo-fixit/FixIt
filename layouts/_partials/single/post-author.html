@@ -2,9 +2,9 @@
 {{- $author := partial "function/get-author-map.html" .Params.author -}}
 {{- .Store.Set "author" $author -}}
 {{- $optim := slice 
-  (dict "Process" "resize 16x16 Center webp q75" "descriptor" "16w")
-  (dict "Process" "resize 24x24 Center webp q75" "descriptor" "24w")
-  (dict "Process" "resize 32x32 Center webp q75" "descriptor" "32w")
+  (dict "Process" "resize 16x16 Center webp" "descriptor" "16w")
+  (dict "Process" "resize 24x24 Center webp" "descriptor" "24w")
+  (dict "Process" "resize 32x32 Center webp" "descriptor" "32w")
 -}}
 
 <span class="post-author">

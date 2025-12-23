@@ -13,9 +13,9 @@
     <div class="featured-image-preview">
       <a href="{{ $.RelPermalink }}" aria-label="{{ $.Title }}">
         {{- $optim := slice 
-          (dict "Process" "fill 800x336 Center webp q75" "descriptor" "800w")
-          (dict "Process" "fill 1200x504 Center webp q75" "descriptor" "1200w")
-          (dict "Process" "fill 1600x672 Center webp q75" "descriptor" "1600w") 
+          (dict "Process" "fill 800x336 Center webp" "descriptor" "800w")
+          (dict "Process" "fill 1200x504 Center webp" "descriptor" "1200w")
+          (dict "Process" "fill 1600x672 Center webp" "descriptor" "1600w") 
         -}}
         {{- dict "Src" $image "Title" $.Title "Resources" $.Resources "Matches" $matches "Loading" "eager" "Width" "800" "Height" "336" "Sizes" "(max-width: 680px) 100vw, (max-width: 960px) 80vw, (max-width: 1440px) 56vw, 800px" "OptimConfig" $optim "Alt" (printf "Featured image for %v" $.Title) | partial "plugin/image.html" -}}
       </a>

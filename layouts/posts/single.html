@@ -145,11 +145,11 @@
     {{- if $image | or (gt (len $matches) 0) -}}
       <div class="featured-image">
         {{- $optim := slice 
-          (dict "Process" "resize 800x webp q75" "descriptor" "800w")
-          (dict "Process" "resize 1200x webp q75" "descriptor" "1200w")
-          (dict "Process" "resize 1600x webp q75" "descriptor" "1600w") 
+          (dict "Process" "resize 800x webp" "descriptor" "800w")
+          (dict "Process" "resize 1200x webp" "descriptor" "1200w")
+          (dict "Process" "resize 1600x webp" "descriptor" "1600w") 
         -}}
-        {{- dict "Src" $image "Title" $.Description "Resources" .Resources "Matches" $matches "Loading" "eager" "OptimConfig" $optim | partial "plugin/image.html" -}}
+        {{- dict "Src" $image "Title" $.Description "Resources" .Resources "Matches" $matches "Loading" "eager" "Sizes" "(max-width: 680px) 100vw, (max-width: 960px) 80vw, (max-width: 1440px) 56vw, 800px" "OptimConfig" $optim | partial "plugin/image.html" -}}
       </div>
     {{- end -}}
 

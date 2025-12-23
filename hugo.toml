@@ -38,6 +38,15 @@ enableEmoji = true
 # mainSections = ["posts"]
 
 # -------------------------------------------------------------------------------------
+# Imaging Configuration
+# See: https://gohugo.io/configuration/imaging/
+# -------------------------------------------------------------------------------------
+
+[imaging]
+_merge = "shallow"
+quality = 75
+
+# -------------------------------------------------------------------------------------
 # Menu Configuration
 # See: https://fixit.lruihao.cn/documentation/basics/#menu-configuration
 # -------------------------------------------------------------------------------------
@@ -1083,6 +1092,7 @@ feedId = ""
 userId = ""
 
 # FixIt 0.3.17 | NEW Image config
+# Combined with Hugo's image processing option `imaging` for image optimisation
 [params.image]
 # cache remote images for better optimisations
 cacheRemote = false
@@ -1342,14 +1352,6 @@ geolocate = true
 scale = true
 # whether to add FullscreenControl
 fullscreen = true
-
-# FixIt 0.3.0 | NEW [Experimental] cache remote images locally
-# See: https://github.com/hugo-fixit/FixIt/pull/362
-# TODO remove (works on image-legacy.html)
-[params.page.cacheRemoteImages]
-enable = false
-# replace remote image URL with local image URL (place in public/images/remote/)
-replace = false
 
 # FixIt 0.3.0 | NEW Related content config (https://gohugo.io/content-management/related/)
 [params.page.related]
