@@ -2,17 +2,19 @@
 {{- $url := .URL -}}
 {{- $options := .OPTIONS | default dict -}}
 
-{{- if $url -}}
-  {{- $cacheKey := print $url (now.Format "2006-01-02") -}}
-  {{- $options = $options | merge (dict "key" $cacheKey) -}}
-  {{- with try (resources.GetRemote $url $options) -}}
-    {{- with .Err -}}
-      {{- erroridf "error-get-remote-json" "%s" . -}}
-    {{- else with .Value -}}
-      {{- $response = .Content | transform.Unmarshal -}}
-    {{- else -}}
-      {{- erroridf "error-get-remote-json" "Failed to get remote JSON %q" $url -}}
-    {{- end -}}
+{{- if not $url -}}
+  {{- erroridf "error-get-remote-json" "URL parameter is required!" -}}
+{{- end -}}
+
+{{- $cacheKey := print $url (now.Format "2006-01-02") -}}
+{{- $options = $options | merge (dict "key" $cacheKey) -}}
+{{- with try (resources.GetRemote $url $options) -}}
+  {{- with .Err -}}
+    {{- erroridf "error-get-remote-json" "%s" . -}}
+  {{- else with .Value -}}
+    {{- $response = .Content | transform.Unmarshal -}}
+  {{- else -}}
+    {{- erroridf "error-get-remote-json" "Failed to get remote JSON %q" $url -}}
   {{- end -}}
 {{- end -}}
 
