@@ -1096,7 +1096,7 @@ userId = ""
 [params.image]
 # cache remote images for better optimisations
 cacheRemote = false
-# Image resizing and optimisation
+# Image resizing and optimisation (may slow builds)
 optimise = false
 # FixIt 0.4.0 | NEW A list of image file names or patterns to exclude from optimisation
 # e.g. ["no-optimize.jpg", "*.tiff", "images/exclude-*.webp"]
