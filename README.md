@@ -202,6 +202,8 @@ The FixIt theme balances **simplicity** and **extensibility** with extra [Hugo t
   🐟 A canvas implemented animation effect of small fish swimming.
 - [cmpt-mdevtools](https://github.com/hugo-fixit/cmpt-mdevtools)\
   Mobile devtools component powered by vConsole and eruda.
+- [cmpt-santa-hat](https://github.com/hugo-fixit/cmpt-santa-hat)\
+  A Christmas Easter Egg by JavaScript.
 - [cmpt-translate](https://github.com/hugo-fixit/cmpt-translate)\
   🌐 A component for site automatic translation.
 - [component-projects](https://github.com/hugo-fixit/component-projects)\
