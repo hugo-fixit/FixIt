@@ -257,16 +257,17 @@
     opacity 0.2s 0.4s;
   opacity: 0;
   translate: 100vw 0;
-  width: MIN(100%, 500px);
+  width: MIN(calc(100% - 4rem), 500px);
   height: 100%;
   max-width: 100%;
   max-height: 100%;
   margin-right: 0;
   border: none;
+  border-left: 1px solid var(#{$rootPrefix}global-border-color);
 
   .toc {
     max-width: 100%;
-    margin-inline: 1rem 5rem;
+    margin-inline: 1rem;
 
     .toc-title {
       font-size: $toc-title-font-size * 1.5;
@@ -303,7 +304,7 @@
   }
 
   &[open] {
-    translate: 4rem 0;
+    translate: 0 0;
   }
 
   @starting-style {
