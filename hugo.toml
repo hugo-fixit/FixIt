@@ -1138,7 +1138,7 @@ sort = false
 boxed = true
 
 # FixIt 0.3.12 | NEW Custom partials config
-# Custom partials must be stored in the /layouts/partials/ directory.
+# Custom partials must be stored in the /layouts/_partials/ directory.
 # Depends on open custom blocks https://fixit.lruihao.cn/references/blocks/
 [params.customPartials]
 head = []
