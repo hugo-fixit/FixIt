@@ -1,3 +1,4 @@
+{{- $logo := resources.Get "images/fixit.svg" | minify -}}
 {{- $loading := resources.Get "images/loading.svg" | minify -}}
 
 @charset "utf-8";
@@ -7,5 +8,6 @@ $base: "{{ relURL "" }}" !default;
 
 :root {
   #{$rootPrefix}base: "#{$base}";
+  #{$rootPrefix}logo-img: url("{{ $logo.RelPermalink }}");
   #{$rootPrefix}loading-img: url("{{ $loading.RelPermalink }}");
 }

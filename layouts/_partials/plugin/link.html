@@ -50,9 +50,7 @@
       {{- end -}}
     {{- end -}}
 
-    {{- $attrs := `class="cl-backdrop"` -}}
-    {{- $attrs = printf ` style="--cl-bg-url: url(%v);"` (resources.Get "images/fixit.svg" | minify).RelPermalink | add $attrs -}}
-    <span {{ $attrs | safeHTMLAttr }}></span>
+    <span class="cl-backdrop"></span>
     <span class="cl-content">
       <span class="cl-text">
         <span class="cl-title">
