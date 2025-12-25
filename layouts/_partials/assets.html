@@ -317,7 +317,7 @@ FixIt theme assets partial
   {{- $configJS = add $configJS "console.log('Page config:', window.config);" -}}
 {{- end -}}
 {{- $targetPath := "" -}}
-{{- if $uniqueFileId | or .IsHome -}}
+{{- if $uniqueFileId | and (not .IsHome) -}}
   {{- $targetPath = printf "%s/js/config/%s.js" $languagePrefix $uniqueFileId -}}
 {{- end -}}
 {{- dict "Content" $configJS "Path" $targetPath "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
@@ -325,7 +325,7 @@ FixIt theme assets partial
 {{- /* MathJax plugin */ -}}
 {{- if .Store.Get "hasMathJax" | and (not $isArchivesOrOffline) -}}
   {{- $targetPath := "" -}}
-  {{- if $uniqueFileId | or .IsHome -}}
+  {{- if $uniqueFileId | and (not .IsHome) -}}
     {{- $targetPath = printf "%s/js/lib/mathjax/%s.min.js" $languagePrefix $uniqueFileId -}}
   {{- end -}}
   {{- $options := dict "targetPath" $targetPath "minify" hugo.IsProduction -}}

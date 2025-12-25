@@ -106,7 +106,7 @@
     {{- $uniqueFileId = .UniqueID -}}
   {{- end -}}
   {{- $targetPath := "" -}}
-  {{- if $uniqueFileId | or .IsHome -}}
+  {{- if $uniqueFileId | and (not .IsHome) -}}
     {{- $targetPath = printf "%s/js/config/post-chat/%s.js" $languagePrefix $uniqueFileId -}}
   {{- end -}}
   {{- dict "Content" $configJS "Path" $targetPath "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
