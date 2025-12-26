@@ -1,7 +1,7 @@
 .breadcrumb-container {
   padding-inline: 1rem;
   font-size: 0.75rem;
-  background-color: $global-background-color;
+  background-color: var(#{$rootPrefix}global-background-color);
   display: flex;
   gap: 0.5rem;
   @include z-index(1);
@@ -16,10 +16,6 @@
     content: '';
     flex: 1;
     padding-inline: 0.5rem;
-  }
-
-  [data-theme='dark'] & {
-    background-color: $global-background-color-dark;
   }
 
   &.sticky {

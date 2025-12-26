@@ -14,12 +14,8 @@
       @include transform(scale(1.2));
 
       sup {
-        color: $global-font-color;
+        color: var(#{$rootPrefix}global-font-color);
         @include transition(all ease-out 0.3s);
-
-        [data-theme='dark'] & {
-          color: $global-font-color-dark;
-        }
       }
     }
 

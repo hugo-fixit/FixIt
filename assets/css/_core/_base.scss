@@ -26,14 +26,9 @@ html {
 }
 
 body {
-  background-color: $global-background-color;
-  color: $global-font-color;
+  background-color: var(#{$rootPrefix}global-background-color);
+  color: var(#{$rootPrefix}global-font-color);
   @include overflow-wrap(break-word);
-
-  [data-theme='dark'] & {
-    color: $global-font-color-dark;
-    background-color: $global-background-color-dark;
-  }
 }
 
 iframe {

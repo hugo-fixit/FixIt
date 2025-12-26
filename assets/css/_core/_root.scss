@@ -5,6 +5,7 @@
   interpolate-size: allow-keywords;
 
   // Global colors variables
+  #{$rootPrefix}global-background-color: #{$global-background-color};
   #{$rootPrefix}global-font-color: #{$global-font-color};
   #{$rootPrefix}global-font-secondary-color: #{$global-font-secondary-color};
   #{$rootPrefix}global-border-color: #{$global-border-color};
@@ -45,6 +46,7 @@
 
 // Dark theme
 [data-theme=dark] {
+  #{$rootPrefix}global-background-color: #{$global-background-color-dark};
   #{$rootPrefix}global-font-color: #{$global-font-color-dark};
   #{$rootPrefix}global-font-secondary-color: #{$global-font-secondary-color-dark};
   #{$rootPrefix}global-border-color: #{$global-border-color-dark};

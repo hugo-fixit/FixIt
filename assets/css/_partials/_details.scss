@@ -1,6 +1,7 @@
 .details {
   > .details-summary {
     @include border-radius($global-border-radius);
+    @include transition(border-radius 0.2s ease 0.2s);
 
     &:hover {
       cursor: pointer;
@@ -21,6 +22,7 @@
   &.open {
     > .details-summary {
       @include border-radius($global-border-radius $global-border-radius 0 0);
+      @include transition(border-radius 0s);
 
       i.details-icon {
         @include transform(rotate(90deg));

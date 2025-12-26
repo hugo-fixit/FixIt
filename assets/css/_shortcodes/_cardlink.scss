@@ -53,7 +53,7 @@
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.25;
-    color: $global-font-color;
+    color: var(#{$rootPrefix}global-font-color);
   }
 
   &meta {
@@ -104,10 +104,6 @@
   [data-theme='dark'] & {
     &content {
       background-color: rgba(61, 62, 65, 0.88);
-    }
-
-    &title {
-      color: $global-font-color-dark;
     }
   }
 }

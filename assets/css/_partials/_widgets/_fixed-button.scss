@@ -12,6 +12,7 @@
   font-size: 1rem;
   line-height: 1.5rem;
   padding: 0.5rem 0.625rem;
+  // TODO
   color: darken($global-font-secondary-color, 10%);
   background-color: $header-background-color;
   @include border-radius(1.25rem);
@@ -19,9 +20,14 @@
   @include blur;
   @extend .print-d-none;
 
+  [data-theme='dark'] & {
+    color: $global-font-secondary-color-dark;
+    background-color: $header-background-color-dark;
+  }
+
   &:hover,
   &:active {
-    color: $global-font-color;
+    color: var(#{$rootPrefix}global-font-color);
     cursor: pointer;
   }
 
@@ -29,16 +35,6 @@
   &:focus,
   &:hover {
     outline: none;
-  }
-
-  [data-theme='dark'] & {
-    color: $global-font-secondary-color-dark;
-    background-color: $header-background-color-dark;
-
-    &:hover,
-    &:active {
-      color: $global-font-color-dark;
-    }
   }
 }
 
