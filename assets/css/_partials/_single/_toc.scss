@@ -196,15 +196,11 @@
     justify-content: space-between;
     line-height: 2em;
     padding: 0 0.75em;
-    background: darken($code-background-color, 3%);
-
-    [data-theme='dark'] & {
-      background: darken($code-background-color-dark, 6%);
-    }
+    background-color: var(#{$rootPrefix}code-header-background-color);
   }
 
   .toc-content {
-    background-color: $code-background-color;
+    background-color: var(#{$rootPrefix}code-block-background-color);
 
     > nav {
       > ul {
@@ -232,18 +228,14 @@
         }
       }
     }
-
-    [data-theme='dark'] & {
-      background-color: $code-background-color-dark;
-    }
   }
 
-  &.open {
+  &:not(.open) {
     .toc-title {
-      background: darken($code-background-color, 6%);
+      #{$rootPrefix}code-header-background-color: #{darken($code-background-color, 6%)};
 
       [data-theme='dark'] & {
-        background: darken($code-background-color-dark, 3%);
+        #{$rootPrefix}code-header-background-color: #{darken($code-background-color-dark, 6%)};
       }
     }
   }
@@ -257,13 +249,14 @@
     opacity 0.2s 0.4s;
   opacity: 0;
   translate: 100vw 0;
-  width: MIN(calc(100% - 4rem), 500px);
+  width: MIN(calc(100% - 4rem), 460px);
   height: 100%;
   max-width: 100%;
   max-height: 100%;
   margin-right: 0;
   border: none;
   border-left: 1px solid var(#{$rootPrefix}global-border-color);
+  background-color: var(#{$rootPrefix}global-background-color);
 
   .toc {
     max-width: 100%;
@@ -286,6 +279,7 @@
   }
 
   &::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
     transition:
       display 0.5s allow-discrete,
       overlay 0.5s allow-discrete,

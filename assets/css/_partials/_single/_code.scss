@@ -259,6 +259,7 @@ pre {
         $code-background-color 100%
       );
       @include z-index(0, 1);
+      @include border-radius(0 0 $global-border-radius $global-border-radius);
 
       [data-theme='dark'] & {
         background: linear-gradient(

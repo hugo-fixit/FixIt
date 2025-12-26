@@ -3,11 +3,11 @@
 // ========================================
 
 @mixin tab-button-size($padding-inline: 1.25rem, $padding-block: 0.75rem) {
-  @if $padding-inline !=0 {
+  @if $padding-inline != 0 {
     padding-inline: $padding-inline;
   }
 
-  @if $padding-block !=0 {
+  @if $padding-block != 0 {
     padding-block: $padding-block;
   }
 }
@@ -107,22 +107,14 @@ tab-container {
   // Clean, minimal with bottom border
   // ========================================
   &[type='underline'] {
-    &::part(tablist-tab-wrapper) {
-      --border-color: #{$global-border-color};
-
-      [data-theme='dark'] & {
-        --border-color: #{$global-border-color-dark};
-      }
-    }
-
     > .tab-button {
-      --border-color: transparent;
+      #{$rootPrefix}tab-button-border-color: transparent;
       @include tab-button-size(0);
 
       &[aria-selected='true'],
       &[aria-selected='false']:hover {
         color: var(#{$rootPrefix}primary);
-        --border-color: var(#{$rootPrefix}primary);
+        #{$rootPrefix}tab-button-border-color: var(#{$rootPrefix}primary);
       }
 
       &[aria-selected='false']:hover {
@@ -154,50 +146,50 @@ tab-container {
     // Top placement
     &[placement='top'] {
       &::part(tablist-tab-wrapper) {
-        border-bottom: 2px solid var(--border-color);
+        border-bottom: 2px solid var(#{$rootPrefix}global-border-color);
       }
 
       > .tab-button {
         translate: 0 2px;
-        border-bottom: 2px solid var(--border-color);
+        border-bottom: 2px solid var(#{$rootPrefix}tab-button-border-color);
       }
     }
 
     // Bottom placement
     &[placement='bottom'] {
       &::part(tablist-tab-wrapper) {
-        border-top: 2px solid var(--border-color);
+        border-top: 2px solid var(#{$rootPrefix}global-border-color);
       }
 
       > .tab-button {
         translate: 0 -2px;
-        border-top: 2px solid var(--border-color);
+        border-top: 2px solid var(#{$rootPrefix}tab-button-border-color);
       }
     }
 
     // Left placement
     &[placement='left'] {
       &::part(tablist-tab-wrapper) {
-        border-right: 2px solid var(--border-color);
+        border-right: 2px solid var(#{$rootPrefix}global-border-color);
       }
 
       > .tab-button {
         text-align: right;
         translate: 2px 0;
-        border-right: 2px solid var(--border-color);
+        border-right: 2px solid var(#{$rootPrefix}tab-button-border-color);
       }
     }
 
     // Right placement
     &[placement='right'] {
       &::part(tablist-tab-wrapper) {
-        border-left: 2px solid var(--border-color);
+        border-left: 2px solid var(#{$rootPrefix}global-border-color);
       }
 
       > .tab-button {
         text-align: left;
         translate: -2px 0;
-        border-left: 2px solid var(--border-color);
+        border-left: 2px solid var(#{$rootPrefix}tab-button-border-color);
       }
     }
   }
@@ -305,62 +297,27 @@ tab-container {
   &[type='card'] {
     gap: 0;
 
-    &::part(tablist-tab-wrapper) {
-      --border-color: #{$global-border-color};
-
-      [data-theme='dark'] & {
-        --border-color: #{$global-border-color-dark};
-      }
-    }
-
     &::part(tablist) {
       gap: 0.25rem;
     }
 
     > .tab-button {
-      border: 1px solid $global-border-color;
-      background: $code-background-color;
+      border: 1px solid var(#{$rootPrefix}global-border-color);
+      background-color: var(#{$rootPrefix}code-block-background-color);
       @include tab-button-size(1.5rem);
 
-      [data-theme='dark'] & {
-        border-color: $global-border-color-dark;
-        background: $code-background-color-dark;
-      }
-
-      &[aria-selected='true'] {
-        background: $global-background-color;
-        color: $global-link-color;
-        z-index: 1;
-        --border-active-color: #{$global-background-color};
-
-        [data-theme='dark'] & {
-          background: $global-background-color-dark;
-          color: $global-link-color-dark;
-          --border-active-color: #{$global-background-color-dark};
-        }
-      }
-
+      &[aria-selected='true'],
       &[aria-selected='false']:hover {
-        background: $global-background-color;
-        color: $global-link-color;
+        background-color: var(#{$rootPrefix}global-background-color);
+        color: var(#{$rootPrefix}global-link-color);
         z-index: 1;
-
-        [data-theme='dark'] & {
-          background: $global-background-color-dark;
-          color: $global-link-color-dark;
-        }
       }
     }
 
     > .tab-panel {
       padding: 0.75rem;
-      background: $global-background-color;
-      border: 1px solid $global-border-color;
-
-      [data-theme='dark'] & {
-        background: $global-background-color-dark;
-        border-color: $global-border-color-dark;
-      }
+      background-color: var(#{$rootPrefix}global-background-color);
+      border: 1px solid var(#{$rootPrefix}global-border-color);
     }
 
     &[placement='top'],
@@ -388,7 +345,7 @@ tab-container {
     // Top placement
     &[placement='top'] {
       &::part(tablist-tab-wrapper) {
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(#{$rootPrefix}global-border-color);
       }
 
       > .tab-button {
@@ -396,7 +353,7 @@ tab-container {
         @include border-radius($global-border-radius $global-border-radius 0 0);
 
         &[aria-selected='true'] {
-          border-bottom-color: var(--border-active-color);
+          border-bottom-color: var(#{$rootPrefix}global-background-color);
         }
       }
 
@@ -409,7 +366,7 @@ tab-container {
     // Bottom placement
     &[placement='bottom'] {
       &::part(tablist-tab-wrapper) {
-        border-top: 1px solid var(--border-color);
+        border-top: 1px solid var(#{$rootPrefix}global-border-color);
       }
 
       > .tab-button {
@@ -417,7 +374,7 @@ tab-container {
         @include border-radius(0 0 $global-border-radius $global-border-radius);
 
         &[aria-selected='true'] {
-          border-top-color: var(--border-active-color);
+          border-top-color: var(#{$rootPrefix}global-background-color);
         }
       }
 
@@ -430,7 +387,7 @@ tab-container {
     // Left placement
     &[placement='left'] {
       &::part(tablist-tab-wrapper) {
-        border-right: 1px solid var(--border-color);
+        border-right: 1px solid var(#{$rootPrefix}global-border-color);
       }
 
       > .tab-button {
@@ -438,7 +395,7 @@ tab-container {
         @include border-radius($global-border-radius 0 0 $global-border-radius);
 
         &[aria-selected='true'] {
-          border-right-color: var(--border-active-color);
+          border-right-color: var(#{$rootPrefix}global-background-color);
         }
       }
 
@@ -451,7 +408,7 @@ tab-container {
     // Right placement
     &[placement='right'] {
       &::part(tablist-tab-wrapper) {
-        border-left: 1px solid var(--border-color);
+        border-left: 1px solid var(#{$rootPrefix}global-border-color);
       }
 
       > .tab-button {
@@ -459,7 +416,7 @@ tab-container {
         @include border-radius(0 $global-border-radius $global-border-radius 0);
 
         &[aria-selected='true'] {
-          border-left-color: var(--border-active-color);
+          border-left-color: var(#{$rootPrefix}global-background-color);
         }
       }
 
@@ -507,11 +464,10 @@ tab-container {
       }
 
       &[aria-selected='true'] {
-        background: $global-background-color;
+        background-color: var(#{$rootPrefix}global-background-color);
         @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
 
         [data-theme='dark'] & {
-          background: $global-background-color-dark;
           @include box-shadow(0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
         }
       }

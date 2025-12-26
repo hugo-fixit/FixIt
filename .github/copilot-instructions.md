@@ -79,15 +79,11 @@ FixIt/
 
 ### 样式组织原则
 
-1. **主题切换支持**: 使用数据属性选择器
+1. **主题切换支持**: 使用 CSS 变量实现主题切换
 
    ```scss
    .element {
-     color: $global-font-color;
-
-     [data-theme='dark'] & {
-       color: $global-font-color-dark;
-     }
+     color: var(#{$rootPrefix}global-font-color);
    }
    ```
 

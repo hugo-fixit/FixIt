@@ -83,13 +83,9 @@
       border-width: var(--timeline-width);
       border-style: solid;
       border-color: var(--timeline-circle-color);
-      background-color: $global-background-color;
+      background-color: var(#{$rootPrefix}global-background-color);
       color: transparent;
       z-index: 1;
-  
-      [data-theme='dark'] & {
-        background-color: $global-background-color-dark;
-      }
     }
     &::after {
       content: '';
