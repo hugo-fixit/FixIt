@@ -168,6 +168,9 @@ pre {
       line-height: 1.4em;
       color: var(#{$rootPrefix}code-header-color);
       background-color: var(#{$rootPrefix}code-header-background-color);
+      position: sticky;
+      top: var(#{$rootPrefix}breadcrumb-height);
+      @include z-index(0, 1);
       @include border-radius($global-border-radius $global-border-radius 0 0);
       @include transition(border-radius 0s);
 
@@ -212,7 +215,7 @@ pre {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          @include z-index(0, 1);
+          @include z-index(0, 2);
         }
       }
 
