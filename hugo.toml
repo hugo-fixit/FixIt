@@ -1166,6 +1166,7 @@ enable = false
 c4u = false
 
 # Page config
+# TODO migrate mapping key to `params` layer in the future
 [params.page]
 # FixIt 0.2.18 | NEW whether to enable the author's avatar of the post
 authorAvatar = true

@@ -1,5 +1,5 @@
 {{- /* Hook for code blocks rendering */ -}}
-{{- $config := .Attributes | merge (.Page.Param "codeblock") -}}
+{{- $config := .Attributes | merge .Page.Params.codeblock | merge .Page.Site.Params.codeblock -}}
 {{- $result := transform.HighlightCodeBlock . -}}
 {{- $wrapper := $result.Wrapped -}}
 

@@ -1,4 +1,4 @@
-{{- $jsonViewer := .Attributes | merge (.Page.Param "jsonViewer") -}}
+{{- $jsonViewer := .Attributes | merge .Page.Params.jsonViewer | merge .Page.Site.Params.jsonViewer -}}
 {{- if $jsonViewer.enable -}}
   {{- $attrs := printf `expand-depth="%v"` $jsonViewer.expanddepth -}}
   {{- $copyable := false -}}
