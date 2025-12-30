@@ -404,7 +404,7 @@ collection = "collections"
 
 [params]
 # FixIt 0.2.15 | CHANGED FixIt theme version
-version = "0.3.X" # e.g. "0.2.X", "0.2.15", "v0.2.15" etc.
+version = "0.4.X" # e.g. "0.2.X", "0.2.15", "v0.2.15" etc.
 # site description
 description = ""
 # site keywords
@@ -414,7 +414,7 @@ defaultTheme = "auto"
 # which hash function used for SRI, when empty, no SRI is used
 # ["sha256", "sha384", "sha512", "md5"]
 fingerprint = ""
-# NEW date format
+# date format
 dateFormat = "2006-01-02"
 # website images for Open Graph and Twitter Cards
 images = []
@@ -601,8 +601,8 @@ animate = true
 icon = "fa-solid fa-heartbeat"
 pre = ""
 value = ""
-
 # e.g. "2021-12-18T16:15:22+08:00"
+
 # FixIt 0.2.17 | NEW footer lines order, optional values: ["first", 0, 1, 2, 3, 4, 5, "last"]
 [params.footer.order]
 powered = 0
@@ -784,14 +784,13 @@ Bluesky = ""
 Phone = ""
 Email = ""
 RSS = true
+
 # custom social links like the following
 # [params.social.twitter]
-#   id = "lruihao"
-#   weight = 3
-#   prefix = "https://twitter.com/"
-#   Title = "Twitter"
-#   [social.twitter.icon]
-#     class = "fa-brands fa-x-twitter fa-fw"
+# id = "lruihao"
+# weight = 3
+# prefix = "https://twitter.com/"
+# Title = "Twitter"
 
 # TypeIt config
 [params.typeit]
