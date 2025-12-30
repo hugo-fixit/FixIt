@@ -22,6 +22,12 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
 
+      - name: Split theme configuration
+        run: |
+          pnpx fixit-cli split hugo.toml
+          tar -zcvf config.tar.gz config
+          tree config
+
       - name: Generate release notes
         run: |
           pnpm install --frozen-lockfile
@@ -33,3 +39,5 @@ jobs:
         with:
           draft: true
           body_path: CHANGELOG.md
+          files: |
+            config.tar.gz
