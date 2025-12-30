@@ -1,4 +1,4 @@
-{{- $rvc := .Page.Param "repoVersion" -}}
+{{- $rvc := .Page.Params.repoVersion | merge .Page.Site.Params.repoVersion -}}
 {{- $version := .Get 0 -}}
 {{- $type := .Get 1 | default "new" | lower -}}
 {{- $label := T (printf "version.%v" $type) | default (upper $type) -}}
