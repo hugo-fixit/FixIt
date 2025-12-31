@@ -1119,6 +1119,12 @@ class FixIt {
     this._jsonViewerOnSwitchTheme();
   }
 
+  initTabEvents(target = document) {
+    target.addEventListener('tab-container-changed', () => {
+      window.FixItMermaid?.init?.();
+    }, false);
+  }
+
   /**
    * Helper method to initialize content components
    * @param {Element} target - The target element (optional, defaults to document)
@@ -1142,6 +1148,7 @@ class FixIt {
     this.initPangu();
     this.initMathJax();
     this.initJsonViewer();
+    this.initTabEvents(target);
     window.FixItMermaid?.init?.();
     window.FixItAPlayer?.init?.();
   }
