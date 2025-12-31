@@ -372,6 +372,7 @@ class FixIt {
         }
       );
       autosearch.on('autocomplete:selected', (_event, suggestion, _dataset, _context) => {
+        document.getElementById('mask')?.click();
         window.location.assign(suggestion.uri);
       });
       if (isMobile) {
