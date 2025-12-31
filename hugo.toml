@@ -496,6 +496,8 @@ snippetLength = 30
 highlightTag = "em"
 # whether to use the absolute URL based on the baseURL in search index
 absoluteURL = false
+# FixIt 0.4.0 | NEW whether to enable anchorify for headings in search results
+anchorify = true
 
 [params.search.algolia]
 index = ""
