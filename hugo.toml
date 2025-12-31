@@ -792,6 +792,9 @@ RSS = true
 # prefix = "https://twitter.com/"
 # Title = "Twitter"
 
+# [params.social.twitter.icon]
+# class = "fa-brands fa-x-twitter fa-fw"
+
 # TypeIt config
 [params.typeit]
 # typing speed between each step (measured in milliseconds)
@@ -1290,7 +1293,7 @@ errorColor = "#ff4949"
 # custom macros map
 # syntax: <macro> = <definition>
 [params.page.math.katex.macros]
-# "\\f" = "#1f(#2)"  # usage: $\f{a}{b}$
+# "\\f" = "#1f(#2)" # usage: $\f{a}{b}$
 
 # MathJax server-side rendering (https://www.mathjax.org)
 # MathJax config: https://docs.mathjax.org/en/latest/options/index.html
@@ -1303,7 +1306,7 @@ cdn = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 # custom macros map
 # syntax: <macro> = <definition>
 [params.page.math.mathjax.macros]
-# bold = ["{\\bf #1}", 1]  # usage: $\bold{math}$
+# bold = ["{\\bf #1}", 1] # usage: $\bold{math}$
 
 [params.page.math.mathjax.loader]
 load = [ "ui/safe" ]
@@ -1312,6 +1315,7 @@ load = [ "ui/safe" ]
 # custom = "https://cdn.jsdelivr.net/gh/sonoisa/XyJax-v3@3.0.1/build/"
 
 # more loader config e.g source, dependencies, provides etc.
+
 [params.page.math.mathjax.options]
 enableMenu = true
 # HTML tags that won't be searched for math

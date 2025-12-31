@@ -70,6 +70,7 @@
   "eslint.validate": [
     "go-html-template",
     "javascript",
+    "typescript",
     "html",
     "markdown",
     "json",
