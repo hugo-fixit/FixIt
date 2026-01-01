@@ -29,7 +29,7 @@ jobs:
       #     commit_message: 'docs(readme): update hugo-fixit component list'
       #     commit_author: 'github-actions[bot] <github-actions[bot]@users.noreply.github.com>'
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           title: Update hugo-fixit component list
           commit-message: 'docs(readme): update hugo-fixit component list'
