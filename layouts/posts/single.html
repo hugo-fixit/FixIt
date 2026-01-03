@@ -167,6 +167,12 @@
       </div>
     {{- end -}}
 
+    {{- /* AI Summary */ -}}
+    {{- $summaryConfig := (.Params | merge .Site.Params).postSummary -}}
+    {{- if $summaryConfig.enable -}}
+      <div class="ai-summary"></div>
+    {{- end -}}
+
     {{- /* Custom block before post content */ -}}
     {{- block "custom-post__content:before" . }}{{ end -}}
 

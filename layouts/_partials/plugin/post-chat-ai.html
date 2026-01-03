@@ -2,10 +2,13 @@
   PostChat AI service.
   PostChat: https://ai.zhheo.com/docs/addCode.html
   PostSummary: https://ai.zhheo.com/docs/summary.html
+  Podcast: https://ai.zhheo.com/docs/podcast.html
+  TODO refactor and migrate to theme component
 */ -}}
 {{- $params := .Params | merge .Site.Params -}}
 {{- $chatConfig := $params.postChat -}}
 {{- $summaryConfig := $params.postSummary -}}
+{{- $podcastConfig := $params.podcast -}}
 {{- $key := $chatConfig.key | default $summaryConfig.key -}}
 {{- $sourcePrefix := "https://ai.zhheo.com/static/public/" -}}
 {{- $jsMap := dict
@@ -29,7 +32,7 @@
     {{- $postChatCSS := "https://ai.zhheo.com/static/public/postChatUser_summary.min.css" -}}
     {{- dict "Source" $postChatCSS "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
     {{- $p := "tianliGPT" -}}
-    {{- $postSummaryConfig := printf "let %v_postSelector='#content';" $p -}}
+    {{- $postSummaryConfig := printf "let %v_postSelector='#content';let %v_injectDom='.ai-summary';" $p $p -}}
     {{- with $summaryConfig.title -}}
       {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_Title='%v';" $p .) -}}
     {{- end -}}
@@ -58,6 +61,10 @@
       {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_recommendation=true;" $p) -}}
     {{- else -}}
       {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_key='%v';" $p $key) -}}
+    {{- end -}}
+    {{- /* Podcast */ -}}
+    {{- if $podcastConfig.enable -}}
+      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_podcast=true;" $p) -}}
     {{- end -}}
     {{- $configJS = add $configJS $postSummaryConfig -}}
   {{- end -}}
