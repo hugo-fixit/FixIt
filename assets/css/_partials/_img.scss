@@ -1,7 +1,3 @@
 img {
   @include border-radius($global-border-radius/2);
-
-  &[loading='lazy'] {
-    background: var(#{$rootPrefix}loading-img) no-repeat center;
-  }
 }
