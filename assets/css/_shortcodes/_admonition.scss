@@ -38,6 +38,10 @@
     &:empty {
       display: none;
     }
+
+    .code-block .code-header {
+      top: initial !important;
+    }
   }
 
   i.icon {
