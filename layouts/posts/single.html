@@ -60,7 +60,7 @@
             {{- printf `<time datetime="%v">%v</time>` . . | safeHTML -}}
           </span>&nbsp;
         {{- end -}}
-        {{- if ne .Lastmod.Unix .PublishDate.Unix }}
+        {{- if (ne .Lastmod.Unix .PublishDate.Unix) | and $params.showLastmod -}}
           {{- with .Lastmod | dateFormat (.Site.Params.dateformat | default "2006-01-02") -}}
             <span title="{{ dict "Date" ("2006-01-02 15:04:05" | $.Lastmod.Format) | T "single.updatedOnDate" }}">
               {{- dict "Class" "fa-regular fa-calendar-check fa-fw me-1" | partial "plugin/icon.html" -}}
