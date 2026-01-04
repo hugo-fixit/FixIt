@@ -73,9 +73,9 @@
   {{- if $chatConfig.enable -}}
     {{- $sourceOpts = dict "Attr" (printf "data-postChat_key=%q" $key) | merge $sourceOpts -}}
     {{- $blackDom := slice
-      ".expiration-reminder"
       "meting-js"
       ".lnt"
+      ".ln"
     -}}
     {{- with $chatConfig.blackDom -}}
       {{- $blackDom = $blackDom | append . -}}
