@@ -176,12 +176,13 @@
     {{- /* Custom block before post content */ -}}
     {{- block "custom-post__content:before" . }}{{ end -}}
 
+    {{- /* Expiration Reminder */ -}}
+    {{- partial "single/expiration-reminder.html" . -}}
+
     {{- /* Content */ -}}
     {{- $content := dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
     <div class="content" id="content"{{ with $params.endFlag }} data-end-flag="{{ . }}"{{ end }}>
       {{- if not $params.password -}}
-        {{- /* Expiration Reminder */ -}}
-        {{- partial "single/expiration-reminder.html" . -}}
         {{- $content -}}
       {{- end -}}
     </div>

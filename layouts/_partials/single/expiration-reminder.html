@@ -1,7 +1,8 @@
 {{- $params := partial "function/params.html" -}}
 {{- $expirationReminder := $params.expirationReminder | default dict -}}
+{{- $isEnabled := $expirationReminder.enable | and (not $params.password) -}}
 
-{{- if $expirationReminder.enable -}}
+{{- if $isEnabled -}}
   {{- $daysAgo := div (sub now.Unix .Lastmod.Unix) 86400 }}
   {{- $reminderThreshold := $expirationReminder.reminder | default 90 }}
   {{- $warningThreshold := $expirationReminder.warning | default 180 }}

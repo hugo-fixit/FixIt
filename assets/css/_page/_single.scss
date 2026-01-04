@@ -509,13 +509,12 @@
     json-viewer[boxed] + json-viewer[boxed] {
       margin-top: 0.5rem;
     }
-
-    @import '../_partials/_single/alert';
-    @import '../_partials/_single/code';
-    @import '../_partials/_single/diagram-copy-btn';
-    @import '../_shortcodes';
   }
-
+  
+  @import '../_shortcodes';
+  @import '../_partials/_single/alert';
+  @import '../_partials/_single/code';
+  @import '../_partials/_single/diagram-copy-btn';
   @import '../_partials/_single/reward';
   @import '../_partials/_single/footer';
   @import '../_partials/_single/comment';
