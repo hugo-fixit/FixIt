@@ -211,7 +211,7 @@ pre {
           transform: translateX(-50%);
           background-color: var(#{$rootPrefix}code-header-background-color);
           padding-inline: 1em;
-          max-width: 80%;
+          max-width: calc(100% - 200px);
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
