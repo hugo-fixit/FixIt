@@ -36,9 +36,9 @@
     "build": "pnpm build:demo && pnpm build:test && pnpm -F integration start",
     "preview": "serve public",
     "lint": "eslint --cache .",
-    "version": "pnpm -F versioning start prod && pnpm changelog -p",
+    "version": "pnpm -F versioning start prod",
     "postversion": "git push && git push --tags",
-    "changelog": "auto-changelog-plus",
+    "changelog": "auto-changelog-plus --starting-date 2021-12-18",
     "prepare": "simple-git-hooks"
   },
   "devDependencies": {
