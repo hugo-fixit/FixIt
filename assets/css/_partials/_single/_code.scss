@@ -69,7 +69,7 @@ pre {
   @include border-radius($global-border-radius);
 
   // lineNumbersInTable=true
-  > .chroma {
+  > div.chroma {
     position: relative;
     background-color: var(#{$rootPrefix}code-block-background-color);
     @include border-radius($global-border-radius);

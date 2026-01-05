@@ -150,13 +150,21 @@ function add(a, b) {
 
 ## Code block inside other blocks
 
-> [!NOTE]-
+> [!NOTE]+
 >
 > ```js {mode="classic"}
 > function add(a, b) {
 >   return a + b
 > }
 > ```
+
+{{< typeit code=java >}}
+public class HelloWorld {
+    public static void main(String []args) {
+        System.out.println("Hello World");
+    }
+}
+{{< /typeit >}}
 
 {{< details "Code Block inside Details" >}}
 
