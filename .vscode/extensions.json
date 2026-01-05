@@ -2,6 +2,7 @@
   "recommendations": [
     "budparr.language-hugo-vscode",
     "kaellarkin.hugo-shortcode-syntax",
-    "eliostruyf.vscode-hugo-themer"
+    "lruihao.hugo-partials-refs",
+    "tamasfe.even-better-toml"
   ]
 }
