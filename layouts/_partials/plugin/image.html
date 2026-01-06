@@ -59,12 +59,14 @@ https://github.com/HEIGE-PCloud/DoIt/blob/main/layouts/_partials/plugin/image.ht
 {{- $blackList := .BlackList | default $config.blackList | default slice -}}
 {{- $isBlocked := false -}}
 {{- $regex := "" -}}
-{{- $disableImageTypes := slice "svg" "gif" -}}
-{{- $isSvg := false -}}
+{{- $disableImageTypes := slice "svg" "gif" "avif" -}}
 {{- with $blackList -}}
   {{- $regex = replace (delimit . "|") "." "\\." -}}
   {{- $regex = replace $regex "*" ".*" -}}
 {{- end -}}
+{{- /* raster graphics */ -}}
+{{- $rasterTypes := slice "svg" "avif" -}}
+{{- $isRaster := false -}}
 {{- if $resource -}}
   {{- if $regex -}}
     {{- $isBlocked = gt (findRE $regex $resource.Name | len) 0 -}}
@@ -72,7 +74,7 @@ https://github.com/HEIGE-PCloud/DoIt/blob/main/layouts/_partials/plugin/image.ht
   {{- if not $isBlocked -}}
     {{- $isBlocked = in $disableImageTypes $resource.MediaType.SubType -}}
   {{- end -}}
-  {{- $isSvg = eq $resource.MediaType.SubType "svg" -}}
+  {{- $isRaster = in $rasterTypes $resource.MediaType.SubType -}}
 {{- end -}}
 
 {{- /* Optimise image and generate srcset processing */ -}}
@@ -95,7 +97,7 @@ https://github.com/HEIGE-PCloud/DoIt/blob/main/layouts/_partials/plugin/image.ht
 {{- $caption := .Caption | default $alt -}}
 {{- $height := .Height -}}
 {{- $width := .Width -}}
-{{- if not $isSvg -}}
+{{- if not $isRaster -}}
   {{- $height = $height | default $resource.Height | default "" -}}
   {{- $width = $width | default $resource.Width | default "" -}}
 {{- end -}}
