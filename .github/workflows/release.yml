@@ -22,11 +22,16 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
 
+      - name: Install fixit-cli
+        run: pnpm install -g fixit-cli
       - name: Split theme configuration
         run: |
-          pnpx fixit-cli split hugo.toml
-          tar -zcvf config.tar.gz config
-          tree config
+          fixit split
+          tar -zcvf config_toml.tar.gz config
+          rm -rf config
+          fixit split -y
+          tar -zcvf config_yaml.tar.gz config
+          rm -rf config
 
       - name: Generate release notes
         run: |
@@ -40,4 +45,5 @@ jobs:
           draft: true
           body_path: CHANGELOG.md
           files: |
-            config.tar.gz
+            config_toml.tar.gz
+            config_yaml.tar.gz
