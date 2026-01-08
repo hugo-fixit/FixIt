@@ -59,10 +59,12 @@
       {{- end -}}
     </div>
   {{- end }}
-  <div class="details-content">
-    <div class="admonition-content">
-      {{- .Text | safeHTML -}}
+  {{- with .Text -}}
+    <div class="details-content">
+      <div class="admonition-content">
+        {{- . | safeHTML -}}
+      </div>
     </div>
-  </div>
+  {{- end }}
 </div>
 {{- /* EOF */ -}}

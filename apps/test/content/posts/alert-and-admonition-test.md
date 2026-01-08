@@ -39,7 +39,7 @@ This article comprehensively tests the **Alerts** Markdown syntax extension and 
 > [!NOTE] FixIt
 > A clean, elegant but advanced Hugo theme.
 
-> [!TIP] This is a title-only alert
+> [!TIP] This is a title-only alert.
 
 ### Foldable Alerts
 
