@@ -46,16 +46,19 @@
 {{- $type = index $aliasMap $type | default $type | default "note" -}}
 {{- $icon := index $iconMap $type | default "fa-solid fa-pencil-alt" -}}
 {{- $title := .Title | default (T (printf "admonition.%v" $type)) | default (title $type) -}}
+{{- $titleless := eq .Title "~" -}}
 {{- $foldable := ne .Foldable false -}}
 
 <div class="details admonition {{ $type }}{{ if .Open | ne false }} open{{ end }}{{ if not $foldable }} disabled{{ end }}">
-  <div class="details-summary admonition-title">
-    {{- dict "Class" (add "icon fa-fw " $icon) | partial "plugin/icon.html" -}}
-    {{- $title | safeHTML -}}
-    {{- if $foldable -}}
-      {{- dict "Class" "details-icon fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
-    {{- end -}}
-  </div>
+  {{- if not $titleless }}
+    <div class="details-summary admonition-title">
+      {{- dict "Class" (add "icon fa-fw " $icon) | partial "plugin/icon.html" -}}
+      {{- $title | safeHTML -}}
+      {{- if $foldable -}}
+        {{- dict "Class" "details-icon fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
+      {{- end -}}
+    </div>
+  {{- end }}
   <div class="details-content">
     <div class="admonition-content">
       {{- .Text | safeHTML -}}

@@ -59,6 +59,11 @@ Alerts can be nested in multiple levels:
 > > [!todo] Yes! They can be nested.
 > > > [!example] You can even use multiple layers of nesting.
 
+### Content-only Alerts
+
+> [!TIP]~
+> This is a content-only alert without a title.
+
 ### Supported types
 
 > [!note]+

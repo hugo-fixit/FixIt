@@ -92,4 +92,13 @@
   &:last-child {
     margin-bottom: 0.75rem;
   }
+
+  // content-only admonition (no title) 
+  &:not(:has(.admonition-title)) {
+    border-left: 0;
+
+    .admonition-content {
+      padding: 1rem 0.25rem;
+    }
+  }
 }
