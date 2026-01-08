@@ -9,7 +9,11 @@
 
     i.details-icon {
       color: var(#{$rootPrefix}global-font-secondary-color);
-      @include transition(transform 0.2s ease);
+      @include transition(all 0.2s ease);
+
+      &:hover {
+        color: var(#{$rootPrefix}global-font-color);
+      }
     }
   }
 
