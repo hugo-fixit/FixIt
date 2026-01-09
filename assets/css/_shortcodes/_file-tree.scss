@@ -1,0 +1,107 @@
+// TODO
+// 支持自定义目录树，而不是实时扫描目录结构生成
+.file-tree-wrapper {
+  border: 1px solid var(#{$rootPrefix}global-border-color);
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1;
+  margin-block: 0.5rem;
+  @include border-radius($global-border-radius);
+  @include transition(box-shadow 0.2s ease);
+
+  &:hover {
+    @include box-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+
+    [data-theme='dark'] & {
+      @include box-shadow(0 2px 8px rgba(255, 255, 255, 0.1));
+    }
+  }
+
+  ul.file-tree {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    .file-tree-item {
+      position: relative;
+
+      &.file-tree-folder {
+        > .file-tree-toggle {
+          cursor: pointer;
+          font-weight: bold;
+
+          [data-theme='dark'] & {
+            color: #ddd;
+          }
+
+          &:hover {
+            i,
+            span {
+              opacity: 0.6;
+            }
+          }
+        }
+      }
+
+      .file-tree-label {
+        display: inline-flex;
+        align-items: center;
+        position: relative;
+        gap: 0.25rem;
+        padding: 0.25rem 0.5rem;
+        @include border-radius($global-border-radius);
+        @include transition(all 0.15s ease);
+
+        .file-tree-icon {
+          width: 1rem;
+          text-align: center;
+          flex-shrink: 0;
+        }
+      }
+    }
+
+    &:not([data-level='0']) {
+      .file-tree-item {
+        margin: 0.25rem 0;
+        padding-left: 0.25rem;
+
+        .file-tree-label::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: -0.5rem;
+          translate: 0 -50%;
+          width: 0.75rem;
+          height: 1px;
+          background-color: var(#{$rootPrefix}global-border-color);
+        }
+      }
+    }
+  }
+
+  .file-tree .file-tree {
+    padding-left: 1.25rem;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -0.25rem;
+      bottom: 0.625rem;
+      left: calc(1rem - 0.5px);
+      width: 1px;
+      background-color: var(#{$rootPrefix}global-border-color);
+      height: var(#{$rootPrefix}file-tree-line-height);
+    }
+  }
+
+  .file-tree-item.is-collapsed {
+    > .file-tree {
+      display: none;
+    }
+
+    > .file-tree-label .file-tree-icon::before {
+      content: '\f07b';
+    }
+  }
+}

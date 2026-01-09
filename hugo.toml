@@ -1160,6 +1160,11 @@ copyable = true
 sort = false
 boxed = true
 
+# FixIt 0.4.2 | NEW File tree config
+# See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/filetree/
+[params.filetree]
+level = 1
+
 # FixIt 0.3.12 | NEW Custom partials config
 # Custom partials must be stored in the /layouts/_partials/ directory.
 # Depends on open custom blocks https://fixit.lruihao.cn/references/blocks/

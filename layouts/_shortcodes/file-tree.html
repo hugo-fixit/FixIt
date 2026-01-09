@@ -1,0 +1,87 @@
+{{- /*
+  Renders a file tree structure starting from the specified path
+  @param {string} [path="/"] - The path relative to the root of your project directory.
+  @param {int} [level=1] - The expand level of the tree. Set to -1/0 to expand/collapse all levels.
+  @example {{< file-tree "content" level=2 >}}
+*/ -}}
+
+{{- $config := dict | merge .Page.Params.filetree | merge .Site.Params.filetree -}}
+{{- $root := cond .IsNamedParams (.Get "path") (.Get 0) | default "/" -}}
+{{- $level := cond .IsNamedParams (.Get "level") (.Get 1) | default $config.level | default 1 -}}
+
+{{- /* Check if the root path exists */ -}}
+{{- $rootIsExists := false -}}
+{{- $rootName := "" -}}
+{{- if fileExists $root -}}
+  {{- $rootIsExists = true -}}
+  {{- $f := os.Stat $root -}}
+  {{- /* Attempt to resolve the path relative to the contentDir */ -}}
+  {{- with try (readDir $root) -}}
+    {{- with .Err }}
+      {{- $root = path.Clean (path.Join "content" $root) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- /* Determine the root name for display */ -}}
+  {{- $rootName = path.Clean $root -}}
+  {{- if (eq $rootName "/") | or (eq $rootName ".") -}}
+    {{- $rootName = $f.Name -}}
+  {{- end -}}
+{{- else -}}
+  {{- warnidf "warning-file-tree" "File tree root path does not exist: %s.See %s %s" $root .Name .Position -}}
+{{- end -}}
+
+{{- /* Start rendering the file tree */ -}}
+{{- if $rootIsExists -}}
+  <div class="file-tree-wrapper">
+    <ul class="file-tree" data-level="0">
+      <li class="file-tree-item file-tree-folder{{ if eq (int $level) 0 }} is-collapsed{{ end }}">
+        <span class="file-tree-label file-tree-toggle">
+          {{- dict "Class" "file-tree-icon fa-regular fa-folder-open" | partial "plugin/icon.html" -}}
+          <span class="file-tree-label__inner">{{ $rootName }}</span>
+        </span>
+        {{- template "render-tree" (dict "path" $root "depth" 1 "level" $level) -}}
+      </li>
+    </ul>
+  </div>
+{{- end -}}
+
+{{- /*
+  Recursive function to render tree
+  @param {string} path - Current directory path
+  @param {int} depth - Current depth level
+  @param {int} level - Collapse level
+*/ -}}
+{{- define "render-tree" -}}
+  {{- $path := .path -}}
+  {{- $depth := .depth -}}
+  {{- $level := .level -}}
+  {{- $ignoreList := slice ".DS_Store" "Thumbs.db" -}}
+  {{- $items := readDir $path -}}
+
+  <ul class="file-tree" data-level="{{ $depth }}">
+    {{- range $items -}}
+      {{- if in $ignoreList .Name -}}
+        {{- continue -}}
+      {{- end -}}
+      {{- $fullPath := printf "%s/%s" $path .Name -}}
+      {{- $isCollapsed := (ge $depth $level) | and (ge $level 0) -}}
+      
+      <li class="file-tree-item{{ if .IsDir }} file-tree-folder{{ end }}{{ if and .IsDir $isCollapsed }} is-collapsed{{ end }}">
+        <span class="file-tree-label{{ if .IsDir }} file-tree-toggle{{ end }}">
+          {{- $icon := "file-tree-icon fa-regular " -}}
+          {{- if .IsDir -}}
+            {{- $icon = add $icon "fa-folder-open" -}}
+          {{- else -}}
+            {{- $icon = add $icon "fa-file-lines" -}}
+          {{- end -}}
+          {{- dict "Class" $icon | partial "plugin/icon.html" -}}
+          <span class="file-tree-label__inner">{{ .Name }}</span>
+        </span>
+        
+        {{- if .IsDir -}}
+          {{- template "render-tree" (dict "path" $fullPath "depth" (add $depth 1) "level" $level) -}}
+        {{- end -}}
+      </li>
+    {{- end -}}
+  </ul>
+{{- end -}}
