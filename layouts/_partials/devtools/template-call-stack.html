@@ -1,0 +1,16 @@
+{{- /*  
+  Render template call stack for debugging purpose.
+  Call the partial from any template: {{- partial "devtools/template-call-stack.html" . -}}
+*/ -}}
+{{- if .Site.Params.dev.debug | and hugo.IsServer -}}
+  {{- with templates.Current -}}
+    <ul class="template-call-stack">
+      {{- range .Ancestors -}}
+        <li><a href="vscode://file/{{ .Filename }}"><small>{{ .Filename }}</small></a></li>
+        {{- with .Base -}}
+          <li><a href="vscode://file/{{ .Filename }}"><small>{{ .Filename }}</small></a></li>
+        {{- end -}}
+      {{- end -}}
+    </ul>
+  {{- end -}}
+{{- end -}}

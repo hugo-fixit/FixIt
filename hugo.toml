@@ -1187,6 +1187,8 @@ postFooterAfter = []
 enable = false
 # Check for updates
 c4u = false
+# # FixIt 0.4.0 | NEW Enable debug mode
+debug = false
 
 # Page config
 # TODO migrate mapping key to `params` layer in the future
