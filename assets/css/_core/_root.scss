@@ -20,7 +20,7 @@
 
   // hr / divider style
   #{$rootPrefix}hr-background-color: #{darken($global-border-color, 5%)};
-  #{$rootPrefix}hr-before-color: #{lighten($single-link-hover-color, 4%)};
+  #{$rootPrefix}hr-active-color: #{lighten($single-link-hover-color, 4%)};
   #{$rootPrefix}divider-edge-weak: linear-gradient(to right, transparent, var(#{$rootPrefix}divider-bg, #d0d0d5), transparent);
 
   // Scrollbar related variables
@@ -54,7 +54,7 @@
   #{$rootPrefix}global-link-hover-color: #{$global-link-hover-color-dark};
 
   #{$rootPrefix}hr-background-color: #{lighten($global-border-color-dark, 5%)};
-  #{$rootPrefix}hr-before-color: #{darken($global-link-hover-color-dark, 4%)};
+  #{$rootPrefix}hr-active-color: #{darken($global-link-hover-color-dark, 4%)};
 
   #{$rootPrefix}code-inline-background-color: rgba(99, 110, 123, 0.4);
   #{$rootPrefix}code-block-background-color: #{$code-background-color-dark};
