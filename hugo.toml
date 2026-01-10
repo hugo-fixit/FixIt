@@ -1164,6 +1164,7 @@ boxed = true
 # See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/filetree/
 [params.filetree]
 level = 1
+ignoreList = []
 
 # FixIt 0.3.12 | NEW Custom partials config
 # Custom partials must be stored in the /layouts/_partials/ directory.

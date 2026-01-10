@@ -13,15 +13,10 @@ This article tests the **File Tree** shortcode functionality in the FixIt theme.
 
 <!--more-->
 
-```go-html-template
-{{</* file-tree "xxx" */>}}
-```
-
-{{< file-tree "/" >}}
+{{< file-tree >}}
 {{< file-tree "." >}}
-
+{{< file-tree "/" >}}
+{{< file-tree "./" 2 ".hugo_build.lock, public, resources" >}}
 {{< file-tree "content" >}}
-
 {{< file-tree "content/posts" "0" >}}
-
 {{< file-tree "posts" -1 >}}

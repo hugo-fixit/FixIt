@@ -1,5 +1,7 @@
+/**
+ * FileTree class to handle file tree interactions
+ */
 export default class FileTree {
-
   init(target = document) {
     target.querySelectorAll('.file-tree-toggle:not([data-init])').forEach((label) => {
       label.addEventListener('click', (e) => {

@@ -2,12 +2,20 @@
   Renders a file tree structure starting from the specified path
   @param {string} [path="/"] - The path relative to the root of your project directory.
   @param {int} [level=1] - The expand level of the tree. Set to -1/0 to expand/collapse all levels.
-  @example {{< file-tree "content" level=2 >}}
+  @param {string} [ignoreList] - A list of file or folder names to ignore, separated by commas.
+  @example {{< file-tree "content" 2 >}}
+  [todo] To link files, add a `linkPrefix` param for the URL prefix, PRs welcome.
+  [todo] 支持自定义目录树，而不是实时扫描目录结构生成
 */ -}}
 
 {{- $config := dict | merge .Page.Params.filetree | merge .Site.Params.filetree -}}
 {{- $root := cond .IsNamedParams (.Get "path") (.Get 0) | default "/" -}}
 {{- $level := cond .IsNamedParams (.Get "level") (.Get 1) | default $config.level | default 1 -}}
+{{- $ignoreList := cond .IsNamedParams (.Get "ignoreList") (.Get 2) | default $config.ignorelist | default "" -}}
+
+{{- /* Process ignoreList into a slice */ -}}
+{{- $ignoreList = split $ignoreList "," -}}
+{{- $ignoreList = apply $ignoreList "trim" "." " " -}}
 
 {{- /* Check if the root path exists */ -}}
 {{- $rootIsExists := false -}}
@@ -39,7 +47,7 @@
           {{- dict "Class" "file-tree-icon fa-regular fa-folder-open" | partial "plugin/icon.html" -}}
           <span class="file-tree-label__inner">{{ $rootName }}</span>
         </span>
-        {{- template "render-tree" (dict "path" $root "depth" 1 "level" $level) -}}
+        {{- template "render-tree" (dict "path" $root "depth" 1 "level" $level "ignoreList" $ignoreList) -}}
       </li>
     </ul>
   </div>
@@ -50,12 +58,16 @@
   @param {string} path - Current directory path
   @param {int} depth - Current depth level
   @param {int} level - Collapse level
+  @param {array} ignoreList - List of file or folder names to ignore
 */ -}}
 {{- define "render-tree" -}}
   {{- $path := .path -}}
   {{- $depth := .depth -}}
   {{- $level := .level -}}
   {{- $ignoreList := slice ".DS_Store" "Thumbs.db" -}}
+  {{- if .ignoreList -}}
+    {{- $ignoreList = union $ignoreList .ignoreList -}}
+  {{- end -}}
   {{- $items := readDir $path -}}
 
   <ul class="file-tree" data-level="{{ $depth }}">
@@ -79,7 +91,7 @@
         </span>
         
         {{- if .IsDir -}}
-          {{- template "render-tree" (dict "path" $fullPath "depth" (add $depth 1) "level" $level) -}}
+          {{- template "render-tree" (dict "path" $fullPath "depth" (add $depth 1) "level" $level "ignoreList" $ignoreList) -}}
         {{- end -}}
       </li>
     {{- end -}}
