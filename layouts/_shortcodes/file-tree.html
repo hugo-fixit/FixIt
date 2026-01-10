@@ -2,7 +2,8 @@
   Renders a file tree structure starting from the specified path
   @param {string} [path="/"] - The path relative to the root of your project directory.
   @param {int} [level=1] - The expand level of the tree. Set to -1/0 to expand/collapse all levels.
-  @param {string} [ignoreList] - A list of file or folder names to ignore, separated by commas.
+  @param {string} [ignoreList=""] - List of file or folder names to ignore, separated by commas.
+  @param {bool} [folderSlash=false] - Whether to append a trailing "/" to folder names.
   @example {{< file-tree "content" 2 >}}
   [todo] To link files, add a `linkPrefix` param for the URL prefix, PRs welcome.
   [todo] 支持自定义目录树，而不是实时扫描目录结构生成
@@ -11,7 +12,8 @@
 {{- $config := dict | merge .Page.Params.filetree | merge .Site.Params.filetree -}}
 {{- $root := cond .IsNamedParams (.Get "path") (.Get 0) | default "/" -}}
 {{- $level := cond .IsNamedParams (.Get "level") (.Get 1) | default $config.level | default 1 -}}
-{{- $ignoreList := cond .IsNamedParams (.Get "ignoreList") (.Get 2) | default $config.ignorelist | default "" -}}
+{{- $ignoreList := cond .IsNamedParams (.Get "ignoreList") nil | default $config.ignorelist | default "" -}}
+{{- $folderSlash := cond .IsNamedParams (.Get "folderSlash") nil | default $config.folderslash | default false -}}
 
 {{- /* Process ignoreList into a slice */ -}}
 {{- $ignoreList = split $ignoreList "," -}}
@@ -19,7 +21,7 @@
 
 {{- /* Check if the root path exists */ -}}
 {{- $rootIsExists := false -}}
-{{- $rootName := "" -}}
+{{- $rootLabel := "" -}}
 {{- if fileExists $root -}}
   {{- $rootIsExists = true -}}
   {{- $f := os.Stat $root -}}
@@ -30,10 +32,11 @@
     {{- end -}}
   {{- end -}}
   {{- /* Determine the root name for display */ -}}
-  {{- $rootName = path.Clean $root -}}
-  {{- if (eq $rootName "/") | or (eq $rootName ".") -}}
-    {{- $rootName = $f.Name -}}
+  {{- $rootLabel = path.Clean $root -}}
+  {{- if (eq $rootLabel "/") | or (eq $rootLabel ".") -}}
+    {{- $rootLabel = $f.Name -}}
   {{- end -}}
+  {{- $rootLabel = cond $folderSlash (add $rootLabel "/") $rootLabel -}}
 {{- else -}}
   {{- warnidf "warning-file-tree" "File tree root path does not exist: %s.See %s %s" $root .Name .Position -}}
 {{- end -}}
@@ -45,9 +48,16 @@
       <li class="file-tree-item file-tree-folder{{ if eq (int $level) 0 }} is-collapsed{{ end }}">
         <span class="file-tree-label file-tree-toggle">
           {{- dict "Class" "file-tree-icon fa-regular fa-folder-open" | partial "plugin/icon.html" -}}
-          <span class="file-tree-label__inner">{{ $rootName }}</span>
+          <span class="file-tree-label__inner">{{ $rootLabel }}</span>
         </span>
-        {{- template "render-tree" (dict "path" $root "depth" 1 "level" $level "ignoreList" $ignoreList) -}}
+        {{- $options := dict
+          "path" $root
+          "depth" 1
+          "level" $level
+          "ignoreList" $ignoreList
+          "folderSlash" $folderSlash
+        -}}
+        {{- template "render-tree" $options -}}
       </li>
     </ul>
   </div>
@@ -59,11 +69,13 @@
   @param {int} depth - Current depth level
   @param {int} level - Collapse level
   @param {array} ignoreList - List of file or folder names to ignore
+  @param {bool} folderSlash - Whether to append a trailing "/" to folder names
 */ -}}
 {{- define "render-tree" -}}
   {{- $path := .path -}}
   {{- $depth := .depth -}}
   {{- $level := .level -}}
+  {{- $folderSlash := .folderSlash -}}
   {{- $ignoreList := slice ".DS_Store" "Thumbs.db" -}}
   {{- if .ignoreList -}}
     {{- $ignoreList = union $ignoreList .ignoreList -}}
@@ -77,6 +89,7 @@
       {{- end -}}
       {{- $fullPath := printf "%s/%s" $path .Name -}}
       {{- $isCollapsed := (ge $depth $level) | and (ge $level 0) -}}
+      {{- $label := cond (and .IsDir $folderSlash) (add .Name "/") .Name -}}
       
       <li class="file-tree-item{{ if .IsDir }} file-tree-folder{{ end }}{{ if and .IsDir $isCollapsed }} is-collapsed{{ end }}">
         <span class="file-tree-label{{ if .IsDir }} file-tree-toggle{{ end }}">
@@ -87,11 +100,18 @@
             {{- $icon = add $icon "fa-file-lines" -}}
           {{- end -}}
           {{- dict "Class" $icon | partial "plugin/icon.html" -}}
-          <span class="file-tree-label__inner">{{ .Name }}</span>
+          <span class="file-tree-label__inner">{{ $label }}</span>
         </span>
         
         {{- if .IsDir -}}
-          {{- template "render-tree" (dict "path" $fullPath "depth" (add $depth 1) "level" $level "ignoreList" $ignoreList) -}}
+          {{- $options := dict
+            "path" $fullPath
+            "depth" (add $depth 1)
+            "level" $level
+            "ignoreList" $ignoreList
+            "folderSlash" $folderSlash
+          -}}
+          {{- template "render-tree" $options -}}
         {{- end -}}
       </li>
     {{- end -}}

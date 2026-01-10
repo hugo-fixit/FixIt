@@ -16,7 +16,12 @@ This article tests the **File Tree** shortcode functionality in the FixIt theme.
 {{< file-tree >}}
 {{< file-tree "." >}}
 {{< file-tree "/" >}}
-{{< file-tree "./" 2 ".hugo_build.lock, public, resources" >}}
+{{< file-tree "./" >}}
 {{< file-tree "content" >}}
 {{< file-tree "content/posts" "0" >}}
 {{< file-tree "posts" -1 >}}
+
+---
+
+{{< file-tree ignoreList=".hugo_build.lock, public, resources" >}}
+{{< file-tree path="content" level="2" folderSlash="true" >}}

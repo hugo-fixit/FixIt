@@ -1163,8 +1163,12 @@ boxed = true
 # FixIt 0.4.2 | NEW File tree config
 # See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/filetree/
 [params.filetree]
+# the expand level of the tree
 level = 1
+# list of file or folder names to ignore
 ignoreList = []
+# whether to append a trailing "/" to folder names
+folderSlash = false
 
 # FixIt 0.3.12 | NEW Custom partials config
 # Custom partials must be stored in the /layouts/_partials/ directory.
@@ -1193,7 +1197,7 @@ postFooterAfter = []
 enable = false
 # Check for updates
 c4u = false
-# # FixIt 0.4.0 | NEW Enable debug mode
+# FixIt 0.4.0 | NEW Enable debug mode
 debug = false
 
 # Page config
