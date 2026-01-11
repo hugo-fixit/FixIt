@@ -1,16 +1,54 @@
 {{- /*
-  Renders a file tree structure from filesystem, page resources, or data files
+  Renders an interactive file tree structure from filesystem, page resources, data files, or inline content.
+  See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/filetree/
+  [todo] To link files, add a `linkPrefix` param for the URL prefix, PRs welcome.
+
   @param {string} [path="/"] - The path relative to the root of your project directory (filesystem mode).
   @param {int} [level=1] - The expand level of the tree. Set to -1/0 to expand/collapse all levels.
-  @param {bool} [folderSlash=false] - Whether to append a trailing "/" to folder names.
-  @param {string} [file] - The path to a YAML/JSON file in the page resources (page resource mode, highest priority).
-  @param {string} [data] - The name of the data file in data/filetree/ (data mode).
+  @param {boolean} [folderSlash=false] - Whether to append a trailing "/" to folder names.
+  @param {string} [file] - The path to a data file in the page resources (page resource mode). Supports JSON, YAML, and TOML formats.
+  @param {string} [data] - The name of the data file in data/filetree/ directory (data mode). Supports JSON, YAML, and TOML formats.
   @param {string} [ignoreList=""] - List of file or folder names to ignore, separated by commas.
-  @example {{< file-tree "content" 2 >}}
-  @example {{< file-tree path="content" level=2 folderSlash=true >}}
-  @example {{< file-tree file="data/example.yml" >}}
-  @example {{< file-tree data="myproject" >}}
-  [todo] To link files, add a `linkPrefix` param for the URL prefix, PRs welcome.
+
+  Priority order (highest to lowest):
+  1. Inline content mode (.Inner content) - Parse tree data from shortcode body
+  2. Page resource mode (file parameter) - Read data file from page bundle
+  3. Data mode (data parameter) - Load data file from data/filetree/ directory
+  4. Filesystem mode (path parameter) - Scan actual directory structure (default)
+
+  Fallback mechanism: If the current mode fails (e.g., file not found, invalid format), 
+  the shortcode will automatically fall back to the next available mode in the priority order.
+
+  @example
+  {{< file-tree "content" 2 />}}
+  {{< file-tree path="content" level=2 folderSlash=true />}}
+  {{< file-tree file="data/example.yml" />}}
+  {{< file-tree data="example" />}}
+  {{< file-tree >}}
+  - name: my-project
+    type: dir
+    children:
+      - name: src
+        type: dir
+      - name: package.json
+        type: file
+  {{< /file-tree >}}
+
+  Data format note: YAML and JSON support direct array format, while TOML requires a root key 'filetree' due to format limitations.
+  Example TOML structure:
+  ```toml
+  [[filetree]]
+  name = "src"
+  type = "dir"
+
+  [[filetree.children]]
+  name = "index.ts"
+  type = "file"
+
+  [[filetree]]
+  name = "README.md"
+  type = "file"
+  ```
 */ -}}
 
 {{- $config := dict | merge .Page.Params.filetree | merge .Site.Params.filetree -}}
@@ -28,25 +66,30 @@
 -}}
 
 {{- /* Page resource mode: read file from page bundle */ -}}
-{{- if $fileName -}}
+{{- $fileContent := strings.TrimSpace .Inner | default "" -}}
+{{- if $fileName | and (eq $fileContent "") -}}
   {{- $ext := path.Ext $fileName | lower -}}
   {{- if in $supportExts $ext -}}
-    {{- $fileContent := "" -}}
     {{- with dict "Path" $fileName "Resources" $.Page.Resources | partial "function/resource.html" }}
       {{- $fileContent = .Content -}}
     {{- else -}}
       {{- warnidf "warning-file-tree" "[file-tree]: no such data file: %s" $fileName -}}
     {{- end -}}
-    {{- $treeData = $fileContent | unmarshal -}}
-    {{- if reflect.IsMap $treeData -}}
-      {{- $treeData = $treeData.filetree -}}
-    {{- end -}}
   {{- else -}}
     {{- warnidf "warning-file-tree" "[file-tree]: Unsupported file format '%s'. Use %s. See %s %s" $ext (delimit $supportExts ", " " or ") $.Name $.Position -}}
   {{- end -}}
+{{- end -}}
+
+{{- /* Parse file content if available */ -}}
+{{- with $fileContent -}}
+  {{- $treeData = . | unmarshal -}}
+  {{- if reflect.IsMap $treeData -}}
+    {{- $treeData = $treeData.filetree -}}
+  {{- end -}}
+{{- end -}}
 
 {{- /* Data mode: render tree from data files */ -}}
-{{- else if $dataName -}}
+{{- if $dataName | and (eq (len $treeData) 0) -}}
   {{- with index .Site.Data.filetree (printf "%v.%v" $dataName .Page.Language) | default (index .Site.Data.filetree $dataName) -}}
     {{- $treeData = . -}}
   {{- else -}}
