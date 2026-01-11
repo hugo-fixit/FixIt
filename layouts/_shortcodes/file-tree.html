@@ -1,12 +1,14 @@
 {{- /*
-  Renders a file tree structure from filesystem or data files
+  Renders a file tree structure from filesystem, page resources, or data files
   @param {string} [path="/"] - The path relative to the root of your project directory (filesystem mode).
   @param {int} [level=1] - The expand level of the tree. Set to -1/0 to expand/collapse all levels.
-  @param {string} [ignoreList=""] - List of file or folder names to ignore, separated by commas (filesystem mode only).
   @param {bool} [folderSlash=false] - Whether to append a trailing "/" to folder names.
+  @param {string} [file] - The path to a YAML/JSON file in the page resources (page resource mode, highest priority).
   @param {string} [data] - The name of the data file in data/filetree/ (data mode).
+  @param {string} [ignoreList=""] - List of file or folder names to ignore, separated by commas.
   @example {{< file-tree "content" 2 >}}
   @example {{< file-tree path="content" level=2 folderSlash=true >}}
+  @example {{< file-tree file="data/example.yml" >}}
   @example {{< file-tree data="myproject" >}}
   [todo] To link files, add a `linkPrefix` param for the URL prefix, PRs welcome.
 */ -}}
@@ -14,37 +16,60 @@
 {{- $config := dict | merge .Page.Params.filetree | merge .Site.Params.filetree -}}
 {{- $root := cond .IsNamedParams (.Get "path") (.Get 0) | default "/" -}}
 {{- $level := cond .IsNamedParams (.Get "level") (.Get 1) | default $config.level | default 1 -}}
-{{- $ignoreList := .Get "ignoreList" | default $config.ignorelist | default "" -}}
 {{- $folderSlash := .Get "folderSlash" | default $config.folderslash | default false -}}
+{{- $fileName := .Get "file" -}}
 {{- $dataName := .Get "data" -}}
+{{- $treeData := slice -}}
+{{- $supportExts := slice ".yml" ".yaml" ".json" ".toml" -}}
+{{- $ignoreList :=
+  (apply (split (.Get "ignoreList" | default "") ",") "trim" "." " ") | union
+  $config.ignorelist | union
+  (slice ".DS_Store" "Thumbs.db")
+-}}
 
-{{- /* Process ignoreList into a slice */ -}}
-{{- $ignoreList = split $ignoreList "," -}}
-{{- $ignoreList = apply $ignoreList "trim" "." " " -}}
+{{- /* Page resource mode: read file from page bundle */ -}}
+{{- if $fileName -}}
+  {{- $ext := path.Ext $fileName | lower -}}
+  {{- if in $supportExts $ext -}}
+    {{- $fileContent := "" -}}
+    {{- with dict "Path" $fileName "Resources" $.Page.Resources | partial "function/resource.html" }}
+      {{- $fileContent = .Content -}}
+    {{- else -}}
+      {{- warnidf "warning-file-tree" "[file-tree]: no such data file: %s" $fileName -}}
+    {{- end -}}
+    {{- $treeData = $fileContent | unmarshal -}}
+    {{- if reflect.IsMap $treeData -}}
+      {{- $treeData = $treeData.filetree -}}
+    {{- end -}}
+  {{- else -}}
+    {{- warnidf "warning-file-tree" "[file-tree]: Unsupported file format '%s'. Use %s. See %s %s" $ext (delimit $supportExts ", " " or ") $.Name $.Position -}}
+  {{- end -}}
 
 {{- /* Data mode: render tree from data files */ -}}
-{{- if $dataName -}}
-  {{- $treeData := slice -}}
-  {{- with index .Site.Data.filetree $dataName -}}
+{{- else if $dataName -}}
+  {{- with index .Site.Data.filetree (printf "%v.%v" $dataName .Page.Language) | default (index .Site.Data.filetree $dataName) -}}
     {{- $treeData = . -}}
   {{- else -}}
-    {{- warnidf "warning-file-tree" "[file-tree]: Data file 'data/filetree/%s.{yml,yaml,json}' not found. See %s %s" $dataName $.Name $.Position -}}
+    {{- $exts := delimit (apply $supportExts "trim" "." "\\.") "|" -}}
+    {{- warnidf "warning-file-tree" "[file-tree]: Data file 'data/filetree/%s.{%s}' not found. See %s %s" $dataName $exts $.Name $.Position -}}
   {{- end -}}
+{{- end -}}
 
-  {{- if $treeData -}}
-    <div class="file-tree-wrapper">
-      {{- $options := dict
-        "items" $treeData
-        "depth" 0
-        "level" $level
-        "folderSlash" $folderSlash
-        "ignoreList" $ignoreList
-      -}}
-      {{- template "render-data-tree" $options -}}
-    </div>
-  {{- end -}}
+{{- /* Render data tree if available */ -}}
+{{- if $treeData -}}
+  <div class="file-tree-wrapper">
+    {{- $options := dict
+      "items" $treeData
+      "depth" 0
+      "level" $level
+      "folderSlash" $folderSlash
+      "ignoreList" $ignoreList
+    -}}
+    {{- template "render-data-tree" $options -}}
+  </div>
+
+{{- /* Filesystem mode: scan directory structure */ -}}
 {{- else -}}
-  {{- /* Filesystem mode: scan directory structure */ -}}
   {{- $rootIsExists := false -}}
   {{- $rootLabel := "" -}}
   {{- if fileExists $root -}}
@@ -144,7 +169,7 @@
 {{- end -}}
 
 {{- /*
-  Recursive function to render tree
+  Recursive function to render tree from filesystem
   @param {string} path - Current directory path
   @param {int} depth - Current depth level
   @param {int} level - Collapse level
@@ -156,10 +181,7 @@
   {{- $depth := .depth -}}
   {{- $level := .level -}}
   {{- $folderSlash := .folderSlash -}}
-  {{- $ignoreList := slice ".DS_Store" "Thumbs.db" -}}
-  {{- if .ignoreList -}}
-    {{- $ignoreList = union $ignoreList .ignoreList -}}
-  {{- end -}}
+  {{- $ignoreList := .ignoreList -}}
   {{- $items := readDir $path -}}
 
   <ul class="file-tree" data-level="{{ $depth }}">
