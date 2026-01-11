@@ -2,6 +2,10 @@
   Renders an interactive file tree structure from filesystem, page resources, data files, or inline content.
   See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/filetree/
   [todo] To link files, add a `linkPrefix` param for the URL prefix, PRs welcome.
+  [todo] TO support code-block rendering like mermaid shortcode. @Lruihao
+  [todo] XML content rendering support. @Lruihao
+  [todo] Test in Tabs shortcode. @Lruihao
+  [todo] FixIt Theme docs update. @Lruihao
 
   @param {string} [path="/"] - The path relative to the root of your project directory (filesystem mode).
   @param {int} [level=1] - The expand level of the tree. Set to -1/0 to expand/collapse all levels.
@@ -11,10 +15,11 @@
   @param {string} [ignoreList=""] - List of file or folder names to ignore, separated by commas.
 
   Priority order (highest to lowest):
-  1. Inline content mode (.Inner content) - Parse tree data from shortcode body
-  2. Page resource mode (file parameter) - Read data file from page bundle
-  3. Data mode (data parameter) - Load data file from data/filetree/ directory
-  4. Filesystem mode (path parameter) - Scan actual directory structure (default)
+  1. Content Modes - Render tree from structured data
+    1. Shortcode body (.Inner content) - Parse tree data from shortcode body
+    2. File data (file parameter) - Read data file from page bundle or asset resources
+    3. Site data (data parameter) - Load data file from data/filetree/ directory
+  2. Filesystem Mode (path parameter) - Scan actual directory structure (default)
 
   Fallback mechanism: If the current mode fails (e.g., file not found, invalid format), 
   the shortcode will automatically fall back to the next available mode in the priority order.
@@ -73,10 +78,10 @@
     {{- with dict "Path" $fileName "Resources" $.Page.Resources | partial "function/resource.html" }}
       {{- $fileContent = .Content -}}
     {{- else -}}
-      {{- warnidf "warning-file-tree" "[file-tree]: no such data file: %s" $fileName -}}
+      {{- warnidf "warning-file-tree" "[%s]: no such data file: %s. See %s" $.Name $fileName $.Position -}}
     {{- end -}}
   {{- else -}}
-    {{- warnidf "warning-file-tree" "[file-tree]: Unsupported file format '%s'. Use %s. See %s %s" $ext (delimit $supportExts ", " " or ") $.Name $.Position -}}
+    {{- warnidf "warning-file-tree" "[%s]: Unsupported file format '%s'. Use %s. See %s" $.Name $ext (delimit $supportExts ", " " or ") $.Position -}}
   {{- end -}}
 {{- end -}}
 
@@ -94,7 +99,7 @@
     {{- $treeData = . -}}
   {{- else -}}
     {{- $exts := delimit (apply $supportExts "trim" "." "\\.") "|" -}}
-    {{- warnidf "warning-file-tree" "[file-tree]: Data file 'data/filetree/%s.{%s}' not found. See %s %s" $dataName $exts $.Name $.Position -}}
+    {{- warnidf "warning-file-tree" "[%s]: Data file 'data/filetree/%s.{%s}' not found. See %s" $.Name $dataName $exts $.Position -}}
   {{- end -}}
 {{- end -}}
 
@@ -161,7 +166,7 @@
       </ul>
     </div>
   {{- else -}}
-    {{- warnidf "warning-file-tree" "[file-tree]: The root path does not exist: %s. See %s %s" $root .Name .Position -}}
+    {{- warnidf "warning-file-tree" "[%s]: The root path does not exist: %s. See %s" .Name $root .Position -}}
   {{- end -}}
 {{- end -}}
 

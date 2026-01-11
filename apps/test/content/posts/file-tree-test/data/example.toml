@@ -1,0 +1,59 @@
+[[filetree]]
+name = "src-toml"
+type = "dir"
+
+[[filetree.children]]
+name = "index.ts"
+type = "file"
+
+[[filetree.children]]
+name = "components"
+type = "dir"
+
+[[filetree.children.children]]
+name = "Header.tsx"
+type = "file"
+
+[[filetree.children.children]]
+name = "Footer.tsx"
+type = "file"
+
+[[filetree.children]]
+name = "utils"
+type = "dir"
+
+[[filetree.children.children]]
+name = "helper.ts"
+type = "file"
+
+[[filetree.children.children]]
+name = "validator.ts"
+type = "file"
+
+[[filetree]]
+name = "public"
+type = "dir"
+
+[[filetree.children]]
+name = "favicon.ico"
+type = "file"
+
+[[filetree.children]]
+name = "images"
+type = "dir"
+
+[[filetree.children.children]]
+name = "logo.png"
+type = "file"
+
+[[filetree]]
+name = "package.json"
+type = "file"
+
+[[filetree]]
+name = "README.md"
+type = "file"
+
+[[filetree]]
+name = "tsconfig.json"
+type = "file"

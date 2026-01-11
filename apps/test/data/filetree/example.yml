@@ -1,0 +1,38 @@
+- name: my-project
+  type: dir
+  children:
+    - name: src
+      type: dir
+      children:
+        - name: index.ts
+          type: file
+        - name: components
+          type: dir
+          children:
+            - name: Header.tsx
+              type: file
+            - name: Footer.tsx
+              type: file
+        - name: utils
+          type: dir
+          children:
+            - name: helper.ts
+              type: file
+            - name: validator.ts
+              type: file
+    - name: public
+      type: dir
+      children:
+        - name: favicon.ico
+          type: file
+        - name: images
+          type: dir
+          children:
+            - name: logo.png
+              type: file
+    - name: package.json
+      type: file
+    - name: README.md
+      type: file
+    - name: tsconfig.json
+      type: file
