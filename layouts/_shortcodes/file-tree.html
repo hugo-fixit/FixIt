@@ -114,28 +114,34 @@
 {{- /* Filesystem mode: scan directory structure */ -}}
 {{- else -}}
   {{- $rootIsExists := false -}}
-  {{- $rootLabel := "" -}}
   {{- if fileExists $root -}}
-    {{- $rootIsExists = true -}}
-    {{- $f := os.Stat $root -}}
     {{- /* Attempt to resolve the path relative to the contentDir */ -}}
     {{- with try (readDir $root) -}}
       {{- with .Err }}
-        {{- $root = path.Clean (path.Join "content" $root) -}}
+        {{- $contentPath := path.Clean (path.Join "content" $root) -}}
+        {{- with try (readDir $contentPath) -}}
+          {{- with not .Err }}
+            {{- $rootIsExists = true -}}
+            {{- $root = $contentPath -}}
+          {{- end -}}
+        {{- end -}}
+      {{- else -}}
+        {{- $rootIsExists = true -}}
       {{- end -}}
     {{- end -}}
+  {{- end -}}
+
+  {{- if $rootIsExists -}}
+    {{- $rootLabel := "" -}}
+    {{- $f := os.Stat $root -}}
     {{- /* Determine the root name for display */ -}}
     {{- $rootLabel = path.Clean $root -}}
     {{- if (eq $rootLabel "/") | or (eq $rootLabel ".") -}}
       {{- $rootLabel = $f.Name -}}
     {{- end -}}
     {{- $rootLabel = cond $folderSlash (add $rootLabel "/") $rootLabel -}}
-  {{- else -}}
-    {{- warnidf "warning-file-tree" "[file-tree]: The root path does not exist: %s.See %s %s" $root .Name .Position -}}
-  {{- end -}}
 
-  {{- /* Start rendering the file tree */ -}}
-  {{- if $rootIsExists -}}
+    {{- /* Start rendering the file tree */ -}}
     <div class="file-tree-wrapper">
       <ul class="file-tree" data-level="0">
         <li class="file-tree-item file-tree-folder{{ if eq (int $level) 0 }} is-collapsed{{ end }}">
@@ -154,6 +160,8 @@
         </li>
       </ul>
     </div>
+  {{- else -}}
+    {{- warnidf "warning-file-tree" "[file-tree]: The root path does not exist: %s. See %s %s" $root .Name .Position -}}
   {{- end -}}
 {{- end -}}
 
