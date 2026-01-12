@@ -178,3 +178,42 @@ gantt
 
 {{% /tab %}}
 {{< /tabs >}}
+
+### File Tree inside Tabs
+
+{{< tabs >}}
+{{% tab title="File Tree Shortcode" %}}
+
+{{< file-tree >}}
+[[filetree]]
+name = "src"
+type = "dir"
+
+[[filetree.children]]
+name = "index.ts"
+type = "file"
+
+[[filetree]]
+name = "README.md"
+type = "file"
+{{< /file-tree >}}
+
+{{% /tab %}}
+{{% tab title="File Tree Code Block" %}}
+
+```file-tree
+[[filetree]]
+name = "src"
+type = "dir"
+
+[[filetree.children]]
+name = "index.ts"
+type = "file"
+
+[[filetree]]
+name = "README.md"
+type = "file"
+```
+
+{{% /tab %}}
+{{< /tabs >}}

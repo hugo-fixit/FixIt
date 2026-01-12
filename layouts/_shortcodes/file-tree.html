@@ -1,21 +1,19 @@
 {{- /*
-  Renders an interactive file tree structure from filesystem, page resources, data files, or inline content.
+  Renders an interactive file tree structure from filesystem, page resources, data files, or inline content
   See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/filetree/
   [todo] To link files, add a `linkPrefix` param for the URL prefix, PRs welcome.
-  [todo] TO support code-block rendering like mermaid shortcode. @Lruihao
   [todo] XML content rendering support. @Lruihao
-  [todo] Test in Tabs shortcode. @Lruihao
   [todo] FixIt Theme docs update. @Lruihao
 
-  @param {string} [path="/"] - The path relative to the root of your project directory (filesystem mode).
-  @param {int} [level=1] - The expand level of the tree. Set to -1/0 to expand/collapse all levels.
+  @param {string} [path="/"] - The path relative to the root of your project directory (filesystem mode)
+  @param {int} [level=1] - Descend only level directories deep (-1 = expand all, 0 = collapse all)
   @param {boolean} [folderSlash=false] - Whether to append a trailing "/" to folder names.
-  @param {string} [file] - The path to a data file in the page resources (page resource mode). Supports JSON, YAML, and TOML formats.
-  @param {string} [data] - The name of the data file in data/filetree/ directory (data mode). Supports JSON, YAML, and TOML formats.
-  @param {string} [ignoreList=""] - List of file or folder names to ignore, separated by commas.
+  @param {string} [file] - The path to a data file in the page resources (page resource mode). Supports JSON, YAML, and TOML formats
+  @param {string} [data] - The name of the data file in data/filetree/ directory (data mode). Supports JSON, YAML, and TOML formats
+  @param {string} [ignoreList=""] - List of file or folder names to ignore, separated by commas
 
   Priority order (highest to lowest):
-  1. Content Modes - Render tree from structured data
+  1. Content Mode - Render tree from structured data
     1. Shortcode body (.Inner content) - Parse tree data from shortcode body
     2. File data (file parameter) - Read data file from page bundle or asset resources
     3. Site data (data parameter) - Load data file from data/filetree/ directory
@@ -41,7 +39,7 @@
 
   Data format note: YAML and JSON support direct array format, while TOML requires a root key 'filetree' due to format limitations.
   Example TOML structure:
-  ```toml
+  ```file-tree
   [[filetree]]
   name = "src"
   type = "dir"
@@ -58,11 +56,12 @@
 
 {{- $config := dict | merge .Page.Params.filetree | merge .Site.Params.filetree -}}
 {{- $root := cond .IsNamedParams (.Get "path") (.Get 0) | default "/" -}}
-{{- $level := cond .IsNamedParams (.Get "level") (.Get 1) | default $config.level | default 1 -}}
+{{- $level := cond .IsNamedParams (.Get "level") (.Get 1) -}}
+{{- $config = cond ((eq $level 0) | or $level) (dict "level" $level | merge $config) $config -}}
+{{- $level = cond (isset $config "level") ($config.level | int) 1 -}}
 {{- $folderSlash := .Get "folderSlash" | default $config.folderslash | default false -}}
 {{- $fileName := .Get "file" -}}
 {{- $dataName := .Get "data" -}}
-{{- $treeData := slice -}}
 {{- $supportExts := slice ".yml" ".yaml" ".json" ".toml" -}}
 {{- $ignoreList :=
   (apply (split (.Get "ignoreList" | default "") ",") "trim" "." " ") | union
@@ -70,13 +69,14 @@
   (slice ".DS_Store" "Thumbs.db")
 -}}
 
-{{- /* Page resource mode: read file from page bundle */ -}}
-{{- $fileContent := strings.TrimSpace .Inner | default "" -}}
-{{- if $fileName | and (eq $fileContent "") -}}
+{{- /* Shortcode body */ -}}
+{{- $content := strings.TrimSpace .Inner | default "" -}}
+{{- /* File Data */ -}}
+{{- if $fileName | and (eq $content "") -}}
   {{- $ext := path.Ext $fileName | lower -}}
   {{- if in $supportExts $ext -}}
     {{- with dict "Path" $fileName "Resources" $.Page.Resources | partial "function/resource.html" }}
-      {{- $fileContent = .Content -}}
+      {{- $content = .Content -}}
     {{- else -}}
       {{- warnidf "warning-file-tree" "[%s]: no such data file: %s. See %s" $.Name $fileName $.Position -}}
     {{- end -}}
@@ -85,16 +85,17 @@
   {{- end -}}
 {{- end -}}
 
-{{- /* Parse file content if available */ -}}
-{{- with $fileContent -}}
+{{- /* Parse structured data from content or file */ -}}
+{{- $treeData := slice -}}
+{{- with $content -}}
   {{- $treeData = . | unmarshal -}}
   {{- if reflect.IsMap $treeData -}}
     {{- $treeData = $treeData.filetree -}}
   {{- end -}}
 {{- end -}}
 
-{{- /* Data mode: render tree from data files */ -}}
-{{- if $dataName | and (eq (len $treeData) 0) -}}
+{{- /* Site Data */ -}}
+{{- if $dataName | and (not $treeData) -}}
   {{- with index .Site.Data.filetree (printf "%v.%v" $dataName .Page.Language) | default (index .Site.Data.filetree $dataName) -}}
     {{- $treeData = . -}}
   {{- else -}}
@@ -103,18 +104,10 @@
   {{- end -}}
 {{- end -}}
 
-{{- /* Render data tree if available */ -}}
+{{- /* Content Mode: render tree from structured data */ -}}
 {{- if $treeData -}}
-  <div class="file-tree-wrapper">
-    {{- $options := dict
-      "items" $treeData
-      "depth" 0
-      "level" $level
-      "folderSlash" $folderSlash
-      "ignoreList" $ignoreList
-    -}}
-    {{- template "render-data-tree" $options -}}
-  </div>
+  {{- $options := dict "items" $treeData "level" $level "folderSlash" $folderSlash "ignoreList" $ignoreList -}}
+  {{- partial "plugin/file-tree.html" $options -}}
 
 {{- /* Filesystem mode: scan directory structure */ -}}
 {{- else -}}
@@ -149,7 +142,7 @@
     {{- /* Start rendering the file tree */ -}}
     <div class="file-tree-wrapper">
       <ul class="file-tree" data-level="0">
-        <li class="file-tree-item file-tree-folder{{ if eq (int $level) 0 }} is-collapsed{{ end }}">
+        <li class="file-tree-item file-tree-folder{{ if eq $level 0 }} is-collapsed{{ end }}">
           <span class="file-tree-label file-tree-toggle">
             {{- dict "Class" "file-tree-icon fa-regular fa-folder-open" | partial "plugin/icon.html" -}}
             <span class="file-tree-label__inner">{{ $rootLabel }}</span>
@@ -171,66 +164,12 @@
 {{- end -}}
 
 {{- /*
-  Recursive function to render tree from structured data
-  @param {array} items - Array of tree items
-  @param {int} depth - Current depth level
-  @param {int} level - Collapse level
-  @param {bool} folderSlash - Whether to append a trailing "/" to folder names
-  @param {array} ignoreList - List of file or folder names to ignore
-*/ -}}
-{{- define "render-data-tree" -}}
-  {{- $items := .items -}}
-  {{- $depth := .depth -}}
-  {{- $level := .level -}}
-  {{- $folderSlash := .folderSlash -}}
-  {{- $ignoreList := .ignoreList -}}
-
-  <ul class="file-tree" data-level="{{ $depth }}">
-    {{- range $items -}}
-      {{- if in $ignoreList .name -}}
-        {{- continue -}}
-      {{- end -}}
-      {{- $isDir := eq .type "dir" -}}
-      {{- $isCollapsed := (ge $depth $level) | and (ge $level 0) -}}
-      {{- $label := .name -}}
-      {{- if and $isDir $folderSlash -}}
-        {{- $label = printf "%s/" $label -}}
-      {{- end -}}
-      
-      <li class="file-tree-item{{ if $isDir }} file-tree-folder{{ end }}{{ if and $isDir $isCollapsed }} is-collapsed{{ end }}">
-        <span class="file-tree-label{{ if $isDir }} file-tree-toggle{{ end }}">
-          {{- $icon := "file-tree-icon fa-regular " -}}
-          {{- if $isDir -}}
-            {{- $icon = add $icon "fa-folder-open" -}}
-          {{- else -}}
-            {{- $icon = add $icon "fa-file-lines" -}}
-          {{- end -}}
-          {{- dict "Class" $icon | partial "plugin/icon.html" -}}
-          <span class="file-tree-label__inner">{{ $label }}</span>
-        </span>
-        
-        {{- if and $isDir .children -}}
-          {{- $options := dict
-            "items" .children
-            "depth" (add $depth 1)
-            "level" $level
-            "folderSlash" $folderSlash
-            "ignoreList" $ignoreList
-          -}}
-          {{- template "render-data-tree" $options -}}
-        {{- end -}}
-      </li>
-    {{- end -}}
-  </ul>
-{{- end -}}
-
-{{- /*
   Recursive function to render tree from filesystem
   @param {string} path - Current directory path
   @param {int} depth - Current depth level
-  @param {int} level - Collapse level
-  @param {array} ignoreList - List of file or folder names to ignore
+  @param {int} level - Descend only level directories deep (-1 = expand all, 0 = collapse all)
   @param {bool} folderSlash - Whether to append a trailing "/" to folder names
+  @param {array} ignoreList - List of file or folder names to ignore
 */ -}}
 {{- define "render-tree" -}}
   {{- $path := .path -}}

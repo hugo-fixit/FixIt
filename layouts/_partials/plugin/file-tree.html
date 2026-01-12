@@ -1,0 +1,66 @@
+{{- /*
+  Recursive function to render tree from structured data
+  @param {array} items - Array of tree items
+  @param {int} depth - Current depth level
+  @param {int} level - Descend only level directories deep (-1 = expand all, 0 = collapse all)
+  @param {bool} folderSlash - Whether to append a trailing "/" to folder names
+  @param {array} ignoreList - List of file or folder names to ignore
+
+  File tree item structure:
+    name: string     - The name of the file or folder
+    type: string     - Type of item, either "dir" (directory) or "file"
+    children?: array - (Optional) Array of child items, only valid for directories
+*/ -}}
+{{- define "render-file-tree" -}}
+  {{- $items := .items -}}
+  {{- $depth := .depth -}}
+  {{- $level := .level -}}
+  {{- $folderSlash := .folderSlash -}}
+  {{- $_ignoreList := slice ".DS_Store" "Thumbs.db" -}}
+  {{- $ignoreList := .ignoreList | union $_ignoreList -}}
+
+  <ul class="file-tree" data-level="{{ $depth }}">
+    {{- range $items -}}
+      {{- if in $ignoreList .name -}}
+        {{- continue -}}
+      {{- end -}}
+      {{- $isDir := eq .type "dir" -}}
+      {{- $isCollapsed := (ge $depth $level) | and (ge $level 0) -}}
+      {{- $label := .name -}}
+      {{- if and $isDir $folderSlash -}}
+        {{- $label = printf "%s/" $label -}}
+      {{- end -}}
+      
+      <li class="file-tree-item{{ if $isDir }} file-tree-folder{{ end }}{{ if and $isDir $isCollapsed }} is-collapsed{{ end }}">
+        <span class="file-tree-label{{ if $isDir }} file-tree-toggle{{ end }}">
+          {{- $icon := "file-tree-icon fa-regular " -}}
+          {{- if $isDir -}}
+            {{- $icon = add $icon "fa-folder-open" -}}
+          {{- else -}}
+            {{- $icon = add $icon "fa-file-lines" -}}
+          {{- end -}}
+          {{- dict "Class" $icon | partial "plugin/icon.html" -}}
+          <span class="file-tree-label__inner">{{ $label }}</span>
+        </span>
+        
+        {{- if and $isDir .children -}}
+          {{- $options := dict
+            "items" .children
+            "depth" (add $depth 1)
+            "level" $level
+            "folderSlash" $folderSlash
+            "ignoreList" $ignoreList
+          -}}
+          {{- template "render-file-tree" $options -}}
+        {{- end -}}
+      </li>
+    {{- end -}}
+  </ul>
+{{- end -}}
+
+{{- if .items -}}
+  <div class="file-tree-wrapper">
+    {{- $options := dict "depth" 0 | merge . -}}
+    {{- template "render-file-tree" $options -}}
+  </div>
+{{- end -}}
