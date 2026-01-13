@@ -9,6 +9,7 @@
   @param {string} [file] - The path of a data file in page resources or assets. (JSON/YAML/TOML)
   @param {string} [data] - The name of the data file in data/filetree/ directory. (JSON/YAML/TOML)
   @param {string} [ignoreList=""] - List of file or folder names to ignore, separated by commas
+  @param {string} [highlightList=""] - List of file or folder names to highlight, separated by commas
   @param {boolean} [fullRootName=false] - Whether to use the full root path as the root name when scanning filesystem
 
   Priority order (highest to lowest):
@@ -62,6 +63,7 @@
 {{- $dataName := .Get "data" -}}
 {{- $supportExts := slice ".yml" ".yaml" ".json" ".toml" -}}
 {{- $ignoreList := union (apply (split (.Get "ignoreList" | default "") ",") "trim" "." " ") $config.ignorelist -}}
+{{- $highlightList := apply (split (.Get "highlightList" | default "") ",") "trim" "." " " -}}
 {{- $fullRootName := .Get "fullRootName" | default false -}}
 
 {{- /* Shortcode body */ -}}
@@ -111,6 +113,11 @@
 {{- end -}}
 
 {{- /* Render the file tree */ -}}
-{{- $options := dict "items" $treeData "level" $level "folderSlash" $folderSlash "ignoreList" $ignoreList -}}
+{{- $options := dict
+  "items" $treeData
+  "level" $level
+  "folderSlash" $folderSlash
+  "ignoreList" $ignoreList
+  "highlightList" $highlightList
+-}}
 {{- partial "plugin/file-tree.html" $options -}}
-

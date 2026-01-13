@@ -5,6 +5,7 @@
   @param {int} level - Descend only level directories deep (-1 = expand all, 0 = collapse all)
   @param {bool} folderSlash - Whether to append a trailing "/" to folder names
   @param {array} ignoreList - List of file or folder names to ignore
+  @param {array} highlightList - List of file or folder names to highlight
 
   File tree item structure:
     name: string     - The name of the file or folder
@@ -18,6 +19,7 @@
   {{- $folderSlash := .folderSlash -}}
   {{- $_ignoreList := slice ".DS_Store" "Thumbs.db" -}}
   {{- $ignoreList := .ignoreList | union $_ignoreList -}}
+  {{- $highlightList := .highlightList -}}
 
   <ul class="file-tree" data-level="{{ $depth }}">
     {{- range $items -}}
@@ -26,13 +28,14 @@
       {{- end -}}
       {{- $isDir := eq .type "dir" -}}
       {{- $isCollapsed := $isDir | and (ge $depth $level) | and (ge $level 0) -}}
+      {{- $isHighlighted := in $highlightList .name -}}
       {{- $label := .name -}}
       {{- if and $isDir $folderSlash -}}
         {{- $label = printf "%s/" $label -}}
       {{- end -}}
       
       <li class="file-tree-item{{ if $isDir }} file-tree-folder{{ end }}{{ if $isCollapsed }} is-collapsed{{ end }}">
-        <span class="file-tree-label{{ if $isDir }} file-tree-toggle{{ end }}">
+        <span class="file-tree-label{{ if $isDir }} file-tree-toggle{{ end }}{{ if $isHighlighted }} is-highlighted{{ end }}">
           {{- $icon := "file-tree-icon fa-regular " -}}
           {{- if $isDir -}}
             {{- $icon = add $icon "fa-folder-open" -}}
@@ -50,6 +53,7 @@
             "level" $level
             "folderSlash" $folderSlash
             "ignoreList" $ignoreList
+            "highlightList" $highlightList
           -}}
           {{- template "render-file-tree" $options -}}
         {{- end -}}
