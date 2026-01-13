@@ -1,21 +1,20 @@
 {{- /*
-  Renders an interactive file tree structure from filesystem, page resources, data files, or inline content
+  Renders an interactive file tree structure from inline content, resources, data files, or filesystem
   See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/filetree/
   [todo] To link files, add a `linkPrefix` param for the URL prefix, PRs welcome.
 
-  @param {string} [path="/"] - The path relative to the root of your project directory (filesystem mode)
-  @param {int} [level=1] - Descend only level directories deep (-1 = expand all, 0 = collapse all)
+  @param {string} [path="/"] - The path to scan in the actual filesystem (project/content directory)
+  @param {int} [level=1] - The expand level of the tree (expand all: -1, collapse all: 0)
   @param {boolean} [folderSlash=false] - Whether to append a trailing "/" to folder names.
-  @param {string} [file] - The path to a data file in the page resources (page resource mode). Supports JSON, YAML, and TOML formats
-  @param {string} [data] - The name of the data file in data/filetree/ directory (data mode). Supports JSON, YAML, and TOML formats
+  @param {string} [file] - The path of a data file in page resources or assets. (JSON/YAML/TOML)
+  @param {string} [data] - The name of the data file in data/filetree/ directory. (JSON/YAML/TOML)
   @param {string} [ignoreList=""] - List of file or folder names to ignore, separated by commas
 
   Priority order (highest to lowest):
-  1. Content Mode - Render tree from structured data
-    1. Shortcode body (.Inner content) - Parse tree data from shortcode body
-    2. File data (file parameter) - Read data file from page bundle or asset resources
-    3. Site data (data parameter) - Load data file from data/filetree/ directory
-  2. Filesystem Mode (path parameter) - Scan actual directory structure (default)
+  1. Inline content (shortcode body) - Parse tree data from shortcode body
+  2. Resources files (file parameter) - Read data file from page bundle or asset
+  3. Data files (data parameter) - Load data file from data/filetree/ directory
+  4. Actual Filesystem (path parameter) - Scan actual directory structure (default)
 
   Fallback mechanism: If the current mode fails (e.g., file not found, invalid format), 
   the shortcode will automatically fall back to the next available mode in the priority order.
@@ -57,7 +56,7 @@
 {{- $level := cond .IsNamedParams (.Get "level") (.Get 1) -}}
 {{- $config = cond ((eq $level 0) | or $level) (dict "level" $level | merge $config) $config -}}
 {{- $level = cond (isset $config "level") ($config.level | int) 1 -}}
-{{- $folderSlash := .Get "folderSlash" | default $config.folderslash | default false -}}
+{{- $folderSlash := cond .IsNamedParams (.Get "folderSlash") (.Get 2) | default $config.folderslash | default false -}}
 {{- $fileName := .Get "file" -}}
 {{- $dataName := .Get "data" -}}
 {{- $supportExts := slice ".yml" ".yaml" ".json" ".toml" -}}

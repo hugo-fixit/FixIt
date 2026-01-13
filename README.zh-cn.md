@@ -147,6 +147,7 @@ pnpx fixit-cli create my-blog
 - 支持基于 [mermaid](https://github.com/knsv/mermaid) 的**图表** 代码块扩展语法和 shortcode
 - 支持基于 [ECharts](https://echarts.apache.org/) 的**交互式数据可视化** 代码块扩展语法和 shortcode
 - 支持 **Timeline** 的代码块扩展语法和 shortcode
+- 支持 **文件树** 的代码块扩展语法和 shortcode
 - 支持基于 [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js) 的 **Mapbox** shortcode
 - 支持基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 的**音乐播放器** shortcode
 - 支持 **Bilibili 视频** 和 **抖音视频** shortcode

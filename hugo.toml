@@ -1163,7 +1163,7 @@ boxed = true
 # FixIt 0.4.2 | NEW File tree config
 # See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/filetree/
 [params.filetree]
-# descend only level directories deep (-1 = expand all, 0 = collapse all)
+# the expand level of the tree (expand all: -1, collapse all: 0)
 level = 1
 # whether to append a trailing "/" to folder names
 folderSlash = false
