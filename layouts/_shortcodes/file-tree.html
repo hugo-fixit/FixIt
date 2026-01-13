@@ -102,7 +102,7 @@
 {{- /* Filesystem mode: scan directory structure */ -}}
 {{- if not $treeData -}}
   {{- /* Build structured tree data from filesystem */ -}}
-  {{- $buildOptions := dict "root" $root "ignoreList" $ignoreList "fullRootName" $fullRootName "log" false -}}
+  {{- $buildOptions := dict "root" $root "ignoreList" $ignoreList "fullRootName" $fullRootName "lang" .Page.Language "log" false -}}
   {{- with partial "function/get-file-tree.html" $buildOptions -}}
     {{- $treeData = . -}}
   {{- else -}}

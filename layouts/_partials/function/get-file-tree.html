@@ -5,6 +5,7 @@
   @param {boolean} [isRecursive=false] - Internal flag for recursive calls
   @param {string} [path] - Internal parameter for recursive directory scanning
   @param {boolean} [fullRootName=false] - Whether to use the full root path as the root name
+  @param {string} [lang] - Page language for multilingual sites
   @param {boolean} [log=true] - Whether to log warnings
   @return {array} Array of tree items with structure: {name, type, children?}, or empty array if root doesn't exist
 */ -}}
@@ -37,13 +38,17 @@
   {{- $root := .root -}}
   {{- $rootIsExists := false -}}
 
-  {{- /* Attempt to resolve the path relative to the contentDir */ -}}
   {{- if fileExists $root -}}
     {{- with try (readDir $root) -}}
-      {{- with .Err }}
+      {{- if .Err }}
+        {{- /* Attempt to resolve the path relative to the contentDir */ -}}
         {{- $contentPath := path.Clean (path.Join "content" $root) -}}
+        {{- /* If multilingual site, try language-specific content directory */ -}}
+        {{- if hugo.IsMultilingual -}}
+          {{- $contentPath = path.Clean (path.Join "content" $.lang $root) -}}
+        {{- end -}}
         {{- with try (readDir $contentPath) -}}
-          {{- with not .Err }}
+          {{- if not .Err }}
             {{- $rootIsExists = true -}}
             {{- $root = $contentPath -}}
           {{- end -}}
