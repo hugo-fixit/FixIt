@@ -4,12 +4,14 @@
   @param {array} ignoreList - List of file or folder names to ignore
   @param {boolean} [isRecursive=false] - Internal flag for recursive calls
   @param {string} [path] - Internal parameter for recursive directory scanning
+  @param {boolean} [fullRootName=false] - Whether to use the full root path as the root name
   @param {boolean} [log=true] - Whether to log warnings
   @return {array} Array of tree items with structure: {name, type, children?}, or empty array if root doesn't exist
 */ -}}
 
 {{- $isRecursive := .isRecursive | default false -}}
 {{- $ignoreList := .ignoreList -}}
+{{- $fullRootName := .fullRootName | default false -}}
 {{- $result := slice -}}
 
 {{- if $isRecursive -}}
@@ -55,9 +57,10 @@
   {{- if $rootIsExists -}}
     {{- $f := os.Stat $root -}}
     {{- /* Determine the root name for display */ -}}
-    {{- $rootLabel := path.Clean $root -}}
-    {{- if (eq $rootLabel "/") | or (eq $rootLabel ".") -}}
-      {{- $rootLabel = $f.Name -}}
+    {{- $rootLabel := $f.Name -}}
+    {{- $rootClean := path.Clean $root -}}
+    {{- if $fullRootName | and (ne $rootClean "/") | and (ne $rootClean ".") -}}
+      {{- $rootLabel = $rootClean -}}
     {{- end -}}
 
     {{- /* Build children recursively */ -}}
