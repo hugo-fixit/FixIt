@@ -2,8 +2,6 @@
   Renders an interactive file tree structure from filesystem, page resources, data files, or inline content
   See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/filetree/
   [todo] To link files, add a `linkPrefix` param for the URL prefix, PRs welcome.
-  [todo] XML content rendering support. @Lruihao
-  [todo] FixIt Theme docs update. @Lruihao
 
   @param {string} [path="/"] - The path relative to the root of your project directory (filesystem mode)
   @param {int} [level=1] - Descend only level directories deep (-1 = expand all, 0 = collapse all)
@@ -63,11 +61,7 @@
 {{- $fileName := .Get "file" -}}
 {{- $dataName := .Get "data" -}}
 {{- $supportExts := slice ".yml" ".yaml" ".json" ".toml" -}}
-{{- $ignoreList :=
-  (apply (split (.Get "ignoreList" | default "") ",") "trim" "." " ") | union
-  $config.ignorelist | union
-  (slice ".DS_Store" "Thumbs.db")
--}}
+{{- $ignoreList := union (apply (split (.Get "ignoreList" | default "") ",") "trim" "." " ") $config.ignorelist -}}
 
 {{- /* Shortcode body */ -}}
 {{- $content := strings.TrimSpace .Inner | default "" -}}
@@ -94,7 +88,7 @@
   {{- end -}}
 {{- end -}}
 
-{{- /* Site Data */ -}}
+{{- /* Site Data: load from data/filetree/ */ -}}
 {{- if $dataName | and (not $treeData) -}}
   {{- with index .Site.Data.filetree (printf "%v.%v" $dataName .Page.Language) | default (index .Site.Data.filetree $dataName) -}}
     {{- $treeData = . -}}
@@ -104,113 +98,18 @@
   {{- end -}}
 {{- end -}}
 
-{{- /* Content Mode: render tree from structured data */ -}}
-{{- if $treeData -}}
-  {{- $options := dict "items" $treeData "level" $level "folderSlash" $folderSlash "ignoreList" $ignoreList -}}
-  {{- partial "plugin/file-tree.html" $options -}}
-
 {{- /* Filesystem mode: scan directory structure */ -}}
-{{- else -}}
-  {{- $rootIsExists := false -}}
-  {{- if fileExists $root -}}
-    {{- /* Attempt to resolve the path relative to the contentDir */ -}}
-    {{- with try (readDir $root) -}}
-      {{- with .Err }}
-        {{- $contentPath := path.Clean (path.Join "content" $root) -}}
-        {{- with try (readDir $contentPath) -}}
-          {{- with not .Err }}
-            {{- $rootIsExists = true -}}
-            {{- $root = $contentPath -}}
-          {{- end -}}
-        {{- end -}}
-      {{- else -}}
-        {{- $rootIsExists = true -}}
-      {{- end -}}
-    {{- end -}}
-  {{- end -}}
-
-  {{- if $rootIsExists -}}
-    {{- $rootLabel := "" -}}
-    {{- $f := os.Stat $root -}}
-    {{- /* Determine the root name for display */ -}}
-    {{- $rootLabel = path.Clean $root -}}
-    {{- if (eq $rootLabel "/") | or (eq $rootLabel ".") -}}
-      {{- $rootLabel = $f.Name -}}
-    {{- end -}}
-    {{- $rootLabel = cond $folderSlash (add $rootLabel "/") $rootLabel -}}
-
-    {{- /* Start rendering the file tree */ -}}
-    <div class="file-tree-wrapper">
-      <ul class="file-tree" data-level="0">
-        <li class="file-tree-item file-tree-folder{{ if eq $level 0 }} is-collapsed{{ end }}">
-          <span class="file-tree-label file-tree-toggle">
-            {{- dict "Class" "file-tree-icon fa-regular fa-folder-open" | partial "plugin/icon.html" -}}
-            <span class="file-tree-label__inner">{{ $rootLabel }}</span>
-          </span>
-          {{- $options := dict
-            "path" $root
-            "depth" 1
-            "level" $level
-            "ignoreList" $ignoreList
-            "folderSlash" $folderSlash
-          -}}
-          {{- template "render-tree" $options -}}
-        </li>
-      </ul>
-    </div>
+{{- if not $treeData -}}
+  {{- /* Build structured tree data from filesystem */ -}}
+  {{- $buildOptions := dict "root" $root "ignoreList" $ignoreList "log" false -}}
+  {{- with partial "function/get-file-tree.html" $buildOptions -}}
+    {{- $treeData = . -}}
   {{- else -}}
     {{- warnidf "warning-file-tree" "[%s]: The root path does not exist: %s. See %s" .Name $root .Position -}}
   {{- end -}}
 {{- end -}}
 
-{{- /*
-  Recursive function to render tree from filesystem
-  @param {string} path - Current directory path
-  @param {int} depth - Current depth level
-  @param {int} level - Descend only level directories deep (-1 = expand all, 0 = collapse all)
-  @param {bool} folderSlash - Whether to append a trailing "/" to folder names
-  @param {array} ignoreList - List of file or folder names to ignore
-*/ -}}
-{{- define "render-tree" -}}
-  {{- $path := .path -}}
-  {{- $depth := .depth -}}
-  {{- $level := .level -}}
-  {{- $folderSlash := .folderSlash -}}
-  {{- $ignoreList := .ignoreList -}}
-  {{- $items := readDir $path -}}
+{{- /* Render the file tree */ -}}
+{{- $options := dict "items" $treeData "level" $level "folderSlash" $folderSlash "ignoreList" $ignoreList -}}
+{{- partial "plugin/file-tree.html" $options -}}
 
-  <ul class="file-tree" data-level="{{ $depth }}">
-    {{- range $items -}}
-      {{- if in $ignoreList .Name -}}
-        {{- continue -}}
-      {{- end -}}
-      {{- $fullPath := printf "%s/%s" $path .Name -}}
-      {{- $isCollapsed := (ge $depth $level) | and (ge $level 0) -}}
-      {{- $label := cond (and .IsDir $folderSlash) (add .Name "/") .Name -}}
-      
-      <li class="file-tree-item{{ if .IsDir }} file-tree-folder{{ end }}{{ if and .IsDir $isCollapsed }} is-collapsed{{ end }}">
-        <span class="file-tree-label{{ if .IsDir }} file-tree-toggle{{ end }}">
-          {{- $icon := "file-tree-icon fa-regular " -}}
-          {{- if .IsDir -}}
-            {{- $icon = add $icon "fa-folder-open" -}}
-          {{- else -}}
-            {{- $icon = add $icon "fa-file-lines" -}}
-          {{- end -}}
-          {{- dict "Class" $icon | partial "plugin/icon.html" -}}
-          <span class="file-tree-label__inner">{{ $label }}</span>
-        </span>
-        
-        {{- if .IsDir -}}
-          {{- $options := dict
-            "path" $fullPath
-            "depth" (add $depth 1)
-            "level" $level
-            "ignoreList" $ignoreList
-            "folderSlash" $folderSlash
-          -}}
-          {{- template "render-tree" $options -}}
-        {{- end -}}
-      </li>
-    {{- end -}}
-  </ul>
-{{- end -}}

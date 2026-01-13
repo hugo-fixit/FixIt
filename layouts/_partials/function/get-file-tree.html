@@ -1,0 +1,77 @@
+{{- /*
+  Build structured tree data from filesystem with root path validation
+  @param {string} root - The root path to scan (will attempt to resolve relative to contentDir)
+  @param {array} ignoreList - List of file or folder names to ignore
+  @param {boolean} [isRecursive=false] - Internal flag for recursive calls
+  @param {string} [path] - Internal parameter for recursive directory scanning
+  @param {boolean} [log=true] - Whether to log warnings
+  @return {array} Array of tree items with structure: {name, type, children?}, or empty array if root doesn't exist
+*/ -}}
+
+{{- $isRecursive := .isRecursive | default false -}}
+{{- $ignoreList := .ignoreList -}}
+{{- $result := slice -}}
+
+{{- if $isRecursive -}}
+  {{- /* Recursive mode: scan directory and build children */ -}}
+  {{- $path := .path -}}
+  {{- $items := readDir $path -}}
+
+  {{- range $items -}}
+    {{- if in $ignoreList .Name -}}
+      {{- continue -}}
+    {{- end -}}
+    {{- $item := dict "name" .Name "type" (cond .IsDir "dir" "file") -}}
+    {{- if .IsDir -}}
+      {{- $fullPath := printf "%s/%s" $path .Name -}}
+      {{- $childOptions := dict "path" $fullPath "ignoreList" $ignoreList "isRecursive" true -}}
+      {{- $children := partial "function/get-file-tree.html" $childOptions -}}
+      {{- $item = merge $item (dict "children" $children) -}}
+    {{- end -}}
+    {{- $result = $result | append $item -}}
+  {{- end -}}
+{{- else -}}
+  {{- /* Initial call: validate root and build tree with root node */ -}}
+  {{- $root := .root -}}
+  {{- $rootIsExists := false -}}
+
+  {{- /* Attempt to resolve the path relative to the contentDir */ -}}
+  {{- if fileExists $root -}}
+    {{- with try (readDir $root) -}}
+      {{- with .Err }}
+        {{- $contentPath := path.Clean (path.Join "content" $root) -}}
+        {{- with try (readDir $contentPath) -}}
+          {{- with not .Err }}
+            {{- $rootIsExists = true -}}
+            {{- $root = $contentPath -}}
+          {{- end -}}
+        {{- end -}}
+      {{- else -}}
+        {{- $rootIsExists = true -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if $rootIsExists -}}
+    {{- $f := os.Stat $root -}}
+    {{- /* Determine the root name for display */ -}}
+    {{- $rootLabel := path.Clean $root -}}
+    {{- if (eq $rootLabel "/") | or (eq $rootLabel ".") -}}
+      {{- $rootLabel = $f.Name -}}
+    {{- end -}}
+
+    {{- /* Build children recursively */ -}}
+    {{- $childOptions := dict "path" $root "ignoreList" $ignoreList "isRecursive" true -}}
+    {{- $children := partial "function/get-file-tree.html" $childOptions -}}
+    
+    {{- /* Return root item with children */ -}}
+    {{- $result = slice (dict "name" $rootLabel "type" "dir" "children" $children) -}}
+  {{- else -}}
+    {{- /* Root doesn't exist, emit warning if context provided */ -}}
+    {{- if .log | default true -}}
+      {{- warnidf "warning-file-tree" "[get-file-tree]: The root path does not exist: %s." $root -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $result -}}

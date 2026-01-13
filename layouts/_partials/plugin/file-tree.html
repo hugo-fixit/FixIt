@@ -25,13 +25,13 @@
         {{- continue -}}
       {{- end -}}
       {{- $isDir := eq .type "dir" -}}
-      {{- $isCollapsed := (ge $depth $level) | and (ge $level 0) -}}
+      {{- $isCollapsed := $isDir | and (ge $depth $level) | and (ge $level 0) -}}
       {{- $label := .name -}}
       {{- if and $isDir $folderSlash -}}
         {{- $label = printf "%s/" $label -}}
       {{- end -}}
       
-      <li class="file-tree-item{{ if $isDir }} file-tree-folder{{ end }}{{ if and $isDir $isCollapsed }} is-collapsed{{ end }}">
+      <li class="file-tree-item{{ if $isDir }} file-tree-folder{{ end }}{{ if $isCollapsed }} is-collapsed{{ end }}">
         <span class="file-tree-label{{ if $isDir }} file-tree-toggle{{ end }}">
           {{- $icon := "file-tree-icon fa-regular " -}}
           {{- if $isDir -}}

@@ -167,6 +167,12 @@ Trying the file not found case (should fallback to next mode):
 
 {{< file-tree ignoreList=".hugo_build.lock, public, resources, node_modules" level=2 folderSlash=true />}}
 
+### root not exist
+
+path="nonexistent/path"
+
+{{< file-tree "nonexistent/path" />}}
+
 ## Code Block Rendering
 
 ### Basic code block
