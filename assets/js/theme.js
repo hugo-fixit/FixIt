@@ -1,11 +1,14 @@
 // TODO use ESLint to check the code style
+// 按需加载主题内部库和功能模块
 import Util from './util';
+import FileTree from './lib/file-tree.js'
 
 class FixIt {
   constructor() {
     this.config = window.config;
     this.isDark = document.documentElement.dataset.theme === 'dark';
     this.util = new Util();
+    this.fileTree = new FileTree();
     this.newScrollTop = this.util.getScrollTop();
     this.oldScrollTop = this.newScrollTop;
     this.scrollEventSet = new Set();
@@ -1122,6 +1125,7 @@ class FixIt {
 
   initTabEvents(target = document) {
     target.addEventListener('tab-container-changed', () => {
+      this.fileTree.updateLineHeight(target);
       window.FixItMermaid?.init?.();
     }, false);
   }
@@ -1150,6 +1154,7 @@ class FixIt {
     this.initMathJax();
     this.initJsonViewer();
     this.initTabEvents(target);
+    this.fileTree.init(target);
     window.FixItMermaid?.init?.();
     window.FixItAPlayer?.init?.();
   }

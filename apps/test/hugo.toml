@@ -5,6 +5,7 @@
 
 title = "Hugo FixIt TEST"
 baseURL = "https://demo.fixit.lruihao.cn/test/"
+ignoreLogs = [ "warning-file-tree" ]
 
 [permalinks]
 

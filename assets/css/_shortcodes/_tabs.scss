@@ -15,7 +15,7 @@
 tab-container {
   display: flex;
   gap: 0.75rem;
-  margin-block: 0.5rem;
+  margin-block: 0.5rem 1rem;
   position: relative;
 
   // loading before defined
@@ -45,6 +45,9 @@ tab-container {
   > .tab-panel {
     &[hidden] {
       display: none;
+    }
+    > *:first-child {
+      margin-top: 0;
     }
   }
 

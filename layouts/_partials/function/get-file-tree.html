@@ -1,0 +1,102 @@
+{{- /*
+  Build structured tree data from filesystem with root path validation
+
+  It attempts to resolve the path relative to the root of your project directory.
+  If a matching directory is not found, it will attempt to resolve the path relative to the contentDir.
+  A leading path separator (/) is optional.
+
+  NOTE: For performance reasons, the recursion depth is limited to 10 levels by default.
+
+  @param {string} root - The root path to scan (relative to project root or contentDir)
+  @param {string} [path] - The directory path for recursive calls
+  @param {int} [level=10] - Descend only level directories deep
+  @param {int} [deep=0] - Current depth level for recursive calls
+  @param {array} [ignoreList] - List of file or folder names to ignore
+  @param {boolean} [isRecursive=false] - Internal flag for recursive calls
+  @param {boolean} [fullRootName=false] - Whether to use the full root path as the root name
+  @param {string} [lang] - Page language for multilingual sites
+  @param {boolean} [log=true] - Whether to log warnings
+  @return {array} Array of tree items with structure: {name, type, children?}, or empty array if root doesn't exist
+*/ -}}
+
+{{- $result := slice -}}
+{{- $level := .level | default 10 -}}
+{{- $deep := .deep | default 0 -}}
+{{- $isRecursive := .isRecursive | default false -}}
+{{- $_ignoreList := slice ".DS_Store" "Thumbs.db" ".directory" ".git" "node_modules" "public" -}}
+{{- $ignoreList := .ignoreList | default slice | union $_ignoreList -}}
+{{- $fullRootName := .fullRootName | default false -}}
+{{- $_debug := (site.Store.Get "devOpts").debug -}}
+
+{{- if $isRecursive -}}
+  {{- if le $deep $level -}}
+    {{- /* Recursive mode: scan directory and build children */ -}}
+    {{- /* {{- if $_debug -}}{{- warnf "Path%v: %v" $deep .path -}}{{- end -}} */ -}}
+    {{- $path := .path -}}
+    {{- $items := readDir $path -}}
+
+    {{- range $items -}}
+      {{- if in $ignoreList .Name -}}
+        {{- continue -}}
+      {{- end -}}
+      {{- $item := dict "name" .Name "type" (cond .IsDir "dir" "file") -}}
+      {{- if .IsDir -}}
+        {{- $fullPath := path.Clean (path.Join $path .Name) -}}
+        {{- $childOptions := dict "path" $fullPath "deep" (add $deep 1) "ignoreList" $ignoreList "isRecursive" true -}}
+        {{- $children := partial "function/get-file-tree.html" $childOptions -}}
+        {{- $item = merge $item (dict "children" $children) -}}
+      {{- end -}}
+      {{- $result = $result | append $item -}}
+    {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{- /* Initial call: validate root and build tree with root node */ -}}
+  {{- $root := .root -}}
+  {{- $rootIsExists := false -}}
+
+  {{- if (fileExists $root) -}}
+    {{- with try (readDir $root) -}}
+      {{- if .Err }}
+        {{- /* Attempt to resolve the path relative to the contentDir */ -}}
+        {{- $contentPath := path.Clean (path.Join "content" $root) -}}
+        {{- /* If multilingual site, try language-specific content directory */ -}}
+        {{- if hugo.IsMultilingual -}}
+          {{- $contentPath = path.Clean (path.Join "content" $.lang $root) -}}
+        {{- end -}}
+        {{- with try (readDir $contentPath) -}}
+          {{- if not .Err }}
+            {{- $rootIsExists = true -}}
+            {{- $root = $contentPath -}}
+          {{- end -}}
+        {{- end -}}
+      {{- else -}}
+        {{- $rootIsExists = true -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if $rootIsExists -}}
+    {{- $f := os.Stat $root -}}
+    {{- /* Determine the root name for display */ -}}
+    {{- $rootLabel := $f.Name -}}
+    {{- $rootClean := path.Clean $root -}}
+    {{- if $fullRootName | and (ne $rootClean "/") | and (ne $rootClean ".") -}}
+      {{- $rootLabel = $rootClean -}}
+    {{- end -}}
+
+    {{- /* Build children recursively */ -}}
+    {{- if $_debug -}}{{- warnf "> %v:" $rootLabel -}}{{- end -}}
+    {{- $childOptions := dict "path" $root "deep" (add $deep 1) "level" $level "ignoreList" $ignoreList "isRecursive" true -}}
+    {{- $children := partial "function/get-file-tree.html" $childOptions -}}
+    
+    {{- /* Return root item with children */ -}}
+    {{- $result = slice (dict "name" $rootLabel "type" "dir" "children" $children) -}}
+  {{- else -}}
+    {{- /* Root doesn't exist, emit warning if context provided */ -}}
+    {{- if .log | default true -}}
+      {{- warnidf "warning-file-tree" "[get-file-tree]: The root path does not exist: %s." $root -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $result -}}

@@ -1,0 +1,51 @@
+{{- /*
+  Render hook for file-tree code blocks
+  Alternative to file-tree shortcode's inner content rendering.
+  
+  Supported attributes:
+  - level: The expand level of the tree (expand all: -1, collapse all: 0, default: 1)
+  - folderSlash: Whether to append a trailing "/" to folder names (default: false)
+  - ignoreList: List of file or folder names to ignore, separated by commas
+  - highlightList: List of file or folder names to highlight, separated by commas
+  
+  Content format: YAML/JSON/TOML with the following item structure:
+    name: string     - The name of the file or folder
+    type: string     - Type of item, either "dir" (directory) or "file"
+    children?: array - (Optional) Array of child items, only valid for directories
+  
+  Example usage:
+    ```file-tree {level=2 folderSlash=true}
+    - name: my-project
+      type: dir
+      children:
+        - name: src
+          type: dir
+        - name: package.json
+          type: file
+    ```
+*/ -}}
+
+{{- $pageConfig := dict | merge .Page.Params.filetree | merge .Page.Site.Params.filetree -}}
+{{- $config := .Attributes | merge $pageConfig -}}
+{{- $level := cond (isset $config "level") ($config.level | int) 1 -}}
+{{- $folderSlash := $config.folderslash | default false -}}
+{{- $ignoreList := union (apply (split (.Attributes.ignorelist | default "") ",") "trim" "." " ") $pageConfig.ignorelist -}}
+{{- $highlightList := apply (split (.Attributes.highlightlist | default "") ",") "trim" "." " " -}}
+
+{{- $content := strings.TrimSpace .Inner | default "" -}}
+{{- $treeData := slice -}}
+{{- with $content -}}
+  {{- $treeData = . | unmarshal -}}
+  {{- if reflect.IsMap $treeData -}}
+    {{- $treeData = $treeData.filetree -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $options := dict
+  "items" $treeData
+  "level" $level
+  "folderSlash" $folderSlash
+  "ignoreList" $ignoreList
+  "highlightList" $highlightList
+-}}
+{{- partial "plugin/file-tree.html" $options -}}
