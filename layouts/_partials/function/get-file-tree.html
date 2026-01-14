@@ -13,9 +13,9 @@
   @param {int} [deep=0] - Current depth level for recursive calls
   @param {array} [ignoreList] - List of file or folder names to ignore
   @param {boolean} [isRecursive=false] - Internal flag for recursive calls
-  @param {boolean} [fullRootName=false] - Whether to use the full root path as the root name
+  @param {string} [name] - Project name for the root node, if set to `{path}`, uses the full root path
   @param {string} [lang] - Page language for multilingual sites
-  @param {boolean} [log=true] - Whether to log warnings
+  @param {boolean} [log=false] - Whether to log warnings
   @return {array} Array of tree items with structure: {name, type, children?}, or empty array if root doesn't exist
 */ -}}
 
@@ -25,7 +25,6 @@
 {{- $isRecursive := .isRecursive | default false -}}
 {{- $_ignoreList := slice ".DS_Store" "Thumbs.db" ".directory" ".git" "node_modules" "public" -}}
 {{- $ignoreList := .ignoreList | default slice | union $_ignoreList -}}
-{{- $fullRootName := .fullRootName | default false -}}
 {{- $_debug := (site.Store.Get "devOpts").debug -}}
 
 {{- if $isRecursive -}}
@@ -78,9 +77,9 @@
   {{- if $rootIsExists -}}
     {{- $f := os.Stat $root -}}
     {{- /* Determine the root name for display */ -}}
-    {{- $rootLabel := $f.Name -}}
+    {{- $rootLabel := .name | default $f.Name -}}
     {{- $rootClean := path.Clean $root -}}
-    {{- if $fullRootName | and (ne $rootClean "/") | and (ne $rootClean ".") -}}
+    {{- if eq .name "{path}" -}}
       {{- $rootLabel = $rootClean -}}
     {{- end -}}
 
@@ -93,7 +92,7 @@
     {{- $result = slice (dict "name" $rootLabel "type" "dir" "children" $children) -}}
   {{- else -}}
     {{- /* Root doesn't exist, emit warning if context provided */ -}}
-    {{- if .log | default true -}}
+    {{- if .log | default false -}}
       {{- warnidf "warning-file-tree" "[get-file-tree]: The root path does not exist: %s." $root -}}
     {{- end -}}
   {{- end -}}

@@ -151,6 +151,12 @@ Trying the file not found case (should fallback to next mode):
 
 {{< file-tree "content" />}}
 
+{{< file-tree name="{path}" />}}
+
+{{< file-tree name="FixIt/apps/test" />}}
+
+{{< file-tree path="posts" name="{path}" />}}
+
 ### Named parameters
 
 {{< file-tree path="data" level=2 />}}

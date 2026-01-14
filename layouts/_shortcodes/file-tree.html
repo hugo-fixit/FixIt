@@ -9,7 +9,7 @@
   @param {string} [data] - The name of the data file in data/filetree/ directory. (JSON/YAML/TOML)
   @param {string} [ignoreList=""] - List of file or folder names to ignore, separated by commas
   @param {string} [highlightList=""] - List of file or folder names to highlight, separated by commas
-  @param {boolean} [fullRootName=false] - Whether to use the full root path as the root name when scanning filesystem
+  @param {string} [name] - Project name for the root node, if set to `{path}`, uses the full root path
 
   Priority order (highest to lowest):
   1. Inline content (shortcode body) - Parse tree data from shortcode body
@@ -63,7 +63,6 @@
 {{- $supportExts := slice ".yml" ".yaml" ".json" ".toml" -}}
 {{- $ignoreList := union (apply (split (.Get "ignoreList" | default "") ",") "trim" "." " ") $config.ignorelist -}}
 {{- $highlightList := apply (split (.Get "highlightList" | default "") ",") "trim" "." " " -}}
-{{- $fullRootName := .Get "fullRootName" | default false -}}
 
 {{- /* Shortcode body */ -}}
 {{- $content := strings.TrimSpace .Inner | default "" -}}
@@ -100,10 +99,9 @@
   {{- end -}}
 {{- end -}}
 
-{{- /* Filesystem mode: scan directory structure */ -}}
+{{- /* Filesystem mode: build structured tree data from filesystem */ -}}
 {{- if not $treeData -}}
-  {{- /* Build structured tree data from filesystem */ -}}
-  {{- $buildOptions := dict "root" $root "ignoreList" $ignoreList "deep" 0 "fullRootName" $fullRootName "lang" .Page.Language "log" false -}}
+  {{- $buildOptions := dict "root" $root "ignoreList" $ignoreList "name" (.Get "name") "lang" .Page.Language -}}
   {{- with partial "function/get-file-tree.html" $buildOptions -}}
     {{- $treeData = . -}}
   {{- else -}}
