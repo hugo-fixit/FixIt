@@ -1,3 +1,23 @@
+{{- /*
+  Renders a tabbed interface with multiple tabs and their corresponding content.
+  See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/tabs/
+ 
+  @param {int} [defaultTab=0] - The index of the tab to be active by default (0-based)
+  @param {string} [type="underline"] - The style type of the tabs ("underline", "pill", "card", "segment", etc.)
+  @param {string} [placement="top"] - The placement of the tabs ("top", "bottom", "left", "right")
+ 
+  Usage:
+  {{< tabs defaultTab="1" type="card" placement="top" >}}
+    {{% tab title="Tab 1" %}}
+      Content for Tab 1
+    {{% /tab %}}
+    {{% tab title="Tab 2" %}}
+      Content for Tab 2
+    {{% /tab %}}
+  {{< /tabs >}}
+ 
+  Note: Tabs must be defined using the nested "tab" shortcode within the "tabs" shortcode.
+*/ -}}
 {{- $tabs := .Store.Get "tabs" -}}
 {{- if not $tabs -}}
   {{- errorf "No tabs found. Please add at least one tab to the tabs shortcode. See %s %s" .Name .Position -}}

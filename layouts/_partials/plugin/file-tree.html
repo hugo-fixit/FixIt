@@ -2,7 +2,7 @@
   Recursive function to render tree from structured data
   @param {array} items - Array of tree items
   @param {int} depth - Current depth level
-  @param {int} level - Descend only level directories deep (-1 = expand all, 0 = collapse all)
+  @param {int} level - The expand level of the tree (expand all: -1, collapse all: 0)
   @param {bool} folderSlash - Whether to append a trailing "/" to folder names
   @param {array} ignoreList - List of file or folder names to ignore
   @param {array} highlightList - List of file or folder names to highlight
@@ -17,8 +17,7 @@
   {{- $depth := .depth -}}
   {{- $level := .level -}}
   {{- $folderSlash := .folderSlash -}}
-  {{- $_ignoreList := slice ".DS_Store" "Thumbs.db" -}}
-  {{- $ignoreList := .ignoreList | union $_ignoreList -}}
+  {{- $ignoreList := .ignoreList | default slice -}}
   {{- $highlightList := .highlightList -}}
 
   <ul class="file-tree" data-level="{{ $depth }}">

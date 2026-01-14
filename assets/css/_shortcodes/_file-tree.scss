@@ -75,7 +75,7 @@
           translate: 0 -50%;
           width: 0.75rem;
           height: 1px;
-          background-color: var(#{$rootPrefix}global-border-color);
+          background-color: var(#{$rootPrefix}secondary);
         }
       }
     }
@@ -92,7 +92,7 @@
       bottom: 0.625rem;
       left: calc(1rem - 0.5px);
       width: 1px;
-      background-color: var(#{$rootPrefix}global-border-color);
+      background-color: var(#{$rootPrefix}secondary);
       height: var(#{$rootPrefix}file-tree-line-height);
     }
   }

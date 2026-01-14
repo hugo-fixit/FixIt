@@ -1161,7 +1161,7 @@ sort = false
 boxed = true
 
 # FixIt 0.4.2 | NEW File tree config
-# See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/filetree/
+# See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/file-tree/
 [params.filetree]
 # the expand level of the tree (expand all: -1, collapse all: 0)
 level = 1

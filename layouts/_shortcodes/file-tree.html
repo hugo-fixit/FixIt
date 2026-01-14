@@ -1,9 +1,8 @@
 {{- /*
   Renders an interactive file tree structure from inline content, resources, data files, or filesystem
-  See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/filetree/
-  [todo] To link files, add a `linkPrefix` param for the URL prefix, PRs welcome.
+  See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/file-tree/
 
-  @param {string} [path="/"] - The path to scan in the actual filesystem (project/content directory)
+  @param {string} [path="/"] - The path to scan in filesystem (relative to project root or contentDir)
   @param {int} [level=1] - The expand level of the tree (expand all: -1, collapse all: 0)
   @param {boolean} [folderSlash=false] - Whether to append a trailing "/" to folder names.
   @param {string} [file] - The path of a data file in page resources or assets. (JSON/YAML/TOML)
@@ -104,7 +103,7 @@
 {{- /* Filesystem mode: scan directory structure */ -}}
 {{- if not $treeData -}}
   {{- /* Build structured tree data from filesystem */ -}}
-  {{- $buildOptions := dict "root" $root "ignoreList" $ignoreList "fullRootName" $fullRootName "lang" .Page.Language "log" false -}}
+  {{- $buildOptions := dict "root" $root "ignoreList" $ignoreList "deep" 0 "fullRootName" $fullRootName "lang" .Page.Language "log" false -}}
   {{- with partial "function/get-file-tree.html" $buildOptions -}}
     {{- $treeData = . -}}
   {{- else -}}
