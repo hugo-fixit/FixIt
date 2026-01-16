@@ -282,7 +282,7 @@ class FixIt {
                 const results = {};
                 window._index.search(query).forEach(({ item, refIndex, matches }) => {
                   let title = item.title;
-                  let content = item.content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                  let content = item.content;
                   matches.forEach(({ indices, value, key }) => {
                     if (key === 'content') {
                       content = this._applyHighlightToText(content, indices, highlightTag);
@@ -343,7 +343,7 @@ class FixIt {
           templates: {
             suggestion: ({ title, uri, date, context }) =>
               `<div><a href="${uri}"><span class="suggestion-title">${title}</span></a><span class="suggestion-date">${date}</span></div><div class="suggestion-context">${context}</div>`,
-            empty: ({ query }) => `<div class="search-empty">${searchConfig.noResultsFound}: <span class="search-query">"${query}"</span></div>`,
+            empty: ({ query }) => `<div class="search-empty">${searchConfig.noResultsFound}: <span class="search-query">"${this.util.HTMLEscape(query)}"</span></div>`,
             footer: ({ }) => {
               let searchType, icon, href;
               switch (searchConfig.type) {

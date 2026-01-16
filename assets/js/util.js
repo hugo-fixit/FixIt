@@ -133,4 +133,14 @@ export default class Util {
     }
     return false;
   }
+
+  HTMLEscape(str) {
+    return str.replace(/[&<>"']/g, char => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    })[char]);
+  }
 }
