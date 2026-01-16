@@ -55,8 +55,8 @@
                     {{- $anchor = replace (index (split $contentm ">") 0) `"` "" -}}
                     {{- $contentm = printf "<h6 id=%v" $contentm -}}
                   {{- end -}}
-                  {{/* Plainify, unescape and remove (\n, \t) */}}
-                  {{- $contentj = $contentj | plainify | htmlUnescape | replaceRE `[\n\t ]+` " " -}}
+                  {{/* Plainify and remove (\n, \t) */}}
+                  {{- $contentj = $contentj | plainify | replaceRE `[\n\t ]+` " " -}}
                   {{- if gt $.Site.Params.search.contentLength 0 -}}
                     {{- $contentj = substr $contentj 0 $.Site.Params.search.contentLength -}}
                   {{- end -}}
@@ -80,8 +80,8 @@
           {{- if gt $j 0 -}}
             {{- $contentj = printf "<h3 id=%v" $contentj -}}
           {{- end -}}
-          {{/* Plainify, unescape and remove (\n, \t) */}}
-          {{- $contentj = $contentj | plainify | htmlUnescape | replaceRE `[\n\t ]+` " " -}}
+          {{/* Plainify and remove (\n, \t) */}}
+          {{- $contentj = $contentj | plainify | replaceRE `[\n\t ]+` " " -}}
           {{- if gt $.Site.Params.search.contentLength 0 -}}
             {{- $contentj = substr $contentj 0 $.Site.Params.search.contentLength -}}
           {{- end -}}
