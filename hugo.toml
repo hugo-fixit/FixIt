@@ -809,7 +809,7 @@ RSS = true
 # Title = "Twitter"
 
 # [params.social.twitter.icon]
-# class = "fa-brands fa-x-twitter fa-fw"
+# class = "fa-brands fa-x-twitter"
 
 # TypeIt config
 [params.typeit]

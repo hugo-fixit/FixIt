@@ -4,7 +4,7 @@
     printf `<a href="%v" class="post-category" title="%v">%v %v</a>`
     (partial "function/escapeurl.html" .RelPermalink)
     (printf "%v - %v" (T "category") .LinkTitle)
-    (dict "Class" "fa-regular fa-folder fa-fw" | partial "plugin/icon.html")
+    (dict "Class" "fa-regular fa-folder" | partial "plugin/icon.html")
     .LinkTitle
   ) -}}
 {{- end -}}
@@ -16,7 +16,7 @@
     printf `<a href="%v" class="post-collection" title="%v">%v %v</a>`
     (partial "function/escapeurl.html" .RelPermalink)
     (printf "%v - %v" (T "collection") .LinkTitle)
-    (dict "Class" "fa-solid fa-layer-group fa-fw" | partial "plugin/icon.html")
+    (dict "Class" "fa-solid fa-layer-group" | partial "plugin/icon.html")
     .LinkTitle
   ) -}}
 {{- end -}}

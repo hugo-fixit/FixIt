@@ -6,6 +6,8 @@
 
 // Diagram copy button styles
 .diagram-copy-btn {
+  width: 1rem;
+  height: 1rem;
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
@@ -40,10 +42,14 @@
     }
   }
 
+  .fa-clone {
+    font-size: 1rem;
+  }
+
   &[data-copied] {
     .fa-clone {
-      --fa: "\f00c";
-      font-weight: 900;
+      --fa: '\f00c';
+      --fa-style: 900;
       color: var(#{$rootPrefix}global-link-hover-color);
     }
   }

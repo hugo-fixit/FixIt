@@ -25,13 +25,13 @@
   {{- /* Title */ -}}
   <h2 class="single-title" itemprop="name headline">
     {{- with $params.weight -}}
-      {{- $icon := dict "Class" "fa-solid fa-thumbtack fa-fw" -}}
+      {{- $icon := dict "Class" "fa-solid fa-thumbtack" -}}
       <span title="{{ T "single.pin" }}" class="icon-pin">{{- $icon | partial "plugin/icon.html" -}}</span>
     {{- end -}}
     {{- $repost := $params.repost | default dict -}}
     {{- with $repost -}}
       {{- if eq .Enable true -}}
-        {{- $icon := dict "Class" "fa-solid fa-share fa-fw" -}}
+        {{- $icon := dict "Class" "fa-solid fa-share" -}}
         {{- $title := cond (hasPrefix .Url "http") (printf "%v -> %v" (T "single.repost") .Url ) (T "single.repost") -}}
         <span title="{{ $title }}" class="icon-repost">{{- $icon | partial "plugin/icon.html" -}}</span>
       {{- end -}}
@@ -73,7 +73,7 @@
     {{- $tagTerms := .GetTerms "tags" -}}
     {{- if $tagTerms -}}
       <div class="post-tags">
-        {{- dict "Class" "fa-solid fa-tags fa-fw me-1" | partial "plugin/icon.html" -}}
+        {{- dict "Class" "fa-solid fa-tags me-1" | partial "plugin/icon.html" -}}
         {{- range $tagTerms -}}
           <a href='{{ partial "function/escapeurl.html" .RelPermalink }}' class="post-tag">{{ .LinkTitle }}</a>
         {{- end -}}

@@ -18,6 +18,7 @@ Test for rendering Font Awesome icons.
 :(fa-solid fa-camera fa-xs):
 :(fa-solid fa-camera fa-sm):
 :(fa-solid fa-camera fa-lg):
+:(fa-solid fa-camera fa-1x):
 :(fa-solid fa-camera fa-2x):
 :(fa-solid fa-camera fa-3x):
 :(fa-solid fa-camera fa-5x):
@@ -26,9 +27,9 @@ Test for rendering Font Awesome icons.
 
 ## Fixed width
 
-:(fa-solid fa-skating fa-fw fa-2x): Skating\
-:(fa-solid fa-skiing fa-fw fa-2x): Skiing\
-:(fa-solid fa-skiing-nordic fa-fw fa-2x): Nordic Skiing
+:(fa-solid fa-skating fa-2x): Skating\
+:(fa-solid fa-skiing fa-2x): Skiing\
+:(fa-solid fa-skiing-nordic fa-2x): Nordic Skiing
 
 ## List icon
 
@@ -75,4 +76,4 @@ hey guys!
 
 ## Border
 
-:(fa-brands fa-apple fa-border fa-fw fa-10x):
+:(fa-brands fa-apple fa-border fa-10x):

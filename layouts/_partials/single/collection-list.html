@@ -10,10 +10,10 @@
 
     <div class="details collection-details{{ if $open }} open{{ end }}">
       <div class="details-summary collection-summary">
-        {{ dict "Class" "fa-solid fa-layer-group fa-fw" | partial "plugin/icon.html" }}
+        {{ dict "Class" "fa-solid fa-layer-group" | partial "plugin/icon.html" }}
         <span class="collection-name" title="{{ T "collections" }}">{{ .LinkTitle }}</span>
         <span class="collection-count">{{ $pages.Len }}</span>
-        {{- dict "Class" "details-icon fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
+        {{- dict "Class" "details-icon fa-solid fa-angle-right" | partial "plugin/icon.html" -}}
       </div>
       <div class="details-content collection-content">
         <nav>
@@ -36,19 +36,19 @@
             {{- with $pages.Next $ -}}
               {{- $capitalizeTitles := .Param "capitalizeTitles" -}}
               <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ cond $capitalizeTitles (title .LinkTitle) .LinkTitle }}">
-                {{- dict "Class" "fa-solid fa-angle-left fa-fw" | partial "plugin/icon.html" -}}
+                {{- dict "Class" "fa-solid fa-angle-left" | partial "plugin/icon.html" -}}
               </a>
             {{- else -}}
-              {{- dict "Class" "fa-solid fa-angle-left fa-fw collection-nav-item text-secondary" | partial "plugin/icon.html" -}}
+              {{- dict "Class" "fa-solid fa-angle-left collection-nav-item text-secondary" | partial "plugin/icon.html" -}}
             {{- end -}}
             <span class="text-secondary">{{ add $currentKey 1 }}/{{ $pages.Len }}</span>
             {{- with $pages.Prev $ -}}
               {{- $capitalizeTitles := .Param "capitalizeTitles" -}}
               <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ cond $capitalizeTitles (title .LinkTitle) .LinkTitle }}">
-                {{- dict "Class" "fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
+                {{- dict "Class" "fa-solid fa-angle-right" | partial "plugin/icon.html" -}}
               </a>
             {{- else -}}
-              {{- dict "Class" "fa-solid fa-angle-right fa-fw collection-nav-item text-secondary" | partial "plugin/icon.html" -}}
+              {{- dict "Class" "fa-solid fa-angle-right collection-nav-item text-secondary" | partial "plugin/icon.html" -}}
             {{- end -}}
           </div>
         </nav>

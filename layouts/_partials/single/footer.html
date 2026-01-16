@@ -30,7 +30,7 @@
                   {{- $title = printf "%s&#10Commit Date: %v" $title (.CommitDate | dateFormat "2006-01-02 15:04:05") -}}
                 {{- end -}}
                 <a class="git-hash" href="{{ printf `%v/commit/%v` $gitRepo .Hash }}" rel="external nofollow noopener noreferrer" target="_blank" title="{{ $title | safeHTML }}">
-                  {{- dict "Class" "fa-solid fa-hashtag fa-fw" | partial "plugin/icon.html" -}}
+                  {{- dict "Class" "fa-solid fa-hashtag" | partial "plugin/icon.html" -}}
                   {{- .AbbreviatedHash -}}
                 </a>
               {{- end -}}
@@ -97,7 +97,7 @@
     <section class="post-tags">
       {{- $tagTerms := .GetTerms "tags" -}}
       {{- if $tagTerms -}}
-        {{- dict "Class" "fa-solid fa-tags fa-fw me-1" | partial "plugin/icon.html" -}}
+        {{- dict "Class" "fa-solid fa-tags me-1" | partial "plugin/icon.html" -}}
         {{- range $tagTerms -}}
           {{- $href := partial "function/escapeurl.html" .RelPermalink -}}
           {{- $title := printf "%v - %v" (T "tags") .LinkTitle -}}
@@ -129,7 +129,7 @@
     {{- with $prev -}}
       {{- $capitalizeTitles := .Param "capitalizeTitles" -}}
       <a href="{{ .RelPermalink }}" class="post-nav-item" rel="prev" title="{{ cond $capitalizeTitles (title .LinkTitle) .LinkTitle }}">
-        {{- dict "Class" "fa-solid fa-angle-left fa-fw" | partial "plugin/icon.html" -}}
+        {{- dict "Class" "fa-solid fa-angle-left" | partial "plugin/icon.html" -}}
         {{- cond $capitalizeTitles (title .LinkTitle) .LinkTitle -}}
       </a>
     {{- end -}}
@@ -137,7 +137,7 @@
       {{- $capitalizeTitles := .Param "capitalizeTitles" -}}
       <a href="{{ .RelPermalink }}" class="post-nav-item" rel="next" title="{{ cond $capitalizeTitles (title .LinkTitle) .LinkTitle }}">
         {{- cond $capitalizeTitles (title .LinkTitle) .LinkTitle -}}
-        {{- dict "Class" "fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
+        {{- dict "Class" "fa-solid fa-angle-right" | partial "plugin/icon.html" -}}
       </a>
     {{- end -}}
   </div>

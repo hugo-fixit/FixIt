@@ -29,7 +29,7 @@
         <div class="footer-line copyright{{ with $footerConfig.order.copyright }} order-{{ . }}{{ end }}" itemscope itemtype="http://schema.org/CreativeWork">
           {{- /* Copyright year */ -}}
           {{- if ne $footerConfig.copyright false -}}
-            {{ dict "Class" "fa-regular fa-copyright fa-fw" | partial "plugin/icon.html" }}
+            {{ dict "Class" "fa-regular fa-copyright" | partial "plugin/icon.html" }}
             {{ with $footerConfig.since -}}
               <span itemprop="copyrightYear">
                 {{- if lt . now.Year }}{{ . }} - {{ end }}{{ now.Year -}}
@@ -59,7 +59,7 @@
           {{- if $siteTime.enable | and $siteTime.value -}}
             {{- with $siteTime -}}
               <span class="site-time" title='{{ T "footer.siteRunning" }}'>
-                {{- $siteTimeIcon := printf (cond .Animate "%v fa-fw animate-icon" "%v fa-fw") .Icon -}}
+                {{- $siteTimeIcon := printf (cond .Animate "%v animate-icon" "%v") .Icon -}}
                 {{- dict "Class" $siteTimeIcon | partial "plugin/icon.html" -}}
                 {{- with .Pre -}}<span class="ms-1 d-none">{{ . }}</span>{{- end -}}
                 {{- printf `<span class="run-times ms-1">%v</span>` (T "footer.siteRunning") | safeHTML -}}
@@ -72,9 +72,9 @@
       {{- /* 不蒜子 */ -}}
       {{- $busuanzi := .Site.Params.busuanzi -}}
       {{- if eq $busuanzi.enable true -}}
-        {{- $loading := dict "Class" "fa-solid fa-spinner fa-spin fa-fw" | partial "plugin/icon.html" -}}
-        {{- $iconUV := dict "Class" "fa-regular fa-user fa-fw me-1" | partial "plugin/icon.html" -}}
-        {{- $iconPV := dict "Class" "fa-regular fa-eye fa-fw me-1" | partial "plugin/icon.html" -}}
+        {{- $loading := dict "Class" "fa-solid fa-spinner fa-spin" | partial "plugin/icon.html" -}}
+        {{- $iconUV := dict "Class" "fa-regular fa-user me-1" | partial "plugin/icon.html" -}}
+        {{- $iconPV := dict "Class" "fa-regular fa-eye me-1" | partial "plugin/icon.html" -}}
         <div class="footer-line visitor{{ with $footerConfig.order.visitor }} order-{{ . }}{{ end }}{{ if not $busuanzi.siteViews }} d-none{{ end }}">
           <span id="busuanzi_container_site_uv" title='{{ T "footer.siteUV" }}'>
             {{- $iconUV }}<span id="busuanzi_value_site_uv">{{ $loading }}</span>

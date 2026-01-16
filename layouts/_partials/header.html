@@ -53,7 +53,7 @@
                 {{- if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end -}}
               >
                 {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
-                {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
+                {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
                 {{- .Name }}
                 {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
               </a>
@@ -79,7 +79,7 @@
                           {{- if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end -}}
                         >
                           {{- with $v.Pre -}}{{- . | safeHTML }} {{ end }}
-                          {{- with $v.Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
+                          {{- with $v.Params.Icon -}}{{ dict "Class" (printf "%v fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
                           {{- $v.Name }}
                           {{- with $v.Post }} {{ . | safeHTML -}}{{- end -}}
                         </a>
@@ -98,23 +98,23 @@
           <li class="menu-item search" id="search-desktop">
             <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `assets.searchPlaceholder`) }}" id="search-input-desktop">
             <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="{{ T `assets.search` }}">
-              {{ dict "Class" "fa-solid fa-search fa-fw" | partial "plugin/icon.html" }}
+              {{ dict "Class" "fa-solid fa-search" | partial "plugin/icon.html" }}
             </a>
             <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="{{ T `assets.clear` }}">
-              {{ dict "Class" "fa-solid fa-times-circle fa-fw" | partial "plugin/icon.html" }}
+              {{ dict "Class" "fa-solid fa-times-circle" | partial "plugin/icon.html" }}
             </a>
             <span class="search-button search-loading" id="search-loading-desktop">
-              {{ dict "Class" "fa-solid fa-spinner fa-fw fa-spin" | partial "plugin/icon.html" }}
+              {{ dict "Class" "fa-solid fa-spinner fa-spin" | partial "plugin/icon.html" }}
             </span>
           </li>
         {{- end -}}
         <li class="menu-item theme-switch" role="button" aria-label="{{ T "header.switchTheme" }}" title="{{ T "header.switchTheme" }}">
-          {{- dict "Class" "fa-solid fa-adjust fa-fw" | partial "plugin/icon.html" -}}
+          {{- dict "Class" "fa-solid fa-adjust" | partial "plugin/icon.html" -}}
         </li>
         {{- if hugo.IsMultilingual -}}
           <li class="menu-item language-switch">
             <span role="button" aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}">
-              {{- dict "Class" "fa-solid fa-language fa-fw" | partial "plugin/icon.html" -}}
+              {{- dict "Class" "fa-solid fa-language" | partial "plugin/icon.html" -}}
             </span>
             <ul class="sub-menu">
               {{- if (eq .Kind "404") -}}
@@ -188,7 +188,7 @@
         {{- end -}}
       </div>
       <div class="theme-switch" role="button" aria-label="{{ T "header.switchTheme" }}">
-        {{- dict "Class" "fa-solid fa-adjust fa-fw" | partial "plugin/icon.html" -}}
+        {{- dict "Class" "fa-solid fa-adjust" | partial "plugin/icon.html" -}}
       </div>
       <div class="menu-toggle" id="menu-toggle-mobile" role="button" aria-labelledby="menu-mobile">
         <span></span><span></span><span></span>
@@ -201,13 +201,13 @@
             <div class="search mobile" id="search-mobile">
               <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `assets.searchPlaceholder`) }}" id="search-input-mobile">
               <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="{{ T `assets.search` }}">
-                {{ dict "Class" "fa-solid fa-search fa-fw" | partial "plugin/icon.html" }}
+                {{ dict "Class" "fa-solid fa-search" | partial "plugin/icon.html" }}
               </a>
               <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="{{ T `assets.clear` }}">
-                {{ dict "Class" "fa-solid fa-times-circle fa-fw" | partial "plugin/icon.html" }}
+                {{ dict "Class" "fa-solid fa-times-circle" | partial "plugin/icon.html" }}
               </a>
               <span class="search-button search-loading" id="search-loading-mobile">
-                {{ dict "Class" "fa-solid fa-spinner fa-fw fa-spin" | partial "plugin/icon.html" }}
+                {{ dict "Class" "fa-solid fa-spinner fa-spin" | partial "plugin/icon.html" }}
               </span>
             </div>
             <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
@@ -234,7 +234,7 @@
                     {{- if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end -}}
                   >
                     {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
-                    {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
+                    {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
                     {{- .Name }}
                     {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
                   </a>
@@ -260,7 +260,7 @@
                           {{- if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end -}}
                         >
                           {{- with $v.Pre -}}{{- . | safeHTML }} {{ end }}
-                          {{- with $v.Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
+                          {{- with $v.Params.Icon -}}{{ dict "Class" (printf "%v fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
                           {{- $v.Name }}
                           {{- with $v.Post }} {{ . | safeHTML -}}{{- end -}}
                         </a>
@@ -275,7 +275,7 @@
                   {{- if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end -}}
                 >
                   {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
-                  {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-fw fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
+                  {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
                   {{- .Name }}
                   {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
                 </a>

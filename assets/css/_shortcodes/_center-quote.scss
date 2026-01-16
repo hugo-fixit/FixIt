@@ -19,9 +19,9 @@ blockquote.blockquote-center {
     border-top: 1px solid $global-border-color;
     text-align: left;
     top: -20px;
-    content: '\f10d';
-    font-family: 'Font Awesome 5 Free';
+    font-family: var(--fa-family-classic);
     font-weight: 900;
+    content: '\f10d';
 
     [data-theme='dark'] & {
       border-top-color: $global-border-color-dark;
@@ -32,9 +32,9 @@ blockquote.blockquote-center {
     border-bottom: 1px solid $global-border-color;
     bottom: -20px;
     text-align: right;
-    content: '\f10e';
-    font-family: 'Font Awesome 5 Free';
+    font-family: var(--fa-family-classic);
     font-weight: 900;
+    content: '\f10e';
 
     [data-theme='dark'] & {
       border-bottom-color: $global-border-color-dark;

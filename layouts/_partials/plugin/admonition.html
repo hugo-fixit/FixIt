@@ -52,10 +52,10 @@
 <div class="details admonition {{ $type }}{{ if .Open | ne false }} open{{ end }}{{ if not $foldable }} disabled{{ end }}">
   {{- if not $titleless }}
     <div class="details-summary admonition-title">
-      {{- dict "Class" (add "icon fa-fw " $icon) | partial "plugin/icon.html" -}}
+      {{- dict "Class" (add "icon " $icon) | partial "plugin/icon.html" -}}
       {{- $title | safeHTML -}}
       {{- if $foldable -}}
-        {{- dict "Class" "details-icon fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
+        {{- dict "Class" "details-icon fa-solid fa-angle-right" | partial "plugin/icon.html" -}}
       {{- end -}}
     </div>
   {{- end }}

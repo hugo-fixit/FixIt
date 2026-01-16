@@ -11,7 +11,7 @@
     <div class="header">
       {{- /* Title */ -}}
       <h1 class="single-title animate__animated animate__pulse animate__faster">
-        {{- dict "Class" "fa-solid fa-box-archive fa-fw me-1" | partial "plugin/icon.html" -}}
+        {{- dict "Class" "fa-solid fa-box-archive me-1" | partial "plugin/icon.html" -}}
         {{- .Params.Title | default (T "archives") }} <sup>{{ $pages.Len }}</sup>
       </h1>
       {{- /* Total word count */ -}}
@@ -26,7 +26,7 @@
           {{- $humanizedNum = printf "%.2fK" (div $humanizedNum 1000.0) -}}
         {{- end -}}
         <p class="single-subtitle total-word-count" title='{{- T "section.totalWordCount" . }}'>
-          {{- dict "Class" "fa-regular fa-keyboard fa-fw" | partial "plugin/icon.html" }} {{ T "section.totalWordCount" (dict "Count" $humanizedNum) -}}
+          {{- dict "Class" "fa-regular fa-keyboard" | partial "plugin/icon.html" }} {{ T "section.totalWordCount" (dict "Count" $humanizedNum) -}}
         </p>
       {{- end -}}
     </div>
@@ -42,7 +42,7 @@
       {{- partial "recently-updated.html" . -}}
       {{- range $pages.PageGroups -}}
         <h2 class="group-title">
-          {{- dict "Class" "fa-regular fa-calendar fa-fw me-1" | partial "plugin/icon.html" -}}
+          {{- dict "Class" "fa-regular fa-calendar me-1" | partial "plugin/icon.html" -}}
           {{- .Key -}}
         </h2>
         {{- range .Pages -}}
@@ -50,7 +50,7 @@
             <a href="{{ .RelPermalink }}" class="archive-item-link">
               {{- $repost := .Params.repost | default dict -}}
               {{- if eq $repost.enable true -}}
-                {{- dict "Class" "fa-solid fa-share fa-fw text-success me-1" | partial "plugin/icon.html" -}}
+                {{- dict "Class" "fa-solid fa-share text-success me-1" | partial "plugin/icon.html" -}}
               {{- end -}}
               {{- /* Use the original title after archiving the articles */ -}}
               {{- cond (.Param "capitalizeTitles") (title .Title) .Title -}}

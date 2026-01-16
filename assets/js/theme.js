@@ -349,7 +349,7 @@ class FixIt {
               switch (searchConfig.type) {
                 case 'algolia':
                   searchType = 'algolia';
-                  icon = '<i class="fa-brands fa-algolia fa-fw" aria-hidden="true"></i>';
+                  icon = '<i class="fa-brands fa-algolia" aria-hidden="true"></i>';
                   href = 'https://www.algolia.com/';
                   break;
                 case 'fuse':
@@ -360,7 +360,7 @@ class FixIt {
                 case 'cse':
                   if (this.config.cse.engine === 'google') {
                     searchType = 'Google CSE';
-                    icon = '<i class="fa-brands fa-google fa-fw" aria-hidden="true"></i>';
+                    icon = '<i class="fa-brands fa-google" aria-hidden="true"></i>';
                     href = 'https://programmablesearchengine.google.com/';
                   }
                   break;

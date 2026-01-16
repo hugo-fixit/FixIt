@@ -7,7 +7,7 @@
     <div class="comment">{{ $reward.comment }}</div>
     <input type="checkbox" class="reward-input" name="reward" id="{{ $id }}" hidden />
     <label class="reward-button" for="{{ $id }}">
-      {{- dict "Class" "fa-solid fa-qrcode fa-fw" | partial "plugin/icon.html" -}}
+      {{- dict "Class" "fa-solid fa-qrcode" | partial "plugin/icon.html" -}}
       {{- T "single.reward.donate" -}}
     </label>
     <div class="reward-ways"{{ with $reward.mode }} data-mode="{{ . }}"{{ end }}>

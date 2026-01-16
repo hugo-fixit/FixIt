@@ -26,11 +26,11 @@
   - [ ] Unchecked
   - [x] Checked
 */ -}}
-{{- $icon := dict "Class" (add "checkbox-icon fa-fw " (index $iconMap " ")) | partial "plugin/icon.html" -}}
+{{- $icon := dict "Class" (add "checkbox-icon " (index $iconMap " ")) | partial "plugin/icon.html" -}}
 {{- $label := T (printf "taskList.%v" " ") -}}
 {{- $content := replaceRE `<li>(\n<p>)*<input disabled="" type="checkbox"> (.+?)(</p>\n)*</li>` (printf `<li data-task=" " title=%q>$1%s$2$3</li>` $label $icon) . -}}
 {{- $label := T (printf "taskList.%v" "x") -}}
-{{- $icon := dict "Class" (add "checkbox-icon fa-fw " (index $iconMap "x")) | partial "plugin/icon.html" -}}
+{{- $icon := dict "Class" (add "checkbox-icon " (index $iconMap "x")) | partial "plugin/icon.html" -}}
 {{- $content = replaceRE `<li>(\n<p>)*<input checked="" disabled="" type="checkbox"> (.+?)(</p>\n)*</li>` (printf `<li data-task="x" title=%q>$1%s$2$3</li>` $label $icon) $content -}}
 
 {{- /*
@@ -45,7 +45,7 @@
 */ -}}
 {{- range $extendedSigns -}}
   {{- $class := index $iconMap . | default "fa-solid fa-check-square" -}}
-  {{- $icon := dict "Class" (add "checkbox-icon fa-fw " $class) | partial "plugin/icon.html" -}}
+  {{- $icon := dict "Class" (add "checkbox-icon " $class) | partial "plugin/icon.html" -}}
   {{- $sign := htmlEscape . -}}
   {{- $originSign := replace . "\\" "" -}}
   {{- $label := (T (printf "taskList.%v" $originSign)) | default (T (printf "taskList.%v" " ")) -}}

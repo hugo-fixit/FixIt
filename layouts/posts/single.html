@@ -30,7 +30,7 @@
         {{- $repost := $params.repost | default dict -}}
         {{- with $repost -}}
           {{- if eq .Enable true -}}
-            {{- $icon := dict "Class" "fa-solid fa-share fa-fw" -}}
+            {{- $icon := dict "Class" "fa-solid fa-share" -}}
             {{- $iconTitle := cond (hasPrefix .Url "http") (printf "%v -> %v" (T "single.repost") .Url ) (T "single.repost") -}}
             {{- if hasPrefix .Url "http" -}}
               {{ dict "Destination" .Url "Icon" $icon "Class" "icon-repost" "Title" $iconTitle | partial "plugin/link.html" -}}
@@ -56,27 +56,27 @@
       <div class="post-meta-line">
         {{- with .PublishDate | dateFormat (.Site.Params.dateformat | default "2006-01-02") -}}
           <span title="{{ dict "Date" ("2006-01-02 15:04:05" | $.PublishDate.Format) | T "single.publishedOnDate" }}">
-            {{- dict "Class" "fa-solid fa-calendar-days fa-fw me-1" | partial "plugin/icon.html" -}}
+            {{- dict "Class" "fa-solid fa-calendar-days me-1" | partial "plugin/icon.html" -}}
             {{- printf `<time datetime="%v">%v</time>` . . | safeHTML -}}
           </span>&nbsp;
         {{- end -}}
         {{- if (ne .Lastmod.Unix .PublishDate.Unix) | and $params.showLastmod -}}
           {{- with .Lastmod | dateFormat (.Site.Params.dateformat | default "2006-01-02") -}}
             <span title="{{ dict "Date" ("2006-01-02 15:04:05" | $.Lastmod.Format) | T "single.updatedOnDate" }}">
-              {{- dict "Class" "fa-regular fa-calendar-check fa-fw me-1" | partial "plugin/icon.html" -}}
+              {{- dict "Class" "fa-regular fa-calendar-check me-1" | partial "plugin/icon.html" -}}
               {{- printf `<time datetime="%v">%v</time>` . . | safeHTML -}}
             </span>&nbsp;
           {{- end -}}
         {{- end -}}
         {{- if $params.wordCount -}}
           <span title="{{ T "single.wordCount" .WordCount }}">
-            {{- dict "Class" "fa-solid fa-pencil-alt fa-fw me-1" | partial "plugin/icon.html" -}}
+            {{- dict "Class" "fa-solid fa-pencil-alt me-1" | partial "plugin/icon.html" -}}
             {{- T "single.fuzzyWordCount" .FuzzyWordCount -}}
           </span>&nbsp;
         {{- end -}}
         {{- if $params.readingTime -}}
           <span>
-            {{- dict "Class" "fa-regular fa-clock fa-fw me-1" | partial "plugin/icon.html" -}}
+            {{- dict "Class" "fa-regular fa-clock me-1" | partial "plugin/icon.html" -}}
             {{- T "single.readingTime" .ReadingTime -}}
           </span>&nbsp;
         {{- end -}}
@@ -90,8 +90,8 @@
           {{- .Store.Set "commentExpired" true -}}
         {{- end -}}
         {{- $comment := .Store.Get "comment" | default dict -}}
-        {{- $visitorIcon := dict "Class" "fa-regular fa-eye fa-fw me-1" | partial "plugin/icon.html" -}}
-        {{- $commentIcon := dict "Class" "fa-regular fa-comments fa-fw me-1" | partial "plugin/icon.html" -}}
+        {{- $visitorIcon := dict "Class" "fa-regular fa-eye me-1" | partial "plugin/icon.html" -}}
+        {{- $commentIcon := dict "Class" "fa-regular fa-comments me-1" | partial "plugin/icon.html" -}}
         {{- /* Visitor Count */ -}}
         {{- if $comment.enable | and $comment.artalk.enable -}}
           <span class="comment-visitors" data-flag-title="{{ $title }}">
@@ -231,7 +231,7 @@
     {{- if $showToc -}}
       <h2 class="toc-title{{ with $params.password }} encrypted-hidden{{ end }}">
         {{- T "single.contents" -}}&nbsp;
-        {{- dict "Class" "toc-icon fa-solid fa-angle-down fa-fw" | partial "plugin/icon.html" -}}
+        {{- dict "Class" "toc-icon fa-solid fa-angle-down" | partial "plugin/icon.html" -}}
       </h2>
       <div class="toc-content{{ if eq $toc.auto false }} always-active{{ end }}{{ with $params.password }} encrypted-hidden{{ end }}" id="toc-content-auto"></div>
     {{- end -}}

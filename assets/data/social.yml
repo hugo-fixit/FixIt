@@ -4,7 +4,7 @@ github:
   Prefix: https://github.com/
   Title: GitHub
   Icon:
-    Class: fa-brands fa-github-alt fa-fw
+    Class: fa-brands fa-github-alt
 
 # 002: LinkedIn
 linkedin:
@@ -12,7 +12,7 @@ linkedin:
   Prefix: https://linkedin.com/in/
   Title: LinkedIn
   Icon:
-    Class: fa-brands fa-linkedin fa-fw
+    Class: fa-brands fa-linkedin
 
 # 003: Twitter (X)
 twitter:
@@ -20,7 +20,7 @@ twitter:
   Prefix: https://twitter.com/
   Title: X
   Icon:
-    Class: fa-brands fa-x-twitter fa-fw
+    Class: fa-brands fa-x-twitter
 
 # 004: Instagram
 instagram:
@@ -28,7 +28,7 @@ instagram:
   Prefix: https://www.instagram.com/
   Title: Instagram
   Icon:
-    Class: fa-brands fa-instagram fa-fw
+    Class: fa-brands fa-instagram
 
 # 005: facebook
 facebook:
@@ -36,7 +36,7 @@ facebook:
   Prefix: https://facebook.com/
   Title: facebook
   Icon:
-    Class: fa-brands fa-facebook fa-fw
+    Class: fa-brands fa-facebook
 
 # 006: Telegram
 telegram:
@@ -44,7 +44,7 @@ telegram:
   Prefix: https://t.me/
   Title: Telegram
   Icon:
-    Class: fa-brands fa-telegram-plane fa-fw
+    Class: fa-brands fa-telegram-plane
 
 # 007: Medium
 medium:
@@ -52,7 +52,7 @@ medium:
   Prefix: https://medium.com/
   Title: Medium
   Icon:
-    Class: fa-brands fa-medium fa-fw
+    Class: fa-brands fa-medium
 
 # 008: GitLab
 gitlab:
@@ -60,7 +60,7 @@ gitlab:
   Prefix: https://gitlab.com/
   Title: GitLab
   Icon:
-    Class: fa-brands fa-gitlab fa-fw
+    Class: fa-brands fa-gitlab
 
 # 009: YouTube Legacy
 youtubelegacy:
@@ -68,7 +68,7 @@ youtubelegacy:
   Prefix: https://www.youtube.com/user/
   Title: YouTube
   Icon:
-    Class: fa-brands fa-youtube fa-fw
+    Class: fa-brands fa-youtube
 
 # 010: YouTube Custom
 youtubecustom:
@@ -76,7 +76,7 @@ youtubecustom:
   Prefix: https://www.youtube.com/c/
   Title: YouTube
   Icon:
-    Class: fa-brands fa-youtube fa-fw
+    Class: fa-brands fa-youtube
 
 # 011: YouTube Channel
 youtubechannel:
@@ -84,7 +84,7 @@ youtubechannel:
   Prefix: https://www.youtube.com/channel/
   Title: YouTube
   Icon:
-    Class: fa-brands fa-youtube fa-fw
+    Class: fa-brands fa-youtube
 
 # 012: Tumblr
 tumblr:
@@ -92,7 +92,7 @@ tumblr:
   Template: https://%v.tumblr.com/
   Title: Tumblr
   Icon:
-    Class: fa-brands fa-tumblr fa-fw
+    Class: fa-brands fa-tumblr
 
 # 013: Quora
 quora:
@@ -100,7 +100,7 @@ quora:
   Prefix: https://www.quora.com/profile/
   Title: Quora
   Icon:
-    Class: fa-brands fa-quora fa-fw
+    Class: fa-brands fa-quora
 
 # 014: Keybase
 keybase:
@@ -108,7 +108,7 @@ keybase:
   Prefix: https://keybase.io/
   Title: Keybase
   Icon:
-    Class: fa-brands fa-keybase fa-fw
+    Class: fa-brands fa-keybase
 
 # 015: Pinterest
 pinterest:
@@ -116,7 +116,7 @@ pinterest:
   Prefix: https://www.pinterest.com/
   Title: Pinterest
   Icon:
-    Class: fa-brands fa-pinterest fa-fw
+    Class: fa-brands fa-pinterest
 
 # 016: Reddit
 reddit:
@@ -124,7 +124,7 @@ reddit:
   Prefix: https://www.reddit.com/user/
   Title: Reddit
   Icon:
-    Class: fa-brands fa-reddit fa-fw
+    Class: fa-brands fa-reddit
 
 # 017: CodePen
 codepen:
@@ -132,7 +132,7 @@ codepen:
   Prefix: https://codepen.io/
   Title: CodePen
   Icon:
-    Class: fa-brands fa-codepen fa-fw
+    Class: fa-brands fa-codepen
 
 # 018: freeCodeCamp
 freecodecamp:
@@ -140,7 +140,7 @@ freecodecamp:
   Prefix: https://freecodecamp.org/
   Title: freeCodeCamp
   Icon:
-    Class: fa-brands fa-free-code-camp fa-fw
+    Class: fa-brands fa-free-code-camp
 
 # 019: Bitbucket
 bitbucket:
@@ -148,7 +148,7 @@ bitbucket:
   Prefix: https://bitbucket.org/
   Title: Bitbucket
   Icon:
-    Class: fa-brands fa-bitbucket fa-fw
+    Class: fa-brands fa-bitbucket
 
 # 020: Stack Overflow
 stackoverflow:
@@ -156,7 +156,7 @@ stackoverflow:
   Prefix: https://stackoverflow.com/users/
   Title: Stack Overflow
   Icon:
-    Class: fa-brands fa-stack-overflow fa-fw
+    Class: fa-brands fa-stack-overflow
 
 # 021: 微博
 weibo:
@@ -164,7 +164,7 @@ weibo:
   Prefix: https://weibo.com/
   Title: 微博
   Icon:
-    Class: fa-brands fa-weibo fa-fw
+    Class: fa-brands fa-weibo
 
 # 022: OK.RU
 odnoklassniki:
@@ -172,7 +172,7 @@ odnoklassniki:
   Prefix: https://ok.ru/
   Title: OK.RU
   Icon:
-    Class: fa-brands fa-odnoklassniki fa-fw
+    Class: fa-brands fa-odnoklassniki
 
 # 023: VK
 vk:
@@ -180,7 +180,7 @@ vk:
   Prefix: https://vk.com/
   Title: VK
   Icon:
-    Class: fa-brands fa-vk fa-fw
+    Class: fa-brands fa-vk
 
 # 024: Flickr
 flickr:
@@ -188,7 +188,7 @@ flickr:
   Prefix: https://www.flickr.com/photos/
   Title: Flickr
   Icon:
-    Class: fa-brands fa-flickr fa-fw
+    Class: fa-brands fa-flickr
 
 # 025: Xing
 xing:
@@ -196,7 +196,7 @@ xing:
   Prefix: https://www.xing.com/profile/
   Title: Xing
   Icon:
-    Class: fa-brands fa-xing fa-fw
+    Class: fa-brands fa-xing
 
 # 026: Snapchat
 snapchat:
@@ -204,7 +204,7 @@ snapchat:
   Prefix: https://www.snapchat.com/add/
   Title: Snapchat
   Icon:
-    Class: fa-brands fa-snapchat fa-fw
+    Class: fa-brands fa-snapchat
 
 # 027: SoundCloud
 soundcloud:
@@ -212,7 +212,7 @@ soundcloud:
   Prefix: https://soundcloud.com/
   Title: SoundCloud
   Icon:
-    Class: fa-brands fa-soundcloud fa-fw
+    Class: fa-brands fa-soundcloud
 
 # 028: Spotify
 spotify:
@@ -220,7 +220,7 @@ spotify:
   Prefix: https://open.spotify.com/user/
   Title: Spotify
   Icon:
-    Class: fa-brands fa-spotify fa-fw
+    Class: fa-brands fa-spotify
 
 # 029: Bandcamp
 bandcamp:
@@ -228,7 +228,7 @@ bandcamp:
   Template: https://%v.bandcamp.com/
   Title: Bandcamp
   Icon:
-    Class: fa-brands fa-bandcamp fa-fw
+    Class: fa-brands fa-bandcamp
 
 # 030: PayPal
 paypal:
@@ -236,7 +236,7 @@ paypal:
   Prefix: https://paypal.me/
   Title: PayPal
   Icon:
-    Class: fa-brands fa-paypal fa-fw
+    Class: fa-brands fa-paypal
 
 # 031: 500px
 fivehundredpx:
@@ -244,7 +244,7 @@ fivehundredpx:
   Prefix: https://500px.com/
   Title: 500px
   Icon:
-    Class: fa-brands fa-500px fa-fw
+    Class: fa-brands fa-500px
 
 # 032: Mix
 mix:
@@ -252,7 +252,7 @@ mix:
   Prefix: https://mix.com/
   Title: Mix
   Icon:
-    Class: fa-brands fa-mix fa-fw
+    Class: fa-brands fa-mix
 
 # 033: Goodreads
 goodreads:
@@ -260,7 +260,7 @@ goodreads:
   Prefix: https://www.goodreads.com/user/show/
   Title: Goodreads
   Icon:
-    Class: fa-brands fa-goodreads fa-fw
+    Class: fa-brands fa-goodreads
 
 # 034: Last.fm
 lastfm:
@@ -268,7 +268,7 @@ lastfm:
   Prefix: https://www.last.fm/user/
   Title: Last.fm
   Icon:
-    Class: fa-brands fa-lastfm fa-fw
+    Class: fa-brands fa-lastfm
 
 # 035: Foursquare
 foursquare:
@@ -276,7 +276,7 @@ foursquare:
   Prefix: https://foursquare.com/
   Title: Foursquare
   Icon:
-    Class: fa-brands fa-foursquare fa-fw
+    Class: fa-brands fa-foursquare
 
 # 036: Hacker News
 hackernews:
@@ -284,7 +284,7 @@ hackernews:
   Template: https://news.ycombinator.com/user?id=%v
   Title: Hacker News
   Icon:
-    Class: fa-brands fa-hacker-news fa-fw
+    Class: fa-brands fa-hacker-news
 
 # 037: Kickstarter
 kickstarter:
@@ -292,7 +292,7 @@ kickstarter:
   Prefix: https://kickstarter.com/profile/
   Title: Kickstarter
   Icon:
-    Class: fa-brands fa-kickstarter fa-fw
+    Class: fa-brands fa-kickstarter
 
 # 038: Patreon
 patreon:
@@ -300,7 +300,7 @@ patreon:
   Prefix: https://patreon.com/
   Title: Patreon
   Icon:
-    Class: fa-brands fa-patreon fa-fw
+    Class: fa-brands fa-patreon
 
 # 039: Steam
 steam:
@@ -308,7 +308,7 @@ steam:
   Prefix: https://steamcommunity.com/id/
   Title: Steam
   Icon:
-    Class: fa-brands fa-steam fa-fw
+    Class: fa-brands fa-steam
 
 # 040: Twitch
 twitch:
@@ -316,7 +316,7 @@ twitch:
   Prefix: https://www.twitch.tv/
   Title: Twitch
   Icon:
-    Class: fa-brands fa-twitch fa-fw
+    Class: fa-brands fa-twitch
 
 # 041: Strava
 strava:
@@ -324,7 +324,7 @@ strava:
   Prefix: https://www.strava.com/athletes/
   Title: Strava
   Icon:
-    Class: fa-brands fa-strava fa-fw
+    Class: fa-brands fa-strava
 
 # 042: Skype
 skype:
@@ -332,7 +332,7 @@ skype:
   Template: 'skype:'
   Title: Skype
   Icon:
-    Class: fa-brands fa-skype fa-fw
+    Class: fa-brands fa-skype
 
 # 043: WhatsApp
 whatsapp:
@@ -340,7 +340,7 @@ whatsapp:
   Prefix: https://wa.me/
   Title: WhatsApp
   Icon:
-    Class: fa-brands fa-whatsapp fa-fw
+    Class: fa-brands fa-whatsapp
 
 # 044: 知乎
 zhihu:
@@ -348,7 +348,7 @@ zhihu:
   Prefix: https://www.zhihu.com/people/
   Title: 知乎
   Icon:
-    Class: fa-brands fa-zhihu fa-fw
+    Class: fa-brands fa-zhihu
 
 # 045: 豆瓣
 douban:
@@ -364,7 +364,7 @@ angellist:
   Prefix: https://angel.co/
   Title: Angellist
   Icon:
-    Class: fa-brands fa-angellist fa-fw
+    Class: fa-brands fa-angellist
 
 # 047: SlideShare
 slideshare:
@@ -372,7 +372,7 @@ slideshare:
   Prefix: https://slideshare.com/
   Title: SlideShare
   Icon:
-    Class: fa-brands fa-slideshare fa-fw
+    Class: fa-brands fa-slideshare
 
 # 048: JSFiddle
 jsfiddle:
@@ -380,7 +380,7 @@ jsfiddle:
   Prefix: https://jsfiddle.com/
   Title: JSFiddle
   Icon:
-    Class: fa-brands fa-jsfiddle fa-fw
+    Class: fa-brands fa-jsfiddle
 
 # 049: DeviantArt
 deviantart:
@@ -388,7 +388,7 @@ deviantart:
   Template: https://%v.deviantart.com/
   Title: DeviantArt
   Icon:
-    Class: fa-brands fa-deviantart fa-fw
+    Class: fa-brands fa-deviantart
 
 # 050: Behance
 behance:
@@ -396,7 +396,7 @@ behance:
   Prefix: https://behance.net/
   Title: Behance
   Icon:
-    Class: fa-brands fa-behance fa-fw
+    Class: fa-brands fa-behance
 
 # 051: Dribbble
 dribbble:
@@ -404,7 +404,7 @@ dribbble:
   Prefix: https://dribbble.com/
   Title: Dribbble
   Icon:
-    Class: fa-brands fa-dribbble fa-fw
+    Class: fa-brands fa-dribbble
 
 # 052: WordPress
 wordpress:
@@ -412,7 +412,7 @@ wordpress:
   Template: https://%v.wordpress.com/
   Title: WordPress
   Icon:
-    Class: fa-brands fa-wordpress fa-fw
+    Class: fa-brands fa-wordpress
 
 # 053: Vine
 vine:
@@ -420,7 +420,7 @@ vine:
   Prefix: https://vine.co/
   Title: Vine
   Icon:
-    Class: fa-brands fa-vine fa-fw
+    Class: fa-brands fa-vine
 
 # 054: Google Scholar
 googlescholar:
@@ -436,7 +436,7 @@ researchgate:
   Prefix: https://www.researchgate.net/profile/
   Title: ResearchGate
   Icon:
-    Class: fa-brands fa-researchgate fa-fw
+    Class: fa-brands fa-researchgate
 
 # 056: Mastodon
 mastodon:
@@ -444,7 +444,7 @@ mastodon:
   Prefix: https://mastodon.social/
   Title: Mastodon
   Icon:
-    Class: fa-brands fa-mastodon fa-fw
+    Class: fa-brands fa-mastodon
 
 # 057: Thingiverse
 thingiverse:
@@ -460,7 +460,7 @@ devto:
   Prefix: https://dev.to/
   Title: Dev.To
   Icon:
-    Class: fa-brands fa-dev fa-fw
+    Class: fa-brands fa-dev
 
 # 059: Gitea
 gitea:
@@ -499,7 +499,7 @@ orcid:
   Prefix: https://orcid.org/
   Title: ORCID
   Icon:
-    Class: fa-brands fa-orcid fa-fw
+    Class: fa-brands fa-orcid
 
 # 064 Liberapay
 liberapay:
@@ -570,7 +570,7 @@ discord:
   Prefix: https://discordapp.com/users/
   Title: Discord
   Icon:
-    Class: fa-brands fa-discord fa-fw
+    Class: fa-brands fa-discord
 
 # 073: Discord Server Invite Link
 discordinvite:
@@ -578,7 +578,7 @@ discordinvite:
   Prefix: https://discord.gg/
   Title: Discord
   Icon:
-    Class: fa-brands fa-discord fa-fw
+    Class: fa-brands fa-discord
 
 # 074: Lichess user profile
 lichess:
@@ -601,14 +601,14 @@ kaggle:
   Prefix: https://kaggle.com/
   Title: Kaggle
   Icon:
-    Class: fa-brands fa-kaggle fa-fw
+    Class: fa-brands fa-kaggle
 
 # 077: MediaWiki
 mediawiki:
   Weight: 77
   Title: MediaWiki
   Icon:
-    Class: fa-brands fa-wikipedia-w fa-fw
+    Class: fa-brands fa-wikipedia-w
 
 # 078: Plume
 plume:
@@ -687,7 +687,7 @@ phone:
   Template: tel:%v
   Title: Phone
   Icon:
-    Class: fa-solid fa-phone fa-fw
+    Class: fa-solid fa-phone
 
 # Email
 email:
@@ -695,7 +695,7 @@ email:
   Template: mailto:%v
   Title: Email
   Icon:
-    Class: fa-regular fa-envelope fa-fw
+    Class: fa-regular fa-envelope
 
 # RSS
 rss:
@@ -704,4 +704,4 @@ rss:
   Title: RSS
   Newtab: true
   Icon:
-    Class: fa-solid fa-rss fa-fw
+    Class: fa-solid fa-rss

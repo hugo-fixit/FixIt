@@ -13,9 +13,9 @@
   {{- with $related -}}
     <div class="details related-details open">
       <div class="details-summary related-summary">
-        {{ dict "Class" "fa-solid fa-fire fa-fade text-danger fa-fw" | partial "plugin/icon.html" }}
+        {{ dict "Class" "fa-solid fa-fire fa-fade text-danger" | partial "plugin/icon.html" }}
         <span class="related-title">{{ T "single.relatedContent" }}</span>
-        {{- dict "Class" "details-icon fa-solid fa-angle-right fa-fw" | partial "plugin/icon.html" -}}
+        {{- dict "Class" "details-icon fa-solid fa-angle-right" | partial "plugin/icon.html" -}}
       </div>
       <div class="details-content related-content">
         <ul class="related-list">

@@ -21,7 +21,7 @@
     {{- end -}}
     <h1 class="single-title animate__animated animate__pulse animate__faster">
       {{- with $termIcon -}}
-        {{- dict "Class" (add . " fa-fw me-1") | partial "plugin/icon.html" -}}
+        {{- dict "Class" (add . " me-1") | partial "plugin/icon.html" -}}
       {{- end -}}
       {{- $termTitle }} <sup>{{ $pageCount }}</sup>
     </h1>
@@ -37,7 +37,7 @@
       {{- partial "recently-updated.html" . -}}
       {{- range $pages.PageGroups -}}
         <h2 class="group-title">
-          {{- dict "Class" "fa-regular fa-calendar fa-fw me-1" | partial "plugin/icon.html" -}}
+          {{- dict "Class" "fa-regular fa-calendar me-1" | partial "plugin/icon.html" -}}
           {{- .Key -}}
         </h2>
         {{- range .Pages -}}
@@ -45,7 +45,7 @@
             <a href="{{ .RelPermalink }}" class="archive-item-link">
               {{- $repost := .Params.repost | default dict -}}
               {{- if eq $repost.enable true -}}
-                {{- dict "Class" "fa-solid fa-share fa-fw text-success me-1" | partial "plugin/icon.html" -}}
+                {{- dict "Class" "fa-solid fa-share text-success me-1" | partial "plugin/icon.html" -}}
               {{- end -}}
               {{- cond (.Param "capitalizeTitles") (title .LinkTitle) .LinkTitle -}}
             </a>

@@ -15,7 +15,7 @@
   <div class="page archive">
     {{- /* Title */ -}}
     <h1 class="single-title animate__animated animate__pulse animate__faster">
-      {{- dict "Class" (add $icon " fa-fw me-1") | partial "plugin/icon.html" -}}
+      {{- dict "Class" (add $icon " me-1") | partial "plugin/icon.html" -}}
       {{- .Params.Title | default (T $taxonomies) | default $taxonomies | dict "Some" | T "allSome" }} <sup>{{ len .Data.Terms.ByCount }}</sup>
     </h1>
     {{- /* Render different taxonomies */ -}}
