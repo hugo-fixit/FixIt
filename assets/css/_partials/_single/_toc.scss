@@ -279,7 +279,8 @@
   }
 
   &::backdrop {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(2px);
     transition:
       display 0.5s allow-discrete,
       overlay 0.5s allow-discrete,
