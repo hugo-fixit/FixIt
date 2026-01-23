@@ -1,8 +1,8 @@
-@import '../_partials/_single/toc';
-@import '../_partials/_single/fixit-decryptor';
-@import '../_partials/_single/collections';
-@import '../_partials/_single/related';
-@import '../_partials/_single/color-preview';
+@import 'toc';
+@import 'fixit-decryptor';
+@import 'collections';
+@import 'related';
+@import 'color-preview';
 
 .single {
   .single-title {
@@ -511,14 +511,13 @@
     }
   }
 
-  // TODO Reorganization import
-  @import '../_shortcodes';
-  @import '../_partials/_single/alert';
-  @import '../_partials/_single/code';
-  @import '../_partials/_single/diagram-copy-btn';
-  @import '../_partials/_single/reward';
-  @import '../_partials/_single/footer';
-  @import '../_partials/_single/comment';
+  @import '_shortcodes';
+  @import 'alert';
+  @import 'code';
+  @import 'diagram-copy-btn';
+  @import 'reward';
+  @import 'footer';
+  @import 'comment';
 }
 
 .lg-toolbar .lg-icon::after {

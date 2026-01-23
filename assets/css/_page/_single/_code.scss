@@ -461,7 +461,7 @@ pre {
   }
 }
 
-@import '../_code-syntax/index';
+@import './_code-syntax';
 
 // gist shortcode
 .gist {
@@ -506,6 +506,6 @@ pre {
   }
 
   [data-theme='dark'] & {
-    @import '../_code-syntax/github-dark-dimmed';
+    @import './_code-syntax/github-dark-dimmed';
   }
 }

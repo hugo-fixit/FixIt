@@ -90,9 +90,4 @@ details {
 
 @include link(true, true);
 
-@import '../_partials/scrollbar';
-@import '../_partials/mask';
-@import '../_partials/img';
-@import '../_partials/icon';
-@import '../_partials/details';
-@import '../_partials/widgets';
+@import '../_widgets';

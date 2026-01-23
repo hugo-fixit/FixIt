@@ -21,9 +21,9 @@
     box-shadow: -0.75rem 0 0 var(#{$rootPrefix}code-highlight-color), 0.75rem 0 0 var(#{$rootPrefix}code-highlight-color);
   }
 
-  @import '../_code-syntax/light';
+  @import 'light';
 
   [data-theme='dark'] & {
-    @import '../_code-syntax/dark';
+    @import 'dark';
   }
 }

@@ -22,6 +22,6 @@
     margin-bottom: 1rem;
   }
 
-  @import '../_partials/_archive/terms';
-  @import '../_partials/_archive/tags';
+  @import 'terms';
+  @import 'tags';
 }
