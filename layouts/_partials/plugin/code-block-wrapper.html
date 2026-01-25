@@ -80,6 +80,10 @@
       $lineNosDigit
     )
   -}}
+  {{- if $config.tab -}}
+    {{- $tabTitle := $config.name | default .Type | default "Code" -}}
+    {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-tab-group="%s" data-tab-title="%s"` $class $config.tab $tabTitle) -}}
+  {{- end -}}
   {{- $wrapper =
     replace $wrapper
     (printf `class="%s"` $class)

@@ -509,3 +509,150 @@ pre {
     @import './_code-syntax/github-dark-dimmed';
   }
 }
+
+// Code Tabs
+.code-tabs {
+  margin-bottom: 1.25rem;
+  background-color: var(#{$rootPrefix}code-block-background-color);
+  @include border-radius($global-border-radius);
+  overflow: hidden;
+  border: 1px solid var(#{$rootPrefix}border-color);
+
+  .tabs-header {
+    display: flex;
+    overflow-x: auto;
+    background-color: var(#{$rootPrefix}code-header-background-color);
+    border-bottom: 1px solid var(#{$rootPrefix}border-color);
+    
+    .tab-item {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      color: var(#{$rootPrefix}global-font-secondary-color);
+      font-size: 0.9em;
+      font-weight: bold;
+      white-space: nowrap;
+      @include transition(all 0.2s);
+      border-bottom: 2px solid transparent;
+      user-select: none;
+
+      &:hover {
+        color: var(#{$rootPrefix}global-font-color);
+        background-color: rgba(128, 128, 128, 0.05);
+      }
+
+      &.active {
+        color: var(#{$rootPrefix}global-font-color);
+        border-bottom-color: var(#{$rootPrefix}primary-color);
+        background-color: var(#{$rootPrefix}code-block-background-color);
+      }
+    }
+  }
+
+  .tabs-content {
+    .code-block {
+      margin: 0;
+      border: none;
+      @include border-radius(0);
+      
+      .code-header {
+        background-color: transparent;
+        .code-title {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+// Code Tabs
+.code-tabs {
+  margin-bottom: 1.25rem;
+  background-color: var(#{$rootPrefix}code-block-background-color);
+  @include border-radius($global-border-radius);
+  // overflow: hidden; // remove overflow hidden to allow scrollbar if needed, but mainly to avoid clipping actions if any
+  // But wait, code-block has border radius, so we need to clip children?
+  // Actually, .code-block uses radius on itself. 
+  // Here .code-tabs is the container.
+  
+  // Tabs Header mimics .code-header
+  .tabs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    font-family: $global-font-family;
+    font-weight: bold;
+    line-height: 1.4em;
+    color: var(#{$rootPrefix}code-header-color);
+    background-color: var(#{$rootPrefix}code-header-background-color);
+    @include z-index(0, 1);
+    @include border-radius($global-border-radius $global-border-radius 0 0);
+    border-bottom: 1px solid var(#{$rootPrefix}border-color);
+
+    .tabs-items {
+      display: flex;
+      overflow-x: auto;
+      
+      .tab-item {
+        padding: 0.4rem 0.8rem;
+        cursor: pointer;
+        color: var(#{$rootPrefix}global-font-secondary-color);
+        white-space: nowrap;
+        border-bottom: 2px solid transparent;
+        @include transition(all 0.2s);
+        user-select: none;
+        
+        &:hover {
+          color: var(#{$rootPrefix}global-font-color);
+        }
+        
+        &.active {
+          color: var(#{$rootPrefix}global-font-color);
+          border-bottom-color: var(#{$rootPrefix}primary-color);
+        }
+      }
+    }
+
+    .tabs-actions {
+      display: flex;
+      flex-shrink: 0;
+      padding-right: 0.2rem;
+      
+      // Mimic .code-header children
+      .ellipses-btn {
+        display: none;
+      }
+
+      .line-nos-btn, .line-wrap-btn, .edit-btn, .copy-btn {
+        padding: 0.4rem;
+        cursor: pointer;
+        color: inherit;
+        
+        &:hover {
+          color: var(#{$rootPrefix}global-link-hover-color);
+        }
+      }
+      
+      // Hide some buttons if needed, or style them
+    }
+  }
+
+  .tabs-content {
+    .code-block {
+      margin: 0;
+      
+      .code-header {
+        display: none; // Hide original header completely as we moved actions
+      }
+      
+      .code-wrapper {
+        @include border-radius(0 0 $global-border-radius $global-border-radius);
+        
+        > pre.chroma {
+          @include border-radius(0 0 $global-border-radius $global-border-radius);
+        }
+      }
+    }
+  }
+}
