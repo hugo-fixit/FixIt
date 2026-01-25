@@ -595,6 +595,104 @@ class FixIt {
   }
 
   /**
+   * init code tabs
+   */
+  initCodeTabs() {
+    const $codeBlocks = document.querySelectorAll('.code-block[data-tab-group]');
+    const processed = new Set();
+    
+    Util.forEach($codeBlocks, ($block) => {
+      if (processed.has($block)) return;
+      
+      const groupName = $block.dataset.tabGroup;
+      const $tabs = [];
+      let $curr = $block;
+      
+      // collect consecutive blocks with same group
+      while ($curr && $curr.classList?.contains('code-block') && $curr.dataset.tabGroup === groupName) {
+        $tabs.push($curr);
+        processed.add($curr);
+        $curr = $curr.nextElementSibling;
+      }
+      
+      if ($tabs.length < 2) return;
+      
+      // create DOM structure
+      const $container = document.createElement('div');
+      $container.className = 'code-tabs';
+      
+      const $header = document.createElement('div');
+      $header.className = 'tabs-header';
+      
+      const $items = document.createElement('div');
+      $items.className = 'tabs-items';
+
+      const $actions = document.createElement('div');
+      $actions.className = 'tabs-actions';
+
+      $header.appendChild($items);
+      $header.appendChild($actions);
+      
+      const $content = document.createElement('div');
+      $content.className = 'tabs-content';
+
+      // insert container before the first block
+      const $firstBlock = $tabs[0];
+      $firstBlock.parentNode.insertBefore($container, $firstBlock);
+      
+      $tabs.forEach(($tab, index) => {
+        const title = $tab.dataset.tabTitle || 'Code';
+        
+        // tab button
+        const $btn = document.createElement('span');
+        $btn.className = 'tab-item';
+        if (index === 0) $btn.classList.add('active');
+        $btn.textContent = title;
+        $btn.dataset.index = index;
+        $btn.title = title;
+
+        $btn.addEventListener('click', () => {
+          // 1. restore buttons to the currently active tab
+          const $activeTab = $tabs.find(t => t.classList.contains('active'));
+          if ($activeTab) {
+            const $activeHeader = $activeTab.querySelector('.code-header');
+            if ($activeHeader) {
+              Array.from($actions.children).forEach(btn => $activeHeader.appendChild(btn));
+            }
+          }
+
+          // 2. switch active tab UI
+          $items.querySelectorAll('.tab-item').forEach(b => b.classList.remove('active'));
+          $btn.classList.add('active');
+          
+          // 3. switch content
+          $tabs.forEach(b => b.classList.remove('active'));
+          $tab.classList.add('active');
+
+          // 4. move new buttons to actions
+          const $codeHeader = $tab.querySelector('.code-header');
+          if ($codeHeader) {
+            $codeHeader.querySelectorAll('.action-btn').forEach(btn => $actions.appendChild(btn));
+          }
+        });
+        $items.appendChild($btn);
+        
+        // move block to content
+        $tab.classList.toggle('active', index === 0);
+        // remove is-collapsed class
+        $tab.classList.remove('is-collapsed');
+        $content.appendChild($tab);
+      });
+      
+      $container.appendChild($header);
+      $container.appendChild($content);
+
+      // initialize actions for first tab
+      $items.firstElementChild.click();
+    });
+  }
+
+  /**
    * init diagram copy button
    */
   initDiagramCopyBtn() {
@@ -1261,6 +1359,7 @@ class FixIt {
     this.initDetails(target);
     this.initLightGallery();
     this.initCodeWrapper();
+    this.initCodeTabs();
     this.initDiagramCopyBtn();
     this.initEcharts();
     this.initTypeit(target);
