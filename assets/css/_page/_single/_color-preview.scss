@@ -5,13 +5,13 @@
 
   .color-preview {
     display: inline-block;
-    width: var(#{$rootPrefix}color-code-size);
-    height: var(#{$rootPrefix}color-code-size);
+    width: fixit-var(color-code-size);
+    height: fixit-var(color-code-size);
     border-radius: 50%;
     margin-right: 0.25em;
     vertical-align: middle;
     border: 1px solid;
-    border-color: var(#{$rootPrefix}color-preview-border-color, #d1d9e0b3);
+    border-color: fixit-var(color-preview-border-color, #d1d9e0b3);
     pointer-events: none;
     transform: translateY(-1px);
 

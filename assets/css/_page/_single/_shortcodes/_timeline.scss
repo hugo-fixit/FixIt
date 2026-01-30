@@ -36,14 +36,14 @@ ul.#{$prefix}timeline {
 
     @each $color, $value in $theme-colors {
       &[data-type='#{$color}'] {
-        --timeline-circle-color: var(#{$rootPrefix}#{$color});
+        --timeline-circle-color: fixit-var(#{$color});
       }
     }
 
     .#{$prefix}timeline-item__timestamp {
       font-size: 0.8125rem;
       line-height: 1;
-      color: var(#{$rootPrefix}secondary);
+      color: fixit-var(secondary);
 
       &.is-top {
         margin-bottom: 0.25rem;
@@ -83,7 +83,7 @@ ul.#{$prefix}timeline {
       border-width: var(--timeline-width);
       border-style: solid;
       border-color: var(--timeline-circle-color);
-      background-color: var(#{$rootPrefix}global-background-color);
+      background-color: fixit-var(global-background-color);
       color: transparent;
       z-index: 1;
     }

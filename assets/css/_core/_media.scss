@@ -140,7 +140,7 @@
     }
     // adjust the scroll margin top of the content anchors on the page
     body:not([data-header-desktop='auto']) &+.fi-container .content [id] {
-      scroll-margin-top: calc(var(#{$rootPrefix}scroll-mt) + var(#{$rootPrefix}breadcrumb-height));
+      scroll-margin-top: calc(#{fixit-var(scroll-mt)} + #{fixit-var(breadcrumb-height)});
     }
   }
 
@@ -155,7 +155,7 @@
   }
   [data-header-desktop='sticky'] {
     .page .content .highlight.code-block .code-header {
-      top: calc(#{$header-height} + var(#{$rootPrefix}breadcrumb-height));
+      top: calc(#{$header-height} + #{fixit-var(breadcrumb-height)});
     }
   }
 }
@@ -179,7 +179,7 @@
     }
     // adjust the scroll margin top of the content anchors on the page
     body:not([data-header-mobile='auto']) &+.fi-container .content [id] {
-      scroll-margin-top: calc(var(#{$rootPrefix}scroll-mt) + var(#{$rootPrefix}breadcrumb-height));
+      scroll-margin-top: calc(#{fixit-var(scroll-mt)} + #{fixit-var(breadcrumb-height)});
     }
   }
 
@@ -194,7 +194,7 @@
   }
   [data-header-mobile='sticky'] {
     .page .content .highlight.code-block .code-header {
-      top: calc(#{$header-height} + var(#{$rootPrefix}breadcrumb-height));
+      top: calc(#{$header-height} + #{fixit-var(breadcrumb-height)});
     }
   }
   

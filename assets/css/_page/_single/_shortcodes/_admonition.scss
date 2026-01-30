@@ -4,12 +4,12 @@
   padding: 0 0.75rem;
   border-left: .25rem solid;
   overflow: hidden;
-  background-color: var(#{$rootPrefix}admonition-bg-color);
-  border-left-color: var(#{$rootPrefix}admonition-color);
+  background-color: fixit-var(admonition-bg-color);
+  border-left-color: fixit-var(admonition-color);
   @include border-radius($global-border-radius);
 
   .admonition-title {
-    font-weight: var(#{$rootPrefix}admonition-title-font-weight, bold);
+    font-weight: fixit-var(admonition-title-font-weight, bold);
     margin: 0 -0.75rem;
     padding: 0.25rem 1.8rem;
     border-bottom: 1px solid;
@@ -39,17 +39,17 @@
   }
 
   > .admonition-title {
-    border-bottom-color: var(#{$rootPrefix}admonition-bg-color);
-    background-color: var(#{$rootPrefix}admonition-bg-color-collapsed);
+    border-bottom-color: fixit-var(admonition-bg-color);
+    background-color: fixit-var(admonition-bg-color-collapsed);
     @include transition(all 0.2s ease);
 
     i.icon {
-      color: var(#{$rootPrefix}admonition-color);
+      color: fixit-var(admonition-color);
     }
   }
 
   &.open > .admonition-title {
-    background-color: var(#{$rootPrefix}admonition-bg-color);
+    background-color: fixit-var(admonition-bg-color);
   }
 
   .admonition-content {
@@ -102,7 +102,7 @@
 
   // content-only admonition without title
   &:not(:has(.admonition-title)) {
-    border: 1px solid var(#{$rootPrefix}admonition-bg-color);
+    border: 1px solid fixit-var(admonition-bg-color);
 
     .admonition-content {
       padding: 0.75rem 0.25rem;

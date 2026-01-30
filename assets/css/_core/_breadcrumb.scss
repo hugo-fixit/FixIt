@@ -1,7 +1,7 @@
 .breadcrumb-container {
   padding-inline: 1rem;
   font-size: 0.75rem;
-  background-color: var(#{$rootPrefix}global-background-color);
+  background-color: fixit-var(global-background-color);
   display: flex;
   gap: 0.5rem;
   @include z-index(1);
@@ -43,11 +43,11 @@
         content: attr(data-separator);
         display: inline-block;
         padding-inline: 0.5rem;
-        color: var(#{$rootPrefix}global-font-secondary-color);
+        color: fixit-var(global-font-secondary-color);
       }
 
       &.active {
-        color: var(#{$rootPrefix}secondary);
+        color: fixit-var(secondary);
       }
     }
   }

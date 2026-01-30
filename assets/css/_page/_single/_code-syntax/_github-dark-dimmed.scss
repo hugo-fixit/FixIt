@@ -43,37 +43,37 @@
   #{$rootPrefix}color-prettylights-syntax-sublimelinter-gutter-mark: #545d68;
 
   .blob-num {
-    color: var(#{$rootPrefix}color-blob-num);
+    color: fixit-var(color-blob-num);
   }
   .blob-code-inner {
-    color: var(#{$rootPrefix}color-blob-code-inner);
+    color: fixit-var(color-blob-code-inner);
   }
 
   .pl-c /* comment, punctuation.definition.comment, string.comment */ {
-    color: var(#{$rootPrefix}color-prettylights-syntax-comment);
+    color: fixit-var(color-prettylights-syntax-comment);
   }
 
   .pl-c1 /* constant, entity.name.constant, variable.other.constant, variable.language, support, meta.property-name, support.constant, support.variable, meta.module-reference, markup.raw, meta.diff.header, meta.output */,
   .pl-s .pl-v /* string variable */ {
-    color: var(#{$rootPrefix}color-prettylights-syntax-constant);
+    color: fixit-var(color-prettylights-syntax-constant);
   }
 
   .pl-e /* entity */,
   .pl-en /* entity.name */ {
-    color: var(#{$rootPrefix}color-prettylights-syntax-entity);
+    color: fixit-var(color-prettylights-syntax-entity);
   }
 
   .pl-smi /* variable.parameter.function, storage.modifier.package, storage.modifier.import, storage.type.java, variable.other */,
   .pl-s .pl-s1 /* string source */ {
-    color: var(#{$rootPrefix}color-prettylights-syntax-storage-modifier-import);
+    color: fixit-var(color-prettylights-syntax-storage-modifier-import);
   }
 
   .pl-ent /* entity.name.tag, markup.quote */ {
-    color: var(#{$rootPrefix}color-prettylights-syntax-entity-tag);
+    color: fixit-var(color-prettylights-syntax-entity-tag);
   }
 
   .pl-k /* keyword, storage, storage.type */ {
-    color: var(#{$rootPrefix}color-prettylights-syntax-keyword);
+    color: fixit-var(color-prettylights-syntax-keyword);
   }
 
   .pl-s /* string */,
@@ -83,26 +83,26 @@
   .pl-sr .pl-cce /* string.regexp constant.character.escape */,
   .pl-sr .pl-sre /* string.regexp source.ruby.embedded */,
   .pl-sr .pl-sra /* string.regexp string.regexp.arbitrary-repitition */ {
-    color: var(#{$rootPrefix}color-prettylights-syntax-string);
+    color: fixit-var(color-prettylights-syntax-string);
   }
 
   .pl-v /* variable */,
   .pl-smw /* sublimelinter.mark.warning */ {
-    color: var(#{$rootPrefix}color-prettylights-syntax-variable);
+    color: fixit-var(color-prettylights-syntax-variable);
   }
 
   .pl-bu /* invalid.broken, invalid.deprecated, invalid.unimplemented, message.error, brackethighlighter.unmatched, sublimelinter.mark.error */ {
-    color: var(#{$rootPrefix}color-prettylights-syntax-brackethighlighter-unmatched);
+    color: fixit-var(color-prettylights-syntax-brackethighlighter-unmatched);
   }
 
   .pl-ii /* invalid.illegal */ {
-    color: var(#{$rootPrefix}color-prettylights-syntax-invalid-illegal-text);
-    background-color: var(#{$rootPrefix}color-prettylights-syntax-invalid-illegal-bg);
+    color: fixit-var(color-prettylights-syntax-invalid-illegal-text);
+    background-color: fixit-var(color-prettylights-syntax-invalid-illegal-bg);
   }
 
   .pl-c2 /* carriage-return */ {
-    color: var(#{$rootPrefix}color-prettylights-syntax-carriage-return-text);
-    background-color: var(#{$rootPrefix}color-prettylights-syntax-carriage-return-bg);
+    color: fixit-var(color-prettylights-syntax-carriage-return-text);
+    background-color: fixit-var(color-prettylights-syntax-carriage-return-bg);
   }
 
   .pl-c2::before /* carriage-return */ {
@@ -111,65 +111,65 @@
 
   .pl-sr .pl-cce /* string.regexp constant.character.escape */ {
     font-weight: bold;
-    color: var(#{$rootPrefix}color-prettylights-syntax-string-regexp);
+    color: fixit-var(color-prettylights-syntax-string-regexp);
   }
 
   .pl-ml /* markup.list */ {
-    color: var(#{$rootPrefix}color-prettylights-syntax-markup-list);
+    color: fixit-var(color-prettylights-syntax-markup-list);
   }
 
   .pl-mh /* markup.heading */,
   .pl-mh .pl-en /* markup.heading entity.name */,
   .pl-ms /* meta.separator */ {
     font-weight: bold;
-    color: var(#{$rootPrefix}color-prettylights-syntax-markup-heading);
+    color: fixit-var(color-prettylights-syntax-markup-heading);
   }
 
   .pl-mi /* markup.italic */ {
     font-style: italic;
-    color: var(#{$rootPrefix}color-prettylights-syntax-markup-italic);
+    color: fixit-var(color-prettylights-syntax-markup-italic);
   }
 
   .pl-mb /* markup.bold */ {
     font-weight: bold;
-    color: var(#{$rootPrefix}color-prettylights-syntax-markup-bold);
+    color: fixit-var(color-prettylights-syntax-markup-bold);
   }
 
   .pl-md /* markup.deleted, meta.diff.header.from-file, punctuation.definition.deleted */ {
-    color: var(#{$rootPrefix}color-prettylights-syntax-markup-deleted-text);
-    background-color: var(#{$rootPrefix}color-prettylights-syntax-markup-deleted-bg);
+    color: fixit-var(color-prettylights-syntax-markup-deleted-text);
+    background-color: fixit-var(color-prettylights-syntax-markup-deleted-bg);
   }
 
   .pl-mi1 /* markup.inserted, meta.diff.header.to-file, punctuation.definition.inserted */ {
-    color: var(#{$rootPrefix}color-prettylights-syntax-markup-inserted-text);
-    background-color: var(#{$rootPrefix}color-prettylights-syntax-markup-inserted-bg);
+    color: fixit-var(color-prettylights-syntax-markup-inserted-text);
+    background-color: fixit-var(color-prettylights-syntax-markup-inserted-bg);
   }
 
   .pl-mc /* markup.changed, punctuation.definition.changed */ {
-    color: var(#{$rootPrefix}color-prettylights-syntax-markup-changed-text);
-    background-color: var(#{$rootPrefix}color-prettylights-syntax-markup-changed-bg);
+    color: fixit-var(color-prettylights-syntax-markup-changed-text);
+    background-color: fixit-var(color-prettylights-syntax-markup-changed-bg);
   }
 
   .pl-mi2 /* markup.ignored, markup.untracked */ {
-    color: var(#{$rootPrefix}color-prettylights-syntax-markup-ignored-text);
-    background-color: var(#{$rootPrefix}color-prettylights-syntax-markup-ignored-bg);
+    color: fixit-var(color-prettylights-syntax-markup-ignored-text);
+    background-color: fixit-var(color-prettylights-syntax-markup-ignored-bg);
   }
 
   .pl-mdr /* meta.diff.range */ {
     font-weight: bold;
-    color: var(#{$rootPrefix}color-prettylights-syntax-meta-diff-range);
+    color: fixit-var(color-prettylights-syntax-meta-diff-range);
   }
 
   .pl-ba /* brackethighlighter.tag, brackethighlighter.curly, brackethighlighter.round, brackethighlighter.square, brackethighlighter.angle, brackethighlighter.quote */ {
-    color: var(#{$rootPrefix}color-prettylights-syntax-brackethighlighter-angle);
+    color: fixit-var(color-prettylights-syntax-brackethighlighter-angle);
   }
 
   .pl-sg /* sublimelinter.gutter-mark */ {
-    color: var(#{$rootPrefix}color-prettylights-syntax-sublimelinter-gutter-mark);
+    color: fixit-var(color-prettylights-syntax-sublimelinter-gutter-mark);
   }
 
   .pl-corl /* constant.other.reference.link, string.other.link */ {
     text-decoration: underline;
-    color: var(#{$rootPrefix}color-prettylights-syntax-constant-other-reference-link);
+    color: fixit-var(color-prettylights-syntax-constant-other-reference-link);
   }
 }

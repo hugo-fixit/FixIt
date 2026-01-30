@@ -56,10 +56,10 @@
   }
 
   ruby {
-    background-color: var(#{$rootPrefix}code-block-background-color);
+    background-color: fixit-var(code-block-background-color);
 
     rt {
-      color: var(#{$rootPrefix}global-font-secondary-color);
+      color: fixit-var(global-font-secondary-color);
     }
   }
 }
@@ -109,7 +109,7 @@
 #toc-auto {
   display: block;
   position: sticky;
-  top: calc(#{$header-height} + var(#{$rootPrefix}breadcrumb-height));
+  top: calc(#{$header-height} + #{fixit-var(breadcrumb-height)});
   box-sizing: border-box;
   visibility: hidden;
   @include overflow-wrap(break-word);
@@ -196,11 +196,11 @@
     justify-content: space-between;
     line-height: 2em;
     padding: 0 0.75em;
-    background-color: var(#{$rootPrefix}code-header-background-color);
+    background-color: fixit-var(code-header-background-color);
   }
 
   .toc-content {
-    background-color: var(#{$rootPrefix}code-block-background-color);
+    background-color: fixit-var(code-block-background-color);
 
     > nav {
       > ul {
@@ -255,8 +255,8 @@
   max-height: 100%;
   margin-right: 0;
   border: none;
-  border-left: 1px solid var(#{$rootPrefix}global-border-color);
-  background-color: var(#{$rootPrefix}global-background-color);
+  border-left: 1px solid fixit-var(global-border-color);
+  background-color: fixit-var(global-background-color);
 
   .toc {
     max-width: 100%;

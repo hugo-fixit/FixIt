@@ -11,7 +11,7 @@ pre {
   overflow: auto;
   font-size: $code-block-font-size;
   font-family: $code-font-family;
-  background-color: var(#{$rootPrefix}code-block-background-color);
+  background-color: fixit-var(code-block-background-color);
   @include border-radius($global-border-radius);
   @include tab-size(4);
 
@@ -71,7 +71,7 @@ pre {
   // lineNumbersInTable=true
   > div.chroma {
     position: relative;
-    background-color: var(#{$rootPrefix}code-block-background-color);
+    background-color: fixit-var(code-block-background-color);
     @include border-radius($global-border-radius);
 
     &:is(pre):has(.ln) {
@@ -81,7 +81,7 @@ pre {
     .lntable {
       overflow: auto;
       display: block;
-      background-color: var(#{$rootPrefix}code-block-background-color);
+      background-color: fixit-var(code-block-background-color);
       @include border-radius($global-border-radius);
 
       td {
@@ -120,7 +120,7 @@ pre {
   // Line numbers
   .lnt,
   .ln {
-    color: var(#{$rootPrefix}global-font-secondary-color);
+    color: fixit-var(global-font-secondary-color);
     @include user-select(none);
   }
 
@@ -136,7 +136,7 @@ pre {
       overflow: hidden;
       height: auto;
       position: relative;
-      counter-reset: codeNos calc(var(#{$rootPrefix}line-start) - 1);
+      counter-reset: codeNos calc(fixit-var(line-start) - 1);
       @include border-radius($global-border-radius);
       @include transition(height 0.5s ease-out);
       @include border-radius($global-border-radius);
@@ -150,7 +150,7 @@ pre {
     // code preview
     &:has(.code-expand-btn):not(.is-expanded, .is-collapsed) {
       .code-wrapper {
-        height: calc(1.45em * var(#{$rootPrefix}max-shown-lines) + var(#{$rootPrefix}code-expand-offset, 0.5rem));
+        height: calc(1.45em * #{fixit-var(max-shown-lines)} + #{fixit-var(code-expand-offset, 0.5rem)});
       }
       &[data-mode='mac'] .code-wrapper {
         #{$rootPrefix}code-expand-offset: 1.875rem + 0.5rem;
@@ -166,10 +166,10 @@ pre {
       font-family: $global-font-family;
       font-weight: bold;
       line-height: 1.4em;
-      color: var(#{$rootPrefix}code-header-color);
-      background-color: var(#{$rootPrefix}code-header-background-color);
+      color: fixit-var(code-header-color);
+      background-color: fixit-var(code-header-background-color);
       position: sticky;
-      top: var(#{$rootPrefix}breadcrumb-height);
+      top: fixit-var(breadcrumb-height);
       @include z-index(0, 1);
       @include border-radius($global-border-radius $global-border-radius 0 0);
       @include transition(border-radius 0s);
@@ -192,7 +192,7 @@ pre {
 
         &::after {
           padding-left: 0.2rem;
-          content: attr(data-name, var(#{$rootPrefix}code-type, 'Code'));
+          content: attr(data-name, fixit-var(code-type, 'Code'));
         }
 
         // filename for code block
@@ -209,7 +209,7 @@ pre {
           position: absolute;
           left: 50%;
           transform: translateX(-50%);
-          background-color: var(#{$rootPrefix}code-header-background-color);
+          background-color: fixit-var(code-header-background-color);
           padding-inline: 1em;
           max-width: calc(100% - 200px);
           white-space: nowrap;
@@ -232,7 +232,7 @@ pre {
       .copy-btn[data-copied] .fa-clone {
         --fa: "\f00c";
         font-weight: 900;
-        color: var(#{$rootPrefix}global-link-hover-color);
+        color: fixit-var(global-link-hover-color);
       }
 
       @each $type, $text in $code-type-map {
@@ -246,7 +246,7 @@ pre {
     &:not(.line-nos-hidden) .line-nos-btn,
     .code-header [role='button']:hover,
     &:has([contenteditable='true']) .edit-btn {
-      color: var(#{$rootPrefix}global-link-hover-color);
+      color: fixit-var(global-link-hover-color);
     }
 
     .code-expand-btn {
@@ -392,11 +392,11 @@ pre {
           content: counter(codeNos);
           white-space: nowrap;
           text-align: right;
-          min-width: calc(var(#{$rootPrefix}line-digit) * 1ch);
+          min-width: calc(fixit-var(line-digit) * 1ch);
           padding-inline: 0.75rem;
           flex-shrink: 0;
-          color: var(#{$rootPrefix}global-font-secondary-color);
-          background-color: var(#{$rootPrefix}code-block-background-color);
+          color: fixit-var(global-font-secondary-color);
+          background-color: fixit-var(code-block-background-color);
         }
 
         // highlight for line numbers
@@ -434,8 +434,8 @@ pre {
         padding-top: 1.875rem;
 
         &::after {
-          background: var(#{$rootPrefix}mac-red, #fc625d);
-          box-shadow: 20px 0 var(#{$rootPrefix}mac-yellow, #fdbc40), 40px 0 var(#{$rootPrefix}mac-green, #35cd4b);
+          background: fixit-var(mac-red, #fc625d);
+          box-shadow: 20px 0 fixit-var(mac-yellow, #fdbc40), 40px 0 fixit-var(mac-green, #35cd4b);
           left: 8px;
           top: 8px;
           position: absolute;
@@ -465,7 +465,7 @@ pre {
 
 // gist shortcode
 .gist {
-  background-color: var(#{$rootPrefix}code-block-background-color);
+  background-color: fixit-var(code-block-background-color);
   @include border-radius($global-border-radius $global-border-radius 0 0);
   
   .gist-file,
@@ -487,7 +487,7 @@ pre {
         td.blob-num {
           position: sticky;
           left: 0;
-          background-color: var(#{$rootPrefix}code-block-background-color);
+          background-color: fixit-var(code-block-background-color);
           @include z-index(0, 1);
         }
 
@@ -502,7 +502,7 @@ pre {
     padding: 0.4rem 0.8rem;
     @include link(false, false);
     @include border-radius(0 0 $global-border-radius $global-border-radius);
-    background-color: var(#{$rootPrefix}gist-meta-background-color);
+    background-color: fixit-var(gist-meta-background-color);
   }
 
   [data-theme='dark'] & {

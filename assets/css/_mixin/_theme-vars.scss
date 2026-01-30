@@ -1,0 +1,64 @@
+// Theme variable setting mixin
+// For setting theme color variables, supporting light and dark themes
+
+/// Get CSS variable with prefix
+/// @param {String} $name - CSS variable name (without prefix)
+/// @param {*} $fallback - Optional fallback value
+/// @return {String} - Complete CSS variable reference
+/// @example
+///   color: fixit-var(global-font-color);
+///   background: fixit-var(custom-bg, #fff);
+@function fixit-var($name, $fallback: null) {
+  @if $fallback {
+    @return var(#{$rootPrefix}#{$name}, #{$fallback});
+  } @else {
+    @return var(#{$rootPrefix}#{$name});
+  }
+}
+
+/// Batch set CSS variables
+/// @param {Map} $vars - Variable map, key is CSS variable name (without prefix), value is variable value
+@mixin set-fixit-vars($vars) {
+  @each $name, $value in $vars {
+    #{$rootPrefix}#{$name}: #{$value};
+  }
+}
+
+/// Batch set theme color variables using global $theme-colors
+@mixin set-theme-colors() {
+  // Light theme (in :root)
+  @at-root :root {
+    @each $name, $value in $theme-colors {
+      #{$rootPrefix}#{$name}: #{$value};
+    }
+  }
+  
+  // Dark theme
+  @at-root [data-theme=dark] {
+    @each $name, $value in $theme-colors {
+      #{$rootPrefix}#{$name}: #{darken($value, 5%)};
+    }
+  }
+}
+
+/// Define dual-theme variables (generate definitions for both light and dark simultaneously)
+/// @param {Map} $vars - Variable map, key is CSS variable name, value is Map(light: $light-val, dark: $dark-val)
+/// @example
+///   @include define-theme-vars((
+///     global-background-color: (light: $global-background-color, dark: $global-background-color-dark)
+///   ));
+@mixin define-theme-vars($vars) {
+  // Light theme (in :root)
+  @at-root :root {
+    @each $name, $values in $vars {
+      #{$rootPrefix}#{$name}: #{map-get($values, light)};
+    }
+  }
+  
+  // Dark theme
+  @at-root [data-theme=dark] {
+    @each $name, $values in $vars {
+      #{$rootPrefix}#{$name}: #{map-get($values, dark)};
+    }
+  }
+}

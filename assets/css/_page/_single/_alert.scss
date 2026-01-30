@@ -2,7 +2,7 @@
   padding: 0.5rem 1rem;
   margin-block: 1rem;
   color: inherit;
-  border-left: 0.25em solid var(#{$rootPrefix}alert-border-color);
+  border-left: 0.25em solid fixit-var(alert-border-color);
 
   > :first-child {
     margin-top: 0;
@@ -17,7 +17,7 @@
     align-items: center;
     line-height: 1;
     margin-bottom: 1rem;
-    color: var(#{$rootPrefix}alert-color);
+    color: fixit-var(alert-color);
 
     > svg.icon {
       width: initial;

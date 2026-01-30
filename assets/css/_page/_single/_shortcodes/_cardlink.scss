@@ -23,7 +23,7 @@
     bottom: 0.75rem;
     left: 0;
     right: 0;
-    background-image: var(#{$rootPrefix}logo-img);
+    background-image: fixit-var(logo-img);
     background-repeat: no-repeat;
     filter: blur(0.5rem);
     opacity: 0.5;
@@ -53,7 +53,7 @@
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.25;
-    color: var(#{$rootPrefix}global-font-color);
+    color: fixit-var(global-font-color);
   }
 
   &meta {
@@ -61,7 +61,7 @@
     align-items: center;
     margin-top: 0.25rem;
     font-size: 0.825rem;
-    color: var(#{$rootPrefix}global-font-secondary-color);
+    color: fixit-var(global-font-secondary-color);
   }
 
   &icon-link {

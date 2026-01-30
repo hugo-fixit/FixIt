@@ -27,7 +27,7 @@
 
   &:hover,
   &:active {
-    color: var(#{$rootPrefix}global-font-color);
+    color: fixit-var(global-font-color);
     cursor: pointer;
   }
 
@@ -46,7 +46,7 @@
   // Ring background color
   #{$rootPrefix}b2t-bg: #{$global-border-color};
   // Progress color
-  #{$rootPrefix}b2t-prog: var(#{$rootPrefix}success);
+  #{$rootPrefix}b2t-prog: fixit-var(success);
   // dasharray = circumference = 2πr
   // dashoffset = circumference * (1 - scrollPercent / 100)
   #{$rootPrefix}b2t-dasharray: 314.15;
@@ -69,18 +69,18 @@
 
   .bg {
     fill: none;
-    stroke: var(#{$rootPrefix}b2t-bg);
-    stroke-width: var(#{$rootPrefix}b2t-stroke);
+    stroke: fixit-var(b2t-bg);
+    stroke-width: fixit-var(b2t-stroke);
   }
 
   // Progress ring
   .progress {
     fill: none;
-    stroke: var(#{$rootPrefix}b2t-prog);
-    stroke-width: var(#{$rootPrefix}b2t-stroke);
+    stroke: fixit-var(b2t-prog);
+    stroke-width: fixit-var(b2t-stroke);
     stroke-linecap: round;
-    stroke-dasharray: var(#{$rootPrefix}b2t-dasharray);
-    stroke-dashoffset: calc(var(#{$rootPrefix}b2t-dasharray) * (1 - var(#{$rootPrefix}b2t-progress, 0) / 100));
+    stroke-dasharray: fixit-var(b2t-dasharray);
+    stroke-dashoffset: calc(fixit-var(b2t-dasharray) * (1 - fixit-var(b2t-progress, 0) / 100));
     transition: stroke-dashoffset .1s linear;
   }
 }

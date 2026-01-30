@@ -17,14 +17,14 @@
       width: max-content;
       transform: rotate(30deg);
       margin-right: 0.25em;
-      color: var(#{$rootPrefix}danger);
+      color: fixit-var(danger);
     }
 
     .icon-repost {
       display: inline-block;
       width: max-content;
       margin-right: 0.25em;
-      color: var(#{$rootPrefix}success);
+      color: fixit-var(success);
     }
   }
 
@@ -37,7 +37,7 @@
 
   .post-meta {
     font-size: 0.875rem;
-    color: var(#{$rootPrefix}global-font-secondary-color);
+    color: fixit-var(global-font-secondary-color);
 
     .comment-visitors,
     .comment-count {
@@ -89,14 +89,14 @@
     text-align: center;
     font-size: 15px;
     padding: 5px;
-    color: var(#{$rootPrefix}global-font-secondary-color);
+    color: fixit-var(global-font-secondary-color);
   }
 
   hr {
     position: relative;
     height: 1em;
     margin-block: 1em;
-    background: linear-gradient(to right, var(#{$rootPrefix}hr-background-color) 50%, transparent 50%);
+    background: linear-gradient(to right, fixit-var(hr-background-color) 50%, transparent 50%);
     background-size: 10px 2px;
     background-position: center;
     background-repeat: repeat-x;
@@ -112,7 +112,7 @@
         top: 50%;
         transform: translateY(-50%);
         z-index: 1;
-        color: var(#{$rootPrefix}hr-active-color);
+        color: fixit-var(hr-active-color);
         font-size: 20px;
         line-height: 1;
         transition: left 1s ease-in-out, color 0.3s ease, border-color 0.3s ease;
@@ -232,31 +232,31 @@
 
     // Task lists
     li[data-task] {
-      color: var(#{$rootPrefix}task-color);
+      color: fixit-var(task-color);
       .checkbox-icon {
         margin-right: 0.25em;
-        color: var(#{$rootPrefix}checkbox-color);
+        color: fixit-var(checkbox-color);
       }
     }
     li[data-task='x'],
     li[data-task='-'] {
-      #{$rootPrefix}task-color: var(#{$rootPrefix}secondary);
+      #{$rootPrefix}task-color: fixit-var(secondary);
       text-decoration: line-through rgba(145, 145, 145, 0.6);
     }
     li[data-task='x'] {
-      #{$rootPrefix}checkbox-color: var(#{$rootPrefix}primary);
+      #{$rootPrefix}checkbox-color: fixit-var(primary);
     }
     li[data-task='-'] {
       opacity: 0.6;
     }
     li[data-task='/'] {
-      #{$rootPrefix}task-color: var(#{$rootPrefix}success);
+      #{$rootPrefix}task-color: fixit-var(success);
     }
     li[data-task='!'] {
-      #{$rootPrefix}checkbox-color: var(#{$rootPrefix}danger);
+      #{$rootPrefix}checkbox-color: fixit-var(danger);
     }
     li[data-task='?'] {
-      #{$rootPrefix}checkbox-color: var(#{$rootPrefix}warning);
+      #{$rootPrefix}checkbox-color: fixit-var(warning);
     }
 
     dl {
@@ -269,23 +269,23 @@
     }
 
     ruby {
-      background-color: var(#{$rootPrefix}code-block-background-color);
+      background-color: fixit-var(code-block-background-color);
 
       rt {
-        color: var(#{$rootPrefix}global-font-secondary-color);
+        color: fixit-var(global-font-secondary-color);
       }
     }
 
     mark {
       padding: 0.14em 0.28em;
-      background-color: var(#{$rootPrefix}mark-background-color, mark);
-      color: var(#{$rootPrefix}mark-color, marktext);
+      background-color: fixit-var(mark-background-color, mark);
+      color: fixit-var(mark-color, marktext);
       @include border-radius($global-border-radius);
 
       @each $color, $value in $theme-colors {
         &.mark-#{$color} {
           #{$rootPrefix}mark-color: #fff;
-          #{$rootPrefix}mark-background-color: var(#{$rootPrefix}#{$color});
+          #{$rootPrefix}mark-background-color: fixit-var(#{$color});
         }
       }
     }
@@ -432,7 +432,7 @@
       }
       
       hr {
-        background-color: var(#{$rootPrefix}hr-background-color);
+        background-color: fixit-var(hr-background-color);
         height: 1px;
         margin-block: 1em;
       }
@@ -460,7 +460,7 @@
     kbd {
       display: inline-block;
       padding: 0 0.25rem;
-      background-color: var(#{$rootPrefix}global-background-color);
+      background-color: fixit-var(global-background-color);
       border: 1px solid $global-border-color;
       font-size: 0.8rem;
       font-family: $code-font-family;

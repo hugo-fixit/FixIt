@@ -49,7 +49,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       padding: 1rem;
-      background-color: var(#{$rootPrefix}global-background-color);
+      background-color: fixit-var(global-background-color);
       @include z-index(2);
       @include border-radius($global-border-radius);
       @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, 0.2));
@@ -69,7 +69,7 @@
     border: 2px solid lighten($reward-color, 10%);
     border-radius: $global-border-radius;
     padding: 0.6rem 1rem;
-    background-color: var(#{$rootPrefix}global-background-color);
+    background-color: fixit-var(global-background-color);
     vertical-align: text-top;
     line-height: 1rem;
     @include transition(all 0.3s ease-out);

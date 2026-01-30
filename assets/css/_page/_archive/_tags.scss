@@ -14,13 +14,13 @@
       @include transform(scale(1.2));
 
       sup {
-        color: var(#{$rootPrefix}global-font-color);
+        color: fixit-var(global-font-color);
         @include transition(all ease-out 0.3s);
       }
     }
 
     sup {
-      color: var(#{$rootPrefix}global-font-secondary-color);
+      color: fixit-var(global-font-secondary-color);
     }
   }
 }
@@ -37,7 +37,7 @@
     &:active,
     &:focus,
     &:hover {
-      color: var(#{$rootPrefix}global-link-hover-color) !important;
+      color: fixit-var(global-link-hover-color) !important;
 
       sup {
         opacity: 1;

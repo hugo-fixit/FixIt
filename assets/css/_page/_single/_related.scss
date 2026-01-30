@@ -5,7 +5,7 @@
     display: block;
     border: 0;
     padding-top: 1px;
-    background: var(#{$rootPrefix}divider-edge-weak);
+    background: fixit-var(divider-edge-weak);
     margin-block: 1rem 0.5rem;
   }
 
@@ -30,7 +30,7 @@
 
     .related-count {
       flex-shrink: 0;
-      color: var(#{$rootPrefix}secondary);
+      color: fixit-var(secondary);
     }
 
     .details-icon {

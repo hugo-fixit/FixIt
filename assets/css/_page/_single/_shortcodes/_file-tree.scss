@@ -1,5 +1,5 @@
 .file-tree-wrapper {
-  border: 1px solid var(#{$rootPrefix}global-border-color);
+  border: 1px solid fixit-var(global-border-color);
   padding: 0.5rem;
   font-size: 0.8rem;
   line-height: 1;
@@ -57,7 +57,7 @@
         }
 
         &.is-highlighted {
-          color: var(#{$rootPrefix}global-link-hover-color);
+          color: fixit-var(global-link-hover-color);
         }
       }
     }
@@ -75,7 +75,7 @@
           translate: 0 -50%;
           width: 0.75rem;
           height: 1px;
-          background-color: var(#{$rootPrefix}secondary);
+          background-color: fixit-var(secondary);
         }
       }
     }
@@ -92,8 +92,8 @@
       bottom: 0.625rem;
       left: calc(1rem - 0.5px);
       width: 1px;
-      background-color: var(#{$rootPrefix}secondary);
-      height: var(#{$rootPrefix}file-tree-line-height);
+      background-color: fixit-var(secondary);
+      height: fixit-var(file-tree-line-height);
     }
   }
 

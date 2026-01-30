@@ -26,8 +26,8 @@ html {
 }
 
 body {
-  background-color: var(#{$rootPrefix}global-background-color);
-  color: var(#{$rootPrefix}global-font-color);
+  background-color: fixit-var(global-background-color);
+  color: fixit-var(global-font-color);
   @include overflow-wrap(break-word);
 }
 
@@ -77,7 +77,7 @@ details {
   line-height: $code-font-size;
   font-family: $code-font-family;
   color: $code-color;
-  background-color: var(#{$rootPrefix}code-inline-background-color);
+  background-color: fixit-var(code-inline-background-color);
   text-decoration: inherit;
   @include border-radius($global-border-radius);
   @include overflow-wrap(break-word);

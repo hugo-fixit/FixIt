@@ -1,15 +1,15 @@
 /* Modern browsers with `scrollbar-*` support (high priority) */
 @supports (scrollbar-width: auto) {
   * {
-    scrollbar-color: var(#{$rootPrefix}scrollbar-thumb-color) var(#{$rootPrefix}scrollbar-track-color);;
-    scrollbar-width: var(#{$rootPrefix}scrollbar-width);
+    scrollbar-color: fixit-var(scrollbar-thumb-color) fixit-var(scrollbar-track-color);;
+    scrollbar-width: fixit-var(scrollbar-width);
   }
 }
 
 /* Legacy browsers with `::-webkit-scrollbar-*` support */
 ::-webkit-scrollbar {
-  height: var(#{$rootPrefix}scrollbar-width-legacy);
-  width: var(#{$rootPrefix}scrollbar-width-legacy);
+  height: fixit-var(scrollbar-width-legacy);
+  width: fixit-var(scrollbar-width-legacy);
   overflow: visible;
 }
 ::-webkit-scrollbar-button {
@@ -17,16 +17,16 @@
   width: 0;
 }
 ::-webkit-scrollbar-corner {
-  background-color: var(#{$rootPrefix}scrollbar-track-color);
+  background-color: fixit-var(scrollbar-track-color);
 }
 ::-webkit-scrollbar-thumb {
-  background-color: var(#{$rootPrefix}scrollbar-thumb-color);
+  background-color: fixit-var(scrollbar-thumb-color);
   &:hover {
-    background-color: var(#{$rootPrefix}scrollbar-thumb-hover-color);
+    background-color: fixit-var(scrollbar-thumb-hover-color);
   }
 }
 ::-webkit-scrollbar-track {
-  background-color: var(#{$rootPrefix}scrollbar-track-color);
+  background-color: fixit-var(scrollbar-track-color);
 }
 ::-webkit-scrollbar-thumb,
 ::-webkit-scrollbar-track {
