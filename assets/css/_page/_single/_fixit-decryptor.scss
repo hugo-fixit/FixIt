@@ -84,7 +84,7 @@ fixit-encryptor {
 // fixit-encryptor for for the encrypted pages
 article fixit-encryptor {
   .fixit-decryptor-container {
-    #{$rootPrefix}decryptor-margin-block: 2rem;
+    @include set-fixit-var(decryptor-margin-block, 2rem);
   }
   &.decrypted > .fixit-decryptor-container {
     .fixit-decryptor-loading,
@@ -102,7 +102,7 @@ article fixit-encryptor {
 // fixit-encryptor shortcodes
 #content fixit-encryptor {
   .fixit-decryptor-container {
-    #{$rootPrefix}decryptor-margin-block: 1rem;
+    @include set-fixit-var(decryptor-margin-block, 1rem);
   }
   &.decrypted > .fixit-decryptor-container {
     display: none;

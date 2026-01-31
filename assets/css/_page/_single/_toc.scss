@@ -117,7 +117,7 @@
   @extend .print-d-none;
 
   [data-header-desktop='normal'] & {
-    #{$rootPrefix}scroll-mt: #{$global-scroll-margin-top};
+    @include set-fixit-var(scroll-mt, $global-scroll-margin-top);
   }
 
   .toc-title {
@@ -232,10 +232,10 @@
 
   &:not(.open) {
     .toc-title {
-      #{$rootPrefix}code-header-background-color: #{darken($code-background-color, 6%)};
+      @include set-fixit-var(code-header-background-color, darken($code-background-color, 6%));
 
       [data-theme='dark'] & {
-        #{$rootPrefix}code-header-background-color: #{darken($code-background-color-dark, 6%)};
+        @include set-fixit-var(code-header-background-color, darken($code-background-color-dark, 6%));
       }
     }
   }

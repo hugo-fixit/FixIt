@@ -111,13 +111,13 @@ tab-container {
   // ========================================
   &[type='underline'] {
     > .tab-button {
-      #{$rootPrefix}tab-button-border-color: transparent;
+      @include set-fixit-var(tab-button-border-color, transparent);
       @include tab-button-size(0);
 
       &[aria-selected='true'],
       &[aria-selected='false']:hover {
         color: fixit-var(primary);
-        #{$rootPrefix}tab-button-border-color: fixit-var(primary);
+        @include set-fixit-var(tab-button-border-color, fixit-var(primary));
       }
 
       &[aria-selected='false']:hover {

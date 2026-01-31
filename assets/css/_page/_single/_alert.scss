@@ -28,16 +28,20 @@
 
   @each $type, $item in $alert-color-map {
     &.alert-#{$type} {
-      #{$rootPrefix}alert-border-color: #{map-get($item, border-color)};
-      #{$rootPrefix}alert-color: #{map-get($item, color)};
+      @include set-fixit-vars((
+        alert-border-color: map-get($item, border-color),
+        alert-color: map-get($item, color)
+      ));
     }
   }
 
   [data-theme='dark'] & {
     @each $type, $item in $alert-color-map-dark {
       &.alert-#{$type} {
-        #{$rootPrefix}alert-border-color: #{map-get($item, border-color)};
-        #{$rootPrefix}alert-color: #{map-get($item, color)};
+        @include set-fixit-vars((
+          alert-border-color: map-get($item, border-color),
+          alert-color: map-get($item, color)
+        ));
       }
     }
   }

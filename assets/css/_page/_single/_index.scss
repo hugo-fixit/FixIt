@@ -240,23 +240,23 @@
     }
     li[data-task='x'],
     li[data-task='-'] {
-      #{$rootPrefix}task-color: fixit-var(secondary);
       text-decoration: line-through rgba(145, 145, 145, 0.6);
+      @include set-fixit-var(task-color, fixit-var(secondary));
     }
     li[data-task='x'] {
-      #{$rootPrefix}checkbox-color: fixit-var(primary);
+      @include set-fixit-var(checkbox-color, fixit-var(primary));
     }
     li[data-task='-'] {
       opacity: 0.6;
     }
     li[data-task='/'] {
-      #{$rootPrefix}task-color: fixit-var(success);
+      @include set-fixit-var(task-color, fixit-var(success));
     }
     li[data-task='!'] {
-      #{$rootPrefix}checkbox-color: fixit-var(danger);
+      @include set-fixit-var(checkbox-color, fixit-var(danger));
     }
     li[data-task='?'] {
-      #{$rootPrefix}checkbox-color: fixit-var(warning);
+      @include set-fixit-var(checkbox-color, fixit-var(warning));
     }
 
     dl {
@@ -284,8 +284,10 @@
 
       @each $color, $value in $theme-colors {
         &.mark-#{$color} {
-          #{$rootPrefix}mark-color: #fff;
-          #{$rootPrefix}mark-background-color: fixit-var(#{$color});
+          @include set-fixit-vars((
+            mark-color: #fff,
+            mark-background-color: fixit-var(#{$color}),
+          ));
         }
       }
     }
@@ -293,10 +295,10 @@
     .table-wrapper {
       position: relative;
       overflow-x: auto;
-      #{$rootPrefix}scrollbar-thumb-color: #{$table-background-color};
+      @include set-fixit-var(scrollbar-thumb-color, $table-background-color);
 
       [data-theme='dark'] & {
-        #{$rootPrefix}scrollbar-thumb-color: #{$table-background-color-dark};
+        @include set-fixit-var(scrollbar-thumb-color, $table-background-color-dark);
       }
 
       > table {

@@ -1,5 +1,6 @@
-// Theme variable setting mixin
-// For setting theme color variables, supporting light and dark themes
+// ========================================
+// Theme Variable Mixins and Functions
+// ========================================
 
 /// Get CSS variable with prefix
 /// @param {String} $name - CSS variable name (without prefix)
@@ -16,8 +17,22 @@
   }
 }
 
+/// Set a single CSS variable
+/// @param {String} $name - CSS variable name (without prefix)
+/// @param {*} $value - Variable value
+/// @example
+///   @include set-fixit-var(custom-color, #ff0000);
+@mixin set-fixit-var($name, $value) {
+  #{$rootPrefix}#{$name}: #{$value};
+}
+
 /// Batch set CSS variables
 /// @param {Map} $vars - Variable map, key is CSS variable name (without prefix), value is variable value
+/// @example
+///   @include set-fixit-vars((
+///     custom-color: #ff0000,
+///     custom-bg: #00ff00,
+///   ));
 @mixin set-fixit-vars($vars) {
   @each $name, $value in $vars {
     #{$rootPrefix}#{$name}: #{$value};
@@ -25,6 +40,7 @@
 }
 
 /// Batch set theme color variables using global $theme-colors
+/// Generates light theme (in :root) and dark theme ([data-theme=dark]) variables
 @mixin set-theme-colors() {
   // Light theme (in :root)
   @at-root :root {
@@ -32,7 +48,7 @@
       #{$rootPrefix}#{$name}: #{$value};
     }
   }
-  
+
   // Dark theme
   @at-root [data-theme=dark] {
     @each $name, $value in $theme-colors {
@@ -54,7 +70,7 @@
       #{$rootPrefix}#{$name}: #{map-get($values, light)};
     }
   }
-  
+
   // Dark theme
   @at-root [data-theme=dark] {
     @each $name, $values in $vars {

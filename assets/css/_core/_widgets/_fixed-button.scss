@@ -41,19 +41,23 @@
 .back-to-top {
   overflow: hidden;
   position: relative;
-  // Ring stroke width
-  #{$rootPrefix}b2t-stroke: 0.5rem;
-  // Ring background color
-  #{$rootPrefix}b2t-bg: #{$global-border-color};
-  // Progress color
-  #{$rootPrefix}b2t-prog: fixit-var(success);
-  // dasharray = circumference = 2πr
-  // dashoffset = circumference * (1 - scrollPercent / 100)
-  #{$rootPrefix}b2t-dasharray: 314.15;
+  @include set-fixit-vars((
+    // Ring stroke width
+    b2t-stroke: 0.5rem,
+    // Ring background color
+    b2t-bg: $global-border-color,
+    // Progress color
+    b2t-prog: fixit-var(success),
+    // dasharray = circumference = 2πr
+    // dashoffset = circumference * (1 - scrollPercent / 100)
+    b2t-dasharray: 314.15
+  ));
 
   [data-theme='dark'] & {
-    #{$rootPrefix}b2t-bg: #{$global-border-color-dark};
-    #{$rootPrefix}b2t-prog: #{$global-font-color-dark};
+     @include set-fixit-vars((
+      b2t-bg: $global-border-color-dark,
+      b2t-prog: $global-font-color-dark
+    ));
   }
 
   // SVG circular progress ring

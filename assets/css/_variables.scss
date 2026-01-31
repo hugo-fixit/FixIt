@@ -1,11 +1,12 @@
-// ==============================
-// Variables
-// TODO refactor variables
-// ==============================
+// ==========================================================================
+// SCSS Variables
+// Note: These SCSS variables are now also defined as CSS custom properties
+// in _core/_root.scss for runtime theme switching and runtime customization.
+// ==========================================================================
 
 // ========== Global ========== //
 $prefix: fi- !default;
-$rootPrefix: --fi- !default;
+$rootPrefix: --#{$prefix} !default;
 
 // Font and Line Height
 $global-font-family: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif !default;
@@ -14,7 +15,7 @@ $global-font-weight: 400 !default;
 $global-line-height: 1.5rem !default;
 
 // scroll-margin-top of content anchor
-$global-scroll-margin-top: 0.5rem;
+$global-scroll-margin-top: 0.5rem !default;
 
 // Radius of the border
 $global-border-radius: 5px !default;
@@ -184,8 +185,4 @@ $github-corner-fill: $header-background-color-dark !default;
 $github-corner-fill-dark: $header-background-color !default;
 // ========== GitHub Corners ========== //
 
-@import '_maps/admonition';
-@import '_maps/alert';
-@import '_maps/code-type';
-@import '_maps/colors';
-@import '_maps/utilities';
+@import '_maps';

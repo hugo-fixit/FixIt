@@ -1,7 +1,7 @@
 // Color preview styles for inline code
 .color-code {
   position: relative;
-  #{$rootPrefix}color-code-size: 0.64em;
+  @include set-fixit-var(color-code-size, 0.64em);
 
   .color-preview {
     display: inline-block;
@@ -16,7 +16,7 @@
     transform: translateY(-1px);
 
     [data-theme='dark'] & {
-      #{$rootPrefix}color-preview-border-color: #3d444db3;
+      @include set-fixit-var(color-preview-border-color, #3d444db3);
     }
   }
 }

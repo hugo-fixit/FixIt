@@ -26,19 +26,25 @@
   @extend .print-d-none;
 
   [data-theme='dark'] & {
-    #{$rootPrefix}dcb-color: #d1d7e0;
-    #{$rootPrefix}dcb-border-color: #3d444d;
-    #{$rootPrefix}dcb-background-color: #2a313c;
-    #{$rootPrefix}dcb-box-shadow: 0px 0px 0px 0px #000000;
+    @include set-fixit-vars((
+      dcb-color: #d1d7e0,
+      dcb-border-color: #3d444d,
+      dcb-background-color: #2a313c,
+      dcb-box-shadow: 0px 0px 0px 0px #000000,
+    ));
   }
 
   &:hover {
-    #{$rootPrefix}dcb-border-color: #d1d9e0;
-    #{$rootPrefix}dcb-background-color: #eff2f5;
+    @include set-fixit-vars((
+      dcb-border-color: #d1d9e0,
+      dcb-background-color: #eff2f5,
+    ));
 
     [data-theme='dark'] & {
-      #{$rootPrefix}dcb-border-color: #3d444d;
-      #{$rootPrefix}dcb-background-color: #2f3742;
+      @include set-fixit-vars((
+        dcb-border-color: #3d444d,
+        dcb-background-color: #2f3742,
+      ));
     }
   }
 

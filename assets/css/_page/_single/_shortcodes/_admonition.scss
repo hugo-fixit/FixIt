@@ -27,7 +27,7 @@
 
     // title-only admonition without content
     &:not(:has(+ .details-content)) {
-      #{$rootPrefix}admonition-title-font-weight: normal;
+      @include set-fixit-var(admonition-title-font-weight, normal);
       padding: 0.75rem 1rem 0.75rem 2.2rem;
       border: 0;
 
@@ -81,17 +81,21 @@
   }
 
   // default admonition type is note
-  #{$rootPrefix}admonition-color: #{map-get(map-get($admonition-color-map, note), color)};
-  #{$rootPrefix}admonition-bg-color: #{map-get(map-get($admonition-color-map, note), bg-color)};
-  #{$rootPrefix}admonition-bg-color-collapsed: #{opacify(map-get(map-get($admonition-color-map, note), bg-color), 0.15)};
+  @include set-fixit-vars((
+    admonition-color: map-get(map-get($admonition-color-map, note), color),
+    admonition-bg-color: map-get(map-get($admonition-color-map, note), bg-color),
+    admonition-bg-color-collapsed: opacify(map-get(map-get($admonition-color-map, note), bg-color), 0.15),
+  ));
 
   // set color for each admonition type
   @each $type, $item in $admonition-color-map {
     @if $type != 'note' {
       &.#{$type} {
-        #{$rootPrefix}admonition-color: #{map-get($item, color)};
-        #{$rootPrefix}admonition-bg-color: #{map-get($item, bg-color)};
-        #{$rootPrefix}admonition-bg-color-collapsed: #{opacify(map-get($item, bg-color), 0.15)};
+         @include set-fixit-vars((
+          admonition-color: map-get($item, color),
+          admonition-bg-color: map-get($item, bg-color),
+          admonition-bg-color-collapsed: opacify(map-get($item, bg-color), 0.15),
+        ));
       }
     }
   }

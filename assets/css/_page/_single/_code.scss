@@ -43,7 +43,7 @@ pre {
 .gist {
   font-size: $code-block-font-size;
   font-family: $code-font-family;
-  #{$rootPrefix}scrollbar-thumb-color: inherit;
+  @include set-fixit-var(scrollbar-thumb-color, inherit);
 
   table {
     width: 100%;
@@ -142,9 +142,11 @@ pre {
       @include border-radius($global-border-radius);
       // attr() for arbitrary properties is currently only supported in Chromium-based browsers (see https://caniuse.com/css3-attr);
       // non-supporting browsers fall back to values set via Hugo templating in render-codeblock.html
-      #{$rootPrefix}max-shown-lines: attr(data-max number, 10);
-      #{$rootPrefix}line-start: attr(data-line-start number, 1);
-      #{$rootPrefix}line-digit: attr(data-line-digit number, 1);
+      @include set-fixit-vars((
+        max-shown-lines: attr(data-max number, 10),
+        line-start: attr(data-line-start number, 1),
+        line-digit: attr(data-line-digit number, 1),
+      ));
     }
 
     // code preview
@@ -153,7 +155,7 @@ pre {
         height: calc(1.45em * #{fixit-var(max-shown-lines)} + #{fixit-var(code-expand-offset, 0.5rem)});
       }
       &[data-mode='mac'] .code-wrapper {
-        #{$rootPrefix}code-expand-offset: 1.875rem + 0.5rem;
+        @include set-fixit-var(code-expand-offset, 1.875rem + 0.5rem);
       }
     }
     
@@ -237,7 +239,8 @@ pre {
 
       @each $type, $text in $code-type-map {
         &.language-#{to-lower-case($type)} {
-          #{$rootPrefix}code-type: $text;
+          // e.g., --fi-code-type: "JavaScript";
+          @include set-fixit-var(code-type, '"#{$text}"');
         }
       }
     }
@@ -290,12 +293,12 @@ pre {
     // classic mode code block collapsed
     &.is-collapsed {
       .code-header {
-        #{$rootPrefix}code-header-background-color: #{darken($code-background-color, 6%)};
+        @include set-fixit-var(code-header-background-color, darken($code-background-color, 6%));
         @include border-radius($global-border-radius);
         @include transition(border-radius 0.2s ease 0.2s);
 
         [data-theme='dark'] & {
-          #{$rootPrefix}code-header-background-color: #{darken($code-background-color-dark, 6%)};
+          @include set-fixit-var(code-header-background-color, darken($code-background-color-dark, 6%));
         }
 
         + .code-wrapper {
@@ -445,9 +448,11 @@ pre {
           width: 12px;
 
           [data-theme='dark'] & {
-            #{$rootPrefix}mac-red-dark: #ff5f56;
-            #{$rootPrefix}mac-yellow-dark: #febc2e;
-            #{$rootPrefix}mac-green-dark: #28c840;
+            @include set-fixit-vars((
+              mac-red: #ff5f56,
+              mac-yellow: #febc2e,
+              mac-green: #28c840,
+            ));
           }
         }
       }

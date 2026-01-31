@@ -145,7 +145,7 @@
   }
 
   [data-header-desktop='normal'] .page .content [id] {
-    #{$rootPrefix}scroll-mt: #{$global-scroll-margin-top};
+    @include set-fixit-var(scroll-mt, $global-scroll-margin-top);
   }
   [data-header-desktop='normal'] {
     #toc-auto,
@@ -184,7 +184,7 @@
   }
 
   [data-header-mobile='normal'] .page .content [id] {
-    #{$rootPrefix}scroll-mt: #{$global-scroll-margin-top};
+    @include set-fixit-var(scroll-mt, $global-scroll-margin-top);
   }
   [data-header-mobile='normal'] {
     #toc-auto,
@@ -225,7 +225,7 @@
 
   // 确保打印时没有 scrollbar
   :root {
-    #{$rootPrefix}scrollbar-width: none !important;
+    @include set-fixit-var(scrollbar-width, none !important);
   }
 
   *::-webkit-scrollbar {

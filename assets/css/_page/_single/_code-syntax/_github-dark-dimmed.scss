@@ -7,40 +7,42 @@
  * Updated on 2024-07-14
  */
 & {
-  // Blob colors
-  #{$rootPrefix}color-blob-num: #778491;
-  #{$rootPrefix}color-blob-code-inner: #c5d1de;
-  // Syntax colors
-  #{$rootPrefix}color-prettylights-syntax-comment: #768390;
-  #{$rootPrefix}color-prettylights-syntax-constant: #6cb6ff;
-  #{$rootPrefix}color-prettylights-syntax-constant-other-reference-link: #96d0ff;
-  #{$rootPrefix}color-prettylights-syntax-entity: #dcbdfb;
-  #{$rootPrefix}color-prettylights-syntax-storage-modifier-import: #adbac7;
-  #{$rootPrefix}color-prettylights-syntax-entity-tag: #8ddb8c;
-  #{$rootPrefix}color-prettylights-syntax-keyword: #f47067;
-  #{$rootPrefix}color-prettylights-syntax-string: #96d0ff;
-  #{$rootPrefix}color-prettylights-syntax-variable: #f69d50;
-  #{$rootPrefix}color-prettylights-syntax-brackethighlighter-unmatched: #e5534b;
-  #{$rootPrefix}color-prettylights-syntax-brackethighlighter-angle: #768390;
-  #{$rootPrefix}color-prettylights-syntax-invalid-illegal-text: #cdd9e5;
-  #{$rootPrefix}color-prettylights-syntax-invalid-illegal-bg: #922323;
-  #{$rootPrefix}color-prettylights-syntax-carriage-return-text: #cdd9e5;
-  #{$rootPrefix}color-prettylights-syntax-carriage-return-bg: #ad2e2c;
-  #{$rootPrefix}color-prettylights-syntax-string-regexp: #8ddb8c;
-  #{$rootPrefix}color-prettylights-syntax-markup-list: #eac55f;
-  #{$rootPrefix}color-prettylights-syntax-markup-heading: #316dca;
-  #{$rootPrefix}color-prettylights-syntax-markup-italic: #adbac7;
-  #{$rootPrefix}color-prettylights-syntax-markup-bold: #adbac7;
-  #{$rootPrefix}color-prettylights-syntax-markup-deleted-text: #ffd8d3;
-  #{$rootPrefix}color-prettylights-syntax-markup-deleted-bg: #78191b;
-  #{$rootPrefix}color-prettylights-syntax-markup-inserted-text: #b4f1b4;
-  #{$rootPrefix}color-prettylights-syntax-markup-inserted-bg: #1b4721;
-  #{$rootPrefix}color-prettylights-syntax-markup-changed-text: #ffddb0;
-  #{$rootPrefix}color-prettylights-syntax-markup-changed-bg: #682d0f;
-  #{$rootPrefix}color-prettylights-syntax-markup-ignored-text: #adbac7;
-  #{$rootPrefix}color-prettylights-syntax-markup-ignored-bg: #255ab2;
-  #{$rootPrefix}color-prettylights-syntax-meta-diff-range: #dcbdfb;
-  #{$rootPrefix}color-prettylights-syntax-sublimelinter-gutter-mark: #545d68;
+  @include set-fixit-vars((
+    // Blob colors
+    color-blob-num: #778491,
+    color-blob-code-inner: #c5d1de,
+    // Syntax colors
+    color-prettylights-syntax-comment: #768390,
+    color-prettylights-syntax-constant: #6cb6ff,
+    color-prettylights-syntax-constant-other-reference-link: #96d0ff,
+    color-prettylights-syntax-entity: #dcbdfb,
+    color-prettylights-syntax-storage-modifier-import: #adbac7,
+    color-prettylights-syntax-entity-tag: #8ddb8c,
+    color-prettylights-syntax-keyword: #f47067,
+    color-prettylights-syntax-string: #96d0ff,
+    color-prettylights-syntax-variable: #f69d50,
+    color-prettylights-syntax-brackethighlighter-unmatched: #e5534b,
+    color-prettylights-syntax-brackethighlighter-angle: #768390,
+    color-prettylights-syntax-invalid-illegal-text: #cdd9e5,
+    color-prettylights-syntax-invalid-illegal-bg: #922323,
+    color-prettylights-syntax-carriage-return-text: #cdd9e5,
+    color-prettylights-syntax-carriage-return-bg: #ad2e2c,
+    color-prettylights-syntax-string-regexp: #8ddb8c,
+    color-prettylights-syntax-markup-list: #eac55f,
+    color-prettylights-syntax-markup-heading: #316dca,
+    color-prettylights-syntax-markup-italic: #adbac7,
+    color-prettylights-syntax-markup-bold: #adbac7,
+    color-prettylights-syntax-markup-deleted-text: #ffd8d3,
+    color-prettylights-syntax-markup-deleted-bg: #78191b,
+    color-prettylights-syntax-markup-inserted-text: #b4f1b4,
+    color-prettylights-syntax-markup-inserted-bg: #1b4721,
+    color-prettylights-syntax-markup-changed-text: #ffddb0,
+    color-prettylights-syntax-markup-changed-bg: #682d0f,
+    color-prettylights-syntax-markup-ignored-text: #adbac7,
+    color-prettylights-syntax-markup-ignored-bg: #255ab2,
+    color-prettylights-syntax-meta-diff-range: #dcbdfb,
+    color-prettylights-syntax-sublimelinter-gutter-mark: #545d68,
+  ));
 
   .blob-num {
     color: fixit-var(color-blob-num);
