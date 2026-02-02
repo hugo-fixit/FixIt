@@ -1,14 +1,14 @@
 @import "../../lib/normalize/normalize";
 
 html {
-  font-family: $global-font-family;
-  font-weight: $global-font-weight;
+  font-family: fixit-var(global-font-family);
+  font-weight: fixit-var(global-font-weight);
   font-display: swap;
-  font-size: $global-font-size;
-  line-height: $global-line-height;
+  font-size: fixit-var(global-font-size);
+  line-height: fixit-var(global-line-height);
   width: 100%;
   scroll-behavior: smooth;
-  overflow: overlay;
+  overflow: auto;
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
@@ -18,11 +18,7 @@ html {
 }
 
 ::selection {
-  background-color: $selection-color;
-
-  [data-theme='dark'] & {
-    background-color: $selection-color-dark;
-  }
+  background-color: fixit-var(selection-color);
 }
 
 body {
@@ -73,19 +69,15 @@ details {
 %code {
   padding: 0.2em 0.4em;
   margin: 0;
-  font-size: $code-font-size;
-  line-height: $code-font-size;
-  font-family: $code-font-family;
-  color: $code-color;
+  font-size: fixit-var(code-font-size);
+  line-height: fixit-var(code-font-size);
+  font-family: fixit-var(code-font-family);
+  color: fixit-var(code-color);
   background-color: fixit-var(code-inline-background-color);
   text-decoration: inherit;
   @include border-radius($global-border-radius);
   @include overflow-wrap(break-word);
   @include line-break(auto);
-
-  [data-theme='dark'] & {
-    color: $code-color-dark;
-  }
 }
 
 @include link(true, true);

@@ -20,7 +20,7 @@
 
   &.sticky {
     position: sticky;
-    top: $header-height;
+    top: fixit-var(header-height);
   }
 
   .breadcrumb {
@@ -29,12 +29,8 @@
     padding: 0.5rem 0;
     margin: 0 auto;
     list-style: none;
-    border-bottom: 1px inset $global-border-color;
+    border-bottom: 1px inset fixit-var(global-border-color);
     @extend %page-style;
-
-    [data-theme='dark'] & {
-      border-bottom-color: $global-border-color-dark;
-    }
 
     .breadcrumb-item {
       display: flex;

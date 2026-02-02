@@ -1,13 +1,9 @@
 header {
   width: 100%;
-  background-color: $header-background-color;
+  background-color: fixit-var(header-background-color);
   @include z-index(2);
   @include transition(box-shadow 0.3s ease);
   @extend .print-d-none;
-
-  [data-theme='dark'] & {
-    background-color: $header-background-color-dark;
-  }
 
   &:hover {
     @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, 0.1));
@@ -27,8 +23,8 @@ header {
 }
 
 .header-title {
-  font-size: $header-title-font-size;
-  font-family: $header-title-font-family;
+  font-size: fixit-var(header-title-font-size);
+  font-family: fixit-var(header-title-font-family);
   font-weight: bold;
   margin-right: 0.5rem;
   min-width: 10%;
@@ -42,7 +38,7 @@ header {
     height: 1.5em;
     width: auto;
     vertical-align: top;
-    transform: translateY(calc(#{$header-height} / 2 - 50%));
+    transform: translateY(calc(#{fixit-var(header-height)} / 2 - 50%));
   }
 
   .header-title-text {
@@ -64,11 +60,7 @@ header {
     list-style: none;
     margin: 0.25rem 0.5rem;
     height: 1px;
-    background-color: $menu-border-color;
-
-    [data-theme='dark'] & {
-      background-color: $menu-border-color-dark;
-    }
+    background-color: fixit-var(menu-border-color);
   }
 
   .menu-item {
@@ -88,11 +80,7 @@ header {
       >.menu-link,
       >.nested-item>.menu-link {
         font-weight: bold;
-        color: $menu-active-color;
-
-        [data-theme='dark'] & {
-          color: $menu-active-color-dark;
-        }
+        color: fixit-var(menu-active-color);
       }
     }
 
@@ -157,19 +145,11 @@ header {
   &.mobile {
     input {
       color: fixit-var(global-font-color);
-      background-color: $search-background-color;
+      background-color: fixit-var(search-background-color);
       padding: 0 2rem 0 2rem;
     }
 
-    [data-theme='dark'] & {
-      input {
-        background-color: $search-background-color-dark;
-      }
-
-      @include placeholder($global-font-secondary-color-dark);
-    }
-
-    @include placeholder($global-font-secondary-color);
+    @include placeholder(fixit-var(global-font-secondary-color));
 
     .search-button {
       color: fixit-var(global-font-secondary-color);
@@ -196,8 +176,8 @@ header {
   display: block;
   position: sticky;
   top: 0;
-  height: $header-height;
-  line-height: $header-height;
+  height: fixit-var(header-height);
+  line-height: fixit-var(header-height);
   box-sizing: border-box;
 
   [data-header-desktop='normal'] & {
@@ -211,11 +191,11 @@ header {
 
   .header-wrapper {
     // use css native function to calculate max value
-    padding: 0 2rem 0 MAX(10vh, $header-height);
+    padding: 0 2rem 0 MAX(10vh, fixit-var(header-height));
     height: 100%;
 
     &[data-github-corner='right'] {
-      padding-right: $header-height;
+      padding-right: fixit-var(header-height);
     }
 
     .header-title {
@@ -263,24 +243,22 @@ header {
         margin: 0;
         padding: 0.25rem 0;
         display: none;
-        top: calc(#{$header-height} - 0.75rem);
-        border-radius: $global-border-radius;
-        border: 1px solid $menu-border-color;
-        background-color: $header-background-color;
+        top: calc(#{fixit-var(header-height)} - 0.75rem);
+        border: 1px solid fixit-var(menu-border-color);
+        background-color: fixit-var(header-background-color);
         max-height: 60vh;
         overflow-y: auto;
+        @include border-radius($global-border-radius);
         @include transition(box-shadow 0.3s ease);
         @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, 0.1));
 
         [data-theme='dark'] & {
-          background-color: $header-background-color-dark;
-          border-color: $menu-border-color-dark;
           @include box-shadow(0 0 1.5rem 0 rgba(255, 255, 255, 0.1));
         }
 
         .menu-item {
-          height: $submenu-height;
-          line-height: $submenu-height;
+          height: fixit-var(submenu-height);
+          line-height: fixit-var(submenu-height);
           max-width: 15rem;
           white-space: nowrap;
           text-overflow: ellipsis;
@@ -301,8 +279,8 @@ header {
   display: none;
   position: sticky;
   top: 0;
-  min-height: $header-height;
-  line-height: $header-height;
+  min-height: fixit-var(header-height);
+  line-height: fixit-var(header-height);
 
   [data-header-mobile='normal'] & {
     position: static;
@@ -328,15 +306,11 @@ header {
       .menu-toggle {
         span {
           display: block;
-          background: $global-font-color;
+          background: fixit-var(global-font-color);
           width: 20px;
           height: 2px;
           @include border-radius(3px);
           @include transition(all 0.3s ease-in-out);
-
-          [data-theme='dark'] & {
-            background: $global-font-color-dark;
-          }
         }
 
         span:not(:last-child) {
@@ -360,17 +334,15 @@ header {
     }
 
     .menu {
-      background: $header-background-color;
-      border-top: 2px solid $global-border-color;
+      background-color: fixit-var(header-background-color);
+      border-top: 2px solid fixit-var(global-border-color);
       display: none;
-      overflow-y: overlay;
+      overflow-y: auto;
       max-height: 70vh;
       @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
       @include scrollbar-width(none, 0);
 
       [data-theme='dark'] & {
-        background: $header-background-color-dark;
-        border-top-color: $global-border-color-dark;
         @include box-shadow(0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
       }
 
@@ -379,16 +351,12 @@ header {
         justify-content: space-between;
         align-items: center;
         box-sizing: border-box;
-        padding: ($header-height - 2.5rem) / 2 1rem;
+        padding: 0.5rem 1rem;
         line-height: 2.5rem;
         position: sticky;
         top: 0;
-        background-color: $header-background-color;
+        background-color: fixit-var(header-background-color);
         @include z-index(0, 50);
- 
-        [data-theme='dark'] & {
-          background-color: $header-background-color-dark;
-        }
       }
 
       .search {
@@ -455,11 +423,7 @@ header {
         bottom: 0;
         line-height: 2.5rem;
         padding: 0 1rem;
-        background-color: $header-background-color;
- 
-        [data-theme='dark'] & {
-          background-color: $header-background-color-dark;
-        }
+        background-color: fixit-var(header-background-color);
 
         .menu-system-item {
           padding-inline: 0.5rem;
@@ -503,10 +467,6 @@ header {
   }
 
   &.open {
-    .header-wrapper {
-      margin-top: -$header-height;
-    }
-
     .menu {
       padding-top: 0;
       border-top: none;
@@ -524,7 +484,7 @@ header {
 
 .search-dropdown {
   position: fixed;
-  top: $header-height;
+  top: fixit-var(header-height);
   @include z-index(2);
   @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
 
@@ -548,7 +508,7 @@ header {
 
     .suggestions {
       overflow-y: auto;
-      max-height: calc(100vh - #{$header-height});
+      max-height: calc(100dvh - #{fixit-var(header-height)});
 
       .suggestion {
         padding: 0.75rem 1rem;
@@ -572,22 +532,18 @@ header {
 
         .suggestion-context {
           line-height: 1.25rem;
-          @include box(vertical);
           -webkit-line-clamp: 2;
           line-clamp: 2;
           overflow: hidden;
           text-overflow: ellipsis;
-          @include overflow-wrap(break-word);
           color: fixit-var(global-font-secondary-color);
+          @include overflow-wrap(break-word);
+          @include box(vertical);
         }
 
         em {
           font-style: normal;
-          background-color: $selection-color;
-
-          [data-theme='dark'] & {
-            background-color: $selection-color-dark;
-          }
+          background-color: fixit-var(selection-color);
         }
 
         &.cursor {

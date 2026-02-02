@@ -62,7 +62,7 @@
                 {{- $siteTimeIcon := printf (cond .Animate "%v animate-icon" "%v") .Icon -}}
                 {{- dict "Class" $siteTimeIcon | partial "plugin/icon.html" -}}
                 {{- with .Pre -}}<span class="ms-1 d-none">{{ . }}</span>{{- end -}}
-                {{- printf `<span class="run-times ms-1">%v</span>` (T "footer.siteRunning") | safeHTML -}}
+                {{- printf `<span class="run-times variant-numeric ms-1">%v</span>` (T "footer.siteRunning") | safeHTML -}}
               </span>
             {{- end -}}
           {{- end -}}
