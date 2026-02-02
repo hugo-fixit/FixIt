@@ -62,7 +62,7 @@
         bottom: 2px;
         color: $single-link-color;
 
-        [data-theme='dark'] & {
+        [data-theme=dark] & {
           color: $single-link-color-dark;
         }
       }

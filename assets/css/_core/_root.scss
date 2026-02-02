@@ -58,7 +58,7 @@
     // Other utilities
     breadcrumb-height: 0px,
     divider-edge-weak: linear-gradient(to right, transparent, fixit-var(divider-bg, #d0d0d5), transparent),
-    scroll-mt: calc(#{$header-height} + #{$global-scroll-margin-top}),
+    scroll-mt: calc(#{fixit-var(header-height)} + #{fixit-var(global-scroll-margin-top)}),
   ));
 }
 

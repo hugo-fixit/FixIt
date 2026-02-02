@@ -1,7 +1,7 @@
 {{- /* Tags Page */ -}}
 {{- $tagCloud := .Site.Params.tagcloud -}}
 
-<div class="tag-cloud-tags{{ with $tagCloud.enable }} text-center{{ end }}">
+<div class="tags{{ with $tagCloud.enable }} tag-cloud-tags{{ end }}">
   {{- /* Tags Cloud */ -}}
   {{- if $tagCloud.enable -}}
     {{- $tags := cond (eq $tagCloud.orderby "name") $.Site.Taxonomies.tags.Alphabetical $.Site.Taxonomies.tags.ByCount -}}
@@ -11,11 +11,11 @@
     {{- range $tags -}}
       {{- $grade := math.Min (math.Floor (div (sub .Count 1) $baseGrade)) 10 -}}
       {{- $fontSize := add $minFont (mul $grade $baseFont) -}}
-      <a href='{{ partial "function/escapeurl.html" .Page.RelPermalink }}' class="tag-cloud-{{ $grade }}" style="--tag-font: {{ $fontSize }}px">{{ .Page.LinkTitle }} <sup>{{ .Count }}</sup></a>
+      <a href='{{ partial "function/escapeurl.html" .Page.RelPermalink }}' class="tag-item" data-grade="{{ $grade }}" style="--fi-tag-cloud-font: {{ $fontSize }}px">{{ .Page.LinkTitle }} <sup>{{ .Count }}</sup></a>
     {{- end -}}
   {{- else -}}
     {{- range $.Site.Taxonomies.tags.ByCount -}}
-      <a href='{{ partial "function/escapeurl.html" .Page.RelPermalink }}'>{{ .Page.LinkTitle }} <sup>{{ .Count }}</sup></a>
+      <a href='{{ partial "function/escapeurl.html" .Page.RelPermalink }}' class="tag-item">{{ .Page.LinkTitle }} <sup>{{ .Count }}</sup></a>
     {{- end -}}
   {{- end -}}
 </div>

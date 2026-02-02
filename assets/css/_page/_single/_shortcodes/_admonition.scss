@@ -20,7 +20,7 @@
       font-weight: bolder;
       text-shadow: 0 0.05rem 0.05rem rgba(0, 0, 0, 0.2);
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         text-shadow: 0 0.05rem 0.05rem rgba(255, 255, 255, 0.2);
       }
     }

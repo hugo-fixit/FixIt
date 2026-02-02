@@ -27,7 +27,7 @@ pre {
     @include border-radius(0);
     @include max-content(min-width);
 
-    [data-theme='dark'] & {
+    [data-theme=dark] & {
       background-color: transparent;
     }
   }
@@ -136,7 +136,7 @@ pre {
       overflow: hidden;
       height: auto;
       position: relative;
-      counter-reset: codeNos calc(fixit-var(line-start) - 1);
+      counter-reset: codeNos calc(#{fixit-var(line-start)} - 1);
       @include border-radius($global-border-radius);
       @include transition(height 0.5s ease-out);
       @include border-radius($global-border-radius);
@@ -267,7 +267,7 @@ pre {
       @include z-index(0, 1);
       @include border-radius(0 0 $global-border-radius $global-border-radius);
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         background: linear-gradient(
           180deg,
           rgba($code-background-color-dark, 0) 0%,
@@ -297,7 +297,7 @@ pre {
         @include border-radius($global-border-radius);
         @include transition(border-radius 0.2s ease 0.2s);
 
-        [data-theme='dark'] & {
+        [data-theme=dark] & {
           @include set-fixit-var(code-header-background-color, darken($code-background-color-dark, 6%));
         }
 
@@ -395,7 +395,7 @@ pre {
           content: counter(codeNos);
           white-space: nowrap;
           text-align: right;
-          min-width: calc(fixit-var(line-digit) * 1ch);
+          min-width: calc(#{fixit-var(line-digit)} * 1ch);
           padding-inline: 0.75rem;
           flex-shrink: 0;
           color: fixit-var(global-font-secondary-color);
@@ -427,7 +427,7 @@ pre {
     &:not([data-mode='classic']) {
       border: 1px solid darken($code-background-color, 3%);
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         border-color: darken($code-background-color-dark, 3%);
       }
     }
@@ -447,7 +447,7 @@ pre {
           height: 12px;
           width: 12px;
 
-          [data-theme='dark'] & {
+          [data-theme=dark] & {
             @include set-fixit-vars((
               mac-red: #ff5f56,
               mac-yellow: #febc2e,
@@ -510,7 +510,7 @@ pre {
     background-color: fixit-var(gist-meta-background-color);
   }
 
-  [data-theme='dark'] & {
+  [data-theme=dark] & {
     @import './_code-syntax/github-dark-dimmed';
   }
 }

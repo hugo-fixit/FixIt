@@ -54,7 +54,7 @@
       @include border-radius($global-border-radius);
       @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, 0.2));
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         @include box-shadow(0 0 1.5rem 0 rgba(255, 255, 255, 0.2));
       }
     }
@@ -80,14 +80,14 @@
       border-color: $reward-color;
       background-color: $reward-color;
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         color: #ffffff;
         border-color: $reward-color-dark;
         background-color: $reward-color-dark;
       }
     }
 
-    [data-theme='dark'] & {
+    [data-theme=dark] & {
       color: $reward-color;
       border-color: lighten($reward-color, 5%);
     }

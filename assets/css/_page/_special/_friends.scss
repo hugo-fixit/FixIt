@@ -23,19 +23,19 @@
     background: rgba(255, 255, 255, 0.3);
     box-sizing: border-box;
     box-shadow: 3px 3px 5px #aaa;
-    @include border-radius($global-border-radius);
     border: none;
     transition-duration: 0.3s;
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    @include border-radius($global-border-radius);
   }
 
   .friend-link:hover {
     background: #fff;
-    @include transform(scale(1.03));
     box-shadow: 0 0 3px #aaa;
+    @include transform(scale(1.03));
   }
 
   .friend-avatar {
@@ -43,9 +43,9 @@
     object-position: center;
     width: 100% !important;
     height: 150px !important;
-    @include border-radius($global-border-radius);
     margin: 0;
     padding: 0;
+    @include border-radius($global-border-radius);
   }
 
   .friend-nickname {

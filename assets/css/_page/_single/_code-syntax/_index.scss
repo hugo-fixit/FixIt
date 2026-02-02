@@ -23,7 +23,7 @@
 
   @import 'light';
 
-  [data-theme='dark'] & {
+  [data-theme=dark] & {
     @import 'dark';
   }
 }

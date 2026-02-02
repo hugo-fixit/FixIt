@@ -10,7 +10,7 @@
   &:hover {
     @include box-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
 
-    [data-theme='dark'] & {
+    [data-theme=dark] & {
       @include box-shadow(0 2px 8px rgba(255, 255, 255, 0.1));
     }
   }
@@ -28,7 +28,7 @@
           cursor: pointer;
           font-weight: bold;
 
-          [data-theme='dark'] & {
+          [data-theme=dark] & {
             color: #ddd;
           }
 

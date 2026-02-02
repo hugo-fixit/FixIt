@@ -10,7 +10,7 @@
   width: 100%;
   @include z-index(2);
 
-  [data-theme='dark'] & {
+  [data-theme=dark] & {
     background-color: fixit-var(danger-dark);
   }
 }

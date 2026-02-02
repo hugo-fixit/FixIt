@@ -15,7 +15,7 @@
     pointer-events: none;
     transform: translateY(-1px);
 
-    [data-theme='dark'] & {
+    [data-theme=dark] & {
       @include set-fixit-var(color-preview-border-color, #3d444db3);
     }
   }

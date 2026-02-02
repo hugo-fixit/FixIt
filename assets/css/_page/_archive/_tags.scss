@@ -1,7 +1,7 @@
-.tag-cloud-tags {
+.tags {
   margin: 10px 0;
 
-  a {
+  .tag-item {
     display: inline-block;
     position: relative;
     margin: 5px 10px;
@@ -25,31 +25,36 @@
   }
 }
 
-@for $grade from 0 through 10 {
-  $tag-cloud-color: mix($tag-cloud-end, $tag-cloud-start, $grade * 10);
-  $tag-cloud-color-dark: mix($tag-cloud-end-dark, $tag-cloud-start-dark, $grade * 10);
+.tag-cloud-tags {
+  text-align: center;
 
-  .tag-cloud-#{$grade} {
-    color: $tag-cloud-color;
-    font-size: var(--tag-font);
-    margin: 10px !important;
+  .tag-item {
+    color: fixit-var(tag-cloud-color);
+    font-size: fixit-var(tag-cloud-font);
+    margin: 10px;
 
     &:active,
     &:focus,
     &:hover {
-      color: fixit-var(global-link-hover-color) !important;
+      color: fixit-var(global-link-hover-color);
 
       sup {
         opacity: 1;
       }
     }
 
-    [data-theme='dark'] & {
-      color: $tag-cloud-color-dark;
-    }
-
     sup {
       opacity: 0;
+    }
+
+    @for $grade from 0 through 10 {
+      &[data-grade="#{$grade}"] {
+        @include set-fixit-var(tag-cloud-color, mix($tag-cloud-end, $tag-cloud-start, $grade * 10));
+
+        [data-theme=dark] & {
+          @include set-fixit-var(tag-cloud-color, mix($tag-cloud-end-dark, $tag-cloud-start-dark, $grade * 10));
+        }
+      }
     }
   }
 }

@@ -25,7 +25,7 @@
   @include z-index(0, 1);
   @extend .print-d-none;
 
-  [data-theme='dark'] & {
+  [data-theme=dark] & {
     @include set-fixit-vars((
       dcb-color: #d1d7e0,
       dcb-border-color: #3d444d,
@@ -40,7 +40,7 @@
       dcb-background-color: #eff2f5,
     ));
 
-    [data-theme='dark'] & {
+    [data-theme=dark] & {
       @include set-fixit-vars((
         dcb-border-color: #3d444d,
         dcb-background-color: #2f3742,

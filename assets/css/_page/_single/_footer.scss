@@ -9,7 +9,7 @@
     border-bottom: 1px solid $global-border-color;
     padding: 0.3rem 0;
 
-    [data-theme='dark'] & {
+    [data-theme=dark] & {
       border-bottom: 1px solid $global-border-color-dark;
     }
 

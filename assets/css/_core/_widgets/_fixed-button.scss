@@ -20,7 +20,7 @@
   @include blur;
   @extend .print-d-none;
 
-  [data-theme='dark'] & {
+  [data-theme=dark] & {
     color: $global-font-secondary-color-dark;
     background-color: $header-background-color-dark;
   }
@@ -53,7 +53,7 @@
     b2t-dasharray: 314.15
   ));
 
-  [data-theme='dark'] & {
+  [data-theme=dark] & {
      @include set-fixit-vars((
       b2t-bg: $global-border-color-dark,
       b2t-prog: $global-font-color-dark
@@ -84,7 +84,7 @@
     stroke-width: fixit-var(b2t-stroke);
     stroke-linecap: round;
     stroke-dasharray: fixit-var(b2t-dasharray);
-    stroke-dashoffset: calc(fixit-var(b2t-dasharray) * (1 - fixit-var(b2t-progress, 0) / 100));
+    stroke-dashoffset: calc(#{fixit-var(b2t-dasharray)} * (1 - #{fixit-var(b2t-progress, 0)} / 100));
     transition: stroke-dashoffset .1s linear;
   }
 }

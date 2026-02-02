@@ -97,7 +97,7 @@ ul.#{$prefix}timeline {
       background-color: var(--timeline-color);
     }
   
-    [data-theme='dark'] & {
+    [data-theme=dark] & {
       --timeline-color: #{darken($global-border-color, 50%)};
     }
   }  

@@ -26,13 +26,13 @@
       border-color: fixit-var(global-link-hover-color);
       box-shadow: 0px 0px 5px 0px lighten($global-link-hover-color, 20%);
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         color: lighten($global-link-hover-color-dark, 6%);
         box-shadow: 0px 0px 5px 0px darken($global-link-hover-color-dark, 20%);
       }
     }
 
-    [data-theme='dark'] & {
+    [data-theme=dark] & {
       border-color: lighten($global-border-color-dark, 15%);
       box-shadow: 0px 0px 5px 0px lighten($global-border-color-dark, 15%);
     }
@@ -54,7 +54,7 @@
 
     background-color: $header-background-color;
 
-    [data-theme='dark'] & {
+    [data-theme=dark] & {
       background-color: $header-background-color-dark;
     }
   }

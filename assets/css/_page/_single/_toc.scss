@@ -27,7 +27,7 @@
         bottom: 2px;
         color: $single-link-color;
 
-        [data-theme='dark'] & {
+        [data-theme=dark] & {
           color: $single-link-color-dark;
         }
       }
@@ -48,7 +48,7 @@
       li:has(> a:hover)::marker {
         color: $single-link-color;
 
-        [data-theme='dark'] & {
+        [data-theme=dark] & {
           color: $single-link-color-dark;
         }
       }
@@ -72,7 +72,7 @@
       &::marker {
         color: $single-link-color;
 
-        [data-theme='dark'] & {
+        [data-theme=dark] & {
           color: $single-link-color-dark;
         }
       }
@@ -84,7 +84,7 @@
       > a {
         color: $single-link-color;
 
-        [data-theme='dark'] & {
+        [data-theme=dark] & {
           color: $single-link-color-dark;
         }
       }
@@ -94,7 +94,7 @@
       a.active::before {
         color: $single-link-hover-color;
 
-        [data-theme='dark'] & {
+        [data-theme=dark] & {
           color: $single-link-hover-color-dark;
         }
       }
@@ -133,7 +133,7 @@
       bottom: 2px;
       color: $global-border-color;
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         color: $global-border-color-dark;
       }
     }
@@ -212,7 +212,7 @@
           &::before {
             color: $single-link-hover-color;
 
-            [data-theme='dark'] & {
+            [data-theme=dark] & {
               color: $single-link-hover-color-dark;
             }
           }
@@ -234,7 +234,7 @@
     .toc-title {
       @include set-fixit-var(code-header-background-color, darken($code-background-color, 6%));
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         @include set-fixit-var(code-header-background-color, darken($code-background-color-dark, 6%));
       }
     }

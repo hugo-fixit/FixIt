@@ -8,7 +8,7 @@ header {
   &:hover {
     @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, 0.1));
 
-    [data-theme='dark'] & {
+    [data-theme=dark] & {
       @include box-shadow(0 0 1.5rem 0 rgba(255, 255, 255, 0.1));
     }
   }
@@ -232,7 +232,7 @@ header {
           padding: 0;
           border-left: 1px dashed lighten($global-font-secondary-color, 15%);
 
-          [data-theme='dark'] & {
+          [data-theme=dark] & {
             border-left-color: darken($global-font-secondary-color-dark, 15%);
           }
         }
@@ -252,7 +252,7 @@ header {
         @include transition(box-shadow 0.3s ease);
         @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, 0.1));
 
-        [data-theme='dark'] & {
+        [data-theme=dark] & {
           @include box-shadow(0 0 1.5rem 0 rgba(255, 255, 255, 0.1));
         }
 
@@ -342,7 +342,7 @@ header {
       @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
       @include scrollbar-width(none, 0);
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         @include box-shadow(0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
       }
 
@@ -391,7 +391,7 @@ header {
         &:not(.menu-system):hover {
           background-color: lighten($global-font-secondary-color, 24%);
 
-          [data-theme='dark'] & {
+          [data-theme=dark] & {
             background-color: darken($global-font-secondary-color-dark, 24%);
           }
         }
@@ -454,7 +454,7 @@ header {
         .menu-item:hover {
           background-color: lighten($global-font-secondary-color, 20%);
 
-          [data-theme='dark'] & {
+          [data-theme=dark] & {
             background-color: darken($global-font-secondary-color-dark, 20%);
           }
         }
@@ -488,7 +488,7 @@ header {
   @include z-index(2);
   @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
 
-  [data-theme='dark'] & {
+  [data-theme=dark] & {
     @include box-shadow(0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
   }
 
@@ -549,7 +549,7 @@ header {
         &.cursor {
           background: darken($code-background-color, 5%);
 
-          [data-theme='dark'] & {
+          [data-theme=dark] & {
             background: lighten($code-background-color-dark, 5%);
           }
         }
@@ -567,7 +567,7 @@ header {
       .search-query {
         font-weight: bold;
 
-        [data-theme='dark'] & {
+        [data-theme=dark] & {
           color: #ddd;
         }
       }

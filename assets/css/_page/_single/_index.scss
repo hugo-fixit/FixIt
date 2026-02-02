@@ -63,7 +63,7 @@
         object-position: center;
         @include object-fit(cover);
 
-        [data-theme='dark'] & {
+        [data-theme=dark] & {
           border-color: $global-border-color-dark;
         }
       }
@@ -159,7 +159,7 @@
       margin-top: 1.5rem;
       margin-bottom: 1rem;
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         font-weight: bolder;
       }
 
@@ -192,7 +192,7 @@
     strong {
       font-weight: bold;
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         color: #ddd;
       }
     }
@@ -203,14 +203,14 @@
       white-space: normal;
       @include overflow-wrap(break-word);
 
-      [data-theme='dark'] & b,
-      [data-theme='dark'] & strong {
+      [data-theme=dark] & b,
+      [data-theme=dark] & strong {
         color: $single-link-color-dark;
       }
     }
 
-    [data-theme='dark'] a:hover b,
-    [data-theme='dark'] a:hover strong {
+    [data-theme=dark] a:hover b,
+    [data-theme=dark] a:hover strong {
       color: $single-link-hover-color-dark;
     }
 
@@ -297,7 +297,7 @@
       overflow-x: auto;
       @include set-fixit-var(scrollbar-thumb-color, $table-background-color);
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         @include set-fixit-var(scrollbar-thumb-color, $table-background-color-dark);
       }
 
@@ -309,14 +309,14 @@
         background: $table-background-color;
         border-collapse: collapse;
 
-        [data-theme='dark'] & {
+        [data-theme=dark] & {
           background: $table-background-color-dark;
         }
 
         thead {
           background: $table-thead-color;
 
-          [data-theme='dark'] & {
+          [data-theme=dark] & {
             background-color: $table-thead-color-dark;
           }
         }
@@ -325,7 +325,7 @@
           & tr:nth-child(odd) {
             background: darken($table-background-color, 2.25%);
 
-            [data-theme='dark'] & {
+            [data-theme=dark] & {
               background-color: lighten($table-background-color-dark, 2.75%);
             }
           }
@@ -333,7 +333,7 @@
           & tr:hover {
             background: darken($table-background-color, 4.5%);
 
-            [data-theme='dark'] & {
+            [data-theme=dark] & {
               background-color: lighten($table-background-color-dark, 5.5%);
             }
           }
@@ -344,7 +344,7 @@
           padding: 0.3rem 1rem;
           border: 1px solid darken($table-thead-color, 2%);
 
-          [data-theme='dark'] & {
+          [data-theme=dark] & {
             border-color: darken($table-thead-color-dark, 2%);
           }
         }
@@ -400,7 +400,7 @@
         margin-inline-start: 0.25em;
       }
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         color: $blockquote-color-dark;
         border-left-color: $global-border-color-dark;
       }
@@ -415,7 +415,7 @@
       border-radius: 4px;
       cursor: pointer;
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         background-color: rgba(56, 139, 253, 0.1);
         color: #58a6ff;
       }
@@ -450,7 +450,7 @@
 
       @include link(false, true);
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         color: lighten($global-font-secondary-color-dark, 5%);
       }
 
@@ -470,7 +470,7 @@
       @include border-radius($global-border-radius);
       @include box-shadow(inset 0 -1px 0 $global-border-color);
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         border: 1px solid $global-border-color-dark;
         color: $code-color-dark;
         @include box-shadow(inset 0 -1px 0 $global-border-color-dark);

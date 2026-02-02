@@ -35,7 +35,7 @@
     }
   }
 
-  [data-theme='dark'] & {
+  [data-theme=dark] & {
     @each $type, $item in $alert-color-map-dark {
       &.alert-#{$type} {
         @include set-fixit-vars((

@@ -7,7 +7,7 @@
     &:focus {
       background-color: #ccc;
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         background-color: #444;
       }
     }

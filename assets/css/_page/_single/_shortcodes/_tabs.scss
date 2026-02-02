@@ -212,7 +212,7 @@ tab-container {
         background: fixit-var(primary);
         @include box-shadow(0 0.125rem 0.5rem rgba(0, 0, 0, 0.3));
 
-        [data-theme='dark'] & {
+        [data-theme=dark] & {
           background: fixit-var(primary);
           @include box-shadow(0 0.125rem 0.5rem rgba(255, 255, 255, 0.3));
         }
@@ -221,7 +221,7 @@ tab-container {
       &[aria-selected='false']:hover {
         background: rgba(175, 184, 193, 0.4);
 
-        [data-theme='dark'] & {
+        [data-theme=dark] & {
           background: rgba(99, 110, 123, 0.6);
         }
       }
@@ -445,7 +445,7 @@ tab-container {
       background: $code-background-color;
       @include border-radius($global-border-radius);
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         background: $code-background-color-dark;
       }
     }
@@ -470,7 +470,7 @@ tab-container {
         background-color: fixit-var(global-background-color);
         @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
 
-        [data-theme='dark'] & {
+        [data-theme=dark] & {
           @include box-shadow(0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
         }
       }
