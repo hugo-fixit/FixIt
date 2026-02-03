@@ -9,8 +9,8 @@ pre {
   line-height: 1.45em;
   padding: 0.5rem 0.75rem;
   overflow: auto;
-  font-size: $code-block-font-size;
-  font-family: $code-font-family;
+  font-size: fixit-var(code-block-font-size);
+  font-family: fixit-var(code-font-family);
   background-color: fixit-var(code-block-background-color);
   @include border-radius($global-border-radius);
   @include tab-size(4);
@@ -41,8 +41,8 @@ pre {
 
 .highlight,
 .gist {
-  font-size: $code-block-font-size;
-  font-family: $code-font-family;
+  font-size: fixit-var(code-block-font-size);
+  font-family: fixit-var(code-font-family);
   @include set-fixit-var(scrollbar-thumb-color, inherit);
 
   table {
@@ -165,7 +165,7 @@ pre {
       align-items: center;
       box-sizing: border-box;
       width: 100%;
-      font-family: $global-font-family;
+      font-family: fixit-var(global-font-family);
       font-weight: bold;
       line-height: 1.4em;
       color: fixit-var(code-header-color);

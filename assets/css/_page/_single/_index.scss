@@ -58,14 +58,10 @@
         height: 1.3rem;
         border-radius: 50%;
         vertical-align: text-bottom;
-        border: 0.25px solid $global-border-color;
+        border: 0.25px solid fixit-var(global-border-color);
         box-sizing: border-box;
         object-position: center;
         @include object-fit(cover);
-
-        [data-theme=dark] & {
-          border-color: $global-border-color-dark;
-        }
       }
     }
   }
@@ -133,7 +129,7 @@
     > h2 {
       font-size: 1.5em;
       padding-bottom: 0.3em;
-      border-bottom: 1px solid $global-border-color;
+      border-bottom: 1px solid fixit-var(global-border-color);
     }
 
     > h3 {
@@ -203,15 +199,12 @@
       white-space: normal;
       @include overflow-wrap(break-word);
 
-      [data-theme=dark] & b,
-      [data-theme=dark] & strong {
-        color: $single-link-color-dark;
+      b,
+      strong {
+        [data-theme=dark] & {
+          color: inherit;
+        }
       }
-    }
-
-    [data-theme=dark] a:hover b,
-    [data-theme=dark] a:hover strong {
-      color: $single-link-hover-color-dark;
     }
 
     ul,
@@ -295,30 +288,18 @@
     .table-wrapper {
       position: relative;
       overflow-x: auto;
-      @include set-fixit-var(scrollbar-thumb-color, $table-background-color);
-
-      [data-theme=dark] & {
-        @include set-fixit-var(scrollbar-thumb-color, $table-background-color-dark);
-      }
+      @include set-fixit-var(scrollbar-thumb-color, fixit-var(table-background-color));
 
       > table {
         width: 100%;
         max-width: 100%;
         margin: 0.625rem 0;
         border-spacing: 0;
-        background: $table-background-color;
+        background: fixit-var(table-background-color);
         border-collapse: collapse;
 
-        [data-theme=dark] & {
-          background: $table-background-color-dark;
-        }
-
         thead {
-          background: $table-thead-color;
-
-          [data-theme=dark] & {
-            background-color: $table-thead-color-dark;
-          }
+          background: fixit-var(table-thead-color);
         }
 
         &:not([class]) tbody {
@@ -386,8 +367,8 @@
 
     blockquote {
       display: block;
-      border-left: 0.25em solid $global-border-color;
-      color: $blockquote-color;
+      border-left: 0.25em solid fixit-var(global-border-color);
+      color: fixit-var(blockquote-color);
       padding: 0 1em;
       margin: 1rem 0;
 
@@ -398,11 +379,6 @@
 
       dl dd {
         margin-inline-start: 0.25em;
-      }
-
-      [data-theme=dark] & {
-        color: $blockquote-color-dark;
-        border-left-color: $global-border-color-dark;
       }
 
       @include link(false, true);
@@ -463,16 +439,14 @@
       display: inline-block;
       padding: 0 0.25rem;
       background-color: fixit-var(global-background-color);
-      border: 1px solid $global-border-color;
+      border: 1px solid fixit-var(global-border-color);
       font-size: 0.8rem;
-      font-family: $code-font-family;
-      color: $code-color;
+      font-family: fixit-var(code-font-family);
+      color: fixit-var(code-color);
       @include border-radius($global-border-radius);
       @include box-shadow(inset 0 -1px 0 $global-border-color);
 
       [data-theme=dark] & {
-        border: 1px solid $global-border-color-dark;
-        color: $code-color-dark;
         @include box-shadow(inset 0 -1px 0 $global-border-color-dark);
       }
     }

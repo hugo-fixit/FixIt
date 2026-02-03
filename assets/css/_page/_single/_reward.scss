@@ -29,7 +29,7 @@
       }
   
       &:hover span[data-animation] {
-        animation: var(--animation-reward, jackInTheBox) 0.8s infinite linear;
+        animation: fixit-var(animation-reward, jackInTheBox) 0.8s infinite linear;
         // The animation may affect :hover of img in dark mode
         pointer-events: none;
       }
@@ -38,7 +38,7 @@
         display: inline-block;
         margin: 0.8em 2em 0;
         max-width: 100%;
-        width: $reward-img-width;
+        width: fixit-var(reward-img-width);
       }
     }
 
@@ -65,30 +65,23 @@
     box-sizing: border-box;
     cursor: pointer;
     outline: none;
-    color: lighten($reward-color, 5%);
+    color: fixit-var(reward-color, lighten($reward-color, 5%));
     border: 2px solid lighten($reward-color, 10%);
-    border-radius: $global-border-radius;
     padding: 0.6rem 1rem;
     background-color: fixit-var(global-background-color);
     vertical-align: text-top;
     line-height: 1rem;
+    @include border-radius($global-border-radius);
     @include transition(all 0.3s ease-out);
 
     &:active,
     &:hover {
       color: #ffffff;
-      border-color: $reward-color;
-      background-color: $reward-color;
-
-      [data-theme=dark] & {
-        color: #ffffff;
-        border-color: $reward-color-dark;
-        background-color: $reward-color-dark;
-      }
+      border-color: fixit-var(reward-color);
+      background-color: fixit-var(reward-color);
     }
 
     [data-theme=dark] & {
-      color: $reward-color;
       border-color: lighten($reward-color, 5%);
     }
   }

@@ -34,7 +34,7 @@ tab-container {
     display: block;
     border: none;
     color: inherit;
-    background: transparent;
+    background-color: transparent;
     font-size: 0.9em;
     font-weight: 500;
     cursor: pointer;
@@ -203,26 +203,26 @@ tab-container {
   // ========================================
   &[type='pill'] {
     > .tab-button {
-      background: fixit-var(code-inline-background-color);
+      background-color: fixit-var(code-inline-background-color);
       @include tab-button-size;
       @include border-radius(2em);
 
       &[aria-selected='true'] {
         color: #ffffff;
-        background: fixit-var(primary);
+        background-color: fixit-var(primary);
         @include box-shadow(0 0.125rem 0.5rem rgba(0, 0, 0, 0.3));
 
         [data-theme=dark] & {
-          background: fixit-var(primary);
+          background-color: fixit-var(primary);
           @include box-shadow(0 0.125rem 0.5rem rgba(255, 255, 255, 0.3));
         }
       }
 
       &[aria-selected='false']:hover {
-        background: rgba(175, 184, 193, 0.4);
+        background-color: rgba(175, 184, 193, 0.4);
 
         [data-theme=dark] & {
-          background: rgba(99, 110, 123, 0.6);
+          background-color: rgba(99, 110, 123, 0.6);
         }
       }
     }
@@ -442,12 +442,8 @@ tab-container {
 
     &::part(tablist-tab-wrapper) {
       padding: 0.25rem;
-      background: $code-background-color;
+      background-color: fixit-var(code-block-background-color);
       @include border-radius($global-border-radius);
-
-      [data-theme=dark] & {
-        background: $code-background-color-dark;
-      }
     }
 
     &::part(tablist) {

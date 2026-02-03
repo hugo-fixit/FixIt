@@ -86,7 +86,7 @@
 // Collection aside container
 .aside-collection {
   position: sticky;
-  top: calc(#{$header-height} + #{fixit-var(breadcrumb-height)});
+  top: calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height)});
   box-sizing: border-box;
   @include overflow-wrap(break-word);
   @include blur;
@@ -127,7 +127,7 @@
     .collection-name {
       flex-grow: 1;
       font-weight: bold;
-      font-size: $collection-title-font-size;
+      font-size: fixit-var(collection-title-font-size);
 
       &::before {
         content: attr(title) '・';
@@ -147,7 +147,7 @@
   }
 
   .collection-content {
-    font-size: $collection-list-font-size;
+    font-size: fixit-var(collection-list-font-size);
     background-color: darken($global-background-color, 2%);
 
     [data-theme=dark] & {
@@ -171,27 +171,15 @@
         margin-right: 0.5em;
         position: relative;
         bottom: 2px;
-        color: $single-link-color;
-
-        [data-theme=dark] & {
-          color: $single-link-color-dark;
-        }
+        color: fixit-var(single-link-color);
       }
 
       .collection-item > .active {
         font-weight: bold;
-        color: $single-link-color;
-
-        [data-theme=dark] & {
-          color: $single-link-color-dark;
-        }
+        color: fixit-var(single-link-color);
 
         &::before {
-          color: $single-link-hover-color;
-  
-          [data-theme=dark] & {
-            color: $single-link-hover-color-dark;
-          }
+          color: fixit-var(single-link-hover-color);
         }
       }
     }

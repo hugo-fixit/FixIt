@@ -3,28 +3,30 @@ ul.#{$prefix}timeline {
   box-sizing: border-box;
   overflow: auto;
   margin: 1rem auto;
-  --timeline-color: #{darken($global-border-color, 5%)};
-  --timeline-circle-color: #FF735A;
-  --timeline-circle-size: 10px;
-  --timeline-width: 2px;
+  @include set-fixit-vars((
+    timeline-color: darken($global-border-color, 5%),
+    timeline-circle-color: #FF735A,
+    timeline-circle-size: 10px,
+    timeline-width: 2px,
+  ));
 
   &[data-animation] {
     .#{$prefix}timeline-item::before {
-      border-color: var(--timeline-color);
+      border-color: fixit-var(timeline-color);
       animation-name: border-color-fade;
       animation-duration: 2s;
       animation-iteration-count: infinite;
-      animation-delay: calc(var(--timeline-index) * 0.3s);
+      animation-delay: calc(#{fixit-var(timeline-index)} * 0.3s);
   
       @keyframes border-color-fade {
         0% {
-          border-color: var(--timeline-color);
+          border-color: fixit-var(timeline-color);
         }
         50% {
-          border-color: var(--timeline-circle-color);
+          border-color: fixit-var(timeline-circle-color);
         }
         100% {
-          border-color: var(--timeline-color);
+          border-color: fixit-var(timeline-color);
         }
       }
     }
@@ -36,7 +38,7 @@ ul.#{$prefix}timeline {
 
     @each $color, $value in $theme-colors {
       &[data-type='#{$color}'] {
-        --timeline-circle-color: fixit-var(#{$color});
+        @include set-fixit-var(timeline-circle-color, fixit-var(#{$color}));
       }
     }
 
@@ -59,7 +61,7 @@ ul.#{$prefix}timeline {
     }
 
     &[data-node='dot']::before {
-      background-color: var(--timeline-circle-color) !important;
+      background-color: fixit-var(timeline-circle-color) !important;
     }
     &[data-size='small']::before {
       transform: scale(0.8) translateY(-50%);
@@ -74,15 +76,15 @@ ul.#{$prefix}timeline {
       top: 1.25rem;
       transform: translateY(-50%);
       left: 0;
-      width: var(--timeline-circle-size);
-      height: var(--timeline-circle-size);
-      font-size: var(--timeline-circle-size);
-      line-height: var(--timeline-circle-size);
+      width: fixit-var(timeline-circle-size);
+      height: fixit-var(timeline-circle-size);
+      font-size: fixit-var(timeline-circle-size);
+      line-height: fixit-var(timeline-circle-size);
       text-align: center;
       border-radius: 50%;
-      border-width: var(--timeline-width);
+      border-width: fixit-var(timeline-width);
       border-style: solid;
-      border-color: var(--timeline-circle-color);
+      border-color: fixit-var(timeline-circle-color);
       background-color: fixit-var(global-background-color);
       color: transparent;
       z-index: 1;
@@ -91,14 +93,14 @@ ul.#{$prefix}timeline {
       content: '';
       position: absolute;
       top: 0;
-      left: calc(var(--timeline-circle-size) / 2 + var(--timeline-width) / 2);
-      width: var(--timeline-width);
+      left: calc(#{fixit-var(timeline-circle-size)} / 2 + #{fixit-var(timeline-width)} / 2);
+      width: fixit-var(timeline-width);
       height: 100%;
-      background-color: var(--timeline-color);
+      background-color: fixit-var(timeline-color);
     }
   
     [data-theme=dark] & {
-      --timeline-color: #{darken($global-border-color, 50%)};
+      @include set-fixit-var(timeline-color, darken($global-border-color-dark, 50%));
     }
   }  
 }

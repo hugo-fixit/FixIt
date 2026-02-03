@@ -25,7 +25,7 @@
 
     .related-title {
       font-weight: bold;
-      font-size: $related-title-font-size;
+      font-size: fixit-var(related-title-font-size);
     }
 
     .related-count {
@@ -41,7 +41,7 @@
   }
 
   .related-content {
-    font-size: $related-list-font-size;
+    font-size: fixit-var(related-list-font-size);
 
     .related-list {
       margin: 0;
@@ -60,14 +60,8 @@
         margin-right: 0.5em;
         position: relative;
         bottom: 2px;
-        color: $single-link-color;
-
-        [data-theme=dark] & {
-          color: $single-link-color-dark;
-        }
+        color: fixit-var(single-link-color);
       }
     }
   }
 }
-
-

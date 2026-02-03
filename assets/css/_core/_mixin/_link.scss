@@ -1,10 +1,7 @@
-/**
- * Link mixin
- * @param {Boolean} $light use global link color
- * @param {Boolean} $dark use global link color dark
- * @param {String} $decoration text-decoration, default none
- * TODO refactor to use CSS variables
- */
+/// Link mixin
+/// @param {Boolean} $light use global link color
+/// @param {Boolean} $dark use global link color dark
+/// @param {String} $decoration text-decoration, default none
 @mixin link($light, $dark, $decoration: none) {
   a,
   a::before,
