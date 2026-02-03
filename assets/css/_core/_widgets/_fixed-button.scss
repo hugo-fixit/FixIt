@@ -12,17 +12,15 @@
   font-size: 1rem;
   line-height: 1.5rem;
   padding: 0.5rem 0.625rem;
-  // TODO
   color: darken($global-font-secondary-color, 10%);
-  background-color: $header-background-color;
+  background-color: fixit-var(header-background-color);
   @include border-radius(1.25rem);
   @include transition(color 0.4s ease);
   @include blur;
   @extend .print-d-none;
 
   [data-theme=dark] & {
-    color: $global-font-secondary-color-dark;
-    background-color: $header-background-color-dark;
+    color: fixit-var(global-font-secondary-color);
   }
 
   &:hover,
@@ -44,8 +42,6 @@
   @include set-fixit-vars((
     // Ring stroke width
     b2t-stroke: 0.5rem,
-    // Ring background color
-    b2t-bg: $global-border-color,
     // Progress color
     b2t-prog: fixit-var(success),
     // dasharray = circumference = 2πr
@@ -54,10 +50,7 @@
   ));
 
   [data-theme=dark] & {
-     @include set-fixit-vars((
-      b2t-bg: $global-border-color-dark,
-      b2t-prog: $global-font-color-dark
-    ));
+     @include set-fixit-var(b2t-prog, fixit-var(global-font-color));
   }
 
   // SVG circular progress ring
@@ -73,7 +66,7 @@
 
   .bg {
     fill: none;
-    stroke: fixit-var(b2t-bg);
+    stroke: fixit-var(global-border-color);
     stroke-width: fixit-var(b2t-stroke);
   }
 

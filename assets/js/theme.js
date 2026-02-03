@@ -1282,7 +1282,7 @@ class FixIt {
       const contentHeight = document.body.scrollHeight - window.innerHeight;
       const scrollPercent = Math.max(Math.min(100 * Math.max(this.newScrollTop, 0) / contentHeight, 100), 0);
       if ($readingProgressBar) {
-        $readingProgressBar.style.setProperty('--progress', `${scrollPercent.toFixed(2)}%`);
+        $readingProgressBar.style.setProperty('--fi-progress', `${scrollPercent.toFixed(2)}%`);
       }
       // whether to show back to top button
       if ($backToTop) {

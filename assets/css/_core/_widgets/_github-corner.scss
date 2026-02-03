@@ -23,16 +23,11 @@
     animation: octocat-wave 560ms ease-in-out;
   }
   svg {
-    width: $header-height;
-    height: $header-height;
+    width: fixit-var(header-height);
+    height: fixit-var(header-height);
     border: 0;
-    color: $github-corner-color;
-    fill: $github-corner-fill;
-
-    [data-theme=dark] & {
-      color: $github-corner-color-dark;
-      fill: $github-corner-fill-dark;
-    }
+    color: fixit-var(github-corner-color);
+    fill: fixit-var(github-corner-fill);
   }
   &.left {
     left: 0;
