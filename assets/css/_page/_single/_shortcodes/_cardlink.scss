@@ -95,7 +95,7 @@
     flex-shrink: 0;
     margin-left: 0.25rem;
     object-fit: cover;
-    border-radius: 50%;
+    @include border-radius(full);
   }
 
   [data-theme=dark] & {

@@ -4,7 +4,7 @@
   font-size: 0.8rem;
   line-height: 1;
   margin-block: 0.5rem;
-  @include border-radius($global-border-radius);
+  @include border-radius;
   @include transition(box-shadow 0.2s ease);
 
   &:hover {
@@ -47,7 +47,7 @@
         position: relative;
         gap: 0.25rem;
         padding: 0.25rem 0.5rem;
-        @include border-radius($global-border-radius);
+        @include border-radius;
         @include transition(all 0.15s ease);
 
         .file-tree-icon {

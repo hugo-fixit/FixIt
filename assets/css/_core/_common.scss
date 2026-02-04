@@ -54,3 +54,7 @@
 .variant-numeric {
   font-variant-numeric: tabular-nums lining-nums;
 }
+
+.rounded-full {
+  @include border-radius(full);
+}

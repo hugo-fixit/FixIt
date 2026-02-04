@@ -205,7 +205,7 @@ tab-container {
     > .tab-button {
       background-color: fixit-var(code-inline-background-color);
       @include tab-button-size;
-      @include border-radius(2em);
+      @include border-radius(full);
 
       &[aria-selected='true'] {
         color: #ffffff;
@@ -353,7 +353,7 @@ tab-container {
 
       > .tab-button {
         translate: 0 1px;
-        @include border-radius($global-border-radius $global-border-radius 0 0);
+        @include border-radius(top);
 
         &[aria-selected='true'] {
           border-bottom-color: fixit-var(global-background-color);
@@ -362,7 +362,7 @@ tab-container {
 
       > .tab-panel {
         border-top: none;
-        @include border-radius(0 0 $global-border-radius $global-border-radius);
+        @include border-radius(bottom);
       }
     }
 
@@ -374,7 +374,7 @@ tab-container {
 
       > .tab-button {
         translate: 0 -1px;
-        @include border-radius(0 0 $global-border-radius $global-border-radius);
+        @include border-radius(bottom);
 
         &[aria-selected='true'] {
           border-top-color: fixit-var(global-background-color);
@@ -383,7 +383,7 @@ tab-container {
 
       > .tab-panel {
         border-bottom: none;
-        @include border-radius($global-border-radius $global-border-radius 0 0);
+        @include border-radius(top);
       }
     }
 
@@ -395,7 +395,7 @@ tab-container {
 
       > .tab-button {
         translate: 1px 0;
-        @include border-radius($global-border-radius 0 0 $global-border-radius);
+        @include border-radius(left);
 
         &[aria-selected='true'] {
           border-right-color: fixit-var(global-background-color);
@@ -404,7 +404,7 @@ tab-container {
 
       > .tab-panel {
         border-left: none;
-        @include border-radius(0 $global-border-radius $global-border-radius 0);
+        @include border-radius(right);
       }
     }
 
@@ -416,7 +416,7 @@ tab-container {
 
       > .tab-button {
         translate: -1px 0;
-        @include border-radius(0 $global-border-radius $global-border-radius 0);
+        @include border-radius(right);
 
         &[aria-selected='true'] {
           border-left-color: fixit-var(global-background-color);
@@ -425,7 +425,7 @@ tab-container {
 
       > .tab-panel {
         border-right: none;
-        @include border-radius($global-border-radius 0 0 $global-border-radius);
+        @include border-radius(left);
       }
     }
   }
@@ -443,7 +443,7 @@ tab-container {
     &::part(tablist-tab-wrapper) {
       padding: 0.25rem;
       background-color: fixit-var(code-block-background-color);
-      @include border-radius($global-border-radius);
+      @include border-radius;
     }
 
     &::part(tablist) {
@@ -455,7 +455,7 @@ tab-container {
       flex-grow: 1;
 
       @include tab-button-size;
-      @include border-radius($global-border-radius);
+      @include border-radius;
 
       &[aria-selected='true'],
       &:hover {

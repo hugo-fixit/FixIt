@@ -12,7 +12,7 @@ pre {
   font-size: fixit-var(code-block-font-size);
   font-family: fixit-var(code-font-family);
   background-color: fixit-var(code-block-background-color);
-  @include border-radius($global-border-radius);
+  @include border-radius;
   @include tab-size(4);
 
   + pre {
@@ -66,13 +66,13 @@ pre {
 .highlight {
   margin: 0.5rem 0;
   position: relative;
-  @include border-radius($global-border-radius);
+  @include border-radius;
 
   // lineNumbersInTable=true
   > div.chroma {
     position: relative;
     background-color: fixit-var(code-block-background-color);
-    @include border-radius($global-border-radius);
+    @include border-radius;
 
     &:is(pre):has(.ln) {
       padding: 0.5rem;
@@ -82,7 +82,7 @@ pre {
       overflow: auto;
       display: block;
       background-color: fixit-var(code-block-background-color);
-      @include border-radius($global-border-radius);
+      @include border-radius;
 
       td {
         vertical-align: top;
@@ -137,9 +137,9 @@ pre {
       height: auto;
       position: relative;
       counter-reset: codeNos calc(#{fixit-var(line-start)} - 1);
-      @include border-radius($global-border-radius);
+      @include border-radius;
       @include transition(height 0.5s ease-out);
-      @include border-radius($global-border-radius);
+      @include border-radius;
       // attr() for arbitrary properties is currently only supported in Chromium-based browsers (see https://caniuse.com/css3-attr);
       // non-supporting browsers fall back to values set via Hugo templating in render-codeblock.html
       @include set-fixit-vars((
@@ -173,14 +173,14 @@ pre {
       position: sticky;
       top: fixit-var(breadcrumb-height);
       @include z-index(0, 1);
-      @include border-radius($global-border-radius $global-border-radius 0 0);
+      @include border-radius(top);
       @include transition(border-radius 0s);
 
       + .code-wrapper {
-        @include border-radius(0 0 $global-border-radius $global-border-radius);
+        @include border-radius(bottom);
 
         > pre.chroma {
-          @include border-radius(0 0 $global-border-radius $global-border-radius);
+          @include border-radius(bottom);
         }
       }
 
@@ -265,7 +265,7 @@ pre {
         $code-background-color 100%
       );
       @include z-index(0, 1);
-      @include border-radius(0 0 $global-border-radius $global-border-radius);
+      @include border-radius(bottom);
 
       [data-theme=dark] & {
         background: linear-gradient(
@@ -294,7 +294,7 @@ pre {
     &.is-collapsed {
       .code-header {
         @include set-fixit-var(code-header-background-color, darken($code-background-color, 6%));
-        @include border-radius($global-border-radius);
+        @include border-radius;
         @include transition(border-radius 0.2s ease 0.2s);
 
         [data-theme=dark] & {
@@ -442,10 +442,10 @@ pre {
           left: 8px;
           top: 8px;
           position: absolute;
-          border-radius: 50%;
           content: ' ';
           height: 12px;
           width: 12px;
+          @include border-radius(full);
 
           [data-theme=dark] & {
             @include set-fixit-vars((
@@ -471,7 +471,7 @@ pre {
 // gist shortcode
 .gist {
   background-color: fixit-var(code-block-background-color);
-  @include border-radius($global-border-radius $global-border-radius 0 0);
+  @include border-radius(top);
   
   .gist-file,
   .gist-data,
@@ -506,7 +506,7 @@ pre {
   .gist-meta {
     padding: 0.4rem 0.8rem;
     @include link(false, false);
-    @include border-radius(0 0 $global-border-radius $global-border-radius);
+    @include border-radius(bottom);
     background-color: fixit-var(gist-meta-background-color);
   }
 

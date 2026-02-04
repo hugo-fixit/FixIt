@@ -5,7 +5,7 @@
   margin-block: 1rem;
   padding: 1rem 1.25rem;
   position: relative;
-  @include border-radius($global-border-radius * 1.5);
+  @include border-radius(0.5rem);
   @include user-select(none);
   @extend .print-d-none;
 
@@ -197,7 +197,7 @@
 
       a.collection-nav-item {
         padding-inline: 2px;
-        border-radius: 50%;
+        @include border-radius(full);
         @include transition(background-color 0.3s ease-out);
 
         &:hover {

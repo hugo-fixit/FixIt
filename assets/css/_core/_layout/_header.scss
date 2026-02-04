@@ -107,11 +107,11 @@ header {
     box-sizing: border-box;
     height: 2.5rem;
     width: 1.25rem;
-    @include border-radius(0.5rem);
     border: none;
     outline: none;
     background-color: transparent;
     vertical-align: baseline !important;
+    @include border-radius(0.5rem);
     @include transition(width 0.3s ease);
   }
 
@@ -248,7 +248,7 @@ header {
         background-color: fixit-var(header-background-color);
         max-height: 60vh;
         overflow-y: auto;
-        @include border-radius($global-border-radius);
+        @include border-radius;
         @include transition(box-shadow 0.3s ease);
         @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, 0.1));
 
@@ -306,10 +306,10 @@ header {
       .menu-toggle {
         span {
           display: block;
-          background: fixit-var(global-font-color);
+          background-color: fixit-var(global-font-color);
           width: 20px;
           height: 2px;
-          @include border-radius(3px);
+          @include border-radius(full);
           @include transition(all 0.3s ease-in-out);
         }
 

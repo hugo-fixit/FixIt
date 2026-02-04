@@ -7,7 +7,7 @@
     display: inline-block;
     width: fixit-var(color-code-size);
     height: fixit-var(color-code-size);
-    border-radius: 50%;
+    @include border-radius(full);
     margin-right: 0.25em;
     vertical-align: middle;
     border: 1px solid;

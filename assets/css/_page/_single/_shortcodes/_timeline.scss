@@ -81,7 +81,7 @@ ul.#{$prefix}timeline {
       font-size: fixit-var(timeline-circle-size);
       line-height: fixit-var(timeline-circle-size);
       text-align: center;
-      border-radius: 50%;
+      @include border-radius(full);
       border-width: fixit-var(timeline-width);
       border-style: solid;
       border-color: fixit-var(timeline-circle-color);

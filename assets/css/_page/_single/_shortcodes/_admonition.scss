@@ -6,7 +6,7 @@
   overflow: hidden;
   background-color: fixit-var(admonition-bg-color);
   border-left-color: fixit-var(admonition-color);
-  @include border-radius($global-border-radius);
+  @include border-radius;
 
   .admonition-title {
     font-weight: fixit-var(admonition-title-font-weight, bold);

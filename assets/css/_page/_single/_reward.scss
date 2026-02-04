@@ -51,7 +51,7 @@
       padding: 1rem;
       background-color: fixit-var(global-background-color);
       @include z-index(2);
-      @include border-radius($global-border-radius);
+      @include border-radius;
       @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, 0.2));
 
       [data-theme=dark] & {
@@ -71,7 +71,7 @@
     background-color: fixit-var(global-background-color);
     vertical-align: text-top;
     line-height: 1rem;
-    @include border-radius($global-border-radius);
+    @include border-radius;
     @include transition(all 0.3s ease-out);
 
     &:active,

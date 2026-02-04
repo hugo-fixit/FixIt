@@ -16,7 +16,7 @@
     color: fixit-var(global-font-color);
     border: 1px solid darken($global-border-color, 15%);
     box-shadow: 0px 0px 5px 0px darken($global-border-color, 15%);
-    @include border-radius($global-border-radius);
+    @include border-radius;
     @include transition(all 0.1s ease-out);
 
     &:active,

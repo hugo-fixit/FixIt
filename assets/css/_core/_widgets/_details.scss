@@ -1,6 +1,6 @@
 .details {
   > .details-summary {
-    @include border-radius($global-border-radius);
+    @include border-radius;
     @include transition(border-radius 0.2s ease 0.2s);
 
     &:hover {
@@ -25,7 +25,7 @@
 
   &.open {
     > .details-summary {
-      @include border-radius($global-border-radius $global-border-radius 0 0);
+      @include border-radius(top);
       @include transition(border-radius 0s);
 
       i.details-icon {
@@ -35,7 +35,7 @@
 
     > .details-content {
       height: auto;
-      @include border-radius(0 0 $global-border-radius $global-border-radius);
+      @include border-radius(bottom);
     }
   }
 

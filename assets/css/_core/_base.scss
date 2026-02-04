@@ -29,7 +29,7 @@ body {
 
 iframe {
   border: 0;
-  @include border-radius($global-border-radius);
+  @include border-radius;
 }
 
 [role='button'] {
@@ -49,9 +49,11 @@ img {
   object-fit: cover;
 }
 
-img,video {
+img,
+video {
   max-width: 100%;
   height: auto;
+  @include border-radius;
 }
 
 dialog {
@@ -75,7 +77,7 @@ details {
   color: fixit-var(code-color);
   background-color: fixit-var(code-inline-background-color);
   text-decoration: inherit;
-  @include border-radius($global-border-radius);
+  @include border-radius;
   @include overflow-wrap(break-word);
   @include line-break(auto);
 }

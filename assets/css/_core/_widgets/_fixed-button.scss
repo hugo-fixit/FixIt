@@ -14,7 +14,7 @@
   padding: 0.5rem 0.625rem;
   color: darken($global-font-secondary-color, 10%);
   background-color: fixit-var(header-background-color);
-  @include border-radius(1.25rem);
+  @include border-radius(full);
   @include transition(color 0.4s ease);
   @include blur;
   @extend .print-d-none;

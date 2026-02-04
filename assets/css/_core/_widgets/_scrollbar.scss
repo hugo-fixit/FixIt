@@ -32,5 +32,5 @@
 ::-webkit-scrollbar-track {
   background-clip: padding-box;
   border: 3px solid transparent;
-  border-radius: 100px;
+  @include border-radius(full);
 }
