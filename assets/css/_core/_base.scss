@@ -79,7 +79,6 @@ details {
   text-decoration: inherit;
   @include border-radius;
   @include overflow-wrap(break-word);
-  @include line-break(auto);
 }
 
 @include link(true, true);

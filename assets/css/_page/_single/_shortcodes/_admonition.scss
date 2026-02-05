@@ -41,7 +41,7 @@
   > .admonition-title {
     border-bottom-color: fixit-var(admonition-bg-color);
     background-color: fixit-var(admonition-bg-color-collapsed);
-    @include transition(all 0.2s ease);
+    transition: all 0.2s ease;
 
     i.icon {
       color: fixit-var(admonition-color);

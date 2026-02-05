@@ -1,7 +1,7 @@
 .details {
   > .details-summary {
+    transition: border-radius 0.2s ease 0.2s;
     @include border-radius;
-    @include transition(border-radius 0.2s ease 0.2s);
 
     &:hover {
       cursor: pointer;
@@ -9,7 +9,7 @@
 
     i.details-icon {
       color: fixit-var(global-font-secondary-color);
-      @include transition(all 0.2s ease);
+      transition: all 0.2s ease;
 
       &:hover {
         color: fixit-var(global-font-color);
@@ -20,16 +20,16 @@
   > .details-content {
     height: 0;
     overflow-y: hidden;
-    @include transition(height 0.5s ease-out);
+    transition: height 0.5s ease-out;
   }
 
   &.open {
     > .details-summary {
+      transition: border-radius 0s;
       @include border-radius(top);
-      @include transition(border-radius 0s);
 
       i.details-icon {
-        @include transform(rotate(90deg));
+        transform: rotate(90deg);
       }
     }
 

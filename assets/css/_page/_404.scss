@@ -2,5 +2,5 @@
   font-size: 1.8rem;
   line-height: 3rem;
   text-align: center;
-  @include transform(translateY(30vh));
+  transform: translateY(30vh);
 }

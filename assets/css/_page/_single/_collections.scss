@@ -51,7 +51,7 @@
       font-weight: 500;
       display: flex;
       align-items: center;
-      @include transition(all 0.3s ease-out);
+      transition: all 0.3s ease-out;
 
       &:only-child {
         max-width: 100%;
@@ -73,11 +73,11 @@
       }
 
       &[rel='prev']:hover {
-        @include transform(translateX(-4px));
+        transform: translateX(-4px);
       }
 
       &[rel='next']:hover {
-        @include transform(translateX(4px));
+        transform: translateX(4px);
       }
     }
   }
@@ -198,7 +198,7 @@
       a.collection-nav-item {
         padding-inline: 2px;
         @include border-radius(full);
-        @include transition(background-color 0.3s ease-out);
+        transition: background-color 0.3s ease-out;
 
         &:hover {
           background-color: darken($global-background-color, 10%);

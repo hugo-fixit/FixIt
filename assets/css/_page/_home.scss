@@ -10,17 +10,17 @@
         width: 8rem;
         height: auto;
         margin: 0 auto;
+        box-shadow: 0 0 0 0.3618em rgba(0, 0, 0, 0.05);
+        transition: all 0.4s ease;
         @include border-radius(full);
-        @include box-shadow(0 0 0 0.3618em rgba(0, 0, 0, 0.05));
-        @include transition(all 0.4s ease);
 
         [data-theme=dark] & {
-          @include box-shadow(0 0 0 0.3618em rgba(255, 255, 255, 0.05));
+          box-shadow: 0 0 0 0.3618em rgba(255, 255, 255, 0.05);
         }
 
         &:hover {
           position: relative;
-          @include transform(translateY(-0.75rem));
+          transform: translateY(-0.75rem);
         }
       }
     }
@@ -105,7 +105,7 @@
       aspect-ratio: auto 1000 / 420;
       position: relative;
       margin: 0.6rem auto;
-      @include transition(transform 0.4s ease);
+      transition: transform 0.4s ease;
 
       img {
         position: absolute;
@@ -113,11 +113,11 @@
         height: 100%;
         left: 0;
         top: 0;
-        @include object-fit(cover);
+        object-fit: cover;
       }
 
       &:hover {
-        @include transform(scale(1.01));
+        transform: scale(1.01);
       }
     }
 

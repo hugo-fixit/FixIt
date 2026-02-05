@@ -2,14 +2,14 @@ header {
   width: 100%;
   background-color: fixit-var(header-background-color);
   @include z-index(fixed);
-  @include transition(box-shadow 0.3s ease);
+  transition: box-shadow 0.3s ease;
   @extend .print-d-none;
 
   &:hover {
-    @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, 0.1));
+    box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.1);
 
     [data-theme=dark] & {
-      @include box-shadow(0 0 1.5rem 0 rgba(255, 255, 255, 0.1));
+      box-shadow: 0 0 1.5rem 0 rgba(255, 255, 255, 0.1);
     }
   }
 }
@@ -31,7 +31,7 @@ header {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  @include flex(10);
+  flex: 10;
 
   .logo {
     min-height: 1.5em;
@@ -89,12 +89,12 @@ header {
     }
 
     .menu-link i {
-      @include transform(perspective(1rem));
-      @include transition(transform 0.4s ease);
+      transform: perspective(1rem);
+      transition: transform 0.4s ease;
     }
 
     .menu-link:hover i {
-      @include transform(perspective(1rem) translateZ(0.2rem));
+      transform: perspective(1rem) translateZ(0.2rem);
     }
   }
 }
@@ -112,7 +112,7 @@ header {
     background-color: transparent;
     vertical-align: baseline !important;
     @include border-radius(0.5rem);
-    @include transition(width 0.3s ease);
+    transition: width 0.3s ease;
   }
 
   @include placeholder(transparent);
@@ -167,8 +167,8 @@ header {
 
 .theme-switch {
   i {
-    @include transform(rotate(225deg));
-    @include transition(all 0.4s ease);
+    transform: rotate(225deg);
+    transition: all 0.4s ease;
   }
 }
 
@@ -211,15 +211,15 @@ header {
       > .menu-item {
         &:hover .sub-menu {
           display: block;
-          @include transform(translateX(-0.5rem));
+          transform: translateX(-0.5rem);
         }
         &.theme-switch {
           &:hover i {
-            @include transform(rotate(45deg));
+            transform: rotate(45deg);
           }
         }
         &.language-switch:hover .sub-menu {
-          @include transform(translateX(calc(1.75rem - 100%)));
+          transform: translateX(calc(1.75rem - 100%));
         }
       }
 
@@ -249,11 +249,11 @@ header {
         max-height: 60vh;
         overflow-y: auto;
         @include border-radius;
-        @include transition(box-shadow 0.3s ease);
-        @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, 0.1));
+        transition: box-shadow 0.3s ease;
+        box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.1);
 
         [data-theme=dark] & {
-          @include box-shadow(0 0 1.5rem 0 rgba(255, 255, 255, 0.1));
+          box-shadow: 0 0 1.5rem 0 rgba(255, 255, 255, 0.1);
         }
 
         .menu-item {
@@ -293,7 +293,7 @@ header {
     .header-wrapper {
       padding: 0 1rem;
       font-size: 1.125rem;
-      @include transition(margin-top 0.3s ease);
+      transition: margin-top 0.3s ease;
 
       .header-title {
         max-width: 80%;
@@ -310,7 +310,7 @@ header {
           width: 20px;
           height: 2px;
           @include border-radius(full);
-          @include transition(all 0.3s ease-in-out);
+          transition: all 0.3s ease-in-out;
         }
 
         span:not(:last-child) {
@@ -319,7 +319,7 @@ header {
 
         &.active {
           span:nth-child(1) {
-            @include transform(translateY(8px) rotate(45deg));
+            transform: translateY(8px) rotate(45deg);
           }
 
           span:nth-child(2) {
@@ -327,7 +327,7 @@ header {
           }
 
           span:nth-child(3) {
-            @include transform(translateY(-8px) rotate(-45deg));
+            transform: translateY(-8px) rotate(-45deg);
           }
         }
       }
@@ -339,11 +339,11 @@ header {
       display: none;
       overflow-y: auto;
       max-height: 70vh;
-      @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
       @include scrollbar-width(none, 0);
 
       [data-theme=dark] & {
-        @include box-shadow(0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
+        box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
       }
 
       .search-wrapper {
@@ -401,7 +401,7 @@ header {
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow-x: hidden;
-          @include flex(4);
+          flex: 4;
         }
 
         & .nested-item {
@@ -489,11 +489,11 @@ header {
 .search-dropdown {
   position: fixed;
   top: fixit-var(header-height);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
   @include z-index(fixed);
-  @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
 
   [data-theme=dark] & {
-    @include box-shadow(0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
+    box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
   }
 
   &.desktop {
@@ -512,7 +512,8 @@ header {
 
     .suggestions {
       overflow-y: auto;
-      max-height: calc(100dvh - #{fixit-var(header-height)});
+      // 41px is the height of the search-footer
+      max-height: calc(100dvh - #{fixit-var(header-height)} - 41px);
 
       .suggestion {
         padding: 0.75rem 1rem;
@@ -535,14 +536,15 @@ header {
         }
 
         .suggestion-context {
+          display: -webkit-box;
           line-height: 1.25rem;
+          -webkit-box-orient: vertical;
           -webkit-line-clamp: 2;
           line-clamp: 2;
           overflow: hidden;
           text-overflow: ellipsis;
           color: fixit-var(global-font-secondary-color);
           @include overflow-wrap(break-word);
-          @include box(vertical);
         }
 
         em {
@@ -582,7 +584,6 @@ header {
       float: right;
       font-size: 0.8rem;
       color: fixit-var(global-font-secondary-color);
-
       @include link(false, false);
 
       a {

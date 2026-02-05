@@ -15,7 +15,7 @@
     font-weight: 700;
     padding: 5px 5px;
     text-decoration: none;
-    @include transition(0.3s);
+    transition: 0.3s;
   }
 
   li {
@@ -41,7 +41,7 @@
       height: 3px;
       background: fixit-var(pagination-link-hover-color);
       bottom: 0px;
-      @include transition(0.3s);
+      transition: 0.3s;
     }
 
     &::before {

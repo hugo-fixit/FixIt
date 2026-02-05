@@ -39,7 +39,7 @@ tab-container {
     font-weight: 500;
     cursor: pointer;
     flex-shrink: 0;
-    @include transition(all 0.3s ease);
+    transition: all 0.3s ease;
   }
 
   > .tab-panel {
@@ -210,11 +210,11 @@ tab-container {
       &[aria-selected='true'] {
         color: #ffffff;
         background-color: fixit-var(primary);
-        @include box-shadow(0 0.125rem 0.5rem rgba(0, 0, 0, 0.3));
+        box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.3);
 
         [data-theme=dark] & {
           background-color: fixit-var(primary);
-          @include box-shadow(0 0.125rem 0.5rem rgba(255, 255, 255, 0.3));
+          box-shadow: 0 0.125rem 0.5rem rgba(255, 255, 255, 0.3);
         }
       }
 
@@ -464,10 +464,10 @@ tab-container {
 
       &[aria-selected='true'] {
         background-color: fixit-var(global-background-color);
-        @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
 
         [data-theme=dark] & {
-          @include box-shadow(0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
+          box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
         }
       }
     }

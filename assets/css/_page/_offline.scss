@@ -1,6 +1,6 @@
 #content-offline {
   text-align: center;
-  @include transform(translateY(30vh));
+  transform: translateY(30vh);
 
   .offline-title {
     font-size: 3.6rem;

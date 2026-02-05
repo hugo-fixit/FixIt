@@ -12,8 +12,8 @@ pre {
   font-size: fixit-var(code-block-font-size);
   font-family: fixit-var(code-font-family);
   background-color: fixit-var(code-block-background-color);
+  tab-size: 4;
   @include border-radius;
-  @include tab-size(4);
 
   + pre {
     margin-top: 0.5rem;
@@ -24,8 +24,8 @@ pre {
     background-color: transparent;
     font-size: inherit;
     line-height: inherit;
+    min-width: max-content;
     @include border-radius(0);
-    @include max-content(min-width);
 
     [data-theme=dark] & {
       background-color: transparent;
@@ -137,8 +137,8 @@ pre {
       height: auto;
       position: relative;
       counter-reset: codeNos calc(#{fixit-var(line-start)} - 1);
+      transition: height 0.5s ease-out;
       @include border-radius;
-      @include transition(height 0.5s ease-out);
       @include border-radius;
       // attr() for arbitrary properties is currently only supported in Chromium-based browsers (see https://caniuse.com/css3-attr);
       // non-supporting browsers fall back to values set via Hugo templating in render-codeblock.html
@@ -172,9 +172,9 @@ pre {
       background-color: fixit-var(code-header-background-color);
       position: sticky;
       top: fixit-var(breadcrumb-height);
+      transition: border-radius 0s;
       @include z-index(base);
       @include border-radius(top);
-      @include transition(border-radius 0s);
 
       + .code-wrapper {
         @include border-radius(bottom);
@@ -204,7 +204,7 @@ pre {
 
         .arrow {
           padding: 0 0.2rem;
-          @include transition(transform 0.2s ease);
+          transition: transform 0.2s ease;
         }
 
         .title-inner {
@@ -282,7 +282,7 @@ pre {
         animation-duration: 1.5s;
         animation-iteration-count: infinite;
         animation-delay: 0.3s;
-        @include transition(transform 0.2s ease);
+        transition: transform 0.2s ease;
       }
     }
 
@@ -293,9 +293,9 @@ pre {
     // classic mode code block collapsed
     &.is-collapsed {
       .code-header {
+        transition: border-radius 0.2s ease 0.2s;
         @include set-fixit-var(code-header-background-color, darken($code-background-color, 6%));
         @include border-radius;
-        @include transition(border-radius 0.2s ease 0.2s);
 
         [data-theme=dark] & {
           @include set-fixit-var(code-header-background-color, darken($code-background-color-dark, 6%));
@@ -307,7 +307,7 @@ pre {
       }
 
       .arrow {
-        @include transform(rotate(-90deg));
+        transform: rotate(-90deg);
       }
 
       .ellipses-btn {

@@ -115,13 +115,13 @@
     }
 
     i.toc-icon {
-      @include transition(transform 0.2s ease);
+      transition: transform 0.2s ease;
     }
   }
 
   &.toc-hidden i.toc-icon {
-    @include transform(rotate(-90deg));
-    @include transition(transform 0.2s ease);
+    transform: rotate(-90deg);
+    transition: transform 0.2s ease;
   }
 
   .toc-content {

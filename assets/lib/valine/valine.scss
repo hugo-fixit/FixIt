@@ -17,18 +17,6 @@ $code-background-color-dark: #272C34 !default;
   overflow-wrap: $value;
 }
 
-@mixin line-break($value) {
-  -webkit-line-break: $value;
-  -ms-line-break: $value;
-  line-break: $value;
-}
-
-@mixin tab-size($value) {
-  -moz-tab-size: $value;
-  -o-tab-size: $value;
-  tab-size: $value;
-}
-
 .v[data-class=v] {
   .vcount {
     z-index: 60;
@@ -53,15 +41,14 @@ $code-background-color-dark: #272C34 !default;
 
   code, pre, pre code {
     font-size: 90%;
-    @include overflow-wrap(break-word);
-    @include line-break(auto);
-    @include tab-size(4);
+    tab-size: 4;
     color: $code-color;
-    background: $code-background-color;
+    background-color: $code-background-color;
+    @include overflow-wrap(break-word);
 
     [data-theme=dark] & {
       color: $code-color-dark;
-      background: $code-background-color-dark;
+      background-color: $code-background-color-dark;
     }
   }
 }

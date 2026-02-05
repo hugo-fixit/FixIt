@@ -61,7 +61,7 @@
         box-sizing: border-box;
         object-position: center;
         @include border-radius(full);
-        @include object-fit(cover);
+        object-fit: cover;
       }
     }
   }
@@ -444,10 +444,10 @@
       font-family: fixit-var(code-font-family);
       color: fixit-var(code-color);
       @include border-radius;
-      @include box-shadow(inset 0 -1px 0 $global-border-color);
+      box-shadow: inset 0 -1px 0 $global-border-color;
 
       [data-theme=dark] & {
-        @include box-shadow(inset 0 -1px 0 $global-border-color-dark);
+        box-shadow: inset 0 -1px 0 $global-border-color-dark;
       }
     }
 

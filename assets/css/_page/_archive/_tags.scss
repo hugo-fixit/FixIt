@@ -5,17 +5,17 @@
     display: inline-block;
     position: relative;
     margin: 5px 10px;
+    transition: all ease-out 0.3s;
     @include overflow-wrap(break-word);
-    @include transition(all ease-out 0.3s);
 
     &:active,
     &:focus,
     &:hover {
-      @include transform(scale(1.2));
+      transform: scale(1.2);
 
       sup {
         color: fixit-var(global-font-color);
-        @include transition(all ease-out 0.3s);
+        transition: all ease-out 0.3s;
       }
     }
 
