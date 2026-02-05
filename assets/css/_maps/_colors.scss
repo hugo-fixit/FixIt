@@ -1,17 +1,9 @@
-// Theme colors
-$primary: #1772ee !default;
-$secondary: #919191 !default;
-$success: #13ce66 !default;
-$info: #0dcaf0 !default;
-$warning: #ffba00 !default;
-$danger: #ff4949 !default;
-
 // Theme colors map
 $theme-colors: (
-  'primary': $primary,
-  'secondary': $secondary,
-  'success': $success,
-  'info': $info,
-  'warning': $warning,
-  'danger': $danger
+  'primary': #1677ff,
+  'secondary': #8b949e,
+  'success': #52c41a,
+  'info': #13c2c2,
+  'warning': #faad14,
+  'danger': #ff4d4f
 ) !default;

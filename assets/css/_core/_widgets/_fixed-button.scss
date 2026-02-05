@@ -12,16 +12,12 @@
   font-size: 1rem;
   line-height: 1.5rem;
   padding: 0.5rem 0.625rem;
-  color: darken($global-font-secondary-color, 10%);
+  color: fixit-var(secondary);
   background-color: fixit-var(header-background-color);
   transition: color 0.4s ease;
   @include border-radius(full);
   @include blur;
   @extend .print-d-none;
-
-  [data-theme=dark] & {
-    color: fixit-var(global-font-secondary-color);
-  }
 
   &:hover,
   &:active {

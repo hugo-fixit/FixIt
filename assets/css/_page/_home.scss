@@ -62,7 +62,7 @@
       font-weight: normal;
       margin: 0;
       padding: 0.5rem;
-      color: fixit-var(global-font-secondary-color);
+      color: fixit-var(secondary);
     }
   }
 }
@@ -129,12 +129,12 @@
 
     .content {
       margin-top: 0.3rem;
-      color: fixit-var(global-font-secondary-color);
+      color: fixit-var(global-placeholder-color);  
       @include link(false, true);
 
       b,
       strong {
-        color: fixit-var(global-font-secondary-color);
+        color: fixit-var(global-placeholder-color);
       }
     }
 

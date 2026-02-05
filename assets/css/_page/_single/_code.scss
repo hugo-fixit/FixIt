@@ -120,7 +120,7 @@ pre {
   // Line numbers
   .lnt,
   .ln {
-    color: fixit-var(global-font-secondary-color);
+    color: fixit-var(secondary);
     @include user-select(none);
   }
 
@@ -398,7 +398,7 @@ pre {
           min-width: calc(#{fixit-var(line-digit)} * 1ch);
           padding-inline: 0.75rem;
           flex-shrink: 0;
-          color: fixit-var(global-font-secondary-color);
+          color: fixit-var(secondary);
           background-color: fixit-var(code-block-background-color);
         }
 

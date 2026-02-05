@@ -28,9 +28,9 @@ $global-background-color-dark: #292a2e !default;
 $global-font-color: #161209 !default;
 $global-font-color-dark: #b1b1ba !default;
 
-// Color of the secondary text
-$global-font-secondary-color: #b1b1ba !default;
-$global-font-secondary-color-dark: #909092 !default;
+// Color of the placeholder
+$global-placeholder-color: #b1b1ba !default;
+$global-placeholder-color-dark: #909092 !default;
 
 // Color of the link
 $global-link-color: #161209 !default;
@@ -92,10 +92,10 @@ $search-background-color-dark: #363636 !default;
 
 // ========== Tag Cloud ========== //
 // Color range of tag cloud
-$tag-cloud-start: $global-font-secondary-color!default;
-$tag-cloud-end: $global-font-color!default;
-$tag-cloud-start-dark: $global-font-secondary-color-dark!default;
-$tag-cloud-end-dark: $global-font-color-dark!default;
+$tag-cloud-start: #b1b1ba !default;
+$tag-cloud-end: $global-font-color !default;
+$tag-cloud-start-dark: #909092 !default;
+$tag-cloud-end-dark: $global-font-color-dark !default;
 // ========== Tag Cloud ========== //
 
 // ========== Single Content ========== //

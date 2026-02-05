@@ -39,7 +39,7 @@
         content: attr(data-separator);
         display: inline-block;
         padding-inline: 0.5rem;
-        color: fixit-var(global-font-secondary-color);
+        color: fixit-var(global-placeholder-color);
       }
 
       &.active {

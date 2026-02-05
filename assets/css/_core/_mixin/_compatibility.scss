@@ -1,4 +1,4 @@
-@mixin placeholder($color) {
+@mixin placeholder($color: fixit-var(global-placeholder-color)) {
   input::-webkit-input-placeholder {
     color: $color;
   }

@@ -111,8 +111,8 @@ header {
     outline: none;
     background-color: transparent;
     vertical-align: baseline !important;
-    @include border-radius(0.5rem);
     transition: width 0.3s ease;
+    @include border-radius(0.5rem);
   }
 
   @include placeholder(transparent);
@@ -149,10 +149,10 @@ header {
       padding: 0 2rem 0 2rem;
     }
 
-    @include placeholder(fixit-var(global-font-secondary-color));
+    @include placeholder;
 
     .search-button {
-      color: fixit-var(global-font-secondary-color);
+      color: fixit-var(global-placeholder-color);
     }
 
     .search-clear:hover {
@@ -230,11 +230,7 @@ header {
           width: 0;
           margin: 0.125rem 0.25rem;
           padding: 0;
-          border-left: 1px dashed lighten($global-font-secondary-color, 15%);
-
-          [data-theme=dark] & {
-            border-left-color: darken($global-font-secondary-color-dark, 15%);
-          }
+          border-left: 1px dashed fixit-var(global-border-color);
         }
       }
 
@@ -389,10 +385,10 @@ header {
         padding: 0 1rem;
 
         &:not(.menu-system):hover {
-          background-color: lighten($global-font-secondary-color, 24%);
+          background-color: #f2f2f3;
 
           [data-theme=dark] & {
-            background-color: darken($global-font-secondary-color-dark, 24%);
+            background-color: #535355;
           }
         }
 
@@ -452,10 +448,10 @@ header {
         }
 
         .menu-item:hover {
-          background-color: lighten($global-font-secondary-color, 20%);
+          background-color: #e7e7ea;
 
           [data-theme=dark] & {
-            background-color: darken($global-font-secondary-color-dark, 20%);
+            background-color: #5d5d5f;
           }
         }
       }
@@ -532,7 +528,7 @@ header {
           font-size: 0.875rem;
           float: right;
           text-align: right;
-          color: fixit-var(global-font-secondary-color);
+          color: fixit-var(secondary);
         }
 
         .suggestion-context {
@@ -543,7 +539,7 @@ header {
           line-clamp: 2;
           overflow: hidden;
           text-overflow: ellipsis;
-          color: fixit-var(global-font-secondary-color);
+          color: fixit-var(global-placeholder-color);
           @include overflow-wrap(break-word);
         }
 
@@ -583,7 +579,7 @@ header {
       padding: 0.5rem 1rem;
       float: right;
       font-size: 0.8rem;
-      color: fixit-var(global-font-secondary-color);
+      color: fixit-var(secondary);
       @include link(false, false);
 
       a {

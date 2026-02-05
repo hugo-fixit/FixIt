@@ -15,14 +15,14 @@
 
       .post-info-mod {
         font-size: 0.8em;
-        color: fixit-var(global-font-secondary-color);
+        color: fixit-var(secondary);  
 
         @include link(false, false);
       }
 
       .post-info-license {
         font-size: 0.8em;
-        color: fixit-var(global-font-secondary-color);
+        color: fixit-var(secondary);
 
         @include link(false, false);
       }

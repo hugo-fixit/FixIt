@@ -37,7 +37,7 @@
 
   .post-meta {
     font-size: 0.875rem;
-    color: fixit-var(global-font-secondary-color);
+    color: fixit-var(secondary);
 
     .comment-visitors,
     .comment-count {
@@ -85,7 +85,7 @@
     text-align: center;
     font-size: 15px;
     padding: 5px;
-    color: fixit-var(global-font-secondary-color);
+    color: fixit-var(global-placeholder-color);
   }
 
   hr {
@@ -265,7 +265,7 @@
       background-color: fixit-var(code-block-background-color);
 
       rt {
-        color: fixit-var(global-font-secondary-color);
+        color: fixit-var(secondary);
       }
     }
 
@@ -402,7 +402,12 @@
     .footnotes {
       font-size: 0.75rem;
       white-space: normal;
-      color: darken($global-font-secondary-color, 5%);
+      color: #a3a3ae;
+      @include link(false, true);
+
+      [data-theme=dark] & {
+        color: #9d9d9f;
+      }
 
       ol {
         margin-block: 1em;
@@ -424,12 +429,6 @@
         text-decoration: underline;
       }
 
-      @include link(false, true);
-
-      [data-theme=dark] & {
-        color: lighten($global-font-secondary-color-dark, 5%);
-      }
-
       p {
         margin: 0.25rem 0;
       }
@@ -443,12 +442,8 @@
       font-size: 0.8rem;
       font-family: fixit-var(code-font-family);
       color: fixit-var(code-color);
+      box-shadow: inset 0 -1px 0 fixit-var(global-border-color);
       @include border-radius;
-      box-shadow: inset 0 -1px 0 $global-border-color;
-
-      [data-theme=dark] & {
-        box-shadow: inset 0 -1px 0 $global-border-color-dark;
-      }
     }
 
     // KaTeX styles
