@@ -4,7 +4,7 @@
   background-color: fixit-var(global-background-color);
   display: flex;
   gap: 0.5rem;
-  @include z-index(1);
+  @include z-index(sticky);
   @extend .print-d-none;
 
   &:has(~ main[data-reverse]) {

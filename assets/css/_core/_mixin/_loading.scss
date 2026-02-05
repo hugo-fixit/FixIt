@@ -11,5 +11,5 @@
   background-repeat: no-repeat;
   background-image: fixit-var(loading-img);
   background-size: 60px;
-  @include z-index(0, 10);
+  @include z-index(loading);
 }

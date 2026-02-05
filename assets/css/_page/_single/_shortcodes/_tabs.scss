@@ -313,7 +313,7 @@ tab-container {
       &[aria-selected='false']:hover {
         background-color: fixit-var(global-background-color);
         color: fixit-var(global-link-color);
-        z-index: 1;
+        @include z-index(base);
       }
     }
 
@@ -334,13 +334,13 @@ tab-container {
         &:first-of-type {
           position: sticky;
           left: 0;
-          z-index: 2;
+          @include z-index(base, 1);
         }
 
         &:last-of-type {
           position: sticky;
           right: 0;
-          z-index: 2;
+          @include z-index(base, 1);
         }
       }
     }

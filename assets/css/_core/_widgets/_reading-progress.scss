@@ -3,7 +3,7 @@
   width: fixit-var(progress, 0);
   background-color: fixit-var(bg-progress, fixit-var(success));
   position: fixed;
-  @include z-index(2);
+  @include z-index(fixed);
   @extend .print-d-none;
   
   [data-theme=dark] & {

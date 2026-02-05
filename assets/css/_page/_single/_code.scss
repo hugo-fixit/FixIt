@@ -172,7 +172,7 @@ pre {
       background-color: fixit-var(code-header-background-color);
       position: sticky;
       top: fixit-var(breadcrumb-height);
-      @include z-index(0, 1);
+      @include z-index(base);
       @include border-radius(top);
       @include transition(border-radius 0s);
 
@@ -217,7 +217,7 @@ pre {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          @include z-index(0, 2);
+          @include z-index(base, 1);
         }
       }
 
@@ -264,7 +264,7 @@ pre {
         rgba($code-background-color, 0.9) 60%,
         $code-background-color 100%
       );
-      @include z-index(0, 1);
+      @include z-index(base);
       @include border-radius(bottom);
 
       [data-theme=dark] & {
@@ -493,7 +493,7 @@ pre {
           position: sticky;
           left: 0;
           background-color: fixit-var(code-block-background-color);
-          @include z-index(0, 1);
+          @include z-index(base);
         }
 
         td.blob-code {

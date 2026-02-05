@@ -87,7 +87,7 @@ ul.#{$prefix}timeline {
       border-color: fixit-var(timeline-circle-color);
       background-color: fixit-var(global-background-color);
       color: transparent;
-      z-index: 1;
+      @include z-index(base);
     }
     &::after {
       content: '';

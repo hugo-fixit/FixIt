@@ -1,7 +1,7 @@
 header {
   width: 100%;
   background-color: fixit-var(header-background-color);
-  @include z-index(2);
+  @include z-index(fixed);
   @include transition(box-shadow 0.3s ease);
   @extend .print-d-none;
 
@@ -356,7 +356,7 @@ header {
         position: sticky;
         top: 0;
         background-color: fixit-var(header-background-color);
-        @include z-index(0, 50);
+        @include z-index(sticky);
       }
 
       .search {
@@ -467,6 +467,10 @@ header {
   }
 
   &.open {
+    .header-wrapper {
+      margin-top: calc(#{fixit-var(header-height)} * -1);
+    }
+
     .menu {
       padding-top: 0;
       border-top: none;
@@ -485,7 +489,7 @@ header {
 .search-dropdown {
   position: fixed;
   top: fixit-var(header-height);
-  @include z-index(2);
+  @include z-index(fixed);
   @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
 
   [data-theme=dark] & {

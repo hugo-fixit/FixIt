@@ -16,7 +16,7 @@
 .github-corner {
   position: fixed;
   top: 0;
-  @include z-index(2);
+  @include z-index(fixed);
   @extend .print-d-none;
 
   :hover .octo-arm {

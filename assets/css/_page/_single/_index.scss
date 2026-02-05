@@ -107,7 +107,7 @@
         left: 5%;
         top: 50%;
         transform: translateY(-50%);
-        z-index: 1;
+        @include z-index(base);
         color: fixit-var(hr-active-color);
         font-size: 20px;
         line-height: 1;

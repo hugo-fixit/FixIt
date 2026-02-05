@@ -22,7 +22,7 @@
   transition-duration: 0.1s;
   transition-property: color, background-color, box-shadow, border-color;
   @include border-radius;
-  @include z-index(0, 1);
+  @include z-index(base);
   @extend .print-d-none;
 
   [data-theme=dark] & {

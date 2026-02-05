@@ -50,7 +50,7 @@
       transform: translate(-50%, -50%);
       padding: 1rem;
       background-color: fixit-var(global-background-color);
-      @include z-index(2);
+      @include z-index(fixed);
       @include border-radius;
       @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, 0.2));
 
