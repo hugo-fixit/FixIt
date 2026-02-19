@@ -1,4 +1,4 @@
-{{- $buildDrafts := .Site.BuildDrafts -}}
+{{- $buildDrafts := .Page.Draft -}}
 {{- $relLangURL := relLangURL "" -}}
 
 {{- /* Desktop header */ -}}
@@ -118,7 +118,7 @@
             </span>
             <ul class="sub-menu">
               {{- if (eq .Kind "404") -}}
-                {{- range .Sites -}}
+                {{- range hugo.Sites -}}
                   {{- if ne . $.Site -}}
                     {{- $link := printf "%v/404.html" .LanguagePrefix -}}
                     <li class="menu-item">
@@ -292,7 +292,7 @@
               </span>
               <select id="language-select" class="language-select" onchange="location = this.value;">
                 {{- if eq .Kind "404" -}}
-                  {{- range .Sites -}}
+                  {{- range hugo.Sites -}}
                     {{- $link := printf "%v/404.html" .LanguagePrefix -}}
                     <option value="{{ $link }}"{{ if eq . $.Site }} selected disabled{{ end }}>
                       {{- .Language.LanguageName -}}
