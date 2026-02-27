@@ -7,7 +7,7 @@ licenselink = "https://github.com/hugo-fixit/FixIt/blob/main/LICENSE"
 description = "A Clean, Elegant but Advanced Hugo Theme for Hugo."
 homepage = "https://github.com/hugo-fixit/FixIt"
 demosite = "https://fixit.lruihao.cn"
-min_version = "0.147.7"
+min_version = "0.156.0"
 tags = [
   "blog",
   "clean",

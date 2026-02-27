@@ -6,7 +6,7 @@ Only the latest version receives active maintenance and security updates:
 
 | Version | Hugo Version      | LoveIt Compat      | Supported          |
 | :-----: | :---------------: | :----------------: | :----------------: |
-| 0.4.x   | >= 0.147.7        | N/A                | :white_check_mark: |
+| 0.4.x   | 0.147.7 ~ latest  | N/A                | :white_check_mark: |
 | 0.3.x   | 0.112.0 ~ 0.146.0 | N/A                | :x:                |
 | 0.2.x   | 0.62.0 ~ 0.110.0  | :white_check_mark: | :x:                |
 | 0.1.x   | Unknown           | :white_check_mark: | :x:                |
