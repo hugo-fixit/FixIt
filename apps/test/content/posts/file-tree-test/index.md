@@ -115,7 +115,7 @@ Trying the file not found case (should fallback to next mode):
 
 {{< file-tree file="data/nonexistent.yaml" data="example" />}}
 
-### Site data
+### Hugo data
 
 #### Basic usage
 

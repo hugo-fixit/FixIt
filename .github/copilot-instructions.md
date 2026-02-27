@@ -184,7 +184,7 @@ class FixIt {
 4. **循环遍历**: 合理使用 range
 
    ```go-html-template
-   {{- range $index, $value := .Site.Languages -}}
+   {{- range $index, $value := .Pages -}}
      <!-- 处理逻辑 -->
    {{- end -}}
    ```
