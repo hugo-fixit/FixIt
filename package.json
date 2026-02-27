@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.7.3",
-    "@types/node": "^24.10.4",
+    "@types/node": "^24.10.15",
     "auto-changelog-plus": "^1.2.3",
     "eslint": "^9.39.2",
     "lint-staged": "^16.2.7",
