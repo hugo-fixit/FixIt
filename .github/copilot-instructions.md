@@ -6,7 +6,7 @@
 
 FixIt 是一个面向 Hugo 静态网站生成器的现代化、响应式主题。项目基于以下技术栈：
 
-- **Hugo**: 静态网站生成器（≥ 0.147.7）
+- **Hugo**: 静态网站生成器（≥ 0.156.0）
 - **SCSS**: CSS 预处理器，用于样式开发
 - **JavaScript**: ES6+ 标准，用于前端交互功能
 - **Go Templates**: Hugo 模板引擎
@@ -184,7 +184,7 @@ class FixIt {
 4. **循环遍历**: 合理使用 range
 
    ```go-html-template
-   {{- range $index, $value := .Site.Languages -}}
+   {{- range $index, $value := .Pages -}}
      <!-- 处理逻辑 -->
    {{- end -}}
    ```
@@ -211,7 +211,7 @@ class FixIt {
 
 1. **前置要求**:
    - Node.js (≥ 20.0.0)
-   - Hugo Extended (≥ 0.147.7)
+   - Hugo Extended (≥ 0.156.0)
    - pnpm (包管理器)
 
 2. **开发命令**:

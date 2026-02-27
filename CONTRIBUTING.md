@@ -7,7 +7,7 @@ Make sure that you follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) while contrib
 Before you start contributing, make sure you have the following tools installed:
 
 - **Node.js** (>= 20.0.0) - Required for package management and build tools
-- **Hugo Extended** (>= 0.147.7) - The static site generator
+- **Hugo Extended** (>= 0.156.0) - The static site generator
 - **pnpm** - Package manager (recommended)
 
 You can check your installed versions:

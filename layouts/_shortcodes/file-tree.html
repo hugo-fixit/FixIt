@@ -89,9 +89,9 @@
   {{- end -}}
 {{- end -}}
 
-{{- /* Site Data: load from data/filetree/ */ -}}
+{{- /* Hugo Data: load from data/filetree/ */ -}}
 {{- if $dataName | and (not $treeData) -}}
-  {{- with index .Site.Data.filetree (printf "%v.%v" $dataName .Page.Language) | default (index .Site.Data.filetree $dataName) -}}
+  {{- with index hugo.Data.filetree (printf "%v.%v" $dataName .Page.Language) | default (index hugo.Data.filetree $dataName) -}}
     {{- $treeData = . -}}
   {{- else -}}
     {{- $exts := delimit (apply $supportExts "trim" "." "\\.") "|" -}}
