@@ -114,7 +114,6 @@
   reward-color: (light: $reward-color, dark: $reward-color-dark),
 
   // Divider
-  hr-background-color: (light: darken($global-border-color, 5%), dark: lighten($global-border-color-dark, 5%)),
   hr-active-color: (light: lighten($single-link-hover-color, 4%), dark: darken($global-link-hover-color-dark, 4%)),
 
   // Code

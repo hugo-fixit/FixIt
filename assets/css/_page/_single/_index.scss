@@ -92,7 +92,7 @@
     position: relative;
     height: 1em;
     margin-block: 1em;
-    background: linear-gradient(to right, fixit-var(hr-background-color) 50%, transparent 50%);
+    background-image: linear-gradient(to right, fixit-var(global-border-color) 50%, transparent 50%);
     background-size: 10px 2px;
     background-position: center;
     background-repeat: repeat-x;
@@ -415,7 +415,7 @@
       }
       
       hr {
-        background-color: fixit-var(hr-background-color);
+        background-color: fixit-var(global-border-color);
         height: 1px;
         margin-block: 1em;
       }

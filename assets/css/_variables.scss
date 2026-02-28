@@ -41,11 +41,8 @@ $global-link-hover-color: #2983bb !default; // 潮蓝
 $global-link-hover-color-dark: #fff !default;
 
 // Color of the border
-// TODO refactor border colors
-// $global-border-color: #e3e3e3 !default;
-// $global-border-color-dark: #434343 !default;
-$global-border-color: #f0f0f0 !default;
-$global-border-color-dark: #363636 !default;
+$global-border-color: #e3e3e3 !default;
+$global-border-color-dark: #717171 !default;
 // ========== Global ========== //
 
 // ========== Scrollbar ========== //
@@ -79,8 +76,8 @@ $menu-active-color: #161209 !default;
 $menu-active-color-dark: #fff !default;
 
 // Border color of the menu item
-$menu-border-color: darken($global-border-color, 5%) !default;
-$menu-border-color-dark: lighten($global-border-color-dark, 5%) !default;
+$menu-border-color: #3c3c3c1f !default;
+$menu-border-color-dark: #5454547a !default;
 
 // Height of the submenu item of desktop header
 $submenu-height: $header-height * 0.5 !default;

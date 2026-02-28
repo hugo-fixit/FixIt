@@ -14,8 +14,8 @@
     box-sizing: border-box;
     outline: none;
     color: fixit-var(global-font-color);
-    border: 1px solid darken($global-border-color, 15%);
-    box-shadow: 0px 0px 5px 0px darken($global-border-color, 15%);
+    border: 1px solid fixit-var(global-border-color);
+    box-shadow: 0px 0px 5px 0px fixit-var(global-border-color);
     @include border-radius;
     transition: all 0.1s ease-out;
 
@@ -30,11 +30,6 @@
         color: lighten($global-link-hover-color-dark, 6%);
         box-shadow: 0px 0px 5px 0px darken($global-link-hover-color-dark, 20%);
       }
-    }
-
-    [data-theme=dark] & {
-      border-color: lighten($global-border-color-dark, 15%);
-      box-shadow: 0px 0px 5px 0px lighten($global-border-color-dark, 15%);
     }
   }
 

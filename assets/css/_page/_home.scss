@@ -84,12 +84,12 @@
       content: '';
       position: absolute;
       width: 100%;
-      padding: 2px;
+      padding: 1.5px;
       transform: translateY(18px);
       background: repeating-linear-gradient(
         135deg,
-        fixit-var(hr-background-color) 0px,
-        fixit-var(hr-background-color) 4px,
+        fixit-var(global-border-color) 0px,
+        fixit-var(global-border-color) 4px,
         transparent 4px,
         transparent 8px
       );
