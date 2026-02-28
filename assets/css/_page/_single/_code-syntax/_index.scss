@@ -17,13 +17,13 @@
   /* LineHighlight */
   .hl {
     display: block;
-    background-color: var(#{$rootPrefix}code-highlight-color);
-    box-shadow: -0.75rem 0 0 var(#{$rootPrefix}code-highlight-color), 0.75rem 0 0 var(#{$rootPrefix}code-highlight-color);
+    background-color: fixit-var(code-highlight-color);
+    box-shadow: -0.75rem 0 0 fixit-var(code-highlight-color), 0.75rem 0 0 fixit-var(code-highlight-color);
   }
 
   @import 'light';
 
-  [data-theme='dark'] & {
+  [data-theme=dark] & {
     @import 'dark';
   }
 }

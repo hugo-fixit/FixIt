@@ -21,7 +21,7 @@
 }
 
 .mermaid {
-  [data-theme='dark'] & {
+  [data-theme=dark] & {
     height: 0;
     padding: 0;
   }
@@ -31,7 +31,7 @@
   height: 0;
   padding: 0;
 
-  [data-theme='dark'] & {
+  [data-theme=dark] & {
     height: auto;
     padding: 0.5rem 0.75rem;
   }

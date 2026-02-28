@@ -1,0 +1,83 @@
+.fixed-buttons {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  @include z-index(fixed, -10);
+}
+
+.fixed-button {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding: 0.5rem 0.625rem;
+  color: fixit-var(secondary);
+  background-color: darken($header-background-color, 4%);
+  transition: color 0.4s ease;
+  @include border-radius(full);
+  @include blur;
+  @extend .print-d-none;
+
+  [data-theme=dark] & {
+    background-color: darken($header-background-color-dark, 4%);
+  }
+
+  &:hover,
+  &:active {
+    color: fixit-var(global-font-color);
+    cursor: pointer;
+  }
+
+  &:active,
+  &:focus,
+  &:hover {
+    outline: none;
+  }
+}
+
+.back-to-top {
+  overflow: hidden;
+  position: relative;
+  @include set-fixit-vars((
+    // Ring stroke width
+    b2t-stroke: 0.5rem,
+    // Progress color
+    b2t-prog: fixit-var(success),
+    // dasharray = circumference = 2πr
+    // dashoffset = circumference * (1 - scrollPercent / 100)
+    b2t-dasharray: 314.15
+  ));
+
+  [data-theme=dark] & {
+     @include set-fixit-var(b2t-prog, fixit-var(global-font-color));
+  }
+
+  // SVG circular progress ring
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    // Rotate to start from top
+    transform: rotate(-90deg);
+  }
+
+  .bg {
+    fill: none;
+    stroke: fixit-var(global-border-color);
+    stroke-width: fixit-var(b2t-stroke);
+  }
+
+  // Progress ring
+  .progress {
+    fill: none;
+    stroke: fixit-var(b2t-prog);
+    stroke-width: fixit-var(b2t-stroke);
+    stroke-linecap: round;
+    stroke-dasharray: fixit-var(b2t-dasharray);
+    stroke-dashoffset: calc(#{fixit-var(b2t-dasharray)} * (1 - #{fixit-var(b2t-progress, 0)} / 100));
+    transition: stroke-dashoffset .1s linear;
+  }
+}

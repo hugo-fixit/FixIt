@@ -2,7 +2,6 @@
 title: Tabs Comprehensive Test Cases
 date: 2025-09-09T10:00:00+08:00
 collections:
-
 - Tests
 categories:
 - Shortcodes

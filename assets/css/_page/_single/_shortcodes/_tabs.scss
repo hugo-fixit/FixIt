@@ -34,12 +34,12 @@ tab-container {
     display: block;
     border: none;
     color: inherit;
-    background: transparent;
+    background-color: transparent;
     font-size: 0.9em;
     font-weight: 500;
     cursor: pointer;
     flex-shrink: 0;
-    @include transition(all 0.3s ease);
+    transition: all 0.3s ease;
   }
 
   > .tab-panel {
@@ -111,13 +111,13 @@ tab-container {
   // ========================================
   &[type='underline'] {
     > .tab-button {
-      #{$rootPrefix}tab-button-border-color: transparent;
+      @include set-fixit-var(tab-button-border-color, transparent);
       @include tab-button-size(0);
 
       &[aria-selected='true'],
       &[aria-selected='false']:hover {
-        color: var(#{$rootPrefix}primary);
-        #{$rootPrefix}tab-button-border-color: var(#{$rootPrefix}primary);
+        color: fixit-var(primary);
+        @include set-fixit-var(tab-button-border-color, fixit-var(primary));
       }
 
       &[aria-selected='false']:hover {
@@ -149,50 +149,50 @@ tab-container {
     // Top placement
     &[placement='top'] {
       &::part(tablist-tab-wrapper) {
-        border-bottom: 2px solid var(#{$rootPrefix}global-border-color);
+        border-bottom: 2px solid fixit-var(global-border-color);
       }
 
       > .tab-button {
         translate: 0 2px;
-        border-bottom: 2px solid var(#{$rootPrefix}tab-button-border-color);
+        border-bottom: 2px solid fixit-var(tab-button-border-color);
       }
     }
 
     // Bottom placement
     &[placement='bottom'] {
       &::part(tablist-tab-wrapper) {
-        border-top: 2px solid var(#{$rootPrefix}global-border-color);
+        border-top: 2px solid fixit-var(global-border-color);
       }
 
       > .tab-button {
         translate: 0 -2px;
-        border-top: 2px solid var(#{$rootPrefix}tab-button-border-color);
+        border-top: 2px solid fixit-var(tab-button-border-color);
       }
     }
 
     // Left placement
     &[placement='left'] {
       &::part(tablist-tab-wrapper) {
-        border-right: 2px solid var(#{$rootPrefix}global-border-color);
+        border-right: 2px solid fixit-var(global-border-color);
       }
 
       > .tab-button {
         text-align: right;
         translate: 2px 0;
-        border-right: 2px solid var(#{$rootPrefix}tab-button-border-color);
+        border-right: 2px solid fixit-var(tab-button-border-color);
       }
     }
 
     // Right placement
     &[placement='right'] {
       &::part(tablist-tab-wrapper) {
-        border-left: 2px solid var(#{$rootPrefix}global-border-color);
+        border-left: 2px solid fixit-var(global-border-color);
       }
 
       > .tab-button {
         text-align: left;
         translate: -2px 0;
-        border-left: 2px solid var(#{$rootPrefix}tab-button-border-color);
+        border-left: 2px solid fixit-var(tab-button-border-color);
       }
     }
   }
@@ -203,26 +203,26 @@ tab-container {
   // ========================================
   &[type='pill'] {
     > .tab-button {
-      background: var(#{$rootPrefix}code-inline-background-color);
+      background-color: fixit-var(code-inline-background-color);
       @include tab-button-size;
-      @include border-radius(2em);
+      @include border-radius(full);
 
       &[aria-selected='true'] {
         color: #ffffff;
-        background: var(#{$rootPrefix}primary);
-        @include box-shadow(0 0.125rem 0.5rem rgba(0, 0, 0, 0.3));
+        background-color: fixit-var(primary);
+        box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.3);
 
-        [data-theme='dark'] & {
-          background: var(#{$rootPrefix}primary);
-          @include box-shadow(0 0.125rem 0.5rem rgba(255, 255, 255, 0.3));
+        [data-theme=dark] & {
+          background-color: fixit-var(primary);
+          box-shadow: 0 0.125rem 0.5rem rgba(255, 255, 255, 0.3);
         }
       }
 
       &[aria-selected='false']:hover {
-        background: rgba(175, 184, 193, 0.4);
+        background-color: rgba(175, 184, 193, 0.4);
 
-        [data-theme='dark'] & {
-          background: rgba(99, 110, 123, 0.6);
+        [data-theme=dark] & {
+          background-color: rgba(99, 110, 123, 0.6);
         }
       }
     }
@@ -305,22 +305,22 @@ tab-container {
     }
 
     > .tab-button {
-      border: 1px solid var(#{$rootPrefix}global-border-color);
-      background-color: var(#{$rootPrefix}code-block-background-color);
+      border: 1px solid fixit-var(global-border-color);
+      background-color: fixit-var(code-block-background-color);
       @include tab-button-size(1.5rem);
 
       &[aria-selected='true'],
       &[aria-selected='false']:hover {
-        background-color: var(#{$rootPrefix}global-background-color);
-        color: var(#{$rootPrefix}global-link-color);
-        z-index: 1;
+        background-color: fixit-var(global-background-color);
+        color: fixit-var(global-link-color);
+        @include z-index(base);
       }
     }
 
     > .tab-panel {
       padding: 0.75rem;
-      background-color: var(#{$rootPrefix}global-background-color);
-      border: 1px solid var(#{$rootPrefix}global-border-color);
+      background-color: fixit-var(global-background-color);
+      border: 1px solid fixit-var(global-border-color);
     }
 
     &[placement='top'],
@@ -334,13 +334,13 @@ tab-container {
         &:first-of-type {
           position: sticky;
           left: 0;
-          z-index: 2;
+          @include z-index(base, 1);
         }
 
         &:last-of-type {
           position: sticky;
           right: 0;
-          z-index: 2;
+          @include z-index(base, 1);
         }
       }
     }
@@ -348,84 +348,84 @@ tab-container {
     // Top placement
     &[placement='top'] {
       &::part(tablist-tab-wrapper) {
-        border-bottom: 1px solid var(#{$rootPrefix}global-border-color);
+        border-bottom: 1px solid fixit-var(global-border-color);
       }
 
       > .tab-button {
         translate: 0 1px;
-        @include border-radius($global-border-radius $global-border-radius 0 0);
+        @include border-radius(top);
 
         &[aria-selected='true'] {
-          border-bottom-color: var(#{$rootPrefix}global-background-color);
+          border-bottom-color: fixit-var(global-background-color);
         }
       }
 
       > .tab-panel {
         border-top: none;
-        @include border-radius(0 0 $global-border-radius $global-border-radius);
+        @include border-radius(bottom);
       }
     }
 
     // Bottom placement
     &[placement='bottom'] {
       &::part(tablist-tab-wrapper) {
-        border-top: 1px solid var(#{$rootPrefix}global-border-color);
+        border-top: 1px solid fixit-var(global-border-color);
       }
 
       > .tab-button {
         translate: 0 -1px;
-        @include border-radius(0 0 $global-border-radius $global-border-radius);
+        @include border-radius(bottom);
 
         &[aria-selected='true'] {
-          border-top-color: var(#{$rootPrefix}global-background-color);
+          border-top-color: fixit-var(global-background-color);
         }
       }
 
       > .tab-panel {
         border-bottom: none;
-        @include border-radius($global-border-radius $global-border-radius 0 0);
+        @include border-radius(top);
       }
     }
 
     // Left placement
     &[placement='left'] {
       &::part(tablist-tab-wrapper) {
-        border-right: 1px solid var(#{$rootPrefix}global-border-color);
+        border-right: 1px solid fixit-var(global-border-color);
       }
 
       > .tab-button {
         translate: 1px 0;
-        @include border-radius($global-border-radius 0 0 $global-border-radius);
+        @include border-radius(left);
 
         &[aria-selected='true'] {
-          border-right-color: var(#{$rootPrefix}global-background-color);
+          border-right-color: fixit-var(global-background-color);
         }
       }
 
       > .tab-panel {
         border-left: none;
-        @include border-radius(0 $global-border-radius $global-border-radius 0);
+        @include border-radius(right);
       }
     }
 
     // Right placement
     &[placement='right'] {
       &::part(tablist-tab-wrapper) {
-        border-left: 1px solid var(#{$rootPrefix}global-border-color);
+        border-left: 1px solid fixit-var(global-border-color);
       }
 
       > .tab-button {
         translate: -1px 0;
-        @include border-radius(0 $global-border-radius $global-border-radius 0);
+        @include border-radius(right);
 
         &[aria-selected='true'] {
-          border-left-color: var(#{$rootPrefix}global-background-color);
+          border-left-color: fixit-var(global-background-color);
         }
       }
 
       > .tab-panel {
         border-right: none;
-        @include border-radius($global-border-radius 0 0 $global-border-radius);
+        @include border-radius(left);
       }
     }
   }
@@ -442,12 +442,8 @@ tab-container {
 
     &::part(tablist-tab-wrapper) {
       padding: 0.25rem;
-      background: $code-background-color;
-      @include border-radius($global-border-radius);
-
-      [data-theme='dark'] & {
-        background: $code-background-color-dark;
-      }
+      background-color: fixit-var(code-block-background-color);
+      @include border-radius;
     }
 
     &::part(tablist) {
@@ -459,7 +455,7 @@ tab-container {
       flex-grow: 1;
 
       @include tab-button-size;
-      @include border-radius($global-border-radius);
+      @include border-radius;
 
       &[aria-selected='true'],
       &:hover {
@@ -467,11 +463,11 @@ tab-container {
       }
 
       &[aria-selected='true'] {
-        background-color: var(#{$rootPrefix}global-background-color);
-        @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
+        background-color: fixit-var(global-background-color);
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
 
-        [data-theme='dark'] & {
-          @include box-shadow(0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
+        [data-theme=dark] & {
+          box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
         }
       }
     }

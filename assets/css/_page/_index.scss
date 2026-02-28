@@ -4,7 +4,7 @@
 
   .content {
     [id] {
-      scroll-margin-top: var(#{$rootPrefix}scroll-mt);
+      scroll-margin-top: fixit-var(scroll-mt);
     }
   }
 
@@ -17,3 +17,5 @@
 @import 'home';
 @import '404';
 @import 'offline';
+@import "media";
+@import "patch";

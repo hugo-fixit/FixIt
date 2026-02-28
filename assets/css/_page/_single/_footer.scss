@@ -6,12 +6,8 @@
   }
 
   .post-info {
-    border-bottom: 1px solid $global-border-color;
+    border-bottom: 1px solid fixit-var(global-border-color);
     padding: 0.3rem 0;
-
-    [data-theme='dark'] & {
-      border-bottom: 1px solid $global-border-color-dark;
-    }
 
     .post-info-line {
       display: flex;
@@ -19,14 +15,14 @@
 
       .post-info-mod {
         font-size: 0.8em;
-        color: var(#{$rootPrefix}global-font-secondary-color);
+        color: fixit-var(secondary);  
 
         @include link(false, false);
       }
 
       .post-info-license {
         font-size: 0.8em;
-        color: var(#{$rootPrefix}global-font-secondary-color);
+        color: fixit-var(secondary);
 
         @include link(false, false);
       }
@@ -90,18 +86,18 @@
       flex: 1;
       font-size: 1rem;
       font-weight: 600;
-      @include transition(all 0.3s ease-out);
+      transition: all 0.3s ease-out;
 
       &[rel='next'] {
         text-align: right;
       }
 
       &[rel='prev']:hover {
-        @include transform(translateX(-4px));
+        transform: translateX(-4px);
       }
 
       &[rel='next']:hover {
-        @include transform(translateX(4px));
+        transform: translateX(4px);
       }
     }
   }

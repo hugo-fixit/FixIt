@@ -1,0 +1,47 @@
+.details {
+  > .details-summary {
+    transition: border-radius 0.2s ease 0.2s;
+    @include border-radius;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    i.details-icon {
+      color: fixit-var(secondary);
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: fixit-var(global-font-color);
+      }
+    }
+  }
+
+  > .details-content {
+    height: 0;
+    overflow-y: hidden;
+    transition: height 0.5s ease-out;
+  }
+
+  &.open {
+    > .details-summary {
+      transition: border-radius 0s;
+      @include border-radius(top);
+
+      i.details-icon {
+        transform: rotate(90deg);
+      }
+    }
+
+    > .details-content {
+      height: auto;
+      @include border-radius(bottom);
+    }
+  }
+
+  &.disabled {
+    > .details-summary {
+      cursor: default;
+    }
+  }
+}

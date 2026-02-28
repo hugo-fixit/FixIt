@@ -1,17 +1,17 @@
 .file-tree-wrapper {
-  border: 1px solid var(#{$rootPrefix}global-border-color);
+  border: 1px solid fixit-var(global-border-color);
   padding: 0.5rem;
   font-size: 0.8rem;
   line-height: 1;
   margin-block: 0.5rem;
-  @include border-radius($global-border-radius);
-  @include transition(box-shadow 0.2s ease);
+  @include border-radius;
+  transition: box-shadow 0.2s ease;
 
   &:hover {
-    @include box-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
-    [data-theme='dark'] & {
-      @include box-shadow(0 2px 8px rgba(255, 255, 255, 0.1));
+    [data-theme=dark] & {
+      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
     }
   }
 
@@ -28,7 +28,7 @@
           cursor: pointer;
           font-weight: bold;
 
-          [data-theme='dark'] & {
+          [data-theme=dark] & {
             color: #ddd;
           }
 
@@ -47,8 +47,8 @@
         position: relative;
         gap: 0.25rem;
         padding: 0.25rem 0.5rem;
-        @include border-radius($global-border-radius);
-        @include transition(all 0.15s ease);
+        transition: all 0.15s ease;
+        @include border-radius;
 
         .file-tree-icon {
           width: 1rem;
@@ -57,7 +57,7 @@
         }
 
         &.is-highlighted {
-          color: var(#{$rootPrefix}global-link-hover-color);
+          color: fixit-var(global-link-hover-color);
         }
       }
     }
@@ -75,7 +75,7 @@
           translate: 0 -50%;
           width: 0.75rem;
           height: 1px;
-          background-color: var(#{$rootPrefix}secondary);
+          background-color: fixit-var(secondary);
         }
       }
     }
@@ -92,8 +92,8 @@
       bottom: 0.625rem;
       left: calc(1rem - 0.5px);
       width: 1px;
-      background-color: var(#{$rootPrefix}secondary);
-      height: var(#{$rootPrefix}file-tree-line-height);
+      background-color: fixit-var(secondary);
+      height: fixit-var(file-tree-line-height);
     }
   }
 

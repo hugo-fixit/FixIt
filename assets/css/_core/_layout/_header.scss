@@ -1,19 +1,15 @@
 header {
   width: 100%;
-  background-color: $header-background-color;
-  @include z-index(2);
-  @include transition(box-shadow 0.3s ease);
+  background-color: fixit-var(header-background-color);
+  @include z-index(fixed);
+  transition: box-shadow 0.3s ease;
   @extend .print-d-none;
 
-  [data-theme='dark'] & {
-    background-color: $header-background-color-dark;
-  }
-
   &:hover {
-    @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, 0.1));
+    box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.1);
 
-    [data-theme='dark'] & {
-      @include box-shadow(0 0 1.5rem 0 rgba(255, 255, 255, 0.1));
+    [data-theme=dark] & {
+      box-shadow: 0 0 1.5rem 0 rgba(255, 255, 255, 0.1);
     }
   }
 }
@@ -27,22 +23,22 @@ header {
 }
 
 .header-title {
-  font-size: $header-title-font-size;
-  font-family: $header-title-font-family;
+  font-size: fixit-var(header-title-font-size);
+  font-family: fixit-var(header-title-font-family);
   font-weight: bold;
   margin-right: 0.5rem;
   min-width: 10%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  @include flex(10);
+  flex: 10;
 
   .logo {
     min-height: 1.5em;
     height: 1.5em;
     width: auto;
     vertical-align: top;
-    transform: translateY(calc(#{$header-height} / 2 - 50%));
+    transform: translateY(calc(#{fixit-var(header-height)} / 2 - 50%));
   }
 
   .header-title-text {
@@ -64,11 +60,7 @@ header {
     list-style: none;
     margin: 0.25rem 0.5rem;
     height: 1px;
-    background-color: $menu-border-color;
-
-    [data-theme='dark'] & {
-      background-color: $menu-border-color-dark;
-    }
+    background-color: fixit-var(menu-border-color);
   }
 
   .menu-item {
@@ -77,7 +69,7 @@ header {
     .dropdown-icon {
       margin-left: 0.25rem;
       font-size: .875em;
-      color: var(#{$rootPrefix}global-font-color);
+      color: fixit-var(global-font-color);
 
       &.open::before {
         content: "\f078";
@@ -88,11 +80,7 @@ header {
       >.menu-link,
       >.nested-item>.menu-link {
         font-weight: bold;
-        color: $menu-active-color;
-
-        [data-theme='dark'] & {
-          color: $menu-active-color-dark;
-        }
+        color: fixit-var(menu-active-color);
       }
     }
 
@@ -101,12 +89,12 @@ header {
     }
 
     .menu-link i {
-      @include transform(perspective(1rem));
-      @include transition(transform 0.4s ease);
+      transform: perspective(1rem);
+      transition: transform 0.4s ease;
     }
 
     .menu-link:hover i {
-      @include transform(perspective(1rem) translateZ(0.2rem));
+      transform: perspective(1rem) translateZ(0.2rem);
     }
   }
 }
@@ -119,12 +107,12 @@ header {
     box-sizing: border-box;
     height: 2.5rem;
     width: 1.25rem;
-    @include border-radius(0.5rem);
     border: none;
     outline: none;
     background-color: transparent;
     vertical-align: baseline !important;
-    @include transition(width 0.3s ease);
+    transition: width 0.3s ease;
+    @include border-radius(0.5rem);
   }
 
   @include placeholder(transparent);
@@ -156,23 +144,15 @@ header {
   .open &,
   &.mobile {
     input {
-      color: var(#{$rootPrefix}global-font-color);
-      background-color: $search-background-color;
+      color: fixit-var(global-font-color);
+      background-color: fixit-var(search-background-color);
       padding: 0 2rem 0 2rem;
     }
 
-    [data-theme='dark'] & {
-      input {
-        background-color: $search-background-color-dark;
-      }
-
-      @include placeholder($global-font-secondary-color-dark);
-    }
-
-    @include placeholder($global-font-secondary-color);
+    @include placeholder;
 
     .search-button {
-      color: var(#{$rootPrefix}global-font-secondary-color);
+      color: fixit-var(global-placeholder-color);
     }
 
     .search-clear:hover {
@@ -187,8 +167,8 @@ header {
 
 .theme-switch {
   i {
-    @include transform(rotate(225deg));
-    @include transition(all 0.4s ease);
+    transform: rotate(225deg);
+    transition: all 0.4s ease;
   }
 }
 
@@ -196,8 +176,8 @@ header {
   display: block;
   position: sticky;
   top: 0;
-  height: $header-height;
-  line-height: $header-height;
+  height: fixit-var(header-height);
+  line-height: fixit-var(header-height);
   box-sizing: border-box;
 
   [data-header-desktop='normal'] & {
@@ -211,11 +191,11 @@ header {
 
   .header-wrapper {
     // use css native function to calculate max value
-    padding: 0 2rem 0 MAX(10vh, $header-height);
+    padding: 0 2rem 0 MAX(10vh, fixit-var(header-height));
     height: 100%;
 
     &[data-github-corner='right'] {
-      padding-right: $header-height;
+      padding-right: fixit-var(header-height);
     }
 
     .header-title {
@@ -231,15 +211,15 @@ header {
       > .menu-item {
         &:hover .sub-menu {
           display: block;
-          @include transform(translateX(-0.5rem));
+          transform: translateX(-0.5rem);
         }
         &.theme-switch {
           &:hover i {
-            @include transform(rotate(45deg));
+            transform: rotate(45deg);
           }
         }
         &.language-switch:hover .sub-menu {
-          @include transform(translateX(calc(1.75rem - 100%)));
+          transform: translateX(calc(1.75rem - 100%));
         }
       }
 
@@ -250,11 +230,7 @@ header {
           width: 0;
           margin: 0.125rem 0.25rem;
           padding: 0;
-          border-left: 1px dashed lighten($global-font-secondary-color, 15%);
-
-          [data-theme='dark'] & {
-            border-left-color: darken($global-font-secondary-color-dark, 15%);
-          }
+          border-left: 1px dashed fixit-var(global-border-color);
         }
       }
 
@@ -263,24 +239,22 @@ header {
         margin: 0;
         padding: 0.25rem 0;
         display: none;
-        top: calc(#{$header-height} - 0.75rem);
-        border-radius: $global-border-radius;
-        border: 1px solid $menu-border-color;
-        background-color: $header-background-color;
+        top: calc(#{fixit-var(header-height)} - 0.75rem);
+        border: 1px solid fixit-var(menu-border-color);
+        background-color: fixit-var(header-background-color);
         max-height: 60vh;
         overflow-y: auto;
-        @include transition(box-shadow 0.3s ease);
-        @include box-shadow(0 0 1.5rem 0 rgba(0, 0, 0, 0.1));
+        @include border-radius;
+        transition: box-shadow 0.3s ease;
+        box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.1);
 
-        [data-theme='dark'] & {
-          background-color: $header-background-color-dark;
-          border-color: $menu-border-color-dark;
-          @include box-shadow(0 0 1.5rem 0 rgba(255, 255, 255, 0.1));
+        [data-theme=dark] & {
+          box-shadow: 0 0 1.5rem 0 rgba(255, 255, 255, 0.1);
         }
 
         .menu-item {
-          height: $submenu-height;
-          line-height: $submenu-height;
+          height: fixit-var(submenu-height);
+          line-height: fixit-var(submenu-height);
           max-width: 15rem;
           white-space: nowrap;
           text-overflow: ellipsis;
@@ -301,8 +275,8 @@ header {
   display: none;
   position: sticky;
   top: 0;
-  min-height: $header-height;
-  line-height: $header-height;
+  min-height: fixit-var(header-height);
+  line-height: fixit-var(header-height);
 
   [data-header-mobile='normal'] & {
     position: static;
@@ -315,7 +289,7 @@ header {
     .header-wrapper {
       padding: 0 1rem;
       font-size: 1.125rem;
-      @include transition(margin-top 0.3s ease);
+      transition: margin-top 0.3s ease;
 
       .header-title {
         max-width: 80%;
@@ -328,15 +302,11 @@ header {
       .menu-toggle {
         span {
           display: block;
-          background: $global-font-color;
+          background-color: fixit-var(global-font-color);
           width: 20px;
           height: 2px;
-          @include border-radius(3px);
-          @include transition(all 0.3s ease-in-out);
-
-          [data-theme='dark'] & {
-            background: $global-font-color-dark;
-          }
+          @include border-radius(full);
+          transition: all 0.3s ease-in-out;
         }
 
         span:not(:last-child) {
@@ -345,7 +315,7 @@ header {
 
         &.active {
           span:nth-child(1) {
-            @include transform(translateY(8px) rotate(45deg));
+            transform: translateY(8px) rotate(45deg);
           }
 
           span:nth-child(2) {
@@ -353,25 +323,23 @@ header {
           }
 
           span:nth-child(3) {
-            @include transform(translateY(-8px) rotate(-45deg));
+            transform: translateY(-8px) rotate(-45deg);
           }
         }
       }
     }
 
     .menu {
-      background: $header-background-color;
-      border-top: 2px solid $global-border-color;
+      background-color: fixit-var(header-background-color);
+      border-top: 2px solid fixit-var(global-border-color);
       display: none;
-      overflow-y: overlay;
+      overflow-y: auto;
       max-height: 70vh;
-      @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
       @include scrollbar-width(none, 0);
 
-      [data-theme='dark'] & {
-        background: $header-background-color-dark;
-        border-top-color: $global-border-color-dark;
-        @include box-shadow(0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
+      [data-theme=dark] & {
+        box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
       }
 
       .search-wrapper {
@@ -379,16 +347,12 @@ header {
         justify-content: space-between;
         align-items: center;
         box-sizing: border-box;
-        padding: ($header-height - 2.5rem) / 2 1rem;
+        padding: 0.5rem 1rem;
         line-height: 2.5rem;
         position: sticky;
         top: 0;
-        background-color: $header-background-color;
-        @include z-index(0, 50);
- 
-        [data-theme='dark'] & {
-          background-color: $header-background-color-dark;
-        }
+        background-color: fixit-var(header-background-color);
+        @include z-index(sticky);
       }
 
       .search {
@@ -421,10 +385,10 @@ header {
         padding: 0 1rem;
 
         &:not(.menu-system):hover {
-          background-color: lighten($global-font-secondary-color, 24%);
+          background-color: #f2f2f3;
 
-          [data-theme='dark'] & {
-            background-color: darken($global-font-secondary-color-dark, 24%);
+          [data-theme=dark] & {
+            background-color: #535355;
           }
         }
 
@@ -433,7 +397,7 @@ header {
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow-x: hidden;
-          @include flex(4);
+          flex: 4;
         }
 
         & .nested-item {
@@ -455,11 +419,7 @@ header {
         bottom: 0;
         line-height: 2.5rem;
         padding: 0 1rem;
-        background-color: $header-background-color;
- 
-        [data-theme='dark'] & {
-          background-color: $header-background-color-dark;
-        }
+        background-color: fixit-var(header-background-color);
 
         .menu-system-item {
           padding-inline: 0.5rem;
@@ -488,10 +448,10 @@ header {
         }
 
         .menu-item:hover {
-          background-color: lighten($global-font-secondary-color, 20%);
+          background-color: #e7e7ea;
 
-          [data-theme='dark'] & {
-            background-color: darken($global-font-secondary-color-dark, 20%);
+          [data-theme=dark] & {
+            background-color: #5d5d5f;
           }
         }
       }
@@ -504,7 +464,7 @@ header {
 
   &.open {
     .header-wrapper {
-      margin-top: -$header-height;
+      margin-top: calc(#{fixit-var(header-height)} * -1);
     }
 
     .menu {
@@ -524,12 +484,12 @@ header {
 
 .search-dropdown {
   position: fixed;
-  top: $header-height;
-  @include z-index(2);
-  @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1));
+  top: fixit-var(header-height);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  @include z-index(fixed);
 
-  [data-theme='dark'] & {
-    @include box-shadow(0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
+  [data-theme=dark] & {
+    box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
   }
 
   &.desktop {
@@ -544,11 +504,12 @@ header {
 
   .dropdown-menu {
     right: 0 !important;
-    background-color: var(#{$rootPrefix}global-background-color);
+    background-color: fixit-var(global-background-color);
 
     .suggestions {
       overflow-y: auto;
-      max-height: calc(100vh - #{$header-height});
+      // 41px is the height of the search-footer
+      max-height: calc(100dvh - #{fixit-var(header-height)} - 41px);
 
       .suggestion {
         padding: 0.75rem 1rem;
@@ -567,33 +528,30 @@ header {
           font-size: 0.875rem;
           float: right;
           text-align: right;
-          color: var(#{$rootPrefix}global-font-secondary-color);
+          color: fixit-var(secondary);
         }
 
         .suggestion-context {
+          display: -webkit-box;
           line-height: 1.25rem;
-          @include box(vertical);
+          -webkit-box-orient: vertical;
           -webkit-line-clamp: 2;
           line-clamp: 2;
           overflow: hidden;
           text-overflow: ellipsis;
+          color: fixit-var(global-placeholder-color);
           @include overflow-wrap(break-word);
-          color: var(#{$rootPrefix}global-font-secondary-color);
         }
 
         em {
           font-style: normal;
-          background-color: $selection-color;
-
-          [data-theme='dark'] & {
-            background-color: $selection-color-dark;
-          }
+          background-color: fixit-var(selection-color);
         }
 
         &.cursor {
           background: darken($code-background-color, 5%);
 
-          [data-theme='dark'] & {
+          [data-theme=dark] & {
             background: lighten($code-background-color-dark, 5%);
           }
         }
@@ -611,7 +569,7 @@ header {
       .search-query {
         font-weight: bold;
 
-        [data-theme='dark'] & {
+        [data-theme=dark] & {
           color: #ddd;
         }
       }
@@ -621,8 +579,7 @@ header {
       padding: 0.5rem 1rem;
       float: right;
       font-size: 0.8rem;
-      color: var(#{$rootPrefix}global-font-secondary-color);
-
+      color: fixit-var(secondary);
       @include link(false, false);
 
       a {

@@ -10,17 +10,17 @@
         width: 8rem;
         height: auto;
         margin: 0 auto;
-        @include border-radius(100%);
-        @include box-shadow(0 0 0 0.3618em rgba(0, 0, 0, 0.05));
-        @include transition(all 0.4s ease);
+        box-shadow: 0 0 0 0.3618em rgba(0, 0, 0, 0.05);
+        transition: all 0.4s ease;
+        @include border-radius(full);
 
-        [data-theme='dark'] & {
-          @include box-shadow(0 0 0 0.3618em rgba(255, 255, 255, 0.05));
+        [data-theme=dark] & {
+          box-shadow: 0 0 0 0.3618em rgba(255, 255, 255, 0.05);
         }
 
         &:hover {
           position: relative;
-          @include transform(translateY(-0.75rem));
+          transform: translateY(-0.75rem);
         }
       }
     }
@@ -62,7 +62,7 @@
       font-weight: normal;
       margin: 0;
       padding: 0.5rem;
-      color: var(#{$rootPrefix}global-font-secondary-color);
+      color: fixit-var(secondary);
     }
   }
 }
@@ -78,18 +78,18 @@
 
   .summary {
     padding-block: 1rem;
-    color: var(#{$rootPrefix}global-font-color);
+    color: fixit-var(global-font-color);
 
     &:not(:last-of-type)::after {
       content: '';
       position: absolute;
       width: 100%;
-      padding: 2px;
+      padding: 1.5px;
       transform: translateY(18px);
       background: repeating-linear-gradient(
         135deg,
-        var(#{$rootPrefix}hr-background-color) 0px,
-        var(#{$rootPrefix}hr-background-color) 4px,
+        fixit-var(global-border-color) 0px,
+        fixit-var(global-border-color) 4px,
         transparent 4px,
         transparent 8px
       );
@@ -105,7 +105,7 @@
       aspect-ratio: auto 1000 / 420;
       position: relative;
       margin: 0.6rem auto;
-      @include transition(transform 0.4s ease);
+      transition: transform 0.4s ease;
 
       img {
         position: absolute;
@@ -113,11 +113,11 @@
         height: 100%;
         left: 0;
         top: 0;
-        @include object-fit(cover);
+        object-fit: cover;
       }
 
       &:hover {
-        @include transform(scale(1.01));
+        transform: scale(1.01);
       }
     }
 
@@ -129,12 +129,12 @@
 
     .content {
       margin-top: 0.3rem;
-      color: var(#{$rootPrefix}global-font-secondary-color);
+      color: fixit-var(global-placeholder-color);  
       @include link(false, true);
 
       b,
       strong {
-        color: var(#{$rootPrefix}global-font-secondary-color);
+        color: fixit-var(global-placeholder-color);
       }
     }
 

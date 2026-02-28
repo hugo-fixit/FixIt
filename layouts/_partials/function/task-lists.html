@@ -28,10 +28,10 @@
 */ -}}
 {{- $icon := dict "Class" (add "checkbox-icon " (index $iconMap " ")) | partial "plugin/icon.html" -}}
 {{- $label := T (printf "taskList.%v" " ") -}}
-{{- $content := replaceRE `<li>(\n<p>)*<input disabled="" type="checkbox"> (.+?)(</p>\n)*</li>` (printf `<li data-task=" " title=%q>$1%s$2$3</li>` $label $icon) . -}}
+{{- $content := replaceRE `(?s)<li>((\n<p>)*)<input disabled="" type="checkbox">` (printf `<li data-task=" " title=%q>$1%s` $label $icon) . -}}
 {{- $label := T (printf "taskList.%v" "x") -}}
 {{- $icon := dict "Class" (add "checkbox-icon " (index $iconMap "x")) | partial "plugin/icon.html" -}}
-{{- $content = replaceRE `<li>(\n<p>)*<input checked="" disabled="" type="checkbox"> (.+?)(</p>\n)*</li>` (printf `<li data-task="x" title=%q>$1%s$2$3</li>` $label $icon) $content -}}
+{{- $content = replaceRE `(?s)<li>((\n<p>)*)<input checked="" disabled="" type="checkbox">` (printf `<li data-task="x" title=%q>$1%s` $label $icon) $content -}}
 
 {{- /*
   The extended syntax is compatible with Obsidian.
@@ -49,7 +49,7 @@
   {{- $sign := htmlEscape . -}}
   {{- $originSign := replace . "\\" "" -}}
   {{- $label := (T (printf "taskList.%v" $originSign)) | default (T (printf "taskList.%v" " ")) -}}
-  {{- $content = replaceRE (printf `<li>(\n<p>)*\[%s\] (.+?)(</p>\n)*</li>` $sign) (printf `<li data-task=%q title=%q>$1%s$2$3</li>` $originSign $label $icon) $content -}}
+  {{- $content = replaceRE (printf `(?s)<li>((\n<p>)*)\[%s\]` $sign) (printf `<li data-task=%q title=%q>$1%s` $originSign $label $icon) $content -}}
 {{- end -}}
 
 {{- return $content -}}

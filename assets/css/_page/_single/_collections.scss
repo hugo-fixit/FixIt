@@ -5,11 +5,11 @@
   margin-block: 1rem;
   padding: 1rem 1.25rem;
   position: relative;
-  @include border-radius($global-border-radius * 1.5);
+  @include border-radius(0.5rem);
   @include user-select(none);
   @extend .print-d-none;
 
-  [data-theme='dark'] & {
+  [data-theme=dark] & {
     background-color: lighten($global-background-color-dark, 3%);
   }
 
@@ -22,7 +22,7 @@
     height: 2rem;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.03) 100%);
 
-    [data-theme='dark'] & {
+    [data-theme=dark] & {
       background: linear-gradient(
         to bottom,
         rgba(255, 255, 255, 0.03),
@@ -51,7 +51,7 @@
       font-weight: 500;
       display: flex;
       align-items: center;
-      @include transition(all 0.3s ease-out);
+      transition: all 0.3s ease-out;
 
       &:only-child {
         max-width: 100%;
@@ -73,11 +73,11 @@
       }
 
       &[rel='prev']:hover {
-        @include transform(translateX(-4px));
+        transform: translateX(-4px);
       }
 
       &[rel='next']:hover {
-        @include transform(translateX(4px));
+        transform: translateX(4px);
       }
     }
   }
@@ -86,7 +86,7 @@
 // Collection aside container
 .aside-collection {
   position: sticky;
-  top: calc(#{$header-height} + var(#{$rootPrefix}breadcrumb-height));
+  top: calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height)});
   box-sizing: border-box;
   @include overflow-wrap(break-word);
   @include blur;
@@ -103,7 +103,7 @@
     .collection-summary {
       background-color: darken($global-background-color, 4%);
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         background-color: lighten($global-background-color-dark, 4%);
       }
     }
@@ -116,7 +116,7 @@
     padding: 0.2em 0.5em;
     background-color: darken($global-background-color, 3%);
 
-    [data-theme='dark'] & {
+    [data-theme=dark] & {
       background-color: lighten($global-background-color-dark, 3%);
     }
     
@@ -127,7 +127,7 @@
     .collection-name {
       flex-grow: 1;
       font-weight: bold;
-      font-size: $collection-title-font-size;
+      font-size: fixit-var(collection-title-font-size);
 
       &::before {
         content: attr(title) '・';
@@ -136,7 +136,7 @@
 
     .collection-count {
       flex-shrink: 0;
-      color: var(#{$rootPrefix}secondary);
+      color: fixit-var(secondary);
     }
 
     .details-icon {
@@ -147,10 +147,10 @@
   }
 
   .collection-content {
-    font-size: $collection-list-font-size;
+    font-size: fixit-var(collection-list-font-size);
     background-color: darken($global-background-color, 2%);
 
-    [data-theme='dark'] & {
+    [data-theme=dark] & {
       background-color: lighten($global-background-color-dark, 2%);
     }
 
@@ -171,27 +171,15 @@
         margin-right: 0.5em;
         position: relative;
         bottom: 2px;
-        color: $single-link-color;
-
-        [data-theme='dark'] & {
-          color: $single-link-color-dark;
-        }
+        color: fixit-var(single-link-color);
       }
 
       .collection-item > .active {
         font-weight: bold;
-        color: $single-link-color;
-
-        [data-theme='dark'] & {
-          color: $single-link-color-dark;
-        }
+        color: fixit-var(single-link-color);
 
         &::before {
-          color: $single-link-hover-color;
-  
-          [data-theme='dark'] & {
-            color: $single-link-hover-color-dark;
-          }
+          color: fixit-var(single-link-hover-color);
         }
       }
     }
@@ -203,19 +191,19 @@
       gap: 0.5em;
       background-color: darken($global-background-color, 3%);
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         background-color: lighten($global-background-color-dark, 3%);
       }
 
       a.collection-nav-item {
         padding-inline: 2px;
-        border-radius: 50%;
-        @include transition(background-color 0.3s ease-out);
+        @include border-radius(full);
+        transition: background-color 0.3s ease-out;
 
         &:hover {
           background-color: darken($global-background-color, 10%);
 
-          [data-theme='dark'] & {
+          [data-theme=dark] & {
             background-color: lighten($global-background-color-dark, 10%);
           }
         }

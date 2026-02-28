@@ -1,13 +1,13 @@
 .cc-window.cc-banner {
   .cc-btn {
-    color: var(#{$rootPrefix}global-font-color);
-    background-color: var(#{$rootPrefix}global-background-color);
+    color: fixit-var(global-font-color);
+    background-color: fixit-var(global-background-color);
 
     &:hover,
     &:focus {
       background-color: #ccc;
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         background-color: #444;
       }
     }

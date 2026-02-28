@@ -41,7 +41,7 @@
 
 @each $color, $value in $theme-colors {
   .text-#{$color} {
-    color: var(#{$rootPrefix}#{$color}) !important;
+    color: fixit-var(#{$color}) !important;
   }
 }
 
@@ -53,4 +53,8 @@
 
 .variant-numeric {
   font-variant-numeric: tabular-nums lining-nums;
+}
+
+.rounded-full {
+  @include border-radius(full);
 }

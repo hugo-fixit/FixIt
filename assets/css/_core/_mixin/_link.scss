@@ -1,10 +1,7 @@
-/**
- * Link mixin
- * @param {Boolean} $light use global link color
- * @param {Boolean} $dark use global link color dark
- * @param {String} $decoration text-decoration, default none
- * TODO refactor to use CSS variables
- */
+/// Link mixin
+/// @param {Boolean} $light use global link color
+/// @param {Boolean} $dark use global link color dark
+/// @param {String} $decoration text-decoration, default none
 @mixin link($light, $dark, $decoration: none) {
   a,
   a::before,
@@ -19,7 +16,7 @@
       color: $single-link-color;
     }
 
-    [data-theme='dark'] & {
+    [data-theme=dark] & {
       @if $dark {
         color: $global-link-color-dark;
       }
@@ -40,7 +37,7 @@
       color: $single-link-hover-color;
     }
 
-    [data-theme='dark'] & {
+    [data-theme=dark] & {
       @if $dark {
         color: $global-link-hover-color-dark;
       }

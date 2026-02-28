@@ -4,12 +4,12 @@
   padding: 0 0.75rem;
   border-left: .25rem solid;
   overflow: hidden;
-  background-color: var(#{$rootPrefix}admonition-bg-color);
-  border-left-color: var(#{$rootPrefix}admonition-color);
-  @include border-radius($global-border-radius);
+  background-color: fixit-var(admonition-bg-color);
+  border-left-color: fixit-var(admonition-color);
+  @include border-radius;
 
   .admonition-title {
-    font-weight: var(#{$rootPrefix}admonition-title-font-weight, bold);
+    font-weight: fixit-var(admonition-title-font-weight, bold);
     margin: 0 -0.75rem;
     padding: 0.25rem 1.8rem;
     border-bottom: 1px solid;
@@ -20,14 +20,14 @@
       font-weight: bolder;
       text-shadow: 0 0.05rem 0.05rem rgba(0, 0, 0, 0.2);
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         text-shadow: 0 0.05rem 0.05rem rgba(255, 255, 255, 0.2);
       }
     }
 
     // title-only admonition without content
     &:not(:has(+ .details-content)) {
-      #{$rootPrefix}admonition-title-font-weight: normal;
+      @include set-fixit-var(admonition-title-font-weight, normal);
       padding: 0.75rem 1rem 0.75rem 2.2rem;
       border: 0;
 
@@ -39,17 +39,17 @@
   }
 
   > .admonition-title {
-    border-bottom-color: var(#{$rootPrefix}admonition-bg-color);
-    background-color: var(#{$rootPrefix}admonition-bg-color-collapsed);
-    @include transition(all 0.2s ease);
+    border-bottom-color: fixit-var(admonition-bg-color);
+    background-color: fixit-var(admonition-bg-color-collapsed);
+    transition: all 0.2s ease;
 
     i.icon {
-      color: var(#{$rootPrefix}admonition-color);
+      color: fixit-var(admonition-color);
     }
   }
 
   &.open > .admonition-title {
-    background-color: var(#{$rootPrefix}admonition-bg-color);
+    background-color: fixit-var(admonition-bg-color);
   }
 
   .admonition-content {
@@ -81,17 +81,21 @@
   }
 
   // default admonition type is note
-  #{$rootPrefix}admonition-color: #{map-get(map-get($admonition-color-map, note), color)};
-  #{$rootPrefix}admonition-bg-color: #{map-get(map-get($admonition-color-map, note), bg-color)};
-  #{$rootPrefix}admonition-bg-color-collapsed: #{opacify(map-get(map-get($admonition-color-map, note), bg-color), 0.15)};
+  @include set-fixit-vars((
+    admonition-color: map-get(map-get($admonition-color-map, note), color),
+    admonition-bg-color: map-get(map-get($admonition-color-map, note), bg-color),
+    admonition-bg-color-collapsed: opacify(map-get(map-get($admonition-color-map, note), bg-color), 0.15),
+  ));
 
   // set color for each admonition type
   @each $type, $item in $admonition-color-map {
     @if $type != 'note' {
       &.#{$type} {
-        #{$rootPrefix}admonition-color: #{map-get($item, color)};
-        #{$rootPrefix}admonition-bg-color: #{map-get($item, bg-color)};
-        #{$rootPrefix}admonition-bg-color-collapsed: #{opacify(map-get($item, bg-color), 0.15)};
+         @include set-fixit-vars((
+          admonition-color: map-get($item, color),
+          admonition-bg-color: map-get($item, bg-color),
+          admonition-bg-color-collapsed: opacify(map-get($item, bg-color), 0.15),
+        ));
       }
     }
   }
@@ -102,7 +106,7 @@
 
   // content-only admonition without title
   &:not(:has(.admonition-title)) {
-    border: 1px solid var(#{$rootPrefix}admonition-bg-color);
+    border: 1px solid fixit-var(admonition-bg-color);
 
     .admonition-content {
       padding: 0.75rem 0.25rem;

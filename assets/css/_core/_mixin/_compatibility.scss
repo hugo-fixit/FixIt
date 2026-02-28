@@ -1,0 +1,33 @@
+@mixin placeholder($color: fixit-var(global-placeholder-color)) {
+  input::-webkit-input-placeholder {
+    color: $color;
+  }
+
+  input:-moz-placeholder {
+    color: $color;
+  }
+
+  input::-moz-placeholder {
+    color: $color;
+  }
+
+  input:-ms-input-placeholder {
+    color: $color;
+  }
+
+  input::placeholder {
+    color: $color;
+  }
+}
+
+// TODO Superseded by text-wrap: wrap; in modern browsers
+@mixin overflow-wrap($value) {
+  word-wrap: $value;
+  overflow-wrap: $value;
+}
+
+@mixin user-select($value) {
+  -webkit-user-select: $value !important;
+  -moz-user-select: $value !important;
+  user-select: $value !important;
+}

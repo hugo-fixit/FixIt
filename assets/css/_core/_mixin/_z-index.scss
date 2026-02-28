@@ -1,0 +1,25 @@
+$z-indexes: (
+  "hide": -1,
+  "auto": auto,
+  "base": 1,
+  "loading": 10,
+  "sticky": 100,
+  "fixed": 200
+) !default;
+
+/// Mixin to set z-index
+/// @param {String|Number} $key - The key of the z-index map or a raw number
+/// @param {Number} $diff - The difference to add to the z-index
+/// @example
+///   @include z-index(base);
+///   @include z-index(base, 1);
+@mixin z-index($key, $diff: 0) {
+  $z-index: map-get($z-indexes, $key);
+
+  @if $z-index {
+    z-index: $z-index + $diff;
+  } @else {
+    @warn "Unknown z-index key: `#{$key}`.";
+    z-index: $key + $diff;
+  }
+}

@@ -1,5 +1,5 @@
 ---
-title: Exact Color Match Test
+title: Color Preview Test
 date: 2025-08-17T17:20:00+08:00
 collections:
   - Tests
@@ -8,6 +8,10 @@ categories:
 tags:
   - Color Preview
 ---
+
+This post is a test post to preview the color syntax in Markdown.
+
+<!--more-->
 
 ## 📝 Syntax
 
@@ -31,6 +35,17 @@ Pure color values (no leading/trailing characters):
 - `rgb(0, 255, 0)`
 - `hsl(240, 100%, 50%)`
 - `hsl(120, 100%, 50%)`
+
+Theme colors:
+
+| Type      | Light     | Dark      |
+| :-------: | :-------: | :-------: |
+| Primary   | `#1677ff` | `#0069fc` |
+| Secondary | `#8b949e` | `#7d8792` |
+| Success   | `#52c41a` | `#49ad17` |
+| Info      | `#13c2c2` | `#11abab` |
+| Warning   | `#faad14` | `#efa105` |
+| Danger    | `#ff4d4f` | `#ff3436` |
 
 ## ❌ Regular Code
 

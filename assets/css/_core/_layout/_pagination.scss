@@ -10,16 +10,12 @@
 
   a {
     font-size: 0.8rem;
-    color: $pagination-link-color;
+    color: fixit-var(pagination-link-color);
     letter-spacing: 0.1rem;
     font-weight: 700;
     padding: 5px 5px;
     text-decoration: none;
-    @include transition(0.3s);
-
-    [data-theme='dark'] & {
-      color: $pagination-link-color-dark;
-    }
+    transition: 0.3s;
   }
 
   li {
@@ -34,11 +30,7 @@
     }
 
     &:hover a {
-      color: $pagination-link-hover-color;
-    }
-
-    [data-theme='dark'] &:hover a {
-      color: $pagination-link-hover-color-dark;
+      color: fixit-var(pagination-link-hover-color);
     }
 
     &::before,
@@ -47,14 +39,9 @@
       content: '';
       width: 0;
       height: 3px;
-      background: $pagination-link-hover-color;
-      @include transition(0.3s);
+      background: fixit-var(pagination-link-hover-color);
       bottom: 0px;
-    }
-
-    [data-theme='dark'] &::before,
-    [data-theme='dark'] &::after {
-      background: $pagination-link-hover-color-dark;
+      transition: 0.3s;
     }
 
     &::before {
@@ -74,11 +61,7 @@
 
     &.active {
       a {
-        color: $pagination-link-hover-color;
-      }
-
-      [data-theme='dark'] & a {
-        color: $pagination-link-hover-color-dark;
+        color: fixit-var(pagination-link-hover-color);
       }
 
       &::before,

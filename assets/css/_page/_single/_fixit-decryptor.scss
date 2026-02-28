@@ -1,7 +1,7 @@
 .fixit-decryptor-container {
-  font-family: $global-font-family;
+  font-family: fixit-var(global-font-family);
   text-align: center;
-  margin-block: var(#{$rootPrefix}decryptor-margin-block);
+  margin-block: fixit-var(decryptor-margin-block);
 
   .fixit-decryptor-loading {
     vertical-align: middle;
@@ -13,28 +13,23 @@
     display: none;
     box-sizing: border-box;
     outline: none;
-    color: var(#{$rootPrefix}global-font-color);
-    border: 1px solid darken($global-border-color, 15%);
-    border-radius: $global-border-radius;
-    @include transition(all 0.1s ease-out);
-    box-shadow: 0px 0px 5px 0px darken($global-border-color, 15%);
+    color: fixit-var(global-font-color);
+    border: 1px solid fixit-var(global-border-color);
+    box-shadow: 0px 0px 5px 0px fixit-var(global-border-color);
+    @include border-radius;
+    transition: all 0.1s ease-out;
 
     &:active,
     &:focus,
     &:hover {
       color: darken($global-link-hover-color, 6%);
-      border-color: var(#{$rootPrefix}global-link-hover-color);
+      border-color: fixit-var(global-link-hover-color);
       box-shadow: 0px 0px 5px 0px lighten($global-link-hover-color, 20%);
 
-      [data-theme='dark'] & {
+      [data-theme=dark] & {
         color: lighten($global-link-hover-color-dark, 6%);
         box-shadow: 0px 0px 5px 0px darken($global-link-hover-color-dark, 20%);
       }
-    }
-
-    [data-theme='dark'] & {
-      border-color: lighten($global-border-color-dark, 15%);
-      box-shadow: 0px 0px 5px 0px lighten($global-border-color-dark, 15%);
     }
   }
 
@@ -43,20 +38,15 @@
     height: 3rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    background-color: var(#{$rootPrefix}global-background-color);
+    background-color: fixit-var(global-background-color);
   }
 
   .fixit-decryptor-btn,
   .fixit-encryptor-btn {
     cursor: pointer;
-    @include transition(all 0.1s ease-out);
     padding: 0.8rem 1rem;
-
-    background-color: $header-background-color;
-
-    [data-theme='dark'] & {
-      background-color: $header-background-color-dark;
-    }
+    background-color: fixit-var(global-background-color);
+    transition: all 0.1s ease-out;
   }
 
   .fixit-encryptor-btn {
@@ -84,7 +74,7 @@ fixit-encryptor {
 // fixit-encryptor for for the encrypted pages
 article fixit-encryptor {
   .fixit-decryptor-container {
-    #{$rootPrefix}decryptor-margin-block: 2rem;
+    @include set-fixit-var(decryptor-margin-block, 2rem);
   }
   &.decrypted > .fixit-decryptor-container {
     .fixit-decryptor-loading,
@@ -102,7 +92,7 @@ article fixit-encryptor {
 // fixit-encryptor shortcodes
 #content fixit-encryptor {
   .fixit-decryptor-container {
-    #{$rootPrefix}decryptor-margin-block: 1rem;
+    @include set-fixit-var(decryptor-margin-block, 1rem);
   }
   &.decrypted > .fixit-decryptor-container {
     display: none;

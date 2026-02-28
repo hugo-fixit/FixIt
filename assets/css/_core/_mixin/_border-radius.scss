@@ -1,0 +1,26 @@
+/// Mixin to set border-radius
+/// @param {String|Number|List} $value - The value of the border-radius, position (top, bottom, left, right) or keyword (full)
+/// @param {Number} $radius - The radius of the border (only for position)
+/// @example
+///   @include border-radius;
+///   @include border-radius(full);
+///   @include border-radius(top);
+///   @include border-radius(top, 10px);
+///   @include border-radius(10px 20px 10px 20px);
+@mixin border-radius($value: fixit-var(global-border-radius), $radius: null) {
+  $r: if($radius, $radius, fixit-var(global-border-radius));
+
+  @if $value == full {
+    border-radius: calc(infinity * 1px);
+  } @else if $value == top {
+    border-radius: $r $r 0 0;
+  } @else if $value == bottom {
+    border-radius: 0 0 $r $r;
+  } @else if $value == left {
+    border-radius: $r 0 0 $r;
+  } @else if $value == right {
+    border-radius: 0 $r $r 0;
+  } @else {
+    border-radius: $value;
+  }
+}

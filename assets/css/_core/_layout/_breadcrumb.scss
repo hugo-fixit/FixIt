@@ -1,10 +1,10 @@
 .breadcrumb-container {
   padding-inline: 1rem;
   font-size: 0.75rem;
-  background-color: var(#{$rootPrefix}global-background-color);
+  background-color: fixit-var(global-background-color);
   display: flex;
   gap: 0.5rem;
-  @include z-index(1);
+  @include z-index(sticky);
   @extend .print-d-none;
 
   &:has(~ main[data-reverse]) {
@@ -20,7 +20,7 @@
 
   &.sticky {
     position: sticky;
-    top: $header-height;
+    top: fixit-var(header-height);
   }
 
   .breadcrumb {
@@ -29,12 +29,8 @@
     padding: 0.5rem 0;
     margin: 0 auto;
     list-style: none;
-    border-bottom: 1px inset $global-border-color;
+    border-bottom: 1px inset fixit-var(global-border-color);
     @extend %page-style;
-
-    [data-theme='dark'] & {
-      border-bottom-color: $global-border-color-dark;
-    }
 
     .breadcrumb-item {
       display: flex;
@@ -43,11 +39,11 @@
         content: attr(data-separator);
         display: inline-block;
         padding-inline: 0.5rem;
-        color: var(#{$rootPrefix}global-font-secondary-color);
+        color: fixit-var(global-placeholder-color);
       }
 
       &.active {
-        color: var(#{$rootPrefix}secondary);
+        color: fixit-var(secondary);
       }
     }
   }

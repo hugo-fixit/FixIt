@@ -90,7 +90,7 @@ FixIt/
 2. **Mixin 使用**: 提高代码复用性
 
    ```scss
-   @include border-radius($global-border-radius);
+   @include border-radius;
    @include transition(all 0.2s ease);
    @include blur;
    ```

@@ -1,11 +1,12 @@
-// ==============================
-// Variables
-// TODO refactor variables
-// ==============================
+// ==========================================================================
+// SCSS Variables
+// Note: These SCSS variables are now also defined as CSS custom properties
+// in _core/_root.scss for runtime theme switching and runtime customization.
+// ==========================================================================
 
 // ========== Global ========== //
 $prefix: fi- !default;
-$rootPrefix: --fi- !default;
+$rootPrefix: --#{$prefix} !default;
 
 // Font and Line Height
 $global-font-family: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif !default;
@@ -14,7 +15,7 @@ $global-font-weight: 400 !default;
 $global-line-height: 1.5rem !default;
 
 // scroll-margin-top of content anchor
-$global-scroll-margin-top: 0.5rem;
+$global-scroll-margin-top: 0.5rem !default;
 
 // Radius of the border
 $global-border-radius: 5px !default;
@@ -27,9 +28,9 @@ $global-background-color-dark: #292a2e !default;
 $global-font-color: #161209 !default;
 $global-font-color-dark: #b1b1ba !default;
 
-// Color of the secondary text
-$global-font-secondary-color: #b1b1ba !default;
-$global-font-secondary-color-dark: #909092 !default;
+// Color of the placeholder
+$global-placeholder-color: #b1b1ba !default;
+$global-placeholder-color-dark: #909092 !default;
 
 // Color of the link
 $global-link-color: #161209 !default;
@@ -40,11 +41,8 @@ $global-link-hover-color: #2983bb !default; // 潮蓝
 $global-link-hover-color-dark: #fff !default;
 
 // Color of the border
-// TODO refactor border colors
-// $global-border-color: #e3e3e3 !default;
-// $global-border-color-dark: #434343 !default;
-$global-border-color: #f0f0f0 !default;
-$global-border-color-dark: #363636 !default;
+$global-border-color: #e3e3e3 !default;
+$global-border-color-dark: #717171 !default;
 // ========== Global ========== //
 
 // ========== Scrollbar ========== //
@@ -78,8 +76,8 @@ $menu-active-color: #161209 !default;
 $menu-active-color-dark: #fff !default;
 
 // Border color of the menu item
-$menu-border-color: darken($global-border-color, 5%) !default;
-$menu-border-color-dark: lighten($global-border-color-dark, 5%) !default;
+$menu-border-color: #3c3c3c1f !default;
+$menu-border-color-dark: #5454547a !default;
 
 // Height of the submenu item of desktop header
 $submenu-height: $header-height * 0.5 !default;
@@ -91,10 +89,10 @@ $search-background-color-dark: #363636 !default;
 
 // ========== Tag Cloud ========== //
 // Color range of tag cloud
-$tag-cloud-start: $global-font-secondary-color!default;
-$tag-cloud-end: $global-font-color!default;
-$tag-cloud-start-dark: $global-font-secondary-color-dark!default;
-$tag-cloud-end-dark: $global-font-color-dark!default;
+$tag-cloud-start: #b1b1ba !default;
+$tag-cloud-end: $global-font-color !default;
+$tag-cloud-start-dark: #909092 !default;
+$tag-cloud-end-dark: $global-font-color-dark !default;
 // ========== Tag Cloud ========== //
 
 // ========== Single Content ========== //
@@ -184,8 +182,4 @@ $github-corner-fill: $header-background-color-dark !default;
 $github-corner-fill-dark: $header-background-color !default;
 // ========== GitHub Corners ========== //
 
-@import '_maps/admonition';
-@import '_maps/alert';
-@import '_maps/code-type';
-@import '_maps/colors';
-@import '_maps/utilities';
+@import '_maps';

@@ -1,13 +1,13 @@
 // Common styles for all TOC types
 .toc {
   .toc-title {
-    font-size: $toc-title-font-size;
+    font-size: fixit-var(toc-title-font-size);
     font-weight: bold;
     text-transform: uppercase;
   }
 
   .toc-content {
-    font-size: $toc-content-font-size;
+    font-size: fixit-var(toc-content-font-size);
 
     code {
       @extend %code;
@@ -25,11 +25,7 @@
         margin-right: 0.5em;
         position: relative;
         bottom: 2px;
-        color: $single-link-color;
-
-        [data-theme='dark'] & {
-          color: $single-link-color-dark;
-        }
+        color: fixit-var(single-link-color);
       }
 
       ul {
@@ -46,20 +42,16 @@
       }
 
       li:has(> a:hover)::marker {
-        color: $single-link-color;
-
-        [data-theme='dark'] & {
-          color: $single-link-color-dark;
-        }
+        color: fixit-var(single-link-color);
       }
     }
   }
 
   ruby {
-    background-color: var(#{$rootPrefix}code-block-background-color);
+    background-color: fixit-var(code-block-background-color);
 
     rt {
-      color: var(#{$rootPrefix}global-font-secondary-color);
+      color: fixit-var(secondary);
     }
   }
 }
@@ -70,11 +62,7 @@
   .toc-content {
     li.has-active {
       &::marker {
-        color: $single-link-color;
-
-        [data-theme='dark'] & {
-          color: $single-link-color-dark;
-        }
+        color: fixit-var(single-link-color);
       }
 
       &:has(> .active)::marker {
@@ -82,21 +70,13 @@
       }
 
       > a {
-        color: $single-link-color;
-
-        [data-theme='dark'] & {
-          color: $single-link-color-dark;
-        }
+        color: fixit-var(single-link-color);
       }
     }
 
     ul {
       a.active::before {
-        color: $single-link-hover-color;
-
-        [data-theme='dark'] & {
-          color: $single-link-hover-color-dark;
-        }
+        color: fixit-var(single-link-hover-color);
       }
     }
 
@@ -109,7 +89,7 @@
 #toc-auto {
   display: block;
   position: sticky;
-  top: calc(#{$header-height} + var(#{$rootPrefix}breadcrumb-height));
+  top: calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height)});
   box-sizing: border-box;
   visibility: hidden;
   @include overflow-wrap(break-word);
@@ -117,7 +97,7 @@
   @extend .print-d-none;
 
   [data-header-desktop='normal'] & {
-    #{$rootPrefix}scroll-mt: #{$global-scroll-margin-top};
+    @include set-fixit-var(scroll-mt, fixit-var(global-scroll-margin-top));
   }
 
   .toc-title {
@@ -131,27 +111,23 @@
       margin-right: 0.5em;
       position: relative;
       bottom: 2px;
-      color: $global-border-color;
-
-      [data-theme='dark'] & {
-        color: $global-border-color-dark;
-      }
+      color: fixit-var(global-border-color);
     }
 
     i.toc-icon {
-      @include transition(transform 0.2s ease);
+      transition: transform 0.2s ease;
     }
   }
 
   &.toc-hidden i.toc-icon {
-    @include transform(rotate(-90deg));
-    @include transition(transform 0.2s ease);
+    transform: rotate(-90deg);
+    transition: transform 0.2s ease;
   }
 
   .toc-content {
     overflow-y: scroll;
-    // TODO 这里计算错误，待重构
-    max-height: calc(100vh - #{2 * $header-height});
+    // TODO 这里计算错误，待重构使用 JS 计算
+    max-height: calc(100vh - #{2 * #{fixit-var(header-height)}});
     @include scrollbar-width(none, 0);
 
     &.always-active ul,
@@ -196,11 +172,11 @@
     justify-content: space-between;
     line-height: 2em;
     padding: 0 0.75em;
-    background-color: var(#{$rootPrefix}code-header-background-color);
+    background-color: fixit-var(code-header-background-color);
   }
 
   .toc-content {
-    background-color: var(#{$rootPrefix}code-block-background-color);
+    background-color: fixit-var(code-block-background-color);
 
     > nav {
       > ul {
@@ -210,11 +186,7 @@
           font-weight: bold;
 
           &::before {
-            color: $single-link-hover-color;
-
-            [data-theme='dark'] & {
-              color: $single-link-hover-color-dark;
-            }
+            color: fixit-var(single-link-hover-color);
           }
         }
       }
@@ -232,10 +204,10 @@
 
   &:not(.open) {
     .toc-title {
-      #{$rootPrefix}code-header-background-color: #{darken($code-background-color, 6%)};
+      @include set-fixit-var(code-header-background-color, darken($code-background-color, 6%));
 
-      [data-theme='dark'] & {
-        #{$rootPrefix}code-header-background-color: #{darken($code-background-color-dark, 6%)};
+      [data-theme=dark] & {
+        @include set-fixit-var(code-header-background-color, darken($code-background-color-dark, 6%));
       }
     }
   }
@@ -255,21 +227,21 @@
   max-height: 100%;
   margin-right: 0;
   border: none;
-  border-left: 1px solid var(#{$rootPrefix}global-border-color);
-  background-color: var(#{$rootPrefix}global-background-color);
+  border-left: 1px solid fixit-var(global-border-color);
+  background-color: fixit-var(global-background-color);
 
   .toc {
     max-width: 100%;
     margin-inline: 1rem;
 
     .toc-title {
-      font-size: $toc-title-font-size * 1.5;
-      line-height: $toc-title-font-size * 2;
-      margin-block: $toc-title-font-size;
+      font-size: calc(#{fixit-var(toc-title-font-size)} * 1.5);
+      line-height: calc(#{fixit-var(toc-title-font-size)} * 2);
+      margin-block: fixit-var(toc-title-font-size);
     }
 
     .toc-content {
-      font-size: max($toc-content-font-size, 1rem);
+      font-size: MAX(fixit-var(toc-content-font-size), 1rem);
 
       nav {
         max-height: calc(100dvh - 5rem);
