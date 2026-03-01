@@ -42,7 +42,7 @@
     "prepare": "simple-git-hooks"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^6.7.3",
+    "@antfu/eslint-config": "^7.6.1",
     "@types/node": "^24.10.15",
     "auto-changelog-plus": "^1.2.3",
     "eslint": "^9.39.2",
