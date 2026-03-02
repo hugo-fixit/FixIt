@@ -459,6 +459,33 @@ class FixIt {
     }, false);
   }
 
+  initDownloadCode(codeBlock, codePreEl) {
+    const downloadBtn = codeBlock.querySelector('.code-header .download-btn');
+    if (!downloadBtn) return;
+    downloadBtn.addEventListener('click', () => {
+      const $codeHeader = codeBlock.querySelector('.code-header');
+      const fileNameFromTitle = $codeHeader?.querySelector('.code-title')?.dataset.name?.trim();
+      const language = Array.from($codeHeader?.classList || []).find((className) => className.startsWith('language-'))?.replace('language-', '');
+      const fallbackName = language && language !== 'fallback' ? `code.${language}` : 'code.txt';
+      const fileName = (fileNameFromTitle || fallbackName).replace(/[\\/:*?"<>|\r\n]+/g, '-');
+      const blob = new Blob([codePreEl.innerText], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = fileName || fallbackName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      downloadBtn.toggleAttribute('data-downloaded', true);
+      downloadBtn.classList.toggle('fa-spin', true);
+      setTimeout(() => {
+        downloadBtn.toggleAttribute('data-downloaded', false);
+        downloadBtn.classList.toggle('fa-spin', false);
+      }, 300);
+    }, false);
+  }
+
   /**
    * init code wrapper
    */
@@ -477,6 +504,7 @@ class FixIt {
       if ($codeBlock.dataset.mode === 'classic') {
         const $codeHeader = $codeBlock.querySelector('.code-header');
         if (!$codeHeader) return;
+        this.initDownloadCode($codeBlock, $codePreEl);
         // code title
         $codeHeader.querySelector('.code-title').addEventListener('click', () => {
           $codeBlock.classList.toggle('is-collapsed');
