@@ -237,6 +237,12 @@ pre {
         color: fixit-var(global-link-hover-color);
       }
 
+      .download-btn[data-downloaded] .fa-download {
+        --fa: "\f1ce";
+        font-weight: 900;
+        color: fixit-var(global-link-hover-color);
+      }
+
       @each $type, $text in $code-type-map {
         &.language-#{to-lower-case($type)} {
           // e.g., --fi-code-type: "JavaScript";

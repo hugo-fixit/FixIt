@@ -1144,6 +1144,8 @@ wrapperClass = ""
 maxShownLines = 10
 # whether to enable code copy button
 copyable = true
+# [classic] whether to enable code download button in the code block header
+downloadable = false
 # [classic] whether to enable line numbers toggle button in the code block header
 lineNosToggler = true
 # [classic] whether to enable toggle line wrapping button in the code block header
