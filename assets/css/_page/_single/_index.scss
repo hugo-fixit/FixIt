@@ -231,21 +231,23 @@
     li[data-task] {
       list-style: none;
       color: fixit-var(task-color);
+
       .checkbox-icon {
         margin: 0 .25em 0 -1.5em;
         color: fixit-var(checkbox-color);
       }
     }
-    li[data-task='x'],
-    li[data-task='-'] {
-      text-decoration: line-through rgba(145, 145, 145, 0.6);
-      @include set-fixit-var(task-color, fixit-var(secondary));
-    }
     li[data-task='x'] {
-      @include set-fixit-var(checkbox-color, fixit-var(primary));
+      @include set-fixit-var(checkbox-color, fixit-var(secondary));
+
+      .checkbox-icon {
+        opacity: 0.6;
+      }
     }
     li[data-task='-'] {
       opacity: 0.6;
+      text-decoration: line-through rgba(145, 145, 145, 0.6);
+      @include set-fixit-var(task-color, fixit-var(secondary));
     }
     li[data-task='/'] {
       @include set-fixit-var(task-color, fixit-var(success));
