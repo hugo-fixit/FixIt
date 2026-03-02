@@ -219,10 +219,13 @@ class FixIt {
       this.clickMaskEventSet.add(this._searchDesktopOnClickMask);
     }
     $searchInput.addEventListener('input', () => {
-      if ($searchInput.value === '') $searchClear.style.display = 'none';
-      else $searchClear.style.display = 'inline';
+      if ($searchInput.value === '')
+        $searchClear.style.display = 'none';
+      else
+        $searchClear.style.display = 'inline';
     }, false);
 
+    // https://www.algolia.com/doc/ui-libraries/autocomplete/guides/upgrading
     const initAutosearch = () => {
       const autosearch = autocomplete(`#search-input-${suffix}`,
         {

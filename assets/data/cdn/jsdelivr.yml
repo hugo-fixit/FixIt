@@ -16,9 +16,8 @@ libFiles:
   # artalk@latest https://github.com/ArtalkJS/Artalk
   artalkCSS: artalk@latest/dist/Artalk.css
   artalkJS: artalk@latest/dist/Artalk.js
-  # autocomplete-js@0.38.1 https://github.com/algolia/autocomplete
-  # TODO update autocompleteJS: '@algolia/autocomplete-js@1.7.1/dist/umd/index.production.js'
-  autocompleteJS: autocomplete.js@0.38.1/dist/autocomplete.min.js
+  # autocomplete-js@1.19.6 https://github.com/algolia/autocomplete
+  autocompleteJS: '@algolia/autocomplete-js@1.19.6/dist/umd/index.production.js'
   # cell-watermark@1.0.3 https://github.com/Lruihao/watermark
   cellWatermarkJS: cell-watermark@1.0.3/src/watermark.min.js
   # cookieconsent@3.1.1 https://github.com/osano/cookieconsent

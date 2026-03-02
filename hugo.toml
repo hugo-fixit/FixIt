@@ -495,7 +495,7 @@ dark = "#252627"
 
 # Search config
 [params.search]
-enable = false
+enable = true
 # type of search engine ["algolia", "fuse", "cse", "post-chat"]
 type = "fuse"
 # max index length of the chunked content
