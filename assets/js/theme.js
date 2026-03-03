@@ -486,6 +486,58 @@ class FixIt {
     }, false);
   }
 
+  _setCodeFullscreenState(codeBlock, show) {
+    const fullscreenBtn = codeBlock.querySelector('.code-header .fullscreen-btn');
+    const hasExpandBtn = !!codeBlock.querySelector('.code-expand-btn');
+    if (show && hasExpandBtn) {
+      codeBlock.dataset.fullscreenExpanded = codeBlock.classList.contains('is-expanded') ? 'true' : 'false';
+      codeBlock.classList.add('is-expanded');
+    }
+    if (!show && codeBlock.classList.contains('is-fullscreen')) {
+      codeBlock.classList.add('instant-height');
+      if (hasExpandBtn && codeBlock.dataset.fullscreenExpanded === 'false') {
+        codeBlock.classList.remove('is-expanded');
+      }
+      delete codeBlock.dataset.fullscreenExpanded;
+      window.requestAnimationFrame(() => {
+        codeBlock.classList.remove('instant-height');
+      });
+    }
+    codeBlock.classList.toggle('is-fullscreen', show);
+    fullscreenBtn?.toggleAttribute('data-fullscreen', show);
+    const hasFullscreenCode = !!document.querySelector('.code-block.highlight.is-fullscreen');
+    document.documentElement.style.overflow = hasFullscreenCode ? 'hidden' : '';
+  }
+
+  closeCodeFullscreen() {
+    const $activeCodeBlock = document.querySelector('.code-block.highlight.is-fullscreen');
+    if (!$activeCodeBlock) return;
+    this._setCodeFullscreenState($activeCodeBlock, false);
+  }
+
+  initFullscreenCode(codeBlock) {
+    const fullscreenBtn = codeBlock.querySelector('.code-header .fullscreen-btn');
+    if (!fullscreenBtn) return;
+    fullscreenBtn.addEventListener('click', () => {
+      const isFullscreen = codeBlock.classList.contains('is-fullscreen');
+      if (isFullscreen) {
+        this._setCodeFullscreenState(codeBlock, false);
+        return;
+      }
+      this.closeCodeFullscreen();
+      codeBlock.classList.remove('is-collapsed');
+      this._setCodeFullscreenState(codeBlock, true);
+    }, false);
+    if (!this._codeFullscreenOnEsc) {
+      this._codeFullscreenOnEsc = (event) => {
+        if (event.key === 'Escape') {
+          this.closeCodeFullscreen();
+        }
+      };
+      document.addEventListener('keydown', this._codeFullscreenOnEsc, false);
+    }
+  }
+
   /**
    * init code wrapper
    */
@@ -505,8 +557,10 @@ class FixIt {
         const $codeHeader = $codeBlock.querySelector('.code-header');
         if (!$codeHeader) return;
         this.initDownloadCode($codeBlock, $codePreEl);
+        this.initFullscreenCode($codeBlock);
         // code title
         $codeHeader.querySelector('.code-title').addEventListener('click', () => {
+          if ($codeBlock.classList.contains('is-fullscreen')) return;
           $codeBlock.classList.toggle('is-collapsed');
         }, false);
         // ellipses icon
