@@ -1146,6 +1146,8 @@ maxShownLines = 10
 copyable = true
 # [classic] whether to enable code download button in the code block header
 downloadable = false
+# [classic] whether to enable code fullscreen button in the code block header
+fullscreen = false
 # [classic] whether to enable line numbers toggle button in the code block header
 lineNosToggler = true
 # [classic] whether to enable toggle line wrapping button in the code block header

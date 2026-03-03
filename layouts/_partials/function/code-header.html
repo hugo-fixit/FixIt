@@ -8,6 +8,7 @@
 {{- $editBtn := "" -}}
 {{- $copyBtn := "" -}}
 {{- $downloadBtn := "" -}}
+{{- $fullscreenBtn := "" -}}
 {{- $foldIcon := dict "Class" "arrow fa-solid fa-chevron-down" | partial "plugin/icon.html" -}}
 {{- $titleEl := printf `<span class="code-title">%s</span>` $foldIcon -}}
 {{- $ellipsisBtn := printf `<span class="ellipses-btn" aria-label="Show more options" role="button">%s</span>` (dict "Class" "fa-solid fa-ellipsis-h" | partial "plugin/icon.html") -}}
@@ -35,10 +36,14 @@
   {{- $downloadIcon := dict "Class" "fa-solid fa-download" | partial "plugin/icon.html" -}}
   {{- $downloadBtn = printf `<span class="download-btn" aria-label="%s" role="button" title="%s">%s</span>` (T "assets.downloadCode") (T "assets.downloadCode") $downloadIcon -}}
 {{- end -}}
+{{- if $config.fullscreen -}}
+  {{- $fullscreenIcon := dict "Class" "fa-solid fa-expand" | partial "plugin/icon.html" -}}
+  {{- $fullscreenBtn = printf `<span class="fullscreen-btn" aria-label="%s" role="button" title="%s">%s</span>` (T "assets.toggleCodeFullscreen") (T "assets.toggleCodeFullscreen") $fullscreenIcon -}}
+{{- end -}}
 {{- with $config.name -}}
   {{- $titleEl = replace $titleEl `<span class="code-title">` (printf `<span class="code-title" data-name="%s">` .) -}}
 {{- end -}}
-{{- $codeHeader := printf `<div class="code-header language-%s">%s%s%s%s%s%s%s</div>` $lang $titleEl $ellipsisBtn $lineNosBtn $lineWrapBtn $editBtn $copyBtn $downloadBtn -}}
+{{- $codeHeader := printf `<div class="code-header language-%s">%s%s%s%s%s%s%s%s</div>` $lang $titleEl $ellipsisBtn $lineNosBtn $lineWrapBtn $editBtn $copyBtn $downloadBtn $fullscreenBtn -}}
 {{- $wrapper = replaceRE `(<div class="code-wrapper">)` (printf "%s$1" $codeHeader) $wrapper -}}
 
 {{- return $wrapper -}}

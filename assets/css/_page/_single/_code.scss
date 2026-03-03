@@ -132,6 +132,10 @@ pre {
 
   // code fences blocks wrapped
   &.code-block {
+    &.instant-height .code-wrapper {
+      transition: height 0s !important;
+    }
+
     .code-wrapper {
       overflow: hidden;
       height: auto;
@@ -173,6 +177,7 @@ pre {
       position: sticky;
       top: fixit-var(breadcrumb-height);
       transition: border-radius 0s;
+      cursor: pointer;
       @include z-index(base);
       @include border-radius(top);
 
@@ -182,10 +187,6 @@ pre {
         > pre.chroma {
           @include border-radius(bottom);
         }
-      }
-
-      &:hover {
-        cursor: pointer;
       }
 
       .code-title {
@@ -243,6 +244,12 @@ pre {
         color: fixit-var(global-link-hover-color);
       }
 
+      .fullscreen-btn[data-fullscreen] .fa-expand {
+        --fa: "\f066";
+        font-weight: 900;
+        color: fixit-var(global-link-hover-color);
+      }
+
       @each $type, $text in $code-type-map {
         &.language-#{to-lower-case($type)} {
           // e.g., --fi-code-type: "JavaScript";
@@ -256,6 +263,37 @@ pre {
     .code-header [role='button']:hover,
     &:has([contenteditable='true']) .edit-btn {
       color: fixit-var(global-link-hover-color);
+    }
+
+    &.is-fullscreen {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: 0 !important;
+      overflow: auto;
+      @include z-index(fixed, 1);
+      @include border-radius(0);
+
+      .code-header {
+        top: 0 !important;
+        cursor: default;
+
+        .arrow {
+          display: none;
+        }
+      }
+
+      .code-wrapper {
+        overflow: auto;
+        // 1.4em for header height, 0.8rem for padding
+        height: calc(100dvh - 1.4em - 0.8rem);
+      }
+
+      .code-expand-btn {
+        display: none;
+      }
     }
 
     .code-expand-btn {
