@@ -1,5 +1,4 @@
 // TODO use ESLint to check the code style
-// 按需加载主题内部库和功能模块
 import Util from './util';
 import FileTree from './lib/file-tree.js'
 
@@ -7,9 +6,8 @@ class FixIt {
   constructor() {
     this.config = window.config;
     this.isDark = document.documentElement.dataset.theme === 'dark';
-    this.util = new Util();
     this.fileTree = new FileTree();
-    this.newScrollTop = this.util.getScrollTop();
+    this.newScrollTop = Util.getScrollTop();
     this.oldScrollTop = this.newScrollTop;
     this.scrollEventSet = new Set();
     this.resizeEventSet = new Set();
@@ -31,7 +29,7 @@ class FixIt {
   }
 
   initSVGIcon() {
-    this.util.forEach(document.querySelectorAll('[data-svg-src]'), ($icon) => {
+    Util.forEach(document.querySelectorAll('[data-svg-src]'), ($icon) => {
       fetch($icon.dataset.svgSrc)
         .then((response) => response.text())
         .then((svg) => {
@@ -60,7 +58,7 @@ class FixIt {
   }
 
   initMenuDesktop() {
-    this.util.forEach(document.querySelectorAll('.has-children'), ($item) => {
+    Util.forEach(document.querySelectorAll('.has-children'), ($item) => {
       $item.querySelector('.sub-menu').style.minWidth = `${$item.offsetWidth - 8}px`;
     });
   }
@@ -80,7 +78,7 @@ class FixIt {
     });
     this.clickMaskEventSet.add(this._menuMobileOnClickMask);
     // add nested menu toggler
-    this.util.forEach(document.querySelectorAll('.menu-item>.nested-item'), ($nestedItem) => {
+    Util.forEach(document.querySelectorAll('.menu-item>.nested-item'), ($nestedItem) => {
       $nestedItem.addEventListener('click', function () {
         this.parentNode.querySelector('.sub-menu').classList.toggle('open');
         this.querySelector('.dropdown-icon').classList.toggle('open');
@@ -89,7 +87,7 @@ class FixIt {
   }
 
   initSwitchTheme() {
-    this.util.forEach(document.getElementsByClassName('theme-switch'), ($themeSwitch) => {
+    Util.forEach(document.getElementsByClassName('theme-switch'), ($themeSwitch) => {
       $themeSwitch.addEventListener('click', () => {
         document.documentElement.dataset.theme = this.isDark ? 'light' : 'dark';
         document.documentElement.style.setProperty('color-scheme', this.isDark ? 'light' : 'dark');
@@ -136,7 +134,7 @@ class FixIt {
 
   initSearch() {
     const searchConfig = this.config.search;
-    const isMobile = this.util.isMobile();
+    const isMobile = Util.isMobile();
     if (
       !searchConfig ||
       (isMobile && this._searchMobileOnce) ||
@@ -343,7 +341,7 @@ class FixIt {
           templates: {
             suggestion: ({ title, uri, date, context }) =>
               `<div><a href="${uri}"><span class="suggestion-title">${title}</span></a><span class="suggestion-date">${date}</span></div><div class="suggestion-context">${context}</div>`,
-            empty: ({ query }) => `<div class="search-empty">${searchConfig.noResultsFound}: <span class="search-query">"${this.util.HTMLEscape(query)}"</span></div>`,
+            empty: ({ query }) => `<div class="search-empty">${searchConfig.noResultsFound}: <span class="search-query">"${Util.HTMLEscape(query)}"</span></div>`,
             footer: ({ }) => {
               let searchType, icon, href;
               switch (searchConfig.type) {
@@ -396,7 +394,7 @@ class FixIt {
   }
 
   initDetails(target = document) {
-    this.util.forEach(target.querySelectorAll('.details:not(.disabled)'), ($details) => {
+    Util.forEach(target.querySelectorAll('.details:not(.disabled)'), ($details) => {
       const $summary = $details.querySelector('.details-summary');
       $summary.addEventListener('click', () => {
         $details.classList.toggle('open');
@@ -438,11 +436,11 @@ class FixIt {
       const iswWrap = codeBlock.classList.contains('line-wrapping');
       const highlightLines = codeBlock.querySelectorAll('.hl');
       iswWrap && codeBlock.classList.toggle('line-wrapping');
-      this.util.forEach(highlightLines, $hl => $hl.classList.toggle('hl'));
-      this.util.copyText(codePreEl.innerText.trim()).then(() => {
-        this.util.animateCSS(codePreEl, 'animate__flash');
+      Util.forEach(highlightLines, $hl => $hl.classList.toggle('hl'));
+      Util.copyText(codePreEl.innerText.trim()).then(() => {
+        Util.animateCSS(codePreEl, 'animate__flash');
         iswWrap && codeBlock.classList.toggle('line-wrapping');
-        this.util.forEach(highlightLines, $hl => $hl.classList.toggle('hl'));
+        Util.forEach(highlightLines, $hl => $hl.classList.toggle('hl'));
         copyBtn.toggleAttribute('data-copied', true);
         setTimeout(() => {
           copyBtn.toggleAttribute('data-copied', false);
@@ -543,7 +541,7 @@ class FixIt {
    */
   initCodeWrapper() {
     const $codeBlocks = document.querySelectorAll('.code-block.highlight:not([data-init])');
-    this.util.forEach($codeBlocks, ($codeBlock) => {
+    Util.forEach($codeBlocks, ($codeBlock) => {
       const $preElements = $codeBlock.querySelectorAll('pre.chroma');
       if (!$preElements.length) return;
       const $codePreEl = $preElements[$preElements.length - 1];
@@ -583,7 +581,7 @@ class FixIt {
               $codePreEl.setAttribute('contenteditable', false);
               $codePreEl.blur();
             } else {
-              this.util.forEach($codeBlock.querySelectorAll('.hl'), ($hl) => {
+              Util.forEach($codeBlock.querySelectorAll('.hl'), ($hl) => {
                 $hl.classList.remove('hl');
               });
               $codeBlock.classList.add('is-expanded');
@@ -600,15 +598,15 @@ class FixIt {
    * init diagram copy button
    */
   initDiagramCopyBtn() {
-    const stagingDOM = this.util.getStagingDOM()
-    this.util.forEach(document.querySelectorAll('.diagram-copy-btn'), ($btn) => {
+    const stagingDOM = Util.getStagingDOM()
+    Util.forEach(document.querySelectorAll('.diagram-copy-btn'), ($btn) => {
       $btn.addEventListener('click', () => {
         stagingDOM.stage($btn.parentElement.querySelector('template').content.cloneNode(true))
         let code = stagingDOM.contentAsText();
         try {
           code = JSON.stringify(JSON.parse(code), null, 2);
         } catch { }
-        this.util.copyText(code).then(() => {
+        Util.copyText(code).then(() => {
           $btn.toggleAttribute('data-copied', true);
           setTimeout(() => {
             $btn.toggleAttribute('data-copied', false);
@@ -632,10 +630,10 @@ class FixIt {
     const $tocLiElements = $tocContainer.getElementsByTagName('li');
 
     // Remove all active classes
-    this.util.forEach($tocLinkElements, ($tocLink) => {
+    Util.forEach($tocLinkElements, ($tocLink) => {
       $tocLink.classList.remove('active');
     });
-    this.util.forEach($tocLiElements, ($tocLi) => {
+    Util.forEach($tocLiElements, ($tocLi) => {
       $tocLi.classList.remove('has-active');
     });
 
@@ -674,10 +672,10 @@ class FixIt {
     // TOC Drawer Button Visibility
     const openButton = document.querySelector("#toc-drawer-button");
     if (openButton) {
-      openButton.classList.toggle('d-none', !this.util.isTocStatic());
+      openButton.classList.toggle('d-none', !Util.isTocStatic());
     }
     // TOC Static and TOC Dialog
-    if (this.util.isTocStatic()) {
+    if (Util.isTocStatic()) {
       const $tocContentStatic = document.getElementById('toc-content-static');
       if ($tocCore.parentElement !== $tocContentStatic) {
         $tocCore.parentElement.removeChild($tocCore);
@@ -704,7 +702,7 @@ class FixIt {
     }
     const $toc = document.getElementById('toc-auto');
     $toc.style.visibility = 'visible';
-    this.util.animateCSS($toc, ['animate__fadeIn', 'animate__faster'], true);
+    Util.animateCSS($toc, ['animate__fadeIn', 'animate__faster'], true);
     const $postMeta = document.querySelector('.post-meta');
     $toc.style.marginTop = `${$postMeta.offsetTop + $postMeta.clientHeight}px`;
 
@@ -733,7 +731,7 @@ class FixIt {
       } else {
         $tocContentAuto.classList.remove('animate__fadeIn');
       }
-      this.util.animateCSS($tocContentAuto, animation, true, () => {
+      Util.animateCSS($tocContentAuto, animation, true, () => {
         $tocContentAuto.classList.contains('animate__fadeOut') && $tocContentAuto.classList.add('d-none');
       });
       $toc.classList.toggle('toc-hidden');
@@ -768,7 +766,7 @@ class FixIt {
         $tocCore = $newTocCore;
       }
       // remove APlayer click event listener of the heading mark
-      this.util.forEach(document.querySelectorAll('.heading-mark'), ($headingMark) => {
+      Util.forEach(document.querySelectorAll('.heading-mark'), ($headingMark) => {
         const $newHeadingMark = $headingMark.cloneNode(true);
         $headingMark.parentElement.replaceChild($newHeadingMark, $headingMark);
       });
@@ -785,8 +783,8 @@ class FixIt {
         this._echartsArr[i].dispose();
       }
       this._echartsArr = [];
-      const stagingDOM = this.util.getStagingDOM()
-      this.util.forEach(document.getElementsByClassName('echarts'), ($echarts) => {
+      const stagingDOM = Util.getStagingDOM()
+      Util.forEach(document.getElementsByClassName('echarts'), ($echarts) => {
         const $dataEl = $echarts.nextElementSibling;
         if ($dataEl.tagName !== 'TEMPLATE') return;
         const chart = echarts.init($echarts, this.isDark ? 'dark' : 'light', { renderer: 'svg' });
@@ -818,7 +816,7 @@ class FixIt {
              * @returns {Object|Promise} ECharts option or Promise
              */
             const _getOption = new Function('fixit', 'chart',
-              this.util.isObjectLiteral(jsCodes) ? `return ${jsCodes}` : jsCodes
+              Util.isObjectLiteral(jsCodes) ? `return ${jsCodes}` : jsCodes
             );
             if ($dataEl.dataset.async === 'true') {
               return Promise.resolve(_getOption(this, chart)).then(option => {
@@ -852,7 +850,7 @@ class FixIt {
         mapboxgl.setRTLTextPlugin(this.config.mapbox.RTLTextPlugin);
         this._mapboxArr = this._mapboxArr || [];
       }
-      this.util.forEach(document.querySelectorAll('.mapbox:empty'), ($mapbox) => {
+      Util.forEach(document.querySelectorAll('.mapbox:empty'), ($mapbox) => {
         const { lng, lat, zoom, lightStyle, darkStyle, marked, markers, navigation, geolocate, scale, fullscreen } = JSON.parse($mapbox.dataset.options);
         const mapbox = new mapboxgl.Map({
           container: $mapbox,
@@ -901,7 +899,7 @@ class FixIt {
         this._mapboxArr.push(mapbox);
       });
       this._mapboxOnSwitchTheme = this._mapboxOnSwitchTheme || (() => {
-        this.util.forEach(this._mapboxArr, (mapbox) => {
+        Util.forEach(this._mapboxArr, (mapbox) => {
           const $mapbox = mapbox.getContainer();
           const { lightStyle, darkStyle } = JSON.parse($mapbox.dataset.options);
           mapbox.setStyle(this.isDark ? darkStyle : lightStyle);
@@ -928,7 +926,7 @@ class FixIt {
         acc[group].push(ele);
         return acc;
       }, {});
-      const stagingDOM = this.util.getStagingDOM()
+      const stagingDOM = Util.getStagingDOM()
 
       Object.values(groupMap).forEach((group) => {
         const typeone = (i) => {
@@ -1002,7 +1000,7 @@ class FixIt {
       $viewCommentsBtn.classList.remove('d-none');
       // view comments button click event
       $viewCommentsBtn.addEventListener('click', () => {
-        this.util.scrollIntoView('#comments');
+        Util.scrollIntoView('#comments');
       }, false);
     }
     this.config.comment.expired && document.querySelector('#comments').remove();
@@ -1119,7 +1117,7 @@ class FixIt {
     let now = new Date();
     let run = new Date(this.config.siteTime);
     let $runTimes = document.querySelector('.run-times');
-    if (!this.util.isValidDate(run) || !$runTimes) {
+    if (!Util.isValidDate(run) || !$runTimes) {
       clearInterval(this.siteTime);
       $runTimes && $runTimes.parentNode.remove();
       return;
@@ -1197,7 +1195,7 @@ class FixIt {
   initJsonViewer() {
     if (!window.JsonViewerElement) return;
     this._jsonViewerOnSwitchTheme = this._jsonViewerOnSwitchTheme || (() => {
-      this.util.forEach(document.getElementsByTagName('json-viewer'), ($el) => {
+      Util.forEach(document.getElementsByTagName('json-viewer'), ($el) => {
         $el.setAttribute('theme', this.isDark ? 'dark' : 'light');
       });
     });
@@ -1249,7 +1247,7 @@ class FixIt {
   _toggleEncryptedClass(container, show) {
     const fromClass = show ? 'encrypted-hidden' : 'decrypted-shown';
     const toClass = show ? 'decrypted-shown' : 'encrypted-hidden';
-    this.util.forEach(container.querySelectorAll(`.${fromClass}`), ($element) => {
+    Util.forEach(container.querySelectorAll(`.${fromClass}`), ($element) => {
       $element.classList.replace(fromClass, toClass);
     });
   }
@@ -1274,7 +1272,7 @@ class FixIt {
   initAutoMark() {
     if (!this.config.autoBookmark) return;
     window.addEventListener('beforeunload', () => {
-      window.sessionStorage?.setItem(`fixit-bookmark/#${location.pathname}`, this.util.getScrollTop());
+      window.sessionStorage?.setItem(`fixit-bookmark/#${location.pathname}`, Util.getScrollTop());
     });
     const scrollTop = Number(window.sessionStorage?.getItem(`fixit-bookmark/#${location.pathname}`));
     // If the page opens with a specific hash, just jump out
@@ -1290,15 +1288,15 @@ class FixIt {
     const $rewards = document.querySelectorAll('.post-reward [data-mode="fixed"]');
     if (!$rewards.length) return;
     // `fixed` mode only supports desktop
-    if (this.util.isMobile()) {
-      this.util.forEach($rewards, ($reward) => {
+    if (Util.isMobile()) {
+      Util.forEach($rewards, ($reward) => {
         $reward.removeAttribute('data-mode');
       });
       return;
     }
     // Close post reward images exclude special id
     const _closeRewardExclude = (id) => {
-      this.util.forEach($rewards, ($reward) => {
+      Util.forEach($rewards, ($reward) => {
         const $rewardInput = $reward.parentElement.querySelector('.reward-input');
         if ($rewardInput.id !== id) {
           $rewardInput.checked = false;
@@ -1306,7 +1304,7 @@ class FixIt {
       });
     };
     // Add additional click event to reward buttons
-    this.util.forEach($rewards, ($reward) => {
+    Util.forEach($rewards, ($reward) => {
       $reward.previousElementSibling.addEventListener('click', function () {
         _closeRewardExclude(this.getAttribute('for'));
       }, false)
@@ -1339,7 +1337,7 @@ class FixIt {
       $headers.push(document.getElementById('header-mobile'));
     }
     $backToTop?.addEventListener('click', () => {
-      this.util.scrollIntoView('body');
+      Util.scrollIntoView('body');
     });
     window.addEventListener('scroll', (event) => {
       if (this.disableScrollEvent) {
@@ -1347,17 +1345,17 @@ class FixIt {
         return;
       }
       const $mask = document.getElementById('mask');
-      this.newScrollTop = this.util.getScrollTop();
+      this.newScrollTop = Util.getScrollTop();
       const scroll = this.newScrollTop - this.oldScrollTop;
       // header animation
-      this.util.forEach($headers, ($header) => {
+      Util.forEach($headers, ($header) => {
         if (scroll > ACCURACY) {
           $header.classList.remove('animate__fadeInDown');
-          this.util.animateCSS($header, ['animate__fadeOutUp'], true);
+          Util.animateCSS($header, ['animate__fadeOutUp'], true);
           $mask.click();
         } else if (scroll < -ACCURACY) {
           $header.classList.remove('animate__fadeOutUp');
-          this.util.animateCSS($header, ['animate__fadeInDown'], true);
+          Util.animateCSS($header, ['animate__fadeInDown'], true);
           $mask.click();
         }
       });
@@ -1370,10 +1368,10 @@ class FixIt {
       if ($backToTop) {
         if (scrollPercent > 1) {
           $backToTop.classList.remove('d-none', 'animate__fadeOut');
-          this.util.animateCSS($backToTop, ['animate__fadeIn'], true);
+          Util.animateCSS($backToTop, ['animate__fadeIn'], true);
         } else {
           $backToTop.classList.remove('animate__fadeIn');
-          this.util.animateCSS($backToTop, ['animate__fadeOut'], true, () => {
+          Util.animateCSS($backToTop, ['animate__fadeOut'], true, () => {
             $backToTop.classList.contains('animate__fadeOut') && $backToTop.classList.add('d-none');
           });
         }
@@ -1393,7 +1391,7 @@ class FixIt {
   }
 
   onResize() {
-    let resizeBefore = this.util.isMobile();
+    let resizeBefore = Util.isMobile();
     window.addEventListener('resize', () => {
       if (!this._resizeTimeout) {
         this._resizeTimeout = window.setTimeout(() => {
@@ -1404,7 +1402,7 @@ class FixIt {
           this.initToc();
           this.initSearch();
 
-          const isMobile = this.util.isMobile()
+          const isMobile = Util.isMobile()
           if (isMobile !== resizeBefore) {
             document.getElementById('mask').click();
             resizeBefore = isMobile;
@@ -1427,7 +1425,7 @@ class FixIt {
 
   beforeprint() {
     window.addEventListener('beforeprint', () => {
-      this.util.forEach(document.querySelectorAll('.chroma'), ($el) => {
+      Util.forEach(document.querySelectorAll('.chroma'), ($el) => {
         $el.classList.toggle('open', true)
       });
       for (let event of this.beforeprintEventSet) {

@@ -120,7 +120,7 @@ FixIt/
 ```javascript
 // 使用 ES6 类
 export default class Util {
-  copyText(text) {
+  static copyText(text) {
     // ...
   }
 }
@@ -129,7 +129,7 @@ export default class Util {
 class FixIt {
   constructor() {
     this.config = window.config
-    this.util = new Util()
+    this.scrollTop = Util.getScrollTop()
   }
 
   init() {

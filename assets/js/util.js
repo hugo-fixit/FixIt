@@ -1,5 +1,5 @@
 export default class Util {
-  forEach(elements, handler) {
+  static forEach(elements, handler) {
     elements = elements || [];
     const promises = [];
     for (let i = 0; i < elements.length; i++) {
@@ -11,15 +11,15 @@ export default class Util {
     return Promise.all(promises);
   }
 
-  getScrollTop() {
+  static getScrollTop() {
     return (document.documentElement ?? document.body).scrollTop;
   }
 
-  isMobile() {
+  static isMobile() {
     return window.matchMedia('only screen and (max-width: 680px)').matches;
   }
 
-  isTocStatic() {
+  static isTocStatic() {
     return document.getElementById('toc-static').dataset.kept === 'true' || window.matchMedia('only screen and (max-width: 960px)').matches;
   }
 
@@ -30,7 +30,7 @@ export default class Util {
    * @param {Boolean} reserved reserved animation
    * @param {Function} callback remove callback
    */
-  animateCSS(element, animation, reserved, callback) {
+  static animateCSS(element, animation, reserved, callback) {
     !Array.isArray(animation) && (animation = [animation]);
     element.classList.add('animate__animated', ...animation);
     element.addEventListener('animationend', () => {
@@ -44,7 +44,7 @@ export default class Util {
    * @param {*} date may be date or not
    * @returns {Boolean}
    */
-  isValidDate(date) {
+  static isValidDate(date) {
     return date instanceof Date && !isNaN(date.getTime());
   }
 
@@ -52,7 +52,7 @@ export default class Util {
    * scroll some element into view
    * @param {String} selector element to scroll
    */
-  scrollIntoView(selector) {
+  static scrollIntoView(selector) {
     const element = selector.startsWith('#')
       ? document.getElementById(selector.slice(1))
       : document.querySelector(selector);
@@ -65,7 +65,7 @@ export default class Util {
    * get a hidden element for temporary use
    * @returns {Object} { $el: Element, destroy: Function }
    */
-  getStagingDOM() {
+  static getStagingDOM() {
     const stagingElement = document.createElement('div')
     stagingElement.style.display = 'none';
     stagingElement.dataset.stagingId = Math.random().toString(36).slice(2);
@@ -97,7 +97,7 @@ export default class Util {
    * @param {String} text text to copy
    * @returns {Promise} promise
    */
-  copyText(text) {
+  static copyText(text) {
     if (navigator.clipboard) {
       this.copyText = (text) => navigator.clipboard.writeText(text);
       return this.copyText(text);
@@ -123,7 +123,7 @@ export default class Util {
    * @param {String} str string to check
    * @returns {Boolean} whether the string is a JS object string
    */
-  isObjectLiteral(str) {
+  static isObjectLiteral(str) {
     if (typeof str !== 'string') {
       return false;
     }
@@ -134,7 +134,7 @@ export default class Util {
     return false;
   }
 
-  HTMLEscape(str) {
+  static HTMLEscape(str) {
     return str.replace(/[&<>"']/g, char => ({
       '&': '&amp;',
       '<': '&lt;',
