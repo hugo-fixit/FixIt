@@ -1,0 +1,11 @@
+body {
+  .cell-tooltip {
+    --tooltip-bg: #ffffff;
+    --tooltip-color: #0f172a;
+
+    [data-theme=dark] & {
+      --tooltip-bg: #39393c;
+      --tooltip-color: #e2e2e6;
+    }
+  }
+}

@@ -1210,6 +1210,47 @@ class FixIt {
     }, false);
   }
 
+  initFootnotes() {
+    const $footnoteRefs = document.querySelectorAll('#content sup[id^="fnref:"]');
+    const $footnotes = document.querySelector('.footnotes[role="doc-endnotes"]');
+    if (!$footnoteRefs.length || !$footnotes) return;
+    const footnoteMap = new Map();
+    $footnoteRefs.forEach(($ref) => {
+      if (this.config.tooltip) {
+        const $link = $ref.querySelector('a.footnote-ref');
+        if ($link) {
+          $link.addEventListener('click', (e) => {
+            e.preventDefault();
+          }, false);
+        }
+      }
+      const id = $ref.id.replace('fnref:', '');
+      const $footnoteContent = $footnotes.querySelector(`[id="fn:${id}"]`);
+      if ($footnoteContent) {
+        const $clonedContent = $footnoteContent.cloneNode(true);
+        const $backref = $clonedContent.querySelector('.footnote-backref');
+        if ($backref) {
+          $backref.remove();
+        }
+        footnoteMap.set($ref, $clonedContent);
+      }
+    });
+    footnoteMap.forEach(($content, $ref) => {
+      if ($ref.hasAttribute('title')) return;
+      $ref.setAttribute('title', $content.textContent.trim());
+      if (this.config.tooltip) {
+        const { Tooltip } = window.CellTooltip;
+        Tooltip.getOrCreateInstance($ref);
+      }
+    });
+  }
+
+  initTooltip() {
+    if (!this.config.tooltip) return;
+    const { Tooltip } = window.CellTooltip;
+    Tooltip.initAll('[data-ct-tooltip]');
+  }
+
   /**
    * Helper method to initialize content components
    * @param {Element} target - The target element (optional, defaults to document)
@@ -1224,6 +1265,8 @@ class FixIt {
     this.initEcharts();
     this.initTypeit(target);
     this.initMapbox();
+    this.initFootnotes();
+    this.initTooltip();
     if (includeToc) {
       this.fixTocScroll();
       this.initToc();

@@ -214,6 +214,13 @@ FixIt theme assets partial
   {{- $config = dict "pangu" .Site.Params.pangu | merge $config -}}
 {{- end -}}
 
+{{- /* Cell Tooltip */ -}}
+{{- if eq .Site.Params.tooltip true -}}
+  {{- $source := $cdn.cellTooltipJS | default "lib/cell-tooltip/cell-tooltip.umd.cjs" -}}
+  {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- $config = dict "tooltip" true | merge $config -}}
+{{- end -}}
+
 {{- /* Watermark */ -}}
 {{- if eq .Site.Params.watermark.enable true -}}
   {{- $source := $cdn.cellWatermarkJS | default "lib/cell-watermark/watermark.min.js" -}}
