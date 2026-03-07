@@ -467,10 +467,13 @@
     }
 
     // MathJax styles
-    mjx-container[jax='CHTML'][display='true'] {
-      max-width: 100%;
-      overflow-x: auto;
-      overflow-y: hidden;
+    mjx-container[jax='CHTML'] {
+      // formula Blocks
+      &[display='true'] {
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+      }
 
       // fix the color of xypic diagrams
       mjx-xypic {

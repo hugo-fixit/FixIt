@@ -58,3 +58,10 @@
 .rounded-full {
   @include border-radius(full);
 }
+
+// auto adapt to dark mode by inverting the color and hue
+.auto-dark-mode {
+  [data-theme=dark] & {
+    filter: invert(1) hue-rotate(0.5turn);
+  }
+}

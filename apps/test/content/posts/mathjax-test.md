@@ -117,3 +117,23 @@ U \ar@/_/[ddr]_y \ar@{.>}[dr]|{\langle x,y \rangle} \ar@/^/[drr]^x \\
 }
 \end{xy}
 $$
+
+## More
+
+### Dark Mode Adaptation
+
+Use `.auto-dark-mode` class to automatically adapt to dark mode by inverting the color and hue:
+
+For inline formula:
+
+$\bbox[border: solid .4pt magenta, pink]{x^2=4}$
+{.auto-dark-mode}
+
+For formula blocks:
+
+{{< style "[data-theme=dark] & { filter: invert(1) hue-rotate(0.5turn); }" >}}
+$$
+\bbox[border: solid .4pt magenta, pink]{x^2=4}
+$$
+{.auto-dark-mode}
+{{< /style >}}
