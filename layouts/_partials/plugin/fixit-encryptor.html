@@ -16,11 +16,11 @@
         <input type="password" id="{{ $id }}" class="fixit-decryptor-input" placeholder="🔑 {{ $message }}" />
       </label>
       <button class="fixit-decryptor-btn">
-        {{- dict "Class" "fa-solid fa-unlock" | partial "plugin/icon.html" }} {{ T "single.enterBtn" -}}
+        {{- dict "Class" "fa-solid fa-unlock" | partial "plugin/icon.html" }}{{ T "single.enterBtn" -}}
       </button>
       {{- if not .IsPartial -}}
         <button class="fixit-encryptor-btn">
-          {{- dict "Class" "fa-solid fa-lock" | partial "plugin/icon.html" }} {{ T "single.encryptyAgain" -}}
+          {{- dict "Class" "fa-solid fa-lock" | partial "plugin/icon.html" }}{{ T "single.encryptyAgain" -}}
         </button>
       {{- end -}}
     </div>

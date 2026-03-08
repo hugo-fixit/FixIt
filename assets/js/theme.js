@@ -1268,10 +1268,12 @@ class FixIt {
     this.initFootnotes();
     this.initTooltip();
     if (includeToc) {
-      this.fixTocScroll();
-      this.initToc();
-      this.initTocListener();
-      this.initTocDialog();
+       window.setTimeout(() => {
+        this.fixTocScroll();
+        this.initToc();
+        this.initTocListener();
+        this.initTocDialog();
+      }, 100);
     }
     this.initPangu();
     this.initMathJax();
@@ -1499,7 +1501,6 @@ class FixIt {
       this.initReward();
       this.initPostChatUser();
 
-      // [todo] refactor async init toc
       window.setTimeout(() => {
         this.initComment();
         if (!this.config.encryption?.all) {
