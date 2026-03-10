@@ -359,7 +359,7 @@ pre {
         display: inline;
       }
 
-      .code-header [role='button']:not(.ellipses-btn),
+      .code-header .action-btn,
       .code-expand-btn {
         display: none;
       }
@@ -557,5 +557,107 @@ pre {
 
   [data-theme=dark] & {
     @import './_code-syntax/github-dark-dimmed';
+  }
+}
+
+// Code Tabs
+.code-tabs {
+  margin: 0.5rem 0;
+  background-color: fixit-var(code-block-background-color);
+  border: 1px solid fixit-var(global-border-color);
+  @include border-radius;
+
+  &:has(.code-block.active .code-expand-btn) {
+    margin-bottom: 1rem;
+  }
+
+  &:has(.code-block.active.line-wrapping) .tabs-actions .line-wrap-btn,
+  &:has(.code-block.active:not(.line-nos-hidden)) .tabs-actions .line-nos-btn,
+  &:has(.code-block.active [contenteditable='true']) .tabs-actions .edit-btn {
+    color: fixit-var(global-link-hover-color);
+  }
+
+  .tabs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1.4em;
+    font-size: fixit-var(code-block-font-size);
+    color: fixit-var(code-header-color);
+    background-color: fixit-var(code-header-background-color);
+    @include border-radius(top);
+
+    .tabs-items {
+      display: flex;
+      overflow-x: auto;
+      @include border-radius(top);
+      
+      .tab-item {
+        padding: 0.4rem 0.8rem;
+        cursor: pointer;
+        font-weight: bold;
+        color: fixit-var(secondary);
+        white-space: nowrap;
+        transition: all 0.2s;
+        user-select: none;
+        
+        &:hover {
+          color: fixit-var(global-font-color);
+          background-color: rgba(128, 128, 128, 0.05);
+        }
+        
+        &.active {
+          color: fixit-var(global-font-color);
+          box-shadow: inset 0 -2px 0 fixit-var(code-tab-active-border-color, fixit-var(primary));
+          background-color: fixit-var(code-block-background-color);
+        }
+      }
+    }
+
+    .tabs-actions {
+      display: flex;
+      flex-shrink: 0;
+
+      .action-btn {
+        padding: 0.4rem;
+
+        &:hover {
+          color: fixit-var(global-link-hover-color);
+        }
+
+        &.copy-btn[data-copied] .fa-clone {
+          --fa: "\f00c";
+          font-weight: 900;
+          color: fixit-var(global-link-hover-color);
+        }
+
+        &.download-btn[data-downloaded] .fa-download {
+          --fa: "\f1ce";
+          font-weight: 900;
+          color: fixit-var(global-link-hover-color);
+        }
+
+        &.fullscreen-btn {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .tabs-content {
+    .code-block {
+      display: none;
+      margin: 0;
+      @include border-radius(bottom);
+
+      &.active {
+        display: block;
+      }
+
+      // hide original header
+      .code-header {
+        display: none;
+      }
+    }
   }
 }
