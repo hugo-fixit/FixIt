@@ -590,27 +590,40 @@ pre {
     .tabs-items {
       display: flex;
       overflow-x: auto;
+      position: relative;
       @include border-radius(top);
-      
+
       .tab-item {
         padding: 0.4rem 0.8rem;
         cursor: pointer;
         font-weight: bold;
         color: fixit-var(secondary);
         white-space: nowrap;
-        transition: all 0.2s;
         user-select: none;
-        
-        &:hover {
-          color: fixit-var(global-font-color);
-          background-color: rgba(128, 128, 128, 0.05);
-        }
-        
-        &.active {
-          color: fixit-var(global-font-color);
-          box-shadow: inset 0 -2px 0 fixit-var(code-tab-active-border-color, fixit-var(primary));
-          background-color: fixit-var(code-block-background-color);
-        }
+        @include border-radius;
+
+        // mobile style
+        // padding-inline: 0.6rem;
+      }
+
+      &:not(:has(.tab-item:hover)) .tab-item.active,
+      .tab-item:hover {
+        anchor-name: #{$rootPrefix}tab-hover;
+        color: fixit-var(global-font-color);
+      }
+
+      &::before {
+        content: '';
+        position-anchor: #{$rootPrefix}tab-hover;
+        position: absolute;
+        inset: anchor(inside);
+        translate: 2px 2px;
+        width: calc(anchor-size(width) - 0.25rem);
+        height: calc(anchor-size(height) - 0.25rem);
+        box-shadow: inset 0 0 1rem 0.25rem color-mix(in srgb, fixit-var(secondary) 30%, transparent);
+        pointer-events: none;
+        transition: 0.3s ease-in-out;
+        @include border-radius;
       }
     }
 

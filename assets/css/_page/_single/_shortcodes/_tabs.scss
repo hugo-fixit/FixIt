@@ -107,22 +107,35 @@ tab-container {
 
   // ========================================
   // Style 1: Underline Style (Default)
-  // Clean, minimal with bottom border
+  // Clean, minimal with sliding indicator
   // ========================================
   &[type='underline'] {
     > .tab-button {
-      @include set-fixit-var(tab-button-border-color, transparent);
       @include tab-button-size(0);
 
       &[aria-selected='true'],
       &[aria-selected='false']:hover {
         color: fixit-var(primary);
-        @include set-fixit-var(tab-button-border-color, fixit-var(primary));
       }
 
       &[aria-selected='false']:hover {
         opacity: 0.7;
       }
+    }
+
+    // Anchor tracking: follows hover, rests on active tab
+    &:not(:has(> .tab-button:hover)) > .tab-button[aria-selected='true'],
+    > .tab-button:hover {
+      anchor-name: #{$rootPrefix}tab-underline-active;
+    }
+
+    // Sliding box-shadow indicator via anchor positioning
+    &::part(tablist-tab-wrapper)::before {
+      content: '';
+      position: absolute;
+      position-anchor: #{$rootPrefix}tab-underline-active;
+      inset: anchor(inside);
+      pointer-events: none;
     }
 
     &[placement='top'],
@@ -137,6 +150,10 @@ tab-container {
         overflow-x: scroll;
         overflow-y: hidden;
       }
+
+      &::part(tablist-tab-wrapper)::before {
+        transition: all 0.3s ease-in-out, top, bottom 0s;
+      }
     }
 
     &[placement='left'],
@@ -144,17 +161,21 @@ tab-container {
       > .tab-button {
         @include tab-button-size(1rem, 0);
       }
+
+      &::part(tablist-tab-wrapper)::before {
+        transition: all 0.3s ease-in-out, left, right 0s;
+      }
     }
 
     // Top placement
     &[placement='top'] {
       &::part(tablist-tab-wrapper) {
         border-bottom: 2px solid fixit-var(global-border-color);
-      }
 
-      > .tab-button {
-        translate: 0 2px;
-        border-bottom: 2px solid fixit-var(tab-button-border-color);
+        &::before {
+          box-shadow: inset 0 -2px 0 fixit-var(primary);
+          translate: 0 2px;
+        }
       }
     }
 
@@ -162,11 +183,11 @@ tab-container {
     &[placement='bottom'] {
       &::part(tablist-tab-wrapper) {
         border-top: 2px solid fixit-var(global-border-color);
-      }
 
-      > .tab-button {
-        translate: 0 -2px;
-        border-top: 2px solid fixit-var(tab-button-border-color);
+         &::before {
+          box-shadow: inset 0 2px 0 fixit-var(primary);
+          translate: 0 -2px;
+        }
       }
     }
 
@@ -174,12 +195,15 @@ tab-container {
     &[placement='left'] {
       &::part(tablist-tab-wrapper) {
         border-right: 2px solid fixit-var(global-border-color);
+
+        &::before {
+          box-shadow: inset -2px 0 0 fixit-var(primary);
+          translate: 2px 0;
+        }
       }
 
       > .tab-button {
         text-align: right;
-        translate: 2px 0;
-        border-right: 2px solid fixit-var(tab-button-border-color);
       }
     }
 
@@ -187,12 +211,15 @@ tab-container {
     &[placement='right'] {
       &::part(tablist-tab-wrapper) {
         border-left: 2px solid fixit-var(global-border-color);
+
+        &::before {
+          box-shadow: inset 2px 0 0 fixit-var(primary);
+          translate: -2px 0;
+        }
       }
 
       > .tab-button {
         text-align: left;
-        translate: -2px 0;
-        border-left: 2px solid fixit-var(tab-button-border-color);
       }
     }
   }
@@ -451,8 +478,10 @@ tab-container {
     }
 
     > .tab-button {
+      position: relative;
       font-weight: 400;
       flex-grow: 1;
+      @include z-index(base);
 
       @include tab-button-size;
       @include border-radius;
@@ -463,12 +492,26 @@ tab-container {
       }
 
       &[aria-selected='true'] {
-        background-color: fixit-var(global-background-color);
-        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+        anchor-name: #{$rootPrefix}tab-segment-active;
+        background-color: transparent;
+        box-shadow: none;
+      }
+    }
 
-        [data-theme=dark] & {
-          box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
-        }
+    // Sliding active indicator via anchor positioning
+    &::part(tablist-tab-wrapper)::before {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+      position-anchor: #{$rootPrefix}tab-segment-active;
+      inset: anchor(inside);
+      background-color: fixit-var(global-background-color);
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+      transition: all 0.15s ease, top, bottom 0s;
+      @include border-radius;
+
+      [data-theme=dark] & {
+        box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
       }
     }
   }
@@ -530,4 +573,55 @@ tab-container {
 
 tab-container .tab-panel:not([hidden]) {
   animation: tabSlideIn 0.3s ease-out;
+}
+
+// Firefox fallback: `::part(...)::before` is not supported.
+// We use a CSS variable to control the border color of the active tab button,
+// and apply the sliding effect directly on the button itself.
+@supports (-moz-appearance: none) {
+  tab-container {
+    &[type='underline'] {
+      > .tab-button {
+        @include set-fixit-var(tab-button-border-color, transparent);
+
+        &[aria-selected='true'],
+        &[aria-selected='false']:hover {
+          @include set-fixit-var(tab-button-border-color, fixit-var(primary));
+        }
+      }
+
+      &[placement='top'] > .tab-button {
+        translate: 0 2px;
+        border-bottom: 2px solid fixit-var(tab-button-border-color);
+      }
+
+      &[placement='bottom'] > .tab-button {
+        translate: 0 -2px;
+        border-top: 2px solid fixit-var(tab-button-border-color);
+      }
+
+      &[placement='left'] > .tab-button {
+        translate: 2px 0;
+        border-right: 2px solid fixit-var(tab-button-border-color);
+      }
+
+      &[placement='right'] > .tab-button {
+        translate: -2px 0;
+        border-left: 2px solid fixit-var(tab-button-border-color);
+      }
+    }
+
+    &[type='segment'] {
+      > .tab-button {
+        &[aria-selected='true'] {
+          background-color: fixit-var(global-background-color);
+          box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+
+          [data-theme=dark] & {
+            box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
+          }
+        }
+      }
+    }
+  }
 }
