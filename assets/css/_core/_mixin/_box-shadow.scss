@@ -1,0 +1,26 @@
+/// Mixin to apply box-shadow with timing control
+/// @param {String} $when - When to show shadow: always | hover | never (default: always)
+/// @param {List} $shadow - The box-shadow value
+/// @example
+///   @include box-shadow;
+///   @include box-shadow(hover);
+///   @include box-shadow(never);
+///   @include box-shadow(always, 0 4px 8px rgba(0, 0, 0, 0.15));
+@mixin box-shadow(
+  $when: always,
+  $shadow: (0 1px 2px -2px rgba(0, 0, 0, 0.08), 0 3px 6px 0 rgba(0, 0, 0, 0.06), 0 5px 12px 4px rgba(0, 0, 0, 0.04))
+) {
+  @if $when == always {
+    box-shadow: $shadow;
+  } @else if $when == hover {
+    transition: box-shadow 0.3s fixit-var(bezier);
+
+    &:hover {
+      box-shadow: $shadow;
+    }
+  } @else if $when == never {
+    box-shadow: none;
+  } @else {
+    @warn "box-shadow mixin: unknown $when value '#{$when}'. Expected always, hover, or never.";
+  }
+}

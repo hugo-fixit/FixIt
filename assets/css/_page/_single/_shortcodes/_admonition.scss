@@ -60,7 +60,8 @@
       margin: 0;
     }
 
-    .code-block .code-header {
+    .code-block .code-header,
+    .code-tabs .tabs-header {
       top: initial !important;
     }
   }

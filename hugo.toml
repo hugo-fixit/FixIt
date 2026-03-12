@@ -1144,6 +1144,8 @@ mode = "classic"
 wrapperClass = ""
 # the maximum number of lines to show in the code block preview
 maxShownLines = 10
+# whether to show shadow effect for code blocks, available values: ["always", "hover", "never"]
+shadow = "never"
 # whether to enable code copy button
 copyable = true
 # [classic] whether to enable code download button in the code block header

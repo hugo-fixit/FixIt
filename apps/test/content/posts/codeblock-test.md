@@ -64,6 +64,38 @@ hello('FixIt')
 // Hello, FixIt!
 ```
 
+## Shadow
+
+{{< tabs >}}
+{{% tab title="Always" %}}
+
+```js {shadow="always"}
+function hello(x = 'world') {
+  console.log(`Hello, ${x}!`)
+}
+```
+
+{{% /tab %}}
+{{% tab title="Hover" %}}
+
+```js {shadow="hover"}
+function hello(x = 'world') {
+  console.log(`Hello, ${x}!`)
+}
+```
+
+{{% /tab %}}
+{{% tab title="Never" %}}
+
+```js {shadow="never"}
+function hello(x = 'world') {
+  console.log(`Hello, ${x}!`)
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Collapsed/Expanded
 
 ```
