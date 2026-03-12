@@ -640,13 +640,15 @@ class FixIt {
       const $firstBlock = $tabs[0];
       $firstBlock.parentNode.insertBefore($container, $firstBlock);
       
+      const activeTabIndex = $tabs.findIndex(tab => tab.classList.contains('active'));
       $tabs.forEach(($tab, index) => {
         const title = $tab.dataset.tabTitle || 'Code';
+        const defaultActiveTab = activeTabIndex === -1 && index === 0;
         
         // tab button
         const $btn = document.createElement('span');
         $btn.className = 'tab-item';
-        if (index === 0) $btn.classList.add('active');
+        if (defaultActiveTab) $btn.classList.add('active');
         $btn.textContent = title;
         $btn.dataset.index = index;
         $btn.title = title;
@@ -678,8 +680,7 @@ class FixIt {
         $items.appendChild($btn);
         
         // move block to content
-        $tab.classList.toggle('active', index === 0);
-        // remove is-collapsed class
+        $tab.classList.toggle('active', activeTabIndex === index || defaultActiveTab);
         $tab.classList.remove('is-collapsed');
         $content.appendChild($tab);
       });
@@ -687,8 +688,13 @@ class FixIt {
       $container.appendChild($header);
       $container.appendChild($content);
 
-      // initialize actions for first tab
-      $items.firstElementChild.click();
+      // initialize actions for the active tab
+      if (activeTabIndex !== -1) {
+        const $activeBtn = $items.querySelector(`.tab-item[data-index="${activeTabIndex}"]`);
+        if ($activeBtn) $activeBtn.click();
+      } else {
+        $items.firstElementChild.click();
+      }
     });
   }
 

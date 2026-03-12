@@ -40,6 +40,19 @@ def sum(a, b):
 print(sum(1, 2))
 ```
 
+## Active Tab
+
+```js {group=tab-active name="Inactive Tab"}
+function greet(name) {
+  return `Hello, ${name}!`
+}
+```
+
+```python {group=tab-active name="Active Tab" .active}
+def greet(name):
+  return f"Hello, {name}!"
+```
+
 ## Mode
 
 ```ts {group=tab-mode name="Classic"}
