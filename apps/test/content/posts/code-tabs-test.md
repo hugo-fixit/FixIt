@@ -53,6 +53,25 @@ def greet(name):
   return f"Hello, {name}!"
 ```
 
+## Shadow
+
+```js {group=tab-shadow name="Always" shadow="always"}
+function greet(name) {
+  return `Hello, ${name}!`
+}
+```
+
+```python {group=tab-shadow name="Hover" shadow="hover"}
+def greet(name):
+  return f"Hello, {name}!"
+```
+
+```go {group=tab-shadow name="Never" shadow="never"}
+func greet(name string) string {
+  return fmt.Sprintf("Hello, %s!", name)
+}
+```
+
 ## Mode
 
 ```ts {group=tab-mode name="Classic"}
@@ -121,3 +140,27 @@ function shortFunction() {
   console.log('This is a short function.')
 }
 ```
+
+## Code tabs inside other blocks
+
+> [!NOTE]+
+>
+> ```python {group=tab-nested}
+> print("Python")
+> ```
+>
+> ```go {group=tab-nested}
+> fmt.Println("Go")
+> ```
+
+{{< details open=true >}}
+
+```python {group=tab2}
+print("Python")
+```
+
+```go {group=tab2}
+fmt.Println("Go")
+```
+
+{{< /details >}}

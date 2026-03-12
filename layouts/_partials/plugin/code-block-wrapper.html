@@ -58,11 +58,25 @@
       (printf `class="%s" data-copyable="%v"` $class $config.copyable)
     -}}
   {{- end -}}
+  {{- if ne $config.shadow "never" -}}
+    {{- $wrapper =
+      replace $wrapper
+      (printf `class="%s"` $class)
+      (printf `class="%s" data-shadow="%s"` $class $config.shadow)
+    -}}
+  {{- end -}}
+  {{- if $config.group -}}
+    {{- $tabTitle := $config.name | default (strings.FirstUpper .Type) | default "Code" -}}
+    {{- $wrapper =
+      replace $wrapper
+      (printf `class="%s"` $class)
+      (printf `class="%s" data-tab-group="%s" data-tab-title="%s"` $class $config.group $tabTitle) -}}
+  {{- end -}}
   {{- if ne .Options.linenostart nil -}}
     {{- $wrapper =
       replace $wrapper
       `class="code-wrapper"`
-      (printf `class="code-wrapper" data-line-start="%v"` .)
+      (printf `class="code-wrapper" data-line-start="%v"` .Options.linenostart)
     -}}
   {{- end -}}
   {{- $wrapperStyle := printf "--fi-max-shown-lines:%v;--fi-line-digit:%v;--fi-line-start:%v;" $maxShownLines $lineNosDigit $lineNoStart -}}
@@ -80,10 +94,6 @@
       $lineNosDigit
     )
   -}}
-  {{- if $config.group -}}
-    {{- $tabTitle := $config.name | default (strings.FirstUpper .Type) | default "Code" -}}
-    {{- $wrapper = replace $wrapper (printf `class="%s"` $class) (printf `class="%s" data-tab-group="%s" data-tab-title="%s"` $class $config.group $tabTitle) -}}
-  {{- end -}}
   {{- $wrapper =
     replace $wrapper
     (printf `class="%s"` $class)

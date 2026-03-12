@@ -55,6 +55,9 @@
     scrollbar-width: thin,
     scrollbar-width-legacy: 12px,
 
+    // Animations
+    bezier: cubic-bezier(.4, 0, .2, 1),
+
     // Other utilities
     breadcrumb-height: 0px,
     divider-edge-weak: linear-gradient(to right, transparent, fixit-var(divider-bg, #d0d0d5), transparent),

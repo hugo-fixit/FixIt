@@ -154,7 +154,8 @@
     }
   }
   [data-header-desktop='sticky'] {
-    .page .content .highlight.code-block .code-header {
+    .page .content .highlight.code-block .code-header,
+    .page .content .code-tabs .tabs-header {
       top: calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height)});
     }
   }
@@ -193,7 +194,8 @@
     }
   }
   [data-header-mobile='sticky'] {
-    .page .content .highlight.code-block .code-header {
+    .page .content .highlight.code-block .code-header,
+    .page .content .code-tabs .tabs-header {
       top: calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height)});
     }
   }

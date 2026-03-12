@@ -639,7 +639,7 @@ class FixIt {
       // insert container before the first block
       const $firstBlock = $tabs[0];
       $firstBlock.parentNode.insertBefore($container, $firstBlock);
-      
+
       const activeTabIndex = $tabs.findIndex(tab => tab.classList.contains('active'));
       $tabs.forEach(($tab, index) => {
         const title = $tab.dataset.tabTitle || 'Code';
@@ -671,7 +671,15 @@ class FixIt {
           $tabs.forEach(b => b.classList.remove('active'));
           $tab.classList.add('active');
 
-          // 4. move new buttons to actions
+          // 4. sync shadow mode data attribute
+          const shadowMode = $tab?.dataset.shadow;
+          if (shadowMode) {
+            $container.dataset.shadow = shadowMode;
+          } else {
+            delete $container.dataset.shadow;
+          }
+
+          // 5. move new buttons to actions
           const $codeHeader = $tab.querySelector('.code-header');
           if ($codeHeader) {
             $codeHeader.querySelectorAll('.action-btn').forEach(btn => $actions.appendChild(btn));

@@ -132,6 +132,14 @@ pre {
 
   // code fences blocks wrapped
   &.code-block {
+    &[data-shadow='always'] {
+      @include box-shadow(always);
+    }
+
+    &[data-shadow='hover'] {
+      @include box-shadow(hover);
+    }
+
     &.instant-height .code-wrapper {
       transition: height 0s !important;
     }
@@ -267,10 +275,7 @@ pre {
 
     &.is-fullscreen {
       position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+      inset: 0;
       margin: 0 !important;
       overflow: auto;
       @include z-index(fixed, 1);
@@ -567,6 +572,14 @@ pre {
   border: 1px solid fixit-var(global-border-color);
   @include border-radius;
 
+  &[data-shadow='always'] {
+    @include box-shadow(always);
+  }
+
+  &[data-shadow='hover'] {
+    @include box-shadow(hover);
+  }
+
   &:has(.code-block.active .code-expand-btn) {
     margin-bottom: 1rem;
   }
@@ -585,6 +598,9 @@ pre {
     font-size: fixit-var(code-block-font-size);
     color: fixit-var(code-header-color);
     background-color: fixit-var(code-header-background-color);
+    position: sticky;
+    top: fixit-var(breadcrumb-height);
+    @include z-index(base);
     @include border-radius(top);
 
     .tabs-items {
@@ -662,6 +678,7 @@ pre {
       display: none;
       margin: 0;
       @include border-radius(bottom);
+      @include box-shadow(never);
 
       &.active {
         display: block;
