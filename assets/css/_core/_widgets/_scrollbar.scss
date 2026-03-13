@@ -1,7 +1,7 @@
 /* Modern browsers with `scrollbar-*` support (high priority) */
 @supports (scrollbar-width: auto) {
   * {
-    scrollbar-color: fixit-var(scrollbar-thumb-color) fixit-var(scrollbar-track-color);;
+    scrollbar-color: fixit-var(scrollbar-thumb-color) fixit-var(scrollbar-track-color);
     scrollbar-width: fixit-var(scrollbar-width);
   }
 }

@@ -615,7 +615,7 @@ pre {
         font-weight: bold;
         color: fixit-var(secondary);
         white-space: nowrap;
-        user-select: none;
+        @include user-select(none);
         @include border-radius;
 
         // mobile style

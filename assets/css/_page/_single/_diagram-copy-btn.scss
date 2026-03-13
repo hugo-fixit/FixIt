@@ -13,7 +13,6 @@
   right: 0.5rem;
   line-height: 1;
   padding: 0.5rem;
-  user-select: none;
   border: 1px solid;
   color: fixit-var(dcb-color, #25292e);
   border-color: fixit-var(dcb-border-color, #d1d9e0);
@@ -21,6 +20,7 @@
   box-shadow: fixit-var(dcb-box-shadow, 0px 1px 0px 0px #1f23280a);
   transition-duration: 0.1s;
   transition-property: color, background-color, box-shadow, border-color;
+  @include user-select(none);
   @include border-radius;
   @include z-index(base);
   @extend .print-d-none;

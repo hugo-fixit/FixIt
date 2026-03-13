@@ -118,6 +118,12 @@ U \ar@/_/[ddr]_y \ar@{.>}[dr]|{\langle x,y \rangle} \ar@/^/[drr]^x \\
 \end{xy}
 $$
 
+## \$\\text{MathJax}\$ in headings
+
+```latex
+## \$\\text{MathJax}\$ in headings
+```
+
 ## More
 
 ### Dark Mode Adaptation
