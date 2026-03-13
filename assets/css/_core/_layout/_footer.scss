@@ -4,7 +4,6 @@ footer {
   text-align: center;
   line-height: 1.25rem;
   padding: 1rem 0;
-  @extend .print-d-none;
 
   .footer-container {
     display: flex;
@@ -28,6 +27,10 @@ footer {
   }
 
   @include blur;
+
+  @include media('print') {
+    display: none !important;
+  }
 }
 
 @keyframes icon-animate {

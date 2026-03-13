@@ -17,7 +17,6 @@
   transition: color 0.4s ease;
   @include border-radius(full);
   @include blur;
-  @extend .print-d-none;
 
   [data-theme=dark] & {
     background-color: darken($header-background-color-dark, 3%);
@@ -33,6 +32,10 @@
   &:focus,
   &:hover {
     outline: none;
+  }
+
+  @include media('print') {
+    display: none !important;
   }
 }
 

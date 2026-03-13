@@ -7,7 +7,6 @@
   position: relative;
   @include border-radius(0.5rem);
   @include user-select(none);
-  @extend .print-d-none;
 
   [data-theme=dark] & {
     background-color: lighten($global-background-color-dark, 3%);
@@ -81,6 +80,10 @@
       }
     }
   }
+
+  @include media('print') {
+    display: none !important;
+  }
 }
 
 // Collection aside container
@@ -90,7 +93,10 @@
   box-sizing: border-box;
   @include overflow-wrap(break-word);
   @include blur;
-  @extend .print-d-none;
+
+  @include media('print') {
+    display: none !important;
+  }
 }
 
 // Collection List

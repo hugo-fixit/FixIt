@@ -23,7 +23,6 @@
   @include user-select(none);
   @include border-radius;
   @include z-index(base);
-  @extend .print-d-none;
 
   [data-theme=dark] & {
     @include set-fixit-vars((
@@ -58,5 +57,9 @@
       --fa-style: 900;
       color: fixit-var(global-link-hover-color);
     }
+  }
+
+  @include media('print') {
+    display: none !important;
   }
 }

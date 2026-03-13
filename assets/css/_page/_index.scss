@@ -9,6 +9,11 @@
   }
 
   @include blur;
+
+  @include media('print') {
+    width: 100% !important;
+    padding-top: 0 !important;
+  }
 }
 
 @import '_single';

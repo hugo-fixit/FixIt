@@ -17,11 +17,11 @@
   position: fixed;
   top: 0;
   @include z-index(fixed);
-  @extend .print-d-none;
 
   :hover .octo-arm {
     animation: octocat-wave 560ms ease-in-out;
   }
+
   svg {
     width: fixit-var(header-height);
     height: fixit-var(header-height);
@@ -29,6 +29,7 @@
     color: fixit-var(github-corner-color);
     fill: fixit-var(github-corner-fill);
   }
+
   &.left {
     left: 0;
 
@@ -36,7 +37,12 @@
       transform: scale(-1, 1);
     }
   }
+
   &.right {
     right: 0;
+  }
+
+  @include media('print') {
+    display: none !important;
   }
 }

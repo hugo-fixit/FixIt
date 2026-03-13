@@ -237,7 +237,10 @@ pre {
 
       [role='button'] {
         padding: 0.4rem;
-        @extend .print-d-none;
+
+        @include media('print') {
+          display: none !important;
+        }
       }
 
       .copy-btn[data-copied] .fa-clone {
@@ -263,6 +266,10 @@ pre {
           // e.g., --fi-code-type: "JavaScript";
           @include set-fixit-var(code-type, '"#{$text}"');
         }
+      }
+
+      @include media('print') {
+        top: initial;
       }
     }
 
@@ -670,6 +677,10 @@ pre {
           display: none;
         }
       }
+    }
+
+    @include media('print') {
+      top: initial;
     }
   }
 

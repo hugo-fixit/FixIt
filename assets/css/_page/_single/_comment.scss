@@ -1,8 +1,11 @@
->#comments {
+> #comments {
   padding: 2rem 0;
-  @extend .print-d-none;
 
   iframe {
     width: 100%;
+  }
+
+  @include media('print') {
+    display: none !important;
   }
 }
