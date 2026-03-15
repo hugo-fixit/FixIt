@@ -218,7 +218,7 @@ The FixIt theme balances **simplicity** and **extensibility** with extra [Hugo t
 - [shortcode-caniuse](https://github.com/hugo-fixit/shortcode-caniuse)\
   A Hugo theme component with caniuse shortcode.
 - [shortcode-docs-bookmark](https://github.com/hugo-fixit/shortcode-docs-bookmark)\
-  🔖 Embed bookmark of FixIt Docs.
+  ���� Embed bookmark of FixIt Docs.
 - [shortcode-missing-translation](https://github.com/hugo-fixit/shortcode-missing-translation)\
   A Hugo theme component with missing-translation shortcode.
 - [shortcode-mmt-netease](https://github.com/hugo-fixit/shortcode-mmt-netease)\
