@@ -5,6 +5,18 @@
   .content {
     [id] {
       scroll-margin-top: fixit-var(scroll-mt);
+
+      [data-header-desktop='normal'] & {
+        @include media('xs', 'up') {
+          @include set-fixit-var(scroll-mt, fixit-var(global-scroll-margin-top));
+        }
+      }
+
+      [data-header-mobile='normal'] & {
+        @include media('xs') {
+          @include set-fixit-var(scroll-mt, fixit-var(global-scroll-margin-top));
+        }
+      }
     }
   }
 
@@ -22,5 +34,4 @@
 @import 'home';
 @import '404';
 @import 'offline';
-@import "media";
 @import "patch";

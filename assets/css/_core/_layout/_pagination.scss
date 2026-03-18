@@ -69,5 +69,9 @@
         width: 50%;
       }
     }
+
+    @include media('xs') {
+      margin: 0 5px;
+    }
   }
 }

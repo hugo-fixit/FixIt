@@ -265,12 +265,24 @@ header {
         }
       }
     }
+
+    @include media('md', 'down') {
+      padding-inline-end: 1rem;
+    }
+
+    @include media('sm', 'down') {
+      padding-inline-start: 1rem;
+    }
   }
 
   &.open .header-wrapper .menu .menu-item.search {
     input {
       width: 24rem;
     }
+  }
+
+  @include media('xs') {
+    display: none;
   }
 }
 
@@ -483,6 +495,10 @@ header {
       }
     }
   }
+
+  @include media('xs') {
+    display: block;
+  }
 }
 
 .search-dropdown {
@@ -498,6 +514,10 @@ header {
   &.desktop {
     right: 2rem;
     width: 30rem;
+
+    @include media('md', 'down') {
+      right: 1rem;
+    }
   }
 
   &.mobile {

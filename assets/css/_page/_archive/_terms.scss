@@ -38,6 +38,10 @@
         padding-right: 1rem;
       }
     }
+
+    @include media('xs') {
+      width: 100%;
+    }
   }
 }
 

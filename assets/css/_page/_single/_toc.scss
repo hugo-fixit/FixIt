@@ -214,6 +214,10 @@
       }
     }
   }
+
+  @include media('sm', 'down') {
+    display: block;
+  }
 }
 
 #toc-dialog {

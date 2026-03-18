@@ -77,7 +77,7 @@ $breakpoints: (
       }
     } @else if $direction == 'up' {
       @if $min == null {
-        // xs-up: no constraint, always applies
+        // xs-up: no lower bound, always applies
         @content;
       } @else {
         @media only screen and (min-width: $min) {

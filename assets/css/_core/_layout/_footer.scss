@@ -24,6 +24,10 @@ footer {
         animation: icon-animate 1.33s ease-in-out infinite;
       }
     }
+
+    @include media('xs') {
+      font-size: 0.618rem;
+    }
   }
 
   @include blur;
