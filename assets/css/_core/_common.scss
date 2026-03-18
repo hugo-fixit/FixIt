@@ -65,3 +65,35 @@
     filter: invert(1) hue-rotate(0.5turn);
   }
 }
+
+// print view helper
+.page-break-before {
+  break-before: page;
+}
+
+.page-break-after {
+  break-after: page;
+}
+
+@include media('xs', 'up') {
+  .d-none-desktop {
+    display: none;
+  }
+}
+
+@include media('xs') {
+  .d-none-mobile {
+    display: none !important;
+  }
+}
+
+@include media('print') {
+  @page {
+    size: A4 portrait;
+    margin: 1.27cm;
+  }
+
+  .d-none-print {
+    display: none !important;
+  }
+}

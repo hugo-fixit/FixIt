@@ -1,9 +1,8 @@
 header {
   width: 100%;
   background-color: fixit-var(header-background-color);
-  @include z-index(fixed);
   transition: box-shadow 0.3s ease;
-  @extend .print-d-none;
+  @include z-index(fixed);
 
   &:hover {
     box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.1);
@@ -11,6 +10,10 @@ header {
     [data-theme=dark] & {
       box-shadow: 0 0 1.5rem 0 rgba(255, 255, 255, 0.1);
     }
+  }
+
+  @include media('print') {
+    display: none !important;
   }
 }
 
@@ -262,12 +265,24 @@ header {
         }
       }
     }
+
+    @include media('md', 'down') {
+      padding-inline-end: 1rem;
+    }
+
+    @include media('sm', 'down') {
+      padding-inline-start: 1rem;
+    }
   }
 
   &.open .header-wrapper .menu .menu-item.search {
     input {
       width: 24rem;
     }
+  }
+
+  @include media('xs') {
+    display: none;
   }
 }
 
@@ -480,6 +495,10 @@ header {
       }
     }
   }
+
+  @include media('xs') {
+    display: block;
+  }
 }
 
 .search-dropdown {
@@ -495,6 +514,10 @@ header {
   &.desktop {
     right: 2rem;
     width: 30rem;
+
+    @include media('md', 'down') {
+      right: 1rem;
+    }
   }
 
   &.mobile {

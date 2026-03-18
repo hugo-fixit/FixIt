@@ -237,7 +237,10 @@ pre {
 
       [role='button'] {
         padding: 0.4rem;
-        @extend .print-d-none;
+
+        @include media('print') {
+          display: none !important;
+        }
       }
 
       .copy-btn[data-copied] .fa-clone {
@@ -263,6 +266,22 @@ pre {
           // e.g., --fi-code-type: "JavaScript";
           @include set-fixit-var(code-type, '"#{$text}"');
         }
+      }
+
+      [data-header-desktop='sticky'] & {
+        @include media('xs', 'up') {
+          top: calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height)});
+        }
+      }
+
+      [data-header-mobile='sticky'] & {
+        @include media('xs') {
+          top: calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height)});
+        }
+      }
+
+      @include media('print') {
+        top: initial;
       }
     }
 
@@ -618,8 +637,9 @@ pre {
         @include user-select(none);
         @include border-radius;
 
-        // mobile style
-        // padding-inline: 0.6rem;
+        @include media('xs') {
+          padding-inline: 0.6rem;
+        }
       }
 
       &:not(:has(.tab-item:hover)) .tab-item.active,
@@ -670,6 +690,22 @@ pre {
           display: none;
         }
       }
+    }
+
+    [data-header-desktop='sticky'] & {
+      @include media('xs', 'up') {
+        top: calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height)});
+      }
+    }
+
+    [data-header-mobile='sticky'] & {
+      @include media('xs') {
+        top: calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height)});
+      }
+    }
+
+    @include media('print') {
+      top: initial;
     }
   }
 

@@ -3,6 +3,10 @@
   * {
     scrollbar-color: fixit-var(scrollbar-thumb-color) fixit-var(scrollbar-track-color);
     scrollbar-width: fixit-var(scrollbar-width);
+
+    @include media('print') {
+      scrollbar-width: none;
+    }
   }
 }
 
@@ -11,6 +15,10 @@
   height: fixit-var(scrollbar-width-legacy);
   width: fixit-var(scrollbar-width-legacy);
   overflow: visible;
+
+  @include media('print') {
+    display: none;
+  }
 }
 ::-webkit-scrollbar-button {
   height: 0;

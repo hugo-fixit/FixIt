@@ -43,10 +43,10 @@
   padding: 0;
 }
 
-@media only print {
+@include media('print') {
   .mermaid,
   .mermaid-dark {
-    display: none;
+    display: none !important;
   }
   .mermaid-neutral {
     height: auto;

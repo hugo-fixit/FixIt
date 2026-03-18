@@ -4,9 +4,12 @@
   background-color: fixit-var(bg-progress, fixit-var(success));
   position: fixed;
   @include z-index(fixed);
-  @extend .print-d-none;
-  
+
   [data-theme=dark] & {
     background-color: fixit-var(bg-progress-dark, fixit-var(global-font-color));
+  }
+
+  @include media('print') {
+    display: none !important;
   }
 }

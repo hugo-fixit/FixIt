@@ -1,0 +1,100 @@
+// Responsive breakpoints matching the project's media query design
+// ┌──────────────────────────────────────────────────────┐
+// │  xs   │    sm     │     md     │     lg     │   xl   │
+// │ ≤680  │ 681–960   │ 961–1200   │ 1201–1440  │ ≥1441  │
+// └──────────────────────────────────────────────────────┘
+$breakpoints: (
+  'xs': (
+    'min': null,
+    'max': 680px,
+  ),
+  'sm': (
+    'min': 681px,
+    'max': 960px,
+  ),
+  'md': (
+    'min': 961px,
+    'max': 1200px,
+  ),
+  'lg': (
+    'min': 1201px,
+    'max': 1440px,
+  ),
+  'xl': (
+    'min': 1441px,
+    'max': null,
+  ),
+) !default;
+
+/// Apply styles within a named media target.
+/// @param {String} $target - Target name: xs | sm | md | lg | xl | print | reduce-motion
+/// @param {String} $direction  - Range direction: only | up | down [default: only]
+///
+/// @example
+///   // xs: ≤ 680px
+///   @include media('xs') { ... }
+///   // sm: 681px – 960px
+///   @include media('sm') { ... }
+///   // md and above: ≥ 961px
+///   @include media('md', 'up') { ... }
+///   // lg and below: ≤ 1440px
+///   @include media('lg', 'down') { ... }
+///   // print media
+///   @include media('print') { ... }
+///   // reduced motion
+///   @include media('reduce-motion') { ... }
+@mixin media($target, $direction: 'only') {
+  @if $target == 'print' {
+    @media only print {
+      @content;
+    }
+  } @else if $target == 'reduce-motion' {
+    @media screen and (prefers-reduced-motion: reduce) {
+      @content;
+    }
+  } @else {
+    $range: map-get($breakpoints, $target);
+    $min: if($range != null, map-get($range, 'min'), null);
+    $max: if($range != null, map-get($range, 'max'), null);
+
+    @if $range == null {
+      @warn "Unknown media target `#{$target}`. Expected: xs, sm, md, lg, xl, print, reduce-motion.";
+    } @else if $direction == 'only' {
+      @if $min == null {
+        // xs: max-width only, no lower bound
+        @media only screen and (max-width: $max) {
+          @content;
+        }
+      } @else if $max == null {
+        // xl: min-width only, no upper bound
+        @media only screen and (min-width: $min) {
+          @content;
+        }
+      } @else {
+        @media only screen and (min-width: $min) and (max-width: $max) {
+          @content;
+        }
+      }
+    } @else if $direction == 'up' {
+      @if $min == null {
+        // xs-up: no lower bound, always applies
+        @content;
+      } @else {
+        @media only screen and (min-width: $min) {
+          @content;
+        }
+      }
+    } @else if $direction == 'down' {
+      @if $max == null {
+        // xl-down: no upper bound, always applies
+        @content;
+      } @else {
+        @media only screen and (max-width: $max) {
+          @content;
+        }
+      }
+    } @else {
+      @warn "Unknown direction `#{$direction}`. Expected: only, up, down.";
+    }
+  }
+}

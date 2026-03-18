@@ -1,4 +1,6 @@
 #postChat_button,
 .post-TianliGPT {
-  @extend .print-d-none;
+  @include media('print') {
+    display: none !important;
+  }
 }

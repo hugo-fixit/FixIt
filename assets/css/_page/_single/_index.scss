@@ -26,6 +26,10 @@
       margin-right: 0.25em;
       color: fixit-var(success);
     }
+
+    @include media('print') {
+      text-align: center;
+    }
   }
 
   .single-subtitle {
@@ -33,16 +37,15 @@
     font-size: 1.2rem;
     font-weight: normal;
     line-height: 1.15;
+
+    @include media('print') {
+      text-align: center;
+    }
   }
 
   .post-meta {
     font-size: 0.875rem;
     color: fixit-var(secondary);
-
-    .comment-visitors,
-    .comment-count {
-      @extend .print-d-none;
-    }
 
     span {
       display: inline-block;
@@ -62,6 +65,15 @@
         object-position: center;
         @include border-radius(full);
         object-fit: cover;
+      }
+    }
+
+    @include media('print') {
+      text-align: center;
+
+      .comment-visitors,
+      .comment-count {
+        display: none;
       }
     }
   }
@@ -125,6 +137,7 @@
 
   .content {
     margin-block: 1rem;
+
     > h1,
     > h2 {
       font-size: 1.5em;
@@ -458,6 +471,9 @@
       max-width: 100%;
       overflow-x: auto;
       overflow-y: hidden;
+      // neutralize the margin-right setting of .katex .vlist-t2
+      // to prevent scrollbars from appearing when the width is not full
+      padding-right: 2px;
     }
     .katex-error {
       padding: 0.14em 0.28em;
@@ -489,6 +505,35 @@
 
     json-viewer[boxed] + json-viewer[boxed] {
       margin-top: 0.5rem;
+    }
+
+    @include media('lg', 'up') {
+      :is(.code-block, .diagram-container) {
+        :is(.code-copy-btn, .diagram-copy-btn) {
+          display: none;
+          opacity: 0;
+          transform: scale(0.9);
+          transition:
+            display 0.25s allow-discrete,
+            opacity 0.25s,
+            transform 0.25s,
+            color 0.1s,
+            background-color 0.1s,
+            box-shadow 0.1s,
+            border-color 0.1s;
+        }
+        &:hover {
+          :is(.code-copy-btn, .diagram-copy-btn) {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+            @starting-style {
+              opacity: 0;
+              transform: scale(0.9);
+            }
+          }
+        }
+      }
     }
   }
 

@@ -1,7 +1,6 @@
 .post-reward {
   padding: 1rem;
   text-align: center;
-  @extend .print-d-none;
 
   &:has(.reward-ways:empty) {
     display: none;
@@ -84,5 +83,9 @@
     [data-theme=dark] & {
       border-color: lighten($reward-color, 5%);
     }
+  }
+
+  @include media('print') {
+    display: none !important;
   }
 }

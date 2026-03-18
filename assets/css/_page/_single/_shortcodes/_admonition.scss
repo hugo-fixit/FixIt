@@ -60,6 +60,7 @@
       margin: 0;
     }
 
+    // reset sticky header position in code block when inside admonition
     .code-block .code-header,
     .code-tabs .tabs-header {
       top: initial !important;

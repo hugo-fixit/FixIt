@@ -94,7 +94,6 @@
   visibility: hidden;
   @include overflow-wrap(break-word);
   @include blur;
-  @extend .print-d-none;
 
   [data-header-desktop='normal'] & {
     @include set-fixit-var(scroll-mt, fixit-var(global-scroll-margin-top));
@@ -157,6 +156,10 @@
       }
     }
   }
+
+  @include media('print') {
+    display: none !important;
+  }
 }
 
 #toc-static {
@@ -210,6 +213,10 @@
         @include set-fixit-var(code-header-background-color, darken($code-background-color-dark, 6%));
       }
     }
+  }
+
+  @include media('sm', 'down') {
+    display: block;
   }
 }
 

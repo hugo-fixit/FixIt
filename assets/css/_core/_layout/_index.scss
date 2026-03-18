@@ -1,4 +1,4 @@
-/** Layout **/
+// Responsive layout
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -15,6 +15,10 @@
 
       &:not(:has(~ aside)) {
         display: none;
+      }
+
+      @include media('sm', 'down') {
+        display: none !important;
       }
     }
 
@@ -34,9 +38,45 @@
       }
     }
   }
+
+  @include media('md') {
+    main {
+      // hide empty aside and expand article when only one aside is empty
+      aside:first-child:empty:has(~ aside:not(:empty)),
+      aside:first-child:not(:empty) ~ aside#toc-auto:empty {
+        display: none;
+      }
+  
+      aside:first-child:empty:has(~ aside:not(:empty)) ~ article,
+      aside:first-child:not(:empty) ~ article:has(~ aside:empty) {
+        flex: 3;
+      }
+    }
+
+    // adjust breadcrumb flex when asides are empty
+    &:has(main > aside:first-child:empty ~ aside:not(:empty)) .breadcrumb-container {
+      .breadcrumb {
+        flex: 3;
+      }
+
+      &::before {
+        display: none;
+      }
+    }
+    &:has(main > aside:first-child:not(:empty) ~ aside#toc-auto:empty) .breadcrumb-container {
+      .breadcrumb {
+        flex: 3;
+      }
+
+      &::after {
+        display: none;
+      }
+    }
+  }
 }
 
 @import "header";
 @import "breadcrumb";
-@import "footer";
+@import "page-style";
 @import "pagination";
+@import "footer";

@@ -5,7 +5,6 @@
   display: flex;
   gap: 0.5rem;
   @include z-index(sticky);
-  @extend .print-d-none;
 
   &:has(~ main[data-reverse]) {
     flex-direction: row-reverse;
@@ -16,11 +15,35 @@
     content: '';
     flex: 1;
     padding-inline: 0.5rem;
+
+    @include media('sm', 'down') {
+      display: none;
+    }
   }
 
   &.sticky {
     position: sticky;
     top: fixit-var(header-height);
+
+    @include media('sm', 'up') {
+      body:not([data-header-desktop='sticky']) & {
+        top: 0;
+      }
+      // adjust the scroll margin top of the content anchors on the page
+      body:not([data-header-desktop='auto']) &+.fi-container .content [id] {
+        scroll-margin-top: calc(#{fixit-var(scroll-mt)} + #{fixit-var(breadcrumb-height)});
+      }
+    }
+
+    @include media('xs') {
+      body:not([data-header-mobile='sticky']) & {
+        top: 0;
+      }
+      // adjust the scroll margin top of the content anchors on the page
+      body:not([data-header-mobile='auto']) &+.fi-container .content [id] {
+        scroll-margin-top: calc(#{fixit-var(scroll-mt)} + #{fixit-var(breadcrumb-height)});
+      }
+    }
   }
 
   .breadcrumb {
@@ -46,5 +69,9 @@
         color: fixit-var(secondary);
       }
     }
+  }
+
+  @include media('print') {
+    display: none !important;
   }
 }
