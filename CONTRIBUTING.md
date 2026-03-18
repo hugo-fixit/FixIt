@@ -119,3 +119,45 @@ Finally, create a new pull request at <https://github.com/hugo-fixit/FixIt/pulls
 ## Git Commit Guidelines
 
 We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification for commit messages. This enables automatic changelog generation using our custom template: [conventional.hbs](https://github.com/Lruihao/auto-changelog-plus/blob/main/settings/conventional.hbs).
+
+> [!NOTE]
+>
+> Commits in a PR will normally be squashed into one commit, so you don't need to rebase locally.
+
+### Commit Message Format
+
+```
+<type>(<scope>): <subject>
+^      ^         ^
+|      |         |__ Subject: Concise description of the change (imperative mood, lowercase).
+|      |____________ Scope: The specific part of the codebase affected (optional but recommended).
+|___________________ Type: Indicates the kind of change.
+```
+
+### Allowed Types
+
+- `feat`: A new feature.
+- `fix`: A bug fix.
+- `refactor`: Code changes that neither fix a bug nor add a feature.
+- `chore`: Changes to the build process, auxiliary tools, libraries, documentation generation etc.
+- `docs`: Documentation only changes.
+- Other conventional types like `perf`, `style`, `test`, `ci`, `build` are also acceptable.
+
+### Allowed Scopes
+
+- `workflow`: CI/CD workflow changes (`.github/workflows/`)
+- `archetypes`: Content templates (`archetypes/`)
+- `assets`: Changes to theme assets like CSS, JS (`assets/`)
+- `i18n`: Internationalization and translation files (`i18n/`)
+- `layouts`: Root-level Hugo template files (`layouts/*.html`)
+- `config`: Theme configuration (`hugo.toml`, `theme.toml`)
+- _(All top-level directories in the layouts and packages directories)_
+- _(Consider adding other scopes as needed for better granularity)_
+
+### Examples
+
+- `feat(_shortcodes): add mapbox zoom control options`
+- `fix(_partials): avoid duplicate canonical link tags`
+- `docs(i18n): update translation key naming guidelines`
+- `ci(workflow): optimize preview deployment cache`
+- `refactor(assets): split theme initialization into smaller modules`
