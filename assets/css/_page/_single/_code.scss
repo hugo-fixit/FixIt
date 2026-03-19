@@ -281,7 +281,7 @@ pre {
       }
 
       @include media('print') {
-        top: initial;
+        top: initial !important;
       }
     }
 
@@ -705,7 +705,7 @@ pre {
     }
 
     @include media('print') {
-      top: initial;
+      top: initial !important;
     }
   }
 

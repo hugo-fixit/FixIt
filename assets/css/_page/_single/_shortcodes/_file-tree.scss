@@ -56,6 +56,10 @@
           flex-shrink: 0;
         }
 
+        .file-tree-label__inner {
+          word-break: break-all;
+        }
+
         &.is-highlighted {
           color: fixit-var(global-link-hover-color);
         }

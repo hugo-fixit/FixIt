@@ -2,7 +2,7 @@
  * FileTree class to handle file tree interactions
  */
 export default class FileTree {
-  init(target = document) {
+  static init(target = document) {
     target.querySelectorAll('.file-tree-toggle:not([data-init])').forEach((label) => {
       label.addEventListener('click', (e) => {
         e.stopPropagation()
@@ -18,7 +18,7 @@ export default class FileTree {
     this.updateLineHeight(target)
   }
 
-  updateLineHeight(target = document) {
+  static updateLineHeight(target = document) {
     const uls = target.querySelectorAll('.file-tree .file-tree')
     uls.forEach((ul) => {
       const parentItem = ul.closest('.file-tree-item.is-collapsed')
@@ -46,5 +46,15 @@ export default class FileTree {
 
       ul.style.setProperty('--fi-file-tree-line-height', `${height}px`)
     })
+  }
+
+  static expandAll(target = document) {
+    target.querySelectorAll('.file-tree-folder').forEach(folder => folder.classList.remove('is-collapsed'))
+    this.updateLineHeight(target)
+  }
+
+  static collapseAll(target = document) {
+    target.querySelectorAll('.file-tree-folder').forEach(folder => folder.classList.add('is-collapsed'))
+    this.updateLineHeight(target)
   }
 }

@@ -6,7 +6,6 @@ class FixIt {
   constructor() {
     this.config = window.config;
     this.isDark = document.documentElement.dataset.theme === 'dark';
-    this.fileTree = new FileTree();
     this.newScrollTop = Util.getScrollTop();
     this.oldScrollTop = this.newScrollTop;
     this.scrollEventSet = new Set();
@@ -14,6 +13,7 @@ class FixIt {
     this.switchThemeEventSet = new Set();
     this.clickMaskEventSet = new Set();
     this.beforeprintEventSet = new Set();
+    this.afterprintEventSet = new Set();
     this.disableScrollEvent = false;
     window.objectFitImages && objectFitImages();
   }
@@ -1317,7 +1317,7 @@ class FixIt {
 
   initTabEvents(target = document) {
     target.addEventListener('tab-container-changed', () => {
-      this.fileTree.updateLineHeight(target);
+      FileTree.updateLineHeight(target);
       window.FixItMermaid?.init?.();
     }, false);
   }
@@ -1392,7 +1392,7 @@ class FixIt {
     this.initMathJax();
     this.initJsonViewer();
     this.initTabEvents(target);
-    this.fileTree.init(target);
+    FileTree.init(target);
     window.FixItMermaid?.init?.();
     window.FixItAPlayer?.init?.();
   }
@@ -1581,12 +1581,51 @@ class FixIt {
     }, false);
   }
 
-  beforeprint() {
+  initPrint() {
     window.addEventListener('beforeprint', () => {
-      Util.forEach(document.querySelectorAll('.chroma'), ($el) => {
-        $el.classList.toggle('open', true)
+      const $content = document.getElementById('content');
+      // revert code tabs to code blocks for better printing support
+      Util.forEach($content.querySelectorAll('.code-tabs'), ($codeTabs) => {
+        // restore action buttons to the active tab's code-header before reverting
+        const $actions = $codeTabs.querySelector('.tabs-actions');
+        const $activeBlock = $codeTabs.querySelector('.code-block.active');
+        if ($actions && $activeBlock) {
+          const $codeHeader = $activeBlock.querySelector('.code-header');
+          if ($codeHeader) {
+            Array.from($actions.children).forEach(btn => $codeHeader.appendChild(btn));
+          }
+        }
+        const $codeBlocks = $codeTabs.querySelectorAll('.code-block');
+        $codeBlocks.forEach(($codeBlock) => {
+          $codeTabs.parentElement.insertBefore($codeBlock, $codeTabs);
+        });
+        $codeTabs.parentElement.removeChild($codeTabs);
+      });
+      Util.forEach($content.querySelectorAll('.code-block'), ($el) => {
+        // line wrapping
+        $el.classList.add('line-wrapping');
+        // expand all code blocks
+        $el.classList.remove('is-collapsed');
+        // expand code preview
+        if ($el.querySelector('.code-expand-btn')) {
+          $el.classList.add('is-expanded');
+        }
+      });
+      FileTree.expandAll($content);
+      Util.forEach($content.querySelectorAll('.details'), ($el) => {
+        $el.classList.add('open');
+      });
+      Util.forEach($content.querySelectorAll('details'), ($el) => {
+        $el.setAttribute('open', '');
       });
       for (let event of this.beforeprintEventSet) {
+        event();
+      }
+    }, false);
+
+    window.addEventListener('afterprint', () => {
+      this.initCodeTabs();
+      for (let event of this.afterprintEventSet) {
         event();
       }
     }, false);
@@ -1625,7 +1664,7 @@ class FixIt {
         this.onScroll();
         this.onResize();
         this.onClickMask();
-        this.beforeprint();
+        this.initPrint();
       }, 100);
     } catch (err) {
       console.error(err);
