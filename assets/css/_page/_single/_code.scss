@@ -269,7 +269,7 @@ pre {
       }
 
       [data-header-desktop='sticky'] & {
-        @include media('xs', 'up') {
+        @include media('sm', 'up') {
           top: calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height)});
         }
       }
@@ -693,7 +693,7 @@ pre {
     }
 
     [data-header-desktop='sticky'] & {
-      @include media('xs', 'up') {
+      @include media('sm', 'up') {
         top: calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height)});
       }
     }
