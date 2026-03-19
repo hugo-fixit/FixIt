@@ -51,6 +51,10 @@ tab-container {
     }
   }
 
+  &::part(tablist-wrapper) {
+    display: contents;
+  }
+
   &::part(tablist-tab-wrapper) {
     flex: 1 0 auto;
   }
@@ -136,6 +140,10 @@ tab-container {
       position-anchor: #{$rootPrefix}tab-underline-active;
       inset: anchor(inside);
       pointer-events: none;
+    }
+
+    &:has(> .tab-button[aria-selected='false']:hover)::part(tablist-tab-wrapper)::before {
+      opacity: 0.7;
     }
 
     &[placement='top'],
