@@ -1,0 +1,62 @@
+{{- $parsed := dict -}}
+{{- $ok := false -}}
+{{- with try (transform.Unmarshal .Inner) -}}
+  {{- with .Err -}}
+    {{- warnf "Toggle code block: unable to parse content at %s" $.Position -}}
+  {{- else with .Value -}}
+    {{- $parsed = . -}}
+    {{- $ok = true -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $ok -}}
+  {{- $pageID := .Page.RelPermalink | default .Page.File.Path -}}
+  {{- $seed := printf "%s|%s|%s" $pageID .Position .Inner -}}
+  {{- $group := printf "toggle-%s" (md5 $seed) -}}
+  {{- $activeFormat := "" -}}
+  {{- $raw := strings.TrimSpace .Inner -}}
+  {{- range $candidate := slice "json" "toml" "yaml" -}}
+    {{- if not $activeFormat -}}
+      {{- with try (transform.Unmarshal (dict "format" $candidate) $raw) -}}
+        {{- if not .Err -}}
+          {{- $activeFormat = $candidate -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $commonAttrsStr := printf ", group=%q" $group -}}
+  {{- if ne .Attributes.copyable nil -}}
+    {{- $commonAttrsStr = printf "%s, copyable=%v" $commonAttrsStr .Attributes.copyable -}}
+  {{- end -}}
+  {{- if ne .Attributes.downloadable nil -}}
+    {{- $commonAttrsStr = printf "%s, downloadable=%v" $commonAttrsStr .Attributes.downloadable -}}
+  {{- end -}}
+  {{- if ne .Attributes.fullscreen nil -}}
+    {{- $commonAttrsStr = printf "%s, fullscreen=%v" $commonAttrsStr .Attributes.fullscreen -}}
+  {{- end -}}
+  {{- if ne .Attributes.lineNosToggler nil -}}
+    {{- $commonAttrsStr = printf "%s, lineNosToggler=%v" $commonAttrsStr .Attributes.lineNosToggler -}}
+  {{- end -}}
+  {{- if ne .Attributes.lineWrapToggler nil -}}
+    {{- $commonAttrsStr = printf "%s, lineWrapToggler=%v" $commonAttrsStr .Attributes.lineWrapToggler -}}
+  {{- end -}}
+  {{- if ne .Attributes.editable nil -}}
+    {{- $commonAttrsStr = printf "%s, editable=%v" $commonAttrsStr .Attributes.editable -}}
+  {{- end -}}
+  {{- $renderText := "" -}}
+  {{- range $format := slice "yaml" "toml" "json" -}}
+    {{- $content := transform.Remarshal $format $parsed -}}
+    {{- if eq $format "toml" -}}
+      {{- $content = replaceRE `(?m)^[\t ]+` "" $content -}}
+    {{- else if eq $format "json" -}}
+      {{- $content = $parsed | jsonify (dict "indent" "  ") -}}
+    {{- end -}}
+    {{- $active := cond (eq $format $activeFormat) ", .active" "" -}}
+    {{- $jsonViewer := cond (eq $format "json") ", enable=false" "" -}}
+    {{- $block := printf "```%s {name=%q%s%s%s}\n%s\n```\n\n" $format $format $active $jsonViewer $commonAttrsStr $content -}}
+    {{- $renderText = add $renderText $block -}}
+  {{- end -}}
+  {{- $renderText | .Page.RenderString -}}
+{{- else -}}
+  {{- partial "plugin/code-block-wrapper.html" . -}}
+{{- end -}}
