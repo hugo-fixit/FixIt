@@ -644,6 +644,10 @@ class FixIt {
       $firstBlock.parentNode.insertBefore($container, $firstBlock);
 
       const activeTabIndex = $tabs.findIndex(tab => tab.classList.contains('active'));
+      const langPref = window.localStorage.getItem('config_lang_perf');
+      const hasCodeToggle = $tabs.some(tab => tab.dataset.codeToggle === 'true');
+      const langPrefIndex = (langPref && hasCodeToggle) ? $tabs.findIndex(tab => tab.dataset.tabTitle.toLowerCase() === langPref) : -1;
+      const resolvedIndex = langPrefIndex !== -1 ? langPrefIndex : activeTabIndex;
       const beforeTabs = $tabs[0]?.getAttribute('before_tabs');
       if (beforeTabs) {
         const $before = document.createElement('span');
@@ -653,7 +657,7 @@ class FixIt {
       }
       $tabs.forEach(($tab, index) => {
         const title = $tab.dataset.tabTitle || 'Code';
-        const defaultActiveTab = activeTabIndex === -1 && index === 0;
+        const defaultActiveTab = resolvedIndex === -1 && index === 0;
         
         // tab button
         const $btn = document.createElement('span');
@@ -676,6 +680,14 @@ class FixIt {
           // 2. switch active tab UI
           $items.querySelectorAll('.tab-item').forEach(b => b.classList.remove('active'));
           $btn.classList.add('active');
+          if ($tab.dataset.codeToggle === 'true') {
+            window.localStorage.setItem('config_lang_perf', $tab.dataset.tabTitle.toLowerCase());
+            const activeItems = document.querySelectorAll(`
+              .tab-item[title="${$tab.dataset.tabTitle.toLowerCase()}"]:not(.active),
+              .tab-item[title="${$tab.dataset.tabTitle.toUpperCase()}"]:not(.active)`
+            );
+            Util.forEach(activeItems, t => t.click());
+          }
           
           // 3. switch content
           $tabs.forEach(b => b.classList.remove('active'));
@@ -698,7 +710,7 @@ class FixIt {
         $items.appendChild($btn);
         
         // move block to content
-        $tab.classList.toggle('active', activeTabIndex === index || defaultActiveTab);
+        $tab.classList.toggle('active', resolvedIndex === index || defaultActiveTab);
         $tab.classList.remove('is-collapsed');
         $tab.classList.remove('d-none');
         $tab.dataset.tabInit = 'true';
@@ -709,8 +721,8 @@ class FixIt {
       $container.appendChild($content);
 
       // initialize actions for the active tab
-      if (activeTabIndex !== -1) {
-        const $activeBtn = $items.querySelector(`.tab-item[data-index="${activeTabIndex}"]`);
+      if (resolvedIndex !== -1) {
+        const $activeBtn = $items.querySelector(`.tab-item[data-index="${resolvedIndex}"]`);
         if ($activeBtn) $activeBtn.click();
       } else {
         $items.firstElementChild.click();

@@ -55,7 +55,7 @@
     {{- $active := cond (eq $format $activeFormat) ", .active" "" -}}
     {{- $jsonViewer := cond (eq $format "json") ", enable=false" "" -}}
     {{- $labelName := cond (ne $.Attributes.before_tabs nil) $format (upper $format) -}}
-    {{- $block := printf "```%s {name=%q%s%s%s}\n%s\n```\n\n" $format $labelName $active $jsonViewer $commonAttrsStr $content -}}
+    {{- $block := printf "```%s {data-code-toggle=true, name=%q%s%s%s}\n%s\n```\n\n" $format $labelName $active $jsonViewer $commonAttrsStr $content -}}
     {{- $renderText = add $renderText $block -}}
   {{- end -}}
   {{- $renderText | .Page.RenderString -}}
