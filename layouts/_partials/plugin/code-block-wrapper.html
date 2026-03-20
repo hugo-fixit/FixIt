@@ -70,7 +70,7 @@
     {{- $wrapper =
       replace $wrapper
       (printf `class="%s"` $class)
-      (printf `class="%s" data-tab-group="%s" data-tab-title="%s"` $class $config.group $tabTitle) -}}
+      (printf `class="%s" data-tab-title="%s"` $class $tabTitle) -}}
   {{- end -}}
   {{- if ne .Options.linenostart nil -}}
     {{- $wrapper =

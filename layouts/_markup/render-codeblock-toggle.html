@@ -34,17 +34,20 @@
   {{- if ne .Attributes.fullscreen nil -}}
     {{- $commonAttrsStr = printf "%s, fullscreen=%v" $commonAttrsStr .Attributes.fullscreen -}}
   {{- end -}}
-  {{- if ne .Attributes.lineNosToggler nil -}}
-    {{- $commonAttrsStr = printf "%s, lineNosToggler=%v" $commonAttrsStr .Attributes.lineNosToggler -}}
+  {{- if ne .Attributes.linenostoggler nil -}}
+    {{- $commonAttrsStr = printf "%s, lineNosToggler=%v" $commonAttrsStr .Attributes.linenostoggler -}}
   {{- end -}}
-  {{- if ne .Attributes.lineWrapToggler nil -}}
-    {{- $commonAttrsStr = printf "%s, lineWrapToggler=%v" $commonAttrsStr .Attributes.lineWrapToggler -}}
+  {{- if ne .Attributes.linewraptoggler nil -}}
+    {{- $commonAttrsStr = printf "%s, lineWrapToggler=%v" $commonAttrsStr .Attributes.linewraptoggler -}}
   {{- end -}}
   {{- if ne .Attributes.editable nil -}}
     {{- $commonAttrsStr = printf "%s, editable=%v" $commonAttrsStr .Attributes.editable -}}
   {{- end -}}
+  {{- if ne .Attributes.before_tabs nil -}}
+    {{- $commonAttrsStr = printf "%s, before_tabs=%q" $commonAttrsStr .Attributes.before_tabs -}}
+  {{- end -}}
   {{- $renderText := "" -}}
-  {{- range $format := slice "yaml" "toml" "json" -}}
+  {{- range $format := slice "toml" "yaml" "json" -}}
     {{- $content := transform.Remarshal $format $parsed -}}
     {{- if eq $format "toml" -}}
       {{- $content = replaceRE `(?m)^[\t ]+` "" $content -}}

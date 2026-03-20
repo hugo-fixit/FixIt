@@ -182,13 +182,14 @@ function add(a, b) {
 
 ## Code Toggle
 
-```toggle
+```toggle {before_tabs="hugo."}
 [params]
-version = "0.3.X"
+description = ''
+keywords = []
 
-[params.page]
-collectionList = true
-collectionNavigation = true
+[params.codeblock]
+mode = 'classic'
+wrapper = true
 ```
 
 ## Code block inside other blocks

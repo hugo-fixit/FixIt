@@ -601,18 +601,18 @@ class FixIt {
    * init code tabs
    */
   initCodeTabs() {
-    const $codeBlocks = document.querySelectorAll('.code-block[data-tab-group]');
+    const $codeBlocks = document.querySelectorAll('.code-block[group]');
     const processed = new Set();
     
     Util.forEach($codeBlocks, ($block) => {
       if (processed.has($block)) return;
       
-      const groupName = $block.dataset.tabGroup;
+      const groupName = $block.getAttribute('group');
       const $tabs = [];
       let $curr = $block;
       
       // collect consecutive blocks with same group
-      while ($curr && $curr.classList?.contains('code-block') && $curr.dataset.tabGroup === groupName) {
+      while ($curr && $curr.classList?.contains('code-block') && $curr.getAttribute('group') === groupName) {
         $tabs.push($curr);
         processed.add($curr);
         $curr = $curr.nextElementSibling;
@@ -644,6 +644,13 @@ class FixIt {
       $firstBlock.parentNode.insertBefore($container, $firstBlock);
 
       const activeTabIndex = $tabs.findIndex(tab => tab.classList.contains('active'));
+      const beforeTabs = $tabs[0]?.getAttribute('before_tabs');
+      if (beforeTabs) {
+        const $before = document.createElement('span');
+        $before.className = 'before-tabs';
+        $before.textContent = beforeTabs;
+        $items.appendChild($before);
+      }
       $tabs.forEach(($tab, index) => {
         const title = $tab.dataset.tabTitle || 'Code';
         const defaultActiveTab = activeTabIndex === -1 && index === 0;

@@ -628,6 +628,12 @@ pre {
       position: relative;
       @include border-radius(top);
 
+      .before-tabs {
+        padding: 0.4rem 0.6rem;
+        white-space: nowrap;
+        color: fixit-var(global-font-color);
+      }
+
       .tab-item {
         padding: 0.4rem 0.8rem;
         cursor: pointer;
