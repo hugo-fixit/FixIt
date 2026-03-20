@@ -441,9 +441,16 @@ class FixIt {
         Util.animateCSS(codePreEl, 'animate__flash');
         iswWrap && codeBlock.classList.toggle('line-wrapping');
         Util.forEach(highlightLines, $hl => $hl.classList.toggle('hl'));
+        const copiedText = copyBtn.dataset.copiedText;
+        const originalTitle = copyBtn.dataset.ctOriginalTitle;
         copyBtn.toggleAttribute('data-copied', true);
+        copyBtn.dataset.ctTitle = copiedText;
+        const instance = window.CellTooltip.getOrCreateInstance(copyBtn);
+        instance.refresh();
         setTimeout(() => {
           copyBtn.toggleAttribute('data-copied', false);
+          copyBtn.dataset.ctTitle = originalTitle;
+          instance.hide();
         }, 2000);
       }, () => {
         console.error('Clipboard write failed!', 'Your browser does not support clipboard API!');

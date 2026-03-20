@@ -30,7 +30,7 @@
 {{- end -}}
 {{- if $config.copyable -}}
   {{- $copyIcon := dict "Class" "fa-regular fa-clone" | partial "plugin/icon.html" -}}
-  {{- $copyBtn = printf `<span class="action-btn copy-btn" aria-label="%s" role="button" title="%s" data-ct-tooltip>%s</span>` (T "assets.copyToClipboard") (T "assets.copyToClipboard") $copyIcon -}}
+  {{- $copyBtn = printf `<span class="action-btn copy-btn" aria-label="%s" role="button" title="%s" data-copied-text="%s" data-ct-tooltip>%s</span>` (T "assets.copyToClipboard") (T "assets.copyToClipboard") (T "assets.copiedText") $copyIcon -}}
 {{- end -}}
 {{- if $config.downloadable -}}
   {{- $downloadIcon := dict "Class" "fa-solid fa-download" | partial "plugin/icon.html" -}}

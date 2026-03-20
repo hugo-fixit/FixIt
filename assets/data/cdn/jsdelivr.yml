@@ -19,8 +19,8 @@ libFiles:
   # autocomplete-js@0.38.1 https://github.com/algolia/autocomplete
   # TODO update autocompleteJS: '@algolia/autocomplete-js@1.7.1/dist/umd/index.production.js'
   autocompleteJS: autocomplete.js@0.38.1/dist/autocomplete.min.js
-  # cell-tooltip@0.2.0 https://github.com/Lruihao/cell-tooltip
-  cellTooltipJS: cell-tooltip@0.2.0/dist/cell-tooltip.umd.js
+  # cell-tooltip@0.3.0 https://github.com/Lruihao/cell-tooltip
+  cellTooltipJS: cell-tooltip@0.3.0/dist/cell-tooltip.umd.js
   # cell-watermark@1.0.3 https://github.com/Lruihao/watermark
   cellWatermarkJS: cell-watermark@1.0.3/src/watermark.min.js
   # cookieconsent@3.1.1 https://github.com/osano/cookieconsent
