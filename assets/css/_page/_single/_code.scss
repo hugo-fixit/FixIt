@@ -532,11 +532,6 @@ pre {
         padding-block: 0.875rem;
       }
     }
-
-    // for code tabs, only show the first tab content before JS loaded
-    &[data-hidden] {
-      display: none;
-    }
   }
 }
 

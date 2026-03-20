@@ -601,7 +601,7 @@ class FixIt {
    * init code tabs
    */
   initCodeTabs() {
-    const $codeBlocks = document.querySelectorAll('.code-block[group]');
+    const $codeBlocks = document.querySelectorAll('.code-block[group]:not([data-tab-init])');
     const processed = new Set();
     
     Util.forEach($codeBlocks, ($block) => {
@@ -613,7 +613,6 @@ class FixIt {
       
       // collect consecutive blocks with same group
       while ($curr && $curr.classList?.contains('code-block') && $curr.getAttribute('group') === groupName) {
-        delete $curr.dataset.hidden;
         $tabs.push($curr);
         processed.add($curr);
         $curr = $curr.nextElementSibling;
@@ -701,6 +700,8 @@ class FixIt {
         // move block to content
         $tab.classList.toggle('active', activeTabIndex === index || defaultActiveTab);
         $tab.classList.remove('is-collapsed');
+        $tab.classList.remove('d-none');
+        $tab.dataset.tabInit = 'true';
         $content.appendChild($tab);
       });
       
@@ -1606,6 +1607,7 @@ class FixIt {
         }
         const $codeBlocks = $codeTabs.querySelectorAll('.code-block');
         $codeBlocks.forEach(($codeBlock) => {
+          delete $codeBlock.dataset.tabInit;
           $codeTabs.parentElement.insertBefore($codeBlock, $codeTabs);
         });
         $codeTabs.parentElement.removeChild($codeTabs);

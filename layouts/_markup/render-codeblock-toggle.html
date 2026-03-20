@@ -10,9 +10,7 @@
 {{- end -}}
 
 {{- if $ok -}}
-  {{- $pageID := .Page.RelPermalink | default .Page.File.Path -}}
-  {{- $seed := printf "%s|%s|%s" $pageID .Position .Inner -}}
-  {{- $group := printf "toggle-%s" (md5 $seed) -}}
+  {{- $groupId := printf "tab-%s" (md5 (dict "Page" .Page | partial "function/id.html")) -}}
   {{- $activeFormat := "" -}}
   {{- $raw := strings.TrimSpace .Inner -}}
   {{- range $candidate := slice "json" "toml" "yaml" -}}
@@ -24,7 +22,7 @@
       {{- end -}}
     {{- end -}}
   {{- end -}}
-  {{- $commonAttrsStr := printf ", group=%q" $group -}}
+  {{- $commonAttrsStr := printf ", group=%q" $groupId -}}
   {{- if ne .Attributes.copyable nil -}}
     {{- $commonAttrsStr = printf "%s, copyable=%v" $commonAttrsStr .Attributes.copyable -}}
   {{- end -}}
@@ -43,8 +41,8 @@
   {{- if ne .Attributes.editable nil -}}
     {{- $commonAttrsStr = printf "%s, editable=%v" $commonAttrsStr .Attributes.editable -}}
   {{- end -}}
-  {{- if ne .Attributes.before_tabs nil -}}
-    {{- $commonAttrsStr = printf "%s, before_tabs=%q" $commonAttrsStr .Attributes.before_tabs -}}
+  {{- with .Attributes.before_tabs -}}
+    {{- $commonAttrsStr = printf "%s, before_tabs=%q" $commonAttrsStr . -}}
   {{- end -}}
   {{- $renderText := "" -}}
   {{- range $format := slice "toml" "yaml" "json" -}}
@@ -56,7 +54,8 @@
     {{- end -}}
     {{- $active := cond (eq $format $activeFormat) ", .active" "" -}}
     {{- $jsonViewer := cond (eq $format "json") ", enable=false" "" -}}
-    {{- $block := printf "```%s {name=%q%s%s%s}\n%s\n```\n\n" $format $format $active $jsonViewer $commonAttrsStr $content -}}
+    {{- $labelName := cond (ne $.Attributes.before_tabs nil) $format (upper $format) -}}
+    {{- $block := printf "```%s {name=%q%s%s%s}\n%s\n```\n\n" $format $labelName $active $jsonViewer $commonAttrsStr $content -}}
     {{- $renderText = add $renderText $block -}}
   {{- end -}}
   {{- $renderText | .Page.RenderString -}}
