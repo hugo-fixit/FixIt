@@ -67,10 +67,16 @@
   {{- end -}}
   {{- if $config.group -}}
     {{- $tabTitle := $config.name | default (strings.FirstUpper .Type) | default "Code" -}}
+    {{- $groupKey := printf "code-tab-group-first:%s" $config.group -}}
+    {{- $isFirst := not (.Page.Store.Get $groupKey) -}}
+    {{- if $isFirst -}}
+      {{- .Page.Store.Set $groupKey true -}}
+    {{- end -}}
+    {{- $hidden := cond $isFirst "" " data-hidden" -}}
     {{- $wrapper =
       replace $wrapper
       (printf `class="%s"` $class)
-      (printf `class="%s" data-tab-title="%s"` $class $tabTitle) -}}
+      (printf `class="%s" data-tab-group="%s" data-tab-title="%s"%s` $class $config.group $tabTitle $hidden) -}}
   {{- end -}}
   {{- if ne .Options.linenostart nil -}}
     {{- $wrapper =

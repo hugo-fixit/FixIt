@@ -613,6 +613,7 @@ class FixIt {
       
       // collect consecutive blocks with same group
       while ($curr && $curr.classList?.contains('code-block') && $curr.getAttribute('group') === groupName) {
+        delete $curr.dataset.hidden;
         $tabs.push($curr);
         processed.add($curr);
         $curr = $curr.nextElementSibling;
