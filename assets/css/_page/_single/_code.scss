@@ -532,6 +532,11 @@ pre {
         padding-block: 0.875rem;
       }
     }
+
+    // for code tabs, only show the first tab content before JS loaded
+    &[data-hidden] {
+      display: none;
+    }
   }
 }
 
@@ -627,6 +632,12 @@ pre {
       overflow-x: auto;
       position: relative;
       @include border-radius(top);
+
+      .before-tabs {
+        padding: 0.4rem 0.6rem;
+        white-space: nowrap;
+        color: fixit-var(global-font-color);
+      }
 
       .tab-item {
         padding: 0.4rem 0.8rem;

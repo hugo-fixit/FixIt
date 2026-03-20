@@ -462,15 +462,18 @@ class FixIt {
     if (!downloadBtn) return;
     downloadBtn.addEventListener('click', () => {
       const $codeHeader = codeBlock.querySelector('.code-header');
-      const fileNameFromTitle = $codeHeader?.querySelector('.code-title')?.dataset.name?.trim();
+      const name = codeBlock.dataset.name?.trim();
       const language = Array.from($codeHeader?.classList || []).find((className) => className.startsWith('language-'))?.replace('language-', '');
-      const fallbackName = language && language !== 'fallback' ? `code.${language}` : 'code.txt';
-      const fileName = (fileNameFromTitle || fallbackName).replace(/[\\/:*?"<>|\r\n]+/g, '-');
+      const ext = language && language !== 'fallback' ? language : 'txt';
+      const fallbackName = name
+        ? (name.includes('.') ? name : `${name}.${ext}`)
+        : `code.${ext}`;
+      const fileName = codeBlock.getAttribute('filename')?.trim();
       const blob = new Blob([codePreEl.innerText], { type: 'text/plain;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = fileName || fallbackName;
+      link.download = (fileName || fallbackName).replace(/[\\/:*?"<>|\r\n]+/g, '-');
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -598,18 +601,19 @@ class FixIt {
    * init code tabs
    */
   initCodeTabs() {
-    const $codeBlocks = document.querySelectorAll('.code-block[data-tab-group]');
+    const $codeBlocks = document.querySelectorAll('.code-block[group]');
     const processed = new Set();
     
     Util.forEach($codeBlocks, ($block) => {
       if (processed.has($block)) return;
       
-      const groupName = $block.dataset.tabGroup;
+      const groupName = $block.getAttribute('group');
       const $tabs = [];
       let $curr = $block;
       
       // collect consecutive blocks with same group
-      while ($curr && $curr.classList?.contains('code-block') && $curr.dataset.tabGroup === groupName) {
+      while ($curr && $curr.classList?.contains('code-block') && $curr.getAttribute('group') === groupName) {
+        delete $curr.dataset.hidden;
         $tabs.push($curr);
         processed.add($curr);
         $curr = $curr.nextElementSibling;
@@ -641,6 +645,13 @@ class FixIt {
       $firstBlock.parentNode.insertBefore($container, $firstBlock);
 
       const activeTabIndex = $tabs.findIndex(tab => tab.classList.contains('active'));
+      const beforeTabs = $tabs[0]?.getAttribute('before_tabs');
+      if (beforeTabs) {
+        const $before = document.createElement('span');
+        $before.className = 'before-tabs';
+        $before.textContent = beforeTabs;
+        $items.appendChild($before);
+      }
       $tabs.forEach(($tab, index) => {
         const title = $tab.dataset.tabTitle || 'Code';
         const defaultActiveTab = activeTabIndex === -1 && index === 0;
