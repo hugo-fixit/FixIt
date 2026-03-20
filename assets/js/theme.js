@@ -462,15 +462,18 @@ class FixIt {
     if (!downloadBtn) return;
     downloadBtn.addEventListener('click', () => {
       const $codeHeader = codeBlock.querySelector('.code-header');
-      const fileNameFromTitle = $codeHeader?.querySelector('.code-title')?.dataset.name?.trim();
+      const name = codeBlock.dataset.name?.trim();
       const language = Array.from($codeHeader?.classList || []).find((className) => className.startsWith('language-'))?.replace('language-', '');
-      const fallbackName = language && language !== 'fallback' ? `code.${language}` : 'code.txt';
-      const fileName = (fileNameFromTitle || fallbackName).replace(/[\\/:*?"<>|\r\n]+/g, '-');
+      const ext = language && language !== 'fallback' ? language : 'txt';
+      const fallbackName = name
+        ? (name.includes('.') ? name : `${name}.${ext}`)
+        : `code.${ext}`;
+      const fileName = codeBlock.getAttribute('filename')?.trim();
       const blob = new Blob([codePreEl.innerText], { type: 'text/plain;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = fileName || fallbackName;
+      link.download = (fileName || fallbackName).replace(/[\\/:*?"<>|\r\n]+/g, '-');
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
