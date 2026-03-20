@@ -216,7 +216,7 @@ FixIt theme assets partial
 
 {{- /* Cell Tooltip */ -}}
 {{- if eq .Site.Params.tooltip true -}}
-  {{- $source := $cdn.cellTooltipJS | default "lib/cell-tooltip/cell-tooltip.umd.cjs" -}}
+  {{- $source := $cdn.cellTooltipJS | default "lib/cell-tooltip/cell-tooltip.umd.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "tooltip" true | merge $config -}}
 {{- end -}}

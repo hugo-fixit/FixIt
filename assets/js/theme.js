@@ -1351,16 +1351,14 @@ class FixIt {
       if ($ref.hasAttribute('title')) return;
       $ref.setAttribute('title', $content.textContent.trim());
       if (this.config.tooltip) {
-        const { Tooltip } = window.CellTooltip;
-        Tooltip.getOrCreateInstance($ref);
+        window.CellTooltip.getOrCreateInstance($ref);
       }
     });
   }
 
   initTooltip() {
     if (!this.config.tooltip) return;
-    const { Tooltip } = window.CellTooltip;
-    Tooltip.initAll('[data-ct-tooltip]');
+    window.CellTooltip.initAll('[data-ct-tooltip]');
   }
 
   /**
