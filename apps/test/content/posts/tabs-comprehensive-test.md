@@ -216,3 +216,16 @@ type = "file"
 
 {{% /tab %}}
 {{< /tabs >}}
+
+### MathJax inside tabs
+
+{{< tabs >}}
+{{% tab title="Inline" %}}
+$c = \pm\sqrt{a^2 + b^2}$ and \(f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi\)
+{{% /tab %}}
+{{% tab title="Block" %}}
+$$ x = {-b \pm \sqrt{b^2-4ac} \over 2a} $$
+
+\[ f(a) = \frac{1}{2\pi i} \oint\frac{f(z)}{z-a}dz \]
+{{% /tab %}}
+{{< /tabs >}}

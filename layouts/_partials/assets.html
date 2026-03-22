@@ -216,6 +216,7 @@ FixIt theme assets partial
 
 {{- /* Cell Tooltip */ -}}
 {{- if eq .Site.Params.tooltip true -}}
+  {{- /*  [todo] 临时可行性验证，需要寻找一个更稳定的替代品（Floating UI） */ -}}
   {{- $source := $cdn.cellTooltipJS | default "lib/cell-tooltip/cell-tooltip.umd.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "tooltip" true | merge $config -}}
@@ -306,6 +307,9 @@ FixIt theme assets partial
     {{- dict "Source" "lib/pace/pace-patch-flat-top.css" "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
   {{- end -}}
 {{- end -}}
+
+{{- /* Print */ -}}
+{{- $config = partial "function/snake2camel.html" .Site.Params.print | dict "print" | merge $config -}}
 
 {{- /* PostChat */ -}}
 {{- partial "plugin/post-chat-ai.html" . -}}
