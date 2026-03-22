@@ -1613,43 +1613,49 @@ class FixIt {
   initPrint() {
     window.addEventListener('beforeprint', () => {
       const $content = document.getElementById('content');
-      // revert code tabs to code blocks for better printing support
-      Util.forEach($content.querySelectorAll('.code-tabs'), ($codeTabs) => {
-        // restore action buttons to the active tab's code-header before reverting
-        const $actions = $codeTabs.querySelector('.tabs-actions');
-        const $activeBlock = $codeTabs.querySelector('.code-block.active');
-        if ($actions && $activeBlock) {
-          const $codeHeader = $activeBlock.querySelector('.code-header');
-          if ($codeHeader) {
-            Array.from($actions.children).forEach(btn => $codeHeader.appendChild(btn));
+      const printConfig = this.config.print || {};
+
+      if (printConfig.expandAdmonition) {
+        Util.forEach($content.querySelectorAll('.admonition'), ($el) => $el.classList.add('open'));
+      }
+      if (printConfig.expandCode) {
+        // revert code tabs to code blocks for better printing support
+        Util.forEach($content.querySelectorAll('.code-tabs'), ($codeTabs) => {
+          // restore action buttons to the active tab's code-header before reverting
+          const $actions = $codeTabs.querySelector('.tabs-actions');
+          const $activeBlock = $codeTabs.querySelector('.code-block.active');
+          if ($actions && $activeBlock) {
+            const $codeHeader = $activeBlock.querySelector('.code-header');
+            if ($codeHeader) {
+              Array.from($actions.children).forEach(btn => $codeHeader.appendChild(btn));
+            }
           }
-        }
-        const $codeBlocks = $codeTabs.querySelectorAll('.code-block');
-        $codeBlocks.forEach(($codeBlock) => {
-          delete $codeBlock.dataset.tabInit;
-          $codeTabs.parentElement.insertBefore($codeBlock, $codeTabs);
+          const $codeBlocks = $codeTabs.querySelectorAll('.code-block');
+          $codeBlocks.forEach(($codeBlock) => {
+            delete $codeBlock.dataset.tabInit;
+            $codeTabs.parentElement.insertBefore($codeBlock, $codeTabs);
+          });
+          $codeTabs.parentElement.removeChild($codeTabs);
         });
-        $codeTabs.parentElement.removeChild($codeTabs);
-      });
-      Util.forEach($content.querySelectorAll('.code-block'), ($el) => {
-        // line wrapping
-        $el.classList.add('line-wrapping');
-        // expand all code blocks
-        $el.classList.remove('is-collapsed');
-        // expand code preview
-        if ($el.querySelector('.code-expand-btn')) {
-          $el.classList.add('is-expanded');
-        }
-      });
-      FileTree.expandAll($content);
-      Util.forEach($content.querySelectorAll('.details'), ($el) => {
-        $el.classList.add('open');
-      });
-      Util.forEach($content.querySelectorAll('details'), ($el) => {
-        $el.setAttribute('open', '');
-      });
+        Util.forEach($content.querySelectorAll('.code-block'), ($el) => {
+          // line wrapping
+          $el.classList.add('line-wrapping');
+          // expand all code blocks
+          $el.classList.remove('is-collapsed');
+          // expand code preview
+          if ($el.querySelector('.code-expand-btn')) {
+            $el.classList.add('is-expanded');
+          }
+        });
+      }
+      if (printConfig.expandDetails) {
+        Util.forEach($content.querySelectorAll('details'), ($el) => $el.setAttribute('open', ''));
+      }
       for (let event of this.beforeprintEventSet) {
         event();
+      }
+      if (printConfig.expandFileTree) {
+        FileTree.expandAll($content);
       }
     }, false);
 

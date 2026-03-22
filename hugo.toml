@@ -1178,6 +1178,17 @@ folderSlash = false
 # list of file or folder names to ignore
 ignoreList = []
 
+# FixIt 0.4.5 | NEW Print config
+[params.print]
+# whether to expand all admonitions before printing
+expand_admonition = true
+# whether to expand all code blocks and code tabs before printing
+expand_code = true
+# whether to expand all details elements before printing
+expand_details = true
+# whether to expand all file trees before printing
+expand_file_tree = false
+
 # FixIt 0.3.12 | NEW Custom partials config
 # Custom partials must be stored in the /layouts/_partials/ directory.
 # Depends on open custom blocks https://fixit.lruihao.cn/references/blocks/
