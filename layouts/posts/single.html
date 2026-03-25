@@ -218,9 +218,6 @@
 
     {{- /* Custom block after post footer */ -}}
     {{- block "custom-post__footer:after" . }}{{ end -}}
-
-    {{- /* Comment */ -}}
-    {{- partial "single/comment.html" . -}}
   </article>
 
   <aside class="toc" id="toc-auto" aria-label="{{ T "single.contents" }}">
@@ -251,4 +248,8 @@
       </div>
     </dialog>
   {{- end -}}
+{{- end -}}
+
+{{- define "comments" -}}
+  {{- partial "layout/comment.html" . -}}
 {{- end -}}

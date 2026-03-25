@@ -89,10 +89,11 @@
 // Collection aside container
 .aside-collection {
   position: sticky;
-  top: calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height)});
   box-sizing: border-box;
+  margin-bottom: 8rem;
   @include overflow-wrap(break-word);
   @include blur;
+  @include sticky-top-offset;
 
   @include media('print') {
     display: none !important;

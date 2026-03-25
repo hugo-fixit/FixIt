@@ -49,7 +49,7 @@
       {{- range $pages.Pages -}}
         {{- .Render "summary" -}}
       {{- end -}}
-      {{- partial "paginator.html" . -}}
+      {{- partial "layout/paginator.html" . -}}
     {{- end -}}
   </div>
 {{- end -}}

@@ -1,20 +1,33 @@
 .page {
   position: relative;
+  padding-inline: 0.5rem;
   @extend %page-style;
 
   .content {
     [id] {
-      scroll-margin-top: fixit-var(scroll-mt);
+      scroll-margin-top: fixit-var(scroll-margin-top, 0.5rem);
 
-      [data-header-desktop='normal'] & {
-        @include media('xs', 'up') {
-          @include set-fixit-var(scroll-mt, fixit-var(global-scroll-margin-top));
+      @include media('sm', 'up') {
+        [data-header-desktop='sticky'] &,
+        [data-header-desktop='auto'] & {
+          @include set-fixit-var(scroll-margin-top, calc(#{fixit-var(header-height)} + 0.5rem));
+        }
+
+        [data-header-desktop='sticky']:has(.breadcrumb-container.sticky) &,
+        [data-header-desktop='auto']:has(.breadcrumb-container.sticky) & {
+          @include set-fixit-var(scroll-margin-top, calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height, 0px)} + 0.5rem));
         }
       }
 
-      [data-header-mobile='normal'] & {
-        @include media('xs') {
-          @include set-fixit-var(scroll-mt, fixit-var(global-scroll-margin-top));
+      @include media('xs') {
+        [data-header-mobile='sticky'] &,
+        [data-header-mobile='auto'] & {
+          @include set-fixit-var(scroll-margin-top, calc(#{fixit-var(header-height)} + 0.5rem));
+        }
+
+        [data-header-mobile='sticky']:has(.breadcrumb-container.sticky) &,
+        [data-header-mobile='auto']:has(.breadcrumb-container.sticky) & {
+          @include set-fixit-var(scroll-margin-top, calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height, 0px)} + 0.5rem));
         }
       }
     }

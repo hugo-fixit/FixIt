@@ -89,15 +89,12 @@
 #toc-auto {
   display: block;
   position: sticky;
-  top: calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height)});
   box-sizing: border-box;
   visibility: hidden;
+  margin-bottom: 8rem;
   @include overflow-wrap(break-word);
   @include blur;
-
-  [data-header-desktop='normal'] & {
-    @include set-fixit-var(scroll-mt, fixit-var(global-scroll-margin-top));
-  }
+  @include sticky-top-offset;
 
   .toc-title {
     margin-block: 0 0.5em;

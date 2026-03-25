@@ -399,14 +399,6 @@ class FixIt {
     initAutosearch();
   }
 
-  initBreadcrumb() {
-    const $breadcrumbContainer = document.querySelector('.breadcrumb-container.sticky')
-    this.breadcrumbHeight = $breadcrumbContainer?.clientHeight ?? 0;
-    if (this.breadcrumbHeight) {
-      document.querySelector('main.fi-container')?.style.setProperty('--fi-breadcrumb-height', `${this.breadcrumbHeight}px`);
-    }
-  }
-
   initDetails(target = document) {
     forEach(target.querySelectorAll('.details:not(.disabled)'), ($details) => {
       const $summary = $details.querySelector('.details-summary');
@@ -860,14 +852,11 @@ class FixIt {
     const $toc = document.getElementById('toc-auto');
     $toc.style.visibility = 'visible';
     animateCSS($toc, ['animate__fadeIn', 'animate__faster'], true);
-    const $postMeta = document.querySelector('.post-meta');
-    $toc.style.marginTop = `${$postMeta.offsetTop + $postMeta.clientHeight}px`;
-
-    document.querySelector('.fi-container').addEventListener('resize', () => {
-      $toc.style.marginBottom = `${document.querySelector('.fi-container').clientHeight - document.querySelector('.post-footer').offsetTop}px`;
-    });
+    // document.querySelector('.fi-container').addEventListener('resize', () => {
+    //   $toc.style.marginBottom = `${document.querySelector('.fi-container').clientHeight - document.querySelector('.post-footer').offsetTop}px`;
+    // });
     this._tocOnScroll = this._tocOnScroll || (() => {
-      $toc.style.marginBottom = `${document.querySelector('.fi-container').clientHeight - document.querySelector('.post-footer').offsetTop}px`;
+      // $toc.style.marginBottom = `${document.querySelector('.fi-container').clientHeight - document.querySelector('.post-footer').offsetTop}px`;
       this._updateTocActiveState($tocCore, $headingElements, INDEX_OFFSET);
     });
     this._tocOnScroll();
@@ -1694,7 +1683,6 @@ class FixIt {
       this.initMenu();
       this.initSwitchTheme();
       this.initSearch();
-      this.initBreadcrumb();
       this.initCookieconsent();
       this.initSiteTime();
       this.initServiceWorker();

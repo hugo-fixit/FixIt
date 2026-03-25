@@ -159,6 +159,10 @@ pre {
         line-start: attr(data-line-start number, 1),
         line-digit: attr(data-line-digit number, 1),
       ));
+
+      @include media('reduce-motion') {
+        transition: none;
+      }
     }
 
     // code preview
@@ -183,11 +187,11 @@ pre {
       color: fixit-var(code-header-color);
       background-color: fixit-var(code-header-background-color);
       position: sticky;
-      top: fixit-var(breadcrumb-height);
       transition: border-radius 0s;
       cursor: pointer;
-      @include z-index(base);
+      @include z-index(base, 1);
       @include border-radius(top);
+      @include sticky-top-offset;
 
       + .code-wrapper {
         @include border-radius(bottom);
@@ -226,7 +230,7 @@ pre {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          @include z-index(base, 1);
+          @include z-index(base, 2);
         }
       }
 
@@ -265,18 +269,6 @@ pre {
         &.language-#{to-lower-case($type)} {
           // e.g., --fi-code-type: "JavaScript";
           @include set-fixit-var(code-type, '"#{$text}"');
-        }
-      }
-
-      [data-header-desktop='sticky'] & {
-        @include media('sm', 'up') {
-          top: calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height)});
-        }
-      }
-
-      [data-header-mobile='sticky'] & {
-        @include media('xs') {
-          top: calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height)});
         }
       }
 
@@ -618,9 +610,9 @@ pre {
     color: fixit-var(code-header-color);
     background-color: fixit-var(code-header-background-color);
     position: sticky;
-    top: fixit-var(breadcrumb-height);
-    @include z-index(base);
+    @include z-index(base, 1);
     @include border-radius(top);
+    @include sticky-top-offset;
 
     .tabs-items {
       display: flex;
@@ -695,18 +687,6 @@ pre {
         &.fullscreen-btn {
           display: none;
         }
-      }
-    }
-
-    [data-header-desktop='sticky'] & {
-      @include media('sm', 'up') {
-        top: calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height)});
-      }
-    }
-
-    [data-header-mobile='sticky'] & {
-      @include media('xs') {
-        top: calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height)});
       }
     }
 

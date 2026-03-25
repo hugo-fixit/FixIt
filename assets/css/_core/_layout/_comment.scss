@@ -1,0 +1,28 @@
+#comments {
+  padding: 2rem 1rem;
+  display: flex;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    padding-inline: 0.5rem;
+
+    @include media('sm', 'down') {
+      display: none;
+    }
+  }
+
+  .comment {
+    padding-inline: 0.5rem;
+    @extend %page-style;
+
+    iframe {
+      width: 100%;
+    }
+  }
+
+  @include media('print') {
+    display: none !important;
+  }
+}
