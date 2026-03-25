@@ -27,7 +27,6 @@
       align-items: flex-start;
       justify-content: center;
       padding-inline: 1rem;
-      gap: 0.5rem;
 
       &[data-reverse] {
         flex-direction: row-reverse;
@@ -53,22 +52,28 @@
       }
     }
 
-    // adjust breadcrumb flex when asides are empty
-    &:has(main > aside:first-child:empty ~ aside:not(:empty)) .breadcrumb-container {
-      .breadcrumb {
+    // when left aside is hidden: expand content and remove left spacer
+    &:has(main > aside:first-child:empty ~ aside:not(:empty)) {
+      .breadcrumb-container .breadcrumb,
+      #comments .comment {
         flex: 3;
       }
 
-      &::before {
+      .breadcrumb-container::before,
+      #comments::before {
         display: none;
       }
     }
-    &:has(main > aside:first-child:not(:empty) ~ aside#toc-auto:empty) .breadcrumb-container {
-      .breadcrumb {
+
+    // when right aside is hidden: expand content and remove right spacer
+    &:has(main > aside:first-child:not(:empty) ~ aside#toc-auto:empty) {
+      .breadcrumb-container .breadcrumb,
+      #comments .comment {
         flex: 3;
       }
 
-      &::after {
+      .breadcrumb-container::after,
+      #comments::after {
         display: none;
       }
     }
@@ -79,4 +84,5 @@
 @import "breadcrumb";
 @import "page-style";
 @import "pagination";
+@import "comment";
 @import "footer";

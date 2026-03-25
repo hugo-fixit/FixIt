@@ -4,6 +4,8 @@
 
 # === init ===
 [init]
+hugoVersionError = "Hugo のバージョンが低すぎます。\n\n現在の Hugo バージョンは {{ .Current }} ですが、FixIt がサポートする最小バージョンは {{ .Minimal }} です。\n\n自分のコンピューターで Hugo を実行している場合は、https://gohugo.io/getting-started/installing/#upgrade-hugo でアップグレードガイドを参照してください。\n\nサードパーティプラットフォームにデプロイしている場合は、Hugo バージョンを適切に設定してください。"
+hugoExtendedWarn = "SCSS サポートには Hugo Extended バージョンが必要です。"
 configurationError = "設定ファイルエラー\nまだ FixIt のバージョンパラメータを正しく設定していません。 https://fixit.lruihao.cn/zh-cn/documentation/basics/#theme-configuration を参照してください"
 compatibilityError = "互換性エラー ({{ .From }} -> {{ .To }}):\n互換性のない更新が行われました。 https://github.com/hugo-fixit/FixIt/releases を参照してください"
 devVersionWarn = "開発版の FixIt を使用しています。安定版の使用を検討してください。\n https://github.com/hugo-fixit/FixIt/releases を参照"

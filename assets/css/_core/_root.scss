@@ -26,7 +26,6 @@
     global-font-size: $global-font-size,
     global-font-weight: $global-font-weight,
     global-line-height: $global-line-height,
-    global-scroll-margin-top: $global-scroll-margin-top,
     global-border-radius: $global-border-radius,
 
     // Header
@@ -59,10 +58,12 @@
     bezier: cubic-bezier(.4, 0, .2, 1),
 
     // Other utilities
-    breadcrumb-height: 0px,
     divider-edge-weak: linear-gradient(to right, transparent, fixit-var(divider-bg, #d0d0d5), transparent),
-    scroll-mt: calc(#{fixit-var(header-height)} + #{fixit-var(global-scroll-margin-top)}),
   ));
+
+  &:has(.breadcrumb-container.sticky) {
+    @include set-fixit-var(breadcrumb-height, 2.5rem);
+  }
 }
 
 // ----------------------------------------

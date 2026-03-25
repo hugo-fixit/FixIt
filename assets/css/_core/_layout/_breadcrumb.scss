@@ -3,7 +3,6 @@
   font-size: 0.75rem;
   background-color: fixit-var(global-background-color);
   display: flex;
-  gap: 0.5rem;
   @include z-index(sticky);
 
   &:has(~ main[data-reverse]) {
@@ -23,40 +22,48 @@
 
   &.sticky {
     position: sticky;
-    top: fixit-var(header-height);
+    top: 0px;
+    transition: top 0.5s ease;
 
     @include media('sm', 'up') {
-      body:not([data-header-desktop='sticky']) & {
-        top: 0;
+      [data-header-desktop='sticky'] &,
+      [data-header-desktop='auto'] & {
+        top: fixit-var(header-height);
       }
-      // adjust the scroll margin top of the content anchors on the page
-      body:not([data-header-desktop='auto']) &+.fi-container .content [id] {
-        scroll-margin-top: calc(#{fixit-var(scroll-mt)} + #{fixit-var(breadcrumb-height)});
+      [data-header-desktop='auto']:has(#header-desktop.animate__fadeOutUp) & {
+        top: 0px;
       }
     }
 
     @include media('xs') {
-      body:not([data-header-mobile='sticky']) & {
-        top: 0;
+      [data-header-mobile='sticky'] &,
+      [data-header-mobile='auto'] & {
+        top: fixit-var(header-height);
       }
-      // adjust the scroll margin top of the content anchors on the page
-      body:not([data-header-mobile='auto']) &+.fi-container .content [id] {
-        scroll-margin-top: calc(#{fixit-var(scroll-mt)} + #{fixit-var(breadcrumb-height)});
+      [data-header-mobile='auto']:has(#header-mobile.animate__fadeOutUp) & {
+        top: 0px;
       }
+    }
+
+    @include media('reduce-motion') {
+      transition: none;
     }
   }
 
   .breadcrumb {
     display: flex;
-    flex-wrap: wrap;
-    padding: 0.5rem 0;
+    flex-wrap: nowrap;
+    padding: 0.5rem;
     margin: 0 auto;
     list-style: none;
-    border-bottom: 1px inset fixit-var(global-border-color);
+    box-shadow: inset 0 -1px 0 fixit-var(global-border-color);
+    overflow-x: auto;
+    overflow-y: hidden;
     @extend %page-style;
 
     .breadcrumb-item {
       display: flex;
+      flex-shrink: 0;
 
       + .breadcrumb-item::before {
         content: attr(data-separator);

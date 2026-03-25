@@ -1,0 +1,318 @@
+
+{{- /*
+  Head Partial - Comprehensive head section template
+
+  This partial consolidates all head-related content including:
+  - META: Meta tags for SEO, Open Graph, Twitter Cards, and app metadata
+  - LINK: Favicon, canonical links, RSS feeds, and CSS stylesheet loading
+  - SEO: Schema.org structured data for pages and homepage
+  - SCRIPT: Early-loaded scripts (e.g., theme color scheme detection)
+
+  Called from: layouts/baseof.html
+*/ -}}
+
+{{- $fingerprint := .Site.Store.Get "fingerprint" -}}
+{{- $cdn := .Site.Store.Get "cdn" | default dict -}}
+
+{{- /* ========== META: Meta Tags ========== */ -}}
+{{- $author := partial "function/get-author-map.html" .Params.author -}}
+
+<meta name="author" content="{{ $author.name }}">
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage | and .Summary }}{{ .Summary | plainify }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
+
+{{- $keywords := .Keywords -}}
+{{- if not $keywords -}}
+  {{- if .IsPage | and .Params.tags -}}
+    {{- $keywords = .Params.tags -}}
+  {{- else -}}
+    {{- $keywords = .Site.Params.keywords -}}
+  {{- end -}}
+{{- end -}}
+{{- with $keywords -}}
+  <meta name="keywords" content='{{ delimit . ", " }}'>
+{{- end -}}
+
+{{- template "_internal/schema.html" . -}}
+{{- template "_internal/opengraph.html" . -}}
+{{- template "_internal/twitter_cards.html" . -}}
+{{- with .Site.Params.social.Twitter -}}
+  <meta name="twitter:creator" content="@{{ . }}" />
+{{- end -}}
+
+<meta name="application-name" content="{{ .Site.Params.app.title | default .Site.Title }}">
+<meta name="apple-mobile-web-app-title" content="{{ .Site.Params.app.title | default .Site.Title }}">
+
+{{- with .Site.Params.app.themeColor -}}
+  {{- $color := . -}}
+  {{- if ne (len $color) 2 -}}
+    {{- $color = dict "light" . "dark" . -}}
+  {{- end -}}
+  <meta name="theme-color" data-light="{{ $color.light }}" data-dark="{{ $color.dark }}" content="{{ $color.light }}">
+{{- end -}}
+
+{{- with .Site.Params.app.tileColor -}}
+  <meta name="msapplication-TileColor" content="{{ . }}">
+{{- end -}}
+
+{{- /* Mastodon Verification */ -}}
+{{- with .Site.Params.social.Mastodon -}}
+  {{- $id := "" -}}
+  {{- $prefix := "https://mastodon.social/" -}}
+  {{- if reflect.IsMap . -}}
+    {{- $id = .Id | default .id -}}
+    {{- $prefix = .Prefix | default .prefix | default $prefix -}}
+  {{- end -}}
+  {{- if $id | and $prefix -}}
+    {{- $link := printf "%s/%s" $prefix $id -}}
+    {{- $email := printf "%s@%s" (strings.TrimPrefix "@" $id) (urls.Parse $prefix).Host -}}
+    <link rel="me" href="{{ $link }}" />
+    <meta name="fediverse:creator" content="{{ $email }}" />
+  {{- end -}}
+{{- end -}}
+
+{{- /* ========== LINK: Favicon, Canonical, Feeds, Stylesheets ========== */ -}}
+{{- $title := printf "%s %s %s" .Title .Site.Params.titleDelimiter .Site.Title -}}
+{{- if .IsHome -}}
+  {{- $title = .Site.Title -}}
+{{- end -}}
+
+{{- /* Favicon links */ -}}
+{{- if not .Site.Params.app.noFavicon -}}
+  {{- $relURL := relURL "" -}}
+  {{- with .Site.Params.app.svgFavicon -}}
+    <link rel="icon" href="{{ . }}">
+  {{- else -}}
+    <link rel="shortcut icon" type="image/x-icon" href="{{ $relURL }}favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ $relURL }}favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ $relURL }}favicon-16x16.png">
+  {{- end -}}
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ $relURL }}apple-touch-icon.png">
+  {{- with .Site.Params.app.iconColor -}}
+    <link rel="mask-icon" href="{{ $relURL }}safari-pinned-tab.svg" color="{{ . }}">
+  {{- end -}}
+  {{- if eq .Site.Params.enablePWA true -}}
+    <link rel="manifest" href="{{ $relURL }}site.webmanifest">
+  {{- end -}}
+{{- end -}}
+
+{{- /* Canonical and pagination links */ -}}
+<link rel="canonical" type="text/html" href="{{ .Permalink }}" title="{{ $title }}" />
+{{- with .Prev -}}
+  <link rel="prev" type="text/html" href="{{ .Permalink }}" title="{{ .Title }}" />
+{{- end -}}
+{{- with .Next -}}
+  <link rel="next" type="text/html" href="{{ .Permalink }}" title="{{ .Title }}" />
+{{- end -}}
+
+{{- /* Alternative output formats (Atom, RSS, etc.) */ -}}
+{{- range .AlternativeOutputFormats -}}
+  {{- printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink $title | safeHTML -}}
+{{- end -}}
+
+{{- /* JSON Feed support */ -}}
+{{- with .OutputFormats.Get "jsonfeed" -}}
+  <link rel="alternate" type="application/feed+json" href="{{ .Permalink }}" title="{{ $title }}" />
+{{- end -}}
+
+{{- /* Core stylesheets */ -}}
+{{- /* Config CSS */ -}}
+{{- $options := dict "Source" "css/config.template.scss" "Template" "css/config.scss" "Fingerprint" $fingerprint -}}
+{{- $toCSS := dict "targetPath" "css/config.min.css" "enableSourceMap" true -}}
+{{- $options = dict "Context" . "ToCSS" $toCSS | merge $options -}}
+{{- partial "plugin/style.html" $options -}}
+
+{{- /* Theme CSS */ -}}
+{{- $options := dict "Source" "css/style.scss" "Fingerprint" $fingerprint -}}
+{{- $toCSS := dict "targetPath" "css/style.min.css" "enableSourceMap" true -}}
+{{- $options = dict "Context" . "ToCSS" $toCSS | merge $options -}}
+{{- partial "plugin/style.html" $options -}}
+
+{{- /* Font Awesome Icons */ -}}
+{{- $source := $cdn.fontawesomeFreeCSS | default "lib/fontawesome-free/all.min.css" -}}
+{{- $options := dict "Source" $source "Fingerprint" $fingerprint "Preload" true -}}
+{{- partial "plugin/style.html" $options -}}
+
+{{- /* Animate.css Animation Library */ -}}
+{{- $source := $cdn.animateCSS | default "lib/animate/animate.min.css" -}}
+{{- $options := dict "Source" $source "Fingerprint" $fingerprint "Preload" true -}}
+{{- partial "plugin/style.html" $options -}}
+
+{{- /* ========== SEO: Structured Data (Schema.org) ========== */ -}}
+{{- $params := partial "function/params.html" -}}
+
+{{- /* Search Engine Verification */ -}}
+{{- with .Site.Params.verification.google -}}
+  <meta name="google-site-verification" content="{{ . }}" />
+{{- end -}}
+{{- with .Site.Params.verification.bing -}}
+  <meta name="msvalidate.01" content="{{ . }}" />
+{{- end -}}
+{{- with .Site.Params.verification.yandex -}}
+  <meta name="yandex-verification" content="{{ . }}" />
+{{- end -}}
+{{- with .Site.Params.verification.pinterest -}}
+  <meta name="p:domain_verify" content="{{ . }}" />
+{{- end -}}
+{{- with .Site.Params.verification.baidu -}}
+  <meta name="baidu-site-verification" content="{{ . }}" />
+{{- end -}}
+{{- with .Site.Params.verification.so -}}
+  <meta name="360-site-verification" content="{{ . }}" />
+{{- end -}}
+{{- with .Site.Params.verification.sogou -}}
+  <meta name="sogou_site_verification" content="{{ . }}" />
+{{- end -}}
+
+{{- /* Homepage Structured Data */ -}}
+{{- if .IsHome -}}
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "url": "{{ .Permalink }}",
+    {{- with .Site.LanguageCode -}}
+      "inLanguage": "{{ . }}",
+    {{- end -}}
+    {{- with .Site.Params.author.name -}}
+      "author": {
+        "@type": "Person",
+        "name": {{ . | safeHTML }}
+      },
+    {{- end -}}
+    {{- with .Site.Params.description -}}
+      "description": {{ . | safeHTML }},
+    {{- end -}}
+    {{- $image := .Site.Params.seo.image -}}
+    {{- with dict "Path" $image | partial "function/resource.html" -}}
+      "image": {
+        "@type": "ImageObject",
+        "url": "{{ .Permalink }}",
+        "width": {{ .Width }},
+        "height": {{ .Height }}
+      },
+    {{- else -}}
+      {{- with $image -}}
+        "image": "{{ . | absURL }}",
+      {{- end -}}
+    {{- end -}}
+    {{- with .Site.Params.seo.thumbnailUrl -}}
+      {{- with dict "Path" . | partial "function/resource.html" -}}
+        "thumbnailUrl": "{{ .Permalink }}",
+      {{- else -}}
+        "thumbnailUrl": "{{ . | absURL }}",
+      {{- end -}}
+    {{- end -}}
+    {{- with .Site.Copyright -}}
+      "license": "{{ . | safeHTML }}",
+    {{- end -}}
+    "name": {{ .Site.Title | safeHTML }}
+  }
+  </script>
+
+{{- /* Page (Article) Structured Data */ -}}
+{{- else if .IsPage -}}
+  {{- $authorName := .Site.Params.author.name | default (T "single.author") -}}
+  {{- with .Params.author -}}
+    {{- if reflect.IsMap . -}}
+      {{- $authorName = cond (isset . "name") .name $authorName -}}
+    {{- else -}}
+      {{- $authorName = . -}}
+    {{- end -}}
+  {{- end -}}
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ .Title | safeHTML }},
+    "inLanguage": "{{ .Site.LanguageCode }}",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ .Permalink }}"
+    },
+    {{- $images := $params.seo.images | default slice -}}
+    {{- if not $images -}}
+      {{- with .Resources.GetMatch "featured-image-preview" -}}
+        {{- $images = slice "featured-image-preview" -}}
+      {{- end -}}
+      {{- with .Resources.GetMatch "featured-image" -}}
+        {{- $images = slice "featured-image" -}}
+      {{- end -}}
+    {{- end -}}
+    {{- with .Site.Params.seo.image -}}
+      {{- $images = $images | default (slice .) -}}
+    {{- end -}}
+    {{- with $images -}}
+      "image": [
+        {{- range $index, $value := . -}}
+          {{- if gt $index 0 }},{{ end -}}
+          {{- with dict "Path" $value | partial "function/resource.html" -}}
+            {
+              "@type": "ImageObject",
+              "url": "{{ .Permalink }}",
+              "width": {{ .Width }},
+              "height": {{ .Height }}
+            }
+          {{- else -}}
+            {{- with $value -}}
+              "{{ . | absURL }}"
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      ],
+    {{- end -}}
+    "genre": "{{ .Type }}",
+    {{- with .Params.tags -}}
+      "keywords": "{{ delimit . ", " }}",
+    {{- end -}}
+    "wordcount": {{ .WordCount }},
+    "url": "{{ .Permalink }}",
+    {{- if not .PublishDate.IsZero -}}
+      "datePublished": {{ .PublishDate.Format "2006-01-02T15:04:05-07:00" | safeHTML }},
+    {{- else if not .Date.IsZero -}}
+      "datePublished": {{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }},
+    {{- end -}}
+    {{- with .Lastmod -}}
+      "dateModified": {{ .Format "2006-01-02T15:04:05-07:00" | safeHTML }},
+    {{- end -}}
+    {{- with .Site.Copyright -}}
+      "license": {{ . | safeHTML }},
+    {{- end -}}
+    {{- $publisher := $authorName | dict "name" -}}
+    {{- $publisher = $params.seo.publisher | default dict | merge $publisher -}}
+    "publisher": {
+      "@type": "Organization",
+      "name": {{ $publisher.name | safeHTML }}
+      {{- $logo := $publisher.logoUrl -}}
+      {{- with dict "Path" $logo | partial "function/resource.html" -}}
+        ,"logo": {
+          "@type": "ImageObject",
+          "url": "{{ .Permalink }}",
+          "width": {{ .Width }},
+          "height": {{ .Height }}
+        }
+      {{- else -}}
+        {{- with $logo -}}
+          ,"logo": "{{ . | absURL }}"
+        {{- end -}}
+      {{- end -}}
+    },
+    {{- with $authorName -}}
+      "author": {
+        "@type": "Person",
+        "name": {{ . | safeHTML }}
+      },
+    {{- end -}}
+    "description": {{ .Description | safeHTML }}
+  }
+  </script>
+{{- end -}}
+
+{{- /* ========== SCRIPT: Early-Loaded Head Scripts ========== */ -}}
+
+{{- /* Theme Color Scheme Detection (runs before page render) */ -}}
+{{- $options := dict "targetPath" "js/head/color-scheme.min.js" "minify" hugo.IsProduction -}}
+{{- $options := dict "defaultTheme" .Site.Params.defaulttheme | dict "params" | merge $options -}}
+{{- if not hugo.IsProduction -}}
+  {{- $options = dict "sourceMap" "external" | merge $options -}}
+{{- end -}}
+{{- dict "Source" (resources.Get "js/head/color-scheme.js") "Build" $options "Fingerprint" $fingerprint | partial "plugin/script.html" -}}

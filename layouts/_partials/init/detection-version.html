@@ -2,6 +2,17 @@
 {{- $latest := $version -}}
 {{- $devOpts := .Site.Store.Get "devOpts" -}}
 
+{{- /* Check Hugo version */ -}}
+{{- $MINIMAL_HUGO_VERSION := "0.156.0" -}}
+{{- if lt hugo.Version $MINIMAL_HUGO_VERSION -}}
+  {{- errorf "\n\n%v\n\n" (dict "Current" hugo.Version "Minimal" $MINIMAL_HUGO_VERSION | T "init.hugoVersionError") -}}
+{{- end -}}
+
+{{- /* Check Hugo extend */ -}}
+{{- if eq hugo.IsExtended false -}}
+  {{- warnf "\n\n%v\n\n" (T "init.hugoExtendedWarn") -}}
+{{- end -}}
+
 {{- /* Check for updates */ -}}
 {{- if $devOpts.c4u -}}
   {{- $url := "https://api.github.com/repos/hugo-fixit/FixIt/releases/latest" -}}

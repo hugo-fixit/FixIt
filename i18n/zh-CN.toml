@@ -4,9 +4,11 @@
 
 # === init ===
 [init]
-configurationError = "配置文件错误\n您还没有正确配置 FixIt 的版本参数。参考 https://fixit.lruihao.cn/zh-cn/documentation/basics/#theme-configuration"
-compatibilityError = "兼容性错误 ({{ .From }} -> {{ .To }}):\n您进行了一次不兼容的更新。参考 https://github.com/hugo-fixit/FixIt/releases"
-devVersionWarn = "您正在使用开发版的 FixIt，请考虑使用稳定版。\n见 https://github.com/hugo-fixit/FixIt/releases"
+hugoVersionError = "Hugo 版本过低。\n\n目前使用的 Hugo 版本为 {{ .Current }}，FixIt 支持的最低的 Hugo 版本为 {{ .Minimal }}。\n\n如果你正在自己的计算机上运行 Hugo，请访问 https://gohugo.io/getting-started/installing/#upgrade-hugo 以查阅升级指南。\n\n如果你正在第三方平台上部署，请按照相应文档配置 Hugo 版本。"
+hugoExtendedWarn = "需要使用 Hugo Extended 版本来获得 SCSS 支持。"
+configurationError = "配置文件错误\n你还没有正确配置 FixIt 的版本参数。参考 https://fixit.lruihao.cn/zh-cn/documentation/basics/#theme-configuration"
+compatibilityError = "兼容性错误 ({{ .From }} -> {{ .To }}):\n你进行了一次不兼容的更新。参考 https://github.com/hugo-fixit/FixIt/releases"
+devVersionWarn = "你正在使用开发版的 FixIt，请考虑使用稳定版。\n见 https://github.com/hugo-fixit/FixIt/releases"
 devEnvWarn = "当前运行环境是“development”。“评论系统”、“PWA”、“CDN”、“fingerprint”和“统计”不会启用。"
 quicklyUpgrade = "使用命令快速升级："
 # === init ===
@@ -103,7 +105,7 @@ toggleCodeEditable = "切换可编辑代码块"
 downloadCode = "下载代码"
 toggleCodeFullscreen = "切换代码块全屏"
 expandCode = "展开或折叠代码块"
-cookieconsentMessage = "本网站使用 Cookies 来改善您的浏览体验。"
+cookieconsentMessage = "本网站使用 Cookies 来改善你的浏览体验。"
 cookieconsentDismiss = "同意"
 cookieconsentLink = "了解更多"
 # === partials/assets.html ===
@@ -166,7 +168,7 @@ bitcoin = "比特币"
 other = "页面没找到"
 
 [pageNotFoundText]
-other = "抱歉，您要查找的页面不存在。"
+other = "抱歉，你要查找的页面不存在。"
 # === 404.html ===
 
 # === offline ===
@@ -174,7 +176,7 @@ other = "抱歉，您要查找的页面不存在。"
 other = "离线"
 
 [offlineText]
-other = "您没有连接到 Internet，只有缓存的页面可用。"
+other = "你没有连接到 Internet，只有缓存的页面可用。"
 # === offline ===
 
 # === GitHub Alert ===

@@ -24,8 +24,9 @@
 
     {{- /* Content Encryption */ -}}
     {{- dict "Content" $content "Password" $params.password "Message" $params.message "Page" . | partial "plugin/fixit-encryptor.html" -}}
-
-    {{- /* Comment */ -}}
-    {{- partial "single/comment.html" . -}}
   </article>
+{{- end -}}
+
+{{- define "comments" -}}
+  {{- partial "layout/comment.html" . -}}
 {{- end -}}

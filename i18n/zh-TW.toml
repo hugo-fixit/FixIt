@@ -4,9 +4,11 @@
 
 # === init ===
 [init]
-configurationError = "配置文件錯誤\n您還沒有正確配置 FixIt 的版本參數。參考 https://fixit.lruihao.cn/zh-cn/documentation/basics/#theme-configuration"
-compatibilityError = "兼容性錯誤 ({{ .From }} -> {{ .To }}):\n您進行了一次不兼容的更新。参考 https://github.com/hugo-fixit/FixIt/releases"
-devVersionWarn = "您正在使用開發版的 FixIt，請考慮使用穩定版。\n見 https://github.com/hugo-fixit/FixIt/releases"
+hugoVersionError = "Hugo 版本過低。\n\n目前使用的 Hugo 版本為 {{ .Current }}，FixIt 支持的最老的 Hugo 版本為 {{ .Minimal }}。\n\n如果你正在自己的計算機上運行 Hugo，請訪問 https://gohugo.io/getting-started/installing/#upgrade-hugo 以查閱升級指南。\n\n如果你正在第三方平台上部署，請按照相應文檔配置 Hugo 版本。"
+hugoExtendedWarn = "需要使用 Hugo Extended 版本來獲得 SCSS 支持。"
+configurationError = "配置文件錯誤\n你還沒有正確配置 FixIt 的版本參數。參考 https://fixit.lruihao.cn/zh-cn/documentation/basics/#theme-configuration"
+compatibilityError = "兼容性錯誤 ({{ .From }} -> {{ .To }}):\n你進行了一次不兼容的更新。参考 https://github.com/hugo-fixit/FixIt/releases"
+devVersionWarn = "你正在使用開發版的 FixIt，請考慮使用穩定版。\n見 https://github.com/hugo-fixit/FixIt/releases"
 devEnvWarn = "當前運行環境是“development”。“評論系統”、“PWA”、“CDN”、“fingerprint”和“統計”不會啟用。"
 quicklyUpgrade = "使用命令快速升級："
 # === init ===
@@ -103,7 +105,7 @@ toggleCodeEditable = "切換可編輯程式碼區塊"
 downloadCode = "下載程式碼"
 toggleCodeFullscreen = "切換程式碼區塊全螢幕"
 expandCode = "展開或摺疊程式碼區塊"
-cookieconsentMessage = "本網站使用 Cookies 來改善您的流覽體驗。"
+cookieconsentMessage = "本網站使用 Cookies 來改善你的流覽體驗。"
 cookieconsentDismiss = "同意"
 cookieconsentLink = "瞭解更多"
 # === partials/assets.html ===
@@ -166,7 +168,7 @@ bitcoin = "比特幣"
 other = "找不到網頁"
 
 [pageNotFoundText]
-other = "抱歉，您要查找的頁面不存在。"
+other = "抱歉，你要查找的頁面不存在。"
 # === 404.html ===
 
 # === offline ===
@@ -174,7 +176,7 @@ other = "抱歉，您要查找的頁面不存在。"
 other = "離線"
 
 [offlineText]
-other = "您沒有連接到 Internet，只有緩存的頁面可用。"
+other = "你沒有連接到 Internet，只有緩存的頁面可用。"
 # === offline ===
 
 # === GitHub Alert ===

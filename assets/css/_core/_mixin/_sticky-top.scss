@@ -1,0 +1,56 @@
+/// Apply the shared sticky top offset used by TOC, collections, and code headers.
+/// 
+/// @param {boolean} $transition - Whether to include the transition for top changes (default: true).
+///
+/// Top offset rules:
+/// - Base: keep space for the breadcrumb bar when no sticky header override applies.
+/// - Desktop auto: offset by header height while the header is visible.
+/// - Desktop auto hidden: reset to 0 when the auto header has faded out.
+/// - Desktop/mobile sticky: offset by header height plus breadcrumb height.
+@mixin sticky-top-offset($transition: true) {
+  $sticky-top-bar-offset: calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height, 0px)});
+  $base-top-offset: fixit-var(breadcrumb-height, 0px);
+
+  // Base offset reserved for the breadcrumb bar.
+  top: $base-top-offset;
+
+  @include media('sm', 'up') {
+    [data-header-desktop='sticky'] &,
+    [data-header-desktop='auto'] & {
+      // Sticky or auto desktop header uses the same combined header and breadcrumb offset.
+      top: $sticky-top-bar-offset;
+    }
+
+    [data-header-desktop='auto']:has(#header-desktop.animate__fadeOutUp) & {
+      // Once the auto header is hidden, remove the extra top offset.
+      top: $base-top-offset;
+    }
+  }
+
+  @include media('xs') {
+    [data-header-mobile='sticky'] &,
+    [data-header-mobile='auto'] & {
+      // Sticky or auto mobile header uses the same combined header and breadcrumb offset.
+      top: $sticky-top-bar-offset;
+    }
+
+    [data-header-mobile='auto']:has(#header-mobile.animate__fadeOutUp) & {
+      // Once the auto header is hidden, remove the extra top offset.
+      top: $base-top-offset;
+    }
+  }
+
+  [data-header-mobile='sticky'] & {
+    @include media('xs') {
+      // Sticky mobile header uses the same combined header and breadcrumb offset.
+      top: $sticky-top-bar-offset;
+    }
+  }
+
+  @if $transition {
+    transition: top 0.5s ease;
+    @include media('reduce-motion') {
+      transition: none;
+    }
+  }
+}
