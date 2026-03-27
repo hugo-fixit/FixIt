@@ -75,7 +75,7 @@
   break-after: page;
 }
 
-@include media('xs', 'up') {
+@include media('sm', 'up') {
   .d-none-desktop {
     display: none;
   }

@@ -57,6 +57,19 @@
   }
 }
 
+/// Define a single theme variable (generate definitions for both light and dark)
+/// @param {String} $name - CSS variable name (without prefix)
+/// @param {Map} $vars -- Variable map, key is CSS variable name, value is Map(light: $light-val, dark: $dark-val)
+/// @example
+///   @include define-theme-var(header-background-color, (light: rgba($header-background-color, 0.7), dark: rgba($header-background-color-dark, 0.5)));
+@mixin define-theme-var($name, $vars) {
+  #{$rootPrefix}#{$name}: #{map-get($vars, light)};
+
+  [data-theme=dark] & {
+    #{$rootPrefix}#{$name}: #{map-get($vars, dark)};
+  }
+} 
+
 /// Define dual-theme variables (generate definitions for both light and dark simultaneously)
 /// @param {Map} $vars - Variable map, key is CSS variable name, value is Map(light: $light-val, dark: $dark-val)
 /// @example
