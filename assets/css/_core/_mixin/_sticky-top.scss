@@ -21,7 +21,7 @@
       top: $sticky-top-bar-offset;
     }
 
-    [data-header-desktop='auto']:has(#header-desktop.animate__fadeOutUp) & {
+    [data-header-desktop='auto']:has(#header-desktop.header__fadeOutUp) & {
       // Once the auto header is hidden, remove the extra top offset.
       top: $base-top-offset;
     }
@@ -34,7 +34,7 @@
       top: $sticky-top-bar-offset;
     }
 
-    [data-header-mobile='auto']:has(#header-mobile.animate__fadeOutUp) & {
+    [data-header-mobile='auto']:has(#header-mobile.header__fadeOutUp) & {
       // Once the auto header is hidden, remove the extra top offset.
       top: $base-top-offset;
     }

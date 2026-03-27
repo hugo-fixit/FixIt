@@ -30,7 +30,7 @@
       [data-header-desktop='auto'] & {
         top: fixit-var(header-height);
       }
-      [data-header-desktop='auto']:has(#header-desktop.animate__fadeOutUp) & {
+      [data-header-desktop='auto']:has(#header-desktop.header__fadeOutUp) & {
         top: 0px;
       }
     }
@@ -40,7 +40,7 @@
       [data-header-mobile='auto'] & {
         top: fixit-var(header-height);
       }
-      [data-header-mobile='auto']:has(#header-mobile.animate__fadeOutUp) & {
+      [data-header-mobile='auto']:has(#header-mobile.header__fadeOutUp) & {
         top: 0px;
       }
     }

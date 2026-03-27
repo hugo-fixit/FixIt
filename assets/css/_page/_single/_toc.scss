@@ -93,7 +93,6 @@
   visibility: hidden;
   margin-bottom: 8rem;
   @include overflow-wrap(break-word);
-  @include blur;
   @include sticky-top-offset;
 
   .toc-title {
