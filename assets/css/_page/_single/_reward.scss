@@ -51,11 +51,7 @@
       background-color: fixit-var(global-background-color);
       @include z-index(fixed);
       @include border-radius;
-      box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.2);
-
-      [data-theme=dark] & {
-        box-shadow: 0 0 1.5rem 0 rgba(255, 255, 255, 0.2);
-      }
+      @include apply-theme-property(box-shadow, (light: 0 0 1.5rem 0 rgba(0, 0, 0, 0.2), dark: 0 0 1.5rem 0 rgba(255, 255, 255, 0.2)));
     }
   }
 
@@ -70,8 +66,8 @@
     background-color: fixit-var(global-background-color);
     vertical-align: text-top;
     line-height: 1rem;
-    @include border-radius;
     transition: all 0.3s ease-out;
+    @include border-radius;
 
     &:active,
     &:hover {

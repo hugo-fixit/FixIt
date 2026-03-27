@@ -26,10 +26,6 @@ pre {
     line-height: inherit;
     min-width: max-content;
     @include border-radius(0);
-
-    [data-theme=dark] & {
-      background-color: transparent;
-    }
   }
 
   img {
@@ -120,7 +116,7 @@ pre {
   // Line numbers
   .lnt,
   .ln {
-    color: fixit-var(secondary);
+    color: fixit-var(global-font-secondary-color);
     @include user-select(none);
   }
 
@@ -459,7 +455,7 @@ pre {
           min-width: calc(#{fixit-var(line-digit)} * 1ch);
           padding-inline: 0.75rem;
           flex-shrink: 0;
-          color: fixit-var(secondary);
+          color: fixit-var(global-font-secondary-color);
           background-color: fixit-var(code-block-background-color);
         }
 
@@ -486,11 +482,7 @@ pre {
 
     // add border for non-classic mode
     &:not([data-mode='classic']) {
-      border: 1px solid darken($code-background-color, 3%);
-
-      [data-theme=dark] & {
-        border-color: darken($code-background-color-dark, 3%);
-      }
+      border: 1px solid fixit-var(global-border-color-light);
     }
 
     &[data-mode='mac'] {
@@ -580,7 +572,7 @@ pre {
 .code-tabs {
   margin: 0.5rem 0;
   background-color: fixit-var(code-block-background-color);
-  border: 1px solid fixit-var(global-border-color);
+  border: 1px solid fixit-var(global-border-color-light);
   @include border-radius;
 
   &[data-shadow='always'] {
@@ -610,6 +602,7 @@ pre {
     color: fixit-var(code-header-color);
     background-color: fixit-var(code-header-background-color);
     position: sticky;
+    border-bottom: 1px solid fixit-var(global-border-color);
     @include z-index(base, 1);
     @include border-radius(top);
     @include sticky-top-offset;
@@ -630,7 +623,7 @@ pre {
         padding: 0.4rem 0.8rem;
         cursor: pointer;
         font-weight: bold;
-        color: fixit-var(secondary);
+        color: fixit-var(global-font-secondary-color);
         white-space: nowrap;
         @include user-select(none);
         @include border-radius;
@@ -654,7 +647,7 @@ pre {
         translate: 2px 2px;
         width: calc(anchor-size(width) - 0.25rem);
         height: calc(anchor-size(height) - 0.25rem);
-        box-shadow: inset 0 0 1rem 0.25rem color-mix(in srgb, fixit-var(secondary) 30%, transparent);
+        box-shadow: inset 0 0 1rem 0.25rem color-mix(in srgb, fixit-var(global-font-secondary-color) 30%, transparent);
         pointer-events: none;
         transition: 0.3s ease-in-out;
         @include border-radius;

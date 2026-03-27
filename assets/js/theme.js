@@ -1514,31 +1514,40 @@ class FixIt {
   }
 
   onScroll() {
-    const $headers = [];
     const ACCURACY = 20;
+    const $allHeaders = document.querySelectorAll('.wrapper > header');
+    const $autoHeaders = [];
     const $backToTop = document.querySelector('.back-to-top');
     const $readingProgressBar = document.querySelector('.reading-progress-bar');
     if (document.body.dataset.headerDesktop === 'auto') {
-      $headers.push(document.getElementById('header-desktop'));
+      $autoHeaders.push(document.getElementById('header-desktop'));
     }
     if (document.body.dataset.headerMobile === 'auto') {
-      $headers.push(document.getElementById('header-mobile'));
+      $autoHeaders.push(document.getElementById('header-mobile'));
     }
     $backToTop?.addEventListener('click', () => {
       scrollIntoView('body');
     });
+    let timer = null;
     window.addEventListener('scroll', (event) => {
+      forEach($allHeaders, ($header) => {
+        $header.classList.add('active');
+      });
+      timer = setTimeout(() => {
+        forEach($allHeaders, ($header) => {
+          $header.classList.remove('active');
+        });
+      }, 300);
       if (this.disableScrollEvent) {
         event.preventDefault();
         return;
       }
       this.newScrollTop = getScrollTop();
       const scroll = this.newScrollTop - this.oldScrollTop;
-      const isTop = this.newScrollTop <= 0;
       if (Math.abs(scroll) > ACCURACY) {
         document.getElementById('mask').click();
         const isScrollingDown = scroll > 0;
-        forEach($headers, ($header) => {
+        forEach($autoHeaders, ($header) => {
           if (isScrollingDown) {
             $header.classList.remove('header__fadeInDown');
             animateCSS($header, ['header__fadeOutUp'], true);
@@ -1548,7 +1557,7 @@ class FixIt {
           }
         });
       } else if (this.newScrollTop <= 0) {
-        forEach($headers, ($header) => {
+        forEach($autoHeaders, ($header) => {
           $header.classList.remove('header__fadeOutUp');
           animateCSS($header, ['header__fadeInDown'], true);
         });

@@ -45,7 +45,7 @@
 
   .post-meta {
     font-size: 0.875rem;
-    color: fixit-var(secondary);
+    color: fixit-var(global-font-secondary-color);
 
     span {
       display: inline-block;
@@ -167,10 +167,7 @@
       line-height: 1.25;
       margin-top: 1.5rem;
       margin-bottom: 1rem;
-
-      [data-theme=dark] & {
-        font-weight: bolder;
-      }
+      @include apply-theme-property(font-weight, (light: bold, dark: bolder));
 
       &:hover,
       &:target {
@@ -234,7 +231,7 @@
     }
 
     li::marker {
-      color: fixit-var(secondary);
+      color: fixit-var(global-font-secondary-color);
     }
     li:hover::marker {
       color: fixit-var(single-link-hover-color);
@@ -251,7 +248,7 @@
       }
     }
     li[data-task='x'] {
-      @include set-fixit-var(checkbox-color, fixit-var(secondary));
+      @include set-fixit-var(checkbox-color, fixit-var(global-font-secondary-color));
 
       .checkbox-icon {
         opacity: 0.6;
@@ -260,7 +257,7 @@
     li[data-task='-'] {
       opacity: 0.6;
       text-decoration: line-through rgba(145, 145, 145, 0.6);
-      @include set-fixit-var(task-color, fixit-var(secondary));
+      @include set-fixit-var(task-color, fixit-var(global-font-secondary-color));
     }
     li[data-task='/'] {
       @include set-fixit-var(task-color, fixit-var(success));
@@ -285,7 +282,7 @@
       background-color: fixit-var(code-block-background-color);
 
       rt {
-        color: fixit-var(secondary);
+        color: fixit-var(global-font-secondary-color);
       }
     }
 

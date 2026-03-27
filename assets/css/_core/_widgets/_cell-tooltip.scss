@@ -1,11 +1,6 @@
 body {
   .cell-tooltip {
-    --tooltip-bg: #ffffff;
-    --tooltip-color: #0f172a;
-
-    [data-theme=dark] & {
-      --tooltip-bg: #39393c;
-      --tooltip-color: #e2e2e6;
-    }
+    @include apply-theme-property(--tooltip-bg, (light: #ffffff, dark: #39393c));
+    @include apply-theme-property(--tooltip-color, (light: #0f172a, dark: #e2e2e6));
   }
 }

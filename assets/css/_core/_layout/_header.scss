@@ -13,12 +13,9 @@ header {
     background-color: fixit-var(header-background-color);
   }
 
-  &:hover {
-    box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.125);
-
-    [data-theme=dark] & {
-      box-shadow: 0 0 1.5rem 0 rgba(255, 255, 255, 0.125);
-    }
+  &:hover,
+  &.active {
+    @include apply-theme-property(box-shadow, (light: 0 0 1.5rem 0 rgba(0, 0, 0, 0.125), dark: 0 0 1.5rem 0 rgba(255, 255, 255, 0.125)));
   }
 
   &.animate__animated.header__fadeInDown {
@@ -286,13 +283,9 @@ header {
         background-color: fixit-var(header-background-color);
         max-height: 60vh;
         overflow-y: auto;
-        @include border-radius;
         transition: box-shadow 0.3s ease;
-        box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.1);
-
-        [data-theme=dark] & {
-          box-shadow: 0 0 1.5rem 0 rgba(255, 255, 255, 0.1);
-        }
+        @include border-radius;
+        @include apply-theme-property(box-shadow, (light: 0 0 1.5rem 0 rgba(0, 0, 0, 0.1), dark: 0 0 1.5rem 0 rgba(255, 255, 255, 0.1)));
 
         .menu-item {
           height: fixit-var(submenu-height);
@@ -388,12 +381,8 @@ header {
       display: none;
       overflow-y: auto;
       max-height: 70vh;
-      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
       @include scrollbar-width(none, 0);
-
-      [data-theme=dark] & {
-        box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
-      }
+      @include apply-theme-property(box-shadow, (light: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1), dark: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1)));
 
       .search-wrapper {
         display: flex;
@@ -438,11 +427,7 @@ header {
         padding: 0 1rem;
 
         &:not(.menu-system):hover {
-          background-color: #f2f2f3;
-
-          [data-theme=dark] & {
-            background-color: #535355;
-          }
+          @include apply-theme-property(background-color, (light: #f2f2f3, dark: #535355));
         }
 
         .menu-link {
@@ -501,11 +486,7 @@ header {
         }
 
         .menu-item:hover {
-          background-color: #e7e7ea;
-
-          [data-theme=dark] & {
-            background-color: #5d5d5f;
-          }
+          @include apply-theme-property(background-color, (light: #e7e7ea, dark: #5d5d5f));
         }
       }
 
@@ -544,10 +525,7 @@ header {
   top: fixit-var(header-height);
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
   @include z-index(fixed);
-
-  [data-theme=dark] & {
-    box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
-  }
+  @include apply-theme-property(box-shadow, (light: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1), dark: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1)));
 
   &.desktop {
     right: 2rem;
@@ -589,7 +567,7 @@ header {
           font-size: 0.875rem;
           float: right;
           text-align: right;
-          color: fixit-var(secondary);
+          color: fixit-var(global-font-secondary-color);
         }
 
         .suggestion-context {
@@ -610,11 +588,7 @@ header {
         }
 
         &.cursor {
-          background: darken($code-background-color, 5%);
-
-          [data-theme=dark] & {
-            background: lighten($code-background-color-dark, 5%);
-          }
+          @include apply-theme-property(background-color, (light: darken($code-background-color, 5%), dark: lighten($code-background-color-dark, 5%)));
         }
 
         &:hover {
@@ -640,7 +614,7 @@ header {
       padding: 0.5rem 1rem;
       float: right;
       font-size: 0.8rem;
-      color: fixit-var(secondary);
+      color: fixit-var(global-font-secondary-color);
       @include link(false, false);
 
       a {

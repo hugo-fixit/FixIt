@@ -246,19 +246,11 @@ tab-container {
         color: #ffffff;
         background-color: fixit-var(primary);
         box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.3);
-
-        [data-theme=dark] & {
-          background-color: fixit-var(primary);
-          box-shadow: 0 0.125rem 0.5rem rgba(255, 255, 255, 0.3);
-        }
+        @include apply-theme-property(box-shadow, (light: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.3), dark: 0 0.125rem 0.5rem rgba(255, 255, 255, 0.3)));
       }
 
       &[aria-selected='false']:hover {
-        background-color: rgba(175, 184, 193, 0.4);
-
-        [data-theme=dark] & {
-          background-color: rgba(99, 110, 123, 0.6);
-        }
+        @include apply-theme-property(background-color, (light: rgba(175, 184, 193, 0.4), dark: rgba(99, 110, 123, 0.6)));
       }
     }
 
@@ -514,13 +506,9 @@ tab-container {
       position-anchor: #{$rootPrefix}tab-segment-active;
       inset: anchor(inside);
       background-color: fixit-var(global-background-color);
-      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
       transition: all 0.15s ease, top, bottom 0s;
       @include border-radius;
-
-      [data-theme=dark] & {
-        box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
-      }
+      @include apply-theme-property(box-shadow, (light: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1), dark: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1)));
     }
   }
 }
@@ -623,11 +611,7 @@ tab-container .tab-panel:not([hidden]) {
       > .tab-button {
         &[aria-selected='true'] {
           background-color: fixit-var(global-background-color);
-          box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
-
-          [data-theme=dark] & {
-            box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
-          }
+          @include apply-theme-property(box-shadow, (light: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1), dark: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1)));
         }
       }
     }
