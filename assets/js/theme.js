@@ -80,11 +80,12 @@ class FixIt {
   initMenuMobile() {
     const $menuToggleMobile = document.getElementById('menu-toggle-mobile');
     const $menuMobile = document.getElementById('menu-mobile');
+    const $mask = document.getElementById('mask');
     $menuToggleMobile.addEventListener('click', (event) => {
-      document.body.classList.toggle('blur');
+      $mask.classList.toggle('blur');
       $menuToggleMobile.classList.toggle('active');
       $menuMobile.classList.toggle('active');
-      this.disableScrollEvent = document.body.classList.contains('blur');
+      this.disableScrollEvent = $mask.classList.contains('blur');
     }, false);
     this._menuMobileOnClickMask = this._menuMobileOnClickMask || (() => {
       $menuToggleMobile.classList.remove('active');
@@ -175,6 +176,7 @@ class FixIt {
     const $searchLoading = document.getElementById(`search-loading-${suffix}`);
     const $searchClear = document.getElementById(`search-clear-${suffix}`);
     const $searchCancel = document.getElementById('search-cancel-mobile');
+    const $mask = document.getElementById('mask');
 
     // goto the PostChat panel rather than search results
     if (searchConfig.type === 'post-chat' && window.postChatUser) {
@@ -194,12 +196,12 @@ class FixIt {
       this._searchMobileOnce = true;
       $searchInput.addEventListener('focus', () => {
         this.disableScrollEvent = true;
-        document.body.classList.add('blur');
+        $mask.classList.add('blur');
         $header.classList.add('open');
       }, false);
       $searchCancel.addEventListener('click', () => {
         this.disableScrollEvent = false;
-        document.body.classList.remove('blur');
+        $mask.classList.remove('blur');
         document.getElementById('menu-toggle-mobile').classList.remove('active');
         document.getElementById('menu-mobile').classList.remove('active');
         this._resetSearchUI($header, $searchLoading, $searchClear, this._searchMobile);
@@ -215,7 +217,7 @@ class FixIt {
     } else {
       this._searchDesktopOnce = true;
       $searchToggle.addEventListener('click', () => {
-        document.body.classList.add('blur');
+        $mask.classList.add('blur');
         $header.classList.add('open');
         $searchInput.focus();
         this.disableScrollEvent = true;
@@ -387,7 +389,7 @@ class FixIt {
         }
       );
       autosearch.on('autocomplete:selected', (_event, suggestion, _dataset, _context) => {
-        document.getElementById('mask')?.click();
+        $mask?.click();
         window.location.assign(suggestion.uri);
       });
       if (_isMobile) {
@@ -852,11 +854,7 @@ class FixIt {
     const $toc = document.getElementById('toc-auto');
     $toc.style.visibility = 'visible';
     animateCSS($toc, ['animate__fadeIn', 'animate__faster'], true);
-    // document.querySelector('.fi-container').addEventListener('resize', () => {
-    //   $toc.style.marginBottom = `${document.querySelector('.fi-container').clientHeight - document.querySelector('.post-footer').offsetTop}px`;
-    // });
     this._tocOnScroll = this._tocOnScroll || (() => {
-      // $toc.style.marginBottom = `${document.querySelector('.fi-container').clientHeight - document.querySelector('.post-footer').offsetTop}px`;
       this._updateTocActiveState($tocCore, $headingElements, INDEX_OFFSET);
     });
     this._tocOnScroll();
@@ -1540,14 +1538,13 @@ class FixIt {
       // header animation
       forEach($headers, ($header) => {
         if (scroll > ACCURACY) {
-          $header.classList.remove('animate__fadeInDown');
-          animateCSS($header, ['animate__fadeOutUp'], true);
-          $mask.click();
+          $header.classList.remove('header__fadeInDown');
+          animateCSS($header, ['header__fadeOutUp'], true);
         } else if (scroll < -ACCURACY) {
-          $header.classList.remove('animate__fadeOutUp');
-          animateCSS($header, ['animate__fadeInDown'], true);
-          $mask.click();
+          $header.classList.remove('header__fadeOutUp');
+          animateCSS($header, ['header__fadeInDown'], true);
         }
+        $mask.click();
       });
       const contentHeight = document.body.scrollHeight - window.innerHeight;
       const scrollPercent = Math.max(Math.min(100 * Math.max(this.newScrollTop, 0) / contentHeight, 100), 0);
@@ -1603,13 +1600,13 @@ class FixIt {
   }
 
   onClickMask() {
-    document.getElementById('mask').addEventListener('click', () => {
-      if (!document.body.classList.contains('blur')) return;
+    document.getElementById('mask').addEventListener('click', (e) => {
+      if (!e.target.classList.contains('blur')) return;
       for (let event of this.clickMaskEventSet) {
         event();
       }
       this.disableScrollEvent = false;
-      document.body.classList.remove('blur');
+      e.target.classList.remove('blur');
     }, false);
   }
 

@@ -6,11 +6,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0);
   @include z-index(hide);
 
-  .blur & {
-    @include z-index(fixed, -1);
+  &.blur {
     background-color: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(2px);
+    @include z-index(fixed, -1);
   }
 }

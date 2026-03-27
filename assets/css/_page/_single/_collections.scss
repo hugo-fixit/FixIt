@@ -92,7 +92,6 @@
   box-sizing: border-box;
   margin-bottom: 8rem;
   @include overflow-wrap(break-word);
-  @include blur;
   @include sticky-top-offset;
 
   @include media('print') {

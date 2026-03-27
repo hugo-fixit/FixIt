@@ -1,6 +1,0 @@
-@mixin blur {
-  // TODO refactor blur with backdrop-filter
-  .blur & {
-    filter: blur(1.5px);
-  }
-}

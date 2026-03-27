@@ -30,8 +30,6 @@ footer {
     }
   }
 
-  @include blur;
-
   @include media('print') {
     display: none !important;
   }

@@ -13,13 +13,12 @@
   line-height: 1.5rem;
   padding: 0.5rem 0.625rem;
   color: fixit-var(secondary);
-  background-color: darken($header-background-color, 3%);
+  background-color: #f1f1f1;
   transition: color 0.4s ease;
   @include border-radius(full);
-  @include blur;
 
   [data-theme=dark] & {
-    background-color: darken($header-background-color-dark, 3%);
+    background-color: #1e1e1f;
   }
 
   &:hover,
