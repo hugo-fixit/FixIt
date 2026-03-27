@@ -1532,20 +1532,27 @@ class FixIt {
         event.preventDefault();
         return;
       }
-      const $mask = document.getElementById('mask');
       this.newScrollTop = getScrollTop();
       const scroll = this.newScrollTop - this.oldScrollTop;
-      // header animation
-      forEach($headers, ($header) => {
-        if (scroll > ACCURACY) {
-          $header.classList.remove('header__fadeInDown');
-          animateCSS($header, ['header__fadeOutUp'], true);
-        } else if (scroll < -ACCURACY) {
+      const isTop = this.newScrollTop <= 0;
+      if (Math.abs(scroll) > ACCURACY) {
+        document.getElementById('mask').click();
+        const isScrollingDown = scroll > 0;
+        forEach($headers, ($header) => {
+          if (isScrollingDown) {
+            $header.classList.remove('header__fadeInDown');
+            animateCSS($header, ['header__fadeOutUp'], true);
+          } else {
+            $header.classList.remove('header__fadeOutUp');
+            animateCSS($header, ['header__fadeInDown'], true);
+          }
+        });
+      } else if (this.newScrollTop <= 0) {
+        forEach($headers, ($header) => {
           $header.classList.remove('header__fadeOutUp');
           animateCSS($header, ['header__fadeInDown'], true);
-        }
-        $mask.click();
-      });
+        });
+      }
       const contentHeight = document.body.scrollHeight - window.innerHeight;
       const scrollPercent = Math.max(Math.min(100 * Math.max(this.newScrollTop, 0) / contentHeight, 100), 0);
       if ($readingProgressBar) {
