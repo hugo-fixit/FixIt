@@ -18,7 +18,7 @@
 
     strong {
       font-weight: bolder;
-      @include apply-theme-property(text-shadow, (light: 0 0.05rem 0.05rem rgba(0, 0, 0, 0.2), dark: 0 0.05rem 0.05rem rgba(255, 255, 255, 0.2)));
+      text-shadow: light-dark(0 0.05rem 0.05rem rgba(0, 0, 0, 0.2), 0 0.05rem 0.05rem rgba(255, 255, 255, 0.2));
     }
 
     // title-only admonition without content

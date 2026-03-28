@@ -39,59 +39,43 @@
   }
 }
 
-/// Batch set theme color variables using global $theme-colors
-/// Generates light theme (in :root) and dark theme ([data-theme=dark]) variables
-@mixin set-theme-colors() {
-  // Light theme (in :root)
-  @at-root :root {
-    @each $name, $value in $theme-colors {
-      #{$rootPrefix}#{$name}: #{$value};
-    }
+/// Dark mode content wrapper
+/// - Explicit dark mode: [data-theme-mode='dark']
+/// - Auto mode with system dark preference: [data-theme-mode='auto'] + prefers-color-scheme
+@mixin dark-mode {
+  [data-theme-mode='dark'] & {
+    @content;
   }
 
-  // Dark theme
-  @at-root [data-theme=dark] {
-    @each $name, $value in $theme-colors {
-      #{$rootPrefix}#{$name}: #{darken($value, 5%)};
+  @media (prefers-color-scheme: dark) {
+    :root[data-theme-mode='auto'] & {
+      @content;
     }
   }
 }
 
-/// Output a theme-aware CSS property in the current selector
-/// This mixin emits a light value on the current rule and overrides it inside
-/// [data-theme=dark] for the same selector. It does not define CSS custom properties.
-/// @param {String} $attr - CSS property name, e.g. background-color
-/// @param {Map} $vars - Theme value map in the form of (light: $light-val, dark: $dark-val)
-/// @example
-///   .card {
-///     @include apply-theme-property(background-color, (light: rgba($header-background-color, 0.7), dark: rgba($header-background-color-dark, 0.5)));
-///   }
-@mixin apply-theme-property($attr, $vars) {
-  #{$attr}: #{map-get($vars, light)};
-
-  [data-theme=dark] & {
-    #{$attr}: #{map-get($vars, dark)};
+/// Batch set theme color variables using global $theme-colors
+/// Values are emitted via light-dark() and switched by CSS color-scheme.
+@mixin set-theme-colors() {
+  // Light/Dark in one declaration (driven by color-scheme)
+  @at-root :root {
+    @each $name, $value in $theme-colors {
+      #{$rootPrefix}#{$name}: light-dark(#{$value}, #{darken($value, 5%)});
+    }
   }
-} 
+}
 
-/// Define dual-theme variables (generate definitions for both light and dark simultaneously)
+/// Define dual-theme variables with light-dark()
 /// @param {Map} $vars - Variable map, key is CSS variable name, value is Map(light: $light-val, dark: $dark-val)
 /// @example
 ///   @include define-theme-vars((
 ///     global-background-color: (light: $global-background-color, dark: $global-background-color-dark)
 ///   ));
 @mixin define-theme-vars($vars) {
-  // Light theme (in :root)
+  // Light/Dark in one declaration (driven by color-scheme)
   @at-root :root {
     @each $name, $values in $vars {
-      #{$rootPrefix}#{$name}: #{map-get($values, light)};
-    }
-  }
-
-  // Dark theme
-  @at-root [data-theme=dark] {
-    @each $name, $values in $vars {
-      #{$rootPrefix}#{$name}: #{map-get($values, dark)};
+      #{$rootPrefix}#{$name}: light-dark(#{map-get($values, light)}, #{map-get($values, dark)});
     }
   }
 }

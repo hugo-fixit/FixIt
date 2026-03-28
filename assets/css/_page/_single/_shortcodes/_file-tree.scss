@@ -8,7 +8,7 @@
   transition: box-shadow 0.2s ease;
 
   &:hover {
-    @include apply-theme-property(box-shadow, (light: 0 2px 8px rgba(0, 0, 0, 0.1), dark: 0 2px 8px rgba(255, 255, 255, 0.1)));
+    box-shadow: light-dark(0 2px 8px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(255, 255, 255, 0.1));
   }
 
   ul.file-tree {
@@ -22,11 +22,7 @@
       &.file-tree-folder {
         > .file-tree-toggle {
           cursor: pointer;
-          font-weight: bold;
-
-          [data-theme=dark] & {
-            color: #ddd;
-          }
+          @include bold-dark;
 
           &:hover {
             i,

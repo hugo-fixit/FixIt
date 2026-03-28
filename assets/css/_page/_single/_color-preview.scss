@@ -13,6 +13,6 @@
     border: 1px solid;
     pointer-events: none;
     transform: translateY(-1px);
-    @include apply-theme-property(border-color, (light: #d1d9e0b3, dark: #3d444db3));
+    border-color: light-dark(#d1d9e0b3, #3d444db3);
   }
 }

@@ -1,3 +1,10 @@
+/**
+ * Iterate over an array-like collection.
+ * If any handler call returns a Promise, all Promises are collected and returned.
+ * @param {ArrayLike<*>|Array<*>} elements collection to iterate
+ * @param {Function} handler callback for each item
+ * @returns {Promise<Array<*>>} resolved results for async handlers
+ */
 export function forEach(elements, handler) {
   elements = elements || [];
   const promises = [];
@@ -10,24 +17,56 @@ export function forEach(elements, handler) {
   return Promise.all(promises);
 }
 
+/**
+ * Get the current vertical scroll position.
+ * @returns {number} current scroll top
+ */
 export function getScrollTop() {
   return (document.documentElement ?? document.body).scrollTop;
 }
 
+/**
+ * Check whether the current viewport matches the mobile breakpoint.
+ * @returns {Boolean} whether the viewport is mobile-sized
+ */
 export function isMobile() {
   return window.matchMedia('only screen and (max-width: 680px)').matches;
 }
 
+/**
+ * Check whether the table of contents should use the static layout.
+ * @returns {Boolean} whether the TOC should be rendered as static
+ */
 export function isTocStatic() {
   return document.getElementById('toc-static').dataset.kept === 'true' || window.matchMedia('only screen and (max-width: 960px)').matches;
 }
 
 /**
- * add animate to element
- * @param {Element} element animate element
- * @param {String|Array<String>} animation animation name
- * @param {Boolean} reserved reserved animation
- * @param {Function} callback remove callback
+ * Get the current theme mode from the root element.
+ * @returns {String} one of auto, light, or dark
+ */
+export function getThemeMode() {
+  return document.documentElement.dataset.themeMode || 'auto';
+}
+
+/**
+ * Check whether the current effective theme is dark.
+ * In auto mode, this follows the system color scheme preference.
+ * @returns {Boolean} whether dark mode is currently active
+ */
+export function isDarkMode() {
+  const themeMode = getThemeMode();
+  return themeMode === 'auto'
+    ? window.matchMedia('(prefers-color-scheme: dark)').matches
+    : themeMode === 'dark';
+}
+
+/**
+ * Add one or more Animate.css classes to an element.
+ * @param {Element} element target element
+ * @param {String|Array<String>} animation animation name or names
+ * @param {Boolean} reserved whether to keep animation classes after completion
+ * @param {Function} callback callback invoked after animation ends
  */
 export function animateCSS(element, animation, reserved, callback) {
   !Array.isArray(animation) && (animation = [animation]);
@@ -39,17 +78,17 @@ export function animateCSS(element, animation, reserved, callback) {
 }
 
 /**
- * date validator
- * @param {*} date may be date or not
- * @returns {Boolean}
+ * Validate whether a value is a valid Date instance.
+ * @param {*} date value to validate
+ * @returns {Boolean} whether the value is a valid date
  */
 export function isValidDate(date) {
   return date instanceof Date && !isNaN(date.getTime());
 }
 
 /**
- * scroll some element into view
- * @param {String} selector element to scroll
+ * Scroll an element into view smoothly.
+ * @param {String} selector selector or id reference beginning with #
  */
 export function scrollIntoView(selector) {
   const element = selector.startsWith('#')
@@ -61,8 +100,8 @@ export function scrollIntoView(selector) {
 }
 
 /**
- * get a hidden element for temporary use
- * @returns {Object} { $el: Element, destroy: Function }
+ * Create a hidden staging element for temporary DOM operations.
+ * @returns {Object} staging helpers and the staging element itself
  */
 export function getStagingDOM() {
   const stagingElement = document.createElement('div')
@@ -92,8 +131,8 @@ export function getStagingDOM() {
 }
 
 /**
- * create a copy text function with fallback
- * @returns {Function} copy text function
+ * Create a text-copy helper with clipboard API fallback.
+ * @returns {Function} function that copies text and returns a Promise
  */
 export function createCopyText() {
   if (navigator.clipboard) {
@@ -114,10 +153,10 @@ export function createCopyText() {
 }
 
 /**
- * check if a string is a JS object string
+ * Check whether a string looks like a JavaScript object literal.
  * @example isObjectLiteral("{a:1,b:2}") // true
  * @param {String} str string to check
- * @returns {Boolean} whether the string is a JS object string
+ * @returns {Boolean} whether the string is an object literal
  */
 export function isObjectLiteral(str) {
   if (typeof str !== 'string') {
@@ -130,6 +169,11 @@ export function isObjectLiteral(str) {
   return false;
 }
 
+/**
+ * Escape a string for safe HTML text output.
+ * @param {String} str string to escape
+ * @returns {String} escaped HTML string
+ */
 export function HTMLEscape(str) {
   return str.replace(/[&<>"']/g, char => ({
     '&': '&amp;',

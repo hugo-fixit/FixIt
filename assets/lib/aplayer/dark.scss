@@ -1,4 +1,4 @@
-[data-theme=dark] .aplayer {
+@mixin aplayer-dark-theme {
   background: #212121;
 
   &.aplayer-withlist {
@@ -100,5 +100,15 @@
         fill: #eee;
       }
     }
+  }
+}
+
+[data-theme-mode='dark'] .aplayer {
+  @include aplayer-dark-theme;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-theme-mode='auto'] .aplayer {
+    @include aplayer-dark-theme;
   }
 }

@@ -16,6 +16,15 @@
 
 :root {
   interpolate-size: allow-keywords;
+  color-scheme: light dark;
+
+  &[data-theme-mode='light'] {
+    color-scheme: light;
+  }
+
+  &[data-theme-mode='dark'] {
+    color-scheme: dark;
+  }
 
   // ----------------------------------------
   // Theme-Independent Variables

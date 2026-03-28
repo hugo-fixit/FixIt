@@ -51,7 +51,7 @@
       background-color: fixit-var(global-background-color);
       @include z-index(fixed);
       @include border-radius;
-      @include apply-theme-property(box-shadow, (light: 0 0 1.5rem 0 rgba(0, 0, 0, 0.2), dark: 0 0 1.5rem 0 rgba(255, 255, 255, 0.2)));
+      box-shadow: light-dark(0 0 1.5rem 0 rgba(0, 0, 0, 0.2), 0 0 1.5rem 0 rgba(255, 255, 255, 0.2));
     }
   }
 
@@ -61,7 +61,7 @@
     cursor: pointer;
     outline: none;
     color: fixit-var(reward-color, lighten($reward-color, 5%));
-    border: 2px solid lighten($reward-color, 10%);
+    border: 2px solid light-dark(lighten($reward-color, 10%), lighten($reward-color, 5%));
     padding: 0.6rem 1rem;
     background-color: fixit-var(global-background-color);
     vertical-align: text-top;
@@ -74,10 +74,6 @@
       color: #ffffff;
       border-color: fixit-var(reward-color);
       background-color: fixit-var(reward-color);
-    }
-
-    [data-theme=dark] & {
-      border-color: lighten($reward-color, 5%);
     }
   }
 

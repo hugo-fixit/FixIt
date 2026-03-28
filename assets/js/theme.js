@@ -3,6 +3,8 @@ import {
   forEach,
   getScrollTop,
   isMobile,
+  getThemeMode,
+  isDarkMode,
   isTocStatic,
   animateCSS,
   isValidDate,
@@ -19,7 +21,8 @@ const copyText = createCopyText();
 class FixIt {
   constructor() {
     this.config = window.config;
-    this.isDark = document.documentElement.dataset.theme === 'dark';
+    this.themeMode = getThemeMode();
+    this.isDark = isDarkMode();
     this.newScrollTop = getScrollTop();
     this.oldScrollTop = this.newScrollTop;
     this.scrollEventSet = new Set();
@@ -102,16 +105,36 @@ class FixIt {
   }
 
   initSwitchTheme() {
+    const mql = window.matchMedia('(prefers-color-scheme: dark)');
+    const modes = ['auto', 'light', 'dark'];
+    const applyThemeMode = (mode, persist = true) => {
+      this.themeMode = mode;
+      document.documentElement.dataset.themeMode = mode;
+      this.isDark = mode === 'auto' ? mql.matches : mode === 'dark';
+
+      if (persist) {
+        window.localStorage?.setItem('theme-mode', mode);
+      }
+
+      for (let event of this.switchThemeEventSet) {
+        event(this.isDark);
+      }
+    };
+
     forEach(document.getElementsByClassName('theme-switch'), ($themeSwitch) => {
       $themeSwitch.addEventListener('click', () => {
-        document.documentElement.dataset.theme = this.isDark ? 'light' : 'dark';
-        document.documentElement.style.setProperty('color-scheme', this.isDark ? 'light' : 'dark');
-        this.isDark = !this.isDark;
-        window.localStorage?.setItem('theme', this.isDark ? 'dark' : 'light');
-        for (let event of this.switchThemeEventSet) {
-          event(this.isDark);
-        }
+        const currentIndex = modes.indexOf(this.themeMode);
+        const nextMode = modes[(currentIndex + 1) % modes.length];
+        applyThemeMode(nextMode);
       }, false);
+    });
+
+    mql.addEventListener('change', (e) => {
+      if (this.themeMode !== 'auto') return;
+      this.isDark = e.matches;
+      for (let event of this.switchThemeEventSet) {
+        event(this.isDark);
+      }
     });
   }
 

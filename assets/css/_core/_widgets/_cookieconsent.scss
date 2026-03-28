@@ -5,7 +5,7 @@
 
     &:hover,
     &:focus {
-      @include apply-theme-property(background-color, (light: #ccc, dark: #444));
+      background-color: light-dark(#ccc, #444);
     }
   }
 }

@@ -15,7 +15,7 @@ header {
 
   &:hover,
   &.active {
-    @include apply-theme-property(box-shadow, (light: 0 0 1.5rem 0 rgba(0, 0, 0, 0.125), dark: 0 0 1.5rem 0 rgba(255, 255, 255, 0.125)));
+    box-shadow: light-dark(0 0 1.5rem 0 rgba(0, 0, 0, 0.125), 0 0 1.5rem 0 rgba(255, 255, 255, 0.125));
   }
 
   &.animate__animated.header__fadeInDown {
@@ -285,7 +285,7 @@ header {
         overflow-y: auto;
         transition: box-shadow 0.3s ease;
         @include border-radius;
-        @include apply-theme-property(box-shadow, (light: 0 0 1.5rem 0 rgba(0, 0, 0, 0.1), dark: 0 0 1.5rem 0 rgba(255, 255, 255, 0.1)));
+        box-shadow: light-dark(0 0 1.5rem 0 rgba(0, 0, 0, 0.1), 0 0 1.5rem 0 rgba(255, 255, 255, 0.1));
 
         .menu-item {
           height: fixit-var(submenu-height);
@@ -382,7 +382,7 @@ header {
       overflow-y: auto;
       max-height: 70vh;
       @include scrollbar-width(none, 0);
-      @include apply-theme-property(box-shadow, (light: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1), dark: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1)));
+      box-shadow: light-dark(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1), 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
 
       .search-wrapper {
         display: flex;
@@ -427,7 +427,7 @@ header {
         padding: 0 1rem;
 
         &:not(.menu-system):hover {
-          @include apply-theme-property(background-color, (light: #f2f2f3, dark: #535355));
+          background-color: light-dark(#f2f2f3, #535355);
         }
 
         .menu-link {
@@ -486,7 +486,7 @@ header {
         }
 
         .menu-item:hover {
-          @include apply-theme-property(background-color, (light: #e7e7ea, dark: #5d5d5f));
+          background-color: light-dark(#e7e7ea, #5d5d5f);
         }
       }
 
@@ -525,7 +525,7 @@ header {
   top: fixit-var(header-height);
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
   @include z-index(fixed);
-  @include apply-theme-property(box-shadow, (light: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1), dark: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1)));
+  box-shadow: light-dark(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1), 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
 
   &.desktop {
     right: 2rem;
@@ -588,7 +588,7 @@ header {
         }
 
         &.cursor {
-          @include apply-theme-property(background-color, (light: darken($code-background-color, 5%), dark: lighten($code-background-color-dark, 5%)));
+          background-color: light-dark(darken($code-background-color, 5%), lighten($code-background-color-dark, 5%));
         }
 
         &:hover {
@@ -602,11 +602,7 @@ header {
       text-align: center;
 
       .search-query {
-        font-weight: bold;
-
-        [data-theme=dark] & {
-          color: #ddd;
-        }
+        @include bold-dark;
       }
     }
 

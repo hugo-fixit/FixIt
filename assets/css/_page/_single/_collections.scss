@@ -6,7 +6,7 @@
   position: relative;
   @include border-radius(0.5rem);
   @include user-select(none);
-  @include apply-theme-property(background-color, (light: darken($global-background-color, 4%), dark: lighten($global-background-color-dark, 4%)));
+  background-color: light-dark(darken($global-background-color, 4%), lighten($global-background-color-dark, 4%));
 
   &:has(.collection-nav-item:nth-child(2))::before {
     content: '';
@@ -15,16 +15,12 @@
     bottom: 0.75rem;
     width: 1px;
     height: 2rem;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.08) 50%, rgba(0, 0, 0, 0.05) 100%);
-
-    [data-theme=dark] & {
-      background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0.05),
-        rgba(255, 255, 255, 0.08) 50%,
-        rgba(255, 255, 255, 0.05) 100%
-      );
-    }
+    background: linear-gradient(
+      to bottom,
+      light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.05)),
+      light-dark(rgba(0, 0, 0, 0.08), rgba(255, 255, 255, 0.08)) 50%,
+      light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.05)) 100%
+    );
   }
 
   .collection-title {
@@ -103,7 +99,7 @@
 
   &.open {
     .collection-summary {
-      @include apply-theme-property(background-color, (light: darken($global-background-color, 5%), dark: lighten($global-background-color-dark, 5%)));
+      background-color: light-dark(darken($global-background-color, 5%), lighten($global-background-color-dark, 5%));
     }
   }
 
@@ -112,7 +108,7 @@
     align-items: baseline;
     gap: 0.25em;
     padding: 0.2em 0.5em;
-    @include apply-theme-property(background-color, (light: darken($global-background-color, 5%), dark: lighten($global-background-color-dark, 5%)));
+    background-color: light-dark(darken($global-background-color, 5%), lighten($global-background-color-dark, 5%));
 
     > i.fa-layer-group {
       flex-shrink: 0;
@@ -142,7 +138,7 @@
 
   .collection-content {
     font-size: fixit-var(collection-list-font-size);
-    @include apply-theme-property(background-color, (light: darken($global-background-color, 3%), dark: lighten($global-background-color-dark, 3%)));
+    background-color: light-dark(darken($global-background-color, 3%), lighten($global-background-color-dark, 3%));
 
     .collection-list {
       margin: 0;
@@ -179,7 +175,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.5em;
-      @include apply-theme-property(background-color, (light: darken($global-background-color, 5%), dark: lighten($global-background-color-dark, 5%)));
+      background-color: light-dark(darken($global-background-color, 5%), lighten($global-background-color-dark, 5%));
 
       a.collection-nav-item {
         padding-inline: 2px;
@@ -187,7 +183,7 @@
         transition: background-color 0.3s ease-out;
 
         &:hover {
-          @include apply-theme-property(background-color, (light: darken($global-background-color, 10%), dark: lighten($global-background-color-dark, 10%)));
+          background-color: light-dark(darken($global-background-color, 10%), lighten($global-background-color-dark, 10%));
         }
       }
 

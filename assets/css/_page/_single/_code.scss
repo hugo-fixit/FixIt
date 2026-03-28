@@ -317,21 +317,12 @@ pre {
       bottom: 0;
       background: linear-gradient(
         180deg,
-        rgba($code-background-color, 0) 0%,
-        rgba($code-background-color, 0.9) 60%,
-        $code-background-color 100%
+        light-dark(rgba($code-background-color, 0), rgba($code-background-color-dark, 0)) 0%,
+        light-dark(rgba($code-background-color, 0.9), rgba($code-background-color-dark, 0.9)) 60%,
+        light-dark($code-background-color, $code-background-color-dark) 100%
       );
       @include z-index(base);
       @include border-radius(bottom);
-
-      [data-theme=dark] & {
-        background: linear-gradient(
-          180deg,
-          rgba($code-background-color-dark, 0) 0%,
-          rgba($code-background-color-dark, 0.9) 60%,
-          $code-background-color-dark 100%
-        );
-      }
 
       .fa-angles-down {
         opacity: 0;
@@ -351,12 +342,11 @@ pre {
     &.is-collapsed {
       .code-header {
         transition: border-radius 0.2s ease 0.2s;
-        @include set-fixit-var(code-header-background-color, darken($code-background-color, 6%));
+        @include set-fixit-var(
+          code-header-background-color,
+          light-dark(darken($code-background-color, 6%), darken($code-background-color-dark, 6%))
+        );
         @include border-radius;
-
-        [data-theme=dark] & {
-          @include set-fixit-var(code-header-background-color, darken($code-background-color-dark, 6%));
-        }
 
         + .code-wrapper {
           height: 0;
@@ -500,7 +490,7 @@ pre {
           width: 12px;
           @include border-radius(full);
 
-          [data-theme=dark] & {
+          @include dark-mode {
             @include set-fixit-vars((
               mac-red: #ff5f56,
               mac-yellow: #febc2e,
@@ -563,7 +553,7 @@ pre {
     background-color: fixit-var(gist-meta-background-color);
   }
 
-  [data-theme=dark] & {
+  @include dark-mode {
     @import './_code-syntax/github-dark-dimmed';
   }
 }
