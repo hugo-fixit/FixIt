@@ -1,21 +1,26 @@
+$header-box-shadow: 0 0 1.5rem 0 light-dark(rgba(0, 0, 0, 0.125), rgba(255, 255, 255, 0.125));
+
 header {
   width: 100%;
   transition: box-shadow 0.3s ease;
+  background-color: fixit-var(header-background-color);
   @include z-index(fixed);
-  
+
+  &:hover {
+    box-shadow: $header-box-shadow;
+  }
+
+  @include scroll-state-query('scroller scroll-state(scrollable: top)') {
+    box-shadow: $header-box-shadow;
+  }
+
   &.blur {
-    backdrop-filter: saturate(1.2) blur(10px);
-    background-size: 4px 4px;
-    background-image: radial-gradient(transparent 1px, fixit-var(header-background-color) 1px);
-  }
-
-  &:not(.blur) {
-    background-color: fixit-var(header-background-color);
-  }
-
-  &:hover,
-  &.active {
-    box-shadow: 0 0 1.5rem 0 light-dark(rgba(0, 0, 0, 0.125), rgba(255, 255, 255, 0.125));
+    @include scroll-state-query('scroller scroll-state(scrollable: top)', '&') {
+      background-color: transparent;
+      backdrop-filter: saturate(1.2) blur(10px);
+      background-size: 4px 4px;
+      background-image: radial-gradient(transparent 1px, fixit-var(header-background-color) 1px);
+    }
   }
 
   &.animate__animated.header__fadeInDown {

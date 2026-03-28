@@ -1538,7 +1538,6 @@ class FixIt {
 
   onScroll() {
     const ACCURACY = 20;
-    const $allHeaders = document.querySelectorAll('.wrapper > header');
     const $autoHeaders = [];
     const $backToTop = document.querySelector('.back-to-top');
     const $readingProgressBar = document.querySelector('.reading-progress-bar');
@@ -1551,16 +1550,7 @@ class FixIt {
     $backToTop?.addEventListener('click', () => {
       scrollIntoView('body');
     });
-    let timer = null;
     window.addEventListener('scroll', (event) => {
-      forEach($allHeaders, ($header) => {
-        $header.classList.add('active');
-      });
-      timer = setTimeout(() => {
-        forEach($allHeaders, ($header) => {
-          $header.classList.remove('active');
-        });
-      }, 300);
       if (this.disableScrollEvent) {
         event.preventDefault();
         return;
