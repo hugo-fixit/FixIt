@@ -51,7 +51,7 @@
     background-color: fixit-var(code-block-background-color);
 
     rt {
-      color: fixit-var(secondary);
+      color: fixit-var(global-font-secondary-color);
     }
   }
 }
@@ -205,7 +205,7 @@
     .toc-title {
       @include set-fixit-var(
         code-header-background-color,
-        light-dark(darken($code-background-color, 6%), darken($code-background-color-dark, 6%))
+        light-dark(darken($code-header-background-color, 1%), darken($code-header-background-color-dark, 1%))
       );
     }
   }

@@ -12,7 +12,7 @@
         margin: 0 auto;
         transition: all 0.4s ease;
         @include border-radius(full);
-        box-shadow: light-dark(0 0 0 0.3618em rgba(0, 0, 0, 0.05), 0 0 0 0.3618em rgba(255, 255, 255, 0.05));
+        box-shadow: 0 0 0 0.3618em light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.05));
 
         &:hover {
           position: relative;
@@ -73,6 +73,7 @@
   }
 
   .summary {
+    position: relative;
     padding-block: 1rem;
     color: fixit-var(global-font-color);
 
@@ -140,12 +141,10 @@
       justify-content: space-between;
       align-items: center;
       font-size: 0.875rem;
-
       @include link(false, false);
 
       .post-tags {
         padding: 0;
-
         @include link(true, true);
 
         .post-tag:not(:last-child)::after {

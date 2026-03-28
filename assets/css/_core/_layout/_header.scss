@@ -15,7 +15,7 @@ header {
 
   &:hover,
   &.active {
-    box-shadow: light-dark(0 0 1.5rem 0 rgba(0, 0, 0, 0.125), 0 0 1.5rem 0 rgba(255, 255, 255, 0.125));
+    box-shadow: 0 0 1.5rem 0 light-dark(rgba(0, 0, 0, 0.125), rgba(255, 255, 255, 0.125));
   }
 
   &.animate__animated.header__fadeInDown {
@@ -206,9 +206,21 @@ header {
 
 .theme-switch {
   i {
-    transform: rotate(225deg);
-    transition: all 0.4s ease;
+    display: inline-block;
+    transform: rotate(225deg) scale(1);
+    transform-origin: center;
+    @include theme-switch-mode('auto');
+    @include theme-switch-mode('light', '\f185');
+    @include theme-switch-mode('dark', '\f186');
+
+    @include media('reduce-motion') {
+      animation: none !important;
+    }
   }
+
+  @include theme-switch-keyframes('auto', 180deg, 0.9, 0.7, 60%, 245deg, 1.08);
+  @include theme-switch-keyframes('light', 140deg, 0.82, 0.55, 55%, 250deg, 1.12);
+  @include theme-switch-keyframes('dark', 310deg, 0.86, 0.55, 55%, 205deg, 1.08);
 }
 
 #header-desktop {
@@ -245,17 +257,11 @@ header {
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
-      float: right;
 
       > .menu-item {
         &:hover .sub-menu {
           display: block;
           transform: translateX(-0.5rem);
-        }
-        &.theme-switch {
-          &:hover i {
-            transform: rotate(45deg);
-          }
         }
         &.language-switch:hover .sub-menu {
           transform: translateX(calc(1.75rem - 100%));
@@ -267,9 +273,9 @@ header {
 
         &.delimiter {
           width: 0;
-          margin: 0.125rem 0.25rem;
+          margin: 18.5px 0.5rem;
           padding: 0;
-          border-left: 1px dashed fixit-var(global-border-color-weight);
+          border-left: 1.5px solid fixit-var(global-border-color-weight);
         }
       }
 
@@ -285,7 +291,7 @@ header {
         overflow-y: auto;
         transition: box-shadow 0.3s ease;
         @include border-radius;
-        box-shadow: light-dark(0 0 1.5rem 0 rgba(0, 0, 0, 0.1), 0 0 1.5rem 0 rgba(255, 255, 255, 0.1));
+        box-shadow: 0 0 1.5rem 0 light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
 
         .menu-item {
           height: fixit-var(submenu-height);
@@ -382,7 +388,7 @@ header {
       overflow-y: auto;
       max-height: 70vh;
       @include scrollbar-width(none, 0);
-      box-shadow: light-dark(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1), 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
+      box-shadow: 0 0.125rem 0.25rem light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
 
       .search-wrapper {
         display: flex;
@@ -525,7 +531,7 @@ header {
   top: fixit-var(header-height);
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
   @include z-index(fixed);
-  box-shadow: light-dark(0 0.125rem 0.25rem rgba(0, 0, 0, 0.1), 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1));
+  box-shadow: 0 0.125rem 0.25rem light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
 
   &.desktop {
     right: 2rem;
@@ -547,27 +553,33 @@ header {
 
     .suggestions {
       overflow-y: auto;
-      // 41px is the height of the search-footer
-      max-height: calc(100dvh - #{fixit-var(header-height)} - 41px);
+      // 40px is the height of the search-footer
+      max-height: calc(100dvh - #{fixit-var(header-height)} - 40px);
 
       .suggestion {
         padding: 0.75rem 1rem;
 
-        .suggestion-title {
-          display: inline-block;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          font-size: 1rem;
-          font-weight: bold;
-          max-width: 75%;
-        }
+        > :first-child {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.25rem;
+          margin-bottom: 0.5rem;
 
-        .suggestion-date {
-          font-size: 0.875rem;
-          float: right;
-          text-align: right;
-          color: fixit-var(global-font-secondary-color);
+          > a {
+            display: inline-block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 1rem;
+            font-weight: bold;
+          }
+
+          .suggestion-date {
+            font-size: 0.875rem;
+            flex-shrink: 0;
+            color: fixit-var(global-font-secondary-color);
+          }
         }
 
         .suggestion-context {
@@ -588,7 +600,7 @@ header {
         }
 
         &.cursor {
-          background-color: light-dark(darken($code-background-color, 5%), lighten($code-background-color-dark, 5%));
+          background-color: fixit-var(code-block-background-color);
         }
 
         &:hover {
@@ -608,14 +620,10 @@ header {
 
     .search-footer {
       padding: 0.5rem 1rem;
-      float: right;
-      font-size: 0.8rem;
+      font-size: 0.875rem;
+      text-align: right;
       color: fixit-var(global-font-secondary-color);
       @include link(false, false);
-
-      a {
-        font-size: 1rem;
-      }
     }
   }
 }

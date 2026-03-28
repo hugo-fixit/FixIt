@@ -326,7 +326,7 @@
         th,
         td {
           padding: 0.3rem 1rem;
-          border: 1px solid light-dark(darken($table-thead-color, 2%), darken($table-thead-color-dark, 2%));
+          border: 1px solid light-dark(darken($table-thead-color, 4%), #3d444d);
         }
       }
     }

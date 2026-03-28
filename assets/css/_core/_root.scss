@@ -137,7 +137,7 @@
   code-inline-background-color: (light: rgba(175, 184, 193, 0.2), dark: rgba(99, 110, 123, 0.4)),
   code-block-background-color: (light: $code-background-color, dark: $code-background-color-dark),
   code-header-color: (light: $code-header-color, dark: $code-header-color-dark),
-  code-header-background-color: (light: darken($code-background-color, 5%), dark: darken($code-background-color-dark, 5%)),
+  code-header-background-color: (light: $code-header-background-color, dark: $code-header-background-color-dark),
   code-highlight-color: (light: $code-highlight-color, dark: $code-highlight-color-dark),
   gist-meta-background-color: (light: darken($code-background-color, 5%), dark: darken($code-background-color-dark, 5%)),
 ));

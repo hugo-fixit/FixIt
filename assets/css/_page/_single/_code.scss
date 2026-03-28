@@ -342,11 +342,11 @@ pre {
     &.is-collapsed {
       .code-header {
         transition: border-radius 0.2s ease 0.2s;
+        @include border-radius;
         @include set-fixit-var(
           code-header-background-color,
-          light-dark(darken($code-background-color, 6%), darken($code-background-color-dark, 6%))
+          light-dark(darken($code-header-background-color, 1%), darken($code-header-background-color-dark, 1%))
         );
-        @include border-radius;
 
         + .code-wrapper {
           height: 0;

@@ -51,7 +51,7 @@
       background-color: fixit-var(global-background-color);
       @include z-index(fixed);
       @include border-radius;
-      box-shadow: light-dark(0 0 1.5rem 0 rgba(0, 0, 0, 0.2), 0 0 1.5rem 0 rgba(255, 255, 255, 0.2));
+      box-shadow: 0 0 1.5rem 0 light-dark(rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2));
     }
   }
 

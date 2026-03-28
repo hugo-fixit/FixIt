@@ -10,7 +10,7 @@
     dcb-color: light-dark(#25292e, #d1d7e0),
     dcb-border-color: light-dark(#d1d9e0, #3d444d),
     dcb-background-color: light-dark(#f6f8fa, #2a313c),
-    dcb-box-shadow: light-dark(0px 1px 0px 0px #1f23280a, 0px 0px 0px 0px #000000)
+    dcb-box-shadow: 0px 1px 0px 0px light-dark(#1f23280a, #000000)
   ));
   width: 1rem;
   height: 1rem;

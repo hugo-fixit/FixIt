@@ -84,8 +84,8 @@ $menu-border-color-dark: #5454547a !default;
 $submenu-height: $header-height * 0.5 !default;
 
 // Color of the search background
-$search-background-color: #e9e9e9 !default;
-$search-background-color-dark: #363636 !default;
+$search-background-color: #e9eaed !default;
+$search-background-color-dark: #202833 !default;
 // ========== Header ========== //
 
 // ========== Tag Cloud ========== //
@@ -118,12 +118,12 @@ $single-link-hover-color: #ea517f !default; // 莲瓣红
 $single-link-hover-color-dark: #cc5595 !default; // 龙须红
 
 // Color of the table background
-$table-background-color: #fff !default;
-$table-background-color-dark: #272c34 !default;
+$table-background-color: #fbfcfe !default;
+$table-background-color-dark: #242c35 !default;
 
 // Color of the table thead
-$table-thead-color: #ededed !default;
-$table-thead-color-dark: #20252b !default;
+$table-thead-color: #e7edf3 !default;
+$table-thead-color-dark: #1d242d !default;
 
 // Color of the blockquote
 $blockquote-color: #697681 !default;
@@ -152,18 +152,24 @@ $pagination-link-hover-color-dark: #fff !default;
 $code-color: #24292f !default;
 $code-color-dark: #adbac7 !default;
 
+// Color of the code header text
+$code-header-color: #7d7d7d !default;
+$code-header-color-dark: #b1b0b0 !default;
+
+// Color of the code header background
+$code-header-background-color: #e4e9ee !default;
+$code-header-background-color-dark: #181f28 !default;
+
 // Color of the code background
 $code-background-color: #f4f6f8 !default;
-$code-background-color-dark: #252b34 !default;
+$code-background-color-dark: #2d333B !default;
 
+// Color of the code error
 $code-error-color: #dc3545 !default;
 
 // Color of the highlight code
 $code-highlight-color: #fff8c5 !default;
 $code-highlight-color-dark: rgba(174, 124, 20, 0.3) !default;
-
-$code-header-color: #7d7d7d !default;
-$code-header-color-dark: #b1b0b0 !default;
 
 // Font size of the code
 $code-font-size: 0.875em !default;
