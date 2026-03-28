@@ -294,6 +294,7 @@ header {
         background-color: fixit-var(header-background-color);
         max-height: 60vh;
         overflow-y: auto;
+        overscroll-behavior: contain;
         transition: box-shadow 0.3s ease;
         @include border-radius;
         box-shadow: 0 0 1.5rem 0 light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
@@ -391,6 +392,7 @@ header {
       border-top: 2px solid fixit-var(global-border-color-light);
       display: none;
       overflow-y: auto;
+      overscroll-behavior: contain;
       max-height: 70vh;
       @include scrollbar-width(none, 0);
       box-shadow: 0 0.125rem 0.25rem light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
@@ -558,6 +560,7 @@ header {
 
     .suggestions {
       overflow-y: auto;
+      overscroll-behavior: contain;
       // 40px is the height of the search-footer
       max-height: calc(100dvh - #{fixit-var(header-height)} - 40px);
 

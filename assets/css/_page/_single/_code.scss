@@ -76,6 +76,7 @@ pre {
 
     .lntable {
       overflow: auto;
+      overscroll-behavior-x: none;
       display: block;
       background-color: fixit-var(code-block-background-color);
       @include border-radius;
@@ -399,8 +400,18 @@ pre {
     &.line-nos-hidden {
       > .chroma .lntable {
         width: 100%;
-        display: table;
+        overscroll-behavior-x: contain;
+
+        > tbody {
+          display: table;
+          width: 100%;
+        }
+
+        .lntd:last-child {
+          width: 100%;
+        }
       }
+
       .lntd:first-child,
       .ln {
         display: none;

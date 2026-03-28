@@ -31,7 +31,6 @@ class FixIt {
     this.clickMaskEventSet = new Set();
     this.beforeprintEventSet = new Set();
     this.afterprintEventSet = new Set();
-    this.disableScrollEvent = false;
     window.objectFitImages && objectFitImages();
   }
 
@@ -88,7 +87,6 @@ class FixIt {
       $mask.classList.toggle('blur');
       $menuToggleMobile.classList.toggle('active');
       $menuMobile.classList.toggle('active');
-      this.disableScrollEvent = $mask.classList.contains('blur');
     }, false);
     this._menuMobileOnClickMask = this._menuMobileOnClickMask || (() => {
       $menuToggleMobile.classList.remove('active');
@@ -218,12 +216,10 @@ class FixIt {
     if (_isMobile) {
       this._searchMobileOnce = true;
       $searchInput.addEventListener('focus', () => {
-        this.disableScrollEvent = true;
         $mask.classList.add('blur');
         $header.classList.add('open');
       }, false);
       $searchCancel.addEventListener('click', () => {
-        this.disableScrollEvent = false;
         $mask.classList.remove('blur');
         document.getElementById('menu-toggle-mobile').classList.remove('active');
         document.getElementById('menu-mobile').classList.remove('active');
@@ -243,10 +239,8 @@ class FixIt {
         $mask.classList.add('blur');
         $header.classList.add('open');
         $searchInput.focus();
-        this.disableScrollEvent = true;
       }, false);
       $searchClear.addEventListener('click', () => {
-        this.disableScrollEvent = false;
         $searchClear.style.display = 'none';
         this._searchDesktop && this._searchDesktop.autocomplete.setVal('');
       }, false);
@@ -1551,10 +1545,6 @@ class FixIt {
       scrollIntoView('body');
     });
     window.addEventListener('scroll', (event) => {
-      if (this.disableScrollEvent) {
-        event.preventDefault();
-        return;
-      }
       this.newScrollTop = getScrollTop();
       const scroll = this.newScrollTop - this.oldScrollTop;
       if (Math.abs(scroll) > ACCURACY) {
@@ -1634,7 +1624,6 @@ class FixIt {
       for (let event of this.clickMaskEventSet) {
         event();
       }
-      this.disableScrollEvent = false;
       e.target.classList.remove('blur');
     }, false);
   }

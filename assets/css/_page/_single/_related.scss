@@ -49,7 +49,8 @@
       padding-block: 0.4em;
       text-indent: -0.8em;
       list-style: none;
-      overflow-y: scroll;
+      overflow-y: auto;
+      overscroll-behavior: contain;
       max-height: 60vh;
       @include scrollbar-width(none, 0);
 
