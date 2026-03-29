@@ -1,23 +1,25 @@
+$header-box-shadow: 0 0 1.5rem 0 light-dark(rgba(0, 0, 0, 0.125), rgba(255, 255, 255, 0.125));
+
 header {
   width: 100%;
   transition: box-shadow 0.3s ease;
+  background-color: fixit-var(header-background-color);
   @include z-index(fixed);
-  
-  &.blur {
-    backdrop-filter: saturate(1.2) blur(10px);
-    background-size: 4px 4px;
-    background-image: radial-gradient(transparent 1px, fixit-var(header-background-color) 1px);
-  }
-
-  &:not(.blur) {
-    background-color: fixit-var(header-background-color);
-  }
 
   &:hover {
-    box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.125);
+    box-shadow: $header-box-shadow;
+  }
 
-    [data-theme=dark] & {
-      box-shadow: 0 0 1.5rem 0 rgba(255, 255, 255, 0.125);
+  @include scroll-state-query('scroller scroll-state(scrollable: top)') {
+    box-shadow: $header-box-shadow;
+  }
+
+  &.blur {
+    @include scroll-state-query('scroller scroll-state(scrollable: top)', '&') {
+      background-color: transparent;
+      backdrop-filter: saturate(1.2) blur(10px);
+      background-size: 4px 4px;
+      background-image: radial-gradient(transparent 1px, fixit-var(header-background-color) 1px);
     }
   }
 
@@ -191,10 +193,8 @@ header {
       padding: 0 2rem 0 2rem;
     }
 
-    @include placeholder;
-
     .search-button {
-      color: fixit-var(global-placeholder-color);
+      color: fixit-var(global-font-tertiary-color);
     }
 
     .search-clear:hover {
@@ -204,14 +204,28 @@ header {
     .search-toggle:hover {
       cursor: default;
     }
+
+    @include placeholder;
   }
 }
 
 .theme-switch {
   i {
-    transform: rotate(225deg);
-    transition: all 0.4s ease;
+    display: inline-block;
+    transform: rotate(225deg) scale(1);
+    transform-origin: center;
+    @include theme-switch-mode('auto');
+    @include theme-switch-mode('light', '\f185');
+    @include theme-switch-mode('dark', '\f186');
+
+    @include media('reduce-motion') {
+      animation: none !important;
+    }
   }
+
+  @include theme-switch-keyframes('auto', 180deg, 0.9, 0.7, 60%, 245deg, 1.08);
+  @include theme-switch-keyframes('light', 140deg, 0.82, 0.55, 55%, 250deg, 1.12);
+  @include theme-switch-keyframes('dark', 310deg, 0.86, 0.55, 55%, 205deg, 1.08);
 }
 
 #header-desktop {
@@ -248,17 +262,11 @@ header {
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
-      float: right;
 
       > .menu-item {
         &:hover .sub-menu {
           display: block;
           transform: translateX(-0.5rem);
-        }
-        &.theme-switch {
-          &:hover i {
-            transform: rotate(45deg);
-          }
         }
         &.language-switch:hover .sub-menu {
           transform: translateX(calc(1.75rem - 100%));
@@ -270,9 +278,9 @@ header {
 
         &.delimiter {
           width: 0;
-          margin: 0.125rem 0.25rem;
+          margin: 18.5px 0.5rem;
           padding: 0;
-          border-left: 1px dashed fixit-var(global-border-color-weight);
+          border-left: 1.5px solid fixit-var(global-border-color);
         }
       }
 
@@ -286,13 +294,10 @@ header {
         background-color: fixit-var(header-background-color);
         max-height: 60vh;
         overflow-y: auto;
-        @include border-radius;
+        overscroll-behavior: contain;
         transition: box-shadow 0.3s ease;
-        box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.1);
-
-        [data-theme=dark] & {
-          box-shadow: 0 0 1.5rem 0 rgba(255, 255, 255, 0.1);
-        }
+        @include border-radius;
+        box-shadow: 0 0 1.5rem 0 light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
 
         .menu-item {
           height: fixit-var(submenu-height);
@@ -387,13 +392,10 @@ header {
       border-top: 2px solid fixit-var(global-border-color-light);
       display: none;
       overflow-y: auto;
+      overscroll-behavior: contain;
       max-height: 70vh;
-      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
       @include scrollbar-width(none, 0);
-
-      [data-theme=dark] & {
-        box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
-      }
+      box-shadow: 0 0.125rem 0.25rem light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
 
       .search-wrapper {
         display: flex;
@@ -438,11 +440,7 @@ header {
         padding: 0 1rem;
 
         &:not(.menu-system):hover {
-          background-color: #f2f2f3;
-
-          [data-theme=dark] & {
-            background-color: #535355;
-          }
+          background-color: light-dark(#f2f2f3, #535355);
         }
 
         .menu-link {
@@ -501,11 +499,7 @@ header {
         }
 
         .menu-item:hover {
-          background-color: #e7e7ea;
-
-          [data-theme=dark] & {
-            background-color: #5d5d5f;
-          }
+          background-color: light-dark(#e7e7ea, #5d5d5f);
         }
       }
 
@@ -544,10 +538,7 @@ header {
   top: fixit-var(header-height);
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
   @include z-index(fixed);
-
-  [data-theme=dark] & {
-    box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
-  }
+  box-shadow: 0 0.125rem 0.25rem light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
 
   &.desktop {
     right: 2rem;
@@ -569,27 +560,34 @@ header {
 
     .suggestions {
       overflow-y: auto;
-      // 41px is the height of the search-footer
-      max-height: calc(100dvh - #{fixit-var(header-height)} - 41px);
+      overscroll-behavior: contain;
+      // 40px is the height of the search-footer
+      max-height: calc(100dvh - #{fixit-var(header-height)} - 40px);
 
       .suggestion {
         padding: 0.75rem 1rem;
 
-        .suggestion-title {
-          display: inline-block;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          font-size: 1rem;
-          font-weight: bold;
-          max-width: 75%;
-        }
+        > :first-child {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.25rem;
+          margin-bottom: 0.5rem;
 
-        .suggestion-date {
-          font-size: 0.875rem;
-          float: right;
-          text-align: right;
-          color: fixit-var(secondary);
+          > a {
+            display: inline-block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 1rem;
+            font-weight: bold;
+          }
+
+          .suggestion-date {
+            font-size: 0.875rem;
+            flex-shrink: 0;
+            color: fixit-var(global-font-tertiary-color);
+          }
         }
 
         .suggestion-context {
@@ -600,7 +598,7 @@ header {
           line-clamp: 2;
           overflow: hidden;
           text-overflow: ellipsis;
-          color: fixit-var(global-placeholder-color);
+          color: fixit-var(global-font-secondary-color);
           @include overflow-wrap(break-word);
         }
 
@@ -610,11 +608,7 @@ header {
         }
 
         &.cursor {
-          background: darken($code-background-color, 5%);
-
-          [data-theme=dark] & {
-            background: lighten($code-background-color-dark, 5%);
-          }
+          background-color: fixit-var(code-block-background-color);
         }
 
         &:hover {
@@ -628,24 +622,16 @@ header {
       text-align: center;
 
       .search-query {
-        font-weight: bold;
-
-        [data-theme=dark] & {
-          color: #ddd;
-        }
+        @include bold-dark;
       }
     }
 
     .search-footer {
       padding: 0.5rem 1rem;
-      float: right;
-      font-size: 0.8rem;
-      color: fixit-var(secondary);
+      font-size: 0.875rem;
+      text-align: right;
+      color: fixit-var(global-font-secondary-color);
       @include link(false, false);
-
-      a {
-        font-size: 1rem;
-      }
     }
   }
 }

@@ -1,44 +1,55 @@
-[data-theme=dark] .aplayer {
-  background: #212121;
+@mixin aplayer-dark-theme {
+  $aplayer-bg: #181f28;
+  $aplayer-bg-elevated: #1f2731;
+  $aplayer-bg-hover: #252f3a;
+  $aplayer-bg-active: #2b3642;
+  $aplayer-border: #313a45;
+  $aplayer-text: #d1d7e0;
+  $aplayer-text-secondary: #9aa5b1;
+  $aplayer-text-muted: #838d98;
+  $aplayer-shadow: #161b22;
+  $aplayer-switcher-bg: #232d39;
+
+  background: $aplayer-bg;
 
   &.aplayer-withlist {
     .aplayer-info {
-      border-bottom-color: #5c5c5c;
+      border-bottom-color: $aplayer-border;
     }
   }
 
   &.aplayer-fixed {
     .aplayer-list {
-      border-color: #5c5c5c;
+      border-color: $aplayer-border;
     }
   }
 
   .aplayer-body {
-    background-color: #212121;
+    background-color: $aplayer-bg;
   }
 
   .aplayer-info {
-    border-top-color: #212121;
+    border-top-color: $aplayer-border;
   }
 
   .aplayer-info {
     .aplayer-music {
       .aplayer-title {
-        color: #fff;
+        color: $aplayer-text;
       }
 
       .aplayer-author {
-        color: #fff;
+        color: $aplayer-text-secondary;
       }
     }
 
     .aplayer-controller {
       .aplayer-time {
-        color: #eee;
+        color: $aplayer-text-secondary;
 
         .aplayer-icon {
           path {
-            fill: #eee;
+            fill: $aplayer-text-secondary;
           }
         }
       }
@@ -46,59 +57,69 @@
   }
 
   .aplayer-list {
-    background-color: #212121;
+    background-color: $aplayer-bg;
 
     li {
-      color: #fff;
-      border-top-color: #666;
+      color: $aplayer-text;
+      border-top-color: $aplayer-border;
 
       &:hover {
-        background: #4e4e4e;
+        background: $aplayer-bg-hover;
       }
 
       &.aplayer-list-light {
-        background: #6c6c6c;
+        background: $aplayer-bg-active;
       }
 
       .aplayer-list-index {
-        color: #ddd;
+        color: $aplayer-text-muted;
       }
 
       .aplayer-list-author {
-        color: #ddd;
+        color: $aplayer-text-secondary;
       }
     }
   }
 
   .aplayer-lrc {
-    text-shadow: -1px -1px 0 #666;
+    text-shadow: -1px -1px 0 $aplayer-shadow;
 
     &:before {
-      background: -moz-linear-gradient(top, rgba(33,33,33,1) 0%, rgba(33,33,33,0) 100%);
-      background: -webkit-linear-gradient(top, rgba(33,33,33,1) 0%,rgba(33,33,33,0) 100%);
-      background: linear-gradient(to bottom, rgba(33,33,33,1) 0%,rgba(33,33,33,0) 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#212121', endColorstr='#00212121',GradientType=0 );
+      background: -moz-linear-gradient(top, rgba(24,31,40,1) 0%, rgba(24,31,40,0) 100%);
+      background: -webkit-linear-gradient(top, rgba(24,31,40,1) 0%, rgba(24,31,40,0) 100%);
+      background: linear-gradient(to bottom, rgba(24,31,40,1) 0%, rgba(24,31,40,0) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#181f28', endColorstr='#00181f28',GradientType=0 );
     }
 
     &:after {
-      background: -moz-linear-gradient(top, rgba(33,33,33,0) 0%, rgba(33,33,33,0.8) 100%);
-      background: -webkit-linear-gradient(top, rgba(33,33,33,0) 0%,rgba(33,33,33,0.8) 100%);
-      background: linear-gradient(to bottom, rgba(33,33,33,0) 0%,rgba(33,33,33,0.8) 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00212121', endColorstr='#cc212121',GradientType=0 );
+      background: -moz-linear-gradient(top, rgba(24,31,40,0) 0%, rgba(24,31,40,0.9) 100%);
+      background: -webkit-linear-gradient(top, rgba(24,31,40,0) 0%, rgba(24,31,40,0.9) 100%);
+      background: linear-gradient(to bottom, rgba(24,31,40,0) 0%, rgba(24,31,40,0.9) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00181f28', endColorstr='#e6181f28',GradientType=0 );
     }
 
     p {
-      color: #fff;
+      color: $aplayer-text;
     }
   }
 
   .aplayer-miniswitcher {
-    background: #484848;
+    background: $aplayer-switcher-bg;
 
     .aplayer-icon {
       path {
-        fill: #eee;
+        fill: $aplayer-text-secondary;
       }
     }
+  }
+}
+
+[data-theme-mode='dark'] .aplayer {
+  @include aplayer-dark-theme;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-theme-mode='auto'] .aplayer {
+    @include aplayer-dark-theme;
   }
 }

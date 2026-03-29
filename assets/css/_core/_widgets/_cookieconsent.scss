@@ -5,11 +5,7 @@
 
     &:hover,
     &:focus {
-      background-color: #ccc;
-
-      [data-theme=dark] & {
-        background-color: #444;
-      }
+      background-color: light-dark(#ccc, #444);
     }
   }
 }

@@ -1,7 +1,7 @@
 // ========== Global ========== //
 // Color of the border
-$border-color: #f0f0f0;
-$border-color-dark: #363636;
+$border-color: #d7dee4;
+$border-color-dark: #383f47;
 
 // ========== Code ========== //
 // Color of the code
@@ -9,8 +9,8 @@ $code-color: #E74C3C !default;
 $code-color-dark: #E5BF78 !default;
 
 // Color of the code background
-$code-background-color: #f5f5f5 !default;
-$code-background-color-dark: #272C34 !default;
+$code-background-color: #f4f6f8 !default;
+$code-background-color-dark: #2d333B !default;
 
 @mixin overflow-wrap($value) {
   word-wrap: $value;
@@ -32,23 +32,14 @@ $code-background-color-dark: #272C34 !default;
   .vcards .vcard .vh,
   .vcards .vcard .vquote,
   blockquote {
-    border-color: $border-color;
-
-    [data-theme=dark] & {
-      border-color: $border-color-dark;
-    }
+    border-color: light-dark($border-color, $border-color-dark);
   }
 
   code, pre, pre code {
     font-size: 90%;
     tab-size: 4;
-    color: $code-color;
-    background-color: $code-background-color;
+    color: light-dark($code-color, $code-color-dark);
+    background-color: light-dark($code-background-color, $code-background-color-dark);
     @include overflow-wrap(break-word);
-
-    [data-theme=dark] & {
-      color: $code-color-dark;
-      background-color: $code-background-color-dark;
-    }
   }
 }

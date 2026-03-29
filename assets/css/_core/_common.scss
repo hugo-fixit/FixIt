@@ -61,7 +61,7 @@
 
 // auto adapt to dark mode by inverting the color and hue
 .auto-dark-mode {
-  [data-theme=dark] & {
+  @include dark-mode {
     filter: invert(1) hue-rotate(0.5turn);
   }
 }

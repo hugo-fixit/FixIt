@@ -69,11 +69,11 @@
         content: attr(data-separator);
         display: inline-block;
         padding-inline: 0.5rem;
-        color: fixit-var(global-placeholder-color);
+        color: fixit-var(global-border-color);
       }
 
       &.active {
-        color: fixit-var(secondary);
+        color: fixit-var(global-font-secondary-color);
       }
     }
   }

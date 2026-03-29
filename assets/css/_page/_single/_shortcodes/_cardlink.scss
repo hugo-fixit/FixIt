@@ -34,7 +34,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.75rem;
-    background-color: rgba(245, 245, 245, 0.88);
+    background-color: light-dark(rgba(245, 245, 245, 0.88), rgba(61, 62, 65, 0.88));
   }
 
   &text {
@@ -58,7 +58,7 @@
     align-items: center;
     margin-top: 0.25rem;
     font-size: 0.825rem;
-    color: fixit-var(secondary);
+    color: fixit-var(global-font-secondary-color);
   }
 
   &icon-link {
@@ -96,11 +96,5 @@
     margin-left: 0.25rem;
     object-fit: cover;
     @include border-radius(full);
-  }
-
-  [data-theme=dark] & {
-    &content {
-      background-color: rgba(61, 62, 65, 0.88);
-    }
   }
 }

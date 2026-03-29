@@ -51,7 +51,7 @@
     background-color: fixit-var(code-block-background-color);
 
     rt {
-      color: fixit-var(secondary);
+      color: fixit-var(global-font-secondary-color);
     }
   }
 }
@@ -120,7 +120,8 @@
   }
 
   .toc-content {
-    overflow-y: scroll;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     // TODO 这里计算错误，待重构使用 JS 计算
     max-height: calc(100vh - #{2 * #{fixit-var(header-height)}});
     @include scrollbar-width(none, 0);
@@ -203,11 +204,10 @@
 
   &:not(.open) {
     .toc-title {
-      @include set-fixit-var(code-header-background-color, darken($code-background-color, 6%));
-
-      [data-theme=dark] & {
-        @include set-fixit-var(code-header-background-color, darken($code-background-color-dark, 6%));
-      }
+      @include set-fixit-var(
+        code-header-background-color,
+        light-dark(darken($code-header-background-color, 1%), darken($code-header-background-color-dark, 1%))
+      );
     }
   }
 

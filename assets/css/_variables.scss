@@ -19,31 +19,31 @@ $global-border-radius: 5px !default;
 
 // Color of the background
 $global-background-color: #ffffff !default;
-$global-background-color-dark: #292a2e !default;
+$global-background-color-dark: #1f252d !default;
 
 // Color of the text
-$global-font-color: #161209 !default;
-$global-font-color-dark: #b1b1ba !default;
+$global-font-color: #1f2328 !default;
+$global-font-color-dark: #b3bdcb !default;
 
 // Color of the secondary text
 $global-font-secondary-color: #8b949e !default;
 $global-font-secondary-color-dark: #7d8792 !default;
 
-// Color of the placeholder
-$global-placeholder-color: #b1b1ba !default;
-$global-placeholder-color-dark: #909092 !default;
+// Color of the tertiary text
+$global-font-tertiary-color: lighten($global-font-secondary-color, 12%) !default;
+$global-font-tertiary-color-dark: darken($global-font-secondary-color-dark, 12%) !default;
 
 // Color of the link
 $global-link-color: #161209 !default;
-$global-link-color-dark: #b1b1ba !default;
+$global-link-color-dark: $global-font-color-dark !default;
 
 // Color of the hover link
 $global-link-hover-color: #2983bb !default; // 潮蓝
 $global-link-hover-color-dark: #fff !default;
 
 // Color of the border
-$global-border-color: #e3e3e3 !default;
-$global-border-color-dark: #454545 !default;
+$global-border-color: #d7dee4 !default;
+$global-border-color-dark: #383f47 !default;
 // ========== Global ========== //
 
 // ========== Scrollbar ========== //
@@ -65,15 +65,15 @@ $selection-color-dark: rgba(50, 112, 194, 0.4) !default;
 $header-height: 3.5rem !default;
 
 // Color of the header background
-$header-background-color: #f7f7f8 !default;
-$header-background-color-dark: #252627 !default;
+$header-background-color: #f6f8fa !default;
+$header-background-color-dark: #151b23 !default;
 
 // Font style of the header title
 $header-title-font-family: $global-font-family !default;
 $header-title-font-size: 1.375rem !default;
 
 // Color of the active menu item
-$menu-active-color: #161209 !default;
+$menu-active-color: $global-link-color !default;
 $menu-active-color-dark: #fff !default;
 
 // Border color of the menu item
@@ -84,13 +84,13 @@ $menu-border-color-dark: #5454547a !default;
 $submenu-height: $header-height * 0.5 !default;
 
 // Color of the search background
-$search-background-color: #e9e9e9 !default;
-$search-background-color-dark: #363636 !default;
+$search-background-color: #e9eaed !default;
+$search-background-color-dark: #202833 !default;
 // ========== Header ========== //
 
 // ========== Tag Cloud ========== //
 // Color range of tag cloud
-$tag-cloud-start: #b1b1ba !default;
+$tag-cloud-start: $global-font-color-dark !default;
 $tag-cloud-end: $global-font-color !default;
 $tag-cloud-start-dark: #909092 !default;
 $tag-cloud-end-dark: $global-font-color-dark !default;
@@ -118,12 +118,16 @@ $single-link-hover-color: #ea517f !default; // 莲瓣红
 $single-link-hover-color-dark: #cc5595 !default; // 龙须红
 
 // Color of the table background
-$table-background-color: #fff !default;
-$table-background-color-dark: #272c34 !default;
+$table-background-color: #f9fbfe !default;
+$table-background-color-dark: #26303a !default;
 
 // Color of the table thead
-$table-thead-color: #ededed !default;
-$table-thead-color-dark: #20252b !default;
+$table-thead-color: #e3ebf4 !default;
+$table-thead-color-dark: #3a4653 !default;
+
+// Color of the table border
+$table-border-color: #d4dee8 !default;
+$table-border-color-dark: #4b5867 !default;
 
 // Color of the blockquote
 $blockquote-color: #697681 !default;
@@ -140,7 +144,7 @@ $reward-img-width: 180px !default;
 // ========== Pagination ========== //
 // Color of the link in pagination
 $pagination-link-color: #bfbfbf !default;
-$pagination-link-color-dark: #b1b1ba !default;
+$pagination-link-color-dark: $global-font-color-dark !default;
 
 // Color of the hover link in pagination
 $pagination-link-hover-color: #000 !default;
@@ -149,21 +153,27 @@ $pagination-link-hover-color-dark: #fff !default;
 
 // ========== Code ========== //
 // Color of the code
-$code-color: #24292f !default;
-$code-color-dark: #adbac7 !default;
+$code-color: #26323d !default;
+$code-color-dark: #c5d1dc !default;
+
+// Color of the code header text
+$code-header-color: #70808f !default;
+$code-header-color-dark: #99a7b5 !default;
+
+// Color of the code header background
+$code-header-background-color: #dde6ef !default;
+$code-header-background-color-dark: #161f28 !default;
 
 // Color of the code background
-$code-background-color: #f4f6f8 !default;
-$code-background-color-dark: #2d333b !default;
+$code-background-color: #f3f7fb !default;
+$code-background-color-dark: #2a333d !default;
 
+// Color of the code error
 $code-error-color: #dc3545 !default;
 
 // Color of the highlight code
-$code-highlight-color: #fff8c5 !default;
-$code-highlight-color-dark: rgba(174, 124, 20, 0.15) !default;
-
-$code-header-color: #7d7d7d !default;
-$code-header-color-dark: #b1b0b0 !default;
+$code-highlight-color: #fff2b8 !default;
+$code-highlight-color-dark: rgba(191, 144, 32, 0.28) !default;
 
 // Font size of the code
 $code-font-size: 0.875em !default;
