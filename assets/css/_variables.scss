@@ -23,19 +23,19 @@ $global-background-color-dark: #1f252d !default;
 
 // Color of the text
 $global-font-color: #1f2328 !default;
-$global-font-color-dark: #d1d7e0 !default;
+$global-font-color-dark: #b3bdcb !default;
 
 // Color of the secondary text
 $global-font-secondary-color: #8b949e !default;
 $global-font-secondary-color-dark: #7d8792 !default;
 
-// Color of the placeholder
-$global-placeholder-color: #b1b1ba !default;
-$global-placeholder-color-dark: #909092 !default;
+// Color of the tertiary text
+$global-font-tertiary-color: lighten($global-font-secondary-color, 12%) !default;
+$global-font-tertiary-color-dark: darken($global-font-secondary-color-dark, 12%) !default;
 
 // Color of the link
 $global-link-color: #161209 !default;
-$global-link-color-dark: #b1b1ba !default;
+$global-link-color-dark: $global-font-color-dark !default;
 
 // Color of the hover link
 $global-link-hover-color: #2983bb !default; // 潮蓝
@@ -73,7 +73,7 @@ $header-title-font-family: $global-font-family !default;
 $header-title-font-size: 1.375rem !default;
 
 // Color of the active menu item
-$menu-active-color: #161209 !default;
+$menu-active-color: $global-link-color !default;
 $menu-active-color-dark: #fff !default;
 
 // Border color of the menu item
@@ -90,7 +90,7 @@ $search-background-color-dark: #202833 !default;
 
 // ========== Tag Cloud ========== //
 // Color range of tag cloud
-$tag-cloud-start: #b1b1ba !default;
+$tag-cloud-start: $global-font-color-dark !default;
 $tag-cloud-end: $global-font-color !default;
 $tag-cloud-start-dark: #909092 !default;
 $tag-cloud-end-dark: $global-font-color-dark !default;
@@ -144,7 +144,7 @@ $reward-img-width: 180px !default;
 // ========== Pagination ========== //
 // Color of the link in pagination
 $pagination-link-color: #bfbfbf !default;
-$pagination-link-color-dark: #b1b1ba !default;
+$pagination-link-color-dark: $global-font-color-dark !default;
 
 // Color of the hover link in pagination
 $pagination-link-hover-color: #000 !default;

@@ -126,12 +126,12 @@
 
     .content {
       margin-top: 0.3rem;
-      color: fixit-var(global-placeholder-color);  
+      color: fixit-var(global-font-tertiary-color);  
       @include link(false, true);
 
       b,
       strong {
-        color: fixit-var(global-placeholder-color);
+        color: fixit-var(global-font-tertiary-color);
       }
     }
 

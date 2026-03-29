@@ -193,10 +193,8 @@ header {
       padding: 0 2rem 0 2rem;
     }
 
-    @include placeholder;
-
     .search-button {
-      color: fixit-var(global-placeholder-color);
+      color: fixit-var(global-font-tertiary-color);
     }
 
     .search-clear:hover {
@@ -206,6 +204,8 @@ header {
     .search-toggle:hover {
       cursor: default;
     }
+
+    @include placeholder;
   }
 }
 
@@ -586,7 +586,7 @@ header {
           .suggestion-date {
             font-size: 0.875rem;
             flex-shrink: 0;
-            color: fixit-var(global-font-secondary-color);
+            color: fixit-var(global-font-tertiary-color);
           }
         }
 
@@ -598,7 +598,7 @@ header {
           line-clamp: 2;
           overflow: hidden;
           text-overflow: ellipsis;
-          color: fixit-var(global-placeholder-color);
+          color: fixit-var(global-font-secondary-color);
           @include overflow-wrap(break-word);
         }
 

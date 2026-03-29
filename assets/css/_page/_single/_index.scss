@@ -95,9 +95,10 @@
     content: attr(data-end-flag);
     display: block;
     text-align: center;
-    font-size: 15px;
-    padding: 5px;
-    color: fixit-var(global-placeholder-color);
+    font-size: 0.875em;
+    padding: 0.25rem;
+    color: fixit-var(global-font-tertiary-color);
+    opacity: 0.8;
   }
 
   hr {
