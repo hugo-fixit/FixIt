@@ -118,12 +118,16 @@ $single-link-hover-color: #ea517f !default; // 莲瓣红
 $single-link-hover-color-dark: #cc5595 !default; // 龙须红
 
 // Color of the table background
-$table-background-color: #fbfcfe !default;
-$table-background-color-dark: #242c35 !default;
+$table-background-color: #f9fbfe !default;
+$table-background-color-dark: #26303a !default;
 
 // Color of the table thead
-$table-thead-color: #e7edf3 !default;
-$table-thead-color-dark: #1d242d !default;
+$table-thead-color: #e3ebf4 !default;
+$table-thead-color-dark: #3a4653 !default;
+
+// Color of the table border
+$table-border-color: #d4dee8 !default;
+$table-border-color-dark: #4b5867 !default;
 
 // Color of the blockquote
 $blockquote-color: #697681 !default;
@@ -149,27 +153,27 @@ $pagination-link-hover-color-dark: #fff !default;
 
 // ========== Code ========== //
 // Color of the code
-$code-color: #24292f !default;
-$code-color-dark: #adbac7 !default;
+$code-color: #26323d !default;
+$code-color-dark: #c5d1dc !default;
 
 // Color of the code header text
-$code-header-color: #7d7d7d !default;
-$code-header-color-dark: #b1b0b0 !default;
+$code-header-color: #70808f !default;
+$code-header-color-dark: #99a7b5 !default;
 
 // Color of the code header background
-$code-header-background-color: #e4e9ee !default;
-$code-header-background-color-dark: #181f28 !default;
+$code-header-background-color: #dde6ef !default;
+$code-header-background-color-dark: #161f28 !default;
 
 // Color of the code background
-$code-background-color: #f4f6f8 !default;
-$code-background-color-dark: #2d333B !default;
+$code-background-color: #f3f7fb !default;
+$code-background-color-dark: #2a333d !default;
 
 // Color of the code error
 $code-error-color: #dc3545 !default;
 
 // Color of the highlight code
-$code-highlight-color: #fff8c5 !default;
-$code-highlight-color-dark: rgba(174, 124, 20, 0.3) !default;
+$code-highlight-color: #fff2b8 !default;
+$code-highlight-color-dark: rgba(191, 144, 32, 0.28) !default;
 
 // Font size of the code
 $code-font-size: 0.875em !default;

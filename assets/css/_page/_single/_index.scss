@@ -299,15 +299,20 @@
     .table-wrapper {
       position: relative;
       overflow-x: auto;
+      overflow-y: hidden;
+      margin: 0.5rem 0;
+      background: fixit-var(table-background-color);
+      border: 1px solid fixit-var(table-border-color);
+      @include border-radius;
       @include set-fixit-var(scrollbar-thumb-color, fixit-var(table-background-color));
 
       > table {
         width: 100%;
         max-width: 100%;
-        margin: 0.625rem 0;
+        margin: 0;
         border-spacing: 0;
         background: fixit-var(table-background-color);
-        border-collapse: collapse;
+        border-collapse: separate;
 
         thead {
           background: fixit-var(table-thead-color);
@@ -326,7 +331,16 @@
         th,
         td {
           padding: 0.3rem 1rem;
-          border: 1px solid light-dark(darken($table-thead-color, 4%), #3d444d);
+          border-right: 1px solid fixit-var(table-border-color);
+          border-bottom: 1px solid fixit-var(table-border-color);
+        }
+
+        tr > :last-child {
+          border-right: none;
+        }
+
+        > :last-child > tr:last-child > * {
+          border-bottom: none;
         }
       }
     }

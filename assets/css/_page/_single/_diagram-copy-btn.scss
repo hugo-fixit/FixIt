@@ -6,12 +6,6 @@
 
 // Diagram copy button styles
 .diagram-copy-btn {
-  @include set-fixit-vars((
-    dcb-color: light-dark(#25292e, #d1d7e0),
-    dcb-border-color: light-dark(#d1d9e0, #3d444d),
-    dcb-background-color: light-dark(#f6f8fa, #2a313c),
-    dcb-box-shadow: 0px 1px 0px 0px light-dark(#1f23280a, #000000)
-  ));
   width: 1rem;
   height: 1rem;
   position: absolute;
@@ -20,19 +14,15 @@
   line-height: 1;
   padding: 0.5rem;
   border: 1px solid;
-  color: fixit-var(dcb-color, #25292e);
-  border-color: fixit-var(dcb-border-color, #d1d9e0);
-  background-color: fixit-var(dcb-background-color, #f6f8fa);
-  box-shadow: fixit-var(dcb-box-shadow, 0px 1px 0px 0px #1f23280a);
+  color: light-dark(#25292e, #d1d7e0);
+  border-color: light-dark(#d1d9e0, #3d444d);
+  background-color: light-dark(#f6f8fa, #2a313c);
   @include user-select(none);
   @include border-radius;
   @include z-index(base);
 
   &:hover {
-    @include set-fixit-vars((
-      dcb-border-color: light-dark(#d1d9e0, #3d444d),
-      dcb-background-color: light-dark(#eff2f5, #2f3742)
-    ));
+    background-color: light-dark(darken(#f6f8fa, 3%), darken(#2a313c, 3%));
   }
 
   .fa-clone {

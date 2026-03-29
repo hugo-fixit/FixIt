@@ -606,6 +606,7 @@ class FixIt {
         }, false);
         // line wrapping toggle button
         $codeHeader.querySelector('.line-wrap-btn')?.addEventListener('click', () => {
+          if ($codeBlock.querySelector('[contenteditable="true"]')) return;
           $codeBlock.classList.toggle('line-wrapping');
         }, false);
         // edit button toggle button
@@ -620,6 +621,7 @@ class FixIt {
                 $hl.classList.remove('hl');
               });
               $codeBlock.classList.add('is-expanded');
+              $codeBlock.classList.remove('line-wrapping');
               $codePreEl.setAttribute('contenteditable', true);
               $codePreEl.focus();
             }

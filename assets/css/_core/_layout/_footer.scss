@@ -19,8 +19,16 @@ footer {
         margin-right: 0.25rem;
       }
 
+      .hugo-icon,
+      .fixit-icon,
       .animate-icon {
-        color: #dc143c;
+        @include dark-mode {
+          filter: invert(1) hue-rotate(0.5turn) opacity(0.6);
+        }
+      }
+
+      .animate-icon {
+        color: light-dark(#e01846, #ff5f7a);
         animation: icon-animate 1.33s ease-in-out infinite;
       }
     }

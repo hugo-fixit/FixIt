@@ -475,7 +475,7 @@ pre {
 
     // when line numbers shown
     &:not(.line-nos-hidden) {
-      .lntd:last-child pre.chroma,
+      .lntd:last-child pre.chroma:not([contenteditable='true']),
       .code-wrapper > pre.chroma:not(:has(.ln)) {
         padding-left: 0;
       }
