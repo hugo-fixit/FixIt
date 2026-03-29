@@ -22,11 +22,11 @@
       }
     }
 
-    &.fi-container {
+    &.#{$prefix}container {
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      padding-inline: 1rem;
+      padding-inline: 0.5rem;
 
       &[data-reverse] {
         flex-direction: row-reverse;

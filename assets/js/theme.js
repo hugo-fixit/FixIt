@@ -3,6 +3,8 @@ import {
   forEach,
   getScrollTop,
   isMobile,
+  getThemeMode,
+  isDarkMode,
   isTocStatic,
   animateCSS,
   isValidDate,
@@ -19,7 +21,8 @@ const copyText = createCopyText();
 class FixIt {
   constructor() {
     this.config = window.config;
-    this.isDark = document.documentElement.dataset.theme === 'dark';
+    this.themeMode = getThemeMode();
+    this.isDark = isDarkMode();
     this.newScrollTop = getScrollTop();
     this.oldScrollTop = this.newScrollTop;
     this.scrollEventSet = new Set();
@@ -28,7 +31,6 @@ class FixIt {
     this.clickMaskEventSet = new Set();
     this.beforeprintEventSet = new Set();
     this.afterprintEventSet = new Set();
-    this.disableScrollEvent = false;
     window.objectFitImages && objectFitImages();
   }
 
@@ -85,7 +87,6 @@ class FixIt {
       $mask.classList.toggle('blur');
       $menuToggleMobile.classList.toggle('active');
       $menuMobile.classList.toggle('active');
-      this.disableScrollEvent = $mask.classList.contains('blur');
     }, false);
     this._menuMobileOnClickMask = this._menuMobileOnClickMask || (() => {
       $menuToggleMobile.classList.remove('active');
@@ -102,16 +103,36 @@ class FixIt {
   }
 
   initSwitchTheme() {
+    const mql = window.matchMedia('(prefers-color-scheme: dark)');
+    const modes = ['auto', 'light', 'dark'];
+    const applyThemeMode = (mode, persist = true) => {
+      this.themeMode = mode;
+      document.documentElement.dataset.themeMode = mode;
+      this.isDark = mode === 'auto' ? mql.matches : mode === 'dark';
+
+      if (persist) {
+        window.localStorage?.setItem('theme-mode', mode);
+      }
+
+      for (let event of this.switchThemeEventSet) {
+        event(this.isDark);
+      }
+    };
+
     forEach(document.getElementsByClassName('theme-switch'), ($themeSwitch) => {
       $themeSwitch.addEventListener('click', () => {
-        document.documentElement.dataset.theme = this.isDark ? 'light' : 'dark';
-        document.documentElement.style.setProperty('color-scheme', this.isDark ? 'light' : 'dark');
-        this.isDark = !this.isDark;
-        window.localStorage?.setItem('theme', this.isDark ? 'dark' : 'light');
-        for (let event of this.switchThemeEventSet) {
-          event(this.isDark);
-        }
+        const currentIndex = modes.indexOf(this.themeMode);
+        const nextMode = modes[(currentIndex + 1) % modes.length];
+        applyThemeMode(nextMode);
       }, false);
+    });
+
+    mql.addEventListener('change', (e) => {
+      if (this.themeMode !== 'auto') return;
+      this.isDark = e.matches;
+      for (let event of this.switchThemeEventSet) {
+        event(this.isDark);
+      }
     });
   }
 
@@ -195,12 +216,10 @@ class FixIt {
     if (_isMobile) {
       this._searchMobileOnce = true;
       $searchInput.addEventListener('focus', () => {
-        this.disableScrollEvent = true;
         $mask.classList.add('blur');
         $header.classList.add('open');
       }, false);
       $searchCancel.addEventListener('click', () => {
-        this.disableScrollEvent = false;
         $mask.classList.remove('blur');
         document.getElementById('menu-toggle-mobile').classList.remove('active');
         document.getElementById('menu-mobile').classList.remove('active');
@@ -220,10 +239,8 @@ class FixIt {
         $mask.classList.add('blur');
         $header.classList.add('open');
         $searchInput.focus();
-        this.disableScrollEvent = true;
       }, false);
       $searchClear.addEventListener('click', () => {
-        this.disableScrollEvent = false;
         $searchClear.style.display = 'none';
         this._searchDesktop && this._searchDesktop.autocomplete.setVal('');
       }, false);
@@ -589,6 +606,7 @@ class FixIt {
         }, false);
         // line wrapping toggle button
         $codeHeader.querySelector('.line-wrap-btn')?.addEventListener('click', () => {
+          if ($codeBlock.querySelector('[contenteditable="true"]')) return;
           $codeBlock.classList.toggle('line-wrapping');
         }, false);
         // edit button toggle button
@@ -603,6 +621,7 @@ class FixIt {
                 $hl.classList.remove('hl');
               });
               $codeBlock.classList.add('is-expanded');
+              $codeBlock.classList.remove('line-wrapping');
               $codePreEl.setAttribute('contenteditable', true);
               $codePreEl.focus();
             }
@@ -1514,31 +1533,26 @@ class FixIt {
   }
 
   onScroll() {
-    const $headers = [];
     const ACCURACY = 20;
+    const $autoHeaders = [];
     const $backToTop = document.querySelector('.back-to-top');
     const $readingProgressBar = document.querySelector('.reading-progress-bar');
     if (document.body.dataset.headerDesktop === 'auto') {
-      $headers.push(document.getElementById('header-desktop'));
+      $autoHeaders.push(document.getElementById('header-desktop'));
     }
     if (document.body.dataset.headerMobile === 'auto') {
-      $headers.push(document.getElementById('header-mobile'));
+      $autoHeaders.push(document.getElementById('header-mobile'));
     }
     $backToTop?.addEventListener('click', () => {
       scrollIntoView('body');
     });
     window.addEventListener('scroll', (event) => {
-      if (this.disableScrollEvent) {
-        event.preventDefault();
-        return;
-      }
       this.newScrollTop = getScrollTop();
       const scroll = this.newScrollTop - this.oldScrollTop;
-      const isTop = this.newScrollTop <= 0;
       if (Math.abs(scroll) > ACCURACY) {
         document.getElementById('mask').click();
         const isScrollingDown = scroll > 0;
-        forEach($headers, ($header) => {
+        forEach($autoHeaders, ($header) => {
           if (isScrollingDown) {
             $header.classList.remove('header__fadeInDown');
             animateCSS($header, ['header__fadeOutUp'], true);
@@ -1548,7 +1562,7 @@ class FixIt {
           }
         });
       } else if (this.newScrollTop <= 0) {
-        forEach($headers, ($header) => {
+        forEach($autoHeaders, ($header) => {
           $header.classList.remove('header__fadeOutUp');
           animateCSS($header, ['header__fadeInDown'], true);
         });
@@ -1612,7 +1626,6 @@ class FixIt {
       for (let event of this.clickMaskEventSet) {
         event();
       }
-      this.disableScrollEvent = false;
       e.target.classList.remove('blur');
     }, false);
   }

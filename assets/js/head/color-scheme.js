@@ -1,22 +1,16 @@
 import params from '@params';
 
 /**
- * Check theme isDark before body rendering
+ * Initialize theme mode before body rendering.
+ * Modes: auto | light | dark
  */
 (function () {
   const localStorage = window.localStorage;
-  if (!localStorage) {
-    return;
-  }
-  let isDark = false;
-  const themeUsed = localStorage.getItem('theme');
-  if (themeUsed) {
-    isDark = themeUsed === 'dark';
-  } else {
-    isDark = params.defaultTheme === 'auto' ?
-      window.matchMedia('(prefers-color-scheme: dark)').matches :
-      params.defaultTheme === 'dark';
-  }
-  isDark && (document.documentElement.dataset.theme = 'dark');
-  document.documentElement.style.setProperty('color-scheme', isDark ? 'dark' : 'light');
+  const storedMode = localStorage?.getItem('theme-mode');
+  const themeMode = storedMode ||
+    (params.defaultTheme === 'light' || params.defaultTheme === 'dark'
+      ? params.defaultTheme
+      : 'auto');
+
+  document.documentElement.dataset.themeMode = themeMode;
 })();

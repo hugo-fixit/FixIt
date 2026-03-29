@@ -554,7 +554,7 @@ desktopMode = "sticky"
 # FixIt 0.2.13 | CHANGED mobile header mode ["sticky", "normal", "auto"]
 mobileMode = "auto"
 # FixIt 1.0.0 | NEW whether to enable header blur effect
-blur = true
+blur = false
 
 # Header title config
 [params.header.title]

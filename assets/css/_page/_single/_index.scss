@@ -45,7 +45,7 @@
 
   .post-meta {
     font-size: 0.875rem;
-    color: fixit-var(secondary);
+    color: fixit-var(global-font-secondary-color);
 
     span {
       display: inline-block;
@@ -95,9 +95,10 @@
     content: attr(data-end-flag);
     display: block;
     text-align: center;
-    font-size: 15px;
-    padding: 5px;
-    color: fixit-var(global-placeholder-color);
+    font-size: 0.875em;
+    padding: 0.25rem;
+    color: fixit-var(global-font-tertiary-color);
+    opacity: 0.8;
   }
 
   hr {
@@ -167,10 +168,7 @@
       line-height: 1.25;
       margin-top: 1.5rem;
       margin-bottom: 1rem;
-
-      [data-theme=dark] & {
-        font-weight: bolder;
-      }
+      font-weight: light-dark(bold, bolder);
 
       &:hover,
       &:target {
@@ -199,11 +197,7 @@
 
     b,
     strong {
-      font-weight: bold;
-
-      [data-theme=dark] & {
-        color: #ddd;
-      }
+      @include bold-dark;
     }
 
     @include link(false, false);
@@ -214,9 +208,7 @@
 
       b,
       strong {
-        [data-theme=dark] & {
-          color: inherit;
-        }
+        color: inherit;
       }
     }
 
@@ -234,7 +226,7 @@
     }
 
     li::marker {
-      color: fixit-var(secondary);
+      color: fixit-var(global-font-secondary-color);
     }
     li:hover::marker {
       color: fixit-var(single-link-hover-color);
@@ -251,7 +243,7 @@
       }
     }
     li[data-task='x'] {
-      @include set-fixit-var(checkbox-color, fixit-var(secondary));
+      @include set-fixit-var(checkbox-color, fixit-var(global-font-secondary-color));
 
       .checkbox-icon {
         opacity: 0.6;
@@ -260,7 +252,7 @@
     li[data-task='-'] {
       opacity: 0.6;
       text-decoration: line-through rgba(145, 145, 145, 0.6);
-      @include set-fixit-var(task-color, fixit-var(secondary));
+      @include set-fixit-var(task-color, fixit-var(global-font-secondary-color));
     }
     li[data-task='/'] {
       @include set-fixit-var(task-color, fixit-var(success));
@@ -285,7 +277,7 @@
       background-color: fixit-var(code-block-background-color);
 
       rt {
-        color: fixit-var(secondary);
+        color: fixit-var(global-font-secondary-color);
       }
     }
 
@@ -308,15 +300,20 @@
     .table-wrapper {
       position: relative;
       overflow-x: auto;
+      overflow-y: hidden;
+      margin: 0.5rem 0;
+      background: fixit-var(table-background-color);
+      border: 1px solid fixit-var(table-border-color);
+      @include border-radius;
       @include set-fixit-var(scrollbar-thumb-color, fixit-var(table-background-color));
 
       > table {
         width: 100%;
         max-width: 100%;
-        margin: 0.625rem 0;
+        margin: 0;
         border-spacing: 0;
         background: fixit-var(table-background-color);
-        border-collapse: collapse;
+        border-collapse: separate;
 
         thead {
           background: fixit-var(table-thead-color);
@@ -324,30 +321,27 @@
 
         &:not([class]) tbody {
           & tr:nth-child(odd) {
-            background: darken($table-background-color, 2.25%);
-
-            [data-theme=dark] & {
-              background-color: lighten($table-background-color-dark, 2.75%);
-            }
+            background: light-dark(darken($table-background-color, 2.25%), lighten($table-background-color-dark, 2.75%));
           }
 
           & tr:hover {
-            background: darken($table-background-color, 4.5%);
-
-            [data-theme=dark] & {
-              background-color: lighten($table-background-color-dark, 5.5%);
-            }
+            background: light-dark(darken($table-background-color, 4.5%), lighten($table-background-color-dark, 5.5%));
           }
         }
 
         th,
         td {
           padding: 0.3rem 1rem;
-          border: 1px solid darken($table-thead-color, 2%);
+          border-right: 1px solid fixit-var(table-border-color);
+          border-bottom: 1px solid fixit-var(table-border-color);
+        }
 
-          [data-theme=dark] & {
-            border-color: darken($table-thead-color-dark, 2%);
-          }
+        tr > :last-child {
+          border-right: none;
+        }
+
+        > :last-child > tr:last-child > * {
+          border-bottom: none;
         }
       }
     }
@@ -406,15 +400,10 @@
 
     sup[id^='fnref']:has(.footnote-ref) {
       padding: 2px 4px;
-      background-color: rgba(238, 238, 238, 0.7);
-      color: #555555;
+      background-color: light-dark(rgba(238, 238, 238, 0.7), rgba(56, 139, 253, 0.1));
+      color: light-dark(#555555, #58a6ff);
       cursor: pointer;
       @include border-radius(0.25rem);
-
-      [data-theme=dark] & {
-        background-color: rgba(56, 139, 253, 0.1);
-        color: #58a6ff;
-      }
 
       @include link(true, false);
     }
@@ -422,12 +411,8 @@
     .footnotes {
       font-size: 0.75rem;
       white-space: normal;
-      color: #a3a3ae;
+      color: light-dark(#a3a3ae, #9d9d9f);
       @include link(false, true);
-
-      [data-theme=dark] & {
-        color: #9d9d9f;
-      }
 
       ol {
         margin-block: 1em;

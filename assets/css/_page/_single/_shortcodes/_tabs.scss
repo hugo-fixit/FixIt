@@ -246,19 +246,11 @@ tab-container {
         color: #ffffff;
         background-color: fixit-var(primary);
         box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.3);
-
-        [data-theme=dark] & {
-          background-color: fixit-var(primary);
-          box-shadow: 0 0.125rem 0.5rem rgba(255, 255, 255, 0.3);
-        }
+        box-shadow: 0 0.125rem 0.5rem light-dark(rgba(0, 0, 0, 0.3), rgba(255, 255, 255, 0.3));
       }
 
       &[aria-selected='false']:hover {
-        background-color: rgba(175, 184, 193, 0.4);
-
-        [data-theme=dark] & {
-          background-color: rgba(99, 110, 123, 0.6);
-        }
+        background-color: light-dark(rgba(175, 184, 193, 0.4), rgba(99, 110, 123, 0.6));
       }
     }
 
@@ -476,6 +468,7 @@ tab-container {
     }
 
     &::part(tablist-tab-wrapper) {
+      position: relative;
       padding: 0.25rem;
       background-color: fixit-var(code-block-background-color);
       @include border-radius;
@@ -490,7 +483,6 @@ tab-container {
       font-weight: 400;
       flex-grow: 1;
       @include z-index(base);
-
       @include tab-button-size;
       @include border-radius;
 
@@ -500,10 +492,13 @@ tab-container {
       }
 
       &[aria-selected='true'] {
-        anchor-name: #{$rootPrefix}tab-segment-active;
-        background-color: transparent;
         box-shadow: none;
       }
+    }
+
+    &:not(:has(> .tab-button:hover)) > .tab-button[aria-selected='true'],
+    > .tab-button:hover {
+      anchor-name: #{$rootPrefix}tab-segment-active;
     }
 
     // Sliding active indicator via anchor positioning
@@ -512,15 +507,18 @@ tab-container {
       position: absolute;
       pointer-events: none;
       position-anchor: #{$rootPrefix}tab-segment-active;
-      inset: anchor(inside);
+      top: anchor(top);
+      left: anchor(left);
+      width: anchor-size(width);
+      height: anchor-size(height);
       background-color: fixit-var(global-background-color);
-      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
-      transition: all 0.15s ease, top, bottom 0s;
+      transition:
+        top 0.3s ease,
+        left 0.3s ease,
+        width 0.3s ease,
+        height 0.3s ease;
+      box-shadow: 0 0.125rem 0.25rem light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
       @include border-radius;
-
-      [data-theme=dark] & {
-        box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
-      }
     }
   }
 }
@@ -623,11 +621,7 @@ tab-container .tab-panel:not([hidden]) {
       > .tab-button {
         &[aria-selected='true'] {
           background-color: fixit-var(global-background-color);
-          box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
-
-          [data-theme=dark] & {
-            box-shadow: 0 0.125rem 0.25rem rgba(255, 255, 255, 0.1);
-          }
+          box-shadow: 0 0.125rem 0.25rem light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
         }
       }
     }

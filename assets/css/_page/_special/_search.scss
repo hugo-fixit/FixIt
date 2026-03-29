@@ -15,7 +15,7 @@
       margin: 0;
 
       .gsc-input-box {
-        [data-theme=dark] & {
+        @include dark-mode {
           border-color: #c2c2c2;
         }
         input {
@@ -28,12 +28,12 @@
 
   #___gcse_0,
   #___gcse_1 {
-    [data-theme=dark] & {
+    @include dark-mode {
       filter: invert(1) hue-rotate(0.5turn);
     }
   }
   #___gcse_1 img {
-    [data-theme=dark] & {
+    @include dark-mode {
       filter: invert(1) hue-rotate(0.5turn) opacity(0.75);
     }
   }

@@ -66,7 +66,7 @@ FixIt/
 
    ```scss
    $global-font-family: system-ui, sans-serif;
-   $code-background-color: #f6f8fa;
+   $code-background-color: #f4f6f8;
    $header-height: 3.5rem;
    ```
 

@@ -45,7 +45,7 @@ ul.#{$prefix}timeline {
     .#{$prefix}timeline-item__timestamp {
       font-size: 0.8125rem;
       line-height: 1;
-      color: fixit-var(secondary);
+      color: fixit-var(global-font-secondary-color);
 
       &.is-top {
         margin-bottom: 0.25rem;
@@ -76,17 +76,17 @@ ul.#{$prefix}timeline {
       top: 1.25rem;
       transform: translateY(-50%);
       left: 0;
+      text-align: center;
+      border-style: solid;
+      color: transparent;
       width: fixit-var(timeline-circle-size);
       height: fixit-var(timeline-circle-size);
       font-size: fixit-var(timeline-circle-size);
       line-height: fixit-var(timeline-circle-size);
-      text-align: center;
-      @include border-radius(full);
       border-width: fixit-var(timeline-width);
-      border-style: solid;
       border-color: fixit-var(timeline-circle-color);
       background-color: fixit-var(global-background-color);
-      color: transparent;
+      @include border-radius(full);
       @include z-index(base);
     }
     &::after {

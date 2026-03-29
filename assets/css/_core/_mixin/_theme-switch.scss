@@ -1,0 +1,48 @@
+// Shared defaults for theme-switch icon motion.
+// Keep them overridable so other entries can reuse the same mixin with different pacing.
+$theme-switch-animation-duration: 0.5s !default;
+$theme-switch-animation-easing: cubic-bezier(0.22, 1, 0.36, 1) !default;
+
+/// Bind a theme mode selector to an icon glyph and its matching animation.
+/// @param {String} $mode - Theme mode name: auto | light | dark
+/// @param {String|null} $icon - Optional Font Awesome glyph code assigned to --fa
+/// @example
+///   @include theme-switch-mode('auto');
+///   @include theme-switch-mode('light', '\f185');
+@mixin theme-switch-mode($mode, $icon: null) {
+  [data-theme-mode='#{$mode}'] & {
+    @if $icon != null {
+      --fa: '#{$icon}';
+    }
+
+    animation: #{$prefix}theme-switch-#{$mode} $theme-switch-animation-duration $theme-switch-animation-easing;
+  }
+}
+
+/// Generate one theme-switch keyframes block from a compact parameter list.
+/// The final state is intentionally shared so all modes settle on the same resting pose.
+/// @param {String} $name - Animation suffix used in the generated keyframes name
+/// @param {Angle} $from-rotate - Initial rotation angle
+/// @param {Number} $from-scale - Initial icon scale
+/// @param {Number} $from-opacity - Initial icon opacity
+/// @param {String} $mid-step - Intermediate keyframe percentage such as 55% or 60%
+/// @param {Angle} $mid-rotate - Intermediate rotation angle
+/// @param {Number} $mid-scale - Intermediate icon scale
+@mixin theme-switch-keyframes($name, $from-rotate, $from-scale, $from-opacity, $mid-step, $mid-rotate, $mid-scale) {
+  @keyframes #{$prefix}theme-switch-#{$name} {
+    0% {
+      transform: rotate($from-rotate) scale($from-scale);
+      opacity: $from-opacity;
+    }
+
+    #{$mid-step} {
+      transform: rotate($mid-rotate) scale($mid-scale);
+      opacity: 1;
+    }
+
+    100% {
+      transform: rotate(225deg) scale(1);
+      opacity: 1;
+    }
+  }
+}

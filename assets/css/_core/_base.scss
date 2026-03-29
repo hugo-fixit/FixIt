@@ -9,6 +9,8 @@ html {
   width: 100%;
   scroll-behavior: smooth;
   overflow: auto;
+  container-type: scroll-state;
+  container-name: scroller;
 
   @include media('reduce-motion') {
     scroll-behavior: auto;

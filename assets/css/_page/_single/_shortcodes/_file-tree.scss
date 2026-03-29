@@ -8,11 +8,7 @@
   transition: box-shadow 0.2s ease;
 
   &:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-    [data-theme=dark] & {
-      box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
-    }
+    box-shadow: 0 2px 8px light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
   }
 
   ul.file-tree {
@@ -26,11 +22,7 @@
       &.file-tree-folder {
         > .file-tree-toggle {
           cursor: pointer;
-          font-weight: bold;
-
-          [data-theme=dark] & {
-            color: #ddd;
-          }
+          @include bold-dark;
 
           &:hover {
             i,
@@ -79,7 +71,7 @@
           translate: 0 -50%;
           width: 0.75rem;
           height: 1px;
-          background-color: fixit-var(secondary);
+          background-color: fixit-var(global-font-secondary-color);
         }
       }
     }
@@ -96,7 +88,7 @@
       bottom: 0.625rem;
       left: calc(1rem - 0.5px);
       width: 1px;
-      background-color: fixit-var(secondary);
+      background-color: fixit-var(global-font-secondary-color);
       height: fixit-var(file-tree-line-height);
     }
   }

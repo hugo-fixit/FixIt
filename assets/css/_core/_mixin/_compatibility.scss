@@ -1,4 +1,4 @@
-@mixin placeholder($color: fixit-var(global-placeholder-color)) {
+@mixin placeholder($color: fixit-var(global-font-tertiary-color)) {
   input::-webkit-input-placeholder {
     color: $color;
   }
@@ -30,4 +30,34 @@
   -webkit-user-select: $value !important;
   -moz-user-select: $value !important;
   user-select: $value !important;
+}
+
+/// Apply styles only when scroll-state container queries are supported.
+/// Unsupported browsers skip the container branch, and can optionally reuse
+/// the same styles through a fallback selector.
+/// @param {String} $container-query - Full container query string
+/// @param {String|null} $fallback-selector - Optional selector used as a fallback
+/// @example
+///   @include scroll-state-query('scroller scroll-state(scrollable: top)') {
+///     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+///   }
+///   @include scroll-state-query('scroller scroll-state(scrollable: top)', '&') {
+///     backdrop-filter: saturate(1.2) blur(10px);
+///   }
+@mixin scroll-state-query($container-query, $fallback-selector: null) {
+  @supports (container-type: scroll-state) {
+    @container #{$container-query} {
+      @content;
+    }
+  }
+
+  // Fallback for browsers that do not support scroll-state container queries, such as Safari and Firefox.
+  // https://caniuse.com/mdn-css_properties_container-type_scroll-state
+  @if $fallback-selector != null {
+    @supports not (container-type: scroll-state) {
+      #{$fallback-selector} {
+        @content;
+      }
+    }
+  }
 }

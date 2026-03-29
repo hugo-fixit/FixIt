@@ -26,10 +26,6 @@ pre {
     line-height: inherit;
     min-width: max-content;
     @include border-radius(0);
-
-    [data-theme=dark] & {
-      background-color: transparent;
-    }
   }
 
   img {
@@ -80,6 +76,7 @@ pre {
 
     .lntable {
       overflow: auto;
+      overscroll-behavior-x: none;
       display: block;
       background-color: fixit-var(code-block-background-color);
       @include border-radius;
@@ -120,7 +117,7 @@ pre {
   // Line numbers
   .lnt,
   .ln {
-    color: fixit-var(secondary);
+    color: fixit-var(global-font-secondary-color);
     @include user-select(none);
   }
 
@@ -321,21 +318,12 @@ pre {
       bottom: 0;
       background: linear-gradient(
         180deg,
-        rgba($code-background-color, 0) 0%,
-        rgba($code-background-color, 0.9) 60%,
-        $code-background-color 100%
+        light-dark(rgba($code-background-color, 0), rgba($code-background-color-dark, 0)) 0%,
+        light-dark(rgba($code-background-color, 0.9), rgba($code-background-color-dark, 0.9)) 60%,
+        light-dark($code-background-color, $code-background-color-dark) 100%
       );
       @include z-index(base);
       @include border-radius(bottom);
-
-      [data-theme=dark] & {
-        background: linear-gradient(
-          180deg,
-          rgba($code-background-color-dark, 0) 0%,
-          rgba($code-background-color-dark, 0.9) 60%,
-          $code-background-color-dark 100%
-        );
-      }
 
       .fa-angles-down {
         opacity: 0;
@@ -355,12 +343,11 @@ pre {
     &.is-collapsed {
       .code-header {
         transition: border-radius 0.2s ease 0.2s;
-        @include set-fixit-var(code-header-background-color, darken($code-background-color, 6%));
         @include border-radius;
-
-        [data-theme=dark] & {
-          @include set-fixit-var(code-header-background-color, darken($code-background-color-dark, 6%));
-        }
+        @include set-fixit-var(
+          code-header-background-color,
+          light-dark(darken($code-header-background-color, 1%), darken($code-header-background-color-dark, 1%))
+        );
 
         + .code-wrapper {
           height: 0;
@@ -413,8 +400,18 @@ pre {
     &.line-nos-hidden {
       > .chroma .lntable {
         width: 100%;
-        display: table;
+        overscroll-behavior-x: contain;
+
+        > tbody {
+          display: table;
+          width: 100%;
+        }
+
+        .lntd:last-child {
+          width: 100%;
+        }
       }
+
       .lntd:first-child,
       .ln {
         display: none;
@@ -459,7 +456,7 @@ pre {
           min-width: calc(#{fixit-var(line-digit)} * 1ch);
           padding-inline: 0.75rem;
           flex-shrink: 0;
-          color: fixit-var(secondary);
+          color: fixit-var(global-font-secondary-color);
           background-color: fixit-var(code-block-background-color);
         }
 
@@ -478,7 +475,7 @@ pre {
 
     // when line numbers shown
     &:not(.line-nos-hidden) {
-      .lntd:last-child pre.chroma,
+      .lntd:last-child pre.chroma:not([contenteditable='true']),
       .code-wrapper > pre.chroma:not(:has(.ln)) {
         padding-left: 0;
       }
@@ -486,11 +483,7 @@ pre {
 
     // add border for non-classic mode
     &:not([data-mode='classic']) {
-      border: 1px solid darken($code-background-color, 3%);
-
-      [data-theme=dark] & {
-        border-color: darken($code-background-color-dark, 3%);
-      }
+      border: 1px solid fixit-var(global-border-color-light);
     }
 
     &[data-mode='mac'] {
@@ -508,7 +501,7 @@ pre {
           width: 12px;
           @include border-radius(full);
 
-          [data-theme=dark] & {
+          @include dark-mode {
             @include set-fixit-vars((
               mac-red: #ff5f56,
               mac-yellow: #febc2e,
@@ -571,7 +564,7 @@ pre {
     background-color: fixit-var(gist-meta-background-color);
   }
 
-  [data-theme=dark] & {
+  @include dark-mode {
     @import './_code-syntax/github-dark-dimmed';
   }
 }
@@ -580,7 +573,7 @@ pre {
 .code-tabs {
   margin: 0.5rem 0;
   background-color: fixit-var(code-block-background-color);
-  border: 1px solid fixit-var(global-border-color);
+  border: 1px solid fixit-var(global-border-color-light);
   @include border-radius;
 
   &[data-shadow='always'] {
@@ -610,6 +603,7 @@ pre {
     color: fixit-var(code-header-color);
     background-color: fixit-var(code-header-background-color);
     position: sticky;
+    border-bottom: 1px solid fixit-var(global-border-color);
     @include z-index(base, 1);
     @include border-radius(top);
     @include sticky-top-offset;
@@ -630,7 +624,7 @@ pre {
         padding: 0.4rem 0.8rem;
         cursor: pointer;
         font-weight: bold;
-        color: fixit-var(secondary);
+        color: fixit-var(global-font-secondary-color);
         white-space: nowrap;
         @include user-select(none);
         @include border-radius;
@@ -654,7 +648,7 @@ pre {
         translate: 2px 2px;
         width: calc(anchor-size(width) - 0.25rem);
         height: calc(anchor-size(height) - 0.25rem);
-        box-shadow: inset 0 0 1rem 0.25rem color-mix(in srgb, fixit-var(secondary) 30%, transparent);
+        box-shadow: inset 0 0 1rem 0.25rem color-mix(in srgb, fixit-var(global-font-secondary-color) 30%, transparent);
         pointer-events: none;
         transition: 0.3s ease-in-out;
         @include border-radius;

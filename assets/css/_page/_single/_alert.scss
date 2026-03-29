@@ -27,22 +27,13 @@
   }
 
   @each $type, $item in $alert-color-map {
+    $dark-item: map-get($alert-color-map-dark, $type);
+
     &.alert-#{$type} {
       @include set-fixit-vars((
-        alert-border-color: map-get($item, border-color),
-        alert-color: map-get($item, color)
+        alert-border-color: light-dark(map-get($item, border-color), map-get($dark-item, border-color)),
+        alert-color: light-dark(map-get($item, color), map-get($dark-item, color))
       ));
-    }
-  }
-
-  [data-theme=dark] & {
-    @each $type, $item in $alert-color-map-dark {
-      &.alert-#{$type} {
-        @include set-fixit-vars((
-          alert-border-color: map-get($item, border-color),
-          alert-color: map-get($item, color)
-        ));
-      }
     }
   }
 }

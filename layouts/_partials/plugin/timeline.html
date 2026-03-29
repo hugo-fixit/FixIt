@@ -49,7 +49,7 @@
   {{- with $animation }} data-animation{{- end -}}
 >
   {{- range $index, $item := $events -}}
-    {{- $itemStyle := printf "--timeline-index: %v;" (add $index 1) -}}
+    {{- $itemStyle := printf "--fi-timeline-index: %v;" (add $index 1) -}}
     {{- with $item.color -}}
       {{- $itemStyle = add $itemStyle (printf "--timeline-circle-color: %v;" .) -}}
     {{- end -}}
