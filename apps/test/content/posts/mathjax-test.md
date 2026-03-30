@@ -141,5 +141,4 @@ For formula blocks:
 $$
 \bbox[border: solid .4pt magenta, pink]{x^2=4}
 $$
-{.auto-dark-mode}
 {{< /auto-dark >}}

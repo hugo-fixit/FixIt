@@ -1,0 +1,34 @@
+// Task list utility mixins
+// ----------------------------------------
+
+/// Set task list icon color and allow custom styles via @content
+/// @param {Color | Null} $color - Icon color (optional)
+/// Usage:
+///   @include task-icon(fixit-var(secondary)) {
+///     opacity: 0.8;
+///   }
+@mixin task-icon($color: null) {
+	> i {
+		// Set icon color (optional)
+		@if $color != null {
+			@include set-fixit-var(task-icon-color, $color);
+		}
+		@content;
+	}
+}
+
+/// Set task list text color and allow custom styles via @content
+/// @param {Color | Null} $color - Text color (optional)
+/// Usage:
+///   @include task-text(fixit-var(secondary)) {
+///     text-decoration: line-through fixit-var(secondary);
+///   }
+@mixin task-text($color: null) {
+	> span {
+		// Set text color (optional)
+		@if $color != null {
+			@include set-fixit-var(task-text-color, $color);
+		}
+		@content;
+	}
+}

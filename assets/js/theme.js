@@ -1409,7 +1409,14 @@ class FixIt {
 
   initTooltip() {
     if (!this.config.tooltip) return;
-    window.CellTooltip.initAll('[data-ct-tooltip]');
+    // task list items tooltip
+    window.CellTooltip.initAll('li[data-task] > span[title]', {
+      placement: 'right',
+    });
+    // code block action buttons tooltip
+    window.CellTooltip.initAll('.action-btn[title]');
+    // footnote refs tooltip
+    this.initFootnotes();
   }
 
   /**
@@ -1427,7 +1434,6 @@ class FixIt {
     this.initEcharts();
     this.initTypeit(target);
     this.initMapbox();
-    this.initFootnotes();
     this.initTooltip();
     if (includeToc) {
        window.setTimeout(() => {

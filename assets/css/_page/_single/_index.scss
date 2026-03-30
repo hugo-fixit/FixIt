@@ -120,7 +120,6 @@
         left: 5%;
         top: 50%;
         transform: translateY(-50%);
-        @include z-index(base);
         color: fixit-var(hr-active-color);
         font-size: 20px;
         line-height: 1;
@@ -128,6 +127,7 @@
         font-family: var(--fa-family-classic);
         font-weight: 600;
         content: '\f0c4';
+        @include z-index(base);
       }
     
       &:hover::before {
@@ -218,50 +218,52 @@
       margin-block: 0.5em;
     }
 
-    ol ol,
-    ol ul,
-    ul ol,
-    ul ul {
+    :is(ol, ul) :is(ol, ul) {
       padding-left: 20px;
     }
 
     li::marker {
-      color: fixit-var(global-font-secondary-color);
+      color: fixit-var(secondary);
     }
     li:hover::marker {
       color: fixit-var(single-link-hover-color);
     }
 
     // Task lists
-    li[data-task] {
-      list-style: none;
-      color: fixit-var(task-color);
-
-      .checkbox-icon {
-        margin: 0 .25em 0 -1.5em;
-        color: fixit-var(checkbox-color);
+    li {
+      &[data-task] {
+        list-style: none;
+        @include task-icon {
+          margin: 0 0.25em 0 -1.5em;
+          color: fixit-var(task-icon-color, fixit-var(secondary));
+        };
+        @include task-text {
+          color: fixit-var(task-text-color);
+        }
       }
-    }
-    li[data-task='x'] {
-      @include set-fixit-var(checkbox-color, fixit-var(global-font-secondary-color));
 
-      .checkbox-icon {
-        opacity: 0.6;
+      &[data-task='-'] {
+        @include task-icon {
+          opacity: 0.7;
+        };
+        @include task-text(fixit-var(secondary)) {
+          opacity: 0.7;
+          text-decoration: line-through fixit-var(secondary);
+        }
       }
-    }
-    li[data-task='-'] {
-      opacity: 0.6;
-      text-decoration: line-through rgba(145, 145, 145, 0.6);
-      @include set-fixit-var(task-color, fixit-var(global-font-secondary-color));
-    }
-    li[data-task='/'] {
-      @include set-fixit-var(task-color, fixit-var(success));
-    }
-    li[data-task='!'] {
-      @include set-fixit-var(checkbox-color, fixit-var(danger));
-    }
-    li[data-task='?'] {
-      @include set-fixit-var(checkbox-color, fixit-var(warning));
+
+      &[data-task='/'] {
+        @include task-icon(fixit-var(success));
+        @include task-text(fixit-var(success));
+      }
+
+      &[data-task='!'] {
+        @include task-icon(fixit-var(danger));
+      }
+
+      &[data-task='?'] {
+        @include task-icon(fixit-var(warning));
+      }
     }
 
     dl {

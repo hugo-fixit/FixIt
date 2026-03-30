@@ -26,12 +26,12 @@
   - [ ] Unchecked
   - [x] Checked
 */ -}}
-{{- $icon := dict "Class" (add "checkbox-icon " (index $iconMap " ")) | partial "plugin/icon.html" -}}
+{{- $icon := dict "Class" (index $iconMap " ") | partial "plugin/icon.html" -}}
 {{- $label := T (printf "taskList.%v" " ") -}}
-{{- $content := replaceRE `(?s)<li>((\n<p>)*)<input disabled="" type="checkbox">\s?` (printf `<li data-task=" " title=%q>$1%s` $label $icon) . -}}
+{{- $content := replaceRE `(?s)<li>((\n<p>)*)<input disabled="" type="checkbox">\s?([\s\S]*?)(<ul|<ol|</li>)` (printf `<li data-task=" ">$1%s<span title=%q>$3</span>$4` $icon $label) . -}}
 {{- $label := T (printf "taskList.%v" "x") -}}
-{{- $icon := dict "Class" (add "checkbox-icon " (index $iconMap "x")) | partial "plugin/icon.html" -}}
-{{- $content = replaceRE `(?s)<li>((\n<p>)*)<input checked="" disabled="" type="checkbox">\s?` (printf `<li data-task="x" title=%q>$1%s` $label $icon) $content -}}
+{{- $icon := dict "Class" (index $iconMap "x") | partial "plugin/icon.html" -}}
+{{- $content = replaceRE `(?s)<li>((\n<p>)*)<input checked="" disabled="" type="checkbox">\s?([\s\S]*?)(<ul|<ol|</li>)` (printf `<li data-task="x">$1%s<span title=%q>$3</span>$4` $icon $label) $content -}}
 
 {{- /*
   The extended syntax is compatible with Obsidian.
@@ -45,11 +45,11 @@
 */ -}}
 {{- range $extendedSigns -}}
   {{- $class := index $iconMap . | default "fa-solid fa-check-square" -}}
-  {{- $icon := dict "Class" (add "checkbox-icon " $class) | partial "plugin/icon.html" -}}
+  {{- $icon := dict "Class" $class | partial "plugin/icon.html" -}}
   {{- $sign := htmlEscape . -}}
   {{- $originSign := replace . "\\" "" -}}
   {{- $label := (T (printf "taskList.%v" $originSign)) | default (T (printf "taskList.%v" " ")) -}}
-  {{- $content = replaceRE (printf `(?s)<li>((\n<p>)*)\[%s\]\s?` $sign) (printf `<li data-task=%q title=%q>$1%s` $originSign $label $icon) $content -}}
+  {{- $content = replaceRE (printf `(?s)<li>((\n<p>)*)\[%s\]\s?([\s\S]*?)(<ul|<ol|</li>)` $sign) (printf `<li data-task=%q>$1%s<span title=%q>$3</span>$4` $originSign $icon $label) $content -}}
 {{- end -}}
 
 {{- return $content -}}

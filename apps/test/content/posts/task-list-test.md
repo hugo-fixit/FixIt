@@ -19,17 +19,6 @@ This post tests the rendering of task lists in Markdown.
 - [x] Checked Task
 - Regular list item
 
-## Nested Task Lists (Bug Fix Verification)
-
-- [ ] Parent Task 1
-  - [ ] Child Task 1.1
-  - [x] Child Task 1.2
-  - Regular list item
-- [x] Parent Task 2
-  - [ ] Child Task 2.1
-    - [ ] Grandchild Task 2.1.1
-    - [x] Grandchild Task 2.1.2
-
 ## Extended Task Lists (Custom Icons)
 
 - [-] Cancelled Task
@@ -39,6 +28,22 @@ This post tests the rendering of task lists in Markdown.
 - [!] Important Task
 - [?] Question Task
 - Regular list item
+
+## Nested Task Lists (Bug Fix Verification)
+
+- [ ] Parent Task 1
+  - [ ] Child Task 1.1
+  - [x] Child Task 1.2
+  - Regular list item
+- [/] Parent Task 2
+  - Regular list item
+  - [ ] Child Task 2.1
+    - [x] Grandchild Task 2.1.1
+    - [-] Grandchild Task 2.1.2
+      - [<] Scheduled Task
+      - [>] Rescheduled Task
+      - [!] Important Task
+      - [?] Question Task
 
 ## Mixed Content in List Items
 

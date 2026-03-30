@@ -5,6 +5,7 @@ resources/
 # Hugo
 .hugo_build.lock
 jsconfig.json
+.hugo_cache
 
 # NPM
 node_modules/
