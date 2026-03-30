@@ -31,6 +31,11 @@
 [![GitHub stars](https://img.shields.io/github/stars/hugo-fixit/FixIt?style=social)](https://github.com/hugo-fixit/FixIt)
 [![Gitee star of FixIt](https://gitee.com/lruihao/FixIt/badge/star.svg)](https://gitee.com/lruihao/FixIt/stargazers)
 
+> [!WARNING]
+> **v0.x 版本仅接受 bug 修复，如需提交新功能，请基于 [v1](https://github.com/hugo-fixit/FixIt/tree/v1) 分支开发。**
+>
+> 1.0 版本计划在 **2027 年上半年** 发布，欢迎加入开发和讨论！详见 [v1 里程碑](https://github.com/hugo-fixit/FixIt/milestone/8)。
+
 ## 即时预览
 
 <p align="center">

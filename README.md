@@ -31,6 +31,11 @@
 [![GitHub stars](https://img.shields.io/github/stars/hugo-fixit/FixIt?style=social)](https://github.com/hugo-fixit/FixIt)
 [![Gitee star of FixIt](https://gitee.com/lruihao/FixIt/badge/star.svg)](https://gitee.com/lruihao/FixIt/stargazers)
 
+> [!WARNING]
+> **Version v0.x only accepts bug fixes. For new feature submissions, please develop on the [v1](https://github.com/hugo-fixit/FixIt/tree/v1) branch.**
+>
+> Version 1.0 is planned for release in **the first half of 2027**. Welcome to join the development and discussion! See [v1 Milestone](https://github.com/hugo-fixit/FixIt/milestone/8) for details.
+
 ## Live Preview
 
 <p align="center">
