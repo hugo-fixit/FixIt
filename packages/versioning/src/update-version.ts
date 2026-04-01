@@ -5,6 +5,10 @@ import { join } from 'node:path'
 import process from 'node:process'
 import { workspaceRoot } from '@hugo-fixit/shared'
 
+const ISO_TIMESTAMP_CLEAN_RE = /[-:TZ]/g
+const VERSION_PATCH_RE = /(\d+)$/
+const VERSION_RE = /v\d+\.\d+\.\d+(-[\w.\-]+)?/
+
 /**
  * Update the version of the FixIt
  * @param type version type
@@ -45,13 +49,12 @@ export function updateVersion(type: 'dev' | 'prod') {
   const shortHash: string = execSync('git rev-parse --short HEAD').toString().trim()
   // Build the development version v{major}.{minor}.{patch+1}-{timestamp}-{shortHash}
   // e.g. v0.3.21-20250702061540-abcdefg
-  const timestamp: string = new Date().toISOString().replace(/[-:TZ]/g, '').slice(0, -4)
-  const devVersion: string = `${version.replace(/(\d+)$/, (match, part) => (Number.parseInt(part) + 1).toString())}-${timestamp}-${shortHash}`
+  const timestamp: string = new Date().toISOString().replace(ISO_TIMESTAMP_CLEAN_RE, '').slice(0, -4)
+  const devVersion: string = `${version.replace(VERSION_PATCH_RE, (_versionPatchMatch, part) => (Number.parseInt(part) + 1).toString())}-${timestamp}-${shortHash}`
   const initHtml: string = fs.readFileSync(initHtmlPath, 'utf8')
   const latestVersion: string = type === 'prod' ? version : devVersion
-  const versionRegex: RegExp = /v\d+\.\d+\.\d+(-[\w.\-]+)?/
-  const lastVersion: string = initHtml.match(versionRegex)![0].slice(1)
-  const newInitHtml: string = initHtml.replace(versionRegex, `v${latestVersion}`)
+  const lastVersion: string = initHtml.match(VERSION_RE)![0].slice(1)
+  const newInitHtml: string = initHtml.replace(VERSION_RE, `v${latestVersion}`)
 
   if (lastVersion === version && gitDiff.includes('layouts/_partials/init/index.html')) {
     // After running `npm version` or manually modifying the version number, skip the update

@@ -620,8 +620,8 @@ enable = false
 animate = true
 icon = "fa-solid fa-heartbeat"
 pre = ""
-value = ""
 # e.g. "2021-12-18T16:15:22+08:00"
+value = ""
 
 # FixIt 0.2.17 | NEW footer lines order, optional values: ["first", 0, 1, 2, 3, 4, 5, "last"]
 [params.footer.order]
