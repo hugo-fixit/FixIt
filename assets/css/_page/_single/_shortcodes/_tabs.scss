@@ -526,7 +526,7 @@ tab-container {
 // ========================================
 // Responsive design for smaller screens
 // ========================================
-@media only screen and (max-width: 680px) {
+@include media('xs') {
   tab-container {
     &[type='underline'] {
       &[placement='top'],

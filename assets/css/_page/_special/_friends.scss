@@ -9,7 +9,7 @@
     flex-wrap: wrap;
   }
 
-  @media (max-width: 576px) {
+  @include media('xs') {
     .friend-links {
       justify-content: space-around;
     }

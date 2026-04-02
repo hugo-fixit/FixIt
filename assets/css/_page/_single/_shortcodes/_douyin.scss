@@ -15,7 +15,7 @@
   }
 }
 
-@media only screen and (max-width: 680px) {
+@include media('xs') {
   .douyin {
     width: 92%;
     margin-inline: 4%;

@@ -39,6 +39,21 @@
   }
 }
 
+/// Light mode content wrapper
+/// - Explicit light mode: [data-theme-mode='light']
+/// - Auto mode with system light preference: [data-theme-mode='auto'] + prefers-color-scheme
+@mixin light-mode {
+  [data-theme-mode='light'] & {
+    @content;
+  }
+
+  @media (prefers-color-scheme: light) {
+    [data-theme-mode='auto'] & {
+      @content;
+    }
+  }
+}
+
 /// Dark mode content wrapper
 /// - Explicit dark mode: [data-theme-mode='dark']
 /// - Auto mode with system dark preference: [data-theme-mode='auto'] + prefers-color-scheme
@@ -48,7 +63,7 @@
   }
 
   @media (prefers-color-scheme: dark) {
-    :root[data-theme-mode='auto'] & {
+    [data-theme-mode='auto'] & {
       @content;
     }
   }
