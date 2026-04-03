@@ -241,7 +241,7 @@
   {{- if $showToc -}}
     <dialog id="toc-dialog" aria-labelledby="toc-dialog-title" role="dialog">
       <div class="toc">
-        <h2 class="toc-title">{{ T "single.contents" }}</h2>
+        <h2 class="toc-title" id="toc-dialog-title">{{ T "single.contents" }}</h2>
         <div class="toc-content" id="toc-content-drawer">
           {{- replace $tableOfContents `id="TableOfContents"` "" | safeHTML -}}
         </div>

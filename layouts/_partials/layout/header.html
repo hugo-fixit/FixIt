@@ -96,8 +96,8 @@
         {{- end -}}
         {{- if .Site.Params.search.enable -}}
           <li class="menu-item search" id="search-desktop">
-            <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `assets.searchPlaceholder`) }}" id="search-input-desktop">
-            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="{{ T `assets.search` }}">
+            <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `assets.searchPlaceholder`) }}" id="search-input-desktop" tabindex="-1">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="{{ T `assets.search` }}" aria-controls="search-dropdown-desktop" aria-expanded="false">
               {{ dict "Class" "fa-solid fa-search" | partial "plugin/icon.html" }}
             </a>
             <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="{{ T `assets.clear` }}">
@@ -108,12 +108,12 @@
             </span>
           </li>
         {{- end -}}
-        <li class="menu-item theme-switch" role="button" aria-label="{{ T "header.switchTheme" }}" title="{{ T "header.switchTheme" }}">
+        <li class="menu-item theme-switch" role="button" tabindex="0" aria-label="{{ T "header.switchTheme" }}" title="{{ T "header.switchTheme" }}">
           {{- dict "Class" "fa-solid fa-adjust" | partial "plugin/icon.html" -}}
         </li>
         {{- if hugo.IsMultilingual -}}
           <li class="menu-item language-switch">
-            <span role="button" aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}">
+            <span role="button" tabindex="0" aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}">
               {{- dict "Class" "fa-solid fa-language" | partial "plugin/icon.html" -}}
             </span>
             <ul class="sub-menu">
@@ -187,10 +187,10 @@
           {{- end -}}
         {{- end -}}
       </div>
-      <div class="theme-switch" role="button" aria-label="{{ T "header.switchTheme" }}">
+      <div class="theme-switch" role="button" tabindex="0" aria-label="{{ T "header.switchTheme" }}">
         {{- dict "Class" "fa-solid fa-adjust" | partial "plugin/icon.html" -}}
       </div>
-      <div class="menu-toggle" id="menu-toggle-mobile" role="button" aria-labelledby="menu-mobile">
+      <div class="menu-toggle" id="menu-toggle-mobile" role="button" tabindex="0" aria-controls="menu-mobile" aria-expanded="false" aria-labelledby="menu-mobile">
         <span></span><span></span><span></span>
       </div>
     </div>
@@ -200,7 +200,7 @@
           <li class="search-wrapper">
             <div class="search mobile" id="search-mobile">
               <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `assets.searchPlaceholder`) }}" id="search-input-mobile">
-              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="{{ T `assets.search` }}">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="{{ T `assets.search` }}" aria-controls="search-dropdown-mobile" aria-expanded="false">
                 {{ dict "Class" "fa-solid fa-search" | partial "plugin/icon.html" }}
               </a>
               <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="{{ T `assets.clear` }}">
@@ -286,7 +286,7 @@
         <li class="menu-item menu-system">
           {{- if hugo.IsMultilingual -}}
             <span class="menu-system-item language-switch">
-              <span role="button" aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}">
+              <span role="button" tabindex="0" aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}">
                 {{- .Language.LanguageName -}}
                 {{- dict "Class" "dropdown-icon fa-solid fa-chevron-down" | partial "plugin/icon.html" -}}
               </span>

@@ -68,6 +68,19 @@ class FixIt {
     this.config.twemoji && twemoji.parse(target);
   }
 
+  initRoleButtons(target = document) {
+    forEach(target.querySelectorAll('[role="button"]'), ($el) => {
+      if ($el.dataset.init) return;
+      $el.dataset.init = 'true';
+      $el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          $el.click();
+        }
+      }, false);
+    });
+  }
+
   initMenu() {
     this.initMenuDesktop();
     this.initMenuMobile();
@@ -87,10 +100,12 @@ class FixIt {
       $mask.classList.toggle('blur');
       $menuToggleMobile.classList.toggle('active');
       $menuMobile.classList.toggle('active');
+      $menuToggleMobile.setAttribute('aria-expanded', $menuToggleMobile.classList.contains('active') ? 'true' : 'false');
     }, false);
     this._menuMobileOnClickMask = this._menuMobileOnClickMask || (() => {
       $menuToggleMobile.classList.remove('active');
       $menuMobile.classList.remove('active');
+      $menuToggleMobile.setAttribute('aria-expanded', 'false');
     });
     this.clickMaskEventSet.add(this._menuMobileOnClickMask);
     // add nested menu toggler
@@ -166,6 +181,7 @@ class FixIt {
     $searchLoading.style.display = 'none';
     $searchClear.style.display = 'none';
     searchInstance && searchInstance.autocomplete.setVal('');
+    document.getElementById(`search-toggle-${$header.id.replace('header-', '')}`)?.setAttribute('aria-expanded', 'false');
   }
 
   initSearch() {
@@ -198,6 +214,9 @@ class FixIt {
     const $searchClear = document.getElementById(`search-clear-${suffix}`);
     const $searchCancel = document.getElementById('search-cancel-mobile');
     const $mask = document.getElementById('mask');
+    const setSearchExpanded = (expanded) => {
+      $searchToggle?.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    };
 
     // goto the PostChat panel rather than search results
     if (searchConfig.type === 'post-chat' && window.postChatUser) {
@@ -218,11 +237,13 @@ class FixIt {
       $searchInput.addEventListener('focus', () => {
         $mask.classList.add('blur');
         $header.classList.add('open');
+        setSearchExpanded(true);
       }, false);
       $searchCancel.addEventListener('click', () => {
         $mask.classList.remove('blur');
         document.getElementById('menu-toggle-mobile').classList.remove('active');
         document.getElementById('menu-mobile').classList.remove('active');
+        document.getElementById('menu-toggle-mobile').setAttribute('aria-expanded', 'false');
         this._resetSearchUI($header, $searchLoading, $searchClear, this._searchMobile);
       }, false);
       $searchClear.addEventListener('click', () => {
@@ -239,6 +260,7 @@ class FixIt {
         $mask.classList.add('blur');
         $header.classList.add('open');
         $searchInput.focus();
+        setSearchExpanded(true);
       }, false);
       $searchClear.addEventListener('click', () => {
         $searchClear.style.display = 'none';
@@ -262,7 +284,7 @@ class FixIt {
           dropdownMenuContainer: `#search-dropdown-${suffix}`,
           clearOnSelected: true,
           cssClasses: { noPrefix: true },
-          debug: true
+          debug: false
         },
         {
           name: 'search',
@@ -908,10 +930,14 @@ class FixIt {
     if (!dialog || !openButton) return;
     openButton.addEventListener("click", () => {
       dialog.showModal();
+      openButton.setAttribute('aria-expanded', 'true');
       document.activeElement?.blur();
     });
     dialog.addEventListener("click", (e) => {
       dialog.close();
+    });
+    dialog.addEventListener("close", () => {
+      openButton.setAttribute('aria-expanded', 'false');
     });
   }
 
@@ -1447,6 +1473,7 @@ class FixIt {
     this.initMathJax();
     this.initJsonViewer();
     this.initTabEvents(target);
+    this.initRoleButtons(target);
     FileTree.init(target);
     window.FixItMermaid?.init?.();
     window.FixItAPlayer?.init?.();

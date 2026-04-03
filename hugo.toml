@@ -492,8 +492,8 @@ tileColor = "#da532c"
 
 # FixIt 0.2.12 | CHANGED Android browser theme color
 [params.app.themeColor]
-light = "#f8f8f8"
-dark = "#252627"
+light = "#f6f8fa"
+dark = "#151b23"
 
 # Search config
 [params.search]
