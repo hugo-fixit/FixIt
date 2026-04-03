@@ -23,10 +23,8 @@
     cursor: pointer;
   }
 
-  &:active,
-  &:focus,
-  &:hover {
-    outline: none;
+  &:focus-visible {
+    outline: -webkit-focus-ring-color auto 1px;
   }
 
   @include media('print') {

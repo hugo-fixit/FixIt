@@ -11,34 +11,34 @@
 {{- $fullscreenBtn := "" -}}
 {{- $foldIcon := dict "Class" "arrow fa-solid fa-chevron-down" | partial "plugin/icon.html" -}}
 {{- $titleEl := printf `<span class="code-title">%s</span>` $foldIcon -}}
-{{- $ellipsisBtn := printf `<span class="ellipses-btn" aria-label="Show more options" role="button">%s</span>` (dict "Class" "fa-solid fa-ellipsis-h" | partial "plugin/icon.html") -}}
+{{- $ellipsisBtn := printf `<span class="ellipses-btn" aria-label="Show more options" role="button" tabindex="0">%s</span>` (dict "Class" "fa-solid fa-ellipsis-h" | partial "plugin/icon.html") -}}
 
 {{- if $config.title -}}
   {{- $titleEl = printf `<span class="code-title">%s<span class="title-inner">%s</span></span>` $foldIcon $config.title -}}
 {{- end -}}
 {{- if $config.linenostoggler -}}
   {{- $lineNosIcon := dict "Class" "fa-solid fa-list-ol" | partial "plugin/icon.html" -}}
-  {{- $lineNosBtn = printf `<span class="action-btn line-nos-btn" aria-label="%s" role="button" title="%s">%s</span>` (T "assets.toggleLineNumbers") (T "assets.toggleLineNumbers") $lineNosIcon -}}
+  {{- $lineNosBtn = printf `<span class="action-btn line-nos-btn" aria-label="%s" role="button" tabindex="0" title="%s">%s</span>` (T "assets.toggleLineNumbers") (T "assets.toggleLineNumbers") $lineNosIcon -}}
 {{- end -}}
 {{- if $config.linewraptoggler -}}
   {{- $lineWrapIcon := dict "Class" "fa-solid fa-right-left" | partial "plugin/icon.html" -}}
-  {{- $lineWrapBtn = printf `<span class="action-btn line-wrap-btn" aria-label="%s" role="button" title="%s">%s</span>` (T "assets.toggleLineWrap") (T "assets.toggleLineWrap") $lineWrapIcon -}}
+  {{- $lineWrapBtn = printf `<span class="action-btn line-wrap-btn" aria-label="%s" role="button" tabindex="0" title="%s">%s</span>` (T "assets.toggleLineWrap") (T "assets.toggleLineWrap") $lineWrapIcon -}}
 {{- end -}}
 {{- if $config.editable -}}
   {{- $editIcon := dict "Class" "fa-solid fa-pen-to-square" | partial "plugin/icon.html" -}}
-  {{- $editBtn = printf `<span class="action-btn edit-btn" aria-label="%s" role="button" title="%s">%s</span>` (T "assets.toggleCodeEditable") (T "assets.toggleCodeEditable") $editIcon -}}
+  {{- $editBtn = printf `<span class="action-btn edit-btn" aria-label="%s" role="button" tabindex="0" title="%s">%s</span>` (T "assets.toggleCodeEditable") (T "assets.toggleCodeEditable") $editIcon -}}
 {{- end -}}
 {{- if $config.copyable -}}
   {{- $copyIcon := dict "Class" "fa-regular fa-clone" | partial "plugin/icon.html" -}}
-  {{- $copyBtn = printf `<span class="action-btn copy-btn" aria-label="%s" role="button" title="%s" data-copied-text="%s">%s</span>` (T "assets.copyToClipboard") (T "assets.copyToClipboard") (T "assets.copiedText") $copyIcon -}}
+  {{- $copyBtn = printf `<span class="action-btn copy-btn" aria-label="%s" role="button" tabindex="0" title="%s" data-copied-text="%s">%s</span>` (T "assets.copyToClipboard") (T "assets.copyToClipboard") (T "assets.copiedText") $copyIcon -}}
 {{- end -}}
 {{- if $config.downloadable -}}
   {{- $downloadIcon := dict "Class" "fa-solid fa-download" | partial "plugin/icon.html" -}}
-  {{- $downloadBtn = printf `<span class="action-btn download-btn" aria-label="%s" role="button" title="%s">%s</span>` (T "assets.downloadCode") (T "assets.downloadCode") $downloadIcon -}}
+  {{- $downloadBtn = printf `<span class="action-btn download-btn" aria-label="%s" role="button" tabindex="0" title="%s">%s</span>` (T "assets.downloadCode") (T "assets.downloadCode") $downloadIcon -}}
 {{- end -}}
 {{- if $config.fullscreen -}}
   {{- $fullscreenIcon := dict "Class" "fa-solid fa-expand" | partial "plugin/icon.html" -}}
-  {{- $fullscreenBtn = printf `<span class="action-btn fullscreen-btn" aria-label="%s" role="button" title="%s">%s</span>` (T "assets.toggleCodeFullscreen") (T "assets.toggleCodeFullscreen") $fullscreenIcon -}}
+  {{- $fullscreenBtn = printf `<span class="action-btn fullscreen-btn" aria-label="%s" role="button" tabindex="0" title="%s">%s</span>` (T "assets.toggleCodeFullscreen") (T "assets.toggleCodeFullscreen") $fullscreenIcon -}}
 {{- end -}}
 {{- with $config.name -}}
   {{- $titleEl = replace $titleEl `<span class="code-title">` (printf `<span class="code-title" data-name="%s">` .) -}}

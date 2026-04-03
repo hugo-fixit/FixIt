@@ -61,3 +61,22 @@
     }
   }
 }
+
+@mixin focus-visible-ring($size: 1.5em, $offset: 0.2rem) {
+  &:focus-visible {
+    outline: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: $size;
+      height: $size;
+      transform: translate(-50%, -50%);
+      outline: -webkit-focus-ring-color auto 1px;
+      outline-offset: $offset;
+      pointer-events: none;
+    }
+  }
+}

@@ -70,7 +70,8 @@ header {
   font-size: fixit-var(header-title-font-size);
   font-family: fixit-var(header-title-font-family);
   font-weight: bold;
-  margin-right: 0.5rem;
+  margin-inline-end: 0.25rem;
+  padding-inline: 0.25rem;
   min-width: 10%;
   overflow: hidden;
   white-space: nowrap;
@@ -175,6 +176,7 @@ header {
     #header-desktop.open & {
       left: 1rem;
     }
+    @include focus-visible-ring;
   }
 
   .search-loading {
@@ -210,6 +212,9 @@ header {
 }
 
 .theme-switch {
+  position: relative;
+  @include focus-visible-ring;
+
   i {
     display: inline-block;
     transform: rotate(225deg) scale(1);
@@ -246,12 +251,14 @@ header {
   }
 
   .header-wrapper {
-    // use css native function to calculate max value
-    padding: 0 2rem 0 MAX(10vh, fixit-var(header-height));
+    padding: 0 2rem;
     height: 100%;
 
+    &[data-github-corner='left'] {
+      padding-inline-start: fixit-var(header-height);
+    }
     &[data-github-corner='right'] {
-      padding-right: fixit-var(header-height);
+      padding-inline-end: fixit-var(header-height);
     }
 
     .header-title {
@@ -311,11 +318,7 @@ header {
     }
 
     @include media('md', 'down') {
-      padding-inline-end: 1rem;
-    }
-
-    @include media('sm', 'down') {
-      padding-inline-start: 1rem;
+      padding-inline: 1rem;
     }
   }
 
@@ -358,13 +361,16 @@ header {
       }
 
       .menu-toggle {
+        position: relative;
+        @include focus-visible-ring;
+
         span {
           display: block;
           background-color: fixit-var(global-font-color);
           width: 20px;
           height: 2px;
-          @include border-radius(full);
           transition: all 0.3s ease-in-out;
+          @include border-radius(full);
         }
 
         span:not(:last-child) {
