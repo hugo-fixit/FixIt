@@ -25,10 +25,12 @@ class FixIt {
     this.isDark = isDarkMode();
     this.newScrollTop = getScrollTop();
     this.oldScrollTop = this.newScrollTop;
+    this.maskOverlays = new Map();
+    this.activeMaskOverlay = null;
+    this.activeTocId = null;
     this.scrollEventSet = new Set();
     this.resizeEventSet = new Set();
     this.switchThemeEventSet = new Set();
-    this.clickMaskEventSet = new Set();
     this.beforeprintEventSet = new Set();
     this.afterprintEventSet = new Set();
     window.objectFitImages && objectFitImages();
@@ -68,17 +70,54 @@ class FixIt {
     this.config.twemoji && twemoji.parse(target);
   }
 
-  initRoleButtons(target = document) {
-    forEach(target.querySelectorAll('[role="button"]'), ($el) => {
-      if ($el.dataset.init) return;
-      $el.dataset.init = 'true';
-      $el.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          $el.click();
-        }
-      }, false);
-    });
+  registerMaskOverlay(name, handlers) {
+    this.maskOverlays.set(name, handlers);
+  }
+
+  syncMaskState() {
+    document.getElementById('mask')?.classList.toggle('blur', Boolean(this.activeMaskOverlay));
+  }
+
+  openMaskOverlay(name) {
+    this.disableScrollEvent = true;
+    const overlay = this.maskOverlays.get(name);
+    if (!overlay) return;
+    if (this.activeMaskOverlay && this.activeMaskOverlay !== name) {
+      this.closeMaskOverlay(this.activeMaskOverlay, true);
+    }
+    overlay.onOpen?.();
+    this.activeMaskOverlay = name;
+    this.syncMaskState();
+  }
+
+  closeMaskOverlay(name, skipSync = false) {
+    this.disableScrollEvent = false;
+    const overlay = this.maskOverlays.get(name);
+    if (!overlay) return;
+    overlay.onClose?.();
+    if (this.activeMaskOverlay === name) {
+      this.activeMaskOverlay = null;
+    }
+    !skipSync && this.syncMaskState();
+  }
+
+  toggleMaskOverlay(name) {
+    const overlay = this.maskOverlays.get(name);
+    if (!overlay) return;
+    const isActive = overlay.isActive?.() ?? this.activeMaskOverlay === name;
+    if (this.activeMaskOverlay === name && isActive) {
+      this.closeMaskOverlay(name);
+      return;
+    }
+    this.openMaskOverlay(name);
+  }
+
+  closeActiveMaskOverlay() {
+    if (!this.activeMaskOverlay) {
+      this.syncMaskState();
+      return;
+    }
+    this.closeMaskOverlay(this.activeMaskOverlay);
   }
 
   initMenu() {
@@ -95,19 +134,28 @@ class FixIt {
   initMenuMobile() {
     const $menuToggleMobile = document.getElementById('menu-toggle-mobile');
     const $menuMobile = document.getElementById('menu-mobile');
-    const $mask = document.getElementById('mask');
-    $menuToggleMobile.addEventListener('click', (event) => {
-      $mask.classList.toggle('blur');
-      $menuToggleMobile.classList.toggle('active');
-      $menuMobile.classList.toggle('active');
-      $menuToggleMobile.setAttribute('aria-expanded', $menuToggleMobile.classList.contains('active') ? 'true' : 'false');
+    if (!$menuToggleMobile || !$menuMobile) return;
+    this.registerMaskOverlay('menu-mobile', {
+      isActive: () => $menuMobile.classList.contains('active'),
+      onOpen: () => {
+        $menuToggleMobile.classList.add('active');
+        $menuMobile.classList.add('active');
+        $menuToggleMobile.setAttribute('aria-expanded', 'true');
+      },
+      onClose: () => {
+        $menuToggleMobile.classList.remove('active');
+        $menuMobile.classList.remove('active');
+        $menuToggleMobile.setAttribute('aria-expanded', 'false');
+      },
+    });
+    $menuToggleMobile.addEventListener('click', () => {
+      this.toggleMaskOverlay('menu-mobile');
     }, false);
     this._menuMobileOnClickMask = this._menuMobileOnClickMask || (() => {
       $menuToggleMobile.classList.remove('active');
       $menuMobile.classList.remove('active');
       $menuToggleMobile.setAttribute('aria-expanded', 'false');
     });
-    this.clickMaskEventSet.add(this._menuMobileOnClickMask);
     // add nested menu toggler
     forEach(document.querySelectorAll('.menu-item>.nested-item'), ($nestedItem) => {
       $nestedItem.addEventListener('click', function () {
@@ -213,9 +261,32 @@ class FixIt {
     const $searchLoading = document.getElementById(`search-loading-${suffix}`);
     const $searchClear = document.getElementById(`search-clear-${suffix}`);
     const $searchCancel = document.getElementById('search-cancel-mobile');
-    const $mask = document.getElementById('mask');
+    const $menuToggleMobile = document.getElementById('menu-toggle-mobile');
+    const $menuMobile = document.getElementById('menu-mobile');
+    if (!$header || !$searchInput || !$searchToggle || !$searchLoading || !$searchClear) return;
     const setSearchExpanded = (expanded) => {
       $searchToggle?.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    };
+    const overlayName = `search-${suffix}`;
+    const openSearch = () => {
+      if (_isMobile && $menuToggleMobile && $menuMobile) {
+        this.disableScrollEvent = true;
+        $menuToggleMobile.classList.add('active');
+        $menuMobile.classList.add('active');
+        $menuToggleMobile.setAttribute('aria-expanded', 'true');
+      }
+      $header.classList.add('open');
+      setSearchExpanded(true);
+      !_isMobile && $searchInput.focus();
+    };
+    const closeSearch = () => {
+      if (_isMobile && $menuToggleMobile && $menuMobile) {
+        this.disableScrollEvent = false;
+        $menuToggleMobile.classList.remove('active');
+        $menuMobile.classList.remove('active');
+        $menuToggleMobile.setAttribute('aria-expanded', 'false');
+      }
+      this._resetSearchUI($header, $searchLoading, $searchClear, _isMobile ? this._searchMobile : this._searchDesktop);
     };
 
     // goto the PostChat panel rather than search results
@@ -234,42 +305,36 @@ class FixIt {
 
     if (_isMobile) {
       this._searchMobileOnce = true;
+      this.registerMaskOverlay(overlayName, {
+        isActive: () => $header.classList.contains('open'),
+        onOpen: openSearch,
+        onClose: closeSearch,
+      });
       $searchInput.addEventListener('focus', () => {
-        $mask.classList.add('blur');
-        $header.classList.add('open');
-        setSearchExpanded(true);
+        this.openMaskOverlay(overlayName);
       }, false);
       $searchCancel.addEventListener('click', () => {
-        $mask.classList.remove('blur');
-        document.getElementById('menu-toggle-mobile').classList.remove('active');
-        document.getElementById('menu-mobile').classList.remove('active');
-        document.getElementById('menu-toggle-mobile').setAttribute('aria-expanded', 'false');
-        this._resetSearchUI($header, $searchLoading, $searchClear, this._searchMobile);
+        this.closeMaskOverlay(overlayName);
       }, false);
       $searchClear.addEventListener('click', () => {
+        this.disableScrollEvent = false;
         $searchClear.style.display = 'none';
         this._searchMobile && this._searchMobile.autocomplete.setVal('');
       }, false);
-      this._searchMobileOnClickMask = this._searchMobileOnClickMask || (() => {
-        this._resetSearchUI($header, $searchLoading, $searchClear, this._searchMobile);
-      });
-      this.clickMaskEventSet.add(this._searchMobileOnClickMask);
     } else {
       this._searchDesktopOnce = true;
+      this.registerMaskOverlay(overlayName, {
+        isActive: () => $header.classList.contains('open'),
+        onOpen: openSearch,
+        onClose: closeSearch,
+      });
       $searchToggle.addEventListener('click', () => {
-        $mask.classList.add('blur');
-        $header.classList.add('open');
-        $searchInput.focus();
-        setSearchExpanded(true);
+        this.toggleMaskOverlay(overlayName);
       }, false);
       $searchClear.addEventListener('click', () => {
         $searchClear.style.display = 'none';
         this._searchDesktop && this._searchDesktop.autocomplete.setVal('');
       }, false);
-      this._searchDesktopOnClickMask = this._searchDesktopOnClickMask || (() => {
-        this._resetSearchUI($header, $searchLoading, $searchClear, this._searchDesktop);
-      });
-      this.clickMaskEventSet.add(this._searchDesktopOnClickMask);
     }
     $searchInput.addEventListener('input', () => {
       if ($searchInput.value === '') $searchClear.style.display = 'none';
@@ -428,7 +493,7 @@ class FixIt {
         }
       );
       autosearch.on('autocomplete:selected', (_event, suggestion, _dataset, _context) => {
-        $mask?.click();
+        this.closeMaskOverlay(overlayName);
         window.location.assign(suggestion.uri);
       });
       if (_isMobile) {
@@ -811,42 +876,121 @@ class FixIt {
     stagingDOM.destroy();
   }
 
-  /**
-   * Helper method to update TOC active state based on scroll position
-   * @param {HTMLElement} $tocContainer - TOC container element for parent traversal
-   * @param {HTMLCollection} $headingElements - Heading elements to track
-   * @param {number} indexOffset - Offset for active state calculation
-   */
-  _updateTocActiveState($tocContainer, $headingElements, indexOffset) {
-    const $tocLinkElements = $tocContainer.querySelectorAll('a:first-child');
-    const $tocLiElements = $tocContainer.getElementsByTagName('li');
+  getVisibleHeaderOffset() {
+    const $desktopHeader = document.getElementById('header-desktop');
+    const $mobileHeader = document.getElementById('header-mobile');
+    const $header = [$desktopHeader, $mobileHeader].find(($el) => $el && window.getComputedStyle($el).display !== 'none');
+    if (!$header) return 0;
+    const isDesktop = $header.id === 'header-desktop';
+    const headerMode = isDesktop ? document.body.dataset.headerDesktop : document.body.dataset.headerMobile;
+    if (!['sticky', 'auto'].includes(headerMode)) return 0;
+    if (headerMode === 'auto' && $header.classList.contains('header__fadeOutUp')) return 0;
+    return $header.offsetHeight;
+  }
 
-    // Remove all active classes
-    forEach($tocLinkElements, ($tocLink) => {
-      $tocLink.classList.remove('active');
-    });
-    forEach($tocLiElements, ($tocLi) => {
-      $tocLi.classList.remove('has-active');
-    });
+  getBreadcrumbHeight() {
+    return document.querySelector('.breadcrumb-container')?.offsetHeight || 0;
+  }
 
-    // Calculate active TOC index
-    let activeTocIndex = $headingElements.length - 1;
-    for (let i = 0; i < $headingElements.length - 1; i++) {
-      const thisTop = $headingElements[i].getBoundingClientRect().top;
-      const nextTop = $headingElements[i + 1].getBoundingClientRect().top;
-      if ((i == 0 && thisTop > indexOffset) || (thisTop <= indexOffset && nextTop > indexOffset)) {
-        activeTocIndex = i;
+  getTocIndexOffset() {
+    return 20 + this.getVisibleHeaderOffset() + this.getBreadcrumbHeight();
+  }
+
+  getTocHeadingElements() {
+    return Array.from(document.getElementsByClassName('heading-element')).filter(($heading) => $heading.id);
+  }
+
+  getActiveTocHeading($headingElements, indexOffset = this.getTocIndexOffset()) {
+    if (!$headingElements.length) return null;
+    const threshold = window.scrollY + indexOffset + 1;
+    let $activeHeading = $headingElements[0];
+    for (const $heading of $headingElements) {
+      const headingTop = window.scrollY + $heading.getBoundingClientRect().top;
+      if (headingTop <= threshold) {
+        $activeHeading = $heading;
+      } else {
         break;
       }
     }
+    return $activeHeading;
+  }
 
-    // Add active classes
-    if (activeTocIndex !== -1 && $tocLinkElements[activeTocIndex]) {
-      $tocLinkElements[activeTocIndex].classList.add('active');
-      let $parent = $tocLinkElements[activeTocIndex].parentElement;
-      while ($parent !== $tocContainer) {
-        $parent.classList.add('has-active');
-        $parent = $parent.parentElement.parentElement;
+  getTocRoots() {
+    return [
+      document.getElementById('TableOfContents'),
+      document.querySelector('#toc-content-static > nav'),
+      document.querySelector('#toc-content-drawer > nav'),
+    ].filter(Boolean);
+  }
+
+  getTocLinkById($tocRoot, id) {
+    if (!$tocRoot || !id) return null;
+    const targetHash = `#${id}`;
+    return Array.from($tocRoot.querySelectorAll('a[href^="#"]')).find(($link) => $link.getAttribute('href') === targetHash) || null;
+  }
+
+  applyTocActiveState($tocRoot, activeId) {
+    if (!$tocRoot) return;
+    forEach($tocRoot.querySelectorAll('a[href^="#"]'), ($tocLink) => {
+      $tocLink.classList.remove('active');
+    });
+    forEach($tocRoot.querySelectorAll('li'), ($tocLi) => {
+      $tocLi.classList.remove('has-active');
+    });
+    const $activeLink = this.getTocLinkById($tocRoot, activeId);
+    if (!$activeLink) return;
+    $activeLink.classList.add('active');
+    let $parent = $activeLink.closest('li');
+    while ($parent) {
+      $parent.classList.add('has-active');
+      $parent = $parent.parentElement?.closest('li') || null;
+    }
+  }
+
+  scrollActiveTocLinkIntoView($tocRoot, activeId, $scrollContainer = $tocRoot) {
+    const $activeLink = this.getTocLinkById($tocRoot, activeId);
+    if (!$activeLink || !$scrollContainer) return;
+    const containerRect = $scrollContainer.getBoundingClientRect();
+    const linkRect = $activeLink.getBoundingClientRect();
+    const offsetTop = linkRect.top - containerRect.top;
+    const offsetBottom = linkRect.bottom - containerRect.bottom;
+    if (offsetTop < 0) {
+      $scrollContainer.scrollTop += offsetTop;
+    } else if (offsetBottom > 0) {
+      $scrollContainer.scrollTop += offsetBottom;
+    }
+  }
+
+  syncTocHeight() {
+    const $toc = document.getElementById('toc-auto');
+    const $tocContentAuto = document.getElementById('toc-content-auto');
+    if ($toc && $tocContentAuto) {
+      const maxHeight = Math.max(window.innerHeight - $tocContentAuto.getBoundingClientRect().top - 16);
+      $tocContentAuto.style.setProperty('--fi-toc-content-max-height', `${Math.floor(maxHeight)}px`);
+    }
+  }
+
+  syncTocActiveState() {
+    const $headingElements = this.getTocHeadingElements();
+    const $activeHeading = this.getActiveTocHeading($headingElements);
+    if (!$activeHeading?.id) return;
+    const activeId = $activeHeading.id;
+    const $tocRoots = this.getTocRoots();
+    forEach($tocRoots, ($tocRoot) => {
+      this.applyTocActiveState($tocRoot, activeId);
+    });
+    if (this.activeTocId !== activeId) {
+      this.activeTocId = activeId;
+      if (!isTocStatic()) {
+        const $autoTocRoot = document.getElementById('TableOfContents');
+        const $autoTocContainer = document.getElementById('toc-content-auto');
+        if ($autoTocRoot && $autoTocContainer) {
+          this.scrollActiveTocLinkIntoView($autoTocRoot, activeId, $autoTocContainer);
+        }
+      }
+      if (document.getElementById('toc-dialog')?.open) {
+        const $dialogTocRoot = document.querySelector('#toc-content-drawer > nav');
+        this.scrollActiveTocLinkIntoView($dialogTocRoot, activeId, $dialogTocRoot);
       }
     }
   }
@@ -857,15 +1001,12 @@ class FixIt {
   initToc() {
     const $tocCore = document.getElementById('TableOfContents');
     if ($tocCore === null) return;
-    const $headingElements = document.getElementsByClassName('heading-element');
-    const INDEX_OFFSET = 20 + this.breadcrumbHeight + (
-      document.body.dataset.headerDesktop !== 'normal' ? document.getElementById('header-desktop').offsetHeight : 0
-    );
     // TOC Drawer Button Visibility
     const openButton = document.querySelector("#toc-drawer-button");
     if (openButton) {
       openButton.classList.toggle('d-none', !isTocStatic());
     }
+    this.activeTocId = null;
     // TOC Static and TOC Dialog
     if (isTocStatic()) {
       const $tocContentStatic = document.getElementById('toc-content-static');
@@ -873,16 +1014,8 @@ class FixIt {
         $tocCore.parentElement.removeChild($tocCore);
         $tocContentStatic.appendChild($tocCore);
       }
-      this._tocDialogOnScroll = this._tocDialogOnScroll || (() => {
-        this._updateTocActiveState(
-          document.querySelector('#toc-content-drawer>nav'),
-          $headingElements,
-          INDEX_OFFSET
-        );
-      });
-      this._tocDialogOnScroll();
-      this.scrollEventSet.add(this._tocDialogOnScroll);
-      this._tocOnScroll && this.scrollEventSet.delete(this._tocOnScroll);
+      this.syncTocHeight();
+      this.syncTocActiveState();
       return;
     }
 
@@ -895,12 +1028,8 @@ class FixIt {
     const $toc = document.getElementById('toc-auto');
     $toc.style.visibility = 'visible';
     animateCSS($toc, ['animate__fadeIn', 'animate__faster'], true);
-    this._tocOnScroll = this._tocOnScroll || (() => {
-      this._updateTocActiveState($tocCore, $headingElements, INDEX_OFFSET);
-    });
-    this._tocOnScroll();
-    this.scrollEventSet.add(this._tocOnScroll);
-    this._tocDialogOnScroll && this.scrollEventSet.delete(this._tocDialogOnScroll);
+    this.syncTocHeight();
+    this.syncTocActiveState();
   }
 
   // TODO refactor use allow-discrete display property
@@ -931,9 +1060,13 @@ class FixIt {
     openButton.addEventListener("click", () => {
       dialog.showModal();
       openButton.setAttribute('aria-expanded', 'true');
+      this.syncTocHeight();
+      this.syncTocActiveState();
+      const $dialogTocRoot = document.querySelector('#toc-content-drawer > nav');
+      this.scrollActiveTocLinkIntoView($dialogTocRoot, this.activeTocId, $dialogTocRoot);
       document.activeElement?.blur();
     });
-    dialog.addEventListener("click", (e) => {
+    dialog.addEventListener("click", () => {
       dialog.close();
     });
     dialog.addEventListener("close", () => {
@@ -1473,7 +1606,6 @@ class FixIt {
     this.initMathJax();
     this.initJsonViewer();
     this.initTabEvents(target);
-    this.initRoleButtons(target);
     FileTree.init(target);
     window.FixItMermaid?.init?.();
     window.FixItAPlayer?.init?.();
@@ -1580,10 +1712,14 @@ class FixIt {
       scrollIntoView('body');
     });
     window.addEventListener('scroll', (event) => {
+      if (this.disableScrollEvent) {
+        event.preventDefault();
+        return;
+      }
       this.newScrollTop = getScrollTop();
       const scroll = this.newScrollTop - this.oldScrollTop;
       if (Math.abs(scroll) > ACCURACY) {
-        document.getElementById('mask').click();
+        this.closeActiveMaskOverlay();
         const isScrollingDown = scroll > 0;
         forEach($autoHeaders, ($header) => {
           if (isScrollingDown) {
@@ -1627,6 +1763,8 @@ class FixIt {
       for (let event of this.scrollEventSet) {
         event();
       }
+      this.syncTocHeight();
+      this.syncTocActiveState();
       this.oldScrollTop = this.newScrollTop;
     }, false);
   }
@@ -1642,10 +1780,12 @@ class FixIt {
           }
           this.initToc();
           this.initSearch();
+          this.syncTocHeight();
+          this.syncTocActiveState();
 
           const _isMobile = isMobile();
           if (_isMobile !== resizeBefore) {
-            document.getElementById('mask').click();
+            this.closeActiveMaskOverlay();
             resizeBefore = _isMobile;
           }
         }, 100);
@@ -1656,10 +1796,7 @@ class FixIt {
   onClickMask() {
     document.getElementById('mask').addEventListener('click', (e) => {
       if (!e.target.classList.contains('blur')) return;
-      for (let event of this.clickMaskEventSet) {
-        event();
-      }
-      e.target.classList.remove('blur');
+      this.closeActiveMaskOverlay();
     }, false);
   }
 

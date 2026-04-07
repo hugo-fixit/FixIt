@@ -108,14 +108,16 @@
             </span>
           </li>
         {{- end -}}
-        <li class="menu-item theme-switch" role="button" tabindex="0" aria-label="{{ T "header.switchTheme" }}" title="{{ T "header.switchTheme" }}">
-          {{- dict "Class" "fa-solid fa-adjust" | partial "plugin/icon.html" -}}
+        <li class="menu-item theme-switch-item">
+          <button type="button" class="theme-switch" aria-label="{{ T "header.switchTheme" }}" title="{{ T "header.switchTheme" }}">
+            {{- dict "Class" "fa-solid fa-adjust" | partial "plugin/icon.html" -}}
+          </button>
         </li>
         {{- if hugo.IsMultilingual -}}
           <li class="menu-item language-switch">
-            <span role="button" tabindex="0" aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}">
+            <button type="button" aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}">
               {{- dict "Class" "fa-solid fa-language" | partial "plugin/icon.html" -}}
-            </span>
+            </button>
             <ul class="sub-menu">
               {{- if (eq .Kind "404") -}}
                 {{- range hugo.Sites -}}
@@ -187,12 +189,12 @@
           {{- end -}}
         {{- end -}}
       </div>
-      <div class="theme-switch" role="button" tabindex="0" aria-label="{{ T "header.switchTheme" }}">
+      <button type="button" class="theme-switch" aria-label="{{ T "header.switchTheme" }}">
         {{- dict "Class" "fa-solid fa-adjust" | partial "plugin/icon.html" -}}
-      </div>
-      <div class="menu-toggle" id="menu-toggle-mobile" role="button" tabindex="0" aria-controls="menu-mobile" aria-expanded="false" aria-labelledby="menu-mobile">
+      </button>
+      <button type="button" class="menu-toggle" id="menu-toggle-mobile" aria-controls="menu-mobile" aria-expanded="false" aria-labelledby="menu-mobile">
         <span></span><span></span><span></span>
-      </div>
+      </button>
     </div>
     <nav>
       <ul class="menu" id="menu-mobile">
@@ -286,10 +288,10 @@
         <li class="menu-item menu-system">
           {{- if hugo.IsMultilingual -}}
             <span class="menu-system-item language-switch">
-              <span role="button" tabindex="0" aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}">
+              <button type="button" aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}">
                 {{- .Language.LanguageName -}}
                 {{- dict "Class" "dropdown-icon fa-solid fa-chevron-down" | partial "plugin/icon.html" -}}
-              </span>
+              </button>
               <select id="language-select" class="language-select" onchange="location = this.value;">
                 {{- if eq .Kind "404" -}}
                   {{- range hugo.Sites -}}

@@ -6,6 +6,7 @@
 
 // Diagram copy button styles
 .diagram-copy-btn {
+  box-sizing: content-box;
   width: 1rem;
   height: 1rem;
   position: absolute;

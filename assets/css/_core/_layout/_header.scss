@@ -172,11 +172,11 @@ header {
   .search-toggle {
     left: 0.5rem;
     right: auto;
+    @include focus-visible-ring;
 
     #header-desktop.open & {
       left: 1rem;
     }
-    @include focus-visible-ring;
   }
 
   .search-loading {

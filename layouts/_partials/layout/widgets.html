@@ -6,7 +6,7 @@
     <div class="fixed-buttons">
       {{- /* back to top button */ -}}
       {{- if $backToTop.enable -}}
-        <div class="fixed-button back-to-top animate__faster d-none" role="button" tabindex="0" aria-label="{{ T `baseof.backToTop` }}">
+        <button type="button" class="fixed-button back-to-top animate__faster d-none" aria-label="{{ T `baseof.backToTop` }}">
           {{- dict "Class" "fa-solid fa-arrow-up" | partial "plugin/icon.html" -}}
           {{- if $backToTop.scrollpercent -}}
             <svg viewBox="0 0 100 100">
@@ -14,19 +14,19 @@
               <circle class="progress" cx="50" cy="50" r="50"></circle>
             </svg>
           {{- end -}}
-        </div>
+        </button>
       {{- end -}}
       {{- /* toc dialog button */ -}}
       {{- if .Store.Get "showToc" -}}
-        <div id="toc-drawer-button" class="fixed-button toc-drawer-button d-none{{ with $params.password }} encrypted-hidden{{ end }}" role="button" tabindex="0" aria-label="{{ T `single.contents` }}" aria-controls="toc-dialog" aria-expanded="false">
+        <button type="button" id="toc-drawer-button" class="fixed-button toc-drawer-button d-none{{ with $params.password }} encrypted-hidden{{ end }}" aria-label="{{ T `single.contents` }}" aria-controls="toc-dialog" aria-expanded="false">
           {{- dict "Class" "fa-solid fa-bars" | partial "plugin/icon.html" -}}
-        </div>
+        </button>
       {{- end -}}
       {{- /* comment button */ -}}
       {{- if $comment.enable -}}
-        <div class="fixed-button view-comments d-none" role="button" tabindex="0" aria-label="{{ T `baseof.viewComments` }}">
+        <button type="button" class="fixed-button view-comments d-none" aria-label="{{ T `baseof.viewComments` }}">
           {{- dict "Class" "fa-solid fa-comment" | partial "plugin/icon.html" -}}
-        </div>
+        </button>
       {{- end -}}
     </div>
   {{- end -}}

@@ -236,7 +236,7 @@ pre {
         padding: 0.4rem;
       }
 
-      [role='button'] {
+      button {
         padding: 0.4rem;
 
         @include media('print') {
@@ -276,7 +276,7 @@ pre {
 
     &.line-wrapping .line-wrap-btn,
     &:not(.line-nos-hidden) .line-nos-btn,
-    .code-header [role='button']:hover,
+    .code-header button:hover,
     &:has([contenteditable='true']) .edit-btn {
       color: fixit-var(global-link-hover-color);
     }

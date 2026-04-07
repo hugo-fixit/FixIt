@@ -1,6 +1,6 @@
 {{- /* Diagram copy button */ -}}
 {{- $label := .Label | default "Copy Diagram code" -}}
 
-<div class="diagram-copy-btn" aria-label="{{ $label }}" role="button" tabindex="0">
+<button type="button" class="diagram-copy-btn" aria-label="{{ $label }}">
   {{- dict "Class" "fa-regular fa-clone fa-width-auto" | partial "plugin/icon.html" -}}
-</div>
+</button>

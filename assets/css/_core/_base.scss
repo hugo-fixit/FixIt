@@ -32,7 +32,12 @@ iframe {
   @include border-radius;
 }
 
-[role='button'] {
+button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  appearance: none;
   cursor: pointer;
 }
 

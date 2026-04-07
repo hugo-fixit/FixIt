@@ -62,7 +62,7 @@
   }
 }
 
-@mixin focus-visible-ring($size: 1.5em, $offset: 0.2rem) {
+@mixin focus-visible-ring($size: 1.3em, $offset: 0.2rem) {
   &:focus-visible {
     outline: none;
 

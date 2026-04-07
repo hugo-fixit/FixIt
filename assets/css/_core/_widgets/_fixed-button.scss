@@ -14,15 +14,14 @@
   padding: 0.5rem 0.625rem;
   color: fixit-var(global-font-secondary-color);
   transition: color 0.4s ease;
-  @include border-radius(full);
   background-color: light-dark(#f1f1f1, #1e1e1f);
+  @include border-radius(full);
 
   &:hover,
   &:active,
   &:focus {
     outline: none;
     color: fixit-var(global-font-color);
-    cursor: pointer;
   }
 
   @include media('print') {
