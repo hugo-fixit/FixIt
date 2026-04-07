@@ -1,7 +1,7 @@
 {{- partial "init/index.html" . -}}
 
 <!DOCTYPE html>
-<html itemscope itemtype="http://schema.org/WebPage" lang="{{ .Site.LanguageCode }}">
+<html itemscope itemtype="http://schema.org/WebPage" lang="{{ .Site.Language.Locale }}">
   <head>
     {{- if .IsHome | and (ne .Site.Params.disableThemeInject true) }}
     <meta name="theme" content='FixIt {{ hugo.Store.Get "version" }}'>

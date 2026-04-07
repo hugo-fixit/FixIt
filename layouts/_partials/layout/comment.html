@@ -20,10 +20,10 @@
       {{- $source := $cdn.artalkJS | default (add $artalk.server "/dist/Artalk.js") -}}
       {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/script.html" -}}
       {{- $commentConfig = dict "el" "#artalk" "pageKey" .Permalink "pageTitle" .Title "pvEl" "artalk-visitor-count" "countEl" "artalk-comment-count" | dict "artalk" | merge $commentConfig -}}
-      {{- if (eq $artalk.locale "") | and (eq $.Site.LanguageCode "en") -}}
+      {{- if (eq $artalk.locale "") | and (eq $.Site.Language.Locale "en") -}}
         {{- $artalk = dict "locale" "en-US" | merge $artalk -}}
       {{- end -}}
-      {{- $commentConfig = dict "locale" ($artalk.locale | default $.Site.LanguageCode | default "auto") | dict "artalk" | merge $commentConfig -}}
+      {{- $commentConfig = dict "locale" ($artalk.locale | default $.Site.Language.Locale | default "auto") | dict "artalk" | merge $commentConfig -}}
       {{- if eq $artalk.usebackendconf false -}}
         {{- $commentConfig = dict "useBackendConf" false | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
@@ -318,7 +318,7 @@
             data-reactions-enabled="{{ .ReactionsEnabled }}"
             data-emit-metadata="{{ .EmitMetadata }}"
             data-input-position="{{ .InputPosition }}"
-            data-lang="{{ .lang | default $.Site.LanguageCode }}"
+            data-lang="{{ .lang | default $.Site.Language.Locale }}"
             {{ if ne .LazyLoad false }}data-loading="lazy"{{ end }}
             crossorigin="anonymous"
             async
