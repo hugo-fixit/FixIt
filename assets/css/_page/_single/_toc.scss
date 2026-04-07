@@ -122,8 +122,7 @@
   .toc-content {
     overflow-y: auto;
     overscroll-behavior: contain;
-    // TODO 这里计算错误，待重构使用 JS 计算
-    max-height: calc(100vh - #{2 * #{fixit-var(header-height)}});
+    max-height: fixit-var(toc-content-max-height, calc(100dvh - #{2 * #{fixit-var(header-height)}}));
     @include scrollbar-width(none, 0);
 
     &.always-active ul,

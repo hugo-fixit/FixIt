@@ -18,13 +18,11 @@
   background-color: light-dark(#f1f1f1, #1e1e1f);
 
   &:hover,
-  &:active {
+  &:active,
+  &:focus {
+    outline: none;
     color: fixit-var(global-font-color);
     cursor: pointer;
-  }
-
-  &:focus-visible {
-    outline: -webkit-focus-ring-color auto 1px;
   }
 
   @include media('print') {
