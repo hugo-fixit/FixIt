@@ -1279,6 +1279,31 @@ collectionList = false
 # FixIt 0.3.0 | NEW whether to enable collection navigation at the end of the post
 collectionNavigation = false
 
+# FixIt 0.4.6 | NEW External link guard config
+[params.page.externalLinkGuard]
+# whether to enable external link guard for post content
+enable = false
+# V1 supports: "content" (post body only)
+scope = "content"
+# mode: "modal" (current page dialog) | "redirect" (intermediate page, reserved)
+mode = "modal"
+# allowed domains (exact host or parent domain) will skip confirmation
+allow_domains = []
+# blocked URL schemes for security
+block_schemes = [
+  "javascript",
+  "data",
+  "file"
+]
+# how to open target link after confirm: "follow" | "newtab" | "self"
+new_tab_policy = "follow"
+# whether to show full URL in dialog
+show_full_url = true
+# custom message text, empty to use i18n default
+message = ""
+# reserved for redirect mode
+redirect_url = ""
+
 # FixIt 0.2.15 | NEW Repost config
 [params.page.repost]
 enable = false

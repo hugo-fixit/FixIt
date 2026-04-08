@@ -153,20 +153,22 @@ export function createCopyText() {
 }
 
 /**
- * Check whether a string looks like a JavaScript object literal.
+ * Check whether a value is a plain object, or a string that looks like
+ * a JavaScript object literal.
+ * @example isObjectLiteral({ a: 1 }) // true
  * @example isObjectLiteral("{a:1,b:2}") // true
- * @param {String} str string to check
- * @returns {Boolean} whether the string is an object literal
+ * @param {*} value value to check
+ * @returns {Boolean} whether the value is object-like
  */
-export function isObjectLiteral(str) {
-  if (typeof str !== 'string') {
-    return false;
-  }
-  str = str.replace(/\s+/g, ' ').trim().replace(/;$/, '')
-  if (str.startsWith('{') && str.endsWith('}')) {
+export function isObjectLiteral(value) {
+  if (value && typeof value === 'object' && !Array.isArray(value)) {
     return true;
   }
-  return false;
+  if (typeof value !== 'string') {
+    return false;
+  }
+  const normalized = value.replace(/\s+/g, ' ').trim().replace(/;$/, '');
+  return normalized.startsWith('{') && normalized.endsWith('}');
 }
 
 /**

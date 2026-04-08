@@ -311,6 +311,20 @@ FixIt theme assets partial
 {{- /* Print */ -}}
 {{- $config = partial "function/snake2camel.html" .Site.Params.print | dict "print" | merge $config -}}
 
+{{- /* External link guard */ -}}
+{{- $externalLinkGuard := $params.externalLinkGuard | default dict -}}
+{{- $externalLinkGuardLabels := dict
+  "title" (T "assets.externalLinkGuardTitle")
+  "message" (T "assets.externalLinkGuardMessage")
+  "targetLabel" (T "assets.externalLinkGuardTargetLabel")
+  "confirm" (T "assets.externalLinkGuardConfirm")
+  "cancel" (T "assets.externalLinkGuardCancel")
+  "copy" (T "assets.copyToClipboard")
+  "copied" (T "assets.copiedText")
+-}}
+{{- $externalLinkGuard = dict "labels" $externalLinkGuardLabels | merge (partial "function/snake2camel.html" $externalLinkGuard) -}}
+{{- $config = dict "externalLinkGuard" $externalLinkGuard | merge $config -}}
+
 {{- /* PostChat */ -}}
 {{- partial "plugin/post-chat-ai.html" . -}}
 
