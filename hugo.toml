@@ -1283,9 +1283,11 @@ collectionNavigation = false
 [params.page.externalLinkGuard]
 # whether to enable external link guard for post content
 enable = false
-# V1 supports: "content" (post body only)
+# scope:
+# - "content": only post content area (e.g. #content and decryptor content)
+# - "site": all external links on the whole site
 scope = "content"
-# mode: "modal" (current page dialog) | "redirect" (intermediate page, reserved)
+# mode: "modal" (current page dialog) | "redirect" (intermediate page)
 mode = "modal"
 # allowed domains (exact host or parent domain) will skip confirmation
 allow_domains = []
@@ -1295,14 +1297,18 @@ block_schemes = [
   "data",
   "file"
 ]
-# how to open target link after confirm: "follow" | "newtab" | "self"
+# how to open target link after confirm:
+# - "follow": follow original link behavior
+#   - open in new tab when link has target="_blank"
+#   - otherwise open in current tab
+# - "newtab": always open in a new tab
+# - "self": always open in current tab
+# note: Ctrl/Cmd/Shift + click is treated as force-new-tab and has higher priority than the policy above.
 new_tab_policy = "follow"
 # whether to show full URL in dialog
 show_full_url = true
 # custom message text, empty to use i18n default
 message = ""
-# reserved for redirect mode
-redirect_url = ""
 
 # FixIt 0.2.15 | NEW Repost config
 [params.page.repost]

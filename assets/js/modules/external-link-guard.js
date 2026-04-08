@@ -20,7 +20,6 @@ function normalizeExternalLinkGuardConfig(rawConfig) {
     ? blockSchemesRaw.map((item) => String(item || '').trim().toLowerCase()).filter(Boolean)
     : ['javascript', 'data', 'file'];
   const showFullURL = config.showFullURL ?? config.showFullUrl ?? config.show_full_url ?? config.showfullurl;
-  const redirectURL = config.redirectURL ?? config.redirectUrl ?? config.redirect_url ?? config.redirecturl;
   const labelTitle = labels.title || labels.Title;
   const labelMessage = labels.message || labels.Message;
   const labelTarget = labels.targetLabel || labels.target_label || labels.targetlabel;
@@ -37,7 +36,6 @@ function normalizeExternalLinkGuardConfig(rawConfig) {
     newTabPolicy: ['newtab', 'self', 'follow'].includes(newTabPolicy) ? newTabPolicy : 'follow',
     showFullURL: showFullURL !== false,
     message: typeof config.message === 'string' ? config.message.trim() : '',
-    redirectURL: typeof redirectURL === 'string' ? redirectURL.trim() : '',
     labels: {
       title: labelTitle || 'Leaving this site',
       message: labelMessage || 'You are about to visit an external website. Please confirm whether to continue.',
@@ -72,7 +70,7 @@ function openExternalLinkTarget(href, $anchor, newTabPolicy, forceNewTab = false
   window.location.href = href;
 }
 
-function buildExternalLinkRedirectHTML(guard, targetHref) {
+function buildExternalLinkRedirectHTML(guard, targetHref, targetDisplay) {
   const title = guard.labels.title || 'Leaving this site';
   const message = guard.message || guard.labels.message || 'You are about to visit an external website. Please confirm whether to continue.';
   const targetLabel = guard.labels.targetLabel || 'Target address:';
@@ -89,6 +87,7 @@ function buildExternalLinkRedirectHTML(guard, targetHref) {
     copyText,
     copiedText,
     targetHref,
+    targetDisplay,
   });
   return `<!doctype html>
 <html lang="en">
@@ -256,7 +255,7 @@ function buildExternalLinkRedirectHTML(guard, targetHref) {
       if ($title) $title.textContent = state.title;
       if ($message) $message.textContent = state.message;
       if ($targetLabel) $targetLabel.textContent = state.targetLabel;
-      if ($target) $target.textContent = state.targetHref;
+      if ($target) $target.textContent = state.targetDisplay || state.targetHref;
       if ($copy) {
         $copy.setAttribute('aria-label', state.copyText);
         $copy.title = state.copyText;
@@ -432,23 +431,10 @@ export function bindExternalLinkGuard(instance, copyText) {
 
     const forceNewTab = event.metaKey || event.ctrlKey || event.shiftKey;
 
-    if (guard.mode === 'redirect' && guard.redirectURL) {
-      let redirectTarget;
-      try {
-        redirectTarget = new URL(guard.redirectURL, window.location.origin);
-        redirectTarget.searchParams.set('target', url.href);
-      } catch {
-        redirectTarget = null;
-      }
-      if (redirectTarget) {
-        openExternalLinkTarget(redirectTarget.toString(), $anchor, guard.newTabPolicy, forceNewTab);
-        return;
-      }
-    }
-
     if (guard.mode === 'redirect') {
       if (typeof Blob === 'function' && window.URL?.createObjectURL) {
-        const html = buildExternalLinkRedirectHTML(guard, url.href);
+        const displayTarget = guard.showFullURL ? url.href : url.host;
+        const html = buildExternalLinkRedirectHTML(guard, url.href, displayTarget);
         const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
         const blobURL = window.URL.createObjectURL(blob);
         openExternalLinkTarget(blobURL, $anchor, guard.newTabPolicy, forceNewTab);
