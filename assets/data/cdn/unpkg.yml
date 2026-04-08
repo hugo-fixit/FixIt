@@ -21,8 +21,8 @@ libFiles:
   autocompleteJS: autocomplete.js@0.38.1/dist/autocomplete.min.js
   # cell-tooltip@0.3.1 https://github.com/Lruihao/cell-tooltip
   cellTooltipJS: cell-tooltip@0.3.1/dist/cell-tooltip.umd.js
-  # cell-watermark@1.0.3 https://github.com/Lruihao/watermark
-  cellWatermarkJS: cell-watermark@1.0.3/src/watermark.min.js
+  # cell-watermark@1.0.4 https://github.com/Lruihao/watermark
+  cellWatermarkJS: cell-watermark@1.0.4/src/watermark.js
   # cookieconsent@3.1.1 https://github.com/osano/cookieconsent
   cookieconsentCSS: cookieconsent@3.1.1/build/cookieconsent.min.css
   cookieconsentJS: cookieconsent@3.1.1/build/cookieconsent.min.js
@@ -59,14 +59,14 @@ libFiles:
   metingJS: meting@2.0.1/dist/Meting.min.js
   # object-fit-images@3.2.4 https://github.com/fregante/object-fit-images
   objectFitImagesJS: object-fit-images@3.2.4/dist/ofi.min.js
-  # pangu.js@4.0.7 https://github.com/vinta/pangu.js
-  panguJS: pangu@4.0.7/dist/browser/pangu.min.js
   # pace-js@1.2.4 https://github.com/CodeByZach/pace
   paceJS: pace-js@1.2.4
+  # pangu.js@4.0.7 https://github.com/vinta/pangu.js
+  panguJS: pangu@4.0.7/dist/browser/pangu.min.js
   # sharer.js@0.5.1 https://github.com/ellisonleao/sharer.js
   sharerJS: sharer.js@0.5.1/sharer.min.js
   # @github/tab-container-element@4.8.2 https://github.com/github/tab-container-element
-  tabContainerElementJS: '@github/tab-container-element@4.8.2/dist/index.js'
+  tabContainerElementJS: '@github/tab-container-element@4.8.2/dist/bundle.min.js'
   # twemoji@14.0.2 https://github.com/twitter/twemoji
   twemojiJS: twemoji@14.0.2/dist/twemoji.min.js
   # twikoo@1.7.3 https://github.com/imaegoo/twikoo

@@ -23,11 +23,6 @@ jobs:
           comment_tag_name: HUGO_FIXIT_COMPONENTS
           readme_path: 'README.md,README.zh-cn.md'
           template: "- [{$repo.name}]({$repo.html_url})\\\n  {$repo.description}"
-      # - name: Commit changes
-      #   uses: stefanzweifel/git-auto-commit-action@v5
-      #   with:
-      #     commit_message: 'docs(readme): update hugo-fixit component list'
-      #     commit_author: 'github-actions[bot] <github-actions[bot]@users.noreply.github.com>'
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
         with:
