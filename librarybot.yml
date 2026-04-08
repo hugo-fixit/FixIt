@@ -1,0 +1,191 @@
+schemaVersion: 1
+baseDir: assets/lib
+libraries:
+  - npm: algoliasearch
+    version: 4.20.0
+  - npm: animate.css
+    version: 4.1.1
+    local:
+      items:
+        - from: animate.min.css
+          to: animate/animate.min.css
+  - npm: aplayer
+    version: 1.10.1
+    local:
+      items:
+        - from: dist/APlayer.min.css
+          to: aplayer/APlayer.min.css
+        - from: dist/APlayer.min.js
+          to: aplayer/APlayer.min.js
+  - npm: cell-tooltip
+    version: 0.3.1
+    local:
+      items:
+        - from: dist/cell-tooltip.umd.js
+          to: cell-tooltip/cell-tooltip.umd.js
+  - npm: cell-watermark
+    version: 1.0.4
+    local:
+      items:
+        - from: src/watermark.js
+          to: cell-watermark/watermark.js
+  - npm: cookieconsent
+    version: 3.1.1
+    local:
+      items:
+        - from: build/cookieconsent.min.css
+          to: cookieconsent/cookieconsent.min.css
+        - from: build/cookieconsent.min.js
+          to: cookieconsent/cookieconsent.min.js
+  - npm: crypto-js
+    version: 4.2.0
+    local:
+      items:
+        - from: core.js
+          to: crypto-js/core.js
+        - from: enc-base64.js
+          to: crypto-js/enc-base64.js
+        - from: sha256.js
+          to: crypto-js/sha256.js
+  - npm: echarts
+    version: 5.3.3
+    local:
+      items:
+        - from: dist/echarts.min.js
+          to: echarts/echarts.min.js
+  - npm: '@fortawesome/fontawesome-free'
+    version: 7.1.0
+    local:
+      items:
+        - from: css/all.min.css
+          to: fontawesome-free/all.min.css
+  - npm: fuse.js
+    version: 7.3.0
+    local:
+      items:
+        - from: dist/fuse.cjs
+          to: fuse/fuse.js
+  - npm: gitalk
+    version: 1.7.2
+    local:
+      items:
+        - from: dist/gitalk.css
+          to: gitalk/gitalk.css
+        - from: dist/gitalk.min.js
+          to: gitalk/gitalk.min.js
+  - npm: instant.page
+    version: 5.2.0
+    local:
+      items:
+        - from: instantpage.min.js
+          to: instant.page/instantpage.min.js
+  - npm: json-viewer-element
+    version: 1.0.4
+    local:
+      items:
+        - from: dist/json-viewer-element.umd.js
+          to: json-viewer-element/json-viewer-element.umd.js
+  - npm: katex
+    version: 0.16.22
+    local:
+      items:
+        - from: dist/contrib/copy-tex.min.js
+          to: katex/copy-tex.min.js
+        - from: dist/katex.min.css
+          to: katex/katex.min.css
+  - npm: lightgallery
+    version: 2.7.2
+    local:
+      items:
+        - from: css/lightgallery-bundle.min.css
+          to: lightgallery/css/lightgallery-bundle.min.css
+        - from: lightgallery.min.js
+          to: lightgallery/lightgallery.min.js
+        - from: plugins/thumbnail/lg-thumbnail.min.js
+          to: lightgallery/plugins/thumbnail/lg-thumbnail.min.js
+        - from: plugins/zoom/lg-zoom.min.js
+          to: lightgallery/lg-zoom.min.js
+  - npm: mapbox-gl
+    version: 2.10.0
+    local:
+      items:
+        - from: dist/mapbox-gl.css
+          to: mapbox-gl/mapbox-gl.css
+        - from: dist/mapbox-gl.js
+          to: mapbox-gl/mapbox-gl.js
+  - npm: meting
+    version: 2.0.1
+    local:
+      items:
+        - from: dist/Meting.min.js
+          to: meting/Meting.min.js
+  - npm: pace-js
+    version: 1.2.4
+    local:
+      items:
+        - from: pace.min.js
+          to: pace/pace.min.js
+  - npm: pangu
+    version: 4.0.7
+    local:
+      items:
+        - from: dist/browser/pangu.umd.js
+          to: pangu/pangu.umd.js
+  - npm: sharer.js
+    version: 0.5.1
+    local:
+      items:
+        - from: sharer.min.js
+          to: sharer/sharer.min.js
+  - npm: simple-icons
+    version: 9.19.0
+    local:
+      items:
+        - type: dir
+          from: icons
+          to: simple-icons/icons
+          clean: true
+  - npm: '@github/tab-container-element'
+    version: 4.8.2
+    local:
+      items:
+        - from: dist/bundle.min.js
+          to: tab-container-element/bundle.min.js
+  - npm: twemoji
+    version: 14.0.2
+    local:
+      items:
+        - from: dist/twemoji.min.js
+          to: twemoji/twemoji.min.js
+  - npm: twikoo
+    version: 1.7.3
+    local:
+      items:
+        - from: dist/twikoo.all.min.js
+          to: twikoo/twikoo.all.min.js
+  - npm: typeit
+    version: 8.8.4
+    local:
+      items:
+        - from: dist/index.umd.js
+          to: typeit/typeit.umd.js
+  - npm: valine
+    version: 1.5.2
+    local:
+      items:
+        - from: dist/Valine.min.js
+          to: valine/Valine.min.js
+  - npm: '@waline/client'
+    version: 3.12.1
+    local:
+      items:
+        - from: dist/waline.css
+          to: waline/waline.css
+        - from: dist/waline.umd.js
+          to: waline/waline.umd.js
+  - npm: xxhash-wasm
+    version: 1.0.2
+    local:
+      items:
+        - from: umd/xxhash-wasm.js
+          to: xxhash-wasm/xxhash-wasm.js

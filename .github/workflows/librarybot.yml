@@ -1,0 +1,49 @@
+name: Update libraries from npm
+on:
+  schedule:
+    - cron: '0 0  * * 0'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      libraries: ${{ steps.list.outputs.libraries_json }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: List libraries
+        id: list
+        uses: ./
+        with:
+          mode: list
+  update:
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        library: ${{ fromJson(needs.prepare.outputs.libraries) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Update library
+        id: update
+        uses: ./
+        with:
+          mode: update
+          library: ${{ matrix.library }}
+      - name: Create Pull Request
+        if: steps.update.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          title: 'chore(deps): bump ${{ steps.update.outputs.package }} from `${{ steps.update.outputs.from_version }}` to `${{ steps.update.outputs.to_version }}`'
+          commit-message: 'chore(deps): bump ${{ steps.update.outputs.package }} from `${{ steps.update.outputs.from_version }}` to `${{ steps.update.outputs.to_version }}`'
+          body: |
+            Automated update of `${{ steps.update.outputs.package }}` from `${{ steps.update.outputs.from_version }}` to `${{ steps.update.outputs.to_version }}`.
+          branch: ${{ steps.update.outputs.pr_branch }}
+          base: main
+          labels: dependencies
+          reviewers: Lruihao
