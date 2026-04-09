@@ -33,7 +33,7 @@
             {{- $icon := dict "Class" "fa-solid fa-share" -}}
             {{- $iconTitle := cond (hasPrefix .Url "http") (printf "%v -> %v" (T "single.repost") .Url ) (T "single.repost") -}}
             {{- if hasPrefix .Url "http" -}}
-              {{ dict "Destination" .Url "Icon" $icon "Class" "icon-repost" "Title" $iconTitle | partial "plugin/link.html" -}}
+              {{ dict "Destination" .Url "Icon" $icon "Class" "icon-repost" "Title" $iconTitle "ExternalIcon" false | partial "plugin/link.html" -}}
             {{- else -}}
               <span title="{{ $iconTitle }}" class="icon-repost">{{- $icon | partial "plugin/icon.html" -}}</span>
             {{- end -}}

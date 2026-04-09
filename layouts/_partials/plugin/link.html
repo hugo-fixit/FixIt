@@ -1,5 +1,24 @@
+{{- /*
+  Link rendering partial for regular and card-style links.
+  - Auto-detects external links and applies target/rel policies.
+  - Supports optional icon, download hint, and external icon display.
+  - Supports card mode with URL meta and favicon fallback.
+  @param {String} .Destination target URL
+  @param {String} [.Content] link label HTML
+  @param {String} [.Title] title attribute
+  @param {String} [.Class] custom CSS classes
+  @param {Boolean} [.Newtab] force external behavior
+  @param {Boolean} [.Noreferrer] whether to include noreferrer (default: true)
+  @param {Boolean} [.ExternalIcon] whether to show external-link icon
+  @param {Object} [.Icon] icon params for plugin/icon.html
+  @param {Boolean} [.Card] whether to render card link layout
+  @param {String} [.CardIcon] card icon URL or icon class
+  @param {String} [.Download] download attribute value
+*/ -}}
+
+{{- $config := partial "function/snake2camel.html" site.Params.link -}}
 {{- $rel := "" -}}
-{{- $external := false -}}
+{{- $isExternal := false -}}
 {{- $noreferrer := true -}}
 {{- if eq .Noreferrer false -}}
   {{- $noreferrer = false -}}
@@ -7,20 +26,23 @@
 {{- $url := urls.Parse .Destination -}}
 {{- if $url.IsAbs | or .Newtab -}}
   {{- $rel = cond $noreferrer "external nofollow noopener noreferrer" "external nofollow" -}}
-  {{- $external = true -}}
+  {{- $isExternal = true -}}
 {{- end -}}
 {{- $class := .Class | default "" -}}
 {{- if eq .Card true -}}
   {{- $class = trim (printf "%v %v" "card-link" $class) " " -}}
 {{- end -}}
+
 <a href="{{ .Destination | safeURL }}"
   {{- with .Title }} title="{{ . }}"{{- end -}}
-  {{- if $external }} target="_blank"{{- end -}}
+  {{- if $isExternal }} target="_blank"{{- end -}}
   {{- if $rel | or .Rel }} rel="{{ $rel }}{{ with .Rel }} {{ . }}{{ end }}"{{- end -}}
   {{- with $class }} class="{{ with $class }}{{ . }}{{ end }}"{{- end -}}
   {{- with .Download }} download="{{ . }}"{{- end -}}
 >
   {{- if ne .Card true -}}
+    {{- /* Regular link rendering */ -}}
+    {{- $externalIcon := .ExternalIcon | default $config.externalIcon -}}
     {{- with .Icon -}}
       {{- partial "plugin/icon.html" . }}
     {{ end -}}
@@ -28,8 +50,8 @@
       {{- . | safeHTML -}}
     {{- end -}}
     {{- if 
-      (.ExternalIcon | default false) 
-      | and $external | and (eq (hasPrefix .Content `<img`) false)
+      $externalIcon
+      | and $isExternal | and (eq (hasPrefix .Content `<img`) false)
       | and (eq ((strings.HasSuffix .Content `</i>`) | or (strings.HasSuffix .Content `):`)) false)
     -}}
       {{- if .Download -}}
@@ -41,6 +63,7 @@
       {{- dict "Class" "fa-solid fa-download ms-1 text-secondary" | partial "plugin/icon.html" -}}
     {{- end -}}
   {{- else -}}
+    {{- /* Card link rendering */ -}}
     {{- $cardIcon := .CardIcon -}}
     {{- if (not $cardIcon) | and $url.Host -}}
       {{- with partial "function/get-remote-image.html" (dict "Src" (add "https://favicon.im/" $url.Host)) -}}

@@ -1,0 +1,10 @@
+{{- /*  
+  This is a debug partial that dumps the current context.
+  @example
+  {{- partial "_debug/dump.html" . -}}
+*/ -}}
+{{- $debug := (site.Store.Get "devOpts").debug -}}
+
+{{- if $debug | and hugo.IsServer -}}
+  <pre>{{ debug.Dump . }}</pre>
+{{- end -}}

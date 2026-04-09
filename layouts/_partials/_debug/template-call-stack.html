@@ -1,6 +1,7 @@
 {{- /*  
   Render template call stack for debugging purpose.
-  Call the partial from any template: {{- partial "_debug/template-call-stack.html" . -}}
+  @example
+  {{- partial "_debug/template-call-stack.html" . -}}
 */ -}}
 {{- $debug := (site.Store.Get "devOpts").debug -}}
 

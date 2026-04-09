@@ -18,5 +18,5 @@
   {{- $options = dict "Card" (.Get 3) | merge $options -}}
   {{- $options = dict "CardIcon" (.Get 4) | merge $options -}}
 {{- end -}}
-{{- $options = dict "ExternalIcon" (.Get "external-icon" | default .Site.Params.externalIcon) | merge $options -}}
+{{- $options = dict "ExternalIcon" (.Get "external-icon") | merge $options -}}
 {{- partial "plugin/link.html" $options -}}

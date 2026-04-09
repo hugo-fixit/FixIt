@@ -434,8 +434,6 @@ dateFormat = "2006-01-02"
 images = []
 # FixIt 0.2.12 | NEW enable PWA
 enablePWA = false
-# FixIt 0.2.14 | NEW whether to add external Icon for external links automatically
-externalIcon = false
 # FixIt 0.3.13 | NEW whether to capitalize titles
 capitalizeTitles = true
 # FixIt 0.3.0 | NEW whether to add site title to the title of every page
@@ -1128,6 +1126,11 @@ optimise = false
 # FixIt 0.4.0 | NEW A list of image file names or patterns to exclude from optimisation
 # e.g. ["no-optimize.jpg", "*.tiff", "images/exclude-*.webp"]
 blackList = []
+
+# FixIt 1.0.0 | NEW Link config
+[params.link]
+# whether to add external Icon for external links automatically
+external_icon = true
 
 # FixIt 0.4.0 | NEW Code block wrapper config
 # you can override the global config via Markdown attributes, for example:
