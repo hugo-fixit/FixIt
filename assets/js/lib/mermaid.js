@@ -188,6 +188,19 @@ function createZoomButton({ action, title, icon }) {
   return button
 }
 
+function resolveActiveMermaidNode(container, fallbackNode) {
+  const isDark = document.documentElement.dataset.theme === 'dark'
+  const preferredSelector = isDark ? '.mermaid-dark' : '.mermaid'
+  const preferredNode = container.querySelector(preferredSelector)
+  if (preferredNode?.querySelector('svg')) return preferredNode
+
+  const fallbackSelector = '.mermaid[data-processed], .mermaid-dark[data-processed], .mermaid-neutral[data-processed], .mermaid, .mermaid-dark, .mermaid-neutral'
+  const resolvedNode = container.querySelector(fallbackSelector)
+  if (resolvedNode?.querySelector('svg')) return resolvedNode
+
+  return fallbackNode
+}
+
 function ensureZoomControls(node, state, options) {
   const container = node.closest('.mermaid-diagram-container') || node.parentElement
   if (!container) return
@@ -214,18 +227,22 @@ function ensureZoomControls(node, state, options) {
     const button = event.target.closest('button[data-action]')
     if (!button) return
     const action = button.dataset.action
+    const targetNode = resolveActiveMermaidNode(container, node)
+    const targetState = getZoomState(targetNode)
+    const targetOptions = getZoomOptions(targetNode)
+
     if (action === 'zoom-in') {
-      updateZoomLevel(node, state, options, state.scale + options.step)
+      updateZoomLevel(targetNode, targetState, targetOptions, targetState.scale + targetOptions.step)
     } else if (action === 'zoom-out') {
-      updateZoomLevel(node, state, options, state.scale - options.step)
+      updateZoomLevel(targetNode, targetState, targetOptions, targetState.scale - targetOptions.step)
     } else if (action === 'reset') {
-      state.scale = 1
-      applyZoom(node, state)
-      node.scrollLeft = 0
-      node.scrollTop = 0
-      updateZoomControls(node, state, options)
+      targetState.scale = 1
+      applyZoom(targetNode, targetState)
+      targetNode.scrollLeft = 0
+      targetNode.scrollTop = 0
+      updateZoomControls(targetNode, targetState, targetOptions)
     } else if (action === 'download') {
-      downloadMermaidSvg(node)
+      downloadMermaidSvg(targetNode)
     }
   }
 
