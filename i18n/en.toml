@@ -188,6 +188,13 @@ other = "Offline"
 other = "You are not connected to the Internet, only cached pages will be available."
 # === offline ===
 
+# === link redirection ===
+[linkRedirection]
+title = "Redirection Notice"
+message = "You are about to leave {{ .Title }}, please be aware of your account and property security."
+confirm = "Continue visiting"
+# === link redirection ===
+
 # === GitHub Alert ===
 [alert]
 note = "Note"

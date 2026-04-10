@@ -184,6 +184,13 @@ other = "离线"
 other = "你没有连接到 Internet，只有缓存的页面可用。"
 # === offline ===
 
+# === link redirection ===
+[linkRedirection]
+title = "跳转提示"
+message = "即将离开{{ .Title }}，请注意账号财产安全。"
+confirm = "继续访问"
+# === link redirection ===
+
 # === GitHub Alert ===
 [alert]
 note = "注意"

@@ -1,0 +1,29 @@
+{{- define "title" -}}
+  {{- T "linkRedirection.title" -}}
+  {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
+{{- end -}}
+
+{{- define "content" -}}
+  <article class="page" id="content-link">
+    <main class="card">
+      <p class="message">{{ dict "Title" .Site.Title | T "linkRedirection.message" }}</p>
+      <div class="target-wrapper">
+        <p class="target">-</p>
+        <button type="button" class="copy-btn" aria-label="{{ T "assets.copyToClipboard" }}" disabled>
+          {{- dict "Class" "fa-regular fa-clone" | partial "plugin/icon.html" -}}
+        </button>
+      </div>
+      <div class="actions">
+        <button type="button" class="confirm-btn" aria-label="{{ T "linkRedirection.confirm" }}" disabled>{{ T "linkRedirection.confirm" }}</button>
+      </div>
+    </main>
+  </article>
+
+  {{- /* link redirection page script */ -}}
+  {{- $fingerprint := .Site.Store.Get "fingerprint" -}}
+  {{- $options := dict "targetPath" "js/page/link.min.js" "minify" hugo.IsProduction -}}
+  {{- if not hugo.IsProduction -}}
+    {{- $options = dict "sourceMap" "external" | merge $options -}}
+  {{- end -}}
+  {{- dict "Source" (resources.Get "js/page/link.js") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+{{- end -}}

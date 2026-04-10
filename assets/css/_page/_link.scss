@@ -1,0 +1,72 @@
+#content-link {
+  margin: auto 0;
+
+  .card {
+    position: relative;
+    padding: 1.5rem;
+    margin-inline: 1rem;
+    border: 1px solid fixit-var(global-border-color-light);
+    box-shadow: 0 1rem 2rem light-dark(rgba(15, 23, 42, 0.18), rgba(0, 0, 0, 0.35));
+    background-color: light-dark(#fff, #1d2230);
+    @include border-radius(1rem);
+
+    .message {
+      font-weight: 600;
+      margin-top: 0;
+    }
+
+    .target-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+
+      .target {
+        flex-grow: 1;
+        font-size: 0.875rem;
+        background-color: light-dark(#f8fafc, #171b25);
+        padding: 0.5rem 1rem;
+        margin: 0;
+        border: 1px solid fixit-var(global-border-color);
+        @include border-radius;
+      }
+
+      .copy-btn {
+        flex-shrink: 0;
+        padding: 0.5rem;
+        background-color: light-dark(#f8fafc, #171b25);
+        border: 1px solid fixit-var(global-border-color);
+        @include border-radius;
+
+        &[data-copied] .fa-clone {
+          --fa: "\f00c";
+          font-weight: 900;
+          color: fixit-var(global-link-hover-color);
+        }
+      }
+
+    }
+    
+    .actions {
+      text-align: right;
+      font-size: 0.875rem;
+
+      .confirm-btn {
+        background-color: fixit-var(primary);
+        color: #fff;
+        border: none;
+        padding: 0.5rem 0.875rem;
+        @include border-radius;
+      }
+    }
+
+    button[disabled] {
+      filter: opacity(70%);
+      cursor: not-allowed;
+    }
+  }
+
+  body:has(&) {
+    @include set-fixit-var(global-background-color, fixit-var(header-background-color));
+  }
+}
