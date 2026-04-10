@@ -179,6 +179,13 @@ other = "オフライン"
 other = "インターネットに接続されていません。キャッシュされたページのみが利用可能です。"
 # === offline ===
 
+# === link redirection ===
+[linkRedirection]
+title = "リダイレクト通知"
+message = "{{ .Title }} から離れようとしています。アカウントと資産の安全にご注意ください。"
+confirm = "閲覧を続ける"
+# === link redirection ===
+
 # === GitHub Alert ===
 [alert]
 note = "注意"

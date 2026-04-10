@@ -182,6 +182,13 @@ other = "ngoại tuyến"
 other = "Bạn chưa kết nối với Internet, chỉ các trang được lưu trong bộ nhớ cache sẽ khả dụng."
 # === offline ===
 
+# === link redirection ===
+[linkRedirection]
+title = "Thông báo chuyển hướng"
+message = "Bạn sắp rời khỏi {{ .Title }}, vui lòng chú ý an toàn cho tài khoản và tài sản của mình."
+confirm = "Tiếp tục truy cập"
+# === link redirection ===
+
 # === GitHub Alert ===
 [alert]
 note = "Ghi chú"

@@ -183,6 +183,13 @@ other = "Deconectat"
 other = "Nu sunteți conectat la Internet, vor fi disponibile doar paginile stocate în cache."
 # === offline ===
 
+# === link redirection ===
+[linkRedirection]
+title = "Notificare de redirecționare"
+message = "Urmează să părăsiți {{ .Title }}. Vă rugăm să acordați atenție securității contului și bunurilor dvs."
+confirm = "Continuă vizitarea"
+# === link redirection ===
+
 # === GitHub Alert ===
 [alert]
 note = "Notă"

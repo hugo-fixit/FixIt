@@ -1143,6 +1143,16 @@ blackList = []
 # whether to add external Icon for external links automatically
 external_icon = true
 
+# external link guard config
+[params.link.guard]
+enable = false
+# external link guard mode, available modes: ["modal"， "redirect"]
+# in "modal" mode, a dialog will pop up to ask for confirmation when users click external links
+# in "redirect" mode, users will be redirected to an intermediate page before visiting external links
+mode = "modal"
+# allowed domains (exact host or parent domain) will skip confirmation
+allow_domains = []
+
 # FixIt 0.4.0 | NEW Code block wrapper config
 # you can override the global config via Markdown attributes, for example:
 # ```lang {mode="mac", maxShownLines=5}

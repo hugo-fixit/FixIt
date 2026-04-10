@@ -6,11 +6,12 @@
 {{- define "content" -}}
   <article class="page" id="content-link">
     <main class="card">
+      <h2 class="title">{{ T "linkRedirection.title" }}</h2>
       <p class="message">{{ dict "Title" .Site.Title | T "linkRedirection.message" }}</p>
       <div class="target-wrapper">
         <p class="target">-</p>
         <button type="button" class="copy-btn" aria-label="{{ T "assets.copyToClipboard" }}" disabled>
-          {{- dict "Class" "fa-regular fa-clone" | partial "plugin/icon.html" -}}
+          {{- dict "Class" "fa-regular fa-clone fa-width-auto" | partial "plugin/icon.html" -}}
         </button>
       </div>
       <div class="actions">

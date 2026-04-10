@@ -18,11 +18,15 @@ This post validates link rendering paths in FixIt, including Markdown render hoo
 
 These links are rendered by `layouts/_markup/render-link.html` and should always produce regular links.
 
-- Internal relative link: [Task list test](/posts/task-list-test/)
+- Internal relative link: [Task list test](/test/units/task-list-test/)
 - Internal anchor link: [Jump to Card Link section](#card-link-shortcode)
 - Absolute same-site link: [Test site home](http://demo.fixit.lruihao.cn/test/)
 - External HTTP link: [FixIt Repository](https://github.com/hugo-fixit/FixIt)
 - Mail link: [Email test](mailto:test@example.com)
+- JavaScript link: [JavaScript test](javascript:void(0))
+- Tel link: [Phone test](tel:+1234567890)
+- File link: [File test](file:///path/to/file.txt)
+- Data link: [Data URI test](data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==)
 
 ### Title Attribute (Markdown)
 
@@ -34,7 +38,7 @@ These links are rendered by `layouts/_markup/render-link.html` and should always
 
 {{< link href="https://github.com/hugo-fixit/FixIt" content="GitHub via shortcode" title="GitHub title" >}}
 
-{{< link href="/posts/codeblock-test/" content="Internal shortcode link" class="shortcode-link-test" >}}
+{{< link href="/test/units/codeblock-test/" content="Internal shortcode link" class="shortcode-link-test" >}}
 
 {{< link href="https://example.com" content="Custom rel + no noreferrer" rel="ugc" noreferrer=false >}}
 

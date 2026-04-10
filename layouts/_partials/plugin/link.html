@@ -92,6 +92,7 @@
   </span>
 {{- end -}}
 
+{{- $blockSchemes := slice "javascript" "mailto" "tel" "file" "data" -}}
 {{- $config := partial "function/snake2camel.html" site.Params.link -}}
 {{- $rel := .Rel | default "" -}}
 {{- $isExternal := false -}}
@@ -100,7 +101,8 @@
   {{- $noreferrer = false -}}
 {{- end -}}
 {{- $url := urls.Parse .Destination -}}
-{{- if $url.IsAbs -}}
+{{/*  {{ partial "_debug/dump" $url }}  */}}
+{{- if $url.IsAbs | and (not (in $blockSchemes $url.Scheme)) -}}
   {{- $isExternal = not (strings.HasPrefix .Destination site.BaseURL) -}}
 {{- end -}}
 {{- if $isExternal -}}
@@ -114,7 +116,18 @@
   {{- $class = trim (printf "%v %v" "card-link" $class) " " -}}
 {{- end -}}
 
-{{- $attrs := printf `href="%s"` (.Destination | safeURL) -}}
+{{- /* External link guard */ -}}
+{{- $isGuarded := false -}}
+{{- if
+  $config.guard.enable
+  | and $isExternal
+  | and (not (in $config.guard.allowDomains $url.Host))
+-}}
+  {{- $isGuarded = true -}}
+{{- end -}}
+
+{{- $destination := cond $isGuarded (add (relLangURL "link") "?target=" (urlquery .Destination)) .Destination -}}
+{{- $attrs := printf `href="%s"` ($destination | safeURL) -}}
 {{- with .Title -}}
   {{- $attrs = printf ` title="%s"` . | add $attrs -}}
 {{- end -}}
@@ -129,6 +142,9 @@
 {{- end -}}
 {{- with .Download -}}
   {{- $attrs = printf ` download="%s"` . | add $attrs -}}
+{{- end -}}
+{{- if $isGuarded | and (eq $config.guard.mode "modal") -}}
+  {{- $attrs = add $attrs ` data-guard="modal"` -}}
 {{- end -}}
 
 <a {{ $attrs | safeHTMLAttr }}>

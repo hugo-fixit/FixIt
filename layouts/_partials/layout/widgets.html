@@ -65,6 +65,26 @@
     {{- end -}}
   {{- end -}}
 
+  {{- /* Link Guard Dialog */ -}}
+  {{- if .Site.Params.link.guard.enable -}}
+    <dialog id="link-guard-dialog" aria-labelledby="link-guard-dialog-title" role="dialog">
+      <div class="guard-content">
+        <h2 class="title">{{ T "linkRedirection.title" }}</h2>
+        <p class="message">{{ dict "Title" .Site.Title | T "linkRedirection.message" }}</p>
+        <div class="target-wrapper">
+          <p class="target">-</p>
+          <button type="button" class="copy-btn" aria-label="{{ T "assets.copyToClipboard" }}">
+            {{- dict "Class" "fa-regular fa-clone fa-width-auto" | partial "plugin/icon.html" -}}
+          </button>
+        </div>
+        <div class="actions">
+          <button type="button" class="cancel-btn">{{ T "assets.cancel" }}</button>
+          <button type="button" class="confirm-btn">{{ T "linkRedirection.confirm" }}</button>
+        </div>
+      </div>
+    </dialog>
+  {{- end -}}
+
   {{- /* Custom widgets */ -}}
   {{- block "custom-widgets" . }}{{ end -}}
 

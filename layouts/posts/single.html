@@ -238,6 +238,7 @@
   </aside>
 
   {{- /* TOC Dialog */ -}}
+  {{- /* [todo] move to widgets.html */ -}}
   {{- if $showToc -}}
     <dialog id="toc-dialog" aria-labelledby="toc-dialog-title" role="dialog">
       <div class="toc">
@@ -248,33 +249,6 @@
       </div>
     </dialog>
   {{- end -}}
-
-  {{- /* External Link Guard Dialog */ -}}
-  <dialog id="external-link-dialog" aria-labelledby="external-link-dialog-title" role="dialog">
-    <div class="external-link-guard">
-      <h2 class="elg-title" id="external-link-dialog-title">{{ T "assets.externalLinkGuardTitle" }}</h2>
-      <p class="elg-message" id="external-link-dialog-message">{{ T "assets.externalLinkGuardMessage" }}</p>
-      <p class="elg-target-label">{{ T "assets.externalLinkGuardTargetLabel" }}</p>
-      <div class="elg-target-wrap">
-        <p class="elg-target" id="external-link-dialog-target"></p>
-        <button
-          type="button"
-          class="elg-copy-btn"
-          id="external-link-dialog-copy"
-          data-copy-label="{{ T "assets.copyToClipboard" }}"
-          data-copied-label="{{ T "assets.copiedText" }}"
-          title="{{ T "assets.copyToClipboard" }}"
-          aria-label="{{ T "assets.copyToClipboard" }}"
-        >
-          {{- dict "Class" "fa-regular fa-clone fa-sm" | partial "plugin/icon.html" -}}
-        </button>
-      </div>
-      <div class="elg-actions">
-        <button type="button" class="elg-btn elg-btn-cancel" id="external-link-dialog-cancel">{{ T "assets.externalLinkGuardCancel" }}</button>
-        <button type="button" class="elg-btn elg-btn-confirm" id="external-link-dialog-confirm">{{ T "assets.externalLinkGuardConfirm" }}</button>
-      </div>
-    </div>
-  </dialog>
 {{- end -}}
 
 {{- define "comments" -}}

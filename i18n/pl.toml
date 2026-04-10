@@ -183,6 +183,13 @@ other = "Offline"
 other = "Nie masz połączenia z Internetem, dostępne będą tylko strony z pamięci podręcznej."
 # === offline ===
 
+# === link redirection ===
+[linkRedirection]
+title = "Powiadomienie o przekierowaniu"
+message = "Za chwilę opuścisz {{ .Title }}. Zadbaj o bezpieczeństwo konta i swoich środków."
+confirm = "Kontynuuj odwiedzanie"
+# === link redirection ===
+
 # === GitHub Alert ===
 [alert]
 note = "Notatka"
