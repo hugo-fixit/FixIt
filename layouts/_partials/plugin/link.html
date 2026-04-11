@@ -7,6 +7,7 @@
   @param {String} [.Content] link label HTML
   @param {String} [.Title] title attribute
   @param {String} [.Class] custom CSS classes
+  @param {String} [.Rel] rel attribute value
   @param {Boolean} [.Newtab] force external behavior
   @param {Boolean} [.Noreferrer] whether to include noreferrer (default: true)
   @param {Boolean} [.ExternalIcon] whether to show external-link icon
@@ -14,6 +15,8 @@
   @param {Boolean} [.Card] whether to render card link layout
   @param {String} [.CardIcon] card icon URL or icon class
   @param {String} [.Download] download attribute value
+  @param {Boolean} [.IsGuarded] explicitly enable or disable link guard
+  @param {Object} [.Page] current page context
 */ -}}
 
 {{- /* Regular link rendering */ -}}
@@ -32,6 +35,7 @@
     $externalIcon 
     | and $isExternal
     | and (not (hasPrefix $ctx.Content `<img`))
+    | and (not (hasPrefix $ctx.Content `<svg`))
     | and (not (strings.HasSuffix $ctx.Content `</i>`))
     | and (not (strings.HasSuffix $ctx.Content `):`))
   -}}
@@ -101,7 +105,6 @@
   {{- $noreferrer = false -}}
 {{- end -}}
 {{- $url := urls.Parse .Destination -}}
-{{/*  {{ partial "_debug/dump" $url }}  */}}
 {{- if $url.IsAbs | and (not (in $blockSchemes $url.Scheme)) -}}
   {{- $isExternal = not (strings.HasPrefix .Destination site.BaseURL) -}}
 {{- end -}}
@@ -118,12 +121,20 @@
 
 {{- /* External link guard */ -}}
 {{- $isGuarded := false -}}
+{{- $guardConfig := $config.guard -}}
+{{- with .Page.Params.link_guard -}}
+  {{- if reflect.IsMap . -}}
+    {{- $guardConfig = (partial "function/snake2camel.html" .) | merge $guardConfig -}}
+  {{- else -}}
+    {{- $guardConfig = (dict "enable" .) | merge $guardConfig -}}
+  {{- end -}}
+{{- end -}}
 {{- if
-  $config.guard.enable
+  $guardConfig.enable
   | and $isExternal
-  | and (not (in $config.guard.allowDomains $url.Host))
+  | and (not (in $guardConfig.allowDomains $url.Host))
 -}}
-  {{- $isGuarded = true -}}
+  {{- $isGuarded = .IsGuarded | default true -}}
 {{- end -}}
 
 {{- $destination := cond $isGuarded (add (relLangURL "link") "?target=" (urlquery .Destination)) .Destination -}}
@@ -143,7 +154,7 @@
 {{- with .Download -}}
   {{- $attrs = printf ` download="%s"` . | add $attrs -}}
 {{- end -}}
-{{- if $isGuarded | and (eq $config.guard.mode "modal") -}}
+{{- if $isGuarded | and (eq $guardConfig.mode "modal") -}}
   {{- $attrs = add $attrs ` data-guard="modal"` -}}
 {{- end -}}
 

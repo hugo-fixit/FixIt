@@ -34,7 +34,10 @@
     font-family: fixit-var(code-font-family);
     font-size: 0.875rem;
     line-height: 1rem;
-    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    @include user-select(text);
     @include border-radius;
   }
 
@@ -79,5 +82,14 @@
     color: #fff;
     background-color: fixit-var(primary);
     border-color: fixit-var(primary);
+  }
+
+  @include media('xs') {
+    padding: 1rem;
+
+    .cancel-btn,
+    .confirm-btn {
+      flex: 1 1 50%;
+    }
   }
 }

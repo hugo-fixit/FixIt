@@ -1143,7 +1143,8 @@ blackList = []
 # whether to add external Icon for external links automatically
 external_icon = true
 
-# external link guard config
+# External link guard config
+# per-page override via front matter: link_guard (bool/object)
 [params.link.guard]
 enable = false
 # external link guard mode, available modes: ["modal"， "redirect"]
@@ -1282,6 +1283,8 @@ linkToEdit = true
 # FixIt 0.3.0 | NEW whether to show link to report issue for the post
 linkToReport = true
 # FixIt 0.3.20 | NEW whether to show link to view the post in VSCode
+# [todo] (string) migrate to link_to_editor config in the future
+# to support more editors (vscode://, trae://, etc.)
 linkToVscode = true
 # FixIt 0.3.10 | CHANGED Page style ["narrow", "normal", "wide", ...]
 pageStyle = "normal"

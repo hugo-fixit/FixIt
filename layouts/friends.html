@@ -1,3 +1,23 @@
+{{- /*
+  [todo] refactor #206
+  [todo] link_guard usage in data file
+  Friends page template.
+
+  Usage:
+  1. Friend link items are loaded from data/friends.yml.
+  2. External link guard is disabled by default on this page.
+  3. To enable guard for all friend links on the current page, set `link_guard` to `true` in front matter.
+
+  @example
+  ```md
+  ---
+  title: friends
+  layout: friends
+  link_guard: true
+  ---
+  ```
+*/ -}}
+
 {{- define "title" -}}
   {{- cond (.Param "capitalizeTitles") (title .Title) .Title -}}
   {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
@@ -5,6 +25,7 @@
 
 {{- define "content" -}}
   {{- $params := partial "function/params.html" -}}
+  {{- $isGuarded := .Params.link_guard | default false -}}
   <article class="page single special friends">
     <div class="header">
       {{- /* Title */ -}}
@@ -16,18 +37,24 @@
     {{- /* Friend links */ -}}
     <script src="//at.alicdn.com/t/font_578712_g26jo2kbzd5qm2t9.js" async defer></script>
     <div class="friend-links">
-      {{ range $index, $friend := hugo.Data.friends }}
-        <a class="friend-link" title="{{ $friend.description | safeHTML }}" href="{{ $friend.url | safeURL }}" rel="external noopener" target="_blank">
-          {{ if $friend.avatar }}
-            {{- dict "Src" $friend.avatar "Alt" $friend.nickname "Title" $friend.description "Class" "friend-avatar" | partial "plugin/image.html" -}}
-          {{ else }}
-            <svg class="friend-avatar" aria-hidden="true">
-              <use xlink:href="#icon-{{ add 1 $index }}"></use>
-            </svg>
-          {{ end }}
-          <span class="friend-nickname" title="{{ $friend.nickname }}">@{{ $friend.nickname }}</span>
-        </a>
-      {{ end }}
+      {{- range $index, $friend := hugo.Data.friends -}}
+        {{- $avatar := "" -}}
+        {{- if $friend.avatar -}}
+          {{- $avatar = dict "Src" $friend.avatar "Alt" $friend.nickname "Title" $friend.description "Class" "friend-avatar" | partial "plugin/image.html" -}}
+        {{- else -}}
+          {{- $avatar = printf `<svg class="friend-avatar" aria-hidden="true"><use xlink:href="#icon-%d"></use></svg>` (add 1 $index) -}}
+        {{- end -}}
+        {{- $nickname := printf `<span class="friend-nickname" title="%s">@%s</span>` $friend.nickname $friend.nickname -}}
+        {{- $options := dict
+          "Destination" $friend.url
+          "Title" $friend.description
+          "Content" (printf `%s%s` $avatar $nickname)
+          "Class" "friend-link"
+          "ExternalIcon" false
+          "IsGuarded" $isGuarded
+        -}}
+        {{- partial "plugin/link.html" $options -}}
+      {{- end -}}
     </div>
 
     {{- /* Content */ -}}

@@ -47,24 +47,3 @@
     }
   }
 }
-
-@include media('xs') {
-  #link-guard-dialog {
-    width: calc(100% - 2rem);
-
-    .guard-content {
-      padding: 1rem;
-
-      .actions {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .cancel-btn,
-      .confirm-btn {
-        width: 100%;
-        min-width: 0;
-      }
-    }
-  }
-}

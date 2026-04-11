@@ -2,5 +2,5 @@
 {{- with dict "Path" $destination | partial "function/resource.html" -}}
   {{- $destination = .RelPermalink -}}
 {{- end -}}
-{{- $options := dict "Destination" $destination "Title" .Title "Content" .Text -}}
+{{- $options := dict "Destination" $destination "Title" .Title "Content" .Text "Page" .Page -}}
 {{- partial "plugin/link.html" $options -}}

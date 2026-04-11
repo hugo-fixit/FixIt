@@ -1,5 +1,5 @@
 #content-link {
-  margin: auto 0;
+  align-self: center;
 
   .card {
     width: MIN(600px, calc(100% - 2rem));
@@ -8,8 +8,7 @@
     @include link-guard-content;
 
     @include media('xs') {
-      margin-inline: 0;
-      padding: 1rem;
+      width: MIN(600px, 100%);
     }
   }
 

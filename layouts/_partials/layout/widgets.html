@@ -66,7 +66,11 @@
   {{- end -}}
 
   {{- /* Link Guard Dialog */ -}}
-  {{- if .Site.Params.link.guard.enable -}}
+  {{- $linkGuard := .Site.Params.link.guard  -}}
+  {{- with .Params.link_guard -}}
+    {{- $linkGuard = (cond (reflect.IsMap .) . (dict "enable" .)) | merge $linkGuard -}}
+  {{- end -}}
+  {{- if $linkGuard.enable | and (eq $linkGuard.mode "modal") -}}
     <dialog id="link-guard-dialog" aria-labelledby="link-guard-dialog-title" role="dialog">
       <div class="guard-content">
         <h2 class="title">{{ T "linkRedirection.title" }}</h2>

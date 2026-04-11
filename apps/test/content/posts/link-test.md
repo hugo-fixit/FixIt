@@ -7,6 +7,11 @@ categories:
   - Markdown
 tags:
   - Link
+link_guard:
+  enable: true
+  # mode: redirect
+  allow_domains:
+    - demo.fixit.lruihao.cn
 ---
 
 
