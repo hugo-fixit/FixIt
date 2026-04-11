@@ -179,6 +179,13 @@ other = "오프라인"
 other = "인터넷에 연결되어 있지 않으며, 캐시된 페이지만 사용할 수 있습니다."
 # === offline ===
 
+# === link redirection ===
+[linkRedirection]
+title = "리디렉션 안내"
+message = "{{ .Title }}에서 벗어나려고 합니다. 계정과 자산 보안에 유의해 주세요."
+confirm = "계속 방문"
+
+# === link redirection ===
 # === GitHub Alert ===
 [alert]
 note = "노트"

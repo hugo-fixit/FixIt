@@ -184,6 +184,13 @@ other = "ऑफलाइन"
 other = "आप इंटरनेट से कनेक्ट नहीं हैं, केवल कैश्ड पेज ही उपलब्ध होंगे।"
 # === offline ===
 
+# === link redirection ===
+[linkRedirection]
+title = "रीडायरेक्शन सूचना"
+message = "आप {{ .Title }} छोड़ने वाले हैं, कृपया अपने खाते और संपत्ति की सुरक्षा पर ध्यान दें।"
+confirm = "देखना जारी रखें"
+# === link redirection ===
+
 # === GitHub Alert ===
 [alert]
 note = "ध्यान दें"

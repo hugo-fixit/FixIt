@@ -84,7 +84,7 @@
     {{- end -}}
 
     {{- /* Build children recursively */ -}}
-    {{- if $_debug -}}{{- warnf "> %v:" $rootLabel -}}{{- end -}}
+    {{- if $_debug -}}{{- warnf "[file-tree]> %v:" $rootLabel -}}{{- end -}}
     {{- $childOptions := dict "path" $root "deep" (add $deep 1) "level" $level "ignoreList" $ignoreList "isRecursive" true -}}
     {{- $children := partial "function/get-file-tree.html" $childOptions -}}
     

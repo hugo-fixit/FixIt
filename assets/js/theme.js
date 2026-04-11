@@ -1579,6 +1579,77 @@ class FixIt {
   }
 
   /**
+   * Initialize link guard dialog for links with target="_blank" and data-guard="modal"
+   * @param {Element} target - The target element to initialize within (optional, defaults to document)
+   */
+  initLinkGuardDialog(target = document) {
+    const dialog = document.getElementById('link-guard-dialog');
+    if (!dialog) return;
+
+    const $target = dialog.querySelector('.target');
+    const $copy = dialog.querySelector('.copy-btn');
+    const $confirm = dialog.querySelector('.confirm-btn');
+    const $cancel = dialog.querySelector('.cancel-btn');
+
+    const _closeDialog = () => {
+      if (dialog.open) dialog.close();
+      dialog._target = null;
+      if ($target) {
+        $target.textContent = '-';
+      }
+    };
+
+    if (!dialog.dataset.init) {
+      dialog.dataset.init = 'true';
+
+      $confirm?.addEventListener('click', () => {
+        if (dialog._target) {
+          window.open(dialog._target, '_blank', 'noopener,noreferrer');
+        }
+        _closeDialog();
+      });
+
+      $cancel?.addEventListener('click', _closeDialog);
+
+      $copy?.addEventListener('click', () => {
+        const textToCopy = dialog._target || '';
+        if (!textToCopy) return;
+        copyText(textToCopy).then(() => {
+          $copy.toggleAttribute('data-copied', true);
+          window.setTimeout(() => {
+            $copy.toggleAttribute('data-copied', false);
+          }, 2000);
+        });
+      });
+
+      dialog.addEventListener('click', (e) => {
+        if (e.target === dialog) _closeDialog();
+      });
+    }
+
+    forEach(target.querySelectorAll('a[target="_blank"][data-guard="modal"]:not([data-init])'), ($link) => {
+      $link.dataset.init = 'true';
+      $link.addEventListener('click', (e) => {
+        e.preventDefault();
+        let target = $link.href;
+        try {
+          const guardUrl = new URL($link.href);
+          target = guardUrl.searchParams.get('target') || target;
+        } catch (err) {
+          // Ignore malformed URLs and fall back to the original href.
+        }
+
+        dialog._target = target;
+        if ($target) {
+          $target.textContent = target;
+        }
+        dialog.showModal();
+        document.activeElement?.blur();
+      }, false);
+    });
+  }
+
+  /**
    * Helper method to initialize content components
    * @param {Element} target - The target element (optional, defaults to document)
    * @param {Boolean} includeToc - Whether to initialize TOC-related components
@@ -1606,6 +1677,7 @@ class FixIt {
     this.initMathJax();
     this.initJsonViewer();
     this.initTabEvents(target);
+    this.initLinkGuardDialog(target);
     FileTree.init(target);
     window.FixItMermaid?.init?.();
     window.FixItAPlayer?.init?.();

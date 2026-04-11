@@ -1,0 +1,19 @@
+#content-link {
+  margin: auto 0;
+
+  .card {
+    width: MIN(600px, calc(100% - 2rem));
+    box-sizing: border-box;
+    margin: 0 auto;
+    @include link-guard-content;
+
+    @include media('xs') {
+      margin-inline: 0;
+      padding: 1rem;
+    }
+  }
+
+  body:has(&) {
+    @include set-fixit-var(global-background-color, fixit-var(header-background-color));
+  }
+}

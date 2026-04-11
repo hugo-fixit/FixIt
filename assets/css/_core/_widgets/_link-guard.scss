@@ -1,0 +1,70 @@
+#link-guard-dialog {
+  width: MIN(600px, calc(100% - 2rem));
+  max-width: 100%;
+  border: none;
+  padding: 0;
+  color: fixit-var(global-font-color);
+  background-color: transparent;
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+  transition:
+    display 0.2s allow-discrete,
+    overlay 0.2s allow-discrete,
+    transform 0.2s,
+    opacity 0.2s;
+
+  .guard-content {
+    @include link-guard-content;
+  }
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    transition:
+      display 0.2s allow-discrete,
+      overlay 0.2s allow-discrete,
+      opacity 0.2s;
+  }
+
+  &[open] {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  &[open]::backdrop {
+    opacity: 1;
+  }
+
+  @starting-style {
+    &[open],
+    &[open]::backdrop {
+      opacity: 0;
+    }
+
+    &[open] {
+      transform: translateY(12px) scale(0.98);
+    }
+  }
+}
+
+@include media('xs') {
+  #link-guard-dialog {
+    width: calc(100% - 2rem);
+
+    .guard-content {
+      padding: 1rem;
+
+      .actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .cancel-btn,
+      .confirm-btn {
+        width: 100%;
+        min-width: 0;
+      }
+    }
+  }
+}

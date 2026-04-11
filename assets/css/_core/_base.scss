@@ -12,6 +12,10 @@ html {
   container-type: scroll-state;
   container-name: scroller;
 
+  &:has(dialog[open]) {
+    overflow: hidden;
+  }
+
   @include media('reduce-motion') {
     scroll-behavior: auto;
   }
@@ -39,6 +43,11 @@ button {
   color: inherit;
   appearance: none;
   cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
 }
 
 summary {

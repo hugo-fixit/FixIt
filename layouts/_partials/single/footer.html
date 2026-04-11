@@ -81,7 +81,8 @@
             {{- $linkOptions = $linkOptions | append $options -}}
           {{- end -}}
           {{- range $linkOptions -}}
-            <span>{{ partial "plugin/link.html" . }}</span>
+            {{- $commonOptions := dict "ExternalIcon" false -}}
+            <span>{{ partial "plugin/link.html" (. | merge $commonOptions) }}</span>
           {{- end -}}
         </div>
         <div class="post-info-share">

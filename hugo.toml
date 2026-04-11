@@ -341,6 +341,16 @@ isHTML = true
 permalinkable = true
 notAlternative = true
 
+# Fixit 1.0.0 | NEW Options to make output /link/index.html file
+[outputFormats.link]
+path = "link"
+baseName = "index"
+mediaType = "text/html"
+isPlainText = false
+isHTML = true
+permalinkable = true
+notAlternative = true
+
 # FixIt 0.3.0 | NEW Options to make output readme.md file
 [outputFormats.readme]
 baseName = "readme"
@@ -372,7 +382,7 @@ permalinkable = true
 # -------------------------------------------------------------------------------------
 
 # Options to make hugo output files, the optional values are below:
-# home = ["html", "rss", "archives", "offline", "readme", "baidu_urls", "search"]
+# home = ["html", "rss", "archives", "offline", "link", "search", "readme", "baidu_urls"]
 # page = ["html", "markdown"]
 # section = ["html", "rss"]
 # taxonomy = ["html"]
@@ -384,6 +394,7 @@ home = [
   "rss",
   "archives",
   "offline",
+  "link",
   "search"
 ]
 page = [
@@ -434,8 +445,6 @@ dateFormat = "2006-01-02"
 images = []
 # FixIt 0.2.12 | NEW enable PWA
 enablePWA = false
-# FixIt 0.2.14 | NEW whether to add external Icon for external links automatically
-externalIcon = false
 # FixIt 0.3.13 | NEW whether to capitalize titles
 capitalizeTitles = true
 # FixIt 0.3.0 | NEW whether to add site title to the title of every page
@@ -1129,6 +1138,21 @@ optimise = false
 # e.g. ["no-optimize.jpg", "*.tiff", "images/exclude-*.webp"]
 blackList = []
 
+# FixIt 1.0.0 | NEW Link config
+[params.link]
+# whether to add external Icon for external links automatically
+external_icon = true
+
+# external link guard config
+[params.link.guard]
+enable = false
+# external link guard mode, available modes: ["modal"， "redirect"]
+# in "modal" mode, a dialog will pop up to ask for confirmation when users click external links
+# in "redirect" mode, users will be redirected to an intermediate page before visiting external links
+mode = "modal"
+# allowed domains (exact host or parent domain) will skip confirmation
+allow_domains = []
+
 # FixIt 0.4.0 | NEW Code block wrapper config
 # you can override the global config via Markdown attributes, for example:
 # ```lang {mode="mac", maxShownLines=5}
@@ -1278,6 +1302,37 @@ instantPage = false
 collectionList = false
 # FixIt 0.3.0 | NEW whether to enable collection navigation at the end of the post
 collectionNavigation = false
+
+# FixIt 0.4.6 | NEW External link guard config
+[params.page.externalLinkGuard]
+# whether to enable external link guard for post content
+enable = false
+# scope:
+# - "content": only post content area (e.g. #content and decryptor content)
+# - "site": all external links on the whole site
+scope = "content"
+# mode: "modal" (current page dialog) | "redirect" (intermediate page)
+mode = "modal"
+# allowed domains (exact host or parent domain) will skip confirmation
+allow_domains = []
+# blocked URL schemes for security
+block_schemes = [
+  "javascript",
+  "data",
+  "file"
+]
+# how to open target link after confirm:
+# - "follow": follow original link behavior
+#   - open in new tab when link has target="_blank"
+#   - otherwise open in current tab
+# - "newtab": always open in a new tab
+# - "self": always open in current tab
+# note: Ctrl/Cmd/Shift + click is treated as force-new-tab and has higher priority than the policy above.
+new_tab_policy = "follow"
+# whether to show full URL in dialog
+show_full_url = true
+# custom message text, empty to use i18n default
+message = ""
 
 # FixIt 0.2.15 | NEW Repost config
 [params.page.repost]

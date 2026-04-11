@@ -183,6 +183,13 @@ other = "Offline"
 other = "Sie sind nicht mit dem Internet verbunden, es stehen nur zwischengespeicherte Seiten zur Verfügung."
 # === offline ===
 
+# === link redirection ===
+[linkRedirection]
+title = "Hinweis zur Weiterleitung"
+message = "Sie sind dabei, {{ .Title }} zu verlassen. Bitte achten Sie auf die Sicherheit Ihres Kontos und Vermögens."
+confirm = "Weiter besuchen"
+# === link redirection ===
+
 # === GitHub Alert ===
 [alert]
 note = "Hinweis"
