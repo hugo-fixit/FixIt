@@ -52,6 +52,7 @@ pnpm dev:docs
 > [!TIP]
 >
 > - Add `-e production` to the development command to check the production environment, e.g. `pnpm dev:test -e production`.
+> - Add `-e debug` to enable debug mode (if applicable), e.g. `pnpm dev:test -e debug`.
 > - For documentation-related theme changes, it is recommended to clone both `FixIt` and `fixit-docs` as sibling directories.
 
 ### Building

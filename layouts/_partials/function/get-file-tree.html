@@ -25,7 +25,7 @@
 {{- $isRecursive := .isRecursive | default false -}}
 {{- $_ignoreList := slice ".DS_Store" "Thumbs.db" ".directory" ".git" "node_modules" "public" -}}
 {{- $ignoreList := .ignoreList | default slice | union $_ignoreList -}}
-{{- $_debug := (site.Store.Get "devOpts").debug -}}
+{{- $_debug := eq hugo.Environment "debug" | and hugo.IsServer -}}
 
 {{- if $isRecursive -}}
   {{- if le $deep $level -}}

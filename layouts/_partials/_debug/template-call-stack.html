@@ -3,9 +3,7 @@
   @example
   {{- partial "_debug/template-call-stack.html" . -}}
 */ -}}
-{{- $debug := (site.Store.Get "devOpts").debug -}}
-
-{{- if $debug | and hugo.IsServer -}}
+{{- if eq hugo.Environment "debug" | and hugo.IsServer -}}
   {{- with templates.Current -}}
     <ul class="template-call-stack">
       {{- range .Ancestors -}}
