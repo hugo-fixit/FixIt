@@ -26,12 +26,6 @@
   overflow-wrap: $value;
 }
 
-@mixin user-select($value) {
-  -webkit-user-select: $value !important;
-  -moz-user-select: $value !important;
-  user-select: $value !important;
-}
-
 /// Apply styles only when scroll-state container queries are supported.
 /// Unsupported browsers skip the container branch, and can optionally reuse
 /// the same styles through a fallback selector.

@@ -37,7 +37,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    @include user-select(text);
+    user-select: all;
     @include border-radius;
   }
 
@@ -51,8 +51,8 @@
     background: light-dark(#f8fafc, #171b25);
     border: 1px solid fixit-var(global-border-color);
     color: fixit-var(global-font-secondary-color);
+    user-select: none;
     @include border-radius;
-    @include user-select(none);
 
     &[data-copied] .fa-clone {
       --fa: "\f00c";
@@ -74,8 +74,8 @@
     border: 1px solid fixit-var(global-border-color-light);
     background: light-dark(#f6f8fa, #2a313c);
     color: fixit-var(global-font-color);
+    user-select: none;
     @include border-radius;
-    @include user-select(none);
   }
 
   .confirm-btn {

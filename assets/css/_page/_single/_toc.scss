@@ -98,7 +98,7 @@
   .toc-title {
     margin-block: 0 0.5em;
     cursor: pointer;
-    @include user-select(none);
+    user-select: none;
 
     &::before {
       content: '|';

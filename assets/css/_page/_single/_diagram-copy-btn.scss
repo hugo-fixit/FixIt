@@ -18,7 +18,7 @@
   color: light-dark(#25292e, #d1d7e0);
   border-color: light-dark(#d1d9e0, #3d444d);
   background-color: light-dark(#f6f8fa, #2a313c);
-  @include user-select(none);
+  user-select: none;
   @include border-radius;
   @include z-index(base);
 

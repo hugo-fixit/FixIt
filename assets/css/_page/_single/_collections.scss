@@ -4,9 +4,9 @@
   margin-block: 1rem;
   padding: 1rem 1.25rem;
   position: relative;
-  @include border-radius(0.5rem);
-  @include user-select(none);
+  user-select: none;
   background-color: light-dark(darken($global-background-color, 4%), lighten($global-background-color-dark, 4%));
+  @include border-radius(0.5rem);
 
   &:has(.collection-nav-item:nth-child(2))::before {
     content: '';
@@ -108,6 +108,7 @@
     align-items: baseline;
     gap: 0.25em;
     padding: 0.2em 0.5em;
+    user-select: none;
     background-color: light-dark(darken($global-background-color, 5%), lighten($global-background-color-dark, 5%));
 
     > i.fa-layer-group {
@@ -132,8 +133,6 @@
     .details-icon {
       flex-shrink: 0;
     }
-
-    @include user-select(none);
   }
 
   .collection-content {

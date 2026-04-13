@@ -118,7 +118,7 @@ pre {
   .lnt,
   .ln {
     color: fixit-var(global-font-secondary-color);
-    @include user-select(none);
+    user-select: none;
   }
 
   &:not(.code-block) {
@@ -626,7 +626,7 @@ pre {
         font-weight: bold;
         color: fixit-var(global-font-secondary-color);
         white-space: nowrap;
-        @include user-select(none);
+        user-select: none;
         @include border-radius;
 
         @include media('xs') {

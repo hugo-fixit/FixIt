@@ -18,6 +18,7 @@
     align-items: baseline;
     gap: 0.25em;
     padding: 0.2em 0.5em;
+    user-select: none;
     
     > i.fa-layer-group {
       flex-shrink: 0;
@@ -36,8 +37,6 @@
     .details-icon {
       flex-shrink: 0;
     }
-
-    @include user-select(none);
   }
 
   .related-content {
