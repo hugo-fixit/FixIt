@@ -544,7 +544,7 @@ qq:
 # 069: QQ Group
 qqgroup:
   Weight: 69
-  Template: https://qm.qq.com/cgi-bin/qm/qr?k=%v&jump_from=webapi
+  Prefix: https://qm.qq.com/q/
   Title: QQ Group
   Icon:
     Simpleicons: tencentqq
