@@ -1,0 +1,3 @@
+{{- if and (eq .Site hugo.Sites.Default) .Site.Params.search.enable (eq .Site.Params.search.type "pagefind") -}}
+  {{- warnf "FixIt Pagefind search enabled\nRun `pagefind --site <publicDir>` after site build to create the search index.\n\n" -}}
+{{- end -}}

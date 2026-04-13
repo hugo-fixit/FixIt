@@ -26,7 +26,7 @@
   <article class="page single"{{ with .Params.fromAdapters }} data-adapters="{{ . }}"{{ end }}>
     <div class="header">
       {{- /* Title */ -}}
-      <h1 class="single-title animate__animated animate__flipInX">
+      <h1 class="single-title animate__animated animate__flipInX" data-pagefind-body="true">
         {{- $repost := $params.repost | default dict -}}
         {{- with $repost -}}
           {{- if eq .Enable true -}}
@@ -181,7 +181,7 @@
 
     {{- /* Content */ -}}
     {{- $content := dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
-    <div class="content" id="content"{{ with $params.endFlag }} data-end-flag="{{ . }}"{{ end }}>
+    <div class="content" id="content" data-pagefind-body="true"{{ with $params.endFlag }} data-end-flag="{{ . }}"{{ end }}>
       {{- if not $params.password -}}
         {{- $content -}}
       {{- end -}}
