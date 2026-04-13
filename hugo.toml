@@ -869,6 +869,22 @@ layoutLoaders = []
 # Note: ELK layouts require layoutLoaders to be configured first
 layout = "dagre"
 
+# FixIt 0.4.6 | NEW Mermaid diagram zoom control
+[params.mermaid.zoom]
+# Enable Mermaid zoom controls (+ / - / reset)
+enable = true
+# Min and max zoom scale
+minScale = 0.5
+maxScale = 3
+# Step for each zoom action
+step = 0.25
+# Enable mouse wheel zoom
+wheel = true
+# Wheel zoom mode: "ctrl" (Ctrl/Cmd + wheel) | "always" (wheel directly over diagram)
+wheelMode = "ctrl"
+# Show "download SVG" button in Mermaid toolbar
+download = true
+
 # FixIt 0.3.13 | NEW Admonitions custom config
 # See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/admonition/#custom-admonitions
 # syntax: <type> = <icon>

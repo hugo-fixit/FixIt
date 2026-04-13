@@ -1,5 +1,25 @@
 {{- /* Mermaid support for code fences extended and shortcodes. */ -}}
-<div class="diagram-container">
+{{- $zoom := site.Params.mermaid.zoom | default dict -}}
+{{- $zoomEnable := true -}}
+{{- if isset $zoom "enable" -}}
+  {{- $zoomEnable = index $zoom "enable" -}}
+{{- end -}}
+{{- $zoomDownload := false -}}
+{{- if isset $zoom "download" -}}
+  {{- $zoomDownload = index $zoom "download" -}}
+{{- end -}}
+{{- $zoomWheelMode := (index $zoom "wheelMode") | default (index $zoom "wheelmode") | default "ctrl" -}}
+
+<div
+  class="diagram-container mermaid-diagram-container"
+  data-mermaid-zoom-enable="{{ $zoomEnable }}"
+  data-mermaid-zoom-download="{{ $zoomDownload }}"
+  data-mermaid-zoom-wheel-mode="{{ $zoomWheelMode }}"
+  data-mermaid-zoom-in-label="{{ T "assets.mermaidZoomIn" }}"
+  data-mermaid-zoom-out-label="{{ T "assets.mermaidZoomOut" }}"
+  data-mermaid-reset-zoom-label="{{ T "assets.mermaidResetZoom" }}"
+  data-mermaid-download-svg-label="{{ T "assets.downloadMermaidSVG" }}"
+>
   <pre class="mermaid">{{ .Inner | safeHTML }}</pre>
   <pre class="mermaid-dark">{{ .Inner | safeHTML }}</pre>
   <pre class="mermaid-neutral">{{ .Inner | safeHTML }}</pre>

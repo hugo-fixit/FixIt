@@ -3,20 +3,128 @@
 .mermaid-neutral {
   position: relative;
   margin: 0;
-  overflow: hidden !important;
+  overflow: auto !important;
+  overscroll-behavior: auto;
 
   &[data-processed] {
     text-align: center;
     background-color: transparent;
   }
 
+  &[data-processed][data-zoomed='true'] {
+    text-align: left;
+  }
+
   &:not([data-processed])::before {
     @include loading;
   }
 
+  &[data-zoom-ready='true'] {
+    cursor: grab;
+  }
+
+  &[data-panning='true'] {
+    cursor: grabbing;
+    user-select: none;
+  }
+
   svg {
     max-width: 100%;
-    height: auto; 
+    height: auto;
+  }
+}
+
+.mermaid-diagram-container {
+  .mermaid-zoom-controls {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem;
+    pointer-events: none;
+    opacity: 0.82;
+    transform: translateY(0);
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+    border: 1px solid;
+    border-color: color-mix(in srgb, light-dark(#d1d9e0, #3d444d) 78%, transparent);
+    background: color-mix(in srgb, light-dark(#ffffff, #252c36) 84%, transparent);
+    @include border-radius(999px);
+    @include z-index(base);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+  }
+
+  .mermaid-zoom-ratio {
+    min-width: 2.8rem;
+    height: 1.6rem;
+    line-height: 1.6rem;
+    padding-inline: 0.45rem;
+    text-align: center;
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    color: color-mix(in srgb, fixit-var(global-font-secondary-color) 92%, transparent);
+    background: color-mix(in srgb, light-dark(#f6f8fa, #2f3744) 92%, transparent);
+    @include border-radius(999px);
+    @include user-select(none);
+  }
+
+  .mermaid-zoom-btn {
+    width: 1.6rem;
+    height: 1.6rem;
+    line-height: 1;
+    padding: 0;
+    border: none;
+    pointer-events: auto;
+    color: color-mix(in srgb, light-dark(#25292e, #d1d7e0) 96%, transparent);
+    background: transparent;
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease,
+      transform 0.2s ease,
+      opacity 0.2s ease;
+    @include user-select(none);
+    @include border-radius(999px);
+
+    &:hover:not(:disabled) {
+      color: fixit-var(global-link-hover-color);
+      background: color-mix(in srgb, light-dark(#edf2f7, #344154) 88%, transparent);
+      transform: translateY(-1px);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  &:hover .mermaid-zoom-controls,
+  &:focus-within .mermaid-zoom-controls {
+    opacity: 1;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.16);
+  }
+
+  @include media('xs') {
+    .mermaid-zoom-controls {
+      top: 0.5rem;
+      left: 0.5rem;
+      opacity: 1;
+    }
+
+    .mermaid-zoom-ratio {
+      min-width: 2.5rem;
+      font-size: 0.68rem;
+    }
+
+    .mermaid-zoom-btn {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 }
 
@@ -51,5 +159,8 @@
   .mermaid-neutral {
     height: auto;
     padding: 0.5rem 0.75rem;
+  }
+  .mermaid-zoom-controls {
+    display: none !important;
   }
 }
