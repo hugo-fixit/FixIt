@@ -1,0 +1,24 @@
+{{- /*
+  Resolve taxonomy icon by slot with site-level overrides.
+
+  @param {String} .Taxonomy taxonomy singular key, e.g. "tag", "category"
+  @param {String} .Slot icon slot: "title", "card", "term"
+  @return {String} icon class
+*/ -}}
+{{- $taxonomy := .Taxonomy | default "category" -}}
+{{- $slot := .Slot | default "title" -}}
+{{- $defaults := dict
+  "tag" (slice "fa-solid fa-tags" "fa-solid fa-tag" "fa-solid fa-tag")
+  "category" (slice "fa-solid fa-folder-tree" "fa-regular fa-folder" "fa-regular fa-folder-open")
+  "collection" (slice "fa-solid fa-layer-group" "fa-solid fa-layer-group" "fa-solid fa-layer-group")
+-}}
+{{- $fallback := index $defaults "category" -}}
+{{- $icons := index $defaults $taxonomy | default $fallback -}}
+{{- with index site.Params "taxonomy_icons" -}}
+  {{- with index . $taxonomy -}}
+    {{- $icons = . | default $icons -}}
+  {{- end -}}
+{{- end -}}
+{{- $slotIndex := index (dict "title" 0 "card" 1 "term" 2) $slot | default 0 -}}
+{{- $icon := index $icons $slotIndex | default (index $fallback $slotIndex) -}}
+{{- return $icon -}}
