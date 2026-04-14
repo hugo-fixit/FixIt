@@ -5,12 +5,7 @@
 
 {{- define "content" -}}
   {{- $taxonomies := .Data.Plural -}}
-  {{- $iconMap := dict
-    "categories" "fa-solid fa-folder-tree"
-    "collections" "fa-solid fa-layer-group"
-    "tags" "fa-solid fa-tags"
-  -}}
-  {{- $icon := index $iconMap $taxonomies | default $iconMap.categories -}}
+  {{- $icon := .Params.titleIcon | default (dict "Taxonomy" .Data.Singular "Slot" "title" | partial "function/get-taxonomy-icon.html") -}}
 
   <div class="page archive">
     {{- /* Title */ -}}

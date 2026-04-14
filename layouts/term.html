@@ -8,17 +8,8 @@
     {{- /* Title */ -}}
     {{- $taxonomy := .Data.Singular -}}
     {{- $pageCount := len .Pages -}}
-    {{- $termIcon := "" -}}
+    {{- $termIcon := .Params.titleIcon | default (dict "Taxonomy" $taxonomy "Slot" "term" | partial "function/get-taxonomy-icon.html") -}}
     {{- $termTitle := .Title -}}
-    {{- if eq $taxonomy "category" -}}
-      {{- $termIcon = "fa-regular fa-folder-open" -}}
-    {{- else if eq $taxonomy "tag" -}}
-      {{- $termIcon = "fa-solid fa-tag" -}}
-    {{- else if eq $taxonomy "collection" -}}
-      {{- $termIcon = "fa-solid fa-layer-group" -}}
-    {{- else -}}
-      {{- $termTitle = printf "%v - %v" (T $taxonomy | default $taxonomy) .Title -}}
-    {{- end -}}
     <h1 class="single-title animate__animated animate__pulse animate__faster">
       {{- with $termIcon -}}
         {{- dict "Class" (add . " me-1") | partial "plugin/icon.html" -}}

@@ -1205,6 +1205,17 @@ folderSlash = false
 # list of file or folder names to ignore
 ignoreList = []
 
+# FixIt 1.0.0 | NEW Taxonomy icons config
+# Works with [taxonomies]. Configure [taxonomies] first, otherwise taxonomy icons will not take effect.
+[params.taxonomy_icons]
+# syntax: <taxonomy> = [<title icon>, <card icon>, <term title icon>]
+# example:
+# topic = [
+#   "fa-solid fa-book-bookmark",
+#   "fa-solid fa-book",
+#   "fa-solid fa-book-open"
+# ]
+
 # FixIt 0.4.5 | NEW Print config
 [params.print]
 # whether to expand all admonitions before printing
