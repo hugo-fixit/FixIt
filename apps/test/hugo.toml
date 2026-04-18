@@ -3,7 +3,7 @@
 # See: https://gohugo.io/configuration/all/
 # -------------------------------------------------------------------------------------
 
-title = "Hugo FixIt TEST"
+title = "FixIt TEST"
 baseURL = "https://demo.fixit.lruihao.cn/test/"
 ignoreLogs = [ "warning-file-tree" ]
 

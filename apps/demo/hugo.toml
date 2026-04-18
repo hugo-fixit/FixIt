@@ -7,7 +7,7 @@
 # See: https://gohugo.io/getting-started/configuration/
 # -------------------------------------------------------------------------------------
 
-title = "Hugo FixIt Demo"
+title = "FixIt Demo"
 baseURL = "https://demo.fixit.lruihao.cn/"
 # theme = "FixIt"
 
