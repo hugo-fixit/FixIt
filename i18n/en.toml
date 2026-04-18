@@ -208,6 +208,7 @@ x = "Checked"
 "<" = "Scheduled"
 ">" = "Rescheduled"
 "!" = "Important"
+"!x" = "Important Checked"
 "?" = "Question"
 # === Task lists ===
 

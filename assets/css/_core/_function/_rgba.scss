@@ -1,0 +1,8 @@
+/// Build an rgba-like color from any source color expression.
+/// @param {Color | String} $color - Source color, supports CSS vars such as fixit-var(secondary).
+/// @param {Number} $alpha [1] - Alpha channel value in range 0..1.
+/// @example
+///   color: fixit-rgba(fixit-var(secondary), 0.2);
+@function fixit-rgba($color, $alpha: 1) {
+  @return unquote("rgb(from #{$color} r g b / #{$alpha})");
+}

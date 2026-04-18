@@ -26,6 +26,7 @@ This post tests the rendering of task lists in Markdown.
 - [<] Scheduled Task
 - [>] Rescheduled Task
 - [!] Important Task
+- [!x] Important Checked Task
 - [?] Question Task
 - Regular list item
 
@@ -43,6 +44,7 @@ This post tests the rendering of task lists in Markdown.
       - [<] Scheduled Task
       - [>] Rescheduled Task
       - [!] Important Task
+      - [!x] Important Checked Task
       - [?] Question Task
 
 ## Mixed Content in List Items

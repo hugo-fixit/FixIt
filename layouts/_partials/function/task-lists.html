@@ -3,12 +3,13 @@
 
 {{- $iconMap := dict
   " " "fa-regular fa-square"
-  "x" "fa-solid fa-check-square"
+  "x" "fa-regular fa-check-square"
   "/" "fa-regular fa-square"
   "-" "fa-solid fa-square-xmark"
   "<" "fa-regular fa-calendar-plus"
   ">" "fa-regular fa-calendar-minus"
-  "!" "fa-solid fa-circle-exclamation"
+  "!" "fa-regular fa-star"
+  "!x" "fa-solid fa-star"
   "\\?" "fa-regular fa-circle-question"
 -}}
 {{- /* Custom Task lists */ -}}
@@ -41,6 +42,7 @@
   - [<] Scheduled
   - [>] Rescheduled
   - [!] Important
+  - [!x] Important Checked
   - [?] Question
 */ -}}
 {{- range $extendedSigns -}}
