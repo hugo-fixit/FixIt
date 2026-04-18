@@ -3,7 +3,7 @@ $header-box-shadow: 0 0 1.5rem 0 light-dark(rgba(0, 0, 0, 0.125), rgba(255, 255,
 header {
   width: 100%;
   transition: box-shadow 0.3s ease;
-  background-color: fixit-var(header-background-color);
+  background-color: fi-var(header-background-color);
   @include z-index(fixed);
 
   &:hover {
@@ -19,7 +19,7 @@ header {
       background-color: transparent;
       backdrop-filter: saturate(1.2) blur(10px);
       background-size: 4px 4px;
-      background-image: radial-gradient(transparent 1px, fixit-var(header-background-color) 1px);
+      background-image: radial-gradient(transparent 1px, fi-var(header-background-color) 1px);
     }
   }
 
@@ -67,8 +67,8 @@ header {
 }
 
 .header-title {
-  font-size: fixit-var(header-title-font-size);
-  font-family: fixit-var(header-title-font-family);
+  font-size: fi-var(header-title-font-size);
+  font-family: fi-var(header-title-font-family);
   font-weight: bold;
   margin-inline-end: 0.25rem;
   padding-inline: 0.25rem;
@@ -83,7 +83,7 @@ header {
     height: 1.5em;
     width: auto;
     vertical-align: top;
-    transform: translateY(calc(#{fixit-var(header-height)} / 2 - 50%));
+    transform: translateY(calc(#{fi-var(header-height)} / 2 - 50%));
   }
 
   .header-title-text {
@@ -105,7 +105,7 @@ header {
     list-style: none;
     margin: 0.25rem 0.5rem;
     height: 1px;
-    background-color: fixit-var(menu-border-color);
+    background-color: fi-var(menu-border-color);
   }
 
   .menu-item {
@@ -114,7 +114,7 @@ header {
     .dropdown-icon {
       margin-left: 0.25rem;
       font-size: .875em;
-      color: fixit-var(global-font-color);
+      color: fi-var(global-font-color);
 
       &.open::before {
         content: "\f078";
@@ -125,7 +125,7 @@ header {
       >.menu-link,
       >.nested-item>.menu-link {
         font-weight: bold;
-        color: fixit-var(menu-active-color);
+        color: fi-var(menu-active-color);
       }
     }
 
@@ -190,13 +190,13 @@ header {
   .open &,
   &.mobile {
     input {
-      color: fixit-var(global-font-color);
-      background-color: fixit-var(search-background-color);
+      color: fi-var(global-font-color);
+      background-color: fi-var(search-background-color);
       padding: 0 2rem 0 2rem;
     }
 
     .search-button {
-      color: fixit-var(global-font-tertiary-color);
+      color: fi-var(global-font-tertiary-color);
     }
 
     .search-clear:hover {
@@ -237,8 +237,8 @@ header {
   display: block;
   position: sticky;
   top: 0;
-  height: fixit-var(header-height);
-  line-height: fixit-var(header-height);
+  height: fi-var(header-height);
+  line-height: fi-var(header-height);
   box-sizing: border-box;
 
   [data-header-desktop='normal'] & {
@@ -255,10 +255,10 @@ header {
     height: 100%;
 
     &[data-github-corner='left'] {
-      padding-inline-start: fixit-var(header-height);
+      padding-inline-start: fi-var(header-height);
     }
     &[data-github-corner='right'] {
-      padding-inline-end: fixit-var(header-height);
+      padding-inline-end: fi-var(header-height);
     }
 
     .header-title {
@@ -287,7 +287,7 @@ header {
           width: 0;
           margin: 18.5px 0.5rem;
           padding: 0;
-          border-left: 1.5px solid fixit-var(global-border-color);
+          border-left: 1.5px solid fi-var(global-border-color);
         }
       }
 
@@ -296,9 +296,9 @@ header {
         margin: 0;
         padding: 0.25rem 0;
         display: none;
-        top: calc(#{fixit-var(header-height)} - 0.75rem);
-        border: 1px solid fixit-var(menu-border-color);
-        background-color: fixit-var(header-background-color);
+        top: calc(#{fi-var(header-height)} - 0.75rem);
+        border: 1px solid fi-var(menu-border-color);
+        background-color: fi-var(header-background-color);
         max-height: 60vh;
         overflow-y: auto;
         overscroll-behavior: contain;
@@ -307,8 +307,8 @@ header {
         box-shadow: 0 0 1.5rem 0 light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
 
         .menu-item {
-          height: fixit-var(submenu-height);
-          line-height: fixit-var(submenu-height);
+          height: fi-var(submenu-height);
+          line-height: fi-var(submenu-height);
           max-width: 15rem;
           white-space: nowrap;
           text-overflow: ellipsis;
@@ -336,8 +336,8 @@ header {
 #header-mobile {
   position: sticky;
   top: 0;
-  min-height: fixit-var(header-height);
-  line-height: fixit-var(header-height);
+  min-height: fi-var(header-height);
+  line-height: fi-var(header-height);
 
   [data-header-mobile='normal'] & {
     position: static;
@@ -366,7 +366,7 @@ header {
 
         span {
           display: block;
-          background-color: fixit-var(global-font-color);
+          background-color: fi-var(global-font-color);
           width: 20px;
           height: 2px;
           transition: all 0.3s ease-in-out;
@@ -394,8 +394,8 @@ header {
     }
 
     .menu {
-      background-color: fixit-var(header-background-color);
-      border-top: 2px solid fixit-var(global-border-color-light);
+      background-color: fi-var(header-background-color);
+      border-top: 2px solid fi-var(global-border-color-light);
       display: none;
       overflow-y: auto;
       overscroll-behavior: contain;
@@ -412,7 +412,7 @@ header {
         line-height: 2.5rem;
         position: sticky;
         top: 0;
-        background-color: fixit-var(header-background-color);
+        background-color: fi-var(header-background-color);
         @include z-index(sticky);
       }
 
@@ -476,7 +476,7 @@ header {
         bottom: 0;
         line-height: 2.5rem;
         padding: 0 1rem;
-        background-color: fixit-var(header-background-color);
+        background-color: fi-var(header-background-color);
 
         .menu-system-item {
           padding-inline: 0.5rem;
@@ -517,7 +517,7 @@ header {
 
   &.open {
     .header-wrapper {
-      margin-top: calc(#{fixit-var(header-height)} * -1);
+      margin-top: calc(#{fi-var(header-height)} * -1);
     }
 
     .menu {
@@ -541,7 +541,7 @@ header {
 
 .search-dropdown {
   position: fixed;
-  top: fixit-var(header-height);
+  top: fi-var(header-height);
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
   @include z-index(fixed);
   box-shadow: 0 0.125rem 0.25rem light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
@@ -562,13 +562,13 @@ header {
 
   .dropdown-menu {
     right: 0 !important;
-    background-color: fixit-var(global-background-color);
+    background-color: fi-var(global-background-color);
 
     .suggestions {
       overflow-y: auto;
       overscroll-behavior: contain;
       // 40px is the height of the search-footer
-      max-height: calc(100dvh - #{fixit-var(header-height)} - 40px);
+      max-height: calc(100dvh - #{fi-var(header-height)} - 40px);
 
       .suggestion {
         padding: 0.75rem 1rem;
@@ -592,7 +592,7 @@ header {
           .suggestion-date {
             font-size: 0.875rem;
             flex-shrink: 0;
-            color: fixit-var(global-font-tertiary-color);
+            color: fi-var(global-font-tertiary-color);
           }
         }
 
@@ -604,17 +604,17 @@ header {
           line-clamp: 2;
           overflow: hidden;
           text-overflow: ellipsis;
-          color: fixit-var(global-font-secondary-color);
+          color: fi-var(global-font-secondary-color);
           @include overflow-wrap(break-word);
         }
 
         em {
           font-style: normal;
-          background-color: fixit-var(selection-color);
+          background-color: fi-var(selection-color);
         }
 
         &.cursor {
-          background-color: fixit-var(code-block-background-color);
+          background-color: fi-var(code-block-background-color);
         }
 
         &:hover {
@@ -636,7 +636,7 @@ header {
       padding: 0.5rem 1rem;
       font-size: 0.875rem;
       text-align: right;
-      color: fixit-var(global-font-secondary-color);
+      color: fi-var(global-font-secondary-color);
       @include link(false, false);
     }
   }

@@ -2,13 +2,13 @@
   .highlight {
     padding: 0.375rem;
     font-size: 0.875rem;
-    font-family: fixit-var(code-font-family);
+    font-family: fi-var(code-font-family);
     font-weight: bold;
     word-break: break-all;
     white-space: pre-wrap;
   }
 
-  --ti-cursor-color: fixit-var(global-font-color);
-  --ti-cursor-font-family: fixit-var(global-font-family);
+  --ti-cursor-color: fi-var(global-font-color);
+  --ti-cursor-font-family: fi-var(global-font-family);
   --ti-cursor-transform: translateX(0);
 }

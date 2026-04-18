@@ -8,11 +8,11 @@
     }
 
     i.details-icon {
-      color: fixit-var(global-font-secondary-color);
+      color: fi-var(global-font-secondary-color);
       transition: all 0.2s ease;
 
       &:hover {
-        color: fixit-var(global-font-color);
+        color: fi-var(global-font-color);
       }
     }
   }

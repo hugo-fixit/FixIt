@@ -83,7 +83,7 @@ FixIt/
 
    ```scss
    .element {
-     color: var(#{$rootPrefix}global-font-color);
+     color: fi-var(global-font-color);
    }
    ```
 

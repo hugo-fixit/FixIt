@@ -2,7 +2,7 @@
 /// Keep this as the single source of truth for both link page card and guard dialog body.
 @mixin link-guard-content {
   padding: 1.5rem;
-  border: 1px solid fixit-var(global-border-color-light);
+  border: 1px solid fi-var(global-border-color-light);
   background: light-dark(#fff, #1d2230);
   box-shadow: 0 1rem 2rem light-dark(rgba(15, 23, 42, 0.18), rgba(0, 0, 0, 0.35));
   @include border-radius(1rem);
@@ -30,8 +30,8 @@
     flex: 1 1 auto;
     min-width: 0;
     background: light-dark(#f8fafc, #171b25);
-    border: 1px solid fixit-var(global-border-color);
-    font-family: fixit-var(code-font-family);
+    border: 1px solid fi-var(global-border-color);
+    font-family: fi-var(code-font-family);
     font-size: 0.875rem;
     line-height: 1rem;
     overflow: hidden;
@@ -49,15 +49,15 @@
     padding: 0.5rem;
     line-height: 1;
     background: light-dark(#f8fafc, #171b25);
-    border: 1px solid fixit-var(global-border-color);
-    color: fixit-var(global-font-secondary-color);
+    border: 1px solid fi-var(global-border-color);
+    color: fi-var(global-font-secondary-color);
     user-select: none;
     @include border-radius;
 
     &[data-copied] .fa-clone {
       --fa: "\f00c";
       font-weight: 900;
-      color: fixit-var(global-link-hover-color);
+      color: fi-var(global-link-hover-color);
     }
   }
 
@@ -71,17 +71,17 @@
   .cancel-btn,
   .confirm-btn {
     padding: 0.5rem 0.875rem;
-    border: 1px solid fixit-var(global-border-color-light);
+    border: 1px solid fi-var(global-border-color-light);
     background: light-dark(#f6f8fa, #2a313c);
-    color: fixit-var(global-font-color);
+    color: fi-var(global-font-color);
     user-select: none;
     @include border-radius;
   }
 
   .confirm-btn {
     color: #fff;
-    background-color: fixit-var(primary);
-    border-color: fixit-var(primary);
+    background-color: fi-var(primary);
+    border-color: fi-var(primary);
   }
 
   @include media('xs') {

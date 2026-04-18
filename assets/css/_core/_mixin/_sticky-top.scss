@@ -8,8 +8,8 @@
 /// - Desktop auto hidden: reset to 0 when the auto header has faded out.
 /// - Desktop/mobile sticky: offset by header height plus breadcrumb height.
 @mixin sticky-top-offset($transition: true) {
-  $sticky-top-bar-offset: calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height, 0px)});
-  $base-top-offset: fixit-var(breadcrumb-height, 0px);
+  $sticky-top-bar-offset: calc(#{fi-var(header-height)} + #{fi-var(breadcrumb-height, 0px)});
+  $base-top-offset: fi-var(breadcrumb-height, 0px);
 
   // Base offset reserved for the breadcrumb bar.
   top: $base-top-offset;

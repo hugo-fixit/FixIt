@@ -41,7 +41,7 @@
 
 @each $color, $value in $theme-colors {
   .text-#{$color} {
-    color: fixit-var(#{$color}) !important;
+    color: fi-var(#{$color}) !important;
   }
 }
 

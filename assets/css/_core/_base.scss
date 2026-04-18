@@ -1,11 +1,11 @@
 @import "../../lib/normalize/normalize";
 
 html {
-  font-family: fixit-var(global-font-family);
-  font-weight: fixit-var(global-font-weight);
+  font-family: fi-var(global-font-family);
+  font-weight: fi-var(global-font-weight);
   font-display: swap;
-  font-size: fixit-var(global-font-size);
-  line-height: fixit-var(global-line-height);
+  font-size: fi-var(global-font-size);
+  line-height: fi-var(global-line-height);
   width: 100%;
   scroll-behavior: smooth;
   overflow: auto;
@@ -22,12 +22,12 @@ html {
 }
 
 ::selection {
-  background-color: fixit-var(selection-color);
+  background-color: fi-var(selection-color);
 }
 
 body {
-  background-color: fixit-var(global-background-color);
-  color: fixit-var(global-font-color);
+  background-color: fi-var(global-background-color);
+  color: fi-var(global-font-color);
   @include overflow-wrap(break-word);
 }
 
@@ -85,11 +85,11 @@ details {
 %code {
   padding: 0.2em 0.4em;
   margin: 0;
-  font-size: fixit-var(code-font-size);
-  line-height: fixit-var(code-font-size);
-  font-family: fixit-var(code-font-family);
-  color: fixit-var(code-color);
-  background-color: fixit-var(code-inline-background-color);
+  font-size: fi-var(code-font-size);
+  line-height: fi-var(code-font-size);
+  font-family: fi-var(code-font-family);
+  color: fi-var(code-color);
+  background-color: fi-var(code-inline-background-color);
   text-decoration: inherit;
   @include border-radius;
   @include overflow-wrap(break-word);

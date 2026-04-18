@@ -14,13 +14,13 @@
       transform: scale(1.2);
 
       sup {
-        color: fixit-var(global-font-color);
+        color: fi-var(global-font-color);
         transition: all ease-out 0.3s;
       }
     }
 
     sup {
-      color: fixit-var(global-font-secondary-color);
+      color: fi-var(global-font-secondary-color);
     }
   }
 }
@@ -29,14 +29,14 @@
   text-align: center;
 
   .tag-item {
-    color: fixit-var(tag-cloud-color);
-    font-size: fixit-var(tag-cloud-font);
+    color: fi-var(tag-cloud-color);
+    font-size: fi-var(tag-cloud-font);
     margin: 10px;
 
     &:active,
     &:focus,
     &:hover {
-      color: fixit-var(global-link-hover-color);
+      color: fi-var(global-link-hover-color);
 
       sup {
         opacity: 1;
@@ -49,7 +49,7 @@
 
     @for $grade from 0 through 10 {
       &[data-grade="#{$grade}"] {
-        @include set-fixit-var(
+        @include set-fi-var(
           tag-cloud-color,
           light-dark(
             mix($tag-cloud-end, $tag-cloud-start, $grade * 10),

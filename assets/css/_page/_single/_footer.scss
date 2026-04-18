@@ -6,7 +6,7 @@
   }
 
   .post-info {
-    border-bottom: 1px solid fixit-var(global-border-color);
+    border-bottom: 1px solid fi-var(global-border-color);
     padding: 0.3rem 0;
 
     .post-info-line {
@@ -15,14 +15,14 @@
 
       .post-info-mod {
         font-size: 0.8em;
-        color: fixit-var(global-font-secondary-color);  
+        color: fi-var(global-font-secondary-color);  
 
         @include link(false, false);
       }
 
       .post-info-license {
         font-size: 0.8em;
-        color: fixit-var(global-font-secondary-color);
+        color: fi-var(global-font-secondary-color);
 
         @include link(false, false);
       }
@@ -37,7 +37,7 @@
           content: '|';
           margin-left: 0.25rem;
           margin-right: 0.25rem;
-          color: fixit-var(global-font-secondary-color);
+          color: fi-var(global-font-secondary-color);
         }
       }
 

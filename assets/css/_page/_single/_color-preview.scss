@@ -1,12 +1,12 @@
 // Color preview styles for inline code
 .color-code {
   position: relative;
-  @include set-fixit-var(color-code-size, 0.64em);
+  @include set-fi-var(color-code-size, 0.64em);
 
   .color-preview {
     display: inline-block;
-    width: fixit-var(color-code-size);
-    height: fixit-var(color-code-size);
+    width: fi-var(color-code-size);
+    height: fi-var(color-code-size);
     @include border-radius(full);
     margin-right: 0.25em;
     vertical-align: middle;

@@ -17,14 +17,14 @@
       width: max-content;
       transform: rotate(30deg);
       margin-right: 0.25em;
-      color: fixit-var(danger);
+      color: fi-var(danger);
     }
 
     .icon-repost {
       display: inline-block;
       width: max-content;
       margin-right: 0.25em;
-      color: fixit-var(success);
+      color: fi-var(success);
     }
 
     @include media('print') {
@@ -45,7 +45,7 @@
 
   .post-meta {
     font-size: 0.875rem;
-    color: fixit-var(global-font-secondary-color);
+    color: fi-var(global-font-secondary-color);
 
     span {
       display: inline-block;
@@ -60,7 +60,7 @@
         width: 1.3rem;
         height: 1.3rem;
         vertical-align: text-bottom;
-        border: 0.25px solid fixit-var(global-border-color);
+        border: 0.25px solid fi-var(global-border-color);
         box-sizing: border-box;
         object-position: center;
         @include border-radius(full);
@@ -97,7 +97,7 @@
     text-align: center;
     font-size: 0.875em;
     padding: 0.25rem;
-    color: fixit-var(global-font-tertiary-color);
+    color: fi-var(global-font-tertiary-color);
     opacity: 0.8;
   }
 
@@ -105,7 +105,7 @@
     position: relative;
     height: 1em;
     margin-block: 1em;
-    background-image: linear-gradient(to right, fixit-var(global-border-color) 50%, transparent 50%);
+    background-image: linear-gradient(to right, fi-var(global-border-color) 50%, transparent 50%);
     background-size: 10px 2px;
     background-position: center;
     background-repeat: repeat-x;
@@ -120,7 +120,7 @@
         left: 5%;
         top: 50%;
         transform: translateY(-50%);
-        color: fixit-var(hr-active-color);
+        color: fi-var(hr-active-color);
         font-size: 20px;
         line-height: 1;
         transition: left 1s ease-in-out, color 0.3s ease, border-color 0.3s ease;
@@ -143,7 +143,7 @@
     > h2 {
       font-size: 1.5em;
       padding-bottom: 0.3em;
-      border-bottom: 1px solid fixit-var(global-border-color-light);
+      border-bottom: 1px solid fi-var(global-border-color-light);
     }
 
     > h3 {
@@ -223,10 +223,10 @@
     }
 
     li::marker {
-      color: fixit-var(secondary);
+      color: fi-var(secondary);
     }
     li:hover::marker {
-      color: fixit-var(single-link-hover-color);
+      color: fi-var(single-link-hover-color);
     }
 
     // Task lists
@@ -235,16 +235,16 @@
         list-style: none;
         @include task-icon {
           margin: 0 0.25em 0 -1.5em;
-          color: fixit-var(task-icon-color, fixit-var(secondary));
+          color: fi-var(task-icon-color, fi-var(secondary));
         };
         @include task-text {
-          color: fixit-var(task-text-color);
+          color: fi-var(task-text-color);
         }
       }
       
       &[data-task='x'] {
         @include task-icon {
-          background-color: fixit-rgba(fixit-var(secondary), 0.2);
+          background-color: fi-rgba(fi-var(secondary), 0.2);
           mask-image: linear-gradient(#000, #000);
           mask-size: 0.875em 0.875em;
           mask-repeat: no-repeat;
@@ -256,24 +256,24 @@
         @include task-icon {
           opacity: 0.7;
         };
-        @include task-text(fixit-var(secondary)) {
+        @include task-text(fi-var(secondary)) {
           opacity: 0.7;
-          text-decoration: line-through fixit-var(secondary);
+          text-decoration: line-through fi-var(secondary);
         }
       }
 
       &[data-task='/'] {
-        @include task-icon(fixit-var(success));
-        @include task-text(fixit-var(success));
+        @include task-icon(fi-var(success));
+        @include task-text(fi-var(success));
       }
 
       &[data-task='!'],
       &[data-task='!x'] {
-        @include task-icon(fixit-var(danger));
+        @include task-icon(fi-var(danger));
       }
 
       &[data-task='?'] {
-        @include task-icon(fixit-var(warning));
+        @include task-icon(fi-var(warning));
       }
     }
 
@@ -287,24 +287,24 @@
     }
 
     ruby {
-      background-color: fixit-var(code-block-background-color);
+      background-color: fi-var(code-block-background-color);
 
       rt {
-        color: fixit-var(global-font-secondary-color);
+        color: fi-var(global-font-secondary-color);
       }
     }
 
     mark {
       padding: 0.14em 0.28em;
-      background-color: fixit-var(mark-background-color, mark);
-      color: fixit-var(mark-color, marktext);
+      background-color: fi-var(mark-background-color, mark);
+      color: fi-var(mark-color, marktext);
       @include border-radius;
 
       @each $color, $value in $theme-colors {
         &.mark-#{$color} {
-          @include set-fixit-vars((
+          @include set-fi-vars((
             mark-color: #fff,
-            mark-background-color: fixit-var(#{$color}),
+            mark-background-color: fi-var(#{$color}),
           ));
         }
       }
@@ -315,21 +315,21 @@
       overflow-x: auto;
       overflow-y: hidden;
       margin: 0.5rem 0;
-      background: fixit-var(table-background-color);
-      border: 1px solid fixit-var(table-border-color);
+      background: fi-var(table-background-color);
+      border: 1px solid fi-var(table-border-color);
       @include border-radius;
-      @include set-fixit-var(scrollbar-thumb-color, fixit-var(table-background-color));
+      @include set-fi-var(scrollbar-thumb-color, fi-var(table-background-color));
 
       > table {
         width: 100%;
         max-width: 100%;
         margin: 0;
         border-spacing: 0;
-        background: fixit-var(table-background-color);
+        background: fi-var(table-background-color);
         border-collapse: separate;
 
         thead {
-          background: fixit-var(table-thead-color);
+          background: fi-var(table-thead-color);
         }
 
         &:not([class]) tbody {
@@ -345,8 +345,8 @@
         th,
         td {
           padding: 0.3rem 1rem;
-          border-right: 1px solid fixit-var(table-border-color);
-          border-bottom: 1px solid fixit-var(table-border-color);
+          border-right: 1px solid fi-var(table-border-color);
+          border-bottom: 1px solid fi-var(table-border-color);
         }
 
         tr > :last-child {
@@ -394,8 +394,8 @@
 
     blockquote {
       display: block;
-      border-left: 0.25em solid fixit-var(global-border-color);
-      color: fixit-var(blockquote-color);
+      border-left: 0.25em solid fi-var(global-border-color);
+      color: fi-var(blockquote-color);
       padding: 0 1em;
       margin: 1rem 0;
 
@@ -433,7 +433,7 @@
       }
       
       hr {
-        background-color: fixit-var(global-border-color);
+        background-color: fi-var(global-border-color);
         height: 1px;
         margin-block: 1em;
       }
@@ -455,12 +455,12 @@
     kbd {
       display: inline-block;
       padding: 0 0.25rem;
-      background-color: fixit-var(global-background-color);
-      border: 1px solid fixit-var(global-border-color);
+      background-color: fi-var(global-background-color);
+      border: 1px solid fi-var(global-border-color);
       font-size: 0.8rem;
-      font-family: fixit-var(code-font-family);
-      color: fixit-var(code-color);
-      box-shadow: inset 0 -1px 0 fixit-var(global-border-color);
+      font-family: fi-var(code-font-family);
+      color: fi-var(code-color);
+      box-shadow: inset 0 -1px 0 fi-var(global-border-color);
       @include border-radius;
     }
 

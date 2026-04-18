@@ -2,7 +2,7 @@
   padding: 0.5rem 1rem;
   margin-block: 1rem;
   color: inherit;
-  border-left: 0.25em solid fixit-var(alert-border-color);
+  border-left: 0.25em solid fi-var(alert-border-color);
 
   > :first-child {
     margin-top: 0;
@@ -17,7 +17,7 @@
     align-items: center;
     line-height: 1;
     margin-bottom: 1rem;
-    color: fixit-var(alert-color);
+    color: fi-var(alert-color);
 
     > svg.icon {
       width: initial;
@@ -30,7 +30,7 @@
     $dark-item: map-get($alert-color-map-dark, $type);
 
     &.alert-#{$type} {
-      @include set-fixit-vars((
+      @include set-fi-vars((
         alert-border-color: light-dark(map-get($item, border-color), map-get($dark-item, border-color)),
         alert-color: light-dark(map-get($item, color), map-get($dark-item, color))
       ));

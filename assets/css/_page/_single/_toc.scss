@@ -1,13 +1,13 @@
 // Common styles for all TOC types
 .toc {
   .toc-title {
-    font-size: fixit-var(toc-title-font-size);
+    font-size: fi-var(toc-title-font-size);
     font-weight: bold;
     text-transform: uppercase;
   }
 
   .toc-content {
-    font-size: fixit-var(toc-content-font-size);
+    font-size: fi-var(toc-content-font-size);
 
     code {
       @extend %code;
@@ -25,7 +25,7 @@
         margin-right: 0.5em;
         position: relative;
         bottom: 2px;
-        color: fixit-var(single-link-color);
+        color: fi-var(single-link-color);
       }
 
       ul {
@@ -42,16 +42,16 @@
       }
 
       li:has(> a:hover)::marker {
-        color: fixit-var(single-link-color);
+        color: fi-var(single-link-color);
       }
     }
   }
 
   ruby {
-    background-color: fixit-var(code-block-background-color);
+    background-color: fi-var(code-block-background-color);
 
     rt {
-      color: fixit-var(global-font-secondary-color);
+      color: fi-var(global-font-secondary-color);
     }
   }
 }
@@ -62,7 +62,7 @@
   .toc-content {
     li.has-active {
       &::marker {
-        color: fixit-var(single-link-color);
+        color: fi-var(single-link-color);
       }
 
       &:has(> .active)::marker {
@@ -70,13 +70,13 @@
       }
 
       > a {
-        color: fixit-var(single-link-color);
+        color: fi-var(single-link-color);
       }
     }
 
     ul {
       a.active::before {
-        color: fixit-var(single-link-hover-color);
+        color: fi-var(single-link-hover-color);
       }
     }
 
@@ -106,7 +106,7 @@
       margin-right: 0.5em;
       position: relative;
       bottom: 2px;
-      color: fixit-var(global-border-color);
+      color: fi-var(global-border-color);
     }
 
     i.toc-icon {
@@ -122,7 +122,7 @@
   .toc-content {
     overflow-y: auto;
     overscroll-behavior: contain;
-    max-height: fixit-var(toc-content-max-height, calc(100dvh - #{2 * #{fixit-var(header-height)}}));
+    max-height: fi-var(toc-content-max-height, calc(100dvh - #{2 * #{fi-var(header-height)}}));
     @include scrollbar-width(none, 0);
 
     &.always-active ul,
@@ -171,11 +171,11 @@
     justify-content: space-between;
     line-height: 2em;
     padding: 0 0.75em;
-    background-color: fixit-var(code-header-background-color);
+    background-color: fi-var(code-header-background-color);
   }
 
   .toc-content {
-    background-color: fixit-var(code-block-background-color);
+    background-color: fi-var(code-block-background-color);
 
     > nav {
       > ul {
@@ -185,7 +185,7 @@
           font-weight: bold;
 
           &::before {
-            color: fixit-var(single-link-hover-color);
+            color: fi-var(single-link-hover-color);
           }
         }
       }
@@ -203,7 +203,7 @@
 
   &:not(.open) {
     .toc-title {
-      @include set-fixit-var(
+      @include set-fi-var(
         code-header-background-color,
         light-dark(darken($code-header-background-color, 1%), darken($code-header-background-color-dark, 1%))
       );
@@ -224,8 +224,8 @@
   max-height: 100%;
   margin-right: 0;
   border: none;
-  border-left: 1px solid fixit-var(global-border-color-light);
-  background-color: fixit-var(global-background-color);
+  border-left: 1px solid fi-var(global-border-color-light);
+  background-color: fi-var(global-background-color);
   transition:
     display 0.2s allow-discrete,
     overlay 0.2s allow-discrete,
@@ -237,13 +237,13 @@
     margin-inline: 1rem;
 
     .toc-title {
-      font-size: calc(#{fixit-var(toc-title-font-size)} * 1.5);
-      line-height: calc(#{fixit-var(toc-title-font-size)} * 2);
-      margin-block: fixit-var(toc-title-font-size);
+      font-size: calc(#{fi-var(toc-title-font-size)} * 1.5);
+      line-height: calc(#{fi-var(toc-title-font-size)} * 2);
+      margin-block: fi-var(toc-title-font-size);
     }
 
     .toc-content {
-      font-size: MAX(fixit-var(toc-content-font-size), 1rem);
+      font-size: MAX(fi-var(toc-content-font-size), 1rem);
 
       nav {
         max-height: calc(100dvh - 5rem);

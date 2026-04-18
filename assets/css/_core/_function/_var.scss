@@ -3,9 +3,9 @@
 /// @param {*} $fallback - Optional fallback value
 /// @return {String} - Complete CSS variable reference
 /// @example
-///   color: fixit-var(global-font-color);
-///   background: fixit-var(custom-bg, #fff);
-@function fixit-var($name, $fallback: null) {
+///   color: fi-var(global-font-color);
+///   background: fi-var(custom-bg, #fff);
+@function fi-var($name, $fallback: null) {
 	@if $fallback {
 		@return var(#{$rootPrefix}#{$name}, #{$fallback});
 	} @else {

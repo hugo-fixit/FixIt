@@ -1,4 +1,4 @@
-@mixin placeholder($color: fixit-var(global-font-tertiary-color)) {
+@mixin placeholder($color: fi-var(global-font-tertiary-color)) {
   input::-webkit-input-placeholder {
     color: $color;
   }

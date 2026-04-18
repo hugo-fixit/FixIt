@@ -58,7 +58,7 @@
       font-weight: normal;
       margin: 0;
       padding: 0.5rem;
-      color: fixit-var(global-font-secondary-color);
+      color: fi-var(global-font-secondary-color);
     }
   }
 }
@@ -75,7 +75,7 @@
   .summary {
     position: relative;
     padding-block: 1rem;
-    color: fixit-var(global-font-color);
+    color: fi-var(global-font-color);
 
     &:not(:last-of-type)::after {
       content: '';
@@ -85,8 +85,8 @@
       transform: translateY(18px);
       background: repeating-linear-gradient(
         135deg,
-        fixit-var(global-border-color) 0px,
-        fixit-var(global-border-color) 4px,
+        fi-var(global-border-color) 0px,
+        fi-var(global-border-color) 4px,
         transparent 4px,
         transparent 8px
       );
@@ -126,12 +126,12 @@
 
     .content {
       margin-top: 0.3rem;
-      color: fixit-var(global-font-tertiary-color);  
+      color: fi-var(global-font-tertiary-color);  
       @include link(false, true);
 
       b,
       strong {
-        color: fixit-var(global-font-tertiary-color);
+        color: fi-var(global-font-tertiary-color);
       }
     }
 

@@ -10,7 +10,7 @@
 
   a {
     font-size: 0.8rem;
-    color: fixit-var(pagination-link-color);
+    color: fi-var(pagination-link-color);
     letter-spacing: 0.1rem;
     font-weight: 700;
     padding: 5px 5px;
@@ -30,7 +30,7 @@
     }
 
     &:hover a {
-      color: fixit-var(pagination-link-hover-color);
+      color: fi-var(pagination-link-hover-color);
     }
 
     &::before,
@@ -39,7 +39,7 @@
       content: '';
       width: 0;
       height: 3px;
-      background: fixit-var(pagination-link-hover-color);
+      background: fi-var(pagination-link-hover-color);
       bottom: 0px;
       transition: 0.3s;
     }
@@ -61,7 +61,7 @@
 
     &.active {
       a {
-        color: fixit-var(pagination-link-hover-color);
+        color: fi-var(pagination-link-hover-color);
       }
 
       &::before,

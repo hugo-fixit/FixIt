@@ -1,9 +1,9 @@
 .reading-progress-bar {
-  height: fixit-var(progress-h, 2px);
-  width: fixit-var(progress, 0);
+  height: fi-var(progress-h, 2px);
+  width: fi-var(progress, 0);
   background-color: light-dark(
-    fixit-var(bg-progress, fixit-var(success)),
-    fixit-var(bg-progress-dark, fixit-var(global-font-color))
+    fi-var(bg-progress, fi-var(success)),
+    fi-var(bg-progress-dark, fi-var(global-font-color))
   );
   position: fixed;
   @include z-index(fixed);

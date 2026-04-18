@@ -17,8 +17,8 @@
   /* LineHighlight */
   .hl {
     display: block;
-    background-color: fixit-var(code-highlight-color);
-    box-shadow: -0.75rem 0 0 fixit-var(code-highlight-color), 0.75rem 0 0 fixit-var(code-highlight-color);
+    background-color: fi-var(code-highlight-color);
+    box-shadow: -0.75rem 0 0 fi-var(code-highlight-color), 0.75rem 0 0 fi-var(code-highlight-color);
   }
 
   @import 'light';

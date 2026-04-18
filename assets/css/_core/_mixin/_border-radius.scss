@@ -7,8 +7,8 @@
 ///   @include border-radius(top);
 ///   @include border-radius(top, 10px);
 ///   @include border-radius(10px 20px 10px 20px);
-@mixin border-radius($value: fixit-var(global-border-radius), $radius: null) {
-  $r: if($radius, $radius, fixit-var(global-border-radius));
+@mixin border-radius($value: fi-var(global-border-radius), $radius: null) {
+  $r: if($radius, $radius, fi-var(global-border-radius));
 
   @if $value == full {
     border-radius: calc(infinity * 1px);

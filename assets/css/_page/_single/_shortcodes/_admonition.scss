@@ -4,12 +4,12 @@
   padding: 0 0.75rem;
   border-left: .25rem solid;
   overflow: hidden;
-  background-color: fixit-var(admonition-bg-color);
-  border-left-color: fixit-var(admonition-color);
+  background-color: fi-var(admonition-bg-color);
+  border-left-color: fi-var(admonition-color);
   @include border-radius;
 
   .admonition-title {
-    font-weight: fixit-var(admonition-title-font-weight, bold);
+    font-weight: fi-var(admonition-title-font-weight, bold);
     margin: 0 -0.75rem;
     padding: 0.25rem 1.8rem;
     border-bottom: 1px solid;
@@ -23,7 +23,7 @@
 
     // title-only admonition without content
     &:not(:has(+ .details-content)) {
-      @include set-fixit-var(admonition-title-font-weight, normal);
+      @include set-fi-var(admonition-title-font-weight, normal);
       padding: 0.75rem 1rem 0.75rem 2.2rem;
       border: 0;
 
@@ -35,17 +35,17 @@
   }
 
   > .admonition-title {
-    border-bottom-color: fixit-var(admonition-bg-color);
-    background-color: fixit-var(admonition-bg-color-collapsed);
+    border-bottom-color: fi-var(admonition-bg-color);
+    background-color: fi-var(admonition-bg-color-collapsed);
     transition: all 0.2s ease;
 
     i.icon {
-      color: fixit-var(admonition-color);
+      color: fi-var(admonition-color);
     }
   }
 
   &.open > .admonition-title {
-    background-color: fixit-var(admonition-bg-color);
+    background-color: fi-var(admonition-bg-color);
   }
 
   .admonition-content {
@@ -79,7 +79,7 @@
   }
 
   // default admonition type is note
-  @include set-fixit-vars((
+  @include set-fi-vars((
     admonition-color: map-get(map-get($admonition-color-map, note), color),
     admonition-bg-color: map-get(map-get($admonition-color-map, note), bg-color),
     admonition-bg-color-collapsed: opacify(map-get(map-get($admonition-color-map, note), bg-color), 0.15),
@@ -89,7 +89,7 @@
   @each $type, $item in $admonition-color-map {
     @if $type != 'note' {
       &.#{$type} {
-         @include set-fixit-vars((
+         @include set-fi-vars((
           admonition-color: map-get($item, color),
           admonition-bg-color: map-get($item, bg-color),
           admonition-bg-color-collapsed: opacify(map-get($item, bg-color), 0.15),
@@ -104,7 +104,7 @@
 
   // content-only admonition without title
   &:not(:has(.admonition-title)) {
-    border: 1px solid fixit-var(admonition-bg-color);
+    border: 1px solid fi-var(admonition-bg-color);
 
     .admonition-content {
       padding: 0.75rem 0.25rem;

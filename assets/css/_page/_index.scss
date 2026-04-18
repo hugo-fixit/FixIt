@@ -4,29 +4,29 @@
 
   .content {
     [id] {
-      scroll-margin-top: fixit-var(scroll-margin-top, 0.5rem);
+      scroll-margin-top: fi-var(scroll-margin-top, 0.5rem);
 
       @include media('sm', 'up') {
         [data-header-desktop='sticky'] &,
         [data-header-desktop='auto'] & {
-          @include set-fixit-var(scroll-margin-top, calc(#{fixit-var(header-height)} + 0.5rem));
+          @include set-fi-var(scroll-margin-top, calc(#{fi-var(header-height)} + 0.5rem));
         }
 
         [data-header-desktop='sticky']:has(.breadcrumb-container.sticky) &,
         [data-header-desktop='auto']:has(.breadcrumb-container.sticky) & {
-          @include set-fixit-var(scroll-margin-top, calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height, 0px)} + 0.5rem));
+          @include set-fi-var(scroll-margin-top, calc(#{fi-var(header-height)} + #{fi-var(breadcrumb-height, 0px)} + 0.5rem));
         }
       }
 
       @include media('xs') {
         [data-header-mobile='sticky'] &,
         [data-header-mobile='auto'] & {
-          @include set-fixit-var(scroll-margin-top, calc(#{fixit-var(header-height)} + 0.5rem));
+          @include set-fi-var(scroll-margin-top, calc(#{fi-var(header-height)} + 0.5rem));
         }
 
         [data-header-mobile='sticky']:has(.breadcrumb-container.sticky) &,
         [data-header-mobile='auto']:has(.breadcrumb-container.sticky) & {
-          @include set-fixit-var(scroll-margin-top, calc(#{fixit-var(header-height)} + #{fixit-var(breadcrumb-height, 0px)} + 0.5rem));
+          @include set-fi-var(scroll-margin-top, calc(#{fi-var(header-height)} + #{fi-var(breadcrumb-height, 0px)} + 0.5rem));
         }
       }
     }

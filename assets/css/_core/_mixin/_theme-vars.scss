@@ -6,19 +6,19 @@
 /// @param {String} $name - CSS variable name (without prefix)
 /// @param {*} $value - Variable value
 /// @example
-///   @include set-fixit-var(custom-color, #ff0000);
-@mixin set-fixit-var($name, $value) {
+///   @include set-fi-var(custom-color, #ff0000);
+@mixin set-fi-var($name, $value) {
   #{$rootPrefix}#{$name}: #{$value};
 }
 
 /// Batch set CSS variables
 /// @param {Map} $vars - Variable map, key is CSS variable name (without prefix), value is variable value
 /// @example
-///   @include set-fixit-vars((
+///   @include set-fi-vars((
 ///     custom-color: #ff0000,
 ///     custom-bg: #00ff00,
 ///   ));
-@mixin set-fixit-vars($vars) {
+@mixin set-fi-vars($vars) {
   @each $name, $value in $vars {
     #{$rootPrefix}#{$name}: #{$value};
   }

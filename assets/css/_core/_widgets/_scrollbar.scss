@@ -1,8 +1,8 @@
 /* Modern browsers with `scrollbar-*` support (high priority) */
 @supports (scrollbar-width: auto) {
   * {
-    scrollbar-color: fixit-var(scrollbar-thumb-color) fixit-var(scrollbar-track-color);
-    scrollbar-width: fixit-var(scrollbar-width);
+    scrollbar-color: fi-var(scrollbar-thumb-color) fi-var(scrollbar-track-color);
+    scrollbar-width: fi-var(scrollbar-width);
 
     @include media('print') {
       scrollbar-width: none;
@@ -12,8 +12,8 @@
 
 /* Legacy browsers with `::-webkit-scrollbar-*` support */
 ::-webkit-scrollbar {
-  height: fixit-var(scrollbar-width-legacy);
-  width: fixit-var(scrollbar-width-legacy);
+  height: fi-var(scrollbar-width-legacy);
+  width: fi-var(scrollbar-width-legacy);
   overflow: visible;
 
   @include media('print') {
@@ -25,16 +25,16 @@
   width: 0;
 }
 ::-webkit-scrollbar-corner {
-  background-color: fixit-var(scrollbar-track-color);
+  background-color: fi-var(scrollbar-track-color);
 }
 ::-webkit-scrollbar-thumb {
-  background-color: fixit-var(scrollbar-thumb-color);
+  background-color: fi-var(scrollbar-thumb-color);
   &:hover {
-    background-color: fixit-var(scrollbar-thumb-hover-color);
+    background-color: fi-var(scrollbar-thumb-hover-color);
   }
 }
 ::-webkit-scrollbar-track {
-  background-color: fixit-var(scrollbar-track-color);
+  background-color: fi-var(scrollbar-track-color);
 }
 ::-webkit-scrollbar-thumb,
 ::-webkit-scrollbar-track {

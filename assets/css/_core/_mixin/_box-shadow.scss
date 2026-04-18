@@ -13,7 +13,7 @@
   @if $when == always {
     box-shadow: $shadow;
   } @else if $when == hover {
-    transition: box-shadow 0.3s fixit-var(bezier);
+    transition: box-shadow 0.3s fi-var(bezier);
 
     &:hover {
       box-shadow: $shadow;

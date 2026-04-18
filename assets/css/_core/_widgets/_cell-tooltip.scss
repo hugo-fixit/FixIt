@@ -1,7 +1,7 @@
 body {
   .cell-tooltip {
     --tooltip-bg: light-dark(#ffffff, #3d444d);
-    --tooltip-color: fixit-var(global-font-color);
+    --tooltip-color: fi-var(global-font-color);
     --tooltip-shadow-color: light-dark(rgba(0, 0, 0, 0.18), rgba(255, 255, 255, 0.18));
   }
 }

@@ -29,7 +29,7 @@
   // ----------------------------------------
   // Theme-Independent Variables
   // ----------------------------------------
-  @include set-fixit-vars((
+  @include set-fi-vars((
     // Global Typography
     global-font-family: $global-font-family,
     global-font-size: $global-font-size,
@@ -67,11 +67,11 @@
     bezier: cubic-bezier(.4, 0, .2, 1),
 
     // Other utilities
-    divider-edge-weak: linear-gradient(to right, transparent, fixit-var(divider-bg, #d0d0d5), transparent),
+    divider-edge-weak: linear-gradient(to right, transparent, fi-var(divider-bg, #d0d0d5), transparent),
   ));
 
   &:has(.breadcrumb-container.sticky) {
-    @include set-fixit-var(breadcrumb-height, 2.5rem);
+    @include set-fi-var(breadcrumb-height, 2.5rem);
   }
 }
 

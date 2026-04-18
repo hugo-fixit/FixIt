@@ -12,7 +12,7 @@
   font-size: 1rem;
   line-height: 1.5rem;
   padding: 0.5rem 0.625rem;
-  color: fixit-var(global-font-secondary-color);
+  color: fi-var(global-font-secondary-color);
   transition: color 0.4s ease;
   background-color: light-dark(#f1f1f1, #1e1e1f);
   @include border-radius(full);
@@ -21,7 +21,7 @@
   &:active,
   &:focus {
     outline: none;
-    color: fixit-var(global-font-color);
+    color: fi-var(global-font-color);
   }
 
   @include media('print') {
@@ -32,11 +32,11 @@
 .back-to-top {
   overflow: hidden;
   position: relative;
-  @include set-fixit-vars((
+  @include set-fi-vars((
     // Ring stroke width
     b2t-stroke: 0.5rem,
     // Progress color
-    b2t-prog: light-dark(fixit-var(success), fixit-var(global-font-color)),
+    b2t-prog: light-dark(fi-var(success), fi-var(global-font-color)),
     // dasharray = circumference = 2πr
     // dashoffset = circumference * (1 - scrollPercent / 100)
     b2t-dasharray: 314.15
@@ -55,18 +55,18 @@
 
   .bg {
     fill: none;
-    stroke: fixit-var(global-border-color-light);
-    stroke-width: fixit-var(b2t-stroke);
+    stroke: fi-var(global-border-color-light);
+    stroke-width: fi-var(b2t-stroke);
   }
 
   // Progress ring
   .progress {
     fill: none;
-    stroke: fixit-var(b2t-prog);
-    stroke-width: fixit-var(b2t-stroke);
+    stroke: fi-var(b2t-prog);
+    stroke-width: fi-var(b2t-stroke);
     stroke-linecap: round;
-    stroke-dasharray: fixit-var(b2t-dasharray);
-    stroke-dashoffset: calc(#{fixit-var(b2t-dasharray)} * (1 - #{fixit-var(b2t-progress, 0)} / 100));
+    stroke-dasharray: fi-var(b2t-dasharray);
+    stroke-dashoffset: calc(#{fi-var(b2t-dasharray)} * (1 - #{fi-var(b2t-progress, 0)} / 100));
     transition: stroke-dashoffset .1s linear;
   }
 }

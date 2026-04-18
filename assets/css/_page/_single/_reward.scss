@@ -28,7 +28,7 @@
       }
   
       &:hover span[data-animation] {
-        animation: fixit-var(animation-reward, jackInTheBox) 0.8s infinite linear;
+        animation: fi-var(animation-reward, jackInTheBox) 0.8s infinite linear;
         // The animation may affect :hover of img in dark mode
         pointer-events: none;
       }
@@ -37,7 +37,7 @@
         display: inline-block;
         margin: 0.8em 2em 0;
         max-width: 100%;
-        width: fixit-var(reward-img-width);
+        width: fi-var(reward-img-width);
       }
     }
 
@@ -48,7 +48,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       padding: 1rem;
-      background-color: fixit-var(global-background-color);
+      background-color: fi-var(global-background-color);
       @include z-index(fixed);
       @include border-radius;
       box-shadow: 0 0 1.5rem 0 light-dark(rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2));
@@ -60,10 +60,10 @@
     box-sizing: border-box;
     cursor: pointer;
     outline: none;
-    color: fixit-var(reward-color, lighten($reward-color, 5%));
+    color: fi-var(reward-color, lighten($reward-color, 5%));
     border: 2px solid light-dark(lighten($reward-color, 10%), lighten($reward-color, 5%));
     padding: 0.6rem 1rem;
-    background-color: fixit-var(global-background-color);
+    background-color: fi-var(global-background-color);
     vertical-align: text-top;
     line-height: 1rem;
     transition: all 0.3s ease-out;
@@ -72,8 +72,8 @@
     &:active,
     &:hover {
       color: #ffffff;
-      border-color: fixit-var(reward-color);
-      background-color: fixit-var(reward-color);
+      border-color: fi-var(reward-color);
+      background-color: fi-var(reward-color);
     }
   }
 

@@ -9,9 +9,9 @@ pre {
   line-height: 1.45em;
   padding: 0.5rem 0.75rem;
   overflow: auto;
-  font-size: fixit-var(code-block-font-size);
-  font-family: fixit-var(code-font-family);
-  background-color: fixit-var(code-block-background-color);
+  font-size: fi-var(code-block-font-size);
+  font-family: fi-var(code-font-family);
+  background-color: fi-var(code-block-background-color);
   tab-size: 4;
   @include border-radius;
 
@@ -37,9 +37,9 @@ pre {
 
 .highlight,
 .gist {
-  font-size: fixit-var(code-block-font-size);
-  font-family: fixit-var(code-font-family);
-  @include set-fixit-var(scrollbar-thumb-color, inherit);
+  font-size: fi-var(code-block-font-size);
+  font-family: fi-var(code-font-family);
+  @include set-fi-var(scrollbar-thumb-color, inherit);
 
   table {
     width: 100%;
@@ -67,7 +67,7 @@ pre {
   // lineNumbersInTable=true
   > div.chroma {
     position: relative;
-    background-color: fixit-var(code-block-background-color);
+    background-color: fi-var(code-block-background-color);
     @include border-radius;
 
     &:is(pre):has(.ln) {
@@ -78,7 +78,7 @@ pre {
       overflow: auto;
       overscroll-behavior-x: none;
       display: block;
-      background-color: fixit-var(code-block-background-color);
+      background-color: fi-var(code-block-background-color);
       @include border-radius;
 
       td {
@@ -117,7 +117,7 @@ pre {
   // Line numbers
   .lnt,
   .ln {
-    color: fixit-var(global-font-secondary-color);
+    color: fi-var(global-font-secondary-color);
     user-select: none;
   }
 
@@ -145,13 +145,13 @@ pre {
       overflow: hidden;
       height: auto;
       position: relative;
-      counter-reset: codeNos calc(#{fixit-var(line-start)} - 1);
+      counter-reset: codeNos calc(#{fi-var(line-start)} - 1);
       transition: height 0.5s ease-out;
       @include border-radius;
       @include border-radius;
       // attr() for arbitrary properties is currently only supported in Chromium-based browsers (see https://caniuse.com/css3-attr);
       // non-supporting browsers fall back to values set via Hugo templating in render-codeblock.html
-      @include set-fixit-vars((
+      @include set-fi-vars((
         max-shown-lines: attr(data-max number, 10),
         line-start: attr(data-line-start number, 1),
         line-digit: attr(data-line-digit number, 1),
@@ -165,10 +165,10 @@ pre {
     // code preview
     &:has(.code-expand-btn):not(.is-expanded, .is-collapsed) {
       .code-wrapper {
-        height: calc(1.45em * #{fixit-var(max-shown-lines)} + #{fixit-var(code-expand-offset, 0.5rem)});
+        height: calc(1.45em * #{fi-var(max-shown-lines)} + #{fi-var(code-expand-offset, 0.5rem)});
       }
       &[data-mode='mac'] .code-wrapper {
-        @include set-fixit-var(code-expand-offset, 1.875rem + 0.5rem);
+        @include set-fi-var(code-expand-offset, 1.875rem + 0.5rem);
       }
     }
     
@@ -178,11 +178,11 @@ pre {
       align-items: center;
       box-sizing: border-box;
       width: 100%;
-      font-family: fixit-var(global-font-family);
+      font-family: fi-var(global-font-family);
       font-weight: bold;
       line-height: 1.4em;
-      color: fixit-var(code-header-color);
-      background-color: fixit-var(code-header-background-color);
+      color: fi-var(code-header-color);
+      background-color: fi-var(code-header-background-color);
       position: sticky;
       transition: border-radius 0s;
       cursor: pointer;
@@ -204,7 +204,7 @@ pre {
 
         &::after {
           padding-left: 0.2rem;
-          content: attr(data-name, fixit-var(code-type, 'Code'));
+          content: attr(data-name, fi-var(code-type, 'Code'));
         }
 
         // filename for code block
@@ -221,7 +221,7 @@ pre {
           position: absolute;
           left: 50%;
           transform: translateX(-50%);
-          background-color: fixit-var(code-header-background-color);
+          background-color: fi-var(code-header-background-color);
           padding-inline: 1em;
           max-width: calc(100% - 200px);
           white-space: nowrap;
@@ -247,25 +247,25 @@ pre {
       .copy-btn[data-copied] .fa-clone {
         --fa: "\f00c";
         font-weight: 900;
-        color: fixit-var(global-link-hover-color);
+        color: fi-var(global-link-hover-color);
       }
 
       .download-btn[data-downloaded] .fa-download {
         --fa: "\f1ce";
         font-weight: 900;
-        color: fixit-var(global-link-hover-color);
+        color: fi-var(global-link-hover-color);
       }
 
       .fullscreen-btn[data-fullscreen] .fa-expand {
         --fa: "\f066";
         font-weight: 900;
-        color: fixit-var(global-link-hover-color);
+        color: fi-var(global-link-hover-color);
       }
 
       @each $type, $text in $code-type-map {
         &.language-#{to-lower-case($type)} {
           // e.g., --fi-code-type: "JavaScript";
-          @include set-fixit-var(code-type, '"#{$text}"');
+          @include set-fi-var(code-type, '"#{$text}"');
         }
       }
 
@@ -278,7 +278,7 @@ pre {
     &:not(.line-nos-hidden) .line-nos-btn,
     .code-header button:hover,
     &:has([contenteditable='true']) .edit-btn {
-      color: fixit-var(global-link-hover-color);
+      color: fi-var(global-link-hover-color);
     }
 
     &.is-fullscreen {
@@ -344,7 +344,7 @@ pre {
       .code-header {
         transition: border-radius 0.2s ease 0.2s;
         @include border-radius;
-        @include set-fixit-var(
+        @include set-fi-var(
           code-header-background-color,
           light-dark(darken($code-header-background-color, 1%), darken($code-header-background-color-dark, 1%))
         );
@@ -453,11 +453,11 @@ pre {
           content: counter(codeNos);
           white-space: nowrap;
           text-align: right;
-          min-width: calc(#{fixit-var(line-digit)} * 1ch);
+          min-width: calc(#{fi-var(line-digit)} * 1ch);
           padding-inline: 0.75rem;
           flex-shrink: 0;
-          color: fixit-var(global-font-secondary-color);
-          background-color: fixit-var(code-block-background-color);
+          color: fi-var(global-font-secondary-color);
+          background-color: fi-var(code-block-background-color);
         }
 
         // highlight for line numbers
@@ -483,7 +483,7 @@ pre {
 
     // add border for non-classic mode
     &:not([data-mode='classic']) {
-      border: 1px solid fixit-var(global-border-color-light);
+      border: 1px solid fi-var(global-border-color-light);
     }
 
     &[data-mode='mac'] {
@@ -491,8 +491,8 @@ pre {
         padding-top: 1.875rem;
 
         &::after {
-          background: fixit-var(mac-red, #fc625d);
-          box-shadow: 20px 0 fixit-var(mac-yellow, #fdbc40), 40px 0 fixit-var(mac-green, #35cd4b);
+          background: fi-var(mac-red, #fc625d);
+          box-shadow: 20px 0 fi-var(mac-yellow, #fdbc40), 40px 0 fi-var(mac-green, #35cd4b);
           left: 8px;
           top: 8px;
           position: absolute;
@@ -502,7 +502,7 @@ pre {
           @include border-radius(full);
 
           @include dark-mode {
-            @include set-fixit-vars((
+            @include set-fi-vars((
               mac-red: #ff5f56,
               mac-yellow: #febc2e,
               mac-green: #28c840,
@@ -524,7 +524,7 @@ pre {
 
 // gist shortcode
 .gist {
-  background-color: fixit-var(code-block-background-color);
+  background-color: fi-var(code-block-background-color);
   @include border-radius(top);
   
   .gist-file,
@@ -546,7 +546,7 @@ pre {
         td.blob-num {
           position: sticky;
           left: 0;
-          background-color: fixit-var(code-block-background-color);
+          background-color: fi-var(code-block-background-color);
           @include z-index(base);
         }
 
@@ -561,7 +561,7 @@ pre {
     padding: 0.4rem 0.8rem;
     @include link(false, false);
     @include border-radius(bottom);
-    background-color: fixit-var(gist-meta-background-color);
+    background-color: fi-var(gist-meta-background-color);
   }
 
   @include dark-mode {
@@ -572,8 +572,8 @@ pre {
 // Code Tabs
 .code-tabs {
   margin: 0.5rem 0;
-  background-color: fixit-var(code-block-background-color);
-  border: 1px solid fixit-var(global-border-color-light);
+  background-color: fi-var(code-block-background-color);
+  border: 1px solid fi-var(global-border-color-light);
   @include border-radius;
 
   &[data-shadow='always'] {
@@ -591,7 +591,7 @@ pre {
   &:has(.code-block.active.line-wrapping) .tabs-actions .line-wrap-btn,
   &:has(.code-block.active:not(.line-nos-hidden)) .tabs-actions .line-nos-btn,
   &:has(.code-block.active [contenteditable='true']) .tabs-actions .edit-btn {
-    color: fixit-var(global-link-hover-color);
+    color: fi-var(global-link-hover-color);
   }
 
   .tabs-header {
@@ -599,11 +599,11 @@ pre {
     justify-content: space-between;
     align-items: center;
     line-height: 1.4em;
-    font-size: fixit-var(code-block-font-size);
-    color: fixit-var(code-header-color);
-    background-color: fixit-var(code-header-background-color);
+    font-size: fi-var(code-block-font-size);
+    color: fi-var(code-header-color);
+    background-color: fi-var(code-header-background-color);
     position: sticky;
-    border-bottom: 1px solid fixit-var(global-border-color);
+    border-bottom: 1px solid fi-var(global-border-color);
     @include z-index(base, 1);
     @include border-radius(top);
     @include sticky-top-offset;
@@ -617,14 +617,14 @@ pre {
       .before-tabs {
         padding: 0.4rem 0.6rem;
         white-space: nowrap;
-        color: fixit-var(global-font-color);
+        color: fi-var(global-font-color);
       }
 
       .tab-item {
         padding: 0.4rem 0.8rem;
         cursor: pointer;
         font-weight: bold;
-        color: fixit-var(global-font-secondary-color);
+        color: fi-var(global-font-secondary-color);
         white-space: nowrap;
         user-select: none;
         @include border-radius;
@@ -637,7 +637,7 @@ pre {
       &:not(:has(.tab-item:hover)) .tab-item.active,
       .tab-item:hover {
         anchor-name: #{$rootPrefix}tab-hover;
-        color: fixit-var(global-font-color);
+        color: fi-var(global-font-color);
       }
 
       &::before {
@@ -648,7 +648,7 @@ pre {
         translate: 2px 2px;
         width: calc(anchor-size(width) - 0.25rem);
         height: calc(anchor-size(height) - 0.25rem);
-        box-shadow: inset 0 0 1rem 0.25rem color-mix(in srgb, fixit-var(global-font-secondary-color) 30%, transparent);
+        box-shadow: inset 0 0 1rem 0.25rem color-mix(in srgb, fi-var(global-font-secondary-color) 30%, transparent);
         pointer-events: none;
         transition: 0.3s ease-in-out;
         @include border-radius;
@@ -663,19 +663,19 @@ pre {
         padding: 0.4rem;
 
         &:hover {
-          color: fixit-var(global-link-hover-color);
+          color: fi-var(global-link-hover-color);
         }
 
         &.copy-btn[data-copied] .fa-clone {
           --fa: "\f00c";
           font-weight: 900;
-          color: fixit-var(global-link-hover-color);
+          color: fi-var(global-link-hover-color);
         }
 
         &.download-btn[data-downloaded] .fa-download {
           --fa: "\f1ce";
           font-weight: 900;
-          color: fixit-var(global-link-hover-color);
+          color: fi-var(global-link-hover-color);
         }
 
         &.fullscreen-btn {

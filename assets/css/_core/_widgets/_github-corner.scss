@@ -23,11 +23,11 @@
   }
 
   svg {
-    width: fixit-var(header-height);
-    height: fixit-var(header-height);
+    width: fi-var(header-height);
+    height: fi-var(header-height);
     border: 0;
-    color: fixit-var(github-corner-color);
-    fill: fixit-var(github-corner-fill);
+    color: fi-var(github-corner-color);
+    fill: fi-var(github-corner-fill);
   }
 
   &.left {

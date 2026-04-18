@@ -16,7 +16,7 @@ blockquote.blockquote-center {
   }
 
   &::before {
-    border-top: 1px solid fixit-var(global-border-color);
+    border-top: 1px solid fi-var(global-border-color);
     text-align: left;
     top: -20px;
     font-family: var(--fa-family-classic);
@@ -25,7 +25,7 @@ blockquote.blockquote-center {
   }
 
   &::after {
-    border-bottom: 1px solid fixit-var(global-border-color);
+    border-bottom: 1px solid fi-var(global-border-color);
     bottom: -20px;
     text-align: right;
     font-family: var(--fa-family-classic);

@@ -5,7 +5,7 @@
     display: block;
     border: 0;
     padding-top: 1px;
-    background: fixit-var(divider-edge-weak);
+    background: fi-var(divider-edge-weak);
     margin-block: 1rem 0.5rem;
   }
 
@@ -26,12 +26,12 @@
 
     .related-title {
       font-weight: bold;
-      font-size: fixit-var(related-title-font-size);
+      font-size: fi-var(related-title-font-size);
     }
 
     .related-count {
       flex-shrink: 0;
-      color: fixit-var(global-font-secondary-color);
+      color: fi-var(global-font-secondary-color);
     }
 
     .details-icon {
@@ -40,7 +40,7 @@
   }
 
   .related-content {
-    font-size: fixit-var(related-list-font-size);
+    font-size: fi-var(related-list-font-size);
 
     .related-list {
       margin: 0;
@@ -60,7 +60,7 @@
         margin-right: 0.5em;
         position: relative;
         bottom: 2px;
-        color: fixit-var(single-link-color);
+        color: fi-var(single-link-color);
       }
     }
   }

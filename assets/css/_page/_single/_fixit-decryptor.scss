@@ -1,7 +1,7 @@
 .fixit-decryptor-container {
-  font-family: fixit-var(global-font-family);
+  font-family: fi-var(global-font-family);
   text-align: center;
-  margin-block: fixit-var(decryptor-margin-block);
+  margin-block: fi-var(decryptor-margin-block);
 
   .fixit-decryptor-loading {
     vertical-align: middle;
@@ -13,9 +13,9 @@
     display: none;
     box-sizing: border-box;
     outline: none;
-    color: fixit-var(global-font-color);
-    border: 1px solid fixit-var(global-border-color);
-    box-shadow: 0px 0px 5px 0px fixit-var(global-border-color);
+    color: fi-var(global-font-color);
+    border: 1px solid fi-var(global-border-color);
+    box-shadow: 0px 0px 5px 0px fi-var(global-border-color);
     @include border-radius;
     transition: all 0.1s ease-out;
 
@@ -23,7 +23,7 @@
     &:focus,
     &:hover {
       color: light-dark(darken($global-link-hover-color, 6%), lighten($global-link-hover-color-dark, 6%));
-      border-color: fixit-var(global-link-hover-color);
+      border-color: fi-var(global-link-hover-color);
       box-shadow: 0px 0px 5px 0px light-dark(
         lighten($global-link-hover-color, 20%),
         darken($global-link-hover-color-dark, 20%)
@@ -36,14 +36,14 @@
     height: 3rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    background-color: fixit-var(global-background-color);
+    background-color: fi-var(global-background-color);
   }
 
   .fixit-decryptor-btn,
   .fixit-encryptor-btn {
     cursor: pointer;
     padding: 0.8rem 1rem;
-    background-color: fixit-var(global-background-color);
+    background-color: fi-var(global-background-color);
     transition: all 0.1s ease-out;
   }
 
@@ -72,7 +72,7 @@ fixit-encryptor {
 // fixit-encryptor for for the encrypted pages
 article fixit-encryptor {
   .fixit-decryptor-container {
-    @include set-fixit-var(decryptor-margin-block, 2rem);
+    @include set-fi-var(decryptor-margin-block, 2rem);
   }
   &.decrypted > .fixit-decryptor-container {
     .fixit-decryptor-loading,
@@ -90,7 +90,7 @@ article fixit-encryptor {
 // fixit-encryptor shortcodes
 #content fixit-encryptor {
   .fixit-decryptor-container {
-    @include set-fixit-var(decryptor-margin-block, 1rem);
+    @include set-fi-var(decryptor-margin-block, 1rem);
   }
   &.decrypted > .fixit-decryptor-container {
     display: none;

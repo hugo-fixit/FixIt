@@ -13,6 +13,6 @@
   }
 
   body:has(&) {
-    @include set-fixit-var(global-background-color, fixit-var(header-background-color));
+    @include set-fi-var(global-background-color, fi-var(header-background-color));
   }
 }
