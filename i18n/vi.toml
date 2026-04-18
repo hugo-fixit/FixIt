@@ -207,6 +207,7 @@ x = "Đã kiểm tra"
 "<" = "Đã lên lịch"
 ">" = "Đã lên lịch lại"
 "!" = "Quan trọng"
+"!x" = "Quan trọng Đã kiểm tra"
 "?" = "Câu hỏi"
 # === Task lists ===
 

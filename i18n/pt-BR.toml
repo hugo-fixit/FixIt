@@ -209,6 +209,7 @@ x = "Verificado"
 "<" = "Agendado"
 ">" = "Reagendado"
 "!" = "Importante"
+"!x" = "Importante Verificado"
 "?" = "Dúvida"
 # === Task lists ===
 

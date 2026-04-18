@@ -208,6 +208,7 @@ x = "Verificato"
 "<" = "Programmato"
 ">" = "Ripianificato"
 "!" = "Importante"
+"!x" = "Importante Verificato"
 "?" = "Domanda"
 # === Task lists ===
 

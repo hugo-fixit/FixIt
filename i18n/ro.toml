@@ -208,6 +208,7 @@ x = "Controlat"
 "<" = "Programat"
 ">" = "Reprogramat"
 "!" = "Important"
+"!x" = "Important Verificat"
 "?" = "Întrebare"
 # === Task lists ===
 

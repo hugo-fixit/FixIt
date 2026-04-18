@@ -2,21 +2,6 @@
 // Theme Variable Mixins and Functions
 // ========================================
 
-/// Get CSS variable with prefix
-/// @param {String} $name - CSS variable name (without prefix)
-/// @param {*} $fallback - Optional fallback value
-/// @return {String} - Complete CSS variable reference
-/// @example
-///   color: fixit-var(global-font-color);
-///   background: fixit-var(custom-bg, #fff);
-@function fixit-var($name, $fallback: null) {
-  @if $fallback {
-    @return var(#{$rootPrefix}#{$name}, #{$fallback});
-  } @else {
-    @return var(#{$rootPrefix}#{$name});
-  }
-}
-
 /// Set a single CSS variable
 /// @param {String} $name - CSS variable name (without prefix)
 /// @param {*} $value - Variable value

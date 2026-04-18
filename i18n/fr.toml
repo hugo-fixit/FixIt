@@ -208,6 +208,7 @@ x = "Vérifié"
 "<" = "Planifié"
 ">" = "Replanifié"
 "!" = "Important"
+"!x" = "Important Vérifié"
 "?" = "Question"
 # === Task lists ===
 

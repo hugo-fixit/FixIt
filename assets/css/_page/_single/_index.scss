@@ -241,6 +241,16 @@
           color: fixit-var(task-text-color);
         }
       }
+      
+      &[data-task='x'] {
+        @include task-icon {
+          background-color: fixit-rgba(fixit-var(secondary), 0.2);
+          mask-image: linear-gradient(#000, #000);
+          mask-size: 0.875em 0.875em;
+          mask-repeat: no-repeat;
+          mask-position: center;
+        };
+      }
 
       &[data-task='-'] {
         @include task-icon {
@@ -257,7 +267,8 @@
         @include task-text(fixit-var(success));
       }
 
-      &[data-task='!'] {
+      &[data-task='!'],
+      &[data-task='!x'] {
         @include task-icon(fixit-var(danger));
       }
 
