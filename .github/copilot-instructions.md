@@ -41,15 +41,9 @@ FixIt/
 
 ### 文件组织结构
 
-1. **主入口文件**: `assets/css/style.scss`
-2. **变量文件**: `assets/css/_variables.scss` - 全局变量定义
-3. **覆写文件**: `assets/css/_override.scss` - 用户自定义覆写
-4. **组织结构**:
-   - `_core/`: 核心样式（基础、布局、媒体查询等）
-   - `_mixin/`: SCSS mixins 和函数
-   - `_page/`: 页面特定样式
-   - `_partials/`: 组件样式
-   - `_shortcodes/`: 短代码样式
+1. **主入口文件**: `assets/scss/main.scss`
+2. **变量文件**: `assets/scss/_variables.scss` - 全局变量定义
+3. **覆写文件**: `assets/scss/_override.scss` - 用户自定义覆写
 
 ### 命名约定
 
@@ -111,7 +105,7 @@ FixIt/
 ### 文件组织
 
 1. **主题核心**: `assets/js/theme.js` - 主题核心逻辑
-2. **工具函数**: `assets/js/util.js` - 通用工具函数
+2. **工具函数**: `assets/js/utils/` - 通用工具函数
 3. **特定功能**: 按功能划分独立模块
 
 ### 编码实例

@@ -520,7 +520,7 @@ pre {
   }
 }
 
-@import './_code-syntax';
+@import './code-syntax';
 
 // gist shortcode
 .gist {
@@ -565,7 +565,7 @@ pre {
   }
 
   @include dark-mode {
-    @import './_code-syntax/github-dark-dimmed';
+    @import './code-syntax/github-dark-dimmed';
   }
 }
 

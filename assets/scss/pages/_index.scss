@@ -1,5 +1,6 @@
 .page {
   padding-inline: 0.5rem;
+  box-sizing: border-box;
   @extend %page-style;
 
   .content {
@@ -38,9 +39,9 @@
   }
 }
 
-@import '_single';
-@import '_special';
-@import '_archive';
+@import 'single';
+@import 'specials';
+@import 'archives';
 @import '404';
 @import 'home';
 @import 'link';

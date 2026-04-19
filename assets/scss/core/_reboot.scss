@@ -1,0 +1,357 @@
+/// Reboot
+///
+/// Normalization of HTML elements, manually forked from Normalize.css to remove
+/// styles targeting irrelevant browsers while applying new styles.
+///
+/// Normalize is licensed MIT. https://github.com/necolas/normalize.css
+
+
+// 1. Correct the line height in all browsers.
+
+:root {
+  font-family: fi-var(global-font-family);
+  font-weight: fi-var(global-font-weight);
+  font-display: swap;
+  font-size: fi-var(global-font-size);
+  line-height: fi-var(global-line-height); // 1
+  width: 100%;
+  scroll-behavior: smooth;
+  overflow: auto;
+  container-type: scroll-state;
+  container-name: scroller;
+
+  &:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  @include media('reduce-motion') {
+    scroll-behavior: auto;
+  }
+}
+
+// 1. Remove the margin in all browsers.
+// 2. As a best practice, apply a default `background-color`.
+// 3. Prevent adjustments of font size after orientation changes in iOS.
+// 4. Change the default tap highlight to be completely transparent in iOS.
+
+body {
+  margin: 0; // 1
+  background-color: fi-var(global-background-color); // 2
+  color: fi-var(global-font-color);
+  -webkit-text-size-adjust: 100%; // 3
+  -webkit-tap-highlight-color: rgba(#000, 0); // 4
+  @include overflow-wrap(break-word);
+}
+
+// Correct the font size and margin on `h1` elements within `section` and
+// `article` contexts in Chrome, Firefox, and Safari.
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+// 1. Add the correct box sizing in Firefox.
+
+hr {
+  box-sizing: content-box; // 1
+  height: 0; // 1
+}
+
+// 1. Correct the inheritance and scaling of font size in all browsers.
+// 2. Correct the odd `em` font sizing in all browsers.
+
+pre {
+  font-family: monospace, monospace; // 1
+  font-size: 1em; // 2
+}
+
+// 1. Add the correct text decoration in Chrome, Edge, Opera, and Safari.
+// 2. Add explicit cursor to indicate changed behavior.
+// 3. Prevent the text-decoration to be skipped.
+
+abbr[title] {
+  text-decoration: underline dotted; // 1
+  cursor: help; // 2
+  text-decoration-skip-ink: none; // 3
+}
+
+// Add the correct font weight in Chrome, Edge, and Safari.
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+// 1. Correct the inheritance and scaling of font size in all browsers.
+// 2. Correct the odd `em` font sizing in all browsers.
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; // 1
+  font-size: 1em; // 2
+}
+
+// Add the correct font size in all browsers.
+
+small {
+  font-size: 80%;
+}
+
+// Prevent `sub` and `sup` elements from affecting the line height in
+// all browsers.
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+img {
+  object-fit: cover;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  @include border-radius;
+}
+
+// 1. Remove the default `border-radius` that macOS Chrome adds.
+
+button {
+  border-radius: 0; // 1
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+
+// Explicitly remove focus outline in Chromium when it shouldn't be
+// visible (e.g. as result of mouse click or touch tap). It already
+// should be doing this automatically, but seems to currently be
+// confused and applies its very visible two-tone outline anyway.
+
+button:focus:not(:focus-visible) {
+  outline: 0;
+}
+
+// 1. Change the font styles in all browsers.
+// 2. Remove the margin in Firefox and Safari.
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; // 1
+  font-size: inherit; // 1
+  line-height: 1.15; // 1
+  margin: 0; // 2
+}
+
+// Remove the inheritance of text transform in Firefox
+
+button,
+select {
+  text-transform: none;
+}
+
+// 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`
+//    controls in Android 4.
+// 2. Correct the inability to style clickable types in iOS and Safari.
+// 3. Opinionated: add "hand" cursor to non-disabled button elements.
+
+button,
+[type="button"], // 1
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button; // 2
+
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled) {
+    cursor: pointer; // 3
+  }
+}
+
+// Remove inner border and padding from Firefox, but don't restore the outline like Normalize.
+
+::-moz-focus-inner {
+  padding: 0;
+  border-style: none;
+}
+
+// 1. Browsers set a default `min-width: min-content;` on fieldsets,
+//    unlike e.g. `<div>`s, which have `min-width: 0;` by default.
+//    So we reset that to ensure fieldsets behave more like a standard block element.
+//    See https://html.spec.whatwg.org/multipage/#the-fieldset-and-legend-elements
+// 2. Reset the default outline behavior of fieldsets so they don't affect page layout.
+
+fieldset {
+  min-width: 0; // 1
+  padding: 0; // 2
+  margin: 0; // 2
+  border: 0; // 2
+}
+
+
+// 1. By using `float: left`, the legend will behave like a block element.
+//    This way the border of a fieldset wraps around the legend if present.
+// 2. Fix wrapping bug.
+
+legend {
+  float: left; // 1
+  width: 100%;
+  padding: 0;
+  margin-bottom: 0.5rem;
+  font-weight: null;
+  line-height: inherit;
+  font-size: 1.5rem;
+
+  + * {
+    clear: left; // 2
+  }
+}
+
+// Add the correct vertical alignment in Chrome, Firefox, and Opera.
+
+progress {
+  vertical-align: baseline;
+}
+
+// 1. Textareas should really only resize vertically so they don't break their (horizontal) containers.
+
+textarea {
+  overflow: vertical; // 1
+}
+
+// Fix height of inputs with a type of datetime-local, date, month, week, or time
+
+::-webkit-datetime-edit-fields-wrapper,
+::-webkit-datetime-edit-text,
+::-webkit-datetime-edit-minute,
+::-webkit-datetime-edit-hour-field,
+::-webkit-datetime-edit-day-field,
+::-webkit-datetime-edit-month-field,
+::-webkit-datetime-edit-year-field {
+  padding: 0;
+}
+
+::-webkit-inner-spin-button {
+  height: auto;
+}
+
+// 1. This overrides the extra rounded corners on search inputs in iOS so that our
+//    `.form-control` class can properly style them. Note that this cannot simply
+//    be added to `.form-control` as it's not specific enough.
+// 2. Correct the outline style in Safari.
+
+[type='search'] {
+  -webkit-appearance: textfield; // 1
+  outline-offset: -2px; // 2
+
+  // 3. Better affordance and consistent appearance for search cancel button
+  &::-webkit-search-cancel-button {
+    cursor: pointer;
+    filter: grayscale(1);
+  }
+}
+
+// 1. A few input types should stay LTR
+// See https://rtlstyling.com/posts/rtl-styling#form-inputs
+// 2. RTL only output
+// See https://rtlcss.com/learn/usage-guide/control-directives/#raw
+
+/* rtl:raw:
+[type="tel"],
+[type="url"],
+[type="email"],
+[type="number"] {
+  direction: ltr;
+}
+*/
+
+// Remove the inner padding in Chrome and Safari on macOS.
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+// Remove padding around color pickers in webkit browsers
+
+::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+// Correct element displays
+
+output {
+  display: inline-block;
+}
+
+// 1. Remove border from iframe
+
+iframe {
+  border: 0; // 1
+  @include border-radius;
+}
+
+details {
+  &.center {
+    summary {
+      text-align: center;
+    }
+  }
+}
+
+// 1. Add the correct display in all browsers.
+
+summary {
+  display: list-item; // 1
+  cursor: pointer;
+}
+
+dialog {
+  padding: 0;
+}
+
+// Always hide an element with the `hidden` HTML attribute.
+
+[hidden] {
+  display: none;
+}
+
+::selection {
+  background-color: fi-var(selection-color);
+}
+
+%code {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: fi-var(code-font-size);
+  line-height: fi-var(code-font-size);
+  font-family: fi-var(code-font-family);
+  color: fi-var(code-color);
+  background-color: fi-var(code-inline-background-color);
+  text-decoration: inherit;
+  @include border-radius;
+  @include overflow-wrap(break-word);
+}
+
+@include link(true, true);

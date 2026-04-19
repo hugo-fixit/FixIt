@@ -4,8 +4,8 @@
  * To generate syntax highlighting styles from the command line,
  * See https://gohugo.io/quick-reference/syntax-highlighting-styles/#styles
  * For example:
- *   hugo gen chromastyles --style=github > assets/css/_partials/_code-syntax/light.scss
- *   hugo gen chromastyles --style=github-dark > assets/css/_partials/_code-syntax/dark.scss
+ *   hugo gen chromastyles --style=github > assets/css/pages/single/code-syntax/light.scss
+ *   hugo gen chromastyles --style=github-dark > assets/css/pages/single/code-syntax/dark.scss
  */
 .highlight {
   /* LineLink */

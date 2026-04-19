@@ -116,14 +116,14 @@
 
 {{- /* Core stylesheets */ -}}
 {{- /* Config CSS */ -}}
-{{- $options := dict "Source" "css/config.template.scss" "Template" "css/config.scss" "Fingerprint" $fingerprint -}}
+{{- $options := dict "Source" "scss/config.template.scss" "Template" "scss/config.scss" "Fingerprint" $fingerprint -}}
 {{- $toCSS := dict "targetPath" "css/config.min.css" "enableSourceMap" true -}}
 {{- $options = dict "Context" . "ToCSS" $toCSS | merge $options -}}
 {{- partial "plugin/style.html" $options -}}
 
 {{- /* Theme CSS */ -}}
-{{- $options := dict "Source" "css/style.scss" "Fingerprint" $fingerprint -}}
-{{- $toCSS := dict "targetPath" "css/style.min.css" "enableSourceMap" true -}}
+{{- $options := dict "Source" "scss/main.scss" "Fingerprint" $fingerprint -}}
+{{- $toCSS := dict "targetPath" "css/main.min.css" "enableSourceMap" true -}}
 {{- $options = dict "Context" . "ToCSS" $toCSS | merge $options -}}
 {{- partial "plugin/style.html" $options -}}
 

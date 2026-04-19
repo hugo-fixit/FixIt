@@ -84,7 +84,7 @@ FixIt/
 │   └── test/           # Test site
 ├── archetypes/         # Content templates
 ├── assets/             # Theme assets
-│   ├── css/            # SCSS stylesheets
+│   ├── scss/           # SCSS stylesheets
 │   ├── js/             # JavaScript files
 │   ├── images/         # Image assets
 │   └── lib/            # Third-party libraries
