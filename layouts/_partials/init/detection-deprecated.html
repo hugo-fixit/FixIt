@@ -6,6 +6,22 @@
   {{- $warns = $warns | append "The parameter `params.externalIcon` is deprecated since v1.0.0, use `params.link.external_icon` instead." -}}
 {{- end -}}
 
+{{- with resources.Get "css/_custom.scss" -}}
+  {{- $warns = $warns | append "The file `assets/css/_custom.scss` is deprecated. Please move your custom styles to `assets/scss/custom.scss`." -}}
+{{- end -}}
+
+{{- with resources.Get "css/_override.scss" -}}
+  {{- $warns = $warns | append "The file `assets/css/_override.scss` is deprecated. Please move your custom styles to `assets/scss/override.scss`." -}}
+{{- end -}}
+
+{{- with resources.Get "css/_variables.scss" -}}
+  {{- $warns = $warns | append "The file `assets/css/_variables.scss` is deprecated. Please move your variables to `assets/scss/_variables.scss`." -}}
+{{- end -}}
+
+{{- with resources.Get "js/_custom.js" -}}
+  {{- $warns = $warns | append "The file `assets/js/_custom.js` is deprecated. Please move your custom scripts to `assets/js/custom.js`." -}}
+{{- end -}}
+
 {{- if len $warns -}}
   {{- warnf "FixIt deprecation warnings (%v):\n • %v\n\n" (hugo.Store.Get "version") (delimit $warns "\n • ") -}}
 {{- end -}}

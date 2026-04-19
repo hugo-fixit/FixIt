@@ -364,7 +364,7 @@ FixIt theme assets partial
 {{- block "custom-assets" . }}{{ end -}}
 
 {{- /* Custom script */ -}}
-{{- with ((resources.Get "js/custom.js") | default (resources.Get "js/_custom.js")) -}}
+{{- with resources.Get "js/custom.js" -}}
   {{- $options := dict "targetPath" "js/custom.min.js" "minify" hugo.IsProduction -}}
   {{- if not hugo.IsProduction -}}
     {{- $options = dict "sourceMap" "external" | merge $options -}}
@@ -374,14 +374,14 @@ FixIt theme assets partial
 
 {{- with .Store.Get "styleArr" -}}
   {{- $content := delimit . " " -}}
-  {{- $path :=  printf "%s/css/page/%s.scss" $languagePrefix $uniqueFileId -}}
-  {{- $options := printf "css/page/%s.min.css" $uniqueFileId | dict "targetPath" -}}
+  {{- $path :=  printf "%s/scss/pages/%s.scss" $languagePrefix $uniqueFileId -}}
+  {{- $options := printf "css/pages/%s.min.css" $uniqueFileId | dict "targetPath" -}}
   {{- dict "Content" $content "Path" $path "ToCSS" $options | dict "Page" $ "Data" | partial "store/style.html" -}}
 {{- end -}}
 
 {{- with .Store.Get "scriptArr" -}}
   {{- $content := delimit . "\n" -}}
-  {{- $targetPath := printf "%s/js/page/%s.js" $languagePrefix $uniqueFileId -}}
+  {{- $targetPath := printf "%s/js/pages/%s.js" $languagePrefix $uniqueFileId -}}
   {{- dict "Content" $content "Path" $targetPath "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
 {{- end -}}
 
