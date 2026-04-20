@@ -71,30 +71,32 @@ header {
   font-size: fi-var(header-title-font-size);
   font-family: fi-var(header-title-font-family);
   font-weight: bold;
-  margin-inline-end: 0.25rem;
-  padding-inline: 0.25rem;
+  line-height: 1;
+  padding: 0.25rem;
   min-width: 10%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   flex: 10;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.25rem;
+  
+  .header-title-link {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
 
-  .logo {
-    min-height: 1.5em;
-    height: 1.5em;
-    width: auto;
-    vertical-align: top;
-    transform: translateY(calc(#{fi-var(header-height)} / 2 - 50%));
-  }
-
-  .header-title-text {
-    margin-left: 0.25rem;
-    margin-right: 0.25rem;
+    // recommended size: 32px * 32px
+    .logo {
+      height: 32px;
+      width: auto;
+    }
   }
 
   .header-subtitle {
-    margin-left: 0.25rem;
-    font-size: 0.6em;
+    font-size: 0.75rem;
+    line-height: fi-var(header-title-font-size);
   }
 }
 
@@ -262,10 +264,6 @@ header {
       padding-inline-end: fi-var(header-height);
     }
 
-    .header-title {
-      height: 100%;
-    }
-
     .menu {
       display: flex;
       flex-direction: row;
@@ -337,7 +335,7 @@ header {
 #header-mobile {
   position: sticky;
   top: 0;
-  min-height: fi-var(header-height);
+  height: fi-var(header-height);
   line-height: fi-var(header-height);
 
   [data-header-mobile='normal'] & {
@@ -347,8 +345,11 @@ header {
   .header-container {
     padding: 0;
     margin: 0;
+    height: fi-var(header-height);
+    position: relative;
 
     .header-wrapper {
+      height: 100%;
       padding: 0 1rem;
       font-size: 1.125rem;
       transition: margin-top 0.3s ease;

@@ -5,7 +5,7 @@
 <header class="desktop animate__faster{{ if .Site.Params.header.blur }} blur{{ end }}" id="header-desktop">
   <div class="header-wrapper"{{ if .Site.Params.githubCorner.enable }} data-github-corner="{{ .Site.Params.githubCorner.position }}"{{ end }}>
     <div class="header-title">
-      <a href="{{ $relLangURL }}" title="{{ .Site.Title }}">
+      <a href="{{ $relLangURL }}" title="{{ .Site.Title }}" class="header-title-link">
         {{- with .Site.Params.header.title -}}
           {{- with .logo -}}
             {{- dict "Src" . "Class" "logo" "Alt" $.Site.Title "Width" 32 "Height" 32 | partial "plugin/image.html" -}}
@@ -15,7 +15,7 @@
           {{- end -}}
           {{- if .typeit -}}
             {{- $.Store.Set "hasTyped" true -}}
-            <span class="typeit"><template>{{ .name | default $.Site.Title }}</template></span>
+            <span class="typeit" data-group="header-desktop"><template>{{ .name | default $.Site.Title }}</template></span>
           {{- else -}}
             <span class="header-title-text">{{ .name | default $.Site.Title }}</span>
           {{- end -}}
@@ -29,7 +29,7 @@
       {{- with .Site.Params.header.subtitle -}}
         {{- if .typeit -}}
         {{- $.Store.Set "hasTyped" true -}}
-          <span class="typeit header-subtitle"><template>{{ .name }}</template></span>
+          <span class="typeit header-subtitle" data-group="header-desktop"><template>{{ .name }}</template></span>
         {{- else -}}
           <span class="header-subtitle">{{ .name }}</span>
         {{- end -}}
@@ -159,7 +159,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="{{ $relLangURL }}" title="{{ .Site.Title }}">
+        <a href="{{ $relLangURL }}" title="{{ .Site.Title }}" class="header-title-link">
           {{- with .Site.Params.header.title -}}
             {{- with .logo -}}
               {{- dict "Src" . "Class" "logo" "Alt" $.Site.Title "Width" 26 "Height" 26 | partial "plugin/image.html" -}}
@@ -169,7 +169,7 @@
             {{- end -}}
             {{- if .typeit -}}
               {{- $.Store.Set "hasTyped" true -}}
-              <span class="typeit"><template>{{ .name | default $.Site.Title }}</template></span>
+              <span class="typeit" data-group="header-mobile"><template>{{ .name | default $.Site.Title }}</template></span>
             {{- else -}}
               <span class="header-title-text">{{ .name | default $.Site.Title }}</span>
             {{- end -}}
@@ -183,7 +183,7 @@
         {{- with .Site.Params.header.subtitle -}}
           {{- if .typeit -}}
             {{- $.Store.Set "hasTyped" true -}}
-            <span class="typeit header-subtitle"><template>{{ .name }}</template></span>
+            <span class="typeit header-subtitle" data-group="header-mobile"><template>{{ .name }}</template></span>
           {{- else -}}
             <span class="header-subtitle">{{- .name -}}</span>
           {{- end -}}

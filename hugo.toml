@@ -835,6 +835,7 @@ cursorChar = "|"
 # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
 duration = -1
 # FixIt 0.2.18 | NEW whether your strings will continuously loop after completing
+# [fixme] There is a bug when printing in groups
 loop = false
 
 # FixIt 0.2.15 | NEW Mermaid config
