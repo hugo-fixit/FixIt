@@ -8,13 +8,13 @@
 ///     opacity: 0.8;
 ///   }
 @mixin task-icon($color: null) {
-	> i {
-		// Set icon color (optional)
-		@if $color != null {
-			@include set-fi-var(task-icon-color, $color);
-		}
-		@content;
-	}
+  > i {
+    // Set icon color (optional)
+    @if $color != null {
+      @include set-fi-var(task-icon-color, $color);
+    }
+    @content;
+  }
 }
 
 /// Set task list text color and allow custom styles via @content
@@ -24,11 +24,11 @@
 ///     text-decoration: line-through fi-var(secondary);
 ///   }
 @mixin task-text($color: null) {
-	> span {
-		// Set text color (optional)
-		@if $color != null {
-			@include set-fi-var(task-text-color, $color);
-		}
-		@content;
-	}
+  > span {
+    // Set text color (optional)
+    @if $color != null {
+      @include set-fi-var(task-text-color, $color);
+    }
+    @content;
+  }
 }

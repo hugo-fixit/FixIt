@@ -1,20 +1,4 @@
 @mixin placeholder($color: fi-var(global-font-tertiary-color)) {
-  input::-webkit-input-placeholder {
-    color: $color;
-  }
-
-  input:-moz-placeholder {
-    color: $color;
-  }
-
-  input::-moz-placeholder {
-    color: $color;
-  }
-
-  input:-ms-input-placeholder {
-    color: $color;
-  }
-
   input::placeholder {
     color: $color;
   }
