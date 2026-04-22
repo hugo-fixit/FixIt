@@ -38,7 +38,7 @@ export function isMobile() {
  * @returns {Boolean} whether the TOC should be rendered as static
  */
 export function isTocStatic() {
-  return document.getElementById('toc-static').dataset.kept === 'true' || window.matchMedia('only screen and (max-width: 960px)').matches;
+  return document.getElementById('toc-static')?.dataset?.kept === 'true' || window.matchMedia('only screen and (max-width: 960px)').matches;
 }
 
 /**
