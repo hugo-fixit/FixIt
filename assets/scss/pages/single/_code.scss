@@ -627,7 +627,26 @@ pre {
         color: fi-var(global-font-secondary-color);
         white-space: nowrap;
         user-select: none;
+        position: relative;
         @include border-radius;
+
+        &:not(:last-child)::after {
+          content: '';
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 1px;
+          height: 36%;
+          background-color: fi-var(global-border-color-weight);
+        }
+
+        // hide dividers on both sides of the active tab
+        &.active::after,
+        &:has(+ .tab-item.active)::after {
+          // display: none;
+          background-color: fi-var(global-border-color);
+        }
 
         @include media('xs') {
           padding-inline: 0.6rem;
@@ -648,7 +667,7 @@ pre {
         translate: 2px 2px;
         width: calc(anchor-size(width) - 0.25rem);
         height: calc(anchor-size(height) - 0.25rem);
-        box-shadow: inset 0 0 1rem 0.25rem color-mix(in srgb, fi-var(global-font-secondary-color) 30%, transparent);
+        box-shadow: inset 0 0 1rem 0.25rem light-dark(#fff, fi-rgba(fi-var(global-font-secondary-color), 0.4));
         pointer-events: none;
         transition: 0.3s ease-in-out;
         @include border-radius;
