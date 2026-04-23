@@ -724,6 +724,9 @@ class FixIt {
   initCodeTabs() {
     const $codeBlocks = document.querySelectorAll('.code-block[group]:not([data-tab-init])');
     const processed = new Set();
+    const normalizeTabTitle = (title = '') => title.toLowerCase();
+
+    this._codeTabToggleRegistry = this._codeTabToggleRegistry || new Map();
     
     forEach($codeBlocks, ($block) => {
       if (processed.has($block)) return;
@@ -776,6 +779,68 @@ class FixIt {
         $before.textContent = beforeTabs;
         $items.appendChild($before);
       }
+
+      const tabButtons = [];
+      const toggleLangToIndex = new Map();
+
+      const switchToTab = (index, { sync = true } = {}) => {
+        const $nextTab = $tabs[index];
+        const $nextBtn = tabButtons[index];
+        if (!$nextTab || !$nextBtn) return;
+
+        // 1. restore buttons to the currently active tab
+        const $activeTab = $tabs.find(t => t.classList.contains('active'));
+        if ($activeTab) {
+          const $activeHeader = $activeTab.querySelector('.code-header');
+          if ($activeHeader) {
+            Array.from($actions.children).forEach(btn => $activeHeader.appendChild(btn));
+          }
+        }
+
+        // 2. switch active tab UI
+        tabButtons.forEach(b => b.classList.remove('active'));
+        $nextBtn.classList.add('active');
+
+        // 3. switch content
+        $tabs.forEach(b => b.classList.remove('active'));
+        $nextTab.classList.add('active');
+
+        // 4. sync shadow mode data attribute
+        const shadowMode = $nextTab?.dataset.shadow;
+        if (shadowMode) {
+          $container.dataset.shadow = shadowMode;
+        } else {
+          delete $container.dataset.shadow;
+        }
+
+        // 5. move new buttons to actions
+        const $codeHeader = $nextTab.querySelector('.code-header');
+        if ($codeHeader) {
+          $codeHeader.querySelectorAll('.action-btn').forEach(btn => $actions.appendChild(btn));
+        }
+
+        if (!sync || $nextTab.dataset.codeToggle !== 'true') return;
+
+        const tabTitle = $nextTab.dataset.tabTitle;
+        if (!tabTitle) return;
+        const normalizedTitle = normalizeTabTitle(tabTitle);
+        window.localStorage.setItem('config_lang_perf', normalizedTitle);
+
+        const syncHandlers = this._codeTabToggleRegistry.get(normalizedTitle);
+        if (!syncHandlers?.size) return;
+        syncHandlers.forEach((handler) => {
+          if (handler !== switchByLang) {
+            handler(normalizedTitle, { sync: false });
+          }
+        });
+      };
+
+      const switchByLang = (lang, options = {}) => {
+        const index = toggleLangToIndex.get(normalizeTabTitle(lang));
+        if (index === undefined) return;
+        switchToTab(index, options);
+      };
+
       $tabs.forEach(($tab, index) => {
         const title = $tab.dataset.tabTitle || 'Code';
         const defaultActiveTab = resolvedIndex === -1 && index === 0;
@@ -787,46 +852,15 @@ class FixIt {
         $btn.textContent = title;
         $btn.dataset.index = index;
         $btn.title = title;
+        tabButtons.push($btn);
+
+        const normalizedTitle = normalizeTabTitle(title);
+        if (!toggleLangToIndex.has(normalizedTitle)) {
+          toggleLangToIndex.set(normalizedTitle, index);
+        }
 
         $btn.addEventListener('click', () => {
-          // 1. restore buttons to the currently active tab
-          const $activeTab = $tabs.find(t => t.classList.contains('active'));
-          if ($activeTab) {
-            const $activeHeader = $activeTab.querySelector('.code-header');
-            if ($activeHeader) {
-              Array.from($actions.children).forEach(btn => $activeHeader.appendChild(btn));
-            }
-          }
-
-          // 2. switch active tab UI
-          $items.querySelectorAll('.tab-item').forEach(b => b.classList.remove('active'));
-          $btn.classList.add('active');
-          if ($tab.dataset.codeToggle === 'true') {
-            window.localStorage.setItem('config_lang_perf', $tab.dataset.tabTitle.toLowerCase());
-            const activeItems = document.querySelectorAll(`
-              .tab-item[title="${$tab.dataset.tabTitle.toLowerCase()}"]:not(.active),
-              .tab-item[title="${$tab.dataset.tabTitle.toUpperCase()}"]:not(.active)`
-            );
-            forEach(activeItems, t => t.click());
-          }
-          
-          // 3. switch content
-          $tabs.forEach(b => b.classList.remove('active'));
-          $tab.classList.add('active');
-
-          // 4. sync shadow mode data attribute
-          const shadowMode = $tab?.dataset.shadow;
-          if (shadowMode) {
-            $container.dataset.shadow = shadowMode;
-          } else {
-            delete $container.dataset.shadow;
-          }
-
-          // 5. move new buttons to actions
-          const $codeHeader = $tab.querySelector('.code-header');
-          if ($codeHeader) {
-            $codeHeader.querySelectorAll('.action-btn').forEach(btn => $actions.appendChild(btn));
-          }
+          switchToTab(index);
         });
         $items.appendChild($btn);
         
@@ -841,12 +875,17 @@ class FixIt {
       $container.appendChild($header);
       $container.appendChild($content);
 
+      toggleLangToIndex.forEach((_index, lang) => {
+        const handlers = this._codeTabToggleRegistry.get(lang) || new Set();
+        handlers.add(switchByLang);
+        this._codeTabToggleRegistry.set(lang, handlers);
+      });
+
       // initialize actions for the active tab
       if (resolvedIndex !== -1) {
-        const $activeBtn = $items.querySelector(`.tab-item[data-index="${resolvedIndex}"]`);
-        if ($activeBtn) $activeBtn.click();
+        switchToTab(resolvedIndex, { sync: false });
       } else {
-        $items.firstElementChild.click();
+        switchToTab(0, { sync: false });
       }
     });
   }
