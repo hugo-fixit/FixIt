@@ -1567,7 +1567,6 @@ class FixIt {
   initTabEvents(target = document) {
     target.addEventListener('tab-container-changed', () => {
       FileTree.updateLineHeight(target);
-      window.FixItMermaid?.init?.();
     }, false);
   }
 
