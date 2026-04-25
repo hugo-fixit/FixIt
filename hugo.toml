@@ -841,6 +841,8 @@ loop = false
 # FixIt 0.2.15 | NEW Mermaid config
 # See http://fixit.lruihao.cn/documentation/content-management/diagrams-support/mermaid/
 [params.mermaid]
+# FixIt 1.0.0 | NEW whether to enable the mermaid wrapper
+wrapper = true
 # FixIt 0.4.0 | NEW Mermaid ESM module CDN source
 # default is https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs
 cdn = ""

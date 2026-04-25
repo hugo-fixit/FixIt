@@ -348,6 +348,10 @@ FixIt theme assets partial
 
 {{- /* Mermaid plugin */ -}}
 {{- if .Store.Get "hasMermaid" | and (not $isArchivesOrOffline) -}}
+  {{- if .Site.Params.mermaid.wrapper -}}
+    {{- $source := $cdn.panzoomJS | default "lib/panzoom/panzoom.min.js" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
+  {{- end -}}
   {{- $options := dict "Source" "js/lib/mermaid.js" "Template" "js/lib/mermaid.js" -}}
   {{- $options = dict "Context" . "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Attr" `type="module"` | merge $options -}}
   {{- $options | dict "Page" $ "Data" | partial "store/script.html" -}}
