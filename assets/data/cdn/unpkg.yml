@@ -63,6 +63,8 @@ libFiles:
   paceJS: pace-js@1.2.4
   # pangu.js@4.0.7 https://github.com/vinta/pangu.js
   panguJS: pangu@4.0.7/dist/browser/pangu.min.js
+  # @panzoom/panzoom@4.6.2 https://github.com/timmywil/panzoom
+  panzoomJS: '@panzoom/panzoom@4.6.2/dist/panzoom.min.js'
   # sharer.js@0.5.1 https://github.com/ellisonleao/sharer.js
   sharerJS: sharer.js@0.5.1/sharer.min.js
   # @github/tab-container-element@4.8.2 https://github.com/github/tab-container-element

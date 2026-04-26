@@ -131,6 +131,12 @@ libraries:
       items:
         - from: dist/browser/pangu.umd.js
           to: pangu/pangu.umd.js
+  - npm: '@panzoom/panzoom'
+    version: 4.6.2
+    local:
+      items:
+        - from: dist/panzoom.min.js
+          to: panzoom/panzoom.min.js
   - npm: sharer.js
     version: 0.5.1
     local:

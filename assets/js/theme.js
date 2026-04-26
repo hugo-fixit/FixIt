@@ -1567,7 +1567,6 @@ class FixIt {
   initTabEvents(target = document) {
     target.addEventListener('tab-container-changed', () => {
       FileTree.updateLineHeight(target);
-      window.FixItMermaid?.init?.();
     }, false);
   }
 
@@ -1922,6 +1921,8 @@ class FixIt {
       if (printConfig.expandCode) {
         // revert code tabs to code blocks for better printing support
         forEach($content.querySelectorAll('.code-tabs'), ($codeTabs) => {
+          // skip diagrams
+          if ($codeTabs.dataset.diagram) return;
           // restore action buttons to the active tab's code-header before reverting
           const $actions = $codeTabs.querySelector('.tabs-actions');
           const $activeBlock = $codeTabs.querySelector('.code-block.active');
