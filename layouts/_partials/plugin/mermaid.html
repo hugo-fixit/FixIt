@@ -31,32 +31,19 @@
         <button type="button" class="action-btn diagram-download-btn" aria-label="{{ $labelDownload }}" title="{{ $labelDownload }}">
           {{- dict "Class" "fa-solid fa-download" | partial "plugin/icon.html" -}}
         </button>
-        <button
-          type="button"
-          class="action-btn diagram-fullscreen-btn"
-          aria-label="{{ $labelFullscreen }}"
-          title="{{ $labelFullscreen }}"
-          data-title="{{ $labelFullscreen }}"
-          data-exit-title="{{ $labelExitFullscreen }}"
-        >
-          {{- dict "Class" "fa-solid fa-expand" | partial "plugin/icon.html" -}}
-        </button>
       </div>
     </div>
     <div class="tabs-content">
       <div class="code-block diagram-view active">
-        <div class="diagram-stage">
-          <div class="diagram-container">
-            <pre class="mermaid">{{ $code | safeHTML }}</pre>
-            <pre class="mermaid-dark">{{ $code | safeHTML }}</pre>
-            <pre class="mermaid-neutral">{{ $code | safeHTML }}</pre>
-            <template><pre>{{ $code | safeHTML }}</pre></template>
-          </div>
+        <div class="diagram-container">
+          <pre class="mermaid">{{ $code | safeHTML }}</pre>
+          <pre class="mermaid-dark">{{ $code | safeHTML }}</pre>
         </div>
       </div>
       {{- $codeFence | page.RenderString (dict "display" "block") -}}
     </div>
   </div>
+  <pre class="mermaid-neutral">{{ $code | safeHTML }}</pre>
 {{- else -}}
   <div class="diagram-container">
     <pre class="mermaid">{{ $code | safeHTML }}</pre>

@@ -137,10 +137,6 @@ pre {
       @include box-shadow(hover);
     }
 
-    &.instant-height .code-wrapper {
-      transition: height 0s !important;
-    }
-
     .code-wrapper {
       overflow: hidden;
       height: auto;
@@ -252,12 +248,6 @@ pre {
 
       .download-btn[data-downloaded] .fa-download {
         --fa: "\f1ce";
-        font-weight: 900;
-        color: fi-var(global-link-hover-color);
-      }
-
-      .fullscreen-btn[data-fullscreen] .fa-expand {
-        --fa: "\f066";
         font-weight: 900;
         color: fi-var(global-link-hover-color);
       }
@@ -696,10 +686,6 @@ pre {
           font-weight: 900;
           color: fi-var(global-link-hover-color);
         }
-
-        &.fullscreen-btn {
-          display: none;
-        }
       }
     }
 
@@ -725,4 +711,43 @@ pre {
       }
     }
   }
+
+  &.is-fullscreen {
+    position: fixed;
+    inset: 0;
+    margin: 0 !important;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    @include z-index(fixed, 1);
+    @include border-radius(0);
+
+    .tabs-header {
+      top: 0 !important;
+      @include border-radius(0);
+    }
+
+    .tabs-content {
+      flex: 1;
+      min-height: 0;
+
+      .code-block.active {
+        height: 100%;
+      }
+
+      .code-wrapper {
+        overflow: auto;
+        height: calc(100dvh - 1.4em - 0.8rem);
+      }
+    }
+
+    .code-expand-btn {
+      display: none;
+    }
+  }
+}
+
+// prevent transition when code block height changed by fullscreen toggle
+.instant-height .code-wrapper {
+  transition: height 0s !important;
 }

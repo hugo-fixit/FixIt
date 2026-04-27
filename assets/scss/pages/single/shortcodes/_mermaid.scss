@@ -1,7 +1,6 @@
-.mermaid,
-.mermaid-dark,
-.mermaid-neutral {
+@mixin mermaid-base {
   position: relative;
+  box-sizing: border-box;
   margin: 0;
   overflow: hidden !important;
 
@@ -20,86 +19,7 @@
   }
 }
 
-.mermaid-panzoom {
-  touch-action: none;
-
-  svg {
-    cursor: grab;
-    user-select: none;
-  }
-
-  svg:active {
-    cursor: grabbing;
-  }
-}
-
-.diagram-tabs {
-  border: 1px solid fi-var(global-border-color);
-  background-color: fi-var(code-block-background-color);
-  @include border-radius;
-
-  .diagram-stage {
-    overflow: hidden;
-  }
-
-  .diagram-container {
-    margin-block: 0;
-  }
-
-  &.is-fullscreen {
-    position: fixed;
-    inset: 0;
-    margin: 0 !important;
-    display: flex;
-    flex-direction: column;
-    @include z-index(fixed, 1);
-    @include border-radius(0);
-
-    .tabs-header {
-      top: 0 !important;
-      @include border-radius(0);
-    }
-
-    .tabs-content {
-      flex: 1;
-      min-height: 0;
-    }
-
-    .diagram-stage {
-      height: 100%;
-    }
-
-    .diagram-container {
-      height: 100%;
-    }
-
-    :is(.mermaid, .mermaid-dark, .mermaid-neutral)[data-processed] {
-      height: 100%;
-    }
-  }
-}
-
-.diagram-fullscreen {
-  overflow: hidden;
-}
-
-@include media('print') {
-  .diagram-tabs {
-    .tabs-header {
-      display: none !important;
-    }
-    .tabs-content > .code-block:not(.diagram-view),
-    .diagram-code {
-      display: none !important;
-    }
-    .diagram-view {
-      display: block !important;
-    }
-  }
-}
-
-.mermaid-dark,
-.mermaid-neutral {
+@mixin mermaid-hidden-layer {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -107,35 +27,57 @@
   pointer-events: none;
 }
 
+@mixin mermaid-visible-layer {
+  position: relative;
+  inset: auto;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+:is(.mermaid, .mermaid-dark, .mermaid-neutral) {
+  @include mermaid-base;
+}
+
+.diagram-tabs {
+  .diagram-container {
+    margin-block: 0;
+  }
+
+  &.is-fullscreen {
+    .diagram-container {
+      height: 100%;
+    }
+
+    :is(.mermaid, .mermaid-dark)[data-processed] {
+      height: 100%;
+    }
+  }
+}
+
+:is(.mermaid-dark, .mermaid-neutral) {
+  @include mermaid-hidden-layer;
+}
+
 .mermaid {
   @include dark-mode {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    visibility: hidden;
-    pointer-events: none;
+    @include mermaid-hidden-layer;
   }
 }
 
 .mermaid-dark {
   @include dark-mode {
-    position: relative;
-    inset: auto;
-    visibility: visible;
-    pointer-events: auto;
+    @include mermaid-visible-layer;
   }
 }
 
 @include media('print') {
+  .diagram-tabs,
   .mermaid,
   .mermaid-dark {
-    display: none !important;
+    display: none;
   }
   .mermaid-neutral {
-    position: relative;
-    inset: auto;
+    @include mermaid-visible-layer;
     width: auto;
-    visibility: visible;
-    pointer-events: auto;
   }
 }

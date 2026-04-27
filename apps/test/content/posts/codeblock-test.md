@@ -192,6 +192,175 @@ mode = 'classic'
 wrapper = true
 ```
 
+## Mermaid
+
+```mermaid
+flowchart TD
+    A[Start] --> B{Is it?}
+    B -->|Yes| C[OK]
+    C --> D[Rethink]
+    D --> B
+    B ---->|No| E[End]
+```
+
+## ECharts
+
+```echarts
+[title]
+text = "Summary Line Chart"
+top = "2%"
+left = "center"
+
+[tooltip]
+trigger = "axis"
+
+[legend]
+data = [
+  "Email Marketing",
+  "Affiliate Advertising",
+  "Video Advertising",
+  "Direct View",
+  "Search Engine"
+]
+top = "10%"
+
+[grid]
+left = "5%"
+right = "5%"
+bottom = "5%"
+top = "20%"
+containLabel = true
+
+[toolbox]
+left = "left"
+[toolbox.feature]
+[toolbox.feature.saveAsImage]
+title = "Save as Image"
+
+[xAxis]
+type = "category"
+boundaryGap = false
+data = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday"
+]
+
+[yAxis]
+type = "value"
+
+[[series]]
+name = "Email Marketing"
+type = "line"
+stack = "Total"
+data = [
+  120.0,
+  132.0,
+  101.0,
+  134.0,
+  90.0,
+  230.0,
+  210.0
+]
+
+[[series]]
+name = "Affiliate Advertising"
+type = "line"
+stack = "Total"
+data = [
+  220.0,
+  182.0,
+  191.0,
+  234.0,
+  290.0,
+  330.0,
+  310.0
+]
+
+[[series]]
+name = "Video Advertising"
+type = "line"
+stack = "Total"
+data = [
+  150.0,
+  232.0,
+  201.0,
+  154.0,
+  190.0,
+  330.0,
+  410.0
+]
+
+[[series]]
+name = "Direct View"
+type = "line"
+stack = "Total"
+data = [
+  320.0,
+  332.0,
+  301.0,
+  334.0,
+  390.0,
+  330.0,
+  320.0
+]
+
+[[series]]
+name = "Search Engine"
+type = "line"
+stack = "Total"
+data = [
+  820.0,
+  932.0,
+  901.0,
+  934.0,
+  1290.0,
+  1330.0,
+  1320.0
+]
+```
+
+## Timeline
+
+```timeline
+events:
+  - timestamp: 2024-07-11
+    content: Success
+  - timestamp: 2024-07-13
+    content: Approved
+  - timestamp: 2024-07-15
+    content: Event start
+```
+
+## JSON
+
+```json
+{
+  "name": "FixIt",
+  "version": "0.4.0",
+  "description": "A clean, elegant but advanced blog theme for Hugo",
+  "keywords": ["Hugo", "theme", "FixIt"]
+}
+```
+
+## File Tree
+
+{{< file-tree >}}
+- name: src
+  type: dir
+  children:
+    - name: index.ts
+      type: file
+    - name: app.ts
+      type: file
+- name: package.json
+  type: file
+{{< /file-tree >}}
+
 ## Code block inside other blocks
 
 > [!NOTE]+

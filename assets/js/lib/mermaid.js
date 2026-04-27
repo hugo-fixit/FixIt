@@ -238,7 +238,6 @@ function bindMermaidPanzoom(svg) {
 
   const host = svg.closest('.mermaid, .mermaid-dark, .mermaid-neutral')
   if (!host) return
-  host.classList.add('mermaid-panzoom')
   if (panzoomWheelHosts.has(host)) return
   panzoomWheelHosts.add(host)
 
@@ -287,16 +286,9 @@ function initMermaidDiagramControls() {
     const zoomOutBtn = tabs.querySelector('.diagram-zoom-out-btn')
     const resetBtn = tabs.querySelector('.diagram-reset-btn')
     const downloadBtn = tabs.querySelector('.diagram-download-btn')
-    const fullscreenBtn = tabs.querySelector('.diagram-fullscreen-btn')
     tabs.dataset.diagramInit = 'true'
 
-    const diagramActionButtons = [
-      zoomOutBtn,
-      zoomInBtn,
-      resetBtn,
-      downloadBtn,
-      fullscreenBtn,
-    ].filter(Boolean)
+    const diagramActionButtons = [zoomOutBtn, zoomInBtn, resetBtn, downloadBtn].filter(Boolean)
 
     const movedActionRestore = new WeakMap()
     let codeActionCache = []
@@ -305,7 +297,11 @@ function initMermaidDiagramControls() {
       elements.forEach((el) => {
         if (!el || el.parentElement === actions) return
         movedActionRestore.set(el, { parent: el.parentElement, next: el.nextSibling })
-        actions.appendChild(el)
+        if (pinnedFullscreenBtn && pinnedFullscreenBtn.parentElement === actions) {
+          actions.insertBefore(el, pinnedFullscreenBtn)
+        } else {
+          actions.appendChild(el)
+        }
       })
     }
 
@@ -322,10 +318,16 @@ function initMermaidDiagramControls() {
       })
     }
 
+    const pinnedFullscreenBtn = codeBlock.querySelector('.code-header .fullscreen-btn')
+    if (pinnedFullscreenBtn && pinnedFullscreenBtn.parentElement !== actions) {
+      actions.appendChild(pinnedFullscreenBtn)
+    }
+
     const collectCodeActions = () => {
       const codeHeader = codeBlock.querySelector('.code-header')
       if (codeHeader) {
         return Array.from(codeHeader.querySelectorAll('.action-btn'))
+          .filter((btn) => btn !== pinnedFullscreenBtn)
       }
       return Array.from(codeBlock.querySelectorAll('.code-copy-btn'))
     }
@@ -401,15 +403,6 @@ function initMermaidDiagramControls() {
       link.click()
       document.body.removeChild(link)
       URL.revokeObjectURL(url)
-    })
-    fullscreenBtn?.addEventListener('click', () => {
-      const enabled = !tabs.classList.contains('is-fullscreen')
-      tabs.classList.toggle('is-fullscreen', enabled)
-      document.body.classList.toggle('diagram-fullscreen', enabled)
-      fullscreenBtn.toggleAttribute('data-fullscreen', enabled)
-      const nextTitle = enabled ? (fullscreenBtn.dataset.exitTitle || fullscreenBtn.title) : (fullscreenBtn.dataset.title || fullscreenBtn.title)
-      fullscreenBtn.title = nextTitle
-      fullscreenBtn.setAttribute('aria-label', nextTitle)
     })
 
     if (!diagramBlock.classList.contains('active')) {

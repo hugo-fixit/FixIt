@@ -20,7 +20,7 @@
   container-type: scroll-state;
   container-name: scroller;
 
-  &:has(dialog[open]) {
+  &:has(dialog[open], .is-fullscreen) {
     overflow: hidden;
   }
 

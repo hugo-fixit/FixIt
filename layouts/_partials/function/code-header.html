@@ -38,7 +38,7 @@
 {{- end -}}
 {{- if $config.fullscreen -}}
   {{- $fullscreenIcon := dict "Class" "fa-solid fa-expand" | partial "plugin/icon.html" -}}
-  {{- $fullscreenBtn = printf `<button type="button" class="action-btn fullscreen-btn" aria-label="%s" title="%s">%s</button>` (T "assets.toggleCodeFullscreen") (T "assets.toggleCodeFullscreen") $fullscreenIcon -}}
+  {{- $fullscreenBtn = printf `<button type="button" class="action-btn fullscreen-btn" aria-label="%s" title="%s" data-exit-title="%s">%s</button>` (T "assets.fullscreen") (T "assets.fullscreen") (T "assets.exitFullscreen") $fullscreenIcon -}}
 {{- end -}}
 {{- with $config.name -}}
   {{- $titleEl = replace $titleEl `<span class="code-title">` (printf `<span class="code-title" data-name="%s">` .) -}}

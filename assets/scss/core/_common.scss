@@ -59,6 +59,14 @@
   @include border-radius(full);
 }
 
+.is-fullscreen {
+  .fa-expand {
+    --fa: "\f066";
+    font-weight: 900;
+    color: fi-var(global-link-hover-color);
+  }
+}
+
 // auto adapt to dark mode by inverting the color and hue
 .auto-dark-mode {
   @include dark-mode {
