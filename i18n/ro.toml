@@ -105,8 +105,9 @@ toggleLineNumbers = "Comută numerele de linie"
 toggleLineWrap = "Comută înfășurarea liniei"
 toggleCodeEditable = "Comută blocul de cod editabil"
 downloadCode = "Descarcă codul"
-toggleCodeFullscreen = "Comută ecran complet pentru blocul de cod"
 expandCode = "Extinde sau restrânge blocul de cod"
+fullscreen = "Ecran complet"
+exitFullscreen = "Ieși din ecran complet"
 cookieconsentMessage = "Acest site web utilizează Cookies pentru a vă îmbunătăți experiența."
 cookieconsentDismiss = "De acord"
 cookieconsentLink = "Aflați mai multe"
@@ -236,3 +237,17 @@ changed = "SCHIMBAT"
 deleted = "ȘTERS"
 deprecated = "DEPRECIAȚI"
 # === shortcodes/version.html ===
+
+# === diagram actions ===
+[diagram]
+zoomIn = "Mărește"
+zoomOut = "Micșorează"
+reset = "Resetează"
+download = "Descarcă SVG"
+# === diagram actions ===
+
+# === tabs related ===
+[tabs]
+diagram = "Diagramă"
+code = "Cod"
+# === tabs related ===

@@ -103,15 +103,9 @@ toggleLineNumbers = "切换行号"
 toggleLineWrap = "切换自动换行"
 toggleCodeEditable = "切换可编辑代码块"
 downloadCode = "下载代码"
+expandCode = "展开或折叠代码块"
 fullscreen = "全屏"
 exitFullscreen = "退出全屏"
-expandCode = "展开或折叠代码块"
-diagramTabDiagram = "图表"
-diagramTabCode = "代码"
-diagramZoomIn = "放大"
-diagramZoomOut = "缩小"
-diagramReset = "重置"
-diagramDownloadSvg = "下载 SVG"
 cookieconsentMessage = "本网站使用 Cookies 来改善你的浏览体验。"
 cookieconsentDismiss = "同意"
 cookieconsentLink = "了解更多"
@@ -239,3 +233,17 @@ changed = "更改"
 deleted = "删除"
 deprecated = "弃用"
 # === shortcodes/version.html ===
+
+# === diagram actions ===
+[diagram]
+zoomIn = "放大"
+zoomOut = "缩小"
+reset = "重置"
+download = "下载 SVG"
+# === diagram actions ===
+
+# === tabs related ===
+[tabs]
+diagram = "图表"
+code = "代码"
+# === tabs related ===

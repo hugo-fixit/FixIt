@@ -103,8 +103,9 @@ toggleLineNumbers = "줄 번호 전환"
 toggleLineWrap = "자동 줄 바꿈 전환"
 toggleCodeEditable = "코드 블록 편집 전환"
 downloadCode = "코드 다운로드"
-toggleCodeFullscreen = "코드 블록 전체 화면 전환"
 expandCode = "코드 블록 확장/축소"
+fullscreen = "전체 화면"
+exitFullscreen = "전체 화면 종료"
 cookieconsentMessage = "이 웹사이트는 쿠키를 사용하여 경험을 향상시킵니다."
 cookieconsentDismiss = "동의"
 cookieconsentLink = "자세히 알아보기"
@@ -232,3 +233,17 @@ changed = "변경됨"
 deleted = "삭제됨"
 deprecated = "더 이상 사용되지 않음"
 # === shortcodes/version.html ===
+
+# === diagram actions ===
+[diagram]
+zoomIn = "확대"
+zoomOut = "축소"
+reset = "재설정"
+download = "SVG 다운로드"
+# === diagram actions ===
+
+# === tabs related ===
+[tabs]
+diagram = "다이어그램"
+code = "코드"
+# === tabs related ===

@@ -105,8 +105,9 @@ toggleLineNumbers = "Прекидач за бројеве линија"
 toggleLineWrap = "Прекидач за оматање линија"
 toggleCodeEditable = "Пребаци уређивање блока кода"
 downloadCode = "Преузми код"
-toggleCodeFullscreen = "Пребаци цео екран блока кода"
 expandCode = "Прошири или смањи блок кода"
+fullscreen = "Цео екран"
+exitFullscreen = "Изађи из целог екрана"
 cookieconsentMessage = "Ова веб локација користи Cookies да би побољшала ваше искуство."
 cookieconsentDismiss = "Договорити се"
 cookieconsentLink = "Сазнајте више"
@@ -236,3 +237,17 @@ changed = "ПРОМЕЊЕНО"
 deleted = "ОБРИСАНО"
 deprecated = "ЗАСТАРЕЛО"
 # === shortcodes/version.html ===
+
+# === diagram actions ===
+[diagram]
+zoomIn = "Увећај"
+zoomOut = "Умањи"
+reset = "Ресетуј"
+download = "Преузми SVG"
+# === diagram actions ===
+
+# === tabs related ===
+[tabs]
+diagram = "Дијаграм"
+code = "Код"
+# === tabs related ===

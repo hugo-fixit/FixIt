@@ -1,12 +1,10 @@
 {{- /* Mermaid support for code fences extended and shortcodes. */ -}}
-{{- $labelDiagram := T "assets.diagramTabDiagram" -}}
-{{- $labelCode := T "assets.diagramTabCode" -}}
-{{- $labelZoomIn := T "assets.diagramZoomIn" -}}
-{{- $labelZoomOut := T "assets.diagramZoomOut" -}}
-{{- $labelReset := T "assets.diagramReset" -}}
-{{- $labelDownload := T "assets.diagramDownloadSvg" -}}
-{{- $labelFullscreen := T "assets.diagramFullscreen" -}}
-{{- $labelExitFullscreen := T "assets.diagramExitFullscreen" -}}
+{{- $labelDiagram := T "tabs.diagram" -}}
+{{- $labelCode := T "tabs.code" -}}
+{{- $labelZoomIn := T "diagram.zoomIn" -}}
+{{- $labelZoomOut := T "diagram.zoomOut" -}}
+{{- $labelReset := T "diagram.reset" -}}
+{{- $labelDownload := T "diagram.download" -}}
 {{- $code := strings.TrimSpace .Inner -}}
 {{- $codeAttrs := `{copyable=true, wrapperClass="diagram-code"}` -}}
 {{- $codeFence := printf "```text %s\n%s\n```" $codeAttrs $code -}}
