@@ -36,12 +36,12 @@
         <div class="diagram-container">
           <pre class="mermaid">{{ $code | safeHTML }}</pre>
           <pre class="mermaid-dark">{{ $code | safeHTML }}</pre>
+          <pre class="mermaid-neutral">{{ $code | safeHTML }}</pre>
         </div>
       </div>
       {{- $codeFence | page.RenderString (dict "display" "block") -}}
     </div>
   </div>
-  <pre class="mermaid-neutral">{{ $code | safeHTML }}</pre>
 {{- else -}}
   <div class="diagram-container">
     <pre class="mermaid">{{ $code | safeHTML }}</pre>

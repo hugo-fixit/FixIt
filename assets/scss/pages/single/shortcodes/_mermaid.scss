@@ -71,13 +71,19 @@
 }
 
 @include media('print') {
-  .diagram-tabs,
+  .diagram-tabs {
+    border: none !important;
+    background-color: transparent !important;
+
+    .tabs-header {
+      display: none !important;
+    }
+  }
   .mermaid,
   .mermaid-dark {
     display: none;
   }
   .mermaid-neutral {
     @include mermaid-visible-layer;
-    width: auto;
   }
 }
