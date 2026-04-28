@@ -5,8 +5,12 @@
   overflow: hidden !important;
 
   &[data-processed] {
-    text-align: center;
     background-color: transparent;
+
+    svg {
+      display: block;
+      margin-inline: auto;
+    }
   }
 
   &:not([data-processed])::before {
@@ -39,6 +43,22 @@
 }
 
 .diagram-tabs {
+  .tabs-actions .fullscreen-btn {
+    position: relative;
+    margin-inline-start: 4px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 1px;
+      translate: -2px -50%;
+      height: fi-var(code-block-font-size);
+      background-color: fi-var(global-border-color-weight);
+    }
+  }
+
   .diagram-container {
     margin-block: 0;
   }

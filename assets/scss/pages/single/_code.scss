@@ -625,9 +625,9 @@ pre {
           position: absolute;
           right: 0;
           top: 50%;
-          transform: translateY(-50%);
+          translate: 0 -50%;
           width: 1px;
-          height: 36%;
+          height: fi-var(code-block-font-size);
           background-color: fi-var(global-border-color-weight);
         }
 
