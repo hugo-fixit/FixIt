@@ -39,6 +39,7 @@ let mermaidThemeSyncBound = false
 let mermaidPanzoomGroups = null
 
 function getMermaidPanzoomGroup(svg) {
+  if (!svg?.closest?.('.diagram-view')) return null
   const container = svg?.closest?.('.diagram-container')
   if (!container) return null
   if (!mermaidPanzoomGroups) mermaidPanzoomGroups = new WeakMap()
@@ -47,7 +48,7 @@ function getMermaidPanzoomGroup(svg) {
     group = { container, transform: null, svgs: new Set(), lastSvg: null }
     mermaidPanzoomGroups.set(container, group)
   }
-  const svgs = container.querySelectorAll('.mermaid svg, .mermaid-dark svg, .mermaid-neutral svg')
+  const svgs = container.querySelectorAll('.mermaid svg, .mermaid-dark svg')
   svgs.forEach((s) => group.svgs.add(s))
   return group
 }
@@ -218,6 +219,8 @@ function getActiveMermaidSvg(root) {
 
 function bindMermaidPanzoom(svg) {
   if (!svg) return
+  if (!svg.closest?.('.diagram-view')) return
+  if (!svg.closest?.('.mermaid, .mermaid-dark')) return
   if (!panzoomInstances) panzoomInstances = new WeakMap()
   if (!panzoomWheelHosts) panzoomWheelHosts = new WeakSet()
   if (panzoomInstances.has(svg)) return
@@ -236,7 +239,7 @@ function bindMermaidPanzoom(svg) {
     applyPanzoomTransform(panzoom, group.transform)
   }
 
-  const host = svg.closest('.mermaid, .mermaid-dark, .mermaid-neutral')
+  const host = svg.closest('.mermaid, .mermaid-dark')
   if (!host) return
   if (panzoomWheelHosts.has(host)) return
   panzoomWheelHosts.add(host)
@@ -398,7 +401,7 @@ function initMermaidDiagramControls() {
       const url = URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
-      link.download = 'mermaid.svg'
+      link.download = diagramBlock.dataset.filename.split('.')[0]
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
@@ -529,6 +532,18 @@ async function initMermaid() {
   }
   if (!mermaidThemeSyncBound) {
     mermaidThemeSyncBound = true
+    const getActivePanzoomSvg = (container) => {
+      const nodes = container?.querySelectorAll?.('.mermaid, .mermaid-dark')
+      if (!nodes?.length) return null
+      const visible = Array.from(nodes).find((el) => {
+        const style = getComputedStyle(el)
+        if (style.display === 'none' || style.visibility === 'hidden') return false
+        const rect = el.getBoundingClientRect()
+        return rect.width > 0 && rect.height > 0
+      })
+      return visible?.querySelector?.('svg') || null
+    }
+
     const safeGetTransformFromSvg = (svg) => {
       const instance = svg && panzoomInstances?.get?.(svg)
       if (instance?.getPan && instance?.getScale) {
@@ -542,7 +557,7 @@ async function initMermaid() {
     }
 
     const resolveSourceSvg = (container) => {
-      const active = getActiveMermaidSvg(container)
+      const active = getActivePanzoomSvg(container)
       const nowDark = isDarkMode()
       const fallback = nowDark
         ? container.querySelector('.mermaid svg')
@@ -555,8 +570,8 @@ async function initMermaid() {
 
     const sync = () => {
       if (!mermaidPanzoomGroups) return
-      document.querySelectorAll('.diagram-container').forEach((container) => {
-        const currentActive = getActiveMermaidSvg(container)
+      document.querySelectorAll('.diagram-view .diagram-container').forEach((container) => {
+        const currentActive = getActivePanzoomSvg(container)
         if (!currentActive) return
         const group = getMermaidPanzoomGroup(currentActive)
         if (!group) return
@@ -601,7 +616,7 @@ async function initMermaid() {
     loadMermaid({ theme: 'neutral', darkMode: false, selector: '.mermaid-neutral', watchViewport: false })
   })
 
-  document.querySelectorAll('.mermaid[data-processed] svg, .mermaid-dark[data-processed] svg, .mermaid-neutral[data-processed] svg').forEach(bindMermaidPanzoom)
+  document.querySelectorAll('.diagram-view .mermaid[data-processed] svg, .diagram-view .mermaid-dark[data-processed] svg').forEach(bindMermaidPanzoom)
 }
 
 window.FixItMermaid = {

@@ -1,15 +1,18 @@
 {{- /* Mermaid support for code fences extended and shortcodes. */ -}}
-{{- $labelDiagram := T "tabs.diagram" -}}
-{{- $labelCode := T "tabs.code" -}}
-{{- $labelZoomIn := T "diagram.zoomIn" -}}
-{{- $labelZoomOut := T "diagram.zoomOut" -}}
-{{- $labelReset := T "diagram.reset" -}}
-{{- $labelDownload := T "diagram.download" -}}
 {{- $code := strings.TrimSpace .Inner -}}
-{{- $codeAttrs := `{copyable=true, wrapperClass="diagram-code"}` -}}
-{{- $codeFence := printf "```text %s\n%s\n```" $codeAttrs $code -}}
+{{- $wrapped := .Options.wrapper | default site.Params.mermaid.wrapper -}}
 
-{{- if site.Params.mermaid.wrapper -}}
+{{- if $wrapped -}}
+  {{- $labelDiagram := T "tabs.diagram" -}}
+  {{- $labelCode := T "tabs.code" -}}
+  {{- $labelZoomIn := T "diagram.zoomIn" -}}
+  {{- $labelZoomOut := T "diagram.zoomOut" -}}
+  {{- $labelReset := T "diagram.reset" -}}
+  {{- $labelDownload := T "diagram.download" -}}
+  {{- $filename := .Options.filename | default "mermaid.mmd" -}}
+  {{- $codeAttrs := printf `{copyable=true, fullscreen=true, filename="%s", class="diagram-code"}` $filename -}}
+  {{- $codeFence := printf "```text %s\n%s\n```" $codeAttrs $code -}}
+
   <div class="code-tabs diagram-tabs" data-diagram="mermaid">
     <div class="tabs-header">
       <div class="tabs-items">
@@ -32,7 +35,7 @@
       </div>
     </div>
     <div class="tabs-content">
-      <div class="code-block diagram-view active">
+      <div class="code-block diagram-view active" data-filename="{{ $filename }}">
         <div class="diagram-container">
           <pre class="mermaid">{{ $code | safeHTML }}</pre>
           <pre class="mermaid-dark">{{ $code | safeHTML }}</pre>
