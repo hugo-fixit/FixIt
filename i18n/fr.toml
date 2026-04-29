@@ -105,8 +105,9 @@ toggleLineNumbers = "Basculer les numéros de ligne"
 toggleLineWrap = "Basculer le retour à la ligne"
 toggleCodeEditable = "Basculer le bloc de code modifiable"
 downloadCode = "Télécharger le code"
-toggleCodeFullscreen = "Basculer le plein écran du bloc de code"
 expandCode = "Développer ou réduire le bloc de code"
+fullscreen = "Plein écran"
+exitFullscreen = "Quitter le plein écran"
 cookieconsentMessage = "Ce site Web utilise des Cookies pour améliorer votre expérience."
 cookieconsentDismiss = "J'ai compris !"
 cookieconsentLink = "En apprendre plus"
@@ -236,3 +237,17 @@ changed = "MODIFIÉ"
 deleted = "SUPPRIMÉ"
 deprecated = "OBSOLÈTE"
 # === shortcodes/version.html ===
+
+# === diagram actions ===
+[diagram]
+zoomIn = "Zoom avant"
+zoomOut = "Zoom arrière"
+reset = "Réinitialiser"
+download = "Télécharger le SVG"
+# === diagram actions ===
+
+# === tabs related ===
+[tabs]
+diagram = "Diagramme"
+code = "Code"
+# === tabs related ===

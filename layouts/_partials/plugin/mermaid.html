@@ -1,9 +1,56 @@
 {{- /* Mermaid support for code fences extended and shortcodes. */ -}}
-<div class="diagram-container">
-  <pre class="mermaid">{{ .Inner | safeHTML }}</pre>
-  <pre class="mermaid-dark">{{ .Inner | safeHTML }}</pre>
-  <pre class="mermaid-neutral">{{ .Inner | safeHTML }}</pre>
-  {{- dict "Label" "Copy Mermaid code" | partial "plugin/diagram-copy-btn.html" -}}
-  <template><pre>{{ .Inner | safeHTML }}</pre></template>
-</div>
-{{- /* EOF */ -}}
+{{- $code := strings.TrimSpace .Inner -}}
+{{- $wrapped := .Options.wrapper | default site.Params.mermaid.wrapper -}}
+
+{{- if $wrapped -}}
+  {{- $labelDiagram := T "tabs.diagram" -}}
+  {{- $labelCode := T "tabs.code" -}}
+  {{- $labelZoomIn := T "diagram.zoomIn" -}}
+  {{- $labelZoomOut := T "diagram.zoomOut" -}}
+  {{- $labelReset := T "diagram.reset" -}}
+  {{- $labelDownload := T "diagram.download" -}}
+  {{- $filename := .Options.filename | default "mermaid.mmd" -}}
+  {{- $codeAttrs := printf `{copyable=true, fullscreen=true, filename="%s", class="diagram-code"}` $filename -}}
+  {{- $codeFence := printf "```text %s\n%s\n```" $codeAttrs $code -}}
+
+  <div class="code-tabs diagram-tabs" data-diagram="mermaid">
+    <div class="tabs-header">
+      <div class="tabs-items">
+        <span class="tab-item active" data-tab="diagram" title="{{ $labelDiagram }}">{{ $labelDiagram }}</span>
+        <span class="tab-item" data-tab="code" title="{{ $labelCode }}">{{ $labelCode }}</span>
+      </div>
+      <div class="tabs-actions">
+        <button type="button" class="action-btn diagram-zoom-out-btn" aria-label="{{ $labelZoomOut }}" title="{{ $labelZoomOut }}">
+          {{- dict "Class" "fa-solid fa-magnifying-glass-minus" | partial "plugin/icon.html" -}}
+        </button>
+        <button type="button" class="action-btn diagram-zoom-in-btn" aria-label="{{ $labelZoomIn }}" title="{{ $labelZoomIn }}">
+          {{- dict "Class" "fa-solid fa-magnifying-glass-plus" | partial "plugin/icon.html" -}}
+        </button>
+        <button type="button" class="action-btn diagram-reset-btn" aria-label="{{ $labelReset }}" title="{{ $labelReset }}">
+          {{- dict "Class" "fa-solid fa-arrows-rotate" | partial "plugin/icon.html" -}}
+        </button>
+        <button type="button" class="action-btn diagram-download-btn" aria-label="{{ $labelDownload }}" title="{{ $labelDownload }}">
+          {{- dict "Class" "fa-solid fa-download" | partial "plugin/icon.html" -}}
+        </button>
+      </div>
+    </div>
+    <div class="tabs-content">
+      <div class="code-block diagram-view active" data-filename="{{ $filename }}">
+        <div class="diagram-container">
+          <pre class="mermaid">{{ $code | safeHTML }}</pre>
+          <pre class="mermaid-dark">{{ $code | safeHTML }}</pre>
+          <pre class="mermaid-neutral">{{ $code | safeHTML }}</pre>
+        </div>
+      </div>
+      {{- $codeFence | page.RenderString (dict "display" "block") -}}
+    </div>
+  </div>
+{{- else -}}
+  <div class="diagram-container">
+    <pre class="mermaid">{{ $code | safeHTML }}</pre>
+    <pre class="mermaid-dark">{{ $code | safeHTML }}</pre>
+    <pre class="mermaid-neutral">{{ $code | safeHTML }}</pre>
+    {{- dict "Label" "Copy Mermaid code" | partial "plugin/diagram-copy-btn.html" -}}
+    <template><pre>{{ $code | safeHTML }}</pre></template>
+  </div>
+{{- end -}}

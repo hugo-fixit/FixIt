@@ -13,6 +13,17 @@ tags:
 
 The FixIt theme supports two ways to use Mermaid: code block syntax and shortcode syntax.
 
+```mermaid
+---
+config:
+  theme: 'forest'
+---
+  graph TD
+    a --> b
+```
+
+<!--more-->
+
 ## Flowchart
 
 ```mermaid
@@ -23,8 +34,6 @@ flowchart TD
     D --> B
     B ---->|No| E[End]
 ```
-
-<!--more-->
 
 ## Sequence Diagram
 

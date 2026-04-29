@@ -104,8 +104,9 @@ toggleLineNumbers = "Chuyển đổi số dòng"
 toggleLineWrap = "Chuyển đổi xuống dòng"
 toggleCodeEditable = "Chuyển đổi khối mã có thể chỉnh sửa"
 downloadCode = "Tải mã"
-toggleCodeFullscreen = "Chuyển đổi toàn màn hình khối mã"
 expandCode = "Mở rộng hoặc thu gọn khối mã"
+fullscreen = "Toàn màn hình"
+exitFullscreen = "Thoát toàn màn hình"
 cookieconsentMessage = "Trang web này sử dụng Cookies để cải thiện trải nghiệm của bạn."
 cookieconsentDismiss = "Đã hiểu!"
 cookieconsentLink = "Tìm hiểu thêm"
@@ -235,3 +236,17 @@ changed = "THAY ĐỔI"
 deleted = "XOÁ"
 deprecated = "KHÔNG CÒN SỬ DỤNG"
 # === shortcodes/version.html ===
+
+# === diagram actions ===
+[diagram]
+zoomIn = "Phóng to"
+zoomOut = "Thu nhỏ"
+reset = "Đặt lại"
+download = "Tải SVG"
+# === diagram actions ===
+
+# === tabs related ===
+[tabs]
+diagram = "Sơ đồ"
+code = "Mã"
+# === tabs related ===

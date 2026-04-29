@@ -105,8 +105,9 @@ toggleLineNumbers = "Toggle line numbers"
 toggleLineWrap = "Toggle code wrap"
 toggleCodeEditable = "Toggle code block editable"
 downloadCode = "Download code"
-toggleCodeFullscreen = "Toggle code block fullscreen"
 expandCode = "Expand or collapse code block"
+fullscreen = "Fullscreen"
+exitFullscreen = "Exit fullscreen"
 cookieconsentMessage = "This website uses Cookies to improve your experience."
 cookieconsentDismiss = "Got it!"
 cookieconsentLink = "Learn more"
@@ -236,3 +237,17 @@ changed = "CHANGED"
 deleted = "DELETED"
 deprecated = "DEPRECATED"
 # === shortcodes/version.html ===
+
+# === diagram actions ===
+[diagram]
+zoomIn = "Zoom in"
+zoomOut = "Zoom out"
+reset = "Reset"
+download = "Download SVG"
+# === diagram actions ===
+
+# === tabs related ===
+[tabs]
+diagram = "Diagram"
+code = "Code"
+# === tabs related ===

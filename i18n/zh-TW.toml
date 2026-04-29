@@ -103,8 +103,9 @@ toggleLineNumbers = "切換行號"
 toggleLineWrap = "切換自動換行"
 toggleCodeEditable = "切換可編輯程式碼區塊"
 downloadCode = "下載程式碼"
-toggleCodeFullscreen = "切換程式碼區塊全螢幕"
 expandCode = "展開或摺疊程式碼區塊"
+fullscreen = "全螢幕"
+exitFullscreen = "退出全螢幕"
 cookieconsentMessage = "本網站使用 Cookies 來改善你的流覽體驗。"
 cookieconsentDismiss = "同意"
 cookieconsentLink = "瞭解更多"
@@ -232,3 +233,17 @@ changed = "更改"
 deleted = "刪除"
 deprecated = "棄用"
 # === shortcodes/version.html ===
+
+# === diagram actions ===
+[diagram]
+zoomIn = "放大"
+zoomOut = "縮小"
+reset = "重置"
+download = "下載 SVG"
+# === diagram actions ===
+
+# === tabs related ===
+[tabs]
+diagram = "圖表"
+code = "程式碼"
+# === tabs related ===

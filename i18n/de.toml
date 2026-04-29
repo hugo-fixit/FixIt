@@ -105,8 +105,9 @@ toggleLineNumbers = "Zeilennummern umschalten"
 toggleLineWrap = "Zeilenumbruch umschalten"
 toggleCodeEditable = "Codeblock editierbar umschalten"
 downloadCode = "Code herunterladen"
-toggleCodeFullscreen = "Codeblock-Vollbild umschalten"
 expandCode = "Codeblock erweitern oder reduzieren"
+fullscreen = "Vollbild"
+exitFullscreen = "Vollbild verlassen"
 cookieconsentMessage = "Diese Website verwendet Cookies, um Ihre Erfahrung zu verbessern."
 cookieconsentDismiss = "Zustimmen"
 cookieconsentLink = "Erfahren Sie mehr"
@@ -236,3 +237,17 @@ changed = "GEÄNDERT"
 deleted = "GELÖSCHT"
 deprecated = "VERALTET"
 # === shortcodes/version.html ===
+
+# === diagram actions ===
+[diagram]
+zoomIn = "Vergrößern"
+zoomOut = "Verkleinern"
+reset = "Zurücksetzen"
+download = "SVG herunterladen"
+# === diagram actions ===
+
+# === tabs related ===
+[tabs]
+diagram = "Diagramm"
+code = "Code"
+# === tabs related ===

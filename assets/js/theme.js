@@ -606,47 +606,64 @@ class FixIt {
     }, false);
   }
 
+  _getCodeFullscreenTarget(codeBlock) {
+    return codeBlock.closest('.code-tabs') || codeBlock;
+  }
+
   _setCodeFullscreenState(codeBlock, show) {
-    const fullscreenBtn = codeBlock.querySelector('.code-header .fullscreen-btn');
-    const hasExpandBtn = !!codeBlock.querySelector('.code-expand-btn');
-    if (show && hasExpandBtn) {
+    const target = this._getCodeFullscreenTarget(codeBlock);
+    const expandBtn = codeBlock.querySelector('.code-expand-btn');
+
+    if (show && expandBtn) {
       codeBlock.dataset.fullscreenExpanded = codeBlock.classList.contains('is-expanded') ? 'true' : 'false';
       codeBlock.classList.add('is-expanded');
     }
-    if (!show && codeBlock.classList.contains('is-fullscreen')) {
-      codeBlock.classList.add('instant-height');
-      if (hasExpandBtn && codeBlock.dataset.fullscreenExpanded === 'false') {
+
+    if (!show && target.classList.contains('is-fullscreen')) {
+      target.classList.add('instant-height');
+      window.requestAnimationFrame(() => target.classList.remove('instant-height'));
+
+      if (expandBtn && codeBlock.dataset.fullscreenExpanded === 'false') {
         codeBlock.classList.remove('is-expanded');
       }
       delete codeBlock.dataset.fullscreenExpanded;
-      window.requestAnimationFrame(() => {
-        codeBlock.classList.remove('instant-height');
-      });
     }
-    codeBlock.classList.toggle('is-fullscreen', show);
-    fullscreenBtn?.toggleAttribute('data-fullscreen', show);
-    const hasFullscreenCode = !!document.querySelector('.code-block.highlight.is-fullscreen');
-    document.documentElement.style.overflow = hasFullscreenCode ? 'hidden' : '';
+
+    // update button tooltip
+    target.classList.toggle('is-fullscreen', show);
+    const btn = target.querySelector('.tabs-actions .fullscreen-btn')
+      || codeBlock.querySelector('.code-header .fullscreen-btn');
+    if (!btn) return;
+    const exitTitle = btn.dataset.exitTitle || btn.getAttribute('data-exit-title') || btn.title;
+    const originalTitle = btn.dataset.ctOriginalTitle || btn.dataset.ctTitle || btn.title;
+    btn.dataset.ctOriginalTitle = originalTitle;
+    btn.dataset.ctTitle = show ? exitTitle : originalTitle;
+    const instance = window.CellTooltip.getOrCreateInstance(btn);
+    instance.hide();
   }
 
   closeCodeFullscreen() {
-    const $activeCodeBlock = document.querySelector('.code-block.highlight.is-fullscreen');
-    if (!$activeCodeBlock) return;
-    this._setCodeFullscreenState($activeCodeBlock, false);
+    const $activeTabs = document.querySelector('.code-tabs.is-fullscreen');
+    if ($activeTabs) {
+      const $activeBlock = $activeTabs.querySelector('.code-block.active') || $activeTabs.querySelector('.code-block');
+      if ($activeBlock) this._setCodeFullscreenState($activeBlock, false);
+      return;
+    }
+    const $activeBlock = document.querySelector('.code-block.highlight.is-fullscreen');
+    if ($activeBlock) this._setCodeFullscreenState($activeBlock, false);
   }
 
   initFullscreenCode(codeBlock) {
     const fullscreenBtn = codeBlock.querySelector('.code-header .fullscreen-btn');
     if (!fullscreenBtn) return;
     fullscreenBtn.addEventListener('click', () => {
-      const isFullscreen = codeBlock.classList.contains('is-fullscreen');
-      if (isFullscreen) {
-        this._setCodeFullscreenState(codeBlock, false);
-        return;
+      const target = this._getCodeFullscreenTarget(codeBlock);
+      const show = !target.classList.contains('is-fullscreen');
+      if (show) {
+        this.closeCodeFullscreen();
+        codeBlock.classList.remove('is-collapsed');
       }
-      this.closeCodeFullscreen();
-      codeBlock.classList.remove('is-collapsed');
-      this._setCodeFullscreenState(codeBlock, true);
+      this._setCodeFullscreenState(codeBlock, show);
     }, false);
     if (!this._codeFullscreenOnEsc) {
       this._codeFullscreenOnEsc = (event) => {
@@ -1567,7 +1584,6 @@ class FixIt {
   initTabEvents(target = document) {
     target.addEventListener('tab-container-changed', () => {
       FileTree.updateLineHeight(target);
-      window.FixItMermaid?.init?.();
     }, false);
   }
 
@@ -1612,7 +1628,9 @@ class FixIt {
       placement: 'right',
     });
     // code block action buttons tooltip
-    window.CellTooltip.initAll('.action-btn[title]');
+    window.CellTooltip.initAll('.action-btn[title]', {
+      placement: 'bottom',
+    });
     // footnote refs tooltip
     this.initFootnotes();
   }
@@ -1922,6 +1940,8 @@ class FixIt {
       if (printConfig.expandCode) {
         // revert code tabs to code blocks for better printing support
         forEach($content.querySelectorAll('.code-tabs'), ($codeTabs) => {
+          // skip diagrams
+          if ($codeTabs.dataset.diagram) return;
           // restore action buttons to the active tab's code-header before reverting
           const $actions = $codeTabs.querySelector('.tabs-actions');
           const $activeBlock = $codeTabs.querySelector('.code-block.active');

@@ -105,8 +105,9 @@ toggleLineNumbers = "Переключить номера строк"
 toggleLineWrap = "Переключить перенос строк"
 toggleCodeEditable = "Переключить редактируемый блок кода"
 downloadCode = "Скачать код"
-toggleCodeFullscreen = "Переключить полноэкранный режим блока кода"
 expandCode = "Развернуть или свернуть блок кода"
+fullscreen = "Полный экран"
+exitFullscreen = "Выйти из полного экрана"
 cookieconsentMessage = "Этот сайт использует Cookies для улучшения вашего опыта."
 cookieconsentDismiss = "Согласен"
 cookieconsentLink = "Учить больше"
@@ -236,3 +237,17 @@ changed = "ИЗМЕНЕН"
 deleted = "УДАЛЕН"
 deprecated = "УСТАРЕЛ"
 # === shortcodes/version.html ===
+
+# === diagram actions ===
+[diagram]
+zoomIn = "Увеличить"
+zoomOut = "Уменьшить"
+reset = "Сбросить"
+download = "Скачать SVG"
+# === diagram actions ===
+
+# === tabs related ===
+[tabs]
+diagram = "Диаграмма"
+code = "Код"
+# === tabs related ===

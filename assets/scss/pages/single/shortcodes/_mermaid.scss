@@ -1,13 +1,16 @@
-.mermaid,
-.mermaid-dark,
-.mermaid-neutral {
+@mixin mermaid-base {
   position: relative;
+  box-sizing: border-box;
   margin: 0;
   overflow: hidden !important;
 
   &[data-processed] {
-    text-align: center;
     background-color: transparent;
+
+    svg {
+      display: block;
+      margin-inline: auto;
+    }
   }
 
   &:not([data-processed])::before {
@@ -20,36 +23,87 @@
   }
 }
 
+@mixin mermaid-hidden-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@mixin mermaid-visible-layer {
+  position: relative;
+  inset: auto;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+:is(.mermaid, .mermaid-dark, .mermaid-neutral) {
+  @include mermaid-base;
+}
+
+.diagram-tabs {
+  .tabs-actions .fullscreen-btn {
+    position: relative;
+    margin-inline-start: 4px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 1px;
+      translate: -2px -50%;
+      height: fi-var(code-block-font-size);
+      background-color: fi-var(global-border-color-weight);
+    }
+  }
+
+  .diagram-container {
+    margin-block: 0;
+  }
+
+  &.is-fullscreen {
+    .diagram-container {
+      height: 100%;
+    }
+
+    :is(.mermaid, .mermaid-dark)[data-processed] {
+      height: 100%;
+    }
+  }
+}
+
+:is(.mermaid-dark, .mermaid-neutral) {
+  @include mermaid-hidden-layer;
+}
+
 .mermaid {
   @include dark-mode {
-    height: 0;
-    padding: 0;
+    @include mermaid-hidden-layer;
   }
 }
 
 .mermaid-dark {
-  height: 0;
-  padding: 0;
-
   @include dark-mode {
-    height: auto;
-    padding: 0.5rem 0.75rem;
+    @include mermaid-visible-layer;
   }
-}
-
-// for print view
-.mermaid-neutral {
-  height: 0;
-  padding: 0;
 }
 
 @include media('print') {
+  .diagram-tabs {
+    border: none !important;
+    background-color: transparent !important;
+
+    .tabs-header {
+      display: none !important;
+    }
+  }
   .mermaid,
   .mermaid-dark {
-    display: none !important;
+    display: none;
   }
   .mermaid-neutral {
-    height: auto;
-    padding: 0.5rem 0.75rem;
+    @include mermaid-visible-layer;
   }
 }
