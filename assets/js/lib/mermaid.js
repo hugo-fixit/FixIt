@@ -248,12 +248,20 @@ async function renderMermaidElement(el, { theme, darkMode } = {}) {
       el.setAttribute('data-processed', '')
       const svgId = svgEl?.id || id
       if (svgId) {
-        const group = svgEl ? getMermaidPanzoomGroup(svgEl) : null
-        if (svgEl && group?.transform) applyPanzoomTransformToSvg(svgEl, group.transform)
+        {{- if $wrapped }}
+        const group = getMermaidPanzoomGroup(svgEl)
+        applyPanzoomTransformToSvg(svgEl, group?.transform)
+        {{- end }}
         document.dispatchEvent(new CustomEvent('fixit:mermaid-rendered', { detail: { svgId } }))
       }
     } catch (e) {
+      const errDiv = document.getElementById(`d${id}`)
+      if (errDiv) {
+        el.innerHTML = errDiv.innerHTML
+        errDiv.remove()
+      }
       el.removeAttribute('data-processing')
+      el.setAttribute('data-processed', '')
       console.warn('FixIt Mermaid render failed:', e)
     }
   })
@@ -284,6 +292,7 @@ async function renderActiveLayerInContainer(container) {
  * Render it in idle time for print / fallback scenarios.
  */
 function scheduleNeutralRender() {
+  if (window.matchMedia('only screen and (max-width: 960px)').matches) return
   runWhenIdle(() => {
     const neutralNodes = Array.from(document.querySelectorAll('.mermaid-neutral'))
       .filter((el) => el && !el.hasAttribute('data-processed'))
@@ -661,17 +670,18 @@ async function init() {
     `%c💫 FixIt Mermaid`,
     'color: #FF3670; font-weight: bold; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);',
   )
-  // Core: observe containers and render only when they become visible.
-  observeMermaidContainers()
-  // Neutral is non-critical, defer to idle time.
-  scheduleNeutralRender()
 
-  bindTabContainerChanged()
 {{- if $wrapped }}
   initDiagramControls()
   bindRenderedPanzoom()
   bindThemeSync()
 {{- end }}
+  bindTabContainerChanged()
+
+  // Core: observe containers and render only when they become visible.
+  observeMermaidContainers()
+  // Neutral is non-critical, defer to idle time.
+  scheduleNeutralRender()
 
   if (!mermaidThemeRerenderBound && window.fixit?.switchThemeEventSet?.add) {
     mermaidThemeRerenderBound = true

@@ -13,10 +13,6 @@
     }
   }
 
-  &:not([data-processed])::before {
-    @include loading;
-  }
-
   svg {
     max-width: 100%;
     height: auto; 
@@ -36,6 +32,13 @@
   inset: auto;
   visibility: visible;
   pointer-events: auto;
+}
+
+:is(.mermaid, .mermaid-dark) {
+  // loading indicator
+  &:not([data-processed])::before {
+    @include loading;
+  }
 }
 
 :is(.mermaid, .mermaid-dark, .mermaid-neutral) {
