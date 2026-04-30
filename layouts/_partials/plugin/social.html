@@ -1,3 +1,13 @@
+{{- /*
+  Social profile link helper.
+  - Builds destination from explicit Url or from Prefix/Template/Id.
+  - Delegates final rendering to plugin/link.html with rel=me.
+  @param {String} [.Url] explicit target URL
+  @param {String} [.Template] URL template containing one %%v placeholder
+  @param {String} [.Prefix] URL prefix used to build Template
+  @param {String} [.Id] account id used by Template
+*/ -}}
+
 {{- $destination := "" -}}
 {{- with .Url -}}
   {{- $destination = . | relLangURL -}}

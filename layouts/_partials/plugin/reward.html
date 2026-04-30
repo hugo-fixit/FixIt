@@ -1,3 +1,12 @@
+{{- /*
+  Post reward panel renderer.
+  - Renders reward switch button and reward QR/payment images.
+  - Supports optional author prefix and animation mode.
+  @param {Object} .Reward reward config object
+  @param {String} .Id unique input id for reward toggle
+  @param {String} [.Author] optional author name for image alt text
+*/ -}}
+
 {{- $reward := .Reward -}}
 {{- $id := .Id -}}
 {{- $author := .Author | default "" -}}

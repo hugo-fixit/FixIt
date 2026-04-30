@@ -1,4 +1,8 @@
-{{- /* Diagram copy button */ -}}
+{{- /*
+  Copy button for diagram-like plugins.
+  @param {String} [.Label] aria label text for copy action
+*/ -}}
+
 {{- $label := .Label | default "Copy Diagram code" -}}
 
 <button type="button" class="diagram-copy-btn" aria-label="{{ $label }}">

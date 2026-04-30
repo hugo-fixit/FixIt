@@ -1,3 +1,14 @@
+{{- /*
+  Icon renderer for Font Awesome classes and SVG sources.
+  - Renders <i> element when Class is provided.
+  - Resolves local SVG resources or external SVG URL fallback.
+  - Supports Simple Icons shorthand by icon name.
+  @param {String} [.Class] icon class name for <i>
+  @param {String} [.Src] svg source path or URL
+  @param {String} [.Simpleicons] simple-icons icon name
+  @param {String} [.Prefix] custom prefix for simple-icons source path
+*/ -}}
+
 {{- with .Class -}}
   <i class="{{ . }}" aria-hidden="true"></i>
 {{- else -}}

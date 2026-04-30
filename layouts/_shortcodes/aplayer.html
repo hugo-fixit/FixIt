@@ -1,3 +1,5 @@
+{{- if ne hugo.Context.MarkupScope "home" -}}
+
 {{- if .IsNamedParams -}}
   {{- $options := dict -}}
   {{- with .Get "fixed" -}}{{- $options = dict "fixed" . | merge $options -}}{{- end -}}
@@ -21,4 +23,6 @@
   {{- .Page.Store.Set "hasAplayer" true -}}
 {{- else -}}
   {{- errorf "Only named params is supported: %s" .Position -}}
+{{- end -}}
+
 {{- end -}}

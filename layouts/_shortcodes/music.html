@@ -1,3 +1,5 @@
+{{- if ne hugo.Context.MarkupScope "home" -}}
+
 {{- $theme := "#448aff" -}}
 {{- if .IsNamedParams -}}
   {{- $theme = .Get "theme" | default $theme -}}
@@ -47,4 +49,7 @@
 {{- else -}}
   <meting-js server="{{ .Get 0 }}" type="{{ .Get 1 }}" id="{{ .Get 2 }}" theme="{{ $theme }}"></meting-js>
 {{- end -}}
+
 {{- .Page.Store.Set "hasMusic" true -}}
+
+{{- end -}}

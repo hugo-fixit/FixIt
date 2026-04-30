@@ -1,3 +1,22 @@
+{{- /*
+  Script tag renderer.
+  - Accepts direct script HTML or builds script source from local/remote resources.
+  - Supports template execution, minify/build/fingerprint pipeline, and extra attrs.
+  @param {String} .Source script source URL/path or full <script> HTML
+  @param {String} [.Content] inline content to write as generated resource
+  @param {String} [.Path] resource path used with Content
+  @param {Object} [.Template] template name/path for ExecuteAsTemplate
+  @param {Object} [.Context] template context for ExecuteAsTemplate
+  @param {Boolean} [.Minify] whether to minify resource
+  @param {Object} [.Build] js.Build options
+  @param {String} [.Fingerprint] fingerprint algorithm
+  @param {Boolean} [.Async] whether to add async attribute
+  @param {Boolean} [.Defer] whether to add defer attribute
+  @param {Boolean} [.Crossorigin] whether to add crossorigin=anonymous
+  @param {String} [.Integrity] SRI hash value
+  @param {String} [.Attr] additional attributes
+*/ -}}
+
 {{- if strings.HasPrefix .Source "<script" -}}
   {{- safeHTML .Source -}}
 {{- else -}}

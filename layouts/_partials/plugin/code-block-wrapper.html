@@ -1,4 +1,14 @@
-{{- /* Hook for code blocks rendering */ -}}
+{{- /*
+  Code block wrapper hook for highlight output.
+  - Applies wrapper UI features based on codeblock config.
+  - Supports classic/modern modes, copy button, expand button, and line-number states.
+  @param {Object} .Attributes code block attributes
+  @param {Object} .Options code fence options
+  @param {String} .Inner raw code content
+  @param {Object} .Page current page context
+  @param {String} .Type language/type for current block
+*/ -}}
+
 {{- $config := .Attributes | merge .Page.Params.codeblock | merge .Page.Site.Params.codeblock -}}
 {{- $result := transform.HighlightCodeBlock . -}}
 {{- $wrapper := $result.Wrapped -}}

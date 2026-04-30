@@ -1,4 +1,21 @@
-{{- /* ECharts support for code fences extended and shortcodes. */ -}}
+{{- /*
+  ECharts rendering partial for code fences extended syntax and shortcode usage.
+  - Skips rendering when MarkupScope is home.
+  - Supports chart options from inline content, data key, or resource file.
+  - Supports JavaScript template mode via js/file options.
+  @param {Object} [.Options] render options from shortcode or code fence attributes
+  @param {String} [.Options.width] chart container width (default: 100%)
+  @param {String} [.Options.height] chart container height (default: 30rem)
+  @param {Boolean} [.Options.js] whether to treat content as JS option builder
+  @param {Boolean} [.Options.async] whether JS template executes asynchronously
+  @param {String} [.Options.data] key of data source under data/echarts
+  @param {String} [.Options.file] local resource path for js/json/yaml/toml source
+  @param {String} [.Inner] inline chart option content
+  @param {Object} [.Page] current page context
+*/ -}}
+
+{{- if ne hugo.Context.MarkupScope "home" -}}
+
 {{- $width := .Options.width | default "100%" -}}
 {{- $height := .Options.height | default "30rem" -}}
 {{- $js := .Options.js | default false -}}
@@ -42,4 +59,7 @@
   <template>{{ $content | jsonify }}</template>
 {{- end -}}
 </div>
-{{- /* EOF */ -}}
+
+{{- .Page.Store.Set "hasEcharts" true -}}
+
+{{- end -}}

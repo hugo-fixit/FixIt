@@ -1,3 +1,21 @@
+{{- /*
+  Stylesheet tag renderer.
+  - Accepts direct <link> HTML or builds CSS resources from local paths/content.
+  - Supports template execution, optional toCSS, minify/fingerprint, and preload mode.
+  @param {String} .Source stylesheet URL/path or full <link> HTML
+  @param {String} [.Content] inline style content to write as generated resource
+  @param {String} [.Path] resource path used with Content
+  @param {Object} [.Template] template name/path for ExecuteAsTemplate
+  @param {Object} [.Context] template context for ExecuteAsTemplate
+  @param {Object} [.ToCSS] toCSS options
+  @param {Boolean} [.Minify] whether to minify resource
+  @param {String} [.Fingerprint] fingerprint algorithm
+  @param {Boolean} [.Crossorigin] whether to add crossorigin=anonymous
+  @param {Boolean} [.Preload] whether to output preload + noscript fallback
+  @param {String} [.Integrity] SRI hash value
+  @param {String} [.Attr] additional attributes
+*/ -}}
+
 {{- if strings.HasPrefix .Source "<link" -}}
   {{- safeHTML .Source -}}
 {{- else -}}

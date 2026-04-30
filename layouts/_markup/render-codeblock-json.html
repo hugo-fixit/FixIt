@@ -1,5 +1,5 @@
 {{- $jsonViewer := .Attributes | merge .Page.Params.jsonViewer | merge .Page.Site.Params.jsonViewer -}}
-{{- if $jsonViewer.enable -}}
+{{- if $jsonViewer.enable | and (ne hugo.Context.MarkupScope "home") -}}
   {{- $attrs := printf `expand-depth="%v"` $jsonViewer.expanddepth -}}
   {{- $copyable := false -}}
   {{- with $jsonViewer.copyable -}}
@@ -13,9 +13,6 @@
   {{- end -}}
   <json-viewer value="{{ .Inner | jsonify }}" {{ $attrs | safeHTMLAttr }}{{ with $copyable}} copyable="{{ . | jsonify }}"{{ end }}></json-viewer>
   {{- .Page.Store.Set "hasJsonViewer" true -}}
-  {{- if eq hugo.Context.MarkupScope "home" -}}
-    {{- site.Home.Store.Set "hasJsonViewer" true -}}
-  {{- end -}}
 {{- else -}}
   {{- partial "plugin/code-block-wrapper.html" . -}}
 {{- end -}}

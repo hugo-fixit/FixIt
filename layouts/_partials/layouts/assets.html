@@ -348,7 +348,7 @@ FixIt theme assets partial
 
 {{- /* Mermaid plugin */ -}}
 {{- if .Store.Get "hasMermaid" | and (not $isArchivesOrOffline) -}}
-  {{- if .Site.Params.mermaid.wrapper -}}
+  {{- if .Store.Get "hasPanzoom" -}}
     {{- $source := $cdn.panzoomJS | default "lib/panzoom/panzoom.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
   {{- end -}}

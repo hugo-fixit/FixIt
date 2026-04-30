@@ -1,3 +1,5 @@
+{{- if ne hugo.Context.MarkupScope "home" -}}
+
 {{- $mapbox := (.Page.Params | merge .Site.Params.page).mapbox | default dict -}}
 
 {{- $lng := cond .IsNamedParams (.Get "lng") (.Get 0) -}}
@@ -33,4 +35,7 @@
 
 {{- $attrs := printf `style="width: %v; height: %v;"` $width $height -}}
 <div class="mapbox" data-options="{{ $options | jsonify }}" {{ $attrs | safeHTMLAttr }}></div>
+
 {{- .Page.Store.Set "hasMapbox" true -}}
+
+{{- end -}}

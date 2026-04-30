@@ -1,4 +1,17 @@
-{{- /* Mermaid support for code fences extended and shortcodes. */ -}}
+{{- /*
+  Mermaid rendering partial for code fences extended syntax and shortcode usage.
+  - Skips rendering when MarkupScope is home.
+  - Supports wrapped view with tabs/actions and plain diagram mode.
+  - Supports per-diagram filename for code/download actions.
+  @param {Object} [.Options] render options from shortcode or code fence attributes
+  @param {Boolean} [.Options.wrapper] whether to enable wrapped diagram UI
+  @param {String} [.Options.filename] filename used by diagram/code actions
+  @param {String} [.Inner] inline Mermaid source content
+  @param {Object} [.Page] current page context
+*/ -}}
+
+{{- if ne hugo.Context.MarkupScope "home" -}}
+
 {{- $code := strings.TrimSpace .Inner -}}
 {{- $wrapped := .Options.wrapper | default site.Params.mermaid.wrapper -}}
 
@@ -42,9 +55,10 @@
           <pre class="mermaid-neutral">{{ $code | safeHTML }}</pre>
         </div>
       </div>
-      {{- $codeFence | page.RenderString (dict "display" "block") -}}
+      {{- $codeFence | .Page.RenderString (dict "display" "block") -}}
     </div>
   </div>
+  {{- .Page.Store.Set "hasPanzoom" true -}}
 {{- else -}}
   <div class="diagram-container">
     <pre class="mermaid">{{ $code | safeHTML }}</pre>
@@ -53,4 +67,8 @@
     {{- dict "Label" "Copy Mermaid code" | partial "plugin/diagram-copy-btn.html" -}}
     <template><pre>{{ $code | safeHTML }}</pre></template>
   </div>
+{{- end -}}
+
+{{- .Page.Store.Set "hasMermaid" true -}}
+
 {{- end -}}

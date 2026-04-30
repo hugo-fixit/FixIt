@@ -2,5 +2,4 @@
   "wrapper" (.Get "wrapper")
   "filename" (.Get "filename")
 -}}
-{{- dict "Options" $options "Inner" .Inner | partial "plugin/mermaid.html" -}}
-{{- .Page.Store.Set "hasMermaid" true -}}
+{{- dict "Options" $options "Inner" .Inner "Page" .Page | partial "plugin/mermaid.html" -}}

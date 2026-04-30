@@ -1,4 +1,5 @@
-{{- /* trim the newline */ -}}
+{{- if ne hugo.Context.MarkupScope "home" -}}
+
 {{- $content := trim (partial "function/dos2unix.html" .Inner) "\n" -}}
 {{- $classList := slice -}}
 {{- with .Get "class" -}}
@@ -50,4 +51,7 @@
   {{- printf `<%v %v></%v>` $tag $innerAttrs $tag | safeHTML -}}
   <template><pre>{{ printf "%v" $content | safeHTML }}</pre></template>
 </div>
+
 {{- .Page.Store.Set "hasTyped" true -}}
+
+{{- end -}}

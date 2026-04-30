@@ -1,7 +1,6 @@
 {{- /* Page level params is not supported */ -}}
 {{- $mermaid := .Site.Params.mermaid -}}
 {{- $mermaidCDN := $mermaid.cdn | default "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs" -}}
-{{- $wrapped := $mermaid.wrapper | default true -}}
 
 import mermaid from "{{ $mermaidCDN }}"
 {{- with $mermaid.zenuml }}
@@ -32,13 +31,12 @@ let mermaidContainerObserver = null
 let mermaidRenderLock = Promise.resolve()
 let mermaidConfigKey = ''
 let mermaidIdSeq = 0
-{{- if $wrapped }}
+// Panzoom states
 let panzoomInstances = null
 let panzoomWheelHosts = null
 let panzoomEventBound = false
 let mermaidThemeSyncBound = false
 let mermaidPanzoomGroups = null
-{{- end }}
 
 /**
  * Waits for the next animation frame.
@@ -48,7 +46,6 @@ function nextFrame() {
   return new Promise((resolve) => requestAnimationFrame(resolve))
 }
 
-{{- if $wrapped }}
 /**
  * Gets (and initializes) the panzoom shared state for a Mermaid diagram container.
  *
@@ -113,7 +110,6 @@ function applyPanzoomTransform(instance, transform) {
   instance.zoom(transform.scale, { animate: false, force: true })
   setTimeout(() => instance.pan(transform.x, transform.y, { animate: false, force: true }))
 }
-{{- end }}
 
 /**
  * Schedule task at idle time to avoid blocking critical rendering.
@@ -355,7 +351,6 @@ function observeMermaidContainers(root = document, refresh = false) {
   })
 }
 
-{{- if $wrapped }}
 /**
  * Gets the currently visible SVG for a diagram block that contains multiple Mermaid layers.
  * @param {Element} root
@@ -574,7 +569,6 @@ function bindRenderedPanzoom() {
     bindMermaidPanzoom(document.getElementById(svgId))
   })
 }
-{{- end }}
 
 /**
  * Binds a listener so Mermaid diagrams inside a tab panel render after tab switches.
@@ -593,7 +587,6 @@ function bindTabContainerChanged() {
   })
 }
 
-{{- if $wrapped }}
 /**
  * Binds theme switch synchronization for Panzoom transforms across Mermaid layers.
  * @returns {void}
@@ -664,7 +657,6 @@ function bindThemeSync() {
     })
   }
 }
-{{- end }}
 
 /**
  * Initializes Mermaid rendering, events, lazy loading and diagram controls.
@@ -678,11 +670,9 @@ async function init() {
     'color: #FF3670; font-weight: bold; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);',
   )
 
-{{- if $wrapped }}
   initDiagramControls()
   bindRenderedPanzoom()
   bindThemeSync()
-{{- end }}
   bindTabContainerChanged()
 
   // Core: observe containers and render only when they become visible.

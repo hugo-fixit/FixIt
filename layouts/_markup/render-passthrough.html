@@ -13,7 +13,7 @@
   Regular passthrough rendering:
     - [todo] support more features in future
 */ -}}
-{{- if $math.enable -}}
+{{- if $math.enable | and (ne hugo.Context.MarkupScope "home") -}}
   {{- if eq $math.type "katex" -}}
     {{- $katex := $math.katex -}}
     {{- $opts := dict "output" "htmlAndMathml" "displayMode" (eq $.Type "block") }}
@@ -29,9 +29,6 @@
       {{- else }}
         {{- .Value }}
         {{- $.Page.Store.Set "hasKaTeX" true -}}
-        {{- if eq hugo.Context.MarkupScope "home" -}}
-          {{- site.Home.Store.Set "hasKaTeX" true -}}
-        {{- end -}}
       {{- end }}
     {{- end -}}
   {{- else if eq $math.type "mathjax" -}}
@@ -41,9 +38,6 @@
       ${{ .Inner }}$
     {{- end -}}
     {{- $.Page.Store.Set "hasMathJax" true -}}
-    {{- if eq hugo.Context.MarkupScope "home" -}}
-      {{- site.Home.Store.Set "hasMathJax" true -}}
-    {{- end -}}
   {{- end -}}
 {{- else -}}
   {{- /* Regular passthrough rendering */ -}}

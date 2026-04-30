@@ -1,4 +1,20 @@
-{{- /* Timeline support for code fences extended and shortcodes. */ -}}
+{{- /*
+  Timeline rendering partial for code fences extended syntax and shortcode usage.
+  - Supports events from inline content, data key, resource file, or direct Events input.
+  - Supports reverse order, placement, animation, node style, and size options.
+  @param {Object} [.Options] render options from shortcode or code fence attributes
+  @param {Boolean} [.Options.reverse] whether to sort events in descending order
+  @param {String} [.Options.placement] default timestamp placement
+  @param {Boolean} [.Options.animation] whether to enable item animation
+  @param {String} [.Options.size] timeline size variant
+  @param {String} [.Options.node] timeline node style
+  @param {String} [.Options.data] key of data source under data/timeline
+  @param {String} [.Options.file] local resource path for timeline data
+  @param {String} [.Inner] inline timeline source content
+  @param {Array} [.Events] direct events array override
+  @param {Object} [.Page] current page context
+*/ -}}
+
 {{- $reverse := .Options.reverse | default false -}}
 {{- $placement := .Options.placement | default "bottom" -}}
 {{- $animation := .Options.animation | default false -}}
