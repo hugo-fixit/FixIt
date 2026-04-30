@@ -56,6 +56,7 @@ function nextFrame() {
  * (e.g. `.mermaid` vs `.mermaid-dark`) within the same `.diagram-container`.
  *
  * @param {SVGElement} svg
+ * @returns {Object}
  */
 function getMermaidPanzoomGroup(svg) {
   if (!svg?.closest?.('.diagram-view')) return null
@@ -73,30 +74,44 @@ function getMermaidPanzoomGroup(svg) {
 }
 
 /**
- * Applies a saved pan/zoom transform via CSS transform.
- * @param {SVGElement} svg
- * @param {any} transform
- * @param {number} transform.x
- * @param {number} transform.y
- * @param {number} transform.scale
+ * Compares two pan/zoom transforms with a small tolerance.
+ * Used to avoid redundant sync work (e.g. repeated theme switches / re-renders).
+ *
+ * @param {Object} a - PanzoomTransform object.
+ * @param {Object} b - PanzoomTransform object.
+ * @returns {boolean}
  */
-function applyPanzoomTransformToSvg(svg, transform) {
-  if (!svg || !transform) return
-  svg.style.transform = `scale(${transform.scale}) translate(${transform.x}px, ${transform.y}px)`
+function isSamePanzoomTransform(a, b) {
+  if (!a || !b) return false
+  const eps = 1e-3
+  return (
+    Math.abs(a.x - b.x) <= eps &&
+    Math.abs(a.y - b.y) <= eps &&
+    Math.abs(a.scale - b.scale) <= eps
+  )
 }
 
 /**
- * Applies a saved pan/zoom transform via Panzoom instance methods.
- * @param {any} instance
- * @param {any} transform
- * @param {number} transform.x
- * @param {number} transform.y
- * @param {number} transform.scale
+ * Applies a pan/zoom transform to a Panzoom instance.
+ *
+ * Reads the current state via `getPan()` and `getScale()` and skips if it is already
+ * effectively equal to `transform` (see `isSamePanzoomTransform`).
+ *
+ * Note: the pan step is deferred to the next macrotask so the zoom can be applied first.
+ *
+ * @param {Object} instance - Panzoom instance with zoom/pan/getPan/getScale methods.
+ * @param {PanzoomTransform} transform
+ * @returns {void}
  */
 function applyPanzoomTransform(instance, transform) {
   if (!instance || !transform) return
-  try { instance.zoom(transform.scale, { animate: false, force: true }) } catch {}
-  try { instance.pan(transform.x, transform.y, { animate: false, force: true }) } catch {}
+  const currentTransform = {
+    scale: instance.getScale(),
+    ...instance.getPan(),
+  }
+  if (isSamePanzoomTransform(currentTransform, transform)) return
+  instance.zoom(transform.scale, { animate: false, force: true })
+  setTimeout(() => instance.pan(transform.x, transform.y, { animate: false, force: true }))
 }
 {{- end }}
 
@@ -248,10 +263,6 @@ async function renderMermaidElement(el, { theme, darkMode } = {}) {
       el.setAttribute('data-processed', '')
       const svgId = svgEl?.id || id
       if (svgId) {
-        {{- if $wrapped }}
-        const group = getMermaidPanzoomGroup(svgEl)
-        applyPanzoomTransformToSvg(svgEl, group?.transform)
-        {{- end }}
         document.dispatchEvent(new CustomEvent('fixit:mermaid-rendered', { detail: { svgId } }))
       }
     } catch (e) {
@@ -590,6 +601,7 @@ function bindTabContainerChanged() {
 function bindThemeSync() {
   if (mermaidThemeSyncBound) return
   mermaidThemeSyncBound = true
+  let lastEffectiveDark = isDarkMode()
 
   const getActivePanzoomSvg = (container) => {
     const nodes = container?.querySelectorAll?.('.mermaid, .mermaid-dark')
@@ -615,46 +627,40 @@ function bindThemeSync() {
     return null
   }
 
-  const resolveSourceSvg = (container) => {
-    const active = getActivePanzoomSvg(container)
-    const nowDark = isDarkMode()
-    const fallback = nowDark
-      ? container.querySelector('.mermaid svg')
-      : container.querySelector('.mermaid-dark svg')
-    const group = active ? getMermaidPanzoomGroup(active) : null
-    const last = group?.lastSvg
-    if (last?.isConnected) return last
-    return fallback || active
-  }
-
-  const sync = () => {
+  const sync = (nowDark) => {
     if (!mermaidPanzoomGroups) return
     document.querySelectorAll('.diagram-view .diagram-container').forEach((container) => {
       const currentActive = getActivePanzoomSvg(container)
-      if (!currentActive) return
-      const group = getMermaidPanzoomGroup(currentActive)
+      const fallbackSource = nowDark
+        ? container.querySelector('.mermaid svg')
+        : container.querySelector('.mermaid-dark svg')
+
+      const groupSeed = currentActive || fallbackSource
+      if (!groupSeed) return
+      const group = getMermaidPanzoomGroup(groupSeed)
       if (!group) return
 
-      const sourceSvg = resolveSourceSvg(container)
+      const last = group?.lastSvg
+      const sourceSvg = last?.isConnected ? last : (fallbackSource || currentActive)
       const sourceTransform = safeGetTransformFromSvg(sourceSvg)
       if (sourceTransform) group.transform = sourceTransform
 
       if (!group.transform) return
 
-      const instance = panzoomInstances?.get?.(currentActive)
-      if (instance) {
+      if (currentActive) {
+        const instance = panzoomInstances?.get?.(currentActive)
         applyPanzoomTransform(instance, group.transform)
-      } else {
-        applyPanzoomTransformToSvg(currentActive, group.transform)
       }
     })
   }
 
   if (window.fixit?.switchThemeEventSet?.add) {
-    window.fixit.switchThemeEventSet.add(async () => {
+    window.fixit.switchThemeEventSet.add(async (isDark) => {
+      if (isDark === lastEffectiveDark) return
+      lastEffectiveDark = isDark
       await nextFrame()
       await nextFrame()
-      sync()
+      sync(isDark)
     })
   }
 }
