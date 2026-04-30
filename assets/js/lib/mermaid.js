@@ -534,13 +534,14 @@ function initDiagramControls() {
       const svg = getActiveMermaidSvg(diagramBlock)
       if (!svg) return
       const clonedSvg = svg.cloneNode(true)
-      clonedSvg.style.removeProperty('transform')
+      // remove style attribute (transform etc.) that may interfere with proper rendering in external viewers
+      clonedSvg.removeAttribute('style')
       const xml = new XMLSerializer().serializeToString(clonedSvg)
       const blob = new Blob([xml], { type: 'image/svg+xml;charset=utf-8' })
       const url = URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
-      link.download = diagramBlock.dataset.filename.split('.')[0]
+      link.download = `${diagramBlock.dataset.filename.split('.')[0]}.svg`
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)

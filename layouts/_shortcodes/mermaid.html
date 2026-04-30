@@ -1,3 +1,6 @@
-{{- $options := dict -}}
+{{- $options := dict
+  "wrapper" (.Get "wrapper")
+  "filename" (.Get "filename")
+-}}
 {{- dict "Options" $options "Inner" .Inner | partial "plugin/mermaid.html" -}}
 {{- .Page.Store.Set "hasMermaid" true -}}
