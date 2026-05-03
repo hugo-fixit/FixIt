@@ -711,7 +711,7 @@ enable = true
 # special amount of posts in each home posts page
 paginate = 6
 # whether to show featured image preview in home page post list
-imagePreview = false
+imagePreview = true
 
 # FixIt 0.2.16 | CHANGED Social config about the author
 [params.social]
