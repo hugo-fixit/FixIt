@@ -126,7 +126,7 @@
   .toc-content {
     overflow-y: scroll;
     // TODO 这里计算错误，待重构使用 JS 计算
-    max-height: calc(100vh - #{2 * #{fixit-var(header-height)}});
+    max-height: calc(100vh - 2 * var(--fi-header-height));
     @include scrollbar-width(none, 0);
 
     &.always-active ul,
