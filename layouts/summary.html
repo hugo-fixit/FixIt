@@ -1,6 +1,7 @@
 {{- $params := .Params | merge .Site.Params.page -}}
 
 <article class="single summary" itemscope itemtype="http://schema.org/Article">
+  {{- if not (eq .Site.Params.home.posts.imagePreview false) -}}
   {{- /* Featured image */ -}}
   {{- $image := $params.featuredimagepreview | default $params.featuredimage -}}
   {{- $matches := slice -}}
@@ -12,14 +13,15 @@
   {{- if $image | or (gt (len $matches) 0) -}}
     <div class="featured-image-preview">
       <a href="{{ $.RelPermalink }}" aria-label="{{ $.Title }}">
-        {{- $optim := slice 
+        {{- $optim := slice
           (dict "Process" "fill 800x336 Center webp" "descriptor" "800w")
           (dict "Process" "fill 1200x504 Center webp" "descriptor" "1200w")
-          (dict "Process" "fill 1600x672 Center webp" "descriptor" "1600w") 
+          (dict "Process" "fill 1600x672 Center webp" "descriptor" "1600w")
         -}}
         {{- dict "Src" $image "Title" $.Title "Resources" $.Resources "Matches" $matches "Loading" "eager" "Width" "800" "Height" "336" "Sizes" "(max-width: 680px) 100vw, (max-width: 960px) 80vw, (max-width: 1440px) 56vw, 800px" "OptimConfig" $optim "Alt" (printf "Featured image for %v" $.Title) | partial "plugin/image.html" -}}
       </a>
     </div>
+  {{- end -}}
   {{- end -}}
 
   {{- /* Title */ -}}
