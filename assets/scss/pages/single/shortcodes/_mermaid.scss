@@ -46,6 +46,10 @@
 }
 
 .diagram-tabs {
+  :is(.mermaid, .mermaid-dark)[data-processed] svg {
+    will-change: transform;
+  }
+
   .tabs-actions .fullscreen-btn {
     position: relative;
     margin-inline-start: 4px;

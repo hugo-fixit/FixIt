@@ -286,11 +286,11 @@ function collectMermaidContainers(root = document) {
  */
 async function renderActiveLayerInContainer(container) {
   if (!container) return
-  const el = container.querySelector(isDarkMode() ? '.mermaid-dark' : '.mermaid')
+  const darkMode = isDarkMode()
+  const el = container.querySelector(darkMode ? '.mermaid-dark' : '.mermaid')
   if (!el) return
   if (el.hasAttribute('data-processed') || el.querySelector('svg')) return
   if (!isNodeVisuallyActive(el)) return
-  const darkMode = isDarkMode()
   await renderMermaidElement(el, { theme: getTheme(), darkMode })
 }
 
