@@ -122,7 +122,7 @@
   .toc-content {
     overflow-y: auto;
     overscroll-behavior: contain;
-    max-height: fi-var(toc-content-max-height, calc(100dvh - #{2 * #{fi-var(header-height)}}));
+    max-height: fi-var(toc-content-max-height, 90dvh);
     @include scrollbar-width(none, 0);
 
     &.always-active ul,
