@@ -1,3 +1,8 @@
+@use "sass:color";
+@use "core/functions" as *;
+@use "core/mixins" as *;
+@use "override" as *;
+
 .tags {
   margin: 10px 0;
 
@@ -52,8 +57,8 @@
         @include set-fi-var(
           tag-cloud-color,
           light-dark(
-            mix($tag-cloud-end, $tag-cloud-start, $grade * 10),
-            mix($tag-cloud-end-dark, $tag-cloud-start-dark, $grade * 10)
+            color.mix($tag-cloud-end, $tag-cloud-start, $grade * 10),
+            color.mix($tag-cloud-end-dark, $tag-cloud-start-dark, $grade * 10)
           )
         );
       }

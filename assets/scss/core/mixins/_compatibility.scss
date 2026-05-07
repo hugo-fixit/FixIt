@@ -1,3 +1,5 @@
+@use "core/functions" as *;
+
 @mixin placeholder($color: fi-var(global-font-tertiary-color)) {
   input::placeholder {
     color: $color;
@@ -13,19 +15,26 @@
 /// Apply styles only when scroll-state container queries are supported.
 /// Unsupported browsers skip the container branch, and can optionally reuse
 /// the same styles through a fallback selector.
-/// @param {String} $container-query - Full container query string
+/// @param {String|null} $container-name - Optional container name
+/// @param {String} $container-condition - Container query condition (without outer parentheses)
 /// @param {String|null} $fallback-selector - Optional selector used as a fallback
 /// @example
-///   @include scroll-state-query('scroller scroll-state(scrollable: top)') {
+///   @include scroll-state-query('scroller', 'scroll-state(scrollable: top)') {
 ///     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
 ///   }
-///   @include scroll-state-query('scroller scroll-state(scrollable: top)', '&') {
+///   @include scroll-state-query('scroller', 'scroll-state(scrollable: top)', '&') {
 ///     backdrop-filter: saturate(1.2) blur(10px);
 ///   }
-@mixin scroll-state-query($container-query, $fallback-selector: null) {
+@mixin scroll-state-query($container-name, $container-condition, $fallback-selector: null) {
   @supports (container-type: scroll-state) {
-    @container #{$container-query} {
-      @content;
+    @if $container-name != null {
+      @container #{$container-name} (#{$container-condition}) {
+        @content;
+      }
+    } @else {
+      @container (#{$container-condition}) {
+        @content;
+      }
     }
   }
 

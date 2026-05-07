@@ -1,3 +1,5 @@
+@use "core/mixins" as *;
+
 iframe.instagram-media {
   @include dark-mode {
     border: none !important;

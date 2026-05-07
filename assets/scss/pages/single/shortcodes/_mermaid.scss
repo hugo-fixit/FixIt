@@ -1,3 +1,6 @@
+@use "core/functions" as *;
+@use "core/mixins" as *;
+
 @mixin mermaid-base {
   position: relative;
   box-sizing: border-box;

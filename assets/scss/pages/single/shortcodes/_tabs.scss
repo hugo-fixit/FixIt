@@ -1,6 +1,9 @@
 // ========================================
 // Tabs shortcode - Multiple Design Styles
 // ========================================
+@use "core/functions" as *;
+@use "core/mixins" as *;
+@use "override" as *;
 
 @mixin tab-button-size($padding-inline: 1.25rem, $padding-block: 0.75rem) {
   @if $padding-inline != 0 {

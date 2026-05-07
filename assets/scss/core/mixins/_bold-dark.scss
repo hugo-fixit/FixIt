@@ -1,3 +1,5 @@
+@use "theme-vars" as *;
+
 /// Make text bold and apply an extra text color in dark mode.
 /// The light theme keeps its original inherited color.
 /// @param {Color} $color - Bold text color used in dark mode

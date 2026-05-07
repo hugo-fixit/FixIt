@@ -1,3 +1,7 @@
+@use "sass:meta";
+@use "core/functions" as *;
+@use "core/mixins" as *;
+
 /**
  * Code syntax highlighting for Chroma
  *
@@ -21,9 +25,9 @@
     box-shadow: -0.75rem 0 0 fi-var(code-highlight-color), 0.75rem 0 0 fi-var(code-highlight-color);
   }
 
-  @import 'light';
+  @include meta.load-css('light');
 
   @include dark-mode {
-    @import 'dark';
+    @include meta.load-css('dark');
   }
 }

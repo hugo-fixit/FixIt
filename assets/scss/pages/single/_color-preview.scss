@@ -1,3 +1,6 @@
+@use "core/functions" as *;
+@use "core/mixins" as *;
+
 // Color preview styles for inline code
 .color-code {
   position: relative;

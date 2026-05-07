@@ -1,8 +1,13 @@
-@import 'toc';
-@import 'fixit-decryptor';
-@import 'collections';
-@import 'related';
-@import 'color-preview';
+@use "sass:color";
+@use "sass:meta";
+@use 'toc';
+@use 'fixit-decryptor';
+@use 'collections';
+@use 'related';
+@use 'color-preview';
+@use "core/functions" as *;
+@use "core/mixins" as *;
+@use "override" as *;
 
 .single {
   .single-title {
@@ -334,11 +339,11 @@
 
         &:not([class]) tbody {
           & tr:nth-child(odd) {
-            background: light-dark(darken($table-background-color, 2.25%), lighten($table-background-color-dark, 2.75%));
+            background: light-dark(color.adjust($table-background-color, $lightness: -2.25%), color.adjust($table-background-color-dark, $lightness: 2.75%));
           }
 
           & tr:hover {
-            background: light-dark(darken($table-background-color, 4.5%), lighten($table-background-color-dark, 5.5%));
+            background: light-dark(color.adjust($table-background-color, $lightness: -4.5%), color.adjust($table-background-color-dark, $lightness: 5.5%));
           }
         }
 
@@ -535,13 +540,12 @@
     }
   }
 
-  @import 'shortcodes';
-  @import 'alert';
-  @import 'code';
-  @import 'diagram-copy-btn';
-  @import 'reward';
-  @import 'footer';
-  // @import 'comment';
+  @include meta.load-css('shortcodes');
+  @include meta.load-css('alert');
+  @include meta.load-css('code');
+  @include meta.load-css('diagram-copy-btn');
+  @include meta.load-css('reward');
+  @include meta.load-css('footer');
 }
 
 .lg-toolbar .lg-icon::after {

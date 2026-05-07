@@ -1,3 +1,9 @@
+@use "sass:color";
+@use "sass:map";
+@use "core/functions" as *;
+@use "core/maps" as maps;
+@use "core/mixins" as *;
+
 .admonition {
   position: relative;
   margin: 1rem 0;
@@ -80,19 +86,19 @@
 
   // default admonition type is note
   @include set-fi-vars((
-    admonition-color: map-get(map-get($admonition-color-map, note), color),
-    admonition-bg-color: map-get(map-get($admonition-color-map, note), bg-color),
-    admonition-bg-color-collapsed: opacify(map-get(map-get($admonition-color-map, note), bg-color), 0.15),
+    admonition-color: map.get(map.get(maps.$admonition-color-map, note), color),
+    admonition-bg-color: map.get(map.get(maps.$admonition-color-map, note), bg-color),
+    admonition-bg-color-collapsed: color.adjust(map.get(map.get(maps.$admonition-color-map, note), bg-color), $alpha: 0.15),
   ));
 
   // set color for each admonition type
-  @each $type, $item in $admonition-color-map {
+  @each $type, $item in maps.$admonition-color-map {
     @if $type != 'note' {
       &.#{$type} {
          @include set-fi-vars((
-          admonition-color: map-get($item, color),
-          admonition-bg-color: map-get($item, bg-color),
-          admonition-bg-color-collapsed: opacify(map-get($item, bg-color), 0.15),
+          admonition-color: map.get($item, color),
+          admonition-bg-color: map.get($item, bg-color),
+          admonition-bg-color-collapsed: color.adjust(map.get($item, bg-color), $alpha: 0.15),
         ));
       }
     }

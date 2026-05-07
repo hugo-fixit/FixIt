@@ -1,3 +1,6 @@
+@use "core/functions" as *;
+@use "core/mixins" as *;
+
 .reading-progress-bar {
   height: fi-var(progress-h, 2px);
   width: fi-var(progress, 0);

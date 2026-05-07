@@ -1,3 +1,5 @@
+@use "sass:meta";
+
 .special {
   .single-title,
   .single-subtitle {
@@ -5,5 +7,5 @@
   }
 }
 
-@import 'friends';
-@import 'search';
+@include meta.load-css('friends');
+@include meta.load-css('search');

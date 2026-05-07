@@ -1,6 +1,4 @@
-@import "functions";
-@import "mixins";
-@import "common";
-@import "reboot";
-@import "root";
-@import "layouts";
+@use "common";
+@use "reboot";
+@use "root";
+@use "layouts";

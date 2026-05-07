@@ -1,3 +1,7 @@
+@use "sass:meta";
+@use "core/mixins" as *;
+@use "override" as *;
+
 // Responsive layout
 .wrapper {
   display: flex;
@@ -80,9 +84,9 @@
   }
 }
 
-@import "header";
-@import "breadcrumb";
-@import "page-style";
-@import "pagination";
-@import "comment";
-@import "footer";
+@include meta.load-css("header");
+@include meta.load-css("page-style");
+@include meta.load-css("breadcrumb");
+@include meta.load-css("pagination");
+@include meta.load-css("comment");
+@include meta.load-css("footer");

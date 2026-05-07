@@ -1,0 +1,16 @@
+@use "core/functions" as *;
+@use "border-radius" as *;
+@use "compatibility" as *;
+
+@mixin inline-code() {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: fi-var(code-font-size);
+  line-height: fi-var(code-font-size);
+  font-family: fi-var(code-font-family);
+  color: fi-var(code-color);
+  background-color: fi-var(code-inline-background-color);
+  text-decoration: inherit;
+  @include border-radius;
+  @include overflow-wrap(break-word);
+}

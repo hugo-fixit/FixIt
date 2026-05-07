@@ -1,3 +1,8 @@
+@use "sass:meta";
+@use "core/functions" as *;
+@use "core/layouts/page-style";
+@use "core/mixins" as *;
+
 .page {
   padding-inline: 0.5rem;
   box-sizing: border-box;
@@ -39,11 +44,11 @@
   }
 }
 
-@import 'single';
-@import 'specials';
-@import 'archives';
-@import '404';
-@import 'home';
-@import 'link';
-@import 'offline';
-@import "patch";
+@include meta.load-css('single');
+@include meta.load-css('specials');
+@include meta.load-css('archives');
+@include meta.load-css('404');
+@include meta.load-css('home');
+@include meta.load-css('link');
+@include meta.load-css('offline');
+@include meta.load-css("patch");

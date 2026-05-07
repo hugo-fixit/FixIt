@@ -1,3 +1,7 @@
+@use "core/functions" as *;
+@use "border-radius" as *;
+@use "media" as *;
+
 /// Shared styles for link guard content blocks.
 /// Keep this as the single source of truth for both link page card and guard dialog body.
 @mixin link-guard-content {

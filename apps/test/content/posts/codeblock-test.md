@@ -18,7 +18,7 @@ Testing code block in FixIt theme.
 🎉🥚 in development mode!
 ```
 
-## Multiple modes
+## Multiple `modes`
 
 ```js {mode="classic"}
 // Classic mode

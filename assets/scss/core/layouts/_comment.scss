@@ -1,3 +1,6 @@
+@use "core/mixins" as *;
+@use "core/layouts/page-style";
+
 body > #comments {
   padding: 2rem 1rem;
   display: flex;

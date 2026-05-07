@@ -1,6 +1,14 @@
+@use "sass:color";
+@use "sass:meta";
+@use "sass:string";
+@use "core/functions" as *;
+@use "core/mixins" as *;
+@use "pages/single/diagram-copy-btn";
+@use "override" as *;
+
 // inline code
 code {
-  @extend %code;
+  @include inline-code();
 }
 
 // indented code
@@ -253,7 +261,7 @@ pre {
       }
 
       @each $type, $text in $code-type-map {
-        &.language-#{to-lower-case($type)} {
+        &.language-#{string.to-lower-case($type)} {
           // e.g., --fi-code-type: "JavaScript";
           @include set-fi-var(code-type, '"#{$text}"');
         }
@@ -336,7 +344,7 @@ pre {
         @include border-radius;
         @include set-fi-var(
           code-header-background-color,
-          light-dark(darken($code-header-background-color, 1%), darken($code-header-background-color-dark, 1%))
+          light-dark(color.adjust($code-header-background-color, $lightness: -1%), color.adjust($code-header-background-color-dark, $lightness: -1%))
         );
 
         + .code-wrapper {
@@ -510,7 +518,7 @@ pre {
   }
 }
 
-@import './code-syntax';
+@include meta.load-css('code-syntax');
 
 // gist shortcode
 .gist {
@@ -555,7 +563,7 @@ pre {
   }
 
   @include dark-mode {
-    @import './code-syntax/github-dark-dimmed';
+    @include meta.load-css('code-syntax/github-dark-dimmed');
   }
 }
 

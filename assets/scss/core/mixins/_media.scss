@@ -3,6 +3,8 @@
 // │  xs   │    sm     │     md     │     lg     │   xl   │
 // │ ≤680  │ 681–960   │ 961–1200   │ 1201–1440  │ ≥1441  │
 // └──────────────────────────────────────────────────────┘
+@use "sass:map";
+
 $breakpoints: (
   'xs': (
     'min': null,
@@ -53,9 +55,14 @@ $breakpoints: (
       @content;
     }
   } @else {
-    $range: map-get($breakpoints, $target);
-    $min: if($range != null, map-get($range, 'min'), null);
-    $max: if($range != null, map-get($range, 'max'), null);
+    $range: map.get($breakpoints, $target);
+    $min: null;
+    $max: null;
+
+    @if $range != null {
+      $min: map.get($range, 'min');
+      $max: map.get($range, 'max');
+    }
 
     @if $range == null {
       @warn "Unknown media target `#{$target}`. Expected: xs, sm, md, lg, xl, print, reduce-motion.";

@@ -1,3 +1,7 @@
+@use "sass:color";
+@use "core/functions" as *;
+@use "core/mixins" as *;
+
 // Diagram container
 .diagram-container {
   position: relative;
@@ -23,7 +27,7 @@
   @include z-index(base);
 
   &:hover {
-    background-color: light-dark(darken(#f6f8fa, 3%), darken(#2a313c, 3%));
+    background-color: light-dark(color.adjust(#f6f8fa, $lightness: -3%), color.adjust(#2a313c, $lightness: -3%));
   }
 
   .fa-clone {

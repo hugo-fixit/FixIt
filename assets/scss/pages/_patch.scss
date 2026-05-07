@@ -1,3 +1,5 @@
+@use "override" as *;
+
 /* Resolve style conflicts between third-party plugins */
 
 @keyframes #{$prefix}pulse {

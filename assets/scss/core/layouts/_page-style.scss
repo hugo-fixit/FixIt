@@ -1,3 +1,5 @@
+@use "core/mixins" as *;
+
 %page-style {
   @include media('xl') {
     width: ROUND(60%, 2px);

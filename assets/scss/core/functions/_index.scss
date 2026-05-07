@@ -1,2 +1,2 @@
-@import 'rgba';
-@import 'var';
+@forward "rgba" as fi-*;
+@forward "var" as fi-*;

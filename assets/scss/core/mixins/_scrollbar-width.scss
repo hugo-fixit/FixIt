@@ -1,3 +1,5 @@
+@use "theme-vars" as *;
+
 @mixin scrollbar-width($width: thin, $widthLegacy: 12px) {
   @include set-fi-vars((
     scrollbar-width: $width,

@@ -1,3 +1,5 @@
+@use "sass:meta";
+
 .archive {
   .single-title {
     padding: 1rem 0 0.5rem;
@@ -22,6 +24,6 @@
     margin-bottom: 1rem;
   }
 
-  @import 'terms';
-  @import 'tags';
+  @include meta.load-css('terms');
+  @include meta.load-css('tags');
 }

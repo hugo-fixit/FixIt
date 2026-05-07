@@ -1,3 +1,6 @@
+@use "core/functions" as *;
+@use "z-index" as *;
+
 // Loading Mixin for before/after pseudo element
 @mixin loading {
   content: '';
