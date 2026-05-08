@@ -30,5 +30,6 @@ $RECYCLE.BIN/
 .directory
 
 CHANGELOG.md
-.stash/
 docs
+.vercel
+.env*.local
