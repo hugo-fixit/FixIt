@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "regions": ["hkg1"],
+  "framework": "hugo",
+  "installCommand": "pnpm install",
+  "buildCommand": "chmod a+x build.sh && ./build.sh",
+  "outputDirectory": "public",
+  "alias": ["demo.fixit.lruihao.cn", "fixit-demo"]
+}

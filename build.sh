@@ -6,8 +6,7 @@
 #
 # The Vercel build image automatically installs Node.js dependencies.
 #
-# Usage:
-# Set Vercel "Build Command" to:
+# @example
 # chmod a+x build.sh && ./build.sh
 #------------------------------------------------------------------------------
 
@@ -25,6 +24,28 @@ cleanup() {
 
 # Register the cleanup trap
 trap cleanup EXIT SIGINT SIGTERM
+
+# Build demo/test with the correct Hugo baseURL on Vercel preview deployments.
+# - demo: https://${VERCEL_URL}
+# - test: https://${VERCEL_URL}/test
+build() {
+  local target="$1"
+  if [[ ! "${target}" =~ ^(demo|test)$ ]]; then
+    echo "Unknown build target: ${target}" >&2
+    return 2
+  fi
+
+  if [[ "${VERCEL_ENV:-}" != "preview" ]]; then
+    pnpm "build:${target}"
+    return
+  fi
+
+  local base_url="https://${VERCEL_URL}"
+  if [[ "${target}" == "test" ]]; then
+    base_url+="/test"
+  fi
+  pnpm "build:${target}" --buildDrafts --baseURL "${base_url}"
+}
 
 main() {
   # Define tool versions
@@ -80,7 +101,10 @@ main() {
 
   # Build the site
   echo "Building the site..."
-  pnpm build
+  build demo &
+  build test &
+  wait
+  pnpm -F integration start
 }
 
 main "$@"
