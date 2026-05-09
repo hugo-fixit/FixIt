@@ -5,138 +5,547 @@
 @use "core/mixins" as *;
 @use "pages/single/diagram-copy-btn";
 @use "override" as *;
+@use "code-syntax";
 
-// inline code
-code {
-  @include inline-code();
-}
-
-// indented code
-pre {
-  margin: 0;
-  line-height: 1.45em;
-  padding: 0.5rem 0.75rem;
-  overflow: auto;
-  font-size: fi-var(code-block-font-size);
-  font-family: fi-var(code-font-family);
-  background-color: fi-var(code-block-background-color);
-  tab-size: 4;
-  @include border-radius;
-
-  + pre {
-    margin-top: 0.5rem;
-  }
-
+.single {
+  // inline code
   code {
-    padding: 0;
-    background-color: transparent;
-    font-size: inherit;
-    line-height: inherit;
-    min-width: max-content;
-    @include border-radius(0);
+    @include inline-code;
   }
 
-  img {
-    min-height: 1em;
-    max-height: 1.2em;
-    vertical-align: text-bottom;
-  }
-}
-
-.highlight,
-.gist {
-  font-size: fi-var(code-block-font-size);
-  font-family: fi-var(code-font-family);
-  @include set-fi-var(scrollbar-thumb-color, inherit);
-
-  table {
-    width: 100%;
-    max-width: 100%;
-    border-spacing: 0;
-    border-collapse: collapse;
-  }
-
-  table,
-  table thead,
-  table tr,
-  table td {
-    margin: 0;
-    padding: 0;
-    border: none;
-  }
-}
-
-// Code fences blocks or highlight shortcodes
-.highlight {
-  margin: 0.5rem 0;
-  position: relative;
-  @include border-radius;
-
-  // lineNumbersInTable=true
-  > div.chroma {
+  // color preview styles for inline code
+  .color-code {
     position: relative;
+    @include set-fi-var(color-code-size, 0.64em);
+
+    .color-preview {
+      display: inline-block;
+      width: fi-var(color-code-size);
+      height: fi-var(color-code-size);
+      @include border-radius(full);
+      margin-right: 0.25em;
+      vertical-align: middle;
+      border: 1px solid;
+      pointer-events: none;
+      transform: translateY(-1px);
+      border-color: light-dark(#d1d9e0b3, #3d444db3);
+    }
+  }
+
+  // indented code
+  pre {
+    margin: 0;
+    line-height: 1.45em;
+    padding: 0.5rem 0.75rem;
+    overflow: auto;
+    font-size: fi-var(code-block-font-size);
+    font-family: fi-var(code-font-family);
     background-color: fi-var(code-block-background-color);
+    tab-size: 4;
     @include border-radius;
 
-    &:is(pre):has(.ln) {
-      padding: 0.5rem;
+    + pre {
+      margin-top: 0.5rem;
     }
 
-    .lntable {
-      overflow: auto;
-      overscroll-behavior-x: none;
-      display: block;
+    code {
+      padding: 0;
+      background-color: transparent;
+      font-size: inherit;
+      line-height: inherit;
+      min-width: max-content;
+      @include border-radius(0);
+    }
+
+    img {
+      min-height: 1em;
+      max-height: 1.2em;
+      vertical-align: text-bottom;
+    }
+  }
+
+  .highlight,
+  .gist {
+    font-size: fi-var(code-block-font-size);
+    font-family: fi-var(code-font-family);
+    @include set-fi-var(scrollbar-thumb-color, inherit);
+
+    table {
+      width: 100%;
+      max-width: 100%;
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+
+    table,
+    table thead,
+    table tr,
+    table td {
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+  }
+
+  // Code fences blocks or highlight shortcodes
+  .highlight {
+    margin: 0.5rem 0;
+    position: relative;
+    @include border-radius;
+
+    // lineNumbersInTable=true
+    > div.chroma {
+      position: relative;
       background-color: fi-var(code-block-background-color);
       @include border-radius;
 
-      td {
-        vertical-align: top;
-        padding: 0;
+      &:is(pre):has(.ln) {
+        padding: 0.5rem;
       }
 
-      pre {
-        outline-offset: -1px;
+      .lntable {
+        overflow: auto;
+        overscroll-behavior-x: none;
+        display: block;
+        background-color: fi-var(code-block-background-color);
+        @include border-radius;
+
+        td {
+          vertical-align: top;
+          padding: 0;
+        }
+
+        pre {
+          outline-offset: -1px;
+          @include border-radius(0);
+        }
+
+        // line numbers
+        .lntd:first-child {
+          position: sticky;
+          left: 0;
+        }
+        // code content
+        .lntd:last-child {
+          width: 100%;
+          code {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    // line numbers (lineNumbersInTable=false)
+    .ln {
+      padding-right: 0.75rem;
+      display: inline-block;
+      text-align: right;
+      position: sticky;
+      left: 0;
+    }
+    // Line numbers
+    .lnt,
+    .ln {
+      color: fi-var(global-font-secondary-color);
+      user-select: none;
+    }
+
+    &:not(.code-block) {
+      .lntd:last-child pre.chroma {
+        padding-left: 0;
+      }
+    }
+
+    // code fences blocks wrapped
+    &.code-block {
+      &[data-shadow='always'] {
+        @include box-shadow(always);
+      }
+
+      &[data-shadow='hover'] {
+        @include box-shadow(hover);
+      }
+
+      .code-wrapper {
+        overflow: hidden;
+        height: auto;
+        position: relative;
+        counter-reset: codeNos calc(#{fi-var(line-start)} - 1);
+        transition: height 0.5s ease-out;
+        @include border-radius;
+        @include border-radius;
+        // attr() for arbitrary properties is currently only supported in Chromium-based browsers (see https://caniuse.com/css3-attr);
+        // non-supporting browsers fall back to values set via Hugo templating in render-codeblock.html
+        @include set-fi-vars((
+          max-shown-lines: attr(data-max number, 10),
+          line-start: attr(data-line-start number, 1),
+          line-digit: attr(data-line-digit number, 1),
+        ));
+
+        @include media('reduce-motion') {
+          transition: none;
+        }
+      }
+
+      // code preview
+      &:has(.code-expand-btn):not(.is-expanded, .is-collapsed) {
+        .code-wrapper {
+          height: calc(1.45em * #{fi-var(max-shown-lines)} + #{fi-var(code-expand-offset, 0.5rem)});
+        }
+        &[data-mode='mac'] .code-wrapper {
+          @include set-fi-var(code-expand-offset, 1.875rem + 0.5rem);
+        }
+      }
+      
+      .code-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;
+        width: 100%;
+        font-family: fi-var(global-font-family);
+        font-weight: bold;
+        line-height: 1.4em;
+        color: fi-var(code-header-color);
+        background-color: fi-var(code-header-background-color);
+        position: sticky;
+        transition: border-radius 0s;
+        cursor: pointer;
+        @include z-index(base, 1);
+        @include border-radius(top);
+        @include sticky-top-offset;
+
+        + .code-wrapper {
+          @include border-radius(bottom);
+
+          > pre.chroma {
+            @include border-radius(bottom);
+          }
+        }
+
+        .code-title {
+          width: 100%;
+          padding: 0.4rem;
+
+          &::after {
+            padding-left: 0.2rem;
+            content: attr(data-name, fi-var(code-type, 'Code'));
+          }
+
+          // filename for code block
+          &[data-name]::after {
+            @include overflow-wrap(break-word);
+          }
+
+          .arrow {
+            padding: 0 0.2rem;
+            transition: transform 0.2s ease;
+          }
+
+          .title-inner {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: fi-var(code-header-background-color);
+            padding-inline: 1em;
+            max-width: calc(100% - 200px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            @include z-index(base, 2);
+          }
+        }
+
+        .ellipses-btn {
+          display: none;
+          padding: 0.4rem;
+        }
+
+        button {
+          padding: 0.4rem;
+
+          @include media('print') {
+            display: none !important;
+          }
+        }
+
+        .copy-btn[data-copied] .fa-clone {
+          --fa: "\f00c";
+          font-weight: 900;
+          color: fi-var(global-link-hover-color);
+        }
+
+        .download-btn[data-downloaded] .fa-download {
+          --fa: "\f1ce";
+          font-weight: 900;
+          color: fi-var(global-link-hover-color);
+        }
+
+        @each $type, $text in $code-type-map {
+          &.language-#{string.to-lower-case($type)} {
+            // e.g., --fi-code-type: "JavaScript";
+            @include set-fi-var(code-type, '"#{$text}"');
+          }
+        }
+
+        @include media('print') {
+          top: initial !important;
+        }
+      }
+
+      &.line-wrapping .line-wrap-btn,
+      &:not(.line-nos-hidden) .line-nos-btn,
+      .code-header button:hover,
+      &:has([contenteditable='true']) .edit-btn {
+        color: fi-var(global-link-hover-color);
+      }
+
+      &.is-fullscreen {
+        position: fixed;
+        inset: 0;
+        margin: 0 !important;
+        overflow: auto;
+        @include z-index(fixed, 1);
         @include border-radius(0);
+
+        .code-header {
+          top: 0 !important;
+          cursor: default;
+          @include border-radius(0);
+
+          .arrow {
+            display: none;
+          }
+        }
+
+        .code-wrapper {
+          overflow: auto;
+          // 1.4em for header height, 0.8rem for padding
+          height: calc(100dvh - 1.4em - 0.8rem);
+        }
+
+        .code-expand-btn {
+          display: none;
+        }
       }
 
-      // line numbers
-      .lntd:first-child {
+      .code-expand-btn {
+        width: 100%;
+        padding-block: 1rem;
+        text-align: center;
+        position: absolute;
+        bottom: 0;
+        background: linear-gradient(
+          180deg,
+          light-dark(rgba($code-background-color, 0), rgba($code-background-color-dark, 0)) 0%,
+          light-dark(rgba($code-background-color, 0.9), rgba($code-background-color-dark, 0.9)) 60%,
+          light-dark($code-background-color, $code-background-color-dark) 100%
+        );
+        @include z-index(base);
+        @include border-radius(bottom);
+
+        .fa-angles-down {
+          opacity: 0;
+          animation-name: fadeOutDown;
+          animation-duration: 1.5s;
+          animation-iteration-count: infinite;
+          animation-delay: 0.3s;
+          transition: transform 0.2s ease;
+        }
+      }
+
+      .code-copy-btn {
+        @extend .diagram-copy-btn;
+      }
+
+      // classic mode code block collapsed
+      &.is-collapsed {
+        .code-header {
+          transition: border-radius 0.2s ease 0.2s;
+          @include border-radius;
+          @include set-fi-var(
+            code-header-background-color,
+            light-dark(color.adjust($code-header-background-color, $lightness: -1%), color.adjust($code-header-background-color-dark, $lightness: -1%))
+          );
+
+          + .code-wrapper {
+            height: 0;
+          }
+        }
+
+        .arrow {
+          transform: rotate(-90deg);
+        }
+
+        .ellipses-btn {
+          display: inline;
+        }
+
+        .code-header .action-btn,
+        .code-expand-btn {
+          display: none;
+        }
+      }
+
+      // code preview expanded
+      &.is-expanded {
+        margin-bottom: 1rem;
+        &:has([contenteditable='true']) .code-expand-btn {
+          display: none;
+        }
+        .code-expand-btn {
+          background: transparent;
+          padding-block: 0;
+          transform: translateY(1rem);
+
+          .fa-angles-down {
+            animation-name: fadeOutRotate;
+
+            @keyframes fadeOutRotate {
+              0% {
+                opacity: 1;
+                transform: rotate(180deg);
+              }
+              100% {
+                opacity: 0;
+                transform: rotate(180deg) translate3d(0, 100%, 0);
+              }
+            }
+          }
+        }
+      }
+
+      // hide original line numbers
+      &.line-nos-hidden {
+        > .chroma .lntable {
+          width: 100%;
+          overscroll-behavior-x: contain;
+
+          > tbody {
+            display: table;
+            width: 100%;
+          }
+
+          .lntd:last-child {
+            width: 100%;
+          }
+        }
+
+        .lntd:first-child,
+        .ln {
+          display: none;
+        }
+      }
+
+      // line wrapping
+      &.line-wrapping {
+        > .chroma .lntable {
+          width: 100%;
+          display: table;
+
+          // hide original line numbers
+          .lntd:first-child {
+            display: none;
+          }
+        }
+        .lntd:last-child pre.chroma,
+        .code-wrapper > pre.chroma {
+          max-width: 100%;
+          box-sizing: border-box;
+
+          code {
+            text-wrap: wrap;
+            word-break: break-all;
+            overflow-wrap: break-word;
+          }
+        }
+      }
+
+      // line numbers (pseudo-elements) for code blocks
+      &.line-wrapping:not(.line-nos-hidden) .lntd:last-child pre.chroma,
+      &:not(.line-nos-hidden) .code-wrapper > pre.chroma:not(:has(.ln)) {
+        > code > .line {
+          display: flex;
+
+          &::before {
+            counter-increment: codeNos;
+            content: counter(codeNos);
+            white-space: nowrap;
+            text-align: right;
+            min-width: calc(#{fi-var(line-digit)} * 1ch);
+            padding-inline: 0.75rem;
+            flex-shrink: 0;
+            color: fi-var(global-font-secondary-color);
+            background-color: fi-var(code-block-background-color);
+          }
+
+          // highlight for line numbers
+          &.hl::before {
+            background-color: transparent;
+          }
+        }
+      }
+
+      // add sticky effect for line numbers when lineNos=false
+      &:not(.line-nos-hidden) .code-wrapper > pre.chroma > code > .line::before {
         position: sticky;
         left: 0;
       }
-      // code content
-      .lntd:last-child {
-        width: 100%;
-        code {
-          width: 100%;
+
+      // when line numbers shown
+      &:not(.line-nos-hidden) {
+        .lntd:last-child pre.chroma:not([contenteditable='true']),
+        .code-wrapper > pre.chroma:not(:has(.ln)) {
+          padding-left: 0;
+        }
+      }
+
+      // add border for non-classic mode
+      &:not([data-mode='classic']) {
+        border: 1px solid fi-var(global-border-color-light);
+      }
+
+      &[data-mode='mac'] {
+        pre.chroma {
+          padding-top: 1.875rem;
+
+          &::after {
+            background: fi-var(mac-red, #fc625d);
+            box-shadow: 20px 0 fi-var(mac-yellow, #fdbc40), 40px 0 fi-var(mac-green, #35cd4b);
+            left: 8px;
+            top: 8px;
+            position: absolute;
+            content: ' ';
+            height: 12px;
+            width: 12px;
+            @include border-radius(full);
+
+            @include dark-mode {
+              @include set-fi-vars((
+                mac-red: #ff5f56,
+                mac-yellow: #febc2e,
+                mac-green: #28c840,
+              ));
+            }
+          }
+        }
+      }
+
+      &[data-mode='simple'] {
+        pre.chroma {
+          padding-block: 0.875rem;
         }
       }
     }
   }
 
-  // line numbers (lineNumbersInTable=false)
-  .ln {
-    padding-right: 0.75rem;
-    display: inline-block;
-    text-align: right;
-    position: sticky;
-    left: 0;
-  }
-  // Line numbers
-  .lnt,
-  .ln {
-    color: fi-var(global-font-secondary-color);
-    user-select: none;
-  }
+  // Code Tabs
+  .code-tabs {
+    margin: 0.5rem 0;
+    background-color: fi-var(code-block-background-color);
+    border: 1px solid fi-var(global-border-color-light);
+    @include border-radius;
 
-  &:not(.code-block) {
-    .lntd:last-child pre.chroma {
-      padding-left: 0;
-    }
-  }
-
-  // code fences blocks wrapped
-  &.code-block {
     &[data-shadow='always'] {
       @include box-shadow(always);
     }
@@ -145,125 +554,118 @@ pre {
       @include box-shadow(hover);
     }
 
-    .code-wrapper {
-      overflow: hidden;
-      height: auto;
-      position: relative;
-      counter-reset: codeNos calc(#{fi-var(line-start)} - 1);
-      transition: height 0.5s ease-out;
-      @include border-radius;
-      @include border-radius;
-      // attr() for arbitrary properties is currently only supported in Chromium-based browsers (see https://caniuse.com/css3-attr);
-      // non-supporting browsers fall back to values set via Hugo templating in render-codeblock.html
-      @include set-fi-vars((
-        max-shown-lines: attr(data-max number, 10),
-        line-start: attr(data-line-start number, 1),
-        line-digit: attr(data-line-digit number, 1),
-      ));
-
-      @include media('reduce-motion') {
-        transition: none;
-      }
+    &:has(.code-block.active .code-expand-btn) {
+      margin-bottom: 1rem;
     }
 
-    // code preview
-    &:has(.code-expand-btn):not(.is-expanded, .is-collapsed) {
-      .code-wrapper {
-        height: calc(1.45em * #{fi-var(max-shown-lines)} + #{fi-var(code-expand-offset, 0.5rem)});
-      }
-      &[data-mode='mac'] .code-wrapper {
-        @include set-fi-var(code-expand-offset, 1.875rem + 0.5rem);
-      }
+    &:has(.code-block.active.line-wrapping) .tabs-actions .line-wrap-btn,
+    &:has(.code-block.active:not(.line-nos-hidden)) .tabs-actions .line-nos-btn,
+    &:has(.code-block.active [contenteditable='true']) .tabs-actions .edit-btn {
+      color: fi-var(global-link-hover-color);
     }
-    
-    .code-header {
+
+    .tabs-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-sizing: border-box;
-      width: 100%;
-      font-family: fi-var(global-font-family);
-      font-weight: bold;
       line-height: 1.4em;
+      font-size: fi-var(code-block-font-size);
       color: fi-var(code-header-color);
       background-color: fi-var(code-header-background-color);
       position: sticky;
-      transition: border-radius 0s;
-      cursor: pointer;
+      border-bottom: 1px solid fi-var(global-border-color);
       @include z-index(base, 1);
       @include border-radius(top);
       @include sticky-top-offset;
 
-      + .code-wrapper {
-        @include border-radius(bottom);
+      .tabs-items {
+        display: flex;
+        overflow-x: auto;
+        position: relative;
+        @include border-radius(top);
 
-        > pre.chroma {
-          @include border-radius(bottom);
-        }
-      }
-
-      .code-title {
-        width: 100%;
-        padding: 0.4rem;
-
-        &::after {
-          padding-left: 0.2rem;
-          content: attr(data-name, fi-var(code-type, 'Code'));
-        }
-
-        // filename for code block
-        &[data-name]::after {
-          @include overflow-wrap(break-word);
-        }
-
-        .arrow {
-          padding: 0 0.2rem;
-          transition: transform 0.2s ease;
-        }
-
-        .title-inner {
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-          background-color: fi-var(code-header-background-color);
-          padding-inline: 1em;
-          max-width: calc(100% - 200px);
+        .before-tabs {
+          padding: 0.4rem 0.6rem;
           white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          @include z-index(base, 2);
+          color: fi-var(global-font-color);
+        }
+
+        .tab-item {
+          padding: 0.4rem 0.8rem;
+          cursor: pointer;
+          font-weight: bold;
+          color: fi-var(global-font-secondary-color);
+          white-space: nowrap;
+          user-select: none;
+          position: relative;
+          @include border-radius;
+
+          &:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            translate: 0 -50%;
+            width: 1px;
+            height: fi-var(code-block-font-size);
+            background-color: fi-var(global-border-color-weight);
+          }
+
+          // hide dividers on both sides of the active tab
+          &.active::after,
+          &:has(+ .tab-item.active)::after {
+            // display: none;
+            background-color: fi-var(global-border-color);
+          }
+
+          @include media('xs') {
+            padding-inline: 0.6rem;
+          }
+        }
+
+        &:not(:has(.tab-item:hover)) .tab-item.active,
+        .tab-item:hover {
+          anchor-name: #{$rootPrefix}tab-hover;
+          color: fi-var(global-font-color);
+        }
+
+        &::before {
+          content: '';
+          position-anchor: #{$rootPrefix}tab-hover;
+          position: absolute;
+          inset: anchor(inside);
+          translate: 2px 2px;
+          width: calc(anchor-size(width) - 0.25rem);
+          height: calc(anchor-size(height) - 0.25rem);
+          box-shadow: inset 0 0 1rem 0.25rem light-dark(#fff, fi-rgba(fi-var(global-font-secondary-color), 0.4));
+          pointer-events: none;
+          transition: 0.3s ease-in-out;
+          @include border-radius;
         }
       }
 
-      .ellipses-btn {
-        display: none;
-        padding: 0.4rem;
-      }
+      .tabs-actions {
+        display: flex;
+        flex-shrink: 0;
 
-      button {
-        padding: 0.4rem;
+        .action-btn {
+          padding: 0.4rem;
 
-        @include media('print') {
-          display: none !important;
-        }
-      }
+          &:hover {
+            color: fi-var(global-link-hover-color);
+          }
 
-      .copy-btn[data-copied] .fa-clone {
-        --fa: "\f00c";
-        font-weight: 900;
-        color: fi-var(global-link-hover-color);
-      }
+          &.copy-btn[data-copied] .fa-clone {
+            --fa: "\f00c";
+            font-weight: 900;
+            color: fi-var(global-link-hover-color);
+          }
 
-      .download-btn[data-downloaded] .fa-download {
-        --fa: "\f1ce";
-        font-weight: 900;
-        color: fi-var(global-link-hover-color);
-      }
-
-      @each $type, $text in $code-type-map {
-        &.language-#{string.to-lower-case($type)} {
-          // e.g., --fi-code-type: "JavaScript";
-          @include set-fi-var(code-type, '"#{$text}"');
+          &.download-btn[data-downloaded] .fa-download {
+            --fa: "\f1ce";
+            font-weight: 900;
+            color: fi-var(global-link-hover-color);
+          }
         }
       }
 
@@ -272,490 +674,61 @@ pre {
       }
     }
 
-    &.line-wrapping .line-wrap-btn,
-    &:not(.line-nos-hidden) .line-nos-btn,
-    .code-header button:hover,
-    &:has([contenteditable='true']) .edit-btn {
-      color: fi-var(global-link-hover-color);
+    .tabs-content {
+      .code-block {
+        display: none;
+        margin: 0;
+        @include border-radius(bottom);
+        @include box-shadow(never);
+
+        &.active {
+          display: block;
+        }
+
+        // hide original header
+        .code-header {
+          display: none;
+        }
+      }
     }
 
     &.is-fullscreen {
       position: fixed;
       inset: 0;
       margin: 0 !important;
-      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
       @include z-index(fixed, 1);
       @include border-radius(0);
 
-      .code-header {
+      .tabs-header {
         top: 0 !important;
-        cursor: default;
         @include border-radius(0);
-
-        .arrow {
-          display: none;
-        }
       }
 
-      .code-wrapper {
-        overflow: auto;
-        // 1.4em for header height, 0.8rem for padding
-        height: calc(100dvh - 1.4em - 0.8rem);
+      .tabs-content {
+        flex: 1;
+        min-height: 0;
+
+        .code-block.active {
+          height: 100%;
+        }
+
+        .code-wrapper {
+          overflow: auto;
+          height: calc(100dvh - 1.4em - 0.8rem);
+        }
       }
 
       .code-expand-btn {
         display: none;
       }
     }
-
-    .code-expand-btn {
-      width: 100%;
-      padding-block: 1rem;
-      text-align: center;
-      position: absolute;
-      bottom: 0;
-      background: linear-gradient(
-        180deg,
-        light-dark(rgba($code-background-color, 0), rgba($code-background-color-dark, 0)) 0%,
-        light-dark(rgba($code-background-color, 0.9), rgba($code-background-color-dark, 0.9)) 60%,
-        light-dark($code-background-color, $code-background-color-dark) 100%
-      );
-      @include z-index(base);
-      @include border-radius(bottom);
-
-      .fa-angles-down {
-        opacity: 0;
-        animation-name: fadeOutDown;
-        animation-duration: 1.5s;
-        animation-iteration-count: infinite;
-        animation-delay: 0.3s;
-        transition: transform 0.2s ease;
-      }
-    }
-
-    .code-copy-btn {
-      @extend .diagram-copy-btn;
-    }
-
-    // classic mode code block collapsed
-    &.is-collapsed {
-      .code-header {
-        transition: border-radius 0.2s ease 0.2s;
-        @include border-radius;
-        @include set-fi-var(
-          code-header-background-color,
-          light-dark(color.adjust($code-header-background-color, $lightness: -1%), color.adjust($code-header-background-color-dark, $lightness: -1%))
-        );
-
-        + .code-wrapper {
-          height: 0;
-        }
-      }
-
-      .arrow {
-        transform: rotate(-90deg);
-      }
-
-      .ellipses-btn {
-        display: inline;
-      }
-
-      .code-header .action-btn,
-      .code-expand-btn {
-        display: none;
-      }
-    }
-
-    // code preview expanded
-    &.is-expanded {
-      margin-bottom: 1rem;
-      &:has([contenteditable='true']) .code-expand-btn {
-        display: none;
-      }
-      .code-expand-btn {
-        background: transparent;
-        padding-block: 0;
-        transform: translateY(1rem);
-
-        .fa-angles-down {
-          animation-name: fadeOutRotate;
-
-          @keyframes fadeOutRotate {
-            0% {
-              opacity: 1;
-              transform: rotate(180deg);
-            }
-            100% {
-              opacity: 0;
-              transform: rotate(180deg) translate3d(0, 100%, 0);
-            }
-          }
-        }
-      }
-    }
-
-    // hide original line numbers
-    &.line-nos-hidden {
-      > .chroma .lntable {
-        width: 100%;
-        overscroll-behavior-x: contain;
-
-        > tbody {
-          display: table;
-          width: 100%;
-        }
-
-        .lntd:last-child {
-          width: 100%;
-        }
-      }
-
-      .lntd:first-child,
-      .ln {
-        display: none;
-      }
-    }
-
-    // line wrapping
-    &.line-wrapping {
-      > .chroma .lntable {
-        width: 100%;
-        display: table;
-
-        // hide original line numbers
-        .lntd:first-child {
-          display: none;
-        }
-      }
-      .lntd:last-child pre.chroma,
-      .code-wrapper > pre.chroma {
-        max-width: 100%;
-        box-sizing: border-box;
-
-        code {
-          text-wrap: wrap;
-          word-break: break-all;
-          overflow-wrap: break-word;
-        }
-      }
-    }
-
-    // line numbers (pseudo-elements) for code blocks
-    &.line-wrapping:not(.line-nos-hidden) .lntd:last-child pre.chroma,
-    &:not(.line-nos-hidden) .code-wrapper > pre.chroma:not(:has(.ln)) {
-      > code > .line {
-        display: flex;
-
-        &::before {
-          counter-increment: codeNos;
-          content: counter(codeNos);
-          white-space: nowrap;
-          text-align: right;
-          min-width: calc(#{fi-var(line-digit)} * 1ch);
-          padding-inline: 0.75rem;
-          flex-shrink: 0;
-          color: fi-var(global-font-secondary-color);
-          background-color: fi-var(code-block-background-color);
-        }
-
-        // highlight for line numbers
-        &.hl::before {
-          background-color: transparent;
-        }
-      }
-    }
-
-    // add sticky effect for line numbers when lineNos=false
-    &:not(.line-nos-hidden) .code-wrapper > pre.chroma > code > .line::before {
-      position: sticky;
-      left: 0;
-    }
-
-    // when line numbers shown
-    &:not(.line-nos-hidden) {
-      .lntd:last-child pre.chroma:not([contenteditable='true']),
-      .code-wrapper > pre.chroma:not(:has(.ln)) {
-        padding-left: 0;
-      }
-    }
-
-    // add border for non-classic mode
-    &:not([data-mode='classic']) {
-      border: 1px solid fi-var(global-border-color-light);
-    }
-
-    &[data-mode='mac'] {
-      pre.chroma {
-        padding-top: 1.875rem;
-
-        &::after {
-          background: fi-var(mac-red, #fc625d);
-          box-shadow: 20px 0 fi-var(mac-yellow, #fdbc40), 40px 0 fi-var(mac-green, #35cd4b);
-          left: 8px;
-          top: 8px;
-          position: absolute;
-          content: ' ';
-          height: 12px;
-          width: 12px;
-          @include border-radius(full);
-
-          @include dark-mode {
-            @include set-fi-vars((
-              mac-red: #ff5f56,
-              mac-yellow: #febc2e,
-              mac-green: #28c840,
-            ));
-          }
-        }
-      }
-    }
-
-    &[data-mode='simple'] {
-      pre.chroma {
-        padding-block: 0.875rem;
-      }
-    }
-  }
-}
-
-@include meta.load-css('code-syntax');
-
-// gist shortcode
-.gist {
-  background-color: fi-var(code-block-background-color);
-  @include border-radius(top);
-  
-  .gist-file,
-  .gist-data,
-  .gist-meta {
-    border: none;
   }
 
-  .gist-data {
-    background-color: inherit;
-
-    .blob-wrapper {
-      padding-block: 0.5rem;
-
-      table.highlight {
-        background-color: inherit;
-        overflow: initial;
-
-        td.blob-num {
-          position: sticky;
-          left: 0;
-          background-color: fi-var(code-block-background-color);
-          @include z-index(base);
-        }
-
-        td.blob-code {
-          padding-left: 2px !important;
-        }
-      }
-    }
+  // prevent transition when code block height changed by fullscreen toggle
+  .instant-height .code-wrapper {
+    transition: height 0s !important;
   }
-
-  .gist-meta {
-    padding: 0.4rem 0.8rem;
-    @include link(false, false);
-    @include border-radius(bottom);
-    background-color: fi-var(gist-meta-background-color);
-  }
-
-  @include dark-mode {
-    @include meta.load-css('code-syntax/github-dark-dimmed');
-  }
-}
-
-// Code Tabs
-.code-tabs {
-  margin: 0.5rem 0;
-  background-color: fi-var(code-block-background-color);
-  border: 1px solid fi-var(global-border-color-light);
-  @include border-radius;
-
-  &[data-shadow='always'] {
-    @include box-shadow(always);
-  }
-
-  &[data-shadow='hover'] {
-    @include box-shadow(hover);
-  }
-
-  &:has(.code-block.active .code-expand-btn) {
-    margin-bottom: 1rem;
-  }
-
-  &:has(.code-block.active.line-wrapping) .tabs-actions .line-wrap-btn,
-  &:has(.code-block.active:not(.line-nos-hidden)) .tabs-actions .line-nos-btn,
-  &:has(.code-block.active [contenteditable='true']) .tabs-actions .edit-btn {
-    color: fi-var(global-link-hover-color);
-  }
-
-  .tabs-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    line-height: 1.4em;
-    font-size: fi-var(code-block-font-size);
-    color: fi-var(code-header-color);
-    background-color: fi-var(code-header-background-color);
-    position: sticky;
-    border-bottom: 1px solid fi-var(global-border-color);
-    @include z-index(base, 1);
-    @include border-radius(top);
-    @include sticky-top-offset;
-
-    .tabs-items {
-      display: flex;
-      overflow-x: auto;
-      position: relative;
-      @include border-radius(top);
-
-      .before-tabs {
-        padding: 0.4rem 0.6rem;
-        white-space: nowrap;
-        color: fi-var(global-font-color);
-      }
-
-      .tab-item {
-        padding: 0.4rem 0.8rem;
-        cursor: pointer;
-        font-weight: bold;
-        color: fi-var(global-font-secondary-color);
-        white-space: nowrap;
-        user-select: none;
-        position: relative;
-        @include border-radius;
-
-        &:not(:last-child)::after {
-          content: '';
-          position: absolute;
-          right: 0;
-          top: 50%;
-          translate: 0 -50%;
-          width: 1px;
-          height: fi-var(code-block-font-size);
-          background-color: fi-var(global-border-color-weight);
-        }
-
-        // hide dividers on both sides of the active tab
-        &.active::after,
-        &:has(+ .tab-item.active)::after {
-          // display: none;
-          background-color: fi-var(global-border-color);
-        }
-
-        @include media('xs') {
-          padding-inline: 0.6rem;
-        }
-      }
-
-      &:not(:has(.tab-item:hover)) .tab-item.active,
-      .tab-item:hover {
-        anchor-name: #{$rootPrefix}tab-hover;
-        color: fi-var(global-font-color);
-      }
-
-      &::before {
-        content: '';
-        position-anchor: #{$rootPrefix}tab-hover;
-        position: absolute;
-        inset: anchor(inside);
-        translate: 2px 2px;
-        width: calc(anchor-size(width) - 0.25rem);
-        height: calc(anchor-size(height) - 0.25rem);
-        box-shadow: inset 0 0 1rem 0.25rem light-dark(#fff, fi-rgba(fi-var(global-font-secondary-color), 0.4));
-        pointer-events: none;
-        transition: 0.3s ease-in-out;
-        @include border-radius;
-      }
-    }
-
-    .tabs-actions {
-      display: flex;
-      flex-shrink: 0;
-
-      .action-btn {
-        padding: 0.4rem;
-
-        &:hover {
-          color: fi-var(global-link-hover-color);
-        }
-
-        &.copy-btn[data-copied] .fa-clone {
-          --fa: "\f00c";
-          font-weight: 900;
-          color: fi-var(global-link-hover-color);
-        }
-
-        &.download-btn[data-downloaded] .fa-download {
-          --fa: "\f1ce";
-          font-weight: 900;
-          color: fi-var(global-link-hover-color);
-        }
-      }
-    }
-
-    @include media('print') {
-      top: initial !important;
-    }
-  }
-
-  .tabs-content {
-    .code-block {
-      display: none;
-      margin: 0;
-      @include border-radius(bottom);
-      @include box-shadow(never);
-
-      &.active {
-        display: block;
-      }
-
-      // hide original header
-      .code-header {
-        display: none;
-      }
-    }
-  }
-
-  &.is-fullscreen {
-    position: fixed;
-    inset: 0;
-    margin: 0 !important;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    @include z-index(fixed, 1);
-    @include border-radius(0);
-
-    .tabs-header {
-      top: 0 !important;
-      @include border-radius(0);
-    }
-
-    .tabs-content {
-      flex: 1;
-      min-height: 0;
-
-      .code-block.active {
-        height: 100%;
-      }
-
-      .code-wrapper {
-        overflow: auto;
-        height: calc(100dvh - 1.4em - 0.8rem);
-      }
-    }
-
-    .code-expand-btn {
-      display: none;
-    }
-  }
-}
-
-// prevent transition when code block height changed by fullscreen toggle
-.instant-height .code-wrapper {
-  transition: height 0s !important;
 }

@@ -1,52 +1,9 @@
-@use "sass:meta";
-@use "core/functions" as *;
-@use "core/mixins" as *;
-
-.page {
-  padding-inline: 0.5rem;
-  box-sizing: border-box;
-
-  .content {
-    [id] {
-      scroll-margin-top: fi-var(scroll-margin-top, 0.5rem);
-
-      @include media('sm', 'up') {
-        [data-header-desktop='sticky'] &,
-        [data-header-desktop='auto'] & {
-          @include set-fi-var(scroll-margin-top, calc(#{fi-var(header-height)} + 0.5rem));
-        }
-
-        [data-header-desktop='sticky']:has(.breadcrumb-container.sticky) &,
-        [data-header-desktop='auto']:has(.breadcrumb-container.sticky) & {
-          @include set-fi-var(scroll-margin-top, calc(#{fi-var(header-height)} + #{fi-var(breadcrumb-height, 0px)} + 0.5rem));
-        }
-      }
-
-      @include media('xs') {
-        [data-header-mobile='sticky'] &,
-        [data-header-mobile='auto'] & {
-          @include set-fi-var(scroll-margin-top, calc(#{fi-var(header-height)} + 0.5rem));
-        }
-
-        [data-header-mobile='sticky']:has(.breadcrumb-container.sticky) &,
-        [data-header-mobile='auto']:has(.breadcrumb-container.sticky) & {
-          @include set-fi-var(scroll-margin-top, calc(#{fi-var(header-height)} + #{fi-var(breadcrumb-height, 0px)} + 0.5rem));
-        }
-      }
-    }
-  }
-
-  @include media('print') {
-    width: 100% !important;
-    padding-top: 0 !important;
-  }
-}
-
-@include meta.load-css('single');
-@include meta.load-css('specials');
-@include meta.load-css('archives');
-@include meta.load-css('404');
-@include meta.load-css('home');
-@include meta.load-css('link');
-@include meta.load-css('offline');
-@include meta.load-css("patch");
+@use "base";
+@use "single";
+@use "specials";
+@use "archives";
+@use "404" as page404;
+@use "home";
+@use "link";
+@use "offline";
+@use "patch";

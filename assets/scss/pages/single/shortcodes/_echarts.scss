@@ -1,6 +1,6 @@
 @use "core/mixins" as *;
 
-.echarts {
+.single .echarts {
   text-align: center;
 
   &:not([_echarts_instance_])::before {

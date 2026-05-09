@@ -1,9 +1,8 @@
+// Card link style
 @use "core/functions" as *;
 @use "core/mixins" as *;
 
-/// Card link style
-/// @author @Lruihao https://lruihao.cn
-.card-link {
+.single .card-link {
   position: relative;
   display: block;
   margin: 0.5rem auto;

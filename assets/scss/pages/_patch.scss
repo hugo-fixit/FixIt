@@ -1,6 +1,5 @@
+// Resolve style conflicts between third-party plugins
 @use "override" as *;
-
-/* Resolve style conflicts between third-party plugins */
 
 @keyframes #{$prefix}pulse {
   from {
@@ -24,4 +23,9 @@
 // fix ZenUML intersection height error
 #zenuml-intersection-detector-container {
   display: none;
+}
+
+// lightgallery
+.lg-toolbar .lg-download:after {
+  color: #999;
 }

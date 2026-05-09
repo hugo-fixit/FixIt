@@ -144,7 +144,6 @@
   code-header-color: (light: $code-header-color, dark: $code-header-color-dark),
   code-header-background-color: (light: $code-header-background-color, dark: $code-header-background-color-dark),
   code-highlight-color: (light: $code-highlight-color, dark: $code-highlight-color-dark),
-  gist-meta-background-color: (light: color.adjust($code-background-color, $lightness: -5%), dark: color.adjust($code-background-color-dark, $lightness: -5%)),
 ));
 
 // Third-party component theme colors (extensions and plugins)

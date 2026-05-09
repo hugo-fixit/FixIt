@@ -3,7 +3,7 @@
 @use "core/mixins" as *;
 @use "core/maps" as maps;
 
-.alert {
+.single .alert {
   padding: 0.5rem 1rem;
   margin-block: 1rem;
   color: inherit;

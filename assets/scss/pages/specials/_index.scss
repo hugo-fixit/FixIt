@@ -5,7 +5,7 @@
   .single-subtitle {
     text-align: right;
   }
-}
 
-@include meta.load-css('friends');
-@include meta.load-css('search');
+  @include meta.load-css('friends');
+  @include meta.load-css('search');
+}

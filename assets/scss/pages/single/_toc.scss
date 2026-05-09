@@ -15,7 +15,7 @@
     font-size: fi-var(toc-content-font-size);
 
     code {
-      @include inline-code();
+      @include inline-code;
     }
 
     ul {

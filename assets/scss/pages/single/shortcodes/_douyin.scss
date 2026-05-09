@@ -1,6 +1,6 @@
 @use "core/mixins" as *;
 
-.douyin {
+.single .douyin {
   position: relative;
   width: 100%;
   height: 0;
@@ -15,10 +15,9 @@
     left: 0;
     top: 0;
   }
-}
 
-@include media('xs') {
-  .douyin {
+  // [todo] get width and height from api
+  @include media('xs') {
     width: 92%;
     margin-inline: 4%;
     padding-bottom: 190%;
