@@ -1,49 +1,24 @@
 @use "core/mixins" as *;
 
-%page-style {
+@include page-style;
+
+@include page-style('wide') {
   @include media('xl') {
-    width: ROUND(60%, 2px);
-    max-width: 1200px;
+    width: ROUND(64%, 2px);
+    max-width: 1600px;
   }
 
   @include media('lg') {
-    width: ROUND(56%, 2px);
+    width: ROUND(60%, 2px);
   }
 
   @include media('md') {
-    width: ROUND(52%, 2px);
-  }
-
-  @include media('sm') {
-    width: ROUND(80%, 2px);
-  }
-
-  @include media('xs') {
-    width: 100%;
+    width: ROUND(56%, 2px);
   }
 }
 
-[data-page-style='wide'] {
-  %page-style {
-    @include media('xl') {
-      width: ROUND(64%, 2px);
-      max-width: 1600px;
-    }
-
-    @include media('lg') {
-      width: ROUND(60%, 2px);
-    }
-
-    @include media('md') {
-      width: ROUND(56%, 2px);
-    }
-  }
-}
-
-[data-page-style='narrow'] {
-  %page-style {
-    @include media('xl') {
-      max-width: 800px;
-    }
+@include page-style('narrow') {
+  @include media('xl') {
+    max-width: 800px;
   }
 }

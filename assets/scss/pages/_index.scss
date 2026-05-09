@@ -1,12 +1,10 @@
 @use "sass:meta";
 @use "core/functions" as *;
-@use "core/layouts/page-style";
 @use "core/mixins" as *;
 
 .page {
   padding-inline: 0.5rem;
   box-sizing: border-box;
-  @extend %page-style;
 
   .content {
     [id] {

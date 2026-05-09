@@ -1,0 +1,54 @@
+@use "media" as *;
+
+/// Page style helper for setting responsive content width.
+///
+/// This mixin has two modes:
+/// 1) Default mode (no arguments): emits the base page-style rules for all built-in targets.
+/// 2) Variant mode (pass $variant): emits rules under `[data-page-style='$variant']` for the same targets.
+///
+/// @param {String | Null} $variant - Variant name (e.g. wide/narrow/custom). When null, emit defaults.
+///
+/// @example
+///   // Theme internal: emit default rules
+///   @include page-style;
+///
+///   // Theme internal: emit a built-in variant
+///   @include page-style('wide') { ... }
+///   @include page-style('narrow') { ... }
+///
+///   // User custom: add a custom variant without caring about internal selectors
+///   @include page-style('custom') {
+///     @include media('xl') { width: ROUND(70%, 2px); }
+///   }
+@mixin page-style($variant: null) {
+  $target: ':is(main > .page, .breadcrumb-container > .breadcrumb, #comments > .comment)';
+
+  @if $variant == null {
+    @at-root #{$target} {
+      @include media('xl') {
+        width: ROUND(60%, 2px);
+        max-width: 1200px;
+      }
+
+      @include media('lg') {
+        width: ROUND(56%, 2px);
+      }
+
+      @include media('md') {
+        width: ROUND(52%, 2px);
+      }
+
+      @include media('sm') {
+        width: ROUND(80%, 2px);
+      }
+
+      @include media('xs') {
+        width: 100%;
+      }
+    }
+  } @else {
+    @at-root [data-page-style='#{$variant}'] #{$target} {
+      @content;
+    }
+  }
+}
