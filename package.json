@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.4.5",
   "private": true,
-  "packageManager": "pnpm@10.33.0",
+  "packageManager": "pnpm@11.0.9",
   "description": "Hugo FixIt core theme component source files",
   "author": {
     "name": "Lruihao",
@@ -42,16 +42,16 @@
     "prepare": "simple-git-hooks"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^7.7.3",
-    "@types/node": "^25.5.0",
+    "@antfu/eslint-config": "^8.2.0",
+    "@types/node": "^25.6.2",
     "auto-changelog-plus": "^1.2.3",
     "concurrently": "^9.2.1",
     "eslint": "^10.0.3",
-    "lint-staged": "^16.4.0",
+    "lint-staged": "^17.0.4",
     "serve": "^14.2.6",
     "simple-git-hooks": "^2.13.1",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.3"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm -F versioning start dev && pnpm lint-staged"

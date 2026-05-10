@@ -77,5 +77,6 @@ export function updateVersion(type: 'dev' | 'prod') {
       execFileSync('git', ['add', stageFile])
     }
   })
+  // console.log('Node.js:', process.version)
   console.log(`Update the FixIt version from v${lastVersion} to v${latestVersion}.`)
 }
