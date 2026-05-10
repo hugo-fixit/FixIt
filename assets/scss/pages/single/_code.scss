@@ -3,9 +3,9 @@
 @use "sass:string";
 @use "core/functions" as *;
 @use "core/mixins" as *;
-@use "pages/single/diagram-copy-btn";
 @use "override" as *;
 @use "code-syntax";
+@use "copy-icon-btn";
 
 .single {
   // inline code
@@ -354,8 +354,10 @@
         }
       }
 
-      .code-copy-btn {
-        @extend .diagram-copy-btn;
+      .copy-icon-btn {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
       }
 
       // classic mode code block collapsed

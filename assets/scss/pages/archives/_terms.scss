@@ -1,4 +1,3 @@
-@use "core/common";
 @use "core/functions" as *;
 @use "core/mixins" as *;
 
@@ -69,5 +68,5 @@
   text-align: right;
   color: fi-var(global-font-secondary-color);
   white-space: nowrap;
-  @extend .variant-numeric;
+  font-variant-numeric: tabular-nums lining-nums;
 }

@@ -463,6 +463,17 @@
       @include border-radius;
     }
 
+    .diagram-container {
+      position: relative;
+      margin-block: 0.5rem;
+
+      > .copy-icon-btn {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+      }
+    }
+
     // KaTeX styles
     .katex-display {
       max-width: 100%;
@@ -502,35 +513,6 @@
 
     json-viewer[boxed] + json-viewer[boxed] {
       margin-top: 0.5rem;
-    }
-
-    @include media('lg', 'up') {
-      :is(.code-block, .diagram-container) {
-        :is(.code-copy-btn, .diagram-copy-btn) {
-          display: none;
-          opacity: 0;
-          transform: scale(0.9);
-          transition:
-            display 0.25s allow-discrete,
-            opacity 0.25s,
-            transform 0.25s,
-            color 0.1s,
-            background-color 0.1s,
-            box-shadow 0.1s,
-            border-color 0.1s;
-        }
-        &:hover {
-          :is(.code-copy-btn, .diagram-copy-btn) {
-            display: block;
-            opacity: 1;
-            transform: scale(1);
-            @starting-style {
-              opacity: 0;
-              transform: scale(0.9);
-            }
-          }
-        }
-      }
     }
   }
 }

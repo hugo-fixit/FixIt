@@ -10,7 +10,7 @@ function initLinkGuard() {
   const params = new URLSearchParams(window.location.search);
   const target = params.get('target');
   const targetElement = document.querySelector('.target');
-  const copyBtn = document.querySelector('.copy-btn');
+  const copyBtn = document.querySelector('.copy-icon-btn');
   const confirmBtn = document.querySelector('.confirm-btn');
 
   if (target) {
