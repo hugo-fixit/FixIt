@@ -77,6 +77,7 @@
 {{- end -}}
 
 {{- /* Favicon links */ -}}
+{{/* [todo] 先判断有图片资源时才加载，没有时提示引导 https://realfavicongenerator.net/  */}}
 {{- if not .Site.Params.app.noFavicon -}}
   {{- $relURL := relURL "" -}}
   {{- with .Site.Params.app.svgFavicon -}}

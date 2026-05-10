@@ -16,6 +16,9 @@ node_modules/
 !.vscode/extensions.json
 !.vscode/settings.json
 
+# Trae
+.trae/
+
 # OS Files
 ## Windows
 Thumbs.db

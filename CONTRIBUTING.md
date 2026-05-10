@@ -135,6 +135,13 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 |___________________ Type: Indicates the kind of change.
 ```
 
+> [!NOTE]
+>
+> - Keep the subject line concise and ideally within 72 characters.
+> - If the change is more than a sentence, add a body.
+> - Do not include secrets (tokens/keys) or personal data in commit messages.
+> - Do not invent issue/PR numbers or facts that are not present in the diff.
+
 ### Allowed Types
 
 - `feat`: A new feature.

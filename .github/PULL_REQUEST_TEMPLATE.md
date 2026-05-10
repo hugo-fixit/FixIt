@@ -1,13 +1,15 @@
-<!-- Thank you for contributing! -->
+<!--
+Thank you for contributing!
+
+Before submitting the PR, please make sure you do the following:
+
+- Read the [Contributing Guidelines](https://github.com/hugo-fixit/FixIt/blob/main/CONTRIBUTING.md).
+- Provide a description in this PR that addresses **what** the PR is solving. If this PR is going to solve an existing issue, please reference the issue (e.g. `close #123`).
+-->
 
 ### Description
 
 <!-- Please insert your description here and provide especially info about the "what" this PR is solving -->
-
-### Before submitting the PR, please make sure you do the following <!-- (put an "X" next to an item) -->
-
-- [ ] Read the [Contributing Guidelines](https://github.com/hugo-fixit/FixIt/blob/main/CONTRIBUTING.md).
-- [ ] Provide a description in this PR that addresses **what** the PR is solving. If this PR is going to solve an existing issue, please reference the issue (e.g. `close #123`).
 
 ### What is the purpose of this pull request? <!-- (put an "X" next to an item) -->
 
