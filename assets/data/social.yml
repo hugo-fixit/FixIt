@@ -17,7 +17,7 @@ linkedin:
 # 003: Twitter (X)
 twitter:
   Weight: 3
-  Prefix: https://twitter.com/
+  Prefix: https://x.com/
   Title: X
   Icon:
     Class: fa-brands fa-x-twitter
