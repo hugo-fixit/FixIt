@@ -5,6 +5,7 @@ export default antfu({
   ignores: [
     'node_modules/**',
     'assets/lib/**',
+    'assets/js/lib/mermaid.js',
     'public/**',
     'layouts/**/*.json',
     'layouts/**/*.xml',
