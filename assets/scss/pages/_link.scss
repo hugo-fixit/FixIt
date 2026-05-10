@@ -1,3 +1,7 @@
+// link guard intermediate page
+@use "core/functions" as *;
+@use "core/mixins" as *;
+
 #content-link {
   align-self: center;
 

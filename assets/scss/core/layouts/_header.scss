@@ -1,3 +1,7 @@
+@use "core/functions" as *;
+@use "core/mixins" as *;
+@use "override" as *;
+
 $header-box-shadow: 0 0 1.5rem 0 light-dark(rgba(0, 0, 0, 0.125), rgba(255, 255, 255, 0.125));
 
 header {
@@ -10,12 +14,12 @@ header {
     box-shadow: $header-box-shadow;
   }
 
-  @include scroll-state-query('scroller scroll-state(scrollable: top)') {
+  @include scroll-state-query('scroller', 'scroll-state(scrollable: top)') {
     box-shadow: $header-box-shadow;
   }
 
   &.blur {
-    @include scroll-state-query('scroller scroll-state(scrollable: top)', '&') {
+    @include scroll-state-query('scroller', 'scroll-state(scrollable: top)', '&') {
       background-color: transparent;
       backdrop-filter: saturate(1.2) blur(10px);
       background-size: 4px 4px;

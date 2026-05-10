@@ -1,6 +1,9 @@
 // ========================================
 // Theme Variable Mixins and Functions
 // ========================================
+@use "sass:color";
+@use "sass:map";
+@use "override" as *;
 
 /// Set a single CSS variable
 /// @param {String} $name - CSS variable name (without prefix)
@@ -60,7 +63,7 @@
   // Light/Dark in one declaration (driven by color-scheme)
   @at-root :root {
     @each $name, $value in $theme-colors {
-      #{$rootPrefix}#{$name}: light-dark(#{$value}, #{darken($value, 5%)});
+      #{$rootPrefix}#{$name}: light-dark(#{$value}, #{color.adjust($value, $lightness: -5%)});
     }
   }
 }
@@ -75,7 +78,7 @@
   // Light/Dark in one declaration (driven by color-scheme)
   @at-root :root {
     @each $name, $values in $vars {
-      #{$rootPrefix}#{$name}: light-dark(#{map-get($values, light)}, #{map-get($values, dark)});
+      #{$rootPrefix}#{$name}: light-dark(#{map.get($values, light)}, #{map.get($values, dark)});
     }
   }
 }

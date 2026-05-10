@@ -1,0 +1,68 @@
+@use "sass:color";
+@use "core/functions" as *;
+@use "core/mixins" as *;
+
+.copy-icon-btn {
+  box-sizing: content-box;
+  width: 1rem;
+  height: 1rem;
+  line-height: 1;
+  padding: 0.5rem;
+  border: 1px solid fi-var(global-border-color);
+  color: light-dark(#25292e, #d1d7e0);
+  background-color: light-dark(#f6f8fa, #2a313c);
+  user-select: none;
+  @include border-radius;
+  @include z-index(base);
+
+  &:hover {
+    background-color: light-dark(
+      color.adjust(#f6f8fa, $lightness: -3%),
+      color.adjust(#2a313c, $lightness: -3%)
+    );
+  }
+
+  .fa-clone {
+    font-size: 1rem;
+  }
+
+  &[data-copied] .fa-clone {
+    --fa: "\f00c";
+    --fa-style: 900;
+    color: fi-var(global-link-hover-color);
+  }
+
+  @include media('print') {
+    display: none !important;
+  }
+}
+
+.single .content {
+  @include media('lg', 'up') {
+    :is(.code-block, .diagram-container) {
+      .copy-icon-btn {
+        display: none;
+        opacity: 0;
+        transform: scale(0.9);
+        transition:
+          display 0.25s allow-discrete,
+          opacity 0.25s,
+          transform 0.25s,
+          color 0.1s,
+          background-color 0.1s,
+          box-shadow 0.1s,
+          border-color 0.1s;
+      }
+      &:hover .copy-icon-btn {
+        display: block;
+        opacity: 1;
+        transform: scale(1);
+
+        @starting-style {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+      }
+    }
+  }
+}

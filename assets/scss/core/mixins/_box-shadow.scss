@@ -1,3 +1,5 @@
+@use "core/functions" as *;
+
 /// Mixin to apply box-shadow with timing control
 /// @param {String} $when - When to show shadow: always | hover | never (default: always)
 /// @param {List} $shadow - The box-shadow value

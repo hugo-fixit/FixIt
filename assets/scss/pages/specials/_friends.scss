@@ -1,6 +1,7 @@
 // Style of layout friends
+@use "core/mixins" as *;
 
-.special.friends {
+&.friends {
   .friend-links {
     margin-top: 1rem;
     display: flex;

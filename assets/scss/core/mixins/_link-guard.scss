@@ -1,3 +1,7 @@
+@use "core/functions" as *;
+@use "border-radius" as *;
+@use "media" as *;
+
 /// Shared styles for link guard content blocks.
 /// Keep this as the single source of truth for both link page card and guard dialog body.
 @mixin link-guard-content {
@@ -41,24 +45,9 @@
     @include border-radius;
   }
 
-  .copy-btn {
-    box-sizing: content-box;
-    width: 1rem;
-    height: 1rem;
+  .copy-icon-btn {
     flex-shrink: 0;
-    padding: 0.5rem;
-    line-height: 1;
     background: light-dark(#f8fafc, #171b25);
-    border: 1px solid fi-var(global-border-color);
-    color: fi-var(global-font-secondary-color);
-    user-select: none;
-    @include border-radius;
-
-    &[data-copied] .fa-clone {
-      --fa: "\f00c";
-      font-weight: 900;
-      color: fi-var(global-link-hover-color);
-    }
   }
 
   .actions {

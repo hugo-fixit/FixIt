@@ -4,7 +4,8 @@
 /// styles targeting irrelevant browsers while applying new styles.
 ///
 /// Normalize is licensed MIT. https://github.com/necolas/normalize.css
-
+@use "functions" as *;
+@use "mixins" as *;
 
 // 1. Correct the line height in all browsers.
 
@@ -339,19 +340,6 @@ dialog {
 
 ::selection {
   background-color: fi-var(selection-color);
-}
-
-%code {
-  padding: 0.2em 0.4em;
-  margin: 0;
-  font-size: fi-var(code-font-size);
-  line-height: fi-var(code-font-size);
-  font-family: fi-var(code-font-family);
-  color: fi-var(code-color);
-  background-color: fi-var(code-inline-background-color);
-  text-decoration: inherit;
-  @include border-radius;
-  @include overflow-wrap(break-word);
 }
 
 @include link(true, true);

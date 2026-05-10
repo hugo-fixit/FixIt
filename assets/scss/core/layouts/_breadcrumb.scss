@@ -1,5 +1,8 @@
+@use "core/functions" as *;
+@use "core/mixins" as *;
+
 .breadcrumb-container {
-  padding-inline: 1rem;
+  padding-inline: 0.5rem;
   font-size: 0.75rem;
   background-color: fi-var(global-background-color);
   display: flex;
@@ -53,13 +56,13 @@
   .breadcrumb {
     display: flex;
     flex-wrap: nowrap;
-    padding: 0.5rem 2px;
+    padding: 0.5rem;
     margin: 0 auto;
     list-style: none;
     box-shadow: inset 0 -1px 0 fi-var(global-border-color);
     overflow-x: auto;
     overflow-y: hidden;
-    @extend %page-style;
+    box-sizing: border-box;
 
     .breadcrumb-item {
       display: flex;

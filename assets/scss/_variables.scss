@@ -3,6 +3,8 @@
 // Note: These SCSS variables are now also defined as CSS custom properties
 // in _core/_root.scss for runtime theme switching and runtime customization.
 // ==========================================================================
+@forward "core/maps";
+@use "sass:color";
 
 // ========== Global ========== //
 $prefix: fi- !default;
@@ -30,8 +32,8 @@ $global-font-secondary-color: #8b949e !default;
 $global-font-secondary-color-dark: #7d8792 !default;
 
 // Color of the tertiary text
-$global-font-tertiary-color: lighten($global-font-secondary-color, 12%) !default;
-$global-font-tertiary-color-dark: darken($global-font-secondary-color-dark, 12%) !default;
+$global-font-tertiary-color: color.adjust($global-font-secondary-color, $lightness: 12%) !default;
+$global-font-tertiary-color-dark: color.adjust($global-font-secondary-color-dark, $lightness: -12%) !default;
 
 // Color of the link
 $global-link-color: #161209 !default;
@@ -135,7 +137,7 @@ $blockquote-color-dark: #9ba3aa !default;
 
 // Color of reward
 $reward-color: tomato !default;
-$reward-color-dark: darken($reward-color, 5%) !default;
+$reward-color-dark: color.adjust($reward-color, $lightness: -5%) !default;
 
 // Width of reward image
 $reward-img-width: 180px !default;
@@ -192,5 +194,3 @@ $github-corner-color-dark: black !default;
 $github-corner-fill: $header-background-color-dark !default;
 $github-corner-fill-dark: $header-background-color !default;
 // ========== GitHub Corners ========== //
-
-@import 'core/maps';

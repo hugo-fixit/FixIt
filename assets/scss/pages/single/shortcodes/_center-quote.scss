@@ -1,4 +1,6 @@
-blockquote.blockquote-center {
+@use "core/functions" as *;
+
+.single blockquote.blockquote-center {
   border-left: none;
   margin: 40px 0;
   padding: 0;

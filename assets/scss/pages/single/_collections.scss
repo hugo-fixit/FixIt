@@ -1,11 +1,16 @@
+@use "sass:color";
+@use "core/functions" as *;
+@use "core/mixins" as *;
+@use "override" as *;
+
 // Collection Navigation
-.collection-card {
+.single .collection-card {
   font-size: 0.875rem;
   margin-block: 1rem;
   padding: 1rem 1.25rem;
   position: relative;
   user-select: none;
-  background-color: light-dark(darken($global-background-color, 4%), lighten($global-background-color-dark, 4%));
+  background-color: light-dark(color.adjust($global-background-color, $lightness: -4%), color.adjust($global-background-color-dark, $lightness: 4%));
   @include border-radius(0.5rem);
 
   &:has(.collection-nav-item:nth-child(2))::before {
@@ -99,7 +104,7 @@
 
   &.open {
     .collection-summary {
-      background-color: light-dark(darken($global-background-color, 5%), lighten($global-background-color-dark, 5%));
+      background-color: light-dark(color.adjust($global-background-color, $lightness: -5%), color.adjust($global-background-color-dark, $lightness: 5%));
     }
   }
 
@@ -109,7 +114,7 @@
     gap: 0.25em;
     padding: 0.2em 0.5em;
     user-select: none;
-    background-color: light-dark(darken($global-background-color, 5%), lighten($global-background-color-dark, 5%));
+    background-color: light-dark(color.adjust($global-background-color, $lightness: -5%), color.adjust($global-background-color-dark, $lightness: 5%));
 
     > i.fa-layer-group {
       flex-shrink: 0;
@@ -137,7 +142,7 @@
 
   .collection-content {
     font-size: fi-var(collection-list-font-size);
-    background-color: light-dark(darken($global-background-color, 3%), lighten($global-background-color-dark, 3%));
+    background-color: light-dark(color.adjust($global-background-color, $lightness: -3%), color.adjust($global-background-color-dark, $lightness: 3%));
 
     .collection-list {
       margin: 0;
@@ -175,7 +180,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.5em;
-      background-color: light-dark(darken($global-background-color, 5%), lighten($global-background-color-dark, 5%));
+      background-color: light-dark(color.adjust($global-background-color, $lightness: -5%), color.adjust($global-background-color-dark, $lightness: 5%));
 
       a.collection-nav-item {
         padding-inline: 2px;
@@ -183,7 +188,7 @@
         transition: background-color 0.3s ease-out;
 
         &:hover {
-          background-color: light-dark(darken($global-background-color, 10%), lighten($global-background-color-dark, 10%));
+          background-color: light-dark(color.adjust($global-background-color, $lightness: -10%), color.adjust($global-background-color-dark, $lightness: 10%));
         }
       }
 

@@ -13,7 +13,7 @@ tags:
 
 The FixIt theme supports two ways to use Mermaid: code block syntax and shortcode syntax.
 
-```mermaid
+```mermaid {wrapper=false}
 ---
 config:
   theme: 'forest'

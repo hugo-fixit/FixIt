@@ -1,3 +1,5 @@
+@use "override" as *;
+
 // Shared defaults for theme-switch icon motion.
 // Keep them overridable so other entries can reuse the same mixin with different pacing.
 $theme-switch-animation-duration: 0.5s !default;

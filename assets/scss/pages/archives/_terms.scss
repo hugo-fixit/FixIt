@@ -1,3 +1,6 @@
+@use "core/functions" as *;
+@use "core/mixins" as *;
+
 .taxonomy-cards {
   margin: 0 auto;
   display: flex;
@@ -65,5 +68,5 @@
   text-align: right;
   color: fi-var(global-font-secondary-color);
   white-space: nowrap;
-  @extend .variant-numeric;
+  font-variant-numeric: tabular-nums lining-nums;
 }

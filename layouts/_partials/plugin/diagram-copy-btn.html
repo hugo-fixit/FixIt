@@ -4,7 +4,9 @@
 */ -}}
 
 {{- $label := .Label | default "Copy Diagram code" -}}
+{{- $copyToClipboard := T "assets.copyToClipboard" -}}
+{{- $copiedText := T "assets.copiedText" -}}
 
-<button type="button" class="diagram-copy-btn" aria-label="{{ $label }}">
+<button type="button" class="copy-icon-btn" aria-label="{{ $label }}" title="{{ $copyToClipboard }}" data-copied-text="{{ $copiedText }}">
   {{- dict "Class" "fa-regular fa-clone fa-width-auto" | partial "plugin/icon.html" -}}
 </button>

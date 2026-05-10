@@ -1,3 +1,6 @@
+@use "sass:string";
+@use "override" as *;
+
 /// Get CSS variable with prefix
 /// @param {String} $name - CSS variable name (without prefix)
 /// @param {*} $fallback - Optional fallback value
@@ -5,10 +8,10 @@
 /// @example
 ///   color: fi-var(global-font-color);
 ///   background: fi-var(custom-bg, #fff);
-@function fi-var($name, $fallback: null) {
-	@if $fallback {
-		@return var(#{$rootPrefix}#{$name}, #{$fallback});
-	} @else {
-		@return var(#{$rootPrefix}#{$name});
-	}
+@function var($name, $fallback: null) {
+  @if $fallback != null {
+    @return string.unquote("var(#{$rootPrefix}#{$name}, #{$fallback})");
+  }
+
+  @return string.unquote("var(#{$rootPrefix}#{$name})");
 }

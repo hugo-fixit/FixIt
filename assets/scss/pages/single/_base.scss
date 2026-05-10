@@ -1,0 +1,518 @@
+@use "sass:color";
+@use "core/functions" as *;
+@use "core/mixins" as *;
+@use "override" as *;
+
+.single {
+  .single-title {
+    padding: 1rem 0 0.5rem;
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: bold;
+    line-height: 140%;
+
+    .icon-pin {
+      display: inline-block;
+      width: max-content;
+      transform: rotate(30deg);
+      margin-right: 0.25em;
+      color: fi-var(danger);
+    }
+
+    .icon-repost {
+      display: inline-block;
+      width: max-content;
+      margin-right: 0.25em;
+      color: fi-var(success);
+    }
+
+    @include media('print') {
+      text-align: center;
+    }
+  }
+
+  .single-subtitle {
+    margin-block: 0 0.5rem;
+    font-size: 1.2rem;
+    font-weight: normal;
+    line-height: 1.15;
+
+    @include media('print') {
+      text-align: center;
+    }
+  }
+
+  .post-meta {
+    font-size: 0.875rem;
+    color: fi-var(global-font-secondary-color);
+
+    span {
+      display: inline-block;
+    }
+
+    @include link(false, true);
+
+    .author {
+      font-size: 1.05rem;
+
+      img.avatar {
+        width: 1.3rem;
+        height: 1.3rem;
+        vertical-align: text-bottom;
+        border: 0.25px solid fi-var(global-border-color);
+        box-sizing: border-box;
+        object-position: center;
+        @include border-radius(full);
+        object-fit: cover;
+      }
+    }
+
+    @include media('print') {
+      text-align: center;
+
+      .comment-visitors,
+      .comment-count {
+        display: none;
+      }
+    }
+  }
+
+  .featured-image {
+    margin: 1rem 0;
+
+    img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+  }
+
+  #content[data-end-flag]:not([data-password])::after {
+    content: attr(data-end-flag);
+    display: block;
+    text-align: center;
+    font-size: 0.875em;
+    padding: 0.25rem;
+    color: fi-var(global-font-tertiary-color);
+    opacity: 0.8;
+  }
+
+  hr {
+    position: relative;
+    height: 1em;
+    margin-block: 1em;
+    background-image: linear-gradient(to right, fi-var(global-border-color) 50%, transparent 50%);
+    background-size: 10px 2px;
+    background-position: center;
+    background-repeat: repeat-x;
+    border: none;
+
+    &.awesome-hr {
+      &::before {
+        display: inline-block;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        position: absolute;
+        left: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+        color: fi-var(hr-active-color);
+        font-size: 20px;
+        line-height: 1;
+        transition: left 1s ease-in-out, color 0.3s ease, border-color 0.3s ease;
+        font-family: var(--fa-family-classic);
+        font-weight: 600;
+        content: '\f0c4';
+        @include z-index(base);
+      }
+    
+      &:hover::before {
+        left: calc(95% - 20px);
+      }
+    }
+  }
+
+  .content {
+    margin-block: 1rem;
+
+    > h1,
+    > h2 {
+      font-size: 1.5em;
+      padding-bottom: 0.3em;
+      border-bottom: 1px solid fi-var(global-border-color-light);
+    }
+
+    > h3 {
+      font-size: 1.25em;
+    }
+
+    > h4 {
+      font-size: 1em;
+    }
+
+    > h5 {
+      font-size: 0.875em;
+    }
+
+    > h6 {
+      font-size: 0.85em;
+    }
+
+    .heading-element {
+      display: flex;
+      font-weight: bold;
+      line-height: 1.25;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: light-dark(bold, bolder);
+
+      &:hover,
+      &:target {
+        > .heading-mark {
+          opacity: 1;
+        }
+      }
+
+      > .heading-mark {
+        display: inline-flex;
+        align-items: center;
+        opacity: 0;
+        padding-inline: 0.5rem;
+        transition: all 0.2s ease-in-out;
+        @include link(false, false);
+
+        svg {
+          fill: currentColor;
+        }
+      }
+    }
+
+    p {
+      margin: 0.5rem 0;
+    }
+
+    b,
+    strong {
+      @include bold-dark;
+    }
+
+    @include link(false, false);
+
+    a {
+      white-space: normal;
+      @include overflow-wrap(break-word);
+
+      b,
+      strong {
+        color: inherit;
+      }
+    }
+
+    > ul,
+    > ol,
+    > dl {
+      margin-block: 0.5em;
+    }
+
+    :is(ol, ul) :is(ol, ul) {
+      padding-left: 20px;
+    }
+
+    li::marker {
+      color: fi-var(secondary);
+    }
+    li:hover::marker {
+      color: fi-var(single-link-hover-color);
+    }
+
+    // Task lists
+    li {
+      &[data-task] {
+        list-style: none;
+        @include task-icon {
+          margin: 0 0.25em 0 -1.5em;
+          color: fi-var(task-icon-color, fi-var(secondary));
+        };
+        @include task-text {
+          color: fi-var(task-text-color);
+        }
+      }
+      
+      &[data-task='x'] {
+        @include task-icon {
+          background-color: fi-rgba(fi-var(secondary), 0.2);
+          mask-image: linear-gradient(#000, #000);
+          mask-size: 0.875em 0.875em;
+          mask-repeat: no-repeat;
+          mask-position: center;
+        };
+      }
+
+      &[data-task='-'] {
+        @include task-icon {
+          opacity: 0.7;
+        };
+        @include task-text(fi-var(secondary)) {
+          opacity: 0.7;
+          text-decoration: line-through fi-var(secondary);
+        }
+      }
+
+      &[data-task='/'] {
+        @include task-icon(fi-var(success));
+        @include task-text(fi-var(success));
+      }
+
+      &[data-task='!'],
+      &[data-task='!x'] {
+        @include task-icon(fi-var(danger));
+      }
+
+      &[data-task='?'] {
+        @include task-icon(fi-var(warning));
+      }
+    }
+
+    dl {
+      dt {
+        font-weight: bold;
+      }
+      dd {
+        margin: 0.25em 0 1em;
+      }
+    }
+
+    ruby {
+      background-color: fi-var(code-block-background-color);
+
+      rt {
+        color: fi-var(global-font-secondary-color);
+      }
+    }
+
+    mark {
+      padding: 0.14em 0.28em;
+      background-color: fi-var(mark-background-color, mark);
+      color: fi-var(mark-color, marktext);
+      @include border-radius;
+
+      @each $color, $value in $theme-colors {
+        &.mark-#{$color} {
+          @include set-fi-vars((
+            mark-color: #fff,
+            mark-background-color: fi-var(#{$color}),
+          ));
+        }
+      }
+    }
+
+    .table-wrapper {
+      position: relative;
+      overflow-x: auto;
+      overflow-y: hidden;
+      margin: 0.5rem 0;
+      background: fi-var(table-background-color);
+      border: 1px solid fi-var(table-border-color);
+      @include border-radius;
+      @include set-fi-var(scrollbar-thumb-color, fi-var(table-background-color));
+
+      > table {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        border-spacing: 0;
+        background: fi-var(table-background-color);
+        border-collapse: separate;
+
+        thead {
+          background: fi-var(table-thead-color);
+        }
+
+        &:not([class]) tbody {
+          & tr:nth-child(odd) {
+            background: light-dark(color.adjust($table-background-color, $lightness: -2.25%), color.adjust($table-background-color-dark, $lightness: 2.75%));
+          }
+
+          & tr:hover {
+            background: light-dark(color.adjust($table-background-color, $lightness: -4.5%), color.adjust($table-background-color-dark, $lightness: 5.5%));
+          }
+        }
+
+        th,
+        td {
+          padding: 0.3rem 1rem;
+          border-right: 1px solid fi-var(table-border-color);
+          border-bottom: 1px solid fi-var(table-border-color);
+        }
+
+        tr > :last-child {
+          border-right: none;
+        }
+
+        > :last-child > tr:last-child > * {
+          border-bottom: none;
+        }
+      }
+    }
+
+    img {
+      max-width: 100%;
+      // SVG performs differently in Safari compared to other browsers
+      &:not([src*='.svg']) {
+        min-height: 1em;
+      }
+    }
+    svg {
+      max-width: 100%;
+    }
+
+    figure {
+      margin: 0.5rem;
+      text-align: center;
+
+      .image-caption:not(:empty) {
+        min-width: 20%;
+        max-width: 80%;
+        display: inline-block;
+        padding: 0.5rem;
+        margin: 0 auto;
+        font-size: 0.875rem;
+        color: #969696;
+      }
+
+      img {
+        display: block;
+        margin: 0 auto;
+        height: auto;
+        overflow: hidden;
+      }
+    }
+
+    blockquote {
+      display: block;
+      border-left: 0.25em solid fi-var(global-border-color);
+      color: fi-var(blockquote-color);
+      padding: 0 1em;
+      margin: 1rem 0;
+
+      ul,
+      ol {
+        padding-left: 1.5em;
+      }
+
+      dl dd {
+        margin-inline-start: 0.25em;
+      }
+
+      @include link(false, true);
+    }
+
+    sup[id^='fnref']:has(.footnote-ref) {
+      padding: 2px 4px;
+      background-color: light-dark(rgba(238, 238, 238, 0.7), rgba(56, 139, 253, 0.1));
+      color: light-dark(#555555, #58a6ff);
+      cursor: pointer;
+      @include border-radius(0.25rem);
+
+      @include link(true, false);
+    }
+
+    .footnotes {
+      font-size: 0.75rem;
+      white-space: normal;
+      color: light-dark(#a3a3ae, #9d9d9f);
+      @include link(false, true);
+
+      ol {
+        margin-block: 1em;
+        padding-left: 1rem;
+      }
+      
+      hr {
+        background-color: fi-var(global-border-color);
+        height: 1px;
+        margin-block: 1em;
+      }
+
+      code {
+        font-size: 0.75rem;
+      }
+
+      a:not(.footnote-backref) {
+        color: inherit;
+        text-decoration: underline;
+      }
+
+      p {
+        margin: 0.25rem 0;
+      }
+    }
+
+    kbd {
+      display: inline-block;
+      padding: 0 0.25rem;
+      background-color: fi-var(global-background-color);
+      border: 1px solid fi-var(global-border-color);
+      font-size: 0.8rem;
+      font-family: fi-var(code-font-family);
+      color: fi-var(code-color);
+      box-shadow: inset 0 -1px 0 fi-var(global-border-color);
+      @include border-radius;
+    }
+
+    .diagram-container {
+      position: relative;
+      margin-block: 0.5rem;
+
+      > .copy-icon-btn {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+      }
+    }
+
+    // KaTeX styles
+    .katex-display {
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      // neutralize the margin-right setting of .katex .vlist-t2
+      // to prevent scrollbars from appearing when the width is not full
+      padding-right: 2px;
+    }
+    .katex-error {
+      padding: 0.14em 0.28em;
+      background-color: mark;
+      cursor: help;
+      @include border-radius;
+    }
+
+    // MathJax styles
+    mjx-container[jax='CHTML'] {
+      // formula Blocks
+      &[display='true'] {
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+      }
+
+      // fix the color of xypic diagrams
+      mjx-xypic {
+        g {
+          stroke: currentColor !important;
+        }
+        mjx-xypic-object {
+          color: currentColor !important;
+          fill: currentColor !important;
+        }
+      }
+    }
+
+    json-viewer[boxed] + json-viewer[boxed] {
+      margin-top: 0.5rem;
+    }
+  }
+}

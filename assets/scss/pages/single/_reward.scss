@@ -1,4 +1,9 @@
-.post-reward {
+@use "sass:color";
+@use "core/functions" as *;
+@use "core/mixins" as *;
+@use "override" as *;
+
+.single .post-reward {
   padding: 1rem;
   text-align: center;
 
@@ -60,8 +65,8 @@
     box-sizing: border-box;
     cursor: pointer;
     outline: none;
-    color: fi-var(reward-color, lighten($reward-color, 5%));
-    border: 2px solid light-dark(lighten($reward-color, 10%), lighten($reward-color, 5%));
+    color: fi-var(reward-color, color.adjust($reward-color, $lightness: 5%));
+    border: 2px solid light-dark(color.adjust($reward-color, $lightness: 10%), color.adjust($reward-color, $lightness: 5%));
     padding: 0.6rem 1rem;
     background-color: fi-var(global-background-color);
     vertical-align: text-top;

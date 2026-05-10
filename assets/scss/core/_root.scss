@@ -13,6 +13,10 @@
 //
 // These CSS variables enable runtime theme switching and customization.
 // ================================================================================
+@use "sass:color";
+@use "functions" as *;
+@use "mixins" as *;
+@use "override" as *;
 
 :root {
   interpolate-size: allow-keywords;
@@ -92,8 +96,8 @@
   global-link-color: (light: $global-link-color, dark: $global-link-color-dark),
   global-link-hover-color: (light: $global-link-hover-color, dark: $global-link-hover-color-dark),
   global-border-color: (light: $global-border-color, dark: $global-border-color-dark),
-  global-border-color-light: (light: lighten($global-border-color, 5%), dark: darken($global-border-color-dark, 5%)),
-  global-border-color-weight: (light: darken($global-border-color, 5%), dark: lighten($global-border-color-dark, 5%)),
+  global-border-color-light: (light: color.adjust($global-border-color, $lightness: 5%), dark: color.adjust($global-border-color-dark, $lightness: -5%)),
+  global-border-color-weight: (light: color.adjust($global-border-color, $lightness: -5%), dark: color.adjust($global-border-color-dark, $lightness: 5%)),
 
   // Header
   header-background-color: (light: $header-background-color, dark: $header-background-color-dark),
@@ -131,7 +135,7 @@
   reward-color: (light: $reward-color, dark: $reward-color-dark),
 
   // Divider
-  hr-active-color: (light: lighten($single-link-hover-color, 4%), dark: darken($global-link-hover-color-dark, 4%)),
+  hr-active-color: (light: color.adjust($single-link-hover-color, $lightness: 4%), dark: color.adjust($global-link-hover-color-dark, $lightness: -4%)),
 
   // Code
   code-color: (light: $code-color, dark: $code-color-dark),
@@ -140,7 +144,6 @@
   code-header-color: (light: $code-header-color, dark: $code-header-color-dark),
   code-header-background-color: (light: $code-header-background-color, dark: $code-header-background-color-dark),
   code-highlight-color: (light: $code-highlight-color, dark: $code-highlight-color-dark),
-  gist-meta-background-color: (light: darken($code-background-color, 5%), dark: darken($code-background-color-dark, 5%)),
 ));
 
 // Third-party component theme colors (extensions and plugins)

@@ -1,4 +1,7 @@
-.file-tree-wrapper {
+@use "core/functions" as *;
+@use "core/mixins" as *;
+
+.single .file-tree-wrapper {
   border: 1px solid fi-var(global-border-color);
   padding: 0.5rem;
   font-size: 0.8rem;

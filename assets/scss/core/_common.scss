@@ -2,6 +2,9 @@
 // Common Styles
 // 常用样式
 // ==============================
+@use "functions" as *;
+@use "mixins" as *;
+@use "maps" as maps;
 
 .text-truncate {
   overflow: hidden;
@@ -39,13 +42,13 @@
   padding-right: 0.25em !important;
 }
 
-@each $color, $value in $theme-colors {
+@each $color, $value in maps.$theme-colors {
   .text-#{$color} {
     color: fi-var(#{$color}) !important;
   }
 }
 
-@each $key, $value in $orders {
+@each $key, $value in maps.$orders {
   .order-#{$key} {
     order: #{$value} !important;
   }

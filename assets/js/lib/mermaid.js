@@ -481,7 +481,7 @@ function initDiagramControls() {
         return Array.from(codeHeader.querySelectorAll('.action-btn'))
           .filter((btn) => btn !== pinnedFullscreenBtn)
       }
-      return Array.from(codeBlock.querySelectorAll('.code-copy-btn'))
+      return Array.from(codeBlock.querySelectorAll('.copy-icon-btn'))
     }
 
     const getCodeActions = () => {

@@ -1,3 +1,6 @@
+@use "core/functions" as *;
+@use "media" as *;
+
 /// Apply the shared sticky top offset used by TOC, collections, and code headers.
 /// 
 /// @param {boolean} $transition - Whether to include the transition for top changes (default: true).

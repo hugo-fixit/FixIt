@@ -1,12 +1,24 @@
+@use "override" as *;
+
 /// Link mixin
 /// @param {Boolean} $light use global link color
 /// @param {Boolean} $dark use global link color dark
 /// @param {String} $decoration text-decoration, default none
 @mixin link($light, $dark, $decoration: none) {
-  $link-color-light: if($light, $global-link-color, $single-link-color);
-  $link-color-dark: if($dark, $global-link-color-dark, $single-link-color-dark);
-  $link-hover-color-light: if($light, $global-link-hover-color, $single-link-hover-color);
-  $link-hover-color-dark: if($dark, $global-link-hover-color-dark, $single-link-hover-color-dark);
+  $link-color-light: $single-link-color;
+  $link-color-dark: $single-link-color-dark;
+  $link-hover-color-light: $single-link-hover-color;
+  $link-hover-color-dark: $single-link-hover-color-dark;
+
+  @if $light {
+    $link-color-light: $global-link-color;
+    $link-hover-color-light: $global-link-hover-color;
+  }
+
+  @if $dark {
+    $link-color-dark: $global-link-color-dark;
+    $link-hover-color-dark: $global-link-hover-color-dark;
+  }
 
   a,
   a::before,

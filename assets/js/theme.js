@@ -542,7 +542,7 @@ class FixIt {
   initCopyCode(codeBlock, codePreEl) {
     const copyBtn = codeBlock.dataset.mode === 'classic'
       ? codeBlock.querySelector('.code-header .copy-btn')
-      : codeBlock.querySelector('.code-copy-btn');
+      : codeBlock.querySelector('.copy-icon-btn');
     if (codeBlock.dataset.copyable !== 'true' || !copyBtn) return;
     copyBtn.addEventListener('click', () => {
       const iswWrap = codeBlock.classList.contains('line-wrapping');
@@ -912,7 +912,7 @@ class FixIt {
    */
   initDiagramCopyBtn() {
     const stagingDOM = getStagingDOM()
-    forEach(document.querySelectorAll('.diagram-copy-btn'), ($btn) => {
+    forEach(document.querySelectorAll('.diagram-container > .copy-icon-btn'), ($btn) => {
       $btn.addEventListener('click', () => {
         stagingDOM.stage($btn.parentElement.querySelector('template').content.cloneNode(true))
         let code = stagingDOM.contentAsText();
@@ -920,10 +920,18 @@ class FixIt {
           code = JSON.stringify(JSON.parse(code), null, 2);
         } catch { }
         copyText(code).then(() => {
+          const copiedText = $btn.dataset.copiedText;
+          const originalTitle = $btn.dataset.ctOriginalTitle;
           $btn.toggleAttribute('data-copied', true);
+          $btn.dataset.ctTitle = copiedText;
+          const instance = window.CellTooltip.getOrCreateInstance($btn);
+          instance.refresh();
           setTimeout(() => {
             $btn.toggleAttribute('data-copied', false);
+            $btn.dataset.ctTitle = originalTitle;
+            instance.hide();
           }, 2000);
+          $btn.toggleAttribute('data-copied', true);
         }, () => {
           console.error('Clipboard write failed!', 'Your browser does not support clipboard API!');
         });
@@ -1631,6 +1639,10 @@ class FixIt {
     window.CellTooltip.initAll('.action-btn[title]', {
       placement: 'bottom',
     });
+    // copy icon button tooltip
+    window.CellTooltip.initAll('.copy-icon-btn[title]', {
+      placement: 'top',
+    });
     // footnote refs tooltip
     this.initFootnotes();
   }
@@ -1644,7 +1656,7 @@ class FixIt {
     if (!dialog) return;
 
     const $target = dialog.querySelector('.target');
-    const $copy = dialog.querySelector('.copy-btn');
+    const $copy = dialog.querySelector('.copy-icon-btn');
     const $confirm = dialog.querySelector('.confirm-btn');
     const $cancel = dialog.querySelector('.cancel-btn');
 

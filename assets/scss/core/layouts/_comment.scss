@@ -1,5 +1,7 @@
-body > #comments {
-  padding: 2rem 1rem;
+@use "core/mixins" as *;
+
+.wrapper > #comments {
+  padding: 2rem 0.5rem;
   display: flex;
 
   &::before,
@@ -14,7 +16,9 @@ body > #comments {
   }
 
   .comment {
-    @extend %page-style;
+    margin: 0 auto;
+    padding-inline: 0.5rem;
+    box-sizing: border-box;
 
     iframe {
       width: 100%;

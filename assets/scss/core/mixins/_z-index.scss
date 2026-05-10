@@ -1,3 +1,5 @@
+@use "sass:map";
+
 $z-indexes: (
   "hide": -1,
   "auto": auto,
@@ -14,7 +16,7 @@ $z-indexes: (
 ///   @include z-index(base);
 ///   @include z-index(base, 1);
 @mixin z-index($key, $diff: 0) {
-  $z-index: map-get($z-indexes, $key);
+  $z-index: map.get($z-indexes, $key);
 
   @if $z-index {
     z-index: $z-index + $diff;

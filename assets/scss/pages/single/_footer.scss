@@ -1,4 +1,7 @@
-.post-footer {
+@use "core/functions" as *;
+@use "core/mixins" as *;
+
+.single .post-footer {
   margin: 2rem 0;
 
   &~.post-reward {

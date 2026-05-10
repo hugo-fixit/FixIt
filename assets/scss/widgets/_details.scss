@@ -1,3 +1,6 @@
+@use "core/functions" as *;
+@use "core/mixins" as *;
+
 .details {
   > .details-summary {
     transition: border-radius 0.2s ease 0.2s;
