@@ -1,0 +1,40 @@
+{{- /*
+  Extends Hugo's embedded twitter_cards partial:
+  https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_partials/twitter_cards.html
+
+  Key differences:
+  - Generates twitter:site / twitter:creator from site params (.Site.Params.social.twitter)
+    - The param can be a string or a map; when it's a map, reads Id/id
+*/ -}}
+{{- $images := partial "_funcs/get-page-images" . }}
+{{- with index $images 0 }}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ .Permalink }}">
+{{- else }}
+  <meta name="twitter:card" content="summary">
+{{- end }}
+
+{{- with or .Title site.Title site.Params.title | plainify }}
+  <meta name="twitter:title" content="{{ . }}">
+{{- end }}
+
+{{- with or .Description .Summary site.Params.description | plainify | htmlUnescape }}
+  <meta name="twitter:description" content="{{ trim . "\n\r\t " }}">
+{{- end }}
+
+{{- with site.Params.social.twitter -}}
+  {{- $site := "" -}} 
+  {{- $creator := "" -}}
+  {{- if reflect.IsMap . -}}
+    {{- $creator = .creator | default .id -}}
+    {{- $site = .site | default $creator -}}
+  {{- else -}}
+    {{- $creator = . -}}
+  {{- end -}}
+  {{- with $site -}}
+    <meta name="twitter:site" content="@{{ . }}">
+  {{- end -}}
+  {{- with $creator -}}
+    <meta name="twitter:creator" content="@{{ . }}">
+  {{- end -}}
+{{- end -}}

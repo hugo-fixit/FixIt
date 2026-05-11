@@ -820,8 +820,8 @@ RSS = true
 # [params.social.twitter]
 # id = "lruihao"
 # weight = 3
-# prefix = "https://twitter.com/"
-# Title = "Twitter"
+# prefix = "https://x.com/"
+# title = "X"
 
 # [params.social.twitter.icon]
 # class = "fa-brands fa-x-twitter"

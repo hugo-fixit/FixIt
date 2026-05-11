@@ -34,10 +34,7 @@
 
 {{- template "_internal/schema.html" . -}}
 {{- template "_internal/opengraph.html" . -}}
-{{- template "_internal/twitter_cards.html" . -}}
-{{- with .Site.Params.social.Twitter -}}
-  <meta name="twitter:creator" content="@{{ . }}" />
-{{- end -}}
+{{- partial "layouts/head/twitter-cards.html" . -}}
 
 <meta name="application-name" content="{{ .Site.Params.app.title | default .Site.Title }}">
 <meta name="apple-mobile-web-app-title" content="{{ .Site.Params.app.title | default .Site.Title }}">
@@ -59,8 +56,8 @@
   {{- $id := "" -}}
   {{- $prefix := "https://mastodon.social/" -}}
   {{- if reflect.IsMap . -}}
-    {{- $id = .Id | default .id -}}
-    {{- $prefix = .Prefix | default .prefix | default $prefix -}}
+    {{- $id = .id -}}
+    {{- $prefix = .prefix | default $prefix -}}
   {{- end -}}
   {{- if $id | and $prefix -}}
     {{- $link := printf "%s/%s" $prefix $id -}}
@@ -317,3 +314,6 @@
   {{- $options = dict "sourceMap" "external" | merge $options -}}
 {{- end -}}
 {{- dict "Source" (resources.Get "js/head/color-scheme.js") "Build" $options "Fingerprint" $fingerprint | partial "plugin/script.html" -}}
+
+{{- /* Custom head */ -}}
+{{- block "custom-head" . }}{{ end -}}
