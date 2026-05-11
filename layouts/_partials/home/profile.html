@@ -57,11 +57,7 @@
       {{- $socialArr := slice -}}
       {{- range $key, $value := .Site.Params.social -}}
         {{- $social := $key | lower | index $socialMap | default dict -}}
-        {{- if and $value (ne (lower $key) "weight") -}}
-          {{- $homeWeight := index ($.Site.Params.social.weight | default dict) $key -}}
-          {{- if $homeWeight -}}
-            {{- $social = dict "Weight" $homeWeight | merge $social -}}
-          {{- end -}}
+        {{- if $value -}}
           {{- if reflect.IsMap $value -}}
             {{- with $value.weight -}}
               {{- $social = dict "Weight" . | merge $social -}}

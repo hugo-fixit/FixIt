@@ -34,13 +34,3 @@ _merge = "shallow"
 # FixIt theme version
 version = "0.3.X" # e.g. "0.2.X", "0.2.15", "v0.2.15" etc.
 # ...
-
-[params.social]
-GitHub = "my_github"
-Twitter = "my_twitter"
-Linkedin = "my_linkedin"
-
-[params.social.weight]
-Linkedin = 1
-GitHub = 2
-Twitter = 3
