@@ -1,7 +1,7 @@
 // Style of layout search
 @use "core/mixins" as *;
 
-&.search {
+.special.search {
   // Google CSE
   .gcse-searchbox:empty,
   .gcse-searchresults:empty {

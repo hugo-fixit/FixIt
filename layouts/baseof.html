@@ -10,11 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
     <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
-
-    {{- partial "layouts/head.html" . -}}
+    {{- partial "layouts/head/index.html" . -}}
     {{- /* TODO preload script https://developer.mozilla.org/zh-CN/docs/Web/HTML/Attributes/rel/preload */ -}}
-    {{- /* Custom head */ -}}
-    {{- block "custom-head" . }}{{ end -}}
   </head>
   <body data-instant-intensity="viewport" data-header-desktop="{{ .Site.Params.header.desktopMode }}" data-header-mobile="{{ .Site.Params.header.mobileMode }}">
     {{- /* Body wrapper */ -}}

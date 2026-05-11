@@ -37,6 +37,22 @@ _merge = "shallow"
 [params]
 version = "0.3.X"
 
+[params.home.profile]
+enable = true
+avatarURL = "/images/fixit-test.png"
+
+[params.social]
+
+[params.social.github]
+id = "hugo-fixit"
+weight = 2
+
+[params.social.twitter]
+id = "lruihao"
+weight = 1
+# for twitter cards
+# site = "hugo-fixit"
+
 [params.page]
 collectionList = true
 collectionNavigation = true

@@ -1,11 +1,3 @@
-@use "sass:meta";
-
-.special {
-  .single-title,
-  .single-subtitle {
-    text-align: right;
-  }
-
-  @include meta.load-css('friends');
-  @include meta.load-css('search');
-}
+@use "base.scss";
+@use "friends.scss";
+@use "search.scss";
