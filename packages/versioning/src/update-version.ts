@@ -30,6 +30,12 @@ export function updateVersion(type: 'dev' | 'prod') {
   ]
   const gitDiff: string = execSync('git diff --cached --name-only').toString().trim()
 
+  // console.log(
+  //   'Node.js:',
+  //   execSync('which node').toString().trim(),
+  //   process.version,
+  // )
+
   if (type !== 'prod') {
     // Avoid conflicts when creating a Pull Request
     if (!['dev', 'main'].includes(branch)) {
@@ -37,7 +43,6 @@ export function updateVersion(type: 'dev' | 'prod') {
       process.exit(0)
     }
     if (!match.some(item => gitDiff.includes(item))) {
-      console.log('Node.js:', process.version)
       console.log('No need to update the FixIt version.')
       process.exit(0)
     }
@@ -82,6 +87,5 @@ export function updateVersion(type: 'dev' | 'prod') {
       execFileSync('git', ['add', stageFile])
     }
   })
-  // console.log('Node.js:', process.version)
   console.log(`Update the FixIt version from v${lastVersion} to v${latestVersion}.`)
 }

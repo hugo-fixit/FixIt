@@ -4,7 +4,7 @@
 
   Key differences:
   - Generates twitter:site / twitter:creator from site params (.Site.Params.social.twitter)
-    - The param can be a string or a map; when it's a map, reads Id/id
+    - The param can be a string or a map; when it's a map, reads creator/id
 */ -}}
 {{- $images := partial "_funcs/get-page-images" . }}
 {{- with index $images 0 }}
