@@ -617,11 +617,11 @@ icp = ""
 # license info (HTML format is supported)
 license = ""
 
-# FixIt 0.3.0 | NEW whether to show Hugo and theme info
+# FixIt 1.0.0 | CHANGED whether to show Hugo and theme info
 [params.footer.powered]
 enable = true
-hugoLogo = true
-themeLogo = true
+hugoLogo = false
+themeLogo = false
 
 # FixIt 0.2.17 | CHANGED Site creation time
 [params.footer.siteTime]
