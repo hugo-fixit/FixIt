@@ -37,7 +37,7 @@ export function updateVersion(type: 'dev' | 'prod') {
       process.exit(0)
     }
     if (!match.some(item => gitDiff.includes(item))) {
-      // console.log('Node.js:', process.version)
+      console.log('Node.js:', process.version)
       console.log('No need to update the FixIt version.')
       process.exit(0)
     }
