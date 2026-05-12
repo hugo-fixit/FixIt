@@ -7,7 +7,7 @@ import { workspaceRoot } from '@hugo-fixit/shared'
 
 const ISO_TIMESTAMP_CLEAN_RE = /[-:TZ]/g
 const VERSION_PATCH_RE = /(\d+)$/
-const VERSION_RE = /v\d+\.\d+\.\d+(-[\w.\-]+)?/
+const VERSION_RE = /v\d+\.\d+\.\d+(-[\w.-]+)?/
 
 /**
  * Update the version of the FixIt
@@ -37,6 +37,7 @@ export function updateVersion(type: 'dev' | 'prod') {
       process.exit(0)
     }
     if (!match.some(item => gitDiff.includes(item))) {
+      // console.log('Node.js:', process.version)
       console.log('No need to update the FixIt version.')
       process.exit(0)
     }
@@ -50,10 +51,14 @@ export function updateVersion(type: 'dev' | 'prod') {
   // Build the development version v{major}.{minor}.{patch+1}-{timestamp}-{shortHash}
   // e.g. v0.3.21-20250702061540-abcdefg
   const timestamp: string = new Date().toISOString().replace(ISO_TIMESTAMP_CLEAN_RE, '').slice(0, -4)
-  const devVersion: string = `${version.replace(VERSION_PATCH_RE, (_versionPatchMatch, part) => (Number.parseInt(part) + 1).toString())}-${timestamp}-${shortHash}`
+  const devVersion: string = `${version.replace(VERSION_PATCH_RE, (_versionPatchMatch, part) => (Number.parseInt(part, 10) + 1).toString())}-${timestamp}-${shortHash}`
   const initHtml: string = fs.readFileSync(initHtmlPath, 'utf8')
   const latestVersion: string = type === 'prod' ? version : devVersion
-  const lastVersion: string = initHtml.match(VERSION_RE)![0].slice(1)
+  const versionMatch = initHtml.match(VERSION_RE)
+  if (!versionMatch) {
+    throw new Error('Unable to find current version in layouts/_partials/init/index.html.')
+  }
+  const lastVersion: string = versionMatch[0].slice(1)
   const newInitHtml: string = initHtml.replace(VERSION_RE, `v${latestVersion}`)
 
   if (lastVersion === version && gitDiff.includes('layouts/_partials/init/index.html')) {
