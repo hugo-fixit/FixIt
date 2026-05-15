@@ -237,6 +237,21 @@
     translate 0.2s,
     opacity 0.2s 0.4s;
 
+  .toc-close-btn {
+    position: absolute;
+    top: 1.25rem;
+    right: 1rem;
+    padding: 0.25rem;
+    color: fi-var(global-font-secondary-color);
+    transition: color 0.2s ease;
+    @include border-radius;
+
+    &:hover,
+    &:focus-visible {
+      color: fi-var(global-font-color);
+    }
+  }
+
   .toc {
     max-width: 100%;
     margin-inline: 1rem;

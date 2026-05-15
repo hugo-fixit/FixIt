@@ -71,7 +71,7 @@
     {{- $linkGuard = (cond (reflect.IsMap .) . (dict "enable" .)) | merge $linkGuard -}}
   {{- end -}}
   {{- if $linkGuard.enable | and (eq $linkGuard.mode "modal") -}}
-    <dialog id="link-guard-dialog" aria-labelledby="link-guard-dialog-title" role="dialog">
+    <dialog id="link-guard-dialog" aria-labelledby="link-guard-dialog-title" role="dialog" closedby="any">
       <div class="guard-content">
         <h2 class="title">{{ T "linkRedirection.title" }}</h2>
         <p class="message">{{ dict "Title" .Site.Title | T "linkRedirection.message" }}</p>

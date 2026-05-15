@@ -1121,6 +1121,8 @@ class FixIt {
     const dialog = document.querySelector("#toc-dialog");
     const openButton = document.querySelector("#toc-drawer-button");
     if (!dialog || !openButton) return;
+    const closeButton = dialog.querySelector(".toc-close-btn");
+    closeButton?.addEventListener("click", () => dialog.close());
     openButton.addEventListener("click", () => {
       dialog.showModal();
       openButton.setAttribute('aria-expanded', 'true');
@@ -1130,8 +1132,8 @@ class FixIt {
       this.scrollActiveTocLinkIntoView($dialogTocRoot, this.activeTocId, $dialogTocRoot);
       document.activeElement?.blur();
     });
-    dialog.addEventListener("click", () => {
-      dialog.close();
+    forEach(document.querySelectorAll('#toc-content-drawer a[href^="#"]'), ($link) => {
+      $link.addEventListener("click", () => dialog.close());
     });
     dialog.addEventListener("close", () => {
       openButton.setAttribute('aria-expanded', 'false');
@@ -1665,16 +1667,16 @@ class FixIt {
     if (!dialog.dataset.init) {
       dialog.dataset.init = 'true';
 
-      $confirm?.addEventListener('click', () => {
+      $confirm.addEventListener('click', () => {
         if (dialog._target) {
           window.open(dialog._target, '_blank', 'noopener,noreferrer');
         }
         _closeDialog();
       });
 
-      $cancel?.addEventListener('click', _closeDialog);
+      $cancel.addEventListener('click', _closeDialog);
 
-      $copy?.addEventListener('click', () => {
+      $copy.addEventListener('click', () => {
         const textToCopy = dialog._target || '';
         if (!textToCopy) return;
         copyText(textToCopy).then(() => {
@@ -1683,10 +1685,6 @@ class FixIt {
             $copy.toggleAttribute('data-copied', false);
           }, 2000);
         });
-      });
-
-      dialog.addEventListener('click', (e) => {
-        if (e.target === dialog) _closeDialog();
       });
     }
 
