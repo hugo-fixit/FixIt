@@ -190,7 +190,7 @@ libraries:
         - from: dist/waline.umd.js
           to: waline/waline.umd.js
   - npm: xxhash-wasm
-    version: 1.0.2
+    version: 1.1.0
     local:
       items:
         - from: umd/xxhash-wasm.js
