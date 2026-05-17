@@ -66,7 +66,7 @@ libraries:
         - from: dist/fuse.cjs
           to: fuse/fuse.js
   - npm: gitalk
-    version: 1.7.2
+    version: 1.8.0
     local:
       items:
         - from: dist/gitalk.css
@@ -195,3 +195,4 @@ libraries:
       items:
         - from: umd/xxhash-wasm.js
           to: xxhash-wasm/xxhash-wasm.js
+
