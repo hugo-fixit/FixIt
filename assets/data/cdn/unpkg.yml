@@ -32,8 +32,8 @@ libFiles:
   cryptoSha256JS: crypto-js@4.2.0/sha256.js
   # echarts@6.0.0 https://github.com/apache/echarts
   echartsJS: echarts@6.0.0/dist/echarts.min.js
-  # fontawesome-free@7.1.0 https://github.com/FortAwesome/Font-Awesome
-  fontawesomeFreeCSS: '@fortawesome/fontawesome-free@7.1.0/css/all.min.css'
+  # @fortawesome/fontawesome-free@7.2.0 https://github.com/FortAwesome/Font-Awesome
+  fontawesomeFreeCSS: '@fortawesome/fontawesome-free@7.2.0/css/all.min.css'
   # fusejs@6.6.2 https://github.com/krisk/fuse
   fuseJS: fuse.js@6.6.2/dist/fuse.min.js
   # gitalk@1.8.0 https://github.com/gitalk/gitalk
@@ -76,7 +76,7 @@ libFiles:
   typeitJS: typeit@8.8.7/dist/index.umd.js
   # valine@1.5.3 https://github.com/xCss/Valine
   valineJS: valine@1.5.3/dist/Valine.min.js
-  # waline@3.12.1 https://github.com/walinejs/waline
+  # @waline/client@3.13.0 https://github.com/walinejs/waline
   walineCSS: '@waline/client@3.13.0/dist/waline.css'
   walineJS: '@waline/client@3.13.0/dist/waline.umd.js'
   # xxhash-wasm@1.1.0 https://github.com/jungomi/xxhash-wasm
