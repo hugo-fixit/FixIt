@@ -86,7 +86,7 @@ libraries:
         - from: dist/json-viewer-element.umd.js
           to: json-viewer-element/json-viewer-element.umd.js
   - npm: katex
-    version: 0.16.22
+    version: 0.16.47
     local:
       items:
         - from: dist/contrib/copy-tex.min.js
@@ -195,3 +195,4 @@ libraries:
       items:
         - from: umd/xxhash-wasm.js
           to: xxhash-wasm/xxhash-wasm.js
+
