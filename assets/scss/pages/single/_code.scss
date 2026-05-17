@@ -135,11 +135,20 @@
       }
     }
 
+    // line numbers (lineNumbersInTable=true)
+    .lnt {
+      display: block;
+      width: calc(#{fi-var(line-digit)} * 1ch);
+      min-width: 0.75rem;
+      text-align: right;
+    }
     // line numbers (lineNumbersInTable=false)
     .ln {
-      padding-right: 0.75rem;
       display: inline-block;
+      width: calc(#{fi-var(line-digit)} * 1ch);
+      min-width: 0.75rem;
       text-align: right;
+      padding-right: 0.75rem;
       position: sticky;
       left: 0;
     }
@@ -474,7 +483,8 @@
             content: counter(codeNos);
             white-space: nowrap;
             text-align: right;
-            min-width: calc(#{fi-var(line-digit)} * 1ch);
+            width: calc(#{fi-var(line-digit)} * 1ch);
+            min-width: 0.75rem;
             padding-inline: 0.75rem;
             flex-shrink: 0;
             color: fi-var(global-font-secondary-color);

@@ -19,7 +19,7 @@
   {{- $lines := cond .Inner (len (split .Inner "\n")) 0 -}}
   {{- $maxShownLines := $config.maxshownlines -}}
   {{- $lineNoStart := cond (ne .Options.linenostart nil) .Options.linenostart 1 -}}
-  {{- $lineNosDigit := strings.RuneCount (add $lines $lineNoStart) -}}
+  {{- $lineNosDigit := strings.RuneCount (sub (add $lines $lineNoStart) 1) -}}
   {{- $class := "highlight" -}}
   {{- with $config.class -}}{{ $class = add $class " " . }}{{- end -}}
   {{- $targetClass := add "code-block " $class -}}
