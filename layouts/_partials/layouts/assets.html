@@ -209,7 +209,7 @@ FixIt theme assets partial
 
 {{- /* PanguJS */ -}}
 {{- if eq .Site.Params.pangu.enable true -}}
-  {{- $source := $cdn.panguJS | default "lib/pangu/pangu.min.js" -}}
+  {{- $source := $cdn.panguJS | default "lib/pangu/pangu.umd.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "pangu" .Site.Params.pangu | merge $config -}}
 {{- end -}}

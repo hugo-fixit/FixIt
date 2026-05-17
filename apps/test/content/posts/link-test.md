@@ -14,7 +14,6 @@ link_guard:
     - demo.fixit.lruihao.cn
 ---
 
-
 This post validates link rendering paths in FixIt, including Markdown render hook and link shortcode modes.
 
 <!--more-->
