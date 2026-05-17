@@ -114,7 +114,7 @@ libraries:
         - from: dist/mapbox-gl.js
           to: mapbox-gl/mapbox-gl.js
   - npm: meting
-    version: 2.0.1
+    version: 2.0.2
     local:
       items:
         - from: dist/Meting.min.js
