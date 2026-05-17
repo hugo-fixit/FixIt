@@ -86,7 +86,7 @@ libraries:
         - from: dist/json-viewer-element.umd.js
           to: json-viewer-element/json-viewer-element.umd.js
   - npm: katex
-    version: 0.16.22
+    version: 0.16.47
     local:
       items:
         - from: dist/contrib/copy-tex.min.js
@@ -176,7 +176,7 @@ libraries:
         - from: dist/index.umd.js
           to: typeit/typeit.umd.js
   - npm: valine
-    version: 1.5.2
+    version: 1.5.3
     local:
       items:
         - from: dist/Valine.min.js
