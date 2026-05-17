@@ -48,7 +48,7 @@ libraries:
         - from: sha256.js
           to: crypto-js/sha256.js
   - npm: echarts
-    version: 5.3.3
+    version: 6.0.0
     local:
       items:
         - from: dist/echarts.min.js
