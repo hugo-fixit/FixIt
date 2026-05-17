@@ -3,8 +3,8 @@
 
 prefix:
   libFiles: https://cdn.jsdelivr.net/npm/
-  # simple-icons@9.19.0 https://github.com/simple-icons/simple-icons
-  simpleIcons: https://cdn.jsdelivr.net/npm/simple-icons@9.19.0/icons/
+  # simple-icons@16.19.0 https://github.com/simple-icons/simple-icons
+  simpleIcons: https://cdn.jsdelivr.net/npm/simple-icons@16.19.0/icons/
 libFiles:
   # algoliasearch@5.52.1 https://github.com/algolia/algoliasearch-client-javascript
   algoliasearchJS: algoliasearch@5.52.1/dist/algoliasearch-lite.umd.min.js
