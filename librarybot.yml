@@ -164,7 +164,7 @@ libraries:
         - from: dist/twemoji.min.js
           to: twemoji/twemoji.min.js
   - npm: twikoo
-    version: 1.7.3
+    version: 1.7.9
     local:
       items:
         - from: dist/twikoo.all.min.js
