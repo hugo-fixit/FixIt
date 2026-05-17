@@ -170,11 +170,11 @@ libraries:
         - from: dist/twikoo.all.min.js
           to: twikoo/twikoo.all.min.js
   - npm: typeit
-    version: 8.8.4
+    version: 8.8.7
     local:
       items:
         - from: dist/index.umd.js
-          to: typeit/typeit.umd.js
+          to: typeit/index.umd.js
   - npm: valine
     version: 1.5.3
     local:
@@ -195,4 +195,3 @@ libraries:
       items:
         - from: umd/xxhash-wasm.js
           to: xxhash-wasm/xxhash-wasm.js
-
