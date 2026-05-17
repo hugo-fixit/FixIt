@@ -1,0 +1,11 @@
+{{- if and .Site.Params.search.enable (eq .Site.Params.search.type "pagefind") .IsPage -}}
+  {{- $params := partial "function/params.html" -}}
+  {{- $hidden := cond (eq $params.hiddenFromSearch true) "true" "false" -}}
+  {{- $encrypted := cond (and (isset $params "password") (ne (printf "%v" $params.password) "")) "true" "false" -}}
+  {{- $pageDate := (.PublishDate | default .Date) -}}
+  {{- $dateLabel := $pageDate | dateFormat (.Site.Params.dateFormat | default "2006-01-02") -}}
+  <meta data-pagefind-filter="hidden:{{ $hidden }}">
+  <meta data-pagefind-filter="encrypted:{{ $encrypted }}">
+  <meta data-pagefind-meta="date:{{ $dateLabel }}">
+  <meta data-pagefind-sort="date:{{ $pageDate.Unix }}">
+{{- end -}}

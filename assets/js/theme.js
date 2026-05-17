@@ -15,6 +15,7 @@ import {
   HTMLEscape,
 } from './utils/common';
 import FileTree from './lib/file-tree.js'
+import { createPagefindSearch } from './lib/pagefind-search.js'
 
 const copyText = createCopyText();
 
@@ -264,6 +265,9 @@ class FixIt {
     const $menuToggleMobile = document.getElementById('menu-toggle-mobile');
     const $menuMobile = document.getElementById('menu-mobile');
     if (!$header || !$searchInput || !$searchToggle || !$searchLoading || !$searchClear) return;
+    const pagefindSearch = searchConfig.type === 'pagefind'
+      ? (this._pagefindSearch ||= createPagefindSearch(searchConfig))
+      : null;
     const setSearchExpanded = (expanded) => {
       $searchToggle?.setAttribute('aria-expanded', expanded ? 'true' : 'false');
     };
@@ -340,6 +344,13 @@ class FixIt {
       if ($searchInput.value === '') $searchClear.style.display = 'none';
       else $searchClear.style.display = 'inline';
     }, false);
+    if (pagefindSearch) {
+      $searchInput.addEventListener('focus', () => {
+        pagefindSearch.preload().catch((error) => {
+          console.error(error);
+        });
+      }, { once: true });
+    }
 
     const initAutosearch = () => {
       const autosearch = autocomplete(`#search-input-${suffix}`,
@@ -454,6 +465,16 @@ class FixIt {
                   context: cseConfig.gotoResultsPage
                 }]);
               }
+            } else if (searchConfig.type === 'pagefind') {
+              pagefindSearch
+                .search(query, maxResultLength)
+                .then((results) => {
+                  finish(results || []);
+                })
+                .catch((err) => {
+                  console.error(err);
+                  finish([]);
+                });
             } else {
               finish([]);
             }
@@ -481,6 +502,11 @@ class FixIt {
                     icon = '<i class="fa-brands fa-google" aria-hidden="true"></i>';
                     href = 'https://programmablesearchengine.google.com/';
                   }
+                  break;
+                case 'pagefind':
+                  searchType = 'Pagefind';
+                  icon = '';
+                  href = 'https://pagefind.app/';
                   break;
                 default:
                   searchType = '';
