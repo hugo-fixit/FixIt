@@ -46,11 +46,11 @@ libFiles:
   # katex@0.16.22 https://github.com/KaTeX/KaTeX
   katexCopyTexJS: katex@0.16.22/dist/contrib/copy-tex.min.js
   katexCSS: katex@0.16.22/dist/katex.min.css
-  # lightgallery@2.7.2 https://github.com/sachinchoolur/lightgallery
-  lightgalleryCSS: lightgallery@2.7.2/css/lightgallery-bundle.min.css
-  lightgalleryJS: lightgallery@2.7.2/lightgallery.min.js
-  lightgalleryThumbnailJS: lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js
-  lightgalleryZoomJS: lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js
+  # lightgallery@2.9.0 https://github.com/sachinchoolur/lightgallery
+  lightgalleryCSS: lightgallery@2.9.0/css/lightgallery-bundle.min.css
+  lightgalleryJS: lightgallery@2.9.0/lightgallery.min.js
+  lightgalleryThumbnailJS: lightgallery@2.9.0/plugins/thumbnail/lg-thumbnail.min.js
+  lightgalleryZoomJS: lightgallery@2.9.0/plugins/zoom/lg-zoom.min.js
   # mapbox-gl@2.10.0 https://docs.mapbox.com/mapbox-gl-js
   # TODO update to 3.x
   mapboxGLCSS: mapbox-gl@2.10.0/dist/mapbox-gl.css

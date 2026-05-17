@@ -94,7 +94,7 @@ libraries:
         - from: dist/katex.min.css
           to: katex/katex.min.css
   - npm: lightgallery
-    version: 2.7.2
+    version: 2.9.0
     local:
       items:
         - from: css/lightgallery-bundle.min.css
@@ -195,3 +195,4 @@ libraries:
       items:
         - from: umd/xxhash-wasm.js
           to: xxhash-wasm/xxhash-wasm.js
+
