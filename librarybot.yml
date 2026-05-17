@@ -86,7 +86,7 @@ libraries:
         - from: dist/json-viewer-element.umd.js
           to: json-viewer-element/json-viewer-element.umd.js
   - npm: katex
-    version: 0.16.22
+    version: 0.16.47
     local:
       items:
         - from: dist/contrib/copy-tex.min.js
@@ -94,7 +94,7 @@ libraries:
         - from: dist/katex.min.css
           to: katex/katex.min.css
   - npm: lightgallery
-    version: 2.7.2
+    version: 2.9.0
     local:
       items:
         - from: css/lightgallery-bundle.min.css
@@ -176,13 +176,13 @@ libraries:
         - from: dist/index.umd.js
           to: typeit/typeit.umd.js
   - npm: valine
-    version: 1.5.2
+    version: 1.5.3
     local:
       items:
         - from: dist/Valine.min.js
           to: valine/Valine.min.js
   - npm: '@waline/client'
-    version: 3.12.1
+    version: 3.13.0
     local:
       items:
         - from: dist/waline.css
