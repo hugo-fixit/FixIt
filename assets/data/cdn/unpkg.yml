@@ -64,8 +64,8 @@ libFiles:
   panguJS: pangu@7.2.1/dist/browser/pangu.min.js
   # @panzoom/panzoom@4.6.2 https://github.com/timmywil/panzoom
   panzoomJS: '@panzoom/panzoom@4.6.2/dist/panzoom.min.js'
-  # sharer.js@0.5.1 https://github.com/ellisonleao/sharer.js
-  sharerJS: sharer.js@0.5.1/sharer.min.js
+  # sharer.js@0.5.4 https://github.com/ellisonleao/sharer.js
+  sharerJS: sharer.js@0.5.4/sharer.min.js
   # @github/tab-container-element@4.8.2 https://github.com/github/tab-container-element
   tabContainerElementJS: '@github/tab-container-element@4.8.2/dist/bundle.min.js'
   # twemoji@14.0.2 https://github.com/twitter/twemoji

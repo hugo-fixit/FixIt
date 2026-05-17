@@ -138,7 +138,7 @@ libraries:
         - from: dist/panzoom.min.js
           to: panzoom/panzoom.min.js
   - npm: sharer.js
-    version: 0.5.1
+    version: 0.5.4
     local:
       items:
         - from: sharer.min.js
