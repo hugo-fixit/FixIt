@@ -46,14 +46,13 @@ FixIt theme assets partial
     {{- $config = dict "isCaseSensitive" $search.fuse.isCaseSensitive "minMatchCharLength" $search.fuse.minMatchCharLength "findAllMatches" $search.fuse.findAllMatches "location" $search.fuse.location "threshold" $search.fuse.threshold "distance" $search.fuse.distance "ignoreLocation" $search.fuse.ignoreLocation "useExtendedSearch" $search.fuse.useExtendedSearch "ignoreFieldNorm" $search.fuse.ignoreFieldNorm | dict "search" | merge $config -}}
   {{- else if eq $search.type "pagefind" -}}
     {{- $pagefind := $search.pagefind | default dict -}}
-    {{- $bundlePath := $pagefind.bundlePath | default "pagefind/" -}}
     {{- $config = dict
       "type" "pagefind"
       "pagefind" (dict
-        "bundlePath" $bundlePath
+        "bundlePath" ($pagefind.bundlePath | default "pagefind/")
         "baseURL" .Site.BaseURL
-        "debounceTimeoutMs" (cond (eq (printf "%v" $pagefind.debounceTimeoutMs) "<nil>") 300 $pagefind.debounceTimeoutMs)
-        "useBuiltInFilters" (cond (eq (printf "%v" $pagefind.useBuiltInFilters) "<nil>") true $pagefind.useBuiltInFilters)
+        "debounceTimeoutMs" ($pagefind.debounceTimeoutMs | default 300)
+        "useBuiltInFilters" ($pagefind.useBuiltInFilters | default true)
         "sortBy" ($pagefind.sortBy | default "")
         "sortOrder" ($pagefind.sortOrder | default "desc")
       )

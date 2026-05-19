@@ -137,7 +137,7 @@ pnpx fixit-cli create my-blog
 - 支持**二级菜单**
 - 支持**内容加密**（页面、局部）
 - 支持**友情链接**的页面模板
-- 支持基于 [algolia](https://www.algolia.com/)、[Fuse.js](https://fusejs.io/)、 **CSE** 或 [PostChat](https://ai.zhheo.com/console/login?InviteID=85041330) 的**搜索**
+- 支持基于 [algolia](https://www.algolia.com/)、[Fuse.js](https://fusejs.io/)、[Pagefind](https://pagefind.app)、CSE 或 [PostChat](https://ai.zhheo.com/console/login?InviteID=85041330) 的**搜索**
 - 支持基于 [Google](https://programmablesearchengine.google.com/) 的**自定义搜索引擎 (CSE)**
 - 支持 **Twemoji**
 - 支持**代码高亮**

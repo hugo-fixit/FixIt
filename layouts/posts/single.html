@@ -11,6 +11,7 @@
   {{- $showToc := $toc.enable | and (ne $tableOfContents `<nav id="TableOfContents"></nav>`) -}}
   {{- .Store.Set "showToc" $showToc -}}
   {{- $tableOfContents = dict "Content" $tableOfContents "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+  {{- $pagefindEnabled := and .Site.Params.search.enable (eq .Site.Params.search.type "pagefind") -}}
 
   <aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="{{ T "collections" }}">
     {{- /* Collection List */ -}}
@@ -26,7 +27,7 @@
   <article class="page single"{{ with .Params.fromAdapters }} data-adapters="{{ . }}"{{ end }}>
     <div class="header">
       {{- /* Title */ -}}
-      <h1 class="single-title animate__animated animate__flipInX" data-pagefind-body="true">
+      <h1 class="single-title animate__animated animate__flipInX"{{ if $pagefindEnabled }} data-pagefind-body{{ end }}>
         {{- $repost := $params.repost | default dict -}}
         {{- with $repost -}}
           {{- if eq .Enable true -}}
@@ -181,7 +182,7 @@
 
     {{- /* Content */ -}}
     {{- $content := dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
-    <div class="content" id="content" data-pagefind-body="true"{{ with $params.endFlag }} data-end-flag="{{ . }}"{{ end }}>
+    <div class="content" id="content"{{ if $pagefindEnabled }} data-pagefind-body{{ end }}{{ with $params.endFlag }} data-end-flag="{{ . }}"{{ end }}>
       {{- if not $params.password -}}
         {{- $content -}}
       {{- end -}}

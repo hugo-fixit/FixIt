@@ -265,9 +265,6 @@ class FixIt {
     const $menuToggleMobile = document.getElementById('menu-toggle-mobile');
     const $menuMobile = document.getElementById('menu-mobile');
     if (!$header || !$searchInput || !$searchToggle || !$searchLoading || !$searchClear) return;
-    const pagefindSearch = searchConfig.type === 'pagefind'
-      ? (this._pagefindSearch ||= createPagefindSearch(searchConfig))
-      : null;
     const setSearchExpanded = (expanded) => {
       $searchToggle?.setAttribute('aria-expanded', expanded ? 'true' : 'false');
     };
@@ -344,9 +341,10 @@ class FixIt {
       if ($searchInput.value === '') $searchClear.style.display = 'none';
       else $searchClear.style.display = 'inline';
     }, false);
-    if (pagefindSearch) {
+    if (searchConfig.type === 'pagefind') {
+      this._pagefindSearch = this._pagefindSearch || createPagefindSearch(searchConfig);
       $searchInput.addEventListener('focus', () => {
-        pagefindSearch.preload().catch((error) => {
+        this._pagefindSearch.preload().catch((error) => {
           console.error(error);
         });
       }, { once: true });
@@ -466,7 +464,7 @@ class FixIt {
                 }]);
               }
             } else if (searchConfig.type === 'pagefind') {
-              pagefindSearch
+              this._pagefindSearch
                 .search(query, maxResultLength)
                 .then((results) => {
                   finish(results || []);

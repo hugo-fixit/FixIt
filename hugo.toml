@@ -541,7 +541,7 @@ ignoreLocation = false
 useExtendedSearch = false
 ignoreFieldNorm = false
 
-# Pagefind search config
+# Pagefind search config (http://pagefind.app/)
 [params.search.pagefind]
 # Pagefind bundle and index directory
 bundlePath = "pagefind/"
