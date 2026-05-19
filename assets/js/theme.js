@@ -15,6 +15,7 @@ import {
   HTMLEscape,
 } from './utils/common';
 import FileTree from './lib/file-tree.js'
+import { createPagefindSearch } from './lib/pagefind-search.js'
 
 const copyText = createCopyText();
 
@@ -340,6 +341,14 @@ class FixIt {
       if ($searchInput.value === '') $searchClear.style.display = 'none';
       else $searchClear.style.display = 'inline';
     }, false);
+    if (searchConfig.type === 'pagefind') {
+      this._pagefindSearch = this._pagefindSearch || createPagefindSearch(searchConfig);
+      $searchInput.addEventListener('focus', () => {
+        this._pagefindSearch.preload().catch((error) => {
+          console.error(error);
+        });
+      }, { once: true });
+    }
 
     const initAutosearch = () => {
       const autosearch = autocomplete(`#search-input-${suffix}`,
@@ -454,6 +463,16 @@ class FixIt {
                   context: cseConfig.gotoResultsPage
                 }]);
               }
+            } else if (searchConfig.type === 'pagefind') {
+              this._pagefindSearch
+                .search(query, maxResultLength)
+                .then((results) => {
+                  finish(results || []);
+                })
+                .catch((err) => {
+                  console.error(err);
+                  finish([]);
+                });
             } else {
               finish([]);
             }
@@ -481,6 +500,11 @@ class FixIt {
                     icon = '<i class="fa-brands fa-google" aria-hidden="true"></i>';
                     href = 'https://programmablesearchengine.google.com/';
                   }
+                  break;
+                case 'pagefind':
+                  searchType = 'Pagefind';
+                  icon = '';
+                  href = 'https://pagefind.app/';
                   break;
                 default:
                   searchType = '';
