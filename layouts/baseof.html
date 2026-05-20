@@ -10,14 +10,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
     <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
-    {{- partial "layouts/head/index.html" . -}}
+    {{- partial "base/head/index.html" . -}}
     {{- /* TODO preload script https://developer.mozilla.org/zh-CN/docs/Web/HTML/Attributes/rel/preload */ -}}
   </head>
   <body data-instant-intensity="viewport" data-header-desktop="{{ .Site.Params.header.desktopMode }}" data-header-mobile="{{ .Site.Params.header.mobileMode }}">
     {{- /* Body wrapper */ -}}
     <div class="wrapper" data-page-style="{{ (partial `function/params.html`).pageStyle | default `normal` }}">
-      {{- partial "layouts/header.html" . -}}
-      {{- partial "layouts/breadcrumb.html" . -}}
+      {{- partial "base/header.html" . -}}
+      {{- partial "base/breadcrumb.html" . -}}
       {{- $toc := .Store.Get "toc" -}}
       <main class="fi-container"{{ if (eq $toc.enable true) | and (eq $toc.position `left`) }} data-reverse{{ end }}>
         {{- block "content" . }}{{ end -}}
@@ -25,13 +25,13 @@
       {{- /* Comment */ -}}
       {{- block "comments" . }}{{ end -}}
       {{- /* Footer */ -}}
-      {{- partialCached "layouts/footer.html" . -}}
+      {{- partialCached "base/footer.html" . -}}
     </div>
 
     {{- /* Theme widgets */ -}}
-    {{- partial "layouts/widgets.html" . -}}
+    {{- partial "base/widgets.html" . -}}
 
     {{- /* Load JavaScript scripts and CSS */ -}}
-    {{- partial "layouts/assets.html" . -}}
+    {{- partial "base/assets.html" . -}}
   </body>
 </html>

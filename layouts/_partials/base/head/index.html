@@ -8,7 +8,7 @@
   - SEO: Schema.org structured data for pages and homepage
   - SCRIPT: Early-loaded scripts (e.g., theme color scheme detection)
 
-  Called from: layouts/baseof.html
+  Called from: base/baseof.html
 */ -}}
 
 {{- $fingerprint := .Site.Store.Get "fingerprint" -}}
@@ -34,7 +34,7 @@
 
 {{- template "_internal/schema.html" . -}}
 {{- template "_internal/opengraph.html" . -}}
-{{- partial "layouts/head/twitter-cards.html" . -}}
+{{- partial "base/head/twitter-cards.html" . -}}
 
 {{- partial "plugin/pagefind-metadata.html" . -}}
 
