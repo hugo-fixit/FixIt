@@ -1,7 +1,8 @@
+/** MathJax integration — configures and dynamically loads the MathJax script. */
 const params = window.config.mathjax || {}
 
 /**
- * Load MathJax script dynamically
+ * Load MathJax script dynamically.
  */
 function loadMathJax() {
   const script = document.createElement('script')
@@ -11,8 +12,8 @@ function loadMathJax() {
 }
 
 /**
- * Configuring MathJax
- * https://docs.mathjax.org/en/latest/options/index.html
+ * Configuring MathJax.
+ * @see https://docs.mathjax.org/en/latest/options/index.html
  */
 window.MathJax = {
   tex: {
@@ -21,7 +22,6 @@ window.MathJax = {
     packages: {
       ...params.packages,
     },
-    // custom macros
     macros: {
       // make \KaTeX command work in MathJax
       KaTeX: '{K\\kern-.325em\\raise.21em{\\scriptstyle{A}}\\kern-.17em\\TeX}',
@@ -31,14 +31,14 @@ window.MathJax = {
   },
   loader: {
     ...params.loader,
-    failed: function (error) {
-      console.error(`MathJax(${error.package || '?'}): ${error.message}`);
+    failed(error: { package?: string, message: string }) {
+      console.error(`MathJax(${error.package || '?'}): ${error.message}`)
     },
   },
   options: {
     processHtmlClass: 'content',
     ...params.options,
-  }
+  },
 }
 
 loadMathJax()

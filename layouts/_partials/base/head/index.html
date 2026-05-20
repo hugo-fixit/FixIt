@@ -315,7 +315,7 @@
 {{- if not hugo.IsProduction -}}
   {{- $options = dict "sourceMap" "external" | merge $options -}}
 {{- end -}}
-{{- dict "Source" (resources.Get "js/head/color-scheme.js") "Build" $options "Fingerprint" $fingerprint | partial "plugin/script.html" -}}
+{{- dict "Source" (resources.Get "js/head/color-scheme.ts") "Build" $options "Fingerprint" $fingerprint | partial "plugin/script.html" -}}
 
 {{- /* Custom head */ -}}
 {{- block "custom-head" . }}{{ end -}}

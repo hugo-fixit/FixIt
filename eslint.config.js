@@ -10,7 +10,7 @@ export default antfu({
     'layouts/**/*.json',
     'layouts/**/*.xml',
     'layouts/**/*.md',
-    // 临时忽略
-    'assets/js/**',
+    // ignore temporarily
+    'assets/js/service-worker.js',
   ],
 })

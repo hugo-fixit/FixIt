@@ -4,6 +4,7 @@ FixIt theme assets partial
 - Third-party libraries and plugins
 - Theme assets and plugins
   - Config script
+  - FileTree plugin
   - MathJax plugin
   - Mermaid plugin
   - Theme script
@@ -193,7 +194,7 @@ FixIt theme assets partial
     {{- if not hugo.IsProduction -}}
       {{- $options = dict "sourceMap" "external" | merge $options -}}
     {{- end -}}
-    {{- dict "Source" (resources.Get "js/lib/aplayer.js") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+    {{- dict "Source" (resources.Get "js/lib/aplayer.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- end -}}
   {{- if .Store.Get "hasMusic" -}}
     {{- /* MetingJS */ -}}
@@ -268,7 +269,7 @@ FixIt theme assets partial
   {{- if not hugo.IsProduction -}}
     {{- $options = dict "sourceMap" "external" | merge $options -}}
   {{- end -}}
-  {{- dict "Source" (resources.Get "js/fixit-decryptor.js") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" (resources.Get "js/lib/fixit-decryptor.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "all" (isset $params "password") "shortcode" ($encryptPartial | default false) | dict "encryption" | merge $config -}}
 {{- end -}}
 
@@ -289,7 +290,7 @@ FixIt theme assets partial
 {{- /* PWA */ -}}
 {{- if not hugo.IsServer | and .Site.Params.enablePWA | and hugo.IsProduction -}}
   {{- $options := dict "targetPath" "service-worker.min.js" "minify" true -}}
-  {{- $source := resources.Get "js/service-worker.js" | js.Build $options -}}
+  {{- $source := resources.Get "js/service-worker.ts" | js.Build $options -}}
   {{- $_ := $source.RelPermalink -}}
   {{- $config = dict "enablePWA" .Site.Params.enablePWA | merge $config -}}
 {{- end -}}
@@ -346,6 +347,13 @@ FixIt theme assets partial
 {{- end -}}
 {{- dict "Content" $configJS "Path" $targetPath "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
+{{- /* File tree */ -}}
+{{- $options := dict "targetPath" "js/lib/file-tree.min.js" "minify" hugo.IsProduction -}}
+{{- if not hugo.IsProduction -}}
+  {{- $options = dict "sourceMap" "external" | merge $options -}}
+{{- end -}}
+{{- dict "Source" (resources.Get "js/lib/file-tree.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+
 {{- /* MathJax plugin */ -}}
 {{- if .Store.Get "hasMathJax" | and (not $isArchivesOrOffline) -}}
   {{- $targetPath := "" -}}
@@ -356,7 +364,7 @@ FixIt theme assets partial
   {{- if not hugo.IsProduction -}}
     {{- $options = dict "sourceMap" "external" | merge $options -}}
   {{- end -}}
-  {{- dict "Source" (resources.Get "js/lib/mathjax.js") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" (resources.Get "js/lib/mathjax.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* Mermaid plugin */ -}}
@@ -371,17 +379,17 @@ FixIt theme assets partial
 {{- end -}}
 
 {{- /* Theme script */ -}}
-{{- $options := dict "targetPath" "js/theme.min.js" "minify" hugo.IsProduction -}}
+{{- $options := dict "targetPath" "js/main.min.js" "minify" hugo.IsProduction -}}
 {{- if not hugo.IsProduction -}}
   {{- $options = dict "sourceMap" "external" | merge $options -}}
 {{- end -}}
-{{- dict "Source" (resources.Get "js/theme.js") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+{{- dict "Source" (resources.Get "js/main.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
 {{- /* Custom Assets */ -}}
 {{- block "custom-assets" . }}{{ end -}}
 
-{{- /* Custom script */ -}}
-{{- with resources.Get "js/custom.js" -}}
+{{- /* Custom script (custom.ts takes priority over custom.js) */ -}}
+{{- with resources.Get "js/custom.ts" | default (resources.Get "js/custom.js") -}}
   {{- $options := dict "targetPath" "js/custom.min.js" "minify" hugo.IsProduction -}}
   {{- if not hugo.IsProduction -}}
     {{- $options = dict "sourceMap" "external" | merge $options -}}

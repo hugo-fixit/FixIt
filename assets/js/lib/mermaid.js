@@ -2,6 +2,7 @@
 {{- $mermaid := .Site.Params.mermaid -}}
 {{- $mermaidCDN := $mermaid.cdn | default "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs" -}}
 
+/** Mermaid diagram integration — lazy rendering, theme sync, and pan/zoom support. */
 import mermaid from "{{ $mermaidCDN }}"
 {{- with $mermaid.zenuml }}
 import zenuml from "{{ . }}"
@@ -25,8 +26,6 @@ for(const item of {{ $loadersArr }}) {
 mermaid.registerLayoutLoaders(loaders)
 mermaid.startOnLoad = false;
 const config = {{ $mermaid | jsonify }}
-let tabContainerEventBound = false
-let mermaidThemeRerenderBound = false
 let mermaidContainerObserver = null
 let mermaidRenderLock = Promise.resolve()
 let mermaidConfigKey = ''
@@ -34,9 +33,12 @@ let mermaidIdSeq = 0
 // Panzoom states
 let panzoomInstances = null
 let panzoomWheelHosts = null
-let panzoomEventBound = false
-let mermaidThemeSyncBound = false
 let mermaidPanzoomGroups = null
+
+console.log(
+  `%c💫 FixIt Mermaid`,
+  'color: #FF3670; font-weight: bold; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);',
+)
 
 /**
  * Waits for the next animation frame.
@@ -274,6 +276,11 @@ async function renderMermaidElement(el, { theme, darkMode } = {}) {
   })
 }
 
+/**
+ * Collect all diagram containers that contain Mermaid elements.
+ * @param {Element|Document} [root=document] - The root to search within.
+ * @returns {Element[]}
+ */
 function collectMermaidContainers(root = document) {
   return Array.from(root.querySelectorAll('.diagram-container'))
     .filter((container) => container && container.querySelector('.mermaid, .mermaid-dark, .mermaid-neutral'))
@@ -283,6 +290,7 @@ function collectMermaidContainers(root = document) {
  * Core rule: render only when the active layer is visible and not rendered yet.
  * - "Active layer" means `.mermaid` in light mode or `.mermaid-dark` in dark mode.
  * - We treat presence of a rendered `<svg>` as "already rendered" even if flags are missing.
+ * @param {Element} container - A `.diagram-container` element.
  */
 async function renderActiveLayerInContainer(container) {
   if (!container) return
@@ -334,6 +342,8 @@ function bindMermaidIntersectionObserver() {
 /**
  * Registers all Mermaid containers under root into the observer.
  * Idempotent via `data-mermaid-observed`.
+ * @param {Element|Document} [root=document] - The root to search within.
+ * @param {boolean} [refresh=false] - If `true`, re-observe all containers.
  */
 function observeMermaidContainers(root = document, refresh = false) {
   bindMermaidIntersectionObserver()
@@ -405,7 +415,7 @@ function bindMermaidPanzoom(svg) {
   host.addEventListener('pointerdown', () => {
     const currentSvg = host.querySelector('svg')
     if (group && currentSvg) group.lastSvg = currentSvg
-  })
+  }, false)
 
   host.addEventListener('wheel', (event) => {
     if (!event.ctrlKey) return
@@ -425,7 +435,7 @@ function bindMermaidPanzoom(svg) {
  * - Ensures Mermaid renders when the diagram tab is active
  */
 function initDiagramControls() {
-  document.querySelectorAll('.diagram-tabs[data-diagram="mermaid"]:not([data-diagram-init])').forEach((tabs) => {
+  document.querySelectorAll('.diagram-tabs[data-diagram="mermaid"]:not([data-diagram-init])').forEach(async (tabs) => {
     const actions = tabs.querySelector('.tabs-actions')
     const diagramTabBtn = tabs.querySelector('.tab-item[data-tab="diagram"]')
     const codeTabBtn = tabs.querySelector('.tab-item[data-tab="code"]')
@@ -472,6 +482,8 @@ function initDiagramControls() {
 
     const pinnedFullscreenBtn = codeBlock.querySelector('.code-header .fullscreen-btn')
     if (pinnedFullscreenBtn && pinnedFullscreenBtn.parentElement !== actions) {
+      // wait until the fullscreen button in code.ts is initialized
+      await nextFrame()
       actions.appendChild(pinnedFullscreenBtn)
     }
 
@@ -518,24 +530,24 @@ function initDiagramControls() {
       return svg && panzoomInstances ? panzoomInstances.get(svg) : null
     }
 
-    diagramTabBtn.addEventListener('click', () => switchTo('diagram'))
-    codeTabBtn.addEventListener('click', () => switchTo('code'))
+    diagramTabBtn.addEventListener('click', () => switchTo('diagram'), false)
+    codeTabBtn.addEventListener('click', () => switchTo('code'), false)
 
     zoomInBtn?.addEventListener('click', () => {
       const panzoom = resolvePanzoom()
       if (!panzoom?.zoomIn) return
       try { panzoom.zoomIn({ animate: true }) } catch { panzoom.zoomIn() }
-    })
+    }, false)
     zoomOutBtn?.addEventListener('click', () => {
       const panzoom = resolvePanzoom()
       if (!panzoom?.zoomOut) return
       try { panzoom.zoomOut({ animate: true }) } catch { panzoom.zoomOut() }
-    })
+    }, false)
     resetBtn?.addEventListener('click', () => {
       const panzoom = resolvePanzoom()
       if (!panzoom?.reset) return
       try { panzoom.reset({ animate: true }) } catch { panzoom.reset() }
-    })
+    }, false)
     downloadBtn?.addEventListener('click', () => {
       const svg = getActiveMermaidSvg(diagramBlock)
       if (!svg) return
@@ -552,7 +564,7 @@ function initDiagramControls() {
       link.click()
       document.body.removeChild(link)
       URL.revokeObjectURL(url)
-    })
+    }, false)
   })
 }
 
@@ -561,13 +573,11 @@ function initDiagramControls() {
  * @returns {void}
  */
 function bindRenderedPanzoom() {
-  if (panzoomEventBound) return
-  panzoomEventBound = true
   document.addEventListener('fixit:mermaid-rendered', (event) => {
     const svgId = event?.detail?.svgId
     if (!svgId) return
     bindMermaidPanzoom(document.getElementById(svgId))
-  })
+  }, false)
 }
 
 /**
@@ -575,16 +585,11 @@ function bindRenderedPanzoom() {
  * @returns {void}
  */
 function bindTabContainerChanged() {
-  if (tabContainerEventBound) return
-  tabContainerEventBound = true
-  document.addEventListener('tab-container-changed', async (event) => {
+  document.addEventListener('tab-container-changed', (event) => {
     const panel = event?.panel || event?.detail?.relatedTarget
     if (!panel) return
-    // Wait for layout/visibility to settle after tab switch before measuring visibility.
-    await nextFrame()
-    await nextFrame()
     observeMermaidContainers(panel, true)
-  })
+  }, false)
 }
 
 /**
@@ -592,8 +597,6 @@ function bindTabContainerChanged() {
  * @returns {void}
  */
 function bindThemeSync() {
-  if (mermaidThemeSyncBound) return
-  mermaidThemeSyncBound = true
   let lastEffectiveDark = isDarkMode()
 
   const getActivePanzoomSvg = (container) => {
@@ -647,52 +650,36 @@ function bindThemeSync() {
     })
   }
 
-  if (window.fixit?.switchThemeEventSet?.add) {
-    window.fixit.switchThemeEventSet.add(async (isDark) => {
-      if (isDark === lastEffectiveDark) return
-      lastEffectiveDark = isDark
-      await nextFrame()
-      await nextFrame()
-      sync(isDark)
-    })
-  }
+  document.addEventListener('fixit:switch-theme', (e) => {
+    const isDark = e.detail.isDark
+    if (isDark === lastEffectiveDark) return
+    lastEffectiveDark = isDark
+    sync(isDark)
+    observeMermaidContainers(document, true)
+  }, false)
 }
 
 /**
  * Initializes Mermaid rendering, events, lazy loading and diagram controls.
- * @returns {Promise<void>}
  */
-async function init() {
+function initMermaid() {
   const mermaidElements = document.querySelectorAll('.mermaid, .mermaid-dark, .mermaid-neutral')
   if (!mermaidElements.length) return
-  console.log(
-    `%c💫 FixIt Mermaid`,
-    'color: #FF3670; font-weight: bold; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);',
-  )
 
   initDiagramControls()
-  bindRenderedPanzoom()
-  bindThemeSync()
-  bindTabContainerChanged()
-
   // Core: observe containers and render only when they become visible.
   observeMermaidContainers()
   // Neutral is non-critical, defer to idle time.
   scheduleNeutralRender()
-
-  if (!mermaidThemeRerenderBound && window.fixit?.switchThemeEventSet?.add) {
-    mermaidThemeRerenderBound = true
-    window.fixit.switchThemeEventSet.add(async () => {
-      await nextFrame()
-      await nextFrame()
-      // Theme switch doesn't change container intersection, so refresh IO to trigger callbacks.
-      observeMermaidContainers(document, true)
-    })
-  }
 }
 
-window.FixItMermaid = {
-  config,
-  init,
-}
 window.mermaid = mermaid
+
+document.addEventListener('DOMContentLoaded', () => {
+  bindRenderedPanzoom()
+  bindThemeSync()
+  bindTabContainerChanged()
+  initMermaid()
+  document.addEventListener('fixit:decrypted', initMermaid, false)
+  document.addEventListener('fixit:partial-decrypted', initMermaid, false)
+}, false)

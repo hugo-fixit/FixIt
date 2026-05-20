@@ -2,43 +2,40 @@
  * for link redirection page
  */
 
-import { createCopyText } from '../utils/common';
+import { createCopyText } from '../utils'
 
-const copyText = createCopyText();
+const copyText = createCopyText()
 
 function initLinkGuard() {
-  const params = new URLSearchParams(window.location.search);
-  const target = params.get('target');
-  const targetElement = document.querySelector('.target');
-  const copyBtn = document.querySelector('.copy-icon-btn');
-  const confirmBtn = document.querySelector('.confirm-btn');
+  const params = new URLSearchParams(window.location.search)
+  const target = params.get('target')
+  const $target = document.querySelector('.target')
+  const $copy = document.querySelector('.copy-icon-btn')
+  const $confirm = document.querySelector('.confirm-btn')
 
-  if (target) {
-    targetElement.textContent = target;
-    copyBtn.disabled = false;
-    confirmBtn.disabled = false;
-
-    copyBtn.addEventListener('click', () =>{
-      copyText(target).then(() => {
-        copyBtn.toggleAttribute('data-copied', true);
-        setTimeout(() => {
-          copyBtn.toggleAttribute('data-copied', false);
-        }, 2000);
-      }, () => {
-        console.error('Clipboard write failed!', 'Your browser does not support clipboard API!');
-      });
-    });
-
-    confirmBtn.addEventListener('click', () => {
-      window.location.href = target;
-    });
-  } else {
-    targetElement.textContent = 'Invalid target URL';
+  if (!target) {
+    $target.textContent = 'Invalid target URL'
+    return
   }
+
+  $target.textContent = target
+  $copy.disabled = false
+  $confirm.disabled = false
+
+  $copy.addEventListener('click', () => {
+    copyText(target).then(() => {
+      $copy.toggleAttribute('data-copied', true)
+      window.setTimeout(() => {
+        $copy.toggleAttribute('data-copied', false)
+      }, 2000)
+    }, () => {
+      console.error('Clipboard write failed!', 'Your browser does not support clipboard API!')
+    })
+  })
+
+  $confirm.addEventListener('click', () => {
+    window.location.href = target
+  })
 }
 
-if (document.readyState !== 'loading') {
-  initLinkGuard();
-} else {
-  document.addEventListener('DOMContentLoaded', initLinkGuard, false);
-}
+document.addEventListener('DOMContentLoaded', initLinkGuard, false)

@@ -19,6 +19,9 @@ node_modules/
 # Trae
 .trae/
 
+# Claude
+.claude/
+
 # OS Files
 ## Windows
 Thumbs.db
