@@ -40,14 +40,16 @@
 {{- end -}}
 
 {{- /* Tabs Container */ -}}
-<tab-container default-tab="{{ $defaultTab }}" placement="{{ $placement }}"{{ with $type }} type="{{ . }}"{{ end }}>
-  {{- range $index, $tab := $tabs -}}
-    {{- $title := $tab.title | default (printf "Untitled%v" $index) -}}
-    {{- $id := $tab.id -}}
-    <button class="tab-button" type="button" role="tab" id="tab-{{ $id }}" aria-selected="{{ eq $index $defaultTab }}">{{ $title | $.Page.RenderString }}</button>
-  {{- end -}}
-  {{- .Inner -}}
-</tab-container>
+<div class="shortcode-tabs">
+  <tab-container default-tab="{{ $defaultTab }}" placement="{{ $placement }}"{{ with $type }} type="{{ . }}"{{ end }}>
+    {{- range $index, $tab := $tabs -}}
+      {{- $title := $tab.title | default (printf "Untitled%v" $index) -}}
+      {{- $id := $tab.id -}}
+      <button class="tab-button" type="button" role="tab" id="tab-{{ $id }}" aria-selected="{{ eq $index $defaultTab }}">{{ $title | $.Page.RenderString }}</button>
+    {{- end -}}
+    {{- .Inner | strings.TrimSpace | .Page.RenderString -}}
+  </tab-container>
+</div>
 
 {{- .Page.Store.Set "hasTabs" true -}}
 
