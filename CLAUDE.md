@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-FixIt is a modern, responsive theme for Hugo static site generator. Built with Hugo templates, SCSS, and TypeScript/JavaScript.
+FixIt is a modern, responsive theme for the Hugo static site generator. Built with Hugo templates, SCSS, and TypeScript.
 
 ## Development Commands
 
@@ -43,41 +43,53 @@ pnpm typecheck         # Run TypeScript type checking
 
 ### JavaScript Module System (`assets/js/`)
 
-The JS follows a factory-function pattern with a shared context object:
+The JS follows a service-class architecture with dependency injection:
 
-- **`main.ts`** - Entry point. Creates `FixItContext` via `createFixIt()`, then runs initialization sequence on DOMContentLoaded.
-- **`types.ts`** - TypeScript interfaces for `FixItContext`, `FixItConfig`, and all config sub-types. Declares global `window` augmentations for third-party libs.
-- **`modules/`** - Feature modules (charts, code, comment, content, core, encryption, events, link-guard, menu, misc, search, svg, theme, toc). Each exports a `createX(ctx)` factory that returns methods merged into the context.
-- **`utils/`** - Pure utility functions (animation, array, clipboard, dom, file, media, string, theme, tooltip, validate). Re-exported from `utils/index.ts`.
-- **`lib/`** - Third-party library wrappers (aplayer, file-tree, fixit-decryptor, mathjax, mermaid).
+- **`main.ts`** — Entry point. Bootstraps `ServiceContainer` and `TypedEventBus`, registers all services, resolves them, and builds a `window.fixit` backward-compatibility facade via `publicAPI()`. Runs the init sequence on `DOMContentLoaded`.
+- **`types.ts`** — TypeScript interfaces for `FixItConfig`, `FixItPublicAPI`, and all config sub-types. Declares global `window` augmentations for third-party libs.
+- **`core/`** — Infrastructure layer:
+  - `container.ts` — Lightweight DI container with `Symbol`-based tokens, lazy resolution, and circular-dependency detection.
+  - `event-bus.ts` — Typed wrapper around DOM `CustomEvents` with `on`/`off`/`emit` methods and a `FixItEventMap` payload type map.
+  - `tokens.ts` — Service interfaces (`CoreService`, `ThemeService`, `CodeService`, etc.) and a `TOKENS` constant mapping each to a typed `ServiceToken`.
+- **`modules/`** — Feature modules. Each is a class implementing its service interface. Dependencies are constructor-injected via the container. Private state uses ES6 `#` fields. Modules: charts, code, comment, content, core, encryption, events, link-guard, menu, misc, search, svg, theme, toc. `pagefind.ts` is a standalone factory consumed by `SearchModule`.
+- **`utils/`** — Pure utility functions (animation, array, clipboard, dom, file, media, string, theme, tooltip, validate). Re-exported from `utils/index.ts`.
+- **`lib/`** — Third-party library wrappers (aplayer, file-tree, fixit-decryptor, mathjax, mermaid).
+- **`pages/`** — Page-specific scripts (e.g. `link.ts` for the link guard redirection page).
 
 Module pattern:
 
 ```typescript
-export function createModule(ctx: FixItContext) {
-  // Initialize state on ctx
-  // Return { methodName, ... } merged into ctx
+export class ExampleModule implements ExampleService {
+  #privateState: any // ES6 private field
+
+  constructor(
+    private readonly core: CoreService,
+    private readonly bus: TypedEventBus,
+  ) {}
+
+  publicMethod(): void { /* ... */ }
+  #privateHelper(): void { /* ... */ }
 }
 ```
 
 ### Hugo Templates (`layouts/`)
 
-- **`_partials/`** - Reusable template components
-- **`_shortcodes/`** - Custom Hugo shortcodes
-- **`_markup/`** - Hugo render hooks
+- **`_partials/`** — Reusable template components
+- **`_shortcodes/`** — Custom Hugo shortcodes
+- **`_markup/`** — Hugo render hooks
 
 ### Theme Configuration
 
-- **`hugo.toml`** - Default theme configuration (47K+ lines)
-- **`theme.toml`** - Theme metadata
+- **`hugo.toml`** — Default theme configuration (47K+ lines)
+- **`theme.toml`** — Theme metadata
 
 ### Packages (`packages/`)
 
 Monorepo packages managed by pnpm workspaces:
 
-- `integration` - Integration testing
-- `shared` - Shared utilities
-- `versioning` - Version management tooling
+- `integration` — Integration testing
+- `shared` — Shared utilities
+- `versioning` — Version management tooling
 
 ## Commit Convention
 
