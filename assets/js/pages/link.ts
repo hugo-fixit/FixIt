@@ -1,17 +1,14 @@
-/**
- * for link redirection page
- */
-
+/** Link guard redirection page — displays target URL with copy and confirm actions. */
 import { createCopyText } from '../utils'
 
 const copyText = createCopyText()
 
-function initLinkGuard() {
+function initLinkGuard(): void {
   const params = new URLSearchParams(window.location.search)
   const target = params.get('target')
-  const $target = document.querySelector('.target')
-  const $copy = document.querySelector('.copy-icon-btn')
-  const $confirm = document.querySelector('.confirm-btn')
+  const $target = document.querySelector<HTMLElement>('.target')!
+  const $copy = document.querySelector<HTMLButtonElement>('.copy-icon-btn')!
+  const $confirm = document.querySelector<HTMLButtonElement>('.confirm-btn')!
 
   if (!target) {
     $target.textContent = 'Invalid target URL'
