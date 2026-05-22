@@ -11,12 +11,12 @@ const SEARCH_META: Record<string, { label: string, icon: string, href: string }>
 }
 
 export class SearchModule implements SearchService {
-  private _searchMobileOnce: boolean | undefined
-  private _searchDesktopOnce: boolean | undefined
-  private _searchMobile: any
-  private _searchDesktop: any
-  private _algoliaIndex: any
-  private _pagefindSearch: ReturnType<typeof createPagefindSearch> | undefined
+  #searchMobileOnce: boolean | undefined
+  #searchDesktopOnce: boolean | undefined
+  #searchMobile: any
+  #searchDesktop: any
+  #algoliaIndex: any
+  #pagefindSearch: ReturnType<typeof createPagefindSearch> | undefined
 
   constructor(private readonly core: CoreService) {}
 
@@ -27,7 +27,7 @@ export class SearchModule implements SearchService {
    * @param $searchClear - The clear button element.
    * @param searchInstance - The autocomplete instance to clear.
    */
-  _resetSearchUI($header: HTMLElement, $searchLoading: HTMLElement, $searchClear: HTMLElement, searchInstance: any) {
+  #resetSearchUI($header: HTMLElement, $searchLoading: HTMLElement, $searchClear: HTMLElement, searchInstance: any) {
     $header.classList.remove('open')
     $searchLoading.style.display = 'none'
     $searchClear.style.display = 'none'
@@ -41,8 +41,8 @@ export class SearchModule implements SearchService {
     const _isMobile = isMobile()
     if (
       !searchConfig
-      || (_isMobile && this._searchMobileOnce)
-      || (!_isMobile && this._searchDesktopOnce)
+      || (_isMobile && this.#searchMobileOnce)
+      || (!_isMobile && this.#searchDesktopOnce)
     ) {
       return
     }
@@ -85,7 +85,7 @@ export class SearchModule implements SearchService {
         $menuMobile.classList.remove('active')
         $menuToggleMobile.setAttribute('aria-expanded', 'false')
       }
-      this._resetSearchUI($header, $searchLoading, $searchClear, _isMobile ? this._searchMobile : this._searchDesktop)
+      this.#resetSearchUI($header, $searchLoading, $searchClear, _isMobile ? this.#searchMobile : this.#searchDesktop)
     }
 
     // goto the PostChat panel rather than search results
@@ -104,7 +104,7 @@ export class SearchModule implements SearchService {
     }
 
     if (_isMobile) {
-      this._searchMobileOnce = true
+      this.#searchMobileOnce = true
       this.core.registerMaskOverlay(overlayName, {
         isActive: () => $header.classList.contains('open'),
         onOpen: openSearch,
@@ -119,11 +119,11 @@ export class SearchModule implements SearchService {
       $searchClear.addEventListener('click', () => {
         this.core.disableScrollEvent = false
         $searchClear.style.display = 'none'
-        this._searchMobile && this._searchMobile.autocomplete.setVal('')
+        this.#searchMobile && this.#searchMobile.autocomplete.setVal('')
       }, false)
     }
     else {
-      this._searchDesktopOnce = true
+      this.#searchDesktopOnce = true
       this.core.registerMaskOverlay(overlayName, {
         isActive: () => $header.classList.contains('open'),
         onOpen: openSearch,
@@ -134,7 +134,7 @@ export class SearchModule implements SearchService {
       }, false)
       $searchClear.addEventListener('click', () => {
         $searchClear.style.display = 'none'
-        this._searchDesktop && this._searchDesktop.autocomplete.setVal('')
+        this.#searchDesktop && this.#searchDesktop.autocomplete.setVal('')
       }, false)
     }
     $searchInput.addEventListener('input', () => {
@@ -143,9 +143,9 @@ export class SearchModule implements SearchService {
       else $searchClear.style.display = 'inline'
     }, false)
     if (searchConfig.type === 'pagefind') {
-      this._pagefindSearch = this._pagefindSearch || createPagefindSearch(searchConfig)
+      this.#pagefindSearch = this.#pagefindSearch || createPagefindSearch(searchConfig)
       $searchInput.addEventListener('focus', () => {
-        this._pagefindSearch!.preload().catch((error: Error) => {
+        this.#pagefindSearch!.preload().catch((error: Error) => {
           console.error(error)
         })
       }, { once: true })
@@ -170,13 +170,13 @@ export class SearchModule implements SearchService {
             callback(results)
           }
           if (searchConfig.type === 'algolia') {
-            this._algoliaIndex
-              = this._algoliaIndex
+            this.#algoliaIndex
+              = this.#algoliaIndex
                 || window.algoliasearch!(
                   searchConfig.algoliaAppID,
                   searchConfig.algoliaSearchKey,
                 ).initIndex(searchConfig.algoliaIndex)
-            this._algoliaIndex
+            this.#algoliaIndex
               .search(query, {
                 offset: 0,
                 length: maxResultLength * 8,
@@ -270,7 +270,7 @@ export class SearchModule implements SearchService {
             }
           }
           else if (searchConfig.type === 'pagefind') {
-            this._pagefindSearch!
+            this.#pagefindSearch!
               .search(query, maxResultLength)
               .then((results: any[] | null) => {
                 finish(results || [])
@@ -301,10 +301,10 @@ export class SearchModule implements SearchService {
         window.location.assign(suggestion.uri)
       })
       if (_isMobile) {
-        this._searchMobile = autosearch
+        this.#searchMobile = autosearch
       }
       else {
-        this._searchDesktop = autosearch
+        this.#searchDesktop = autosearch
       }
     }
     initAutosearch()

@@ -5,7 +5,7 @@ import type { CoreService, ThemeService } from '../core/tokens'
 import { forEach } from '../utils'
 
 export class ThemeModule implements ThemeService {
-  private _themeColorOnSwitchTheme: (() => void) | undefined
+  #themeColorOnSwitchTheme: (() => void) | undefined
 
   constructor(
     private readonly core: CoreService,
@@ -17,11 +17,11 @@ export class ThemeModule implements ThemeService {
     const $meta = document.querySelector<HTMLMetaElement>('[name="theme-color"]')
     if (!$meta)
       return
-    this._themeColorOnSwitchTheme = this._themeColorOnSwitchTheme || (() => {
+    this.#themeColorOnSwitchTheme = this.#themeColorOnSwitchTheme || (() => {
       $meta.content = this.core.isDark ? $meta.dataset.dark! : $meta.dataset.light!
     })
-    this.bus.on('fixit:switch-theme', this._themeColorOnSwitchTheme)
-    this._themeColorOnSwitchTheme()
+    this.bus.on('fixit:switch-theme', this.#themeColorOnSwitchTheme)
+    this.#themeColorOnSwitchTheme()
   }
 
   /** Initialize the theme switch button cycle and system preference listener. */

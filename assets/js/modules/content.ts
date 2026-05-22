@@ -10,7 +10,7 @@ const lightGallery = window.lightGallery
 
 export class ContentModule implements ContentService {
   private lg: { destroy: (removeSubModules?: boolean) => void } | undefined
-  private _jsonViewerOnSwitchTheme: (() => void) | undefined
+  #jsonViewerOnSwitchTheme: (() => void) | undefined
 
   constructor(
     private readonly core: CoreService,
@@ -60,13 +60,13 @@ export class ContentModule implements ContentService {
   initJsonViewer() {
     if (!window.JsonViewerElement)
       return
-    this._jsonViewerOnSwitchTheme = this._jsonViewerOnSwitchTheme || (() => {
+    this.#jsonViewerOnSwitchTheme = this.#jsonViewerOnSwitchTheme || (() => {
       forEach(document.getElementsByTagName('json-viewer'), ($el: Element) => {
         $el.setAttribute('theme', this.core.isDark ? 'dark' : 'light')
       })
     })
-    this.bus.on('fixit:switch-theme', this._jsonViewerOnSwitchTheme)
-    this._jsonViewerOnSwitchTheme()
+    this.bus.on('fixit:switch-theme', this.#jsonViewerOnSwitchTheme)
+    this.#jsonViewerOnSwitchTheme()
   }
 
   /** Convert footnote refs into tooltip-enabled elements. */
@@ -120,7 +120,7 @@ export class ContentModule implements ContentService {
    * @param target - The root element to initialize components within.
    * @param includeToc - Whether to also initialize TOC-related components.
    */
-  private _initContentComponents(target: Element | Document = document, includeToc = true) {
+  #initContentComponents(target: Element | Document = document, includeToc = true) {
     this.initTwemoji(target)
     this.initDetails(target)
     this.initLightGallery()
@@ -146,13 +146,13 @@ export class ContentModule implements ContentService {
 
   initContent() {
     if (!this.core.config.encryption?.all) {
-      this._initContentComponents()
+      this.#initContentComponents()
     }
     this.bus.on('fixit:decrypted', () => {
-      this._initContentComponents()
+      this.#initContentComponents()
     })
     this.bus.on('fixit:partial-decrypted', (e) => {
-      this._initContentComponents(e.target, false)
+      this.#initContentComponents(e.target, false)
     })
   }
 

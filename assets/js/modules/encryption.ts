@@ -10,7 +10,7 @@ export class EncryptionModule implements EncryptionService {
    * @param container - The root element containing encrypted elements.
    * @param show - `true` to show decrypted content, `false` to hide.
    */
-  private _toggleEncryptedClass(container: Element | Document, show: boolean) {
+  #toggleEncryptedClass(container: Element | Document, show: boolean) {
     const fromClass = show ? 'encrypted-hidden' : 'decrypted-shown'
     const toClass = show ? 'decrypted-shown' : 'encrypted-hidden'
     forEach(container.querySelectorAll(`.${fromClass}`), ($element: Element) => {
@@ -25,14 +25,14 @@ export class EncryptionModule implements EncryptionService {
     const decryptor = new window.FixItDecryptor()
 
     document.addEventListener('fixit:decrypted', () => {
-      this._toggleEncryptedClass(document, true)
+      this.#toggleEncryptedClass(document, true)
     })
     document.addEventListener('fixit:partial-decrypted', (e: Event) => {
       const $content = (e as CustomEvent).detail.target as Element
-      this._toggleEncryptedClass($content, true)
+      this.#toggleEncryptedClass($content, true)
     })
     document.addEventListener('fixit:reset', () => {
-      this._toggleEncryptedClass(document, false)
+      this.#toggleEncryptedClass(document, false)
     })
 
     decryptor.init(this.core.config.encryption)

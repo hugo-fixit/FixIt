@@ -7,7 +7,7 @@ const copyText = createCopyText()
 
 export class CodeModule implements CodeService {
   private readonly CODE_TAB_SYNC_EVENT = 'fixit:code-tab-sync'
-  private _codeFullscreenOnEsc: ((event: KeyboardEvent) => void) | undefined
+  #codeFullscreenOnEsc: ((event: KeyboardEvent) => void) | undefined
 
   /**
    * Attach copy-to-clipboard behaviour to a code block.
@@ -83,7 +83,7 @@ export class CodeModule implements CodeService {
    * @param codeBlock - The `.code-block` element.
    * @returns The element to apply fullscreen to.
    */
-  _getCodeFullscreenTarget(codeBlock: HTMLElement): HTMLElement {
+  #getCodeFullscreenTarget(codeBlock: HTMLElement): HTMLElement {
     return (codeBlock.closest('.code-tabs') as HTMLElement) || codeBlock
   }
 
@@ -92,8 +92,8 @@ export class CodeModule implements CodeService {
    * @param codeBlock - The `.code-block` element.
    * @param show - `true` to enter fullscreen, `false` to exit.
    */
-  _setCodeFullscreenState(codeBlock: HTMLElement, show: boolean) {
-    const target = this._getCodeFullscreenTarget(codeBlock)
+  #setCodeFullscreenState(codeBlock: HTMLElement, show: boolean) {
+    const target = this.#getCodeFullscreenTarget(codeBlock)
     const expandBtn = codeBlock.querySelector<HTMLElement>('.code-expand-btn')
 
     if (show && expandBtn) {
@@ -131,12 +131,12 @@ export class CodeModule implements CodeService {
     if ($activeTabs) {
       const $activeBlock = $activeTabs.querySelector<HTMLElement>('.code-block.active') || $activeTabs.querySelector<HTMLElement>('.code-block')
       if ($activeBlock)
-        this._setCodeFullscreenState($activeBlock, false)
+        this.#setCodeFullscreenState($activeBlock, false)
       return
     }
     const $activeBlock = document.querySelector<HTMLElement>('.code-block.highlight.is-fullscreen')
     if ($activeBlock)
-      this._setCodeFullscreenState($activeBlock, false)
+      this.#setCodeFullscreenState($activeBlock, false)
   }
 
   /**
@@ -148,21 +148,21 @@ export class CodeModule implements CodeService {
     if (!fullscreenBtn)
       return
     fullscreenBtn.addEventListener('click', () => {
-      const target = this._getCodeFullscreenTarget(codeBlock)
+      const target = this.#getCodeFullscreenTarget(codeBlock)
       const show = !target.classList.contains('is-fullscreen')
       if (show) {
         this.closeCodeFullscreen()
         codeBlock.classList.remove('is-collapsed')
       }
-      this._setCodeFullscreenState(codeBlock, show)
+      this.#setCodeFullscreenState(codeBlock, show)
     }, false)
-    if (!this._codeFullscreenOnEsc) {
-      this._codeFullscreenOnEsc = (event: KeyboardEvent) => {
+    if (!this.#codeFullscreenOnEsc) {
+      this.#codeFullscreenOnEsc = (event: KeyboardEvent) => {
         if (event.key === 'Escape') {
           this.closeCodeFullscreen()
         }
       }
-      document.addEventListener('keydown', this._codeFullscreenOnEsc, false)
+      document.addEventListener('keydown', this.#codeFullscreenOnEsc, false)
     }
   }
 

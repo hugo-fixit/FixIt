@@ -9,11 +9,11 @@ const MapboxLanguage = window.MapboxLanguage
 const TypeIt = window.TypeIt
 
 export class ChartsModule implements ChartsService {
-  private _echartsOnSwitchTheme: (() => void) | undefined
-  private _echartsArr: any[] = []
-  private _echartsOnResize: (() => void) | undefined
-  private readonly _mapboxArr: any[] = []
-  private _mapboxOnSwitchTheme: (() => void) | undefined
+  #echartsOnSwitchTheme: (() => void) | undefined
+  #echartsArr: any[] = []
+  #echartsOnResize: (() => void) | undefined
+  readonly #mapboxArr: any[] = []
+  #mapboxOnSwitchTheme: (() => void) | undefined
 
   constructor(
     private readonly core: CoreService,
@@ -26,11 +26,11 @@ export class ChartsModule implements ChartsService {
       return
     echarts.registerTheme('light', this.core.config.echarts.lightTheme!)
     echarts.registerTheme('dark', this.core.config.echarts.darkTheme!)
-    this._echartsOnSwitchTheme = this._echartsOnSwitchTheme || (() => {
-      for (let i = 0; i < this._echartsArr.length; i++) {
-        this._echartsArr[i].dispose()
+    this.#echartsOnSwitchTheme = this.#echartsOnSwitchTheme || (() => {
+      for (let i = 0; i < this.#echartsArr.length; i++) {
+        this.#echartsArr[i].dispose()
       }
-      this._echartsArr = []
+      this.#echartsArr = []
       const stagingDOM = getStagingDOM()
       forEach(document.getElementsByClassName('echarts'), ($echarts: Element) => {
         const $dataEl = $echarts.nextElementSibling as HTMLElement
@@ -52,7 +52,7 @@ export class ChartsModule implements ChartsService {
           }
           chart.hideLoading()
           chart.setOption(option)
-          this._echartsArr.push(chart)
+          this.#echartsArr.push(chart)
         }
         // support JS object literal or JS code
         if ($dataEl.dataset.fmt === 'js') {
@@ -76,14 +76,14 @@ export class ChartsModule implements ChartsService {
       })
       stagingDOM.destroy()
     })
-    this.bus.on('fixit:switch-theme', this._echartsOnSwitchTheme)
-    this._echartsOnSwitchTheme()
-    this._echartsOnResize = this._echartsOnResize || (() => {
-      for (let i = 0; i < this._echartsArr.length; i++) {
-        this._echartsArr[i].resize()
+    this.bus.on('fixit:switch-theme', this.#echartsOnSwitchTheme)
+    this.#echartsOnSwitchTheme()
+    this.#echartsOnResize = this.#echartsOnResize || (() => {
+      for (let i = 0; i < this.#echartsArr.length; i++) {
+        this.#echartsArr[i].resize()
       }
     })
-    this.bus.on('fixit:resize', this._echartsOnResize)
+    this.bus.on('fixit:resize', this.#echartsOnResize)
   }
 
   /** Initialize Mapbox GL maps with controls and theme sync. */
@@ -137,17 +137,17 @@ export class ChartsModule implements ChartsService {
           mapbox.addControl(new mapboxgl.FullscreenControl())
         }
         mapbox.addControl(new MapboxLanguage())
-        this._mapboxArr.push(mapbox)
+        this.#mapboxArr.push(mapbox)
       })
-      this._mapboxOnSwitchTheme = this._mapboxOnSwitchTheme || (() => {
-        forEach(this._mapboxArr, (mapbox: any) => {
+      this.#mapboxOnSwitchTheme = this.#mapboxOnSwitchTheme || (() => {
+        forEach(this.#mapboxArr, (mapbox: any) => {
           const $mapbox = mapbox.getContainer()
           const { lightStyle, darkStyle } = JSON.parse($mapbox.dataset.options)
           mapbox.setStyle(this.core.isDark ? darkStyle : lightStyle)
           mapbox.addControl(new MapboxLanguage())
         })
       })
-      this.bus.on('fixit:switch-theme', this._mapboxOnSwitchTheme)
+      this.bus.on('fixit:switch-theme', this.#mapboxOnSwitchTheme)
     }
   }
 

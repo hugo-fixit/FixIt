@@ -39,7 +39,6 @@ export interface MenuService {
 
 // ─── SearchService ───
 export interface SearchService {
-  _resetSearchUI: ($header: HTMLElement, $searchLoading: HTMLElement, $searchClear: HTMLElement, searchInstance: any) => void
   initSearch: () => void
 }
 
@@ -48,8 +47,6 @@ export interface CodeService {
   initCopyCode: (codeBlock: HTMLElement, codePreEl: HTMLElement) => void
   initCodeExpandBtn: (codeBlock: HTMLElement) => void
   initDownloadCode: (codeBlock: HTMLElement, codePreEl: HTMLElement) => void
-  _getCodeFullscreenTarget: (codeBlock: HTMLElement) => HTMLElement
-  _setCodeFullscreenState: (codeBlock: HTMLElement, show: boolean) => void
   closeCodeFullscreen: () => void
   initFullscreenCode: (codeBlock: HTMLElement) => void
   initCodeWrapper: () => void

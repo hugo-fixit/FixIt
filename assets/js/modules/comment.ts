@@ -11,9 +11,9 @@ const Valine = window.Valine
 const Waline = window.Waline
 
 export class CommentModule implements CommentService {
-  private _utterancesOnSwitchTheme: (() => void) | undefined
-  private _giscusOnSwitchTheme: (() => void) | undefined
-  private _messageListener: ((event: MessageEvent) => void) | undefined
+  #utterancesOnSwitchTheme: (() => void) | undefined
+  #giscusOnSwitchTheme: (() => void) | undefined
+  #messageListener: ((event: MessageEvent) => void) | undefined
 
   constructor(
     private readonly core: CoreService,
@@ -109,14 +109,14 @@ export class CommentModule implements CommentService {
       script.crossOrigin = 'anonymous'
       script.async = true
       document.getElementById('utterances')!.appendChild(script)
-      this._utterancesOnSwitchTheme = this._utterancesOnSwitchTheme || (() => {
+      this.#utterancesOnSwitchTheme = this.#utterancesOnSwitchTheme || (() => {
         const message = {
           type: 'set-theme',
           theme: this.core.isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme,
         }
         document.querySelector<HTMLIFrameElement>('.utterances-frame')?.contentWindow?.postMessage(message, 'https://utteranc.es')
       })
-      this.bus.on('fixit:switch-theme', this._utterancesOnSwitchTheme)
+      this.bus.on('fixit:switch-theme', this.#utterancesOnSwitchTheme)
       return
     }
     if (this.core.config.comment.twikoo) {
@@ -145,22 +145,22 @@ export class CommentModule implements CommentService {
     }
     if (this.core.config.comment.giscus) {
       const giscusConfig = this.core.config.comment.giscus
-      this._giscusOnSwitchTheme = this._giscusOnSwitchTheme || (() => {
+      this.#giscusOnSwitchTheme = this.#giscusOnSwitchTheme || (() => {
         const message = { setConfig: { theme: this.core.isDark ? giscusConfig.darkTheme : giscusConfig.lightTheme } }
         document.querySelector<HTMLIFrameElement>('.giscus-frame')?.contentWindow?.postMessage({ giscus: message }, giscusConfig.origin!)
       })
-      this.bus.on('fixit:switch-theme', this._giscusOnSwitchTheme)
-      this._messageListener = (event: MessageEvent) => {
+      this.bus.on('fixit:switch-theme', this.#giscusOnSwitchTheme)
+      this.#messageListener = (event: MessageEvent) => {
         if (event.origin !== giscusConfig.origin)
           return
         const $script = document.querySelector('#giscus>script')
         if ($script) {
           $script.parentElement!.removeChild($script)
         }
-        this._giscusOnSwitchTheme!()
-        window.removeEventListener('message', this._messageListener!, false)
+        this.#giscusOnSwitchTheme!()
+        window.removeEventListener('message', this.#messageListener!, false)
       }
-      window.addEventListener('message', this._messageListener, false)
+      window.addEventListener('message', this.#messageListener, false)
     }
   }
 }

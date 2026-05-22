@@ -4,7 +4,7 @@ import type { CodeService, CoreService, EventsService, SearchService, TocService
 import { animateCSS, forEach, getScrollTop, isMobile, scrollIntoView } from '../utils'
 
 export class EventsModule implements EventsService {
-  private _resizeTimeout: number | null = null
+  #resizeTimeout: number | null = null
 
   constructor(
     private readonly core: CoreService,
@@ -89,9 +89,9 @@ export class EventsModule implements EventsService {
   onResize() {
     let resizeBefore = isMobile()
     window.addEventListener('resize', () => {
-      if (!this._resizeTimeout) {
-        this._resizeTimeout = window.setTimeout(() => {
-          this._resizeTimeout = null
+      if (!this.#resizeTimeout) {
+        this.#resizeTimeout = window.setTimeout(() => {
+          this.#resizeTimeout = null
           this.bus.emit('fixit:resize')
           this.toc.initToc()
           this.search.initSearch()
