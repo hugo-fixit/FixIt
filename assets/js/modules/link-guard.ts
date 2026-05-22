@@ -1,18 +1,15 @@
 /** Link guard module — external link confirmation dialog with copy support. */
+import type { LinkGuardService } from '../core/tokens'
 import { createCopyText, flashCopiedTooltip, forEach } from '../utils'
 
 const copyText = createCopyText()
 
-/**
- * Create external-link confirmation dialog handler.
- * @returns Link guard initialization methods.
- */
-export function createLinkGuard() {
+export class LinkGuardModule implements LinkGuardService {
   /**
    * Initialize the link-guard dialog and bind click handlers on guarded links.
    * @param target - The root element to search for guarded links.
    */
-  function initLinkGuardDialog(target: Element | Document = document) {
+  initLinkGuardDialog(target: Element | Document = document) {
     const dialog = document.getElementById('link-guard-dialog') as HTMLDialogElement
     if (!dialog)
       return
@@ -75,6 +72,4 @@ export function createLinkGuard() {
       }, false)
     })
   }
-
-  return { initLinkGuardDialog }
 }

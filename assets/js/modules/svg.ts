@@ -1,13 +1,10 @@
 /** SVG module — inline SVG icon loading from data-svg-src attributes. */
+import type { SvgService } from '../core/tokens'
 import { forEach } from '../utils'
 
-/**
- * Create SVG icon loading handler.
- * @returns SVG icon initialization methods.
- */
-export function createSvg() {
+export class SvgModule implements SvgService {
   /** Fetch and inline SVG icons referenced by `data-svg-src` attributes. */
-  function initSVGIcon() {
+  initSVGIcon() {
     forEach(document.querySelectorAll<HTMLElement>('[data-svg-src]'), ($icon) => {
       fetch($icon.dataset.svgSrc!)
         .then(response => response.text())
@@ -26,6 +23,4 @@ export function createSvg() {
         })
     })
   }
-
-  return { initSVGIcon }
 }

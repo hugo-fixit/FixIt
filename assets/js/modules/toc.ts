@@ -1,17 +1,12 @@
 /** Table of Contents module — TOC scroll tracking, active state sync, and dialog. */
-import type { FixItContext } from '../types'
+import type { TocService } from '../core/tokens'
 import { animateCSS, forEach, isTocStatic } from '../utils'
 
-/**
- * Create TOC management handlers.
- * @param ctx - The shared FixIt context object.
- * @returns TOC management methods.
- */
-export function createToc(ctx: FixItContext): any {
-  let methods: ReturnType<typeof createToc>
+export class TocModule implements TocService {
+  private activeTocId: string | null = null
 
   /** Get the pixel height of the currently visible sticky header. */
-  function getVisibleHeaderOffset(): number {
+  getVisibleHeaderOffset(): number {
     const $desktopHeader = document.getElementById('header-desktop')
     const $mobileHeader = document.getElementById('header-mobile')
     const $header = [$desktopHeader, $mobileHeader].find($el => $el && window.getComputedStyle($el).display !== 'none')
@@ -27,17 +22,17 @@ export function createToc(ctx: FixItContext): any {
   }
 
   /** Get the pixel height of the breadcrumb container. */
-  function getBreadcrumbHeight(): number {
+  getBreadcrumbHeight(): number {
     return document.querySelector<HTMLElement>('.breadcrumb-container')?.offsetHeight || 0
   }
 
   /** Get the combined vertical offset used to determine the active TOC heading. */
-  function getTocIndexOffset(): number {
-    return 20 + getVisibleHeaderOffset() + getBreadcrumbHeight()
+  getTocIndexOffset(): number {
+    return 20 + this.getVisibleHeaderOffset() + this.getBreadcrumbHeight()
   }
 
   /** Get all heading elements that have an `id` attribute. */
-  function getTocHeadingElements(): HTMLElement[] {
+  getTocHeadingElements(): HTMLElement[] {
     return Array.from(document.querySelectorAll<HTMLElement>('.heading-element[id]'))
   }
 
@@ -47,7 +42,7 @@ export function createToc(ctx: FixItContext): any {
    * @param indexOffset - Vertical offset from the top for the active threshold.
    * @returns The active heading element, or `null` if none found.
    */
-  function getActiveTocHeading($headingElements: HTMLElement[], indexOffset = getTocIndexOffset()): HTMLElement | null {
+  getActiveTocHeading($headingElements: HTMLElement[], indexOffset = this.getTocIndexOffset()): HTMLElement | null {
     if (!$headingElements.length)
       return null
     const threshold = window.scrollY + indexOffset + 1
@@ -65,7 +60,7 @@ export function createToc(ctx: FixItContext): any {
   }
 
   /** Get all TOC root containers (static, auto, and drawer). */
-  function getTocRoots(): HTMLElement[] {
+  getTocRoots(): HTMLElement[] {
     return [
       document.getElementById('TableOfContents'),
       document.querySelector<HTMLElement>('#toc-content-static > nav'),
@@ -79,7 +74,7 @@ export function createToc(ctx: FixItContext): any {
    * @param id - The heading id (without `#`).
    * @returns The matching anchor element, or `null`.
    */
-  function getTocLinkById($tocRoot: HTMLElement, id: string): HTMLAnchorElement | null {
+  getTocLinkById($tocRoot: HTMLElement, id: string): HTMLAnchorElement | null {
     if (!$tocRoot || !id)
       return null
     const targetHash = `#${id}`
@@ -91,7 +86,7 @@ export function createToc(ctx: FixItContext): any {
    * @param $tocRoot - The TOC root container element.
    * @param activeId - The id of the currently active heading.
    */
-  function applyTocActiveState($tocRoot: HTMLElement, activeId: string) {
+  applyTocActiveState($tocRoot: HTMLElement, activeId: string) {
     if (!$tocRoot)
       return
     forEach($tocRoot.querySelectorAll('a[href^="#"]'), ($tocLink: Element) => {
@@ -100,7 +95,7 @@ export function createToc(ctx: FixItContext): any {
     forEach($tocRoot.querySelectorAll('li'), ($tocLi: Element) => {
       $tocLi.classList.remove('has-active')
     })
-    const $activeLink = getTocLinkById($tocRoot, activeId)
+    const $activeLink = this.getTocLinkById($tocRoot, activeId)
     if (!$activeLink)
       return
     $activeLink.classList.add('active')
@@ -117,8 +112,8 @@ export function createToc(ctx: FixItContext): any {
    * @param activeId - The id of the currently active heading.
    * @param $scrollContainer - The scrollable container (defaults to `$tocRoot`).
    */
-  function scrollActiveTocLinkIntoView($tocRoot: HTMLElement, activeId: string, $scrollContainer: HTMLElement = $tocRoot) {
-    const $activeLink = getTocLinkById($tocRoot, activeId)
+  scrollActiveTocLinkIntoView($tocRoot: HTMLElement, activeId: string, $scrollContainer: HTMLElement = $tocRoot) {
+    const $activeLink = this.getTocLinkById($tocRoot, activeId)
     if (!$activeLink || !$scrollContainer)
       return
     const containerRect = $scrollContainer.getBoundingClientRect()
@@ -134,7 +129,7 @@ export function createToc(ctx: FixItContext): any {
   }
 
   /** Update the TOC container's max-height CSS variable to fit the viewport. */
-  function syncTocHeight() {
+  syncTocHeight() {
     const $toc = document.getElementById('toc-auto')
     const $tocContentAuto = document.getElementById('toc-content-auto')
     if ($toc && $tocContentAuto) {
@@ -144,34 +139,34 @@ export function createToc(ctx: FixItContext): any {
   }
 
   /** Sync the active heading highlight across all TOC containers. */
-  function syncTocActiveState() {
-    const $headingElements = getTocHeadingElements()
-    const $activeHeading = getActiveTocHeading($headingElements)
+  syncTocActiveState() {
+    const $headingElements = this.getTocHeadingElements()
+    const $activeHeading = this.getActiveTocHeading($headingElements)
     if (!$activeHeading?.id)
       return
     const activeId = $activeHeading.id
-    const $tocRoots = getTocRoots()
+    const $tocRoots = this.getTocRoots()
     forEach($tocRoots, ($tocRoot) => {
-      applyTocActiveState($tocRoot, activeId)
+      this.applyTocActiveState($tocRoot, activeId)
     })
-    if (ctx.activeTocId !== activeId) {
-      ctx.activeTocId = activeId
+    if (this.activeTocId !== activeId) {
+      this.activeTocId = activeId
       if (!isTocStatic()) {
         const $autoTocRoot = document.getElementById('TableOfContents')
         const $autoTocContainer = document.getElementById('toc-content-auto')
         if ($autoTocRoot && $autoTocContainer) {
-          scrollActiveTocLinkIntoView($autoTocRoot, activeId, $autoTocContainer)
+          this.scrollActiveTocLinkIntoView($autoTocRoot, activeId, $autoTocContainer)
         }
       }
       if ((document.getElementById('toc-dialog') as HTMLDialogElement)?.open) {
         const $dialogTocRoot = document.querySelector<HTMLElement>('#toc-content-drawer > nav')!
-        scrollActiveTocLinkIntoView($dialogTocRoot, activeId, $dialogTocRoot)
+        this.scrollActiveTocLinkIntoView($dialogTocRoot, activeId, $dialogTocRoot)
       }
     }
   }
 
   /** Initialize TOC layout: move the TOC node to the correct container and sync state. */
-  function initToc() {
+  initToc() {
     const $tocCore = document.getElementById('TableOfContents')
     if ($tocCore === null)
       return
@@ -180,7 +175,7 @@ export function createToc(ctx: FixItContext): any {
     if (openButton) {
       openButton.classList.toggle('d-none', !isTocStatic())
     }
-    ctx.activeTocId = null
+    this.activeTocId = null
     // TOC Static and TOC Dialog
     if (isTocStatic()) {
       const $tocContentStatic = document.getElementById('toc-content-static')!
@@ -188,8 +183,8 @@ export function createToc(ctx: FixItContext): any {
         $tocCore.parentElement!.removeChild($tocCore)
         $tocContentStatic.appendChild($tocCore)
       }
-      methods.syncTocHeight()
-      methods.syncTocActiveState()
+      this.syncTocHeight()
+      this.syncTocActiveState()
       return
     }
 
@@ -202,12 +197,12 @@ export function createToc(ctx: FixItContext): any {
     const $toc = document.getElementById('toc-auto')!
     $toc.style.visibility = 'visible'
     animateCSS($toc, ['animate__fadeIn', 'animate__faster'], true)
-    methods.syncTocHeight()
-    methods.syncTocActiveState()
+    this.syncTocHeight()
+    this.syncTocActiveState()
   }
 
   /** Bind the TOC title click handler for show/hide toggle. */
-  function initTocListener() {
+  initTocListener() {
     const $toc = document.getElementById('toc-auto')!
     const $tocContentAuto = document.getElementById('toc-content-auto')!
     document.querySelector<HTMLElement>('#toc-auto>.toc-title')?.addEventListener('click', () => {
@@ -228,7 +223,7 @@ export function createToc(ctx: FixItContext): any {
   }
 
   /** Initialize the mobile TOC drawer dialog and its open/close handlers. */
-  function initTocDialog() {
+  initTocDialog() {
     const dialog = document.querySelector<HTMLDialogElement>('#toc-dialog')
     const openButton = document.querySelector<HTMLElement>('#toc-drawer-button')
     if (!dialog || !openButton)
@@ -238,10 +233,10 @@ export function createToc(ctx: FixItContext): any {
     openButton.addEventListener('click', () => {
       dialog.showModal()
       openButton.setAttribute('aria-expanded', 'true')
-      methods.syncTocHeight()
-      methods.syncTocActiveState()
+      this.syncTocHeight()
+      this.syncTocActiveState()
       const $dialogTocRoot = document.querySelector<HTMLElement>('#toc-content-drawer > nav')!
-      methods.scrollActiveTocLinkIntoView($dialogTocRoot, ctx.activeTocId!, $dialogTocRoot)
+      this.scrollActiveTocLinkIntoView($dialogTocRoot, this.activeTocId!, $dialogTocRoot)
       ;(document.activeElement as HTMLElement)?.blur()
     })
     forEach(document.querySelectorAll<HTMLAnchorElement>('#toc-content-drawer a[href^="#"]'), ($link) => {
@@ -253,7 +248,7 @@ export function createToc(ctx: FixItContext): any {
   }
 
   /** Clone TOC and heading-mark nodes to detach APlayer event listeners. */
-  function fixTocScroll() {
+  fixTocScroll() {
     if (typeof window.APlayer === 'function') {
       let $tocCore = document.getElementById('TableOfContents')
       if ($tocCore) {
@@ -267,23 +262,4 @@ export function createToc(ctx: FixItContext): any {
       })
     }
   }
-
-  methods = {
-    getVisibleHeaderOffset,
-    getBreadcrumbHeight,
-    getTocIndexOffset,
-    getTocHeadingElements,
-    getActiveTocHeading,
-    getTocRoots,
-    getTocLinkById,
-    applyTocActiveState,
-    scrollActiveTocLinkIntoView,
-    syncTocHeight,
-    syncTocActiveState,
-    initToc,
-    initTocListener,
-    initTocDialog,
-    fixTocScroll,
-  }
-  return methods
 }

@@ -1,31 +1,32 @@
 /** Miscellaneous module — cookie consent, site time, PWA, watermark, MathJax, bookmarks, and rewards. */
-import type { FixItContext } from '../types'
+import type { TypedEventBus } from '../core/event-bus'
+import type { CoreService, MiscService } from '../core/tokens'
 import { forEach, getScrollTop, isMobile, isValidDate } from '../utils'
 
 const cookieconsent = window.cookieconsent
 const pangu = window.pangu
 const Watermark = window.Watermark
 
-/**
- * Create miscellaneous feature handlers (cookie consent, site time, PWA, watermark, etc.).
- * @param ctx - The shared FixIt context object.
- * @returns Miscellaneous feature initialization methods.
- */
-export function createMisc(ctx: FixItContext) {
-  let siteTime: ReturnType<typeof setInterval> | undefined
+export class MiscModule implements MiscService {
+  private siteTime: ReturnType<typeof setInterval> | undefined
+
+  constructor(
+    private readonly core: CoreService,
+    private readonly bus: TypedEventBus,
+  ) {}
 
   /** Initialize cookie consent banner if configured. */
-  function initCookieconsent() {
-    ctx.config.cookieconsent && cookieconsent?.initialise(ctx.config.cookieconsent)
+  initCookieconsent() {
+    this.core.config.cookieconsent && cookieconsent?.initialise(this.core.config.cookieconsent)
   }
 
   /** Calculate and display the elapsed time since site launch. */
-  function getSiteTime() {
+  getSiteTime() {
     const now = new Date()
-    const run = new Date(ctx.config.siteTime!)
+    const run = new Date(this.core.config.siteTime!)
     const $runTimes = document.querySelector<HTMLElement>('.run-times')
     if (!isValidDate(run) || !$runTimes) {
-      clearInterval(siteTime)
+      clearInterval(this.siteTime)
       $runTimes && $runTimes.parentNode!.removeChild($runTimes)
       return
     }
@@ -39,21 +40,21 @@ export function createMisc(ctx: FixItContext) {
   }
 
   /** Start the site-time counter with visibility-change pausing. */
-  function initSiteTime() {
-    if (ctx.config.siteTime) {
-      siteTime = setInterval(getSiteTime, 500)
+  initSiteTime() {
+    if (this.core.config.siteTime) {
+      this.siteTime = setInterval(() => this.getSiteTime(), 500)
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
-          return clearInterval(siteTime)
+          return clearInterval(this.siteTime)
         }
-        siteTime = setInterval(getSiteTime, 500)
+        this.siteTime = setInterval(() => this.getSiteTime(), 500)
       }, false)
     }
   }
 
   /** Register the service worker for PWA support. */
-  function initServiceWorker() {
-    if (ctx.config.enablePWA && 'serviceWorker' in navigator) {
+  initServiceWorker() {
+    if (this.core.config.enablePWA && 'serviceWorker' in navigator) {
       navigator.serviceWorker
         .register('/service-worker.min.js', { scope: '/' })
         .then((_registration) => {
@@ -71,18 +72,18 @@ export function createMisc(ctx: FixItContext) {
   }
 
   /** Initialize the watermark overlay if enabled. */
-  function initWatermark() {
-    if (!ctx.config.watermark?.enable)
+  initWatermark() {
+    if (!this.core.config.watermark?.enable)
       return
-    void new Watermark(ctx.config.watermark)
+    void new Watermark(this.core.config.watermark)
   }
 
   /** Initialize Pangu.js for automatic CJK spacing. */
-  function initPangu() {
-    if (!ctx.config.pangu?.enable)
+  initPangu() {
+    if (!this.core.config.pangu?.enable)
       return
     pangu.ignoredTags = /^(script|code|pre|textarea|sup|sub)$/i
-    const selector = ctx.config.pangu.selector
+    const selector = this.core.config.pangu.selector
     if (selector) {
       document.querySelectorAll(selector).forEach(el => pangu.spacingNode(el))
       return
@@ -91,7 +92,7 @@ export function createMisc(ctx: FixItContext) {
   }
 
   /** Trigger MathJax re-typesetting if MathJax is loaded. */
-  function initMathJax() {
+  initMathJax() {
     if (window.MathJax?.typesetPromise) {
       window.MathJax.typesetPromise().then(() => {
         // Do something else after typesetting is complete
@@ -100,8 +101,8 @@ export function createMisc(ctx: FixItContext) {
   }
 
   /** Save and restore scroll position as an automatic bookmark. */
-  function initAutoMark() {
-    if (!ctx.config.autoBookmark)
+  initAutoMark() {
+    if (!this.core.config.autoBookmark)
       return
     window.addEventListener('beforeunload', () => {
       window.sessionStorage?.setItem(`fixit-bookmark/#${location.pathname}`, String(getScrollTop()))
@@ -113,7 +114,7 @@ export function createMisc(ctx: FixItContext) {
   }
 
   /** Initialize reward/donation button exclusive-toggle behaviour. */
-  function initReward() {
+  initReward() {
     const $rewards = document.querySelectorAll<HTMLElement>('.post-reward [data-mode="fixed"]')
     if (!$rewards.length)
       return
@@ -138,31 +139,18 @@ export function createMisc(ctx: FixItContext) {
   }
 
   /** Initialize PostChat theme sync if configured. */
-  function initPostChatUser() {
+  initPostChatUser() {
     if (!window.postChatUser || !window.postChatConfig || window.postChatConfig.userMode === 'magic')
       return
-    window.postChat_theme = ctx.isDark ? 'dark' : 'light'
-    document.addEventListener('fixit:switch-theme', () => {
+    window.postChat_theme = this.core.isDark ? 'dark' : 'light'
+    this.bus.on('fixit:switch-theme', () => {
       const targetFrame = document.getElementById('postChat_iframeContainer')
       if (targetFrame) {
-        window.postChatUser.setPostChatTheme(ctx.isDark ? 'dark' : 'light')
+        window.postChatUser.setPostChatTheme(this.core.isDark ? 'dark' : 'light')
       }
       else {
-        window.postChat_theme = ctx.isDark ? 'dark' : 'light'
+        window.postChat_theme = this.core.isDark ? 'dark' : 'light'
       }
     })
-  }
-
-  return {
-    initCookieconsent,
-    getSiteTime,
-    initSiteTime,
-    initServiceWorker,
-    initWatermark,
-    initPangu,
-    initMathJax,
-    initAutoMark,
-    initReward,
-    initPostChatUser,
   }
 }

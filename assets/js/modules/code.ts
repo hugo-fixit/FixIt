@@ -1,25 +1,20 @@
 /** Code module — code block interactions: copy, download, fullscreen, tabs, and line numbers. */
+import type { CodeService } from '../core/tokens'
 import { animateCSS, createCopyText, downloadAsFile, flashCopiedTooltip, forEach, getStagingDOM } from '../utils'
 
 const CellTooltip = window.CellTooltip
 const copyText = createCopyText()
 
-/**
- * Create code block interaction handlers.
- * @returns Code block management methods.
- */
-export function createCode(): any {
-  const CODE_TAB_SYNC_EVENT = 'fixit:code-tab-sync'
-  let _codeFullscreenOnEsc: ((event: KeyboardEvent) => void) | undefined
-
-  let methods: ReturnType<typeof createCode>
+export class CodeModule implements CodeService {
+  private readonly CODE_TAB_SYNC_EVENT = 'fixit:code-tab-sync'
+  private _codeFullscreenOnEsc: ((event: KeyboardEvent) => void) | undefined
 
   /**
    * Attach copy-to-clipboard behaviour to a code block.
    * @param codeBlock - The `.code-block` container element.
    * @param codePreEl - The `<pre>` element containing the code text.
    */
-  function initCopyCode(codeBlock: HTMLElement, codePreEl: HTMLElement) {
+  initCopyCode(codeBlock: HTMLElement, codePreEl: HTMLElement) {
     const copyBtn = codeBlock.dataset.mode === 'classic'
       ? codeBlock.querySelector<HTMLElement>('.code-header .copy-btn')
       : codeBlock.querySelector<HTMLElement>('.copy-icon-btn')
@@ -49,7 +44,7 @@ export function createCode(): any {
    * Attach toggle behaviour to the code expand/collapse button.
    * @param codeBlock - The `.code-block` container element.
    */
-  function initCodeExpandBtn(codeBlock: HTMLElement) {
+  initCodeExpandBtn(codeBlock: HTMLElement) {
     codeBlock.querySelector('.code-expand-btn')?.addEventListener('click', () => {
       codeBlock.classList.toggle('is-expanded')
     }, false)
@@ -60,7 +55,7 @@ export function createCode(): any {
    * @param codeBlock - The `.code-block` container element.
    * @param codePreEl - The `<pre>` element containing the code text.
    */
-  function initDownloadCode(codeBlock: HTMLElement, codePreEl: HTMLElement) {
+  initDownloadCode(codeBlock: HTMLElement, codePreEl: HTMLElement) {
     const downloadBtn = codeBlock.querySelector<HTMLElement>('.code-header .download-btn')
     if (!downloadBtn)
       return
@@ -88,7 +83,7 @@ export function createCode(): any {
    * @param codeBlock - The `.code-block` element.
    * @returns The element to apply fullscreen to.
    */
-  function _getCodeFullscreenTarget(codeBlock: HTMLElement): HTMLElement {
+  _getCodeFullscreenTarget(codeBlock: HTMLElement): HTMLElement {
     return (codeBlock.closest('.code-tabs') as HTMLElement) || codeBlock
   }
 
@@ -97,8 +92,8 @@ export function createCode(): any {
    * @param codeBlock - The `.code-block` element.
    * @param show - `true` to enter fullscreen, `false` to exit.
    */
-  function _setCodeFullscreenState(codeBlock: HTMLElement, show: boolean) {
-    const target = _getCodeFullscreenTarget(codeBlock)
+  _setCodeFullscreenState(codeBlock: HTMLElement, show: boolean) {
+    const target = this._getCodeFullscreenTarget(codeBlock)
     const expandBtn = codeBlock.querySelector<HTMLElement>('.code-expand-btn')
 
     if (show && expandBtn) {
@@ -131,48 +126,48 @@ export function createCode(): any {
   }
 
   /** Exit fullscreen on the currently active code block. */
-  function closeCodeFullscreen() {
+  closeCodeFullscreen() {
     const $activeTabs = document.querySelector<HTMLElement>('.code-tabs.is-fullscreen')
     if ($activeTabs) {
       const $activeBlock = $activeTabs.querySelector<HTMLElement>('.code-block.active') || $activeTabs.querySelector<HTMLElement>('.code-block')
       if ($activeBlock)
-        _setCodeFullscreenState($activeBlock, false)
+        this._setCodeFullscreenState($activeBlock, false)
       return
     }
     const $activeBlock = document.querySelector<HTMLElement>('.code-block.highlight.is-fullscreen')
     if ($activeBlock)
-      _setCodeFullscreenState($activeBlock, false)
+      this._setCodeFullscreenState($activeBlock, false)
   }
 
   /**
    * Attach fullscreen toggle and Escape-key handler to a code block.
    * @param codeBlock - The `.code-block` container element.
    */
-  function initFullscreenCode(codeBlock: HTMLElement) {
+  initFullscreenCode(codeBlock: HTMLElement) {
     const fullscreenBtn = codeBlock.querySelector<HTMLElement>('.code-header .fullscreen-btn')
     if (!fullscreenBtn)
       return
     fullscreenBtn.addEventListener('click', () => {
-      const target = _getCodeFullscreenTarget(codeBlock)
+      const target = this._getCodeFullscreenTarget(codeBlock)
       const show = !target.classList.contains('is-fullscreen')
       if (show) {
-        methods.closeCodeFullscreen()
+        this.closeCodeFullscreen()
         codeBlock.classList.remove('is-collapsed')
       }
-      _setCodeFullscreenState(codeBlock, show)
+      this._setCodeFullscreenState(codeBlock, show)
     }, false)
-    if (!_codeFullscreenOnEsc) {
-      _codeFullscreenOnEsc = (event: KeyboardEvent) => {
+    if (!this._codeFullscreenOnEsc) {
+      this._codeFullscreenOnEsc = (event: KeyboardEvent) => {
         if (event.key === 'Escape') {
-          methods.closeCodeFullscreen()
+          this.closeCodeFullscreen()
         }
       }
-      document.addEventListener('keydown', _codeFullscreenOnEsc, false)
+      document.addEventListener('keydown', this._codeFullscreenOnEsc, false)
     }
   }
 
   /** Initialize all un-initialized code blocks on the page. */
-  function initCodeWrapper() {
+  initCodeWrapper() {
     const $codeBlocks = document.querySelectorAll<HTMLElement>('.code-block.highlight:not([data-init])')
     forEach($codeBlocks, ($codeBlock) => {
       const $preElements = $codeBlock.querySelectorAll<HTMLPreElement>('pre.chroma')
@@ -181,16 +176,16 @@ export function createCode(): any {
       const $codePreEl = $preElements[$preElements.length - 1]
       $codeBlock.dataset.init = 'true'
 
-      initCopyCode($codeBlock, $codePreEl)
-      initCodeExpandBtn($codeBlock)
+      this.initCopyCode($codeBlock, $codePreEl)
+      this.initCodeExpandBtn($codeBlock)
 
       // classic mode code block interactions
       if ($codeBlock.dataset.mode === 'classic') {
         const $codeHeader = $codeBlock.querySelector<HTMLElement>('.code-header')
         if (!$codeHeader)
           return
-        initDownloadCode($codeBlock, $codePreEl)
-        initFullscreenCode($codeBlock)
+        this.initDownloadCode($codeBlock, $codePreEl)
+        this.initFullscreenCode($codeBlock)
         // code title
         $codeHeader.querySelector<HTMLElement>('.code-title')!.addEventListener('click', () => {
           if ($codeBlock.classList.contains('is-fullscreen'))
@@ -235,7 +230,7 @@ export function createCode(): any {
   }
 
   /** Group consecutive code blocks into tabbed containers with language sync. */
-  function initCodeTabs() {
+  initCodeTabs() {
     const $codeBlocks = document.querySelectorAll<HTMLElement>('.code-block[group]:not([data-tab-init])')
     const processed = new Set<HTMLElement>()
     const normalizeTabTitle = (title = '') => title.toLowerCase()
@@ -336,7 +331,7 @@ export function createCode(): any {
         }
       }
 
-      document.addEventListener(CODE_TAB_SYNC_EVENT, (event: Event) => {
+      document.addEventListener(this.CODE_TAB_SYNC_EVENT, (event: Event) => {
         const { detail } = event as CustomEvent<{ lang: string, source: HTMLElement }>
         if (!detail.lang || detail.source === $container)
           return
@@ -366,7 +361,7 @@ export function createCode(): any {
         $btn.addEventListener('click', () => {
           if ($tab.dataset.codeToggle === 'true') {
             window.localStorage.setItem('config_lang_perf', normalizedTitle)
-            document.dispatchEvent(new CustomEvent(CODE_TAB_SYNC_EVENT, {
+            document.dispatchEvent(new CustomEvent(this.CODE_TAB_SYNC_EVENT, {
               detail: {
                 lang: normalizedTitle,
                 source: $container,
@@ -399,7 +394,7 @@ export function createCode(): any {
   }
 
   /** Attach copy behaviour to diagram container copy buttons. */
-  function initDiagramCopyBtn() {
+  initDiagramCopyBtn() {
     const stagingDOM = getStagingDOM()
     forEach(document.querySelectorAll<HTMLElement>('.diagram-container > .copy-icon-btn'), ($btn) => {
       $btn.addEventListener('click', () => {
@@ -418,18 +413,4 @@ export function createCode(): any {
     })
     stagingDOM.destroy()
   }
-
-  methods = {
-    initCopyCode,
-    initCodeExpandBtn,
-    initDownloadCode,
-    _getCodeFullscreenTarget,
-    _setCodeFullscreenState,
-    closeCodeFullscreen,
-    initFullscreenCode,
-    initCodeWrapper,
-    initCodeTabs,
-    initDiagramCopyBtn,
-  }
-  return methods
 }

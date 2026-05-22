@@ -1,5 +1,5 @@
 /** Search module — Algolia, Fuse.js, CSE, and Pagefind search engine integration. */
-import type { FixItContext } from '../types'
+import type { CoreService, SearchService } from '../core/tokens'
 import { applyHighlightToText, HTMLEscape, isMobile } from '../utils'
 import { createPagefindSearch } from './pagefind'
 
@@ -10,18 +10,15 @@ const SEARCH_META: Record<string, { label: string, icon: string, href: string }>
   pagefind: { label: 'Pagefind', icon: '', href: 'https://pagefind.app/' },
 }
 
-/**
- * Create search engine handlers for Algolia, Fuse.js, CSE, and Pagefind.
- * @param ctx - The shared FixIt context object.
- * @returns Search initialization methods.
- */
-export function createSearch(ctx: FixItContext) {
-  let _searchMobileOnce: boolean | undefined
-  let _searchDesktopOnce: boolean | undefined
-  let _searchMobile: any
-  let _searchDesktop: any
-  let _algoliaIndex: any
-  let _pagefindSearch: ReturnType<typeof createPagefindSearch> | undefined
+export class SearchModule implements SearchService {
+  private _searchMobileOnce: boolean | undefined
+  private _searchDesktopOnce: boolean | undefined
+  private _searchMobile: any
+  private _searchDesktop: any
+  private _algoliaIndex: any
+  private _pagefindSearch: ReturnType<typeof createPagefindSearch> | undefined
+
+  constructor(private readonly core: CoreService) {}
 
   /**
    * Reset search UI: close header, hide loading/clear, clear input value.
@@ -30,7 +27,7 @@ export function createSearch(ctx: FixItContext) {
    * @param $searchClear - The clear button element.
    * @param searchInstance - The autocomplete instance to clear.
    */
-  function _resetSearchUI($header: HTMLElement, $searchLoading: HTMLElement, $searchClear: HTMLElement, searchInstance: any) {
+  _resetSearchUI($header: HTMLElement, $searchLoading: HTMLElement, $searchClear: HTMLElement, searchInstance: any) {
     $header.classList.remove('open')
     $searchLoading.style.display = 'none'
     $searchClear.style.display = 'none'
@@ -39,13 +36,13 @@ export function createSearch(ctx: FixItContext) {
   }
 
   /** Initialize the search overlay, autocomplete, and engine-specific logic. */
-  function initSearch() {
-    const searchConfig = ctx.config.search
+  initSearch() {
+    const searchConfig = this.core.config.search
     const _isMobile = isMobile()
     if (
       !searchConfig
-      || (_isMobile && _searchMobileOnce)
-      || (!_isMobile && _searchDesktopOnce)
+      || (_isMobile && this._searchMobileOnce)
+      || (!_isMobile && this._searchDesktopOnce)
     ) {
       return
     }
@@ -72,7 +69,7 @@ export function createSearch(ctx: FixItContext) {
     const overlayName = `search-${suffix}`
     const openSearch = () => {
       if (_isMobile && $menuToggleMobile && $menuMobile) {
-        ctx.disableScrollEvent = true
+        this.core.disableScrollEvent = true
         $menuToggleMobile.classList.add('active')
         $menuMobile.classList.add('active')
         $menuToggleMobile.setAttribute('aria-expanded', 'true')
@@ -83,12 +80,12 @@ export function createSearch(ctx: FixItContext) {
     }
     const closeSearch = () => {
       if (_isMobile && $menuToggleMobile && $menuMobile) {
-        ctx.disableScrollEvent = false
+        this.core.disableScrollEvent = false
         $menuToggleMobile.classList.remove('active')
         $menuMobile.classList.remove('active')
         $menuToggleMobile.setAttribute('aria-expanded', 'false')
       }
-      _resetSearchUI($header, $searchLoading, $searchClear, _isMobile ? _searchMobile : _searchDesktop)
+      this._resetSearchUI($header, $searchLoading, $searchClear, _isMobile ? this._searchMobile : this._searchDesktop)
     }
 
     // goto the PostChat panel rather than search results
@@ -107,37 +104,37 @@ export function createSearch(ctx: FixItContext) {
     }
 
     if (_isMobile) {
-      _searchMobileOnce = true
-      ctx.registerMaskOverlay(overlayName, {
+      this._searchMobileOnce = true
+      this.core.registerMaskOverlay(overlayName, {
         isActive: () => $header.classList.contains('open'),
         onOpen: openSearch,
         onClose: closeSearch,
       })
       $searchInput.addEventListener('focus', () => {
-        ctx.openMaskOverlay(overlayName)
+        this.core.openMaskOverlay(overlayName)
       }, false)
       $searchCancel?.addEventListener('click', () => {
-        ctx.closeMaskOverlay(overlayName)
+        this.core.closeMaskOverlay(overlayName)
       }, false)
       $searchClear.addEventListener('click', () => {
-        ctx.disableScrollEvent = false
+        this.core.disableScrollEvent = false
         $searchClear.style.display = 'none'
-        _searchMobile && _searchMobile.autocomplete.setVal('')
+        this._searchMobile && this._searchMobile.autocomplete.setVal('')
       }, false)
     }
     else {
-      _searchDesktopOnce = true
-      ctx.registerMaskOverlay(overlayName, {
+      this._searchDesktopOnce = true
+      this.core.registerMaskOverlay(overlayName, {
         isActive: () => $header.classList.contains('open'),
         onOpen: openSearch,
         onClose: closeSearch,
       })
       $searchToggle.addEventListener('click', () => {
-        ctx.toggleMaskOverlay(overlayName)
+        this.core.toggleMaskOverlay(overlayName)
       }, false)
       $searchClear.addEventListener('click', () => {
         $searchClear.style.display = 'none'
-        _searchDesktop && _searchDesktop.autocomplete.setVal('')
+        this._searchDesktop && this._searchDesktop.autocomplete.setVal('')
       }, false)
     }
     $searchInput.addEventListener('input', () => {
@@ -146,9 +143,9 @@ export function createSearch(ctx: FixItContext) {
       else $searchClear.style.display = 'inline'
     }, false)
     if (searchConfig.type === 'pagefind') {
-      _pagefindSearch = _pagefindSearch || createPagefindSearch(searchConfig)
+      this._pagefindSearch = this._pagefindSearch || createPagefindSearch(searchConfig)
       $searchInput.addEventListener('focus', () => {
-        _pagefindSearch!.preload().catch((error: Error) => {
+        this._pagefindSearch!.preload().catch((error: Error) => {
           console.error(error)
         })
       }, { once: true })
@@ -173,13 +170,13 @@ export function createSearch(ctx: FixItContext) {
             callback(results)
           }
           if (searchConfig.type === 'algolia') {
-            _algoliaIndex
-              = _algoliaIndex
+            this._algoliaIndex
+              = this._algoliaIndex
                 || window.algoliasearch!(
                   searchConfig.algoliaAppID,
                   searchConfig.algoliaSearchKey,
                 ).initIndex(searchConfig.algoliaIndex)
-            _algoliaIndex
+            this._algoliaIndex
               .search(query, {
                 offset: 0,
                 length: maxResultLength * 8,
@@ -262,7 +259,7 @@ export function createSearch(ctx: FixItContext) {
             }
           }
           else if (searchConfig.type === 'cse') {
-            const cseConfig = ctx.config.cse
+            const cseConfig = this.core.config.cse
             if (cseConfig?.engine === 'google' && cseConfig.cx) {
               finish([{
                 uri: `${cseConfig.resultsPage}#gsc.tab=0&gsc.q=${encodeURIComponent(query)}`,
@@ -273,7 +270,7 @@ export function createSearch(ctx: FixItContext) {
             }
           }
           else if (searchConfig.type === 'pagefind') {
-            _pagefindSearch!
+            this._pagefindSearch!
               .search(query, maxResultLength)
               .then((results: any[] | null) => {
                 finish(results || [])
@@ -300,21 +297,16 @@ export function createSearch(ctx: FixItContext) {
         },
       })
       autosearch.on('autocomplete:selected', (_event: any, suggestion: any, _dataset: any, _context: any) => {
-        ctx.closeMaskOverlay(overlayName)
+        this.core.closeMaskOverlay(overlayName)
         window.location.assign(suggestion.uri)
       })
       if (_isMobile) {
-        _searchMobile = autosearch
+        this._searchMobile = autosearch
       }
       else {
-        _searchDesktop = autosearch
+        this._searchDesktop = autosearch
       }
     }
     initAutosearch()
-  }
-
-  return {
-    _resetSearchUI,
-    initSearch,
   }
 }

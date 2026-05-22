@@ -1,17 +1,3 @@
-/** FixIt context — shared state and methods across all modules */
-export interface FixItContext {
-  [key: string]: any
-  config: FixItConfig
-  themeMode: string
-  isDark: boolean
-  newScrollTop: number
-  oldScrollTop: number
-  disableScrollEvent: boolean
-  activeTocId: string | null
-  activeMaskOverlay: string | null
-  maskOverlays: Map<string, MaskOverlayHandler>
-}
-
 /** Mask overlay handler */
 export interface MaskOverlayHandler {
   isActive?: () => boolean
@@ -165,6 +151,14 @@ export interface PrintConfig {
   expandFileTree?: boolean
 }
 
+/** Public API exposed on window.fixit for backward compatibility. */
+export interface FixItPublicAPI {
+  readonly config: FixItConfig
+  readonly themeMode: string
+  readonly isDark: boolean
+  [method: string]: any
+}
+
 declare global {
   interface Window {
     // Third-party libraries
@@ -199,7 +193,7 @@ declare global {
     xxhash?: any
 
     // FixIt theme
-    fixit: any
+    fixit: FixItPublicAPI
     config: FixItConfig
     _fuseIndex?: any
     _searchMobile?: any

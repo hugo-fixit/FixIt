@@ -1,5 +1,6 @@
 /** Content module — orchestrates rendering of page content components (gallery, tooltips, diagrams, etc.). */
-import type { FixItContext } from '../types'
+import type { TypedEventBus } from '../core/event-bus'
+import type { ChartsService, CodeService, ContentService, CoreService, LinkGuardService, MiscService, TocService } from '../core/tokens'
 import { forEach } from '../utils'
 
 const CellTooltip = window.CellTooltip
@@ -7,20 +8,25 @@ const lgThumbnail = window.lgThumbnail
 const lgZoom = window.lgZoom
 const lightGallery = window.lightGallery
 
-/**
- * Create content rendering orchestrators for galleries, tooltips, diagrams, etc.
- * @param ctx - The shared FixIt context object.
- * @returns Content component initialization methods.
- */
-export function createContent(ctx: FixItContext) {
-  let lg: { destroy: (removeSubModules?: boolean) => void } | undefined
-  let _jsonViewerOnSwitchTheme: (() => void) | undefined
+export class ContentModule implements ContentService {
+  private lg: { destroy: (removeSubModules?: boolean) => void } | undefined
+  private _jsonViewerOnSwitchTheme: (() => void) | undefined
+
+  constructor(
+    private readonly core: CoreService,
+    private readonly code: CodeService,
+    private readonly charts: ChartsService,
+    private readonly toc: TocService,
+    private readonly misc: MiscService,
+    private readonly linkGuard: LinkGuardService,
+    private readonly bus: TypedEventBus,
+  ) {}
 
   /**
    * Attach toggle behaviour to `<details>` elements.
    * @param target - The root element to search within.
    */
-  function initDetails(target: Element | Document = document) {
+  initDetails(target: Element | Document = document) {
     forEach(target.querySelectorAll<HTMLElement>('.details:not(.disabled)'), ($details) => {
       const $summary = $details.querySelector<HTMLElement>('.details-summary')!
       $summary.addEventListener('click', () => {
@@ -30,10 +36,10 @@ export function createContent(ctx: FixItContext) {
   }
 
   /** Initialize lightGallery for image zoom and thumbnails. */
-  function initLightGallery() {
-    if (ctx.config.lightgallery) {
-      lg?.destroy(true)
-      lg = lightGallery(document.getElementById('content')!, {
+  initLightGallery() {
+    if (this.core.config.lightgallery) {
+      this.lg?.destroy(true)
+      this.lg = lightGallery(document.getElementById('content')!, {
         plugins: [lgThumbnail, lgZoom],
         selector: '.lightgallery',
         speed: 400,
@@ -51,27 +57,27 @@ export function createContent(ctx: FixItContext) {
   }
 
   /** Initialize json-viewer elements and bind theme switch. */
-  function initJsonViewer() {
+  initJsonViewer() {
     if (!window.JsonViewerElement)
       return
-    _jsonViewerOnSwitchTheme = _jsonViewerOnSwitchTheme || (() => {
+    this._jsonViewerOnSwitchTheme = this._jsonViewerOnSwitchTheme || (() => {
       forEach(document.getElementsByTagName('json-viewer'), ($el: Element) => {
-        $el.setAttribute('theme', ctx.isDark ? 'dark' : 'light')
+        $el.setAttribute('theme', this.core.isDark ? 'dark' : 'light')
       })
     })
-    document.addEventListener('fixit:switch-theme', _jsonViewerOnSwitchTheme)
-    _jsonViewerOnSwitchTheme()
+    this.bus.on('fixit:switch-theme', this._jsonViewerOnSwitchTheme)
+    this._jsonViewerOnSwitchTheme()
   }
 
   /** Convert footnote refs into tooltip-enabled elements. */
-  function initFootnotes() {
+  initFootnotes() {
     const $footnoteRefs = document.querySelectorAll<HTMLElement>('#content sup[id^="fnref:"]')
     const $footnotes = document.querySelector<HTMLElement>('.footnotes[role="doc-endnotes"]')
     if (!$footnoteRefs.length || !$footnotes)
       return
     const footnoteMap = new Map<HTMLElement, HTMLElement>()
     $footnoteRefs.forEach(($ref) => {
-      if (ctx.config.tooltip) {
+      if (this.core.config.tooltip) {
         const $link = $ref.querySelector<HTMLAnchorElement>('a.footnote-ref')
         if ($link) {
           $link.addEventListener('click', (e) => {
@@ -93,20 +99,20 @@ export function createContent(ctx: FixItContext) {
       if ($ref.hasAttribute('title'))
         return
       $ref.setAttribute('title', $content.textContent!.trim())
-      if (ctx.config.tooltip) {
+      if (this.core.config.tooltip) {
         CellTooltip.getOrCreateInstance($ref)
       }
     })
   }
 
   /** Initialize CellTooltip on action buttons, copy buttons, and footnotes. */
-  function initTooltip() {
-    if (!ctx.config.tooltip)
+  initTooltip() {
+    if (!this.core.config.tooltip)
       return
     CellTooltip.initAll('li[data-task] > span[title]', { placement: 'right' })
     CellTooltip.initAll('.action-btn[title]', { placement: 'bottom' })
     CellTooltip.initAll('.copy-icon-btn[title]', { placement: 'top' })
-    initFootnotes()
+    this.initFootnotes()
   }
 
   /**
@@ -114,42 +120,39 @@ export function createContent(ctx: FixItContext) {
    * @param target - The root element to initialize components within.
    * @param includeToc - Whether to also initialize TOC-related components.
    */
-  function _initContentComponents(target: Element | Document = document, includeToc = true) {
-    initTwemoji(target)
-    initDetails(target)
-    initLightGallery()
-    ctx.initCodeWrapper()
-    ctx.initCodeTabs()
-    ctx.initDiagramCopyBtn()
-    ctx.initEcharts()
-    ctx.initTypeit(target)
-    ctx.initMapbox()
-    initTooltip()
-    ctx.initPangu()
-    ctx.initMathJax()
-    initJsonViewer()
-    ctx.initLinkGuardDialog(target)
+  private _initContentComponents(target: Element | Document = document, includeToc = true) {
+    this.initTwemoji(target)
+    this.initDetails(target)
+    this.initLightGallery()
+    this.code.initCodeWrapper()
+    this.code.initCodeTabs()
+    this.code.initDiagramCopyBtn()
+    this.charts.initEcharts()
+    this.charts.initTypeit(target)
+    this.charts.initMapbox()
+    this.initTooltip()
+    this.misc.initPangu()
+    this.misc.initMathJax()
+    this.initJsonViewer()
+    this.linkGuard.initLinkGuardDialog(target)
 
     if (includeToc) {
-      window.setTimeout(() => {
-        ctx.fixTocScroll()
-        ctx.initToc()
-        ctx.initTocListener()
-        ctx.initTocDialog()
-      }, 100)
+      this.toc.fixTocScroll()
+      this.toc.initToc()
+      this.toc.initTocListener()
+      this.toc.initTocDialog()
     }
   }
 
-  function initContent() {
-    if (!ctx.config.encryption?.all) {
-      _initContentComponents()
+  initContent() {
+    if (!this.core.config.encryption?.all) {
+      this._initContentComponents()
     }
-    document.addEventListener('fixit:decrypted', () => {
-      _initContentComponents()
+    this.bus.on('fixit:decrypted', () => {
+      this._initContentComponents()
     })
-    document.addEventListener('fixit:partial-decrypted', (e: Event) => {
-      const $content = (e as CustomEvent).detail.target as Element
-      _initContentComponents($content, false)
+    this.bus.on('fixit:partial-decrypted', (e) => {
+      this._initContentComponents(e.target, false)
     })
   }
 
@@ -157,17 +160,7 @@ export function createContent(ctx: FixItContext) {
    * Parse emoji shortcodes into Twemoji images.
    * @param target - The root element to parse for emoji.
    */
-  function initTwemoji(target: Element | Document = document) {
-    ctx.config.twemoji && window.twemoji?.parse(target as Element)
-  }
-
-  return {
-    initDetails,
-    initLightGallery,
-    initJsonViewer,
-    initFootnotes,
-    initTooltip,
-    initTwemoji,
-    initContent,
+  initTwemoji(target: Element | Document = document) {
+    this.core.config.twemoji && window.twemoji?.parse(target as Element)
   }
 }

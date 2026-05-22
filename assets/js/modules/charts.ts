@@ -1,5 +1,6 @@
 /** Charts module — ECharts, Mapbox GL, and TypeIt integrations. */
-import type { FixItContext } from '../types'
+import type { TypedEventBus } from '../core/event-bus'
+import type { ChartsService, CoreService } from '../core/tokens'
 import { forEach, getStagingDOM, isObjectLiteral } from '../utils'
 
 const echarts = window.echarts
@@ -7,35 +8,35 @@ const mapboxgl = window.mapboxgl
 const MapboxLanguage = window.MapboxLanguage
 const TypeIt = window.TypeIt
 
-/**
- * Create chart and animation integration handlers.
- * @param ctx - The shared FixIt context object.
- * @returns Chart and animation initialization methods.
- */
-export function createCharts(ctx: FixItContext) {
-  let _echartsOnSwitchTheme: (() => void) | undefined
-  let _echartsArr: any[] = []
-  let _echartsOnResize: (() => void) | undefined
-  const _mapboxArr: any[] = []
-  let _mapboxOnSwitchTheme: (() => void) | undefined
+export class ChartsModule implements ChartsService {
+  private _echartsOnSwitchTheme: (() => void) | undefined
+  private _echartsArr: any[] = []
+  private _echartsOnResize: (() => void) | undefined
+  private readonly _mapboxArr: any[] = []
+  private _mapboxOnSwitchTheme: (() => void) | undefined
+
+  constructor(
+    private readonly core: CoreService,
+    private readonly bus: TypedEventBus,
+  ) {}
 
   /** Initialize ECharts instances from shortcode markup with theme sync. */
-  function initEcharts() {
-    if (!ctx.config.echarts)
+  initEcharts() {
+    if (!this.core.config.echarts)
       return
-    echarts.registerTheme('light', ctx.config.echarts.lightTheme!)
-    echarts.registerTheme('dark', ctx.config.echarts.darkTheme!)
-    _echartsOnSwitchTheme = _echartsOnSwitchTheme || (() => {
-      for (let i = 0; i < _echartsArr.length; i++) {
-        _echartsArr[i].dispose()
+    echarts.registerTheme('light', this.core.config.echarts.lightTheme!)
+    echarts.registerTheme('dark', this.core.config.echarts.darkTheme!)
+    this._echartsOnSwitchTheme = this._echartsOnSwitchTheme || (() => {
+      for (let i = 0; i < this._echartsArr.length; i++) {
+        this._echartsArr[i].dispose()
       }
-      _echartsArr = []
+      this._echartsArr = []
       const stagingDOM = getStagingDOM()
       forEach(document.getElementsByClassName('echarts'), ($echarts: Element) => {
         const $dataEl = $echarts.nextElementSibling as HTMLElement
         if ($dataEl.tagName !== 'TEMPLATE')
           return
-        const chart = echarts.init($echarts as HTMLElement, ctx.isDark ? 'dark' : 'light', { renderer: 'svg' })
+        const chart = echarts.init($echarts as HTMLElement, this.core.isDark ? 'dark' : 'light', { renderer: 'svg' })
         chart.showLoading()
         stagingDOM.stage(($dataEl as HTMLTemplateElement).content.cloneNode(true))
         const _setOption = (option: any) => {
@@ -51,7 +52,7 @@ export function createCharts(ctx: FixItContext) {
           }
           chart.hideLoading()
           chart.setOption(option)
-          _echartsArr.push(chart)
+          this._echartsArr.push(chart)
         }
         // support JS object literal or JS code
         if ($dataEl.dataset.fmt === 'js') {
@@ -60,11 +61,11 @@ export function createCharts(ctx: FixItContext) {
             // eslint-disable-next-line no-new-func
             const _getOption = new Function('fixit', 'chart', isObjectLiteral(jsCodes) ? `return ${jsCodes}` : jsCodes)
             if ($dataEl.dataset.async === 'true') {
-              return Promise.resolve(_getOption(ctx, chart)).then((option: any) => {
+              return Promise.resolve(_getOption(window.fixit, chart)).then((option: any) => {
                 _setOption(option)
               })
             }
-            return _setOption(_getOption(ctx, chart))
+            return _setOption(_getOption(window.fixit, chart))
           }
           catch (err) {
             return console.error(err)
@@ -75,22 +76,22 @@ export function createCharts(ctx: FixItContext) {
       })
       stagingDOM.destroy()
     })
-    document.addEventListener('fixit:switch-theme', _echartsOnSwitchTheme)
-    _echartsOnSwitchTheme()
-    _echartsOnResize = _echartsOnResize || (() => {
-      for (let i = 0; i < _echartsArr.length; i++) {
-        _echartsArr[i].resize()
+    this.bus.on('fixit:switch-theme', this._echartsOnSwitchTheme)
+    this._echartsOnSwitchTheme()
+    this._echartsOnResize = this._echartsOnResize || (() => {
+      for (let i = 0; i < this._echartsArr.length; i++) {
+        this._echartsArr[i].resize()
       }
     })
-    document.addEventListener('fixit:resize', _echartsOnResize)
+    this.bus.on('fixit:resize', this._echartsOnResize)
   }
 
   /** Initialize Mapbox GL maps with controls and theme sync. */
-  function initMapbox() {
-    if (ctx.config.mapbox) {
+  initMapbox() {
+    if (this.core.config.mapbox) {
       if (!mapboxgl.accessToken) {
-        mapboxgl.accessToken = ctx.config.mapbox.accessToken!
-        mapboxgl.setRTLTextPlugin(ctx.config.mapbox.RTLTextPlugin!)
+        mapboxgl.accessToken = this.core.config.mapbox.accessToken!
+        mapboxgl.setRTLTextPlugin(this.core.config.mapbox.RTLTextPlugin!)
       }
       forEach(document.querySelectorAll<HTMLElement>('.mapbox:empty'), ($mapbox) => {
         const { lng, lat, zoom, lightStyle, darkStyle, marked, markers, navigation, geolocate, scale, fullscreen } = JSON.parse($mapbox.dataset.options!)
@@ -99,7 +100,7 @@ export function createCharts(ctx: FixItContext) {
           center: [lng, lat],
           zoom,
           minZoom: 0.2,
-          style: ctx.isDark ? darkStyle : lightStyle,
+          style: this.core.isDark ? darkStyle : lightStyle,
           attributionControl: false,
         })
         if (marked) {
@@ -136,17 +137,17 @@ export function createCharts(ctx: FixItContext) {
           mapbox.addControl(new mapboxgl.FullscreenControl())
         }
         mapbox.addControl(new MapboxLanguage())
-        _mapboxArr.push(mapbox)
+        this._mapboxArr.push(mapbox)
       })
-      _mapboxOnSwitchTheme = _mapboxOnSwitchTheme || (() => {
-        forEach(_mapboxArr, (mapbox: any) => {
+      this._mapboxOnSwitchTheme = this._mapboxOnSwitchTheme || (() => {
+        forEach(this._mapboxArr, (mapbox: any) => {
           const $mapbox = mapbox.getContainer()
           const { lightStyle, darkStyle } = JSON.parse($mapbox.dataset.options)
-          mapbox.setStyle(ctx.isDark ? darkStyle : lightStyle)
+          mapbox.setStyle(this.core.isDark ? darkStyle : lightStyle)
           mapbox.addControl(new MapboxLanguage())
         })
       })
-      document.addEventListener('fixit:switch-theme', _mapboxOnSwitchTheme)
+      this.bus.on('fixit:switch-theme', this._mapboxOnSwitchTheme)
     }
   }
 
@@ -154,9 +155,9 @@ export function createCharts(ctx: FixItContext) {
    * Initialize TypeIt typewriter instances, grouped and chained by data attributes.
    * @param target - The root element to search for `.typeit` elements.
    */
-  function initTypeit(target: Element | Document = document) {
-    if (ctx.config.typeit) {
-      const typeitConfig = ctx.config.typeit
+  initTypeit(target: Element | Document = document) {
+    if (this.core.config.typeit) {
+      const typeitConfig = this.core.config.typeit
       const speed = typeitConfig.speed || 100
       const cursorSpeed = typeitConfig.cursorSpeed || 1000
       const cursorChar = typeitConfig.cursorChar || '|'
@@ -208,6 +209,4 @@ export function createCharts(ctx: FixItContext) {
       stagingDOM.destroy()
     }
   }
-
-  return { initEcharts, initMapbox, initTypeit }
 }

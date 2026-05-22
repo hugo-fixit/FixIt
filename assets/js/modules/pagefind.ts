@@ -1,7 +1,4 @@
-/**
- * Pagefind search integration for FixIt theme.
- * @see https://pagefind.app/
- */
+/** Pagefind search engine integration with lazy loading, filters, and debounced search. */
 
 /** Matches absolute URLs (e.g. "https://..." or "//...") */
 const ABSOLUTE_URL_RE = /^(?:[a-z]+:)?\/\//i

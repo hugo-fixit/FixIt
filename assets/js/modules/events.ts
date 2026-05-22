@@ -1,17 +1,21 @@
 /** Events module — scroll, resize, mask click, and print event handling. */
-import type { FixItContext } from '../types'
+import type { TypedEventBus } from '../core/event-bus'
+import type { CodeService, CoreService, EventsService, SearchService, TocService } from '../core/tokens'
 import { animateCSS, forEach, getScrollTop, isMobile, scrollIntoView } from '../utils'
 
-/**
- * Create DOM event handlers for scroll, resize, mask click, and print.
- * @param ctx - The shared FixIt context object.
- * @returns Event binding methods.
- */
-export function createEvents(ctx: FixItContext) {
-  let _resizeTimeout: number | null = null
+export class EventsModule implements EventsService {
+  private _resizeTimeout: number | null = null
+
+  constructor(
+    private readonly core: CoreService,
+    private readonly toc: TocService,
+    private readonly search: SearchService,
+    private readonly code: CodeService,
+    private readonly bus: TypedEventBus,
+  ) {}
 
   /** Bind scroll listener: auto-hide headers, reading progress, back-to-top, and TOC sync. */
-  function onScroll() {
+  onScroll() {
     const ACCURACY = 20
     const $autoHeaders: HTMLElement[] = []
     const $backToTop = document.querySelector<HTMLElement>('.back-to-top')
@@ -26,14 +30,14 @@ export function createEvents(ctx: FixItContext) {
       scrollIntoView('body')
     })
     window.addEventListener('scroll', (event) => {
-      if (ctx.disableScrollEvent) {
+      if (this.core.disableScrollEvent) {
         event.preventDefault()
         return
       }
-      ctx.newScrollTop = getScrollTop()
-      const scroll = ctx.newScrollTop - ctx.oldScrollTop
+      this.core.newScrollTop = getScrollTop()
+      const scroll = this.core.newScrollTop - this.core.oldScrollTop
       if (Math.abs(scroll) > ACCURACY) {
-        ctx.closeActiveMaskOverlay()
+        this.core.closeActiveMaskOverlay()
         const isScrollingDown = scroll > 0
         forEach($autoHeaders, ($header) => {
           if (isScrollingDown) {
@@ -46,14 +50,14 @@ export function createEvents(ctx: FixItContext) {
           }
         })
       }
-      else if (ctx.newScrollTop <= 0) {
+      else if (this.core.newScrollTop <= 0) {
         forEach($autoHeaders, ($header) => {
           $header.classList.remove('header__fadeOutUp')
           animateCSS($header, ['header__fadeInDown'], true)
         })
       }
       const contentHeight = document.body.scrollHeight - window.innerHeight
-      const scrollPercent = Math.max(Math.min(100 * Math.max(ctx.newScrollTop, 0) / contentHeight, 100), 0)
+      const scrollPercent = Math.max(Math.min(100 * Math.max(this.core.newScrollTop, 0) / contentHeight, 100), 0)
       if ($readingProgressBar) {
         $readingProgressBar.style.setProperty('--fi-progress', `${scrollPercent.toFixed(2)}%`)
       }
@@ -74,29 +78,29 @@ export function createEvents(ctx: FixItContext) {
           $backToTop.querySelector<SVGCircleElement>('circle.progress')!.style.strokeDashoffset = String(dashoffset.toFixed(2))
         }
       }
-      document.dispatchEvent(new CustomEvent('fixit:scroll'))
-      ctx.syncTocHeight()
-      ctx.syncTocActiveState()
-      ctx.oldScrollTop = ctx.newScrollTop
+      this.bus.emit('fixit:scroll')
+      this.toc.syncTocHeight()
+      this.toc.syncTocActiveState()
+      this.core.oldScrollTop = this.core.newScrollTop
     }, false)
   }
 
   /** Bind resize listener with debounce: re-init TOC, search, and sync state. */
-  function onResize() {
+  onResize() {
     let resizeBefore = isMobile()
     window.addEventListener('resize', () => {
-      if (!_resizeTimeout) {
-        _resizeTimeout = window.setTimeout(() => {
-          _resizeTimeout = null
-          document.dispatchEvent(new CustomEvent('fixit:resize'))
-          ctx.initToc()
-          ctx.initSearch()
-          ctx.syncTocHeight()
-          ctx.syncTocActiveState()
+      if (!this._resizeTimeout) {
+        this._resizeTimeout = window.setTimeout(() => {
+          this._resizeTimeout = null
+          this.bus.emit('fixit:resize')
+          this.toc.initToc()
+          this.search.initSearch()
+          this.toc.syncTocHeight()
+          this.toc.syncTocActiveState()
 
           const _isMobile = isMobile()
           if (_isMobile !== resizeBefore) {
-            ctx.closeActiveMaskOverlay()
+            this.core.closeActiveMaskOverlay()
             resizeBefore = _isMobile
           }
         }, 100)
@@ -105,19 +109,19 @@ export function createEvents(ctx: FixItContext) {
   }
 
   /** Bind mask click to close the active overlay. */
-  function onClickMask() {
+  onClickMask() {
     document.getElementById('mask')!.addEventListener('click', (e) => {
       if (!(e.target as HTMLElement).classList.contains('blur'))
         return
-      ctx.closeActiveMaskOverlay()
+      this.core.closeActiveMaskOverlay()
     }, false)
   }
 
   /** Bind beforeprint/afterprint to expand admonitions, code blocks, details, and file trees. */
-  function initPrint() {
+  initPrint() {
     window.addEventListener('beforeprint', () => {
       const $content = document.getElementById('content')!
-      const printConfig = ctx.config.print || {}
+      const printConfig = this.core.config.print || {}
 
       if (printConfig.expandAdmonition) {
         forEach($content.querySelectorAll('.admonition'), ($el: Element) => $el.classList.add('open'))
@@ -152,14 +156,12 @@ export function createEvents(ctx: FixItContext) {
       if (printConfig.expandDetails) {
         forEach($content.querySelectorAll('details'), ($el: Element) => $el.setAttribute('open', ''))
       }
-      document.dispatchEvent(new CustomEvent('fixit:before-print'))
+      this.bus.emit('fixit:before-print')
     }, false)
 
     window.addEventListener('afterprint', () => {
-      ctx.initCodeTabs()
-      document.dispatchEvent(new CustomEvent('fixit:after-print'))
+      this.code.initCodeTabs()
+      this.bus.emit('fixit:after-print')
     }, false)
   }
-
-  return { onScroll, onResize, onClickMask, initPrint }
 }
