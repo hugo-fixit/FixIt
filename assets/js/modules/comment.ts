@@ -11,8 +11,6 @@ const Valine = window.Valine
 const Waline = window.Waline
 
 export class CommentModule implements CommentService {
-  #utterancesOnSwitchTheme: (() => void) | undefined
-  #giscusOnSwitchTheme: (() => void) | undefined
   #messageListener: ((event: MessageEvent) => void) | undefined
 
   constructor(
@@ -70,8 +68,10 @@ export class CommentModule implements CommentService {
       }
       const artalk = Artalk.init(this.core.config.comment.artalk)
       artalk.setDarkMode(this.core.isDark)
-      this.bus.on('fixit:switch-theme', () => {
-        artalk.setDarkMode(this.core.isDark)
+      this.bus.on('fixit:switch-theme', ({ detail }) => {
+        if (!detail.isChanged)
+          return
+        artalk.setDarkMode(detail.isDark)
       })
       artalk.on('comments-loaded', () => {
         this.core.config.comment?.artalk?.lightgallery && this.initCommentLightGallery('.atk-comment .atk-content', 'img:not([atk-emoticon])')
@@ -109,14 +109,18 @@ export class CommentModule implements CommentService {
       script.crossOrigin = 'anonymous'
       script.async = true
       document.getElementById('utterances')!.appendChild(script)
-      this.#utterancesOnSwitchTheme = this.#utterancesOnSwitchTheme || (() => {
+      const applyUtterancesTheme = (isDark: boolean) => {
         const message = {
           type: 'set-theme',
-          theme: this.core.isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme,
+          theme: isDark ? utterancesConfig.darkTheme : utterancesConfig.lightTheme,
         }
         document.querySelector<HTMLIFrameElement>('.utterances-frame')?.contentWindow?.postMessage(message, 'https://utteranc.es')
+      }
+      this.bus.on('fixit:switch-theme', ({ detail }) => {
+        if (!detail.isChanged)
+          return
+        applyUtterancesTheme(detail.isDark)
       })
-      this.bus.on('fixit:switch-theme', this.#utterancesOnSwitchTheme)
       return
     }
     if (this.core.config.comment.twikoo) {
@@ -145,11 +149,15 @@ export class CommentModule implements CommentService {
     }
     if (this.core.config.comment.giscus) {
       const giscusConfig = this.core.config.comment.giscus
-      this.#giscusOnSwitchTheme = this.#giscusOnSwitchTheme || (() => {
-        const message = { setConfig: { theme: this.core.isDark ? giscusConfig.darkTheme : giscusConfig.lightTheme } }
+      const applyGiscusTheme = (isDark: boolean) => {
+        const message = { setConfig: { theme: isDark ? giscusConfig.darkTheme : giscusConfig.lightTheme } }
         document.querySelector<HTMLIFrameElement>('.giscus-frame')?.contentWindow?.postMessage({ giscus: message }, giscusConfig.origin!)
+      }
+      this.bus.on('fixit:switch-theme', ({ detail }) => {
+        if (!detail.isChanged)
+          return
+        applyGiscusTheme(detail.isDark)
       })
-      this.bus.on('fixit:switch-theme', this.#giscusOnSwitchTheme)
       this.#messageListener = (event: MessageEvent) => {
         if (event.origin !== giscusConfig.origin)
           return
@@ -157,7 +165,7 @@ export class CommentModule implements CommentService {
         if ($script) {
           $script.parentElement!.removeChild($script)
         }
-        this.#giscusOnSwitchTheme!()
+        applyGiscusTheme(this.core.isDark)
         window.removeEventListener('message', this.#messageListener!, false)
       }
       window.addEventListener('message', this.#messageListener, false)

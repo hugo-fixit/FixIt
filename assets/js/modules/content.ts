@@ -10,7 +10,6 @@ const lightGallery = window.lightGallery
 
 export class ContentModule implements ContentService {
   private lg: { destroy: (removeSubModules?: boolean) => void } | undefined
-  #jsonViewerOnSwitchTheme: (() => void) | undefined
 
   constructor(
     private readonly core: CoreService,
@@ -60,13 +59,17 @@ export class ContentModule implements ContentService {
   initJsonViewer() {
     if (!window.JsonViewerElement)
       return
-    this.#jsonViewerOnSwitchTheme = this.#jsonViewerOnSwitchTheme || (() => {
+    const applyJsonViewerTheme = (isDark: boolean) => {
       forEach(document.getElementsByTagName('json-viewer'), ($el: Element) => {
-        $el.setAttribute('theme', this.core.isDark ? 'dark' : 'light')
+        $el.setAttribute('theme', isDark ? 'dark' : 'light')
       })
+    }
+    this.bus.on('fixit:switch-theme', ({ detail }) => {
+      if (!detail.isChanged)
+        return
+      applyJsonViewerTheme(detail.isDark)
     })
-    this.bus.on('fixit:switch-theme', this.#jsonViewerOnSwitchTheme)
-    this.#jsonViewerOnSwitchTheme()
+    applyJsonViewerTheme(this.core.isDark)
   }
 
   /** Convert footnote refs into tooltip-enabled elements. */

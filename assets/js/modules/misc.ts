@@ -143,13 +143,15 @@ export class MiscModule implements MiscService {
     if (!window.postChatUser || !window.postChatConfig || window.postChatConfig.userMode === 'magic')
       return
     window.postChat_theme = this.core.isDark ? 'dark' : 'light'
-    this.bus.on('fixit:switch-theme', () => {
+    this.bus.on('fixit:switch-theme', ({ detail }) => {
+      if (!detail.isChanged)
+        return
       const targetFrame = document.getElementById('postChat_iframeContainer')
       if (targetFrame) {
-        window.postChatUser.setPostChatTheme(this.core.isDark ? 'dark' : 'light')
+        window.postChatUser.setPostChatTheme(detail.isDark ? 'dark' : 'light')
       }
       else {
-        window.postChat_theme = this.core.isDark ? 'dark' : 'light'
+        window.postChat_theme = detail.isDark ? 'dark' : 'light'
       }
     })
   }

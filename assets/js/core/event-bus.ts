@@ -2,7 +2,7 @@
 
 /** Event map: every FixIt event and its payload shape. */
 export interface FixItEventMap {
-  'fixit:switch-theme': { isDark: boolean }
+  'fixit:switch-theme': { isDark: boolean, isChanged: boolean }
   'fixit:scroll': void
   'fixit:resize': void
   'fixit:decrypted': void

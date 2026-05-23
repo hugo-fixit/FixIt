@@ -9,11 +9,9 @@ const MapboxLanguage = window.MapboxLanguage
 const TypeIt = window.TypeIt
 
 export class ChartsModule implements ChartsService {
-  #echartsOnSwitchTheme: (() => void) | undefined
   #echartsArr: any[] = []
   #echartsOnResize: (() => void) | undefined
   readonly #mapboxArr: any[] = []
-  #mapboxOnSwitchTheme: (() => void) | undefined
 
   constructor(
     private readonly core: CoreService,
@@ -26,7 +24,7 @@ export class ChartsModule implements ChartsService {
       return
     echarts.registerTheme('light', this.core.config.echarts.lightTheme!)
     echarts.registerTheme('dark', this.core.config.echarts.darkTheme!)
-    this.#echartsOnSwitchTheme = this.#echartsOnSwitchTheme || (() => {
+    const applyEchartsTheme = (isDark: boolean) => {
       for (let i = 0; i < this.#echartsArr.length; i++) {
         this.#echartsArr[i].dispose()
       }
@@ -36,7 +34,7 @@ export class ChartsModule implements ChartsService {
         const $dataEl = $echarts.nextElementSibling as HTMLElement
         if ($dataEl.tagName !== 'TEMPLATE')
           return
-        const chart = echarts.init($echarts as HTMLElement, this.core.isDark ? 'dark' : 'light', { renderer: 'svg' })
+        const chart = echarts.init($echarts as HTMLElement, isDark ? 'dark' : 'light', { renderer: 'svg' })
         chart.showLoading()
         stagingDOM.stage(($dataEl as HTMLTemplateElement).content.cloneNode(true))
         const _setOption = (option: any) => {
@@ -75,9 +73,13 @@ export class ChartsModule implements ChartsService {
         _setOption(stagingDOM.contentAsJson())
       })
       stagingDOM.destroy()
+    }
+    this.bus.on('fixit:switch-theme', ({ detail }) => {
+      if (!detail.isChanged)
+        return
+      applyEchartsTheme(detail.isDark)
     })
-    this.bus.on('fixit:switch-theme', this.#echartsOnSwitchTheme)
-    this.#echartsOnSwitchTheme()
+    applyEchartsTheme(this.core.isDark)
     this.#echartsOnResize = this.#echartsOnResize || (() => {
       for (let i = 0; i < this.#echartsArr.length; i++) {
         this.#echartsArr[i].resize()
@@ -139,15 +141,19 @@ export class ChartsModule implements ChartsService {
         mapbox.addControl(new MapboxLanguage())
         this.#mapboxArr.push(mapbox)
       })
-      this.#mapboxOnSwitchTheme = this.#mapboxOnSwitchTheme || (() => {
+      const applyMapboxTheme = (isDark: boolean) => {
         forEach(this.#mapboxArr, (mapbox: any) => {
           const $mapbox = mapbox.getContainer()
           const { lightStyle, darkStyle } = JSON.parse($mapbox.dataset.options)
-          mapbox.setStyle(this.core.isDark ? darkStyle : lightStyle)
+          mapbox.setStyle(isDark ? darkStyle : lightStyle)
           mapbox.addControl(new MapboxLanguage())
         })
+      }
+      this.bus.on('fixit:switch-theme', ({ detail }) => {
+        if (!detail.isChanged)
+          return
+        applyMapboxTheme(detail.isDark)
       })
-      this.bus.on('fixit:switch-theme', this.#mapboxOnSwitchTheme)
     }
   }
 

@@ -597,8 +597,6 @@ function bindTabContainerChanged() {
  * @returns {void}
  */
 function bindThemeSync() {
-  let lastEffectiveDark = isDarkMode()
-
   const getActivePanzoomSvg = (container) => {
     const nodes = container?.querySelectorAll?.('.mermaid, .mermaid-dark')
     if (!nodes?.length) return null
@@ -651,9 +649,8 @@ function bindThemeSync() {
   }
 
   document.addEventListener('fixit:switch-theme', (e) => {
-    const isDark = e.detail.isDark
-    if (isDark === lastEffectiveDark) return
-    lastEffectiveDark = isDark
+    const { isDark, isChanged } = e.detail
+    if (!isChanged) return
     sync(isDark)
     observeMermaidContainers(document, true)
   }, false)

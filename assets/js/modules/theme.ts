@@ -5,8 +5,6 @@ import type { CoreService, ThemeService } from '../core/tokens'
 import { forEach } from '../utils'
 
 export class ThemeModule implements ThemeService {
-  #themeColorOnSwitchTheme: (() => void) | undefined
-
   constructor(
     private readonly core: CoreService,
     private readonly bus: TypedEventBus,
@@ -17,11 +15,15 @@ export class ThemeModule implements ThemeService {
     const $meta = document.querySelector<HTMLMetaElement>('[name="theme-color"]')
     if (!$meta)
       return
-    this.#themeColorOnSwitchTheme = this.#themeColorOnSwitchTheme || (() => {
-      $meta.content = this.core.isDark ? $meta.dataset.dark! : $meta.dataset.light!
+    const applyThemeColor = (isDark: boolean) => {
+      $meta.content = isDark ? $meta.dataset.dark! : $meta.dataset.light!
+    }
+    this.bus.on('fixit:switch-theme', ({ detail }) => {
+      if (!detail.isChanged)
+        return
+      applyThemeColor(detail.isDark)
     })
-    this.bus.on('fixit:switch-theme', this.#themeColorOnSwitchTheme)
-    this.#themeColorOnSwitchTheme()
+    applyThemeColor(this.core.isDark)
   }
 
   /** Initialize the theme switch button cycle and system preference listener. */
@@ -29,6 +31,7 @@ export class ThemeModule implements ThemeService {
     const mql = window.matchMedia('(prefers-color-scheme: dark)')
     const modes = ['auto', 'light', 'dark'] as const
     const applyThemeMode = (mode: string, persist = true) => {
+      const prevIsDark = this.core.isDark
       this.core.themeMode = mode
       document.documentElement.dataset.themeMode = mode
       this.core.isDark = mode === 'auto' ? mql.matches : mode === 'dark'
@@ -37,7 +40,10 @@ export class ThemeModule implements ThemeService {
         window.localStorage?.setItem('theme-mode', mode)
       }
 
-      this.bus.emit('fixit:switch-theme', { isDark: this.core.isDark })
+      this.bus.emit('fixit:switch-theme', {
+        isDark: this.core.isDark,
+        isChanged: prevIsDark !== this.core.isDark,
+      })
     }
 
     forEach(document.getElementsByClassName('theme-switch'), ($themeSwitch: Element) => {
@@ -51,8 +57,12 @@ export class ThemeModule implements ThemeService {
     mql.addEventListener('change', (e: MediaQueryListEvent) => {
       if (this.core.themeMode !== 'auto')
         return
+      const prevIsDark = this.core.isDark
       this.core.isDark = e.matches
-      this.bus.emit('fixit:switch-theme', { isDark: this.core.isDark })
+      this.bus.emit('fixit:switch-theme', {
+        isDark: this.core.isDark,
+        isChanged: prevIsDark !== this.core.isDark,
+      })
     })
   }
 }
