@@ -876,13 +876,13 @@ export async function bootstrapMermaid(options: MermaidBootstrapOptions): Promis
 
   try {
     // Mermaid core module is required; optional modules degrade gracefully.
-    const mermaidMod = await import(/* @vite-ignore */ mermaidSource)
+    const mermaidMod = await import(mermaidSource)
     const mermaid = unwrapModule<MermaidRuntimeModule>(mermaidMod)
 
     let zenuml: unknown
     if (zenumlSource) {
       try {
-        const zenumlMod = await import(/* @vite-ignore */ zenumlSource)
+        const zenumlMod = await import(zenumlSource)
         zenuml = unwrapModule(zenumlMod)
       }
       catch (error) {
@@ -892,7 +892,7 @@ export async function bootstrapMermaid(options: MermaidBootstrapOptions): Promis
 
     const loaded = await Promise.all(layoutLoaderSources.map(async (source) => {
       try {
-        const loaderMod = await import(/* @vite-ignore */ source)
+        const loaderMod = await import(source)
         return unwrapModule(loaderMod)
       }
       catch (error) {
