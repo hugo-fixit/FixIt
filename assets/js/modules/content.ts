@@ -151,8 +151,8 @@ export class ContentModule implements ContentService {
     this.bus.on('fixit:decrypted', () => {
       this.#initContentComponents()
     })
-    this.bus.on('fixit:partial-decrypted', (e) => {
-      this.#initContentComponents(e.target, false)
+    this.bus.on('fixit:partial-decrypted', ({ detail }) => {
+      this.#initContentComponents(detail.target, false)
     })
   }
 

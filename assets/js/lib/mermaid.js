@@ -573,8 +573,8 @@ function initDiagramControls() {
  * @returns {void}
  */
 function bindRenderedPanzoom() {
-  document.addEventListener('fixit:mermaid-rendered', (event) => {
-    const svgId = event?.detail?.svgId
+  document.addEventListener('fixit:mermaid-rendered', ({ detail }) => {
+    const svgId = detail.svgId
     if (!svgId) return
     bindMermaidPanzoom(document.getElementById(svgId))
   }, false)
@@ -585,8 +585,8 @@ function bindRenderedPanzoom() {
  * @returns {void}
  */
 function bindTabContainerChanged() {
-  document.addEventListener('tab-container-changed', (event) => {
-    const panel = event?.panel || event?.detail?.relatedTarget
+  document.addEventListener('tab-container-changed', (e) => {
+    const panel = e.panel || e.detail?.relatedTarget
     if (!panel) return
     observeMermaidContainers(panel, true)
   }, false)

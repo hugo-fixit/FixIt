@@ -1,4 +1,5 @@
 /** Code module — code block interactions: copy, download, fullscreen, tabs, and line numbers. */
+import type { TypedEventBus } from '../core/event-bus'
 import type { CodeService } from '../core/tokens'
 import { animateCSS, createCopyText, downloadAsFile, flashCopiedTooltip, forEach, getStagingDOM } from '../utils'
 
@@ -6,8 +7,11 @@ const CellTooltip = window.CellTooltip
 const copyText = createCopyText()
 
 export class CodeModule implements CodeService {
-  private readonly CODE_TAB_SYNC_EVENT = 'fixit:code-tab-sync'
   #codeFullscreenOnEsc: ((event: KeyboardEvent) => void) | undefined
+
+  constructor(
+    private readonly bus: TypedEventBus,
+  ) {}
 
   /**
    * Attach copy-to-clipboard behaviour to a code block.
@@ -331,13 +335,12 @@ export class CodeModule implements CodeService {
         }
       }
 
-      document.addEventListener(this.CODE_TAB_SYNC_EVENT, (event: Event) => {
-        const { detail } = event as CustomEvent<{ lang: string, source: HTMLElement }>
+      this.bus.on('fixit:code-tab-sync', ({ detail }) => {
         if (!detail.lang || detail.source === $container)
           return
         const index = toggleLangToIndex.get(detail.lang)
         index !== undefined && switchToTab(index)
-      }, false)
+      })
 
       $tabs.forEach(($tab, index) => {
         const title = $tab.dataset.tabTitle || 'Code'
@@ -361,12 +364,10 @@ export class CodeModule implements CodeService {
         $btn.addEventListener('click', () => {
           if ($tab.dataset.codeToggle === 'true') {
             window.localStorage.setItem('config_lang_perf', normalizedTitle)
-            document.dispatchEvent(new CustomEvent(this.CODE_TAB_SYNC_EVENT, {
-              detail: {
-                lang: normalizedTitle,
-                source: $container,
-              },
-            }))
+            this.bus.emit('fixit:code-tab-sync', {
+              lang: normalizedTitle,
+              source: $container,
+            })
           }
           switchToTab(index)
         })

@@ -14,7 +14,9 @@ export interface FixItEventMap {
   'fixit:mermaid-rendered': void
 }
 
-type Handler<T> = T extends void ? () => void : (detail: T) => void
+type Handler<T> = T extends void
+  ? (() => void) | ((event: CustomEvent<void>) => void)
+  : (event: CustomEvent<T>) => void
 
 export class TypedEventBus {
   private target = document

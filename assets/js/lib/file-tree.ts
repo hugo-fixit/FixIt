@@ -2,6 +2,8 @@
  * Initialize file tree toggle handlers under the given root.
  * @param target - The root element or document to search within.
  */
+import type { TabContainerChangedEvent } from '../types'
+
 function initFileTree(target: Element | Document = document) {
   target.querySelectorAll<HTMLElement>('.file-tree-toggle:not([data-init])').forEach((label) => {
     label.addEventListener('click', (e) => {
@@ -64,11 +66,11 @@ function expandAll(target: Element | Document = document) {
 
 /** Bind global events for file tree self-management. */
 function bindEvents() {
-  document.addEventListener('tab-container-changed', ((e: Event) => {
-    const panel = (e as any).panel as HTMLElement | undefined
+  document.addEventListener('tab-container-changed', (e: TabContainerChangedEvent) => {
+    const panel = e.panel || e.detail?.relatedTarget
     if (panel)
       updateLineHeight(panel)
-  }) as EventListener, false)
+  }, false)
 
   document.addEventListener('fixit:before-print', () => {
     if (window.config.print?.expandFileTree) {
@@ -80,9 +82,9 @@ function bindEvents() {
     initFileTree()
   }, false)
 
-  document.addEventListener('fixit:partial-decrypted', ((e: CustomEvent) => {
+  document.addEventListener('fixit:partial-decrypted', (e) => {
     initFileTree(e.detail.target)
-  }) as EventListener, false)
+  }, false)
 }
 
 document.addEventListener('DOMContentLoaded', () => {

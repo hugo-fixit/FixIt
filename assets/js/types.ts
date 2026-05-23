@@ -1,3 +1,5 @@
+import type { FixItEventMap } from './core/event-bus'
+
 /** Mask overlay handler */
 export interface MaskOverlayHandler {
   isActive?: () => boolean
@@ -151,6 +153,18 @@ export interface PrintConfig {
   expandFileTree?: boolean
 }
 
+export interface TabContainerChangedDetail {
+  relatedTarget?: Element | null
+}
+
+export type TabContainerChangedEvent = CustomEvent<TabContainerChangedDetail> & {
+  panel: Element | null
+}
+
+type FixItDocumentEventMap = {
+  [K in keyof FixItEventMap]: CustomEvent<FixItEventMap[K]>
+}
+
 /** Public API exposed on window.fixit for backward compatibility. */
 export interface FixItPublicAPI {
   readonly config: FixItConfig
@@ -160,6 +174,10 @@ export interface FixItPublicAPI {
 }
 
 declare global {
+  interface DocumentEventMap extends FixItDocumentEventMap {
+    'tab-container-changed': TabContainerChangedEvent
+  }
+
   interface Window {
     // Third-party libraries
     autocomplete?: any

@@ -40,7 +40,7 @@ function bootstrap(): void {
     .register(TOKENS.Svg, () => new SvgModule())
     .register(TOKENS.Menu, c => new MenuModule(c.resolve(TOKENS.Core)))
     .register(TOKENS.Search, c => new SearchModule(c.resolve(TOKENS.Core)))
-    .register(TOKENS.Code, () => new CodeModule())
+    .register(TOKENS.Code, () => new CodeModule(bus))
     .register(TOKENS.Toc, () => new TocModule())
     .register(TOKENS.Charts, c => new ChartsModule(c.resolve(TOKENS.Core), bus))
     .register(TOKENS.Comment, c => new CommentModule(c.resolve(TOKENS.Core), bus))
