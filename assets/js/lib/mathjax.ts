@@ -1,4 +1,11 @@
-/** MathJax integration — configures and dynamically loads the MathJax script. */
+/**
+ * MathJax integration for FixIt.
+ *
+ * Responsibilities:
+ * - Build MathJax global configuration from theme runtime options.
+ * - Register default delimiters/macros and allow user-level overrides.
+ * - Load the MathJax runtime script dynamically from configured CDN.
+ */
 const params = window.config.mathjax || {}
 
 /**

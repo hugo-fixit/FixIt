@@ -1,6 +1,18 @@
+/**
+ * Encrypted content decryptor for FixIt pages and shortcodes.
+ *
+ * Responsibilities:
+ * - Validate password input and decrypt Base64 payloads into target containers.
+ * - Support both full-page and shortcode-scoped encrypted blocks.
+ * - Persist and validate page-level decrypt cache with expiration.
+ * - Emit and react to FixIt events for decrypted/partial-decrypted/reset flows.
+ */
+import { TypedEventBus } from '../core/event-bus'
 import { flashTooltip } from '../utils'
 
 declare const CryptoJS: any
+
+const eventBus = new TypedEventBus()
 
 interface DecryptorOptions {
   duration?: number
@@ -12,7 +24,6 @@ interface CachedStat {
   salt: string
 }
 
-/** Page-level and shortcode-level encrypted content decryptor. */
 class FixItDecryptor {
   options: Required<DecryptorOptions>
 
@@ -43,8 +54,10 @@ class FixItDecryptor {
     catch (err) {
       return console.error(err)
     }
-    const eventName = $target.id === 'content' ? 'fixit:decrypted' : 'fixit:partial-decrypted'
-    document.dispatchEvent(new CustomEvent(eventName, { detail: { target: $target } }))
+    if ($target.id === 'content')
+      eventBus.emit('fixit:decrypted')
+    else
+      eventBus.emit('fixit:partial-decrypted', { target: $target })
   }
 
   /**
@@ -84,11 +97,11 @@ class FixItDecryptor {
   init({ all, shortcode }: { all?: boolean, shortcode?: boolean }) {
     const $content = document.querySelector<HTMLElement>('#content')
     if (shortcode) {
-      document.addEventListener('fixit:decrypted', () => {
+      eventBus.on('fixit:decrypted', () => {
         this.initShortcodes($content!)
       })
-      document.addEventListener('fixit:partial-decrypted', (e: Event) => {
-        this.initShortcodes((e as CustomEvent).detail.target)
+      eventBus.on('fixit:partial-decrypted', (e) => {
+        this.initShortcodes(e.detail.target)
       })
     }
     if (all) {
@@ -136,7 +149,7 @@ class FixItDecryptor {
       $encryptor.classList.remove('decrypted')
       $content.innerHTML = ''
       window.localStorage?.removeItem(`fixit-decryptor/#${location.pathname}`)
-      document.dispatchEvent(new CustomEvent('fixit:reset'))
+      eventBus.emit('fixit:reset')
     })
 
     $encryptor.classList.add('initialized')

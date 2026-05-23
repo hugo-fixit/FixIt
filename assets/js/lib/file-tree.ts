@@ -1,8 +1,20 @@
 /**
+ * File tree behavior module for FixIt content blocks.
+ *
+ * Responsibilities:
+ * - Initialize folder expand/collapse interactions for `.file-tree` blocks.
+ * - Recalculate connector line heights when tree visibility/layout changes.
+ * - Sync tree state across tab switches, print preparation, and decrypted content updates.
+ */
+import type { TabContainerChangedEvent } from '../types'
+import { TypedEventBus } from '../core/event-bus'
+
+const eventBus = new TypedEventBus()
+
+/**
  * Initialize file tree toggle handlers under the given root.
  * @param target - The root element or document to search within.
  */
-import type { TabContainerChangedEvent } from '../types'
 
 function initFileTree(target: Element | Document = document) {
   target.querySelectorAll<HTMLElement>('.file-tree-toggle:not([data-init])').forEach((label) => {
@@ -72,19 +84,19 @@ function bindEvents() {
       updateLineHeight(panel)
   }, false)
 
-  document.addEventListener('fixit:before-print', () => {
+  eventBus.on('fixit:before-print', () => {
     if (window.config.print?.expandFileTree) {
       expandAll(document.getElementById('content')!)
     }
-  }, false)
+  })
 
-  document.addEventListener('fixit:decrypted', () => {
+  eventBus.on('fixit:decrypted', () => {
     initFileTree()
-  }, false)
+  })
 
-  document.addEventListener('fixit:partial-decrypted', (e) => {
+  eventBus.on('fixit:partial-decrypted', (e) => {
     initFileTree(e.detail.target)
-  }, false)
+  })
 }
 
 document.addEventListener('DOMContentLoaded', () => {
