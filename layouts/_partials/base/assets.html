@@ -172,10 +172,10 @@ FixIt theme assets partial
 {{- /* Mapbox GL */ -}}
 {{- if .Store.Get "hasMapbox" -}}
   {{- $source := $cdn.mapboxGLCSS | default "lib/mapbox-gl/mapbox-gl.css" -}}
-  {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint "Preload" true | dict "Page" . "Data" | partial "store/style.html" -}}
+  {{- dict "Source" $source "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Preload" true | dict "Page" . "Data" | partial "store/style.html" -}}
   {{- $source = $cdn.mapboxGLJS | default "lib/mapbox-gl/mapbox-gl.js" -}}
-  {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-  {{- dict "Source" "lib/mapbox-gl/mapbox-gl-language.js" "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" $source "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" "lib/mapbox-gl/mapbox-gl-language.js" "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "accessToken" $params.mapbox.accessToken "RTLTextPlugin" "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.0/mapbox-gl-rtl-text.js" | dict "mapbox" | merge $config -}}
 {{- end -}}
 
@@ -239,7 +239,7 @@ FixIt theme assets partial
 {{- /* Watermark */ -}}
 {{- if eq .Site.Params.watermark.enable true -}}
   {{- $source := $cdn.cellWatermarkJS | default "lib/cell-watermark/watermark.js" -}}
-  {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" $source "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $watermarkConfig := .Site.Params.watermark | default dict -}}
   {{- $watermarkConfig = dict
     "appendTo" ".widgets"
@@ -260,10 +260,10 @@ FixIt theme assets partial
   {{- $cryptoEncBase64JS := $cdn.cryptoEncBase64JS | default "lib/crypto-js/enc-base64.js" -}}
   {{- $cryptoSha256JS := $cdn.cryptoSha256JS | default "lib/crypto-js/sha256.js" -}}
   {{- $xxhashWasmJS := $cdn.xxhashWasmJS | default "lib/xxhash-wasm/xxhash-wasm.js" -}}
-  {{- dict "Source" $cryptoCoreJS "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-  {{- dict "Source" $cryptoEncBase64JS "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-  {{- dict "Source" $cryptoSha256JS "Minify" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-  {{- dict "Source" $xxhashWasmJS "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" $cryptoCoreJS "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" $cryptoEncBase64JS "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" $cryptoSha256JS "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" $xxhashWasmJS "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- /* Decryption script */ -}}
   {{- $options := dict "targetPath" "js/fixit-decryptor.min.js" "minify" hugo.IsProduction -}}
   {{- if not hugo.IsProduction -}}
@@ -290,7 +290,7 @@ FixIt theme assets partial
 {{- /* PWA */ -}}
 {{- if not hugo.IsServer | and .Site.Params.enablePWA | and hugo.IsProduction -}}
   {{- $options := dict "targetPath" "service-worker.min.js" "minify" true -}}
-  {{- $source := resources.Get "js/service-worker.ts" | js.Build $options -}}
+  {{- $source := resources.Get "js/service-worker.js" | js.Build $options -}}
   {{- $_ := $source.RelPermalink -}}
   {{- $config = dict "enablePWA" .Site.Params.enablePWA | merge $config -}}
 {{- end -}}
@@ -373,9 +373,32 @@ FixIt theme assets partial
     {{- $source := $cdn.panzoomJS | default "lib/panzoom/panzoom.min.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
   {{- end -}}
-  {{- $options := dict "Source" "js/lib/mermaid.js" "Template" "js/lib/mermaid.js" -}}
-  {{- $options = dict "Context" . "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Attr" `type="module"` | merge $options -}}
-  {{- $options | dict "Page" $ "Data" | partial "store/script.html" -}}
+
+  {{- $mermaid := .Site.Params.mermaid -}}
+  {{- $mermaidCDN := $mermaid.cdn | default "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs" -}}
+  {{- $zenumlCDN := $mermaid.zenuml | default "" -}}
+  {{- $layoutLoaders := $mermaid.layoutloaders | default slice -}}
+
+  {{- $options := dict "targetPath" "js/lib/mermaid.js" "format" "esm" "minify" hugo.IsProduction -}}
+  {{- if not hugo.IsProduction -}}
+    {{- $options = dict "sourceMap" "external" | merge $options -}}
+  {{- end -}}
+  {{- $mermaidModule := resources.Get "js/lib/mermaid.ts" | js.Build $options -}}
+  {{- with $fingerprint -}}
+    {{- $mermaidModule = $mermaidModule | fingerprint . -}}
+  {{- end -}}
+  {{- $mermaidModuleURL := $mermaidModule.RelPermalink -}}
+
+  {{- $bootstrapJS := dict
+    "MermaidModuleURL" $mermaidModuleURL
+    "MermaidCDN" $mermaidCDN
+    "ZenumlCDN" $zenumlCDN
+    "LayoutLoaders" $layoutLoaders
+    "Mermaid" $mermaid
+    | partial "plugin/mermaid-bootstrap.html"
+    | htmlUnescape
+  -}}
+  {{- dict "Content" $bootstrapJS "Path" "js/lib/mermaid-bootstrap.js" "Minify" hugo.IsProduction "Attr" `type="module"` "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* Theme script */ -}}
@@ -407,7 +430,7 @@ FixIt theme assets partial
 {{- with .Store.Get "scriptArr" -}}
   {{- $content := delimit . "\n" -}}
   {{- $targetPath := printf "%s/js/pages/%s.js" $languagePrefix $uniqueFileId -}}
-  {{- dict "Content" $content "Path" $targetPath "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
+  {{- dict "Content" $content "Path" $targetPath "Minify" hugo.IsProduction "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- range (.Store.Get "this").style -}}

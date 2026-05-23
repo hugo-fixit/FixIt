@@ -11,7 +11,7 @@ export interface FixItEventMap {
   'fixit:before-print': void
   'fixit:after-print': void
   'fixit:code-tab-sync': { lang: string, source: HTMLElement }
-  'fixit:mermaid-rendered': void
+  'fixit:mermaid-rendered': { svgId: string }
 }
 
 type Handler<T> = T extends void

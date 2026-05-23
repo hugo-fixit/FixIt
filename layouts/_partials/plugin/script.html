@@ -33,6 +33,7 @@
     {{- end -}}
     {{- with .Build -}}
       {{- $resource = $resource | js.Build . -}}
+      {{/*  [todo] add a js.Build function to auto minify file as *.min.js  */}}
     {{- end -}}
     {{- with .Fingerprint -}}
       {{- $resource = $resource | fingerprint . -}}
@@ -45,7 +46,11 @@
 
   {{- /* Script form string */ -}}
   {{- if .Content | and .Path -}}
-    {{- $src = (resources.FromString .Path .Content).RelPermalink -}}
+    {{- $contentResource := resources.FromString .Path .Content -}}
+    {{- if .Minify -}}
+      {{- $contentResource = $contentResource | minify -}}
+    {{- end -}}
+    {{- $src = $contentResource.RelPermalink -}}
   {{- end -}}
 
   {{- /* Script attributes */ -}}
