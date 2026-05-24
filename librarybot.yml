@@ -106,7 +106,7 @@ libraries:
         - from: plugins/zoom/lg-zoom.min.js
           to: lightgallery/lg-zoom.min.js
   - npm: mapbox-gl
-    version: 3.23.1
+    version: 3.24.0
     local:
       items:
         - from: dist/mapbox-gl.css
