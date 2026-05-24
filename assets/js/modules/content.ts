@@ -1,6 +1,6 @@
 /** Content module — orchestrates rendering of page content components (gallery, tooltips, diagrams, etc.). */
 import type { TypedEventBus } from '../core/event-bus'
-import type { ChartsService, CodeService, ContentService, CoreService, LinkGuardService, MiscService, TocService } from '../core/tokens'
+import type { CodeService, ContentService, CoreService, LinkGuardService, MiscService, TocService } from '../core/tokens'
 
 const CellTooltip = window.CellTooltip
 const lgThumbnail = window.lgThumbnail
@@ -13,7 +13,6 @@ export class ContentModule implements ContentService {
   constructor(
     private readonly core: CoreService,
     private readonly code: CodeService,
-    private readonly charts: ChartsService,
     private readonly toc: TocService,
     private readonly misc: MiscService,
     private readonly linkGuard: LinkGuardService,
@@ -129,9 +128,6 @@ export class ContentModule implements ContentService {
     this.code.initCodeWrapper()
     this.code.initCodeTabs()
     this.code.initDiagramCopyBtn()
-    this.charts.initEcharts()
-    this.charts.initTypeit(target)
-    this.charts.initMapbox()
     this.initTooltip()
     this.misc.initPangu()
     this.misc.initMathJax()

@@ -73,13 +73,6 @@ export interface TocService {
   fixTocScroll: () => void
 }
 
-// ─── ChartsService ───
-export interface ChartsService {
-  initEcharts: () => void
-  initMapbox: () => void
-  initTypeit: (target?: Element | Document) => void
-}
-
 // ─── CommentService ───
 export interface CommentService {
   initCommentLightGallery: (comments: string, images: string) => void
@@ -139,7 +132,6 @@ export const TOKENS = {
   Search: token<SearchService>('Search'),
   Code: token<CodeService>('Code'),
   Toc: token<TocService>('Toc'),
-  Charts: token<ChartsService>('Charts'),
   Comment: token<CommentService>('Comment'),
   Encryption: token<EncryptionService>('Encryption'),
   Content: token<ContentService>('Content'),

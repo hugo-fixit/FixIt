@@ -2,7 +2,6 @@
 import { ServiceContainer } from './core/container'
 import { TypedEventBus } from './core/event-bus'
 import { TOKENS } from './core/tokens'
-import { ChartsModule } from './modules/charts'
 import { CodeModule } from './modules/code'
 import { CommentModule } from './modules/comment'
 import { ContentModule } from './modules/content'
@@ -42,7 +41,6 @@ function bootstrap(): void {
     .register(TOKENS.Search, c => new SearchModule(c.resolve(TOKENS.Core)))
     .register(TOKENS.Code, () => new CodeModule(bus))
     .register(TOKENS.Toc, () => new TocModule())
-    .register(TOKENS.Charts, c => new ChartsModule(c.resolve(TOKENS.Core), bus))
     .register(TOKENS.Comment, c => new CommentModule(c.resolve(TOKENS.Core), bus))
     .register(TOKENS.Encryption, c => new EncryptionModule(c.resolve(TOKENS.Core)))
     .register(TOKENS.Misc, c => new MiscModule(c.resolve(TOKENS.Core), bus))
@@ -50,7 +48,6 @@ function bootstrap(): void {
     .register(TOKENS.Content, c => new ContentModule(
       c.resolve(TOKENS.Core),
       c.resolve(TOKENS.Code),
-      c.resolve(TOKENS.Charts),
       c.resolve(TOKENS.Toc),
       c.resolve(TOKENS.Misc),
       c.resolve(TOKENS.LinkGuard),
@@ -72,7 +69,6 @@ function bootstrap(): void {
   const search = container.resolve(TOKENS.Search)
   const code = container.resolve(TOKENS.Code)
   const toc = container.resolve(TOKENS.Toc)
-  const charts = container.resolve(TOKENS.Charts)
   const comment = container.resolve(TOKENS.Comment)
   const enc = container.resolve(TOKENS.Encryption)
   const content = container.resolve(TOKENS.Content)
@@ -91,7 +87,6 @@ function bootstrap(): void {
     ...publicAPI(search),
     ...publicAPI(code),
     ...publicAPI(toc),
-    ...publicAPI(charts),
     ...publicAPI(comment),
     ...publicAPI(enc),
     ...publicAPI(content),
