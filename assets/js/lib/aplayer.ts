@@ -2,7 +2,7 @@
  * APlayer integration for FixIt shortcode blocks.
  *
  * Responsibilities:
- * - Discover `.aplayer-shortcode` nodes and initialize APlayer instances once.
+ * - Discover `.shortcode-aplayer` nodes and initialize APlayer instances once.
  * - Re-run initialization after decrypted or partially decrypted content is revealed.
  * - Keep behavior idempotent through `data-processed` markers.
  */
@@ -11,8 +11,8 @@ import { TypedEventBus } from '../core/event-bus'
 const eventBus = new TypedEventBus()
 
 function initAPlayer() {
-  Array.from(document.getElementsByClassName('aplayer-shortcode')).forEach((aplayer) => {
-    const el = aplayer as HTMLElement
+  const aplayers = document.querySelectorAll<HTMLElement>('.shortcode-aplayer')
+  aplayers.forEach((el) => {
     if (el.dataset.processed)
       return
     const audio = JSON.parse(el.dataset.audio!)

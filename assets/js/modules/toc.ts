@@ -1,6 +1,6 @@
 /** Table of Contents module — TOC scroll tracking, active state sync, and dialog. */
 import type { TocService } from '../core/tokens'
-import { animateCSS, forEach, isTocStatic } from '../utils'
+import { animateCSS, isTocStatic } from '../utils'
 
 export class TocModule implements TocService {
   private activeTocId: string | null = null
@@ -89,10 +89,10 @@ export class TocModule implements TocService {
   applyTocActiveState($tocRoot: HTMLElement, activeId: string) {
     if (!$tocRoot)
       return
-    forEach($tocRoot.querySelectorAll('a[href^="#"]'), ($tocLink: Element) => {
+    $tocRoot.querySelectorAll('a[href^="#"]').forEach(($tocLink: Element) => {
       $tocLink.classList.remove('active')
     })
-    forEach($tocRoot.querySelectorAll('li'), ($tocLi: Element) => {
+    $tocRoot.querySelectorAll('li').forEach(($tocLi: Element) => {
       $tocLi.classList.remove('has-active')
     })
     const $activeLink = this.getTocLinkById($tocRoot, activeId)
@@ -146,7 +146,7 @@ export class TocModule implements TocService {
       return
     const activeId = $activeHeading.id
     const $tocRoots = this.getTocRoots()
-    forEach($tocRoots, ($tocRoot) => {
+    $tocRoots.forEach(($tocRoot) => {
       this.applyTocActiveState($tocRoot, activeId)
     })
     if (this.activeTocId !== activeId) {
@@ -239,7 +239,7 @@ export class TocModule implements TocService {
       this.scrollActiveTocLinkIntoView($dialogTocRoot, this.activeTocId!, $dialogTocRoot)
       ;(document.activeElement as HTMLElement)?.blur()
     })
-    forEach(document.querySelectorAll<HTMLAnchorElement>('#toc-content-drawer a[href^="#"]'), ($link) => {
+    document.querySelectorAll<HTMLAnchorElement>('#toc-content-drawer a[href^="#"]').forEach(($link) => {
       $link.addEventListener('click', () => dialog.close())
     })
     dialog.addEventListener('close', () => {
@@ -256,7 +256,7 @@ export class TocModule implements TocService {
         $tocCore.parentElement!.replaceChild($newTocCore, $tocCore)
         $tocCore = $newTocCore
       }
-      forEach(document.querySelectorAll('.heading-mark'), ($headingMark: Element) => {
+      document.querySelectorAll('.heading-mark').forEach(($headingMark: Element) => {
         const $newHeadingMark = $headingMark.cloneNode(true)
         $headingMark.parentElement!.replaceChild($newHeadingMark, $headingMark)
       })

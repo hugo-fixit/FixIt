@@ -1,7 +1,7 @@
 /** Miscellaneous module — cookie consent, site time, PWA, watermark, MathJax, bookmarks, and rewards. */
 import type { TypedEventBus } from '../core/event-bus'
 import type { CoreService, MiscService } from '../core/tokens'
-import { forEach, getScrollTop, isMobile, isValidDate } from '../utils'
+import { getScrollTop, isMobile, isValidDate } from '../utils'
 
 const cookieconsent = window.cookieconsent
 const pangu = window.pangu
@@ -119,18 +119,18 @@ export class MiscModule implements MiscService {
     if (!$rewards.length)
       return
     if (isMobile()) {
-      forEach($rewards, $reward => $reward.removeAttribute('data-mode'))
+      $rewards.forEach($reward => $reward.removeAttribute('data-mode'))
       return
     }
     const _closeRewardExclude = (_id?: any) => {
-      forEach($rewards, ($reward) => {
+      $rewards.forEach(($reward) => {
         const $rewardInput = $reward.parentElement!.querySelector<HTMLInputElement>('.reward-input')
         if ($rewardInput && $rewardInput.id !== _id) {
           $rewardInput.checked = false
         }
       })
     }
-    forEach($rewards, ($reward) => {
+    $rewards.forEach(($reward) => {
       $reward.previousElementSibling!.addEventListener('click', function (this: HTMLElement) {
         _closeRewardExclude(this.getAttribute('for'))
       }, false)

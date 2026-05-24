@@ -1,7 +1,7 @@
 /** Events module — scroll, resize, mask click, and print event handling. */
 import type { TypedEventBus } from '../core/event-bus'
 import type { CodeService, CoreService, EventsService, SearchService, TocService } from '../core/tokens'
-import { animateCSS, forEach, getScrollTop, isMobile, scrollIntoView } from '../utils'
+import { animateCSS, getScrollTop, isMobile, scrollIntoView } from '../utils'
 
 export class EventsModule implements EventsService {
   #resizeTimeout: number | null = null
@@ -39,7 +39,7 @@ export class EventsModule implements EventsService {
       if (Math.abs(scroll) > ACCURACY) {
         this.core.closeActiveMaskOverlay()
         const isScrollingDown = scroll > 0
-        forEach($autoHeaders, ($header) => {
+        $autoHeaders.forEach(($header) => {
           if (isScrollingDown) {
             $header.classList.remove('header__fadeInDown')
             animateCSS($header, ['header__fadeOutUp'], true)
@@ -51,7 +51,7 @@ export class EventsModule implements EventsService {
         })
       }
       else if (this.core.newScrollTop <= 0) {
-        forEach($autoHeaders, ($header) => {
+        $autoHeaders.forEach(($header) => {
           $header.classList.remove('header__fadeOutUp')
           animateCSS($header, ['header__fadeInDown'], true)
         })
@@ -124,10 +124,10 @@ export class EventsModule implements EventsService {
       const printConfig = this.core.config.print || {}
 
       if (printConfig.expandAdmonition) {
-        forEach($content.querySelectorAll('.admonition'), ($el: Element) => $el.classList.add('open'))
+        $content.querySelectorAll('.admonition').forEach(($el: Element) => $el.classList.add('open'))
       }
       if (printConfig.expandCode) {
-        forEach($content.querySelectorAll<HTMLElement>('.code-tabs'), ($codeTabs) => {
+        $content.querySelectorAll<HTMLElement>('.code-tabs').forEach(($codeTabs) => {
           if ($codeTabs.dataset.diagram)
             return
           const $actions = $codeTabs.querySelector<HTMLElement>('.tabs-actions')
@@ -145,7 +145,7 @@ export class EventsModule implements EventsService {
           })
           $codeTabs.parentElement!.removeChild($codeTabs)
         })
-        forEach($content.querySelectorAll<HTMLElement>('.code-block'), ($el) => {
+        $content.querySelectorAll<HTMLElement>('.code-block').forEach(($el) => {
           $el.classList.add('line-wrapping')
           $el.classList.remove('is-collapsed')
           if ($el.querySelector('.code-expand-btn')) {
@@ -154,7 +154,7 @@ export class EventsModule implements EventsService {
         })
       }
       if (printConfig.expandDetails) {
-        forEach($content.querySelectorAll('details'), ($el: Element) => $el.setAttribute('open', ''))
+        $content.querySelectorAll('details').forEach(($el: Element) => $el.setAttribute('open', ''))
       }
       this.bus.emit('fixit:before-print')
     }, false)

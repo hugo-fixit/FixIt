@@ -1,7 +1,7 @@
 /** Charts module — ECharts, Mapbox GL, and TypeIt integrations. */
 import type { TypedEventBus } from '../core/event-bus'
 import type { ChartsService, CoreService } from '../core/tokens'
-import { forEach, getStagingDOM, isObjectLiteral } from '../utils'
+import { getStagingDOM, isObjectLiteral } from '../utils'
 
 const echarts = window.echarts
 const mapboxgl = window.mapboxgl
@@ -30,7 +30,7 @@ export class ChartsModule implements ChartsService {
       }
       this.#echartsArr = []
       const stagingDOM = getStagingDOM()
-      forEach(document.getElementsByClassName('echarts'), ($echarts: Element) => {
+      document.querySelectorAll('.echarts').forEach(($echarts: Element) => {
         const $dataEl = $echarts.nextElementSibling as HTMLElement
         if ($dataEl.tagName !== 'TEMPLATE')
           return
@@ -95,7 +95,7 @@ export class ChartsModule implements ChartsService {
         mapboxgl.accessToken = this.core.config.mapbox.accessToken!
         mapboxgl.setRTLTextPlugin(this.core.config.mapbox.RTLTextPlugin!)
       }
-      forEach(document.querySelectorAll<HTMLElement>('.mapbox:empty'), ($mapbox) => {
+      document.querySelectorAll<HTMLElement>('.mapbox:empty').forEach(($mapbox) => {
         const { lng, lat, zoom, lightStyle, darkStyle, marked, markers, navigation, geolocate, scale, fullscreen } = JSON.parse($mapbox.dataset.options!)
         const mapbox = new mapboxgl.Map({
           container: $mapbox,
@@ -142,7 +142,7 @@ export class ChartsModule implements ChartsService {
         this.#mapboxArr.push(mapbox)
       })
       const applyMapboxTheme = (isDark: boolean) => {
-        forEach(this.#mapboxArr, (mapbox: any) => {
+        this.#mapboxArr.forEach((mapbox: any) => {
           const $mapbox = mapbox.getContainer()
           const { lightStyle, darkStyle } = JSON.parse($mapbox.dataset.options)
           mapbox.setStyle(isDark ? darkStyle : lightStyle)

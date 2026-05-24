@@ -1,6 +1,6 @@
 /** Link guard module — external link confirmation dialog with copy support. */
 import type { LinkGuardService } from '../core/tokens'
-import { createCopyText, flashCopiedTooltip, forEach } from '../utils'
+import { createCopyText, flashCopiedTooltip } from '../utils'
 
 const copyText = createCopyText()
 
@@ -50,7 +50,7 @@ export class LinkGuardModule implements LinkGuardService {
       })
     }
 
-    forEach(target.querySelectorAll<HTMLAnchorElement>('a[target="_blank"][data-guard="modal"]:not([data-init])'), ($link) => {
+    target.querySelectorAll<HTMLAnchorElement>('a[target="_blank"][data-guard="modal"]:not([data-init])').forEach(($link) => {
       $link.dataset.init = 'true'
       $link.addEventListener('click', (e) => {
         e.preventDefault()

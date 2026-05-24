@@ -2,7 +2,6 @@
 
 import type { TypedEventBus } from '../core/event-bus'
 import type { CoreService, ThemeService } from '../core/tokens'
-import { forEach } from '../utils'
 
 export class ThemeModule implements ThemeService {
   constructor(
@@ -46,7 +45,7 @@ export class ThemeModule implements ThemeService {
       })
     }
 
-    forEach(document.getElementsByClassName('theme-switch'), ($themeSwitch: Element) => {
+    document.querySelectorAll('.theme-switch').forEach(($themeSwitch: Element) => {
       $themeSwitch.addEventListener('click', () => {
         const currentIndex = modes.indexOf(this.core.themeMode as typeof modes[number])
         const nextMode = modes[(currentIndex + 1) % modes.length]

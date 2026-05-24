@@ -1,7 +1,6 @@
 /** Content module — orchestrates rendering of page content components (gallery, tooltips, diagrams, etc.). */
 import type { TypedEventBus } from '../core/event-bus'
 import type { ChartsService, CodeService, ContentService, CoreService, LinkGuardService, MiscService, TocService } from '../core/tokens'
-import { forEach } from '../utils'
 
 const CellTooltip = window.CellTooltip
 const lgThumbnail = window.lgThumbnail
@@ -26,7 +25,7 @@ export class ContentModule implements ContentService {
    * @param target - The root element to search within.
    */
   initDetails(target: Element | Document = document) {
-    forEach(target.querySelectorAll<HTMLElement>('.details:not(.disabled)'), ($details) => {
+    target.querySelectorAll<HTMLElement>('.details:not(.disabled)').forEach(($details) => {
       const $summary = $details.querySelector<HTMLElement>('.details-summary')!
       $summary.addEventListener('click', () => {
         $details.classList.toggle('open')
@@ -60,7 +59,7 @@ export class ContentModule implements ContentService {
     if (!window.JsonViewerElement)
       return
     const applyJsonViewerTheme = (isDark: boolean) => {
-      forEach(document.getElementsByTagName('json-viewer'), ($el: Element) => {
+      document.querySelectorAll('json-viewer').forEach(($el: Element) => {
         $el.setAttribute('theme', isDark ? 'dark' : 'light')
       })
     }

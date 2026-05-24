@@ -1,5 +1,4 @@
 export * from './animation'
-export * from './array'
 export * from './clipboard'
 export * from './dom'
 export * from './file'

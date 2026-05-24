@@ -1,6 +1,5 @@
 /** Encryption module — page decryption via FixItDecryptor and encrypted content toggling. */
 import type { CoreService, EncryptionService } from '../core/tokens'
-import { forEach } from '../utils'
 
 export class EncryptionModule implements EncryptionService {
   constructor(private readonly core: CoreService) {}
@@ -13,7 +12,7 @@ export class EncryptionModule implements EncryptionService {
   #toggleEncryptedClass(container: Element | Document, show: boolean) {
     const fromClass = show ? 'encrypted-hidden' : 'decrypted-shown'
     const toClass = show ? 'decrypted-shown' : 'encrypted-hidden'
-    forEach(container.querySelectorAll(`.${fromClass}`), ($element: Element) => {
+    container.querySelectorAll(`.${fromClass}`).forEach(($element: Element) => {
       $element.classList.replace(fromClass, toClass)
     })
   }

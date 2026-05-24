@@ -1,7 +1,7 @@
 /** Code module — code block interactions: copy, download, fullscreen, tabs, and line numbers. */
 import type { TypedEventBus } from '../core/event-bus'
 import type { CodeService } from '../core/tokens'
-import { animateCSS, createCopyText, downloadAsFile, flashCopiedTooltip, forEach, getStagingDOM } from '../utils'
+import { animateCSS, createCopyText, downloadAsFile, flashCopiedTooltip, getStagingDOM } from '../utils'
 
 const CellTooltip = window.CellTooltip
 const copyText = createCopyText()
@@ -28,13 +28,13 @@ export class CodeModule implements CodeService {
       const iswWrap = codeBlock.classList.contains('line-wrapping')
       const highlightLines = codeBlock.querySelectorAll('.hl')
       iswWrap && codeBlock.classList.toggle('line-wrapping')
-      forEach(highlightLines, ($hl) => {
+      highlightLines.forEach(($hl) => {
         $hl.classList.toggle('hl')
       })
       copyText(codePreEl.textContent!.trim()).then(() => {
         animateCSS(codePreEl, 'animate__flash')
         iswWrap && codeBlock.classList.toggle('line-wrapping')
-        forEach(highlightLines, ($hl) => {
+        highlightLines.forEach(($hl) => {
           $hl.classList.toggle('hl')
         })
         flashCopiedTooltip(copyBtn)
@@ -173,7 +173,7 @@ export class CodeModule implements CodeService {
   /** Initialize all un-initialized code blocks on the page. */
   initCodeWrapper() {
     const $codeBlocks = document.querySelectorAll<HTMLElement>('.code-block.highlight:not([data-init])')
-    forEach($codeBlocks, ($codeBlock) => {
+    $codeBlocks.forEach(($codeBlock) => {
       const $preElements = $codeBlock.querySelectorAll<HTMLPreElement>('pre.chroma')
       if (!$preElements.length)
         return
@@ -219,7 +219,7 @@ export class CodeModule implements CodeService {
               $codePreEl.blur()
             }
             else {
-              forEach($codeBlock.querySelectorAll('.hl'), ($hl: Element) => {
+              $codeBlock.querySelectorAll('.hl').forEach(($hl: Element) => {
                 $hl.classList.remove('hl')
               })
               $codeBlock.classList.add('is-expanded')
@@ -239,7 +239,7 @@ export class CodeModule implements CodeService {
     const processed = new Set<HTMLElement>()
     const normalizeTabTitle = (title = '') => title.toLowerCase()
 
-    forEach($codeBlocks, ($block) => {
+    $codeBlocks.forEach(($block) => {
       if (processed.has($block))
         return
 
@@ -397,7 +397,7 @@ export class CodeModule implements CodeService {
   /** Attach copy behaviour to diagram container copy buttons. */
   initDiagramCopyBtn() {
     const stagingDOM = getStagingDOM()
-    forEach(document.querySelectorAll<HTMLElement>('.diagram-container > .copy-icon-btn'), ($btn) => {
+    document.querySelectorAll<HTMLElement>('.diagram-container > .copy-icon-btn').forEach(($btn) => {
       $btn.addEventListener('click', () => {
         stagingDOM.stage($btn.parentElement!.querySelector('template')!.content.cloneNode(true))
         let code = stagingDOM.contentAsText()
