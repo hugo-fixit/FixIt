@@ -1,0 +1,25 @@
+{{- /*
+  Build and minify a JS resource with unified behavior.
+  @param {resource.Resource} .Resource Hugo resource to process
+  @param {Object} [.Build] js.Build options (defaults: minify=hugo.IsProduction, sourceMap=cond hugo.IsDevelopment "linked" "none")
+  @param {Boolean} [.Minify] extra minify flag; final minify is Minify OR Build.minify
+  @return {resource.Resource}
+*/ -}}
+
+{{- $resource := .Resource -}}
+{{- $minify := .Minify -}}
+{{- with .Build -}}
+  {{- $buildOptions := . -}}
+  {{- if not (isset $buildOptions "sourceMap") -}}
+    {{- $buildOptions = dict "sourceMap" (cond hugo.IsDevelopment "linked" "none") | merge $buildOptions -}}
+  {{- end -}}
+  {{- if not (isset $buildOptions "minify") -}}
+    {{- $buildOptions = dict "minify" hugo.IsProduction | merge $buildOptions -}}
+  {{- end -}}
+  {{- $minify = $minify | or (index $buildOptions "minify") -}}
+  {{- $resource = $resource | js.Build $buildOptions -}}
+{{- end -}}
+{{- if $minify -}}
+  {{- $resource = $resource | minify -}}
+{{- end -}}
+{{- return $resource -}}

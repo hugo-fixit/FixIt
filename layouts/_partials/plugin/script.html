@@ -8,7 +8,7 @@
   @param {Object} [.Template] template name/path for ExecuteAsTemplate
   @param {Object} [.Context] template context for ExecuteAsTemplate
   @param {Boolean} [.Minify] whether to minify resource
-  @param {Object} [.Build] js.Build options
+  @param {Object} [.Build] js.Build options (Build.minify is normalized to .Minify for path semantics)
   @param {String} [.Fingerprint] fingerprint algorithm
   @param {Boolean} [.Async] whether to add async attribute
   @param {Boolean} [.Defer] whether to add defer attribute
@@ -23,18 +23,13 @@
   {{- /* Script source */ -}}
   {{- $src := .Source -}}
   {{- $integrity := .Integrity -}}
+  {{- $minify := .Minify -}}
   {{- if $src | and (not (urls.Parse $src).Host) -}}
     {{- $resource := resources.Get $src -}}
     {{- with .Template -}}
       {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
     {{- end -}}
-    {{- if .Minify -}}
-      {{- $resource = $resource | minify -}}
-    {{- end -}}
-    {{- with .Build -}}
-      {{- $resource = $resource | js.Build . -}}
-      {{/*  [todo] add a js.Build function to auto minify file as *.min.js  */}}
-    {{- end -}}
+    {{- $resource = dict "Resource" $resource "Build" .Build "Minify" $minify | partial "function/js-build.html" -}}
     {{- with .Fingerprint -}}
       {{- $resource = $resource | fingerprint . -}}
       {{- $integrity = $resource.Data.Integrity -}}

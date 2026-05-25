@@ -83,10 +83,7 @@ FixIt theme assets partial
 {{- if .Store.Get "hasJsonViewer" | and (not $isArchivesOrOffline) -}}
   {{- $source := $cdn.jsonViewerElementJS | default "lib/json-viewer-element/json-viewer-element.umd.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-  {{- $options := dict "targetPath" "js/lib/json-viewer.min.js" "minify" hugo.IsProduction -}}
-  {{- if not hugo.IsProduction -}}
-    {{- $options = dict "sourceMap" "external" | merge $options -}}
-  {{- end -}}
+  {{- $options := dict "targetPath" "js/lib/json-viewer.js" -}}
   {{- dict "Source" (resources.Get "js/lib/json-viewer.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
@@ -95,10 +92,7 @@ FixIt theme assets partial
   {{- $source := $cdn.twemojiJS | default "lib/twemoji/twemoji.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "twemoji" true | merge $config -}}
-  {{- $options := dict "targetPath" "js/lib/twemoji.min.js" "minify" hugo.IsProduction -}}
-  {{- if not hugo.IsProduction -}}
-    {{- $options = dict "sourceMap" "external" | merge $options -}}
-  {{- end -}}
+  {{- $options := dict "targetPath" "js/lib/twemoji.js" -}}
   {{- dict "Source" (resources.Get "js/lib/twemoji.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
@@ -113,10 +107,7 @@ FixIt theme assets partial
   {{- $source := $cdn.lightgalleryZoomJS | default "lib/lightgallery/plugins/zoom/lg-zoom.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "lightgallery" true | merge $config -}}
-  {{- $options := dict "targetPath" "js/lib/lightgallery.min.js" "minify" hugo.IsProduction -}}
-  {{- if not hugo.IsProduction -}}
-    {{- $options = dict "sourceMap" "external" | merge $options -}}
-  {{- end -}}
+  {{- $options := dict "targetPath" "js/lib/lightgallery.js" -}}
   {{- dict "Source" (resources.Get "js/lib/lightgallery.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
@@ -132,10 +123,7 @@ FixIt theme assets partial
   {{- $source := $cdn.typeitJS | default "lib/typeit/index.umd.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "speed" $typeit.speed "cursorSpeed" $typeit.cursorSpeed "cursorChar" $typeit.cursorChar "duration" $typeit.duration "loop" $typeit.loop | dict "typeit" | merge $config -}}
-  {{- $options := dict "targetPath" "js/lib/typeit.min.js" "minify" hugo.IsProduction -}}
-  {{- if not hugo.IsProduction -}}
-    {{- $options = dict "sourceMap" "external" | merge $options -}}
-  {{- end -}}
+  {{- $options := dict "targetPath" "js/lib/typeit.js" -}}
   {{- dict "Source" (resources.Get "js/lib/typeit.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
@@ -187,10 +175,7 @@ FixIt theme assets partial
   {{- $lightTheme := resources.Get "lib/echarts/theme/light.yml" | transform.Unmarshal -}}
   {{- $darkTheme := resources.Get "lib/echarts/theme/dark.yml" | transform.Unmarshal -}}
   {{- $config = dict "lightTheme" $lightTheme "darkTheme" $darkTheme | dict "echarts" | merge $config -}}
-  {{- $options := dict "targetPath" "js/lib/echarts.min.js" "minify" hugo.IsProduction -}}
-  {{- if not hugo.IsProduction -}}
-    {{- $options = dict "sourceMap" "external" | merge $options -}}
-  {{- end -}}
+  {{- $options := dict "targetPath" "js/lib/echarts.js" -}}
   {{- dict "Source" (resources.Get "js/lib/echarts.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
@@ -202,10 +187,7 @@ FixIt theme assets partial
   {{- dict "Source" $source "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- dict "Source" "lib/mapbox-gl/mapbox-gl-language.js" "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "accessToken" $params.mapbox.accessToken "RTLTextPlugin" "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.0/mapbox-gl-rtl-text.js" | dict "mapbox" | merge $config -}}
-  {{- $options := dict "targetPath" "js/lib/mapbox.min.js" "minify" hugo.IsProduction -}}
-  {{- if not hugo.IsProduction -}}
-    {{- $options = dict "sourceMap" "external" | merge $options -}}
-  {{- end -}}
+  {{- $options := dict "targetPath" "js/lib/mapbox.js" -}}
   {{- dict "Source" (resources.Get "js/lib/mapbox.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
@@ -214,16 +196,13 @@ FixIt theme assets partial
   {{- /* APlayer */ -}}
   {{- $source := $cdn.aplayerCSS | default "lib/aplayer/APlayer.min.css" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Preload" true | dict "Page" . "Data" | partial "store/style.html" -}}
-  {{- $options := dict "targetPath" "lib/aplayer/dark.min.css" "enableSourceMap" true -}}
+  {{- $options := dict "targetPath" "lib/aplayer/dark.min.css" -}}
   {{- dict "Source" "lib/aplayer/dark.scss" "ToCSS" $options "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
   {{- $source := $cdn.aplayerJS | default "lib/aplayer/APlayer.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
   {{- if .Store.Get "hasAplayer" -}}
-    {{- $options := dict "targetPath" "js/lib/aplayer.min.js" "minify" hugo.IsProduction -}}
-    {{- if not hugo.IsProduction -}}
-      {{- $options = dict "sourceMap" "external" | merge $options -}}
-    {{- end -}}
+    {{- $options := dict "targetPath" "js/lib/aplayer.js" -}}
     {{- dict "Source" (resources.Get "js/lib/aplayer.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- end -}}
   {{- if .Store.Get "hasMusic" -}}
@@ -249,10 +228,7 @@ FixIt theme assets partial
   {{- $cookieconsentConfig = .Site.Params.cookieconsent | merge $cookieconsentConfig -}}
   {{- $cookieconsentConfig = dict "message" ($cookieconsentConfig.content.message | default (T "assets.cookieconsentMessage")) "dismiss" ($cookieconsentConfig.content.dismiss | default (T "assets.cookieconsentDismiss")) "link" ($cookieconsentConfig.content.link | default (T "assets.cookieconsentLink")) | dict "content" | merge $cookieconsentConfig -}}
   {{- $config = $cookieconsentConfig | dict "cookieconsent" | merge $config -}}
-  {{- $options := dict "targetPath" "js/lib/cookieconsent.min.js" "minify" hugo.IsProduction -}}
-  {{- if not hugo.IsProduction -}}
-    {{- $options = dict "sourceMap" "external" | merge $options -}}
-  {{- end -}}
+  {{- $options := dict "targetPath" "js/lib/cookieconsent.js" -}}
   {{- dict "Source" (resources.Get "js/lib/cookieconsent.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
@@ -261,10 +237,7 @@ FixIt theme assets partial
   {{- $source := $cdn.panguJS | default "lib/pangu/pangu.umd.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "pangu" .Site.Params.pangu | merge $config -}}
-  {{- $options := dict "targetPath" "js/lib/pangu.min.js" "minify" hugo.IsProduction -}}
-  {{- if not hugo.IsProduction -}}
-    {{- $options = dict "sourceMap" "external" | merge $options -}}
-  {{- end -}}
+  {{- $options := dict "targetPath" "js/lib/pangu.js" -}}
   {{- dict "Source" (resources.Get "js/lib/pangu.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
@@ -291,10 +264,7 @@ FixIt theme assets partial
     | merge $watermarkConfig
   -}}
   {{- $config = dict "watermark" $watermarkConfig | merge $config -}}
-  {{- $options := dict "targetPath" "js/lib/watermark.min.js" "minify" hugo.IsProduction -}}
-  {{- if not hugo.IsProduction -}}
-    {{- $options = dict "sourceMap" "external" | merge $options -}}
-  {{- end -}}
+  {{- $options := dict "targetPath" "js/lib/watermark.js" -}}
   {{- dict "Source" (resources.Get "js/lib/watermark.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
@@ -310,10 +280,7 @@ FixIt theme assets partial
   {{- dict "Source" $cryptoSha256JS "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- dict "Source" $xxhashWasmJS "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- /* Decryption script */ -}}
-  {{- $options := dict "targetPath" "js/fixit-decryptor.min.js" "minify" hugo.IsProduction -}}
-  {{- if not hugo.IsProduction -}}
-    {{- $options = dict "sourceMap" "external" | merge $options -}}
-  {{- end -}}
+  {{- $options := dict "targetPath" "js/lib/fixit-decryptor.js" -}}
   {{- dict "Source" (resources.Get "js/lib/fixit-decryptor.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "all" (isset $params "password") "shortcode" ($encryptPartial | default false) | dict "encryption" | merge $config -}}
 {{- end -}}
@@ -333,8 +300,9 @@ FixIt theme assets partial
 {{- end -}}
 
 {{- /* PWA */ -}}
+{{- /* [todo] refactor */ -}}
 {{- if not hugo.IsServer | and .Site.Params.enablePWA | and hugo.IsProduction -}}
-  {{- $options := dict "targetPath" "service-worker.min.js" "minify" true -}}
+  {{- $options := dict "targetPath" "service-worker.js" "minify" true -}}
   {{- $source := resources.Get "js/service-worker.js" | js.Build $options -}}
   {{- $_ := $source.RelPermalink -}}
   {{- $config = dict "enablePWA" .Site.Params.enablePWA | merge $config -}}
@@ -390,21 +358,15 @@ FixIt theme assets partial
 {{- if $uniqueFileId | and (not .IsHome) -}}
   {{- $targetPath = printf "%s/js/config/%s.js" $languagePrefix $uniqueFileId -}}
 {{- end -}}
-{{- dict "Content" $configJS "Path" $targetPath "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+{{- dict "Content" $configJS "Path" $targetPath "Minify" hugo.IsProduction "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
 {{- /* File tree */ -}}
-{{- $options := dict "targetPath" "js/lib/file-tree.min.js" "minify" hugo.IsProduction -}}
-{{- if not hugo.IsProduction -}}
-  {{- $options = dict "sourceMap" "external" | merge $options -}}
-{{- end -}}
+{{- $options := dict "targetPath" "js/lib/file-tree.js" -}}
 {{- dict "Source" (resources.Get "js/lib/file-tree.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
 {{- /* MathJax plugin */ -}}
 {{- if .Store.Get "hasMathJax" | and (not $isArchivesOrOffline) -}}
-  {{- $options := dict "targetPath" "js/lib/mathjax.min.js" "minify" hugo.IsProduction -}}
-  {{- if not hugo.IsProduction -}}
-    {{- $options = dict "sourceMap" "external" | merge $options -}}
-  {{- end -}}
+  {{- $options := dict "targetPath" "js/lib/mathjax.js" -}}
   {{- dict "Source" (resources.Get "js/lib/mathjax.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
@@ -420,11 +382,8 @@ FixIt theme assets partial
   {{- $zenumlCDN := $mermaid.zenuml | default "" -}}
   {{- $layoutLoaders := $mermaid.layoutloaders | default slice -}}
 
-  {{- $options := dict "targetPath" "js/lib/mermaid.js" "format" "esm" "minify" hugo.IsProduction -}}
-  {{- if not hugo.IsProduction -}}
-    {{- $options = dict "sourceMap" "external" | merge $options -}}
-  {{- end -}}
-  {{- $mermaidModule := resources.Get "js/lib/mermaid.ts" | js.Build $options -}}
+  {{- $options := dict "targetPath" "js/lib/mermaid.js" "format" "esm" -}}
+  {{- $mermaidModule := dict "Resource" (resources.Get "js/lib/mermaid.ts") "Build" $options | partial "function/js-build.html" -}}
   {{- with $fingerprint -}}
     {{- $mermaidModule = $mermaidModule | fingerprint . -}}
   {{- end -}}
@@ -443,10 +402,7 @@ FixIt theme assets partial
 {{- end -}}
 
 {{- /* Theme script */ -}}
-{{- $options := dict "targetPath" "js/main.min.js" "minify" hugo.IsProduction -}}
-{{- if not hugo.IsProduction -}}
-  {{- $options = dict "sourceMap" "external" | merge $options -}}
-{{- end -}}
+{{- $options := dict "targetPath" "js/main.js" -}}
 {{- dict "Source" (resources.Get "js/main.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
 {{- /* Custom Assets */ -}}
@@ -454,10 +410,7 @@ FixIt theme assets partial
 
 {{- /* Custom script (custom.ts takes priority over custom.js) */ -}}
 {{- with resources.Get "js/custom.ts" | default (resources.Get "js/custom.js") -}}
-  {{- $options := dict "targetPath" "js/custom.min.js" "minify" hugo.IsProduction -}}
-  {{- if not hugo.IsProduction -}}
-    {{- $options = dict "sourceMap" "external" | merge $options -}}
-  {{- end -}}
+  {{- $options := dict "targetPath" "js/custom.js" -}}
   {{- dict "Source" . "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
 {{- end -}}
 

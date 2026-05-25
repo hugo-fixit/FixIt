@@ -310,11 +310,8 @@
 {{- /* ========== SCRIPT: Early-Loaded Head Scripts ========== */ -}}
 
 {{- /* Theme Color Scheme Detection (runs before page render) */ -}}
-{{- $options := dict "targetPath" "js/head/color-scheme.min.js" "minify" hugo.IsProduction -}}
+{{- $options := dict "targetPath" "js/head/color-scheme.js" -}}
 {{- $options := dict "defaultTheme" .Site.Params.defaulttheme | dict "params" | merge $options -}}
-{{- if not hugo.IsProduction -}}
-  {{- $options = dict "sourceMap" "external" | merge $options -}}
-{{- end -}}
 {{- dict "Source" (resources.Get "js/head/color-scheme.ts") "Build" $options "Fingerprint" $fingerprint | partial "plugin/script.html" -}}
 
 {{- /* Custom head */ -}}
