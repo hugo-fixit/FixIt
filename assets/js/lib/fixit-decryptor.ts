@@ -100,8 +100,8 @@ class FixItDecryptor {
       eventBus.on('fixit:decrypted', () => {
         this.initShortcodes($content!)
       })
-      eventBus.on('fixit:partial-decrypted', (e) => {
-        this.initShortcodes(e.detail.target)
+      eventBus.on('fixit:partial-decrypted', ({ detail }) => {
+        this.initShortcodes(detail.target)
       })
     }
     if (all) {

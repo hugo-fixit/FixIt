@@ -1,11 +1,7 @@
-/** Miscellaneous module — cookie consent, site time, PWA, watermark, MathJax, bookmarks, and rewards. */
+/** Miscellaneous module — site time, PWA, MathJax, bookmarks, rewards, and PostChat. */
 import type { TypedEventBus } from '../core/event-bus'
 import type { CoreService, MiscService } from '../core/tokens'
 import { getScrollTop, isMobile, isValidDate } from '../utils'
-
-const cookieconsent = window.cookieconsent
-const pangu = window.pangu
-const Watermark = window.Watermark
 
 export class MiscModule implements MiscService {
   private siteTime: ReturnType<typeof setInterval> | undefined
@@ -14,11 +10,6 @@ export class MiscModule implements MiscService {
     private readonly core: CoreService,
     private readonly bus: TypedEventBus,
   ) {}
-
-  /** Initialize cookie consent banner if configured. */
-  initCookieconsent() {
-    this.core.config.cookieconsent && cookieconsent?.initialise(this.core.config.cookieconsent)
-  }
 
   /** Calculate and display the elapsed time since site launch. */
   getSiteTime() {
@@ -71,35 +62,6 @@ export class MiscModule implements MiscService {
     }
   }
 
-  /** Initialize the watermark overlay if enabled. */
-  initWatermark() {
-    if (!this.core.config.watermark?.enable)
-      return
-    void new Watermark(this.core.config.watermark)
-  }
-
-  /** Initialize Pangu.js for automatic CJK spacing. */
-  initPangu() {
-    if (!this.core.config.pangu?.enable)
-      return
-    pangu.ignoredTags = /^(script|code|pre|textarea|sup|sub)$/i
-    const selector = this.core.config.pangu.selector
-    if (selector) {
-      document.querySelectorAll(selector).forEach(el => pangu.spacingNode(el))
-      return
-    }
-    pangu.autoSpacingPage()
-  }
-
-  /** Trigger MathJax re-typesetting if MathJax is loaded. */
-  initMathJax() {
-    if (window.MathJax?.typesetPromise) {
-      window.MathJax.typesetPromise().then(() => {
-        // Do something else after typesetting is complete
-      }).catch((err: Error) => console.warn(err.message))
-    }
-  }
-
   /** Save and restore scroll position as an automatic bookmark. */
   initAutoMark() {
     if (!this.core.config.autoBookmark)
@@ -135,7 +97,7 @@ export class MiscModule implements MiscService {
         _closeRewardExclude(this.getAttribute('for'))
       }, false)
     })
-    document.addEventListener('fixit:scroll', _closeRewardExclude)
+    this.bus.on('fixit:scroll', () => _closeRewardExclude())
   }
 
   /** Initialize PostChat theme sync if configured. */

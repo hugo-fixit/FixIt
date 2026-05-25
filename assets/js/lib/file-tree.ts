@@ -94,8 +94,8 @@ function bindEvents() {
     initFileTree()
   })
 
-  eventBus.on('fixit:partial-decrypted', (e) => {
-    initFileTree(e.detail.target)
+  eventBus.on('fixit:partial-decrypted', ({ detail }) => {
+    initFileTree(detail.target)
   })
 }
 

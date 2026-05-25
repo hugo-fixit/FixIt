@@ -1,8 +1,12 @@
 /** Encryption module — page decryption via FixItDecryptor and encrypted content toggling. */
+import type { TypedEventBus } from '../core/event-bus'
 import type { CoreService, EncryptionService } from '../core/tokens'
 
 export class EncryptionModule implements EncryptionService {
-  constructor(private readonly core: CoreService) {}
+  constructor(
+    private readonly core: CoreService,
+    private readonly bus: TypedEventBus,
+  ) {}
 
   /**
    * Toggle between encrypted-hidden and decrypted-shown classes.
@@ -23,14 +27,13 @@ export class EncryptionModule implements EncryptionService {
       return
     const decryptor = new window.FixItDecryptor()
 
-    document.addEventListener('fixit:decrypted', () => {
+    this.bus.on('fixit:decrypted', () => {
       this.#toggleEncryptedClass(document, true)
     })
-    document.addEventListener('fixit:partial-decrypted', (e: Event) => {
-      const $content = (e as CustomEvent).detail.target as Element
-      this.#toggleEncryptedClass($content, true)
+    this.bus.on('fixit:partial-decrypted', ({ detail }) => {
+      this.#toggleEncryptedClass(detail.target, true)
     })
-    document.addEventListener('fixit:reset', () => {
+    this.bus.on('fixit:reset', () => {
       this.#toggleEncryptedClass(document, false)
     })
 

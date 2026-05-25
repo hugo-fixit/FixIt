@@ -1,20 +1,14 @@
 /** Content module — orchestrates rendering of page content components (gallery, tooltips, diagrams, etc.). */
 import type { TypedEventBus } from '../core/event-bus'
-import type { CodeService, ContentService, CoreService, LinkGuardService, MiscService, TocService } from '../core/tokens'
+import type { CodeService, ContentService, CoreService, LinkGuardService, TocService } from '../core/tokens'
 
 const CellTooltip = window.CellTooltip
-const lgThumbnail = window.lgThumbnail
-const lgZoom = window.lgZoom
-const lightGallery = window.lightGallery
 
 export class ContentModule implements ContentService {
-  private lg: { destroy: (removeSubModules?: boolean) => void } | undefined
-
   constructor(
     private readonly core: CoreService,
     private readonly code: CodeService,
     private readonly toc: TocService,
-    private readonly misc: MiscService,
     private readonly linkGuard: LinkGuardService,
     private readonly bus: TypedEventBus,
   ) {}
@@ -30,44 +24,6 @@ export class ContentModule implements ContentService {
         $details.classList.toggle('open')
       }, false)
     })
-  }
-
-  /** Initialize lightGallery for image zoom and thumbnails. */
-  initLightGallery() {
-    if (this.core.config.lightgallery) {
-      this.lg?.destroy(true)
-      this.lg = lightGallery(document.getElementById('content')!, {
-        plugins: [lgThumbnail, lgZoom],
-        selector: '.lightgallery',
-        speed: 400,
-        hideBarsDelay: 2000,
-        allowMediaOverlap: true,
-        exThumbImage: 'data-thumbnail',
-        toggleThumb: true,
-        thumbWidth: 80,
-        thumbHeight: '60px',
-        actualSize: false,
-        showZoomInOutIcons: true,
-        licenseKey: 'none',
-      })
-    }
-  }
-
-  /** Initialize json-viewer elements and bind theme switch. */
-  initJsonViewer() {
-    if (!window.JsonViewerElement)
-      return
-    const applyJsonViewerTheme = (isDark: boolean) => {
-      document.querySelectorAll('json-viewer').forEach(($el: Element) => {
-        $el.setAttribute('theme', isDark ? 'dark' : 'light')
-      })
-    }
-    this.bus.on('fixit:switch-theme', ({ detail }) => {
-      if (!detail.isChanged)
-        return
-      applyJsonViewerTheme(detail.isDark)
-    })
-    applyJsonViewerTheme(this.core.isDark)
   }
 
   /** Convert footnote refs into tooltip-enabled elements. */
@@ -122,16 +78,11 @@ export class ContentModule implements ContentService {
    * @param includeToc - Whether to also initialize TOC-related components.
    */
   #initContentComponents(target: Element | Document = document, includeToc = true) {
-    this.initTwemoji(target)
     this.initDetails(target)
-    this.initLightGallery()
     this.code.initCodeWrapper()
     this.code.initCodeTabs()
     this.code.initDiagramCopyBtn()
     this.initTooltip()
-    this.misc.initPangu()
-    this.misc.initMathJax()
-    this.initJsonViewer()
     this.linkGuard.initLinkGuardDialog(target)
 
     if (includeToc) {
@@ -152,13 +103,5 @@ export class ContentModule implements ContentService {
     this.bus.on('fixit:partial-decrypted', ({ detail }) => {
       this.#initContentComponents(detail.target, false)
     })
-  }
-
-  /**
-   * Parse emoji shortcodes into Twemoji images.
-   * @param target - The root element to parse for emoji.
-   */
-  initTwemoji(target: Element | Document = document) {
-    this.core.config.twemoji && window.twemoji?.parse(target as Element)
   }
 }

@@ -87,23 +87,16 @@ export interface EncryptionService {
 // ─── ContentService ───
 export interface ContentService {
   initDetails: (target?: Element | Document) => void
-  initLightGallery: () => void
-  initJsonViewer: () => void
   initFootnotes: () => void
   initTooltip: () => void
-  initTwemoji: (target?: Element | Document) => void
   initContent: () => void
 }
 
 // ─── MiscService ───
 export interface MiscService {
-  initCookieconsent: () => void
   getSiteTime: () => void
   initSiteTime: () => void
   initServiceWorker: () => void
-  initWatermark: () => void
-  initPangu: () => void
-  initMathJax: () => void
   initAutoMark: () => void
   initReward: () => void
   initPostChatUser: () => void

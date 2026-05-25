@@ -42,14 +42,13 @@ function bootstrap(): void {
     .register(TOKENS.Code, () => new CodeModule(bus))
     .register(TOKENS.Toc, () => new TocModule())
     .register(TOKENS.Comment, c => new CommentModule(c.resolve(TOKENS.Core), bus))
-    .register(TOKENS.Encryption, c => new EncryptionModule(c.resolve(TOKENS.Core)))
+    .register(TOKENS.Encryption, c => new EncryptionModule(c.resolve(TOKENS.Core), bus))
     .register(TOKENS.Misc, c => new MiscModule(c.resolve(TOKENS.Core), bus))
     .register(TOKENS.LinkGuard, () => new LinkGuardModule())
     .register(TOKENS.Content, c => new ContentModule(
       c.resolve(TOKENS.Core),
       c.resolve(TOKENS.Code),
       c.resolve(TOKENS.Toc),
-      c.resolve(TOKENS.Misc),
       c.resolve(TOKENS.LinkGuard),
       bus,
     ))
@@ -104,10 +103,8 @@ function bootstrap(): void {
       menu.initMenu()
       theme.initSwitchTheme()
       search.initSearch()
-      misc.initCookieconsent()
       misc.initSiteTime()
       misc.initServiceWorker()
-      misc.initWatermark()
       misc.initAutoMark()
       misc.initReward()
       misc.initPostChatUser()

@@ -83,6 +83,11 @@ FixIt theme assets partial
 {{- if .Store.Get "hasJsonViewer" | and (not $isArchivesOrOffline) -}}
   {{- $source := $cdn.jsonViewerElementJS | default "lib/json-viewer-element/json-viewer-element.umd.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- $options := dict "targetPath" "js/lib/json-viewer.min.js" "minify" hugo.IsProduction -}}
+  {{- if not hugo.IsProduction -}}
+    {{- $options = dict "sourceMap" "external" | merge $options -}}
+  {{- end -}}
+  {{- dict "Source" (resources.Get "js/lib/json-viewer.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* twemoji */ -}}
@@ -90,6 +95,11 @@ FixIt theme assets partial
   {{- $source := $cdn.twemojiJS | default "lib/twemoji/twemoji.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "twemoji" true | merge $config -}}
+  {{- $options := dict "targetPath" "js/lib/twemoji.min.js" "minify" hugo.IsProduction -}}
+  {{- if not hugo.IsProduction -}}
+    {{- $options = dict "sourceMap" "external" | merge $options -}}
+  {{- end -}}
+  {{- dict "Source" (resources.Get "js/lib/twemoji.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* lightgallery */ -}}
@@ -103,6 +113,11 @@ FixIt theme assets partial
   {{- $source := $cdn.lightgalleryZoomJS | default "lib/lightgallery/plugins/zoom/lg-zoom.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "lightgallery" true | merge $config -}}
+  {{- $options := dict "targetPath" "js/lib/lightgallery.min.js" "minify" hugo.IsProduction -}}
+  {{- if not hugo.IsProduction -}}
+    {{- $options = dict "sourceMap" "external" | merge $options -}}
+  {{- end -}}
+  {{- dict "Source" (resources.Get "js/lib/lightgallery.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* Sharer.js */ -}}
@@ -234,6 +249,11 @@ FixIt theme assets partial
   {{- $cookieconsentConfig = .Site.Params.cookieconsent | merge $cookieconsentConfig -}}
   {{- $cookieconsentConfig = dict "message" ($cookieconsentConfig.content.message | default (T "assets.cookieconsentMessage")) "dismiss" ($cookieconsentConfig.content.dismiss | default (T "assets.cookieconsentDismiss")) "link" ($cookieconsentConfig.content.link | default (T "assets.cookieconsentLink")) | dict "content" | merge $cookieconsentConfig -}}
   {{- $config = $cookieconsentConfig | dict "cookieconsent" | merge $config -}}
+  {{- $options := dict "targetPath" "js/lib/cookieconsent.min.js" "minify" hugo.IsProduction -}}
+  {{- if not hugo.IsProduction -}}
+    {{- $options = dict "sourceMap" "external" | merge $options -}}
+  {{- end -}}
+  {{- dict "Source" (resources.Get "js/lib/cookieconsent.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* PanguJS */ -}}
@@ -241,6 +261,11 @@ FixIt theme assets partial
   {{- $source := $cdn.panguJS | default "lib/pangu/pangu.umd.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "pangu" .Site.Params.pangu | merge $config -}}
+  {{- $options := dict "targetPath" "js/lib/pangu.min.js" "minify" hugo.IsProduction -}}
+  {{- if not hugo.IsProduction -}}
+    {{- $options = dict "sourceMap" "external" | merge $options -}}
+  {{- end -}}
+  {{- dict "Source" (resources.Get "js/lib/pangu.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* Cell Tooltip */ -}}
@@ -266,6 +291,11 @@ FixIt theme assets partial
     | merge $watermarkConfig
   -}}
   {{- $config = dict "watermark" $watermarkConfig | merge $config -}}
+  {{- $options := dict "targetPath" "js/lib/watermark.min.js" "minify" hugo.IsProduction -}}
+  {{- if not hugo.IsProduction -}}
+    {{- $options = dict "sourceMap" "external" | merge $options -}}
+  {{- end -}}
+  {{- dict "Source" (resources.Get "js/lib/watermark.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* Content Decryption */ -}}
@@ -371,11 +401,7 @@ FixIt theme assets partial
 
 {{- /* MathJax plugin */ -}}
 {{- if .Store.Get "hasMathJax" | and (not $isArchivesOrOffline) -}}
-  {{- $targetPath := "" -}}
-  {{- if $uniqueFileId | and (not .IsHome) -}}
-    {{- $targetPath = printf "%s/js/lib/mathjax/%s.min.js" $languagePrefix $uniqueFileId -}}
-  {{- end -}}
-  {{- $options := dict "targetPath" $targetPath "minify" hugo.IsProduction -}}
+  {{- $options := dict "targetPath" "js/lib/mathjax.min.js" "minify" hugo.IsProduction -}}
   {{- if not hugo.IsProduction -}}
     {{- $options = dict "sourceMap" "external" | merge $options -}}
   {{- end -}}
