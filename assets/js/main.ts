@@ -41,7 +41,7 @@ function bootstrap(): void {
     .register(TOKENS.Search, c => new SearchModule(c.resolve(TOKENS.Core)))
     .register(TOKENS.Code, () => new CodeModule(bus))
     .register(TOKENS.Toc, () => new TocModule())
-    .register(TOKENS.Comment, c => new CommentModule(c.resolve(TOKENS.Core), bus))
+    .register(TOKENS.Comment, c => new CommentModule(c.resolve(TOKENS.Core)))
     .register(TOKENS.Encryption, c => new EncryptionModule(c.resolve(TOKENS.Core), bus))
     .register(TOKENS.Misc, c => new MiscModule(c.resolve(TOKENS.Core), bus))
     .register(TOKENS.LinkGuard, () => new LinkGuardModule())

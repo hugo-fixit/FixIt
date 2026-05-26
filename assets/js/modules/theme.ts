@@ -41,6 +41,7 @@ export class ThemeModule implements ThemeService {
 
       this.bus.emit('fixit:switch-theme', {
         isDark: this.core.isDark,
+        mode,
         isChanged: prevIsDark !== this.core.isDark,
       })
     }
@@ -60,6 +61,7 @@ export class ThemeModule implements ThemeService {
       this.core.isDark = e.matches
       this.bus.emit('fixit:switch-theme', {
         isDark: this.core.isDark,
+        mode: 'auto',
         isChanged: prevIsDark !== this.core.isDark,
       })
     })

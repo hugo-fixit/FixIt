@@ -1,43 +1,6 @@
 # FixIt Coding Standards and Guidelines
 
-This document defines the coding standards, best practices, and development guidelines for the FixIt theme project.
-
-## Project Overview
-
-FixIt is a modern, responsive theme for the Hugo static site generator. Tech stack:
-
-- **Hugo** (>= 0.158.0) — Static site generator
-- **SCSS** — CSS preprocessing
-- **TypeScript** — Frontend logic (ES6+ target)
-- **Go Templates** — Hugo template engine
-- **pnpm** — Package manager
-
-## Directory Structure
-
-```
-FixIt/
-├── apps/               # Minimal sites (demo, test)
-├── archetypes/         # Content templates
-├── assets/             # Theme assets
-│   ├── css/            # SCSS styles
-│   ├── js/             # TypeScript source
-│   │   ├── core/       # DI container, event bus, service tokens
-│   │   ├── modules/    # Feature modules (service classes)
-│   │   ├── utils/      # Pure utility functions
-│   │   ├── lib/        # Third-party library wrappers
-│   │   └── pages/      # Page-specific scripts
-│   ├── images/         # Image assets
-│   └── lib/            # Third-party CSS/font libraries
-├── i18n/               # Internationalization files
-├── layouts/            # Hugo templates
-│   ├── _markup/        # Render hooks
-│   ├── _partials/      # Reusable template components
-│   └── _shortcodes/    # Custom shortcodes
-├── packages/           # Monorepo packages (integration, shared, versioning)
-├── static/             # Static files
-├── hugo.toml           # Default theme configuration
-└── package.json        # Scripts and dependencies
-```
+This document defines the detailed coding standards for the FixIt theme project. For project overview, architecture, and development commands, see [CLAUDE.md](../../CLAUDE.md).
 
 ## SCSS Coding Standards
 

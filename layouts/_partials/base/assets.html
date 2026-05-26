@@ -1,16 +1,16 @@
 {{- /*
-FixIt theme assets partial
-===============================================
-- Third-party libraries and plugins
-- Theme assets and plugins
-  - Config script
-  - FileTree plugin
-  - MathJax plugin
-  - Mermaid plugin
-  - Theme script
-  - Custom Assets block
-  - Custom script
-===============================================
+  Assets Partial - Asset orchestration for page scripts and styles
+
+  This partial collects feature flags and page/site params, then registers
+  required CSS/JS resources through store/style.html and store/script.html.
+
+  Key responsibilities:
+  - Resolve optional third-party libraries and plugin integrations
+  - Build per-page runtime config and emit window.config
+  - Build and register core bundles (file-tree, mermaid, main, custom)
+  - Append page-injected style/script arrays and analytics hooks
+
+  Called from: layouts/baseof.html
 */ -}}
 
 {{- $noop := .WordCount -}}
@@ -141,6 +141,8 @@ FixIt theme assets partial
 
 {{- /* MathJax */ -}}
 {{- if .Store.Get "hasMathJax" | and (not $isArchivesOrOffline) -}}
+  {{- $options := dict "targetPath" "js/lib/mathjax.js" -}}
+  {{- dict "Source" (resources.Get "js/lib/mathjax.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $mathjax := $math.mathjax -}}
   {{- $mjoc := $mathjax.options | default dict -}}
   {{- $mjo := dict -}}
@@ -191,7 +193,7 @@ FixIt theme assets partial
   {{- dict "Source" (resources.Get "js/lib/mapbox.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
-{{- /* Music */ -}}
+{{- /* Music (APlayer / MetingJS) */ -}}
 {{- if (.Store.Get "hasAplayer") | or (.Store.Get "hasMusic") -}}
   {{- /* APlayer */ -}}
   {{- $source := $cdn.aplayerCSS | default "lib/aplayer/APlayer.min.css" -}}
@@ -212,7 +214,7 @@ FixIt theme assets partial
   {{- end -}}
 {{- end -}}
 
-{{- /* Tabs and tab */ -}}
+{{- /* Tabs */ -}}
 {{- if .Store.Get "hasTabs" | and (not $isArchivesOrOffline) -}}
   {{- $source := $cdn.tabContainerElementJS | default "lib/tab-container-element/bundle.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Attr" `type="module"` "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
@@ -243,7 +245,7 @@ FixIt theme assets partial
 
 {{- /* Cell Tooltip */ -}}
 {{- if eq .Site.Params.tooltip true -}}
-  {{- /*  [todo] 临时可行性验证，需要寻找一个更稳定的替代品（Floating UI） */ -}}
+  {{- /* [TODO] Temporary feasibility check; replace with a more stable alternative (Floating UI). */ -}}
   {{- $source := $cdn.cellTooltipJS | default "lib/cell-tooltip/cell-tooltip.umd.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "tooltip" true | merge $config -}}
@@ -285,7 +287,7 @@ FixIt theme assets partial
   {{- $config = dict "all" (isset $params "password") "shortcode" ($encryptPartial | default false) | dict "encryption" | merge $config -}}
 {{- end -}}
 
-{{- /* 不蒜子 */ -}}
+{{- /* Busuanzi visitor counter */ -}}
 {{- if .Site.Params.busuanzi.enable | and hugo.IsProduction -}}
   {{- $source := .Site.Params.busuanzi.source | default "https://vercount.one/js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Async" true "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
@@ -349,7 +351,7 @@ FixIt theme assets partial
   {{- dict "Source" . "Fingerprint" $fingerprint "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
 {{- end -}}
 
-{{- /* Config scripts */ -}}
+{{- /* Runtime config script (window.config) */ -}}
 {{- $configJS := $config | jsonify | printf "window.config=%s;" -}}
 {{- if hugo.IsServer -}}
   {{- $configJS = add $configJS "console.log('Page config:', window.config);" -}}
@@ -360,15 +362,9 @@ FixIt theme assets partial
 {{- end -}}
 {{- dict "Content" $configJS "Path" $targetPath "Minify" hugo.IsProduction "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
-{{- /* File tree */ -}}
+{{- /* File-tree plugin */ -}}
 {{- $options := dict "targetPath" "js/lib/file-tree.js" -}}
 {{- dict "Source" (resources.Get "js/lib/file-tree.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-
-{{- /* MathJax plugin */ -}}
-{{- if .Store.Get "hasMathJax" | and (not $isArchivesOrOffline) -}}
-  {{- $options := dict "targetPath" "js/lib/mathjax.js" -}}
-  {{- dict "Source" (resources.Get "js/lib/mathjax.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-{{- end -}}
 
 {{- /* Mermaid plugin */ -}}
 {{- if .Store.Get "hasMermaid" | and (not $isArchivesOrOffline) -}}
@@ -401,11 +397,11 @@ FixIt theme assets partial
   {{- dict "Content" $bootstrapJS "Path" "js/lib/mermaid-bootstrap.js" "Minify" hugo.IsProduction "Attr" `type="module"` "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
-{{- /* Theme script */ -}}
+{{- /* Theme main bundle */ -}}
 {{- $options := dict "targetPath" "js/main.js" -}}
 {{- dict "Source" (resources.Get "js/main.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
-{{- /* Custom Assets */ -}}
+{{- /* Custom assets block */ -}}
 {{- block "custom-assets" . }}{{ end -}}
 
 {{- /* Custom script (custom.ts takes priority over custom.js) */ -}}

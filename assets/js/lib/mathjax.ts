@@ -8,17 +8,52 @@
  */
 import { TypedEventBus } from '../core/event-bus'
 
-const params = window.config.mathjax || {}
 const eventBus = new TypedEventBus()
 
 /**
- * Load MathJax script dynamically.
+ * Bootstrap MathJax by setting up the global configuration and loading the script.
+ * @see https://docs.mathjax.org/en/latest/options/index.html
  */
-function loadMathJax() {
-  const script = document.createElement('script')
-  script.src = params.cdn || 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
-  script.async = true
-  document.head.appendChild(script)
+function bootstrapMathJax() {
+  const params = window.config.mathjax || {}
+
+  const loadMathJax = () => {
+    const script = document.createElement('script')
+    script.src = params.cdn || 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+    script.async = true
+    document.head.appendChild(script)
+  }
+
+  const configureMathJax = () => {
+    window.MathJax = {
+      tex: {
+        displayMath: [['\\[', '\\]'], ['$$', '$$']],
+        inlineMath: [['\\(', '\\)'], ['$', '$']],
+        packages: {
+          ...params.packages,
+        },
+        macros: {
+          // make \KaTeX command work in MathJax
+          KaTeX: '{K\\kern-.325em\\raise.21em{\\scriptstyle{A}}\\kern-.17em\\TeX}',
+          ...params.macros,
+        },
+        ...params.tex,
+      },
+      loader: {
+        ...params.loader,
+        failed(error: { package?: string, message: string }) {
+          console.error(`MathJax(${error.package || '?'}): ${error.message}`)
+        },
+      },
+      options: {
+        processHtmlClass: 'content',
+        ...params.options,
+      },
+    }
+  }
+
+  loadMathJax()
+  configureMathJax()
 }
 
 /**
@@ -33,39 +68,8 @@ function initMathJax(el?: Element) {
   }
 }
 
-/**
- * Configuring MathJax.
- * @see https://docs.mathjax.org/en/latest/options/index.html
- */
-window.MathJax = {
-  tex: {
-    displayMath: [['\\[', '\\]'], ['$$', '$$']],
-    inlineMath: [['\\(', '\\)'], ['$', '$']],
-    packages: {
-      ...params.packages,
-    },
-    macros: {
-      // make \KaTeX command work in MathJax
-      KaTeX: '{K\\kern-.325em\\raise.21em{\\scriptstyle{A}}\\kern-.17em\\TeX}',
-      ...params.macros,
-    },
-    ...params.tex,
-  },
-  loader: {
-    ...params.loader,
-    failed(error: { package?: string, message: string }) {
-      console.error(`MathJax(${error.package || '?'}): ${error.message}`)
-    },
-  },
-  options: {
-    processHtmlClass: 'content',
-    ...params.options,
-  },
-}
-
-loadMathJax()
-
 document.addEventListener('DOMContentLoaded', () => {
+  bootstrapMathJax()
   eventBus.on('fixit:decrypted', () => {
     initMathJax()
   })

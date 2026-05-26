@@ -75,7 +75,6 @@ export interface TocService {
 
 // ─── CommentService ───
 export interface CommentService {
-  initCommentLightGallery: (comments: string, images: string) => void
   initComment: () => void
 }
 

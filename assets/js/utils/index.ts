@@ -1,5 +1,6 @@
 export * from './animation'
 export * from './clipboard'
+export * from './comment'
 export * from './dom'
 export * from './file'
 export * from './media'
