@@ -1,4 +1,11 @@
-/** FixIt theme entry point — bootstraps service container and initializes all modules. */
+/**
+ * FixIt theme entry point — bootstraps service container and initializes all modules.
+ *
+ * Responsibilities:
+ * - Register and resolve all service modules via the DI container.
+ * - Build the `window.fixit` backward-compatibility facade.
+ * - Run the init sequence on `DOMContentLoaded` (content, theme, menu, search, etc.).
+ */
 import { ServiceContainer } from './core/container'
 import { TypedEventBus } from './core/event-bus'
 import { TOKENS } from './core/tokens'
@@ -48,7 +55,6 @@ function bootstrap(): void {
     .register(TOKENS.Content, c => new ContentModule(
       c.resolve(TOKENS.Core),
       c.resolve(TOKENS.Code),
-      c.resolve(TOKENS.Toc),
       c.resolve(TOKENS.LinkGuard),
       bus,
     ))
@@ -96,7 +102,8 @@ function bootstrap(): void {
 
   function init() {
     try {
-      content.initContent()
+      toc.setup()
+      content.setup()
       enc.initFixItDecryptor()
       theme.initThemeColor()
       svg.initSVGIcon()

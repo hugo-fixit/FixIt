@@ -71,6 +71,7 @@ export interface TocService {
   initTocListener: () => void
   initTocDialog: () => void
   fixTocScroll: () => void
+  setup: () => void
 }
 
 // ─── CommentService ───
@@ -86,9 +87,8 @@ export interface EncryptionService {
 // ─── ContentService ───
 export interface ContentService {
   initDetails: (target?: Element | Document) => void
-  initFootnotes: () => void
   initTooltip: () => void
-  initContent: () => void
+  setup: () => void
 }
 
 // ─── MiscService ───

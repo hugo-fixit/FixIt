@@ -1,4 +1,12 @@
-/** Miscellaneous module — site time, PWA, MathJax, bookmarks, rewards, and PostChat. */
+/**
+ * Miscellaneous module — site time, PWA, bookmarks, rewards, and PostChat.
+ *
+ * Responsibilities:
+ * - Display site running time with animated counters.
+ * - Register service worker for PWA support.
+ * - Auto-bookmark scroll position for page restoration.
+ * - Initialize reward QR codes and PostChat AI user info.
+ */
 import type { TypedEventBus } from '../core/event-bus'
 import type { CoreService, MiscService } from '../core/tokens'
 import { getScrollTop, isMobile, isValidDate } from '../utils'

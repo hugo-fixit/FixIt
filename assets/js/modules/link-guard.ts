@@ -1,4 +1,10 @@
-/** Link guard module — external link confirmation dialog with copy support. */
+/**
+ * Link guard module — external link confirmation dialog with copy support.
+ *
+ * Responsibilities:
+ * - Intercept clicks on external links and show a confirmation dialog.
+ * - Allow users to copy the target URL from the dialog.
+ */
 import type { LinkGuardService } from '../core/tokens'
 import { createCopyText, flashCopiedTooltip } from '../utils'
 

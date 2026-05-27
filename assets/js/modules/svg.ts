@@ -1,4 +1,10 @@
-/** SVG module — inline SVG icon loading from data-svg-src attributes. */
+/**
+ * SVG module — inline SVG icon loading from data-svg-src attributes.
+ *
+ * Responsibilities:
+ * - Fetch and inline SVG icons referenced by `data-svg-src` attributes.
+ * - Cache fetched SVGs to avoid duplicate requests.
+ */
 import type { SvgService } from '../core/tokens'
 
 export class SvgModule implements SvgService {

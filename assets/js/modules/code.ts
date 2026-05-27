@@ -1,4 +1,11 @@
-/** Code module — code block interactions: copy, download, fullscreen, tabs, and line numbers. */
+/**
+ * Code module — code block interactions: copy, download, fullscreen, tabs, and line numbers.
+ *
+ * Responsibilities:
+ * - Wrap code blocks with action buttons (copy, download, fullscreen, line numbers).
+ * - Initialize code tab groups and sync selection across related blocks.
+ * - Copy diagram source (Mermaid, ECharts) from code blocks.
+ */
 import type { TypedEventBus } from '../core/event-bus'
 import type { CodeService } from '../core/tokens'
 import { animateCSS, createCopyText, downloadAsFile, flashCopiedTooltip, getStagingDOM } from '../utils'

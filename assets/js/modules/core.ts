@@ -1,4 +1,11 @@
-/** Core module — shared state initialization and mask overlay management. */
+/**
+ * Core module — shared state initialization and mask overlay management.
+ *
+ * Responsibilities:
+ * - Load and expose page/site configuration from `window.config`.
+ * - Track theme mode (light/dark) and provide `isDark` / `themeMode` accessors.
+ * - Manage mask overlay visibility for search and menu drawers.
+ */
 import type { CoreService } from '../core/tokens'
 import type { FixItConfig, MaskOverlayHandler } from '../types'
 import { getScrollTop, getThemeMode, isDarkMode } from '../utils'

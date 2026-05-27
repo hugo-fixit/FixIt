@@ -1,6 +1,14 @@
-/** Content module — orchestrates rendering of page content components (gallery, tooltips, diagrams, etc.). */
+/**
+ * Content module — details toggle, tooltips, footnotes, and link guard setup.
+ *
+ * Responsibilities:
+ * - Attach toggle behaviour to `<details>` elements.
+ * - Initialize CellTooltip on action buttons, copy buttons, and footnotes.
+ * - Set up link guard dialog for external link confirmation.
+ * - Re-initialize components after encrypted content is decrypted.
+ */
 import type { TypedEventBus } from '../core/event-bus'
-import type { CodeService, ContentService, CoreService, LinkGuardService, TocService } from '../core/tokens'
+import type { CodeService, ContentService, CoreService, LinkGuardService } from '../core/tokens'
 
 const CellTooltip = window.CellTooltip
 
@@ -8,7 +16,6 @@ export class ContentModule implements ContentService {
   constructor(
     private readonly core: CoreService,
     private readonly code: CodeService,
-    private readonly toc: TocService,
     private readonly linkGuard: LinkGuardService,
     private readonly bus: TypedEventBus,
   ) {}
@@ -27,7 +34,7 @@ export class ContentModule implements ContentService {
   }
 
   /** Convert footnote refs into tooltip-enabled elements. */
-  initFootnotes() {
+  #initFootnotes() {
     const $footnoteRefs = document.querySelectorAll<HTMLElement>('#content sup[id^="fnref:"]')
     const $footnotes = document.querySelector<HTMLElement>('.footnotes[role="doc-endnotes"]')
     if (!$footnoteRefs.length || !$footnotes)
@@ -69,39 +76,29 @@ export class ContentModule implements ContentService {
     CellTooltip.initAll('li[data-task] > span[title]', { placement: 'right' })
     CellTooltip.initAll('.action-btn[title]', { placement: 'bottom' })
     CellTooltip.initAll('.copy-icon-btn[title]', { placement: 'top' })
-    this.initFootnotes()
+    this.#initFootnotes()
   }
 
   /**
    * Orchestrate all content component initializations on a target element.
    * @param target - The root element to initialize components within.
-   * @param includeToc - Whether to also initialize TOC-related components.
    */
-  #initContentComponents(target: Element | Document = document, includeToc = true) {
+  #initContent(target: Element | Document = document) {
     this.initDetails(target)
     this.code.initCodeWrapper()
     this.code.initCodeTabs()
     this.code.initDiagramCopyBtn()
     this.initTooltip()
     this.linkGuard.initLinkGuardDialog(target)
-
-    if (includeToc) {
-      this.toc.fixTocScroll()
-      this.toc.initToc()
-      this.toc.initTocListener()
-      this.toc.initTocDialog()
-    }
   }
 
-  initContent() {
-    if (!this.core.config.encryption?.all) {
-      this.#initContentComponents()
-    }
+  setup() {
+    this.#initContent()
     this.bus.on('fixit:decrypted', () => {
-      this.#initContentComponents()
+      this.#initContent()
     })
     this.bus.on('fixit:partial-decrypted', ({ detail }) => {
-      this.#initContentComponents(detail.target, false)
+      this.#initContent(detail.target)
     })
   }
 }

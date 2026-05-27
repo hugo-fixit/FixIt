@@ -1,4 +1,12 @@
-/** Events module — scroll, resize, mask click, and print event handling. */
+/**
+ * Events module — scroll, resize, mask click, and print event handling.
+ *
+ * Responsibilities:
+ * - Throttled scroll handler for back-to-top button, header show/hide, and TOC active state sync.
+ * - Resize handler for TOC height and table wrapping recalculation.
+ * - Mask click handler to close search and menu drawers.
+ * - Print preparation handler.
+ */
 import type { TypedEventBus } from '../core/event-bus'
 import type { CodeService, CoreService, EventsService, SearchService, TocService } from '../core/tokens'
 import { animateCSS, getScrollTop, isMobile, scrollIntoView } from '../utils'

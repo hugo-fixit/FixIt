@@ -1,4 +1,12 @@
-/** Table of Contents module — TOC scroll tracking, active state sync, and dialog. */
+/**
+ * Table of Contents module — TOC scroll tracking, active state sync, and dialog.
+ *
+ * Responsibilities:
+ * - Move TOC node to the correct container (static, auto, or drawer) on init.
+ * - Track scroll position and highlight the active heading in all TOC containers.
+ * - Initialize mobile TOC drawer dialog and its open/close handlers.
+ * - Clone TOC nodes to detach APlayer event listeners.
+ */
 import type { TocService } from '../core/tokens'
 import { animateCSS, isTocStatic } from '../utils'
 
@@ -261,5 +269,13 @@ export class TocModule implements TocService {
         $headingMark.parentElement!.replaceChild($newHeadingMark, $headingMark)
       })
     }
+  }
+
+  /** Initialize all TOC components and register event listeners. */
+  setup() {
+    this.fixTocScroll()
+    this.initToc()
+    this.initTocListener()
+    this.initTocDialog()
   }
 }

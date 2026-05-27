@@ -1,4 +1,10 @@
-/** Comment module — Orchestrates comment section display. */
+/**
+ * Comment module — comment plugin initialization and scroll-into-view.
+ *
+ * Responsibilities:
+ * - Initialize the configured comment plugin (Artalk, Twikoo, Giscus, etc.).
+ * - Scroll to comments section when the URL hash targets `#comments`.
+ */
 import type { CommentService, CoreService } from '../core/tokens'
 import { scrollIntoView } from '../utils'
 

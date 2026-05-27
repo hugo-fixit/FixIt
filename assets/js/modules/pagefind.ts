@@ -1,4 +1,11 @@
-/** Pagefind search engine integration with lazy loading, filters, and debounced search. */
+/**
+ * Pagefind search engine integration with lazy loading, filters, and debounced search.
+ *
+ * Responsibilities:
+ * - Lazy load the Pagefind UI and index on first search interaction.
+ * - Apply configured filters, sorting, and debounce settings.
+ * - Manage search dialog open/close lifecycle.
+ */
 
 /** Matches absolute URLs (e.g. "https://..." or "//...") */
 const ABSOLUTE_URL_RE = /^(?:[a-z]+:)?\/\//i

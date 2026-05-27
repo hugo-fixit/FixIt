@@ -1,4 +1,11 @@
-/** Link guard redirection page — displays target URL with copy and confirm actions. */
+/**
+ * Link guard redirection page — displays target URL with copy and confirm actions.
+ *
+ * Responsibilities:
+ * - Parse the `target` query parameter and display the destination URL.
+ * - Allow users to copy the target URL to clipboard.
+ * - Confirm and navigate to the target URL on user action.
+ */
 import { createCopyText } from '../utils'
 
 const copyText = createCopyText()

@@ -1,4 +1,11 @@
-/** Theme module — color scheme switching and theme-color meta tag management. */
+/**
+ * Theme module — color scheme switching and theme-color meta tag management.
+ *
+ * Responsibilities:
+ * - Toggle between light, dark, and auto color schemes.
+ * - Update `<meta name="theme-color">` based on current scheme.
+ * - Persist user preference to localStorage.
+ */
 
 import type { TypedEventBus } from '../core/event-bus'
 import type { CoreService, ThemeService } from '../core/tokens'

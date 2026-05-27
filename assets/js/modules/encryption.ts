@@ -1,4 +1,10 @@
-/** Encryption module — page decryption via FixItDecryptor and encrypted content toggling. */
+/**
+ * Encryption module — page decryption via FixItDecryptor and encrypted content toggling.
+ *
+ * Responsibilities:
+ * - Initialize FixItDecryptor for full-page and shortcode-scoped decryption.
+ * - Toggle visibility of encrypted content sections.
+ */
 import type { TypedEventBus } from '../core/event-bus'
 import type { CoreService, EncryptionService } from '../core/tokens'
 

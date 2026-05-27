@@ -1,4 +1,11 @@
-/** Search module — Algolia, Fuse.js, CSE, and Pagefind search engine integration. */
+/**
+ * Search module — Algolia, Fuse.js, CSE, and Pagefind search engine integration.
+ *
+ * Responsibilities:
+ * - Initialize the configured search engine backend.
+ * - Manage search dialog open/close and keyboard shortcuts.
+ * - Handle autosearch, result rendering, and UI state reset.
+ */
 import type { CoreService, SearchService } from '../core/tokens'
 import { applyHighlightToText, HTMLEscape, isMobile } from '../utils'
 import { createPagefindSearch } from './pagefind'
