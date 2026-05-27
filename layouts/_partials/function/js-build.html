@@ -1,15 +1,22 @@
 {{- /*
   Build and minify a JS resource with unified behavior.
   @param {resource.Resource} .Resource Hugo resource to process
-  @param {Object} [.Build] js.Build options (defaults: minify=hugo.IsProduction, sourceMap=cond hugo.IsDevelopment "linked" "none")
+  @param {Object|Boolean} [.Build] true for defaults, dict for custom options, false/omit to skip js.Build
   @param {Boolean} [.Minify] extra minify flag; final minify is Minify OR Build.minify
   @return {resource.Resource}
 */ -}}
 
 {{- $resource := .Resource -}}
 {{- $minify := .Minify -}}
-{{- with .Build -}}
-  {{- $buildOptions := . -}}
+{{- if .Build -}}
+  {{- $buildOptions := .Build -}}
+  {{- if eq .Build true -}}
+    {{- $buildOptions = dict -}}
+  {{- end -}}
+  {{- if not (isset $buildOptions "targetPath") -}}
+    {{- $targetPath := $resource.Name | replaceRE `\.ts$` ".js" -}}
+    {{- $buildOptions = dict "targetPath" $targetPath | merge $buildOptions -}}
+  {{- end -}}
   {{- if not (isset $buildOptions "sourceMap") -}}
     {{- $buildOptions = dict "sourceMap" (cond hugo.IsDevelopment "linked" "none") | merge $buildOptions -}}
   {{- end -}}

@@ -20,7 +20,7 @@ export interface FixItConfig {
   comment?: CommentConfig
   cookieconsent?: object
   siteTime?: string
-  enablePWA?: boolean
+  PWA?: PWAConfig
   watermark?: WatermarkConfig
   pangu?: PanguConfig
   mathjax?: MathJaxConfig
@@ -121,6 +121,11 @@ export interface GiscusConfig {
   origin?: string
   lightTheme?: string
   darkTheme?: string
+}
+
+export interface PWAConfig {
+  enable?: boolean
+  serviceWorkerURL: string
 }
 
 export interface WatermarkConfig {

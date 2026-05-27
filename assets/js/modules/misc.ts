@@ -45,9 +45,9 @@ export class MiscModule implements MiscService {
 
   /** Register the service worker for PWA support. */
   initServiceWorker() {
-    if (this.core.config.enablePWA && 'serviceWorker' in navigator) {
+    if (this.core.config.PWA?.enable && 'serviceWorker' in navigator) {
       navigator.serviceWorker
-        .register('/service-worker.min.js', { scope: '/' })
+        .register(this.core.config.PWA.serviceWorkerURL, { scope: '/' })
         .then((_registration) => {
           // console.log('Service Worker Registered');
         })

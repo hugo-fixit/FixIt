@@ -1,7 +1,7 @@
 /**
  * Service Worker
  * imported from https://github.com/HEIGE-PCloud/DoIt/blob/v0.2.11/src/js/sw.js
- * [todo] rewrite with TypeScript and fix some issues
+ * [todo] rewrite with TypeScript and fixes issue #298
  */
 const CACHE_VERSION = 1;
 
