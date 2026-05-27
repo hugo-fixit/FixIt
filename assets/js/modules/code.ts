@@ -1,3 +1,7 @@
+import type { CodeService } from '../core/tokens'
+import { eventBus } from '../core/event-bus'
+import { animateCSS, createCopyText, downloadAsFile, flashCopiedTooltip, getStagingDOM } from '../utils'
+
 /**
  * Code module — code block interactions: copy, download, fullscreen, tabs, and line numbers.
  *
@@ -6,19 +10,13 @@
  * - Initialize code tab groups and sync selection across related blocks.
  * - Copy diagram source (Mermaid, ECharts) from code blocks.
  */
-import type { TypedEventBus } from '../core/event-bus'
-import type { CodeService } from '../core/tokens'
-import { animateCSS, createCopyText, downloadAsFile, flashCopiedTooltip, getStagingDOM } from '../utils'
-
 const CellTooltip = window.CellTooltip
 const copyText = createCopyText()
 
 export class CodeModule implements CodeService {
-  #codeFullscreenOnEsc: ((event: KeyboardEvent) => void) | undefined
+  #fullscreenAbort: AbortController | undefined
 
-  constructor(
-    private readonly bus: TypedEventBus,
-  ) {}
+  constructor() {}
 
   /**
    * Attach copy-to-clipboard behaviour to a code block.
@@ -167,13 +165,12 @@ export class CodeModule implements CodeService {
       }
       this.#setCodeFullscreenState(codeBlock, show)
     }, false)
-    if (!this.#codeFullscreenOnEsc) {
-      this.#codeFullscreenOnEsc = (event: KeyboardEvent) => {
-        if (event.key === 'Escape') {
+    if (!this.#fullscreenAbort) {
+      this.#fullscreenAbort = new AbortController()
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape')
           this.closeCodeFullscreen()
-        }
-      }
-      document.addEventListener('keydown', this.#codeFullscreenOnEsc, false)
+      }, { signal: this.#fullscreenAbort.signal })
     }
   }
 
@@ -342,7 +339,7 @@ export class CodeModule implements CodeService {
         }
       }
 
-      this.bus.on('fixit:code-tab-sync', ({ detail }) => {
+      eventBus.on('fixit:code-tab-sync', ({ detail }) => {
         if (!detail.lang || detail.source === $container)
           return
         const index = toggleLangToIndex.get(detail.lang)
@@ -371,10 +368,7 @@ export class CodeModule implements CodeService {
         $btn.addEventListener('click', () => {
           if ($tab.dataset.codeToggle === 'true') {
             window.localStorage.setItem('config_lang_perf', normalizedTitle)
-            this.bus.emit('fixit:code-tab-sync', {
-              lang: normalizedTitle,
-              source: $container,
-            })
+            eventBus.emit('fixit:code-tab-sync', { lang: normalizedTitle, source: $container })
           }
           switchToTab(index)
         })

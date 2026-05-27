@@ -54,6 +54,9 @@
   {{- $ctx := .ctx -}}
   {{- $url := .url -}}
   {{- $cardIcon := $ctx.CardIcon -}}
+  {{- with dict "Path" $cardIcon | partial "function/resource.html" -}}
+    {{- $cardIcon = .RelPermalink -}}
+  {{- end -}}
   {{- if (not $cardIcon) | and $url.Host -}}
     {{- with partial "function/get-remote-image.html" (dict "Src" (add "https://favicon.im/" $url.Host)) -}}
       {{- $cardIcon = .RelPermalink -}}

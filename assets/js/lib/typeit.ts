@@ -5,10 +5,8 @@
  * - Initialize TypeIt typewriter instances, grouped and chained by data attributes.
  * - Re-run initialization after decrypted content is revealed.
  */
-import { TypedEventBus } from '../core/event-bus'
+import { eventBus } from '../core/event-bus'
 import { getStagingDOM } from '../utils'
-
-const eventBus = new TypedEventBus()
 
 function initTypeit(target: Element | Document = document) {
   const TypeIt = window.TypeIt

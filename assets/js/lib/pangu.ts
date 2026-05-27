@@ -6,9 +6,7 @@
  * - Support both full-page spacing and selector-based spacing.
  * - Re-run spacing after decrypted or partially decrypted content is revealed.
  */
-import { TypedEventBus } from '../core/event-bus'
-
-const eventBus = new TypedEventBus()
+import { eventBus } from '../core/event-bus'
 
 function initPangu(target?: Element) {
   if (!window.config.pangu?.enable || !window.pangu)

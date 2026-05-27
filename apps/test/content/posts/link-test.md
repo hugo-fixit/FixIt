@@ -64,7 +64,7 @@ These links are rendered by `layouts/_markup/render-link.html` and should always
 
 ### Card with custom image icon
 
-{{< link href="https://gohugo.io" content="Hugo Official Site" card=true card-icon="/test/images/hugo.min.svg" >}}
+{{< link href="https://gohugo.io" content="Hugo Official Site" card=true card-icon="/images/hugo.svg" >}}
 
 ### Card with download state
 

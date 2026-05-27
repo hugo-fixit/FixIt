@@ -7,12 +7,10 @@
  * - Persist and validate page-level decrypt cache with expiration.
  * - Emit and react to FixIt events for decrypted/partial-decrypted/reset flows.
  */
-import { TypedEventBus } from '../core/event-bus'
+import { eventBus } from '../core/event-bus'
 import { flashTooltip } from '../utils'
 
 declare const CryptoJS: any
-
-const eventBus = new TypedEventBus()
 
 interface DecryptorOptions {
   duration?: number
@@ -149,7 +147,7 @@ class FixItDecryptor {
       $encryptor.classList.remove('decrypted')
       $content.innerHTML = ''
       window.localStorage?.removeItem(`fixit-decryptor/#${location.pathname}`)
-      eventBus.emit('fixit:reset')
+      eventBus.emit('fixit:re-encrypt')
     })
 
     $encryptor.classList.add('initialized')

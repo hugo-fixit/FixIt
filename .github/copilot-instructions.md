@@ -22,10 +22,9 @@ This document defines the detailed coding standards for the FixIt theme project.
 
 ### Architecture
 
-The JS follows a service-class architecture with dependency injection:
+Service-class architecture with direct constructor calls:
 
-- **`ServiceContainer`** (`core/container.ts`) — Lightweight DI container with `Symbol`-based tokens and lazy resolution.
-- **`TypedEventBus`** (`core/event-bus.ts`) — Typed event system wrapping DOM `CustomEvents`.
+- **`TypedEventBus`** (`core/event-bus.ts`) — Module-level singleton (`eventBus`) wrapping DOM `CustomEvents` with typed event map.
 - **Service interfaces** (`core/tokens.ts`) — Typed contracts for each module (`CoreService`, `ThemeService`, `CodeService`, etc.).
 - **Module classes** (`modules/*.ts`) — Each module implements its service interface. Dependencies are constructor-injected.
 
@@ -35,10 +34,7 @@ The JS follows a service-class architecture with dependency injection:
 export class ExampleModule implements ExampleService {
   #privateState: any // ES6 # private fields, not _ prefix
 
-  constructor(
-    private readonly core: CoreService,
-    private readonly bus: TypedEventBus,
-  ) {}
+  constructor(private readonly core: CoreService) {}
 
   publicMethod(): void { /* ... */ }
   #privateHelper(): void { /* ... */ }
@@ -49,9 +45,9 @@ export class ExampleModule implements ExampleService {
 
 - Use ES6 `#` private fields — not TypeScript `private` with `_` prefix
 - Keep modules focused: one module per file, one service interface per module
-- Use the `TypedEventBus` for cross-module communication — do not import other modules directly
-- Constructor injection for all dependencies — no global state access
-- Use `window.fixit` only for backward compatibility in third-party lib callbacks
+- Import the shared `eventBus` singleton from `core/event-bus` for cross-module communication
+- Constructor injection for dependencies — no global state access
+- `window.fixit` exposes a typed public API (`FixItPublicAPI`) for user custom scripts
 
 ### Utilities
 

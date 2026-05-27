@@ -55,21 +55,23 @@ Root `package.json` is `@hugo-fixit/core`. pnpm workspaces include `apps/*` and 
 
 ### JavaScript Module System (`assets/js/`)
 
-Service-class architecture with dependency injection:
+Service-class architecture with direct constructor calls:
 
-- **`main.ts`** — Entry point. Bootstraps `ServiceContainer` and `TypedEventBus`, registers all services, resolves them, and builds a `window.fixit` backward-compatibility facade via `publicAPI()`. Runs the init sequence on `DOMContentLoaded`.
-- **`types.ts`** — TypeScript interfaces for `FixItConfig`, `FixItPublicAPI`, and all config sub-types. Declares global `window` augmentations for third-party libs.
+- **`main.ts`** — Entry point. Instantiates all modules with direct constructor calls, builds the typed `window.fixit` public API facade, and runs the init sequence on `DOMContentLoaded`.
+- **`types/`** — TypeScript type definitions:
+  - `config.ts` — `FixItConfig` and all config sub-types.
+  - `ui.ts` — `FixItPublicAPI`, global `window` augmentation for third-party libs.
+  - `third-party.ts` — Types for vendored libraries.
 - **`core/`** — Infrastructure layer:
-  - `container.ts` — Lightweight DI container with `Symbol`-based tokens, lazy resolution, and circular-dependency detection.
-  - `event-bus.ts` — Typed wrapper around DOM `CustomEvents` with `on`/`off`/`emit` methods and a `FixItEventMap` payload type map.
-  - `tokens.ts` — Service interfaces (`CoreService`, `ThemeService`, `CodeService`, etc.) and a `TOKENS` constant mapping each to a typed `ServiceToken`.
-- **`modules/`** — Feature modules. Each is a class implementing its service interface. Dependencies are constructor-injected via the container. Private state uses ES6 `#` fields. Modules: charts, code, comment, content, core, encryption, events, link-guard, menu, misc, search, svg, theme, toc. `pagefind.ts` is a standalone factory consumed by `SearchModule`.
+  - `event-bus.ts` — Typed event bus singleton wrapping DOM `CustomEvents`. Exports `eventBus` (module-level singleton) and `FixItEventMap` type.
+  - `tokens.ts` — Service interfaces (`CoreService`, `ThemeService`, `CodeService`, etc.) used for module constructor typing.
+- **`modules/`** — Feature modules. Each is a class implementing its service interface. Dependencies are constructor-injected. Private state uses ES6 `#` fields. Modules: charts, code, content, core, encryption, events, menu, misc, search, theme, toc. `pagefind.ts` is a standalone factory consumed by `SearchModule`.
 - **`utils/`** — Pure utility functions (no side effects, no DOM state). Re-exported from `utils/index.ts`.
-- **`lib/`** — Third-party library wrappers (aplayer, echarts, file-tree, fixit-decryptor, lightgallery, mapbox, mathjax, mermaid, etc.).
+- **`lib/`** — Third-party library wrappers (aplayer, echarts, file-tree, fixit-decryptor, lightgallery, mapbox, mathjax, mermaid, etc.). All import the shared `eventBus` singleton.
 - **`head/`** — `color-scheme.ts` runs synchronously in `<head>` before body render to prevent flash of wrong theme.
 - **`pages/`** — Page-specific scripts (e.g. `link.ts` for the link guard redirection page).
 
-Cross-module communication uses `TypedEventBus`, not direct module imports. The `window.fixit` global API is only for backward compatibility in third-party library callbacks and user custom scripts.
+Cross-module communication uses the shared `eventBus` singleton, not direct module imports. The `window.fixit` facade exposes a typed public API for user custom scripts (`custom.ts`): theme control, scroll state, mask overlay management, content re-initialization, and the event bus.
 
 ### Hugo Templates (`layouts/`)
 
@@ -105,7 +107,8 @@ Hugo Pipes processes all assets. The key orchestration is in `_partials/base/ass
 
 - Use ES6 `#` private fields — not TypeScript `private` with `_` prefix
 - One module per file, one service interface per module
-- Constructor injection for all dependencies — no global state access
+- Constructor injection for dependencies — no global state access
+- Import the shared `eventBus` singleton from `core/event-bus` — do not create new instances
 - Pure functions only in `utils/` — no side effects, no DOM state
 
 ### Hugo Templates

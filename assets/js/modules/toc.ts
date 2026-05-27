@@ -1,3 +1,6 @@
+import type { TocService } from '../core/tokens'
+import { animateCSS, isTocStatic } from '../utils'
+
 /**
  * Table of Contents module — TOC scroll tracking, active state sync, and dialog.
  *
@@ -7,9 +10,6 @@
  * - Initialize mobile TOC drawer dialog and its open/close handlers.
  * - Clone TOC nodes to detach APlayer event listeners.
  */
-import type { TocService } from '../core/tokens'
-import { animateCSS, isTocStatic } from '../utils'
-
 export class TocModule implements TocService {
   private activeTocId: string | null = null
 

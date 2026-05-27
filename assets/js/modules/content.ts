@@ -1,24 +1,114 @@
+import type { CodeService, ContentService, CoreService } from '../core/tokens'
+import { eventBus } from '../core/event-bus'
+import { createCopyText, flashCopiedTooltip } from '../utils'
+
+const CellTooltip = window.CellTooltip
+const copyText = createCopyText()
+
 /**
- * Content module — details toggle, tooltips, footnotes, and link guard setup.
+ * Content module — details toggle, tooltips, footnotes, SVG icons, and link guard.
  *
  * Responsibilities:
  * - Attach toggle behaviour to `<details>` elements.
  * - Initialize CellTooltip on action buttons, copy buttons, and footnotes.
+ * - Fetch and inline SVG icons from `data-svg-src` attributes.
  * - Set up link guard dialog for external link confirmation.
  * - Re-initialize components after encrypted content is decrypted.
  */
-import type { TypedEventBus } from '../core/event-bus'
-import type { CodeService, ContentService, CoreService, LinkGuardService } from '../core/tokens'
-
-const CellTooltip = window.CellTooltip
-
 export class ContentModule implements ContentService {
   constructor(
     private readonly core: CoreService,
     private readonly code: CodeService,
-    private readonly linkGuard: LinkGuardService,
-    private readonly bus: TypedEventBus,
   ) {}
+
+  /** Fetch and inline SVG icons referenced by `data-svg-src` attributes. */
+  initSVGIcon() {
+    document.querySelectorAll<HTMLElement>('[data-svg-src]').forEach(($icon) => {
+      fetch($icon.dataset.svgSrc!)
+        .then(response => response.text())
+        .then((svg) => {
+          const $temp = document.createElement('div')
+          $temp.insertAdjacentHTML('afterbegin', svg)
+          const $svg = $temp.firstChild as SVGElement
+          $svg.dataset.svgSrc = $icon.dataset.svgSrc
+          $svg.classList.add('icon')
+          const $titleElements = $svg.getElementsByTagName('title')
+          $titleElements.length && $svg.removeChild($titleElements[0])
+          $icon.parentElement!.replaceChild($svg, $icon)
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    })
+  }
+
+  /**
+   * Initialize the link-guard dialog and bind click handlers on guarded links.
+   * @param target - The root element to search for guarded links.
+   */
+  initLinkGuardDialog(target: Element | Document = document) {
+    const dialog = document.getElementById('link-guard-dialog') as HTMLDialogElement
+    if (!dialog)
+      return
+
+    const $target = dialog.querySelector<HTMLElement>('.target')
+    const $copy = dialog.querySelector<HTMLElement>('.copy-icon-btn')
+    const $confirm = dialog.querySelector<HTMLElement>('.confirm-btn')
+    const $cancel = dialog.querySelector<HTMLElement>('.cancel-btn')
+
+    const _closeDialog = () => {
+      if (dialog.open)
+        dialog.close()
+      ;(dialog as any)._target = null
+      if ($target) {
+        $target.textContent = '-'
+      }
+    }
+
+    if (!dialog.dataset.init) {
+      dialog.dataset.init = 'true'
+
+      $confirm!.addEventListener('click', () => {
+        if ((dialog as any)._target) {
+          window.open((dialog as any)._target, '_blank', 'noopener,noreferrer')
+        }
+        _closeDialog()
+      })
+
+      $cancel!.addEventListener('click', _closeDialog)
+
+      $copy!.addEventListener('click', () => {
+        const textToCopy = (dialog as any)._target || ''
+        if (!textToCopy)
+          return
+        copyText(textToCopy).then(() => {
+          flashCopiedTooltip($copy!)
+        })
+      })
+    }
+
+    target.querySelectorAll<HTMLAnchorElement>('a[target="_blank"][data-guard="modal"]:not([data-init])').forEach(($link) => {
+      $link.dataset.init = 'true'
+      $link.addEventListener('click', (e) => {
+        e.preventDefault()
+        let targetUrl = $link.href
+        try {
+          const guardUrl = new URL($link.href)
+          targetUrl = guardUrl.searchParams.get('target') || targetUrl
+        }
+        catch {
+          // Ignore malformed URLs and fall back to the original href.
+        }
+
+        ;(dialog as any)._target = targetUrl
+        if ($target) {
+          $target.textContent = targetUrl
+        }
+        dialog.showModal()
+        ;(document.activeElement as HTMLElement)?.blur()
+      }, false)
+    })
+  }
 
   /**
    * Attach toggle behaviour to `<details>` elements.
@@ -80,25 +170,26 @@ export class ContentModule implements ContentService {
   }
 
   /**
-   * Orchestrate all content component initializations on a target element.
+   * Re-initialize content components within a target element.
+   * Useful after AJAX/pjax loads or dynamic content injection.
    * @param target - The root element to initialize components within.
    */
-  #initContent(target: Element | Document = document) {
+  initContent(target: Element | Document = document) {
     this.initDetails(target)
     this.code.initCodeWrapper()
     this.code.initCodeTabs()
     this.code.initDiagramCopyBtn()
     this.initTooltip()
-    this.linkGuard.initLinkGuardDialog(target)
+    this.initLinkGuardDialog(target)
   }
 
   setup() {
-    this.#initContent()
-    this.bus.on('fixit:decrypted', () => {
-      this.#initContent()
+    this.initContent()
+    eventBus.on('fixit:decrypted', () => {
+      this.initContent()
     })
-    this.bus.on('fixit:partial-decrypted', ({ detail }) => {
-      this.#initContent(detail.target)
+    eventBus.on('fixit:partial-decrypted', ({ detail }) => {
+      this.initContent(detail.target)
     })
   }
 }

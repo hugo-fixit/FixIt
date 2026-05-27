@@ -5,10 +5,8 @@
  * - Dynamically inject Utterances script
  * - Handle theme synchronization via postMessage
  */
-import { TypedEventBus } from '../core/event-bus'
+import { eventBus } from '../core/event-bus'
 import { isDarkMode } from '../utils'
-
-const eventBus = new TypedEventBus()
 
 document.addEventListener('DOMContentLoaded', () => {
   if (!window.config.comment?.utterances)

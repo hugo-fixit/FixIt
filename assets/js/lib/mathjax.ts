@@ -6,9 +6,7 @@
  * - Register default delimiters/macros and allow user-level overrides.
  * - Load the MathJax runtime script dynamically from configured CDN.
  */
-import { TypedEventBus } from '../core/event-bus'
-
-const eventBus = new TypedEventBus()
+import { eventBus } from '../core/event-bus'
 
 /**
  * Bootstrap MathJax by setting up the global configuration and loading the script.

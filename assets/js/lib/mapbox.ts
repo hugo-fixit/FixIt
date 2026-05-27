@@ -6,10 +6,8 @@
  * - Apply light/dark style on theme switch.
  * - Re-run initialization after decrypted content is revealed.
  */
-import { TypedEventBus } from '../core/event-bus'
+import { eventBus } from '../core/event-bus'
 import { isDarkMode } from '../utils'
-
-const eventBus = new TypedEventBus()
 
 const mapboxArr: any[] = []
 

@@ -1,5 +1,3 @@
-/** Typed event bus — wraps DOM CustomEvents with type-safe emit/on/off. */
-
 /** Event map: every FixIt event and its payload shape. */
 export interface FixItEventMap {
   'fixit:switch-theme': { isDark: boolean, mode: string, isChanged: boolean }
@@ -7,17 +5,15 @@ export interface FixItEventMap {
   'fixit:resize': void
   'fixit:decrypted': void
   'fixit:partial-decrypted': { target: Element }
-  'fixit:reset': void
-  'fixit:before-print': void
-  'fixit:after-print': void
+  'fixit:re-encrypt': void
   'fixit:code-tab-sync': { lang: string, source: HTMLElement }
-  'fixit:mermaid-rendered': { svgId: string }
 }
 
 type Handler<T> = T extends void
   ? (() => void) | ((event: CustomEvent<void>) => void)
   : (event: CustomEvent<T>) => void
 
+/** Typed event bus — wraps DOM CustomEvents with type-safe emit/on/off. */
 export class TypedEventBus {
   private target = document
 
@@ -41,3 +37,6 @@ export class TypedEventBus {
     )
   }
 }
+
+/** Shared event bus singleton for all modules and libs. */
+export const eventBus = new TypedEventBus()

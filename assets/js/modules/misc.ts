@@ -1,23 +1,21 @@
+import type { CoreService, MiscService } from '../core/tokens'
+import { eventBus } from '../core/event-bus'
+import { getScrollTop, isMobile, isValidDate, scrollIntoView } from '../utils'
+
 /**
- * Miscellaneous module — site time, PWA, bookmarks, rewards, and PostChat.
+ * Miscellaneous module — site time, PWA, bookmarks, rewards, comments, and PostChat.
  *
  * Responsibilities:
  * - Display site running time with animated counters.
  * - Register service worker for PWA support.
  * - Auto-bookmark scroll position for page restoration.
  * - Initialize reward QR codes and PostChat AI user info.
+ * - Initialize comment section UI and scroll-into-view.
  */
-import type { TypedEventBus } from '../core/event-bus'
-import type { CoreService, MiscService } from '../core/tokens'
-import { getScrollTop, isMobile, isValidDate } from '../utils'
-
 export class MiscModule implements MiscService {
   private siteTime: ReturnType<typeof setInterval> | undefined
 
-  constructor(
-    private readonly core: CoreService,
-    private readonly bus: TypedEventBus,
-  ) {}
+  constructor(private readonly core: CoreService) {}
 
   /** Calculate and display the elapsed time since site launch. */
   getSiteTime() {
@@ -92,10 +90,10 @@ export class MiscModule implements MiscService {
       $rewards.forEach($reward => $reward.removeAttribute('data-mode'))
       return
     }
-    const _closeRewardExclude = (_id?: any) => {
+    const _closeRewardExclude = (id?: string | null) => {
       $rewards.forEach(($reward) => {
         const $rewardInput = $reward.parentElement!.querySelector<HTMLInputElement>('.reward-input')
-        if ($rewardInput && $rewardInput.id !== _id) {
+        if ($rewardInput && $rewardInput.id !== id) {
           $rewardInput.checked = false
         }
       })
@@ -105,7 +103,24 @@ export class MiscModule implements MiscService {
         _closeRewardExclude(this.getAttribute('for'))
       }, false)
     })
-    this.bus.on('fixit:scroll', () => _closeRewardExclude())
+    eventBus.on('fixit:scroll', () => _closeRewardExclude())
+  }
+
+  /** Initialize the comment section UI. */
+  initComment() {
+    if (!this.core.config.comment?.enable)
+      return
+
+    if (document.querySelector('#comments')) {
+      const $viewCommentsBtn = document.querySelector<HTMLElement>('.view-comments')!
+      $viewCommentsBtn.classList.remove('d-none')
+      $viewCommentsBtn.addEventListener('click', () => {
+        scrollIntoView('#comments')
+      }, false)
+    }
+
+    if (this.core.config.comment.expired)
+      document.querySelector('#comments')!.remove()
   }
 
   /** Initialize PostChat theme sync if configured. */
@@ -113,7 +128,7 @@ export class MiscModule implements MiscService {
     if (!window.postChatUser || !window.postChatConfig || window.postChatConfig.userMode === 'magic')
       return
     window.postChat_theme = this.core.isDark ? 'dark' : 'light'
-    this.bus.on('fixit:switch-theme', ({ detail }) => {
+    eventBus.on('fixit:switch-theme', ({ detail }) => {
       if (!detail.isChanged)
         return
       const targetFrame = document.getElementById('postChat_iframeContainer')

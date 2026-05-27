@@ -1,7 +1,5 @@
-/** Service interfaces and tokens for all FixIt modules. */
+/** Service interfaces for all FixIt modules. */
 import type { FixItConfig, MaskOverlayHandler } from '../types'
-import type { TypedEventBus } from './event-bus'
-import { token } from './container'
 
 // ─── CoreService ───
 export interface CoreService {
@@ -21,20 +19,14 @@ export interface CoreService {
 
 // ─── ThemeService ───
 export interface ThemeService {
+  setThemeMode: (mode: string, persist?: boolean) => void
   initThemeColor: () => void
   initSwitchTheme: () => void
-}
-
-// ─── SvgService ───
-export interface SvgService {
-  initSVGIcon: () => void
 }
 
 // ─── MenuService ───
 export interface MenuService {
   initMenu: () => void
-  initMenuDesktop: () => void
-  initMenuMobile: () => void
 }
 
 // ─── SearchService ───
@@ -44,11 +36,6 @@ export interface SearchService {
 
 // ─── CodeService ───
 export interface CodeService {
-  initCopyCode: (codeBlock: HTMLElement, codePreEl: HTMLElement) => void
-  initCodeExpandBtn: (codeBlock: HTMLElement) => void
-  initDownloadCode: (codeBlock: HTMLElement, codePreEl: HTMLElement) => void
-  closeCodeFullscreen: () => void
-  initFullscreenCode: (codeBlock: HTMLElement) => void
   initCodeWrapper: () => void
   initCodeTabs: () => void
   initDiagramCopyBtn: () => void
@@ -56,27 +43,10 @@ export interface CodeService {
 
 // ─── TocService ───
 export interface TocService {
-  getVisibleHeaderOffset: () => number
-  getBreadcrumbHeight: () => number
-  getTocIndexOffset: () => number
-  getTocHeadingElements: () => HTMLElement[]
-  getActiveTocHeading: ($headingElements: HTMLElement[], indexOffset?: number) => HTMLElement | null
-  getTocRoots: () => HTMLElement[]
-  getTocLinkById: ($tocRoot: HTMLElement, id: string) => HTMLAnchorElement | null
-  applyTocActiveState: ($tocRoot: HTMLElement, activeId: string) => void
-  scrollActiveTocLinkIntoView: ($tocRoot: HTMLElement, activeId: string, $scrollContainer?: HTMLElement) => void
   syncTocHeight: () => void
   syncTocActiveState: () => void
   initToc: () => void
-  initTocListener: () => void
-  initTocDialog: () => void
-  fixTocScroll: () => void
   setup: () => void
-}
-
-// ─── CommentService ───
-export interface CommentService {
-  initComment: () => void
 }
 
 // ─── EncryptionService ───
@@ -86,24 +56,20 @@ export interface EncryptionService {
 
 // ─── ContentService ───
 export interface ContentService {
-  initDetails: (target?: Element | Document) => void
-  initTooltip: () => void
+  initSVGIcon: () => void
+  initLinkGuardDialog: (target?: Element | Document) => void
+  initContent: (target?: Element | Document) => void
   setup: () => void
 }
 
 // ─── MiscService ───
 export interface MiscService {
-  getSiteTime: () => void
   initSiteTime: () => void
   initServiceWorker: () => void
   initAutoMark: () => void
   initReward: () => void
   initPostChatUser: () => void
-}
-
-// ─── LinkGuardService ───
-export interface LinkGuardService {
-  initLinkGuardDialog: (target?: Element | Document) => void
+  initComment: () => void
 }
 
 // ─── EventsService ───
@@ -113,21 +79,3 @@ export interface EventsService {
   onClickMask: () => void
   initPrint: () => void
 }
-
-// ─── Service Tokens ───
-export const TOKENS = {
-  EventBus: token<TypedEventBus>('EventBus'),
-  Core: token<CoreService>('Core'),
-  Theme: token<ThemeService>('Theme'),
-  Svg: token<SvgService>('Svg'),
-  Menu: token<MenuService>('Menu'),
-  Search: token<SearchService>('Search'),
-  Code: token<CodeService>('Code'),
-  Toc: token<TocService>('Toc'),
-  Comment: token<CommentService>('Comment'),
-  Encryption: token<EncryptionService>('Encryption'),
-  Content: token<ContentService>('Content'),
-  Misc: token<MiscService>('Misc'),
-  LinkGuard: token<LinkGuardService>('LinkGuard'),
-  Events: token<EventsService>('Events'),
-} as const

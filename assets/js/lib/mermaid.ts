@@ -28,7 +28,7 @@ import type {
   PanzoomTransform,
   TabContainerChangedEvent,
 } from '../types'
-import { TypedEventBus } from '../core/event-bus'
+import { eventBus } from '../core/event-bus'
 import { isDarkMode } from '../utils'
 
 interface MermaidPanzoomGroup {
@@ -57,7 +57,6 @@ let mermaidContainerObserver: IntersectionObserver | null = null
 let mermaidRenderLock: Promise<void> = Promise.resolve()
 let mermaidConfigKey = ''
 let mermaidIdSeq = 0
-const eventBus = new TypedEventBus()
 
 let panzoomInstances: WeakMap<SVGElement, PanzoomInstance> | null = null
 let panzoomWheelHosts: WeakSet<Element> | null = null
@@ -291,8 +290,9 @@ async function renderMermaidElement(el: Element | null, options: RenderOptions):
 
       const svgId = svgEl?.id ?? id
       if (svgId) {
-        // Hook pan/zoom binding and post-render behaviors.
-        eventBus.emit('fixit:mermaid-rendered', { svgId })
+        const renderedSvg = document.getElementById(svgId)
+        if (renderedSvg instanceof SVGElement)
+          bindMermaidPanzoom(renderedSvg)
       }
     }
     catch (error) {
@@ -675,17 +675,6 @@ function initDiagramControls(): void {
   })
 }
 
-/** Binds a listener to attach pan/zoom after Mermaid renders an SVG. */
-function bindRenderedPanzoom(): void {
-  eventBus.on('fixit:mermaid-rendered', ({ detail }) => {
-    if (!detail?.svgId)
-      return
-    const svg = document.getElementById(detail.svgId)
-    if (svg instanceof SVGElement)
-      bindMermaidPanzoom(svg)
-  })
-}
-
 /** Binds tab switch listener so Mermaid in tab panels renders after tab changes. */
 function bindTabContainerChanged(): void {
   document.addEventListener('tab-container-changed', (event: TabContainerChangedEvent) => {
@@ -798,7 +787,6 @@ function bindGlobalEventsOnce(): void {
     '%c💫 FixIt Mermaid',
     'color: #FF3670; font-weight: bold; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);',
   )
-  bindRenderedPanzoom()
   bindThemeSync()
   bindTabContainerChanged()
 

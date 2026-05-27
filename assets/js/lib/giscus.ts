@@ -5,10 +5,8 @@
  * - Setup theme synchronization via postMessage
  * - Handle giscus initialization messages
  */
-import { TypedEventBus } from '../core/event-bus'
+import { eventBus } from '../core/event-bus'
 import { isDarkMode } from '../utils'
-
-const eventBus = new TypedEventBus()
 
 document.addEventListener('DOMContentLoaded', () => {
   if (!window.config.comment?.giscus)

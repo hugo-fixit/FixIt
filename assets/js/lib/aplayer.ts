@@ -6,9 +6,7 @@
  * - Re-run initialization after decrypted or partially decrypted content is revealed.
  * - Keep behavior idempotent through `data-processed` markers.
  */
-import { TypedEventBus } from '../core/event-bus'
-
-const eventBus = new TypedEventBus()
+import { eventBus } from '../core/event-bus'
 
 function initAPlayer() {
   const aplayers = document.querySelectorAll<HTMLElement>('.shortcode-aplayer')

@@ -1,3 +1,5 @@
+import type { CoreService, MenuService } from '../core/tokens'
+
 /**
  * Menu module — desktop dropdown and mobile drawer navigation.
  *
@@ -6,8 +8,6 @@
  * - Initialize mobile header drawer menu open/close/toggle.
  * - Sync menu state with mask overlay.
  */
-import type { CoreService, MenuService } from '../core/tokens'
-
 export class MenuModule implements MenuService {
   constructor(private readonly core: CoreService) {}
 

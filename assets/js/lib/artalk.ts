@@ -7,11 +7,9 @@
  * - Handle theme switching
  * - Setup lightGallery for comment images when enabled
  */
-import { TypedEventBus } from '../core/event-bus'
+import { eventBus } from '../core/event-bus'
 import { isDarkMode } from '../utils'
 import { initCommentLightGallery } from '../utils/comment'
-
-const eventBus = new TypedEventBus()
 
 document.addEventListener('DOMContentLoaded', () => {
   if (!window.config.comment?.artalk || !window.Artalk)

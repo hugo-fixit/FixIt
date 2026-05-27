@@ -1,103 +1,48 @@
-/**
- * FixIt theme entry point — bootstraps service container and initializes all modules.
- *
- * Responsibilities:
- * - Register and resolve all service modules via the DI container.
- * - Build the `window.fixit` backward-compatibility facade.
- * - Run the init sequence on `DOMContentLoaded` (content, theme, menu, search, etc.).
- */
-import { ServiceContainer } from './core/container'
-import { TypedEventBus } from './core/event-bus'
-import { TOKENS } from './core/tokens'
+import { eventBus } from './core/event-bus'
 import { CodeModule } from './modules/code'
-import { CommentModule } from './modules/comment'
 import { ContentModule } from './modules/content'
 import { CoreModule } from './modules/core'
 import { EncryptionModule } from './modules/encryption'
 import { EventsModule } from './modules/events'
-import { LinkGuardModule } from './modules/link-guard'
 import { MenuModule } from './modules/menu'
 import { MiscModule } from './modules/misc'
 import { SearchModule } from './modules/search'
-import { SvgModule } from './modules/svg'
 import { ThemeModule } from './modules/theme'
 import { TocModule } from './modules/toc'
 
-/** Extract public methods from a service instance (excluding constructor). */
-function publicAPI(service: Record<string, any>): Record<string, any> {
-  const api: Record<string, any> = {}
-  for (const key of Object.getOwnPropertyNames(Object.getPrototypeOf(service))) {
-    if (key !== 'constructor' && typeof service[key] === 'function') {
-      api[key] = service[key].bind(service)
-    }
-  }
-  return api
-}
-
+/**
+ * FixIt theme entry point — initializes all modules and the window.fixit facade.
+ *
+ * Responsibilities:
+ * - Instantiate all service modules with direct constructor calls.
+ * - Build the `window.fixit` facade.
+ * - Run the init sequence on `DOMContentLoaded` (content, theme, menu, search, etc.).
+ */
 function bootstrap(): void {
-  const bus = new TypedEventBus()
-  const container = new ServiceContainer()
+  const core = new CoreModule()
+  const theme = new ThemeModule(core)
+  const code = new CodeModule()
+  const toc = new TocModule()
+  const menu = new MenuModule(core)
+  const search = new SearchModule(core)
+  const enc = new EncryptionModule(core)
+  const misc = new MiscModule(core)
+  const content = new ContentModule(core, code)
+  const events = new EventsModule(core, toc, search, code)
 
-  // Register all services (order does not matter — container resolves lazily)
-  container
-    .register(TOKENS.EventBus, () => bus)
-    .register(TOKENS.Core, () => new CoreModule())
-    .register(TOKENS.Theme, c => new ThemeModule(c.resolve(TOKENS.Core), bus))
-    .register(TOKENS.Svg, () => new SvgModule())
-    .register(TOKENS.Menu, c => new MenuModule(c.resolve(TOKENS.Core)))
-    .register(TOKENS.Search, c => new SearchModule(c.resolve(TOKENS.Core)))
-    .register(TOKENS.Code, () => new CodeModule(bus))
-    .register(TOKENS.Toc, () => new TocModule())
-    .register(TOKENS.Comment, c => new CommentModule(c.resolve(TOKENS.Core)))
-    .register(TOKENS.Encryption, c => new EncryptionModule(c.resolve(TOKENS.Core), bus))
-    .register(TOKENS.Misc, c => new MiscModule(c.resolve(TOKENS.Core), bus))
-    .register(TOKENS.LinkGuard, () => new LinkGuardModule())
-    .register(TOKENS.Content, c => new ContentModule(
-      c.resolve(TOKENS.Core),
-      c.resolve(TOKENS.Code),
-      c.resolve(TOKENS.LinkGuard),
-      bus,
-    ))
-    .register(TOKENS.Events, c => new EventsModule(
-      c.resolve(TOKENS.Core),
-      c.resolve(TOKENS.Toc),
-      c.resolve(TOKENS.Search),
-      c.resolve(TOKENS.Code),
-      bus,
-    ))
-
-  // Resolve all services
-  const core = container.resolve(TOKENS.Core)
-  const theme = container.resolve(TOKENS.Theme)
-  const svg = container.resolve(TOKENS.Svg)
-  const menu = container.resolve(TOKENS.Menu)
-  const search = container.resolve(TOKENS.Search)
-  const code = container.resolve(TOKENS.Code)
-  const toc = container.resolve(TOKENS.Toc)
-  const comment = container.resolve(TOKENS.Comment)
-  const enc = container.resolve(TOKENS.Encryption)
-  const content = container.resolve(TOKENS.Content)
-  const misc = container.resolve(TOKENS.Misc)
-  const linkGuard = container.resolve(TOKENS.LinkGuard)
-  const events = container.resolve(TOKENS.Events)
-
-  // Build window.fixit backward-compatibility facade
+  // Build window.fixit facade
   window.fixit = {
     get config() { return core.config },
     get themeMode() { return core.themeMode },
     get isDark() { return core.isDark },
-    ...publicAPI(theme),
-    ...publicAPI(svg),
-    ...publicAPI(menu),
-    ...publicAPI(search),
-    ...publicAPI(code),
-    ...publicAPI(toc),
-    ...publicAPI(comment),
-    ...publicAPI(enc),
-    ...publicAPI(content),
-    ...publicAPI(misc),
-    ...publicAPI(linkGuard),
-    ...publicAPI(events),
+    get newScrollTop() { return core.newScrollTop },
+    get oldScrollTop() { return core.oldScrollTop },
+    setThemeMode: (mode, persist) => theme.setThemeMode(mode, persist),
+    registerMaskOverlay: (name, handlers) => core.registerMaskOverlay(name, handlers),
+    toggleMaskOverlay: name => core.toggleMaskOverlay(name),
+    closeMaskOverlay: (name, skipSync) => core.closeMaskOverlay(name, skipSync),
+    initContent: target => content.initContent(target),
+    eventBus,
   }
 
   function init() {
@@ -106,7 +51,7 @@ function bootstrap(): void {
       content.setup()
       enc.initFixItDecryptor()
       theme.initThemeColor()
-      svg.initSVGIcon()
+      content.initSVGIcon()
       menu.initMenu()
       theme.initSwitchTheme()
       search.initSearch()
@@ -115,7 +60,7 @@ function bootstrap(): void {
       misc.initAutoMark()
       misc.initReward()
       misc.initPostChatUser()
-      comment.initComment()
+      misc.initComment()
       events.onScroll()
       events.onResize()
       events.onClickMask()

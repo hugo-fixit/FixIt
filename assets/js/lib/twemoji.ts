@@ -5,9 +5,7 @@
  * - Parse emoji shortcodes into Twemoji images when enabled.
  * - Re-run parsing after decrypted or partially decrypted content is revealed.
  */
-import { TypedEventBus } from '../core/event-bus'
-
-const eventBus = new TypedEventBus()
+import { eventBus } from '../core/event-bus'
 
 function initTwemoji(target: Element | Document = document) {
   if (window.config.twemoji && window.twemoji)

@@ -5,10 +5,8 @@
  * - Initialize Waline with configured settings
  * - Handle pageview counting for expired comments
  */
-import { TypedEventBus } from '../core/event-bus'
+import { eventBus } from '../core/event-bus'
 import { getThemeMode } from '../utils'
-
-const eventBus = new TypedEventBus()
 
 document.addEventListener('DOMContentLoaded', () => {
   if (!window.config.comment?.waline || !window.Waline)

@@ -7,10 +7,8 @@
  * - Resize charts on window resize events.
  * - Re-run initialization after decrypted content is revealed.
  */
-import { TypedEventBus } from '../core/event-bus'
+import { eventBus } from '../core/event-bus'
 import { getStagingDOM, isDarkMode, isObjectLiteral } from '../utils'
-
-const eventBus = new TypedEventBus()
 
 let echartsArr: any[] = []
 

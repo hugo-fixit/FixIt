@@ -1,0 +1,31 @@
+/**
+ * Custom TypeScript for FixIt site.
+ *
+ * Rename this file to custom.ts to activate it.
+ * Access the FixIt public API via `window.fixit` (type: FixItPublicAPI).
+ * @see https://fixit.lruihao.cn
+ */
+
+import type { FixItPublicAPI } from './types/ui'
+
+declare const fixit: FixItPublicAPI
+
+class CustomScript {
+  constructor() {
+    this.init()
+  }
+
+  init() {
+    console.log('hello from custom.ts!')
+    document.addEventListener('fixit:switch-theme', ({ detail }) => {
+      console.log('Theme switched:', detail.mode, 'isDark:', detail.isDark, 'isChanged:', detail.isChanged)
+    })
+    console.log('FixIt API:', fixit)
+    console.log('FixIt config:', fixit.config)
+    return this
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  void new CustomScript()
+})

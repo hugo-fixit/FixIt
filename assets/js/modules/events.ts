@@ -1,3 +1,7 @@
+import type { CodeService, CoreService, EventsService, SearchService, TocService } from '../core/tokens'
+import { eventBus } from '../core/event-bus'
+import { animateCSS, getScrollTop, isMobile, scrollIntoView } from '../utils'
+
 /**
  * Events module — scroll, resize, mask click, and print event handling.
  *
@@ -7,10 +11,6 @@
  * - Mask click handler to close search and menu drawers.
  * - Print preparation handler.
  */
-import type { TypedEventBus } from '../core/event-bus'
-import type { CodeService, CoreService, EventsService, SearchService, TocService } from '../core/tokens'
-import { animateCSS, getScrollTop, isMobile, scrollIntoView } from '../utils'
-
 export class EventsModule implements EventsService {
   #resizeTimeout: number | null = null
 
@@ -19,7 +19,6 @@ export class EventsModule implements EventsService {
     private readonly toc: TocService,
     private readonly search: SearchService,
     private readonly code: CodeService,
-    private readonly bus: TypedEventBus,
   ) {}
 
   /** Bind scroll listener: auto-hide headers, reading progress, back-to-top, and TOC sync. */
@@ -86,7 +85,7 @@ export class EventsModule implements EventsService {
           $backToTop.querySelector<SVGCircleElement>('circle.progress')!.style.strokeDashoffset = String(dashoffset.toFixed(2))
         }
       }
-      this.bus.emit('fixit:scroll')
+      eventBus.emit('fixit:scroll')
       this.toc.syncTocHeight()
       this.toc.syncTocActiveState()
       this.core.oldScrollTop = this.core.newScrollTop
@@ -100,7 +99,7 @@ export class EventsModule implements EventsService {
       if (!this.#resizeTimeout) {
         this.#resizeTimeout = window.setTimeout(() => {
           this.#resizeTimeout = null
-          this.bus.emit('fixit:resize')
+          eventBus.emit('fixit:resize')
           this.toc.initToc()
           this.search.initSearch()
           this.toc.syncTocHeight()
@@ -164,12 +163,10 @@ export class EventsModule implements EventsService {
       if (printConfig.expandDetails) {
         $content.querySelectorAll('details').forEach(($el: Element) => $el.setAttribute('open', ''))
       }
-      this.bus.emit('fixit:before-print')
     }, false)
 
     window.addEventListener('afterprint', () => {
       this.code.initCodeTabs()
-      this.bus.emit('fixit:after-print')
     }, false)
   }
 }

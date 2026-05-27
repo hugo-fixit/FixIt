@@ -7,9 +7,7 @@
  * - Sync tree state across tab switches, print preparation, and decrypted content updates.
  */
 import type { TabContainerChangedEvent } from '../types'
-import { TypedEventBus } from '../core/event-bus'
-
-const eventBus = new TypedEventBus()
+import { eventBus } from '../core/event-bus'
 
 /**
  * Initialize file tree toggle handlers under the given root.
@@ -84,11 +82,11 @@ function bindEvents() {
       updateLineHeight(panel)
   }, false)
 
-  eventBus.on('fixit:before-print', () => {
+  window.addEventListener('beforeprint', () => {
     if (window.config.print?.expandFileTree) {
       expandAll(document.getElementById('content')!)
     }
-  })
+  }, false)
 
   eventBus.on('fixit:decrypted', () => {
     initFileTree()

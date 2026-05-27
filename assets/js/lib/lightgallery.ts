@@ -5,9 +5,7 @@
  * - Initialize lightGallery for page image zoom and thumbnails.
  * - Re-initialize on decrypted or partially decrypted content.
  */
-import { TypedEventBus } from '../core/event-bus'
-
-const eventBus = new TypedEventBus()
+import { eventBus } from '../core/event-bus'
 
 let lg: { destroy: (removeSubModules?: boolean) => void } | undefined
 
