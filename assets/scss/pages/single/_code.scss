@@ -623,10 +623,9 @@
             background-color: fi-var(global-border-color-weight);
           }
 
-          // hide dividers on both sides of the active tab
+          // lighten dividers on both sides of the active tab
           &.active::after,
           &:has(+ .tab-item.active)::after {
-            // display: none;
             background-color: fi-var(global-border-color);
           }
 
