@@ -1,7 +1,8 @@
 name: Update libraries from npm
 on:
   schedule:
-    - cron: '0 0  * * 0'
+    # Run at 00:00, on day 1 of the month
+    - cron: '0 0 1 * *'
   workflow_dispatch:
 permissions:
   contents: write
@@ -47,3 +48,5 @@ jobs:
           base: main
           labels: dependencies
           reviewers: Lruihao
+          author: Cell[bot] <lrhx@users.noreply.github.com>
+          committer: Cell[bot] <lrhx@users.noreply.github.com>
