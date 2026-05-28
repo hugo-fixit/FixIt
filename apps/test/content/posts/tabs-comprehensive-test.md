@@ -115,7 +115,7 @@ Nested tab C with a table:
 {{% tab title="Outer Tab 3" %}}
 This tab contains vertical nested tabs:
 
-{{< tabs type="card" vertical=true >}}
+{{< tabs type="card" placement="left" >}}
 
 {{% tab title="Vertical A" %}}
 Content for vertical nested tab A.

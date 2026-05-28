@@ -76,7 +76,6 @@ tab-container {
   &[placement='left'],
   &[placement='right'] {
     max-width: 100%;
-    overflow: hidden;
 
     &::part(tablist-wrapper) {
       min-height: 100px;
