@@ -6,19 +6,27 @@ Make sure that you follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) while contrib
 
 Before you start contributing, make sure you have the following tools installed:
 
-- **Node.js** (>= 20.0.0) - Required for package management and build tools
 - **Hugo Extended** (>= 0.158.0) - The static site generator
-- **pnpm** - Package manager (recommended)
+- **Dart Sass** - Required for SCSS compilation
+- **Node.js** (>= 22) - Required for package management and build tools
+- **pnpm** - Package manager
 
 You can check your installed versions:
 
 ```bash
-node --version
 hugo version
+sass --version
+node --version
 pnpm --version
 ```
 
-## How to contribute to this project
+Check the Hugo environment information:
+
+```bash
+hugo env
+```
+
+## How to Contribute
 
 First, fork this repository by clicking the fork button.
 
@@ -36,9 +44,16 @@ pnpm install
 
 And now you are ready to go!
 
-Here are some useful commands for development:
+### Workflow
 
-### Development
+1. **Make your changes** in the appropriate directories
+2. **Test locally** using `pnpm dev:demo` or `pnpm dev:test`
+3. **Check code quality** with `pnpm lint` and `pnpm typecheck`
+4. **Check different environments** with production builds (`pnpm build:demo` or `pnpm build:test`)
+5. **Verify documentation** changes with `pnpm dev:docs` (if applicable)
+6. **Commit your changes** following the commit message format below
+
+### Commands
 
 ```bash
 # Start demo site development server
@@ -47,6 +62,21 @@ pnpm dev:demo
 pnpm dev:test
 # Start documentation development server (requires fixit-docs as sibling directory)
 pnpm dev:docs
+
+# Build demo site
+pnpm build:demo
+# Build test site
+pnpm build:test
+# Build all sites
+pnpm build
+
+# Lint with ESLint
+pnpm lint
+# TypeScript type checking
+pnpm typecheck
+
+# Preview the built site locally (requires build first)
+pnpm preview
 ```
 
 > [!TIP]
@@ -55,23 +85,17 @@ pnpm dev:docs
 > - Add `-e debug` to enable debug mode (if applicable), e.g. `pnpm dev:test -e debug`.
 > - For documentation-related theme changes, it is recommended to clone both `FixIt` and `fixit-docs` as sibling directories.
 
-### Building
+### Pull Request
 
-```bash
-# Build demo site
-pnpm build:demo
-# Build test site
-pnpm build:test
-# Build all sites
-pnpm build
-```
+- Create a feature branch from `main`
+- Make your changes with clear, focused commits
+- Test your changes thoroughly
+- Update documentation if needed
+- Submit a pull request with a clear description
 
-### Preview
+Finally, create a new pull request at <https://github.com/hugo-fixit/FixIt/pulls> to submit your contribution.
 
-```bash
-# Preview the built site locally (requires build first)
-pnpm preview
-```
+---
 
 ## Project Structure
 
@@ -84,38 +108,23 @@ FixIt/
 │   └── test/           # Test site
 ├── archetypes/         # Content templates
 ├── assets/             # Theme assets
-│   ├── scss/           # SCSS stylesheets
-│   ├── js/             # JavaScript files
 │   ├── images/         # Image assets
-│   └── lib/            # Third-party libraries
+│   ├── js/             # JavaScript files
+│   ├── lib/            # Third-party libraries
+│   └── scss/           # SCSS stylesheets
 ├── i18n/               # Internationalization files
 ├── layouts/            # Hugo template files
 │   ├── _markup/        # Hugo render hooks
 │   ├── _partials/      # Reusable template components
 │   └── _shortcodes/    # Custom shortcodes
-├── packages/           # Theme-related packages
+├── packages/           # Theme-related packages (pnpm workspaces)
+│   ├── shared/         # Shared utilities
+│   ├── versioning/     # Version management (pre-commit)
+│   └── integration/    # Post-build site merging
 ├── static/             # Static files
 ├── hugo.toml           # Default theme configuration
 └── package.json        # npm scripts and dependencies
 ```
-
-## Development Workflow
-
-1. **Make your changes** in the appropriate directories
-2. **Test locally** using `pnpm dev` or `pnpm test`
-3. **Check different environments** with production builds
-4. **Verify documentation** changes with `pnpm dev:docs` (if applicable)
-5. **Commit your changes** following the commit message format below
-
-## Pull Request Guidelines
-
-- Create a feature branch from `main`
-- Make your changes with clear, focused commits
-- Test your changes thoroughly
-- Update documentation if needed
-- Submit a pull request with a clear description
-
-Finally, create a new pull request at <https://github.com/hugo-fixit/FixIt/pulls> to submit your contribution 🎉
 
 ## Git Commit Guidelines
 
