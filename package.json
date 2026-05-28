@@ -4,7 +4,7 @@
   "version": "0.4.5",
   "nextVersion": "1.0.0",
   "private": true,
-  "packageManager": "pnpm@11.1.0",
+  "packageManager": "pnpm@11.4.0",
   "description": "Hugo FixIt core theme component source files",
   "author": {
     "name": "Lruihao",
@@ -39,7 +39,6 @@
     "lint": "eslint --cache .",
     "typecheck": "tsc --noEmit",
     "version": "pnpm -F versioning start prod",
-    "postversion": "git push && git push --tags",
     "changelog": "auto-changelog-plus --starting-date 2021-12-18",
     "prepare": "simple-git-hooks"
   },
