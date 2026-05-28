@@ -33,6 +33,10 @@
   {{- if (gt $latest $version) | and $devOpts.c4u -}}
     {{- warnf "FixIt %v (⬆️ %v)\n%v`git submodule update --remote --merge`\n\n" $version $latest (T "init.quicklyUpgrade") -}}
   {{- end -}}
+  {{- /* [todo] remove this temporary warning after v1.0.0 release */ -}}
+  {{- if hasPrefix $version "v1." -}}
+    {{- warnidf "warning-v1-dev" "FixIt %v\n⚠️ You are using a v1.0.0 development version, which may contain breaking changes.\nIt is recommended to use the latest stable release v0.4.5: https://github.com/hugo-fixit/FixIt/releases/tag/v0.4.5\n" $version -}}
+  {{- end -}}
 {{- end -}}
 
 {{- hugo.Store.Set "latest" $latest -}}

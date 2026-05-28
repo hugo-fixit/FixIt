@@ -55,8 +55,11 @@ export function updateVersion(type: 'dev' | 'prod') {
   const shortHash: string = execSync('git rev-parse --short HEAD').toString().trim()
   // Build the development version v{major}.{minor}.{patch+1}-{timestamp}-{shortHash}
   // e.g. v0.3.21-20250702061540-abcdefg
+  // If `nextVersion` is set in package.json, use it as the base instead of auto-incrementing patch.
   const timestamp: string = new Date().toISOString().replace(ISO_TIMESTAMP_CLEAN_RE, '').slice(0, -4)
-  const devVersion: string = `${version.replace(VERSION_PATCH_RE, (_versionPatchMatch, part) => (Number.parseInt(part, 10) + 1).toString())}-${timestamp}-${shortHash}`
+  const nextVersion: string | undefined = packageJson.nextVersion
+  const devBaseVersion: string = nextVersion ?? version.replace(VERSION_PATCH_RE, (_versionPatchMatch, part) => (Number.parseInt(part, 10) + 1).toString())
+  const devVersion: string = `${devBaseVersion}-${timestamp}-${shortHash}`
   const initHtml: string = fs.readFileSync(initHtmlPath, 'utf8')
   const latestVersion: string = type === 'prod' ? version : devVersion
   const versionMatch = initHtml.match(VERSION_RE)
@@ -74,6 +77,12 @@ export function updateVersion(type: 'dev' | 'prod') {
 
   // Update the version number in layouts/_partials/init/index.html
   fs.writeFileSync(initHtmlPath, newInitHtml)
+  // In prod mode, remove the `nextVersion` field from package.json if present
+  if (type === 'prod' && nextVersion) {
+    delete packageJson.nextVersion
+    fs.writeFileSync(packageJsonPath, `${JSON.stringify(packageJson, null, 2)}\n`)
+    console.log('Removed nextVersion field from package.json.')
+  }
   // Add the updated files to the git stage
   const toStageFiles: string[] = [
     'layouts/_partials/init/index.html',
