@@ -43,9 +43,9 @@ libFiles:
   instantPage: instant.page@5.2.0/instantpage.js
   # json-viewer-element@1.0.4 https://github.com/Lruihao/json-viewer-element
   jsonViewerElementJS: json-viewer-element@1.0.4/dist/json-viewer-element.umd.js
-  # katex@0.16.47 https://github.com/KaTeX/KaTeX
-  katexCopyTexJS: katex@0.16.47/dist/contrib/copy-tex.min.js
-  katexCSS: katex@0.16.47/dist/katex.min.css
+  # katex@0.17.0 https://github.com/KaTeX/KaTeX
+  katexCopyTexJS: katex@0.17.0/dist/contrib/copy-tex.min.js
+  katexCSS: katex@0.17.0/dist/katex.min.css
   # lightgallery@2.9.0 https://github.com/sachinchoolur/lightgallery
   lightgalleryCSS: lightgallery@2.9.0/css/lightgallery-bundle.min.css
   lightgalleryJS: lightgallery@2.9.0/lightgallery.min.js
