@@ -2,7 +2,7 @@
 # Traduzioni per l'italiano
 # https://gohugo.io/content-management/multilingual/#translation-of-strings
 
-# === init ===
+# === Init ===
 [init]
 hugoVersionError = "La versione di Hugo è troppo bassa.\n\nLa versione attuale di Hugo è {{ .Current }}, la versione minima supportata per FixIt è {{ .Minimal }}.\n\nSe stai eseguendo Hugo sul tuo computer, consulta https://gohugo.io/getting-started/installing/#upgrade-hugo per la guida all'aggiornamento.\n\nSe stai distribuendo su una piattaforma di terze parti, configura la versione di Hugo di conseguenza."
 hugoExtendedWarn = "La versione Hugo Extended è necessaria per il supporto SCSS."
@@ -11,14 +11,14 @@ compatibilityError = "Errore di compatibilità ({{ .From }} -> {{ .To }}):\nHai 
 devVersionWarn = "Stai utilizzando una versione di sviluppo di FixIt. Si prega di considerare l'utilizzo di una versione stabile.\nVedi https://github.com/hugo-fixit/FixIt/releases"
 devEnvWarn = "L'ambiente attuale è \"sviluppo\". Il \"sistema di commenti\", \"PWA\", \"CDN\", \"impronta digitale\" e \"analisi\" saranno disabilitati."
 quicklyUpgrade = "Aggiornamento rapido usa il comando: "
-# === init ===
+# === Init ===
 
-# === baseof ===
+# === Base Layout ===
 [baseof]
 backToTop = "Torna all'inizio"
 viewComments = "Vedi commenti"
 noscript = "Questo sito funziona meglio con JavaScript abilitato."
-# === baseof ===
+# === Base Layout ===
 
 # === Taxonomy ===
 [archives]
@@ -67,29 +67,29 @@ other = "Totale {{ .Count }} articoli"
 more = "Più"
 # === Pagination ===
 
-# === partials/header.html ===
+# === Header ===
 [header]
 selectLanguage = "Scegliere la lingua"
 noMoretTranslations = "Non ci sono altre traduzioni"
 switchTheme = "Cambiare il tema"
-# === partials/header.html ===
+# === Header ===
 
-# === partials/footer.html ===
+# === Footer ===
 [footer]
 poweredBySome = "Realizzato da {{ .Hugo }} | Tema - {{ .Theme }}"
 siteUV = "Visitatori totali"
 sitePV = "Visite totali"
 siteRunning = "Sito in esecuzione ..."
-# === partials/footer.html ===
+# === Footer ===
 
-# === partials/comment.html ===
+# === Comment ===
 [comment]
 valineLang = "en" # Valine non supporta l'italiano
 valinePlaceholder = "Il tuo commento ..."
 facebookLanguageCode = "it"
-# === partials/comment.html ===
+# === Comment ===
 
-# === partials/assets.html ===
+# === Assets ===
 [assets]
 search = "Cerca"
 searchPlaceholder = "Cerca il titolo o il contenuto dell'articolo ..."
@@ -111,14 +111,14 @@ exitFullscreen = "Esci da schermo intero"
 cookieconsentMessage = "Questo sito Web utilizza i Cookies per migliorare la tua esperienza."
 cookieconsentDismiss = "Essere d'accordo"
 cookieconsentLink = "Per saperne di più"
-# === partials/assets.html ===
+# === Assets ===
 
-# === partials/plugin/share.html ===
+# === Share ===
 [shareOn]
 other = "Condividi su"
-# === partials/plugin/share.html ===
+# === Share ===
 
-# === posts/single.html ===
+# === Single Post ===
 [single]
 contents = "Contenuti"
 pin = "Fissa in alto"
@@ -166,41 +166,41 @@ wechatpay = "WeChat Pay"
 alipay = "Alipay"
 paypal = "PayPal"
 bitcoin = "Bitcoin"
-# === posts/single.html ===
+# === Single Post ===
 
-# === 404.html ===
+# === Error Pages ===
 [pageNotFound]
 other = "Pagina non trovata"
 
 [pageNotFoundText]
 other = "Mi spiace, la pagina cercata non esiste."
-# === 404.html ===
+# === Error Pages ===
 
-# === offline ===
+# === Offline ===
 [offlineTitle]
 other = "disconnesso"
 
 [offlineText]
 other = "Non sei connesso a Internet, saranno disponibili solo le pagine memorizzate nella cache."
-# === offline ===
+# === Offline ===
 
-# === link redirection ===
+# === Link Redirection ===
 [linkRedirection]
 title = "Avviso di reindirizzamento"
 message = "Stai per lasciare {{ .Title }}. Presta attenzione alla sicurezza del tuo account e dei tuoi beni."
 confirm = "Continua a visitare"
-# === link redirection ===
+# === Link Redirection ===
 
-# === GitHub Alert ===
+# === Alert ===
 [alert]
 note = "Nota"
 tip = "Suggerimento"
 important = "Importante"
 warning = "Avvertimento"
 caution = "Attenzione"
-# === GitHub Alert ===
+# === Alert ===
 
-# === Task lists ===
+# === Task List ===
 [taskList]
 x = "Verificato"
 " " = "Non verificato"
@@ -211,9 +211,9 @@ x = "Verificato"
 "!" = "Importante"
 "!x" = "Importante Verificato"
 "?" = "Domanda"
-# === Task lists ===
+# === Task List ===
 
-# === shortcodes/admonition.html ===
+# === Admonition ===
 [admonition]
 note = "Note"
 abstract = "Sommario"
@@ -228,26 +228,26 @@ danger = "Pericolo"
 bug = "Bug"
 example = "Esempio"
 quote = "Citazione"
-# === shortcodes/admonition.html ===
+# === Admonition ===
 
-# === shortcodes/version.html ===
+# === Version ===
 [version]
 new = "NUOVO"
 changed = "CAMBIATO"
 deleted = "CANCELLATO"
 deprecated = "DEPRECATO"
-# === shortcodes/version.html ===
+# === Version ===
 
-# === diagram actions ===
+# === Diagram ===
 [diagram]
 zoomIn = "Zoom avanti"
 zoomOut = "Zoom indietro"
 reset = "Reimposta"
 download = "Scarica SVG"
-# === diagram actions ===
+# === Diagram ===
 
-# === tabs related ===
+# === Tabs ===
 [tabs]
 diagram = "Diagramma"
 code = "Codice"
-# === tabs related ===
+# === Tabs ===

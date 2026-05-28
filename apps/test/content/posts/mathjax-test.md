@@ -142,3 +142,9 @@ $$
 \bbox[border: solid .4pt magenta, pink]{x^2=4}
 $$
 {{< /auto-dark >}}
+
+### In Encrypted Content
+
+{{% fixit-encryptor "1212" %}}
+$c = \pm\sqrt{a^2 + b^2}$ and \(f(x)=\int_{-\infty}^{\infty} \hat{f}(\xi) e^{2 \pi i \xi x} d \xi\)
+{{% /fixit-encryptor %}}

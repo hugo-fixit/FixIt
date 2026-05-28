@@ -19,7 +19,7 @@
   {{- $audio := trim .Inner " \r\n" -}}
   {{- $audio = replace $audio "}" "}," | printf "[%s]" -}}
   {{- $audio = replace $audio ",]" "]" -}}
-  <div class="aplayer-shortcode" data-audio="{{ $audio }}" data-options="{{ $options }}"></div>
+  <div class="shortcode-aplayer" data-audio="{{ $audio }}" data-options="{{ $options }}"></div>
   {{- .Page.Store.Set "hasAplayer" true -}}
 {{- else -}}
   {{- errorf "Only named params is supported: %s" .Position -}}

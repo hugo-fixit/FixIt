@@ -6,6 +6,18 @@
 title = "FixIt TEST"
 baseURL = "https://demo.fixit.lruihao.cn/test/"
 ignoreLogs = [ "warning-file-tree" ]
+defaultContentLanguage = "en"
+
+# test for multilingual support
+# [languages]
+
+# [languages.en]
+# languageCode = "en"
+# languageName = "English"
+
+# [languages.zh-cn]
+# languageCode = "zh-CN"
+# languageName = "简体中文"
 
 [permalinks]
 

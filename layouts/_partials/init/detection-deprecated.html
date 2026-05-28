@@ -19,7 +19,7 @@
 {{- end -}}
 
 {{- with resources.Get "js/_custom.js" -}}
-  {{- $warns = $warns | append "The file `assets/js/_custom.js` is deprecated. Please move your custom scripts to `assets/js/custom.js`." -}}
+  {{- $warns = $warns | append "The file `assets/js/_custom.js` is deprecated. Please move your custom scripts to `assets/js/custom.ts` or `assets/js/custom.js`." -}}
 {{- end -}}
 
 {{- if len $warns -}}

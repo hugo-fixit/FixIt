@@ -4,7 +4,7 @@
 @mixin mermaid-base {
   position: relative;
   box-sizing: border-box;
-  margin: 0;
+  margin: 0 !important;
   overflow: hidden !important;
 
   &[data-processed] {
@@ -70,7 +70,7 @@
   }
 
   .diagram-container {
-    margin-block: 0;
+    margin-block: 0 !important;
   }
 
   &.is-fullscreen {

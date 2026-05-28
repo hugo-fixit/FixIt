@@ -510,8 +510,15 @@
       }
     }
 
-    json-viewer[boxed] + json-viewer[boxed] {
-      margin-top: 0.5rem;
+    json-viewer {
+      &[boxed] + json-viewer[boxed] {
+        margin-top: 0.5rem;
+      }
+
+      @include dark-mode {
+        --jv-bg-color: #{fi-var(code-block-background-color)};
+        --jv-border-color: #{fi-var(global-border-color)};
+      }
     }
   }
 }

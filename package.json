@@ -36,6 +36,7 @@
     "build": "concurrently 'pnpm build:demo' 'pnpm build:test' && pnpm -F integration start",
     "preview": "serve public",
     "lint": "eslint --cache .",
+    "typecheck": "tsc --noEmit",
     "version": "pnpm -F versioning start prod",
     "postversion": "git push && git push --tags",
     "changelog": "auto-changelog-plus --starting-date 2021-12-18",
@@ -54,7 +55,7 @@
     "typescript": "^6.0.3"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm -F versioning start dev && pnpm lint-staged"
+    "pre-commit": "pnpm -F versioning start dev && pnpm typecheck && pnpm lint-staged"
   },
   "lint-staged": {
     "*": "eslint --fix"

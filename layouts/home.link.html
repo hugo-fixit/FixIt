@@ -22,9 +22,6 @@
 
   {{- /* link redirection page script */ -}}
   {{- $fingerprint := .Site.Store.Get "fingerprint" -}}
-  {{- $options := dict "targetPath" "js/pages/link.min.js" "minify" hugo.IsProduction -}}
-  {{- if not hugo.IsProduction -}}
-    {{- $options = dict "sourceMap" "external" | merge $options -}}
-  {{- end -}}
-  {{- dict "Source" (resources.Get "js/pages/link.js") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- $options := dict "targetPath" "js/pages/link.js" -}}
+  {{- dict "Source" (resources.Get "js/pages/link.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
