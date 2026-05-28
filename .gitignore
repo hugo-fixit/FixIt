@@ -1,11 +1,9 @@
-# Hugo default output directory
-public/
-resources/
-
 # Hugo
 .hugo_build.lock
 jsconfig.json
 .hugo_cache
+public/
+resources/
 
 # NPM
 node_modules/
@@ -22,6 +20,17 @@ node_modules/
 # Claude
 .claude/
 
+# Vercel
+.vercel/
+
+# Environment Variables
+.env*.local
+
+# Documentation
+docs/
+CHANGELOG.md
+TODO.md
+
 # OS Files
 ## Windows
 Thumbs.db
@@ -34,8 +43,3 @@ $RECYCLE.BIN/
 
 ## Linux
 .directory
-
-CHANGELOG.md
-docs
-.vercel
-.env*.local
