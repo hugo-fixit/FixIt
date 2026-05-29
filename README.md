@@ -196,7 +196,7 @@ FixIt supports multilingual and i18n. For more information, see the [Content Man
 
 ## Theme Components
 
-The FixIt theme balances **simplicity** and **extensibility** with extra [Hugo theme components](https://fixit.lruihao.cn/ecosystem/#-components) for customization.
+To balance **simplicity** and **extensibility**, FixIt theme provides extra [Hugo theme components](https://fixit.lruihao.cn/ecosystem/#-components) for customization.
 
 <details>
 <summary>Click to view.</summary>
@@ -238,19 +238,19 @@ The FixIt theme balances **simplicity** and **extensibility** with extra [Hugo t
 
 All feedback is welcome! Head over to the [discussions][discussions], [Pull requests][pulls] and [issues][issues] tracker.
 
-| Official Community          | Description                     |
-| :-------------------------- | :------------------------------ |
-| [Discussions][discussions]  | GitHub discussion forum         |
-| [FixIt WeChat group][wx-mp] | Follow and reply "FixIt" to get |
-| [FixIt QQ group][qq-group]  | QQ group: `814031017`           |
-| [Hugo FixIt Planet][zsxq]   | Paid knowledge Planet           |
+| Official Community           | Description                     |
+| :--------------------------- | :------------------------------ |
+| [Discussions][discussions]   | GitHub discussion forum         |
+| [FixIt WeChat group][wx-mp]  | Follow and reply "FixIt" to get |
+| [FixIt QQ group][qq-group]   | QQ group: `814031017`           |
+| [FixIt Dev group][dev-group] | QQ group: `770835493`           |
 
 [discussions]: https://github.com/hugo-fixit/FixIt/discussions
 [pulls]: https://github.com/hugo-fixit/FixIt/pulls
 [issues]: https://github.com/hugo-fixit/FixIt/issues
-[qq-group]: https://qm.qq.com/cgi-bin/qm/qr?k=awbwdTtSQ_-H5QGzeJxdWgv6JMbNehNM&jump_from=webapi
-[zsxq]: https://t.zsxq.com/GgKEW
 [wx-mp]: https://lruihao.cn/images/qr-wx-mp.webp
+[qq-group]: https://qm.qq.com/q/Mn1I7ljqsS
+[dev-group]: https://qm.qq.com/q/ky3uru0mbu
 
 ## Contributing
 
@@ -320,7 +320,7 @@ If you enjoy the theme, please consider buying me a cup of coffee ☕️. Thanks
 
 - [WeChat Pay](/images/wechatpay.jpg)
 - [Alipay](/images/alipay.jpg)
-- [PayPal](https://paypal.me/Lruihao)
+<!-- - [PayPal](https://paypal.me/Lruihao) -->
 
 Thanks to the following sponsors for their great support:
 
