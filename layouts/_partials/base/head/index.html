@@ -114,18 +114,23 @@
   <link rel="alternate" type="application/feed+json" href="{{ .Permalink }}" title="{{ $title }}" />
 {{- end -}}
 
-{{- /* Core stylesheets */ -}}
 {{- /* Config CSS */ -}}
-{{- $options := dict "Source" "scss/config.template.scss" "Template" "scss/config.scss" "Fingerprint" $fingerprint -}}
-{{- $toCSS := dict "targetPath" "css/config.min.css" "enableSourceMap" true -}}
-{{- $options = dict "Context" . "ToCSS" $toCSS | merge $options -}}
-{{- partial "plugin/style.html" $options -}}
+{{- dict
+  "Source" "scss/config.template.scss"
+  "Template" "scss/config.scss"
+  "ToCSS" (dict "enableSourceMap" false)
+  "Fingerprint" $fingerprint
+  "Context" .
+  | partial "plugin/style.html"
+-}}
 
 {{- /* Theme main CSS */ -}}
-{{- $options := dict "Source" "scss/main.scss" "Fingerprint" $fingerprint -}}
-{{- $toCSS := dict "targetPath" "css/main.min.css" "enableSourceMap" true -}}
-{{- $options = dict "Context" . "ToCSS" $toCSS | merge $options -}}
-{{- partial "plugin/style.html" $options -}}
+{{- dict
+  "Source" "scss/main.scss"
+  "ToCSS" true
+  "Fingerprint" $fingerprint
+  | partial "plugin/style.html"
+-}}
 
 {{- /* Font Awesome Icons */ -}}
 {{- $source := $cdn.fontawesomeFreeCSS | default "lib/fontawesome-free/all.min.css" -}}
@@ -319,7 +324,7 @@
 {{- /* Theme Color Scheme Detection (runs before page render) */ -}}
 {{- $options := dict "targetPath" "js/head/color-scheme.js" -}}
 {{- $options := dict "defaultTheme" .Site.Params.defaulttheme | dict "params" | merge $options -}}
-{{- dict "Source" (resources.Get "js/head/color-scheme.ts") "Build" $options "Fingerprint" $fingerprint | partial "plugin/script.html" -}}
+{{- dict "Source" "js/head/color-scheme.ts" "Build" $options "Fingerprint" $fingerprint | partial "plugin/script.html" -}}
 
 {{- /* Custom head */ -}}
 {{- block "custom-head" . }}{{ end -}}

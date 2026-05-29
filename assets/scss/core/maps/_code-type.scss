@@ -1,8 +1,5 @@
-/**
- * Map of code identifiers/languages to Chroma supported languages.
- *
- * @generator https://github.com/hugo-fixit/.tools/blob/main/tampermonkey/code-type-map-fetcher.user.js
- */
+/// Map of code identifiers/languages to Chroma supported languages.
+/// @generator https://github.com/hugo-fixit/.tools/blob/main/tampermonkey/code-type-map-fetcher.user.js
 $code-type-map: (
   "1s": "OnesEnterprise",
   "1s\\:enterprise": "OnesEnterprise",

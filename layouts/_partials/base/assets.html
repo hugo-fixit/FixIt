@@ -83,7 +83,7 @@
 {{- if .Store.Get "hasJsonViewer" | and (not $isArchivesOrOffline) -}}
   {{- $source := $cdn.jsonViewerElementJS | default "lib/json-viewer-element/json-viewer-element.umd.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-  {{- dict "Source" (resources.Get "js/lib/json-viewer.ts") "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" "js/lib/json-viewer.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* twemoji */ -}}
@@ -91,7 +91,7 @@
   {{- $source := $cdn.twemojiJS | default "lib/twemoji/twemoji.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "twemoji" true | merge $config -}}
-  {{- dict "Source" (resources.Get "js/lib/twemoji.ts") "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" "js/lib/twemoji.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* lightgallery */ -}}
@@ -105,7 +105,7 @@
   {{- $source := $cdn.lightgalleryZoomJS | default "lib/lightgallery/plugins/zoom/lg-zoom.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "lightgallery" true | merge $config -}}
-  {{- dict "Source" (resources.Get "js/lib/lightgallery.ts") "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" "js/lib/lightgallery.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* Sharer.js */ -}}
@@ -120,7 +120,7 @@
   {{- $source := $cdn.typeitJS | default "lib/typeit/index.umd.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "speed" $typeit.speed "cursorSpeed" $typeit.cursorSpeed "cursorChar" $typeit.cursorChar "duration" $typeit.duration "loop" $typeit.loop | dict "typeit" | merge $config -}}
-  {{- dict "Source" (resources.Get "js/lib/typeit.ts") "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" "js/lib/typeit.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* KaTeX */ -}}
@@ -137,7 +137,7 @@
 
 {{- /* MathJax */ -}}
 {{- if .Store.Get "hasMathJax" | and (not $isArchivesOrOffline) -}}
-  {{- dict "Source" (resources.Get "js/lib/mathjax.ts") "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" (resources.Get "js/lib/mathjax.ts") "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $mathjax := $math.mathjax -}}
   {{- $mjoc := $mathjax.options | default dict -}}
   {{- $mjo := dict -}}
@@ -172,7 +172,7 @@
   {{- $lightTheme := resources.Get "lib/echarts/theme/light.yml" | transform.Unmarshal -}}
   {{- $darkTheme := resources.Get "lib/echarts/theme/dark.yml" | transform.Unmarshal -}}
   {{- $config = dict "lightTheme" $lightTheme "darkTheme" $darkTheme | dict "echarts" | merge $config -}}
-  {{- dict "Source" (resources.Get "js/lib/echarts.ts") "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" "js/lib/echarts.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* Mapbox GL */ -}}
@@ -183,7 +183,7 @@
   {{- dict "Source" $source "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- dict "Source" "lib/mapbox-gl/mapbox-gl-language.js" "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "accessToken" $params.mapbox.accessToken "RTLTextPlugin" "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.0/mapbox-gl-rtl-text.js" | dict "mapbox" | merge $config -}}
-  {{- dict "Source" (resources.Get "js/lib/mapbox.ts") "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" "js/lib/mapbox.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* Music (APlayer / MetingJS) */ -}}
@@ -191,13 +191,12 @@
   {{- /* APlayer */ -}}
   {{- $source := $cdn.aplayerCSS | default "lib/aplayer/APlayer.min.css" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
-  {{- $options := dict "targetPath" "lib/aplayer/dark.min.css" -}}
-  {{- dict "Source" "lib/aplayer/dark.scss" "ToCSS" $options "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
+  {{- dict "Source" "lib/aplayer/dark.scss" "ToCSS" true "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
   {{- $source := $cdn.aplayerJS | default "lib/aplayer/APlayer.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
   {{- if .Store.Get "hasAplayer" -}}
-    {{- dict "Source" (resources.Get "js/lib/aplayer.ts") "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+    {{- dict "Source" "js/lib/aplayer.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- end -}}
   {{- if .Store.Get "hasMusic" -}}
     {{- /* MetingJS */ -}}
@@ -222,7 +221,7 @@
   {{- $cookieconsentConfig = .Site.Params.cookieconsent | merge $cookieconsentConfig -}}
   {{- $cookieconsentConfig = dict "message" ($cookieconsentConfig.content.message | default (T "assets.cookieconsentMessage")) "dismiss" ($cookieconsentConfig.content.dismiss | default (T "assets.cookieconsentDismiss")) "link" ($cookieconsentConfig.content.link | default (T "assets.cookieconsentLink")) | dict "content" | merge $cookieconsentConfig -}}
   {{- $config = $cookieconsentConfig | dict "cookieconsent" | merge $config -}}
-  {{- dict "Source" (resources.Get "js/lib/cookieconsent.ts") "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" "js/lib/cookieconsent.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* PanguJS */ -}}
@@ -230,7 +229,7 @@
   {{- $source := $cdn.panguJS | default "lib/pangu/pangu.umd.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "pangu" .Site.Params.pangu | merge $config -}}
-  {{- dict "Source" (resources.Get "js/lib/pangu.ts") "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" "js/lib/pangu.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* Cell Tooltip */ -}}
@@ -256,7 +255,7 @@
     | merge $watermarkConfig
   -}}
   {{- $config = dict "watermark" $watermarkConfig | merge $config -}}
-  {{- dict "Source" (resources.Get "js/lib/watermark.ts") "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" "js/lib/watermark.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* Content Decryption */ -}}
@@ -271,7 +270,7 @@
   {{- dict "Source" $cryptoSha256JS "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- dict "Source" $xxhashWasmJS "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- /* Decryption script */ -}}
-  {{- dict "Source" (resources.Get "js/lib/fixit-decryptor.ts") "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" "js/lib/fixit-decryptor.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "all" (isset $params "password") "shortcode" ($encryptPartial | default false) | dict "encryption" | merge $config -}}
 {{- end -}}
 
@@ -352,7 +351,7 @@
 {{- dict "Content" $configJS "Path" $targetPath "Minify" hugo.IsProduction "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
 {{- /* File-tree plugin */ -}}
-{{- dict "Source" (resources.Get "js/lib/file-tree.ts") "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+{{- dict "Source" "js/lib/file-tree.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
 {{- /* Mermaid plugin */ -}}
 {{- if .Store.Get "hasMermaid" | and (not $isArchivesOrOffline) -}}
@@ -386,21 +385,20 @@
 {{- end -}}
 
 {{- /* Theme main bundle */ -}}
-{{- dict "Source" (resources.Get "js/main.ts") "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+{{- dict "Source" "js/main.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
 {{- /* Custom assets block */ -}}
 {{- block "custom-assets" . }}{{ end -}}
 
 {{- /* Custom script (custom.ts takes priority over custom.js) */ -}}
 {{- with resources.Get "js/custom.ts" | default (resources.Get "js/custom.js") -}}
-  {{- dict "Source" . "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
+  {{- dict "Source" . "Fingerprint" $fingerprint "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- with .Store.Get "styleArr" -}}
   {{- $content := delimit . " " -}}
   {{- $path :=  printf "%s/scss/pages/%s.scss" $languagePrefix $uniqueFileId -}}
-  {{- $options := printf "css/pages/%s.min.css" $uniqueFileId | dict "targetPath" -}}
-  {{- dict "Content" $content "Path" $path "ToCSS" $options | dict "Page" $ "Data" | partial "store/style.html" -}}
+  {{- dict "Content" $content "Path" $path "ToCSS" (dict "enableSourceMap" false) | dict "Page" $ "Data" | partial "store/style.html" -}}
 {{- end -}}
 
 {{- with .Store.Get "scriptArr" -}}

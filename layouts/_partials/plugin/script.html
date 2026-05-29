@@ -2,10 +2,10 @@
   Script tag renderer.
   - Accepts direct script HTML or builds script source from local/remote resources.
   - Supports template execution, minify/build/fingerprint pipeline, and extra attrs.
-  @param {String} .Source script source URL/path or full <script> HTML
+  @param {String|Resource} .Source script source URL/path or Hugo resource; if string starts with "<script" it's treated as raw HTML
   @param {String} [.Content] inline content to write as generated resource
-  @param {String} [.Path] resource path used with Content
-  @param {Object} [.Template] template name/path for ExecuteAsTemplate
+  @param {String} [.Path] target path for resource created from Content
+  @param {Object} [.Template] target path for resource created from template execution
   @param {Object} [.Context] template context for ExecuteAsTemplate
   @param {Boolean} [.Minify] whether to minify resource
   @param {Object} [.Build] js.Build options (Build.minify is normalized to .Minify for path semantics)
@@ -27,7 +27,7 @@
   {{- if $src | and (not (urls.Parse $src).Host) -}}
     {{- $resource := resources.Get $src -}}
     {{- with .Template -}}
-      {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
+      {{- $resource = resources.ExecuteAsTemplate . $.Context $resource -}}
     {{- end -}}
     {{- $resource = dict "Resource" $resource "Build" .Build "Minify" $minify | partial "function/js-build.html" -}}
     {{- with .Fingerprint -}}

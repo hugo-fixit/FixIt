@@ -2,12 +2,12 @@
   Stylesheet tag renderer.
   - Accepts direct <link> HTML or builds CSS resources from local paths/content.
   - Supports template execution, optional toCSS, minify/fingerprint, and preload mode.
-  @param {String} .Source stylesheet URL/path or full <link> HTML
+  @param {String} .Source stylesheet URL/path or Hugo resource; if string starts with "<link" it's treated as raw HTML
   @param {String} [.Content] inline style content to write as generated resource
-  @param {String} [.Path] resource path used with Content
-  @param {Object} [.Template] template name/path for ExecuteAsTemplate
+  @param {String} [.Path] target path for resource created from Content
+  @param {Object} [.Template] target path for resource created from template execution
   @param {Object} [.Context] template context for ExecuteAsTemplate
-  @param {Object} [.ToCSS] toCSS options
+  @param {Object|Boolean} [.ToCSS] true for defaults, dict for custom toCSS options, false/omit to skip toCSS
   @param {Boolean} [.Minify] whether to minify resource
   @param {String} [.Fingerprint] fingerprint algorithm
   @param {Boolean} [.Crossorigin] whether to add crossorigin=anonymous
@@ -29,14 +29,29 @@
     {{- $resource = resources.FromString $.Path . -}}
   {{- end -}}
   {{- if $resource -}}
+    {{- $minify := .Minify -}}
     {{- with .Template -}}
-      {{- $resource = $resource | resources.ExecuteAsTemplate . $.Context -}}
+      {{- $resource = resources.ExecuteAsTemplate . $.Context $resource -}}
     {{- end -}}
     {{- with .ToCSS -}}
-      {{- $options := . | merge (dict "outputStyle" "compressed" "transpiler" "dartsass" "silenceDeprecations" (slice "import" "global-builtin" "color-functions" "function-units")) -}}
+      {{- $targetPath := replaceRE `\.(template\.)?scss$` ".css" $resource.Name -}}
+      {{- $targetPath = replace $targetPath "scss" "css" -}}
+      {{- $defaultOptions := dict
+        "transpiler" "dartsass"
+        "enableSourceMap" hugo.IsDevelopment
+        "outputStyle" (cond hugo.IsDevelopment "expanded" "compressed")
+        "targetPath" $targetPath
+        "silenceDeprecations" (slice "import" "global-builtin" "color-functions" "function-units")
+      -}}
+      {{- $options := . -}}
+      {{- if eq . true -}}
+        {{- $options = dict -}}
+      {{- end -}}
+      {{- $options = $options | merge $defaultOptions -}}
       {{- $resource = $resource | toCSS $options -}}
+      {{- $minify = $minify | default hugo.IsProduction -}}
     {{- end -}}
-    {{- if .Minify -}}
+    {{- if $minify -}}
       {{- $resource = $resource | minify -}}
     {{- end -}}
     {{- with .Fingerprint -}}

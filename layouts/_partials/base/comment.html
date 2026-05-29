@@ -19,8 +19,7 @@
       {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
       {{- $source := $cdn.artalkJS | default (add $artalk.server "/dist/Artalk.js") -}}
       {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- $options := dict "targetPath" "js/lib/artalk.js" -}}
-      {{- dict "Source" (resources.Get "js/lib/artalk.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+      {{- dict "Source" "js/lib/artalk.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
       {{- $commentConfig = dict "el" "#artalk" "pageKey" .Permalink "pageTitle" .Title "pvEl" "artalk-visitor-count" "countEl" "artalk-comment-count" | dict "artalk" | merge $commentConfig -}}
       {{- if (eq $artalk.locale "") | and (eq $.Site.Language.Locale "en") -}}
         {{- $artalk = dict "locale" "en-US" | merge $artalk -}}
@@ -109,8 +108,7 @@
       {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
       {{- $source := $cdn.gitalkJS | default "lib/gitalk/gitalk.min.js" -}}
       {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- $options := dict "targetPath" "js/lib/gitalk.js" -}}
-      {{- dict "Source" (resources.Get "js/lib/gitalk.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+      {{- dict "Source" "js/lib/gitalk.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
       {{- $commentConfig = dict "id" .Date "title" .Title "clientID" $gitalk.clientId "clientSecret" $gitalk.clientSecret "repo" $gitalk.repo "owner" $gitalk.owner "admin" (slice $gitalk.owner) | dict "gitalk" | merge $commentConfig -}}
       <noscript>
         Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk" rel="external nofollow noopener noreferrer">Gitalk</a>.
@@ -121,12 +119,10 @@
     {{- $valine := $comment.valine | default dict -}}
     {{- if $valine.enable -}}
       <div id="valine" class="comment"></div>
-      {{- $options := dict "targetPath" "lib/valine/valine.min.css" -}}
-      {{- dict "Source" "lib/valine/valine.scss" "ToCSS" $options | dict "Page" . "Data" | partial "store/style.html" -}}
+      {{- dict "Source" "lib/valine/valine.scss" "ToCSS" true | dict "Page" . "Data" | partial "store/style.html" -}}
       {{- $source := $cdn.valineJS | default "lib/valine/Valine.min.js" -}}
       {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- $options := dict "targetPath" "js/lib/valine.js" -}}
-      {{- dict "Source" (resources.Get "js/lib/valine.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+      {{- dict "Source" "js/lib/valine.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
       {{- $commentConfig = dict "el" "#valine" "appId" $valine.appId "appKey" $valine.appKey "lang" ($valine.lang | default (T "valineLang")) "visitor" $valine.visitor "recordIP" $valine.recordIP "placeholder" ($valine.placeholder | default (T "comment.valinePlaceholder")) "highlight" (ne $valine.highlight false) "enableQQ" $valine.enableQQ | dict "valine" | merge $commentConfig -}}
       {{- with $valine.avatar -}}
         {{- $commentConfig = dict "avatar" . | dict "valine" | merge $commentConfig -}}
@@ -158,8 +154,7 @@
       {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
       {{- $source := $cdn.walineJS | default "lib/waline/waline.umd.js" -}}
       {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- $options := dict "targetPath" "js/lib/waline.js" -}}
-      {{- dict "Source" (resources.Get "js/lib/waline.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+      {{- dict "Source" "js/lib/waline.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
       {{- $commentConfig = dict "el" "#waline" "serverURL" $waline.serverURL "lang" .Lang | dict "waline" | merge $commentConfig -}}
       {{- $commentConfig = dict "copyright" true "imageUploader" false "highlighter" false "texRenderer" false "search" false | dict "waline" | merge $commentConfig -}}
       {{- with $waline.pageview -}}
@@ -270,8 +265,7 @@
     {{- $utterances := $comment.utterances | default dict -}}
     {{- if $utterances.enable -}}
       <div id="utterances" class="comment"></div>
-      {{- $options := dict "targetPath" "js/lib/utterances.js" -}}
-      {{- dict "Source" (resources.Get "js/lib/utterances.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+      {{- dict "Source" "js/lib/utterances.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
       {{- $commentConfig = dict "repo" $utterances.repo | dict "utterances" | merge $commentConfig -}}
       {{- $commentConfig = $utterances.issueTerm | default "pathname" | dict "issueTerm" | dict "utterances" | merge $commentConfig -}}
       {{- $commentConfig = dict "label" $utterances.label | dict "utterances" | merge $commentConfig -}}
@@ -289,8 +283,7 @@
       <div id="twikoo"></div>
       {{- $source := $cdn.twikooJS | default "lib/twikoo/twikoo.all.min.js" -}}
       {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- $options := dict "targetPath" "js/lib/twikoo.js" -}}
-      {{- dict "Source" (resources.Get "js/lib/twikoo.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+      {{- dict "Source" "js/lib/twikoo.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
       {{- $commentConfig = dict "el" "#twikoo" "envId" $twikoo.envId "lang" .Lang | dict "twikoo" | merge $commentConfig -}}
       {{- with $twikoo.region -}}
         {{- $commentConfig = dict "region" . | dict "twikoo" | merge $commentConfig -}}
@@ -312,8 +305,7 @@
     {{- /* Giscus Comment System */ -}}
     {{- $giscus := $comment.giscus | default dict -}}
     {{- if $giscus.enable -}}
-      {{- $options := dict "targetPath" "js/lib/giscus.js" -}}
-      {{- dict "Source" (resources.Get "js/lib/giscus.ts") "Build" $options "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+      {{- dict "Source" "js/lib/giscus.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
       {{- with $giscus -}}
         {{- $commentConfig = .origin | default "https://giscus.app" | dict "origin" | dict "giscus" | merge $commentConfig -}}
         {{- $commentConfig = .lightTheme | default "light" | dict "lightTheme" | dict "giscus" | merge $commentConfig -}}
