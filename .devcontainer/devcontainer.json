@@ -1,0 +1,24 @@
+{
+  "name": "FixIt Theme",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "HUGO_VERSION": "0.158.0",
+      "DART_SASS_VERSION": "1.99.0",
+      "GO_VERSION": "1.24.4"
+    }
+  },
+  "postCreateCommand": "pnpm install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "budparr.language-hugo-vscode",
+        "kaellarkin.hugo-shortcode-syntax",
+        "lruihao.hugo-partials-refs",
+        "tamasfe.even-better-toml",
+        "casualjim.gotemplate",
+        "SomewhatStationery.some-sass"
+      ]
+    }
+  }
+}

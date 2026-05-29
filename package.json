@@ -35,6 +35,7 @@
     "build:demo": "pnpm -F demo build",
     "build:test": "pnpm -F test build",
     "build": "concurrently 'pnpm build:demo' 'pnpm build:test' && pnpm -F integration start",
+    "clean": "rm -rf public resources/_gen apps/*/public apps/*/resources/_gen",
     "preview": "serve public",
     "lint": "eslint --cache .",
     "typecheck": "tsc --noEmit",
