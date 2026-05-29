@@ -121,7 +121,7 @@
 {{- $options = dict "Context" . "ToCSS" $toCSS | merge $options -}}
 {{- partial "plugin/style.html" $options -}}
 
-{{- /* Theme CSS */ -}}
+{{- /* Theme main CSS */ -}}
 {{- $options := dict "Source" "scss/main.scss" "Fingerprint" $fingerprint -}}
 {{- $toCSS := dict "targetPath" "css/main.min.css" "enableSourceMap" true -}}
 {{- $options = dict "Context" . "ToCSS" $toCSS | merge $options -}}
@@ -136,6 +136,13 @@
 {{- $source := $cdn.animateCSS | default "lib/animate/animate.min.css" -}}
 {{- $options := dict "Source" $source "Fingerprint" $fingerprint "Preload" true -}}
 {{- partial "plugin/style.html" $options -}}
+
+{{- /* Preload main theme bundle */ -}}
+{{- $mainResource := dict "Resource" (resources.Get "js/main.ts") "Build" true | partial "function/js-build.html" -}}
+{{- with $fingerprint -}}
+  {{- $mainResource = $mainResource | fingerprint . -}}
+{{- end -}}
+<link rel="preload" href="{{ $mainResource.RelPermalink }}" as="script">
 
 {{- /* ========== SEO: Structured Data (Schema.org) ========== */ -}}
 {{- $params := partial "function/params.html" -}}

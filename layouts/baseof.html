@@ -11,7 +11,6 @@
     <meta name="robots" content="noodp" />
     <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
     {{- partial "base/head/index.html" . -}}
-    {{- /* TODO preload script https://developer.mozilla.org/zh-CN/docs/Web/HTML/Attributes/rel/preload */ -}}
   </head>
   <body data-instant-intensity="viewport" data-header-desktop="{{ .Site.Params.header.desktopMode }}" data-header-mobile="{{ .Site.Params.header.mobileMode }}">
     {{- /* Body wrapper */ -}}

@@ -6,12 +6,12 @@
   {{- $math = dict "enable" false -}}
 {{- end -}}
 
-{{- /* 
+{{- /*
   Mathematical formulas rendering:
     - KaTeX server-side rendering
     - MathJax client-side rendering
   Regular passthrough rendering:
-    - [todo] support more features in future
+    - support more features in future
 */ -}}
 {{- if $math.enable | and (ne hugo.Context.MarkupScope "home") -}}
   {{- if eq $math.type "katex" -}}

@@ -127,7 +127,7 @@
 {{- $math := .Store.Get "math" -}}
 {{- if .Store.Get "hasKaTeX" | and (not $isArchivesOrOffline) -}}
   {{- $source := $cdn.katexCSS | default "lib/katex/katex.min.css" -}}
-  {{- dict "Source" $source "Fingerprint" $fingerprint "Preload" true | dict "Page" . "Data" | partial "store/style.html" -}}
+  {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
   {{- /* Copy-tex extension */ -}}
   {{- if $math.katex.copyTex -}}
     {{- $source := $cdn.katexCopyTexJS | default "lib/katex/copy-tex.min.js" -}}
@@ -178,7 +178,7 @@
 {{- /* Mapbox GL */ -}}
 {{- if .Store.Get "hasMapbox" -}}
   {{- $source := $cdn.mapboxGLCSS | default "lib/mapbox-gl/mapbox-gl.css" -}}
-  {{- dict "Source" $source "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Preload" true | dict "Page" . "Data" | partial "store/style.html" -}}
+  {{- dict "Source" $source "Minify" hugo.IsProduction "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
   {{- $source = $cdn.mapboxGLJS | default "lib/mapbox-gl/mapbox-gl.js" -}}
   {{- dict "Source" $source "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- dict "Source" "lib/mapbox-gl/mapbox-gl-language.js" "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
@@ -190,7 +190,7 @@
 {{- if (.Store.Get "hasAplayer") | or (.Store.Get "hasMusic") -}}
   {{- /* APlayer */ -}}
   {{- $source := $cdn.aplayerCSS | default "lib/aplayer/APlayer.min.css" -}}
-  {{- dict "Source" $source "Fingerprint" $fingerprint "Preload" true | dict "Page" . "Data" | partial "store/style.html" -}}
+  {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
   {{- $options := dict "targetPath" "lib/aplayer/dark.min.css" -}}
   {{- dict "Source" "lib/aplayer/dark.scss" "ToCSS" $options "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
   {{- $source := $cdn.aplayerJS | default "lib/aplayer/APlayer.min.js" -}}
