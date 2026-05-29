@@ -8,6 +8,14 @@
     "hugo.toml": "theme.toml, .hugo_build.lock",
     "vercel.json": "build.sh"
   },
+  "files.associations": {
+    "*.template.scss": "gocss",
+    "*.template.svg": "html",
+    "**/plugin/script.html": "gohtml",
+    "**/layouts/**/*.json": "gojson",
+    "**/layouts/**/*.xml": "gohtml",
+    "**/layouts/**/*.md": "gotemplate"
+  },
   // Disable the default formatter, use eslint instead
   "prettier.enable": false,
   "editor.formatOnSave": false,
@@ -69,6 +77,9 @@
       "fixable": true
     }
   ],
+  // SCSS path resolution (Some Sass extension)
+  "somesass.workspace.loadPaths": ["assets/scss"],
+  "somesass.scss.links.enabled": true,
   // Enable eslint for all supported languages
   "eslint.validate": [
     "go-html-template",

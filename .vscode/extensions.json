@@ -4,6 +4,7 @@
     "kaellarkin.hugo-shortcode-syntax",
     "lruihao.hugo-partials-refs",
     "tamasfe.even-better-toml",
-    "casualjim.gotemplate"
+    "casualjim.gotemplate",
+    "SomewhatStationery.some-sass"
   ]
 }
