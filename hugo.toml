@@ -1534,8 +1534,9 @@ enable = false
 enable = false
 server = "https://yourdomain"
 site = "默认站点"
-# FixIt 0.3.3 | NEW whether use backend configuration
-useBackendConf = false
+# FixIt 1.0.0 | NEW prefer remote (backend) configuration over local
+# If true, remote config takes priority; if false (default), local config overrides remote
+preferRemoteConf = false
 placeholder = ""
 noComment = ""
 sendBtn = ""
@@ -1543,8 +1544,7 @@ editorTravel = true
 flatMode = "auto"
 # FixIt 0.2.17 | CHANGED enable lightgallery support
 lightgallery = false
-locale = "" # FixIt 0.2.15 | NEW
-# FixIt 0.2.18 | NEW
+locale = ""
 emoticons = ""
 nestMax = 2
 nestSort = "DATE_ASC" # ["DATE_ASC", "DATE_DESC", "VOTE_UP_DESC"]
@@ -1552,9 +1552,27 @@ vote = true
 voteDown = false
 uaBadge = true
 listSort = true
+listUnreadHighlight = false
 imgUpload = true
+imgLazyLoad = false # false | "native" | "data-src"
 preview = true
 versionCheck = true
+# request timeout in milliseconds
+reqTimeout = 15000
+# page view increment on comment list load
+pvAdd = true
+
+# FixIt 1.0.0 | NEW pagination config
+[params.page.comment.artalk.pagination]
+pageSize = 20
+readMore = true
+autoLoad = true
+
+# FixIt 1.0.0 | NEW height limit config
+[params.page.comment.artalk.heightLimit]
+content = 300
+children = 400
+scrollable = false
 
 # Disqus comment config (https://disqus.com)
 [params.page.comment.disqus]

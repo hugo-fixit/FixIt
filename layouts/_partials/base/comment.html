@@ -7,11 +7,6 @@
   {{- $commentConfig = dict "enable" true "expired" (.Store.Get "commentExpired" | default false) -}}
   <div id="comments">
     {{- /* Artalk Comment System */ -}}
-    {{/*
-      TODO next version to support new config for Artalk
-      https://artalk.js.org/guide/frontend/config.html#评论分页
-      https://artalk.js.org/guide/frontend/config.html#内容限高
-    */}}
     {{- $artalk := $comment.artalk | default dict -}}
     {{- if $artalk.enable -}}
       <div id="artalk" class="comment"></div>
@@ -25,9 +20,6 @@
         {{- $artalk = dict "locale" "en-US" | merge $artalk -}}
       {{- end -}}
       {{- $commentConfig = dict "locale" ($artalk.locale | default $.Site.Language.Locale | default "auto") | dict "artalk" | merge $commentConfig -}}
-      {{- if eq $artalk.usebackendconf false -}}
-        {{- $commentConfig = dict "useBackendConf" false | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
       {{- with .Site.Params.gravatar -}}
         {{/* See https://artalk.js.org/guide/frontend/config.html#gravatar-params */}}
         {{- $gravatarMirror := printf "https://%v/avatar/" .Host -}}
@@ -83,6 +75,47 @@
       {{- end -}}
       {{- if eq $artalk.versioncheck false -}}
         {{- $commentConfig = dict "versionCheck" false | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- if eq $artalk.preferremoteconf true -}}
+        {{- $commentConfig = dict "preferRemoteConf" true | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $artalk.imglazyload -}}
+        {{- $commentConfig = dict "imgLazyLoad" . | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $artalk.reqtimeout -}}
+        {{- $commentConfig = dict "reqTimeout" . | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- if eq $artalk.listunreadhighlight true -}}
+        {{- $commentConfig = dict "listUnreadHighlight" true | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- if eq $artalk.pvadd false -}}
+        {{- $commentConfig = dict "pvAdd" false | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $artalk.pagination -}}
+        {{- $pagination := dict -}}
+        {{- with .pagesize -}}
+          {{- $pagination = dict "pageSize" . | merge $pagination -}}
+        {{- end -}}
+        {{- if eq .readmore false -}}
+          {{- $pagination = dict "readMore" false | merge $pagination -}}
+        {{- end -}}
+        {{- if eq .autoload false -}}
+          {{- $pagination = dict "autoLoad" false | merge $pagination -}}
+        {{- end -}}
+        {{- $commentConfig = dict "pagination" $pagination | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $artalk.heightlimit -}}
+        {{- $heightLimit := dict -}}
+        {{- with .content -}}
+          {{- $heightLimit = dict "content" . | merge $heightLimit -}}
+        {{- end -}}
+        {{- with .children -}}
+          {{- $heightLimit = dict "children" . | merge $heightLimit -}}
+        {{- end -}}
+        {{- if eq .scrollable true -}}
+          {{- $heightLimit = dict "scrollable" true | merge $heightLimit -}}
+        {{- end -}}
+        {{- $commentConfig = dict "heightLimit" $heightLimit | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
       <noscript>
         Please enable JavaScript to view the comments powered by <a href="https://github.com/ArtalkJS/Artalk" rel="external nofollow noopener noreferrer">Artalk</a>.
