@@ -310,14 +310,30 @@
     {{- end -}}
 
     {{- /* Twikoo Comment System */ -}}
-    {{- /* TODO review lang config https://github.com/twikoojs/twikoo/blob/main/src/client/utils/i18n/index.js */ -}}
     {{- $twikoo := $comment.twikoo | default dict -}}
     {{- if $twikoo.enable -}}
       <div id="twikoo"></div>
       {{- $source := $cdn.twikooJS | default "lib/twikoo/twikoo.all.min.js" -}}
       {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
       {{- dict "Source" "js/lib/twikoo.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- $commentConfig = dict "el" "#twikoo" "envId" $twikoo.envId "lang" .Lang | dict "twikoo" | merge $commentConfig -}}
+      {{- /* Twikoo lang map: https://github.com/twikoojs/twikoo/blob/main/src/client/utils/i18n/index.js */ -}}
+      {{- $twikooLangMap := dict "pt-BR" "pt" "sr" "hr" -}}
+      {{- $lang := .Lang -}}
+      {{- with index $twikooLangMap $lang -}}
+        {{- $lang = . -}}
+      {{- else -}}
+        {{- $twikooLangs := slice "zh" "zh-cn" "zh-hk" "zh-tw" "en" "en-us" "en-gb" "uz" "ja" "ja-jp" "ko" "ko-kr" "vi" "vi-vn" -}}
+        {{- if not (in $twikooLangs $lang) -}}
+          {{- /* fallback to base language code, then "en" */ -}}
+          {{- $baseLang := index (split $lang "-") 0 -}}
+          {{- if in $twikooLangs $baseLang -}}
+            {{- $lang = $baseLang -}}
+          {{- else -}}
+            {{- $lang = "en" -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $commentConfig = dict "el" "#twikoo" "envId" $twikoo.envId "lang" $lang | dict "twikoo" | merge $commentConfig -}}
       {{- with $twikoo.region -}}
         {{- $commentConfig = dict "region" . | dict "twikoo" | merge $commentConfig -}}
       {{- end -}}
