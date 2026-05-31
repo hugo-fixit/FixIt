@@ -1,8 +1,9 @@
 {{- /*
   Script tag renderer.
-  - Accepts direct script HTML or builds script source from local/remote resources.
+  - Accepts direct script HTML, a pre-built resource, or builds from source path.
   - Supports template execution, minify/build/fingerprint pipeline, and extra attrs.
-  @param {String|Resource} .Source script source URL/path or Hugo resource; if string starts with "<script" it's treated as raw HTML
+  @param {String} [.Source] script source URL/path; if starts with "<script" it's treated as raw HTML
+  @param {resource.Resource} [.Resource] pre-built resource (skips build pipeline)
   @param {String} [.Content] inline content to write as generated resource
   @param {String} [.Path] target path for resource created from Content
   @param {Object} [.Template] target path for resource created from template execution
@@ -17,21 +18,31 @@
   @param {String} [.Attr] additional attributes
 */ -}}
 
-{{- if strings.HasPrefix .Source "<script" -}}
+{{- if strings.HasPrefix (.Source | default "") "<script" -}}
   {{- safeHTML .Source -}}
 {{- else -}}
-  {{- /* Script source */ -}}
-  {{- $src := .Source -}}
+  {{- $src := "" -}}
   {{- $integrity := .Integrity -}}
-  {{- $minify := .Minify -}}
-  {{- if $src | and (not (urls.Parse $src).Host) -}}
+
+  {{- /* Pre-built resource */ -}}
+  {{- with .Resource -}}
+    {{- $src = .RelPermalink -}}
+    {{- with .Data.Integrity -}}
+      {{- $integrity = . -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- /* Source build */ -}}
+  {{- if not $src -}}
+    {{- $src = .Source -}}
+  {{- end -}}
+  {{- if $src | and (not (urls.Parse $src).Host) | and (not .Resource) -}}
     {{- $resource := resources.Get $src -}}
     {{- with .Template -}}
       {{- $resource = resources.ExecuteAsTemplate . $.Context $resource -}}
     {{- end -}}
-    {{- $resource = dict "Resource" $resource "Build" .Build "Minify" $minify | partial "function/js-build.html" -}}
+    {{- $resource = dict "Resource" $resource "Build" .Build "Minify" .Minify "Fingerprint" .Fingerprint | partial "function/js-build.html" -}}
     {{- with .Fingerprint -}}
-      {{- $resource = $resource | fingerprint . -}}
       {{- $integrity = $resource.Data.Integrity -}}
     {{- end -}}
     {{- with $resource.RelPermalink -}}

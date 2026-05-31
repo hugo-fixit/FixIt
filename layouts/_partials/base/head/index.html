@@ -75,8 +75,7 @@
   {{- $title = .Site.Title -}}
 {{- end -}}
 
-{{- /* Favicon links */ -}}
-{{/* [todo] 先判断有图片资源时才加载，没有时提示引导 https://realfavicongenerator.net/  */}}
+{{- /* Favicon links (static resources, generated via https://realfavicongenerator.net/) */ -}}
 {{- if not .Site.Params.app.noFavicon -}}
   {{- $relURL := relURL "" -}}
   {{- with .Site.Params.app.svgFavicon -}}
@@ -125,12 +124,14 @@
 -}}
 
 {{- /* Theme main CSS */ -}}
-{{- dict
-  "Source" "scss/main.scss"
+{{- $mainCSS := dict
+  "Resource" (resources.Get "scss/main.scss")
   "ToCSS" true
   "Fingerprint" $fingerprint
-  | partial "plugin/style.html"
+  | partial "function/to-css.html"
 -}}
+{{- .Site.Store.Set "mainCSS" $mainCSS -}}
+{{- dict "Resource" $mainCSS | partial "plugin/style.html" -}}
 
 {{- /* Font Awesome Icons */ -}}
 {{- $source := $cdn.fontawesomeFreeCSS | default "lib/fontawesome-free/all.min.css" -}}
@@ -143,10 +144,8 @@
 {{- partial "plugin/style.html" $options -}}
 
 {{- /* Preload main theme bundle */ -}}
-{{- $mainResource := dict "Resource" (resources.Get "js/main.ts") "Build" true | partial "function/js-build.html" -}}
-{{- with $fingerprint -}}
-  {{- $mainResource = $mainResource | fingerprint . -}}
-{{- end -}}
+{{- $mainResource := dict "Resource" (resources.Get "js/main.ts") "Build" true "Fingerprint" $fingerprint | partial "function/js-build.html" -}}
+{{- .Site.Store.Set "mainJS" $mainResource -}}
 <link rel="preload" href="{{ $mainResource.RelPermalink }}" as="script">
 
 {{- /* ========== SEO: Structured Data (Schema.org) ========== */ -}}

@@ -9,7 +9,6 @@ export default antfu({
     'layouts/**/*.json',
     'layouts/**/*.xml',
     'layouts/**/*.md',
-    // ignore temporarily
-    'assets/js/service-worker.js',
+    '**/*.template.*',
   ],
 })

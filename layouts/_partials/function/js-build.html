@@ -3,6 +3,7 @@
   @param {resource.Resource} .Resource Hugo resource to process
   @param {Object|Boolean} [.Build] true for defaults, dict for custom options, false/omit to skip js.Build
   @param {Boolean} [.Minify] extra minify flag; final minify is Minify OR Build.minify
+  @param {String} [.Fingerprint] fingerprint algorithm (e.g. "sha256")
   @return {resource.Resource}
 */ -}}
 
@@ -24,5 +25,8 @@
 {{- end -}}
 {{- if $minify -}}
   {{- $resource = $resource | minify -}}
+{{- end -}}
+{{- with .Fingerprint -}}
+  {{- $resource = $resource | fingerprint . -}}
 {{- end -}}
 {{- return $resource -}}
