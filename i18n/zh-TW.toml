@@ -82,9 +82,7 @@ siteRunning = "網站運行中……"
 
 # === Comment ===
 [comment]
-valineLang = "zh-TW"
 valinePlaceholder = "你的評論……"
-facebookLanguageCode = "zh-TW"
 # === Comment ===
 
 # === Assets ===

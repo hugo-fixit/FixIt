@@ -84,9 +84,7 @@ siteRunning = "Website running ..."
 
 # === Comment ===
 [comment]
-valineLang = "sr" # Valine не подржава српски
 valinePlaceholder = "Ваш коментар ..."
-facebookLanguageCode = "sr_RS"
 # === Comment ===
 
 # === Assets ===

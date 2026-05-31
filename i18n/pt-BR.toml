@@ -85,9 +85,7 @@ siteRunning = "Site no ar..."
 
 # === Comment ===
 [comment]
-valineLang = "en" # Valine não suporta português
 valinePlaceholder = "O seu comentário..."
-facebookLanguageCode = "pt_BR"
 # === Comment ===
 
 # === Assets ===

@@ -84,9 +84,7 @@ siteRunning = "Site en cours d'exécution ..."
 
 # === Comment ===
 [comment]
-valineLang = "en" # French not supported by Valine
 valinePlaceholder = "Votre commentaire ..."
-facebookLanguageCode = "fr"
 # === Comment ===
 
 # === Assets ===

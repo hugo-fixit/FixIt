@@ -82,9 +82,7 @@ siteRunning = "사이트 운영 중……"
 
 # === Comment ===
 [comment]
-valineLang = "ko"
 valinePlaceholder = "당신의 댓글……"
-facebookLanguageCode = "ko_KR"
 # === Comment ===
 
 # === Assets ===

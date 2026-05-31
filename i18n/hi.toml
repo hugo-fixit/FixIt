@@ -85,9 +85,7 @@ siteRunning = "वेबसाइट चल रही है ..."
 
 # === Comment ===
 [comment]
-valineLang = "hi"
 valinePlaceholder = "आपकी टिप्पणी ..."
-facebookLanguageCode = "hi"
 # === Comment ===
 
 # === Assets ===

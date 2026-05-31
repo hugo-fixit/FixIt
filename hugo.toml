@@ -1683,6 +1683,7 @@ region = ""
 path = ""
 visitor = true
 commentCount = true
+lang = ""
 # FixIt 0.2.17 | CHANGED enable lightgallery support
 lightgallery = false
 # FixIt 0.2.17 | NEW enable Katex support
