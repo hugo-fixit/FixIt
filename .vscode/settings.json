@@ -9,6 +9,8 @@
     "vercel.json": "build.sh"
   },
   "files.associations": {
+    "*.template.ts": "gots",
+    "*.template.js": "gojs",
     "*.template.scss": "gocss",
     "*.template.svg": "html",
     "**/plugin/script.html": "gohtml",

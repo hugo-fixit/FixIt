@@ -290,12 +290,16 @@
 
 {{- /* PWA */ -}}
 {{- if not hugo.IsServer | and .Site.Params.enablePWA | and hugo.IsProduction -}}
-  {{- $serviceWorker := dict "Resource" (resources.Get "js/service-worker.js") "Build" true | partial "function/js-build.html" -}}
-  {{- with $fingerprint -}}
-    {{- $serviceWorker = $serviceWorker | fingerprint . -}}
+  {{- $offlineURL := "" -}}
+  {{- with .Site.Home.OutputFormats.Get "offline" -}}
+    {{- $offlineURL = .RelPermalink -}}
   {{- end -}}
-  {{- $serviceWorkerURL := $serviceWorker.RelPermalink -}}
-  {{- $config = dict "PWA" (dict "enable" .Site.Params.enablePWA "serviceWorkerURL" $serviceWorkerURL) | merge $config -}}
+  {{- $mainCSS := .Site.Store.Get "mainCSS" -}}
+  {{- $mainJS := .Site.Store.Get "mainJS" -}}
+  {{- $swBuildCtx := dict "mainCSSURL" $mainCSS.RelPermalink "mainJSURL" $mainJS.RelPermalink "offlineURL" $offlineURL "relURL" (relURL "") "Page" . -}}
+  {{- $serviceWorker := resources.Get "js/service-worker.template.js" | resources.ExecuteAsTemplate "js/service-worker.template.js" $swBuildCtx -}}
+  {{- $serviceWorker = dict "Resource" $serviceWorker "Build" (dict "targetPath" "sw.js") "Fingerprint" $fingerprint | partial "function/js-build.html" -}}
+  {{- $config = dict "PWA" (dict "enable" .Site.Params.enablePWA "serviceWorkerURL" $serviceWorker.RelPermalink) | merge $config -}}
 {{- end -}}
 
 {{- /* Auto Bookmark */ -}}
@@ -366,10 +370,7 @@
   {{- $layoutLoaders := $mermaid.layoutloaders | default slice -}}
 
   {{- $options := dict "format" "esm" -}}
-  {{- $mermaidModule := dict "Resource" (resources.Get "js/lib/mermaid.ts") "Build" $options | partial "function/js-build.html" -}}
-  {{- with $fingerprint -}}
-    {{- $mermaidModule = $mermaidModule | fingerprint . -}}
-  {{- end -}}
+  {{- $mermaidModule := dict "Resource" (resources.Get "js/lib/mermaid.ts") "Build" $options "Fingerprint" $fingerprint | partial "function/js-build.html" -}}
   {{- $mermaidModuleURL := $mermaidModule.RelPermalink -}}
 
   {{- $bootstrapJS := dict
@@ -384,8 +385,8 @@
   {{- dict "Content" $bootstrapJS "Path" "js/lib/mermaid-bootstrap.js" "Minify" hugo.IsProduction "Attr" `type="module"` "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
-{{- /* Theme main bundle */ -}}
-{{- dict "Source" "js/main.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+{{- /* Theme main bundle (built once in head/index.html) */ -}}
+{{- dict "Resource" (.Site.Store.Get "mainJS") "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
 {{- /* Custom assets block */ -}}
 {{- block "custom-assets" . }}{{ end -}}

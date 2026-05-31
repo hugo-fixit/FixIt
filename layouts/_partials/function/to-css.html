@@ -1,0 +1,35 @@
+{{- /*
+  Compile SCSS to CSS via dartsass, optionally minify and fingerprint.
+  @param {resource.Resource} .Resource SCSS resource
+  @param {Object|Boolean} [.ToCSS] true for defaults, dict for custom toCSS options, false/omit to skip
+  @param {Boolean} [.Minify] whether to minify; defaults to hugo.IsProduction when ToCSS is used
+  @param {String} [.Fingerprint] fingerprint algorithm (e.g. "sha256")
+  @return {resource.Resource}
+*/ -}}
+
+{{- $resource := .Resource -}}
+{{- $minify := .Minify -}}
+{{- with .ToCSS -}}
+  {{- $targetPath := replaceRE `\.(template\.)?scss$` ".css" $resource.Name -}}
+  {{- $targetPath = replace $targetPath "scss" "css" -}}
+  {{- $defaultOptions := dict
+    "transpiler" "dartsass"
+    "enableSourceMap" hugo.IsDevelopment
+    "outputStyle" (cond hugo.IsDevelopment "expanded" "compressed")
+    "targetPath" $targetPath
+  -}}
+  {{- $options := . -}}
+  {{- if eq $options true -}}
+    {{- $options = dict -}}
+  {{- end -}}
+  {{- $options = $options | merge $defaultOptions -}}
+  {{- $resource = $resource | toCSS $options -}}
+  {{- $minify = $minify | default hugo.IsProduction -}}
+{{- end -}}
+{{- if $minify -}}
+  {{- $resource = $resource | minify -}}
+{{- end -}}
+{{- with .Fingerprint -}}
+  {{- $resource = $resource | fingerprint . -}}
+{{- end -}}
+{{- return $resource -}}
