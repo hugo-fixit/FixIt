@@ -7,11 +7,6 @@
   {{- $commentConfig = dict "enable" true "expired" (.Store.Get "commentExpired" | default false) -}}
   <div id="comments">
     {{- /* Artalk Comment System */ -}}
-    {{/*
-      TODO next version to support new config for Artalk
-      https://artalk.js.org/guide/frontend/config.html#评论分页
-      https://artalk.js.org/guide/frontend/config.html#内容限高
-    */}}
     {{- $artalk := $comment.artalk | default dict -}}
     {{- if $artalk.enable -}}
       <div id="artalk" class="comment"></div>
@@ -25,9 +20,6 @@
         {{- $artalk = dict "locale" "en-US" | merge $artalk -}}
       {{- end -}}
       {{- $commentConfig = dict "locale" ($artalk.locale | default $.Site.Language.Locale | default "auto") | dict "artalk" | merge $commentConfig -}}
-      {{- if eq $artalk.usebackendconf false -}}
-        {{- $commentConfig = dict "useBackendConf" false | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
       {{- with .Site.Params.gravatar -}}
         {{/* See https://artalk.js.org/guide/frontend/config.html#gravatar-params */}}
         {{- $gravatarMirror := printf "https://%v/avatar/" .Host -}}
@@ -84,6 +76,47 @@
       {{- if eq $artalk.versioncheck false -}}
         {{- $commentConfig = dict "versionCheck" false | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
+      {{- if eq $artalk.preferremoteconf true -}}
+        {{- $commentConfig = dict "preferRemoteConf" true | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $artalk.imglazyload -}}
+        {{- $commentConfig = dict "imgLazyLoad" . | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $artalk.reqtimeout -}}
+        {{- $commentConfig = dict "reqTimeout" . | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- if eq $artalk.listunreadhighlight true -}}
+        {{- $commentConfig = dict "listUnreadHighlight" true | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- if eq $artalk.pvadd false -}}
+        {{- $commentConfig = dict "pvAdd" false | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $artalk.pagination -}}
+        {{- $pagination := dict -}}
+        {{- with .pagesize -}}
+          {{- $pagination = dict "pageSize" . | merge $pagination -}}
+        {{- end -}}
+        {{- if eq .readmore false -}}
+          {{- $pagination = dict "readMore" false | merge $pagination -}}
+        {{- end -}}
+        {{- if eq .autoload false -}}
+          {{- $pagination = dict "autoLoad" false | merge $pagination -}}
+        {{- end -}}
+        {{- $commentConfig = dict "pagination" $pagination | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
+      {{- with $artalk.heightlimit -}}
+        {{- $heightLimit := dict -}}
+        {{- with .content -}}
+          {{- $heightLimit = dict "content" . | merge $heightLimit -}}
+        {{- end -}}
+        {{- with .children -}}
+          {{- $heightLimit = dict "children" . | merge $heightLimit -}}
+        {{- end -}}
+        {{- if eq .scrollable true -}}
+          {{- $heightLimit = dict "scrollable" true | merge $heightLimit -}}
+        {{- end -}}
+        {{- $commentConfig = dict "heightLimit" $heightLimit | dict "artalk" | merge $commentConfig -}}
+      {{- end -}}
       <noscript>
         Please enable JavaScript to view the comments powered by <a href="https://github.com/ArtalkJS/Artalk" rel="external nofollow noopener noreferrer">Artalk</a>.
       </noscript>
@@ -123,7 +156,11 @@
       {{- $source := $cdn.valineJS | default "lib/valine/Valine.min.js" -}}
       {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/script.html" -}}
       {{- dict "Source" "js/lib/valine.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- $commentConfig = dict "el" "#valine" "appId" $valine.appId "appKey" $valine.appKey "lang" ($valine.lang | default (T "valineLang")) "visitor" $valine.visitor "recordIP" $valine.recordIP "placeholder" ($valine.placeholder | default (T "comment.valinePlaceholder")) "highlight" (ne $valine.highlight false) "enableQQ" $valine.enableQQ | dict "valine" | merge $commentConfig -}}
+      {{- /* Valine lang: https://github.com/xCss/Valine */ -}}
+      {{- $valineLang := $valine.lang | default .Lang -}}
+      {{- $valineLangs := dict "zh-cn" "zh-cn" "zh-tw" "zh-tw" "en" "en" "en-us" "en" "en-gb" "en" "ja" "ja" "ko" "ko" "ru" "ru" "fr" "fr" "pt-br" "pt" -}}
+      {{- $valineLang = or (index $valineLangs $valineLang) (index $valineLangs (index (split $valineLang "-") 0)) "en" -}}
+      {{- $commentConfig = dict "el" "#valine" "appId" $valine.appId "appKey" $valine.appKey "lang" $valineLang "visitor" $valine.visitor "recordIP" $valine.recordIP "placeholder" ($valine.placeholder | default (T "comment.valinePlaceholder")) "highlight" (ne $valine.highlight false) "enableQQ" $valine.enableQQ | dict "valine" | merge $commentConfig -}}
       {{- with $valine.avatar -}}
         {{- $commentConfig = dict "avatar" . | dict "valine" | merge $commentConfig -}}
       {{- end -}}
@@ -217,7 +254,11 @@
         data-width="{{ $facebook.width }}"
         data-numposts="{{ $facebook.numPosts }}"
       ></div>
-      {{- $source := printf "https://connect.facebook.net/%v/sdk.js#xfbml=1&version=v5.0&appId=%v&autoLogAppEvents=1" ($facebook.languageCode | default (T "comment.facebookLanguageCode")) $facebook.appId -}}
+      {{- /* Facebook locale: https://developers.facebook.com/docs/internationalization */ -}}
+      {{- $fbLang := $facebook.languageCode | default .Lang -}}
+      {{- $fbLangs := dict "zh" "zh_CN" "zh-cn" "zh_CN" "zh-tw" "zh_TW" "en" "en_US" "ja" "ja_JP" "ko" "ko_KR" "fr" "fr_FR" "de" "de_DE" "es" "es_ES" "pt" "pt_BR" "pt-br" "pt_BR" "ru" "ru_RU" "it" "it_IT" "hi" "hi_IN" "pl" "pl_PL" "ro" "ro_RO" "sr" "sr_RS" "vi" "vi_VN" -}}
+      {{- $fbLang = or (index $fbLangs $fbLang) (index $fbLangs (index (split $fbLang "-") 0)) "en_US" -}}
+      {{- $source := printf "https://connect.facebook.net/%v/sdk.js#xfbml=1&version=v5.0&appId=%v&autoLogAppEvents=1" $fbLang $facebook.appId -}}
       {{- dict "Source" $source "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
       <noscript>
         Please enable JavaScript to view the comments powered by <a href="https://developers.facebook.com/docs/plugins/comments/" rel="external nofollow noopener noreferrer">Facebook</a>.
@@ -277,14 +318,18 @@
     {{- end -}}
 
     {{- /* Twikoo Comment System */ -}}
-    {{- /* TODO review lang config https://github.com/twikoojs/twikoo/blob/main/src/client/utils/i18n/index.js */ -}}
     {{- $twikoo := $comment.twikoo | default dict -}}
     {{- if $twikoo.enable -}}
       <div id="twikoo"></div>
       {{- $source := $cdn.twikooJS | default "lib/twikoo/twikoo.all.min.js" -}}
       {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
       {{- dict "Source" "js/lib/twikoo.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- $commentConfig = dict "el" "#twikoo" "envId" $twikoo.envId "lang" .Lang | dict "twikoo" | merge $commentConfig -}}
+      {{- /* Twikoo lang: https://github.com/twikoojs/twikoo/blob/main/src/client/utils/i18n/index.js */ -}}
+      {{- $lang := $twikoo.lang | default .Lang -}}
+      {{- $langs := slice "zh" "zh-cn" "zh-hk" "zh-tw" "en" "en-us" "en-gb" "uz" "ja" "ja-jp" "ko" "ko-kr" "vi" "vi-vn" "pt" "hr" -}}
+      {{- $base := index (split $lang "-") 0 -}}
+      {{- $lang = or (and (in $langs $lang) $lang) (and (in $langs $base) $base) "en" -}}
+      {{- $commentConfig = dict "el" "#twikoo" "envId" $twikoo.envId "lang" $lang | dict "twikoo" | merge $commentConfig -}}
       {{- with $twikoo.region -}}
         {{- $commentConfig = dict "region" . | dict "twikoo" | merge $commentConfig -}}
       {{- end -}}
