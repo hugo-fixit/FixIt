@@ -76,8 +76,8 @@ libFiles:
   typeitJS: typeit@8.8.7/dist/index.umd.js
   # valine@1.5.3 https://github.com/xCss/Valine
   valineJS: valine@1.5.3/dist/Valine.min.js
-  # @waline/client@3.13.0 https://github.com/walinejs/waline
-  walineCSS: '@waline/client@3.13.0/dist/waline.css'
-  walineJS: '@waline/client@3.13.0/dist/waline.umd.js'
+  # @waline/client@3.15.0 https://github.com/walinejs/waline
+  walineCSS: '@waline/client@3.15.0/dist/waline.css'
+  walineJS: '@waline/client@3.15.0/dist/waline.umd.js'
   # xxhash-wasm@1.1.0 https://github.com/jungomi/xxhash-wasm
   xxhashWasmJS: xxhash-wasm@1.1.0/umd/xxhash-wasm.js
