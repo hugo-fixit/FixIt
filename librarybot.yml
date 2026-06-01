@@ -60,7 +60,7 @@ libraries:
         - from: css/all.min.css
           to: fontawesome-free/all.min.css
   - npm: fuse.js
-    version: 7.3.0
+    version: 7.4.0
     local:
       items:
         - from: dist/fuse.cjs
