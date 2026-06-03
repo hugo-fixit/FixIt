@@ -32,6 +32,12 @@ pnpm build             # Build all sites (demo + test, merged into public/)
 pnpm preview           # Preview built site (requires build first)
 ```
 
+### Code Generation
+
+```bash
+pnpm gen:lexers        # Regenerate assets/scss/core/maps/_chroma-lexers.scss from Chroma source
+```
+
 ### Code Quality
 
 ```bash
@@ -49,9 +55,10 @@ Root `package.json` is `@hugo-fixit/core`. pnpm workspaces include `apps/*` and 
 
 - `apps/demo/` — Demo site (deployed to `demo.fixit.lruihao.cn`)
 - `apps/test/` — Test site for exercising theme features
-- `packages/shared` — Shared utilities (exports `workspaceRoot`)
+- `packages/shared` — Shared utilities (exports `workspaceRoot`, `capitalize`, etc.)
 - `packages/versioning` — Version management (auto-updates version in `layouts/_partials/init/index.html` during pre-commit)
 - `packages/integration` — Post-build: merges demo/test output into `public/`
+- `packages/helpers` — Code generation helpers (CLI dispatcher pattern, sub-commands in `src/<name>/`)
 
 ### JavaScript Module System (`assets/js/`)
 

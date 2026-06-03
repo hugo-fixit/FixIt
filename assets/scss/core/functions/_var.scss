@@ -1,3 +1,4 @@
+@use "sass:meta";
 @use "sass:string";
 @use "override" as *;
 
@@ -10,6 +11,9 @@
 ///   background: fi-var(custom-bg, #fff);
 @function var($name, $fallback: null) {
   @if $fallback != null {
+    @if meta.type-of($fallback) == string {
+      @return string.unquote('var(#{$rootPrefix}#{$name}, "#{$fallback}")');
+    }
     @return string.unquote("var(#{$rootPrefix}#{$name}, #{$fallback})");
   }
 

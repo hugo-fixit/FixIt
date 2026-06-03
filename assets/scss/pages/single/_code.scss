@@ -205,7 +205,7 @@
           @include set-fi-var(code-expand-offset, 1.875rem + 0.5rem);
         }
       }
-      
+
       .code-header {
         display: flex;
         justify-content: space-between;
@@ -290,10 +290,10 @@
           color: fi-var(global-link-hover-color);
         }
 
-        @each $type, $text in $code-type-map {
+        @each $type, $text in $chroma-lexers {
           &.language-#{string.to-lower-case($type)} {
             // e.g., --fi-code-type: "JavaScript";
-            @include set-fi-var(code-type, '"#{$text}"');
+            @include set-fi-var(code-type, $text);
           }
         }
 

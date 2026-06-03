@@ -1,0 +1,39 @@
+name: Update Chroma lexer map
+on:
+  schedule:
+    # Run at 00:00, on day 1 of the month
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Generate lexer map
+        run: pnpm gen:lexers
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          title: 'chore(assets): regenerate chroma lexer map'
+          commit-message: 'chore(assets): regenerate chroma lexer map'
+          body: |
+            Auto-generated `assets/scss/core/maps/_chroma-lexers.scss` via `pnpm gen:lexers`.
+            Data from: [alecthomas/chroma](https://github.com/alecthomas/chroma/tree/master/lexers) latest release.
+          branch: auto/chroma-lexers
+          base: main
+          labels: dependencies
+          reviewers: Lruihao
+          author: Cell[bot] <lrhx@users.noreply.github.com>
+          committer: Cell[bot] <lrhx@users.noreply.github.com>
