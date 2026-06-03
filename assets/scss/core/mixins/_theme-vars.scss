@@ -11,7 +11,7 @@
 /// @example
 ///   @include set-fi-var(custom-color, #ff0000);
 @mixin set-fi-var($name, $value) {
-  #{$rootPrefix}#{$name}: #{$value};
+  #{$rootPrefix}#{$name}: $value;
 }
 
 /// Batch set CSS variables
@@ -23,7 +23,7 @@
 ///   ));
 @mixin set-fi-vars($vars) {
   @each $name, $value in $vars {
-    #{$rootPrefix}#{$name}: #{$value};
+    #{$rootPrefix}#{$name}: $value;
   }
 }
 

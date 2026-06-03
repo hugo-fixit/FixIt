@@ -75,6 +75,9 @@ pnpm lint
 # TypeScript type checking
 pnpm typecheck
 
+# Regenerate Chroma lexer map (assets/scss/core/maps/_chroma-lexers.scss)
+pnpm gen:lexers
+
 # Preview the built site locally (requires build first)
 pnpm preview
 ```
@@ -120,7 +123,8 @@ FixIt/
 ├── packages/           # Theme-related packages (pnpm workspaces)
 │   ├── shared/         # Shared utilities
 │   ├── versioning/     # Version management (pre-commit)
-│   └── integration/    # Post-build site merging
+│   ├── integration/    # Post-build site merging
+│   └── helpers/        # Code generation helpers
 ├── static/             # Static files
 ├── hugo.toml           # Default theme configuration
 └── package.json        # npm scripts and dependencies

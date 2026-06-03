@@ -41,6 +41,7 @@
     "typecheck": "tsc --noEmit",
     "version": "pnpm -F versioning start prod",
     "changelog": "auto-changelog-plus --starting-date 2021-12-18",
+    "gen:lexers": "pnpm -F helpers start chroma-lexers",
     "prepare": "simple-git-hooks"
   },
   "devDependencies": {

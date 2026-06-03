@@ -1,9 +1,9 @@
-/* eslint-disable no-console */
 import { execFileSync, execSync } from 'node:child_process'
 import fs from 'node:fs'
 import { join } from 'node:path'
 import process from 'node:process'
 import { workspaceRoot } from '@hugo-fixit/shared'
+import consola from 'consola'
 
 const ISO_TIMESTAMP_CLEAN_RE = /[-:TZ]/g
 const VERSION_PATCH_RE = /(\d+)$/
@@ -30,20 +30,20 @@ export function updateVersion(type: 'dev' | 'prod') {
   ]
   const gitDiff: string = execSync('git diff --cached --name-only').toString().trim()
 
-  // console.log(
-  //   'Node.js:',
-  //   execSync('which node').toString().trim(),
-  //   process.version,
-  // )
+  consola.info(
+    'Node.js:',
+    execSync('which node').toString().trim(),
+    process.version,
+  )
 
   if (type !== 'prod') {
     // Avoid conflicts when creating a Pull Request
     if (!['dev', 'main'].includes(branch)) {
-      console.log(`The current branch is ${branch}, no need to update the FixIt version.`)
+      consola.info(`The current branch is ${branch}, no need to update the FixIt version.`)
       process.exit(0)
     }
     if (!match.some(item => gitDiff.includes(item))) {
-      console.log('No need to update the FixIt version.')
+      consola.info('No need to update the FixIt version.')
       process.exit(0)
     }
   }
@@ -71,7 +71,7 @@ export function updateVersion(type: 'dev' | 'prod') {
 
   if (lastVersion === version && gitDiff.includes('layouts/_partials/init/index.html')) {
     // After running `npm version` or manually modifying the version number, skip the update
-    console.log(`The FixIt version has been updated to v${lastVersion}.`)
+    consola.info(`The FixIt version has been updated to v${lastVersion}.`)
     process.exit(0)
   }
 
@@ -81,7 +81,7 @@ export function updateVersion(type: 'dev' | 'prod') {
   if (type === 'prod' && nextVersion) {
     delete packageJson.nextVersion
     fs.writeFileSync(packageJsonPath, `${JSON.stringify(packageJson, null, 2)}\n`)
-    console.log('Removed nextVersion field from package.json.')
+    consola.info('Removed nextVersion field from package.json.')
   }
   // Add the updated files to the git stage
   const toStageFiles: string[] = [
@@ -96,5 +96,5 @@ export function updateVersion(type: 'dev' | 'prod') {
       execFileSync('git', ['add', stageFile])
     }
   })
-  console.log(`Update the FixIt version from v${lastVersion} to v${latestVersion}.`)
+  consola.info(`Update the FixIt version from v${lastVersion} to v${latestVersion}.`)
 }

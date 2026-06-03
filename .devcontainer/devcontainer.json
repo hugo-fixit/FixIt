@@ -17,7 +17,8 @@
         "lruihao.hugo-partials-refs",
         "tamasfe.even-better-toml",
         "casualjim.gotemplate",
-        "SomewhatStationery.some-sass"
+        "SomewhatStationery.some-sass",
+        "gruntfuggly.todo-tree"
       ]
     }
   }
