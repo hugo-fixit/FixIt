@@ -121,10 +121,10 @@ FixIt/
 │   ├── _partials/      # Reusable template components
 │   └── _shortcodes/    # Custom shortcodes
 ├── packages/           # Theme-related packages (pnpm workspaces)
-│   ├── shared/         # Shared utilities
-│   ├── versioning/     # Version management (pre-commit)
+│   ├── chroma-lexers/  # Chroma lexer SCSS map generator
 │   ├── integration/    # Post-build site merging
-│   └── helpers/        # Code generation helpers
+│   ├── shared/         # Shared utilities
+│   └── versioning/     # Version management (pre-commit)
 ├── static/             # Static files
 ├── hugo.toml           # Default theme configuration
 └── package.json        # npm scripts and dependencies

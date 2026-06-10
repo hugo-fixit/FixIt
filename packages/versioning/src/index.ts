@@ -1,5 +1,5 @@
 import process from 'node:process'
-import consola from 'consola'
+import { consola } from '@hugo-fixit/shared'
 import { updateVersion } from './update-version'
 
 const type: string = process.argv[2]

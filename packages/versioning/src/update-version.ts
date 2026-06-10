@@ -1,11 +1,8 @@
-import { execFileSync, execSync } from 'node:child_process'
+import { execFileSync } from 'node:child_process'
 import fs from 'node:fs'
-import { join } from 'node:path'
 import process from 'node:process'
-import { workspaceRoot } from '@hugo-fixit/shared'
-import consola from 'consola'
+import { consola, fromRoot, runCommand } from '@hugo-fixit/shared'
 
-const ISO_TIMESTAMP_CLEAN_RE = /[-:TZ]/g
 const VERSION_PATCH_RE = /(\d+)$/
 const VERSION_RE = /v\d+\.\d+\.\d+(-[\w.-]+)?/
 
@@ -14,7 +11,7 @@ const VERSION_RE = /v\d+\.\d+\.\d+(-[\w.-]+)?/
  * @param type version type
  */
 export function updateVersion(type: 'dev' | 'prod') {
-  const branch: string = execSync('git rev-parse --abbrev-ref HEAD').toString().trim()
+  const branch: string = runCommand('git rev-parse --abbrev-ref HEAD')
   const match: string[] = [
     'archetypes/',
     'assets/',
@@ -28,13 +25,13 @@ export function updateVersion(type: 'dev' | 'prod') {
     'pnpm-lock.yaml',
     'theme.toml',
   ]
-  const gitDiff: string = execSync('git diff --cached --name-only').toString().trim()
+  const gitDiff: string = runCommand('git diff --cached --name-only')
 
-  consola.info(
-    'Node.js:',
-    execSync('which node').toString().trim(),
-    process.version,
-  )
+  // consola.info(
+  //   'Node.js:',
+  //   runCommand('which node'),
+  //   process.version,
+  // )
 
   if (type !== 'prod') {
     // Avoid conflicts when creating a Pull Request
@@ -47,19 +44,17 @@ export function updateVersion(type: 'dev' | 'prod') {
       process.exit(0)
     }
   }
-  const initHtmlPath: string = join(workspaceRoot, 'layouts/_partials/init/index.html')
-  const packageJsonPath: string = join(workspaceRoot, 'package.json')
+  const initHtmlPath: string = fromRoot('layouts/_partials/init/index.html')
+  const packageJsonPath: string = fromRoot('package.json')
   const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'))
   const version: string = packageJson.version
-  // Get the short hash of the last commit (can not get this commit hash at pre-commit hook)
-  const shortHash: string = execSync('git rev-parse --short HEAD').toString().trim()
-  // Build the development version v{major}.{minor}.{patch+1}-{timestamp}-{shortHash}
-  // e.g. v0.3.21-20250702061540-abcdefg
-  // If `nextVersion` is set in package.json, use it as the base instead of auto-incrementing patch.
-  const timestamp: string = new Date().toISOString().replace(ISO_TIMESTAMP_CLEAN_RE, '').slice(0, -4)
+  const timestamp: string = Date.now().toString(36)
   const nextVersion: string | undefined = packageJson.nextVersion
+  // If `nextVersion` is set in package.json, use it as the base instead of auto-incrementing patch.
   const devBaseVersion: string = nextVersion ?? version.replace(VERSION_PATCH_RE, (_versionPatchMatch, part) => (Number.parseInt(part, 10) + 1).toString())
-  const devVersion: string = `${devBaseVersion}-${timestamp}-${shortHash}`
+  // Development version syntax: v{major}.{minor}.{patch+1}-{timestamp(36)}
+  // e.g. v0.3.21-mq7veaoa
+  const devVersion: string = `${devBaseVersion}-${timestamp}`
   const initHtml: string = fs.readFileSync(initHtmlPath, 'utf8')
   const latestVersion: string = type === 'prod' ? version : devVersion
   const versionMatch = initHtml.match(VERSION_RE)
@@ -91,10 +86,12 @@ export function updateVersion(type: 'dev' | 'prod') {
     'pnpm-lock.yaml',
   ]
   toStageFiles.forEach((file) => {
-    const stageFile = join(workspaceRoot, file)
+    const stageFile = fromRoot(file)
     if (fs.existsSync(stageFile)) {
       execFileSync('git', ['add', stageFile])
     }
   })
-  consola.info(`Update the FixIt version from v${lastVersion} to v${latestVersion}.`)
+  if (lastVersion !== latestVersion) {
+    consola.info(`Update the FixIt version from v${lastVersion} to v${latestVersion}.`)
+  }
 }

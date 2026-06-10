@@ -4,5 +4,8 @@
   "private": true,
   "description": "Internal utilities shared across @hugo-fixit packages",
   "author": "Lruihao",
-  "main": "src/index.ts"
+  "main": "src/index.ts",
+  "dependencies": {
+    "consola": "^3.4.2"
+  }
 }

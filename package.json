@@ -41,7 +41,7 @@
     "typecheck": "tsc --noEmit",
     "version": "pnpm -F versioning start prod",
     "changelog": "auto-changelog-plus --starting-date 2021-12-18",
-    "gen:lexers": "pnpm -F helpers start chroma-lexers",
+    "gen:lexers": "pnpm -F chroma-lexers start",
     "prepare": "simple-git-hooks"
   },
   "devDependencies": {
@@ -50,6 +50,7 @@
     "auto-changelog-plus": "^1.2.4",
     "concurrently": "^9.2.1",
     "eslint": "^10.3.0",
+    "jiti": "^2.7.0",
     "lint-staged": "^17.0.4",
     "serve": "^14.2.6",
     "simple-git-hooks": "^2.13.1",

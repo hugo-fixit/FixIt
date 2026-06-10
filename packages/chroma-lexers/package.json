@@ -1,7 +1,7 @@
 {
-  "name": "@hugo-fixit/helpers",
+  "name": "@hugo-fixit/chroma-lexers",
   "private": true,
-  "description": "Code generation helpers for the FixIt theme",
+  "description": "Generate Chroma lexer SCSS map from GitHub for the FixIt theme",
   "author": "Lruihao",
   "main": "src/index.ts",
   "scripts": {
@@ -9,7 +9,6 @@
   },
   "devDependencies": {
     "@hugo-fixit/shared": "workspace:*",
-    "consola": "^3.4.2",
     "ora": "^9.4.0"
   }
 }

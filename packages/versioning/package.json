@@ -8,7 +8,6 @@
     "start": "tsx src/index.ts"
   },
   "devDependencies": {
-    "@hugo-fixit/shared": "workspace:*",
-    "consola": "^3.4.2"
+    "@hugo-fixit/shared": "workspace:*"
   }
 }

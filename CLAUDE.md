@@ -55,10 +55,10 @@ Root `package.json` is `@hugo-fixit/core`. pnpm workspaces include `apps/*` and 
 
 - `apps/demo/` — Demo site (deployed to `demo.fixit.lruihao.cn`)
 - `apps/test/` — Test site for exercising theme features
-- `packages/shared` — Shared utilities (exports `workspaceRoot`, `capitalize`, etc.)
+- `packages/shared` — Shared utilities (exports `workspaceRoot`, `fromRoot`, `runCommand`, `capitalize`, `consola`)
 - `packages/versioning` — Version management (auto-updates version in `layouts/_partials/init/index.html` during pre-commit)
 - `packages/integration` — Post-build: merges demo/test output into `public/`
-- `packages/helpers` — Code generation helpers (CLI dispatcher pattern, sub-commands in `src/<name>/`)
+- `packages/chroma-lexers` — Generates Chroma lexer SCSS map from GitHub
 
 ### JavaScript Module System (`assets/js/`)
 
@@ -145,4 +145,4 @@ Pre-commit runs: versioning (dev mode), typecheck, lint-staged (eslint --fix on 
 
 ## ESLint
 
-Uses `@antfu/eslint-config` with TypeScript support. Config at `eslint.config.js`.
+Uses `@antfu/eslint-config` with TypeScript support. Config at `eslint.config.ts`.

@@ -1,7 +1,6 @@
 import { Buffer } from 'node:buffer'
-import { execSync } from 'node:child_process'
 import process from 'node:process'
-import consola from 'consola'
+import { consola, runCommand } from '@hugo-fixit/shared'
 import ora from 'ora'
 
 export interface LexerEntry {
@@ -44,7 +43,7 @@ function getGitHubToken(): string | undefined {
     return process.env.GITHUB_TOKEN
   }
   try {
-    return execSync('gh auth token', { encoding: 'utf-8' }).trim()
+    return runCommand('gh auth token')
   }
   catch {
     return undefined
@@ -54,7 +53,7 @@ function getGitHubToken(): string | undefined {
 function getHeaders(): Record<string, string> {
   const headers: Record<string, string> = {
     'Accept': 'application/vnd.github.v3+json',
-    'User-Agent': '@hugo-fixit/helpers',
+    'User-Agent': '@hugo-fixit/chroma-lexers',
   }
   const token = getGitHubToken()
   if (token) {
@@ -91,10 +90,10 @@ async function fetchDirectoryListing(dir: string, ref: string): Promise<Array<{ 
 function decodeHtmlEntities(str: string): string {
   return str
     .replace(/&#39;/g, '\'')
-    .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, '&')
 }
 
 function parseLexerXml(xml: string): LexerEntry[] {
