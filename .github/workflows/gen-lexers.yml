@@ -35,5 +35,6 @@ jobs:
           base: main
           labels: dependencies
           reviewers: Lruihao
+          token: ${{ secrets.BOT_TOKEN }}
           author: Cell[bot] <lrhx@users.noreply.github.com>
           committer: Cell[bot] <lrhx@users.noreply.github.com>
