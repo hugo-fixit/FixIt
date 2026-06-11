@@ -148,7 +148,7 @@ libraries:
         - from: sharer.min.js
           to: sharer/sharer.min.js
   - npm: simple-icons
-    version: 16.22.0
+    version: 16.23.0
     local:
       items:
         - type: dir
