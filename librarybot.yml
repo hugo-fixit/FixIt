@@ -64,11 +64,11 @@ libraries:
         - from: css/all.min.css
           to: fontawesome-free/all.min.css
   - npm: fuse.js
-    version: 7.3.0
+    version: 7.4.2
     local:
       items:
-        - from: dist/fuse.min.js
-          to: fuse/fuse.min.js
+        - from: dist/fuse.mjs
+          to: fuse/fuse.mjs
   - npm: gitalk
     version: 1.8.0
     local:
