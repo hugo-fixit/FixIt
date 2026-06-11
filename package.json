@@ -38,7 +38,7 @@
     "clean": "rm -rf public resources/_gen apps/*/public apps/*/resources/_gen",
     "preview": "serve public",
     "lint": "eslint --cache .",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit -p assets/tsconfig.json",
     "version": "pnpm -F versioning start prod",
     "changelog": "auto-changelog-plus --starting-date 2021-12-18",
     "gen:lexers": "pnpm -F chroma-lexers start",

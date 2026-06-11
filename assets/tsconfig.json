@@ -11,6 +11,6 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
   },
-  "include": ["assets/js/**/*.ts"],
+  "include": ["js/**/*.ts"],
   "exclude": ["node_modules"]
 }
