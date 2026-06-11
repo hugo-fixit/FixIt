@@ -12,8 +12,8 @@ importers:
         specifier: ^9.0.0
         version: 9.0.0(@typescript-eslint/rule-tester@8.56.1(eslint@10.4.1(jiti@2.7.0))(typescript@6.0.3))(@typescript-eslint/typescript-estree@8.59.2(typescript@6.0.3))(@typescript-eslint/utils@8.59.2(eslint@10.4.1(jiti@2.7.0))(typescript@6.0.3))(@vue/compiler-sfc@3.5.20)(eslint@10.4.1(jiti@2.7.0))(typescript@6.0.3)
       '@types/node':
-        specifier: ^25.9.2
-        version: 25.9.2
+        specifier: ^25.9.3
+        version: 25.9.3
       auto-changelog-plus:
         specifier: ^1.3.0
         version: 1.3.0
@@ -483,6 +483,9 @@ packages:
 
   '@types/node@25.9.2':
     resolution: {integrity: sha512-G05zqtJhcDLb8uslf5EjCxXg9G1KQxiV8OS0R26IC//Eoyitzqe8z37I7cqvnZlrlSfgocQRfSn/AHBZJJFyGw==}
+
+  '@types/node@25.9.3':
+    resolution: {integrity: sha512-603BddQMv3pUcr4U2dhujk83N2tTDVr/34wII2B6bJy6g+8WD6yUb11jszNs0gdi4PesVWl7ABt8nYMVpnLUcg==}
 
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
@@ -1830,6 +1833,11 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  semver@7.8.4:
+    resolution: {integrity: sha512-rUCObTnP32Q08R2uuIrt7r9PlEonuTmtuXYcW6s5kjdlj3xbnwe+21yXptAUYcMAABLkYYTtnmzb3w3EDZfueA==}
+    engines: {node: '>=10'}
+    hasBin: true
+
   serve-handler@6.1.7:
     resolution: {integrity: sha512-CinAq1xWb0vR3twAv9evEU8cNWkXCb9kd5ePAHUKJBkOsUpR1wt/CvGdeca7vqumL1U5cSaeVQ6zZMxiJ3yWsg==}
 
@@ -2448,6 +2456,10 @@ snapshots:
     dependencies:
       undici-types: 7.24.6
 
+  '@types/node@25.9.3':
+    dependencies:
+      undici-types: 7.24.6
+
   '@types/unist@3.0.3': {}
 
   '@typescript-eslint/eslint-plugin@8.59.2(@typescript-eslint/parser@8.59.2(eslint@10.4.1(jiti@2.7.0))(typescript@6.0.3))(eslint@10.4.1(jiti@2.7.0))(typescript@6.0.3)':
@@ -2492,8 +2504,8 @@ snapshots:
 
   '@typescript-eslint/project-service@8.56.1(typescript@6.0.3)':
     dependencies:
-      '@typescript-eslint/tsconfig-utils': 8.59.2(typescript@6.0.3)
-      '@typescript-eslint/types': 8.59.2
+      '@typescript-eslint/tsconfig-utils': 8.56.1(typescript@6.0.3)
+      '@typescript-eslint/types': 8.56.1
       debug: 4.4.3
       typescript: 6.0.3
     transitivePeerDependencies:
@@ -2517,7 +2529,7 @@ snapshots:
       eslint: 10.4.1(jiti@2.7.0)
       json-stable-stringify-without-jsonify: 1.0.1
       lodash.merge: 4.6.2
-      semver: 7.8.3
+      semver: 7.8.4
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -2564,7 +2576,7 @@ snapshots:
       '@typescript-eslint/visitor-keys': 8.56.1
       debug: 4.4.3
       minimatch: 10.2.5
-      semver: 7.8.3
+      semver: 7.8.4
       tinyglobby: 0.2.17
       ts-api-utils: 2.5.0(typescript@6.0.3)
       typescript: 6.0.3
@@ -4042,6 +4054,8 @@ snapshots:
   semver@7.8.0: {}
 
   semver@7.8.3: {}
+
+  semver@7.8.4: {}
 
   serve-handler@6.1.7:
     dependencies:
