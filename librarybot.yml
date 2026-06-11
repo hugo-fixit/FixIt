@@ -2,7 +2,7 @@ schemaVersion: 1
 baseDir: assets/lib
 libraries:
   - npm: algoliasearch
-    version: 5.52.1
+    version: 5.53.0
   - npm: animate.css
     version: 4.1.1
     local:
