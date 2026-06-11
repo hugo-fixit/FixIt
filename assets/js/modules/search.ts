@@ -177,12 +177,37 @@ export class SearchModule implements SearchService {
             callback(results)
           }
           if (searchConfig.type === 'algolia') {
-            this.#algoliaIndex
-              = this.#algoliaIndex
-                || window.algoliasearch!(
-                  searchConfig.algoliaAppID,
-                  searchConfig.algoliaSearchKey,
-                ).initIndex(searchConfig.algoliaIndex)
+            if (!this.#algoliaIndex) {
+              // Algolia v5 lite UMD exposes window['algoliasearch/lite'].liteClient.
+              const liteClient = (window as any)['algoliasearch/lite']?.liteClient
+              if (!liteClient) {
+                console.error('Algolia client is not available on window')
+                finish([])
+                return
+              }
+              const client = liteClient(searchConfig.algoliaAppID, searchConfig.algoliaSearchKey)
+              this.#algoliaIndex = {
+                search: (queryText: string, params: Record<string, any> = {}) => {
+                  const {
+                    offset,
+                    length,
+                    ...rest
+                  } = params
+                  const request: Record<string, any> = {
+                    indexName: searchConfig.algoliaIndex,
+                    query: queryText,
+                    ...rest,
+                  }
+                  if (typeof length === 'number')
+                    request.hitsPerPage = length
+                  if (typeof offset === 'number' && typeof length === 'number' && length > 0)
+                    request.page = Math.floor(offset / length)
+                  return client
+                    .search({ requests: [request] })
+                    .then((response: any) => ({ hits: response.results?.[0]?.hits ?? [] }))
+                },
+              }
+            }
             this.#algoliaIndex
               .search(query, {
                 offset: 0,

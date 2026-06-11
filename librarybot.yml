@@ -3,6 +3,10 @@ baseDir: assets/lib
 libraries:
   - npm: algoliasearch
     version: 5.53.0
+    local:
+      items:
+        - from: dist/lite/builds/browser.umd.js
+          to: algoliasearch/browser.umd.js
   - npm: animate.css
     version: 4.1.1
     local:
@@ -63,8 +67,8 @@ libraries:
     version: 7.3.0
     local:
       items:
-        - from: dist/fuse.cjs
-          to: fuse/fuse.js
+        - from: dist/fuse.min.js
+          to: fuse/fuse.min.js
   - npm: gitalk
     version: 1.8.0
     local:
