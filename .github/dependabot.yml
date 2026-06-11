@@ -37,12 +37,3 @@ updates:
       - Lruihao
     labels:
       - dependencies
-  - package-ecosystem: gitsubmodule
-    directory: /
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 1000
-    assignees:
-      - Lruihao
-    labels:
-      - dependencies
