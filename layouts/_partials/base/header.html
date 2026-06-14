@@ -96,17 +96,13 @@
         {{- end -}}
         {{- if .Site.Params.search.enable -}}
           <li class="menu-item search" id="search-desktop">
-            <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `assets.searchPlaceholder`) }}" id="search-input-desktop" tabindex="-1">
-            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="{{ T `assets.search` }}" aria-controls="search-dropdown-desktop" aria-expanded="false">
+            <button type="button" class="search-trigger" id="search-trigger-desktop" aria-label="{{ T "assets.search" }}" title="{{ T "assets.search" }}">
               {{ dict "Class" "fa-solid fa-search" | partial "plugin/icon.html" }}
-            </a>
-            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="{{ T `assets.clear` }}">
-              {{ dict "Class" "fa-solid fa-times-circle" | partial "plugin/icon.html" }}
-            </a>
-            <span class="search-button search-loading" id="search-loading-desktop">
-              {{ dict "Class" "fa-solid fa-spinner fa-spin" | partial "plugin/icon.html" }}
-            </span>
+              {{ T "assets.search" }}
+              <kbd>Ctrl K</kbd>
+            </button>
           </li>
+          <li class="menu-item delimiter"></li>
         {{- end -}}
         <li class="menu-item theme-switch-item">
           <button type="button" class="theme-switch" aria-label="{{ T "header.switchTheme" }}" title="{{ T "header.switchTheme" }}">
@@ -200,21 +196,10 @@
       <ul class="menu" id="menu-mobile">
         {{- if .Site.Params.search.enable -}}
           <li class="search-wrapper">
-            <div class="search mobile" id="search-mobile">
-              <input type="text" placeholder="{{ .Site.Params.search.placeholder | default (T `assets.searchPlaceholder`) }}" id="search-input-mobile">
-              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="{{ T `assets.search` }}" aria-controls="search-dropdown-mobile" aria-expanded="false">
-                {{ dict "Class" "fa-solid fa-search" | partial "plugin/icon.html" }}
-              </a>
-              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="{{ T `assets.clear` }}">
-                {{ dict "Class" "fa-solid fa-times-circle" | partial "plugin/icon.html" }}
-              </a>
-              <span class="search-button search-loading" id="search-loading-mobile">
-                {{ dict "Class" "fa-solid fa-spinner fa-spin" | partial "plugin/icon.html" }}
-              </span>
-            </div>
-            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
-              {{ T `assets.cancel` }}
-            </a>
+            <button type="button" class="search-trigger mobile" id="search-trigger-mobile" aria-label="{{ T "assets.search" }}">
+              {{ dict "Class" "fa-solid fa-search" | partial "plugin/icon.html" }}
+              <span>{{ .Site.Params.search.placeholder | default (T `assets.searchPlaceholder`) }}</span>
+            </button>
           </li>
         {{- end -}}
         {{- $currentPage := . -}}
@@ -321,11 +306,3 @@
   </div>
 </header>
 
-{{- if .Site.Params.search.enable -}}
-  <div class="search-dropdown desktop">
-    <div id="search-dropdown-desktop"></div>
-  </div>
-  <div class="search-dropdown mobile">
-    <div id="search-dropdown-mobile"></div>
-  </div>
-{{- end -}}

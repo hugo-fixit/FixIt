@@ -44,6 +44,17 @@
   {{- /* Search mask */ -}}
   <div id="mask"></div>
 
+  {{- /* Search dialog */ -}}
+  {{- if .Site.Params.search.enable -}}
+    <dialog id="search-dialog" class="search-dialog" aria-label="{{ T "assets.search" }}" closedby="any">
+      <div class="search-modal">
+        <div class="search-modal-header">
+          <div id="search-modal-autocomplete"></div>
+        </div>
+      </div>
+    </dialog>
+  {{- end -}}
+
   {{- /* Reading progress bar */ -}}
   {{- $readingProgress := .Site.Params.readingProgress -}}
   {{- if $readingProgress.enable -}}
@@ -71,9 +82,9 @@
     {{- $linkGuard = (cond (reflect.IsMap .) . (dict "enable" .)) | merge $linkGuard -}}
   {{- end -}}
   {{- if $linkGuard.enable | and (eq $linkGuard.mode "modal") -}}
-    <dialog id="link-guard-dialog" aria-labelledby="link-guard-dialog-title" role="dialog" closedby="any">
+    <dialog id="link-guard-dialog" aria-labelledby="link-guard-dialog-title" closedby="any">
       <div class="guard-content">
-        <h2 class="title">{{ T "linkRedirection.title" }}</h2>
+        <h2 class="title" id="link-guard-dialog-title">{{ T "linkRedirection.title" }}</h2>
         <p class="message">{{ dict "Title" .Site.Title | T "linkRedirection.message" }}</p>
         <div class="target-wrapper">
           <p class="target">-</p>

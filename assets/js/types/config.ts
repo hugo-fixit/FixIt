@@ -34,6 +34,7 @@ export interface FixItConfig {
 
 export interface SearchConfig {
   type?: string
+  placeholder?: string
   maxResultLength?: number
   snippetLength?: number
   highlightTag?: string

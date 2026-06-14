@@ -1,6 +1,12 @@
 schemaVersion: 1
 baseDir: assets/lib
 libraries:
+  - npm: '@algolia/autocomplete-js'
+    version: 1.19.8
+    local:
+      items:
+        - from: dist/umd/index.production.js
+          to: autocomplete-js/index.production.js
   - npm: algoliasearch
     version: 5.53.0
     local:
