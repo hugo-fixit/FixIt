@@ -49,7 +49,24 @@
     <dialog id="search-dialog" class="search-dialog" aria-label="{{ T "assets.search" }}" closedby="any">
       <div class="search-modal">
         <div class="search-modal-header">
-          <div id="search-modal-autocomplete"></div>
+          <span class="search-delimiter"></span>
+          <button type="button" class="search-close-btn" aria-label="Close Search Dialog"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+        </div>
+        <div class="search-source-footer">
+          {{- $searchType := .Site.Params.search.type -}}
+          {{- $meta := dict
+            "algolia" (dict "label" "algolia" "icon" "fa-brands fa-algolia" "href" "https://www.algolia.com/")
+            "cse" (dict "label" "Google CSE" "icon" "fa-brands fa-google" "href" "https://programmablesearchengine.google.com/")
+            "pagefind" (dict "label" "Pagefind" "href" "https://pagefind.app/")
+            "fuse" (dict "label" "Fuse.js" "href" "https://fusejs.io/")
+          -}}
+          {{- with index $meta $searchType -}}
+            {{- $icon := dict -}}
+            {{- if .icon -}}
+              {{- $icon = dict "Class" .icon -}}
+            {{- end -}}
+            Search by {{ dict "Destination" .href "Content" .label "Icon" $icon "ExternalIcon" false | partial "plugin/link.html" -}}
+          {{- end -}}
         </div>
       </div>
     </dialog>

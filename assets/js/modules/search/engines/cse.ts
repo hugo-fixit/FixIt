@@ -18,6 +18,7 @@ export function createCSEEngine(cseConfig: CSEConfig | undefined): SearchEngine 
           icon: '<i class="fa-brands fa-google" aria-hidden="true"></i>',
         }]
       }
+      console.warn('CSE is not properly configured. Please set cse.engine to "google" and provide a cx value in your site config.')
       return [{
         uri: '',
         title: 'CSE is not configured',

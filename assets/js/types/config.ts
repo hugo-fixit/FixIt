@@ -52,6 +52,7 @@ export interface SearchConfig {
   algoliaSearchKey?: string
   algoliaIndex?: string
   noResultsFound?: string
+  clearText?: string
   pagefind?: PagefindConfig
 }
 

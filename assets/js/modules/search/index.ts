@@ -1,14 +1,13 @@
 import type { CoreService, SearchService } from '../../core/tokens'
 import type { SearchEngine, SearchResult } from './types'
 
-import { HTMLEscape, isMobile } from '../../utils'
+import { isMobile } from '../../utils'
 import { createAlgoliaEngine } from './engines/algolia'
 import { createCSEEngine } from './engines/cse'
 import { createFuseEngine } from './engines/fuse'
 import { createPagefindEngine } from './engines/pagefind'
-import { SEARCH_META } from './types'
 
-/** Module-level close function for navigator callback. */
+/** Module-level close function for dialog. */
 let globalCloseDialog: (() => void) | undefined
 
 /**
@@ -73,6 +72,9 @@ export class SearchModule implements SearchService {
     if (!searchConfig || !this.#engine)
       return
 
+    searchConfig.placeholder = searchConfig.placeholder || 'Search...'
+    searchConfig.clearText = searchConfig.clearText || 'Clear'
+
     const autocompleteLib = (window as any)['@algolia/autocomplete-js']
     if (!autocompleteLib?.autocomplete) {
       console.error('[FixIt] @algolia/autocomplete-js is not available on window')
@@ -88,13 +90,38 @@ export class SearchModule implements SearchService {
     const panelContainer = document.querySelector('#search-dialog .search-modal')
 
     this.#autocompleteInstance = autocomplete({
-      container: '#search-modal-autocomplete',
+      container: '.search-modal-header',
       panelContainer: panelContainer || undefined,
-      placeholder: searchConfig.placeholder || '',
+      placeholder: searchConfig.placeholder,
       openOnFocus: true,
       defaultActiveItemId: 0,
       detachedMediaQuery: 'none',
-      classNames: { noPrefix: true },
+      shouldPanelOpen({ state }: { state: { query: string } }) {
+        return state.query.trim().length > 0
+      },
+      translations: {
+        clearButtonTitle: searchConfig.clearText,
+      },
+      classNames: {
+        root: 'search-autocomplete',
+        form: 'search-form',
+        input: 'search-input',
+        inputWrapper: 'search-input-wrapper',
+        inputWrapperPrefix: 'search-input-prefix',
+        inputWrapperSuffix: 'search-input-suffix',
+        submitButton: 'search-submit-btn',
+        clearButton: 'search-clear-btn',
+        loadingIndicator: 'search-loading',
+        label: 'search-label',
+        list: 'search-list',
+        item: 'search-item',
+        panel: 'search-panel',
+        panelLayout: 'search-panel-layout',
+        source: 'search-source',
+        sourceFooter: 'search-source-footer',
+        sourceHeader: 'search-source-header',
+        sourceNoResults: 'search-source-no-results',
+      },
       getSources({ query }: { query: string }) {
         if (!query.trim())
           return []
@@ -112,33 +139,40 @@ export class SearchModule implements SearchService {
               const icon = item.icon ? h`<span class="suggestion-icon" dangerouslySetInnerHTML=${{ __html: item.icon }}></span>` : ''
               const date = item.date ? h`<span class="suggestion-date">${item.date}</span>` : ''
               const context = h`<div class="suggestion-context" dangerouslySetInnerHTML=${{ __html: item.context }}></div>`
-              return h`<div class="aa-ItemWrapper"><div><a href="${item.uri}">${title}</a>${icon}${date}</div>${context}</div>`
+              return h`<div class="search-item-wrapper"><div><a href="${item.uri}">${title}</a>${icon}${date}</div>${context}</div>`
             },
             noResults({ html: h }: { html: any }) {
-              const query_ = h`<span class="search-query">"${HTMLEscape(query)}"</span>`
-              return h`<div class="search-empty">${searchConfig.noResultsFound}: ${query_}</div>`
+              return h`<div class="search-empty"><i class="fa-solid fa-magnifying-glass search-empty-icon" aria-hidden="true"></i><p>${searchConfig.noResultsFound}: <span class="search-query">"${query}"</span></p></div>`
             },
-            footer({ html: h }: { html: any }) {
-              const meta = SEARCH_META[searchConfig.type!]
-              if (!meta)
-                return ''
-              const icon = meta.icon ? h`<span dangerouslySetInnerHTML=${{ __html: meta.icon }}></span> ` : ''
-              return h`<div class="search-footer">Search by <a href="${meta.href}" rel="noopener noreferrer" target="_blank">${icon}${meta.label}</a></div>`
-            },
+          },
+          onSelect({ item }: { item: SearchResult }) {
+            if (item.uri) {
+              globalCloseDialog?.()
+              window.location.assign(item.uri)
+            }
           },
         }]
       },
-      navigator: {
-        navigate({ itemUrl }: { itemUrl: string }) {
-          closeDialog()
-          window.location.assign(itemUrl)
-        },
-      },
     })
+
+    // Replace clear button SVG with text
+    const clearBtn = document.querySelector('.search-autocomplete .search-clear-btn')
+    if (clearBtn) {
+      clearBtn.textContent = searchConfig.clearText
+    }
+
+    // Prevent blur when clicking inside modal but outside form
+    panelContainer?.addEventListener('mousedown', (e) => {
+      if (!(e.target as HTMLElement).closest('.search-form'))
+        e.stopPropagation()
+    })
+
+    // Close button
+    document.querySelector('.search-close-btn')?.addEventListener('click', () => globalCloseDialog?.())
 
     // Preload pagefind on first focus
     if (searchConfig.type === 'pagefind' && this.#engine.preload) {
-      const container = document.getElementById('search-modal-autocomplete')
+      const container = document.querySelector('.search-autocomplete')
       container?.addEventListener('focusin', () => {
         this.#engine!.preload!().catch((error: Error) => {
           console.error(error)
@@ -177,7 +211,7 @@ export class SearchModule implements SearchService {
       }
     }
 
-    // Expose close for navigator callback
+    // Expose close function for use in autocomplete callbacks
     globalCloseDialog = close
 
     document.getElementById('search-trigger-desktop')?.addEventListener('click', open)
@@ -236,8 +270,4 @@ export class SearchModule implements SearchService {
       el.textContent = isMac ? '⌘ K' : 'Ctrl K'
     })
   }
-}
-
-function closeDialog() {
-  globalCloseDialog?.()
 }

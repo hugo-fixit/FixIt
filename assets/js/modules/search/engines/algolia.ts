@@ -7,6 +7,20 @@ import type { SearchEngine, SearchResult } from '../types'
  * Lazily initializes the Algolia v5 lite client on first search.
  */
 export function createAlgoliaEngine(searchConfig: SearchConfig): SearchEngine {
+  if (!searchConfig.algoliaAppID || !searchConfig.algoliaSearchKey || !searchConfig.algoliaIndex) {
+    console.warn('[FixIt] Algolia is not configured. Please set `search.algolia.appID`, `search.algolia.searchKey`, and `search.algolia.index` in your site config.')
+    return {
+      async search() {
+        return [{
+          uri: '',
+          title: 'Algolia is not configured',
+          date: '',
+          context: 'Please set <code>search.algolia.appID</code>, <code>search.algolia.searchKey</code>, and <code>search.algolia.index</code> in your site config.',
+        }]
+      },
+    }
+  }
+
   let algoliaIndex: {
     search: (query: string, params: Record<string, any>) => Promise<{ hits: any[] }>
   } | null = null

@@ -47,7 +47,7 @@ _merge = "shallow"
 # -------------------------------------------------------------------------------------
 
 [params]
-version = "0.3.X"
+version = "1.0.X"
 
 [params.home.profile]
 enable = true

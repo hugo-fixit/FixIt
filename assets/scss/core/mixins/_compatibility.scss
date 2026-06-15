@@ -1,11 +1,5 @@
 @use "core/functions" as *;
 
-@mixin placeholder($color: fi-var(global-font-tertiary-color)) {
-  input::placeholder {
-    color: $color;
-  }
-}
-
 // TODO Superseded by text-wrap: wrap; in modern browsers
 @mixin overflow-wrap($value) {
   word-wrap: $value;
