@@ -141,12 +141,12 @@ header {
     }
 
     .menu-link i {
-      perspective: 1rem;
-      transition: translate 0.4s ease;
+      transform: perspective(1rem);
+      transition: transform 0.4s ease;
     }
 
     .menu-link:hover i {
-      translate: 0 0 0.2rem;
+      transform: perspective(1rem) translateZ(0.2rem);
     }
   }
 }

@@ -72,7 +72,7 @@ export function createAlgoliaEngine(searchConfig: SearchConfig): SearchEngine {
         })
         const results: Record<string, SearchResult> = {}
         hits.forEach(({ uri, date, _highlightResult: { title }, _snippetResult: { content } }: any) => {
-          if (results[uri] && results[uri].context.length > content.value)
+          if (results[uri] && results[uri].context.length > content.value.length)
             return
           results[uri] = { uri, title: title.value, date, context: content.value }
         })

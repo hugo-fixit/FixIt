@@ -1,14 +1,10 @@
 import type { CoreService, SearchService } from '../../core/tokens'
 import type { SearchEngine, SearchResult } from './types'
 
-import { isMobile } from '../../utils'
 import { createAlgoliaEngine } from './engines/algolia'
 import { createCSEEngine } from './engines/cse'
 import { createFuseEngine } from './engines/fuse'
 import { createPagefindEngine } from './engines/pagefind'
-
-/** Module-level close function for dialog. */
-let globalCloseDialog: (() => void) | undefined
 
 /**
  * Search module — orchestrates search engines, autocomplete, and UI lifecycle.
@@ -21,6 +17,8 @@ let globalCloseDialog: (() => void) | undefined
 export class SearchModule implements SearchService {
   #engine: SearchEngine | undefined
   #autocompleteInstance: any
+  #openDialog: (() => void) | undefined
+  #closeDialog: (() => void) | undefined
   #initialized = false
 
   constructor(private readonly core: CoreService) {}
@@ -57,6 +55,7 @@ export class SearchModule implements SearchService {
       case 'pagefind':
         return createPagefindEngine(searchConfig)
       default:
+        console.warn(`[FixIt] Unknown search type: "${type}". Supported types: algolia, fuse, cse, pagefind.`)
         return {
           async search() {
             return []
@@ -87,17 +86,14 @@ export class SearchModule implements SearchService {
     // Render the panel inside .search-modal (sibling of .search-modal-header)
     // so it stays within the <dialog> and benefits from the flex layout.
     const panelContainer = document.querySelector('#search-dialog .search-modal')
+    let submitBtn: HTMLButtonElement | null = null
 
     this.#autocompleteInstance = autocomplete({
       container: '.search-modal-header',
       panelContainer: panelContainer || undefined,
       placeholder: searchConfig.placeholder,
-      openOnFocus: true,
       defaultActiveItemId: 0,
       detachedMediaQuery: 'none',
-      shouldPanelOpen({ state }: { state: { query: string } }) {
-        return state.query.trim().length > 0
-      },
       translations: {
         clearButtonTitle: searchConfig.clearText,
       },
@@ -121,7 +117,7 @@ export class SearchModule implements SearchService {
         sourceHeader: 'search-source-header',
         sourceNoResults: 'search-source-no-results',
       },
-      getSources({ query }: { query: string }) {
+      getSources: ({ query }: { query: string }) => {
         if (!query.trim())
           return []
         return [{
@@ -144,15 +140,15 @@ export class SearchModule implements SearchService {
               return h`<div class="search-empty"><i class="fa-solid fa-magnifying-glass search-empty-icon" aria-hidden="true"></i><p>${searchConfig.noResultsFound}: <span class="search-query">"${query}"</span></p></div>`
             },
           },
-          onSelect({ item }: { item: SearchResult }) {
+          onSelect: ({ item }: { item: SearchResult }) => {
             if (item.uri) {
-              globalCloseDialog?.()
+              this.#closeDialog?.()
               window.location.assign(item.uri)
             }
           },
         }]
       },
-      onSubmit({ state }: { state: { activeItemId: number | null, collections: Array<{ items: SearchResult[] }> } }) {
+      onSubmit: ({ state }: { state: { activeItemId: number | null, collections: Array<{ items: SearchResult[] }> } }) => {
         const { activeItemId, collections } = state
         if (activeItemId === null || !collections.length)
           return
@@ -160,12 +156,11 @@ export class SearchModule implements SearchService {
         const items = collections[0].items
         const item = items[activeItemId]
         if (item?.uri) {
-          globalCloseDialog?.()
+          this.#closeDialog?.()
           window.location.assign(item.uri)
         }
       },
-      onStateChange({ state }: { state: { query: string, collections: Array<{ items: SearchResult[] }> } }) {
-        const submitBtn = document.querySelector('.search-submit-btn') as HTMLButtonElement | null
+      onStateChange: ({ state }: { state: { query: string, collections: Array<{ items: SearchResult[] }> } }) => {
         if (!submitBtn)
           return
 
@@ -174,20 +169,22 @@ export class SearchModule implements SearchService {
       },
     })
 
+    // Cache submit button after autocomplete creates it
+    submitBtn = document.querySelector('.search-submit-btn')
+
     // Replace clear button SVG with text
     const clearBtn = document.querySelector('.search-autocomplete .search-clear-btn')
     if (clearBtn) {
       clearBtn.textContent = searchConfig.clearText
     }
 
-    // Prevent blur when clicking inside modal but outside form
-    panelContainer?.addEventListener('mousedown', (e) => {
-      if (!(e.target as HTMLElement).closest('.search-form'))
-        e.stopPropagation()
+    // Prevent autocomplete input blur on mousedown
+    document.addEventListener('mousedown', (e) => {
+      e.stopPropagation()
     })
 
     // Close button
-    document.querySelector('.search-close-btn')?.addEventListener('click', () => globalCloseDialog?.())
+    document.querySelector('.search-close-btn')?.addEventListener('click', () => this.#closeDialog?.())
 
     // Preload pagefind on first focus
     if (searchConfig.type === 'pagefind' && this.#engine.preload) {
@@ -230,8 +227,9 @@ export class SearchModule implements SearchService {
       }
     }
 
-    // Expose close function for use in autocomplete callbacks
-    globalCloseDialog = close
+    // Expose open/close functions for use in autocomplete callbacks and keyboard shortcuts
+    this.#openDialog = open
+    this.#closeDialog = close
 
     document.querySelector('.search-trigger.desktop')?.addEventListener('click', open)
     document.querySelector('.search-trigger.mobile')?.addEventListener('click', () => {
@@ -256,22 +254,8 @@ export class SearchModule implements SearchService {
   #initKeyboardShortcuts() {
     document.addEventListener('keydown', (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        if (isMobile())
-          return
         e.preventDefault()
-        const dialog = document.getElementById('search-dialog') as HTMLDialogElement | null
-        if (!dialog)
-          return
-        if (dialog.open) {
-          globalCloseDialog?.()
-        }
-        else {
-          dialog.showModal()
-          requestAnimationFrame(() => {
-            const input = dialog.querySelector('input') as HTMLInputElement | null
-            input?.focus()
-          })
-        }
+        this.#openDialog?.()
       }
     })
   }
