@@ -320,14 +320,10 @@
 
 {{- /* ========== SCRIPT: Early-Loaded Head Scripts ========== */ -}}
 
-{{- /* Theme Color Scheme Detection (runs before page render) */ -}}
-{{- $options := dict "targetPath" "js/head/color-scheme.js" -}}
-{{- $options := dict "defaultTheme" .Site.Params.defaulttheme | dict "params" | merge $options -}}
-{{- dict "Source" "js/head/color-scheme.ts" "Build" $options "Fingerprint" $fingerprint | partial "plugin/script.html" -}}
-
-{{- /* Platform Detection (runs before page render) */ -}}
-{{- $options := dict "targetPath" "js/head/platform.js" -}}
-{{- dict "Source" "js/head/platform.ts" "Build" $options "Fingerprint" $fingerprint | partial "plugin/script.html" -}}
+{{- /* Theme Color Scheme & Platform Detection (runs before page render) */ -}}
+{{- $options := dict "targetPath" "js/head.js" -}}
+{{- $options = dict "defaultTheme" .Site.Params.defaulttheme | dict "params" | merge $options -}}
+{{- dict "Source" "js/head/index.ts" "Build" $options "Fingerprint" $fingerprint | partial "plugin/script.html" -}}
 
 {{- /* Custom head */ -}}
 {{- block "custom-head" . }}{{ end -}}

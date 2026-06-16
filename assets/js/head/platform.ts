@@ -5,8 +5,8 @@
  * - Detect macOS platform from user agent.
  * - Set `data-platform` on `<html>` to enable platform-specific CSS styling.
  */
-(function () {
+export function initPlatform() {
   if (/mac/i.test(navigator.platform)) {
     document.documentElement.dataset.platform = 'mac'
   }
-})()
+}
