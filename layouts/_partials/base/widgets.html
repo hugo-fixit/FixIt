@@ -53,6 +53,21 @@
           <button type="button" class="search-close-btn" aria-label="Close Search Dialog"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
         </div>
         <div class="search-source-footer">
+          <div class="search-shortcuts">
+            <span class="search-shortcut">
+              <kbd>{{ dict "Src" "images/icons/arraw-up.svg" | partial "plugin/icon.html" }}</kbd>
+              <kbd>{{ dict "Src" "images/icons/arraw-down.svg" | partial "plugin/icon.html" }}</kbd>
+              {{ T "assets.navigate" }}
+            </span>
+            <span class="search-shortcut">
+              <kbd>{{ dict "Src" "images/icons/enter-key.svg" | partial "plugin/icon.html" }}</kbd>
+              {{ T "assets.select" }}
+            </span>
+            <span class="search-shortcut">
+              <kbd>ESC</kbd>
+              {{ T "assets.close" }}
+            </span>
+          </div>
           {{- $searchType := .Site.Params.search.type -}}
           {{- $meta := dict
             "algolia" (dict "label" "algolia" "icon" "fa-brands fa-algolia" "href" "https://www.algolia.com/")
@@ -65,7 +80,7 @@
             {{- if .icon -}}
               {{- $icon = dict "Class" .icon -}}
             {{- end -}}
-            Search by {{ dict "Destination" .href "Content" .label "Icon" $icon "ExternalIcon" false | partial "plugin/link.html" -}}
+            <span class="search-engine">{{ T "assets.searchBy" }} {{ dict "Destination" .href "Content" .label "Icon" $icon "ExternalIcon" false | partial "plugin/link.html" -}}</span>
           {{- end -}}
         </div>
       </div>

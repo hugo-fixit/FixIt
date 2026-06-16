@@ -325,5 +325,9 @@
 {{- $options := dict "defaultTheme" .Site.Params.defaulttheme | dict "params" | merge $options -}}
 {{- dict "Source" "js/head/color-scheme.ts" "Build" $options "Fingerprint" $fingerprint | partial "plugin/script.html" -}}
 
+{{- /* Platform Detection (runs before page render) */ -}}
+{{- $options := dict "targetPath" "js/head/platform.js" -}}
+{{- dict "Source" "js/head/platform.ts" "Build" $options "Fingerprint" $fingerprint | partial "plugin/script.html" -}}
+
 {{- /* Custom head */ -}}
 {{- block "custom-head" . }}{{ end -}}

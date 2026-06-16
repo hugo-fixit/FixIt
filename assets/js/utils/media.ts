@@ -1,4 +1,12 @@
 /**
+ * Check whether the current platform is macOS.
+ * @returns `true` if the user agent indicates macOS.
+ */
+export function isMac(): boolean {
+  return /mac/i.test(navigator.platform)
+}
+
+/**
  * Check whether the current viewport matches the mobile breakpoint.
  * @returns `true` if the viewport width is 680px or less.
  */

@@ -290,6 +290,14 @@ header {
       background-color: light-dark(#dfe1e4, #353b45);
       border: 1px solid fi-var(global-border-color);
       @include border-radius(0.25rem);
+
+      &::after {
+        content: 'Ctrl K';
+      }
+    }
+
+    [data-platform='mac'] & kbd::after {
+      content: '⌘ K';
     }
   }
 

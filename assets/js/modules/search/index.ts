@@ -42,7 +42,6 @@ export class SearchModule implements SearchService {
       this.#initAutosearch()
       this.#initDialog()
       this.#initKeyboardShortcuts()
-      this.#initPlatformHint()
     }
   }
 
@@ -274,14 +273,6 @@ export class SearchModule implements SearchService {
           })
         }
       }
-    })
-  }
-
-  /** Update shortcut hint text based on platform. */
-  #initPlatformHint() {
-    const isMac = /mac/i.test(navigator.platform)
-    document.querySelectorAll<HTMLElement>('.search-trigger kbd').forEach((el) => {
-      el.textContent = isMac ? '⌘ K' : 'Ctrl K'
     })
   }
 }
