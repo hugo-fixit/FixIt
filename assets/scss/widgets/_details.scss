@@ -32,7 +32,7 @@
       @include border-radius(top);
 
       i.details-icon {
-        transform: rotate(90deg);
+        rotate: 90deg;
       }
     }
 

@@ -1,0 +1,376 @@
+@use "core/functions" as *;
+@use "core/mixins" as *;
+@use "core/mixins/media" as *;
+
+// Search modal dialog (native <dialog>)
+dialog.search-dialog {
+  padding: 0;
+  border: none;
+  background: transparent;
+  overflow: visible;
+  width: MIN(800px, calc(100% - 2rem));
+  // Anchor to top and center horizontally with fixed dimensions
+  // to prevent position jumps when results appear/disappear.
+  top: 15vh;
+  left: 50%;
+  margin: 0;
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(2px);
+  }
+
+  .search-modal {
+    width: 100%;
+    max-height: MIN(480px, calc(100dvh - 8rem));
+    background-color: light-dark(#fff, #1d2230);
+    border: 1px solid fi-var(global-border-color-light);
+    box-shadow: 0 1rem 2rem light-dark(rgba(15, 23, 42, 0.18), rgba(0, 0, 0, 0.35));
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    @include border-radius(1rem);
+  }
+
+  .search-modal-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    border-bottom: 1px solid fi-var(global-border-color-light);
+    padding: 0.75rem 1rem;
+  }
+
+  // @algolia/autocomplete-js input container
+  .search-autocomplete {
+    flex: 1;
+    min-width: 0;
+    order: -1;
+
+    .search-form {
+      display: flex;
+      align-items: center;
+
+      &:focus-within .search-submit-btn {
+        color: fi-var(primary);
+      }
+    }
+
+    .search-input-wrapper {
+      flex: 1;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 1.875rem;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: fi-var(global-font-color);
+      font-size: 1rem;
+      padding: 0 0.5rem;
+
+      &::placeholder {
+        color: fi-var(global-font-tertiary-color);
+      }
+
+      &::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+      }
+    }
+
+    .search-input-prefix,
+    .search-input-suffix {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .search-submit-btn,
+    .search-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.5rem;
+      height: 1.5rem;
+      padding: 0;
+      border: none;
+      background: transparent;
+      color: fi-var(global-font-secondary-color);
+      filter: drop-shadow(0 0 0.5px currentColor);
+
+      &:hover {
+        color: fi-var(global-font-color);
+      }
+
+      &[hidden] {
+        display: none;
+      }
+    }
+
+    .search-clear-btn {
+      width: auto;
+      height: auto;
+      padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+      color: fi-var(primary);
+      font-size: 0.875rem;
+    }
+  }
+
+  .search-modal-header:has(.search-clear-btn:not([hidden])) .search-delimiter {
+    display: block;
+  }
+
+  .search-delimiter {
+    display: none;
+    width: 1px;
+    height: 1rem;
+    background-color: fi-var(global-border-color);
+  }
+
+  .search-close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: fi-var(global-font-secondary-color);
+    border-radius: 0.25rem;
+
+    &:hover {
+      color: fi-var(primary);
+      background-color: light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.05));
+    }
+  }
+
+  // @algolia/autocomplete-js results panel (rendered as sibling in .search-modal)
+  .search-panel {
+    flex: 1;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    box-shadow: none;
+    position: static;
+    @include scrollbar-width(thin);
+  }
+
+  .search-panel-layout {
+    padding: 0;
+  }
+
+  .search-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .search-item {
+    padding: 0;
+    cursor: pointer;
+
+    &[aria-selected='true'] {
+      background-color: fi-var(code-block-background-color);
+    }
+  }
+
+  .search-item-wrapper {
+    padding: 0.75rem 1rem;
+
+    > :first-child {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.25rem;
+      margin-bottom: 0.5rem;
+
+      > a {
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 1rem;
+        font-weight: bold;
+      }
+    }
+
+    .suggestion-icon {
+      flex-shrink: 0;
+      color: fi-var(primary);
+      font-size: 1.25em;
+    }
+
+    .suggestion-date {
+      font-size: 0.875rem;
+      flex-shrink: 0;
+      color: fi-var(global-font-tertiary-color);
+    }
+
+    .suggestion-context {
+      display: -webkit-box;
+      line-height: 1.25rem;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: fi-var(global-font-secondary-color);
+      @include overflow-wrap(break-word);
+    }
+
+    em {
+      font-style: normal;
+      background-color: fi-var(selection-color);
+    }
+  }
+
+  .search-source-no-results {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .search-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 2rem 1rem;
+    text-align: center;
+    color: fi-var(global-font-color);
+
+    .search-empty-icon {
+      font-size: 2.5rem;
+      color: fi-var(global-font-tertiary-color);
+    }
+
+    .search-query {
+      @include bold-dark;
+    }
+  }
+
+  .search-modal:has(.search-panel) .search-source-footer {
+    border-top: 1px solid fi-var(global-border-color-light);
+  }
+
+  .search-source-footer {
+    order: 3;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: fi-var(global-font-secondary-color);
+    background-color: light-dark(#f5f6f7, #151b23);
+    @include link(false, false);
+  }
+
+  .search-shortcuts {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .search-shortcut {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    kbd {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.125rem;
+      min-width: 1.25rem;
+      height: 1.25rem;
+      padding: 0 0.25rem;
+      font-family: inherit;
+      font-size: 0.75rem;
+      line-height: 1;
+      border: 1px solid fi-var(global-border-color);
+      background-color: fi-var(global-background-color);
+      @include border-radius(0.25rem);
+
+      svg.icon path {
+        fill: none;
+        filter: drop-shadow(0 0 0.5px currentColor);
+      }
+    }
+  }
+
+  .search-engine {
+    margin-inline-start: auto;
+  }
+
+  @include media('xs') {
+    &:modal {
+      inset: 0;
+      width: 100%;
+      max-width: 100%;
+      max-height: 100dvh;
+      translate: 0 0;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .search-modal {
+      width: 100%;
+      height: 100%;
+      max-height: 100dvh;
+      border: none;
+      @include border-radius(0);
+
+      .search-source-footer {
+        border-bottom: 1px solid fi-var(global-border-color);
+      }
+    }
+
+    .search-shortcuts {
+      display: none;
+    }
+  }
+
+  @include media('sm', 'up') {
+    opacity: 0;
+    translate: -50% 12px;
+    scale: 0.98;
+    transition:
+      display 0.2s allow-discrete,
+      overlay 0.2s allow-discrete,
+      translate 0.2s,
+      scale 0.2s,
+      opacity 0.2s;
+
+    &[open] {
+      opacity: 1;
+      translate: -50% 0;
+      scale: 1;
+    }
+
+    &::backdrop {
+      opacity: 0;
+      transition:
+        display 0.2s allow-discrete,
+        overlay 0.2s allow-discrete,
+        opacity 0.2s;
+    }
+
+    &[open]::backdrop {
+      opacity: 1;
+    }
+
+    @starting-style {
+      &[open],
+      &[open]::backdrop {
+        opacity: 0;
+      }
+
+      &[open] {
+        translate: -50% 12px;
+        scale: 0.98;
+      }
+    }
+  }
+}

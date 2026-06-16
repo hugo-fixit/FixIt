@@ -51,7 +51,7 @@
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      translate: -50% -50%;
       padding: 1rem;
       background-color: fi-var(global-background-color);
       @include z-index(fixed);

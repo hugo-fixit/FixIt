@@ -31,10 +31,6 @@ $global-font-color-dark: #b3bdcb !default;
 $global-font-secondary-color: #8b949e !default;
 $global-font-secondary-color-dark: #7d8792 !default;
 
-// Color of the tertiary text
-$global-font-tertiary-color: color.adjust($global-font-secondary-color, $lightness: 12%) !default;
-$global-font-tertiary-color-dark: color.adjust($global-font-secondary-color-dark, $lightness: -12%) !default;
-
 // Color of the link
 $global-link-color: #161209 !default;
 $global-link-color-dark: $global-font-color-dark !default;

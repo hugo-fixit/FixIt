@@ -240,7 +240,7 @@
 
   {{- /* TOC Dialog */ -}}
   {{- if $showToc -}}
-    <dialog id="toc-dialog" aria-labelledby="toc-dialog-title" role="dialog" closedby="any">
+    <dialog id="toc-dialog" aria-labelledby="toc-dialog-title" closedby="any">
       <button type="button" class="toc-close-btn" aria-label="Close Table of Contents">
         {{- dict "Class" "fa-solid fa-xmark fa-lg" | partial "plugin/icon.html" -}}
       </button>

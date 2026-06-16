@@ -1,14 +1,14 @@
 // @ts-expect-error — Hugo js.Build virtual module
-import params from '@params';
+import params from '@params'
 
 /**
- * Color scheme initialization — runs synchronously in `<head>` before body rendering.
+ * Theme color scheme detection — runs synchronously in `<head>` before body rendering.
  *
  * Responsibilities:
  * - Read stored theme mode from localStorage, falling back to site default.
  * - Set `data-theme-mode` on `<html>` to prevent flash of wrong theme.
  */
-(function () {
+export function initColorScheme() {
   const localStorage = window.localStorage
   const storedMode = localStorage?.getItem('theme-mode')
   const themeMode = storedMode || (
@@ -16,6 +16,5 @@ import params from '@params';
       ? params.defaultTheme
       : 'auto'
   )
-
   document.documentElement.dataset.themeMode = themeMode
-})()
+}

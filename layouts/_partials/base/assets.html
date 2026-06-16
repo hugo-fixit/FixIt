@@ -30,10 +30,10 @@
 {{- /* Search */ -}}
 {{- if .Site.Params.search | and .Site.Params.search.enable -}}
   {{- $search := .Site.Params.search -}}
-  {{- /* TODO update "lib/autocomplete-js/umd/index.production.js" */ -}}
-  {{- $source := $cdn.autocompleteJS | default "lib/autocomplete/autocomplete.min.js" -}}
+  {{- $source := $cdn.autocompleteJS | default "lib/autocomplete-js/index.production.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-  {{- $config = dict "maxResultLength" $search.maxResultLength "snippetLength" $search.snippetLength "highlightTag" $search.highlightTag "noResultsFound" (T "assets.noResultsFound") | dict "search" | merge $config -}}
+  {{- $placeholder := $search.placeholder | default (T "assets.searchPlaceholder") -}}
+  {{- $config = dict "maxResultLength" $search.maxResultLength "snippetLength" $search.snippetLength "highlightTag" $search.highlightTag "noResultsFound" (T "assets.noResultsFound") "placeholder" $placeholder "clearText" (T "assets.clear") | dict "search" | merge $config -}}
   {{- if eq $search.type "algolia" -}}
     {{- $source := $cdn.algoliasearchJS | default "lib/algoliasearch/browser.umd.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
@@ -67,8 +67,6 @@
     {{- if eq $cse.engine "bing" -}}
       {{- /* Unsupported */ -}}
     {{- end -}}
-  {{- else if eq $search.type "post-chat" -}}
-    {{- $config = dict "type" "post-chat" | dict "search" | merge $config -}}
   {{- end -}}
 {{- end -}}
 
@@ -136,7 +134,7 @@
 
 {{- /* MathJax */ -}}
 {{- if .Store.Get "hasMathJax" | and (not $isArchivesOrOffline) -}}
-  {{- dict "Source" (resources.Get "js/lib/mathjax.ts") "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- dict "Source" "js/lib/mathjax.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $mathjax := $math.mathjax -}}
   {{- $mjoc := $mathjax.options | default dict -}}
   {{- $mjo := dict -}}

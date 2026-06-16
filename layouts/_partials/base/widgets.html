@@ -44,6 +44,49 @@
   {{- /* Search mask */ -}}
   <div id="mask"></div>
 
+  {{- /* Search dialog */ -}}
+  {{- if .Site.Params.search.enable -}}
+    <dialog id="search-dialog" class="search-dialog" aria-label="{{ T "assets.search" }}" closedby="any">
+      <div class="search-modal">
+        <div class="search-modal-header">
+          <span class="search-delimiter"></span>
+          <button type="button" class="search-close-btn" aria-label="Close Search Dialog"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+        </div>
+        <div class="search-source-footer">
+          <div class="search-shortcuts">
+            <span class="search-shortcut">
+              <kbd>{{ dict "Src" "images/icons/arrow-up.svg" | partial "plugin/icon.html" }}</kbd>
+              <kbd>{{ dict "Src" "images/icons/arrow-down.svg" | partial "plugin/icon.html" }}</kbd>
+              {{ T "assets.navigate" }}
+            </span>
+            <span class="search-shortcut">
+              <kbd>{{ dict "Src" "images/icons/enter-key.svg" | partial "plugin/icon.html" }}</kbd>
+              {{ T "assets.select" }}
+            </span>
+            <span class="search-shortcut">
+              <kbd>ESC</kbd>
+              {{ T "assets.close" }}
+            </span>
+          </div>
+          {{- $searchType := .Site.Params.search.type -}}
+          {{- $meta := dict
+            "algolia" (dict "label" "algolia" "icon" "fa-brands fa-algolia" "href" "https://www.algolia.com/")
+            "cse" (dict "label" "Google CSE" "icon" "fa-brands fa-google" "href" "https://programmablesearchengine.google.com/")
+            "pagefind" (dict "label" "Pagefind" "href" "https://pagefind.app/")
+            "fuse" (dict "label" "Fuse.js" "href" "https://fusejs.io/")
+          -}}
+          {{- with index $meta $searchType -}}
+            {{- $icon := dict -}}
+            {{- if .icon -}}
+              {{- $icon = dict "Class" .icon -}}
+            {{- end -}}
+            <span class="search-engine">{{ T "assets.searchBy" }} {{ dict "Destination" .href "Content" .label "Icon" $icon "ExternalIcon" false | partial "plugin/link.html" -}}</span>
+          {{- end -}}
+        </div>
+      </div>
+    </dialog>
+  {{- end -}}
+
   {{- /* Reading progress bar */ -}}
   {{- $readingProgress := .Site.Params.readingProgress -}}
   {{- if $readingProgress.enable -}}
@@ -71,9 +114,9 @@
     {{- $linkGuard = (cond (reflect.IsMap .) . (dict "enable" .)) | merge $linkGuard -}}
   {{- end -}}
   {{- if $linkGuard.enable | and (eq $linkGuard.mode "modal") -}}
-    <dialog id="link-guard-dialog" aria-labelledby="link-guard-dialog-title" role="dialog" closedby="any">
+    <dialog id="link-guard-dialog" aria-labelledby="link-guard-dialog-title" closedby="any">
       <div class="guard-content">
-        <h2 class="title">{{ T "linkRedirection.title" }}</h2>
+        <h2 class="title" id="link-guard-dialog-title">{{ T "linkRedirection.title" }}</h2>
         <p class="message">{{ dict "Title" .Site.Title | T "linkRedirection.message" }}</p>
         <div class="target-wrapper">
           <p class="target">-</p>

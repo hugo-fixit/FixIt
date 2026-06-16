@@ -15,9 +15,12 @@ Test for rendering Font Awesome icons.
 
 ## Size
 
+:(fa-solid fa-camera fa-2xs):
 :(fa-solid fa-camera fa-xs):
 :(fa-solid fa-camera fa-sm):
 :(fa-solid fa-camera fa-lg):
+:(fa-solid fa-camera fa-xl):
+:(fa-solid fa-camera fa-2xl):
 :(fa-solid fa-camera fa-1x):
 :(fa-solid fa-camera fa-2x):
 :(fa-solid fa-camera fa-3x):

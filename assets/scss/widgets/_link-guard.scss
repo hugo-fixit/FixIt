@@ -9,11 +9,13 @@
   color: fi-var(global-font-color);
   background-color: transparent;
   opacity: 0;
-  transform: translateY(12px) scale(0.98);
+  translate: 0 12px;
+  scale: 0.98;
   transition:
     display 0.2s allow-discrete,
     overlay 0.2s allow-discrete,
-    transform 0.2s,
+    translate 0.2s,
+    scale 0.2s,
     opacity 0.2s;
 
   .guard-content {
@@ -32,7 +34,8 @@
 
   &[open] {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    translate: 0 0;
+    scale: 1;
   }
 
   &[open]::backdrop {
@@ -46,7 +49,8 @@
     }
 
     &[open] {
-      transform: translateY(12px) scale(0.98);
+      translate: 0 12px;
+      scale: 0.98;
     }
   }
 }

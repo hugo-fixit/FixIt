@@ -16,7 +16,7 @@
     &:active,
     &:focus,
     &:hover {
-      transform: scale(1.2);
+      scale: 1.2;
 
       sup {
         color: fi-var(global-font-color);

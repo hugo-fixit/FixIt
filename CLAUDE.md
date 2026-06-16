@@ -126,6 +126,7 @@ Hugo Pipes processes all assets. The key orchestration is in `_partials/base/ass
 - Use `partialCached` for expensive partials that don't change per page
 - Use `.Site.Store` for shared computed values (e.g. fingerprint)
 - Check `hugo.IsProduction` before adding analytics or minification
+- Minimize `id` attribute usage — prefer class selectors for styling and JS queries. Reserve `id` for: `<label for>`, `aria-controls`/`aria-labelledby`, fragment anchors, or third-party library requirements
 
 ## Commit Convention
 

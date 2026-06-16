@@ -33,17 +33,20 @@ $theme-switch-animation-easing: cubic-bezier(0.22, 1, 0.36, 1) !default;
 @mixin theme-switch-keyframes($name, $from-rotate, $from-scale, $from-opacity, $mid-step, $mid-rotate, $mid-scale) {
   @keyframes #{$prefix}theme-switch-#{$name} {
     0% {
-      transform: rotate($from-rotate) scale($from-scale);
+      rotate: $from-rotate;
+      scale: $from-scale;
       opacity: $from-opacity;
     }
 
     #{$mid-step} {
-      transform: rotate($mid-rotate) scale($mid-scale);
+      rotate: $mid-rotate;
+      scale: $mid-scale;
       opacity: 1;
     }
 
     100% {
-      transform: rotate(225deg) scale(1);
+      rotate: 225deg;
+      scale: 1;
       opacity: 1;
     }
   }

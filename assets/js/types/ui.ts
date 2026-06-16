@@ -36,7 +36,7 @@ declare global {
 
   interface Window {
     // Third-party libraries
-    'autocomplete'?: any
+    '@algolia/autocomplete-js'?: { autocomplete: (...args: any[]) => any }
     'algoliasearch/lite'?: { liteClient: (...args: any[]) => any }
     'Artalk'?: any
     'APlayer'?: any
@@ -72,8 +72,6 @@ declare global {
     'config': FixItConfig
     'mermaid'?: MermaidRuntimeModule
     '_fuseIndex'?: any
-    '_searchMobile'?: any
-    '_searchDesktop'?: any
     'FixItDecryptor'?: any
   }
 }

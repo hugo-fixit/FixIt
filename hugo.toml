@@ -429,7 +429,7 @@ collection = "collections"
 
 [params]
 # FixIt 0.2.15 | CHANGED FixIt theme version
-version = "0.4.X" # e.g. "0.2.X", "0.2.15", "v0.2.15" etc.
+version = "1.0.X" # e.g. "0.4.X", "0.4.5", "v1.0.0" etc.
 # site description
 description = ""
 # site keywords
@@ -506,8 +506,8 @@ dark = "#151b23"
 
 # Search config
 [params.search]
-enable = false
-# type of search engine ["algolia", "fuse", "pagefind", "cse", "post-chat"]
+enable = true
+# type of search engine ["algolia", "fuse", "pagefind", "cse"]
 type = "fuse"
 # max index length of the chunked content
 contentLength = 4000
@@ -557,7 +557,7 @@ sortOrder = "desc"
 # FixIt 0.3.16 | NEW Custom Search Engine (CSE)
 [params.cse]
 # search engine: ["google", "bing"]
-engine = ""
+engine = "google"
 # search results page URL (layout: search)
 resultsPage = "/search/"
 

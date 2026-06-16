@@ -34,6 +34,7 @@ export interface FixItConfig {
 
 export interface SearchConfig {
   type?: string
+  placeholder?: string
   maxResultLength?: number
   snippetLength?: number
   highlightTag?: string
@@ -51,6 +52,7 @@ export interface SearchConfig {
   algoliaSearchKey?: string
   algoliaIndex?: string
   noResultsFound?: string
+  clearText?: string
   pagefind?: PagefindConfig
 }
 
