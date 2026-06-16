@@ -27,7 +27,7 @@
       vertical-align: middle;
       border: 1px solid;
       pointer-events: none;
-      transform: translateY(-1px);
+      translate: 0 -1px;
       border-color: light-dark(#d1d9e0b3, #3d444db3);
     }
   }
@@ -248,13 +248,13 @@
 
           .arrow {
             padding: 0 0.2rem;
-            transition: transform 0.2s ease;
+            transition: rotate 0.2s ease;
           }
 
           .title-inner {
             position: absolute;
             left: 50%;
-            transform: translateX(-50%);
+            translate: -50% 0;
             background-color: fi-var(code-header-background-color);
             padding-inline: 1em;
             max-width: calc(100% - 200px);
@@ -385,7 +385,7 @@
         }
 
         .arrow {
-          transform: rotate(-90deg);
+          rotate: -90deg;
         }
 
         .ellipses-btn {
@@ -407,7 +407,7 @@
         .code-expand-btn {
           background: transparent;
           padding-block: 0;
-          transform: translateY(1rem);
+          translate: 0 1rem;
 
           .fa-angles-down {
             animation-name: fadeOutRotate;
@@ -415,11 +415,12 @@
             @keyframes fadeOutRotate {
               0% {
                 opacity: 1;
-                transform: rotate(180deg);
+                rotate: 180deg;
               }
               100% {
                 opacity: 0;
-                transform: rotate(180deg) translate3d(0, 100%, 0);
+                rotate: 180deg;
+                translate: 0 -100%;
               }
             }
           }

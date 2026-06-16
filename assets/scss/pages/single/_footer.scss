@@ -101,11 +101,11 @@
       }
 
       &[rel='prev']:hover {
-        transform: translateX(-4px);
+        translate: -4px 0;
       }
 
       &[rel='next']:hover {
-        transform: translateX(4px);
+        translate: 4px 0;
       }
     }
 

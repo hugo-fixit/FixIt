@@ -153,6 +153,26 @@ export class SearchModule implements SearchService {
           },
         }]
       },
+      onSubmit({ state }: { state: { activeItemId: number | null, collections: Array<{ items: SearchResult[] }> } }) {
+        const { activeItemId, collections } = state
+        if (activeItemId === null || !collections.length)
+          return
+
+        const items = collections[0].items
+        const item = items[activeItemId]
+        if (item?.uri) {
+          globalCloseDialog?.()
+          window.location.assign(item.uri)
+        }
+      },
+      onStateChange({ state }: { state: { query: string, collections: Array<{ items: SearchResult[] }> } }) {
+        const submitBtn = document.querySelector('.search-submit-btn') as HTMLButtonElement | null
+        if (!submitBtn)
+          return
+
+        const hasResults = state.collections.some(collection => collection.items.length > 0)
+        submitBtn.disabled = !state.query.trim() || !hasResults
+      },
     })
 
     // Replace clear button SVG with text

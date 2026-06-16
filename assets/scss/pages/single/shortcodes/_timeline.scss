@@ -68,17 +68,19 @@
       background-color: fi-var(timeline-circle-color) !important;
     }
     &[data-size='small']::before {
-      transform: scale(0.8) translateY(-50%);
+      scale: 0.8;
+      translate: 0 -50%;
     }
     &[data-size='large']::before {
-      transform: scale(1.2) translateY(-50%);
+      scale: 1.2;
+      translate: 0 -50%;
     }
-    
+
     &::before {
       content: '';
       position: absolute;
       top: 1.25rem;
-      transform: translateY(-50%);
+      translate: 0 -50%;
       left: 0;
       text-align: center;
       border-style: solid;

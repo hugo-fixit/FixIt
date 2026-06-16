@@ -13,12 +13,47 @@ dialog.search-dialog {
   // to prevent position jumps when results appear/disappear.
   top: 15vh;
   left: 50%;
-  transform: translateX(-50%);
   margin: 0;
+  opacity: 0;
+  translate: -50% 12px;
+  scale: 0.98;
+  transition:
+    display 0.2s allow-discrete,
+    overlay 0.2s allow-discrete,
+    translate 0.2s,
+    scale 0.2s,
+    opacity 0.2s;
+
+  &[open] {
+    opacity: 1;
+    translate: -50% 0;
+    scale: 1;
+  }
 
   &::backdrop {
     background-color: rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(2px);
+    opacity: 0;
+    transition:
+      display 0.2s allow-discrete,
+      overlay 0.2s allow-discrete,
+      opacity 0.2s;
+  }
+
+  &[open]::backdrop {
+    opacity: 1;
+  }
+
+  @starting-style {
+    &[open],
+    &[open]::backdrop {
+      opacity: 0;
+    }
+
+    &[open] {
+      translate: -50% 12px;
+      scale: 0.98;
+    }
   }
 
   .search-modal {
@@ -30,7 +65,7 @@ dialog.search-dialog {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    @include border-radius;
+    @include border-radius(1rem);
   }
 
   .search-modal-header {
@@ -108,10 +143,6 @@ dialog.search-dialog {
       &[hidden] {
         display: none;
       }
-    }
-
-    .search-submit-btn {
-      pointer-events: none;
     }
 
     .search-clear-btn {
@@ -274,10 +305,9 @@ dialog.search-dialog {
     &:modal {
       inset: 0;
       width: 100%;
-      height: 100dvh;
       max-width: 100%;
       max-height: 100dvh;
-      transform: none;
+      translate: 0 0;
       margin: 0;
       overflow: hidden;
     }
@@ -287,8 +317,7 @@ dialog.search-dialog {
       height: 100%;
       max-height: 100dvh;
       border: none;
-      border-radius: 0;
-      box-shadow: none;
+      @include border-radius(0);
     }
   }
 }

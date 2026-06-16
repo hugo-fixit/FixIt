@@ -42,23 +42,23 @@ header {
 
 @keyframes #{$prefix}header-fade-in-down {
   from {
-    transform: translate3d(0, -100%, 0);
+    translate: 0 -100% 0;
     visibility: visible;
   }
 
   to {
-    transform: translate3d(0, 0, 0);
+    translate: 0 0 0;
   }
 }
 
 @keyframes #{$prefix}header-fade-out-up {
   from {
-    transform: translate3d(0, 0, 0);
+    translate: 0 0 0;
   }
 
   to {
     visibility: hidden;
-    transform: translate3d(0, -100%, 0);
+    translate: 0 -100% 0;
   }
 }
 
@@ -85,7 +85,7 @@ header {
   display: flex;
   align-items: flex-end;
   gap: 0.25rem;
-  
+
   .header-title-link {
     display: flex;
     align-items: center;
@@ -141,12 +141,12 @@ header {
     }
 
     .menu-link i {
-      transform: perspective(1rem);
-      transition: transform 0.4s ease;
+      perspective: 1rem;
+      transition: translate 0.4s ease;
     }
 
     .menu-link:hover i {
-      transform: perspective(1rem) translateZ(0.2rem);
+      translate: 0 0 0.2rem;
     }
   }
 }
@@ -157,7 +157,8 @@ header {
 
   i {
     display: inline-block;
-    transform: rotate(225deg) scale(1);
+    rotate: 225deg;
+    scale: 1;
     transform-origin: center;
     @include theme-switch-mode('auto');
     @include theme-switch-mode('light', '\f185');
@@ -209,10 +210,10 @@ header {
       > .menu-item {
         &:hover .sub-menu {
           display: block;
-          transform: translateX(-0.5rem);
+          translate: -0.5rem 0;
         }
         &.language-switch:hover .sub-menu {
-          transform: translateX(calc(1.75rem - 100%));
+          translate: calc(2.25rem - 100%) 0;
         }
       }
 
@@ -312,7 +313,8 @@ header {
 
         &.active {
           span:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
+            translate: 0 8px;
+            rotate: 45deg;
           }
 
           span:nth-child(2) {
@@ -320,7 +322,8 @@ header {
           }
 
           span:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
+            translate: 0 -8px;
+            rotate: -45deg;
           }
         }
       }

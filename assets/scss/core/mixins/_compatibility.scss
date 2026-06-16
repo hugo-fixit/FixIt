@@ -54,7 +54,7 @@
       left: 50%;
       width: $size;
       height: $size;
-      transform: translate(-50%, -50%);
+      translate: -50% -50%;
       outline: -webkit-focus-ring-color auto 1px;
       outline-offset: $offset;
       pointer-events: none;

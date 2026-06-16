@@ -19,6 +19,7 @@ node_modules/
 
 # Claude
 .claude/
+CLAUDE.local.md
 .codegraph/
 
 # Vercel

@@ -14,12 +14,12 @@
         height: auto;
         margin: 0 auto;
         transition: all 0.4s ease;
-        @include border-radius(full);
         box-shadow: 0 0 0 0.3618em light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.05));
+        @include border-radius(full);
 
         &:hover {
           position: relative;
-          transform: translateY(-0.75rem);
+          translate: 0 -0.75rem;
         }
       }
     }
@@ -85,7 +85,7 @@
       position: absolute;
       width: 100%;
       padding: 1.5px;
-      transform: translateY(18px);
+      translate: 0 18px;
       background: repeating-linear-gradient(
         135deg,
         fi-var(global-border-color) 0px,
@@ -105,7 +105,7 @@
       aspect-ratio: auto 1000 / 420;
       position: relative;
       margin: 0.6rem auto;
-      transition: transform 0.4s ease;
+      transition: scale 0.4s ease;
 
       img {
         position: absolute;
@@ -117,7 +117,7 @@
       }
 
       &:hover {
-        transform: scale(1.01);
+        scale: 1.01;
       }
     }
 
@@ -129,7 +129,7 @@
 
     .content {
       margin-top: 0.3rem;
-      color: fi-var(global-font-tertiary-color);  
+      color: fi-var(global-font-tertiary-color);
       @include link(false, true);
 
       b,

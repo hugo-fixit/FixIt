@@ -14,7 +14,7 @@
     .icon-pin {
       display: inline-block;
       width: max-content;
-      transform: rotate(30deg);
+      rotate: 30deg;
       margin-right: 0.25em;
       color: fi-var(danger);
     }
@@ -118,7 +118,7 @@
         position: absolute;
         left: 5%;
         top: 50%;
-        transform: translateY(-50%);
+        translate: 0 -50%;
         color: fi-var(hr-active-color);
         font-size: 20px;
         line-height: 1;
