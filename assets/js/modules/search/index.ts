@@ -234,15 +234,9 @@ export class SearchModule implements SearchService {
     // Expose close function for use in autocomplete callbacks
     globalCloseDialog = close
 
-    document.getElementById('search-trigger-desktop')?.addEventListener('click', open)
-    document.getElementById('search-trigger-mobile')?.addEventListener('click', () => {
-      const $menuToggle = document.getElementById('menu-toggle-mobile')
-      const $menuMobile = document.getElementById('menu-mobile')
-      if ($menuToggle?.classList.contains('active')) {
-        $menuToggle.classList.remove('active')
-        $menuMobile?.classList.remove('active')
-        $menuToggle.setAttribute('aria-expanded', 'false')
-      }
+    document.querySelector('.search-trigger.desktop')?.addEventListener('click', open)
+    document.querySelector('.search-trigger.mobile')?.addEventListener('click', () => {
+      this.core.closeMaskOverlay('menu-mobile')
       open()
     })
 

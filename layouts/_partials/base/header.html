@@ -95,8 +95,8 @@
           <li class="menu-item delimiter"></li>
         {{- end -}}
         {{- if .Site.Params.search.enable -}}
-          <li class="menu-item search" id="search-desktop">
-            <button type="button" class="search-trigger" id="search-trigger-desktop" aria-label="{{ T "assets.search" }}" title="{{ T "assets.search" }}">
+          <li class="menu-item search">
+            <button type="button" class="search-trigger desktop" aria-label="{{ T "assets.search" }}" title="{{ T "assets.search" }}">
               {{ dict "Class" "fa-solid fa-search" | partial "plugin/icon.html" }}
               {{ T "assets.search" }}
               <kbd>Ctrl K</kbd>
@@ -185,6 +185,11 @@
           {{- end -}}
         {{- end -}}
       </div>
+      {{- if .Site.Params.search.enable -}}
+        <button type="button" class="search-trigger mobile" aria-label="{{ T "assets.search" }}">
+          {{- dict "Class" "fa-solid fa-search" | partial "plugin/icon.html" -}}
+        </button>
+      {{- end -}}
       <button type="button" class="theme-switch" aria-label="{{ T "header.switchTheme" }}">
         {{- dict "Class" "fa-solid fa-adjust" | partial "plugin/icon.html" -}}
       </button>
@@ -194,14 +199,6 @@
     </div>
     <nav>
       <ul class="menu" id="menu-mobile">
-        {{- if .Site.Params.search.enable -}}
-          <li class="search-wrapper">
-            <button type="button" class="search-trigger mobile" id="search-trigger-mobile" aria-label="{{ T "assets.search" }}">
-              {{ dict "Class" "fa-solid fa-search" | partial "plugin/icon.html" }}
-              <span>{{ .Site.Params.search.placeholder | default (T `assets.searchPlaceholder`) }}</span>
-            </button>
-          </li>
-        {{- end -}}
         {{- $currentPage := . -}}
         {{- range .Site.Menus.main -}}
           {{- $url := .URL -}}
