@@ -12,6 +12,7 @@ import { getScrollTop, getThemeMode, isDarkMode } from '../utils'
  */
 export class CoreModule implements CoreService {
   readonly config: FixItConfig
+  readonly version: string
   themeMode: string
   isDark: boolean
   newScrollTop: number
@@ -23,6 +24,7 @@ export class CoreModule implements CoreService {
 
   constructor() {
     this.config = window.config
+    this.version = this.config.version
     this.themeMode = getThemeMode()
     this.isDark = isDarkMode()
     this.newScrollTop = getScrollTop()

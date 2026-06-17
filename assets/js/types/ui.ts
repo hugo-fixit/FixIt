@@ -17,6 +17,7 @@ type FixItDocumentEventMap = {
 /** Public API exposed on window.fixit. */
 export interface FixItPublicAPI {
   readonly config: FixItConfig
+  readonly version: string
   readonly themeMode: string
   readonly isDark: boolean
   readonly newScrollTop: number

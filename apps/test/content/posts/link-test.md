@@ -26,7 +26,7 @@ These links are rendered by `layouts/_markup/render-link.html` and should always
 - Internal anchor link: [Jump to Card Link section](#card-link-shortcode)
 - Absolute same-site link: [Test site home](http://demo.fixit.lruihao.cn/test/)
 - External HTTP link: [FixIt Repository](https://github.com/hugo-fixit/FixIt)
-- Mail link: [Email test](mailto:test@example.com)
+- Mail link: [Email test](mailto:test@gmail.com)
 - JavaScript link: [JavaScript test](javascript:void(0))
 - Tel link: [Phone test](tel:+1234567890)
 - File link: [File test](file:///path/to/file.txt)
@@ -34,7 +34,7 @@ These links are rendered by `layouts/_markup/render-link.html` and should always
 
 ### Title Attribute (Markdown)
 
-[External link with title](https://example.com "Example Title")
+[External link with title](https://google.com "Example Title")
 
 ## Link Shortcode (Regular)
 
@@ -44,13 +44,13 @@ These links are rendered by `layouts/_markup/render-link.html` and should always
 
 {{< link href="/test/units/codeblock-test/" content="Internal shortcode link" class="shortcode-link-test" >}}
 
-{{< link href="https://example.com" content="Custom rel + no noreferrer" rel="ugc" noreferrer=false >}}
+{{< link href="https://google.com" content="Custom rel + no noreferrer" rel="ugc" noreferrer=false >}}
 
 {{< link href="/images/fixit.svg" content="Download local file" download="fixit.svg" >}}
 
 ### Positional parameters
 
-{{< link "https://example.org" "Positional regular link" "Positional title" >}}
+{{< link "https://mozilla.org" "Positional regular link" "Positional title" >}}
 
 ## Card Link Shortcode
 
@@ -72,16 +72,16 @@ These links are rendered by `layouts/_markup/render-link.html` and should always
 
 ### Positional card parameters
 
-{{< link "https://example.com" "Positional card link" "" true "fa-solid fa-link" >}}
+{{< link "https://google.com" "Positional card link" "" true "fa-solid fa-link" >}}
 
 ## Edge Cases
 
 - URL with query string:
-  [Search query test](https://example.com/search?q=fixit&lang=en)
+  [Search query test](https://google.com/search?q=fixit&lang=en)
 - URL with fragment:
-  [Fragment test](https://example.com/docs#installation)
+  [Fragment test](https://google.com/docs#installation)
 - Long URL display (card meta should trim protocol automatically):
-  {{< link href="https://example.com/a/very/long/path/for/testing/card/url/display?foo=bar&baz=qux" content="Long URL card" card=true >}}
+  {{< link href="https://google.com/a/very/long/path/for/testing/card/url/display?foo=bar&baz=qux" content="Long URL card" card=true >}}
 
 ## Manual Verification Checklist
 

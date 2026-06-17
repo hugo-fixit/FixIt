@@ -9,8 +9,7 @@ export interface MaskOverlayHandler {
 
 /** FixIt theme configuration (typed version of window.config) */
 export interface FixItConfig {
-  version?: string
-  themeMode?: string
+  version: string
   twemoji?: boolean
   search?: SearchConfig
   cse?: CSEConfig

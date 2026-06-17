@@ -1,3 +1,4 @@
+import { printBanner } from './core/banner'
 import { eventBus } from './core/event-bus'
 import { CodeModule } from './modules/code'
 import { ContentModule } from './modules/content'
@@ -33,6 +34,7 @@ function bootstrap(): void {
   // Build window.fixit facade
   window.fixit = {
     get config() { return core.config },
+    get version() { return core.version },
     get themeMode() { return core.themeMode },
     get isDark() { return core.isDark },
     get newScrollTop() { return core.newScrollTop },
@@ -69,14 +71,7 @@ function bootstrap(): void {
     catch (err) {
       console.error(err)
     }
-    const fixitColor = '#FF735A'
-    // eslint-disable-next-line no-console
-    console.log(
-      `%c FixIt ${core.config.version} %c https://github.com/hugo-fixit %c`,
-      `background: ${fixitColor};border:1px solid ${fixitColor}; padding: 1px; border-radius: 2px 0 0 2px; color: #fff;`,
-      `border:1px solid ${fixitColor}; padding: 1px; border-radius: 0 2px 2px 0; color: ${fixitColor};`,
-      'background:transparent;',
-    )
+    printBanner(core.version)
   }
 
   document.addEventListener('DOMContentLoaded', init, false)
