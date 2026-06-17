@@ -384,8 +384,8 @@ header {
       overflow-y: auto;
       overscroll-behavior: contain;
       max-height: 70vh;
-      @include scrollbar-width(none, 0);
       box-shadow: 0 0.125rem 0.25rem light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
+      @include scrollbar-width(none, 0);
 
       .search-wrapper {
         display: flex;

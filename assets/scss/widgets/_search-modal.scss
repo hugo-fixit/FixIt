@@ -115,6 +115,10 @@ dialog.search-dialog {
       padding: 0.25rem 0.25rem 0.25rem 0.5rem;
       color: fi-var(primary);
       font-size: 0.875rem;
+
+      &:hover {
+        opacity: 0.8;
+      }
     }
   }
 
@@ -141,6 +145,7 @@ dialog.search-dialog {
     background: transparent;
     color: fi-var(global-font-secondary-color);
     border-radius: 0.25rem;
+    transition: all 0.2s;
 
     &:hover {
       color: fi-var(primary);
@@ -313,6 +318,7 @@ dialog.search-dialog {
       translate: 0 0;
       margin: 0;
       overflow: hidden;
+      box-shadow: 0 0 1.5rem 0 light-dark(rgba(0, 0, 0, 0.125), rgba(255, 255, 255, 0.125));
     }
 
     .search-modal {
@@ -321,10 +327,6 @@ dialog.search-dialog {
       max-height: 100dvh;
       border: none;
       @include border-radius(0);
-
-      .search-source-footer {
-        border-bottom: 1px solid fi-var(global-border-color);
-      }
     }
 
     .search-shortcuts {
