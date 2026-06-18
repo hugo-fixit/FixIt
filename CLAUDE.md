@@ -117,6 +117,7 @@ Hugo Pipes processes all assets. The key orchestration is in `_partials/base/ass
 - Constructor injection for dependencies — no global state access
 - Import the shared `eventBus` singleton from `core/event-bus` — do not create new instances
 - Pure functions only in `utils/` — no side effects, no DOM state
+- Comment style: follow [TSDoc](https://tsdoc.org/) conventions
 
 ### Hugo Templates
 

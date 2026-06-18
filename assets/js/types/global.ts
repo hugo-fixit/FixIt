@@ -1,5 +1,6 @@
-import type { FixItEventMap, TypedEventBus } from '../core/event-bus'
-import type { FixItConfig, MaskOverlayHandler } from './config'
+import type { FixItDocumentEventMap } from '../core/event-bus'
+import type { FixItPublicAPI } from '../core/tokens'
+import type { FixItConfig } from './config'
 import type { MermaidRuntimeModule, PanzoomInstance } from './third-party'
 
 export interface TabContainerChangedDetail {
@@ -8,26 +9,6 @@ export interface TabContainerChangedDetail {
 
 export type TabContainerChangedEvent = CustomEvent<TabContainerChangedDetail> & {
   panel: Element | null
-}
-
-type FixItDocumentEventMap = {
-  [K in keyof FixItEventMap]: CustomEvent<FixItEventMap[K]>
-}
-
-/** Public API exposed on window.fixit. */
-export interface FixItPublicAPI {
-  readonly config: FixItConfig
-  readonly version: string
-  readonly themeMode: string
-  readonly isDark: boolean
-  readonly newScrollTop: number
-  readonly oldScrollTop: number
-  setThemeMode: (mode: string, persist?: boolean) => void
-  registerMaskOverlay: (name: string, handlers: MaskOverlayHandler) => void
-  toggleMaskOverlay: (name: string) => void
-  closeMaskOverlay: (name: string, skipSync?: boolean) => void
-  initContent: (target?: Element | Document) => void
-  eventBus: TypedEventBus
 }
 
 declare global {

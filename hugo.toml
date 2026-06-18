@@ -507,7 +507,7 @@ dark = "#151b23"
 # Search config
 [params.search]
 enable = true
-# type of search engine ["algolia", "fuse", "pagefind", "cse"]
+# type of search engine ["fuse", "algolia", "pagefind", "cse"]
 type = "fuse"
 # max index length of the chunked content
 contentLength = 4000

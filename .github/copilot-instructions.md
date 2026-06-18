@@ -10,7 +10,7 @@ This document defines the detailed coding standards for the FixIt theme project.
 - **SCSS variables**: hyphen-separated, semantic (`$global-font-family`, `$code-background-color`)
 - **CSS custom properties**: prefixed with `fi-` / `--fi-`
 
-### Guidelines
+### SCSS Guidelines
 
 - Use 2-space indentation
 - Use CSS variables for theme switching support
@@ -48,6 +48,7 @@ export class ExampleModule implements ExampleService {
 - Import the shared `eventBus` singleton from `core/event-bus` for cross-module communication
 - Constructor injection for dependencies — no global state access
 - `window.fixit` exposes a typed public API (`FixItPublicAPI`) for user custom scripts
+- Comment style: follow [TSDoc](https://tsdoc.org/) conventions
 
 ### Utilities
 
@@ -63,7 +64,7 @@ export class ExampleModule implements ExampleService {
 - **Translation**: Use `T` function for i18n (`{{ T "header.switchTheme" }}`)
 - **Whitespace**: Use `{{- -}}` trim markers to control whitespace output
 
-### Guidelines
+### Hugo Template Guidelines
 
 - Use `partialCached` for expensive partials that don't change per page
 - Use `.Site.Store` for shared computed values (e.g. fingerprint)

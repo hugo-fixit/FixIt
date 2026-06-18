@@ -1,10 +1,11 @@
-import type { SearchConfig } from '../../../types/config'
-import type { SearchEngine, SearchResult } from '../types'
+import type { SearchConfig, SearchEngine, SearchResult } from '../types'
 
 /**
  * Create an Algolia search engine instance.
  *
  * Lazily initializes the Algolia v5 lite client on first search.
+ * @param searchConfig - The search configuration containing Algolia credentials.
+ * @returns A SearchEngine instance for Algolia.
  */
 export function createAlgoliaEngine(searchConfig: SearchConfig): SearchEngine {
   if (!searchConfig.algoliaAppID || !searchConfig.algoliaSearchKey || !searchConfig.algoliaIndex) {

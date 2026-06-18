@@ -1,11 +1,12 @@
-import type { SearchConfig } from '../../../types/config'
-import type { SearchEngine, SearchResult } from '../types'
+import type { SearchConfig, SearchEngine, SearchResult } from '../types'
 import { applyHighlightToText } from '../../../utils'
 
 /**
  * Create a Fuse.js search engine instance.
  *
  * Lazily fetches and indexes the search JSON on first search.
+ * @param searchConfig - The search configuration containing Fuse.js options.
+ * @returns A SearchEngine instance for Fuse.js.
  */
 export function createFuseEngine(searchConfig: SearchConfig): SearchEngine {
   return {

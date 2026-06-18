@@ -1,6 +1,5 @@
 import type { CoreService, SearchService } from '../../core/tokens'
-import type { SearchEngine, SearchResult } from './types'
-
+import type { SearchConfig, SearchEngine, SearchResult } from './types'
 import { createAlgoliaEngine } from './engines/algolia'
 import { createCSEEngine } from './engines/cse'
 import { createFuseEngine } from './engines/fuse'
@@ -26,12 +25,12 @@ export class SearchModule implements SearchService {
   /** Initialize the search overlay, autocomplete, and engine-specific logic. */
   initSearch() {
     const searchConfig = this.core.config.search
-    if (!searchConfig)
+    if (!searchConfig || !searchConfig.type)
       return
 
     // Initialize engine once
     if (!this.#engine) {
-      this.#engine = this.#createEngine(searchConfig.type!, searchConfig)
+      this.#engine = this.#createEngine(searchConfig.type, searchConfig)
     }
 
     // Initialize dialog and autocomplete once
@@ -44,7 +43,7 @@ export class SearchModule implements SearchService {
   }
 
   /** Create the appropriate search engine based on type. */
-  #createEngine(type: string, searchConfig: Record<string, any>): SearchEngine {
+  #createEngine(type: string, searchConfig: SearchConfig): SearchEngine {
     switch (type) {
       case 'algolia':
         return createAlgoliaEngine(searchConfig)
@@ -53,7 +52,7 @@ export class SearchModule implements SearchService {
       case 'cse':
         return createCSEEngine(this.core.config.cse)
       case 'pagefind':
-        return createPagefindEngine(searchConfig)
+        return createPagefindEngine(searchConfig, this.core.config.pagefind!)
       default:
         console.warn(`[FixIt] Unknown search type: "${type}". Supported types: algolia, fuse, cse, pagefind.`)
         return {

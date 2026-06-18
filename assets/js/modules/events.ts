@@ -1,4 +1,4 @@
-import type { CodeService, CoreService, EventsService, SearchService, TocService } from '../core/tokens'
+import type { CodeService, CoreService, EventsService, TocService } from '../core/tokens'
 import { eventBus } from '../core/event-bus'
 import { animateCSS, getScrollTop, isMobile, scrollIntoView } from '../utils'
 
@@ -13,17 +13,18 @@ import { animateCSS, getScrollTop, isMobile, scrollIntoView } from '../utils'
  */
 export class EventsModule implements EventsService {
   #resizeTimeout: number | null = null
+  #newScrollTop = 0
+  #oldScrollTop = 0
 
   constructor(
     private readonly core: CoreService,
     private readonly toc: TocService,
-    private readonly search: SearchService,
     private readonly code: CodeService,
   ) {}
 
   /** Bind scroll listener: auto-hide headers, reading progress, back-to-top, and TOC sync. */
   onScroll() {
-    const ACCURACY = 20
+    const ACCURACY = 50
     const $autoHeaders: HTMLElement[] = []
     const $backToTop = document.querySelector<HTMLElement>('.back-to-top')
     const $readingProgressBar = document.querySelector<HTMLElement>('.reading-progress-bar')
@@ -36,13 +37,9 @@ export class EventsModule implements EventsService {
     $backToTop?.addEventListener('click', () => {
       scrollIntoView('body')
     })
-    window.addEventListener('scroll', (event) => {
-      if (this.core.disableScrollEvent) {
-        event.preventDefault()
-        return
-      }
-      this.core.newScrollTop = getScrollTop()
-      const scroll = this.core.newScrollTop - this.core.oldScrollTop
+    window.addEventListener('scroll', () => {
+      this.#newScrollTop = getScrollTop()
+      const scroll = this.#newScrollTop - this.#oldScrollTop
       if (Math.abs(scroll) > ACCURACY) {
         this.core.closeActiveMaskOverlay()
         const isScrollingDown = scroll > 0
@@ -57,14 +54,14 @@ export class EventsModule implements EventsService {
           }
         })
       }
-      else if (this.core.newScrollTop <= 0) {
+      else if (this.#newScrollTop <= 0) {
         $autoHeaders.forEach(($header) => {
           $header.classList.remove('header__fadeOutUp')
           animateCSS($header, ['header__fadeInDown'], true)
         })
       }
       const contentHeight = document.body.scrollHeight - window.innerHeight
-      const scrollPercent = Math.max(Math.min(100 * Math.max(this.core.newScrollTop, 0) / contentHeight, 100), 0)
+      const scrollPercent = Math.max(Math.min(100 * Math.max(this.#newScrollTop, 0) / contentHeight, 100), 0)
       if ($readingProgressBar) {
         $readingProgressBar.style.setProperty('--fi-progress', `${scrollPercent.toFixed(2)}%`)
       }
@@ -88,7 +85,7 @@ export class EventsModule implements EventsService {
       eventBus.emit('fixit:scroll')
       this.toc.syncTocHeight()
       this.toc.syncTocActiveState()
-      this.core.oldScrollTop = this.core.newScrollTop
+      this.#oldScrollTop = this.#newScrollTop
     }, false)
   }
 
@@ -101,7 +98,6 @@ export class EventsModule implements EventsService {
           this.#resizeTimeout = null
           eventBus.emit('fixit:resize')
           this.toc.initToc()
-          this.search.initSearch()
           this.toc.syncTocHeight()
           this.toc.syncTocActiveState()
 

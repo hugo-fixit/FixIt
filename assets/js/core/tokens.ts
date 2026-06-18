@@ -1,14 +1,13 @@
 /** Service interfaces for all FixIt modules. */
 import type { FixItConfig, MaskOverlayHandler } from '../types'
+import type { TypedEventBus } from './event-bus'
 
 // ─── CoreService ───
 export interface CoreService {
   readonly config: FixItConfig
+  readonly version: string
   isDark: boolean
   themeMode: string
-  disableScrollEvent: boolean
-  newScrollTop: number
-  oldScrollTop: number
   registerMaskOverlay: (name: string, handlers: MaskOverlayHandler) => void
   openMaskOverlay: (name: string) => void
   closeMaskOverlay: (name: string, skipSync?: boolean) => void
@@ -78,4 +77,26 @@ export interface EventsService {
   onResize: () => void
   onClickMask: () => void
   initPrint: () => void
+}
+
+// ─── FixItPublicAPI ───
+export interface FixItPublicAPI {
+  readonly config: FixItConfig
+  readonly version: string
+  readonly themeMode: string
+  readonly isDark: boolean
+  // Modules
+  readonly core: CoreService
+  readonly theme: ThemeService
+  readonly code: CodeService
+  readonly toc: TocService
+  readonly menu: MenuService
+  readonly search: SearchService
+  readonly enc: EncryptionService
+  readonly misc: MiscService
+  readonly content: ContentService
+  readonly events: EventsService
+  readonly eventBus: TypedEventBus
+  // Methods
+  setThemeMode: (mode: string, persist?: boolean) => void
 }

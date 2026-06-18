@@ -1,5 +1,6 @@
 /**
  * Console banner — prints a styled FixIt version message in the browser console.
+ * @param version - The FixIt version string to display.
  */
 export function printBanner(version: string) {
   const color = '#FF735A'

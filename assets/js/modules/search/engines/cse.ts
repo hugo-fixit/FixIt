@@ -1,10 +1,11 @@
-import type { CSEConfig } from '../../../types/config'
-import type { SearchEngine, SearchResult } from '../types'
+import type { CSEConfig, SearchEngine, SearchResult } from '../types'
 
 /**
  * Create a Google Custom Search Engine adapter.
  *
  * Returns a single result that links to the CSE results page.
+ * @param cseConfig - The CSE configuration, or `undefined` if not configured.
+ * @returns A SearchEngine instance for Google CSE.
  */
 export function createCSEEngine(cseConfig: CSEConfig | undefined): SearchEngine {
   return {

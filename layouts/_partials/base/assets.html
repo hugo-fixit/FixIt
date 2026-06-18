@@ -45,18 +45,20 @@
     {{- dict "Source" "js/lib/fuse.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
     {{- $config = dict "isCaseSensitive" $search.fuse.isCaseSensitive "minMatchCharLength" $search.fuse.minMatchCharLength "findAllMatches" $search.fuse.findAllMatches "location" $search.fuse.location "threshold" $search.fuse.threshold "distance" $search.fuse.distance "ignoreLocation" $search.fuse.ignoreLocation "useExtendedSearch" $search.fuse.useExtendedSearch "ignoreFieldNorm" $search.fuse.ignoreFieldNorm | dict "search" | merge $config -}}
   {{- else if eq $search.type "pagefind" -}}
+    {{- $config = dict "type" "pagefind" | dict "search" | merge $config -}}
     {{- $pagefind := $search.pagefind | default dict -}}
+    {{- $bundlePath := relURL ($pagefind.bundlePath | default "pagefind/") -}}
+    {{- if not (hasSuffix $bundlePath "/") -}}
+      {{- $bundlePath = printf "%v/" $bundlePath -}}
+    {{- end -}}
     {{- $config = dict
-      "type" "pagefind"
-      "pagefind" (dict
-        "bundlePath" ($pagefind.bundlePath | default "pagefind/")
-        "baseURL" .Site.BaseURL
-        "debounceTimeoutMs" ($pagefind.debounceTimeoutMs | default 300)
-        "useBuiltInFilters" ($pagefind.useBuiltInFilters | default true)
-        "sortBy" ($pagefind.sortBy | default "")
-        "sortOrder" ($pagefind.sortOrder | default "desc")
-      )
-    | dict "search" | merge $config -}}
+      "bundlePath" $bundlePath
+      "debounceTimeoutMs" ($pagefind.debounceTimeoutMs | default 300)
+      "useBuiltInFilters" ($pagefind.useBuiltInFilters | default true)
+      "sortBy" ($pagefind.sortBy | default "")
+      "sortOrder" ($pagefind.sortOrder | default "desc")
+      | dict "pagefind" | merge $config
+    -}}
   {{- else if eq $search.type "cse" -}}
     {{- $config = dict "type" "cse" | dict "search" | merge $config -}}
     {{- $cse := .Site.Params.cse -}}

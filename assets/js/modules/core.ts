@@ -1,6 +1,6 @@
 import type { CoreService } from '../core/tokens'
 import type { FixItConfig, MaskOverlayHandler } from '../types'
-import { getScrollTop, getThemeMode, isDarkMode } from '../utils'
+import { getThemeMode, isDarkMode } from '../utils'
 
 /**
  * Core module — shared state initialization and mask overlay management.
@@ -15,9 +15,6 @@ export class CoreModule implements CoreService {
   readonly version: string
   themeMode: string
   isDark: boolean
-  newScrollTop: number
-  oldScrollTop: number
-  disableScrollEvent: boolean
 
   private activeMaskOverlay: string | null = null
   private readonly maskOverlays = new Map<string, MaskOverlayHandler>()
@@ -27,9 +24,6 @@ export class CoreModule implements CoreService {
     this.version = this.config.version
     this.themeMode = getThemeMode()
     this.isDark = isDarkMode()
-    this.newScrollTop = getScrollTop()
-    this.oldScrollTop = this.newScrollTop
-    this.disableScrollEvent = false
 
     window.objectFitImages?.()
   }
@@ -46,7 +40,6 @@ export class CoreModule implements CoreService {
 
   /** Open a named mask overlay, closing any previously active one. */
   openMaskOverlay(name: string) {
-    this.disableScrollEvent = true
     const overlay = this.maskOverlays.get(name)
     if (!overlay)
       return
@@ -60,7 +53,6 @@ export class CoreModule implements CoreService {
 
   /** Close a named mask overlay and optionally skip mask state sync. */
   closeMaskOverlay(name: string, skipSync = false) {
-    this.disableScrollEvent = false
     const overlay = this.maskOverlays.get(name)
     if (!overlay)
       return

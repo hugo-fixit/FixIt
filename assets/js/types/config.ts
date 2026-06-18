@@ -1,3 +1,4 @@
+import type { CSEConfig, PagefindConfig, SearchConfig } from '../modules/search/types'
 import type { MermaidConfig } from './third-party'
 
 /** Mask overlay handler */
@@ -13,6 +14,7 @@ export interface FixItConfig {
   twemoji?: boolean
   search?: SearchConfig
   cse?: CSEConfig
+  pagefind?: PagefindConfig
   echarts?: EchartsConfig
   mapbox?: MapboxConfig
   typeit?: TypeItConfig
@@ -29,47 +31,6 @@ export interface FixItConfig {
   autoBookmark?: boolean
   encryption?: EncryptionConfig
   print?: PrintConfig
-}
-
-export interface SearchConfig {
-  type?: string
-  placeholder?: string
-  maxResultLength?: number
-  snippetLength?: number
-  highlightTag?: string
-  isCaseSensitive?: boolean
-  minMatchCharLength?: number
-  findAllMatches?: boolean
-  location?: number
-  threshold?: number
-  distance?: number
-  ignoreLocation?: boolean
-  useExtendedSearch?: boolean
-  ignoreFieldNorm?: boolean
-  fuseIndexURL?: string
-  algoliaAppID?: string
-  algoliaSearchKey?: string
-  algoliaIndex?: string
-  noResultsFound?: string
-  clearText?: string
-  pagefind?: PagefindConfig
-}
-
-export interface PagefindConfig {
-  bundlePath?: string
-  baseURL?: string
-  debounceTimeoutMs?: number
-  useBuiltInFilters?: boolean
-  sortBy?: string
-  sortOrder?: string
-}
-
-export interface CSEConfig {
-  engine?: string
-  cx?: string
-  resultsPage?: string
-  searchIn?: string
-  gotoResultsPage?: string
 }
 
 export interface EchartsConfig {

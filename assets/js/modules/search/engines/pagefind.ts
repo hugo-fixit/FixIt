@@ -1,30 +1,4 @@
-import type { SearchEngine, SearchResult } from '../types'
-
-/** Matches absolute URLs (e.g. "https://..." or "//...") */
-const ABSOLUTE_URL_RE = /^(?:[a-z]+:)?\/\//i
-
-/**
- * Normalize a Pagefind bundle path to a full URL.
- * Relative paths are resolved against the given baseURL or document.baseURI.
- */
-function normalizeBundlePath(path: string, baseURL?: string): string {
-  let bundlePath = typeof path === 'string' && path.length > 0 ? path : 'pagefind/'
-  if (!bundlePath.endsWith('/')) {
-    bundlePath = `${bundlePath}/`
-  }
-  if (ABSOLUTE_URL_RE.test(bundlePath)) {
-    return bundlePath
-  }
-  return new URL(bundlePath, baseURL || document.baseURI).toString()
-}
-
-/** Safely cast a value to a plain object; returns `{}` for non-objects. */
-const toObject = (value: unknown): Record<string, unknown> => (value && typeof value === 'object' ? value as Record<string, unknown> : {})
-
-/** Normalize sort order to 'asc' or 'desc', defaulting to 'desc'. */
-function normalizeSortOrder(value: unknown): 'asc' | 'desc' {
-  return String(value).toLowerCase() === 'asc' ? 'asc' : 'desc'
-}
+import type { PagefindConfig, SearchConfig, SearchEngine, SearchResult } from '../types'
 
 /** Replace `<mark>` tags in Pagefind excerpts with the configured highlight tag. */
 function replaceExcerptHighlightTag(excerpt: string, highlightTag: string): string {
@@ -40,15 +14,17 @@ function replaceExcerptHighlightTag(excerpt: string, highlightTag: string): stri
  * Create a Pagefind search engine with lazy-loading and built-in filters.
  *
  * Wraps the Pagefind library to conform to the `SearchEngine` interface.
+ * @param searchConfig - The search configuration.
+ * @param pagefindConfig - The Pagefind engine configuration.
+ * @returns A SearchEngine instance for Pagefind.
  */
-export function createPagefindEngine(searchConfig: Record<string, any>): SearchEngine {
-  const pagefindConfig = toObject(searchConfig.pagefind)
-  const bundlePath = normalizeBundlePath(pagefindConfig.bundlePath as string, pagefindConfig.baseURL as string)
+export function createPagefindEngine(searchConfig: SearchConfig, pagefindConfig: PagefindConfig): SearchEngine {
+  const bundlePath = pagefindConfig.bundlePath || 'pagefind/'
   const rawDebounceTimeout = Number(pagefindConfig.debounceTimeoutMs ?? 300)
   const debounceTimeout = Number.isFinite(rawDebounceTimeout) ? Math.max(0, rawDebounceTimeout) : 300
   const builtInFiltersEnabled = pagefindConfig.useBuiltInFilters !== false
-  const sortBy = typeof pagefindConfig.sortBy === 'string' ? (pagefindConfig.sortBy as string).trim() : ''
-  const sortOrder = normalizeSortOrder(pagefindConfig.sortOrder)
+  const sortBy = pagefindConfig.sortBy
+  const sortOrder = pagefindConfig.sortOrder ?? 'desc'
   const highlightTag = searchConfig.highlightTag ?? 'em'
   const excerptLength = Number(searchConfig.snippetLength ?? 30)
 
@@ -64,7 +40,7 @@ export function createPagefindEngine(searchConfig: Record<string, any>): SearchE
 
   const ensurePagefind = async () => {
     if (!state.loading) {
-      state.loading = import(/* @vite-ignore */ `${bundlePath}pagefind.js`)
+      state.loading = import(`${bundlePath}pagefind.js`)
         .then(async (mod: any) => {
           if (!state.initialized) {
             const options: Record<string, any> = {}
@@ -96,7 +72,7 @@ export function createPagefindEngine(searchConfig: Record<string, any>): SearchE
       return state.availableFilters
     }
     try {
-      state.availableFilters = toObject(await pagefind.filters())
+      state.availableFilters = (await pagefind.filters()) as Record<string, any> ?? {}
     }
     catch (error) {
       console.warn('[FixIt] failed to read Pagefind filters:', error)
