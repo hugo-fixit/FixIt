@@ -3,7 +3,7 @@
   "build": {
     "dockerfile": "Dockerfile",
     "args": {
-      "HUGO_VERSION": "0.158.0",
+      "HUGO_VERSION": "0.161.0",
       "DART_SASS_VERSION": "1.99.0",
       "GO_VERSION": "1.24.4"
     }

@@ -6,7 +6,7 @@ Make sure that you follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) while contrib
 
 Before you start contributing, make sure you have the following tools installed:
 
-- **Hugo Extended** (>= 0.158.0) - The static site generator
+- **Hugo Extended** (>= 0.161.0) - The static site generator
 - **Dart Sass** - Required for SCSS compilation
 - **Node.js** (>= 22) - Required for package management and build tools
 - **pnpm** - Package manager

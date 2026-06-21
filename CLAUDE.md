@@ -11,7 +11,7 @@ FixIt is a modern, responsive theme for the Hugo static site generator. Built wi
 ### Prerequisites
 
 - Node.js >= 20
-- Hugo Extended >= 0.158.0 (Dart Sass required)
+- Hugo Extended >= 0.161.0 (Dart Sass required)
 - pnpm
 
 ### Development
