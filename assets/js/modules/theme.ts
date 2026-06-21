@@ -76,4 +76,10 @@ export class ThemeModule implements ThemeService {
       })
     })
   }
+
+  /** Initialize theme color and switch handler. */
+  setup() {
+    this.initThemeColor()
+    this.initSwitchTheme()
+  }
 }

@@ -25,7 +25,7 @@ export class EncryptionModule implements EncryptionService {
   }
 
   /** Initialize the FixItDecryptor and wire up decryption/re-encryption events. */
-  initFixItDecryptor() {
+  setup() {
     if (!this.core.config.encryption)
       return
     const decryptor = new window.FixItDecryptor()

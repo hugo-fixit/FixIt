@@ -9,7 +9,7 @@ const copyText = createCopyText()
  * Content module — details toggle, tooltips, footnotes, SVG icons, and link guard.
  *
  * Responsibilities:
- * - Attach toggle behaviour to `<details>` elements.
+ * - Attach toggle behaviour to `.details` elements.
  * - Initialize CellTooltip on action buttons, copy buttons, and footnotes.
  * - Fetch and inline SVG icons from `data-svg-src` attributes.
  * - Set up link guard dialog for external link confirmation.
@@ -111,7 +111,7 @@ export class ContentModule implements ContentService {
   }
 
   /**
-   * Attach toggle behaviour to `<details>` elements.
+   * Attach toggle behaviour to `.details` elements.
    * @param target - The root element to search within.
    */
   initDetails(target: Element | Document = document) {
@@ -185,6 +185,7 @@ export class ContentModule implements ContentService {
 
   setup() {
     this.initContent()
+    this.initSVGIcon()
     eventBus.on('fixit:decrypted', () => {
       this.initContent()
     })

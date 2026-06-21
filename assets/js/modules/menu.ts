@@ -4,28 +4,22 @@ import type { CoreService, MenuService } from '../core/tokens'
  * Menu module — desktop dropdown and mobile drawer navigation.
  *
  * Responsibilities:
- * - Initialize desktop header dropdown menu interactions.
- * - Initialize mobile header drawer menu open/close/toggle.
+ * - Desktop header dropdown menu interactions.
+ * - Mobile header drawer menu open/close/toggle.
  * - Sync menu state with mask overlay.
  */
 export class MenuModule implements MenuService {
   constructor(private readonly core: CoreService) {}
 
-  /** Initialize both desktop and mobile menus. */
-  initMenu() {
-    this.initMenuDesktop()
-    this.initMenuMobile()
-  }
-
   /** Set min-width on desktop sub-menus to match parent item width. */
-  initMenuDesktop() {
+  initDesktop() {
     document.querySelectorAll<HTMLElement>('.has-children').forEach(($item) => {
       $item.querySelector<HTMLElement>('.sub-menu')!.style.minWidth = `${$item.offsetWidth - 8}px`
     })
   }
 
   /** Initialize mobile drawer menu with mask overlay and nested toggles. */
-  initMenuMobile() {
+  initMobile() {
     const $menuToggleMobile = document.getElementById('menu-toggle-mobile')
     const $menuMobile = document.getElementById('menu-mobile')
     if (!$menuToggleMobile || !$menuMobile)
@@ -53,5 +47,11 @@ export class MenuModule implements MenuService {
         this.querySelector('.dropdown-icon')!.classList.toggle('open')
       })
     })
+  }
+
+  /** Initialize both desktop and mobile menus. */
+  setup() {
+    this.initDesktop()
+    this.initMobile()
   }
 }

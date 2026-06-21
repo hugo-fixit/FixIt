@@ -21,16 +21,19 @@ export interface ThemeService {
   setThemeMode: (mode: string, persist?: boolean) => void
   initThemeColor: () => void
   initSwitchTheme: () => void
+  setup: () => void
 }
 
 // ─── MenuService ───
 export interface MenuService {
-  initMenu: () => void
+  initDesktop: () => void
+  initMobile: () => void
+  setup: () => void
 }
 
 // ─── SearchService ───
 export interface SearchService {
-  initSearch: () => void
+  setup: () => void
 }
 
 // ─── CodeService ───
@@ -50,7 +53,7 @@ export interface TocService {
 
 // ─── EncryptionService ───
 export interface EncryptionService {
-  initFixItDecryptor: () => void
+  setup: () => void
 }
 
 // ─── ContentService ───
@@ -69,6 +72,7 @@ export interface MiscService {
   initReward: () => void
   initPostChatUser: () => void
   initComment: () => void
+  setup: () => void
 }
 
 // ─── EventsService ───
@@ -77,6 +81,7 @@ export interface EventsService {
   onResize: () => void
   onClickMask: () => void
   initPrint: () => void
+  setup: () => void
 }
 
 // ─── FixItPublicAPI ───
