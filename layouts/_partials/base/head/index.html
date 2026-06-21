@@ -113,17 +113,18 @@
   <link rel="alternate" type="application/feed+json" href="{{ .Permalink }}" title="{{ $title }}" />
 {{- end -}}
 
-{{- /* SCSS vars (defaults merged with user config) */ -}}
-{{- $scssVars := (.Site.Params.appearance | default dict) | merge (partialCached "function/scss-vars.html" .) -}}
-
-{{- /* Config CSS */ -}}
-{{- dict
-  "Source" "scss/config.template.scss"
-  "Template" "scss/config.scss"
-  "ToCSS" (dict "enableSourceMap" false "vars" $scssVars)
-  "Fingerprint" $fingerprint
-  "Context" .
-  | partial "plugin/style.html"
+{{- /* SCSS vars: internal (theme config) + appearance (user-configurable) */ -}}
+{{- $logo := resources.Get "images/fixit.svg" | minify -}}
+{{- $loading := resources.Get "images/loading.svg" | minify -}}
+{{- $internal := dict
+  "base" (relURL "")
+  "logo_img" $logo.RelPermalink
+  "loading_img" $loading.RelPermalink
+-}}
+{{- $scssVars :=
+  dict "internal" $internal
+  | merge (.Site.Params.appearance | default dict)
+  | merge (partialCached "function/scss-vars.html" .)
 -}}
 
 {{- /* Theme main CSS */ -}}
