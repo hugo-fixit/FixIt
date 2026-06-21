@@ -22,26 +22,6 @@ export class SearchModule implements SearchService {
 
   constructor(private readonly core: CoreService) {}
 
-  /** Initialize the search overlay, autocomplete, and engine-specific logic. */
-  initSearch() {
-    const searchConfig = this.core.config.search
-    if (!searchConfig || !searchConfig.type)
-      return
-
-    // Initialize engine once
-    if (!this.#engine) {
-      this.#engine = this.#createEngine(searchConfig.type, searchConfig)
-    }
-
-    // Initialize dialog and autocomplete once
-    if (!this.#initialized) {
-      this.#initialized = true
-      this.#initAutosearch()
-      this.#initDialog()
-      this.#initKeyboardShortcuts()
-    }
-  }
-
   /** Create the appropriate search engine based on type. */
   #createEngine(type: string, searchConfig: SearchConfig): SearchEngine {
     switch (type) {
@@ -257,5 +237,25 @@ export class SearchModule implements SearchService {
         this.#openDialog?.()
       }
     })
+  }
+
+  /** Initialize the search overlay, autocomplete, and engine-specific logic. */
+  setup() {
+    const searchConfig = this.core.config.search
+    if (!searchConfig || !searchConfig.type)
+      return
+
+    // Initialize engine once
+    if (!this.#engine) {
+      this.#engine = this.#createEngine(searchConfig.type, searchConfig)
+    }
+
+    // Initialize dialog and autocomplete once
+    if (!this.#initialized) {
+      this.#initialized = true
+      this.#initAutosearch()
+      this.#initDialog()
+      this.#initKeyboardShortcuts()
+    }
   }
 }

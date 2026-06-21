@@ -1,6 +1,6 @@
 @use "sass:meta";
 @use "sass:string";
-@use "override" as *;
+@use "variables" as *;
 
 /// Get CSS variable with prefix
 /// @param {String} $name - CSS variable name (without prefix)

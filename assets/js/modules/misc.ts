@@ -140,4 +140,14 @@ export class MiscModule implements MiscService {
       }
     })
   }
+
+  /** Initialize all miscellaneous features. */
+  setup() {
+    this.initSiteTime()
+    this.initServiceWorker()
+    this.initAutoMark()
+    this.initReward()
+    this.initPostChatUser()
+    this.initComment()
+  }
 }

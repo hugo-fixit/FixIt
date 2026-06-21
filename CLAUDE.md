@@ -90,7 +90,7 @@ Cross-module communication uses the shared `eventBus` singleton, not direct modu
 
 Hugo Pipes processes all assets. The key orchestration is in `_partials/base/assets.html`:
 
-- **CSS**: `scss/config.template.scss` generates runtime CSS custom properties from Hugo config. `scss/main.scss` is the entry point importing `core/`, `pages/`, `widgets/`, `custom`.
+- **CSS**: `scss/main.scss` is the entry point importing `core/`, `pages/`, `widgets/`, `custom`. SCSS variables are configured via `hugo:vars` (user-configurable from `[params.appearance]`) and `hugo:vars/internal` (theme system config).
 - **JS**: `_partials/function/js-build.html` wraps `js.Build` with minify-in-production defaults. Hugo's `@params` injection passes config values into TypeScript at build time.
 - **Third-party libraries**: Stored in `assets/lib/` (vendored, not npm-managed). Tracked by `librarybot.yml` and updated weekly by the `hugo-fixit/librarybot` GitHub Action. Can be overridden via CDN config in `assets/data/cdn/jsdelivr.yml` or `unpkg.yml`.
 

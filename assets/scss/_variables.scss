@@ -1,181 +1,184 @@
 // ==========================================================================
 // SCSS Variables
-// Note: These SCSS variables are now also defined as CSS custom properties
-// in _core/_root.scss for runtime theme switching and runtime customization.
+// Configured via [params.appearance] in hugo.toml using hugo:vars.
+// Default values are defined in layouts/_partials/function/scss-vars.html.
 // ==========================================================================
 @forward "core/maps";
 @use "sass:color";
+@use "hugo:vars" as v;
 
-// ========== Global ========== //
+// ========== Internal ========== //
 $prefix: fi- !default;
 $rootPrefix: --#{$prefix} !default;
+// ========== Internal ========== //
 
+// ========== Global ========== //
 // Font and Line Height
-$global-font-family: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif !default;
-$global-font-size: 16px !default;
-$global-font-weight: 400 !default;
-$global-line-height: 1.5rem !default;
+$global-font-family: v.$global-font-family;
+$global-font-size: v.$global-font-size;
+$global-font-weight: v.$global-font-weight;
+$global-line-height: v.$global-line-height;
 
 // Radius of the border
-$global-border-radius: 6px !default;
+$global-border-radius: v.$global-border-radius;
 
 // Color of the background
-$global-background-color: #ffffff !default;
-$global-background-color-dark: #1f252d !default;
+$global-background-color: v.$global-background-color;
+$global-background-color-dark: v.$global-background-color-dark;
 
 // Color of the text
-$global-font-color: #1f2328 !default;
-$global-font-color-dark: #b3bdcb !default;
+$global-font-color: v.$global-font-color;
+$global-font-color-dark: v.$global-font-color-dark;
 
 // Color of the secondary text
-$global-font-secondary-color: #8b949e !default;
-$global-font-secondary-color-dark: #7d8792 !default;
+$global-font-secondary-color: v.$global-font-secondary-color;
+$global-font-secondary-color-dark: v.$global-font-secondary-color-dark;
 
 // Color of the link
-$global-link-color: #161209 !default;
-$global-link-color-dark: $global-font-color-dark !default;
+$global-link-color: v.$global-link-color;
+$global-link-color-dark: v.$global-link-color-dark;
 
 // Color of the hover link
-$global-link-hover-color: #2983bb !default; // 潮蓝
-$global-link-hover-color-dark: #fff !default;
+$global-link-hover-color: v.$global-link-hover-color;
+$global-link-hover-color-dark: v.$global-link-hover-color-dark;
 
 // Color of the border
-$global-border-color: #d7dee4 !default;
-$global-border-color-dark: #383f47 !default;
+$global-border-color: v.$global-border-color;
+$global-border-color-dark: v.$global-border-color-dark;
 // ========== Global ========== //
 
 // ========== Scrollbar ========== //
 // Color of the scrollbar
-$scrollbar-color: #a6a6a6 !default;
+$scrollbar-color: v.$scrollbar-color;
 
 // Color of the hover scrollbar
-$scrollbar-hover-color: #7d7d7d !default;
+$scrollbar-hover-color: v.$scrollbar-hover-color;
 // ========== Scrollbar ========== //
 
 // ========== Selection ========== //
 // Color of the selected text
-$selection-color: rgba(53, 166, 247, 0.25) !default;
-$selection-color-dark: rgba(50, 112, 194, 0.4) !default;
+$selection-color: v.$selection-color;
+$selection-color-dark: v.$selection-color-dark;
 // ========== Selection ========== //
 
 // ========== Header ========== //
 // Height of the header
-$header-height: 3.5rem !default;
+$header-height: v.$header-height;
 
 // Color of the header background
-$header-background-color: #f6f8fa !default;
-$header-background-color-dark: #151b23 !default;
+$header-background-color: v.$header-background-color;
+$header-background-color-dark: v.$header-background-color-dark;
 
 // Font style of the header title
 $header-title-font-family: $global-font-family !default;
-$header-title-font-size: 1.375rem !default;
+$header-title-font-size: v.$header-title-font-size;
 
 // Color of the active menu item
-$menu-active-color: $global-link-color !default;
-$menu-active-color-dark: #fff !default;
+$menu-active-color: v.$menu-active-color;
+$menu-active-color-dark: v.$menu-active-color-dark;
 
 // Border color of the menu item
-$menu-border-color: #3c3c3c1f !default;
-$menu-border-color-dark: #5454547a !default;
+$menu-border-color: v.$menu-border-color;
+$menu-border-color-dark: v.$menu-border-color-dark;
 
 // Height of the submenu item of desktop header
 $submenu-height: $header-height * 0.5 !default;
 
 // Color of the search background
-$search-background-color: #e9eaed !default;
-$search-background-color-dark: #202833 !default;
+$search-background-color: v.$search-background-color;
+$search-background-color-dark: v.$search-background-color-dark;
 // ========== Header ========== //
 
 // ========== Tag Cloud ========== //
 // Color range of tag cloud
-$tag-cloud-start: $global-font-color-dark !default;
-$tag-cloud-end: $global-font-color !default;
-$tag-cloud-start-dark: #909092 !default;
-$tag-cloud-end-dark: $global-font-color-dark !default;
+$tag-cloud-start: v.$tag-cloud-start;
+$tag-cloud-end: v.$tag-cloud-end;
+$tag-cloud-start-dark: v.$tag-cloud-start-dark;
+$tag-cloud-end-dark: v.$tag-cloud-end-dark;
 // ========== Tag Cloud ========== //
 
 // ========== Single Content ========== //
 // Font size of the TOC
-$toc-title-font-size: 1rem !default;
-$toc-content-font-size: 0.875rem !default;
+$toc-title-font-size: v.$toc-title-font-size;
+$toc-content-font-size: v.$toc-content-font-size;
 
 // Font size of the Collection List
-$collection-title-font-size: 1rem !default;
-$collection-list-font-size: 0.875rem !default;
+$collection-title-font-size: v.$collection-title-font-size;
+$collection-list-font-size: v.$collection-list-font-size;
 
 // Font size of the Related Content List
-$related-title-font-size: 1rem !default;
-$related-list-font-size: 0.875rem !default;
+$related-title-font-size: v.$related-title-font-size;
+$related-list-font-size: v.$related-list-font-size;
 
 // Color of the single link
-$single-link-color: #2376b7 !default; // 花青
-$single-link-color-dark: #1781b5 !default; // 釉蓝
+$single-link-color: v.$single-link-color;
+$single-link-color-dark: v.$single-link-color-dark;
 
 // Color of the hover single link
-$single-link-hover-color: #ea517f !default; // 莲瓣红
-$single-link-hover-color-dark: #cc5595 !default; // 龙须红
+$single-link-hover-color: v.$single-link-hover-color;
+$single-link-hover-color-dark: v.$single-link-hover-color-dark;
 
 // Color of the table background
-$table-background-color: #f9fbfe !default;
-$table-background-color-dark: #26303a !default;
+$table-background-color: v.$table-background-color;
+$table-background-color-dark: v.$table-background-color-dark;
 
 // Color of the table thead
-$table-thead-color: #e3ebf4 !default;
-$table-thead-color-dark: #3a4653 !default;
+$table-thead-color: v.$table-thead-color;
+$table-thead-color-dark: v.$table-thead-color-dark;
 
 // Color of the table border
-$table-border-color: #d4dee8 !default;
-$table-border-color-dark: #4b5867 !default;
+$table-border-color: v.$table-border-color;
+$table-border-color-dark: v.$table-border-color-dark;
 
 // Color of the blockquote
-$blockquote-color: #697681 !default;
-$blockquote-color-dark: #9ba3aa !default;
+$blockquote-color: v.$blockquote-color;
+$blockquote-color-dark: v.$blockquote-color-dark;
 
 // Color of reward
-$reward-color: tomato !default;
+$reward-color: v.$reward-color;
 $reward-color-dark: color.adjust($reward-color, $lightness: -5%) !default;
 
 // Width of reward image
-$reward-img-width: 180px !default;
+$reward-img-width: v.$reward-img-width;
 // ========== Single Content ========== //
 
 // ========== Pagination ========== //
 // Color of the link in pagination
-$pagination-link-color: #bfbfbf !default;
-$pagination-link-color-dark: $global-font-color-dark !default;
+$pagination-link-color: v.$pagination-link-color;
+$pagination-link-color-dark: v.$pagination-link-color-dark;
 
 // Color of the hover link in pagination
-$pagination-link-hover-color: #000 !default;
-$pagination-link-hover-color-dark: #fff !default;
+$pagination-link-hover-color: v.$pagination-link-hover-color;
+$pagination-link-hover-color-dark: v.$pagination-link-hover-color-dark;
 // ========== Pagination ========== //
 
 // ========== Code ========== //
 // Color of the code
-$code-color: #26323d !default;
-$code-color-dark: #c5d1dc !default;
+$code-color: v.$code-color;
+$code-color-dark: v.$code-color-dark;
 
 // Color of the code header text
-$code-header-color: #70808f !default;
-$code-header-color-dark: #99a7b5 !default;
+$code-header-color: v.$code-header-color;
+$code-header-color-dark: v.$code-header-color-dark;
 
 // Color of the code header background
-$code-header-background-color: #dde6ef !default;
-$code-header-background-color-dark: #161f28 !default;
+$code-header-background-color: v.$code-header-background-color;
+$code-header-background-color-dark: v.$code-header-background-color-dark;
 
 // Color of the code background
-$code-background-color: #f3f7fb !default;
-$code-background-color-dark: #2a333d !default;
+$code-background-color: v.$code-background-color;
+$code-background-color-dark: v.$code-background-color-dark;
 
 // Color of the code error
-$code-error-color: #dc3545 !default;
+$code-error-color: v.$code-error-color;
 
 // Color of the highlight code
-$code-highlight-color: #fff2b8 !default;
-$code-highlight-color-dark: rgba(191, 144, 32, 0.28) !default;
+$code-highlight-color: v.$code-highlight-color;
+$code-highlight-color-dark: v.$code-highlight-color-dark;
 
 // Font size of the code
-$code-font-size: 0.875em !default;
-$code-block-font-size: 0.875rem !default;
+$code-font-size: v.$code-font-size;
+$code-block-font-size: v.$code-block-font-size;
 
 // Font family of the code
 $code-font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace, $global-font-family !default;
@@ -183,8 +186,8 @@ $code-font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace, $global-
 
 // ========== GitHub Corners ========== //
 // Color of the GitHub Corners
-$github-corner-color: white !default;
-$github-corner-color-dark: black !default;
+$github-corner-color: v.$github-corner-color;
+$github-corner-color-dark: v.$github-corner-color-dark;
 
 // Color of the GitHub Corners background
 $github-corner-fill: $header-background-color-dark !default;

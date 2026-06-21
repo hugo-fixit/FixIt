@@ -1,4 +1,4 @@
-@use "override" as *;
+@use "variables" as *;
 
 // Shared defaults for theme-switch icon motion.
 // Keep them overridable so other entries can reuse the same mixin with different pacing.

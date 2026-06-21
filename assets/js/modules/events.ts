@@ -165,4 +165,12 @@ export class EventsModule implements EventsService {
       this.code.initCodeTabs()
     }, false)
   }
+
+  /** Initialize all event listeners. */
+  setup() {
+    this.onScroll()
+    this.onResize()
+    this.onClickMask()
+    this.initPrint()
+  }
 }

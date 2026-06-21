@@ -1,0 +1,32 @@
+@use "sass:color";
+@use "theme-vars" as *;
+
+/// Define an admonition type with CSS custom properties
+/// @param {String} $type - Admonition type name (empty string for default type)
+/// @param {Color} $color - Text/border color
+/// @param {Color} $bg - Background color
+/// @param {Color} $bg-collapsed [color.adjust($bg, $alpha: 0.15)] - Collapsed title background color
+/// @example
+///   // Define the default admonition type
+///   @include admonition('', #1677ff, rgba(22, 119, 255, 0.1));
+///
+///   // Define a custom admonition type
+///   @include admonition(custom, #9b59b6, rgba(155, 89, 182, 0.1));
+///
+///   // Define with explicit collapsed background color
+///   @include admonition(important, #e91e63, rgba(233, 30, 99, 0.1), rgba(233, 30, 99, 0.25));
+@mixin admonition($type, $color, $bg, $bg-collapsed: color.adjust($bg, $alpha: 0.15)) {
+  $vars: (
+    admonition-color: $color,
+    admonition-bg-color: $bg,
+    admonition-bg-color-collapsed: $bg-collapsed,
+  );
+
+  @if $type == '' {
+    @include set-fi-vars($vars);
+  } @else {
+    &.#{$type} {
+      @include set-fi-vars($vars);
+    }
+  }
+}

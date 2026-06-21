@@ -2,9 +2,10 @@
 // CSS Custom Properties (CSS Variables)
 // ================================================================================
 // This file defines all CSS custom properties for the FixIt theme.
-// Variables are organized into two main categories:
-// 1. Theme-independent variables: fixed values (fonts, sizes, etc.)
-// 2. Theme-dependent variables: color values that support light/dark themes
+// Variables are organized into three main categories:
+// 1. Internal config: theme system values (base URL, logo, etc.) via hugo:vars/internal
+// 2. Theme-independent variables: fixed values (fonts, sizes, etc.)
+// 3. Theme-dependent variables: color values that support light/dark themes
 //
 // Theme-dependent variables are further categorized into:
 // - Core: Global layout and navigation colors
@@ -16,7 +17,8 @@
 @use "sass:color";
 @use "functions" as *;
 @use "mixins" as *;
-@use "override" as *;
+@use "variables" as *;
+@use "hugo:vars/internal" as i;
 
 :root {
   interpolate-size: allow-keywords;
@@ -34,6 +36,11 @@
   // Theme-Independent Variables
   // ----------------------------------------
   @include set-fi-vars((
+    // Internal config
+    base: "#{i.$base}",
+    logo-img: url("#{i.$logo-img}"),
+    loading-img: url("#{i.$loading-img}"),
+
     // Global Typography
     global-font-family: $global-font-family,
     global-font-size: $global-font-size,

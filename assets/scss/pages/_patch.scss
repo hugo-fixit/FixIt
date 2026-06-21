@@ -1,5 +1,5 @@
 // Resolve style conflicts between third-party plugins
-@use "override" as *;
+@use "variables" as *;
 
 @keyframes #{$prefix}pulse {
   from {
