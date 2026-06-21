@@ -5,6 +5,7 @@
   Note: Color values must use hex format (e.g. "#ff0000"), CSS named colors (e.g. "red") are not supported
   because Hugo's isTypedCSSValue only recognizes hex colors, CSS functions, and CSS units.
 */ -}}
+{{- /* Base defaults — independent values */ -}}
 {{- $defaults := dict
   "global_font_family" "system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif"
   "global_font_size" "16px"
@@ -31,16 +32,12 @@
   "header_background_color" "#f6f8fa"
   "header_background_color_dark" "#151b23"
   "header_title_font_size" "1.375rem"
-  "menu_active_color" "#161209"
   "menu_active_color_dark" "#fff"
   "menu_border_color" "#3c3c3c1f"
   "menu_border_color_dark" "#5454547a"
   "search_background_color" "#e9eaed"
   "search_background_color_dark" "#202833"
-  "tag_cloud_start" "#b3bdcb"
-  "tag_cloud_end" "#1f2328"
   "tag_cloud_start_dark" "#909092"
-  "tag_cloud_end_dark" "#b3bdcb"
   "toc_title_font_size" "1rem"
   "toc_content_font_size" "0.875rem"
   "collection_title_font_size" "1rem"
@@ -62,7 +59,6 @@
   "reward_color" "#ff6347"
   "reward_img_width" "180px"
   "pagination_link_color" "#bfbfbf"
-  "pagination_link_color_dark" "#b3bdcb"
   "pagination_link_hover_color" "#000"
   "pagination_link_hover_color_dark" "#fff"
   "code_color" "#26323d"
@@ -81,4 +77,13 @@
   "github_corner_color" "#ffffff"
   "github_corner_color_dark" "#000000"
 -}}
+{{- /* Derived defaults — values that follow other keys (see _variables.scss) */ -}}
+{{- $derived := dict
+  "menu_active_color" (index $defaults "global_link_color")
+  "tag_cloud_start" (index $defaults "global_font_color_dark")
+  "tag_cloud_end" (index $defaults "global_font_color")
+  "tag_cloud_end_dark" (index $defaults "global_font_color_dark")
+  "pagination_link_color_dark" (index $defaults "global_font_color_dark")
+-}}
+{{- $defaults = merge $defaults $derived -}}
 {{- return $defaults -}}

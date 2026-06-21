@@ -16,19 +16,17 @@
 ///   // Define with explicit collapsed background color
 ///   @include admonition(important, #e91e63, rgba(233, 30, 99, 0.1), rgba(233, 30, 99, 0.25));
 @mixin admonition($type, $color, $bg, $bg-collapsed: color.adjust($bg, $alpha: 0.15)) {
+  $vars: (
+    admonition-color: $color,
+    admonition-bg-color: $bg,
+    admonition-bg-color-collapsed: $bg-collapsed,
+  );
+
   @if $type == '' {
-    @include set-fi-vars((
-      admonition-color: $color,
-      admonition-bg-color: $bg,
-      admonition-bg-color-collapsed: $bg-collapsed,
-    ));
+    @include set-fi-vars($vars);
   } @else {
     &.#{$type} {
-      @include set-fi-vars((
-        admonition-color: $color,
-        admonition-bg-color: $bg,
-        admonition-bg-color-collapsed: $bg-collapsed,
-      ));
+      @include set-fi-vars($vars);
     }
   }
 }

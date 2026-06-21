@@ -14,171 +14,171 @@ $rootPrefix: --#{$prefix} !default;
 
 // ========== Global ========== //
 // Font and Line Height
-$global-font-family: v.$global-font-family !default;
-$global-font-size: v.$global-font-size !default;
-$global-font-weight: v.$global-font-weight !default;
-$global-line-height: v.$global-line-height !default;
+$global-font-family: v.$global-font-family;
+$global-font-size: v.$global-font-size;
+$global-font-weight: v.$global-font-weight;
+$global-line-height: v.$global-line-height;
 
 // Radius of the border
-$global-border-radius: v.$global-border-radius !default;
+$global-border-radius: v.$global-border-radius;
 
 // Color of the background
-$global-background-color: v.$global-background-color !default;
-$global-background-color-dark: v.$global-background-color-dark !default;
+$global-background-color: v.$global-background-color;
+$global-background-color-dark: v.$global-background-color-dark;
 
 // Color of the text
-$global-font-color: v.$global-font-color !default;
-$global-font-color-dark: v.$global-font-color-dark !default;
+$global-font-color: v.$global-font-color;
+$global-font-color-dark: v.$global-font-color-dark;
 
 // Color of the secondary text
-$global-font-secondary-color: v.$global-font-secondary-color !default;
-$global-font-secondary-color-dark: v.$global-font-secondary-color-dark !default;
+$global-font-secondary-color: v.$global-font-secondary-color;
+$global-font-secondary-color-dark: v.$global-font-secondary-color-dark;
 
 // Color of the link
-$global-link-color: v.$global-link-color !default;
-$global-link-color-dark: v.$global-link-color-dark !default;
+$global-link-color: v.$global-link-color;
+$global-link-color-dark: v.$global-link-color-dark;
 
 // Color of the hover link
-$global-link-hover-color: v.$global-link-hover-color !default;
-$global-link-hover-color-dark: v.$global-link-hover-color-dark !default;
+$global-link-hover-color: v.$global-link-hover-color;
+$global-link-hover-color-dark: v.$global-link-hover-color-dark;
 
 // Color of the border
-$global-border-color: v.$global-border-color !default;
-$global-border-color-dark: v.$global-border-color-dark !default;
+$global-border-color: v.$global-border-color;
+$global-border-color-dark: v.$global-border-color-dark;
 // ========== Global ========== //
 
 // ========== Scrollbar ========== //
 // Color of the scrollbar
-$scrollbar-color: v.$scrollbar-color !default;
+$scrollbar-color: v.$scrollbar-color;
 
 // Color of the hover scrollbar
-$scrollbar-hover-color: v.$scrollbar-hover-color !default;
+$scrollbar-hover-color: v.$scrollbar-hover-color;
 // ========== Scrollbar ========== //
 
 // ========== Selection ========== //
 // Color of the selected text
-$selection-color: v.$selection-color !default;
-$selection-color-dark: v.$selection-color-dark !default;
+$selection-color: v.$selection-color;
+$selection-color-dark: v.$selection-color-dark;
 // ========== Selection ========== //
 
 // ========== Header ========== //
 // Height of the header
-$header-height: v.$header-height !default;
+$header-height: v.$header-height;
 
 // Color of the header background
-$header-background-color: v.$header-background-color !default;
-$header-background-color-dark: v.$header-background-color-dark !default;
+$header-background-color: v.$header-background-color;
+$header-background-color-dark: v.$header-background-color-dark;
 
 // Font style of the header title
 $header-title-font-family: $global-font-family !default;
-$header-title-font-size: v.$header-title-font-size !default;
+$header-title-font-size: v.$header-title-font-size;
 
 // Color of the active menu item
-$menu-active-color: $global-link-color !default;
-$menu-active-color-dark: v.$menu-active-color-dark !default;
+$menu-active-color: v.$menu-active-color;
+$menu-active-color-dark: v.$menu-active-color-dark;
 
 // Border color of the menu item
-$menu-border-color: v.$menu-border-color !default;
-$menu-border-color-dark: v.$menu-border-color-dark !default;
+$menu-border-color: v.$menu-border-color;
+$menu-border-color-dark: v.$menu-border-color-dark;
 
 // Height of the submenu item of desktop header
 $submenu-height: $header-height * 0.5 !default;
 
 // Color of the search background
-$search-background-color: v.$search-background-color !default;
-$search-background-color-dark: v.$search-background-color-dark !default;
+$search-background-color: v.$search-background-color;
+$search-background-color-dark: v.$search-background-color-dark;
 // ========== Header ========== //
 
 // ========== Tag Cloud ========== //
 // Color range of tag cloud
-$tag-cloud-start: $global-font-color-dark !default;
-$tag-cloud-end: $global-font-color !default;
-$tag-cloud-start-dark: v.$tag-cloud-start-dark !default;
-$tag-cloud-end-dark: $global-font-color-dark !default;
+$tag-cloud-start: v.$tag-cloud-start;
+$tag-cloud-end: v.$tag-cloud-end;
+$tag-cloud-start-dark: v.$tag-cloud-start-dark;
+$tag-cloud-end-dark: v.$tag-cloud-end-dark;
 // ========== Tag Cloud ========== //
 
 // ========== Single Content ========== //
 // Font size of the TOC
-$toc-title-font-size: v.$toc-title-font-size !default;
-$toc-content-font-size: v.$toc-content-font-size !default;
+$toc-title-font-size: v.$toc-title-font-size;
+$toc-content-font-size: v.$toc-content-font-size;
 
 // Font size of the Collection List
-$collection-title-font-size: v.$collection-title-font-size !default;
-$collection-list-font-size: v.$collection-list-font-size !default;
+$collection-title-font-size: v.$collection-title-font-size;
+$collection-list-font-size: v.$collection-list-font-size;
 
 // Font size of the Related Content List
-$related-title-font-size: v.$related-title-font-size !default;
-$related-list-font-size: v.$related-list-font-size !default;
+$related-title-font-size: v.$related-title-font-size;
+$related-list-font-size: v.$related-list-font-size;
 
 // Color of the single link
-$single-link-color: v.$single-link-color !default;
-$single-link-color-dark: v.$single-link-color-dark !default;
+$single-link-color: v.$single-link-color;
+$single-link-color-dark: v.$single-link-color-dark;
 
 // Color of the hover single link
-$single-link-hover-color: v.$single-link-hover-color !default;
-$single-link-hover-color-dark: v.$single-link-hover-color-dark !default;
+$single-link-hover-color: v.$single-link-hover-color;
+$single-link-hover-color-dark: v.$single-link-hover-color-dark;
 
 // Color of the table background
-$table-background-color: v.$table-background-color !default;
-$table-background-color-dark: v.$table-background-color-dark !default;
+$table-background-color: v.$table-background-color;
+$table-background-color-dark: v.$table-background-color-dark;
 
 // Color of the table thead
-$table-thead-color: v.$table-thead-color !default;
-$table-thead-color-dark: v.$table-thead-color-dark !default;
+$table-thead-color: v.$table-thead-color;
+$table-thead-color-dark: v.$table-thead-color-dark;
 
 // Color of the table border
-$table-border-color: v.$table-border-color !default;
-$table-border-color-dark: v.$table-border-color-dark !default;
+$table-border-color: v.$table-border-color;
+$table-border-color-dark: v.$table-border-color-dark;
 
 // Color of the blockquote
-$blockquote-color: v.$blockquote-color !default;
-$blockquote-color-dark: v.$blockquote-color-dark !default;
+$blockquote-color: v.$blockquote-color;
+$blockquote-color-dark: v.$blockquote-color-dark;
 
 // Color of reward
-$reward-color: v.$reward-color !default;
+$reward-color: v.$reward-color;
 $reward-color-dark: color.adjust($reward-color, $lightness: -5%) !default;
 
 // Width of reward image
-$reward-img-width: v.$reward-img-width !default;
+$reward-img-width: v.$reward-img-width;
 // ========== Single Content ========== //
 
 // ========== Pagination ========== //
 // Color of the link in pagination
-$pagination-link-color: v.$pagination-link-color !default;
-$pagination-link-color-dark: $global-font-color-dark !default;
+$pagination-link-color: v.$pagination-link-color;
+$pagination-link-color-dark: v.$pagination-link-color-dark;
 
 // Color of the hover link in pagination
-$pagination-link-hover-color: v.$pagination-link-hover-color !default;
-$pagination-link-hover-color-dark: v.$pagination-link-hover-color-dark !default;
+$pagination-link-hover-color: v.$pagination-link-hover-color;
+$pagination-link-hover-color-dark: v.$pagination-link-hover-color-dark;
 // ========== Pagination ========== //
 
 // ========== Code ========== //
 // Color of the code
-$code-color: v.$code-color !default;
-$code-color-dark: v.$code-color-dark !default;
+$code-color: v.$code-color;
+$code-color-dark: v.$code-color-dark;
 
 // Color of the code header text
-$code-header-color: v.$code-header-color !default;
-$code-header-color-dark: v.$code-header-color-dark !default;
+$code-header-color: v.$code-header-color;
+$code-header-color-dark: v.$code-header-color-dark;
 
 // Color of the code header background
-$code-header-background-color: v.$code-header-background-color !default;
-$code-header-background-color-dark: v.$code-header-background-color-dark !default;
+$code-header-background-color: v.$code-header-background-color;
+$code-header-background-color-dark: v.$code-header-background-color-dark;
 
 // Color of the code background
-$code-background-color: v.$code-background-color !default;
-$code-background-color-dark: v.$code-background-color-dark !default;
+$code-background-color: v.$code-background-color;
+$code-background-color-dark: v.$code-background-color-dark;
 
 // Color of the code error
-$code-error-color: v.$code-error-color !default;
+$code-error-color: v.$code-error-color;
 
 // Color of the highlight code
-$code-highlight-color: v.$code-highlight-color !default;
-$code-highlight-color-dark: v.$code-highlight-color-dark !default;
+$code-highlight-color: v.$code-highlight-color;
+$code-highlight-color-dark: v.$code-highlight-color-dark;
 
 // Font size of the code
-$code-font-size: v.$code-font-size !default;
-$code-block-font-size: v.$code-block-font-size !default;
+$code-font-size: v.$code-font-size;
+$code-block-font-size: v.$code-block-font-size;
 
 // Font family of the code
 $code-font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace, $global-font-family !default;
@@ -186,8 +186,8 @@ $code-font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace, $global-
 
 // ========== GitHub Corners ========== //
 // Color of the GitHub Corners
-$github-corner-color: v.$github-corner-color !default;
-$github-corner-color-dark: v.$github-corner-color-dark !default;
+$github-corner-color: v.$github-corner-color;
+$github-corner-color-dark: v.$github-corner-color-dark;
 
 // Color of the GitHub Corners background
 $github-corner-fill: $header-background-color-dark !default;
