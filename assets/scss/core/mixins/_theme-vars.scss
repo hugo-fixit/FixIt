@@ -3,7 +3,7 @@
 // ========================================
 @use "sass:color";
 @use "sass:map";
-@use "override" as *;
+@use "variables" as *;
 
 /// Set a single CSS variable
 /// @param {String} $name - CSS variable name (without prefix)

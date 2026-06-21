@@ -16,7 +16,7 @@
 @use "sass:color";
 @use "functions" as *;
 @use "mixins" as *;
-@use "override" as *;
+@use "variables" as *;
 
 :root {
   interpolate-size: allow-keywords;

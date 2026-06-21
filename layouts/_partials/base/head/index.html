@@ -113,11 +113,14 @@
   <link rel="alternate" type="application/feed+json" href="{{ .Permalink }}" title="{{ $title }}" />
 {{- end -}}
 
+{{- /* SCSS vars (defaults merged with user config) */ -}}
+{{- $scssVars := (.Site.Params.appearance | default dict) | merge (partialCached "function/scss-vars.html" .) -}}
+
 {{- /* Config CSS */ -}}
 {{- dict
   "Source" "scss/config.template.scss"
   "Template" "scss/config.scss"
-  "ToCSS" (dict "enableSourceMap" false)
+  "ToCSS" (dict "enableSourceMap" false "vars" $scssVars)
   "Fingerprint" $fingerprint
   "Context" .
   | partial "plugin/style.html"
@@ -126,7 +129,7 @@
 {{- /* Theme main CSS */ -}}
 {{- $mainCSS := dict
   "Resource" (resources.Get "scss/main.scss")
-  "ToCSS" true
+  "ToCSS" (dict "vars" $scssVars)
   "Fingerprint" $fingerprint
   | partial "function/to-css.html"
 -}}

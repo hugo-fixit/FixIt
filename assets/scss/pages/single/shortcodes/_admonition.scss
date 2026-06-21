@@ -56,7 +56,7 @@
 
   .admonition-content {
     padding: 0.5rem 0;
-    
+
     // for extended alert syntax
     > p {
       margin: 0;
@@ -84,24 +84,14 @@
     translate: 50% -50%;
   }
 
-  // default admonition type is note
-  @include set-fi-vars((
-    admonition-color: map.get(map.get(maps.$admonition-color-map, note), color),
-    admonition-bg-color: map.get(map.get(maps.$admonition-color-map, note), bg-color),
-    admonition-bg-color-collapsed: color.adjust(map.get(map.get(maps.$admonition-color-map, note), bg-color), $alpha: 0.15),
-  ));
-
   // set color for each admonition type
+  $default-type: note;
   @each $type, $item in maps.$admonition-color-map {
-    @if $type != 'note' {
-      &.#{$type} {
-         @include set-fi-vars((
-          admonition-color: map.get($item, color),
-          admonition-bg-color: map.get($item, bg-color),
-          admonition-bg-color-collapsed: color.adjust(map.get($item, bg-color), $alpha: 0.15),
-        ));
-      }
+    $admonition-type: $type;
+    @if $type == $default-type {
+      $admonition-type: '';
     }
+    @include admonition($admonition-type, map.get($item, color), map.get($item, bg-color));
   }
 
   &:last-child {

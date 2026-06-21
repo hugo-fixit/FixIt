@@ -1269,6 +1269,19 @@ postContentAfter = []
 postFooterBefore = []
 postFooterAfter = []
 
+# FixIt 1.0.0 | NEW SCSS variables customization via config
+# All SCSS variables from _variables.scss can be configured here.
+# Use the SCSS variable name (without $ prefix, snake_case) as the key.
+# Note:
+# - Color values must use hex format (e.g. "#ff0000"), CSS named colors (e.g. "red") are not supported.
+# - Values used in compile-time operations (color.adjust, arithmetic)
+#   will use the SCSS default for derived values. You can override derived values directly.
+[params.appearance]
+# global_border_radius = "6px"
+# global_font_size = "16px"
+# global_font_color = "#1f2328"
+# global_font_color_dark = "#b3bdcb"
+
 # FixIt 0.2.15 | NEW Developer options
 # select the scope named `public_repo` to generate personal access token,
 # configure with environment variable `HUGO_PARAMS_GHTOKEN=xxx`, see https://gohugo.io/functions/os/getenv/#examples
