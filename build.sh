@@ -101,9 +101,10 @@ main() {
 
   # Build the site
   echo "Building the site..."
-  build demo &
-  build test &
-  wait
+  build demo & pid_demo=$!
+  build test & pid_test=$!
+  wait "${pid_demo}" || { echo "build demo failed"; exit 1; }
+  wait "${pid_test}" || { echo "build test failed"; exit 1; }
   pnpm -F integration start
 }
 
