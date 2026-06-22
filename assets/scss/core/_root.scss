@@ -1,19 +1,19 @@
-// ================================================================================
-// CSS Custom Properties (CSS Variables)
-// ================================================================================
-// This file defines all CSS custom properties for the FixIt theme.
-// Variables are organized into three main categories:
-// 1. Internal config: theme system values (base URL, logo, etc.) via hugo:vars/internal
-// 2. Theme-independent variables: fixed values (fonts, sizes, etc.)
-// 3. Theme-dependent variables: color values that support light/dark themes
-//
-// Theme-dependent variables are further categorized into:
-// - Core: Global layout and navigation colors
-// - Page Content: Article and post content colors
-// - Third-party: Extension and plugin colors
-//
-// These CSS variables enable runtime theme switching and customization.
-// ================================================================================
+/// ================================================================================
+/// CSS Custom Properties (CSS Variables)
+///
+/// This file defines all CSS custom properties for the FixIt theme.
+/// Variables are organized into three main categories:
+/// 1. Internal config: theme system values (base URL etc.) via hugo:vars/internal
+/// 2. Theme-independent variables: fixed values (fonts, sizes, etc.)
+/// 3. Theme-dependent variables: color values that support light/dark themes
+///
+/// Theme-dependent variables are further categorized into:
+/// - Core: Global layout and navigation colors
+/// - Page Content: Article and post content colors
+/// - Third-party: Extension and plugin colors
+///
+/// These CSS variables enable runtime theme switching and customization.
+/// ================================================================================
 @use "sass:color";
 @use "functions" as *;
 @use "mixins" as *;

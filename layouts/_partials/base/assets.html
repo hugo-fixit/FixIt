@@ -392,7 +392,7 @@
 
 {{- /* Custom script (custom.ts takes priority over custom.js) */ -}}
 {{- with resources.Get "js/custom.ts" | default (resources.Get "js/custom.js") -}}
-  {{- dict "Source" . "Fingerprint" $fingerprint "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
+  {{- dict "Source" . "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- with .Store.Get "styleArr" -}}

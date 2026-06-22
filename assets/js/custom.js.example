@@ -1,13 +1,13 @@
 /**
- * Custom TypeScript for FixIt site.
+ * Custom JavaScript for FixIt site.
  *
  * Copy this file to your project's assets/js/ directory
- * and rename it to custom.ts to activate it.
+ * and rename it to custom.js to activate it.
  * Access the FixIt public API via `window.fixit`.
  * @see https://fixit.lruihao.cn
  */
 
-const { fixit } = window as any
+const { fixit } = window
 
 class CustomScript {
   constructor() {
@@ -15,7 +15,7 @@ class CustomScript {
   }
 
   init() {
-    console.log('hello from custom.ts!')
+    console.log('hello from custom.js!')
     console.log('FixIt API:', fixit)
 
     // Top-level properties
@@ -36,7 +36,7 @@ class CustomScript {
     // })
 
     // Typed event bus
-    fixit.eventBus.on('fixit:switch-theme', ({ detail }: { detail: { mode: string, isDark: boolean, isChanged: boolean } }) => {
+    fixit.eventBus.on('fixit:switch-theme', ({ detail }) => {
       console.log('Theme switched:', detail.mode, 'isDark:', detail.isDark, 'isChanged:', detail.isChanged)
     })
 

@@ -1,8 +1,9 @@
-// ==========================================================================
-// SCSS Variables
-// Configured via [params.appearance] in hugo.toml using hugo:vars.
-// Default values are defined in layouts/_partials/function/scss-vars.html.
-// ==========================================================================
+/// ==========================================================================
+/// SCSS Variables
+///
+/// Configured via [params.appearance] in hugo.toml using hugo:vars.
+/// Default values are defined in layouts/_partials/function/scss-vars.html.
+/// ==========================================================================
 @forward "core/maps";
 @use "sass:color";
 @use "hugo:vars" as v;
@@ -181,7 +182,7 @@ $code-font-size: v.$code-font-size;
 $code-block-font-size: v.$code-block-font-size;
 
 // Font family of the code
-$code-font-family: Source Code Pro, Menlo, Consolas, Monaco, monospace, $global-font-family !default;
+$code-font-family: v.$code-font-family, $global-font-family;
 // ========== Code ========== //
 
 // ========== GitHub Corners ========== //
