@@ -1,0 +1,51 @@
+{{- /*
+  CSS Partial - Base and page-specific CSS loading
+
+  Loads the main stylesheet (every page) and conditionally loads
+  page-specific CSS based on .Kind, .Layout, and .RelPermalink.
+
+  Called from: base/head/index.html
+*/ -}}
+
+{{- $scssVars := partialCached "function/scss-vars.html" . -}}
+{{- $fingerprint := .Site.Store.Get "fingerprint" -}}
+
+{{- /* Base CSS (every page) */ -}}
+{{- $mainCSS := dict
+  "Resource" (resources.Get "scss/main.scss")
+  "ToCSS" (dict "vars" $scssVars)
+  "Fingerprint" $fingerprint
+  | partial "function/to-css.html"
+-}}
+{{- .Site.Store.Set "mainCSS" $mainCSS -}}
+{{- dict "Resource" $mainCSS | partial "plugin/style.html" -}}
+
+{{- /* Page-specific CSS */ -}}
+{{- $pageCSSPath := "" -}}
+{{- if eq .Kind "home" -}}
+  {{- if in .RelPermalink "archives" -}}
+    {{- $pageCSSPath = "scss/archives.scss" -}}
+  {{- else if in .RelPermalink "link" -}}
+    {{- $pageCSSPath = "scss/link.scss" -}}
+  {{- else -}}
+    {{- $pageCSSPath = "scss/home.scss" -}}
+  {{- end -}}
+{{- else if eq .Kind "page" -}}
+  {{- if eq .Layout "search" -}}
+    {{- $pageCSSPath = "scss/search.scss" -}}
+  {{- else if eq .Layout "friends" -}}
+    {{- $pageCSSPath = "scss/friends.scss" -}}
+  {{- else if eq .Type "posts" -}}
+    {{- $pageCSSPath = "scss/posts.scss" -}}
+  {{- end -}}
+{{- else if in (slice "section" "taxonomy" "term") .Kind -}}
+  {{- $pageCSSPath = "scss/archives.scss" -}}
+{{- end -}}
+{{- with $pageCSSPath -}}
+  {{- dict "Source" . "ToCSS" (dict "vars" $scssVars) "Fingerprint" $fingerprint | partial "plugin/style.html" -}}
+{{- end -}}
+
+{{- /* Custom CSS (highest priority) */ -}}
+{{- with resources.Get "scss/custom.scss" -}}
+  {{- dict "Source" "scss/custom.scss" "ToCSS" (dict "vars" $scssVars) "Fingerprint" $fingerprint | partial "plugin/style.html" -}}
+{{- end -}}

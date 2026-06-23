@@ -18,7 +18,6 @@
 @use "functions" as *;
 @use "mixins" as *;
 @use "variables" as *;
-@use "hugo:vars/internal" as i;
 
 :root {
   interpolate-size: allow-keywords;
@@ -37,9 +36,9 @@
   // ----------------------------------------
   @include set-fi-vars((
     // Internal config
-    base: "#{i.$base}",
-    logo-img: url("#{i.$logo-img}"),
-    loading-img: url("#{i.$loading-img}"),
+    base-url: "#{$base-url}",
+    logo-img: url("#{$logo-img}"),
+    loading-img: url("#{$loading-img}"),
 
     // Global Typography
     global-font-family: $global-font-family,
@@ -52,7 +51,7 @@
     header-height: $header-height,
     header-title-font-family: $header-title-font-family,
     header-title-font-size: $header-title-font-size,
-    submenu-height: $submenu-height,
+    submenu-height: $header-height * 0.5,
 
     // Single Content
     toc-title-font-size: $toc-title-font-size,

@@ -113,29 +113,8 @@
   <link rel="alternate" type="application/feed+json" href="{{ .Permalink }}" title="{{ $title }}" />
 {{- end -}}
 
-{{- /* SCSS vars: internal (theme config) + appearance (user-configurable) */ -}}
-{{- $logo := resources.Get "images/fixit.svg" | minify -}}
-{{- $loading := resources.Get "images/loading.svg" | minify -}}
-{{- $internal := dict
-  "base" (relURL "")
-  "logo_img" $logo.RelPermalink
-  "loading_img" $loading.RelPermalink
--}}
-{{- $scssVars :=
-  dict "internal" $internal
-  | merge (.Site.Params.appearance | default dict)
-  | merge (partialCached "function/scss-vars.html" .)
--}}
-
-{{- /* Theme main CSS */ -}}
-{{- $mainCSS := dict
-  "Resource" (resources.Get "scss/main.scss")
-  "ToCSS" (dict "vars" $scssVars)
-  "Fingerprint" $fingerprint
-  | partial "function/to-css.html"
--}}
-{{- .Site.Store.Set "mainCSS" $mainCSS -}}
-{{- dict "Resource" $mainCSS | partial "plugin/style.html" -}}
+{{- /* CSS: base + page-specific */ -}}
+{{- partial "base/head/css.html" . -}}
 
 {{- /* Font Awesome Icons */ -}}
 {{- $source := $cdn.fontawesomeFreeCSS | default "lib/fontawesome-free/all.min.css" -}}

@@ -128,7 +128,7 @@
         content: '\f0c4';
         @include z-index(base);
       }
-    
+
       &:hover::before {
         left: calc(95% - 20px);
       }
@@ -239,7 +239,7 @@
           color: fi-var(task-text-color);
         }
       }
-      
+
       &[data-task='x'] {
         @include task-icon {
           background-color: fi-rgba(fi-var(secondary), 0.2);
@@ -429,7 +429,7 @@
         margin-block: 1em;
         padding-left: 1rem;
       }
-      
+
       hr {
         background-color: fi-var(global-border-color);
         height: 1px;
@@ -519,6 +519,14 @@
         --jv-bg-color: #{fi-var(code-block-background-color)};
         --jv-border-color: #{fi-var(global-border-color)};
       }
+    }
+  }
+
+  // Special page styles
+  &.special {
+    .single-title,
+    .single-subtitle {
+      text-align: right;
     }
   }
 }
