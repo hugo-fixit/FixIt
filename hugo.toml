@@ -1270,17 +1270,100 @@ postFooterBefore = []
 postFooterAfter = []
 
 # FixIt 1.0.0 | NEW SCSS variables customization via config
-# All SCSS variables from _variables.scss can be configured here.
-# Use the SCSS variable name (without $ prefix, snake_case) as the key.
-# Note:
-# - Color values must use hex format (e.g. "#ff0000"), CSS named colors (e.g. "red") are not supported.
-# - Values used in compile-time operations (color.adjust, arithmetic)
-#   will use the SCSS default for derived values. You can override derived values directly.
+# Leave empty to use the theme default value (defined in scss-vars.html).
+# Note: Color values must use hex format (e.g. "#ff0000"), CSS named colors (e.g. "red") are not supported.
 [params.appearance]
-# global_border_radius = "6px"
-# global_font_size = "16px"
-# global_font_color = "#1f2328"
-# global_font_color_dark = "#b3bdcb"
+# Global Typography
+global_font_family = ""
+global_font_size = ""
+global_font_weight = ""
+global_line_height = ""
+global_border_radius = ""
+# Global Colors
+global_background_color = ""
+global_background_color_dark = ""
+global_font_color = ""
+global_font_color_dark = ""
+global_font_secondary_color = ""
+global_font_secondary_color_dark = ""
+global_link_color = ""
+global_link_color_dark = ""
+global_link_hover_color = ""
+global_link_hover_color_dark = ""
+global_border_color = ""
+global_border_color_dark = ""
+# Scrollbar
+scrollbar_color = ""
+scrollbar_hover_color = ""
+# Selection
+selection_color = ""
+selection_color_dark = ""
+# Header
+header_background_color = ""
+header_background_color_dark = ""
+header_title_font_size = ""
+header_title_font_family = ""
+menu_active_color = ""
+menu_active_color_dark = ""
+menu_border_color = ""
+menu_border_color_dark = ""
+search_background_color = ""
+search_background_color_dark = ""
+# Tag Cloud
+tag_cloud_start = ""
+tag_cloud_start_dark = ""
+tag_cloud_end = ""
+tag_cloud_end_dark = ""
+# Single Content
+toc_title_font_size = ""
+toc_content_font_size = ""
+collection_title_font_size = ""
+collection_list_font_size = ""
+related_title_font_size = ""
+related_list_font_size = ""
+single_link_color = ""
+single_link_color_dark = ""
+single_link_hover_color = ""
+single_link_hover_color_dark = ""
+# Table
+table_background_color = ""
+table_background_color_dark = ""
+table_thead_color = ""
+table_thead_color_dark = ""
+table_border_color = ""
+table_border_color_dark = ""
+# Blockquote
+blockquote_color = ""
+blockquote_color_dark = ""
+# Reward
+reward_color = ""
+reward_color_dark = ""
+reward_img_width = ""
+# Pagination
+pagination_link_color = ""
+pagination_link_color_dark = ""
+pagination_link_hover_color = ""
+pagination_link_hover_color_dark = ""
+# Code
+code_color = ""
+code_color_dark = ""
+code_font_family = ""
+code_header_color = ""
+code_header_color_dark = ""
+code_header_background_color = ""
+code_header_background_color_dark = ""
+code_background_color = ""
+code_background_color_dark = ""
+code_error_color = ""
+code_highlight_color = ""
+code_highlight_color_dark = ""
+code_font_size = ""
+code_block_font_size = ""
+# GitHub Corners
+github_corner_color = ""
+github_corner_color_dark = ""
+github_corner_fill = ""
+github_corner_fill_dark = ""
 
 # FixIt 0.2.15 | NEW Developer options
 # select the scope named `public_repo` to generate personal access token,

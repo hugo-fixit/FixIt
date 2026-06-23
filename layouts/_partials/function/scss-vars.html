@@ -1,12 +1,30 @@
 {{- /*
-  SCSS variables default values.
-  Merged with user config ([params.appearance]) and passed to toCSS as hugo:vars.
-  Values from: assets/scss/_variables.scss
+  Build the complete SCSS variables dict passed to toCSS as hugo:vars.
+  Two categories:
+    - Internal: theme config (base URL, logo, loading image) — highest priority
+    - Appearance: defaults + derived + user config ([params.appearance])
+  Reference: assets/scss/_variables.scss
   Note: Color values must use hex format (e.g. "#ff0000"), CSS named colors (e.g. "red") are not supported
   because Hugo's isTypedCSSValue only recognizes hex colors, CSS functions, and CSS units.
 */ -}}
-{{- /* Base defaults — independent values */ -}}
-{{- $defaults := dict
+
+{{- /* Internal — theme config (not user-overridable) */ -}}
+{{- $logo := resources.Get "images/fixit.svg" | minify -}}
+{{- $loading := resources.Get "images/loading.svg" | minify -}}
+{{- $internal := dict
+  "base_url" (relURL "")
+  "logo_img" $logo.RelPermalink
+  "loading_img" $loading.RelPermalink
+-}}
+
+{{- /* Appearance — defaults + derived + user overrides */ -}}
+{{- $overrides := dict -}}
+{{- range $key, $value := .Site.Params.appearance | default dict -}}
+  {{- if $value -}}
+    {{- $overrides = $overrides | merge (dict $key $value) -}}
+  {{- end -}}
+{{- end -}}
+{{- $appearance := dict
   "global_font_family" "system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei UI, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial, sans-serif"
   "global_font_size" "16px"
   "global_font_weight" "400"
@@ -28,7 +46,6 @@
   "scrollbar_hover_color" "#7d7d7d"
   "selection_color" "rgba(53, 166, 247, 0.25)"
   "selection_color_dark" "rgba(50, 112, 194, 0.4)"
-  "header_height" "3.5rem"
   "header_background_color" "#f6f8fa"
   "header_background_color_dark" "#151b23"
   "header_title_font_size" "1.375rem"
@@ -57,6 +74,7 @@
   "blockquote_color" "#697681"
   "blockquote_color_dark" "#9ba3aa"
   "reward_color" "#ff6347"
+  "reward_color_dark" "#ff4d2e"
   "reward_img_width" "180px"
   "pagination_link_color" "#bfbfbf"
   "pagination_link_hover_color" "#000"
@@ -78,13 +96,21 @@
   "github_corner_color" "#ffffff"
   "github_corner_color_dark" "#000000"
 -}}
-{{- /* Derived defaults — values that follow other keys (see _variables.scss) */ -}}
+{{- /* Derived — computed from base defaults */ -}}
 {{- $derived := dict
-  "menu_active_color" (index $defaults "global_link_color")
-  "tag_cloud_start" (index $defaults "global_font_color_dark")
-  "tag_cloud_end" (index $defaults "global_font_color")
-  "tag_cloud_end_dark" (index $defaults "global_font_color_dark")
-  "pagination_link_color_dark" (index $defaults "global_font_color_dark")
+  "header_title_font_family" (index $appearance "global_font_family")
+  "menu_active_color" (index $appearance "global_link_color")
+  "tag_cloud_start" (index $appearance "global_font_color_dark")
+  "tag_cloud_end" (index $appearance "global_font_color")
+  "tag_cloud_end_dark" (index $appearance "global_font_color_dark")
+  "pagination_link_color_dark" (index $appearance "global_font_color_dark")
+  "github_corner_fill" (index $appearance "header_background_color_dark")
+  "github_corner_fill_dark" (index $appearance "header_background_color")
 -}}
-{{- $defaults = merge $defaults $derived -}}
-{{- return $defaults -}}
+
+{{- $appearance = $overrides | merge $derived | merge $appearance -}}
+
+{{- /* Merge: appearance + internal */ -}}
+{{- $scssVars := dict "internal" $internal | merge $appearance -}}
+
+{{- return $scssVars -}}
