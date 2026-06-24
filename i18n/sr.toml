@@ -99,6 +99,7 @@ cancel = "Поништи"
 navigate = "Навигација"
 select = "Изабери"
 close = "Затвори"
+refresh = "Освежи"
 noResultsFound = "Резултати нису пронађени"
 copyToClipboard = "Копирај на радну таблу"
 copyText = "Копирај"
@@ -185,6 +186,12 @@ other = "Оффлине"
 [offlineText]
 other = "Нисте повезани на Интернет, биће доступне само кеширане странице."
 # === Offline ===
+
+# === Service Worker ===
+[serviceWorker]
+updateTitle = "Ажурирање доступно"
+updateText = "Нова верзија овог сајта је доступна."
+# === Service Worker ===
 
 # === Link Redirection ===
 [linkRedirection]

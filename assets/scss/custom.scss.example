@@ -1,10 +1,11 @@
 /// ==========================================================================
 /// Custom Styles
 ///
-/// Copy this file to your project's assets/scss/ directory to activate it.
+/// Copy this file to your project's assets/scss/ directory
+/// and rename it to custom.scss to activate it.
 /// See: https://fixit.lruihao.cn/documentation/advanced/#style-customization
 /// ==========================================================================
-// @use "core/mixins" as *;
+@use "core/mixins" as *;
 // ————————————————————————————————————————————————————————————
 // Custom Fonts
 // Configure font families via [params.appearance] in hugo.toml:
@@ -12,25 +13,25 @@
 //   code_font_family = "Fira Mono, monospace"
 // Import custom font CSS below (skip if using system fonts).
 // ————————————————————————————————————————————————————————————
-// @import url('https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css');
-// @import url('https://fonts.googleapis.com/css?family=Fira+Mono:400,700&display=swap&subset=latin-ext');
+@import url('https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Regular/result.css');
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono:400,700&display=swap&subset=latin-ext');
 
 // ————————————————————————————————————————————————————————————
 // Custom Page Width
 // Set pageStyle="custom" in the <body> element to apply.
 // ————————————————————————————————————————————————————————————
-// @include page-style('custom') {
-//   @include media('xl') {
-//     width: ROUND(70%, 2px);
-//     max-width: 1600px;
-//   }
-//   @include media('lg') {
-//     width: ROUND(60%, 2px);
-//   }
-//   @include media('md') {
-//     width: ROUND(56%, 2px);
-//   }
-// }
+@include page-style('custom') {
+  @include media('xl') {
+    width: ROUND(70%, 2px);
+    max-width: 1600px;
+  }
+  @include media('lg') {
+    width: ROUND(60%, 2px);
+  }
+  @include media('md') {
+    width: ROUND(56%, 2px);
+  }
+}
 
 // ————————————————————————————————————————————————————————————
 // Custom Admonitions
@@ -39,9 +40,9 @@
 //   ban = "fa-solid fa-ban"
 // Then use in content: {{</* admonition ban */>}} or > [!ban]
 // ————————————————————————————————————————————————————————————
-// .admonition {
-//   @include admonition(ban, #ff3d00, rgba(255, 61, 0, 0.1));
-// }
+.admonition {
+  @include admonition(ban, #ff3d00, rgba(255, 61, 0, 0.1));
+}
 
 // ————————————————————————————————————————————————————————————
 // Custom Task List Style
@@ -49,7 +50,7 @@
 //   [params.taskList]
 //   tip = "fa-regular fa-lightbulb"
 // ————————————————————————————————————————————————————————————
-// li[data-task='tip'] {
-//   @include task-icon(#EA9E36);
-//   @include task-text(#9974F7);
-// }
+li[data-task='tip'] {
+  @include task-icon(#EA9E36);
+  @include task-text(#9974F7);
+}

@@ -135,6 +135,17 @@
   {{- /* Custom widgets */ -}}
   {{- block "custom-widgets" . }}{{ end -}}
 
+  {{- /* Service Worker Update Notification */ -}}
+  {{- if .Site.Params.app.pwa -}}
+    <div class="sw-update-notification">
+      <div class="sw-update-content">
+        <p class="sw-update-title">{{ T "serviceWorker.updateTitle" }}</p>
+        <p class="sw-update-text">{{ T "serviceWorker.updateText" }}</p>
+      </div>
+      <button type="button" class="sw-update-btn">{{ T "assets.refresh" }}</button>
+    </div>
+  {{- end -}}
+
   <noscript>
     <div class="noscript-warning">{{ T "baseof.noscript" }}</div>
   </noscript>

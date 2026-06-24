@@ -97,6 +97,7 @@ cancel = "キャンセル"
 navigate = "移動"
 select = "選択"
 close = "閉じる"
+refresh = "更新"
 noResultsFound = "結果が見つかりません"
 copyToClipboard = "クリップボードにコピー"
 copyText = "コピー"
@@ -181,6 +182,12 @@ other = "オフライン"
 [offlineText]
 other = "インターネットに接続されていません。キャッシュされたページのみが利用可能です。"
 # === Offline ===
+
+# === Service Worker ===
+[serviceWorker]
+updateTitle = "アップデートがあります"
+updateText = "このサイトの新しいバージョンが利用可能です。"
+# === Service Worker ===
 
 # === Link Redirection ===
 [linkRedirection]

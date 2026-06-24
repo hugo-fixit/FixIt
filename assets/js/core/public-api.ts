@@ -6,6 +6,7 @@ import { EncryptionModule } from '../modules/encryption'
 import { EventsModule } from '../modules/events'
 import { MenuModule } from '../modules/menu'
 import { MiscModule } from '../modules/misc'
+import { PWAModule } from '../modules/pwa'
 import { SearchModule } from '../modules/search'
 import { ThemeModule } from '../modules/theme'
 import { TocModule } from '../modules/toc'
@@ -24,6 +25,7 @@ export class PublicAPI implements FixItPublicAPI {
   readonly menu
   readonly search
   readonly enc
+  readonly pwa
   readonly misc
   readonly content
   readonly events
@@ -38,6 +40,7 @@ export class PublicAPI implements FixItPublicAPI {
     this.menu = new MenuModule(this.core)
     this.search = new SearchModule(this.core)
     this.enc = new EncryptionModule(this.core)
+    this.pwa = new PWAModule(this.core)
     this.misc = new MiscModule(this.core)
     this.content = new ContentModule(this.core, this.code)
     this.events = new EventsModule(this.core, this.toc, this.code)

@@ -288,17 +288,17 @@
 {{- end -}}
 
 {{- /* PWA */ -}}
-{{- if not hugo.IsServer | and .Site.Params.enablePWA | and hugo.IsProduction -}}
+{{- if not hugo.IsServer | and hugo.IsProduction | and .Site.Params.app.pwa -}}
   {{- $offlineURL := "" -}}
   {{- with .Site.Home.OutputFormats.Get "offline" -}}
     {{- $offlineURL = .RelPermalink -}}
   {{- end -}}
   {{- $mainCSS := .Site.Store.Get "mainCSS" -}}
   {{- $mainJS := .Site.Store.Get "mainJS" -}}
-  {{- $swBuildCtx := dict "mainCSSURL" $mainCSS.RelPermalink "mainJSURL" $mainJS.RelPermalink "offlineURL" $offlineURL "relURL" (relURL "") "Page" . -}}
+  {{- $swBuildCtx := dict "mainCSSURL" $mainCSS.RelPermalink "mainJSURL" $mainJS.RelPermalink "offlineURL" $offlineURL "relURL" (relURL "") "version" (hugo.Store.Get "version") "Page" . -}}
   {{- $serviceWorker := resources.Get "js/service-worker.template.js" | resources.ExecuteAsTemplate "js/service-worker.template.js" $swBuildCtx -}}
   {{- $serviceWorker = dict "Resource" $serviceWorker "Build" (dict "targetPath" "sw.js") "Fingerprint" $fingerprint | partial "function/js-build.html" -}}
-  {{- $config = dict "PWA" (dict "enable" .Site.Params.enablePWA "serviceWorkerURL" $serviceWorker.RelPermalink) | merge $config -}}
+  {{- $config = dict "PWA" (dict "enable" .Site.Params.app.pwa "serviceWorkerURL" $serviceWorker.RelPermalink) | merge $config -}}
 {{- end -}}
 
 {{- /* Auto Bookmark */ -}}

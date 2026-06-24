@@ -98,6 +98,7 @@ cancel = "Huỷ"
 navigate = "Điều hướng"
 select = "Chọn"
 close = "Đóng"
+refresh = "Làm mới"
 noResultsFound = "Không tìm thấy kết quả"
 copyToClipboard = "Sao chép vào bộ nhớ tạm"
 copyText = "Sao chép"
@@ -184,6 +185,12 @@ other = "ngoại tuyến"
 [offlineText]
 other = "Bạn chưa kết nối với Internet, chỉ các trang được lưu trong bộ nhớ cache sẽ khả dụng."
 # === Offline ===
+
+# === Service Worker ===
+[serviceWorker]
+updateTitle = "Có bản cập nhật"
+updateText = "Một phiên bản mới của trang web này đã sẵn sàng."
+# === Service Worker ===
 
 # === Link Redirection ===
 [linkRedirection]

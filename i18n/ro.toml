@@ -99,6 +99,7 @@ cancel = "Anulare"
 navigate = "Navigare"
 select = "Selectare"
 close = "Închide"
+refresh = "Reîmprospătare"
 noResultsFound = "Nici un rezultat gasit"
 copyToClipboard = "Copiați în clipboard"
 copyText = "Copiază"
@@ -185,6 +186,12 @@ other = "Deconectat"
 [offlineText]
 other = "Nu sunteți conectat la Internet, vor fi disponibile doar paginile stocate în cache."
 # === Offline ===
+
+# === Service Worker ===
+[serviceWorker]
+updateTitle = "Actualizare disponibilă"
+updateText = "O nouă versiune a acestui site este disponibilă."
+# === Service Worker ===
 
 # === Link Redirection ===
 [linkRedirection]

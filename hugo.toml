@@ -376,13 +376,20 @@ isPlainText = true
 isHTML = false
 permalinkable = true
 
+# FixIt 1.0.0 | NEW Options to make output site.webmanifest file
+[outputFormats.manifest]
+baseName = "site"
+mediaType = "application/manifest+json"
+isPlainText = true
+isHTML = false
+
 # -------------------------------------------------------------------------------------
 # Output Configuration
 # See: https://gohugo.io/configuration/outputs/
 # -------------------------------------------------------------------------------------
 
 # options to make hugo output files, the optional values are below:
-# home = ["html", "rss", "archives", "offline", "link", "search", "readme", "baidu_urls"]
+# home = ["html", "rss", "archives", "search", "offline", "manifest", "link", "readme", "baidu_urls"]
 # page = ["html", "markdown"]
 # section = ["html", "rss"]
 # taxonomy = ["html"]
@@ -393,9 +400,10 @@ home = [
   "html",
   "rss",
   "archives",
+  "search",
   "offline",
-  "link",
-  "search"
+  "manifest",
+  "link"
 ]
 page = [
   "html",
@@ -443,8 +451,6 @@ fingerprint = ""
 dateFormat = "2006-01-02"
 # website images for Open Graph and Twitter Cards
 images = []
-# FixIt 0.2.12 | NEW enable PWA
-enablePWA = false
 # FixIt 0.3.13 | NEW whether to capitalize titles
 capitalizeTitles = true
 # FixIt 0.3.0 | NEW whether to add site title to the title of every page
@@ -486,23 +492,44 @@ dir = "content"
 # available template params: {title} {URL} {sourceURL}
 issueTpl = "title=[BUG]%20{title}&body=|Field|Value|%0A|-|-|%0A|Title|{title}|%0A|URL|{URL}|%0A|Filename|{sourceURL}|"
 
-# App icon config
+# FixIt 1.0.0 | CHANGED App and PWA config
 [params.app]
-# optional site title override for the app when added to an iOS home screen or Android launcher
-title = "FixIt"
+# whether to enable PWA support
+pwa = false
+# app name used for home screen and manifest (falls back to site title)
+name = ""
+# optional short name for the manifest (falls back to name)
+short_name = ""
 # whether to omit favicon resource links
-noFavicon = false
+no_favicon = false
 # modern SVG favicon to use in place of older style .png and .ico files
-svgFavicon = ""
+svg_favicon = ""
 # Safari mask icon color
-iconColor = "#5bbad5"
+mask_color = "#5bbad5"
 # Windows v8-10 tile color
-tileColor = "#da532c"
+tile_color = "#da532c"
 
-# FixIt 0.2.12 | CHANGED Android browser theme color
-[params.app.themeColor]
+# Android browser theme color
+[params.app.theme_color]
 light = "#f6f8fa"
 dark = "#151b23"
+
+# Web app manifest icons (users should provide their own icon files)
+[[params.app.icons]]
+src = "/apple-touch-icon.png"
+sizes = "180x180"
+type = "image/png"
+purpose = "any maskable"
+
+[[params.app.icons]]
+src = "/android-chrome-192x192.png"
+sizes = "192x192"
+type = "image/png"
+
+[[params.app.icons]]
+src = "/android-chrome-512x512.png"
+sizes = "512x512"
+type = "image/png"
 
 # Search config
 [params.search]

@@ -100,6 +100,7 @@ cancel = "रद्द करें"
 navigate = "नेविगेट"
 select = "चुनें"
 close = "बंद करें"
+refresh = "रिफ़्रेश"
 noResultsFound = "कोई परिणाम नहीं मिला"
 copyToClipboard = "क्लिपबोर्ड पर कॉपी करें"
 copyText = "कॉपी करें"
@@ -186,6 +187,12 @@ other = "ऑफलाइन"
 [offlineText]
 other = "आप इंटरनेट से कनेक्ट नहीं हैं, केवल कैश्ड पेज ही उपलब्ध होंगे।"
 # === Offline ===
+
+# === Service Worker ===
+[serviceWorker]
+updateTitle = "अपडेट उपलब्ध"
+updateText = "इस साइट का नया संस्करण उपलब्ध है।"
+# === Service Worker ===
 
 # === Link Redirection ===
 [linkRedirection]

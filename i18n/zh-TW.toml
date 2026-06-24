@@ -97,6 +97,7 @@ cancel = "取消"
 navigate = "切換"
 select = "選擇"
 close = "關閉"
+refresh = "重新整理"
 noResultsFound = "沒有找到結果"
 copyToClipboard = "複製到剪貼板"
 copyText = "複製"
@@ -181,6 +182,12 @@ other = "離線"
 [offlineText]
 other = "你沒有連接到 Internet，只有緩存的頁面可用。"
 # === Offline ===
+
+# === Service Worker ===
+[serviceWorker]
+updateTitle = "發現新版本"
+updateText = "當前站點有新版本可用。"
+# === Service Worker ===
 
 # === Link Redirection ===
 [linkRedirection]
