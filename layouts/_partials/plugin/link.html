@@ -32,7 +32,7 @@
     {{- . | safeHTML -}}
   {{- end -}}
   {{- if
-    $externalIcon 
+    $externalIcon
     | and $isExternal
     | and (not (hasPrefix $ctx.Content `<img`))
     | and (not (hasPrefix $ctx.Content `<svg`))
@@ -58,9 +58,9 @@
     {{- $cardIcon = .RelPermalink -}}
   {{- end -}}
   {{- if (not $cardIcon) | and $url.Host -}}
-    {{- with partial "function/get-remote-image.html" (dict "Src" (add "https://favicon.im/" $url.Host)) -}}
+    {{- with partial "function/get-remote-image.html" (dict "Src" (add "https://api.lruihao.cn/google/s2/favicons?sz=64&domain=" $url.Host)) -}}
       {{- $cardIcon = .RelPermalink -}}
-    {{- else with partial "function/get-remote-image.html" (dict "Src" (add "https://api.lruihao.cn/google/s2/favicons?sz=64&domain=" $url.Host)) -}}
+    {{- else with partial "function/get-remote-image.html" (dict "Src" (add "https://favicon.im/" $url.Host)) -}}
       {{- $cardIcon = .RelPermalink -}}
     {{- end -}}
   {{- end -}}

@@ -124,12 +124,25 @@ export function createPagefindEngine(searchConfig: SearchConfig, pagefindConfig:
         (searched.results || []).slice(0, resultLimit).map((entry: any) => entry.data()),
       )
 
-      return records.map((item: any) => ({
-        uri: item.url || '#',
-        title: item.meta?.title || item.url || '',
-        date: item.meta?.date || '',
-        context: replaceExcerptHighlightTag(item.excerpt || '', highlightTag),
-      }))
+      return records.map((item: any) => {
+        const url = item.url || '#'
+        const hashIndex = url.indexOf('#')
+        let heading: string | undefined
+        if (hashIndex > 0 && item.sub_results?.length) {
+          const subResult = item.sub_results.find((sr: any) => sr.url === url)
+          heading = subResult?.title || undefined
+        }
+        return {
+          uri: url,
+          title: item.meta?.title || item.url || '',
+          date: item.meta?.date || '',
+          context: replaceExcerptHighlightTag(item.excerpt || '', highlightTag),
+          heading,
+          tags: item.meta?.tags ? item.meta.tags.split(',').map((t: string) => t.trim()).filter(Boolean) : undefined,
+          categories: item.meta?.categories ? item.meta.categories.split(',').map((t: string) => t.trim()).filter(Boolean) : undefined,
+          collections: item.meta?.collections ? item.meta.collections.split(',').map((t: string) => t.trim()).filter(Boolean) : undefined,
+        }
+      })
     },
   }
 }

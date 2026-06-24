@@ -7,6 +7,10 @@ export interface SearchResult {
   date: string
   context: string
   icon?: string
+  heading?: string
+  tags?: string[]
+  categories?: string[]
+  collections?: string[]
 }
 
 /** Common interface for all search engine backends. */
@@ -45,7 +49,7 @@ export interface PagefindConfig {
   bundlePath?: string
   debounceTimeoutMs?: number
   useBuiltInFilters?: boolean
-  sortBy?: 'date'
+  sortBy?: 'date' | 'title'
   sortOrder?: 'asc' | 'desc'
 }
 

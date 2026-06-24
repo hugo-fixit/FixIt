@@ -576,7 +576,7 @@ bundlePath = "pagefind/"
 debounceTimeoutMs = 300
 # whether to respect FixIt built-in search visibility rules
 useBuiltInFilters = true
-# optional sort field, current recommended built-in value: "date"
+# optional sort field: ["date", "title"]
 sortBy = ""
 # sort order for sortBy: ["asc", "desc"]
 sortOrder = "desc"

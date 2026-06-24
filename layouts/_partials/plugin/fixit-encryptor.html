@@ -20,7 +20,7 @@
   {{- if .IsPartial -}}
     {{- $id = dict "Page" .Page | partial "function/id.html" -}}
   {{- end -}}
-  <fixit-encryptor>
+  <fixit-encryptor data-pagefind-ignore="all">
     <div class="fixit-decryptor-container">
       <img class="fixit-decryptor-loading" src="{{ $loading.RelPermalink }}" alt="decryptor loading" width="48" height="48" />
       <label for="{{ $id }}" title="{{ T `single.password` }}">
