@@ -588,13 +588,15 @@ engine = "google"
 # search results page URL (layout: search)
 resultsPage = "/search/"
 
-# Google: https://programmablesearchengine.google.com/
 # Google Custom Search Engine Context
+# See: https://programmablesearchengine.google.com/
 [params.cse.google]
 cx = ""
 
-# Bing (Unsupported): https://www.customsearch.ai/
+# Bing Custom Search Engine Context (unverified)
+# See: https://www.customsearch.ai/
 [params.cse.bing]
+cx = ""
 
 # Header config
 [params.header]
