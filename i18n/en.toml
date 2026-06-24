@@ -99,6 +99,7 @@ cancel = "Cancel"
 navigate = "Navigate"
 select = "Select"
 close = "Close"
+refresh = "Refresh"
 noResultsFound = "No results found"
 copyToClipboard = "Copy to clipboard"
 copyText = "Copy"
@@ -185,6 +186,12 @@ other = "Offline"
 [offlineText]
 other = "You are not connected to the Internet, only cached pages will be available."
 # === Offline ===
+
+# === Service Worker ===
+[serviceWorker]
+updateTitle = "Update Available"
+updateText = "A new version of this site is available."
+# === Service Worker ===
 
 # === Link Redirection ===
 [linkRedirection]

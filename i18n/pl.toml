@@ -99,6 +99,7 @@ cancel = "Anuluj"
 navigate = "Nawiguj"
 select = "Wybierz"
 close = "Zamknij"
+refresh = "Odśwież"
 noResultsFound = "Nie znaleziono wyników"
 copyToClipboard = "Skopiuj do schowka"
 copyText = "Kopiuj"
@@ -185,6 +186,12 @@ other = "Offline"
 [offlineText]
 other = "Nie masz połączenia z Internetem, dostępne będą tylko strony z pamięci podręcznej."
 # === Offline ===
+
+# === Service Worker ===
+[serviceWorker]
+updateTitle = "Dostępna aktualizacja"
+updateText = "Dostępna jest nowa wersja tej strony."
+# === Service Worker ===
 
 # === Link Redirection ===
 [linkRedirection]

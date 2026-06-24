@@ -1,0 +1,30 @@
+{{- if .Site.Params.app.pwa -}}
+  {{- $name := .Site.Params.app.name | default .Site.Title -}}
+  {{- $shortName := .Site.Params.app.short_name | default $name -}}
+  {{- $startURL := relURL "/" -}}
+  {{- $display := "standalone" -}}
+  {{- $themeColor := "" -}}
+  {{- with .Site.Params.app.theme_color -}}
+    {{- $themeColor = .light -}}
+  {{- end -}}
+  {{- $bgColor := .Site.Params.appearance.global_background_color | default "#ffffff" -}}
+
+  {{- /* Build icons array from params.app.icons, with fallback defaults */ -}}
+  {{- $icons := slice -}}
+  {{- with .Site.Params.app.icons -}}
+    {{- range . -}}
+      {{- $icon := dict "src" .src "sizes" .sizes "type" .type -}}
+      {{- with .purpose -}}
+        {{- $icon = $icon | merge (dict "purpose" .) -}}
+      {{- end -}}
+      {{- $icons = $icons | append $icon -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $icons = $icons | append (dict "src" (printf "%sapple-touch-icon.png" (relURL "")) "sizes" "180x180" "type" "image/png" "purpose" "any maskable") -}}
+    {{- $icons = $icons | append (dict "src" (printf "%sandroid-chrome-192x192.png" (relURL "")) "sizes" "192x192" "type" "image/png") -}}
+    {{- $icons = $icons | append (dict "src" (printf "%sandroid-chrome-512x512.png" (relURL "")) "sizes" "512x512" "type" "image/png") -}}
+  {{- end -}}
+
+  {{- $manifest := dict "name" $name "short_name" $shortName "start_url" $startURL "display" $display "theme_color" $themeColor "background_color" $bgColor "icons" $icons -}}
+  {{- $manifest | jsonify (dict "indent" "  ") -}}
+{{- end -}}

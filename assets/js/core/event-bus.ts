@@ -7,6 +7,7 @@ export interface FixItEventMap {
   'fixit:partial-decrypted': { target: Element }
   'fixit:re-encrypt': void
   'fixit:code-tab-sync': { lang: string, source: HTMLElement }
+  'fixit:sw-update': void
 }
 
 /** Document event map augmented with FixIt custom events. */

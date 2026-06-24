@@ -49,25 +49,6 @@ export class MiscModule implements MiscService {
     }
   }
 
-  /** Register the service worker for PWA support. */
-  initServiceWorker() {
-    if (this.core.config.PWA?.enable && 'serviceWorker' in navigator) {
-      navigator.serviceWorker
-        .register(this.core.config.PWA.serviceWorkerURL)
-        .then((_registration) => {
-          // console.log('Service Worker Registered');
-        })
-        .catch((error) => {
-          console.error('error: ', error)
-        })
-      navigator.serviceWorker
-        .ready
-        .then((_registration) => {
-          // console.log('Service Worker Ready');
-        })
-    }
-  }
-
   /** Save and restore scroll position as an automatic bookmark. */
   initAutoMark() {
     if (!this.core.config.autoBookmark)
@@ -144,7 +125,6 @@ export class MiscModule implements MiscService {
   /** Initialize all miscellaneous features. */
   setup() {
     this.initSiteTime()
-    this.initServiceWorker()
     this.initAutoMark()
     this.initReward()
     this.initPostChatUser()

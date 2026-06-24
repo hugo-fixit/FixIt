@@ -67,11 +67,15 @@ export interface ContentService {
 // ─── MiscService ───
 export interface MiscService {
   initSiteTime: () => void
-  initServiceWorker: () => void
   initAutoMark: () => void
   initReward: () => void
   initPostChatUser: () => void
   initComment: () => void
+  setup: () => void
+}
+
+// ─── PWAService ───
+export interface PWAService {
   setup: () => void
 }
 
@@ -98,6 +102,7 @@ export interface FixItPublicAPI {
   readonly menu: MenuService
   readonly search: SearchService
   readonly enc: EncryptionService
+  readonly pwa: PWAService
   readonly misc: MiscService
   readonly content: ContentService
   readonly events: EventsService

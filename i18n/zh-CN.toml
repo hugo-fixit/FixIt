@@ -97,6 +97,7 @@ cancel = "取消"
 navigate = "切换"
 select = "选择"
 close = "关闭"
+refresh = "刷新"
 noResultsFound = "没有找到结果"
 copyToClipboard = "复制到剪贴板"
 copyText = "复制"
@@ -181,6 +182,12 @@ other = "离线"
 [offlineText]
 other = "你没有连接到 Internet，只有缓存的页面可用。"
 # === Offline ===
+
+# === Service Worker ===
+[serviceWorker]
+updateTitle = "发现新版本"
+updateText = "当前站点有新版本可用。"
+# === Service Worker ===
 
 # === Link Redirection ===
 [linkRedirection]

@@ -99,6 +99,7 @@ cancel = "Annuler"
 navigate = "Naviguer"
 select = "Sélectionner"
 close = "Fermer"
+refresh = "Actualiser"
 noResultsFound = "Aucun résultat trouvé"
 copyToClipboard = "Copier dans le presse-papiers"
 copyText = "Copier"
@@ -185,6 +186,12 @@ other = "Hors ligne"
 [offlineText]
 other = "Vous n'êtes pas connecté à Internet, seules les pages mises en cache seront disponibles."
 # === Offline ===
+
+# === Service Worker ===
+[serviceWorker]
+updateTitle = "Mise à jour disponible"
+updateText = "Une nouvelle version de ce site est disponible."
+# === Service Worker ===
 
 # === Link Redirection ===
 [linkRedirection]

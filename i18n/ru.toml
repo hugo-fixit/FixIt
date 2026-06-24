@@ -99,6 +99,7 @@ cancel = "Отменить"
 navigate = "Навигация"
 select = "Выбрать"
 close = "Закрыть"
+refresh = "Обновить"
 noResultsFound = "Результаты не найдены"
 copyToClipboard = "Копировать в буфер обмена"
 copyText = "Копировать"
@@ -185,6 +186,12 @@ other = "Не в сети"
 [offlineText]
 other = "Вы не подключены к интернету, будут доступны только кешированные страницы."
 # === Offline ===
+
+# === Service Worker ===
+[serviceWorker]
+updateTitle = "Доступно обновление"
+updateText = "Доступна новая версия этого сайта."
+# === Service Worker ===
 
 # === Link Redirection ===
 [linkRedirection]

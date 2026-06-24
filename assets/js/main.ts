@@ -28,6 +28,7 @@ function bootstrap(): void {
       window.fixit.search.setup()
       window.fixit.content.setup()
       window.fixit.enc.setup()
+      window.fixit.pwa.setup()
       window.fixit.misc.setup()
       window.fixit.events.setup()
     }
