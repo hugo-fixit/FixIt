@@ -310,9 +310,10 @@ privacyEnhanced = true
 # See: https://gohugo.io/configuration/media-types/
 # -------------------------------------------------------------------------------------
 
-[mediaTypes]
+# [mediaTypes]
+
 # [mediaTypes."application/feed+json"]
-# suffixes = ["json"]
+# suffixes = [ "json" ]
 
 # -------------------------------------------------------------------------------------
 # Output Format Configuration
@@ -380,6 +381,7 @@ permalinkable = true
 [outputFormats.manifest]
 baseName = "site"
 mediaType = "application/manifest+json"
+rel = "manifest"
 isPlainText = true
 isHTML = false
 

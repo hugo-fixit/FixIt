@@ -85,9 +85,6 @@
   {{- with .Site.Params.app.mask_color -}}
     <link rel="mask-icon" href="{{ $relURL }}safari-pinned-tab.svg" color="{{ . }}">
   {{- end -}}
-  {{- with .OutputFormats.Get "manifest" -}}
-    {{- if eq $.Site.Params.app.pwa true -}}<link rel="manifest" href="{{ .RelPermalink }}">{{- end -}}
-  {{- end -}}
 {{- end -}}
 
 {{- /* Canonical and pagination links */ -}}
@@ -99,14 +96,12 @@
   <link rel="next" type="text/html" href="{{ .Permalink }}" title="{{ .Title }}" />
 {{- end -}}
 
-{{- /* Alternative output formats (Atom, RSS, etc.) */ -}}
+{{- /* Alternative output formats (Atom, RSS, manifest etc.) */ -}}
 {{- range .AlternativeOutputFormats -}}
-  {{- printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink $title | safeHTML -}}
-{{- end -}}
-
-{{- /* JSON Feed support */ -}}
-{{- with .OutputFormats.Get "jsonfeed" -}}
-  <link rel="alternate" type="application/feed+json" href="{{ .Permalink }}" title="{{ $title }}" />
+  {{- if  (eq .Name "manifest") | and (not $.Site.Params.app.pwa) -}}
+    {{- continue -}}
+  {{- end -}}
+  <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
 {{- end -}}
 
 {{- /* CSS: base + page-specific */ -}}
