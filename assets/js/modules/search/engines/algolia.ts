@@ -65,17 +65,26 @@ export function createAlgoliaEngine(searchConfig: SearchConfig): SearchEngine {
         const { hits } = await algoliaIndex!.search(query, {
           offset: 0,
           length: maxResultLength * 8,
-          attributesToHighlight: ['title'],
+          attributesToHighlight: ['title', 'heading'],
           attributesToRetrieve: ['*'],
           attributesToSnippet: [`content:${snippetLength}`],
           highlightPreTag: `<${highlightTag}>`,
           highlightPostTag: `</${highlightTag}>`,
         })
         const results: Record<string, SearchResult> = {}
-        hits.forEach(({ uri, date, _highlightResult: { title }, _snippetResult: { content } }: any) => {
+        hits.forEach(({ uri, date, heading, tags, categories, collections, _highlightResult, _snippetResult: { content } }: any) => {
           if (results[uri] && results[uri].context.length > content.value.length)
             return
-          results[uri] = { uri, title: title.value, date, context: content.value }
+          results[uri] = {
+            uri,
+            title: _highlightResult.title.value,
+            date,
+            context: content.value,
+            heading: _highlightResult.heading?.value || heading || undefined,
+            tags,
+            categories,
+            collections,
+          }
         })
         return Object.values(results).slice(0, maxResultLength)
       }

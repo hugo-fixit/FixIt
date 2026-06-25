@@ -19,40 +19,44 @@
     {{- $params := .Params | merge $.Site.Params.page -}}
     {{/* Extended Markdown syntax */}}
     {{- $content := dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" -}}
-    {{/* Remove line number for code */}}
-    {{- $content = $content | replaceRE `<span class="lnt?"> *\d*\n?</span>` "" -}}
-    {{- $content = $content | replaceRE ` class="heading-element"` "" -}}
     {{- if ne $.Site.Params.search.anchorify false -}}
       {{- /* When anchorify is enabled (default), create separate index entries for each heading */ -}}
       {{- $anchor := "" -}}
+      {{- $headingText := "" -}}
       {{- range $h, $contenth := split $content "<h1 id=" -}}
         {{- if gt $h 0 -}}
           {{- $anchor = replace (index (split $contenth ">") 0) `"` "" -}}
+          {{- $headingText = index (split (index (split $contenth ">") 1) "<") 0 | plainify | replaceRE `[\n\t ]+$` "" -}}
           {{- $contenth = printf "<h1 id=%v" $contenth -}}
         {{- end -}}
         {{- range $i, $contenti := split $contenth "<h2 id=" -}}
           {{- if gt $i 0 -}}
             {{- $anchor = replace (index (split $contenti ">") 0) `"` "" -}}
+            {{- $headingText = index (split (index (split $contenti ">") 1) "<") 0 | plainify | replaceRE `[\n\t ]+$` "" -}}
             {{- $contenti = printf "<h2 id=%v" $contenti -}}
           {{- end -}}
           {{- range $j, $contentj := split $contenti "<h3 id=" -}}
             {{- if gt $j 0 -}}
               {{- $anchor = replace (index (split $contentj ">") 0) `"` "" -}}
+              {{- $headingText = index (split (index (split $contentj ">") 1) "<") 0 | plainify | replaceRE `[\n\t ]+$` "" -}}
               {{- $contentj = printf "<h3 id=%v" $contentj -}}
             {{- end -}}
             {{- range $k, $contentk := split $contentj "<h4 id=" -}}
               {{- if gt $k 0 -}}
                 {{- $anchor = replace (index (split $contentk ">") 0) `"` "" -}}
+                {{- $headingText = index (split (index (split $contentk ">") 1) "<") 0 | plainify | replaceRE `[\n\t ]+$` "" -}}
                 {{- $contentk = printf "<h4 id=%v" $contentk -}}
               {{- end -}}
               {{- range $l, $contentl := split $contentk "<h5 id=" -}}
                 {{- if gt $l 0 -}}
                   {{- $anchor = replace (index (split $contentl ">") 0) `"` "" -}}
+                  {{- $headingText = index (split (index (split $contentl ">") 1) "<") 0 | plainify | replaceRE `[\n\t ]+$` "" -}}
                   {{- $contentk = printf "<h5 id=%v" $contentl -}}
                 {{- end -}}
                 {{- range $m, $contentm := split $contentl "<h6 id=" -}}
                   {{- if gt $m 0 -}}
                     {{- $anchor = replace (index (split $contentm ">") 0) `"` "" -}}
+                    {{- $headingText = index (split (index (split $contentm ">") 1) "<") 0 | plainify | replaceRE `[\n\t ]+$` "" -}}
                     {{- $contentm = printf "<h6 id=%v" $contentm -}}
                   {{- end -}}
                   {{/* Plainify and remove (\n, \t) */}}
@@ -61,7 +65,7 @@
                     {{- $contentj = substr $contentj 0 $.Site.Params.search.contentLength -}}
                   {{- end -}}
                   {{- if $contentj | and (ne $contentj " ") -}}
-                    {{- $one := printf "%v:%v:%v" $uri $i $j | dict "content" $contentj "uri" (printf "%v#%v" $uri $anchor) "objectID" | merge $meta -}}
+                    {{- $one := printf "%v:%v:%v" $uri $i $j | dict "content" $contentj "heading" $headingText "uri" (printf "%v#%v" $uri $anchor) "objectID" | merge $meta -}}
                     {{- $index = $index | append $one -}}
                   {{- end -}}
                 {{- end -}}

@@ -62,12 +62,16 @@
   {{- else if eq $search.type "cse" -}}
     {{- $config = dict "type" "cse" | dict "search" | merge $config -}}
     {{- $cse := .Site.Params.cse -}}
-    {{- $config = dict "resultsPage" $cse.resultsPage "gotoResultsPage" (T "assets.gotoResultsPage") | dict "cse" | merge $config -}}
+    {{- $resultsPage := $cse.resultsPage -}}
+    {{- if not (hasPrefix $resultsPage (relURL "")) -}}
+      {{- $resultsPage = path.Join (relURL "") $resultsPage -}}
+    {{- end -}}
+    {{- $config = dict "resultsPage" $resultsPage "gotoResultsPage" (T "assets.gotoResultsPage") | dict "cse" | merge $config -}}
     {{- if (eq $cse.engine "google") | and $cse.google.cx  -}}
       {{- $config = dict "engine" "google" "cx" $cse.google.cx "searchIn" (T "assets.searchIn" "Google") | dict "cse" | merge $config -}}
     {{- end -}}
-    {{- if eq $cse.engine "bing" -}}
-      {{- /* Unsupported */ -}}
+    {{- if eq $cse.engine "bing" | and $cse.bing.cx -}}
+      {{- $config = dict "engine" "bing" "cx" $cse.bing.cx "searchIn" (T "assets.searchIn" "Bing") | dict "cse" | merge $config -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}

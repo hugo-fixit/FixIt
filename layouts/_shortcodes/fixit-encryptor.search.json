@@ -1,0 +1,4 @@
+{{- $password := cond .IsNamedParams (.Get "password") (.Get 0) | default "" -}}
+{{- if not $password -}}
+  {{- .Inner -}}
+{{- end -}}

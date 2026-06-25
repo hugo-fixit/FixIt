@@ -29,6 +29,14 @@
       {{- end -}}
     {{- end -}}
 
-    {{- /* Bing CSE (Unsupported) */ -}}
+    {{- /* Bing CSE */ -}}
+    {{- if eq $cse.engine "bing" -}}
+      {{- with $cse.bing.cx -}}
+        <script type="text/javascript"
+          id="bcs_js_snippet"
+          src="https://ui.customsearch.ai/api/ux/rendering-js?customConfig={{ . }}&market=en-US&safeSearch=Moderate&version=latest&q=">
+        </script>
+      {{- end -}}
+    {{- end -}}
   </article>
 {{- end -}}

@@ -6,6 +6,10 @@
   {{- $dateLabel := $pageDate | dateFormat (.Site.Params.dateFormat | default "2006-01-02") -}}
   <meta data-pagefind-filter="hidden:{{ $hidden }}">
   <meta data-pagefind-filter="encrypted:{{ $encrypted }}">
-  <meta data-pagefind-meta="date:{{ $dateLabel }}">
   <meta data-pagefind-sort="date:{{ $pageDate.Unix }}">
+  <meta data-pagefind-sort="title:{{ .Title }}">
+  <meta data-pagefind-meta="date:{{ $dateLabel }}">
+  {{- with .Params.tags }}<meta data-pagefind-meta="tags:{{ delimit . "," }}">{{ end -}}
+  {{- with .Params.categories }}<meta data-pagefind-meta="categories:{{ delimit . "," }}">{{ end -}}
+  {{- with .Params.collections }}<meta data-pagefind-meta="collections:{{ delimit . "," }}">{{ end -}}
 {{- end -}}

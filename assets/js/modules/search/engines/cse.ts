@@ -1,11 +1,11 @@
 import type { CSEConfig, SearchEngine, SearchResult } from '../types'
 
 /**
- * Create a Google Custom Search Engine adapter.
+ * Create a Custom Search Engine adapter (Google or Bing).
  *
  * Returns a single result that links to the CSE results page.
  * @param cseConfig - The CSE configuration, or `undefined` if not configured.
- * @returns A SearchEngine instance for Google CSE.
+ * @returns A SearchEngine instance for the configured CSE provider.
  */
 export function createCSEEngine(cseConfig: CSEConfig | undefined): SearchEngine {
   return {
@@ -19,12 +19,21 @@ export function createCSEEngine(cseConfig: CSEConfig | undefined): SearchEngine 
           icon: '<i class="fa-brands fa-google" aria-hidden="true"></i>',
         }]
       }
-      console.warn('CSE is not properly configured. Please set cse.engine to "google" and provide a cx value in your site config.')
+      if (cseConfig?.engine === 'bing' && cseConfig.cx) {
+        return [{
+          uri: `${cseConfig.resultsPage}?q=${encodeURIComponent(query)}`,
+          title: cseConfig.searchIn || '',
+          date: '',
+          context: cseConfig.gotoResultsPage || '',
+          icon: '<i class="fa-brands fa-microsoft" aria-hidden="true"></i>',
+        }]
+      }
+      console.warn('CSE is not properly configured. Please set cse.engine and provide a cx value in your site config.')
       return [{
         uri: '',
         title: 'CSE is not configured',
         date: '',
-        context: 'Please set <code>cse.engine</code> and <code>cse.google.cx</code> in your site config.',
+        context: 'Please set <code>cse.engine</code> and the corresponding <code>cx</code> value in your site config.',
       }]
     },
   }

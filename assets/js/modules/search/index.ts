@@ -112,8 +112,14 @@ export class SearchModule implements SearchService {
               const title = h`<span class="suggestion-title" dangerouslySetInnerHTML=${{ __html: item.title }}></span>`
               const icon = item.icon ? h`<span class="suggestion-icon" dangerouslySetInnerHTML=${{ __html: item.icon }}></span>` : ''
               const date = item.date ? h`<span class="suggestion-date">${item.date}</span>` : ''
+              const heading = item.heading ? h`<span class="suggestion-heading"><span class="suggestion-heading-mark">#</span> <span dangerouslySetInnerHTML=${{ __html: item.heading }}></span></span>` : ''
               const context = h`<div class="suggestion-context" dangerouslySetInnerHTML=${{ __html: item.context }}></div>`
-              return h`<div class="search-item-wrapper"><div><a href="${item.uri}">${title}</a>${icon}${date}</div>${context}</div>`
+              const cats = item.categories?.length ? h`<span class="suggestion-category"><i class="fa-regular fa-folder" aria-hidden="true"></i> ${item.categories.join(', ')}</span>` : ''
+              const cols = item.collections?.length ? h`<span class="suggestion-collection"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> ${item.collections.join(', ')}</span>` : ''
+              const tags = item.tags?.length ? h`<span class="suggestion-tag"><i class="fa-solid fa-tags" aria-hidden="true"></i> ${item.tags.join(', ')}</span>` : ''
+              const hasMeta = cats || cols || tags
+              const meta = hasMeta ? h`<div class="suggestion-meta">${cats}${cols}${tags}</div>` : ''
+              return h`<div class="search-item-wrapper"><div><a href="${item.uri}">${title}</a>${icon}${heading}${date}</div>${context}${meta}</div>`
             },
             noResults({ html: h }: { html: any }) {
               return h`<div class="search-empty"><i class="fa-solid fa-magnifying-glass search-empty-icon" aria-hidden="true"></i><p>${searchConfig.noResultsFound}: <span class="search-query">"${query}"</span></p></div>`

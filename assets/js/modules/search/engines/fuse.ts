@@ -18,6 +18,7 @@ export function createFuseEngine(searchConfig: SearchConfig): SearchEngine {
         window._fuseIndex!.search(query).forEach(({ item, matches }: any) => {
           let title = item.title
           let content = item.content
+          let heading = item.heading || ''
           matches.forEach(({ indices, key }: any) => {
             if (key === 'content') {
               content = applyHighlightToText(content, indices, highlightTag)
@@ -25,12 +26,19 @@ export function createFuseEngine(searchConfig: SearchConfig): SearchEngine {
             else if (key === 'title') {
               title = applyHighlightToText(title, indices, highlightTag)
             }
+            else if (key === 'heading') {
+              heading = applyHighlightToText(heading, indices, highlightTag)
+            }
           })
           results[item.uri] = {
             uri: item.uri,
             title,
             date: item.date,
             context: content,
+            heading: item.heading ? heading : undefined,
+            tags: item.tags,
+            categories: item.categories,
+            collections: item.collections,
           }
         })
         return Object.values(results).slice(0, maxResultLength)
@@ -53,7 +61,7 @@ export function createFuseEngine(searchConfig: SearchConfig): SearchEngine {
             includeScore: false,
             shouldSort: true,
             includeMatches: true,
-            keys: ['content', 'title'],
+            keys: ['content', 'title', 'heading'],
           })
           return doSearch()
         }
