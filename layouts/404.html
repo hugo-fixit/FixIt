@@ -4,19 +4,14 @@
 {{- end -}}
 
 {{- define "content" -}}
-  <article class="page" id="content-404">
+  <article class="page text-3xl self-stretch flex flex-col items-center justify-center text-center" id="content-404">
     <h1 id="error-emoji"></h1>
     <p class="error-text">
-      {{- T "pageNotFoundText" -}}&nbsp;
+      <span class="me-2">{{ T "pageNotFoundText" }}</span>
       <a href="javascript:void(0);" title="{{ T `back` }}" onclick="window.history.back();">
         {{- dict "Class" "fa-regular fa-hand-point-left" | partial "plugin/icon.html" -}}
       </a>
     </p>
   </article>
-  <script>
-    (function() {
-      const emojiArray = ['\\(o_o)/', '(˚Δ˚)b', '(^-^*)', '(≥o≤)', '(^_^)b', '(·_·)','(=\'X\'=)', '(>_<)', '(;-;)'];
-      document.getElementById('error-emoji').appendChild(document.createTextNode(emojiArray[Math.floor(Math.random() * emojiArray.length)]));
-    })();
-  </script>
+  <script>(() => { const emojiArray = ['\\(o_o)/', '(˚Δ˚)b', '(^-^*)', '(≥o≤)', '(^_^)b', '(·_·)','(=\'X\'=)', '(>_<)', '(;-;)']; document.getElementById('error-emoji').appendChild(document.createTextNode(emojiArray[Math.floor(Math.random() * emojiArray.length)])); })();</script>
 {{- end -}}

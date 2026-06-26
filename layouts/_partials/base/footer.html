@@ -61,8 +61,8 @@
               <span class="site-time" title='{{ T "footer.siteRunning" }}'>
                 {{- $siteTimeIcon := printf (cond .Animate "%v animate-icon" "%v") .Icon -}}
                 {{- dict "Class" $siteTimeIcon | partial "plugin/icon.html" -}}
-                {{- with .Pre -}}<span class="ms-1 d-none">{{ . }}</span>{{- end -}}
-                {{- printf `<span class="run-times variant-numeric ms-1">%v</span>` (T "footer.siteRunning") | safeHTML -}}
+                {{- with .Pre -}}<span class="ms-1 hidden">{{ . }}</span>{{- end -}}
+                {{- printf `<span class="run-times tabular-nums lining-nums ms-1">%v</span>` (T "footer.siteRunning") | safeHTML -}}
               </span>
             {{- end -}}
           {{- end -}}
@@ -75,7 +75,7 @@
         {{- $loading := dict "Class" "fa-solid fa-spinner fa-spin" | partial "plugin/icon.html" -}}
         {{- $iconUV := dict "Class" "fa-regular fa-user me-1" | partial "plugin/icon.html" -}}
         {{- $iconPV := dict "Class" "fa-regular fa-eye me-1" | partial "plugin/icon.html" -}}
-        <div class="footer-line visitor{{ with $footerConfig.order.visitor }} order-{{ . }}{{ end }}{{ if not $busuanzi.siteViews }} d-none{{ end }}">
+        <div class="footer-line visitor{{ with $footerConfig.order.visitor }} order-{{ . }}{{ end }}{{ if not $busuanzi.siteViews }} hidden{{ end }}">
           <span id="busuanzi_container_site_uv" title='{{ T "footer.siteUV" }}'>
             {{- $iconUV }}<span id="busuanzi_value_site_uv">{{ $loading }}</span>
             {{- /* NO_SPACING */ -}}
@@ -87,7 +87,7 @@
           </span>
         </div>
       {{- end -}}
-      
+
       {{- if $footerConfig.gov | or $footerConfig.icp -}}
         <div class="footer-line beian{{ with $footerConfig.order.beian }} order-{{ . }}{{ end }}">
           {{- /* GOV */ -}}

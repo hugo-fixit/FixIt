@@ -4,6 +4,7 @@ export default antfu({
   typescript: true,
   ignores: [
     'node_modules/**',
+    'assets/css/unocss.css',
     'assets/lib/**',
     'public/**',
     'layouts/**/*.json',

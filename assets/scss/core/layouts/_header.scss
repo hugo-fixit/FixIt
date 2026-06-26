@@ -18,7 +18,7 @@ header {
     box-shadow: $header-box-shadow;
   }
 
-  &.blur {
+  &.is-blur {
     @include scroll-state-query('scroller', 'scroll-state(scrollable: top)', '&') {
       background-color: transparent;
       backdrop-filter: saturate(1.2) blur(10px);

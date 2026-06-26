@@ -42,7 +42,7 @@
   {{- with $profile.subtitle -}}
     <p class="home-subtitle">
       {{- if $profile.typeit -}}
-        <span class="d-none">{{ . }}</span>
+        <span class="hidden">{{ . }}</span>
         {{- $.Store.Set "hasTyped" true -}}
         <span class="typeit"><template>{{ . | safeHTML }}</template></span>
       {{- else -}}

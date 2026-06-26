@@ -10,7 +10,10 @@
 {{- $scssVars := partialCached "function/scss-vars.html" . -}}
 {{- $fingerprint := .Site.Store.Get "fingerprint" -}}
 
-{{- /* Base CSS (every page) */ -}}
+{{- /* UnoCSS utility classes (pre-built) */ -}}
+{{- dict "Source" "css/unocss.css" "Minify" hugo.IsProduction "Fingerprint" $fingerprint | partial "plugin/style.html" -}}
+
+{{- /* Main CSS */ -}}
 {{- $mainCSS := dict
   "Resource" (resources.Get "scss/main.scss")
   "ToCSS" (dict "vars" $scssVars)
