@@ -18,3 +18,11 @@
     filter: invert(1) hue-rotate(0.5turn);
   }
 }
+
+// print styles
+@include media('print') {
+  @page {
+    size: A4 portrait;
+    margin: 1.27cm;
+  }
+}

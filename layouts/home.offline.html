@@ -4,17 +4,14 @@
 {{- end -}}
 
 {{- define "content" -}}
-  <article class="page text-center translate-y-[30vh]" id="content-offline">
-    <div class="header">
-      <h1 class="offline-title text-[3.6rem] animate__animated animate__pulse animate__faster">{{- T "offlineTitle" -}}</h1>
-      <p class="offline-subtitle my-[0.4rem] text-base font-normal italic leading-none text-[#57606a] animate__animated animate__headShake">
-        <i class="fa-stack fa-xs" aria-hidden="true">
-          <i class="fa-solid fa-wifi fa-stack-1x" aria-hidden="true"></i>
-          <i class="fa-solid fa-ban fa-stack-2x" aria-hidden="true"></i>
-        </i>
-        <span>ERROR_INTERNET_DISCONNECTED</span>
-      </p>
-    </div>
-    <p class="error-text text-[1.2rem]">{{- T "offlineText" -}}</p>
+  <article class="page self-stretch flex flex-col items-center justify-center text-center" id="content-offline">
+    <p class="animate__animated animate__headShake">
+      <i class="fa-stack fa-4x opacity-50" aria-hidden="true">
+        <i class="fa-solid fa-wifi fa-stack-1x"></i>
+        <i class="fa-solid fa-ban fa-stack-2x text-secondary"></i>
+      </i>
+    </p>
+    <h1 class="offline-title text-5xl text-shadow-md animate__animated animate__pulse animate__infinite">{{- T "offlineTitle" -}}</h1>
+    <p class="offline-text text-lg">{{- T "offlineText" -}}</p>
   </article>
 {{- end -}}
