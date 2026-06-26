@@ -15,6 +15,7 @@ export default defineConfig({
     },
     colors: {
       primary: 'var(--fi-primary)',
+      secondary: 'var(--fi-secondary)',
       success: 'var(--fi-success)',
       info: 'var(--fi-info)',
       warning: 'var(--fi-warning)',
