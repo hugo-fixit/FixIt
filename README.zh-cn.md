@@ -270,11 +270,12 @@ FixIt 主题多语言基本配置及自动翻译等详见 [内容管理](https:/
 <details>
 <summary>感谢 FixIt 主题中使用的所有开源项目。</summary>
 
+- [UnoCSS](https://github.com/unocss/unocss)
 - [normalize.css](https://github.com/necolas/normalize.css)
-- [Font Awesome](https://fontawesome.com/)
+- [Font Awesome](https://github.com/FortAwesome/Font-Awesome)
 - [Simple Icons](https://github.com/simple-icons/simple-icons)
-- [Animate.css](https://daneden.github.io/animate.css/)
-- [autocomplete-js](https://github.com/algolia/autocomplete)
+- [Animate.css](https://github.com/animate-css/animate.css)
+- [autocomplete](https://github.com/algolia/autocomplete)
 - [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
 - [Fuse.js](https://fusejs.io/)
 - [object-fit-images](https://github.com/fregante/object-fit-images)
