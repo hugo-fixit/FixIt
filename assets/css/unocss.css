@@ -14,6 +14,7 @@
 .order-5{order:5;}
 .order-first{order:-9999;}
 .order-last{order:9999;}
+.my-\[0\.4rem\]{margin-top:0.4rem;margin-bottom:0.4rem;}
 .me{margin-inline-end:1rem;}
 .me-1{margin-inline-end:0.25rem;}
 .ms-1{margin-inline-start:0.25rem;}
@@ -29,6 +30,7 @@
 .h6{height:1.5rem;}
 .flex{display:flex;}
 .table{display:table;}
+.translate-y-\[30vh\]{--un-translate-y:30vh;transform:translateX(var(--un-translate-x)) translateY(var(--un-translate-y)) translateZ(var(--un-translate-z)) rotate(var(--un-rotate)) rotateX(var(--un-rotate-x)) rotateY(var(--un-rotate-y)) rotateZ(var(--un-rotate-z)) skewX(var(--un-skew-x)) skewY(var(--un-skew-y)) scaleX(var(--un-scale-x)) scaleY(var(--un-scale-y)) scaleZ(var(--un-scale-z));}
 .transform{transform:translateX(var(--un-translate-x)) translateY(var(--un-translate-y)) translateZ(var(--un-translate-z)) rotate(var(--un-rotate)) rotateX(var(--un-rotate-x)) rotateY(var(--un-rotate-y)) rotateZ(var(--un-rotate-z)) skewX(var(--un-skew-x)) skewY(var(--un-skew-y)) scaleX(var(--un-scale-x)) scaleY(var(--un-scale-y)) scaleZ(var(--un-scale-z));}
 .resize{resize:both;}
 .break-before-page{break-before:page;}
@@ -38,10 +40,20 @@
 .px{padding-left:1rem;padding-right:1rem;}
 .pl{padding-left:1rem;}
 .pt{padding-top:1rem;}
+.text-center{text-align:center;}
 .indent{text-indent:1.5rem;}
+.text-\[1\.2rem\]{font-size:1.2rem;}
+.text-\[1\.8rem\]{font-size:1.8rem;}
+.text-\[3\.6rem\]{font-size:3.6rem;}
+.text-base{font-size:1rem;line-height:1.5rem;}
+.text-\[\#57606a\]{--un-text-opacity:1;color:rgb(87 96 106 / var(--un-text-opacity)) /* #57606a */;}
 .text-danger{color:var(--fi-danger) /* var(--fi-danger) */;}
 .text-success{color:var(--fi-success) /* var(--fi-success) */;}
+.font-normal{font-weight:400;}
+.leading-\[3rem\]{line-height:3rem;}
+.leading-none{line-height:1;}
 .capitalize{text-transform:capitalize;}
+.italic{font-style:italic;}
 .lining-nums{--un-numeric-figure:lining-nums;font-variant-numeric:var(--un-ordinal) var(--un-slashed-zero) var(--un-numeric-figure) var(--un-numeric-spacing) var(--un-numeric-fraction);}
 .tabular-nums{--un-numeric-spacing:tabular-nums;font-variant-numeric:var(--un-ordinal) var(--un-slashed-zero) var(--un-numeric-figure) var(--un-numeric-spacing) var(--un-numeric-fraction);}
 .underline{text-decoration-line:underline;}
