@@ -10,7 +10,12 @@
 {{- $scssVars := partialCached "function/scss-vars.html" . -}}
 {{- $fingerprint := .Site.Store.Get "fingerprint" -}}
 
-{{- /* Base CSS (every page) */ -}}
+{{- /* UnoCSS utility classes (pre-built) */ -}}
+{{- with resources.Get "css/unocss.css" -}}
+  {{- dict "Resource" . "Fingerprint" $fingerprint | partial "plugin/style.html" -}}
+{{- end -}}
+
+{{- /* Base CSS (SCSS) */ -}}
 {{- $mainCSS := dict
   "Resource" (resources.Get "scss/main.scss")
   "ToCSS" (dict "vars" $scssVars)

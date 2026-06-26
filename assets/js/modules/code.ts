@@ -377,7 +377,7 @@ export class CodeModule implements CodeService {
         // move block to content
         $tab.classList.toggle('active', resolvedIndex === index || defaultActiveTab)
         $tab.classList.remove('is-collapsed')
-        $tab.classList.remove('d-none')
+        $tab.classList.remove('hidden')
         $tab.dataset.tabInit = 'true'
         $content.appendChild($tab)
       })

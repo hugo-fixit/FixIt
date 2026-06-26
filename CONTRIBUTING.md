@@ -80,6 +80,11 @@ pnpm gen:lexers
 
 # Preview the built site locally (requires build first)
 pnpm preview
+
+# Build UnoCSS utility classes (pre-built, committed to repo)
+pnpm css:build
+# Watch mode for UnoCSS (for theme developers)
+pnpm css:dev
 ```
 
 > [!TIP]
@@ -111,6 +116,7 @@ FixIt/
 │   └── test/           # Test site
 ├── archetypes/         # Content templates
 ├── assets/             # Theme assets
+│   ├── css/            # UnoCSS pre-built output (unocss.css)
 │   ├── images/         # Image assets
 │   ├── js/             # JavaScript files
 │   ├── lib/            # Third-party libraries
@@ -127,6 +133,7 @@ FixIt/
 │   └── versioning/     # Version management (pre-commit)
 ├── static/             # Static files
 ├── hugo.toml           # Default theme configuration
+├── uno.config.ts       # UnoCSS configuration
 └── package.json        # npm scripts and dependencies
 ```
 

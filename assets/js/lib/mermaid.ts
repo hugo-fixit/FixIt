@@ -171,7 +171,7 @@ function isNodeVisuallyActive(node: Element): boolean {
 function isRenderContextActive(el: Element): boolean {
   if (!el.isConnected)
     return false
-  if (el.closest('[hidden], .d-none, [aria-hidden="true"]'))
+  if (el.closest('[hidden], .hidden, [aria-hidden="true"]'))
     return false
 
   const diagramView = el.closest('.diagram-view')

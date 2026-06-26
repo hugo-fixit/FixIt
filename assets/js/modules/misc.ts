@@ -33,7 +33,7 @@ export class MiscModule implements MiscService {
     const minutes = Math.floor((totalSeconds % 3600) / 60)
     const seconds = totalSeconds % 60
     $runTimes.innerHTML = `${days}, ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
-    document.querySelector('.site-time .d-none')?.classList.remove('d-none')
+    document.querySelector('.site-time .hidden')?.classList.remove('hidden')
   }
 
   /** Start the site-time counter with visibility-change pausing. */
@@ -94,7 +94,7 @@ export class MiscModule implements MiscService {
 
     if (document.querySelector('#comments')) {
       const $viewCommentsBtn = document.querySelector<HTMLElement>('.view-comments')!
-      $viewCommentsBtn.classList.remove('d-none')
+      $viewCommentsBtn.classList.remove('hidden')
       $viewCommentsBtn.addEventListener('click', () => {
         scrollIntoView('#comments')
       }, false)

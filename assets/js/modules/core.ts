@@ -35,7 +35,7 @@ export class CoreModule implements CoreService {
 
   /** Toggle the mask element's blur class based on active overlay state. */
   syncMaskState() {
-    document.getElementById('mask')?.classList.toggle('blur', Boolean(this.activeMaskOverlay))
+    document.getElementById('mask')?.classList.toggle('is-blur', Boolean(this.activeMaskOverlay))
   }
 
   /** Open a named mask overlay, closing any previously active one. */

@@ -29,8 +29,8 @@
     "node": ">=22"
   },
   "scripts": {
-    "dev:demo": "pnpm -F demo dev",
-    "dev:test": "pnpm -F test dev",
+    "dev:demo": "concurrently 'pnpm css:dev' 'pnpm -F demo dev'",
+    "dev:test": "concurrently 'pnpm css:dev' 'pnpm -F test dev'",
     "dev:docs": "hugo server --source=../fixit-docs -D --disableFastRender --navigateToChanged --ignoreCache -O",
     "build:demo": "pnpm -F demo build",
     "build:test": "pnpm -F test build",
@@ -42,11 +42,14 @@
     "version": "pnpm -F versioning start prod",
     "changelog": "auto-changelog-plus --starting-date 2021-12-18",
     "gen:lexers": "pnpm -F chroma-lexers start",
+    "css:build": "unocss \"layouts/**/*.html\" \"assets/js/**/*.ts\" -o assets/css/unocss.css",
+    "css:dev": "pnpm css:build --watch",
     "prepare": "simple-git-hooks"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^9.0.0",
     "@types/node": "^25.9.2",
+    "@unocss/cli": "^66.7.2",
     "auto-changelog-plus": "^1.3.0",
     "concurrently": "^9.2.1",
     "eslint": "^10.4.1",
@@ -55,7 +58,8 @@
     "serve": "^14.2.6",
     "simple-git-hooks": "^2.13.1",
     "tsx": "^4.22.4",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "unocss": "^66.6.0"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm -F versioning start dev && pnpm typecheck && pnpm lint-staged"

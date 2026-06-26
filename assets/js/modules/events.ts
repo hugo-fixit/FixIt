@@ -67,13 +67,13 @@ export class EventsModule implements EventsService {
       }
       if ($backToTop) {
         if (scrollPercent > 1) {
-          $backToTop.classList.remove('d-none', 'animate__fadeOut')
+          $backToTop.classList.remove('hidden', 'animate__fadeOut')
           animateCSS($backToTop, ['animate__fadeIn'], true)
         }
         else {
           $backToTop.classList.remove('animate__fadeIn')
           animateCSS($backToTop, ['animate__fadeOut'], true, () => {
-            $backToTop.classList.contains('animate__fadeOut') && $backToTop.classList.add('d-none')
+            $backToTop.classList.contains('animate__fadeOut') && $backToTop.classList.add('hidden')
           })
         }
         $backToTop.style.setProperty('--fi-b2t-progress', scrollPercent.toFixed(2))
@@ -114,7 +114,7 @@ export class EventsModule implements EventsService {
   /** Bind mask click to close the active overlay. */
   onClickMask() {
     document.getElementById('mask')!.addEventListener('click', (e) => {
-      if (!(e.target as HTMLElement).classList.contains('blur'))
+      if (!(e.target as HTMLElement).classList.contains('is-blur'))
         return
       this.core.closeActiveMaskOverlay()
     }, false)

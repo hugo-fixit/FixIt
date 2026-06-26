@@ -3,63 +3,6 @@
 /// ==========================================================================
 @use "functions" as *;
 @use "mixins" as *;
-@use "maps" as maps;
-
-.text-truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.text-start {
-  text-align: left !important;
-}
-.text-end {
-  text-align: right !important;
-}
-.text-center {
-  text-align: center !important;
-}
-
-.d-none {
-  display: none !important;
-}
-
-.ms-1,
-.mx-1 {
-  margin-left: 0.25em !important;
-}
-.me-1,
-.mx-1 {
-  margin-right: 0.25em !important;
-}
-.ps-1,
-.px-1 {
-  padding-left: 0.25em !important;
-}
-.pe-1,
-.px-1 {
-  padding-right: 0.25em !important;
-}
-
-@each $color, $value in maps.$theme-colors {
-  .text-#{$color} {
-    color: fi-var(#{$color}) !important;
-  }
-}
-
-@each $key, $value in maps.$orders {
-  .order-#{$key} {
-    order: #{$value} !important;
-  }
-}
-
-.variant-numeric {
-  font-variant-numeric: tabular-nums lining-nums;
-}
-
-.rounded-full {
-  @include border-radius(full);
-}
 
 .is-fullscreen {
   .fa-expand {
@@ -73,37 +16,5 @@
 .auto-dark-mode {
   @include dark-mode {
     filter: invert(1) hue-rotate(0.5turn);
-  }
-}
-
-// print view helper
-.page-break-before {
-  break-before: page;
-}
-
-.page-break-after {
-  break-after: page;
-}
-
-@include media('sm', 'up') {
-  .d-none-desktop {
-    display: none;
-  }
-}
-
-@include media('xs') {
-  .d-none-mobile {
-    display: none !important;
-  }
-}
-
-@include media('print') {
-  @page {
-    size: A4 portrait;
-    margin: 1.27cm;
-  }
-
-  .d-none-print {
-    display: none !important;
   }
 }

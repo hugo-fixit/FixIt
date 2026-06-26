@@ -10,7 +10,7 @@
   height: 100%;
   @include z-index(hide);
 
-  &.blur {
+  &.is-blur {
     background-color: rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(2px);
     @include z-index(fixed, -1);

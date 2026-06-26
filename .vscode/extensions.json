@@ -6,6 +6,8 @@
     "tamasfe.even-better-toml",
     "casualjim.gotemplate",
     "SomewhatStationery.some-sass",
-    "gruntfuggly.todo-tree"
+    "gruntfuggly.todo-tree",
+    "antfu.unocss",
+    "antfu.iconify"
   ]
 }

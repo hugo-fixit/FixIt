@@ -82,7 +82,7 @@
     {{- if $isFirst -}}
       {{- .Page.Store.Set $groupKey true -}}
     {{- else -}}
-      {{- $targetClass = add $targetClass " d-none" -}}
+      {{- $targetClass = add $targetClass " hidden" -}}
     {{- end -}}
     {{- $wrapper =
       replace $wrapper

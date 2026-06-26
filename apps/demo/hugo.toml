@@ -17,11 +17,6 @@ _merge = "shallow"
 [outputs]
 _merge = "shallow"
 
-# -------------------------------------------------------------------------------------
-# Taxonomies Configuration
-# See: https://gohugo.io/content-management/taxonomies/#configure-taxonomies
-# -------------------------------------------------------------------------------------
-
 [taxonomies]
 _merge = "shallow"
 

@@ -82,7 +82,6 @@ export function updateVersion(type: 'dev' | 'prod') {
   const toStageFiles: string[] = [
     'layouts/_partials/init/index.html',
     'package.json',
-    'package-lock.json',
     'pnpm-lock.yaml',
   ]
   toStageFiles.forEach((file) => {

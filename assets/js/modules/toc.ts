@@ -181,7 +181,7 @@ export class TocModule implements TocService {
     // TOC Drawer Button Visibility
     const openButton = document.querySelector<HTMLElement>('#toc-drawer-button')
     if (openButton) {
-      openButton.classList.toggle('d-none', !isTocStatic())
+      openButton.classList.toggle('hidden', !isTocStatic())
     }
     this.activeTocId = null
     // TOC Static and TOC Dialog
@@ -218,13 +218,13 @@ export class TocModule implements TocService {
       const tocHidden = $toc.classList.contains('toc-hidden')
       animation.push(tocHidden ? 'animate__fadeIn' : 'animate__fadeOut')
       if (tocHidden) {
-        $tocContentAuto.classList.remove('d-none', 'animate__fadeOut')
+        $tocContentAuto.classList.remove('hidden', 'animate__fadeOut')
       }
       else {
         $tocContentAuto.classList.remove('animate__fadeIn')
       }
       animateCSS($tocContentAuto, animation, true, () => {
-        $tocContentAuto.classList.contains('animate__fadeOut') && $tocContentAuto.classList.add('d-none')
+        $tocContentAuto.classList.contains('animate__fadeOut') && $tocContentAuto.classList.add('hidden')
       })
       $toc.classList.toggle('toc-hidden')
     }, false)
