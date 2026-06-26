@@ -4,7 +4,10 @@ export default defineConfig({
   presets: [
     presetIcons({
       prefix: '',
-      collections: {},
+      collections: {
+        lucide: () => import('@iconify/json/json/lucide.json').then(i => i.default),
+        octicon: () => import('@iconify/json/json/octicon.json').then(i => i.default),
+      },
       extraProperties: {
         'display': 'inline-block',
         'vertical-align': 'text-bottom',
@@ -42,7 +45,12 @@ export default defineConfig({
     'z-fixed': 'z-200',
   },
   // Block unused or false-positive utilities
-  blocklist: ['container', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+  blocklist: [
+    'container',
+    /^h[1-6]$/,
+    // Block legacy Font Awesome icons (FA uses CSS font, not SVG)
+    /^fa-/,
+  ],
   // Always generate order utilities (used dynamically in templates)
   safelist: [
     // For footer lines order, optional values: ["first", 0-5, "last"]

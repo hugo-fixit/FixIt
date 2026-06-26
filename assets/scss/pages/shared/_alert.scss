@@ -23,12 +23,6 @@
     line-height: 1;
     margin-bottom: 1rem;
     color: fi-var(alert-color);
-
-    > svg.icon {
-      width: initial;
-      height: initial;
-      margin-right: 0.5rem;
-    }
   }
 
   @each $type, $item in maps.$alert-color-map {
