@@ -11,9 +11,7 @@
 {{- $fingerprint := .Site.Store.Get "fingerprint" -}}
 
 {{- /* UnoCSS utility classes (pre-built) */ -}}
-{{- with resources.Get "css/unocss.css" -}}
-  {{- dict "Resource" . "Fingerprint" $fingerprint | partial "plugin/style.html" -}}
-{{- end -}}
+{{- dict "Source" "css/unocss.css" "Minify" hugo.IsProduction "Fingerprint" $fingerprint | partial "plugin/style.html" -}}
 
 {{- /* Base CSS (SCSS) */ -}}
 {{- $mainCSS := dict

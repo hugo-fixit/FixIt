@@ -23,8 +23,17 @@ export default defineConfig({
   },
   // No preflight/reset — FixIt has its own in core/_reboot.scss
   preflights: [],
+  // Semantic z-index shortcuts (mirrors core/mixins/_z-index.scss)
+  shortcuts: {
+    'z-hide': 'z--1',
+    'z-auto': 'z-auto',
+    'z-base': 'z-1',
+    'z-loading': 'z-10',
+    'z-sticky': 'z-100',
+    'z-fixed': 'z-200',
+  },
   // Block unused or false-positive utilities
-  blocklist: ['container'],
+  blocklist: ['container', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
   // Always generate order utilities (used dynamically in templates)
   safelist: [
     // For footer lines order, optional values: ["first", 0-5, "last"]

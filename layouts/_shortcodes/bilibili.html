@@ -7,7 +7,7 @@
 {{- $danmaku := .Get "danmaku" | default true -}}
 {{- $t := .Get "t" | default 0 -}}
 
-<div class="bilibili">
-  <iframe src="//player.bilibili.com/player.html?bvid={{ $bvid }}&page={{ $p }}&autoplay={{ $autoplay }}&poster={{ $poster }}&muted={{ $muted }}&danmaku={{ $danmaku }}&t={{ $t }}" border="0" framespacing="0" allowfullscreen="true"></iframe>
+<div class="bilibili relative w-full aspect-video my-4 mx-auto text-center">
+  <iframe class="absolute w-full h-full inset-0" src="//player.bilibili.com/player.html?bvid={{ $bvid }}&page={{ $p }}&autoplay={{ $autoplay }}&poster={{ $poster }}&muted={{ $muted }}&danmaku={{ $danmaku }}&t={{ $t }}" border="0" framespacing="0" allowfullscreen="true"></iframe>
 </div>
 {{- /* EOF */ -}}

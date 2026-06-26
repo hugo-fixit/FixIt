@@ -23,7 +23,7 @@
   {{- $href := "" -}}
   {{- $integrity := .Integrity -}}
 
-  {{- /* Pre-built resource */ -}}
+  {{- /* Resource (pre-built) */ -}}
   {{- with .Resource -}}
     {{- $href = .RelPermalink -}}
     {{- with .Data.Integrity -}}
@@ -32,11 +32,8 @@
   {{- end -}}
 
   {{- /* Source build */ -}}
-  {{- if not $href -}}
-    {{- $href = .Source -}}
-  {{- end -}}
-  {{- if $href | and (not (urls.Parse $href).Host) | and (not .Resource) -}}
-    {{- $resource := resources.Get $href -}}
+  {{- if .Source | and (not .Resource) | and (not (urls.Parse .Source).Host) -}}
+    {{- $resource := resources.Get .Source -}}
     {{- with .Template -}}
       {{- $resource = resources.ExecuteAsTemplate . $.Context $resource -}}
     {{- end -}}
@@ -55,6 +52,9 @@
     {{- end -}}
     {{- $href = $contentResource.RelPermalink -}}
   {{- end -}}
+
+  {{- /* Fallback to source */ -}}
+  {{- $href = $href | default .Source -}}
 
   {{- /* Style attributes */ -}}
   {{- $attrs := printf `href="%v"` $href -}}

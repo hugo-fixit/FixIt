@@ -17,7 +17,7 @@
 {{- $resource := resources.Get "images/version.template.svg" -}}
 {{- $resource = $resource | resources.ExecuteAsTemplate $path (dict "version" $version "label" $label "color" $color "isCJK" $isCJK) | minify -}}
 {{- $alt := printf "%v %v | %v" $repoName $version $label -}}
-<a href="{{ $url }}" rel="external" target="_blank" class="version-link">
-  {{- dict "Src" $resource.RelPermalink "Alt" $alt "Class" "version" | partial "plugin/image.html" -}}
+<a href="{{ $url }}" rel="external" target="_blank" class="version-link whitespace-nowrap">
+  {{- dict "Src" $resource.RelPermalink "Alt" $alt "Class" "version h-[1.25em] align-text-bottom" | partial "plugin/image.html" -}}
 </a>
 {{- /* EOF */ -}}

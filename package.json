@@ -29,8 +29,8 @@
     "node": ">=22"
   },
   "scripts": {
-    "dev:demo": "concurrently 'pnpm css:dev' 'pnpm -F demo dev'",
-    "dev:test": "concurrently 'pnpm css:dev' 'pnpm -F test dev'",
+    "dev:demo": "pnpm -F demo dev",
+    "dev:test": "pnpm -F test dev",
     "dev:docs": "hugo server --source=../fixit-docs -D --disableFastRender --navigateToChanged --ignoreCache -O",
     "build:demo": "pnpm -F demo build",
     "build:test": "pnpm -F test build",
