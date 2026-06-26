@@ -1,7 +1,15 @@
-import { defineConfig, presetWind3 } from 'unocss'
+import { defineConfig, presetIcons, presetWind3 } from 'unocss'
 
 export default defineConfig({
   presets: [
+    presetIcons({
+      prefix: '',
+      collections: {},
+      extraProperties: {
+        'display': 'inline-block',
+        'vertical-align': 'text-bottom',
+      },
+    }),
     presetWind3(),
   ],
   theme: {

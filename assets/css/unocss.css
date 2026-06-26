@@ -57,6 +57,7 @@
 .text-base{font-size:1rem;line-height:1.5rem;}
 .text-\[\#57606a\]{--un-text-opacity:1;color:rgb(87 96 106 / var(--un-text-opacity)) /* #57606a */;}
 .text-danger{color:var(--fi-danger) /* var(--fi-danger) */;}
+.text-secondary{color:var(--fi-secondary) /* var(--fi-secondary) */;}
 .text-success{color:var(--fi-success) /* var(--fi-success) */;}
 .text-white{--un-text-opacity:1;color:rgb(255 255 255 / var(--un-text-opacity)) /* #fff */;}
 .font-bold{font-weight:700;}
