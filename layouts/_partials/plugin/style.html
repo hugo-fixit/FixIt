@@ -47,8 +47,9 @@
   {{- /* Style from string */ -}}
   {{- if .Content | and .Path -}}
     {{- $contentResource := resources.FromString .Path .Content -}}
-    {{- if .Minify -}}
-      {{- $contentResource = $contentResource | minify -}}
+    {{- $contentResource = dict "Resource" $contentResource "ToCSS" .ToCSS "Minify" .Minify "Fingerprint" .Fingerprint | partial "function/to-css.html" -}}
+    {{- with .Fingerprint -}}
+      {{- $integrity = $contentResource.Data.Integrity -}}
     {{- end -}}
     {{- $href = $contentResource.RelPermalink -}}
   {{- end -}}

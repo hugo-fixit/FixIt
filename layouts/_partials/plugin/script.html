@@ -24,7 +24,7 @@
   {{- $src := "" -}}
   {{- $integrity := .Integrity -}}
 
-  {{- /* Pre-built resource */ -}}
+  {{- /* Resource (pre-built) */ -}}
   {{- with .Resource -}}
     {{- $src = .RelPermalink -}}
     {{- with .Data.Integrity -}}
@@ -33,11 +33,8 @@
   {{- end -}}
 
   {{- /* Source build */ -}}
-  {{- if not $src -}}
-    {{- $src = .Source -}}
-  {{- end -}}
-  {{- if $src | and (not (urls.Parse $src).Host) | and (not .Resource) -}}
-    {{- $resource := resources.Get $src -}}
+  {{- if .Source | and (not .Resource) | and (not (urls.Parse .Source).Host) -}}
+    {{- $resource := resources.Get .Source -}}
     {{- with .Template -}}
       {{- $resource = resources.ExecuteAsTemplate . $.Context $resource -}}
     {{- end -}}
@@ -50,14 +47,18 @@
     {{- end -}}
   {{- end -}}
 
-  {{- /* Script form string */ -}}
+  {{- /* Script from string */ -}}
   {{- if .Content | and .Path -}}
     {{- $contentResource := resources.FromString .Path .Content -}}
-    {{- if .Minify -}}
-      {{- $contentResource = $contentResource | minify -}}
+    {{- $contentResource = dict "Resource" $contentResource "Build" .Build "Minify" .Minify "Fingerprint" .Fingerprint | partial "function/js-build.html" -}}
+    {{- with .Fingerprint -}}
+      {{- $integrity = $contentResource.Data.Integrity -}}
     {{- end -}}
     {{- $src = $contentResource.RelPermalink -}}
   {{- end -}}
+
+  {{- /* Fallback to source */ -}}
+  {{- $src = $src | default .Source -}}
 
   {{- /* Script attributes */ -}}
   {{- if $src -}}
