@@ -269,7 +269,7 @@ async function renderMermaidElement(el: Element | null, options: RenderOptions):
 
     const id = `fixit-mermaid-${++mermaidIdSeq}`
     try {
-      const result = await mermaid.render(id, source)
+      const result = await mermaid.render(id, source, el)
       const svg = result?.svg ?? ''
       el.innerHTML = svg
       if (typeof result?.bindFunctions === 'function') {
@@ -296,10 +296,9 @@ async function renderMermaidElement(el: Element | null, options: RenderOptions):
       }
     }
     catch (error) {
-      const errDiv = document.getElementById(`d${id}`)
+      const errDiv = el.querySelector<HTMLElement>(`#d${id}`)
       if (errDiv) {
         el.innerHTML = errDiv.innerHTML
-        errDiv.remove()
       }
       el.removeAttribute('data-processing')
       el.setAttribute('data-processed', '')

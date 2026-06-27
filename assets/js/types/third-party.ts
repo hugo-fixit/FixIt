@@ -18,7 +18,7 @@ export interface MermaidRenderResult {
 export interface MermaidRuntimeModule {
   startOnLoad: boolean
   initialize: (config: Record<string, unknown>) => void
-  render: (id: string, source: string) => Promise<MermaidRenderResult>
+  render: (id: string, source: string, container?: Element) => Promise<MermaidRenderResult>
   registerExternalDiagrams?: (diagrams: unknown[]) => Promise<void>
   registerLayoutLoaders?: (loaders: unknown[]) => void
 }
