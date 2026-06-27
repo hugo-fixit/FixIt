@@ -1,45 +1,48 @@
-// Responsive breakpoints matching the project's media query design
-// ┌──────────────────────────────────────────────────────┐
-// │  xs   │    sm     │     md     │     lg     │   xl   │
-// │ ≤680  │ 681–960   │ 961–1200   │ 1201–1440  │ ≥1441  │
-// └──────────────────────────────────────────────────────┘
+// FixIt Responsive breakpoints system design
+// ┌──────┬───────────┬───────────┬──────────────┐
+// │ Name │ min-width │ max-width │ Direction    │
+// ├──────┼───────────┼───────────┼──────────────┤
+// │ xs   │ (null)    │ 679.9px   │ only         │
+// │ sm   │ 680px     │ 959.9px   │ only/up/down │
+// │ md   │ 960px     │ 1199.9px  │ only/down    │
+// │ lg   │ 1200px    │ 1439.9px  │ only/up      │
+// │ xl   │ 1440px    │ (null)    │ only         │
+// └──────┴───────────┴───────────┴──────────────┘
 @use "sass:map";
+@use "sass:list";
 
 $breakpoints: (
-  'xs': (
-    'min': null,
-    'max': 680.9px,
-  ),
-  'sm': (
-    'min': 681px,
-    'max': 960.9px,
-  ),
-  'md': (
-    'min': 961px,
-    'max': 1200.9px,
-  ),
-  'lg': (
-    'min': 1201px,
-    'max': 1440.9px,
-  ),
-  'xl': (
-    'min': 1441px,
-    'max': null,
-  ),
+  'xs': null,
+  'sm': 680px,
+  'md': 960px,
+  'lg': 1200px,
+  'xl': 1440px,
 ) !default;
+
+/// Get the max-width for a breakpoint (0.1px below the next breakpoint).
+@function _bp-max($name) {
+  // Ordered list of breakpoint names for range derivation
+  $keys: map.keys($breakpoints);
+  $idx: list.index($keys, $name);
+  @if $idx == null or $idx >= list.length($keys) {
+    @return null;
+  }
+  $next: list.nth($keys, $idx + 1);
+  @return map.get($breakpoints, $next) - 0.1px;
+}
 
 /// Apply styles within a named media target.
 /// @param {String} $target - Target name: xs | sm | md | lg | xl | print | reduce-motion
 /// @param {String} $direction  - Range direction: only | up | down [default: only]
 ///
 /// @example
-///   // xs: ≤ 680px
+///   // xs: < 680px
 ///   @include media('xs') { ... }
-///   // sm: 681px – 960px
+///   // sm: 680px – 959.9px
 ///   @include media('sm') { ... }
-///   // md and above: ≥ 961px
+///   // md and above: ≥ 960px
 ///   @include media('md', 'up') { ... }
-///   // lg and below: ≤ 1440px
+///   // lg and below: ≤ 1199.9px
 ///   @include media('lg', 'down') { ... }
 ///   // print media
 ///   @include media('print') { ... }
@@ -54,21 +57,13 @@ $breakpoints: (
     @media screen and (prefers-reduced-motion: reduce) {
       @content;
     }
-  } @else {
-    $range: map.get($breakpoints, $target);
-    $min: null;
-    $max: null;
+  } @else if map.has-key($breakpoints, $target) {
+    $min: map.get($breakpoints, $target);
+    $max: _bp-max($target);
 
-    @if $range != null {
-      $min: map.get($range, 'min');
-      $max: map.get($range, 'max');
-    }
-
-    @if $range == null {
-      @warn "Unknown media target `#{$target}`. Expected: xs, sm, md, lg, xl, print, reduce-motion.";
-    } @else if $direction == 'only' {
+    @if $direction == 'only' {
       @if $min == null {
-        // xs: max-width only, no lower bound
+        // xs: max-width only
         @media only screen and (max-width: $max) {
           @content;
         }
@@ -84,7 +79,7 @@ $breakpoints: (
       }
     } @else if $direction == 'up' {
       @if $min == null {
-        // xs-up: no lower bound, always applies
+        // xs-up: always applies
         @content;
       } @else {
         @media only screen and (min-width: $min) {
@@ -93,7 +88,7 @@ $breakpoints: (
       }
     } @else if $direction == 'down' {
       @if $max == null {
-        // xl-down: no upper bound, always applies
+        // xl-down: always applies
         @content;
       } @else {
         @media only screen and (max-width: $max) {
@@ -103,5 +98,7 @@ $breakpoints: (
     } @else {
       @warn "Unknown direction `#{$direction}`. Expected: only, up, down.";
     }
+  } @else {
+    @warn "Unknown media target `#{$target}`. Expected: xs, sm, md, lg, xl, print, reduce-motion.";
   }
 }

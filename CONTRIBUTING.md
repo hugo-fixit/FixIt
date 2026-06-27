@@ -82,9 +82,9 @@ pnpm gen:lexers
 pnpm preview
 
 # Build UnoCSS utility classes (pre-built, committed to repo)
-pnpm css:build
+pnpm unocss
 # Watch mode for UnoCSS (for theme developers)
-pnpm css:dev
+pnpm unocss:watch
 ```
 
 > [!TIP]

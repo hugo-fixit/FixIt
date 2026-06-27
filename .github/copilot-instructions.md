@@ -22,10 +22,10 @@ This document defines the detailed coding standards for the FixIt theme project.
 
 - Use UnoCSS atomic classes for common utilities (`hidden`, `me-1`, `text-center`, etc.)
 - Theme colors: `bg-primary`, `text-success`, `text-danger`, etc. (mapped via `@theme` in `uno.config.ts`)
-- Responsive: `sm:` (>=681px), `md:` (>=961px), `lg:` (>=1201px), `xl:` (>=1441px). Use `max-sm:` for xs (<681px)
+- Responsive: `sm:` (>=680px), `md:` (>=960px), `lg:` (>=1200px), `xl:` (>=1440px). Use `max-sm:` for xs (<680px)
 - Wrap SVG elements with `<!-- @unocss-skip-start -->` / `<!-- @unocss-skip-end -->` to avoid false positives from `d` attribute values
 - Dynamically generated classes (e.g., `order-*`) must be added to `safelist` in `uno.config.ts`
-- Run `pnpm css:build` after modifying `uno.config.ts` or templates that use UnoCSS classes
+- Run `pnpm unocss` after modifying `uno.config.ts` or templates that use UnoCSS classes
 
 ## TypeScript Coding Standards
 

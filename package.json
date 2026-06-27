@@ -42,8 +42,8 @@
     "version": "pnpm -F versioning start prod",
     "changelog": "auto-changelog-plus --starting-date 2021-12-18",
     "gen:lexers": "pnpm -F chroma-lexers start",
-    "css:build": "unocss \"layouts/**/*.html\" \"assets/js/**/*.ts\" -o assets/css/unocss.css",
-    "css:dev": "pnpm css:build --watch",
+    "unocss": "unocss",
+    "unocss:watch": "unocss --watch",
     "prepare": "simple-git-hooks"
   },
   "devDependencies": {

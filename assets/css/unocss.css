@@ -82,9 +82,12 @@
 .opacity-50{opacity:0.5;}
 .shadow{--un-shadow:var(--un-shadow-inset) 0 1px 3px 0 var(--un-shadow-color, rgb(0 0 0 / 0.1)),var(--un-shadow-inset) 0 1px 2px -1px var(--un-shadow-color, rgb(0 0 0 / 0.1));box-shadow:var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);}
 .blur{--un-blur:blur(8px);filter:var(--un-blur) var(--un-brightness) var(--un-contrast) var(--un-drop-shadow) var(--un-grayscale) var(--un-hue-rotate) var(--un-invert) var(--un-saturate) var(--un-sepia);}
-@media (max-width: 680.9px){
+@media print{
+.print\:hidden{display:none;}
+}
+@media (max-width: 679.9px){
 .max-sm\:hidden{display:none;}
 }
-@media (min-width: 681px){
+@media (min-width: 680px){
 .sm\:hidden{display:none;}
 }

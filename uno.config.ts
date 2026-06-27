@@ -17,12 +17,12 @@ export default defineConfig({
   ],
   theme: {
     // FixIt responsive breakpoints (min-width, mobile-first)
-    // xs (max-width: 680.9px) use max-sm: prefix in UnoCSS
+    // xs (< 680px) use max-sm: prefix in UnoCSS
     breakpoints: {
-      sm: '681px',
-      md: '961px',
-      lg: '1201px',
-      xl: '1441px',
+      sm: '680px',
+      md: '960px',
+      lg: '1200px',
+      xl: '1440px',
     },
     colors: {
       primary: 'var(--fi-primary)',
@@ -65,6 +65,7 @@ export default defineConfig({
     // Responsive visibility
     'sm:hidden',
     'max-sm:hidden',
+    'print:hidden',
     // Print page breaks
     'break-before-page',
     'break-after-page',
@@ -74,6 +75,15 @@ export default defineConfig({
     filesystem: [
       'layouts/**/*.html',
       'assets/js/**/*.ts',
+    ],
+  },
+  // CLI entry for unocss / unocss:watch
+  cli: {
+    entry: [
+      {
+        patterns: ['layouts/**/*.html', 'assets/js/**/*.ts'],
+        outFile: 'assets/css/unocss.css',
+      },
     ],
   },
 })
