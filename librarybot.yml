@@ -69,6 +69,11 @@ libraries:
       items:
         - from: css/all.min.css
           to: fontawesome-free/all.min.css
+        - type: dir
+          from: webfonts
+          to: webfonts
+          baseDir: static/lib
+          clean: true
   - npm: fuse.js
     version: 7.4.2
     local:
@@ -103,6 +108,11 @@ libraries:
           to: katex/copy-tex.min.js
         - from: dist/katex.min.css
           to: katex/katex.min.css
+        - type: dir
+          from: dist/fonts
+          to: katex/fonts
+          baseDir: static/lib
+          clean: true
   - npm: lightgallery
     version: 2.9.0
     local:
@@ -115,6 +125,16 @@ libraries:
           to: lightgallery/plugins/thumbnail/lg-thumbnail.min.js
         - from: plugins/zoom/lg-zoom.min.js
           to: lightgallery/lg-zoom.min.js
+        - type: dir
+          from: fonts
+          to: lightgallery/fonts
+          baseDir: static/lib
+          clean: true
+        - type: dir
+          from: images
+          to: lightgallery/images
+          baseDir: static/lib
+          clean: true
   - npm: mapbox-gl
     version: 3.24.0
     local:
