@@ -21,7 +21,7 @@
               {{- if eq $repost.enable true -}}
                 {{- dict "Class" "fa-solid fa-share text-success me-1" | partial "plugin/icon.html" -}}
               {{- end -}}
-              {{- cond (.Param "capitalizeTitles") (title .LinkTitle) .LinkTitle -}}
+              {{- cond (.Param "capitalize_titles") (title .LinkTitle) .LinkTitle -}}
             </a>
           </article>
         {{- end -}}

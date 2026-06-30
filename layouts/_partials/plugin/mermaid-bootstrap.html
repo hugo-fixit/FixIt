@@ -3,30 +3,13 @@
   Returns inline module JS source used by store/script.html.
 
   @param {String} .MermaidModuleURL
-  @param {String} .MermaidCDN
-  @param {String} .ZenumlCDN
-  @param {Array}  .LayoutLoaders
-  @param {Object} .Mermaid
+  @param {Object} .Mermaid - camelCase-converted mermaid config
 */ -}}
 
 {{- printf `/** Mermaid bootstrap script generator. */
 import { bootstrapMermaid } from %s
-
-const mermaidSource = %s
-const zenumlSource = %s
-const layoutLoaderSources = %s
-const mermaidConfig = %s
-
-void bootstrapMermaid({
-  mermaidSource,
-  zenumlSource,
-  layoutLoaderSources,
-  config: mermaidConfig,
-})
+void bootstrapMermaid(%s)
 `
 (.MermaidModuleURL | jsonify)
-(.MermaidCDN | jsonify)
-(.ZenumlCDN | jsonify)
-(.LayoutLoaders | jsonify)
 (.Mermaid | jsonify)
 -}}

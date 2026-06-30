@@ -4,8 +4,8 @@
   This is mainly used to avoid problems caused by Hugo's case-insensitive config key parsing.
   Keep config keys in snake_case, then convert them here for stable access in templates and JS.
 
-  @param {map} . - The input map/object with snake_case keys
-  @return {map} A new map with camelCase keys, or the input if it's not a map
+  @param {map|slice} . - The input with snake_case keys
+  @return {map|slice} A new value with camelCase keys
 
   @example
   // Simple Map conversion
@@ -24,9 +24,7 @@
 
   @example
   // Practical usage in templates
-  {{- $siteParams := partial "function/snake2camel.html" .Site.Params }}
-  // Now access parameters with camelCase: $siteParams.codeBlock.enableWrapper
-  // [todo] refactor all config to use snake_case in Hugo config files, and camelCase in templates and JS (v1.0 breaking change)
+  {{- $siteParams := partial "function/camel-case-keys.html" .Site.Params }}
 */ -}}
 {{- $input := . -}}
 {{- $output := dict -}}
@@ -34,23 +32,8 @@
 {{- if reflect.IsMap $input -}}
   {{- /* Process map: iterate through all key-value pairs */ -}}
   {{- range $key, $value := $input -}}
-    {{- /* 
-      Convert key from snake_case to camelCase
-      Example: "max_shown_lines" -> "maxShownLines"
-      Strategy: split by "_", capitalize first letter of each part (except first), then concatenate
-    */ -}}
-    {{- $parts := split $key "_" -}}
-    {{- $newKey := index $parts 0 -}}
-    {{- range $i, $part := $parts -}}
-      {{- if gt $i 0 -}}
-        {{- /* Capitalize first letter, preserve the rest */ -}}
-        {{- $first := upper (substr $part 0 1) -}}
-        {{- $rest := substr $part 1 -}}
-        {{- $newKey = printf "%s%s%s" $newKey $first $rest -}}
-      {{- end -}}
-    {{- end -}}
-    
-    {{- /* 
+    {{- $newKey := partial "function/camel-case.html" $key -}}
+    {{- /*
       Recursively process value based on its type
       - For nested maps: recursively convert all nested keys
       - For arrays: process each map element in the array
@@ -58,18 +41,18 @@
     */ -}}
     {{- $newValue := $value -}}
     {{- if reflect.IsMap $value -}}
-      {{- $newValue = partial "function/snake2camel.html" $value -}}
+      {{- $newValue = partial "function/camel-case-keys.html" $value -}}
     {{- else if reflect.IsSlice $value -}}
       {{- $newValue = slice -}}
       {{- range $item := $value -}}
         {{- if reflect.IsMap $item -}}
-          {{- $newValue = $newValue | append (partial "function/snake2camel.html" $item) -}}
+          {{- $newValue = $newValue | append (partial "function/camel-case-keys.html" $item) -}}
         {{- else -}}
           {{- $newValue = $newValue | append $item -}}
         {{- end -}}
       {{- end -}}
     {{- end -}}
-    
+
     {{- /* Add the converted key-value pair to output */ -}}
     {{- $output = merge $output (dict $newKey $newValue) -}}
   {{- end -}}
@@ -79,13 +62,12 @@
   {{- $output := slice -}}
   {{- range $item := $input -}}
     {{- if reflect.IsMap $item -}}
-      {{- $output = $output | append (partial "function/snake2camel.html" $item) -}}
+      {{- $output = $output | append (partial "function/camel-case-keys.html" $item) -}}
     {{- else -}}
       {{- $output = $output | append $item -}}
     {{- end -}}
   {{- end -}}
   {{- return $output -}}
 {{- else -}}
-  {{- /* Return scalar values unchanged */ -}}
   {{- return $input -}}
 {{- end -}}

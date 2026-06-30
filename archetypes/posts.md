@@ -4,33 +4,25 @@ subtitle:
 date: {{ .Date }}
 slug: {{ substr .File.UniqueID 0 7 }}
 draft: true
-author:
-  name:
-  link:
-  email:
-  avatar:
 description:
 keywords:
-comment: false
 weight: 0
-tags:
-  - draft
 categories:
   - draft
-hiddenFromHomePage: false
-hiddenFromSearch: false
-hiddenFromRelated: false
-hiddenFromFeed: false
+collections:
+  - draft
+tags:
+  - draft
 summary:
-featuredImagePreview:
-featuredImage:
+featured_image:
+featured_image_preview:
 password:
 message:
 repost:
   enable: false
   url:
 
-# See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
+# See: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
 <!--more-->

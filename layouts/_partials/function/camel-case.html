@@ -1,0 +1,17 @@
+{{- /*
+  Convert a snake_case string to camelCase.
+  Strategy: split by "_", capitalize first letter of each part (except first), then concatenate
+
+  @param {string} . - The snake_case string
+  @return {string} The camelCase string
+
+  @example "max_shown_lines" -> "maxShownLines"
+*/ -}}
+{{- $parts := split . "_" -}}
+{{- $result := index $parts 0 -}}
+{{- range $i, $part := $parts -}}
+  {{- if gt $i 0 -}}
+    {{- $result = printf "%s%s%s" $result (upper (substr $part 0 1)) (substr $part 1) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $result -}}

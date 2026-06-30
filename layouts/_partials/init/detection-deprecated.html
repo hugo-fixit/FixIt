@@ -6,6 +6,96 @@
   {{- $warns = $warns | append "The parameter `params.externalIcon` is deprecated since v1.0.0, use `params.link.external_icon` instead." -}}
 {{- end -}}
 
+{{- /* params.page structural migration warnings */ -}}
+{{- $deprecatedPageKeys := slice
+  "capitalize_titles" "summary_plainify" "author_avatar"
+  "hidden_from_home_page" "hidden_from_search" "hidden_from_related" "hidden_from_feed"
+  "twemoji" "lightgallery" "ruby" "fraction" "fontawesome" "license"
+  "link_to_markdown" "link_to_source" "link_to_edit" "link_to_report" "link_to_vscode"
+  "page_style" "auto_bookmark" "show_lastmod" "word_count" "reading_time" "end_flag"
+  "instant_page" "collection_list" "collection_navigation" "edit_url" "source_url"
+  "featured_image" "featured_image_preview"
+  "toc" "expiration_reminder" "heading" "math" "mapbox"
+  "related" "reward" "share" "comment" "library" "seo"
+-}}
+{{- $onlyFrontMatters := slice "subtitle" "featured_image" "featured_image_preview" "repost" -}}
+{{- range $deprecatedPageKeys -}}
+  {{- $newKey := . -}}
+  {{- $oldKey := replace . "_" "" -}}
+  {{- $oldDisplay := partial "function/camel-case.html" $newKey -}}
+  {{- if (in $.Site.Params.page $oldKey) | and (not (in $onlyFrontMatters $newKey)) -}}
+    {{- $warns = $warns | append (printf "The parameter `params.page.%s` has been removed since v1.0.0, use `params.%s` instead." $oldDisplay $newKey) -}}
+  {{- end -}}
+  {{- if (in $.Site.Params.page $oldKey) | and (in $onlyFrontMatters $newKey) -}}
+    {{- $warns = $warns | append (printf "The parameter `params.page.%s` has been removed since v1.0.0, use front matter parameter `%s` instead." $oldDisplay $newKey) -}}
+  {{- end -}}
+  {{- if (in $.Page.Params $oldKey) | and (in $newKey "_") -}}
+    {{- $warns = $warns | append (printf "Front matter parameter `%s` is deprecated since v1.0.0, use `%s` instead." $oldDisplay $newKey) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* camelCase → snake_case param/section rename warnings */ -}}
+{{- $deprecatedKeys := slice
+  "default_theme"
+  "date_format"
+  "with_site_title"
+  "disable_theme_inject"
+  "title_delimiter"
+  "index_with_subtitle"
+  "enable_translation_merge"
+  "tag_cloud"
+  "post_chat"
+  "post_summary"
+  "git_info"
+  "back_to_top"
+  "reading_progress"
+  "github_corner"
+  "recently_updated"
+  "json_viewer"
+  "custom_partials"
+  "task_list"
+  "repo_version"
+-}}
+{{- range $deprecatedKeys -}}
+  {{- $newKey := . -}}
+  {{- $oldKey := replace . "_" "" -}}
+  {{- $oldDisplay := partial "function/camel-case.html" $newKey -}}
+  {{- with index $.Site.Params $oldKey -}}
+    {{- $warns = $warns | append (printf "The parameter `params.%s` has been removed since v1.0.0, use `params.%s` instead." $oldDisplay $newKey) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Nested camelCase key rename warnings */ -}}
+{{- $deprecatedNestedKeys := dict
+  "search" (slice "content_length" "absolute_url" "max_result_length" "snippet_length" "highlight_tag")
+  "search.algolia" (slice "app_id" "search_key")
+  "home.profile" (slice "only_first_page" "gravatar_email" "avatar_url" "avatar_menu")
+  "home.posts" (slice "image_preview")
+  "footer.powered" (slice "hugo_logo" "theme_logo")
+-}}
+{{- range $sectionPath, $keys := $deprecatedNestedKeys -}}
+  {{- $parts := split $sectionPath "." -}}
+  {{- $section := $.Site.Params -}}
+  {{- $valid := true -}}
+  {{- range $parts -}}
+    {{- if reflect.IsMap $section -}}
+      {{- $section = index $section . -}}
+    {{- else -}}
+      {{- $valid = false -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $valid | and (reflect.IsMap $section) -}}
+    {{- range $keys -}}
+      {{- $newKey := . -}}
+      {{- $oldKey := replace . "_" "" -}}
+      {{- $oldDisplay := partial "function/camel-case.html" $newKey -}}
+      {{- with index $section $oldKey -}}
+        {{- $warns = $warns | append (printf "The parameter `params.%s.%s` has been removed since v1.0.0, use `params.%s.%s` instead." $sectionPath $oldDisplay $sectionPath $newKey) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
 {{- if fileExists "assets/css/_custom.scss" -}}
   {{- $warns = $warns | append "The file `assets/css/_custom.scss` is deprecated. Please move your custom styles to `assets/scss/custom.scss`." -}}
 {{- end -}}

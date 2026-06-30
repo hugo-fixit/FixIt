@@ -5,7 +5,7 @@
   Podcast: https://ai.zhheo.com/docs/podcast.html
   TODO refactor and migrate to theme component
 */ -}}
-{{- $params := .Params | merge .Site.Params -}}
+{{- $params := .Params | merge .Site.Params | partial "function/camel-case-keys.html" -}}
 {{- $chatConfig := $params.postChat -}}
 {{- $summaryConfig := $params.postSummary -}}
 {{- $podcastConfig := $params.podcast -}}
@@ -17,7 +17,7 @@
   "both" "postChatUser_summary.min.js"
 -}}
 {{- /* PostSummary only for public posts */ -}}
-{{- $password := .Params.password | default .Site.Params.page.password -}}
+{{- $password := .Params.password -}}
 {{- $isPost := (eq .Kind "page") | and (eq .Type "posts") | and (not $password) -}}
 {{- $summaryEnable := cond $isPost $summaryConfig.enable false -}}
 {{- $enable := $chatConfig.enable | or $summaryEnable -}}
@@ -81,28 +81,7 @@
       {{- $blackDom = $blackDom | append . -}}
     {{- end -}}
     {{- $upLoadWeb := cond (.IsHome | or $password | or (eq .Kind "404")) false $chatConfig.upLoadWeb -}}
-    {{- $postChatConfig := dict
-      "userMode" $chatConfig.userMode
-      "defaultInput" $chatConfig.defaultInput
-      "left" $chatConfig.left
-      "bottom" $chatConfig.bottom
-      "width" $chatConfig.width
-      "height" $chatConfig.height
-      "fill" $chatConfig.fill
-      "backgroundColor" $chatConfig.backgroundColor
-      "upLoadWeb" $upLoadWeb
-      "showInviteLink" $chatConfig.showInviteLink
-      "userTitle" $chatConfig.userTitle
-      "userDesc" $chatConfig.userDesc
-      "addButton" $chatConfig.addButton
-      "blackDom" $blackDom
-      "frameWidth" $chatConfig.frameWidth
-      "frameHeight" $chatConfig.frameHeight
-      "userIcon" $chatConfig.userIcon
-      "defaultChatQuestions" $chatConfig.defaultChatQuestions
-      "defaultSearchQuestions" $chatConfig.defaultSearchQuestions
-      "hotWords" $chatConfig.hotWords
-    -}}
+    {{- $postChatConfig := dict "upLoadWeb" $upLoadWeb "blackDom" $blackDom | merge $chatConfig -}}
     {{- $configJS = add $configJS ($postChatConfig | jsonify | printf "var postChatConfig=%s") -}}
   {{- end -}}
 

@@ -11,11 +11,11 @@
         <div class="footer-line powered{{ with $footerConfig.order.powered }} order-{{ . }}{{ end }}">
           {{- $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo %v">{hugoLogo}Hugo</a>` hugo.Version -}}
           {{- $theme := printf `<a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt %v">{themeLogo}FixIt</a>` (hugo.Store.Get "version") -}}
-          {{- if $footerConfig.powered.hugoLogo -}}
+          {{- if $footerConfig.powered.hugo_logo -}}
           {{- $hugoLogo := printf `<img class="hugo-icon" src="%v" alt="Hugo logo" /> ` (resources.Get "images/hugo.svg" | minify).RelPermalink -}}
             {{- $hugo = replace $hugo "{hugoLogo}" $hugoLogo -}}
           {{- end -}}
-          {{- if $footerConfig.powered.themeLogo -}}
+          {{- if $footerConfig.powered.theme_logo -}}
             {{- $themeLogo := printf `<img class="fixit-icon" src="%v" alt="FixIt logo" /> ` (resources.Get "images/fixit.svg" | minify).RelPermalink -}}
             {{- $theme = replace $theme "{themeLogo}" $themeLogo -}}
           {{- end -}}
@@ -53,7 +53,7 @@
         </div>
       {{- end -}}
 
-      {{- $siteTime := .Site.Store.Get "siteTime" -}}
+      {{- $siteTime := .Site.Params.footer.site_time -}}
       {{- if $siteTime.enable -}}
         <div class="footer-line statistics{{ with $footerConfig.order.statistics }} order-{{ . }}{{ end }}">
           {{- if $siteTime.enable | and $siteTime.value -}}

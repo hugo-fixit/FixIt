@@ -1,7 +1,7 @@
 {{- $pages := .Site.RegularPages }}
 
 {{- /* Merge missing translations from other languages */ -}}
-{{- if .Site.Params.enableTranslationMerge -}}
+{{- if .Site.Params.enable_translation_merge -}}
   {{- range .Site.Home.Translations -}}
     {{- $pages = $pages | lang.Merge .Site.RegularPages -}}
   {{- end -}}

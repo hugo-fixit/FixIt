@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="{{ .Site.Language.Locale }}">
   <head>
-    {{- if .IsHome | and (ne .Site.Params.disableThemeInject true) }}
+    {{- if .IsHome | and (ne .Site.Params.disable_theme_inject true) }}
     <meta name="theme" content='FixIt {{ hugo.Store.Get "version" }}'>
     {{- end }}
     <meta charset="utf-8">
@@ -12,12 +12,12 @@
     <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
     {{- partial "base/head/index.html" . -}}
   </head>
-  <body data-instant-intensity="viewport" data-header-desktop="{{ .Site.Params.header.desktopMode }}" data-header-mobile="{{ .Site.Params.header.mobileMode }}">
+  <body data-instant-intensity="viewport" data-header-desktop="{{ .Site.Params.header.desktop_mode }}" data-header-mobile="{{ .Site.Params.header.mobile_mode }}">
     {{- /* Body wrapper */ -}}
-    <div class="wrapper" data-page-style="{{ (partial `function/params.html`).pageStyle | default `normal` }}">
+    <div class="wrapper" data-page-style="{{ .Param `page_style` | default `normal` }}">
       {{- partial "base/header.html" . -}}
       {{- partial "base/breadcrumb.html" . -}}
-      {{- $toc := .Store.Get "toc" -}}
+      {{- $toc := dict "Page" .Page "Key" "toc" | partial "function/param.html" -}}
       <main class="fi-container"{{ if (eq $toc.enable true) | and (eq $toc.position `left`) }} data-reverse{{ end }}>
         {{- block "content" . }}{{ end -}}
       </main>

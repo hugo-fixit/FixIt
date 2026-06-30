@@ -102,7 +102,7 @@
 {{- end -}}
 
 {{- $blockSchemes := slice "javascript" "mailto" "tel" "file" "data" "vscode" "trae" -}}
-{{- $config := partial "function/snake2camel.html" site.Params.link -}}
+{{- $config := partial "function/camel-case-keys.html" site.Params.link -}}
 {{- $rel := .Rel | default "" -}}
 {{- $isExternal := false -}}
 {{- $noreferrer := true -}}
@@ -129,7 +129,7 @@
 {{- $guardConfig := $config.guard -}}
 {{- with .Page.Params.link_guard -}}
   {{- if reflect.IsMap . -}}
-    {{- $guardConfig = (partial "function/snake2camel.html" .) | merge $guardConfig -}}
+    {{- $guardConfig = partial "function/camel-case-keys.html" . | merge $guardConfig -}}
   {{- else -}}
     {{- $guardConfig = (dict "enable" .) | merge $guardConfig -}}
   {{- end -}}

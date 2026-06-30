@@ -1,0 +1,28 @@
+{{- /*
+  Get a page-level section param with shorthand support and site defaults merged.
+
+  Handles shorthand booleans in front matter (e.g., `toc: true`) by wrapping them
+  in a dict with an "enable" key, then merges with site-level defaults.
+
+  For Page-level scalar params (e.g., capitalize_titles, ruby, password), use
+  .Param "xxx" directly instead of this partial.
+
+  @param {map} . - dict with "Page", "Key", and optional "ToCamel" fields
+    - Page: the page context
+    - Key: the param key name (e.g., "toc", "reward", "math")
+    - ToCamel: if true, convert result keys to camelCase (default: false)
+  @return {map} The merged param map
+
+  @example
+  {{- $toc := dict "Page" . "Key" "toc" | partial "function/param.html" -}}
+  {{- $config := dict "Page" . "Key" "math" "ToCamel" true | partial "function/param.html" -}}
+*/ -}}
+{{- $value := .Page.Param .Key -}}
+{{- if not (reflect.IsMap $value) -}}
+  {{- $value = dict "enable" $value -}}
+{{- end -}}
+{{- $value = $value | merge (index site.Params .Key) -}}
+{{- if .ToCamel -}}
+  {{- $value = partial "function/camel-case-keys.html" $value -}}
+{{- end -}}
+{{- return $value -}}

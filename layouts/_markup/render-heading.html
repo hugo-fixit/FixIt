@@ -1,14 +1,9 @@
 {{- /* Read the config and format */ -}}
-{{- $params := .Page.Params | merge site.Params.page -}}
-{{- /* Toc data patch */ -}}
-{{- $toc := $params.toc -}}
-{{- if not (reflect.IsMap $toc) -}}
-  {{- $toc = dict "enable" $toc | merge site.Params.page.toc -}}
-{{- end -}}
-{{- $headingConfig := $params.heading -}}
+{{- $toc := dict "Page" .Page "Key" "toc" | partial "function/param.html" -}}
+{{- $headingConfig := dict "Page" .Page "Key" "heading" | partial "function/param.html" -}}
 {{- /* Only enable in main section pages */ -}}
 {{- $intersect := (slice .Page.Section .Page.Type) | intersect site.MainSections -}}
-{{- $onlyMainSection := cond $headingConfig.number.onlyMainSection ((gt (len $intersect) 0) | and (eq .Page.Kind "page")) true -}}
+{{- $onlyMainSection := cond $headingConfig.number.only_main_section ((gt (len $intersect) 0) | and (eq .Page.Kind "page")) true -}}
 {{- $ordered := $toc.ordered | and $headingConfig.number.enable | and $onlyMainSection -}}
 {{- $h1Format := $headingConfig.number.format.h1 | default "{title}" -}}
 {{- $h2Format := $headingConfig.number.format.h2 | default "{h2} {title}" -}}
@@ -17,7 +12,7 @@
 {{- $h5Format := $headingConfig.number.format.h5 | default "{h2}.{h3}.{h4}.{h5} {title}" -}}
 {{- $h6Format := $headingConfig.number.format.h6 | default "{h2}.{h3}.{h4}.{h5}.{h6} {title}" -}}
 {{- $level := .Level -}}
-{{- $maxMarkupLevel := cond $toc.decreaseH1 2 1 -}}
+{{- $maxMarkupLevel := cond $toc.decrease_h1 2 1 -}}
 
 {{- /* Disable ordered headings on home page */ -}}
 {{- if eq hugo.Context.MarkupScope "home" -}}

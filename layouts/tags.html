@@ -1,11 +1,11 @@
 {{- /* Tags Page */ -}}
-{{- $tagCloud := .Site.Params.tagcloud -}}
+{{- $tagCloud := .Site.Params.tag_cloud -}}
 
 <div class="tags{{ with $tagCloud.enable }} tag-cloud-tags{{ end }}">
   {{- /* Tags Cloud */ -}}
   {{- if $tagCloud.enable -}}
     {{- $tags := cond (eq $tagCloud.orderby "name") $.Site.Taxonomies.tags.Alphabetical $.Site.Taxonomies.tags.ByCount -}}
-    {{- $baseGrade := div ($tagCloud.peakCount | default 10) 10.0 -}}
+    {{- $baseGrade := div ($tagCloud.peak_count | default 10) 10.0 -}}
     {{- $minFont := $tagCloud.min | default 16 -}}
     {{- $baseFont := div (sub ($tagCloud.max | default 32) $minFont) 10.0 -}}
     {{- range $tags -}}

@@ -1,10 +1,4 @@
-{{- $params := .Page.Params | merge site.Params.page -}}
-{{- $math := $params.math -}}
-{{- if eq $math true -}}
-  {{- $math = dict "enable" true | merge site.Params.page.math -}}
-{{- else if eq $math false -}}
-  {{- $math = dict "enable" false -}}
-{{- end -}}
+{{- $math := dict "Page" .Page "Key" "math" "ToCamel" true | partial "function/param.html" -}}
 
 {{- /*
   Mathematical formulas rendering:
@@ -15,13 +9,7 @@
 */ -}}
 {{- if $math.enable | and (ne hugo.Context.MarkupScope "home") -}}
   {{- if eq $math.type "katex" -}}
-    {{- $katex := $math.katex -}}
-    {{- $opts := dict "output" "htmlAndMathml" "displayMode" (eq $.Type "block") }}
-    {{- $opts = dict "throwOnError" $katex.throwOnError "errorColor" $katex.errorColor | merge $opts }}
-    {{- $macros := $katex.macros | default dict -}}
-    {{- if $macros -}}
-      {{- $opts = dict "macros" $macros | merge $opts -}}
-    {{- end -}}
+    {{- $opts := $math.katex | merge (dict "output" "htmlAndMathml" "displayMode" (eq $.Type "block")) }}
     {{- /* render mathematical markup to HTML */ -}}
     {{- with try (transform.ToMath .Inner $opts) }}
       {{- with .Err }}

@@ -1,14 +1,14 @@
-{{- /*  
+{{- /*
 The image plugin is a partial that handles image resources.
 
 Parameters:
-- Src: The path to the image. 
+- Src: The path to the image.
     It can be a page resource (inside a page bundle) https://gohugo.io/methods/page/resources/
     or a global resource (inside the assets directory) https://gohugo.io/functions/resources/get/
     or a link to a remote resource, which can be cached if the site parameter is set https://gohugo.io/functions/resources/getremote/
 - Resources: If the image is a page resource, this parameter is required. It is the .Resources of the page.
-- OptimConfig: optimisation parameter, defined like 
-    {{- $optim := slice 
+- OptimConfig: optimisation parameter, defined like
+    {{- $optim := slice
         (dict "Process" "resize 800x Center webp q75" "descriptor" "800w")
         (dict "Process" "resize 1200x Center webp q75" "descriptor" "1200w")
         (dict "Process" "resize 1600x Center webp q75" "descriptor" "1600w")
@@ -47,28 +47,30 @@ https://github.com/HEIGE-PCloud/DoIt/blob/main/layouts/_partials/plugin/image.ht
   {{- $resource = $resource | default ($Resources.Get .Src) | default (resources.Get .Src) -}}
 {{- end -}}
 
-{{- /* Get remote image resource */ -}}
-{{- $cacheRemote := .CacheRemote | default $config.cacheRemote | default false -}}
-{{- if not $resource | and $cacheRemote -}}
-  {{- with partial "function/get-remote-image.html" (dict "Src" .Src) -}}
-    {{- $resource = . -}}
-  {{- end -}}
-{{- end -}}
-
 {{- /* Check if the image is blocked from optimisation */ -}}
-{{- $blackList := .BlackList | default $config.blackList | default slice -}}
+{{- $blackList := .BlackList | default $config.black_list | default slice -}}
 {{- $isBlocked := false -}}
 {{- $regex := "" -}}
 {{- $disableImageTypes := slice "svg" "gif" "avif" -}}
 {{- with $blackList -}}
   {{- $regex = replace (delimit . "|") "." "\\." -}}
   {{- $regex = replace $regex "*" ".*" -}}
+  {{- $isBlocked = gt (findRE $regex $.Src | len) 0 -}}
 {{- end -}}
+
+{{- /* Get remote image resource (skip if blocked by black_list) */ -}}
+{{- $cacheRemote := .CacheRemote | default $config.cache_remote | default false -}}
+{{- if not $resource | and $cacheRemote | and (not $isBlocked) -}}
+  {{- with partial "function/get-remote-image.html" (dict "Src" .Src) -}}
+    {{- $resource = . -}}
+  {{- end -}}
+{{- end -}}
+
 {{- /* raster graphics */ -}}
 {{- $rasterTypes := slice "svg" "avif" -}}
 {{- $isRaster := false -}}
 {{- if $resource -}}
-  {{- if $regex -}}
+  {{- if $regex | and (not $isBlocked) -}}
     {{- $isBlocked = gt (findRE $regex $resource.Name | len) 0 -}}
   {{- end -}}
   {{- if not $isBlocked -}}

@@ -1,7 +1,5 @@
 {{- /* Collection Navigation */ -}}
-{{- $params := partial "function/params.html" -}}
-
-{{- if .Params.collections | and $params.collectionNavigation -}}
+{{- if .Params.collections | and (.Param "collection_navigation") -}}
   {{- $collectionTerms := .GetTerms "collections" -}}
   {{- range $collectionTerms -}}
     {{- $termLink := printf `<a href="%v">%v <span>%v・%v</span></span></a>`
@@ -18,7 +16,7 @@
         {{/*  TODO JS 实现 reverse 翻转顺序  */}}
         {{- $pages := (where .Pages "Params.Weight" "!=" nil) | append (where .Pages "Params.Weight" "eq" nil).ByDate -}}
         {{- with $pages.Next $ -}}
-          {{- $capitalizeTitles := .Param "capitalizeTitles" -}}
+          {{- $capitalizeTitles := .Param "capitalize_titles" -}}
           {{- $title := .Params.shortTitle | default .LinkTitle -}}
           {{- $title = cond $capitalizeTitles (title $title) $title -}}
           <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ $title }}">
@@ -27,7 +25,7 @@
           </a>
         {{- end -}}
         {{- with $pages.Prev $ -}}
-          {{- $capitalizeTitles := .Param "capitalizeTitles" -}}
+          {{- $capitalizeTitles := .Param "capitalize_titles" -}}
           {{- $title := .Params.shortTitle | default .LinkTitle -}}
           {{- $title = cond $capitalizeTitles (title $title) $title -}}
           <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ $title }}">

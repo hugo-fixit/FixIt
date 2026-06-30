@@ -43,10 +43,12 @@ _merge = "shallow"
 
 [params]
 version = "1.0.X"
+collection_list = true
+collection_navigation = true
 
 [params.home.profile]
 enable = true
-avatarURL = "/images/fixit-test.png"
+avatar_url = "/images/fixit-test.png"
 
 [params.social]
 
@@ -59,10 +61,6 @@ id = "lruihao"
 weight = 1
 # for twitter cards
 # site = "hugo-fixit"
-
-[params.page]
-collectionList = true
-collectionNavigation = true
 
 [params.author]
 name = "Lruihao"

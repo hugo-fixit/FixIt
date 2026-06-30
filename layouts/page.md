@@ -1,8 +1,7 @@
-{{- $params := partial "function/params.html" -}}
 {{- $author := .Store.Get "author" | default (partial "function/get-author-map.html" .Params.author) -}}
-# {{ cond (.Param "capitalizeTitles") (title .Title) .Title }}
+# {{ cond (.Param "capitalize_titles") (title .Title) .Title }}
 
-{{ if $params.password -}}
+{{ if .Params.password -}}
   _**{{ T "single.encryptedAbstract" }}**_
 {{- else -}}
   {{ .RawContent | replaceRE "\n?{{% fixit-encryptor .+ %}}((\n|.)*){{% /fixit-encryptor %}}\n?" "" }}
@@ -10,6 +9,7 @@
 
 ---
 
-> {{ T "single.author"}}: {{ with $author.link }}[{{ $author.name }}]({{ . }}){{ else }}{{ $author.name }}{{ end }}  
-> URL: {{ .Permalink }}  
-{{ if $params.repost.enable | and (hasPrefix $params.repost.url "http") }}> {{ T "single.repost" }} URL: {{ $params.repost.url }}{{ end }}
+> {{ T "single.author"}}: {{ with $author.link }}[{{ $author.name }}]({{ . }}){{ else }}{{ $author.name }}{{ end }}  {{/* EOL */}}
+> URL: {{ .Permalink }}  {{/* EOL */}}
+{{ $repost := .Param "repost" | default dict -}}
+{{ if $repost.enable | and (hasPrefix $repost.url "http") }}> {{ T "single.repost" }} URL: {{ $repost.url }}{{ end }}

@@ -49,7 +49,7 @@ This article tests the **File Tree** shortcode functionality in the FixIt theme.
 
 #### YAML format
 
-{{< file-tree folderSlash=true >}}
+{{< file-tree folder_slash=true >}}
 - name: project-root
   type: dir
   children:
@@ -99,7 +99,7 @@ type = "file"
 
 TOML with folder slash and level 3:
 
-{{< file-tree file="data/example.toml" level=3 folderSlash=true />}}
+{{< file-tree file="data/example.toml" level=3 folder_slash=true />}}
 
 #### JSON format
 
@@ -107,7 +107,7 @@ TOML with folder slash and level 3:
 
 JSON with folder slash and level 2:
 
-{{< file-tree file="filetree/example.json" level=2 folderSlash=true />}}
+{{< file-tree file="filetree/example.json" level=2 folder_slash=true />}}
 
 #### YAML format
 
@@ -131,15 +131,15 @@ Trying the file not found case (should fallback to next mode):
 
 #### With folder slash
 
-{{< file-tree data="example" folderSlash=true />}}
+{{< file-tree data="example" folder_slash=true />}}
 
 #### With level and folder slash
 
-{{< file-tree data="example" level=2 folderSlash=true />}}
+{{< file-tree data="example" level=2 folder_slash=true />}}
 
 #### Collapsed with ignore
 
-{{< file-tree data="example" level=0 ignoreList="README.md" />}}
+{{< file-tree data="example" level=0 ignore_list="README.md" />}}
 
 ## Filesystem Mode
 
@@ -165,13 +165,13 @@ Trying the file not found case (should fallback to next mode):
 
 {{< file-tree "assets" 0 />}}
 
-{{< file-tree path="assets" level=2 folderSlash=true />}}
+{{< file-tree path="assets" level=2 folder_slash=true />}}
 
 {{< file-tree "assets" -1 />}}
 
 ### With ignore lists
 
-{{< file-tree ignoreList=".hugo_build.lock, public, resources, node_modules" level=2 folderSlash=true />}}
+{{< file-tree ignore_list=".hugo_build.lock, public, resources, node_modules" level=2 folder_slash=true />}}
 
 ### root not exist
 
@@ -220,7 +220,7 @@ type = "file"
 
 ### With parameters
 
-```file-tree {level=2 folderSlash=true ignoreList="config.local.js"}
+```file-tree {level=2 folder_slash=true ignore_list="config.local.js"}
 - name: project
   type: dir
   children:
@@ -242,7 +242,7 @@ type = "file"
 
 ### Fully expanded
 
-```file-tree {level=-1 folderSlash=true}
+```file-tree {level=-1 folder_slash=true}
 - name: backend
   type: dir
   children:

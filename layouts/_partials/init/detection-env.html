@@ -1,5 +1,4 @@
 {{- /* FixIt theme environment detection */ -}}
-{{- $params := partial "function/params.html" -}}
 
 {{- if hugo.IsProduction -}}
   {{- $cdn := .Site.Params.cdn -}}
@@ -14,12 +13,7 @@
   {{- .Site.Store.Set "cdn" $cdn -}}
   {{- .Site.Store.Set "fingerprint" .Site.Params.fingerprint -}}
   {{- .Site.Store.Set "analytics" .Site.Params.analytics -}}
-  {{- .Store.Set "comment" $params.comment -}}
-  {{- if eq .Params.comment true -}}
-    {{- .Store.Set "comment" .Site.Params.page.comment -}}
-  {{- else if eq .Params.comment false -}}
-    {{- .Store.Set "comment" (dict "enable" false) -}}
-  {{- end -}}
+  {{- .Store.Set "comment" (dict "Page" . "Key" "comment" | partial "function/param.html") -}}
 {{- else -}}
   {{- .Site.Store.Set "devOpts" .Site.Params.dev -}}
   {{- if ne .Site.Params.dev.enable true -}}

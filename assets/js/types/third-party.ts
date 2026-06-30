@@ -6,7 +6,7 @@ export interface MermaidConfig {
   securitylevel?: string
   look?: string
   fontfamily?: string
-  layoutloaders?: string[]
+  layoutLoaders?: string[]
   layout?: string
 }
 

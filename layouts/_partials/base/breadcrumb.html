@@ -3,12 +3,12 @@
   <nav aria-label="breadcrumb" class="breadcrumb-container{{ if .Site.Params.breadcrumb.sticky }} sticky{{ end }}">
     <ol class="breadcrumb">
       {{- range .Ancestors.Reverse -}}
-        {{- if .IsHome | and (not .Site.Params.breadcrumb.showHome) -}}
+        {{- if .IsHome | and (not .Site.Params.breadcrumb.show_home) -}}
           {{- continue -}}
         {{- end -}}
 
         {{- $title := "" -}}
-        {{- $capitalizeTitles := .Param "capitalizeTitles" -}}
+        {{- $capitalizeTitles := .Param "capitalize_titles" -}}
         {{- with .Description -}}
           {{- $title = . -}}
         {{- else -}}
@@ -23,14 +23,14 @@
           {{- $innerText = T "single.home" -}}
         {{- else -}}
           {{- $innerText = .Page.Params.shortTitle | default (lower .LinkTitle | T) | default .LinkTitle -}}
-          {{- $innerText = cond ((.Param "breadcrumb.capitalize") | and $capitalizeTitles) (title $innerText) $innerText -}}
+          {{- $innerText = cond (.Site.Params.breadcrumb.capitalize | and $capitalizeTitles) (title $innerText) $innerText -}}
         {{- end -}}
 
         <li class="breadcrumb-item" data-separator="{{ $separator }}"><a href="{{ .RelPermalink }}" title="{{ $title }}">{{ $innerText }}</a></li>
       {{- end -}}
 
       {{- $currentText := .Page.Params.shortTitle | default (lower .LinkTitle | T) | default .LinkTitle -}}
-      {{- $currentText = cond ((.Param "breadcrumb.capitalize") | and (.Param "capitalizeTitles")) (title $currentText) $currentText -}}
+      {{- $currentText = cond (.Site.Params.breadcrumb.capitalize | and (.Param "capitalize_titles")) (title $currentText) $currentText -}}
       <li class="breadcrumb-item active" data-separator="{{ $separator }}" aria-current="page">{{ $currentText }}</li>
     </ol>
   </nav>

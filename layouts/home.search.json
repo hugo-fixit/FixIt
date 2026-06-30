@@ -1,24 +1,23 @@
 {{- if .Site.Params.search.enable -}}
   {{- $index := slice -}}
   {{- $pages := where .Site.RegularPages "Params.password" "eq" nil -}}
-  {{- if .Site.Params.page.hiddenFromSearch -}}
-    {{- $pages = where $pages "Params.hiddenfromsearch" false -}}
+  {{- if .Param "hidden_from_search" -}}
+    {{- $pages = where $pages "Params.hidden_from_search" false -}}
   {{- else -}}
-    {{- $pages = where $pages "Params.hiddenfromsearch" "!=" true -}}
+    {{- $pages = where $pages "Params.hidden_from_search" "!=" true -}}
   {{- end -}}
   {{- range $pages -}}
     {{- $uri := .RelPermalink -}}
-    {{- if $.Site.Params.search.absoluteURL -}}
+    {{- if $.Site.Params.search.absolute_url -}}
       {{- $uri = .Permalink -}}
     {{- end -}}
     {{- $meta := dict "uri" $uri "title" .Title "tags" .Params.tags "categories" .Params.categories "collections" .Params.collections -}}
-    {{- $meta = $.Site.Params.dateFormat | default "2006-01-02" | .PublishDate.Format | dict "date" | merge $meta -}}
+    {{- $meta = $.Site.Params.date_format | default "2006-01-02" | .PublishDate.Format | dict "date" | merge $meta -}}
     {{- with .Description -}}
       {{- $index = $index | append (dict "content" . "objectID" $uri | merge $meta) -}}
     {{- end -}}
-    {{- $params := .Params | merge $.Site.Params.page -}}
     {{/* Extended Markdown syntax */}}
-    {{- $content := dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" -}}
+    {{- $content := dict "Content" .Content "Ruby" (.Param "ruby") "Fraction" (.Param "fraction") "Fontawesome" (.Param "fontawesome") | partial "function/content.html" -}}
     {{- if ne $.Site.Params.search.anchorify false -}}
       {{- /* When anchorify is enabled (default), create separate index entries for each heading */ -}}
       {{- $anchor := "" -}}
@@ -61,8 +60,8 @@
                   {{- end -}}
                   {{/* Plainify and remove (\n, \t) */}}
                   {{- $contentj = $contentj | plainify | replaceRE `[\n\t ]+` " " -}}
-                  {{- if gt $.Site.Params.search.contentLength 0 -}}
-                    {{- $contentj = substr $contentj 0 $.Site.Params.search.contentLength -}}
+                  {{- if gt $.Site.Params.search.content_length 0 -}}
+                    {{- $contentj = substr $contentj 0 $.Site.Params.search.content_length -}}
                   {{- end -}}
                   {{- if $contentj | and (ne $contentj " ") -}}
                     {{- $one := printf "%v:%v:%v" $uri $i $j | dict "content" $contentj "heading" $headingText "uri" (printf "%v#%v" $uri $anchor) "objectID" | merge $meta -}}
@@ -86,8 +85,8 @@
           {{- end -}}
           {{/* Plainify and remove (\n, \t) */}}
           {{- $contentj = $contentj | plainify | replaceRE `[\n\t ]+` " " -}}
-          {{- if gt $.Site.Params.search.contentLength 0 -}}
-            {{- $contentj = substr $contentj 0 $.Site.Params.search.contentLength -}}
+          {{- if gt $.Site.Params.search.content_length 0 -}}
+            {{- $contentj = substr $contentj 0 $.Site.Params.search.content_length -}}
           {{- end -}}
           {{- if $contentj | and (ne $contentj " ") -}}
             {{- $one := printf "%v:%v:%v" $uri $i $j | dict "content" $contentj "objectID" | merge $meta -}}

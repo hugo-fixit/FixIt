@@ -1,30 +1,29 @@
 {{- define "title" -}}
-  {{- cond (.Param "capitalizeTitles") (title .Title) .Title -}}
-  {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
+  {{- cond (.Param "capitalize_titles") (title .Title) .Title -}}
+  {{- if .Site.Params.with_site_title }} {{ .Site.Params.title_delimiter }} {{ .Site.Title }}{{- end -}}
 {{- end -}}
 
 {{- define "content" -}}
-  {{- $params := partial "function/params.html" -}}
   {{- $pagefindEnabled := and .Site.Params.search.enable (eq .Site.Params.search.type "pagefind") -}}
   <article class="page single special">
     <div class="header">
       {{- /* Title */ -}}
-      <h1 class="single-title animate__animated animate__pulse animate__faster"{{ if $pagefindEnabled }} data-pagefind-body{{ end }}>{{- cond (.Param "capitalizeTitles") (title .Title) .Title -}}</h1>
+      <h1 class="single-title animate__animated animate__pulse animate__faster"{{ if $pagefindEnabled }} data-pagefind-body{{ end }}>{{- cond (.Param "capitalize_titles") (title .Title) .Title -}}</h1>
 
       {{- /* Subtitle */ -}}
-      {{- with $params.subtitle -}}<p class="single-subtitle animate__animated animate__fadeIn">{{ . | $.RenderString }}</p>{{- end -}}
+      {{- with .Params.subtitle -}}<p class="single-subtitle animate__animated animate__fadeIn">{{ . | $.RenderString }}</p>{{- end -}}
     </div>
 
     {{- /* Content */ -}}
-    {{- $content := dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+    {{- $content := dict "Content" .Content "Ruby" (.Param "ruby") "Fraction" (.Param "fraction") "Fontawesome" (.Param "fontawesome") | partial "function/content.html" | safeHTML -}}
     <div class="content" id="content"{{ if $pagefindEnabled }} data-pagefind-body{{ end }}>
-      {{- if not $params.password -}}
+      {{- if not .Params.password -}}
         {{- $content -}}
       {{- end -}}
     </div>
 
     {{- /* Content Encryption */ -}}
-    {{- dict "Content" $content "Password" $params.password "Message" $params.message "Page" . | partial "plugin/fixit-encryptor.html" -}}
+    {{- dict "Content" $content "Password" .Params.password "Message" .Params.message "Page" . | partial "plugin/fixit-encryptor.html" -}}
   </article>
 {{- end -}}
 

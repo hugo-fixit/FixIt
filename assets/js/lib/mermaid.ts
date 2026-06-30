@@ -43,13 +43,6 @@ interface RenderOptions {
   darkMode: boolean
 }
 
-interface MermaidBootstrapOptions {
-  mermaidSource: string
-  zenumlSource?: string
-  layoutLoaderSources?: string[]
-  config: MermaidConfig
-}
-
 let mermaid: MermaidRuntimeModule | null = null
 let config: MermaidConfig = {}
 let hasBoundGlobalEvents = false
@@ -856,10 +849,12 @@ function unwrapModule<T>(mod: { default?: T } | T): T {
 /**
  * Bootstrap entry used by template-injected script.
  * Loads Mermaid and optional extensions via dynamic import and hands runtime to initMermaidRuntime.
- * @param options Bootstrap options provided by template-injected script.
+ * @param config Mermaid configuration with CDN URLs for core and optional modules.
  */
-export async function bootstrapMermaid(options: MermaidBootstrapOptions): Promise<void> {
-  const { mermaidSource, zenumlSource = '', layoutLoaderSources = [], config } = options
+export async function bootstrapMermaid(config: MermaidConfig): Promise<void> {
+  const mermaidSource = config.cdn ?? 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs'
+  const zenumlSource = config.zenuml ?? ''
+  const layoutLoaderSources = config.layoutLoaders ?? []
 
   try {
     // Mermaid core module is required; optional modules degrade gracefully.

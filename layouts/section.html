@@ -1,6 +1,6 @@
 {{- define "title" -}}
   {{- title (.Params.Title | default ((T .Section) | default .Section | dict "Some" | T "allSome")) -}}
-  {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
+  {{- if .Site.Params.with_site_title }} {{ .Site.Params.title_delimiter }} {{ .Site.Title }}{{- end -}}
 {{- end -}}
 
 {{- define "content" -}}
@@ -53,10 +53,10 @@
               {{- if eq $repost.enable true -}}
                 {{- dict "Class" "fa-solid fa-share text-success me-1" | partial "plugin/icon.html" -}}
               {{- end -}}
-              {{- cond (.Param "capitalizeTitles") (title .LinkTitle) .LinkTitle -}}
+              {{- cond (.Param "capitalize_titles") (title .LinkTitle) .LinkTitle -}}
             </a>
             <span class="archive-item-date" title='{{ "2006-01-02 15:04:05" | .Date.Format }}'>
-              {{- .Date | dateFormat ($.Site.Params.section.dateFormat | default "01-02") -}}
+              {{- .Date | dateFormat ($.Site.Params.section.date_format | default "01-02") -}}
             </span>
           </article>
         {{- end -}}

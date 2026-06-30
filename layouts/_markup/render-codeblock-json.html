@@ -1,6 +1,11 @@
-{{- $jsonViewer := .Attributes | merge .Page.Params.jsonViewer | merge .Page.Site.Params.jsonViewer -}}
+{{- $jsonViewer := .Attributes | merge .Page.Params.json_viewer | merge .Page.Site.Params.json_viewer -}}
 {{- if $jsonViewer.enable | and (ne hugo.Context.MarkupScope "home") -}}
-  {{- $attrs := printf `expand-depth="%v"` $jsonViewer.expanddepth -}}
+  {{- /* Deprecated camelCase attribute support: Hugo lowercases Markdown attributes, so expandDepth → expanddepth */ -}}
+  {{- if isset .Attributes "expanddepth" | and (not (isset .Attributes "expand_depth")) -}}
+    {{- warnidf "deprecated-json-viewer-attr" "The attribute `expandDepth` is deprecated since v1.0.0, use `expand_depth` instead. See %s" .Position -}}
+    {{- $jsonViewer = dict "expand_depth" .Attributes.expanddepth | merge $jsonViewer -}}
+  {{- end -}}
+  {{- $attrs := printf `expand-depth="%v"` $jsonViewer.expand_depth -}}
   {{- $copyable := false -}}
   {{- with $jsonViewer.copyable -}}
     {{- $copyable = dict "copyText" (T "assets.copyText") "copiedText" (T "assets.copiedText") -}}
