@@ -1,4 +1,17 @@
-{{- $rvc := (.Page.Params | merge .Page.Site.Params).repoVersion -}}
+{{- /*
+  Version badge shortcode.
+  Renders an inline SVG version badge linking to the repository release/tag.
+
+  @param {String} 0 - The version string (e.g., "v1.0.0")
+  @param {String} [1="new"] - The type: "new", "changed", "deleted", "deprecated"
+  @param {String} [2] - Custom URL override (defaults to repo_version.url)
+  @param {String} [3] - Custom repo name override (defaults to repo_version.name)
+
+  @example
+  {{< version "v1.0.0" >}}
+  {{< version "v0.4.5" "deprecated" >}}
+*/ -}}
+{{- $rvc := dict "Page" .Page "Key" "repo_version" | partial "function/param.html" | default dict -}}
 {{- $version := .Get 0 -}}
 {{- $type := .Get 1 | default "new" | lower -}}
 {{- $label := T (printf "version.%v" $type) | default (upper $type) -}}

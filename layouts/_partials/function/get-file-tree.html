@@ -7,24 +7,24 @@
 
   NOTE: For performance reasons, the recursion depth is limited to 10 levels by default.
 
-  @param {string} root - The root path to scan (relative to project root or contentDir)
-  @param {string} [path] - The directory path for recursive calls
-  @param {int} [level=10] - Descend only level directories deep
-  @param {int} [deep=0] - Current depth level for recursive calls
-  @param {array} [ignoreList] - List of file or folder names to ignore
-  @param {boolean} [isRecursive=false] - Internal flag for recursive calls
-  @param {string} [name] - Project name for the root node, if set to `{path}`, uses the full root path
-  @param {string} [lang] - Page language for multilingual sites
-  @param {boolean} [log=false] - Whether to log warnings
-  @return {array} Array of tree items with structure: {name, type, children?}, or empty array if root doesn't exist
+  @param {String} root - The root path to scan (relative to project root or contentDir)
+  @param {String} [path] - The directory path for recursive calls
+  @param {Int} [level=10] - Descend only level directories deep
+  @param {Int} [deep=0] - Current depth level for recursive calls
+  @param {Array} [ignore_list] - List of file or folder names to ignore
+  @param {Boolean} [is_recursive=false] - Internal flag for recursive calls
+  @param {String} [name] - Project name for the root node, if set to `{path}`, uses the full root path
+  @param {String} [lang] - Page language for multilingual sites
+  @param {Boolean} [log=false] - Whether to log warnings
+  @return {Array} Array of tree items with structure: {name, type, children?}, or empty array if root doesn't exist
 */ -}}
 
 {{- $result := slice -}}
 {{- $level := .level | default 10 -}}
 {{- $deep := .deep | default 0 -}}
-{{- $isRecursive := .isRecursive | default false -}}
+{{- $isRecursive := .is_recursive | default false -}}
 {{- $_ignoreList := slice ".DS_Store" "Thumbs.db" ".directory" ".git" "node_modules" "public" -}}
-{{- $ignoreList := .ignoreList | default slice | union $_ignoreList -}}
+{{- $ignoreList := .ignore_list | default slice | union $_ignoreList -}}
 {{- $_debug := eq hugo.Environment "debug" | and hugo.IsServer -}}
 
 {{- if $isRecursive -}}
@@ -41,7 +41,7 @@
       {{- $item := dict "name" .Name "type" (cond .IsDir "dir" "file") -}}
       {{- if .IsDir -}}
         {{- $fullPath := path.Clean (path.Join $path .Name) -}}
-        {{- $childOptions := dict "path" $fullPath "deep" (add $deep 1) "ignoreList" $ignoreList "isRecursive" true -}}
+        {{- $childOptions := dict "path" $fullPath "deep" (add $deep 1) "ignore_list" $ignoreList "is_recursive" true -}}
         {{- $children := partial "function/get-file-tree.html" $childOptions -}}
         {{- $item = merge $item (dict "children" $children) -}}
       {{- end -}}
@@ -85,7 +85,7 @@
 
     {{- /* Build children recursively */ -}}
     {{- if $_debug -}}{{- warnf "[file-tree]> %v:" $rootLabel -}}{{- end -}}
-    {{- $childOptions := dict "path" $root "deep" (add $deep 1) "level" $level "ignoreList" $ignoreList "isRecursive" true -}}
+    {{- $childOptions := dict "path" $root "deep" (add $deep 1) "level" $level "ignore_list" $ignoreList "is_recursive" true -}}
     {{- $children := partial "function/get-file-tree.html" $childOptions -}}
     
     {{- /* Return root item with children */ -}}

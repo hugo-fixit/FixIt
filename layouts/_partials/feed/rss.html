@@ -1,8 +1,12 @@
 {{- $pages := .Pages -}}
 {{- /* Front matter: password */ -}}
 {{- $pages = where $pages "Params.password" "eq" nil -}}
-{{- /* Front matter: hiddenFromFeed */ -}}
-{{- $pages = where $pages "Params.hiddenFromFeed" "ne" true -}}
+{{- /* Front matter: hidden_from_feed */ -}}
+{{- if .Site.Params.hidden_from_feed -}}
+  {{- $pages = where $pages "Params.hidden_from_feed" false -}}
+{{- else -}}
+  {{- $pages = where $pages "Params.hidden_from_feed" "!=" true -}}
+{{- end -}}
 {{- if ge .Config.limit 1 -}}
   {{- $pages = $pages | first .Config.limit -}}
 {{- end -}}
@@ -13,10 +17,10 @@
     <title>{{ .Title }}</title>
     <link>{{ .Permalink }}</link>
     <description>{{ .Site.Params.description | default .Site.Title }}</description>
-    {{- if and (.Site.Params.feed.follow.feedId) (.Site.Params.feed.follow.userId) }}
+    {{- if and (.Site.Params.feed.follow.feed_id) (.Site.Params.feed.follow.user_id) }}
     <follow_challenge>
-      <feedId>{{ .Site.Params.feed.follow.feedId }}</feedId>
-      <userId>{{ .Site.Params.feed.follow.userId }}</userId>
+      <feedId>{{ .Site.Params.feed.follow.feed_id }}</feedId>
+      <userId>{{ .Site.Params.feed.follow.user_id }}</userId>
     </follow_challenge>
     {{- end }}
     <generator>Hugo {{ hugo.Version }} &amp; FixIt {{ hugo.Store.Get "version" }}</generator>
@@ -29,19 +33,9 @@
     {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
     {{- end }}
     {{- range $page := $pages }}
-    {{- $params := .Params | merge .Site.Params.Page }}
-    {{- $fullText := ((.Params.feed | default dict) | merge $.Config ).fulltext }}
+    {{- $fullText := ((.Params.feed | default dict) | merge $.Config ).full_text }}
     {{- $author := partial "function/get-author-map.html" .Params.author }}
-    {{- $image := $params.featuredimagepreview | default $params.featuredimage }}
-    {{- with dict "Path" $image "Resources" .Resources | partial "function/resource.html" }}
-      {{- $image = .Permalink }}
-    {{- end }}
-    {{- with .Resources.GetMatch "featured-image" }}
-      {{- $image = .Permalink }}
-    {{- end }}
-    {{- with .Resources.GetMatch "featured-image-preview" }}
-      {{- $image = .Permalink }}
-    {{- end }}
+    {{- $cover := dict "Page" . "Preview" true "Build" true | partial "function/get-cover.html" -}}
     <item>
       <title>{{ .Title }}</title>
       <link>{{ .Permalink }}</link>
@@ -55,7 +49,7 @@
       {{- end }}
       {{- if $fullText }}
       <description>
-        {{- dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome "FeaturedImage" $image | partial "function/xml-content.html" -}}
+        {{- dict "Content" .Content "Ruby" (.Param "ruby") "Fraction" (.Param "fraction") "Fontawesome" (.Param "fontawesome") "FeaturedImage" $cover.URL | partial "function/xml-content.html" -}}
       </description>
       {{- else }}
       <description>{{ (.Summary | default .Description | default .Title) | transform.XMLEscape | safeHTML }}</description>

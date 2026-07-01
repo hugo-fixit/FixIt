@@ -43,13 +43,6 @@ interface RenderOptions {
   darkMode: boolean
 }
 
-interface MermaidBootstrapOptions {
-  mermaidSource: string
-  zenumlSource?: string
-  layoutLoaderSources?: string[]
-  config: MermaidConfig
-}
-
 let mermaid: MermaidRuntimeModule | null = null
 let config: MermaidConfig = {}
 let hasBoundGlobalEvents = false
@@ -179,8 +172,12 @@ function isRenderContextActive(el: Element): boolean {
     return false
 
   const panel = el.closest('.tab-panel')
-  if (panel instanceof HTMLElement && panel.hidden)
-    return false
+  if (panel) {
+    // tab-container uses slot-based hiding; check actual layout visibility
+    const panelRect = panel.getBoundingClientRect()
+    if (panelRect.width === 0 && panelRect.height === 0)
+      return false
+  }
 
   return true
 }
@@ -231,11 +228,11 @@ function ensureMermaidInitialized(theme: string, darkMode: boolean): void {
     startOnLoad: false,
     darkMode,
     theme,
-    securityLevel: config.securitylevel,
+    securityLevel: config.securityLevel,
     look: config.look,
     layout: config.layout,
-    fontFamily: config.fontfamily,
-    altFontFamily: config.fontfamily,
+    fontFamily: config.fontFamily,
+    altFontFamily: config.fontFamily,
   })
 }
 
@@ -271,7 +268,7 @@ async function renderMermaidElement(el: Element | null, options: RenderOptions):
     try {
       const result = await mermaid.render(id, source, el)
       const svg = result?.svg ?? ''
-      el.innerHTML = svg
+      svg && (el.innerHTML = svg)
       if (typeof result?.bindFunctions === 'function') {
         try {
           result.bindFunctions(el)
@@ -681,6 +678,12 @@ function bindTabContainerChanged(): void {
     if (!panel)
       return
     observeMermaidContainers(panel, true)
+    // Also schedule neutral layer render for the newly visible panel
+    const neutralNodes = panel.querySelectorAll<Element>('.mermaid-neutral')
+    neutralNodes.forEach((el) => {
+      if (!el.hasAttribute('data-processed'))
+        void renderMermaidElement(el, { theme: 'neutral', darkMode: false })
+    })
   }, false)
 }
 
@@ -856,10 +859,12 @@ function unwrapModule<T>(mod: { default?: T } | T): T {
 /**
  * Bootstrap entry used by template-injected script.
  * Loads Mermaid and optional extensions via dynamic import and hands runtime to initMermaidRuntime.
- * @param options Bootstrap options provided by template-injected script.
  */
-export async function bootstrapMermaid(options: MermaidBootstrapOptions): Promise<void> {
-  const { mermaidSource, zenumlSource = '', layoutLoaderSources = [], config } = options
+export async function bootstrapMermaid(): Promise<void> {
+  config = window.config?.mermaid ?? {}
+  const mermaidSource = config.cdn || 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs'
+  const zenumlSource = config.zenuml || ''
+  const layoutLoaderSources = config.layoutLoaders || []
 
   try {
     // Mermaid core module is required; optional modules degrade gracefully.

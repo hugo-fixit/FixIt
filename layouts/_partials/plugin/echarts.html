@@ -3,15 +3,15 @@
   - Skips rendering when MarkupScope is home.
   - Supports chart options from inline content, data key, or resource file.
   - Supports JavaScript template mode via js/file options.
-  @param {Object} [.Options] render options from shortcode or code fence attributes
-  @param {String} [.Options.width] chart container width (default: 100%)
-  @param {String} [.Options.height] chart container height (default: 30rem)
-  @param {Boolean} [.Options.js] whether to treat content as JS option builder
-  @param {Boolean} [.Options.async] whether JS template executes asynchronously
-  @param {String} [.Options.data] key of data source under data/echarts
-  @param {String} [.Options.file] local resource path for js/json/yaml/toml source
-  @param {String} [.Inner] inline chart option content
-  @param {Object} [.Page] current page context
+  @param {Object} [.Options] - Render options from shortcode or code fence attributes
+  @param {String} [.Options.width] - Chart container width (default: 100%)
+  @param {String} [.Options.height] - Chart container height (default: 30rem)
+  @param {Boolean} [.Options.js] - Whether to treat content as JS option builder
+  @param {Boolean} [.Options.async] - Whether JS template executes asynchronously
+  @param {String} [.Options.data] - Key of data source under data/echarts
+  @param {String} [.Options.file] - Local resource path for js/json/yaml/toml source
+  @param {String} [.Inner] - Inline chart option content
+  @param {Object} [.Page] - Current page context
 */ -}}
 
 {{- if ne hugo.Context.MarkupScope "home" -}}

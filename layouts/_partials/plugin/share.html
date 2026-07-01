@@ -2,13 +2,14 @@
   Social share buttons renderer.
   - Reads share switches from merged theme/page params.
   - Outputs provider-specific sharer attributes for supported platforms.
-  @param {Object} .Page current page context
+  @param {Object} .Page - Current page context
 */ -}}
 
-{{- $share := (partial "function/params.html").share | default dict -}}
+{{- $share := dict "Page" . "Key" "share" | partial "function/param.html" | default dict -}}
 
 {{- if $share.enable -}}
-  {{- $title := cond (.Param "capitalizeTitles") (title .Title) .Title -}}
+  {{- $title := cond (.Param "capitalize_titles") (title .Title) .Title -}}
+  {{- $cover := dict "Page" . "Preview" true "Build" true | partial "function/get-cover.html" -}}
   {{- $twitterVia := "" -}}
   {{- with .Site.Params.social.twitter -}}
     {{- if reflect.IsMap . -}}
@@ -54,7 +55,7 @@
 
   {{- /* 006: Pinterest */ -}}
   {{- if $share.Pinterest -}}
-    <a href="javascript:void(0);" title="{{ T `shareOn` }} Pinterest" data-sharer="pinterest" data-url="{{ .Permalink }}"{{ with .Description }} data-description="{{ . }}"{{ end }}{{ with .Params.featuredImage }} data-image="{{ . }}"{{ end }}>
+    <a href="javascript:void(0);" title="{{ T `shareOn` }} Pinterest" data-sharer="pinterest" data-url="{{ .Permalink }}"{{ with .Description }} data-description="{{ . }}"{{ end }}{{ with $cover.URL }} data-image="{{ . }}"{{ end }}>
       {{- dict "Class" "fa-brands fa-pinterest" | partial "plugin/icon.html" -}}
     </a>
   {{ end -}}
@@ -82,14 +83,14 @@
 
   {{- /* 010: VK */ -}}
   {{- if $share.VK -}}
-    <a href="javascript:void(0);" title="{{ T `shareOn` }} VK" data-sharer="vk" data-url="{{ .Permalink }}" data-title="{{ $title }}"{{ with .Description }} data-caption="{{ . }}"{{ end }}{{ with .Params.featuredImage }} data-image="{{ . }}"{{ end }}>
+    <a href="javascript:void(0);" title="{{ T `shareOn` }} VK" data-sharer="vk" data-url="{{ .Permalink }}" data-title="{{ $title }}"{{ with .Description }} data-caption="{{ . }}"{{ end }}{{ with $cover.URL }} data-image="{{ . }}"{{ end }}>
       {{- dict "Class" "fa-brands fa-vk" | partial "plugin/icon.html" -}}
     </a>
   {{ end -}}
 
   {{- /* 011: Buffer */ -}}
   {{- if $share.Buffer -}}
-    <a href="javascript:void(0);" title="{{ T `shareOn` }} Buffer" data-sharer="buffer" data-url="{{ .Permalink }}" data-title="{{ $title }}"{{ with $twitterVia }} data-via="{{ strings.TrimPrefix `@` . }}"{{ end }}{{ with .Params.featuredImage }} data-picture="{{ . }}"{{ end }}>
+    <a href="javascript:void(0);" title="{{ T `shareOn` }} Buffer" data-sharer="buffer" data-url="{{ .Permalink }}" data-title="{{ $title }}"{{ with $twitterVia }} data-via="{{ strings.TrimPrefix `@` . }}"{{ end }}{{ with $cover.URL }} data-picture="{{ . }}"{{ end }}>
       {{- dict "Class" "fa-brands fa-buffer" | partial "plugin/icon.html" -}}
     </a>
   {{ end -}}
@@ -131,7 +132,7 @@
 
   {{- /* 017: 微博 */ -}}
   {{- if $share.Weibo -}}
-    <a href="javascript:void(0);" title="{{ T `shareOn` }} 微博" data-sharer="weibo" data-url="{{ .Permalink }}" data-title="{{ $title }}"{{ with .Params.featuredImage }} data-image="{{ . }}"{{ end }}{{ with .Site.Params.Social.Weibo }} data-ralateuid="{{ . }}"{{ end }}>
+    <a href="javascript:void(0);" title="{{ T `shareOn` }} 微博" data-sharer="weibo" data-url="{{ .Permalink }}" data-title="{{ $title }}"{{ with $cover.URL }} data-image="{{ . }}"{{ end }}{{ with .Site.Params.Social.Weibo }} data-ralateuid="{{ . }}"{{ end }}>
       {{- dict "Class" "fa-brands fa-weibo" | partial "plugin/icon.html" -}}
     </a>
   {{ end -}}

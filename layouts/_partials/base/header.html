@@ -3,7 +3,7 @@
 
 {{- /* Desktop header */ -}}
 <header class="desktop animate__faster{{ if .Site.Params.header.blur }} is-blur{{ end }}" id="header-desktop">
-  <div class="header-wrapper"{{ if .Site.Params.githubCorner.enable }} data-github-corner="{{ .Site.Params.githubCorner.position }}"{{ end }}>
+  <div class="header-wrapper"{{ if .Site.Params.github_corner.enable }} data-github-corner="{{ .Site.Params.github_corner.position }}"{{ end }}>
     <div class="header-title">
       <a href="{{ $relLangURL }}" title="{{ .Site.Title }}" class="header-title-link">
         {{- with .Site.Params.header.title -}}

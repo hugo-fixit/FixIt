@@ -1,6 +1,6 @@
 {{- define "title" -}}
   {{- .Params.Title | default (T "archives") -}}
-  {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
+  {{- if .Site.Params.with_site_title }} {{ .Site.Params.title_delimiter }} {{ .Site.Title }}{{- end -}}
 {{- end -}}
 
 {{- define "content" -}}
@@ -53,10 +53,10 @@
                 {{- dict "Class" "fa-solid fa-share text-success me-1" | partial "plugin/icon.html" -}}
               {{- end -}}
               {{- /* Use the original title after archiving the articles */ -}}
-              {{- cond (.Param "capitalizeTitles") (title .Title) .Title -}}
+              {{- cond (.Param "capitalize_titles") (title .Title) .Title -}}
             </a>
             <span class="archive-item-date" title='{{ "2006-01-02 15:04:05" | .Date.Format }}'>
-              {{- .Date | dateFormat ($.Site.Params.archives.dateFormat | default "01-02") -}}
+              {{- .Date | dateFormat ($.Site.Params.archives.date_format | default "01-02") -}}
             </span>
           </article>
         {{- end -}}

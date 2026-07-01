@@ -6,6 +6,113 @@
   {{- $warns = $warns | append "The parameter `params.externalIcon` is deprecated since v1.0.0, use `params.link.external_icon` instead." -}}
 {{- end -}}
 
+{{- /* params.page structural migration warnings */ -}}
+{{- $deprecatedPageKeys := slice
+  "capitalize_titles" "summary_plainify" "author_avatar"
+  "hidden_from_home_page" "hidden_from_search" "hidden_from_related" "hidden_from_feed"
+  "twemoji" "lightgallery" "ruby" "fraction" "fontawesome" "license"
+  "page_style" "auto_bookmark" "show_lastmod" "word_count" "reading_time" "end_flag"
+  "instant_page" "collection_list" "collection_navigation" "edit_url" "source_url"
+  "featured_image" "featured_image_preview"
+  "toc" "expiration_reminder" "heading" "math" "mapbox"
+  "related" "reward" "share" "comment" "library" "seo"
+-}}
+{{- $onlyFrontMatters := slice "subtitle" "featured_image" "featured_image_preview" "repost" -}}
+{{- range $deprecatedPageKeys -}}
+  {{- $newKey := . -}}
+  {{- $oldKey := replace . "_" "" -}}
+  {{- $oldDisplay := partial "function/camel-case.html" $newKey -}}
+  {{- if (in $.Site.Params.page $oldKey) | and (not (in $onlyFrontMatters $newKey)) -}}
+    {{- $warns = $warns | append (printf "The parameter `params.page.%s` has been removed since v1.0.0, use `params.%s` instead." $oldDisplay $newKey) -}}
+  {{- end -}}
+  {{- if (in $.Site.Params.page $oldKey) | and (in $onlyFrontMatters $newKey) -}}
+    {{- $warns = $warns | append (printf "The parameter `params.page.%s` has been removed since v1.0.0, use front matter parameter `%s` instead." $oldDisplay $newKey) -}}
+  {{- end -}}
+  {{- if (in $.Page.Params $oldKey) | and (in $newKey "_") -}}
+    {{- $warns = $warns | append (printf "Front matter parameter `%s` is deprecated since v1.0.0, use `%s` instead." $oldDisplay $newKey) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* camelCase → snake_case param/section rename warnings */ -}}
+{{- $deprecatedKeys := slice
+  "default_theme"
+  "date_format"
+  "with_site_title"
+  "disable_theme_inject"
+  "title_delimiter"
+  "index_with_subtitle"
+  "enable_translation_merge"
+  "tag_cloud"
+  "post_chat"
+  "post_summary"
+  "git_info"
+  "back_to_top"
+  "reading_progress"
+  "github_corner"
+  "recently_updated"
+  "json_viewer"
+  "custom_partials"
+  "task_list"
+  "repo_version"
+-}}
+{{- range $deprecatedKeys -}}
+  {{- $newKey := . -}}
+  {{- $oldKey := replace . "_" "" -}}
+  {{- $oldDisplay := partial "function/camel-case.html" $newKey -}}
+  {{- with index $.Site.Params $oldKey -}}
+    {{- $warns = $warns | append (printf "The parameter `params.%s` has been removed since v1.0.0, use `params.%s` instead." $oldDisplay $newKey) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Nested camelCase key rename warnings */ -}}
+{{- $deprecatedNestedKeys := dict
+  "search" (slice "content_length" "absolute_url" "max_result_length" "snippet_length" "highlight_tag")
+  "search.algolia" (slice "app_id" "search_key")
+  "header" (slice "desktop_mode" "mobile_mode")
+  "breadcrumb" (slice "show_home")
+  "navigation" (slice "in_section")
+  "footer.powered" (slice "hugo_logo" "theme_logo")
+  "footer" (slice "site_time")
+  "home.profile" (slice "only_first_page" "gravatar_email" "avatar_url" "avatar_menu")
+  "home.posts" (slice "image_preview")
+  "watermark" (slice "row_spacing" "col_spacing" "font_size" "font_family")
+  "busuanzi" (slice "site_views" "page_views")
+  "image" (slice "cache_remote" "black_list")
+  "mermaid" (slice "security_level" "font_family" "layout_loaders")
+  "codeblock" (slice "wrapper_class" "max_shown_lines" "line_nos_toggler" "line_wrap_toggler")
+  "filetree" (slice "folder_slash" "ignore_list")
+  "math.katex" (slice "copy_tex" "throw_on_error" "error_color")
+  "math.mathjax.options" (slice "enable_menu" "skip_html_tags" "ignore_html_class")
+  "post_summary" (slice "post_url" "word_limit" "typing_animate" "beginning_text" "loading_text")
+-}}
+{{- range $sectionPath, $keys := $deprecatedNestedKeys -}}
+  {{- $parts := split $sectionPath "." -}}
+  {{- $section := $.Site.Params -}}
+  {{- $valid := true -}}
+  {{- range $parts -}}
+    {{- if reflect.IsMap $section -}}
+      {{- $section = index $section . -}}
+    {{- else -}}
+      {{- $valid = false -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $valid | and (reflect.IsMap $section) -}}
+    {{- range $keys -}}
+      {{- $newKey := . -}}
+      {{- $oldKey := replace . "_" "" -}}
+      {{- $oldDisplay := partial "function/camel-case.html" $newKey -}}
+      {{- with index $section $oldKey -}}
+        {{- $warns = $warns | append (printf "The parameter `params.%s.%s` has been removed since v1.0.0, use `params.%s.%s` instead." $sectionPath $oldDisplay $sectionPath $newKey) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Front matter key migration warnings */ -}}
+{{- with $.Page.Params.link_guard -}}
+  {{- $warns = $warns | append "Front matter parameter `link_guard` has been removed since v1.0.0, use `link.guard` instead." -}}
+{{- end -}}
+
 {{- if fileExists "assets/css/_custom.scss" -}}
   {{- $warns = $warns | append "The file `assets/css/_custom.scss` is deprecated. Please move your custom styles to `assets/scss/custom.scss`." -}}
 {{- end -}}

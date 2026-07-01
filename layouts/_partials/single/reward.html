@@ -1,4 +1,4 @@
-{{- $reward := .Store.Get "reward" -}}
+{{- $reward := dict "Page" . "Key" "reward" | partial "function/param.html" -}}
 {{- $author := .Store.Get "author" -}}
 {{- $options := dict "Reward" $reward "Id" "fi-reward" "Author" $author.name -}}
 {{- partial "plugin/reward.html" $options -}}

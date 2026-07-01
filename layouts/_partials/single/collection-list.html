@@ -1,7 +1,5 @@
 {{- /* Collection List */ -}}
-{{- $params := partial "function/params.html" -}}
-
-{{- if .Params.collections | and $params.collectionList -}}
+{{- if .Params.collections | and (.Param "collection_list") -}}
   {{- $collectionTerms := .GetTerms "collections" -}}
   {{- range $collectionTerms -}}
     {{- $pages := (where .Pages "Params.Weight" "!=" nil) | append (where .Pages "Params.Weight" "eq" nil).ByDate -}}
@@ -19,7 +17,7 @@
         <nav>
           <ul class="collection-list">
             {{- range $key, $page := $pages -}}
-              {{- $capitalizeTitles := $page.Param "capitalizeTitles" -}}
+              {{- $capitalizeTitles := $page.Param "capitalize_titles" -}}
               {{- $title := $page.Params.shortTitle | default $page.LinkTitle -}}
               {{- $title = cond $capitalizeTitles (title $title) $title -}}
               <li class="collection-item">
@@ -34,7 +32,7 @@
           </ul>
           <div class="collection-nav-simple">
             {{- with $pages.Next $ -}}
-              {{- $capitalizeTitles := .Param "capitalizeTitles" -}}
+              {{- $capitalizeTitles := .Param "capitalize_titles" -}}
               <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ cond $capitalizeTitles (title .LinkTitle) .LinkTitle }}">
                 {{- dict "Class" "fa-solid fa-angle-left" | partial "plugin/icon.html" -}}
               </a>
@@ -43,7 +41,7 @@
             {{- end -}}
             <span class="text-secondary">{{ add $currentKey 1 }}/{{ $pages.Len }}</span>
             {{- with $pages.Prev $ -}}
-              {{- $capitalizeTitles := .Param "capitalizeTitles" -}}
+              {{- $capitalizeTitles := .Param "capitalize_titles" -}}
               <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ cond $capitalizeTitles (title .LinkTitle) .LinkTitle }}">
                 {{- dict "Class" "fa-solid fa-angle-right" | partial "plugin/icon.html" -}}
               </a>

@@ -1,16 +1,8 @@
-{{- $params := .Params | merge .Site.Params.page -}}
-
 <article class="single summary" itemscope itemtype="http://schema.org/Article">
   {{- /* Featured image */ -}}
-  {{- if ne .Site.Params.home.posts.imagePreview false -}}
-    {{- $image := $params.featuredimagepreview | default $params.featuredimage -}}
-    {{- $matches := slice -}}
-    {{- if .Resources.GetMatch "featured-image-preview" -}}
-      {{- $matches = $matches | append "featured-image-preview" -}}
-    {{- else if .Resources.GetMatch "featured-image" -}}
-      {{- $matches = $matches | append "featured-image" -}}
-    {{- end -}}
-    {{- if $image | or (gt (len $matches) 0) -}}
+  {{- if ne .Site.Params.home.posts.image_preview false -}}
+    {{- $cover := dict "Page" . "Preview" true | partial "function/get-cover.html" -}}
+    {{- if $cover.Source | or (gt (len $cover.Matches) 0) -}}
       <div class="featured-image-preview">
         <a href="{{ $.RelPermalink }}" aria-label="{{ $.Title }}">
           {{- $optim := slice
@@ -18,7 +10,7 @@
             (dict "Process" "fill 1200x504 Center webp" "descriptor" "1200w")
             (dict "Process" "fill 1600x672 Center webp" "descriptor" "1600w")
           -}}
-          {{- dict "Src" $image "Title" $.Title "Resources" $.Resources "Matches" $matches "Loading" "eager" "Width" "800" "Height" "336" "Sizes" "(max-width: 679.9px) 100vw, (max-width: 959.9px) 80vw, (max-width: 1439.9px) 56vw, 800px" "OptimConfig" $optim "Alt" (printf "Featured image for %v" $.Title) | partial "plugin/image.html" -}}
+          {{- dict "Src" $cover.Source "Title" $.Title "Resources" $.Resources "Matches" $cover.Matches "Loading" "eager" "Width" "800" "Height" "336" "Sizes" "(max-width: 679.9px) 100vw, (max-width: 959.9px) 80vw, (max-width: 1439.9px) 56vw, 800px" "OptimConfig" $optim "Alt" (printf "Featured image for %v" $.Title) | partial "plugin/image.html" -}}
         </a>
       </div>
     {{- end -}}
@@ -26,11 +18,11 @@
 
   {{- /* Title */ -}}
   <h2 class="single-title" itemprop="name headline">
-    {{- with $params.weight -}}
+    {{- with .Params.weight -}}
       {{- $icon := dict "Class" "fa-solid fa-thumbtack" -}}
-      <span title="{{ T "single.pin" }}" class="icon-pin">{{- $icon | partial "plugin/icon.html" -}}</span>
+      <span title="{{ T `single.pin` }}" class="icon-pin">{{- $icon | partial "plugin/icon.html" -}}</span>
     {{- end -}}
-    {{- $repost := $params.repost | default dict -}}
+    {{- $repost := .Params.repost | default dict -}}
     {{- with $repost -}}
       {{- if eq .Enable true -}}
         {{- $icon := dict "Class" "fa-solid fa-share" -}}
@@ -38,14 +30,14 @@
         <span title="{{ $title }}" class="icon-repost">{{- $icon | partial "plugin/icon.html" -}}</span>
       {{- end -}}
     {{- end -}}
-    <a href="{{ .RelPermalink }}">{{ cond (.Param "capitalizeTitles") (title .Title) .Title }}</a>
+    <a href="{{ .RelPermalink }}">{{ cond (.Param "capitalize_titles") (title .Title) .Title }}</a>
   </h2>
 
   {{- /* Meta */ -}}
   <div class="post-meta">
     {{- partial "single/post-author.html" . -}}
 
-    {{- with .PublishDate | dateFormat (.Site.Params.dateFormat | default "2006-01-02") -}}
+    {{- with .PublishDate | dateFormat (.Site.Params.date_format | default "2006-01-02") -}}
       &nbsp;<span class="post-publish" title='{{ "2006-01-02 15:04:05" | $.PublishDate.Format }}'>
         {{- printf `<time datetime="%v">%v</time>` . . | dict "Date" | T "single.publishedOnDate" | safeHTML -}}
       </span>
@@ -57,10 +49,10 @@
   {{- /* Summary content */ -}}
   <div class="content">
     {{- if .Summary -}}
-      {{- $plainify := (.Param "summaryPlainify") | default false -}}
+      {{- $plainify := .Param "summary_plainify" | default false -}}
       {{- with .Markup "home" -}}
         {{- with .Render -}}
-          {{- $summary := dict "Content" .Summary.Text "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+          {{- $summary := dict "Content" .Summary.Text "Ruby" ($.Param "ruby") "Fraction" ($.Param "fraction") "Fontawesome" ($.Param "fontawesome") | partial "function/content.html" | safeHTML -}}
           {{- cond $plainify ($summary | plainify) $summary -}}
         {{- end -}}
       {{- end -}}

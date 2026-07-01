@@ -2,19 +2,19 @@
   Stylesheet tag renderer.
   - Accepts direct <link> HTML, a pre-built resource, or builds from source path.
   - Supports template execution, optional toCSS, minify/fingerprint, and preload mode.
-  @param {String} [.Source] stylesheet URL/path; if starts with "<link" it's treated as raw HTML
-  @param {resource.Resource} [.Resource] pre-built resource (skips build pipeline)
-  @param {String} [.Content] inline style content to write as generated resource
-  @param {String} [.Path] target path for resource created from Content
-  @param {Object} [.Template] target path for resource created from template execution
-  @param {Object} [.Context] template context for ExecuteAsTemplate
-  @param {Object|Boolean} [.ToCSS] true for defaults, dict for custom toCSS options, false/omit to skip toCSS
-  @param {Boolean} [.Minify] whether to minify resource
-  @param {String} [.Fingerprint] fingerprint algorithm
-  @param {Boolean} [.Crossorigin] whether to add crossorigin=anonymous
-  @param {Boolean} [.Preload] whether to output preload + noscript fallback
-  @param {String} [.Integrity] SRI hash value
-  @param {String} [.Attr] additional attributes
+  @param {String} [.Source] - Stylesheet URL/path; if starts with "<link" it's treated as raw HTML
+  @param {resource.Resource} [.Resource] - Pre-built resource (skips build pipeline)
+  @param {String} [.Content] - Inline style content to write as generated resource
+  @param {String} [.Path] - Target path for resource created from Content
+  @param {Object} [.Template] - Target path for resource created from template execution
+  @param {Object} [.Context] - Template context for ExecuteAsTemplate
+  @param {Object|Boolean} [.ToCSS] - True for defaults, dict for custom toCSS options, false/omit to skip toCSS
+  @param {Boolean} [.Minify] - Whether to minify resource
+  @param {String} [.Fingerprint] - Fingerprint algorithm
+  @param {Boolean} [.Crossorigin] - Whether to add crossorigin=anonymous
+  @param {Boolean} [.Preload] - Whether to output preload + noscript fallback
+  @param {String} [.Integrity] - SRI hash value
+  @param {String} [.Attr] - Additional attributes
 */ -}}
 
 {{- if strings.HasPrefix (.Source | default "") "<link" -}}

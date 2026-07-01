@@ -1,11 +1,11 @@
 {{- /*
   Recursive function to render tree from structured data
-  @param {array} items - Array of tree items
-  @param {int} level - The expand level of the tree (expand all: -1, collapse all: 0)
-  @param {int} [depth=0] - Current depth level
-  @param {bool} [folderSlash=false] - Whether to append a trailing "/" to folder names
-  @param {array} [ignoreList] - List of file or folder names to ignore
-  @param {array} [highlightList] - List of file or folder names to highlight
+  @param {Array} items - Array of tree items
+  @param {Int} level - The expand level of the tree (expand all: -1, collapse all: 0)
+  @param {Int} [depth=0] - Current depth level
+  @param {Boolean} [folder_slash=false] - Whether to append a trailing "/" to folder names
+  @param {Array} [ignore_list] - List of file or folder names to ignore
+  @param {Array} [highlight_list] - List of file or folder names to highlight
 
   File tree item structure:
     name: string     - The name of the file or folder
@@ -16,9 +16,9 @@
   {{- $items := .items -}}
   {{- $level := .level -}}
   {{- $depth := .depth | default 0 -}}
-  {{- $folderSlash := .folderSlash | default false -}}
-  {{- $ignoreList := .ignoreList | default slice -}}
-  {{- $highlightList := .highlightList | default slice -}}
+  {{- $folderSlash := .folder_slash | default false -}}
+  {{- $ignoreList := .ignore_list | default slice -}}
+  {{- $highlightList := .highlight_list | default slice -}}
 
   <ul class="file-tree" data-level="{{ $depth }}">
     {{- /* Sort items: directories first, then files */ -}}
@@ -34,7 +34,7 @@
         {{- $fileItems = $fileItems | append . -}}
       {{- end -}}
     {{- end -}}
-    
+
     {{- range (append $fileItems $dirItems) -}}
       {{- $isDir := eq .type "dir" -}}
       {{- $isCollapsed := $isDir | and (ge $depth $level) | and (ge $level 0) -}}
@@ -43,7 +43,7 @@
       {{- if and $isDir $folderSlash -}}
         {{- $label = printf "%s/" $label -}}
       {{- end -}}
-      
+
       <li class="file-tree-item{{ if $isDir }} file-tree-folder{{ end }}{{ if $isCollapsed }} is-collapsed{{ end }}">
         <span class="file-tree-label{{ if $isDir }} file-tree-toggle{{ end }}{{ if $isHighlighted }} is-highlighted{{ end }}">
           {{- $icon := "file-tree-icon fa-regular " -}}
@@ -55,15 +55,15 @@
           {{- dict "Class" $icon | partial "plugin/icon.html" -}}
           <span class="file-tree-label__inner">{{ $label }}</span>
         </span>
-        
+
         {{- if and $isDir .children -}}
           {{- $options := dict
             "items" .children
             "depth" (add $depth 1)
             "level" $level
-            "folderSlash" $folderSlash
-            "ignoreList" $ignoreList
-            "highlightList" $highlightList
+            "folder_slash" $folderSlash
+            "ignore_list" $ignoreList
+            "highlight_list" $highlightList
           -}}
           {{- template "render-file-tree" $options -}}
         {{- end -}}
@@ -73,7 +73,7 @@
 {{- end -}}
 
 {{- if .items -}}
-  {{- $ignoreList := .ignoreList | default slice -}}
+  {{- $ignoreList := .ignore_list | default slice -}}
   {{- $notEmpty := false -}}
   {{- range .items -}}
     {{- if not (in $ignoreList .name) -}}

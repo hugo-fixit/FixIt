@@ -14,7 +14,6 @@
 */ -}}
 
 {{- $noop := .WordCount -}}
-{{- $params := partial "function/params.html" -}}
 {{- $cdn := .Site.Store.Get "cdn" | default dict -}}
 {{- $fingerprint := .Site.Store.Get "fingerprint" -}}
 {{- $config := (.Store.Get "this").config -}}
@@ -33,36 +32,36 @@
   {{- $source := $cdn.autocompleteJS | default "lib/autocomplete-js/index.production.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $placeholder := $search.placeholder | default (T "assets.searchPlaceholder") -}}
-  {{- $config = dict "maxResultLength" $search.maxResultLength "snippetLength" $search.snippetLength "highlightTag" $search.highlightTag "noResultsFound" (T "assets.noResultsFound") "placeholder" $placeholder "clearText" (T "assets.clear") | dict "search" | merge $config -}}
+  {{- $config = dict "maxResultLength" $search.max_result_length "snippetLength" $search.snippet_length "highlightTag" $search.highlight_tag "noResultsFound" (T "assets.noResultsFound") "placeholder" $placeholder "clearText" (T "assets.clear") | dict "search" | merge $config -}}
   {{- if eq $search.type "algolia" -}}
     {{- $source := $cdn.algoliasearchJS | default "lib/algoliasearch/browser.umd.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-    {{- $config = dict "type" "algolia" "algoliaIndex" $search.algolia.index "algoliaAppID" $search.algolia.appID "algoliaSearchKey" $search.algolia.searchKey | dict "search" | merge $config -}}
+    {{- $config = dict "type" "algolia" "algoliaIndex" $search.algolia.index "algoliaAppID" $search.algolia.app_id "algoliaSearchKey" $search.algolia.search_key | dict "search" | merge $config -}}
   {{- else if eq $search.type "fuse" -}}
     {{- with .Site.Home.OutputFormats.Get "search" -}}
       {{- $config = dict "type" "fuse" "fuseIndexURL" .RelPermalink | dict "search" | merge $config -}}
     {{- end -}}
     {{- dict "Source" "js/lib/fuse.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-    {{- $config = dict "isCaseSensitive" $search.fuse.isCaseSensitive "minMatchCharLength" $search.fuse.minMatchCharLength "findAllMatches" $search.fuse.findAllMatches "location" $search.fuse.location "threshold" $search.fuse.threshold "distance" $search.fuse.distance "ignoreLocation" $search.fuse.ignoreLocation "useExtendedSearch" $search.fuse.useExtendedSearch "ignoreFieldNorm" $search.fuse.ignoreFieldNorm | dict "search" | merge $config -}}
+    {{- $config = dict "isCaseSensitive" $search.fuse.is_case_sensitive "minMatchCharLength" $search.fuse.min_match_char_length "findAllMatches" $search.fuse.find_all_matches "location" $search.fuse.location "threshold" $search.fuse.threshold "distance" $search.fuse.distance "ignoreLocation" $search.fuse.ignore_location "useExtendedSearch" $search.fuse.use_extended_search "ignoreFieldNorm" $search.fuse.ignore_field_norm | dict "search" | merge $config -}}
   {{- else if eq $search.type "pagefind" -}}
     {{- $config = dict "type" "pagefind" | dict "search" | merge $config -}}
     {{- $pagefind := $search.pagefind | default dict -}}
-    {{- $bundlePath := relURL ($pagefind.bundlePath | default "pagefind/") -}}
+    {{- $bundlePath := relURL ($pagefind.bundle_path | default "pagefind/") -}}
     {{- if not (hasSuffix $bundlePath "/") -}}
       {{- $bundlePath = printf "%v/" $bundlePath -}}
     {{- end -}}
     {{- $config = dict
       "bundlePath" $bundlePath
-      "debounceTimeoutMs" ($pagefind.debounceTimeoutMs | default 300)
-      "useBuiltInFilters" ($pagefind.useBuiltInFilters | default true)
-      "sortBy" ($pagefind.sortBy | default "")
-      "sortOrder" ($pagefind.sortOrder | default "desc")
+      "debounceTimeoutMs" ($pagefind.debounce_timeout_ms | default 300)
+      "useBuiltInFilters" ($pagefind.use_built_in_filters | default true)
+      "sortBy" ($pagefind.sort_by | default "")
+      "sortOrder" ($pagefind.sort_order | default "desc")
       | dict "pagefind" | merge $config
     -}}
   {{- else if eq $search.type "cse" -}}
     {{- $config = dict "type" "cse" | dict "search" | merge $config -}}
     {{- $cse := .Site.Params.cse -}}
-    {{- $resultsPage := $cse.resultsPage -}}
+    {{- $resultsPage := $cse.results_page -}}
     {{- if not (hasPrefix $resultsPage (relURL "")) -}}
       {{- $resultsPage = path.Join (relURL "") $resultsPage -}}
     {{- end -}}
@@ -77,7 +76,7 @@
 {{- end -}}
 
 {{- /* instant.page */ -}}
-{{- if $params.instantPage -}}
+{{- if .Param "instant_page" -}}
   {{- $source := $cdn.instantPage | default "lib/instant-page/instantpage.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Attr" `type="module"` "Async" true "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
@@ -89,8 +88,18 @@
   {{- dict "Source" "js/lib/json-viewer.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
+{{- /* Mermaid */ -}}
+{{- if .Store.Get "hasMermaid" | and (not $isArchivesOrOffline) -}}
+  {{- if .Store.Get "hasPanzoom" -}}
+    {{- $source := $cdn.panzoomJS | default "lib/panzoom/panzoom.min.js" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
+  {{- end -}}
+  {{- $mermaid := dict "Page" . "Key" "mermaid" "ToCamel" true | partial "function/param.html" -}}
+  {{- $config = dict "mermaid" $mermaid | merge $config -}}
+{{- end -}}
+
 {{- /* twemoji */ -}}
-{{- if $params.twemoji -}}
+{{- if .Param "twemoji" -}}
   {{- $source := $cdn.twemojiJS | default "lib/twemoji/twemoji.min.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "twemoji" true | merge $config -}}
@@ -98,7 +107,7 @@
 {{- end -}}
 
 {{- /* lightgallery */ -}}
-{{- if $params.lightgallery | or (eq $params.lightgallery "force") -}}
+{{- if (.Param "lightgallery") | or (eq (.Param "lightgallery") "force") -}}
   {{- $source := $cdn.lightgalleryCSS | default "lib/lightgallery/css/lightgallery-bundle.min.css" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
   {{- $source := $cdn.lightgalleryJS | default "lib/lightgallery/lightgallery.min.js" -}}
@@ -119,15 +128,15 @@
 
 {{- /* TypeIt */ -}}
 {{- if .Store.Get "hasTyped" -}}
-  {{- $typeit := .Site.Params.typeit -}}
+  {{- $typeit := partial "function/camel-case-keys.html" .Site.Params.typeit -}}
   {{- $source := $cdn.typeitJS | default "lib/typeit/index.umd.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-  {{- $config = dict "speed" $typeit.speed "cursorSpeed" $typeit.cursorSpeed "cursorChar" $typeit.cursorChar "duration" $typeit.duration "loop" $typeit.loop | dict "typeit" | merge $config -}}
+  {{- $config = dict "typeit" $typeit | merge $config -}}
   {{- dict "Source" "js/lib/typeit.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- /* KaTeX */ -}}
-{{- $math := .Store.Get "math" -}}
+{{- $math := dict "Page" . "Key" "math" "ToCamel" true | partial "function/param.html" -}}
 {{- if .Store.Get "hasKaTeX" | and (not $isArchivesOrOffline) -}}
   {{- $source := $cdn.katexCSS | default "lib/katex/katex.min.css" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
@@ -185,7 +194,8 @@
   {{- $source = $cdn.mapboxGLJS | default "lib/mapbox-gl/mapbox-gl.js" -}}
   {{- dict "Source" $source "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- dict "Source" "lib/mapbox-gl/mapbox-gl-language.js" "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-  {{- $config = dict "accessToken" $params.mapbox.accessToken "RTLTextPlugin" "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.0/mapbox-gl-rtl-text.js" | dict "mapbox" | merge $config -}}
+  {{- $mapbox := dict "Page" . "Key" "mapbox" | partial "function/param.html" -}}
+  {{- $config = dict "accessToken" $mapbox.access_token "RTLTextPlugin" "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.0/mapbox-gl-rtl-text.js" | dict "mapbox" | merge $config -}}
   {{- dict "Source" "js/lib/mapbox.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
@@ -244,17 +254,13 @@
 {{- end -}}
 
 {{- /* Watermark */ -}}
-{{- if eq .Site.Params.watermark.enable true -}}
+{{- $watermarkConfig := partial "function/camel-case-keys.html" .Site.Params.watermark | default dict -}}
+{{- if $watermarkConfig.enable -}}
   {{- $source := $cdn.cellWatermarkJS | default "lib/cell-watermark/watermark.js" -}}
   {{- dict "Source" $source "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-  {{- $watermarkConfig := .Site.Params.watermark | default dict -}}
   {{- $watermarkConfig = dict
     "appendTo" ".widgets"
     "content" ($watermarkConfig.content | default $author.name | default .Site.Title)
-    "rowSpacing" $watermarkConfig.rowSpacing
-    "colSpacing" $watermarkConfig.colSpacing
-    "fontSize" $watermarkConfig.fontSize
-    "fontFamily" $watermarkConfig.fontFamily
     | merge $watermarkConfig
   -}}
   {{- $config = dict "watermark" $watermarkConfig | merge $config -}}
@@ -263,7 +269,7 @@
 
 {{- /* Content Decryption */ -}}
 {{- $encryptPartial := .Store.Get "hasEncryptor" -}}
-{{- if $params.password | or $encryptPartial -}}
+{{- if .Params.password | or $encryptPartial -}}
   {{- $cryptoCoreJS := $cdn.cryptoCoreJS | default "lib/crypto-js/core.js" -}}
   {{- $cryptoEncBase64JS := $cdn.cryptoEncBase64JS | default "lib/crypto-js/enc-base64.js" -}}
   {{- $cryptoSha256JS := $cdn.cryptoSha256JS | default "lib/crypto-js/sha256.js" -}}
@@ -274,7 +280,7 @@
   {{- dict "Source" $xxhashWasmJS "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- /* Decryption script */ -}}
   {{- dict "Source" "js/lib/fixit-decryptor.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-  {{- $config = dict "all" (isset $params "password") "shortcode" ($encryptPartial | default false) | dict "encryption" | merge $config -}}
+  {{- $config = dict "all" (.Params.password | not | not) "shortcode" ($encryptPartial | default false) | dict "encryption" | merge $config -}}
 {{- end -}}
 
 {{- /* Busuanzi visitor counter */ -}}
@@ -284,7 +290,7 @@
 {{- end -}}
 
 {{- /* Site creation time */ -}}
-{{- $siteTime := .Site.Store.Get "siteTime" -}}
+{{- $siteTime := .Site.Params.footer.site_time -}}
 {{- if $siteTime.enable -}}
   {{- with $siteTime.value -}}
     {{- $config = dict "siteTime" . | merge $config -}}
@@ -307,7 +313,7 @@
 
 {{- /* Auto Bookmark */ -}}
 {{- if eq .Kind "page" -}}
-  {{- with $params.autoBookmark -}}
+  {{- with .Param "auto_bookmark" -}}
     {{- $config = dict "autoBookmark" . | merge $config -}}
   {{- end -}}
 {{- end -}}
@@ -333,56 +339,38 @@
 {{- end -}}
 
 {{- /* Print */ -}}
-{{- $config = partial "function/snake2camel.html" .Site.Params.print | dict "print" | merge $config -}}
+{{- $config = partial "function/camel-case-keys.html" .Site.Params.print | dict "print" | merge $config -}}
 
 {{- /* PostChat */ -}}
 {{- partial "plugin/post-chat-ai.html" . -}}
 
-{{- range $params.library.css -}}
+{{- $library := dict "Page" . "Key" "library" | partial "function/param.html" -}}
+{{- range $library.css -}}
   {{- dict "Source" . "Fingerprint" $fingerprint | dict "Page" $ "Data" | partial "store/style.html" -}}
 {{- end -}}
 
-{{- range $params.library.js -}}
+{{- range $library.js -}}
   {{- dict "Source" . "Fingerprint" $fingerprint "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
 {{- end -}}
 
-{{- /* Runtime config script (window.config) */ -}}
-{{- $configJS := $config | jsonify | printf "window.config=%s;" -}}
-{{- if hugo.IsServer -}}
-  {{- $configJS = add $configJS "console.log('Page config:', window.config);" -}}
-{{- end -}}
-{{- $targetPath := "" -}}
+{{- /* Runtime config script */ -}}
+{{- $configJS := dict "Config" $config | partial "gen/config.html" -}}
+{{- $configPath := "" -}}
 {{- if $uniqueFileId | and (not .IsHome) -}}
-  {{- $targetPath = printf "%s/js/config/%s.js" $languagePrefix $uniqueFileId -}}
+  {{- $configPath = printf "%s/js/config/%s.js" $languagePrefix $uniqueFileId -}}
 {{- end -}}
-{{- dict "Content" $configJS "Path" $targetPath "Minify" hugo.IsProduction "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+{{- dict "Content" $configJS "Path" $configPath "Minify" hugo.IsProduction "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
 {{- /* File-tree plugin */ -}}
 {{- dict "Source" "js/lib/file-tree.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
-{{- /* Mermaid plugin */ -}}
+{{- /* Mermaid module */ -}}
 {{- if .Store.Get "hasMermaid" | and (not $isArchivesOrOffline) -}}
-  {{- if .Store.Get "hasPanzoom" -}}
-    {{- $source := $cdn.panzoomJS | default "lib/panzoom/panzoom.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
-  {{- end -}}
-
-  {{- $mermaid := .Site.Params.mermaid -}}
-  {{- $mermaidCDN := $mermaid.cdn | default "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs" -}}
-  {{- $zenumlCDN := $mermaid.zenuml | default "" -}}
-  {{- $layoutLoaders := $mermaid.layoutloaders | default slice -}}
-
   {{- $options := dict "format" "esm" -}}
   {{- $mermaidModule := dict "Resource" (resources.Get "js/lib/mermaid.ts") "Build" $options "Fingerprint" $fingerprint | partial "function/js-build.html" -}}
-  {{- $mermaidModuleURL := $mermaidModule.RelPermalink -}}
-
   {{- $bootstrapJS := dict
-    "MermaidModuleURL" $mermaidModuleURL
-    "MermaidCDN" $mermaidCDN
-    "ZenumlCDN" $zenumlCDN
-    "LayoutLoaders" $layoutLoaders
-    "Mermaid" $mermaid
-    | partial "plugin/mermaid-bootstrap.html"
+    "MermaidModuleURL" $mermaidModule.RelPermalink
+    | partial "gen/mermaid-bootstrap.html"
     | htmlUnescape
   -}}
   {{- dict "Content" $bootstrapJS "Path" "js/lib/mermaid-bootstrap.js" "Minify" hugo.IsProduction "Attr" `type="module"` "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}

@@ -1,16 +1,15 @@
 {{- define "title" -}}
-  {{- cond (.Param "capitalizeTitles") (title .Title) .Title -}}
-  {{- if .Site.Params.withSiteTitle }} {{ .Site.Params.titleDelimiter }} {{ .Site.Title }}{{- end -}}
+  {{- cond (.Param "capitalize_titles") (title .Title) .Title -}}
+  {{- if .Site.Params.with_site_title }} {{ .Site.Params.title_delimiter }} {{ .Site.Title }}{{- end -}}
 {{- end -}}
 
 {{- define "content" -}}
-  {{- $title := cond (.Param "capitalizeTitles") (title .Title) .Title -}}
-  {{- $params := partial "function/params.html" -}}
-  {{- $toc := .Store.Get "toc" -}}
-  {{- $tableOfContents := .Fragments.ToHTML ($toc.startlevel | int) ($toc.endlevel | int) ($toc.ordered | default false) -}}
+  {{- $title := cond (.Param "capitalize_titles") (title .Title) .Title -}}
+  {{- $toc := dict "Page" . "Key" "toc" | partial "function/param.html" -}}
+  {{- $tableOfContents := .Fragments.ToHTML ($toc.start_level | int) ($toc.end_level | int) ($toc.ordered | default false) -}}
   {{- $showToc := $toc.enable | and (ne $tableOfContents `<nav id="TableOfContents"></nav>`) -}}
   {{- .Store.Set "showToc" $showToc -}}
-  {{- $tableOfContents = dict "Content" $tableOfContents "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+  {{- $tableOfContents = dict "Content" $tableOfContents "Ruby" (.Param "ruby") "Fraction" (.Param "fraction") "Fontawesome" (.Param "fontawesome") | partial "function/content.html" | safeHTML -}}
   {{- $pagefindEnabled := and .Site.Params.search.enable (eq .Site.Params.search.type "pagefind") -}}
 
   <aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="{{ T "collections" }}">
@@ -28,7 +27,7 @@
     <div class="header">
       {{- /* Title */ -}}
       <h1 class="single-title animate__animated animate__flipInX"{{ if $pagefindEnabled }} data-pagefind-body{{ end }}>
-        {{- $repost := $params.repost | default dict -}}
+        {{- $repost := .Params.repost | default dict -}}
         {{- with $repost -}}
           {{- if eq .Enable true -}}
             {{- $icon := dict "Class" "fa-solid fa-share" -}}
@@ -44,7 +43,7 @@
       </h1>
 
       {{- /* Subtitle */ -}}
-      {{- with $params.subtitle -}}<p class="single-subtitle animate__animated animate__fadeIn">{{ . | $.RenderString }}</p>{{- end -}}
+      {{- with .Params.subtitle -}}<p class="single-subtitle animate__animated animate__fadeIn">{{ . | $.RenderString }}</p>{{- end -}}
     </div>
 
     {{- /* Meta */ -}}
@@ -55,27 +54,27 @@
       </div>
       {{- /* TODO add disclaimer or space between meta and content */ -}}
       <div class="post-meta-line">
-        {{- with .PublishDate | dateFormat (.Site.Params.dateformat | default "2006-01-02") -}}
+        {{- with .PublishDate | dateFormat (.Site.Params.date_format | default "2006-01-02") -}}
           <span title="{{ dict "Date" ("2006-01-02 15:04:05" | $.PublishDate.Format) | T "single.publishedOnDate" }}">
             {{- dict "Class" "fa-solid fa-calendar-days me-1" | partial "plugin/icon.html" -}}
             {{- printf `<time datetime="%v">%v</time>` . . | safeHTML -}}
           </span>&nbsp;
         {{- end -}}
-        {{- if (ne .Lastmod.Unix .PublishDate.Unix) | and $params.showLastmod -}}
-          {{- with .Lastmod | dateFormat (.Site.Params.dateformat | default "2006-01-02") -}}
+        {{- if (ne .Lastmod.Unix .PublishDate.Unix) | and (.Param "show_lastmod") -}}
+          {{- with .Lastmod | dateFormat (.Site.Params.date_format | default "2006-01-02") -}}
             <span title="{{ dict "Date" ("2006-01-02 15:04:05" | $.Lastmod.Format) | T "single.updatedOnDate" }}">
               {{- dict "Class" "fa-regular fa-calendar-check me-1" | partial "plugin/icon.html" -}}
               {{- printf `<time datetime="%v">%v</time>` . . | safeHTML -}}
             </span>&nbsp;
           {{- end -}}
         {{- end -}}
-        {{- if $params.wordCount -}}
+        {{- if .Param "word_count" -}}
           <span title="{{ T "single.wordCount" .WordCount }}">
             {{- dict "Class" "fa-solid fa-pencil-alt me-1" | partial "plugin/icon.html" -}}
             {{- T "single.fuzzyWordCount" .FuzzyWordCount -}}
           </span>&nbsp;
         {{- end -}}
-        {{- if $params.readingTime -}}
+        {{- if .Param "reading_time" -}}
           <span>
             {{- dict "Class" "fa-regular fa-clock me-1" | partial "plugin/icon.html" -}}
             {{- T "single.readingTime" .ReadingTime -}}
@@ -83,11 +82,11 @@
         {{- end -}}
 
         {{- /* If the article expires, close the comment or not */ -}}
-        {{- $expirationReminder := $params.expirationReminder | default dict -}}
+        {{- $expirationReminder := dict "Page" . "Key" "expiration_reminder" | partial "function/param.html" | default dict -}}
         {{- if
           $expirationReminder.enable
           | and (gt (div (sub now.Unix .Lastmod.Unix) 86400) ($expirationReminder.warning | default 180))
-          | and $expirationReminder.closeComment -}}
+          | and $expirationReminder.close_comment -}}
           {{- .Store.Set "commentExpired" true -}}
         {{- end -}}
         {{- $comment := .Store.Get "comment" | default dict -}}
@@ -110,7 +109,7 @@
           <span id="{{ .RelPermalink }}" class="comment-visitors" data-flag-title="{{ $title }}">
             {{- $visitorIcon }}<span id="twikoo_visitors">-</span>&nbsp;{{ T "single.views" }}
           </span>&nbsp;
-        {{- else if .Site.Params.busuanzi.enable | and .Site.Params.busuanzi.pageViews | and hugo.IsProduction -}}
+        {{- else if .Site.Params.busuanzi.enable | and .Site.Params.busuanzi.page_views | and hugo.IsProduction -}}
           <span id="busuanzi_container_page_pv" class="busuanzi_visitors comment-visitors" data-flag-title="{{ $title }}">
             {{- $visitorIcon }}<span id="busuanzi_value_page_pv">-</span>&nbsp;{{ T "single.views" }}
           </span>&nbsp;
@@ -139,25 +138,21 @@
     </div>
 
     {{- /* Featured image */ -}}
-    {{- $image := $params.featuredimage -}}
-    {{- $matches := slice -}}
-    {{- if .Resources.GetMatch "featured-image" -}}
-      {{- $matches = $matches | append "featured-image" -}}
-    {{- end -}}
-    {{- if $image | or (gt (len $matches) 0) -}}
+    {{- $cover := dict "Page" . | partial "function/get-cover.html" -}}
+    {{- if $cover.Source | or (gt (len $cover.Matches) 0) -}}
       <div class="featured-image">
-        {{- $optim := slice 
+        {{- $optim := slice
           (dict "Process" "resize 800x webp" "descriptor" "800w")
           (dict "Process" "resize 1200x webp" "descriptor" "1200w")
-          (dict "Process" "resize 1600x webp" "descriptor" "1600w") 
+          (dict "Process" "resize 1600x webp" "descriptor" "1600w")
         -}}
-        {{- dict "Src" $image "Title" $.Description "Resources" .Resources "Matches" $matches "Loading" "eager" "Sizes" "(max-width: 679.9px) 100vw, (max-width: 959.9px) 80vw, (max-width: 1439.9px) 56vw, 800px" "OptimConfig" $optim | partial "plugin/image.html" -}}
+        {{- dict "Src" $cover.Source "Title" $.Description "Resources" $.Resources "Matches" $cover.Matches "Loading" "eager" "Sizes" "(max-width: 679.9px) 100vw, (max-width: 959.9px) 80vw, (max-width: 1439.9px) 56vw, 800px" "OptimConfig" $optim | partial "plugin/image.html" -}}
       </div>
     {{- end -}}
 
     {{- /* Static TOC */ -}}
     {{- if $showToc -}}
-      <div class="details toc{{ with $params.password }} encrypted-hidden{{ end }}" id="toc-static" data-kept="{{ if $toc.keepstatic }}true{{ else }}false{{ end }}">
+      <div class="details toc{{ with .Params.password }} encrypted-hidden{{ end }}" id="toc-static" data-kept="{{ if $toc.keep_static }}true{{ else }}false{{ end }}">
         <div class="details-summary toc-title">
           <span>{{ T "single.contents" }}</span>
           <span>{{ dict "Class" "details-icon fa-solid fa-angle-right" | partial "plugin/icon.html" }}</span>
@@ -169,7 +164,7 @@
     {{- end -}}
 
     {{- /* AI Summary */ -}}
-    {{- $summaryConfig := (.Params | merge .Site.Params).postSummary -}}
+    {{- $summaryConfig := dict "Page" . "Key" "post_summary" | partial "function/param.html" -}}
     {{- if $summaryConfig.enable -}}
       <div class="ai-summary"></div>
     {{- end -}}
@@ -181,9 +176,9 @@
     {{- partial "single/expiration-reminder.html" . -}}
 
     {{- /* Content */ -}}
-    {{- $content := dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
-    <div class="content" id="content"{{ if $pagefindEnabled }} data-pagefind-body{{ end }}{{ with $params.endFlag }} data-end-flag="{{ . }}"{{ end }}>
-      {{- if not $params.password -}}
+    {{- $content := dict "Content" .Content "Ruby" (.Param "ruby") "Fraction" (.Param "fraction") "Fontawesome" (.Param "fontawesome") | partial "function/content.html" | safeHTML -}}
+    <div class="content" id="content"{{ if $pagefindEnabled }} data-pagefind-body{{ end }}{{ with .Param "end_flag" }} data-end-flag="{{ . }}"{{ end }}>
+      {{- if not .Params.password -}}
         {{- $content -}}
       {{- end -}}
     </div>
@@ -195,13 +190,13 @@
     {{- partial "single/related.html" . -}}
 
     {{- /* Reward before Footer */ -}}
-    {{- $reward := .Store.Get "reward" -}}
+    {{- $reward := dict "Page" . "Key" "reward" | partial "function/param.html" -}}
     {{- if eq $reward.position "before" -}}
       {{- partial "single/reward.html" . -}}
     {{- end -}}
 
     {{- /* Content Encryption */ -}}
-    {{- dict "Content" $content "Password" $params.password "Message" $params.message "Page" . | partial "plugin/fixit-encryptor.html" -}}
+    {{- dict "Content" $content "Password" .Params.password "Message" .Params.message "Page" . | partial "plugin/fixit-encryptor.html" -}}
 
     {{- /* Collection Navigation */ -}}
     {{- partial "single/collection-nav.html" . -}}
@@ -227,11 +222,11 @@
 
     {{- /* Auto TOC */ -}}
     {{- if $showToc -}}
-      <h2 class="toc-title{{ with $params.password }} encrypted-hidden{{ end }}">
+      <h2 class="toc-title{{ with .Params.password }} encrypted-hidden{{ end }}">
         {{- T "single.contents" -}}&nbsp;
         {{- dict "Class" "toc-icon fa-solid fa-angle-down" | partial "plugin/icon.html" -}}
       </h2>
-      <div class="toc-content{{ if eq $toc.auto false }} always-active{{ end }}{{ with $params.password }} encrypted-hidden{{ end }}" id="toc-content-auto"></div>
+      <div class="toc-content{{ if eq $toc.auto false }} always-active{{ end }}{{ with .Params.password }} encrypted-hidden{{ end }}" id="toc-content-auto"></div>
     {{- end -}}
 
     {{- /* Custom block after post toc */ -}}

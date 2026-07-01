@@ -1,6 +1,6 @@
 {{- $title := title (.Params.Title | default ((T .Section) | default .Section | dict "Some" | T "allSome")) -}}
-{{- if .Site.Params.withSiteTitle -}}
-  {{- $title = printf "%s %s %s" $title .Site.Params.titleDelimiter .Site.Title -}}
+{{- if .Site.Params.with_site_title -}}
+  {{- $title = printf "%s %s %s" $title .Site.Params.title_delimiter .Site.Title -}}
 {{- end -}}
 {{- $config := (.Params.feed | default dict) | merge .Site.Params.section.feed | merge .Site.Params.feed -}}
 {{- $options := dict "Site" .Site "Config" $config "OutputFormats" .OutputFormats -}}

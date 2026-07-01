@@ -43,10 +43,12 @@ _merge = "shallow"
 
 [params]
 version = "1.0.X"
+collection_list = true
+collection_navigation = true
 
 [params.home.profile]
 enable = true
-avatarURL = "/images/fixit-test.png"
+avatar_url = "/images/fixit-test.png"
 
 [params.social]
 
@@ -60,15 +62,8 @@ weight = 1
 # for twitter cards
 # site = "hugo-fixit"
 
-[params.page]
-collectionList = true
-collectionNavigation = true
-
 [params.author]
 name = "Lruihao"
 email = ""
 link = "https://lruihao.cn"
 avatar = "https://lruihao.cn/images/avatar.jpg"
-
-[params.mermaid]
-zenuml = "https://cdn.jsdelivr.net/npm/@mermaid-js/mermaid-zenuml/dist/mermaid-zenuml.esm.min.mjs"

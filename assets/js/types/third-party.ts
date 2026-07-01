@@ -3,10 +3,10 @@ export interface MermaidConfig {
   cdn?: string
   zenuml?: string
   themes?: string[]
-  securitylevel?: string
+  securityLevel?: string
   look?: string
-  fontfamily?: string
-  layoutloaders?: string[]
+  fontFamily?: string
+  layoutLoaders?: string[]
   layout?: string
 }
 

@@ -1,8 +1,6 @@
-{{- $params := partial "function/params.html" -}}
-{{- $expirationReminder := $params.expirationReminder | default dict -}}
-{{- $isEnabled := $expirationReminder.enable | and (not $params.password) -}}
+{{- $expirationReminder := dict "Page" . "Key" "expiration_reminder" | partial "function/param.html" | default dict -}}
 
-{{- if $isEnabled -}}
+{{- if $expirationReminder.enable | and (not .Params.password) -}}
   {{- $daysAgo := div (sub now.Unix .Lastmod.Unix) 86400 }}
   {{- $reminderThreshold := $expirationReminder.reminder | default 90 }}
   {{- $warningThreshold := $expirationReminder.warning | default 180 }}
@@ -21,7 +19,7 @@
       </div>
       <div class="details-content">
         <div class="admonition-content">
-          {{- with $updateTime | dateFormat (.Site.Params.dateformat | default "2006-01-02") -}}
+          {{- with $updateTime | dateFormat (.Site.Params.date_format | default "2006-01-02") -}}
             {{- dict "Date" . | T "single.expirationReminder" -}}
           {{- end -}}
         </div>

@@ -3,20 +3,20 @@
   - Auto-detects external links and applies target/rel policies.
   - Supports optional icon, download hint, and external icon display.
   - Supports card mode with URL meta and favicon fallback.
-  @param {String} .Destination target URL
-  @param {String} [.Content] link label HTML
-  @param {String} [.Title] title attribute
-  @param {String} [.Class] custom CSS classes
-  @param {String} [.Rel] rel attribute value
-  @param {Boolean} [.Newtab] force external behavior
-  @param {Boolean} [.Noreferrer] whether to include noreferrer (default: true)
-  @param {Boolean} [.ExternalIcon] whether to show external-link icon
-  @param {Object} [.Icon] icon params for plugin/icon.html
-  @param {Boolean} [.Card] whether to render card link layout
-  @param {String} [.CardIcon] card icon URL or icon class
-  @param {String} [.Download] download attribute value
-  @param {Boolean} [.IsGuarded] explicitly enable or disable link guard
-  @param {Object} [.Page] current page context
+  @param {String} .Destination - Target URL
+  @param {String} [.Content] - Link label HTML
+  @param {String} [.Title] - Title attribute
+  @param {String} [.Class] - Custom CSS classes
+  @param {String} [.Rel] - Rel attribute value
+  @param {Boolean} [.Newtab] - Force external behavior
+  @param {Boolean} [.Noreferrer] - Whether to include noreferrer (default: true)
+  @param {Boolean} [.ExternalIcon] - Whether to show external-link icon
+  @param {Object} [.Icon] - Icon params for plugin/icon.html
+  @param {Boolean} [.Card] - Whether to render card link layout
+  @param {String} [.CardIcon] - Card icon URL or icon class
+  @param {String} [.Download] - Download attribute value
+  @param {Boolean} [.IsGuarded] - Explicitly enable or disable link guard
+  @param {Object} [.Page] - Page context for page-level link config override
 */ -}}
 
 {{- /* Regular link rendering */ -}}
@@ -102,7 +102,10 @@
 {{- end -}}
 
 {{- $blockSchemes := slice "javascript" "mailto" "tel" "file" "data" "vscode" "trae" -}}
-{{- $config := partial "function/snake2camel.html" site.Params.link -}}
+{{- $config := partial "function/camel-case-keys.html" site.Params.link -}}
+{{- with .Page -}}
+  {{- $config = dict "Page" . "Key" "link" "ToCamel" true | partial "function/param.html" -}}
+{{- end -}}
 {{- $rel := .Rel | default "" -}}
 {{- $isExternal := false -}}
 {{- $noreferrer := true -}}
@@ -126,18 +129,10 @@
 
 {{- /* External link guard */ -}}
 {{- $isGuarded := false -}}
-{{- $guardConfig := $config.guard -}}
-{{- with .Page.Params.link_guard -}}
-  {{- if reflect.IsMap . -}}
-    {{- $guardConfig = (partial "function/snake2camel.html" .) | merge $guardConfig -}}
-  {{- else -}}
-    {{- $guardConfig = (dict "enable" .) | merge $guardConfig -}}
-  {{- end -}}
-{{- end -}}
 {{- if
-  $guardConfig.enable
+  $config.guard.enable
   | and $isExternal
-  | and (not (in $guardConfig.allowDomains $url.Host))
+  | and (not (in $config.guard.allowDomains $url.Host))
 -}}
   {{- $isGuarded = .IsGuarded | default true -}}
 {{- end -}}
@@ -159,7 +154,7 @@
 {{- with .Download -}}
   {{- $attrs = printf ` download="%s"` . | add $attrs -}}
 {{- end -}}
-{{- if $isGuarded | and (eq $guardConfig.mode "modal") -}}
+{{- if $isGuarded | and (eq $config.guard.mode "modal") -}}
   {{- $attrs = add $attrs ` data-guard="modal"` -}}
 {{- end -}}
 

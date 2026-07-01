@@ -1,15 +1,14 @@
 {{- /* Related Content */ -}}
 {{- /* https://gohugo.io/content-management/related/ */ -}}
-{{- $params := partial "function/params.html" -}}
-
-{{- if $params.related.enable | and ("aside" | in $params.related.position) | and (not $params.password) -}}
+{{- $relatedConfig := dict "Page" . "Key" "related" | partial "function/param.html" -}}
+{{- if $relatedConfig.enable | and ("aside" | in $relatedConfig.position) | and (not .Params.password) -}}
   {{- $posts := .Site.Store.Get "mainSectionPages" -}}
-  {{- if .Site.Params.page.hiddenFromRelated -}}
-    {{- $posts = where $posts "Params.hiddenfromrelated" false -}}
+  {{- if .Site.Params.hidden_from_related -}}
+    {{- $posts = where $posts "Params.hidden_from_related" false -}}
   {{- else -}}
-    {{- $posts = where $posts "Params.hiddenfromrelated" "!=" true -}}
+    {{- $posts = where $posts "Params.hidden_from_related" "!=" true -}}
   {{- end -}}
-  {{- $related := $posts.Related . | first ($params.related.count | default 5) -}}
+  {{- $related := $posts.Related . | first ($relatedConfig.count | default 5) -}}
   {{- with $related -}}
     <div class="details related-details open">
       <div class="details-summary related-summary">
@@ -20,7 +19,7 @@
       <div class="details-content related-content">
         <ul class="related-list">
           {{- range $i, $p := . -}}
-            {{- $title := cond (.Param "capitalizeTitles") (title .LinkTitle) .LinkTitle -}}
+            {{- $title := cond (.Param "capitalize_titles") (title .LinkTitle) .LinkTitle -}}
             <li class="related-item">
               <a href="{{ .RelPermalink }}" title="{{ $title }}">{{ $title }}</a>
               {{- with .HeadingsFiltered -}}

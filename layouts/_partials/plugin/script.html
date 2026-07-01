@@ -2,20 +2,20 @@
   Script tag renderer.
   - Accepts direct script HTML, a pre-built resource, or builds from source path.
   - Supports template execution, minify/build/fingerprint pipeline, and extra attrs.
-  @param {String} [.Source] script source URL/path; if starts with "<script" it's treated as raw HTML
-  @param {resource.Resource} [.Resource] pre-built resource (skips build pipeline)
-  @param {String} [.Content] inline content to write as generated resource
-  @param {String} [.Path] target path for resource created from Content
-  @param {Object} [.Template] target path for resource created from template execution
-  @param {Object} [.Context] template context for ExecuteAsTemplate
-  @param {Boolean} [.Minify] whether to minify resource
-  @param {Object} [.Build] js.Build options (Build.minify is normalized to .Minify for path semantics)
-  @param {String} [.Fingerprint] fingerprint algorithm
-  @param {Boolean} [.Async] whether to add async attribute
-  @param {Boolean} [.Defer] whether to add defer attribute
-  @param {Boolean} [.Crossorigin] whether to add crossorigin=anonymous
-  @param {String} [.Integrity] SRI hash value
-  @param {String} [.Attr] additional attributes
+  @param {String} [.Source] - Script source URL/path; if starts with "<script" it's treated as raw HTML
+  @param {resource.Resource} [.Resource] - Pre-built resource (skips build pipeline)
+  @param {String} [.Content] - Inline content to write as generated resource
+  @param {String} [.Path] - Target path for resource created from Content
+  @param {Object} [.Template] - Target path for resource created from template execution
+  @param {Object} [.Context] - Template context for ExecuteAsTemplate
+  @param {Boolean} [.Minify] - Whether to minify resource
+  @param {Object} [.Build] - js.Build options (Build.minify is normalized to .Minify for path semantics)
+  @param {String} [.Fingerprint] - Fingerprint algorithm
+  @param {Boolean} [.Async] - Whether to add async attribute
+  @param {Boolean} [.Defer] - Whether to add defer attribute
+  @param {Boolean} [.Crossorigin] - Whether to add crossorigin=anonymous
+  @param {String} [.Integrity] - SRI hash value
+  @param {String} [.Attr] - Additional attributes
 */ -}}
 
 {{- if strings.HasPrefix (.Source | default "") "<script" -}}

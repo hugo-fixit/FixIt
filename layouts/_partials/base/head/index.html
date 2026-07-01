@@ -50,7 +50,7 @@
 {{- end -}}
 
 {{- /* Mastodon Verification */ -}}
-{{- with .Site.Params.social.Mastodon -}}
+{{- with .Site.Params.social.mastodon -}}
   {{- $id := "" -}}
   {{- $prefix := "https://mastodon.social/" -}}
   {{- if reflect.IsMap . -}}
@@ -66,7 +66,7 @@
 {{- end -}}
 
 {{- /* ========== LINK: Favicon, Canonical, Feeds, Stylesheets ========== */ -}}
-{{- $title := printf "%s %s %s" .Title .Site.Params.titleDelimiter .Site.Title -}}
+{{- $title := printf "%s %s %s" .Title .Site.Params.title_delimiter .Site.Title -}}
 {{- if .IsHome -}}
   {{- $title = .Site.Title -}}
 {{- end -}}
@@ -123,8 +123,6 @@
 <link rel="preload" href="{{ $mainResource.RelPermalink }}" as="script">
 
 {{- /* ========== SEO: Structured Data (Schema.org) ========== */ -}}
-{{- $params := partial "function/params.html" -}}
-
 {{- /* Search Engine Verification */ -}}
 {{- with .Site.Params.verification.google -}}
   <meta name="google-site-verification" content="{{ . }}" />
@@ -167,7 +165,7 @@
     {{- with .Site.Params.description -}}
       "description": {{ . | safeHTML }},
     {{- end -}}
-    {{- $image := .Site.Params.seo.image -}}
+    {{- $image := .Site.Params.seo.cover -}}
     {{- with dict "Path" $image | partial "function/resource.html" -}}
       "image": {
         "@type": "ImageObject",
@@ -180,7 +178,7 @@
         "image": "{{ . | absURL }}",
       {{- end -}}
     {{- end -}}
-    {{- with .Site.Params.seo.thumbnailUrl -}}
+    {{- with .Site.Params.seo.thumbnail_url -}}
       {{- with dict "Path" . | partial "function/resource.html" -}}
         "thumbnailUrl": "{{ .Permalink }}",
       {{- else -}}
@@ -204,6 +202,7 @@
       {{- $authorName = . -}}
     {{- end -}}
   {{- end -}}
+  {{- $seo := dict "Page" . "Key" "seo" | partial "function/param.html" -}}
   <script type="application/ld+json">
   {
     "@context": "http://schema.org",
@@ -214,7 +213,7 @@
       "@type": "WebPage",
       "@id": "{{ .Permalink }}"
     },
-    {{- $images := $params.seo.images | default slice -}}
+    {{- $images := $seo.images | default slice -}}
     {{- if not $images -}}
       {{- with .Resources.GetMatch "featured-image-preview" -}}
         {{- $images = slice "featured-image-preview" -}}
@@ -223,7 +222,7 @@
         {{- $images = slice "featured-image" -}}
       {{- end -}}
     {{- end -}}
-    {{- with .Site.Params.seo.image -}}
+    {{- with .Site.Params.seo.cover -}}
       {{- $images = $images | default (slice .) -}}
     {{- end -}}
     {{- with $images -}}
@@ -263,11 +262,11 @@
       "license": {{ . | safeHTML }},
     {{- end -}}
     {{- $publisher := $authorName | dict "name" -}}
-    {{- $publisher = $params.seo.publisher | default dict | merge $publisher -}}
+    {{- $publisher = $seo.publisher | default dict | merge $publisher -}}
     "publisher": {
       "@type": "Organization",
       "name": {{ $publisher.name | safeHTML }}
-      {{- $logo := $publisher.logoUrl -}}
+      {{- $logo := $publisher.logo_url -}}
       {{- with dict "Path" $logo | partial "function/resource.html" -}}
         ,"logo": {
           "@type": "ImageObject",
@@ -296,7 +295,7 @@
 
 {{- /* Theme Color Scheme & Platform Detection (runs before page render) */ -}}
 {{- $options := dict "targetPath" "js/head.js" -}}
-{{- $options = dict "defaultTheme" .Site.Params.defaulttheme | dict "params" | merge $options -}}
+{{- $options = dict "defaultTheme" .Site.Params.default_theme | dict "params" | merge $options -}}
 {{- dict "Source" "js/head/index.ts" "Build" $options "Fingerprint" $fingerprint | partial "plugin/script.html" -}}
 
 {{- /* Custom head */ -}}

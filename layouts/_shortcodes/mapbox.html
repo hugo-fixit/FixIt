@@ -1,14 +1,14 @@
 {{- if ne hugo.Context.MarkupScope "home" -}}
 
-{{- $mapbox := (.Page.Params | merge .Site.Params.page).mapbox | default dict -}}
+{{- $mapbox := dict "Page" .Page "Key" "mapbox" | partial "function/param.html" | default dict -}}
 
 {{- $lng := cond .IsNamedParams (.Get "lng") (.Get 0) -}}
 {{- $lat := cond .IsNamedParams (.Get "lat") (.Get 1) -}}
 {{- $zoom := cond .IsNamedParams (.Get "zoom") (.Get 2) | default 10 -}}
 {{- $marked := cond .IsNamedParams (.Get "marked") (.Get 3) | ne false -}}
 {{- $markers := cond .IsNamedParams (.Get "markers") (.Get 6) | default "[]" -}}
-{{- $lightStyle := $mapbox.lightStyle -}}
-{{- $darkStyle := $mapbox.darkStyle -}}
+{{- $lightStyle := $mapbox.light_style -}}
+{{- $darkStyle := $mapbox.dark_style -}}
 {{- $navigation := $mapbox.navigation -}}
 {{- $geolocate := $mapbox.geolocate -}}
 {{- $scale := $mapbox.scale -}}

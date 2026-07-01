@@ -1,0 +1,74 @@
+{{- /*
+  Get the cover image for a page.
+
+  Resolves the cover image by checking front matter params first, then page resources.
+  Supports remote URLs, inline data URIs, and local page/global resources.
+
+  Resolution order:
+    1. Front matter: featured_image_preview (if Preview=true) or featured_image
+    2. Page resources: "featured-image-preview" (if Preview=true), then "featured-image"
+    3. Global resources: by the front matter value as a path
+
+  @param {Map} . - Configuration dict
+    - Page: {Page} the page context (required)
+    - Preview: {Boolean} if true, prefer featured_image_preview over featured_image (default: false)
+    - Build: {Boolean} if true, resolve resource objects and permalinks; if false, only check existence (default: false)
+  @return {Map} dict with:
+    - Source: {String} the raw front matter value (may be empty)
+    - Matches: {Slice} matched resource names (e.g., ["featured-image-preview"])
+    - Resource: {Object} the resolved Hugo resource object (empty dict if Build=false or not found)
+    - URL: {String} the resolved permalink, or raw front matter value if resource not found
+
+  @example
+  {{- $cover := dict "Page" . | partial "function/get-cover.html" -}}
+  {{- with $cover.URL }}<img src="{{ . }}">{{ end -}}
+
+  {{- $cover := dict "Page" . "Preview" true | partial "function/get-cover.html" -}}
+  {{- dict "Src" $cover.URL "Resources" .Resources "Matches" $cover.Matches | partial "plugin/image.html" -}}
+*/ -}}
+{{- $page := .Page -}}
+{{- $preview := .Preview | default false -}}
+{{- $build := .Build | default false -}}
+
+{{- /* Resolve front matter value */ -}}
+{{- $image := "" -}}
+{{- if $preview -}}
+  {{- $image = $page.Params.featured_image_preview | default $page.Params.featured_image -}}
+{{- else -}}
+  {{- $image = $page.Params.featured_image -}}
+{{- end -}}
+
+{{- /* Skip resource resolution for remote URLs and inline data URIs */ -}}
+{{- $isInline := strings.HasPrefix $image "data:image" -}}
+{{- $isRemote := urls.Parse $image | partial "function/is-url-remote.html" -}}
+{{- $matches := slice -}}
+{{- $resource := dict -}}
+{{- $url := $image -}}
+
+{{- if not $isRemote | and (not $isInline) -}}
+  {{- /* Check which named resources exist in the page bundle */ -}}
+  {{- if $preview -}}
+    {{- if $page.Resources.GetMatch "featured-image-preview" -}}
+      {{- $matches = $matches | append "featured-image-preview" -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $page.Resources.GetMatch "featured-image" -}}
+    {{- $matches = $matches | append "featured-image" -}}
+  {{- end -}}
+
+  {{- /* When Build=true, resolve the actual resource object and its permalink */ -}}
+  {{- if $build -}}
+    {{- /* Try matched resource names first (priority order) */ -}}
+    {{- range $matches -}}
+      {{- $resource = $page.Resources.GetMatch . -}}
+      {{- if $resource -}}
+        {{- break -}}
+      {{- end -}}
+    {{- end -}}
+    {{- /* Fallback: try page resources by path, then global assets */ -}}
+    {{- $resource = $resource | default ($page.Resources.Get $image) | default (resources.Get $image) -}}
+    {{- $url = $resource.RelPermalink | default $image -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return (dict "Source" $image "Matches" $matches "Resource" $resource "URL" $url) -}}

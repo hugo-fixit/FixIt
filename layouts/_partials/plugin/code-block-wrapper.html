@@ -2,14 +2,29 @@
   Code block wrapper hook for highlight output.
   - Applies wrapper UI features based on codeblock config.
   - Supports classic/modern modes, copy button, expand button, and line-number states.
-  @param {Object} .Attributes code block attributes
-  @param {Object} .Options code fence options
-  @param {String} .Inner raw code content
-  @param {Object} .Page current page context
-  @param {String} .Type language/type for current block
+  @param {Object} .Attributes - Code block attributes
+  @param {Object} .Options - Code fence options
+  @param {String} .Inner - Raw code content
+  @param {Object} .Page - Current page context
+  @param {String} .Type - Language/type for current block
 */ -}}
 
-{{- $config := .Attributes | merge .Page.Params.codeblock | merge .Page.Site.Params.codeblock -}}
+{{- $config := .Attributes | merge (dict "Page" .Page "Key" "codeblock" | partial "function/param.html") -}}
+
+{{- /* Deprecated camelCase attribute support: Hugo lowercases Markdown attributes */ -}}
+{{- if isset .Attributes "wrapperclass" | and (not (isset .Attributes "wrapper_class")) -}}
+  {{- warnidf "v1-deprecated-codeblock-attr" "The attribute `wrapperClass` is deprecated since v1.0.0, use `wrapper_class` instead. See %s" .Position -}}
+{{- end -}}
+{{- if isset .Attributes "maxshownlines" | and (not (isset .Attributes "max_shown_lines")) -}}
+  {{- warnidf "v1-deprecated-codeblock-attr" "The attribute `maxShownLines` is deprecated since v1.0.0, use `max_shown_lines` instead. See %s" .Position -}}
+{{- end -}}
+{{- if isset .Attributes "linenostoggler" | and (not (isset .Attributes "line_nos_toggler")) -}}
+  {{- warnidf "v1-deprecated-codeblock-attr" "The attribute `lineNosToggler` is deprecated since v1.0.0, use `line_nos_toggler` instead. See %s" .Position -}}
+{{- end -}}
+{{- if isset .Attributes "linewraptoggler" | and (not (isset .Attributes "line_wrap_toggler")) -}}
+  {{- warnidf "v1-deprecated-codeblock-attr" "The attribute `lineWrapToggler` is deprecated since v1.0.0, use `line_wrap_toggler` instead. See %s" .Position -}}
+{{- end -}}
+
 {{- $result := transform.HighlightCodeBlock . -}}
 {{- $wrapper := $result.Wrapped -}}
 
@@ -17,13 +32,13 @@
 {{- if $config.wrapper -}}
   {{- $mode := $config.mode | default "classic" -}}
   {{- $lines := cond .Inner (len (split .Inner "\n")) 0 -}}
-  {{- $maxShownLines := $config.maxshownlines -}}
+  {{- $maxShownLines := $config.max_shown_lines | default .Attributes.maxshownlines -}}
   {{- $lineNoStart := cond (ne .Options.linenostart nil) .Options.linenostart 1 -}}
   {{- $lineNosDigit := strings.RuneCount (sub (add $lines $lineNoStart) 1) -}}
   {{- $class := "highlight" -}}
   {{- with $config.class -}}{{ $class = add $class " " . }}{{- end -}}
   {{- $targetClass := add "code-block " $class -}}
-  {{- with $config.wrapperclass -}}{{ $targetClass = add $targetClass " " . }}{{- end -}}
+  {{- with ($config.wrapper_class | default .Attributes.wrapperclass) -}}{{ $targetClass = add $targetClass " " . }}{{- end -}}
 
   {{- /* Add code wrapper around the table or pre */ -}}
   {{- $REin := cond (strings.Contains $wrapper `<table class="lntable">`)
@@ -49,7 +64,7 @@
     {{- $wrapper = dict "Wrapper" $wrapper "Config" $config | partial "function/code-copy-btn.html" -}}
   {{- end -}}
 
-  {{- /* 
+  {{- /*
     Add data attributes and class
     Directly set CSS variables to ensure compatibility with non-Chromium-based browsers
     See https://caniuse.com/css3-attr for attr() support status

@@ -7,11 +7,12 @@ categories:
   - Markdown
 tags:
   - Link
-link_guard:
-  enable: true
-  # mode: redirect
-  allow_domains:
-    - demo.fixit.lruihao.cn
+link:
+  guard:
+    enable: true
+    # mode: redirect
+    allow_domains:
+      - demo.fixit.lruihao.cn
 ---
 
 This post validates link rendering paths in FixIt, including Markdown render hook and link shortcode modes.

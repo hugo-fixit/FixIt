@@ -1,0 +1,12 @@
+{{- /*
+  Generate per-page runtime config as window.config JS content.
+
+  @param {Object} .Config - The assembled config dict
+  @return {string} The JS content string (window.config=<JSON>;)
+*/ -}}
+
+{{- $content := .Config | jsonify | printf "window.config=%s;" -}}
+{{- if hugo.IsServer -}}
+  {{- $content = add $content "console.log('Page config:', window.config);" -}}
+{{- end -}}
+{{- return $content -}}
