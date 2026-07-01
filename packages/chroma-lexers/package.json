@@ -9,6 +9,6 @@
   },
   "devDependencies": {
     "@hugo-fixit/shared": "workspace:*",
-    "ora": "^9.4.0"
+    "ora": "^9.4.1"
   }
 }
