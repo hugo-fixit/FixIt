@@ -8,7 +8,7 @@ libraries:
         - from: dist/umd/index.production.js
           to: autocomplete-js/index.production.js
   - npm: algoliasearch
-    version: 5.53.0
+    version: 5.55.1
     local:
       items:
         - from: dist/lite/builds/browser.umd.js
