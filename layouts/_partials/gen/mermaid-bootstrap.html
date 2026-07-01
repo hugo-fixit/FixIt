@@ -1,15 +1,14 @@
 {{- /*
   Mermaid bootstrap script generator.
   Returns inline module JS source used by store/script.html.
+  Config is read from window.config.mermaid at runtime.
 
   @param {String} .MermaidModuleURL - Mermaid module URL
-  @param {Object} .Mermaid - CamelCase-converted mermaid config
 */ -}}
 
 {{- printf `/** Mermaid bootstrap script generator. */
 import { bootstrapMermaid } from %s
-void bootstrapMermaid(%s)
+void bootstrapMermaid()
 `
 (.MermaidModuleURL | jsonify)
-(.Mermaid | jsonify)
 -}}

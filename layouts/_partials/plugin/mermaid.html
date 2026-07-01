@@ -13,7 +13,8 @@
 {{- if ne hugo.Context.MarkupScope "home" -}}
 
 {{- $code := strings.TrimSpace .Inner -}}
-{{- $wrapped := .Options.wrapper | default site.Params.mermaid.wrapper -}}
+{{- $mermaidConfig := dict "Page" .Page "Key" "mermaid" | partial "function/param.html" -}}
+{{- $wrapped := .Options.wrapper | default $mermaidConfig.wrapper -}}
 
 {{- if $wrapped -}}
   {{- $labelDiagram := T "tabs.diagram" -}}

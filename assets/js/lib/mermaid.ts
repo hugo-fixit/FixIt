@@ -224,11 +224,11 @@ function ensureMermaidInitialized(theme: string, darkMode: boolean): void {
     startOnLoad: false,
     darkMode,
     theme,
-    securityLevel: config.securitylevel,
+    securityLevel: config.securityLevel,
     look: config.look,
     layout: config.layout,
-    fontFamily: config.fontfamily,
-    altFontFamily: config.fontfamily,
+    fontFamily: config.fontFamily,
+    altFontFamily: config.fontFamily,
   })
 }
 
@@ -849,12 +849,12 @@ function unwrapModule<T>(mod: { default?: T } | T): T {
 /**
  * Bootstrap entry used by template-injected script.
  * Loads Mermaid and optional extensions via dynamic import and hands runtime to initMermaidRuntime.
- * @param config Mermaid configuration with CDN URLs for core and optional modules.
  */
-export async function bootstrapMermaid(config: MermaidConfig): Promise<void> {
-  const mermaidSource = config.cdn ?? 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs'
-  const zenumlSource = config.zenuml ?? ''
-  const layoutLoaderSources = config.layoutLoaders ?? []
+export async function bootstrapMermaid(): Promise<void> {
+  config = window.config?.mermaid ?? {}
+  const mermaidSource = config.cdn || 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs'
+  const zenumlSource = config.zenuml || ''
+  const layoutLoaderSources = config.layoutLoaders || []
 
   try {
     // Mermaid core module is required; optional modules degrade gracefully.

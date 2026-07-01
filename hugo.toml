@@ -642,6 +642,44 @@ ignore_list = []
 # list of file or folder names to highlight
 highlight_list = []
 
+# Mermaid config
+# See http://fixit.lruihao.cn/documentation/content-management/diagrams-support/mermaid/
+[params.mermaid]
+# whether to enable the Mermaid wrapper
+# When enabled, Mermaid diagrams are wrapped with diagram tabs and actions:
+# - pan/zoom (drag & ctrl+wheel)
+# - reset view
+# - download as SVG
+wrapper = true
+# Mermaid ESM module CDN source
+# default is https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs
+cdn = ""
+# ZenUML ESM module CDN source
+# default is empty, you can set it to a CDN source to enable ZenUML support
+# e.g. https://cdn.jsdelivr.net/npm/@mermaid-js/mermaid-zenuml/dist/mermaid-zenuml.esm.min.mjs
+zenuml = ""
+# for values, see https://mermaid.js.org/config/theming.html#available-themes
+themes = [
+  "default",
+  "dark"
+]
+# The security level for Mermaid diagrams
+# optional values: ["strict", "loose", "antiscript", "sandbox"]
+security_level = "loose"
+# The appearance style for Mermaid diagrams
+# optional values: ["classic", "handDrawn"]
+look = "handDrawn"
+# Specifies the font to be used in the rendered diagrams
+font_family = ""
+# Layout loaders from ESM module CDN sources (e.g., ELK layout engine)
+# Example: ["https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk/dist/mermaid-layout-elk.esm.min.mjs"]
+# this will enable additional layout options: ["elk", "elk.layered", "elk.stress", "elk.force", "elk.mrtree"]
+layout_loaders = []
+# default layout algorithm for rendering diagrams
+# available options: "dagre" (default), "elk", "elk.layered", "elk.stress", "elk.force", "elk.mrtree"
+# note: ELK layouts require layout_loaders to be configured first
+layout = "dagre"
+
 # Table of the contents config
 [params.toc]
 # whether to enable the table of the contents
@@ -1475,44 +1513,6 @@ duration = -1
 # whether your strings will continuously loop after completing
 # [fixme] There is a bug when printing in groups
 loop = false
-
-# Mermaid config
-# See http://fixit.lruihao.cn/documentation/content-management/diagrams-support/mermaid/
-[params.mermaid]
-# whether to enable the Mermaid wrapper
-# When enabled, Mermaid diagrams are wrapped with diagram tabs and actions:
-# - pan/zoom (drag & ctrl+wheel)
-# - reset view
-# - download as SVG
-wrapper = true
-# Mermaid ESM module CDN source
-# default is https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs
-cdn = ""
-# ZenUML ESM module CDN source
-# default is empty, you can set it to a CDN source to enable ZenUML support
-# e.g. https://cdn.jsdelivr.net/npm/@mermaid-js/mermaid-zenuml/dist/mermaid-zenuml.esm.min.mjs
-zenuml = ""
-# for values, see https://mermaid.js.org/config/theming.html#available-themes
-themes = [
-  "default",
-  "dark"
-]
-# The security level for Mermaid diagrams
-# optional values: ["strict", "loose", "antiscript", "sandbox"]
-security_level = "loose"
-# The appearance style for Mermaid diagrams
-# optional values: ["classic", "handDrawn"]
-look = "handDrawn"
-# Specifies the font to be used in the rendered diagrams
-font_family = ""
-# Layout loaders from ESM module CDN sources (e.g., ELK layout engine)
-# Example: ["https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk/dist/mermaid-layout-elk.esm.min.mjs"]
-# this will enable additional layout options: ["elk", "elk.layered", "elk.stress", "elk.force", "elk.mrtree"]
-layout_loaders = []
-# default layout algorithm for rendering diagrams
-# available options: "dagre" (default), "elk", "elk.layered", "elk.stress", "elk.force", "elk.mrtree"
-# note: ELK layouts require layout_loaders to be configured first
-layout = "dagre"
 
 # Admonitions custom config
 # See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/admonition/#custom-admonitions

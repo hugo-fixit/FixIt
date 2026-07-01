@@ -88,6 +88,16 @@
   {{- dict "Source" "js/lib/json-viewer.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
+{{- /* Mermaid */ -}}
+{{- if .Store.Get "hasMermaid" | and (not $isArchivesOrOffline) -}}
+  {{- if .Store.Get "hasPanzoom" -}}
+    {{- $source := $cdn.panzoomJS | default "lib/panzoom/panzoom.min.js" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
+  {{- end -}}
+  {{- $mermaid := dict "Page" . "Key" "mermaid" "ToCamel" true | partial "function/param.html" -}}
+  {{- $config = dict "mermaid" $mermaid | merge $config -}}
+{{- end -}}
+
 {{- /* twemoji */ -}}
 {{- if .Param "twemoji" -}}
   {{- $source := $cdn.twemojiJS | default "lib/twemoji/twemoji.min.js" -}}
@@ -343,37 +353,24 @@
   {{- dict "Source" . "Fingerprint" $fingerprint "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
 {{- end -}}
 
-{{- /* Runtime config script (window.config) */ -}}
-{{- $configJS := $config | jsonify | printf "window.config=%s;" -}}
-{{- if hugo.IsServer -}}
-  {{- $configJS = add $configJS "console.log('Page config:', window.config);" -}}
-{{- end -}}
-{{- $targetPath := "" -}}
+{{- /* Runtime config script */ -}}
+{{- $configJS := dict "Config" $config | partial "gen/config.html" -}}
+{{- $configPath := "" -}}
 {{- if $uniqueFileId | and (not .IsHome) -}}
-  {{- $targetPath = printf "%s/js/config/%s.js" $languagePrefix $uniqueFileId -}}
+  {{- $configPath = printf "%s/js/config/%s.js" $languagePrefix $uniqueFileId -}}
 {{- end -}}
-{{- dict "Content" $configJS "Path" $targetPath "Minify" hugo.IsProduction "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+{{- dict "Content" $configJS "Path" $configPath "Minify" hugo.IsProduction "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
 {{- /* File-tree plugin */ -}}
 {{- dict "Source" "js/lib/file-tree.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 
-{{- /* Mermaid plugin */ -}}
+{{- /* Mermaid module */ -}}
 {{- if .Store.Get "hasMermaid" | and (not $isArchivesOrOffline) -}}
-  {{- if .Store.Get "hasPanzoom" -}}
-    {{- $source := $cdn.panzoomJS | default "lib/panzoom/panzoom.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" $ "Data" | partial "store/script.html" -}}
-  {{- end -}}
-
-  {{- $mermaid := .Site.Params.mermaid | partial "function/camel-case-keys.html" -}}
-
   {{- $options := dict "format" "esm" -}}
   {{- $mermaidModule := dict "Resource" (resources.Get "js/lib/mermaid.ts") "Build" $options "Fingerprint" $fingerprint | partial "function/js-build.html" -}}
-  {{- $mermaidModuleURL := $mermaidModule.RelPermalink -}}
-
   {{- $bootstrapJS := dict
-    "MermaidModuleURL" $mermaidModuleURL
-    "Mermaid" $mermaid
-    | partial "plugin/mermaid-bootstrap.html"
+    "MermaidModuleURL" $mermaidModule.RelPermalink
+    | partial "gen/mermaid-bootstrap.html"
     | htmlUnescape
   -}}
   {{- dict "Content" $bootstrapJS "Path" "js/lib/mermaid-bootstrap.js" "Minify" hugo.IsProduction "Attr" `type="module"` "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
