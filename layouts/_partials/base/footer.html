@@ -9,10 +9,10 @@
       {{- /* Powered by Hugo and Theme - FixIt */ -}}
       {{- if ne $footerConfig.powered.enable false -}}
         <div class="footer-line powered{{ with $footerConfig.order.powered }} order-{{ . }}{{ end }}">
-          {{- $hugo := printf `<a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo %v">{hugoLogo}Hugo</a>` hugo.Version -}}
-          {{- $theme := printf `<a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt %v">{themeLogo}FixIt</a>` (hugo.Store.Get "version") -}}
+          {{- $hugo := replace `<a href="https://github.com/gohugoio/hugo?v={hugoVersion}" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo {hugoVersion}">{hugoLogo}Hugo</a>` "{hugoVersion}" hugo.Version -}}
+          {{- $theme := replace `<a href="https://github.com/hugo-fixit/FixIt?v={themeVersion}" target="_blank" rel="external" title="FixIt {themeVersion}">{themeLogo}FixIt</a>` "{themeVersion}" (hugo.Store.Get "version") -}}
           {{- if $footerConfig.powered.hugo_logo -}}
-          {{- $hugoLogo := printf `<img class="hugo-icon" src="%v" alt="Hugo logo" /> ` (resources.Get "images/hugo.svg" | minify).RelPermalink -}}
+            {{- $hugoLogo := printf `<img class="hugo-icon" src="%v" alt="Hugo logo" /> ` (resources.Get "images/hugo.svg" | minify).RelPermalink -}}
             {{- $hugo = replace $hugo "{hugoLogo}" $hugoLogo -}}
           {{- end -}}
           {{- if $footerConfig.powered.theme_logo -}}
