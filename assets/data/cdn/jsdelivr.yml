@@ -31,8 +31,8 @@ libFiles:
   cryptoSha256JS: crypto-js@4.2.0/sha256.js
   # echarts@6.1.0 https://github.com/apache/echarts
   echartsJS: echarts@6.1.0/dist/echarts.min.js
-  # @fortawesome/fontawesome-free@7.2.0 https://github.com/FortAwesome/Font-Awesome
-  fontawesomeFreeCSS: '@fortawesome/fontawesome-free@7.2.0/css/all.min.css'
+  # @fortawesome/fontawesome-free@7.3.0 https://github.com/FortAwesome/Font-Awesome
+  fontawesomeFreeCSS: '@fortawesome/fontawesome-free@7.3.0/css/all.min.css'
   # gitalk@1.8.0 https://github.com/gitalk/gitalk
   gitalkCSS: gitalk@1.8.0/dist/gitalk.min.css
   gitalkJS: gitalk@1.8.0/dist/gitalk.min.js
