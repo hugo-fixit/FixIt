@@ -172,8 +172,12 @@ function isRenderContextActive(el: Element): boolean {
     return false
 
   const panel = el.closest('.tab-panel')
-  if (panel instanceof HTMLElement && panel.hidden)
-    return false
+  if (panel) {
+    // tab-container uses slot-based hiding; check actual layout visibility
+    const panelRect = panel.getBoundingClientRect()
+    if (panelRect.width === 0 && panelRect.height === 0)
+      return false
+  }
 
   return true
 }
@@ -264,7 +268,7 @@ async function renderMermaidElement(el: Element | null, options: RenderOptions):
     try {
       const result = await mermaid.render(id, source, el)
       const svg = result?.svg ?? ''
-      el.innerHTML = svg
+      svg && (el.innerHTML = svg)
       if (typeof result?.bindFunctions === 'function') {
         try {
           result.bindFunctions(el)
@@ -674,6 +678,12 @@ function bindTabContainerChanged(): void {
     if (!panel)
       return
     observeMermaidContainers(panel, true)
+    // Also schedule neutral layer render for the newly visible panel
+    const neutralNodes = panel.querySelectorAll<Element>('.mermaid-neutral')
+    neutralNodes.forEach((el) => {
+      if (!el.hasAttribute('data-processed'))
+        void renderMermaidElement(el, { theme: 'neutral', darkMode: false })
+    })
   }, false)
 }
 
