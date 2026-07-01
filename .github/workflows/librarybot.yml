@@ -14,7 +14,7 @@ jobs:
       libraries: ${{ steps.list.outputs.libraries_json }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: List libraries
         id: list
         uses: hugo-fixit/librarybot@v1
@@ -29,7 +29,7 @@ jobs:
         library: ${{ fromJson(needs.prepare.outputs.libraries) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Update library
         id: update
         uses: hugo-fixit/librarybot@v1
