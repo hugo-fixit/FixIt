@@ -3,7 +3,7 @@
   - Reads analytics config from Site Store.
   - Conditionally renders provider snippets when enabled.
   - Supported providers include Google, Fathom, Baidu, Umami, and others.
-  @param {Object} .Site Hugo site object
+  @param {Object} .Site - Hugo site object
 */ -}}
 
 {{- $analytics := .Site.Store.Get "analytics" | default dict -}}

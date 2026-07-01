@@ -2,7 +2,7 @@
   Social share buttons renderer.
   - Reads share switches from merged theme/page params.
   - Outputs provider-specific sharer attributes for supported platforms.
-  @param {Object} .Page current page context
+  @param {Object} .Page - Current page context
 */ -}}
 
 {{- $share := dict "Page" . "Key" "share" | partial "function/param.html" | default dict -}}

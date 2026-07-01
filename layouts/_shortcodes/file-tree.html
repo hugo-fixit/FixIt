@@ -2,14 +2,14 @@
   Renders an interactive file tree structure from inline content, resources, data files, or filesystem
   See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/file-tree/
 
-  @param {string} [path="/"] - The path to scan in filesystem (relative to project root or contentDir)
-  @param {int} [level=1] - The expand level of the tree (expand all: -1, collapse all: 0)
-  @param {boolean} [folder_slash=false] - Whether to append a trailing "/" to folder names.
-  @param {string} [file] - The path of a data file in page resources or assets. (JSON/YAML/TOML)
-  @param {string} [data] - The name of the data file in data/filetree/ directory. (JSON/YAML/TOML)
-  @param {string} [ignore_list=""] - List of file or folder names to ignore, separated by commas
-  @param {string} [highlight_list=""] - List of file or folder names to highlight, separated by commas
-  @param {string} [name] - Project name for the root node, if set to `{path}`, uses the full root path
+  @param {String} [path="/"] - The path to scan in filesystem (relative to project root or contentDir)
+  @param {Int} [level=1] - The expand level of the tree (expand all: -1, collapse all: 0)
+  @param {Boolean} [folder_slash=false] - Whether to append a trailing "/" to folder names.
+  @param {String} [file] - The path of a data file in page resources or assets. (JSON/YAML/TOML)
+  @param {String} [data] - The name of the data file in data/filetree/ directory. (JSON/YAML/TOML)
+  @param {String} [ignore_list=""] - List of file or folder names to ignore, separated by commas
+  @param {String} [highlight_list=""] - List of file or folder names to highlight, separated by commas
+  @param {String} [name] - Project name for the root node, if set to `{path}`, uses the full root path
 
   Priority order (highest to lowest):
   1. Inline content (shortcode body) - Parse tree data from shortcode body

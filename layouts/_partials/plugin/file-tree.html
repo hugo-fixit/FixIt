@@ -1,11 +1,11 @@
 {{- /*
   Recursive function to render tree from structured data
-  @param {array} items - Array of tree items
-  @param {int} level - The expand level of the tree (expand all: -1, collapse all: 0)
-  @param {int} [depth=0] - Current depth level
-  @param {bool} [folder_slash=false] - Whether to append a trailing "/" to folder names
-  @param {array} [ignore_list] - List of file or folder names to ignore
-  @param {array} [highlight_list] - List of file or folder names to highlight
+  @param {Array} items - Array of tree items
+  @param {Int} level - The expand level of the tree (expand all: -1, collapse all: 0)
+  @param {Int} [depth=0] - Current depth level
+  @param {Boolean} [folder_slash=false] - Whether to append a trailing "/" to folder names
+  @param {Array} [ignore_list] - List of file or folder names to ignore
+  @param {Array} [highlight_list] - List of file or folder names to highlight
 
   File tree item structure:
     name: string     - The name of the file or folder

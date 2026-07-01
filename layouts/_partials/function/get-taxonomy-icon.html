@@ -1,9 +1,9 @@
 {{- /*
   Resolve taxonomy icon by slot with site-level overrides.
 
-  @param {String} .Taxonomy taxonomy singular key, e.g. "tag", "category"
-  @param {String} .Slot icon slot: "title", "card", "term"
-  @return {String} icon class
+  @param {String} .Taxonomy - Taxonomy singular key, e.g. "tag", "category"
+  @param {String} .Slot - Icon slot: "title", "card", "term"
+  @return {String} Icon class
 */ -}}
 {{- $taxonomy := .Taxonomy | default "category" -}}
 {{- $slot := .Slot | default "title" -}}

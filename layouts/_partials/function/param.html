@@ -7,11 +7,11 @@
   For Page-level scalar params (e.g., capitalize_titles, ruby, password), use
   .Param "xxx" directly instead of this partial.
 
-  @param {map} . - dict with "Page", "Key", and optional "ToCamel" fields
+  @param {Map} . - Dict with "Page", "Key", and optional "ToCamel" fields
     - Page: the page context
     - Key: the param key name (e.g., "toc", "reward", "math")
     - ToCamel: if true, convert result keys to camelCase (default: false)
-  @return {map} The merged param map
+  @return {Map} The merged param map
 
   @example
   {{- $toc := dict "Page" . "Key" "toc" | partial "function/param.html" -}}

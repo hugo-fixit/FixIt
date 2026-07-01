@@ -9,15 +9,15 @@
     2. Page resources: "featured-image-preview" (if Preview=true), then "featured-image"
     3. Global resources: by the front matter value as a path
 
-  @param {map} . - Configuration dict
+  @param {Map} . - Configuration dict
     - Page: {Page} the page context (required)
-    - Preview: {bool} if true, prefer featured_image_preview over featured_image (default: false)
-    - Build: {bool} if true, resolve resource objects and permalinks; if false, only check existence (default: false)
-  @return {map} dict with:
-    - Source: {string} the raw front matter value (may be empty)
-    - Matches: {slice} matched resource names (e.g., ["featured-image-preview"])
-    - Resource: {object} the resolved Hugo resource object (empty dict if Build=false or not found)
-    - URL: {string} the resolved permalink, or raw front matter value if resource not found
+    - Preview: {Boolean} if true, prefer featured_image_preview over featured_image (default: false)
+    - Build: {Boolean} if true, resolve resource objects and permalinks; if false, only check existence (default: false)
+  @return {Map} dict with:
+    - Source: {String} the raw front matter value (may be empty)
+    - Matches: {Slice} matched resource names (e.g., ["featured-image-preview"])
+    - Resource: {Object} the resolved Hugo resource object (empty dict if Build=false or not found)
+    - URL: {String} the resolved permalink, or raw front matter value if resource not found
 
   @example
   {{- $cover := dict "Page" . | partial "function/get-cover.html" -}}

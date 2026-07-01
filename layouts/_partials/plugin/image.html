@@ -8,25 +8,25 @@
 
   @param {String} .Src - Image path (page resource, global resource, or remote URL)
   @param {Object} [.Resources] - Page resources (.Resources), required for page resources
-  @param {Array}  [.OptimConfig] - srcset processing config, e.g.:
+  @param {Array} [.OptimConfig] - srcset processing config, e.g.:
       slice (dict "Process" "resize 800x webp" "descriptor" "800w")
       See https://gohugo.io/content-management/image-processing/
   @param {String} [.Alt] - Alt text
   @param {String} [.Title] - Title attribute
   @param {String} [.Caption] - Caption for lightgallery
-  @param {Int}    [.Width] - Intrinsic width in pixels
-  @param {Int}    [.Height] - Intrinsic height in pixels
+  @param {Int} [.Width] - Intrinsic width in pixels
+  @param {Int} [.Height] - Intrinsic height in pixels
   @param {String} [.Loading] - "eager" or "lazy" (default: "lazy")
   @param {String} [.Class] - CSS classes
   @param {String} [.Sizes] - srcset sizes attribute
-  @param {Array}  [.Matches] - Resource match names, e.g. ["featured-image-preview", "featured-image"]
+  @param {Array} [.Matches] - Resource match names, e.g. ["featured-image-preview", "featured-image"]
   @param {Boolean} [.Linked] - Wrap in lightgallery link
   @param {Object} [.Rel] - rel attribute
   @param {String} [.Decoding] - decoding attribute
   @param {String} [.Referrerpolicy] - referrerpolicy attribute
   @param {Boolean} [.Optimise] - Override site param to enable optimisation
   @param {Boolean} [.CacheRemote] - Override site param to enable remote caching
-  @param {Array}   [.BlackList] - Override site param black list
+  @param {Array} [.BlackList] - Override site param black list
   @param {Object} [.Page] - Page context for page-level image config override
 
   @example

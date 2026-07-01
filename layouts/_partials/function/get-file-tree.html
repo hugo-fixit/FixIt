@@ -7,16 +7,16 @@
 
   NOTE: For performance reasons, the recursion depth is limited to 10 levels by default.
 
-  @param {string} root - The root path to scan (relative to project root or contentDir)
-  @param {string} [path] - The directory path for recursive calls
-  @param {int} [level=10] - Descend only level directories deep
-  @param {int} [deep=0] - Current depth level for recursive calls
-  @param {array} [ignore_list] - List of file or folder names to ignore
-  @param {boolean} [is_recursive=false] - Internal flag for recursive calls
-  @param {string} [name] - Project name for the root node, if set to `{path}`, uses the full root path
-  @param {string} [lang] - Page language for multilingual sites
-  @param {boolean} [log=false] - Whether to log warnings
-  @return {array} Array of tree items with structure: {name, type, children?}, or empty array if root doesn't exist
+  @param {String} root - The root path to scan (relative to project root or contentDir)
+  @param {String} [path] - The directory path for recursive calls
+  @param {Int} [level=10] - Descend only level directories deep
+  @param {Int} [deep=0] - Current depth level for recursive calls
+  @param {Array} [ignore_list] - List of file or folder names to ignore
+  @param {Boolean} [is_recursive=false] - Internal flag for recursive calls
+  @param {String} [name] - Project name for the root node, if set to `{path}`, uses the full root path
+  @param {String} [lang] - Page language for multilingual sites
+  @param {Boolean} [log=false] - Whether to log warnings
+  @return {Array} Array of tree items with structure: {name, type, children?}, or empty array if root doesn't exist
 */ -}}
 
 {{- $result := slice -}}
