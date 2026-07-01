@@ -68,9 +68,22 @@
 {{- $deprecatedNestedKeys := dict
   "search" (slice "content_length" "absolute_url" "max_result_length" "snippet_length" "highlight_tag")
   "search.algolia" (slice "app_id" "search_key")
+  "header" (slice "desktop_mode" "mobile_mode")
+  "breadcrumb" (slice "show_home")
+  "navigation" (slice "in_section")
+  "footer.powered" (slice "hugo_logo" "theme_logo")
+  "footer" (slice "site_time")
   "home.profile" (slice "only_first_page" "gravatar_email" "avatar_url" "avatar_menu")
   "home.posts" (slice "image_preview")
-  "footer.powered" (slice "hugo_logo" "theme_logo")
+  "watermark" (slice "row_spacing" "col_spacing" "font_size" "font_family")
+  "busuanzi" (slice "site_views" "page_views")
+  "image" (slice "cache_remote" "black_list")
+  "mermaid" (slice "security_level" "font_family" "layout_loaders")
+  "codeblock" (slice "wrapper_class" "max_shown_lines" "line_nos_toggler" "line_wrap_toggler")
+  "filetree" (slice "folder_slash" "ignore_list")
+  "math.katex" (slice "copy_tex" "throw_on_error" "error_color")
+  "math.mathjax.options" (slice "enable_menu" "skip_html_tags" "ignore_html_class")
+  "post_summary" (slice "post_url" "word_limit" "typing_animate" "beginning_text" "loading_text")
 -}}
 {{- range $sectionPath, $keys := $deprecatedNestedKeys -}}
   {{- $parts := split $sectionPath "." -}}
@@ -93,6 +106,11 @@
       {{- end -}}
     {{- end -}}
   {{- end -}}
+{{- end -}}
+
+{{- /* Front matter key migration warnings */ -}}
+{{- with $.Page.Params.link_guard -}}
+  {{- $warns = $warns | append "Front matter parameter `link_guard` has been removed since v1.0.0, use `link.guard` instead." -}}
 {{- end -}}
 
 {{- if fileExists "assets/css/_custom.scss" -}}

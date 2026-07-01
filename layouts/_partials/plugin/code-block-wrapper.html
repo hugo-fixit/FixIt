@@ -32,13 +32,13 @@
 {{- if $config.wrapper -}}
   {{- $mode := $config.mode | default "classic" -}}
   {{- $lines := cond .Inner (len (split .Inner "\n")) 0 -}}
-  {{- $maxShownLines := $config.max_shown_lines -}}
+  {{- $maxShownLines := $config.max_shown_lines | default .Attributes.maxshownlines -}}
   {{- $lineNoStart := cond (ne .Options.linenostart nil) .Options.linenostart 1 -}}
   {{- $lineNosDigit := strings.RuneCount (sub (add $lines $lineNoStart) 1) -}}
   {{- $class := "highlight" -}}
   {{- with $config.class -}}{{ $class = add $class " " . }}{{- end -}}
   {{- $targetClass := add "code-block " $class -}}
-  {{- with $config.wrapper_class -}}{{ $targetClass = add $targetClass " " . }}{{- end -}}
+  {{- with ($config.wrapper_class | default .Attributes.wrapperclass) -}}{{ $targetClass = add $targetClass " " . }}{{- end -}}
 
   {{- /* Add code wrapper around the table or pre */ -}}
   {{- $REin := cond (strings.Contains $wrapper `<table class="lntable">`)

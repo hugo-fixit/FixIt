@@ -28,7 +28,7 @@
 {{- $pageConfig := dict "Page" .Page "Key" "filetree" | partial "function/param.html" -}}
 {{- $config := .Attributes | merge $pageConfig -}}
 {{- $level := cond (isset $config "level") ($config.level | int) 1 -}}
-{{- $folderSlash := $config.folder_slash | default false -}}
+{{- $folderSlash := $config.folder_slash | default .Attributes.folderslash | default false -}}
 {{- $ignoreList := union (apply (split (.Attributes.ignore_list | default .Attributes.ignorelist | default "") ",") "trim" "." " ") $pageConfig.ignore_list -}}
 {{- $highlightList := union (apply (split (.Attributes.highlight_list | default .Attributes.highlightlist | default "") ",") "trim" "." " ") $pageConfig.highlight_list -}}
 {{- /* Deprecated camelCase attribute support */ -}}
