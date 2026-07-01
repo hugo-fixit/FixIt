@@ -563,6 +563,21 @@ email = ""
 link = ""
 avatar = ""
 
+# Link config
+[params.link]
+# whether to add external Icon for external links automatically
+external_icon = true
+
+# External link guard config
+[params.link.guard]
+enable = false
+# external link guard mode, available modes: ["modal", "redirect"]
+# in "modal" mode, a dialog will pop up to ask for confirmation when users click external links
+# in "redirect" mode, users will be redirected to an intermediate page before visiting external links
+mode = "modal"
+# allowed domains (exact host or parent domain) will skip confirmation
+allow_domains = []
+
 # Table of the contents config
 [params.toc]
 # whether to enable the table of the contents
@@ -1656,23 +1671,6 @@ optimise = false
 # A list of image file names or patterns to exclude from optimisation
 # e.g. ["no-optimize.jpg", "*.tiff", "images/exclude-*.webp"]
 black_list = []
-
-# Link config
-# [todo] move to page-level and remvoe link_guard front matter
-[params.link]
-# whether to add external Icon for external links automatically
-external_icon = true
-
-# External link guard config
-# per-page override via front matter: link_guard (bool/object)
-[params.link.guard]
-enable = false
-# external link guard mode, available modes: ["modal"， "redirect"]
-# in "modal" mode, a dialog will pop up to ask for confirmation when users click external links
-# in "redirect" mode, users will be redirected to an intermediate page before visiting external links
-mode = "modal"
-# allowed domains (exact host or parent domain) will skip confirmation
-allow_domains = []
 
 # Code block wrapper config
 # you can override the global config via Markdown attributes, for example:

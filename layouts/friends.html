@@ -1,19 +1,21 @@
 {{- /*
   [todo] refactor #206
-  [todo] link_guard usage in data file
+  [todo] link guard usage in data file
   Friends page template.
 
   Usage:
   1. Friend link items are loaded from data/friends.yml.
   2. External link guard is disabled by default on this page.
-  3. To enable guard for all friend links on the current page, set `link_guard` to `true` in front matter.
+  3. To enable guard for all friend links on the current page, set link.guard.enable in front matter.
 
   @example
   ```md
   ---
   title: friends
   layout: friends
-  link_guard: true
+  link:
+    guard:
+      enable: true
   ---
   ```
 */ -}}
@@ -24,7 +26,7 @@
 {{- end -}}
 
 {{- define "content" -}}
-  {{- $isGuarded := .Params.link_guard | default false -}}
+  {{- $isGuarded := .Params.link.guard.enable | default false -}}
   <article class="page single special friends">
     <div class="header">
       {{- /* Title */ -}}

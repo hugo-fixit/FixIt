@@ -108,10 +108,7 @@
   {{- end -}}
 
   {{- /* Link Guard Dialog */ -}}
-  {{- $linkGuard := .Site.Params.link.guard -}}
-  {{- with .Params.link_guard -}}
-    {{- $linkGuard = (cond (reflect.IsMap .) . (dict "enable" .)) | merge $linkGuard -}}
-  {{- end -}}
+  {{- $linkGuard := (dict "Page" . "Key" "link" | partial "function/param.html").guard | default dict -}}
   {{- if $linkGuard.enable | and (eq $linkGuard.mode "modal") -}}
     <dialog id="link-guard-dialog" aria-labelledby="link-guard-dialog-title" closedby="any">
       <div class="guard-content">

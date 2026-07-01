@@ -103,6 +103,9 @@
 
 {{- $blockSchemes := slice "javascript" "mailto" "tel" "file" "data" "vscode" "trae" -}}
 {{- $config := partial "function/camel-case-keys.html" site.Params.link -}}
+{{- with .Page -}}
+  {{- $config = dict "Page" . "Key" "link" "ToCamel" true | partial "function/param.html" -}}
+{{- end -}}
 {{- $rel := .Rel | default "" -}}
 {{- $isExternal := false -}}
 {{- $noreferrer := true -}}
@@ -126,18 +129,10 @@
 
 {{- /* External link guard */ -}}
 {{- $isGuarded := false -}}
-{{- $guardConfig := $config.guard -}}
-{{- with .Page.Params.link_guard -}}
-  {{- if reflect.IsMap . -}}
-    {{- $guardConfig = partial "function/camel-case-keys.html" . | merge $guardConfig -}}
-  {{- else -}}
-    {{- $guardConfig = (dict "enable" .) | merge $guardConfig -}}
-  {{- end -}}
-{{- end -}}
 {{- if
-  $guardConfig.enable
+  $config.guard.enable
   | and $isExternal
-  | and (not (in $guardConfig.allowDomains $url.Host))
+  | and (not (in $config.guard.allowDomains $url.Host))
 -}}
   {{- $isGuarded = .IsGuarded | default true -}}
 {{- end -}}
@@ -159,7 +154,7 @@
 {{- with .Download -}}
   {{- $attrs = printf ` download="%s"` . | add $attrs -}}
 {{- end -}}
-{{- if $isGuarded | and (eq $guardConfig.mode "modal") -}}
+{{- if $isGuarded | and (eq $config.guard.mode "modal") -}}
   {{- $attrs = add $attrs ` data-guard="modal"` -}}
 {{- end -}}
 
