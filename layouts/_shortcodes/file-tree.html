@@ -52,14 +52,14 @@
   ```
 */ -}}
 
-{{- $config := dict | merge .Page.Params.filetree | merge .Site.Params.filetree -}}
+{{- $config := dict "Page" .Page "Key" "filetree" | partial "function/param.html" -}}
 {{- $root := cond .IsNamedParams (.Get "path") (.Get 0) | default "/" -}}
 {{- $level := cond .IsNamedParams (.Get "level") (.Get 1) -}}
 {{- $config = cond ((eq $level 0) | or $level) (dict "level" $level | merge $config) $config -}}
 {{- $level = cond (isset $config "level") ($config.level | int) 1 -}}
 {{- $folderSlash := cond .IsNamedParams (.Get "folder_slash" | default (.Get "folderSlash")) (.Get 2) | default $config.folder_slash | default false -}}
 {{- if .IsNamedParams | and (.Get "folderSlash") -}}
-  {{- warnidf "deprecated-file-tree-param" "[%s]: The parameter `folderSlash` is deprecated since v1.0.0, use `folder_slash` instead. See %s" .Name .Position -}}
+  {{- warnidf "v1-deprecated-file-tree-param" "[%s]: The parameter `folderSlash` is deprecated since v1.0.0, use `folder_slash` instead. See %s" .Name .Position -}}
 {{- end -}}
 {{- $fileName := .Get "file" -}}
 {{- $dataName := .Get "data" -}}
@@ -67,10 +67,10 @@
 {{- $ignoreList := union (apply (split (.Get "ignore_list" | default (.Get "ignoreList") | default "") ",") "trim" "." " ") $config.ignore_list -}}
 {{- $highlightList := union (apply (split (.Get "highlight_list" | default (.Get "highlightList") | default "") ",") "trim" "." " ") $config.highlight_list -}}
 {{- if .IsNamedParams | and (.Get "ignoreList") -}}
-  {{- warnidf "deprecated-file-tree-param" "[%s]: The parameter `ignoreList` is deprecated since v1.0.0, use `ignore_list` instead. See %s" .Name .Position -}}
+  {{- warnidf "v1-deprecated-file-tree-param" "[%s]: The parameter `ignoreList` is deprecated since v1.0.0, use `ignore_list` instead. See %s" .Name .Position -}}
 {{- end -}}
 {{- if .IsNamedParams | and (.Get "highlightList") -}}
-  {{- warnidf "deprecated-file-tree-param" "[%s]: The parameter `highlightList` is deprecated since v1.0.0, use `highlight_list` instead. See %s" .Name .Position -}}
+  {{- warnidf "v1-deprecated-file-tree-param" "[%s]: The parameter `highlightList` is deprecated since v1.0.0, use `highlight_list` instead. See %s" .Name .Position -}}
 {{- end -}}
 
 {{- /* Shortcode body */ -}}

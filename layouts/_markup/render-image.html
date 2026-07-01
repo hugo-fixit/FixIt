@@ -16,12 +16,12 @@ A Markdown image has three components: the image description, the image destinat
 {{- if .Title -}}
   {{- $linked := ne $lightgallery false -}}
   <figure>
-    {{- dict "Src" .Destination "Alt" .PlainText "Title" .Title "Caption" .Text "Linked" $linked "Loading" "lazy" "Resources" .Page.Resources "OptimConfig" $optim | partial "plugin/image.html" -}}
+    {{- dict "Page" .Page "Src" .Destination "Alt" .PlainText "Title" .Title "Caption" .Text "Linked" $linked "Loading" "lazy" "Resources" .Page.Resources "OptimConfig" $optim | partial "plugin/image.html" -}}
     <figcaption class="image-caption">
       {{- .Title | safeHTML -}}
     </figcaption>
   </figure>
 {{- else -}}
   {{- $linked := (eq $lightgallery "force") | or ($lightgallery | and (ne .Title "")) -}}
-  {{- dict "Src" .Destination "Alt" .PlainText "Title" .Title "Linked" $linked "Loading" "lazy" "Resources" .Page.Resources "OptimConfig" $optim | partial "plugin/image.html" -}}
+  {{- dict "Page" .Page "Src" .Destination "Alt" .PlainText "Title" .Title "Linked" $linked "Loading" "lazy" "Resources" .Page.Resources "OptimConfig" $optim | partial "plugin/image.html" -}}
 {{- end -}}

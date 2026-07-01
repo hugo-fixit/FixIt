@@ -16,11 +16,11 @@
 {{- if $config.title -}}
   {{- $titleEl = printf `<span class="code-title">%s<span class="title-inner">%s</span></span>` $foldIcon $config.title -}}
 {{- end -}}
-{{- if $config.linenostoggler -}}
+{{- if $config.line_nos_toggler -}}
   {{- $lineNosIcon := dict "Class" "fa-solid fa-list-ol" | partial "plugin/icon.html" -}}
   {{- $lineNosBtn = printf `<button type="button" class="action-btn line-nos-btn" aria-label="%s" title="%s">%s</button>` (T "assets.toggleLineNumbers") (T "assets.toggleLineNumbers") $lineNosIcon -}}
 {{- end -}}
-{{- if $config.linewraptoggler -}}
+{{- if $config.line_wrap_toggler -}}
   {{- $lineWrapIcon := dict "Class" "fa-solid fa-right-left" | partial "plugin/icon.html" -}}
   {{- $lineWrapBtn = printf `<button type="button" class="action-btn line-wrap-btn" aria-label="%s" title="%s">%s</button>` (T "assets.toggleLineWrap") (T "assets.toggleLineWrap") $lineWrapIcon -}}
 {{- end -}}

@@ -25,7 +25,7 @@
     ```
 */ -}}
 
-{{- $pageConfig := dict | merge .Page.Params.filetree | merge .Page.Site.Params.filetree -}}
+{{- $pageConfig := dict "Page" .Page "Key" "filetree" | partial "function/param.html" -}}
 {{- $config := .Attributes | merge $pageConfig -}}
 {{- $level := cond (isset $config "level") ($config.level | int) 1 -}}
 {{- $folderSlash := $config.folder_slash | default false -}}
@@ -33,13 +33,13 @@
 {{- $highlightList := union (apply (split (.Attributes.highlight_list | default .Attributes.highlightlist | default "") ",") "trim" "." " ") $pageConfig.highlight_list -}}
 {{- /* Deprecated camelCase attribute support */ -}}
 {{- if isset .Attributes "folderslash" -}}
-  {{- warnidf "deprecated-file-tree-attr" "The attribute `folderSlash` is deprecated since v1.0.0, use `folder_slash` instead. See %s" .Position -}}
+  {{- warnidf "v1-deprecated-file-tree-attr" "The attribute `folderSlash` is deprecated since v1.0.0, use `folder_slash` instead. See %s" .Position -}}
 {{- end -}}
 {{- if isset .Attributes "ignorelist" | and (not (isset .Attributes "ignore_list")) -}}
-  {{- warnidf "deprecated-file-tree-attr" "The attribute `ignoreList` is deprecated since v1.0.0, use `ignore_list` instead. See %s" .Position -}}
+  {{- warnidf "v1-deprecated-file-tree-attr" "The attribute `ignoreList` is deprecated since v1.0.0, use `ignore_list` instead. See %s" .Position -}}
 {{- end -}}
 {{- if isset .Attributes "highlightlist" | and (not (isset .Attributes "highlight_list")) -}}
-  {{- warnidf "deprecated-file-tree-attr" "The attribute `highlightList` is deprecated since v1.0.0, use `highlight_list` instead. See %s" .Position -}}
+  {{- warnidf "v1-deprecated-file-tree-attr" "The attribute `highlightList` is deprecated since v1.0.0, use `highlight_list` instead. See %s" .Position -}}
 {{- end -}}
 
 {{- $content := strings.TrimSpace .Inner | default "" -}}

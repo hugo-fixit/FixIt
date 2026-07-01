@@ -32,11 +32,11 @@
   {{- if ne .Attributes.fullscreen nil -}}
     {{- $commonAttrsStr = printf "%s, fullscreen=%v" $commonAttrsStr .Attributes.fullscreen -}}
   {{- end -}}
-  {{- if ne .Attributes.linenostoggler nil -}}
-    {{- $commonAttrsStr = printf "%s, lineNosToggler=%v" $commonAttrsStr .Attributes.linenostoggler -}}
+  {{- if ne .Attributes.line_nos_toggler nil -}}
+    {{- $commonAttrsStr = printf "%s, line_nos_toggler=%v" $commonAttrsStr .Attributes.line_nos_toggler -}}
   {{- end -}}
-  {{- if ne .Attributes.linewraptoggler nil -}}
-    {{- $commonAttrsStr = printf "%s, lineWrapToggler=%v" $commonAttrsStr .Attributes.linewraptoggler -}}
+  {{- if ne .Attributes.line_wrap_toggler nil -}}
+    {{- $commonAttrsStr = printf "%s, line_wrap_toggler=%v" $commonAttrsStr .Attributes.line_wrap_toggler -}}
   {{- end -}}
   {{- if ne .Attributes.editable nil -}}
     {{- $commonAttrsStr = printf "%s, editable=%v" $commonAttrsStr .Attributes.editable -}}

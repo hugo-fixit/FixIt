@@ -578,6 +578,70 @@ mode = "modal"
 # allowed domains (exact host or parent domain) will skip confirmation
 allow_domains = []
 
+# Image config
+# combined with Hugo's image processing option `imaging` for image optimisation
+[params.image]
+# cache remote images for better optimisations
+cache_remote = false
+# Image resizing and optimisation (may slow builds)
+optimise = false
+# A list of image file names or patterns to exclude from optimisation
+# e.g. ["no-optimize.jpg", "*.tiff", "images/exclude-*.webp"]
+black_list = []
+
+# Code block wrapper config
+# you can override the global config via Markdown attributes, for example:
+# ```lang {mode="mac", max_shown_lines=5}
+# code here
+# ```
+[params.codeblock]
+# whether to enable the code block wrapper
+wrapper = true
+# code block mode
+# available modes: ["classic", "mac", "simple", ...]
+# if you set to custom value, you need to create a custom CSS for data-mode attribute
+mode = "classic"
+# additional classes for the code block wrapper
+# e.g. "is-collapsed is-expanded line-nos-hidden line-wrapping"
+wrapper_class = ""
+# the maximum number of lines to show in the code block preview
+max_shown_lines = 10
+# whether to show shadow effect for code blocks, available values: ["always", "hover", "never"]
+shadow = "never"
+# whether to enable code copy button
+copyable = true
+# [classic] whether to enable code download button in the code block header
+downloadable = false
+# [classic] whether to enable code fullscreen button in the code block header
+fullscreen = false
+# [classic] whether to enable line numbers toggle button in the code block header
+line_nos_toggler = true
+# [classic] whether to enable toggle line wrapping button in the code block header
+line_wrap_toggler = true
+# [classic][Experimental] whether to enable code edit button in the code block header
+editable = false
+
+# JSON Viewer config
+# See https://github.com/Lruihao/json-viewer-element
+[params.json_viewer]
+enable = true
+expand_depth = 1
+copyable = true
+sort = false
+boxed = true
+
+# File tree config
+# See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/file-tree/
+[params.filetree]
+# the expand level of the tree (expand all: -1, collapse all: 0)
+level = 1
+# whether to append a trailing "/" to folder names
+folder_slash = false
+# list of file or folder names to ignore
+ignore_list = []
+# list of file or folder names to highlight
+highlight_list = []
+
 # Table of the contents config
 [params.toc]
 # whether to enable the table of the contents
@@ -1660,70 +1724,6 @@ full_text = true
 [params.feed.follow]
 feed_id = ""
 user_id = ""
-
-# Image config
-# combined with Hugo's image processing option `imaging` for image optimisation
-[params.image]
-# cache remote images for better optimisations
-cache_remote = false
-# Image resizing and optimisation (may slow builds)
-optimise = false
-# A list of image file names or patterns to exclude from optimisation
-# e.g. ["no-optimize.jpg", "*.tiff", "images/exclude-*.webp"]
-black_list = []
-
-# Code block wrapper config
-# you can override the global config via Markdown attributes, for example:
-# ```lang {mode="mac", max_shown_lines=5}
-# code here
-# ```
-[params.codeblock]
-# whether to enable the code block wrapper
-wrapper = true
-# code block mode
-# available modes: ["classic", "mac", "simple", ...]
-# if you set to custom value, you need to create a custom CSS for data-mode attribute
-mode = "classic"
-# additional classes for the code block wrapper
-# e.g. "is-collapsed is-expanded line-nos-hidden line-wrapping"
-wrapper_class = ""
-# the maximum number of lines to show in the code block preview
-max_shown_lines = 10
-# whether to show shadow effect for code blocks, available values: ["always", "hover", "never"]
-shadow = "never"
-# whether to enable code copy button
-copyable = true
-# [classic] whether to enable code download button in the code block header
-downloadable = false
-# [classic] whether to enable code fullscreen button in the code block header
-fullscreen = false
-# [classic] whether to enable line numbers toggle button in the code block header
-line_nos_toggler = true
-# [classic] whether to enable toggle line wrapping button in the code block header
-line_wrap_toggler = true
-# [classic][Experimental] whether to enable code edit button in the code block header
-editable = false
-
-# JSON Viewer config
-# See https://github.com/Lruihao/json-viewer-element
-[params.json_viewer]
-enable = true
-expand_depth = 1
-copyable = true
-sort = false
-boxed = true
-
-# File tree config
-# See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/file-tree/
-[params.filetree]
-# the expand level of the tree (expand all: -1, collapse all: 0)
-level = 1
-# whether to append a trailing "/" to folder names
-folder_slash = false
-# list of file or folder names to ignore
-ignore_list = []
-# list of file or folder names to highlight
-highlight_list = []
 
 # Taxonomy icons config
 # works with [taxonomies]. Configure [taxonomies] first, otherwise taxonomy icons will not take effect.
