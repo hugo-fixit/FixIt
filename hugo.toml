@@ -524,18 +524,6 @@ fraction = true
 fontawesome = true
 # license info (HTML format is supported)
 license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>'
-# whether to show link to Raw Markdown content of the post
-link_to_markdown = true
-# whether to show link to view source code of the post
-link_to_source = true
-# whether to show link to edit the post
-link_to_edit = true
-# whether to show link to report issue for the post
-link_to_report = true
-# whether to show link to view the post in VSCode
-# [todo] (string) migrate to link_to_editor config in the future
-# to support more editors (vscode://, trae://, etc.)
-link_to_vscode = true
 # Page style ["narrow", "normal", "wide", ...]
 page_style = "normal"
 # Auto Bookmark Support
@@ -887,6 +875,19 @@ mode = "static"
 # alipay = "/images/alipay.png"
 # paypal = "/images/paypal.png"
 # bitcoin = "/images/bitcoin.png"
+
+# Post footer link config
+[params.post_link]
+# whether to show link to Raw Markdown content
+markdown = true
+# whether to show link to view source code (requires git_info.repo)
+source = true
+# whether to show link to edit the post (requires git_info.repo)
+edit = true
+# whether to show link to report issue (requires git_info.repo)
+report = true
+# open in editor protocol (e.g. "vscode", "trae" etc.), empty to disable
+editor = "vscode"
 
 # Social share links in post page
 [params.share]

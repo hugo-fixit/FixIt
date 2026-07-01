@@ -14,26 +14,27 @@
 {{- end -}}
 
 {{- $linkOptions := slice -}}
+{{- $postLink := .Param "post_link" | default dict -}}
 {{- if not .Params.password -}}
-  {{- if .Param "link_to_markdown" -}}
+  {{- if $postLink.markdown -}}
     {{- with .OutputFormats.Get "markdown" -}}
       {{- $options := dict "Class" "link-to-markdown" "Destination" .RelPermalink "Title" (T "single.readMarkdown") "Content" (T "single.readMarkdown") -}}
       {{- $linkOptions = $linkOptions | append $options -}}
     {{- end -}}
   {{- end -}}
-  {{- if (.Param "link_to_source") | and $gitRepo -}}
+  {{- if $postLink.source | and $gitRepo -}}
     {{- $link := replace $blobURL "{path}" $.File.Path -}}
     {{- $sourceURL = .Param "source_url" | default (add $link "?plain=1") -}}
     {{- $options := dict "Class" "link-to-source" "Destination" $sourceURL "Title" (T "single.viewSource") "Content" (T "single.viewSource") -}}
     {{- $linkOptions = $linkOptions | append $options -}}
   {{- end -}}
-  {{- if (.Param "link_to_edit") | and $gitRepo -}}
+  {{- if $postLink.edit | and $gitRepo -}}
     {{- $link := replace $editURL "{path}" $.File.Path -}}
     {{- $editURL = .Param "edit_url" | default $link -}}
     {{- $options := dict "Class" "link-to-edit" "Destination" $editURL "Title" (T "single.editThisPage") "Content" (T "single.editThisPage") -}}
     {{- $linkOptions = $linkOptions | append $options -}}
   {{- end -}}
-  {{- if (.Param "link_to_report") | and $gitRepo -}}
+  {{- if $postLink.report | and $gitRepo -}}
     {{- $link := replace $reportURL "{title}" ($.Title | urlquery) -}}
     {{- $link = replace $link "{URL}" $.Permalink -}}
     {{- $link = replace $link "{sourceURL}" $sourceURL -}}
@@ -41,10 +42,12 @@
     {{- $linkOptions = $linkOptions | append $options -}}
   {{- end -}}
 {{- end -}}
-{{- if (.Param "link_to_vscode") | and hugo.IsServer | and (not $.File.IsContentAdapter) -}}
-  {{- $link := printf "vscode://file/%v" $.File.Filename -}}
-  {{- $options := dict "Class" "link-to-vscode" "Destination" $link "Title" (T "single.openInEditor") "Content" (T "single.openInEditor") -}}
-  {{- $linkOptions = $linkOptions | append $options -}}
+{{- with $postLink.editor -}}
+  {{- if hugo.IsServer | and (not $.File.IsContentAdapter) -}}
+    {{- $link := printf "%s://file/%v" . $.File.Filename -}}
+    {{- $options := dict "Class" "link-to-editor" "Destination" $link "Title" (T "single.openInEditor") "Content" (T "single.openInEditor") -}}
+    {{- $linkOptions = $linkOptions | append $options -}}
+  {{- end -}}
 {{- end -}}
 <div class="post-footer" id="post-footer">
   <div class="post-info">
