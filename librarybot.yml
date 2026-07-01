@@ -64,7 +64,7 @@ libraries:
         - from: dist/echarts.min.js
           to: echarts/echarts.min.js
   - npm: '@fortawesome/fontawesome-free'
-    version: 7.2.0
+    version: 7.3.0
     local:
       items:
         - from: css/all.min.css
