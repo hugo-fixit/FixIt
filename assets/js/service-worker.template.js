@@ -116,6 +116,13 @@ self.addEventListener('activate', (event) => {
   )
 })
 
+/** Allow clients to trigger immediate activation of a waiting service worker. */
+self.addEventListener('message', (event) => {
+  if (event.data?.type === 'SKIP_WAITING') {
+    self.skipWaiting()
+  }
+})
+
 /* ========== Fetch Strategies ========== */
 
 /** Route same-origin GET requests to the appropriate caching strategy. */
