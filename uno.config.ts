@@ -53,6 +53,16 @@ export default defineConfig({
   ],
   // Always generate order utilities (used dynamically in templates)
   safelist: [
+    'text-success',
+    'text-error',
+    'text-warning',
+    'text-info',
+    'text-primary',
+    'bg-success',
+    'bg-error',
+    'bg-warning',
+    'bg-info',
+    'bg-primary',
     // For footer lines order, optional values: ["first", 0-5, "last"]
     'order-first',
     'order-last',
@@ -76,6 +86,9 @@ export default defineConfig({
       'layouts/**/*.html',
       'assets/js/**/*.ts',
     ],
+    pipeline: {
+      exclude: ['node_modules', 'dist'],
+    },
   },
   // CLI entry for unocss / unocss:watch
   cli: {
