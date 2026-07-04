@@ -63,47 +63,6 @@ pnpx fixit-cli create my-blog
 
 [![asciicast](https://asciinema.org/a/697494.svg)](https://asciinema.org/a/697494)
 
-### Post-build Encryption (npx)
-
-If you prefer encrypting content after `hugo build`, use the built-in scripts:
-
-```bash
-# Build and encrypt
-pnpm build:secure
-
-# Verify all encrypted blocks are migrated to AES marker
-pnpm encrypt:verify
-```
-
-You can also run encryption separately:
-
-```bash
-pnpm build
-pnpm encrypt:postbuild
-pnpm encrypt:verify
-```
-
-Optional: customize input directory.
-
-```bash
-pnpm -F post-encrypt start -- --input apps/demo/public
-pnpm -F post-encrypt start -- --input apps/demo/public --verify
-```
-
-Per-site secure build scripts are also available:
-
-```bash
-pnpm build:demo:secure
-pnpm build:test:secure
-```
-
-Notes:
-
-- `encrypt:postbuild` runs the workspace package `@hugo-fixit/post-encrypt`
-- `encrypt:verify` fails when `<cipher-text data-password="...">` does not carry `data-cipher="aes-256-gcm-v1"`
-- The package encrypts `<cipher-text>` payloads with AES-256-GCM and writes marker `data-cipher="aes-256-gcm-v1"`
-- Existing pages without encryption markers are left unchanged
-
 ### Templates
 
 Click the following links to generate a new repository with template:

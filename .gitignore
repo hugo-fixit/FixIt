@@ -5,6 +5,9 @@ jsconfig.json
 public/
 resources/
 
+# packages
+dist/
+
 # NPM
 node_modules/
 .eslintcache

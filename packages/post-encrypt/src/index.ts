@@ -1,9 +1,9 @@
+#!/usr/bin/env node
 import { Buffer } from 'node:buffer'
 import { createCipheriv, pbkdf2Sync, randomBytes } from 'node:crypto'
 import { readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
-import { consola, fromRoot } from '@hugo-fixit/shared'
 
 const AES_CIPHER = 'aes-256-gcm'
 const AES_MARKER = 'aes-256-gcm-v2'
@@ -15,6 +15,7 @@ const CLOSE_TAG = '</template>'
 
 interface CliOptions {
   input: string
+  cwd: string
   dryRun: boolean
   verifyOnly: boolean
 }
@@ -29,8 +30,10 @@ interface TemplateMatch {
 }
 
 function parseArgs(argv: string[]): CliOptions {
+  // INIT_CWD is set by pnpm to the original working directory
   const options: CliOptions = {
-    input: process.env.FIXIT_ENCRYPT_INPUT?.trim() || 'public',
+    input: 'public',
+    cwd: process.env.INIT_CWD || process.cwd(),
     dryRun: false,
     verifyOnly: false,
   }
@@ -239,15 +242,15 @@ function main() {
   const options = parseArgs(process.argv.slice(2))
   const targetDir = path.isAbsolute(options.input)
     ? options.input
-    : fromRoot(options.input)
+    : path.resolve(options.cwd, options.input)
 
   let htmlFiles: string[] = []
   try {
     htmlFiles = collectHtmlFiles(targetDir)
   }
   catch (error) {
-    consola.error(`Failed to scan input directory: ${targetDir}`)
-    consola.error(error)
+    console.error(`Failed to scan input directory: ${targetDir}`)
+    console.error(error)
     process.exit(1)
   }
 
@@ -259,7 +262,7 @@ function main() {
     if (hasUnencryptedTemplate(originalContent)) {
       unencryptedFiles++
       if (options.verifyOnly) {
-        consola.warn(`Unencrypted template found in: ${path.relative(fromRoot(), filePath)}`)
+        console.warn(`Unencrypted template found in: ${path.relative(options.cwd, filePath)}`)
         continue
       }
     }
@@ -279,19 +282,19 @@ function main() {
 
   if (options.verifyOnly) {
     if (unencryptedFiles > 0) {
-      consola.error(`Verification failed: ${unencryptedFiles} HTML files still contain unencrypted templates`)
+      console.error(`Verification failed: ${unencryptedFiles} HTML files still contain unencrypted templates`)
       process.exit(1)
     }
-    consola.success('Verification passed: all encryption templates use aes-256-gcm-v2')
+    console.warn('Verification passed: all encryption templates use aes-256-gcm-v2')
     return
   }
 
   if (options.dryRun) {
-    consola.info(`Dry run complete: ${changedFiles} HTML files would be updated (${AES_MARKER})`)
+    console.warn(`Dry run complete: ${changedFiles} HTML files would be updated (${AES_MARKER})`)
     return
   }
 
-  consola.success(`Post-build encryption completed: ${changedFiles} HTML files updated (${AES_MARKER})`)
+  console.warn(`Post-build encryption completed: ${changedFiles} HTML files updated (${AES_MARKER})`)
 }
 
 main()
