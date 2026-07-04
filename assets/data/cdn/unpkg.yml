@@ -25,10 +25,6 @@ libFiles:
   # cookieconsent@3.1.1 https://github.com/osano/cookieconsent
   cookieconsentCSS: cookieconsent@3.1.1/build/cookieconsent.min.css
   cookieconsentJS: cookieconsent@3.1.1/build/cookieconsent.min.js
-  # crypto-js@4.2.0 https://github.com/brix/crypto-js
-  cryptoCoreJS: crypto-js@4.2.0/core.js
-  cryptoEncBase64JS: crypto-js@4.2.0/enc-base64.js
-  cryptoSha256JS: crypto-js@4.2.0/sha256.js
   # echarts@6.1.0 https://github.com/apache/echarts
   echartsJS: echarts@6.1.0/dist/echarts.min.js
   # @fortawesome/fontawesome-free@7.3.0 https://github.com/FortAwesome/Font-Awesome
@@ -76,5 +72,3 @@ libFiles:
   # @waline/client@3.15.2 https://github.com/walinejs/waline
   walineCSS: '@waline/client@3.15.2/dist/waline.css'
   walineJS: '@waline/client@3.15.2/dist/waline.umd.js'
-  # xxhash-wasm@1.1.0 https://github.com/jungomi/xxhash-wasm
-  xxhashWasmJS: xxhash-wasm@1.1.0/umd/xxhash-wasm.js

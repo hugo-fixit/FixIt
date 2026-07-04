@@ -270,14 +270,6 @@
 {{- /* Content Decryption */ -}}
 {{- $encryptPartial := .Store.Get "hasEncryptor" -}}
 {{- if .Params.password | or $encryptPartial -}}
-  {{- $cryptoCoreJS := $cdn.cryptoCoreJS | default "lib/crypto-js/core.js" -}}
-  {{- $cryptoEncBase64JS := $cdn.cryptoEncBase64JS | default "lib/crypto-js/enc-base64.js" -}}
-  {{- $cryptoSha256JS := $cdn.cryptoSha256JS | default "lib/crypto-js/sha256.js" -}}
-  {{- $xxhashWasmJS := $cdn.xxhashWasmJS | default "lib/xxhash-wasm/xxhash-wasm.js" -}}
-  {{- dict "Source" $cryptoCoreJS "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-  {{- dict "Source" $cryptoEncBase64JS "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-  {{- dict "Source" $cryptoSha256JS "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-  {{- dict "Source" $xxhashWasmJS "Minify" hugo.IsProduction "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- /* Decryption script */ -}}
   {{- dict "Source" "js/lib/fixit-decryptor.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "all" (.Params.password | not | not) "shortcode" ($encryptPartial | default false) | dict "encryption" | merge $config -}}

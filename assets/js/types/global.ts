@@ -24,7 +24,6 @@ declare global {
     'APlayer'?: any
     'CellTooltip'?: any
     'cookieconsent'?: any
-    'CryptoJS'?: any
     'echarts'?: any
     'Fuse'?: any
     'Gitalk'?: any
@@ -46,7 +45,6 @@ declare global {
     'Valine'?: any
     'Waline'?: any
     'Watermark'?: any
-    'xxhash'?: any
     'Panzoom'?: (element: SVGElement, options?: Record<string, unknown>) => PanzoomInstance
 
     // FixIt theme

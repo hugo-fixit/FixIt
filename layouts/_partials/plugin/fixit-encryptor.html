@@ -1,18 +1,15 @@
 {{- /*
   Encrypted content renderer.
-  - Encrypts content payload and renders decryptor UI.
+  - Renders template placeholder for post-build AES-256-GCM encryption.
   - Supports full-page mode and partial mode with isolated target container.
   @param {String} .Password - Encryption password
-  @param {String} .Content - Content to encrypt and render
+  @param {String} .Content - Plaintext content (encrypted by post-build script)
   @param {String} [.Message] - Custom input placeholder message
   @param {Boolean} [.IsPartial] - Whether current render is partial mode
   @param {Object} [.Page] - Current page context (required when IsPartial is true)
 */ -}}
 
 {{- if .Password -}}
-  {{- /* Content Encryption */ -}}
-  {{- $content := dict "Content" .Content "Password" .Password | partial "function/content-encryption.html" -}}
-
   {{- /* Generating fixit-encryptor DOM */ -}}
   {{- $message := .Message | default (T "single.encryptedMessage") -}}
   {{- $loading := resources.Get "images/loading.svg" | minify -}}
@@ -36,6 +33,6 @@
       {{- end -}}
     </div>
     {{- if .IsPartial }}<div class="decryptor-content"></div>{{ end -}}
-    <cipher-text data-password="{{ xxhash .Password }}">{{ $content }}</cipher-text>
+    <template data-password="{{ sha256 .Password }}">{{ .Content }}</template>
   </fixit-encryptor>
 {{- end -}}

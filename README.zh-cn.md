@@ -63,6 +63,47 @@ pnpx fixit-cli create my-blog
 
 [![asciicast](https://asciinema.org/a/697494.svg)](https://asciinema.org/a/697494)
 
+### 构建后加密（npx）
+
+如果你希望在 `hugo build` 完成后再加密内容，可以使用内置脚本：
+
+```bash
+# 构建并加密
+pnpm build:secure
+
+# 校验加密块是否全部迁移为 AES 标记
+pnpm encrypt:verify
+```
+
+你也可以分步执行：
+
+```bash
+pnpm build
+pnpm encrypt:postbuild
+pnpm encrypt:verify
+```
+
+可选：自定义加密输入目录。
+
+```bash
+pnpm -F post-encrypt start -- --input apps/demo/public
+pnpm -F post-encrypt start -- --input apps/demo/public --verify
+```
+
+也可以按站点分别执行安全构建：
+
+```bash
+pnpm build:demo:secure
+pnpm build:test:secure
+```
+
+说明：
+
+- `encrypt:postbuild` 通过工作区包 `@hugo-fixit/post-encrypt` 执行
+- `encrypt:verify` 会在检测到 `<cipher-text data-password="...">` 缺少 `data-cipher="aes-256-gcm-v1"` 时返回失败
+- 该包会对 `<cipher-text>` 内容使用 AES-256-GCM 加密，并写入 `data-cipher="aes-256-gcm-v1"` 标记
+- 没有加密标记的页面不会被修改
+
 ### 模板
 
 点击以下链接使用模板生成一个新的仓库：

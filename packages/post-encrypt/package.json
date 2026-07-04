@@ -1,0 +1,14 @@
+{
+  "name": "@hugo-fixit/post-encrypt",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Post-build encryption orchestrator for the FixIt theme",
+  "author": "Lruihao",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "tsx src/index.ts"
+  },
+  "devDependencies": {
+    "@hugo-fixit/shared": "workspace:*"
+  }
+}
