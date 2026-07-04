@@ -270,7 +270,7 @@
 {{- /* Content Decryption */ -}}
 {{- $encryptPartial := .Store.Get "hasEncryptor" -}}
 {{- if .Params.password | or $encryptPartial -}}
-  {{- warnf "[FixIt] Content encryption detected on page %q (%s).\nRun `npx @hugo-fixit/post-encrypt` in the site root directory after building to encrypt content.\nWithout this step, encrypted content remains in plaintext!\n" .Title .Permalink -}}
+  {{- warnf "[FixIt] Content encryption detected on page %q (%s).\nRun `npx @hugo-fixit/post-encrypt` in the site root directory after building.\nWithout this step, encrypted content remains in plaintext!\n" .Title .Permalink -}}
   {{- /* Decryption script */ -}}
   {{- dict "Source" "js/lib/fixit-decryptor.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
   {{- $config = dict "all" (.Params.password | not | not) "shortcode" ($encryptPartial | default false) | dict "encryption" | merge $config -}}

@@ -117,7 +117,7 @@ export class ContentModule implements ContentService {
   initDetails(target: Element | Document = document) {
     target.querySelectorAll<HTMLElement>('.details:not(.disabled)').forEach(($details) => {
       const $summary = $details.querySelector<HTMLElement>('.details-summary')!
-      $summary.addEventListener('click', () => {
+      $summary?.addEventListener('click', () => {
         $details.classList.toggle('open')
       }, false)
     })
