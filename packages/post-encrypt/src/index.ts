@@ -4,6 +4,7 @@ import { createCipheriv, pbkdf2Sync, randomBytes } from 'node:crypto'
 import { readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
+import consola from 'consola'
 
 const AES_CIPHER = 'aes-256-gcm'
 const AES_MARKER = 'aes-256-gcm-v2'
@@ -249,20 +250,23 @@ function main() {
     htmlFiles = collectHtmlFiles(targetDir)
   }
   catch (error) {
-    console.error(`Failed to scan input directory: ${targetDir}`)
-    console.error(error)
+    consola.error(`Failed to scan input directory: ${targetDir}`)
+    consola.error(error)
     process.exit(1)
   }
 
   let changedFiles = 0
   let unencryptedFiles = 0
+  let totalTemplates = 0
   for (const filePath of htmlFiles) {
     const originalContent = readFileSync(filePath, 'utf8')
+    const matches = findEncryptionTemplates(originalContent)
+    totalTemplates += matches.length
 
     if (hasUnencryptedTemplate(originalContent)) {
       unencryptedFiles++
       if (options.verifyOnly) {
-        console.warn(`Unencrypted template found in: ${path.relative(options.cwd, filePath)}`)
+        consola.warn(`Unencrypted template found in: ${path.relative(options.cwd, filePath)}`)
         continue
       }
     }
@@ -282,19 +286,29 @@ function main() {
 
   if (options.verifyOnly) {
     if (unencryptedFiles > 0) {
-      console.error(`Verification failed: ${unencryptedFiles} HTML files still contain unencrypted templates`)
+      consola.warn(`Verification failed: ${unencryptedFiles} HTML files still contain unencrypted templates`)
       process.exit(1)
     }
-    console.warn('Verification passed: all encryption templates use aes-256-gcm-v2')
+    if (totalTemplates === 0) {
+      consola.info('No encryption templates found.')
+    }
+    else {
+      consola.info(`Verification passed: all ${totalTemplates} encryption templates use ${AES_MARKER}`)
+    }
+    return
+  }
+
+  if (changedFiles === 0) {
+    consola.info('No encryption templates found or all already encrypted.')
     return
   }
 
   if (options.dryRun) {
-    console.warn(`Dry run complete: ${changedFiles} HTML files would be updated (${AES_MARKER})`)
+    consola.info(`Dry run complete: ${changedFiles} HTML files would be updated (${AES_MARKER})`)
     return
   }
 
-  console.warn(`Post-build encryption completed: ${changedFiles} HTML files updated (${AES_MARKER})`)
+  consola.info(`Post-build encryption completed: ${changedFiles} HTML files updated (${AES_MARKER})`)
 }
 
 main()

@@ -24,7 +24,7 @@
     "start": "tsx src/index.ts",
     "prepublishOnly": "pnpm build"
   },
-  "devDependencies": {
-    "@hugo-fixit/shared": "workspace:*"
+  "dependencies": {
+    "consola": "^3.4.2"
   }
 }

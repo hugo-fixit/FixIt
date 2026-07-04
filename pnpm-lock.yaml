@@ -80,10 +80,10 @@ importers:
         version: 11.3.6
 
   packages/post-encrypt:
-    devDependencies:
-      '@hugo-fixit/shared':
-        specifier: workspace:*
-        version: link:../shared
+    dependencies:
+      consola:
+        specifier: ^3.4.2
+        version: 3.4.2
 
   packages/shared:
     dependencies:
