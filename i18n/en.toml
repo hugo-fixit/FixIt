@@ -145,6 +145,8 @@ encryptedMessage = "Please enter the password"
 password = "Password"
 enterBtn = "Enter"
 encryptyAgain = "Encrypt again"
+encryptionWarning = "Content encryption detected, but they are still in plaintext!"
+encryptionCommand = "Run `npx @hugo-fixit/post-encrypt` after building to actually encrypt them."
 relatedContent = "Related Content"
 
 [single.includedIn]

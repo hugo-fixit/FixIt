@@ -146,6 +146,8 @@ encryptedMessage = "कृपया पासवर्ड दर्ज करे
 password = "पासवर्ड"
 enterBtn = "दर्ज करें"
 encryptyAgain = "फिर से एन्क्रिप्ट करें"
+encryptionWarning = "सामग्री एन्क्रिप्शन का पता चला, लेकिन वे अभी भी सादे पाठ में हैं!"
+encryptionCommand = "उन्हें वास्तव में एन्क्रिप्ट करने के लिए बिल्ड के बाद `npx @hugo-fixit/post-encrypt` चलाएं।"
 relatedContent = "संबंधित सामग्री"
 
 [single.includedIn]

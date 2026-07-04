@@ -24,6 +24,8 @@ interface DecryptorOptions {
 interface CachedStat {
   expiration: number
   password: string
+  /** SHA-256 hash of the password, used for AES key derivation */
+  sha256: string
 }
 
 const PBKDF2_ITERATIONS = 100_000
@@ -119,6 +121,11 @@ class FixItDecryptor {
       $template.parentElement!.classList.add('decrypted')
     }
     catch (err) {
+      const $encryptor = $template.parentElement!
+      const $input = $encryptor.querySelector<HTMLInputElement>('.fixit-decryptor-input')
+      if ($input) {
+        flashTooltip($input, err instanceof Error ? err.message : 'Decryption failed')
+      }
       return console.error(err)
     }
     if ($target.id === 'content')
@@ -133,7 +140,7 @@ class FixItDecryptor {
    * @param $encryptor - The `<fixit-encryptor>` element containing the input field.
    * @param callback - Invoked with `(template, sha256Hash)` on success.
    */
-  async #validatePassword($encryptor: Element, callback: ($template: HTMLTemplateElement, passwordHash: string) => Promise<void>): Promise<void> {
+  async #validatePassword($encryptor: Element, callback: ($template: HTMLTemplateElement, passwordHash: string, verifyHash?: string) => Promise<void>): Promise<void> {
     const $template = $encryptor.querySelector<HTMLTemplateElement>('template[data-password]')!
     const storedHash = $template.dataset.password!
     const verifySalt = $template.dataset.verifySalt
@@ -149,14 +156,16 @@ class FixItDecryptor {
     }
 
     let matches: boolean
+    let verifyHash: string
     if (verifySalt) {
       // Post-build: stored hash is PBKDF2(SHA-256(password), verifySalt)
       const salt = Uint8Array.from(atob(verifySalt), c => c.charCodeAt(0)).buffer as ArrayBuffer
-      const verifyHash = await this.#deriveVerifyHash(inputSha256, salt)
+      verifyHash = await this.#deriveVerifyHash(inputSha256, salt)
       matches = verifyHash === storedHash
     }
     else {
       // Dev mode: stored hash is SHA-256(password)
+      verifyHash = inputSha256
       matches = inputSha256 === storedHash
     }
 
@@ -164,8 +173,8 @@ class FixItDecryptor {
       flashTooltip(inputEl, `Password error: ${input} not the correct password!`)
       return console.warn(`Password error: ${input} not the correct password!`)
     }
-    // Pass SHA-256 hash for AES key derivation and cache
-    await callback($template, inputSha256)
+    // Store verifyHash for cache validation, inputSha256 for AES key derivation
+    await callback($template, inputSha256, verifyHash)
   }
 
   /**
@@ -199,12 +208,13 @@ class FixItDecryptor {
     const $content = document.querySelector<HTMLElement>('#content')!
 
     const decryptorHandler = () => {
-      void this.#validatePassword($encryptor, async ($template, passwordHash) => {
+      void this.#validatePassword($encryptor, async ($template, passwordHash, verifyHash) => {
         window.localStorage?.setItem(
           `fixit-decryptor/#${location.pathname}`,
           JSON.stringify({
             expiration: Math.ceil(Date.now() / 1000) + this.options.duration,
-            password: passwordHash,
+            password: verifyHash ?? passwordHash,
+            sha256: passwordHash,
           }),
         )
         await this.#decryptContent($template, $content, passwordHash)
@@ -280,7 +290,8 @@ class FixItDecryptor {
       }
       return this
     }
-    void this.#decryptContent($template, $content, cachedStat.password)
+    // Use sha256 hash for AES key derivation (not the verification hash)
+    void this.#decryptContent($template, $content, cachedStat.sha256)
     return this
   }
 }

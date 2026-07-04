@@ -145,6 +145,8 @@ encryptedMessage = "Vă rugăm să introduceți parola"
 password = "Parolă"
 enterBtn = "Intră"
 encryptyAgain = "Criptează din nou"
+encryptionWarning = "Criptarea conținutului a fost detectată, dar sunt încă în text clar!"
+encryptionCommand = "Rulați `npx @hugo-fixit/post-encrypt` după compilare pentru a le cripta efectiv."
 relatedContent = "Conținut înrudit"
 
 [single.includedIn]

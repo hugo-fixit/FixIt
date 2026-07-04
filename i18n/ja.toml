@@ -143,6 +143,8 @@ encryptedMessage = "パスワードを入力してください"
 password = "パスワード"
 enterBtn = "入る"
 encryptyAgain = "再度暗号化"
+encryptionWarning = "コンテンツの暗号化が検出されましたが、まだ平文です！"
+encryptionCommand = "実際に暗号化するには、ビルド後に `npx @hugo-fixit/post-encrypt` を実行してください。"
 relatedContent = "関連コンテンツ"
 
 [single.includedIn]

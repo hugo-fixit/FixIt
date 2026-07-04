@@ -145,6 +145,8 @@ encryptedMessage = "Proszę wprowadzić hasło"
 password = "Hasło"
 enterBtn = "Wejdź"
 encryptyAgain = "Zaszyfruj ponownie"
+encryptionWarning = "Wykryto szyfrowanie treści, ale nadal są w postaci zwykłego tekstu!"
+encryptionCommand = "Uruchom `npx @hugo-fixit/post-encrypt` po kompilacji, aby je faktycznie zaszyfrować."
 relatedContent = "Powiązane treści"
 
 [single.includedIn]

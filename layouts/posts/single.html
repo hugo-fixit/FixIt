@@ -174,7 +174,7 @@
 
     {{- /* Encryption Dev Warning */ -}}
     {{- if (.Params.password | or (.Store.Get "hasEncryptor")) | and (not hugo.IsProduction) -}}
-      {{- dict "Type" "danger" "Title" "Run <code>npx @hugo-fixit/post-encrypt</code> in the site root directory after building.<br>Without this step, encrypted content remains in plaintext!" "Foldable" false | partial "plugin/admonition.html" -}}
+      {{- dict "Type" "danger" "Title" (printf "%s<br>%s" (T "single.encryptionWarning") (T "single.encryptionCommand") | $.RenderString) "Foldable" false | partial "plugin/admonition.html" -}}
     {{- end -}}
 
     {{- /* Expiration Reminder */ -}}
