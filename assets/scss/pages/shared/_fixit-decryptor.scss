@@ -1,103 +1,193 @@
-@use "sass:color";
 @use "core/functions" as *;
 @use "core/mixins" as *;
-@use "variables" as *;
 
+// fixit-encryptor custom element
+fixit-encryptor {
+  display: block;
+}
+
+// Card container for the decryptor UI
 .fixit-decryptor-container {
-  font-family: fi-var(global-font-family);
   text-align: center;
   margin-block: fi-var(decryptor-margin-block);
+}
 
-  .fixit-decryptor-loading {
-    vertical-align: middle;
-  }
+// Form wrapper (hidden until initialized)
+.fixit-decryptor-form {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 24rem;
+  margin-inline: auto;
+  padding: 1.5rem;
+  border: 1px solid fi-var(global-border-color);
+  @include border-radius;
 
-  .fixit-decryptor-input,
-  .fixit-decryptor-btn,
-  .fixit-encryptor-btn {
-    display: none;
-    box-sizing: border-box;
-    outline: none;
-    color: fi-var(global-font-color);
-    border: 1px solid fi-var(global-border-color);
-    box-shadow: 0px 0px 5px 0px fi-var(global-border-color);
-    @include border-radius;
-    transition: all 0.1s ease-out;
-
-    &:active,
-    &:focus,
-    &:hover {
-      color: light-dark(color.adjust($global-link-hover-color, $lightness: -6%), color.adjust($global-link-hover-color-dark, $lightness: 6%));
-      border-color: fi-var(global-link-hover-color);
-      box-shadow: 0px 0px 5px 0px light-dark(
-        color.adjust($global-link-hover-color, $lightness: 20%),
-        color.adjust($global-link-hover-color-dark, $lightness: -20%)
-      );
-    }
-  }
-
-  .fixit-decryptor-input {
-    width: calc(clamp(50%, 450px, 100%) - 100px);
-    height: 3rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    background-color: fi-var(global-background-color);
-  }
-
-  .fixit-decryptor-btn,
-  .fixit-encryptor-btn {
-    cursor: pointer;
-    padding: 0.8rem 1rem;
-    background-color: fi-var(global-background-color);
-    transition: all 0.1s ease-out;
-  }
-
-  .fixit-encryptor-btn {
-    display: none;
+  .initialized & {
+    display: flex;
   }
 }
 
-fixit-encryptor {
-  &.initialized > .fixit-decryptor-container {
-    .fixit-decryptor-input,
-    .fixit-decryptor-btn {
-      display: inline-block;
-    }
+// Lock icon header
+.fixit-decryptor-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: light-dark(fi-rgba(fi-var(primary), 0.1), fi-rgba(fi-var(primary), 0.15));
+}
 
-    .fixit-decryptor-loading {
-      display: none;
-    }
+// Password input field with icon prefix
+.fixit-decryptor-field {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0 0.75rem;
+  border: 1px solid fi-var(global-border-color);
+  background-color: fi-var(global-background-color);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  @include border-radius;
+
+  &:focus-within {
+    border-color: var(--fi-primary);
+    box-shadow: 0 0 0 2px light-dark(fi-rgba(fi-var(primary), 0.15), fi-rgba(fi-var(primary), 0.25));
+  }
+
+  > i {
+    flex-shrink: 0;
+    color: fi-var(global-font-tertiary-color);
+    font-size: 0.8rem;
   }
 }
 
-// fixit-encryptor for for the encrypted pages
+.fixit-decryptor-input {
+  flex: 1;
+  height: 2.5rem;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: fi-var(global-font-color);
+
+  &::placeholder {
+    color: fi-var(global-font-quaternary-color);
+  }
+}
+
+// Unlock button
+.fixit-decryptor-btn {
+  display: none;
+  width: 100%;
+  height: 2.5rem;
+  border: none;
+  background-color: var(--fi-primary);
+  color: var(--fi-global-background-color, #fff);
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  @include border-radius;
+
+  &:hover {
+    opacity: 0.85;
+  }
+
+  .initialized & {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// Re-encrypt button (page-level, after decryption)
+.fixit-encryptor-btn {
+  display: none;
+  margin-top: 0.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid fi-var(global-border-color);
+  border-radius: 50%;
+  background: none;
+  color: fi-var(global-font-tertiary-color);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    color: fi-var(global-link-hover-color);
+    border-color: fi-var(global-link-hover-color);
+    background-color: light-dark(fi-rgba(fi-var(primary), 0.06), fi-rgba(fi-var(primary), 0.1));
+  }
+
+  .decrypted & {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// Page-level decryptor
 article fixit-encryptor {
   .fixit-decryptor-container {
     @include set-fi-var(decryptor-margin-block, 2rem);
   }
-  &.decrypted > .fixit-decryptor-container {
-    .fixit-decryptor-loading,
-    .fixit-decryptor-input,
-    .fixit-decryptor-btn {
-      display: none;
-    }
 
-    .fixit-encryptor-btn {
-      display: inline-block;
+  &.decrypted > .fixit-decryptor-container {
+    .fixit-decryptor-form {
+      display: none;
     }
   }
 }
 
-// fixit-encryptor shortcodes
+// Shortcode-level decryptor — connected input + button design
 #content fixit-encryptor {
   .fixit-decryptor-container {
     @include set-fi-var(decryptor-margin-block, 1rem);
   }
+
+  .fixit-decryptor-form {
+    flex-direction: row;
+    justify-content: center;
+    gap: 0;
+    max-width: 24rem;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+  }
+
+  .fixit-decryptor-header {
+    display: none;
+  }
+
+  .fixit-decryptor-field {
+    flex: 1;
+    height: 2.5rem;
+    border-right: none;
+    border-radius: fi-var(global-border-radius) 0 0 fi-var(global-border-radius);
+
+    &:focus-within + .fixit-decryptor-btn {
+      border-color: var(--fi-primary);
+      box-shadow: 0 0 0 2px light-dark(fi-rgba(fi-var(primary), 0.15), fi-rgba(fi-var(primary), 0.25));
+    }
+  }
+
+  .fixit-decryptor-btn {
+    width: auto;
+    padding: 0 0.85rem;
+    border-radius: 0 fi-var(global-border-radius) fi-var(global-border-radius) 0;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
   &.decrypted > .fixit-decryptor-container {
     display: none;
   }
 }
 
+// Hidden elements for encrypted pages
 .encrypted-hidden {
   display: none !important;
 }

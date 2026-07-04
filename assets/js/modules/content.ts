@@ -166,6 +166,7 @@ export class ContentModule implements ContentService {
     CellTooltip.initAll('li[data-task] > span[title]', { placement: 'right' })
     CellTooltip.initAll('.action-btn[title]', { placement: 'bottom' })
     CellTooltip.initAll('.copy-icon-btn[title]', { placement: 'top' })
+    CellTooltip.initAll('.fixit-encryptor-btn[title]')
     this.#initFootnotes()
   }
 

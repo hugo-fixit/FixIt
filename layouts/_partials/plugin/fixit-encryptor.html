@@ -12,23 +12,28 @@
 {{- if .Password -}}
   {{- /* Generating fixit-encryptor DOM */ -}}
   {{- $message := .Message | default (T "single.encryptedMessage") -}}
-  {{- $loading := resources.Get "images/loading.svg" | minify -}}
   {{- $id := "fixit-decryptor-input" -}}
   {{- if .IsPartial -}}
     {{- $id = dict "Page" .Page | partial "function/id.html" -}}
   {{- end -}}
   <fixit-encryptor data-pagefind-ignore="all">
     <div class="fixit-decryptor-container">
-      <img class="fixit-decryptor-loading" src="{{ $loading.RelPermalink }}" alt="decryptor loading" width="48" height="48" />
-      <label for="{{ $id }}" title="{{ T `single.password` }}">
-        <input type="password" id="{{ $id }}" class="fixit-decryptor-input" placeholder="🔑 {{ $message }}" />
-      </label>
-      <button class="fixit-decryptor-btn">
-        {{- dict "Class" "fa-solid fa-unlock" | partial "plugin/icon.html" }}{{ T "single.enterBtn" -}}
-      </button>
+      <div class="fixit-decryptor-form">
+        <div class="fixit-decryptor-header">
+          <i class="fixit-decryptor-icon fa-solid fa-lock"></i>
+        </div>
+        <label for="{{ $id }}" class="sr-only">{{ T `single.password` }}</label>
+        <div class="fixit-decryptor-field">
+          <i class="fa-solid fa-key"></i>
+          <input type="password" id="{{ $id }}" class="fixit-decryptor-input max-sm:w-full" placeholder="{{ $message }}" />
+        </div>
+        <button class="fixit-decryptor-btn">
+          {{- dict "Class" "fa-solid fa-unlock-keyhole me-1.5" | partial "plugin/icon.html" }}{{ T "single.enterBtn" -}}
+        </button>
+      </div>
       {{- if not .IsPartial -}}
-        <button class="fixit-encryptor-btn">
-          {{- dict "Class" "fa-solid fa-lock" | partial "plugin/icon.html" }}{{ T "single.encryptyAgain" -}}
+        <button class="fixit-encryptor-btn" title="{{ T `single.encryptyAgain` }}">
+          {{- dict "Class" "fa-solid fa-lock" | partial "plugin/icon.html" -}}
         </button>
       {{- end -}}
     </div>

@@ -16,6 +16,8 @@ export interface FixItDecryptorInstance {
   /**
    * Initialize page-level and/or shortcode-level decryption based on flags.
    * @param options - `{ all?, shortcode? }` controlling which modes to activate.
+   * @param options.all - Enable whole-page decryption.
+   * @param options.shortcode - Enable shortcode-level decryption.
    */
   init: (options: { all?: boolean, shortcode?: boolean }) => void
   /** Restore decrypted content from localStorage cache if the password has not expired. */
