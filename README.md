@@ -303,9 +303,7 @@ Thanks to the [Hugo DoIt](https://github.com/HEIGE-PCloud/DoIt) theme and [Hexo 
 - [Twikoo](https://twikoo.js.org/)
 - [github-corners](https://github.com/tholman/github-corners)
 - [giscus](https://giscus.app/zh-CN)
-- [crypto-js](https://github.com/brix/crypto-js)
 - [pace](https://github.com/CodeByZach/pace)
-- [xxhash-wasm](https://github.com/jungomi/xxhash-wasm)
 - [`<tab-container>` element](https://github.com/github/tab-container-element)
 - [`<json-viewer>` element](https://github.com/Lruihao/json-viewer-element)
 

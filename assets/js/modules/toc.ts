@@ -264,8 +264,8 @@ export class TocModule implements TocService {
     this.initTocListener()
     this.initTocDialog()
     this.fixTocScroll()
-    window.addEventListener('resize', () => this.syncTocLayout())
-    window.addEventListener('scroll', () => this.syncTocActiveState())
+    eventBus.on('fixit:resize', () => this.syncTocLayout())
+    eventBus.on('fixit:scroll', () => this.syncTocActiveState())
     eventBus.on('fixit:decrypted', () => {
       this.initToc()
       this.syncTocLayout()

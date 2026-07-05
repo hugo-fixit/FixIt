@@ -230,8 +230,7 @@ function encryptTemplatesInHtml(html: string): { content: string, changed: boole
   return { content: result, changed }
 }
 
-function hasUnencryptedTemplate(html: string): boolean {
-  const matches = findEncryptionTemplates(html)
+function hasUnencryptedTemplate(matches: TemplateMatch[]): boolean {
   return matches.some((match) => {
     const attrs = String(match.attrs)
     const hasAesMarker = /\bdata-cipher\s*=\s*"aes-256-gcm-v[12]"/.test(attrs)
@@ -263,7 +262,7 @@ function main() {
     const matches = findEncryptionTemplates(originalContent)
     totalTemplates += matches.length
 
-    if (hasUnencryptedTemplate(originalContent)) {
+    if (hasUnencryptedTemplate(matches)) {
       unencryptedFiles++
       if (options.verifyOnly) {
         consola.warn(`Unencrypted template found in: ${path.relative(options.cwd, filePath)}`)
