@@ -190,7 +190,7 @@ export class TocModule implements TocService {
       return
 
     // Copy TOC to target containers
-    const targets = ['toc-content-drawer', 'toc-content-static', 'toc-content-auto']
+    const targets = ['toc-content-static', 'toc-content-auto', 'toc-content-drawer']
     for (const id of targets) {
       const $container = document.getElementById(id)
       if ($container && !$container.querySelector('nav')) {
@@ -223,6 +223,19 @@ export class TocModule implements TocService {
   }
 
   /** Initialize the mobile TOC drawer dialog and its open/close handlers. */
+  initTocDialogLink() {
+    const dialog = document.querySelector<HTMLDialogElement>('#toc-dialog')
+    if (!dialog)
+      return
+    document.querySelectorAll<HTMLAnchorElement>('#toc-content-drawer a[href^="#"]').forEach(($link) => {
+      if ($link.dataset.tocDialogCloseBound === 'true')
+        return
+      $link.addEventListener('click', () => dialog.close())
+      $link.dataset.tocDialogCloseBound = 'true'
+    })
+  }
+
+  /** Initialize the mobile TOC drawer dialog and its open/close handlers. */
   initTocDialog() {
     const dialog = document.querySelector<HTMLDialogElement>('#toc-dialog')
     const openButton = document.querySelector<HTMLElement>('#toc-drawer-button')
@@ -238,9 +251,6 @@ export class TocModule implements TocService {
       const $dialogTocRoot = document.querySelector<HTMLElement>('#toc-content-drawer > nav')!
       this.scrollActiveTocLinkIntoView($dialogTocRoot, this.activeTocId!, $dialogTocRoot)
       ;(document.activeElement as HTMLElement)?.blur()
-    })
-    document.querySelectorAll<HTMLAnchorElement>('#toc-content-drawer a[href^="#"]').forEach(($link) => {
-      $link.addEventListener('click', () => dialog.close())
     })
     dialog.addEventListener('close', () => {
       openButton.setAttribute('aria-expanded', 'false')
@@ -263,12 +273,14 @@ export class TocModule implements TocService {
     this.syncTocLayout()
     this.initTocListener()
     this.initTocDialog()
+    this.initTocDialogLink()
     this.fixTocScroll()
     eventBus.on('fixit:resize', () => this.syncTocLayout())
     eventBus.on('fixit:scroll', () => this.syncTocActiveState())
     eventBus.on('fixit:decrypted', () => {
       this.initToc()
       this.syncTocLayout()
+      this.initTocDialogLink()
     })
   }
 }
