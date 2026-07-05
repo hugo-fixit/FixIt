@@ -5,7 +5,7 @@
   "description": "Post-build AES-256-GCM encryption tool for the FixIt Hugo theme",
   "author": "Lruihao",
   "license": "MIT",
-  "homepage": "https://github.com/hugo-fixit/FixIt/tree/feat/post-encrypt/packages/post-encrypt#readme",
+  "homepage": "https://github.com/hugo-fixit/FixIt/tree/main/packages/post-encrypt#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hugo-fixit/FixIt.git",

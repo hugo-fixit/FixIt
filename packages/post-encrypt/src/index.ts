@@ -19,6 +19,7 @@ interface CliOptions {
   cwd: string
   dryRun: boolean
   verifyOnly: boolean
+  helpRequested: boolean
 }
 
 interface TemplateMatch {
@@ -37,10 +38,15 @@ function parseArgs(argv: string[]): CliOptions {
     cwd: process.env.INIT_CWD || process.cwd(),
     dryRun: false,
     verifyOnly: false,
+    helpRequested: false,
   }
 
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i]
+    if (arg === '--help' || arg === '-h') {
+      options.helpRequested = true
+      continue
+    }
     if (arg === '--input') {
       options.input = argv[i + 1] || options.input
       i++
@@ -61,6 +67,23 @@ function parseArgs(argv: string[]): CliOptions {
   }
 
   return options
+}
+
+function printHelp(): void {
+  consola.log(`Usage:
+  post-encrypt [options]
+
+Options:
+  --input <dir>  Input directory containing HTML files (default: public)
+  --dry-run      Show which files would be modified without writing
+  --verify       Verify all encryption templates are encrypted
+  -h, --help     Show this help message
+
+Examples:
+  post-encrypt
+  post-encrypt --input dist
+  post-encrypt --verify
+  post-encrypt --dry-run`)
 }
 
 function collectHtmlFiles(targetDir: string): string[] {
@@ -240,6 +263,10 @@ function hasUnencryptedTemplate(matches: TemplateMatch[]): boolean {
 
 function main() {
   const options = parseArgs(process.argv.slice(2))
+  if (options.helpRequested) {
+    printHelp()
+    return
+  }
   const targetDir = path.isAbsolute(options.input)
     ? options.input
     : path.resolve(options.cwd, options.input)
