@@ -189,8 +189,8 @@ export class TocModule implements TocService {
     if (!$tocTemplate || !$tocCore)
       return
 
-    // Copy TOC to target containers (drawer always, plus static or auto)
-    const targets = ['toc-content-drawer', isTocStatic() ? 'toc-content-static' : 'toc-content-auto']
+    // Copy TOC to target containers
+    const targets = ['toc-content-drawer', 'toc-content-static', 'toc-content-auto']
     for (const id of targets) {
       const $container = document.getElementById(id)
       if ($container && !$container.querySelector('nav')) {

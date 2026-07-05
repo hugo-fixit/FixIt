@@ -129,7 +129,7 @@ class FixItDecryptor {
       return console.error(err)
     }
     if ($target.id === 'content')
-      eventBus.emit('fixit:decrypted')
+      eventBus.emit('fixit:decrypted', { target: $target })
     else
       eventBus.emit('fixit:partial-decrypted', { target: $target })
   }
@@ -184,10 +184,9 @@ class FixItDecryptor {
    * @param options.shortcode - Enable shortcode-level decryption.
    */
   init({ all, shortcode }: { all?: boolean, shortcode?: boolean }): void {
-    const $content = document.querySelector<HTMLElement>('#content')
     if (shortcode) {
-      eventBus.on('fixit:decrypted', () => {
-        this.initShortcodes($content!)
+      eventBus.on('fixit:decrypted', ({ detail }) => {
+        this.initShortcodes(detail.target)
       })
       eventBus.on('fixit:partial-decrypted', ({ detail }) => {
         this.initShortcodes(detail.target)
@@ -197,7 +196,7 @@ class FixItDecryptor {
       this.initPage()
     }
     else if (shortcode) {
-      this.initShortcodes($content!)
+      this.initShortcodes(document.querySelector<HTMLElement>('#content')!)
     }
   }
 

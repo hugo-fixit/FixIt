@@ -433,6 +433,14 @@ tag = "tags"
 collection = "collections"
 
 # -------------------------------------------------------------------------------------
+# Build Configuration
+# See: https://gohugo.io/configuration/build/
+# -------------------------------------------------------------------------------------
+
+[build]
+noJSConfigInAssets = true
+
+# -------------------------------------------------------------------------------------
 # Theme Core Configuration
 # Two types of params:
 #   1. Site-level params — apply to the entire site, can NOT be overridden per-page.

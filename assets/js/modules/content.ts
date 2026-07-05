@@ -187,8 +187,8 @@ export class ContentModule implements ContentService {
   setup() {
     this.initContent()
     this.initSVGIcon()
-    eventBus.on('fixit:decrypted', () => {
-      this.initContent()
+    eventBus.on('fixit:decrypted', ({ detail }) => {
+      this.initContent(detail.target)
     })
     eventBus.on('fixit:partial-decrypted', ({ detail }) => {
       this.initContent(detail.target)
