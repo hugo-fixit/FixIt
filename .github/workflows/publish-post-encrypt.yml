@@ -1,0 +1,43 @@
+name: Publish post-encrypt
+
+on:
+  push:
+    tags:
+      - 'post-encrypt-v*.*.*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: publish-post-encrypt-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          registry-url: 'https://registry.npmjs.org'
+          cache: pnpm
+          scope: '@hugo-fixit'
+
+      - name: Update npm
+        run: npm install -g npm@latest
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build package
+        run: pnpm -F post-encrypt build
+
+      - name: Publish package to npm
+        working-directory: packages/post-encrypt
+        run: npm publish --access public --provenance
