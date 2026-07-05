@@ -25,7 +25,10 @@ export function updateVersion(type: 'dev' | 'prod') {
     'pnpm-lock.yaml',
     'theme.toml',
   ]
-  const gitDiff: string = runCommand('git diff --cached --name-only')
+  const stagedFiles: string[] = runCommand('git diff --cached --name-only')
+    .split('\n')
+    .map(file => file.trim())
+    .filter(Boolean)
 
   // consola.info(
   //   'Node.js:',
@@ -39,7 +42,9 @@ export function updateVersion(type: 'dev' | 'prod') {
       consola.info(`The current branch is ${branch}, no need to update the FixIt version.`)
       process.exit(0)
     }
-    if (!match.some(item => gitDiff.includes(item))) {
+    if (!match.some(item => item.endsWith('/')
+      ? stagedFiles.some(file => file.startsWith(item))
+      : stagedFiles.includes(item))) {
       consola.info('No need to update the FixIt version.')
       process.exit(0)
     }
@@ -64,7 +69,7 @@ export function updateVersion(type: 'dev' | 'prod') {
   const lastVersion: string = versionMatch[0].slice(1)
   const newInitHtml: string = initHtml.replace(VERSION_RE, `v${latestVersion}`)
 
-  if (lastVersion === version && gitDiff.includes('layouts/_partials/init/index.html')) {
+  if (lastVersion === version && stagedFiles.includes('layouts/_partials/init/index.html')) {
     // After running `npm version` or manually modifying the version number, skip the update
     consola.info(`The FixIt version has been updated to v${lastVersion}.`)
     process.exit(0)
