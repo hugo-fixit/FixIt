@@ -47,16 +47,6 @@ libraries:
           to: cookieconsent/cookieconsent.min.css
         - from: build/cookieconsent.min.js
           to: cookieconsent/cookieconsent.min.js
-  - npm: crypto-js
-    version: 4.2.0
-    local:
-      items:
-        - from: core.js
-          to: crypto-js/core.js
-        - from: enc-base64.js
-          to: crypto-js/enc-base64.js
-        - from: sha256.js
-          to: crypto-js/sha256.js
   - npm: echarts
     version: 6.1.0
     local:
@@ -219,9 +209,3 @@ libraries:
           to: waline/waline.css
         - from: dist/waline.umd.js
           to: waline/waline.umd.js
-  - npm: xxhash-wasm
-    version: 1.1.0
-    local:
-      items:
-        - from: umd/xxhash-wasm.js
-          to: xxhash-wasm/xxhash-wasm.js

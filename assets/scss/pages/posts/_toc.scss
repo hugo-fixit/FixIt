@@ -95,7 +95,6 @@
   display: block;
   position: sticky;
   box-sizing: border-box;
-  visibility: hidden;
   margin-bottom: 8rem;
   @include overflow-wrap(break-word);
   @include sticky-top-offset;

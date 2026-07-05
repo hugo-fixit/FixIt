@@ -1,4 +1,5 @@
 import type { TocService } from '../core/tokens'
+import { eventBus } from '../core/event-bus'
 import { animateCSS, isTocStatic } from '../utils'
 
 /**
@@ -70,7 +71,7 @@ export class TocModule implements TocService {
   /** Get all TOC root containers (static, auto, and drawer). */
   getTocRoots(): HTMLElement[] {
     return [
-      document.getElementById('TableOfContents'),
+      document.querySelector<HTMLElement>('#toc-content-auto > nav'),
       document.querySelector<HTMLElement>('#toc-content-static > nav'),
       document.querySelector<HTMLElement>('#toc-content-drawer > nav'),
     ].filter(Boolean) as HTMLElement[]
@@ -160,7 +161,7 @@ export class TocModule implements TocService {
     if (this.activeTocId !== activeId) {
       this.activeTocId = activeId
       if (!isTocStatic()) {
-        const $autoTocRoot = document.getElementById('TableOfContents')
+        const $autoTocRoot = document.querySelector<HTMLElement>('#toc-content-auto > nav')
         const $autoTocContainer = document.getElementById('toc-content-auto')
         if ($autoTocRoot && $autoTocContainer) {
           this.scrollActiveTocLinkIntoView($autoTocRoot, activeId, $autoTocContainer)
@@ -173,40 +174,31 @@ export class TocModule implements TocService {
     }
   }
 
-  /** Initialize TOC layout: move the TOC node to the correct container and sync state. */
-  initToc() {
-    const $tocCore = document.getElementById('TableOfContents')
-    if ($tocCore === null)
-      return
-    // TOC Drawer Button Visibility
-    const openButton = document.querySelector<HTMLElement>('#toc-drawer-button')
-    if (openButton) {
-      openButton.classList.toggle('hidden', !isTocStatic())
-    }
+  /** Sync TOC layout state: drawer button visibility, height, and active heading. */
+  syncTocLayout() {
+    document.querySelector<HTMLElement>('#toc-drawer-button')?.classList.toggle('hidden', !isTocStatic())
     this.activeTocId = null
-    // TOC Static and TOC Dialog
-    if (isTocStatic()) {
-      const $tocContentStatic = document.getElementById('toc-content-static')!
-      if ($tocCore.parentElement !== $tocContentStatic) {
-        $tocCore.parentElement!.removeChild($tocCore)
-        $tocContentStatic.appendChild($tocCore)
-      }
-      this.syncTocHeight()
-      this.syncTocActiveState()
-      return
-    }
-
-    // TOC Auto
-    const $tocContentAuto = document.getElementById('toc-content-auto')!
-    if ($tocCore.parentElement !== $tocContentAuto) {
-      $tocCore.parentElement!.removeChild($tocCore)
-      $tocContentAuto.appendChild($tocCore)
-    }
-    const $toc = document.getElementById('toc-auto')!
-    $toc.style.visibility = 'visible'
-    animateCSS($toc, ['animate__fadeIn', 'animate__faster'], true)
     this.syncTocHeight()
     this.syncTocActiveState()
+  }
+
+  /** Initialize TOC layout: read from `<template data-toc>`, copy to the correct container and dialog. */
+  initToc() {
+    const $tocTemplate = document.querySelector<HTMLTemplateElement>('template[data-toc]')
+    const $tocCore = $tocTemplate?.content.querySelector('#TableOfContents')
+    if (!$tocTemplate || !$tocCore)
+      return
+
+    // Copy TOC to target containers
+    const targets = ['toc-content-drawer', 'toc-content-static', 'toc-content-auto']
+    for (const id of targets) {
+      const $container = document.getElementById(id)
+      if ($container && !$container.querySelector('nav')) {
+        const $clone = $tocCore.cloneNode(true) as HTMLElement
+        $clone.removeAttribute('id')
+        $container.appendChild($clone)
+      }
+    }
   }
 
   /** Bind the TOC title click handler for show/hide toggle. */
@@ -255,15 +247,9 @@ export class TocModule implements TocService {
     })
   }
 
-  /** Clone TOC and heading-mark nodes to detach APlayer event listeners. */
+  /** Clone heading-mark nodes to detach APlayer event listeners. */
   fixTocScroll() {
     if (typeof window.APlayer === 'function') {
-      let $tocCore = document.getElementById('TableOfContents')
-      if ($tocCore) {
-        const $newTocCore = $tocCore.cloneNode(true) as HTMLElement
-        $tocCore.parentElement!.replaceChild($newTocCore, $tocCore)
-        $tocCore = $newTocCore
-      }
       document.querySelectorAll('.heading-mark').forEach(($headingMark: Element) => {
         const $newHeadingMark = $headingMark.cloneNode(true)
         $headingMark.parentElement!.replaceChild($newHeadingMark, $headingMark)
@@ -273,9 +259,16 @@ export class TocModule implements TocService {
 
   /** Initialize all TOC components and register event listeners. */
   setup() {
-    this.fixTocScroll()
     this.initToc()
+    this.syncTocLayout()
     this.initTocListener()
     this.initTocDialog()
+    this.fixTocScroll()
+    eventBus.on('fixit:resize', () => this.syncTocLayout())
+    eventBus.on('fixit:scroll', () => this.syncTocActiveState())
+    eventBus.on('fixit:decrypted', () => {
+      this.initToc()
+      this.syncTocLayout()
+    })
   }
 }

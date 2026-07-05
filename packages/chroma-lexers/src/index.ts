@@ -5,3 +5,5 @@ export default async function main() {
   const lexers = await fetchLexers()
   generateScss(lexers)
 }
+
+main()

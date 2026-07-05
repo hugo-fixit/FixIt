@@ -145,6 +145,8 @@ encryptedMessage = "Per favore inserisci la password"
 password = "Password"
 enterBtn = "Entra"
 encryptyAgain = "Crittografa di nuovo"
+encryptionWarning = "Rilevata crittografia dei contenuti, ma sono ancora in testo in chiaro!"
+encryptionCommand = "Eseguire `npx @hugo-fixit/post-encrypt` dopo la compilazione per crittograffarli effettivamente."
 relatedContent = "Contenuti correlati"
 
 [single.includedIn]

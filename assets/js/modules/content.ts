@@ -117,7 +117,7 @@ export class ContentModule implements ContentService {
   initDetails(target: Element | Document = document) {
     target.querySelectorAll<HTMLElement>('.details:not(.disabled)').forEach(($details) => {
       const $summary = $details.querySelector<HTMLElement>('.details-summary')!
-      $summary.addEventListener('click', () => {
+      $summary?.addEventListener('click', () => {
         $details.classList.toggle('open')
       }, false)
     })
@@ -166,6 +166,7 @@ export class ContentModule implements ContentService {
     CellTooltip.initAll('li[data-task] > span[title]', { placement: 'right' })
     CellTooltip.initAll('.action-btn[title]', { placement: 'bottom' })
     CellTooltip.initAll('.copy-icon-btn[title]', { placement: 'top' })
+    CellTooltip.initAll('.fixit-encryptor-btn[title]')
     this.#initFootnotes()
   }
 
@@ -186,8 +187,8 @@ export class ContentModule implements ContentService {
   setup() {
     this.initContent()
     this.initSVGIcon()
-    eventBus.on('fixit:decrypted', () => {
-      this.initContent()
+    eventBus.on('fixit:decrypted', ({ detail }) => {
+      this.initContent(detail.target)
     })
     eventBus.on('fixit:partial-decrypted', ({ detail }) => {
       this.initContent(detail.target)

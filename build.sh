@@ -106,6 +106,10 @@ main() {
   wait "${pid_demo}" || { echo "build demo failed"; exit 1; }
   wait "${pid_test}" || { echo "build test failed"; exit 1; }
   pnpm -F integration start
+
+  # Post-process encrypted content and verify encryption output.
+  pnpm encrypt
+  pnpm encrypt --verify
 }
 
 main "$@"

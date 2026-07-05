@@ -144,6 +144,8 @@ encryptedMessage = "Vui lòng nhập mật khẩu"
 password = "Mật khẩu"
 enterBtn = "Nhập"
 encryptyAgain = "Mã hóa lại"
+encryptionWarning = "Phát hiện mã hóa nội dung, nhưng chúng vẫn ở dạng văn bản thuần!"
+encryptionCommand = "Chạy `npx @hugo-fixit/post-encrypt` sau khi build để thực sự mã hóa chúng."
 relatedContent = "Nội dung liên quan"
 
 [single.includedIn]

@@ -79,6 +79,12 @@ importers:
         specifier: ^11.3.6
         version: 11.3.6
 
+  packages/post-encrypt:
+    dependencies:
+      consola:
+        specifier: ^3.4.2
+        version: 3.4.2
+
   packages/shared:
     dependencies:
       consola:

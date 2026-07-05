@@ -12,6 +12,7 @@
 /* layer: shortcuts */
 .z-fixed{z-index:200;}
 /* layer: default */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0;}
 .visible{visibility:visible;}
 .absolute{position:absolute;}
 .fixed{position:fixed;}
@@ -33,6 +34,7 @@
 .my-4{margin-top:1rem;margin-bottom:1rem;}
 .me{margin-inline-end:1rem;}
 .me-1{margin-inline-end:0.25rem;}
+.me-1\.5{margin-inline-end:0.375rem;}
 .me-2{margin-inline-end:0.5rem;}
 .ms-1{margin-inline-start:0.25rem;}
 .inline{display:inline;}
@@ -94,6 +96,7 @@
 }
 @media (max-width: 679.9px){
 .max-sm\:hidden{display:none;}
+.max-sm\:w-full{width:100%;}
 }
 @media (min-width: 680px){
 .sm\:hidden{display:none;}

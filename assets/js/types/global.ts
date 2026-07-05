@@ -7,6 +7,25 @@ export interface TabContainerChangedDetail {
   relatedTarget?: Element | null
 }
 
+export interface FixItDecryptorOptions {
+  /** Cache duration in seconds for decrypted content (default: 24 hours) */
+  duration?: number
+}
+
+export interface FixItDecryptorInstance {
+  /**
+   * Initialize page-level and/or shortcode-level decryption based on flags.
+   * @param options - `{ all?, shortcode? }` controlling which modes to activate.
+   * @param options.all - Enable whole-page decryption.
+   * @param options.shortcode - Enable shortcode-level decryption.
+   */
+  init: (options: { all?: boolean, shortcode?: boolean }) => void
+  /** Restore decrypted content from localStorage cache if the password has not expired. */
+  validateCache: () => this
+}
+
+export type FixItDecryptorConstructor = new (options?: FixItDecryptorOptions) => FixItDecryptorInstance
+
 export type TabContainerChangedEvent = CustomEvent<TabContainerChangedDetail> & {
   panel: Element | null
 }
@@ -24,7 +43,6 @@ declare global {
     'APlayer'?: any
     'CellTooltip'?: any
     'cookieconsent'?: any
-    'CryptoJS'?: any
     'echarts'?: any
     'Fuse'?: any
     'Gitalk'?: any
@@ -46,7 +64,6 @@ declare global {
     'Valine'?: any
     'Waline'?: any
     'Watermark'?: any
-    'xxhash'?: any
     'Panzoom'?: (element: SVGElement, options?: Record<string, unknown>) => PanzoomInstance
 
     // FixIt theme
@@ -54,6 +71,6 @@ declare global {
     'config': FixItConfig
     'mermaid'?: MermaidRuntimeModule
     '_fuseIndex'?: any
-    'FixItDecryptor'?: any
+    'FixItDecryptor'?: FixItDecryptorConstructor
   }
 }

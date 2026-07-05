@@ -1,0 +1,39 @@
+{
+  "name": "@hugo-fixit/post-encrypt",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Post-build AES-256-GCM encryption tool for the FixIt Hugo theme",
+  "author": "Lruihao",
+  "license": "MIT",
+  "homepage": "https://github.com/hugo-fixit/FixIt/tree/feat/post-encrypt/packages/post-encrypt#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hugo-fixit/FixIt.git",
+    "directory": "packages/post-encrypt"
+  },
+  "bugs": {
+    "url": "https://github.com/hugo-fixit/FixIt/issues"
+  },
+  "keywords": [
+    "hugo",
+    "fixit",
+    "encryption",
+    "aes-256-gcm",
+    "post-build"
+  ],
+  "main": "./dist/index.js",
+  "bin": {
+    "post-encrypt": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "tsx src/index.ts",
+    "prepublishOnly": "pnpm build"
+  },
+  "dependencies": {
+    "consola": "^3.4.2"
+  }
+}

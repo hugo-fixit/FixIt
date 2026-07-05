@@ -2,15 +2,20 @@
  * Encrypted content decryptor for FixIt pages and shortcodes.
  *
  * Responsibilities:
- * - Validate password input and decrypt Base64 payloads into target containers.
+ * - Validate password input and decrypt AES-256-GCM payloads into target containers.
  * - Support both full-page and shortcode-scoped encrypted blocks.
  * - Persist and validate page-level decrypt cache with expiration.
  * - Emit and react to FixIt events for decrypted/partial-decrypted/reset flows.
+ *
+ * Encrypted payloads are stored in `<template data-password="..." data-cipher="...">` elements.
+ * Using `<template>` prevents the browser from rendering inner content (mermaid, echarts, etc.).
+ *
+ * Payload formats:
+ * - v2 (current): PBKDF2(SHA-256(password), 100k iterations) → base64(salt).base64(iv).base64(ciphertext+tag)
+ * - Password verification: data-password stores PBKDF2(SHA-256(password), data-verify-salt) when post-encrypted
  */
 import { eventBus } from '../core/event-bus'
 import { flashTooltip } from '../utils'
-
-declare const CryptoJS: any
 
 interface DecryptorOptions {
   duration?: number
@@ -19,8 +24,11 @@ interface DecryptorOptions {
 interface CachedStat {
   expiration: number
   password: string
-  salt: string
+  /** SHA-256 hash of the password, used for AES key derivation */
+  sha256: string
 }
+
+const PBKDF2_ITERATIONS = 100_000
 
 class FixItDecryptor {
   options: Required<DecryptorOptions>
@@ -33,45 +41,112 @@ class FixItDecryptor {
   constructor(options: DecryptorOptions = {}) {
     this.options = { duration: options.duration || 24 * 60 * 60 }
     customElements.get('fixit-encryptor') || customElements.define('fixit-encryptor', class extends HTMLElement {})
-    customElements.get('cipher-text') || customElements.define('cipher-text', class extends HTMLElement {})
   }
 
   /**
-   * Decode Base64 cipher text and inject the decrypted HTML into the target.
-   * @param $cipherText - The `<cipher-text>` element containing the encrypted content.
-   * @param $target - The DOM element to inject decrypted HTML into.
-   * @param salt - The salt string derived from the password.
+   * Decrypt a v2 payload using PBKDF2 key derivation.
+   * Format: base64(salt).base64(iv).base64(ciphertext+tag)
    */
-  #decryptContent($cipherText: HTMLElement, $target: HTMLElement, salt: string) {
+  async #decryptV2(payload: string, passwordHash: string): Promise<string> {
+    const [saltBase64, ivBase64, encryptedBase64] = payload.split('.', 3)
+    if (!saltBase64 || !ivBase64 || !encryptedBase64) {
+      throw new Error('Invalid v2 payload format: expected 3 segments')
+    }
+
+    const salt = Uint8Array.from(atob(saltBase64), c => c.charCodeAt(0))
+    const iv = Uint8Array.from(atob(ivBase64), c => c.charCodeAt(0))
+    const encrypted = Uint8Array.from(atob(encryptedBase64), c => c.charCodeAt(0))
+
+    const passwordBytes = new TextEncoder().encode(passwordHash)
+    const baseKey = await crypto.subtle.importKey('raw', passwordBytes, 'PBKDF2', false, ['deriveKey'])
+    const aesKey = await crypto.subtle.deriveKey(
+      { name: 'PBKDF2', salt, iterations: PBKDF2_ITERATIONS, hash: 'SHA-256' },
+      baseKey,
+      { name: 'AES-GCM', length: 256 },
+      false,
+      ['decrypt'],
+    )
+
+    const plainBuffer = await crypto.subtle.decrypt(
+      { name: 'AES-GCM', iv, tagLength: 128 },
+      aesKey,
+      encrypted,
+    )
+
+    return new TextDecoder().decode(plainBuffer)
+  }
+
+  async #sha256Hex(input: string): Promise<string> {
+    const bytes = new TextEncoder().encode(input)
+    const hashBuffer = await crypto.subtle.digest('SHA-256', bytes)
+    return Array.from(new Uint8Array(hashBuffer))
+      .map(byte => byte.toString(16).padStart(2, '0'))
+      .join('')
+  }
+
+  /**
+   * Derive a verification hash using PBKDF2 from a SHA-256 password hash.
+   */
+  async #deriveVerifyHash(passwordHash: string, salt: ArrayBuffer): Promise<string> {
+    const passwordBytes = new TextEncoder().encode(passwordHash)
+    const baseKey = await crypto.subtle.importKey('raw', passwordBytes, 'PBKDF2', false, ['deriveBits'])
+    const bits = await crypto.subtle.deriveBits(
+      { name: 'PBKDF2', salt, iterations: PBKDF2_ITERATIONS, hash: 'SHA-256' },
+      baseKey,
+      256,
+    )
+    return Array.from(new Uint8Array(bits))
+      .map(byte => byte.toString(16).padStart(2, '0'))
+      .join('')
+  }
+
+  async #decryptContent($template: HTMLTemplateElement, $target: HTMLElement, passwordHash: string): Promise<void> {
     try {
-      $target.innerHTML = CryptoJS!.enc.Base64
-        .parse($cipherText.textContent!.replace(salt, ''))
-        .toString(CryptoJS!.enc.Utf8)
-      $cipherText.parentElement!.classList.add('decrypted')
+      const cipher = $template.dataset.cipher
+      const payload = $template.innerHTML
+
+      let html: string
+      if (!cipher) {
+        // Dev mode: no post-build encryption, content is plaintext
+        html = payload
+      }
+      else if (cipher === 'aes-256-gcm-v2') {
+        html = await this.#decryptV2(payload, passwordHash)
+      }
+      else {
+        throw new Error(`Unsupported cipher: ${cipher}`)
+      }
+
+      $target.innerHTML = html
+      $template.parentElement!.classList.add('decrypted')
     }
     catch (err) {
+      const $encryptor = $template.parentElement!
+      const $input = $encryptor.querySelector<HTMLInputElement>('.fixit-decryptor-input')
+      if ($input) {
+        flashTooltip($input, err instanceof Error ? err.message : 'Decryption failed')
+      }
       return console.error(err)
     }
     if ($target.id === 'content')
-      eventBus.emit('fixit:decrypted')
+      eventBus.emit('fixit:decrypted', { target: $target })
     else
       eventBus.emit('fixit:partial-decrypted', { target: $target })
   }
 
   /**
    * Validate user input against the stored password hash; invoke callback on success.
+   * Supports both PBKDF2-verified (post-build) and plain SHA-256 (dev mode) passwords.
    * @param $encryptor - The `<fixit-encryptor>` element containing the input field.
-   * @param callback - Invoked with `(cipherText, passwordHash, salt)` on success.
+   * @param callback - Invoked with `(template, sha256Hash)` on success.
    */
-  async #validatePassword($encryptor: Element, callback: ($cipherText: HTMLElement, passwordHash: string, salt: string) => void) {
-    const $cipherText = $encryptor.querySelector<HTMLElement>('cipher-text')!
-    const password = $cipherText.dataset.password
+  async #validatePassword($encryptor: Element, callback: ($template: HTMLTemplateElement, passwordHash: string, verifyHash?: string) => Promise<void>): Promise<void> {
+    const $template = $encryptor.querySelector<HTMLTemplateElement>('template[data-password]')!
+    const storedHash = $template.dataset.password!
+    const verifySalt = $template.dataset.verifySalt
     const inputEl = $encryptor.querySelector<HTMLInputElement>('.fixit-decryptor-input')!
     const input = inputEl.value.trim()
-    const { h64ToString } = await window.xxhash!()
-    const inputHash = h64ToString(input)
-    const inputSha256 = CryptoJS!.SHA256(input).toString()
-    const saltLen = input.length % 2 ? input.length : input.length + 1
+    const inputSha256 = await this.#sha256Hex(input)
 
     inputEl.value = ''
     inputEl.blur()
@@ -79,11 +154,27 @@ class FixItDecryptor {
       flashTooltip(inputEl, 'Please enter the correct password!')
       return console.warn('Please enter the correct password!')
     }
-    if (inputHash !== password) {
+
+    let matches: boolean
+    let verifyHash: string
+    if (verifySalt) {
+      // Post-build: stored hash is PBKDF2(SHA-256(password), verifySalt)
+      const salt = Uint8Array.from(atob(verifySalt), c => c.charCodeAt(0)).buffer as ArrayBuffer
+      verifyHash = await this.#deriveVerifyHash(inputSha256, salt)
+      matches = verifyHash === storedHash
+    }
+    else {
+      // Dev mode: stored hash is SHA-256(password)
+      verifyHash = inputSha256
+      matches = inputSha256 === storedHash
+    }
+
+    if (!matches) {
       flashTooltip(inputEl, `Password error: ${input} not the correct password!`)
       return console.warn(`Password error: ${input} not the correct password!`)
     }
-    callback($cipherText, inputHash, inputSha256.slice(saltLen))
+    // Store verifyHash for cache validation, inputSha256 for AES key derivation
+    await callback($template, inputSha256, verifyHash)
   }
 
   /**
@@ -92,11 +183,10 @@ class FixItDecryptor {
    * @param options.all - Enable whole-page decryption.
    * @param options.shortcode - Enable shortcode-level decryption.
    */
-  init({ all, shortcode }: { all?: boolean, shortcode?: boolean }) {
-    const $content = document.querySelector<HTMLElement>('#content')
+  init({ all, shortcode }: { all?: boolean, shortcode?: boolean }): void {
     if (shortcode) {
-      eventBus.on('fixit:decrypted', () => {
-        this.initShortcodes($content!)
+      eventBus.on('fixit:decrypted', ({ detail }) => {
+        this.initShortcodes(detail.target)
       })
       eventBus.on('fixit:partial-decrypted', ({ detail }) => {
         this.initShortcodes(detail.target)
@@ -106,28 +196,49 @@ class FixItDecryptor {
       this.initPage()
     }
     else if (shortcode) {
-      this.initShortcodes($content!)
+      this.initShortcodes(document.querySelector<HTMLElement>('#content')!)
+    }
+  }
+
+  /**
+   * Decrypt the TOC template content in place.
+   * After decryption, TocModule.initToc() (via fixit:decrypted event) copies it to containers.
+   * @param passwordHash - SHA-256 hash for AES key derivation.
+   */
+  async #restoreToc(passwordHash: string): Promise<void> {
+    const $tocTemplate = document.querySelector<HTMLTemplateElement>('template[data-toc][data-cipher]')
+    if (!$tocTemplate)
+      return
+    try {
+      const cipher = $tocTemplate.dataset.cipher
+      const payload = $tocTemplate.innerHTML
+      if (cipher === 'aes-256-gcm-v2')
+        $tocTemplate.innerHTML = await this.#decryptV2(payload, passwordHash)
+    }
+    catch (err) {
+      console.error('[FixItDecryptor] Failed to restore TOC:', err)
     }
   }
 
   /** Initialize whole-page decryption with cache validation and encrypt/re-encrypt buttons. */
-  initPage() {
+  initPage(): void {
     this.validateCache()
     const $encryptor = document.querySelector<HTMLElement>('article > fixit-encryptor')!
     const $content = document.querySelector<HTMLElement>('#content')!
 
     const decryptorHandler = () => {
-      this.#validatePassword($encryptor, ($cipherText, passwordHash, salt) => {
+      void this.#validatePassword($encryptor, async ($template, passwordHash, verifyHash) => {
         window.localStorage?.setItem(
           `fixit-decryptor/#${location.pathname}`,
           JSON.stringify({
             expiration: Math.ceil(Date.now() / 1000) + this.options.duration,
-            password: passwordHash,
-            salt,
+            password: verifyHash ?? passwordHash,
+            sha256: passwordHash,
           }),
         )
-        this.#decryptContent($cipherText, $content, salt)
-      })
+        await this.#restoreToc(passwordHash)
+        await this.#decryptContent($template, $content, passwordHash)
+      }).catch(console.error)
     }
 
     $encryptor.querySelector('.fixit-decryptor-input')?.addEventListener('keydown', (e) => {
@@ -142,10 +253,29 @@ class FixItDecryptor {
       decryptorHandler()
     })
 
-    $encryptor.querySelector('.fixit-encryptor-btn')?.addEventListener('click', (e) => {
+    // Only for full-page decryption: re-encrypt button to clear cache and reset content
+    const $reEncryptBtn = $encryptor.querySelector<HTMLElement>('.fixit-encryptor-btn')
+    $reEncryptBtn?.addEventListener('click', (e) => {
       e.preventDefault()
+      window.CellTooltip?.getOrCreateInstance($reEncryptBtn).dispose()
+      $content.animate(
+        [
+          { opacity: 1, transform: 'scaleY(1)', transformOrigin: 'top' },
+          { opacity: 0, transform: 'scaleY(0)', transformOrigin: 'top' },
+        ],
+        { duration: 200, easing: 'ease-out' },
+      ).finished.then(() => {
+        $content.textContent = ''
+        $content.style.opacity = ''
+        $content.style.transform = ''
+      })
+      for (const id of ['toc-content-static', 'toc-content-auto', 'toc-content-drawer']) {
+        const $el = document.getElementById(id)
+        if ($el?.querySelector('nav')) {
+          $el.textContent = ''
+        }
+      }
       $encryptor.classList.remove('decrypted')
-      $content.innerHTML = ''
       window.localStorage?.removeItem(`fixit-decryptor/#${location.pathname}`)
       eventBus.emit('fixit:re-encrypt')
     })
@@ -157,15 +287,15 @@ class FixItDecryptor {
    * Initialize decryption for all unprocessed `fixit-encryptor` shortcodes under a parent.
    * @param $parent - The parent element to search for shortcodes.
    */
-  initShortcodes($parent: Element) {
+  initShortcodes($parent: Element): void {
     const $shortcodes = $parent.querySelectorAll<HTMLElement>('fixit-encryptor:not(.initialized)')
 
     $shortcodes.forEach(($shortcode) => {
       const decryptorHandler = () => {
         const $content = $shortcode.querySelector<HTMLElement>('.decryptor-content')!
-        this.#validatePassword($shortcode, ($cipherText, passwordHash, salt) => {
-          this.#decryptContent($cipherText, $content, salt)
-        })
+        void this.#validatePassword($shortcode, async ($template, passwordHash) => {
+          await this.#decryptContent($template, $content, passwordHash)
+        }).catch(console.error)
       }
 
       $shortcode.querySelector('.fixit-decryptor-input')?.addEventListener('keydown', (e) => {
@@ -185,11 +315,11 @@ class FixItDecryptor {
   }
 
   /** Restore decrypted content from localStorage cache if the password has not expired. */
-  validateCache() {
+  validateCache(): this {
     const $content = document.querySelector<HTMLElement>('#content')!
     const $encryptor = document.querySelector<HTMLElement>('article > fixit-encryptor')!
-    const $cipherText = $encryptor.querySelector<HTMLElement>('cipher-text')!
-    const password = $cipherText.dataset.password
+    const $template = $encryptor.querySelector<HTMLTemplateElement>('template[data-password]')!
+    const password = $template.dataset.password
     const cachedStat: CachedStat | null = JSON.parse(window.localStorage?.getItem(`fixit-decryptor/#${location.pathname}`) || 'null')
 
     if (!cachedStat || cachedStat.password !== password || cachedStat.expiration < Math.ceil(Date.now() / 1000)) {
@@ -199,7 +329,9 @@ class FixItDecryptor {
       }
       return this
     }
-    this.#decryptContent($cipherText, $content, cachedStat.salt)
+    // Use sha256 hash for AES key derivation (not the verification hash)
+    void this.#restoreToc(cachedStat.sha256)
+      .then(() => this.#decryptContent($template, $content, cachedStat.sha256))
     return this
   }
 }

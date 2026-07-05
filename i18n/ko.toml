@@ -143,6 +143,8 @@ encryptedMessage = "비밀번호를 입력하세요"
 password = "비밀번호"
 enterBtn = "입장"
 encryptyAgain = "다시 암호화"
+encryptionWarning = "콘텐츠 암호화가 감지되었지만 여전히 평문입니다!"
+encryptionCommand = "실제로 암호화하려면 빌드 후 `npx @hugo-fixit/post-encrypt`를 실행하세요."
 relatedContent = "관련 콘텐츠"
 
 [single.includedIn]

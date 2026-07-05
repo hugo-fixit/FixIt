@@ -1,4 +1,4 @@
-import type { CodeService, CoreService, EventsService, TocService } from '../core/tokens'
+import type { CodeService, CoreService, EventsService } from '../core/tokens'
 import { eventBus } from '../core/event-bus'
 import { animateCSS, getScrollTop, isMobile, scrollIntoView } from '../utils'
 
@@ -18,7 +18,6 @@ export class EventsModule implements EventsService {
 
   constructor(
     private readonly core: CoreService,
-    private readonly toc: TocService,
     private readonly code: CodeService,
   ) {}
 
@@ -83,8 +82,6 @@ export class EventsModule implements EventsService {
         }
       }
       eventBus.emit('fixit:scroll')
-      this.toc.syncTocHeight()
-      this.toc.syncTocActiveState()
       this.#oldScrollTop = this.#newScrollTop
     }, false)
   }
@@ -97,9 +94,6 @@ export class EventsModule implements EventsService {
         this.#resizeTimeout = window.setTimeout(() => {
           this.#resizeTimeout = null
           eventBus.emit('fixit:resize')
-          this.toc.initToc()
-          this.toc.syncTocHeight()
-          this.toc.syncTocActiveState()
 
           const _isMobile = isMobile()
           if (_isMobile !== resizeBefore) {

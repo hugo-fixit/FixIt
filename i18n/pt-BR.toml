@@ -146,6 +146,8 @@ encryptedMessage = "Por favor, insira a senha"
 password = "Senha"
 enterBtn = "Entrar"
 encryptyAgain = "Encripte novamente"
+encryptionWarning = "Criptografia de conteúdo detectada, mas ainda estão em texto plano!"
+encryptionCommand = "Execute `npx @hugo-fixit/post-encrypt` após a compilação para realmente criptografá-los."
 relatedContent = "Conteúdo relacionado"
 
 [single.includedIn]
