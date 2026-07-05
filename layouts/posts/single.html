@@ -150,17 +150,17 @@
       </div>
     {{- end -}}
 
-    {{- /* Static TOC */ -}}
     {{- if $showToc -}}
+      {{- /* Static TOC */ -}}
       <div class="details toc{{ with .Params.password }} encrypted-hidden{{ end }}" id="toc-static" data-kept="{{ if $toc.keep_static }}true{{ else }}false{{ end }}">
         <div class="details-summary toc-title">
           <span>{{ T "single.contents" }}</span>
           <span>{{ dict "Class" "details-icon fa-solid fa-angle-right" | partial "plugin/icon.html" }}</span>
         </div>
-        <div class="details-content toc-content" id="toc-content-static">
-          {{- $tableOfContents -}}
-        </div>
+        <div class="details-content toc-content" id="toc-content-static"></div>
       </div>
+      {{- /* TOC source (copied to containers by initToc, encrypted by post-encrypt when password is set) */ -}}
+      <template data-toc{{ with .Params.password }} data-password="{{ sha256 . }}"{{ end }}>{{ $tableOfContents }}</template>
     {{- end -}}
 
     {{- /* AI Summary */ -}}
@@ -221,7 +221,7 @@
     {{- block "custom-post__footer:after" . }}{{ end -}}
   </article>
 
-  <aside class="toc" id="toc-auto" aria-label="{{ T "single.contents" }}">
+  <aside class="toc animate__animated animate__fadeIn animate__faster" id="toc-auto" aria-label="{{ T "single.contents" }}">
     {{- /* Custom block before post toc */ -}}
     {{- block "custom-post__toc:before" . }}{{ end -}}
 
@@ -246,9 +246,7 @@
       </button>
       <div class="toc">
         <h2 class="toc-title" id="toc-dialog-title">{{ T "single.contents" }}</h2>
-        <div class="toc-content" id="toc-content-drawer">
-          {{- replace $tableOfContents `id="TableOfContents"` "" | safeHTML -}}
-        </div>
+        <div class="toc-content" id="toc-content-drawer"></div>
       </div>
     </dialog>
   {{- end -}}

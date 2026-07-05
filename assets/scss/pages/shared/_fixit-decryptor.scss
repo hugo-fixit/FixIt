@@ -12,9 +12,9 @@ fixit-encryptor {
   margin-block: fi-var(decryptor-margin-block);
 }
 
-// Form wrapper (hidden until initialized)
+// Form wrapper
 .fixit-decryptor-form {
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.25rem;
@@ -22,11 +22,8 @@ fixit-encryptor {
   margin-inline: auto;
   padding: 1.5rem;
   border: 1px solid fi-var(global-border-color);
+  transition: opacity 0.3s ease-out;
   @include border-radius;
-
-  .initialized & {
-    display: flex;
-  }
 }
 
 // Lock icon header
@@ -36,8 +33,8 @@ fixit-encryptor {
   justify-content: center;
   width: 3.5rem;
   aspect-ratio: 1;
-  border-radius: 50%;
   background-color: light-dark(fi-rgba(fi-var(primary), 0.1), fi-rgba(fi-var(primary), 0.15));
+  @include border-radius(full);
 }
 
 // Password input field with icon prefix
@@ -80,7 +77,9 @@ fixit-encryptor {
 
 // Unlock button
 .fixit-decryptor-btn {
-  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 2.5rem;
   border: none;
@@ -93,12 +92,6 @@ fixit-encryptor {
 
   &:hover {
     opacity: 0.85;
-  }
-
-  .initialized & {
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 }
 
@@ -136,10 +129,15 @@ article fixit-encryptor {
     @include set-fi-var(decryptor-margin-block, 2rem);
   }
 
-  &.decrypted > .fixit-decryptor-container {
-    .fixit-decryptor-form {
-      display: none;
-    }
+  &.decrypted > .fixit-decryptor-container .fixit-decryptor-form {
+    display: none;
+  }
+}
+
+// Fade-in when form becomes visible (e.g. page load or re-encrypt)
+@starting-style {
+  article fixit-encryptor > .fixit-decryptor-container .fixit-decryptor-form {
+    opacity: 0;
   }
 }
 

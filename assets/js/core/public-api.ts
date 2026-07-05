@@ -43,7 +43,7 @@ export class PublicAPI implements FixItPublicAPI {
     this.pwa = new PWAModule(this.core)
     this.misc = new MiscModule(this.core)
     this.content = new ContentModule(this.core, this.code)
-    this.events = new EventsModule(this.core, this.toc, this.code)
+    this.events = new EventsModule(this.core, this.code)
   }
 
   get config() { return this.core.config }
