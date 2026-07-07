@@ -4,7 +4,7 @@
  * Responsibilities:
  * - Initialize Mapbox GL maps with controls and optional markers.
  * - Apply light/dark style on theme switch.
- * - Re-run initialization after decrypted content is revealed.
+ * - Re-run initialization when `fixit:content-decrypted` is emitted.
  */
 import { eventBus } from '../core/event-bus'
 import { isDarkMode } from '../utils'
@@ -83,6 +83,5 @@ document.addEventListener('DOMContentLoaded', () => {
       mapbox.addControl(new window.MapboxLanguage())
     })
   })
-  eventBus.on('fixit:decrypted', () => initMapbox())
-  eventBus.on('fixit:partial-decrypted', ({ detail }) => initMapbox(detail.target))
+  eventBus.on('fixit:content-decrypted', ({ detail }) => initMapbox(detail.target))
 }, false)

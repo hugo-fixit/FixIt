@@ -68,10 +68,7 @@ function initMathJax(el?: Element) {
 
 document.addEventListener('DOMContentLoaded', () => {
   bootstrapMathJax()
-  eventBus.on('fixit:decrypted', () => {
-    initMathJax()
-  })
-  eventBus.on('fixit:partial-decrypted', ({ detail }) => {
+  eventBus.on('fixit:content-decrypted', ({ detail }) => {
     initMathJax(detail.target)
   })
 })

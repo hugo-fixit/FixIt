@@ -5,7 +5,7 @@
  * - Initialize ECharts instances with light/dark theme support.
  * - Re-render all charts on theme switch.
  * - Resize charts on window resize events.
- * - Re-run initialization after decrypted content is revealed.
+ * - Re-run initialization when `fixit:content-decrypted` is emitted.
  */
 import { eventBus } from '../core/event-bus'
 import { getStagingDOM, isDarkMode, isObjectLiteral } from '../utils'
@@ -84,6 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
   eventBus.on('fixit:resize', () => {
     echartsArr.forEach(chart => chart.resize())
   })
-  eventBus.on('fixit:decrypted', applyEchartsTheme)
-  eventBus.on('fixit:partial-decrypted', ({ detail }) => initEchartsInTarget(detail.target))
+  eventBus.on('fixit:content-decrypted', ({ detail }) => {
+    if (detail.isPage) {
+      applyEchartsTheme()
+      return
+    }
+    initEchartsInTarget(detail.target)
+  })
 }, false)

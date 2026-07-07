@@ -3,7 +3,7 @@
  *
  * Responsibilities:
  * - Initialize lightGallery for page image zoom and thumbnails.
- * - Re-initialize on decrypted or partially decrypted content.
+ * - Re-initialize when `fixit:content-decrypted` is emitted.
  */
 import { eventBus } from '../core/event-bus'
 
@@ -36,6 +36,5 @@ function initLightGallery() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initLightGallery()
-  eventBus.on('fixit:decrypted', initLightGallery)
-  eventBus.on('fixit:partial-decrypted', initLightGallery)
+  eventBus.on('fixit:content-decrypted', initLightGallery)
 }, false)

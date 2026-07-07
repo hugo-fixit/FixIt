@@ -22,7 +22,7 @@
     gap: 0.25em;
     padding: 0.2em 0.5em;
     user-select: none;
-    
+
     > i.fa-layer-group {
       flex-shrink: 0;
     }
@@ -52,7 +52,6 @@
       text-indent: -0.8em;
       list-style: none;
       overflow-y: auto;
-      overscroll-behavior: contain;
       max-height: 60vh;
       @include scrollbar-width(none, 0);
 

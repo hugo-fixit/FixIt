@@ -3,7 +3,7 @@
  *
  * Responsibilities:
  * - Discover `.shortcode-aplayer` nodes and initialize APlayer instances once.
- * - Re-run initialization after decrypted or partially decrypted content is revealed.
+ * - Re-run initialization when `fixit:content-decrypted` is emitted.
  * - Keep behavior idempotent through `data-processed` markers.
  */
 import { eventBus } from '../core/event-bus'
@@ -24,6 +24,5 @@ function initAPlayer() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initAPlayer()
-  eventBus.on('fixit:decrypted', initAPlayer)
-  eventBus.on('fixit:partial-decrypted', initAPlayer)
+  eventBus.on('fixit:content-decrypted', initAPlayer)
 }, false)

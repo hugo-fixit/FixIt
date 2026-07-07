@@ -2,10 +2,10 @@
  * Encrypted content decryptor for FixIt pages and shortcodes.
  *
  * Responsibilities:
- * - Validate password input and decrypt AES-256-GCM payloads into target containers.
+ * - Validate password input and decrypt AES-256-GCM payloads.
  * - Support both full-page and shortcode-scoped encrypted blocks.
  * - Persist and validate page-level decrypt cache with expiration.
- * - Emit and react to FixIt events for decrypted/partial-decrypted/reset flows.
+ * - Emit FixIt events for content/TOC rendering and re-encrypt flows.
  *
  * Encrypted payloads are stored in `<template data-password="..." data-cipher="...">` elements.
  * Using `<template>` prevents the browser from rendering inner content (mermaid, echarts, etc.).
@@ -43,6 +43,33 @@ class FixItDecryptor {
     customElements.get('fixit-encryptor') || customElements.define('fixit-encryptor', class extends HTMLElement {})
   }
 
+  /** Toggle encrypted/decrypted visibility helper classes in the given scope. */
+  #toggleClass(container: Element | Document, show: boolean): void {
+    const fromClass = show ? 'encrypted-hidden' : 'decrypted-shown'
+    const toClass = show ? 'decrypted-shown' : 'encrypted-hidden'
+    container.querySelectorAll(`.${fromClass}`).forEach(($element: Element) => {
+      $element.classList.replace(fromClass, toClass)
+    })
+  }
+
+  /** Copy TOC HTML to all TOC containers. */
+  #renderToc(html: string): void {
+    const $template = document.createElement('template')
+    $template.innerHTML = html
+    const $tocCore = $template.content.querySelector('#TableOfContents')
+    if (!$tocCore)
+      return
+    for (const id of ['toc-content-static', 'toc-content-auto', 'toc-content-drawer']) {
+      const $container = document.getElementById(id)
+      if (!$container)
+        continue
+      $container.textContent = ''
+      const $clone = $tocCore.cloneNode(true) as HTMLElement
+      $clone.removeAttribute('id')
+      $container.appendChild($clone)
+    }
+  }
+
   /**
    * Decrypt a v2 payload using PBKDF2 key derivation.
    * Format: base64(salt).base64(iv).base64(ciphertext+tag)
@@ -76,6 +103,11 @@ class FixItDecryptor {
     return new TextDecoder().decode(plainBuffer)
   }
 
+  /**
+   * Compute SHA-256 hex digest for user input.
+   * @param input - Raw password input.
+   * @returns Lowercase hex SHA-256 digest.
+   */
   async #sha256Hex(input: string): Promise<string> {
     const bytes = new TextEncoder().encode(input)
     const hashBuffer = await crypto.subtle.digest('SHA-256', bytes)
@@ -100,6 +132,45 @@ class FixItDecryptor {
       .join('')
   }
 
+  /**
+   * Decrypt TOC template content and refill TOC containers directly.
+   * The template itself stays encrypted so re-encrypt can restore the initial state.
+   * @param passwordHash - SHA-256 hash for AES key derivation.
+   */
+  async #decryptToc(passwordHash: string): Promise<void> {
+    const $tocTemplate = document.querySelector<HTMLTemplateElement>('template[data-toc]')
+    if (!$tocTemplate)
+      return
+    try {
+      const cipher = $tocTemplate.dataset.cipher
+      const payload = $tocTemplate.innerHTML
+
+      let html: string
+      if (!cipher) {
+        // Dev mode: no post-build encryption, TOC is plaintext
+        html = payload
+      }
+      else if (cipher === 'aes-256-gcm-v2') {
+        html = await this.#decryptV2(payload, passwordHash)
+      }
+      else {
+        throw new Error(`Unsupported cipher: ${cipher}`)
+      }
+
+      this.#renderToc(html)
+      eventBus.emit('fixit:toc-decrypted', { html })
+    }
+    catch (err) {
+      console.error('[FixItDecryptor] Failed to restore TOC:', err)
+    }
+  }
+
+  /**
+   * Decrypt template payload and write plaintext into the target container.
+   * @param $template - Encrypted content template element.
+   * @param $target - Target container that should receive decrypted content.
+   * @param passwordHash - SHA-256 hash for AES key derivation.
+   */
   async #decryptContent($template: HTMLTemplateElement, $target: HTMLElement, passwordHash: string): Promise<void> {
     try {
       const cipher = $template.dataset.cipher
@@ -119,6 +190,9 @@ class FixItDecryptor {
 
       $target.innerHTML = html
       $template.parentElement!.classList.add('decrypted')
+      const isPage = $target.id === 'content'
+      this.#toggleClass(isPage ? document : $target, true)
+      eventBus.emit('fixit:content-decrypted', { target: $target, isPage })
     }
     catch (err) {
       const $encryptor = $template.parentElement!
@@ -128,10 +202,6 @@ class FixItDecryptor {
       }
       return console.error(err)
     }
-    if ($target.id === 'content')
-      eventBus.emit('fixit:decrypted', { target: $target })
-    else
-      eventBus.emit('fixit:partial-decrypted', { target: $target })
   }
 
   /**
@@ -185,10 +255,7 @@ class FixItDecryptor {
    */
   init({ all, shortcode }: { all?: boolean, shortcode?: boolean }): void {
     if (shortcode) {
-      eventBus.on('fixit:decrypted', ({ detail }) => {
-        this.initShortcodes(detail.target)
-      })
-      eventBus.on('fixit:partial-decrypted', ({ detail }) => {
+      eventBus.on('fixit:content-decrypted', ({ detail }) => {
         this.initShortcodes(detail.target)
       })
     }
@@ -200,27 +267,7 @@ class FixItDecryptor {
     }
   }
 
-  /**
-   * Decrypt the TOC template content in place.
-   * After decryption, TocModule.initToc() (via fixit:decrypted event) copies it to containers.
-   * @param passwordHash - SHA-256 hash for AES key derivation.
-   */
-  async #restoreToc(passwordHash: string): Promise<void> {
-    const $tocTemplate = document.querySelector<HTMLTemplateElement>('template[data-toc][data-cipher]')
-    if (!$tocTemplate)
-      return
-    try {
-      const cipher = $tocTemplate.dataset.cipher
-      const payload = $tocTemplate.innerHTML
-      if (cipher === 'aes-256-gcm-v2')
-        $tocTemplate.innerHTML = await this.#decryptV2(payload, passwordHash)
-    }
-    catch (err) {
-      console.error('[FixItDecryptor] Failed to restore TOC:', err)
-    }
-  }
-
-  /** Initialize whole-page decryption with cache validation and encrypt/re-encrypt buttons. */
+  /** Initialize whole-page decryption with cache validation and input handlers. */
   initPage(): void {
     this.validateCache()
     const $encryptor = document.querySelector<HTMLElement>('article > fixit-encryptor')!
@@ -236,7 +283,7 @@ class FixItDecryptor {
             sha256: passwordHash,
           }),
         )
-        await this.#restoreToc(passwordHash)
+        await this.#decryptToc(passwordHash)
         await this.#decryptContent($template, $content, passwordHash)
       }).catch(console.error)
     }
@@ -253,11 +300,17 @@ class FixItDecryptor {
       decryptorHandler()
     })
 
-    // Only for full-page decryption: re-encrypt button to clear cache and reset content
+    // Re-encrypt button only orchestrates state/cache reset; modules handle DOM cleanup.
     const $reEncryptBtn = $encryptor.querySelector<HTMLElement>('.fixit-encryptor-btn')
     $reEncryptBtn?.addEventListener('click', (e) => {
       e.preventDefault()
       window.CellTooltip?.getOrCreateInstance($reEncryptBtn).dispose()
+      for (const id of ['toc-content-static', 'toc-content-auto', 'toc-content-drawer']) {
+        const $el = document.getElementById(id)
+        if ($el) {
+          $el.textContent = ''
+        }
+      }
       $content.animate(
         [
           { opacity: 1, transform: 'scaleY(1)', transformOrigin: 'top' },
@@ -269,13 +322,8 @@ class FixItDecryptor {
         $content.style.opacity = ''
         $content.style.transform = ''
       })
-      for (const id of ['toc-content-static', 'toc-content-auto', 'toc-content-drawer']) {
-        const $el = document.getElementById(id)
-        if ($el?.querySelector('nav')) {
-          $el.textContent = ''
-        }
-      }
       $encryptor.classList.remove('decrypted')
+      this.#toggleClass(document, false)
       window.localStorage?.removeItem(`fixit-decryptor/#${location.pathname}`)
       eventBus.emit('fixit:re-encrypt')
     })
@@ -330,7 +378,7 @@ class FixItDecryptor {
       return this
     }
     // Use sha256 hash for AES key derivation (not the verification hash)
-    void this.#restoreToc(cachedStat.sha256)
+    void this.#decryptToc(cachedStat.sha256)
       .then(() => this.#decryptContent($template, $content, cachedStat.sha256))
     return this
   }

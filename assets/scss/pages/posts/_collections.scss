@@ -151,7 +151,6 @@
       text-indent: -0.8em;
       list-style: none;
       overflow-y: auto;
-      overscroll-behavior: contain;
       max-height: 60vh;
       @include scrollbar-width(none, 0);
 

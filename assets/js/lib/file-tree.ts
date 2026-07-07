@@ -4,7 +4,7 @@
  * Responsibilities:
  * - Initialize folder expand/collapse interactions for `.file-tree` blocks.
  * - Recalculate connector line heights when tree visibility/layout changes.
- * - Sync tree state across tab switches, print preparation, and decrypted content updates.
+ * - Sync tree state across tab switches, print preparation, and `fixit:content-decrypted` updates.
  */
 import type { TabContainerChangedEvent } from '../types'
 import { eventBus } from '../core/event-bus'
@@ -88,11 +88,7 @@ function bindEvents() {
     }
   }, false)
 
-  eventBus.on('fixit:decrypted', () => {
-    initFileTree()
-  })
-
-  eventBus.on('fixit:partial-decrypted', ({ detail }) => {
+  eventBus.on('fixit:content-decrypted', ({ detail }) => {
     initFileTree(detail.target)
   })
 }

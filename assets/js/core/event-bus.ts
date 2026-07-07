@@ -3,8 +3,8 @@ export interface FixItEventMap {
   'fixit:switch-theme': { isDark: boolean, mode: string, isChanged: boolean }
   'fixit:scroll': void
   'fixit:resize': void
-  'fixit:decrypted': { target: Element }
-  'fixit:partial-decrypted': { target: Element }
+  'fixit:content-decrypted': { target: HTMLElement, isPage: boolean }
+  'fixit:toc-decrypted': { html: string }
   'fixit:re-encrypt': void
   'fixit:code-tab-sync': { lang: string, source: HTMLElement }
   'fixit:sw-update': void

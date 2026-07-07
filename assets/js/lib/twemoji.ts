@@ -3,7 +3,7 @@
  *
  * Responsibilities:
  * - Parse emoji shortcodes into Twemoji images when enabled.
- * - Re-run parsing after decrypted or partially decrypted content is revealed.
+ * - Re-run parsing when `fixit:content-decrypted` is emitted.
  */
 import { eventBus } from '../core/event-bus'
 
@@ -14,10 +14,7 @@ function initTwemoji(target: Element | Document = document) {
 
 document.addEventListener('DOMContentLoaded', () => {
   initTwemoji()
-  eventBus.on('fixit:decrypted', () => {
-    initTwemoji()
-  })
-  eventBus.on('fixit:partial-decrypted', ({ detail }) => {
+  eventBus.on('fixit:content-decrypted', ({ detail }) => {
     initTwemoji(detail.target)
   })
 }, false)

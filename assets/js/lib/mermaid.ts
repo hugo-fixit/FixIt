@@ -13,7 +13,7 @@
  * - Bind pan/zoom behavior and synchronize transforms across light/dark layers
  *   during theme switches.
  * - Wire diagram tab controls (diagram/code switch, zoom/reset/download actions).
- * - React to FixIt events (theme switch, decrypted content, partial decrypted content)
+ * - React to FixIt events (theme switch and `fixit:content-decrypted`)
  *   and re-observe/re-render affected containers when context changes.
  *
  * Public entrypoints:
@@ -793,8 +793,7 @@ function bindGlobalEventsOnce(): void {
   bindTabContainerChanged()
 
   initMermaid()
-  eventBus.on('fixit:decrypted', initMermaid)
-  eventBus.on('fixit:partial-decrypted', initMermaid)
+  eventBus.on('fixit:content-decrypted', initMermaid)
 }
 
 /**

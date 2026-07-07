@@ -4,7 +4,7 @@
  * Responsibilities:
  * - Automatically add spacing between CJK (Chinese, Japanese, Korean) and ASCII characters.
  * - Support both full-page spacing and selector-based spacing.
- * - Re-run spacing after decrypted or partially decrypted content is revealed.
+ * - Re-run spacing when `fixit:content-decrypted` is emitted.
  */
 import { eventBus } from '../core/event-bus'
 
@@ -30,10 +30,7 @@ function initPangu(target?: Element) {
 
 document.addEventListener('DOMContentLoaded', () => {
   initPangu()
-  eventBus.on('fixit:decrypted', () => {
-    initPangu()
-  })
-  eventBus.on('fixit:partial-decrypted', ({ detail }) => {
+  eventBus.on('fixit:content-decrypted', ({ detail }) => {
     initPangu(detail.target)
   })
 }, false)

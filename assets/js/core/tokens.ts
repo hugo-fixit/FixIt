@@ -45,9 +45,9 @@ export interface CodeService {
 
 // ─── TocService ───
 export interface TocService {
+  renderToc: () => void
   syncTocHeight: () => void
   syncTocActiveState: () => void
-  initToc: () => void
   setup: () => void
 }
 

@@ -3,7 +3,7 @@
  *
  * Responsibilities:
  * - Initialize TypeIt typewriter instances, grouped and chained by data attributes.
- * - Re-run initialization after decrypted content is revealed.
+ * - Re-run initialization when `fixit:content-decrypted` is emitted.
  */
 import { eventBus } from '../core/event-bus'
 import { getStagingDOM } from '../utils'
@@ -66,6 +66,5 @@ function initTypeit(target: Element | Document = document) {
 
 document.addEventListener('DOMContentLoaded', () => {
   initTypeit()
-  eventBus.on('fixit:decrypted', () => initTypeit())
-  eventBus.on('fixit:partial-decrypted', ({ detail }) => initTypeit(detail.target))
+  eventBus.on('fixit:content-decrypted', ({ detail }) => initTypeit(detail.target))
 }, false)
