@@ -120,8 +120,8 @@
                   {{- if ne . $.Site -}}
                     {{- $link := printf "%v/404.html" .LanguagePrefix -}}
                     <li class="menu-item">
-                      <a href="{{ $link }}" class="menu-link" title="{{- .Language.LanguageName -}}">
-                        {{- .Language.LanguageName -}}
+                      <a href="{{ $link }}" class="menu-link" title="{{- .Language.Label -}}">
+                        {{- .Language.Label -}}
                       </a>
                     </li>
                   {{- end -}}
@@ -130,9 +130,9 @@
                 {{- range .AllTranslations -}}
                   <li class="menu-item">
                     {{- if ne .Lang $.Lang -}}
-                      <a href="{{ .RelPermalink }}" class="menu-link" title="{{ .Language.LanguageName }}">{{ .Language.LanguageName }}</a>
+                      <a href="{{ .RelPermalink }}" class="menu-link" title="{{ .Language.Label }}">{{ .Language.Label }}</a>
                     {{- else -}}
-                      <span class="text-secondary" title="{{ .Language.LanguageName }}">{{ .Language.LanguageName }}</span>
+                      <span class="text-secondary" title="{{ .Language.Label }}">{{ .Language.Label }}</span>
                     {{- end -}}
                   </li>
                 {{- end -}}
@@ -271,7 +271,7 @@
           {{- if hugo.IsMultilingual -}}
             <span class="menu-system-item language-switch">
               <button type="button" aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}">
-                {{- .Language.LanguageName -}}
+                {{- .Language.Label -}}
                 {{- dict "Class" "dropdown-icon fa-solid fa-chevron-down" | partial "plugin/icon.html" -}}
               </button>
               <select id="language-select" class="language-select" onchange="location = this.value;">
@@ -279,13 +279,13 @@
                   {{- range hugo.Sites -}}
                     {{- $link := printf "%v/404.html" .LanguagePrefix -}}
                     <option value="{{ $link }}"{{ if eq . $.Site }} selected disabled{{ end }}>
-                      {{- .Language.LanguageName -}}
+                      {{- .Language.Label -}}
                     </option>
                   {{- end -}}
                 {{- else if .IsTranslated -}}
                   {{- range .AllTranslations -}}
                     <option value="{{ .RelPermalink }}"{{ if eq .Lang $.Lang }} selected disabled{{ end }}>
-                      {{- .Language.LanguageName -}}
+                      {{- .Language.Label -}}
                     </option>
                   {{- end -}}
                 {{- else -}}
