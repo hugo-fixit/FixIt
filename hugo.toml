@@ -24,6 +24,8 @@ languageCode = "en"
 languageName = "English"
 # whether to include Chinese/Japanese/Korean
 hasCJKLanguage = false
+# timezone local
+# timeZone = "Asia/Shanghai"
 # copyright description used only for seo schema
 copyright = ""
 # whether to use robots.txt
@@ -32,10 +34,18 @@ enableRobotsTXT = true
 enableGitInfo = true
 # whether to use emoji code
 enableEmoji = true
+# the capitalization rules to follow, optional values: ["ap", "chicago", "go", "firstupper", "none"]
+titleCaseStyle = "ap"
+# whether to capitalize automatic list titles
+capitalizeListTitles = false
 # the main sections of a site
 # if set, the MainSections method on the Site object returns the given sections,
 # otherwise it returns the section with the most pages.
 # mainSections = ["posts"]
+# the editor to use when creating new content
+# newContentEditor = "code"
+# ignore some build warnings and errors
+ignoreLogs = []
 
 # -------------------------------------------------------------------------------------
 # Front Matter Configuration
@@ -181,7 +191,8 @@ min = "0.161.0"
 [markup]
 _merge = "shallow"
 
-# Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)
+# syntax highlighting
+# See: https://gohugo.io/content-management/syntax-highlighting
 [markup.highlight]
 # ~~~~~~~~~~ necessary configurations ~~~~~~~~~~
 # https://github.com/hugo-fixit/FixIt/issues/43
@@ -754,7 +765,8 @@ cdn = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 # custom macros map
 # syntax: <macro> = <definition>
 [params.math.mathjax.macros]
-# bold = ["{\\bf #1}", 1] # usage: $\bold{math}$
+# usage: $\bold{math}$
+# bold = ["{\\bf #1}", 1]
 
 [params.math.mathjax.loader]
 load = [ "ui/safe" ]
@@ -1147,9 +1159,9 @@ no_favicon = false
 # modern SVG favicon to use in place of older style .png and .ico files
 svg_favicon = ""
 # Safari mask icon color
-mask_color = "#5bbad5"
+mask_color = "#FF7359"
 # Windows v8-10 tile color
-tile_color = "#da532c"
+tile_color = "#2d89ef"
 
 # Android browser theme color
 [params.app.theme_color]
@@ -1272,7 +1284,7 @@ typeit = false
 # Breadcrumb config
 [params.breadcrumb]
 enable = false
-sticky = false
+sticky = true
 show_home = false
 separator = "/"
 capitalize = true
@@ -1369,10 +1381,14 @@ max_count = 10
 # TagCloud config for tags page
 [params.tag_cloud]
 enable = false
-min = 14 # Minimum font size in px
-max = 32 # Maximum font size in px
-peak_count = 10 # Maximum count of posts per tag
-orderby = "name" # Order of tags, optional values: ["name", "count"]
+# Minimum font size in px
+min = 14
+# Maximum font size in px
+max = 32
+# Maximum count of posts per tag
+peak_count = 10
+# Order of tags, optional values: ["name", "count"]
+orderby = "name"
 
 # Home page config
 [params.home]
