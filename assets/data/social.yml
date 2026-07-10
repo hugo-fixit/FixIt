@@ -539,7 +539,7 @@ qq:
   Template: https://wpa.qq.com/msgrd?v=3&uin=%v&site=qq&menu=yes
   Title: QQ
   Icon:
-    Simpleicons: tencentqq
+    Simpleicons: qq
 
 # 069: QQ Group
 qqgroup:
@@ -547,7 +547,7 @@ qqgroup:
   Prefix: https://qm.qq.com/q/
   Title: QQ Group
   Icon:
-    Simpleicons: tencentqq
+    Simpleicons: qq
 
 # 070: Diaspora
 diaspora:

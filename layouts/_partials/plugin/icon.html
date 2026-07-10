@@ -23,12 +23,12 @@
   {{- end -}}
 
   {{- if (urls.Parse $src).Host | not -}}
-    {{- $resource := resources.Get $src | minify -}}
-    {{ if not $resource }}
+    {{- with resources.Get $src -}}
+      {{- $resource := . | resources.Minify -}}
+      {{- $resource.Content | replaceRE `<svg ` `<svg class="icon" ` | safeHTML -}}
+    {{- else -}}
       {{- errorf "Icon does not exist %v" $src -}}
     {{- end -}}
-    {{- $resource := $resource.Content -}}
-    {{- $resource | replaceRE `<svg ` `<svg class="icon" ` | safeHTML -}}
   {{- else -}}
     {{- /* fetch svg icon from external source */ -}}
     <i data-svg-src="{{ $src }}" aria-hidden="true"></i>
