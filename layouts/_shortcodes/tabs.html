@@ -1,11 +1,11 @@
 {{- /*
   Renders a tabbed interface with multiple tabs and their corresponding content.
   See https://fixit.lruihao.cn/documentation/content-management/shortcodes/extended/tabs/
- 
+
   @param {Int} [defaultTab=0] - The index of the tab to be active by default (0-based)
   @param {String} [type="underline"] - The style type of the tabs ("underline", "pill", "card", "segment", etc.)
   @param {String} [placement="top"] - The placement of the tabs ("top", "bottom", "left", "right")
- 
+
   Usage:
   {{< tabs defaultTab="1" type="card" placement="top" >}}
     {{% tab title="Tab 1" %}}
@@ -15,7 +15,7 @@
       Content for Tab 2
     {{% /tab %}}
   {{< /tabs >}}
- 
+
   Note: Tabs must be defined using the nested "tab" shortcode within the "tabs" shortcode.
 */ -}}
 
@@ -47,7 +47,7 @@
       {{- $id := $tab.id -}}
       <button class="tab-button" type="button" role="tab" id="tab-{{ $id }}" aria-selected="{{ eq $index $defaultTab }}">{{ $title | $.Page.RenderString }}</button>
     {{- end -}}
-    {{- .Inner | strings.TrimSpace | .Page.RenderString -}}
+    {{- .Inner -}}
   </tab-container>
 </div>
 

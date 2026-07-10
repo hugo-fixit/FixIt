@@ -9,7 +9,8 @@
 {{- $id := dict "Page" .Page | partial "function/id.html" -}}
 {{- $title := .Get "title" -}}
 {{- .Parent.Store.Add "tabs" (slice (dict "title" $title "id" $id)) -}}
+{{- $content := trim .Inner "\r\n" -}}
 
 {{- /* Tab panel */ -}}
-<div role="tabpanel" aria-labelledby="tab-{{ $id }}" class="tab-panel">{{ .Inner | strings.TrimSpace | .Page.RenderString }}</div>
+<div role="tabpanel" aria-labelledby="tab-{{ $id }}" class="tab-panel">{{ $content | safeHTML }}</div>
 {{- /* EOF */ -}}
