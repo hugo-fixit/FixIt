@@ -1247,12 +1247,14 @@ absolute_url = false
 # Whether to enable anchorify for headings in search results.
 anchorify = true
 
+# Algolia search configuration.
 [params.search.algolia]
 index = ""
 app_id = ""
 search_key = ""
 
-# https://fusejs.io/api/options.html
+# Fuse.js search configuration.
+# See: [Fuse.js options](https://fusejs.io/api/options.html)
 [params.search.fuse]
 is_case_sensitive = false
 min_match_char_length = 2
@@ -1738,7 +1740,7 @@ data = ""
 # Compatibility configuration.
 [params.compatibility]
 # Whether to use Polyfill.io on cdnjs to be compatible with older browsers.
-# https://cdnjs.cloudflare.com/polyfill.
+# See: https://cdnjs.cloudflare.com/polyfill.
 polyfill = false
 # Whether to use object-fit-images to be compatible with older browsers.
 object_fit = false
