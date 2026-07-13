@@ -12,12 +12,12 @@ defaultContentLanguage = "en"
 # [languages]
 
 # [languages.en]
-# languageCode = "en"
-# languageName = "English"
+# locale = "en"
+# label = "English"
 
 # [languages.zh-cn]
-# languageCode = "zh-CN"
-# languageName = "简体中文"
+# locale = "zh-CN"
+# label = "简体中文"
 
 [permalinks]
 

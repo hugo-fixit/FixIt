@@ -25,7 +25,7 @@
 -}}
 {{- $color := index $colorMap $type | default (index $colorMap "new") -}}
 {{- $repoName := .Get 3 | default $rvc.name -}}
-{{- $pathTemplate := cond hugo.IsMultilingual (printf "images/version/%%v-%%v.%v.svg" .Page.Language.Lang) "images/version/%v-%v.svg" -}}
+{{- $pathTemplate := cond hugo.IsMultilingual (printf "images/version/%%v-%%v.%v.svg" .Page.Language.Name) "images/version/%v-%v.svg" -}}
 {{- $path := printf $pathTemplate $version $type -}}
 {{- $resource := resources.Get "images/version.template.svg" -}}
 {{- $resource = $resource | resources.ExecuteAsTemplate $path (dict "version" $version "label" $label "color" $color "isCJK" $isCJK) | minify -}}

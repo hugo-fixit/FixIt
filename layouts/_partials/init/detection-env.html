@@ -19,7 +19,7 @@
   {{- if ne .Site.Params.dev.enable true -}}
     {{- .Site.Store.Set "devOpts" dict -}}
   {{- end -}}
-  {{- if eq .Site hugo.Sites.Default -}}
+  {{- if .Site.Language.IsDefault -}}
     {{- warnf "FixIt %v\n%v\n\n" (hugo.Store.Get "version") (T "init.devEnvWarn") -}}
   {{- end -}}
 {{- end -}}
