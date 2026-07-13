@@ -49,9 +49,9 @@
 
 ### Documentation
 
-Head to the [Quick Start](https://fixit.lruihao.cn/documentation/getting-started/quick-start/) page for a step-by-step guide on how to create a new website with FixIt.
+Head to the [Quick Start](https://fixit.lruihao.cn/docs/getting-started/quick-start/) page for a step-by-step guide on how to create a new website with FixIt.
 
-Outline: [Installation](https://fixit.lruihao.cn/documentation/installation/) ➜ [Getting Started](https://fixit.lruihao.cn/documentation/getting-started/) ➜ [Content Management](https://fixit.lruihao.cn/documentation/content-management/) ➜ [Advanced Usage](https://fixit.lruihao.cn/documentation/advanced/)
+Outline: [Installation](https://fixit.lruihao.cn/docs/installation/) ➜ [Getting Started](https://fixit.lruihao.cn/docs/getting-started/) ➜ [Content Management](https://fixit.lruihao.cn/docs/content-management/) ➜ [Advanced Usage](https://fixit.lruihao.cn/docs/advanced/)
 
 ### Starter Wizard
 
@@ -170,7 +170,7 @@ Click the following links to generate a new repository with template:
 
 ## Multilingual and i18n
 
-FixIt supports multilingual and i18n. For more information, see the [Content Management](https://fixit.lruihao.cn/documentation/content-management/introduction#multilingual) documentation. You are welcome to [contribute with a new language](https://github.com/hugo-fixit/FixIt/pulls).
+FixIt supports multilingual and i18n. For more information, see the [Content Management](https://fixit.lruihao.cn/docs/content-management/introduction#multilingual) documentation. You are welcome to [contribute with a new language](https://github.com/hugo-fixit/FixIt/pulls).
 
 <details>
 <summary>FixIt supports the following languages.</summary>

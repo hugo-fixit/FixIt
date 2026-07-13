@@ -1,11 +1,9 @@
-{{- if eq .Site hugo.Sites.Default -}}
-  {{- $encryptedPages := slice -}}
-  {{- range .Site.RegularPages -}}
-    {{- if or .Params.password (.Store.Get "hasEncryptor") -}}
-      {{- $encryptedPages = $encryptedPages | append (printf " • %s: %s" .Title .Permalink) -}}
-    {{- end -}}
+{{- $encryptedPages := slice -}}
+{{- range .Site.RegularPages -}}
+  {{- if or .Params.password (.Store.Get "hasEncryptor") -}}
+    {{- $encryptedPages = $encryptedPages | append (printf " • %s: %s" .Title .Permalink) -}}
   {{- end -}}
-  {{- with $encryptedPages -}}
-    {{- warnf "[FixIt] %s\n%s\n%s" (T "single.encryptionWarning") (delimit . "\n") (T "single.encryptionCommand") -}}
-  {{- end -}}
+{{- end -}}
+{{- with $encryptedPages -}}
+  {{- warnf "[FixIt] %s\n%s\n%s" (T "single.encryptionWarning") (delimit . "\n") (T "single.encryptionCommand") -}}
 {{- end -}}

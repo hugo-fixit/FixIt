@@ -22,7 +22,7 @@ repost:
   enable: false
   url:
 
-# See: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
+# See: https://fixit.lruihao.cn/docs/content-management/front-matter/
 ---
 
 <!--more-->

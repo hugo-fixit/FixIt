@@ -6,7 +6,7 @@
 [init]
 hugoVersionError = "Hugo 版本过低。\n\n目前使用的 Hugo 版本为 {{ .Current }}，FixIt 支持的最低的 Hugo 版本为 {{ .Minimal }}。\n\n如果你正在自己的计算机上运行 Hugo，请访问 https://gohugo.io/getting-started/installing/#upgrade-hugo 以查阅升级指南。\n\n如果你正在第三方平台上部署，请按照相应文档配置 Hugo 版本。"
 hugoExtendedWarn = "需要使用 Hugo Extended 版本来获得 SCSS 支持。"
-configurationError = "配置文件错误\n你还没有正确配置 FixIt 的版本参数。参考 https://fixit.lruihao.cn/zh-cn/documentation/basics/#theme-configuration"
+configurationError = "配置文件错误\n你还没有正确配置 FixIt 的版本参数。参考 https://fixit.lruihao.cn/zh-cn/docs/getting-started/configuration/params/"
 compatibilityError = "兼容性错误 ({{ .From }} -> {{ .To }}):\n你进行了一次不兼容的更新。参考 https://github.com/hugo-fixit/FixIt/releases"
 devVersionWarn = "你正在使用开发版的 FixIt，请考虑使用稳定版。\n见 https://github.com/hugo-fixit/FixIt/releases"
 devEnvWarn = "当前运行环境是“development”。“评论系统”、“PWA”、“CDN”、“fingerprint”和“统计”不会启用。"

@@ -49,9 +49,9 @@
 
 ### 主题文档
 
-前往 [快速上手](https://fixit.lruihao.cn/zh-cn/documentation/getting-started/quick-start/) 页面，了解如何使用 FixIt 主题创建一个新网站的详细步骤。
+前往 [快速上手](https://fixit.lruihao.cn/zh-cn/docs/getting-started/quick-start/) 页面，了解如何使用 FixIt 主题创建一个新网站的详细步骤。
 
-大纲：[安装篇](https://fixit.lruihao.cn/zh-cn/documentation/installation/) ➜ [入门篇](https://fixit.lruihao.cn/zh-cn/documentation/getting-started/) ➜ [内容管理](https://fixit.lruihao.cn/zh-cn/documentation/content-management/) ➜ [进阶篇](https://fixit.lruihao.cn/zh-cn/documentation/advanced/)
+大纲：[安装篇](https://fixit.lruihao.cn/zh-cn/docs/installation/) ➜ [入门篇](https://fixit.lruihao.cn/zh-cn/docs/getting-started/) ➜ [内容管理](https://fixit.lruihao.cn/zh-cn/docs/content-management/) ➜ [进阶篇](https://fixit.lruihao.cn/zh-cn/docs/advanced/)
 
 ### 快速开始
 
@@ -170,7 +170,7 @@ pnpx fixit-cli create my-blog
 
 ## 多语言和国际化
 
-FixIt 主题多语言基本配置及自动翻译等详见 [内容管理](https://fixit.lruihao.cn/zh-cn/documentation/content-management/introduction#multilingual) 文档，欢迎 [贡献一种新的语言](https://github.com/hugo-fixit/FixIt/pulls)。
+FixIt 主题多语言基本配置及自动翻译等详见 [内容管理](https://fixit.lruihao.cn/zh-cn/docs/content-management/introduction#multilingual) 文档，欢迎 [贡献一种新的语言](https://github.com/hugo-fixit/FixIt/pulls)。
 
 <details>
 <summary>FixIt 支持下列语言。</summary>

@@ -3,7 +3,7 @@
 ///
 /// Copy this file to your project's assets/scss/ directory
 /// and rename it to custom.scss to activate it.
-/// See: https://fixit.lruihao.cn/documentation/advanced/#style-customization
+/// See: https://fixit.lruihao.cn/docs/advanced/#style-customization
 /// ==========================================================================
 @use "core/mixins" as *;
 // ————————————————————————————————————————————————————————————

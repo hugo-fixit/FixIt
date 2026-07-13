@@ -22,7 +22,7 @@ _merge = "shallow"
 
 # -------------------------------------------------------------------------------------
 # Theme Core Configuration
-# See: https://fixit.lruihao.cn/documentation/basics/#theme-configuration
+# See: https://fixit.lruihao.cn/docs/getting-started/configuration/params/
 # -------------------------------------------------------------------------------------
 
 [params]
