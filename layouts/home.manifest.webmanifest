@@ -1,4 +1,4 @@
-{{- if .Site.Params.app.pwa -}}
+{{- if not hugo.IsServer | and hugo.IsProduction | and .Site.Params.app.pwa -}}
   {{- $name := .Site.Params.app.name | default .Site.Title -}}
   {{- $shortName := .Site.Params.app.short_name | default $name -}}
   {{- $startURL := relURL "/" -}}

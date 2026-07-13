@@ -5,7 +5,7 @@
   position: fixed;
   inset-inline-end: 1.5rem;
   bottom: 1.5rem;
-  display: flex;
+  display: none;
   align-items: center;
   gap: 0.75rem 1rem;
   padding: 0.625rem 1rem;
@@ -18,11 +18,13 @@
   translate: 0 1rem;
   opacity: 0;
   transition:
+    display 0.3s allow-discrete,
     translate 0.3s,
     opacity 0.3s;
   @include z-index(fixed);
 
   &.visible {
+    display: flex;
     translate: 0 0;
     opacity: 1;
   }

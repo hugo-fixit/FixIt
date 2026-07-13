@@ -129,7 +129,7 @@
   {{- end -}}
 
   {{- /* Service Worker Update Notification */ -}}
-  {{- if .Site.Params.app.pwa -}}
+  {{- if not hugo.IsServer | and hugo.IsProduction | and .Site.Params.app.pwa -}}
     <div class="sw-update-notification">
       <div class="sw-update-content">
         <p class="sw-update-title">{{ T "serviceWorker.updateTitle" }}</p>
