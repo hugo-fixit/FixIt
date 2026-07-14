@@ -665,7 +665,7 @@ ignore_list = []
 highlight_list = []
 
 # Mermaid configuration.
-# See: [Mermaid](http://fixit.lruihao.cn/documentation/content-management/diagrams-support/mermaid/)
+# See: [Mermaid](https://fixit.lruihao.cn/docs/content-management/diagrams-support/mermaid/)
 [params.mermaid]
 # Whether to enable the Mermaid wrapper.
 # When enabled, Mermaid diagrams are wrapped with diagram tabs and actions:
@@ -750,7 +750,7 @@ h5 = "{h2}.{h3}.{h4}.{h5} {title}"
 h6 = "{h2}.{h3}.{h4}.{h5}.{h6} {title}"
 
 # Mathematical formulas configuration.
-# See: [Formula](http://fixit.lruihao.cn/documentation/content-management/markdown-syntax/extended/#formula)
+# See: [Formula](https://fixit.lruihao.cn/docs/content-management/markdown-syntax/extended/#formula)
 [params.math]
 enable = true
 # Mathematical formulas rendering engines.
