@@ -109,3 +109,5 @@
   {{- $sourceOpts = dict "Source" $postChatJS | merge $sourceOpts -}}
   {{- $sourceOpts | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
+
+{{- return $enable -}}

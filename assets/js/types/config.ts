@@ -31,6 +31,7 @@ export interface FixItConfig {
   autoBookmark?: boolean
   encryption?: EncryptionConfig
   print?: PrintConfig
+  postChat?: boolean
 }
 
 export interface EchartsConfig {

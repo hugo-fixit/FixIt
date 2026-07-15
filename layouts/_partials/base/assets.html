@@ -334,7 +334,10 @@
 {{- $config = partial "function/camel-case-keys.html" .Site.Params.print | dict "print" | merge $config -}}
 
 {{- /* PostChat */ -}}
-{{- partial "plugin/post-chat-ai.html" . -}}
+{{- $postChatEnable := partial "plugin/post-chat-ai.html" . -}}
+{{- if $postChatEnable -}}
+  {{- $config = dict "postChat" true | merge $config -}}
+{{- end -}}
 
 {{- $library := dict "Page" . "Key" "library" | partial "function/param.html" -}}
 {{- range $library.css -}}

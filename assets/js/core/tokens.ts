@@ -69,8 +69,8 @@ export interface MiscService {
   initSiteTime: () => void
   initAutoMark: () => void
   initReward: () => void
-  initPostChatUser: () => void
   initComment: () => void
+  initPostChat: () => void
   setup: () => void
 }
 

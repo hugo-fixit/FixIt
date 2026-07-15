@@ -104,22 +104,39 @@ export class MiscModule implements MiscService {
       document.querySelector('#comments')!.remove()
   }
 
-  /** Initialize PostChat theme sync if configured. */
-  initPostChatUser() {
-    if (!window.postChatUser || !window.postChatConfig || window.postChatConfig.userMode === 'magic')
-      return
-    window.postChat_theme = this.core.isDark ? 'dark' : 'light'
-    eventBus.on('fixit:switch-theme', ({ detail }) => {
-      if (!detail.isChanged)
+  /**
+   * Initialize PostChat and postSummary for HongMoAI
+   */
+  initPostChat() {
+    const initThemeCompatibility = () => {
+      if (this.core.config.postChat) {
+        document.body.classList.toggle('dark', this.core.isDark)
+        eventBus.on('fixit:switch-theme', ({ detail }) => {
+          if (!detail.isChanged)
+            return
+          document.body.classList.toggle('dark', detail.isDark)
+        })
+      }
+    }
+    /** Initialize PostChat theme sync if configured. */
+    const initPostChatUser = () => {
+      if (!window.postChatUser || !window.postChatConfig || window.postChatConfig.userMode === 'magic')
         return
-      const targetFrame = document.getElementById('postChat_iframeContainer')
-      if (targetFrame) {
-        window.postChatUser.setPostChatTheme(detail.isDark ? 'dark' : 'light')
-      }
-      else {
-        window.postChat_theme = detail.isDark ? 'dark' : 'light'
-      }
-    })
+      window.postChat_theme = this.core.isDark ? 'dark' : 'light'
+      eventBus.on('fixit:switch-theme', ({ detail }) => {
+        if (!detail.isChanged)
+          return
+        const targetFrame = document.getElementById('postChat_iframeContainer')
+        if (targetFrame) {
+          window.postChatUser.setPostChatTheme(detail.isDark ? 'dark' : 'light')
+        }
+        else {
+          window.postChat_theme = detail.isDark ? 'dark' : 'light'
+        }
+      })
+    }
+    initThemeCompatibility()
+    initPostChatUser()
   }
 
   /** Initialize all miscellaneous features. */
@@ -127,7 +144,7 @@ export class MiscModule implements MiscService {
     this.initSiteTime()
     this.initAutoMark()
     this.initReward()
-    this.initPostChatUser()
     this.initComment()
+    this.initPostChat()
   }
 }
