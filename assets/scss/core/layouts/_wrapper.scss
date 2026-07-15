@@ -16,7 +16,7 @@
       padding: 0.5rem;
       max-width: 500px;
 
-      &:not(:has(~ aside)) {
+      &:first-of-type:not(:has(~ aside)) {
         display: none;
       }
 
@@ -48,7 +48,7 @@
       aside:first-child:not(:empty) ~ aside#toc-auto:empty {
         display: none;
       }
-  
+
       aside:first-child:empty:has(~ aside:not(:empty)) ~ article,
       aside:first-child:not(:empty) ~ article:has(~ aside:empty) {
         flex: 3;

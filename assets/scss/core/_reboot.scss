@@ -53,10 +53,12 @@ h1 {
 }
 
 // 1. Add the correct box sizing in Firefox.
+// 2. Ensure `::before` pseudo-element (e.g. awesome-hr icon) is not clipped.
 
 hr {
   box-sizing: content-box; // 1
   height: 0; // 1
+  overflow: visible; // 2
 }
 
 // 1. Correct the inheritance and scaling of font size in all browsers.

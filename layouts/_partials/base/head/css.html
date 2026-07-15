@@ -24,28 +24,35 @@
 {{- dict "Resource" $mainCSS | partial "plugin/style.html" -}}
 
 {{- /* Page-specific CSS */ -}}
-{{- $pageCSSPath := "" -}}
-{{- if eq .Kind "home" -}}
-  {{- if in .RelPermalink "archives" -}}
-    {{- $pageCSSPath = "scss/archives.scss" -}}
-  {{- else if in .RelPermalink "link" -}}
-    {{- $pageCSSPath = "scss/link.scss" -}}
-  {{- else -}}
-    {{- $pageCSSPath = "scss/home.scss" -}}
-  {{- end -}}
-{{- else if eq .Kind "page" -}}
-  {{- if eq .Layout "search" -}}
-    {{- $pageCSSPath = "scss/search.scss" -}}
-  {{- else if eq .Layout "friends" -}}
-    {{- $pageCSSPath = "scss/friends.scss" -}}
-  {{- else if eq .Type "posts" -}}
-    {{- $pageCSSPath = "scss/posts.scss" -}}
-  {{- end -}}
-{{- else if in (slice "section" "taxonomy" "term") .Kind -}}
-  {{- $pageCSSPath = "scss/archives.scss" -}}
+{{- $pageName := "" -}}
+{{- $kindsMap := dict
+  "section" "archives"
+  "taxonomy" "archives"
+  "term" "archives"
+  "home" (
+    cond (in .RelPermalink "archives") "archives" (
+      cond (in .RelPermalink "link") "link" (
+        cond (in .RelPermalink "offline") "" "home"
+      )
+    )
+  )
+  "page" (
+    cond (in (slice "search" "friends") .Layout) .Layout (
+      cond (eq .Type "posts") "posts" ""
+    )
+  )
+-}}
+{{- with (index $kindsMap .Kind) -}}
+  {{- $pageName = . -}}
 {{- end -}}
-{{- with $pageCSSPath -}}
-  {{- dict "Source" . "ToCSS" (dict "vars" $scssVars) "Fingerprint" $fingerprint | partial "plugin/style.html" -}}
+{{- with $pageName -}}
+  {{- dict
+    "Content" (printf `@use "pages/%s";` .)
+    "Path" (printf "scss/%s.scss" .)
+    "ToCSS" (dict "vars" $scssVars "targetPath" (printf "css/pages/%s.css" .))
+    "Fingerprint" $fingerprint
+    | partial "plugin/style.html"
+  -}}
 {{- end -}}
 
 {{- /* Custom CSS (highest priority) */ -}}

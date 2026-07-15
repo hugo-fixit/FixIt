@@ -2,6 +2,7 @@
 @use "core/mixins" as *;
 
 .page {
+  position: relative;
   padding-inline: 0.5rem;
   box-sizing: border-box;
 
@@ -38,5 +39,28 @@
   @include media('print') {
     width: 100% !important;
     padding-top: 0 !important;
+  }
+}
+
+@include page-style;
+
+@include page-style('wide') {
+  @include media('xl') {
+    width: ROUND(64%, 2px);
+    max-width: 1600px;
+  }
+
+  @include media('lg') {
+    width: ROUND(60%, 2px);
+  }
+
+  @include media('md') {
+    width: ROUND(56%, 2px);
+  }
+}
+
+@include page-style('narrow') {
+  @include media('xl') {
+    max-width: 800px;
   }
 }

@@ -114,23 +114,23 @@
 {{- end -}}
 
 {{- if fileExists "assets/css/_custom.scss" -}}
-  {{- $warns = $warns | append "The file `assets/css/_custom.scss` is deprecated. Please move your custom styles to `assets/scss/custom.scss`." -}}
+  {{- $warns = $warns | append "The file `assets/css/_custom.scss` is deprecated. Please move your custom styles to `assets/scss/custom.scss`.\nSee: https://fixit.lruihao.cn/docs/advanced/" -}}
 {{- end -}}
 
 {{- if fileExists "assets/css/_override.scss" -}}
-  {{- $warns = $warns | append "The file `assets/css/_override.scss` is deprecated. Use `[params.appearance]` in your site configuration instead." -}}
+  {{- $warns = $warns | append "The file `assets/css/_override.scss` is deprecated. Use `[params.appearance]` in your site configuration instead.\nSee: https://fixit.lruihao.cn/docs/advanced/" -}}
 {{- end -}}
 
 {{- if fileExists "assets/scss/override.scss" -}}
-  {{- $warns = $warns | append "The file `assets/scss/override.scss` is deprecated. Use `[params.appearance]` in your site configuration instead." -}}
+  {{- $warns = $warns | append "The file `assets/scss/override.scss` is deprecated. Use `[params.appearance]` in your site configuration instead.\nSee: https://fixit.lruihao.cn/docs/advanced/" -}}
 {{- end -}}
 
 {{- if fileExists "assets/css/_variables.scss" -}}
-  {{- $warns = $warns | append "The file `assets/css/_variables.scss` is deprecated. Please move your variables to `assets/scss/_variables.scss`." -}}
+  {{- $warns = $warns | append "The file `assets/css/_variables.scss` is deprecated. Please move your variables to `assets/scss/_variables.scss`.\nSee: https://fixit.lruihao.cn/docs/advanced/" -}}
 {{- end -}}
 
 {{- if fileExists "assets/js/_custom.js" -}}
-  {{- $warns = $warns | append "The file `assets/js/_custom.js` is deprecated. Please move your custom scripts to `assets/js/custom.ts` or `assets/js/custom.js`." -}}
+  {{- $warns = $warns | append "The file `assets/js/_custom.js` is deprecated. Please move your custom scripts to `assets/js/custom.ts` or `assets/js/custom.js`.\nSee: https://fixit.lruihao.cn/docs/advanced/" -}}
 {{- end -}}
 
 {{- if len $warns -}}
