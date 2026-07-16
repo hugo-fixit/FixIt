@@ -120,7 +120,7 @@
                   {{- if ne . $.Site -}}
                     {{- $link := printf "%v/404.html" .LanguagePrefix -}}
                     <li class="menu-item">
-                      <a href="{{ $link }}" class="menu-link" title="{{- .Language.Label -}}">
+                      <a href="{{ $link }}" class="menu-link" title="{{ .Language.Label }}">
                         {{- .Language.Label -}}
                       </a>
                     </li>
@@ -129,7 +129,7 @@
               {{- else if .IsTranslated -}}
                 {{- range .AllTranslations -}}
                   <li class="menu-item">
-                    {{- if ne .Lang $.Lang -}}
+                    {{- if ne .Language.Name $.Language.Name -}}
                       <a href="{{ .RelPermalink }}" class="menu-link" title="{{ .Language.Label }}">{{ .Language.Label }}</a>
                     {{- else -}}
                       <span class="text-secondary" title="{{ .Language.Label }}">{{ .Language.Label }}</span>
@@ -284,7 +284,7 @@
                   {{- end -}}
                 {{- else if .IsTranslated -}}
                   {{- range .AllTranslations -}}
-                    <option value="{{ .RelPermalink }}"{{ if eq .Lang $.Lang }} selected disabled{{ end }}>
+                    <option value="{{ .RelPermalink }}"{{ if eq .Language.Name $.Language.Name }} selected disabled{{ end }}>
                       {{- .Language.Label -}}
                     </option>
                   {{- end -}}
