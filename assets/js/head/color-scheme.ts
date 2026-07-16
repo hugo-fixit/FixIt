@@ -1,4 +1,3 @@
-// @ts-expect-error — Hugo js.Build virtual module
 import params from '@params'
 
 /**

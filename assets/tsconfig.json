@@ -4,6 +4,12 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
     "moduleResolution": "bundler",
+    "paths": {
+      "@params": ["./js/types/params"]
+    },
+    "typeRoots": [
+      "./js/types"
+    ],
     "strict": true,
     "noUnusedLocals": true,
     "allowSyntheticDefaultImports": true,

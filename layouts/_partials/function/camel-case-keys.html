@@ -26,7 +26,7 @@
   // Practical usage in templates
   {{- $siteParams := partial "function/camel-case-keys.html" .Site.Params }}
 */ -}}
-{{- $input := . -}}
+{{- $input := . | default dict -}}
 {{- $output := dict -}}
 
 {{- if reflect.IsMap $input -}}
