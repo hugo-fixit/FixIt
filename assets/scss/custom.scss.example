@@ -18,7 +18,7 @@
 
 // ————————————————————————————————————————————————————————————
 // Custom Page Width
-// Set pageStyle="custom" in the <body> element to apply.
+// Set page_style = "custom" in the site configuration to apply.
 // ————————————————————————————————————————————————————————————
 @include page-style('custom') {
   @include media('xl') {
