@@ -1,27 +1,43 @@
+{{- $raw := strings.TrimSpace .Inner -}}
 {{- $parsed := dict -}}
 {{- $ok := false -}}
-{{- with try (transform.Unmarshal .Inner) -}}
+{{- $activeFormat := "" -}}
+{{- /* Try auto-detect first, then explicit format detection */ -}}
+{{- with try (transform.Unmarshal $raw) -}}
   {{- with .Err -}}
-    {{- warnf "Toggle code block: unable to parse content at %s" $.Position -}}
+    {{- /* Auto-detect failed, try each format explicitly */ -}}
+    {{- range $candidate := slice "json" "toml" "yaml" -}}
+      {{- if not $ok -}}
+        {{- with try (transform.Unmarshal (dict "format" $candidate) $raw) -}}
+          {{- if not .Err -}}
+            {{- $parsed = .Value -}}
+            {{- $ok = true -}}
+            {{- $activeFormat = $candidate -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if not $ok -}}
+      {{- warnf "Toggle code block: unable to parse content at %s" $.Position -}}
+    {{- end -}}
   {{- else with .Value -}}
     {{- $parsed = . -}}
     {{- $ok = true -}}
+    {{- /* Detect the active format for tab highlighting */ -}}
+    {{- range $candidate := slice "json" "toml" "yaml" -}}
+      {{- if not $activeFormat -}}
+        {{- with try (transform.Unmarshal (dict "format" $candidate) $raw) -}}
+          {{- if not .Err -}}
+            {{- $activeFormat = $candidate -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 
 {{- if $ok -}}
   {{- $groupId := printf "tab-%s" (md5 (dict "Page" .Page | partial "function/id.html")) -}}
-  {{- $activeFormat := "" -}}
-  {{- $raw := strings.TrimSpace .Inner -}}
-  {{- range $candidate := slice "json" "toml" "yaml" -}}
-    {{- if not $activeFormat -}}
-      {{- with try (transform.Unmarshal (dict "format" $candidate) $raw) -}}
-        {{- if not .Err -}}
-          {{- $activeFormat = $candidate -}}
-        {{- end -}}
-      {{- end -}}
-    {{- end -}}
-  {{- end -}}
   {{- $commonAttrsStr := printf ", group=%q" $groupId -}}
   {{- if ne .Attributes.copyable nil -}}
     {{- $commonAttrsStr = printf "%s, copyable=%v" $commonAttrsStr .Attributes.copyable -}}
@@ -52,9 +68,15 @@
   {{- end -}}
   {{- $renderText := "" -}}
   {{- range $format := slice "toml" "yaml" "json" -}}
-    {{- $content := transform.Remarshal $format $parsed -}}
+    {{- $content := "" -}}
     {{- if eq $format "toml" -}}
+      {{- $content = transform.Remarshal $format $parsed -}}
       {{- $content = replaceRE `(?m)^[\t ]+` "" $content -}}
+    {{- else if eq $format "yaml" -}}
+      {{- $content = transform.Remarshal $format $parsed -}}
+      {{- /* Strip YAML anchors/aliases created for identical values (e.g. empty arrays) */ -}}
+      {{- $content = replaceRE `(?m)(\w[\w\s]*:\s+)&(\w+)\n(\S+)` "$1$3" $content -}}
+      {{- $content = replaceRE `(?m)^(\s*\w[\w\s]*:\s+)&\w+\s+\*\w+$` "${1}[]" $content -}}
     {{- else if eq $format "json" -}}
       {{- $content = $parsed | jsonify (dict "indent" "  ") -}}
     {{- end -}}
