@@ -3,6 +3,7 @@ import { Buffer } from 'node:buffer'
 import { createCipheriv, pbkdf2Sync, randomBytes } from 'node:crypto'
 import { readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
+import { performance } from 'node:perf_hooks'
 import process from 'node:process'
 import consola from 'consola'
 
@@ -261,6 +262,13 @@ function hasUnencryptedTemplate(matches: TemplateMatch[]): boolean {
   })
 }
 
+function formatElapsed(ms: number): string {
+  if (ms < 1000) {
+    return `${Math.round(ms)}ms`
+  }
+  return `${(ms / 1000).toFixed(2)}s`
+}
+
 function main() {
   const options = parseArgs(process.argv.slice(2))
   if (options.helpRequested) {
@@ -270,6 +278,8 @@ function main() {
   const targetDir = path.isAbsolute(options.input)
     ? options.input
     : path.resolve(options.cwd, options.input)
+
+  const startTime = performance.now()
 
   let htmlFiles: string[] = []
   try {
@@ -310,31 +320,34 @@ function main() {
     }
   }
 
+  const elapsed = formatElapsed(performance.now() - startTime)
+  const scanned = `${htmlFiles.length} files scanned`
+
   if (options.verifyOnly) {
     if (unencryptedFiles > 0) {
-      consola.warn(`Verification failed: ${unencryptedFiles} HTML files still contain unencrypted templates`)
+      consola.warn(`Verification failed: ${unencryptedFiles} HTML files still contain unencrypted templates (${scanned}, ${elapsed})`)
       process.exit(1)
     }
     if (totalTemplates === 0) {
-      consola.info('No encryption templates found.')
+      consola.info(`No encryption templates found. (${scanned}, ${elapsed})`)
     }
     else {
-      consola.info(`Verification passed: all ${totalTemplates} encryption templates use ${AES_MARKER}`)
+      consola.info(`Verification passed: all ${totalTemplates} encryption templates use ${AES_MARKER} (${scanned}, ${elapsed})`)
     }
     return
   }
 
   if (changedFiles === 0) {
-    consola.info('No encryption templates found or all already encrypted.')
+    consola.info(`No encryption templates found or all already encrypted. (${scanned}, ${elapsed})`)
     return
   }
 
   if (options.dryRun) {
-    consola.info(`Dry run complete: ${changedFiles} HTML files would be updated (${AES_MARKER})`)
+    consola.info(`Dry run complete: ${changedFiles} HTML files would be updated (${AES_MARKER}) (${scanned}, ${elapsed})`)
     return
   }
 
-  consola.info(`Post-build encryption completed: ${changedFiles} HTML files updated (${AES_MARKER})`)
+  consola.info(`Post-build encryption completed: ${changedFiles} HTML files updated (${AES_MARKER}) (${scanned}, ${elapsed})`)
 }
 
 main()
