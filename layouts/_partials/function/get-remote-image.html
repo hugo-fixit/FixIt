@@ -1,9 +1,12 @@
 {{- /* cache remote image locally */ -}}
 {{- $resource := 0 -}}
+{{- $options := .OPTIONS | default dict -}}
+{{- $cacheKey := print .Src (now.Format "2006-01-02") -}}
+{{- $options = $options | merge (dict "key" $cacheKey "timeout" "3s") -}}
 {{- $isRemote := urls.Parse .Src | partial "function/is-url-remote.html" -}}
 
 {{- if $isRemote -}}
-  {{- with try (resources.GetRemote .Src) -}}
+  {{- with try (resources.GetRemote .Src $options) -}}
     {{- with .Err -}}
       {{- warnidf "warning-remote-image" "%s" . -}}
     {{- else with .Value -}}

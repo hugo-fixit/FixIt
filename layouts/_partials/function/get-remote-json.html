@@ -7,7 +7,7 @@
 {{- end -}}
 
 {{- $cacheKey := print $url (now.Format "2006-01-02") -}}
-{{- $options = $options | merge (dict "key" $cacheKey) -}}
+{{- $options = $options | merge (dict "key" $cacheKey "timeout" "3s") -}}
 {{- with try (resources.GetRemote $url $options) -}}
   {{- with .Err -}}
     {{- erroridf "error-get-remote-json" "%s" . -}}
