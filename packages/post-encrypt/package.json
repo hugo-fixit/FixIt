@@ -31,6 +31,7 @@
   "scripts": {
     "build": "tsc",
     "start": "tsx src/index.ts",
+    "test": "tsx src/test/bench.ts",
     "prepublishOnly": "pnpm build"
   },
   "dependencies": {
