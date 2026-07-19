@@ -146,7 +146,7 @@ password = "Паролица"
 enterBtn = "Унеси"
 encryptyAgain = "Поново шифруј"
 encryptionWarning = "Детектовано је шифровање садржаја, али су и даље у обичном тексту!"
-encryptionCommand = "Покрените `npx @hugo-fixit/post-encrypt` након изградње да бисте их заиста шифровали."
+encryptionCommand = "Покрените `npx @hugo-fixit/encrypt` након изградње да бисте их заиста шифровали."
 relatedContent = "Повезани садржај"
 
 [single.includedIn]

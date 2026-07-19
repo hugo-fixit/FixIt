@@ -146,7 +146,7 @@ password = "Passwort"
 enterBtn = "Eintreten"
 encryptyAgain = "Erneut verschlüsseln"
 encryptionWarning = "Inhaltsverschlüsselung erkannt, aber sie sind noch im Klartext!"
-encryptionCommand = "Führen Sie `npx @hugo-fixit/post-encrypt` nach dem Build aus, um sie tatsächlich zu verschlüsseln."
+encryptionCommand = "Führen Sie `npx @hugo-fixit/encrypt` nach dem Build aus, um sie tatsächlich zu verschlüsseln."
 relatedContent = "Ähnliche Inhalte"
 
 [single.includedIn]

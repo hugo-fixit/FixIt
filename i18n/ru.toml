@@ -146,7 +146,7 @@ password = "арготизм"
 enterBtn = "Войти"
 encryptyAgain = "Зашифровать снова"
 encryptionWarning = "Обнаружено шифрование контента, но он всё ещё в открытом виде!"
-encryptionCommand = "Запустите `npx @hugo-fixit/post-encrypt` после сборки, чтобы фактически зашифровать их."
+encryptionCommand = "Запустите `npx @hugo-fixit/encrypt` после сборки, чтобы фактически зашифровать их."
 relatedContent = "Связанный контент"
 
 [single.includedIn]

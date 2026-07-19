@@ -67,6 +67,12 @@ importers:
         specifier: ^9.4.1
         version: 9.4.1
 
+  packages/encrypt:
+    dependencies:
+      consola:
+        specifier: ^3.4.2
+        version: 3.4.2
+
   packages/integration:
     devDependencies:
       '@hugo-fixit/shared':
@@ -78,12 +84,6 @@ importers:
       fs-extra:
         specifier: ^11.3.6
         version: 11.3.6
-
-  packages/post-encrypt:
-    dependencies:
-      consola:
-        specifier: ^3.4.2
-        version: 3.4.2
 
   packages/shared:
     dependencies:

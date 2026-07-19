@@ -146,7 +146,7 @@ password = "Mot de passe"
 enterBtn = "Entrer"
 encryptyAgain = "Chiffrer à nouveau"
 encryptionWarning = "Chiffrement de contenu détecté, mais ils sont toujours en texte clair !"
-encryptionCommand = "Exécutez `npx @hugo-fixit/post-encrypt` après la compilation pour les chiffrer réellement."
+encryptionCommand = "Exécutez `npx @hugo-fixit/encrypt` après la compilation pour les chiffrer réellement."
 relatedContent = "Contenu lié"
 
 [single.includedIn]

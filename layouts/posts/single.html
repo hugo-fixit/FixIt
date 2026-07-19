@@ -159,7 +159,7 @@
         </div>
         <div class="details-content toc-content" id="toc-content-static"></div>
       </div>
-      {{- /* TOC source (copied to containers by initToc, encrypted by post-encrypt when password is set) */ -}}
+      {{- /* TOC source (copied to containers by initToc, encrypted by fixit-encrypt when password is set) */ -}}
       <template data-toc{{ with .Params.password }} data-password="{{ sha256 . }}"{{ end }}>{{ $tableOfContents }}</template>
     {{- end -}}
 

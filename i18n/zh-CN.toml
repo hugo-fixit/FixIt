@@ -144,7 +144,7 @@ password = "密码"
 enterBtn = "进入"
 encryptyAgain = "重新加密"
 encryptionWarning = "检测到内容加密，但仍为明文状态！"
-encryptionCommand = "请在构建后执行 `npx @hugo-fixit/post-encrypt` 以实际加密内容。"
+encryptionCommand = "请在构建后执行 `npx @hugo-fixit/encrypt` 以实际加密内容。"
 relatedContent = "相关内容"
 
 [single.includedIn]

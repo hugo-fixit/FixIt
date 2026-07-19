@@ -12,7 +12,7 @@
  *
  * Payload formats:
  * - v2 (current): PBKDF2(SHA-256(password), 100k iterations) → base64(salt).base64(iv).base64(ciphertext+tag)
- * - Password verification: data-password stores PBKDF2(SHA-256(password), data-verify-salt) when post-encrypted
+ * - Password verification: data-password stores PBKDF2(SHA-256(password), data-verify-salt) when fixit-encrypted
  */
 import { eventBus } from '../core/event-bus'
 import { flashTooltip } from '../utils'

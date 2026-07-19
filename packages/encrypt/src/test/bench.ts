@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url'
 import consola from 'consola'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const BENCH_DIR = '/tmp/post-encrypt-bench'
+const BENCH_DIR = '/tmp/fixit-encrypt-bench'
 
 const PASSWORD_HASH = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
 
@@ -54,7 +54,7 @@ function bench(files: number, templatesPerFile: number, templateSize: string): v
   )
 }
 
-consola.info('=== post-encrypt benchmark ===\n')
+consola.info('=== fixit-encrypt benchmark ===\n')
 
 consola.info('--- Test 1: 1 small template/file, scaling file count ---')
 for (const n of [10, 50, 100, 500, 1000]) {

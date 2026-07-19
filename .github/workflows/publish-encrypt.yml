@@ -1,9 +1,9 @@
-name: Publish post-encrypt
+name: Publish @hugo-fixit/encrypt
 
 on:
   push:
     tags:
-      - 'post-encrypt-v*.*.*'
+      - 'encrypt-v*.*.*'
   workflow_dispatch:
 
 permissions:
@@ -11,7 +11,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: publish-post-encrypt-${{ github.ref }}
+  group: publish-encrypt-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -36,8 +36,8 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build package
-        run: pnpm -F post-encrypt build
+        run: pnpm -F encrypt build
 
       - name: Publish package to npm
-        working-directory: packages/post-encrypt
+        working-directory: packages/encrypt
         run: npm publish --access public --provenance

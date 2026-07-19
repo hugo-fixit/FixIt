@@ -72,7 +72,7 @@ function parseArgs(argv: string[]): CliOptions {
 
 function printHelp(): void {
   consola.log(`Usage:
-  post-encrypt [options]
+  fixit-encrypt [options]
 
 Options:
   --input <dir>  Input directory containing HTML files (default: public)
@@ -81,10 +81,10 @@ Options:
   -h, --help     Show this help message
 
 Examples:
-  post-encrypt
-  post-encrypt --input dist
-  post-encrypt --verify
-  post-encrypt --dry-run`)
+  fixit-encrypt
+  fixit-encrypt --input dist
+  fixit-encrypt --verify
+  fixit-encrypt --dry-run`)
 }
 
 function collectHtmlFiles(targetDir: string): string[] {
