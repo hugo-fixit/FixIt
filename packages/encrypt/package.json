@@ -1,7 +1,7 @@
 {
   "name": "@hugo-fixit/encrypt",
   "type": "module",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Post-build AES-256-GCM encryption tool for the FixIt Hugo theme",
   "author": "Lruihao",
   "license": "MIT",
