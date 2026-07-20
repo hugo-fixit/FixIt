@@ -75,7 +75,7 @@
         {{- $loading := dict "Class" "fa-solid fa-spinner fa-spin" | partial "plugin/icon.html" -}}
         {{- $iconUV := dict "Class" "fa-regular fa-user me-1" | partial "plugin/icon.html" -}}
         {{- $iconPV := dict "Class" "fa-regular fa-eye me-1" | partial "plugin/icon.html" -}}
-        <div class="footer-line visitor{{ with $footerConfig.order.visitor }} order-{{ . }}{{ end }}{{ if not $busuanzi.siteViews }} hidden{{ end }}">
+        <div class="footer-line visitor{{ with $footerConfig.order.visitor }} order-{{ . }}{{ end }}{{ if not $busuanzi.site_views }} hidden{{ end }}">
           <span id="busuanzi_container_site_uv" title='{{ T "footer.siteUV" }}'>
             {{- $iconUV }}<span id="busuanzi_value_site_uv">{{ $loading }}</span>
             {{- /* NO_SPACING */ -}}
