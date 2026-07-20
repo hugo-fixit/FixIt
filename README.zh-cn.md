@@ -194,6 +194,15 @@ FixIt 主题多语言基本配置及自动翻译等详见 [内容管理](https:/
 
 </details>
 
+## 浏览器支持
+
+FixIt 主题支持所有主流浏览器的最近两个版本。
+
+![Chrome](https://img.shields.io/badge/Chrome-last+2-blue?logo=googlechrome)
+![Edge](https://img.shields.io/badge/Edge-last+2-blue?logo=microsoft-edge)
+![Firefox](https://img.shields.io/badge/Firefox-last+2-orange?logo=firefox)
+![Safari](https://img.shields.io/badge/Safari-last+2-blue?logo=safari)
+
 ## 主题组件
 
 为了平衡 FixIt 主题的 **简洁性** 和 **可扩展性**，我们额外开发了一系列 [Hugo 主题组件](https://fixit.lruihao.cn/zh-cn/ecosystem/#-组件) 供用户选择。
