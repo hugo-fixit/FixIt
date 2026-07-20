@@ -11,6 +11,8 @@
 @use "sass:map";
 @use "sass:list";
 
+/// Responsive breakpoints map for the `media` mixin.
+/// @type Map
 $breakpoints: (
   'xs': null,
   'sm': 680px,

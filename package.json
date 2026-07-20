@@ -43,6 +43,9 @@
     "version": "pnpm -F versioning start prod",
     "changelog": "auto-changelog-plus --starting-date 2021-12-18",
     "gen:lexers": "pnpm -F chroma-lexers start",
+    "gen:docs": "pnpm -F gen-docs start",
+    "gen:typedoc": "typedoc",
+    "gen:sassdoc": "npx sassdoc@2.7.2 assets/scss/ --dest ../fixit-docs/static/references/scss --config .sassdocrc",
     "unocss": "unocss",
     "unocss:watch": "unocss --watch",
     "prepare": "simple-git-hooks"
@@ -61,6 +64,7 @@
     "serve": "^14.2.6",
     "simple-git-hooks": "^2.13.1",
     "tsx": "^4.22.4",
+    "typedoc": "^0.28.20",
     "typescript": "^6.0.3",
     "unocss": "^66.7.4"
   },

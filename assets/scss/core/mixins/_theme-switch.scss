@@ -1,8 +1,11 @@
 @use "variables" as *;
 
-// Shared defaults for theme-switch icon motion.
-// Keep them overridable so other entries can reuse the same mixin with different pacing.
+/// Duration of the theme-switch icon animation.
+/// @type Time
 $theme-switch-animation-duration: 0.5s !default;
+
+/// Easing function for the theme-switch icon animation.
+/// @type String
 $theme-switch-animation-easing: cubic-bezier(0.22, 1, 0.36, 1) !default;
 
 /// Bind a theme mode selector to an icon glyph and its matching animation.

@@ -1,5 +1,8 @@
 @use "theme-vars" as *;
 
+/// Set scrollbar width CSS custom properties.
+/// @param {String} $width [$width: thin] - Scrollbar width value
+/// @param {Length} $widthLegacy [$widthLegacy: 12px] - Legacy scrollbar width
 @mixin scrollbar-width($width: thin, $widthLegacy: 12px) {
   @include set-fi-vars((
     scrollbar-width: $width,

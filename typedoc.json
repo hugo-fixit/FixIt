@@ -1,0 +1,28 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "assets/js"
+  ],
+  "entryPointStrategy": "expand",
+  "tsconfig": "assets/tsconfig.json",
+  "out": "../fixit-docs/static/references/javascript",
+  "skipErrorChecking": true,
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "exclude": [
+    "assets/js/types/index.ts",
+    "assets/js/utils/index.ts",
+    "**/main.ts",
+    "**/head/**",
+    "**/lib/**",
+    "**/pages/**"
+  ],
+  "name": "FixIt JavaScript API",
+  "navigationLinks": {
+    "FixIt Documentation": "https://fixit.lruihao.cn",
+    "GitHub": "https://github.com/hugo-fixit/FixIt"
+  },
+  "categorizeByGroup": true,
+  "readme": "none",
+  "sourceLinkTemplate": "https://github.com/hugo-fixit/FixIt/blob/{gitRevision}/{path}#L{line}"
+}

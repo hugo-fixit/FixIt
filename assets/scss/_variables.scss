@@ -8,6 +8,14 @@
 @forward "hugo:vars";
 @forward "hugo:vars/internal";
 
+/// CSS variable prefix for all custom properties.
+/// @type String
 $prefix: fi- !default;
+
+/// Root prefix for CSS custom properties (derived from $prefix).
+/// @type String
 $rootPrefix: --#{$prefix} !default;
+
+/// Default header height.
+/// @type Length
 $header-height: 3.5rem !default;

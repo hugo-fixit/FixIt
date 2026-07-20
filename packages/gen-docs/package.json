@@ -1,0 +1,17 @@
+{
+  "name": "@hugo-fixit/gen-docs",
+  "private": true,
+  "description": "Generate API reference documentation from FixIt source files",
+  "author": "Lruihao",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "tsx src/index.ts"
+  },
+  "devDependencies": {
+    "@hugo-fixit/shared": "workspace:*",
+    "commander": "^14.0.3",
+    "picocolors": "^1.1.1",
+    "toml": "^3.0.0",
+    "typescript": "^6.0.3"
+  }
+}

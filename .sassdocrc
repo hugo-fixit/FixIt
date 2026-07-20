@@ -1,0 +1,7 @@
+{
+  "display": {
+    "access": ["public"],
+    "alias": false
+  },
+  "sort": ["group"]
+}

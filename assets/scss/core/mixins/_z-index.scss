@@ -1,5 +1,7 @@
 @use "sass:map";
 
+/// Z-index scale for consistent layering across the theme.
+/// @type Map
 $z-indexes: (
   "hide": -1,
   "auto": auto,

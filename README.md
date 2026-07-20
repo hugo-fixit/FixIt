@@ -168,7 +168,7 @@ Click the following links to generate a new repository with template:
 
 </details>
 
-## Multilingual and i18n
+## Multilingual and I18n
 
 FixIt supports multilingual and i18n. For more information, see the [Content Management](https://fixit.lruihao.cn/docs/content-management/introduction#multilingual) documentation. You are welcome to [contribute with a new language](https://github.com/hugo-fixit/FixIt/pulls).
 

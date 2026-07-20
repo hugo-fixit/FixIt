@@ -1,4 +1,5 @@
-// Color map of basic alerts
+/// Color map of GitHub-style alerts (light theme).
+/// @type Map
 $alert-color-map: (
   note: (
     border-color: #0969da,
@@ -22,6 +23,8 @@ $alert-color-map: (
   ),
 ) !default;
 
+/// Color map of GitHub-style alerts (dark theme).
+/// @type Map
 $alert-color-map-dark: (
   note: (
     border-color: #316dca,
