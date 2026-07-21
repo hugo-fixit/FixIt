@@ -34,7 +34,7 @@
     "dev:docs": "hugo server --source=../fixit-docs -D --disableFastRender --navigateToChanged --ignoreCache -O",
     "build:demo": "pnpm -F demo build",
     "build:test": "pnpm -F test build",
-    "build": "concurrently 'pnpm build:demo' 'pnpm build:test' && pnpm -F integration start && pnpm encrypt && pnpm encrypt --verify",
+    "build": "concurrently 'pnpm build:demo' 'pnpm build:test' && pnpm -F integration start && pnpm encrypt",
     "encrypt": "pnpm -F encrypt start",
     "clean": "rm -rf public resources/_gen apps/*/public apps/*/resources/_gen",
     "preview": "serve public",

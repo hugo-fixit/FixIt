@@ -1,4 +1,4 @@
-import { execSync } from 'node:child_process'
+import { execFileSync, execSync } from 'node:child_process'
 import { writeFileSync } from 'node:fs'
 import { dirname } from 'node:path'
 import { performance } from 'node:perf_hooks'
@@ -35,7 +35,7 @@ function setup(fileCount: number, templatesPerFile: number, templateSize: string
 
 function run(): number {
   const start = performance.now()
-  execSync(`npx tsx ${__dirname}/../index.ts --input ${BENCH_DIR}`, {
+  execFileSync('npx', ['tsx', `${__dirname}/../index.ts`, '--input', BENCH_DIR], {
     encoding: 'utf8',
     cwd: __dirname,
   })

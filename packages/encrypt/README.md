@@ -99,12 +99,14 @@ The per-template cost is constant regardless of file count or content size, as P
 
 The current implementation is in **Node.js (TypeScript)**. For environments where Node.js performance is a bottleneck, community-maintained implementations in other languages are welcome:
 
-| Language | Status    | Repository       |
-| -------- | --------- | ---------------- |
-| Node.js  | Available | hugo-fixit/FixIt |
-| Python   | Planned   | —                |
-| Go       | Planned   | —                |
-| Rust     | Planned   | —                |
+| Language | Status    | Repository         |
+| -------- | --------- | ------------------ |
+| Node.js  | Available | hugo-fixit/FixIt   |
+| Go       | Available | [fixit-encrypt.go] |
+| Python   | Planned   | —                  |
+| Rust     | Planned   | —                  |
+
+[fixit-encrypt.go]: https://github.com/hugo-fixit/fixit-encrypt.go
 
 If you have implemented `fixit-encrypt` in another language, please open a PR to add it to this list.
 
