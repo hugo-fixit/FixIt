@@ -5,7 +5,9 @@
   @param {String} . - The snake_case string
   @return {String} The camelCase string
 
-  @example "max_shown_lines" -> "maxShownLines"
+  @example
+  // "max_shown_lines" -> "maxShownLines"
+  {{- partial "function/camel-case.html" "max_shown_lines" -}}
 */ -}}
 {{- $parts := split . "_" -}}
 {{- $result := index $parts 0 -}}

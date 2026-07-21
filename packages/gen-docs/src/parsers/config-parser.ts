@@ -25,8 +25,9 @@ function isHardSeparator(text: string): boolean {
     || /^\+{20,}\s*$/.test(text.trim())
 }
 
-function extractComments(content: string): { commentMap: Map<string, string[]>, pageLevelStartKey: string, pageLevelEndKey: string } {
+function extractComments(content: string): { commentMap: Map<string, string[]>, sectionCommentMap: Map<string, string[]>, pageLevelStartKey: string, pageLevelEndKey: string } {
   const commentMap = new Map<string, string[]>()
+  const sectionCommentMap = new Map<string, string[]>()
   const lines = content.split('\n')
   const pendingComments: string[] = []
   const sectionStack: string[] = []
@@ -56,6 +57,37 @@ function extractComments(content: string): { commentMap: Map<string, string[]>, 
         if (afterHardSeparator && !pageLevelEndKey && pageLevelStartKey) {
           pageLevelEndKey = key.split('.')[1]
           afterHardSeparator = false
+        }
+        // Collect section-level comments for empty sections.
+        // Walk backward from the section header and collect contiguous comment lines.
+        // Skip blank lines between the section header and comments.
+        const sectionPath = key.split('.').slice(1).join('.')
+        let scanIdx = i - 1
+        const sectionComments: string[] = []
+        // Skip blank lines immediately before the section header
+        let hasBlankBeforeComments = false
+        while (scanIdx >= 0 && lines[scanIdx].trim() === '') {
+          hasBlankBeforeComments = true
+          scanIdx--
+        }
+        // Collect comment lines
+        while (scanIdx >= 0 && lines[scanIdx].trim().startsWith('#')) {
+          sectionComments.unshift(lines[scanIdx].trim().replace(/^#\s?/, ''))
+          scanIdx--
+        }
+        if (sectionComments.length > 0) {
+          const prevIsSection = scanIdx >= 0 && /^\[[^\]]+\]$/.test(lines[scanIdx].trim())
+          // Key rule: if there's NO blank line between the section header and the
+          // comments above it, the comments are section-level for this section.
+          // If there IS a blank line, the comments are trailing content from the
+          // previous section (e.g., examples) and should not be assigned here.
+          if (!hasBlankBeforeComments && prevIsSection) {
+            sectionCommentMap.set(sectionPath, sectionComments)
+          }
+          else if (!prevIsSection) {
+            // Comments preceded by non-section content or start-of-file
+            sectionCommentMap.set(sectionPath, sectionComments)
+          }
         }
         let splitIdx = pendingComments.length
         let foundSplitPoint = false
@@ -172,7 +204,7 @@ function extractComments(content: string): { commentMap: Map<string, string[]>, 
     }
   }
 
-  return { commentMap, pageLevelStartKey, pageLevelEndKey }
+  return { commentMap, sectionCommentMap, pageLevelStartKey, pageLevelEndKey }
 }
 
 function detectType(value: unknown): string {
@@ -258,12 +290,17 @@ function documentSection(
   obj: Record<string, unknown>,
   commentMap: Map<string, string[]>,
   parentPath: string,
+  sectionCommentMap?: Map<string, string[]>,
 ): ParamDoc[] {
   const docs: ParamDoc[] = []
+  const seenKeys = new Set<string>()
 
   for (const [key, value] of Object.entries(obj)) {
     const fullPath = parentPath ? `${parentPath}.${key}` : key
     const comments = commentMap.get(fullPath) || []
+    // Fall back to section-level comments if no key-level comments
+    const sectionComments = sectionCommentMap?.get(fullPath)
+    const effectiveComments = comments.length > 0 ? comments : (sectionComments || [])
     const type = detectType(value)
     const isTable = typeof value === 'object' && !Array.isArray(value) && value !== null
     const isArray = Array.isArray(value)
@@ -272,7 +309,7 @@ function documentSection(
       name: key,
       type,
       defaultValue: formatDefault(value),
-      description: joinComments(comments),
+      description: joinComments(effectiveComments),
       children: [],
       isTable,
       isArray,
@@ -284,10 +321,35 @@ function documentSection(
         value as Record<string, unknown>,
         commentMap,
         fullPath,
+        sectionCommentMap,
       )
     }
 
     docs.push(doc)
+    seenKeys.add(key)
+  }
+
+  // Add placeholder entries for empty sections that have section-level comments
+  if (sectionCommentMap) {
+    for (const [sectionPath, comments] of sectionCommentMap) {
+      const prefix = parentPath ? `${parentPath}.` : ''
+      if (sectionPath.startsWith(prefix) && !sectionPath.slice(prefix.length).includes('.')) {
+        const key = sectionPath.slice(prefix.length)
+        if (key && !seenKeys.has(key)) {
+          docs.push({
+            name: key,
+            type: 'map',
+            defaultValue: '',
+            description: joinComments(comments),
+            children: [],
+            isTable: true,
+            isArray: false,
+            rawValue: {},
+          })
+          seenKeys.add(key)
+        }
+      }
+    }
   }
 
   return docs
@@ -416,9 +478,9 @@ export function generateDocs(content: string): string {
     throw new Error('No [params] section found in hugo.toml.')
   }
 
-  const { commentMap, pageLevelStartKey, pageLevelEndKey } = extractComments(content)
+  const { commentMap, sectionCommentMap, pageLevelStartKey, pageLevelEndKey } = extractComments(content)
   const params = parsed.params as Record<string, unknown>
-  const docs = documentSection(params, commentMap, '')
+  const docs = documentSection(params, commentMap, '', sectionCommentMap)
 
   const siteLevel: ParamDoc[] = []
   const pageLevel: ParamDoc[] = []

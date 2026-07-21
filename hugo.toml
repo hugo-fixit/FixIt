@@ -676,7 +676,7 @@ wrapper = true
 cdn = "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs"
 # ZenUML ESM module CDN source.
 # You can set it to a CDN source to enable ZenUML support.
-# Example: `https://cdn.jsdelivr.net/npm/@mermaid-js/mermaid-zenuml/dist/mermaid-zenuml.esm.min.mjs`.
+# Example: `https://cdn.jsdelivr.net/npm/@mermaid-js/mermaid-zenuml/dist/mermaid-zenuml.esm.min.mjs`
 zenuml = ""
 # For values, See: [Available Themes](https://mermaid.js.org/config/theming.html#available-themes).
 themes = [
@@ -692,7 +692,7 @@ look = "handDrawn"
 # Specifies the font to be used in the rendered diagrams.
 font_family = ""
 # Layout loaders from ESM module CDN sources (e.g., ELK layout engine).
-# Example: ["https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk/dist/mermaid-layout-elk.esm.min.mjs"].
+# Example: ["https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk/dist/mermaid-layout-elk.esm.min.mjs"]
 # This will enable additional layout options: ["elk", "elk.layered", "elk.stress", "elk.force", "elk.mrtree"].
 layout_loaders = []
 # Default layout algorithm for rendering diagrams.
@@ -859,9 +859,9 @@ user_desc = ""
 # DOM container to be blacked out, e.g. [".aplayer"]
 black_dom = []
 # only for iframe mode
-# Example: "375px".
+# Example: "375px"
 frame_width = ""
-# Example: "600px".
+# Example: "600px"
 frame_height = ""
 # Only for magic mode.
 user_icon = ""
@@ -1163,21 +1163,21 @@ lazy_load = true
 [params.library]
 
 # Load some CSS from local assets.
-# Example: someCSS = "css/some.css".
+# Example: `someCSS = "css/some.css"`
 # Load some CSS from remote CDN.
-# Example: someCSS = "https://cdn.example.com/some.css".
+# Example: `someCSS = "https://cdn.example.com/some.css"`
 [params.library.css]
 
 # Load some JS from local assets.
-# Example: someJS = "js/some.js".
+# Example: `someJS = "js/some.js"`
 # Load some JS from remote CDN.
-# Example: someJS = "https://cdn.example.com/some.js".
+# Example: `someJS = "https://cdn.example.com/some.js"`
 [params.library.js]
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 # Public Git repository information only then enableGitInfo is true.
 [params.git_info]
-# Example: "https://github.com/hugo-fixit/docs".
+# Example: `"https://github.com/hugo-fixit/docs"`
 repo = ""
 branch = "main"
 # The content directory path relative to the root of the repository.
@@ -1373,7 +1373,7 @@ enable = false
 animate = true
 icon = "fa-solid fa-heartbeat"
 pre = ""
-# Example: "2021-12-18T16:15:22+08:00".
+# Example: "2021-12-18T16:15:22+08:00"
 value = ""
 
 # Footer lines order.
