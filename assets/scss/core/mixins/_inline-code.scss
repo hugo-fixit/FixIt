@@ -2,6 +2,7 @@
 @use "border-radius" as *;
 @use "compatibility" as *;
 
+/// Shared inline code styles using theme CSS variables.
 @mixin inline-code() {
   padding: 0.2em 0.4em;
   margin: 0;

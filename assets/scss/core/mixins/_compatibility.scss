@@ -1,6 +1,8 @@
 @use "core/functions" as *;
 
-// TODO Superseded by text-wrap: wrap; in modern browsers
+/// Apply word-wrap and overflow-wrap for cross-browser compatibility.
+/// TODO Superseded by `text-wrap: wrap;` in modern browsers.
+/// @param {String} $value - Wrap value (e.g. `break-word`)
 @mixin overflow-wrap($value) {
   word-wrap: $value;
   overflow-wrap: $value;
@@ -43,6 +45,9 @@
   }
 }
 
+/// Apply a focus-visible ring outline using a pseudo-element.
+/// @param {Length} $size [$size: 1.3em] - Size of the focus ring
+/// @param {Length} $offset [$offset: 0.2rem] - Offset from the element
 @mixin focus-visible-ring($size: 1.3em, $offset: 0.2rem) {
   &:focus-visible {
     outline: none;

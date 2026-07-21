@@ -21,8 +21,9 @@
 
   @example
   {{- $cover := dict "Page" . | partial "function/get-cover.html" -}}
-  {{- with $cover.URL }}<img src="{{ . }}">{{ end -}}
+  {{- with $cover.URL -}}<img src="{{ . }}">{{- end -}}
 
+  @example
   {{- $cover := dict "Page" . "Preview" true | partial "function/get-cover.html" -}}
   {{- dict "Src" $cover.URL "Resources" .Resources "Matches" $cover.Matches | partial "plugin/image.html" -}}
 */ -}}

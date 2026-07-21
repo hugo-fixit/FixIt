@@ -15,7 +15,8 @@ export type FixItDocumentEventMap = {
   [K in keyof FixItEventMap]: CustomEvent<FixItEventMap[K]>
 }
 
-type Handler<T> = T extends void
+/** Event handler type — infers the correct signature from the event payload. */
+export type Handler<T> = T extends void
   ? (() => void) | ((event: CustomEvent<void>) => void)
   : (event: CustomEvent<T>) => void
 

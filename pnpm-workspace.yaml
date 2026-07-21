@@ -7,5 +7,6 @@ packages:
   - packages/*
 allowBuilds:
   '@parcel/watcher': true
+  core-js: true
   esbuild: true
   simple-git-hooks: true

@@ -1,7 +1,7 @@
 @use "core/functions" as *;
 @use "z-index" as *;
 
-// Loading Mixin for before/after pseudo element
+/// Loading pseudo-element styles for async content.
 @mixin loading {
   content: '';
   position: absolute;

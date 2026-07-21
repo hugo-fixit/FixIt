@@ -24,7 +24,7 @@
 
   @example
   // Practical usage in templates
-  {{- $siteParams := partial "function/camel-case-keys.html" .Site.Params }}
+  {{- $siteParams := partial "function/camel-case-keys.html" .Site.Params -}}
 */ -}}
 {{- $input := . | default dict -}}
 {{- $output := dict -}}
