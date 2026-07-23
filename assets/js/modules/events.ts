@@ -15,11 +15,13 @@ export class EventsModule implements EventsService {
   #resizeTimeout: number | null = null
   #newScrollTop = 0
   #oldScrollTop = 0
+  #core: CoreService
+  #code: CodeService
 
-  constructor(
-    private readonly core: CoreService,
-    private readonly code: CodeService,
-  ) {}
+  constructor(core: CoreService, code: CodeService) {
+    this.#core = core
+    this.#code = code
+  }
 
   /** Bind scroll listener: auto-hide headers, reading progress, back-to-top, and TOC sync. */
   onScroll() {
@@ -40,7 +42,7 @@ export class EventsModule implements EventsService {
       this.#newScrollTop = getScrollTop()
       const scroll = this.#newScrollTop - this.#oldScrollTop
       if (Math.abs(scroll) > ACCURACY) {
-        this.core.closeActiveMaskOverlay()
+        this.#core.closeActiveMaskOverlay()
         const isScrollingDown = scroll > 0
         $autoHeaders.forEach(($header) => {
           if (isScrollingDown) {
@@ -97,7 +99,7 @@ export class EventsModule implements EventsService {
 
           const _isMobile = isMobile()
           if (_isMobile !== resizeBefore) {
-            this.core.closeActiveMaskOverlay()
+            this.#core.closeActiveMaskOverlay()
             resizeBefore = _isMobile
           }
         }, 100)
@@ -110,7 +112,7 @@ export class EventsModule implements EventsService {
     document.getElementById('mask')!.addEventListener('click', (e) => {
       if (!(e.target as HTMLElement).classList.contains('is-blur'))
         return
-      this.core.closeActiveMaskOverlay()
+      this.#core.closeActiveMaskOverlay()
     }, false)
   }
 
@@ -118,7 +120,7 @@ export class EventsModule implements EventsService {
   initPrint() {
     window.addEventListener('beforeprint', () => {
       const $content = document.getElementById('content')!
-      const printConfig = this.core.config.print || {}
+      const printConfig = this.#core.config.print || {}
 
       if (printConfig.expandAdmonition) {
         $content.querySelectorAll('.admonition').forEach(($el: Element) => $el.classList.add('open'))
@@ -156,7 +158,7 @@ export class EventsModule implements EventsService {
     }, false)
 
     window.addEventListener('afterprint', () => {
-      this.code.initCodeTabs()
+      this.#code.initCodeTabs()
     }, false)
   }
 

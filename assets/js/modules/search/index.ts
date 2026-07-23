@@ -19,8 +19,11 @@ export class SearchModule implements SearchService {
   #openDialog: (() => void) | undefined
   #closeDialog: (() => void) | undefined
   #initialized = false
+  #core: CoreService
 
-  constructor(private readonly core: CoreService) {}
+  constructor(core: CoreService) {
+    this.#core = core
+  }
 
   /** Create the appropriate search engine based on type. */
   #createEngine(type: string, searchConfig: SearchConfig): SearchEngine {
@@ -30,9 +33,9 @@ export class SearchModule implements SearchService {
       case 'fuse':
         return createFuseEngine(searchConfig)
       case 'cse':
-        return createCSEEngine(this.core.config.cse)
+        return createCSEEngine(this.#core.config.cse)
       case 'pagefind':
-        return createPagefindEngine(searchConfig, this.core.config.pagefind!)
+        return createPagefindEngine(searchConfig, this.#core.config.pagefind!)
       default:
         console.warn(`[FixIt] Unknown search type: "${type}". Supported types: algolia, fuse, cse, pagefind.`)
         return {
@@ -45,7 +48,7 @@ export class SearchModule implements SearchService {
 
   /** Initialize @algolia/autocomplete-js instance. */
   #initAutosearch() {
-    const searchConfig = this.core.config.search
+    const searchConfig = this.#core.config.search
     if (!searchConfig || !this.#engine)
       return
 
@@ -218,7 +221,7 @@ export class SearchModule implements SearchService {
 
     document.querySelector('.search-trigger.desktop')?.addEventListener('click', open)
     document.querySelector('.search-trigger.mobile')?.addEventListener('click', () => {
-      this.core.closeMaskOverlay('menu-mobile')
+      this.#core.closeMaskOverlay('menu-mobile')
       open()
     })
 
@@ -247,7 +250,7 @@ export class SearchModule implements SearchService {
 
   /** Initialize the search overlay, autocomplete, and engine-specific logic. */
   setup() {
-    const searchConfig = this.core.config.search
+    const searchConfig = this.#core.config.search
     if (!searchConfig || !searchConfig.type)
       return
 

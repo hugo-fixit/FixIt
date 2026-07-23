@@ -7,14 +7,18 @@ import type { CoreService, EncryptionService } from '../core/tokens'
  * - Initialize FixItDecryptor for full-page and shortcode-scoped decryption.
  */
 export class EncryptionModule implements EncryptionService {
-  constructor(private readonly core: CoreService) {}
+  #core: CoreService
+
+  constructor(core: CoreService) {
+    this.#core = core
+  }
 
   /** Initialize FixItDecryptor with encryption config. */
   setup() {
-    if (!this.core.config.encryption || !window.FixItDecryptor)
+    if (!this.#core.config.encryption || !window.FixItDecryptor)
       return
     const decryptor = new window.FixItDecryptor()
 
-    decryptor.init(this.core.config.encryption)
+    decryptor.init(this.#core.config.encryption)
   }
 }

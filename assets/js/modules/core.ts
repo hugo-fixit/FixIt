@@ -16,8 +16,8 @@ export class CoreModule implements CoreService {
   themeMode: string
   isDark: boolean
 
-  private activeMaskOverlay: string | null = null
-  private readonly maskOverlays = new Map<string, MaskOverlayHandler>()
+  #activeMaskOverlay: string | null = null
+  #maskOverlays = new Map<string, MaskOverlayHandler>()
 
   constructor() {
     this.config = window.config
@@ -30,46 +30,46 @@ export class CoreModule implements CoreService {
 
   /** Register a named mask overlay with open/close/isActive handlers. */
   registerMaskOverlay(name: string, handlers: MaskOverlayHandler) {
-    this.maskOverlays.set(name, handlers)
+    this.#maskOverlays.set(name, handlers)
   }
 
   /** Toggle the mask element's blur class based on active overlay state. */
   syncMaskState() {
-    document.getElementById('mask')?.classList.toggle('is-blur', Boolean(this.activeMaskOverlay))
+    document.getElementById('mask')?.classList.toggle('is-blur', Boolean(this.#activeMaskOverlay))
   }
 
   /** Open a named mask overlay, closing any previously active one. */
   openMaskOverlay(name: string) {
-    const overlay = this.maskOverlays.get(name)
+    const overlay = this.#maskOverlays.get(name)
     if (!overlay)
       return
-    if (this.activeMaskOverlay && this.activeMaskOverlay !== name) {
-      this.closeMaskOverlay(this.activeMaskOverlay, true)
+    if (this.#activeMaskOverlay && this.#activeMaskOverlay !== name) {
+      this.closeMaskOverlay(this.#activeMaskOverlay, true)
     }
     overlay.onOpen?.()
-    this.activeMaskOverlay = name
+    this.#activeMaskOverlay = name
     this.syncMaskState()
   }
 
   /** Close a named mask overlay and optionally skip mask state sync. */
   closeMaskOverlay(name: string, skipSync = false) {
-    const overlay = this.maskOverlays.get(name)
+    const overlay = this.#maskOverlays.get(name)
     if (!overlay)
       return
     overlay.onClose?.()
-    if (this.activeMaskOverlay === name) {
-      this.activeMaskOverlay = null
+    if (this.#activeMaskOverlay === name) {
+      this.#activeMaskOverlay = null
     }
     !skipSync && this.syncMaskState()
   }
 
   /** Toggle a named mask overlay open/closed. */
   toggleMaskOverlay(name: string) {
-    const overlay = this.maskOverlays.get(name)
+    const overlay = this.#maskOverlays.get(name)
     if (!overlay)
       return
-    const isActive = overlay.isActive?.() ?? this.activeMaskOverlay === name
-    if (this.activeMaskOverlay === name && isActive) {
+    const isActive = overlay.isActive?.() ?? this.#activeMaskOverlay === name
+    if (this.#activeMaskOverlay === name && isActive) {
       this.closeMaskOverlay(name)
       return
     }
@@ -78,10 +78,10 @@ export class CoreModule implements CoreService {
 
   /** Close whichever mask overlay is currently active. */
   closeActiveMaskOverlay() {
-    if (!this.activeMaskOverlay) {
+    if (!this.#activeMaskOverlay) {
       this.syncMaskState()
       return
     }
-    this.closeMaskOverlay(this.activeMaskOverlay)
+    this.closeMaskOverlay(this.#activeMaskOverlay)
   }
 }

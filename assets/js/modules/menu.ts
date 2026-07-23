@@ -9,7 +9,11 @@ import type { CoreService, MenuService } from '../core/tokens'
  * - Sync menu state with mask overlay.
  */
 export class MenuModule implements MenuService {
-  constructor(private readonly core: CoreService) {}
+  #core: CoreService
+
+  constructor(core: CoreService) {
+    this.#core = core
+  }
 
   /** Set min-width on desktop sub-menus to match parent item width. */
   initDesktop() {
@@ -24,7 +28,7 @@ export class MenuModule implements MenuService {
     const $menuMobile = document.getElementById('menu-mobile')
     if (!$menuToggleMobile || !$menuMobile)
       return
-    this.core.registerMaskOverlay('menu-mobile', {
+    this.#core.registerMaskOverlay('menu-mobile', {
       isActive: () => $menuMobile.classList.contains('active'),
       onOpen: () => {
         $menuToggleMobile.classList.add('active')
@@ -38,7 +42,7 @@ export class MenuModule implements MenuService {
       },
     })
     $menuToggleMobile.addEventListener('click', () => {
-      this.core.toggleMaskOverlay('menu-mobile')
+      this.#core.toggleMaskOverlay('menu-mobile')
     }, false)
     // add nested menu toggler
     document.querySelectorAll<HTMLElement>('.menu-item>.nested-item').forEach(($nestedItem) => {

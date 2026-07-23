@@ -10,11 +10,15 @@ import { eventBus } from '../core/event-bus'
  * - Show update notification toast and handle refresh.
  */
 export class PWAModule implements PWAService {
-  constructor(private readonly core: CoreService) {}
+  #core: CoreService
+
+  constructor(core: CoreService) {
+    this.#core = core
+  }
 
   /** Register the service worker with update detection and notification binding. */
   async setup() {
-    const pwa = this.core.config.PWA
+    const pwa = this.#core.config.PWA
     if (!pwa?.enable || !('serviceWorker' in navigator))
       return
 
@@ -49,14 +53,14 @@ export class PWAModule implements PWAService {
       window.location.reload()
     })
 
-    this.bindUpdateNotification(registration)
+    this.#bindUpdateNotification(registration)
   }
 
   /**
    * Bind the template-rendered update notification toast.
    * Shows the toast on `fixit:sw-update` and wires the refresh button to skip waiting.
    */
-  private bindUpdateNotification(registration: ServiceWorkerRegistration) {
+  #bindUpdateNotification(registration: ServiceWorkerRegistration) {
     const toast = document.querySelector<HTMLElement>('.sw-update-notification')
     if (!toast)
       return

@@ -10,9 +10,12 @@ import { eventBus } from '../core/event-bus'
  * - Persist user preference to localStorage.
  */
 export class ThemeModule implements ThemeService {
-  private readonly mql = window.matchMedia('(prefers-color-scheme: dark)')
+  #mql = window.matchMedia('(prefers-color-scheme: dark)')
+  #core: CoreService
 
-  constructor(private readonly core: CoreService) {}
+  constructor(core: CoreService) {
+    this.#core = core
+  }
 
   /**
    * Apply a theme mode and emit the `fixit:switch-theme` event.
@@ -20,19 +23,19 @@ export class ThemeModule implements ThemeService {
    * @param persist - Whether to save the choice to localStorage (default: `true`).
    */
   setThemeMode(mode: string, persist = true) {
-    const prevIsDark = this.core.isDark
-    this.core.themeMode = mode
+    const prevIsDark = this.#core.isDark
+    this.#core.themeMode = mode
     document.documentElement.dataset.themeMode = mode
-    this.core.isDark = mode === 'auto' ? this.mql.matches : mode === 'dark'
+    this.#core.isDark = mode === 'auto' ? this.#mql.matches : mode === 'dark'
 
     if (persist) {
       window.localStorage?.setItem('theme-mode', mode)
     }
 
     eventBus.emit('fixit:switch-theme', {
-      isDark: this.core.isDark,
+      isDark: this.#core.isDark,
       mode,
-      isChanged: prevIsDark !== this.core.isDark,
+      isChanged: prevIsDark !== this.#core.isDark,
     })
   }
 
@@ -49,7 +52,7 @@ export class ThemeModule implements ThemeService {
         return
       applyThemeColor(detail.isDark)
     })
-    applyThemeColor(this.core.isDark)
+    applyThemeColor(this.#core.isDark)
   }
 
   /** Initialize the theme switch button cycle and system preference listener. */
@@ -58,21 +61,21 @@ export class ThemeModule implements ThemeService {
 
     document.querySelectorAll('.theme-switch').forEach(($themeSwitch: Element) => {
       $themeSwitch.addEventListener('click', () => {
-        const currentIndex = modes.indexOf(this.core.themeMode as typeof modes[number])
+        const currentIndex = modes.indexOf(this.#core.themeMode as typeof modes[number])
         const nextMode = modes[(currentIndex + 1) % modes.length]
         this.setThemeMode(nextMode)
       }, false)
     })
 
-    this.mql.addEventListener('change', (e: MediaQueryListEvent) => {
-      if (this.core.themeMode !== 'auto')
+    this.#mql.addEventListener('change', (e: MediaQueryListEvent) => {
+      if (this.#core.themeMode !== 'auto')
         return
-      const prevIsDark = this.core.isDark
-      this.core.isDark = e.matches
+      const prevIsDark = this.#core.isDark
+      this.#core.isDark = e.matches
       eventBus.emit('fixit:switch-theme', {
-        isDark: this.core.isDark,
+        isDark: this.#core.isDark,
         mode: 'auto',
-        isChanged: prevIsDark !== this.core.isDark,
+        isChanged: prevIsDark !== this.#core.isDark,
       })
     })
   }

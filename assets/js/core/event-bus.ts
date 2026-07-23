@@ -22,14 +22,14 @@ export type Handler<T> = T extends void
 
 /** Typed event bus — wraps DOM CustomEvents with type-safe emit/on/off. */
 export class TypedEventBus {
-  private target = document
+  #target = document
 
   on<K extends keyof FixItEventMap>(event: K, handler: Handler<FixItEventMap[K]>): void {
-    this.target.addEventListener(event as string, handler as EventListener)
+    this.#target.addEventListener(event as string, handler as EventListener)
   }
 
   off<K extends keyof FixItEventMap>(event: K, handler: Handler<FixItEventMap[K]>): void {
-    this.target.removeEventListener(event as string, handler as EventListener)
+    this.#target.removeEventListener(event as string, handler as EventListener)
   }
 
   emit<K extends keyof FixItEventMap>(
@@ -37,7 +37,7 @@ export class TypedEventBus {
     ...args: FixItEventMap[K] extends void ? [] : [FixItEventMap[K]]
   ): void {
     const detail = args[0]
-    this.target.dispatchEvent(
+    this.#target.dispatchEvent(
       detail !== undefined
         ? new CustomEvent(event as string, { detail })
         : new CustomEvent(event as string),

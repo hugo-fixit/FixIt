@@ -16,7 +16,7 @@ const TOC_CONTAINER_IDS = ['toc-content-auto', 'toc-content-static', 'toc-conten
  * - Clone TOC nodes to detach APlayer event listeners.
  */
 export class TocModule implements TocService {
-  private activeTocId: string | null = null
+  #activeTocId: string | null = null
 
   /** Get all TOC content containers (auto, static, and drawer). */
   #getTocContainers(): HTMLElement[] {
@@ -141,8 +141,8 @@ export class TocModule implements TocService {
     $tocRoots.forEach(($tocRoot) => {
       this.#applyTocActiveState($tocRoot, activeId)
     })
-    if (this.activeTocId !== activeId) {
-      this.activeTocId = activeId
+    if (this.#activeTocId !== activeId) {
+      this.#activeTocId = activeId
       if (!isTocStatic()) {
         const $autoTocRoot = document.querySelector<HTMLElement>('#toc-content-auto > nav')
         const $autoTocContainer = document.getElementById('toc-content-auto')
@@ -160,7 +160,7 @@ export class TocModule implements TocService {
   /** Sync TOC layout state: drawer button visibility, height, and active heading. */
   #syncTocLayout() {
     document.querySelector<HTMLElement>('#toc-drawer-button')?.classList.toggle('hidden', !isTocStatic())
-    this.activeTocId = null
+    this.#activeTocId = null
     this.syncTocHeight()
     this.syncTocActiveState()
   }
@@ -229,7 +229,7 @@ export class TocModule implements TocService {
       this.syncTocHeight()
       this.syncTocActiveState()
       const $dialogTocRoot = document.querySelector<HTMLElement>('#toc-content-drawer > nav')!
-      this.#scrollActiveTocLinkIntoView($dialogTocRoot, this.activeTocId!, $dialogTocRoot)
+      this.#scrollActiveTocLinkIntoView($dialogTocRoot, this.#activeTocId!, $dialogTocRoot)
       ;(document.activeElement as HTMLElement)?.blur()
     })
     dialog.addEventListener('close', () => {

@@ -16,10 +16,13 @@ const copyText = createCopyText()
  * - Re-initialize components after encrypted content is decrypted.
  */
 export class ContentModule implements ContentService {
-  constructor(
-    private readonly core: CoreService,
-    private readonly code: CodeService,
-  ) {}
+  #core: CoreService
+  #code: CodeService
+
+  constructor(core: CoreService, code: CodeService) {
+    this.#core = core
+    this.#code = code
+  }
 
   /** Fetch and inline SVG icons referenced by `data-svg-src` attributes. */
   initSVGIcon() {
@@ -131,7 +134,7 @@ export class ContentModule implements ContentService {
       return
     const footnoteMap = new Map<HTMLElement, HTMLElement>()
     $footnoteRefs.forEach(($ref) => {
-      if (this.core.config.tooltip) {
+      if (this.#core.config.tooltip) {
         const $link = $ref.querySelector<HTMLAnchorElement>('a.footnote-ref')
         if ($link) {
           $link.addEventListener('click', (e) => {
@@ -153,7 +156,7 @@ export class ContentModule implements ContentService {
       if ($ref.hasAttribute('title'))
         return
       $ref.setAttribute('title', $content.textContent!.trim())
-      if (this.core.config.tooltip) {
+      if (this.#core.config.tooltip) {
         CellTooltip.getOrCreateInstance($ref)
       }
     })
@@ -161,7 +164,7 @@ export class ContentModule implements ContentService {
 
   /** Initialize CellTooltip on action buttons, copy buttons, and footnotes. */
   initTooltip() {
-    if (!this.core.config.tooltip)
+    if (!this.#core.config.tooltip)
       return
     CellTooltip.initAll('li[data-task] > span[title]', { placement: 'right' })
     CellTooltip.initAll('.action-btn[title]', { placement: 'bottom' })
@@ -177,9 +180,9 @@ export class ContentModule implements ContentService {
    */
   initContent(target: Element | Document = document) {
     this.initDetails(target)
-    this.code.initCodeWrapper()
-    this.code.initCodeTabs()
-    this.code.initDiagramCopyBtn()
+    this.#code.initCodeWrapper()
+    this.#code.initCodeTabs()
+    this.#code.initDiagramCopyBtn()
     this.initTooltip()
     this.initLinkGuardDialog(target)
   }
