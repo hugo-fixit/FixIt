@@ -1,13 +1,5 @@
 {
   "todo-tree.tree.scanMode": "workspace only",
-  "explorer.fileNesting.enabled": true,
-  "explorer.fileNesting.patterns": {
-    "tsconfig.json": "tsconfig.*.json, env.d.ts",
-    "package.json": "package-lock.json, pnpm*, .npmrc, .nvmrc, .eslint*, eslint*, .editorconfig, librarybot.yml",
-    "README.md": "README.*.md, CODE_OF_CONDUCT.md, CONTRIBUTING.md, LICENSE, SECURITY.md, CHANGELOG.md",
-    "hugo.toml": "theme.toml, .hugo_build.lock",
-    "vercel.json": "build.sh"
-  },
   "files.associations": {
     "*.template.ts": "gots",
     "*.template.js": "gojs",
@@ -18,7 +10,7 @@
     "**/layouts/**/*.xml": "gohtml",
     "**/layouts/**/*.md": "gotemplate"
   },
-  // Disable the default formatter, use eslint instead
+  // Disable the default formatter, use ESLint instead
   "prettier.enable": false,
   "editor.formatOnSave": false,
   // Auto fix
