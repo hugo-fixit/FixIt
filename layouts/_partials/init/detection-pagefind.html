@@ -1,3 +1,10 @@
+{{- /*
+  Pagefind search index detection partial.
+
+  Warns at build time if Pagefind search is enabled but the index file
+  is missing from the public/ directory.
+*/ -}}
+
 {{- if and .Site.Language.IsDefault .Site.Params.search.enable (eq .Site.Params.search.type "pagefind") (not (fileExists "public/pagefind")) -}}
   {{- warnf "[FixIt] Pagefind search index not found.\nRun `npx pagefind --site public` in the site root directory after building.\n" -}}
 {{- end -}}

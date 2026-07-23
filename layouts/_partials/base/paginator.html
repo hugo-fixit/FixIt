@@ -1,3 +1,10 @@
+{{- /*
+  Pagination component with ellipsis.
+
+  Renders a paginated page list with ellipsis for large page counts.
+  Shows page numbers near the current page and ellipsis markers for distant ranges.
+*/ -}}
+
 {{- if gt .Paginator.TotalPages 1 -}}
   <ul class="pagination">
     {{- .Site.Store.Set "paginator.ellipsed" false -}}

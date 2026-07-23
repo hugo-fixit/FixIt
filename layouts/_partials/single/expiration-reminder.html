@@ -1,3 +1,11 @@
+{{- /*
+  Content expiration reminder partial.
+
+  Displays a note or warning admonition when the page's last modification date
+  exceeds configurable day thresholds (default: 90 days for note, 180 days for warning).
+  Skipped for password-protected pages.
+*/ -}}
+
 {{- $expirationReminder := dict "Page" . "Key" "expiration_reminder" | partial "function/param.html" | default dict -}}
 
 {{- if $expirationReminder.enable | and (not .Params.password) -}}

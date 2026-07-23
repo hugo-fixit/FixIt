@@ -1,3 +1,12 @@
+{{- /*
+  Render breadcrumb navigation for the current page.
+
+  Displays a hierarchical path from the site root to the current page.
+  Supports configurable separator, sticky mode, home visibility, and title capitalization.
+
+  Called from: layouts/baseof.html.
+*/ -}}
+
 {{- if (gt (len .Ancestors.Reverse) 1) | and (eq .Site.Params.breadcrumb.enable true) -}}
   {{- $separator := .Site.Params.breadcrumb.separator | default "/" -}}
   <nav aria-label="breadcrumb" class="breadcrumb-container{{ if .Site.Params.breadcrumb.sticky }} sticky{{ end }}">

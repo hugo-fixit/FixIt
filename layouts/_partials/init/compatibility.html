@@ -1,3 +1,10 @@
+{{- /*
+  Browser compatibility polyfills partial.
+
+  Conditionally loads polyfill.io and object-fit-images for older browsers
+  based on site compatibility configuration.
+*/ -}}
+
 {{- $compatibility := .Site.Params.compatibility | default dict -}}
 {{- $cdn := .Site.Store.Get "cdn" | default dict -}}
 {{- $fingerprint := .Site.Store.Get "fingerprint" -}}

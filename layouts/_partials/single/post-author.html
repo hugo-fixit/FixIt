@@ -1,3 +1,10 @@
+{{- /*
+  Post author display partial.
+
+  Renders the author name with optional avatar and link.
+  Stores the resolved author map in the page store for use by other partials.
+*/ -}}
+
 {{- $author := partial "function/get-author-map.html" .Params.author -}}
 {{- .Store.Set "author" $author -}}
 {{- $optim := slice 

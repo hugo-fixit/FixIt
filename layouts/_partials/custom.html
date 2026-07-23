@@ -1,3 +1,12 @@
+{{- /*
+  Custom partial block definitions.
+
+  Defines named template blocks (custom-head, custom-menu, custom-profile,
+  custom-aside, custom-comment, custom-footer, custom-widgets, custom-assets,
+  custom-post__toc, custom-post__content, custom-post__footer) that users
+  can extend via the custom_partials configuration.
+*/ -}}
+
 {{- define "custom-head" -}}
   {{- $ctx := . -}}
   {{- range .Site.Params.custom_partials.head -}}

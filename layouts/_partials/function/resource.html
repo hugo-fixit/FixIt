@@ -1,3 +1,14 @@
+{{- /*
+  Resolve a Hugo resource by path.
+
+  Attempts to find the resource from page resources first, then global resources.
+  Returns 0 if the resource is not found.
+
+  @param {String} .Path - The resource path (page resource or global resource)
+  @param {Object} [.Resources] - Page resources collection
+  @return {resource.Resource|Number} The resolved resource, or 0 if not found
+*/ -}}
+
 {{- $Resources := .Resources | default page.Resources -}}
 {{- $resource := 0 -}}
 {{- $url := urls.Parse .Path -}}

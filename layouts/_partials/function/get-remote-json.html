@@ -1,3 +1,11 @@
+{{- /*
+  Fetch and parse remote JSON with daily caching.
+
+  @param {String} .URL - The remote JSON URL (required)
+  @param {Object} [.OPTIONS] - Additional options for resources.GetRemote
+  @return {Object} The parsed JSON response, or empty dict on failure
+*/ -}}
+
 {{- $response := dict -}}
 {{- $url := .URL -}}
 {{- $options := .OPTIONS | default dict -}}

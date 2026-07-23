@@ -1,3 +1,11 @@
+{{- /*
+  Version detection and update checking partial.
+
+  Validates Hugo minimum version, checks Hugo Extended edition, detects the
+  FixIt theme version from params, warns about dev versions, and optionally
+  checks for newer releases via the GitHub API.
+*/ -}}
+
 {{- $version := hugo.Store.Get "version" -}}
 {{- $latest := $version -}}
 {{- $devOpts := .Site.Store.Get "devOpts" -}}

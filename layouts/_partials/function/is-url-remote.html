@@ -1,1 +1,8 @@
+{{- /*
+  Check if a parsed URL is remote (has both scheme and host).
+
+  @param {Object} . - A parsed URL object (from urls.Parse)
+  @return {Boolean} True if the URL has a non-empty scheme and host
+*/ -}}
+
 {{- return and (not (eq .Scheme "")) .Host -}}

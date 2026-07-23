@@ -1,4 +1,14 @@
-{{- hugo.Store.Set "version" "v1.0.0-mrudz3q9" -}}
+{{- /*
+  Theme initialization entry point partial.
+
+  Sets the theme version and orchestrates all init sub-partials:
+  environment detection, version checking, deprecated param detection,
+  Pagefind index check, encryption warnings, global setup, and browser compatibility.
+
+  Called from: layouts/baseof.html.
+*/ -}}
+
+{{- hugo.Store.Set "version" "v1.0.0-mrx1h9pi" -}}
 {{- .Store.Set "this" dict -}}
 
 {{- partial "init/detection-env.html" . -}}

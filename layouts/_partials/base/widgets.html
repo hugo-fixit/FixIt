@@ -1,3 +1,18 @@
+{{- /*
+  Global widget layer partial.
+
+  Renders floating UI elements across all pages:
+  - Fixed action buttons (back-to-top, TOC drawer, view comments)
+  - GitHub corner link
+  - Search dialog modal
+  - Reading progress bar
+  - Link guard confirmation dialog
+  - Service worker update notification
+  - Noscript warning
+
+  Called from: layouts/baseof.html.
+*/ -}}
+
 <div class="widgets">
   {{- $backToTop := .Site.Params.back_to_top -}}
   {{- $comment := .Store.Get "comment" -}}

@@ -1,3 +1,11 @@
+{{- /*
+  Script accumulation store partial.
+
+  Appends a script resource entry to the page's accumulated script list.
+  Used by other partials to register JS assets that are rendered together
+  at the end of the page via base/assets.html.
+*/ -}}
+
 {{- $noop := .Page.WordCount -}}
 {{- $this := .Page.Store.Get "this" -}}
 {{- $script := $this.script | default slice -}}

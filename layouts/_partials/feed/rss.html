@@ -1,3 +1,11 @@
+{{- /*
+  RSS feed generation partial.
+
+  Renders an RSS 2.0 XML feed for the current section or home page.
+  Supports full-text or summary mode, filters out password-protected and hidden pages,
+  and includes cover images, author info, and follow challenge tags.
+*/ -}}
+
 {{- $pages := .Pages -}}
 {{- /* Front matter: password */ -}}
 {{- $pages = where $pages "Params.password" "eq" nil -}}

@@ -1,3 +1,10 @@
+{{- /*
+  Encrypted pages detection partial.
+
+  Scans all regular pages for password-protected content and emits a build-time
+  warning listing encrypted pages with their titles and permalinks.
+*/ -}}
+
 {{- $encryptedPages := slice -}}
 {{- range .Site.RegularPages -}}
   {{- if or .Params.password (.Store.Get "hasEncryptor") -}}

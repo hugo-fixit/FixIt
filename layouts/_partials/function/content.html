@@ -1,3 +1,16 @@
+{{- /*
+  Content processing pipeline partial.
+
+  Applies a chain of content transformations: ruby annotations, fractions,
+  Font Awesome icons, task lists, marked text, color preview, and HTML escaping.
+
+  @param {String} .Content - The raw HTML content
+  @param {Boolean} [.Ruby] - Whether to process ruby annotations
+  @param {Boolean} [.Fraction] - Whether to process fraction syntax
+  @param {Boolean} [.Fontawesome] - Whether to process Font Awesome shortcodes
+  @return {String} The processed content
+*/ -}}
+
 {{- $content := .Content -}}
 
 {{- if $content -}}

@@ -1,3 +1,16 @@
+{{- /*
+  Site footer partial.
+
+  Renders the page footer with configurable sections:
+  - Powered by (Hugo and FixIt theme links)
+  - Copyright (year, author, license)
+  - Site running time counter
+  - Visitor statistics (busuanzi)
+  - Gov/ICP filing information (beian)
+
+  Called from: layouts/baseof.html.
+*/ -}}
+
 {{- $footerConfig := .Site.Params.footer -}}
 
 {{- if ne $footerConfig.enable false -}}

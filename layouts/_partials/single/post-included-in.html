@@ -1,3 +1,10 @@
+{{- /*
+  Post categories and collections display partial.
+
+  Renders category and collection links with icons for the current page.
+  Displays categories only, collections only, or both depending on which are present.
+*/ -}}
+
 {{- $categories := slice -}}
 {{- range .GetTerms "categories" -}}
   {{- $categories = $categories | append (

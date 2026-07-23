@@ -1,3 +1,11 @@
+{{- /*
+  Pagefind search metadata injection partial.
+
+  Outputs meta tags for Pagefind indexing: hidden/encrypted filters,
+  date/title sorting fields, and tag/category/collection metadata.
+  Only active when Pagefind search is enabled and the current context is a page.
+*/ -}}
+
 {{- if and .Site.Params.search.enable (eq .Site.Params.search.type "pagefind") .IsPage -}}
   {{- $pageDate := (.PublishDate | default .Date) -}}
   {{- $dateLabel := $pageDate | dateFormat (.Site.Params.date_format | default "2006-01-02") -}}

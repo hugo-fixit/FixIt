@@ -1,3 +1,9 @@
+{{- /*
+  Check if the current page language is CJK (Chinese, Japanese, or Korean).
+
+  @return {Boolean} True if the page language is CJK
+*/ -}}
+
 {{- $cjk := slice "zh-cn" "zh-tw" "ja" "ko" -}}
 {{- $isCJK := (in $cjk .Page.Language.Name) | default .Page.Params.IsCJKLanguage -}}
 

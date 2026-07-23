@@ -1,3 +1,12 @@
+{{- /*
+  Homepage profile section partial.
+
+  Renders the homepage hero area with avatar, title, subtitle (with optional TypeIt animation),
+  social links, and disclaimer text.
+
+  Called from: layouts/index.html.
+*/ -}}
+
 {{- $profile := .Site.Params.home.profile -}}
 {{- $author := partial "function/get-author-map.html" .Params.author -}}
 

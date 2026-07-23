@@ -1,3 +1,17 @@
+{{- /*
+  Process content for XML output (used in RSS feeds).
+
+  Applies content transformations (ruby, fraction, Font Awesome) and prepends
+  the featured image, then XML-escapes the result.
+
+  @param {String} .Content - The raw HTML content
+  @param {Boolean} [.Ruby] - Whether to process ruby annotations
+  @param {Boolean} [.Fraction] - Whether to process fraction syntax
+  @param {Boolean} [.Fontawesome] - Whether to process Font Awesome shortcodes
+  @param {String} [.FeaturedImage] - Featured image URL to prepend
+  @return {String} The XML-escaped processed content
+*/ -}}
+
 {{- $content := .Content -}}
 
 {{- if $content -}}

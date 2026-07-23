@@ -1,3 +1,10 @@
+{{- /*
+  Post reward/donation panel partial.
+
+  Reads the reward config from front matter and site defaults,
+  then delegates rendering to plugin/reward.html.
+*/ -}}
+
 {{- $reward := dict "Page" . "Key" "reward" | partial "function/param.html" -}}
 {{- $author := .Store.Get "author" -}}
 {{- $options := dict "Reward" $reward "Id" "fi-reward" "Author" $author.name -}}

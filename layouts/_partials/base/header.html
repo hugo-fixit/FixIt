@@ -1,3 +1,15 @@
+{{- /*
+  Desktop and mobile site header with navigation.
+
+  Renders two header variants:
+  - Desktop: full navigation menu with submenus, search trigger, theme switch, and language switcher.
+  - Mobile: compact header with hamburger menu, search, theme switch, and language select.
+
+  Both support TypeIt animation for title/subtitle, GitHub corner integration, and custom menu items.
+
+  Called from: layouts/baseof.html.
+*/ -}}
+
 {{- $buildDrafts := .Page.Draft -}}
 {{- $relLangURL := relLangURL "" -}}
 
