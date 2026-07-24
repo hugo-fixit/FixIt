@@ -32,9 +32,8 @@
 [![Gitee star of FixIt](https://gitee.com/lruihao/FixIt/badge/star.svg)](https://gitee.com/lruihao/FixIt/stargazers)
 
 > [!WARNING]
-> **Version v0.x only accepts bug fixes. For new feature submissions, please develop on the [v1](https://github.com/hugo-fixit/FixIt/tree/v1) branch.**
->
-> Version 1.0 is planned for release in **the first half of 2027**. Welcome to join the development and discussion! See [v1 Milestone](https://github.com/hugo-fixit/FixIt/milestone/8) for details.
+> **The `main` branch contains the v1 code. For upgrade instructions, see the [v1 migration guide](https://fixit.lruihao.cn/guides/upgrade-to-v1/).**\
+> Version 1.0.0 is planned for release in **the first half of 2027**. Welcome to join the development and [discussion](https://github.com/orgs/hugo-fixit/discussions/723)!
 
 ## Live Preview
 

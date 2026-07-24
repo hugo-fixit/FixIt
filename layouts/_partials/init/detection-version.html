@@ -32,7 +32,7 @@
 {{- if .Site.Language.IsDefault -}}
   {{- if not .Site.Params.version -}}
     {{- errorf "FixIt %v\n%v\n\n" $version (T "init.configurationError") -}}
-  {{- else if gt "0.2.0" (strings.TrimPrefix "v" .Site.Params.version) -}}
+  {{- else if gt "1.0.0" (strings.TrimPrefix "v" .Site.Params.version) -}}
     {{- errorf "FixIt %v\n%v\n\n" $version (dict "From" .Site.Params.version "To" $version | T "init.compatibilityError")  -}}
   {{- end -}}
   {{- if gt (len (findRE "^v[0-9]+\\.[0-9]+\\.[0-9]+-[0-9a-f]+$" $version)) 0 -}}
@@ -40,10 +40,6 @@
   {{- end -}}
   {{- if (gt $latest $version) | and $devOpts.c4u -}}
     {{- warnf "FixIt %v (⬆️ %v)\n%v`git submodule update --remote --merge`\n\n" $version $latest (T "init.quicklyUpgrade") -}}
-  {{- end -}}
-  {{- /* [todo] remove this temporary warning after v1.0.0 release */ -}}
-  {{- if hasPrefix $version "v1." -}}
-    {{- warnidf "warning-v1-dev" "FixIt %v\n⚠️ You are using a v1.0.0 development version, which may contain breaking changes.\nIt is recommended to use the latest stable release v0.4.5: https://github.com/hugo-fixit/FixIt/releases/tag/v0.4.5\n" $version -}}
   {{- end -}}
 {{- end -}}
 
