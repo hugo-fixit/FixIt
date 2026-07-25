@@ -8,8 +8,8 @@
 import { eventBus } from '../core/event-bus'
 import { isDarkMode } from '../utils'
 
-function applyJsonViewerTheme(isDark: boolean) {
-  document.querySelectorAll('json-viewer').forEach(($el: Element) => {
+function applyJsonViewerTheme(isDark: boolean, scope: Element | Document = document) {
+  scope.querySelectorAll('json-viewer').forEach(($el: Element) => {
     $el.setAttribute('theme', isDark ? 'dark' : 'light')
   })
 }
@@ -24,5 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!detail.isChanged)
       return
     applyJsonViewerTheme(detail.isDark)
+  })
+
+  eventBus.on('fixit:content-decrypted', ({ detail }) => {
+    applyJsonViewerTheme(isDarkMode(), detail.target)
   })
 }, false)
