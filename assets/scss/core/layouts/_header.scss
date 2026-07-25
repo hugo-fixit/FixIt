@@ -406,7 +406,7 @@ header {
         padding: 0 1rem;
 
         &:not(.menu-system):hover {
-          background-color: light-dark(#f2f2f3, #535355);
+          background-color: light-dark(#f2f2f3, #3e444c);
         }
 
         .menu-link {
@@ -465,7 +465,7 @@ header {
         }
 
         .menu-item:hover {
-          background-color: light-dark(#e7e7ea, #5d5d5f);
+          background-color: light-dark(#e7e7ea, #464c54);
         }
       }
 
