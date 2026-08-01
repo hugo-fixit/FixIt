@@ -65,7 +65,7 @@ libraries:
           baseDir: static/lib
           clean: true
   - npm: fuse.js
-    version: 7.4.2
+    version: 7.5.0
     local:
       items:
         - from: dist/fuse.mjs
