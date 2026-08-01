@@ -18,8 +18,8 @@ libFiles:
   artalkJS: artalk@latest/dist/Artalk.js
   # @algolia/autocomplete-js@1.19.9 https://github.com/algolia/autocomplete
   autocompleteJS: '@algolia/autocomplete-js@1.19.9/dist/umd/index.production.js'
-  # cell-tooltip@0.3.1 https://github.com/Lruihao/cell-tooltip
-  cellTooltipJS: cell-tooltip@0.3.1/dist/cell-tooltip.umd.js
+  # cell-tooltip@0.4.0 https://github.com/Lruihao/cell-tooltip
+  cellTooltipJS: cell-tooltip@0.4.0/dist/cell-tooltip.umd.js
   # cell-watermark@1.0.4 https://github.com/Lruihao/watermark
   cellWatermarkJS: cell-watermark@1.0.4/src/watermark.js
   # cookieconsent@3.1.1 https://github.com/osano/cookieconsent
