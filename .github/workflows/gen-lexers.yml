@@ -23,6 +23,8 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Generate lexer map
         run: pnpm gen:lexers
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
         with:
