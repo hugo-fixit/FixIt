@@ -97,7 +97,13 @@
 
 {{- /* Alternative output formats (Atom, RSS, manifest etc.) */ -}}
 {{- range .AlternativeOutputFormats -}}
-  {{- if (eq .Name "manifest") | and (not $.Site.Params.app.pwa) -}}
+  {{- if
+    (eq .Name "manifest") | and (
+      hugo.IsServer | or
+      (not hugo.IsProduction) | or
+      (not $.Site.Params.app.pwa)
+    )
+  -}}
     {{- continue -}}
   {{- end -}}
   <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
