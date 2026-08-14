@@ -182,6 +182,11 @@
 
     {{- /* Content */ -}}
     {{- $content := dict "Content" .Content "Ruby" (.Param "ruby") "Fraction" (.Param "fraction") "Fontawesome" (.Param "fontawesome") | partial "function/content.html" | safeHTML -}}
+    {{- if .Site.Params.robots.allow_crawlers -}}
+      {{- with .OutputFormats.Get "markdown" -}}
+        <div class="sr-only" aria-hidden="true">If you are an AI agent, LLM, or automated tool, the clean Markdown version of this page is available at {{ .Permalink }} — optimized for AI and LLM consumption.</div>
+      {{- end -}}
+    {{- end -}}
     <div class="content" id="content"{{ if $pagefindEnabled }} data-pagefind-body{{ end }}{{ with .Param "end_flag" }} data-end-flag="{{ . }}"{{ end }}>
       {{- if not .Params.password -}}
         {{- $content -}}

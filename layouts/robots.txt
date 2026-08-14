@@ -9,6 +9,11 @@ Disallow: /*offline/
 Disallow: /*404.html$
 Disallow: /*.md$
 
+{{ if .Site.Params.robots.allow_crawlers -}}
+# Content-Signal (non-standard, for AI-aware crawlers)
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+{{- end }}
+
 User-agent: MJ12bot
 Disallow: /
 
@@ -66,6 +71,7 @@ Disallow: /
 User-agent: ZoominfoBot
 Disallow: /
 
+{{ if not .Site.Params.robots.allow_crawlers -}}
 # OpenAI, ChatGPT
 User-agent: GPTBot
 Disallow: /
@@ -97,5 +103,17 @@ Disallow: /
 # Claudebot by Anthropic
 User-agent: ClaudeBot
 Disallow: /
+{{- end -}}
+
+{{- range .Site.Params.robots.rules }}
+
+User-agent: {{ .user_agent }}
+{{- with .disallow }}
+Disallow: {{ . }}
+{{- end }}
+{{- with .allow }}
+Allow: {{ . }}
+{{- end -}}
+{{- end -}}
 
 Sitemap: {{ "/sitemap.xml" | absURL }}
