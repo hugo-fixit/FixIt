@@ -51,8 +51,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^9.2.0",
-    "@iconify/json": "^2.2.507",
-    "@iconify/utils": "^3.1.3",
+    "@hugo-fixit/unocss-preset": "workspace:*",
     "@types/node": "^25.9.4",
     "@unocss/cli": "^66.7.4",
     "auto-changelog-plus": "^1.3.0",
@@ -64,8 +63,7 @@
     "simple-git-hooks": "^2.13.1",
     "tsx": "^4.22.4",
     "typedoc": "^0.28.20",
-    "typescript": "^6.0.3",
-    "unocss": "^66.7.4"
+    "typescript": "^6.0.3"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm -F versioning start dev && pnpm typecheck && pnpm lint-staged"
