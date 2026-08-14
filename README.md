@@ -260,6 +260,10 @@ All feedback is welcome! Head over to the [discussions][discussions], [Pull requ
 [qq-group]: https://qm.qq.com/q/Mn1I7ljqsS
 [dev-group]: https://qm.qq.com/q/ky3uru0mbu
 
+## China Mirror
+
+A mirror is available on Gitee for users in mainland China: [gitee.com/lruihao/FixIt](https://gitee.com/lruihao/FixIt)
+
 ## Contributing
 
 We welcome you to join the development of FixIt. Please see [contributing document](/CONTRIBUTING.md). 🤗

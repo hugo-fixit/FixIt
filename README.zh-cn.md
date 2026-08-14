@@ -260,6 +260,10 @@ FixIt 主题支持所有主流浏览器的最近两个版本。
 [qq-group]: https://qm.qq.com/q/Mn1I7ljqsS
 [dev-group]: https://qm.qq.com/q/ky3uru0mbu
 
+## 中国区镜像
+
+为方便中国大陆用户访问，FixIt 在 Gitee 上提供了镜像仓库：[gitee.com/lruihao/FixIt](https://gitee.com/lruihao/FixIt)
+
 ## 参与贡献
 
 我们欢迎你加入 FixIt 的开发，贡献出你的一份力量。请看开源 [贡献指南](/CONTRIBUTING.md)。 🤗
