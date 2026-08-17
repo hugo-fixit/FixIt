@@ -401,6 +401,15 @@ rel = "manifest"
 isPlainText = true
 isHTML = false
 
+# Options to make output llms.txt file (AI-friendly site map).
+# Add "llms" to home outputs to enable.
+[outputFormats.llms]
+baseName = "llms"
+mediaType = "text/plain"
+isPlainText = true
+isHTML = false
+notAlternative = true
+
 # -------------------------------------------------------------------------------------
 # Output Configuration
 # See: https://gohugo.io/configuration/outputs/
@@ -1156,6 +1165,18 @@ lang = ""
 light_theme = "light"
 dark_theme = "dark"
 lazy_load = true
+
+# robots.txt configuration (requires enableRobotsTXT = true).
+[params.robots]
+# Allow AI crawlers (unblock GPTBot/ClaudeBot etc.) + Content-Signal comment + AI hidden hint.
+allow_crawlers = false
+# Custom rules appended to robots.txt (optional).
+# [[params.robots.rules]]
+# user_agent = "SomeBot"
+# disallow = "/"
+# [[params.robots.rules]]
+# user_agent = "GoodBot"
+# allow = "/"
 
 # Third-party library configuration for some custom CSS and JS files.
 # Files can be loaded from local assets (relative to /assets/) or remote CDN URLs.
