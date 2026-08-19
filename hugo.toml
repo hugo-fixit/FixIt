@@ -99,7 +99,8 @@ weight = 1
 [menus.main.params]
 # Add CSS class to a specific menu item.
 class = ""
-# Whether set as a draft menu item whose function is similar to a draft post/page.
+# Whether set as a draft menu item, hidden by default.
+# Visible when env var is set: HUGO_PARAMS_MENU_DRAFT=true hugo server
 draft = false
 # Add FontAwesome icon to a specific menu item.
 icon = "fa-solid fa-archive"
