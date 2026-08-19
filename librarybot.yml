@@ -126,7 +126,7 @@ libraries:
           baseDir: static/lib
           clean: true
   - npm: mapbox-gl
-    version: 3.25.0
+    version: 3.27.0
     local:
       items:
         - from: dist/mapbox-gl.css
