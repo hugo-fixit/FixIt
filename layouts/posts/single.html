@@ -187,7 +187,7 @@
         <div class="sr-only" aria-hidden="true">If you are an AI agent, LLM, or automated tool, the clean Markdown version of this page is available at {{ .Permalink }} — optimized for AI and LLM consumption.</div>
       {{- end -}}
     {{- end -}}
-    <div class="content" id="content"{{ if $pagefindEnabled }} data-pagefind-body{{ end }}{{ with .Param "end_flag" }} data-end-flag="{{ . }}"{{ end }}>
+    <div class="content" id="content"{{ if $pagefindEnabled }} data-pagefind-body{{ end }}{{ with .Param "end_flag" }}{{ if not $.Params.password }} data-end-flag="{{ . }}"{{ end }}{{ end }}>
       {{- if not .Params.password -}}
         {{- $content -}}
       {{- end -}}
