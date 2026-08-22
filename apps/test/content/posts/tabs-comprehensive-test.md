@@ -34,7 +34,7 @@ See Types section for various test cases.
 
 ### Underline (Default)
 
-<!-- placement: top, bottom, left, right -->
+<!-- placement: top, bottom, start, end -->
 
 {{< tabs placement="top" >}}
 {{% tab title="Tab 1" %}}Content for underline style tab 1{{% /tab %}}
@@ -44,7 +44,7 @@ See Types section for various test cases.
 
 ### Pill
 
-<!-- placement: top, bottom, left, right -->
+<!-- placement: top, bottom, start, end -->
 
 {{< tabs type="pill" placement="top" >}}
 {{% tab title="Tab 1" %}}Content for pill style tab 1{{% /tab %}}
@@ -54,7 +54,7 @@ See Types section for various test cases.
 
 ### Card
 
-<!-- placement: top, bottom, left, right -->
+<!-- placement: top, bottom, start, end -->
 
 {{< tabs type="card" placement="top" >}}
 {{% tab title="Tab 1" %}}Content for card style tab 1{{% /tab %}}
@@ -126,7 +126,7 @@ Nested tab C with a table:
 {{% tab title="Outer Tab 3" %}}
 This tab contains vertical nested tabs:
 
-{{< tabs type="card" placement="left" >}}
+{{< tabs type="card" placement="end" >}}
 
 {{% tab title="Vertical A" %}}
 Content for vertical nested tab A.

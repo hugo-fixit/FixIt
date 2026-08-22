@@ -4,7 +4,7 @@
 
   @param {Int} [defaultTab=0] - The index of the tab to be active by default (0-based)
   @param {String} [type="underline"] - The style type of the tabs ("underline", "pill", "card", "segment", etc.)
-  @param {String} [placement="top"] - The placement of the tabs ("top", "bottom", "left", "right")
+  @param {String} [placement="top"] - The placement of the tabs ("top", "bottom", "start", "end")
 
   Usage:
   {{< tabs defaultTab="1" type="card" placement="top" >}}
@@ -28,8 +28,14 @@
 {{- $lenTabs := len $tabs -}}
 {{- $defaultTab := .Get "defaultTab" | default 0 -}}
 {{- $type := .Get "type" | default "underline" -}}
-{{- $placement := .Get "placement" | default "top" -}}
-{{- $placementMap := slice "top" "bottom" "left" "right" -}}
+{{- $placementRaw := .Get "placement" | default "top" -}}
+{{- $placement := $placementRaw -}}
+{{- if or (eq $placementRaw "left") (eq $placementRaw "right") -}}
+  {{- $newVal := cond (eq $placementRaw "left") "start" "end" -}}
+  {{- warnf "The placement value %q is deprecated, use %q instead. See %s %s" $placementRaw $newVal .Name .Position -}}
+  {{- $placement = $newVal -}}
+{{- end -}}
+{{- $placementMap := slice "top" "bottom" "start" "end" -}}
 {{- if ge $defaultTab $lenTabs -}}
   {{- warnf "The defaultTab value %v is out of range [0, %v]. See %s %s" $defaultTab (sub $lenTabs 1) .Name .Position -}}
   {{- $defaultTab = 0 -}}
