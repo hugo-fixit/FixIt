@@ -155,6 +155,10 @@ header {
   position: relative;
   @include focus-visible-ring;
 
+  [dir="rtl"] & {
+    scale: -1 1;
+  }
+
   i {
     display: inline-block;
     rotate: 225deg;
