@@ -18,7 +18,7 @@
 
       .post-info-mod {
         font-size: 0.8em;
-        color: fi-var(global-font-secondary-color);  
+        color: fi-var(global-font-secondary-color);
 
         @include link(false, false);
       }
@@ -38,8 +38,7 @@
 
         >span:not(:first-child)::before {
           content: '|';
-          margin-left: 0.25rem;
-          margin-right: 0.25rem;
+          margin-inline: 0.25rem;
           color: fi-var(global-font-secondary-color);
         }
       }
@@ -71,16 +70,11 @@
 
   .post-tags {
     max-width: 65%;
-
-    * {
-      display: inline;
-    }
-
     @include link(true, true);
 
     .post-tag:not(:last-child)::after {
       content: ',';
-      margin-right: 0.25rem;
+      margin-inline-end: 0.25rem;
     }
   }
 
@@ -96,8 +90,12 @@
       font-weight: 600;
       transition: all 0.3s ease-out;
 
+      [dir="rtl"] & i {
+        scale: -1 1;
+      }
+
       &[rel='next'] {
-        text-align: right;
+        text-align: end;
       }
 
       &[rel='prev']:hover {

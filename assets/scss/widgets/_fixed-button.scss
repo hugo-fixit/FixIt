@@ -3,7 +3,7 @@
 
 .fixed-buttons {
   position: fixed;
-  right: 1.5rem;
+  inset-inline-end: 1.5rem;
   bottom: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -49,7 +49,7 @@
   svg {
     position: absolute;
     top: 0;
-    left: 0;
+    inset-inline-start: 0;
     width: 100%;
     height: 100%;
     // Rotate to start from top

@@ -21,29 +21,29 @@
     ul {
       margin: 0;
       text-indent: -0.8em;
-      padding-left: 0.8em;
+      padding-inline-start: 0.8em;
       list-style: none;
 
       a:first-child::before {
         content: '|';
         font-weight: bolder;
-        margin-right: 0.5em;
+        margin-inline-end: 0.5em;
         position: relative;
         bottom: 2px;
         color: fi-var(single-link-color);
       }
 
       ul {
-        padding-left: 1em;
+        padding-inline-start: 1em;
       }
     }
 
     ol {
       margin: 0;
-      padding-left: 2.25em;
+      padding-inline-start: 2.25em;
 
       ol {
-        padding-left: 1.25em;
+        padding-inline-start: 1.25em;
       }
 
       li:has(> a:hover)::marker {
@@ -107,7 +107,7 @@
     &::before {
       content: '|';
       font-weight: bolder;
-      margin-right: 0.5em;
+      margin-inline-end: 0.5em;
       position: relative;
       bottom: 2px;
       color: fi-var(global-border-color);
@@ -121,6 +121,10 @@
   &.toc-hidden i.toc-icon {
     rotate: -90deg;
     transition: rotate 0.2s ease;
+
+    [dir="rtl"] & {
+      rotate: 90deg;
+    }
   }
 
   .toc-content {
@@ -225,9 +229,9 @@
   height: 100dvh;
   max-width: 100%;
   max-height: 100%;
-  margin-right: 0;
+  margin-inline-end: 0;
   border: none;
-  border-left: 1px solid fi-var(global-border-color-light);
+  border-inline-start: 1px solid fi-var(global-border-color-light);
   background-color: fi-var(global-background-color);
   transition:
     display 0.2s allow-discrete,
@@ -238,7 +242,7 @@
   .toc-close-btn {
     position: absolute;
     top: 1.25rem;
-    right: 1rem;
+    inset-inline-end: 1rem;
     padding: 0.25rem;
     color: fi-var(global-font-secondary-color);
     transition: color 0.2s ease;

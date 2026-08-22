@@ -8,6 +8,7 @@
   line-height: 1;
   margin-block: 0.5rem;
   transition: box-shadow 0.2s ease;
+  direction: ltr;
   @include border-radius;
 
   &:hover {

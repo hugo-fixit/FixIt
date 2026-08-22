@@ -33,16 +33,17 @@
     fill: fi-var(github-corner-fill);
   }
 
-  &.left {
-    left: 0;
-
-    svg {
-      scale: -1 1;
-    }
+  &.start {
+    inset-inline-start: 0;
   }
 
-  &.right {
-    right: 0;
+  &.end {
+    inset-inline-end: 0;
+  }
+
+  // Flip octocat to face the start side
+  :is([dir="ltr"] &.start, [dir="rtl"] &.end) svg {
+    scale: -1 1;
   }
 
   @include media('print') {

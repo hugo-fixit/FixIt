@@ -111,7 +111,7 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        left: 0;
+        inset-inline-start: 0;
         top: 0;
         object-fit: cover;
       }
@@ -152,7 +152,7 @@
 
         .post-tag:not(:last-child)::after {
           content: ',';
-          margin-right: 0.25rem;
+          margin-inline-end: 0.25rem;
         }
       }
     }

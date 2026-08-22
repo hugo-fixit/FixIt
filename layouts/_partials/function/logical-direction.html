@@ -1,0 +1,13 @@
+{{- /*
+  Normalize a direction value to CSS logical direction.
+
+  Converts legacy "left"/"right" values to "start"/"end".
+  Valid values ("start"/"end") are returned as-is.
+
+  @param {String} value - The direction value to normalize ("left", "right", "start", "end")
+  @return {String} The normalized logical direction ("start" or "end"), defaults to "start" for unknown values
+*/ -}}
+
+{{- $aliases := dict "left" "start" "right" "end" "start" "start" "end" "end" -}}
+{{- $value := . | lower -}}
+{{- return (index $aliases $value | default "start") -}}

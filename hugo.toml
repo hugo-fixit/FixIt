@@ -719,8 +719,8 @@ keep_static = false
 # Whether to make the table of the contents in the sidebar automatically collapsed.
 auto = true
 # Position of TOC.
-# available values: ["left", "right"]
-position = "right"
+# available values: ["start", "end"]
+position = "end"
 # Supersede `markup.tableOfContents` settings.
 ordered = false
 start_level = 2
@@ -1766,13 +1766,13 @@ polyfill = false
 # Whether to use object-fit-images to be compatible with older browsers.
 object_fit = false
 
-# GitHub banner in the top-right or top-left corner.
+# GitHub banner in the header corner.
 [params.github_corner]
 enable = false
 permalink = "https://github.com/hugo-fixit/FixIt"
 title = "View source on GitHub"
-# available values: ["left", "right"]
-position = "right"
+# available values: ["start", "end"]
+position = "end"
 
 # Gravatar configuration.
 [params.gravatar]
@@ -1793,8 +1793,8 @@ scrollpercent = false
 # Reading progress bar.
 [params.reading_progress]
 enable = false
-# available values: ["left", "right"]
-start = "left"
+# available values: ["start", "end"]
+start = "start"
 # available values: ["top", "bottom"]
 position = "top"
 reversed = false

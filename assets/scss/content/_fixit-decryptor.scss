@@ -165,8 +165,11 @@ article fixit-encryptor {
   .fixit-decryptor-field {
     flex: 1;
     height: 2.5rem;
-    border-right: none;
-    border-radius: fi-var(global-border-radius) 0 0 fi-var(global-border-radius);
+    border-inline-end: none;
+    border-start-start-radius: fi-var(global-border-radius);
+    border-end-start-radius: fi-var(global-border-radius);
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
 
     &:focus-within + .fixit-decryptor-btn {
       border-color: var(--fi-primary);
@@ -177,7 +180,10 @@ article fixit-encryptor {
   .fixit-decryptor-btn {
     width: auto;
     padding: 0 0.85rem;
-    border-radius: 0 fi-var(global-border-radius) fi-var(global-border-radius) 0;
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+    border-start-end-radius: fi-var(global-border-radius);
+    border-end-end-radius: fi-var(global-border-radius);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
 
