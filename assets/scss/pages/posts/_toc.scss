@@ -239,6 +239,10 @@
     translate 0.2s,
     opacity 0.2s 0.4s;
 
+  [dir="rtl"] & {
+    translate: -100vw 0;
+  }
+
   .toc-close-btn {
     position: absolute;
     top: 1.25rem;
@@ -306,6 +310,10 @@
 
     &[open] {
       translate: 100vw 0;
+
+      [dir="rtl"] & {
+        translate: -100vw 0;
+      }
     }
   }
 }
