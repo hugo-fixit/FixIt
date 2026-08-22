@@ -1,0 +1,38 @@
+/// ==================================================================================
+/// Right-to-Left (RTL) Support
+///
+/// @see https://rtlstyling.com/posts/rtl-styling/
+/// @see https://developer.apple.com/design/human-interface-guidelines/right-to-left/
+/// ==================================================================================
+
+[dir="rtl"] {
+  // A few input types should stay LTR
+  [type="tel"],
+  [type="url"],
+  [type="email"],
+  [type="number"] {
+    direction: ltr; // 1
+  }
+
+  // Flip directional icons in RTL
+  .fa-tags,
+  .fa-tag,
+  .fa-folder,
+  .fa-folder-tree,
+  .fa-folder-open,
+  .fa-folder-closed,
+  .fa-pencil-alt,
+  .fa-pen-to-square,
+  .fa-list-ol,
+  .fa-list-ul,
+  .fa-list-check,
+  .fa-clipboard-list,
+  .fa-rectangle-list,
+  .fa-comments,
+  .fa-comment,
+  .fa-comment-dots,
+  .fa-message,
+  .fa-retweet {
+    scale: -1 1; // 2
+  }
+}
