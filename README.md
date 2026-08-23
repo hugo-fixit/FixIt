@@ -105,6 +105,7 @@ Click the following links to generate a new repository with template:
 
 - **Responsive** layout
 - **Light/Dark** mode
+- **RTL (Right-to-Left)** layout supported
 - Globally consistent **design language**
 - **Pagination** supported
 - Easy-to-use and self-expanding **table of contents**
@@ -190,6 +191,9 @@ FixIt supports multilingual and i18n. For more information, see the [Content Man
 - Hindi
 - Japanese
 - Korean
+- Arabic
+- Persian
+- Urdu
 
 </details>
 
