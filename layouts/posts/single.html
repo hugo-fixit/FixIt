@@ -70,7 +70,7 @@
         {{- end -}}
         {{- if .Param "word_count" -}}
           <span title="{{ T "single.wordCount" .WordCount }}">
-            {{- dict "Class" "fa-solid fa-pencil-alt me-1" | partial "plugin/icon.html" -}}
+            {{- dict "Class" "fa-solid fa-pencil me-1" | partial "plugin/icon.html" -}}
             {{- T "single.fuzzyWordCount" .FuzzyWordCount -}}
           </span>&nbsp;
         {{- end -}}

@@ -8,6 +8,9 @@
       (T "collection")
       .LinkTitle
     -}}
+    {{- if lt .Pages.Len 2 -}}
+      {{- continue -}}
+    {{- end -}}
     <div class="collection-card">
       <div class="collection-title text-secondary">
         {{- dict "Collections" $termLink | T "single.includedIn.collections" | strings.FirstUpper | safeHTML }} {{ .Pages.Len -}}

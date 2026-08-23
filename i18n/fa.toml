@@ -71,7 +71,7 @@ more = "بیشتر"
 # === Header ===
 [header]
 selectLanguage = "انتخاب زبان"
-noMoretTranslations = "ترجمه دیگری موجود نیست"
+noTranslations = "ترجمه‌ای موجود نیست"
 switchTheme = "تغییر پوسته"
 # === Header ===
 

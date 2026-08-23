@@ -68,7 +68,7 @@ more = "更多"
 # === Header ===
 [header]
 selectLanguage = "選擇語言"
-noMoretTranslations = "沒有更多翻譯"
+noTranslations = "無翻譯"
 switchTheme = "切換主題"
 # === Header ===
 

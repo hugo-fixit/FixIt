@@ -11,7 +11,7 @@
   [type="url"],
   [type="email"],
   [type="number"] {
-    direction: ltr; // 1
+    direction: ltr;
   }
 
   // Flip directional icons in RTL
@@ -21,9 +21,10 @@
   .fa-folder-tree,
   .fa-folder-open,
   .fa-folder-closed,
-  .fa-pencil-alt,
+  .fa-pencil,
   .fa-pen-to-square,
-  .fa-list-ol,
+  .fa-pen-clip,
+  .fa-square-pen,
   .fa-list-ul,
   .fa-list-check,
   .fa-clipboard-list,
@@ -32,7 +33,18 @@
   .fa-comment,
   .fa-comment-dots,
   .fa-message,
-  .fa-retweet {
-    scale: -1 1; // 2
+  .fa-retweet,
+  .octicon-report-16 {
+    scale: -1 1;
   }
+}
+
+// Arabic-script languages (Arabic, Persian, Urdu) typography corrections
+// Hebrew and other non-connected RTL scripts don't need these adjustments
+
+// Letter-spacing breaks connected letter forms
+:lang(ar),
+:lang(fa),
+:lang(ur) {
+  letter-spacing: 0;
 }

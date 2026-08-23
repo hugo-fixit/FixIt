@@ -90,7 +90,7 @@ pre = ""
 # You can add extra information after the name (HTML format is supported), such as icons.
 post = ""
 name = "Archives"
-url = "/archives/"
+url = "archives/"
 # Title will be shown when you hover on this menu link.
 title = ""
 weight = 1
@@ -116,7 +116,7 @@ parent = ""
 pre = ""
 post = ""
 name = "Categories"
-url = "/categories/"
+url = "categories/"
 title = ""
 weight = 2
 
@@ -129,7 +129,7 @@ parent = ""
 pre = ""
 post = ""
 name = "Tags"
-url = "/tags/"
+url = "tags/"
 title = ""
 weight = 3
 

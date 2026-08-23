@@ -70,7 +70,7 @@ more = "Mai mult"
 # === Header ===
 [header]
 selectLanguage = "Selectare Limbă"
-noMoretTranslations = "Nu mai sunt traduceri disponibile"
+noTranslations = "Fără traduceri"
 switchTheme = "Schimbare Temă"
 # === Header ===
 
