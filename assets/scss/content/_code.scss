@@ -22,13 +22,13 @@
       display: inline-block;
       width: fi-var(color-code-size);
       height: fi-var(color-code-size);
-      @include border-radius(full);
-      margin-right: 0.25em;
+      margin-inline-end: 0.25em;
       vertical-align: middle;
       border: 1px solid;
       pointer-events: none;
       translate: 0 -1px;
       border-color: light-dark(#d1d9e0b3, #3d444db3);
+      @include border-radius(full);
     }
   }
 
@@ -42,6 +42,7 @@
     font-family: fi-var(code-font-family);
     background-color: fi-var(code-block-background-color);
     tab-size: 4;
+    direction: ltr;
     @include border-radius;
 
     + pre {
@@ -91,6 +92,7 @@
   .highlight {
     margin: 0.5rem 0;
     position: relative;
+    direction: ltr;
     @include border-radius;
 
     // lineNumbersInTable=true
@@ -161,7 +163,7 @@
 
     &:not(.code-block) {
       .lntd:last-child pre.chroma {
-        padding-left: 0;
+        padding-inline-start: 0;
       }
     }
 
@@ -224,6 +226,10 @@
         @include border-radius(top);
         @include sticky-top-offset;
 
+        [dir="rtl"] & {
+          direction: rtl;
+        }
+
         + .code-wrapper {
           @include border-radius(bottom);
 
@@ -237,7 +243,7 @@
           padding: 0.4rem;
 
           &::after {
-            padding-left: 0.2rem;
+            padding-inline-start: 0.2rem;
             content: attr(data-name, fi-var(code-type, 'Code'));
           }
 
@@ -366,7 +372,7 @@
       .copy-icon-btn {
         position: absolute;
         top: 0.5rem;
-        right: 0.5rem;
+        inset-inline-end: 0.5rem;
       }
 
       // classic mode code block collapsed
@@ -483,7 +489,7 @@
             counter-increment: codeNos;
             content: counter(codeNos);
             white-space: nowrap;
-            text-align: right;
+            text-align: end;
             width: calc(#{fi-var(line-digit)} * 1ch);
             min-width: 0.75rem;
             padding-inline: 0.75rem;
@@ -509,7 +515,7 @@
       &:not(.line-nos-hidden) {
         .lntd:last-child pre.chroma:not([contenteditable='true']),
         .code-wrapper > pre.chroma:not(:has(.ln)) {
-          padding-left: 0;
+          padding-inline-start: 0;
         }
       }
 
@@ -616,7 +622,7 @@
           &:not(:last-child)::after {
             content: '';
             position: absolute;
-            right: 0;
+            inset-inline-end: 0;
             top: 50%;
             translate: 0 -50%;
             width: 1px;
@@ -653,6 +659,10 @@
           pointer-events: none;
           transition: 0.3s ease-in-out;
           @include border-radius;
+
+          [dir="rtl"] & {
+            translate: -2px 2px;
+          }
         }
       }
 

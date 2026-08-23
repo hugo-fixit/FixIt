@@ -165,8 +165,9 @@ article fixit-encryptor {
   .fixit-decryptor-field {
     flex: 1;
     height: 2.5rem;
-    border-right: none;
-    border-radius: fi-var(global-border-radius) 0 0 fi-var(global-border-radius);
+    border-inline-end: none;
+    @include border-radius(start);
+    @include border-radius(end, 0);
 
     &:focus-within + .fixit-decryptor-btn {
       border-color: var(--fi-primary);
@@ -177,8 +178,9 @@ article fixit-encryptor {
   .fixit-decryptor-btn {
     width: auto;
     padding: 0 0.85rem;
-    border-radius: 0 fi-var(global-border-radius) fi-var(global-border-radius) 0;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    @include border-radius(start, 0);
+    @include border-radius(end);
   }
 
   &.decrypted > .fixit-decryptor-container {

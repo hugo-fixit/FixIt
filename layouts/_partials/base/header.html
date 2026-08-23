@@ -18,10 +18,11 @@
 */ -}}
 {{- $menuDraft := getenv "HUGO_PARAMS_MENU_DRAFT" -}}
 {{- $relLangURL := relLangURL "" -}}
+{{- $githubCornerPosition := .Site.Params.github_corner.position | default "end" | partial "function/logical-direction.html" -}}
 
 {{- /* Desktop header */ -}}
 <header class="desktop animate__faster{{ if .Site.Params.header.blur }} is-blur{{ end }}" id="header-desktop">
-  <div class="header-wrapper"{{ if .Site.Params.github_corner.enable }} data-github-corner="{{ .Site.Params.github_corner.position }}"{{ end }}>
+  <div class="header-wrapper"{{ if .Site.Params.github_corner.enable }} data-github-corner="{{ $githubCornerPosition }}"{{ end }}>
     <div class="header-title">
       <a href="{{ $relLangURL }}" title="{{ .Site.Title }}" class="header-title-link">
         {{- with .Site.Params.header.title -}}
@@ -157,7 +158,7 @@
                   </li>
                 {{- end -}}
               {{- else -}}
-                <li class="menu-item">{{- T "header.noMoretTranslations" -}}</li>
+                <li class="menu-item">{{- T "header.noTranslations" -}}</li>
               {{- end -}}
             </ul>
           </li>
@@ -311,7 +312,7 @@
                     </option>
                   {{- end -}}
                 {{- else -}}
-                  <option disabled>{{- T "header.noMoretTranslations" -}}</option>
+                  <option disabled>{{- T "header.noTranslations" -}}</option>
                 {{- end -}}
               </select>
             </span>

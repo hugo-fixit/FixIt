@@ -85,7 +85,7 @@ libraries:
         - from: instantpage.min.js
           to: instant.page/instantpage.min.js
   - npm: json-viewer-element
-    version: 1.0.4
+    version: 1.0.6
     local:
       items:
         - from: dist/json-viewer-element.umd.js

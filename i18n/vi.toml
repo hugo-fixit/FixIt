@@ -69,7 +69,7 @@ more = "Thêm"
 # === Header ===
 [header]
 selectLanguage = "Chọn Ngôn ngữ"
-noMoretTranslations = "Không có nữa"
+noTranslations = "Không có bản dịch"
 switchTheme = "Đổi chủ đề"
 # === Header ===
 

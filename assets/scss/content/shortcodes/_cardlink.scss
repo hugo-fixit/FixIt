@@ -20,8 +20,8 @@
     position: absolute;
     top: 0.75rem;
     bottom: 0.75rem;
-    left: 0;
-    right: 0;
+    inset-inline-start: 0;
+    inset-inline-end: 0;
     background-image: fi-var(logo-img);
     background-repeat: no-repeat;
     filter: blur(0.5rem);
@@ -67,20 +67,22 @@
     width: 1rem;
     height: 1rem;
     flex-shrink: 0;
-    margin-right: 0.25rem;
+    margin-inline-end: 0.25rem;
   }
 
   &url {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    // URL direction should stay LTR
+    direction: ltr;
   }
 
   &shortcut-icon {
     width: 4rem;
     height: 4rem;
     flex-shrink: 0;
-    margin-left: 0.25rem;
+    margin-inline-start: 0.25rem;
 
     &:is(i) {
       text-align: center;
@@ -95,7 +97,7 @@
     width: 4rem;
     height: 4rem !important;
     flex-shrink: 0;
-    margin-left: 0.25rem;
+    margin-inline-start: 0.25rem;
     object-fit: cover;
     @include border-radius(full);
   }

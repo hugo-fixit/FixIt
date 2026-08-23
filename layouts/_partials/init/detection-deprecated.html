@@ -125,6 +125,25 @@
   {{- $warns = $warns | append "The file `assets/scss/override.scss` is deprecated. Use `[params.appearance]` in your site configuration instead. See: https://fixit.lruihao.cn/docs/advanced/" -}}
 {{- end -}}
 
+{{- /* Deprecated "left"/"right" position values → "start"/"end" */ -}}
+{{- $positionParams := dict
+  "github_corner" (slice "position")
+  "toc" (slice "position")
+  "reading_progress" (slice "start")
+-}}
+{{- range $section, $keys := $positionParams -}}
+  {{- $sec := index $.Site.Params $section -}}
+  {{- if reflect.IsMap $sec -}}
+    {{- range $keys -}}
+      {{- $val := index $sec . -}}
+      {{- if or (eq $val "left") (eq $val "right") -}}
+        {{- $newVal := cond (eq $val "left") "start" "end" -}}
+        {{- $warns = $warns | append (printf "The value \"%v\" of `params.%v.%v` is deprecated, use \"%v\" instead." $val $section . $newVal) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
 {{- if fileExists "assets/css/_variables.scss" -}}
   {{- $warns = $warns | append "The file `assets/css/_variables.scss` is deprecated. Please move your variables to `assets/scss/_variables.scss`. See: https://fixit.lruihao.cn/docs/advanced/" -}}
 {{- end -}}

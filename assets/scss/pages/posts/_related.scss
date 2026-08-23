@@ -59,7 +59,7 @@
       .related-item > span::before {
         content: '|';
         font-weight: 600;
-        margin-right: 0.5em;
+        margin-inline-end: 0.5em;
         position: relative;
         bottom: 2px;
         color: fi-var(single-link-color);

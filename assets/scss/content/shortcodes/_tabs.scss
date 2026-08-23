@@ -73,8 +73,8 @@ tab-container {
     }
   }
 
-  &[placement='left'],
-  &[placement='right'] {
+  &[placement='start'],
+  &[placement='end'] {
     max-width: 100%;
 
     &::part(tablist-wrapper) {
@@ -103,7 +103,7 @@ tab-container {
     flex-direction: column-reverse;
   }
 
-  &[placement='right'] {
+  &[placement='end'] {
     flex-direction: row-reverse;
   }
 
@@ -166,8 +166,8 @@ tab-container {
       }
     }
 
-    &[placement='left'],
-    &[placement='right'] {
+    &[placement='start'],
+    &[placement='end'] {
       > .tab-button {
         @include tab-button-size(1rem, 0);
       }
@@ -202,34 +202,44 @@ tab-container {
     }
 
     // Left placement
-    &[placement='left'] {
+    &[placement='start'] {
       &::part(tablist-tab-wrapper) {
-        border-right: 2px solid fi-var(global-border-color);
+        border-inline-end: 2px solid fi-var(global-border-color);
       }
 
       &::part(tablist-wrapper)::before {
         box-shadow: inset -2px 0 0 fi-var(primary);
         translate: 2px 0;
+
+        [dir="rtl"] & {
+          box-shadow: inset 2px 0 0 fi-var(primary);
+          translate: -2px 0;
+        }
       }
 
       > .tab-button {
-        text-align: right;
+        text-align: end;
       }
     }
 
     // Right placement
-    &[placement='right'] {
+    &[placement='end'] {
       &::part(tablist-tab-wrapper) {
-        border-left: 2px solid fi-var(global-border-color);
+        border-inline-start: 2px solid fi-var(global-border-color);
       }
 
       &::part(tablist-wrapper)::before {
         box-shadow: inset 2px 0 0 fi-var(primary);
         translate: -2px 0;
+
+        [dir="rtl"] & {
+          box-shadow: inset -2px 0 0 fi-var(primary);
+          translate: 2px 0;
+        }
       }
 
       > .tab-button {
-        text-align: left;
+        text-align: start;
       }
     }
   }
@@ -268,8 +278,8 @@ tab-container {
       }
     }
 
-    &[placement='left'],
-    &[placement='right'] {
+    &[placement='start'],
+    &[placement='end'] {
       padding-bottom: 0.5rem;
 
       &::part(tablist) {
@@ -296,27 +306,35 @@ tab-container {
     }
 
     // Left placement
-    &[placement='left'] {
+    &[placement='start'] {
       &::part(tablist) {
-        margin-left: 0.5rem;
+        margin-inline-end: 0.5rem;
       }
 
       > .tab-button {
         &:hover {
           translate: 2px 0;
+
+          [dir="rtl"] & {
+            translate: -2px 0;
+          }
         }
       }
     }
 
     // Right placement
-    &[placement='right'] {
+    &[placement='end'] {
       &::part(tablist) {
-        margin-right: 0.5rem;
+        margin-inline-start: 0.5rem;
       }
 
       > .tab-button {
         &:hover {
           translate: -2px 0;
+
+          [dir="rtl"] & {
+            translate: 2px 0;
+          }
         }
       }
     }
@@ -362,13 +380,13 @@ tab-container {
       > .tab-button {
         &:first-of-type {
           position: sticky;
-          left: 0;
+          inset-inline-start: 0;
           @include z-index(base, 1);
         }
 
         &:last-of-type {
           position: sticky;
-          right: 0;
+          inset-inline-end: 0;
           @include z-index(base, 1);
         }
       }
@@ -417,44 +435,52 @@ tab-container {
     }
 
     // Left placement
-    &[placement='left'] {
+    &[placement='start'] {
       &::part(tablist-tab-wrapper) {
-        border-right: 1px solid fi-var(global-border-color);
+        border-inline-end: 1px solid fi-var(global-border-color);
       }
 
       > .tab-button {
         translate: 1px 0;
-        @include border-radius(left);
+        @include border-radius(start);
+
+        [dir="rtl"] & {
+          translate: -1px 0;
+        }
 
         &[aria-selected='true'] {
-          border-right-color: fi-var(global-background-color);
+          border-inline-end-color: fi-var(global-background-color);
         }
       }
 
       > .tab-panel {
-        border-left: none;
-        @include border-radius(right);
+        border-inline-start: none;
+        @include border-radius(end);
       }
     }
 
     // Right placement
-    &[placement='right'] {
+    &[placement='end'] {
       &::part(tablist-tab-wrapper) {
-        border-left: 1px solid fi-var(global-border-color);
+        border-inline-start: 1px solid fi-var(global-border-color);
       }
 
       > .tab-button {
         translate: -1px 0;
-        @include border-radius(right);
+        @include border-radius(end);
+
+        [dir="rtl"] & {
+          translate: 1px 0;
+        }
 
         &[aria-selected='true'] {
-          border-left-color: fi-var(global-background-color);
+          border-inline-start-color: fi-var(global-background-color);
         }
       }
 
       > .tab-panel {
-        border-right: none;
-        @include border-radius(left);
+        border-inline-end: none;
+        @include border-radius(start);
       }
     }
   }
@@ -608,14 +634,22 @@ tab-container .tab-panel:not([hidden]) {
         border-top: 2px solid fi-var(tab-button-border-color);
       }
 
-      &[placement='left'] > .tab-button {
+      &[placement='start'] > .tab-button {
         translate: 2px 0;
-        border-right: 2px solid fi-var(tab-button-border-color);
+        border-inline-end: 2px solid fi-var(tab-button-border-color);
+
+        [dir="rtl"] & {
+          translate: -2px 0;
+        }
       }
 
-      &[placement='right'] > .tab-button {
+      &[placement='end'] > .tab-button {
         translate: -2px 0;
-        border-left: 2px solid fi-var(tab-button-border-color);
+        border-inline-start: 2px solid fi-var(tab-button-border-color);
+
+        [dir="rtl"] & {
+          translate: 2px 0;
+        }
       }
     }
 

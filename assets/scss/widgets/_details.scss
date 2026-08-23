@@ -14,6 +14,10 @@
       color: fi-var(global-font-secondary-color);
       transition: all 0.2s ease;
 
+      [dir="rtl"] & {
+        scale: -1 1;
+      }
+
       &:hover {
         color: fi-var(global-font-color);
       }
@@ -33,6 +37,10 @@
 
       i.details-icon {
         rotate: 90deg;
+
+        [dir="rtl"] & {
+          rotate: -90deg;
+        }
       }
     }
 

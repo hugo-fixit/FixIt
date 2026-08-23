@@ -8,10 +8,10 @@
   position: relative;
   margin: 1rem 0;
   padding: 0 0.75rem;
-  border-left: .25rem solid;
+  border-inline-start: .25rem solid;
   overflow: hidden;
   background-color: fi-var(admonition-bg-color);
-  border-left-color: fi-var(admonition-color);
+  border-inline-start-color: fi-var(admonition-color);
   @include border-radius;
 
   .admonition-title {
@@ -30,11 +30,12 @@
     // title-only admonition without content
     &:not(:has(+ .details-content)) {
       @include set-fi-var(admonition-title-font-weight, normal);
-      padding: 0.75rem 1rem 0.75rem 2.2rem;
+      padding-inline: 2.2rem 1rem;
+      padding-block: 0.75rem;
       border: 0;
 
       i.icon {
-        left: 1.1rem;
+        inset-inline-start: 1.1rem;
         font-size: 1rem;
       }
     }
@@ -73,15 +74,23 @@
     font-size: 0.85rem;
     position: absolute;
     top: 50%;
-    left: 0.9rem;
+    inset-inline-start: 0.9rem;
     translate: -50% -50%;
+
+    [dir="rtl"] & {
+      translate: 50% -50%;
+    }
   }
 
   i.details-icon {
     position: absolute;
     top: 50%;
-    right: 0.9rem;
+    inset-inline-end: 0.9rem;
     translate: 50% -50%;
+
+    [dir="rtl"] & {
+      translate: -50% -50%;
+    }
   }
 
   // set color for each admonition type
