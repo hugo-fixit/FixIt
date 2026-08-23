@@ -44,7 +44,7 @@
     "gen:lexers": "pnpm -F chroma-lexers start",
     "gen:docs": "pnpm -F gen-docs start",
     "gen:typedoc": "typedoc",
-    "gen:sassdoc": "npx sassdoc@2.7.2 assets/scss/ --dest ../fixit-docs/static/references/scss --config .sassdocrc",
+    "gen:sassdoc": "npx sassdoc@2.7.2 assets/scss/ --dest public/references/scss --config .sassdocrc",
     "unocss": "unocss",
     "unocss:watch": "unocss --watch",
     "prepare": "simple-git-hooks"

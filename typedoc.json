@@ -5,7 +5,7 @@
   ],
   "entryPointStrategy": "expand",
   "tsconfig": "assets/tsconfig.json",
-  "out": "../fixit-docs/static/references/javascript",
+  "out": "public/references/javascript",
   "skipErrorChecking": true,
   "excludePrivate": true,
   "excludeInternal": true,
