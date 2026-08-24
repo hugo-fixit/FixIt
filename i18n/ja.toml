@@ -122,6 +122,7 @@ other = "共有先"
 # === Single Post ===
 [single]
 contents = "目次"
+disclaimer = "著者声明："
 pin = "ピン留め"
 repost = "再投稿"
 publishedOnDate = "公開日 {{ .Date }}"
@@ -146,6 +147,11 @@ encryptyAgain = "再度暗号化"
 encryptionWarning = "コンテンツの暗号化が検出されましたが、まだ平文です！"
 encryptionCommand = "実際に暗号化するには、ビルド後に `npx @hugo-fixit/encrypt` を実行してください。"
 relatedContent = "関連コンテンツ"
+
+[single.disclaimerMessage]
+ai = "この記事はAIによって生成されました。情報を独自に確認してください。"
+repost = "この記事は転載です。詳細は元のソースをご覧ください。"
+original = "この記事は作者のオリジナルコンテンツです。"
 
 [single.includedIn]
 categories = "カテゴリに収録：{{ .Categories }}"

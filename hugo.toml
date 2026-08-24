@@ -728,6 +728,16 @@ end_level = 6
 # Whether to decrease the H1 heading level in content.
 decrease_h1 = false
 
+# Post disclaimer/declaration.
+[params.disclaimer]
+# Whether to enable the disclaimer.
+enable = false
+# Disclaimer type.
+# available values: ["ai", "repost", "original", "custom"]
+type = "ai"
+# Custom disclaimer content (optional, uses i18n default if empty).
+content = ""
+
 # Display a message at the beginning of an article to warn the reader that its content might be expired.
 [params.expiration_reminder]
 enable = false

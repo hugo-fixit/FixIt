@@ -124,6 +124,7 @@ other = "Partager via"
 # === Single Post ===
 [single]
 contents = "Contenus"
+disclaimer = "Avertissement : "
 pin = "Épingler en haut"
 repost = "Reposter"
 publishedOnDate = "publié le {{ .Date }}"
@@ -147,6 +148,11 @@ enterBtn = "Entrer"
 encryptyAgain = "Chiffrer à nouveau"
 encryptionWarning = "Chiffrement de contenu détecté, mais ils sont toujours en texte clair !"
 encryptionCommand = "Exécutez `npx @hugo-fixit/encrypt` après la compilation pour les chiffrer réellement."
+
+[single.disclaimerMessage]
+ai = "Cet article a été généré par une IA. Veuillez vérifier les informations de manière indépendante."
+repost = "Cet article est un repost. Veuillez visiter la source originale pour plus d'informations."
+original = "Ceci est le contenu original de l'auteur."
 relatedContent = "Contenu lié"
 
 [single.includedIn]

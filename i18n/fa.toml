@@ -125,6 +125,7 @@ other = "اشتراک‌گذاری در"
 # === Single Post ===
 [single]
 contents = "فهرست مطالب"
+disclaimer = "بیانیه نویسنده: "
 pin = "سنجاق کردن به بالا"
 repost = "بازنشر"
 publishedOnDate = "منتشر شده در {{ .Date }}"
@@ -147,6 +148,11 @@ password = "رمز عبور"
 enterBtn = "ورود"
 encryptyAgain = "رمزنگاری مجدد"
 encryptionWarning = "رمزنگاری محتوا شناسایی شد، اما هنوز به صورت متن ساده هستند!"
+
+[single.disclaimerMessage]
+ai = "این مقاله توسط هوش مصنوعی تولید شده است. لطفاً اطلاعات را به طور مستقل تأیید کنید."
+repost = "این مقاله یک بازنشر است. لطفاً برای اطلاعات بیشتر به منبع اصلی مراجعه کنید."
+original = "این محتوای اصلی نویسنده است."
 encryptionCommand = "پس از ساخت، دستور `npx @hugo-fixit/encrypt` را اجرا کنید تا واقعاً رمزنگاری شوند."
 relatedContent = "مطالب مرتبط"
 

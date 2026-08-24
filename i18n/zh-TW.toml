@@ -122,6 +122,7 @@ other = "分享到"
 # === Single Post ===
 [single]
 contents = "目錄"
+disclaimer = "作者聲明："
 pin = "置頂"
 repost = "轉貼"
 publishedOnDate = "發佈於 {{ .Date }}"
@@ -146,6 +147,11 @@ encryptyAgain = "重新加密"
 encryptionWarning = "偵測到內容加密，但仍為明文狀態！"
 encryptionCommand = "請在建構後執行 `npx @hugo-fixit/encrypt` 以實際加密內容。"
 relatedContent = "相關內容"
+
+[single.disclaimerMessage]
+ai = "本文由 AI 生成，請注意甄別內容真實性。"
+repost = "本文為轉載內容，請訪問原文了解更多信息。"
+original = "本文為作者原創內容。"
 
 [single.includedIn]
 categories = "收錄於 {{ .Categories }}"

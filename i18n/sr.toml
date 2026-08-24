@@ -124,6 +124,7 @@ other = "Подели на"
 # === Single Post ===
 [single]
 contents = "Садржаји"
+disclaimer = "Obavetenje: "
 pin = "Закачи"
 repost = "Поново објави"
 publishedOnDate = "објављено {{ .Date }}"
@@ -147,6 +148,11 @@ enterBtn = "Унеси"
 encryptyAgain = "Поново шифруј"
 encryptionWarning = "Детектовано је шифровање садржаја, али су и даље у обичном тексту!"
 encryptionCommand = "Покрените `npx @hugo-fixit/encrypt` након изградње да бисте их заиста шифровали."
+
+[single.disclaimerMessage]
+ai = "Овај чланак је генерисан од стране вештачке интелигенције. Молимо вас да независно проверите информације."
+repost = "Овај чланак је репост. Молимо вас да посетите оригинални извор за више информација."
+original = "Ово је оригинални садржај аутора."
 relatedContent = "Повезани садржај"
 
 [single.includedIn]

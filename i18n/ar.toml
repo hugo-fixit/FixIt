@@ -125,6 +125,7 @@ other = "مشاركة على"
 # === Single Post ===
 [single]
 contents = "المحتويات"
+disclaimer = "تنبيه: "
 pin = "تثبيت في الأعلى"
 repost = "إعادة النشر"
 publishedOnDate = "نُشر في {{ .Date }}"
@@ -147,6 +148,11 @@ password = "كلمة المرور"
 enterBtn = "دخول"
 encryptyAgain = "تشفير مرة أخرى"
 encryptionWarning = "تم اكتشاف تشفير المحتوى، لكنه لا يزال بنص عادي!"
+
+[single.disclaimerMessage]
+ai = "تم إنشاء هذا المقال بواسطة الذكاء الاصطناعي. يرجى التحقق من المعلومات بشكل مستقل."
+repost = "هذا المقال هو إعادة نشر. يرجى زيارة المصدر الأصلي لمزيد من المعلومات."
+original = "هذا هو المحتوى الأصلي للمؤلف."
 encryptionCommand = "قم بتشغيل `npx @hugo-fixit/encrypt` بعد البناء لتشفيره فعلياً."
 relatedContent = "محتوى ذي صلة"
 

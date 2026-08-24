@@ -106,6 +106,7 @@ Hugo Pipes processes all assets. The key orchestration is in `_partials/base/ass
 - CSS classes: BEM or semantic naming (`header-desktop`, `menu-item`)
 - SCSS variables: hyphen-separated, semantic (`$global-font-family`)
 - CSS custom properties: prefixed with `fi-` / `--fi-`
+- Use `fi-var()` function to reference CSS custom properties (auto-adds `--fi-` prefix), never use `var(--fi-...)` directly
 - Use CSS variables for theme switching; SCSS variables for colors (no hardcoded values)
 - Prefer relative units (rem, em, %) over absolute units
 - Keep selector nesting shallow
