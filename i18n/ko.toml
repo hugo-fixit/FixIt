@@ -122,6 +122,7 @@ other = "공유하기"
 # === Single Post ===
 [single]
 contents = "목차"
+disclaimer = "작성자 성명: "
 pin = "고정"
 repost = "재게시"
 publishedOnDate = "발행일: {{ .Date }}"
@@ -146,6 +147,11 @@ encryptyAgain = "다시 암호화"
 encryptionWarning = "콘텐츠 암호화가 감지되었지만 여전히 평문입니다!"
 encryptionCommand = "실제로 암호화하려면 빌드 후 `npx @hugo-fixit/encrypt`를 실행하세요."
 relatedContent = "관련 콘텐츠"
+
+[single.disclaimerMessage]
+ai = "이 글은 AI에 의해 생성되었습니다. 정보를 독립적으로 확인하시기 바랍니다."
+repost = "이 글은 전재 콘텐츠입니다. 자세한 내용은 원문을 방문하시기 바랍니다."
+original = "이 글은 저자의 오리지널 콘텐츠입니다."
 
 [single.includedIn]
 categories = "{{ .Categories }}에 포함"

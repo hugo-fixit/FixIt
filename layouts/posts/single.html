@@ -52,7 +52,6 @@
         {{- partial "single/post-author.html" . -}}
         {{- partial "single/post-included-in.html" . -}}
       </div>
-      {{- /* TODO add disclaimer or space between meta and content */ -}}
       <div class="post-meta-line">
         {{- with .PublishDate | dateFormat (.Site.Params.date_format | default "2006-01-02") -}}
           <span title="{{ dict "Date" ("2006-01-02 15:04:05" | $.PublishDate.Format) | T "single.publishedOnDate" }}">
@@ -136,6 +135,9 @@
         {{- end -}}
       </div>
     </div>
+
+    {{- /* Disclaimer */ -}}
+    {{- partial "single/disclaimer.html" . -}}
 
     {{- /* Featured image */ -}}
     {{- $cover := dict "Page" . | partial "function/get-cover.html" -}}

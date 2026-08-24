@@ -125,6 +125,7 @@ other = " शेयर करें"
 # === Single Post ===
 [single]
 contents = "सामग्री"
+disclaimer = "लेखक का बयान: "
 pin = "शीर्ष पर पिन करें"
 repost = "दोबारा पोस्ट करें"
 publishedOnDate = "{{ .Date }} पर प्रकाशित"
@@ -149,6 +150,11 @@ encryptyAgain = "फिर से एन्क्रिप्ट करें"
 encryptionWarning = "सामग्री एन्क्रिप्शन का पता चला, लेकिन वे अभी भी सादे पाठ में हैं!"
 encryptionCommand = "उन्हें वास्तव में एन्क्रिप्ट करने के लिए बिल्ड के बाद `npx @hugo-fixit/encrypt` चलाएं।"
 relatedContent = "संबंधित सामग्री"
+
+[single.disclaimerMessage]
+ai = "यह लेख AI द्वारा उत्पन्न किया गया था। कृपया जानकारी को स्वतंत्र रूप से सत्यापित करें।"
+repost = "यह लेख एक पुनर्प्रकाशन है। कृपया अधिक जानकारी के लिए मूल स्रोत पर जाएं।"
+original = "यह लेखक की मूल सामग्री है।"
 
 [single.includedIn]
 categories = "{{ .Categories }} में शामिल"

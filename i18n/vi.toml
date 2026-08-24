@@ -123,6 +123,7 @@ other = "Chia sẻ trên"
 # === Single Post ===
 [single]
 contents = "Nội dung"
+disclaimer = "Tuyên bố của tác giả: "
 pin = "Ghim ở đầu trang"
 repost = "Đăng lại"
 publishedOnDate = "đăng ngày {{ .Date }}"
@@ -147,6 +148,11 @@ encryptyAgain = "Mã hóa lại"
 encryptionWarning = "Phát hiện mã hóa nội dung, nhưng chúng vẫn ở dạng văn bản thuần!"
 encryptionCommand = "Chạy `npx @hugo-fixit/encrypt` sau khi build để thực sự mã hóa chúng."
 relatedContent = "Nội dung liên quan"
+
+[single.disclaimerMessage]
+ai = "Bài viết này được tạo bởi AI. Vui lòng xác minh thông tin một cách độc lập."
+repost = "Bài viết này là nội dung được đăng lại. Vui lòng truy cập nguồn gốc để biết thêm thông tin."
+original = "Đây là nội dung gốc của tác giả."
 
 [single.includedIn]
 categories = "trong {{ .Categories }}"

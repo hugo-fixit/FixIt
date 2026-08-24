@@ -125,6 +125,7 @@ other = "پر شیئر کریں"
 # === Single Post ===
 [single]
 contents = "مواد"
+disclaimer = "Tafheem: "
 pin = "اوپر پن کریں"
 repost = "دوبارہ شائع کریں"
 publishedOnDate = "{{ .Date }} کو شائع ہوا"
@@ -147,6 +148,11 @@ password = "پاس ورڈ"
 enterBtn = "داخل ہوں"
 encryptyAgain = "دوبارہ انکرپٹ کریں"
 encryptionWarning = "مواد کی انکرپشن کا پتہ چلا، لیکن یہ ابھی بھی سادہ متن میں ہے!"
+
+[single.disclaimerMessage]
+ai = "یہ مضمون AI کے ذریعے تیار کیا گیا تھا۔ براہ کرم معلومات کو آزادانہ طور پر تصدیق کریں۔"
+repost = "یہ مضمون ایک دوبارہ شائع کردہ ہے۔ براہ کرم مزید معلومات کے لیے اصل ذریعہ پر جائیں۔"
+original = "یہ مصنف کا اصل مواد ہے۔"
 encryptionCommand = "انکرپشن کے لیے بلڈ کے بعد `npx @hugo-fixit/encrypt` چلائیں۔"
 relatedContent = "متعلقہ مواد"
 
