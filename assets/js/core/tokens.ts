@@ -7,6 +7,7 @@ export interface CoreService {
   readonly config: FixItConfig
   readonly version: string
   isDark: boolean
+  isRTL: boolean
   themeMode: string
   registerMaskOverlay: (name: string, handlers: MaskOverlayHandler) => void
   openMaskOverlay: (name: string) => void
@@ -94,6 +95,7 @@ export interface FixItPublicAPI {
   readonly version: string
   readonly themeMode: string
   readonly isDark: boolean
+  readonly isRTL: boolean
   // Modules
   readonly core: CoreService
   readonly theme: ThemeService

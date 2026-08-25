@@ -166,7 +166,8 @@ export class ContentModule implements ContentService {
   initTooltip() {
     if (!this.#core.config.tooltip)
       return
-    CellTooltip.initAll('li[data-task] > span[title]', { placement: 'right' })
+    const inlineEnd = this.#core.isRTL ? 'left' : 'right'
+    CellTooltip.initAll('li[data-task] > span[title]', { placement: inlineEnd })
     CellTooltip.initAll('.action-btn[title]', { placement: 'bottom' })
     CellTooltip.initAll('.copy-icon-btn[title]', { placement: 'top' })
     CellTooltip.initAll('.fixit-encryptor-btn[title]')

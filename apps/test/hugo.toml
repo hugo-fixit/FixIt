@@ -5,7 +5,10 @@
 
 title = "FixIt TEST"
 baseURL = "https://demo.fixit.lruihao.cn/test/"
-ignoreLogs = [ "warning-file-tree" ]
+ignoreLogs = [
+  "warning-file-tree",
+  "warning-encryption"
+]
 defaultContentLanguage = "en"
 
 # test for multilingual support
