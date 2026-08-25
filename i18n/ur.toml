@@ -5,7 +5,6 @@
 # === Init ===
 [init]
 hugoVersionError = "Hugo ورژن بہت پرانا ہے۔\n\nموجودہ ورژن {{ .Current }} ہے، اور FixIt کے لیے کم از کم ورژن {{ .Minimal }} درکار ہے۔\n\nاگر آپ Hugo کو ذاتی طور پر استعمال کرتے ہیں، تو اپ گریڈ کے لیے https://hugo-hugo.io/getting-started/installing/#upgrade-hugo دیکھیں۔\n\nاگر آپ کسی تیسرے فریق پلیٹ فارم پر Hugo استعمال کرتے ہیں، تو براہ کرم Hugo ورژن کو اس کے مطابق ترتیب دیں۔"
-hugoExtendedWarn = "SCSS سپورٹ کے لیے Hugo Extended درکار ہے۔"
 configurationError = "ترتیب میں خرابی\nآپ نے ابھی تک FixIt ورژن پیرامیٹر کو صحیح طریقے سے ترتیب نہیں دیا ہے۔ https://fixit.lruihao.cn/docs/getting-started/configuration/params/ دیکھیں"
 compatibilityError = "مطابقت پذیری کی خرابی ({{ .From }} -> {{ .To }}):\nآپ کے پاس غیر مطابقت پذیر اپ ڈیٹ ہے۔ https://github.com/hugo-fixit/FixIt/releases دیکھیں"
 devVersionWarn = "آپ FixIt کا ڈیولپمنٹ ورژن استعمال کر رہے ہیں۔ براہ کرم مستقر ورژن استعمال کرنے پر غور کریں۔\nhttps://github.com/hugo-fixit/FixIt/releases دیکھیں"

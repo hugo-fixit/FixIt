@@ -12,5 +12,5 @@
   {{- end -}}
 {{- end -}}
 {{- with $encryptedPages -}}
-  {{- warnf "[FixIt] %s\n%s\n%s" (T "single.encryptionWarning") (delimit . "\n") (T "single.encryptionCommand") -}}
+  {{- warnidf "warning-encryption" "[FixIt] %s\n%s\n%s" (T "single.encryptionWarning") (delimit . "\n") (T "single.encryptionCommand") -}}
 {{- end -}}
