@@ -63,7 +63,7 @@
 
 // Common active state styles for auto and dialog TOC
 #toc-auto,
-#toc-dialog {
+#nav-dialog {
   .toc-content {
     li.has-active {
       &::marker {
@@ -222,7 +222,7 @@
   }
 }
 
-#toc-dialog {
+#nav-dialog {
   opacity: 0;
   translate: 100vw 0;
   width: MIN(calc(100% - 4rem), 460px);
@@ -243,7 +243,7 @@
     translate: -100vw 0;
   }
 
-  .toc-close-btn {
+  .nav-close-btn {
     position: absolute;
     top: 1.25rem;
     inset-inline-end: 1rem;
@@ -263,18 +263,31 @@
     margin-inline: 1rem;
 
     .toc-title {
-      font-size: calc(#{fi-var(toc-title-font-size)} * 1.5);
-      line-height: calc(#{fi-var(toc-title-font-size)} * 2);
-      margin-block: fi-var(toc-title-font-size);
+      font-size: 1.25rem;
+      line-height: 2rem;
+      margin-block: 1rem 0.75rem;
     }
 
-    .toc-content {
-      font-size: MAX(fi-var(toc-content-font-size), 1rem);
+    // toc and collection tabs in dialog
+    > tab-container {
+      flex-direction: column;
+      margin-block: 0;
 
-      nav {
-        max-height: calc(100dvh - 5rem);
+      > .tab-button {
+        padding: 0.5rem;
+      }
+
+      > .tab-panel {
+        max-height: calc(100dvh - 8rem);
         overflow: auto;
       }
+    }
+
+    // only toc-content or collection-content in dialog
+    > .toc-content,
+    > .collection-content {
+      max-height: calc(100dvh - 5rem);
+      overflow: auto;
     }
   }
 

@@ -122,6 +122,7 @@ other = "Chia sẻ trên"
 # === Single Post ===
 [single]
 contents = "Nội dung"
+navigation = "Điều hướng"
 disclaimer = "Tuyên bố của tác giả: "
 pin = "Ghim ở đầu trang"
 repost = "Đăng lại"

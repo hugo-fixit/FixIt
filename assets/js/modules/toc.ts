@@ -150,7 +150,7 @@ export class TocModule implements TocService {
           this.#scrollActiveTocLinkIntoView($autoTocRoot, activeId, $autoTocContainer)
         }
       }
-      if ((document.getElementById('toc-dialog') as HTMLDialogElement)?.open) {
+      if ((document.getElementById('nav-dialog') as HTMLDialogElement)?.open) {
         const $dialogTocRoot = document.querySelector<HTMLElement>('#toc-content-drawer > nav')!
         this.#scrollActiveTocLinkIntoView($dialogTocRoot, activeId, $dialogTocRoot)
       }
@@ -159,7 +159,7 @@ export class TocModule implements TocService {
 
   /** Sync TOC layout state: drawer button visibility, height, and active heading. */
   #syncTocLayout() {
-    document.querySelector<HTMLElement>('#toc-drawer-button')?.classList.toggle('hidden', !isTocStatic())
+    document.querySelector<HTMLElement>('#nav-drawer-button')?.classList.toggle('hidden', !isTocStatic())
     this.#activeTocId = null
     this.syncTocHeight()
     this.syncTocActiveState()
@@ -204,7 +204,7 @@ export class TocModule implements TocService {
 
   /** Initialize the mobile TOC drawer dialog and its open/close handlers. */
   #initTocDrawerLinkClose() {
-    const dialog = document.querySelector<HTMLDialogElement>('#toc-dialog')
+    const dialog = document.querySelector<HTMLDialogElement>('#nav-dialog')
     if (!dialog)
       return
     document.querySelectorAll<HTMLAnchorElement>('#toc-content-drawer a[href^="#"]').forEach(($link) => {
@@ -217,11 +217,11 @@ export class TocModule implements TocService {
 
   /** Initialize the mobile TOC drawer dialog and its open/close handlers. */
   #initTocDrawer() {
-    const dialog = document.querySelector<HTMLDialogElement>('#toc-dialog')
-    const openButton = document.querySelector<HTMLElement>('#toc-drawer-button')
+    const dialog = document.querySelector<HTMLDialogElement>('#nav-dialog')
+    const openButton = document.querySelector<HTMLElement>('#nav-drawer-button')
     if (!dialog || !openButton)
       return
-    const closeButton = dialog.querySelector<HTMLElement>('.toc-close-btn')
+    const closeButton = dialog.querySelector<HTMLElement>('.nav-close-btn')
     closeButton?.addEventListener('click', () => dialog.close())
     openButton.addEventListener('click', () => {
       dialog.showModal()

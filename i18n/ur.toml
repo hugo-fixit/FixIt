@@ -124,6 +124,7 @@ other = "پر شیئر کریں"
 # === Single Post ===
 [single]
 contents = "مواد"
+navigation = "نیویگیشن"
 disclaimer = "Tafheem: "
 pin = "اوپر پن کریں"
 repost = "دوبارہ شائع کریں"

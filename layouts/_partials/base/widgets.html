@@ -2,49 +2,20 @@
   Global widget layer partial.
 
   Renders floating UI elements across all pages:
-  - Fixed action buttons (back-to-top, TOC drawer, view comments)
   - GitHub corner link
+  - Navigation dialog
   - Search dialog modal
   - Reading progress bar
   - Link guard confirmation dialog
   - Service worker update notification
+  - Fixed action buttons (back-to-top, TOC drawer, view comments)
+  - Custom widgets
   - Noscript warning
 
   Called from: layouts/baseof.html.
 */ -}}
 
 <div class="widgets">
-  {{- $backToTop := .Site.Params.back_to_top -}}
-  {{- $comment := .Store.Get "comment" -}}
-  {{- if $backToTop.enable | or $comment.enable -}}
-    <div class="fixed-buttons">
-      {{- /* back to top button */ -}}
-      {{- if $backToTop.enable -}}
-        <button type="button" class="fixed-button back-to-top animate__faster hidden" aria-label="{{ T `baseof.backToTop` }}">
-          {{- dict "Class" "fa-solid fa-arrow-up" | partial "plugin/icon.html" -}}
-          {{- if $backToTop.scrollpercent -}}
-            <svg viewBox="0 0 100 100">
-              <circle class="bg" cx="50" cy="50" r="50"></circle>
-              <circle class="progress" cx="50" cy="50" r="50"></circle>
-            </svg>
-          {{- end -}}
-        </button>
-      {{- end -}}
-      {{- /* toc dialog button */ -}}
-      {{- if .Store.Get "showToc" -}}
-        <button type="button" id="toc-drawer-button" class="fixed-button toc-drawer-button hidden{{ with .Params.password }} encrypted-hidden{{ end }}" aria-label="{{ T `single.contents` }}" aria-controls="toc-dialog" aria-expanded="false">
-          {{- dict "Class" "fa-solid fa-bars" | partial "plugin/icon.html" -}}
-        </button>
-      {{- end -}}
-      {{- /* comment button */ -}}
-      {{- if $comment.enable -}}
-        <button type="button" class="fixed-button view-comments hidden" aria-label="{{ T `baseof.viewComments` }}">
-          {{- dict "Class" "fa-solid fa-comment" | partial "plugin/icon.html" -}}
-        </button>
-      {{- end -}}
-    </div>
-  {{- end -}}
-
   {{- /* GitHub Corners */ -}}
   {{- $githubCorner := .Site.Params.github_corner -}}
   {{- if $githubCorner.enable -}}
@@ -58,6 +29,9 @@
 
   {{- /* Header mobile mask */ -}}
   <div id="mask"></div>
+
+  {{- /* Nav Dialog */ -}}
+  {{- partial "single/nav-dialog.html" . -}}
 
   {{- /* Search dialog */ -}}
   {{- if .Site.Params.search.enable -}}
@@ -152,6 +126,37 @@
         <p class="sw-update-text">{{ T "serviceWorker.updateText" }}</p>
       </div>
       <button type="button" class="sw-update-btn">{{ T "assets.refresh" }}</button>
+    </div>
+  {{- end -}}
+
+  {{- $backToTop := .Site.Params.back_to_top -}}
+  {{- $comment := .Store.Get "comment" -}}
+  {{- if $backToTop.enable | or $comment.enable -}}
+    <div class="fixed-buttons">
+      {{- /* back to top button */ -}}
+      {{- if $backToTop.enable -}}
+        <button type="button" class="fixed-button back-to-top animate__faster hidden" aria-label="{{ T `baseof.backToTop` }}">
+          {{- dict "Class" "fa-solid fa-arrow-up" | partial "plugin/icon.html" -}}
+          {{- if $backToTop.scrollpercent -}}
+            <svg viewBox="0 0 100 100">
+              <circle class="bg" cx="50" cy="50" r="50"></circle>
+              <circle class="progress" cx="50" cy="50" r="50"></circle>
+            </svg>
+          {{- end -}}
+        </button>
+      {{- end -}}
+      {{- /* nav dialog button */ -}}
+      {{- if .Store.Get "showNavDialog" -}}
+        <button type="button" id="nav-drawer-button" class="fixed-button nav-drawer-button hidden{{ with .Params.password }} encrypted-hidden{{ end }}" aria-label="{{ T `single.navigation` }}" aria-controls="nav-dialog" aria-expanded="false">
+          {{- dict "Class" "fa-solid fa-bars" | partial "plugin/icon.html" -}}
+        </button>
+      {{- end -}}
+      {{- /* comment button */ -}}
+      {{- if $comment.enable -}}
+        <button type="button" class="fixed-button view-comments hidden" aria-label="{{ T `baseof.viewComments` }}">
+          {{- dict "Class" "fa-solid fa-comment" | partial "plugin/icon.html" -}}
+        </button>
+      {{- end -}}
     </div>
   {{- end -}}
 

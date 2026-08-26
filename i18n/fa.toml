@@ -124,6 +124,7 @@ other = "اشتراک‌گذاری در"
 # === Single Post ===
 [single]
 contents = "فهرست مطالب"
+navigation = "ناوبری"
 disclaimer = "بیانیه نویسنده: "
 pin = "سنجاق کردن به بالا"
 repost = "بازنشر"

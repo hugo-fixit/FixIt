@@ -123,6 +123,7 @@ other = "Compartir en"
 # === Single Post ===
 [single]
 contents = "Contenido"
+navigation = "Navegación"
 disclaimer = "Aviso: "
 pin = "Fijar en la parte superior"
 repost = "Repostear"

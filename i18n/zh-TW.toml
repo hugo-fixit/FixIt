@@ -121,6 +121,7 @@ other = "分享到"
 # === Single Post ===
 [single]
 contents = "目錄"
+navigation = "導航"
 disclaimer = "作者聲明："
 pin = "置頂"
 repost = "轉貼"

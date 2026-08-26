@@ -123,6 +123,7 @@ other = "Поделиться в"
 # === Single Post ===
 [single]
 contents = "Содержание"
+navigation = "Навигация"
 disclaimer = "Заявление автора: "
 pin = "Закрепить наверху"
 repost = "Перепостить"

@@ -121,6 +121,7 @@ other = "共有先"
 # === Single Post ===
 [single]
 contents = "目次"
+navigation = "ナビゲーション"
 disclaimer = "著者声明："
 pin = "ピン留め"
 repost = "再投稿"

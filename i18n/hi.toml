@@ -124,6 +124,7 @@ other = " शेयर करें"
 # === Single Post ===
 [single]
 contents = "सामग्री"
+navigation = "नेविगेशन"
 disclaimer = "लेखक का बयान: "
 pin = "शीर्ष पर पिन करें"
 repost = "दोबारा पोस्ट करें"

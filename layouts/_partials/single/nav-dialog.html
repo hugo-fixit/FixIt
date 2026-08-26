@@ -1,0 +1,34 @@
+{{- /* Nav Dialog - Mobile drawer for TOC and Collections */ -}}
+{{- $showToc := .Store.Get "showToc" -}}
+{{- $showCollection := .Params.collections | and (.Param "collection_list") -}}
+{{- $showNavDialog := $showToc | or $showCollection -}}
+{{- .Store.Set "showNavDialog" $showNavDialog -}}
+{{- if $showNavDialog -}}
+  <dialog id="nav-dialog" aria-labelledby="nav-dialog-title" closedby="any">
+    <button type="button" class="nav-close-btn" aria-label="Close {{ T `single.navigation` }}">
+      {{- dict "Class" "fa-solid fa-xmark fa-lg" | partial "plugin/icon.html" -}}
+    </button>
+    <div class="toc">
+      <h2 class="toc-title" id="nav-dialog-title">{{ T "single.navigation" }}</h2>
+      {{- if $showToc | and $showCollection -}}
+        {{- .Store.Set "hasTabs" true -}}
+        <tab-container type="segment">
+          <button class="tab-button" type="button" role="tab" aria-selected="true">{{ T "single.contents" }}</button>
+          <button class="tab-button" type="button" role="tab" aria-selected="false">{{ T "collections" }}</button>
+          <div role="tabpanel" class="tab-panel">
+            <div class="toc-content" id="toc-content-drawer"></div>
+          </div>
+          <div role="tabpanel" class="tab-panel" hidden>
+            {{- partial "single/collection-list.html" . -}}
+          </div>
+        </tab-container>
+      {{- else if $showToc -}}
+        <div class="toc-content" id="toc-content-drawer"></div>
+      {{- else -}}
+        <div class="collection-content">
+          {{- partial "single/collection-list.html" . -}}
+        </div>
+      {{- end -}}
+    </div>
+  </dialog>
+{{- end -}}
