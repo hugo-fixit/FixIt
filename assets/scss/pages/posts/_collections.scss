@@ -108,7 +108,7 @@
 
   &.open {
     .collection-summary {
-      background-color: light-dark(color.adjust($global-background-color, $lightness: -5%), color.adjust($global-background-color-dark, $lightness: 5%));
+      background-color: light-dark(color.adjust($global-background-color, $lightness: -4%), color.adjust($global-background-color-dark, $lightness: 4%));
     }
   }
 
@@ -118,7 +118,8 @@
     gap: 0.25em;
     padding: 0.2em 0.5em;
     user-select: none;
-    background-color: light-dark(color.adjust($global-background-color, $lightness: -5%), color.adjust($global-background-color-dark, $lightness: 5%));
+    background-color: light-dark(color.adjust($global-background-color, $lightness: -4.5%), color.adjust($global-background-color-dark, $lightness: 4.5%));
+    transition: background-color 0.2s ease;
 
     > i.fa-layer-group {
       flex-shrink: 0;
@@ -183,7 +184,6 @@
       align-items: center;
       justify-content: center;
       gap: 0.5em;
-      background-color: light-dark(color.adjust($global-background-color, $lightness: -5%), color.adjust($global-background-color-dark, $lightness: 5%));
 
       [dir="rtl"] & i {
         scale: -1 1;

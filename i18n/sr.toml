@@ -123,6 +123,7 @@ other = "Подели на"
 # === Single Post ===
 [single]
 contents = "Садржаји"
+navigation = "Навигација"
 disclaimer = "Obavetenje: "
 pin = "Закачи"
 repost = "Поново објави"

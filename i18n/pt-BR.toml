@@ -124,6 +124,7 @@ other = "Compartilhar em"
 # === Single Post ===
 [single]
 contents = "Conteúdos"
+navigation = "Navegação"
 disclaimer = "Aviso: "
 pin = "Fixar no topo"
 repost = "Repostar"

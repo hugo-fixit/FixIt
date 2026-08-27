@@ -121,6 +121,7 @@ other = "공유하기"
 # === Single Post ===
 [single]
 contents = "목차"
+navigation = "내비게이션"
 disclaimer = "작성자 성명: "
 pin = "고정"
 repost = "재게시"

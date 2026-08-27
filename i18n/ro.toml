@@ -123,6 +123,7 @@ other = "Distribuie pe"
 # === Single Post ===
 [single]
 contents = "Cuprins"
+navigation = "Navigare"
 disclaimer = "Notificare: "
 pin = "Fixează în partea de sus"
 repost = "Repostează"

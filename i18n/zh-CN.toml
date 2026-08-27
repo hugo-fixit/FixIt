@@ -121,6 +121,7 @@ other = "分享到"
 # === Single Post ===
 [single]
 contents = "目录"
+navigation = "导航"
 disclaimer = "作者声明："
 pin = "置顶"
 repost = "转载"
