@@ -141,6 +141,51 @@
 
   .content {
     margin-block: 1rem;
+    counter-reset: h2 h3 h4 h5 h6;
+
+    > h2.heading-element {
+      counter-increment: h2;
+      counter-reset: h3 h4 h5 h6;
+    }
+
+    > h3.heading-element {
+      counter-increment: h3;
+      counter-reset: h4 h5 h6;
+    }
+
+    > h4.heading-element {
+      counter-increment: h4;
+      counter-reset: h5 h6;
+    }
+
+    > h5.heading-element {
+      counter-increment: h5;
+      counter-reset: h6;
+    }
+
+    > h6.heading-element {
+      counter-increment: h6;
+    }
+
+    > h2.heading-element .heading-numbered::before {
+      content: counter(h2) ". ";
+    }
+
+    > h3.heading-element .heading-numbered::before {
+      content: counter(h2) "." counter(h3) ". ";
+    }
+
+    > h4.heading-element .heading-numbered::before {
+      content: counter(h2) "." counter(h3) "." counter(h4) ". ";
+    }
+
+    > h5.heading-element .heading-numbered::before {
+      content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ". ";
+    }
+
+    > h6.heading-element .heading-numbered::before {
+      content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ". ";
+    }
 
     > h1,
     > h2 {
