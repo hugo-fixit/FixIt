@@ -12,16 +12,7 @@
   {{- $tableOfContents = dict "Content" $tableOfContents "Ruby" (.Param "ruby") "Fraction" (.Param "fraction") "Fontawesome" (.Param "fontawesome") | partial "function/content.html" | safeHTML -}}
   {{- $pagefindEnabled := and .Site.Params.search.enable (eq .Site.Params.search.type "pagefind") -}}
 
-  <aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="{{ T "collections" }}">
-    {{- /* Collection List */ -}}
-    {{- partial "single/collection-list.html" . -}}
-
-    {{- /* Related Content */ -}}
-    {{- partial "single/related-aside.html" . -}}
-
-    {{- /* Custom Aside */ -}}
-    {{- block "custom-aside" . }}{{ end -}}
-  </aside>
+  {{- partial "single/aside-collection.html" . -}}
 
   <article class="page single"{{ with .Params.fromAdapters }} data-adapters="{{ . }}"{{ end }}>
     <div class="header">
@@ -228,27 +219,7 @@
     {{- block "custom-post__footer:after" . }}{{ end -}}
   </article>
 
-  <aside class="toc animate__animated animate__fadeIn animate__faster" id="toc-auto" aria-label="{{ T "single.contents" }}">
-    {{- /* Custom block before post toc */ -}}
-    {{- block "custom-post__toc:before" . }}{{ end -}}
-
-    {{- /* Auto TOC */ -}}
-    {{- if $showToc -}}
-      <h2 class="toc-title{{ with .Params.password }} encrypted-hidden{{ end }}">
-        <span>
-          {{- T "single.contents" -}}
-          {{- dict "Class" "toc-icon fa-solid fa-angle-down ms-1" | partial "plugin/icon.html" -}}
-        </span>
-        <button type="button" class="toc-print-btn" onclick="event.stopPropagation(); window.print()" aria-label="{{ T "single.print" }}">
-          {{- dict "Class" "fa-solid fa-print" | partial "plugin/icon.html" -}}
-        </button>
-      </h2>
-      <div class="toc-content{{ if eq $toc.auto false }} always-active{{ end }}{{ with .Params.password }} encrypted-hidden{{ end }}" id="toc-content-auto"></div>
-    {{- end -}}
-
-    {{- /* Custom block after post toc */ -}}
-    {{- block "custom-post__toc:after" . }}{{ end -}}
-  </aside>
+  {{- partial "single/aside-toc.html" . -}}
 {{- end -}}
 
 {{- define "comments" -}}

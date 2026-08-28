@@ -1,0 +1,26 @@
+{{- /* Sidebar Table of Contents */ -}}
+{{- $toc := dict "Page" . "Key" "toc" | partial "function/param.html" -}}
+{{- $showToc := .Store.Get "showToc" -}}
+
+<aside class="toc animate__animated animate__fadeIn animate__faster" id="toc-auto" aria-label="{{ T "single.contents" }}">
+  {{- /* Custom block before post toc */ -}}
+  {{- block "custom-post__toc:before" . }}{{ end -}}
+
+  {{- /* Auto TOC */ -}}
+  {{- if $showToc -}}
+    <h2 class="toc-title{{ with .Params.password }} encrypted-hidden{{ end }}">
+      <span>
+        {{- T "single.contents" -}}
+        {{- dict "Class" "toc-icon fa-solid fa-angle-down ms-1" | partial "plugin/icon.html" -}}
+      </span>
+      <button type="button" class="toc-print-btn" onclick="event.stopPropagation(); window.print()" aria-label="{{ T "single.print" }}">
+        {{- dict "Class" "fa-solid fa-print" | partial "plugin/icon.html" -}}
+      </button>
+    </h2>
+    <div class="toc-content{{ if eq $toc.auto false }} always-active{{ end }}{{ with .Params.password }} encrypted-hidden{{ end }}" id="toc-content-auto"></div>
+  {{- end -}}
+
+  {{- /* Custom block after post toc */ -}}
+  {{- block "custom-post__toc:after" . }}{{ end -}}
+</aside>
+{{- /* EOF */ -}}
