@@ -117,6 +117,8 @@
   @include sticky-top-offset;
 
   .toc-title {
+    display: flex;
+    align-items: center;
     margin-block: 0 0.5em;
     cursor: pointer;
     user-select: none;
@@ -132,6 +134,20 @@
 
     i.toc-icon {
       transition: rotate 0.2s ease;
+    }
+
+    .toc-print-btn {
+      padding: 0;
+      border: none;
+      background: none;
+      color: fi-var(global-font-secondary-color);
+      cursor: pointer;
+      margin-inline-start: auto;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: fi-var(global-font-color);
+      }
     }
   }
 

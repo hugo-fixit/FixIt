@@ -153,10 +153,6 @@
         .post-tag:not(:last-child)::after {
           content: ',';
           margin-inline-end: 0.25rem;
-
-          [dir="rtl"] & {
-            scale: -1 1;
-          }
         }
       }
     }
