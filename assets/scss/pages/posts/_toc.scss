@@ -40,10 +40,27 @@
 
     ol {
       margin: 0;
-      padding-inline-start: 2.25em;
+      padding-inline-start: 3ch;
+      list-style: none;
+      counter-reset: toc-counter;
 
-      ol {
-        padding-inline-start: 1.25em;
+      // 10+ items → 2-digit marker
+      &:has(> :nth-child(10)) {
+        padding-inline-start: 4ch;
+      }
+
+      // 100+ items → 3-digit marker
+      &:has(> :nth-child(100)) {
+        padding-inline-start: 5ch;
+      }
+
+      > li {
+        counter-increment: toc-counter;
+
+        &::marker {
+          content: counters(toc-counter, ".") ". ";
+          color: fi-var(global-font-secondary-color);
+        }
       }
 
       li:has(> a:hover)::marker {
@@ -130,6 +147,8 @@
   .toc-content {
     overflow-y: auto;
     max-height: fi-var(toc-content-max-height, 90dvh);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 2%, black 98%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 2%, black 98%, transparent 100%);
     @include scrollbar-width(none, 0);
 
     &.always-active ul,
@@ -198,7 +217,8 @@
       }
 
       > ol {
-        padding: 0.4em 1em 0.4em 2.25em;
+        padding-block: 0.4em;
+        padding-inline-end: 1em;
 
         li:has(> a:hover)::marker,
         a:hover {
