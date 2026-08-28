@@ -5,12 +5,6 @@
 {{- $intersect := (slice .Page.Section .Page.Type) | intersect site.MainSections -}}
 {{- $onlyMainSection := cond $headingConfig.number.only_main_section ((gt (len $intersect) 0) | and (eq .Page.Kind "page")) true -}}
 {{- $ordered := $toc.ordered | and $headingConfig.number.enable | and $onlyMainSection -}}
-{{- $h1Format := $headingConfig.number.format.h1 | default "{title}" -}}
-{{- $h2Format := $headingConfig.number.format.h2 | default "{h2} {title}" -}}
-{{- $h3Format := $headingConfig.number.format.h3 | default "{h2}.{h3} {title}" -}}
-{{- $h4Format := $headingConfig.number.format.h4 | default "{h2}.{h3}.{h4} {title}" -}}
-{{- $h5Format := $headingConfig.number.format.h5 | default "{h2}.{h3}.{h4}.{h5} {title}" -}}
-{{- $h6Format := $headingConfig.number.format.h6 | default "{h2}.{h3}.{h4}.{h5}.{h6} {title}" -}}
 {{- $level := .Level -}}
 {{- $maxMarkupLevel := cond $toc.decrease_h1 2 1 -}}
 
@@ -20,11 +14,6 @@
   {{- /* Decrease the level to match the correct HTML level */ -}}
   {{- $level = add $level 1 -}}
   {{- $maxMarkupLevel = 3 -}}
-{{- end -}}
-
-{{- if $ordered -}}
-  {{- /* Set the count for child level to 0 */ -}}
-  {{- .Page.Store.SetInMap "heading-counter" (string (add $level 1)) 0 -}}
 {{- end -}}
 
 {{- $attrs := "" }}
@@ -44,48 +33,10 @@
 {{- $markupLevel := cond $decreased $maxMarkupLevel $level -}}
 <h{{ $markupLevel }} {{ $attrs | safeHTMLAttr }}{{ with $decreased }} data-decreased{{ end }}>
   {{- $title := .Text -}}
-  {{- if $ordered -}}
-    {{- /* Add 1 to the current level */ -}}
-    {{- $headingMap := .Page.Store.Get "heading-counter" -}}
-    {{- $count := (string $level) | index $headingMap | int | add 1 -}}
-    {{- .Page.Store.SetInMap "heading-counter" (string $level) $count -}}
-
-    {{- /* Get the counters for all levels */ -}}
-    {{- $h1 := "1" | index $headingMap | int | string -}}
-    {{- $h2 := "2" | index $headingMap | int | string -}}
-    {{- $h3 := "3" | index $headingMap | int | string -}}
-    {{- $h4 := "4" | index $headingMap | int | string -}}
-    {{- $h5 := "5" | index $headingMap | int | string -}}
-    {{- $h6 := "6" | index $headingMap | int | string -}}
-
-    {{- /* Apply the level based on the format */ -}}
-    {{- $title = "" -}}
-    {{- if $level | eq 1 -}}
-      {{- $title = $h1Format -}}
-    {{- else if $level | eq 2 -}}
-      {{- $title = $h2Format -}}
-    {{- else if $level | eq 3 -}}
-      {{- $title = $h3Format -}}
-    {{- else if $level | eq 4 -}}
-      {{- $title = $h4Format -}}
-    {{- else if $level | eq 5 -}}
-      {{- $title = $h5Format -}}
-    {{- else if $level | eq 6 -}}
-      {{- $title = $h6Format -}}
-    {{- end -}}
-
-    {{- $title = replace $title "{h1}" $h1 -}}
-    {{- $title = replace $title "{h2}" $h2 -}}
-    {{- $title = replace $title "{h3}" $h3 -}}
-    {{- $title = replace $title "{h4}" $h4 -}}
-    {{- $title = replace $title "{h5}" $h5 -}}
-    {{- $title = replace $title "{h6}" $h6 -}}
-    {{- $title = replace $title "{title}" .Text -}}
-  {{- end -}}
   {{- if $headingConfig.capitalize -}}
     {{- $title = replace $title .PlainText (title .PlainText) -}}
   {{- end -}}
-  <span>{{ $title | safeHTML }}</span>
+  <span{{ if $ordered }} class="heading-numbered"{{ end }}>{{ $title | safeHTML }}</span>
   <a href="#{{ .Anchor | safeURL }}" class="heading-mark">
     {{- /* @unocss-skip-start */ -}}
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>

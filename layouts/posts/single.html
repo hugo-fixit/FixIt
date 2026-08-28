@@ -235,8 +235,13 @@
     {{- /* Auto TOC */ -}}
     {{- if $showToc -}}
       <h2 class="toc-title{{ with .Params.password }} encrypted-hidden{{ end }}">
-        {{- T "single.contents" -}}&nbsp;
-        {{- dict "Class" "toc-icon fa-solid fa-angle-down" | partial "plugin/icon.html" -}}
+        <span>
+          {{- T "single.contents" -}}
+          {{- dict "Class" "toc-icon fa-solid fa-angle-down ms-1" | partial "plugin/icon.html" -}}
+        </span>
+        <button type="button" class="toc-print-btn" onclick="event.stopPropagation(); window.print()" aria-label="{{ T "single.print" }}">
+          {{- dict "Class" "fa-solid fa-print" | partial "plugin/icon.html" -}}
+        </button>
       </h2>
       <div class="toc-content{{ if eq $toc.auto false }} always-active{{ end }}{{ with .Params.password }} encrypted-hidden{{ end }}" id="toc-content-auto"></div>
     {{- end -}}
