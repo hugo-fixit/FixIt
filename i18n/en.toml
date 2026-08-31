@@ -88,6 +88,7 @@ valinePlaceholder = "Your comment ..."
 
 # === Assets ===
 [assets]
+table = "Table"
 search = "Search"
 searchPlaceholder = "Search titles or contents ..."
 searchIn = "Search in {{ . }}"

@@ -86,6 +86,7 @@ valinePlaceholder = "你的評論……"
 
 # === Assets ===
 [assets]
+table = "表"
 search = "搜尋"
 searchPlaceholder = "搜尋文章標題或內容……"
 searchIn = "在 {{ . }} 中搜尋"

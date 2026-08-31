@@ -267,6 +267,11 @@
   {{- dict "Source" "js/lib/watermark.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
+{{- /* Table Sort */ -}}
+{{- if .Store.Get "hasTableSort" -}}
+  {{- dict "Source" "js/lib/table-sort.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+{{- end -}}
+
 {{- /* Content Decryption */ -}}
 {{- $encryptPartial := .Store.Get "hasEncryptor" -}}
 {{- if .Params.password | or $encryptPartial -}}

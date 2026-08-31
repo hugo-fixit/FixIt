@@ -141,7 +141,7 @@
 
   .content {
     margin-block: 1rem;
-    counter-reset: h2 h3 h4 h5 h6;
+    counter-reset: h2 h3 h4 h5 h6 table-counter;
 
     > h2.heading-element {
       counter-increment: h2;
@@ -165,6 +165,10 @@
 
     > h6.heading-element {
       counter-increment: h6;
+    }
+
+    > .table-wrapper table[data-table-numbered] {
+      counter-increment: table-counter;
     }
 
     > h2.heading-element .heading-numbered::before {
@@ -358,53 +362,8 @@
       }
     }
 
-    .table-wrapper {
-      position: relative;
-      overflow-x: auto;
-      overflow-y: hidden;
-      margin: 0.5rem 0;
-      background: fi-var(table-background-color);
-      border: 1px solid fi-var(table-border-color);
-      @include border-radius;
-      @include set-fi-var(scrollbar-thumb-color, fi-var(table-background-color));
-
-      > table {
-        width: 100%;
-        max-width: 100%;
-        margin: 0;
-        border-spacing: 0;
-        background: fi-var(table-background-color);
-        border-collapse: separate;
-
-        thead {
-          background: fi-var(table-thead-color);
-        }
-
-        &:not([class]) tbody {
-          & tr:nth-child(odd) {
-            background: light-dark(color.adjust($table-background-color, $lightness: -2.25%), color.adjust($table-background-color-dark, $lightness: 2.75%));
-          }
-
-          & tr:hover {
-            background: light-dark(color.adjust($table-background-color, $lightness: -4.5%), color.adjust($table-background-color-dark, $lightness: 5.5%));
-          }
-        }
-
-        th,
-        td {
-          padding: 0.3rem 1rem;
-          border-inline-end: 1px solid fi-var(table-border-color);
-          border-bottom: 1px solid fi-var(table-border-color);
-        }
-
-        tr > :last-child {
-          border-inline-end: none;
-        }
-
-        > :last-child > tr:last-child > * {
-          border-bottom: none;
-        }
-      }
+    > .table-wrapper table[data-table-numbered] {
+      counter-increment: table-counter;
     }
 
     img {

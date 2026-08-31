@@ -88,6 +88,7 @@ valinePlaceholder = "Ваш комментарий ..."
 
 # === Assets ===
 [assets]
+table = "Таблица"
 search = "Поиск"
 searchPlaceholder = "Поиск заголовков или содержимого ..."
 searchIn = "Поиск в {{ . }}"

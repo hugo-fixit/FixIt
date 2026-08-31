@@ -87,6 +87,7 @@ valinePlaceholder = "Bình luận của bạn ..."
 
 # === Assets ===
 [assets]
+table = "Bảng"
 search = "Tìm kiếm"
 searchPlaceholder = "Tìm tiêu đề hoặc nội dung..."
 searchIn = "Tìm kiếm trong {{ . }}"
