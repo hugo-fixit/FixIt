@@ -32,6 +32,7 @@ export interface FixItConfig {
   encryption?: EncryptionConfig
   print?: PrintConfig
   postChat?: boolean
+  table?: TableConfig
 }
 
 export interface EchartsConfig {
@@ -120,4 +121,9 @@ export interface PrintConfig {
   expandCode?: boolean
   expandDetails?: boolean
   expandFileTree?: boolean
+}
+
+export interface TableConfig {
+  number?: boolean
+  sort?: boolean
 }

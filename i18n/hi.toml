@@ -89,6 +89,7 @@ valinePlaceholder = "आपकी टिप्पणी ..."
 
 # === Assets ===
 [assets]
+table = "तालिका"
 search = "खोज"
 searchPlaceholder = "शीर्षक या सामग्री खोजें ..."
 searchIn = "{{ . }} में खोजें"

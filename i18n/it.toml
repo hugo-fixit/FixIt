@@ -88,6 +88,7 @@ valinePlaceholder = "Il tuo commento ..."
 
 # === Assets ===
 [assets]
+table = "Tabella"
 search = "Cerca"
 searchPlaceholder = "Cerca il titolo o il contenuto dell'articolo ..."
 searchIn = "Cerca in"

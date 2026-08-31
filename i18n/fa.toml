@@ -89,6 +89,7 @@ valinePlaceholder = "نظر شما ..."
 
 # === Assets ===
 [assets]
+table = "جدول"
 search = "جستجو"
 searchPlaceholder = "جستجوی عناوین یا محتوا ..."
 searchIn = "جستجو در {{ . }}"

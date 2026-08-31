@@ -86,6 +86,7 @@ valinePlaceholder = "당신의 댓글……"
 
 # === Assets ===
 [assets]
+table = "표"
 search = "검색"
 searchPlaceholder = "제목 또는 내용을 검색하세요..."
 searchIn = "{{ . }}에서 검색"

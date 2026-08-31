@@ -88,6 +88,7 @@ valinePlaceholder = "Comentariul dvs ..."
 
 # === Assets ===
 [assets]
+table = "Tabelă"
 search = "Căutare"
 searchPlaceholder = "Căutarea titlului sau conținutului articolului ..."
 searchIn = "Căutare în {{ . }}"
