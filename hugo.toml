@@ -728,7 +728,7 @@ end_level = 6
 # Whether to decrease the H1 heading level in content.
 decrease_h1 = false
 
-# Post disclaimer/declaration.
+# {{< version 1.0.0 >}} Post disclaimer/declaration.
 [params.disclaimer]
 # Whether to enable the disclaimer.
 enable = false

@@ -16,7 +16,7 @@
   </clipPath>
   <g clip-path="url(#r)">
     <rect width="{{ $labelWidth }}" height="20" fill="#403c3d" />
-    <rect x="{{ $labelWidth }}" width="{{ $versionWidth }}" height="20" fill="#{{ .color }}" />
+    <rect x="{{ $labelWidth }}" width="{{ $versionWidth }}" height="20" fill="{{ .color }}" />
     <rect width="{{ $width }}" height="20" fill="url(#s)" />
   </g>
   <g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110">
