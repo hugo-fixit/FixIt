@@ -172,7 +172,7 @@ libraries:
           to: simple-icons/icons
           clean: true
   - npm: '@github/tab-container-element'
-    version: 4.8.2
+    version: 4.9.0
     local:
       items:
         - from: dist/bundle.js
