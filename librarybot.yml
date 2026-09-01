@@ -28,7 +28,7 @@ libraries:
         - from: dist/APlayer.min.js
           to: aplayer/APlayer.min.js
   - npm: cell-tooltip
-    version: 0.3.1
+    version: 0.4.0
     local:
       items:
         - from: dist/cell-tooltip.umd.js
@@ -54,7 +54,7 @@ libraries:
         - from: dist/echarts.min.js
           to: echarts/echarts.min.js
   - npm: '@fortawesome/fontawesome-free'
-    version: 7.3.0
+    version: 7.3.1
     local:
       items:
         - from: css/all.min.css
@@ -65,7 +65,7 @@ libraries:
           baseDir: static/lib
           clean: true
   - npm: fuse.js
-    version: 7.4.2
+    version: 7.5.0
     local:
       items:
         - from: dist/fuse.mjs
@@ -85,7 +85,7 @@ libraries:
         - from: instantpage.min.js
           to: instant.page/instantpage.min.js
   - npm: json-viewer-element
-    version: 1.0.4
+    version: 1.0.6
     local:
       items:
         - from: dist/json-viewer-element.umd.js
@@ -126,7 +126,7 @@ libraries:
           baseDir: static/lib
           clean: true
   - npm: mapbox-gl
-    version: 3.25.0
+    version: 3.27.0
     local:
       items:
         - from: dist/mapbox-gl.css
@@ -184,7 +184,7 @@ libraries:
         - from: dist/twemoji.min.js
           to: twemoji/twemoji.min.js
   - npm: twikoo
-    version: 1.7.13
+    version: 1.7.15
     local:
       items:
         - from: dist/twikoo.all.min.js

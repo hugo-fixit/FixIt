@@ -1,8 +1,9 @@
 {{- /*
   Version detection and update checking partial.
 
-  Validates Hugo minimum version, checks Hugo Extended edition, detects the
-  FixIt theme version from params, warns about dev versions, and optionally
+  Validates Hugo minimum version,
+  detects the FixIt theme version from params,
+  warns about dev versions, and optionally
   checks for newer releases via the GitHub API.
 */ -}}
 
@@ -14,11 +15,6 @@
 {{- $MINIMAL_HUGO_VERSION := "0.161.0" -}}
 {{- if lt hugo.Version $MINIMAL_HUGO_VERSION -}}
   {{- errorf "\n\n%v\n\n" (dict "Current" hugo.Version "Minimal" $MINIMAL_HUGO_VERSION | T "init.hugoVersionError") -}}
-{{- end -}}
-
-{{- /* Check Hugo extend */ -}}
-{{- if eq hugo.IsExtended false -}}
-  {{- warnf "\n\n%v\n\n" (T "init.hugoExtendedWarn") -}}
 {{- end -}}
 
 {{- /* Check for updates */ -}}

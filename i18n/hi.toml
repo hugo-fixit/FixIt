@@ -5,7 +5,6 @@
 # === Init ===
 [init]
 hugoVersionError = "Hugo संस्करण बहुत पुराना है।\n\nवर्तमान में उपयोग किया जा रहा Hugo संस्करण {{ .Current }} है, जबकि FixIt के लिए न्यूनतम आवश्यक संस्करण {{ .Minimal }} है।\n\nयदि आप अपने कंप्यूटर पर Hugo का उपयोग कर रहे हैं, तो कृपया अपग्रेड गाइड देखें: https://gohugo.io/getting-started/installing/#upgrade-hugo\n\nयदि आप किसी तृतीय-पक्ष प्लेटफ़ॉर्म पर तैनात कर रहे हैं, तो कृपया Hugo संस्करण को तदनुसार कॉन्फ़िगर करें। "
-hugoExtendedWarn = "SCSS समर्थन के लिए Hugo Extended संस्करण आवश्यक है।"
 configurationError = "कन्फ़िग्यरेशन त्रुटि \nआपने फिक्सइट संस्करण पैरामीटर को सही ढंग से कॉन्फ़िगर नहीं किया है।. यह देखें: https://fixit.lruihao.cn/docs/getting-started/configuration/params/"
 compatibilityError = "संगतता त्रुटि ({{ .From }} -> {{ .To }}):\nआपके पास एक असंगत अपडेट है. यह देखें: https://github.com/hugo-fixit/FixIt/releases"
 devVersionWarn = "आप फिक्सइट के डिवेलपर संस्करण का उपयोग कर रहे हैं। कृपया एक स्थिर संस्करण का उपयोग करने पर विचार करें।\nयह देखें: https://github.com/hugo-fixit/FixIt/releases"
@@ -71,7 +70,7 @@ more = "और देखें"
 # === Header ===
 [header]
 selectLanguage = "भाषा चुने"
-noMoretTranslations = "कोई और अनुवाद नहीं"
+noTranslations = "कोई अनुवाद नहीं"
 switchTheme = "थीम बदलें"
 # === Header ===
 
@@ -90,6 +89,7 @@ valinePlaceholder = "आपकी टिप्पणी ..."
 
 # === Assets ===
 [assets]
+table = "तालिका"
 search = "खोज"
 searchPlaceholder = "शीर्षक या सामग्री खोजें ..."
 searchIn = "{{ . }} में खोजें"
@@ -125,6 +125,8 @@ other = " शेयर करें"
 # === Single Post ===
 [single]
 contents = "सामग्री"
+navigation = "नेविगेशन"
+disclaimer = "लेखक का बयान: "
 pin = "शीर्ष पर पिन करें"
 repost = "दोबारा पोस्ट करें"
 publishedOnDate = "{{ .Date }} पर प्रकाशित"
@@ -142,6 +144,7 @@ home = "घर"
 readMore = "और पढ़ें"
 expirationReminder = "यह लेख अंतिम बार {{ .Date }} पर अद्यतन किया गया था, सामग्री पुरानी हो सकती है."
 encryptedAbstract = "यह लेख एन्क्रिप्ट किया गया है, इसलिए इसकी मूल सामग्री अदृश्य है!"
+print = "प्रिंट"
 encryptedMessage = "कृपया पासवर्ड दर्ज करें"
 password = "पासवर्ड"
 enterBtn = "दर्ज करें"
@@ -149,6 +152,11 @@ encryptyAgain = "फिर से एन्क्रिप्ट करें"
 encryptionWarning = "सामग्री एन्क्रिप्शन का पता चला, लेकिन वे अभी भी सादे पाठ में हैं!"
 encryptionCommand = "उन्हें वास्तव में एन्क्रिप्ट करने के लिए बिल्ड के बाद `npx @hugo-fixit/encrypt` चलाएं।"
 relatedContent = "संबंधित सामग्री"
+
+[single.disclaimerMessage]
+ai = "यह लेख AI द्वारा उत्पन्न किया गया था। कृपया जानकारी को स्वतंत्र रूप से सत्यापित करें।"
+repost = "यह लेख एक पुनर्प्रकाशन है। कृपया अधिक जानकारी के लिए मूल स्रोत पर जाएं।"
+original = "यह लेखक की मूल सामग्री है।"
 
 [single.includedIn]
 categories = "{{ .Categories }} में शामिल"

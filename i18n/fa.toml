@@ -1,0 +1,273 @@
+# Translations for Persian
+# ترجمه به فارسی
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === Init ===
+[init]
+hugoVersionError = "نسخه Hugo بسیار پایین است.\n\nنسخه فعلی Hugo {{ .Current }} است و حداقل نسخه پشتیبانی‌شده برای FixIt {{ .Minimal }} می‌باشد.\n\nاگر Hugo را روی رایانه شخصی خود اجرا می‌کنید، برای راهنمای ارتقا به https://gohugo.io/getting-started/installing/#upgrade-hugo مراجعه کنید.\n\nاگر از پلت‌فرم شخص ثالث استفاده می‌کنید، لطفاً نسخه Hugo را مطابق با آن پیکربندی کنید."
+configurationError = "خطای پیکربندی\nشما هنوز پارامتر نسخه FixIt را به درستی پیکربندی نکرده‌اید. به https://fixit.lruihao.cn/docs/getting-started/configuration/params/ مراجعه کنید"
+compatibilityError = "خطای سازگاری ({{ .From }} -> {{ .To }}):\nشما یک به‌روزرسانی ناسازگار دارید. به https://github.com/hugo-fixit/FixIt/releases مراجعه کنید"
+devVersionWarn = "شما از نسخه توسعه FixIt استفاده می‌کنید. لطفاً از نسخه پایدار استفاده کنید.\nبه https://github.com/hugo-fixit/FixIt/releases مراجعه کنید"
+devEnvWarn = "محیط فعلی «development» است. «سیستم نظرات»، «PWA»، «CDN»، «اثر انگشت» و «تحلیل‌ها» غیرفعال خواهند شد."
+quicklyUpgrade = "ارتقاء سریع با دستور: "
+# === Init ===
+
+# === Base Layout ===
+[baseof]
+backToTop = "بازگشت به بالا"
+viewComments = "مشاهده نظرات"
+noscript = "این وبسایت با فعال بودن JavaScript بهتر عمل می‌کند."
+# === Base Layout ===
+
+# === Taxonomy ===
+[archives]
+other = "بایگانی"
+
+[allSome]
+other = "همه {{ .Some }}"
+
+[category]
+other = "دسته‌بندی"
+
+[categories]
+other = "دسته‌بندی‌ها"
+
+[collection]
+other = "مجموعه"
+
+[collections]
+other = "مجموعه‌ها"
+
+[tag]
+other = "برچسب"
+
+[tags]
+other = "برچسب‌ها"
+
+[posts]
+other = "نوشته‌ها"
+
+# === Taxonomy ===
+
+# === Section ===
+[section]
+recentlyUpdated = "به‌روزرسانی‌های اخیر"
+
+[section.totalWordCount]
+one = "مجموع یک کلمه"
+other = "مجموع {{ .Count }} کلمه"
+
+[section.archiveCounter]
+one = "فقط یک مقاله"
+other = "مجموعاً {{ .Count }} مقاله"
+# === Section ===
+
+# === Pagination ===
+[pagination]
+more = "بیشتر"
+# === Pagination ===
+
+# === Header ===
+[header]
+selectLanguage = "انتخاب زبان"
+noTranslations = "ترجمه‌ای موجود نیست"
+switchTheme = "تغییر پوسته"
+# === Header ===
+
+# === Footer ===
+[footer]
+poweredBySome = "قدرت‌گرفته از {{ .Hugo }} | پوسته - {{ .Theme }}"
+siteUV = "مجموع بازدیدکنندگان"
+sitePV = "مجموع بازدیدها"
+siteRunning = "وبسایت در حال اجرا ..."
+# === Footer ===
+
+# === Comment ===
+[comment]
+valinePlaceholder = "نظر شما ..."
+# === Comment ===
+
+# === Assets ===
+[assets]
+table = "جدول"
+search = "جستجو"
+searchPlaceholder = "جستجوی عناوین یا محتوا ..."
+searchIn = "جستجو در {{ . }}"
+searchBy = "جستجو بر اساس"
+gotoResultsPage = "رفتن به صفحه نتایج جستجو ..."
+clear = "پاک کردن"
+cancel = "لغو"
+navigate = "پیمایش"
+select = "انتخاب"
+close = "بستن"
+refresh = "بازخوانی"
+noResultsFound = "نتیجه‌ای یافت نشد"
+copyToClipboard = "کپی در کلیپ‌بورد"
+copyText = "کپی"
+copiedText = "کپی شد"
+toggleLineNumbers = "نمایش/مخفی کردن شماره خطوط"
+toggleLineWrap = "نمایش/مخفی کردن پیچش کد"
+toggleCodeEditable = "قابل ویرایش کردن بلوک کد"
+downloadCode = "دانلود کد"
+expandCode = "باز کردن یا بستن بلوک کد"
+fullscreen = "تمام‌صفحه"
+exitFullscreen = "خروج از تمام‌صفحه"
+cookieconsentMessage = "این وبسایت از کوکی‌ها برای بهبود تجربه شما استفاده می‌کند."
+cookieconsentDismiss = "متوجه شدم!"
+cookieconsentLink = "اطلاعات بیشتر"
+# === Assets ===
+
+# === Share ===
+[shareOn]
+other = "اشتراک‌گذاری در"
+# === Share ===
+
+# === Single Post ===
+[single]
+contents = "فهرست مطالب"
+navigation = "ناوبری"
+disclaimer = "بیانیه نویسنده: "
+pin = "سنجاق کردن به بالا"
+repost = "بازنشر"
+publishedOnDate = "منتشر شده در {{ .Date }}"
+views = "بازدید"
+comments = "نظرات"
+author = "نویسنده"
+updatedOnDate = "به‌روزرسانی شده در {{ .Date }}"
+readMarkdown = "خواندن Markdown"
+viewSource = "مشاهده سورس"
+editThisPage = "ویرایش این صفحه"
+reportIssue = "گزارش مشکل"
+openInEditor = "باز کردن در ویرایشگر"
+back = "بازگشت"
+home = "خانه"
+readMore = "ادامه مطلب"
+expirationReminder = "این مقاله آخرین بار در {{ .Date }} به‌روزرسانی شده است و ممکن است محتوای آن قدیمی باشد."
+encryptedAbstract = "این مقاله رمزنگاری شده است، بنابراین محتوای خام آن قابل مشاهده نیست!"
+print = "چاپ"
+encryptedMessage = "لطفاً رمز عبور را وارد کنید"
+password = "رمز عبور"
+enterBtn = "ورود"
+encryptyAgain = "رمزنگاری مجدد"
+encryptionWarning = "رمزنگاری محتوا شناسایی شد، اما هنوز به صورت متن ساده هستند!"
+
+[single.disclaimerMessage]
+ai = "این مقاله توسط هوش مصنوعی تولید شده است. لطفاً اطلاعات را به طور مستقل تأیید کنید."
+repost = "این مقاله یک بازنشر است. لطفاً برای اطلاعات بیشتر به منبع اصلی مراجعه کنید."
+original = "این محتوای اصلی نویسنده است."
+encryptionCommand = "پس از ساخت، دستور `npx @hugo-fixit/encrypt` را اجرا کنید تا واقعاً رمزنگاری شوند."
+relatedContent = "مطالب مرتبط"
+
+[single.includedIn]
+categories = "قرار گرفته در {{ .Categories }}"
+collections = "قرار گرفته در {{ .Collections }}"
+both = "قرار گرفته در {{ .Categories }} و {{ .Collections }}"
+
+[single.wordCount]
+one = "یک کلمه"
+other = "{{ .Count }} کلمه"
+
+[single.fuzzyWordCount]
+other = "حدود {{ .Count }} کلمه"
+
+[single.readingTime]
+one = "یک دقیقه"
+other = "{{ .Count }} دقیقه"
+
+[single.reward]
+donate = "حمایت مالی"
+wechatpay = "WeChat Pay"
+alipay = "Alipay"
+paypal = "PayPal"
+bitcoin = "Bitcoin"
+# === Single Post ===
+
+# === Error Pages ===
+[pageNotFound]
+other = "صفحه یافت نشد"
+
+[pageNotFoundText]
+other = "صفحه‌ای که به دنبال آن هستید وجود ندارد. متأسفیم."
+# === Error Pages ===
+
+# === Offline ===
+[offlineTitle]
+other = "آفلاین"
+
+[offlineText]
+other = "شما به اینترنت متصل نیستید، فقط صفحات ذخیره‌شده در دسترس خواهند بود."
+# === Offline ===
+
+# === Service Worker ===
+[serviceWorker]
+updateTitle = "به‌روزرسانی موجود است"
+updateText = "نسخه جدیدی از این سایت موجود است."
+# === Service Worker ===
+
+# === Link Redirection ===
+[linkRedirection]
+title = "اعلامیه تغییر مسیر"
+message = "شما در حال ترک {{ .Title }} هستید، لطفاً از امنیت حساب و دارایی خود اطمینان حاصل کنید."
+confirm = "ادامه بازدید"
+# === Link Redirection ===
+
+# === Alert ===
+[alert]
+note = "توجه"
+tip = "نکته"
+important = "مهم"
+warning = "هشدار"
+caution = "احتیاط"
+# === Alert ===
+
+# === Task List ===
+[taskList]
+x = "تیک‌خورده"
+" " = "بدون تیک"
+"/" = "در حال انجام"
+"-" = "لغو شده"
+"<" = "برنامه‌ریزی شده"
+">" = "برنامه‌ریزی مجدد شده"
+"!" = "مهم"
+"!x" = "مهم تیک‌خورده"
+"?" = "سوال"
+# === Task List ===
+
+# === Admonition ===
+[admonition]
+note = "توجه"
+abstract = "چکیده"
+info = "اطلاعات"
+todo = "انجام دادنی"
+tip = "نکته"
+success = "موفقیت"
+question = "سوال"
+warning = "هشدار"
+failure = "شکست"
+danger = "خطر"
+bug = "خطا"
+example = "مثال"
+quote = "نقل‌قول"
+# === Admonition ===
+
+# === Version ===
+[version]
+new = "جدید"
+changed = "تغییر یافته"
+deleted = "حذف شده"
+deprecated = "منسوخ شده"
+# === Version ===
+
+# === Diagram ===
+[diagram]
+zoomIn = "بزرگ‌نمایی"
+zoomOut = "کوچک‌نمایی"
+reset = "بازنشانی"
+download = "دانلود SVG"
+# === Diagram ===
+
+# === Tabs ===
+[tabs]
+diagram = "نمودار"
+code = "کد"
+# === Tabs ===

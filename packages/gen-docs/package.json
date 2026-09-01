@@ -9,9 +9,9 @@
   },
   "devDependencies": {
     "@hugo-fixit/shared": "workspace:*",
-    "commander": "^14.0.3",
+    "commander": "^15.0.0",
     "picocolors": "^1.1.1",
-    "toml": "^3.0.0",
+    "toml": "^5.0.0",
     "typescript": "^6.0.3"
   }
 }

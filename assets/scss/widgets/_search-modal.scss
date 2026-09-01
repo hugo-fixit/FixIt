@@ -12,8 +12,7 @@ dialog.search-dialog {
   // Anchor to top and center horizontally with fixed dimensions
   // to prevent position jumps when results appear/disappear.
   top: 15vh;
-  left: 50%;
-  margin: 0;
+  margin: 0 auto;
 
   &::backdrop {
     background-color: rgba(0, 0, 0, 0.25);
@@ -219,7 +218,7 @@ dialog.search-dialog {
 
       .suggestion-heading-mark {
         color: fi-var(global-font-tertiary-color);
-        margin-right: 0.125rem;
+        margin-inline-end: 0.125rem;
       }
 
       em {
@@ -255,7 +254,7 @@ dialog.search-dialog {
       color: fi-var(global-font-tertiary-color);
 
       i {
-        margin-right: 0.125rem;
+        margin-inline-end: 0.125rem;
       }
     }
 
@@ -346,6 +345,7 @@ dialog.search-dialog {
     &:modal {
       inset: 0;
       width: 100%;
+      height: 100dvh;
       max-width: 100%;
       max-height: 100dvh;
       translate: 0 0;
@@ -369,7 +369,7 @@ dialog.search-dialog {
 
   @include media('sm', 'up') {
     opacity: 0;
-    translate: -50% 12px;
+    translate: 0 12px;
     scale: 0.98;
     transition:
       display 0.2s allow-discrete,
@@ -380,7 +380,7 @@ dialog.search-dialog {
 
     &[open] {
       opacity: 1;
-      translate: -50% 0;
+      translate: 0 0;
       scale: 1;
     }
 
@@ -403,7 +403,7 @@ dialog.search-dialog {
       }
 
       &[open] {
-        translate: -50% 12px;
+        translate: 0 12px;
         scale: 0.98;
       }
     }

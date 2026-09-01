@@ -18,7 +18,7 @@
 
   svg {
     max-width: 100%;
-    height: auto; 
+    height: auto;
   }
 }
 
@@ -60,12 +60,16 @@
     &::before {
       content: '';
       position: absolute;
-      left: 0;
+      inset-inline-start: 0;
       top: 50%;
       width: 1px;
       translate: -2px -50%;
       height: fi-var(code-block-font-size);
       background-color: fi-var(global-border-color-weight);
+
+      [dir="rtl"] & {
+        translate: 2px -50%;
+      }
     }
   }
 

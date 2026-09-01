@@ -21,29 +21,46 @@
     ul {
       margin: 0;
       text-indent: -0.8em;
-      padding-left: 0.8em;
+      padding-inline-start: 0.8em;
       list-style: none;
 
       a:first-child::before {
         content: '|';
         font-weight: bolder;
-        margin-right: 0.5em;
+        margin-inline-end: 0.5em;
         position: relative;
         bottom: 2px;
         color: fi-var(single-link-color);
       }
 
       ul {
-        padding-left: 1em;
+        padding-inline-start: 1em;
       }
     }
 
     ol {
       margin: 0;
-      padding-left: 2.25em;
+      padding-inline-start: 3ch;
+      list-style: none;
+      counter-reset: toc-counter;
 
-      ol {
-        padding-left: 1.25em;
+      // 10+ items → 2-digit marker
+      &:has(> :nth-child(10)) {
+        padding-inline-start: 4ch;
+      }
+
+      // 100+ items → 3-digit marker
+      &:has(> :nth-child(100)) {
+        padding-inline-start: 5ch;
+      }
+
+      > li {
+        counter-increment: toc-counter;
+
+        &::marker {
+          content: counters(toc-counter, ".") ". ";
+          color: fi-var(global-font-secondary-color);
+        }
       }
 
       li:has(> a:hover)::marker {
@@ -63,7 +80,7 @@
 
 // Common active state styles for auto and dialog TOC
 #toc-auto,
-#toc-dialog {
+#nav-dialog {
   .toc-content {
     li.has-active {
       &::marker {
@@ -100,6 +117,8 @@
   @include sticky-top-offset;
 
   .toc-title {
+    display: flex;
+    align-items: center;
     margin-block: 0 0.5em;
     cursor: pointer;
     user-select: none;
@@ -107,7 +126,7 @@
     &::before {
       content: '|';
       font-weight: bolder;
-      margin-right: 0.5em;
+      margin-inline-end: 0.5em;
       position: relative;
       bottom: 2px;
       color: fi-var(global-border-color);
@@ -116,16 +135,36 @@
     i.toc-icon {
       transition: rotate 0.2s ease;
     }
+
+    .toc-print-btn {
+      padding: 0;
+      border: none;
+      background: none;
+      color: fi-var(global-font-secondary-color);
+      cursor: pointer;
+      margin-inline-start: auto;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: fi-var(global-font-color);
+      }
+    }
   }
 
   &.toc-hidden i.toc-icon {
     rotate: -90deg;
     transition: rotate 0.2s ease;
+
+    [dir="rtl"] & {
+      rotate: 90deg;
+    }
   }
 
   .toc-content {
     overflow-y: auto;
     max-height: fi-var(toc-content-max-height, 90dvh);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 2%, black 98%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 2%, black 98%, transparent 100%);
     @include scrollbar-width(none, 0);
 
     &.always-active ul,
@@ -194,7 +233,8 @@
       }
 
       > ol {
-        padding: 0.4em 1em 0.4em 2.25em;
+        padding-block: 0.4em;
+        padding-inline-end: 1em;
 
         li:has(> a:hover)::marker,
         a:hover {
@@ -218,16 +258,16 @@
   }
 }
 
-#toc-dialog {
+#nav-dialog {
   opacity: 0;
   translate: 100vw 0;
   width: MIN(calc(100% - 4rem), 460px);
   height: 100dvh;
   max-width: 100%;
   max-height: 100%;
-  margin-right: 0;
+  margin-inline-end: 0;
   border: none;
-  border-left: 1px solid fi-var(global-border-color-light);
+  border-inline-start: 1px solid fi-var(global-border-color-light);
   background-color: fi-var(global-background-color);
   transition:
     display 0.2s allow-discrete,
@@ -235,10 +275,14 @@
     translate 0.2s,
     opacity 0.2s 0.4s;
 
-  .toc-close-btn {
+  [dir="rtl"] & {
+    translate: -100vw 0;
+  }
+
+  .nav-close-btn {
     position: absolute;
     top: 1.25rem;
-    right: 1rem;
+    inset-inline-end: 1rem;
     padding: 0.25rem;
     color: fi-var(global-font-secondary-color);
     transition: color 0.2s ease;
@@ -255,18 +299,31 @@
     margin-inline: 1rem;
 
     .toc-title {
-      font-size: calc(#{fi-var(toc-title-font-size)} * 1.5);
-      line-height: calc(#{fi-var(toc-title-font-size)} * 2);
-      margin-block: fi-var(toc-title-font-size);
+      font-size: 1.25rem;
+      line-height: 2rem;
+      margin-block: 1rem 0.75rem;
     }
 
-    .toc-content {
-      font-size: MAX(fi-var(toc-content-font-size), 1rem);
+    // toc and collection tabs in dialog
+    > tab-container {
+      flex-direction: column;
+      margin-block: 0;
 
-      nav {
-        max-height: calc(100dvh - 5rem);
+      > .tab-button {
+        padding: 0.5rem;
+      }
+
+      > .tab-panel {
+        max-height: calc(100dvh - 8rem);
         overflow: auto;
       }
+    }
+
+    // only toc-content or collection-content in dialog
+    > .toc-content,
+    > .collection-content {
+      max-height: calc(100dvh - 5rem);
+      overflow: auto;
     }
   }
 
@@ -302,6 +359,10 @@
 
     &[open] {
       translate: 100vw 0;
+
+      [dir="rtl"] & {
+        translate: -100vw 0;
+      }
     }
   }
 }

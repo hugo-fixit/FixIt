@@ -44,28 +44,26 @@
     "gen:lexers": "pnpm -F chroma-lexers start",
     "gen:docs": "pnpm -F gen-docs start",
     "gen:typedoc": "typedoc",
-    "gen:sassdoc": "npx sassdoc@2.7.2 assets/scss/ --dest ../fixit-docs/static/references/scss --config .sassdocrc",
+    "gen:sassdoc": "npx sassdoc@2.7.2 assets/scss/ --dest public/references/scss --config .sassdocrc",
     "unocss": "unocss",
     "unocss:watch": "unocss --watch",
     "prepare": "simple-git-hooks"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^9.1.0",
-    "@iconify/json": "^2.2.493",
-    "@iconify/utils": "^3.1.3",
+    "@antfu/eslint-config": "^9.2.0",
+    "@hugo-fixit/unocss-preset": "workspace:*",
     "@types/node": "^25.9.4",
     "@unocss/cli": "^66.7.4",
     "auto-changelog-plus": "^1.3.0",
-    "concurrently": "^10.0.3",
-    "eslint": "^10.6.0",
+    "concurrently": "^10.0.4",
+    "eslint": "^10.8.0",
     "jiti": "^2.7.0",
-    "lint-staged": "^17.0.8",
+    "lint-staged": "^17.2.0",
     "serve": "^14.2.6",
     "simple-git-hooks": "^2.13.1",
     "tsx": "^4.22.4",
     "typedoc": "^0.28.20",
-    "typescript": "^6.0.3",
-    "unocss": "^66.7.4"
+    "typescript": "^6.0.3"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm -F versioning start dev && pnpm typecheck && pnpm lint-staged"

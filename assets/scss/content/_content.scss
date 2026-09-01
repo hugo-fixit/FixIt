@@ -15,14 +15,14 @@
       display: inline-block;
       width: max-content;
       rotate: 30deg;
-      margin-right: 0.25em;
+      margin-inline-end: 0.25em;
       color: fi-var(danger);
     }
 
     .icon-repost {
       display: inline-block;
       width: max-content;
-      margin-right: 0.25em;
+      margin-inline-end: 0.25em;
       color: fi-var(success);
     }
 
@@ -116,27 +116,80 @@
         text-rendering: auto;
         -webkit-font-smoothing: antialiased;
         position: absolute;
-        left: 5%;
+        inset-inline-start: 5%;
         top: 50%;
         translate: 0 -50%;
         color: fi-var(hr-active-color);
         font-size: 20px;
         line-height: 1;
-        transition: left 1s ease-in-out, color 0.3s ease, border-color 0.3s ease;
+        transition: inset-inline-start 1s ease-in-out, color 0.3s ease, border-color 0.3s ease;
         font-family: var(--fa-family-classic);
         font-weight: 600;
         content: '\f0c4';
         @include z-index(base);
+
+        [dir="rtl"] & {
+          scale: -1 1;
+        }
       }
 
       &:hover::before {
-        left: calc(95% - 20px);
+        inset-inline-start: calc(95% - 20px);
       }
     }
   }
 
   .content {
     margin-block: 1rem;
+    counter-reset: h2 h3 h4 h5 h6 table-counter;
+
+    > h2.heading-element {
+      counter-increment: h2;
+      counter-reset: h3 h4 h5 h6;
+    }
+
+    > h3.heading-element {
+      counter-increment: h3;
+      counter-reset: h4 h5 h6;
+    }
+
+    > h4.heading-element {
+      counter-increment: h4;
+      counter-reset: h5 h6;
+    }
+
+    > h5.heading-element {
+      counter-increment: h5;
+      counter-reset: h6;
+    }
+
+    > h6.heading-element {
+      counter-increment: h6;
+    }
+
+    > .table-wrapper table[data-table-numbered] {
+      counter-increment: table-counter;
+    }
+
+    > h2.heading-element .heading-numbered::before {
+      content: counter(h2) ". ";
+    }
+
+    > h3.heading-element .heading-numbered::before {
+      content: counter(h2) "." counter(h3) ". ";
+    }
+
+    > h4.heading-element .heading-numbered::before {
+      content: counter(h2) "." counter(h3) "." counter(h4) ". ";
+    }
+
+    > h5.heading-element .heading-numbered::before {
+      content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ". ";
+    }
+
+    > h6.heading-element .heading-numbered::before {
+      content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ". ";
+    }
 
     > h1,
     > h2 {
@@ -217,7 +270,7 @@
     }
 
     :is(ol, ul) :is(ol, ul) {
-      padding-left: 20px;
+      padding-inline-start: 20px;
     }
 
     li::marker {
@@ -232,7 +285,8 @@
       &[data-task] {
         list-style: none;
         @include task-icon {
-          margin: 0 0.25em 0 -1.5em;
+          margin-block: 0;
+          margin-inline: -1.5em 0.25em;
           color: fi-var(task-icon-color, fi-var(secondary));
         };
         @include task-text {
@@ -308,53 +362,8 @@
       }
     }
 
-    .table-wrapper {
-      position: relative;
-      overflow-x: auto;
-      overflow-y: hidden;
-      margin: 0.5rem 0;
-      background: fi-var(table-background-color);
-      border: 1px solid fi-var(table-border-color);
-      @include border-radius;
-      @include set-fi-var(scrollbar-thumb-color, fi-var(table-background-color));
-
-      > table {
-        width: 100%;
-        max-width: 100%;
-        margin: 0;
-        border-spacing: 0;
-        background: fi-var(table-background-color);
-        border-collapse: separate;
-
-        thead {
-          background: fi-var(table-thead-color);
-        }
-
-        &:not([class]) tbody {
-          & tr:nth-child(odd) {
-            background: light-dark(color.adjust($table-background-color, $lightness: -2.25%), color.adjust($table-background-color-dark, $lightness: 2.75%));
-          }
-
-          & tr:hover {
-            background: light-dark(color.adjust($table-background-color, $lightness: -4.5%), color.adjust($table-background-color-dark, $lightness: 5.5%));
-          }
-        }
-
-        th,
-        td {
-          padding: 0.3rem 1rem;
-          border-right: 1px solid fi-var(table-border-color);
-          border-bottom: 1px solid fi-var(table-border-color);
-        }
-
-        tr > :last-child {
-          border-right: none;
-        }
-
-        > :last-child > tr:last-child > * {
-          border-bottom: none;
-        }
-      }
+    > .table-wrapper table[data-table-numbered] {
+      counter-increment: table-counter;
     }
 
     img {
@@ -392,14 +401,14 @@
 
     blockquote {
       display: block;
-      border-left: 0.25em solid fi-var(global-border-color);
+      border-inline-start: 0.25em solid fi-var(global-border-color);
       color: fi-var(blockquote-color);
       padding: 0 1em;
       margin: 1rem 0;
 
       ul,
       ol {
-        padding-left: 1.5em;
+        padding-inline-start: 1.5em;
       }
 
       dl dd {
@@ -427,7 +436,7 @@
 
       ol {
         margin-block: 1em;
-        padding-left: 1rem;
+        padding-inline-start: 1rem;
       }
 
       hr {
@@ -465,6 +474,7 @@
     .diagram-container {
       position: relative;
       margin-block: 0.5rem;
+      direction: ltr;
 
       > .copy-icon-btn {
         position: absolute;
@@ -480,12 +490,17 @@
       overflow-y: hidden;
       // neutralize the margin-right setting of .katex .vlist-t2
       // to prevent scrollbars from appearing when the width is not full
-      padding-right: 2px;
+      padding-inline-end: 2px;
+    }
+    .katex {
+      display: inline-block;
+      direction: ltr;
     }
     .katex-error {
       padding: 0.14em 0.28em;
       background-color: mark;
       cursor: help;
+      direction: ltr;
       @include border-radius;
     }
 
@@ -526,7 +541,7 @@
   &.special {
     .single-title,
     .single-subtitle {
-      text-align: right;
+      text-align: end;
     }
   }
 }

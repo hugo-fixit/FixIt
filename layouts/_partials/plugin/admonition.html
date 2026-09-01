@@ -11,7 +11,7 @@
 */ -}}
 
 {{- $iconMap := dict
-  "note" "fa-solid fa-pencil-alt"
+  "note" "fa-solid fa-pencil"
   "abstract" "fa-solid fa-clipboard-list"
   "info" "fa-solid fa-circle-info"
   "todo" "fa-solid fa-list-check"
@@ -45,7 +45,7 @@
 -}}
 {{- $type := .Type | lower -}}
 {{- $type = index $aliasMap $type | default $type | default "note" -}}
-{{- $icon := index $iconMap $type | default "fa-solid fa-pencil-alt" -}}
+{{- $icon := index $iconMap $type | default "fa-solid fa-pencil" -}}
 {{- $title := .Title | default (T (printf "admonition.%v" $type)) | default (title $type) -}}
 {{- $titleless := eq .Title "~" -}}
 {{- $foldable := ne .Foldable false -}}

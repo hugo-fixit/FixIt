@@ -16,7 +16,7 @@
 
   {{- if gt $daysAgo $reminderThreshold -}}
     {{- $type := "note" -}}
-    {{- $icon := "fa-pencil-alt" -}}
+    {{- $icon := "fa-pencil" -}}
     {{- if gt $daysAgo $warningThreshold -}}
       {{- $type = "warning" -}}
       {{- $icon = "fa-exclamation-triangle" -}}

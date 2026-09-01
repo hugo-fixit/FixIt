@@ -105,6 +105,7 @@ Click the following links to generate a new repository with template:
 
 - **Responsive** layout
 - **Light/Dark** mode
+- **RTL (Right-to-Left)** layout supported
 - Globally consistent **design language**
 - **Pagination** supported
 - Easy-to-use and self-expanding **table of contents**
@@ -190,6 +191,9 @@ FixIt supports multilingual and i18n. For more information, see the [Content Man
 - Hindi
 - Japanese
 - Korean
+- Arabic
+- Persian
+- Urdu
 
 </details>
 
@@ -259,6 +263,10 @@ All feedback is welcome! Head over to the [discussions][discussions], [Pull requ
 [wx-mp]: https://lruihao.cn/images/qr-wx-mp.webp
 [qq-group]: https://qm.qq.com/q/Mn1I7ljqsS
 [dev-group]: https://qm.qq.com/q/ky3uru0mbu
+
+## China Mirror
+
+A mirror is available on Gitee for users in mainland China: [gitee.com/lruihao/FixIt](https://gitee.com/lruihao/FixIt)
 
 ## Contributing
 

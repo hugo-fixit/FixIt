@@ -5,7 +5,6 @@
 # === Init ===
 [init]
 hugoVersionError = "A versão do Hugo é muito baixa.\n\nA versão atual do Hugo é {{ .Current }}, a versão mínima suportada pelo FixIt é {{ .Minimal }}.\n\nSe você está executando o Hugo em seu computador, consulte https://gohugo.io/getting-started/installing/#upgrade-hugo para obter um guia de atualização.\n\nSe você está implantando em uma plataforma de terceiros, configure a versão do Hugo adequadamente."
-hugoExtendedWarn = "A versão Hugo Extended é necessária para o suporte a SCSS."
 configurationError = "Erro de configuração\nVocê ainda não configurou o parâmetro da versão do FixIt corretamente. Consulte https://fixit.lruihao.cn/docs/getting-started/configuration/params/"
 compatibilityError = "Erro de compatibilidade ({{ .From }} -> {{ .To }}):\nVocê tem uma atualização incompatível. Consulte https://github.com/hugo-fixit/FixIt/releases"
 devVersionWarn = "Você está usando a versão de desenvolvedor do FixIt. Por favor, use uma versão estável. \nConsulte https://github.com/hugo-fixit/FixIt/releases"
@@ -71,7 +70,7 @@ more = "Mais"
 # === Header ===
 [header]
 selectLanguage = "Selecione o idioma"
-noMoretTranslations = "Não há mais traduções"
+noTranslations = "Sem traduções"
 switchTheme = "Trocar tema"
 # === Header ===
 
@@ -90,6 +89,7 @@ valinePlaceholder = "O seu comentário..."
 
 # === Assets ===
 [assets]
+table = "Tabela"
 search = "Pesquisa"
 searchPlaceholder = "Pesquisar títulos ou conteúdos..."
 searchIn = "Pesquisar em {{ . }}"
@@ -125,6 +125,8 @@ other = "Compartilhar em"
 # === Single Post ===
 [single]
 contents = "Conteúdos"
+navigation = "Navegação"
+disclaimer = "Aviso: "
 pin = "Fixar no topo"
 repost = "Repostar"
 publishedOnDate = "publicado em {{ .Date }}"
@@ -142,11 +144,17 @@ home = "Home"
 readMore = "Leia mais"
 expirationReminder = "Este artigo foi atualizado pela última vez em {{ .Date }}, o conteúdo pode estar desatualizado."
 encryptedAbstract = "Este artigo foi encriptado, então seu contéudo bruto é invisível!"
+print = "Imprimir"
 encryptedMessage = "Por favor, insira a senha"
 password = "Senha"
 enterBtn = "Entrar"
 encryptyAgain = "Encripte novamente"
 encryptionWarning = "Criptografia de conteúdo detectada, mas ainda estão em texto plano!"
+
+[single.disclaimerMessage]
+ai = "Este artigo foi gerado por IA. Por favor, verifique as informações de forma independente."
+repost = "Este artigo é um repost. Por favor, visite a fonte original para mais informações."
+original = "Este é o conteúdo original do autor."
 encryptionCommand = "Execute `npx @hugo-fixit/encrypt` após a compilação para realmente criptografá-los."
 relatedContent = "Conteúdo relacionado"
 

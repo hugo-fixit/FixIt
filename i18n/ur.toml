@@ -1,0 +1,273 @@
+# Translations for Urdu
+# اردو ترجمے
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === Init ===
+[init]
+hugoVersionError = "Hugo ورژن بہت پرانا ہے۔\n\nموجودہ ورژن {{ .Current }} ہے، اور FixIt کے لیے کم از کم ورژن {{ .Minimal }} درکار ہے۔\n\nاگر آپ Hugo کو ذاتی طور پر استعمال کرتے ہیں، تو اپ گریڈ کے لیے https://hugo-hugo.io/getting-started/installing/#upgrade-hugo دیکھیں۔\n\nاگر آپ کسی تیسرے فریق پلیٹ فارم پر Hugo استعمال کرتے ہیں، تو براہ کرم Hugo ورژن کو اس کے مطابق ترتیب دیں۔"
+configurationError = "ترتیب میں خرابی\nآپ نے ابھی تک FixIt ورژن پیرامیٹر کو صحیح طریقے سے ترتیب نہیں دیا ہے۔ https://fixit.lruihao.cn/docs/getting-started/configuration/params/ دیکھیں"
+compatibilityError = "مطابقت پذیری کی خرابی ({{ .From }} -> {{ .To }}):\nآپ کے پاس غیر مطابقت پذیر اپ ڈیٹ ہے۔ https://github.com/hugo-fixit/FixIt/releases دیکھیں"
+devVersionWarn = "آپ FixIt کا ڈیولپمنٹ ورژن استعمال کر رہے ہیں۔ براہ کرم مستقر ورژن استعمال کرنے پر غور کریں۔\nhttps://github.com/hugo-fixit/FixIt/releases دیکھیں"
+devEnvWarn = "موجودہ ماحول \"development\" ہے۔ \"تبصرہ نظام\"، \"PWA\"، \"CDN\"، \"ڈیجٹل فنگر پرنٹ\" اور \"تجزیات\" غیر فعال ہو جائیں گے۔"
+quicklyUpgrade = "تیزی سے اپ گریڈ کرنے کے لیے کمانڈ استعمال کریں: "
+# === Init ===
+
+# === Base Layout ===
+[baseof]
+backToTop = "اوپر واپس جائیں"
+viewComments = "تبصرے دیکھیں"
+noscript = "یہ ویب سائٹ JavaScript فعال ہونے پر بہتر کام کرتی ہے۔"
+# === Base Layout ===
+
+# === Taxonomy ===
+[archives]
+other = "آرکائیو"
+
+[allSome]
+other = "تمام {{ .Some }}"
+
+[category]
+other = "زمرہ"
+
+[categories]
+other = "زمرے"
+
+[collection]
+other = "مجموعہ"
+
+[collections]
+other = "مجموعے"
+
+[tag]
+other = "ٹیگ"
+
+[tags]
+other = "ٹیگز"
+
+[posts]
+other = "مضامین"
+
+# === Taxonomy ===
+
+# === Section ===
+[section]
+recentlyUpdated = "حال ہی میں اپ ڈیٹ کیا گیا"
+
+[section.totalWordCount]
+one = "ایک لفظ"
+other = "{{ .Count }} الفاظ"
+
+[section.archiveCounter]
+one = "صرف ایک مضمون"
+other = "{{ .Count }} مضامین"
+# === Section ===
+
+# === Pagination ===
+[pagination]
+more = "مزید"
+# === Pagination ===
+
+# === Header ===
+[header]
+selectLanguage = "زبان منتخب کریں"
+noTranslations = "ترجمے نہیں"
+switchTheme = "تھیم تبدیل کریں"
+# === Header ===
+
+# === Footer ===
+[footer]
+poweredBySome = "{{ .Hugo }} سے چلتا ہے | تھیم - {{ .Theme }}"
+siteUV = "کل زائرین"
+sitePV = "کل ملاقاتیں"
+siteRunning = "سائٹ چل رہی ہے ..."
+# === Footer ===
+
+# === Comment ===
+[comment]
+valinePlaceholder = "آپ کا تبصرہ ..."
+# === Comment ===
+
+# === Assets ===
+[assets]
+table = "جدول"
+search = "تلاش"
+searchPlaceholder = "عنوان یا مواد میں تلاش کریں ..."
+searchIn = "{{ . }} میں تلاش کریں"
+searchBy = "تلاش بذریعہ"
+gotoResultsPage = "تلاش کے نتائج کے صفحے پر جائیں ..."
+clear = "صاف کریں"
+cancel = "منسوخ"
+navigate = "نیویگیٹ"
+select = "منتخب کریں"
+close = "بند کریں"
+refresh = "ریفریش"
+noResultsFound = "کوئی نتائج نہیں ملے"
+copyToClipboard = "کلپ بورڈ پر کاپی کریں"
+copyText = "کاپی"
+copiedText = "کاپی ہو گیا"
+toggleLineNumbers = "سطر نمبر دکھائیں/چھپائیں"
+toggleLineWrap = "سطر ریپ دکھائیں/چھپائیں"
+toggleCodeEditable = "کوڈ بلاک میں ترمیم دکھائیں/چھپائیں"
+downloadCode = "کوڈ ڈاؤن لوڈ کریں"
+expandCode = "کوڈ بلاک کو بڑا کریں یا سکیڑیں"
+fullscreen = "فل اسکرین"
+exitFullscreen = "فل اسکرین سے باہر نکلیں"
+cookieconsentMessage = "یہ ویب سائٹ آپ کے تجربے کو بہتر بنانے کے لیے کوکیز استعمال کرتی ہے۔"
+cookieconsentDismiss = "سمجھ گیا!"
+cookieconsentLink = "مزید جانیں"
+# === Assets ===
+
+# === Share ===
+[shareOn]
+other = "پر شیئر کریں"
+# === Share ===
+
+# === Single Post ===
+[single]
+contents = "مواد"
+navigation = "نیویگیشن"
+disclaimer = "Tafheem: "
+pin = "اوپر پن کریں"
+repost = "دوبارہ شائع کریں"
+publishedOnDate = "{{ .Date }} کو شائع ہوا"
+views = "مناظر"
+comments = "تبصرے"
+author = "مصنف"
+updatedOnDate = "{{ .Date }} کو اپ ڈیٹ کیا گیا"
+readMarkdown = "مارک ڈاؤن پڑھیں"
+viewSource = "ذریعہ دیکھیں"
+editThisPage = "اس صفحے میں ترمیم کریں"
+reportIssue = "مسئلہ رپورٹ کریں"
+openInEditor = "ایڈیٹر میں کھولیں"
+back = "واپس"
+home = "ہوم"
+readMore = "مزید پڑھیں"
+expirationReminder = "اس مضمون کو آخری بار {{ .Date }} کو اپ ڈیٹ کیا گیا تھا، اور مواد پرانا ہو سکتا ہے۔"
+encryptedAbstract = "اس مضمون کو انکرپٹ کیا گیا ہے، اس لیے اصل مواد نظر نہیں آتا!"
+print = "پرنٹ"
+encryptedMessage = "براہ کرم پاس ورڈ درج کریں"
+password = "پاس ورڈ"
+enterBtn = "داخل ہوں"
+encryptyAgain = "دوبارہ انکرپٹ کریں"
+encryptionWarning = "مواد کی انکرپشن کا پتہ چلا، لیکن یہ ابھی بھی سادہ متن میں ہے!"
+
+[single.disclaimerMessage]
+ai = "یہ مضمون AI کے ذریعے تیار کیا گیا تھا۔ براہ کرم معلومات کو آزادانہ طور پر تصدیق کریں۔"
+repost = "یہ مضمون ایک دوبارہ شائع کردہ ہے۔ براہ کرم مزید معلومات کے لیے اصل ذریعہ پر جائیں۔"
+original = "یہ مصنف کا اصل مواد ہے۔"
+encryptionCommand = "انکرپشن کے لیے بلڈ کے بعد `npx @hugo-fixit/encrypt` چلائیں۔"
+relatedContent = "متعلقہ مواد"
+
+[single.includedIn]
+categories = "{{ .Categories }} میں شامل"
+collections = "{{ .Collections }} میں شامل"
+both = "{{ .Categories }} اور {{ .Collections }} میں شامل"
+
+[single.wordCount]
+one = "ایک لفظ"
+other = "{{ .Count }} الفاظ"
+
+[single.fuzzyWordCount]
+other = "تقریباً {{ .Count }} الفاظ"
+
+[single.readingTime]
+one = "ایک منٹ"
+other = "{{ .Count }} منٹ"
+
+[single.reward]
+donate = "عطیہ دیں"
+wechatpay = "WeChat Pay"
+alipay = "Alipay"
+paypal = "PayPal"
+bitcoin = "Bitcoin"
+# === Single Post ===
+
+# === Error Pages ===
+[pageNotFound]
+other = "صفحہ نہیں ملا"
+
+[pageNotFoundText]
+other = "آپ جو صفحہ تلاش کر رہے ہیں وہ موجود نہیں ہے۔ ہم معذرت خواہ ہیں۔"
+# === Error Pages ===
+
+# === Offline ===
+[offlineTitle]
+other = "آف لائن"
+
+[offlineText]
+other = "آپ آف لائن ہیں، صرف وہی صفحات دستیاب ہوں گے جو کیشے میں ہیں۔"
+# === Offline ===
+
+# === Service Worker ===
+[serviceWorker]
+updateTitle = "اپ ڈیٹ دستیاب"
+updateText = "اس ویب سائٹ کا نیا ورژن دستیاب ہے۔"
+# === Service Worker ===
+
+# === Link Redirection ===
+[linkRedirection]
+title = "ری ڈائریکشن نوٹس"
+message = "آپ {{ . Title }} چھوڑنے والے ہیں، براہ کرم اپنے اکاؤنٹ اور اثاثوں کی حفاظت پر توجہ دیں۔"
+confirm = "دورے کو جاری رکھیں"
+# === Link Redirection ===
+
+# === Alert ===
+[alert]
+note = "نوٹ"
+tip = "ٹپ"
+important = "اہم"
+warning = "انتباہ"
+caution = "احتیاط"
+# === Alert ===
+
+# === Task List ===
+[taskList]
+x = "تصدیق ہو گئی"
+" " = "تصدیق نہیں ہوئی"
+"/" = "جاری ہے"
+"-" = "منسوخ"
+"<" = "شیڈول کیا گیا"
+">" = "دوبارہ شیڈول کیا گیا"
+"!" = "اہم"
+"!x" = "اہم - تصدیق ہو گئی"
+"?" = "سوال"
+# === Task List ===
+
+# === Admonition ===
+[admonition]
+note = "نوٹ"
+abstract = "خلاصہ"
+info = "معلومات"
+todo = "ٹو ڈو"
+tip = "ٹپ"
+success = "کامیابی"
+question = "سوال"
+warning = "انتباہ"
+failure = "ناکامی"
+danger = "خطرہ"
+bug = "بگ"
+example = "مثال"
+quote = "اقتباس"
+# === Admonition ===
+
+# === Version ===
+[version]
+new = "نیا"
+changed = "تبدیل"
+deleted = "حذف"
+deprecated = "منسوخ"
+# === Version ===
+
+# === Diagram ===
+[diagram]
+zoomIn = "زوم ان"
+zoomOut = "زوم آؤٹ"
+reset = "ری سیٹ"
+download = "SVG ڈاؤن لوڈ"
+# === Diagram ===
+
+# === Tabs ===
+[tabs]
+diagram = "ڈائیگرام"
+code = "کوڈ"
+# === Tabs ===

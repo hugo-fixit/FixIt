@@ -5,6 +5,6 @@
 /// @param {Number} $alpha [1] - Alpha channel value in range 0..1.
 /// @example
 ///   color: fi-rgba(fi-var(secondary), 0.2);
-@function rgba($color, $alpha: 1) {
-  @return string.unquote("rgb(from #{$color} r g b / #{$alpha})");
+@function fi-rgba($color, $alpha: 1) {
+  @return rgb(from $color r g b / $alpha);
 }

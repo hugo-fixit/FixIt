@@ -1,0 +1,29 @@
+# {{ .Site.Title }}
+
+> {{ .Site.Params.description }}
+
+{{- range $name, $taxonomy := .Site.Taxonomies }}
+{{- if gt (len $taxonomy) 0 }}
+
+## {{ title $name }}
+
+{{- range $term, $pages := $taxonomy }}
+{{- if le (len $pages) 5 }}
+- {{ $term }}: {{ range $pages }}[{{ .Title }}]({{ .Permalink }}) {{ end }}
+{{- else }}
+- {{ $term }} ({{ len $pages }})
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+## Pages
+
+{{- range where .Site.RegularPages "Draft" "eq" false }}
+{{- $page := . }}
+{{- with .Description }}
+- [{{ $page.Title }}]({{ $page.Permalink }}): {{ . }}
+{{- else }}
+- [{{ .Title }}]({{ .Permalink }})
+{{- end }}
+{{- end }}

@@ -16,7 +16,7 @@
   &:has(.collection-nav-item:nth-child(2))::before {
     content: '';
     position: absolute;
-    left: 50%;
+    inset-inline-start: 50%;
     bottom: 0.75rem;
     width: 1px;
     height: 2rem;
@@ -55,6 +55,10 @@
 
       i {
         flex-shrink: 0;
+
+        [dir="rtl"] & {
+          scale: -1 1;
+        }
       }
 
       span {
@@ -65,7 +69,7 @@
       }
 
       &[rel='next'] {
-        text-align: right;
+        text-align: end;
       }
 
       &[rel='prev']:hover {
@@ -104,7 +108,7 @@
 
   &.open {
     .collection-summary {
-      background-color: light-dark(color.adjust($global-background-color, $lightness: -5%), color.adjust($global-background-color-dark, $lightness: 5%));
+      background-color: light-dark(color.adjust($global-background-color, $lightness: -4%), color.adjust($global-background-color-dark, $lightness: 4%));
     }
   }
 
@@ -114,7 +118,8 @@
     gap: 0.25em;
     padding: 0.2em 0.5em;
     user-select: none;
-    background-color: light-dark(color.adjust($global-background-color, $lightness: -5%), color.adjust($global-background-color-dark, $lightness: 5%));
+    background-color: light-dark(color.adjust($global-background-color, $lightness: -4.5%), color.adjust($global-background-color-dark, $lightness: 4.5%));
+    transition: background-color 0.2s ease;
 
     > i.fa-layer-group {
       flex-shrink: 0;
@@ -158,7 +163,7 @@
       .collection-item > span::before {
         content: '|';
         font-weight: 600;
-        margin-right: 0.5em;
+        margin-inline-end: 0.5em;
         position: relative;
         bottom: 2px;
         color: fi-var(single-link-color);
@@ -179,7 +184,10 @@
       align-items: center;
       justify-content: center;
       gap: 0.5em;
-      background-color: light-dark(color.adjust($global-background-color, $lightness: -5%), color.adjust($global-background-color-dark, $lightness: 5%));
+
+      [dir="rtl"] & i {
+        scale: -1 1;
+      }
 
       a.collection-nav-item {
         padding-inline: 2px;

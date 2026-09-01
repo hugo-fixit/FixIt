@@ -219,7 +219,7 @@ fieldset {
 // 2. Fix wrapping bug.
 
 legend {
-  float: left; // 1
+  float: inline-start; // 1
   width: 100%;
   padding: 0;
   margin-bottom: 0.5rem;
@@ -228,7 +228,7 @@ legend {
   font-size: 1.5rem;
 
   + * {
-    clear: left; // 2
+    clear: inline-start; // 2
   }
 }
 
@@ -275,20 +275,6 @@ textarea {
     filter: grayscale(1);
   }
 }
-
-// 1. A few input types should stay LTR
-// See https://rtlstyling.com/posts/rtl-styling#form-inputs
-// 2. RTL only output
-// See https://rtlcss.com/learn/usage-guide/control-directives/#raw
-
-/* rtl:raw:
-[type="tel"],
-[type="url"],
-[type="email"],
-[type="number"] {
-  direction: ltr;
-}
-*/
 
 // Remove the inner padding in Chrome and Safari on macOS.
 

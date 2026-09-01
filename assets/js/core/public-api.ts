@@ -50,6 +50,7 @@ export class PublicAPI implements FixItPublicAPI {
   get version() { return this.core.version }
   get themeMode() { return this.core.themeMode }
   get isDark() { return this.core.isDark }
+  get isRTL() { return this.core.isRTL }
 
   setThemeMode(mode: string, persist?: boolean) {
     this.theme.setThemeMode(mode, persist)

@@ -1,15 +1,40 @@
 {{- /*
-  Add a table wrapper to better style overflow tables
-  The reset of the template is the same as the default render-table.html
+  Custom table render hook for FixIt theme.
+  - Wraps tables in a scrollable container
+  - Supports auto-numbering via CSS counters (config: params.table.number)
+  - Supports client-side sorting (config: params.table.sort)
+  - Supports table captions via Markdown attribute {caption="..."}
+  - Per-table override via Markdown attributes (e.g., {number=false, sort=false})
+
   See https://gohugo.io/render-hooks/tables/
 */ -}}
+{{- $pageConfig := dict "Page" .Page "Key" "table" | partial "function/param.html" | merge .Attributes -}}
+{{- $config := .Attributes | merge $pageConfig -}}
+{{- $caption := .Attributes.caption -}}
+
+{{- $attrs := "" -}}
+{{- if $config.number }}
+  {{- $attrs = printf "%s data-table-numbered" $attrs }}
+{{- end -}}
+{{- if $config.sort }}
+  {{- $attrs = printf "%s data-sortable" $attrs }}
+  {{- .Page.Store.Set "hasTableSort" true }}
+{{- end -}}
+{{- range $k, $v := .Attributes }}
+  {{- if and $v (ne $k "number") (ne $k "caption") (ne $k "sort") }}
+    {{- $attrs = printf "%s %s=%q" $attrs $k $v }}
+  {{- end }}
+{{- end -}}
+{{- $attrs = partial "function/trim.html" $attrs -}}
+
 <div class="table-wrapper">
-  <table
-    {{- range $k, $v := .Attributes }}
-      {{- if $v }}
-        {{- printf " %s=%q" $k $v | safeHTMLAttr }}
-      {{- end }}
-    {{- end }}>
+  <table {{ $attrs | safeHTMLAttr }}>
+    {{- if or $config.number $caption }}
+    <caption>
+      {{- if $config.number }}<span class="table-number" data-i18n-table="{{ T `assets.table` }}"></span>{{ end -}}
+      {{- with $caption }}<span class="table-caption">{{ . }}</span>{{ end -}}
+    </caption>
+    {{- end -}}
     <thead>
       {{- range .THead }}
         <tr>

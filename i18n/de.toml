@@ -5,7 +5,6 @@
 # === Init ===
 [init]
 hugoVersionError = "Hugo-Version ist zu niedrig.\n\nAktuelle Hugo-Version ist {{ .Current }}, die minimal unterstützte Version für FixIt ist {{ .Minimal }}.\n\nWenn Sie Hugo auf Ihrem eigenen Computer ausführen, schauen Sie sich https://gohugo.io/getting-started/installing/#upgrade-hugo für eine Upgrade-Anleitung an.\n\nWenn Sie auf einer Drittanbieterplattform bereitstellen, konfigurieren Sie bitte die Hugo-Version entsprechend."
-hugoExtendedWarn = "Die Hugo Extended-Version ist für die Unterstützung von SCSS erforderlich."
 configurationError = "Konfigurationsfehler\nSie haben den FixIt-Versionsparameter noch nicht korrekt konfiguriert. Siehe https://fixit.lruihao.cn/docs/getting-started/configuration/params/?lang=deutsch"
 compatibilityError = "Kompatibilitätsfehler ({{ .From }} -> {{ .To }}):\nSie haben ein inkompatibles Update. Siehe https://github.com/hugo-fixit/FixIt/releases"
 devVersionWarn = "Sie verwenden eine Entwicklungsversion von FixIt. Bitte erwägen Sie die Verwendung einer stabilen Version.\nSiehe https://github.com/hugo-fixit/FixIt/releases"
@@ -70,7 +69,7 @@ more = "Mehr"
 # === Header ===
 [header]
 selectLanguage = "Sprache wählen"
-noMoretTranslations = "Keine weiteren Übersetzungen"
+noTranslations = "Keine Übersetzungen"
 switchTheme = "Darstellung ändern"
 # === Header ===
 
@@ -89,6 +88,7 @@ valinePlaceholder = "Ihr Kommentar ..."
 
 # === Assets ===
 [assets]
+table = "Tabelle"
 search = "Suche"
 searchPlaceholder = "Suche nach Titel und Inhalt..."
 searchIn = "Suche in {{ . }}"
@@ -124,6 +124,8 @@ other = "Teilen auf"
 # === Single Post ===
 [single]
 contents = "Inhalt"
+navigation = "Navigation"
+disclaimer = "Autorenhinweis: "
 pin = "Oben anheften"
 repost = "Erneut posten"
 publishedOnDate = "veröffentlicht an {{ .Date }}"
@@ -141,12 +143,18 @@ home = "Startseite"
 readMore = "Mehr lesen"
 expirationReminder = "Dieser Artikel wurde zuletzt auf {{ .Date }} aktualisiert, der Inhalt kann veraltet sein."
 encryptedAbstract = "Dieser Artikel wurde verschlüsselt, daher ist sein Rohinhalt unsichtbar!"
+print = "Drucken"
 encryptedMessage = "Bitte geben Sie das Passwort ein"
 password = "Passwort"
 enterBtn = "Eintreten"
 encryptyAgain = "Erneut verschlüsseln"
 encryptionWarning = "Inhaltsverschlüsselung erkannt, aber sie sind noch im Klartext!"
 encryptionCommand = "Führen Sie `npx @hugo-fixit/encrypt` nach dem Build aus, um sie tatsächlich zu verschlüsseln."
+
+[single.disclaimerMessage]
+ai = "Dieser Artikel wurde von einer KI generiert. Bitte überprüfen Sie die Informationen unabhängig."
+repost = "Dieser Artikel ist ein Repost. Bitte besuchen Sie die Originalquelle für weitere Informationen."
+original = "Dies ist der Originalinhalt des Autors."
 relatedContent = "Ähnliche Inhalte"
 
 [single.includedIn]

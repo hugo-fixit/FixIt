@@ -1,0 +1,12 @@
+{{- /* Sidebar Collection */ -}}
+<aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="{{ T "collections" }}">
+  {{- /* Collection List */ -}}
+  {{- partial "single/collection-list.html" . -}}
+
+  {{- /* Related Content */ -}}
+  {{- partial "single/related-aside.html" . -}}
+
+  {{- /* Custom Aside */ -}}
+  {{- block "custom-aside" . }}{{ end -}}
+</aside>
+{{- /* EOF */ -}}

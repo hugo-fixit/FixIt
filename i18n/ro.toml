@@ -5,7 +5,6 @@
 # === Init ===
 [init]
 hugoVersionError = "Versiunea Hugo este prea veche.\n\nVersiunea curentă Hugo este {{ .Current }}, versiunea minimă compatibilă cu FixIt este {{ .Minimal }}.\n\nDacă rulați Hugo pe propriul computer, consultați https://gohugo.io/getting-started/installing/#upgrade-hugo pentru ghidul de actualizare.\n\nDacă implementați pe o platformă terță, configurați versiunea Hugo corespunzător."
-hugoExtendedWarn = "Versiunea Hugo Extended este necesară pentru suportul SCSS."
 configurationError = "Eroare de configurare\nNu ați configurat corect parametrul versiunii FixIt. Consultați https://fixit.lruihao.cn/docs/getting-started/configuration/params/"
 compatibilityError = "Eroare de compatibilitate ({{ .From }} -> {{ .To }}):\nAveți o actualizare incompatibilă. Consultați https://github.com/hugo-fixit/FixIt/releases"
 devVersionWarn = "Utilizați o versiune de dezvoltare a FixIt. Vă rugăm să luați în considerare utilizarea unei versiuni stabile.\nConsultați https://github.com/hugo-fixit/FixIt/releases"
@@ -70,7 +69,7 @@ more = "Mai mult"
 # === Header ===
 [header]
 selectLanguage = "Selectare Limbă"
-noMoretTranslations = "Nu mai sunt traduceri disponibile"
+noTranslations = "Fără traduceri"
 switchTheme = "Schimbare Temă"
 # === Header ===
 
@@ -89,6 +88,7 @@ valinePlaceholder = "Comentariul dvs ..."
 
 # === Assets ===
 [assets]
+table = "Tabelă"
 search = "Căutare"
 searchPlaceholder = "Căutarea titlului sau conținutului articolului ..."
 searchIn = "Căutare în {{ . }}"
@@ -124,6 +124,8 @@ other = "Distribuie pe"
 # === Single Post ===
 [single]
 contents = "Cuprins"
+navigation = "Navigare"
+disclaimer = "Notificare: "
 pin = "Fixează în partea de sus"
 repost = "Repostează"
 publishedOnDate = "publicat la {{ .Date }}"
@@ -141,12 +143,18 @@ home = "Acasă"
 readMore = "Citește mai mult"
 expirationReminder = "Acest articol a fost actualizat ultima dată pe {{ .Date }}, conținutul poate fi depășit."
 encryptedAbstract = "Acest articol a fost criptat, astfel încât conținutul său brut este invizibil!"
+print = "Imprimare"
 encryptedMessage = "Vă rugăm să introduceți parola"
 password = "Parolă"
 enterBtn = "Intră"
 encryptyAgain = "Criptează din nou"
 encryptionWarning = "Criptarea conținutului a fost detectată, dar sunt încă în text clar!"
 encryptionCommand = "Rulați `npx @hugo-fixit/encrypt` după compilare pentru a le cripta efectiv."
+
+[single.disclaimerMessage]
+ai = "Acest articol a fost generat de AI. Vă rugăm să verificați informațiile în mod independent."
+repost = "Acest articol este o repostare. Vă rugăm să vizitați sursa originală pentru mai multe informații."
+original = "Acesta este conținutul original al autorului."
 relatedContent = "Conținut înrudit"
 
 [single.includedIn]

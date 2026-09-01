@@ -12,6 +12,7 @@ tags:
 This post is a test post to preview the color syntax in Markdown.
 
 <!--more-->
+<!-- markdownlint-disable MD055 MD056 -->
 
 ## 📝 Syntax
 
@@ -20,6 +21,7 @@ This post is a test post to preview the color syntax in Markdown.
 | HEX   | `` `#RRGGBB` ``    | `` `#0969DA` ``            | `#0969DA`            |
 | RGB   | `` `rgb(R,G,B)` `` | `` `rgb(9, 105, 218)` ``   | `rgb(9, 105, 218)`   |
 | HSL   | `` `hsl(H,S,L)` `` | `` `hsl(212, 92%, 45%)` `` | `hsl(212, 92%, 45%)` |
+{caption="Color syntax in Markdown"}
 
 e.g. The background color is `#ffffff` for light mode and `#000000` for dark mode.
 

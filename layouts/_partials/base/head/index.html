@@ -19,6 +19,24 @@
 <meta name="author" content="{{ $author.name }}">
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage | and .Summary }}{{ .Summary | plainify }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
 
+{{- /* Robots meta tag: respect page-level robots frontmatter; default to index,follow with max-image-preview:large only when cover exists */ -}}
+{{- if isset .Params "robots" -}}
+  <meta name="robots" content="{{ .Params.robots }}">
+{{- else -}}
+  {{- $hasCover := false -}}
+  {{- if .IsHome -}}
+    {{- $hasCover = isset .Site.Params.seo "cover" -}}
+  {{- else if .IsPage -}}
+    {{- $cover := dict "Page" . | partial "function/get-cover.html" -}}
+    {{- $hasCover = or $cover.Source $cover.Matches -}}
+  {{- end -}}
+  {{- if $hasCover -}}
+    <meta name="robots" content="index, follow, max-image-preview:large">
+  {{- else -}}
+    <meta name="robots" content="index, follow">
+  {{- end -}}
+{{- end -}}
+
 {{- $keywords := .Keywords -}}
 {{- if not $keywords -}}
   {{- if .IsPage | and .Params.tags -}}
@@ -97,7 +115,13 @@
 
 {{- /* Alternative output formats (Atom, RSS, manifest etc.) */ -}}
 {{- range .AlternativeOutputFormats -}}
-  {{- if (eq .Name "manifest") | and (not $.Site.Params.app.pwa) -}}
+  {{- if
+    (eq .Name "manifest") | and (
+      hugo.IsServer | or
+      (not hugo.IsProduction) | or
+      (not $.Site.Params.app.pwa)
+    )
+  -}}
     {{- continue -}}
   {{- end -}}
   <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">

@@ -1,14 +1,13 @@
 {{- partial "init/index.html" . -}}
 
 <!DOCTYPE html>
-<html itemscope itemtype="http://schema.org/WebPage" lang="{{ .Site.Language.Locale }}">
+<html itemscope itemtype="http://schema.org/WebPage" lang="{{ .Site.Language.Locale }}" dir="{{ .Site.Language.Direction | default `ltr` }}">
   <head>
     {{- if .IsHome | and (ne .Site.Params.disable_theme_inject true) }}
     <meta name="theme" content='FixIt {{ hugo.Store.Get "version" }}'>
     {{- end }}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-    <meta name="robots" content="noodp" />
     <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
     {{- partial "base/head/index.html" . -}}
   </head>
@@ -18,7 +17,8 @@
       {{- partial "base/header.html" . -}}
       {{- partial "base/breadcrumb.html" . -}}
       {{- $toc := dict "Page" .Page "Key" "toc" | partial "function/param.html" -}}
-      <main class="fi-container"{{ if (eq $toc.enable true) | and (eq $toc.position `left`) }} data-reverse{{ end }}>
+      {{- $tocPosition := $toc.position | default "end" | partial "function/logical-direction.html" -}}
+      <main class="fi-container"{{ if (eq $toc.enable true) | and (eq $tocPosition `start`) }} data-reverse{{ end }}>
         {{- block "content" . }}{{ end -}}
       </main>
       {{- /* Comment */ -}}

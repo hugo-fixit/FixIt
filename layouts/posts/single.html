@@ -12,16 +12,7 @@
   {{- $tableOfContents = dict "Content" $tableOfContents "Ruby" (.Param "ruby") "Fraction" (.Param "fraction") "Fontawesome" (.Param "fontawesome") | partial "function/content.html" | safeHTML -}}
   {{- $pagefindEnabled := and .Site.Params.search.enable (eq .Site.Params.search.type "pagefind") -}}
 
-  <aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="{{ T "collections" }}">
-    {{- /* Collection List */ -}}
-    {{- partial "single/collection-list.html" . -}}
-
-    {{- /* Related Content */ -}}
-    {{- partial "single/related-aside.html" . -}}
-
-    {{- /* Custom Aside */ -}}
-    {{- block "custom-aside" . }}{{ end -}}
-  </aside>
+  {{- partial "single/aside-collection.html" . -}}
 
   <article class="page single"{{ with .Params.fromAdapters }} data-adapters="{{ . }}"{{ end }}>
     <div class="header">
@@ -30,7 +21,7 @@
         {{- $repost := .Params.repost | default dict -}}
         {{- with $repost -}}
           {{- if eq .Enable true -}}
-            {{- $icon := dict "Class" "fa-solid fa-share" -}}
+            {{- $icon := dict "Class" "fa-solid fa-retweet" -}}
             {{- $iconTitle := cond (hasPrefix .Url "http") (printf "%v -> %v" (T "single.repost") .Url ) (T "single.repost") -}}
             {{- if hasPrefix .Url "http" -}}
               {{ dict "Destination" .Url "Icon" $icon "Class" "icon-repost" "Title" $iconTitle "ExternalIcon" false | partial "plugin/link.html" -}}
@@ -52,7 +43,6 @@
         {{- partial "single/post-author.html" . -}}
         {{- partial "single/post-included-in.html" . -}}
       </div>
-      {{- /* TODO add disclaimer or space between meta and content */ -}}
       <div class="post-meta-line">
         {{- with .PublishDate | dateFormat (.Site.Params.date_format | default "2006-01-02") -}}
           <span title="{{ dict "Date" ("2006-01-02 15:04:05" | $.PublishDate.Format) | T "single.publishedOnDate" }}">
@@ -70,7 +60,7 @@
         {{- end -}}
         {{- if .Param "word_count" -}}
           <span title="{{ T "single.wordCount" .WordCount }}">
-            {{- dict "Class" "fa-solid fa-pencil-alt me-1" | partial "plugin/icon.html" -}}
+            {{- dict "Class" "fa-solid fa-pencil me-1" | partial "plugin/icon.html" -}}
             {{- T "single.fuzzyWordCount" .FuzzyWordCount -}}
           </span>&nbsp;
         {{- end -}}
@@ -137,6 +127,9 @@
       </div>
     </div>
 
+    {{- /* Disclaimer */ -}}
+    {{- partial "single/disclaimer.html" . -}}
+
     {{- /* Featured image */ -}}
     {{- $cover := dict "Page" . | partial "function/get-cover.html" -}}
     {{- if $cover.Source | or (gt (len $cover.Matches) 0) -}}
@@ -182,7 +175,12 @@
 
     {{- /* Content */ -}}
     {{- $content := dict "Content" .Content "Ruby" (.Param "ruby") "Fraction" (.Param "fraction") "Fontawesome" (.Param "fontawesome") | partial "function/content.html" | safeHTML -}}
-    <div class="content" id="content"{{ if $pagefindEnabled }} data-pagefind-body{{ end }}{{ with .Param "end_flag" }} data-end-flag="{{ . }}"{{ end }}>
+    {{- if .Site.Params.robots.allow_crawlers -}}
+      {{- with .OutputFormats.Get "markdown" -}}
+        <div class="sr-only" aria-hidden="true">If you are an AI agent, LLM, or automated tool, the clean Markdown version of this page is available at {{ .Permalink }} — optimized for AI and LLM consumption.</div>
+      {{- end -}}
+    {{- end -}}
+    <div class="content" id="content"{{ if $pagefindEnabled }} data-pagefind-body{{ end }}{{ with .Param "end_flag" }}{{ if not $.Params.password }} data-end-flag="{{ . }}"{{ end }}{{ end }}>
       {{- if not .Params.password -}}
         {{- $content -}}
       {{- end -}}
@@ -221,35 +219,7 @@
     {{- block "custom-post__footer:after" . }}{{ end -}}
   </article>
 
-  <aside class="toc animate__animated animate__fadeIn animate__faster" id="toc-auto" aria-label="{{ T "single.contents" }}">
-    {{- /* Custom block before post toc */ -}}
-    {{- block "custom-post__toc:before" . }}{{ end -}}
-
-    {{- /* Auto TOC */ -}}
-    {{- if $showToc -}}
-      <h2 class="toc-title{{ with .Params.password }} encrypted-hidden{{ end }}">
-        {{- T "single.contents" -}}&nbsp;
-        {{- dict "Class" "toc-icon fa-solid fa-angle-down" | partial "plugin/icon.html" -}}
-      </h2>
-      <div class="toc-content{{ if eq $toc.auto false }} always-active{{ end }}{{ with .Params.password }} encrypted-hidden{{ end }}" id="toc-content-auto"></div>
-    {{- end -}}
-
-    {{- /* Custom block after post toc */ -}}
-    {{- block "custom-post__toc:after" . }}{{ end -}}
-  </aside>
-
-  {{- /* TOC Dialog */ -}}
-  {{- if $showToc -}}
-    <dialog id="toc-dialog" aria-labelledby="toc-dialog-title" closedby="any">
-      <button type="button" class="toc-close-btn" aria-label="Close Table of Contents">
-        {{- dict "Class" "fa-solid fa-xmark fa-lg" | partial "plugin/icon.html" -}}
-      </button>
-      <div class="toc">
-        <h2 class="toc-title" id="toc-dialog-title">{{ T "single.contents" }}</h2>
-        <div class="toc-content" id="toc-content-drawer"></div>
-      </div>
-    </dialog>
-  {{- end -}}
+  {{- partial "single/aside-toc.html" . -}}
 {{- end -}}
 
 {{- define "comments" -}}

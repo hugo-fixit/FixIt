@@ -9,13 +9,10 @@
 /// @example
 ///   color: fi-var(global-font-color);
 ///   background: fi-var(custom-bg, #fff);
-@function var($name, $fallback: null) {
+@function fi-var($name, $fallback: null) {
   @if $fallback != null {
-    @if meta.type-of($fallback) == string {
-      @return string.unquote('var(#{$rootPrefix}#{$name}, "#{$fallback}")');
-    }
-    @return string.unquote("var(#{$rootPrefix}#{$name}, #{$fallback})");
+    @return var(#{$rootPrefix}#{$name}, $fallback);
   }
 
-  @return string.unquote("var(#{$rootPrefix}#{$name})");
+  @return var(#{$rootPrefix}#{$name});
 }

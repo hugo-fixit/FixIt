@@ -1,0 +1,273 @@
+# Translations for Arabic
+# الترجمة إلى العربية
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === Init ===
+[init]
+hugoVersionError = "إصدار Hugo منخفض جداً.\n\nالإصدار الحالي هو {{ .Current }}، والإصدار الأدنى المطلوب لـ FixIt هو {{ .Minimal }}.\n\nإذا كنت تستخدم Hugo على جهازك الشخصي، راجع https://gohugo.io/getting-started/installing/#upgrade-hugo لدليل الترقية.\n\nإذا كنت تستخدم Hugo على منصة طرف ثالث، يرجى تكوين إصدار Hugo وفقاً لذلك."
+configurationError = "خطأ في التكوين\nلم تقم بتكوين معامل إصدار FixIt بشكل صحيح بعد. راجع https://fixit.lruihao.cn/docs/getting-started/configuration/params/"
+compatibilityError = "خطأ في التوافق ({{ .From }} -> {{ .To }}):\nلديك تحديث غير متوافق. راجع https://github.com/hugo-fixit/FixIt/releases"
+devVersionWarn = "أنت تستخدم إصدار تطوير من FixIt. يُرجى التفكير في استخدام إصدار مستقر.\nراجع https://github.com/hugo-fixit/FixIt/releases"
+devEnvWarn = "البيئة الحالية هي \"development\". سيتم تعطيل \"نظام التعليقات\"، \"PWA\"، \"CDN\"، \"البصمة الرقمية\" و\"التحليلات\"."
+quicklyUpgrade = "للترقية السريعة استخدم الأمر: "
+# === Init ===
+
+# === Base Layout ===
+[baseof]
+backToTop = "العودة للأعلى"
+viewComments = "عرض التعليقات"
+noscript = "يعمل هذا الموقع بشكل أفضل مع تمكين JavaScript."
+# === Base Layout ===
+
+# === Taxonomy ===
+[archives]
+other = "الأرشيف"
+
+[allSome]
+other = "جميع {{ .Some }}"
+
+[category]
+other = "التصنيف"
+
+[categories]
+other = "التصنيفات"
+
+[collection]
+other = "المجموعة"
+
+[collections]
+other = "المجموعات"
+
+[tag]
+other = "الوسم"
+
+[tags]
+other = "الوسوم"
+
+[posts]
+other = "المقالات"
+
+# === Taxonomy ===
+
+# === Section ===
+[section]
+recentlyUpdated = "تم التحديث مؤخراً"
+
+[section.totalWordCount]
+one = "كلمة واحدة"
+other = "{{ .Count }} كلمة"
+
+[section.archiveCounter]
+one = "مقال واحد فقط"
+other = "{{ .Count }} مقالة"
+# === Section ===
+
+# === Pagination ===
+[pagination]
+more = "المزيد"
+# === Pagination ===
+
+# === Header ===
+[header]
+selectLanguage = "اختر اللغة"
+noTranslations = "لا توجد ترجمات"
+switchTheme = "تغيير السمة"
+# === Header ===
+
+# === Footer ===
+[footer]
+poweredBySome = "بدعم من {{ .Hugo }} | السمة - {{ .Theme }}"
+siteUV = "إجمالي الزوار"
+sitePV = "إجمالي الزيارات"
+siteRunning = "الموقع يعمل منذ ..."
+# === Footer ===
+
+# === Comment ===
+[comment]
+valinePlaceholder = "تعليقك ..."
+# === Comment ===
+
+# === Assets ===
+[assets]
+table = "جدول"
+search = "بحث"
+searchPlaceholder = "ابحث في العناوين أو المحتوى ..."
+searchIn = "ابحث في {{ . }}"
+searchBy = "بحث بواسطة"
+gotoResultsPage = "الذهاب إلى صفحة نتائج البحث ..."
+clear = "مسح"
+cancel = "إلغاء"
+navigate = "تنقل"
+select = "تحديد"
+close = "إغلاق"
+refresh = "تحديث"
+noResultsFound = "لم يتم العثور على نتائج"
+copyToClipboard = "نسخ إلى الحافظة"
+copyText = "نسخ"
+copiedText = "تم النسخ"
+toggleLineNumbers = "إظهار/إخفاء أرقام الأسطر"
+toggleLineWrap = "إظهار/إخفاء التفاف الأسطر"
+toggleCodeEditable = "إظهار/إخفاء تحرير كتلة الكود"
+downloadCode = "تحميل الكود"
+expandCode = "توسيع أو طي كتلة الكود"
+fullscreen = "ملء الشاشة"
+exitFullscreen = "الخروج من ملء الشاشة"
+cookieconsentMessage = "يستخدم هذا الموقع ملفات تعريف الارتباط لتحسين تجربتك."
+cookieconsentDismiss = "فهمت!"
+cookieconsentLink = "اعرف المزيد"
+# === Assets ===
+
+# === Share ===
+[shareOn]
+other = "مشاركة على"
+# === Share ===
+
+# === Single Post ===
+[single]
+contents = "المحتويات"
+navigation = "التنقل"
+disclaimer = "تنبيه: "
+pin = "تثبيت في الأعلى"
+repost = "إعادة النشر"
+publishedOnDate = "نُشر في {{ .Date }}"
+views = "مشاهدات"
+comments = "تعليقات"
+author = "المؤلف"
+updatedOnDate = "تم التحديث في {{ .Date }}"
+readMarkdown = "قراءة Markdown"
+viewSource = "عرض المصدر"
+editThisPage = "تعديل هذه الصفحة"
+reportIssue = "الإبلاغ عن مشكلة"
+openInEditor = "فتح في المحرر"
+back = "رجوع"
+home = "الرئيسية"
+readMore = "اقرأ المزيد"
+expirationReminder = "تم تحديث هذا المقال آخر مرة في {{ .Date }}، وقد يكون المحتوى قديماً."
+encryptedAbstract = "تم تشفير هذا المقال، لذا المحتوى الأصلي غير مرئي!"
+print = "طباعة"
+encryptedMessage = "يرجى إدخال كلمة المرور"
+password = "كلمة المرور"
+enterBtn = "دخول"
+encryptyAgain = "تشفير مرة أخرى"
+encryptionWarning = "تم اكتشاف تشفير المحتوى، لكنه لا يزال بنص عادي!"
+
+[single.disclaimerMessage]
+ai = "تم إنشاء هذا المقال بواسطة الذكاء الاصطناعي. يرجى التحقق من المعلومات بشكل مستقل."
+repost = "هذا المقال هو إعادة نشر. يرجى زيارة المصدر الأصلي لمزيد من المعلومات."
+original = "هذا هو المحتوى الأصلي للمؤلف."
+encryptionCommand = "قم بتشغيل `npx @hugo-fixit/encrypt` بعد البناء لتشفيره فعلياً."
+relatedContent = "محتوى ذي صلة"
+
+[single.includedIn]
+categories = "مدرجة في {{ .Categories }}"
+collections = "مدرجة في {{ .Collections }}"
+both = "مدرجة في {{ .Categories }} و {{ .Collections }}"
+
+[single.wordCount]
+one = "كلمة واحدة"
+other = "{{ .Count }} كلمة"
+
+[single.fuzzyWordCount]
+other = "حوالي {{ .Count }} كلمة"
+
+[single.readingTime]
+one = "دقيقة واحدة"
+other = "{{ .Count }} دقائق"
+
+[single.reward]
+donate = "تبرع"
+wechatpay = "WeChat Pay"
+alipay = "Alipay"
+paypal = "PayPal"
+bitcoin = "Bitcoin"
+# === Single Post ===
+
+# === Error Pages ===
+[pageNotFound]
+other = "الصفحة غير موجودة"
+
+[pageNotFoundText]
+other = "الصفحة التي تبحث عنها غير موجودة. نعتذر عن ذلك."
+# === Error Pages ===
+
+# === Offline ===
+[offlineTitle]
+other = "غير متصل"
+
+[offlineText]
+other = "أنت غير متصل بالإنترنت، ستكون فقط الصفحات المخزنة مؤقتاً متاحة."
+# === Offline ===
+
+# === Service Worker ===
+[serviceWorker]
+updateTitle = "تحديث متاح"
+updateText = "يتوفر إصدار جديد من هذا الموقع."
+# === Service Worker ===
+
+# === Link Redirection ===
+[linkRedirection]
+title = "إشعار إعادة التوجيه"
+message = "أنت على وشك مغادرة {{ .Title }}، يرجى الانتباه إلى أمان حسابك وممتلكاتك."
+confirm = "متابعة الزيارة"
+# === Link Redirection ===
+
+# === Alert ===
+[alert]
+note = "ملاحظة"
+tip = "نصيحة"
+important = "مهم"
+warning = "تحذير"
+caution = "انتبه"
+# === Alert ===
+
+# === Task List ===
+[taskList]
+x = "تم التحقق"
+" " = "لم يتم التحقق"
+"/" = "قيد التنفيذ"
+"-" = "ملغى"
+"<" = "مجدول"
+">" = "أُعيد جدولته"
+"!" = "مهم"
+"!x" = "مهم - تم التحقق"
+"?" = "سؤال"
+# === Task List ===
+
+# === Admonition ===
+[admonition]
+note = "ملاحظة"
+abstract = "ملخص"
+info = "معلومات"
+todo = "المهام"
+tip = "نصيحة"
+success = "نجاح"
+question = "سؤال"
+warning = "تحذير"
+failure = "فشل"
+danger = "خطر"
+bug = "خلل"
+example = "مثال"
+quote = "اقتباس"
+# === Admonition ===
+
+# === Version ===
+[version]
+new = "جديد"
+changed = "تم التغيير"
+deleted = "تم الحذف"
+deprecated = "متقادم"
+# === Version ===
+
+# === Diagram ===
+[diagram]
+zoomIn = "تكبير"
+zoomOut = "تصغير"
+reset = "إعادة تعيين"
+download = "تحميل SVG"
+# === Diagram ===
+
+# === Tabs ===
+[tabs]
+diagram = "مخطط"
+code = "الكود"
+# === Tabs ===

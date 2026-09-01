@@ -5,7 +5,6 @@
 # === Init ===
 [init]
 hugoVersionError = "Верзија Hugo-а је прениска.\n\nТренутна верзија Hugo-а је {{ .Current }}, а минимална подржана верзија за FixIt је {{ .Minimal }}.\n\nАко покрећете Hugo на свом рачунару, погледајте https://gohugo.io/getting-started/installing/#upgrade-hugo за водич за надоградњу.\n\nАко постављате на платформу треће стране, конфигуришите верзију Hugo-а у складу с тим."
-hugoExtendedWarn = "Верзија Hugo Extended је неопходна за подршку SCSS-а."
 configurationError = "Грешка у конфигурацији\nНисте правилно конфигурисали параметар верзије FixIt. Погледајте https://fixit.lruihao.cn/docs/getting-started/configuration/params/"
 compatibilityError = "Грешка у компатибилности ({{ .From }} -> {{ .To }}):\nИмате некомпатибилно ажурирање. Погледајте https://github.com/hugo-fixit/FixIt/releases"
 devVersionWarn = "Користите развојну верзију FixIt. Размотрите коришћење стабилне верзије.\nПогледајте https://github.com/hugo-fixit/FixIt/releases"
@@ -70,7 +69,7 @@ more = "Више"
 # === Header ===
 [header]
 selectLanguage = "Изабери Језик"
-noMoretTranslations = "Нема више превода"
+noTranslations = "Нема превода"
 switchTheme = "Промени Тему"
 # === Header ===
 
@@ -89,6 +88,7 @@ valinePlaceholder = "Ваш коментар ..."
 
 # === Assets ===
 [assets]
+table = "Табела"
 search = "Претрага"
 searchPlaceholder = "Претражи наслове или садржај..."
 searchIn = "Претражи у {{ . }}"
@@ -124,6 +124,8 @@ other = "Подели на"
 # === Single Post ===
 [single]
 contents = "Садржаји"
+navigation = "Навигација"
+disclaimer = "Obavetenje: "
 pin = "Закачи"
 repost = "Поново објави"
 publishedOnDate = "објављено {{ .Date }}"
@@ -141,12 +143,18 @@ home = "Почетна"
 readMore = "Прочитај више"
 expirationReminder = "Овај чланак је последњи пут ажуриран {{ .Date }}, садржај је можда застарео."
 encryptedAbstract = "Овај чланак је шифрован."
+print = "Штампај"
 encryptedMessage = "Унесите лозинку да бисте видели садржај."
 password = "Паролица"
 enterBtn = "Унеси"
 encryptyAgain = "Поново шифруј"
 encryptionWarning = "Детектовано је шифровање садржаја, али су и даље у обичном тексту!"
 encryptionCommand = "Покрените `npx @hugo-fixit/encrypt` након изградње да бисте их заиста шифровали."
+
+[single.disclaimerMessage]
+ai = "Овај чланак је генерисан од стране вештачке интелигенције. Молимо вас да независно проверите информације."
+repost = "Овај чланак је репост. Молимо вас да посетите оригинални извор за више информација."
+original = "Ово је оригинални садржај аутора."
 relatedContent = "Повезани садржај"
 
 [single.includedIn]

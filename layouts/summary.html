@@ -25,7 +25,7 @@
     {{- $repost := .Params.repost | default dict -}}
     {{- with $repost -}}
       {{- if eq .Enable true -}}
-        {{- $icon := dict "Class" "fa-solid fa-share" -}}
+        {{- $icon := dict "Class" "fa-solid fa-retweet" -}}
         {{- $title := cond (hasPrefix .Url "http") (printf "%v -> %v" (T "single.repost") .Url ) (T "single.repost") -}}
         <span title="{{ $title }}" class="icon-repost">{{- $icon | partial "plugin/icon.html" -}}</span>
       {{- end -}}

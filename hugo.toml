@@ -90,7 +90,7 @@ pre = ""
 # You can add extra information after the name (HTML format is supported), such as icons.
 post = ""
 name = "Archives"
-url = "/archives/"
+url = "archives/"
 # Title will be shown when you hover on this menu link.
 title = ""
 weight = 1
@@ -99,7 +99,8 @@ weight = 1
 [menus.main.params]
 # Add CSS class to a specific menu item.
 class = ""
-# Whether set as a draft menu item whose function is similar to a draft post/page.
+# Whether set as a draft menu item, hidden by default.
+# Visible when env var is set: HUGO_PARAMS_MENU_DRAFT=true hugo server
 draft = false
 # Add FontAwesome icon to a specific menu item.
 icon = "fa-solid fa-archive"
@@ -115,7 +116,7 @@ parent = ""
 pre = ""
 post = ""
 name = "Categories"
-url = "/categories/"
+url = "categories/"
 title = ""
 weight = 2
 
@@ -128,7 +129,7 @@ parent = ""
 pre = ""
 post = ""
 name = "Tags"
-url = "/tags/"
+url = "tags/"
 title = ""
 weight = 3
 
@@ -400,6 +401,15 @@ mediaType = "application/manifest+json"
 rel = "manifest"
 isPlainText = true
 isHTML = false
+
+# Options to make output llms.txt file (AI-friendly site map).
+# Add "llms" to home outputs to enable.
+[outputFormats.llms]
+baseName = "llms"
+mediaType = "text/plain"
+isPlainText = true
+isHTML = false
+notAlternative = true
 
 # -------------------------------------------------------------------------------------
 # Output Configuration
@@ -709,14 +719,24 @@ keep_static = false
 # Whether to make the table of the contents in the sidebar automatically collapsed.
 auto = true
 # Position of TOC.
-# available values: ["left", "right"]
-position = "right"
+# available values: ["start", "end"]
+position = "end"
 # Supersede `markup.tableOfContents` settings.
 ordered = false
 start_level = 2
 end_level = 6
 # Whether to decrease the H1 heading level in content.
 decrease_h1 = false
+
+# {{< version 1.0.0 >}} Post disclaimer/declaration.
+[params.disclaimer]
+# Whether to enable the disclaimer.
+enable = false
+# Disclaimer type.
+# available values: ["ai", "repost", "original", "custom"]
+type = "ai"
+# Custom disclaimer content (optional, uses I18n default if empty).
+content = ""
 
 # Display a message at the beginning of an article to warn the reader that its content might be expired.
 [params.expiration_reminder]
@@ -740,13 +760,12 @@ enable = false
 # Only enable in main section pages (default is posts).
 only_main_section = true
 
-[params.heading.number.format]
-h1 = "{title}"
-h2 = "{h2} {title}"
-h3 = "{h2}.{h3} {title}"
-h4 = "{h2}.{h3}.{h4} {title}"
-h5 = "{h2}.{h3}.{h4}.{h5} {title}"
-h6 = "{h2}.{h3}.{h4}.{h5}.{h6} {title}"
+# {{< version 1.0.0 >}} Table configuration.
+[params.table]
+# Whether to enable auto table numbering.
+number = false
+# Whether to enable table sorting.
+sort = true
 
 # Mathematical formulas configuration.
 # See: [Formula](https://fixit.lruihao.cn/docs/content-management/markdown-syntax/extended/#formula)
@@ -1156,6 +1175,18 @@ lang = ""
 light_theme = "light"
 dark_theme = "dark"
 lazy_load = true
+
+# robots.txt configuration (requires enableRobotsTXT = true).
+[params.robots]
+# Allow AI crawlers (unblock GPTBot/ClaudeBot etc.) + Content-Signal comment + AI hidden hint.
+allow_crawlers = false
+# Custom rules appended to robots.txt (optional).
+# [[params.robots.rules]]
+# user_agent = "SomeBot"
+# disallow = "/"
+# [[params.robots.rules]]
+# user_agent = "GoodBot"
+# allow = "/"
 
 # Third-party library configuration for some custom CSS and JS files.
 # Files can be loaded from local assets (relative to /assets/) or remote CDN URLs.
@@ -1744,13 +1775,13 @@ polyfill = false
 # Whether to use object-fit-images to be compatible with older browsers.
 object_fit = false
 
-# GitHub banner in the top-right or top-left corner.
+# GitHub banner in the header corner.
 [params.github_corner]
 enable = false
 permalink = "https://github.com/hugo-fixit/FixIt"
 title = "View source on GitHub"
-# available values: ["left", "right"]
-position = "right"
+# available values: ["start", "end"]
+position = "end"
 
 # Gravatar configuration.
 [params.gravatar]
@@ -1771,8 +1802,8 @@ scrollpercent = false
 # Reading progress bar.
 [params.reading_progress]
 enable = false
-# available values: ["left", "right"]
-start = "left"
+# available values: ["start", "end"]
+start = "start"
 # available values: ["top", "bottom"]
 position = "top"
 reversed = false

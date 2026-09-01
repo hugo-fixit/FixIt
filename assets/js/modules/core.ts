@@ -1,6 +1,6 @@
 import type { CoreService } from '../core/tokens'
 import type { FixItConfig, MaskOverlayHandler } from '../types'
-import { getThemeMode, isDarkMode } from '../utils'
+import { getThemeMode, isDarkMode, isRTL } from '../utils'
 
 /**
  * Core module — shared state initialization and mask overlay management.
@@ -13,6 +13,7 @@ import { getThemeMode, isDarkMode } from '../utils'
 export class CoreModule implements CoreService {
   readonly config: FixItConfig
   readonly version: string
+  readonly isRTL: boolean
   themeMode: string
   isDark: boolean
 
@@ -22,6 +23,7 @@ export class CoreModule implements CoreService {
   constructor() {
     this.config = window.config
     this.version = this.config.version
+    this.isRTL = isRTL()
     this.themeMode = getThemeMode()
     this.isDark = isDarkMode()
 

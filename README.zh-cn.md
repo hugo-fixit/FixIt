@@ -105,6 +105,7 @@ pnpx fixit-cli create my-blog
 
 - **响应式** 布局
 - **浅色/深色** 主题模式
+- 支持 **RTL（从右到左）** 布局
 - 全局一致的 **设计语言**
 - 支持 **分页**
 - 易用和自动展开的 **文章目录**
@@ -190,6 +191,9 @@ FixIt 主题多语言基本配置及自动翻译等详见 [内容管理](https:/
 - 印地语
 - 日语
 - 韩语
+- 阿拉伯语
+- 波斯语
+- 乌尔都语
 
 </details>
 
@@ -259,6 +263,10 @@ FixIt 主题支持所有主流浏览器的最近两个版本。
 [wx-mp]: https://lruihao.cn/images/qr-wx-mp.webp
 [qq-group]: https://qm.qq.com/q/Mn1I7ljqsS
 [dev-group]: https://qm.qq.com/q/ky3uru0mbu
+
+## 中国区镜像
+
+为方便中国大陆用户访问，FixIt 在 Gitee 上提供了镜像仓库：[gitee.com/lruihao/FixIt](https://gitee.com/lruihao/FixIt)
 
 ## 参与贡献
 

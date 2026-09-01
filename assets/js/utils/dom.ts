@@ -1,4 +1,12 @@
 /**
+ * Check whether the document direction is right-to-left.
+ * @returns `true` if the document is RTL.
+ */
+export function isRTL(): boolean {
+  return document.documentElement.dir === 'rtl'
+}
+
+/**
  * Get the current vertical scroll position.
  * @returns The scroll offset in pixels.
  */

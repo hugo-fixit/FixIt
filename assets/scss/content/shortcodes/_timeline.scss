@@ -81,7 +81,7 @@
       position: absolute;
       top: 1.25rem;
       translate: 0 -50%;
-      left: 0;
+      inset-inline-start: 0;
       text-align: center;
       border-style: solid;
       color: transparent;
@@ -99,7 +99,7 @@
       content: '';
       position: absolute;
       top: 0;
-      left: calc(#{fi-var(timeline-circle-size)} / 2 + #{fi-var(timeline-width)} / 2);
+      inset-inline-start: calc(#{fi-var(timeline-circle-size)} / 2 + #{fi-var(timeline-width)} / 2);
       width: fi-var(timeline-width);
       height: 100%;
       background-color: fi-var(timeline-color);

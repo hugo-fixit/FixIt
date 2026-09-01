@@ -5,7 +5,6 @@
 # === Init ===
 [init]
 hugoVersionError = "Hugo 版本过低。\n\n目前使用的 Hugo 版本为 {{ .Current }}，FixIt 支持的最低的 Hugo 版本为 {{ .Minimal }}。\n\n如果你正在自己的计算机上运行 Hugo，请访问 https://gohugo.io/getting-started/installing/#upgrade-hugo 以查阅升级指南。\n\n如果你正在第三方平台上部署，请按照相应文档配置 Hugo 版本。"
-hugoExtendedWarn = "需要使用 Hugo Extended 版本来获得 SCSS 支持。"
 configurationError = "配置文件错误\n你还没有正确配置 FixIt 的版本参数。参考 https://fixit.lruihao.cn/zh-cn/docs/getting-started/configuration/params/"
 compatibilityError = "兼容性错误 ({{ .From }} -> {{ .To }}):\n你进行了一次不兼容的更新。参考 https://github.com/hugo-fixit/FixIt/releases"
 devVersionWarn = "你正在使用开发版的 FixIt，请考虑使用稳定版。\n见 https://github.com/hugo-fixit/FixIt/releases"
@@ -68,7 +67,7 @@ more = "更多"
 # === Header ===
 [header]
 selectLanguage = "选择语言"
-noMoretTranslations = "没有更多翻译"
+noTranslations = "无翻译"
 switchTheme = "切换主题"
 # === Header ===
 
@@ -87,6 +86,7 @@ valinePlaceholder = "你的评论……"
 
 # === Assets ===
 [assets]
+table = "表"
 search = "搜索"
 searchPlaceholder = "搜索文章标题或内容……"
 searchIn = "在 {{ . }} 中搜索"
@@ -122,6 +122,8 @@ other = "分享到"
 # === Single Post ===
 [single]
 contents = "目录"
+navigation = "导航"
+disclaimer = "作者声明："
 pin = "置顶"
 repost = "转载"
 publishedOnDate = "发布于 {{ .Date }}"
@@ -139,6 +141,7 @@ home = "主页"
 readMore = "阅读全文"
 expirationReminder = "本文最后更新于 {{ .Date }}，文中内容可能已过时。"
 encryptedAbstract = "本文已加密，因此其原始内容不可见！"
+print = "打印"
 encryptedMessage = "请输入密码"
 password = "密码"
 enterBtn = "进入"
@@ -146,6 +149,11 @@ encryptyAgain = "重新加密"
 encryptionWarning = "检测到内容加密，但仍为明文状态！"
 encryptionCommand = "请在构建后执行 `npx @hugo-fixit/encrypt` 以实际加密内容。"
 relatedContent = "相关内容"
+
+[single.disclaimerMessage]
+ai = "本文由 AI 生成，请注意甄别内容真实性。"
+repost = "本文为转载内容，请访问原文了解更多信息。"
+original = "本文为作者原创内容。"
 
 [single.includedIn]
 categories = "收录于 {{ .Categories }}"

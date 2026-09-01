@@ -1,0 +1,13 @@
+{
+  "name": "@hugo-fixit/unocss-preset",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "UnoCSS preset for Hugo FixIt theme",
+  "author": "Lruihao",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@iconify/json": "^2.2.507",
+    "unocss": "^66.7.4"
+  }
+}

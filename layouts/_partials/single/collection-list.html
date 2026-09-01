@@ -5,7 +5,6 @@
     {{- $pages := (where .Pages "Params.Weight" "!=" nil) | append (where .Pages "Params.Weight" "eq" nil).ByDate -}}
     {{- $open := eq (index $collectionTerms 0) . -}}
     {{- $currentKey := 0 -}}
-
     <div class="details collection-details{{ if $open }} open{{ end }}">
       <div class="details-summary collection-summary">
         {{ dict "Class" "fa-solid fa-layer-group" | partial "plugin/icon.html" }}

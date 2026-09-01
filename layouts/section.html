@@ -51,7 +51,7 @@
             <a href="{{ .RelPermalink }}" class="archive-item-link">
               {{- $repost := .Params.repost | default dict -}}
               {{- if eq $repost.enable true -}}
-                {{- dict "Class" "fa-solid fa-share text-success me-1" | partial "plugin/icon.html" -}}
+                {{- dict "Class" "fa-solid fa-retweet text-success me-1" | partial "plugin/icon.html" -}}
               {{- end -}}
               {{- cond (.Param "capitalize_titles") (title .LinkTitle) .LinkTitle -}}
             </a>

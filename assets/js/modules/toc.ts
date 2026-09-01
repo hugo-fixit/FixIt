@@ -17,6 +17,10 @@ const TOC_CONTAINER_IDS = ['toc-content-auto', 'toc-content-static', 'toc-conten
  */
 export class TocModule implements TocService {
   #activeTocId: string | null = null
+  #previousActiveLinks = new Map<HTMLElement, HTMLAnchorElement | null>()
+  #headingOffsets: Array<{ id: string, top: number }> = []
+  #headingOffsetsDirty = true
+  #rafId: number | null = null
 
   /** Get all TOC content containers (auto, static, and drawer). */
   #getTocContainers(): HTMLElement[] {
@@ -25,38 +29,55 @@ export class TocModule implements TocService {
       .filter(Boolean) as HTMLElement[]
   }
 
+  /** Compute the scroll offset for header + breadcrumb. */
+  #getIndexOffset(): number {
+    const headerId = isMobile() ? 'header-mobile' : 'header-desktop'
+    const $header = document.getElementById(headerId)
+    const headerMode = document.body.getAttribute(`data-${headerId}`)
+    if (!$header || window.getComputedStyle($header).display === 'none')
+      return 20
+    const shouldApplyOffset = headerMode === 'sticky' || (headerMode === 'auto' && !$header.classList.contains('header__fadeOutUp'))
+    const headerOffset = shouldApplyOffset ? $header.offsetHeight : 0
+    const breadcrumbOffset = document.querySelector<HTMLElement>('.breadcrumb-container')?.offsetHeight || 0
+    return 20 + headerOffset + breadcrumbOffset
+  }
+
+  /** Cache heading absolute offsets for binary search. Called on init/resize/content change. */
+  #cacheHeadingOffsets() {
+    const $headingElements = document.querySelectorAll<HTMLElement>('.heading-element[id]')
+    this.#headingOffsets = Array.from($headingElements).map($h => ({
+      id: $h.id,
+      top: window.scrollY + $h.getBoundingClientRect().top,
+    }))
+    this.#headingOffsetsDirty = false
+  }
+
   /**
    * Determine which heading is currently active based on scroll position.
+   * Uses cached offsets with binary search for O(log n) performance.
    * @returns The active heading element, or `null` if none found.
    */
   #getActiveTocHeading(): HTMLElement | null {
-    const $headingElements = Array.from(document.querySelectorAll<HTMLElement>('.heading-element[id]'))
-    if (!$headingElements.length)
+    if (this.#headingOffsetsDirty || !this.#headingOffsets.length)
+      this.#cacheHeadingOffsets()
+    if (!this.#headingOffsets.length)
       return null
-    const headerOffset = (() => {
-      const headerId = isMobile() ? 'header-mobile' : 'header-desktop'
-      const $header = document.getElementById(headerId)
-      const headerMode = document.body.getAttribute(`data-${headerId}`)
-      if (!$header || window.getComputedStyle($header).display === 'none')
-        return 0
-      const shouldApplyOffset = headerMode === 'sticky' || (headerMode === 'auto' && !$header.classList.contains('header__fadeOutUp'))
-      return shouldApplyOffset ? $header.offsetHeight : 0
-    })()
-    const breadcrumbOffset = document.querySelector<HTMLElement>('.breadcrumb-container')?.offsetHeight || 0
-    const indexOffset = 20 + headerOffset + breadcrumbOffset
 
-    const threshold = window.scrollY + indexOffset + 1
-    let $activeHeading = $headingElements[0]
-    for (const $heading of $headingElements) {
-      const headingTop = window.scrollY + $heading.getBoundingClientRect().top
-      if (headingTop <= threshold) {
-        $activeHeading = $heading
+    const threshold = window.scrollY + this.#getIndexOffset() + 1
+    let lo = 0
+    let hi = this.#headingOffsets.length - 1
+    let result = 0
+    while (lo <= hi) {
+      const mid = (lo + hi) >>> 1
+      if (this.#headingOffsets[mid].top <= threshold) {
+        result = mid
+        lo = mid + 1
       }
       else {
-        break
+        hi = mid - 1
       }
     }
-    return $activeHeading
+    return document.getElementById(this.#headingOffsets[result].id)
   }
 
   /**
@@ -73,50 +94,64 @@ export class TocModule implements TocService {
   }
 
   /**
-   * Highlight the active TOC item and its parent chain.
+   * Get the ancestor `<li>` chain from a link up to the TOC root.
+   * @param $link - The anchor element inside a `<li>`.
+   * @returns An array of ancestor `<li>` elements (nearest first).
+   */
+  #getAncestorChain($link: Element): HTMLLIElement[] {
+    const chain: HTMLLIElement[] = []
+    let $parent = $link.closest('li')
+    while ($parent) {
+      chain.push($parent)
+      $parent = $parent.parentElement?.closest('li') || null
+    }
+    return chain
+  }
+
+  /**
+   * Highlight the active TOC item and its parent chain using diff-based updates.
+   * Only removes/adds classes on the difference between old and new active chains,
+   * avoiding a global clear that causes visual flash.
    * @param $tocRoot - The TOC root container element.
    * @param activeId - The id of the currently active heading.
    */
   #applyTocActiveState($tocRoot: HTMLElement, activeId: string) {
     if (!$tocRoot)
       return
-    $tocRoot.querySelectorAll('a[href^="#"]').forEach(($tocLink: Element) => {
-      $tocLink.classList.remove('active')
-    })
-    $tocRoot.querySelectorAll('li').forEach(($tocLi: Element) => {
-      $tocLi.classList.remove('has-active')
-    })
-    const $activeLink = this.#getTocLinkById($tocRoot, activeId)
-    if (!$activeLink)
+    const $newActiveLink = this.#getTocLinkById($tocRoot, activeId)
+    const $prevActiveLink = this.#previousActiveLinks.get($tocRoot) || null
+    if ($newActiveLink === $prevActiveLink)
       return
-    $activeLink.classList.add('active')
-    let $parent = $activeLink.closest('li')
-    while ($parent) {
-      $parent.classList.add('has-active')
-      $parent = $parent.parentElement?.closest('li') || null
+
+    // Remove from old chain
+    if ($prevActiveLink) {
+      $prevActiveLink.classList.remove('active')
+      for (const $li of this.#getAncestorChain($prevActiveLink)) {
+        $li.classList.remove('has-active')
+      }
     }
+
+    // Add to new chain
+    if ($newActiveLink) {
+      $newActiveLink.classList.add('active')
+      for (const $li of this.#getAncestorChain($newActiveLink)) {
+        $li.classList.add('has-active')
+      }
+    }
+
+    this.#previousActiveLinks.set($tocRoot, $newActiveLink)
   }
 
   /**
    * Scroll the active TOC link into the visible area of its container.
    * @param $tocRoot - The TOC root container element.
    * @param activeId - The id of the currently active heading.
-   * @param $scrollContainer - The scrollable container (defaults to `$tocRoot`).
    */
-  #scrollActiveTocLinkIntoView($tocRoot: HTMLElement, activeId: string, $scrollContainer: HTMLElement = $tocRoot) {
+  #scrollActiveTocLinkIntoView($tocRoot: HTMLElement, activeId: string) {
     const $activeLink = this.#getTocLinkById($tocRoot, activeId)
-    if (!$activeLink || !$scrollContainer)
+    if (!$activeLink)
       return
-    const containerRect = $scrollContainer.getBoundingClientRect()
-    const linkRect = $activeLink.getBoundingClientRect()
-    const offsetTop = linkRect.top - containerRect.top
-    const offsetBottom = linkRect.bottom - containerRect.bottom
-    if (offsetTop < 0) {
-      $scrollContainer.scrollTop += offsetTop
-    }
-    else if (offsetBottom > 0) {
-      $scrollContainer.scrollTop += offsetBottom
-    }
+    $activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
   }
 
   /** Update the TOC container's max-height CSS variable to fit the viewport. */
@@ -129,38 +164,44 @@ export class TocModule implements TocService {
     }
   }
 
-  /** Sync the active heading highlight across all TOC containers. */
+  /** Sync the active heading highlight across all TOC containers. Throttled via rAF. */
   syncTocActiveState() {
-    const $activeHeading = this.#getActiveTocHeading()
-    if (!$activeHeading?.id)
+    if (this.#rafId !== null)
       return
-    const activeId = $activeHeading.id
-    const $tocRoots = this.#getTocContainers()
-      .map($container => $container.querySelector<HTMLElement>('nav'))
-      .filter(Boolean) as HTMLElement[]
-    $tocRoots.forEach(($tocRoot) => {
-      this.#applyTocActiveState($tocRoot, activeId)
-    })
-    if (this.#activeTocId !== activeId) {
-      this.#activeTocId = activeId
-      if (!isTocStatic()) {
-        const $autoTocRoot = document.querySelector<HTMLElement>('#toc-content-auto > nav')
-        const $autoTocContainer = document.getElementById('toc-content-auto')
-        if ($autoTocRoot && $autoTocContainer) {
-          this.#scrollActiveTocLinkIntoView($autoTocRoot, activeId, $autoTocContainer)
+    this.#rafId = requestAnimationFrame(() => {
+      this.#rafId = null
+      const $activeHeading = this.#getActiveTocHeading()
+      if (!$activeHeading?.id)
+        return
+      const activeId = $activeHeading.id
+      const $tocRoots = this.#getTocContainers()
+        .map($container => $container.querySelector<HTMLElement>('nav'))
+        .filter(Boolean) as HTMLElement[]
+      $tocRoots.forEach(($tocRoot) => {
+        this.#applyTocActiveState($tocRoot, activeId)
+      })
+      if (this.#activeTocId !== activeId) {
+        this.#activeTocId = activeId
+        if (!isTocStatic()) {
+          const $autoTocRoot = document.querySelector<HTMLElement>('#toc-content-auto > nav')
+          if ($autoTocRoot) {
+            this.#scrollActiveTocLinkIntoView($autoTocRoot, activeId)
+          }
+        }
+        if ((document.getElementById('nav-dialog') as HTMLDialogElement)?.open) {
+          const $dialogTocRoot = document.querySelector<HTMLElement>('#toc-content-drawer > nav')!
+          this.#scrollActiveTocLinkIntoView($dialogTocRoot, activeId)
         }
       }
-      if ((document.getElementById('toc-dialog') as HTMLDialogElement)?.open) {
-        const $dialogTocRoot = document.querySelector<HTMLElement>('#toc-content-drawer > nav')!
-        this.#scrollActiveTocLinkIntoView($dialogTocRoot, activeId, $dialogTocRoot)
-      }
-    }
+    })
   }
 
   /** Sync TOC layout state: drawer button visibility, height, and active heading. */
   #syncTocLayout() {
-    document.querySelector<HTMLElement>('#toc-drawer-button')?.classList.toggle('hidden', !isTocStatic())
+    document.querySelector<HTMLElement>('#nav-drawer-button')?.classList.toggle('hidden', !isTocStatic())
     this.#activeTocId = null
+    this.#previousActiveLinks.clear()
+    this.#headingOffsetsDirty = true
     this.syncTocHeight()
     this.syncTocActiveState()
   }
@@ -179,6 +220,7 @@ export class TocModule implements TocService {
       $clone.removeAttribute('id')
       $container.appendChild($clone)
     }
+    this.#headingOffsetsDirty = true
   }
 
   /** Bind the `toc-auto` title click handler for show/hide toggle. */
@@ -204,7 +246,7 @@ export class TocModule implements TocService {
 
   /** Initialize the mobile TOC drawer dialog and its open/close handlers. */
   #initTocDrawerLinkClose() {
-    const dialog = document.querySelector<HTMLDialogElement>('#toc-dialog')
+    const dialog = document.querySelector<HTMLDialogElement>('#nav-dialog')
     if (!dialog)
       return
     document.querySelectorAll<HTMLAnchorElement>('#toc-content-drawer a[href^="#"]').forEach(($link) => {
@@ -217,11 +259,11 @@ export class TocModule implements TocService {
 
   /** Initialize the mobile TOC drawer dialog and its open/close handlers. */
   #initTocDrawer() {
-    const dialog = document.querySelector<HTMLDialogElement>('#toc-dialog')
-    const openButton = document.querySelector<HTMLElement>('#toc-drawer-button')
+    const dialog = document.querySelector<HTMLDialogElement>('#nav-dialog')
+    const openButton = document.querySelector<HTMLElement>('#nav-drawer-button')
     if (!dialog || !openButton)
       return
-    const closeButton = dialog.querySelector<HTMLElement>('.toc-close-btn')
+    const closeButton = dialog.querySelector<HTMLElement>('.nav-close-btn')
     closeButton?.addEventListener('click', () => dialog.close())
     openButton.addEventListener('click', () => {
       dialog.showModal()
@@ -229,7 +271,7 @@ export class TocModule implements TocService {
       this.syncTocHeight()
       this.syncTocActiveState()
       const $dialogTocRoot = document.querySelector<HTMLElement>('#toc-content-drawer > nav')!
-      this.#scrollActiveTocLinkIntoView($dialogTocRoot, this.#activeTocId!, $dialogTocRoot)
+      this.#scrollActiveTocLinkIntoView($dialogTocRoot, this.#activeTocId!)
       ;(document.activeElement as HTMLElement)?.blur()
     })
     dialog.addEventListener('close', () => {

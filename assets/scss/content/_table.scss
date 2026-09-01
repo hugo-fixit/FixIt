@@ -1,0 +1,114 @@
+@use "sass:color";
+@use "core/functions" as *;
+@use "core/mixins" as *;
+@use "variables" as *;
+
+.table-wrapper {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 0.5rem 0;
+  background: fi-var(table-background-color);
+  border: 1px solid fi-var(table-border-color);
+  @include border-radius;
+  @include set-fi-var(scrollbar-thumb-color, fi-var(table-background-color));
+
+  > table {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border-spacing: 0;
+    background: fi-var(table-background-color);
+    border-collapse: separate;
+
+    thead {
+      background: fi-var(table-thead-color);
+    }
+
+    tbody {
+      tr:nth-child(odd) {
+        background: light-dark(color.adjust($table-background-color, $lightness: -2.25%), color.adjust($table-background-color-dark, $lightness: 2.75%));
+      }
+      tr:hover {
+        background: light-dark(color.adjust($table-background-color, $lightness: -4.5%), color.adjust($table-background-color-dark, $lightness: 5.5%));
+      }
+    }
+
+    th,
+    td {
+      padding: 0.3rem 1rem;
+      border-inline-end: 1px solid fi-var(table-border-color);
+      border-bottom: 1px solid fi-var(table-border-color);
+    }
+
+    tr > :last-child {
+      border-inline-end: none;
+    }
+
+    > :last-child > tr:last-child > * {
+      border-bottom: none;
+    }
+
+    > caption {
+      caption-side: top;
+      padding: 0.5rem 1rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.875em;
+      border-bottom: 1px solid fi-var(table-border-color);
+      border-radius: fi-var(global-border-radius) fi-var(global-border-radius) 0 0;
+
+      .table-number {
+        &::before {
+          content: attr(data-i18n-table) " " counter(table-counter);
+        }
+
+        & + .table-caption {
+          font-weight: normal;
+
+          &::before {
+            content: "-";
+            margin-inline: 0.25em;
+          }
+        }
+      }
+    }
+
+    // Sortable table styles
+    &.is-sortable thead th.sort-header {
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      padding-inline-end: 1.5rem;
+
+      &::after {
+        content: "";
+        position: absolute;
+        inset-inline-end: 0.5rem;
+        top: 50%;
+        translate: 0 -50%;
+        width: 0;
+        height: 0;
+        border-inline: 4px solid transparent;
+        border-block: 4px solid transparent;
+        opacity: 0.3;
+        transition: all 0.2s, translate 0.2s;
+      }
+
+      &:hover::after {
+        opacity: 0.6;
+      }
+
+      &.sort-asc::after,
+      &.sort-desc::after {
+        opacity: 1;
+        border-block-end: 5px solid fi-var(global-font-color);
+        border-block-start: 0;
+      }
+
+      &.sort-desc::after {
+        rotate: 180deg;
+      }
+    }
+  }
+}

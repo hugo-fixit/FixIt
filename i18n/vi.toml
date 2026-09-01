@@ -4,7 +4,6 @@
 # === Init ===
 [init]
 hugoVersionError = "Phiên bản Hugo quá thấp.\n\nPhiên bản Hugo hiện tại là {{ .Current }}, phiên bản tối thiểu được hỗ trợ cho FixIt là {{ .Minimal }}.\n\nNếu bạn đang chạy Hugo trên máy tính của mình, hãy xem https://gohugo.io/getting-started/installing/#upgrade-hugo để biết hướng dẫn nâng cấp.\n\nNếu bạn đang triển khai trên nền tảng của bên thứ ba, vui lòng cấu hình phiên bản Hugo cho phù hợp."
-hugoExtendedWarn = "Phiên bản Hugo Extended là cần thiết để hỗ trợ SCSS."
 configurationError = "Lỗi cấu hình\nBạn chưa cấu hình tham số phiên bản FixIt đúng cách. Xem https://fixit.lruihao.cn/docs/getting-started/configuration/params/"
 compatibilityError = "Lỗi tương thích ({{ .From }} -> {{ .To }}):\nBạn có một bản cập nhật không tương thích. Xem https://github.com/hugo-fixit/FixIt/releases"
 devVersionWarn = "Bạn đang sử dụng một phiên bản phát triển của FixIt. Vui lòng xem xét sử dụng một phiên bản ổn định.\nXem https://github.com/hugo-fixit/FixIt/releases"
@@ -69,7 +68,7 @@ more = "Thêm"
 # === Header ===
 [header]
 selectLanguage = "Chọn Ngôn ngữ"
-noMoretTranslations = "Không có nữa"
+noTranslations = "Không có bản dịch"
 switchTheme = "Đổi chủ đề"
 # === Header ===
 
@@ -88,6 +87,7 @@ valinePlaceholder = "Bình luận của bạn ..."
 
 # === Assets ===
 [assets]
+table = "Bảng"
 search = "Tìm kiếm"
 searchPlaceholder = "Tìm tiêu đề hoặc nội dung..."
 searchIn = "Tìm kiếm trong {{ . }}"
@@ -123,6 +123,8 @@ other = "Chia sẻ trên"
 # === Single Post ===
 [single]
 contents = "Nội dung"
+navigation = "Điều hướng"
+disclaimer = "Tuyên bố của tác giả: "
 pin = "Ghim ở đầu trang"
 repost = "Đăng lại"
 publishedOnDate = "đăng ngày {{ .Date }}"
@@ -140,6 +142,7 @@ home = "Trang chủ"
 readMore = "Đọc thêm"
 expirationReminder = "Bài viết này được cập nhật lần cuối vào {{ .Date }}, nội dung có thể đã lỗi thời."
 encryptedAbstract = "Bài viết này đã được mã hóa, nên nội dung gốc không thể nhìn thấy!"
+print = "In"
 encryptedMessage = "Vui lòng nhập mật khẩu"
 password = "Mật khẩu"
 enterBtn = "Nhập"
@@ -147,6 +150,11 @@ encryptyAgain = "Mã hóa lại"
 encryptionWarning = "Phát hiện mã hóa nội dung, nhưng chúng vẫn ở dạng văn bản thuần!"
 encryptionCommand = "Chạy `npx @hugo-fixit/encrypt` sau khi build để thực sự mã hóa chúng."
 relatedContent = "Nội dung liên quan"
+
+[single.disclaimerMessage]
+ai = "Bài viết này được tạo bởi AI. Vui lòng xác minh thông tin một cách độc lập."
+repost = "Bài viết này là nội dung được đăng lại. Vui lòng truy cập nguồn gốc để biết thêm thông tin."
+original = "Đây là nội dung gốc của tác giả."
 
 [single.includedIn]
 categories = "trong {{ .Categories }}"

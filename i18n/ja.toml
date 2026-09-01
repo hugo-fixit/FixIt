@@ -5,7 +5,6 @@
 # === Init ===
 [init]
 hugoVersionError = "Hugo のバージョンが低すぎます。\n\n現在の Hugo バージョンは {{ .Current }} ですが、FixIt がサポートする最小バージョンは {{ .Minimal }} です。\n\n自分のコンピューターで Hugo を実行している場合は、https://gohugo.io/getting-started/installing/#upgrade-hugo でアップグレードガイドを参照してください。\n\nサードパーティプラットフォームにデプロイしている場合は、Hugo バージョンを適切に設定してください。"
-hugoExtendedWarn = "SCSS サポートには Hugo Extended バージョンが必要です。"
 configurationError = "設定ファイルエラー\nまだ FixIt のバージョンパラメータを正しく設定していません。 https://fixit.lruihao.cn/docs/getting-started/configuration/params/?lang=japanese を参照してください"
 compatibilityError = "互換性エラー ({{ .From }} -> {{ .To }}):\n互換性のない更新が行われました。 https://github.com/hugo-fixit/FixIt/releases を参照してください"
 devVersionWarn = "開発版の FixIt を使用しています。安定版の使用を検討してください。\n https://github.com/hugo-fixit/FixIt/releases を参照"
@@ -68,7 +67,7 @@ more = "もっと見る"
 # === Header ===
 [header]
 selectLanguage = "言語を選択"
-noMoretTranslations = "これ以上の翻訳はありません"
+noTranslations = "翻訳なし"
 switchTheme = "テーマを切り替え"
 # === Header ===
 
@@ -87,6 +86,7 @@ valinePlaceholder = "あなたのコメント……"
 
 # === Assets ===
 [assets]
+table = "テーブル"
 search = "検索"
 searchPlaceholder = "タイトルまたは内容を検索..."
 searchIn = "{{ . }} で検索"
@@ -122,6 +122,8 @@ other = "共有先"
 # === Single Post ===
 [single]
 contents = "目次"
+navigation = "ナビゲーション"
+disclaimer = "著者声明："
 pin = "ピン留め"
 repost = "再投稿"
 publishedOnDate = "公開日 {{ .Date }}"
@@ -139,6 +141,7 @@ home = "ホーム"
 readMore = "続きを読む"
 expirationReminder = "この記事は {{ .Date }} に最終更新されました。内容が古くなっている可能性があります。"
 encryptedAbstract = "この記事は暗号化されているため、元の内容は表示できません！"
+print = "印刷"
 encryptedMessage = "パスワードを入力してください"
 password = "パスワード"
 enterBtn = "入る"
@@ -146,6 +149,11 @@ encryptyAgain = "再度暗号化"
 encryptionWarning = "コンテンツの暗号化が検出されましたが、まだ平文です！"
 encryptionCommand = "実際に暗号化するには、ビルド後に `npx @hugo-fixit/encrypt` を実行してください。"
 relatedContent = "関連コンテンツ"
+
+[single.disclaimerMessage]
+ai = "この記事はAIによって生成されました。情報を独自に確認してください。"
+repost = "この記事は転載です。詳細は元のソースをご覧ください。"
+original = "この記事は作者のオリジナルコンテンツです。"
 
 [single.includedIn]
 categories = "カテゴリに収録：{{ .Categories }}"

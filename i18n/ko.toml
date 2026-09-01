@@ -5,7 +5,6 @@
 # === Init ===
 [init]
 hugoVersionError = "Hugo 버전이 너무 낮습니다.\n\n현재 Hugo 버전은 {{ .Current }}이며, FixIt의 최소 지원 버전은 {{ .Minimal }}입니다.\n\n자신의 컴퓨터에서 Hugo를 실행 중이라면 https://gohugo.io/getting-started/installing/#upgrade-hugo 에서 업그레이드 가이드를 확인하세요.\n\n타사 플랫폼에 배포 중이라면 Hugo 버전을 적절히 설정해 주세요."
-hugoExtendedWarn = "SCSS 지원을 위해 Hugo Extended 버전이 필요합니다."
 configurationError = "구성 파일 오류\n아직 FixIt의 버전 매개변수를 올바르게 구성하지 않았습니다. https://fixit.lruihao.cn/docs/getting-started/configuration/params/?lang=korean 을 참조하세요."
 compatibilityError = "호환성 오류 ({{ .From }} -> {{ .To }}):\n비호환 업데이트를 수행했습니다. https://github.com/hugo-fixit/FixIt/releases 를 참조하세요."
 devVersionWarn = "현재 개발 버전의 FixIt을 사용 중입니다. 안정적인 버전을 사용하는 것이 좋습니다.\n자세한 내용은 https://github.com/hugo-fixit/FixIt/releases 를 참조하세요."
@@ -68,7 +67,7 @@ more = "더 보기"
 # === Header ===
 [header]
 selectLanguage = "언어 선택"
-noMoretTranslations = "더 이상 번역이 없습니다"
+noTranslations = "번역 없음"
 switchTheme = "테마 전환"
 # === Header ===
 
@@ -87,6 +86,7 @@ valinePlaceholder = "당신의 댓글……"
 
 # === Assets ===
 [assets]
+table = "표"
 search = "검색"
 searchPlaceholder = "제목 또는 내용을 검색하세요..."
 searchIn = "{{ . }}에서 검색"
@@ -122,6 +122,8 @@ other = "공유하기"
 # === Single Post ===
 [single]
 contents = "목차"
+navigation = "내비게이션"
+disclaimer = "작성자 성명: "
 pin = "고정"
 repost = "재게시"
 publishedOnDate = "발행일: {{ .Date }}"
@@ -139,6 +141,7 @@ home = "홈"
 readMore = "더 읽기"
 expirationReminder = "이 문서는 {{ .Date }}에 마지막으로 업데이트되었으며, 내용이 오래되었을 수 있습니다."
 encryptedAbstract = "이 문서는 암호화되어 원본 내용을 볼 수 없습니다!"
+print = "인쇄"
 encryptedMessage = "비밀번호를 입력하세요"
 password = "비밀번호"
 enterBtn = "입장"
@@ -146,6 +149,11 @@ encryptyAgain = "다시 암호화"
 encryptionWarning = "콘텐츠 암호화가 감지되었지만 여전히 평문입니다!"
 encryptionCommand = "실제로 암호화하려면 빌드 후 `npx @hugo-fixit/encrypt`를 실행하세요."
 relatedContent = "관련 콘텐츠"
+
+[single.disclaimerMessage]
+ai = "이 글은 AI에 의해 생성되었습니다. 정보를 독립적으로 확인하시기 바랍니다."
+repost = "이 글은 전재 콘텐츠입니다. 자세한 내용은 원문을 방문하시기 바랍니다."
+original = "이 글은 저자의 오리지널 콘텐츠입니다."
 
 [single.includedIn]
 categories = "{{ .Categories }}에 포함"

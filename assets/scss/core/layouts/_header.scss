@@ -119,7 +119,7 @@ header {
     list-style: none;
 
     .dropdown-icon {
-      margin-left: 0.25rem;
+      margin-inline-start: 0.25rem;
       font-size: .875em;
       color: fi-var(global-font-color);
 
@@ -154,6 +154,10 @@ header {
 .theme-switch {
   position: relative;
   @include focus-visible-ring;
+
+  [dir="rtl"] & {
+    scale: -1 1;
+  }
 
   i {
     display: inline-block;
@@ -195,10 +199,10 @@ header {
     padding: 0 2rem;
     height: 100%;
 
-    &[data-github-corner='left'] {
+    &[data-github-corner='start'] {
       padding-inline-start: fi-var(header-height);
     }
-    &[data-github-corner='right'] {
+    &[data-github-corner='end'] {
       padding-inline-end: fi-var(header-height);
     }
 
@@ -211,9 +215,17 @@ header {
         &:hover .sub-menu {
           display: block;
           translate: -0.5rem 0;
+
+          [dir="rtl"] & {
+            translate: 0.5rem 0;
+          }
         }
         &.language-switch:hover .sub-menu {
           translate: calc(1.75rem - 100%) 0;
+
+          [dir="rtl"] & {
+            translate: calc(100% - 1.75rem) 0;
+          }
         }
       }
 
@@ -229,7 +241,7 @@ header {
           width: 0;
           margin: 18.5px 0.5rem;
           padding: 0;
-          border-left: 1.5px solid fi-var(global-border-color);
+          border-inline-start: 1.5px solid fi-var(global-border-color);
         }
       }
 
@@ -448,7 +460,7 @@ header {
           .language-select {
             position: absolute;
             opacity: 0;
-            left: 0;
+            inset-inline-start: 0;
             top: 0;
             width: 100%;
             height: 100%;
@@ -457,7 +469,7 @@ header {
       }
 
       .sub-menu {
-        padding-left: 0;
+        padding-inline-start: 0;
         display: none;
 
         &.open {

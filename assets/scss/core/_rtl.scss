@@ -1,0 +1,51 @@
+// ==================================================================================
+// Right-to-Left (RTL) Support
+//
+// See https://rtlstyling.com/posts/rtl-styling/
+// See https://developer.apple.com/design/human-interface-guidelines/right-to-left/
+// ==================================================================================
+
+[dir="rtl"] {
+  // A few input types should stay LTR
+  [type="tel"],
+  [type="url"],
+  [type="email"],
+  [type="number"] {
+    direction: ltr;
+  }
+
+  // Flip directional icons in RTL
+  .fa-tags,
+  .fa-tag,
+  .fa-folder,
+  .fa-folder-tree,
+  .fa-folder-open,
+  .fa-folder-closed,
+  .fa-pencil,
+  .fa-pen-to-square,
+  .fa-pen-clip,
+  .fa-square-pen,
+  .fa-feather,
+  .fa-list-ul,
+  .fa-list-check,
+  .fa-clipboard-list,
+  .fa-rectangle-list,
+  .fa-comments,
+  .fa-comment,
+  .fa-comment-dots,
+  .fa-message,
+  .fa-retweet,
+  .octicon-report-16 {
+    scale: -1 1;
+  }
+}
+
+// Arabic-script languages (Arabic, Persian, Urdu) typography corrections
+// Hebrew and other non-connected RTL scripts don't need these adjustments
+
+// Letter-spacing breaks connected letter forms
+:lang(ar),
+:lang(fa),
+:lang(ur) {
+  letter-spacing: 0;
+}

@@ -10,12 +10,19 @@
   Called from: layouts/baseof.html.
 */ -}}
 
-{{- $buildDrafts := .Page.Draft -}}
+{{- /*
+  Whether to show draft menu items in the navigation.
+  Controlled via env var at build time: HUGO_PARAMS_MENU_DRAFT=true hugo server
+  Replaces the deprecated .Site.BuildDrafts (Hugo v0.156.0).
+  See: https://discourse.gohugo.io/t/deprecations-in-v0-156-0/56732/11
+*/ -}}
+{{- $menuDraft := getenv "HUGO_PARAMS_MENU_DRAFT" -}}
 {{- $relLangURL := relLangURL "" -}}
+{{- $githubCornerPosition := .Site.Params.github_corner.position | default "end" | partial "function/logical-direction.html" -}}
 
 {{- /* Desktop header */ -}}
 <header class="desktop animate__faster{{ if .Site.Params.header.blur }} is-blur{{ end }}" id="header-desktop">
-  <div class="header-wrapper"{{ if .Site.Params.github_corner.enable }} data-github-corner="{{ .Site.Params.github_corner.position }}"{{ end }}>
+  <div class="header-wrapper"{{ if .Site.Params.github_corner.enable }} data-github-corner="{{ $githubCornerPosition }}"{{ end }}>
     <div class="header-title">
       <a href="{{ $relLangURL }}" title="{{ .Site.Title }}" class="header-title-link">
         {{- with .Site.Params.header.title -}}
@@ -57,51 +64,53 @@
           {{- with .Page -}}
             {{- $url = .RelPermalink -}}
           {{- end -}}
-          {{- if (ne .Params.Draft true) | or $buildDrafts | and (ne .Params.Type "mobile") -}}
-            <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}{{ if .HasChildren }} has-children{{ end }}">
-              <a class="menu-link"
-                {{- with $url }} href="{{ $url }}"{{ else }} href="javascript:void(0);"{{ end }}
-                {{- with .Title }} title="{{ . }}"{{ end }}
-                {{- if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end -}}
-              >
-                {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
-                {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
-                {{- .Name }}
-                {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
-              </a>
-              {{- if .HasChildren -}}
-                {{ dict "Class" "dropdown-icon fa-solid fa-chevron-down" | partial "plugin/icon.html" }}
-                <ul class="sub-menu">
-                  {{- range $k, $v := .Children -}}
-                    {{- $url := $v.URL -}}
-                    {{- with $url -}}
-                      {{- $url = . | relLangURL -}}
-                    {{- end -}}
-                    {{- with $v.Page -}}
-                      {{- $url = .RelPermalink -}}
-                    {{- end -}}
-                    {{- if (ne $v.Params.Draft true) | or $buildDrafts | and (ne $v.Params.Type "mobile") -}}
-                      {{- if $k | and $v.Params.Divided -}}
-                        <li class="menu-item-divider" aria-hidden="true"></li>
-                      {{- end -}}
-                      <li class="menu-item{{ if $.IsMenuCurrent `main` $v | or ($.HasMenuCurrent `main` $v) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with $v.Params.Class }} {{ . }}{{ end }}">
-                        <a class="menu-link"
-                          {{- with $url }} href="{{ $url }}"{{ else }} href="javascript:void(0);"{{ end }}
-                          {{- with $v.Title }} title="{{ . }}"{{ end }}
-                          {{- if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end -}}
-                        >
-                          {{- with $v.Pre -}}{{- . | safeHTML }} {{ end }}
-                          {{- with $v.Params.Icon -}}{{ dict "Class" (printf "%v fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
-                          {{- $v.Name }}
-                          {{- with $v.Post }} {{ . | safeHTML -}}{{- end -}}
-                        </a>
-                      </li>
-                    {{- end -}}
-                  {{- end -}}
-                </ul>
-              {{- end -}}
-            </li>
+          {{- if (eq .Params.Type "mobile") | or (and (eq .Params.Draft true) (ne $menuDraft "true")) -}}
+            {{ continue }}
           {{- end -}}
+          <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}{{ if .HasChildren }} has-children{{ end }}">
+            <a class="menu-link"
+              {{- with $url }} href="{{ $url }}"{{ else }} href="javascript:void(0);"{{ end }}
+              {{- with .Title }} title="{{ . }}"{{ end }}
+              {{- if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end -}}
+            >
+              {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
+              {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
+              {{- .Name }}
+              {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
+            </a>
+            {{- if .HasChildren -}}
+              {{ dict "Class" "dropdown-icon fa-solid fa-chevron-down" | partial "plugin/icon.html" }}
+              <ul class="sub-menu">
+                {{- range $k, $v := .Children -}}
+                  {{- $url := $v.URL -}}
+                  {{- with $url -}}
+                    {{- $url = . | relLangURL -}}
+                  {{- end -}}
+                  {{- with $v.Page -}}
+                    {{- $url = .RelPermalink -}}
+                  {{- end -}}
+                  {{- if (eq $v.Params.Type "mobile") | or (and (eq $v.Params.Draft true) (ne $menuDraft "true")) -}}
+                    {{ continue }}
+                  {{- end -}}
+                  {{- if $k | and $v.Params.Divided -}}
+                    <li class="menu-item-divider" aria-hidden="true"></li>
+                  {{- end -}}
+                  <li class="menu-item{{ if $.IsMenuCurrent `main` $v | or ($.HasMenuCurrent `main` $v) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with $v.Params.Class }} {{ . }}{{ end }}">
+                    <a class="menu-link"
+                      {{- with $url }} href="{{ $url }}"{{ else }} href="javascript:void(0);"{{ end }}
+                      {{- with $v.Title }} title="{{ . }}"{{ end }}
+                      {{- if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end -}}
+                    >
+                      {{- with $v.Pre -}}{{- . | safeHTML }} {{ end }}
+                      {{- with $v.Params.Icon -}}{{ dict "Class" (printf "%v fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
+                      {{- $v.Name }}
+                      {{- with $v.Post }} {{ . | safeHTML -}}{{- end -}}
+                    </a>
+                  </li>
+                {{- end -}}
+              </ul>
+            {{- end -}}
+          </li>
         {{- end -}}
         {{- if .Site.Menus.main -}}
           <li class="menu-item delimiter"></li>
@@ -149,7 +158,7 @@
                   </li>
                 {{- end -}}
               {{- else -}}
-                <li class="menu-item">{{- T "header.noMoretTranslations" -}}</li>
+                <li class="menu-item">{{- T "header.noTranslations" -}}</li>
               {{- end -}}
             </ul>
           </li>
@@ -220,51 +229,12 @@
           {{- with .Page -}}
             {{- $url = .RelPermalink -}}
           {{- end -}}
-          {{- if (ne .Params.Draft true) | or $buildDrafts | and (ne .Params.Type "desktop") -}}
-            <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}">
-              {{- if .HasChildren -}}
-                <span class="nested-item">
-                  <a class="menu-link"
-                    {{- with $url }} href="{{ $url }}"{{ else }} href="javascript:void(0);"{{ end }}
-                    {{- with .Title }} title="{{ . }}"{{ end }}
-                    {{- if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end -}}
-                  >
-                    {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
-                    {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
-                    {{- .Name }}
-                    {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
-                  </a>
-                  {{ dict "Class" "dropdown-icon fa-solid fa-chevron-right" | partial "plugin/icon.html" }}
-                </span>
-                <ul class="sub-menu">
-                  {{- range $k, $v := .Children -}}
-                    {{- $url := $v.URL -}}
-                    {{- with $url -}}
-                      {{- $url = . | relLangURL -}}
-                    {{- end -}}
-                    {{- with $v.Page -}}
-                      {{- $url = .RelPermalink -}}
-                    {{- end -}}
-                    {{- if (ne $v.Params.Draft true) | or $buildDrafts | and (ne $v.Params.Type "desktop") -}}
-                      {{- if $k | and $v.Params.Divided -}}
-                        <li class="menu-item menu-item-divider" aria-hidden="true"></li>
-                      {{- end -}}
-                      <li class="menu-item{{ if $.IsMenuCurrent `main` $v | or ($.HasMenuCurrent `main` $v) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with $v.Params.Class }} {{ . }}{{ end }}">
-                        <a class="menu-link"
-                          {{- with $url }} href="{{ $url }}"{{ else }} href="javascript:void(0);"{{ end }}
-                          {{- with $v.Title }} title="{{ . }}"{{ end }}
-                          {{- if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end -}}
-                        >
-                          {{- with $v.Pre -}}{{- . | safeHTML }} {{ end }}
-                          {{- with $v.Params.Icon -}}{{ dict "Class" (printf "%v fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
-                          {{- $v.Name }}
-                          {{- with $v.Post }} {{ . | safeHTML -}}{{- end -}}
-                        </a>
-                      </li>
-                    {{- end -}}
-                  {{- end -}}
-                </ul>
-              {{- else -}}
+          {{- if (eq .Params.Type "desktop") | or (and (eq .Params.Draft true) (ne $menuDraft "true")) -}}
+            {{ continue }}
+          {{- end -}}
+          <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}">
+            {{- if .HasChildren -}}
+              <span class="nested-item">
                 <a class="menu-link"
                   {{- with $url }} href="{{ $url }}"{{ else }} href="javascript:void(0);"{{ end }}
                   {{- with .Title }} title="{{ . }}"{{ end }}
@@ -275,9 +245,50 @@
                   {{- .Name }}
                   {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
                 </a>
-              {{- end -}}
-            </li>
-          {{- end -}}
+                {{ dict "Class" "dropdown-icon fa-solid fa-chevron-right" | partial "plugin/icon.html" }}
+              </span>
+              <ul class="sub-menu">
+                {{- range $k, $v := .Children -}}
+                  {{- $url := $v.URL -}}
+                  {{- with $url -}}
+                    {{- $url = . | relLangURL -}}
+                  {{- end -}}
+                  {{- with $v.Page -}}
+                    {{- $url = .RelPermalink -}}
+                  {{- end -}}
+                  {{- if (eq $v.Params.Type "desktop") | or (and (eq $v.Params.Draft true) (ne $menuDraft "true")) -}}
+                    {{ continue }}
+                  {{- end -}}
+                  {{- if $k | and $v.Params.Divided -}}
+                    <li class="menu-item menu-item-divider" aria-hidden="true"></li>
+                  {{- end -}}
+                  <li class="menu-item{{ if $.IsMenuCurrent `main` $v | or ($.HasMenuCurrent `main` $v) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with $v.Params.Class }} {{ . }}{{ end }}">
+                    <a class="menu-link"
+                      {{- with $url }} href="{{ $url }}"{{ else }} href="javascript:void(0);"{{ end }}
+                      {{- with $v.Title }} title="{{ . }}"{{ end }}
+                      {{- if (urls.Parse $url).Host }}rel="noopener noreferrer" target="_blank"{{ end -}}
+                    >
+                      {{- with $v.Pre -}}{{- . | safeHTML }} {{ end }}
+                      {{- with $v.Params.Icon -}}{{ dict "Class" (printf "%v fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
+                      {{- $v.Name }}
+                      {{- with $v.Post }} {{ . | safeHTML -}}{{- end -}}
+                    </a>
+                  </li>
+                {{- end -}}
+              </ul>
+            {{- else -}}
+              <a class="menu-link"
+                {{- with $url }} href="{{ $url }}"{{ else }} href="javascript:void(0);"{{ end }}
+                {{- with .Title }} title="{{ . }}"{{ end }}
+                {{- if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end -}}
+              >
+                {{- with .Pre -}}{{- . | safeHTML }} {{ end }}
+                {{- with .Params.Icon -}}{{ dict "Class" (printf "%v fa-sm" .) | partial "plugin/icon.html" }} {{ end }}
+                {{- .Name }}
+                {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
+              </a>
+            {{- end -}}
+          </li>
         {{- end -}}
         <li class="menu-item menu-system">
           {{- if hugo.IsMultilingual -}}
@@ -301,7 +312,7 @@
                     </option>
                   {{- end -}}
                 {{- else -}}
-                  <option disabled>{{- T "header.noMoretTranslations" -}}</option>
+                  <option disabled>{{- T "header.noTranslations" -}}</option>
                 {{- end -}}
               </select>
             </span>

@@ -1,0 +1,63 @@
+@use "core/functions" as *;
+@use "core/mixins" as *;
+
+@keyframes disclaimer-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@keyframes disclaimer-shimmer-rtl {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+.post-disclaimer {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+  padding: 0.25rem 0;
+  font-size: 0.8em;
+  color: fi-var(global-font-tertiary-color);
+
+  .post-disclaimer__content {
+    background: linear-gradient(
+      90deg,
+      fi-var(global-font-tertiary-color) 0%,
+      fi-var(global-font-tertiary-color) 40%,
+      fi-var(global-font-color) 50%,
+      fi-var(global-font-tertiary-color) 60%,
+      fi-var(global-font-tertiary-color) 100%
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: disclaimer-shimmer 3s linear infinite;
+    @include media('reduce-motion') {
+      animation: none;
+    }
+
+    [dir="rtl"] & {
+      animation-name: disclaimer-shimmer-rtl;
+    }
+  }
+
+  .icon {
+    flex-shrink: 0;
+    padding-inline: 0.125em;
+    color: fi-var(global-font-secondary-color);
+  }
+
+  svg.icon {
+    width: 1.25em;
+    height: 1.25em;
+  }
+}
