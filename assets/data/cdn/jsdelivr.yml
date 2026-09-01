@@ -53,8 +53,8 @@ libFiles:
   objectFitImagesJS: object-fit-images@3.2.4/dist/ofi.min.js
   # pace-js@1.2.4 https://github.com/CodeByZach/pace
   paceJS: pace-js@1.2.4
-  # pangu@7.2.1 https://github.com/vinta/pangu.js
-  panguJS: pangu@7.2.1/dist/browser/pangu.min.js
+  # pangu@9.1.0 https://github.com/vinta/pangu.js
+  panguJS: pangu@9.1.0/dist/browser/pangu.min.js
   # @panzoom/panzoom@4.6.2 https://github.com/timmywil/panzoom
   panzoomJS: '@panzoom/panzoom@4.6.2/dist/panzoom.min.js'
   # sharer.js@0.5.4 https://github.com/ellisonleao/sharer.js

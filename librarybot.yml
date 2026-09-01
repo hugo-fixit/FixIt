@@ -146,7 +146,7 @@ libraries:
         - from: pace.min.js
           to: pace/pace.min.js
   - npm: pangu
-    version: 7.2.1
+    version: 9.1.0
     local:
       items:
         - from: dist/browser/pangu.umd.js
