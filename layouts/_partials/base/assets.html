@@ -220,7 +220,7 @@
 
 {{- /* Tabs */ -}}
 {{- if .Store.Get "hasTabs" | and (not $isArchivesOrOffline) -}}
-  {{- $source := $cdn.tabContainerElementJS | default "lib/tab-container-element/bundle.min.js" -}}
+  {{- $source := $cdn.tabContainerElementJS | default "lib/tab-container-element/bundle.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Attr" `type="module"` "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 

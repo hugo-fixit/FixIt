@@ -175,8 +175,8 @@ libraries:
     version: 4.8.2
     local:
       items:
-        - from: dist/bundle.min.js
-          to: tab-container-element/bundle.min.js
+        - from: dist/bundle.js
+          to: tab-container-element/bundle.js
   - npm: twemoji
     version: 14.0.2
     local:
