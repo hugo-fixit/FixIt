@@ -58,7 +58,7 @@
 	var HASH_CJK = new RegExp(`(([^ \\u00a0])#)([${CJK}])`, "g");
 	var CJK_FINAL_HASHTAG = new RegExp(`([^/])([${CJK}])(#[A-Za-z0-9]+)$`);
 	var CJK_OPERATOR_ANS = new RegExp(`([${CJK}])([${OPERATORS_WITH_HYPHEN}])([${AN}])`, "g");
-	var ANS_OPERATOR_CJK = new RegExp(`([${AN}])([${OPERATORS_NO_PLUS}])([${CJK}])`, "g");
+	var ANS_OPERATOR_CJK = new RegExp(`([${AN}${RIGHT_BRACKETS_BASIC}])([${OPERATORS_NO_PLUS}])([${CJK}])`, "g");
 	var CJK_SLASH_CJK = new RegExp(`([${CJK}])([/])([${CJK}])`, "g");
 	var CJK_SLASH_ANS = new RegExp(`([${CJK}])([/])([${AN}])`, "g");
 	var ANS_SLASH_CJK = new RegExp(`([${AN}])([/])([${CJK}])`, "g");
@@ -67,7 +67,7 @@
 	var PLUS_CJK_CONTACT = new RegExp(`[${CJK}]\\+|\\+[${CJK}]`);
 	var PLUS_SEPARATOR = /(?<=[^\s+])\+(?=[^\s+])/g;
 	var SINGLE_LETTER_GRADE_CJK = new RegExp(`\\b([${A}])([${GRADE_OPERATORS}])([${CJK}])`, "g");
-	var CJK_SIGN_DIGIT = new RegExp(`([${CJK}])([\\+\\-])([0-9])`, "g");
+	var CJK_SIGN_DIGIT = new RegExp(`([${CJK}])(\\+)([0-9])`, "g");
 	var CJK_HYPHEN_FLAG = new RegExp(`([${CJK}])(\\-)([a-z])\\b`, "g");
 	var AN_PLUS_CJK = new RegExp(`([${AN}])(\\+)([${CJK}])`, "g");
 	var CJK_LESS_THAN = new RegExp(`([${CJK}])(<)([${AN}])`, "g");
@@ -168,7 +168,7 @@
 	var Pangu = class {
 		version;
 		constructor() {
-			this.version = "9.1.0";
+			this.version = "9.1.1";
 		}
 		spacingText(text) {
 			if (typeof text !== "string") {
