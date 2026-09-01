@@ -92,7 +92,7 @@ Hugo Pipes processes all assets. The key orchestration is in `_partials/base/ass
 
 - **CSS**: `scss/main.scss` is the entry point importing `core/`, `pages/`, `widgets/`, `custom`. SCSS variables are configured via `hugo:vars` (user-configurable from `[params.appearance]`) and `hugo:vars/internal` (theme system config). UnoCSS utility classes are pre-built to `assets/css/unocss.css` (via `pnpm unocss`), loaded before the main SCSS bundle.
 - **JS**: `_partials/function/js-build.html` wraps `js.Build` with minify-in-production defaults. Hugo's `@params` injection passes config values into TypeScript at build time.
-- **Third-party libraries**: Stored in `assets/lib/` (vendored, not npm-managed). Tracked by `librarybot.yml` and updated monthly by the `hugo-fixit/librarybot` GitHub Action. Can be overridden via CDN config in `assets/data/cdn/jsdelivr.yml` or `unpkg.yml`.
+- **Third-party libraries**: Stored in `assets/lib/` (vendored, not npm-managed). Tracked by `librarybot.yml` and updated quarterly by the `hugo-fixit/librarybot` GitHub Action. Can be overridden via CDN config in `assets/data/cdn/jsdelivr.yml` or `unpkg.yml`.
 
 ### Theme Configuration
 

@@ -1,7 +1,7 @@
 name: Update libraries from npm
 on:
   schedule:
-    - cron: '0 0 1 * *'
+    - cron: '0 0 1 */3 *'
   workflow_dispatch:
 env:
   CONFIG_PATH: ./assets/lib/librarybot.yml
