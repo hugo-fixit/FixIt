@@ -7,7 +7,7 @@
   "author": "Lruihao",
   "main": "src/index.ts",
   "dependencies": {
-    "@iconify/json": "^2.2.507",
+    "@iconify/json": "^2.2.521",
     "unocss": "^66.7.4"
   }
 }
