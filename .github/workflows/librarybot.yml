@@ -1,9 +1,10 @@
 name: Update libraries from npm
 on:
   schedule:
-    # Run at 00:00, on day 1 of the month
     - cron: '0 0 1 * *'
   workflow_dispatch:
+env:
+  CONFIG_PATH: ./assets/lib/librarybot.yml
 permissions:
   contents: write
   pull-requests: write
@@ -20,6 +21,7 @@ jobs:
         uses: hugo-fixit/librarybot@v1
         with:
           mode: list
+          config_path: ${{ env.CONFIG_PATH }}
   update:
     needs: prepare
     runs-on: ubuntu-latest
@@ -36,6 +38,7 @@ jobs:
         with:
           mode: update
           library: ${{ matrix.library }}
+          config_path: ${{ env.CONFIG_PATH }}
       - name: Create Pull Request
         if: steps.update.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v8
