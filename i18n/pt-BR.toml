@@ -115,6 +115,7 @@ exitFullscreen = "Sair da tela cheia"
 cookieconsentMessage = "Este site usa Cookies para melhorar sua experiência."
 cookieconsentDismiss = "Aceitar"
 cookieconsentLink = "Saber mais"
+toggleSortOrder = "Alternar ordem de classificação"
 # === Assets ===
 
 # === Share ===

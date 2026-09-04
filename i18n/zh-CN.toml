@@ -112,6 +112,7 @@ exitFullscreen = "退出全屏"
 cookieconsentMessage = "本网站使用 Cookies 来改善你的浏览体验。"
 cookieconsentDismiss = "同意"
 cookieconsentLink = "了解更多"
+toggleSortOrder = "切换排序方式"
 # === Assets ===
 
 # === Share ===

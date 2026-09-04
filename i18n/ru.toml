@@ -114,6 +114,7 @@ exitFullscreen = "Выйти из полного экрана"
 cookieconsentMessage = "Этот сайт использует Cookies для улучшения вашего опыта."
 cookieconsentDismiss = "Согласен"
 cookieconsentLink = "Учить больше"
+toggleSortOrder = "Переключить порядок сортировки"
 # === Assets ===
 
 # === Share ===

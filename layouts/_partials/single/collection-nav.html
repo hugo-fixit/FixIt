@@ -16,8 +16,7 @@
         {{- dict "Collections" $termLink | T "single.includedIn.collections" | strings.FirstUpper | safeHTML }} {{ .Pages.Len -}}
       </div>
       <div class="collection-nav">
-        {{/*  TODO JS 实现 reverse 翻转顺序  */}}
-        {{- $pages := (where .Pages "Params.Weight" "!=" nil) | append (where .Pages "Params.Weight" "eq" nil).ByDate -}}
+        {{- $pages := .Pages.ByDate -}}
         {{- with $pages.Next $ -}}
           {{- $capitalizeTitles := .Param "capitalize_titles" -}}
           {{- $title := .Params.shortTitle | default .LinkTitle -}}

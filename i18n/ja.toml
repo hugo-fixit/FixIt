@@ -112,6 +112,7 @@ exitFullscreen = "全画面を終了"
 cookieconsentMessage = "このウェブサイトはクッキーを使用して体験を向上させます。"
 cookieconsentDismiss = "同意する"
 cookieconsentLink = "詳細はこちら"
+toggleSortOrder = "並べ替え順序の切り替え"
 # === Assets ===
 
 # === Share ===

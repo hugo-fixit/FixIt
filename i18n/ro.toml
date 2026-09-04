@@ -114,6 +114,7 @@ exitFullscreen = "Ieși din ecran complet"
 cookieconsentMessage = "Acest site web utilizează Cookies pentru a vă îmbunătăți experiența."
 cookieconsentDismiss = "De acord"
 cookieconsentLink = "Aflați mai multe"
+toggleSortOrder = "Schimbă ordinea de sortare"
 # === Assets ===
 
 # === Share ===
