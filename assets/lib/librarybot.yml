@@ -28,7 +28,7 @@ libraries:
         - from: dist/APlayer.min.js
           to: aplayer/APlayer.min.js
   - npm: cell-tooltip
-    version: 0.4.0
+    version: 0.4.1
     local:
       items:
         - from: dist/cell-tooltip.umd.js
