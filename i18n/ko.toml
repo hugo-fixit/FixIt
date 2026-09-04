@@ -112,6 +112,7 @@ exitFullscreen = "전체 화면 종료"
 cookieconsentMessage = "이 웹사이트는 쿠키를 사용하여 경험을 향상시킵니다."
 cookieconsentDismiss = "동의"
 cookieconsentLink = "자세히 알아보기"
+toggleSortOrder = "정렬 순서 전환"
 # === Assets ===
 
 # === Share ===

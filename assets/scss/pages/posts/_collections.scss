@@ -126,22 +126,38 @@
     }
 
     .collection-name {
-      flex-grow: 1;
       font-weight: bold;
       font-size: fi-var(collection-title-font-size);
-
-      &::before {
-        content: attr(title) '・';
-      }
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: fit-content;
     }
 
     .collection-count {
       flex-shrink: 0;
+      flex-grow: 1;
       color: fi-var(global-font-secondary-color);
     }
 
     .details-icon {
       flex-shrink: 0;
+    }
+
+    .collection-sort-toggle {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      padding: 0.25rem;
+      font-size: 0.75em;
+      color: fi-var(global-font-secondary-color);
+      transition: color 0.2s ease;
+      @include border-radius(full);
+
+      &:hover {
+        color: fi-var(global-font-color);
+        background-color: light-dark(color.adjust($global-background-color, $lightness: -7%), color.adjust($global-background-color-dark, $lightness: 7%));
+      }
     }
   }
 
@@ -191,11 +207,11 @@
 
       a.collection-nav-item {
         padding-inline: 2px;
-        @include border-radius(full);
         transition: background-color 0.3s ease-out;
+        @include border-radius(full);
 
         &:hover {
-          background-color: light-dark(color.adjust($global-background-color, $lightness: -10%), color.adjust($global-background-color-dark, $lightness: 10%));
+          background-color: light-dark(color.adjust($global-background-color, $lightness: -7%), color.adjust($global-background-color-dark, $lightness: 7%));
         }
       }
 

@@ -61,6 +61,7 @@ export interface EncryptionService {
 export interface ContentService {
   initSVGIcon: () => void
   initLinkGuardDialog: (target?: Element | Document) => void
+  initCollectionSort: () => void
   initContent: (target?: Element | Document) => void
   setup: () => void
 }

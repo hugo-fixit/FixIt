@@ -113,6 +113,7 @@ exitFullscreen = "Thoát toàn màn hình"
 cookieconsentMessage = "Trang web này sử dụng Cookies để cải thiện trải nghiệm của bạn."
 cookieconsentDismiss = "Đã hiểu!"
 cookieconsentLink = "Tìm hiểu thêm"
+toggleSortOrder = "Đổi thứ tự sắp xếp"
 # === Assets ===
 
 # === Share ===

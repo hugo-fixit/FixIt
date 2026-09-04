@@ -112,6 +112,7 @@ exitFullscreen = "退出全螢幕"
 cookieconsentMessage = "本網站使用 Cookies 來改善你的流覽體驗。"
 cookieconsentDismiss = "同意"
 cookieconsentLink = "瞭解更多"
+toggleSortOrder = "切換排序方式"
 # === Assets ===
 
 # === Share ===

@@ -115,6 +115,7 @@ exitFullscreen = "خروج از تمام‌صفحه"
 cookieconsentMessage = "این وبسایت از کوکی‌ها برای بهبود تجربه شما استفاده می‌کند."
 cookieconsentDismiss = "متوجه شدم!"
 cookieconsentLink = "اطلاعات بیشتر"
+toggleSortOrder = "تغییر ترتیب مرتب‌سازی"
 # === Assets ===
 
 # === Share ===

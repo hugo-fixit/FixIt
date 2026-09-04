@@ -115,6 +115,7 @@ exitFullscreen = "पूर्ण स्क्रीन से बाहर न�
 cookieconsentMessage = "यह वेबसाइट आपके अनुभव को बेहतर बनाने के लिए कुकीज़ का उपयोग करती है।"
 cookieconsentDismiss = "समझ गया!"
 cookieconsentLink = "और अधिक जानें"
+toggleSortOrder = "क्रम बदलें"
 # === Assets ===
 
 # === Share ===

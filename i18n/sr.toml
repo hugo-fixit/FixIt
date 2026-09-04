@@ -114,6 +114,7 @@ exitFullscreen = "Изађи из целог екрана"
 cookieconsentMessage = "Ова веб локација користи Cookies да би побољшала ваше искуство."
 cookieconsentDismiss = "Договорити се"
 cookieconsentLink = "Сазнајте више"
+toggleSortOrder = "Промени редослед сортирања"
 # === Assets ===
 
 # === Share ===

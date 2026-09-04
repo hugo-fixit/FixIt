@@ -115,6 +115,7 @@ exitFullscreen = "الخروج من ملء الشاشة"
 cookieconsentMessage = "يستخدم هذا الموقع ملفات تعريف الارتباط لتحسين تجربتك."
 cookieconsentDismiss = "فهمت!"
 cookieconsentLink = "اعرف المزيد"
+toggleSortOrder = "تبديل ترتيب الفرز"
 # === Assets ===
 
 # === Share ===

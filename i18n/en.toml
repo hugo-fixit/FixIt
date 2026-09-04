@@ -114,6 +114,7 @@ exitFullscreen = "Exit fullscreen"
 cookieconsentMessage = "This website uses Cookies to improve your experience."
 cookieconsentDismiss = "Got it!"
 cookieconsentLink = "Learn more"
+toggleSortOrder = "Toggle sort order"
 # === Assets ===
 
 # === Share ===
