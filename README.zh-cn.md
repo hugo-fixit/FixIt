@@ -97,7 +97,6 @@ pnpx fixit-cli create my-blog
 - 支持 **[Umami Analytics](https://umami.is/)**
 - 支持 **[Plausible Analytics](https://plausible.io/)**
 - 支持 **[Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics)**
-- 支持 **[Splitbee Analytics](https://splitbee.io)**
 - 支持搜索引擎的 **网站验证** (Google, Bing, Yandex, Pinterest, Baidu, 360 and Sogou)
 - 支持所有第三方库的 **CDN**
 
@@ -116,8 +115,8 @@ pnpx fixit-cli create my-blog
 
 - 支持 **[Gravatar](https://gravatar.com)** 头像
 - 支持本地 **头像**
-- 支持多达 **87** 种社交链接
-- 支持多达 **28** 种网站分享
+- 支持多达 **86** 种社交链接
+- 支持多达 **25** 种网站分享
 - 支持 **[Disqus](https://disqus.com)** 评论系统
 - 支持 **[Gitalk](https://github.com/gitalk/gitalk)** 评论系统
 - 支持 **[Valine](https://valine.js.org/)** 评论系统
@@ -129,16 +128,17 @@ pnpx fixit-cli create my-blog
 - 支持 **[Artalk](https://artalk.js.org/)** 评论系统
 - 支持 **[Twikoo](https://twikoo.js.org/)** 评论系统
 - 支持 **[giscus](https://giscus.app/zh-CN/)** 评论系统
+- 支持通过模板块覆盖 **自定义** 评论系统
 
 ### 扩展功能
 
-- 支持基于 [PostChat](https://ai.zhheo.com/console/login?InviteID=85041330) 的 **AI 摘要**、**AI 搜索** 和 **AI 智能客服**
 - 支持 **渐进式网页应用**
 - 支持 **二级菜单**
 - 支持 **内容加密**（页面、局部）
 - 支持 **友情链接** 的页面模板
-- 支持基于 [algolia](https://www.algolia.com/)、[Fuse.js](https://fusejs.io/)、[Pagefind](https://pagefind.app)、CSE 或 [PostChat](https://ai.zhheo.com/console/login?InviteID=85041330) 的 **搜索**
-- 支持基于 [Google](https://programmablesearchengine.google.com/) 的 **自定义搜索引擎 (CSE)**
+- 支持基于 [algolia](https://www.algolia.com/)、[Fuse.js](https://fusejs.io/)、[Pagefind](https://pagefind.app) 或 CSE 的 **搜索**
+- 支持基于 [Google](https://programmablesearchengine.google.com/) 或 [Bing](https://www.customsearch.ai/) 的 **自定义搜索引擎 (CSE)**
+- 支持基于 [PostChat](https://ai.zhheo.com/console/login?InviteID=85041330) 的 **AI 摘要**、**AI 搜索** 和 **AI 智能客服**
 - 支持 **Twemoji**
 - 支持 **代码高亮**
 - 一键 **复制代码** 到剪贴板
@@ -164,6 +164,9 @@ pnpx fixit-cli create my-blog
 - 支持基于 [cell-watermark](https://github.com/Lruihao/watermark) 的 **网页水印**
 - 支持基于 [pangu.js](https://github.com/vinta/pangu.js) 的 **中文排版**
 - 支持本地 **缓存远程图床图片**
+- 支持移动端 **导航对话框**，标签页切换目录和集合列表
+- 支持 **阅读进度条**
+- 支持基于 [cell-tooltip](https://github.com/Lruihao/cell-tooltip) 的 **工具提示**
 - ……
 
 </details>
@@ -322,6 +325,9 @@ FixIt 主题支持所有主流浏览器的最近两个版本。
 - [pace](https://github.com/CodeByZach/pace)
 - [`<tab-container>` element](https://github.com/github/tab-container-element)
 - [`<json-viewer>` element](https://github.com/Lruihao/json-viewer-element)
+- [Pagefind](https://pagefind.app)
+- [instant.page](https://instant.page)
+- [panzoom](https://github.com/timmywil/panzoom)
 
 </details>
 

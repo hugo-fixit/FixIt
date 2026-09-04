@@ -1739,16 +1739,6 @@ src = ""
 [params.analytics.cloudflare]
 token = ""
 
-# Splitbee Analytics.
-[params.analytics.splitbee]
-enable = false
-# No cookie mode.
-no_cookie = true
-# Respect the do not track setting of the browser.
-do_not_track = true
-# Token (optional), more info on https://splitbee.io/docs/embed-the-script.
-data_token = ""
-
 # Cookie consent configuration.
 [params.cookieconsent]
 enable = true
