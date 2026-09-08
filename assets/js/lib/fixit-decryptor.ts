@@ -198,7 +198,7 @@ class FixItDecryptor {
       const $encryptor = $template.parentElement!
       const $input = $encryptor.querySelector<HTMLInputElement>('.fixit-decryptor-input')
       if ($input) {
-        flashTooltip($input, err instanceof Error ? err.message : 'Decryption failed')
+        flashTooltip($input, err instanceof Error ? err.message : 'Decryption failed', 3000, true)
       }
       return console.error(err)
     }
@@ -221,7 +221,7 @@ class FixItDecryptor {
     inputEl.value = ''
     inputEl.blur()
     if (!input) {
-      flashTooltip(inputEl, 'Please enter the correct password!')
+      flashTooltip(inputEl, 'Please enter the correct password!', 3000, true)
       return console.warn('Please enter the correct password!')
     }
 
@@ -240,7 +240,7 @@ class FixItDecryptor {
     }
 
     if (!matches) {
-      flashTooltip(inputEl, `Password error: ${input} not the correct password!`)
+      flashTooltip(inputEl, `Password error: ${input} not the correct password!`, 3000, true)
       return console.warn(`Password error: ${input} not the correct password!`)
     }
     // Store verifyHash for cache validation, inputSha256 for AES key derivation

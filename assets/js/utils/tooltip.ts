@@ -3,18 +3,27 @@
  * @param el - The target element to show the tooltip on.
  * @param message - The tooltip message text.
  * @param duration - How long to display the tooltip in milliseconds.
+ * @param clearPending - Whether to clear CellTooltip's internal pending hide timer (e.g. from focusout).
  */
-export function flashTooltip(el: HTMLElement, message: string, duration = 3000) {
+export function flashTooltip(el: HTMLElement, message: string, duration = 3000, clearPending = false) {
   const CellTooltip = window.CellTooltip
-  const originalTitle = el.dataset.ctTitle
-  el.dataset.ctTitle = message
+  clearTimeout(Number(el.dataset.flashTimer))
   const instance = CellTooltip.getOrCreateInstance(el)
+  if (!instance.flashOriginalTitle) {
+    instance.flashOriginalTitle = instance.config.title ?? ''
+  }
+  instance.config.title = message
   instance.refresh()
+  if (clearPending) {
+    instance.enter()
+  }
   instance.show()
-  setTimeout(() => {
-    el.dataset.ctTitle = originalTitle ?? ''
+  el.dataset.flashTimer = String(setTimeout(() => {
+    instance.config.title = instance.flashOriginalTitle
+    instance.flashOriginalTitle = null
     instance.hide()
-  }, duration)
+    delete el.dataset.flashTimer
+  }, duration))
 }
 
 /**
