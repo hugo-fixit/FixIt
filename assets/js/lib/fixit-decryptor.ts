@@ -15,6 +15,7 @@
  * - Password verification: data-password stores PBKDF2(SHA-256(password), data-verify-salt) when fixit-encrypted
  */
 import { eventBus } from '../core/event-bus'
+import { t } from '../i18n'
 import { flashTooltip } from '../utils'
 
 interface DecryptorOptions {
@@ -198,7 +199,7 @@ class FixItDecryptor {
       const $encryptor = $template.parentElement!
       const $input = $encryptor.querySelector<HTMLInputElement>('.fixit-decryptor-input')
       if ($input) {
-        flashTooltip($input, err instanceof Error ? err.message : 'Decryption failed', 3000, true)
+        flashTooltip($input, err instanceof Error ? err.message : t('decryptionFailed'), 3000, true)
       }
       return console.error(err)
     }
@@ -221,8 +222,8 @@ class FixItDecryptor {
     inputEl.value = ''
     inputEl.blur()
     if (!input) {
-      flashTooltip(inputEl, 'Please enter the correct password!', 3000, true)
-      return console.warn('Please enter the correct password!')
+      flashTooltip(inputEl, t('enterCorrectPassword'), 3000, true)
+      return console.warn(t('enterCorrectPassword'))
     }
 
     let matches: boolean
@@ -240,8 +241,8 @@ class FixItDecryptor {
     }
 
     if (!matches) {
-      flashTooltip(inputEl, `Password error: ${input} not the correct password!`, 3000, true)
-      return console.warn(`Password error: ${input} not the correct password!`)
+      flashTooltip(inputEl, t('passwordIncorrect'), 3000, true)
+      return console.warn(t('passwordIncorrect'))
     }
     // Store verifyHash for cache validation, inputSha256 for AES key derivation
     await callback($template, inputSha256, verifyHash)
@@ -362,7 +363,7 @@ class FixItDecryptor {
     })
   }
 
-  /** Restore decrypted content from localStorage cache if the password has not expired. */
+  /** Restore decrypted content from LocalStorage cache if the password has not expired. */
   validateCache(): this {
     const $content = document.querySelector<HTMLElement>('#content')!
     const $encryptor = document.querySelector<HTMLElement>('article > fixit-encryptor')!
@@ -373,7 +374,7 @@ class FixItDecryptor {
     if (!cachedStat || cachedStat.password !== password || cachedStat.expiration < Math.ceil(Date.now() / 1000)) {
       if (cachedStat) {
         window.localStorage?.removeItem(`fixit-decryptor/#${location.pathname}`)
-        console.warn('The password has expired, please re-enter!')
+        console.warn(t('passwordExpired'))
       }
       return this
     }

@@ -74,6 +74,7 @@ Service-class architecture with direct constructor calls:
   - `tokens.ts` — Service interfaces (`CoreService`, `ThemeService`, `CodeService`, etc.) used for module constructor typing.
 - **`modules/`** — Feature modules. Each is a class implementing its service interface. Dependencies are constructor-injected. Private state uses ES6 `#` fields. Modules: charts, code, content, core, encryption, events, menu, misc, search, theme, toc. `pagefind.ts` is a standalone factory consumed by `SearchModule`.
 - **`utils/`** — Pure utility functions (no side effects, no DOM state). Re-exported from `utils/index.ts`.
+- **`i18n/`** — Runtime translations for JS-only strings (not available via Hugo's `T` function or `data-*` attributes). Each language is a separate file (`en.ts`, `zh-CN.ts`, etc.) exporting a `Translations` object. Language codes match Hugo's i18n file names and `document.documentElement.lang`. Exports `t(key)` with English fallback. To add a language: create `<lang>.ts`, import in `index.ts`. To add a key: add to `Translations` interface and every language file.
 - **`lib/`** — Third-party library wrappers (aplayer, echarts, file-tree, fixit-decryptor, lightgallery, mapbox, mathjax, mermaid, etc.). All import the shared `eventBus` singleton.
 - **`head/`** — `color-scheme.ts` runs synchronously in `<head>` before body render to prevent flash of wrong theme.
 - **`pages/`** — Page-specific scripts (e.g. `link.ts` for the link guard redirection page).
