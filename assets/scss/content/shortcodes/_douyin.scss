@@ -1,25 +1,32 @@
 @use "core/mixins" as *;
+@use "core/functions" as *;
 
 .single .douyin {
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: 60.725%;
   margin: 1rem auto;
   text-align: center;
 
   iframe {
-    position: absolute;
     width: 100%;
-    height: 100%;
-    inset-inline-start: 0;
-    top: 0;
   }
 
-  // [todo] get width and height from api
+  @include media('sm', 'up') {
+    width: 100%;
+    aspect-ratio: fi-var(douyin-ratio, 9 / 16);
+
+    iframe {
+      // Add 35 pixels for the iframe controls
+      height: calc(100% + 35px);
+    }
+  }
+
   @include media('xs') {
-    width: 92%;
-    margin-inline: 4%;
-    padding-bottom: 190%;
+    width: 324px;
+    height: 672px;
+    overflow: hidden;
+
+    iframe {
+      // Add 48 pixels for douyin footer
+      height: calc(100% + 48px);
+    }
   }
 }
