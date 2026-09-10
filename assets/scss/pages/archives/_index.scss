@@ -1,7 +1,12 @@
 // Archives page styles (section, taxonomy, term)
 @use "sass:meta";
+@use "core/functions" as *;
 
 .archive {
+  .header {
+    text-align: end;
+  }
+
   .single-title {
     padding: 1rem 0 0.5rem;
     margin: 0;
@@ -17,6 +22,20 @@
     font-weight: normal;
     line-height: 100%;
     text-align: end;
+
+    &.total-word-count {
+      margin: 0;
+      font-size: 0.875rem;
+    }
+  }
+
+  .rss-link {
+    font-size: 0.75rem;
+    color: fi-var(global-font-secondary-color);
+
+    &:hover {
+      color: fi-var(global-link-hover-color);
+    }
   }
 
   .group-title {

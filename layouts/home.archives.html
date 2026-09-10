@@ -11,8 +11,9 @@
     <div class="header">
       {{- /* Title */ -}}
       <h1 class="single-title animate__animated animate__pulse animate__faster">
-        {{- dict "Class" "fa-solid fa-box-archive me-1" | partial "plugin/icon.html" -}}
-        {{- .Params.Title | default (T "archives") }} <sup>{{ $pages.Len }}</sup>
+        {{- dict "Class" "fa-solid fa-box-archive" | partial "plugin/icon.html" -}}
+        <sup class="me-1">{{ $pages.Len }}</sup>
+        {{- .Params.Title | default (T "archives") }}
       </h1>
       {{- /* Total word count */ -}}
       {{- /* See https://github.com/hugo-fixit/FixIt/issues/124 */ -}}
@@ -28,6 +29,10 @@
         <p class="single-subtitle total-word-count" title='{{- T "section.totalWordCount" . }}'>
           {{- dict "Class" "fa-regular fa-keyboard" | partial "plugin/icon.html" }} {{ T "section.totalWordCount" (dict "Count" $humanizedNum) -}}
         </p>
+      {{- end -}}
+      {{- /* RSS Feed Link */ -}}
+      {{- with .OutputFormats.Get "rss" -}}
+        {{- dict "Destination" .Permalink "Title" (T "section.subscribeRSS") "Class" "rss-link" "Content" (printf "%s%s" (dict "Class" "fa-solid fa-rss me-1" | partial "plugin/icon.html") (T "section.subscribeRSS")) "Newtab" true | partial "plugin/link.html" -}}
       {{- end -}}
     </div>
 

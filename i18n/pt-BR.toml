@@ -52,6 +52,7 @@ other = "Posts"
 # === Section ===
 [section]
 recentlyUpdated = "Recentemente atualizado"
+subscribeRSS = "Inscrever-se no feed RSS"
 
 [section.totalWordCount]
 one = "Apenas uma palavra"

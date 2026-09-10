@@ -50,6 +50,7 @@ other = "Bài viết"
 # === Section ===
 [section]
 recentlyUpdated = "Mới nhất"
+subscribeRSS = "Đăng ký kênh RSS"
 
 [section.totalWordCount]
 one = "Chỉ một từ"

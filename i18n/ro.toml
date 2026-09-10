@@ -51,6 +51,7 @@ other = "Articole"
 # === Section ===
 [section]
 recentlyUpdated = "Actualizat recent"
+subscribeRSS = "Abonează-te la fluxul RSS"
 
 [section.totalWordCount]
 one = "Un cuvânt"
