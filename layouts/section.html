@@ -12,8 +12,9 @@
         {{- with .Params.titleIcon -}}
           {{- $titleIcon = . -}}
         {{- end -}}
-        {{- dict "Class" (add $titleIcon " me-1") | partial "plugin/icon.html" -}}
-        {{- title (.Params.Title | default ((T .Section) | default .Section | dict "Some" | T "allSome")) }} <sup>{{ .Pages.Len }}</sup>
+        {{- dict "Class" $titleIcon | partial "plugin/icon.html" -}}
+        <sup class="me-1">{{ .Pages.Len }}</sup>
+        {{- title (.Params.Title | default ((T .Section) | default .Section | dict "Some" | T "allSome")) }}
       </h1>
       {{- /* Total word count */ -}}
       {{- /* See https://github.com/hugo-fixit/FixIt/issues/124 */ -}}
@@ -29,6 +30,10 @@
         <p class="single-subtitle total-word-count" title='{{- T "section.totalWordCount" . }}'>
           {{- dict "Class" "fa-regular fa-keyboard" | partial "plugin/icon.html" }} {{ T "section.totalWordCount" (dict "Count" $humanizedNum) -}}
         </p>
+      {{- end -}}
+      {{- /* RSS Feed Link */ -}}
+      {{- with .OutputFormats.Get "rss" -}}
+        {{- dict "Destination" .Permalink "Title" (T "section.subscribeRSS") "Class" "rss-link" "Content" (printf "%s%s" (dict "Class" "fa-solid fa-rss me-1" | partial "plugin/icon.html") (T "section.subscribeRSS")) "Newtab" true | partial "plugin/link.html" -}}
       {{- end -}}
     </div>
 

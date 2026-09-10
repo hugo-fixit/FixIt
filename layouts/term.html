@@ -5,17 +5,24 @@
 
 {{- define "content" -}}
   <div class="page archive">
-    {{- /* Title */ -}}
-    {{- $taxonomy := .Data.Singular -}}
-    {{- $pageCount := len .Pages -}}
-    {{- $termIcon := .Params.titleIcon | default (dict "Taxonomy" $taxonomy "Slot" "term" | partial "function/get-taxonomy-icon.html") -}}
-    {{- $termTitle := .Title -}}
-    <h1 class="single-title animate__animated animate__pulse animate__faster">
-      {{- with $termIcon -}}
-        {{- dict "Class" (add . " me-1") | partial "plugin/icon.html" -}}
+    <div class="header">
+      {{- /* Title */ -}}
+      {{- $taxonomy := .Data.Singular -}}
+      {{- $pageCount := len .Pages -}}
+      {{- $termIcon := .Params.titleIcon | default (dict "Taxonomy" $taxonomy "Slot" "term" | partial "function/get-taxonomy-icon.html") -}}
+      {{- $termTitle := .Title -}}
+      <h1 class="single-title animate__animated animate__pulse animate__faster">
+        {{- with $termIcon -}}
+          {{- dict "Class" . | partial "plugin/icon.html" -}}
+        {{- end -}}
+        <sup class="me-1">{{ $pageCount }}</sup>
+        {{- $termTitle }}
+      </h1>
+      {{- /* RSS Feed Link */ -}}
+      {{- with .OutputFormats.Get "rss" -}}
+        {{- dict "Destination" .Permalink "Title" (T "section.subscribeRSS") "Class" "rss-link" "Content" (printf "%s%s" (dict "Class" "fa-solid fa-rss me-1" | partial "plugin/icon.html") (T "section.subscribeRSS")) "Newtab" true | partial "plugin/link.html" -}}
       {{- end -}}
-      {{- $termTitle }} <sup>{{ $pageCount }}</sup>
-    </h1>
+    </div>
 
     {{- /* Paginate */ -}}
     {{- if .Pages -}}

@@ -52,6 +52,7 @@ other = "نوشته‌ها"
 # === Section ===
 [section]
 recentlyUpdated = "به‌روزرسانی‌های اخیر"
+subscribeRSS = "اشتراک در خوراک RSS"
 
 [section.totalWordCount]
 one = "مجموع یک کلمه"

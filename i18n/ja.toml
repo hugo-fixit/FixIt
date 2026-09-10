@@ -51,6 +51,7 @@ other = "記事"
 # === Section ===
 [section]
 recentlyUpdated = "最近更新"
+subscribeRSS = "RSSフィードを購読する"
 
 [section.totalWordCount]
 other = "合計約 {{ .Count }} 字"

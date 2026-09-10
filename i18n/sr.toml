@@ -51,6 +51,7 @@ other = "Постови"
 # === Section ===
 [section]
 recentlyUpdated = "Недавно Ажурирано"
+subscribeRSS = "Пратите RSS извор"
 
 [section.totalWordCount]
 one = "Једна реч"
