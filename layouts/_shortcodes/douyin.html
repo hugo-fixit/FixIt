@@ -1,8 +1,18 @@
 {{- /* reference https://developer.open-douyin.com/docs/resource/zh-CN/dop/develop/openapi/video-management/douyin/iframe-player/get-iframe-by-video */ -}}
-{{- /* [todo] get iframe from api */ -}}
 {{- $id := cond .IsNamedParams (.Get "id") (.Get 0) -}}
+{{- $style := "" -}}
 
-<div class="douyin">
+{{- $apiURL := printf "https://open.douyin.com/api/douyin/v1/video/get_iframe_by_video?video_id=%s" (string $id) -}}
+{{- $resp := partial "function/get-remote-json.html" (dict "URL" $apiURL) -}}
+{{- if eq (int $resp.err_no) 0 -}}
+  {{- $width := int $resp.data.video_width -}}
+  {{- $height := int $resp.data.video_height -}}
+  {{- if and (gt $width 0) (gt $height 0) -}}
+    {{- $style = printf " style=\"--fi-douyin-ratio: %g / %g;\"" (float $width) (float $height) -}}
+  {{- end -}}
+{{- end -}}
+
+<div class="douyin"{{ $style | safeHTMLAttr }}>
   <iframe src="//open.douyin.com/player/video?vid={{ $id }}&autoplay=0" border="0" framespacing="0" allowfullscreen="true"></iframe>
 </div>
 {{- /* EOF */ -}}
