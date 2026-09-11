@@ -11,7 +11,7 @@
 
   @include media('sm', 'up') {
     width: 100%;
-    aspect-ratio: fi-var(douyin-ratio, 9 / 16);
+    aspect-ratio: fi-var(douyin-ratio, calc(9 / 16));
 
     iframe {
       // Add 35 pixels for the iframe controls
