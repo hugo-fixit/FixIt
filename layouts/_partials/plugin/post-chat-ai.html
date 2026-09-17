@@ -5,24 +5,28 @@
   Podcast: https://ai.zhheo.com/docs/podcast.html
   TODO refactor and migrate to theme component
 */ -}}
-{{- $params := .Params | merge .Site.Params | partial "function/camel-case-keys.html" -}}
-{{- $chatConfig := $params.postChat -}}
-{{- $summaryConfig := $params.postSummary -}}
-{{- $podcastConfig := $params.podcast -}}
-{{- $key := $chatConfig.key | default $summaryConfig.key -}}
-{{- $sourcePrefix := "https://ai.zhheo.com/static/public/" -}}
-{{- $jsMap := dict
-  "chat" "postChatUser.min.js"
-  "summary" "tianli_gpt.min.js"
-  "both" "postChatUser_summary.min.js"
--}}
-{{- /* PostSummary only for public posts */ -}}
+{{- /* Check if PostChat or PostSummary is enabled first to avoid unnecessary conversion */ -}}
+{{- $postChatRaw := dict "Page" . "Key" "post_chat" | partial "function/param.html" -}}
+{{- $postSummaryRaw := dict "Page" . "Key" "post_summary" | partial "function/param.html" -}}
 {{- $password := .Params.password -}}
 {{- $isPost := (eq .Kind "page") | and (eq .Type "posts") | and (not $password) -}}
-{{- $summaryEnable := cond $isPost $summaryConfig.enable false -}}
-{{- $enable := $chatConfig.enable | or $summaryEnable -}}
+{{- $chatEnable := $postChatRaw.enable | default false -}}
+{{- $summaryEnable := cond $isPost ($postSummaryRaw.enable | default false) false -}}
+{{- $enable := $chatEnable | or $summaryEnable -}}
+{{- $key := $postChatRaw.key | default $postSummaryRaw.key -}}
 
 {{- if $enable | and $key -}}
+  {{- /* Only convert specific config sections when enabled */ -}}
+  {{- $chatConfig := dict "Page" . "Key" "post_chat" "ToCamel" true | partial "function/param.html" -}}
+  {{- $summaryConfig := dict "Page" . "Key" "post_summary" "ToCamel" true | partial "function/param.html" -}}
+  {{- $podcastConfig := dict "Page" . "Key" "podcast" "ToCamel" true | partial "function/param.html" -}}
+  {{- $sourcePrefix := "https://ai.zhheo.com/static/public/" -}}
+  {{- $jsMap := dict
+    "chat" "postChatUser.min.js"
+    "summary" "tianli_gpt.min.js"
+    "both" "postChatUser_summary.min.js"
+  -}}
+  {{- $summaryEnable = cond $isPost $summaryConfig.enable false -}}
   {{- $configJS := "" -}}
   {{- $fingerprint := .Site.Store.Get "fingerprint" -}}
   {{- $sourceOpts := dict "Fingerprint" $fingerprint "Defer" true -}}
