@@ -13,7 +13,7 @@
   {{- .Site.Store.Set "cdn" $cdn -}}
   {{- .Site.Store.Set "fingerprint" .Site.Params.fingerprint -}}
   {{- .Site.Store.Set "analytics" .Site.Params.analytics -}}
-  {{- .Store.Set "comment" (dict "Page" . "Key" "comment" | partial "function/param.html") -}}
+  {{- .Store.Set "comment" (dict "Page" . "Key" "comment" "ToCamel" true | partial "function/param.html") -}}
 {{- else -}}
   {{- .Site.Store.Set "devOpts" .Site.Params.dev -}}
   {{- if ne .Site.Params.dev.enable true -}}

@@ -31,7 +31,7 @@
       {{- end -}}
       {{- $commentConfig = dict "locale" ($artalk.locale | default $.Site.Language.Locale | default "auto") | dict "artalk" | merge $commentConfig -}}
       {{- with .Site.Params.gravatar -}}
-        {{/* See https://artalk.js.org/guide/frontend/config.html#gravatar-params */}}
+        {{- /* See https://artalk.js.org/guide/frontend/config.html#gravatar-params */ -}}
         {{- $gravatarMirror := printf "https://%v/avatar/" .Host -}}
         {{- $commentConfig = dict "mirror" $gravatarMirror "params" (printf "d=%v&s=240" .Style) | dict "gravatar" | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
@@ -44,22 +44,22 @@
       {{- with $artalk.placeholder -}}
         {{- $commentConfig = dict "placeholder" . | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- with $artalk.nocomment -}}
+      {{- with $artalk.noComment -}}
         {{- $commentConfig = dict "noComment" . | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- with $artalk.sendbtn -}}
+      {{- with $artalk.sendBtn -}}
         {{- $commentConfig = dict "sendBtn" . | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- with $artalk.editortravel -}}
+      {{- with $artalk.editorTravel -}}
         {{- $commentConfig = dict "editorTravel" . | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- if ne $artalk.flatmode nil -}}
-        {{- $commentConfig = dict "flatMode" $artalk.flatmode | dict "artalk" | merge $commentConfig -}}
+      {{- if ne $artalk.flatMode nil -}}
+        {{- $commentConfig = dict "flatMode" $artalk.flatMode | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- with $artalk.nestmax -}}
+      {{- with $artalk.nestMax -}}
         {{- $commentConfig = dict "nestMax" . | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- with $artalk.nestsort -}}
+      {{- with $artalk.nestSort -}}
         {{- $commentConfig = dict "nestSort" . | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
       {{- with $artalk.lightgallery -}}
@@ -68,53 +68,53 @@
       {{- if eq $artalk.vote false -}}
         {{- $commentConfig = dict "vote" false | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- with $artalk.votedown -}}
+      {{- with $artalk.voteDown -}}
         {{- $commentConfig = dict "voteDown" . | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- if eq $artalk.uabadge false -}}
+      {{- if eq $artalk.uaBadge false -}}
         {{- $commentConfig = dict "uaBadge" false | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- if eq $artalk.listsort false -}}
+      {{- if eq $artalk.listSort false -}}
         {{- $commentConfig = dict "listSort" false | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- if eq $artalk.imgupload false -}}
+      {{- if eq $artalk.imgUpload false -}}
         {{- $commentConfig = dict "imgUpload" false | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
       {{- if eq $artalk.preview false -}}
         {{- $commentConfig = dict "preview" false | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- if eq $artalk.versioncheck false -}}
+      {{- if eq $artalk.versionCheck false -}}
         {{- $commentConfig = dict "versionCheck" false | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- if eq $artalk.preferremoteconf true -}}
+      {{- if eq $artalk.preferRemoteConf true -}}
         {{- $commentConfig = dict "preferRemoteConf" true | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- with $artalk.imglazyload -}}
+      {{- with $artalk.imgLazyLoad -}}
         {{- $commentConfig = dict "imgLazyLoad" . | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- with $artalk.reqtimeout -}}
+      {{- with $artalk.reqTimeout -}}
         {{- $commentConfig = dict "reqTimeout" . | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- if eq $artalk.listunreadhighlight true -}}
+      {{- if eq $artalk.listUnreadHighlight true -}}
         {{- $commentConfig = dict "listUnreadHighlight" true | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- if eq $artalk.pvadd false -}}
+      {{- if eq $artalk.pvAdd false -}}
         {{- $commentConfig = dict "pvAdd" false | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
       {{- with $artalk.pagination -}}
         {{- $pagination := dict -}}
-        {{- with .pagesize -}}
+        {{- with .pageSize -}}
           {{- $pagination = dict "pageSize" . | merge $pagination -}}
         {{- end -}}
-        {{- if eq .readmore false -}}
+        {{- if eq .readMore false -}}
           {{- $pagination = dict "readMore" false | merge $pagination -}}
         {{- end -}}
-        {{- if eq .autoload false -}}
+        {{- if eq .autoLoad false -}}
           {{- $pagination = dict "autoLoad" false | merge $pagination -}}
         {{- end -}}
         {{- $commentConfig = dict "pagination" $pagination | dict "artalk" | merge $commentConfig -}}
       {{- end -}}
-      {{- with $artalk.heightlimit -}}
+      {{- with $artalk.heightLimit -}}
         {{- $heightLimit := dict -}}
         {{- with .content -}}
           {{- $heightLimit = dict "content" . | merge $heightLimit -}}
@@ -279,7 +279,7 @@
     {{- $telegram := $comment.telegram | default dict -}}
     {{- if $telegram.enable -}}
       <div id="telegram-comments" class="comment"></div>
-      {{- $attr := printf `data-comments-app-website="%v"` $telegram.siteID -}}
+      {{- $attr := printf `data-comments-app-website="%v"` $telegram.siteId -}}
       {{- $attr = printf `%v data-limit="%v"` $attr ($telegram.limit | default 5) -}}
       {{- with $telegram.height -}}
         {{- $attr = printf `%v data-height="%v"` $attr . -}}
@@ -367,20 +367,20 @@
         {{- $commentConfig = .darkTheme | default "dark" | dict "darkTheme" | dict "giscus" | merge $commentConfig -}}
         <div id="giscus" class="comment">
           <script
-            src="{{ .Origin }}/client.js"
-            data-repo="{{ .Repo }}"
-            data-repo-id="{{ .RepoId }}"
-            data-category="{{ .Category }}"
-            data-category-id="{{ .CategoryId }}"
-            data-mapping="{{ .Mapping }}"
-            data-strict="{{ .Strict }}"
-            {{ if .Term }}data-term="{{ .Term }}"{{ end }}
+            src="{{ .origin }}/client.js"
+            data-repo="{{ .repo }}"
+            data-repo-id="{{ .repoId }}"
+            data-category="{{ .category }}"
+            data-category-id="{{ .categoryId }}"
+            data-mapping="{{ .mapping }}"
+            data-strict="{{ .strict }}"
+            {{ if .term }}data-term="{{ .term }}"{{ end }}
             data-theme="preferred_color_scheme"
-            data-reactions-enabled="{{ .ReactionsEnabled }}"
-            data-emit-metadata="{{ .EmitMetadata }}"
-            data-input-position="{{ .InputPosition }}"
+            data-reactions-enabled="{{ .reactionsEnabled }}"
+            data-emit-metadata="{{ .emitMetadata }}"
+            data-input-position="{{ .inputPosition }}"
             data-lang="{{ .lang | default $.Site.Language.Locale }}"
-            {{ if ne .LazyLoad false }}data-loading="lazy"{{ end }}
+            {{ if ne .lazyLoad false }}data-loading="lazy"{{ end }}
             crossorigin="anonymous"
             async
             defer
