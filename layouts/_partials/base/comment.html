@@ -3,7 +3,7 @@
 
   Renders the comment container and injects provider-specific CSS/JS assets.
   Supported providers: Artalk, Disqus, Gitalk, Valine, Waline, Facebook,
-  Telegram, Commento, Utterances, Twikoo, Giscus, and custom comment systems.
+  Telegram, Utterances, Twikoo, Giscus, and custom comment systems.
 
   Called from: layouts/baseof.html.
 */ -}}
@@ -299,16 +299,6 @@
       {{- dict "Source" "https://comments.app/js/widget.js?2" "Defer" true "Attr" $attr | dict "Page" . "Data" | partial "store/script.html" -}}
       <noscript>
         Please enable JavaScript to view the comments powered by <a href="https://comments.app/" rel="external nofollow noopener noreferrer">Telegram Comments</a>.
-      </noscript>
-    {{- end -}}
-
-    {{- /* Commento Comment System */ -}}
-    {{- $commento := $comment.commento | default dict -}}
-    {{- if $commento.enable -}}
-      <div id="commento" class="comment"></div>
-      {{- dict "Source" "https://cdn.commento.io/js/commento.js" "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-      <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://commento.io/" rel="external nofollow noopener noreferrer">Commento</a>.
       </noscript>
     {{- end -}}
 
