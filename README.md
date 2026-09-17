@@ -123,7 +123,6 @@ Click the following links to generate a new repository with template:
 - **Waline** comment system supported by [Waline](https://waline.js.org/)
 - **Facebook comments** system supported by [Facebook](https://developers.facebook.com/docs/plugins/comments/)
 - **Telegram comments** system supported by [Telegram Comments](https://comments.app/)
-- **Commento** comment system supported by [Commento](https://commento.io/)
 - **Utterances** comment system supported by [Utterances](https://utteranc.es/)
 - **Artalk** comment system supported by [Artalk](https://artalk.js.org/)
 - **Twikoo** comment system supported by [Twikoo](https://twikoo.js.org/)
