@@ -59,7 +59,7 @@
 
     {{- /* Friend links */ -}}
     {{- if $friends -}}
-    <div class="friend-links">
+    <div class="friend-links" data-scheme="{{ $scheme }}">
       {{- range $index, $friend := $friends -}}
         {{- /* Avatar */ -}}
         {{- $avatar := "" -}}

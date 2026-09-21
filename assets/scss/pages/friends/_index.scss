@@ -8,6 +8,14 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: 1rem;
+
+    &[data-scheme="bridge"] {
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    }
+
+    &[data-scheme="note"] {
+      grid-template-columns: 1fr;
+    }
   }
 
   // Scheme: mahjong (tile-style card)
