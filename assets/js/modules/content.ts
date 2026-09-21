@@ -260,7 +260,7 @@ export class ContentModule implements ContentService {
     CellTooltip.initAll('.copy-icon-btn[title]', { placement: 'top' })
     CellTooltip.initAll('.fixit-encryptor-btn[title]')
     CellTooltip.initAll('.collection-sort-toggle[title]', { placement: 'bottom' })
-    CellTooltip.initAll('[data-scheme="mahjong"][title]', { placement: 'bottom' })
+    CellTooltip.initAll('.friend-links[data-scheme="mahjong"] > .friend-link[title]', { placement: 'bottom' })
     this.#initFootnotes()
   }
 

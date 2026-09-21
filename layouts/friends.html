@@ -109,9 +109,9 @@
         {{- end -}}
 
         {{- /* Render link */ -}}
-        {{- $attr := printf `data-scheme="%s"` $scheme -}}
+        {{- $attr := "" -}}
         {{- if $isBroken -}}
-          {{- $attr = printf `%s data-expired-label="%s"` $attr (T "friends.expired") -}}
+          {{- $attr = printf `data-expired-label="%s"` (T "friends.expired") -}}
         {{- end -}}
         {{- $options := dict
           "Destination" $friend.url

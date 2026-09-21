@@ -19,7 +19,7 @@
   }
 
   // Scheme: mahjong (tile-style card)
-  [data-scheme="mahjong"] {
+  .friend-links[data-scheme="mahjong"] > .friend-link {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -69,7 +69,7 @@
   }
 
   // Scheme: bridge (horizontal card)
-  [data-scheme="bridge"] {
+  .friend-links[data-scheme="bridge"] > .friend-link {
     display: flex;
     flex-direction: row;
     align-items: stretch;
@@ -115,7 +115,7 @@
   }
 
   // Scheme: note (text-focused card)
-  [data-scheme="note"] {
+  .friend-links[data-scheme="note"] > .friend-link {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -213,7 +213,7 @@
 
   // Responsive
   @include media('xs') {
-    [data-scheme="bridge"] {
+    .friend-links[data-scheme="bridge"] > .friend-link {
       grid-column: 1 / -1;
       max-width: 100%;
 
