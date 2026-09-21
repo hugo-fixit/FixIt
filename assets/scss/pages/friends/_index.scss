@@ -1,68 +1,218 @@
 // Style of layout friends
+@use "core/functions" as *;
 @use "core/mixins" as *;
 
 .special.friends {
   .friend-links {
     margin-top: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 1rem;
   }
 
-  @include media('xs') {
-    .friend-links {
-      justify-content: space-around;
+  // Scheme: mahjong (tile-style card)
+  [data-scheme="mahjong"] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    justify-self: center;
+    width: 130px;
+    height: 170px;
+    padding: 10px;
+    background: light-dark(
+      linear-gradient(160deg, #faf8f2, #e8e4da),
+      linear-gradient(160deg, #2d3440, #252c36)
+    );
+    border: 1px solid light-dark(#d0c9b8, #3a4555);
+    box-shadow:
+      2px 2px 0 light-dark(#c0b9a8, #1e2833),
+      4px 4px 0 light-dark(#b0a998, #151d27),
+      inset 0 1px 0 light-dark(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.05));
+    transition: 0.35s fi-var(bezier);
+    @include border-radius(10px);
+
+    .friend-avatar {
+      width: 100px;
+      height: 100px;
+      @include border-radius;
+    }
+
+    .friend-nickname {
+      padding: 0 0.25rem;
+      font-size: 0.85em;
+      color: light-dark(#6b5b4b, #b0b8c4);
+      text-shadow:
+        0 1px 0 light-dark(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.08)),
+        0 -1px 0 light-dark(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.3));
+    }
+
+    &:hover {
+      background: light-dark(
+        linear-gradient(160deg, #fff, #f0ece2),
+        linear-gradient(160deg, #3a4555, #2d3440)
+      );
+      transform: translateY(-6px);
+      box-shadow:
+        2px 8px 0 light-dark(#c0b9a8, #1e2833),
+        4px 10px 0 light-dark(#b0a998, #151d27),
+        inset 0 1px 0 light-dark(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.12));
     }
   }
 
-  .friend-link {
-    width: 150px;
-    height: 200px;
-    font-size: 1rem;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.3);
-    box-sizing: border-box;
-    box-shadow: 3px 3px 5px #aaa;
-    border: none;
-    transition-duration: 0.3s;
-    margin-bottom: 1rem;
+  // Scheme: bridge (horizontal card)
+  [data-scheme="bridge"] {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-direction: row;
+    align-items: stretch;
+    grid-column: span 2;
+    max-width: 400px;
+    background: light-dark(rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.2));
+    box-shadow: 3px 3px 5px light-dark(#aaa, #333);
+    transition: 0.3s;
     @include border-radius;
+
+    .friend-avatar {
+      width: 80px !important;
+      min-width: 80px;
+      height: auto !important;
+      border-radius: var(--fi-global-border-radius) 0 0 var(--fi-global-border-radius);
+    }
+
+    .friend-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0.5rem 0.75rem;
+      overflow: hidden;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .friend-nickname {
+      text-align: left;
+    }
+
+    .friend-description {
+      text-align: left;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+    }
+
+    &:hover {
+      background: light-dark(#fff, #2a313c);
+      box-shadow: 0 0 3px light-dark(#aaa, #555);
+      scale: 1.03;
+    }
   }
 
-  .friend-link:hover {
-    background: #fff;
-    box-shadow: 0 0 3px #aaa;
-    scale: 1.03;
+  // Scheme: note (text-focused card)
+  [data-scheme="note"] {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    grid-column: 1 / -1;
+    padding: 0.75rem 1rem;
+    background: light-dark(rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.2));
+    box-shadow: 3px 3px 5px light-dark(#aaa, #333);
+    border-left: 3px solid fi-var(primary);
+    transition: 0.3s;
+    @include border-radius;
+
+    .friend-avatar {
+      display: none;
+    }
+
+    .friend-nickname {
+      text-align: left;
+    }
+
+    .friend-description {
+      text-align: left;
+      margin-top: 0.25rem;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+    }
+
+    &:hover {
+      background: light-dark(#fff, #2a313c);
+      box-shadow: 0 0 3px light-dark(#aaa, #555);
+      scale: 1.03;
+    }
+  }
+
+  // Common styles across schemes
+  .friend-link {
+    font-size: 1rem;
+    text-align: center;
+    box-sizing: border-box;
+    border: none;
   }
 
   .friend-avatar {
     object-fit: cover;
     object-position: center;
-    width: 100% !important;
-    height: 150px !important;
     margin: 0;
     padding: 0;
-    @include border-radius;
   }
 
   .friend-nickname {
     display: block;
     position: relative;
-    color: #2bbc8a;
+    color: fi-var(primary);
     font-weight: bold;
     max-width: 100%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    line-height: 18px;
-    margin-bottom: 1rem;
+    line-height: 1.8;
+
+    &:hover {
+      color: fi-var(danger);
+    }
   }
 
-  .friend-nickname:hover {
-    color: #d480aa;
+  .friend-description {
+    color: fi-var(secondary);
+    font-size: 0.85em;
+    text-wrap: balance;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+
+  // Broken link state
+  .friend-link--broken {
+    opacity: 0.6;
+    position: relative;
+
+    &::after {
+      content: attr(data-expired-label);
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      font-size: 0.7em;
+      padding: 0.1em 0.5em;
+      background: light-dark(#ff6b6b, #c0392b);
+      color: #fff;
+      @include border-radius(1em);
+    }
+
+    .friend-avatar {
+      filter: grayscale(0.8);
+    }
+  }
+
+  // Responsive
+  @include media('xs') {
+    [data-scheme="bridge"] {
+      grid-column: 1 / -1;
+      max-width: 100%;
+
+      .friend-avatar {
+        width: 64px !important;
+        min-width: 64px;
+      }
+    }
   }
 }

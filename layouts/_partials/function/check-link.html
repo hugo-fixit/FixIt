@@ -1,0 +1,29 @@
+{{- /*
+  Check if a URL is reachable using resources.GetRemote.
+
+  @param {Object} . - The options
+  @param {String} .url - The URL to check
+  @param {String} [.timeout] - Request timeout (default: "3s")
+  @return {String} Status: "ok", "broken", or "unknown"
+*/ -}}
+
+{{- $url := .url -}}
+{{- $timeout := .timeout | default "3s" -}}
+{{- $status := "unknown" -}}
+{{- $cacheKey := printf "link-check-%s" $url -}}
+
+{{- if hugo.Store.Get $cacheKey -}}
+  {{- $status = hugo.Store.Get $cacheKey -}}
+{{- else -}}
+  {{- with try (resources.GetRemote $url (dict "timeout" $timeout)) -}}
+    {{- with .Err -}}
+      {{- warnidf "warning-link-check" "Link check failed %q: %s" $url . -}}
+      {{- $status = "broken" -}}
+    {{- else with .Value -}}
+      {{- $status = "ok" -}}
+    {{- end -}}
+  {{- end -}}
+  {{- hugo.Store.Set $cacheKey $status -}}
+{{- end -}}
+
+{{- return $status -}}

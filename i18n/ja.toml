@@ -268,3 +268,8 @@ download = "SVG をダウンロード"
 diagram = "図"
 code = "コード"
 # === Tabs ===
+
+# === Friends ===
+[friends]
+expired = "期限切れ"
+# === Friends ===

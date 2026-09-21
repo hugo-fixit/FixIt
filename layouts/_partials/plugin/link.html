@@ -17,6 +17,7 @@
   @param {String} [.Download] - Download attribute value
   @param {Boolean} [.IsGuarded] - Explicitly enable or disable link guard
   @param {Object} [.Page] - Page context for page-level link config override
+  @param {String} [.Attr] - Raw HTML attributes appended to the anchor tag
 */ -}}
 
 {{- /* Regular link rendering */ -}}
@@ -156,6 +157,9 @@
 {{- end -}}
 {{- if $isGuarded | and (eq $config.guard.mode "modal") -}}
   {{- $attrs = add $attrs ` data-guard="modal"` -}}
+{{- end -}}
+{{- with .Attr -}}
+  {{- $attrs = add $attrs (printf ` %s` .) -}}
 {{- end -}}
 
 <a {{ $attrs | safeHTMLAttr }}>

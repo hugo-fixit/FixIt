@@ -9,6 +9,9 @@ keywords:
   - 'friends template'
   - 友情链接
 comment: false
+# friend_scheme: mahjong   # card layout: mahjong | bridge | note
+# friend_sort: weight      # sort field: weight (desc) | nickname (weight desc first, then alphabetical)
+# friend_link_check: false # [experimental] build-time dead link detection (dev mode only)
 ---
 
 <!-- The `friends.yml` file placed in the `yourProject/data/` directory will be loaded automatically here. -->
