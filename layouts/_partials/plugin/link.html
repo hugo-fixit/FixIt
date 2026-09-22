@@ -129,14 +129,15 @@
 {{- end -}}
 
 {{- /* External link guard */ -}}
-{{- $isGuarded := false -}}
+{{- $isGuarded := .IsGuarded | default false -}}
 {{- if
   $config.guard.enable
   | and $isExternal
   | and (not (in $config.guard.allowDomains $url.Host))
 -}}
-  {{- $isGuarded = .IsGuarded | default true -}}
+  {{- $isGuarded = true -}}
 {{- end -}}
+{{- $isGuarded := .IsGuarded | default $isGuarded -}}
 
 {{- $destination := cond $isGuarded (add (relLangURL "link") "?target=" (urlquery .Destination)) .Destination -}}
 {{- $attrs := printf `href="%s"` ($destination | safeURL) -}}

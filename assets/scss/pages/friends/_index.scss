@@ -14,7 +14,9 @@
     }
 
     &[data-scheme="note"] {
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
   }
 
@@ -104,6 +106,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: flex-start;
       overflow: hidden;
       flex: 1;
       min-width: 0;
@@ -133,38 +136,40 @@
     }
   }
 
-  // Scheme: note (text-focused card)
+  // Scheme: note (minimal text list, single-line with ellipsis)
   .friend-links[data-scheme="note"] > .friend-link {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    grid-column: 1 / -1;
-    padding: 0.75rem 1rem;
-    background: light-dark(rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.2));
-    box-shadow: 3px 3px 5px light-dark(#aaa, #333);
-    border-left: 3px solid fi-var(primary);
-    transition: 0.3s;
-    @include border-radius;
+    display: block;
+    text-align: left;
+    line-height: 1.8;
+    padding: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     .friend-avatar {
       display: none;
     }
 
     .friend-nickname {
-      text-align: left;
+      display: inline;
+      overflow: visible;
+      text-overflow: clip;
     }
 
     .friend-description {
-      text-align: left;
-      margin-top: 0.25rem;
-      -webkit-line-clamp: 3;
-      line-clamp: 3;
-    }
+      display: inline;
+      margin: 0;
+      font-size: 0.85em;
+      color: fi-var(secondary);
+      overflow: visible;
+      text-wrap: nowrap;
+      -webkit-box-orient: initial;
+      -webkit-line-clamp: unset;
+      line-clamp: unset;
 
-    &:hover {
-      background: light-dark(#fff, #2a313c);
-      box-shadow: 0 0 3px light-dark(#aaa, #555);
-      scale: 1.03;
+      &::before {
+        content: " - ";
+      }
     }
   }
 
@@ -216,8 +221,8 @@
     &::after {
       content: attr(data-expired-label);
       position: absolute;
-      top: 5px;
-      right: 5px;
+      top: 6px;
+      inset-inline-end: 6px;
       font-size: 0.7em;
       padding: 0.1em 0.5em;
       background: light-dark(#ff6b6b, #c0392b);
