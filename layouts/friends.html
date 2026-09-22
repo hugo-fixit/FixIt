@@ -33,8 +33,8 @@
   {{- $sortField := .Params.friend_sort | default "weight" -}}
   {{- $linkCheck := .Params.friend_link_check | default false -}}
 
-  {{- /* Load and sort friends data */ -}}
-  {{- $friends := hugo.Data.friends | default slice -}}
+  {{- /* Load and sort friends data: friends.<lang>.yml > friends.yml */ -}}
+  {{- $friends := index hugo.Data (printf "friends.%v" .Language) | default hugo.Data.friends | default slice -}}
   {{- if $friends -}}
     {{- if eq $sortField "nickname" -}}
       {{- /* Composite key: nickname (asc) + weight (desc), then sort once */ -}}
