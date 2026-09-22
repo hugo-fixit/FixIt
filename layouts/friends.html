@@ -2,7 +2,7 @@
   Friends page template.
 
   @feature Front matter params:
-    - friend_scheme {String} - Card layout: "mahjong" (default) | "bridge" | "note"
+    - friend_scheme {String} - Card layout: "mahjong" (default) | "domino" | "note"
     - friend_sort {String} - Sort field: "weight" (default, desc) | "nickname" (weight desc first, then alphabetical)
     - friend_link_check {Boolean} - [Experimental] Enable build-time dead link detection (default: false, dev mode only)
     - link.guard.enable {Boolean} - Enable external link guard (default: false)
@@ -12,7 +12,7 @@
   ---
   title: Friends
   layout: friends
-  friend_scheme: bridge
+  friend_scheme: domino
   friend_sort: weight
   friend_link_check: true
   link:
@@ -83,7 +83,7 @@
 
         {{- /* Build card content by scheme */ -}}
         {{- $content := "" -}}
-        {{- if eq $scheme "bridge" -}}
+        {{- if eq $scheme "domino" -}}
           {{- $content = printf `%s<span class="friend-info">%s%s</span>` $avatar $nickname $description -}}
         {{- else if eq $scheme "note" -}}
           {{- $content = printf `%s%s` $nickname $description -}}

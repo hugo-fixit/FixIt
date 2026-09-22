@@ -6,11 +6,11 @@
   .friend-links {
     margin-top: 1rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 1rem;
 
-    &[data-scheme="bridge"] {
-      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    &[data-scheme="domino"] {
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
     }
 
     &[data-scheme="note"] {
@@ -25,8 +25,8 @@
     align-items: center;
     justify-content: space-around;
     justify-self: center;
-    width: 130px;
-    height: 170px;
+    width: 140px;
+    height: 180px;
     padding: 10px;
     background: light-dark(
       linear-gradient(160deg, #faf8f2, #e8e4da),
@@ -68,30 +68,42 @@
     }
   }
 
-  // Scheme: bridge (horizontal card)
-  .friend-links[data-scheme="bridge"] > .friend-link {
+  // Scheme: domino (domino tile inspired horizontal card)
+  .friend-links[data-scheme="domino"] > .friend-link {
     display: flex;
     flex-direction: row;
-    align-items: stretch;
-    grid-column: span 2;
-    max-width: 400px;
-    background: light-dark(rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.2));
-    box-shadow: 3px 3px 5px light-dark(#aaa, #333);
-    transition: 0.3s;
-    @include border-radius;
+    align-items: center;
+    width: 380px;
+    height: 120px;
+    gap: 0.75rem;
+    padding: 0 0.75rem;
+    background: light-dark(#f5f2ec, #252c36);
+    border: 1.5px solid light-dark(#ccc5b5, #3e4a5a);
+    box-shadow:
+      0 1px 4px light-dark(rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.2)),
+      inset 0 1px 0 light-dark(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.04));
+    outline: 1px solid light-dark(#ddd7ca, #354050);
+    outline-offset: -5px;
+    transition: 0.3s fi-var(bezier);
+    justify-self: center;
+    overflow: hidden;
+    box-sizing: border-box;
+    @include border-radius(10px);
 
     .friend-avatar {
-      width: 80px !important;
-      min-width: 80px;
-      height: auto !important;
-      border-radius: var(--fi-global-border-radius) 0 0 var(--fi-global-border-radius);
+      width: 90px;
+      min-width: 90px;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 2px solid light-dark(#e8e3d8, #3a4555);
+      padding: 2px;
+      @include border-radius(full);
     }
 
     .friend-info {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 0.5rem 0.75rem;
       overflow: hidden;
       flex: 1;
       min-width: 0;
@@ -99,18 +111,25 @@
 
     .friend-nickname {
       text-align: left;
+      font-size: 0.9em;
+      letter-spacing: 0.02em;
     }
 
     .friend-description {
       text-align: left;
-      -webkit-line-clamp: 2;
-      line-clamp: 2;
+      margin-top: 0.15rem;
+      font-size: 0.8em;
+      line-height: 1.5;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
     }
 
     &:hover {
-      background: light-dark(#fff, #2a313c);
-      box-shadow: 0 0 3px light-dark(#aaa, #555);
-      scale: 1.03;
+      background: light-dark(#faf8f3, #2d3542);
+      box-shadow:
+        0 3px 10px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)),
+        inset 0 1px 0 light-dark(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.06));
+      transform: translateY(-2px);
     }
   }
 
@@ -213,13 +232,14 @@
 
   // Responsive
   @include media('xs') {
-    .friend-links[data-scheme="bridge"] > .friend-link {
-      grid-column: 1 / -1;
-      max-width: 100%;
+    .friend-links[data-scheme="domino"] > .friend-link {
+      width: 100%;
+      height: auto;
+      min-height: 110px;
 
       .friend-avatar {
-        width: 64px !important;
-        min-width: 64px;
+        width: 52px;
+        min-width: 52px;
       }
     }
   }
