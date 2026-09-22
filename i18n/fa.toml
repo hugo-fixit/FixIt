@@ -273,3 +273,8 @@ download = "دانلود SVG"
 diagram = "نمودار"
 code = "کد"
 # === Tabs ===
+
+# === Friends ===
+[friends]
+expired = "منقضی شده"
+# === Friends ===

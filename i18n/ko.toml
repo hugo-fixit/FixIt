@@ -268,3 +268,8 @@ download = "SVG 다운로드"
 diagram = "다이어그램"
 code = "코드"
 # === Tabs ===
+
+# === Friends ===
+[friends]
+expired = "만료됨"
+# === Friends ===

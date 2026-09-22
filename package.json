@@ -2,6 +2,7 @@
   "name": "@hugo-fixit/core",
   "type": "module",
   "version": "1.0.0-alpha.3",
+  "nextVersion": "1.0.0-beta",
   "private": true,
   "packageManager": "pnpm@12.3.4",
   "description": "Hugo FixIt core theme component source files",

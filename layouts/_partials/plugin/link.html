@@ -17,6 +17,7 @@
   @param {String} [.Download] - Download attribute value
   @param {Boolean} [.IsGuarded] - Explicitly enable or disable link guard
   @param {Object} [.Page] - Page context for page-level link config override
+  @param {String} [.Attr] - Raw HTML attributes appended to the anchor tag
 */ -}}
 
 {{- /* Regular link rendering */ -}}
@@ -128,14 +129,15 @@
 {{- end -}}
 
 {{- /* External link guard */ -}}
-{{- $isGuarded := false -}}
+{{- $isGuarded := .IsGuarded | default false -}}
 {{- if
   $config.guard.enable
   | and $isExternal
   | and (not (in $config.guard.allowDomains $url.Host))
 -}}
-  {{- $isGuarded = .IsGuarded | default true -}}
+  {{- $isGuarded = true -}}
 {{- end -}}
+{{- $isGuarded := .IsGuarded | default $isGuarded -}}
 
 {{- $destination := cond $isGuarded (add (relLangURL "link") "?target=" (urlquery .Destination)) .Destination -}}
 {{- $attrs := printf `href="%s"` ($destination | safeURL) -}}
@@ -156,6 +158,9 @@
 {{- end -}}
 {{- if $isGuarded | and (eq $config.guard.mode "modal") -}}
   {{- $attrs = add $attrs ` data-guard="modal"` -}}
+{{- end -}}
+{{- with .Attr -}}
+  {{- $attrs = add $attrs (printf ` %s` .) -}}
 {{- end -}}
 
 <a {{ $attrs | safeHTMLAttr }}>

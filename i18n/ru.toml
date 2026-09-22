@@ -272,3 +272,8 @@ download = "Скачать SVG"
 diagram = "Диаграмма"
 code = "Код"
 # === Tabs ===
+
+# === Friends ===
+[friends]
+expired = "Истёкший"
+# === Friends ===

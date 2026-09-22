@@ -271,3 +271,8 @@ download = "Tải SVG"
 diagram = "Sơ đồ"
 code = "Mã"
 # === Tabs ===
+
+# === Friends ===
+[friends]
+expired = "Hết hạn"
+# === Friends ===

@@ -1,68 +1,285 @@
 // Style of layout friends
+@use "core/functions" as *;
 @use "core/mixins" as *;
+
+// ——— Shared geometry ———
+$friends-card-radius: 10px;
+$mahjong-w: 140px;
+$mahjong-h: 180px;
+$mahjong-avatar: 100px;
+$domino-w: 380px;
+$domino-h: 120px;
+$domino-avatar: 90px;
+$domino-avatar-xs: 52px;
+$domino-min-height-xs: 110px;
+
+// ——— Mahjong: ivory tile material ———
+$mahjong-bg: light-dark(
+  linear-gradient(160deg, #faf8f2, #e8e4da),
+  linear-gradient(160deg, #2d3440, #252c36)
+);
+$mahjong-bg-hover: light-dark(
+  linear-gradient(160deg, #fff, #f0ece2),
+  linear-gradient(160deg, #3a4555, #2d3440)
+);
+$mahjong-border: light-dark(#d0c9b8, #3a4555);
+$mahjong-edge: light-dark(#c0b9a8, #1e2833);
+$mahjong-edge-deep: light-dark(#b0a998, #151d27);
+$mahjong-sheen: light-dark(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.05));
+$mahjong-sheen-hover: light-dark(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.12));
+$mahjong-ink: light-dark(#6b5b4b, #b0b8c4);
+$mahjong-ink-highlight: light-dark(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.08));
+$mahjong-ink-shadow: light-dark(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.3));
+
+// ——— Domino: parchment material ———
+$domino-bg: light-dark(#f5f2ec, #252c36);
+$domino-bg-hover: light-dark(#faf8f3, #2d3542);
+$domino-border: light-dark(#ccc5b5, #3e4a5a);
+$domino-outline: light-dark(#ddd7ca, #354050);
+$domino-avatar-border: light-dark(#e8e3d8, #3a4555);
+$domino-shadow: light-dark(rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.2));
+$domino-shadow-hover: light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
+$domino-sheen: light-dark(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.04));
+$domino-sheen-hover: light-dark(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.06));
 
 .special.friends {
   .friend-links {
     margin-top: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
 
-  @include media('xs') {
-    .friend-links {
+    &[data-scheme="domino"] {
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    }
+
+    &[data-scheme="note"] {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    // Scheme: mahjong (tile-style card)
+    &[data-scheme="mahjong"] > .friend-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       justify-content: space-around;
+      justify-self: center;
+      width: $mahjong-w;
+      height: $mahjong-h;
+      padding: 10px;
+      background: $mahjong-bg;
+      border: 1px solid $mahjong-border;
+      box-shadow:
+        2px 2px 0 $mahjong-edge,
+        4px 4px 0 $mahjong-edge-deep,
+        inset 0 1px 0 $mahjong-sheen;
+      transition: 0.35s fi-var(bezier);
+      @include border-radius($friends-card-radius);
+
+      .friend-avatar {
+        width: $mahjong-avatar;
+        height: $mahjong-avatar;
+        @include border-radius;
+      }
+
+      .friend-nickname {
+        padding: 0 0.25rem;
+        font-size: 0.85em;
+        color: $mahjong-ink;
+        text-shadow:
+          0 1px 0 $mahjong-ink-highlight,
+          0 -1px 0 $mahjong-ink-shadow;
+      }
+
+      &:hover {
+        background: $mahjong-bg-hover;
+        transform: translateY(-6px);
+        box-shadow:
+          2px 8px 0 $mahjong-edge,
+          4px 10px 0 $mahjong-edge-deep,
+          inset 0 1px 0 $mahjong-sheen-hover;
+      }
+    }
+
+    // Scheme: domino (domino tile inspired horizontal card)
+    &[data-scheme="domino"] > .friend-link {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: $domino-w;
+      height: $domino-h;
+      gap: 0.75rem;
+      padding: 0 0.75rem;
+      background: $domino-bg;
+      border: 1.5px solid $domino-border;
+      box-shadow:
+        0 1px 4px $domino-shadow,
+        inset 0 1px 0 $domino-sheen;
+      outline: 1px solid $domino-outline;
+      outline-offset: -5px;
+      transition: 0.3s fi-var(bezier);
+      justify-self: center;
+      overflow: hidden;
+      box-sizing: border-box;
+      @include border-radius($friends-card-radius);
+
+      .friend-avatar {
+        width: $domino-avatar;
+        min-width: $domino-avatar;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border: 2px solid $domino-avatar-border;
+        padding: 2px;
+        @include border-radius(full);
+      }
+
+      .friend-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        overflow: hidden;
+        flex: 1;
+        min-width: 0;
+      }
+
+      .friend-nickname {
+        text-align: left;
+        font-size: 0.9em;
+        letter-spacing: 0.02em;
+      }
+
+      .friend-description {
+        text-align: left;
+        margin-top: 0.15rem;
+        font-size: 0.8em;
+        line-height: 1.5;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+      }
+
+      &:hover {
+        background: $domino-bg-hover;
+        box-shadow:
+          0 3px 10px $domino-shadow-hover,
+          inset 0 1px 0 $domino-sheen-hover;
+        transform: translateY(-2px);
+      }
+    }
+
+    // Scheme: note (minimal text list, single-line with ellipsis)
+    &[data-scheme="note"] > .friend-link {
+      display: block;
+      text-align: left;
+      line-height: 1.8;
+      padding: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      .friend-avatar {
+        display: none;
+      }
+
+      .friend-nickname {
+        display: inline;
+        overflow: visible;
+        text-overflow: clip;
+      }
+
+      .friend-description {
+        display: inline;
+        margin: 0;
+        font-size: 0.85em;
+        color: fi-var(secondary);
+        overflow: visible;
+        text-wrap: nowrap;
+        -webkit-box-orient: initial;
+        -webkit-line-clamp: unset;
+        line-clamp: unset;
+
+        &::before {
+          content: " - ";
+        }
+      }
     }
   }
 
+  // Common styles across schemes
   .friend-link {
-    width: 150px;
-    height: 200px;
     font-size: 1rem;
     text-align: center;
-    background: rgba(255, 255, 255, 0.3);
     box-sizing: border-box;
-    box-shadow: 3px 3px 5px #aaa;
     border: none;
-    transition-duration: 0.3s;
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    @include border-radius;
-  }
-
-  .friend-link:hover {
-    background: #fff;
-    box-shadow: 0 0 3px #aaa;
-    scale: 1.03;
   }
 
   .friend-avatar {
     object-fit: cover;
     object-position: center;
-    width: 100% !important;
-    height: 150px !important;
     margin: 0;
     padding: 0;
-    @include border-radius;
   }
 
   .friend-nickname {
     display: block;
     position: relative;
-    color: #2bbc8a;
+    color: fi-var(primary);
     font-weight: bold;
     max-width: 100%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    line-height: 18px;
-    margin-bottom: 1rem;
+    line-height: 1.8;
+
+    &:hover {
+      color: fi-var(danger);
+    }
   }
 
-  .friend-nickname:hover {
-    color: #d480aa;
+  .friend-description {
+    color: fi-var(secondary);
+    font-size: 0.85em;
+    text-wrap: balance;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+
+  // Broken link state
+  .friend-link--broken {
+    opacity: 0.6;
+    position: relative;
+
+    &::after {
+      content: attr(data-expired-label);
+      position: absolute;
+      top: 6px;
+      inset-inline-end: 6px;
+      font-size: 0.7em;
+      padding: 0.1em 0.5em;
+      background: fi-var(danger);
+      color: #fff;
+      @include border-radius(1em);
+    }
+
+    .friend-avatar {
+      filter: grayscale(0.8);
+    }
+  }
+
+  // Responsive
+  @include media('xs') {
+    .friend-links[data-scheme="domino"] > .friend-link {
+      width: 100%;
+      height: auto;
+      min-height: $domino-min-height-xs;
+
+      .friend-avatar {
+        width: $domino-avatar-xs;
+        min-width: $domino-avatar-xs;
+      }
+    }
   }
 }

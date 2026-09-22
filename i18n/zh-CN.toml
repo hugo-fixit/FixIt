@@ -268,3 +268,8 @@ download = "下载 SVG"
 diagram = "图表"
 code = "代码"
 # === Tabs ===
+
+# === Friends ===
+[friends]
+expired = "已过期"
+# === Friends ===

@@ -273,3 +273,8 @@ download = "SVG डाउनलोड करें"
 diagram = "आरेख"
 code = "कोड"
 # === Tabs ===
+
+# === Friends ===
+[friends]
+expired = "समय सीमा समाप्त"
+# === Friends ===
