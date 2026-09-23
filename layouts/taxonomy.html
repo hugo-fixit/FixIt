@@ -10,8 +10,9 @@
   <div class="page archive">
     {{- /* Title */ -}}
     <h1 class="single-title animate__animated animate__pulse animate__faster">
-      {{- dict "Class" (add $icon " me-1") | partial "plugin/icon.html" -}}
-      {{- .Params.Title | default (T $taxonomies) | default $taxonomies | dict "Some" | T "allSome" }} <sup>{{ len .Data.Terms.ByCount }}</sup>
+      {{- dict "Class" $icon | partial "plugin/icon.html" -}}
+      <sup class="me-1">{{ len .Data.Terms.ByCount }}</sup>
+      {{- .Params.Title | default (T $taxonomies) | default $taxonomies | dict "Some" | T "allSome" -}}
     </h1>
     {{- /* Render different taxonomies */ -}}
     {{- $template := cond ( eq $taxonomies "tags") "tags" "taxonomies" -}}

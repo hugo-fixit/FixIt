@@ -10,8 +10,9 @@
       <div class="card-item-wrapper">
         <h2 class="card-item-title">
           <a href='{{ partial "function/escapeurl.html" .RelPermalink }}'>
-            {{- dict "Class" (add $icon " me-1") | partial "plugin/icon.html" -}}
-            {{- .Page.Title }} <sup>{{ len $pages }}</sup>
+            {{- dict "Class" $icon | partial "plugin/icon.html" -}}
+            <sup class="me-1">{{ len $pages }}</sup>
+            {{- .Page.Title -}}
           </a>
         </h2>
         {{- range first 5 $pages -}}
