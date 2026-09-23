@@ -1,0 +1,23 @@
+{{- /*
+  Pagefind search metadata injection partial.
+
+  Outputs meta tags for Pagefind indexing: hidden/encrypted filters,
+  date/title sorting fields, and tag/category/collection metadata.
+  Only active when Pagefind search is enabled and the current context is a page.
+  Called from: layouts/_partials/base/head/index.html.
+*/ -}}
+
+{{- if not (and .Site.Params.search.enable (eq .Site.Params.search.type "pagefind") .IsPage) -}}
+  {{- return -}}
+{{- end -}}
+
+{{- $pageDate := (.PublishDate | default .Date) -}}
+{{- $dateLabel := $pageDate | dateFormat (.Site.Params.date_format | default "2006-01-02") -}}
+<meta data-pagefind-filter="hidden:{{ string (.Param `hidden_from_search`) }}">
+<meta data-pagefind-filter="encrypted:{{ string (.Params.password | not | not) }}">
+<meta data-pagefind-sort="date:{{ $pageDate.Unix }}">
+<meta data-pagefind-sort="title:{{ .Title }}">
+<meta data-pagefind-meta="date:{{ $dateLabel }}">
+{{- with .Params.tags }}<meta data-pagefind-meta="tags:{{ delimit . "," }}">{{ end -}}
+{{- with .Params.categories }}<meta data-pagefind-meta="categories:{{ delimit . "," }}">{{ end -}}
+{{- with .Params.collections }}<meta data-pagefind-meta="collections:{{ delimit . "," }}">{{ end -}}

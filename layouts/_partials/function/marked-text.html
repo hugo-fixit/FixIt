@@ -4,6 +4,10 @@
   Embed types: default, primary, secondary, success, warning, danger
 */ -}}
 
+{{- if not (in . "<mark>") -}}
+  {{- return . -}}
+{{- end -}}
+
 {{- $content := replaceRE `<mark>(.+?)</mark>\[(.+?)\]` `<mark class="mark-$2">$1</mark>` . -}}
 {{- $content = replaceRE `<mark>(.+?)</mark>` `<mark class="mark-default">$1</mark>` $content -}}
 

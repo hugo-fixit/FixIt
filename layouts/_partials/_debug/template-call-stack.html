@@ -3,15 +3,17 @@
   @example
   {{- partial "_debug/template-call-stack.html" . -}}
 */ -}}
-{{- if eq hugo.Environment "debug" | and hugo.IsServer -}}
-  {{- with templates.Current -}}
-    <ul class="template-call-stack">
-      {{- range .Ancestors -}}
+{{- if not (eq hugo.Environment "debug" | and hugo.IsServer) -}}
+  {{- return -}}
+{{- end -}}
+
+{{- with templates.Current -}}
+  <ul class="template-call-stack">
+    {{- range .Ancestors -}}
+      <li><a href="vscode://file/{{ .Filename }}"><small>{{ .Filename }}</small></a></li>
+      {{- with .Base -}}
         <li><a href="vscode://file/{{ .Filename }}"><small>{{ .Filename }}</small></a></li>
-        {{- with .Base -}}
-          <li><a href="vscode://file/{{ .Filename }}"><small>{{ .Filename }}</small></a></li>
-        {{- end -}}
       {{- end -}}
-    </ul>
-  {{- end -}}
+    {{- end -}}
+  </ul>
 {{- end -}}

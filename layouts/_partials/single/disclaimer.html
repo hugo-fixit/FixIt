@@ -8,31 +8,35 @@
 
 {{- $disclaimer := dict "Page" . "Key" "disclaimer" | partial "function/param.html" | default dict -}}
 
-{{- if $disclaimer.enable -}}
-  {{- $type := $disclaimer.type | default "ai" -}}
-  {{- $content := "" -}}
-
-  {{- if eq $type "custom" -}}
-    {{- /* custom type requires content, otherwise skip */ -}}
-    {{- $content = $disclaimer.content | default "" -}}
-  {{- else -}}
-    {{- $content = $disclaimer.content | default (T (printf "single.disclaimerMessage.%s" $type)) -}}
-  {{- end -}}
-
-  {{- if $content -}}
-    {{- $types := slice "ai" "repost" "original" -}}
-    {{- $iconSrc := "" -}}
-    {{- if in $types $type -}}
-      {{- $iconSrc = printf "images/icons/disclaimer/%v.svg" $type -}}
-    {{- end -}}
-
-    <div class="post-disclaimer" data-type="{{ $type }}">
-      {{- if $iconSrc -}}
-        {{- dict "Src" $iconSrc | partial "plugin/icon.html" -}}
-      {{- else -}}
-        {{- dict "Class" "icon fa-solid fa-bullhorn" | partial "plugin/icon.html" -}}
-      {{- end -}}
-      <span class="post-disclaimer__content">{{ T "single.disclaimer" }}{{ $content | safeHTML }}</span>
-    </div>
-  {{- end -}}
+{{- if not $disclaimer.enable -}}
+  {{- return -}}
 {{- end -}}
+
+{{- $type := $disclaimer.type | default "ai" -}}
+{{- $content := "" -}}
+
+{{- if eq $type "custom" -}}
+  {{- /* custom type requires content, otherwise skip */ -}}
+  {{- $content = $disclaimer.content | default "" -}}
+{{- else -}}
+  {{- $content = $disclaimer.content | default (T (printf "single.disclaimerMessage.%s" $type)) -}}
+{{- end -}}
+
+{{- if not $content -}}
+  {{- return -}}
+{{- end -}}
+
+{{- $types := slice "ai" "repost" "original" -}}
+{{- $iconSrc := "" -}}
+{{- if in $types $type -}}
+  {{- $iconSrc = printf "images/icons/disclaimer/%v.svg" $type -}}
+{{- end -}}
+
+<div class="post-disclaimer" data-type="{{ $type }}">
+  {{- if $iconSrc -}}
+    {{- dict "Src" $iconSrc | partial "plugin/icon.html" -}}
+  {{- else -}}
+    {{- dict "Class" "icon fa-solid fa-bullhorn" | partial "plugin/icon.html" -}}
+  {{- end -}}
+  <span class="post-disclaimer__content">{{ T "single.disclaimer" }}{{ $content | safeHTML }}</span>
+</div>

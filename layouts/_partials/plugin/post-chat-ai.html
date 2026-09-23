@@ -15,103 +15,105 @@
 {{- $enable := $chatEnable | or $summaryEnable -}}
 {{- $key := $postChatRaw.key | default $postSummaryRaw.key -}}
 
-{{- if $enable | and $key -}}
-  {{- /* Only convert specific config sections when enabled */ -}}
-  {{- $chatConfig := dict "Page" . "Key" "post_chat" "ToCamel" true | partial "function/param.html" -}}
-  {{- $summaryConfig := dict "Page" . "Key" "post_summary" "ToCamel" true | partial "function/param.html" -}}
-  {{- $podcastConfig := dict "Page" . "Key" "podcast" "ToCamel" true | partial "function/param.html" -}}
-  {{- $sourcePrefix := "https://ai.zhheo.com/static/public/" -}}
-  {{- $jsMap := dict
-    "chat" "postChatUser.min.js"
-    "summary" "tianli_gpt.min.js"
-    "both" "postChatUser_summary.min.js"
-  -}}
-  {{- $summaryEnable = cond $isPost $summaryConfig.enable false -}}
-  {{- $configJS := "" -}}
-  {{- $fingerprint := .Site.Store.Get "fingerprint" -}}
-  {{- $sourceOpts := dict "Fingerprint" $fingerprint "Defer" true -}}
-
-  {{- /* PostSummary */ -}}
-  {{- if $summaryEnable -}}
-    {{- $postChatCSS := "https://ai.zhheo.com/static/public/postChatUser_summary.min.css" -}}
-    {{- dict "Source" $postChatCSS "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
-    {{- $p := "tianliGPT" -}}
-    {{- $postSummaryConfig := printf "let %v_postSelector='#content';let %v_injectDom='.ai-summary';" $p $p -}}
-    {{- with $summaryConfig.title -}}
-      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_Title='%v';" $p .) -}}
-    {{- end -}}
-    {{- with $summaryConfig.theme -}}
-      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_theme='%v';" $p .) -}}
-    {{- end -}}
-    {{- with $summaryConfig.postURL -}}
-      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_postURL='%v';" $p .) -}}
-    {{- end -}}
-    {{- with $summaryConfig.blacklist -}}
-      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_blacklist='%v';" $p .) -}}
-    {{- end -}}
-    {{- with $summaryConfig.wordLimit -}}
-      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_wordLimit=%d;" $p .) -}}
-    {{- end -}}
-    {{- if eq $summaryConfig.typingAnimate false -}}
-      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_typingAnimate=false;" $p) -}}
-    {{- end -}}
-    {{- with $summaryConfig.beginningText -}}
-      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_BeginningText='%v';" $p .) -}}
-    {{- end -}}
-    {{- with eq $summaryConfig.loadingText false -}}
-      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_loadingText=false;" $p) -}}
-    {{- end -}}
-    {{- if $chatConfig.enable -}}
-      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_recommendation=true;" $p) -}}
-    {{- else -}}
-      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_key='%v';" $p $key) -}}
-    {{- end -}}
-    {{- /* Podcast */ -}}
-    {{- if $podcastConfig.enable -}}
-      {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_podcast=true;" $p) -}}
-    {{- end -}}
-    {{- $configJS = add $configJS $postSummaryConfig -}}
-  {{- end -}}
-
-  {{- /* PostChat */ -}}
-  {{- if $chatConfig.enable -}}
-    {{- $sourceOpts = dict "Attr" (printf "data-postChat_key=%q" $key) | merge $sourceOpts -}}
-    {{- $blackDom := slice
-      "meting-js"
-      ".lnt"
-      ".ln"
-    -}}
-    {{- with $chatConfig.blackDom -}}
-      {{- $blackDom = $blackDom | append . -}}
-    {{- end -}}
-    {{- $upLoadWeb := cond (.IsHome | or $password | or (eq .Kind "404")) false $chatConfig.uploadWeb -}}
-    {{- $postChatConfig := dict "upLoadWeb" $upLoadWeb "blackDom" $blackDom | merge $chatConfig -}}
-    {{- $configJS = add $configJS ($postChatConfig | jsonify | printf "var postChatConfig=%s") -}}
-  {{- end -}}
-
-  {{- /* Insert config */ -}}
-  {{- $uniqueFileId := "" -}}
-  {{- $languagePrefix := .Site.LanguagePrefix -}}
-  {{- with .File -}}
-    {{- $uniqueFileId = .UniqueID -}}
-  {{- end -}}
-  {{- $targetPath := "" -}}
-  {{- if $uniqueFileId | and (not .IsHome) -}}
-    {{- $targetPath = printf "%s/js/config/post-chat/%s.js" $languagePrefix $uniqueFileId -}}
-  {{- end -}}
-  {{- dict "Content" $configJS "Path" $targetPath "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-
-  {{- /* Insert script */ -}}
-  {{- $postChatJS := "" -}}
-  {{- if $chatConfig.enable | and $summaryEnable -}}
-    {{- $postChatJS = add $sourcePrefix (index $jsMap "both") -}}
-  {{- else if $chatConfig.enable -}}
-    {{- $postChatJS = add $sourcePrefix (index $jsMap "chat") -}}
-  {{- else if $summaryEnable -}}
-    {{- $postChatJS = add $sourcePrefix (index $jsMap "summary") -}}
-  {{- end -}}
-  {{- $sourceOpts = dict "Source" $postChatJS | merge $sourceOpts -}}
-  {{- $sourceOpts | dict "Page" . "Data" | partial "store/script.html" -}}
+{{- if not (and $enable $key) -}}
+  {{- return false -}}
 {{- end -}}
+
+{{- /* Only convert specific config sections when enabled */ -}}
+{{- $chatConfig := dict "Page" . "Key" "post_chat" "ToCamel" true | partial "function/param.html" -}}
+{{- $summaryConfig := dict "Page" . "Key" "post_summary" "ToCamel" true | partial "function/param.html" -}}
+{{- $podcastConfig := dict "Page" . "Key" "podcast" "ToCamel" true | partial "function/param.html" -}}
+{{- $sourcePrefix := "https://ai.zhheo.com/static/public/" -}}
+{{- $jsMap := dict
+  "chat" "postChatUser.min.js"
+  "summary" "tianli_gpt.min.js"
+  "both" "postChatUser_summary.min.js"
+-}}
+{{- $summaryEnable = cond $isPost $summaryConfig.enable false -}}
+{{- $configJS := "" -}}
+{{- $fingerprint := .Site.Store.Get "fingerprint" -}}
+{{- $sourceOpts := dict "Fingerprint" $fingerprint "Defer" true -}}
+
+{{- /* PostSummary */ -}}
+{{- if $summaryEnable -}}
+  {{- $postChatCSS := "https://ai.zhheo.com/static/public/postChatUser_summary.min.css" -}}
+  {{- dict "Source" $postChatCSS "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
+  {{- $p := "tianliGPT" -}}
+  {{- $postSummaryConfig := printf "let %v_postSelector='#content';let %v_injectDom='.ai-summary';" $p $p -}}
+  {{- with $summaryConfig.title -}}
+    {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_Title='%v';" $p .) -}}
+  {{- end -}}
+  {{- with $summaryConfig.theme -}}
+    {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_theme='%v';" $p .) -}}
+  {{- end -}}
+  {{- with $summaryConfig.postURL -}}
+    {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_postURL='%v';" $p .) -}}
+  {{- end -}}
+  {{- with $summaryConfig.blacklist -}}
+    {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_blacklist='%v';" $p .) -}}
+  {{- end -}}
+  {{- with $summaryConfig.wordLimit -}}
+    {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_wordLimit=%d;" $p .) -}}
+  {{- end -}}
+  {{- if eq $summaryConfig.typingAnimate false -}}
+    {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_typingAnimate=false;" $p) -}}
+  {{- end -}}
+  {{- with $summaryConfig.beginningText -}}
+    {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_BeginningText='%v';" $p .) -}}
+  {{- end -}}
+  {{- with eq $summaryConfig.loadingText false -}}
+    {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_loadingText=false;" $p) -}}
+  {{- end -}}
+  {{- if $chatConfig.enable -}}
+    {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_recommendation=true;" $p) -}}
+  {{- else -}}
+    {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_key='%v';" $p $key) -}}
+  {{- end -}}
+  {{- /* Podcast */ -}}
+  {{- if $podcastConfig.enable -}}
+    {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_podcast=true;" $p) -}}
+  {{- end -}}
+  {{- $configJS = add $configJS $postSummaryConfig -}}
+{{- end -}}
+
+{{- /* PostChat */ -}}
+{{- if $chatConfig.enable -}}
+  {{- $sourceOpts = dict "Attr" (printf "data-postChat_key=%q" $key) | merge $sourceOpts -}}
+  {{- $blackDom := slice
+    "meting-js"
+    ".lnt"
+    ".ln"
+  -}}
+  {{- with $chatConfig.blackDom -}}
+    {{- $blackDom = $blackDom | append . -}}
+  {{- end -}}
+  {{- $upLoadWeb := cond (.IsHome | or $password | or (eq .Kind "404")) false $chatConfig.uploadWeb -}}
+  {{- $postChatConfig := dict "upLoadWeb" $upLoadWeb "blackDom" $blackDom | merge $chatConfig -}}
+  {{- $configJS = add $configJS ($postChatConfig | jsonify | printf "var postChatConfig=%s") -}}
+{{- end -}}
+
+{{- /* Insert config */ -}}
+{{- $uniqueFileId := "" -}}
+{{- $languagePrefix := .Site.LanguagePrefix -}}
+{{- with .File -}}
+  {{- $uniqueFileId = .UniqueID -}}
+{{- end -}}
+{{- $targetPath := "" -}}
+{{- if $uniqueFileId | and (not .IsHome) -}}
+  {{- $targetPath = printf "%s/js/config/post-chat/%s.js" $languagePrefix $uniqueFileId -}}
+{{- end -}}
+{{- dict "Content" $configJS "Path" $targetPath "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+
+{{- /* Insert script */ -}}
+{{- $postChatJS := "" -}}
+{{- if $chatConfig.enable | and $summaryEnable -}}
+  {{- $postChatJS = add $sourcePrefix (index $jsMap "both") -}}
+{{- else if $chatConfig.enable -}}
+  {{- $postChatJS = add $sourcePrefix (index $jsMap "chat") -}}
+{{- else if $summaryEnable -}}
+  {{- $postChatJS = add $sourcePrefix (index $jsMap "summary") -}}
+{{- end -}}
+{{- $sourceOpts = dict "Source" $postChatJS | merge $sourceOpts -}}
+{{- $sourceOpts | dict "Page" . "Data" | partial "store/script.html" -}}
 
 {{- return $enable -}}

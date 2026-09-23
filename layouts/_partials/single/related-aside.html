@@ -1,41 +1,44 @@
 {{- /* Related Content */ -}}
 {{- /* https://gohugo.io/content-management/related/ */ -}}
 {{- $relatedConfig := dict "Page" . "Key" "related" | partial "function/param.html" -}}
-{{- if $relatedConfig.enable | and ("aside" | in $relatedConfig.position) | and (not .Params.password) -}}
-  {{- $posts := .Site.Store.Get "mainSectionPages" -}}
-  {{- if .Site.Params.hidden_from_related -}}
-    {{- $posts = where $posts "Params.hidden_from_related" false -}}
-  {{- else -}}
-    {{- $posts = where $posts "Params.hidden_from_related" "!=" true -}}
-  {{- end -}}
-  {{- $related := $posts.Related . | first ($relatedConfig.count | default 5) -}}
-  {{- with $related -}}
-    <div class="details related-details open">
-      <div class="details-summary related-summary">
-        {{ dict "Class" "fa-solid fa-fire fa-fade text-danger" | partial "plugin/icon.html" }}
-        <span class="related-title">{{ T "single.relatedContent" }}</span>
-        {{- dict "Class" "details-icon fa-solid fa-angle-right" | partial "plugin/icon.html" -}}
-      </div>
-      <div class="details-content related-content">
-        <ul class="related-list">
-          {{- range $i, $p := . -}}
-            {{- $title := cond (.Param "capitalize_titles") (title .LinkTitle) .LinkTitle -}}
-            <li class="related-item">
-              <a href="{{ .RelPermalink }}" title="{{ $title }}">{{ $title }}</a>
-              {{- with .HeadingsFiltered -}}
-                <ul>
-                  {{- range . -}}
-                    {{- $link := printf "%s#%s" $p.RelPermalink .ID | safeURL -}}
-                    <li>
-                      <a href="{{ $link }}" title="{{ .Title }}">{{ .Title }}</a>
-                    </li>
-                  {{- end -}}
-                </ul>
-              {{- end -}}
-            </li>
-          {{- end -}}
-        </ul>
-      </div>
+
+{{- if not ($relatedConfig.enable | and ("aside" | in $relatedConfig.position) | and (not .Params.password)) -}}
+  {{- return -}}
+{{- end -}}
+
+{{- $posts := .Site.Store.Get "mainSectionPages" -}}
+{{- if .Site.Params.hidden_from_related -}}
+  {{- $posts = where $posts "Params.hidden_from_related" false -}}
+{{- else -}}
+  {{- $posts = where $posts "Params.hidden_from_related" "!=" true -}}
+{{- end -}}
+{{- $related := $posts.Related . | first ($relatedConfig.count | default 5) -}}
+{{- with $related -}}
+  <div class="details related-details open">
+    <div class="details-summary related-summary">
+      {{ dict "Class" "fa-solid fa-fire fa-fade text-danger" | partial "plugin/icon.html" }}
+      <span class="related-title">{{ T "single.relatedContent" }}</span>
+      {{- dict "Class" "details-icon fa-solid fa-angle-right" | partial "plugin/icon.html" -}}
     </div>
-  {{- end -}}
+    <div class="details-content related-content">
+      <ul class="related-list">
+        {{- range $i, $p := . -}}
+          {{- $title := cond (.Param "capitalize_titles") (title .LinkTitle) .LinkTitle -}}
+          <li class="related-item">
+            <a href="{{ .RelPermalink }}" title="{{ $title }}">{{ $title }}</a>
+            {{- with .HeadingsFiltered -}}
+              <ul>
+                {{- range . -}}
+                  {{- $link := printf "%s#%s" $p.RelPermalink .ID | safeURL -}}
+                  <li>
+                    <a href="{{ $link }}" title="{{ .Title }}">{{ .Title }}</a>
+                  </li>
+                {{- end -}}
+              </ul>
+            {{- end -}}
+          </li>
+        {{- end -}}
+      </ul>
+    </div>
+  </div>
 {{- end -}}

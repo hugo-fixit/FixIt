@@ -1,7 +1,12 @@
 {{- /* reference https://developer.open-douyin.com/docs/resource/zh-CN/dop/develop/openapi/video-management/douyin/iframe-player/get-iframe-by-video */ -}}
 {{- $id := cond .IsNamedParams (.Get "id") (.Get 0) -}}
-{{- $style := "" -}}
 
+{{- if not $id -}}
+  {{- errorf "[%s]: missing id parameter, See %s" .Name .Position -}}
+  {{- return -}}
+{{- end -}}
+
+{{- $style := "" -}}
 {{- $apiURL := printf "https://open.douyin.com/api/douyin/v1/video/get_iframe_by_video?video_id=%s" (string $id) -}}
 {{- $resp := partial "function/get-remote-json.html" (dict "URL" $apiURL) -}}
 {{- if eq (int $resp.err_no) 0 -}}

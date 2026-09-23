@@ -1,3 +1,7 @@
+{{- if not (strings.TrimSpace .Inner) -}}
+  {{- return -}}
+{{- end -}}
+
 {{- $content := .Inner | .Page.RenderString -}}
 {{- $id := dict "Page" .Page | partial "function/id.html" -}}
 {{- $tag := .Get 1 | default "div" -}}

@@ -17,6 +17,11 @@
 
 {{- $content := . -}}
 
+{{- /* Cheap probe: skip all replaceRE when no color-like code spans exist */ -}}
+{{- if not (in $content "<code>#" | or (in $content "<code>rgb(") | or (in $content "<code>hsl(")) -}}
+  {{- return $content -}}
+{{- end -}}
+
 {{- /* Only apply color preview to code elements that contain EXACTLY a color value and nothing else */ -}}
 
 {{- /* HEX color pattern: code must contain ONLY #RRGGBB (6 digits) */ -}}

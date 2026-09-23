@@ -3,6 +3,8 @@
   @example
   {{- partial "_debug/dump.html" . -}}
 */ -}}
-{{- if eq hugo.Environment "debug" | and hugo.IsServer -}}
-  <pre>{{ debug.Dump . }}</pre>
+{{- if not (eq hugo.Environment "debug" | and hugo.IsServer) -}}
+  {{- return -}}
 {{- end -}}
+
+<pre>{{ debug.Dump . }}</pre>

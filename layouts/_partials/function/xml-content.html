@@ -14,16 +14,16 @@
 
 {{- $content := .Content -}}
 
-{{- if $content -}}
+{{- if not $content -}}
+  {{- return $content -}}
+{{- end -}}
 
-  {{- $content = dict "Content" .Content "Ruby" .Ruby "Fraction" .Fraction "Fontawesome" .Fontawesome | partial "function/content.html" }}
+{{- $content = dict "Content" .Content "Ruby" .Ruby "Fraction" .Fraction "Fontawesome" .Fontawesome | partial "function/content.html" }}
 
-  {{- with .FeaturedImage }}
-    {{- $content = add (printf "<img src=%q alt=%q referrerpolicy=%q>" . "featured image" "no-referrer") $content }}
-  {{- end }}
-
-  {{- $content = $content | transform.XMLEscape | safeHTML -}}
-
+{{- with .FeaturedImage }}
+  {{- $content = add (printf "<img src=%q alt=%q referrerpolicy=%q>" . "featured image" "no-referrer") $content }}
 {{- end }}
+
+{{- $content = $content | transform.XMLEscape | safeHTML -}}
 
 {{- return $content -}}

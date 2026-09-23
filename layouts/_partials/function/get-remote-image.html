@@ -1,22 +1,23 @@
 {{- /* cache remote image locally */ -}}
+{{- $isRemote := urls.Parse .Src | partial "function/is-url-remote.html" -}}
+{{- if not $isRemote -}}
+  {{- return 0 -}}
+{{- end -}}
+
 {{- $resource := 0 -}}
 {{- $options := .OPTIONS | default dict -}}
 {{- $cacheKey := print .Src (now.Format "2006-01-02") -}}
 {{- $options = $options | merge (dict "key" $cacheKey "timeout" "3s") -}}
-{{- $isRemote := urls.Parse .Src | partial "function/is-url-remote.html" -}}
-
-{{- if $isRemote -}}
-  {{- with try (resources.GetRemote .Src $options) -}}
-    {{- with .Err -}}
-      {{- warnidf "warning-remote-image" "%s" . -}}
-    {{- else with .Value -}}
-      {{- if .ResourceType | eq "image" -}}
-        {{- /* placed remote image in public/images/remote/ */ -}}
-        {{- $resource = . | resources.Copy (add "/images/remote/" .Name) -}}
-      {{- end -}}
-    {{- else -}}
-      {{- warnidf "warning-remote-image" "Failed to get remote image %q" $.Src -}}
+{{- with try (resources.GetRemote .Src $options) -}}
+  {{- with .Err -}}
+    {{- warnidf "warning-remote-image" "[ERROR] Failed to get remote image %q" $.Src -}}
+  {{- else with .Value -}}
+    {{- if .ResourceType | eq "image" -}}
+      {{- /* placed remote image in public/images/remote/ */ -}}
+      {{- $resource = . | resources.Copy (add "/images/remote/" .Name) -}}
     {{- end -}}
+  {{- else -}}
+    {{- warnidf "warning-remote-image" "Failed to get remote image %q" $.Src -}}
   {{- end -}}
 {{- end -}}
 {{- return $resource -}}

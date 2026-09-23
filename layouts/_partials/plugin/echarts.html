@@ -14,7 +14,9 @@
   @param {Object} [.Page] - Current page context
 */ -}}
 
-{{- if ne hugo.Context.MarkupScope "home" -}}
+{{- if eq hugo.Context.MarkupScope "home" -}}
+  {{- return -}}
+{{- end -}}
 
 {{- $width := .Options.width | default "100%" -}}
 {{- $height := .Options.height | default "30rem" -}}
@@ -61,5 +63,3 @@
 </div>
 
 {{- .Page.Store.Set "hasEcharts" true -}}
-
-{{- end -}}

@@ -2,10 +2,12 @@
 {{- $config := .Config -}}
 {{- $wrapper := .Wrapper -}}
 
-{{- if $config.copyable -}}
-  {{- $copyIcon := dict "Class" "fa-regular fa-clone fa-width-auto" | partial "plugin/icon.html" -}}
-  {{- $copyBtn := printf `<button type="button" class="copy-icon-btn" aria-label="%s" title="%s" data-copied-text="%s">%s</button>` (T "assets.copyToClipboard") (T "assets.copyToClipboard") (T "assets.copiedText") $copyIcon -}}
-  {{- $wrapper = replaceRE `(<div class="code-wrapper">[\s\S]*?<\/div>)` (printf `$1%s` $copyBtn) $wrapper -}}
+{{- if not $config.copyable -}}
+  {{- return $wrapper -}}
 {{- end -}}
+
+{{- $copyIcon := dict "Class" "fa-regular fa-clone fa-width-auto" | partial "plugin/icon.html" -}}
+{{- $copyBtn := printf `<button type="button" class="copy-icon-btn" aria-label="%s" title="%s" data-copied-text="%s">%s</button>` (T "assets.copyToClipboard") (T "assets.copyToClipboard") (T "assets.copiedText") $copyIcon -}}
+{{- $wrapper = replaceRE `(<div class="code-wrapper">[\s\S]*?<\/div>)` (printf `$1%s` $copyBtn) $wrapper -}}
 
 {{- return $wrapper -}}
