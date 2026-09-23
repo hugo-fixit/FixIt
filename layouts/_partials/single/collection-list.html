@@ -1,58 +1,60 @@
 {{- /* Collection List */ -}}
-{{- if .Params.collections | and (.Param "collection_list") -}}
-  {{- $collectionTerms := .GetTerms "collections" -}}
-  {{- range $collectionTerms -}}
-    {{- $pages := .Pages.ByDate -}}
-    {{- $open := eq (index $collectionTerms 0) . -}}
-    {{- $currentKey := 0 -}}
-    <div class="details collection-details{{ if $open }} open{{ end }}">
-      <div class="details-summary collection-summary">
-        {{ dict "Class" "fa-solid fa-layer-group" | partial "plugin/icon.html" }}
-        <span class="collection-name" title="{{ T "collections" }}">{{ .LinkTitle }}</span>
-        <span class="collection-count">{{ $pages.Len }}</span>
-        <button type="button" class="collection-sort-toggle" title="{{ T "assets.toggleSortOrder" }}" aria-label="{{ T "assets.toggleSortOrder" }}">
-          {{- dict "Class" "fa-solid fa-arrow-up-short-wide" | partial "plugin/icon.html" -}}
-        </button>
-        {{- dict "Class" "details-icon fa-solid fa-angle-right" | partial "plugin/icon.html" -}}
-      </div>
-      <div class="details-content collection-content">
-        <nav>
-          <ul class="collection-list">
-            {{- range $key, $page := $pages -}}
-              {{- $capitalizeTitles := $page.Param "capitalize_titles" -}}
-              {{- $title := $page.Params.shortTitle | default $page.LinkTitle -}}
-              {{- $title = cond $capitalizeTitles (title $title) $title -}}
-              <li class="collection-item">
-                {{- if $.Eq $page -}}
-                  {{- $currentKey = $key -}}
-                  <span class="active" title="{{ $title }}">{{ $title }}</span>
-                {{- else -}}
-                  <a href="{{ $page.RelPermalink }}" title="{{ $title }}">{{ $title }}</a>
-                {{- end -}}
-              </li>
-            {{- end -}}
-          </ul>
-          <div class="collection-nav-simple">
-            {{- with $pages.Next $ -}}
-              {{- $capitalizeTitles := .Param "capitalize_titles" -}}
-              <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ cond $capitalizeTitles (title .LinkTitle) .LinkTitle }}">
-                {{- dict "Class" "fa-solid fa-angle-left" | partial "plugin/icon.html" -}}
-              </a>
-            {{- else -}}
-              {{- dict "Class" "fa-solid fa-angle-left collection-nav-item text-secondary" | partial "plugin/icon.html" -}}
-            {{- end -}}
-            <span class="text-secondary">{{ add $currentKey 1 }}/{{ $pages.Len }}</span>
-            {{- with $pages.Prev $ -}}
-              {{- $capitalizeTitles := .Param "capitalize_titles" -}}
-              <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ cond $capitalizeTitles (title .LinkTitle) .LinkTitle }}">
-                {{- dict "Class" "fa-solid fa-angle-right" | partial "plugin/icon.html" -}}
-              </a>
-            {{- else -}}
-              {{- dict "Class" "fa-solid fa-angle-right collection-nav-item text-secondary" | partial "plugin/icon.html" -}}
-            {{- end -}}
-          </div>
-        </nav>
-      </div>
+{{- if not (.Params.collections | and (.Param "collection_list")) -}}
+  {{- return -}}
+{{- end -}}
+
+{{- $collectionTerms := .GetTerms "collections" -}}
+{{- range $collectionTerms -}}
+  {{- $pages := .Pages.ByDate -}}
+  {{- $open := eq (index $collectionTerms 0) . -}}
+  {{- $currentKey := 0 -}}
+  <div class="details collection-details{{ if $open }} open{{ end }}">
+    <div class="details-summary collection-summary">
+      {{ dict "Class" "fa-solid fa-layer-group" | partial "plugin/icon.html" }}
+      <span class="collection-name" title="{{ T "collections" }}">{{ .LinkTitle }}</span>
+      <span class="collection-count">{{ $pages.Len }}</span>
+      <button type="button" class="collection-sort-toggle" title="{{ T "assets.toggleSortOrder" }}" aria-label="{{ T "assets.toggleSortOrder" }}">
+        {{- dict "Class" "fa-solid fa-arrow-up-short-wide" | partial "plugin/icon.html" -}}
+      </button>
+      {{- dict "Class" "details-icon fa-solid fa-angle-right" | partial "plugin/icon.html" -}}
     </div>
-  {{- end -}}
+    <div class="details-content collection-content">
+      <nav>
+        <ul class="collection-list">
+          {{- range $key, $page := $pages -}}
+            {{- $capitalizeTitles := $page.Param "capitalize_titles" -}}
+            {{- $title := $page.Params.shortTitle | default $page.LinkTitle -}}
+            {{- $title = cond $capitalizeTitles (title $title) $title -}}
+            <li class="collection-item">
+              {{- if $.Eq $page -}}
+                {{- $currentKey = $key -}}
+                <span class="active" title="{{ $title }}">{{ $title }}</span>
+              {{- else -}}
+                <a href="{{ $page.RelPermalink }}" title="{{ $title }}">{{ $title }}</a>
+              {{- end -}}
+            </li>
+          {{- end -}}
+        </ul>
+        <div class="collection-nav-simple">
+          {{- with $pages.Next $ -}}
+            {{- $capitalizeTitles := .Param "capitalize_titles" -}}
+            <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ cond $capitalizeTitles (title .LinkTitle) .LinkTitle }}">
+              {{- dict "Class" "fa-solid fa-angle-left" | partial "plugin/icon.html" -}}
+            </a>
+          {{- else -}}
+            {{- dict "Class" "fa-solid fa-angle-left collection-nav-item text-secondary" | partial "plugin/icon.html" -}}
+          {{- end -}}
+          <span class="text-secondary">{{ add $currentKey 1 }}/{{ $pages.Len }}</span>
+          {{- with $pages.Prev $ -}}
+            {{- $capitalizeTitles := .Param "capitalize_titles" -}}
+            <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ cond $capitalizeTitles (title .LinkTitle) .LinkTitle }}">
+              {{- dict "Class" "fa-solid fa-angle-right" | partial "plugin/icon.html" -}}
+            </a>
+          {{- else -}}
+            {{- dict "Class" "fa-solid fa-angle-right collection-nav-item text-secondary" | partial "plugin/icon.html" -}}
+          {{- end -}}
+        </div>
+      </nav>
+    </div>
+  </div>
 {{- end -}}

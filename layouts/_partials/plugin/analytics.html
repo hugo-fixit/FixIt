@@ -8,51 +8,53 @@
 
 {{- $analytics := .Site.Store.Get "analytics" | default dict -}}
 
-{{- if $analytics.enable -}}
-  {{- /* Google Analytics */ -}}
-  {{- with $analytics.google.id -}}
-    <script>
-      window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
-      gtag('config', '{{ . }}'{{ if $analytics.google.anonymizeIP }}, { 'anonymize_ip': true }{{ end }});
-    </script>
-    {{- printf "https://www.googletagmanager.com/gtag/js?id=%v" . | dict "Async" true "Source" | partial "plugin/script.html" -}}
-  {{- end -}}
+{{- if not $analytics.enable -}}
+  {{- return -}}
+{{- end -}}
 
-  {{- /* Fathom Analytics */ -}}
-  {{- with $analytics.fathom.id -}}
-    <script>
-      window.fathom=window.fathom||function(){(fathom.q=fathom.q||[]).push(arguments);};
-      fathom('set', 'siteId', '{{ . }}');
-      fathom('trackPageview');
-    </script>
-    {{- dict "Source" ($analytics.fathom.server | default "cdn.usefathom.com" | printf "https://%v/tracker.js") "Async" true "Attr" "id=fathom-script" | partial "plugin/script.html" -}}
-  {{- end -}}
+{{- /* Google Analytics */ -}}
+{{- with $analytics.google.id -}}
+  <script>
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+    gtag('config', '{{ . }}'{{ if $analytics.google.anonymizeIP }}, { 'anonymize_ip': true }{{ end }});
+  </script>
+  {{- printf "https://www.googletagmanager.com/gtag/js?id=%v" . | dict "Async" true "Source" | partial "plugin/script.html" -}}
+{{- end -}}
 
-  {{- /* Baidu Analytics */ -}}
-  {{- with $analytics.baidu.id -}}
-    <script>
-      var _hmt = _hmt || [];
-      (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?{{ . }}";
-        var s = document.getElementsByTagName("script")[0]; 
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  {{- end -}}
+{{- /* Fathom Analytics */ -}}
+{{- with $analytics.fathom.id -}}
+  <script>
+    window.fathom=window.fathom||function(){(fathom.q=fathom.q||[]).push(arguments);};
+    fathom('set', 'siteId', '{{ . }}');
+    fathom('trackPageview');
+  </script>
+  {{- dict "Source" ($analytics.fathom.server | default "cdn.usefathom.com" | printf "https://%v/tracker.js") "Async" true "Attr" "id=fathom-script" | partial "plugin/script.html" -}}
+{{- end -}}
 
-  {{- /* Umami Analytics */ -}}
-  {{- with $analytics.umami.data_website_id -}}
-    <script async defer data-website-id="{{ . }}" src="{{ $analytics.umami.src }}" {{ with $analytics.umami.data_host_url }} data-host-url="{{ . }}" {{ end }} {{ with $analytics.umami.data_domains }} data-domains="{{ . }}" {{ end }}></script>
-  {{- end -}}
+{{- /* Baidu Analytics */ -}}
+{{- with $analytics.baidu.id -}}
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?{{ . }}";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+{{- end -}}
 
-  {{- /* Plausible Analytics */ -}}
-  {{- with $analytics.plausible.data_domain -}}
-    <script async defer data-domain="{{ . }}" src="{{ $analytics.plausible.src }}"></script>
-  {{- end -}}
+{{- /* Umami Analytics */ -}}
+{{- with $analytics.umami.data_website_id -}}
+  <script async defer data-website-id="{{ . }}" src="{{ $analytics.umami.src }}" {{ with $analytics.umami.data_host_url }} data-host-url="{{ . }}" {{ end }} {{ with $analytics.umami.data_domains }} data-domains="{{ . }}" {{ end }}></script>
+{{- end -}}
 
-  {{- /* Cloudflare Analytics */ -}}
-  {{- with $analytics.cloudflare.token -}}
-    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "{{ $analytics.cloudflare.token }}"}'></script>
-  {{- end -}}
+{{- /* Plausible Analytics */ -}}
+{{- with $analytics.plausible.data_domain -}}
+  <script async defer data-domain="{{ . }}" src="{{ $analytics.plausible.src }}"></script>
+{{- end -}}
+
+{{- /* Cloudflare Analytics */ -}}
+{{- with $analytics.cloudflare.token -}}
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "{{ $analytics.cloudflare.token }}"}'></script>
 {{- end -}}

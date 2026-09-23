@@ -5,31 +5,34 @@
   Shows page numbers near the current page and ellipsis markers for distant ranges.
 */ -}}
 
-{{- if gt .Paginator.TotalPages 1 -}}
-  <ul class="pagination">
-    {{- .Site.Store.Set "paginator.ellipsed" false -}}
-    {{- range $.Paginator.Pagers -}}
-      {{- $right := sub .TotalPages .PageNumber -}}
-      {{- $showNumber := or (le .PageNumber 1) (eq $right 0) -}}
-      {{- $showNumber := or $showNumber (and (gt .PageNumber (sub $.Paginator.PageNumber 3)) (lt .PageNumber (add $.Paginator.PageNumber 3))) -}}
-      {{- if $showNumber -}}
-        {{- $.Site.Store.Set "paginator.ellipsed" false -}}
-        {{- $.Site.Store.Set "paginator.shouldEllipse" false -}}
-      {{- else -}}
-        {{- $.Site.Store.Set "paginator.shouldEllipse" (not ($.Site.Store.Get "paginator.ellipsed") ) -}}
-        {{- $.Site.Store.Set "paginator.ellipsed" true -}}
-      {{- end -}}
-      {{- if $showNumber -}}
-        <li class="page-item{{ if eq . $.Paginator }} active{{ end }}">
-          <span class="page-link">
-            <a href="{{ .URL }}">{{ .PageNumber }}</a>
-          </span>
-        </li>
-      {{- else if ($.Site.Store.Get "paginator.shouldEllipse") -}}
-        <li class="page-item">
-          <span class="page-link" aria-hidden="true">&hellip;</span>
-        </li>
-      {{- end -}}
-    {{- end -}}
-  </ul>
+{{- if le .Paginator.TotalPages 1 -}}
+  {{- return -}}
 {{- end -}}
+
+<ul class="pagination">
+  {{- .Site.Store.Set "paginator.ellipsed" false -}}
+  {{- range $.Paginator.Pagers -}}
+    {{- $right := sub .TotalPages .PageNumber -}}
+    {{- $showNumber := or (le .PageNumber 1) (eq $right 0) -}}
+    {{- $showNumber := or $showNumber (and (gt .PageNumber (sub $.Paginator.PageNumber 3)) (lt .PageNumber (add $.Paginator.PageNumber 3))) -}}
+    {{- if $showNumber -}}
+      {{- $.Site.Store.Set "paginator.ellipsed" false -}}
+      {{- $.Site.Store.Set "paginator.shouldEllipse" false -}}
+    {{- else -}}
+      {{- $.Site.Store.Set "paginator.shouldEllipse" (not ($.Site.Store.Get "paginator.ellipsed") ) -}}
+      {{- $.Site.Store.Set "paginator.ellipsed" true -}}
+    {{- end -}}
+    {{- if $showNumber -}}
+      <li class="page-item{{ if eq . $.Paginator }} active{{ end }}">
+        <span class="page-link">
+          <a href="{{ .URL }}">{{ .PageNumber }}</a>
+        </span>
+      </li>
+    {{- else if ($.Site.Store.Get "paginator.shouldEllipse") -}}
+      <li class="page-item">
+        <span class="page-link" aria-hidden="true">&hellip;</span>
+      </li>
+    {{- end -}}
+  {{- end -}}
+</ul>
+{{- /* EOF */ -}}

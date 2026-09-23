@@ -13,399 +13,403 @@
 {{- $comment := .Store.Get "comment" | default dict -}}
 {{- $commentConfig := dict "enable" false -}}
 
-{{- if $comment.enable -}}
-  {{- $commentConfig = dict "enable" true "expired" (.Store.Get "commentExpired" | default false) -}}
-  <div id="comments">
-    {{- /* Artalk Comment System */ -}}
-    {{- $artalk := $comment.artalk | default dict -}}
-    {{- if $artalk.enable -}}
-      <div id="artalk" class="comment"></div>
-      {{- $source := $cdn.artalkCSS | default (add $artalk.server "/dist/Artalk.css") -}}
-      {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
-      {{- $source := $cdn.artalkJS | default (add $artalk.server "/dist/Artalk.js") -}}
-      {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- dict "Source" "js/lib/artalk.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- $commentConfig = dict "el" "#artalk" "pageKey" .Permalink "pageTitle" .Title "pvEl" "artalk-visitor-count" "countEl" "artalk-comment-count" | dict "artalk" | merge $commentConfig -}}
-      {{- if (eq $artalk.locale "") | and (eq $.Site.Language.Locale "en") -}}
-        {{- $artalk = dict "locale" "en-US" | merge $artalk -}}
-      {{- end -}}
-      {{- $commentConfig = dict "locale" ($artalk.locale | default $.Site.Language.Locale | default "auto") | dict "artalk" | merge $commentConfig -}}
-      {{- with .Site.Params.gravatar -}}
-        {{- /* See https://artalk.js.org/guide/frontend/config.html#gravatar-params */ -}}
-        {{- $gravatarMirror := printf "https://%v/avatar/" .Host -}}
-        {{- $commentConfig = dict "mirror" $gravatarMirror "params" (printf "d=%v&s=240" .Style) | dict "gravatar" | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $artalk.server -}}
-        {{- $commentConfig = dict "server" . | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $artalk.site -}}
-        {{- $commentConfig = dict "site" . | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $artalk.placeholder -}}
-        {{- $commentConfig = dict "placeholder" . | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $artalk.noComment -}}
-        {{- $commentConfig = dict "noComment" . | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $artalk.sendBtn -}}
-        {{- $commentConfig = dict "sendBtn" . | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $artalk.editorTravel -}}
-        {{- $commentConfig = dict "editorTravel" . | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- if ne $artalk.flatMode nil -}}
-        {{- $commentConfig = dict "flatMode" $artalk.flatMode | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $artalk.nestMax -}}
-        {{- $commentConfig = dict "nestMax" . | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $artalk.nestSort -}}
-        {{- $commentConfig = dict "nestSort" . | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $artalk.lightgallery -}}
-        {{- $commentConfig = dict "lightgallery" . | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- if eq $artalk.vote false -}}
-        {{- $commentConfig = dict "vote" false | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $artalk.voteDown -}}
-        {{- $commentConfig = dict "voteDown" . | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- if eq $artalk.uaBadge false -}}
-        {{- $commentConfig = dict "uaBadge" false | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- if eq $artalk.listSort false -}}
-        {{- $commentConfig = dict "listSort" false | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- if eq $artalk.imgUpload false -}}
-        {{- $commentConfig = dict "imgUpload" false | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- if eq $artalk.preview false -}}
-        {{- $commentConfig = dict "preview" false | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- if eq $artalk.versionCheck false -}}
-        {{- $commentConfig = dict "versionCheck" false | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- if eq $artalk.preferRemoteConf true -}}
-        {{- $commentConfig = dict "preferRemoteConf" true | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $artalk.imgLazyLoad -}}
-        {{- $commentConfig = dict "imgLazyLoad" . | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $artalk.reqTimeout -}}
-        {{- $commentConfig = dict "reqTimeout" . | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- if eq $artalk.listUnreadHighlight true -}}
-        {{- $commentConfig = dict "listUnreadHighlight" true | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- if eq $artalk.pvAdd false -}}
-        {{- $commentConfig = dict "pvAdd" false | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $artalk.pagination -}}
-        {{- $pagination := dict -}}
-        {{- with .pageSize -}}
-          {{- $pagination = dict "pageSize" . | merge $pagination -}}
-        {{- end -}}
-        {{- if eq .readMore false -}}
-          {{- $pagination = dict "readMore" false | merge $pagination -}}
-        {{- end -}}
-        {{- if eq .autoLoad false -}}
-          {{- $pagination = dict "autoLoad" false | merge $pagination -}}
-        {{- end -}}
-        {{- $commentConfig = dict "pagination" $pagination | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $artalk.heightLimit -}}
-        {{- $heightLimit := dict -}}
-        {{- with .content -}}
-          {{- $heightLimit = dict "content" . | merge $heightLimit -}}
-        {{- end -}}
-        {{- with .children -}}
-          {{- $heightLimit = dict "children" . | merge $heightLimit -}}
-        {{- end -}}
-        {{- if eq .scrollable true -}}
-          {{- $heightLimit = dict "scrollable" true | merge $heightLimit -}}
-        {{- end -}}
-        {{- $commentConfig = dict "heightLimit" $heightLimit | dict "artalk" | merge $commentConfig -}}
-      {{- end -}}
-      <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://github.com/ArtalkJS/Artalk" rel="external nofollow noopener noreferrer">Artalk</a>.
-      </noscript>
-    {{- end -}}
+{{- if not $comment.enable -}}
+  {{- dict "comment" $commentConfig | dict "config" | merge (.Store.Get "this") | .Store.Set "this" -}}
+  {{- return -}}
+{{- end -}}
 
-    {{- /* Disqus Comment System */ -}}
-    {{- $disqus := $comment.disqus | default dict -}}
-    {{- if $disqus.enable -}}
-      <div id="disqus_thread" class="comment"></div>
-      {{- $source := printf "https://%v.disqus.com/embed.js" $disqus.shortname -}}
-      {{- dict "Source" $source "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-      <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript" rel="external nofollow noopener noreferrer">Disqus</a>.
-      </noscript>
+{{- $commentConfig = dict "enable" true "expired" (.Store.Get "commentExpired" | default false) -}}
+<div id="comments">
+  {{- /* Artalk Comment System */ -}}
+  {{- $artalk := $comment.artalk | default dict -}}
+  {{- if $artalk.enable -}}
+    <div id="artalk" class="comment"></div>
+    {{- $source := $cdn.artalkCSS | default (add $artalk.server "/dist/Artalk.css") -}}
+    {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
+    {{- $source := $cdn.artalkJS | default (add $artalk.server "/dist/Artalk.js") -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/script.html" -}}
+    {{- dict "Source" "js/lib/artalk.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+    {{- $commentConfig = dict "el" "#artalk" "pageKey" .Permalink "pageTitle" .Title "pvEl" "artalk-visitor-count" "countEl" "artalk-comment-count" | dict "artalk" | merge $commentConfig -}}
+    {{- if (eq $artalk.locale "") | and (eq $.Site.Language.Locale "en") -}}
+      {{- $artalk = dict "locale" "en-US" | merge $artalk -}}
     {{- end -}}
-
-    {{- /* Gitalk Comment System */ -}}
-    {{- $gitalk := $comment.gitalk | default dict -}}
-    {{- if $gitalk.enable -}}
-      <div id="gitalk" class="comment"></div>
-      {{- $source := $cdn.gitalkCSS | default "lib/gitalk/gitalk.css" -}}
-      {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
-      {{- $source := $cdn.gitalkJS | default "lib/gitalk/gitalk.min.js" -}}
-      {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- dict "Source" "js/lib/gitalk.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- $commentConfig = dict "id" .Date "title" .Title "clientID" $gitalk.clientId "clientSecret" $gitalk.clientSecret "repo" $gitalk.repo "owner" $gitalk.owner "admin" (slice $gitalk.owner) | dict "gitalk" | merge $commentConfig -}}
-      <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk" rel="external nofollow noopener noreferrer">Gitalk</a>.
-      </noscript>
+    {{- $commentConfig = dict "locale" ($artalk.locale | default $.Site.Language.Locale | default "auto") | dict "artalk" | merge $commentConfig -}}
+    {{- with .Site.Params.gravatar -}}
+      {{- /* See https://artalk.js.org/guide/frontend/config.html#gravatar-params */ -}}
+      {{- $gravatarMirror := printf "https://%v/avatar/" .Host -}}
+      {{- $commentConfig = dict "mirror" $gravatarMirror "params" (printf "d=%v&s=240" .Style) | dict "gravatar" | dict "artalk" | merge $commentConfig -}}
     {{- end -}}
-
-    {{- /* Valine Comment System */ -}}
-    {{- $valine := $comment.valine | default dict -}}
-    {{- if $valine.enable -}}
-      <div id="valine" class="comment"></div>
-      {{- dict "Source" "lib/valine/valine.scss" "ToCSS" true | dict "Page" . "Data" | partial "store/style.html" -}}
-      {{- $source := $cdn.valineJS | default "lib/valine/Valine.min.js" -}}
-      {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- dict "Source" "js/lib/valine.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- /* Valine lang: https://github.com/xCss/Valine */ -}}
-      {{- $valineLang := $valine.lang | default .Language.Name -}}
-      {{- $valineLangs := dict "zh-cn" "zh-cn" "zh-tw" "zh-tw" "en" "en" "en-us" "en" "en-gb" "en" "ja" "ja" "ko" "ko" "ru" "ru" "fr" "fr" "pt-br" "pt" -}}
-      {{- $valineLang = or (index $valineLangs $valineLang) (index $valineLangs (index (split $valineLang "-") 0)) "en" -}}
-      {{- $commentConfig = dict "el" "#valine" "appId" $valine.appId "appKey" $valine.appKey "lang" $valineLang "visitor" $valine.visitor "recordIP" $valine.recordIP "placeholder" ($valine.placeholder | default (T "comment.valinePlaceholder")) "highlight" (ne $valine.highlight false) "enableQQ" $valine.enableQQ | dict "valine" | merge $commentConfig -}}
-      {{- with $valine.avatar -}}
-        {{- $commentConfig = dict "avatar" . | dict "valine" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $valine.meta -}}
-        {{- $commentConfig = dict "meta" . | dict "valine" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $valine.requiredFields -}}
-        {{- $commentConfig = dict "requiredFields" . | dict "valine" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $valine.pageSize -}}
-        {{- $commentConfig = dict "pageSize" . | dict "valine" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $valine.serverURLs -}}
-        {{- $commentConfig = dict "serverURLs" . | dict "valine" | merge $commentConfig -}}
-      {{- end -}}
-      {{- $commentConfig = $valine.emoji | default "google.yml" | printf "lib/valine/emoji/%v" | resources.Get | transform.Unmarshal | dict "valine" | merge $commentConfig -}}
-      <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/" rel="external nofollow noopener noreferrer">Valine</a>.
-      </noscript>
+    {{- with $artalk.server -}}
+      {{- $commentConfig = dict "server" . | dict "artalk" | merge $commentConfig -}}
     {{- end -}}
-
-    {{- /* Waline Comment System */ -}}
-    {{- /* see https://waline.js.org/reference/client/props.html */ -}}
-    {{- $waline := $comment.waline | default dict -}}
-    {{- if $waline.enable -}}
-      <div id="waline" class="comment"></div>
-      {{- $source := $cdn.walineCSS | default "lib/waline/waline.css" -}}
-      {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
-      {{- $source := $cdn.walineJS | default "lib/waline/waline.umd.js" -}}
-      {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- dict "Source" "js/lib/waline.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- $commentConfig = dict "el" "#waline" "serverURL" $waline.serverURL "lang" .Language.Name | dict "waline" | merge $commentConfig -}}
-      {{- $commentConfig = dict "copyright" true "imageUploader" false "highlighter" false "texRenderer" false "search" false | dict "waline" | merge $commentConfig -}}
-      {{- with $waline.pageview -}}
-        {{- $commentConfig = dict "pageview" . | dict "waline" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $waline.emoji -}}
-        {{- $commentConfig = dict "emoji" . | dict "waline" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $waline.meta -}}
-        {{- $commentConfig = dict "meta" . | dict "waline" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $waline.requiredMeta -}}
-        {{- $commentConfig = dict "requiredMeta" . | dict "waline" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $waline.login -}}
-        {{- $commentConfig = dict "login" . | dict "waline" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $waline.wordLimit -}}
-        {{- $commentConfig = dict "wordLimit" . | dict "waline" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $waline.pageSize -}}
-        {{- $commentConfig = dict "pageSize" . | dict "waline" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $waline.imageUploader -}}
-        {{- $commentConfig = dict "imageUploader" . | dict "waline" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $waline.highlighter -}}
-        {{- $commentConfig = dict "highlighter" . | dict "waline" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $waline.comment -}}
-        {{- $commentConfig = dict "comment" . | dict "waline" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $waline.texRenderer -}}
-        {{- $commentConfig = dict "texRenderer" . | dict "waline" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $waline.search -}}
-        {{- $commentConfig = dict "search" . | dict "waline" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $waline.recaptchaV3Key -}}
-        {{- $commentConfig = dict "recaptchaV3Key" . | dict "waline" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $waline.turnstileKey -}}
-        {{- $commentConfig = dict "turnstileKey" . | dict "waline" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $waline.reaction -}}
-        {{- $commentConfig = dict "reaction" . | dict "waline" | merge $commentConfig -}}
-      {{- end -}}
-      <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://waline.js.org/" rel="external nofollow noopener noreferrer">Waline</a>.
-      </noscript>
+    {{- with $artalk.site -}}
+      {{- $commentConfig = dict "site" . | dict "artalk" | merge $commentConfig -}}
     {{- end -}}
-
-    {{- /* Facebook Comment System */ -}}
-    {{- $facebook := $comment.facebook | default dict -}}
-    {{- if $facebook.enable -}}
-      <div id="fb-root" class="comment"></div>
-      <div
-        class="fb-comments"
-        data-href="{{ .Permalink }}"
-        data-width="{{ $facebook.width }}"
-        data-numposts="{{ $facebook.numPosts }}"
-      ></div>
-      {{- /* Facebook locale: https://developers.facebook.com/docs/internationalization */ -}}
-      {{- $fbLang := $facebook.languageCode | default .Language.Name -}}
-      {{- $fbLangs := dict "zh" "zh_CN" "zh-cn" "zh_CN" "zh-tw" "zh_TW" "en" "en_US" "ja" "ja_JP" "ko" "ko_KR" "fr" "fr_FR" "de" "de_DE" "es" "es_ES" "pt" "pt_BR" "pt-br" "pt_BR" "ru" "ru_RU" "it" "it_IT" "hi" "hi_IN" "pl" "pl_PL" "ro" "ro_RO" "sr" "sr_RS" "vi" "vi_VN" -}}
-      {{- $fbLang = or (index $fbLangs $fbLang) (index $fbLangs (index (split $fbLang "-") 0)) "en_US" -}}
-      {{- $source := printf "https://connect.facebook.net/%v/sdk.js#xfbml=1&version=v5.0&appId=%v&autoLogAppEvents=1" $fbLang $facebook.appId -}}
-      {{- dict "Source" $source "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-      <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://developers.facebook.com/docs/plugins/comments/" rel="external nofollow noopener noreferrer">Facebook</a>.
-      </noscript>
+    {{- with $artalk.placeholder -}}
+      {{- $commentConfig = dict "placeholder" . | dict "artalk" | merge $commentConfig -}}
     {{- end -}}
-
-    {{- /* Telegram Comments System */ -}}
-    {{- $telegram := $comment.telegram | default dict -}}
-    {{- if $telegram.enable -}}
-      <div id="telegram-comments" class="comment"></div>
-      {{- $attr := printf `data-comments-app-website="%v"` $telegram.siteId -}}
-      {{- $attr = printf `%v data-limit="%v"` $attr ($telegram.limit | default 5) -}}
-      {{- with $telegram.height -}}
-        {{- $attr = printf `%v data-height="%v"` $attr . -}}
-      {{- end -}}
-      {{- with $telegram.color -}}
-        {{- $attr = printf `%v data-color="%v"` $attr . -}}
-      {{- end -}}
-      {{- if $telegram.colorful -}}
-        {{- $attr = printf `%v data-colorful="1"` $attr -}}
-      {{- end -}}
-      {{- if $telegram.dislikes -}}
-        {{- $attr = printf `%v data-dislikes="1"` $attr -}}
-      {{- end -}}
-      {{- if $telegram.outlined -}}
-        {{- $attr = printf `%v data-outlined="1"` $attr -}}
-      {{- end -}}
-      {{- dict "Source" "https://comments.app/js/widget.js?2" "Defer" true "Attr" $attr | dict "Page" . "Data" | partial "store/script.html" -}}
-      <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://comments.app/" rel="external nofollow noopener noreferrer">Telegram Comments</a>.
-      </noscript>
+    {{- with $artalk.noComment -}}
+      {{- $commentConfig = dict "noComment" . | dict "artalk" | merge $commentConfig -}}
     {{- end -}}
-
-    {{- /* Utterances Comment System */ -}}
-    {{- $utterances := $comment.utterances | default dict -}}
-    {{- if $utterances.enable -}}
-      <div id="utterances" class="comment"></div>
-      {{- dict "Source" "js/lib/utterances.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- $commentConfig = dict "repo" $utterances.repo | dict "utterances" | merge $commentConfig -}}
-      {{- $commentConfig = $utterances.issueTerm | default "pathname" | dict "issueTerm" | dict "utterances" | merge $commentConfig -}}
-      {{- $commentConfig = dict "label" $utterances.label | dict "utterances" | merge $commentConfig -}}
-      {{- $commentConfig = $utterances.lightTheme | default "github-light" | dict "lightTheme" | dict "utterances" | merge $commentConfig -}}
-      {{- $commentConfig = $utterances.darkTheme | default "github-dark" | dict "darkTheme" | dict "utterances" | merge $commentConfig -}}
-      <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/" rel="external nofollow noopener noreferrer">Utterances</a>.
-      </noscript>
+    {{- with $artalk.sendBtn -}}
+      {{- $commentConfig = dict "sendBtn" . | dict "artalk" | merge $commentConfig -}}
     {{- end -}}
-
-    {{- /* Twikoo Comment System */ -}}
-    {{- $twikoo := $comment.twikoo | default dict -}}
-    {{- if $twikoo.enable -}}
-      <div id="twikoo"></div>
-      {{- $source := $cdn.twikooJS | default "lib/twikoo/twikoo.all.min.js" -}}
-      {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- dict "Source" "js/lib/twikoo.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- /* Twikoo lang: https://github.com/twikoojs/twikoo/blob/main/src/client/utils/i18n/index.js */ -}}
-      {{- $lang := $twikoo.lang | default .Language.Name -}}
-      {{- $langs := slice "zh" "zh-cn" "zh-hk" "zh-tw" "en" "en-us" "en-gb" "uz" "ja" "ja-jp" "ko" "ko-kr" "vi" "vi-vn" "pt" "hr" -}}
-      {{- $base := index (split $lang "-") 0 -}}
-      {{- $lang = or (and (in $langs $lang) $lang) (and (in $langs $base) $base) "en" -}}
-      {{- $commentConfig = dict "el" "#twikoo" "envId" $twikoo.envId "lang" $lang | dict "twikoo" | merge $commentConfig -}}
-      {{- with $twikoo.region -}}
-        {{- $commentConfig = dict "region" . | dict "twikoo" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $twikoo.path -}}
-        {{- $commentConfig = dict "path" . | dict "twikoo" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $twikoo.commentCount -}}
-        {{- $commentConfig = dict "commentCount" . | dict "twikoo" | merge $commentConfig -}}
-      {{- end -}}
-      {{- with $twikoo.lightgallery -}}
-        {{- $commentConfig = dict "lightgallery" . | dict "twikoo" | merge $commentConfig -}}
-      {{- end -}}
-      <noscript>
-        Please enable JavaScript to view the comments powered by <a href="https://twikoo.js.org/" rel="external nofollow noopener noreferrer">Twikoo</a>.
-      </noscript>
+    {{- with $artalk.editorTravel -}}
+      {{- $commentConfig = dict "editorTravel" . | dict "artalk" | merge $commentConfig -}}
     {{- end -}}
-
-    {{- /* Giscus Comment System */ -}}
-    {{- $giscus := $comment.giscus | default dict -}}
-    {{- if $giscus.enable -}}
-      {{- dict "Source" "js/lib/giscus.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-      {{- with $giscus -}}
-        {{- $commentConfig = .origin | default "https://giscus.app" | dict "origin" | dict "giscus" | merge $commentConfig -}}
-        {{- $commentConfig = .lightTheme | default "light" | dict "lightTheme" | dict "giscus" | merge $commentConfig -}}
-        {{- $commentConfig = .darkTheme | default "dark" | dict "darkTheme" | dict "giscus" | merge $commentConfig -}}
-        <div id="giscus" class="comment">
-          <script
-            src="{{ .origin }}/client.js"
-            data-repo="{{ .repo }}"
-            data-repo-id="{{ .repoId }}"
-            data-category="{{ .category }}"
-            data-category-id="{{ .categoryId }}"
-            data-mapping="{{ .mapping }}"
-            data-strict="{{ .strict }}"
-            {{ if .term }}data-term="{{ .term }}"{{ end }}
-            data-theme="preferred_color_scheme"
-            data-reactions-enabled="{{ .reactionsEnabled }}"
-            data-emit-metadata="{{ .emitMetadata }}"
-            data-input-position="{{ .inputPosition }}"
-            data-lang="{{ .lang | default $.Site.Language.Locale }}"
-            {{ if ne .lazyLoad false }}data-loading="lazy"{{ end }}
-            crossorigin="anonymous"
-            async
-            defer
-          ></script>
-        </div>
-        <noscript>
-          Please enable JavaScript to view the comments powered by <a href="https://giscus.app/" rel="external nofollow noopener noreferrer">giscus</a>.
-        </noscript>
-      {{- end -}}
+    {{- if ne $artalk.flatMode nil -}}
+      {{- $commentConfig = dict "flatMode" $artalk.flatMode | dict "artalk" | merge $commentConfig -}}
     {{- end -}}
-
-    {{- /* Custom Comment System */ -}}
-    {{- block "custom-comment" . }}{{ end -}}
-  </div>
-  {{- /* lightgallery for Artalk and Twikoo */ -}}
-  {{- if not (.Param "lightgallery") | and (($artalk.enable | and $artalk.lightgallery) | or ($twikoo.enable | and $twikoo.lightgallery)) -}}
-    {{- $source := $cdn.lightgalleryCSS | default "lib/lightgallery/css/lightgallery-bundle.min.css" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
-    {{- $source := $cdn.lightgalleryJS | default "lib/lightgallery/lightgallery.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-    {{- $source := $cdn.lightgalleryThumbnailJS | default "lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-    {{- $source := $cdn.lightgalleryZoomJS | default "lib/lightgallery/plugins/zoom/lg-zoom.min.js" -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+    {{- with $artalk.nestMax -}}
+      {{- $commentConfig = dict "nestMax" . | dict "artalk" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $artalk.nestSort -}}
+      {{- $commentConfig = dict "nestSort" . | dict "artalk" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $artalk.lightgallery -}}
+      {{- $commentConfig = dict "lightgallery" . | dict "artalk" | merge $commentConfig -}}
+    {{- end -}}
+    {{- if eq $artalk.vote false -}}
+      {{- $commentConfig = dict "vote" false | dict "artalk" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $artalk.voteDown -}}
+      {{- $commentConfig = dict "voteDown" . | dict "artalk" | merge $commentConfig -}}
+    {{- end -}}
+    {{- if eq $artalk.uaBadge false -}}
+      {{- $commentConfig = dict "uaBadge" false | dict "artalk" | merge $commentConfig -}}
+    {{- end -}}
+    {{- if eq $artalk.listSort false -}}
+      {{- $commentConfig = dict "listSort" false | dict "artalk" | merge $commentConfig -}}
+    {{- end -}}
+    {{- if eq $artalk.imgUpload false -}}
+      {{- $commentConfig = dict "imgUpload" false | dict "artalk" | merge $commentConfig -}}
+    {{- end -}}
+    {{- if eq $artalk.preview false -}}
+      {{- $commentConfig = dict "preview" false | dict "artalk" | merge $commentConfig -}}
+    {{- end -}}
+    {{- if eq $artalk.versionCheck false -}}
+      {{- $commentConfig = dict "versionCheck" false | dict "artalk" | merge $commentConfig -}}
+    {{- end -}}
+    {{- if eq $artalk.preferRemoteConf true -}}
+      {{- $commentConfig = dict "preferRemoteConf" true | dict "artalk" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $artalk.imgLazyLoad -}}
+      {{- $commentConfig = dict "imgLazyLoad" . | dict "artalk" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $artalk.reqTimeout -}}
+      {{- $commentConfig = dict "reqTimeout" . | dict "artalk" | merge $commentConfig -}}
+    {{- end -}}
+    {{- if eq $artalk.listUnreadHighlight true -}}
+      {{- $commentConfig = dict "listUnreadHighlight" true | dict "artalk" | merge $commentConfig -}}
+    {{- end -}}
+    {{- if eq $artalk.pvAdd false -}}
+      {{- $commentConfig = dict "pvAdd" false | dict "artalk" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $artalk.pagination -}}
+      {{- $pagination := dict -}}
+      {{- with .pageSize -}}
+        {{- $pagination = dict "pageSize" . | merge $pagination -}}
+      {{- end -}}
+      {{- if eq .readMore false -}}
+        {{- $pagination = dict "readMore" false | merge $pagination -}}
+      {{- end -}}
+      {{- if eq .autoLoad false -}}
+        {{- $pagination = dict "autoLoad" false | merge $pagination -}}
+      {{- end -}}
+      {{- $commentConfig = dict "pagination" $pagination | dict "artalk" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $artalk.heightLimit -}}
+      {{- $heightLimit := dict -}}
+      {{- with .content -}}
+        {{- $heightLimit = dict "content" . | merge $heightLimit -}}
+      {{- end -}}
+      {{- with .children -}}
+        {{- $heightLimit = dict "children" . | merge $heightLimit -}}
+      {{- end -}}
+      {{- if eq .scrollable true -}}
+        {{- $heightLimit = dict "scrollable" true | merge $heightLimit -}}
+      {{- end -}}
+      {{- $commentConfig = dict "heightLimit" $heightLimit | dict "artalk" | merge $commentConfig -}}
+    {{- end -}}
+    <noscript>
+      Please enable JavaScript to view the comments powered by <a href="https://github.com/ArtalkJS/Artalk" rel="external nofollow noopener noreferrer">Artalk</a>.
+    </noscript>
   {{- end -}}
-  {{- /* KaTeX for Twikoo */ -}}
-  {{- if $twikoo.enable | and $twikoo.katex -}}
-    {{- $katexVersion := "0.16.47" -}}
-    {{- $source := printf "https://cdn.jsdelivr.net/npm/katex@%s/dist/katex.min.css" $katexVersion -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
-    {{- $source := printf "https://cdn.jsdelivr.net/npm/katex@%s/dist/katex.min.js" $katexVersion -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-    {{- $source := printf "https://cdn.jsdelivr.net/npm/katex@%s/dist/contrib/auto-render.min.js" $katexVersion -}}
-    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+
+  {{- /* Disqus Comment System */ -}}
+  {{- $disqus := $comment.disqus | default dict -}}
+  {{- if $disqus.enable -}}
+    <div id="disqus_thread" class="comment"></div>
+    {{- $source := printf "https://%v.disqus.com/embed.js" $disqus.shortname -}}
+    {{- dict "Source" $source "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+    <noscript>
+      Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript" rel="external nofollow noopener noreferrer">Disqus</a>.
+    </noscript>
   {{- end -}}
+
+  {{- /* Gitalk Comment System */ -}}
+  {{- $gitalk := $comment.gitalk | default dict -}}
+  {{- if $gitalk.enable -}}
+    <div id="gitalk" class="comment"></div>
+    {{- $source := $cdn.gitalkCSS | default "lib/gitalk/gitalk.css" -}}
+    {{- dict "Source" $source "Minify" true "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
+    {{- $source := $cdn.gitalkJS | default "lib/gitalk/gitalk.min.js" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/script.html" -}}
+    {{- dict "Source" "js/lib/gitalk.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+    {{- $commentConfig = dict "id" .Date "title" .Title "clientID" $gitalk.clientId "clientSecret" $gitalk.clientSecret "repo" $gitalk.repo "owner" $gitalk.owner "admin" (slice $gitalk.owner) | dict "gitalk" | merge $commentConfig -}}
+    <noscript>
+      Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk" rel="external nofollow noopener noreferrer">Gitalk</a>.
+    </noscript>
+  {{- end -}}
+
+  {{- /* Valine Comment System */ -}}
+  {{- $valine := $comment.valine | default dict -}}
+  {{- if $valine.enable -}}
+    <div id="valine" class="comment"></div>
+    {{- dict "Source" "lib/valine/valine.scss" "ToCSS" true | dict "Page" . "Data" | partial "store/style.html" -}}
+    {{- $source := $cdn.valineJS | default "lib/valine/Valine.min.js" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/script.html" -}}
+    {{- dict "Source" "js/lib/valine.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+    {{- /* Valine lang: https://github.com/xCss/Valine */ -}}
+    {{- $valineLang := $valine.lang | default .Language.Name -}}
+    {{- $valineLangs := dict "zh-cn" "zh-cn" "zh-tw" "zh-tw" "en" "en" "en-us" "en" "en-gb" "en" "ja" "ja" "ko" "ko" "ru" "ru" "fr" "fr" "pt-br" "pt" -}}
+    {{- $valineLang = or (index $valineLangs $valineLang) (index $valineLangs (index (split $valineLang "-") 0)) "en" -}}
+    {{- $commentConfig = dict "el" "#valine" "appId" $valine.appId "appKey" $valine.appKey "lang" $valineLang "visitor" $valine.visitor "recordIP" $valine.recordIP "placeholder" ($valine.placeholder | default (T "comment.valinePlaceholder")) "highlight" (ne $valine.highlight false) "enableQQ" $valine.enableQQ | dict "valine" | merge $commentConfig -}}
+    {{- with $valine.avatar -}}
+      {{- $commentConfig = dict "avatar" . | dict "valine" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $valine.meta -}}
+      {{- $commentConfig = dict "meta" . | dict "valine" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $valine.requiredFields -}}
+      {{- $commentConfig = dict "requiredFields" . | dict "valine" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $valine.pageSize -}}
+      {{- $commentConfig = dict "pageSize" . | dict "valine" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $valine.serverURLs -}}
+      {{- $commentConfig = dict "serverURLs" . | dict "valine" | merge $commentConfig -}}
+    {{- end -}}
+    {{- $commentConfig = $valine.emoji | default "google.yml" | printf "lib/valine/emoji/%v" | resources.Get | transform.Unmarshal | dict "valine" | merge $commentConfig -}}
+    <noscript>
+      Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/" rel="external nofollow noopener noreferrer">Valine</a>.
+    </noscript>
+  {{- end -}}
+
+  {{- /* Waline Comment System */ -}}
+  {{- /* see https://waline.js.org/reference/client/props.html */ -}}
+  {{- $waline := $comment.waline | default dict -}}
+  {{- if $waline.enable -}}
+    <div id="waline" class="comment"></div>
+    {{- $source := $cdn.walineCSS | default "lib/waline/waline.css" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
+    {{- $source := $cdn.walineJS | default "lib/waline/waline.umd.js" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+    {{- dict "Source" "js/lib/waline.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+    {{- $commentConfig = dict "el" "#waline" "serverURL" $waline.serverURL "lang" .Language.Name | dict "waline" | merge $commentConfig -}}
+    {{- $commentConfig = dict "copyright" true "imageUploader" false "highlighter" false "texRenderer" false "search" false | dict "waline" | merge $commentConfig -}}
+    {{- with $waline.pageview -}}
+      {{- $commentConfig = dict "pageview" . | dict "waline" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $waline.emoji -}}
+      {{- $commentConfig = dict "emoji" . | dict "waline" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $waline.meta -}}
+      {{- $commentConfig = dict "meta" . | dict "waline" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $waline.requiredMeta -}}
+      {{- $commentConfig = dict "requiredMeta" . | dict "waline" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $waline.login -}}
+      {{- $commentConfig = dict "login" . | dict "waline" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $waline.wordLimit -}}
+      {{- $commentConfig = dict "wordLimit" . | dict "waline" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $waline.pageSize -}}
+      {{- $commentConfig = dict "pageSize" . | dict "waline" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $waline.imageUploader -}}
+      {{- $commentConfig = dict "imageUploader" . | dict "waline" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $waline.highlighter -}}
+      {{- $commentConfig = dict "highlighter" . | dict "waline" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $waline.comment -}}
+      {{- $commentConfig = dict "comment" . | dict "waline" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $waline.texRenderer -}}
+      {{- $commentConfig = dict "texRenderer" . | dict "waline" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $waline.search -}}
+      {{- $commentConfig = dict "search" . | dict "waline" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $waline.recaptchaV3Key -}}
+      {{- $commentConfig = dict "recaptchaV3Key" . | dict "waline" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $waline.turnstileKey -}}
+      {{- $commentConfig = dict "turnstileKey" . | dict "waline" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $waline.reaction -}}
+      {{- $commentConfig = dict "reaction" . | dict "waline" | merge $commentConfig -}}
+    {{- end -}}
+    <noscript>
+      Please enable JavaScript to view the comments powered by <a href="https://waline.js.org/" rel="external nofollow noopener noreferrer">Waline</a>.
+    </noscript>
+  {{- end -}}
+
+  {{- /* Facebook Comment System */ -}}
+  {{- $facebook := $comment.facebook | default dict -}}
+  {{- if $facebook.enable -}}
+    <div id="fb-root" class="comment"></div>
+    <div
+      class="fb-comments"
+      data-href="{{ .Permalink }}"
+      data-width="{{ $facebook.width }}"
+      data-numposts="{{ $facebook.numPosts }}"
+    ></div>
+    {{- /* Facebook locale: https://developers.facebook.com/docs/internationalization */ -}}
+    {{- $fbLang := $facebook.languageCode | default .Language.Name -}}
+    {{- $fbLangs := dict "zh" "zh_CN" "zh-cn" "zh_CN" "zh-tw" "zh_TW" "en" "en_US" "ja" "ja_JP" "ko" "ko_KR" "fr" "fr_FR" "de" "de_DE" "es" "es_ES" "pt" "pt_BR" "pt-br" "pt_BR" "ru" "ru_RU" "it" "it_IT" "hi" "hi_IN" "pl" "pl_PL" "ro" "ro_RO" "sr" "sr_RS" "vi" "vi_VN" -}}
+    {{- $fbLang = or (index $fbLangs $fbLang) (index $fbLangs (index (split $fbLang "-") 0)) "en_US" -}}
+    {{- $source := printf "https://connect.facebook.net/%v/sdk.js#xfbml=1&version=v5.0&appId=%v&autoLogAppEvents=1" $fbLang $facebook.appId -}}
+    {{- dict "Source" $source "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+    <noscript>
+      Please enable JavaScript to view the comments powered by <a href="https://developers.facebook.com/docs/plugins/comments/" rel="external nofollow noopener noreferrer">Facebook</a>.
+    </noscript>
+  {{- end -}}
+
+  {{- /* Telegram Comments System */ -}}
+  {{- $telegram := $comment.telegram | default dict -}}
+  {{- if $telegram.enable -}}
+    <div id="telegram-comments" class="comment"></div>
+    {{- $attr := printf `data-comments-app-website="%v"` $telegram.siteId -}}
+    {{- $attr = printf `%v data-limit="%v"` $attr ($telegram.limit | default 5) -}}
+    {{- with $telegram.height -}}
+      {{- $attr = printf `%v data-height="%v"` $attr . -}}
+    {{- end -}}
+    {{- with $telegram.color -}}
+      {{- $attr = printf `%v data-color="%v"` $attr . -}}
+    {{- end -}}
+    {{- if $telegram.colorful -}}
+      {{- $attr = printf `%v data-colorful="1"` $attr -}}
+    {{- end -}}
+    {{- if $telegram.dislikes -}}
+      {{- $attr = printf `%v data-dislikes="1"` $attr -}}
+    {{- end -}}
+    {{- if $telegram.outlined -}}
+      {{- $attr = printf `%v data-outlined="1"` $attr -}}
+    {{- end -}}
+    {{- dict "Source" "https://comments.app/js/widget.js?2" "Defer" true "Attr" $attr | dict "Page" . "Data" | partial "store/script.html" -}}
+    <noscript>
+      Please enable JavaScript to view the comments powered by <a href="https://comments.app/" rel="external nofollow noopener noreferrer">Telegram Comments</a>.
+    </noscript>
+  {{- end -}}
+
+  {{- /* Utterances Comment System */ -}}
+  {{- $utterances := $comment.utterances | default dict -}}
+  {{- if $utterances.enable -}}
+    <div id="utterances" class="comment"></div>
+    {{- dict "Source" "js/lib/utterances.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+    {{- $commentConfig = dict "repo" $utterances.repo | dict "utterances" | merge $commentConfig -}}
+    {{- $commentConfig = $utterances.issueTerm | default "pathname" | dict "issueTerm" | dict "utterances" | merge $commentConfig -}}
+    {{- $commentConfig = dict "label" $utterances.label | dict "utterances" | merge $commentConfig -}}
+    {{- $commentConfig = $utterances.lightTheme | default "github-light" | dict "lightTheme" | dict "utterances" | merge $commentConfig -}}
+    {{- $commentConfig = $utterances.darkTheme | default "github-dark" | dict "darkTheme" | dict "utterances" | merge $commentConfig -}}
+    <noscript>
+      Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/" rel="external nofollow noopener noreferrer">Utterances</a>.
+    </noscript>
+  {{- end -}}
+
+  {{- /* Twikoo Comment System */ -}}
+  {{- $twikoo := $comment.twikoo | default dict -}}
+  {{- if $twikoo.enable -}}
+    <div id="twikoo"></div>
+    {{- $source := $cdn.twikooJS | default "lib/twikoo/twikoo.all.min.js" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+    {{- dict "Source" "js/lib/twikoo.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+    {{- /* Twikoo lang: https://github.com/twikoojs/twikoo/blob/main/src/client/utils/i18n/index.js */ -}}
+    {{- $lang := $twikoo.lang | default .Language.Name -}}
+    {{- $langs := slice "zh" "zh-cn" "zh-hk" "zh-tw" "en" "en-us" "en-gb" "uz" "ja" "ja-jp" "ko" "ko-kr" "vi" "vi-vn" "pt" "hr" -}}
+    {{- $base := index (split $lang "-") 0 -}}
+    {{- $lang = or (and (in $langs $lang) $lang) (and (in $langs $base) $base) "en" -}}
+    {{- $commentConfig = dict "el" "#twikoo" "envId" $twikoo.envId "lang" $lang | dict "twikoo" | merge $commentConfig -}}
+    {{- with $twikoo.region -}}
+      {{- $commentConfig = dict "region" . | dict "twikoo" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $twikoo.path -}}
+      {{- $commentConfig = dict "path" . | dict "twikoo" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $twikoo.commentCount -}}
+      {{- $commentConfig = dict "commentCount" . | dict "twikoo" | merge $commentConfig -}}
+    {{- end -}}
+    {{- with $twikoo.lightgallery -}}
+      {{- $commentConfig = dict "lightgallery" . | dict "twikoo" | merge $commentConfig -}}
+    {{- end -}}
+    <noscript>
+      Please enable JavaScript to view the comments powered by <a href="https://twikoo.js.org/" rel="external nofollow noopener noreferrer">Twikoo</a>.
+    </noscript>
+  {{- end -}}
+
+  {{- /* Giscus Comment System */ -}}
+  {{- $giscus := $comment.giscus | default dict -}}
+  {{- if $giscus.enable -}}
+    {{- dict "Source" "js/lib/giscus.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+    {{- with $giscus -}}
+      {{- $commentConfig = .origin | default "https://giscus.app" | dict "origin" | dict "giscus" | merge $commentConfig -}}
+      {{- $commentConfig = .lightTheme | default "light" | dict "lightTheme" | dict "giscus" | merge $commentConfig -}}
+      {{- $commentConfig = .darkTheme | default "dark" | dict "darkTheme" | dict "giscus" | merge $commentConfig -}}
+      <div id="giscus" class="comment">
+        <script
+          src="{{ .origin }}/client.js"
+          data-repo="{{ .repo }}"
+          data-repo-id="{{ .repoId }}"
+          data-category="{{ .category }}"
+          data-category-id="{{ .categoryId }}"
+          data-mapping="{{ .mapping }}"
+          data-strict="{{ .strict }}"
+          {{ if .term }}data-term="{{ .term }}"{{ end }}
+          data-theme="preferred_color_scheme"
+          data-reactions-enabled="{{ .reactionsEnabled }}"
+          data-emit-metadata="{{ .emitMetadata }}"
+          data-input-position="{{ .inputPosition }}"
+          data-lang="{{ .lang | default $.Site.Language.Locale }}"
+          {{ if ne .lazyLoad false }}data-loading="lazy"{{ end }}
+          crossorigin="anonymous"
+          async
+          defer
+        ></script>
+      </div>
+      <noscript>
+        Please enable JavaScript to view the comments powered by <a href="https://giscus.app/" rel="external nofollow noopener noreferrer">giscus</a>.
+      </noscript>
+    {{- end -}}
+  {{- end -}}
+
+  {{- /* Custom Comment System */ -}}
+  {{- block "custom-comment" . }}{{ end -}}
+</div>
+
+{{- /* lightgallery for Artalk and Twikoo */ -}}
+{{- if not (.Param "lightgallery") | and (($artalk.enable | and $artalk.lightgallery) | or ($twikoo.enable | and $twikoo.lightgallery)) -}}
+  {{- $source := $cdn.lightgalleryCSS | default "lib/lightgallery/css/lightgallery-bundle.min.css" -}}
+  {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
+  {{- $source := $cdn.lightgalleryJS | default "lib/lightgallery/lightgallery.min.js" -}}
+  {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- $source := $cdn.lightgalleryThumbnailJS | default "lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" -}}
+  {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- $source := $cdn.lightgalleryZoomJS | default "lib/lightgallery/plugins/zoom/lg-zoom.min.js" -}}
+  {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+{{- end -}}
+{{- /* KaTeX for Twikoo */ -}}
+{{- if $twikoo.enable | and $twikoo.katex -}}
+  {{- $katexVersion := "0.16.47" -}}
+  {{- $source := printf "https://cdn.jsdelivr.net/npm/katex@%s/dist/katex.min.css" $katexVersion -}}
+  {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Page" . "Data" | partial "store/style.html" -}}
+  {{- $source := printf "https://cdn.jsdelivr.net/npm/katex@%s/dist/katex.min.js" $katexVersion -}}
+  {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
+  {{- $source := printf "https://cdn.jsdelivr.net/npm/katex@%s/dist/contrib/auto-render.min.js" $katexVersion -}}
+  {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
 {{- end -}}
 
 {{- dict "comment" $commentConfig | dict "config" | merge (.Store.Get "this") | .Store.Set "this" -}}

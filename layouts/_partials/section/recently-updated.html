@@ -7,51 +7,54 @@
 {{- $recentlyUpdatedConfig := .Site.Params.recently_updated -}}
 {{- $scope := index $kindMap .Kind -}}
 {{- $scopeEnable := index $recentlyUpdatedConfig $scope | default false -}}
-{{- if $scopeEnable | and (eq $.Paginator.PageNumber 1) -}}
-  {{- $hasTitle := false }}
-  {{- $postCount := 0 -}}
-  {{- $maxPostCount := $recentlyUpdatedConfig.max_count | default 10 -}}
-  {{- $days := $recentlyUpdatedConfig.days | default 30 -}}
-  {{- $dateformat := (index .Site.Params $scope).date_format | default "01-02" -}}
-  {{- $scopePages := .Pages -}}
-  {{- if eq $scope "archives" -}}
-    {{- $scopePages = .Site.Store.Get "mainSectionPages" -}}
-  {{- end -}}
-  {{- $scopePages = where $scopePages.ByLastmod.Reverse "Section" "!=" "" -}}
-  {{- $hiddenAdapters := .Param "hidden_adapters" | default false -}}
-  {{- if $hiddenAdapters -}}
-    {{- $scopePages = where $scopePages "File.IsContentAdapter" "ne" true -}}
-  {{- end -}}
-  {{- range first $maxPostCount $scopePages -}}
-    {{- if gt (add .Lastmod.Unix (mul 86900 $days)) now.Unix -}}
-      {{- if ne .Lastmod.Unix .Date.Unix }}
-        {{- $postCount = add $postCount 1 -}}
-        {{- if eq $hasTitle false -}}
-          <h2 class="group-title">
-            {{- dict "Class" "fa-regular fa-calendar-check me-1" | partial "plugin/icon.html" -}}
-            {{- T "section.recentlyUpdated" -}}
-          </h2>
-          {{- $hasTitle = true -}}
-        {{- end -}}
-        <article class="archive-item">
-          <a href="{{ .RelPermalink }}" class="archive-item-link">
-            {{- $repost := .Params.repost | default dict -}}
-            {{- if eq $repost.enable true -}}
-              {{- dict "Class" "fa-solid fa-retweet text-success me-1" | partial "plugin/icon.html" -}}
-            {{- end -}}
-            {{- if eq $scope "archives" -}}
-              {{- cond (.Param "capitalize_titles") (title .Title) .Title -}}
-            {{- else -}}
-              {{- cond (.Param "capitalize_titles") (title .LinkTitle) .LinkTitle -}}
-            {{- end -}}
-          </a>
-          <span class="archive-item-date" title='{{ "2006-01-02 15:04:05" | .Lastmod.Format }}'>
-            {{- with .Lastmod | dateFormat $dateformat -}}
-              {{- dict "Date" . | T "single.updatedOnDate" -}}
-            {{- end -}}
-          </span>
-        </article>
+
+{{- if not ($scopeEnable | and (eq $.Paginator.PageNumber 1)) -}}
+  {{- return -}}
+{{- end -}}
+
+{{- $hasTitle := false }}
+{{- $postCount := 0 -}}
+{{- $maxPostCount := $recentlyUpdatedConfig.max_count | default 10 -}}
+{{- $days := $recentlyUpdatedConfig.days | default 30 -}}
+{{- $dateformat := (index .Site.Params $scope).date_format | default "01-02" -}}
+{{- $scopePages := .Pages -}}
+{{- if eq $scope "archives" -}}
+  {{- $scopePages = .Site.Store.Get "mainSectionPages" -}}
+{{- end -}}
+{{- $scopePages = where $scopePages.ByLastmod.Reverse "Section" "!=" "" -}}
+{{- $hiddenAdapters := .Param "hidden_adapters" | default false -}}
+{{- if $hiddenAdapters -}}
+  {{- $scopePages = where $scopePages "File.IsContentAdapter" "ne" true -}}
+{{- end -}}
+{{- range first $maxPostCount $scopePages -}}
+  {{- if gt (add .Lastmod.Unix (mul 86900 $days)) now.Unix -}}
+    {{- if ne .Lastmod.Unix .Date.Unix }}
+      {{- $postCount = add $postCount 1 -}}
+      {{- if eq $hasTitle false -}}
+        <h2 class="group-title">
+          {{- dict "Class" "fa-regular fa-calendar-check me-1" | partial "plugin/icon.html" -}}
+          {{- T "section.recentlyUpdated" -}}
+        </h2>
+        {{- $hasTitle = true -}}
       {{- end -}}
+      <article class="archive-item">
+        <a href="{{ .RelPermalink }}" class="archive-item-link">
+          {{- $repost := .Params.repost | default dict -}}
+          {{- if eq $repost.enable true -}}
+            {{- dict "Class" "fa-solid fa-retweet text-success me-1" | partial "plugin/icon.html" -}}
+          {{- end -}}
+          {{- if eq $scope "archives" -}}
+            {{- cond (.Param "capitalize_titles") (title .Title) .Title -}}
+          {{- else -}}
+            {{- cond (.Param "capitalize_titles") (title .LinkTitle) .LinkTitle -}}
+          {{- end -}}
+        </a>
+        <span class="archive-item-date" title='{{ "2006-01-02 15:04:05" | .Lastmod.Format }}'>
+          {{- with .Lastmod | dateFormat $dateformat -}}
+            {{- dict "Date" . | T "single.updatedOnDate" -}}
+          {{- end -}}
+        </span>
+      </article>
     {{- end -}}
   {{- end -}}
 {{- end -}}

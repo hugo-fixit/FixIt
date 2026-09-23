@@ -1,41 +1,43 @@
 {{- /* Collection Navigation */ -}}
-{{- if .Params.collections | and (.Param "collection_navigation") -}}
-  {{- $collectionTerms := .GetTerms "collections" -}}
-  {{- range $collectionTerms -}}
-    {{- $termLink := printf `<a href="%v">%v <span>%v・%v</span></span></a>`
-      (partial "function/escapeurl.html" .RelPermalink)
-      (dict "Class" "fa-solid fa-layer-group" | partial "plugin/icon.html")
-      (T "collection")
-      .LinkTitle
-    -}}
-    {{- if lt .Pages.Len 2 -}}
-      {{- continue -}}
-    {{- end -}}
-    <div class="collection-card">
-      <div class="collection-title text-secondary">
-        {{- dict "Collections" $termLink | T "single.includedIn.collections" | strings.FirstUpper | safeHTML }} {{ .Pages.Len -}}
-      </div>
-      <div class="collection-nav">
-        {{- $pages := .Pages.ByDate -}}
-        {{- with $pages.Next $ -}}
-          {{- $capitalizeTitles := .Param "capitalize_titles" -}}
-          {{- $title := .Params.shortTitle | default .LinkTitle -}}
-          {{- $title = cond $capitalizeTitles (title $title) $title -}}
-          <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ $title }}">
-            {{- dict "Class" "fa-solid fa-angle-left" | partial "plugin/icon.html" -}}
-            <span>{{ $title }}</span>
-          </a>
-        {{- end -}}
-        {{- with $pages.Prev $ -}}
-          {{- $capitalizeTitles := .Param "capitalize_titles" -}}
-          {{- $title := .Params.shortTitle | default .LinkTitle -}}
-          {{- $title = cond $capitalizeTitles (title $title) $title -}}
-          <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ $title }}">
-            <span>{{ $title }}</span>
-            {{- dict "Class" "fa-solid fa-angle-right" | partial "plugin/icon.html" -}}
-          </a>
-        {{- end -}}
-      </div>
-    </div>
+{{- if not (.Params.collections | and (.Param "collection_navigation")) -}}
+  {{- return -}}
+{{- end -}}
+
+{{- $collectionTerms := .GetTerms "collections" -}}
+{{- range $collectionTerms -}}
+  {{- $termLink := printf `<a href="%v">%v <span>%v・%v</span></span></a>`
+    (partial "function/escapeurl.html" .RelPermalink)
+    (dict "Class" "fa-solid fa-layer-group" | partial "plugin/icon.html")
+    (T "collection")
+    .LinkTitle
+  -}}
+  {{- if lt .Pages.Len 2 -}}
+    {{- continue -}}
   {{- end -}}
+  <div class="collection-card">
+    <div class="collection-title text-secondary">
+      {{- dict "Collections" $termLink | T "single.includedIn.collections" | strings.FirstUpper | safeHTML }} {{ .Pages.Len -}}
+    </div>
+    <div class="collection-nav">
+      {{- $pages := .Pages.ByDate -}}
+      {{- with $pages.Next $ -}}
+        {{- $capitalizeTitles := .Param "capitalize_titles" -}}
+        {{- $title := .Params.shortTitle | default .LinkTitle -}}
+        {{- $title = cond $capitalizeTitles (title $title) $title -}}
+        <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="prev" title="{{ $title }}">
+          {{- dict "Class" "fa-solid fa-angle-left" | partial "plugin/icon.html" -}}
+          <span>{{ $title }}</span>
+        </a>
+      {{- end -}}
+      {{- with $pages.Prev $ -}}
+        {{- $capitalizeTitles := .Param "capitalize_titles" -}}
+        {{- $title := .Params.shortTitle | default .LinkTitle -}}
+        {{- $title = cond $capitalizeTitles (title $title) $title -}}
+        <a href="{{ .RelPermalink }}" class="collection-nav-item" rel="next" title="{{ $title }}">
+          <span>{{ $title }}</span>
+          {{- dict "Class" "fa-solid fa-angle-right" | partial "plugin/icon.html" -}}
+        </a>
+      {{- end -}}
+    </div>
+  </div>
 {{- end -}}

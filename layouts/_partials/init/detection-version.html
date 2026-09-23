@@ -12,7 +12,7 @@
 {{- $devOpts := .Site.Store.Get "devOpts" -}}
 
 {{- /* Check Hugo version */ -}}
-{{- $MINIMAL_HUGO_VERSION := "0.161.0" -}}
+{{- $MINIMAL_HUGO_VERSION := "0.166.0" -}}
 {{- if lt hugo.Version $MINIMAL_HUGO_VERSION -}}
   {{- errorf "\n\n%v\n\n" (dict "Current" hugo.Version "Minimal" $MINIMAL_HUGO_VERSION | T "init.hugoVersionError") -}}
 {{- end -}}

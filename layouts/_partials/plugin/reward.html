@@ -11,28 +11,30 @@
 {{- $id := .Id -}}
 {{- $author := .Author | default "" -}}
 
-{{- if $reward.enable -}}
-  <div class="post-reward">
-    <div class="comment">{{ $reward.comment }}</div>
-    <input type="checkbox" class="reward-input" name="reward" id="{{ $id }}" hidden />
-    <label class="reward-button" for="{{ $id }}">
-      {{- dict "Class" "fa-solid fa-qrcode" | partial "plugin/icon.html" -}}
-      {{- T "single.reward.donate" -}}
-    </label>
-    <div class="reward-ways"{{ with $reward.mode }} data-mode="{{ . }}"{{ end }}>
-      {{- range $way, $image := $reward.ways -}}
-        {{- with T (printf "single.reward.%v" $way) -}}{{ $way = . }}{{- end -}}
-        {{- if $image -}}
-          <div>
-            {{- 
-              dict "Src" $image
-              "Alt" (strings.TrimPrefix " " (printf "%v %v" $author $way))
-              | partial "plugin/image.html"
-            -}}
-            <span{{ if $reward.animation }} data-animation{{ end }}>{{ $way }}</span>
-          </div>
-        {{- end -}}
-      {{- end -}}
-    </div>
-  </div>
+{{- if not $reward.enable -}}
+  {{- return -}}
 {{- end -}}
+
+<div class="post-reward">
+  <div class="comment">{{ $reward.comment }}</div>
+  <input type="checkbox" class="reward-input" name="reward" id="{{ $id }}" hidden />
+  <label class="reward-button" for="{{ $id }}">
+    {{- dict "Class" "fa-solid fa-qrcode" | partial "plugin/icon.html" -}}
+    {{- T "single.reward.donate" -}}
+  </label>
+  <div class="reward-ways"{{ with $reward.mode }} data-mode="{{ . }}"{{ end }}>
+    {{- range $way, $image := $reward.ways -}}
+      {{- with T (printf "single.reward.%v" $way) -}}{{ $way = . }}{{- end -}}
+      {{- if $image -}}
+        <div>
+          {{-
+            dict "Src" $image
+            "Alt" (strings.TrimPrefix " " (printf "%v %v" $author $way))
+            | partial "plugin/image.html"
+          -}}
+          <span{{ if $reward.animation }} data-animation{{ end }}>{{ $way }}</span>
+        </div>
+      {{- end -}}
+    {{- end -}}
+  </div>
+</div>

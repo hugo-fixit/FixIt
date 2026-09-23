@@ -53,7 +53,7 @@
 {{- template "_internal/opengraph.html" . -}}
 {{- partial "base/head/twitter-cards.html" . -}}
 
-{{- partial "plugin/pagefind-metadata.html" . -}}
+{{- partial "base/head/pagefind-metadata.html" . -}}
 
 <meta name="application-name" content="{{ .Site.Params.app.name | default .Site.Title }}">
 <meta name="apple-mobile-web-app-title" content="{{ .Site.Params.app.name | default .Site.Title }}">

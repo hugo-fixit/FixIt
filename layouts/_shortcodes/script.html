@@ -1,5 +1,11 @@
-{{- $scriptArr := .Page.Store.Get "scriptArr" | default slice -}}
 {{- $content := trim (partial "function/dos2unix.html" .Inner) "\n" -}}
-{{- if not (in $scriptArr $content) -}}
-  {{- $scriptArr | append $content | .Page.Store.Set "scriptArr" -}}
+{{- if not $content -}}
+  {{- return -}}
 {{- end -}}
+
+{{- $scriptArr := .Page.Store.Get "scriptArr" | default slice -}}
+{{- if in $scriptArr $content -}}
+  {{- return -}}
+{{- end -}}
+
+{{- $scriptArr | append $content | .Page.Store.Set "scriptArr" -}}

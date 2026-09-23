@@ -1,4 +1,6 @@
-{{- if ne hugo.Context.MarkupScope "home" -}}
+{{- if eq hugo.Context.MarkupScope "home" -}}
+  {{- return -}}
+{{- end -}}
 
 {{- $content := trim (partial "function/dos2unix.html" .Inner) "\n" -}}
 {{- $classList := slice -}}
@@ -53,5 +55,3 @@
 </div>
 
 {{- .Page.Store.Set "hasTyped" true -}}
-
-{{- end -}}

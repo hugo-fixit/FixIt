@@ -7,40 +7,42 @@
   Called from: layouts/baseof.html.
 */ -}}
 
-{{- if (gt (len .Ancestors.Reverse) 1) | and (eq .Site.Params.breadcrumb.enable true) -}}
-  {{- $separator := .Site.Params.breadcrumb.separator | default "/" -}}
-  <nav aria-label="breadcrumb" class="breadcrumb-container{{ if .Site.Params.breadcrumb.sticky }} sticky{{ end }}">
-    <ol class="breadcrumb">
-      {{- range .Ancestors.Reverse -}}
-        {{- if .IsHome | and (not .Site.Params.breadcrumb.show_home) -}}
-          {{- continue -}}
-        {{- end -}}
+{{- if (ne .Site.Params.breadcrumb.enable true) | or (le (len .Ancestors.Reverse) 1) -}}
+  {{- return -}}
+{{- end -}}
 
-        {{- $title := "" -}}
-        {{- $capitalizeTitles := .Param "capitalize_titles" -}}
-        {{- with .Description -}}
-          {{- $title = . -}}
-        {{- else -}}
-          {{- $title = cond $capitalizeTitles (title .LinkTitle) .LinkTitle -}}
-          {{- if .IsPage | and .Summary -}}
-            {{- $title = .Summary | plainify -}}
-          {{- end -}}
-        {{- end -}}
-
-        {{- $innerText := "" -}}
-        {{- if .IsHome -}}
-          {{- $innerText = T "single.home" -}}
-        {{- else -}}
-          {{- $innerText = .Page.Params.shortTitle | default (lower .LinkTitle | T) | default .LinkTitle -}}
-          {{- $innerText = cond (.Site.Params.breadcrumb.capitalize | and $capitalizeTitles) (title $innerText) $innerText -}}
-        {{- end -}}
-
-        <li class="breadcrumb-item" data-separator="{{ $separator }}"><a href="{{ .RelPermalink }}" title="{{ $title }}">{{ $innerText }}</a></li>
+{{- $separator := .Site.Params.breadcrumb.separator | default "/" -}}
+<nav aria-label="breadcrumb" class="breadcrumb-container{{ if .Site.Params.breadcrumb.sticky }} sticky{{ end }}">
+  <ol class="breadcrumb">
+    {{- range .Ancestors.Reverse -}}
+      {{- if .IsHome | and (not .Site.Params.breadcrumb.show_home) -}}
+        {{- continue -}}
       {{- end -}}
 
-      {{- $currentText := .Page.Params.shortTitle | default (lower .LinkTitle | T) | default .LinkTitle -}}
-      {{- $currentText = cond (.Site.Params.breadcrumb.capitalize | and (.Param "capitalize_titles")) (title $currentText) $currentText -}}
-      <li class="breadcrumb-item active" data-separator="{{ $separator }}" aria-current="page">{{ $currentText }}</li>
-    </ol>
-  </nav>
-{{- end -}}
+      {{- $title := "" -}}
+      {{- $capitalizeTitles := .Param "capitalize_titles" -}}
+      {{- with .Description -}}
+        {{- $title = . -}}
+      {{- else -}}
+        {{- $title = cond $capitalizeTitles (title .LinkTitle) .LinkTitle -}}
+        {{- if .IsPage | and .Summary -}}
+          {{- $title = .Summary | plainify -}}
+        {{- end -}}
+      {{- end -}}
+
+      {{- $innerText := "" -}}
+      {{- if .IsHome -}}
+        {{- $innerText = T "single.home" -}}
+      {{- else -}}
+        {{- $innerText = .Page.Params.shortTitle | default (lower .LinkTitle | T) | default .LinkTitle -}}
+        {{- $innerText = cond (.Site.Params.breadcrumb.capitalize | and $capitalizeTitles) (title $innerText) $innerText -}}
+      {{- end -}}
+
+      <li class="breadcrumb-item" data-separator="{{ $separator }}"><a href="{{ .RelPermalink }}" title="{{ $title }}">{{ $innerText }}</a></li>
+    {{- end -}}
+
+    {{- $currentText := .Page.Params.shortTitle | default (lower .LinkTitle | T) | default .LinkTitle -}}
+    {{- $currentText = cond (.Site.Params.breadcrumb.capitalize | and (.Param "capitalize_titles")) (title $currentText) $currentText -}}
+    <li class="breadcrumb-item active" data-separator="{{ $separator }}" aria-current="page">{{ $currentText }}</li>
+  </ol>
+</nav>

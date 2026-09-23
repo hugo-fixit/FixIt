@@ -1,4 +1,6 @@
-{{- if ne hugo.Context.MarkupScope "home" -}}
+{{- if eq hugo.Context.MarkupScope "home" -}}
+  {{- return -}}
+{{- end -}}
 
 {{- $theme := "#448aff" -}}
 {{- if .IsNamedParams -}}
@@ -51,5 +53,3 @@
 {{- end -}}
 
 {{- .Page.Store.Set "hasMusic" true -}}
-
-{{- end -}}

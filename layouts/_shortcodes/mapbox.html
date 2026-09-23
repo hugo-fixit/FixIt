@@ -1,4 +1,6 @@
-{{- if ne hugo.Context.MarkupScope "home" -}}
+{{- if eq hugo.Context.MarkupScope "home" -}}
+  {{- return -}}
+{{- end -}}
 
 {{- $mapbox := dict "Page" .Page "Key" "mapbox" | partial "function/param.html" | default dict -}}
 
@@ -37,5 +39,3 @@
 <div class="mapbox" data-options="{{ $options | jsonify }}" {{ $attrs | safeHTMLAttr }}></div>
 
 {{- .Page.Store.Set "hasMapbox" true -}}
-
-{{- end -}}

@@ -10,7 +10,9 @@
   @param {Object} [.Page] - Current page context
 */ -}}
 
-{{- if ne hugo.Context.MarkupScope "home" -}}
+{{- if eq hugo.Context.MarkupScope "home" -}}
+  {{- return -}}
+{{- end -}}
 
 {{- $code := strings.TrimSpace .Inner -}}
 {{- $mermaidConfig := dict "Page" .Page "Key" "mermaid" | partial "function/param.html" -}}
@@ -71,5 +73,3 @@
 {{- end -}}
 
 {{- .Page.Store.Set "hasMermaid" true -}}
-
-{{- end -}}
