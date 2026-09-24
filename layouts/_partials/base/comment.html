@@ -174,7 +174,7 @@
     {{- $valineLang := $valine.lang | default .Language.Name -}}
     {{- $valineLangs := dict "zh-cn" "zh-cn" "zh-tw" "zh-tw" "en" "en" "en-us" "en" "en-gb" "en" "ja" "ja" "ko" "ko" "ru" "ru" "fr" "fr" "pt-br" "pt" -}}
     {{- $valineLang = or (index $valineLangs $valineLang) (index $valineLangs (index (split $valineLang "-") 0)) "en" -}}
-    {{- $commentConfig = dict "el" "#valine" "appId" $valine.appId "appKey" $valine.appKey "lang" $valineLang "visitor" $valine.visitor "recordIP" $valine.recordIP "placeholder" ($valine.placeholder | default (T "comment.valinePlaceholder")) "highlight" (ne $valine.highlight false) "enableQQ" $valine.enableQQ | dict "valine" | merge $commentConfig -}}
+    {{- $commentConfig = dict "el" "#valine" "appId" $valine.appId "appKey" $valine.appKey "lang" $valineLang "visitor" $valine.visitor "recordIP" $valine.recordIp "placeholder" ($valine.placeholder | default (T "comment.valinePlaceholder")) "highlight" (ne $valine.highlight false) "enableQQ" $valine.enableQq | dict "valine" | merge $commentConfig -}}
     {{- with $valine.avatar -}}
       {{- $commentConfig = dict "avatar" . | dict "valine" | merge $commentConfig -}}
     {{- end -}}
@@ -187,7 +187,7 @@
     {{- with $valine.pageSize -}}
       {{- $commentConfig = dict "pageSize" . | dict "valine" | merge $commentConfig -}}
     {{- end -}}
-    {{- with $valine.serverURLs -}}
+    {{- with $valine.serverUrls -}}
       {{- $commentConfig = dict "serverURLs" . | dict "valine" | merge $commentConfig -}}
     {{- end -}}
     {{- $commentConfig = $valine.emoji | default "google.yml" | printf "lib/valine/emoji/%v" | resources.Get | transform.Unmarshal | dict "valine" | merge $commentConfig -}}
@@ -206,7 +206,7 @@
     {{- $source := $cdn.walineJS | default "lib/waline/waline.umd.js" -}}
     {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
     {{- dict "Source" "js/lib/waline.ts" "Build" true "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
-    {{- $commentConfig = dict "el" "#waline" "serverURL" $waline.serverURL "lang" .Language.Name | dict "waline" | merge $commentConfig -}}
+    {{- $commentConfig = dict "el" "#waline" "serverURL" $waline.serverUrl "lang" .Language.Name | dict "waline" | merge $commentConfig -}}
     {{- $commentConfig = dict "copyright" true "imageUploader" false "highlighter" false "texRenderer" false "search" false | dict "waline" | merge $commentConfig -}}
     {{- with $waline.pageview -}}
       {{- $commentConfig = dict "pageview" . | dict "waline" | merge $commentConfig -}}
