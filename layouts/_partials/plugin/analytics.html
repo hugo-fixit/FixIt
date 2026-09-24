@@ -16,7 +16,7 @@
 {{- with $analytics.google.id -}}
   <script>
     window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
-    gtag('config', '{{ . }}'{{ if $analytics.google.anonymizeIP }}, { 'anonymize_ip': true }{{ end }});
+    gtag('config', '{{ . }}'{{ if $analytics.google.anonymize_ip }}, { 'anonymize_ip': true }{{ end }});
   </script>
   {{- printf "https://www.googletagmanager.com/gtag/js?id=%v" . | dict "Async" true "Source" | partial "plugin/script.html" -}}
 {{- end -}}

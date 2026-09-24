@@ -46,7 +46,7 @@
   {{- with $summaryConfig.theme -}}
     {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_theme='%v';" $p .) -}}
   {{- end -}}
-  {{- with $summaryConfig.postURL -}}
+  {{- with $summaryConfig.postUrl -}}
     {{- $postSummaryConfig = add $postSummaryConfig (printf "let %v_postURL='%v';" $p .) -}}
   {{- end -}}
   {{- with $summaryConfig.blacklist -}}
