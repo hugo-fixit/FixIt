@@ -92,7 +92,7 @@
   position: sticky;
   box-sizing: border-box;
   margin-bottom: 8rem;
-  @include overflow-wrap(break-word);
+  overflow-wrap: break-word;
   @include sticky-top-offset;
 
   @include media('print') {

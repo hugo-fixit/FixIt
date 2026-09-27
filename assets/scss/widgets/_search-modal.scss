@@ -241,7 +241,7 @@ dialog.search-dialog {
       overflow: hidden;
       text-overflow: ellipsis;
       color: fi-var(global-font-secondary-color);
-      @include overflow-wrap(break-word);
+      overflow-wrap: break-word;
     }
 
     .suggestion-meta {

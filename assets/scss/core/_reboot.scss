@@ -41,7 +41,7 @@ body {
   color: fi-var(global-font-color);
   -webkit-text-size-adjust: 100%; // 3
   -webkit-tap-highlight-color: rgba(#000, 0); // 4
-  @include overflow-wrap(break-word);
+  overflow-wrap: break-word;
 }
 
 // Correct the font size and margin on `h1` elements within `section` and

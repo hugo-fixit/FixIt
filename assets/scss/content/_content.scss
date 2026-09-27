@@ -255,7 +255,7 @@
 
     a {
       white-space: normal;
-      @include overflow-wrap(break-word);
+      overflow-wrap: break-word;
 
       b,
       strong {

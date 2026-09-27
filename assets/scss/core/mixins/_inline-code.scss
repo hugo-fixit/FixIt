@@ -1,6 +1,5 @@
 @use "core/functions" as *;
 @use "border-radius" as *;
-@use "compatibility" as *;
 
 /// Shared inline code styles using theme CSS variables.
 @mixin inline-code() {
@@ -13,5 +12,5 @@
   background-color: fi-var(code-inline-background-color);
   text-decoration: inherit;
   @include border-radius;
-  @include overflow-wrap(break-word);
+  overflow-wrap: break-word;
 }

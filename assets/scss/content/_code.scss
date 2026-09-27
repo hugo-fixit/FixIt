@@ -249,7 +249,7 @@
 
           // filename for code block
           &[data-name]::after {
-            @include overflow-wrap(break-word);
+            overflow-wrap: break-word;
           }
 
           .arrow {

@@ -1,13 +1,3 @@
-@use "core/functions" as *;
-
-/// Apply word-wrap and overflow-wrap for cross-browser compatibility.
-/// TODO Superseded by `text-wrap: wrap;` in modern browsers.
-/// @param {String} $value - Wrap value (e.g. `break-word`)
-@mixin overflow-wrap($value) {
-  word-wrap: $value;
-  overflow-wrap: $value;
-}
-
 /// Apply styles only when scroll-state container queries are supported.
 /// Unsupported browsers skip the container branch, and can optionally reuse
 /// the same styles through a fallback selector.
