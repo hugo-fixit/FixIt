@@ -67,15 +67,6 @@ lastmod = [
 ]
 
 # -------------------------------------------------------------------------------------
-# Imaging Configuration
-# See: https://gohugo.io/configuration/imaging/
-# -------------------------------------------------------------------------------------
-
-[imaging]
-_merge = "shallow"
-quality = 75
-
-# -------------------------------------------------------------------------------------
 # Menu Configuration
 # See: https://fixit.lruihao.cn/docs/getting-started/configuration/#menu-configuration
 # -------------------------------------------------------------------------------------

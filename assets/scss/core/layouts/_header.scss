@@ -77,7 +77,7 @@ header {
   font-weight: bold;
   line-height: 1;
   padding: 0.25rem;
-  min-width: 10%;
+  min-width: max-content;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -191,7 +191,7 @@ header {
   }
 
   nav {
-    overflow: hidden;
+    overflow: auto;
     white-space: nowrap;
   }
 

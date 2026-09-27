@@ -159,7 +159,6 @@ dialog.search-dialog {
     overscroll-behavior: contain;
     box-shadow: none;
     position: static;
-    @include scrollbar-width(thin);
   }
 
   .search-panel-layout {
