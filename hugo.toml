@@ -50,6 +50,32 @@ capitalizeListTitles = false
 # The editor to use when creating new content.
 # newContentEditor = "code"
 # Ignore some build warnings and errors.
+# Only messages logged with a message ID (`warnidf` / `erroridf`) can be ignored here.
+# See: https://gohugo.io/functions/fmt/warnidf/ | https://gohugo.io/functions/fmt/erroridf/
+# available values:
+#   FixIt message IDs:
+#     "error-get-remote-json"            - failed to get remote JSON
+#     "v1-deprecated-codeblock-attr"     - deprecated code block attributes
+#     "v1-deprecated-file-tree-attr"     - deprecated file-tree code block attributes
+#     "v1-deprecated-file-tree-param"    - deprecated file-tree shortcode parameters
+#     "v1-deprecated-json-viewer-attr"   - deprecated JSON viewer code block attributes
+#     "v1-deprecated-toggle-attr"        - deprecated toggle code block attributes
+#     "warning-dev-env"                  - development environment (non-production)
+#     "warning-dev-version"              - development version of FixIt
+#     "warning-encryption"               - encrypted pages require decryption
+#     "warning-file-tree"                - file-tree data file or root path not found
+#     "warning-link-check"               - external link check failed
+#     "warning-pagefind"                 - Pagefind search index not found
+#     "warning-remote-image"             - failed to get remote image
+#   Hugo message IDs:
+#     "err-youtube-remote"               - youtube shortcode failed to retrieve remote data
+#     "shortcode-vimeo-simple"           - vimeo_simple shortcode failed to retrieve remote data
+#     "shortcode-x-getremote"            - x shortcode failed to retrieve remote data
+#     "shortcode-x-simple-getremote"     - x_simple shortcode failed to retrieve remote data
+#     "warning-goldmark-raw-html"        - raw HTML omitted while rendering
+#     "warning-home-page-is-leaf-bundle" - home page treated as a leaf bundle
+#     "warning-partial-superfluous-prefix" - superfluous "partials/" prefix in partial call
+#     "warning-rendershortcodes-in-html" - .RenderShortcodes detected inside HTML block
 ignoreLogs = []
 
 # -------------------------------------------------------------------------------------

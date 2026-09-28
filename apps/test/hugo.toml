@@ -6,8 +6,11 @@
 title = "FixIt TEST"
 baseURL = "https://demo.fixit.lruihao.cn/test/"
 ignoreLogs = [
+  "warning-dev-env",
+  "warning-dev-version",
+  "warning-encryption",
   "warning-file-tree",
-  "warning-encryption"
+  "warning-remote-image",
 ]
 defaultContentLanguage = "en"
 
