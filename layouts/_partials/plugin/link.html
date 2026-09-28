@@ -27,8 +27,8 @@
   {{- $isExternal := .isExternal -}}
   {{- $externalIcon := $ctx.ExternalIcon | default $config.externalIcon -}}
   {{- with $ctx.Icon -}}
-    {{- partial "plugin/icon.html" . }}
-  {{ end -}}
+    {{- partial "plugin/icon.html" . -}}
+  {{- end -}}
   {{- with $ctx.Content -}}
     {{- . | safeHTML -}}
   {{- end -}}
@@ -71,8 +71,8 @@
     <span class="cl-text">
       <span class="cl-title">
         {{- with $ctx.Icon -}}
-          {{- partial "plugin/icon.html" . }}
-        {{ end -}}
+          {{- partial "plugin/icon.html" . -}}
+        {{- end -}}
         {{- with $ctx.Content -}}
           {{- . | safeHTML -}}
         {{- end -}}

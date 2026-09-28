@@ -15,10 +15,10 @@
   {{- if $avatar -}}
     <div class="home-avatar">
       {{- $menus := $.Site.Menus.main | default slice -}}
-      {{- $optim := slice 
+      {{- $optim := slice
         (dict "Process" "fill center 96x96 webp" "descriptor" "96w")
         (dict "Process" "fill center 144x144 webp" "descriptor" "144w")
-        (dict "Process" "fill center 192x192 webp" "descriptor" "192w") 
+        (dict "Process" "fill center 192x192 webp" "descriptor" "192w")
       -}}
       {{- $avatarMenuIndex := 0 -}}
       {{- if $profile.avatar_menu -}}

@@ -31,9 +31,7 @@
         </p>
       {{- end -}}
       {{- /* RSS Feed Link */ -}}
-      {{- with .OutputFormats.Get "rss" -}}
-        {{- dict "Destination" .Permalink "Title" (T "section.subscribeRSS") "Class" "rss-link" "Content" (printf "%s%s" (dict "Class" "fa-solid fa-rss me-1" | partial "plugin/icon.html") (T "section.subscribeRSS")) "Newtab" true | partial "plugin/link.html" -}}
-      {{- end -}}
+      {{- partial "plugin/rss-link.html" . -}}
     </div>
 
     {{- /* Paginate */ -}}

@@ -7,7 +7,7 @@
 
 {{- $author := partial "function/get-author-map.html" .Params.author -}}
 {{- .Store.Set "author" $author -}}
-{{- $optim := slice 
+{{- $optim := slice
   (dict "Process" "resize 16x16 Center webp" "descriptor" "16w")
   (dict "Process" "resize 24x24 Center webp" "descriptor" "24w")
   (dict "Process" "resize 32x32 Center webp" "descriptor" "32w")
@@ -15,8 +15,7 @@
 
 <span class="post-author">
   {{- $content := $author.name | default "Anonymous" -}}
-  {{- $icon := dict "Class" "fa-solid fa-user-circle" -}}
-  {{- /* Deprecate $params.authorAvatar in favor of $params.showAvatar and add front matter gravatar {bool} */ -}}
+  {{- $icon := dict "Class" "fa-solid fa-user-circle me-1" -}}
   {{- if $author.avatar | and (.Param "author_avatar") -}}
     {{- $content = printf "%v&nbsp;%v" (dict "Src" $author.avatar "Class" "avatar" "Alt" $content "Width" 16 "Height" 16 "OptimConfig" $optim | partial "plugin/image.html") $content -}}
     {{- $icon = "" -}}
@@ -27,8 +26,8 @@
   {{- else -}}
     <span class="author">
       {{- with $icon -}}
-        {{- . | partial "plugin/icon.html" }}
-      {{ end -}}
+        {{- . | partial "plugin/icon.html" -}}
+      {{- end -}}
       {{- $content | safeHTML -}}
     </span>
   {{- end -}}

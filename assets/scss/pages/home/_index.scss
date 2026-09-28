@@ -42,7 +42,11 @@
     }
 
     .links {
-      padding: 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.25rem;
+      padding-block: 0.5rem;
       font-size: 1.5rem;
 
       a * {

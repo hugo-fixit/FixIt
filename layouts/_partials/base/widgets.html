@@ -67,7 +67,7 @@
           {{- with index $meta $searchType -}}
             {{- $icon := dict -}}
             {{- if .icon -}}
-              {{- $icon = dict "Class" .icon -}}
+              {{- $icon = dict "Class" (add .icon " me-1") -}}
             {{- end -}}
             <span class="search-engine">{{ T "assets.searchBy" }} {{ dict "Destination" .href "Content" .label "Icon" $icon "ExternalIcon" false | partial "plugin/link.html" -}}</span>
           {{- end -}}

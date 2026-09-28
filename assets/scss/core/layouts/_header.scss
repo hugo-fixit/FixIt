@@ -220,11 +220,18 @@ header {
             translate: 0.5rem 0;
           }
         }
-        &.language-switch:hover .sub-menu {
-          translate: calc(1.75rem - 100%) 0;
+        &.language-switch {
+          > button {
+            position: relative;
+            @include focus-visible-ring;
+          }
 
-          [dir="rtl"] & {
-            translate: calc(100% - 1.75rem) 0;
+          &:hover .sub-menu {
+            translate: calc(1.75rem - 100%) 0;
+
+            [dir="rtl"] & {
+              translate: calc(100% - 1.75rem) 0;
+            }
           }
         }
       }

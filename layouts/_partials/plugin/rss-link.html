@@ -1,0 +1,10 @@
+{{- /*
+  RSS feed subscribe link for list pages.
+  - Renders nothing when the page has no RSS output format.
+  @param {Object} . - Page context providing the RSS output format
+*/ -}}
+
+{{- with .OutputFormats.Get "rss" -}}
+  {{- $icon := dict "Class" "fa-solid fa-rss me-1" -}}
+  {{- dict "Destination" .Permalink "Class" "rss-link" "Content" (T "section.subscribeRSS") "Icon" $icon "Newtab" true | partial "plugin/link.html" -}}
+{{- end -}}
