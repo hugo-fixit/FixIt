@@ -17,17 +17,12 @@
         {{- title (.Params.Title | default ((T .Section) | default .Section | dict "Some" | T "allSome")) }}
       </h1>
       {{- /* Total word count */ -}}
-      {{- /* See https://github.com/hugo-fixit/FixIt/issues/124 */ -}}
-      {{- $localData := newScratch -}}
-      {{- range .Pages -}}
-        {{- $localData.Add "totalWordCount" .WordCount -}}
-      {{- end -}}
-      {{- with ($localData.Get "totalWordCount") -}}
+      {{- with (partial "function/total-word-count.html" .Pages) -}}
         {{- $humanizedNum := . -}}
         {{- if ge $humanizedNum 1000 -}}
           {{- $humanizedNum = printf "%.2fK" (div $humanizedNum 1000.0) -}}
         {{- end -}}
-        <p class="single-subtitle total-word-count" title='{{- T "section.totalWordCount" . }}'>
+        <p class="single-subtitle total-word-count" title="{{- T `section.totalWordCount` . }}">
           {{- dict "Class" "fa-regular fa-keyboard" | partial "plugin/icon.html" }} {{ T "section.totalWordCount" (dict "Count" $humanizedNum) -}}
         </p>
       {{- end -}}

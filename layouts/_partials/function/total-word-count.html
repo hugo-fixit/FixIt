@@ -1,0 +1,12 @@
+{{- /*
+  Calculate the total word count of a page collection.
+  @param {Object} . - Page collection (e.g. .Pages)
+  @return {Number} Sum of WordCount across all pages
+*/ -}}
+
+{{- $totalWordCount := 0 -}}
+{{- range . -}}
+  {{- $totalWordCount = add $totalWordCount .WordCount -}}
+{{- end -}}
+
+{{- return $totalWordCount -}}
