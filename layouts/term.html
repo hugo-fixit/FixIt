@@ -18,6 +18,16 @@
         <sup class="me-1">{{ $pageCount }}</sup>
         {{- $termTitle }}
       </h1>
+      {{- /* Total word count */ -}}
+      {{- with (partial "function/total-word-count.html" .Pages) -}}
+        {{- $humanizedNum := . -}}
+        {{- if ge $humanizedNum 1000 -}}
+          {{- $humanizedNum = printf "%.2fK" (div $humanizedNum 1000.0) -}}
+        {{- end -}}
+        <p class="single-subtitle total-word-count" title="{{- T `section.totalWordCount` . }}">
+          {{- dict "Class" "fa-regular fa-keyboard" | partial "plugin/icon.html" }} {{ T "section.totalWordCount" (dict "Count" $humanizedNum) -}}
+        </p>
+      {{- end -}}
       {{- /* RSS Feed Link */ -}}
       {{- partial "plugin/rss-link.html" . -}}
     </div>

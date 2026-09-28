@@ -48,7 +48,7 @@ This is a **right-aligned** paragraph.
 {{< script >}}
 console.log('before decrypting');
 
-document.addEventListener('fixit:decrypted', () => {
+document.addEventListener('fixit:content-decrypted', () => {
   console.log('after decrypting')
 });
 {{< /script >}}
@@ -166,7 +166,7 @@ series:
 {{< typeit code=javascript >}}
 console.log('before decrypting');
 
-document.addEventListener('fixit:decrypted', () => {
+document.addEventListener('fixit:content-decrypted', () => {
   console.log('after decrypting')
 });
 {{< /typeit >}}
