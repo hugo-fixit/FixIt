@@ -1,0 +1,82 @@
+{{- /*
+  Parse author names from a content file's front matter.
+  Supports scalar/map `author` and list/scalar `authors` in YAML or TOML front matter.
+
+  @param {String} . - File path
+  @returns {Slice} Author names found
+*/ -}}
+{{- $names := slice -}}
+{{- with try (os.ReadFile .) -}}
+  {{- with .Value -}}
+    {{- $raw := . -}}
+    {{- $fm := "" -}}
+    {{- if strings.HasPrefix $raw "---" -}}
+      {{- $fm = replaceRE `(?s)^---\r?\n(.*?)\r?\n---.*` "$1" $raw -}}
+    {{- else if strings.HasPrefix $raw "+++" -}}
+      {{- $fm = replaceRE `(?s)^\+\+\+\r?\n(.*?)\r?\n\+\+\+.*` "$1" $raw -}}
+    {{- else if strings.HasPrefix $raw "{" -}}
+      {{- $fm = replaceRE `(?s)^(\{.*?\r?\n\}).*` "$1" $raw -}}
+    {{- end -}}
+    {{- with $fm -}}
+      {{- /* authors: [A, B] or authors: "A" or authors: A */ -}}
+      {{- range findRE `(?m)^\s*authors?\s*:\s*\[([^\]]*)\]` . 1 -}}
+        {{- $inner := replaceRE `(?m)^\s*authors?\s*:\s*\[([^\]]*)\]` "$1" . -}}
+        {{- range split $inner "," -}}
+          {{- with replaceRE `["'\s]` "" . -}}
+            {{- if and . (not (hasPrefix . "-")) (not (in . ":")) -}}
+              {{- $names = $names | append . -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+      {{- range findRE `(?m)^\s*authors?\s*:\s*["']?([^"'\n{\[]+)["']?\s*$` . -}}
+        {{- $v := replaceRE `(?m)^\s*authors?\s*:\s*["']?([^"'\n{\[]+)["']?\s*$` "$1" . | strings.TrimSpace -}}
+        {{- if and $v (ne $v "null") (ne $v "~") (not (hasPrefix $v "-")) (not (in $v ":")) -}}
+          {{- $names = $names | append $v -}}
+        {{- end -}}
+      {{- end -}}
+      {{- /* authors: \n  - A \n  - B */ -}}
+      {{- $inList := false -}}
+      {{- range split . "\n" -}}
+        {{- $line := strings.TrimSpace . -}}
+        {{- if findRE `^authors?\s*:\s*$` $line -}}
+          {{- $inList = true -}}
+        {{- else if $inList -}}
+          {{- if hasPrefix $line "-" -}}
+            {{- $v := replaceRE `^-\s*["']?([^"']+)["']?\s*$` "$1" $line | strings.TrimSpace -}}
+            {{- if and $v (not (in $v ":")) -}}{{- $names = $names | append $v -}}{{- end -}}
+          {{- else if $line -}}
+            {{- $inList = false -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+      {{- /* author: \n  name: X */ -}}
+      {{- $inMap := false -}}
+      {{- range split . "\n" -}}
+        {{- $line := strings.TrimSpace . -}}
+        {{- if findRE `^author\s*:\s*$` $line -}}
+          {{- $inMap = true -}}
+        {{- else if $inMap -}}
+          {{- if findRE `^\s*name\s*:` $line -}}
+            {{- $v := replaceRE `^\s*name\s*:\s*["']?([^"']+)["']?\s*$` "$1" $line | strings.TrimSpace -}}
+            {{- if $v -}}{{- $names = $names | append $v -}}{{- end -}}
+            {{- $inMap = false -}}
+          {{- else if $line -}}
+            {{- $inMap = false -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+      {{- /* TOML: author = "X" | authors = ["A","B"] */ -}}
+      {{- range findRE `(?m)^\s*authors?\s*=\s*\[([^\]]*)\]` . -}}
+        {{- $inner := replaceRE `(?m)^\s*authors?\s*=\s*\[([^\]]*)\]` "$1" . -}}
+        {{- range findRE `["']([^"']+)["']` $inner -}}
+          {{- $names = $names | append (replaceRE `["']` "" .) -}}
+        {{- end -}}
+      {{- end -}}
+      {{- range findRE `(?m)^\s*authors?\s*=\s*["']([^"']+)["']` . -}}
+        {{- $names = $names | append (replaceRE `(?m)^\s*authors?\s*=\s*["']([^"']+)["']` "$1" . | strings.TrimSpace) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return (uniq $names) -}}

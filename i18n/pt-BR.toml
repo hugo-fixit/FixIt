@@ -26,6 +26,12 @@ other = "Arquivos"
 [allSome]
 other = "{{ .Some }}"
 
+[author]
+other = "Autor"
+
+[authors]
+other = "Autores"
+
 [category]
 other = "Categoria"
 

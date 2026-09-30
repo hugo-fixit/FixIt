@@ -26,6 +26,12 @@ other = "歸檔"
 [allSome]
 other = "所有{{ .Some }}"
 
+[author]
+other = "作者"
+
+[authors]
+other = "作者"
+
 [category]
 other = "分類"
 

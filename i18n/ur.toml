@@ -26,6 +26,12 @@ other = "آرکائیو"
 [allSome]
 other = "تمام {{ .Some }}"
 
+[author]
+other = "مصنف"
+
+[authors]
+other = "مصنفین"
+
 [category]
 other = "زمرہ"
 

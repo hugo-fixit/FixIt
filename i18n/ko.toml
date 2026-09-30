@@ -26,6 +26,12 @@ other = "보관함"
 [allSome]
 other = "모두 {{ .Some }}"
 
+[author]
+other = "저자"
+
+[authors]
+other = "저자"
+
 [category]
 other = "분류"
 

@@ -26,6 +26,12 @@ other = "Arhive"
 [allSome]
 other = "Toate {{ .Some }}"
 
+[author]
+other = "Autor"
+
+[authors]
+other = "Autori"
+
 [category]
 other = "Categorie"
 

@@ -26,6 +26,12 @@ other = "بایگانی"
 [allSome]
 other = "همه {{ .Some }}"
 
+[author]
+other = "نویسنده"
+
+[authors]
+other = "نویسندگان"
+
 [category]
 other = "دسته‌بندی"
 

@@ -26,6 +26,12 @@ other = "الأرشيف"
 [allSome]
 other = "جميع {{ .Some }}"
 
+[author]
+other = "المؤلف"
+
+[authors]
+other = "المؤلفون"
+
 [category]
 other = "التصنيف"
 

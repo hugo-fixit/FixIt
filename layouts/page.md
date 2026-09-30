@@ -1,4 +1,4 @@
-{{- $author := .Store.Get "author" | default (partial "function/get-author-map.html" .Params.author) -}}
+{{- $authors := partial "function/get-authors.html" . -}}
 # {{ cond (.Param "capitalize_titles") (title .Title) .Title }}
 
 {{ if .Params.password -}}
@@ -9,7 +9,7 @@
 
 ---
 
-> {{ T "single.author"}}: {{ with $author.link }}[{{ $author.name }}]({{ . }}){{ else }}{{ $author.name }}{{ end }}  {{/* EOL */}}
+> {{ T "single.author"}}: {{ range $i, $author := $authors }}{{ if $i }}, {{ end }}{{ with $author.link }}[{{ $author.name }}]({{ . }}){{ else }}{{ $author.name }}{{ end }}{{ end }}  {{/* EOL */}}
 > URL: {{ .Permalink }}  {{/* EOL */}}
 {{ $repost := .Param "repost" | default dict -}}
 {{ if $repost.enable | and (hasPrefix $repost.url "http") }}> {{ T "single.repost" }} URL: {{ $repost.url }}{{ end }}

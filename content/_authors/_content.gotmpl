@@ -1,0 +1,46 @@
+{{- /*
+  Seed every author that appears in content (or site.Params.author / data/authors)
+  as an `authors` taxonomy term, so /authors/<name>/ exists even when the page
+  only uses legacy `author: "X"` or falls back to the site default author.
+
+  Combined with function/pages-by-author.html, each archive lists every page
+  that resolves to that author. The stub page is hidden from home/search/feed/
+  related and marked noindex; author listings skip it via `author_seed`.
+*/ -}}
+{{- $adapter := . -}}
+{{- $names := slice -}}
+{{- with site.Params.author.name -}}
+  {{- $names = $names | append . -}}
+{{- end -}}
+{{- $names = union $names (partial "function/scan-author-names.html" "content") -}}
+{{- range (hugo.Data.authors | default dict) -}}
+  {{- with .name -}}
+    {{- $names = $names | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $clean := slice -}}
+{{- range $names -}}
+  {{- $v := strings.TrimSpace (printf "%v" .) -}}
+  {{- if and $v (ne $v "null") (ne $v "~") (not (hasPrefix $v "-")) (not (in $v ":")) -}}
+    {{- $clean = $clean | append $v -}}
+  {{- end -}}
+{{- end -}}
+{{- $clean = uniq $clean -}}
+{{- with $clean -}}
+  {{- $page := dict
+    "content" (dict "mediaType" "text/markdown" "value" "Author taxonomy seed page.")
+    "kind" "page"
+    "path" "author-taxonomy-seed"
+    "title" "Author Taxonomy Seed"
+    "params" (dict
+      "authors" .
+      "author_seed" true
+      "robots" "noindex"
+      "hidden_from_home_page" true
+      "hidden_from_search" true
+      "hidden_from_feed" true
+      "hidden_from_related" true
+    )
+  -}}
+  {{- $adapter.AddPage $page -}}
+{{- end -}}

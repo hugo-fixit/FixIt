@@ -1,0 +1,42 @@
+{{- /*
+  Get authors as a list of maps (multi-author via data/authors registry,
+  falls back to get-author-map for the legacy single-author path).
+
+  Multi-author entries are registry keys (strings) resolved via get-author.
+  When `.Params.authors` is empty, this delegates to get-author-map with
+  `.Params.author` (unchanged single-author semantics).
+
+  @param {Page} . - The page context
+  @returns {Slice} List of author maps with keys: key, name, link, email, avatar
+  @example {{- $authors := partial "function/get-authors.html" . -}}
+*/ -}}
+
+{{- $entries := slice -}}
+{{- with .Params.authors -}}
+  {{- if reflect.IsSlice . -}}
+    {{- range . -}}
+      {{- if reflect.IsMap . -}}
+        {{- warnf "FixIt: authors entries must be registry key strings, got a map in %q." $.Path -}}
+      {{- else -}}
+        {{- with printf "%v" . | strings.TrimSpace -}}
+          {{- $entries = $entries | append . -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- else if not (reflect.IsMap .) -}}
+    {{- with printf "%v" . | strings.TrimSpace -}}
+      {{- $entries = slice . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if gt (len $entries) 0 -}}
+  {{- $authors := slice -}}
+  {{- range $entries -}}
+    {{- $authors = $authors | append (partial "function/get-author.html" (dict "Key" . "Size" "32")) -}}
+  {{- end -}}
+  {{- return $authors -}}
+{{- end -}}
+
+{{- $author := partial "function/get-author-map.html" .Params.author -}}
+{{- return slice (dict "key" $author.name "name" $author.name "link" $author.link "email" $author.email "avatar" $author.avatar) -}}

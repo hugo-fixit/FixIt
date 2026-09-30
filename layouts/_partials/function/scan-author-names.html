@@ -1,0 +1,19 @@
+{{- /*
+  Recursively collect author names from content files under a directory.
+
+  @param {String} . - Directory path relative to project root (e.g. "content")
+  @returns {Slice} Unique author names
+*/ -}}
+{{- $names := slice -}}
+{{- $dir := . -}}
+{{- range os.ReadDir $dir -}}
+  {{- $path := path.Join $dir .Name -}}
+  {{- if .IsDir -}}
+    {{- if not (hasPrefix .Name ".") -}}
+      {{- $names = union $names (partial "function/scan-author-names.html" $path) -}}
+    {{- end -}}
+  {{- else if in (slice ".md" ".markdown" ".mdx" ".adoc" ".org" ".html") (path.Ext .Name) -}}
+    {{- $names = union $names (partial "function/parse-author-names.html" $path) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $names -}}

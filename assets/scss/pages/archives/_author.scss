@@ -1,0 +1,62 @@
+// Author term page styles (centered hero: avatar / name / contact icons)
+@use "core/functions" as *;
+@use "core/mixins" as *;
+
+&.author-archive {
+  .archive-header,
+  .archive-meta,
+  .archive-title,
+  .archive-subtitle {
+    text-align: center;
+  }
+
+  .author-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.25rem 0 0.75rem;
+
+    img.avatar {
+      width: 6rem;
+      height: 6rem;
+      object-fit: cover;
+      object-position: center;
+      box-shadow: 0 0 0 0.3618em light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.05));
+      @include border-radius(full);
+    }
+
+    .author-icon {
+      font-size: 5.5rem;
+      line-height: 1;
+      color: fi-var(global-font-secondary-color);
+    }
+
+    .archive-title {
+      padding: 0.125rem 0 0;
+    }
+
+    .author-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .author-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+      padding-block: 0.25rem;
+      margin: 0;
+      font-size: 1.125rem;
+
+      a {
+        color: fi-var(global-font-secondary-color);
+
+        &:hover {
+          color: fi-var(global-link-hover-color);
+        }
+      }
+    }
+  }
+}

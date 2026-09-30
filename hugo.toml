@@ -474,6 +474,9 @@ _merge = "shallow"
 category = "categories"
 tag = "tags"
 collection = "collections"
+# Enables /authors/<name>/ archive pages for the page-level `authors` front matter field.
+# Optional — sites that never set `authors` are unaffected.
+author = "authors"
 
 # -------------------------------------------------------------------------------------
 # Build Configuration
@@ -537,6 +540,7 @@ disable_theme_inject = false
 #   ---
 #   capitalize_titles: false
 #   hidden_from_home_page: true
+#   authors: [Alice, Bob]  # multi-author registry keys (see [params.author] notes below)
 #   toc:
 #     enable: true
 #   math:
@@ -597,7 +601,20 @@ collection_navigation = false
 # End of post flag.
 end_flag = ""
 
-# Author configuration.
+# Author configuration (site default author — single-author pages, footer, home profile, etc.).
+# Multi-author support (optional):
+#   1. Create a registry file per author, e.g. `data/authors/Alice.toml`:
+#        name = "Alice"
+#        link = "https://alice.example.com"
+#        email = "alice@example.com"
+#        avatar = "/images/authors/alice.png"
+#        [zh-cn]            # optional I18n override, key = language key
+#        name = "爱丽丝"
+#   2. In page front matter: `authors: [Alice, Bob]` (registry keys).
+#      When `authors` is set it takes precedence over `author`.
+#      Missing registry keys fall back to `{name: key}` (no inheritance from params.author).
+#      With the `author = "authors"` taxonomy registered, this also creates
+#      `/authors/<key>/` archive pages via the generic taxonomy templates.
 [params.author]
 name = ""
 email = ""

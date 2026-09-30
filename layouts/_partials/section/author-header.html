@@ -1,0 +1,39 @@
+{{- /*
+  Author archive header: avatar, name, then link/email icons.
+
+  @param {Map} . - dict "Page", "Pages", "Author" (from function/get-author.html)
+*/ -}}
+{{- $author := .Author -}}
+{{- $optim := slice
+  (dict "Process" "resize 96x96 Center webp" "descriptor" "96w")
+  (dict "Process" "resize 128x128 Center webp" "descriptor" "128w")
+  (dict "Process" "resize 192x192 Center webp" "descriptor" "192w")
+-}}
+{{- $name := $author.name | default .Page.Title -}}
+{{- $avatar := "" -}}
+{{- if $author.avatar -}}
+  {{- $avatar = dict "Src" $author.avatar "Class" "avatar" "Alt" $name "Width" 96 "Height" 96 "OptimConfig" $optim | partial "plugin/image.html" -}}
+{{- else -}}
+  {{- $avatar = dict "Class" "fa-solid fa-user-circle author-icon" | partial "plugin/icon.html" -}}
+{{- end -}}
+<div class="archive-header author-header">
+  {{- if $author.link -}}
+    {{- dict "Class" "author-avatar" "Destination" $author.link "Title" $name "Rel" "author" "Content" $avatar "ExternalIcon" false | partial "plugin/link.html" -}}
+  {{- else -}}
+    <div class="author-avatar">{{- $avatar -}}</div>
+  {{- end -}}
+  <h1 class="archive-title animate__animated animate__pulse animate__faster">
+    <span class="author-name">{{ $name }}</span>
+  </h1>
+  {{- if or $author.link $author.email -}}
+    <p class="author-contacts">
+      {{- with $author.link -}}
+        {{- dict "Class" "author-contact" "Destination" . "Title" . "Rel" "author" "Icon" (dict "Class" "fa-solid fa-link") "Content" "" "ExternalIcon" false | partial "plugin/link.html" -}}
+      {{- end -}}
+      {{- with $author.email -}}
+        {{- dict "Class" "author-contact" "Destination" (printf "mailto:%v" .) "Title" . "Icon" (dict "Class" "fa-solid fa-envelope") "Content" "" "ExternalIcon" false | partial "plugin/link.html" -}}
+      {{- end -}}
+    </p>
+  {{- end -}}
+</div>
+{{- /* EOF */ -}}

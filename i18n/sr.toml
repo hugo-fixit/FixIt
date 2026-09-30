@@ -26,6 +26,12 @@ other = "Остало"
 [allSome]
 other = "Све {{ .Some }}"
 
+[author]
+other = "Аутор"
+
+[authors]
+other = "Аутори"
+
 [category]
 other = "Категорија"
 

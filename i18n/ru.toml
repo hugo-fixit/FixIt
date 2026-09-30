@@ -26,6 +26,12 @@ other = "Архив"
 [allSome]
 other = "Все {{ .Some }}"
 
+[author]
+other = "Автор"
+
+[authors]
+other = "Авторы"
+
 [category]
 other = "Категория"
 

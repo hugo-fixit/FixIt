@@ -26,6 +26,12 @@ other = "アーカイブ"
 [allSome]
 other = "すべての{{ .Some }}"
 
+[author]
+other = "著者"
+
+[authors]
+other = "著者"
+
 [category]
 other = "カテゴリ"
 

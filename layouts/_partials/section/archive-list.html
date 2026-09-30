@@ -1,0 +1,39 @@
+{{- /*
+  Date-grouped archive list + paginator.
+
+  @param {Map} . - dict "Page" (context) and "Pages" (page collection),
+                   optional "DateFormat" (default "01-02")
+*/ -}}
+{{- $page := .Page -}}
+{{- $pages := .Pages -}}
+{{- $dateFormat := .DateFormat | default "01-02" -}}
+{{- if $pages -}}
+  {{- $grouped := $pages.GroupByDate "2006" -}}
+  {{- with .Paginate -}}
+    {{- $grouped = $page.Paginate $grouped . -}}
+  {{- else -}}
+    {{- $grouped = $page.Paginate $grouped -}}
+  {{- end -}}
+  {{- partial "section/recently-updated.html" $page -}}
+  {{- range $grouped.PageGroups -}}
+    <h2 class="group-title">
+      {{- dict "Class" "fa-regular fa-calendar me-1" | partial "plugin/icon.html" -}}
+      {{- .Key -}}
+    </h2>
+    {{- range .Pages -}}
+      <article class="archive-item">
+        <a href="{{ .RelPermalink }}" class="archive-item-link" title="{{ .Title }}">
+          {{- $repost := .Params.repost | default dict -}}
+          {{- if eq $repost.enable true -}}
+            {{- dict "Class" "fa-solid fa-retweet text-success me-1" | partial "plugin/icon.html" -}}
+          {{- end -}}
+          {{- cond (.Param "capitalize_titles") (title .LinkTitle) .LinkTitle -}}
+        </a>
+        <span class="archive-item-date" title='{{ "2006-01-02 15:04:05" | .Date.Format }}'>
+          {{- .Date | dateFormat $dateFormat -}}
+        </span>
+      </article>
+    {{- end -}}
+  {{- end -}}
+  {{- partial "base/paginator.html" $page -}}
+{{- end -}}

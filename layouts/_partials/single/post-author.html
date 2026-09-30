@@ -1,12 +1,14 @@
 {{- /*
   Post author display partial.
 
-  Renders the author name with optional avatar and link.
-  Stores the resolved author map in the page store for use by other partials.
+  Renders one or more author names with optional avatars and links.
+  Stores the primary (first) resolved author map in the page store as "author"
+  and the full list as "authors" for use by other partials.
 */ -}}
 
-{{- $author := partial "function/get-author-map.html" .Params.author -}}
-{{- .Store.Set "author" $author -}}
+{{- $authors := partial "function/get-authors.html" . -}}
+{{- .Store.Set "authors" $authors -}}
+{{- .Store.Set "author" (index $authors 0) -}}
 {{- $optim := slice
   (dict "Process" "resize 16x16 Center webp" "descriptor" "16w")
   (dict "Process" "resize 24x24 Center webp" "descriptor" "24w")
@@ -14,22 +16,25 @@
 -}}
 
 <span class="post-author">
-  {{- $content := $author.name | default "Anonymous" -}}
-  {{- $icon := dict "Class" "fa-solid fa-user-circle me-1" -}}
-  {{- if $author.avatar | and (.Param "author_avatar") -}}
-    {{- $content = printf "%v&nbsp;%v" (dict "Src" $author.avatar "Class" "avatar" "Alt" $content "Width" 16 "Height" 16 "OptimConfig" $optim | partial "plugin/image.html") $content -}}
-    {{- $icon = "" -}}
-  {{- end -}}
-  {{- if $author.link -}}
-    {{- $options := dict "Class" "author" "Destination" $author.link "Title" (T "single.author") "Rel" "author" "Icon" $icon "Content" $content "ExternalIcon" false -}}
-    {{- partial "plugin/link.html" $options -}}
-  {{- else -}}
-    <span class="author">
-      {{- with $icon -}}
-        {{- . | partial "plugin/icon.html" -}}
-      {{- end -}}
-      {{- $content | safeHTML -}}
-    </span>
+  {{- range $i, $author := $authors -}}
+    {{- if $i -}},{{ end -}}
+    {{- $content := $author.name | default "Anonymous" -}}
+    {{- $icon := dict "Class" "fa-solid fa-user-circle me-1" -}}
+    {{- if $author.avatar | and ($.Param "author_avatar") -}}
+      {{- $content = printf "%v&nbsp;%v" (dict "Src" $author.avatar "Class" "avatar" "Alt" $content "Width" 16 "Height" 16 "OptimConfig" $optim | partial "plugin/image.html") $content -}}
+      {{- $icon = "" -}}
+    {{- end -}}
+    {{- if $author.link -}}
+      {{- $options := dict "Class" "author" "Destination" $author.link "Title" (T "single.author") "Rel" "author" "Icon" $icon "Content" $content "ExternalIcon" false -}}
+      {{- partial "plugin/link.html" $options -}}
+    {{- else -}}
+      <span class="author">
+        {{- with $icon -}}
+          {{- . | partial "plugin/icon.html" -}}
+        {{- end -}}
+        {{- $content | safeHTML -}}
+      </span>
+    {{- end -}}
   {{- end -}}
 </span>
 {{- /* EOF */ -}}
