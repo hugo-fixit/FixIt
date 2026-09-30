@@ -18,13 +18,13 @@ baseURL = "http://localhost:1313"
 # Enable in your site config file.
 # theme = ["FixIt"]
 # Determines default content language.
-# available values: ["en", "zh-cn", "fr", "pl", ...]
+# Available values: ["en", "zh-cn", "fr", "pl", ...]
 defaultContentLanguage = "en"
 # Language code.
-# available values: ["en", "zh-CN", "fr", "pl", ...]
+# Available values: ["en", "zh-CN", "fr", "pl", ...]
 locale = "en"
 # Language name.
-# available values: ["English", "简体中文", "Français", "Polski", ...]
+# Available values: ["English", "简体中文", "Français", "Polski", ...]
 label = "English"
 # Whether to include Chinese/Japanese/Korean.
 hasCJKLanguage = false
@@ -39,7 +39,7 @@ enableGitInfo = true
 # Whether to use emoji code.
 enableEmoji = true
 # The capitalization rules to follow.
-# available values: ["ap", "chicago", "go", "firstupper", "none"]
+# Available values: ["ap", "chicago", "go", "firstupper", "none"]
 titleCaseStyle = "ap"
 # Whether to capitalize automatic list titles.
 capitalizeListTitles = false
@@ -52,7 +52,7 @@ capitalizeListTitles = false
 # Ignore some build warnings and errors.
 # Only messages logged with a message ID (`warnidf` / `erroridf`) can be ignored here.
 # See: https://gohugo.io/functions/fmt/warnidf/ | https://gohugo.io/functions/fmt/erroridf/
-# available values:
+# Available values:
 #   FixIt message IDs:
 #     "error-get-remote-json"            - failed to get remote JSON
 #     "v1-deprecated-codeblock-attr"     - deprecated code block attributes
@@ -122,7 +122,7 @@ draft = false
 # Add FontAwesome icon to a specific menu item.
 icon = "fa-solid fa-archive"
 # Set menu item type.
-# available values: ["mobile", "desktop"]
+# Available values: ["mobile", "desktop"]
 type = ""
 # Whether to show the submenu item divider line.
 divided = false
@@ -474,6 +474,9 @@ _merge = "shallow"
 category = "categories"
 tag = "tags"
 collection = "collections"
+# Enables /authors/<name>/ archive pages for the page-level `authors` front matter field.
+# Optional — sites that never set `authors` are unaffected.
+author = "authors"
 
 # -------------------------------------------------------------------------------------
 # Build Configuration
@@ -501,10 +504,10 @@ description = ""
 # Site keywords.
 keywords = []
 # Site default theme.
-# available values: ["light", "dark", "auto"]
+# Available values: ["light", "dark", "auto"]
 default_theme = "auto"
 # Which hash function used for SRI, when empty, no SRI is used.
-# available values: ["sha256", "sha384", "sha512", "md5"]
+# Available values: ["sha256", "sha384", "sha512", "md5"]
 fingerprint = ""
 # Date format.
 date_format = "2006-01-02"
@@ -537,6 +540,7 @@ disable_theme_inject = false
 #   ---
 #   capitalize_titles: false
 #   hidden_from_home_page: true
+#   authors: [Alice, Bob]  # multi-author registry keys (see [params.author] notes below)
 #   toc:
 #     enable: true
 #   math:
@@ -577,7 +581,7 @@ fontawesome = true
 # License info (HTML format is supported).
 license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>'
 # Page style.
-# available values: ["narrow", "normal", "wide", ...]
+# Available values: ["narrow", "normal", "wide", ...]
 page_style = "normal"
 # Auto bookmark support.
 # If true, save the reading progress when closing the page.
@@ -597,7 +601,24 @@ collection_navigation = false
 # End of post flag.
 end_flag = ""
 
-# Author configuration.
+# Author configuration (site default author — single-author pages, footer, home profile, etc.).
+# Multi-author support (optional):
+# 1. Create a registry file per author, e.g. `data/authors/Alice.toml`:
+#
+#     ```toml
+#     name = "Alice"
+#     link = "https://alice.example.com"
+#     email = "alice@example.com"
+#     avatar = "/images/authors/alice.png"
+#     [zh-cn]            # optional I18n override, key = language key
+#     name = "爱丽丝"
+#     ```
+#
+# 2. In page front matter: `authors: [Alice, Bob]` (registry keys).
+#    When `authors` is set it takes precedence over `author`.
+#    Missing registry keys fall back to `{name: key}` (no inheritance from params.author).
+#    With the `author = "authors"` taxonomy registered, this also creates
+#    `/authors/<key>/` archive pages via the generic taxonomy templates.
 [params.author]
 name = ""
 email = ""
@@ -613,7 +634,7 @@ external_icon = true
 [params.link.guard]
 enable = false
 # External link guard mode.
-# available values: ["modal", "redirect"]
+# Available values: ["modal", "redirect"].
 # In "modal" mode, a dialog will pop up to ask for confirmation when users click external links.
 # In "redirect" mode, users will be redirected to an intermediate page before visiting external links.
 mode = "modal"
@@ -632,15 +653,13 @@ optimise = false
 black_list = []
 
 # Code block wrapper configuration.
-# You can override the global config via Markdown attributes, for example:
-# ```lang {mode="mac", max_shown_lines=5}
-# code here
-# ```
+# You can override the global config via Markdown attributes.
+# Example: info string `lang {mode="mac", max_shown_lines=5}` on the code fence.
 [params.codeblock]
 # Whether to enable the code block wrapper.
 wrapper = true
 # Code block mode.
-# available values: ["classic", "mac", "simple"]
+# Available values: ["classic", "mac", "simple"].
 # If you set to custom value, you need to create a custom CSS for data-mode attribute.
 mode = "classic"
 # Additional classes for the code block wrapper.
@@ -649,7 +668,7 @@ wrapper_class = ""
 # The maximum number of lines to show in the code block preview.
 max_shown_lines = 10
 # Whether to show shadow effect for code blocks.
-# available values: ["always", "hover", "never"]
+# Available values: ["always", "hover", "never"]
 shadow = "never"
 # Whether to enable code copy button.
 copyable = true
@@ -694,16 +713,13 @@ highlight_list = []
 # See: [Mermaid](https://fixit.lruihao.cn/docs/content-management/diagrams-support/mermaid/)
 [params.mermaid]
 # Whether to enable the Mermaid wrapper.
-# When enabled, Mermaid diagrams are wrapped with diagram tabs and actions:
-# - pan/zoom (drag & ctrl+wheel).
-# - reset view.
-# - download as SVG.
+# When enabled, Mermaid diagrams are wrapped with diagram tabs and actions (pan/zoom, reset view, download as SVG).
 wrapper = true
 # Mermaid ESM module CDN source.
 cdn = "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs"
 # ZenUML ESM module CDN source.
 # You can set it to a CDN source to enable ZenUML support.
-# Example: `https://cdn.jsdelivr.net/npm/@mermaid-js/mermaid-zenuml/dist/mermaid-zenuml.esm.min.mjs`
+# Example: `https://cdn.jsdelivr.net/npm/@mermaid-js/mermaid-zenuml/dist/mermaid-zenuml.esm.min.mjs`.
 zenuml = ""
 # For values, See: [Available Themes](https://mermaid.js.org/config/theming.html#available-themes).
 themes = [
@@ -711,19 +727,19 @@ themes = [
   "dark"
 ]
 # The security level for Mermaid diagrams.
-# available values: ["strict", "loose", "antiscript", "sandbox"]
+# Available values: ["strict", "loose", "antiscript", "sandbox"]
 security_level = "loose"
 # The appearance style for Mermaid diagrams.
-# available values: ["classic", "handDrawn"]
+# Available values: ["classic", "handDrawn"]
 look = "handDrawn"
 # Specifies the font to be used in the rendered diagrams.
 font_family = ""
 # Layout loaders from ESM module CDN sources (e.g., ELK layout engine).
-# Example: ["https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk/dist/mermaid-layout-elk.esm.min.mjs"]
+# Example: ["https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk/dist/mermaid-layout-elk.esm.min.mjs"].
 # This will enable additional layout options: ["elk", "elk.layered", "elk.stress", "elk.force", "elk.mrtree"].
 layout_loaders = []
 # Default layout algorithm for rendering diagrams.
-# available values: ["dagre", "elk", "elk.layered", "elk.stress", "elk.force", "elk.mrtree"]
+# Available values: ["dagre", "elk", "elk.layered", "elk.stress", "elk.force", "elk.mrtree"].
 # Note: ELK layouts require `layout_loaders` to be configured first.
 layout = "dagre"
 
@@ -736,7 +752,7 @@ keep_static = false
 # Whether to make the table of the contents in the sidebar automatically collapsed.
 auto = true
 # Position of TOC.
-# available values: ["start", "end"]
+# Available values: ["start", "end"]
 position = "end"
 # Supersede `markup.tableOfContents` settings.
 ordered = false
@@ -750,7 +766,7 @@ decrease_h1 = false
 # Whether to enable the disclaimer.
 enable = false
 # Disclaimer type.
-# available values: ["ai", "repost", "original", "custom"]
+# Available values: ["ai", "repost", "original", "custom"]
 type = "ai"
 # Custom disclaimer content (optional, uses I18n default if empty).
 content = ""
@@ -789,7 +805,7 @@ sort = true
 [params.math]
 enable = true
 # Mathematical formulas rendering engines.
-# available values: ["katex", "mathjax"]
+# Available values: ["katex", "mathjax"]
 type = "katex"
 
 # KaTeX server-side rendering.
@@ -801,9 +817,13 @@ throw_on_error = false
 error_color = "#ff4949"
 
 # Custom macros map.
-# syntax: `<macro> = <definition>`
-[params.math.katex.macros]
+# Syntax: `<macro> = <definition>`
+# Example:
+# ```toml
+# [params.math.katex.macros]
 # "\\f" = "#1f(#2)" # usage: $\f{a}{b}$
+# ```
+[params.math.katex.macros]
 
 # MathJax server-side rendering.
 # See: [MathJax](https://www.mathjax.org) and [MathJax Options](https://docs.mathjax.org/en/latest/options/index.html)
@@ -811,21 +831,33 @@ error_color = "#ff4949"
 cdn = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 
 # MathJax packages config
-[params.math.mathjax.packages]
+# Example:
+# ```toml
+# [params.math.mathjax.packages]
 # "[+]" = ["configmacros"]
+# ```
+[params.math.mathjax.packages]
 
 # Custom macros map.
-# syntax: `<macro> = <definition>`
-[params.math.mathjax.macros]
+# Syntax: `<macro> = <definition>`
+# Example:
+# ```toml
+# [params.math.mathjax.macros]
 # bold = ["{\\bf #1}", 1] # usage: $\bold{math}$
+# ```
+[params.math.mathjax.macros]
 
 # MathJax loader configuration.
 # More loader config e.g source, dependencies, provides etc support.
 [params.math.mathjax.loader]
 load = [ "ui/safe" ]
 
-[params.math.mathjax.loader.paths]
+# Example:
+# ```toml
+# [params.math.mathjax.loader.paths]
 # custom = "https://cdn.jsdelivr.net/gh/sonoisa/XyJax-v3@3.0.1/build/"
+# ```
+[params.math.mathjax.loader.paths]
 
 [params.math.mathjax.options]
 enable_menu = true
@@ -846,10 +878,14 @@ skip_html_tags = [
 ignore_html_class = "mathjax_ignore"
 
 # HTML tags that can appear within math.
-[params.math.mathjax.options.include_html_tags]
+# Example:
+# ```toml
+# [params.math.mathjax.options.include_html_tags]
 # "#comment" = ""
 # br = "\n"
 # wbr = ""
+# ```
+[params.math.mathjax.options.include_html_tags]
 
 # Mapbox GL JS configuration.
 # See: [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js)
@@ -871,14 +907,14 @@ fullscreen = true
 
 # PostChat AI configuration.
 # Based on your posts to build a knowledge base, support AI summary, AI search, and AI Chatbot.
-# See: [HongMoAI](https://ai.zhheo.com/docs/)
+# See: [HongMoAI](https://ai.zhheo.com/docs/).
 # Get PostChat Key from my invitation link, thanks for your support!
 # https://ai.zhheo.com/console/login?InviteID=85041330
 [params.post_chat]
 enable = false
 key = ""
 # How users initiate chats.
-# available values: ["iframe", "magic"]
+# Available values: ["iframe", "magic"]
 user_mode = "iframe"
 add_button = true
 default_input = false
@@ -894,7 +930,7 @@ user_title = ""
 user_desc = ""
 # DOM container to be blacked out, e.g. [".aplayer"]
 black_dom = []
-# only for iframe mode
+# only for iframe mode.
 # Example: "375px"
 frame_width = ""
 # Example: "600px"
@@ -912,7 +948,7 @@ enable = false
 # If you set `params.post_chat.key`, you don't need to set `params.post_summary.key`.
 key = ""
 title = ""
-# available values: ["", "simple", "yanzhi", "menghuan"]
+# Available values: ["", "simple", "yanzhi", "menghuan"]
 theme = ""
 post_url = ""
 blacklist = ""
@@ -932,7 +968,7 @@ enable = false
 enable = false
 count = 5
 # Position of related content.
-# available values: ["aside", "footer"]
+# Available values: ["aside", "footer"]
 position = [
   "aside",
   "footer"
@@ -943,19 +979,24 @@ position = [
 enable = false
 animation = false
 # Position relative to post footer.
-# available values: ["before", "after"]
+# Available values: ["before", "after"]
 position = "after"
-# comment = "Buy me a coffee"
+# Comment text shown near the reward trigger (HTML format is supported).
+comment = "Buy me a coffee"
 # Display mode of QR code images.
-# available values: ["static", "fixed"]
+# Available values: ["static", "fixed"]
 mode = "static"
 
 # Ways to donate (sponsor).
-[params.reward.ways]
+# Example:
+# ```toml
+# [params.reward.ways]
 # wechatpay = "/images/wechatpay.png"
 # alipay = "/images/alipay.png"
 # paypal = "/images/paypal.png"
 # bitcoin = "/images/bitcoin.png"
+# ```
+[params.reward.ways]
 
 # Post footer link configuration.
 [params.post_link]
@@ -1021,7 +1062,7 @@ lightgallery = false
 locale = ""
 emoticons = ""
 nest_max = 2
-# available values: ["DATE_ASC", "DATE_DESC", "VOTE_UP_DESC"]
+# Available values: ["DATE_ASC", "DATE_DESC", "VOTE_UP_DESC"]
 nest_sort = "DATE_ASC"
 vote = true
 vote_down = false
@@ -1029,7 +1070,7 @@ ua_badge = true
 list_sort = true
 list_unread_highlight = false
 img_upload = true
-# available values: [false, "native", "data-src"]
+# Available values: [false, "native", "data-src"]
 img_lazy_load = false
 preview = true
 version_check = true
@@ -1088,7 +1129,7 @@ highlight = true
 enable_qq = false
 server_urls = ""
 # Emoji data file name, default is "google.yml".
-# available values: ["apple.yml", "google.yml", "facebook.yml", "twitter.yml"]
+# Available values: ["apple.yml", "google.yml", "facebook.yml", "twitter.yml"].
 # Located in "themes/FixIt/assets/lib/valine/emoji/" directory.
 # You can store your own data files in the same path under your project:
 # "assets/lib/valine/emoji/".
@@ -1181,7 +1222,7 @@ strict = "0"
 term = ""
 reactions_enabled = "1"
 emit_metadata = "0"
-# available values: ["top", "bottom"]
+# Available values: ["top", "bottom"]
 input_position = "bottom"
 lang = ""
 light_theme = "light"
@@ -1189,16 +1230,19 @@ dark_theme = "dark"
 lazy_load = true
 
 # robots.txt configuration (requires enableRobotsTXT = true).
-[params.robots]
-# Allow AI crawlers (unblock GPTBot/ClaudeBot etc.) + Content-Signal comment + AI hidden hint.
-allow_crawlers = false
 # Custom rules appended to robots.txt (optional).
+#
+# ```toml
 # [[params.robots.rules]]
 # user_agent = "SomeBot"
 # disallow = "/"
 # [[params.robots.rules]]
 # user_agent = "GoodBot"
 # allow = "/"
+# ```
+[params.robots]
+# Allow AI crawlers (unblock GPTBot/ClaudeBot etc.) + Content-Signal comment + AI hidden hint.
+allow_crawlers = false
 
 # Third-party library configuration for some custom CSS and JS files.
 # Files can be loaded from local assets (relative to /assets/) or remote CDN URLs.
@@ -1206,13 +1250,13 @@ allow_crawlers = false
 [params.library]
 
 # Load some CSS from local assets.
-# Example: `someCSS = "css/some.css"`
+# Example: `someCSS = "css/some.css"`.
 # Load some CSS from remote CDN.
 # Example: `someCSS = "https://cdn.example.com/some.css"`
 [params.library.css]
 
 # Load some JS from local assets.
-# Example: `someJS = "js/some.js"`
+# Example: `someJS = "js/some.js"`.
 # Load some JS from remote CDN.
 # Example: `someJS = "https://cdn.example.com/some.js"`
 [params.library.js]
@@ -1226,7 +1270,7 @@ branch = "main"
 # The content directory path relative to the root of the repository.
 dir = "content"
 # The issue template for reporting issue of the posts.
-# available template params: {title} {URL} {sourceURL}
+# Available template params: {title} {URL} {sourceURL}
 issue_tpl = "title=[BUG]%20{title}&body=|Field|Value|%0A|-|-|%0A|Title|{title}|%0A|URL|{URL}|%0A|Filename|{sourceURL}|"
 
 # App and PWA configuration.
@@ -1272,7 +1316,7 @@ type = "image/png"
 [params.search]
 enable = true
 # Type of search engine.
-# available values: ["fuse", "algolia", "pagefind", "cse"]
+# Available values: ["fuse", "algolia", "pagefind", "cse"]
 type = "fuse"
 # Max index length of the chunked content.
 content_length = 4000
@@ -1318,16 +1362,16 @@ debounce_timeout_ms = 300
 # Whether to respect FixIt built-in search visibility rules.
 use_built_in_filters = true
 # Optional sort field.
-# available values: ["date", "title"]
+# Available values: ["date", "title"]
 sort_by = ""
 # Sort order for sort_by.
-# available values: ["asc", "desc"]
+# Available values: ["asc", "desc"]
 sort_order = "desc"
 
 # Custom Search Engine (CSE).
 [params.cse]
 # Search engine.
-# available values: ["google", "bing"]
+# Available values: ["google", "bing"]
 engine = "google"
 # Search results page URL (layout: search).
 results_page = "/search/"
@@ -1345,10 +1389,10 @@ cx = ""
 # Header configuration.
 [params.header]
 # Desktop header mode.
-# available values: ["sticky", "normal", "auto"]
+# Available values: ["sticky", "normal", "auto"]
 desktop_mode = "sticky"
 # Mobile header mode.
-# available values: ["sticky", "normal", "auto"]
+# Available values: ["sticky", "normal", "auto"]
 mobile_mode = "auto"
 # Whether to enable header blur effect.
 blur = false
@@ -1420,7 +1464,7 @@ pre = ""
 value = ""
 
 # Footer lines order.
-# available values: ["first", 0-5, "last"]
+# Available values: ["first", 0-5, "last"]
 [params.footer.order]
 powered = 0
 copyright = 0
@@ -1481,7 +1525,7 @@ max = 32
 # Maximum count of posts per tag.
 peak_count = 10
 # Order of tags.
-# available values: ["name", "count"]
+# Available values: ["name", "count"]
 orderby = "name"
 
 # Home page configuration.
@@ -1518,6 +1562,18 @@ paginate = 6
 image_preview = true
 
 # Social configuration about the author.
+# Custom social links like the following.
+#
+# ```toml
+# [params.social.twitter]
+# id = "lruihao"
+# weight = 3
+# prefix = "https://x.com/"
+# title = "X"
+#
+# [params.social.twitter.icon]
+# class = "fa-brands fa-x-twitter"
+# ```
 [params.social]
 GitHub = ""
 Linkedin = ""
@@ -1609,16 +1665,6 @@ Phone = ""
 Email = ""
 RSS = true
 
-# Custom social links like the following.
-# [params.social.twitter]
-# id = "lruihao"
-# weight = 3
-# prefix = "https://x.com/"
-# title = "X"
-
-# [params.social.twitter.icon]
-# class = "fa-brands fa-x-twitter"
-
 # TypeIt configuration.
 [params.typeit]
 # Typing speed between each step (measured in milliseconds).
@@ -1634,15 +1680,23 @@ loop = false
 
 # Admonitions custom configuration.
 # See: [Custom Admonitions](https://fixit.lruihao.cn/docs/advanced/#custom-admonitions).
-# syntax: `<type> = <icon>`
-[params.admonition]
+# Syntax: `<type> = <icon>`
+# Example:
+# ```toml
+# [params.admonition]
 # ban = "fa-solid fa-ban"
+# ```
+[params.admonition]
 
 # Task lists custom configuration.
 # See: [Custom Task Lists](https://fixit.lruihao.cn/docs/advanced/#custom-task-lists).
-# syntax: `<sign> = <icon>`
-[params.task_list]
+# Syntax: `<sign> = <icon>`
+# Example:
+# ```toml
+# [params.task_list]
 # tip = "fa-regular fa-lightbulb"
+# ```
+[params.task_list]
 
 # Version shortcode configuration.
 [params.repo_version]
@@ -1764,7 +1818,7 @@ link = ""
 # CDN configuration for third-party library files.
 [params.cdn]
 # CDN data file name, disabled by default.
-# available values: ["jsdelivr.yml", "unpkg.yml"]
+# Available values: ["jsdelivr.yml", "unpkg.yml"].
 # Located in "themes/FixIt/assets/data/cdn/" directory.
 # You can store your own data files in the same path under your project: "assets/data/cdn/".
 data = ""
@@ -1782,7 +1836,7 @@ object_fit = false
 enable = false
 permalink = "https://github.com/hugo-fixit/FixIt"
 title = "View source on GitHub"
-# available values: ["start", "end"]
+# Available values: ["start", "end"]
 position = "end"
 
 # Gravatar configuration.
@@ -1790,9 +1844,9 @@ position = "end"
 # Depends on the author's email, if the author's email is not set, the local avatar will be used.
 enable = false
 # Gravatar host, default: "www.gravatar.com".
-# available values: ["cravatar.cn", "gravatar.loli.net", ...]
+# Available values: ["cravatar.cn", "gravatar.loli.net", ...]
 host = "www.gravatar.com"
-# available values: ["", "mp", "identicon", "monsterid", "wavatar", "retro", "blank", "robohash"]
+# Available values: ["", "mp", "identicon", "monsterid", "wavatar", "retro", "blank", "robohash"]
 style = ""
 
 # Back to top.
@@ -1804,9 +1858,9 @@ scrollpercent = false
 # Reading progress bar.
 [params.reading_progress]
 enable = false
-# available values: ["start", "end"]
+# Available values: ["start", "end"]
 start = "start"
-# available values: ["top", "bottom"]
+# Available values: ["top", "bottom"]
 position = "top"
 reversed = false
 light = ""
@@ -1839,14 +1893,9 @@ user_id = ""
 
 # Taxonomy icons configuration.
 # Works with `taxonomies`. Configure `taxonomies` first, otherwise taxonomy icons will not take effect.
+# Syntax: `<taxonomy> = [<title icon>, <card icon>, <term title icon>]`
+# Example: `topic = ["fa-solid fa-book-bookmark", "fa-solid fa-book", "fa-solid fa-book-open"]`
 [params.taxonomy_icons]
-# syntax: `<taxonomy> = [<title icon>, <card icon>, <term title icon>]`
-# example:
-# topic = [
-#   "fa-solid fa-book-bookmark",
-#   "fa-solid fa-book",
-#   "fa-solid fa-book-open"
-# ]
 
 # Print configuration.
 [params.print]

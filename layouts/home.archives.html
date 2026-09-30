@@ -6,60 +6,18 @@
 {{- define "content" -}}
   {{- /* All Posts */ -}}
   {{- $pages := .Site.Store.Get "mainSectionPages" -}}
-
   <div class="page archive">
-    <div class="header">
-      {{- /* Title */ -}}
-      <h1 class="single-title animate__animated animate__pulse animate__faster">
-        {{- dict "Class" "fa-solid fa-box-archive" | partial "plugin/icon.html" -}}
-        <sup class="me-1">{{ $pages.Len }}</sup>
-        {{- .Params.Title | default (T "archives") }}
-      </h1>
-      {{- /* Total word count */ -}}
-      {{- with (partial "function/total-word-count.html" $pages) -}}
-        {{- $humanizedNum := . -}}
-        {{- if ge $humanizedNum 1000 -}}
-          {{- $humanizedNum = printf "%.2fK" (div $humanizedNum 1000.0) -}}
-        {{- end -}}
-        <p class="single-subtitle total-word-count" title="{{- T `section.totalWordCount` . }}">
-          {{- dict "Class" "fa-regular fa-keyboard" | partial "plugin/icon.html" }} {{ T "section.totalWordCount" (dict "Count" $humanizedNum) -}}
-        </p>
-      {{- end -}}
-      {{- /* RSS Feed Link */ -}}
-      {{- partial "plugin/rss-link.html" . -}}
-    </div>
-
-    {{- /* Paginate */ -}}
-    {{- if $pages -}}
-      {{- $pages = $pages.GroupByDate "2006" -}}
-      {{- with .Site.Params.archives.paginate | default .Site.Params.paginate -}}
-        {{- $pages = $.Paginate $pages . -}}
-      {{- else -}}
-        {{- $pages = .Paginate $pages -}}
-      {{- end -}}
-      {{- partial "section/recently-updated.html" . -}}
-      {{- range $pages.PageGroups -}}
-        <h2 class="group-title">
-          {{- dict "Class" "fa-regular fa-calendar me-1" | partial "plugin/icon.html" -}}
-          {{- .Key -}}
-        </h2>
-        {{- range .Pages -}}
-          <article class="archive-item">
-            <a href="{{ .RelPermalink }}" class="archive-item-link">
-              {{- $repost := .Params.repost | default dict -}}
-              {{- if eq $repost.enable true -}}
-                {{- dict "Class" "fa-solid fa-retweet text-success me-1" | partial "plugin/icon.html" -}}
-              {{- end -}}
-              {{- /* Use the original title after archiving the articles */ -}}
-              {{- cond (.Param "capitalize_titles") (title .Title) .Title -}}
-            </a>
-            <span class="archive-item-date" title='{{ "2006-01-02 15:04:05" | .Date.Format }}'>
-              {{- .Date | dateFormat ($.Site.Params.archives.date_format | default "01-02") -}}
-            </span>
-          </article>
-        {{- end -}}
-      {{- end -}}
-      {{- partial "base/paginator.html" . -}}
-    {{- end -}}
+    {{- partial "section/archive-header.html" (dict
+      "Pages" $pages
+      "Title" (.Params.Title | default (T "archives"))
+      "Icon" "fa-solid fa-box-archive"
+    ) -}}
+    {{- partial "section/archive-meta.html" (dict "Page" . "Pages" $pages) -}}
+    {{- partial "section/archive-list.html" (dict
+      "Page" .
+      "Pages" $pages
+      "Paginate" (.Site.Params.archives.paginate | default .Site.Params.paginate)
+      "DateFormat" (.Site.Params.archives.date_format | default "01-02")
+    ) -}}
   </div>
 {{- end -}}

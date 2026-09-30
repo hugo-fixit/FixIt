@@ -42,13 +42,13 @@
     {{- end }}
     {{- range $page := $pages }}
     {{- $fullText := ((.Params.feed | default dict) | merge $.Config ).full_text }}
-    {{- $author := partial "function/get-author-map.html" .Params.author }}
+    {{- $authors := partial "function/get-authors.html" . }}
     {{- $cover := dict "Page" . "Preview" true "Build" true | partial "function/get-cover.html" -}}
     <item>
       <title>{{ .Title }}</title>
       <link>{{ .Permalink }}</link>
       <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
-      {{- with $author.email }}<author>{{ . }}{{ with $author.name }} ({{ . }}){{ end }}</author>{{ end }}
+      {{- range $author := $authors }}{{ with $author.email }}<author>{{ . }}{{ with $author.name }} ({{ . }}){{ end }}</author>{{ end }}{{ end }}
       <guid>{{ .Permalink }}</guid>
       {{- with .GetTerms "categories" }}
       {{- range . }}

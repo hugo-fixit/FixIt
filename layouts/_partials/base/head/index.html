@@ -14,9 +14,11 @@
 {{- $cdn := .Site.Store.Get "cdn" | default dict -}}
 
 {{- /* ========== META: Meta Tags ========== */ -}}
-{{- $author := partial "function/get-author-map.html" .Params.author -}}
+{{- $authors := partial "function/get-authors.html" . -}}
 
-<meta name="author" content="{{ $author.name }}">
+{{- range $i, $author := $authors }}{{ if $i }}
+{{ end }}<meta name="author" content="{{ $author.name }}">
+{{- end }}
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage | and .Summary }}{{ .Summary | plainify }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
 
 {{- /* Robots meta tag: respect page-level robots frontmatter; default to index,follow with max-image-preview:large only when cover exists */ -}}
@@ -218,11 +220,21 @@
 {{- /* Page (Article) Structured Data */ -}}
 {{- else if .IsPage -}}
   {{- $authorName := .Site.Params.author.name | default (T "single.author") -}}
-  {{- with .Params.author -}}
-    {{- if reflect.IsMap . -}}
-      {{- $authorName = cond (isset . "name") .name $authorName -}}
-    {{- else -}}
+  {{- $multiAuthor := false -}}
+  {{- with .Params.authors -}}
+    {{- $multiAuthor = true -}}
+  {{- end -}}
+  {{- if $multiAuthor -}}
+    {{- with (index $authors 0).name -}}
       {{- $authorName = . -}}
+    {{- end -}}
+  {{- else -}}
+    {{- with .Params.author -}}
+      {{- if reflect.IsMap . -}}
+        {{- $authorName = cond (isset . "name") .name $authorName -}}
+      {{- else -}}
+        {{- $authorName = . -}}
+      {{- end -}}
     {{- end -}}
   {{- end -}}
   {{- $seo := dict "Page" . "Key" "seo" | partial "function/param.html" -}}
@@ -303,11 +315,23 @@
         {{- end -}}
       {{- end -}}
     },
+    {{- if and $multiAuthor (gt (len $authors) 1) -}}
+      "author": [
+        {{- range $i, $author := $authors -}}
+          {{- if $i }},{{ end }}
+        {
+          "@type": "Person",
+          "name": {{ $author.name | safeHTML }}
+        }
+        {{- end -}}
+      ],
+    {{- else -}}
     {{- with $authorName -}}
       "author": {
         "@type": "Person",
         "name": {{ . | safeHTML }}
       },
+    {{- end -}}
     {{- end -}}
     "description": {{ .Description | safeHTML }}
   }

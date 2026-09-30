@@ -1,0 +1,39 @@
+{{- /*
+  Get pages by author, plus the author profile (name/registry key).
+  Single pass: also fills missing profile fields from those pages.
+
+  Collects pages that resolve to the given author (registry key / name / legacy
+  `author` fallbacks) and fills missing profile fields (link/email/avatar) from
+  those pages' resolved authors. Also inherits site author fields via get-author.
+
+  @param {Map} . - dict "Name" (String) — author name / registry key (usually .Data.Term), optional "Pages", optional "Size" (Gravatar size, default 240)
+  @returns {Map} "Author" (Map) and "Pages" (Pages collection)
+  @example {{- $term := partial "function/pages-by-author.html" (dict "Name" "Alice") -}}
+*/ -}}
+{{- $term := printf "%v" .Name -}}
+{{- $termSlug := $term | urlize -}}
+{{- $all := .Pages | default site.RegularPages -}}
+{{- $author := partial "function/get-author.html" (dict "Key" $term "Size" (.Size | default "240")) -}}
+{{- $paths := slice -}}
+{{- range $page := $all -}}
+  {{- if $page.Params.author_seed -}}
+    {{- continue -}}
+  {{- end -}}
+  {{- $matched := false -}}
+  {{- range $a := (partial "function/get-authors.html" $page) -}}
+    {{- if or (eq $a.key $term) (eq $a.name $term) (eq ($a.key | urlize) $termSlug) -}}
+      {{- $matched = true -}}
+      {{- range $field := (slice "link" "email" "avatar") -}}
+        {{- if not (index $author $field) -}}
+          {{- with index $a $field -}}
+            {{- $author = dict $field . | merge $author -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $matched -}}
+    {{- $paths = $paths | append $page.Path -}}
+  {{- end -}}
+{{- end -}}
+{{- return (dict "Author" $author "Pages" (where $all "Path" "in" $paths)) -}}

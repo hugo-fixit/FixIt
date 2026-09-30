@@ -1,13 +1,15 @@
 // Archives page styles (section, taxonomy, term)
 @use "sass:meta";
 @use "core/functions" as *;
+@use "core/mixins" as *;
 
 .archive {
-  .header {
+  .archive-header,
+  .archive-meta {
     text-align: end;
   }
 
-  .single-title {
+  .archive-title {
     padding: 1rem 0 0.5rem;
     margin: 0;
     font-size: 1.6rem;
@@ -16,12 +18,11 @@
     text-align: end;
   }
 
-  .single-subtitle {
+  .archive-subtitle {
     margin: 0.5rem 0;
     font-size: 1.2rem;
     font-weight: normal;
     line-height: 100%;
-    text-align: end;
 
     &.total-word-count {
       margin: 0;
@@ -46,4 +47,5 @@
 
   @include meta.load-css('terms');
   @include meta.load-css('tags');
+  @include meta.load-css('author');
 }

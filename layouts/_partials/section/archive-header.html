@@ -1,0 +1,15 @@
+{{- /*
+  Generic archive header: icon + count + title.
+
+  @param {Map} . - dict "Pages", "Title", optional "Icon"
+*/ -}}
+{{- $pages := .Pages -}}
+<div class="archive-header">
+  <h1 class="archive-title animate__animated animate__pulse animate__faster">
+    {{- with .Icon -}}
+      {{- dict "Class" . | partial "plugin/icon.html" -}}
+    {{- end -}}
+    <sup class="me-1">{{ len $pages }}</sup>
+    {{- .Title }}
+  </h1>
+</div>

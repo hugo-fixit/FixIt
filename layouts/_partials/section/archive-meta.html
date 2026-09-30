@@ -1,0 +1,19 @@
+{{- /*
+  Archive meta block: total word count + RSS link.
+
+  @param {Map} . - dict "Page" (context) and "Pages" (page collection)
+*/ -}}
+{{- $page := .Page -}}
+{{- $pages := .Pages -}}
+<div class="archive-meta">
+  {{- with (partial "function/total-word-count.html" $pages) -}}
+    {{- $humanizedNum := . -}}
+    {{- if ge $humanizedNum 1000 -}}
+      {{- $humanizedNum = printf "%.2fK" (div $humanizedNum 1000.0) -}}
+    {{- end -}}
+    <p class="archive-subtitle total-word-count" title="{{- T `section.totalWordCount` . }}">
+      {{- dict "Class" "fa-regular fa-keyboard" | partial "plugin/icon.html" }} {{ T "section.totalWordCount" (dict "Count" $humanizedNum) -}}
+    </p>
+  {{- end -}}
+  {{- partial "plugin/rss-link.html" $page -}}
+</div>

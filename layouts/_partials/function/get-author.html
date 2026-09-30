@@ -1,0 +1,58 @@
+{{- /*
+  Resolve a single author by registry key.
+
+  Looks up hugo.Data.authors[key], applies the language sub-table override,
+  inherits empty fields from site.Params.author when this is the site owner,
+  then applies Gravatar if enabled.
+
+  @param {String|Map} . - Registry key, or map with "Key" and optional "Size" (Gravatar size, default 200)
+  @returns {Map} Author map with keys: key, name, link, email, avatar
+  @example {{- $author := partial "function/get-author.html" "Alice" -}}
+  @example {{- $author := partial "function/get-author.html" (dict "Key" "Alice" "Size" "32") -}}
+*/ -}}
+{{- $key := "" -}}
+{{- $size := "200" -}}
+{{- if reflect.IsMap . -}}
+  {{- $key = printf "%v" (.Key | default "") -}}
+  {{- $size = printf "%v" (.Size | default "200") -}}
+{{- else -}}
+  {{- $key = printf "%v" . -}}
+{{- end -}}
+{{- $fields := slice "name" "link" "email" "avatar" -}}
+{{- $entry := index (hugo.Data.authors | default dict) $key -}}
+{{- if not (reflect.IsMap $entry) -}}
+  {{- $entry = dict -}}
+{{- end -}}
+{{- $author := dict "key" $key "name" $key "link" "" "email" "" "avatar" "" -}}
+{{- range $fields -}}
+  {{- $field := . -}}
+  {{- with index $entry $field -}}
+    {{- $author = dict $field . | merge $author -}}
+  {{- end -}}
+{{- end -}}
+{{- $langTable := index $entry site.Language.Lang | default (index $entry site.Language.Locale) -}}
+{{- if reflect.IsMap $langTable -}}
+  {{- range $fields -}}
+    {{- $field := . -}}
+    {{- with index $langTable $field -}}
+      {{- $author = dict $field . | merge $author -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $siteAuthor := site.Params.author | default dict -}}
+{{- $siteName := $siteAuthor.name | default "" -}}
+{{- if and $siteName (or (eq $key $siteName) (eq $author.name $siteName)) -}}
+  {{- range $fields -}}
+    {{- $field := . -}}
+    {{- if not (index $author $field) -}}
+      {{- with index $siteAuthor $field -}}
+        {{- $author = dict $field . | merge $author -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $gravatar := dict "Email" $author.email "Size" $size | partial "function/get-gravatar.html" -}}
+{{- with $gravatar -}}
+  {{- $author = dict "avatar" . | merge $author -}}
+{{- end -}}
+{{- return $author -}}

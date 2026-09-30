@@ -4,18 +4,13 @@
 {{- end -}}
 
 {{- define "content" -}}
-  {{- $icon := .Params.titleIcon | default (dict "Taxonomy" .Data.Singular "Slot" "term" | partial "function/get-taxonomy-icon.html") -}}
-  {{- $pages := .Pages -}}
-  <div class="page archive">
-    {{- partial "section/archive-header.html" (dict
-      "Pages" $pages
-      "Title" .Title
-      "Icon" $icon
-    ) -}}
-    {{- partial "section/archive-meta.html" (dict "Page" . "Pages" $pages) -}}
+  {{- $term := partial "function/pages-by-author.html" (dict "Name" .Data.Term) -}}
+  <div class="page archive author-archive">
+    {{- partial "section/author-header.html" (dict "Page" . "Pages" $term.Pages "Author" $term.Author) -}}
+    {{- partial "section/archive-meta.html" (dict "Page" . "Pages" $term.Pages) -}}
     {{- partial "section/archive-list.html" (dict
       "Page" .
-      "Pages" $pages
+      "Pages" $term.Pages
       "Paginate" (.Site.Params.list.paginate | default .Site.Params.paginate)
       "DateFormat" (.Site.Params.list.date_format | default "01-02")
     ) -}}

@@ -26,6 +26,12 @@ other = "अभिलेखागार"
 [allSome]
 other = "सभी {{ .Some }}"
 
+[author]
+other = "रचयिता"
+
+[authors]
+other = "रचयिता"
+
 [category]
 other = "श्रेणी"
 

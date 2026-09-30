@@ -25,6 +25,12 @@ other = "Bài viết cũ"
 [allSome]
 other = "Tất cả {{ .Some }}"
 
+[author]
+other = "Tác giả"
+
+[authors]
+other = "Tác giả"
+
 [category]
 other = "Danh mục"
 

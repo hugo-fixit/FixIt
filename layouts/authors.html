@@ -1,0 +1,65 @@
+{{- /*
+  Authors taxonomy cards — computed from get-authors so site-author and legacy
+  `author` fallbacks appear alongside `authors` front-matter terms.
+*/ -}}
+{{- $icon := .Params.cardIcon | default (dict "Taxonomy" .Data.Singular "Slot" "card" | partial "function/get-taxonomy-icon.html") -}}
+{{- $byTerm := dict -}}
+{{- range $p := site.RegularPages -}}
+  {{- if not $p.Params.author_seed -}}
+    {{- range (partial "function/get-authors.html" $p) -}}
+      {{- $term := .key | default .name -}}
+      {{- $pages := index $byTerm $term | default slice -}}
+      {{- if not (in $pages $p) -}}
+        {{- $pages = $pages | append $p -}}
+        {{- $byTerm = merge $byTerm (dict $term $pages) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $termCards := slice -}}
+{{- range $term, $pages := $byTerm -}}
+  {{- $termCards = $termCards | append (dict "Term" $term "Pages" $pages "Count" (len $pages)) -}}
+{{- end -}}
+{{- $termCards = sort $termCards "Count" "desc" -}}
+
+<div class="taxonomy-cards {{ .Data.Plural }}">
+  {{- range $termCards -}}
+    {{- $term := .Term -}}
+    {{- $pages := .Pages -}}
+    {{- $termPage := site.GetPage "taxonomy" (printf "%v/%v" $.Type $term) | default (site.GetPage (printf "/%v/%v" $.Data.Plural ($term | urlize))) -}}
+    <div class="card-item">
+      <div class="card-item-wrapper">
+        <h2 class="card-item-title">
+          {{- if $termPage -}}
+          <a href='{{ partial "function/escapeurl.html" $termPage.RelPermalink }}'>
+            {{- dict "Class" $icon | partial "plugin/icon.html" -}}
+            <sup class="me-1">{{ len $pages }}</sup>
+            {{- $termPage.Title -}}
+          </a>
+          {{- else -}}
+            {{- dict "Class" $icon | partial "plugin/icon.html" -}}
+            <sup class="me-1">{{ len $pages }}</sup>
+            {{- $term -}}
+          {{- end -}}
+        </h2>
+        {{- range first 5 $pages -}}
+          <article class="archive-item">
+            <a href="{{ .RelPermalink }}" class="archive-item-link">
+              {{- $repost := .Params.repost | default dict -}}
+              {{- if eq $repost.enable true -}}
+                {{- dict "Class" "fa-solid fa-retweet text-success me-1" | partial "plugin/icon.html" -}}
+              {{- end -}}
+              {{- cond (.Param "capitalize_titles") (title .LinkTitle) .LinkTitle -}}
+            </a>
+          </article>
+        {{- end -}}
+        {{- if and $termPage (gt (len $pages) 5) -}}
+          <div class="more-post">
+            <a href='{{ partial "function/escapeurl.html" $termPage.RelPermalink }}' class="more-single-link">{{ T "pagination.more" }} >></a>
+          </div>
+        {{- end -}}
+      </div>
+    </div>
+  {{- end -}}
+</div>
+{{- /* EOF */ -}}

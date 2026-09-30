@@ -6,7 +6,7 @@
 {{- define "content" -}}
   {{- $pagefindEnabled := and .Site.Params.search.enable (eq .Site.Params.search.type "pagefind") -}}
   <article class="page single special">
-    <div class="header">
+    <div class="page-header">
       {{- /* Title */ -}}
       <h1 class="single-title animate__animated animate__pulse animate__faster"{{ if $pagefindEnabled }} data-pagefind-body{{ end }}>{{- cond (.Param "capitalize_titles") (title .Title) .Title -}}</h1>
 
