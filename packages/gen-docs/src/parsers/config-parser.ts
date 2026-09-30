@@ -260,30 +260,120 @@ function formatTomlValue(value: unknown): string {
   return '""'
 }
 
+/**
+ * Comment conventions in hugo.toml (kept in sync with this parser):
+ * - Descriptions and examples sit immediately before the config key / table header.
+ * - Simple samples: one line `Example: "value"`.
+ * - Multi-line samples: `Example:` followed by a fenced block.
+ * - Prose lines are joined into a paragraph.
+ * - A bare `key = value` line is rendered as `Example: \`key = value\`.`
+ * - Fenced blocks are kept verbatim; indent to nest under a list item.
+ * - List items start at the marker (`1. ` / `- `); indent continuations under the item.
+ */
 function isExampleLine(line: string): boolean {
-  return /^\s*(?:"[^"]*"|'[^']*'|[\w.-]+)\s*=\s*.+/.test(line)
+  return /^\s*(?:"[^"]*"|'[^']*'|[\w.<>-]+)\s*=\s*.+/.test(line)
+}
+
+function isListItem(line: string): boolean {
+  return /^\s*(?:\d+\.\s|[-*]\s)/.test(line)
+}
+
+function isFence(line: string): boolean {
+  return /^\s*```/.test(line)
 }
 
 function joinComments(comments: string[]): string {
   if (comments.length === 0)
     return ''
-  const filtered = comments.filter(c => c.trim() !== '')
-  if (filtered.length === 0)
-    return ''
-  const sentences = filtered.map((line) => {
-    const trimmed = line.trim()
-    if (isExampleLine(trimmed)) {
-      return `Example: \`${trimmed}\`.`
-    }
-    let s = trimmed
-    if (!s.startsWith('http://') && !s.startsWith('https://')) {
+
+  const parts: string[] = []
+  let prose: string[] = []
+  let fence: string[] | null = null
+  let fenceIndent = ''
+  let listIndent = ''
+
+  const flushProse = () => {
+    if (prose.length === 0)
+      return
+    let s = prose.join(' ').replace(/\s+/g, ' ').trim()
+    if (!s.startsWith('http://') && !s.startsWith('https://') && !s.startsWith('Example:')) {
       s = s.charAt(0).toUpperCase() + s.slice(1)
     }
-    if (!s.endsWith('.') && !s.endsWith('!') && !s.endsWith('?'))
+    if (!/[.!?:]$/.test(s))
       s += '.'
-    return s
-  })
-  return sentences.join(' ')
+    // Continuation lines under a list item stay indented so Markdown nests them
+    if (listIndent) {
+      const last = parts.length - 1
+      if (last >= 0 && isListItem(parts[last].split('\n')[0])) {
+        parts[last] += `\n${listIndent}${s}`
+        prose = []
+        return
+      }
+      listIndent = ''
+    }
+    parts.push(s)
+    prose = []
+  }
+
+  for (const raw of comments) {
+    const trimmed = raw.trim()
+    const indent = (raw.match(/^\s*/) || [''])[0]
+
+    // Fenced code block (``` / ```toml ... ```) is kept verbatim, including indent
+    if (isFence(trimmed)) {
+      if (fence === null) {
+        flushProse()
+        fenceIndent = indent
+        fence = [raw.replace(/\s+$/, '')]
+      }
+      else {
+        fence.push(`${fenceIndent}\`\`\``)
+        parts.push(fence.join('\n'))
+        fence = null
+      }
+      continue
+    }
+    if (fence !== null) {
+      fence.push(raw.replace(/\s+$/, ''))
+      continue
+    }
+
+    if (trimmed === '') {
+      flushProse()
+      continue
+    }
+
+    // Standalone `Example:` label (usually followed by a code fence)
+    if (trimmed === 'Example:' || trimmed === 'Example') {
+      flushProse()
+      parts.push('Example:')
+      continue
+    }
+
+    // Markdown list items: no leading space before the marker
+    if (isListItem(trimmed)) {
+      flushProse()
+      parts.push(trimmed)
+      // Continuations indent to align with list content (e.g. `1. ` → 3 spaces)
+      listIndent = ' '.repeat((trimmed.match(/^(?:\d+\.\s|[-*]\s)/) || ['  '])[0].length)
+      continue
+    }
+
+    // Bare `key = value` sample → Example: `key = value`.
+    if (isExampleLine(trimmed)) {
+      prose.push(`Example: \`${trimmed}\`.`)
+      continue
+    }
+
+    prose.push(trimmed)
+  }
+
+  flushProse()
+  if (fence !== null) {
+    fence.push(`${fenceIndent}\`\`\``)
+    parts.push(fence.join('\n'))
+  }
+  return parts.join('\n\n')
 }
 
 function documentSection(
@@ -399,11 +489,12 @@ function renderChildren(children: ParamDoc[], lines: string[]): void {
   for (const child of children) {
     let meta = `\`${child.type}\``
     const desc = child.description.replace(/\.$/, '')
+    const endPunct = desc.trim().endsWith('```') ? '' : '.'
     if (child.defaultValue && child.type !== 'map') {
-      meta += desc ? ` ${desc}. Default is ${child.defaultValue}.` : ` Default is ${child.defaultValue}.`
+      meta += desc ? ` ${desc}${endPunct} Default is ${child.defaultValue}.` : ` Default is ${child.defaultValue}.`
     }
     else if (desc) {
-      meta += ` ${desc}.`
+      meta += ` ${desc}${endPunct}`
     }
 
     lines.push(child.name)
@@ -414,11 +505,12 @@ function renderChildren(children: ParamDoc[], lines: string[]): void {
       for (const grandchild of child.children) {
         let gcMeta = `\`${grandchild.type}\``
         const gcDesc = grandchild.description.replace(/\.$/, '')
+        const gcEndPunct = gcDesc.trim().endsWith('```') ? '' : '.'
         if (grandchild.defaultValue && grandchild.type !== 'map') {
-          gcMeta += gcDesc ? ` ${gcDesc}. Default is ${grandchild.defaultValue}.` : ` Default is ${grandchild.defaultValue}.`
+          gcMeta += gcDesc ? ` ${gcDesc}${gcEndPunct} Default is ${grandchild.defaultValue}.` : ` Default is ${grandchild.defaultValue}.`
         }
         else if (gcDesc) {
-          gcMeta += ` ${gcDesc}.`
+          gcMeta += ` ${gcDesc}${gcEndPunct}`
         }
         lines.push(`- ${grandchild.name}: ${gcMeta}`)
       }
@@ -432,11 +524,12 @@ function renderParam(doc: ParamDoc): string {
 
   let meta = `\`${doc.type}\``
   const desc = doc.description.replace(/\.$/, '')
+  const endPunct = desc.trim().endsWith('```') ? '' : '.'
   if (doc.defaultValue && doc.type !== 'map') {
-    meta += desc ? ` ${desc}. Default is ${doc.defaultValue}.` : ` Default is ${doc.defaultValue}.`
+    meta += desc ? ` ${desc}${endPunct} Default is ${doc.defaultValue}.` : ` Default is ${doc.defaultValue}.`
   }
   else if (desc) {
-    meta += ` ${desc}.`
+    meta += ` ${desc}${endPunct}`
   }
 
   lines.push(`### ${doc.name}`)

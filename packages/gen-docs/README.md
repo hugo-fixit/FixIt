@@ -52,6 +52,41 @@ Options:
 
 When run without a subcommand, generates both config and partials docs (injects into `en` docs templates).
 
+## hugo.toml Comment Conventions
+
+Config docs are generated from comments in `hugo.toml`. Keep descriptions and examples **immediately before** the config key (or table header) they document.
+
+Simple value sample — one `Example:` line:
+
+```toml
+# FixIt theme version.
+# Example: "0.4.X", "0.4.5", "v1.0.0" etc.
+version = "1.0.X"
+```
+
+Multi-line / map sample — `Example:` then a fenced block (before the key or table header):
+
+```toml
+# MathJax packages config
+# Example:
+# ```
+# [params.math.mathjax.packages]
+# "[+]" = ["configmacros"]
+# ```
+[params.math.mathjax.packages]
+```
+
+Rules consumed by the parser (`joinComments`):
+
+| Comment form | Generated as |
+| --- | --- |
+| Prose lines | One paragraph (joined, capitalized, punctuated) |
+| Explicit `Example: …` on one line | Kept as-is |
+| `Example:` then a fenced block | Label + verbatim code block |
+| Bare `key = "value"` line | Wrapped as Example: `key = "value"`. |
+| Fenced block | Verbatim code block (indent to nest under a list item) |
+| `1. ` / `- ` list | Markdown list; indent continuations under the item |
+
 ## Architecture
 
 ```text
