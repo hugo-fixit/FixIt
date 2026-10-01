@@ -14,21 +14,22 @@
 	var GREEK_AND_COPTIC = "Ͱ-Ͽ";
 	var LATIN_1_SUPPLEMENT_AFTER_NBSP = "¡-ÿ";
 	var NUMBER_FORMS = "⅐-↏";
+	var LETTERLIKE_SYMBOLS = "℀-⅏";
 	var DINGBATS = "✀-➿";
+	var SUPERSCRIPT_SUFFIXES = "®²³¹⁰ⁱ⁴-⁼⁾ⁿ℠™";
 	var CJK = `${CJK_RADICALS_SUPPLEMENT}${KANGXI_RADICALS}${HIRAGANA}${KATAKANA_NO_MIDDLE_DOT}${BOPOMOFO}${ENCLOSED_CJK_LETTERS_AND_MONTHS}${CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A}${CJK_UNIFIED_IDEOGRAPHS}${CJK_COMPATIBILITY_IDEOGRAPHS}`;
 	var AN = "A-Za-z0-9";
 	var A = "A-Za-z";
 	var UPPER_AN = "A-Z0-9";
-	var OPERATORS_WITH_HYPHEN = `\\+\\*=&\\-`;
-	var OPERATORS_NO_PLUS = "\\*=&\\-";
+	var OPERATORS = "\\*=&\\-";
 	var GRADE_OPERATORS = "\\+\\-\\*";
 	var QUOTES = "`\"״";
 	var LEFT_BRACKETS_BASIC = "\\(\\[\\{";
 	var RIGHT_BRACKETS_BASIC = "\\)\\]\\}";
 	var LEFT_BRACKETS_EXTENDED = "\\(\\[\\{<>“";
 	var RIGHT_BRACKETS_EXTENDED = "\\)\\]\\}<>”";
-	var ANS_CJK_AFTER = `${A}${GREEK_AND_COPTIC}0-9@\\$%\\^&\\*\\-\\+\\\\=${LATIN_1_SUPPLEMENT_AFTER_NBSP}${NUMBER_FORMS}${DINGBATS}`;
-	var ANS_BEFORE_CJK = `${A}${GREEK_AND_COPTIC}0-9\\$%\\^&\\*\\-\\+\\\\=${LATIN_1_SUPPLEMENT_AFTER_NBSP}${NUMBER_FORMS}${DINGBATS}`;
+	var ANS_CJK_AFTER = `${A}${GREEK_AND_COPTIC}0-9@\\$%\\^&\\*\\-\\+\\\\=${LATIN_1_SUPPLEMENT_AFTER_NBSP}${NUMBER_FORMS}${DINGBATS}${LETTERLIKE_SYMBOLS}`;
+	var ANS_BEFORE_CJK = `${A}${GREEK_AND_COPTIC}0-9\\$%\\^&\\*\\-\\+\\\\=${LATIN_1_SUPPLEMENT_AFTER_NBSP}${NUMBER_FORMS}${DINGBATS}${LETTERLIKE_SYMBOLS}${SUPERSCRIPT_SUFFIXES}`;
 	var FILE_PATH_DIRS = "home|root|usr|etc|var|opt|tmp|dev|mnt|proc|sys|bin|boot|lib|media|run|sbin|srv|node_modules|path|project|src|dist|test|tests|docs|templates|assets|public|static|config|scripts|tools|build|out|target|your|\\.claude|\\.git|\\.vscode";
 	var FILE_PATH_CHARS = "[A-Za-z0-9_\\-\\.@\\+\\*]+";
 	var UNIX_ABSOLUTE_FILE_PATH = new RegExp(`/(?:\\.?(?:${FILE_PATH_DIRS})|\\.(?:[A-Za-z0-9_\\-]+))(?:/${FILE_PATH_CHARS})*`);
@@ -42,8 +43,8 @@
 	var CJK_PERIOD = new RegExp(`([${CJK}])(\\.)(?![${AN}\\./])(?=[${CJK}${AN}])`, "g");
 	var AN_PERIOD_CJK = new RegExp(`([${AN}])(\\.)([${CJK}])`, "g");
 	var AN_COLON_CJK = new RegExp(`([${AN}])(:)([${CJK}])`, "g");
-	var DOTS_CJK = new RegExp(`([\\.]{2,}|\u2026)([${CJK}])`, "g");
 	var FIX_CJK_COLON_ANS = new RegExp(`([${CJK}])\\:([${UPPER_AN}\\(\\)])`, "g");
+	var DOTS_CJK = new RegExp(`([\\.]{2,}|\u2026)([${CJK}])`, "g");
 	var CJK_QUOTE = new RegExp(`([${CJK}])([${QUOTES}])`, "g");
 	var QUOTE_CJK = new RegExp(`([${QUOTES}])([${CJK}])`, "g");
 	var FIX_QUOTE_ANY_QUOTE = new RegExp(`([${QUOTES}]+)[ ]*([\\s\\S]+?)[ ]*([${QUOTES}]+)`, "g");
@@ -55,21 +56,23 @@
 	var SINGLE_QUOTE_PURE_CJK = new RegExp(`(')([${CJK}]+)(')`, "g");
 	var HASH_ANS_CJK_HASH = new RegExp(`([${CJK}])(#)([${CJK}]+)(#)([${CJK}])`, "g");
 	var CJK_HASH = new RegExp(`([${CJK}])(#([^ \\u00a0]))`, "g");
-	var HASH_CJK = new RegExp(`(([^ \\u00a0])#)([${CJK}])`, "g");
-	var CJK_FINAL_HASHTAG = new RegExp(`([^/])([${CJK}])(#[A-Za-z0-9]+)$`);
-	var CJK_OPERATOR_ANS = new RegExp(`([${CJK}])([${OPERATORS_WITH_HYPHEN}])([${AN}])`, "g");
-	var ANS_OPERATOR_CJK = new RegExp(`([${AN}${RIGHT_BRACKETS_BASIC}])([${OPERATORS_NO_PLUS}])([${CJK}])`, "g");
-	var CJK_SLASH_CJK = new RegExp(`([${CJK}])([/])([${CJK}])`, "g");
-	var CJK_SLASH_ANS = new RegExp(`([${CJK}])([/])([${AN}])`, "g");
-	var ANS_SLASH_CJK = new RegExp(`([${AN}])([/])([${CJK}])`, "g");
+	var HASH_CJK = new RegExp(`(([^ \\u00a0/])#)([${CJK}])`, "g");
+	var NAME_SUFFIX = `(?:(?<![A-Za-z0-9])(?:(?:Apple TV|CATCHPLAY|[Dd]iscovery|Disney|ESPN|Fitness|iCloud|mo ?店|Paramount|PS|Pro)\\+|(?:(?:tw)?(?:AA|BBB|BB|CCC)|tw[AB]|AB|RhD|Rh)[+-])|(?:公視|影劇館)\\+)`;
+	var NAME_SUFFIX_AT_END = new RegExp(`${NAME_SUFFIX}$`);
+	var CLOSING_AFTER_SUFFIX = /[/)\]}\uff09\u3011\u3015\u3009\u300b\u300d\u300f\uff0c\u3002\u3001\uff1b\uff1a\uff01\uff1f]/;
+	var CJK_OPERATOR_ANS = new RegExp(`([${CJK}])(?!\\*\\[)([${OPERATORS}])([${AN}${LEFT_BRACKETS_BASIC}])`, "g");
+	var ANS_OPERATOR_CJK = new RegExp(`([${AN}${RIGHT_BRACKETS_BASIC}])([${OPERATORS}])(?<!${NAME_SUFFIX})([${CJK}])`, "g");
+	var HYPHEN_CJK_CONTACT = new RegExp(`[${CJK}]\\-|\\-[${CJK}]`);
+	var HYPHEN_SEPARATOR = new RegExp(`(?<=[${RIGHT_BRACKETS_BASIC}])\\-(?=[${LEFT_BRACKETS_BASIC}])`, "g");
 	var PIPE_CJK_CONTACT = new RegExp(`[${CJK}]\\||\\|[${CJK}]`);
 	var PIPE_SEPARATOR = /([^\s|])[ ]*(\|+)[ ]*(?=[^\s|])/g;
 	var PLUS_CJK_CONTACT = new RegExp(`[${CJK}]\\+|\\+[${CJK}]`);
-	var PLUS_SEPARATOR = /(?<=[^\s+])\+(?=[^\s+])/g;
+	var PLUS_SEPARATOR = /(?<=[^\s+\uff0c\u3002\uff1b\uff1a\uff01\uff1f\u3001\uff08\uff09\u300c\u300d\u300e\u300f\u3010\u3011\u300a\u300b])\+(?=[^\s+\uff0c\u3002\uff1b\uff1a\uff01\uff1f\u3001\uff08\uff09\u300c\u300d\u300e\u300f\u3010\u3011\u300a\u300b])/g;
+	var RIGHT_BRACKET_PLUS_FULL_WIDTH_LEFT_BRACKET = new RegExp(`(?<=[${RIGHT_BRACKETS_BASIC}])\\+(?=[\\uff08\\u300c\\u300e\\u3010\\u300a])`, "g");
 	var SINGLE_LETTER_GRADE_CJK = new RegExp(`\\b([${A}])([${GRADE_OPERATORS}])([${CJK}])`, "g");
 	var CJK_SIGN_DIGIT = new RegExp(`([${CJK}])(\\+)([0-9])`, "g");
 	var CJK_HYPHEN_FLAG = new RegExp(`([${CJK}])(\\-)([a-z])\\b`, "g");
-	var AN_PLUS_CJK = new RegExp(`([${AN}])(\\+)([${CJK}])`, "g");
+	var DIGIT_PLUS_CJK = new RegExp(`\\b([0-9]+)(\\+)([${CJK}])`, "g");
 	var CJK_LESS_THAN = new RegExp(`([${CJK}])(<)([${AN}])`, "g");
 	var LESS_THAN_CJK = new RegExp(`([${AN}])(<)([${CJK}])`, "g");
 	var CJK_GREATER_THAN = new RegExp(`([${CJK}])(>)([${AN}])`, "g");
@@ -86,10 +89,11 @@
 	var CJK_WINDOWS_PATH = new RegExp(`([${CJK}])(${WINDOWS_FILE_PATH.source})`, "g");
 	var UNIX_ABSOLUTE_FILE_PATH_SLASH_CJK = new RegExp(`(${UNIX_ABSOLUTE_FILE_PATH.source}/)([${CJK}])`, "g");
 	var UNIX_RELATIVE_FILE_PATH_SLASH_CJK = new RegExp(`(${UNIX_RELATIVE_FILE_PATH.source}/)([${CJK}])`, "g");
-	var CJK_ANS = new RegExp(`([${CJK}])([${ANS_CJK_AFTER}])`, "g");
+	var CJK_ANS = new RegExp(`([${CJK}])(?![${SUPERSCRIPT_SUFFIXES}])([${ANS_CJK_AFTER}])(?<!${NAME_SUFFIX})`, "g");
 	var ANS_CJK = new RegExp(`([${ANS_BEFORE_CJK}])([${CJK}])`, "g");
 	var S_A = new RegExp(`(%)([${A}])`, "g");
-	var MIDDLE_DOT = /([ ]*)([\u00b7\u2022\u2027])([ ]*)/g;
+	var COPYRIGHT_DIGIT = /(\u00a9)([0-9])/g;
+	var MIDDLE_DOT = /(?<![ \u00a0\u00b7\u2022\u2027])[\u00b7\u2022\u2027](?![ \u00a0\u00b7\u2022\u2027])/g;
 	var VOID_HTML_TAGS = /* @__PURE__ */ new Set([
 		"area",
 		"base",
@@ -108,8 +112,11 @@
 	]);
 	var BARE_HTML_TAG = /^<([a-zA-Z][a-zA-Z0-9]*)\s*\/?>$/;
 	var CLOSING_HTML_TAG = /<\/([a-zA-Z][a-zA-Z0-9]*)/g;
-	var CJK_HTML_TAG_MENTION = new RegExp(`([${CJK}])(?=\uE002)`, "g");
-	var HTML_TAG_MENTION_CJK = new RegExp(`(?<=\uE003)([${CJK}])`, "g");
+	var CJK_HTML_TAG_MENTION = new RegExp(`([${CJK}])(?=\uE004)`, "g");
+	var HTML_TAG_MENTION_CJK = new RegExp(`(?<=\uE005)([${CJK}])`, "g");
+	var HTTP_URL = /(?<![A-Za-z0-9])https?:\/\/[^\s<>"`\u3000-\u303f\uff00-\uffef\u2018\u2019\u201c\u201d\u2026\ue000-\uf8ff]+/g;
+	var HTTP_URL_TRAILING_PUNCTUATION = /[.,;:!?'"]+$/;
+	var CJK_HTTP_URL = new RegExp(`([${CJK}])(?=\uE00A)`, "g");
 	var BRACKET_PATTERNS = [
 		{
 			pattern: /<([^<>]*)>/g,
@@ -166,23 +173,25 @@
 		}
 	};
 	var Pangu = class {
-		version;
-		constructor() {
-			this.version = "9.1.1";
-		}
-		spacingText(text) {
+		version = "10.4.1";
+		spaceText(text) {
 			if (typeof text !== "string") {
-				console.warn(`spacingText(text) only accepts string but got ${typeof text}`);
+				console.warn(`[pangu] spaceText(text) only accepts string but got ${typeof text}`);
 				return text;
 			}
 			if (text.length <= 1 || !ANY_CJK.test(text)) return text;
 			let newText = text;
-			const backtickManager = new PlaceholderReplacer("BACKTICK_CONTENT_", "", "");
+			const backtickManager = new PlaceholderReplacer("BACKTICK_CONTENT_", "", "");
 			newText = newText.replace(/`([^`]+)`/g, (_match, content) => {
 				return `\`${backtickManager.store(content)}\``;
 			});
-			const htmlTagManager = new PlaceholderReplacer("HTML_TAG_PLACEHOLDER_", "", "");
-			const mentionedTagManager = new PlaceholderReplacer("HTML_TAG_MENTION_", "", "");
+			const urlManager = new PlaceholderReplacer("HTTP_URL_PLACEHOLDER_", "", "");
+			newText = newText.replace(HTTP_URL, (match) => {
+				const url = this.trimHttpUrl(match);
+				return urlManager.store(url) + match.slice(url.length);
+			});
+			const htmlTagManager = new PlaceholderReplacer("HTML_TAG_PLACEHOLDER_", "", "");
+			const mentionedTagManager = new PlaceholderReplacer("HTML_TAG_MENTION_", "", "");
 			let hasHtmlTags = false;
 			if (newText.includes("<")) {
 				hasHtmlTags = true;
@@ -196,11 +205,12 @@
 						if (!VOID_HTML_TAGS.has(tagName) && !closedTagNames.has(tagName)) return mentionedTagManager.store(match);
 					}
 					const processedTag = match.replace(/(\w+)="([^"]*)"/g, (_attrMatch, attrName, attrValue) => {
-						return `${attrName}="${this.spacingText(attrValue)}"`;
+						return `${attrName}="${this.spaceText(attrValue)}"`;
 					});
 					return htmlTagManager.store(processedTag);
 				});
 			}
+			newText = newText.replace(MIDDLE_DOT, "・");
 			newText = newText.replace(DOTS_CJK, "$1 $2");
 			newText = newText.replace(CJK_PUNCTUATION, "$1$2 ");
 			newText = newText.replace(PUNCTUATION_CJK, "$1 ");
@@ -216,7 +226,7 @@
 			newText = newText.replace(QUOTE_AN, "$1 $2");
 			newText = newText.replace(CJK_QUOTE_AN, "$1$2 $3");
 			newText = newText.replace(FIX_POSSESSIVE_SINGLE_QUOTE, "$1's");
-			const singleQuoteCJKManager = new PlaceholderReplacer("SINGLE_QUOTE_CJK_PLACEHOLDER_", "", "");
+			const singleQuoteCJKManager = new PlaceholderReplacer("SINGLE_QUOTE_CJK_PLACEHOLDER_", "", "");
 			newText = newText.replace(SINGLE_QUOTE_PURE_CJK, (match) => {
 				return singleQuoteCJKManager.store(match);
 			});
@@ -224,21 +234,23 @@
 			newText = newText.replace(SINGLE_QUOTE_CJK, "$1 $2");
 			newText = singleQuoteCJKManager.restore(newText);
 			if (newText.length >= 5) newText = newText.replace(HASH_ANS_CJK_HASH, "$1 $2$3$4 $5");
-			newText = newText.split("\n").map((line) => {
-				if ((line.match(/\//g) || []).length <= 1) {
-					line = line.replace(CJK_HASH, "$1 $2");
-					line = line.replace(HASH_CJK, "$1 $3");
-				} else line = line.replace(CJK_FINAL_HASHTAG, "$1$2 $3");
-				return line;
-			}).join("\n");
-			const compoundWordManager = new PlaceholderReplacer("COMPOUND_WORD_PLACEHOLDER_", "", "");
+			newText = newText.replace(CJK_HASH, "$1 $2");
+			newText = newText.replace(HASH_CJK, "$1 $3");
+			const compoundWordManager = new PlaceholderReplacer("COMPOUND_WORD_PLACEHOLDER_", "", "");
 			newText = newText.replace(/\b(?:[A-Za-z0-9]*[a-z][A-Za-z0-9]*-[A-Za-z0-9]+|[A-Za-z0-9]+-[A-Za-z0-9]*[a-z][A-Za-z0-9]*|[A-Za-z]+-[0-9]+|[A-Za-z]+[0-9]+-[A-Za-z0-9]+)(?:-[A-Za-z0-9]+)*\b/g, (match) => {
 				return compoundWordManager.store(match);
 			});
 			newText = newText.replace(SINGLE_LETTER_GRADE_CJK, "$1$2 $3");
 			newText = newText.replace(CJK_SIGN_DIGIT, "$1 $2$3");
 			newText = newText.replace(CJK_HYPHEN_FLAG, "$1 $2$3");
-			newText = newText.replace(AN_PLUS_CJK, "$1$2 $3");
+			newText = newText.replace(DIGIT_PLUS_CJK, "$1$2 $3");
+			newText = newText.split("\n").map((line) => {
+				return (PLUS_CJK_CONTACT.test(line) ? line.replace(PLUS_SEPARATOR, (_match, offset) => {
+					if (!NAME_SUFFIX_AT_END.test(compoundWordManager.restore(line.slice(0, offset + 1)))) return " + ";
+					return CLOSING_AFTER_SUFFIX.test(line[offset + 1] ?? "") ? "+" : "+ ";
+				}) : line).replace(RIGHT_BRACKET_PLUS_FULL_WIDTH_LEFT_BRACKET, " +");
+			}).join("\n");
+			newText = newText.split("\n").map((line) => HYPHEN_CJK_CONTACT.test(line) ? line.replace(HYPHEN_SEPARATOR, " - ") : line).join("\n");
 			newText = newText.replace(CJK_OPERATOR_ANS, "$1 $2 $3");
 			newText = newText.replace(ANS_OPERATOR_CJK, "$1 $2 $3");
 			newText = newText.replace(CJK_LESS_THAN, "$1 $2 $3");
@@ -251,19 +263,8 @@
 			newText = newText.replace(UNIX_ABSOLUTE_FILE_PATH_SLASH_CJK, "$1 $2");
 			newText = newText.replace(UNIX_RELATIVE_FILE_PATH_SLASH_CJK, "$1 $2");
 			newText = newText.split("\n").map((line) => {
-				if ((line.match(/\//g) || []).length !== 1) return line;
-				line = line.replace(CJK_SLASH_CJK, "$1 $2 $3");
-				line = line.replace(CJK_SLASH_ANS, "$1 $2 $3");
-				line = line.replace(ANS_SLASH_CJK, "$1 $2 $3");
-				return line;
-			}).join("\n");
-			newText = newText.split("\n").map((line) => {
 				if (!PIPE_CJK_CONTACT.test(line)) return line;
 				return line.replace(PIPE_SEPARATOR, "$1 $2 ");
-			}).join("\n");
-			newText = newText.split("\n").map((line) => {
-				if (!PLUS_CJK_CONTACT.test(line)) return line;
-				return line.replace(PLUS_SEPARATOR, " + ");
 			}).join("\n");
 			newText = newText.replace(FIX_QUOTE_ANY_QUOTE, "$1$2$3");
 			newText = compoundWordManager.restore(newText);
@@ -277,7 +278,7 @@
 			newText = newText.replace(CJK_ANS, "$1 $2");
 			newText = newText.replace(ANS_CJK, "$1 $2");
 			newText = newText.replace(S_A, "$1 $2");
-			newText = newText.replace(MIDDLE_DOT, "・");
+			newText = newText.replace(COPYRIGHT_DIGIT, "$1 $2");
 			newText = this.fixBracketSpacing(newText);
 			if (hasHtmlTags) {
 				newText = newText.replace(CJK_HTML_TAG_MENTION, "$1 ");
@@ -285,11 +286,26 @@
 				newText = mentionedTagManager.restore(newText);
 				newText = htmlTagManager.restore(newText);
 			}
+			newText = newText.replace(CJK_HTTP_URL, "$1 ");
+			newText = urlManager.restore(newText);
 			newText = backtickManager.restore(newText);
 			return newText;
 		}
 		hasProperSpacing(text) {
-			return this.spacingText(text) === text;
+			return this.spaceText(text) === text;
+		}
+		trimHttpUrl(url) {
+			let unbalancedClosingParentheses = (url.match(/\)/g) ?? []).length - (url.match(/\(/g) ?? []).length;
+			for (;;) {
+				const trimmed = url.replace(HTTP_URL_TRAILING_PUNCTUATION, "");
+				if (trimmed.endsWith(")") && unbalancedClosingParentheses > 0) {
+					unbalancedClosingParentheses--;
+					url = trimmed.slice(0, -1);
+					continue;
+				}
+				if (trimmed === url) return url;
+				url = trimmed;
+			}
 		}
 		fixBracketSpacing(text) {
 			for (const { pattern, open, close } of BRACKET_PATTERNS) text = text.replace(pattern, (_match, innerContent) => {
@@ -302,37 +318,36 @@
 	};
 	var pangu$1 = new Pangu();
 	//#endregion
-	//#region src/browser/boundary-spacing.ts
+	//#region src/browser/dom/boundary-spacing.ts
 	var QUOTE = /["\u201c\u201d]/;
-	function decideBoundarySpacing(context) {
-		if (context.spaceLikeSiblingAfterCurrent) return "none";
-		if (context.currentEndsWithSpace || context.nextStartsWithSpace || context.whitespaceBetween) return "none";
-		if (context.contentBetween) return "none";
-		if (!needsBoundarySpace(context.currentTail, context.nextFirst)) return "none";
-		if (context.spaceLikeSiblingAfterCurrentBoundary || context.currentBoundaryIsBlock) return "none";
-		if (!context.nextBoundaryIsSpaceSensitive) {
-			if (context.nextBoundaryIsIgnored || context.nextBoundaryIsBlock || context.spaceLikeSiblingBeforeNext || context.hiddenBoundaryBefore()) return "none";
+	function decideBoundarySpacing(boundarySpacingContext) {
+		if (boundarySpacingContext.currentEndsWithSpace || boundarySpacingContext.nextStartsWithSpace || boundarySpacingContext.whitespaceBetween || boundarySpacingContext.spaceLikeBetween) return "none";
+		if (boundarySpacingContext.contentBetween) return "none";
+		if (!needsBoundarySpace(boundarySpacingContext.currentTail, boundarySpacingContext.nextFirst)) return "none";
+		if (boundarySpacingContext.blockEdgeBetween) return "none";
+		if (!boundarySpacingContext.nextBoundaryIsSpaceSensitive) {
+			if (boundarySpacingContext.nextBoundaryIsIgnored || boundarySpacingContext.precedingNodeHidden()) return "none";
 			return "prepend-next";
 		}
-		if (!context.currentBoundaryIsSpaceSensitive) {
-			if (context.hiddenBoundaryAfter()) return "none";
+		if (!boundarySpacingContext.currentBoundaryIsSpaceSensitive) {
+			if (boundarySpacingContext.currentNodeHidden() || boundarySpacingContext.nextNodeHidden()) return "none";
 			return "append-current";
 		}
-		if (context.spaceLikeSiblingBeforeNextBoundary || context.hiddenBoundaryAfter()) return "none";
-		if (context.inGridOrFlexContainer()) return "none";
+		if (boundarySpacingContext.currentNodeHidden() || boundarySpacingContext.nextNodeHidden()) return "none";
+		if (boundarySpacingContext.inGridOrFlexContainer()) return "none";
 		return "insert-element";
 	}
-	function decideTextRunSpacing(context) {
-		const verdicts = [];
-		let { text } = context;
-		if (text.startsWith(" ") && context.hiddenBoundaryBefore()) {
-			verdicts.push("trim-leading-space");
+	function decideTextNodeSpacing(textNodeSpacingContext) {
+		const textNodeSpacingDecisions = [];
+		let { text } = textNodeSpacingContext;
+		if (text.startsWith(" ") && textNodeSpacingContext.precedingNodeHidden()) {
+			textNodeSpacingDecisions.push("trim-leading-space");
 			text = text.substring(1);
 		}
 		if (isStandaloneQuote(text)) {
-			if (context.previousElementLastChar !== null && ANY_CJK.test(context.previousElementLastChar)) verdicts.push("prepend-space");
-		} else verdicts.push("apply-text-spacing");
-		return verdicts;
+			if (textNodeSpacingContext.previousElementLastChar !== null && ANY_CJK.test(textNodeSpacingContext.previousElementLastChar)) textNodeSpacingDecisions.push("prepend-space");
+		} else textNodeSpacingDecisions.push("apply-text-spacing");
+		return textNodeSpacingDecisions;
 	}
 	var spacedJunctionCache = /* @__PURE__ */ new Map();
 	var SPACED_JUNCTION_CACHE_MAX = 4096;
@@ -340,7 +355,7 @@
 		const junction = `${currentTail}${nextFirst}`;
 		const cached = spacedJunctionCache.get(junction);
 		if (cached !== void 0) return cached;
-		const spacedJunction = pangu$1.spacingText(junction);
+		const spacedJunction = pangu$1.spaceText(junction);
 		if (spacedJunctionCache.size >= SPACED_JUNCTION_CACHE_MAX) spacedJunctionCache.clear();
 		spacedJunctionCache.set(junction, spacedJunction);
 		return spacedJunction;
@@ -355,33 +370,32 @@
 		return spacedTail === currentTail ? null : spacedTail;
 	}
 	function isQuoteNextToCjk(currentLast, nextFirst) {
-		return QUOTE.test(currentLast) && ANY_CJK.test(nextFirst) || ANY_CJK.test(currentLast) && QUOTE.test(nextFirst);
+		return QUOTE.test(currentLast) && ANY_CJK.test(nextFirst) || ANY_CJK.test(currentLast) && /["\u201d]/.test(nextFirst);
 	}
 	function isStandaloneQuote(text) {
 		return text.length === 1 && QUOTE.test(text);
 	}
 	//#endregion
-	//#region src/browser/dom-walker.ts
+	//#region src/browser/dom/dom-walker.ts
 	var DomWalker = class {
-		static blockTags = /^(div|p|h1|h2|h3|h4|h5|h6)$/i;
-		static ignoredTags = /^(code|pre|script|style|textarea|iframe|input)$/i;
-		static spaceLikeTags = /^(br|hr|i|img|pangu)$/i;
-		static spaceSensitiveTags = /^(a|del|pre|s|strike|u)$/i;
 		static ignoredClass = "no-pangu-spacing";
-		static collectTextNodes(contextNode, reverse = false) {
+		static ignoredTags = /^(code|pre|script|style|textarea|iframe|input)$/i;
+		static blockTags = /^(div|p|h1|h2|h3|h4|h5|h6)$/i;
+		static spaceLikeTags = /^(br|hr|i|img|pangu)$/i;
+		static spaceSensitiveTags = /^(a|del|i|pre|s|strike|u)$/i;
+		static collectTextNodes(root, reverse = false) {
 			const nodes = [];
-			if (!contextNode || contextNode instanceof DocumentFragment) return nodes;
-			const walker = document.createTreeWalker(contextNode, NodeFilter.SHOW_TEXT, { acceptNode: (node) => {
-				if (!node.nodeValue || !/\S/.test(node.nodeValue)) return NodeFilter.FILTER_REJECT;
-				let currentNode = node;
-				while (currentNode) {
-					if (currentNode instanceof Element && this.isIgnoredElement(currentNode)) return NodeFilter.FILTER_REJECT;
-					currentNode = currentNode.parentNode;
-				}
-				return NodeFilter.FILTER_ACCEPT;
-			} });
+			if (!root || root instanceof DocumentFragment) return nodes;
+			const walker = this.createTextWalker(root);
 			while (walker.nextNode()) nodes.push(walker.currentNode);
 			return reverse ? nodes.reverse() : nodes;
+		}
+		static findAdjacentTextNode(textNode, direction) {
+			let root = textNode;
+			while (root.parentNode && root !== document.body && !this.blockTags.test(root.nodeName)) root = root.parentNode;
+			const walker = this.createTextWalker(root);
+			walker.currentNode = textNode;
+			return direction === "previous" ? walker.previousNode() : walker.nextNode();
 		}
 		static findBoundaryNode(textNode, edge) {
 			let node = textNode;
@@ -401,6 +415,20 @@
 			}
 			return false;
 		}
+		static createTextWalker(root) {
+			return document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: (node) => {
+				if (!node.nodeValue || !/\S/.test(node.nodeValue)) return NodeFilter.FILTER_REJECT;
+				return this.isIgnoredNode(node) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+			} });
+		}
+		static isIgnoredNode(node) {
+			let currentNode = node;
+			while (currentNode) {
+				if (currentNode instanceof Element && this.isIgnoredElement(currentNode)) return true;
+				currentNode = currentNode.parentNode;
+			}
+			return false;
+		}
 		static isIgnoredElement(element) {
 			return this.ignoredTags.test(element.nodeName) || this.isContentEditable(element) || element.classList.contains(this.ignoredClass);
 		}
@@ -409,7 +437,63 @@
 		}
 	};
 	//#endregion
-	//#region src/browser/task-scheduler.ts
+	//#region src/browser/dom/visibility-detector.ts
+	var VisibilityDetector = class {
+		cache = /* @__PURE__ */ new WeakMap();
+		clearCache() {
+			this.cache = /* @__PURE__ */ new WeakMap();
+		}
+		isElementVisuallyHidden(element) {
+			const style = getComputedStyle(element);
+			if (style.display === "none") return true;
+			if (style.visibility === "hidden") return true;
+			if (parseFloat(style.opacity) === 0) return true;
+			const clip = style.clip;
+			if (clip && (clip.includes("rect(1px, 1px, 1px, 1px)") || clip.includes("rect(0px, 0px, 0px, 0px)") || clip.includes("rect(0, 0, 0, 0)"))) return true;
+			if (style.overflow === "hidden" && style.position === "absolute") {
+				const height = parseInt(style.height, 10);
+				const width = parseInt(style.width, 10);
+				if (height === 1 && width === 1) return true;
+			}
+			return false;
+		}
+		shouldSkipSpacingAfterNode(node) {
+			let elementToCheck = null;
+			if (node instanceof Element) elementToCheck = node;
+			else if (node.parentElement) elementToCheck = node.parentElement;
+			if (elementToCheck && this.isElementVisuallyHiddenCached(elementToCheck)) return true;
+			let currentElement = elementToCheck?.parentElement;
+			while (currentElement) {
+				if (this.isElementVisuallyHiddenCached(currentElement)) return true;
+				currentElement = currentElement.parentElement;
+			}
+			return false;
+		}
+		shouldSkipSpacingBeforeNode(node) {
+			let previousNode = node.previousSibling;
+			if (!previousNode && node.parentElement) {
+				let parent = node.parentElement;
+				while (parent && !previousNode) {
+					previousNode = parent.previousSibling;
+					if (!previousNode) parent = parent.parentElement;
+				}
+			}
+			if (previousNode) {
+				if (previousNode instanceof Element && this.isElementVisuallyHiddenCached(previousNode)) return true;
+				else if (previousNode instanceof Text && previousNode.parentElement && this.isElementVisuallyHiddenCached(previousNode.parentElement)) return true;
+			}
+			return false;
+		}
+		isElementVisuallyHiddenCached(element) {
+			const cached = this.cache.get(element);
+			if (cached !== void 0) return cached;
+			const hidden = this.isElementVisuallyHidden(element);
+			this.cache.set(element, hidden);
+			return hidden;
+		}
+	};
+	//#endregion
+	//#region src/browser/scheduling/task-scheduler.ts
 	var TaskQueue = class {
 		queue = [];
 		isProcessing = false;
@@ -454,65 +538,7 @@
 		}
 	};
 	//#endregion
-	//#region src/browser/visibility-detector.ts
-	var VisibilityDetector = class {
-		verdictCache = /* @__PURE__ */ new WeakMap();
-		clearCache() {
-			this.verdictCache = /* @__PURE__ */ new WeakMap();
-		}
-		isElementVisuallyHidden(element) {
-			const style = getComputedStyle(element);
-			if (style.display === "none") return true;
-			if (style.visibility === "hidden") return true;
-			if (parseFloat(style.opacity) === 0) return true;
-			const clip = style.clip;
-			if (clip && (clip.includes("rect(1px, 1px, 1px, 1px)") || clip.includes("rect(0px, 0px, 0px, 0px)") || clip.includes("rect(0, 0, 0, 0)"))) return true;
-			if (style.overflow === "hidden" && style.position === "absolute") {
-				const height = parseInt(style.height, 10);
-				const width = parseInt(style.width, 10);
-				if (height === 1 && width === 1) return true;
-			}
-			return false;
-		}
-		shouldSkipSpacingAfterNode(node) {
-			let elementToCheck = null;
-			if (node instanceof Element) elementToCheck = node;
-			else if (node.parentElement) elementToCheck = node.parentElement;
-			if (elementToCheck && this.isElementVisuallyHiddenCached(elementToCheck)) return true;
-			let currentElement = elementToCheck?.parentElement;
-			while (currentElement) {
-				if (this.isElementVisuallyHiddenCached(currentElement)) return true;
-				currentElement = currentElement.parentElement;
-			}
-			return false;
-		}
-		shouldSkipSpacingBeforeNode(node) {
-			let previousNode = node.previousSibling;
-			if (!previousNode && node.parentElement) {
-				let parent = node.parentElement;
-				while (parent && !previousNode) {
-					previousNode = parent.previousSibling;
-					if (!previousNode) parent = parent.parentElement;
-				}
-			}
-			if (previousNode) {
-				if (previousNode instanceof Element && this.isElementVisuallyHiddenCached(previousNode)) return true;
-				else if (previousNode instanceof Text && previousNode.parentElement && this.isElementVisuallyHiddenCached(previousNode.parentElement)) return true;
-			}
-			return false;
-		}
-		isElementVisuallyHiddenCached(element) {
-			const cached = this.verdictCache.get(element);
-			if (cached !== void 0) return cached;
-			const verdict = this.isElementVisuallyHidden(element);
-			this.verdictCache.set(element, verdict);
-			return verdict;
-		}
-	};
-	//#endregion
-	//#region src/browser/pangu.ts
-	var TRAILING_WHITESPACE = /\s$/;
-	var LEADING_WHITESPACE = /^\s/;
+	//#region src/browser/scheduling/timing.ts
 	function once(func) {
 		let executed = false;
 		return function(...args) {
@@ -536,92 +562,122 @@
 			}, delay);
 		};
 	}
+	function waitForVideosToLoad(delayMs, onLoaded) {
+		const videos = Array.from(document.getElementsByTagName("video")).filter((video) => video.getClientRects().length > 0);
+		if (videos.length === 0) setTimeout(onLoaded, delayMs);
+		else if (videos.every((video) => video.readyState >= 3)) setTimeout(onLoaded, delayMs);
+		else {
+			let loadedCount = 0;
+			const videoCount = videos.length;
+			const checkAllLoaded = () => {
+				loadedCount++;
+				if (loadedCount >= videoCount) setTimeout(onLoaded, delayMs);
+			};
+			for (const video of videos) if (video.readyState >= 3) checkAllLoaded();
+			else video.addEventListener("loadeddata", checkAllLoaded, { once: true });
+			setTimeout(onLoaded, delayMs + 5e3);
+		}
+	}
+	//#endregion
+	//#region src/browser/index.ts
 	var BrowserPangu = class BrowserPangu extends Pangu {
+		static trailingWhitespace = /\s$/;
+		static leadingWhitespace = /^\s/;
 		static maxSyncTextNodes = 256;
-		isAutoSpacingPageExecuted = false;
-		autoSpacingPageObserver = null;
+		autoSpacePageObserver = null;
 		lastWrittenData = /* @__PURE__ */ new WeakMap();
+		lateFixedTextNodes = /* @__PURE__ */ new WeakSet();
 		taskScheduler = new TaskScheduler();
 		visibilityDetector = new VisibilityDetector();
-		autoSpacingPage({ pageDelayMs = 1e3, nodeDelayMs = 500, nodeMaxWaitMs = 2e3 } = {}) {
+		onTextNodesSettled = null;
+		autoSpacePage({ pageDelayMs = 1e3, nodeDelayMs = 500, nodeMaxWaitMs = 2e3 } = {}) {
 			if (!(document.body instanceof Node)) return;
-			if (this.isAutoSpacingPageExecuted) return;
-			this.isAutoSpacingPageExecuted = true;
-			this.waitForVideosToLoad(pageDelayMs, once(() => this.spacingPage()));
-			this.setupAutoSpacingPageObserver(nodeDelayMs, nodeMaxWaitMs);
+			if (this.autoSpacePageObserver) return;
+			const observer = this.setupAutoSpacePageObserver(nodeDelayMs, nodeMaxWaitMs);
+			waitForVideosToLoad(pageDelayMs, once(() => {
+				if (this.autoSpacePageObserver === observer) this.spacePage();
+			}));
 		}
-		spacingPage() {
+		spacePage() {
 			const title = document.querySelector("head > title");
-			if (title) this.spacingNode(title);
-			this.spacingNode(document.body);
+			if (title) this.spaceNode(title);
+			this.spaceNode(document.body);
 		}
-		spacingNode(contextNode) {
-			const textNodes = DomWalker.collectTextNodes(contextNode, true);
-			this.schedule(textNodes);
+		spaceNode(node) {
+			const textNodes = DomWalker.collectTextNodes(node, true);
+			this.schedule(() => this.spaceTextNodes(textNodes));
 		}
-		stopAutoSpacingPage() {
-			if (this.autoSpacingPageObserver) {
-				this.autoSpacingPageObserver.disconnect();
-				this.autoSpacingPageObserver = null;
+		stopAutoSpacePage() {
+			if (this.autoSpacePageObserver) {
+				this.autoSpacePageObserver.disconnect();
+				this.autoSpacePageObserver = null;
 			}
-			this.isAutoSpacingPageExecuted = false;
 		}
-		isElementVisuallyHidden(element) {
-			return this.visibilityDetector.isElementVisuallyHidden(element);
-		}
-		isSpaceLikeSibling(node) {
-			return !!node && DomWalker.spaceLikeTags.test(node.nodeName);
+		applyLateFixes(lateFixes) {
+			this.schedule(() => {
+				for (const lateFix of lateFixes) {
+					if (!lateFix.node.isConnected || lateFix.node.data !== lateFix.settled || DomWalker.isIgnoredNode(lateFix.node)) continue;
+					lateFix.node.data = lateFix.data;
+					this.lastWrittenData.set(lateFix.node, lateFix.data);
+					this.lateFixedTextNodes.add(lateFix.node);
+				}
+			});
 		}
 		isGridOrFlexContainer(node) {
 			if (node.nodeType !== Node.ELEMENT_NODE) return false;
 			const display = window.getComputedStyle(node).display;
 			return display === "grid" || display === "inline-grid" || display === "flex" || display === "inline-flex";
 		}
-		spacingTextNodes(textNodes) {
+		spaceTextNodes(textNodes) {
 			this.visibilityDetector.clearCache();
-			let currentTextNode;
+			const unsettledTextNodes = [];
 			let nextTextNode = null;
-			for (let i = 0; i < textNodes.length; i++) {
-				currentTextNode = textNodes[i];
-				if (!currentTextNode) continue;
-				if (currentTextNode instanceof Text) this.applyTextRunSpacing(currentTextNode);
+			for (const currentTextNode of textNodes) {
+				if (currentTextNode instanceof Text) if (this.holdsLateFix(currentTextNode)) {
+					if (this.onTextNodesSettled) unsettledTextNodes.push({
+						node: currentTextNode,
+						unspaced: currentTextNode.data
+					});
+				} else this.applyTextNodeSpacing(currentTextNode, unsettledTextNodes);
 				if (nextTextNode) {
 					if (!(currentTextNode instanceof Text) || !(nextTextNode instanceof Text)) continue;
+					const nextSuperscript = nextTextNode.parentElement?.closest("sup");
+					if (nextSuperscript && !nextSuperscript.contains(currentTextNode)) {
+						nextTextNode = currentTextNode;
+						continue;
+					}
 					const currentBoundaryNode = DomWalker.findBoundaryNode(currentTextNode, "last");
 					const nextBoundaryNode = DomWalker.findBoundaryNode(nextTextNode, "first");
-					const { whitespaceBetween, contentBetween } = this.scanBetweenTextRuns(currentBoundaryNode, nextBoundaryNode);
-					const currentRun = currentTextNode;
-					const nextRun = nextTextNode;
-					const currentTail = currentTextNode.data.slice(-3);
+					const { whitespaceBetween, contentBetween, spaceLikeBetween, blockEdgeBetween } = this.scanBetweenTextNodes(currentTextNode, nextTextNode);
+					const currentNode = currentTextNode;
+					const nextNode = nextTextNode;
+					const currentTail = currentTextNode.data.match(/(?<![A-Za-z0-9])[A-Za-z0-9]{3,}[+-]$/)?.[0] ?? currentTextNode.data.slice(-3);
 					const nextFirst = nextTextNode.data.slice(0, 1);
-					const verdict = decideBoundarySpacing({
+					const boundarySpacingDecision = decideBoundarySpacing({
 						currentTail,
 						nextFirst,
-						currentEndsWithSpace: TRAILING_WHITESPACE.test(currentTextNode.data),
-						nextStartsWithSpace: LEADING_WHITESPACE.test(nextTextNode.data),
+						currentEndsWithSpace: BrowserPangu.trailingWhitespace.test(currentTextNode.data),
+						nextStartsWithSpace: BrowserPangu.leadingWhitespace.test(nextTextNode.data),
 						whitespaceBetween,
 						contentBetween,
-						spaceLikeSiblingAfterCurrent: this.isSpaceLikeSibling(currentTextNode.nextSibling),
-						spaceLikeSiblingAfterCurrentBoundary: this.isSpaceLikeSibling(currentBoundaryNode.nextSibling),
-						spaceLikeSiblingBeforeNext: this.isSpaceLikeSibling(nextTextNode.previousSibling),
-						spaceLikeSiblingBeforeNextBoundary: this.isSpaceLikeSibling(nextBoundaryNode.previousSibling),
-						currentBoundaryIsBlock: DomWalker.blockTags.test(currentBoundaryNode.nodeName),
-						currentBoundaryIsSpaceSensitive: DomWalker.spaceSensitiveTags.test(currentBoundaryNode.nodeName),
-						nextBoundaryIsBlock: DomWalker.blockTags.test(nextBoundaryNode.nodeName),
+						spaceLikeBetween,
+						blockEdgeBetween,
+						currentBoundaryIsSpaceSensitive: DomWalker.spaceSensitiveTags.test(currentBoundaryNode.nodeName) || currentTextNode.parentElement?.closest("sup")?.contains(nextTextNode) === false,
 						nextBoundaryIsIgnored: DomWalker.ignoredTags.test(nextBoundaryNode.nodeName),
 						nextBoundaryIsSpaceSensitive: DomWalker.spaceSensitiveTags.test(nextBoundaryNode.nodeName),
-						hiddenBoundaryBefore: () => this.isHiddenBoundaryBefore(nextRun),
-						hiddenBoundaryAfter: () => this.isHiddenBoundaryAfter(currentRun),
+						precedingNodeHidden: () => this.isPrecedingNodeHidden(nextNode),
+						currentNodeHidden: () => this.isNodeHidden(currentNode),
+						nextNodeHidden: () => this.isNodeHidden(nextNode),
 						inGridOrFlexContainer: () => !!nextBoundaryNode.parentNode && this.isGridOrFlexContainer(nextBoundaryNode.parentNode)
 					});
-					if (verdict !== "none") {
+					if (boundarySpacingDecision !== "none" && !this.holdsLateFix(currentTextNode) && !NAME_SUFFIX_AT_END.test(currentTextNode.data)) {
 						const respacedTail = respaceCurrentTail(currentTail, nextFirst);
 						if (respacedTail !== null) {
 							currentTextNode.data = currentTextNode.data.slice(0, currentTextNode.data.length - currentTail.length) + respacedTail;
 							this.lastWrittenData.set(currentTextNode, currentTextNode.data);
 						}
 					}
-					switch (verdict) {
+					switch (boundarySpacingDecision) {
 						case "prepend-next":
 							nextTextNode.data = ` ${nextTextNode.data}`;
 							this.lastWrittenData.set(nextTextNode, nextTextNode.data);
@@ -638,14 +694,28 @@
 				}
 				nextTextNode = currentTextNode;
 			}
+			this.emitTextNodesSettled(unsettledTextNodes);
 		}
-		applyTextRunSpacing(textNode) {
-			const verdicts = decideTextRunSpacing({
+		holdsLateFix(textNode) {
+			return this.lateFixedTextNodes.has(textNode) && this.lastWrittenData.get(textNode) === textNode.data;
+		}
+		emitTextNodesSettled(unsettledTextNodes) {
+			if (unsettledTextNodes.length === 0) return;
+			const settledTextNodes = unsettledTextNodes.map(({ node, unspaced }) => ({
+				node,
+				unspaced,
+				settled: node.data
+			}));
+			this.onTextNodesSettled?.(settledTextNodes);
+		}
+		applyTextNodeSpacing(textNode, unsettledTextNodes) {
+			this.lateFixedTextNodes.delete(textNode);
+			const textNodeSpacingDecisions = decideTextNodeSpacing({
 				text: textNode.data,
 				previousElementLastChar: this.findPreviousElementLastChar(textNode),
-				hiddenBoundaryBefore: () => this.isHiddenBoundaryBefore(textNode)
+				precedingNodeHidden: () => this.isPrecedingNodeHidden(textNode)
 			});
-			for (const verdict of verdicts) switch (verdict) {
+			for (const textNodeSpacingDecision of textNodeSpacingDecisions) switch (textNodeSpacingDecision) {
 				case "trim-leading-space":
 					textNode.data = textNode.data.substring(1);
 					this.lastWrittenData.set(textNode, textNode.data);
@@ -655,7 +725,11 @@
 					this.lastWrittenData.set(textNode, textNode.data);
 					break;
 				case "apply-text-spacing": {
-					const newText = this.spacingText(textNode.data);
+					if (this.onTextNodesSettled) unsettledTextNodes.push({
+						node: textNode,
+						unspaced: textNode.data
+					});
+					const newText = this.spaceText(textNode.data);
 					if (textNode.data !== newText) {
 						textNode.data = newText;
 						this.lastWrittenData.set(textNode, textNode.data);
@@ -664,11 +738,23 @@
 				}
 			}
 		}
-		spacingNodeSync(contextNode, maxTextNodes) {
-			const textNodes = DomWalker.collectTextNodes(contextNode, true);
+		spaceNodeSync(node, maxTextNodes) {
+			const textNodes = DomWalker.collectTextNodes(node);
 			if (textNodes.length > maxTextNodes) return false;
-			this.spacingTextNodes(textNodes);
+			this.spaceTextNodes(this.withNeighborTextNodes(textNodes).reverse());
 			return true;
+		}
+		withNeighborTextNodes(textNodes) {
+			const firstTextNode = textNodes[0];
+			const lastTextNode = textNodes.at(-1);
+			if (!firstTextNode || !lastTextNode) return textNodes;
+			const previousTextNode = DomWalker.findAdjacentTextNode(firstTextNode, "previous");
+			const nextTextNode = DomWalker.findAdjacentTextNode(lastTextNode, "next");
+			return [
+				...previousTextNode ? [previousTextNode] : [],
+				...textNodes,
+				...nextTextNode ? [nextTextNode] : []
+			];
 		}
 		hasSpacedTextInSubtree(node) {
 			if (node instanceof Text) return this.lastWrittenData.has(node);
@@ -686,32 +772,43 @@
 		}
 		findPreviousElementLastChar(textNode) {
 			const previousNode = textNode.previousSibling;
-			if (previousNode && previousNode.nodeType === Node.ELEMENT_NODE && previousNode.textContent) return previousNode.textContent.slice(-1);
+			if (previousNode?.nodeType === Node.ELEMENT_NODE && previousNode.textContent) return previousNode.textContent.slice(-1);
 			return null;
 		}
-		scanBetweenTextRuns(currentBoundaryNode, nextBoundaryNode) {
+		scanBetweenTextNodes(currentTextNode, nextTextNode) {
 			let whitespaceBetween = false;
 			let contentBetween = false;
+			let spaceLikeBetween = false;
+			let blockEdgeBetween = false;
 			const scan = (node) => {
 				if (node.nodeType === Node.TEXT_NODE && node.textContent) {
 					if (/\s/.test(node.textContent)) whitespaceBetween = true;
 					if (/\S/.test(node.textContent)) contentBetween = true;
-				} else if (node instanceof Element && !DomWalker.isIgnoredElement(node)) for (let child = node.firstChild; child; child = child.nextSibling) scan(child);
+				} else if (node instanceof Element && DomWalker.spaceLikeTags.test(node.nodeName)) spaceLikeBetween = true;
+				else if (node instanceof Element && !DomWalker.isIgnoredElement(node)) for (let child = node.firstChild; child; child = child.nextSibling) scan(child);
 			};
 			let containerOfNext = null;
-			let node = currentBoundaryNode;
+			let node = currentTextNode;
 			while (node && !containerOfNext) {
+				if (DomWalker.blockTags.test(node.nodeName)) {
+					blockEdgeBetween = true;
+					break;
+				}
 				let sibling = node.nextSibling;
-				while (sibling && !sibling.contains(nextBoundaryNode)) {
+				while (sibling && !sibling.contains(nextTextNode)) {
 					scan(sibling);
 					sibling = sibling.nextSibling;
 				}
 				containerOfNext = sibling;
 				node = node.parentNode;
 			}
-			while (containerOfNext && containerOfNext !== nextBoundaryNode) {
+			while (containerOfNext && containerOfNext !== nextTextNode) {
+				if (DomWalker.blockTags.test(containerOfNext.nodeName)) {
+					blockEdgeBetween = true;
+					break;
+				}
 				let child = containerOfNext.firstChild;
-				while (child && !child.contains(nextBoundaryNode)) {
+				while (child && !child.contains(nextTextNode)) {
 					scan(child);
 					child = child.nextSibling;
 				}
@@ -719,51 +816,33 @@
 			}
 			return {
 				whitespaceBetween,
-				contentBetween
+				contentBetween,
+				spaceLikeBetween,
+				blockEdgeBetween
 			};
 		}
-		isHiddenBoundaryBefore(node) {
+		isPrecedingNodeHidden(node) {
 			return this.visibilityDetector.shouldSkipSpacingBeforeNode(node);
 		}
-		isHiddenBoundaryAfter(node) {
+		isNodeHidden(node) {
 			return this.visibilityDetector.shouldSkipSpacingAfterNode(node);
 		}
-		schedule(textNodes) {
+		schedule(task) {
 			if (!this.taskScheduler.config.enabled || typeof requestIdleCallback !== "function") {
-				this.spacingTextNodes(textNodes);
+				task();
 				return;
 			}
-			this.taskScheduler.queue.add(() => {
-				this.spacingTextNodes(textNodes);
-			});
+			this.taskScheduler.queue.add(task);
 		}
-		waitForVideosToLoad(delayMs, onLoaded) {
-			const videos = Array.from(document.getElementsByTagName("video"));
-			if (videos.length === 0) setTimeout(onLoaded, delayMs);
-			else if (videos.every((video) => video.readyState >= 3)) setTimeout(onLoaded, delayMs);
-			else {
-				let loadedCount = 0;
-				const videoCount = videos.length;
-				const checkAllLoaded = () => {
-					loadedCount++;
-					if (loadedCount >= videoCount) setTimeout(onLoaded, delayMs);
-				};
-				for (const video of videos) if (video.readyState >= 3) checkAllLoaded();
-				else video.addEventListener("loadeddata", checkAllLoaded, { once: true });
-				setTimeout(onLoaded, delayMs + 5e3);
-			}
-		}
-		setupAutoSpacingPageObserver(nodeDelayMs, nodeMaxWaitMs) {
-			if (this.autoSpacingPageObserver) {
-				this.autoSpacingPageObserver.disconnect();
-				this.autoSpacingPageObserver = null;
-			}
+		setupAutoSpacePageObserver(nodeDelayMs, nodeMaxWaitMs) {
 			const queue = [];
-			const debouncedSpacingTitle = debounce(() => {
+			const spaceTitleDebounced = debounce(() => {
+				if (this.autoSpacePageObserver !== observer) return;
 				const titleElement = document.querySelector("head > title");
-				if (titleElement) this.spacingNode(titleElement);
+				if (titleElement) this.spaceNode(titleElement);
 			}, nodeDelayMs, nodeMaxWaitMs);
-			const debouncedSpacingNode = debounce(() => {
+			const spaceQueuedNodesDebounced = debounce(() => {
+				if (this.autoSpacePageObserver !== observer) return;
 				const nodesToProcess = [...queue];
 				queue.length = 0;
 				if (nodesToProcess.length === 0) return;
@@ -773,14 +852,17 @@
 				});
 				const seenTextNodes = /* @__PURE__ */ new Set();
 				const allTextNodes = [];
-				for (const node of nodesToProcess) for (const textNode of DomWalker.collectTextNodes(node)) if (!seenTextNodes.has(textNode)) {
-					seenTextNodes.add(textNode);
-					allTextNodes.push(textNode);
+				for (const node of nodesToProcess) {
+					const textNodes = DomWalker.collectTextNodes(node);
+					for (const textNode of this.withNeighborTextNodes(textNodes)) if (!seenTextNodes.has(textNode)) {
+						seenTextNodes.add(textNode);
+						allTextNodes.push(textNode);
+					}
 				}
 				allTextNodes.reverse();
-				this.schedule(allTextNodes);
+				this.schedule(() => this.spaceTextNodes(allTextNodes));
 			}, nodeDelayMs, nodeMaxWaitMs);
-			this.autoSpacingPageObserver = new MutationObserver((mutations) => {
+			const observer = new MutationObserver((mutations) => {
 				let titleChanged = false;
 				let removedSpacedContent = false;
 				for (const mutation of mutations) {
@@ -802,7 +884,7 @@
 								const lastWritten = this.lastWrittenData.get(node);
 								if (lastWritten !== void 0) {
 									if (node.data === lastWritten) break;
-									if (this.spacingNodeSync(node.parentNode, BrowserPangu.maxSyncTextNodes)) break;
+									if (this.spaceNodeSync(node.parentNode, BrowserPangu.maxSyncTextNodes)) break;
 								}
 								queue.push(node.parentNode);
 							}
@@ -810,29 +892,31 @@
 						}
 						case "childList":
 							for (const node of mutation.addedNodes) if (node.nodeType === Node.ELEMENT_NODE) {
-								if (removedSpacedContent && this.spacingNodeSync(node, BrowserPangu.maxSyncTextNodes)) continue;
+								if (removedSpacedContent && this.spaceNodeSync(node, BrowserPangu.maxSyncTextNodes)) continue;
 								queue.push(node);
 							} else if (node.nodeType === Node.TEXT_NODE && node.parentNode) {
-								if (removedSpacedContent && this.spacingNodeSync(node.parentNode, BrowserPangu.maxSyncTextNodes)) continue;
+								if (removedSpacedContent && this.spaceNodeSync(node.parentNode, BrowserPangu.maxSyncTextNodes)) continue;
 								queue.push(node.parentNode);
 							}
 							break;
 						default: break;
 					}
 				}
-				if (titleChanged) debouncedSpacingTitle();
-				debouncedSpacingNode();
+				if (titleChanged) spaceTitleDebounced();
+				spaceQueuedNodesDebounced();
 			});
-			this.autoSpacingPageObserver.observe(document.head, {
+			this.autoSpacePageObserver = observer;
+			observer.observe(document.head, {
 				characterData: true,
 				childList: true,
 				subtree: true
 			});
-			this.autoSpacingPageObserver.observe(document.body, {
+			observer.observe(document.body, {
 				characterData: true,
 				childList: true,
 				subtree: true
 			});
+			return observer;
 		}
 	};
 	var pangu = new BrowserPangu();
