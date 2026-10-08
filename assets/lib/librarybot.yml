@@ -202,7 +202,7 @@ libraries:
         - from: dist/Valine.min.js
           to: valine/Valine.min.js
   - npm: '@waline/client'
-    version: 3.15.2
+    version: 3.16.0
     local:
       items:
         - from: dist/waline.css
