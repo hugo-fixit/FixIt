@@ -20,6 +20,6 @@
     {{- .Site.Store.Set "devOpts" dict -}}
   {{- end -}}
   {{- if .Site.Language.IsDefault -}}
-    {{- warnidf "warning-dev-env" "FixIt %v\n%v\n\n" (hugo.Store.Get "version") (T "init.devEnvWarn") -}}
+    {{- warnidf "warning-dev-env" "FixIt %v\n%v" (hugo.Store.Get "version") (T "init.devEnvWarn") -}}
   {{- end -}}
 {{- end -}}

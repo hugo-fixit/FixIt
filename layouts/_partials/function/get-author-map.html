@@ -1,4 +1,4 @@
-{{- /* 
+{{- /*
   Get author in map format.
   @param {String|Map} . - The author name or map
   @returns {Map}
@@ -11,6 +11,9 @@
 
 {{- $default := dict "name" "" "link" "" "email" "" "avatar" "" -}}
 {{- $author := site.Params.author | merge $default -}}
+{{- if not $author.name -}}
+  {{- $author = dict "name" "Anonymous" | merge $author -}}
+{{- end -}}
 {{- $authorParam := dict -}}
 {{- if reflect.IsMap . -}}
   {{- $authorParam = . -}}

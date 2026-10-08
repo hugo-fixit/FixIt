@@ -2,7 +2,7 @@
 @use "core/functions" as *;
 @use "core/mixins" as *;
 
-&.author-archive {
+.archive.author-archive {
   .archive-header,
   .archive-meta,
   .archive-title,

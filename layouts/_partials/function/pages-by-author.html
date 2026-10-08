@@ -6,14 +6,14 @@
   `author` fallbacks) and fills missing profile fields (link/email/avatar) from
   those pages' resolved authors. Also inherits site author fields via get-author.
 
-  @param {Map} . - dict "Name" (String) — author name / registry key (usually .Data.Term), optional "Pages", optional "Size" (Gravatar size, default 240)
+  @param {Map} . - dict "Name" (String) — author name / registry key (usually .Data.Term), optional "Pages", optional "Size" (Gravatar size, default 96)
   @returns {Map} "Author" (Map) and "Pages" (Pages collection)
   @example {{- $term := partial "function/pages-by-author.html" (dict "Name" "Alice") -}}
 */ -}}
 {{- $term := printf "%v" .Name -}}
 {{- $termSlug := $term | urlize -}}
 {{- $all := .Pages | default site.RegularPages -}}
-{{- $author := partial "function/get-author.html" (dict "Key" $term "Size" (.Size | default "240")) -}}
+{{- $author := partial "function/get-author.html" (dict "Key" $term "Size" (.Size | default "96")) -}}
 {{- $paths := slice -}}
 {{- range $page := $all -}}
   {{- if $page.Params.author_seed -}}

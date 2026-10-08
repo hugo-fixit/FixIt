@@ -15,17 +15,17 @@ function initPangu(target?: Element) {
   window.pangu.ignoredTags = /^(script|code|pre|textarea|sup|sub)$/i
 
   if (target) {
-    window.pangu.spacingNode(target)
+    window.pangu.spaceNode(target)
     return
   }
 
   if (window.config.pangu.selector) {
     document.querySelectorAll(window.config.pangu.selector).forEach((el) => {
-      window.pangu.spacingNode(el)
+      window.pangu.spaceNode(el)
     })
     return
   }
-  window.pangu.autoSpacingPage()
+  window.pangu.autoSpacePage()
 }
 
 document.addEventListener('DOMContentLoaded', () => {

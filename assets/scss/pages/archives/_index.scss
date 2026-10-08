@@ -1,7 +1,7 @@
 // Archives page styles (section, taxonomy, term)
 @use "sass:meta";
 @use "core/functions" as *;
-@use "core/mixins" as *;
+@use "author";
 
 .archive {
   .archive-header,
@@ -47,5 +47,4 @@
 
   @include meta.load-css('terms');
   @include meta.load-css('tags');
-  @include meta.load-css('author');
 }

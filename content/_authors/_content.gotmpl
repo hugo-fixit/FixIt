@@ -11,6 +11,8 @@
 {{- $names := slice -}}
 {{- with site.Params.author.name -}}
   {{- $names = $names | append . -}}
+{{- else -}}
+  {{- $names = $names | append "Anonymous" -}}
 {{- end -}}
 {{- $names = union $names (partial "function/scan-author-names.html" "content") -}}
 {{- range (hugo.Data.authors | default dict) -}}
