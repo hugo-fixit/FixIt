@@ -9,7 +9,7 @@
   {{- range $termCards -}}
     {{- $term := .Term -}}
     {{- $pages := .Pages -}}
-    {{- $termPage := site.GetPage "taxonomy" (printf "%v/%v" $.Type $term) | default (site.GetPage (printf "/%v/%v" $.Data.Plural ($term | urlize))) -}}
+    {{- $termPage := site.GetPage "taxonomy" (printf "%v/%v" $.Type $term) | default (site.GetPage (printf "/%v/%v" $.Data.Plural ($term | urlize | urls.PathUnescape))) -}}
     <div class="card-item">
       <div class="card-item-wrapper">
         <h2 class="card-item-title">

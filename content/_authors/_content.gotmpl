@@ -26,7 +26,8 @@
 {{- range $names -}}
   {{- $v := strings.TrimSpace (printf "%v" .) -}}
   {{- if and $v (ne $v "null") (ne $v "~") (not (hasPrefix $v "-")) (not (in $v ":")) -}}
-    {{- $slug := $v | urlize -}}
+    {{- /* urlize percent-encodes non-ASCII; decode before using as a filesystem path. */ -}}
+    {{- $slug := $v | urlize | urls.PathUnescape -}}
     {{- if not (index $seen $slug) -}}
       {{- $seen = merge $seen (dict $slug true) -}}
       {{- if not (fileExists (printf "content/authors/%s/_index.md" $slug)) -}}
