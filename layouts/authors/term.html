@@ -4,7 +4,7 @@
 {{- end -}}
 
 {{- define "content" -}}
-  {{- $term := partial "function/pages-by-author.html" (dict "Name" .Data.Term) -}}
+  {{- $term := partial "function/pages-by-author.html" (dict "Name" .Title) -}}
   <div class="page archive author-archive">
     {{- partial "section/author-header.html" (dict "Page" . "Pages" $term.Pages "Author" $term.Author) -}}
     {{- partial "section/archive-meta.html" (dict "Page" . "Pages" $term.Pages) -}}

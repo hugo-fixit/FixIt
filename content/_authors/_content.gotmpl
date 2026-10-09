@@ -3,9 +3,10 @@
   as an `authors` taxonomy term, so /authors/<name>/ exists even when the page
   only uses legacy `author: "X"` or falls back to the site default author.
 
+  Terms are added as `kind: term` pages (not a stub regular page), so they never
+  occupy a content section and never disturb site.MainSections auto-detection.
   Combined with function/pages-by-author.html, each archive lists every page
-  that resolves to that author. The stub page is hidden from home/search/feed/
-  related and marked noindex; author listings skip it via `author_seed`.
+  that resolves to that author. Skipped when the authors taxonomy is disabled.
 */ -}}
 {{- $adapter := . -}}
 {{- $names := slice -}}
@@ -15,34 +16,30 @@
   {{- $names = $names | append "Anonymous" -}}
 {{- end -}}
 {{- $names = union $names (partial "function/scan-author-names.html" "content") -}}
-{{- range (hugo.Data.authors | default dict) -}}
-  {{- with .name -}}
+{{- range $key, $entry := (hugo.Data.authors | default dict) -}}
+  {{- $names = $names | append $key -}}
+  {{- with $entry.name -}}
     {{- $names = $names | append . -}}
   {{- end -}}
 {{- end -}}
-{{- $clean := slice -}}
+{{- $seen := dict -}}
 {{- range $names -}}
   {{- $v := strings.TrimSpace (printf "%v" .) -}}
   {{- if and $v (ne $v "null") (ne $v "~") (not (hasPrefix $v "-")) (not (in $v ":")) -}}
-    {{- $clean = $clean | append $v -}}
+    {{- $slug := $v | urlize -}}
+    {{- if not (index $seen $slug) -}}
+      {{- $seen = merge $seen (dict $slug true) -}}
+      {{- if not (fileExists (printf "content/authors/%s/_index.md" $slug)) -}}
+        {{- $r := try ($adapter.AddPage (dict
+          "kind" "term"
+          "path" (printf "../authors/%s" $slug)
+          "title" $v
+          "content" (dict "mediaType" "text/markdown" "value" "")
+        )) -}}
+        {{- with $r.Err -}}
+          {{- warnf "FixIt: skip author term %q: %v" $v . -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
   {{- end -}}
-{{- end -}}
-{{- $clean = uniq $clean -}}
-{{- with $clean -}}
-  {{- $page := dict
-    "content" (dict "mediaType" "text/markdown" "value" "Author taxonomy seed page.")
-    "kind" "page"
-    "path" "author-taxonomy-seed"
-    "title" "Author Taxonomy Seed"
-    "params" (dict
-      "authors" .
-      "author_seed" true
-      "robots" "noindex"
-      "hidden_from_home_page" true
-      "hidden_from_search" true
-      "hidden_from_feed" true
-      "hidden_from_related" true
-    )
-  -}}
-  {{- $adapter.AddPage $page -}}
 {{- end -}}

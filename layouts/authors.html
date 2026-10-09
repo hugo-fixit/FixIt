@@ -3,24 +3,7 @@
   `author` fallbacks appear alongside `authors` front-matter terms.
 */ -}}
 {{- $icon := .Params.cardIcon | default (dict "Taxonomy" .Data.Singular "Slot" "card" | partial "function/get-taxonomy-icon.html") -}}
-{{- $byTerm := dict -}}
-{{- range $p := site.RegularPages -}}
-  {{- if not $p.Params.author_seed -}}
-    {{- range (partial "function/get-authors.html" $p) -}}
-      {{- $term := .key | default .name -}}
-      {{- $pages := index $byTerm $term | default slice -}}
-      {{- if not (in $pages $p) -}}
-        {{- $pages = $pages | append $p -}}
-        {{- $byTerm = merge $byTerm (dict $term $pages) -}}
-      {{- end -}}
-    {{- end -}}
-  {{- end -}}
-{{- end -}}
-{{- $termCards := slice -}}
-{{- range $term, $pages := $byTerm -}}
-  {{- $termCards = $termCards | append (dict "Term" $term "Pages" $pages "Count" (len $pages)) -}}
-{{- end -}}
-{{- $termCards = sort $termCards "Count" "desc" -}}
+{{- $termCards := partial "function/author-terms.html" . -}}
 
 <div class="taxonomy-cards {{ .Data.Plural }}">
   {{- range $termCards -}}

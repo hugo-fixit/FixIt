@@ -1,0 +1,24 @@
+{{- /*
+  Collect author term cards from page authorship (registry key / name / legacy
+  `author` fallbacks), independent of the `authors` taxonomy map. Used by both
+  the authors taxonomy header count and the card list.
+
+  @returns {Slice} Sorted list of maps: Term, Pages, Count
+  @example {{- $terms := partial "function/author-terms.html" . -}}
+*/ -}}
+{{- $byTerm := dict -}}
+{{- range $p := site.RegularPages -}}
+  {{- range (partial "function/get-authors.html" $p) -}}
+    {{- $term := .key | default .name -}}
+    {{- $pages := index $byTerm $term | default slice -}}
+    {{- if not (in $pages $p) -}}
+      {{- $pages = $pages | append $p -}}
+      {{- $byTerm = merge $byTerm (dict $term $pages) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $cards := slice -}}
+{{- range $term, $pages := $byTerm -}}
+  {{- $cards = $cards | append (dict "Term" $term "Pages" $pages "Count" (len $pages)) -}}
+{{- end -}}
+{{- return (sort $cards "Count" "desc") -}}

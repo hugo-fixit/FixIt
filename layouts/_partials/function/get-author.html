@@ -19,7 +19,19 @@
   {{- $key = printf "%v" . -}}
 {{- end -}}
 {{- $fields := slice "name" "link" "email" "avatar" -}}
-{{- $entry := index (hugo.Data.authors | default dict) $key -}}
+{{- $registry := hugo.Data.authors | default dict -}}
+{{- $entry := index $registry $key -}}
+{{- if not (reflect.IsMap $entry) -}}
+  {{- /* Term pages store the urlized slug in .Data.Term — match registry keys by slug. */ -}}
+  {{- $slug := $key | urlize -}}
+  {{- range $k, $v := $registry -}}
+    {{- if and (reflect.IsMap $v) (eq ($k | urlize) $slug) -}}
+      {{- $entry = $v -}}
+      {{- $key = $k -}}
+      {{- break -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 {{- if not (reflect.IsMap $entry) -}}
   {{- $entry = dict -}}
 {{- end -}}
@@ -41,7 +53,7 @@
 {{- end -}}
 {{- $siteAuthor := site.Params.author | default dict -}}
 {{- $siteName := $siteAuthor.name | default "" -}}
-{{- if and $siteName (or (eq $key $siteName) (eq $author.name $siteName)) -}}
+{{- if and $siteName (or (eq $key $siteName) (eq $author.name $siteName) (eq ($key | urlize) ($siteName | urlize))) -}}
   {{- range $fields -}}
     {{- $field := . -}}
     {{- if not (index $author $field) -}}

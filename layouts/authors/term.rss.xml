@@ -3,7 +3,7 @@
   {{- $title = printf "%s %s %s" $title .Site.Params.title_delimiter .Site.Title -}}
 {{- end -}}
 {{- $config := (.Params.feed | default dict) | merge .Site.Params.list.feed | merge .Site.Params.feed -}}
-{{- $pages := (partial "function/pages-by-author.html" (dict "Name" .Data.Term)).Pages -}}
+{{- $pages := (partial "function/pages-by-author.html" (dict "Name" .Title)).Pages -}}
 {{- $options := dict "Site" .Site "Config" $config "OutputFormats" .OutputFormats -}}
 {{- $options = dict "Permalink" .Permalink | merge $options -}}
 {{- $options = dict "Title" $title "Pages" $pages | merge $options -}}
