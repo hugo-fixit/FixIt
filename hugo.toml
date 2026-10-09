@@ -476,6 +476,8 @@ tag = "tags"
 collection = "collections"
 # Enables /authors/<name>/ archive pages for the page-level `authors` front matter field.
 # Optional — sites that never set `authors` are unaffected.
+# IMPORTANT: Keep this in sync with `params.author_archive` above — enable or disable
+# both together, otherwise the build will fail.
 author = "authors"
 
 # -------------------------------------------------------------------------------------
@@ -528,6 +530,10 @@ index_with_subtitle = false
 enable_translation_merge = false
 # Whether to enable tooltip replacement for elements with title attribute, such as footnote references.
 tooltip = true
+# Whether to generate author archive pages at /authors/<name>/.
+# IMPORTANT: Keep this in sync with `author = "authors"` in [taxonomies] below —
+# enable or disable both together, otherwise the build will fail.
+author_archive = true
 # FixIt will, by default, inject a theme meta tag in the HTML head on the home page only.
 # You can turn it off, but we would really appreciate if you don't, as this is a good way to watch FixIt's popularity on the rise.
 disable_theme_inject = false

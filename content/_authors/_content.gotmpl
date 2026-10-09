@@ -6,9 +6,13 @@
   Terms are added as `kind: term` pages (not a stub regular page), so they never
   occupy a content section and never disturb site.MainSections auto-detection.
   Combined with function/pages-by-author.html, each archive lists every page
-  that resolves to that author. Skipped when the authors taxonomy is disabled.
+  that resolves to that author. Controlled by `params.author_archive` — keep it
+  in sync with `author = "authors"` in `[taxonomies]`.
 */ -}}
 {{- $adapter := . -}}
+{{- if not (site.Params.author_archive | default true) -}}
+  {{- return -}}
+{{- end -}}
 {{- $names := slice -}}
 {{- with site.Params.author.name -}}
   {{- $names = $names | append . -}}
