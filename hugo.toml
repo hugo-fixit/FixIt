@@ -474,7 +474,7 @@ _merge = "shallow"
 category = "categories"
 tag = "tags"
 collection = "collections"
-# Enables /authors/<name>/ archive pages for the page-level `authors` front matter field.
+# Enables `/authors/<name>/` archive pages for the page-level `authors` front matter field.
 # Optional — sites that never set `authors` are unaffected.
 # IMPORTANT: Keep this in sync with `params.author_archive` above — enable or disable
 # both together, otherwise the build will fail.
@@ -530,7 +530,7 @@ index_with_subtitle = false
 enable_translation_merge = false
 # Whether to enable tooltip replacement for elements with title attribute, such as footnote references.
 tooltip = true
-# Whether to generate author archive pages at /authors/<name>/.
+# Whether to generate author archive pages at `/authors/<name>/`.
 # IMPORTANT: Keep this in sync with `author = "authors"` in [taxonomies] below —
 # enable or disable both together, otherwise the build will fail.
 author_archive = true
