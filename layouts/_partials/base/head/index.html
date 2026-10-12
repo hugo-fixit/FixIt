@@ -145,7 +145,8 @@
 {{- /* Preload main theme bundle */ -}}
 {{- $mainResource := dict "Resource" (resources.Get "js/main.ts") "Build" true "Fingerprint" $fingerprint | partial "function/js-build.html" -}}
 {{- .Site.Store.Set "mainJS" $mainResource -}}
-<link rel="preload" href="{{ $mainResource.RelPermalink }}" as="script">
+{{- /* Integrity must match the <script> tag from plugin/script.html, else this preload is discarded */ -}}
+<link rel="preload" href="{{ $mainResource.RelPermalink }}" as="script"{{ with $mainResource.Data.Integrity }} integrity="{{ . }}"{{ end }}>
 
 {{- /* ========== SEO: Structured Data (Schema.org) ========== */ -}}
 {{- /* Search Engine Verification */ -}}
