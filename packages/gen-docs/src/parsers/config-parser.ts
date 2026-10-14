@@ -512,6 +512,9 @@ function renderChildren(children: ParamDoc[], lines: string[]): void {
         else if (gcDesc) {
           gcMeta += ` ${gcDesc}${gcEndPunct}`
         }
+        // Keep a blank line after a fenced block so the next list item is not glued to it
+        if (lines.at(-1)?.trimEnd().endsWith('```'))
+          lines.push('')
         lines.push(`- ${grandchild.name}: ${gcMeta}`)
       }
       lines.push('')
