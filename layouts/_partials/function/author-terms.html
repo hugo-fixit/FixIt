@@ -3,11 +3,13 @@
   `author` fallbacks), independent of the `authors` taxonomy map. Used by both
   the authors taxonomy header count and the card list.
 
+  Scans mainSectionPages (same as archives) so non-post pages are excluded.
+
   @returns {Slice} Sorted list of maps: Term, Pages, Count
   @example {{- $terms := partial "function/author-terms.html" . -}}
 */ -}}
 {{- $byTerm := dict -}}
-{{- range $p := site.RegularPages -}}
+{{- range $p := (site.Store.Get "mainSectionPages" | default site.RegularPages) -}}
   {{- range (partial "function/get-authors.html" $p) -}}
     {{- $term := .key | default .name -}}
     {{- $pages := index $byTerm $term | default slice -}}

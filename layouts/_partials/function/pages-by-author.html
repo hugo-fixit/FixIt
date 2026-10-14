@@ -6,13 +6,16 @@
   `author` fallbacks) and fills missing profile fields (link/email/avatar) from
   those pages' resolved authors. Also inherits site author fields via get-author.
 
+  Scope defaults to mainSectionPages (same as archives) so non-post pages are
+  excluded unless the caller passes an explicit "Pages" collection.
+
   @param {Map} . - dict "Name" (String) — author name / registry key (usually the term page title), optional "Pages", optional "Size" (Gravatar size, default 96)
   @returns {Map} "Author" (Map) and "Pages" (Pages collection)
   @example {{- $term := partial "function/pages-by-author.html" (dict "Name" "Alice") -}}
 */ -}}
 {{- $term := printf "%v" .Name -}}
 {{- $termSlug := $term | urlize -}}
-{{- $all := .Pages | default site.RegularPages -}}
+{{- $all := .Pages | default (site.Store.Get "mainSectionPages" | default site.RegularPages) -}}
 {{- $author := partial "function/get-author.html" (dict "Key" $term "Size" (.Size | default "96")) -}}
 {{- $paths := slice -}}
 {{- range $page := $all -}}
