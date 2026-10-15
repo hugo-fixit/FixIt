@@ -3,7 +3,7 @@
 {{- $caption := cond .IsNamedParams (.Get "caption") (.Get 2) | .Page.RenderString -}}
 {{- $options = dict "Caption" $caption | merge $options -}}
 {{- $options = dict "Page" .Page "Resources" .Page.Resources | merge $options -}}
-{{- $optim := slice 
+{{- $optim := slice
   (dict "Process" "resize 800x webp q75" "descriptor" "800w")
   (dict "Process" "resize 1200x webp q75" "descriptor" "1200w")
   (dict "Process" "resize 1600x webp q75" "descriptor" "1600w")
@@ -12,13 +12,16 @@
 {{- $optimise := .Get "optimise" -}}
 {{- $cacheRemote := .Get "cacheRemote" -}}
 
+{{- /* Default lazy loading for both named and positional params */ -}}
+{{- $options = dict "Loading" "lazy" | merge $options -}}
+
 {{- if .IsNamedParams -}}
   {{- $options = dict "Title" (.Get "title") | merge $options -}}
   {{- $options = dict "Height" (.Get "height") | merge $options -}}
   {{- $options = dict "Width" (.Get "width") | merge $options -}}
   {{- $options = .Get "linked" | ne false | dict "Linked" | merge $options -}}
   {{- $options = dict "Rel" (.Get "rel") | merge $options -}}
-  {{- $options = dict "Loading" (.Get "loading" | default "lazy") | merge $options -}}
+  {{- with .Get "loading" -}}{{- $options = dict "Loading" . | merge $options -}}{{- end -}}
   {{- if ne $optimise nil -}}{{- $options = dict "Optimise" $optimise | merge $options -}}{{- end -}}
   {{- if ne $cacheRemote nil -}}{{- $options = dict "CacheRemote" $cacheRemote | merge $options -}}{{- end -}}
 {{- else -}}
