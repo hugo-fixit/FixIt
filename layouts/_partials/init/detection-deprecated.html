@@ -64,13 +64,19 @@
   {{- end -}}
 {{- end -}}
 
+{{- /* Removed parameter warnings */ -}}
+{{- with .Site.Params.navigation -}}
+  {{- if isset . "in_section" -}}
+    {{- $warns = $warns | append "The parameter `params.navigation.in_section` has been removed since v1.0.0; post navigation now always follows sections." -}}
+  {{- end -}}
+{{- end -}}
+
 {{- /* Nested camelCase key rename warnings */ -}}
 {{- $deprecatedNestedKeys := dict
   "search" (slice "content_length" "absolute_url" "max_result_length" "snippet_length" "highlight_tag")
   "search.algolia" (slice "app_id" "search_key")
   "header" (slice "desktop_mode" "mobile_mode")
   "breadcrumb" (slice "show_home")
-  "navigation" (slice "in_section")
   "footer.powered" (slice "hugo_logo" "theme_logo")
   "footer" (slice "site_time")
   "home.profile" (slice "only_first_page" "gravatar_email" "avatar_url" "avatar_menu")

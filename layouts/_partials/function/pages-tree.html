@@ -1,0 +1,20 @@
+{{- /*
+  Return the regular pages of a section in depth-first section tree order.
+
+  Pages and nested subsections are traversed by date in ascending order, so the
+  last page of a subsection (the newest) is followed by the first page of the
+  next sibling subsection (the oldest).
+
+  @param {Page} . - The section page to traverse.
+  @returns {Pages} Regular pages in tree order.
+  @example {{- $pages := partial "function/pages-tree.html" site.GetPage "posts" -}}
+*/ -}}
+{{- $pages := slice -}}
+{{- range .Pages.ByDate -}}
+  {{- if .IsSection -}}
+    {{- $pages = $pages | append (partial "function/pages-tree.html" .) -}}
+  {{- else -}}
+    {{- $pages = $pages | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $pages -}}

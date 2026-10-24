@@ -115,20 +115,45 @@
     </section>
   </div>
 
-  {{- $navigation := .Site.Params.navigation -}}
+  {{- $navigation := .Site.Params.navigation | default dict -}}
   <div class="post-nav">
+    {{- /*
+      Navigate within the current section first, then continue into the next
+      section or subsection: the last page of a section is followed by the
+      first page of the next section, and vice versa.
+    */ -}}
     {{- $pages := .Site.Store.Get "mainSectionPages" -}}
-    {{- $prev := $pages.Prev . -}}
-    {{- $next := $pages.Next . -}}
-    {{- /* Show the post navigation in section pages */ -}}
-    {{- if $navigation.in_section -}}
-      {{- $prev = .PrevInSection -}}
-      {{- $next = .NextInSection -}}
+    {{- $groupedPages := .Site.Store.Get "mainSectionPagesGrouped" -}}
+    {{- if not $groupedPages -}}
+      {{- /*
+        Traverse the section trees of `mainSections` in depth-first order so
+        nested subsections stay contiguous in the navigation.
+      */ -}}
+      {{- $groupedPages = slice -}}
+      {{- range uniq .Site.MainSections -}}
+        {{- with site.GetPage . -}}
+          {{- $groupedPages = $groupedPages | append (partial "function/pages-tree.html" .) -}}
+        {{- end -}}
+      {{- end -}}
+      {{- /*
+        Append pages outside the traversed trees, e.g. pages whose type,
+        rather than section, is a main section type.
+      */ -}}
+      {{- $groupedPages = $groupedPages | append (complement $groupedPages $pages) -}}
+      {{- .Site.Store.Set "mainSectionPagesGrouped" $groupedPages -}}
     {{- end -}}
+    {{- /*
+      The collection is in section tree order, while Hugo's Next returns the
+      page before the given page in the collection and Prev returns the page
+      after it, so map them inversely to make the right link go forward.
+    */ -}}
+    {{- $prev := $groupedPages.Next $ -}}
+    {{- $next := $groupedPages.Prev $ -}}
     {{- /* Reverse the next/previous post navigation order */ -}}
     {{- if $navigation.reverse -}}
-      {{- $prev = $pages.Next . -}}
-      {{- $next = $pages.Prev . -}}
+      {{- $swap := $prev -}}
+      {{- $prev = $next -}}
+      {{- $next = $swap -}}
     {{- end -}}
     {{- with $prev -}}
       {{- $capitalizeTitles := .Param "capitalize_titles" -}}
