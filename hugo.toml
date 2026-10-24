@@ -1433,8 +1433,6 @@ capitalize = true
 
 # Post navigation configuration.
 [params.navigation]
-# Whether to show the post navigation in section pages scope.
-in_section = false
 # Whether to reverse the next/previous post navigation order.
 reverse = false
 
