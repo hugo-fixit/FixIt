@@ -33,7 +33,7 @@
             <span class="header-title-pre">{{ . | safeHTML }}</span>
           {{- end -}}
           {{- if .typeit -}}
-            {{- $.Store.Set "hasTyped" true -}}
+            {{- $.Store.Set "hasTypeIt" true -}}
             <span class="typeit" data-group="header-desktop"><template>{{ .name | default $.Site.Title }}</template></span>
           {{- else -}}
             <span class="header-title-text">{{ .name | default $.Site.Title }}</span>
@@ -47,7 +47,7 @@
       </a>
       {{- with .Site.Params.header.subtitle -}}
         {{- if .typeit -}}
-        {{- $.Store.Set "hasTyped" true -}}
+        {{- $.Store.Set "hasTypeIt" true -}}
           <span class="typeit header-subtitle" data-group="header-desktop"><template>{{ .name }}</template></span>
         {{- else -}}
           <span class="header-subtitle">{{ .name }}</span>
@@ -185,7 +185,7 @@
               <span class="header-title-pre">{{ . | safeHTML }}</span>
             {{- end -}}
             {{- if .typeit -}}
-              {{- $.Store.Set "hasTyped" true -}}
+              {{- $.Store.Set "hasTypeIt" true -}}
               <span class="typeit" data-group="header-mobile"><template>{{ .name | default $.Site.Title }}</template></span>
             {{- else -}}
               <span class="header-title-text">{{ .name | default $.Site.Title }}</span>
@@ -199,7 +199,7 @@
         </a>
         {{- with .Site.Params.header.subtitle -}}
           {{- if .typeit -}}
-            {{- $.Store.Set "hasTyped" true -}}
+            {{- $.Store.Set "hasTypeIt" true -}}
             <span class="typeit header-subtitle" data-group="header-mobile"><template>{{ .name }}</template></span>
           {{- else -}}
             <span class="header-subtitle">{{- .name -}}</span>

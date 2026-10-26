@@ -16,7 +16,7 @@ function initTypeit(target: Element | Document = document) {
   const speed = config.speed || 100
   const cursorSpeed = config.cursorSpeed || 1000
   const cursorChar = config.cursorChar || '|'
-  const loop = config.loop ?? false
+  const defaultLoop = config.loop ?? false
   const typeitElements = target.querySelectorAll<HTMLElement>('.typeit')
   const groupMap = Array.from(typeitElements).reduce<Record<string, HTMLElement[]>>((acc, ele) => {
     const group = ele.dataset.group || ele.id || Math.random().toString(36).substring(2)
@@ -30,6 +30,12 @@ function initTypeit(target: Element | Document = document) {
     const typeone = (i: number) => {
       const typeitElement = group[i]
       const singleData = typeitElement.dataset
+      // Grouped animations run in sequence once; only standalone elements inherit the global loop.
+      let loop = defaultLoop
+      if (singleData.loop)
+        loop = singleData.loop === 'true'
+      if (singleData.group)
+        loop = false
       stagingDOM.stage((typeitElement.querySelector('template') as HTMLTemplateElement).content.cloneNode(true))
       let targetEle = typeitElement.firstElementChild as HTMLElement
       if (typeitElement.firstElementChild!.tagName === 'TEMPLATE') {
@@ -43,7 +49,7 @@ function initTypeit(target: Element | Document = document) {
         cursorSpeed: Number(singleData.cursorSpeed) >= 0 ? Number(singleData.cursorSpeed) : cursorSpeed,
         cursorChar: singleData.cursorChar || cursorChar,
         waitUntilVisible: true,
-        loop: singleData.loop ? singleData.loop === 'true' : loop,
+        loop,
         afterComplete: () => {
           const duration = Number(singleData.duration ?? config.duration)
           if (i === group.length - 1) {
