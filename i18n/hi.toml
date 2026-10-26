@@ -79,6 +79,9 @@ more = "और देखें"
 selectLanguage = "भाषा चुने"
 noTranslations = "कोई अनुवाद नहीं"
 switchTheme = "थीम बदलें"
+submenu = "{{ .Name }} का उपमेनू टॉगल करें"
+mainMenu = "मुख्य मेनू"
+systemMenu = "साइट नियंत्रण"
 # === Header ===
 
 # === Footer ===

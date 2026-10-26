@@ -76,6 +76,9 @@ more = "더 보기"
 selectLanguage = "언어 선택"
 noTranslations = "번역 없음"
 switchTheme = "테마 전환"
+submenu = "{{ .Name }} 하위 메뉴 펼치기/접기"
+mainMenu = "주 메뉴"
+systemMenu = "사이트 컨트롤"
 # === Header ===
 
 # === Footer ===

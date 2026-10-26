@@ -78,6 +78,9 @@ more = "More"
 selectLanguage = "Select Language"
 noTranslations = "No translations"
 switchTheme = "Switch Theme"
+submenu = "Toggle submenu for {{ .Name }}"
+mainMenu = "Main menu"
+systemMenu = "Site controls"
 # === Header ===
 
 # === Footer ===

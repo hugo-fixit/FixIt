@@ -76,6 +76,9 @@ more = "もっと見る"
 selectLanguage = "言語を選択"
 noTranslations = "翻訳なし"
 switchTheme = "テーマを切り替え"
+submenu = "{{ .Name }} のサブメニューを切り替える"
+mainMenu = "メインメニュー"
+systemMenu = "サイトコントロール"
 # === Header ===
 
 # === Footer ===

@@ -78,6 +78,9 @@ more = "Више"
 selectLanguage = "Изабери Језик"
 noTranslations = "Нема превода"
 switchTheme = "Промени Тему"
+submenu = "Прикажи или сакриј подменију за {{ .Name }}"
+mainMenu = "Главни мени"
+systemMenu = "Контроле сајта"
 # === Header ===
 
 # === Footer ===

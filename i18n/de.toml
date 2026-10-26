@@ -78,6 +78,9 @@ more = "Mehr"
 selectLanguage = "Sprache wählen"
 noTranslations = "Keine Übersetzungen"
 switchTheme = "Darstellung ändern"
+submenu = "Untermenü für {{ .Name }} ein- oder ausblenden"
+mainMenu = "Hauptmenü"
+systemMenu = "Website-Steuerung"
 # === Header ===
 
 # === Footer ===

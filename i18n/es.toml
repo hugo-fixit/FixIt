@@ -78,6 +78,9 @@ more = "Más"
 selectLanguage = "Selecciona el lenguage"
 noTranslations = "Sin traducciones"
 switchTheme = "Cambia el tema"
+submenu = "Mostrar u ocultar el submenú de {{ .Name }}"
+mainMenu = "Menú principal"
+systemMenu = "Controles del sitio"
 # === Header ===
 
 # === Footer ===

@@ -79,6 +79,9 @@ more = "بیشتر"
 selectLanguage = "انتخاب زبان"
 noTranslations = "ترجمه‌ای موجود نیست"
 switchTheme = "تغییر پوسته"
+submenu = "نمایش یا پنهان کردن زیرمنوی {{ .Name }}"
+mainMenu = "منوی اصلی"
+systemMenu = "کنترل‌های سایت"
 # === Header ===
 
 # === Footer ===
