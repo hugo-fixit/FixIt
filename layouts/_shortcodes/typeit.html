@@ -8,7 +8,6 @@
   {{- $classList = $classList | append . -}}
 {{- end -}}
 {{- $tag := .Get "tag" | default "div" -}}
-{{- $loop := cond (ne (.Get "group") "") false (.Get "loop") -}}
 
 {{- if .Get "code" -}}
   {{- /* highlight code content without line number */ -}}
@@ -40,8 +39,8 @@
 {{- with .Get "duration" -}}
   {{- $wrapperAttrs = printf `%v data-duration="%v"` $wrapperAttrs . -}}
 {{- end -}}
-{{- with $loop -}}
-  {{- $wrapperAttrs = printf `%v data-loop="true"` $wrapperAttrs -}}
+{{- with .Get "loop" -}}
+  {{- $wrapperAttrs = printf `%v data-loop="%v"` $wrapperAttrs . -}}
 {{- end -}}
 
 {{- $innerAttrs := "" -}}
@@ -54,4 +53,4 @@
   <template><pre>{{ printf "%v" $content | safeHTML }}</pre></template>
 </div>
 
-{{- .Page.Store.Set "hasTyped" true -}}
+{{- .Page.Store.Set "hasTypeIt" true -}}

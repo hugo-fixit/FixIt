@@ -127,7 +127,7 @@
 {{- end -}}
 
 {{- /* TypeIt */ -}}
-{{- if .Store.Get "hasTyped" -}}
+{{- if .Store.Get "hasTypeIt" -}}
   {{- $typeit := partial "function/camel-case-keys.html" .Site.Params.typeit -}}
   {{- $source := $cdn.typeitJS | default "lib/typeit/index.umd.js" -}}
   {{- dict "Source" $source "Fingerprint" $fingerprint "Defer" true | dict "Page" . "Data" | partial "store/script.html" -}}
