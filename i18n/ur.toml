@@ -79,6 +79,9 @@ more = "مزید"
 selectLanguage = "زبان منتخب کریں"
 noTranslations = "ترجمے نہیں"
 switchTheme = "تھیم تبدیل کریں"
+submenu = "{{ .Name }} کا ذیلی مینو ٹوگل کریں"
+mainMenu = "مرکزی مینو"
+systemMenu = "سائٹ کنٹرولز"
 # === Header ===
 
 # === Footer ===

@@ -106,11 +106,34 @@ Hugo Pipes processes all assets. The key orchestration is in `_partials/base/ass
 
 - CSS classes: BEM or semantic naming (`header-desktop`, `menu-item`)
 - SCSS variables: hyphen-separated, semantic (`$global-font-family`)
-- CSS custom properties: prefixed with `fi-` / `--fi-`
-- Use `fi-var()` function to reference CSS custom properties (auto-adds `--fi-` prefix), never use `var(--fi-...)` directly
+- CSS custom properties: prefixed with `--fi-`, written through `@include set-fi-var(name, value)` (or `set-fi-vars` for a map); never write `--fi-*: ...` directly in SCSS
+- Runtime JS-set custom properties (e.g. `--fi-nav-scroll-x`) are the exception: set them with `style.setProperty`, and read them with `fi-var(name, fallback)`
+- Use `fi-var(name, fallback)` to reference CSS custom properties (auto-adds the `--fi-` prefix), never use `var(--fi-...)` directly
+- Within a block, put `@include` calls after all regular declarations and before nested blocks
+- Put nested selectors and at-rules after the parent block's declarations and `@include`s
+- Separate sibling blocks (nested selectors, at-rules, mixin blocks) with one blank line
 - Use CSS variables for theme switching; SCSS variables for colors (no hardcoded values)
 - Prefer relative units (rem, em, %) over absolute units
 - Keep selector nesting shallow
+
+```scss
+.sub-menu {
+  position: absolute;
+  // regular declarations...
+
+  @include set-fi-var(submenu-offset, -0.5rem);
+  @include border-radius;
+  @include z-index(base, 1);
+
+  [dir="rtl"] & {
+    @include set-fi-var(submenu-offset, 0.5rem);
+  }
+
+  .menu-item {
+    // ...
+  }
+}
+```
 
 ### UnoCSS (`assets/css/unocss.css`)
 

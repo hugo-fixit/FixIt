@@ -3,6 +3,7 @@
 @use "variables" as *;
 
 $header-box-shadow: 0 0 1.5rem 0 light-dark(rgba(0, 0, 0, 0.125), rgba(255, 255, 255, 0.125));
+$header-gap: 0.75rem;
 
 header {
   width: 100%;
@@ -66,7 +67,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 0.75rem;
+  gap: $header-gap;
   box-sizing: border-box;
   width: 100%;
 }
@@ -148,6 +149,64 @@ header {
     .menu-link:hover i {
       transform: perspective(1rem) translateZ(0.2rem);
     }
+
+    .submenu-toggle .dropdown-icon {
+      margin-inline-start: 0;
+    }
+  }
+}
+
+.submenu-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 1.5rem;
+  block-size: 1.75rem;
+  margin-inline-start: 0.125rem;
+  padding: 0;
+  color: inherit;
+  vertical-align: middle;
+  @include focus-visible-ring(1.35em, 0.125rem);
+
+  .dropdown-icon {
+    transition: rotate 0.2s ease;
+  }
+
+  @include media('reduce-motion') {
+    .dropdown-icon {
+      transition: none;
+    }
+  }
+}
+
+#header-desktop .menu > .menu-item.has-children > .submenu-toggle[aria-expanded='true'] .dropdown-icon {
+  rotate: 180deg;
+}
+
+#header-mobile .nested-item > .submenu-toggle[aria-expanded='true'] .dropdown-icon {
+  rotate: 90deg;
+}
+
+@media (any-pointer: coarse) {
+  .submenu-toggle {
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    margin-inline-start: 0.25rem;
+  }
+
+  #header-desktop {
+    @include set-fi-var(submenu-height, 2.75rem);
+  }
+
+  #header-desktop .language-switch > [data-submenu-toggle]::before {
+    content: '';
+    position: absolute;
+    inset: -0.625rem;
+  }
+
+  #header-mobile .menu .sub-menu .menu-item {
+    line-height: 2.75rem;
   }
 }
 
@@ -190,8 +249,18 @@ header {
     position: static;
   }
 
-  nav {
+  nav.nav-main {
+    flex: 0 1 auto;
+    min-width: 0;
     overflow: auto;
+    white-space: nowrap;
+    font-size: fi-var(menu-font-size);
+  }
+
+  nav.nav-system {
+    flex: 0 0 auto;
+    // Cancel the header-wrapper gap; the delimiter already provides spacing.
+    margin-inline-start: -$header-gap;
     white-space: nowrap;
   }
 
@@ -212,27 +281,34 @@ header {
       flex-wrap: nowrap;
 
       > .menu-item {
-        &:hover .sub-menu {
+        &.open > .sub-menu {
           display: block;
-          translate: -0.5rem 0;
-
-          [dir="rtl"] & {
-            translate: 0.5rem 0;
-          }
         }
+
         &.language-switch {
           > button {
             position: relative;
             @include focus-visible-ring;
           }
+        }
 
-          &:hover .sub-menu {
-            translate: calc(1.75rem - 100%) 0;
+        // No-JS / legacy template keyboard fallback
+        &:not(.menu-enhanced):focus-within > .sub-menu {
+          display: block;
+        }
+      }
 
-            [dir="rtl"] & {
-              translate: calc(100% - 1.75rem) 0;
-            }
-          }
+      > .menu-item.language-switch > .sub-menu {
+        @include set-fi-var(submenu-offset, calc(1.75rem - 100%));
+
+        [dir="rtl"] & {
+          @include set-fi-var(submenu-offset, calc(100% - 1.75rem));
+        }
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        > .menu-item:not(.menu-enhanced):hover > .sub-menu {
+          display: block;
         }
       }
 
@@ -258,14 +334,22 @@ header {
         padding: 0.25rem 0;
         display: none;
         top: calc(#{fi-var(header-height)} - 0.75rem);
+        // Follow the menu item when the nav scrolls horizontally.
+        translate: calc(var(--fi-submenu-offset) - #{fi-var(nav-scroll-x, 0px)}) 0;
         border: 1px solid fi-var(menu-border-color);
         background-color: fi-var(header-background-color);
         max-height: 60vh;
         overflow-y: auto;
         overscroll-behavior: contain;
         transition: box-shadow 0.3s ease;
-        @include border-radius;
         box-shadow: 0 0 1.5rem 0 light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
+        @include set-fi-var(submenu-offset, -0.5rem);
+        @include border-radius;
+        @include z-index(base, 1);
+
+        [dir="rtl"] & {
+          @include set-fi-var(submenu-offset, 0.5rem);
+        }
 
         .menu-item {
           height: fi-var(submenu-height);
@@ -433,16 +517,21 @@ header {
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow-x: hidden;
-          flex: 4;
         }
 
-        & .nested-item {
+        .nested-item {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          gap: 0.5rem;
 
           .menu-link {
-            max-width: 80%;
+            flex: 1 1 auto;
+            min-inline-size: 0;
+          }
+
+          .submenu-toggle {
+            flex: 0 0 auto;
           }
         }
       }

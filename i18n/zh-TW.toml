@@ -76,6 +76,9 @@ more = "更多"
 selectLanguage = "選擇語言"
 noTranslations = "無翻譯"
 switchTheme = "切換主題"
+submenu = "展開或收合 {{ .Name }} 子選單"
+mainMenu = "主選單"
+systemMenu = "站點功能"
 # === Header ===
 
 # === Footer ===

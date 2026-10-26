@@ -76,6 +76,9 @@ more = "更多"
 selectLanguage = "选择语言"
 noTranslations = "无翻译"
 switchTheme = "切换主题"
+submenu = "展开或收起 {{ .Name }} 子菜单"
+mainMenu = "主菜单"
+systemMenu = "站点功能"
 # === Header ===
 
 # === Footer ===

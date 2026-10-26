@@ -54,9 +54,9 @@
         {{- end -}}
       {{- end -}}
     </div>
-    <nav>
+    <nav class="nav-main" aria-label="{{ T "header.mainMenu" }}">
       <ul class="menu">
-        {{- range .Site.Menus.main -}}
+        {{- range $index, $entry := .Site.Menus.main -}}
           {{- $url := .URL -}}
           {{- with $url -}}
             {{- $url = . | relLangURL -}}
@@ -79,8 +79,12 @@
               {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
             </a>
             {{- if .HasChildren -}}
-              {{ dict "Class" "dropdown-icon fa-solid fa-chevron-down" | partial "plugin/icon.html" }}
-              <ul class="sub-menu">
+              {{- $submenuID := printf "fi-submenu-desktop-%d" $index -}}
+              {{- $submenuLabel := T "header.submenu" (dict "Name" .Name) -}}
+              <button type="button" class="submenu-toggle" data-submenu-toggle aria-expanded="false" aria-controls="{{ $submenuID }}" aria-label="{{ $submenuLabel }}">
+                {{- dict "Class" "dropdown-icon fa-solid fa-chevron-down" | partial "plugin/icon.html" -}}
+              </button>
+              <ul class="sub-menu" id="{{ $submenuID }}">
                 {{- range $k, $v := .Children -}}
                   {{- $url := $v.URL -}}
                   {{- with $url -}}
@@ -112,6 +116,11 @@
             {{- end -}}
           </li>
         {{- end -}}
+      </ul>
+    </nav>
+    {{- /* Keep system controls outside the scrollable main menu nav. */ -}}
+    <nav class="nav-system" aria-label="{{ T "header.systemMenu" }}">
+      <ul class="menu">
         {{- if .Site.Menus.main -}}
           <li class="menu-item delimiter"></li>
         {{- end -}}
@@ -132,10 +141,10 @@
         </li>
         {{- if hugo.IsMultilingual -}}
           <li class="menu-item language-switch">
-            <button type="button" aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}">
+            <button type="button" data-submenu-toggle aria-label="{{ T "header.selectLanguage" }}" title="{{ T "header.selectLanguage" }}" aria-expanded="false" aria-controls="fi-submenu-language-desktop">
               {{- dict "Class" "fa-solid fa-language" | partial "plugin/icon.html" -}}
             </button>
-            <ul class="sub-menu">
+            <ul class="sub-menu" id="fi-submenu-language-desktop">
               {{- if (eq .Kind "404") -}}
                 {{- range hugo.Sites -}}
                   {{- if ne . $.Site -}}
@@ -221,7 +230,7 @@
     <nav>
       <ul class="menu" id="menu-mobile">
         {{- $currentPage := . -}}
-        {{- range .Site.Menus.main -}}
+        {{- range $index, $entry := .Site.Menus.main -}}
           {{- $url := .URL -}}
           {{- with $url -}}
             {{- $url = . | relLangURL -}}
@@ -234,6 +243,8 @@
           {{- end -}}
           <li class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}{{ with .Params.Class }} {{ . }}{{ end }}">
             {{- if .HasChildren -}}
+              {{- $submenuID := printf "fi-submenu-mobile-%d" $index -}}
+              {{- $submenuLabel := T "header.submenu" (dict "Name" .Name) -}}
               <span class="nested-item">
                 <a class="menu-link"
                   {{- with $url }} href="{{ $url }}"{{ else }} href="javascript:void(0);"{{ end }}
@@ -245,9 +256,11 @@
                   {{- .Name }}
                   {{- with .Post }} {{ . | safeHTML -}}{{- end -}}
                 </a>
-                {{ dict "Class" "dropdown-icon fa-solid fa-chevron-right" | partial "plugin/icon.html" }}
+                <button type="button" class="submenu-toggle" data-submenu-toggle aria-expanded="false" aria-controls="{{ $submenuID }}" aria-label="{{ $submenuLabel }}">
+                  {{- dict "Class" "dropdown-icon fa-solid fa-chevron-right" | partial "plugin/icon.html" -}}
+                </button>
               </span>
-              <ul class="sub-menu">
+              <ul class="sub-menu" id="{{ $submenuID }}">
                 {{- range $k, $v := .Children -}}
                   {{- $url := $v.URL -}}
                   {{- with $url -}}

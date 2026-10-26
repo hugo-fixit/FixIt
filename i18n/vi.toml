@@ -77,6 +77,9 @@ more = "Thêm"
 selectLanguage = "Chọn Ngôn ngữ"
 noTranslations = "Không có bản dịch"
 switchTheme = "Đổi chủ đề"
+submenu = "Bật/tắt menu con của {{ .Name }}"
+mainMenu = "Menu chính"
+systemMenu = "Điều khiển trang"
 # === Header ===
 
 # === Footer ===

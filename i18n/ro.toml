@@ -78,6 +78,9 @@ more = "Mai mult"
 selectLanguage = "Selectare Limbă"
 noTranslations = "Fără traduceri"
 switchTheme = "Schimbare Temă"
+submenu = "Comută submeniul pentru {{ .Name }}"
+mainMenu = "Meniu principal"
+systemMenu = "Comenzi site"
 # === Header ===
 
 # === Footer ===

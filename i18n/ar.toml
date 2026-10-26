@@ -79,6 +79,9 @@ more = "المزيد"
 selectLanguage = "اختر اللغة"
 noTranslations = "لا توجد ترجمات"
 switchTheme = "تغيير السمة"
+submenu = "تبديل القائمة الفرعية لـ {{ .Name }}"
+mainMenu = "القائمة الرئيسية"
+systemMenu = "عناصر التحكم بالموقع"
 # === Header ===
 
 # === Footer ===

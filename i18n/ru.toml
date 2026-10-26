@@ -78,6 +78,9 @@ more = "Больше"
 selectLanguage = "Выбор Языка"
 noTranslations = "Нет переводов"
 switchTheme = "Сменить Тему"
+submenu = "Переключить подменю «{{ .Name }}»"
+mainMenu = "Главное меню"
+systemMenu = "Управление сайтом"
 # === Header ===
 
 # === Footer ===
