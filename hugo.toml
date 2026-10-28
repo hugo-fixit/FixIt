@@ -67,6 +67,9 @@ capitalizeListTitles = false
 #     "warning-link-check"               - external link check failed
 #     "warning-pagefind"                 - Pagefind search index not found
 #     "warning-remote-image"             - failed to get remote image
+#     "warning-watermark-config"         - watermark `image` or `text` not configured
+#     "warning-watermark-font"           - watermark font not found or CJK font missing
+#     "warning-watermark-image"          - watermark image not found
 #   Hugo message IDs:
 #     "err-youtube-remote"               - youtube shortcode failed to retrieve remote data
 #     "shortcode-vimeo-simple"           - vimeo_simple shortcode failed to retrieve remote data
@@ -657,6 +660,37 @@ optimise = false
 # A list of image file names or patterns to exclude from optimisation.
 # Example: `["no-optimize.jpg", "*.tiff", "images/exclude-*.webp"]`
 black_list = []
+
+# Image watermark configuration.
+# Applied to content images and featured images. Enabling the watermark
+# triggers image processing even when `optimise = false`.
+[params.image.watermark]
+# Whether to add a watermark to images.
+enable = false
+# Watermark image path relative to `assets`, takes precedence over `text`
+# unless the image shortcode passes `watermark="text"`.
+# A transparent PNG is recommended.
+image = ""
+# Text watermark. Used when `image` is empty, or when an image is rendered with
+# `watermark="text"` in the `image` shortcode.
+text = ""
+# Font path relative to `assets`, required for non-ASCII text such as Chinese.
+# The font must be a TTF or OTF file; font family names are not supported.
+font = ""
+# Position: top-left, top, top-right, left, center, right, bottom-left, bottom, bottom-right.
+position = "bottom-right"
+# Horizontal offset from the image edge in pixels.
+offset_x = 16
+# Vertical offset from the image edge in pixels.
+offset_y = 16
+# Text size in pixels. 0 or negative = auto, about 3% of the image width.
+size = 0
+# Text color in 3- or 6-digit hexadecimal notation.
+color = "#ffffff"
+# Opacity of the image watermark, between 0.0 and 1.0.
+opacity = 0.8
+# Width of the image watermark as a fraction of the image width. 0 = original size.
+scale = 0.15
 
 # Code block wrapper configuration.
 # You can override the global config via Markdown attributes.

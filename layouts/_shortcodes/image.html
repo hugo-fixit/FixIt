@@ -10,6 +10,7 @@
 -}}
 {{- $options = dict "OptimConfig" $optim | merge $options -}}
 {{- $optimise := .Get "optimise" -}}
+{{- $watermark := .Get "watermark" -}}
 {{- $cacheRemote := .Get "cacheRemote" -}}
 
 {{- /* Default lazy loading for both named and positional params */ -}}
@@ -23,6 +24,7 @@
   {{- $options = dict "Rel" (.Get "rel") | merge $options -}}
   {{- with .Get "loading" -}}{{- $options = dict "Loading" . | merge $options -}}{{- end -}}
   {{- if ne $optimise nil -}}{{- $options = dict "Optimise" $optimise | merge $options -}}{{- end -}}
+  {{- if and (ne $watermark nil) (ne $watermark "") -}}{{- $options = dict "Watermark" $watermark | merge $options -}}{{- end -}}
   {{- if ne $cacheRemote nil -}}{{- $options = dict "CacheRemote" $cacheRemote | merge $options -}}{{- end -}}
 {{- else -}}
   {{- $options = cond $caption true false | dict "Linked" | merge $options -}}

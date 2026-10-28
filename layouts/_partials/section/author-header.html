@@ -12,7 +12,7 @@
 {{- $name := $author.name | default .Page.Title -}}
 {{- $avatar := "" -}}
 {{- if $author.avatar -}}
-  {{- $avatar = dict "Src" $author.avatar "Class" "avatar" "Alt" $name "Width" 96 "Height" 96 "OptimConfig" $optim | partial "plugin/image.html" -}}
+  {{- $avatar = dict "Src" $author.avatar "Class" "avatar" "Alt" $name "Width" 96 "Height" 96 "OptimConfig" $optim "Watermark" false | partial "plugin/image.html" -}}
 {{- else -}}
   {{- $avatar = dict "Class" "fa-solid fa-user-circle author-icon" | partial "plugin/icon.html" -}}
 {{- end -}}

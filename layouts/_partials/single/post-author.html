@@ -21,7 +21,7 @@
     {{- $content := $author.name | default "Anonymous" -}}
     {{- $icon := dict "Class" "fa-solid fa-user-circle me-1" -}}
     {{- if $author.avatar | and ($.Param "author_avatar") -}}
-      {{- $content = printf "%v&nbsp;%v" (dict "Src" $author.avatar "Class" "avatar" "Alt" $content "Width" 16 "Height" 16 "OptimConfig" $optim | partial "plugin/image.html") $content -}}
+      {{- $content = printf "%v&nbsp;%v" (dict "Src" $author.avatar "Class" "avatar" "Alt" $content "Width" 16 "Height" 16 "OptimConfig" $optim "Watermark" false | partial "plugin/image.html") $content -}}
       {{- $icon = "" -}}
     {{- end -}}
     {{- if $author.link -}}
