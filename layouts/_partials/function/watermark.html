@@ -1,0 +1,159 @@
+{{- /*
+  Apply a watermark to an image resource.
+
+  The watermark is configured via `params.image.watermark`. When both `image`
+  and `text` are set, the image watermark takes precedence. Set `.Mode` to
+  "text" or "image" to force a watermark type.
+
+  The filter is applied after resizing, so the watermark keeps a constant
+  pixel size across the generated srcset variants. Use `scale` for image
+  watermarks and `size` for text watermarks to make them proportional.
+
+  @param {Resource} .Image - Image resource to watermark (required)
+  @param {Map} .Config - Watermark configuration with camelCase keys (required)
+  @param {String} [.Mode] - Force the watermark type: "text" or "image"
+  @return {Resource} The watermarked image resource, or the original resource on failure
+
+  @example
+  {{- $image = dict "Image" $image "Config" $config.watermark | partial "function/watermark.html" -}}
+*/ -}}
+{{- $image := .Image -}}
+{{- $config := .Config | default dict -}}
+{{- $mode := printf "%v" (.Mode | default "") -}}
+{{- $text := printf "%v" ($config.text | default "") -}}
+{{- $overlayPath := printf "%v" ($config.image | default "") -}}
+
+{{- /* Preserve 0 as a valid offset */ -}}
+{{- $offsetX := 16 -}}
+{{- if isset $config "offsetX" -}}{{- $offsetX = int $config.offsetX -}}{{- end -}}
+{{- $offsetY := 16 -}}
+{{- if isset $config "offsetY" -}}{{- $offsetY = int $config.offsetY -}}{{- end -}}
+
+{{- $positions := dict
+  "top-left" (dict "h" "left" "v" "top")
+  "top" (dict "h" "center" "v" "top")
+  "top-right" (dict "h" "right" "v" "top")
+  "left" (dict "h" "left" "v" "center")
+  "center" (dict "h" "center" "v" "center")
+  "right" (dict "h" "right" "v" "center")
+  "bottom-left" (dict "h" "left" "v" "bottom")
+  "bottom" (dict "h" "center" "v" "bottom")
+  "bottom-right" (dict "h" "right" "v" "bottom")
+-}}
+{{- $position := index $positions "bottom-right" -}}
+{{- with $config.position -}}
+  {{- $position = index $positions . | default $position -}}
+{{- end -}}
+{{- $h := $position.h -}}
+{{- $v := $position.v -}}
+
+{{- $useImage := false -}}
+{{- $useText := false -}}
+{{- if eq $mode "image" -}}
+  {{- $useImage = true -}}
+{{- else if eq $mode "text" -}}
+  {{- $useText = true -}}
+{{- else if $overlayPath -}}
+  {{- $useImage = true -}}
+{{- else if $text -}}
+  {{- $useText = true -}}
+{{- end -}}
+
+{{- if $useImage -}}
+  {{- if not $overlayPath -}}
+    {{- warnidf "warning-watermark-config" "[watermark] `image` mode requires `params.image.watermark.image`" -}}
+    {{- return $image -}}
+  {{- end -}}
+  {{- /* Image watermark */ -}}
+  {{- $overlay := resources.Get $overlayPath -}}
+  {{- if not $overlay -}}
+    {{- warnidf "warning-watermark-image" "[watermark] Image %q not found in assets, skipping watermark" $overlayPath -}}
+    {{- return $image -}}
+  {{- end -}}
+  {{- if or (ne $overlay.ResourceType "image") (eq $overlay.MediaType.SubType "svg") -}}
+    {{- warnidf "warning-watermark-image" "[watermark] Resource %q is not a raster image, skipping watermark" $overlayPath -}}
+    {{- return $image -}}
+  {{- end -}}
+
+  {{- /* Scale the overlay relative to the base image width */ -}}
+  {{- $scale := 0.15 -}}
+  {{- if isset $config "scale" -}}{{- $scale = float $config.scale -}}{{- end -}}
+  {{- if gt $scale 0.0 -}}
+    {{- $overlayWidth := int (mul $image.Width $scale) -}}
+    {{- if gt $overlayWidth 0 -}}
+      {{- $overlay = $overlay.Resize (printf "%dx" $overlayWidth) -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- /* Opacity is baked into the overlay */ -}}
+  {{- $opacity := 0.8 -}}
+  {{- if isset $config "opacity" -}}{{- $opacity = float $config.opacity -}}{{- end -}}
+  {{- if lt $opacity 1.0 -}}
+    {{- $opacity = math.Min 1.0 (math.Max 0.0 $opacity) -}}
+    {{- $overlay = $overlay.Filter (images.Opacity $opacity) -}}
+  {{- end -}}
+
+  {{- $x := div (sub $image.Width $overlay.Width) 2 -}}
+  {{- $y := div (sub $image.Height $overlay.Height) 2 -}}
+  {{- if eq $h "left" -}}
+    {{- $x = $offsetX -}}
+  {{- else if eq $h "right" -}}
+    {{- $x = sub (sub $image.Width $overlay.Width) $offsetX -}}
+  {{- end -}}
+  {{- if eq $v "top" -}}
+    {{- $y = $offsetY -}}
+  {{- else if eq $v "bottom" -}}
+    {{- $y = sub (sub $image.Height $overlay.Height) $offsetY -}}
+  {{- end -}}
+  {{- if lt $x 0 -}}{{- $x = 0 -}}{{- end -}}
+  {{- if lt $y 0 -}}{{- $y = 0 -}}{{- end -}}
+
+  {{- return $image.Filter (images.Overlay $overlay $x $y) -}}
+{{- else if $useText -}}
+  {{- if not $text -}}
+    {{- warnidf "warning-watermark-config" "[watermark] `text` mode requires `params.image.watermark.text`" -}}
+    {{- return $image -}}
+  {{- end -}}
+  {{- /* Text watermark */ -}}
+  {{- $size := 0 -}}
+  {{- if isset $config "size" -}}{{- $size = int $config.size -}}{{- end -}}
+  {{- if le $size 0 -}}
+    {{- $size = div $image.Width 32 -}}
+    {{- if lt $size 1 -}}{{- $size = 1 -}}{{- end -}}
+  {{- end -}}
+
+  {{- $x := div $image.Width 2 -}}
+  {{- $y := div $image.Height 2 -}}
+  {{- if eq $h "left" -}}
+    {{- $x = $offsetX -}}
+  {{- else if eq $h "right" -}}
+    {{- $x = sub $image.Width $offsetX -}}
+  {{- end -}}
+  {{- if eq $v "top" -}}
+    {{- $y = $offsetY -}}
+  {{- else if eq $v "bottom" -}}
+    {{- $y = sub $image.Height $offsetY -}}
+  {{- end -}}
+
+  {{- $options := dict "size" $size "x" $x "y" $y "alignx" $h "aligny" $v -}}
+  {{- with $config.color -}}
+    {{- $options = merge $options (dict "color" (printf "%v" .)) -}}
+  {{- end -}}
+  {{- with $config.font -}}
+    {{- $font := resources.Get (printf "%v" .) -}}
+    {{- if $font -}}
+      {{- $options = merge $options (dict "font" $font) -}}
+    {{- else -}}
+      {{- warnidf "warning-watermark-font" "[watermark] Font %q not found in assets, falling back to the default font" . -}}
+    {{- end -}}
+  {{- else -}}
+    {{- if findRE `[\x{3040}-\x{30FF}\x{3400}-\x{4DBF}\x{4E00}-\x{9FFF}\x{AC00}-\x{D7AF}]` $text -}}
+      {{- warnidf "warning-watermark-font" "[watermark] CJK text requires a font with the corresponding glyphs, set `params.image.watermark.font`" -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- return $image.Filter (images.Text $text $options) -}}
+{{- else -}}
+  {{- warnidf "warning-watermark-config" "[watermark] Neither `image` nor `text` is configured, skipping watermark" -}}
+  {{- return $image -}}
+{{- end -}}

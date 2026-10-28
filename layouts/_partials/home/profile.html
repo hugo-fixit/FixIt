@@ -34,10 +34,10 @@
           {{- $url = .RelPermalink -}}
         {{- end -}}
         <a href="{{ $url }}"{{ with .Title | default .Name }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end }}>
-          {{- dict "Src" $avatar "Alt" "Home avatar" "Width" 96 "Height" 96 "OptimConfig" $optim | partial "plugin/image.html" -}}
+          {{- dict "Src" $avatar "Alt" "Home avatar" "Width" 96 "Height" 96 "OptimConfig" $optim "Watermark" false | partial "plugin/image.html" -}}
         </a>
       {{- else -}}
-        {{- dict "Src" $avatar "Alt" "Home avatar" "Width" 96 "Height" 96 "OptimConfig" $optim | partial "plugin/image.html" -}}
+        {{- dict "Src" $avatar "Alt" "Home avatar" "Width" 96 "Height" 96 "OptimConfig" $optim "Watermark" false | partial "plugin/image.html" -}}
       {{- end -}}
     </div>
   {{- end -}}

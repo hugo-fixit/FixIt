@@ -27,6 +27,7 @@
   @param {Boolean} [.Optimise] - Override site param to enable optimisation
   @param {Boolean} [.CacheRemote] - Override site param to enable remote caching
   @param {Array} [.BlackList] - Override site param black list
+  @param {Boolean|String} [.Watermark] - Override site param; true/false or "text"/"image"
   @param {Object} [.Page] - Page context for page-level image config override
 
   @example
@@ -92,19 +93,72 @@
 {{- /* Optimise image and generate srcset processing */ -}}
 {{- $optim := .OptimConfig -}}
 {{- $optimise := .Optimise | default $config.optimise | default false -}}
+{{- $watermark := $config.watermark | default dict -}}
+{{- if not (reflect.IsMap $watermark) -}}
+  {{- $watermark = dict "enable" $watermark -}}
+{{- end -}}
+{{- $watermarkEnabled := $watermark.enable | default false -}}
+{{- $watermarkMode := "" -}}
+{{- if ne .Watermark nil -}}
+  {{- $watermarkValue := printf "%v" .Watermark -}}
+  {{- if ne $watermarkValue "" -}}
+    {{- if eq (printf "%T" .Watermark) "bool" -}}
+      {{- $watermarkEnabled = .Watermark -}}
+    {{- else -}}
+      {{- $watermarkMode = $watermarkValue -}}
+      {{- if eq $watermarkMode "false" -}}
+        {{- $watermarkEnabled = false -}}
+        {{- $watermarkMode = "" -}}
+      {{- else -}}
+        {{- $watermarkEnabled = true -}}
+        {{- if eq $watermarkMode "true" -}}{{- $watermarkMode = "" -}}{{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $watermarkConfigured := false -}}
+{{- if eq $watermarkMode "text" -}}
+  {{- $watermarkConfigured = ne (printf "%v" ($watermark.text | default "")) "" -}}
+{{- else if eq $watermarkMode "image" -}}
+  {{- $watermarkConfigured = ne (printf "%v" ($watermark.image | default "")) "" -}}
+{{- else -}}
+  {{- $watermarkConfigured = or $watermark.text $watermark.image -}}
+{{- end -}}
+{{- if and $watermarkEnabled (not $watermarkConfigured) -}}
+  {{- if eq $watermarkMode "text" -}}
+    {{- warnidf "warning-watermark-config" "[watermark] `text` mode requires `params.image.watermark.text`" -}}
+  {{- else if eq $watermarkMode "image" -}}
+    {{- warnidf "warning-watermark-config" "[watermark] `image` mode requires `params.image.watermark.image`" -}}
+  {{- else -}}
+    {{- warnidf "warning-watermark-config" "[watermark] Neither `image` nor `text` is configured, skipping watermark" -}}
+  {{- end -}}
+  {{- $watermarkEnabled = false -}}
+{{- end -}}
 {{- $srcset := "" -}}
-{{- if $optim | and $resource | and $optimise | and (not $isBlocked) -}}
+{{- $largest := dict -}}
+{{- if $optim | and $resource | and (or $optimise $watermarkEnabled) | and (not $isBlocked) -}}
   {{ $srcsetSlice := slice -}}
   {{- range $optim -}}
     {{- if .Process -}}
       {{- $processed := $resource.Process .Process -}}
+      {{- if $watermarkEnabled -}}
+        {{- $processed = dict "Image" $processed "Config" $watermark "Mode" $watermarkMode | partial "function/watermark.html" -}}
+      {{- end -}}
       {{- $srcsetSlice = $srcsetSlice | append (printf "%s %s" $processed.RelPermalink .descriptor) -}}
+      {{- if not $largest -}}
+        {{- $largest = $processed -}}
+      {{- else if gt $processed.Width $largest.Width -}}
+        {{- $largest = $processed -}}
+      {{- end -}}
     {{- end -}}
   {{- end -}}
   {{- $srcset = delimit $srcsetSlice ", " -}}
 {{- end -}}
 
 {{- $src := $resource.RelPermalink | default .Src -}}
+{{- if and $watermarkEnabled $largest -}}
+  {{- $src = $largest.RelPermalink -}}
+{{- end -}}
 {{- $alt := .Alt | default $src -}}
 {{- $caption := .Caption | default $alt -}}
 {{- $height := .Height -}}
