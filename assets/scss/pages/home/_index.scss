@@ -45,17 +45,33 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 0.25rem;
       padding-block: 0.5rem;
       font-size: 1.5rem;
 
-      a * {
-        vertical-align: text-bottom;
+      a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        color: light-dark(
+          fi-rgba(fi-var(global-font-color), 0.75),
+          fi-rgba(fi-var(global-font-color), 0.9)
+        );
+        transition: color 0.25s ease, background-color 0.25s ease, translate 0.25s ease;
+
+        @include border-radius(full);
+
+        &:hover,
+        &:focus-visible {
+          color: fi-var(global-font-color);
+          background-color: fi-var(global-border-color-light);
+          translate: 0 -0.125rem;
+        }
       }
 
       img {
         height: 1.5rem;
-        padding: 0 0.25rem;
       }
     }
 
@@ -78,7 +94,7 @@
   }
 
   .home-profile {
-    padding: 2rem 0;
+    padding: 4rem 0;
   }
 
   .home-avatar img {
