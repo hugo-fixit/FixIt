@@ -102,24 +102,28 @@
 
 // Collection List
 .collection-details {
+  overflow: hidden;
+  border: 1px solid fi-var(global-border-color-light);
+  background-color: light-dark(color.adjust($global-background-color, $lightness: -1%), color.adjust($global-background-color-dark, $lightness: 2%));
+
+  @include border-radius(0.5rem);
+
   &:not(:last-of-type) {
     margin-bottom: 0.5rem;
-  }
-
-  &.open {
-    .collection-summary {
-      background-color: light-dark(color.adjust($global-background-color, $lightness: -4%), color.adjust($global-background-color-dark, $lightness: 4%));
-    }
   }
 
   .collection-summary {
     display: flex;
     align-items: baseline;
     gap: 0.25em;
-    padding: 0.2em 0.5em;
+    padding: 0.35em 0.6em;
     user-select: none;
-    background-color: light-dark(color.adjust($global-background-color, $lightness: -4.5%), color.adjust($global-background-color-dark, $lightness: 4.5%));
+    background-color: transparent;
     transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: light-dark(color.adjust($global-background-color, $lightness: -2.5%), color.adjust($global-background-color-dark, $lightness: 2.5%));
+    }
 
     > i.fa-layer-group {
       flex-shrink: 0;
@@ -161,9 +165,15 @@
     }
   }
 
+  &.open {
+    .collection-summary {
+      background-color: light-dark(color.adjust($global-background-color, $lightness: -2.5%), color.adjust($global-background-color-dark, $lightness: 2.5%));
+      border-bottom: 1px solid fi-var(global-border-color-light);
+    }
+  }
+
   .collection-content {
     font-size: fi-var(collection-list-font-size);
-    background-color: light-dark(color.adjust($global-background-color, $lightness: -3%), color.adjust($global-background-color-dark, $lightness: 3%));
 
     .collection-list {
       margin: 0;
@@ -200,6 +210,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.5em;
+      padding-bottom: 0.4em;
 
       [dir="rtl"] & i {
         scale: -1 1;
