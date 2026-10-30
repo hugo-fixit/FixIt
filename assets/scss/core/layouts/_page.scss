@@ -57,10 +57,20 @@
   @include media('md') {
     width: ROUND(56%, 2px);
   }
+
+  @include home-two-column {
+    width: ROUND(90%, 2px);
+    max-width: 1800px;
+  }
 }
 
 @include page-style('narrow') {
   @include media('xl') {
     max-width: 800px;
+  }
+
+  @include home-two-column {
+    width: ROUND(74%, 2px);
+    max-width: 1200px;
   }
 }

@@ -1,0 +1,73 @@
+{{- /*
+  Resolve the blurred backdrop thumbnail for a home post card.
+
+  Local covers are resolved from get-cover and resized locally. Remote covers
+  use the remote URL directly unless `params.image.cache_remote` is enabled;
+  in that case they are fetched through function/get-remote-image.html and
+  resized locally.
+
+  Only processable raster local covers are resized; inline, SVG, GIF, AVIF and
+  other unsupported local covers return an empty string, as do covers in
+  `params.image.black_list` and covers with the image watermark enabled.
+
+  @param {Map} . - Dict with "Cover" (result of function/get-cover.html) and "Src"
+  @return {String} Backdrop image URL, or an empty string
+*/ -}}
+{{- $cover := .Cover -}}
+{{- $src := .Src | default $cover.Source -}}
+{{- $resource := $cover.Resource -}}
+{{- $bgURL := "" -}}
+{{- $config := partial "function/camel-case-keys.html" site.Params.image -}}
+{{- $cacheRemote := $config.cacheRemote | default false -}}
+{{- $watermark := $config.watermark | default dict -}}
+{{- $watermarkEnabled := false -}}
+{{- if reflect.IsMap $watermark -}}
+  {{- $watermarkEnabled = $watermark.enable | default false -}}
+{{- else -}}
+  {{- $watermarkEnabled = $watermark -}}
+{{- end -}}
+{{- $blackList := $config.blackList | default slice -}}
+{{- $isBlocked := false -}}
+{{- with $blackList -}}
+  {{- $regex := replace (delimit . "|") "." "\\." -}}
+  {{- $regex = replace $regex "*" ".*" -}}
+  {{- if gt (findRE $regex $src | len) 0 -}}
+    {{- $isBlocked = true -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if and (not $isBlocked) (not $watermarkEnabled) -}}
+  {{- if not $resource -}}
+    {{- $isRemote := urls.Parse $src | partial "function/is-url-remote.html" -}}
+    {{- if $isRemote -}}
+      {{- if $cacheRemote -}}
+        {{- with dict "Src" $src | partial "function/get-remote-image.html" -}}
+          {{- $resource = . -}}
+        {{- end -}}
+      {{- else -}}
+        {{- $bgURL = $src -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if $resource -}}
+    {{- with $blackList -}}
+      {{- $regex := replace (delimit . "|") "." "\\." -}}
+      {{- $regex = replace $regex "*" ".*" -}}
+      {{- if gt (findRE $regex $resource.Name | len) 0 -}}
+        {{- $isBlocked = true -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- if and (not $isBlocked) (in (slice "jpeg" "png" "webp") $resource.MediaType.SubType) -}}
+      {{- with try ($resource.Resize "96x webp") -}}
+        {{- with .Err -}}
+          {{- warnf "FixIt: failed to resize cover backdrop %q: %v" $src . -}}
+        {{- else -}}
+          {{- $bgURL = .Value.RelPermalink -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $bgURL -}}
