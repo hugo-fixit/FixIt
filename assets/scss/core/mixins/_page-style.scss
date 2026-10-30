@@ -1,36 +1,12 @@
 @use "media" as *;
 
-/// Scope declarations to the home page two-column layout on xl screens.
-///
-/// Must be used inside a selector context (e.g. a `page-style` block).
-/// Accepts any declarations, not just width.
-///
-/// @example
-///   @include page-style('wide') {
-///     @include media('xl') {
-///       width: ROUND(64%, 2px);
-///     }
-///
-///     @include home-two-column {
-///       width: ROUND(90%, 2px);
-///       max-width: 1800px;
-///     }
-///   }
-@mixin home-two-column {
-  @include media('xl') {
-    &.home.posts[data-posts-columns='2'] {
-      @content;
-    }
-  }
-}
-
 /// Page style helper for setting responsive content width.
 ///
 /// This mixin has two modes:
 /// 1) Default mode (no arguments): emits the base page-style rules for all built-in targets.
 /// 2) Variant mode (pass $variant): emits rules under `[data-page-style='$variant']` for the same targets.
 ///
-/// Variant content can scope any declarations to the home two-column layout with `home-two-column`.
+/// Variant content can scope declarations to the home two-column layout with `&.home[data-posts-columns='2']`.
 ///
 /// @param {String | Null} $variant - Variant name (e.g. wide/narrow/custom). When null, emit defaults.
 ///
@@ -44,10 +20,12 @@
 ///
 ///   // User custom: add a custom variant without caring about internal selectors
 ///   @include page-style('custom') {
-///     @include media('xl') { width: ROUND(70%, 2px); }
+///     @include media('xl') {
+///       width: ROUND(70%, 2px);
 ///
-///     @include home-two-column {
-///       width: ROUND(85%, 2px);
+///       &.home[data-posts-columns='2'] {
+///         width: ROUND(85%, 2px);
+///       }
 ///     }
 ///   }
 @mixin page-style($variant: null) {
@@ -58,6 +36,12 @@
       @include media('xl') {
         width: ROUND(60%, 2px);
         max-width: 1200px;
+
+        // Default home two-column width (normal, unset and custom page styles).
+        &.home[data-posts-columns='2'] {
+          width: ROUND(80%, 2px);
+          max-width: 1600px;
+        }
       }
 
       @include media('lg') {
@@ -66,6 +50,10 @@
 
       @include media('md') {
         width: ROUND(52%, 2px);
+
+        &.home {
+          width: ROUND(66%, 2px);
+        }
       }
 
       @include media('sm') {
@@ -74,12 +62,6 @@
 
       @include media('xs') {
         width: 100%;
-      }
-
-      // Default home two-column width (normal, unset and custom page styles).
-      @include home-two-column {
-        width: ROUND(80%, 2px);
-        max-width: 1600px;
       }
     }
   } @else {

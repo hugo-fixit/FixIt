@@ -39,7 +39,7 @@
     // Ring stroke width
     b2t-stroke: 0.5rem,
     // Progress color
-    b2t-prog: light-dark(fi-var(success), fi-var(global-font-color)),
+    b2t-prog: fi-var(global-font-secondary-color),
     // dasharray = circumference = 2πr
     // dashoffset = circumference * (1 - scrollPercent / 100)
     b2t-dasharray: 314.15

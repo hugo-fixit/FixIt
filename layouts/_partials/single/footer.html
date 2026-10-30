@@ -82,9 +82,12 @@
     </div>
     <div class="post-info-line">
       <div class="post-info-md">
-        {{- range $linkOptions -}}
+        {{- range $index, $link := $linkOptions -}}
+          {{- if $index -}}
+            <span class="separator" aria-hidden="true"></span>
+          {{- end -}}
           {{- $commonOptions := dict "ExternalIcon" false -}}
-          <span>{{ partial "plugin/link.html" (. | merge $commonOptions) }}</span>
+          <span>{{ partial "plugin/link.html" ($link | merge $commonOptions) }}</span>
         {{- end -}}
       </div>
       {{- if not .Params.password -}}
@@ -109,9 +112,11 @@
         {{- end -}}
       {{- end -}}
     </section>
-    <section>
+    <section class="post-actions">
       {{- $relLangURL := relLangURL "" -}}
-      <span><a href="javascript:void(0);" onclick="window.history.back();">{{ T "single.back" }}</a></span>&nbsp;|&nbsp;<span><a href="{{ $relLangURL }}">{{ T "single.home" }}</a></span>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">{{ T "single.back" }}</a></span>
+      <span class="separator" aria-hidden="true"></span>
+      <span><a href="{{ $relLangURL }}">{{ T "single.home" }}</a></span>
     </section>
   </div>
 

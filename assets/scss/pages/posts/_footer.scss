@@ -8,6 +8,12 @@
     margin-block: -2rem 0;
   }
 
+  .separator {
+    width: 1px;
+    height: 0.8em;
+    background-color: fi-var(global-font-secondary-color);
+  }
+
   .post-info {
     border-bottom: 1px solid fi-var(global-border-color);
     padding: 0.3rem 0;
@@ -31,16 +37,13 @@
       }
 
       .post-info-md {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
         font-size: 0.8rem;
         width: fit-content;
 
         @include link(false, false);
-
-        >span:not(:first-child)::before {
-          content: '|';
-          margin-inline: 0.25rem;
-          color: fi-var(global-font-secondary-color);
-        }
       }
 
       .post-info-share {
@@ -65,6 +68,12 @@
       @include media('print') {
         display: none !important;
       }
+    }
+
+    .post-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
   }
 

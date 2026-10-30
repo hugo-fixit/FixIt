@@ -9,6 +9,8 @@
 
 {{- $profile := .Site.Params.home.profile -}}
 {{- $author := partial "function/get-author-map.html" .Params.author -}}
+{{- $posts := .Site.Params.home.posts | default dict -}}
+{{- $avatarPx := cond (ne $posts.enable false) 96 128 -}}
 
 <div class="home-profile">
   {{- $avatar := dict "Email" $profile.gravatar_email "Size" "96" | partial "function/get-gravatar.html" | default $profile.avatar_url | default $author.avatar -}}
@@ -34,10 +36,10 @@
           {{- $url = .RelPermalink -}}
         {{- end -}}
         <a href="{{ $url }}"{{ with .Title | default .Name }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreferrer" target="_blank"{{ end }}>
-          {{- dict "Src" $avatar "Alt" "Home avatar" "Width" 96 "Height" 96 "OptimConfig" $optim "Watermark" false | partial "plugin/image.html" -}}
+          {{- dict "Src" $avatar "Alt" "Home avatar" "Width" $avatarPx "Height" $avatarPx "OptimConfig" $optim "Watermark" false | partial "plugin/image.html" -}}
         </a>
       {{- else -}}
-        {{- dict "Src" $avatar "Alt" "Home avatar" "Width" 96 "Height" 96 "OptimConfig" $optim "Watermark" false | partial "plugin/image.html" -}}
+        {{- dict "Src" $avatar "Alt" "Home avatar" "Width" $avatarPx "Height" $avatarPx "OptimConfig" $optim "Watermark" false | partial "plugin/image.html" -}}
       {{- end -}}
     </div>
   {{- end -}}

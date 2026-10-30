@@ -48,6 +48,11 @@
   @include media('xl') {
     width: ROUND(64%, 2px);
     max-width: 1600px;
+
+    &.home[data-posts-columns='2'] {
+      width: ROUND(90%, 2px);
+      max-width: 1800px;
+    }
   }
 
   @include media('lg') {
@@ -56,21 +61,20 @@
 
   @include media('md') {
     width: ROUND(56%, 2px);
-  }
 
-  @include home-two-column {
-    width: ROUND(90%, 2px);
-    max-width: 1800px;
+    &.home {
+      width: ROUND(70%, 2px);
+    }
   }
 }
 
 @include page-style('narrow') {
   @include media('xl') {
     max-width: 800px;
-  }
 
-  @include home-two-column {
-    width: ROUND(74%, 2px);
-    max-width: 1200px;
+    &.home[data-posts-columns='2'] {
+      width: ROUND(74%, 2px);
+      max-width: 1200px;
+    }
   }
 }
