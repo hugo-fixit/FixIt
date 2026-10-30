@@ -12,22 +12,20 @@
       {{- if $isTwoColumn -}}
         {{- $bgURL = dict "Cover" $cover "Src" $cover.Source | partial "function/get-cover-backdrop.html" -}}
       {{- end -}}
-      <div class="summary-media">
+      <a class="summary-media" href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true">
         {{- with $bgURL -}}
           <img class="summary-media-bg" src="{{ . }}" alt="" aria-hidden="true" loading="lazy" decoding="async" hidden>
         {{- end -}}
         <div class="featured-image-preview">
-          <a href="{{ $.RelPermalink }}" aria-label="{{ $.Title }}" tabindex="-1" aria-hidden="true">
-            {{- $optim := slice
-              (dict "Process" "fill 400x168 Center webp" "descriptor" "400w")
-              (dict "Process" "fill 800x336 Center webp" "descriptor" "800w")
-              (dict "Process" "fill 1200x504 Center webp" "descriptor" "1200w")
-              (dict "Process" "fill 1600x672 Center webp" "descriptor" "1600w")
-            -}}
-            {{- dict "Src" $cover.Source "Title" $.Title "Resources" $.Resources "Matches" $cover.Matches "Loading" "eager" "Width" "800" "Height" "336" "Sizes" $sizes "OptimConfig" $optim "Alt" (printf "Featured image for %v" $.Title) | partial "plugin/image.html" -}}
-          </a>
+          {{- $optim := slice
+            (dict "Process" "fill 400x168 Center webp" "descriptor" "400w")
+            (dict "Process" "fill 800x336 Center webp" "descriptor" "800w")
+            (dict "Process" "fill 1200x504 Center webp" "descriptor" "1200w")
+            (dict "Process" "fill 1600x672 Center webp" "descriptor" "1600w")
+          -}}
+          {{- dict "Src" $cover.Source "Title" $.Title "Resources" $.Resources "Matches" $cover.Matches "Loading" "eager" "Width" "800" "Height" "336" "Sizes" $sizes "OptimConfig" $optim "Alt" (printf "Featured image for %v" $.Title) | partial "plugin/image.html" -}}
         </div>
-      </div>
+      </a>
     {{- end -}}
   {{- end -}}
 
