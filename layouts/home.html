@@ -8,6 +8,7 @@
 {{- define "content" -}}
   {{- $profile := .Site.Params.home.profile -}}
   {{- $posts := .Site.Params.home.posts -}}
+  {{- $columns := partial "function/home-columns.html" . -}}
   {{- $pages := slice -}}
 
   {{- /* Paginate calculation */ -}}
@@ -25,7 +26,7 @@
     {{- end -}}
   {{- end -}}
 
-  <div class="page home{{ if ne $posts.enable false }} posts{{ end }}">
+  <div class="page home{{ if ne $posts.enable false }} posts{{ end }}" data-posts-columns="{{ $columns }}">
     {{- /* Only show profile and content on first page */ -}}
     {{- if (not $profile.only_first_page) | or (eq $.Paginator.PageNumber 1) -}}
       {{- /* Profile */ -}}
@@ -45,9 +46,11 @@
 
     {{- /* Paginate rendering */ -}}
     {{- if ne $posts.enable false -}}
-      {{- range $pages.Pages -}}
-        {{- .Render "summary" -}}
-      {{- end -}}
+      <div class="home-posts">
+        {{- range $pages.Pages -}}
+          {{- .Render "summary" -}}
+        {{- end -}}
+      </div>
       {{- partial "base/paginator.html" . -}}
     {{- end -}}
   </div>

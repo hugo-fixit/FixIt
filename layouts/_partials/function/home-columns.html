@@ -1,0 +1,13 @@
+{{- /*
+  Resolve and validate the home post list column count.
+
+  @param {Page} . - The page context
+  @return {String} Normalized column count: "1" (default) or "2"
+*/ -}}
+{{- $raw := .Site.Params.home.posts.columns | default 1 -}}
+{{- $columns := printf "%v" $raw -}}
+{{- if not (in (slice "1" "2") $columns) -}}
+  {{- warnidf "warning-home-columns" "FixIt: unsupported params.home.posts.columns %q, expected 1 or 2; falling back to 1." $columns -}}
+  {{- $columns = "1" -}}
+{{- end -}}
+{{- return $columns -}}

@@ -1,64 +1,81 @@
 <article class="single summary" itemscope itemtype="http://schema.org/Article">
+  {{- $columns := partial "function/home-columns.html" . -}}
+  {{- $isTwoColumn := eq $columns "2" -}}
+  {{- $sizesTail := cond $isTwoColumn "(max-width: 1999.9px) 16vw, 300px" "800px" -}}
+  {{- $sizes := printf "(max-width: 679.9px) 100vw, (max-width: 959.9px) 80vw, (max-width: 1439.9px) 56vw, %s" $sizesTail -}}
+
   {{- /* Featured image */ -}}
   {{- if ne .Site.Params.home.posts.image_preview false -}}
-    {{- $cover := dict "Page" . "Preview" true | partial "function/get-cover.html" -}}
+    {{- $cover := dict "Page" . "Preview" true "Build" $isTwoColumn | partial "function/get-cover.html" -}}
     {{- if $cover.Source | or (gt (len $cover.Matches) 0) -}}
-      <div class="featured-image-preview">
-        <a href="{{ $.RelPermalink }}" aria-label="{{ $.Title }}">
-          {{- $optim := slice
-            (dict "Process" "fill 800x336 Center webp" "descriptor" "800w")
-            (dict "Process" "fill 1200x504 Center webp" "descriptor" "1200w")
-            (dict "Process" "fill 1600x672 Center webp" "descriptor" "1600w")
-          -}}
-          {{- dict "Src" $cover.Source "Title" $.Title "Resources" $.Resources "Matches" $cover.Matches "Loading" "eager" "Width" "800" "Height" "336" "Sizes" "(max-width: 679.9px) 100vw, (max-width: 959.9px) 80vw, (max-width: 1439.9px) 56vw, 800px" "OptimConfig" $optim "Alt" (printf "Featured image for %v" $.Title) | partial "plugin/image.html" -}}
-        </a>
+      {{- $bgURL := "" -}}
+      {{- if $isTwoColumn -}}
+        {{- $bgURL = dict "Cover" $cover "Src" $cover.Source | partial "function/get-cover-backdrop.html" -}}
+      {{- end -}}
+      <div class="summary-media">
+        {{- with $bgURL -}}
+          <img class="summary-media-bg" src="{{ . }}" alt="" aria-hidden="true" loading="lazy" decoding="async" hidden>
+        {{- end -}}
+        <div class="featured-image-preview">
+          <a href="{{ $.RelPermalink }}" aria-label="{{ $.Title }}" tabindex="-1" aria-hidden="true">
+            {{- $optim := slice
+              (dict "Process" "fill 400x168 Center webp" "descriptor" "400w")
+              (dict "Process" "fill 800x336 Center webp" "descriptor" "800w")
+              (dict "Process" "fill 1200x504 Center webp" "descriptor" "1200w")
+              (dict "Process" "fill 1600x672 Center webp" "descriptor" "1600w")
+            -}}
+            {{- dict "Src" $cover.Source "Title" $.Title "Resources" $.Resources "Matches" $cover.Matches "Loading" "eager" "Width" "800" "Height" "336" "Sizes" $sizes "OptimConfig" $optim "Alt" (printf "Featured image for %v" $.Title) | partial "plugin/image.html" -}}
+          </a>
+        </div>
       </div>
     {{- end -}}
   {{- end -}}
 
-  {{- /* Title */ -}}
-  <h2 class="single-title" itemprop="name headline">
-    {{- with .Params.weight -}}
-      {{- $icon := dict "Class" "fa-solid fa-thumbtack" -}}
-      <span title="{{ T `single.pin` }}" class="icon-pin">{{- $icon | partial "plugin/icon.html" -}}</span>
-    {{- end -}}
-    {{- $repost := .Params.repost | default dict -}}
-    {{- with $repost -}}
-      {{- if eq .Enable true -}}
-        {{- $icon := dict "Class" "fa-solid fa-retweet" -}}
-        {{- $title := cond (hasPrefix .Url "http") (printf "%v -> %v" (T "single.repost") .Url ) (T "single.repost") -}}
-        <span title="{{ $title }}" class="icon-repost">{{- $icon | partial "plugin/icon.html" -}}</span>
+  <div class="summary-body">
+    {{- /* Title */ -}}
+    <h2 class="single-title" itemprop="name headline">
+      {{- with .Params.weight -}}
+        {{- $icon := dict "Class" "fa-solid fa-thumbtack" -}}
+        <span title="{{ T `single.pin` }}" class="icon-pin">{{- $icon | partial "plugin/icon.html" -}}</span>
       {{- end -}}
-    {{- end -}}
-    <a href="{{ .RelPermalink }}">{{ cond (.Param "capitalize_titles") (title .Title) .Title }}</a>
-  </h2>
-
-  {{- /* Meta */ -}}
-  <div class="post-meta">
-    {{- partial "single/post-author.html" . -}}
-
-    {{- with .PublishDate | dateFormat (.Site.Params.date_format | default "2006-01-02") -}}
-      &nbsp;<span class="post-publish" title='{{ "2006-01-02 15:04:05" | $.PublishDate.Format }}'>
-        {{- printf `<time datetime="%v">%v</time>` . . | dict "Date" | T "single.publishedOnDate" | safeHTML -}}
-      </span>
-    {{- end -}}
-
-    {{- partial "single/post-included-in.html" . -}}
-  </div>
-
-  {{- /* Summary content */ -}}
-  <div class="content">
-    {{- if .Summary -}}
-      {{- $plainify := .Param "summary_plainify" | default false -}}
-      {{- with .Markup "home" -}}
-        {{- with .Render -}}
-          {{- $summary := dict "Content" .Summary.Text "Ruby" ($.Param "ruby") "Fraction" ($.Param "fraction") "Fontawesome" ($.Param "fontawesome") | partial "function/content.html" | safeHTML -}}
-          {{- cond $plainify ($summary | plainify) $summary -}}
+      {{- $repost := .Params.repost | default dict -}}
+      {{- with $repost -}}
+        {{- if eq .Enable true -}}
+          {{- $icon := dict "Class" "fa-solid fa-retweet" -}}
+          {{- $title := cond (hasPrefix .Url "http") (printf "%v -> %v" (T "single.repost") .Url ) (T "single.repost") -}}
+          <span title="{{ $title }}" class="icon-repost">{{- $icon | partial "plugin/icon.html" -}}</span>
         {{- end -}}
       {{- end -}}
-    {{- else -}}
-      {{- .Description | safeHTML -}}
-    {{- end -}}
+      <a href="{{ .RelPermalink }}">{{ cond (.Param "capitalize_titles") (title .Title) .Title }}</a>
+    </h2>
+
+    {{- /* Meta */ -}}
+    <div class="post-meta">
+      {{- partial "single/post-author.html" . -}}
+
+      {{- with .PublishDate | dateFormat (.Site.Params.date_format | default "2006-01-02") -}}
+        &nbsp;<span class="post-publish" title='{{ "2006-01-02 15:04:05" | $.PublishDate.Format }}'>
+          {{- printf `<time datetime="%v">%v</time>` . . | dict "Date" | T "single.publishedOnDate" | safeHTML -}}
+        </span>
+      {{- end -}}
+
+      {{- partial "single/post-included-in.html" . -}}
+    </div>
+
+    {{- /* Summary content */ -}}
+    <div class="content">
+      {{- if .Summary -}}
+        {{- $plainify := .Param "summary_plainify" | default false -}}
+        {{- with .Markup "home" -}}
+          {{- with .Render -}}
+            {{- $summary := dict "Content" .Summary.Text "Ruby" ($.Param "ruby") "Fraction" ($.Param "fraction") "Fontawesome" ($.Param "fontawesome") | partial "function/content.html" | safeHTML -}}
+            {{- cond $plainify ($summary | plainify) $summary -}}
+          {{- end -}}
+        {{- end -}}
+      {{- else -}}
+        {{- .Description | safeHTML -}}
+      {{- end -}}
+    </div>
   </div>
 
   {{- /* Footer */ -}}

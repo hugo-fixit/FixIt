@@ -129,7 +129,7 @@
       }
 
       &:hover img {
-        scale: 1.01;
+        scale: 1.02;
       }
     }
 
@@ -166,6 +166,104 @@
           content: ',';
           margin-inline-end: 0.25rem;
         }
+      }
+    }
+  }
+}
+
+// Two-column horizontal post cards on extra-large screens.
+// Requires the default summary structure (.summary-body).
+.home.posts[data-posts-columns='2'] .home-posts:has(.summary-body) {
+  @include media('xl') {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    align-items: stretch;
+
+    .summary {
+      display: grid;
+      grid-template-columns: 40% minmax(0, 1fr);
+      column-gap: 0.5rem;
+      row-gap: 0;
+      box-sizing: border-box;
+      padding: 1rem 1.25rem;
+      overflow: hidden;
+      background-color: fi-var(global-background-color);
+      border: 1px solid fi-var(global-border-color);
+
+      @include border-radius(1rem);
+      @include box-shadow(always, (0 4px 8px fi-rgba(fi-var(global-font-color), 0.1)));
+      @include box-shadow(hover, (0 8px 16px fi-rgba(fi-var(global-font-color), 0.2)));
+
+      &:nth-child(even) {
+        grid-template-columns: minmax(0, 1fr) 40%;
+
+        .summary-media {
+          grid-column: 2;
+        }
+
+        .summary-body {
+          grid-column: 1;
+        }
+      }
+
+      // A lone card in the last row spans both columns.
+      &:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+      }
+
+      &:not(:has(.featured-image-preview)) {
+        grid-template-columns: minmax(0, 1fr);
+
+        .summary-body {
+          grid-column: 1;
+        }
+      }
+
+      &:not(:last-of-type)::after {
+        display: none;
+      }
+
+      .summary-media {
+        position: relative;
+        grid-column: 1;
+        grid-row: 1;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        @include border-radius(1rem);
+      }
+
+      .summary-media-bg {
+        display: block;
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.55;
+        filter: blur(20px) saturate(1.2);
+        scale: 1.2;
+        pointer-events: none;
+
+        @include dark-mode {
+          opacity: 0.35;
+        }
+      }
+
+      .featured-image-preview {
+        margin: 0;
+      }
+
+      .summary-body {
+        grid-column: 2;
+        grid-row: 1;
+        min-width: 0;
+      }
+
+      .post-footer {
+        grid-column: 1 / -1;
+        grid-row: 2;
       }
     }
   }

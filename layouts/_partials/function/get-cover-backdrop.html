@@ -1,0 +1,45 @@
+{{- /*
+  Resolve the blurred backdrop thumbnail for a home post card.
+
+  Only local, processable raster covers are used. Remote, inline, SVG, GIF,
+  AVIF and other unsupported covers return an empty string, as do covers in
+  `params.image.black_list` and covers with the image watermark enabled.
+
+  @param {Map} . - Dict with "Cover" (result of function/get-cover.html) and "Src"
+  @return {String} Backdrop image URL, or an empty string
+*/ -}}
+{{- $cover := .Cover -}}
+{{- $src := .Src | default $cover.Source -}}
+{{- $resource := $cover.Resource -}}
+{{- $bgURL := "" -}}
+{{- if $resource -}}
+  {{- $config := partial "function/camel-case-keys.html" site.Params.image -}}
+  {{- $watermark := $config.watermark | default dict -}}
+  {{- $watermarkEnabled := false -}}
+  {{- if reflect.IsMap $watermark -}}
+    {{- $watermarkEnabled = $watermark.enable | default false -}}
+  {{- else -}}
+    {{- $watermarkEnabled = $watermark -}}
+  {{- end -}}
+
+  {{- $blackList := $config.blackList | default slice -}}
+  {{- $isBlocked := false -}}
+  {{- with $blackList -}}
+    {{- $regex := replace (delimit . "|") "." "\\." -}}
+    {{- $regex = replace $regex "*" ".*" -}}
+    {{- if or (gt (findRE $regex $src | len) 0) (gt (findRE $regex $resource.Name | len) 0) -}}
+      {{- $isBlocked = true -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if and (not $isBlocked) (not $watermarkEnabled) (in (slice "jpeg" "png" "webp") $resource.MediaType.SubType) -}}
+    {{- with try ($resource.Resize "96x webp") -}}
+      {{- with .Err -}}
+        {{- warnf "FixIt: failed to resize cover backdrop %q: %v" $src . -}}
+      {{- else -}}
+        {{- $bgURL = .Value.RelPermalink -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $bgURL -}}

@@ -1598,6 +1598,10 @@ enable = true
 paginate = 6
 # Whether to show featured image preview in home page post list.
 image_preview = true
+# Number of columns for the home post list.
+# Available values: [1, 2]
+# 2 enables the horizontal two-column card layout on extra-large screens (>= 1440px).
+columns = 1
 
 # Social configuration about the author.
 # Custom social links like the following.
