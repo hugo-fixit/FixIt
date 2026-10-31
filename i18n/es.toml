@@ -190,6 +190,10 @@ wechatpay = "WeChat Pay"
 alipay = "Alipay"
 paypal = "PayPal"
 bitcoin = "Bitcoin"
+
+[single.follow]
+btn = "Seguir"
+title = "¡Sígueme en {{ .Platform }}!"
 # === Single Post ===
 
 # === Error Pages ===

@@ -186,6 +186,10 @@ wechatpay = "WeChat"
 alipay = "アリペイ"
 paypal = "ペイパル"
 bitcoin = "ビットコイン"
+
+[single.follow]
+btn = "フォロー"
+title = "{{ .Platform }} でフォローしてください！"
 # === Single Post ===
 
 # === Error Pages ===

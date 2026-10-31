@@ -191,6 +191,10 @@ wechatpay = "वीचैट पे"
 alipay = "अली पे"
 paypal = "पेपैल"
 bitcoin = "बिटकॉइन"
+
+[single.follow]
+btn = "फ़ॉलो करें"
+title = "मुझे {{ .Platform }} पर फ़ॉलो करें!"
 # === Single Post ===
 
 # === Error Pages ===

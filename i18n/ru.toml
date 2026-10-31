@@ -190,6 +190,10 @@ wechatpay = ""
 alipay = ""
 paypal = ""
 bitcoin = ""
+
+[single.follow]
+btn = "Подписаться"
+title = "Подпишитесь на меня в {{ .Platform }}!"
 # === Single Post ===
 
 # === Error Pages ===

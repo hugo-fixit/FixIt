@@ -1,0 +1,71 @@
+{{- /*
+  Get a normalized social entry for a platform key.
+
+  @param {String} . - Platform key (case-insensitive), e.g. "github"
+  @return {Map} Merged social entry, empty map when the platform is not configured or disabled
+  @example {{- $social := partial "function/get-social-entry.html" "github" -}}
+*/ -}}
+
+{{- $key := lower (printf "%v" .) -}}
+{{- $socialMap := resources.Get "data/social.yml" | transform.Unmarshal -}}
+{{- $social := $key | index $socialMap | default dict -}}
+{{- $value := false -}}
+{{- range $k, $v := site.Params.social -}}
+  {{- if eq (lower (printf "%v" $k)) $key -}}
+    {{- $value = $v -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $value -}}
+  {{- if reflect.IsMap $value -}}
+    {{- with $value.weight -}}
+      {{- $social = dict "Weight" . | merge $social -}}
+    {{- end -}}
+    {{- with $value.prefix -}}
+      {{- $social = dict "Prefix" . | merge $social -}}
+    {{- end -}}
+    {{- with $value.template -}}
+      {{- $social = dict "Template" . | merge $social -}}
+    {{- end -}}
+    {{- with $value.id -}}
+      {{- $social = dict "Id" . | merge $social -}}
+    {{- end -}}
+    {{- with $value.url -}}
+      {{- $social = dict "Url" . | merge $social -}}
+    {{- end -}}
+    {{- with $value.title -}}
+      {{- $social = dict "Title" . | merge $social -}}
+    {{- end -}}
+    {{- with $value.newtab -}}
+      {{- $social = dict "Newtab" . | merge $social -}}
+    {{- end -}}
+    {{- with $value.icon -}}
+      {{- $icon := dict -}}
+      {{- with .class -}}
+        {{- $icon = dict "Class" . | merge $icon -}}
+      {{- end -}}
+      {{- with .simpleicons -}}
+        {{- $icon = dict "Simpleicons" . | merge $icon -}}
+      {{- end -}}
+      {{- with .src -}}
+        {{- $icon = dict "Src" . | merge $icon -}}
+      {{- end -}}
+      {{- $social = dict "Icon" $icon | merge $social -}}
+    {{- end -}}
+  {{- else if ne $value true -}}
+    {{- $social = dict "Id" $value | merge $social -}}
+  {{- end -}}
+  {{- with $social.Icon -}}
+    {{- if .Simpleicons -}}
+      {{- $prefix := (site.Store.Get "cdn" | default dict).simpleIconsPrefix -}}
+      {{- $social = dict "Prefix" $prefix | dict "Icon" | merge $social -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not (isset $social "Weight") -}}
+    {{- $social = dict "Weight" 0 | merge $social -}}
+  {{- end -}}
+{{- else -}}
+  {{- $social = dict -}}
+{{- end -}}
+
+{{- return $social -}}

@@ -1,0 +1,55 @@
+{{- /*
+  Follow me widget for the post TOC sidebar and mobile navigation drawer.
+
+  Shows the site owner (params.author) and a follow button for the platform
+  configured by `follow` (e.g. `follow = "github"`), resolving the destination
+  and icon from `params.social` and `data/social.yml`.
+
+  Called from: layouts/_partials/single/aside-toc.html and single/nav-dialog.html.
+*/ -}}
+
+{{- $follow := .Param "follow" -}}
+{{- if $follow | and (.Store.Get "showToc") -}}
+  {{- $platform := printf "%v" $follow -}}
+  {{- $social := partial "function/get-social-entry.html" $platform -}}
+  {{- $hasDestination := $social.Url -}}
+  {{- if not $hasDestination -}}
+    {{- if $social.Id | and (or $social.Prefix $social.Template) -}}
+      {{- $hasDestination = true -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $author := partial "function/get-author-map.html" dict -}}
+  {{- if $hasDestination | and (ne $author.name "") | and (ne $author.name "Anonymous") -}}
+    {{- $icon := $social.Icon | default dict -}}
+    {{- with $icon.Class -}}
+      {{- $icon = dict "Class" (printf "%v fa-fw fa-beat" .) | merge $icon -}}
+    {{- end -}}
+    {{- $platformTitle := $social.Title | default $platform -}}
+    {{- $button := dict
+      "Class" "follow-btn"
+      "Content" (T "single.follow.btn")
+      "Title" (T "single.follow.title" (dict "Platform" $platformTitle))
+      "Icon" $icon
+      | merge $social -}}
+    <div class="follow-card{{ with .Params.password }} encrypted-hidden{{ end }}">
+      {{- with $author.link -}}
+        <a class="follow-author-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">
+          {{- with $author.avatar -}}
+            <img class="follow-avatar" src="{{ . }}" alt="" width="32" height="32" loading="lazy">
+          {{- end -}}
+          <span class="follow-author-name">{{ $author.name }}</span>
+        </a>
+      {{- else -}}
+        <span class="follow-author">
+          {{- with $author.avatar -}}
+            <img class="follow-avatar" src="{{ . }}" alt="" width="32" height="32" loading="lazy">
+          {{- end -}}
+          <span class="follow-author-name">{{ $author.name }}</span>
+        </span>
+      {{- end -}}
+      {{- partial "plugin/social.html" $button -}}
+    </div>
+  {{- else if not $hasDestination -}}
+    {{- warnidf "warning-follow-platform" "FixIt: params.follow platform %q is not configured in params.social." $platform -}}
+  {{- end -}}
+{{- end -}}

@@ -64,54 +64,10 @@
 
   {{- if $profile.social -}}
     <div class="links">
-      {{- $socialMap := resources.Get "data/social.yml" | transform.Unmarshal -}}
       {{- $socialArr := slice -}}
       {{- range $key, $value := .Site.Params.social -}}
-        {{- $social := $key | lower | index $socialMap | default dict -}}
-        {{- if $value -}}
-          {{- if reflect.IsMap $value -}}
-            {{- with $value.weight -}}
-              {{- $social = dict "Weight" . | merge $social -}}
-            {{- end -}}
-            {{- with $value.prefix -}}
-              {{- $social = dict "Prefix" . | merge $social -}}
-            {{- end -}}
-            {{- with $value.template -}}
-              {{- $social = dict "Template" . | merge $social -}}
-            {{- end -}}
-            {{- with $value.id -}}
-              {{- $social = dict "Id" . | merge $social -}}
-            {{- end -}}
-            {{- with $value.url -}}
-              {{- $social = dict "Url" . | merge $social -}}
-            {{- end -}}
-            {{- with $value.title -}}
-              {{- $social = dict "Title" . | merge $social -}}
-            {{- end -}}
-            {{- with $value.newtab -}}
-              {{- $social = dict "Newtab" . | merge $social -}}
-            {{- end -}}
-            {{- with $value.icon -}}
-              {{- $icon := dict -}}
-              {{- with .class -}}
-                {{- $icon = dict "Class" . | merge $icon -}}
-              {{- end -}}
-              {{- with .simpleicons -}}
-                {{- $icon = dict "Simpleicons" . | merge $icon -}}
-              {{- end -}}
-              {{- with .src -}}
-                {{- $icon = dict "Src" . | merge $icon -}}
-              {{- end -}}
-              {{- $social = dict "Icon" $icon | merge $social -}}
-            {{- end -}}
-          {{- else if ne $value true -}}
-            {{- $social = dict "Id" $value | merge $social -}}
-          {{- end -}}
-          {{- if $social.Icon.Simpleicons -}}
-            {{- $prefix := ($.Site.Store.Get "cdn" | default dict).simpleIconsPrefix -}}
-            {{- $social = dict "Prefix" $prefix | dict "Icon" | merge $social -}}
-          {{- end -}}
-          {{- $socialArr = $socialArr | append $social -}}
+        {{- with partial "function/get-social-entry.html" $key -}}
+          {{- $socialArr = $socialArr | append . -}}
         {{- end -}}
       {{- end -}}
       {{- range sort $socialArr "Weight" -}}
