@@ -186,6 +186,12 @@ wechatpay = "微信"
 alipay = "支付宝"
 paypal = "贝宝"
 bitcoin = "比特币"
+# === Friends ===
+
+# === Follow ===
+[single.follow]
+btn = "关注"
+title = "在 {{ .Platform }} 上关注我！"
 # === Single Post ===
 
 # === Error Pages ===
@@ -281,4 +287,4 @@ code = "代码"
 # === Friends ===
 [friends]
 expired = "已过期"
-# === Friends ===
+# === Follow ===

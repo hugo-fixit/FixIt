@@ -6,6 +6,9 @@
   {{- /* Custom block before post toc */ -}}
   {{- block "custom-post__toc:before" . }}{{ end -}}
 
+  {{- /* Follow me widget */ -}}
+  {{- partial "single/follow.html" . -}}
+
   {{- /* Auto TOC */ -}}
   {{- if $showToc -}}
     <h2 class="toc-title{{ with .Params.password }} encrypted-hidden{{ end }}">

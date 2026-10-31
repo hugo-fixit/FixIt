@@ -186,6 +186,12 @@ wechatpay = "WeChat"
 alipay = "アリペイ"
 paypal = "ペイパル"
 bitcoin = "ビットコイン"
+# === Friends ===
+
+# === Follow ===
+[single.follow]
+btn = "フォロー"
+title = "{{ .Platform }} でフォローしてください！"
 # === Single Post ===
 
 # === Error Pages ===
@@ -281,4 +287,4 @@ code = "コード"
 # === Friends ===
 [friends]
 expired = "期限切れ"
-# === Friends ===
+# === Follow ===

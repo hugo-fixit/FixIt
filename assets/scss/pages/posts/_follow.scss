@@ -1,0 +1,95 @@
+@use "core/functions" as *;
+@use "core/mixins" as *;
+
+.follow-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline: 0.625rem;
+  padding-block-end: 0.75rem;
+  margin-block-end: 0.75rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, transparent, fi-var(global-border-color), transparent);
+  }
+
+  .follow-author-link,
+  .follow-author {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+    color: fi-var(global-font-color);
+  }
+
+  .follow-author-link {
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .follow-author-name {
+    overflow: hidden;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .follow-avatar {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    box-shadow: 0 0 0 2px light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.06));
+
+    @include border-radius(full);
+  }
+
+  .follow-btn {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1rem;
+    color: fi-var(global-background-color);
+    background-color: fi-var(global-font-color);
+    transition: opacity 0.2s, translate 0.2s;
+    --fa-animation-duration: 2s;
+
+    @include border-radius(full);
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.85;
+      translate: 0 -1px;
+      --fa-animation-iteration-count: 0;
+    }
+  }
+}
+
+#nav-dialog .toc > .follow-card {
+  padding-inline: 0;
+}
+
+#nav-dialog .toc:has(> .follow-card) {
+  > .toc-content {
+    max-height: calc(100dvh - 9rem);
+  }
+
+  > tab-container > .tab-panel {
+    max-height: calc(100dvh - 12rem);
+  }
+}

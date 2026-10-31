@@ -10,6 +10,7 @@
     </button>
     <div class="toc">
       <h2 class="toc-title" id="nav-dialog-title">{{ T "single.navigation" }}</h2>
+      {{- partial "single/follow.html" . -}}
       {{- if $showToc | and $showCollection -}}
         {{- .Store.Set "hasTabs" true -}}
         <tab-container type="segment">

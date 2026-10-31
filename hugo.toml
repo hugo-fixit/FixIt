@@ -607,6 +607,9 @@ instant_page = false
 collection_list = false
 # Whether to enable collection navigation at the end of the post.
 collection_navigation = false
+# Follow me widget in the post TOC sidebar and mobile drawer.
+# Set to a `params.social` platform key to enable (e.g. "github"); empty disables it.
+follow = ""
 # End of post flag.
 end_flag = ""
 

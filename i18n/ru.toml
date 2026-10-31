@@ -190,6 +190,12 @@ wechatpay = ""
 alipay = ""
 paypal = ""
 bitcoin = ""
+# === Friends ===
+
+# === Follow ===
+[single.follow]
+btn = "Подписаться"
+title = "Подпишитесь на меня в {{ .Platform }}!"
 # === Single Post ===
 
 # === Error Pages ===
@@ -285,4 +291,4 @@ code = "Код"
 # === Friends ===
 [friends]
 expired = "Истёкший"
-# === Friends ===
+# === Follow ===

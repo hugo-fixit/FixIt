@@ -191,6 +191,12 @@ wechatpay = "WeChat Pay"
 alipay = "Alipay"
 paypal = "PayPal"
 bitcoin = "Bitcoin"
+# === Friends ===
+
+# === Follow ===
+[single.follow]
+btn = "دنبال کردن"
+title = "من را در {{ .Platform }} دنبال کنید!"
 # === Single Post ===
 
 # === Error Pages ===
@@ -286,4 +292,4 @@ code = "کد"
 # === Friends ===
 [friends]
 expired = "منقضی شده"
-# === Friends ===
+# === Follow ===
