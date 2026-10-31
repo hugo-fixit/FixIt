@@ -140,13 +140,13 @@
       padding: 0;
       border: none;
       background: none;
-      color: fi-var(global-font-secondary-color);
+      color: fi-var(global-font-tertiary-color);
       cursor: pointer;
       margin-inline-start: auto;
       transition: color 0.2s ease;
 
       &:hover {
-        color: fi-var(global-font-color);
+        color: fi-var(global-font-secondary-color);
       }
     }
   }
