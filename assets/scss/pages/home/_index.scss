@@ -1,5 +1,7 @@
+@use "sass:color";
 @use "core/functions" as *;
 @use "core/mixins" as *;
+@use "variables" as *;
 
 .home {
   .home-profile {
@@ -103,20 +105,26 @@
 
   .summary {
     box-sizing: border-box;
-    padding: 1rem 1.25rem;
+    padding: 0.75rem 1rem;
     overflow: hidden;
     color: fi-var(global-font-color);
-    background-color: fi-var(global-background-color);
+    background-color: light-dark(
+      color.adjust($global-background-color, $lightness: -1%),
+      color.adjust($global-background-color-dark, $lightness: 2%)
+    );
     border: 1px solid fi-var(global-border-color);
+    transition: border-color 0.2s ease;
 
     @include border-radius;
-    @include box-shadow(always, (0 4px 8px fi-rgba(fi-var(global-font-color), 0.1)));
-    @include box-shadow(hover, (0 8px 16px fi-rgba(fi-var(global-font-color), 0.2)));
+
+    &:hover {
+      border-color: fi-var(global-border-color-weight);
+    }
 
     .summary-media {
       position: relative;
       display: block;
-      margin: -1rem -1.25rem 0.75rem;
+      margin: -0.75rem -1rem 0.75rem;
 
       &:hover .featured-image-preview img {
         scale: 1.05;
@@ -152,7 +160,7 @@
     .single-title {
       font-size: 1.25rem;
       line-height: 140%;
-      padding-block: 0.5rem 0.75rem;
+      padding-block: 0.25rem 0.5rem;
     }
 
     .content {
@@ -167,10 +175,10 @@
     }
 
     .post-footer {
-      margin-block: 0.4rem 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-block: 0.4rem 0;
       font-size: 0.875rem;
       @include link(false, false);
 
@@ -197,10 +205,11 @@
     .summary {
       display: grid;
       grid-template-columns: 40% minmax(0, 1fr);
+      grid-template-rows: 1fr auto;
       grid-template-areas:
         'media body'
         'footer footer';
-      column-gap: 0.5rem;
+      column-gap: 0.75rem;
 
       &:nth-child(even) {
         grid-template-columns: minmax(0, 1fr) 40%;
@@ -227,6 +236,7 @@
         align-items: center;
         overflow: hidden;
         margin: 0;
+
         @include border-radius;
       }
 
