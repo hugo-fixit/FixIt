@@ -1,0 +1,20 @@
+{{- /*
+  Resolve the display destination for an author.
+
+  Prefers the author's `/authors/<key>/` archive page when it exists, then the
+  author's external `link`, then the optional fallback.
+
+  @param {Map} . - dict "Author" (map with key/name/link), optional "Fallback" (String)
+  @return {String} Link destination, or "" when none is available
+  @example {{- $link := partial "function/get-author-link.html" (dict "Author" $author) -}}
+*/ -}}
+{{- $author := .Author | default dict -}}
+{{- $key := $author.key | default $author.name -}}
+{{- $link := "" -}}
+{{- with $key -}}
+  {{- with site.GetPage (printf "/authors/%s" (. | urlize | urls.PathUnescape)) -}}
+    {{- $link = .RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+{{- return (or $link $author.link (.Fallback | default "")) -}}
+{{- /* EOF */ -}}

@@ -2,6 +2,8 @@
   Post author display partial.
 
   Renders one or more author names with optional avatars and links.
+  Each link prefers the author archive page (`/authors/<key>/`), falling back
+  to the author's external `link`.
   Stores the primary (first) resolved author map in the page store as "author"
   and the full list as "authors" for use by other partials.
 */ -}}
@@ -24,10 +26,7 @@
       {{- $content = printf "%v&nbsp;%v" (dict "Src" $author.avatar "Class" "avatar" "Alt" $content "Width" 16 "Height" 16 "OptimConfig" $optim "Watermark" false | partial "plugin/image.html") $content -}}
       {{- $icon = "" -}}
     {{- end -}}
-    {{- $authorLink := $author.link -}}
-    {{- with site.GetPage (printf "/authors/%s" ($author.key | urlize | urls.PathUnescape)) -}}
-      {{- $authorLink = .RelPermalink -}}
-    {{- end -}}
+    {{- $authorLink := partial "function/get-author-link.html" (dict "Author" $author) -}}
     {{- if $authorLink -}}
       {{- $options := dict "Class" "author" "Destination" $authorLink "Title" (T "single.author") "Rel" "author" "Icon" $icon "Content" $content "ExternalIcon" false -}}
       {{- partial "plugin/link.html" $options -}}

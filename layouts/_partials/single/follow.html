@@ -3,7 +3,8 @@
 
   Shows the site owner (params.author) and a follow button for the platform
   configured by `follow` (e.g. `follow = "github"`), resolving the destination
-  and icon from `params.social` and `data/social.yml`.
+  and icon from `params.social` and `data/social.yml`. The author name links to
+  the author archive page when available, falling back to `author.link`.
 
   Called from: layouts/_partials/single/aside-toc.html and single/nav-dialog.html.
 */ -}}
@@ -31,21 +32,16 @@
       "Title" (T "single.follow.title" (dict "Platform" $platformTitle))
       "Icon" $icon
       | merge $social -}}
+    {{- $authorLink := partial "function/get-author-link.html" (dict "Author" $author) -}}
+    {{- $authorContent := printf `<span class="follow-author-name">%s</span>` ($author.name | htmlEscape) -}}
+    {{- with $author.avatar -}}
+      {{- $authorContent = printf `<img class="follow-avatar" src="%s" alt="" width="32" height="32" loading="lazy">%s` (. | htmlEscape) $authorContent -}}
+    {{- end -}}
     <div class="follow-card{{ with .Params.password }} encrypted-hidden{{ end }}">
-      {{- with $author.link -}}
-        <a class="follow-author-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">
-          {{- with $author.avatar -}}
-            <img class="follow-avatar" src="{{ . }}" alt="" width="32" height="32" loading="lazy">
-          {{- end -}}
-          <span class="follow-author-name">{{ $author.name }}</span>
-        </a>
+      {{- if $authorLink -}}
+        {{- dict "Class" "follow-author-link" "Destination" $authorLink "Content" $authorContent "ExternalIcon" false | partial "plugin/link.html" -}}
       {{- else -}}
-        <span class="follow-author">
-          {{- with $author.avatar -}}
-            <img class="follow-avatar" src="{{ . }}" alt="" width="32" height="32" loading="lazy">
-          {{- end -}}
-          <span class="follow-author-name">{{ $author.name }}</span>
-        </span>
+        <span class="follow-author">{{ $authorContent | safeHTML }}</span>
       {{- end -}}
       {{- partial "plugin/social.html" $button -}}
     </div>

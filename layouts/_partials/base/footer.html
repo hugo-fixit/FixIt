@@ -5,6 +5,9 @@
   - Main row: brand (logo/avatar and title) and social links
   - Bottom bar: powered by, copyright, site running time, visitor statistics, beian
 
+  The copyright author links to the author archive page when available,
+  falling back to `author.link` and then the site home.
+
   Called from: layouts/baseof.html.
 */ -}}
 
@@ -22,16 +25,17 @@
 {{- end -}}
 {{- $brandLogo := "" -}}
 {{- $brandAvatar := false -}}
+{{- $siteAuthor := partial "function/get-author-map.html" "" -}}
 {{- with .Site.Params.header.title -}}
   {{- with .logo -}}{{- $brandLogo = . -}}{{- end -}}
 {{- end -}}
 {{- if not $brandLogo -}}
-  {{- $siteAuthor := partial "function/get-author-map.html" "" -}}
   {{- with $siteAuthor.avatar -}}
     {{- $brandLogo = . -}}
     {{- $brandAvatar = true -}}
   {{- end -}}
 {{- end -}}
+{{- $authorLink := partial "function/get-author-link.html" (dict "Author" $siteAuthor "Fallback" (relLangURL "")) -}}
 {{- $showBrand := and (ne $footerConfig.brand false) (or $brandName $brandLogo) -}}
 
 {{- /* Social links */ -}}
@@ -104,7 +108,7 @@
                 {{- /* Author */ -}}
                 {{- if ne $footerConfig.author false -}}
                   <span class="author" itemprop="copyrightHolder">
-                    {{ partial "plugin/link.html" (dict "Destination" ($.Site.Params.author.link | default (relLangURL "")) "Content" .Site.Params.author.name "ExternalIcon" false) -}}
+                    {{ partial "plugin/link.html" (dict "Destination" $authorLink "Content" .Site.Params.author.name "ExternalIcon" false) -}}
                   </span>
                 {{- end -}}
 
