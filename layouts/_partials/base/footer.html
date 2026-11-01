@@ -1,119 +1,192 @@
 {{- /*
   Site footer partial.
 
-  Renders the page footer with configurable sections:
-  - Powered by (Hugo and FixIt theme links)
-  - Copyright (year, author, license)
-  - Site running time counter
-  - Visitor statistics (busuanzi)
-  - Gov/ICP filing information (beian)
+  Renders the site footer in two compact parts:
+  - Main row: brand (logo/avatar and title) and social links
+  - Bottom bar: powered by, copyright, site running time, visitor statistics, beian
 
   Called from: layouts/baseof.html.
 */ -}}
 
 {{- $footerConfig := .Site.Params.footer -}}
-
 {{- if eq $footerConfig.enable false -}}
   {{- return -}}
 {{- end -}}
+
+{{- $relLangURL := relLangURL "" -}}
+
+{{- /* Brand */ -}}
+{{- $brandName := .Site.Title -}}
+{{- with .Site.Params.header.title -}}
+  {{- with .name -}}{{- $brandName = . -}}{{- end -}}
+{{- end -}}
+{{- $brandLogo := "" -}}
+{{- $brandAvatar := false -}}
+{{- with .Site.Params.header.title -}}
+  {{- with .logo -}}{{- $brandLogo = . -}}{{- end -}}
+{{- end -}}
+{{- if not $brandLogo -}}
+  {{- $siteAuthor := partial "function/get-author-map.html" "" -}}
+  {{- with $siteAuthor.avatar -}}
+    {{- $brandLogo = . -}}
+    {{- $brandAvatar = true -}}
+  {{- end -}}
+{{- end -}}
+{{- $showBrand := and (ne $footerConfig.brand false) (or $brandName $brandLogo) -}}
+
+{{- /* Social links */ -}}
+{{- $socialArr := slice -}}
+{{- if ne $footerConfig.social false -}}
+  {{- range $key, $value := .Site.Params.social -}}
+    {{- with partial "function/get-social-entry.html" $key -}}
+      {{- $socialArr = $socialArr | append . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Bottom bar visibility */ -}}
+{{- $showPowered := ne $footerConfig.powered.enable false -}}
+{{- $showCopyright := or $footerConfig.copyright $footerConfig.author $footerConfig.license -}}
+{{- $siteTime := .Site.Params.footer.site_time -}}
+{{- $showStatistics := and $siteTime.enable $siteTime.value -}}
+{{- $busuanzi := .Site.Params.busuanzi -}}
+{{- $showVisitor := and $busuanzi.enable $busuanzi.site_views -}}
+{{- $showBeian := or $footerConfig.gov $footerConfig.icp -}}
 
 <footer class="footer">
   <div class="footer-container">
     {{- /*  Custom Footer */ -}}
     {{- block "custom-footer" . }}{{ end -}}
 
-    {{- /* Powered by Hugo and Theme - FixIt */ -}}
-    {{- if ne $footerConfig.powered.enable false -}}
-      <div class="footer-line powered{{ with $footerConfig.order.powered }} order-{{ . }}{{ end }}">
-        {{- $hugo := replace `<a href="https://github.com/gohugoio/hugo?v={hugoVersion}" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo {hugoVersion}">{hugoLogo}Hugo</a>` "{hugoVersion}" hugo.Version -}}
-        {{- $theme := replace `<a href="https://github.com/hugo-fixit/FixIt?v={themeVersion}" target="_blank" rel="external" title="FixIt {themeVersion}">{themeLogo}FixIt</a>` "{themeVersion}" (hugo.Store.Get "version") -}}
-        {{- if $footerConfig.powered.hugo_logo -}}
-          {{- $hugoLogo := printf `<img class="hugo-icon" src="%v" alt="Hugo logo" /> ` (resources.Get "images/hugo.svg" | minify).RelPermalink -}}
-          {{- $hugo = replace $hugo "{hugoLogo}" $hugoLogo -}}
-        {{- end -}}
-        {{- if $footerConfig.powered.theme_logo -}}
-          {{- $themeLogo := printf `<img class="fixit-icon" src="%v" alt="FixIt logo" /> ` (resources.Get "images/fixit.svg" | minify).RelPermalink -}}
-          {{- $theme = replace $theme "{themeLogo}" $themeLogo -}}
-        {{- end -}}
-        {{- $hugo = replace $hugo "{hugoLogo}" "" -}}
-        {{- $theme = replace $theme "{themeLogo}" "" -}}
-        {{- dict "Hugo" $hugo "Theme" $theme | T "footer.poweredBySome" | safeHTML }}
-      </div>
-    {{- end -}}
-
-    {{- if $footerConfig.copyright | or $footerConfig.author | or $footerConfig.license -}}
-      <div class="footer-line copyright{{ with $footerConfig.order.copyright }} order-{{ . }}{{ end }}" itemscope itemtype="http://schema.org/CreativeWork">
-        {{- /* Copyright year */ -}}
-        {{- if ne $footerConfig.copyright false -}}
-          {{ dict "Class" "fa-regular fa-copyright" | partial "plugin/icon.html" }}
-          {{ with $footerConfig.since -}}
-            <span itemprop="copyrightYear">
-              {{- if lt . now.Year }}{{ . }} - {{ end }}{{ now.Year -}}
-            </span>
-          {{- else -}}
-            <span itemprop="copyrightYear">{{ now.Year }}</span>
-          {{- end -}}
+    {{- if or $showBrand (gt (len $socialArr) 0) -}}
+      <div class="footer-main">
+        {{- if $showBrand -}}
+          <div class="footer-brand">
+            {{- with $brandLogo -}}
+              <span class="footer-brand-logo-wrap">
+                {{- dict "Src" . "Class" (cond $brandAvatar "footer-brand-logo footer-brand-avatar" "footer-brand-logo") "Alt" $brandName "Width" 32 "Height" 32 | partial "plugin/image.html" -}}
+              </span>
+            {{- end -}}
+            {{- with $brandName -}}
+              <a href="{{ $relLangURL }}" class="footer-brand-title" title="{{ . }}">{{ . }}</a>
+            {{- end -}}
+          </div>
         {{- end -}}
 
-        {{- /* Author */ -}}
-        {{- if ne $footerConfig.author false -}}
-          <span class="author" itemprop="copyrightHolder">
-            {{ partial "plugin/link.html" (dict "Destination" ($.Site.Params.author.link | default (relLangURL "")) "Content" .Site.Params.author.name "ExternalIcon" false) -}}
-          </span>
-        {{- end -}}
-
-        {{- /* License */ -}}
-        {{- with $footerConfig.license -}}
-          <span class="license footer-divider">{{ . | safeHTML }}</span>
+        {{- if gt (len $socialArr) 0 -}}
+          <div class="footer-social">
+            {{- range sort $socialArr "Weight" -}}
+              {{- partial "plugin/social.html" . -}}
+            {{- end -}}
+          </div>
         {{- end -}}
       </div>
     {{- end -}}
 
-    {{- $siteTime := .Site.Params.footer.site_time -}}
-    {{- if $siteTime.enable -}}
-      <div class="footer-line statistics{{ with $footerConfig.order.statistics }} order-{{ . }}{{ end }}">
-        {{- if $siteTime.enable | and $siteTime.value -}}
-          {{- with $siteTime -}}
-            <span class="site-time" title='{{ T "footer.siteRunning" }}'>
-              {{- $siteTimeIcon := printf (cond .Animate "%v animate-icon" "%v") .Icon -}}
-              {{- dict "Class" $siteTimeIcon | partial "plugin/icon.html" -}}
-              {{- with .Pre -}}<span class="ms-1 hidden">{{ . }}</span>{{- end -}}
-              {{- printf `<span class="run-times tabular-nums lining-nums ms-1">%v</span>` (T "footer.siteRunning") | safeHTML -}}
-            </span>
-          {{- end -}}
+    {{- if or $showCopyright $showPowered $showStatistics $showVisitor $showBeian -}}
+      <div class="footer-bottom">
+        {{- if or $showCopyright $showBeian -}}
+          <div class="footer-legal">
+            {{- if $showCopyright -}}
+              <div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork">
+                {{- /* Copyright year */ -}}
+                {{- if ne $footerConfig.copyright false -}}
+                  {{ dict "Class" "fa-regular fa-copyright" | partial "plugin/icon.html" }}
+                  {{ with $footerConfig.since -}}
+                    <span itemprop="copyrightYear">
+                      {{- if lt . now.Year }}{{ . }} - {{ end }}{{ now.Year -}}
+                    </span>
+                  {{- else -}}
+                    <span itemprop="copyrightYear">{{ now.Year }}</span>
+                  {{- end -}}
+                {{- end -}}
+
+                {{- /* Author */ -}}
+                {{- if ne $footerConfig.author false -}}
+                  <span class="author" itemprop="copyrightHolder">
+                    {{ partial "plugin/link.html" (dict "Destination" ($.Site.Params.author.link | default (relLangURL "")) "Content" .Site.Params.author.name "ExternalIcon" false) -}}
+                  </span>
+                {{- end -}}
+
+                {{- /* License */ -}}
+                {{- with $footerConfig.license -}}
+                  <span class="license footer-divider">{{ . | safeHTML }}</span>
+                {{- end -}}
+              </div>
+            {{- end -}}
+
+            {{- if $showBeian -}}
+              <div class="footer-line beian">
+                {{- /* GOV */ -}}
+                {{- with $footerConfig.gov -}}
+                  <span class="gov">{{ . | safeHTML }}</span>
+                {{- end -}}
+
+                {{- /* ICP */ -}}
+                {{- with $footerConfig.icp -}}
+                  <span class="icp footer-divider">{{ . | safeHTML }}</span>
+                {{- end -}}
+              </div>
+            {{- end -}}
+          </div>
         {{- end -}}
-      </div>
-    {{- end -}}
 
-    {{- /* 不蒜子 */ -}}
-    {{- $busuanzi := .Site.Params.busuanzi -}}
-    {{- if eq $busuanzi.enable true -}}
-      {{- $loading := dict "Class" "fa-solid fa-spinner fa-spin" | partial "plugin/icon.html" -}}
-      {{- $iconUV := dict "Class" "fa-regular fa-user me-1" | partial "plugin/icon.html" -}}
-      {{- $iconPV := dict "Class" "fa-regular fa-eye me-1" | partial "plugin/icon.html" -}}
-      <div class="footer-line visitor{{ with $footerConfig.order.visitor }} order-{{ . }}{{ end }}{{ if not $busuanzi.site_views }} hidden{{ end }}">
-        <span id="busuanzi_container_site_uv" title='{{ T "footer.siteUV" }}'>
-          {{- $iconUV }}<span id="busuanzi_value_site_uv">{{ $loading }}</span>
-          {{- /* NO_SPACING */ -}}
-        </span>
-        {{- /* NO_SPACING */ -}}
-        <span id="busuanzi_container_site_pv" class="footer-divider" title='{{ T "footer.sitePV" }}'>
-          {{- $iconPV }}<span id="busuanzi_value_site_pv">{{ $loading }}</span>
-          {{- /* NO_SPACING */ -}}
-        </span>
-      </div>
-    {{- end -}}
+        {{- if or $showStatistics $showVisitor $showPowered -}}
+          <div class="footer-tech">
+            {{- if or $showStatistics $showVisitor -}}
+              <div class="footer-meta">
+                {{- if $showStatistics -}}
+                  <div class="footer-line statistics">
+                    {{- with $siteTime -}}
+                      <span class="site-time" title='{{ T "footer.siteRunning" }}'>
+                        {{- $siteTimeIcon := printf (cond .Animate "%v animate-icon" "%v") .Icon -}}
+                        {{- dict "Class" $siteTimeIcon | partial "plugin/icon.html" -}}
+                        {{- with .Pre -}}<span class="ms-1 hidden">{{ . }}</span>{{- end -}}
+                        {{- printf `<span class="run-times tabular-nums lining-nums ms-1">%v</span>` (T "footer.siteRunning") | safeHTML -}}
+                      </span>
+                    {{- end -}}
+                  </div>
+                {{- end -}}
 
-    {{- if $footerConfig.gov | or $footerConfig.icp -}}
-      <div class="footer-line beian{{ with $footerConfig.order.beian }} order-{{ . }}{{ end }}">
-        {{- /* GOV */ -}}
-        {{- with $footerConfig.gov -}}
-          <span class="gov">{{ . | safeHTML }}</span>
-        {{- end -}}
+                {{- /* 不蒜子 */ -}}
+                {{- if $showVisitor -}}
+                  {{- $loading := dict "Class" "fa-solid fa-spinner fa-spin" | partial "plugin/icon.html" -}}
+                  {{- $iconUV := dict "Class" "fa-regular fa-user me-1" | partial "plugin/icon.html" -}}
+                  {{- $iconPV := dict "Class" "fa-regular fa-eye me-1" | partial "plugin/icon.html" -}}
+                  <div class="footer-line visitor">
+                    <span id="busuanzi_container_site_uv" title='{{ T "footer.siteUV" }}'>
+                      {{- $iconUV }}<span id="busuanzi_value_site_uv">{{ $loading }}</span>
+                      {{- /* NO_SPACING */ -}}
+                    </span>
+                    {{- /* NO_SPACING */ -}}
+                    <span id="busuanzi_container_site_pv" class="footer-divider" title='{{ T "footer.sitePV" }}'>
+                      {{- $iconPV }}<span id="busuanzi_value_site_pv">{{ $loading }}</span>
+                      {{- /* NO_SPACING */ -}}
+                    </span>
+                  </div>
+                {{- end -}}
+              </div>
+            {{- end -}}
 
-        {{- /* ICP */ -}}
-        {{- with $footerConfig.icp -}}
-          <span class="icp footer-divider">{{ . | safeHTML }}</span>
+            {{- /* Powered by Hugo and Theme - FixIt */ -}}
+            {{- if $showPowered -}}
+              <div class="footer-line powered">
+                {{- $hugo := replace `<a href="https://github.com/gohugoio/hugo?v={hugoVersion}" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo {hugoVersion}">{hugoLogo}Hugo</a>` "{hugoVersion}" hugo.Version -}}
+                {{- $theme := replace `<a href="https://github.com/hugo-fixit/FixIt?v={themeVersion}" target="_blank" rel="external" title="FixIt {themeVersion}">{themeLogo}FixIt</a>` "{themeVersion}" (hugo.Store.Get "version") -}}
+                {{- if $footerConfig.powered.hugo_logo -}}
+                  {{- $hugoLogo := printf `<img class="hugo-icon" src="%v" alt="Hugo logo" /> ` (resources.Get "images/hugo.svg" | minify).RelPermalink -}}
+                  {{- $hugo = replace $hugo "{hugoLogo}" $hugoLogo -}}
+                {{- end -}}
+                {{- if $footerConfig.powered.theme_logo -}}
+                  {{- $themeLogo := printf `<img class="fixit-icon" src="%v" alt="FixIt logo" /> ` (resources.Get "images/fixit.svg" | minify).RelPermalink -}}
+                  {{- $theme = replace $theme "{themeLogo}" $themeLogo -}}
+                {{- end -}}
+                {{- $hugo = replace $hugo "{hugoLogo}" "" -}}
+                {{- $theme = replace $theme "{themeLogo}" "" -}}
+                {{- dict "Hugo" $hugo "Theme" $theme | T "footer.poweredBySome" | safeHTML }}
+              </div>
+            {{- end -}}
+          </div>
         {{- end -}}
       </div>
     {{- end -}}

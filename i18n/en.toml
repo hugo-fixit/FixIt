@@ -85,7 +85,7 @@ systemMenu = "Site controls"
 
 # === Footer ===
 [footer]
-poweredBySome = "Powered by {{ .Hugo }} | Theme - {{ .Theme }}"
+poweredBySome = "Powered by {{ .Hugo }} & {{ .Theme }}"
 siteUV = "Total visitors"
 sitePV = "Total visits"
 siteRunning = "Website running ..."

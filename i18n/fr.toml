@@ -85,7 +85,7 @@ systemMenu = "Contrôles du site"
 
 # === Footer ===
 [footer]
-poweredBySome = "Propulsé par {{ .Hugo }} | Thème - {{ .Theme }}"
+poweredBySome = "Propulsé par {{ .Hugo }} & {{ .Theme }}"
 siteUV = "Total de visiteurs"
 sitePV = "Total de visites"
 siteRunning = "Site en cours d'exécution ..."

@@ -1476,6 +1476,10 @@ reverse = false
 # Footer configuration.
 [params.footer]
 enable = true
+# Whether to show the site brand (logo/avatar and title).
+brand = false
+# Whether to show social links in the footer.
+social = false
 # Whether to show copyright info.
 copyright = true
 # Whether to show the author.
@@ -1503,15 +1507,6 @@ icon = "fa-solid fa-heartbeat"
 pre = ""
 # Example: "2021-12-18T16:15:22+08:00"
 value = ""
-
-# Footer lines order.
-# Available values: ["first", 0-5, "last"]
-[params.footer.order]
-powered = 0
-copyright = 0
-statistics = 0
-visitor = 0
-beian = 0
 
 # Archives page configuration (all pages of posts type).
 [params.archives]
