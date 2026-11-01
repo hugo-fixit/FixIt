@@ -85,7 +85,7 @@ systemMenu = "Elementy sterujące witryny"
 
 # === Footer ===
 [footer]
-poweredBySome = "Napędzany przez {{ .Hugo }} | Szablon - {{ .Theme }}"
+poweredBySome = "Napędzany przez {{ .Hugo }} & {{ .Theme }}"
 siteUV = "Całkowita odwiedzających"
 sitePV = "Łączna wizyt"
 siteRunning = "Website running ..."

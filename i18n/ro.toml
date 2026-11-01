@@ -85,7 +85,7 @@ systemMenu = "Comenzi site"
 
 # === Footer ===
 [footer]
-poweredBySome = "Realizat de către {{ .Hugo }} | Temă - {{ .Theme }}"
+poweredBySome = "Realizat de {{ .Hugo }} & {{ .Theme }}"
 siteUV = "Total vizitatori"
 sitePV = "Total vizite"
 siteRunning = "Site-ul rulează ..."

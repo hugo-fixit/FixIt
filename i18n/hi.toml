@@ -86,7 +86,7 @@ systemMenu = "साइट नियंत्रण"
 
 # === Footer ===
 [footer]
-poweredBySome = "{{ .Hugo }} के द्वारा संचालित | थीम - {{ .Theme }}"
+poweredBySome = "{{ .Hugo }} और {{ .Theme }} द्वारा संचालित"
 siteUV = "कुल विज़िटर"
 sitePV = "कुल विज़िट"
 siteRunning = "वेबसाइट चल रही है ..."

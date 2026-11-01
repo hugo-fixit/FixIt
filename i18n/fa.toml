@@ -86,7 +86,7 @@ systemMenu = "کنترل‌های سایت"
 
 # === Footer ===
 [footer]
-poweredBySome = "قدرت‌گرفته از {{ .Hugo }} | پوسته - {{ .Theme }}"
+poweredBySome = "قدرت‌گرفته از {{ .Hugo }} و {{ .Theme }}"
 siteUV = "مجموع بازدیدکنندگان"
 sitePV = "مجموع بازدیدها"
 siteRunning = "وبسایت در حال اجرا ..."

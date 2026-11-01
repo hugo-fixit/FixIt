@@ -86,7 +86,7 @@ systemMenu = "عناصر التحكم بالموقع"
 
 # === Footer ===
 [footer]
-poweredBySome = "بدعم من {{ .Hugo }} | السمة - {{ .Theme }}"
+poweredBySome = "بدعم من {{ .Hugo }} و{{ .Theme }}"
 siteUV = "إجمالي الزوار"
 sitePV = "إجمالي الزيارات"
 siteRunning = "الموقع يعمل منذ ..."

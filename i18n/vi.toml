@@ -84,7 +84,7 @@ systemMenu = "Điều khiển trang"
 
 # === Footer ===
 [footer]
-poweredBySome = "Cung cấp bởi {{ .Hugo }} | Chủ đề - {{ .Theme }}"
+poweredBySome = "Cung cấp bởi {{ .Hugo }} & {{ .Theme }}"
 siteUV = "Tổng khách truy cập"
 sitePV = "Tổng lượt truy cập"
 siteRunning = "Trang web đang chạy ..."

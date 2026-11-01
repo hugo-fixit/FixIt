@@ -85,7 +85,7 @@ systemMenu = "Управление сайтом"
 
 # === Footer ===
 [footer]
-poweredBySome = "Сделано {{ .Hugo }} | Тема - {{ .Theme }}"
+poweredBySome = "Сделано {{ .Hugo }} & {{ .Theme }}"
 siteUV = "Всего посетителей"
 sitePV = "Всего посещений"
 siteRunning = "Website running ..."

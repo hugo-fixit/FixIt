@@ -95,6 +95,26 @@
     gap: 1rem;
   }
 
+  &:not(:has(.home-profile)) {
+    > .single:first-child,
+    > .home-posts {
+      margin-top: 2rem;
+
+      @include media('xs') {
+        margin-top: 1.5rem;
+      }
+    }
+  }
+
+  // Match the footer's top margin so the outer spacing stays symmetric.
+  .home-posts:last-child {
+    margin-bottom: 1rem;
+
+    @include media('xs') {
+      margin-bottom: 0.5rem;
+    }
+  }
+
   .home-profile {
     padding: 4rem 0;
   }

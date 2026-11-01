@@ -36,7 +36,18 @@ pnpm preview           # Preview built site (requires build first)
 
 ```bash
 pnpm gen:lexers        # Regenerate assets/scss/core/maps/_chroma-lexers.scss from Chroma source
+pnpm gen:docs          # Regenerate English theme config and partials docs into ../fixit-docs
 ```
+
+### Documentation
+
+When theme params are added, removed, or renamed, or Hugo templates/partials (including shortcodes and render hooks) are added, removed, or renamed:
+
+1. Run `pnpm gen:docs`.
+2. Update the corresponding pages in `../fixit-docs/content/en/` and `../fixit-docs/content/zh-cn/`.
+3. `gen:docs` regenerates English pages only; manually sync the Chinese translations.
+4. Do not hand-edit content between the `HUGO_FIXIT_PARAMS` or `HUGO_FIXIT_PARTIALS` markers; regenerate it instead.
+5. Run `pnpm -C ../fixit-docs lint` after editing docs.
 
 ### Code Quality
 

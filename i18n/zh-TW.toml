@@ -83,7 +83,7 @@ systemMenu = "站點功能"
 
 # === Footer ===
 [footer]
-poweredBySome = "由 {{ .Hugo }} 強力驅動 | 主題 - {{ .Theme }}"
+poweredBySome = "由 {{ .Hugo }} 與 {{ .Theme }} 驅動"
 siteUV = "總訪客數"
 sitePV = "總訪問量"
 siteRunning = "網站運行中……"
