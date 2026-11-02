@@ -8,6 +8,6 @@
   "main": "src/index.ts",
   "dependencies": {
     "@iconify/json": "^2.2.549",
-    "unocss": "^66.10.5"
+    "unocss": "^66.12.0"
   }
 }
