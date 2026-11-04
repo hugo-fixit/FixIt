@@ -88,7 +88,6 @@ systemMenu = "Website-Steuerung"
 poweredBySome = "Realisiert durch {{ .Hugo }} & {{ .Theme }}"
 siteUV = "Besucher insgesamt"
 sitePV = "Besuche insgesamt"
-siteRunning = "Website läuft ..."
 # === Footer ===
 
 # === Comment ===

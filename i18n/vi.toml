@@ -87,7 +87,6 @@ systemMenu = "Điều khiển trang"
 poweredBySome = "Cung cấp bởi {{ .Hugo }} & {{ .Theme }}"
 siteUV = "Tổng khách truy cập"
 sitePV = "Tổng lượt truy cập"
-siteRunning = "Trang web đang chạy ..."
 # === Footer ===
 
 # === Comment ===

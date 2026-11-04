@@ -89,7 +89,6 @@ systemMenu = "साइट नियंत्रण"
 poweredBySome = "{{ .Hugo }} और {{ .Theme }} द्वारा संचालित"
 siteUV = "कुल विज़िटर"
 sitePV = "कुल विज़िट"
-siteRunning = "वेबसाइट चल रही है ..."
 # === Footer ===
 
 # === Comment ===

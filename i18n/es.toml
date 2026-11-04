@@ -88,7 +88,6 @@ systemMenu = "Controles del sitio"
 poweredBySome = "Provisto por {{ .Hugo }} & {{ .Theme }}"
 siteUV = "Total de visitantes"
 sitePV = "Total de visitas"
-siteRunning = "El sitio se está ejecutando ..."
 # === Footer ===
 
 # === Comment ===

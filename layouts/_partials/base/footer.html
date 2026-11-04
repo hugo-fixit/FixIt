@@ -142,11 +142,11 @@
                 {{- if $showStatistics -}}
                   <div class="footer-line statistics">
                     {{- with $siteTime -}}
-                      <span class="site-time" title='{{ T "footer.siteRunning" }}'>
+                      <span class="site-time" role="timer">
                         {{- $siteTimeIcon := printf (cond .Animate "%v animate-icon" "%v") .Icon -}}
                         {{- dict "Class" $siteTimeIcon | partial "plugin/icon.html" -}}
-                        {{- with .Pre -}}<span class="ms-1 hidden">{{ . }}</span>{{- end -}}
-                        {{- printf `<span class="run-times tabular-nums lining-nums ms-1">%v</span>` (T "footer.siteRunning") | safeHTML -}}
+                        {{- with .Pre -}}<span class="site-time-pre ms-1 hidden">{{ . }}</span>{{- end -}}
+                        <span class="run-times tabular-nums lining-nums ms-1">…</span>
                       </span>
                     {{- end -}}
                   </div>

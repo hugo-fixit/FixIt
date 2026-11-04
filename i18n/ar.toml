@@ -89,7 +89,6 @@ systemMenu = "عناصر التحكم بالموقع"
 poweredBySome = "بدعم من {{ .Hugo }} و{{ .Theme }}"
 siteUV = "إجمالي الزوار"
 sitePV = "إجمالي الزيارات"
-siteRunning = "الموقع يعمل منذ ..."
 # === Footer ===
 
 # === Comment ===

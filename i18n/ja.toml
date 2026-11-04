@@ -86,7 +86,6 @@ systemMenu = "サイトコントロール"
 poweredBySome = "{{ .Hugo }} と {{ .Theme }} による構築"
 siteUV = "総訪問者数"
 sitePV = "総訪問数"
-siteRunning = "サイトが実行中……"
 # === Footer ===
 
 # === Comment ===
