@@ -55,15 +55,22 @@
       }
 
       > li {
+        position: relative;
         counter-increment: toc-counter;
 
-        &::marker {
+        // Safari ignores `content` on ::marker, use ::before instead
+        &::before {
           content: counters(toc-counter, ".") ". ";
+          position: absolute;
+          inset-inline-end: 100%;
+          // Mimic ::marker: keep the trailing space and use tabular figures
+          white-space: pre;
+          font-variant-numeric: tabular-nums;
           color: fi-var(global-font-secondary-color);
         }
       }
 
-      li:has(> a:hover)::marker {
+      li:has(> a:hover)::before {
         color: fi-var(single-link-color);
       }
     }
@@ -83,11 +90,11 @@
 #nav-dialog {
   .toc-content {
     li.has-active {
-      &::marker {
+      &::before {
         color: fi-var(single-link-color);
       }
 
-      &:has(> .active)::marker {
+      &:has(> .active)::before {
         font-weight: bold;
       }
 
@@ -236,7 +243,7 @@
         padding-block: 0.4em;
         padding-inline-end: 1em;
 
-        li:has(> a:hover)::marker,
+        li:has(> a:hover)::before,
         a:hover {
           font-weight: bold;
         }
