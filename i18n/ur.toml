@@ -89,7 +89,6 @@ systemMenu = "سائٹ کنٹرولز"
 poweredBySome = "{{ .Hugo }} اور {{ .Theme }} سے چلتا ہے"
 siteUV = "کل زائرین"
 sitePV = "کل ملاقاتیں"
-siteRunning = "سائٹ چل رہی ہے ..."
 # === Footer ===
 
 # === Comment ===

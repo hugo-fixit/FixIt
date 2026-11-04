@@ -1,4 +1,14 @@
 /**
+ * Pad a number with leading zeros.
+ * @param value - The number to pad.
+ * @param length - The minimum length of the resulting string.
+ * @returns The zero-padded string.
+ */
+export function padNumber(value: number, length = 2): string {
+  return String(value).padStart(length, '0')
+}
+
+/**
  * Escape a string for safe HTML text output.
  * @param str - The string to escape.
  * @returns The escaped string.

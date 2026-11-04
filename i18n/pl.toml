@@ -88,7 +88,6 @@ systemMenu = "Elementy sterujące witryny"
 poweredBySome = "Napędzany przez {{ .Hugo }} & {{ .Theme }}"
 siteUV = "Całkowita odwiedzających"
 sitePV = "Łączna wizyt"
-siteRunning = "Website running ..."
 # === Footer ===
 
 # === Comment ===

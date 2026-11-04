@@ -1,55 +1,29 @@
-import type { CoreService, MiscService } from '../core/tokens'
-import { eventBus } from '../core/event-bus'
-import { getScrollTop, isMobile, isValidDate, scrollIntoView } from '../utils'
+import type { CoreService, MiscService } from '../../core/tokens'
+import { eventBus } from '../../core/event-bus'
+import { getScrollTop, isMobile, scrollIntoView } from '../../utils'
+import { initSiteTimeCounter } from './site-time'
 
 /**
  * Miscellaneous module — site time, PWA, bookmarks, rewards, comments, and PostChat.
  *
  * Responsibilities:
- * - Display site running time with animated counters.
+ * - Display the site running time as a localized day count.
  * - Register service worker for PWA support.
  * - Auto-bookmark scroll position for page restoration.
  * - Initialize reward QR codes and PostChat AI user info.
  * - Initialize comment section UI and scroll-into-view.
  */
 export class MiscModule implements MiscService {
-  #siteTime: ReturnType<typeof setInterval> | undefined
   #core: CoreService
 
   constructor(core: CoreService) {
     this.#core = core
   }
 
-  /** Calculate and display the elapsed time since site launch. */
-  getSiteTime() {
-    const now = new Date()
-    const run = new Date(this.#core.config.siteTime!)
-    const $runTimes = document.querySelector<HTMLElement>('.run-times')
-    if (!isValidDate(run) || !$runTimes) {
-      clearInterval(this.#siteTime)
-      $runTimes && $runTimes.parentNode!.removeChild($runTimes)
-      return
-    }
-    const totalSeconds = Math.floor((now.getTime() - run.getTime()) / 1000)
-    const days = Math.floor(totalSeconds / 86400)
-    const hours = Math.floor((totalSeconds % 86400) / 3600)
-    const minutes = Math.floor((totalSeconds % 3600) / 60)
-    const seconds = totalSeconds % 60
-    $runTimes.innerHTML = `${days}, ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
-    document.querySelector('.site-time .hidden')?.classList.remove('hidden')
-  }
-
-  /** Start the site-time counter with visibility-change pausing. */
+  /** Initialize the site-time counter. */
   initSiteTime() {
-    if (this.#core.config.siteTime) {
-      this.#siteTime = setInterval(() => this.getSiteTime(), 500)
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-          return clearInterval(this.#siteTime)
-        }
-        this.#siteTime = setInterval(() => this.getSiteTime(), 500)
-      }, false)
-    }
+    if (this.#core.config.siteTime)
+      initSiteTimeCounter(this.#core.config.siteTime)
   }
 
   /** Save and restore scroll position as an automatic bookmark. */
