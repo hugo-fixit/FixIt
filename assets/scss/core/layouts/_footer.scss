@@ -129,28 +129,17 @@ footer {
     min-width: 0;
   }
 
-  .footer-legal > * + *::before,
-  .footer-tech > * + *::before {
-    content: none;
-  }
-
   @include media('sm', 'up') {
-    .footer-legal > * + *::before,
-    .footer-tech > * + *::before {
+    .footer-legal > :not(:last-child)::after,
+    .footer-tech > :not(:last-child)::after {
       content: '|';
-      margin-inline-end: 0.5rem;
+      margin-inline-start: 0.5rem;
       color: fi-var(global-font-quaternary-color);
     }
   }
 
-  .footer-meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.25rem 0.5rem;
-  }
-
-  .footer-meta,
+  .footer-line.statistics,
+  .footer-line.visitor,
   .footer-line.beian {
     font-size: 0.6875rem;
   }

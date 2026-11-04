@@ -56,10 +56,7 @@
         justify-content: center;
         width: 2.5rem;
         height: 2.5rem;
-        color: light-dark(
-          fi-rgba(fi-var(global-font-color), 0.75),
-          fi-rgba(fi-var(global-font-color), 0.9)
-        );
+        color: fi-rgba(fi-var(global-font-color), 0.9);
         transition: color 0.25s ease, background-color 0.25s ease, translate 0.25s ease;
 
         @include border-radius(full);
@@ -178,19 +175,19 @@
     }
 
     .single-title {
-      font-size: 1.25rem;
-      line-height: 140%;
+      font-size: 1.125rem;
+      line-height: 130%;
       padding-block: 0.25rem 0.5rem;
     }
 
     .content {
       margin-top: 0.3rem;
-      color: fi-var(global-font-tertiary-color);
+      color: fi-var(global-font-secondary-color);
       @include link(false, true);
 
       b,
       strong {
-        color: fi-var(global-font-tertiary-color);
+        color: fi-var(global-font-secondary-color);
       }
     }
 

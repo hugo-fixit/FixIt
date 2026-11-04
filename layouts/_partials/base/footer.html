@@ -137,38 +137,34 @@
 
         {{- if or $showStatistics $showVisitor $showPowered -}}
           <div class="footer-tech">
-            {{- if or $showStatistics $showVisitor -}}
-              <div class="footer-meta">
-                {{- if $showStatistics -}}
-                  <div class="footer-line statistics">
-                    {{- with $siteTime -}}
-                      <span class="site-time" role="timer">
-                        {{- $siteTimeIcon := printf (cond .Animate "%v animate-icon" "%v") .Icon -}}
-                        {{- dict "Class" $siteTimeIcon | partial "plugin/icon.html" -}}
-                        {{- with .Pre -}}<span class="site-time-pre ms-1 hidden">{{ . }}</span>{{- end -}}
-                        <span class="run-times tabular-nums lining-nums ms-1">…</span>
-                      </span>
-                    {{- end -}}
-                  </div>
+            {{- if $showStatistics -}}
+              <div class="footer-line statistics">
+                {{- with $siteTime -}}
+                  <span class="site-time" role="timer">
+                    {{- $siteTimeIcon := printf (cond .Animate "%v animate-icon" "%v") .Icon -}}
+                    {{- dict "Class" $siteTimeIcon | partial "plugin/icon.html" -}}
+                    {{- with .Pre -}}<span class="site-time-pre ms-1 hidden">{{ . }}</span>{{- end -}}
+                    <span class="run-times tabular-nums lining-nums ms-1">…</span>
+                  </span>
                 {{- end -}}
+              </div>
+            {{- end -}}
 
-                {{- /* 不蒜子 */ -}}
-                {{- if $showVisitor -}}
-                  {{- $loading := dict "Class" "fa-solid fa-spinner fa-spin" | partial "plugin/icon.html" -}}
-                  {{- $iconUV := dict "Class" "fa-regular fa-user me-1" | partial "plugin/icon.html" -}}
-                  {{- $iconPV := dict "Class" "fa-regular fa-eye me-1" | partial "plugin/icon.html" -}}
-                  <div class="footer-line visitor">
-                    <span id="busuanzi_container_site_uv" title='{{ T "footer.siteUV" }}'>
-                      {{- $iconUV }}<span id="busuanzi_value_site_uv">{{ $loading }}</span>
-                      {{- /* NO_SPACING */ -}}
-                    </span>
-                    {{- /* NO_SPACING */ -}}
-                    <span id="busuanzi_container_site_pv" class="footer-divider" title='{{ T "footer.sitePV" }}'>
-                      {{- $iconPV }}<span id="busuanzi_value_site_pv">{{ $loading }}</span>
-                      {{- /* NO_SPACING */ -}}
-                    </span>
-                  </div>
-                {{- end -}}
+            {{- /* 不蒜子 */ -}}
+            {{- if $showVisitor -}}
+              {{- $loading := dict "Class" "fa-solid fa-spinner fa-spin" | partial "plugin/icon.html" -}}
+              {{- $iconUV := dict "Class" "fa-regular fa-user me-1" | partial "plugin/icon.html" -}}
+              {{- $iconPV := dict "Class" "fa-regular fa-eye me-1" | partial "plugin/icon.html" -}}
+              <div class="footer-line visitor">
+                <span id="busuanzi_container_site_uv" title='{{ T "footer.siteUV" }}'>
+                  {{- $iconUV }}<span id="busuanzi_value_site_uv">{{ $loading }}</span>
+                  {{- /* NO_SPACING */ -}}
+                </span>
+                {{- /* NO_SPACING */ -}}
+                <span id="busuanzi_container_site_pv" class="footer-divider" title='{{ T "footer.sitePV" }}'>
+                  {{- $iconPV }}<span id="busuanzi_value_site_pv">{{ $loading }}</span>
+                  {{- /* NO_SPACING */ -}}
+                </span>
               </div>
             {{- end -}}
 
