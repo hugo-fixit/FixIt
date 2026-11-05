@@ -514,6 +514,10 @@ header {
 
         .menu-link {
           display: block;
+          // Keep room for icon animations (e.g. fa-beat) inside the clip box.
+          // The negative margin cancels the padding so text stays aligned.
+          padding-inline: 0.5rem;
+          margin-inline: -0.5rem;
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow-x: hidden;

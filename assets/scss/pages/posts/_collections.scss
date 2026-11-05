@@ -30,6 +30,12 @@
 
   .collection-title {
     @include link(false, false);
+
+    .collection-label {
+      @include media('xs') {
+        display: none;
+      }
+    }
   }
 
   .collection-nav {

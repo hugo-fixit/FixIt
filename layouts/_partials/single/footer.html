@@ -83,11 +83,13 @@
     <div class="post-info-line">
       <div class="post-info-md">
         {{- range $index, $link := $linkOptions -}}
-          {{- if $index -}}
-            <span class="separator" aria-hidden="true"></span>
-          {{- end -}}
           {{- $commonOptions := dict "ExternalIcon" false -}}
-          <span>{{ partial "plugin/link.html" ($link | merge $commonOptions) }}</span>
+          <span>
+            {{- partial "plugin/link.html" ($link | merge $commonOptions) -}}
+            {{- if ne (add $index 1) (len $linkOptions) -}}
+              <span class="separator" aria-hidden="true"></span>
+            {{- end -}}
+          </span>
         {{- end -}}
       </div>
       {{- if not .Params.password -}}

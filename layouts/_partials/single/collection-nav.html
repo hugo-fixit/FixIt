@@ -5,7 +5,7 @@
 
 {{- $collectionTerms := .GetTerms "collections" -}}
 {{- range $collectionTerms -}}
-  {{- $termLink := printf `<a href="%v">%v <span>%v・%v</span></span></a>`
+  {{- $termLink := printf `<a href="%v">%v <span class="collection-label">%v・</span><span>%v</span></a>`
     (partial "function/escapeurl.html" .RelPermalink)
     (dict "Class" "fa-solid fa-layer-group" | partial "plugin/icon.html")
     (T "collection")

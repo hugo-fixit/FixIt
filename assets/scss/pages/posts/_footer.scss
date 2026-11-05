@@ -17,19 +17,27 @@
   .post-info {
     border-bottom: 1px solid fi-var(global-border-color);
     padding: 0.3rem 0;
+    line-height: 1.5;
 
     .post-info-line {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
+      gap: 0.25rem 1rem;
 
       .post-info-mod {
         font-size: 0.8em;
         color: fi-var(global-font-secondary-color);
 
         @include link(false, false);
+
+        .git-hash {
+          white-space: nowrap;
+        }
       }
 
       .post-info-license {
+        margin-inline-start: auto;
         font-size: 0.8em;
         color: fi-var(global-font-secondary-color);
 
@@ -38,15 +46,31 @@
 
       .post-info-md {
         display: flex;
+        flex: 1 1 0;
+        flex-wrap: wrap;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0 0.5rem;
+        min-inline-size: 0;
         font-size: 0.8rem;
-        width: fit-content;
 
         @include link(false, false);
+
+        > span {
+          white-space: nowrap;
+
+          .separator {
+            display: inline-block;
+            margin-inline-start: 0.5rem;
+            vertical-align: middle;
+          }
+        }
       }
 
       .post-info-share {
+        flex-shrink: 0;
+        align-self: center;
+        margin-inline-start: auto;
+
         a * {
           vertical-align: text-bottom;
         }
