@@ -119,6 +119,7 @@
   }
 
   .collection-summary {
+    position: relative;
     display: flex;
     align-items: baseline;
     gap: 0.25em;
@@ -126,6 +127,17 @@
     user-select: none;
     background-color: transparent;
     transition: background-color 0.2s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset-inline: 0.6em;
+      bottom: 0;
+      height: 1px;
+      background: fi-var(global-border-color-light);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
 
     &:hover {
       background-color: light-dark(color.adjust($global-background-color, $lightness: -2.5%), color.adjust($global-background-color-dark, $lightness: 2.5%));
@@ -174,7 +186,10 @@
   &.open {
     .collection-summary {
       background-color: light-dark(color.adjust($global-background-color, $lightness: -2.5%), color.adjust($global-background-color-dark, $lightness: 2.5%));
-      border-bottom: 1px solid fi-var(global-border-color-light);
+
+      &::after {
+        opacity: 1;
+      }
     }
   }
 

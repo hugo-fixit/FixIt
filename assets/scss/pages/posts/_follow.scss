@@ -16,7 +16,7 @@
     inset-inline: 0;
     bottom: 0;
     height: 1px;
-    background-image: linear-gradient(to right, transparent, fi-var(global-border-color), transparent);
+    background: fi-var(divider-edge-weak);
   }
 
   .follow-author-link,

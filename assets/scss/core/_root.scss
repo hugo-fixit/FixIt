@@ -78,7 +78,7 @@
     bezier: cubic-bezier(.4, 0, .2, 1),
 
     // Other utilities
-    divider-edge-weak: linear-gradient(to right, transparent, fi-var(divider-bg, #d0d0d5), transparent),
+    divider-edge-weak: linear-gradient(to right, transparent, fi-var(global-border-color), transparent),
   ));
 
   &:has(.breadcrumb-container.sticky) {
