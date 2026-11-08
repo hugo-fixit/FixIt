@@ -8,6 +8,7 @@
   <div class="page archive author-archive">
     {{- partial "section/author-header.html" (dict "Page" . "Pages" $term.Pages "Author" $term.Author) -}}
     {{- partial "section/archive-meta.html" (dict "Page" . "Pages" $term.Pages) -}}
+    {{- partial "section/contribution-graph.html" (dict "Page" . "Pages" $term.Pages) -}}
     {{- partial "section/archive-list.html" (dict
       "Page" .
       "Pages" $term.Pages

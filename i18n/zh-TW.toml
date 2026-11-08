@@ -64,6 +64,39 @@ other = "總計約 {{ .Count }} 字"
 
 [section.archiveCounter]
 other = "共計 {{ .Count }} 篇文章"
+
+# === Contribution ===
+[section.contributionYears]
+other = "選擇年份"
+
+[section.contributionTotal]
+other = "{{ .Year }} 年貢獻 {{ .Count }} 次"
+
+[section.contributionTooltipMeta]
+other = "{{ .Count }} 篇 · {{ .Words }} 字"
+
+[section.contributionTooltipNone]
+other = "無貢獻"
+
+[section.contributionLongestStreak]
+other = "最長連續貢獻：{{ .Count }} 日"
+
+[section.contributionCurrentStreak]
+other = "最近連續貢獻：{{ .Count }} 日"
+
+[section.contributionLess]
+other = "少"
+
+[section.contributionMore]
+other = "多"
+# === Contribution ===
+
+[section.contributionMonths]
+other = "1月,2月,3月,4月,5月,6月,7月,8月,9月,10月,11月,12月"
+
+[section.contributionWeekdays]
+other = "週一,週二,週三,週四,週五,週六,週日"
+
 # === Section ===
 
 # === Pagination ===

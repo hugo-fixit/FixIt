@@ -2,6 +2,7 @@
 @use "sass:meta";
 @use "core/functions" as *;
 @use "author";
+@use "../shared/contribution";
 
 .archive {
   .archive-header,

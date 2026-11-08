@@ -1,6 +1,7 @@
 import type { FixItPublicAPI } from './tokens'
 import { CodeModule } from '../modules/code'
 import { ContentModule } from '../modules/content'
+import { ContributionModule } from '../modules/contribution'
 import { CoreModule } from '../modules/core'
 import { EncryptionModule } from '../modules/encryption'
 import { EventsModule } from '../modules/events'
@@ -28,6 +29,7 @@ export class PublicAPI implements FixItPublicAPI {
   readonly pwa
   readonly misc
   readonly content
+  readonly contribution
   readonly events
   readonly eventBus = eventBus
 
@@ -43,6 +45,7 @@ export class PublicAPI implements FixItPublicAPI {
     this.pwa = new PWAModule(this.core)
     this.misc = new MiscModule(this.core)
     this.content = new ContentModule(this.core, this.code)
+    this.contribution = new ContributionModule(this.core)
     this.events = new EventsModule(this.core, this.code)
   }
 

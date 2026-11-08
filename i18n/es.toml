@@ -66,6 +66,43 @@ other = "Total {{ .Count }} palabras"
 [section.archiveCounter]
 one = "Solo un artículo"
 other = "Total {{ .Count }} artículos"
+
+# === Contribution ===
+[section.contributionYears]
+other = "Select year"
+
+[section.contributionTotal]
+one = "{{ .Count }} contribution in {{ .Year }}"
+other = "{{ .Count }} contributions in {{ .Year }}"
+
+[section.contributionTooltipMeta]
+one = "{{ .Count }} contribution · {{ .Words }} words"
+other = "{{ .Count }} contributions · {{ .Words }} words"
+
+[section.contributionTooltipNone]
+other = "No contributions"
+
+[section.contributionLongestStreak]
+one = "Longest streak: {{ .Count }} day"
+other = "Longest streak: {{ .Count }} days"
+
+[section.contributionCurrentStreak]
+one = "Current streak: {{ .Count }} day"
+other = "Current streak: {{ .Count }} days"
+
+[section.contributionLess]
+other = "Less"
+
+[section.contributionMore]
+other = "More"
+# === Contribution ===
+
+[section.contributionMonths]
+other = "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec"
+
+[section.contributionWeekdays]
+other = "Mon,Tue,Wed,Thu,Fri,Sat,Sun"
+
 # === Section ===
 
 # === Pagination ===

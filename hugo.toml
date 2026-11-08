@@ -1551,6 +1551,18 @@ list = true
 days = 30
 max_count = 10
 
+# Contribution heatmap configuration for the home page and author archive pages.
+[params.contribution]
+# Whether to show the contribution heatmap.
+enable = true
+# First day of the week.
+# Available values: ["monday", "sunday"]
+first_day_of_week = "sunday"
+# Whether to show contribution statistics (longest/current streak).
+stats = true
+# Maximum number of years to display, newest first. 0 means all years with posts.
+max_years = 0
+
 # TagCloud configuration for tags page.
 [params.tag_cloud]
 enable = false
@@ -1588,6 +1600,8 @@ typeit = true
 social = true
 # Disclaimer (HTML format is supported).
 disclaimer = ""
+# Whether to show the contribution heatmap inside the home profile.
+contribution = true
 
 # Home page posts.
 [params.home.posts]
@@ -2025,6 +2039,11 @@ single_link_color = ""
 single_link_color_dark = ""
 single_link_hover_color = ""
 single_link_hover_color_dark = ""
+# Contribution Heatmap #
+# Theme color of contribution heatmap cells. Defaults to `single_link_color`.
+contribution_color = ""
+# Theme color of contribution heatmap cells in dark mode. Defaults to `single_link_color_dark`.
+contribution_color_dark = ""
 # Table #
 table_background_color = ""
 table_background_color_dark = ""
