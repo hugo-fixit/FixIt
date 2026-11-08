@@ -82,6 +82,11 @@
     </h3>
   {{- end -}}
 
+  {{- /* Contribution graph */ -}}
+  {{- if ne $profile.contribution false -}}
+    {{- partial "section/contribution-graph.html" (dict "Page" . "Pages" (.Site.Store.Get "mainSectionPages")) -}}
+  {{- end -}}
+
   {{- /* Custom Profile */ -}}
   {{- block "custom-profile" . }}{{ end -}}
 </div>

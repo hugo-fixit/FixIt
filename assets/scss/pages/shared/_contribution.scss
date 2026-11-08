@@ -1,0 +1,313 @@
+// Contribution heatmap (home profile and author archive)
+@use "sass:color";
+@use "core/functions" as *;
+@use "core/mixins" as *;
+@use "variables" as *;
+
+$contribution-cell-size: 0.625rem;
+$contribution-cell-gap: 0.125rem;
+$contribution-month-row: 1.25rem;
+
+.contribution-cell-tooltip {
+  max-width: 20rem;
+  text-align: start;
+  line-height: 1.5;
+
+  .cell-tooltip-inner {
+    max-width: 20rem;
+    text-align: start;
+  }
+
+  .contribution-tooltip-date {
+    font-weight: 600;
+  }
+
+  .contribution-tooltip-meta {
+    opacity: 0.75;
+  }
+
+  .contribution-tooltip-titles {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    margin-top: 0.25rem;
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  .contribution-tooltip-more {
+    opacity: 0.6;
+  }
+}
+
+.contribution-graph {
+  margin-block: 1rem;
+  text-align: start;
+
+  .contribution-years {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+
+  .contribution-summary {
+    display: none;
+    order: -2;
+    margin: 0;
+    margin-inline-end: auto;
+    font-size: 1rem;
+    font-weight: 600;
+
+    &.is-active {
+      display: block;
+    }
+  }
+
+  .contribution-year {
+    display: none;
+    order: 1;
+    flex-basis: 100%;
+
+    &.is-active {
+      display: block;
+    }
+  }
+
+  .contribution-year-picker {
+    position: relative;
+    display: inline-flex;
+    order: -1;
+  }
+
+  .contribution-year-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    font-family: inherit;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: fi-var(global-font-color);
+    background-color: fi-var(global-background-color);
+    border: 1px solid fi-var(global-border-color);
+    white-space: nowrap;
+    cursor: pointer;
+    appearance: none;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+
+    @include border-radius;
+
+    .contribution-year-arrow {
+      font-size: 0.5625rem;
+      color: fi-var(global-font-secondary-color);
+      transition: rotate 0.2s ease;
+    }
+
+    &:hover {
+      background-color: fi-var(global-border-color-light);
+      border-color: fi-var(global-border-color-weight);
+    }
+
+    &:focus-visible {
+      outline: 2px solid fi-var(single-link-color);
+      outline-offset: 2px;
+    }
+  }
+
+  .contribution-year-picker.is-open {
+    .contribution-year-trigger {
+      background-color: fi-var(global-border-color-light);
+      border-color: fi-var(global-border-color-weight);
+    }
+
+    .contribution-year-arrow {
+      rotate: 180deg;
+    }
+  }
+
+  .contribution-year-menu {
+    position: absolute;
+    display: none;
+    inset-inline-end: 0;
+    top: calc(100% + 0.25rem);
+    box-sizing: border-box;
+    min-width: 100%;
+    padding: 0.25rem;
+    margin: 0;
+    list-style: none;
+    background-color: fi-var(global-background-color);
+    border: 1px solid fi-var(global-border-color);
+    box-shadow: 0 0.25rem 0.75rem light-dark(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.35));
+
+    @include border-radius;
+    @include z-index(base, 10);
+  }
+
+  .contribution-year-picker.is-open .contribution-year-menu {
+    display: block;
+  }
+
+  .contribution-year-option {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8125rem;
+    color: fi-var(global-font-color);
+    white-space: nowrap;
+    cursor: pointer;
+
+    @include border-radius;
+
+    &:hover,
+    &:focus-visible {
+      background-color: fi-var(global-border-color-light);
+    }
+
+    &:focus-visible {
+      outline: 2px solid fi-var(single-link-color);
+      outline-offset: -2px;
+    }
+
+    &.is-selected {
+      font-weight: 600;
+      color: fi-var(single-link-color);
+    }
+  }
+
+  .contribution-body {
+    display: flex;
+    align-items: stretch;
+    gap: 0.375rem;
+    padding-block: 0.5rem;
+  }
+
+  .contribution-weekdays {
+    display: grid;
+    flex: none;
+    grid-template-rows: $contribution-month-row repeat(7, 1fr);
+    row-gap: $contribution-cell-gap;
+    align-items: center;
+    font-size: 0.625rem;
+    line-height: 1;
+    text-align: end;
+    color: fi-var(global-font-secondary-color);
+
+    span {
+      visibility: hidden;
+      padding-inline-end: 0.125rem;
+    }
+  }
+
+  &[data-first-day="monday"] .contribution-weekdays span:nth-child(2),
+  &[data-first-day="monday"] .contribution-weekdays span:nth-child(4),
+  &[data-first-day="monday"] .contribution-weekdays span:nth-child(6),
+  &[data-first-day="sunday"] .contribution-weekdays span:nth-child(3),
+  &[data-first-day="sunday"] .contribution-weekdays span:nth-child(5),
+  &[data-first-day="sunday"] .contribution-weekdays span:nth-child(7) {
+    visibility: visible;
+  }
+
+  .contribution-scroll {
+    flex: 1;
+    min-width: 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    container-type: inline-size;
+  }
+
+  .contribution-grid {
+    display: grid;
+    box-sizing: border-box;
+    grid-auto-flow: column;
+    grid-template-rows: $contribution-month-row repeat(7, fi-var(contribution-cell-size, $contribution-cell-size));
+    grid-auto-columns: fi-var(contribution-cell-size, $contribution-cell-size);
+    gap: $contribution-cell-gap;
+    width: max-content;
+
+    @include set-fi-var(contribution-cell-size, $contribution-cell-size);
+
+    @each $cols in (53, 54) {
+      &[data-cols="#{$cols}"] {
+        @include set-fi-var(
+          contribution-cell-size,
+          max(
+            #{$contribution-cell-size},
+            calc((100cqw - (#{$cols} - 1) * #{$contribution-cell-gap}) / #{$cols})
+          )
+        );
+      }
+    }
+  }
+
+  .contribution-month {
+    font-size: 0.625rem;
+    line-height: 1;
+    color: fi-var(global-font-secondary-color);
+    white-space: nowrap;
+  }
+
+  .contribution-cell {
+    background-color: light-dark(
+      color.adjust($global-background-color, $lightness: -6%),
+      color.adjust($global-background-color-dark, $lightness: 4%)
+    );
+
+    @include border-radius(2px);
+
+    @for $level from 1 through 4 {
+      &[data-level="#{$level}"] {
+        background-color: light-dark(
+          color.mix($contribution-color, $global-background-color, $level * 20%),
+          color.mix($contribution-color-dark, $global-background-color-dark, $level * 20%)
+        );
+      }
+    }
+
+    &.is-placeholder {
+      background-color: transparent;
+    }
+  }
+
+  .contribution-grid .contribution-cell {
+    width: 100%;
+    height: 100%;
+  }
+
+  .contribution-legend .contribution-cell {
+    flex: none;
+    width: $contribution-cell-size;
+    height: $contribution-cell-size;
+  }
+
+  .contribution-grid .contribution-cell:not(.is-placeholder):hover {
+    outline: 1px solid fi-var(global-font-color);
+    outline-offset: -1px;
+  }
+
+  .contribution-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 0.25rem 0 0;
+    font-size: 0.75rem;
+    color: fi-var(global-font-secondary-color);
+  }
+
+  .contribution-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: fi-var(global-font-secondary-color);
+  }
+}

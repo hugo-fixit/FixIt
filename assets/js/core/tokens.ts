@@ -76,6 +76,11 @@ export interface MiscService {
   setup: () => void
 }
 
+// ─── ContributionService ───
+export interface ContributionService {
+  setup: () => void
+}
+
 // ─── PWAService ───
 export interface PWAService {
   setup: () => void
@@ -108,6 +113,7 @@ export interface FixItPublicAPI {
   readonly pwa: PWAService
   readonly misc: MiscService
   readonly content: ContentService
+  readonly contribution: ContributionService
   readonly events: EventsService
   readonly eventBus: TypedEventBus
   // Methods

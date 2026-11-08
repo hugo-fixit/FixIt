@@ -17,7 +17,7 @@ function bootstrap(): void {
    *
    * 1. UI framework — menu (mask overlay), theme (color scheme)
    * 2. Interactive components — toc (sidebar), search (overlay)
-   * 3. Content enhancement — content (details, tooltips), enc (decryption)
+   * 3. Content enhancement — content (details, tooltips), contribution (year switching), enc (decryption)
    * 4. Global features — misc (PWA, comments), events (scroll, resize)
    */
   function init() {
@@ -27,6 +27,7 @@ function bootstrap(): void {
       window.fixit.toc.setup()
       window.fixit.search.setup()
       window.fixit.content.setup()
+      window.fixit.contribution.setup()
       window.fixit.enc.setup()
       window.fixit.pwa.setup()
       window.fixit.misc.setup()

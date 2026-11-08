@@ -1,0 +1,164 @@
+{{- /*
+  Contribution heatmap: per-year calendar grid with a year dropdown.
+
+  @param {Map} . - dict "Page" (context), "Pages" (page collection)
+  @example {{- partial "section/contribution-graph.html" (dict "Page" . "Pages" $pages) -}}
+*/ -}}
+{{- $config := site.Params.contribution -}}
+{{- if eq $config false -}}{{- return -}}{{- end -}}
+{{- if not (reflect.IsMap $config) -}}{{- $config = dict -}}{{- end -}}
+{{- if eq $config.enable false -}}{{- return -}}{{- end -}}
+{{- $uid := printf "contribution-%s" (.Page.RelPermalink | anchorize | default "home") -}}
+{{- $pages := .Pages -}}
+{{- if not $pages -}}{{- return -}}{{- end -}}
+{{- $firstDay := lower ($config.first_day_of_week | default "sunday") -}}
+{{- if ne $firstDay "sunday" -}}{{- $firstDay = "monday" -}}{{- end -}}
+{{- $mondayFirst := eq $firstDay "monday" -}}
+{{- $showStats := ne $config.stats false -}}
+{{- $maxYears := $config.max_years | default 0 -}}
+{{- $monthNames := split (T "section.contributionMonths") "," -}}
+{{- if ne (len $monthNames) 12 -}}{{- $monthNames = split "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec" "," -}}{{- end -}}
+{{- $weekdayNames := split (T "section.contributionWeekdays") "," -}}
+{{- if ne (len $weekdayNames) 7 -}}{{- $weekdayNames = split "Mon,Tue,Wed,Thu,Fri,Sat,Sun" "," -}}{{- end -}}
+
+{{- $yearGroups := slice -}}
+{{- range $pages.GroupByDate "2006" -}}
+  {{- if ne .Key "0001" -}}{{- $yearGroups = $yearGroups | append . -}}{{- end -}}
+{{- end -}}
+{{- if gt $maxYears 0 -}}{{- $yearGroups = first $maxYears $yearGroups -}}{{- end -}}
+{{- if not $yearGroups -}}{{- return -}}{{- end -}}
+
+<div class="contribution-graph" data-first-day="{{ $firstDay }}">
+  <div class="contribution-years">
+    <div class="contribution-year-picker">
+      <button type="button" class="contribution-year-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="{{ $uid }}-year-menu">
+        <span class="sr-only">{{ T `section.contributionYears` }}:</span>
+        <span class="contribution-year-value">{{ (index $yearGroups 0).Key }}</span>
+        {{- dict "Class" "contribution-year-arrow fa-solid fa-chevron-down" | partial "plugin/icon.html" -}}
+      </button>
+      <ul class="contribution-year-menu" id="{{ $uid }}-year-menu" role="listbox" aria-label="{{ T `section.contributionYears` }}">
+        {{- range $index, $group := $yearGroups -}}
+          <li class="contribution-year-option{{ if eq $index 0 }} is-selected{{ end }}" role="option" data-year="{{ $group.Key }}" aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}" tabindex="-1">{{ $group.Key }}</li>
+        {{- end -}}
+      </ul>
+    </div>
+    {{- range $index, $group := $yearGroups -}}
+      {{- $year := $group.Key -}}
+      {{- $dayScratch := newScratch -}}
+      {{- range $group.Pages.GroupByDate "2006-01-02" -}}
+        {{- $posts := .Pages -}}
+        {{- $words := 0 -}}
+        {{- $titles := slice -}}
+        {{- range $posts -}}
+          {{- $words = add $words .WordCount -}}
+          {{- $titles = $titles | append (dict "title" (.LinkTitle | default .Title) "link" .RelPermalink) -}}
+        {{- end -}}
+        {{- $dayScratch.SetInMap "days" .Key (dict "count" (len $posts) "words" $words "titles" $titles) -}}
+      {{- end -}}
+      {{- $dayMap := $dayScratch.Get "days" | default dict -}}
+      {{- $start := time.AsTime (printf "%s-01-01" $year) -}}
+      {{- $end := time.AsTime (printf "%s-12-31" $year) -}}
+      {{- $days := int $end.YearDay -}}
+      {{- $offset := int $start.Weekday -}}
+      {{- if $mondayFirst -}}{{- $offset = mod (add $offset 6) 7 -}}{{- end -}}
+      {{- $cols := div (add (add $offset $days) 6) 7 -}}
+      {{- $labelScratch := newScratch -}}
+      {{- range $month := seq 0 11 -}}
+        {{- $first := $start.AddDate 0 $month 0 -}}
+        {{- $col := div (add $offset (sub (int $first.YearDay) 1)) 7 -}}
+        {{- $labelScratch.SetInMap "labels" (string $col) (index $monthNames $month) -}}
+      {{- end -}}
+      {{- $labels := $labelScratch.Get "labels" | default dict -}}
+      {{- $total := 0 -}}
+      {{- $run := 0 -}}
+      {{- $longest := 0 -}}
+      {{- $current := 0 -}}
+      {{- $today := now.Format "2006-01-02" -}}
+      {{- range $i := seq 0 (sub $days 1) -}}
+        {{- $day := $start.AddDate 0 0 $i -}}
+        {{- $key := $day.Format "2006-01-02" -}}
+        {{- $dayData := index $dayMap $key | default dict -}}
+        {{- $count := $dayData.count | default 0 -}}
+        {{- $total = add $total $count -}}
+        {{- if gt $count 0 -}}
+          {{- $run = add $run 1 -}}
+          {{- if gt $run $longest -}}{{- $longest = $run -}}{{- end -}}
+        {{- else -}}
+          {{- $run = 0 -}}
+        {{- end -}}
+        {{- if le $key $today -}}{{- $current = $run -}}{{- end -}}
+      {{- end -}}
+      {{- $summary := T "section.contributionTotal" (dict "Count" $total "Year" $year) -}}
+      <p class="contribution-summary{{ if eq $index 0 }} is-active{{ end }}" data-year="{{ $year }}">{{ $summary }}</p>
+      <div class="contribution-year{{ if eq $index 0 }} is-active{{ end }}" data-year="{{ $year }}">
+        <div class="contribution-body">
+          <div class="contribution-weekdays" aria-hidden="true">
+            <span></span>
+            {{- range $row := seq 0 6 -}}
+              {{- $weekdayIndex := cond $mondayFirst $row (mod (add $row 6) 7) -}}
+              <span>{{ index $weekdayNames $weekdayIndex }}</span>
+            {{- end -}}
+          </div>
+          <div class="contribution-scroll">
+            <div class="contribution-grid" data-cols="{{ $cols }}" role="img" aria-label="{{ $summary }}">
+              {{- range $col := seq 0 (sub $cols 1) -}}
+                <span class="contribution-month">{{ with index $labels (string $col) }}{{ . }}{{ end }}</span>
+                {{- range $row := seq 0 6 -}}
+                  {{- $dayIndex := sub (add (mul $col 7) $row) $offset -}}
+                  {{- if and (ge $dayIndex 0) (lt $dayIndex $days) -}}
+                    {{- $day := $start.AddDate 0 0 $dayIndex -}}
+                    {{- $key := $day.Format "2006-01-02" -}}
+                    {{- $dayData := index $dayMap $key | default dict -}}
+                    {{- $count := $dayData.count | default 0 -}}
+                    {{- $level := 0 -}}
+                    {{- if ge $count 5 -}}{{- $level = 4 -}}{{- else if ge $count 3 -}}{{- $level = 3 -}}{{- else if eq $count 2 -}}{{- $level = 2 -}}{{- else if eq $count 1 -}}{{- $level = 1 -}}{{- end -}}
+                    {{- $tooltip := "" -}}
+                    {{- $htmlTooltip := "" -}}
+                    {{- if gt $count 0 -}}
+                      {{- $meta := T "section.contributionTooltipMeta" (dict "Count" $count "Words" (lang.FormatNumber 0 ($dayData.words | default 0))) -}}
+                      {{- $titles := $dayData.titles -}}
+                      {{- $links := slice -}}
+                      {{- $plainTitles := slice -}}
+                      {{- range first 5 $titles -}}
+                        {{- $links = $links | append (printf `<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>` (htmlEscape .link) (htmlEscape .title)) -}}
+                        {{- $plainTitles = $plainTitles | append .title -}}
+                      {{- end -}}
+                      {{- $titleText := delimit $plainTitles "\n" -}}
+                      {{- $titleHTML := delimit $links "" -}}
+                      {{- if gt (len $titles) 5 -}}
+                        {{- $titleText = printf "%s\n…" $titleText -}}
+                        {{- $titleHTML = printf `%s<span class="contribution-tooltip-more">…</span>` $titleHTML -}}
+                      {{- end -}}
+                      {{- $tooltip = printf "%s\n%s\n%s" $key $meta $titleText -}}
+                      {{- $htmlTooltip = printf `<div class="contribution-tooltip-date">%s</div><div class="contribution-tooltip-meta">%s</div><div class="contribution-tooltip-titles">%s</div>` (htmlEscape $key) (htmlEscape $meta) $titleHTML -}}
+                    {{- else -}}
+                      {{- $none := T "section.contributionTooltipNone" -}}
+                      {{- $tooltip = printf "%s\n%s" $key $none -}}
+                      {{- $htmlTooltip = printf `<div class="contribution-tooltip-date">%s</div><div class="contribution-tooltip-meta">%s</div>` (htmlEscape $key) (htmlEscape $none) -}}
+                    {{- end -}}
+                    <span class="contribution-cell" data-level="{{ $level }}" title="{{ $tooltip }}" data-ct-title="{{ $htmlTooltip }}"></span>
+                  {{- else -}}
+                    <span class="contribution-cell is-placeholder" aria-hidden="true"></span>
+                  {{- end -}}
+                {{- end -}}
+              {{- end -}}
+            </div>
+          </div>
+        </div>
+        {{- if $showStats -}}
+          <p class="contribution-stats">
+            <span>{{ T "section.contributionLongestStreak" (dict "Count" $longest) }}</span>
+            <span>{{ T "section.contributionCurrentStreak" (dict "Count" $current) }}</span>
+          </p>
+        {{- end -}}
+      </div>
+    {{- end -}}
+  </div>
+  <div class="contribution-legend" aria-hidden="true">
+    <span>{{ T "section.contributionLess" }}</span>
+    {{- range $level := seq 0 4 -}}
+      <span class="contribution-cell" data-level="{{ $level }}"></span>
+    {{- end -}}
+    <span>{{ T "section.contributionMore" }}</span>
+  </div>
+</div>
