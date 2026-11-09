@@ -70,19 +70,19 @@ other = "共計 {{ .Count }} 篇文章"
 other = "選擇年份"
 
 [section.contributionTotal]
-other = "{{ .Year }} 年貢獻 {{ .Count }} 次"
+other = "{{ .Year }} 年發佈 {{ .Count }} 篇"
 
 [section.contributionTooltipMeta]
 other = "{{ .Count }} 篇 · {{ .Words }} 字"
 
 [section.contributionTooltipNone]
-other = "無貢獻"
+other = "未發佈"
 
 [section.contributionLongestStreak]
-other = "最長連續貢獻：{{ .Count }} 日"
+other = "最長連續發佈：{{ .Count }} 天"
 
 [section.contributionCurrentStreak]
-other = "最近連續貢獻：{{ .Count }} 日"
+other = "目前連續發佈：{{ .Count }} 天"
 
 [section.contributionLess]
 other = "少"

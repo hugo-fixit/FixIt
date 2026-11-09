@@ -72,15 +72,15 @@ other = "Total {{ .Count }} artículos"
 other = "Select year"
 
 [section.contributionTotal]
-one = "{{ .Count }} contribution in {{ .Year }}"
-other = "{{ .Count }} contributions in {{ .Year }}"
+one = "{{ .Count }} post in {{ .Year }}"
+other = "{{ .Count }} posts in {{ .Year }}"
 
 [section.contributionTooltipMeta]
-one = "{{ .Count }} contribution · {{ .Words }} words"
-other = "{{ .Count }} contributions · {{ .Words }} words"
+one = "{{ .Count }} post · {{ .Words }} words"
+other = "{{ .Count }} posts · {{ .Words }} words"
 
 [section.contributionTooltipNone]
-other = "No contributions"
+other = "No posts"
 
 [section.contributionLongestStreak]
 one = "Longest streak: {{ .Count }} day"
