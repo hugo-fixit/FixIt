@@ -291,11 +291,19 @@ $contribution-month-row: 1.25rem;
     outline-offset: -1px;
   }
 
+  .contribution-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 1rem;
+    margin-top: 0.5rem;
+  }
+
   .contribution-stats {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    margin: 0.25rem 0 0;
+    margin: 0;
     font-size: 0.75rem;
     color: fi-var(global-font-secondary-color);
   }
@@ -304,9 +312,8 @@ $contribution-month-row: 1.25rem;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: flex-end;
     gap: 0.25rem;
-    margin-top: 0.5rem;
+    margin-inline-start: auto;
     font-size: 0.75rem;
     color: fi-var(global-font-secondary-color);
   }

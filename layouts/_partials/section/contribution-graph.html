@@ -145,20 +145,22 @@
             </div>
           </div>
         </div>
-        {{- if $showStats -}}
-          <p class="contribution-stats">
-            <span>{{ T "section.contributionLongestStreak" (dict "Count" $longest) }}</span>
-            <span>{{ T "section.contributionCurrentStreak" (dict "Count" $current) }}</span>
-          </p>
-        {{- end -}}
+        <div class="contribution-footer">
+          {{- if $showStats -}}
+            <p class="contribution-stats">
+              <span>{{ T "section.contributionLongestStreak" (dict "Count" $longest) }}</span>
+              <span>{{ T "section.contributionCurrentStreak" (dict "Count" $current) }}</span>
+            </p>
+          {{- end -}}
+          <div class="contribution-legend" aria-hidden="true">
+            <span>{{ T "section.contributionLess" }}</span>
+            {{- range $level := seq 0 4 -}}
+              <span class="contribution-cell" data-level="{{ $level }}"></span>
+            {{- end -}}
+            <span>{{ T "section.contributionMore" }}</span>
+          </div>
+        </div>
       </div>
     {{- end -}}
-  </div>
-  <div class="contribution-legend" aria-hidden="true">
-    <span>{{ T "section.contributionLess" }}</span>
-    {{- range $level := seq 0 4 -}}
-      <span class="contribution-cell" data-level="{{ $level }}"></span>
-    {{- end -}}
-    <span>{{ T "section.contributionMore" }}</span>
   </div>
 </div>
