@@ -38,6 +38,8 @@ export const presetFixIt = definePreset<object>(() => ({
   // Block unused or false-positive utilities
   blocklist: [
     'container',
+    // Semantic class in layouts/_markup/render-table.html
+    'table-caption',
     /^h[1-6]$/,
     // Block legacy Font Awesome icons (FA uses CSS font, not SVG)
     /^fa-/,

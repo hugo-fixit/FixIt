@@ -40,16 +40,23 @@ const GROUP_DESCRIPTIONS: Record<string, string> = {
 
 /**
  * Extract the leading Hugo comment block from file content.
+ * Skips marker-only comments (e.g. `@unocss-skip-start`) wrapping the doc block.
  */
 function extractComment(content: string): string | null {
-  const match = content.match(/^\{\{-?\s*\/\*[\s\S]*?\*\/\s*-?\}\}/)
-  if (!match)
-    return null
-  // Strip the delimiters: {{- /* at start, */ -}} at end
-  const inner = match[0]
-    .replace(/^\{\{-?\s*\/\*\s*/, '')
-    .replace(/\s*\*\/\s*-?\}\}$/, '')
-  return inner.trim()
+  let rest = content
+  while (true) {
+    const match = rest.match(/^\{\{-?\s*\/\*[\s\S]*?\*\/\s*-?\}\}/)
+    if (!match)
+      return null
+    // Strip the delimiters: {{- /* at start, */ -}} at end
+    const inner = match[0]
+      .replace(/^\{\{-?\s*\/\*\s*/, '')
+      .replace(/\s*\*\/\s*-?\}\}$/, '')
+      .trim()
+    if (!/^@unocss-skip-(?:start|end)$/.test(inner))
+      return inner
+    rest = rest.slice(match[0].length).replace(/^\s+/, '')
+  }
 }
 
 /**
