@@ -64,7 +64,9 @@ function getHeaders(): Record<string, string> {
 
 async function fetchBlobContent(sha: string): Promise<string> {
   const url = `https://api.github.com/repos/alecthomas/chroma/git/blobs/${sha}`
-  const res = await fetch(url, { headers: getHeaders() })
+  const res = await fetch(url, {
+    headers: getHeaders(),
+  })
   if (!res.ok) {
     throw new Error(`HTTP ${res.status} for blob ${sha}`)
   }
@@ -77,7 +79,9 @@ async function fetchBlobContent(sha: string): Promise<string> {
 
 async function fetchDirectoryListing(dir: string, ref: string): Promise<Array<{ name: string, sha: string }>> {
   const url = `https://api.github.com/repos/alecthomas/chroma/contents/${dir}?ref=${ref}&per_page=300`
-  const res = await fetch(url, { headers: getHeaders() })
+  const res = await fetch(url, {
+    headers: getHeaders(),
+  })
   if (!res.ok) {
     throw new Error(`Failed to fetch directory listing for ${dir}: HTTP ${res.status}`)
   }
@@ -108,7 +112,9 @@ function parseLexerXml(xml: string): LexerEntry[] {
     aliases.push(match[1])
   }
 
-  return [{ name, aliases }]
+  return [
+    { name, aliases },
+  ]
 }
 
 function parseLexerGo(content: string): LexerEntry[] {

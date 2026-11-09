@@ -73,7 +73,12 @@ function getMermaidPanzoomGroup(svg: SVGElement): MermaidPanzoomGroup | null {
 
   let group = mermaidPanzoomGroups.get(container)
   if (!group) {
-    group = { container, transform: null, svgs: new Set(), lastSvg: null }
+    group = {
+      container,
+      transform: null,
+      svgs: new Set(),
+      lastSvg: null,
+    }
     mermaidPanzoomGroups.set(container, group)
   }
 
@@ -190,7 +195,9 @@ function getTheme(): string {
   const themes = config.themes ?? ['default', 'dark']
   const lightTheme = themes[0] ?? 'default'
   const darkTheme = themes[1] ?? lightTheme
-  return isDarkMode() ? darkTheme : lightTheme
+  return isDarkMode()
+    ? darkTheme
+    : lightTheme
 }
 
 /**
@@ -332,7 +339,10 @@ async function renderActiveLayerInContainer(container: Element | null): Promise<
   if (!isNodeVisuallyActive(el))
     return
 
-  await renderMermaidElement(el, { theme: getTheme(), darkMode })
+  await renderMermaidElement(el, {
+    theme: getTheme(),
+    darkMode,
+  })
 }
 
 /**
@@ -475,7 +485,9 @@ function bindMermaidPanzoom(svg: SVGElement): void {
       return
 
     const currentSvg = host.querySelector<SVGElement>('svg')
-    const instance = currentSvg ? panzoomInstances?.get(currentSvg) : null
+    const instance = currentSvg
+      ? panzoomInstances?.get(currentSvg)
+      : null
     if (!instance)
       return
 
@@ -510,7 +522,12 @@ async function initSingleDiagramTabs(tabs: HTMLElement): Promise<void> {
   const downloadBtn = tabs.querySelector<HTMLElement>('.diagram-download-btn')
   tabs.dataset.diagramInit = 'true'
 
-  const diagramActionButtons = [zoomOutBtn, zoomInBtn, resetBtn, downloadBtn].filter(Boolean) as HTMLElement[]
+  const diagramActionButtons = [
+    zoomOutBtn,
+    zoomInBtn,
+    resetBtn,
+    downloadBtn,
+  ].filter(Boolean) as HTMLElement[]
   const movedActionRestore = new WeakMap<HTMLElement, { parent: HTMLElement, next: ChildNode | null }>()
   let codeActionCache: HTMLElement[] = []
 
@@ -595,7 +612,9 @@ async function initSingleDiagramTabs(tabs: HTMLElement): Promise<void> {
 
   const resolvePanzoom = (): PanzoomInstance | null => {
     const svg = getActiveMermaidSvg(diagramBlock)
-    return svg && panzoomInstances ? (panzoomInstances.get(svg) ?? null) : null
+    return svg && panzoomInstances
+      ? (panzoomInstances.get(svg) ?? null)
+      : null
   }
 
   diagramTabBtn.addEventListener('click', () => switchTo('diagram'), false)
@@ -706,7 +725,9 @@ function bindThemeSync(): void {
   }
 
   const safeGetTransformFromSvg = (svg: SVGElement | null): PanzoomTransform | null => {
-    const instance = svg ? panzoomInstances?.get(svg) : null
+    const instance = svg
+      ? panzoomInstances?.get(svg)
+      : null
     if (!instance?.getPan || !instance?.getScale)
       return null
 
@@ -743,7 +764,9 @@ function bindThemeSync(): void {
         return
 
       const last = group.lastSvg
-      const sourceSvg = last?.isConnected ? last : (fallbackSource ?? currentActive)
+      const sourceSvg = last?.isConnected
+        ? last
+        : (fallbackSource ?? currentActive)
       const sourceTransform = safeGetTransformFromSvg(sourceSvg)
       if (sourceTransform)
         group.transform = sourceTransform

@@ -88,7 +88,12 @@ class FixItDecryptor {
     const passwordBytes = new TextEncoder().encode(passwordHash)
     const baseKey = await crypto.subtle.importKey('raw', passwordBytes, 'PBKDF2', false, ['deriveKey'])
     const aesKey = await crypto.subtle.deriveKey(
-      { name: 'PBKDF2', salt, iterations: PBKDF2_ITERATIONS, hash: 'SHA-256' },
+      {
+        name: 'PBKDF2',
+        salt,
+        iterations: PBKDF2_ITERATIONS,
+        hash: 'SHA-256',
+      },
       baseKey,
       { name: 'AES-GCM', length: 256 },
       false,
@@ -124,7 +129,12 @@ class FixItDecryptor {
     const passwordBytes = new TextEncoder().encode(passwordHash)
     const baseKey = await crypto.subtle.importKey('raw', passwordBytes, 'PBKDF2', false, ['deriveBits'])
     const bits = await crypto.subtle.deriveBits(
-      { name: 'PBKDF2', salt, iterations: PBKDF2_ITERATIONS, hash: 'SHA-256' },
+      {
+        name: 'PBKDF2',
+        salt,
+        iterations: PBKDF2_ITERATIONS,
+        hash: 'SHA-256',
+      },
       baseKey,
       256,
     )
@@ -199,7 +209,9 @@ class FixItDecryptor {
       const $encryptor = $template.parentElement!
       const $input = $encryptor.querySelector<HTMLInputElement>('.fixit-decryptor-input')
       if ($input) {
-        flashTooltip($input, err instanceof Error ? err.message : t('decryptionFailed'), 3000, true)
+        flashTooltip($input, err instanceof Error
+          ? err.message
+          : t('decryptionFailed'), 3000, true)
       }
       return console.error(err)
     }

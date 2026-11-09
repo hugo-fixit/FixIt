@@ -31,7 +31,9 @@ export class TocModule implements TocService {
 
   /** Compute the scroll offset for header + breadcrumb. */
   #getIndexOffset(): number {
-    const headerId = isMobile() ? 'header-mobile' : 'header-desktop'
+    const headerId = isMobile()
+      ? 'header-mobile'
+      : 'header-desktop'
     const $header = document.getElementById(headerId)
     const headerMode = document.body.getAttribute(`data-${headerId}`)
     if (!$header || window.getComputedStyle($header).display === 'none')

@@ -148,7 +148,10 @@ function findEncryptionTemplates(html: string): TemplateMatch[] {
     }
     else {
       if (stack.length > 0) {
-        pairs.push({ open: stack.pop()!, close: closes[ci] })
+        pairs.push({
+          open: stack.pop()!,
+          close: closes[ci],
+        })
       }
       ci++
     }
@@ -167,7 +170,14 @@ function findEncryptionTemplates(html: string): TemplateMatch[] {
 
     const content = html.slice(openEnd + 1, close)
     const closeEnd = close + CLOSE_TAG.length
-    allMatches.push({ openStart: open, openEnd: openEnd + 1, closeStart: close, closeEnd, attrs, content })
+    allMatches.push({
+      openStart: open,
+      openEnd: openEnd + 1,
+      closeStart: close,
+      closeEnd,
+      attrs,
+      content,
+    })
   }
 
   return allMatches

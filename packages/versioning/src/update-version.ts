@@ -61,7 +61,9 @@ export function updateVersion(type: 'dev' | 'prod') {
   // e.g. v0.3.21-mq7veaoa
   const devVersion: string = `${devBaseVersion}-${timestamp}`
   const initHtml: string = fs.readFileSync(initHtmlPath, 'utf8')
-  const latestVersion: string = type === 'prod' ? version : devVersion
+  const latestVersion: string = type === 'prod'
+    ? version
+    : devVersion
   const versionMatch = initHtml.match(VERSION_RE)
   if (!versionMatch) {
     throw new Error('Unable to find current version in layouts/_partials/init/index.html.')

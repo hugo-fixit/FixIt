@@ -119,7 +119,20 @@ function extractComments(content: string): { commentMap: Map<string, string[]>, 
       }
       if (inParams) {
         const rootKey = key.split('.')[0]
-        const nonParamsSections = ['menus', 'markup', 'outputs', 'taxonomies', 'related', 'frontmatter', 'imaging', 'module', 'sitemap', 'minify', 'caches', 'security']
+        const nonParamsSections = [
+          'menus',
+          'markup',
+          'outputs',
+          'taxonomies',
+          'related',
+          'frontmatter',
+          'imaging',
+          'module',
+          'sitemap',
+          'minify',
+          'caches',
+          'security',
+        ]
         if (nonParamsSections.includes(rootKey)) {
           inParams = false
           sectionStack.length = 0
@@ -174,7 +187,10 @@ function extractComments(content: string): { commentMap: Map<string, string[]>, 
     const kvMatch = trimmed.match(/^(\w+)\s*=/)
     if (kvMatch && sectionStack.length > 0) {
       const keyName = kvMatch[1]
-      const fullPath = [...sectionStack.slice(1), keyName].join('.')
+      const fullPath = [
+        ...sectionStack.slice(1),
+        keyName,
+      ].join('.')
       if (afterHardSeparator && !pageLevelStartKey && sectionStack.length === 1) {
         pageLevelStartKey = keyName
         afterHardSeparator = false
@@ -196,7 +212,10 @@ function extractComments(content: string): { commentMap: Map<string, string[]>, 
     const arrayMatch = trimmed.match(/^\[\[(\w+(?:\.\w+)*)\]\]$/)
     if (arrayMatch && inParams) {
       const keyPath = arrayMatch[1]
-      const fullPath = [...sectionStack.slice(1), keyPath].join('.')
+      const fullPath = [
+        ...sectionStack.slice(1),
+        keyPath,
+      ].join('.')
       if (pendingComments.length > 0) {
         commentMap.set(fullPath, [...pendingComments])
         pendingComments.length = 0
@@ -204,7 +223,12 @@ function extractComments(content: string): { commentMap: Map<string, string[]>, 
     }
   }
 
-  return { commentMap, sectionCommentMap, pageLevelStartKey, pageLevelEndKey }
+  return {
+    commentMap,
+    sectionCommentMap,
+    pageLevelStartKey,
+    pageLevelEndKey,
+  }
 }
 
 function detectType(value: unknown): string {
@@ -212,8 +236,11 @@ function detectType(value: unknown): string {
     return 'string'
   if (typeof value === 'boolean')
     return 'bool'
-  if (typeof value === 'number')
-    return Number.isInteger(value) ? 'int' : 'float'
+  if (typeof value === 'number') {
+    return Number.isInteger(value)
+      ? 'int'
+      : 'float'
+  }
   if (typeof value === 'string')
     return 'string'
   if (Array.isArray(value)) {
@@ -229,8 +256,11 @@ function detectType(value: unknown): string {
 function formatDefault(value: unknown): string {
   if (value === null || value === undefined)
     return ''
-  if (typeof value === 'string')
-    return value === '' ? '`""`' : `\`${JSON.stringify(value)}\``
+  if (typeof value === 'string') {
+    return value === ''
+      ? '`""`'
+      : `\`${JSON.stringify(value)}\``
+  }
   if (typeof value === 'boolean')
     return `\`${value}\``
   if (typeof value === 'number')
@@ -324,7 +354,9 @@ function joinComments(comments: string[]): string {
       if (fence === null) {
         flushProse()
         fenceIndent = indent
-        fence = [raw.replace(/\s+$/, '')]
+        fence = [
+          raw.replace(/\s+$/, ''),
+        ]
       }
       else {
         fence.push(`${fenceIndent}\`\`\``)
@@ -386,11 +418,15 @@ function documentSection(
   const seenKeys = new Set<string>()
 
   for (const [key, value] of Object.entries(obj)) {
-    const fullPath = parentPath ? `${parentPath}.${key}` : key
+    const fullPath = parentPath
+      ? `${parentPath}.${key}`
+      : key
     const comments = commentMap.get(fullPath) || []
     // Fall back to section-level comments if no key-level comments
     const sectionComments = sectionCommentMap?.get(fullPath)
-    const effectiveComments = comments.length > 0 ? comments : (sectionComments || [])
+    const effectiveComments = comments.length > 0
+      ? comments
+      : (sectionComments || [])
     const type = detectType(value)
     const isTable = typeof value === 'object' && !Array.isArray(value) && value !== null
     const isArray = Array.isArray(value)
@@ -422,7 +458,9 @@ function documentSection(
   // Add placeholder entries for empty sections that have section-level comments
   if (sectionCommentMap) {
     for (const [sectionPath, comments] of sectionCommentMap) {
-      const prefix = parentPath ? `${parentPath}.` : ''
+      const prefix = parentPath
+        ? `${parentPath}.`
+        : ''
       if (sectionPath.startsWith(prefix) && !sectionPath.slice(prefix.length).includes('.')) {
         const key = sectionPath.slice(prefix.length)
         if (key && !seenKeys.has(key)) {
@@ -489,9 +527,13 @@ function renderChildren(children: ParamDoc[], lines: string[]): void {
   for (const child of children) {
     let meta = `\`${child.type}\``
     const desc = child.description.replace(/\.$/, '')
-    const endPunct = desc.trim().endsWith('```') ? '' : '.'
+    const endPunct = desc.trim().endsWith('```')
+      ? ''
+      : '.'
     if (child.defaultValue && child.type !== 'map') {
-      meta += desc ? ` ${desc}${endPunct} Default is ${child.defaultValue}.` : ` Default is ${child.defaultValue}.`
+      meta += desc
+        ? ` ${desc}${endPunct} Default is ${child.defaultValue}.`
+        : ` Default is ${child.defaultValue}.`
     }
     else if (desc) {
       meta += ` ${desc}${endPunct}`
@@ -505,9 +547,13 @@ function renderChildren(children: ParamDoc[], lines: string[]): void {
       for (const grandchild of child.children) {
         let gcMeta = `\`${grandchild.type}\``
         const gcDesc = grandchild.description.replace(/\.$/, '')
-        const gcEndPunct = gcDesc.trim().endsWith('```') ? '' : '.'
+        const gcEndPunct = gcDesc.trim().endsWith('```')
+          ? ''
+          : '.'
         if (grandchild.defaultValue && grandchild.type !== 'map') {
-          gcMeta += gcDesc ? ` ${gcDesc}${gcEndPunct} Default is ${grandchild.defaultValue}.` : ` Default is ${grandchild.defaultValue}.`
+          gcMeta += gcDesc
+            ? ` ${gcDesc}${gcEndPunct} Default is ${grandchild.defaultValue}.`
+            : ` Default is ${grandchild.defaultValue}.`
         }
         else if (gcDesc) {
           gcMeta += ` ${gcDesc}${gcEndPunct}`
@@ -527,9 +573,13 @@ function renderParam(doc: ParamDoc): string {
 
   let meta = `\`${doc.type}\``
   const desc = doc.description.replace(/\.$/, '')
-  const endPunct = desc.trim().endsWith('```') ? '' : '.'
+  const endPunct = desc.trim().endsWith('```')
+    ? ''
+    : '.'
   if (doc.defaultValue && doc.type !== 'map') {
-    meta += desc ? ` ${desc}${endPunct} Default is ${doc.defaultValue}.` : ` Default is ${doc.defaultValue}.`
+    meta += desc
+      ? ` ${desc}${endPunct} Default is ${doc.defaultValue}.`
+      : ` Default is ${doc.defaultValue}.`
   }
   else if (desc) {
     meta += ` ${desc}${endPunct}`
@@ -544,7 +594,9 @@ function renderParam(doc: ParamDoc): string {
 
     const hasContent = (children: ParamDoc[]): boolean =>
       children.some(child => !child.isTable || (child.children.length > 0 && hasContent(child.children)))
-    const codeBlock = hasContent(doc.children) ? '```toggle' : '```toml'
+    const codeBlock = hasContent(doc.children)
+      ? '```toggle'
+      : '```toml'
 
     lines.push(codeBlock)
     lines.push('[params]')

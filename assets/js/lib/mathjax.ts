@@ -25,8 +25,14 @@ function bootstrapMathJax() {
   const configureMathJax = () => {
     window.MathJax = {
       tex: {
-        displayMath: [['\\[', '\\]'], ['$$', '$$']],
-        inlineMath: [['\\(', '\\)'], ['$', '$']],
+        displayMath: [
+          ['\\[', '\\]'],
+          ['$$', '$$'],
+        ],
+        inlineMath: [
+          ['\\(', '\\)'],
+          ['$', '$'],
+        ],
         packages: {
           ...params.packages,
         },
@@ -58,7 +64,9 @@ function bootstrapMathJax() {
  * Trigger MathJax re-typesetting if MathJax is loaded.
  */
 function initMathJax(el?: Element) {
-  const elements = el ? [el] : undefined
+  const elements = el
+    ? [el]
+    : undefined
   if (window.MathJax?.typesetPromise) {
     window.MathJax.typesetPromise(elements).then(() => {
       // Do something else after typesetting is complete

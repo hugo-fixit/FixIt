@@ -44,9 +44,13 @@ function initTypeit(target: Element | Document = document) {
       }
       const instance = new TypeIt(targetEle, {
         strings: stagingDOM.$el.querySelector('pre')?.innerHTML || stagingDOM.contentAsHtml(),
-        speed: Number(singleData.speed) >= 0 ? Number(singleData.speed) : speed,
+        speed: Number(singleData.speed) >= 0
+          ? Number(singleData.speed)
+          : speed,
         lifeLike: true,
-        cursorSpeed: Number(singleData.cursorSpeed) >= 0 ? Number(singleData.cursorSpeed) : cursorSpeed,
+        cursorSpeed: Number(singleData.cursorSpeed) >= 0
+          ? Number(singleData.cursorSpeed)
+          : cursorSpeed,
         cursorChar: singleData.cursorChar || cursorChar,
         waitUntilVisible: true,
         loop,

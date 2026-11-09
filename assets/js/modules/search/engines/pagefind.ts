@@ -21,7 +21,9 @@ function replaceExcerptHighlightTag(excerpt: string, highlightTag: string): stri
 export function createPagefindEngine(searchConfig: SearchConfig, pagefindConfig: PagefindConfig): SearchEngine {
   const bundlePath = pagefindConfig.bundlePath || 'pagefind/'
   const rawDebounceTimeout = Number(pagefindConfig.debounceTimeoutMs ?? 300)
-  const debounceTimeout = Number.isFinite(rawDebounceTimeout) ? Math.max(0, rawDebounceTimeout) : 300
+  const debounceTimeout = Number.isFinite(rawDebounceTimeout)
+    ? Math.max(0, rawDebounceTimeout)
+    : 300
   const builtInFiltersEnabled = pagefindConfig.useBuiltInFilters !== false
   const sortBy = pagefindConfig.sortBy
   const sortOrder = pagefindConfig.sortOrder ?? 'desc'
@@ -138,9 +140,15 @@ export function createPagefindEngine(searchConfig: SearchConfig, pagefindConfig:
           date: item.meta?.date || '',
           context: replaceExcerptHighlightTag(item.excerpt || '', highlightTag),
           heading,
-          tags: item.meta?.tags ? item.meta.tags.split(',').map((t: string) => t.trim()).filter(Boolean) : undefined,
-          categories: item.meta?.categories ? item.meta.categories.split(',').map((t: string) => t.trim()).filter(Boolean) : undefined,
-          collections: item.meta?.collections ? item.meta.collections.split(',').map((t: string) => t.trim()).filter(Boolean) : undefined,
+          tags: item.meta?.tags
+            ? item.meta.tags.split(',').map((t: string) => t.trim()).filter(Boolean)
+            : undefined,
+          categories: item.meta?.categories
+            ? item.meta.categories.split(',').map((t: string) => t.trim()).filter(Boolean)
+            : undefined,
+          collections: item.meta?.collections
+            ? item.meta.collections.split(',').map((t: string) => t.trim()).filter(Boolean)
+            : undefined,
         }
       })
     },

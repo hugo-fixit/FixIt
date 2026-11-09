@@ -26,7 +26,9 @@ export class ThemeModule implements ThemeService {
     const prevIsDark = this.#core.isDark
     this.#core.themeMode = mode
     document.documentElement.dataset.themeMode = mode
-    this.#core.isDark = mode === 'auto' ? this.#mql.matches : mode === 'dark'
+    this.#core.isDark = mode === 'auto'
+      ? this.#mql.matches
+      : mode === 'dark'
 
     if (persist) {
       window.localStorage?.setItem('theme-mode', mode)

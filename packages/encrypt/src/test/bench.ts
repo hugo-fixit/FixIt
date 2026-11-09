@@ -11,7 +11,11 @@ const BENCH_DIR = '/tmp/fixit-encrypt-bench'
 const PASSWORD_HASH = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
 
 function generateTemplate(size: string): string {
-  const count = size === 'small' ? 5 : size === 'medium' ? 50 : 500
+  const count = size === 'small'
+    ? 5
+    : size === 'medium'
+      ? 50
+      : 500
   const content = '<p>This is some encrypted content that needs to be protected.</p>'.repeat(count)
   return `<div><template data-password="${PASSWORD_HASH}">${content}</template></div>`
 }
@@ -35,7 +39,12 @@ function setup(fileCount: number, templatesPerFile: number, templateSize: string
 
 function run(): number {
   const start = performance.now()
-  execFileSync('npx', ['tsx', `${__dirname}/../index.ts`, '--input', BENCH_DIR], {
+  execFileSync('npx', [
+    'tsx',
+    `${__dirname}/../index.ts`,
+    '--input',
+    BENCH_DIR,
+  ], {
     encoding: 'utf8',
     cwd: __dirname,
   })

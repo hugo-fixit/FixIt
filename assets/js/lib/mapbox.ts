@@ -35,7 +35,9 @@ function initMapbox(target: Element | Document = document) {
     if (marked) {
       new mapboxgl.Marker().setLngLat([lng, lat]).addTo(mapbox)
     }
-    const markerArray = typeof markers === 'string' ? JSON.parse(markers) : markers
+    const markerArray = typeof markers === 'string'
+      ? JSON.parse(markers)
+      : markers
     if (Array.isArray(markerArray) && markerArray.length > 0) {
       markerArray.forEach((marker: any) => {
         const { lng: markerLng, lat: markerLat, description } = marker

@@ -14,7 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const DARK_MODE = 'html[data-theme-mode="dark"]'
   const walineConfig = window.config.comment.waline
-  walineConfig.dark = getThemeMode() === 'auto' ? 'auto' : DARK_MODE
+  walineConfig.dark = getThemeMode() === 'auto'
+    ? 'auto'
+    : DARK_MODE
 
   // Count-only mode for expired comments
   if (window.config.comment?.expired) {
@@ -30,6 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const walineInstance = window.Waline.init(walineConfig)
 
   eventBus.on('fixit:switch-theme', ({ detail }) => {
-    walineInstance.update({ dark: detail.mode === 'auto' ? 'auto' : DARK_MODE })
+    walineInstance.update({
+      dark: detail.mode === 'auto'
+        ? 'auto'
+        : DARK_MODE,
+    })
   })
 }, false)

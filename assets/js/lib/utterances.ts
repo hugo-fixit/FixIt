@@ -20,7 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
   script.setAttribute('issue-term', utterancesConfig.issueTerm!)
   if (utterancesConfig.label)
     script.setAttribute('label', utterancesConfig.label)
-  script.setAttribute('theme', isDarkMode() ? utterancesConfig.darkTheme! : utterancesConfig.lightTheme!)
+  script.setAttribute('theme', isDarkMode()
+    ? utterancesConfig.darkTheme!
+    : utterancesConfig.lightTheme!)
   script.crossOrigin = 'anonymous'
   script.async = true
   document.getElementById('utterances')!.appendChild(script)

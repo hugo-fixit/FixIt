@@ -6,7 +6,9 @@
  * @param callback - Optional callback invoked when the animation ends.
  */
 export function animateCSS(element: Element, animation: string | string[], reserved?: boolean, callback?: () => void) {
-  const animations = Array.isArray(animation) ? animation : [animation]
+  const animations = Array.isArray(animation)
+    ? animation
+    : [animation]
   element.classList.add('animate__animated', ...animations)
   element.addEventListener('animationend', () => {
     !reserved && element.classList.remove('animate__animated', ...animations)

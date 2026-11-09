@@ -24,14 +24,20 @@ function renderParamTable(params: PartialDoc['params']): string {
 
   for (const param of params) {
     const name = `\`${param.name}\``
-    const type = param.type ? `\`${param.type}\`` : ''
+    const type = param.type
+      ? `\`${param.type}\``
+      : ''
     const desc = escapeHtml(param.description || '')
     lines.push(`| ${name} | ${type} | ${desc} |`)
 
     for (const child of param.children) {
-      const childFullName = param.name === '.' ? `.${child.name}` : `${param.name}.${child.name}`
+      const childFullName = param.name === '.'
+        ? `.${child.name}`
+        : `${param.name}.${child.name}`
       const childName = `\`${childFullName}\``
-      const childType = child.type ? `\`${child.type}\`` : ''
+      const childType = child.type
+        ? `\`${child.type}\``
+        : ''
       const childDesc = escapeHtml(child.description || '')
       lines.push(`| ${childName} | ${childType} | ${childDesc} |`)
     }
@@ -90,7 +96,9 @@ function renderGroup(group: PartialGroup): string {
   const lines: string[] = []
 
   const count = group.partials.length
-  const header = group.name === '(root)' ? '(root)' : `${group.name}/`
+  const header = group.name === '(root)'
+    ? '(root)'
+    : `${group.name}/`
   lines.push(`## ${header}`)
   lines.push('')
 
@@ -99,7 +107,9 @@ function renderGroup(group: PartialGroup): string {
     lines.push('')
   }
 
-  lines.push(`> ${count} partial${count !== 1 ? 's' : ''}`)
+  lines.push(`> ${count} partial${count !== 1
+    ? 's'
+    : ''}`)
   lines.push('')
 
   for (const partial of group.partials) {
@@ -127,9 +137,13 @@ export function generatePartialsDocs(groups: PartialGroup[]): string {
   lines.push('## Groups')
   lines.push('')
   for (const group of groups) {
-    const header = group.name === '(root)' ? '(root)' : `${group.name}/`
+    const header = group.name === '(root)'
+      ? '(root)'
+      : `${group.name}/`
     const count = group.partials.length
-    lines.push(`- [${header}](#${group.name.replace(/[()/]/g, '').toLowerCase()}) — ${count} partial${count !== 1 ? 's' : ''}`)
+    lines.push(`- [${header}](#${group.name.replace(/[()/]/g, '').toLowerCase()}) — ${count} partial${count !== 1
+      ? 's'
+      : ''}`)
   }
   lines.push('')
 

@@ -37,7 +37,9 @@ function compareValues(a: string, b: string, direction: SortDirection): number {
       result = a.localeCompare(b)
   }
 
-  return direction === 'asc' ? result : -result
+  return direction === 'asc'
+    ? result
+    : -result
 }
 
 function nextDirection(current: SortDirection): SortDirection {
@@ -77,7 +79,9 @@ function updateSortIndicators(table: HTMLTableElement, colIndex: number, directi
   table.querySelectorAll('th').forEach((th, i) => {
     th.classList.remove('sort-asc', 'sort-desc')
     if (i === colIndex && direction) {
-      th.classList.add(direction === 'asc' ? 'sort-asc' : 'sort-desc')
+      th.classList.add(direction === 'asc'
+        ? 'sort-asc'
+        : 'sort-desc')
     }
   })
 }
@@ -115,7 +119,9 @@ function initSortableTable(table: HTMLTableElement) {
       if (newDir) {
         table.dataset.sortCol = String(index)
         table.dataset.sortDir = newDir
-        th.setAttribute('aria-sort', newDir === 'asc' ? 'ascending' : 'descending')
+        th.setAttribute('aria-sort', newDir === 'asc'
+          ? 'ascending'
+          : 'descending')
       }
       else {
         delete table.dataset.sortCol

@@ -12,12 +12,14 @@ export function createAlgoliaEngine(searchConfig: SearchConfig): SearchEngine {
     console.warn('[FixIt] Algolia is not configured. Please set `search.algolia.appID`, `search.algolia.searchKey`, and `search.algolia.index` in your site config.')
     return {
       async search() {
-        return [{
-          uri: '',
-          title: 'Algolia is not configured',
-          date: '',
-          context: 'Please set <code>search.algolia.appID</code>, <code>search.algolia.searchKey</code>, and <code>search.algolia.index</code> in your site config.',
-        }]
+        return [
+          {
+            uri: '',
+            title: 'Algolia is not configured',
+            date: '',
+            context: 'Please set <code>search.algolia.appID</code>, <code>search.algolia.searchKey</code>, and <code>search.algolia.index</code> in your site config.',
+          },
+        ]
       },
     }
   }
@@ -48,7 +50,9 @@ export function createAlgoliaEngine(searchConfig: SearchConfig): SearchEngine {
         if (typeof offset === 'number' && typeof length === 'number' && length > 0)
           request.page = Math.floor(offset / length)
         return client
-          .search({ requests: [request] })
+          .search({
+            requests: [request],
+          })
           .then((response: any) => ({ hits: response.results?.[0]?.hits ?? [] }))
       },
     }

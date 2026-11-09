@@ -72,9 +72,13 @@ export class CodeModule implements CodeService {
       const $codeHeader = codeBlock.querySelector<HTMLElement>('.code-header')
       const name = codeBlock.dataset.name?.trim()
       const language = Array.from($codeHeader?.classList || []).find(className => className.startsWith('language-'))?.replace('language-', '')
-      const ext = language && language !== 'fallback' ? language : 'txt'
+      const ext = language && language !== 'fallback'
+        ? language
+        : 'txt'
       const fallbackName = name
-        ? (name.includes('.') ? name : `${name}.${ext}`)
+        ? (name.includes('.')
+            ? name
+            : `${name}.${ext}`)
         : `code.${ext}`
       const fileName = codeBlock.getAttribute('filename')?.trim()
       downloadAsFile(codePreEl.textContent!, fileName || fallbackName)
@@ -106,7 +110,9 @@ export class CodeModule implements CodeService {
     const expandBtn = codeBlock.querySelector<HTMLElement>('.code-expand-btn')
 
     if (show && expandBtn) {
-      codeBlock.dataset.fullscreenExpanded = codeBlock.classList.contains('is-expanded') ? 'true' : 'false'
+      codeBlock.dataset.fullscreenExpanded = codeBlock.classList.contains('is-expanded')
+        ? 'true'
+        : 'false'
       codeBlock.classList.add('is-expanded')
     }
 
@@ -287,8 +293,12 @@ export class CodeModule implements CodeService {
       const activeTabIndex = $tabs.findIndex(tab => tab.classList.contains('active'))
       const langPref = window.localStorage.getItem('config_lang_perf')
       const hasCodeToggle = $tabs.some(tab => tab.dataset.codeToggle === 'true')
-      const langPrefIndex = (langPref && hasCodeToggle) ? $tabs.findIndex(tab => tab.dataset.tabTitle!.toLowerCase() === langPref) : -1
-      const resolvedIndex = langPrefIndex !== -1 ? langPrefIndex : activeTabIndex
+      const langPrefIndex = (langPref && hasCodeToggle)
+        ? $tabs.findIndex(tab => tab.dataset.tabTitle!.toLowerCase() === langPref)
+        : -1
+      const resolvedIndex = langPrefIndex !== -1
+        ? langPrefIndex
+        : activeTabIndex
       const beforeTabs = $tabs[0]?.getAttribute('before_tabs')
       if (beforeTabs) {
         const $before = document.createElement('span')

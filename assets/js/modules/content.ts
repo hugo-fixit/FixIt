@@ -158,7 +158,9 @@ export class ContentModule implements ContentService {
         // Find active item and update nav from its siblings
         const $items = Array.from($list.children)
         const $active = $list.querySelector('.active')
-        const activeIdx = $active ? $items.indexOf($active.closest('li')!) : -1
+        const activeIdx = $active
+          ? $items.indexOf($active.closest('li')!)
+          : -1
 
         // Update counter
         const $counter = $nav.querySelector<HTMLElement>('.text-secondary:not(.collection-nav-item)')
@@ -168,7 +170,9 @@ export class ContentModule implements ContentService {
 
         // Update prev link (left arrow)
         const $navItems = $nav.querySelectorAll<HTMLElement>('.collection-nav-item')
-        const $prevItem = activeIdx > 0 ? $items[activeIdx - 1].querySelector('a') : null
+        const $prevItem = activeIdx > 0
+          ? $items[activeIdx - 1].querySelector('a')
+          : null
         if ($navItems[0]) {
           if ($prevItem) {
             const $link = document.createElement('a')

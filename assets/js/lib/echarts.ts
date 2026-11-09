@@ -45,7 +45,9 @@ function initEchartsInTarget(target: Element | Document = document) {
       try {
         const jsCodes = stagingDOM.contentAsText()
         // eslint-disable-next-line no-new-func
-        const _getOption = new Function('fixit', 'chart', isObjectLiteral(jsCodes) ? `return ${jsCodes}` : jsCodes)
+        const _getOption = new Function('fixit', 'chart', isObjectLiteral(jsCodes)
+          ? `return ${jsCodes}`
+          : jsCodes)
         if ($dataEl.dataset.async === 'true') {
           return Promise.resolve(_getOption(window.fixit, chart)).then((option: any) => {
             _setOption(option)

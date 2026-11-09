@@ -52,7 +52,9 @@ function generatePartialsAction(options: { output?: string, template?: string })
       consola.error(`Template not found: ${templatePath}`)
       process.exit(1)
     }
-    const outputPath = options.output ? path.resolve(process.cwd(), options.output) : undefined
+    const outputPath = options.output
+      ? path.resolve(process.cwd(), options.output)
+      : undefined
     let cmd = `pnpm gen:docs partials -t ${options.template}`
     if (options.output)
       cmd += ` -o ${options.output}`
@@ -119,7 +121,9 @@ async function configAction(
     }
   }
   else {
-    const inputPath = source === 'hugo.toml' ? fromRoot('hugo.toml') : path.resolve(process.cwd(), source)
+    const inputPath = source === 'hugo.toml'
+      ? fromRoot('hugo.toml')
+      : path.resolve(process.cwd(), source)
     if (!fs.existsSync(inputPath)) {
       consola.error(`File not found: ${inputPath}`)
       process.exit(1)
@@ -133,7 +137,9 @@ async function configAction(
       consola.error(`Template file not found: ${templatePath}`)
       process.exit(1)
     }
-    const outputPath = options.output ? path.resolve(process.cwd(), options.output) : undefined
+    const outputPath = options.output
+      ? path.resolve(process.cwd(), options.output)
+      : undefined
     let cmd = `gen-docs config ${file}`
     if (options.template)
       cmd += ` -t ${options.template}`

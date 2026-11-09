@@ -23,7 +23,9 @@ export function generateScss(lexers: LexerEntry[]): void {
     }
   }
 
-  const sorted = [...aliasMap.entries()].sort((a, b) =>
+  const sorted = [
+    ...aliasMap.entries(),
+  ].sort((a, b) =>
     a[0].localeCompare(b[0]),
   )
 
@@ -43,7 +45,9 @@ export function generateScss(lexers: LexerEntry[]): void {
   const customEntries = Object.entries(customCodeTypes)
   for (let i = 0; i < customEntries.length; i++) {
     const [key, value] = customEntries[i]
-    const comma = i < customEntries.length - 1 ? ',' : ''
+    const comma = i < customEntries.length - 1
+      ? ','
+      : ''
     lines.push(`  "${key}": "${value}"${comma}`)
   }
 

@@ -15,7 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const giscusConfig = window.config.comment.giscus
 
   const applyGiscusTheme = (isDark: boolean) => {
-    const message = { setConfig: { theme: isDark ? giscusConfig.darkTheme : giscusConfig.lightTheme } }
+    const message = {
+      setConfig: {
+        theme: isDark ? giscusConfig.darkTheme : giscusConfig.lightTheme,
+      },
+    }
     document.querySelector<HTMLIFrameElement>('.giscus-frame')?.contentWindow?.postMessage({ giscus: message }, giscusConfig.origin!)
   }
 
