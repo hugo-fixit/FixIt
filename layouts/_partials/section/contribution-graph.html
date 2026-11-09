@@ -1,6 +1,11 @@
 {{- /*
   Contribution heatmap: per-year calendar grid with a year dropdown.
 
+  Intensity is controlled by `params.contribution.metric`:
+  - `count` (default): posts per day, using fixed thresholds 1 / 2 / 3-4 / 5+.
+  - `words`: total words per day, bucketed by the p50/p75/p90 of days with posts.
+  - `score`: posts + words / 1500, bucketed by the p50/p75/p90 of days with posts.
+
   @param {Map} . - dict "Page" (context), "Pages" (page collection)
   @example {{- partial "section/contribution-graph.html" (dict "Page" . "Pages" $pages) -}}
 */ -}}
@@ -16,6 +21,9 @@
 {{- $mondayFirst := eq $firstDay "monday" -}}
 {{- $showStats := ne $config.stats false -}}
 {{- $maxYears := $config.max_years | default 0 -}}
+{{- $wordsPerPost := 1500 -}}
+{{- $metric := lower (printf "%v" ($config.metric | default "count")) -}}
+{{- if not (in (slice "count" "words" "score") $metric) -}}{{- $metric = "count" -}}{{- end -}}
 {{- $monthNames := split (T "section.contributionMonths") "," -}}
 {{- if ne (len $monthNames) 12 -}}{{- $monthNames = split "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec" "," -}}{{- end -}}
 {{- $weekdayNames := split (T "section.contributionWeekdays") "," -}}
@@ -73,6 +81,7 @@
       {{- $run := 0 -}}
       {{- $longest := 0 -}}
       {{- $current := 0 -}}
+      {{- $values := slice -}}
       {{- $today := now.Format "2006-01-02" -}}
       {{- range $i := seq 0 (sub $days 1) -}}
         {{- $day := $start.AddDate 0 0 $i -}}
@@ -81,12 +90,31 @@
         {{- $count := $dayData.count | default 0 -}}
         {{- $total = add $total $count -}}
         {{- if gt $count 0 -}}
+          {{- $value := $count -}}
+          {{- if eq $metric "words" -}}
+            {{- $value = $dayData.words | default 0 -}}
+          {{- else if eq $metric "score" -}}
+            {{- $value = add (mul $count $wordsPerPost) ($dayData.words | default 0) -}}
+          {{- end -}}
+          {{- $values = $values | append $value -}}
           {{- $run = add $run 1 -}}
           {{- if gt $run $longest -}}{{- $longest = $run -}}{{- end -}}
         {{- else -}}
           {{- $run = 0 -}}
         {{- end -}}
         {{- if le $key $today -}}{{- $current = $run -}}{{- end -}}
+      {{- end -}}
+      {{- /* Bucket words/score by the p50/p75/p90 of days with posts. */ -}}
+      {{- $sortedValues := sort $values -}}
+      {{- $valueCount := len $sortedValues -}}
+      {{- $lastIndex := sub $valueCount 1 -}}
+      {{- $q50 := 0 -}}
+      {{- $q75 := 0 -}}
+      {{- $q90 := 0 -}}
+      {{- if and (ne $metric "count") (gt $valueCount 0) -}}
+        {{- $q50 = index $sortedValues (div (mul $lastIndex 50) 100) -}}
+        {{- $q75 = index $sortedValues (div (mul $lastIndex 75) 100) -}}
+        {{- $q90 = index $sortedValues (div (mul $lastIndex 90) 100) -}}
       {{- end -}}
       {{- $summary := T "section.contributionTotal" (dict "Count" $total "Year" $year) -}}
       <p class="contribution-summary{{ if eq $index 0 }} is-active{{ end }}" data-year="{{ $year }}">{{ $summary }}</p>
@@ -111,7 +139,25 @@
                     {{- $dayData := index $dayMap $key | default dict -}}
                     {{- $count := $dayData.count | default 0 -}}
                     {{- $level := 0 -}}
-                    {{- if ge $count 5 -}}{{- $level = 4 -}}{{- else if ge $count 3 -}}{{- $level = 3 -}}{{- else if eq $count 2 -}}{{- $level = 2 -}}{{- else if eq $count 1 -}}{{- $level = 1 -}}{{- end -}}
+                    {{- if gt $count 0 -}}
+                      {{- if eq $metric "count" -}}
+                        {{- if ge $count 5 -}}{{- $level = 4 -}}
+                        {{- else if ge $count 3 -}}{{- $level = 3 -}}
+                        {{- else if eq $count 2 -}}{{- $level = 2 -}}
+                        {{- else -}}{{- $level = 1 -}}
+                        {{- end -}}
+                      {{- else -}}
+                        {{- $value := $dayData.words | default 0 -}}
+                        {{- if eq $metric "score" -}}
+                          {{- $value = add (mul $count $wordsPerPost) $value -}}
+                        {{- end -}}
+                        {{- if le $value $q50 -}}{{- $level = 1 -}}
+                        {{- else if le $value $q75 -}}{{- $level = 2 -}}
+                        {{- else if le $value $q90 -}}{{- $level = 3 -}}
+                        {{- else -}}{{- $level = 4 -}}
+                        {{- end -}}
+                      {{- end -}}
+                    {{- end -}}
                     {{- $tooltip := "" -}}
                     {{- $htmlTooltip := "" -}}
                     {{- if gt $count 0 -}}

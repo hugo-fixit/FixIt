@@ -1560,6 +1560,12 @@ enable = true
 first_day_of_week = "sunday"
 # Whether to show contribution statistics (longest/current streak).
 stats = true
+# Metric used to calculate contribution intensity.
+# Available values: ["count", "words", "score"]
+# - count: number of posts per day, using fixed thresholds 1 / 2 / 3-4 / 5+.
+# - words: total words per day, bucketed by the p50/p75/p90 of days with posts.
+# - score: posts + words / 1500, bucketed by the p50/p75/p90 of days with posts.
+metric = "count"
 # Maximum number of years to display, newest first. 0 means all years with posts.
 max_years = 0
 
@@ -2040,9 +2046,7 @@ single_link_color_dark = ""
 single_link_hover_color = ""
 single_link_hover_color_dark = ""
 # Contribution Heatmap #
-# Theme color of contribution heatmap cells. Defaults to `single_link_color`.
 contribution_color = ""
-# Theme color of contribution heatmap cells in dark mode. Defaults to `single_link_color_dark`.
 contribution_color_dark = ""
 # Table #
 table_background_color = ""
