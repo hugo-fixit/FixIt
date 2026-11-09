@@ -39,10 +39,6 @@
     background-color: light-dark(rgba(245, 245, 245, 0.88), rgba(61, 62, 65, 0.88));
   }
 
-  &text {
-    overflow: hidden;
-  }
-
   &title {
     display: -webkit-box;
     -webkit-line-clamp: 2;

@@ -28,7 +28,7 @@
 {{- if gt $maxYears 0 -}}{{- $yearGroups = first $maxYears $yearGroups -}}{{- end -}}
 {{- if not $yearGroups -}}{{- return -}}{{- end -}}
 
-<div class="contribution-graph" data-first-day="{{ $firstDay }}">
+<div class="contribution-graph my-4 text-start" data-first-day="{{ $firstDay }}">
   <div class="contribution-years">
     <div class="contribution-year-picker">
       <button type="button" class="contribution-year-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="{{ $uid }}-year-menu">

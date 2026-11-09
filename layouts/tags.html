@@ -1,7 +1,7 @@
 {{- /* Tags Page */ -}}
 {{- $tagCloud := .Site.Params.tag_cloud -}}
 
-<div class="tags{{ with $tagCloud.enable }} tag-cloud-tags{{ end }}">
+<div class="tags{{ with $tagCloud.enable }} tag-cloud-tags text-center{{ end }}">
   {{- /* Tags Cloud */ -}}
   {{- if $tagCloud.enable -}}
     {{- $tags := cond (eq $tagCloud.orderby "name") $.Site.Taxonomies.tags.Alphabetical $.Site.Taxonomies.tags.ByCount -}}

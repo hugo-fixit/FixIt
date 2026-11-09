@@ -360,10 +360,6 @@ dialog.search-dialog {
       border: none;
       @include border-radius(0);
     }
-
-    .search-shortcuts {
-      display: none;
-    }
   }
 
   @include media('sm', 'up') {
