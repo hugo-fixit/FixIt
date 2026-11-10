@@ -11,9 +11,9 @@
   <div class="details collection-details{{ if $open }} open{{ end }}">
     <div class="details-summary collection-summary">
       {{ dict "Class" "fa-solid fa-layer-group" | partial "plugin/icon.html" }}
-      <span class="collection-name" title="{{ T "collections" }}">{{ .LinkTitle }}</span>
-      <span class="collection-count">{{ $pages.Len }}</span>
-      <button type="button" class="collection-sort-toggle" title="{{ T "assets.toggleSortOrder" }}" aria-label="{{ T "assets.toggleSortOrder" }}">
+      <span class="collection-name" title="{{ T `collections` }}">{{ .LinkTitle }}</span>
+      <sup class="collection-count">{{ $pages.Len }}</sup>
+      <button type="button" class="collection-sort-toggle" title="{{ T `assets.toggleSortOrder` }}" aria-label="{{ T `assets.toggleSortOrder` }}">
         {{- dict "Class" "fa-solid fa-arrow-up-short-wide" | partial "plugin/icon.html" -}}
       </button>
       {{- dict "Class" "details-icon fa-solid fa-angle-right" | partial "plugin/icon.html" -}}

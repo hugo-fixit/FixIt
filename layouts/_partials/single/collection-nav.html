@@ -16,7 +16,8 @@
   {{- end -}}
   <div class="collection-card">
     <div class="collection-title text-secondary">
-      {{- dict "Collections" $termLink | T "single.includedIn.collections" | strings.FirstUpper | safeHTML }} {{ .Pages.Len -}}
+      {{- dict "Collections" $termLink | T "single.includedIn.collections" | strings.FirstUpper | safeHTML -}}
+      <sup class="ms-1">{{ .Pages.Len }}</sup>
     </div>
     <div class="collection-nav">
       {{- $pages := .Pages.ByDate -}}
