@@ -188,15 +188,18 @@ header {
   rotate: 90deg;
 }
 
+// Coarse pointers (touch) get 44x44 CSS px targets: WCAG 2.5.5 Target Size (Enhanced), Level AAA.
+// Fine pointers keep the compact 28px rows, still above the WCAG 2.2 SC 2.5.8 Level AA minimum (24px).
+// Larger text and row states keep the 44px rows from reading as empty space.
 @media (any-pointer: coarse) {
   .submenu-toggle {
     inline-size: 2.75rem;
     block-size: 2.75rem;
-    margin-inline-start: 0.25rem;
   }
 
   #header-desktop {
     @include set-fi-var(submenu-height, 2.75rem);
+    @include set-fi-var(menu-font-size, 1rem);
   }
 
   #header-desktop .language-switch > [data-submenu-toggle]::before {
@@ -205,8 +208,14 @@ header {
     inset: -0.625rem;
   }
 
-  #header-mobile .menu .sub-menu .menu-item {
-    line-height: 2.75rem;
+  #header-desktop .header-wrapper .menu .sub-menu .menu-item {
+    padding-inline: 1rem;
+
+    &:hover,
+    &:focus-within,
+    &:active {
+      background-color: light-dark(#e7e7ea, #464c54);
+    }
   }
 }
 
