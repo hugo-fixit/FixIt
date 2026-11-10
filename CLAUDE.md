@@ -183,6 +183,11 @@ Generation and constraints:
 - Check `hugo.IsProduction` before adding analytics or minification
 - Minimize `id` attribute usage — prefer class selectors for styling and JS queries. Reserve `id` for: `<label for>`, `aria-controls`/`aria-labelledby`, fragment anchors, or third-party library requirements
 
+### Accessibility
+
+- Target WCAG AAA for pointer and touch targets (SC 2.5.5, 44x44 CSS px) only when visual density remains acceptable; otherwise WCAG AA (SC 2.5.8, 24x24 CSS px) is the minimum
+- When a rule exists specifically to satisfy an accessibility standard, name that standard in a comment
+
 ## Commit Convention
 
 Follows [Conventional Commits](https://www.conventionalcommits.org/):
