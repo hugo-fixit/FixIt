@@ -198,10 +198,14 @@
       align-items: center;
       margin-block: 0.4rem 0;
       font-size: 0.875rem;
+      gap: 0.5rem;
       @include link(false, false);
 
       .post-tags {
         padding: 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
         @include link(true, true);
 
         .post-tag:not(:last-child)::after {

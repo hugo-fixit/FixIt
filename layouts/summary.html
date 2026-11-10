@@ -78,7 +78,7 @@
 
   {{- /* Footer */ -}}
   <div class="post-footer">
-    <a href="{{ .RelPermalink }}">{{ T "single.readMore" }}</a>
+    <a href="{{ .RelPermalink }}" class="read-more flex-shrink-0">{{ T "single.readMore" }}</a>
     {{- $tagTerms := .GetTerms "tags" -}}
     {{- if $tagTerms -}}
       <div class="post-tags">

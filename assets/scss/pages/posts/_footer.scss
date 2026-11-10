@@ -85,25 +85,34 @@
   .post-info-more {
     padding: 0.3rem 0;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.25rem 1rem;
     font-size: 0.9rem;
-
-    section:last-child {
-      @include media('print') {
-        display: none !important;
-      }
-    }
 
     .post-actions {
       display: flex;
+      flex-shrink: 0;
       align-items: center;
       gap: 0.5rem;
+      margin-inline-start: auto;
     }
   }
 
   .post-tags {
-    max-width: 65%;
+    display: flex;
+    flex: 1 1 18rem;
+    flex-wrap: wrap;
+    align-items: baseline;
+    min-inline-size: 0;
+    max-inline-size: 100%;
+
     @include link(true, true);
+
+    .post-tag {
+      white-space: nowrap;
+    }
 
     .post-tag:not(:last-child)::after {
       content: ',';
