@@ -1,4 +1,10 @@
+@use "core/mixins" as *;
+
 .single .expiration-reminder {
   font-size: 0.8em;
   line-height: 1.5;
+
+  @include media('print') {
+    display: none !important;
+  }
 }
