@@ -24,6 +24,6 @@
   {{- end -}}
   {{- with $updateTime | dateFormat (.Site.Params.date_format | default "2006-01-02") -}}
     {{- $message := dict "Date" . | T "single.expirationReminder" -}}
-    {{- dict "Type" $type "Title" "~" "Foldable" false "Class" "expiration-reminder" "Text" $message | partial "plugin/admonition.html" -}}
+    {{- dict "Type" $type "Title" "~" "Foldable" false "Class" "expiration-reminder text-[0.8em] leading-[1.5] print:hidden" "Text" $message | partial "plugin/admonition.html" -}}
   {{- end -}}
 {{- end -}}

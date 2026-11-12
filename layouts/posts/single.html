@@ -167,7 +167,8 @@
 
     {{- /* Encryption Dev Warning */ -}}
     {{- if (.Params.password | or (.Store.Get "hasEncryptor")) | and (not hugo.IsProduction) -}}
-      {{- dict "Type" "danger" "Title" (printf "%s<br>%s" (T "single.encryptionWarning") (T "single.encryptionCommand") | $.RenderString) "Foldable" false | partial "plugin/admonition.html" -}}
+      {{- $message := printf "%s<br>%s" (T "single.encryptionWarning") (T "single.encryptionCommand") | $.RenderString -}}
+      {{- dict "Type" "danger" "Title" "~" "Foldable" false "Class" "text-[0.8em] leading-[1.5] print:hidden" "Text" $message | partial "plugin/admonition.html" -}}
     {{- end -}}
 
     {{- /* Expiration Reminder */ -}}
