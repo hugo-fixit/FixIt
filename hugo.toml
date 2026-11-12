@@ -811,7 +811,7 @@ enable = false
 # Disclaimer type.
 # Available values: ["ai", "repost", "original", "custom"]
 type = "ai"
-# Custom disclaimer content (optional, uses I18n default if empty).
+# Custom disclaimer content in Markdown format (optional, uses I18n default if empty).
 content = ""
 
 # Display a message at the beginning of an article to warn the reader that its content might be expired.

@@ -4,6 +4,7 @@
   Displays a lightweight disclaimer notice at the beginning of an article.
   Supports multiple types: ai, ai-assisted, ai-translated, repost, original, custom.
   The "custom" type requires content to be specified, otherwise it will not be displayed.
+  The disclaimer content is rendered as Markdown.
 */ -}}
 
 {{- $disclaimer := dict "Page" . "Key" "disclaimer" | partial "function/param.html" | default dict -}}
@@ -32,11 +33,17 @@
   {{- $iconSrc = printf "images/icons/disclaimer/%v.svg" $type -}}
 {{- end -}}
 
-<div class="post-disclaimer" data-type="{{ $type }}">
-  {{- if $iconSrc -}}
-    {{- dict "Src" $iconSrc | partial "plugin/icon.html" -}}
-  {{- else -}}
-    {{- dict "Class" "icon fa-solid fa-bullhorn" | partial "plugin/icon.html" -}}
-  {{- end -}}
-  <span class="post-disclaimer__content">{{ T "single.disclaimer" }}{{ $content | safeHTML }}</span>
-</div>
+{{- $iconOptions := dict "Class" "icon fa-solid fa-bullhorn" -}}
+{{- if $iconSrc -}}
+  {{- $iconOptions = dict "Src" $iconSrc -}}
+{{- end -}}
+{{- $icon := partial "plugin/icon.html" $iconOptions -}}
+{{- $text := printf `%s<span class="post-disclaimer__content"><span class="post-disclaimer__label">%s</span>%s</span>` $icon (T "single.disclaimer") ($content | .RenderString) -}}
+{{- $admonition := dict
+  "Type" "quote"
+  "Title" "~"
+  "Foldable" false
+  "Class" (printf "post-disclaimer post-disclaimer__%s" $type)
+  "Text" $text
+-}}
+{{- partial "plugin/admonition.html" $admonition -}}
