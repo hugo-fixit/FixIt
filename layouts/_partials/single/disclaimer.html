@@ -4,6 +4,7 @@
   Displays a lightweight disclaimer notice at the beginning of an article.
   Supports multiple types: ai, ai-assisted, ai-translated, repost, original, custom.
   The "custom" type requires content to be specified, otherwise it will not be displayed.
+  The disclaimer content is rendered as Markdown.
 */ -}}
 
 {{- $disclaimer := dict "Page" . "Key" "disclaimer" | partial "function/param.html" | default dict -}}
@@ -38,5 +39,5 @@
   {{- else -}}
     {{- dict "Class" "icon fa-solid fa-bullhorn" | partial "plugin/icon.html" -}}
   {{- end -}}
-  <span class="post-disclaimer__content">{{ T "single.disclaimer" }}{{ $content | safeHTML }}</span>
+  <span class="post-disclaimer__content"><span class="post-disclaimer__label">{{ T "single.disclaimer" }}</span>{{ $content | .RenderString }}</span>
 </div>
