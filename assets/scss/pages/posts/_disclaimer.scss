@@ -1,7 +1,5 @@
-@use "sass:color";
 @use "core/functions" as *;
 @use "core/mixins" as *;
-@use "variables" as *;
 
 @keyframes post-disclaimer-sheen {
   0% {
@@ -16,20 +14,11 @@
 
 .post-disclaimer {
   position: relative;
-  margin-block: 1rem;
-  padding: 0.5rem 0.75rem;
+  overflow: hidden;
   font-size: 0.8em;
   line-height: 1.5;
   color: fi-var(global-font-secondary-color);
-  background-color: light-dark(
-    color.adjust($global-background-color, $lightness: -3%),
-    color.adjust($global-background-color-dark, $lightness: 3%)
-  );
-  border: 1px solid fi-var(global-border-color-light);
-  overflow: hidden;
   text-wrap: pretty;
-
-  @include border-radius(0.5rem);
 
   &::after {
     content: '';
