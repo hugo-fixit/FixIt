@@ -7,6 +7,7 @@
   @param {String} [.Title] - The title of the admonition box
   @param {Boolean} [.Open] - Whether the admonition box is open, default is true
   @param {Boolean} [.Foldable] - Whether the admonition box is foldable, default is true
+  @param {String} [.Class] - Additional CSS classes for the admonition box
   For custom admonitions, see https://fixit.lruihao.cn/docs/content-management/shortcodes/extended/admonition/#customize-admonitions
 */ -}}
 
@@ -50,7 +51,7 @@
 {{- $titleless := eq .Title "~" -}}
 {{- $foldable := ne .Foldable false -}}
 
-<div class="details admonition {{ $type }}{{ if .Open | ne false }} open{{ end }}{{ if not $foldable }} disabled{{ end }}">
+<div class="details admonition {{ $type }}{{ if .Open | ne false }} open{{ end }}{{ if not $foldable }} disabled{{ end }}{{ with .Class }} {{ . }}{{ end }}">
   {{- if not $titleless }}
     <div class="details-summary admonition-title">
       {{- dict "Class" (add "icon " $icon) | partial "plugin/icon.html" -}}
