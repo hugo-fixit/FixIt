@@ -28,6 +28,9 @@
         transition: all 0.4s ease;
         box-shadow: 0 0 0 0.3618em light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.05));
         @include border-radius(full);
+        @include media('xs') {
+          width: 6rem;
+        }
 
         &:hover {
           position: relative;
@@ -130,7 +133,8 @@
     }
   }
 
-  .home-avatar img {
+  // Compact (non-fullscreen) profile keeps the smaller avatar.
+  .home-profile:not([data-fullscreen]) .home-avatar img {
     width: 6rem;
   }
 

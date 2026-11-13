@@ -61,7 +61,6 @@ collection_navigation = true
 [params.home.profile]
 enable = true
 avatar_url = "/images/fixit-test.png"
-fullscreen = true
 
 [params.social]
 
