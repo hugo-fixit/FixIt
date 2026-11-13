@@ -3,7 +3,9 @@
   See https://fixit.lruihao.cn/docs/content-management/shortcodes/extended/file-tree/
 
   @param {String} [path="/"] - The path to scan in filesystem (relative to project root or contentDir)
-  @param {Int} [level=1] - The expand level of the tree (expand all: -1, collapse all: 0)
+  @param {Int} [expand_level=1] - The expand level of the tree (expand all: -1, collapse all: 0)
+  @param {Int} [max_depth=10] - Maximum filesystem scan depth (root = 0; only used in filesystem mode)
+  @param {Int} [level] - Deprecated alias of `expand_level`
   @param {Boolean} [folder_slash=false] - Whether to append a trailing "/" to folder names.
   @param {String} [file] - The path of a data file in page resources or assets. (JSON/YAML/TOML)
   @param {String} [data] - The name of the data file in data/filetree/ directory. (JSON/YAML/TOML)
@@ -22,7 +24,7 @@
 
   @example
   {{< file-tree "content" 2 />}}
-  {{< file-tree path="content" level=2 folder_slash=true />}}
+  {{< file-tree path="content" expand_level=2 max_depth=5 folder_slash=true />}}
   {{< file-tree file="data/example.yml" />}}
   {{< file-tree data="example" />}}
   {{< file-tree >}}
@@ -54,9 +56,76 @@
 
 {{- $config := dict "Page" .Page "Key" "filetree" | partial "function/param.html" -}}
 {{- $root := cond .IsNamedParams (.Get "path") (.Get 0) | default "/" -}}
-{{- $level := cond .IsNamedParams (.Get "level") (.Get 1) -}}
-{{- $config = cond ((eq $level 0) | or $level) (dict "level" $level | merge $config) $config -}}
-{{- $level = cond (isset $config "level") ($config.level | int) 1 -}}
+
+{{- /*
+  Resolve expand level and scan depth with source-aware precedence:
+  shortcode parameter > page config > site config. `level` is a deprecated
+  alias of `expand_level`.
+*/ -}}
+{{- $pageConfig := dict -}}
+{{- with .Page.Params.filetree -}}
+  {{- if reflect.IsMap . -}}{{- $pageConfig = . -}}{{- end -}}
+{{- end -}}
+{{- $siteConfig := dict -}}
+{{- with site.Params.filetree -}}
+  {{- if reflect.IsMap . -}}{{- $siteConfig = . -}}{{- end -}}
+{{- end -}}
+
+{{- $expandLevel := 1 -}}
+{{- $expandLevelSet := false -}}
+{{- if .IsNamedParams -}}
+  {{- if isset .Params "expand_level" -}}
+    {{- $expandLevel = .Get "expand_level" -}}
+    {{- $expandLevelSet = true -}}
+  {{- else if isset .Params "level" -}}
+    {{- warnidf "v1-deprecated-file-tree-level-param" "[%s]: The parameter `level` is deprecated since v1.0.0, use `expand_level` instead. See %s" .Name .Position -}}
+    {{- $expandLevel = .Get "level" -}}
+    {{- $expandLevelSet = true -}}
+  {{- end -}}
+{{- else if ne (.Get 1) nil -}}
+  {{- $expandLevel = .Get 1 -}}
+  {{- $expandLevelSet = true -}}
+{{- end -}}
+{{- if not $expandLevelSet -}}
+  {{- if isset $pageConfig "expand_level" -}}
+    {{- $expandLevel = index $pageConfig "expand_level" -}}
+  {{- else if isset $pageConfig "level" -}}
+    {{- warnidf "v1-deprecated-file-tree-level-config" "[%s]: `params.filetree.level` is deprecated since v1.0.0, use `params.filetree.expand_level` instead. See %s" .Name .Position -}}
+    {{- $expandLevel = index $pageConfig "level" -}}
+  {{- else if isset $siteConfig "level" -}}
+    {{- /*
+      The theme default always provides `expand_level`, so a site-level
+      `level` can only come from legacy user configuration.
+    */ -}}
+    {{- warnidf "v1-deprecated-file-tree-level-config" "[%s]: `params.filetree.level` is deprecated since v1.0.0, use `params.filetree.expand_level` instead. See %s" .Name .Position -}}
+    {{- $expandLevel = index $siteConfig "level" -}}
+  {{- else if isset $siteConfig "expand_level" -}}
+    {{- $expandLevel = index $siteConfig "expand_level" -}}
+  {{- end -}}
+{{- end -}}
+{{- $expandLevel = int $expandLevel -}}
+
+{{- $maxDepth := 10 -}}
+{{- $maxDepthSet := false -}}
+{{- if .IsNamedParams -}}
+  {{- if isset .Params "max_depth" -}}
+    {{- $maxDepth = .Get "max_depth" -}}
+    {{- $maxDepthSet = true -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $maxDepthSet -}}
+  {{- if isset $pageConfig "max_depth" -}}
+    {{- $maxDepth = index $pageConfig "max_depth" -}}
+  {{- else if isset $siteConfig "max_depth" -}}
+    {{- $maxDepth = index $siteConfig "max_depth" -}}
+  {{- end -}}
+{{- end -}}
+{{- $maxDepth = int $maxDepth -}}
+{{- if lt $maxDepth 0 -}}
+  {{- warnidf "warning-file-tree-max-depth" "[%s]: `max_depth` must be >= 0, got %v; using 10. See %s" .Name $maxDepth .Position -}}
+  {{- $maxDepth = 10 -}}
+{{- end -}}
+
 {{- $folderSlash := cond .IsNamedParams (.Get "folder_slash" | default (.Get "folderSlash")) (.Get 2) | default $config.folder_slash | default false -}}
 {{- if .IsNamedParams | and (.Get "folderSlash") -}}
   {{- warnidf "v1-deprecated-file-tree-param" "[%s]: The parameter `folderSlash` is deprecated since v1.0.0, use `folder_slash` instead. See %s" .Name .Position -}}
@@ -110,7 +179,7 @@
 
 {{- /* Filesystem mode: build structured tree data from filesystem */ -}}
 {{- if not $treeData -}}
-  {{- $buildOptions := dict "root" $root "ignore_list" $ignoreList "name" (.Get "name") "lang" .Page.Language -}}
+  {{- $buildOptions := dict "root" $root "max_depth" $maxDepth "ignore_list" $ignoreList "name" (.Get "name") "lang" .Page.Language -}}
   {{- with partial "function/get-file-tree.html" $buildOptions -}}
     {{- $treeData = . -}}
   {{- else -}}
@@ -121,7 +190,7 @@
 {{- /* Render the file tree */ -}}
 {{- $options := dict
   "items" $treeData
-  "level" $level
+  "expand_level" $expandLevel
   "folder_slash" $folderSlash
   "ignore_list" $ignoreList
   "highlight_list" $highlightList

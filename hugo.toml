@@ -744,7 +744,10 @@ boxed = true
 # See: [File Tree](https://fixit.lruihao.cn/docs/content-management/shortcodes/extended/file-tree/)
 [params.filetree]
 # The expand level of the tree (expand all: -1, collapse all: 0).
-level = 1
+# `level` is a deprecated alias of `expand_level`.
+expand_level = 1
+# The maximum filesystem scan depth for the file-tree shortcode (root = 0).
+max_depth = 10
 # Whether to append a trailing `/` to folder names.
 folder_slash = false
 # List of file or folder names to ignore.
