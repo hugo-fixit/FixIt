@@ -37,7 +37,7 @@
   Thanks @HEIGE-PCloud for the original code in the DoIt theme.
 */ -}}
 
-{{- $config := partial "function/camel-case-keys.html" site.Params.image -}}
+{{- $config := partialCached "function/camel-case-keys.html" site.Params.image "image" -}}
 {{- with .Page -}}
   {{- $config = dict "Page" . "Key" "image" "ToCamel" true | partial "function/param.html" -}}
 {{- end -}}

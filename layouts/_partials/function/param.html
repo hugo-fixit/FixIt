@@ -17,12 +17,42 @@
   {{- $toc := dict "Page" . "Key" "toc" | partial "function/param.html" -}}
   {{- $config := dict "Page" . "Key" "math" "ToCamel" true | partial "function/param.html" -}}
 */ -}}
-{{- $value := .Page.Param .Key -}}
-{{- if not (reflect.IsMap $value) -}}
-  {{- $value = dict "enable" $value -}}
+{{- /*
+  The same page+key+format always yields the same map; cache per page to
+  avoid re-merging and re-casing site config for every heading/link/image.
+*/ -}}
+{{- $cacheKey := printf "fixit:param:%v:%v" (.Key | default "") (cond .ToCamel "camel" "raw") -}}
+{{- $cached := .Page.Store.Get $cacheKey -}}
+{{- if $cached -}}
+  {{- return $cached -}}
 {{- end -}}
-{{- $value = $value | merge (index site.Params .Key) -}}
+
+{{- $key := .Key -}}
+{{- /*
+  .Page.Param is page params (including cascade) with a site fallback;
+  .Page.Params exposes exactly the page/cascade overlay. Only the overlay
+  needs re-casing per page — the site-level map is cached across pages.
+*/ -}}
+{{- $hasOverlay := isset .Page.Params $key -}}
+{{- $siteValue := index site.Params $key -}}
+{{- if not (reflect.IsMap $siteValue) -}}
+  {{- $siteValue = dict "enable" $siteValue -}}
+{{- end -}}
+{{- $overlay := index .Page.Params $key -}}
+{{- if $hasOverlay | and (not (reflect.IsMap $overlay)) -}}
+  {{- $overlay = dict "enable" $overlay -}}
+{{- end -}}
+
+{{- $value := $siteValue -}}
 {{- if .ToCamel -}}
-  {{- $value = partial "function/camel-case-keys.html" $value -}}
+  {{- $value = partialCached "function/camel-case-keys.html" $siteValue (printf "param-camel:%v" $key) -}}
+  {{- if $hasOverlay -}}
+    {{- $value = merge $value (partial "function/camel-case-keys.html" $overlay) -}}
+  {{- end -}}
+{{- else -}}
+  {{- if $hasOverlay -}}
+    {{- $value = merge $siteValue $overlay -}}
+  {{- end -}}
 {{- end -}}
+{{- .Page.Store.Set $cacheKey $value -}}
 {{- return $value -}}

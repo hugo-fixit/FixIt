@@ -1,0 +1,32 @@
+{{- /*
+  Site-level environment data (CDN map, fingerprint, analytics, dev options).
+
+  Cached per language via partialCached so concurrent page renders do not
+  re-parse the CDN YAML. Callers copy the values into `.Site.Store`.
+
+  @return {Map} cdn, fingerprint, analytics, devOpts
+*/ -}}
+
+{{- $cdn := .Site.Params.cdn -}}
+{{- if hugo.IsProduction -}}
+  {{- with $cdn.data -}}
+    {{- $cdnData := printf "data/cdn/%v" . | resources.Get | transform.Unmarshal -}}
+    {{- $cdn = dict "simpleIconsPrefix" $cdnData.prefix.simpleIcons -}}
+    {{- $prefix := $cdnData.prefix.libFiles | default "" -}}
+    {{- range $key, $value := $cdnData.libFiles -}}
+      {{- $cdn = printf "%v%v" $prefix $value | dict $key | merge $cdn -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $devOpts := .Site.Params.dev -}}
+{{- if ne $devOpts.enable true -}}
+  {{- $devOpts = dict -}}
+{{- end -}}
+
+{{- return (dict
+  "cdn" $cdn
+  "fingerprint" .Site.Params.fingerprint
+  "analytics" .Site.Params.analytics
+  "devOpts" $devOpts
+) -}}

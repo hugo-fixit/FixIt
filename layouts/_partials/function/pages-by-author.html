@@ -17,6 +17,22 @@
 {{- $termSlug := $term | urlize -}}
 {{- $all := .Pages | default (site.Store.Get "mainSectionPages" | default site.RegularPages) -}}
 {{- $author := partial "function/get-author.html" (dict "Key" $term "Size" (.Size | default "96")) -}}
+{{- $index := site.Store.Get "authorPageIndex" -}}
+{{- if and $index (not .Pages) -}}
+  {{- $entry := index $index $term | default (index $index $termSlug) | default dict -}}
+  {{- $paths := index $entry "Paths" | default slice -}}
+  {{- range index $entry "Records" | default slice -}}
+    {{- $record := . -}}
+    {{- range $field := (slice "link" "email" "avatar") -}}
+      {{- if not (index $author $field) -}}
+        {{- with index $record $field -}}
+          {{- $author = dict $field . | merge $author -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- return (dict "Author" $author "Pages" (where $all "Path" "in" $paths)) -}}
+{{- end -}}
 {{- $paths := slice -}}
 {{- range $page := $all -}}
   {{- $matched := false -}}

@@ -1,24 +1,18 @@
 {{- /* FixIt theme environment detection */ -}}
+{{- /*
+  The expensive CDN parsing is cached per language; the store writes below
+  are cheap and run for every page so no page can observe missing values.
+*/ -}}
+{{- $env := partialCached "init/site-env.html" . .Site.Language.Lang -}}
 
 {{- if hugo.IsProduction -}}
-  {{- $cdn := .Site.Params.cdn -}}
-  {{- with $cdn.data -}}
-    {{- $cdnData := printf "data/cdn/%v" . | resources.Get | transform.Unmarshal -}}
-    {{- $cdn = dict "simpleIconsPrefix" $cdnData.prefix.simpleIcons -}}
-    {{- $prefix := $cdnData.prefix.libFiles | default "" -}}
-    {{- range $key, $value := $cdnData.libFiles -}}
-      {{- $cdn = printf "%v%v" $prefix $value | dict $key | merge $cdn -}}
-    {{- end -}}
-  {{- end -}}
-  {{- .Site.Store.Set "cdn" $cdn -}}
-  {{- .Site.Store.Set "fingerprint" .Site.Params.fingerprint -}}
-  {{- .Site.Store.Set "analytics" .Site.Params.analytics -}}
+  {{- .Site.Store.Set "cdn" $env.cdn -}}
+  {{- .Site.Store.Set "fingerprint" $env.fingerprint -}}
+  {{- .Site.Store.Set "analytics" $env.analytics -}}
+  {{- /* Page-level comment config is merged per page. */ -}}
   {{- .Store.Set "comment" (dict "Page" . "Key" "comment" "ToCamel" true | partial "function/param.html") -}}
 {{- else -}}
-  {{- .Site.Store.Set "devOpts" .Site.Params.dev -}}
-  {{- if ne .Site.Params.dev.enable true -}}
-    {{- .Site.Store.Set "devOpts" dict -}}
-  {{- end -}}
+  {{- .Site.Store.Set "devOpts" $env.devOpts -}}
   {{- if .Site.Language.IsDefault -}}
     {{- warnidf "warning-dev-env" "FixIt %v\n%v" (hugo.Store.Get "version") (T "init.devEnvWarn") -}}
   {{- end -}}

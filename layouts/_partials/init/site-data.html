@@ -1,0 +1,68 @@
+{{- /*
+  Site-level page collections and author indexes.
+
+  Cached per language via partialCached: every page copies the results into
+  `.Site.Store`, but the O(N) collection and index building runs once.
+
+  @return {Map} mainSectionPages, authorPageIndex, authorTermsIndex, githubTokenHeader
+*/ -}}
+
+{{- $pages := .Site.RegularPages -}}
+
+{{- /* Merge missing translations from other languages */ -}}
+{{- if .Site.Params.enable_translation_merge -}}
+  {{- range .Site.Home.Translations -}}
+    {{- $pages = $pages | lang.Merge .Site.RegularPages -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Set pages of main sections */ -}}
+{{- $pages = where $pages "Section" "in" .Site.MainSections -}}
+{{- $pages = $pages | union (where .Site.RegularPages "Type" "in" .Site.MainSections) -}}
+
+{{- /* Select the scope named `public_repo` to generate personal access token */ -}}
+{{- $header := dict "Authorization" "" -}}
+{{- with (getenv "HUGO_PARAMS_GHTOKEN") -}}
+  {{- $header = dict "Authorization" (printf "token %v" .) -}}
+{{- end -}}
+
+{{- /* Author index: built once so author term pages do not rescan every page. */ -}}
+{{- $authorIndex := dict -}}
+{{- $authorTerms := dict -}}
+{{- range $page := $pages -}}
+  {{- range (partial "function/get-authors.html" $page) -}}
+    {{- $author := . -}}
+    {{- $term := $author.key | default $author.name -}}
+    {{- if not $term -}}{{- continue -}}{{- end -}}
+    {{- $name := $author.name | default $term -}}
+    {{- $record := dict "key" $term "name" $name "link" ($author.link | default "") "email" ($author.email | default "") "avatar" ($author.avatar | default "") -}}
+    {{- $aliases := slice $term $name | uniq -}}
+    {{- with urlize $term -}}
+      {{- $aliases = $aliases | append . | uniq -}}
+    {{- end -}}
+    {{- with urlize $name -}}
+      {{- $aliases = $aliases | append . | uniq -}}
+    {{- end -}}
+    {{- range $alias := $aliases -}}
+      {{- $entry := index $authorIndex $alias | default dict -}}
+      {{- $entryPaths := index $entry "Paths" | default slice -}}
+      {{- if not (in $entryPaths $page.Path) -}}
+        {{- $entryPaths = $entryPaths | append $page.Path -}}
+      {{- end -}}
+      {{- $entryRecords := index $entry "Records" | default slice -}}
+      {{- $entryRecords = $entryRecords | append $record -}}
+      {{- $authorIndex = merge $authorIndex (dict $alias (dict "Paths" $entryPaths "Records" $entryRecords)) -}}
+    {{- end -}}
+    {{- $termPaths := index $authorTerms $term | default slice -}}
+    {{- if not (in $termPaths $page.Path) -}}
+      {{- $authorTerms = merge $authorTerms (dict $term ($termPaths | append $page.Path)) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return (dict
+  "mainSectionPages" $pages
+  "authorPageIndex" $authorIndex
+  "authorTermsIndex" $authorTerms
+  "githubTokenHeader" $header
+) -}}

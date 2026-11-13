@@ -31,6 +31,12 @@
 {{- $preview := .Preview | default false -}}
 {{- $build := .Build | default false -}}
 
+{{- $cacheKey := printf "fixit:cover:%v:%v" (cond $preview "preview" "plain") (cond $build "build" "check") -}}
+{{- $cached := $page.Store.Get $cacheKey -}}
+{{- if $cached -}}
+  {{- return $cached -}}
+{{- end -}}
+
 {{- /* Resolve front matter value */ -}}
 {{- $image := "" -}}
 {{- if $preview -}}
@@ -72,4 +78,6 @@
   {{- end -}}
 {{- end -}}
 
-{{- return (dict "Source" $image "Matches" $matches "Resource" $resource "URL" $url) -}}
+{{- $result := dict "Source" $image "Matches" $matches "Resource" $resource "URL" $url -}}
+{{- $page.Store.Set $cacheKey $result -}}
+{{- return $result -}}

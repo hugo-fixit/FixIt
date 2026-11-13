@@ -103,7 +103,7 @@
 {{- end -}}
 
 {{- $blockSchemes := slice "javascript" "mailto" "tel" "file" "data" "vscode" "trae" -}}
-{{- $config := partial "function/camel-case-keys.html" site.Params.link -}}
+{{- $config := partialCached "function/camel-case-keys.html" site.Params.link "link" -}}
 {{- with .Page -}}
   {{- $config = dict "Page" . "Key" "link" "ToCamel" true | partial "function/param.html" -}}
 {{- end -}}
