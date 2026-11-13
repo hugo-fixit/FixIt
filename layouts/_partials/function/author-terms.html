@@ -8,8 +8,18 @@
   @returns {Slice} Sorted list of maps: Term, Pages, Count
   @example {{- $terms := partial "function/author-terms.html" . -}}
 */ -}}
+{{- $all := site.Store.Get "mainSectionPages" | default site.RegularPages -}}
+{{- $index := site.Store.Get "authorTermsIndex" -}}
+{{- if $index -}}
+  {{- $cards := slice -}}
+  {{- range $term, $paths := $index -}}
+    {{- $cards = $cards | append (dict "Term" $term "Pages" (where $all "Path" "in" $paths) "Count" (len $paths)) -}}
+  {{- end -}}
+  {{- return (sort $cards "Count" "desc") -}}
+{{- end -}}
+
 {{- $byTerm := dict -}}
-{{- range $p := (site.Store.Get "mainSectionPages" | default site.RegularPages) -}}
+{{- range $p := $all -}}
   {{- range (partial "function/get-authors.html" $p) -}}
     {{- $term := .key | default .name -}}
     {{- $pages := index $byTerm $term | default slice -}}

@@ -32,7 +32,17 @@
 {{- if reflect.IsMap $input -}}
   {{- /* Process map: iterate through all key-value pairs */ -}}
   {{- range $key, $value := $input -}}
-    {{- $newKey := partial "function/camel-case.html" $key -}}
+    {{- /*
+      Inline camel-case.html: a partial call per key dominates build time on
+      large configs (e.g. comment settings converted once per page).
+    */ -}}
+    {{- $keyParts := split $key "_" -}}
+    {{- $newKey := index $keyParts 0 -}}
+    {{- range $i, $part := $keyParts -}}
+      {{- if gt $i 0 -}}
+        {{- $newKey = printf "%s%s%s" $newKey (upper (substr $part 0 1)) (substr $part 1) -}}
+      {{- end -}}
+    {{- end -}}
     {{- /*
       Recursively process value based on its type
       - For nested maps: recursively convert all nested keys

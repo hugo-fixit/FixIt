@@ -1,28 +1,12 @@
 {{- /*
   Global initialization partial.
 
-  Merges translations, resolves main section pages, stores them for cross-partial
-  access, and sets up the GitHub API token header from the HUGO_PARAMS_GHTOKEN
-  environment variable.
+  Copies site-level page collections and author indexes into `.Site.Store`.
+  The data itself is computed once per language by `init/site-data.html`.
 */ -}}
 
-{{- $pages := .Site.RegularPages }}
-
-{{- /* Merge missing translations from other languages */ -}}
-{{- if .Site.Params.enable_translation_merge -}}
-  {{- range .Site.Home.Translations -}}
-    {{- $pages = $pages | lang.Merge .Site.RegularPages -}}
-  {{- end -}}
-{{- end -}}
-
-{{- /* Set pages of main sections */ -}}
-{{- $pages = where $pages "Section" "in" .Site.MainSections -}}
-{{- $pages = $pages | union (where .Site.RegularPages "Type" "in" .Site.MainSections) -}}
-{{- .Site.Store.Set "mainSectionPages" $pages -}}
-
-{{- /* Select the scope named `public_repo` to generate personal access token */ -}}
-{{- $header := dict "Authorization" "" -}}
-{{- with (getenv "HUGO_PARAMS_GHTOKEN") -}}
-  {{- $header = dict "Authorization" (printf "token %v" .)  -}}
-{{- end -}}
-{{- hugo.Store.Set "githubTokenHeader" $header -}}
+{{- $data := partialCached "init/site-data.html" . .Site.Language.Lang -}}
+{{- .Site.Store.Set "mainSectionPages" $data.mainSectionPages -}}
+{{- .Site.Store.Set "authorPageIndex" $data.authorPageIndex -}}
+{{- .Site.Store.Set "authorTermsIndex" $data.authorTermsIndex -}}
+{{- hugo.Store.Set "githubTokenHeader" $data.githubTokenHeader -}}
