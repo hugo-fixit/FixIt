@@ -1,5 +1,5 @@
 {{- /*
-  Author archive header: avatar, name, then link/email icons.
+  Author archive header: avatar, name, then link/email contact links.
 
   @param {Map} . - dict "Page", "Pages", "Author" (from function/get-author.html)
 */ -}}
@@ -28,10 +28,16 @@
   {{- if or $author.link $author.email -}}
     <p class="author-contacts">
       {{- with $author.link -}}
-        {{- dict "Class" "author-contact" "Destination" . "Title" . "Rel" "author" "Icon" (dict "Class" "fa-solid fa-link") "Content" "" "ExternalIcon" false | partial "plugin/link.html" -}}
+        {{- $label := . -}}
+        {{- with urls.Parse . -}}
+          {{- if .Host -}}
+            {{- $label = printf "%v%v" .Host .Path | strings.TrimSuffix "/" -}}
+          {{- end -}}
+        {{- end -}}
+        {{- dict "Class" "author-contact" "Destination" . "Title" . "Rel" "author" "Icon" (dict "Class" "fa-solid fa-link") "Content" (printf `<span class="author-contact-label">%v</span>` ($label | htmlEscape)) "ExternalIcon" false | partial "plugin/link.html" -}}
       {{- end -}}
       {{- with $author.email -}}
-        {{- dict "Class" "author-contact" "Destination" (printf "mailto:%v" .) "Title" . "Icon" (dict "Class" "fa-solid fa-envelope") "Content" "" "ExternalIcon" false | partial "plugin/link.html" -}}
+        {{- dict "Class" "author-contact" "Destination" (printf "mailto:%v" .) "Title" . "Icon" (dict "Class" "fa-solid fa-envelope") "Content" (printf `<span class="author-contact-label">%v</span>` (. | htmlEscape)) "ExternalIcon" false | partial "plugin/link.html" -}}
       {{- end -}}
     </p>
   {{- end -}}

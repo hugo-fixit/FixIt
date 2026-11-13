@@ -8,13 +8,20 @@
   Called from: layouts/baseof.html.
 */ -}}
 
-{{- hugo.Store.Set "version" "v1.0.0-rc.4-mwf70uxd" -}}
+{{- hugo.Store.Set "version" "v1.0.0-rc.4-mwf9hcsh" -}}
 {{- .Store.Set "this" dict -}}
 
+{{- /* Environment setup; per-page comment config lives here too. */ -}}
 {{- partial "init/detection-env.html" . -}}
-{{- partial "init/detection-version.html" . -}}
-{{- partial "init/detection-deprecated.html" . -}}
-{{- partial "init/detection-pagefind.html" . -}}
-{{- partial "init/detection-encryption.html" . -}}
+
+{{- /* Site collections and author indexes; cached per language. */ -}}
 {{- partial "init/global.html" . -}}
+
+{{- /* Site-level build checks; partialCached makes each run once per language. */ -}}
+{{- partialCached "init/detection-version.html" . .Site.Language.Lang -}}
+{{- partialCached "init/detection-pagefind.html" . .Site.Language.Lang -}}
+{{- partialCached "init/detection-encryption.html" . .Site.Language.Lang -}}
+
+{{- /* Deprecated parameter detection (site-level checks are cached internally). */ -}}
+{{- partial "init/detection-deprecated.html" . -}}
 {{- partial "init/compatibility.html" . -}}
