@@ -178,6 +178,13 @@ Generation and constraints:
 - Variable naming: camelCase (`$footerConfig`, `$fingerprint`)
 - Translation: use `T` function (`{{ T "header.switchTheme" }}`)
 - Whitespace: use `{{- -}}` trim markers
+- Multi-line comments: open with `{{- /*` and close with `*/ -}}`, with the closing marker at the start of its own line:
+
+```go
+{{- /*
+  Explanation...
+*/ -}}
+```
 - Use `partialCached` for expensive partials that don't change per page
 - Use `.Site.Store` for shared computed values (e.g. fingerprint)
 - Check `hugo.IsProduction` before adding analytics or minification
