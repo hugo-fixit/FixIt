@@ -3,7 +3,8 @@
   Alternative to file-tree shortcode's inner content rendering.
 
   Supported attributes:
-  - level: The expand level of the tree (expand all: -1, collapse all: 0, default: 1)
+  - expand_level: The expand level of the tree (expand all: -1, collapse all: 0, default: 1)
+  - level: Deprecated alias of `expand_level`
   - folder_slash: Whether to append a trailing "/" to folder names (default: false)
   - ignore_list: List of file or folder names to ignore, separated by commas
   - highlight_list: List of file or folder names to highlight, separated by commas
@@ -14,7 +15,7 @@
     children?: array - (Optional) Array of child items, only valid for directories
 
   Example usage:
-    ```file-tree {level=2 folder_slash=true}
+    ```file-tree {expand_level=2 folder_slash=true}
     - name: my-project
       type: dir
       children:
@@ -27,7 +28,47 @@
 
 {{- $pageConfig := dict "Page" .Page "Key" "filetree" | partial "function/param.html" -}}
 {{- $config := .Attributes | merge $pageConfig -}}
-{{- $level := cond (isset $config "level") ($config.level | int) 1 -}}
+
+{{- /*
+  Resolve the expand level: attribute > page config > site config.
+  `level` is a deprecated alias of `expand_level`.
+*/ -}}
+{{- $pageTreeConfig := dict -}}
+{{- with .Page.Params.filetree -}}
+  {{- if reflect.IsMap . -}}{{- $pageTreeConfig = . -}}{{- end -}}
+{{- end -}}
+{{- $siteTreeConfig := dict -}}
+{{- with site.Params.filetree -}}
+  {{- if reflect.IsMap . -}}{{- $siteTreeConfig = . -}}{{- end -}}
+{{- end -}}
+{{- $expandLevel := 1 -}}
+{{- $expandLevelSet := false -}}
+{{- if isset .Attributes "expand_level" -}}
+  {{- $expandLevel = .Attributes.expand_level -}}
+  {{- $expandLevelSet = true -}}
+{{- else if isset .Attributes "level" -}}
+  {{- warnidf "v1-deprecated-file-tree-level-attr" "The attribute `level` is deprecated since v1.0.0, use `expand_level` instead. See %s" .Position -}}
+  {{- $expandLevel = .Attributes.level -}}
+  {{- $expandLevelSet = true -}}
+{{- end -}}
+{{- if not $expandLevelSet -}}
+  {{- if isset $pageTreeConfig "expand_level" -}}
+    {{- $expandLevel = index $pageTreeConfig "expand_level" -}}
+  {{- else if isset $pageTreeConfig "level" -}}
+    {{- warnidf "v1-deprecated-file-tree-level-config" "`params.filetree.level` is deprecated since v1.0.0, use `params.filetree.expand_level` instead. See %s" .Position -}}
+    {{- $expandLevel = index $pageTreeConfig "level" -}}
+  {{- else if isset $siteTreeConfig "level" -}}
+    {{- /*
+      The theme default always provides `expand_level`, so a site-level
+      `level` can only come from legacy user configuration.
+    */ -}}
+    {{- warnidf "v1-deprecated-file-tree-level-config" "`params.filetree.level` is deprecated since v1.0.0, use `params.filetree.expand_level` instead. See %s" .Position -}}
+    {{- $expandLevel = index $siteTreeConfig "level" -}}
+  {{- else if isset $siteTreeConfig "expand_level" -}}
+    {{- $expandLevel = index $siteTreeConfig "expand_level" -}}
+  {{- end -}}
+{{- end -}}
+{{- $expandLevel = int $expandLevel -}}
 {{- $folderSlash := $config.folder_slash | default .Attributes.folderslash | default false -}}
 {{- $ignoreList := union (apply (split (.Attributes.ignore_list | default .Attributes.ignorelist | default "") ",") "trim" "." " ") $pageConfig.ignore_list -}}
 {{- $highlightList := union (apply (split (.Attributes.highlight_list | default .Attributes.highlightlist | default "") ",") "trim" "." " ") $pageConfig.highlight_list -}}
@@ -53,7 +94,7 @@
 
 {{- $options := dict
   "items" $treeData
-  "level" $level
+  "expand_level" $expandLevel
   "folder_slash" $folderSlash
   "ignore_list" $ignoreList
   "highlight_list" $highlightList

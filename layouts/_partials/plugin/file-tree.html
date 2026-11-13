@@ -1,7 +1,8 @@
 {{- /*
   Recursive function to render tree from structured data
   @param {Array} items - Array of tree items
-  @param {Int} level - The expand level of the tree (expand all: -1, collapse all: 0)
+  @param {Int} [expand_level=1] - The expand level of the tree (expand all: -1, collapse all: 0)
+  @param {Int} [level] - Deprecated alias of `expand_level`
   @param {Int} [depth=0] - Current depth level
   @param {Boolean} [folder_slash=false] - Whether to append a trailing "/" to folder names
   @param {Array} [ignore_list] - List of file or folder names to ignore
@@ -14,7 +15,13 @@
 */ -}}
 {{- define "render-file-tree" -}}
   {{- $items := .items -}}
-  {{- $level := .level -}}
+  {{- $expandLevel := 1 -}}
+  {{- if isset . "expand_level" -}}
+    {{- $expandLevel = .expand_level -}}
+  {{- else if isset . "level" -}}
+    {{- $expandLevel = .level -}}
+  {{- end -}}
+  {{- $expandLevel = int $expandLevel -}}
   {{- $depth := .depth | default 0 -}}
   {{- $folderSlash := .folder_slash | default false -}}
   {{- $ignoreList := .ignore_list | default slice -}}
@@ -37,7 +44,7 @@
 
     {{- range (append $fileItems $dirItems) -}}
       {{- $isDir := eq .type "dir" -}}
-      {{- $isCollapsed := $isDir | and (ge $depth $level) | and (ge $level 0) -}}
+      {{- $isCollapsed := $isDir | and (ge $depth $expandLevel) | and (ge $expandLevel 0) -}}
       {{- $isHighlighted := in $highlightList .name -}}
       {{- $label := .name -}}
       {{- if and $isDir $folderSlash -}}
@@ -60,7 +67,7 @@
           {{- $options := dict
             "items" .children
             "depth" (add $depth 1)
-            "level" $level
+            "expand_level" $expandLevel
             "folder_slash" $folderSlash
             "ignore_list" $ignoreList
             "highlight_list" $highlightList

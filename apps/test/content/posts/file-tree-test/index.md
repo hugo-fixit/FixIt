@@ -97,17 +97,17 @@ type = "file"
 
 {{< file-tree file="data/example.toml" />}}
 
-TOML with folder slash and level 3:
+TOML with folder slash and expand level 3:
 
-{{< file-tree file="data/example.toml" level=3 folder_slash=true />}}
+{{< file-tree file="data/example.toml" expand_level=3 folder_slash=true />}}
 
 #### JSON format
 
 {{< file-tree file="filetree/example.json" />}}
 
-JSON with folder slash and level 2:
+JSON with folder slash and expand level 2:
 
-{{< file-tree file="filetree/example.json" level=2 folder_slash=true />}}
+{{< file-tree file="filetree/example.json" expand_level=2 folder_slash=true />}}
 
 #### YAML format
 
@@ -123,23 +123,23 @@ Trying the file not found case (should fallback to next mode):
 
 #### Fully expanded
 
-{{< file-tree data="example" level=-1 />}}
+{{< file-tree data="example" expand_level=-1 />}}
 
 #### Limited expansion
 
-{{< file-tree data="example" level=1 />}}
+{{< file-tree data="example" expand_level=1 />}}
 
 #### With folder slash
 
 {{< file-tree data="example" folder_slash=true />}}
 
-#### With level and folder slash
+#### With expand level and folder slash
 
-{{< file-tree data="example" level=2 folder_slash=true />}}
+{{< file-tree data="example" expand_level=2 folder_slash=true />}}
 
 #### Collapsed with ignore
 
-{{< file-tree data="example" level=0 ignore_list="README.md" />}}
+{{< file-tree data="example" expand_level=0 ignore_list="README.md" />}}
 
 ## Filesystem Mode
 
@@ -159,19 +159,25 @@ Trying the file not found case (should fallback to next mode):
 
 ### Named parameters
 
-{{< file-tree path="data" level=2 />}}
+{{< file-tree path="data" expand_level=2 />}}
+
+### Scan depth
+
+Limit the filesystem scan depth with `max_depth` (root = 0):
+
+{{< file-tree path="assets" expand_level=-1 max_depth=1 />}}
 
 ### Expansion levels
 
 {{< file-tree "assets" 0 />}}
 
-{{< file-tree path="assets" level=2 folder_slash=true />}}
+{{< file-tree path="assets" expand_level=2 folder_slash=true />}}
 
 {{< file-tree "assets" -1 />}}
 
 ### With ignore lists
 
-{{< file-tree ignore_list=".hugo_build.lock, public, resources, node_modules" level=2 folder_slash=true />}}
+{{< file-tree ignore_list=".hugo_build.lock, public, resources, node_modules" expand_level=2 folder_slash=true />}}
 
 ### root not exist
 
@@ -220,7 +226,7 @@ type = "file"
 
 ### With parameters
 
-```file-tree {level=2 folder_slash=true ignore_list="config.local.js"}
+```file-tree {expand_level=2 folder_slash=true ignore_list="config.local.js"}
 - name: project
   type: dir
   children:
@@ -242,7 +248,7 @@ type = "file"
 
 ### Fully expanded
 
-```file-tree {level=-1 folder_slash=true}
+```file-tree {expand_level=-1 folder_slash=true}
 - name: backend
   type: dir
   children:

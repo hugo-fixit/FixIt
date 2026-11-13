@@ -9,7 +9,8 @@
 
   @param {String} root - The root path to scan (relative to project root or contentDir)
   @param {String} [path] - The directory path for recursive calls
-  @param {Int} [level=10] - Descend only level directories deep
+  @param {Int} [max_depth=10] - Maximum number of directory levels to descend (root = 0)
+  @param {Int} [level] - Deprecated alias of `max_depth`
   @param {Int} [deep=0] - Current depth level for recursive calls
   @param {Array} [ignore_list] - List of file or folder names to ignore
   @param {Boolean} [is_recursive=false] - Internal flag for recursive calls
@@ -20,7 +21,16 @@
 */ -}}
 
 {{- $result := slice -}}
-{{- $level := .level | default 10 -}}
+{{- $maxDepth := 10 -}}
+{{- if isset . "max_depth" -}}
+  {{- $maxDepth = .max_depth -}}
+{{- else if isset . "level" -}}
+  {{- $maxDepth = .level -}}
+{{- end -}}
+{{- $maxDepth = int $maxDepth -}}
+{{- if lt $maxDepth 0 -}}
+  {{- $maxDepth = 0 -}}
+{{- end -}}
 {{- $deep := .deep | default 0 -}}
 {{- $isRecursive := .is_recursive | default false -}}
 {{- $_ignoreList := slice ".DS_Store" "Thumbs.db" ".directory" ".git" "node_modules" "public" -}}
@@ -28,7 +38,7 @@
 {{- $_debug := eq hugo.Environment "debug" | and hugo.IsServer -}}
 
 {{- if $isRecursive -}}
-  {{- if le $deep $level -}}
+  {{- if le $deep $maxDepth -}}
     {{- /* Recursive mode: scan directory and build children */ -}}
     {{- /* {{- if $_debug -}}{{- warnf "Path%v: %v" $deep .path -}}{{- end -}} */ -}}
     {{- $path := .path -}}
@@ -41,7 +51,7 @@
       {{- $item := dict "name" .Name "type" (cond .IsDir "dir" "file") -}}
       {{- if .IsDir -}}
         {{- $fullPath := path.Clean (path.Join $path .Name) -}}
-        {{- $childOptions := dict "path" $fullPath "deep" (add $deep 1) "ignore_list" $ignoreList "is_recursive" true -}}
+        {{- $childOptions := dict "path" $fullPath "deep" (add $deep 1) "max_depth" $maxDepth "ignore_list" $ignoreList "is_recursive" true -}}
         {{- $children := partial "function/get-file-tree.html" $childOptions -}}
         {{- $item = merge $item (dict "children" $children) -}}
       {{- end -}}
@@ -85,7 +95,7 @@
 
     {{- /* Build children recursively */ -}}
     {{- if $_debug -}}{{- warnf "[file-tree]> %v:" $rootLabel -}}{{- end -}}
-    {{- $childOptions := dict "path" $root "deep" (add $deep 1) "level" $level "ignore_list" $ignoreList "is_recursive" true -}}
+    {{- $childOptions := dict "path" $root "deep" (add $deep 1) "max_depth" $maxDepth "ignore_list" $ignoreList "is_recursive" true -}}
     {{- $children := partial "function/get-file-tree.html" $childOptions -}}
     
     {{- /* Return root item with children */ -}}
