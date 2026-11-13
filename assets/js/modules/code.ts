@@ -15,6 +15,7 @@ const copyText = createCopyText()
 
 export class CodeModule implements CodeService {
   #fullscreenAbort: AbortController | undefined
+  #tabSyncHandlers = new Map<HTMLElement, (event: CustomEvent<{ lang: string, source: HTMLElement }>) => void>()
 
   constructor() {}
 
@@ -136,8 +137,7 @@ export class CodeModule implements CodeService {
     const originalTitle = btn.dataset.ctOriginalTitle || btn.dataset.ctTitle || btn.title
     btn.dataset.ctOriginalTitle = originalTitle
     btn.dataset.ctTitle = show ? exitTitle : originalTitle
-    const instance = CellTooltip.getOrCreateInstance(btn)
-    instance.hide()
+    CellTooltip?.getOrCreateInstance(btn).hide()
   }
 
   /** Exit fullscreen on the currently active code block. */
@@ -245,6 +245,14 @@ export class CodeModule implements CodeService {
 
   /** Group consecutive code blocks into tabbed containers with language sync. */
   initCodeTabs() {
+    // Drop listeners for containers that were replaced (print, decryption, re-render).
+    for (const [$container, handler] of this.#tabSyncHandlers) {
+      if (!$container.isConnected) {
+        eventBus.off('fixit:code-tab-sync', handler)
+        this.#tabSyncHandlers.delete($container)
+      }
+    }
+
     const $codeBlocks = document.querySelectorAll<HTMLElement>('.code-block[group]:not([data-tab-init])')
     const processed = new Set<HTMLElement>()
     const normalizeTabTitle = (title = '') => title.toLowerCase()
@@ -349,12 +357,14 @@ export class CodeModule implements CodeService {
         }
       }
 
-      eventBus.on('fixit:code-tab-sync', ({ detail }) => {
+      const syncHandler = ({ detail }: CustomEvent<{ lang: string, source: HTMLElement }>) => {
         if (!detail.lang || detail.source === $container)
           return
         const index = toggleLangToIndex.get(detail.lang)
         index !== undefined && switchToTab(index)
-      })
+      }
+      eventBus.on('fixit:code-tab-sync', syncHandler)
+      this.#tabSyncHandlers.set($container, syncHandler)
 
       $tabs.forEach(($tab, index) => {
         const title = $tab.dataset.tabTitle || 'Code'

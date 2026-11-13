@@ -57,7 +57,7 @@ export class MiscModule implements MiscService {
       })
     }
     $rewards.forEach(($reward) => {
-      $reward.previousElementSibling!.addEventListener('click', function (this: HTMLElement) {
+      $reward.previousElementSibling?.addEventListener('click', function (this: HTMLElement) {
         _closeRewardExclude(this.getAttribute('for'))
       }, false)
     })
@@ -69,16 +69,19 @@ export class MiscModule implements MiscService {
     if (!this.#core.config.comment?.enable)
       return
 
-    if (document.querySelector('#comments')) {
-      const $viewCommentsBtn = document.querySelector<HTMLElement>('.view-comments')!
-      $viewCommentsBtn.classList.remove('hidden')
-      $viewCommentsBtn.addEventListener('click', () => {
-        scrollIntoView('#comments')
-      }, false)
+    const $comments = document.querySelector<HTMLElement>('#comments')
+    if ($comments) {
+      const $viewCommentsBtn = document.querySelector<HTMLElement>('.view-comments')
+      if ($viewCommentsBtn) {
+        $viewCommentsBtn.classList.remove('hidden')
+        $viewCommentsBtn.addEventListener('click', () => {
+          scrollIntoView('#comments')
+        }, false)
+      }
     }
 
     if (this.#core.config.comment.expired)
-      document.querySelector('#comments')!.remove()
+      $comments?.remove()
   }
 
   /**

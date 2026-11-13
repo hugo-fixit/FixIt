@@ -226,7 +226,7 @@ export class ContentModule implements ContentService {
       return
     const footnoteMap = new Map<HTMLElement, HTMLElement>()
     $footnoteRefs.forEach(($ref) => {
-      if (this.#core.config.tooltip) {
+      if (this.#core.config.tooltip && CellTooltip) {
         const $link = $ref.querySelector<HTMLAnchorElement>('a.footnote-ref')
         if ($link) {
           $link.addEventListener('click', (e) => {
@@ -248,7 +248,7 @@ export class ContentModule implements ContentService {
       if ($ref.hasAttribute('title'))
         return
       $ref.setAttribute('title', $content.textContent!.trim())
-      if (this.#core.config.tooltip) {
+      if (this.#core.config.tooltip && CellTooltip) {
         CellTooltip.getOrCreateInstance($ref)
       }
     })
@@ -256,7 +256,7 @@ export class ContentModule implements ContentService {
 
   /** Initialize CellTooltip on action buttons, copy buttons, and footnotes. */
   initTooltip() {
-    if (!this.#core.config.tooltip)
+    if (!this.#core.config.tooltip || !CellTooltip)
       return
     const inlineEnd = this.#core.isRTL ? 'left' : 'right'
     CellTooltip.initAll('li[data-task] > span[title]', { placement: inlineEnd })

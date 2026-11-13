@@ -182,8 +182,9 @@ export class SearchModule implements SearchService {
       clearBtn.textContent = searchConfig.clearText
     }
 
-    // Prevent autocomplete input blur on mousedown
-    document.addEventListener('mousedown', (e) => {
+    // Keep autocomplete panel mousedown from bubbling out of the dialog; a
+    // document-level listener would affect every mousedown on the page.
+    panelContainer?.addEventListener('mousedown', (e) => {
       e.stopPropagation()
     })
 

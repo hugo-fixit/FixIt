@@ -76,15 +76,17 @@ export function createAlgoliaEngine(searchConfig: SearchConfig): SearchEngine {
           highlightPostTag: `</${highlightTag}>`,
         })
         const results: Record<string, SearchResult> = {}
-        hits.forEach(({ uri, date, heading, tags, categories, collections, _highlightResult, _snippetResult: { content } }: any) => {
-          if (results[uri] && results[uri].context.length > content.value.length)
+        hits.forEach(({ uri, date, heading, tags, categories, collections, _highlightResult, _snippetResult }: any) => {
+          const title = _highlightResult?.title?.value ?? uri ?? ''
+          const content = _snippetResult?.content?.value ?? ''
+          if (results[uri] && results[uri].context.length > content.length)
             return
           results[uri] = {
             uri,
-            title: _highlightResult.title.value,
+            title,
             date,
-            context: content.value,
-            heading: _highlightResult.heading?.value || heading || undefined,
+            context: content,
+            heading: _highlightResult?.heading?.value || heading || undefined,
             tags,
             categories,
             collections,

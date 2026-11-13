@@ -11,12 +11,19 @@ export function createCopyText(): (text: string) => Promise<void> {
     input.value = text
     document.body.appendChild(input)
     input.select()
-    if (document.execCommand('copy')) {
-      document.body.removeChild(input)
-      resolve()
+    try {
+      if (document.execCommand('copy'))
+        resolve()
+      else
+        reject(new Error('Copy failed'))
     }
-    else {
-      reject(new Error('Copy failed'))
+    catch (error) {
+      reject(error instanceof Error
+        ? error
+        : new Error('Copy failed'))
+    }
+    finally {
+      input.remove()
     }
   })
 }

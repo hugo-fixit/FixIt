@@ -10,6 +10,7 @@ import { eventBus } from '../core/event-bus'
 import { isDarkMode } from '../utils'
 
 const mapboxArr: any[] = []
+const languageControls = new WeakMap<any, any>()
 
 function initMapbox(target: Element | Document = document) {
   const mapboxgl = window.mapboxgl
@@ -17,6 +18,15 @@ function initMapbox(target: Element | Document = document) {
   const config = window.config.mapbox
   if (!mapboxgl || !config)
     return
+
+  // Drop instances whose containers were replaced by decryption or dynamic loads.
+  for (let i = mapboxArr.length - 1; i >= 0; i--) {
+    if (!mapboxArr[i].getContainer().isConnected) {
+      mapboxArr[i].remove?.()
+      mapboxArr.splice(i, 1)
+    }
+  }
+
   if (!mapboxgl.accessToken) {
     mapboxgl.accessToken = config.accessToken!
     mapboxgl.setRTLTextPlugin(config.RTLTextPlugin!)
@@ -67,7 +77,9 @@ function initMapbox(target: Element | Document = document) {
     if (fullscreen) {
       mapbox.addControl(new mapboxgl.FullscreenControl())
     }
-    mapbox.addControl(new MapboxLanguage())
+    const languageControl = new MapboxLanguage()
+    mapbox.addControl(languageControl)
+    languageControls.set(mapbox, languageControl)
     mapboxArr.push(mapbox)
   })
 }
@@ -82,7 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const $mapbox = mapbox.getContainer()
       const { lightStyle, darkStyle } = JSON.parse($mapbox.dataset.options)
       mapbox.setStyle(isDark ? darkStyle : lightStyle)
-      mapbox.addControl(new window.MapboxLanguage())
+      const previousControl = languageControls.get(mapbox)
+      if (previousControl)
+        mapbox.removeControl(previousControl)
+      const languageControl = new window.MapboxLanguage!()
+      mapbox.addControl(languageControl)
+      languageControls.set(mapbox, languageControl)
     })
   })
   eventBus.on('fixit:content-decrypted', ({ detail }) => initMapbox(detail.target))

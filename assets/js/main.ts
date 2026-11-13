@@ -21,21 +21,58 @@ function bootstrap(): void {
    * 4. Global features — misc (PWA, comments), events (scroll, resize)
    */
   function init() {
-    try {
-      window.fixit.menu.setup()
-      window.fixit.theme.setup()
-      window.fixit.toc.setup()
-      window.fixit.search.setup()
-      window.fixit.content.setup()
-      window.fixit.contribution.setup()
-      window.fixit.enc.setup()
-      window.fixit.pwa.setup()
-      window.fixit.misc.setup()
-      window.fixit.events.setup()
-    }
-    catch (err) {
-      console.error(err)
-    }
+    const modules: Array<[string, () => void]> = [
+      [
+        'menu',
+        () => window.fixit.menu.setup(),
+      ],
+      [
+        'theme',
+        () => window.fixit.theme.setup(),
+      ],
+      [
+        'toc',
+        () => window.fixit.toc.setup(),
+      ],
+      [
+        'search',
+        () => window.fixit.search.setup(),
+      ],
+      [
+        'content',
+        () => window.fixit.content.setup(),
+      ],
+      [
+        'contribution',
+        () => window.fixit.contribution.setup(),
+      ],
+      [
+        'enc',
+        () => window.fixit.enc.setup(),
+      ],
+      [
+        'pwa',
+        () => window.fixit.pwa.setup(),
+      ],
+      [
+        'misc',
+        () => window.fixit.misc.setup(),
+      ],
+      [
+        'events',
+        () => window.fixit.events.setup(),
+      ],
+    ]
+    // Isolate failures: one broken module (e.g. a missing third-party script)
+    // must not prevent the remaining modules from initializing.
+    modules.forEach(([name, setup]) => {
+      try {
+        setup()
+      }
+      catch (err) {
+        console.error(`[FixIt] Failed to initialize the "${name}" module`, err)
+      }
+    })
     printBanner(window.fixit.version)
   }
 

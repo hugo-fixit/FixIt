@@ -33,7 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
       .then((response: Array<{ count: number }>) => {
         const twikooCommentCount = document.getElementById('twikoo-comment-count')
         if (twikooCommentCount)
-          twikooCommentCount.innerHTML = String(response[0].count)
+          twikooCommentCount.innerHTML = String(response[0]?.count ?? 0)
       })
+      .catch(console.error)
   }
 }, false)

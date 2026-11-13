@@ -89,14 +89,17 @@ async function evictOldEntries() {
 
 /* ========== Lifecycle ========== */
 
-/** Pre-cache core assets on install (individual calls for resilience). */
+/**
+ * Pre-cache core assets on install (individual calls for resilience).
+ * Do not call skipWaiting() here: updates wait until the user confirms the
+ * refresh notification, otherwise every deployment would reload open pages.
+ */
 self.addEventListener('install', (event) => {
   event.waitUntil(
     cachePromise
       .then(cache => Promise.allSettled(
         PRECACHE_URLS.filter(Boolean).map(url => cache.add(url)),
-      ))
-      .then(() => self.skipWaiting()),
+      )),
   )
 })
 
