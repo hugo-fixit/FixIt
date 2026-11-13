@@ -8,11 +8,15 @@
 {{- define "content" -}}
   {{- $profile := .Site.Params.home.profile -}}
   {{- $posts := .Site.Params.home.posts -}}
-  {{- $columns := partial "function/home-columns.html" . -}}
+  {{- $postsEnabled := ne $posts.enable false -}}
+  {{- $columns := "1" -}}
+  {{- if $postsEnabled -}}
+    {{- $columns = partial "function/home-columns.html" . -}}
+  {{- end -}}
   {{- $pages := slice -}}
 
   {{- /* Paginate calculation */ -}}
-  {{- if ne $posts.enable false -}}
+  {{- if $postsEnabled -}}
     {{- $pages = .Site.Store.Get "mainSectionPages" -}}
     {{- if .Site.Params.hidden_from_home_page -}}
       {{- $pages = where $pages "Params.hidden_from_home_page" false -}}
@@ -26,7 +30,7 @@
     {{- end -}}
   {{- end -}}
 
-  <div class="page home{{ if ne $posts.enable false }} posts{{ end }}" data-posts-columns="{{ $columns }}">
+  <div class="page home{{ if $postsEnabled }} posts{{ end }}"{{ if $postsEnabled }} data-posts-columns="{{ $columns }}"{{ end }}>
     {{- /* Only show profile and content on first page */ -}}
     {{- if (not $profile.only_first_page) | or (eq $.Paginator.PageNumber 1) -}}
       {{- /* Profile */ -}}
@@ -45,7 +49,7 @@
     {{- end -}}
 
     {{- /* Paginate rendering */ -}}
-    {{- if ne $posts.enable false -}}
+    {{- if $postsEnabled -}}
       <div class="home-posts">
         {{- range $pages.Pages -}}
           {{- .Render "summary" -}}
