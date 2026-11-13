@@ -35,15 +35,17 @@
   {{- /* Source build */ -}}
   {{- if .Source | and (not .Resource) | and (not (urls.Parse .Source).Host) -}}
     {{- $resource := resources.Get .Source -}}
-    {{- with .Template -}}
-      {{- $resource = resources.ExecuteAsTemplate . $.Context $resource -}}
-    {{- end -}}
-    {{- $resource = dict "Resource" $resource "Build" .Build "Minify" .Minify "Fingerprint" .Fingerprint | partial "function/js-build.html" -}}
-    {{- with .Fingerprint -}}
-      {{- $integrity = $resource.Data.Integrity -}}
-    {{- end -}}
-    {{- with $resource.RelPermalink -}}
-      {{- $src = . -}}
+    {{- if $resource -}}
+      {{- with .Template -}}
+        {{- $resource = resources.ExecuteAsTemplate . $.Context $resource -}}
+      {{- end -}}
+      {{- $resource = dict "Resource" $resource "Build" .Build "Minify" .Minify "Fingerprint" .Fingerprint | partial "function/js-build.html" -}}
+      {{- with .Fingerprint -}}
+        {{- $integrity = $resource.Data.Integrity -}}
+      {{- end -}}
+      {{- with $resource.RelPermalink -}}
+        {{- $src = . -}}
+      {{- end -}}
     {{- end -}}
   {{- end -}}
 

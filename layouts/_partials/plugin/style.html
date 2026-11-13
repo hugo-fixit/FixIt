@@ -34,14 +34,16 @@
   {{- /* Source build */ -}}
   {{- if .Source | and (not .Resource) | and (not (urls.Parse .Source).Host) -}}
     {{- $resource := resources.Get .Source -}}
-    {{- with .Template -}}
-      {{- $resource = resources.ExecuteAsTemplate . $.Context $resource -}}
+    {{- if $resource -}}
+      {{- with .Template -}}
+        {{- $resource = resources.ExecuteAsTemplate . $.Context $resource -}}
+      {{- end -}}
+      {{- $resource = dict "Resource" $resource "ToCSS" .ToCSS "Minify" .Minify "Fingerprint" .Fingerprint | partial "function/to-css.html" -}}
+      {{- with .Fingerprint -}}
+        {{- $integrity = $resource.Data.Integrity -}}
+      {{- end -}}
+      {{- $href = $resource.RelPermalink -}}
     {{- end -}}
-    {{- $resource = dict "Resource" $resource "ToCSS" .ToCSS "Minify" .Minify "Fingerprint" .Fingerprint | partial "function/to-css.html" -}}
-    {{- with .Fingerprint -}}
-      {{- $integrity = $resource.Data.Integrity -}}
-    {{- end -}}
-    {{- $href = $resource.RelPermalink -}}
   {{- end -}}
 
   {{- /* Style from string */ -}}
