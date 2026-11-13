@@ -13,8 +13,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      // Use svh so the mobile browser toolbar collapsing does not reflow the hero.
-      min-height: MAX(calc(100svh - #{fi-var(header-height)}), 600px);
+      min-height: MAX(calc(100vh - #{fi-var(header-height)}), 600px);
     }
 
     .home-avatar {
