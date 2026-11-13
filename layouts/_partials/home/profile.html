@@ -12,7 +12,7 @@
 {{- $posts := .Site.Params.home.posts | default dict -}}
 {{- $avatarPx := cond (ne $posts.enable false) 96 128 -}}
 
-<div class="home-profile">
+<div class="home-profile"{{ if $profile.fullscreen }} data-fullscreen{{ end }}>
   {{- $avatar := dict "Email" $profile.gravatar_email "Size" "96" | partial "function/get-gravatar.html" | default $profile.avatar_url | default $author.avatar -}}
   {{- if $avatar -}}
     <div class="home-avatar">

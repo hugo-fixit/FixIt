@@ -8,6 +8,15 @@
   .home-profile {
     text-align: center;
 
+    &[data-fullscreen] {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      // Use svh so the mobile browser toolbar collapsing does not reflow the hero.
+      min-height: MAX(calc(100svh - #{fi-var(header-height)}), 600px);
+    }
+
     .home-avatar {
       padding: 0.5rem;
 
@@ -115,6 +124,10 @@
 
   .home-profile {
     padding: 4rem 0;
+
+    &[data-fullscreen] {
+      margin-bottom: 2rem;
+    }
   }
 
   .home-avatar img {

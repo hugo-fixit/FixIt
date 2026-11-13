@@ -1608,6 +1608,8 @@ social = true
 disclaimer = ""
 # Whether to show the contribution heatmap inside the home profile.
 contribution = true
+# Whether the home profile fills the first screen height.
+fullscreen = true
 
 # Home page posts.
 [params.home.posts]
