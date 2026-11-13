@@ -144,6 +144,13 @@ footer {
     font-size: 0.6875rem;
   }
 
+  // Add the typographic gap between digits and CJK units in locales whose
+  // Intl unit patterns omit it (e.g. zh-CN, ko). Unsupported browsers fall
+  // back to the current unspaced rendering.
+  .site-time .run-times {
+    text-autospace: normal;
+  }
+
   .footer-bottom:has(> :only-child) {
     justify-content: center;
 
