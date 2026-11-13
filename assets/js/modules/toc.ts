@@ -21,6 +21,11 @@ export class TocModule implements TocService {
   #headingOffsets: Array<{ id: string, top: number }> = []
   #headingOffsetsDirty = true
   #rafId: number | null = null
+  #tocLinkMaps = new WeakMap<HTMLElement, Map<string, HTMLAnchorElement>>()
+  #headerId: 'header-mobile' | 'header-desktop' = 'header-desktop'
+  #headerHeight = 0
+  #headerDisplayNone = false
+  #breadcrumbHeight = 0
 
   /** Get all TOC content containers (auto, static, and drawer). */
   #getTocContainers(): HTMLElement[] {
@@ -29,19 +34,25 @@ export class TocModule implements TocService {
       .filter(Boolean) as HTMLElement[]
   }
 
-  /** Compute the scroll offset for header + breadcrumb. */
-  #getIndexOffset(): number {
-    const headerId = isMobile()
+  /** Measure header and breadcrumb sizes once per layout change. */
+  #measureLayout() {
+    this.#headerId = isMobile()
       ? 'header-mobile'
       : 'header-desktop'
-    const $header = document.getElementById(headerId)
-    const headerMode = document.body.getAttribute(`data-${headerId}`)
-    if (!$header || window.getComputedStyle($header).display === 'none')
+    const $header = document.getElementById(this.#headerId)
+    this.#headerHeight = $header?.offsetHeight || 0
+    this.#headerDisplayNone = !$header || window.getComputedStyle($header).display === 'none'
+    this.#breadcrumbHeight = document.querySelector<HTMLElement>('.breadcrumb-container')?.offsetHeight || 0
+  }
+
+  /** Compute the scroll offset for header + breadcrumb from cached metrics. */
+  #getIndexOffset(): number {
+    if (this.#headerDisplayNone)
       return 20
-    const shouldApplyOffset = headerMode === 'sticky' || (headerMode === 'auto' && !$header.classList.contains('header__fadeOutUp'))
-    const headerOffset = shouldApplyOffset ? $header.offsetHeight : 0
-    const breadcrumbOffset = document.querySelector<HTMLElement>('.breadcrumb-container')?.offsetHeight || 0
-    return 20 + headerOffset + breadcrumbOffset
+    const $header = document.getElementById(this.#headerId)
+    const headerMode = document.body.getAttribute(`data-${this.#headerId}`)
+    const shouldApplyOffset = headerMode === 'sticky' || (headerMode === 'auto' && !$header?.classList.contains('header__fadeOutUp'))
+    return 20 + (shouldApplyOffset ? this.#headerHeight : 0) + this.#breadcrumbHeight
   }
 
   /** Cache heading absolute offsets for binary search. Called on init/resize/content change. */
@@ -91,8 +102,18 @@ export class TocModule implements TocService {
   #getTocLinkById($tocRoot: HTMLElement, id: string): HTMLAnchorElement | null {
     if (!$tocRoot || !id)
       return null
-    const targetHash = `#${id}`
-    return Array.from($tocRoot.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')).find($link => $link.getAttribute('href') === targetHash) || null
+    const cached = this.#tocLinkMaps.get($tocRoot)
+    if (cached)
+      return cached.get(id) ?? null
+
+    const map = new Map<string, HTMLAnchorElement>()
+    $tocRoot.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach(($link) => {
+      const href = $link.getAttribute('href')
+      if (href && href.length > 1 && !map.has(href.slice(1)))
+        map.set(href.slice(1), $link)
+    })
+    this.#tocLinkMaps.set($tocRoot, map)
+    return map.get(id) ?? null
   }
 
   /**
@@ -204,6 +225,7 @@ export class TocModule implements TocService {
     this.#activeTocId = null
     this.#previousActiveLinks.clear()
     this.#headingOffsetsDirty = true
+    this.#measureLayout()
     this.syncTocHeight()
     this.syncTocActiveState()
   }

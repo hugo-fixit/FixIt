@@ -83,9 +83,9 @@ function bindEvents() {
   }, false)
 
   window.addEventListener('beforeprint', () => {
-    if (window.config.print?.expandFileTree) {
-      expandAll(document.getElementById('content')!)
-    }
+    const $content = document.getElementById('content')
+    if (window.config.print?.expandFileTree && $content)
+      expandAll($content)
   }, false)
 
   eventBus.on('fixit:content-decrypted', ({ detail }) => {

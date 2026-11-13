@@ -15,6 +15,11 @@ export class EventsModule implements EventsService {
   #resizeTimeout: number | null = null
   #newScrollTop = 0
   #oldScrollTop = 0
+  #scrollFrame: number | null = null
+  #scrollAccum = 0
+  #progress = -1
+  #backToTopVisible = false
+  #isFirefox = navigator.userAgent.toLowerCase().includes('firefox')
   #core: CoreService
   #code: CodeService
 
@@ -23,69 +28,121 @@ export class EventsModule implements EventsService {
     this.#code = code
   }
 
+  /** Toggle the auto-hiding headers without restarting an active animation. */
+  #setHeadersHidden($headers: HTMLElement[], hidden: boolean) {
+    $headers.forEach(($header) => {
+      if (hidden) {
+        if ($header.classList.contains('header__fadeOutUp'))
+          return
+        $header.classList.remove('header__fadeInDown')
+        animateCSS($header, ['header__fadeOutUp'], true)
+      }
+      else {
+        if (!$header.classList.contains('header__fadeOutUp'))
+          return
+        $header.classList.remove('header__fadeOutUp')
+        animateCSS($header, ['header__fadeInDown'], true)
+      }
+    })
+  }
+
+  /** Update reading progress and back-to-top visibility from the current scroll position. */
+  #updateScrollWidgets($backToTop: HTMLElement | null, $readingProgressBar: HTMLElement | null, $progressCircle: SVGCircleElement | null) {
+    const contentHeight = document.documentElement.scrollHeight - window.innerHeight
+    const scrollPercent = contentHeight > 0
+      ? Math.max(0, Math.min(100 * Math.max(this.#newScrollTop, 0) / contentHeight, 100))
+      : 0
+    const progress = Math.round(scrollPercent * 100) / 100
+
+    if (progress !== this.#progress) {
+      this.#progress = progress
+      $readingProgressBar?.style.setProperty('--fi-progress', `${progress}%`)
+      if ($backToTop) {
+        $backToTop.style.setProperty('--fi-b2t-progress', progress.toFixed(2))
+        if ($progressCircle)
+          $progressCircle.style.strokeDashoffset = (2 * Math.PI * 50 * (1 - progress / 100)).toFixed(2)
+      }
+    }
+
+    if (!$backToTop)
+      return
+
+    const shouldShow = progress > 1
+    if (shouldShow && !this.#backToTopVisible) {
+      this.#backToTopVisible = true
+      $backToTop.classList.remove('hidden', 'animate__fadeOut')
+      animateCSS($backToTop, ['animate__fadeIn'], true)
+    }
+    else if (!shouldShow && this.#backToTopVisible) {
+      this.#backToTopVisible = false
+      $backToTop.classList.remove('animate__fadeIn')
+      animateCSS($backToTop, ['animate__fadeOut'], true, () => {
+        if (!this.#backToTopVisible)
+          $backToTop.classList.add('hidden')
+      })
+    }
+  }
+
+  /** Apply one coalesced scroll frame: headers, reading progress, and back-to-top. */
+  #handleScroll($autoHeaders: HTMLElement[], $backToTop: HTMLElement | null, $readingProgressBar: HTMLElement | null, $progressCircle: SVGCircleElement | null, accuracy: number) {
+    this.#newScrollTop = getScrollTop()
+    const scroll = this.#newScrollTop - this.#oldScrollTop
+    if (Math.abs(scroll) > accuracy)
+      this.#core.closeActiveMaskOverlay()
+
+    // Upward scrolling reveals the header on any movement; downward scrolling
+    // hides it only after accumulated movement, so slow upward scrolls recover.
+    if (this.#newScrollTop <= 0) {
+      this.#scrollAccum = 0
+      this.#setHeadersHidden($autoHeaders, false)
+    }
+    else if (scroll > 0) {
+      this.#scrollAccum += scroll
+      if (this.#scrollAccum > accuracy) {
+        this.#scrollAccum = 0
+        this.#setHeadersHidden($autoHeaders, true)
+      }
+    }
+    else if (scroll < 0) {
+      this.#scrollAccum = 0
+      this.#setHeadersHidden($autoHeaders, false)
+    }
+
+    this.#updateScrollWidgets($backToTop, $readingProgressBar, $progressCircle)
+    eventBus.emit('fixit:scroll')
+    this.#oldScrollTop = this.#newScrollTop
+  }
+
   /** Bind scroll listener: auto-hide headers, reading progress, back-to-top, and TOC sync. */
   onScroll() {
     const ACCURACY = 50
     const $autoHeaders: HTMLElement[] = []
     const $backToTop = document.querySelector<HTMLElement>('.back-to-top')
     const $readingProgressBar = document.querySelector<HTMLElement>('.reading-progress-bar')
+    const $progressCircle = this.#isFirefox
+      ? $backToTop?.querySelector<SVGCircleElement>('circle.progress') ?? null
+      : null
     if (document.body.dataset.headerDesktop === 'auto') {
-      $autoHeaders.push(document.getElementById('header-desktop')!)
+      const $header = document.getElementById('header-desktop')
+      if ($header)
+        $autoHeaders.push($header)
     }
     if (document.body.dataset.headerMobile === 'auto') {
-      $autoHeaders.push(document.getElementById('header-mobile')!)
+      const $header = document.getElementById('header-mobile')
+      if ($header)
+        $autoHeaders.push($header)
     }
     $backToTop?.addEventListener('click', () => {
       scrollIntoView('body')
     })
     window.addEventListener('scroll', () => {
-      this.#newScrollTop = getScrollTop()
-      const scroll = this.#newScrollTop - this.#oldScrollTop
-      if (Math.abs(scroll) > ACCURACY) {
-        this.#core.closeActiveMaskOverlay()
-        const isScrollingDown = scroll > 0
-        $autoHeaders.forEach(($header) => {
-          if (isScrollingDown) {
-            $header.classList.remove('header__fadeInDown')
-            animateCSS($header, ['header__fadeOutUp'], true)
-          }
-          else {
-            $header.classList.remove('header__fadeOutUp')
-            animateCSS($header, ['header__fadeInDown'], true)
-          }
-        })
-      }
-      else if (this.#newScrollTop <= 0) {
-        $autoHeaders.forEach(($header) => {
-          $header.classList.remove('header__fadeOutUp')
-          animateCSS($header, ['header__fadeInDown'], true)
-        })
-      }
-      const contentHeight = document.body.scrollHeight - window.innerHeight
-      const scrollPercent = Math.max(Math.min(100 * Math.max(this.#newScrollTop, 0) / contentHeight, 100), 0)
-      if ($readingProgressBar) {
-        $readingProgressBar.style.setProperty('--fi-progress', `${scrollPercent.toFixed(2)}%`)
-      }
-      if ($backToTop) {
-        if (scrollPercent > 1) {
-          $backToTop.classList.remove('hidden', 'animate__fadeOut')
-          animateCSS($backToTop, ['animate__fadeIn'], true)
-        }
-        else {
-          $backToTop.classList.remove('animate__fadeIn')
-          animateCSS($backToTop, ['animate__fadeOut'], true, () => {
-            $backToTop.classList.contains('animate__fadeOut') && $backToTop.classList.add('hidden')
-          })
-        }
-        $backToTop.style.setProperty('--fi-b2t-progress', scrollPercent.toFixed(2))
-        if (navigator.userAgent.toLowerCase().includes('firefox')) {
-          const dashoffset = 2 * Math.PI * 50 * (1 - scrollPercent / 100)
-          $backToTop.querySelector<SVGCircleElement>('circle.progress')!.style.strokeDashoffset = String(dashoffset.toFixed(2))
-        }
-      }
-      eventBus.emit('fixit:scroll')
-      this.#oldScrollTop = this.#newScrollTop
-    }, false)
+      if (this.#scrollFrame !== null)
+        return
+      this.#scrollFrame = window.requestAnimationFrame(() => {
+        this.#scrollFrame = null
+        this.#handleScroll($autoHeaders, $backToTop, $readingProgressBar, $progressCircle, ACCURACY)
+      })
+    }, { passive: true })
   }
 
   /** Bind resize listener with debounce: re-init TOC, search, and sync state. */
@@ -109,7 +166,7 @@ export class EventsModule implements EventsService {
 
   /** Bind mask click to close the active overlay. */
   onClickMask() {
-    document.getElementById('mask')!.addEventListener('click', (e) => {
+    document.getElementById('mask')?.addEventListener('click', (e) => {
       if (!(e.target as HTMLElement).classList.contains('is-blur'))
         return
       this.#core.closeActiveMaskOverlay()
@@ -119,7 +176,9 @@ export class EventsModule implements EventsService {
   /** Bind beforeprint/afterprint to expand admonitions, code blocks, details, and file trees. */
   initPrint() {
     window.addEventListener('beforeprint', () => {
-      const $content = document.getElementById('content')!
+      const $content = document.getElementById('content')
+      if (!$content)
+        return
       const printConfig = this.#core.config.print || {}
 
       if (printConfig.expandAdmonition) {

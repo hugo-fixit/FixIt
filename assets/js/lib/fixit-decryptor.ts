@@ -224,12 +224,14 @@ class FixItDecryptor {
    * @param callback - Invoked with `(template, sha256Hash)` on success.
    */
   async #validatePassword($encryptor: Element, callback: ($template: HTMLTemplateElement, passwordHash: string, verifyHash?: string) => Promise<void>): Promise<void> {
-    const $template = $encryptor.querySelector<HTMLTemplateElement>('template[data-password]')!
-    const storedHash = $template.dataset.password!
+    const $template = $encryptor.querySelector<HTMLTemplateElement>('template[data-password]')
+    const inputEl = $encryptor.querySelector<HTMLInputElement>('.fixit-decryptor-input')
+    if (!$template || !$template.dataset.password || !inputEl)
+      return
+
+    const storedHash = $template.dataset.password
     const verifySalt = $template.dataset.verifySalt
-    const inputEl = $encryptor.querySelector<HTMLInputElement>('.fixit-decryptor-input')!
     const input = inputEl.value.trim()
-    const inputSha256 = await this.#sha256Hex(input)
 
     inputEl.value = ''
     inputEl.blur()
@@ -237,6 +239,8 @@ class FixItDecryptor {
       flashTooltip(inputEl, t('enterCorrectPassword'), 3000, true)
       return console.warn(t('enterCorrectPassword'))
     }
+
+    const inputSha256 = await this.#sha256Hex(input)
 
     let matches: boolean
     let verifyHash: string
@@ -276,15 +280,19 @@ class FixItDecryptor {
       this.initPage()
     }
     else if (shortcode) {
-      this.initShortcodes(document.querySelector<HTMLElement>('#content')!)
+      const $content = document.querySelector<HTMLElement>('#content')
+      if ($content)
+        this.initShortcodes($content)
     }
   }
 
   /** Initialize whole-page decryption with cache validation and input handlers. */
   initPage(): void {
     this.validateCache()
-    const $encryptor = document.querySelector<HTMLElement>('article > fixit-encryptor')!
-    const $content = document.querySelector<HTMLElement>('#content')!
+    const $encryptor = document.querySelector<HTMLElement>('article > fixit-encryptor')
+    const $content = document.querySelector<HTMLElement>('#content')
+    if (!$encryptor || !$content)
+      return
 
     const decryptorHandler = () => {
       void this.#validatePassword($encryptor, async ($template, passwordHash, verifyHash) => {
@@ -377,9 +385,13 @@ class FixItDecryptor {
 
   /** Restore decrypted content from LocalStorage cache if the password has not expired. */
   validateCache(): this {
-    const $content = document.querySelector<HTMLElement>('#content')!
-    const $encryptor = document.querySelector<HTMLElement>('article > fixit-encryptor')!
-    const $template = $encryptor.querySelector<HTMLTemplateElement>('template[data-password]')!
+    const $content = document.querySelector<HTMLElement>('#content')
+    const $encryptor = document.querySelector<HTMLElement>('article > fixit-encryptor')
+    if (!$content || !$encryptor)
+      return this
+    const $template = $encryptor.querySelector<HTMLTemplateElement>('template[data-password]')
+    if (!$template)
+      return this
     const password = $template.dataset.password
     const cachedStat: CachedStat | null = JSON.parse(window.localStorage?.getItem(`fixit-decryptor/#${location.pathname}`) || 'null')
 

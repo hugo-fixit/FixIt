@@ -22,6 +22,7 @@ export class PWAModule implements PWAService {
     if (!pwa?.enable || !('serviceWorker' in navigator))
       return
 
+    const hadController = Boolean(navigator.serviceWorker.controller)
     const registration = await navigator.serviceWorker
       .register(pwa.serviceWorkerURL)
       .catch((error: unknown) => {
@@ -48,8 +49,14 @@ export class PWAModule implements PWAService {
       })
     })
 
-    // Reload when a new service worker takes control
+    // Reload when an update takes control of an already-controlled page. The
+    // first install claims the page as well; reloading there would force every
+    // first visit to load the page twice.
+    let reloading = false
     navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!hadController || reloading)
+        return
+      reloading = true
       window.location.reload()
     })
 

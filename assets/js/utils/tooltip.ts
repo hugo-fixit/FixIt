@@ -7,6 +7,10 @@
  */
 export function flashTooltip(el: HTMLElement, message: string, duration = 3000, clearPending = false) {
   const CellTooltip = window.CellTooltip
+  if (!CellTooltip) {
+    console.warn(message)
+    return
+  }
   clearTimeout(Number(el.dataset.flashTimer))
   const instance = CellTooltip.getOrCreateInstance(el)
   if (!instance.flashOriginalTitle) {
