@@ -430,6 +430,7 @@
 
     .footnotes {
       font-size: 0.75rem;
+      line-height: 1.5;
       white-space: normal;
       color: light-dark(#a3a3ae, #9d9d9f);
       @include link(false, true);
