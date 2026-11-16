@@ -220,37 +220,34 @@ export class ContentModule implements ContentService {
 
   /** Convert footnote refs into tooltip-enabled elements. */
   #initFootnotes() {
-    const $footnoteRefs = document.querySelectorAll<HTMLElement>('#content sup[id^="fnref:"]')
+    const $footnoteRefs = document.querySelectorAll<HTMLElement>('#content sup[id^="fnref"]')
     const $footnotes = document.querySelector<HTMLElement>('.footnotes[role="doc-endnotes"]')
     if (!$footnoteRefs.length || !$footnotes)
       return
     const footnoteMap = new Map<HTMLElement, HTMLElement>()
     $footnoteRefs.forEach(($ref) => {
-      if (this.#core.config.tooltip && CellTooltip) {
-        const $link = $ref.querySelector<HTMLAnchorElement>('a.footnote-ref')
-        if ($link) {
-          $link.addEventListener('click', (e) => {
-            e.preventDefault()
-          }, false)
-        }
-      }
-      const id = $ref.id.replace('fnref:', '')
+      // Extra references to the same footnote use `fnref1:1`, `fnref2:1`, etc.
+      const id = $ref.id.replace(/^fnref\d*:/, '')
       const $footnoteContent = $footnotes.querySelector<HTMLElement>(`[id="fn:${id}"]`)
-      if ($footnoteContent) {
-        const $clonedContent = $footnoteContent.cloneNode(true) as HTMLElement
-        const $backref = $clonedContent.querySelector('.footnote-backref')
-        if ($backref)
-          $backref.remove()
-        footnoteMap.set($ref, $clonedContent)
-      }
+      if (!$footnoteContent)
+        return
+      const $clonedContent = $footnoteContent.cloneNode(true) as HTMLElement
+      $clonedContent.querySelectorAll('.footnote-backref').forEach($backref => $backref.remove())
+      footnoteMap.set($ref, $clonedContent)
     })
     footnoteMap.forEach(($content, $ref) => {
-      if ($ref.hasAttribute('title'))
-        return
-      $ref.setAttribute('title', $content.textContent!.trim())
       if (this.#core.config.tooltip && CellTooltip) {
-        CellTooltip.getOrCreateInstance($ref)
+        // Keep the footnote markup (emphasis, code, links, etc.) in the tooltip.
+        CellTooltip.getOrCreateInstance($ref, {
+          title: $content.innerHTML.trim(),
+          html: true,
+          interactive: true,
+          customClass: 'cell-tooltip-footnote',
+        })
+        return
       }
+      if (!$ref.hasAttribute('title'))
+        $ref.setAttribute('title', $content.textContent!.trim())
     })
   }
 
