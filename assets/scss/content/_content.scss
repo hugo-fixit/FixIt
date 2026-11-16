@@ -440,6 +440,75 @@
         padding-inline-start: 1rem;
       }
 
+      .footnotes-details {
+        margin-block: 1em;
+        overflow: hidden;
+        background-color: light-dark(color.adjust($global-background-color, $lightness: -2.5%), color.adjust($global-background-color-dark, $lightness: 2.5%));
+        @include border-radius(0.5rem);
+
+        > .footnotes-summary {
+          display: flex;
+          align-items: baseline;
+          gap: 0.375rem;
+          padding: 0.5rem 0.75rem;
+          list-style: none;
+          user-select: none;
+          cursor: pointer;
+          color: fi-var(global-font-secondary-color);
+          transition: color 0.2s ease, background-color 0.2s ease;
+
+          &::-webkit-details-marker {
+            display: none;
+          }
+
+          &:hover {
+            color: fi-var(global-font-color);
+            background-color: light-dark(rgba(0, 0, 0, 0.03), rgba(255, 255, 255, 0.04));
+          }
+
+          > .footnotes-icon,
+          > .footnotes-chevron {
+            flex-shrink: 0;
+          }
+
+          > .footnotes-title {
+            font-weight: bold;
+          }
+
+          > .footnotes-count {
+            flex-shrink: 0;
+            flex-grow: 1;
+            font-weight: normal;
+          }
+
+          > .footnotes-chevron {
+            transition: rotate 0.2s ease;
+
+            [dir="rtl"] & {
+              scale: -1 1;
+            }
+          }
+        }
+
+        &[open] > .footnotes-summary {
+          border-block-end: 1px solid fi-var(global-border-color-light);
+        }
+
+        &[open] > .footnotes-summary > .footnotes-chevron {
+          rotate: 90deg;
+
+          [dir="rtl"] & {
+            rotate: -90deg;
+          }
+        }
+
+        > ol {
+          margin-block: 0;
+          padding-block: 0.25rem;
+          padding-inline: 2rem 0.75rem;
+        }
+      }
+
       hr {
         background-color: fi-var(global-border-color);
         height: 1px;

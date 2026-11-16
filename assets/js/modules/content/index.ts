@@ -83,18 +83,20 @@ export class ContentModule implements ContentService {
 
   /** Initialize CellTooltip on action buttons, copy buttons, and footnotes. */
   initTooltip() {
-    if (!this.#core.config.tooltip)
+    if (!this.#core.config.tooltip || !CellTooltip)
       return
-    if (CellTooltip) {
-      const inlineEnd = this.#core.isRTL ? 'left' : 'right'
-      CellTooltip.initAll('li[data-task] > span[title]', { placement: inlineEnd })
-      CellTooltip.initAll('.action-btn[title]', { placement: 'bottom' })
-      CellTooltip.initAll('.copy-icon-btn[title]', { placement: 'top' })
-      CellTooltip.initAll('.fixit-encryptor-btn[title]')
-      CellTooltip.initAll('.collection-sort-toggle[title]', { placement: 'bottom' })
-      CellTooltip.initAll('.friend-links[data-scheme="mahjong"] > .friend-link[title]', { placement: 'bottom' })
-    }
-    initFootnotes()
+    const inlineEnd = this.#core.isRTL ? 'left' : 'right'
+    CellTooltip.initAll('li[data-task] > span[title]', { placement: inlineEnd })
+    CellTooltip.initAll('.action-btn[title]', { placement: 'bottom' })
+    CellTooltip.initAll('.copy-icon-btn[title]', { placement: 'top' })
+    CellTooltip.initAll('.fixit-encryptor-btn[title]')
+    CellTooltip.initAll('.collection-sort-toggle[title]', { placement: 'bottom' })
+    CellTooltip.initAll('.friend-links[data-scheme="mahjong"] > .friend-link[title]', { placement: 'bottom' })
+  }
+
+  /** Initialize the footnote section toggle and tooltips. */
+  initFootnotes() {
+    initFootnotes(this.#core.config.tooltip)
   }
 
   /**
@@ -109,6 +111,7 @@ export class ContentModule implements ContentService {
     this.#code.initCodeTabs()
     this.#code.initDiagramCopyBtn()
     this.initTooltip()
+    this.initFootnotes()
     this.initLinkGuardDialog(target)
   }
 

@@ -1,6 +1,7 @@
 import type { Translations } from '.'
 
 export default {
+  footnotes: 'پانوشت‌ها',
   decryptionFailed: 'رمزگشایی ناموفق بود، لطفاً دوباره وارد کنید!',
   enterCorrectPassword: 'لطفاً رمز عبور صحیح را وارد کنید!',
   passwordIncorrect: 'رمز عبور اشتباه است، لطفاً دوباره تلاش کنید!',

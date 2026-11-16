@@ -1,6 +1,7 @@
 import type { Translations } from '.'
 
 export default {
+  footnotes: 'Notes de bas de page',
   decryptionFailed: 'Échec du déchiffrement, veuillez ressaisir !',
   enterCorrectPassword: 'Veuillez entrer le mot de passe correct !',
   passwordIncorrect: 'Mot de passe incorrect, veuillez réessayer !',
