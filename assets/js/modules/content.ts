@@ -234,6 +234,8 @@ export class ContentModule implements ContentService {
 
     // Code block chrome is inert in a cloned tooltip, so drop it.
     $preview.querySelectorAll('.code-header, .code-expand-btn, .copy-icon-btn').forEach($el => $el.remove())
+    // Line numbers are CSS counters; hide them in the compact preview.
+    $preview.querySelectorAll('.code-block').forEach($el => $el.classList.add('line-nos-hidden'))
 
     // Line-number tables do not fit the narrow tooltip; keep only the code cell.
     $preview.querySelectorAll('table.lntable').forEach(($table) => {
@@ -292,10 +294,45 @@ export class ContentModule implements ContentService {
           interactive: true,
           customClass: 'cell-tooltip-footnote single',
         })
+        this.#initFootnoteTouchPreview($ref)
         return
       }
       if (!$ref.hasAttribute('title'))
         $ref.setAttribute('title', text)
+    })
+  }
+
+  /**
+   * Preview footnote content on touch devices before following the link.
+   *
+   * The hover trigger shows the tooltip on `touchstart`, but the anchor click
+   * still navigates immediately. Keep the first tap on the preview and let a
+   * second tap follow the reference to the footnote.
+   * @param ref - The footnote reference element.
+   */
+  #initFootnoteTouchPreview(ref: HTMLElement) {
+    if (!CellTooltip || !navigator.maxTouchPoints)
+      return
+    let pointerType = ''
+    let tooltipWasOpen = false
+    ref.addEventListener('pointerdown', (event) => {
+      pointerType = event.pointerType
+      tooltipWasOpen = CellTooltip.getInstance(ref)?.tip?.classList.contains('show') ?? false
+    }, { passive: true })
+    ref.addEventListener('click', (event) => {
+      const type = pointerType
+      pointerType = ''
+      // Mouse clicks and keyboard activation keep the default navigation.
+      if (event.detail === 0 || (type !== 'touch' && type !== 'pen'))
+        return
+      const tooltip = CellTooltip.getInstance(ref)
+      tooltip?.clearTimer()
+      if (tooltipWasOpen) {
+        tooltip?.hide()
+        return
+      }
+      event.preventDefault()
+      tooltip?.show()
     })
   }
 
