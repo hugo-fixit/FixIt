@@ -8,45 +8,56 @@ body {
   }
 
   .cell-tooltip-footnote {
-    max-width: 20rem;
+    max-width: MIN(24rem, calc(100vw - 2rem));
     text-align: start;
 
     .cell-tooltip-inner {
-      max-width: 20rem;
+      max-width: MIN(24rem, calc(100vw - 2rem));
+      margin-block: 0;
       line-height: 1.5;
       text-align: start;
-    }
 
-    p {
-      margin-block: 0.25rem;
-
-      &:first-child {
-        margin-block-start: 0;
+      // Reuse `.single .content` styles; reset the page container margin.
+      > .content {
+        margin-block: 0;
       }
 
-      &:last-child {
-        margin-block-end: 0;
+      p {
+        margin-block: 0.25rem;
+
+        &:first-child {
+          margin-block-start: 0;
+        }
+
+        &:last-child {
+          margin-block-end: 0;
+        }
       }
-    }
 
-    ul,
-    ol {
-      margin-block: 0.25rem;
-      padding-inline-start: 1.25rem;
-    }
+      ul,
+      ol {
+        margin-block: 0.25rem;
+        padding-inline-start: 1.25rem;
+      }
 
-    code {
-      font-size: 0.6875rem;
-    }
+      code {
+        font-size: 0.6875rem;
+      }
 
-    img {
-      max-width: 100%;
-      height: auto;
-    }
+      pre {
+        max-height: 12rem;
+        overscroll-behavior: contain;
+      }
 
-    a {
-      color: inherit;
-      text-decoration: underline;
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: underline;
+      }
     }
   }
 }
