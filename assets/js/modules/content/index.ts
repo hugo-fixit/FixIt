@@ -1,11 +1,10 @@
 import type { CodeService, ContentService, CoreService } from '../../core/tokens'
 import { eventBus } from '../../core/event-bus'
 import { initCollectionSort } from './collection-sort'
-import { initDetails } from './details'
 import { initFootnotes } from './footnote'
 import { LinkGuard } from './link-guard'
-import { initSVGIcon } from './svg-icon'
-import { initContentTooltips } from './tooltip'
+
+const CellTooltip = window.CellTooltip
 
 /**
  * Content module — orchestrates content enhancements.
@@ -30,7 +29,23 @@ export class ContentModule implements ContentService {
 
   /** Fetch and inline SVG icons referenced by `data-svg-src` attributes. */
   initSVGIcon() {
-    initSVGIcon()
+    document.querySelectorAll<HTMLElement>('[data-svg-src]').forEach(($icon) => {
+      fetch($icon.dataset.svgSrc!)
+        .then(response => response.text())
+        .then((svg) => {
+          const $temp = document.createElement('div')
+          $temp.insertAdjacentHTML('afterbegin', svg)
+          const $svg = $temp.firstChild as SVGElement
+          $svg.dataset.svgSrc = $icon.dataset.svgSrc
+          $svg.classList.add('icon')
+          const $titleElements = $svg.getElementsByTagName('title')
+          $titleElements.length && $svg.removeChild($titleElements[0])
+          $icon.parentElement!.replaceChild($svg, $icon)
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    })
   }
 
   /**
@@ -53,7 +68,12 @@ export class ContentModule implements ContentService {
    * @param target - The root element to search within.
    */
   initDetails(target: Element | Document = document) {
-    initDetails(target)
+    target.querySelectorAll<HTMLElement>('.details:not(.disabled)').forEach(($details) => {
+      const $summary = $details.querySelector<HTMLElement>('.details-summary')!
+      $summary?.addEventListener('click', () => {
+        $details.classList.toggle('open')
+      }, false)
+    })
   }
 
   /** Initialize collection sort toggle buttons. */
@@ -65,7 +85,15 @@ export class ContentModule implements ContentService {
   initTooltip() {
     if (!this.#core.config.tooltip)
       return
-    initContentTooltips(this.#core.isRTL)
+    if (CellTooltip) {
+      const inlineEnd = this.#core.isRTL ? 'left' : 'right'
+      CellTooltip.initAll('li[data-task] > span[title]', { placement: inlineEnd })
+      CellTooltip.initAll('.action-btn[title]', { placement: 'bottom' })
+      CellTooltip.initAll('.copy-icon-btn[title]', { placement: 'top' })
+      CellTooltip.initAll('.fixit-encryptor-btn[title]')
+      CellTooltip.initAll('.collection-sort-toggle[title]', { placement: 'bottom' })
+      CellTooltip.initAll('.friend-links[data-scheme="mahjong"] > .friend-link[title]', { placement: 'bottom' })
+    }
     initFootnotes()
   }
 
