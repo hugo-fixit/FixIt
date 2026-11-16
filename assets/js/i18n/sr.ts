@@ -1,6 +1,7 @@
 import type { Translations } from '.'
 
 export default {
+  footnotes: 'Фусноте',
   decryptionFailed: 'Дешифровање није успело, унесите поново!',
   enterCorrectPassword: 'Унесите исправну лозинку!',
   passwordIncorrect: 'Погрешна лозинка, покушајте поново!',

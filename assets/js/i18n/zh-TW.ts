@@ -1,6 +1,7 @@
 import type { Translations } from '.'
 
 export default {
+  footnotes: '腳註',
   decryptionFailed: '解密失敗，請重新輸入！',
   enterCorrectPassword: '請輸入正確的密碼！',
   passwordIncorrect: '密碼錯誤，請重新輸入！',

@@ -62,6 +62,7 @@ export interface ContentService {
   initSVGIcon: () => void
   initLinkGuardDialog: (target?: Element | Document) => void
   initCollectionSort: () => void
+  initFootnotes: () => void
   initContent: (target?: Element | Document) => void
   setup: () => void
 }

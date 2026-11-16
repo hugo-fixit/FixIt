@@ -1,6 +1,7 @@
 import type { Translations } from '.'
 
 export default {
+  footnotes: 'الهوامش',
   decryptionFailed: 'فشل فك التشفير، يرجى إعادة الإدخال!',
   enterCorrectPassword: 'يرجى إدخال كلمة المرور الصحيحة!',
   passwordIncorrect: 'كلمة المرور غير صحيحة، يرجى المحاولة مرة أخرى!',

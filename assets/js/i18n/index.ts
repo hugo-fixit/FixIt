@@ -35,6 +35,7 @@ import zhTW from './zh-TW'
 
 /** All translatable string keys used in JavaScript. */
 export interface Translations {
+  footnotes: string
   decryptionFailed: string
   enterCorrectPassword: string
   passwordIncorrect: string

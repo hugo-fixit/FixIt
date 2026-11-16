@@ -82,7 +82,7 @@ English and 中文可以出现在同一个脚注中。[^cjk-mixed] 纯中文脚�
 
 ## Edge Cases
 
-**Adjacent references:** two markers back to back.[^adjacent-a][^adjacent-b]
+**Adjacent references:** two markers back to back.[^adjacent-a] [^adjacent-b]
 
 **Labels with hyphens:** a footnote label may contain hyphens.[^hyphen-label]
 
