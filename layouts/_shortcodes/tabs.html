@@ -35,16 +35,16 @@
 {{- $placement := $placementRaw -}}
 {{- if or (eq $placementRaw "left") (eq $placementRaw "right") -}}
   {{- $newVal := cond (eq $placementRaw "left") "start" "end" -}}
-  {{- warnf "The placement value %q is deprecated, use %q instead. See %s %s" $placementRaw $newVal .Name .Position -}}
+  {{- warnidf "v1-deprecated-tabs-placement" "The placement value %q is deprecated, use %q instead. See %s %s" $placementRaw $newVal .Name .Position -}}
   {{- $placement = $newVal -}}
 {{- end -}}
 {{- $placementMap := slice "top" "bottom" "start" "end" -}}
 {{- if ge $defaultTab $lenTabs -}}
-  {{- warnf "The defaultTab value %v is out of range [0, %v]. See %s %s" $defaultTab (sub $lenTabs 1) .Name .Position -}}
+  {{- warnidf "tabs-default-tab-out-of-range" "The defaultTab value %v is out of range [0, %v]. See %s %s" $defaultTab (sub $lenTabs 1) .Name .Position -}}
   {{- $defaultTab = 0 -}}
 {{- end -}}
 {{- if not (in $placementMap $placement) -}}
-  {{- warnf "The placement value %q is invalid. Supported values are: %v. See %s %s" $placement (delimit $placementMap ", ") .Name .Position -}}
+  {{- warnidf "tabs-placement-invalid" "The placement value %q is invalid. Supported values are: %v. See %s %s" $placement (delimit $placementMap ", ") .Name .Position -}}
   {{- $placement = "top" -}}
 {{- end -}}
 
