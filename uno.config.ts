@@ -7,6 +7,8 @@ export default createFixItConfig({
       filesystem: [
         'layouts/**/*.html',
         'assets/js/**/*.ts',
+        // Translation files contain prose, not class names.
+        '!assets/js/i18n/**',
       ],
       pipeline: {
         exclude: ['node_modules', 'dist'],
@@ -16,7 +18,8 @@ export default createFixItConfig({
     cli: {
       entry: [
         {
-          patterns: ['layouts/**/*.html', 'assets/js/**/*.ts'],
+          // Translation files contain prose, not class names.
+          patterns: ['layouts/**/*.html', 'assets/js/**/*.ts', '!assets/js/i18n/**'],
           outFile: 'assets/css/unocss.css',
         },
       ],
