@@ -142,6 +142,12 @@ libraries:
       items:
         - from: dist/Meting.min.js
           to: meting/Meting.min.js
+  - npm: object-fit-images
+    version: 3.2.4
+    local:
+      items:
+        - from: dist/ofi.min.js
+          to: object-fit-images/ofi.min.js
   - npm: pace-js
     version: 1.2.4
     local:
