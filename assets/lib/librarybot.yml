@@ -27,6 +27,9 @@ libraries:
           to: aplayer/APlayer.min.css
         - from: dist/APlayer.min.js
           to: aplayer/APlayer.min.js
+  # CDN-only: Artalk assets are served from CDN or the user's Artalk server.
+  - npm: artalk
+    version: 2.10.1
   - npm: cell-tooltip
     version: 0.4.1
     local:
