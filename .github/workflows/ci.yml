@@ -26,6 +26,20 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
 
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ vars.HUGO_VERSION || 'latest' }}
+          extended: true
+
+      - name: Install Dart Sass
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/dart-sass.tar.gz" \
+            "https://github.com/sass/dart-sass/releases/download/1.108.2/dart-sass-1.108.2-linux-x64.tar.gz"
+          tar -xzf "$RUNNER_TEMP/dart-sass.tar.gz" -C "$RUNNER_TEMP"
+          "$RUNNER_TEMP/dart-sass/sass" --embedded --version
+          echo "$RUNNER_TEMP/dart-sass" >> "$GITHUB_PATH"
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
