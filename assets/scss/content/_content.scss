@@ -566,6 +566,9 @@
       display: inline-block;
       direction: ltr;
     }
+    .katex-display > .katex {
+      display: block;
+    }
     .katex-error {
       padding: 0.14em 0.28em;
       background-color: mark;
